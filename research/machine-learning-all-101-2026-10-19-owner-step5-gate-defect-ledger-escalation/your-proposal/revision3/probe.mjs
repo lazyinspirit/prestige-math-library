@@ -1,0 +1,44 @@
+import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';
+const repo=process.cwd(),dir=path.dirname(new URL(import.meta.url).pathname),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'step3-native-successor-r2-')),run='machine-learning-all-101-2026-10-19';const authority=JSON.parse(fs.readFileSync(path.join(dir,'native-successor-evidence.json'))),sha=b=>createHash('sha256').update(b).digest('hex');
+try{
+ const toolDir=path.join(tmp,'tools');fs.mkdirSync(toolDir);for(const n of fs.readdirSync('tools').filter(n=>n.endsWith('.mjs')))fs.copyFileSync(path.join(repo,'tools',n),path.join(toolDir,n));for(const n of fs.readdirSync(path.join(dir,'candidate/tools')))fs.copyFileSync(path.join(dir,'candidate/tools',n),path.join(toolDir,n));
+ const root=path.join(tmp,'fixture');fs.mkdirSync(root);fs.symlinkSync(path.join(repo,'items'),path.join(root,'items'),'dir');
+ const put=(p,b)=>{const q=path.join(root,p);fs.mkdirSync(path.dirname(q),{recursive:true});fs.writeFileSync(q,b);};
+ for(const e of Object.values(authority.evidence))put(e.path,fs.readFileSync(e.path));
+ const ledgerPath='research/defect-ledger.jsonl',rawLedger=fs.readFileSync(ledgerPath);put(ledgerPath,rawLedger);const ledger=rawLedger.toString().split(/\r?\n/).filter(Boolean).map(JSON.parse);
+ const {isPublishedItem}=await import(path.join(toolDir,'published-repair-policy.mjs'));const {nativeStep3LedgerSuccessorHistory:verify}=await import(path.join(toolDir,'step3-native-ledger-successor-history.mjs'));
+ const closure=JSON.parse(fs.readFileSync(authority.evidence.closure.path)),select=rows=>rows.filter(r=>r.run===run&&['3a-adjudicate','3b-cross'].includes(r.caught_at_stage)&&!isPublishedItem(root,r.subject)).sort((a,b)=>String(a.defect_id).localeCompare(String(b.defect_id)));
+ assert.equal(select(ledger).length,328);assert.equal(verify(root,run,closure,select(ledger)),true);const checks=['actual328 projection accepted only through authenticated18successors'];
+ const original=select(ledger).filter(r=>!authority.entries.some(e=>e.after===r.defect_id));assert.equal(original.length,317);assert.equal(sha(JSON.stringify(original)),closure.step3_ledger_rows_sha256);checks.push('exact original317 hash and original1313 artifact slots retained');
+ function rejectRows(label,transform){const changed=transform(structuredClone(ledger));put(ledgerPath,changed.map(JSON.stringify).join('\n')+'\n');assert.throws(()=>verify(root,run,closure,select(changed)),undefined,label);put(ledgerPath,rawLedger);checks.push(label);}
+ for(const e of authority.entries){rejectRows('changed original '+e.before,rows=>{rows.find(r=>r.defect_id===e.before).severity='polish';return rows;});rejectRows('changed successor '+e.after,rows=>{rows.find(r=>r.defect_id===e.after).reason='unbound mutation';return rows;});}
+ rejectRows('missing successor rejected',rows=>rows.filter(r=>r.defect_id!==authority.entries[0].after));rejectRows('missing original rejected',rows=>rows.filter(r=>r.defect_id!==authority.entries[0].before));rejectRows('duplicate successor rejected',rows=>[...rows,rows.find(r=>r.defect_id===authority.entries[0].after)]);
+ rejectRows('unbound extra3a row rejected',rows=>[...rows,{...rows.find(r=>r.defect_id===authority.entries[0].after),defect_id:'unbound-extra-step3'}]);
+ for(const [key,e] of Object.entries(authority.evidence)){const raw=fs.readFileSync(path.join(root,e.path));put(e.path,Buffer.concat([raw,Buffer.from(' ')]));assert.throws(()=>verify(root,run,closure,select(ledger)),undefined,key);put(e.path,raw);checks.push('changed bound '+key+' rejected');}
+ assert.equal(verify(root,'another-run',closure,select(ledger)),false);checks.push('foreign run gets no history admission');
+ // The actual complete verify consumer runs read-only over the now-drained real
+ // research/source evidence; no helper, artifact, route or provenance is stubbed.
+ const full=spawnSync(process.execPath,[path.join(toolDir,'step3-close.mjs'),'verify','--root',repo,'--run',run],{cwd:repo,encoding:'utf8',timeout:120000,maxBuffer:16*1024*1024});assert.equal(full.status,0,full.stderr||full.stdout);checks.push('full actual Step3 verify consumer passed using isolated candidate tools');
+ // Exercise the actual full consumer's control flow with only canonical
+ // ledger reads redirected to regular /tmp variant inputs. All other real
+ // evidence and every production route/provenance check remain unchanged.
+ const selectedSuccessors=new Set(authority.entries.filter(e=>!isPublishedItem(repo,e.subject)).map(e=>e.after));
+ const allSuccessors=new Set(authority.entries.map(e=>e.after));
+ const published=authority.entries.find(e=>!selectedSuccessors.has(e.after));
+ const variants=[
+  ['all11selectedmissing',ledger.filter(r=>!selectedSuccessors.has(r.defect_id))],
+  ['all18missing',ledger.filter(r=>!allSuccessors.has(r.defect_id))],
+  ['published-only-missing',ledger.filter(r=>r.defect_id!==published.after)],
+  ['published-only-tampered',ledger.map(r=>r.defect_id===published.after?{...r,reason:'unbound mutation'}:r)],
+ ];
+ const consumerRegressions=[];
+ for(const [name,variant] of variants){
+  const variantPath=path.join(tmp,name+'.jsonl');fs.writeFileSync(variantPath,variant.map(JSON.stringify).join('\n')+'\n');
+  const preload=path.join(tmp,name+'.cjs');fs.writeFileSync(preload,`const fs=require('node:fs'),path=require('node:path'),read=fs.readFileSync;fs.readFileSync=function(p,o){return read.call(this,typeof p==='string'&&path.resolve(p)===${JSON.stringify(path.join(repo,ledgerPath))}?${JSON.stringify(variantPath)}:p,o)};require('node:module').syncBuiltinESMExports();`);
+  const attempt=spawnSync(process.execPath,['--require',preload,path.join(toolDir,'step3-close.mjs'),'verify','--root',repo,'--run',run],{cwd:repo,encoding:'utf8',timeout:120000,maxBuffer:16*1024*1024});
+  assert.equal(attempt.status,1,name+': '+attempt.stderr+attempt.stdout);assert(attempt.stderr.includes('Step-3 native successor history changed:'),name);
+  consumerRegressions.push({name,exit_code:attempt.status,stdout:attempt.stdout,stderr:attempt.stderr});checks.push('actualfullconsumer rejects '+name);
+ }
+ const gate=spawnSync(process.execPath,[path.join(toolDir,'defect-ledger.mjs'),'check','--run',run,'--adjudications',`research/${run}-judge-adjudications.jsonl`,'--reader-decisions',`research/${run}-step5-alert-decisions.jsonl`,'--closure',`research/${run}-judge-closure.json`],{cwd:repo,encoding:'utf8',timeout:120000,maxBuffer:16*1024*1024});assert.equal(gate.status,0,gate.stderr||gate.stdout);assert(gate.stdout.includes('549 defect row(s) checked')&&gate.stdout.includes('0 error(s)'),gate.stdout);checks.push('full actual defect-ledger check consumer passed using isolated candidate tools; no native engine gate attempted');
+ console.log(JSON.stringify({ok:true,checks,ledger_sha256:sha(rawLedger),original_count:317,current_selected_count:328,original_sha256:sha(JSON.stringify(original)),artifact_count:Object.keys(closure.artifacts).length,step3_verify:{exit_code:full.status,stdout:full.stdout,stderr:full.stderr},consumerRegressions,ledger_check:{exit_code:gate.status,stdout_tail:gate.stdout.slice(-600),stderr:gate.stderr}},null,2));
+}finally{fs.rmSync(tmp,{recursive:true,force:true});}

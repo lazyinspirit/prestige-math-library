@@ -1,0 +1,365 @@
+{
+  "original_native_failed_rows": 14,
+  "affected_items": 13,
+  "bindings": [
+    {
+      "batch": 45,
+      "id": "lem-du-activation-normalizer-finite-positive",
+      "index": 0,
+      "check": "ml101-du-softplus-normalizer",
+      "fixture": "softplus",
+      "original_obligation": {
+        "case": "softplus",
+        "calculation": "Softplus is continuous, nonzero and Lipschitz, so the proved bounds apply.",
+        "result": "Its Gaussian squared expectation is positive and finite.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "softplus",
+        "calculation": "Softplus is continuous, nonzero and Lipschitz, so the proved bounds apply.",
+        "result": "Its Gaussian squared expectation is positive and finite.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-softplus-normalizer",
+        "asserts": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant\n\n$$c_\\sigma:=\\bigl(\\mathbb E[\\sigma(Z)^2]\\bigr)^{-1}$$\n\nis a well-defined positive finite real number.",
+        "fixture": "softplus"
+      },
+      "source_path": "items/lem-du-activation-normalizer-finite-positive.md",
+      "source_sha256": "8aa405ced6300665f85111fda1f79befc22e2d191ff53451d0e750672e53193c",
+      "exact_current_asserts": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant\n\n$$c_\\sigma:=\\bigl(\\mathbb E[\\sigma(Z)^2]\\bigr)^{-1}$$\n\nis a well-defined positive finite real number."
+    },
+    {
+      "batch": 45,
+      "id": "lem-du-conditional-loss-contraction-under-gram-control",
+      "index": 0,
+      "check": "ml101-du-gram-loss-contraction",
+      "fixture": "zero-residual-and-gram-grid",
+      "original_obligation": {
+        "case": "zero residual",
+        "calculation": "r=0 forces R=0 by the remainder hypothesis.",
+        "result": "Both losses vanish.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "zero residual",
+        "calculation": "r=0 forces R=0 by the remainder hypothesis.",
+        "result": "Both losses vanish.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-gram-loss-contraction",
+        "asserts": "Let $r\\in\\mathbb R^n$, let $G$ be a real symmetric matrix with eigenvalues in $[\\lambda,\\Lambda]$ for some $0<\\lambda\\le\\Lambda$, and suppose $0<\\eta\\Lambda\\le1$. If an update has the form $r^+=(I-\\eta G)r+R$ with $\\|R\\|_2\\le\\eta\\lambda\\|r\\|_2/4$, then for the quadratic loss $L=\\frac12\\|r\\|_2^2$ and $L^+=\\frac12\\|r^+\\|_2^2$,\n\n$$L^+\\le(1-\\eta\\lambda/2)L.$$",
+        "fixture": "zero-residual-and-gram-grid"
+      },
+      "source_path": "items/lem-du-conditional-loss-contraction-under-gram-control.md",
+      "source_sha256": "6fe51def352c956a65e91bbfd27153d49caf6f2bd633faa9689b7361844d6fb9",
+      "exact_current_asserts": "Let $r\\in\\mathbb R^n$, let $G$ be a real symmetric matrix with eigenvalues in $[\\lambda,\\Lambda]$ for some $0<\\lambda\\le\\Lambda$, and suppose $0<\\eta\\Lambda\\le1$. If an update has the form $r^+=(I-\\eta G)r+R$ with $\\|R\\|_2\\le\\eta\\lambda\\|r\\|_2/4$, then for the quadratic loss $L=\\frac12\\|r\\|_2^2$ and $L^+=\\frac12\\|r^+\\|_2^2$,\n\n$$L^+\\le(1-\\eta\\lambda/2)L.$$"
+    },
+    {
+      "batch": 45,
+      "id": "lem-du-initial-output-gaussian-concentration",
+      "index": 0,
+      "check": "ml101-du-zero-feature-output",
+      "fixture": "zero-feature-matrix",
+      "original_obligation": {
+        "case": "Phi=0",
+        "calculation": "The image norm, trace and operator norm all vanish.",
+        "result": "The probability event holds surely.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "Phi=0",
+        "calculation": "The image norm, trace and operator norm all vanish.",
+        "result": "The probability event holds surely.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-zero-feature-output",
+        "asserts": "Assume AC, DC and countable choice. Fix hidden-layer feature vectors $\\phi_1,\\ldots,\\phi_n\\in\\mathbb R^m$, form the matrix $\\Phi\\in\\mathbb R^{n\\times m}$ with rows $\\phi_i^T$, and let the independent output-weight vector $a\\sim N_m(0,I_m)$. Put $u=\\Phi a$ and $G=\\Phi\\Phi^T$. Then for every $0<\\delta<1$,\n\n$$P\\left\\{\\|u\\|_2\\le\\sqrt{\\operatorname{tr}(G)}+\\|\\Phi\\|_{\\rm op}\\sqrt{2\\log(1/\\delta)}\\right\\}\\ge1-\\delta,$$\n\nwhere $\\|\\Phi\\|_{\\rm op}=\\sup_{\\|v\\|_2=1}\\|\\Phi v\\|_2$. The probability is conditional on the fixed hidden-layer features and is over $a$ only.",
+        "fixture": "zero-feature-matrix"
+      },
+      "source_path": "items/lem-du-initial-output-gaussian-concentration.md",
+      "source_sha256": "f1da2f142d27af016fd9fd1feab7c9f01ae7b8a3954daa9000bd65fcfebf2e5e",
+      "exact_current_asserts": "Assume AC, DC and countable choice. Fix hidden-layer feature vectors $\\phi_1,\\ldots,\\phi_n\\in\\mathbb R^m$, form the matrix $\\Phi\\in\\mathbb R^{n\\times m}$ with rows $\\phi_i^T$, and let the independent output-weight vector $a\\sim N_m(0,I_m)$. Put $u=\\Phi a$ and $G=\\Phi\\Phi^T$. Then for every $0<\\delta<1$,\n\n$$P\\left\\{\\|u\\|_2\\le\\sqrt{\\operatorname{tr}(G)}+\\|\\Phi\\|_{\\rm op}\\sqrt{2\\log(1/\\delta)}\\right\\}\\ge1-\\delta,$$\n\nwhere $\\|\\Phi\\|_{\\rm op}=\\sup_{\\|v\\|_2=1}\\|\\Phi v\\|_2$. The probability is conditional on the fixed hidden-layer features and is over $a$ only."
+    },
+    {
+      "batch": 45,
+      "id": "ex-du-relu-outside-analytic-activation-class",
+      "index": 0,
+      "check": "ml101-du-relu-one-sided-derivatives",
+      "fixture": "relu-at-zero",
+      "original_obligation": {
+        "case": "t=0",
+        "calculation": "The left and right derivatives are 0 and 1.",
+        "result": "The derivative does not exist.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "t=0",
+        "calculation": "The left and right derivatives are 0 and 1.",
+        "result": "The derivative does not exist.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-relu-one-sided-derivatives",
+        "asserts": "Let $\\sigma(t)=\\max\\{0,t\\}$ be the ReLU activation. It is not differentiable at $0$, so it is not analytic and does not satisfy the smooth-activation assumptions of the two finite-width convergence theorems.",
+        "fixture": "relu-at-zero"
+      },
+      "source_path": "items/ex-du-relu-outside-analytic-activation-class.md",
+      "source_sha256": "76d5110188a9db861f8769f9a9d2cf3b59eb4dcf2f6cb4d51ea57859c9968522",
+      "exact_current_asserts": "Let $\\sigma(t)=\\max\\{0,t\\}$ be the ReLU activation. It is not differentiable at $0$, so it is not analytic and does not satisfy the smooth-activation assumptions of the two finite-width convergence theorems."
+    },
+    {
+      "batch": 45,
+      "id": "ex-du-residual-skip-at-every-layer",
+      "index": 0,
+      "check": "ml101-du-depth-three-residual-skips",
+      "fixture": "depth-three-residual",
+      "original_obligation": {
+        "case": "H=3",
+        "calculation": "Substitute h=2 and h=3 into the residual recurrence.",
+        "result": "Both post-initial layers have identity skips.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "H=3",
+        "calculation": "Substitute h=2 and h=3 into the residual recurrence.",
+        "result": "Both post-initial layers have identity skips.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-depth-three-residual-skips",
+        "asserts": "For depth $H=3$, the analyzed residual recurrence is $x^{(1)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(1)}x)$, $x^{(2)}=x^{(1)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(2)}x^{(1)})$, and $x^{(3)}=x^{(2)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(3)}x^{(2)})$. Each layer after the first adds its nonlinear branch to the immediately preceding representation.",
+        "fixture": "depth-three-residual"
+      },
+      "source_path": "items/ex-du-residual-skip-at-every-layer.md",
+      "source_sha256": "9bf14044a27ff42cc20f9c3fb94d8c74907789585ca628eb268416f35c67e363",
+      "exact_current_asserts": "For depth $H=3$, the analyzed residual recurrence is $x^{(1)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(1)}x)$, $x^{(2)}=x^{(1)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(2)}x^{(1)})$, and $x^{(3)}=x^{(2)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(3)}x^{(2)})$. Each layer after the first adds its nonlinear branch to the immediately preceding representation."
+    },
+    {
+      "batch": 45,
+      "id": "ex-du-interpolation-does-not-imply-test-fit",
+      "index": 0,
+      "check": "ml101-du-interpolation-test-counterexample",
+      "fixture": "one-training-point",
+      "original_obligation": {
+        "case": "one training example",
+        "calculation": "Both functions vanish at 0 and differ at 1.",
+        "result": "Training predictions agree while test predictions differ.",
+        "checked_in": "Steps 1.1–2.1"
+      },
+      "proposed_obligation": {
+        "case": "one training example",
+        "calculation": "Both functions vanish at 0 and differ at 1.",
+        "result": "Training predictions agree while test predictions differ.",
+        "checked_in": "Steps 1.1–2.1",
+        "check": "ml101-du-interpolation-test-counterexample",
+        "asserts": "Take one training input $x=0$ with label $y=0$, and one test input $x_*=1$. Define $g_0(x)=0$ and $g_1(x)=x$, and define the one-point empirical quadratic loss by $L_S(g)=\\frac12(g(0)-y)^2$. Both predictors have empirical loss zero, while their test predictions are $g_0(1)=0$ and $g_1(1)=1$. Therefore agreement with the training labels alone does not determine test predictions.",
+        "fixture": "one-training-point"
+      },
+      "source_path": "items/ex-du-interpolation-does-not-imply-test-fit.md",
+      "source_sha256": "9fcb37ab788ff1b15dc47efec93222a13a9deaaca527c2360bd21ae08614204d",
+      "exact_current_asserts": "Take one training input $x=0$ with label $y=0$, and one test input $x_*=1$. Define $g_0(x)=0$ and $g_1(x)=x$, and define the one-point empirical quadratic loss by $L_S(g)=\\frac12(g(0)-y)^2$. Both predictors have empirical loss zero, while their test predictions are $g_0(1)=0$ and $g_1(1)=1$. Therefore agreement with the training labels alone does not determine test predictions."
+    },
+    {
+      "batch": 50,
+      "id": "thm-wasserstein-two-metric-topology",
+      "index": 0,
+      "check": "ml101-w2-tight-tail-dirac-witness",
+      "fixture": "n-two-dirac-cost",
+      "original_obligation": {
+        "case": "d=1 witness at n=2",
+        "inputs": "μ2=(3/4)δ0+(1/4)δ2",
+        "calculation": "Every coupling with second marginal δ0 is supported on R×{0}; the cost is ∫x²dμ2=1.",
+        "result": "W2(μ2,δ0)=1 for this member of the stated tight narrowly convergent sequence."
+      },
+      "proposed_obligation": {
+        "case": "d=1 witness at n=2",
+        "inputs": "μ2=(3/4)δ0+(1/4)δ2",
+        "calculation": "Every coupling with second marginal δ0 is supported on R×{0}; the cost is ∫x²dμ2=1.",
+        "result": "W2(μ2,δ0)=1 for this member of the stated tight narrowly convergent sequence.",
+        "check": "ml101-w2-tight-tail-dirac-witness",
+        "asserts": "Assume the Axiom of Choice. For $d\\ge1$ and $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$, $W_2(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n$ converges narrowly to $\\mu$ and\n$$\\lim_{R\\to\\infty}\\sup_{n\\ge1}\\int_{\\{|x|>R\\}}|x|^2d\\mu_n(x)=0.$$\nTightness by itself is insufficient: for $e_1=(1,0,\\ldots,0)$ and $\\mu_n=(1-n^{-2})\\delta_0+n^{-2}\\delta_{ne_1}$, the sequence is tight and converges narrowly to $\\delta_0$, but $W_2(\\mu_n,\\delta_0)=1$ for every $n$.",
+        "fixture": "n-two-dirac-cost"
+      },
+      "source_path": "items/thm-wasserstein-two-metric-topology.md",
+      "source_sha256": "1a88b43228eb6ffb37ff9becf4e4c6af28a6979e8b00f8dcaa00974c55a020b7",
+      "exact_current_asserts": "Assume the Axiom of Choice. For $d\\ge1$ and $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$, $W_2(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n$ converges narrowly to $\\mu$ and\n$$\\lim_{R\\to\\infty}\\sup_{n\\ge1}\\int_{\\{|x|>R\\}}|x|^2d\\mu_n(x)=0.$$\nTightness by itself is insufficient: for $e_1=(1,0,\\ldots,0)$ and $\\mu_n=(1-n^{-2})\\delta_0+n^{-2}\\delta_{ne_1}$, the sequence is tight and converges narrowly to $\\delta_0$, but $W_2(\\mu_n,\\delta_0)=1$ for every $n$."
+    },
+    {
+      "batch": 50,
+      "id": "lem-smooth-unit-mass-compact-bump-on-euclidean-space",
+      "index": 0,
+      "check": "ml101-bump-one-dimensional-mass",
+      "fixture": "one-dimensional-bump",
+      "original_obligation": {
+        "case": "d=1",
+        "inputs": "ρ1=Φ/∫Φ with Φ(t)=φ(t+1)φ(1−t)",
+        "calculation": "The denominator is strictly positive and finite by step 2.1; scaling gives unit mass.",
+        "result": "ρ1 is positive on (−1,1) and supported on [−1,1]."
+      },
+      "proposed_obligation": {
+        "case": "d=1",
+        "inputs": "ρ1=Φ/∫Φ with Φ(t)=φ(t+1)φ(1−t)",
+        "calculation": "The denominator is strictly positive and finite by step 2.1; scaling gives unit mass.",
+        "result": "ρ1 is positive on (−1,1) and supported on [−1,1].",
+        "check": "ml101-bump-one-dimensional-mass",
+        "asserts": "For $d=1$, $\\int\\rho_1=1$ by step 2.1. By step 3.1, $\\rho_d$ is a nonnegative Borel function supported in the compact cube. For $d\\ge2$, split $\\mathbb R^d=\\mathbb R^{d-1}\\times\\mathbb R$. By",
+        "fixture": "one-dimensional-bump"
+      },
+      "source_path": "items/lem-smooth-unit-mass-compact-bump-on-euclidean-space.md",
+      "source_sha256": "575ae2cafabc74b3a1927bb4386cce0501ada6fdd2ea539fc2552b0d3037d318",
+      "exact_current_asserts": "For $d=1$, $\\int\\rho_1=1$ by step 2.1. By step 3.1, $\\rho_d$ is a nonnegative Borel function supported in the compact cube. For $d\\ge2$, split $\\mathbb R^d=\\mathbb R^{d-1}\\times\\mathbb R$. By"
+    },
+    {
+      "batch": 50,
+      "id": "lem-smooth-unit-mass-compact-bump-on-euclidean-space",
+      "index": 1,
+      "check": "ml101-bump-two-dimensional-mass",
+      "fixture": "two-dimensional-bump",
+      "original_obligation": {
+        "case": "d=2",
+        "inputs": "ρ2(x1,x2)=ψ(x1)ψ(x2)",
+        "calculation": "Tonelli gives ∫ρ2=(∫ψ)(∫ψ)=1.",
+        "result": "ρ2 is supported on [−1,1]^2 and positive on its interior."
+      },
+      "proposed_obligation": {
+        "case": "d=2",
+        "inputs": "ρ2(x1,x2)=ψ(x1)ψ(x2)",
+        "calculation": "Tonelli gives ∫ρ2=(∫ψ)(∫ψ)=1.",
+        "result": "ρ2 is supported on [−1,1]^2 and positive on its interior.",
+        "check": "ml101-bump-two-dimensional-mass",
+        "asserts": "Define $\\rho_d(x_1,\\ldots,x_d)=\\prod_{j=1}^d\\psi(x_j)$. Repeated coordinatewise chain and product rules give every partial derivative as $\\prod_{j=1}^d\\psi^{(\\alpha_j)}(x_j)$ for its multi-index $\\alpha$, so all partial derivatives are continuous. The function is nonnegative, vanishes outside $[-1,1]^d$, and is positive at every point of $(-1,1)^d$; therefore its support is exactly that closed cube.",
+        "fixture": "two-dimensional-bump"
+      },
+      "source_path": "items/lem-smooth-unit-mass-compact-bump-on-euclidean-space.md",
+      "source_sha256": "575ae2cafabc74b3a1927bb4386cce0501ada6fdd2ea539fc2552b0d3037d318",
+      "exact_current_asserts": "Define $\\rho_d(x_1,\\ldots,x_d)=\\prod_{j=1}^d\\psi(x_j)$. Repeated coordinatewise chain and product rules give every partial derivative as $\\prod_{j=1}^d\\psi^{(\\alpha_j)}(x_j)$ for its multi-index $\\alpha$, so all partial derivatives are continuous. The function is nonnegative, vanishes outside $[-1,1]^d$, and is positive at every point of $(-1,1)^d$; therefore its support is exactly that closed cube."
+    },
+    {
+      "batch": 50,
+      "id": "ex-wasserstein-translation-of-a-dirac-mass",
+      "index": 0,
+      "check": "ml101-w2-translated-dirac-action",
+      "fixture": "a-two-b-three-T-two",
+      "original_obligation": {
+        "case": "d=1, T=2, a=2, b=3",
+        "inputs": "μt=δ(2+3t)",
+        "calculation": "W2(μs,μt)=3|t−s| and the constant-field action is 2·3².",
+        "result": "Metric speed 3 and action 18."
+      },
+      "proposed_obligation": {
+        "case": "d=1, T=2, a=2, b=3",
+        "inputs": "μt=δ(2+3t)",
+        "calculation": "W2(μs,μt)=3|t−s| and the constant-field action is 2·3².",
+        "result": "Metric speed 3 and action 18.",
+        "check": "ml101-w2-translated-dirac-action",
+        "asserts": "Assume AC. Let $T>0$ and $a,b\\in\\mathbb R^d$. The curve $\\mu_t=\\delta_{a+tb}$ belongs to $AC^2([0,T];\\mathcal P_2(\\mathbb R^d))$, has constant metric speed $|b|$, and the Borel field $v_t(x)=b$ solves the continuity equation. Its action is $T|b|^2$, equal to the minimum action among fields solving that equation for this curve.",
+        "fixture": "a-two-b-three-T-two"
+      },
+      "source_path": "items/ex-wasserstein-translation-of-a-dirac-mass.md",
+      "source_sha256": "01c2029c88362946c4dfd1588ac8a7c22c43b6113c5c0d7eba46d7c7c2c61596",
+      "exact_current_asserts": "Assume AC. Let $T>0$ and $a,b\\in\\mathbb R^d$. The curve $\\mu_t=\\delta_{a+tb}$ belongs to $AC^2([0,T];\\mathcal P_2(\\mathbb R^d))$, has constant metric speed $|b|$, and the Borel field $v_t(x)=b$ solves the continuity equation. Its action is $T|b|^2$, equal to the minimum action among fields solving that equation for this curve."
+    },
+    {
+      "batch": 50,
+      "id": "ex-isotropic-gaussian-wasserstein-geodesic",
+      "index": 0,
+      "check": "ml101-w2-isotropic-gaussian-geodesic",
+      "fixture": "one-dimensional-gaussian-endpoints",
+      "original_obligation": {
+        "case": "d=1, m0=0, m1=2, σ0=1, σ1=3",
+        "inputs": "μt=Law(2t+(1+2t)ξ)",
+        "calculation": "W2(μ0,μ1)²=4+(3−1)²=8; midpoint mean and scale are 1 and 2.",
+        "result": "Endpoint distance 2√2 and constant-speed subsegments."
+      },
+      "proposed_obligation": {
+        "case": "d=1, m0=0, m1=2, σ0=1, σ1=3",
+        "inputs": "μt=Law(2t+(1+2t)ξ)",
+        "calculation": "W2(μ0,μ1)²=4+(3−1)²=8; midpoint mean and scale are 1 and 2.",
+        "result": "Endpoint distance 2√2 and constant-speed subsegments.",
+        "check": "ml101-w2-isotropic-gaussian-geodesic",
+        "asserts": "Assume AC. Let $d\\ge1$, $m_0,m_1\\in\\mathbb R^d$, and $\\sigma_0,\\sigma_1>0$. Let $\\xi$ have density $(2\\pi)^{-d/2}e^{-|z|^2/2}$ on $\\mathbb R^d$, put $m_t=(1-t)m_0+tm_1$ and $\\sigma_t=(1-t)\\sigma_0+t\\sigma_1$, and set $\\mu_t=\\operatorname{Law}(m_t+\\sigma_t\\xi)$ for $0\\le t\\le1$. Then $\\mu_t$ is a constant-speed $W_2$ geodesic, meaning $W_2(\\mu_s,\\mu_t)=|t-s|W_2(\\mu_0,\\mu_1)$ for all $s,t\\in[0,1]$, from the laws of $m_0+\\sigma_0\\xi$ to the law of $m_1+\\sigma_1\\xi$, with\n$$W_2(\\mu_0,\\mu_1)^2=|m_1-m_0|^2+d(\\sigma_1-\\sigma_0)^2.$$\nThe Borel field\n$$v_t(x)=m_1-m_0+\\frac{\\sigma_1-\\sigma_0}{\\sigma_t}(x-m_t)$$\nsolves the continuity equation and has action equal to this squared distance, hence is minimum-action. The strict positivity of $\\sigma_0$ and $\\sigma_1$ ensures $\\sigma_t>0$ throughout; degenerate covariances are excluded.",
+        "fixture": "one-dimensional-gaussian-endpoints"
+      },
+      "source_path": "items/ex-isotropic-gaussian-wasserstein-geodesic.md",
+      "source_sha256": "bdf4028ec337c229e105761ffd0b00a43d272a14eaf085d9d41f8ca8812291c4",
+      "exact_current_asserts": "Assume AC. Let $d\\ge1$, $m_0,m_1\\in\\mathbb R^d$, and $\\sigma_0,\\sigma_1>0$. Let $\\xi$ have density $(2\\pi)^{-d/2}e^{-|z|^2/2}$ on $\\mathbb R^d$, put $m_t=(1-t)m_0+tm_1$ and $\\sigma_t=(1-t)\\sigma_0+t\\sigma_1$, and set $\\mu_t=\\operatorname{Law}(m_t+\\sigma_t\\xi)$ for $0\\le t\\le1$. Then $\\mu_t$ is a constant-speed $W_2$ geodesic, meaning $W_2(\\mu_s,\\mu_t)=|t-s|W_2(\\mu_0,\\mu_1)$ for all $s,t\\in[0,1]$, from the laws of $m_0+\\sigma_0\\xi$ to the law of $m_1+\\sigma_1\\xi$, with\n$$W_2(\\mu_0,\\mu_1)^2=|m_1-m_0|^2+d(\\sigma_1-\\sigma_0)^2.$$\nThe Borel field\n$$v_t(x)=m_1-m_0+\\frac{\\sigma_1-\\sigma_0}{\\sigma_t}(x-m_t)$$\nsolves the continuity equation and has action equal to this squared distance, hence is minimum-action. The strict positivity of $\\sigma_0$ and $\\sigma_1$ ensures $\\sigma_t>0$ throughout; degenerate covariances are excluded."
+    },
+    {
+      "batch": 51,
+      "id": "ex-separated-and-nonseparated-initialization",
+      "index": 0,
+      "check": "ml101-meanfield-radial-separation",
+      "fixture": "one-segment-radial",
+      "original_obligation": {
+        "check": "radial-intermediate-value-and-origin-avoidance",
+        "asserts": "The radial endpoint norms are 1/2 and 2; the exhibited segment from (1/2,0) to (2,0) has norm at least 1/2 throughout.",
+        "claim": "This finite geometric check confirms the crossing and noncrossing examples only.",
+        "checked_in": "Statement and steps 1.2-2.1",
+        "path_segments": 1
+      },
+      "proposed_obligation": {
+        "check": "ml101-meanfield-radial-separation",
+        "asserts": "Assume AC. In $\\Omega=\\mathbb R^2$, let $\\sigma$ be normalized arc-length probability on the unit circle $S^1=\\{x:|x|=1\\}$ and let $\\delta_0$ be the point mass at the origin. For radii $r_a=1/2$ and $r_b=2$, the support of $\\sigma$ is contained in the ball $B(0,r_b)$ and separates the two spheres $r_aS^1$ and $r_bS^1$: every continuous path from one sphere to the other meets $S^1$. In contrast, the support of $\\delta_0$ is contained in $B(0,r_b)$ but does not separate those spheres. These are only checks of the topological initialization condition; neither example asserts that any flow converges or that its limit is globally minimizing.",
+        "claim": "This finite geometric check confirms the crossing and noncrossing examples only.",
+        "checked_in": "Statement and steps 1.2-2.1",
+        "path_segments": 1,
+        "original_check": "radial-intermediate-value-and-origin-avoidance",
+        "original_asserts": "The radial endpoint norms are 1/2 and 2; the exhibited segment from (1/2,0) to (2,0) has norm at least 1/2 throughout.",
+        "fixture": "one-segment-radial"
+      },
+      "source_path": "items/ex-separated-and-nonseparated-initialization.md",
+      "source_sha256": "b84102aba37bcc51b1ea188bdd4360c0174afe9f09bd7ce919b2ad67758965bd",
+      "exact_current_asserts": "Assume AC. In $\\Omega=\\mathbb R^2$, let $\\sigma$ be normalized arc-length probability on the unit circle $S^1=\\{x:|x|=1\\}$ and let $\\delta_0$ be the point mass at the origin. For radii $r_a=1/2$ and $r_b=2$, the support of $\\sigma$ is contained in the ball $B(0,r_b)$ and separates the two spheres $r_aS^1$ and $r_bS^1$: every continuous path from one sphere to the other meets $S^1$. In contrast, the support of $\\delta_0$ is contained in $B(0,r_b)$ but does not separate those spheres. These are only checks of the topological initialization condition; neither example asserts that any flow converges or that its limit is globally minimizing."
+    },
+    {
+      "batch": 51,
+      "id": "ex-mixture-convexity-not-displacement-convex",
+      "index": 0,
+      "check": "ml101-meanfield-sine-dirac-geodesic",
+      "fixture": "sine-dirac-endpoints",
+      "original_obligation": {
+        "check": "sine-feature-dirac-geodesic",
+        "asserts": "F(δ_0)=0, F(δ_π)=0, and F(δ_{π/2})=1.",
+        "claim": "The exact midpoint value violates displacement convexity with λ=0.",
+        "checked_in": "Statement and step 3.1",
+        "max_support_points": 2
+      },
+      "proposed_obligation": {
+        "check": "ml101-meanfield-sine-dirac-geodesic",
+        "asserts": "Assume AC. Let $\\Omega=\\mathbb R$, $\\mathcal H=\\mathbb R$, $R(z)=z^2$, $\\Phi(x)=\\sin x$, and $V(x)=0$, so $F(\\mu)=(\\int\\sin x\\,d\\mu(x))^2$ for every finite nonnegative Borel measure. For each $r>0$, take $Q_r=[-r,r]$ and $C_1=C_2=1$; the cutoff, boundedness, Lipschitz, and linear-growth assumptions hold. This energy is convex under linear mixtures of measures, but it is not displacement convex along $W_2$ geodesics: along the geodesic from $\\delta_0$ to $\\delta_\\pi$, its endpoint values are zero and its midpoint value is one.",
+        "claim": "The exact midpoint value violates displacement convexity with λ=0.",
+        "checked_in": "Statement and step 3.1",
+        "max_support_points": 2,
+        "original_check": "sine-feature-dirac-geodesic",
+        "original_asserts": "F(δ_0)=0, F(δ_π)=0, and F(δ_{π/2})=1.",
+        "fixture": "sine-dirac-endpoints"
+      },
+      "source_path": "items/ex-mixture-convexity-not-displacement-convex.md",
+      "source_sha256": "d61c23548713461f3e160aee5d4a3b8363361477ff38226e7682350db9eb9c4a",
+      "exact_current_asserts": "Assume AC. Let $\\Omega=\\mathbb R$, $\\mathcal H=\\mathbb R$, $R(z)=z^2$, $\\Phi(x)=\\sin x$, and $V(x)=0$, so $F(\\mu)=(\\int\\sin x\\,d\\mu(x))^2$ for every finite nonnegative Borel measure. For each $r>0$, take $Q_r=[-r,r]$ and $C_1=C_2=1$; the cutoff, boundedness, Lipschitz, and linear-growth assumptions hold. This energy is convex under linear mixtures of measures, but it is not displacement convex along $W_2$ geodesics: along the geodesic from $\\delta_0$ to $\\delta_\\pi$, its endpoint values are zero and its midpoint value is one."
+    },
+    {
+      "batch": 51,
+      "id": "ex-quadratic-feature-energy-flow",
+      "index": 0,
+      "check": "ml101-meanfield-quadratic-particle-flow",
+      "fixture": "one-dimensional-one-particle",
+      "original_obligation": {
+        "check": "one-dimensional-single-particle-normalization",
+        "asserts": "For d=1, m=1, and x(0)=1, the coordinate flow is x(t)=e^{-t} and the empirical law is δ_{e^{-t}}.",
+        "claim": "This checks particle metric normalization and the exact pushforward formula in the one-particle case.",
+        "checked_in": "Statement and steps 1.1-3.1",
+        "dimension": 1,
+        "particles": 1
+      },
+      "proposed_obligation": {
+        "check": "ml101-meanfield-quadratic-particle-flow",
+        "asserts": "Assume AC. In dimension $d\\ge1$, take $\\mathcal H=\\{0\\}$, $R=0$, $\\Phi=0$, $\\Omega=\\mathbb R^d$, $V(x)=|x|^2/2$, and $Q_r=\\overline B(0,r)$ for every $r>0$. This cutoff family has the required relative-neighborhood property, and $\\sup_{Q_r}\\|\\partial V\\|=r\\le1+r$, so $C_1=C_2=1$ works. Thus $F(\\mu)=\\frac12\\int|x|^2d\\mu(x)$. For any $\\mu_0\\in\\mathcal P_2(\\mathbb R^d)$, the unique Wasserstein gradient flow is $\\mu_t=(e^{-t}\\operatorname{id})_\\#\\mu_0$. The corresponding $m$-particle gradient flow satisfies $x_i(t)=e^{-t}x_i(0)$ under the inner product $m^{-1}\\sum_i x_i\\cdot y_i$. For every empirical probability $\\mu_{m,0}$ and every $t\\ge0$,\n$$W_2(\\mu_{m,t},\\mu_t)=e^{-t}W_2(\\mu_{m,0},\\mu_0),$$\nso any initial convergence in $W_2$ persists uniformly on every compact time interval.",
+        "claim": "This checks particle metric normalization and the exact pushforward formula in the one-particle case.",
+        "checked_in": "Statement and steps 1.1-3.1",
+        "dimension": 1,
+        "particles": 1,
+        "original_check": "one-dimensional-single-particle-normalization",
+        "original_asserts": "For d=1, m=1, and x(0)=1, the coordinate flow is x(t)=e^{-t} and the empirical law is δ_{e^{-t}}.",
+        "fixture": "one-dimensional-one-particle"
+      },
+      "source_path": "items/ex-quadratic-feature-energy-flow.md",
+      "source_sha256": "eccaa3f1f08f07176566832a244e61e217ea4d000a6dd79a2dd337086bc657d3",
+      "exact_current_asserts": "Assume AC. In dimension $d\\ge1$, take $\\mathcal H=\\{0\\}$, $R=0$, $\\Phi=0$, $\\Omega=\\mathbb R^d$, $V(x)=|x|^2/2$, and $Q_r=\\overline B(0,r)$ for every $r>0$. This cutoff family has the required relative-neighborhood property, and $\\sup_{Q_r}\\|\\partial V\\|=r\\le1+r$, so $C_1=C_2=1$ works. Thus $F(\\mu)=\\frac12\\int|x|^2d\\mu(x)$. For any $\\mu_0\\in\\mathcal P_2(\\mathbb R^d)$, the unique Wasserstein gradient flow is $\\mu_t=(e^{-t}\\operatorname{id})_\\#\\mu_0$. The corresponding $m$-particle gradient flow satisfies $x_i(t)=e^{-t}x_i(0)$ under the inner product $m^{-1}\\sum_i x_i\\cdot y_i$. For every empirical probability $\\mu_{m,0}$ and every $t\\ge0$,\n$$W_2(\\mu_{m,t},\\mu_t)=e^{-t}W_2(\\mu_{m,0},\\mu_0),$$\nso any initial convergence in $W_2$ persists uniformly on every compact time interval."
+    }
+  ],
+  "preserved_original_fields": "Every original field is unchanged except check/asserts; previous check/asserts retained as original_check/original_asserts as well as in immutable before snapshots. Added fixture selector; no obligation removed."
+}

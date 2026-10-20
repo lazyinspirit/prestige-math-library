@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "scope": [
+    "prop-covariance-factor-model-rotation-ambiguity",
+    "lem-ica-whitening-reduces-mixing-to-orthogonal",
+    "prop-poisson-nmf-loglikelihood",
+    "prop-poisson-nmf-factorization-invariances",
+    "lem-poisson-nmf-updates-preserve-positivity",
+    "ex-gaussian-factor-rotation",
+    "ex-ica-sign-permutation-ambiguity",
+    "ex-poisson-nmf-nonunique-factorizations",
+    "ex-poisson-nmf-zero-count-update"
+  ],
+  "contracts": {
+    "prop-covariance-factor-model-rotation-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-factor-model",
+          "source_section": "Definition",
+          "quote": "A **covariance factor model** is a representation",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "covariance-expansion",
+          "claim": "Expand covariance under the centered, uncorrelated factor-model assumptions.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "orthogonal-rotation",
+          "claim": "Verify the rotated factors and loadings satisfy the model and preserve covariance.",
+          "step": "2.1",
+          "inputs": ["F1", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The statement fixes positive dimensions with q<p."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.1 and step 2.1 impose no nonzero-rank condition on A, so A=0 is included."},
+        {"case": "one", "status": "checked", "evidence": "Step 2.1 includes q=1, where the orthogonal matrices are R=1 and R=-1."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 uses no rank assumption on A, so rank-deficient loading matrices are covered."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The proposition has no endpoint parameter."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof constructs no choices."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The proposition is not an if-and-only-if statement."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The proposition is not an if-and-only-if statement."}
+      ]
+    },
+    "lem-ica-whitening-reduces-mixing-to-orthogonal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "Each source is standardized:",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Then there exist orthonormal bases",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Then $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-covariance",
+          "claim": "Compute C=AA^T and prove it is positive definite.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "spectral-inverse-root",
+          "claim": "Use an invertible SVD to construct a positive symmetric inverse square root.",
+          "step": "2.1",
+          "inputs": ["F2", "step 1.1"]
+        },
+        {
+          "id": "unique-inverse-root",
+          "claim": "Use the real spectral theorem on each eigenspace to prove uniqueness.",
+          "step": "3.1",
+          "inputs": ["F3", "step 2.1"]
+        },
+        {
+          "id": "orthogonal-whitened-mixing",
+          "claim": "Compute the whitened mixing matrix and verify orthogonality.",
+          "step": "4.1",
+          "inputs": ["given", "step 2.1", "step 3.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The statement assumes p>=1."},
+        {"case": "zero", "status": "not_applicable", "reason": "An invertible A cannot be the zero matrix."},
+        {"case": "one", "status": "checked", "evidence": "Step 4.1 is valid for p=1, where the whitened mixing is 1 or -1."},
+        {"case": "degenerate", "status": "not_applicable", "reason": "Invertibility of A makes C=AA^T positive definite, so zero eigenvalues are excluded."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No endpoint parameter occurs in the whitening calculation."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof uses the supplied finite-dimensional spectral and SVD bases and makes no arbitrary-index choice."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The lemma is a direct implication, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The lemma is a direct implication, not an equivalence."}
+      ]
+    },
+    "prop-poisson-nmf-loglikelihood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "At this parameter, the random counts",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-rate-likelihood",
+          "claim": "Multiply the independent Poisson masses and take the logarithm.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "zero-rate-boundary",
+          "claim": "Check both zero-rate cell cases and remove the data-only factorial term.",
+          "step": "2.1",
+          "inputs": ["F1", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The model requires positive matrix dimensions."},
+        {"case": "zero", "status": "checked", "evidence": "Step 2.1 treats x=0 and lambda=0 explicitly."},
+        {"case": "one", "status": "checked", "evidence": "Step 1.1 is a finite product and remains valid for a single cell."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 2.1 handles the degenerate zero-rate Poisson law."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 2.1 handles the boundary lambda=0 and its log-likelihood values."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof makes no choices."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The proposition is not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The proposition is not an equivalence."}
+      ]
+    },
+    "prop-poisson-nmf-factorization-invariances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "component-rescaling",
+          "claim": "Cancel each positive component scale in the corresponding product terms.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "component-permutation",
+          "claim": "Reindex the finite component sum to prove permutation invariance.",
+          "step": "2.1",
+          "inputs": ["F1", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The model fixes a positive inner dimension r."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.1 remains valid when factor entries are zero because the scale factors are positive."},
+        {"case": "one", "status": "checked", "evidence": "Step 2.1 includes r=1, whose only permutation is the identity."},
+        {"case": "degenerate", "status": "checked", "evidence": "The calculation in step 1.1 does not assume either factor matrix has full rank."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The scale parameters satisfy c_k>0; zero scaling is excluded."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof uses only a finite sum and a finite permutation."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The proposition asserts invariance, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The proposition asserts invariance, not an equivalence."}
+      ]
+    },
+    "lem-poisson-nmf-updates-preserve-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "An observed count matrix",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-poisson-nmf-multiplicative-updates",
+          "source_section": "Definition",
+          "quote": "The first factor block uses the current $H^{(t)}$; the second uses the new $W^{(t+1)}$ and the recomputed intermediate rates.",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-w-update",
+          "claim": "Each row has a positive count, which gives a positive numerator and denominator for every W update.",
+          "step": "1.1",
+          "inputs": ["F1", "F2"]
+        },
+        {
+          "id": "positive-h-update",
+          "claim": "Each column has a positive count, which gives a positive numerator and denominator for every H update and closes the induction.",
+          "step": "2.1",
+          "inputs": ["F1", "F2", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The algorithm requires positive n, p, and r."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.1 allows zero cells but uses a positive count somewhere in each row."},
+        {"case": "one", "status": "checked", "evidence": "Steps 1.1 and 2.1 apply when n=p=r=1 and the sole count is positive."},
+        {"case": "degenerate", "status": "not_applicable", "reason": "All-zero rows or columns and zero initial factors are excluded by the hypotheses."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The initialization is strictly positive; zero-valued starting factors are excluded."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Steps 1.1 and 2.1 choose one positive cell in each of finitely many rows and columns; no arbitrary-index choice is used."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The lemma is a one-way well-definedness result."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The lemma is a one-way well-definedness result."}
+      ]
+    },
+    "ex-gaussian-factor-rotation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-covariance-factor-model-rotation-ambiguity",
+          "source_section": "Statement",
+          "quote": "For every orthogonal matrix",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covariance-factor-model",
+          "source_section": "Definition",
+          "quote": "The model assumes only the stated moment and cross-covariance conditions; it does not assume that",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-observation",
+          "claim": "Verify the orthogonal matrix and the pathwise equality of the two observed vectors.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "gaussian-rotation-law",
+          "claim": "Use the orthogonal change of variables to show the standard Gaussian source law is unchanged.",
+          "step": "2.1",
+          "inputs": ["F2", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The example fixes p=3 and q=2."},
+        {"case": "zero", "status": "not_applicable", "reason": "The example fixes positive source and residual variances."},
+        {"case": "one", "status": "not_applicable", "reason": "The example concerns two latent factors."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 computes the explicit nonsingular residual covariance and the full covariance matrix."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "There is no endpoint parameter."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The matrices and Gaussian densities are specified explicitly."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example is a direct computation, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example is a direct computation, not an equivalence."}
+      ]
+    },
+    "ex-ica-sign-permutation-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "has mutually independent real-valued components.",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "signed-permutation-sources",
+          "claim": "Check that the signed permutation preserves independence, standardization, and the Laplace marginals.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "same-observed-law",
+          "claim": "Multiply the signed-permutation factors to recover the original observation.",
+          "step": "2.1",
+          "inputs": ["F1", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The example fixes two source coordinates."},
+        {"case": "zero", "status": "not_applicable", "reason": "The example uses nondegenerate standardized Laplace sources."},
+        {"case": "one", "status": "not_applicable", "reason": "The example has p=2."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 checks that both displayed source laws remain nondegenerate Laplace laws."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "There is no endpoint parameter."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The permutation and sign matrix are explicit."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example exhibits one ambiguity and asserts no equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example exhibits one ambiguity and asserts no equivalence."}
+      ]
+    },
+    "ex-poisson-nmf-nonunique-factorizations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-poisson-nmf-factorization-invariances",
+          "source_section": "Statement",
+          "quote": "Therefore both transformations preserve every Poisson rate and the corresponding likelihood.",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-unit-rate",
+          "claim": "Compute the common all-ones rate matrix for every alpha in the open interval.",
+          "step": "1.1",
+          "inputs": ["F1"]
+        },
+        {
+          "id": "not-trivial-equivalence",
+          "claim": "Use the component outer-product multiset to exclude scale/permutation equivalence.",
+          "step": "2.1",
+          "inputs": ["F2", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The example fixes 2 by 2 matrices and inner dimension 2."},
+        {"case": "zero", "status": "not_applicable", "reason": "Every data and factor entry in this example is positive except no factor entries are zero."},
+        {"case": "one", "status": "not_applicable", "reason": "The example fixes two components."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 verifies that the rank-one rate matrix has a positive two-component factorization."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The statement restricts alpha to 0<alpha<1, so zero-factor endpoints are excluded."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The two factorizations use the explicit values alpha=1/2 and alpha=1/3."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example gives a counterexample to uniqueness, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example gives a counterexample to uniqueness, not an equivalence."}
+      ]
+    },
+    "ex-poisson-nmf-zero-count-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "An observed count matrix",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-poisson-nmf-multiplicative-updates",
+          "source_section": "Definition",
+          "quote": "The first factor block uses the current $H^{(t)}$; the second uses the new $W^{(t+1)}$ and the recomputed intermediate rates.",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-nmf-updates-preserve-positivity",
+          "source_section": "Statement",
+          "quote": "Consequently every finite number of sweeps from a strictly positive initialization is well-defined.",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-w-sweep",
+          "claim": "Compute the initial rates, W update numerator and denominator, and intermediate rates.",
+          "step": "1.1",
+          "inputs": ["F1", "F2"]
+        },
+        {
+          "id": "second-h-sweep",
+          "claim": "Compute the H update and verify the zero cell contributes zero without a zero denominator.",
+          "step": "2.1",
+          "inputs": ["F2", "F3", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The example fixes positive 2 by 2 dimensions and inner dimension 2."},
+        {"case": "zero", "status": "checked", "evidence": "Steps 1.1 and 2.1 explicitly compute both zero-count cells."},
+        {"case": "one", "status": "not_applicable", "reason": "The example is a fixed 2 by 2 calculation."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 2.1 shows all intermediate rates remain positive despite zero observations."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The initial factors are strictly positive and no endpoint parameter is varied."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "All matrices and indices are explicitly fixed."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example is a finite computation, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example is a finite computation, not an equivalence."}
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+--- V2/tools/step3-owner-foreign-reader-routes.mjs
++++ V3/tools/step3-owner-foreign-reader-routes.mjs
+@@ -11,7 +11,7 @@
+ const need=(x,m)=>{if(!x)throw Error(`foreign reader route: ${m}`);};
+ const hex=x=>/^[a-f0-9]{64}$/.test(x??'');
+ const edgeKinds=['deps','justified_by'];
+-function declaredEdge(fm,id,kind){return edgeKinds.includes(kind)&&edgeKinds.filter(k=>Array.isArray(fm[k])&&fm[k].includes(id)).length===1&&fm[kind].includes(id);}
++function declaredEdge(fm,id,kind){return edgeKinds.includes(kind)&&Array.isArray(fm[kind])&&edgeKinds.filter(k=>Array.isArray(fm[k])&&fm[k].includes(id)).length===1&&fm[kind].includes(id);}
+ const batch=x=>typeof x==='string'&&/^[1-9]\d*$/.test(x);
+ const registry=run=>`research/${run}-step3-owner-foreign-reader-routes.json`;
+ function bytes(root,p){need(typeof p==='string'&&!isAbsolute(p)&&!p.includes('\\'),'invalid path');const full=resolve(root,p),rel=relative(resolve(root),full);need(rel&&!rel.startsWith('..')&&!isAbsolute(rel),'escaping path');let at=resolve(root);for(const part of rel.split('/')){at=resolve(at,part);need(!lstatSync(at).isSymbolicLink(),'symlink evidence');}need(lstatSync(full).isFile(),'nonregular input');return readFileSync(full);}

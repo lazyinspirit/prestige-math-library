@@ -1,0 +1,232 @@
+--- research/machine-learning-all-101-2026-10-19-batch-33.proof-contracts.json
++++ proposed-boundaries-only
+@@ -23,43 +23,47 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "The Definition allows empty input/output index sets and any finite receptive-field K. If K is empty its sum is zero and y(p)=b; if O is empty the output is the unique empty function. Channel counts and stride coordinates remain positive.",
++          "evidence": "The Definition allows empty input/output index sets and any finite receptive-field K. If K is empty its sum is zero and y(p)=b; if O is empty the output is the unique empty function. Channel counts and stride coordinates remain positive."
+         },
+         {
+           "case": "zero",
+-          "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "With every filter matrix W_delta and bias b zero, the displayed finite sum is zero at each output site for any boundary extension; this is an admitted zero-output layer.",
++          "evidence": "With every filter matrix W_delta and bias b zero, the displayed finite sum is zero at each output site for any boundary extension; this is an admitted zero-output layer."
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "For one input and output channel and a singleton receptive field K={delta}, the formula reduces to y(p)=b+xtilde(a+s* p+delta)W_delta, a single scalar weighted input plus bias.",
++          "evidence": "For one input and output channel and a singleton receptive field K={delta}, the formula reduces to y(p)=b+xtilde(a+s* p+delta)W_delta, a single scalar weighted input plus bias."
+         },
+         {
+           "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "A receptive field with no offsets gives the spatially constant bias output, while an empty output set has no sites to evaluate. Neither case needs a nonexistent maximum or division in the convolution formula.",
++          "evidence": "A receptive field with no offsets gives the spatially constant bias output, while an empty output set has no sites to evaluate. Neither case needs a nonexistent maximum or division in the convolution formula."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "This layer is indexed by subsets of the integer lattice, not a varying interval parameter. Values beyond D are handled by the supplied boundary extension, and output cropping is fixed by O; no universal limiting or endpoint-symmetry claim is made."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "The extension xtilde, filter matrices, bias, stride and origin are supplied data. The output is their explicit finite sum; the definition does not choose an extension or optimizer from an arbitrary family."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "The displayed expression constructs a cross-correlation layer from its receptive field and channel weights. It is not a characterization asserting that every map with a locality property has this representation."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "def-discrete-convolutional-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "No converse infers filter sharing, padding or stride from an output behavior. The Definition explicitly notes that the chosen cropping/extension/stride need not preserve lattice symmetry."
+         }
+       ]
+     },
+@@ -259,43 +263,48 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "If X is empty, a supplied layer Phi:X->Y is the unique empty function and the displayed equivariance identity is vacuous. If Y is empty and X is nonempty no such supplied function exists; that pair is outside the layer data.",
++          "evidence": "If X is empty, a supplied layer Phi:X->Y is the unique empty function and the displayed equivariance identity is vacuous. If Y is empty and X is nonempty no such supplied function exists; that pair is outside the layer data."
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "The feature spaces X and Y are arbitrary acted-on sets; the definition supplies neither addition nor a distinguished zero element, so a zero-vector boundary is not part of these data."
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "For the one-element group the only action element is the identity, so equivariance reduces to Phi(x)=Phi(x) and every supplied function is equivariant. This follows directly from the displayed action identity.",
++          "evidence": "For the one-element group the only action element is the identity, so equivariance reduces to Phi(x)=Phi(x) and every supplied function is equivariant. This follows directly from the displayed action identity."
+         },
+         {
+           "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "A trivial output action is explicitly admitted: Tprime_g is the identity for every g, and the Definition names the resulting equivariant condition G-invariance. Input and output actions are not required to coincide.",
++          "evidence": "A trivial output action is explicitly admitted: Tprime_g is the identity for every g, and the Definition names the resulting equivariant condition G-invariance. Input and output actions are not required to coincide."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "Equivariance quantifies over group elements and points of acted-on sets. No metric, parameter interval or continuous limiting process is specified, so it has no numerical endpoint case."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "Both actions and the function Phi are already supplied. Testing their equality at each (g,x) requires no choice of orbit representatives or selected map from a family."
+         },
+         {
+           "case": "iff-forward",
+-          "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "By the defining criterion, a layer called G-equivariant satisfies Phi(T_g x)=Tprime_g Phi(x) for every g and x. This is the forward reading of its stated property definition.",
++          "evidence": "By the defining criterion, a layer called G-equivariant satisfies Phi(T_g x)=Tprime_g Phi(x) for every g and x. This is the forward reading of its stated property definition."
+         },
+         {
+           "case": "iff-reverse",
+-          "status": "not_applicable",
+-          "reason": "def-equivariant-neural-layer is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "Conversely, a supplied layer satisfying the displayed identity for all group elements and inputs meets exactly the Definition of G-equivariance; no equality of the input and output actions is additionally required.",
++          "evidence": "Conversely, a supplied layer satisfying the displayed identity for all group elements and inputs meets exactly the Definition of G-equivariance; no equality of the input and output actions is additionally required."
+         }
+       ]
+     },
+@@ -306,43 +315,47 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "A filter with empty support is the zero filter and both displayed correlations are zero; the corresponding sums converge absolutely. The group itself cannot be empty because it contains its identity, and channel counts stay positive.",
++          "evidence": "A filter with empty support is the zero filter and both displayed correlations are zero; the corresponding sums converge absolutely. The group itself cannot be empty because it contains its identity, and channel counts stay positive."
+         },
+         {
+           "case": "zero",
+-          "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "If f or Psi is identically zero, each matrix-product summand vanishes, so the output correlation is zero at every g. This meets the stated finite-support/absolute-convergence requirement.",
++          "evidence": "If f or Psi is identically zero, each matrix-product summand vanishes, so the output correlation is zero at every g. This meets the stated finite-support/absolute-convergence requirement."
+         },
+         {
+           "case": "one",
+-          "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "For a one-element group G={e}, the group-to-group correlation has the single term f(e)Psi(e). With one input and output channel it is ordinary scalar multiplication; the lattice-to-group formula retains its own lattice index set.",
++          "evidence": "For a one-element group G={e}, the group-to-group correlation has the single term f(e)Psi(e). With one input and output channel it is ordinary scalar multiplication; the lattice-to-group formula retains its own lattice index set."
+         },
+         {
+           "case": "degenerate",
+-          "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "status": "checked",
++          "reason": "No invertibility or full-rank condition is imposed on the filter matrices. Zero or singular channel-mixing matrices are admitted and their products are still defined, subject only to the explicit support/convergence condition.",
++          "evidence": "No invertibility or full-rank condition is imposed on the filter matrices. Zero or singular channel-mixing matrices are admitted and their products are still defined, subject only to the explicit support/convergence condition."
+         },
+         {
+           "case": "endpoints",
+           "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "The indexing objects are a discrete group and the full lattice, with no ordered interval or finite-horizon endpoint. The stated support/absolute-convergence condition governs the sums rather than a boundary truncation limit."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "Group multiplication/inversion and the given feature/filter maps determine each summand. No selection of group representatives or minimizers is needed to define either correlation."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "The definition supplies two correlation formulas on their distinct input spaces, not an equivalence saying every equivariant map has a convolution representation."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "def-group-convolution is a definition with no supplied proof phase; its complete declared input/output operation is the claim."
++          "reason": "No converse derives feature/filter data from a group-indexed output. The text expressly allows noncommutative correlation and does not assert a commutativity equivalence."
+         }
+       ]
+     },
+@@ -421,7 +434,13 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The definition requires U nonempty and H a subgroup, so empty pooling index sets are excluded."
++          "reason": "Neighborhood pooling explicitly requires U finite and nonempty. A subgroup H contains the identity, so H, every coset gH, the group G and its coset set are nonempty; proof step 2.1 therefore takes maxima only over nonempty finite sets. The phrase indexed by names these nonempty domains, not an empty pooling case.",
++          "reviewed": {
++            "upheld": true,
++            "by": "policy_gradient_cpo_repair focused boundary metadata review",
++            "reason": "Neighborhood pooling explicitly requires U finite and nonempty. A subgroup H contains the identity, so H, every coset gH, the group G and its coset set are nonempty; proof step 2.1 therefore takes maxima only over nonempty finite sets. The phrase indexed by names these nonempty domains, not an empty pooling case. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
++            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\bindexed by\\b)"
++          }
+         },
+         {
+           "case": "zero",
+@@ -436,7 +455,7 @@
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The cases H={e} and finite H=G are included in the representative and maximum arguments; see steps 1.1–1.3."
++          "evidence": "The cases H={e} and finite H=G are included in the representative and maximum arguments; see steps 1.1\u20131.3."
+         },
+         {
+           "case": "endpoints",
+@@ -446,7 +465,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "The formula is independent of coset representatives and takes maxima over finite sets; no representative is chosen in steps 1.1–1.3."
++          "evidence": "The formula is independent of coset representatives and takes maxima over finite sets; no representative is chosen in steps 1.1\u20131.3."
+         },
+         {
+           "case": "iff-forward",
+@@ -679,7 +698,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Reindexings use explicit bijections h=uk and x=u·y and require no choice; see steps 1.1 and 1.2."
++          "evidence": "Reindexings use explicit bijections h=uk and x=u\u00b7y and require no choice; see steps 1.1 and 1.2."
+         },
+         {
+           "case": "iff-forward",
+@@ -1051,4 +1070,4 @@
+       ]
+     }
+   }
+-}
++}

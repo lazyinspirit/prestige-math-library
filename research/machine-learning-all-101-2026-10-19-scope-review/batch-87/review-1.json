@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "87",
+  "round": 1,
+  "reviewed_items": [
+    "thm-offline-coverage-impossibility-example",
+    "def-offline-reinforcement-learning-dataset",
+    "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+    "alg-trajectory-importance-sampling-ope",
+    "alg-doubly-robust-ope",
+    "thm-trajectory-importance-sampling-is-unbiased",
+    "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+    "rem-offline-rl-distribution-shift-and-pessimism",
+    "ex-offline-ope-full-support-and-missing-support",
+    "ex-offline-ope-exploding-trajectory-weights",
+    "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+    "ex-offline-ope-doubly-robust-correctness-branches"
+  ],
+  "reviewed_pages": [
+    "offline-reinforcement-learning-and-off-policy-evaluation",
+    "offline-reinforcement-learning-and-off-policy-evaluation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The support implication proof and the remark's unbiasedness dependency are repaired. The final review found two remaining prerequisite-relation defects; this is the second review, so they must go to the owner without another engine repair.",
+  "findings": [
+    {
+      "id": "def-offline-reinforcement-learning-dataset",
+      "type": "prerequisite",
+      "reason": "The current path-law lemma's deps do not include this definition, so the reported cycle was not present. The new justified_by entry is invalid: a justified_by target must depend on the definition through deps. Restore the path-law lemma to deps and clear justified_by, or have the owner reconcile the well-definedness relation."
+    },
+    {
+      "id": "alg-trajectory-importance-sampling-ope",
+      "type": "prerequisite",
+      "reason": "thm-trajectory-importance-sampling-is-unbiased now proves the finiteness and almost-sure numerical-output property, and its deps include this algorithm, but the algorithm's justified_by remains empty. The owner must resolve the missing well-definedness relation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-trajectory-importance-sampling-is-unbiased",
+      "decision": "accept",
+      "reason": "The expanded finiteness argument and the OIS/PDIS unbiasedness proof use the current algorithm formulas correctly."
+    },
+    {
+      "id": "rem-offline-rl-distribution-shift-and-pessimism",
+      "decision": "accept",
+      "reason": "It now lists and references the OIS/PDIS unbiasedness theorem; its stated assumptions match that supplier."
+    },
+    {
+      "id": "ex-offline-ope-full-support-and-missing-support",
+      "decision": "accept",
+      "reason": "Its direct finite-support calculation uses the retained OIS formula."
+    },
+    {
+      "id": "ex-offline-ope-exploding-trajectory-weights",
+      "decision": "accept",
+      "reason": "Its finite-horizon calculation uses the retained OIS formula."
+    },
+    {
+      "id": "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+      "decision": "accept",
+      "reason": "Its calculation uses the retained WIS formula and zero-denominator convention."
+    },
+    {
+      "id": "offline-reinforcement-learning-and-off-policy-evaluation",
+      "decision": "accept",
+      "reason": "The assigned item inventory and placement remain unchanged."
+    },
+    {
+      "id": "offline-reinforcement-learning-and-off-policy-evaluation-examples",
+      "decision": "accept",
+      "reason": "The assigned example inventory remains unchanged and its calculations use the retained formulas."
+    }
+  ]
+}

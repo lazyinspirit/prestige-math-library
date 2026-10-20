@@ -1,0 +1,937 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-indicator-response-least-squares-minimum-norm-fit",
+    "thm-lda-and-qda-log-posterior-scores",
+    "thm-binary-logistic-derivatives-and-irls-update",
+    "thm-complete-separation-precludes-finite-logistic-mle",
+    "thm-perceptron-margin-mistake-bound",
+    "ex-generative-lda-and-logistic-share-a-boundary",
+    "ex-separated-logistic-sample-has-unattained-supremum",
+    "ex-nonseparable-perceptron-cycles"
+  ],
+  "contracts": {
+    "lem-indicator-response-least-squares-minimum-norm-fit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-indicator-response-least-squares-classifier",
+          "source_section": "Definition",
+          "quote": "Let $n,q\\ge1$ and $K\\ge2$ be finite integers. For a fixed design matrix $X\\in\\mathbb R^{n\\times q}$ and labels $y_i\\in\\{1,\\ldots,K\\}$, form the indicator response matrix $Y\\in\\mathbb R^{n\\times K}$ by $Y_{ik}=1$ when $y_i=k$ and $Y_{ik}=0$ otherwise. For a coefficient matrix $B\\in\\mathbb R^{q\\times K}$, set $L(B)=(2n)^{-1}\\|Y-XB\\|_F^2$, where $\\|A\\|_F^2$ is the sum of squares of all entries of $A$. Let $B_*$ be the least-squares minimizer with smallest Frobenius norm. For a new row vector $x^T\\in\\mathbb R^{1\\times q}$, the indicator-response classifier assigns scores $(x^TB_*)_k$ and predicts the smallest class index attaining their maximum. An intercept, if used, is one of the columns of $X$; no rank assumption is imposed on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rank-zero",
+          "step": "1.1",
+          "claim": "If $r=0$, [F3] implies $X=0$. By the objective in [F1], the least-squares objective is then constant in $B$, so every matrix is a minimizer and $B_*=0$ is the unique one of smallest Frobenius norm. The minimizer set is $\\{N:XN=0\\}$, as claimed.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "svd-candidate",
+          "step": "1.2",
+          "claim": "Suppose $r>0$ and write the thin SVD $X=U_rD_rV_r^T$ from [F3]. Define $B_*=V_rD_r^{-1}U_r^TY$. Orthonormality gives $XB_*=U_rU_r^TY$, whose $k$th column is the orthogonal projection of the $k$th column of $Y$ onto $\\operatorname{im}X=\\operatorname{span}(U_r)$.",
+          "inputs": [
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "candidate-minimizes",
+          "step": "2.1",
+          "claim": "Each residual column of $Y-XB_*$ is therefore orthogonal to $\\operatorname{im}X$. Applying [F2] to each column shows that every column of $B_*$ is a least-squares minimizer, hence $B_*$ minimizes the matrix objective.",
+          "inputs": [
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "all-minimizers",
+          "step": "2.2",
+          "claim": "By [F2], any other matrix minimizer has the form $B_*+N$ with $XN=0$. The SVD in [F3] gives $\\ker X=\\operatorname{span}(v_{r+1},\\ldots,v_q)$, orthogonal to the row space $\\operatorname{span}(v_1,\\ldots,v_r)$ containing every column of $B_*$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "minimum-norm-unique",
+          "step": "3.1",
+          "claim": "Columnwise Pythagoras now gives $\\|B_*+N\\|_F^2=\\|B_*\\|_F^2+\\|N\\|_F^2$. Thus $B_*$ has the smallest Frobenius norm among all minimizers, and equality is possible only for $N=0$. Together with step 1.1, this proves existence and uniqueness also in rank zero.",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1 and K>=2; there is no empty response-matrix case in this classifier contract."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles rank zero: X=0, every B minimizes, and B*=0 uniquely minimizes Frobenius norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 apply columnwise and include n=1 with K>=2 without any rank assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 treats arbitrary rank, including nonzero rank deficiency through ker(X)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result concerns finite matrices and least-squares norms, not a parameter interval or endpoint limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All spaces are finite dimensional and the SVD/least-squares suppliers require no arbitrary-family choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma characterizes a unique minimum-norm minimizer; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma characterizes a unique minimum-norm minimizer; it states no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-lda-and-qda-log-posterior-scores": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-generative-lda-and-qda-models",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$ and $K\\ge2$ be finite integers, let the class label be $Y\\in\\{1,\\ldots,K\\}$, and let $X\\in\\mathbb R^d$. Choose class priors $\\pi_k>0$ with $\\sum_{k=1}^K\\pi_k=1$, means $\\mu_k\\in\\mathbb R^d$, and real symmetric positive-definite covariance matrices $\\Sigma_k\\in\\mathbb R^{d\\times d}$. The Gaussian generative model has $\\Pr(Y=k)=\\pi_k$ and conditional laws $X\\mid Y=k\\sim N_d(\\mu_k,\\Sigma_k)$. The LDA subfamily imposes one common covariance matrix, $\\Sigma_k=\\Sigma$ for every $k$; the QDA subfamily permits the covariance matrices to differ by class.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-linear-score-classifier",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ and $K\\ge2$ be finite integers, with ordered labels $1<2<\\cdots<K$. A finite linear-score classifier on $\\mathbb R^d$ is specified by vectors $a_k\\in\\mathbb R^d$ and constants $b_k\\in\\mathbb R$, one pair for each label, and assigns score $s_k(x)=a_k^Tx+b_k$ to $x\\in\\mathbb R^d$. Its predicted label is the smallest index attaining $\\max_{1\\le j\\le K}s_j(x)$. This rule is single-valued, including when two or more scores tie.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "density-bayes-ratio",
+          "step": "1.1",
+          "claim": "For each $x$, [F2] gives $f_k(x)>0$ and finite because $\\Sigma_k$ is positive definite; since $\\pi_k>0$, the denominator $m(x)=\\sum_j\\pi_jf_j(x)$ is positive. The density Bayes formula $p_k(x)=\\pi_kf_k(x)/m(x)$ is therefore well-defined, positive, and sums to one.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "qda-score",
+          "step": "2.1",
+          "claim": "Taking logarithms gives $\\log p_k(x)=\\log\\pi_k-\\tfrac d2\\log(2\\pi)-\\tfrac12\\log\\det(\\Sigma_k)-\\tfrac12(x-\\mu_k)^T\\Sigma_k^{-1}(x-\\mu_k)-\\log m(x)$. The terms $-\\tfrac d2\\log(2\\pi)$ and $-\\log m(x)$ do not depend on $k$, so the remaining class-dependent expression is exactly $\\delta_k^{\\mathrm Q}(x)$.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lda-expansion",
+          "step": "3.1",
+          "claim": "Under the LDA premise $\\Sigma_k=\\Sigma$, the determinant term in step 2.1 is also independent of $k$. Symmetry of $\\Sigma^{-1}$ gives $(x-\\mu_k)^T\\Sigma^{-1}(x-\\mu_k)=x^T\\Sigma^{-1}x-2x^T\\Sigma^{-1}\\mu_k+\\mu_k^T\\Sigma^{-1}\\mu_k$. Removing the terms independent of $k$ leaves $\\delta_k^{\\mathrm L}(x)$. The LDA score is affine in $x$, whereas the QDA score in step 2.1 has degree at most two.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tie-rule",
+          "step": "4.1",
+          "claim": "For LDA, the affine scores in step 3.1 have a maximizing index and use the smallest-index tie rule by [F3]. For QDA, each $\\delta_k^{\\mathrm Q}(x)$ is finite because $\\Sigma_k$ is positive definite and $\\pi_k>0$; since $K$ is finite, the maximizing set is nonempty and finite, so it has a unique smallest index. In either model, adding the same finite quantity to every score preserves the maximizing indices, and the log-posterior scores in steps 2.1 and 3.1 differ from the displayed scores by such a quantity. Thus the posterior argmax has the stated deterministic tie rule for both LDA and QDA.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a model-level score theorem with K>=2 classes, not a finite training-sample theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 expands the score for arbitrary means, including a zero class mean."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows K=2; step 1.1 proves the density-ratio identity for that two-class case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every covariance is required positive definite; singular Gaussian laws have no density covered by the supplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All priors are strictly positive and Gaussian densities are positive, so posterior endpoints 0 and 1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated in the theorem and used in step 1.1 through the Gaussian-density supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result gives explicit scores and their argmax rule, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result gives explicit scores and their argmax rule, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-binary-logistic-derivatives-and-irls-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-logistic-and-multiclass-softmax-models",
+          "source_section": "Definition",
+          "quote": "For $d\\ge1$, define the sigmoid $\\sigma(t)=(1+e^{-t})^{-1}$. A binary logistic conditional model on $x\\in\\mathbb R^d$ has finite coefficients $\\beta_0\\in\\mathbb R$, $\\beta\\in\\mathbb R^d$ and specifies $\\Pr(Y=1\\mid x)=\\sigma(\\beta_0+x^T\\beta)$ and $\\Pr(Y=0\\mid x)=1-\\sigma(\\beta_0+x^T\\beta)$ for $Y\\in\\{0,1\\}$. Its classifier predicts $1$ when $\\beta_0+x^T\\beta>0$ and predicts $0$ when $\\beta_0+x^T\\beta\\le0$. A multiclass softmax conditional model has finite ordered labels $1,\\ldots,K$ with $K\\ge2$, affine logits $\\eta_k(x)=a_k+x^Tw_k$ for $a_k\\in\\mathbb R$ and $w_k\\in\\mathbb R^d$, and probabilities $\\Pr(Y=k\\mid x)=e^{\\eta_k(x)}/\\sum_{j=1}^K e^{\\eta_j(x)}$; its classifier chooses the smallest index attaining the largest logit. These models specify conditional label probabilities and impose no distributional assumption on the feature vector $X$, in particular no Gaussian feature law.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binary-logistic-log-likelihood-and-l1-penalty",
+          "source_section": "Definition",
+          "quote": "Fix a finite design with rows $x_i^T\\in\\mathbb R^q$, $1\\le i\\le n$, where $n\\ge1$ and $q\\ge1$. Use either an intercept design, in which the first coordinate of every row is $1$ and $\\beta=(\\beta_0,\\theta)\\in\\mathbb R\\times\\mathbb R^{q-1}$, or a no-intercept design, in which no coordinate is reserved as an intercept, the intercept coefficient is fixed at zero, and $\\beta\\in\\mathbb R^q$. Let $y_i\\in\\{0,1\\}$ and assume the responses are conditionally independent given the design, with binary logistic probabilities $p_i=\\sigma(x_i^T\\beta)$ for finite coefficients. In either design convention, the log-likelihood is\n$$\n\\ell(\\beta)=\\sum_{i=1}^n\\left[y_i x_i^T\\beta-\\log\\!\\left(1+e^{x_i^T\\beta}\\right)\\right].\n$$\nFor $\\lambda>0$, the L1 objective to minimize in the intercept design is $-\\ell(\\beta)+\\lambda\\|\\theta\\|_1$, so the intercept is unpenalized; in the no-intercept design it is $-\\ell(\\beta)+\\lambda\\|\\beta\\|_1$, so every coefficient is penalized. Here $\\|\\theta\\|_1=\\sum_{j=1}^{q-1}|\\theta_j|$ and $\\|\\beta\\|_1=\\sum_{j=1}^{q}|\\beta_j|$, with an empty sum equal to zero. These are objective definitions and assert no optimizer existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-glm-observation-family",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $n\\ge1$ and a dispersion value $\\phi$. For each $1\\le i\\le n$, let $\\mathcal Y_i\\subseteq\\mathbb R$ carry its Borel sigma algebra and let $\\nu_i$ be a sigma-finite positive measure on it. Let $J\\subseteq\\mathbb R$ be an open interval, let $b:J\\to\\mathbb R$ be twice continuously differentiable, let $a_i(\\phi)>0$, and let $c_i(\\,\\cdot\\,,\\phi)$ be measurable. An **explicit one-parameter exponential-family response contract** supplies, for each $\\theta_i\\in J$, a density or mass function relative to $\\nu_i$,\n\n$$f_i(y_i;\\theta_i,\\phi)=\\exp\\!\\left\\{\\frac{y_i\\theta_i-b(\\theta_i)}{a_i(\\phi)}+c_i(y_i,\\phi)\\right\\}.$$\n\nThe contract requires $f_i\\ge0$, $\\int f_i(\\,\\cdot\\,;\\theta_i,\\phi)\\,d\\nu_i=1$ for every $\\theta_i\\in J$, and a fixed support $S_i\\in\\mathcal A_i$ such that $f_i>0$ on $S_i$ and $f_i=0$ off $S_i$, up to a $\\nu_i$-null set independent of $\\theta_i$. When the mean and variance identities are used, it also requires a finite second moment and locally uniform integrable envelopes for the first and second $\\theta_i$ derivatives of $f_i$ on $S_i$.\n\nFor a vector $\\theta=(\\theta_1,\\ldots,\\theta_n)\\in J^n$, the **product sampling law** is the finite product $\\bigotimes_{i=1}^n P_{i,\\theta_i,\\phi}$, where $P_{i,\\theta_i,\\phi}$ has density $f_i$ relative to $\\nu_i$. The coordinate responses are independent in the sense of [[def-independent-random-elements]]. Their product base measure is $\\nu=\\bigotimes_{i=1}^n\\nu_i$ on $\\bigotimes_{i=1}^n\\mathcal A_i$. The next lemma verifies that the joint density is $\\prod_i f_i$.\n\nThe design or conditioning convention, observation units, and response/index roles are part of the surrounding scientific model contract. A sampling-law specification is not evidence that the scientific model is empirically adequate.\n\nEvery scientific application also records a [[def-scientific-statistical-model-contract]]: it names the observation space and record, scientific and analysis units, index meanings, response and predictor maps, target, observation mechanism, support, law, conditioning, and adequacy assumptions. The contract does not itself imply independence or common support; those are explicit hypotheses of this response-family definition. Here $i$ is only a component index until the application assigns it a scientific unit or time meaning.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge1$, $p\\ge1$, a finite design matrix $X\\in\\mathbb R^{n\\times p}$ with rows $x_i^\\mathsf T$, a dispersion value $\\phi$, and an open parameter domain $\\Theta\\subseteq\\mathbb R^p$. A **generalized linear model (GLM)** on this design consists of the response family in [[def-glm-observation-family]], a differentiable one-to-one link $g:\\mathcal M\\to g(\\mathcal M)$ on a specified mean domain $\\mathcal M$, and a specified map $\\tau:\\mathcal M\\to J$ satisfying $b'(\\tau(\\mu))=\\mu$. For $\\beta\\in\\Theta$, put\n\n$$\\eta_i=x_i^\\mathsf T\\beta,\\qquad \\mu_i=g^{-1}(\\eta_i),\\qquad \\theta_i=\\tau(\\mu_i),$$\n\nand require $\\eta_i\\in g(\\mathcal M)$ and $\\theta_i\\in J$ for every $i$. The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$. When $\\theta_i=\\eta_i$ and the component scales are common, write $a_i(\\phi)=a(\\phi)>0$; this common-scale restriction is part of every formula that uses $a(\\phi)$.\n\nThe joint sampling density is the product density from [[lem-glm-product-density]]. For an observed $y=(y_1,\\ldots,y_n)$ with $f_i(y_i;\\theta_i,\\phi)>0$ for every $i$, define its log likelihood by\n\n$$\\ell(\\beta;y,\\phi)=\\sum_{i=1}^n\\left\\{\\frac{y_i\\theta_i-b(\\theta_i)}{a_i(\\phi)}+c_i(y_i,\\phi)\\right\\}.$$\n\nFor a differentiable log likelihood, the **score** is $U(\\beta;y,\\phi):=\\nabla_\\beta\\ell(\\beta;y,\\phi)$. When its entries have finite second moments, the **expected score outer-product information** is $I(\\beta,\\phi):=\\mathbb E_{\\beta,\\phi}[U U^\\mathsf T]$. This page treats $X$ as fixed or conditions on its realized value; it supplies no random-design asymptotic conclusion.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "Consider [[def-generalized-linear-model]] at an admissible finite $\\beta$ with common scale $a(\\phi)>0$. Assume each $\\eta_i\\mapsto\\theta_i$ is differentiable, each $\\eta_i\\mapsto\\mu_i$ is differentiable with $\\dot\\mu_i:=d\\mu_i/d\\eta_i\\ne0$, $V_i:=b''(\\theta_i)>0$, the component scores have finite second moments, and the common-support, differentiability, and local integrable derivative-envelope conditions from [[def-glm-observation-family]] hold. Put\n\n$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},\\qquad z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i}.$$\n\nFor every observed $y$ with $f_i(y_i;\\theta_i,\\phi)>0$ for each $i$, the score and expected score outer-product information are\n\n$$U(\\beta;y,\\phi)=X^\\mathsf T\\left(\\frac{\\dot\\mu_i(y_i-\\mu_i)}{a(\\phi)V_i}\\right)_{i=1}^n,\\qquad I(\\beta,\\phi)=X^\\mathsf T\\operatorname{diag}(w_i)X.$$\n\nIn particular, if $X$ has full column rank, then $I$ is positive definite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "Inputs are an observed response vector $y$ with $f_i(y_i;\\theta_i,\\phi)>0$ for every $i$, a finite design matrix $X$, an admissible finite current parameter $\\beta$, and a GLM with common scale $a(\\phi)>0$. Require each $\\dot\\mu_i=d\\mu_i/d\\eta_i$ to be finite and nonzero and each $V_i=b''(\\theta_i)$ to be finite and positive.\n\n1. Compute $\\eta_i=x_i^\\mathsf T\\beta$ and $\\mu_i=g^{-1}(\\eta_i)$.\n2. Compute the **working response** and positive weight\n$$z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i},\\qquad w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i}.$$\n3. Form $W^{1/2}=\\operatorname{diag}(\\sqrt{w_i})$ using [[thm-of-square-roots]], and put $A=W^{1/2}X$, $r=W^{1/2}z$. By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form $A^+$. Return $\\beta_{\\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]].\n\nThe Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]] and [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]. The output need not lie in $\\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-irls-is-fisher-scoring-step",
+          "source_section": "Statement",
+          "quote": "Under the admissibility hypotheses of [[alg-fisher-scoring-irls]], assume also that each map $\\eta_i\\mapsto\\theta_i$ is differentiable, each map $\\eta_i\\mapsto\\mu_i$ is differentiable with finite nonzero derivative $\\dot\\mu_i$, and $V_i:=b''(\\theta_i)>0$. Each response has finite second moment, its density has the fixed common support and locally uniform integrable envelopes for its first and second $\\theta_i$ derivatives required by [[def-glm-observation-family]], and each component score has finite second moment. If $I(\\beta)=X^\\mathsf T W X$ is invertible, let $U(\\beta)$ and $I(\\beta)$ be the score and expected score outer-product information from [[thm-glm-general-link-score-and-information]]. Then the weighted least-squares output satisfies\n\n$$\\beta_{\\mathrm{new}}=\\beta+I(\\beta)^{-1}U(\\beta).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-hessian-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "logistic-derivatives",
+          "step": "1.1",
+          "claim": "For one observation, $\\ell_i(\\eta_i)=y_i\\eta_i-\\log(1+e^{\\eta_i})$ has derivative $y_i-\\sigma(\\eta_i)$ and second derivative $-\\sigma(\\eta_i)(1-\\sigma(\\eta_i))$. Applying the coordinate chain rule to $\\eta=X\\beta$ gives $\\nabla\\ell=X^T(y-p)$ and $\\nabla^2\\ell=-\\sum_i p_i(1-p_i)x_ix_i^T=-X^TWX$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-weights-and-convexity",
+          "step": "1.2",
+          "claim": "Every finite $\\eta_i$ gives $0<p_i<1$, so $W$ is positive diagonal and $h^TX^TWXh=\\sum_i p_i(1-p_i)(x_i^Th)^2\\ge0$. Therefore the Hessian of $-\\ell$ is positive semidefinite on $\\mathbb R^q$, an open convex domain; [F9] gives convexity. If $X$ has full column rank, $h\\ne0$ implies $Xh\\ne0$, so at least one squared term is nonzero and the same sum is positive.",
+          "inputs": [
+            "F1",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bernoulli-glm-hypotheses",
+          "step": "1.3",
+          "claim": "For Bernoulli data the mass is $\\exp(y_i\\eta_i-\\log(1+e^{\\eta_i}))$ on $\\{0,1\\}$ with counting measure, common support, $a=1$, canonical natural parameter $\\theta_i=\\eta_i$, $b(\\theta)=\\log(1+e^\\theta)$, $\\mu_i=p_i$, $V_i=b''(\\theta_i)=p_i(1-p_i)$, and $\\dot\\mu_i=p_i(1-p_i)$. The response has finite second moment and bounded score; on every compact interval of finite $\\eta_i$ the mass and its first two derivatives are bounded on the finite support, giving the stated local envelopes. Thus the response-family and canonical-link conditions [F3, F4] hold.",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fisher-information-newton",
+          "step": "2.1",
+          "claim": "By [F5], the score is $U=X^T(y-p)$ and the expected information is $I=X^TWX$. Full column rank makes $I$ positive definite. The observed Hessian in step 1.1 is $-I$, so the maximizing Newton formula $\\beta-(\\nabla^2\\ell)^{-1}\\nabla\\ell$ equals $\\beta+I^{-1}U$. The generic IRLS result [F7] gives the same $\\beta+I^{-1}U$ update under these verified hypotheses.",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-least-squares-form",
+          "step": "3.1",
+          "claim": "By [F6], the Bernoulli working response is $z=X\\beta+W^{-1}(y-p)$ and the weights are $W$. The weighted normal equation [F8] and full rank give the unique IRLS fit $\\beta_{\\mathrm{new}}=(X^TWX)^{-1}X^TWz$. Expanding $z$ yields $\\beta+(X^TWX)^{-1}X^T(y-p)$, the Newton step from step 2.1.",
+          "inputs": [
+            "F6",
+            "F8",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1; a zero-row design is outside the likelihood contract."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 remains valid at beta=0, where each p_i=1/2 and each weight is 1/4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies for n=1; step 3.1 gives the weighted least-squares update when the one-row design has full column rank."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves convexity for deficient rank; step 3.1 makes the inverse update conditional on full column rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 proves finite coefficients give 0<p_i<1; endpoint probabilities occur only as limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All operations are finite-dimensional matrix products and a uniquely solvable full-rank weighted least-squares system."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states derivative and update identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states derivative and update identities, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-complete-separation-precludes-finite-logistic-mle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-logistic-log-likelihood-and-l1-penalty",
+          "source_section": "Definition",
+          "quote": "Fix a finite design with rows $x_i^T\\in\\mathbb R^q$, $1\\le i\\le n$, where $n\\ge1$ and $q\\ge1$. Use either an intercept design, in which the first coordinate of every row is $1$ and $\\beta=(\\beta_0,\\theta)\\in\\mathbb R\\times\\mathbb R^{q-1}$, or a no-intercept design, in which no coordinate is reserved as an intercept, the intercept coefficient is fixed at zero, and $\\beta\\in\\mathbb R^q$. Let $y_i\\in\\{0,1\\}$ and assume the responses are conditionally independent given the design, with binary logistic probabilities $p_i=\\sigma(x_i^T\\beta)$ for finite coefficients. In either design convention, the log-likelihood is\n$$\n\\ell(\\beta)=\\sum_{i=1}^n\\left[y_i x_i^T\\beta-\\log\\!\\left(1+e^{x_i^T\\beta}\\right)\\right].\n$$\nFor $\\lambda>0$, the L1 objective to minimize in the intercept design is $-\\ell(\\beta)+\\lambda\\|\\theta\\|_1$, so the intercept is unpenalized; in the no-intercept design it is $-\\ell(\\beta)+\\lambda\\|\\beta\\|_1$, so every coefficient is penalized. Here $\\|\\theta\\|_1=\\sum_{j=1}^{q-1}|\\theta_j|$ and $\\|\\beta\\|_1=\\sum_{j=1}^{q}|\\beta_j|$, with an empty sum equal to zero. These are objective definitions and assert no optimizer existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binary-logistic-and-multiclass-softmax-models",
+          "source_section": "Definition",
+          "quote": "For $d\\ge1$, define the sigmoid $\\sigma(t)=(1+e^{-t})^{-1}$. A binary logistic conditional model on $x\\in\\mathbb R^d$ has finite coefficients $\\beta_0\\in\\mathbb R$, $\\beta\\in\\mathbb R^d$ and specifies $\\Pr(Y=1\\mid x)=\\sigma(\\beta_0+x^T\\beta)$ and $\\Pr(Y=0\\mid x)=1-\\sigma(\\beta_0+x^T\\beta)$ for $Y\\in\\{0,1\\}$. Its classifier predicts $1$ when $\\beta_0+x^T\\beta>0$ and predicts $0$ when $\\beta_0+x^T\\beta\\le0$. A multiclass softmax conditional model has finite ordered labels $1,\\ldots,K$ with $K\\ge2$, affine logits $\\eta_k(x)=a_k+x^Tw_k$ for $a_k\\in\\mathbb R$ and $w_k\\in\\mathbb R^d$, and probabilities $\\Pr(Y=k\\mid x)=e^{\\eta_k(x)}/\\sum_{j=1}^K e^{\\eta_j(x)}$; its classifier chooses the smallest index attaining the largest logit. These models specify conditional label probabilities and impose no distributional assumption on the feature vector $X$, in particular no Gaussian feature law.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "separating-ray-limit",
+          "step": "1.1",
+          "claim": "Put $\\beta(t)=tv$ for $t>0$. If $y_i=1$, the separation condition gives $a_i=x_i^Tv>0$ and the $i$th log-likelihood term is $-\\log(1+e^{-ta_i})\\to0$. If $y_i=0$, the condition gives $a_i=x_i^Tv<0$ and the term is $-\\log(1+e^{ta_i})\\to0$. Since the sample is finite, $\\ell(\\beta(t))\\to0$, so the supremum is at least zero.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strict-negativity-finite-beta",
+          "step": "2.1",
+          "claim": "For any finite $\\beta$, each $\\eta_i$ is finite and [F2] gives $0<p_i<1$. The observed Bernoulli log-probability is $\\log p_i<0$ when $y_i=1$ and $\\log(1-p_i)<0$ when $y_i=0$. As $n\\ge1$, $\\ell(\\beta)<0$ for every finite $\\beta$. Thus the supremum is at most zero and is attained by no finite coefficient vector; step 1.1 shows that it equals zero.",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1; with no observations the likelihood would be identically zero and the conclusion would fail."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes beta=0 among finite coefficients and shows its likelihood is strictly negative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof works for n=1 whenever a strict signed separator exists; finiteness of the sum is explicit in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no rank or distinct-row condition; strict separation supplies every required signed inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 approaches likelihood zero along an unbounded ray while step 2.1 rules it out at every finite coefficient."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The separating vector is supplied in the hypothesis; the proof constructs only the scalar ray beta(t)=t v."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves nonattainment under strict separation, not an iff criterion for MLE existence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves nonattainment under strict separation, not an iff criterion for MLE existence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-perceptron-margin-mistake-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-cyclic-perceptron",
+          "source_section": "Definition",
+          "quote": "Input a finite ordered sample $((x_i,y_i))_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^d$, and $y_i\\in\\{-1,+1\\}$. Put $\\widetilde x_i=(x_i,1)\\in\\mathbb R^{d+1}$ and initialize $w=0$. In each pass, visit $i=1,\\ldots,n$ in the fixed order. Whenever $y_iw^T\\widetilde x_i\\le0$, replace $w$ by $w+y_i\\widetilde x_i$ and count one update. After a full pass with no updates, stop and return $w$. The associated classifier returns $+1$ when $w^T(x,1)>0$ and $-1$ when $w^T(x,1)\\le0$, so a score tie is assigned to $-1$. The procedure has no iteration limit; if its stop condition never holds, it continues with further passes.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "separator-progress",
+          "step": "1.1",
+          "claim": "After each update on point $i$, the separator progress changes by $\\langle u,w+y_i\\widetilde x_i\\rangle-\\langle u,w\\rangle=y_i\\langle u,\\widetilde x_i\\rangle\\ge\\gamma$. Starting at zero, after $M$ updates $\\langle u,w_M\\rangle\\ge M\\gamma$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "norm-increment",
+          "step": "1.2",
+          "claim": "At an update, [F1] gives $y_i\\langle w,\\widetilde x_i\\rangle\\le0$ and $y_i^2=1$, so $\\|w+y_i\\widetilde x_i\\|_2^2=\\|w\\|_2^2+2y_i\\langle w,\\widetilde x_i\\rangle+\\|\\widetilde x_i\\|_2^2\\le\\|w\\|_2^2+R^2$. Since $w_0=0$, after $M$ updates $\\|w_M\\|_2^2\\le MR^2$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "mistake-count-bound",
+          "step": "2.1",
+          "claim": "If $M=0$, the bound is immediate. If $M>0$, [F2] and $\\|u\\|_2=1$ give $M\\gamma\\le\\langle u,w_M\\rangle\\le\\|w_M\\|_2\\le\\sqrt{M}R$, whence $M\\le R^2/\\gamma^2$. Thus only finitely many updates occur.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "termination",
+          "step": "3.1",
+          "claim": "At a visit to point $i$, if $y_i=+1$ and the classifier is wrong, its score is at most zero; if $y_i=-1$ and the classifier is wrong, its score is positive. In either case $y_i\\langle w,\\widetilde x_i\\rangle\\le0$, so every prediction mistake triggers an update by [F1]. Thus the number of mistakes is at most the number of updates and is bounded by step 2.1. An infinite run would complete infinitely many passes, each with at least one update; that would contradict the finite update bound. Therefore a pass with no updates occurs, and during that pass every point has strictly positive signed margin because the update test is $\\le0$. The algorithm stops and returns a training-separating weight vector.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1; an empty sample has no mistake sequence or margin minimum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles M=0 before dividing by the mistake count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a one-row sample with the given positive margin."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The separator premise requires gamma>0; zero-margin data are outside the theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is a finite mistake bound and has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The unit separator u is part of the hypothesis; the proof makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient margin condition for termination, not an iff condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient margin condition for termination, not an iff condition."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-generative-lda-and-logistic-share-a-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lda-and-qda-log-posterior-scores",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$ and $K\\ge2$ be finite, let $\\pi_k>0$ with $\\sum_{k=1}^K\\pi_k=1$, let $\\mu_k\\in\\mathbb R^d$, and let each real symmetric matrix $\\Sigma_k\\in\\mathbb R^{d\\times d}$ be positive definite, meaning $v^T\\Sigma_kv>0$ for every nonzero $v$. Define\n$$\nf_k(x)=(2\\pi)^{-d/2}\\det(\\Sigma_k)^{-1/2}\\exp\\!\\left(-\\tfrac12(x-\\mu_k)^T\\Sigma_k^{-1}(x-\\mu_k)\\right),\\qquad p_k(x)=\\frac{\\pi_k f_k(x)}{\\sum_{j=1}^K\\pi_jf_j(x)}.\n$$\nFor LDA, assume $\\Sigma_k=\\Sigma$ for all $k$; then $\\log p_k(x)$ differs by a term independent of $k$ from the affine score\n$$\n\\delta_k^{\\mathrm L}(x)=x^T\\Sigma^{-1}\\mu_k-\\tfrac12\\mu_k^T\\Sigma^{-1}\\mu_k+\\log\\pi_k.\n$$\nFor QDA, allow the $\\Sigma_k$ to vary with $k$; then $\\log p_k(x)$ differs by a term independent of $k$ from the quadratic score\n$$\n\\delta_k^{\\mathrm Q}(x)=-\\tfrac12\\log\\det(\\Sigma_k)-\\tfrac12(x-\\mu_k)^T\\Sigma_k^{-1}(x-\\mu_k)+\\log\\pi_k.\n$$\nThus maximizing the posterior probabilities uses affine scores in LDA and scores of degree at most two in QDA; ties are resolved by the smallest class index.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binary-logistic-and-multiclass-softmax-models",
+          "source_section": "Definition",
+          "quote": "For $d\\ge1$, define the sigmoid $\\sigma(t)=(1+e^{-t})^{-1}$. A binary logistic conditional model on $x\\in\\mathbb R^d$ has finite coefficients $\\beta_0\\in\\mathbb R$, $\\beta\\in\\mathbb R^d$ and specifies $\\Pr(Y=1\\mid x)=\\sigma(\\beta_0+x^T\\beta)$ and $\\Pr(Y=0\\mid x)=1-\\sigma(\\beta_0+x^T\\beta)$ for $Y\\in\\{0,1\\}$. Its classifier predicts $1$ when $\\beta_0+x^T\\beta>0$ and predicts $0$ when $\\beta_0+x^T\\beta\\le0$. A multiclass softmax conditional model has finite ordered labels $1,\\ldots,K$ with $K\\ge2$, affine logits $\\eta_k(x)=a_k+x^Tw_k$ for $a_k\\in\\mathbb R$ and $w_k\\in\\mathbb R^d$, and probabilities $\\Pr(Y=k\\mid x)=e^{\\eta_k(x)}/\\sum_{j=1}^K e^{\\eta_j(x)}$; its classifier chooses the smallest index attaining the largest logit. These models specify conditional label probabilities and impose no distributional assumption on the feature vector $X$, in particular no Gaussian feature law.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lda-boundary",
+          "step": "1.1",
+          "claim": "For the LDA model, [F1] gives $\\delta_2(x)-\\delta_1(x)=x(1-(-1))-\\tfrac12(1^2-(-1)^2)+\\log(1)=2x$. The two posterior scores tie exactly at $x=0$, with class $1$ selected there by the smallest-label rule.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "logistic-boundary",
+          "step": "2.1",
+          "claim": "For the logistic model, [F2] gives $\\Pr(Y=1\\mid x)=\\sigma(2x)$. Since $\\sigma'(t)=\\sigma(t)(1-\\sigma(t))>0$ and $\\sigma(0)=1/2$, this probability is below, equal to, or above $1/2$ exactly when $x$ is below, equal to, or above zero. Under the stated recoding, the class decisions agree on each region and ties select class $1$; no coefficient-estimation equivalence is claimed.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a two-class probability-model example, not a finite observation-sample claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=0 both score systems tie, and steps 1.1 and 2.1 check the smallest-label convention explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses exactly two classes, the smallest permitted class count for LDA and binary logistic regression."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example covariance is 1, hence strictly positive; no singular covariance case is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For finite x the logistic sigmoid is strictly between zero and one; step 2.1 establishes the threshold behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example explicitly assumes AC because its Gaussian LDA supplier has that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two specified boundaries and proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two specified boundaries and proves no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-separated-logistic-sample-has-unattained-supremum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-logistic-log-likelihood-and-l1-penalty",
+          "source_section": "Definition",
+          "quote": "Fix a finite design with rows $x_i^T\\in\\mathbb R^q$, $1\\le i\\le n$, where $n\\ge1$ and $q\\ge1$. Use either an intercept design, in which the first coordinate of every row is $1$ and $\\beta=(\\beta_0,\\theta)\\in\\mathbb R\\times\\mathbb R^{q-1}$, or a no-intercept design, in which no coordinate is reserved as an intercept, the intercept coefficient is fixed at zero, and $\\beta\\in\\mathbb R^q$. Let $y_i\\in\\{0,1\\}$ and assume the responses are conditionally independent given the design, with binary logistic probabilities $p_i=\\sigma(x_i^T\\beta)$ for finite coefficients. In either design convention, the log-likelihood is\n$$\n\\ell(\\beta)=\\sum_{i=1}^n\\left[y_i x_i^T\\beta-\\log\\!\\left(1+e^{x_i^T\\beta}\\right)\\right].\n$$\nFor $\\lambda>0$, the L1 objective to minimize in the intercept design is $-\\ell(\\beta)+\\lambda\\|\\theta\\|_1$, so the intercept is unpenalized; in the no-intercept design it is $-\\ell(\\beta)+\\lambda\\|\\beta\\|_1$, so every coefficient is penalized. Here $\\|\\theta\\|_1=\\sum_{j=1}^{q-1}|\\theta_j|$ and $\\|\\beta\\|_1=\\sum_{j=1}^{q}|\\beta_j|$, with an empty sum equal to zero. These are objective definitions and assert no optimizer existence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complete-separation-precludes-finite-logistic-mle",
+          "source_section": "Statement",
+          "quote": "Let $n,q\\ge1$ be finite, let $x_i\\in\\mathbb R^q$ be a fixed design row with an intercept coordinate when one is used, and let $y_i\\in\\{0,1\\}$. Suppose the unpenalized binary logistic log-likelihood is $\\ell(\\beta)=\\sum_i[y_i x_i^T\\beta-\\log(1+e^{x_i^T\\beta})]$. If there is a vector $v\\in\\mathbb R^q$ such that $(2y_i-1)x_i^Tv>0$ for every $i$, then $\\sup_{\\beta\\in\\mathbb R^q}\\ell(\\beta)=0$, and no finite coefficient vector attains this supremum.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "explicit-separator",
+          "step": "1.1",
+          "claim": "For $v=(0,1)$, the signed margins are $(2y_1-1)(1,-1)^Tv=(-1)(-1)=1$ and $(2y_2-1)(1,1)^Tv=(1)(1)=1$. Hence the sample is strictly separated.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "explicit-likelihood-limit",
+          "step": "2.1",
+          "claim": "With $\\beta(t)=(0,t)$, the two predictors are $-t$ and $t$. By [F1], the two log-likelihood terms are each $-\\log(1+e^{-t})$, so $\\ell(\\beta(t))=-2\\log(1+e^{-t})\\to0$. Every finite coefficient has likelihood strictly below zero by [F2]; hence this is an unattained supremum.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has exactly two observations and does not discuss an empty-data likelihood."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses the ray t>0; its boundary behavior at t=0 is not needed for the claimed supremum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes each row contribution and sums the two finite terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The explicit separator is checked in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the limit zero as t tends to infinity while the separation theorem preserves strict negativity at every finite t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The separating vector is explicitly given as (0,1); no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete witness, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete witness, not an iff characterization."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-nonseparable-perceptron-cycles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-cyclic-perceptron",
+          "source_section": "Definition",
+          "quote": "Input a finite ordered sample $((x_i,y_i))_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^d$, and $y_i\\in\\{-1,+1\\}$. Put $\\widetilde x_i=(x_i,1)\\in\\mathbb R^{d+1}$ and initialize $w=0$. In each pass, visit $i=1,\\ldots,n$ in the fixed order. Whenever $y_iw^T\\widetilde x_i\\le0$, replace $w$ by $w+y_i\\widetilde x_i$ and count one update. After a full pass with no updates, stop and return $w$. The associated classifier returns $+1$ when $w^T(x,1)>0$ and $-1$ when $w^T(x,1)\\le0$, so a score tie is assigned to $-1$. The procedure has no iteration limit; if its stop condition never holds, it continues with further passes.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-perceptron-update",
+          "step": "1.1",
+          "claim": "Both augmented inputs equal $(0,1)$. Starting at $w_0=(0,0)$, the first observation has margin zero and triggers the update $w_1=(0,1)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-update-cycle",
+          "step": "2.1",
+          "claim": "The second observation then has signed margin $(-1)(0,1)^T(0,1)=-1$, so [F1] updates to $w_2=(0,1)-(0,1)=(0,0)$. Thus each pass repeats the initial state and updates twice, so the stop condition never holds. The sample is nonseparable because a single score at the shared input cannot be strictly positive and strictly negative simultaneously.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example contains two observations and does not define the algorithm on an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero initial weight is used in step 1.1 and recurs in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 process both observations in order on each pass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identical feature vectors with opposing labels are verified as nonseparable in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example is an exact finite two-state cycle, not a limit or endpoint calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The order, initialization and sample are explicit; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves one cycle witness and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves one cycle witness and no biconditional."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

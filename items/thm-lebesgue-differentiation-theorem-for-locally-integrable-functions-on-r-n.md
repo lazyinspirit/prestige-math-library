@@ -11,8 +11,8 @@ provenance:
 deps: [def-ball-average-operator-on-r-n, def-countable-choice, def-locally-integrable-function-on-r-n, lem-continuous-compactly-supported-functions-differentiate-by-ball-averages, thm-c-c-rn-is-dense-in-l-p-of-rn, thm-chebyshev-markov-inequality-for-the-integral, thm-hardy-littlewood-maximal-inequality-for-balls, thm-lebesgue-measure-is-a-complete-measure, thm-finite-and-countable-subadditivity-of-measures, prop-measure-monotonicity]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n.json
   precheck: pass
-  repair: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step2-published-hjb-local-repairs/thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n.json
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.6.11 and Exercise 1.6.14"
@@ -23,11 +23,15 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)).
 
 Let $f\in L^1_{\mathrm{loc}}(\mathbb{R}^n)$. Then
 $$\lim_{r\to0^+}A_rf(x)=f(x)$$
 for Lebesgue-almost every $x\in\mathbb{R}^n$.
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

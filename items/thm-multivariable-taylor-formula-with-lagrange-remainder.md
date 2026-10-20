@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-multivariable-taylor-formula-with-lagrange-remainder.json
   precheck: pass
   audited: 2026-08-02
 sources:
@@ -24,9 +25,13 @@ pipeline_run: null
 
 ## Statement
 
-Let $k\in\mathbb N$, let $U\subseteq\mathbb R^m$ be open and convex, $a,a+h\in U$, and $f\in C^{k+1}(U)$. Write $\iota:\mathbb N\to\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\theta\in(0,1)$ satisfies
+Let $k\in\mathbb N$, let $U\subseteq\mathbb R^m$ be open and convex, $a,a+h\in U$, and $f\in C^{k+1}(U)$. Write $\iota:\mathbb N\to\mathbb R$ for the canonical-natural map of The multivariable Taylor polynomial in multi-index notation. Then some $\theta\in(0,1)$ satisfies
 
 $$f(a+h)=T_kf(a;h)+\sum_{|\alpha|=k+1}\frac{D^\alpha f(a+\theta h)}{\iota(\alpha!)}h^\alpha.$$
+
+## Statement references
+
+[[def-multivariable-taylor-polynomial]]
 
 ## Facts & Assumptions
 

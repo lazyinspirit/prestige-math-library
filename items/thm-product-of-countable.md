@@ -14,6 +14,7 @@ landmark: false
 short: "$A\\times B$ countable"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-product-of-countable.json
   precheck: pass
   verified:
     model: claude-opus-5
@@ -41,11 +42,15 @@ pipeline_run: null
 
 ## Statement
 
-If $A$ and $B$ are at most countable ([[def-countable]]) then so is
+If $A$ and $B$ are at most countable (Finite, countably infinite, countable, uncountable) then so is
 $A \times B$.
 
 **No choice principle is used**: the two enumerations are given, and the
 enumeration of the product is written down from them.
+
+## Statement references
+
+[[def-countable]]
 
 ## Facts & Assumptions
 

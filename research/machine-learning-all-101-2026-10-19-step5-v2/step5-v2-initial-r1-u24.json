@@ -1,0 +1,210 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "24",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-mahalanobis-pseudometric",
+      "model": "gpt-6-luna",
+      "context_sha256": "8dd5575f89396f092f886613e28530635272fbd18ac8fdf84e1f1fb532dc0e32",
+      "outcome": "false_positive",
+      "reason": "The owning page library/machine-learning/ml02-metric-learning.md lists thm-mahalanobis-distance-is-pseudometric. Its steps 1.1\u20132.1 give M=L^T L, step 3.1 identifies d_M with the Euclidean feature distance, and step 4.1 proves the pseudometric axioms. The definition only promises this same-page theorem, not a proof in its own carrier; q_M is nonnegative under its PSD hypothesis, so its square root exists by thm-of-square-roots.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-symmetric-matrix-frobenius-isometry",
+      "model": "gpt-6-luna",
+      "context_sha256": "f1d7cbee5fb455f754a020adbccfbd7cf89e802e6c0376b4f2e3b17f4b9ff61e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The supplier indexes entries by 0<=r,s<d while the lemma silently uses 1<=i,j<=d. This is a missing notation conversion, not a counterexample to the coordinate isometry: the order-preserving bijections i=r+1 and j=s+1 give identical entry lists and sums. Added the explicit convention A_ij=A(i-1,j-1) in the Statement and the finite reindexing identity in F1. At d=1 the sole coordinate A_11 is exactly A(0,0). The inverse, linearity, inner-product identity and norm identity are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-mahalanobis-pseudometric",
+      "disposition": "unaffected",
+      "post_sha256": "6c9ed955589e8e7f5cf90e1c139cdcf303e67c802fef5e115c97d9f0ba9f451b",
+      "review_context_sha256": "d31a5713cebcd03e06dec31c59c5f313a76a0ac185570e7175ba156c62b6fbe8",
+      "reason": "Checked the complete definition, square-root supplier, owning A/B pages and the same-page theorem proof: q_M is nonnegative for PSD M; d_M is the nonnegative root, while the theorem proves the feature representation and triangle inequality without separation. The statement is link-free and there are no diagrams. The original carrier is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-symmetric-matrix-frobenius-isometry",
+      "disposition": "repaired",
+      "post_sha256": "db2706ed209aef43c44f7a977e33e2e0af811bc00e7de41563e9ea317e67df2c",
+      "review_context_sha256": "5cfb1240254a955a948272aaecf04cdfd183e69dfcbe760e973a29682e9b674b",
+      "reason": "Checked the full proof and the three actual suppliers. The explicit one-based relabeling now matches the zero-based Frobenius entry sum; the output list occupies coordinates 0 through m-1 of R^m. There are d diagonal and d(d-1)/2 off-diagonal coordinates, each reconstructible uniquely since sqrt(2)>0. Symmetry makes each upper-triangle product occur twice, proving the pairing and difference-norm identities. For d=1 the off-diagonal list is empty and the sole entry is A(0,0). No choice or diagrams are required. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-svec-transports-frobenius-subgradients",
+    "alg-lmnn-finite-budget-projected-subgradient",
+    "thm-lmnn-projected-subgradient-best-average-bound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-adjudication",
+      "id": "def-mahalanobis-pseudometric",
+      "outcome": "false_positive",
+      "reason": "The owning page library/machine-learning/ml02-metric-learning.md lists thm-mahalanobis-distance-is-pseudometric. Its steps 1.1\u20132.1 give M=L^T L, step 3.1 identifies d_M with the Euclidean feature distance, and step 4.1 proves the pseudometric axioms. The definition only promises this same-page theorem, not a proof in its own carrier; q_M is nonnegative under its PSD hypothesis, so its square root exists by thm-of-square-roots.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-symmetric-matrix-frobenius-isometry",
+      "severity": "nonfatal",
+      "location": "statement",
+      "class": "presentation",
+      "finding": "Missing conversion between the zero-based supplier matrix indices and the local one-based entries.",
+      "correction": "The Statement now defines A_ij=A(i-1,j-1); F1 gives the finite reindexing identity, including d=1. The original svec order and mathematical conclusions are preserved.",
+      "status": "closed",
+      "reason": "The supplier indexes entries by 0<=r,s<d while the lemma silently uses 1<=i,j<=d. This is a missing notation conversion, not a counterexample to the coordinate isometry: the order-preserving bijections i=r+1 and j=s+1 give identical entry lists and sums. Added the explicit convention A_ij=A(i-1,j-1) in the Statement and the finite reindexing identity in F1. At d=1 the sole coordinate A_11 is exactly A(0,0). The inverse, linearity, inner-product identity and norm identity are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-context-observation",
+      "id": "def-frobenius-matrix-norm",
+      "reason": "The Step-4 digest alerts that the Frobenius definition omits the inner-product norm triangle supplier. Its current deps now explicitly include cor-triangle-inequality-for-inner-product-norm. This assignment makes no published edit and no publication-receipt audit claim; no new published repair is proposed. All three direct consumers of the changed lemma are draft frozen-frontier items.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "scope": "Both assigned items are draft members of the frozen frontier. Only the Frobenius lemma carrier, its owning manifest statement mirror, its own three supplier quotation fields, and this report were edited.",
+    "interface_change": "The actual Statement gains only an explicit one-based matrix-entry convention. Its original vectorization order, dimensions, hypotheses, pairing, bijection, and norm conclusions are preserved. F1 supplies the corresponding finite sum substitution. The Mahalanobis Definition is byte-unchanged. No new item, dependency, assumption, axiom of choice, or diagram is needed.",
+    "mathematical_evidence": "For each zero-based pair (r,s) with r,s<d, (i,j)=(r+1,s+1) runs once through 1<=i,j<=d. Diagonals and upper triangles correspond in the same order, so the d=1 entry is A(0,0), not a missing coordinate. The inverse divides each off-diagonal coordinate by sqrt(2), a positive nonzero real; symmetry counts each off-diagonal product twice. Squaring and taking the nonnegative root proves the difference-norm identity.",
+    "sources_and_dependencies": [
+      {
+        "path": "items/def-frobenius-matrix-norm.md",
+        "locator": "Definition: entry-sum formula with i<m and j<n, and its real-matrix square formula"
+      },
+      {
+        "path": "items/def-euclidean-inner-product.md",
+        "locator": "Definition: R^n as functions on {0,...,n-1}, coordinate dot product and induced norm"
+      },
+      {
+        "path": "items/thm-of-square-roots.md",
+        "locator": "Statement and complete proof: existence and uniqueness of the nonnegative square root"
+      },
+      {
+        "path": "items/thm-mahalanobis-distance-is-pseudometric.md",
+        "locator": "Complete proof steps 1.1\u20134.1: factorization, feature norm and pseudometric axioms"
+      }
+    ],
+    "consumer_inventory": "Exact dependency/reference scan for the changed lemma found precisely the three listed item consumers and library/machine-learning/ml02-metric-learning.md. The lemma has no aliases. A separate svec terminology scan found no additional mathematical consumer of this map. All three consumer carriers and both owning pages were read; no consumer or page edit was made. Both pages have frontmatter only and preserve page_layout: compact-v1.",
+    "metadata": "Updated only this lemma statement in research/machine-learning-all-101-2026-10-19-batch-24.pages.json and refreshed its own contract F1/F2/F3 source quotations to actual current source sections. Acquired step5-shared-write-lock with owner step5-v2-initial-r1-u24, reread both shared carriers, applied these changes, passed the selected strict contract check, and released the lock. No shared ledger was edited.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-mahalanobis-pseudometric.md items/lem-symmetric-matrix-frobenius-isometry.md --json",
+        "exit_code": 0,
+        "result": "2 files, 1 checked proof, 0 failures; definition not-applicable, lemma pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-mahalanobis-pseudometric.md items/lem-symmetric-matrix-frobenius-isometry.md library/machine-learning/ml02-metric-learning.md library/machine-learning/ml02-metric-learning-examples.md --json",
+        "exit_code": 0,
+        "result": "4 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-symmetric-matrix-frobenius-isometry.md",
+        "exit_code": 0,
+        "result": "1 item, 3 steps, 0 defects; run once after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-24.proof-contracts.json --strict --items lem-symmetric-matrix-frobenius-isometry --json",
+        "exit_code": 0,
+        "result": "Selected lemma checked; ok true, no errors or warnings."
+      }
+    ],
+    "outside_lane_alerts": [
+      {
+        "id": "alg-lmnn-finite-budget-projected-subgradient",
+        "path": "items/alg-lmnn-finite-budget-projected-subgradient.md",
+        "locator": "Definition final paragraph",
+        "source_excerpt": "All $T$ oracle calls succeed; the generic method reports budget-exhausted after $T$ updates.",
+        "affected_use": "The defining procedure includes a success/termination assertion, already identified by this batch Step-4 digest.",
+        "invalidated_claim": "This is a placement defect under the algorithm instructions; it is not caused by the svec labeling repair. The conditional bound theorem step 1.2 supplies the successful-oracle argument.",
+        "minimality": "Owner should move the procedure property into an appropriate separately proved result while retaining exact operational outputs; no change was made outside the two assigned items.",
+        "route": "frontier item owner; retain the existing Step-4 concern"
+      },
+      {
+        "id": "thm-lmnn-projected-subgradient-best-average-bound",
+        "path": "items/thm-lmnn-projected-subgradient-best-average-bound.md",
+        "locator": "Statement, definition of the vector norm after B_data and R",
+        "source_excerpt": "$\\|z\\|_2=(\\sum_{r=1}^d z_r^2)^{1/2}$",
+        "affected_use": "The norm formula uses one-based vector coordinates without mapping them to the zero-based coordinates of def-euclidean-inner-product.",
+        "invalidated_claim": "The displayed coordinate convention is incomplete under the exact supplier interface; the intended Euclidean norm and conditional bound are sound after finite relabeling. This existing issue is separate from the repaired matrix-label convention.",
+        "minimality": "Add the vector coordinate relabeling or write the sum over r<d; retain the full conditional bound, all hypotheses and AC_omega.",
+        "route": "frontier item owner; no out-of-scope edit"
+      },
+      {
+        "id": "thm-mahalanobis-distance-is-pseudometric",
+        "path": "items/thm-mahalanobis-distance-is-pseudometric.md",
+        "locator": "Facts & Assumptions F3",
+        "source_excerpt": "$\\langle u,v\\rangle=\\sum_{j=1}^{d}u_jv_j$",
+        "affected_use": "F3 cites the zero-based Euclidean inner-product definition while writing a one-based sum without an explicit coordinate relabeling.",
+        "invalidated_claim": "Only the written coordinate convention lacks its finite conversion; M=L^T L, the feature formula and pseudometric proof remain valid under the standard relabeling. The assigned definition correctly points to this theorem on the page.",
+        "minimality": "Clarify u_j=u(j-1), v_j=v(j-1) or use j<d in F3; no theorem statement change is needed.",
+        "route": "frontier item owner; no out-of-scope edit"
+      }
+    ],
+    "unresolved_assigned_obligations": [],
+    "next_action": "Controller collects these adjudications and schedules the ordinary frontier consumer/evidence duties and independent rejudgment. This repair report supplies no independent acceptance or certification."
+  },
+  "gate_resolutions": [],
+  "downstream_reviews": [
+    {
+      "id": "lem-svec-transports-frobenius-subgradients",
+      "path": "items/lem-svec-transports-frobenius-subgradients.md",
+      "affected_use": "F1: The map svec is a linear bijection and preserves inner products and distances; steps 1.1\u20131.3 use its linear inverse and metric equality, and step 2.1 transports the Frobenius subgradient pairing.",
+      "disposition": "unaffected",
+      "invalidated_claim": "None. The clarified entry relabeling preserves the diagonal-first, scaled-upper-triangle coordinate list and every isometry conclusion.",
+      "minimality": "No consumer edit is required; the proof uses structural isometry properties and never names an individual matrix entry."
+    },
+    {
+      "id": "alg-lmnn-finite-budget-projected-subgradient",
+      "path": "items/alg-lmnn-finite-budget-projected-subgradient.md",
+      "affected_use": "Definition paragraph 1 uses svec as the diagonal-first linear isometry, followed by sqrt(2)-scaled upper-triangle coordinates in lexicographic order; the loop transports G_t and the Euclidean projection back to matrices.",
+      "disposition": "unaffected_by_supplier_change",
+      "invalidated_claim": "None from this repair. Adding one to each row and column index preserves the entire list order, so transported subgradients and projected iterates are identical.",
+      "minimality": "No supplier-induced edit is required. The separate Step-4 concern about an algorithm success assertion is retained below for its owner."
+    },
+    {
+      "id": "thm-lmnn-projected-subgradient-best-average-bound",
+      "path": "items/thm-lmnn-projected-subgradient-best-average-bound.md",
+      "affected_use": "F3 and steps 1.1\u20131.3 and 2.1 use svec to transport the closed convex cone, Frobenius subgradients, their bound, initial distance R, the minimizer and the weighted average.",
+      "disposition": "unaffected_by_supplier_change",
+      "invalidated_claim": "None from this repair. The clarified labeling preserves the same linear bijection and inner products, so all norm bounds and transported minimizers are unchanged.",
+      "minimality": "No supplier-induced edit is required. A separate existing Euclidean coordinate-label issue is retained below for its owner."
+    }
+  ],
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-24.pages.json": "50b2a02ca507eeeb13cad6c4efbc1283c866a75a49f64e827dd5807b1bb61dd2",
+    "research/machine-learning-all-101-2026-10-19-batch-24.proof-contracts.json": "06c4f721c4573252f38a9751975841083e6c8efb3b136cffc7d1339aec679527"
+  }
+}

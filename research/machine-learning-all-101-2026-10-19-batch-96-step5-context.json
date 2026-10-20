@@ -1,0 +1,211 @@
+{
+  "group": "af",
+  "batches": [
+    "96"
+  ],
+  "pages_read": [
+    "preference-learning-and-direct-preference-optimization",
+    "preference-learning-and-direct-preference-optimization-examples"
+  ],
+  "items_read": [
+    "def-kl-regularized-policy-improvement",
+    "def-bradley-terry-preference-model",
+    "thm-finite-action-gibbs-policy-optimum",
+    "thm-dpo-reward-policy-reparameterization",
+    "rem-preference-coverage-and-model-misspecification",
+    "alg-direct-preference-optimization-finite-budget",
+    "lem-finite-budget-dpo-properties-and-work",
+    "ex-two-response-kl-regularized-gibbs-policy",
+    "cex-disconnected-comparison-support-does-not-identify-policy",
+    "ex-prompt-reward-offset-leaves-policy-unchanged",
+    "cex-zero-reference-support-breaks-dpo-log-ratio"
+  ],
+  "conventions": [
+    {
+      "convention": "KL is directed from p to q; zero p-coordinate terms are omitted, and positive p mass at a zero q coordinate gives +∞. The objective is expected reward minus β times this KL, with β>0.",
+      "fixed_by": "def-kl-regularized-policy-improvement",
+      "matters_for": [
+        "thm-finite-action-gibbs-policy-optimum",
+        "thm-dpo-reward-policy-reparameterization",
+        "cex-zero-reference-support-breaks-dpo-log-ratio"
+      ]
+    },
+    {
+      "convention": "Bradley–Terry comparisons concern distinct responses and use σ(r(a)−r(b)) for the probability that a is preferred to b; each response set has at least two elements.",
+      "fixed_by": "def-bradley-terry-preference-model",
+      "matters_for": [
+        "thm-dpo-reward-policy-reparameterization",
+        "cex-disconnected-comparison-support-does-not-identify-policy",
+        "ex-prompt-reward-offset-leaves-policy-unchanged"
+      ]
+    },
+    {
+      "convention": "The Gibbs optimum assumes finite nonempty response space, full-support reference, finite real rewards and β>0; policies being optimized may have zero coordinates.",
+      "fixed_by": "thm-finite-action-gibbs-policy-optimum",
+      "matters_for": [
+        "thm-dpo-reward-policy-reparameterization",
+        "ex-two-response-kl-regularized-gibbs-policy",
+        "cex-disconnected-comparison-support-does-not-identify-policy",
+        "ex-prompt-reward-offset-leaves-policy-unchanged"
+      ]
+    },
+    {
+      "convention": "DPO records are ordered winner/loser triples; the policy family is positive and C1 on an open parameter domain, and gradients are Euclidean column vectors.",
+      "fixed_by": "thm-dpo-reward-policy-reparameterization",
+      "matters_for": [
+        "alg-direct-preference-optimization-finite-budget",
+        "lem-finite-budget-dpo-properties-and-work"
+      ]
+    },
+    {
+      "convention": "The update schedule starts at t=0 and has T≥0 attempts. Mini-batches are nonempty ordered lists with repetitions allowed. Exact terminating primitive evaluators and parameter-membership oracle are supplied; reverse AD uses unique strict branches. The max/absolute-value loss implementation is not differentiated.",
+      "fixed_by": "alg-direct-preference-optimization-finite-budget",
+      "matters_for": [
+        "lem-finite-budget-dpo-properties-and-work"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-finite-action-gibbs-policy-optimum",
+      "statement": "For finite nonempty Y, full-support probability vector q, real reward r and β>0, Z=Σ_y q_y exp(r(y)/β) is finite and positive and p*_y=q_y exp(r(y)/β)/Z is a full-support probability vector. F(p*)=β log Z and F(p*)−F(p)=β D(p||p*)≥0 for every probability vector p, with equality exactly when p=p*.",
+      "used_by": [
+        "thm-dpo-reward-policy-reparameterization",
+        "rem-preference-coverage-and-model-misspecification",
+        "ex-two-response-kl-regularized-gibbs-policy",
+        "cex-disconnected-comparison-support-does-not-identify-policy",
+        "ex-prompt-reward-offset-leaves-policy-unchanged"
+      ]
+    },
+    {
+      "id": "thm-dpo-reward-policy-reparameterization",
+      "statement": "Under finite response sets of size at least two, positive reference probabilities, real rewards and β>0, reward differences equal β times differences of Gibbs-policy/reference log ratios. Conversely every full-support policy is the unique Gibbs policy for reward β log(π/q), with prompt-only offsets preserving policy and comparisons. For a nonempty finite ordered winner/loser dataset and positive C1 policy family on an open domain, the average loss log(1+exp(−u_i)) is the Bradley–Terry negative log likelihood and has gradient −(β/n)Σ_i σ(−u_i)(∇log π(w_i|x_i)−∇log π(l_i|x_i)).",
+      "used_by": [
+        "rem-preference-coverage-and-model-misspecification",
+        "alg-direct-preference-optimization-finite-budget",
+        "lem-finite-budget-dpo-properties-and-work",
+        "cex-zero-reference-support-breaks-dpo-log-ratio"
+      ]
+    },
+    {
+      "id": "lem-finite-budget-dpo-properties-and-work",
+      "statement": "For every input of the finite-budget DPO procedure under its supplied exact evaluator and membership-oracle model, prescribed loss evaluations are finite, successful reverse sweeps give the exact mini-batch gradient, and the stored pair remains the most recently accepted parameter in Θ together with its full-data loss. The procedure terminates after at most T attempted updates with the specified status. For M=Σ_t m_t, work excluding membership is O(C[n(T+1)+M+T+1]) for finite graph-dependent C≥d+1; there are at most T membership calls, whose actual finite costs are added separately.",
+      "used_by": [
+        "alg-direct-preference-optimization-finite-budget"
+      ]
+    },
+    {
+      "id": "def-kl-regularized-policy-improvement",
+      "statement": "For probability vectors p,q on finite nonempty Y, D(p||q) is the sum of p_y log(p_y/q_y) over positive p coordinates when p is supported on q, and +∞ otherwise. For real reward r and β>0, maximize F(p)=Σ_y p_y r(y)−β D(p||q) over all probability vectors p.",
+      "used_by": [
+        "thm-finite-action-gibbs-policy-optimum",
+        "thm-dpo-reward-policy-reparameterization",
+        "rem-preference-coverage-and-model-misspecification",
+        "ex-two-response-kl-regularized-gibbs-policy",
+        "cex-disconnected-comparison-support-does-not-identify-policy",
+        "ex-prompt-reward-offset-leaves-policy-unchanged",
+        "cex-zero-reference-support-breaks-dpo-log-ratio"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Positive-domain logarithms, inverse-exponential identities, exact example arithmetic and the undefined zero-reference ratio.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-kullback-leibler-divergence",
+      "used_for": "Directed finite KL and zero-coordinate/singular-support conventions in the policy-improvement definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating the finite DPO composition and checking reverse-mode derivative composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The logarithm derivative in DPO and the integral inequality underlying finite logarithmic strict propriety.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiating the logistic loss.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The precise C1 assumptions on policy coordinates and computational primitives.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "used_for": "Finite graph structure, repeated parent slots, real-arithmetic semantics and strict-branch diagnostics.",
+      "opened": true
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "used_for": "The actual scalar-output reverse sweep invoked for policy log-probability gradients.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "used_for": "The open-domain and C1 foundation cited by reverse-mode correctness.",
+      "opened": true
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "used_for": "Exactness of successful policy-log-probability reverse sweeps on admissible strict branches.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive finite exponentials and the stable loss identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "The stable loss evaluation identity and multiplicative behavior under reward offsets.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-natural-logarithm",
+      "finding": "In def-natural-logarithm, the Definition contains: “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that” followed by the exponential bijection, before the remaining inverse-function identities. This wikilink interrupts the complete Definition and violates the uninterrupted-statement policy; it belongs in an immediately following Definition references section. The mathematical definition itself is sound.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-kullback-leibler-divergence",
+      "finding": "In def-finite-kullback-leibler-divergence, the Definition says: “The generator $f(t)=t\\log t$ is admissible for [[def-finite-f-divergence]] by [[lem-finite-kl-generator-is-admissible]].” Further boundary-value explanation follows within the same section. Both wikilinks remain inside the complete Definition instead of an immediately following Definition references section, contrary to the uninterrupted-statement policy. The KL conventions used by this batch are mathematically consistent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-reverse-mode-automatic-differentiation",
+      "finding": "In alg-reverse-mode-automatic-differentiation, the Definition begins “Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point” and continues with the full procedure. The supplier wikilink interrupts the algorithm Definition and should be placed in an immediately following Definition references section under the uninterrupted-statement policy. The reverse sweep used by this batch is mathematically sound.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "preference-learning-and-direct-preference-optimization",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "Read the prerequisite page and its recurrence algorithm and shared-parameter gradient theorem. This is a contextual prerequisite: the DPO procedure directly invokes the published general scalar-graph reverse sweep, preserving C1, admissibility and unique strict-branch requirements. It does not misapply the narrower recurrence theorem."
+    },
+    {
+      "from": "preference-learning-and-direct-preference-optimization",
+      "to": "calibration-proper-losses-and-surrogate-classification",
+      "faithful": true,
+      "note": "Read the finite scoring-rule definition and complete log/Brier strict-propriety proof. Gibbs Proof 4.1 applies logarithmic strict propriety only after identifying Y with K≥2 labels; the singleton case is handled separately. Zero truth coordinates are omitted consistently."
+    },
+    {
+      "from": "preference-learning-and-direct-preference-optimization",
+      "to": "ml02-linear-classification",
+      "faithful": true,
+      "note": "Read the logistic/softmax definition and prerequisite page. Bradley–Terry imports exactly σ(t)=(1+exp(−t))^−1 for finite real t, without importing affine-feature, classifier-tie or feature-distribution assumptions."
+    }
+  ]
+}

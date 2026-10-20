@@ -1,0 +1,1897 @@
+{
+  "version": 1,
+  "level": 1,
+  "scope": [
+    "lem-symmetric-matrix-frobenius-isometry",
+    "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping",
+    "lem-positive-semidefinite-cone-is-frobenius-closed",
+    "thm-mahalanobis-distance-is-pseudometric",
+    "lem-svec-transports-frobenius-subgradients",
+    "thm-lmnn-fixed-target-objective-is-convex",
+    "lem-lmnn-explicit-subgradient-and-data-bound",
+    "thm-lmnn-projected-subgradient-best-average-bound",
+    "ex-singular-mahalanobis-metric-identifies-distinct-points",
+    "ex-fixed-target-lmnn-triplet-conflict",
+    "ex-one-lmnn-projected-step-is-not-convergence"
+  ],
+  "contracts": {
+    "lem-symmetric-matrix-frobenius-isometry": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n(Absolute value in an ordered field) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of The standard formulas $\\langle x,y\\rangle=\\sum_{k<n}x_k y_k$ on $\\mathbb R^n$ and $\\sum_{k<n}x_k\\overline{y_k}$ on $\\mathbb C^n$ are inner products\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n(Conjugation is an involutive real-field automorphism, $z\\overline z=|z|^2$, and modulus is definite, multiplicative, and subadditive). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\nAbsolute value in an ordered field.\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\nSpectral and Frobenius norms are unitarily invariant, are given by singular values, and satisfy the sharp rank comparison.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coordinate list has $d+d(d-1)/2=m$ entries. Its first $d$ entries recover each diagonal entry of $A$, and each later entry recovers the corresponding symmetric pair by division by $\\sqrt2$ from [F3]. Thus it has a unique inverse on $\\mathbb R^m$; its coordinate formulas are linear, so $\\operatorname{svec}$ is a linear bijection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $A,B\\in\\mathbb S^d$, the Euclidean dot product of their coordinate lists is $\\sum_i A_{ii}B_{ii}+2\\sum_{i<j}A_{ij}B_{ij}$, because each off-diagonal coordinate contributes $(\\sqrt2 A_{ij})(\\sqrt2 B_{ij})$. Symmetry gives $\\langle A,B\\rangle_F=\\sum_i A_{ii}B_{ii}+\\sum_{i<j}(A_{ij}B_{ij}+A_{ji}B_{ji})$, which is the same expression. Hence $\\langle\\operatorname{svec}(A),\\operatorname{svec}(B)\\rangle_2=\\langle A,B\\rangle_F$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Linearity gives $\\operatorname{svec}(A)-\\operatorname{svec}(B)=\\operatorname{svec}(A-B)$. Applying step 1.2 to $A-B$ with itself and taking the unique nonnegative square roots from [F1]–[F3] yields $\\|\\operatorname{svec}(A)-\\operatorname{svec}(B)\\|_2=\\|A-B\\|_F$. This proves norm preservation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "At d=1 the off-diagonal coordinate list is empty. The count in step 1.1 gives m=1, and the off-diagonal sum in step 1.2 is zero, leaving the single diagonal coordinate and its usual scalar product; the inverse and norm identity remain valid.",
+          "evidence": "At d=1 the off-diagonal coordinate list is empty. The count in step 1.1 gives m=1, and the off-diagonal sum in step 1.2 is zero, leaving the single diagonal coordinate and its usual scalar product; the inverse and norm identity remain valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the zero matrix maps to the zero coordinate vector and satisfies norm preservation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.2: when d=1 the coordinate list is the single diagonal entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: no rank or nonsingularity hypothesis is imposed on A or B."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coordinate construction has a discrete lower dimension d=1, not an interval endpoint. In that smallest dimension the list is just A11, and the coordinate-count and diagonal inner-product arguments in steps 1.1 and 1.2 still apply.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The coordinate construction has a discrete lower dimension d=1, not an interval endpoint. In that smallest dimension the list is just A11, and the coordinate-count and diagonal inner-product arguments in steps 1.1 and 1.2 still apply.",
+            "item_sha256": "f53e287651b475e492395f85b94bd85338c36b672c7d6a9e1fe721a4c883d2d7",
+            "row_sha256": "29788f6a1ddf9c7f3b8b19ab6ea93fabb0a73da75aec7505a867cc506126ad1b"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the inverse coordinate by coordinate, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The diagonal/off-diagonal coordinate map is a linear bijection preserving Frobenius inner products and norms. This verifies properties of the supplied map rather than an iff classification of isometries.",
+            "item_sha256": "1a9dae46ba8c69c3d528909343cc100e03c366bac3c488097576edda65c6566f",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The explicitly defined symmetric vectorization is proved linear, bijective and inner-product preserving in steps 1.1 and 1.2. Those are simultaneous conclusions about one map, not two directions of an if-and-only-if criterion.",
+              "item_sha256": "f53e287651b475e492395f85b94bd85338c36b672c7d6a9e1fe721a4c883d2d7",
+              "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The diagonal/off-diagonal coordinate map is a linear bijection preserving Frobenius inner products and norms. This verifies properties of the supplied map rather than an iff classification of isometries.",
+            "item_sha256": "1a9dae46ba8c69c3d528909343cc100e03c366bac3c488097576edda65c6566f",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The explicitly defined symmetric vectorization is proved linear, bijective and inner-product preserving in steps 1.1 and 1.2. Those are simultaneous conclusions about one map, not two directions of an if-and-only-if criterion.",
+              "item_sha256": "f53e287651b475e492395f85b94bd85338c36b672c7d6a9e1fe721a4c883d2d7",
+              "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+            }
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space. The assignment\n\n$$T\\longmapsto B_T,\\qquad B_T(u,v):=\\langle Tu,v\\rangle,$$\n\nrestricts to a bijection between self-adjoint endomorphisms of $V$ and\nsymmetric bilinear forms on $V$. Under this bijection, non-negative operators\ncorrespond exactly to positive semidefinite forms, and positive operators\ncorrespond exactly to positive definite forms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose an orthogonal eigendecomposition of $A$ and define $A_+$ as in the Statement. It is symmetric and has eigenvalues $\\lambda_i^+\\ge0$. By [F2] its associated operator is nonnegative, and by [F3] its quadratic form is positive semidefinite; hence $A_+\\in\\mathbb S_+^d$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $Z\\in\\mathbb S_+^d$ and set $W=U^TZU$. For each coordinate vector $e_i$, $W_{ii}=e_i^TWe_i=(Ue_i)^TZ(Ue_i)\\ge0$; also $W$ is symmetric. Orthogonal invariance [F4] gives $\\|A-Z\\|_F^2=\\|\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)-W\\|_F^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding the entry sum [F5], the last square is $\\sum_i(\\lambda_i-W_{ii})^2+\\sum_{i\\ne j}W_{ij}^2$. For every $w\\ge0$, $(\\lambda_i-w)^2\\ge(\\lambda_i-\\lambda_i^+)^2$: if $\\lambda_i\\ge0$ the right side is zero and equality is attained only at $w=\\lambda_i$, while if $\\lambda_i<0$ then $w-\\lambda_i\\ge-\\lambda_i$ and equality is attained only at $w=0$. Thus every feasible $Z$ has squared distance at least $\\sum_i(\\lambda_i-\\lambda_i^+)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $Z=A_+$ the conjugated matrix $W$ is $\\operatorname{diag}(\\lambda_1^+,\\ldots,\\lambda_d^+)$, so all off-diagonal terms vanish and every diagonal term attains its lower bound from step 2.1. Hence $A_+$ is a minimizer.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Equality in the lower bound requires every off-diagonal square in step 2.1 to vanish and every diagonal term to attain its unique scalar minimum. Therefore $W=\\operatorname{diag}(\\lambda_1^+,\\ldots,\\lambda_d^+)$ and $Z=U W U^T=A_+$. The minimizer is unique; since the argument applies to any orthogonal eigendecomposition, every allowed decomposition gives this same nearest matrix.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The cone is nonempty because the zero matrix is positive semidefinite. At d=1 the off-diagonal square sum in step 2.1 is empty and equals zero; the remaining scalar minimization on w at least zero still yields the unique clipped eigenvalue in steps 2.1 and 4.1.",
+          "evidence": "The cone is nonempty because the zero matrix is positive semidefinite. At d=1 the off-diagonal square sum in step 2.1 is empty and equals zero; the remaining scalar minimization on w at least zero still yields the unique clipped eigenvalue in steps 2.1 and 4.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The cone is nonempty because the zero matrix is positive semidefinite. At d=1 the off-diagonal square sum in step 2.1 is empty and equals zero; the remaining scalar minimization on w at least zero still yields the unique clipped eigenvalue in steps 2.1 and 4.1.",
+            "item_sha256": "2d3b818bdcd28e374757b0c793b04ae2c4c526086f8bbcf7a7e6ea82155af1a5",
+            "row_sha256": "eb000783840756f7602b3a9ad20040b5803ff782f45c46a72a73a9f1c8394f3a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: eigenvalues equal to zero have the unique scalar minimizer zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 cover the one-dimensional scalar minimization over z≥0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows repeated or zero eigenvalues; step 4.1 proves uniqueness, hence decomposition independence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes λ_i=0 in the scalar minimization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement supplies a finite-dimensional orthogonal eigendecomposition; steps 1.1–4.1 use it and prove the resulting projection unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Spectral clipping of the given symmetric matrix uniquely minimizes Frobenius distance over the PSD cone and is independent of the eigenbasis. The theorem constructs the projection; it is not stated as an iff condition on arbitrary proposed matrices.",
+            "item_sha256": "1f44ae51e02e83414836738217968615102a222357e6ecbf8b5ece0b3300d0fb",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The stated conclusion is that the constructed clipped matrix is the unique nearest PSD matrix for each symmetric input. Step 4.1 proves uniqueness through equality conditions; no converse condition on arbitrary projection maps is asserted.",
+              "item_sha256": "2d3b818bdcd28e374757b0c793b04ae2c4c526086f8bbcf7a7e6ea82155af1a5",
+              "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Spectral clipping of the given symmetric matrix uniquely minimizes Frobenius distance over the PSD cone and is independent of the eigenbasis. The theorem constructs the projection; it is not stated as an iff condition on arbitrary proposed matrices.",
+            "item_sha256": "1f44ae51e02e83414836738217968615102a222357e6ecbf8b5ece0b3300d0fb",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The stated conclusion is that the constructed clipped matrix is the unique nearest PSD matrix for each symmetric input. Step 4.1 proves uniqueness through equality conditions; no converse condition on arbitrary projection maps is asserted.",
+              "item_sha256": "2d3b818bdcd28e374757b0c793b04ae2c4c526086f8bbcf7a7e6ea82155af1a5",
+              "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+            }
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all five steps and exact spectral, positivity and orthogonal-invariance suppliers. For arbitrary feasible Z, W=U^TZU has nonnegative diagonal. Squared entry distance splits into diagonal scalar minima and nonnegative off-diagonal squares. Each scalar minimum is unique including lambda=0, and simultaneous equality forces W=diag(lambda+). This proves existence, uniqueness and basis independence for repeated/negative/zero eigenvalues, including d=1 and A=0. Finite decomposition needs no AC. Higham Theorem 2.1 pp.105-106 and Bindel section 6 PDF p.5 checked; their solution agrees with the locally proved formula. Reader locator correction accepted; no unresolved defect."
+      }
+    },
+    "lem-positive-semidefinite-cone-is-frobenius-closed": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-norm-and-normed-space",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) constructed in this library, in particular a\nfield, so that \"vector space\" below always means vector space over $\\mathbb{R}$\n([[def-vector-space]]).\n\nLet $V$ be a vector space over $\\mathbb{R}$, with zero vector $0_V$. A **norm on\n$V$** is a function $N : V \\to \\mathbb{R}$ such that for all $u, v \\in V$ and all\n$\\lambda \\in \\mathbb{R}$:\n\n- **(N1) Separation.** $N(v) = 0$ if and only if $v = 0_V$.\n- **(N2) Absolute homogeneity.** $N(\\lambda v) = |\\lambda|\\,N(v)$, the absolute\n  value being that of [[def-abs-value]].\n- **(N3) Triangle inequality.** $N(u + v) \\le N(u) + N(v)$.\n\nA **normed space** is a pair $(V, N)$ consisting of a vector space $V$ over\n$\\mathbb{R}$ and a norm $N$ on it. When only one norm is in play we write\n$\\lVert v\\rVert$ for $N(v)$; when several are, the norm is always named.\n\n**The values of a norm are real numbers.** The codomain is $\\mathbb{R}$, so\n$N(v)$ is an honest element of the complete ordered field and no infinite value\nis permitted. The same real-valued codomain is required of a metric by\n[[def-metric-space]].\n\n### Nonnegativity is a theorem, not an axiom\n\nMany texts add a fourth condition $N(v) \\ge 0$. It is redundant. Applying (N2)\nwith $\\lambda = -1$ gives $N(-v) = |-1|\\,N(v) = N(v)$ ([[lem-of-abs-value]],\n[[lem-vector-space-elementary-consequences]] for $(-1)v = -v$), and then (N3)\nwith $u = v$ and $-v$ gives\n\n$$0 \\;=\\; N(0_V) \\;=\\; N\\bigl(v + (-v)\\bigr) \\;\\le\\; N(v) + N(-v) \\;=\\; N(v) + N(v),$$\n\nwhere $N(0_V) = 0$ is (N1). So $N(v) + N(v) \\ge 0$, and if $N(v) < 0$ then\n$N(v) + N(v) < 0$ by addition of inequalities, which trichotomy forbids\n([[def-complete-ordered-field]]). Hence $N(v) \\ge 0$ for every $v \\in V$.\n\n**Consequently the verification of a candidate norm has three things to check and\nnot four**, exactly as the verification of a candidate metric has three and not\nfour ([[def-metric-space]], [[lem-metric-nonnegativity]]). No item in this\nlibrary assumes nonnegativity of a norm before the argument above.\n\n### The induced metric\n\nLet $N$ be a norm on $V$ and define\n\n$$d_N(u,v) \\;:=\\; N(u - v) \\qquad (u, v \\in V),$$\n\nwhere $u - v = u + (-v)$ ([[def-vector-space]]). **Then $d_N$ is a metric on\n$V$** ([[def-metric-space]]), and the three axioms are the three conditions\nabove, in order:\n\n- **(M1)** $d_N(u,v) = 0$ means $N(u-v) = 0$, which by (N1) says $u - v = 0_V$,\n  that is $u = v$; and conversely $d_N(v,v) = N(0_V) = 0$.\n- **(M2)** $d_N(v,u) = N(v-u) = N\\bigl((-1)(u-v)\\bigr) = |-1|\\,N(u-v) = d_N(u,v)$,\n  by (N2), [[lem-of-abs-value]] and $(-1)w = -w$\n  ([[lem-vector-space-elementary-consequences]]).\n- **(M3)** $d_N(u,w) = N\\bigl((u-v) + (v-w)\\bigr) \\le N(u-v) + N(v-w) = d_N(u,v) + d_N(v,w)$,\n  by (N3).\n\nA normed space is therefore a metric space, and every notion defined for metric\nspaces — open set ([[def-metric-topology]]), convergence, Cauchyness,\ncontinuity, compactness — is available in it with no further definition. **This\nlibrary never introduces a second notion of any of them for normed spaces.**\n\n### Two properties an arbitrary metric need not have\n\nThe metric $d_N$ satisfies, for all $u, v, w \\in V$ and $\\lambda \\in \\mathbb{R}$:\n\n- **translation invariance**, $d_N(u + w, v + w) = N\\bigl((u+w)-(v+w)\\bigr) = N(u-v) = d_N(u,v)$;\n- **absolute homogeneity**, $d_N(\\lambda u, \\lambda v) = N\\bigl(\\lambda(u-v)\\bigr) = |\\lambda|\\,d_N(u,v)$, by (N2).\n\n**Not every metric on a vector space arises from a norm**, and homogeneity is\nwhat fails. The published bounded remetrisation [[lem-bounded-remetrisation]]\nreplaces a metric $d$ by $d' = \\min\\{d, 1\\}$, a metric with the same topology\nwhose values never exceed $1$; on a vector space $V$ containing a vector $v$ with\n$d(v, 0_V) > 0$ this $d'$ cannot be $d_M$ for any norm $M$, since absolute\nhomogeneity would force $d'(\\lambda v, 0_V) = |\\lambda|\\,d'(v, 0_V)$, which is\nunbounded in $\\lambda$, while $d'$ is bounded by $1$. So the passage from norms\nto metrics is not reversible, and a statement about a metric on a vector space is\nstrictly weaker than the corresponding statement about a norm.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A\\in\\mathbb S^d\\setminus\\mathbb S_+^d$. By the definition of $\\mathbb S_+^d$, there is $v\\in\\mathbb R^d$ with $v^TAv<0$; necessarily $v\\ne0$. Set $\\rho=-v^TAv/(2\\|v\\|_2^2)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $Z\\in\\mathbb S^d$ with $\\|Z-A\\|_F<\\rho$, the entry norm [F1], entry inner product, and Cauchy–Schwarz [F2] give $|v^T(Z-A)v|=|\\langle Z-A,vv^T\\rangle_F|\\le\\|Z-A\\|_F\\|vv^T\\|_F<\\rho\\|v\\|_2^2=-\\tfrac12v^TAv$. Hence $v^TZv<v^TAv-\\tfrac12v^TAv=\\tfrac12v^TAv<0$, so $Z\\notin\\mathbb S_+^d$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 shows that the open ball $B_F(A,\\rho)$ in the metric $d_F$ is contained in the complement of $\\mathbb S_+^d$. Since $A$ was arbitrary in that complement, every point of it has an open ball contained in it; the complement is open by [F3], and therefore $\\mathbb S_+^d$ is closed.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis fixes d at least one; the matrix-entry sum therefore has d squared terms, and the cone contains the zero matrix. The empty-dimensional matrix space is outside the stated domain, rather than an unhandled empty feasible cone.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The hypothesis fixes d at least one; the matrix-entry sum therefore has d squared terms, and the cone contains the zero matrix. The empty-dimensional matrix space is outside the stated domain, rather than an unhandled empty feasible cone."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The hypothesis fixes d at least one; the matrix-entry sum therefore has d squared terms, and the cone contains the zero matrix. The empty-dimensional matrix space is outside the stated domain, rather than an unhandled empty feasible cone.",
+            "item_sha256": "7df81dc58477062781b14670b65d12e26f04ab2162b70826811ea5f79f416d2e",
+            "row_sha256": "2cddf6642e812933a86f265f4f832d2909f978a2217491d96c8c6563590bd6b7"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero matrix belongs to the positive-semidefinite cone, and closedness covers it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 specialize to d=1, where a negative scalar has the negative witness v=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 establishes that any vector witnessing failure of positive semidefiniteness is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no scalar interpolation parameter in the closedness claim. Step 1.1 chooses a strictly negative quadratic form outside the cone and a positive ball radius; equality v-transpose A v=0 belongs to the cone boundary and is not a permissible outside witness.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "There is no scalar interpolation parameter in the closedness claim. Step 1.1 chooses a strictly negative quadratic form outside the cone and a positive ball radius; equality v-transpose A v=0 belongs to the cone boundary and is not a permissible outside witness.",
+            "item_sha256": "7df81dc58477062781b14670b65d12e26f04ab2162b70826811ea5f79f416d2e",
+            "row_sha256": "6d44b267bfd25526d9e1f3bd8156208a0ba8dd9caced23dec17cb41e72eb1d46"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use one witness whose existence follows from failure of the defining universal inequality; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For positive matrix dimension the specified positive-semidefinite cone is closed in the symmetric Frobenius space. The quadratic-form description defines the cone; the asserted result is closedness, not an iff to direction-check.",
+            "item_sha256": "5fa62a4b24025e46bc9259002bb781937df3d757e4c8446c6bdd7eddff120454",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The conclusion is closedness of the positive-semidefinite cone. The proof builds a complement ball from a negative quadratic-form witness, and asserts no equivalence between closedness and another property of matrix sets.",
+              "item_sha256": "7df81dc58477062781b14670b65d12e26f04ab2162b70826811ea5f79f416d2e",
+              "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For positive matrix dimension the specified positive-semidefinite cone is closed in the symmetric Frobenius space. The quadratic-form description defines the cone; the asserted result is closedness, not an iff to direction-check.",
+            "item_sha256": "5fa62a4b24025e46bc9259002bb781937df3d757e4c8446c6bdd7eddff120454",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The conclusion is closedness of the positive-semidefinite cone. The proof builds a complement ball from a negative quadratic-form witness, and asserts no equivalence between closedness and another property of matrix sets.",
+              "item_sha256": "7df81dc58477062781b14670b65d12e26f04ab2162b70826811ea5f79f416d2e",
+              "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+            }
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all three steps and exact F1-F4 suppliers. Outside the cone a negative quadratic witness is nonzero, so rho=-v^TAv/(2||v||²)>0. Entry Cauchy-Schwarz and ||vv^T||F=||v||² keep the whole rho-ball negative. Complement-ball criterion proves closedness. d=1 and singular/zero cone boundary are included; d=0 is excluded. One existential witness uses no AC. Reader explicitly supplies the norm-induced metric and the exact norm-axiom theorem; accepted. Bindel section 6 PDF p.5 and Higham Theorem 2.1 pp.105-106 checked. No unresolved proof defect."
+      }
+    },
+    "thm-mahalanobis-distance-is-pseudometric": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space. The assignment\n\n$$T\\longmapsto B_T,\\qquad B_T(u,v):=\\langle Tu,v\\rangle,$$\n\nrestricts to a bijection between self-adjoint endomorphisms of $V$ and\nsymmetric bilinear forms on $V$. Under this bijection, non-negative operators\ncorrespond exactly to positive semidefinite forms, and positive operators\ncorrespond exactly to positive definite forms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $M$ as the matrix of an endomorphism $T_M:\\mathbb R^d\\to\\mathbb R^d$, $T_Mv=Mv$. The associated symmetric bilinear form is $(u,v)\\mapsto u^TMv$, so its positive-semidefinite hypothesis and [F1] imply that $T_M$ is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], there is an endomorphism $S$ with $T_M=S^*S$. Let $L$ be its real matrix in the standard basis; the Euclidean adjoint has matrix $L^T$, hence $M=L^TL$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $h=x-x'$, steps 2.1 and [F3] give $q_M(x,x')=h^TMh=h^TL^TLh=\\langle Lh,Lh\\rangle=\\|Lh\\|_2^2$. Both $d_M(x,x')$ and $\\|Lh\\|_2$ are nonnegative and their squares agree, so [F5] gives $d_M(x,x')=\\|Lx-Lx'\\|_2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nonnegativity, symmetry, and zero diagonal follow from the corresponding properties of the Euclidean norm in [F4]. For any $x,y,z\\in\\mathbb R^d$, $d_M(x,z)=\\|Lx-Lz\\|_2\\le\\|Lx-Ly\\|_2+\\|Ly-Lz\\|_2=d_M(x,y)+d_M(y,z)$ by the triangle inequality in [F4]. The pseudometric axioms follow.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis d at least one excludes an empty-dimensional vector domain; the domain R-to-the-d is itself nonempty, containing zero. The factorization and norm formula in steps 2.1 and 3.1 concern a fixed finite matrix, not a possibly empty indexed family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The hypothesis d at least one excludes an empty-dimensional vector domain; the domain R-to-the-d is itself nonempty, containing zero. The factorization and norm formula in steps 2.1 and 3.1 concern a fixed finite matrix, not a possibly empty indexed family.",
+            "item_sha256": "121102159e6a0257f556705322d78534fd819ebcf5ddf08e2b4f0c72853b24ed",
+            "row_sha256": "7a43c2e831f122ba5f985467c58572117d7febdf1588e85ab5e0d98c34b19b3b"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–4.1 allow M=0; the feature map can be L=0 and the pseudometric is identically zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The matrix factorization and norm identity in steps 1.1–4.1 apply unchanged when d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement explicitly makes no separation claim; the rank-deficient case is exhibited by the singular-matrix example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no tunable interval parameter in the pseudometric claim. Singular PSD matrices, including the zero matrix, are admitted: step 3.1 obtains an ordinary norm of a possibly zero image, and step 4.1 uses its triangle inequality without dividing by the distance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "There is no tunable interval parameter in the pseudometric claim. Singular PSD matrices, including the zero matrix, are admitted: step 3.1 obtains an ordinary norm of a possibly zero image, and step 4.1 uses its triangle inequality without dividing by the distance.",
+            "item_sha256": "121102159e6a0257f556705322d78534fd819ebcf5ddf08e2b4f0c72853b24ed",
+            "row_sha256": "13e3ef38e5802dffec432cb724af496609189918a3cc5bc74ae594d4ddb9be63"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the finite-dimensional factorization theorem; no choice axiom is stated or needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "A given PSD symmetric matrix factors through a Euclidean linear image, implying the pseudometric axioms. The statement expressly does not assert separation, nor an iff from pseudometric properties to the supplied matrix assumptions.",
+            "item_sha256": "010322b98d81771a82aa5a4a98df8a75d8e2ced24b15efb6dac29ae6e5dfe7bf",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The assumption of a symmetric PSD matrix yields a square-factor representation and the pseudometric axioms. Steps 2.1 through 4.1 prove these conclusions; the theorem deliberately does not characterize separation of distinct points by a biconditional.",
+              "item_sha256": "121102159e6a0257f556705322d78534fd819ebcf5ddf08e2b4f0c72853b24ed",
+              "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "A given PSD symmetric matrix factors through a Euclidean linear image, implying the pseudometric axioms. The statement expressly does not assert separation, nor an iff from pseudometric properties to the supplied matrix assumptions.",
+            "item_sha256": "010322b98d81771a82aa5a4a98df8a75d8e2ced24b15efb6dac29ae6e5dfe7bf",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The assumption of a symmetric PSD matrix yields a square-factor representation and the pseudometric axioms. Steps 2.1 through 4.1 prove these conclusions; the theorem deliberately does not characterize separation of distinct points by a biconditional.",
+              "item_sha256": "121102159e6a0257f556705322d78534fd819ebcf5ddf08e2b4f0c72853b24ed",
+              "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+            }
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all four steps and exact F1-F5 supplier statements. Real symmetric PSD form gives a nonnegative self-adjoint operator; the S* S characterization produces a square real L with M=L^TL. Entry expansion and unique nonnegative roots yield distance=||L(x-xprime)||2. Norm sign symmetry, zero diagonal and triangle then apply to every triple. M=0 and singular M are allowed; separation is expressly not asserted and squared distance is not claimed to satisfy triangle. d>=1; finite existential factorization uses no AC. Reader only corrected Bellet printed pp.9-10; current proof unchanged and sound."
+      }
+    },
+    "lem-svec-transports-frobenius-subgradients": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-symmetric-matrix-frobenius-isometry",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $\\mathbb S^d$ be the real vector space of symmetric $d\\times d$ matrices, and set $m=d(d+1)/2$. Equip $\\mathbb S^d$ with the Frobenius inner product $\\langle A,B\\rangle_F:=\\sum_{i=1}^{d}\\sum_{j=1}^{d}A_{ij}B_{ij}$ and its induced norm. Define $\\operatorname{svec}:\\mathbb S^d\\to\\mathbb R^m$ by listing $A_{11},\\ldots,A_{dd}$ first, followed by $\\sqrt2 A_{ij}$ for $1\\le i<j\\le d$ in lexicographic order. Then $\\operatorname{svec}$ is a linear bijection and preserves inner products and norms; in particular, $\\|\\operatorname{svec}(A)-\\operatorname{svec}(B)\\|_2=\\|A-B\\|_F$ for all $A,B\\in\\mathbb S^d$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $z_0,z_1\\in C'$, choose $M_0,M_1\\in C$ with $z_i=\\operatorname{svec}(M_i)$. For $t\\in[0,1]$, linearity gives $tz_0+(1-t)z_1=\\operatorname{svec}(tM_0+(1-t)M_1)$, and the matrix on the right is in $C$ by [F2]. Thus $C'$ is convex.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $z\\notin C'$ and set $M=\\operatorname{svec}^{-1}(z)\\notin C$. Since $C$ is closed, [F3] gives $r>0$ such that $B_F(M,r)\\subseteq\\mathbb S^d\\setminus C$, where $B_F(M,r)=\\{A\\in\\mathbb S^d:\\|A-M\\|_F<r\\}$. For any $w\\in B_2(z,r)$, isometry [F1] gives $\\operatorname{svec}^{-1}(w)\\in B_F(M,r)$, hence $w\\notin C'$. Therefore $B_2(z,r)\\subseteq\\mathbb R^m\\setminus C'$, so the complement of $C'$ is open and $C'$ is closed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $z_0,z_1\\in C'$ with preimages $M_0,M_1$, linearity yields $\\operatorname{svec}^{-1}(tz_0+(1-t)z_1)=tM_0+(1-t)M_1$. Applying convexity of $F$ from [given] proves $f(tz_0+(1-t)z_1)\\le t f(z_0)+(1-t)f(z_1)$, so $f$ is convex.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $z=\\operatorname{svec}(M)$ and take any $w\\in C'$, with preimage $N\\in C$. The assumed subgradient inequality gives $f(w)=F(N)\\ge F(M)+\\langle G,N-M\\rangle_F$. By inner-product preservation [F1], this equals $f(z)+\\langle\\operatorname{svec}(G),w-z\\rangle_2$; hence $\\operatorname{svec}(G)$ is a Euclidean subgradient by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits C=∅ for the domain conclusions; C′=∅ is closed and convex, while M∈C makes the subgradient clause vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use linearity and inner-product preservation, which include the zero matrix and zero subgradient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove convexity for every t∈[0,1], including t=0 and t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes only closedness and convexity; no nondegeneracy or strict-convexity condition is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include both convex-combination endpoints t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the unique inverse of the bijection svec, so no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The hypotheses of closed convex C and convex F imply their transported properties, and an assumed Frobenius subgradient yields a Euclidean subgradient in step 2.1. The lemma does not claim a converse for arbitrary nonlinear coordinate maps.",
+            "item_sha256": "8da3176eccb8b313c0d444f87ebe9cb9e70ef3238af713637facf8acc74390e3",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The hypotheses of closed convex C and convex F imply their transported properties, and an assumed Frobenius subgradient yields a Euclidean subgradient in step 2.1. The lemma does not claim a converse for arbitrary nonlinear coordinate maps.",
+            "item_sha256": "8da3176eccb8b313c0d444f87ebe9cb9e70ef3238af713637facf8acc74390e3",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked all four steps against the complete isometry supplier and exact convexity, subgradient, metric-topology and ball definitions. Linear bijection preserves convex combinations; its surjectivity is essential in mapping an arbitrary outside Euclidean point back to a complement ball, hence image closedness follows (not a generic continuous-image claim). Inner-product preservation transports the global supporting inequality for all image-domain points. G is a symmetric-space subgradient, as required for svec. Empty C makes the first conclusions vacuous and the conditional M,G premise impossible; singleton/full C and t=0,1 are valid. No existence of subgradients is asserted and no AC is used. No defect."
+      }
+    },
+    "thm-lmnn-fixed-target-objective-is-convex": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lmnn-fixed-target-objective",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,C$, a finite labeled sample $(x_i,y_i)_{i=1}^{n}$ with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, and a weight $\\mu\\in[0,1]$. For each $i$, fix in advance an integer $k_i$ with $0\\le k_i\\le|\\{j\\ne i:y_j=y_i\\}|$ and a fixed target-neighbor set $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$ with $|N_i|=k_i$. These target sets do not change with the matrix being optimized. Let $\\mathbb S_+^d$ denote the real symmetric matrices $M$ satisfying $v^TMv\\ge0$ for all $v\\in\\mathbb R^d$, and put $q_M(x,x')=(x-x')^TM(x-x')$. For a real number $z$, let $[z]_+=\\max\\{z,0\\}$. For $M\\in\\mathbb S_+^d$, define\n\n$$\\epsilon_{\\rm pull}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j),\\qquad \\epsilon_{\\rm push}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nand $F_\\mu(M)=(1-\\mu)\\epsilon_{\\rm pull}(M)+\\mu\\epsilon_{\\rm push}(M)$. This is the fixed-target LMNN training surrogate; it is not a test-error or calibrated/generalization-risk quantity. The quantity $q_M$ is a squared distance, while its square root is the Mahalanobis pseudometric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed pair $(i,j)$, let $C_{ij}=(x_i-x_j)(x_i-x_j)^T$. By [F1], $q_M(x_i,x_j)=\\operatorname{tr}(MC_{ij})$ is linear in $M$, so every pull term is affine-linear. Each margin expression $h_{ijl}(M)=1+\\operatorname{tr}(M(C_{ij}-C_{il}))$ is also affine-linear.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any affine-linear $h$ and $0\\le t\\le1$, $h(tM+(1-t)N)=t h(M)+(1-t)h(N)$. The number $t[h(M)]_++(1-t)[h(N)]_+$ is at least $0$ and at least $t h(M)+(1-t)h(N)$, hence it is at least their maximum $[h(tM+(1-t)N)]_+$. Thus each hinge term is convex by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Finite sums of affine-linear functions and convex hinge functions are convex, and the coefficients $1-\\mu$ and $\\mu$ are nonnegative because $\\mu\\in[0,1]$. Applying the convexity inequality term by term proves $F_\\mu$ is convex on all symmetric matrices, including the endpoint cases $\\mu=0$ and $\\mu=1$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $M,N\\in\\mathbb S_+^d$ and $0\\le t\\le1$, then $tM+(1-t)N$ is symmetric and for every $v$, $v^T(tM+(1-t)N)v=t\\,v^TMv+(1-t)\\,v^TNv\\ge0$. Hence $\\mathbb S_+^d$ is convex by [F3]. Restricting the already convex function $F_\\mu$ to this convex feasible set yields a convex optimization problem.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits empty fixed target sets; the corresponding finite sums are zero and the termwise convexity proof still applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–4.1 define affine distance terms and hinges for M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows μ=0 and μ=1; step 3.1 verifies both endpoint weights."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid when feature differences vanish, since the resulting matrix C_ij is the zero matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles μ=0 and μ=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: the argument uses finite sums, affine identities, and quadratic forms only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "For fixed target sets and a weight between zero and one, the theorem proves convexity by adding affine pull and convex hinge terms in step 3.1. It does not assert that convexity characterizes these weights or excludes all other target procedures.",
+            "item_sha256": "cbfcef9e7220d1e06e4ca0dc763ef129035b6168b82b73a593e462b4f4043989",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "For fixed target sets and a weight between zero and one, the theorem proves convexity by adding affine pull and convex hinge terms in step 3.1. It does not assert that convexity characterizes these weights or excludes all other target procedures.",
+            "item_sha256": "cbfcef9e7220d1e06e4ca0dc763ef129035b6168b82b73a593e462b4f4043989",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all four steps and exact objective, trace, finite-sum and convexity definitions. Entry expansion makes each q linear for symmetric M, including indefinite M in the extended objective. Positive part of an affine function satisfies convexity directly by bounding zero and the affine combination. Nonnegative weights mu and 1-mu preserve it, including endpoints and empty target/impostor sets. Quadratic-form inequalities prove convexity of the PSD cone without positivity of eigenvalues or an existence claim for a minimizer. Fixed targets are essential and retained. Weinberger-Saul section 3.4 pp.220-221 agrees with the matrix formulation. No defect, AC use or diagram obligation."
+      }
+    },
+    "lem-lmnn-explicit-subgradient-and-data-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lmnn-fixed-target-objective",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,C$, a finite labeled sample $(x_i,y_i)_{i=1}^{n}$ with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, and a weight $\\mu\\in[0,1]$. For each $i$, fix in advance an integer $k_i$ with $0\\le k_i\\le|\\{j\\ne i:y_j=y_i\\}|$ and a fixed target-neighbor set $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$ with $|N_i|=k_i$. These target sets do not change with the matrix being optimized. Let $\\mathbb S_+^d$ denote the real symmetric matrices $M$ satisfying $v^TMv\\ge0$ for all $v\\in\\mathbb R^d$, and put $q_M(x,x')=(x-x')^TM(x-x')$. For a real number $z$, let $[z]_+=\\max\\{z,0\\}$. For $M\\in\\mathbb S_+^d$, define\n\n$$\\epsilon_{\\rm pull}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j),\\qquad \\epsilon_{\\rm push}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nand $F_\\mu(M)=(1-\\mu)\\epsilon_{\\rm pull}(M)+\\mu\\epsilon_{\\rm push}(M)$. This is the fixed-target LMNN training surrogate; it is not a test-error or calibrated/generalization-risk quantity. The quantity $q_M$ is a squared distance, while its square root is the Mahalanobis pseudometric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lmnn-fixed-target-objective-is-convex",
+          "source_section": "Statement",
+          "quote": "Let $d,n,C$ be positive integers, let $(x_i,y_i)_{i=1}^{n}$ be a finite sample with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, let each fixed target set satisfy $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$, and let $\\mu\\in[0,1]$. For symmetric $M\\in\\mathbb R^{d\\times d}$ write $q_M(x,x')=(x-x')^TM(x-x')$ and define\n\n$$F_\\mu(M)=(1-\\mu)\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j)+\\mu\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nwhere $[z]_+=\\max\\{z,0\\}$. Then $F_\\mu$ is convex on the real vector space of symmetric matrices. The feasible set $\\mathbb S_+^d=\\{M=M^T:v^TMv\\ge0\\text{ for all }v\\in\\mathbb R^d\\}$ is convex, so minimizing $F_\\mu$ over $\\mathbb S_+^d$ is a convex optimization problem.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-subgradient-and-subdifferential",
+          "source_section": "Definition",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex on a convex set $C\\subseteq\\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\\ge f(a)+\\langle v,y-a\\rangle$ for every $y$ in the domain.\n\nThe **subdifferential** is the set\n\n$$\\partial f(a):=\\{v\\in\\mathbb R^n:f(y)\\ge f(a)+\\langle v,y-a\\rangle\\text{ for every }y\\in C\\},$$\n\nwith the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\\partial f(a)$ to be empty or to contain more than one vector.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a_{ij}=x_i-x_j$, the entrywise inner product satisfies $\\langle M,C_{ij}\\rangle_F=\\sum_{r,s}M_{rs}(a_{ij})_r(a_{ij})_s=a_{ij}^TMa_{ij}=q_M(x_i,x_j)$. Thus each hinge has the form $\\phi(M)=\\max\\{0,1+\\langle M,D_{ijl}\\rangle_F\\}$, with affine argument $h_{ijl}(M)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any $a\\in\\mathbb R^d$, $\\|aa^T\\|_F^2=\\sum_{r,s}(a_ra_s)^2=(\\sum_r a_r^2)^2$, so $\\|C_{ij}\\|_F=\\|x_i-x_j\\|_2^2$ by [F5]. By [F4], $\\|D_{ijl}\\|_F\\le\\|C_{ij}\\|_F+\\|C_{il}\\|_F=\\|x_i-x_j\\|_2^2+\\|x_i-x_l\\|_2^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $h_{ijl}(M)>0$, then $\\phi(M)=h_{ijl}(M)$ and $\\phi(N)\\ge h_{ijl}(N)=\\phi(M)+\\langle D_{ijl},N-M\\rangle_F$ for every $N$. If $h_{ijl}(M)\\le0$, then $\\phi(M)=0$ and $\\phi(N)\\ge0=\\phi(M)+\\langle0,N-M\\rangle_F$ for every $N$. Hence $\\gamma_{ijl}(M)D_{ijl}$ is a subgradient of this hinge, including the selected zero coefficient at equality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each $C_{ij}$ and $D_{ijl}$ is symmetric, so their weighted sum $G(M)$ is symmetric. Each pull term is linear with Frobenius subgradient $C_{ij}$. Adding its supporting equality to the hinge supporting inequalities in step 2.1, weighted by the nonnegative coefficients $1-\\mu$ and $\\mu$, proves $F_\\mu(N)\\ge F_\\mu(M)+\\langle G(M),N-M\\rangle_F$ for every $N\\in\\mathbb S_+^d$. Thus $G(M)$ is a subgradient by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since each $\\gamma_{ijl}(M)\\in\\{0,1\\}$, the triangle inequality and step 1.2 give $\\|G(M)\\|_F\\le(1-\\mu)\\sum_i\\sum_{j\\in N_i}\\|C_{ij}\\|_F+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\|D_{ijl}\\|_F\\le B_{\\rm data}$. The bound is finite because the sample and all index sets are finite, and it is independent of $M$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits empty target or impostor index sets; their finite sums contribute zero to G and B_data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles h_ijl(M)=0 with γ=0, including the exact hinge kink."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits μ=0 and μ=1; step 3.1 uses only the nonnegative weights 1−μ and μ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 allow C_ij or D_ijl to vanish and the norm bound remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes the exact kink convention h=0, and step 3.1 covers μ at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–4.1: all sums are finite and γ is defined by a fixed inequality test; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For fixed target/impostor lists the selected hinge coefficients produce a subgradient and a uniform data-dependent norm bound, including coefficient zero at a hinge kink. This is a construction and bound, not a subgradient iff characterization.",
+            "item_sha256": "4b6c0286b4c0cec24386e6e075f1ae2b88501fd44f58d40050b9e54b6bf624bd",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The displayed selected hinge coefficients give a valid subgradient and a uniform norm upper bound. Steps 2.1 and 3.1 establish a sufficient explicit construction, not an assertion that all subgradients arise from this selected zero-at-kink rule.",
+              "item_sha256": "54244ba9200369136eacbb55c6a081c18a2e868a8af17a6486f637efa5aa2b4d",
+              "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For fixed target/impostor lists the selected hinge coefficients produce a subgradient and a uniform data-dependent norm bound, including coefficient zero at a hinge kink. This is a construction and bound, not a subgradient iff characterization.",
+            "item_sha256": "4b6c0286b4c0cec24386e6e075f1ae2b88501fd44f58d40050b9e54b6bf624bd",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/calibration_surrogate_repair",
+              "reason": "The displayed selected hinge coefficients give a valid subgradient and a uniform norm upper bound. Steps 2.1 and 3.1 establish a sufficient explicit construction, not an assertion that all subgradients arise from this selected zero-at-kink rule.",
+              "item_sha256": "54244ba9200369136eacbb55c6a081c18a2e868a8af17a6486f637efa5aa2b4d",
+              "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+            }
+          ]
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Checked every step and F1-F5 against current objective, convexity, domain-relative subgradient, Frobenius and Euclidean definitions and the exact inner-product norm axioms corollary. Entry expansion gives the correct symmetric Cij and Dijl. For h>0 the affine branch supports globally; for h<=0 the zero branch supports globally, including the kink h=0. Nonnegative weighted sums give G, with no differentiability/sum-rule assumption. ||aa^T||F=||a||² and the triangle inequality yield the stated finite data bound uniformly in M. mu=0,1, empty targets/impostors, coincident data, Bdata=0 and singular M all work. Reader nested-sum repair and explicit norm citations are accepted; no Statement change or consumer repair is needed. No AC. Published Frobenius supplier missing-edge finding is separately recorded, and this proof cites the requisite corollary directly."
+      }
+    },
+    "thm-lmnn-projected-subgradient-best-average-bound": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lmnn-fixed-target-objective-is-convex",
+          "source_section": "Statement",
+          "quote": "Let $d,n,C$ be positive integers, let $(x_i,y_i)_{i=1}^{n}$ be a finite sample with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, let each fixed target set satisfy $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$, and let $\\mu\\in[0,1]$. For symmetric $M\\in\\mathbb R^{d\\times d}$ write $q_M(x,x')=(x-x')^TM(x-x')$ and define\n\n$$F_\\mu(M)=(1-\\mu)\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j)+\\mu\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nwhere $[z]_+=\\max\\{z,0\\}$. Then $F_\\mu$ is convex on the real vector space of symmetric matrices. The feasible set $\\mathbb S_+^d=\\{M=M^T:v^TMv\\ge0\\text{ for all }v\\in\\mathbb R^d\\}$ is convex, so minimizing $F_\\mu$ over $\\mathbb S_+^d$ is a convex optimization problem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-positive-semidefinite-cone-is-frobenius-closed",
+          "source_section": "Statement",
+          "quote": "For an integer $d\\ge1$, let $\\mathbb S^d$ be the real symmetric $d\\times d$ matrices and let $\\mathbb S_+^d=\\{M\\in\\mathbb S^d:v^TMv\\ge0\\text{ for every }v\\in\\mathbb R^d\\}$. With the Frobenius norm $\\|A\\|_F=(\\sum_{i,j}A_{ij}^2)^{1/2}$, the set $\\mathbb S_+^d$ is closed in $\\mathbb S^d$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-symmetric-matrix-frobenius-isometry",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $\\mathbb S^d$ be the real vector space of symmetric $d\\times d$ matrices, and set $m=d(d+1)/2$. Equip $\\mathbb S^d$ with the Frobenius inner product $\\langle A,B\\rangle_F:=\\sum_{i=1}^{d}\\sum_{j=1}^{d}A_{ij}B_{ij}$ and its induced norm. Define $\\operatorname{svec}:\\mathbb S^d\\to\\mathbb R^m$ by listing $A_{11},\\ldots,A_{dd}$ first, followed by $\\sqrt2 A_{ij}$ for $1\\le i<j\\le d$ in lexicographic order. Then $\\operatorname{svec}$ is a linear bijection and preserves inner products and norms; in particular, $\\|\\operatorname{svec}(A)-\\operatorname{svec}(B)\\|_2=\\|A-B\\|_F$ for all $A,B\\in\\mathbb S^d$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-svec-transports-frobenius-subgradients",
+          "source_section": "Statement",
+          "quote": "Let $C\\subseteq\\mathbb S^d$ be a closed convex set of real symmetric matrices in the Frobenius metric, let $F:C\\to\\mathbb R$ be convex, let $\\operatorname{svec}:\\mathbb S^d\\to\\mathbb R^m$ be the symmetric vectorization isometry, and define $C'=\\operatorname{svec}(C)$ and $f:C'\\to\\mathbb R$ by $f(z)=F(\\operatorname{svec}^{-1}(z))$. Then $C'$ is closed and convex and $f$ is convex. If $G$ is a Frobenius subgradient of $F$ at $M\\in C$, meaning $F(N)\\ge F(M)+\\langle G,N-M\\rangle_F$ for every $N\\in C$, then $\\operatorname{svec}(G)$ is a Euclidean subgradient of $f$ at $\\operatorname{svec}(M)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-space-complete",
+          "source_section": "Statement",
+          "quote": "1. $(\\mathbb{R}, d_{\\mathbb{R}})$ with the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]) is a complete metric space\n   ([[def-complete-metric-space]]).\n2. Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and let $d_2$ be the Euclidean metric on\n   $\\mathbb{R}^n$ ([[lem-metrics-on-rn]]). Then $(\\mathbb{R}^n, d_2)$ is complete.\n\n**The hypothesis $n \\ge 1$ is inherited and is not decoration.**\n[[lem-metrics-on-rn]] defines $\\mathbb{R}^n$ and its three metrics only for\n$n \\ge 1$, because at $n = 0$ the metric $d_\\infty$ would be a maximum over the\nempty index set. Every statement about $\\mathbb{R}^n$ in this library carries the\nhypothesis, and this one does too.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-projection-onto-a-nonempty-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space, let $C\\subseteq H$ be nonempty, closed and convex, and let $x\\in H$. Then there is exactly one point $p\\in C$ with $\\|x-p\\|=\\inf_{c\\in C}\\|x-c\\|$, that is, a unique nearest point of $C$ to $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-lmnn-explicit-subgradient-and-data-bound",
+          "source_section": "Statement",
+          "quote": "Fix the finite labeled sample, fixed target sets, and $\\mu\\in[0,1]$ of the LMNN objective. For each $j\\in N_i$ and each impostor index $l$ with $y_l\\ne y_i$, set $C_{ij}=(x_i-x_j)(x_i-x_j)^T$, $D_{ijl}=C_{ij}-C_{il}$, and $h_{ijl}(M)=1+\\langle M,D_{ijl}\\rangle_F$, where $\\langle A,B\\rangle_F=\\sum_{r,s}A_{rs}B_{rs}$. Define $\\gamma_{ijl}(M)=1$ if $h_{ijl}(M)>0$ and $\\gamma_{ijl}(M)=0$ if $h_{ijl}(M)\\le0$. Put\n\n$$G(M)=(1-\\mu)\\sum_i\\sum_{j\\in N_i}C_{ij}+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\gamma_{ijl}(M)D_{ijl}.$$\n\nFor the convex objective $F_\\mu$ on $\\mathbb S_+^d$, a Frobenius subgradient at $M$ means a symmetric matrix $G$ such that $F_\\mu(N)\\ge F_\\mu(M)+\\langle G,N-M\\rangle_F$ for every $N\\in\\mathbb S_+^d$. Then $G(M)$ is a subgradient at every $M\\in\\mathbb S_+^d$. Moreover, uniformly in $M$,\n\n$$\\|G(M)\\|_F\\le B_{\\rm data}:=(1-\\mu)\\sum_i\\sum_{j\\in N_i}\\|x_i-x_j\\|_2^2+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\bigl(\\|x_i-x_j\\|_2^2+\\|x_i-x_l\\|_2^2\\bigr).$$\n\nAt an exact hinge kink $h_{ijl}(M)=0$, the selected subgradient coefficient is $0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-projected-subgradient-method",
+          "source_section": "Definition",
+          "quote": "Finite sums of vectors in $\\mathbb R^n$ use the additive finite-list sum of [[def-linear-combination-and-span]]; sums of real coefficients use [[def-finite-sum]].\n\nLet $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $f:C\\to\\mathbb R$ be convex. The finite-budget projected subgradient procedure takes $x_0\\in C$, an integer budget $N\\ge1$, and positive stepsizes $\\alpha_0,\\ldots,\\alpha_{N-1}$. At iteration $k$, an oracle returns either failure or a pair $(f(x_k),g_k)$ with $g_k\\in\\partial f(x_k)$, where subgradient has the meaning in [[def-subgradient-and-subdifferential]]. On a valid response set\n$$x_{k+1}=P_C(x_k-\\alpha_k g_k),$$\nwhere $P_C(u)$ is the unique nearest point in $C$ to $u$. On an oracle failure at iteration $k$, return status **oracle-failure**, the feasible current iterate, the completed update count, and the least-index best among values observed so far if any (otherwise report none); a full-horizon average is not returned. If all $N$ calls succeed, return status **budget-exhausted**, the final iterate, the weighted average $\\bar x_N=(\\sum_{k<N}\\alpha_kx_k)/(\\sum_{k<N}\\alpha_k)$, and a least-index minimizer of observed values among $x_0,\\ldots,x_{N-1}$. Report status and completed update count. This finite procedure makes no convergence claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-projected-subgradient-best-and-average-bound",
+          "source_section": "Statement",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, let $f:C\\to\\mathbb R$ be convex, and run [[alg-projected-subgradient-method]] for $N\\ge1$ steps with positive $\\alpha_k$. Assume all $N$ oracle calls return valid pairs. Suppose a global minimizer $x^*\\in C$ exists and the oracle vectors obey $\\|g_k\\|_2\\le G$; let $R\\ge\\|x_0-x^*\\|_2$. Set $A_N=\\sum_{k<N}\\alpha_k>0$ and $\\bar x_N=A_N^{-1}\\sum_{k<N}\\alpha_kx_k$. Then\n$$\\max\\left\\{\\min_{0\\le k<N}\\bigl(f(x_k)-f(x^*)\\bigr),\\ f(\\bar x_N)-f(x^*)\\right\\}\\le\\frac{R^2+G^2\\sum_{k<N}\\alpha_k^2}{2A_N}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $A\\in\\mathbb R^{d\\times d}$ be symmetric. There exists an orthogonal eigendecomposition $A=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)U^T$. For any such decomposition define $\\lambda_i^+=\\max\\{\\lambda_i,0\\}$ and $A_+=U\\operatorname{diag}(\\lambda_1^+,\\ldots,\\lambda_d^+)U^T$. Let $\\mathbb S_+^d$ be the set of real symmetric matrices $Z$ with $v^TZv\\ge0$ for every $v\\in\\mathbb R^d$, and let $\\|B\\|_F=(\\sum_{i,j}B_{ij}^2)^{1/2}$. Then $A_+$ is the unique minimizer of $\\|A-Z\\|_F$ over $Z\\in\\mathbb S_+^d$, so its value is independent of the chosen orthogonal eigendecomposition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=d(d+1)/2$ and $C'=\\operatorname{svec}(\\mathbb S_+^d)$. The cone contains $0$; [F1] makes it convex, [F2] makes it closed in Frobenius distance, and [F3] transfers both properties to $C'$. By [F4], $\\mathbb R^m$ is a real Hilbert space; under [A1], [F5] gives a unique Euclidean projection onto $C'$, which is the projection used in [F7]. The explicit matrix update is that projection because [F9] identifies the unique Frobenius-nearest PSD matrix.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $t<T$, the displayed data formula in [F6] computes $G(M_t)$ and its bound. The coordinate transport [F3] makes $\\operatorname{svec}(G(M_t))$ a Euclidean subgradient of $f=F_\\mu\\circ\\operatorname{svec}^{-1}$ with norm $\\|\\operatorname{svec}(G(M_t))\\|_2=\\|G(M_t)\\|_F\\le B_{\\rm data}$. Thus all $T$ oracle calls in [F7] are valid.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The point $M^*$ maps to a global minimizer $z^*=\\operatorname{svec}(M^*)$ of $f$ on $C'$, the initial point satisfies $\\|z_0-z^*\\|_2=R$, and the positive step sizes give $A_T>0$. Apply [F8] to the generic run with $N=T$, subgradient bound $B_{\\rm data}$, and distance bound $R$. It yields the asserted upper bound for the least-index best observed objective gap and the weighted-average objective gap in Euclidean coordinates.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By linearity of $\\operatorname{svec}^{-1}$, the Euclidean weighted average maps to $\\overline M_T$ as defined in the Statement. Each iterate lies in $\\mathbb S_+^d$, so convexity [F1] puts $\\overline M_T$ there; bijectivity also preserves the finite-list minimum, so the Euclidean bound from step 1.3 is exactly the displayed matrix bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits empty target and impostor sets; then B_data may be zero and the finite-run bound remains defined because A_T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows B_data=0; the right side reduces to R²/(2A_T), with no division by B_data."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows T=1; positive η_0 gives A_T=η_0>0 and the imported finite-run theorem applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows R=0 or zero data-dependent subgradient bound; the proof uses only their stated nonnegative bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits μ=0 and μ=1, and the explicit subgradient bound in step 1.2 remains valid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC_ω and an attained minimizer M*; step 1.1 uses AC_ω only for the stated Hilbert projection interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "Given an attained minimizer and positive finite stepsizes, the theorem supplies upper gap bounds for the best observed iterate and weighted average. Step 1.3 applies that sufficient interface; no converse guarantee about minimizer existence or final-iterate optimality is stated.",
+            "item_sha256": "edce501bbdd96eb89746bdbe01aae51a5ebad5126155b3e7b1a3af4954eff804",
+            "row_sha256": "2257c762f9b184c798165a9f354b690c9fac07dd734596f4984269d223bdcb65"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "Given an attained minimizer and positive finite stepsizes, the theorem supplies upper gap bounds for the best observed iterate and weighted average. Step 1.3 applies that sufficient interface; no converse guarantee about minimizer existence or final-iterate optimality is stated.",
+            "item_sha256": "edce501bbdd96eb89746bdbe01aae51a5ebad5126155b3e7b1a3af4954eff804",
+            "row_sha256": "f0bfcddf063762d5a8bf23c7ee80c30c2ac09dd1ad1e137d96a50db514deab57"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all four steps, all nine facts and exact current generic algorithm/best-average theorem, projection theorem, completeness/Hilbert/AComega definitions and local suppliers. Dimension m=d(d+1)/2>=1 meets the Euclidean completeness and generic algorithm domains. Zero matrix makes the cone nonempty; closedness, convexity and isometry supply a closed convex coordinate domain. Inner-product transport gives valid oracle vectors with norm<=Bdata. Spectral clipping is the unique projection, so the matrix execution is the generic run. Assumed attained Mstar maps bijectively to a minimizer, and isometry gives initial distance R. Positive steps and T>=1 ensure AT>0, a finite least-index best point and feasible weighted average. Applied supplier estimate uses iterates 0 through T-1, not MT. R=0, Bdata=0, empty target/impostor sets, mu endpoints, singular matrices and repeated eigenvalues introduce no division by zero. AComega is explicitly assumed only for the abstract Hilbert projection route selecting a minimizing sequence; no full AC is used or necessity claimed. Bubeck section 3.1 and Bertsekas Lecture15 provide context, while the local generic supplier proves the exact variable-step finite bound without compactness. No defect."
+      }
+    },
+    "ex-singular-mahalanobis-metric-identifies-distinct-points": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-mahalanobis-pseudometric",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. A real matrix $M\\in\\mathbb R^{d\\times d}$ is positive semidefinite, written $M\\succeq0$, when it is symmetric and $v^{T}Mv\\ge0$ for every $v\\in\\mathbb R^d$. For $x,x'\\in\\mathbb R^d$, define the squared Mahalanobis distance and its nonnegative square root by\n\n$$q_M(x,x') := (x-x')^{T}M(x-x'),\\qquad d_M(x,x') := \\sqrt{q_M(x,x')}.$$\n\nThe square root is defined because $q_M(x,x')\\ge0$. A pseudometric is a nonnegative symmetric function that vanishes on the diagonal and satisfies the triangle inequality, but may assign distance zero to distinct points. The function $d_M$ is called the Mahalanobis pseudometric associated with $M$; $q_M=d_M^2$ is its squared-distance form. The theorem on this page proves the pseudometric properties and the equivalent linear-feature representation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mahalanobis-distance-is-pseudometric",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $M\\in\\mathbb R^{d\\times d}$ be real symmetric and positive semidefinite, meaning $v^TMv\\ge0$ for every $v\\in\\mathbb R^d$. Define $q_M(x,x')=(x-x')^TM(x-x')$ and $d_M(x,x')=\\sqrt{q_M(x,x')}$. Then there is a real matrix $L\\in\\mathbb R^{d\\times d}$ with $M=L^TL$ and, for all $x,x'\\in\\mathbb R^d$, $d_M(x,x')=\\|Lx-Lx'\\|_2$. Consequently $d_M$ is nonnegative, symmetric, zero on the diagonal, and satisfies the triangle inequality, without asserting separation of distinct points.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $M$ is symmetric, and for every $(a,b)\\in\\mathbb R^2$, $(a,b)M(a,b)^T=a^2\\ge0$; its rank is one, so it is singular. Also $u\\ne v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The difference $u-v=(0,-1)$ satisfies $(u-v)^TM(u-v)=0$, hence $q_M(u,v)=0$ and $d_M(u,v)=\\sqrt0=0$ by [F1].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.2 exhibits zero distance between distinct points, so this valid Mahalanobis pseudometric fails the separation property required of a metric; [F2] confirms its other pseudometric axioms.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two points in R²."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 1.2 compute d_M(u,v)=0 for distinct u and v."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes dimension two and has no one-dimensional parameter case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 1.1 use a rank-one singular positive-semidefinite matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example gives explicit matrices and points without any selection premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The specified rank-one matrix annihilates u-v for two different points, as computed in step 1.2. This exhibits failure of separation for one pseudometric; it does not state a converse characterizing every singular matrix or every metric.",
+            "item_sha256": "0226e2d10f897693c5877bce51bf8cfd6990c4439f1684a89503f15b27c17c05",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The specified rank-one matrix annihilates u-v for two different points, as computed in step 1.2. This exhibits failure of separation for one pseudometric; it does not state a converse characterizing every singular matrix or every metric.",
+            "item_sha256": "0226e2d10f897693c5877bce51bf8cfd6990c4439f1684a89503f15b27c17c05",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rank-one-singular-distance",
+          "claim": "For M=diag(1,0), u=(0,0), v=(0,1), the points differ but q_M(u,v)=0.",
+          "result": "u−v=(0,−1), M(u−v)=(0,0), so q_M=0 and d_M=√0=0."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-fixed-target-lmnn-triplet-conflict": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lmnn-fixed-target-objective",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,C$, a finite labeled sample $(x_i,y_i)_{i=1}^{n}$ with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, and a weight $\\mu\\in[0,1]$. For each $i$, fix in advance an integer $k_i$ with $0\\le k_i\\le|\\{j\\ne i:y_j=y_i\\}|$ and a fixed target-neighbor set $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$ with $|N_i|=k_i$. These target sets do not change with the matrix being optimized. Let $\\mathbb S_+^d$ denote the real symmetric matrices $M$ satisfying $v^TMv\\ge0$ for all $v\\in\\mathbb R^d$, and put $q_M(x,x')=(x-x')^TM(x-x')$. For a real number $z$, let $[z]_+=\\max\\{z,0\\}$. For $M\\in\\mathbb S_+^d$, define\n\n$$\\epsilon_{\\rm pull}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j),\\qquad \\epsilon_{\\rm push}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nand $F_\\mu(M)=(1-\\mu)\\epsilon_{\\rm pull}(M)+\\mu\\epsilon_{\\rm push}(M)$. This is the fixed-target LMNN training surrogate; it is not a test-error or calibrated/generalization-risk quantity. The quantity $q_M$ is a squared distance, while its square root is the Mahalanobis pseudometric.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A scalar matrix $M=[m]$ is feasible exactly when $m\\ge0$. For the designated triplet, $q_M(x_1,x_2)=(0-1)^2m=m$ and $q_M(x_1,x_3)=(0-(-1))^2m=m$, so the hinge argument is $1+m-m=1$ and its value is $[1]_+=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every squared distance and every hinge term in $F_{1/2}$ is nonnegative. The designated hinge contributes $\\tfrac12$, so $F_{1/2}(M)\\ge\\tfrac12$ for every feasible $M$, and this triplet's margin loss cannot be zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes N_3=∅; the empty target set contributes no terms and does not affect the designated triplet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and steps 1.1–1.2 show the designated hinge equals one, so its weighted loss is positive rather than zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example uses d=1 and exactly one designated target-impostor triplet."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses equal squared distances q_M(0,1)=q_M(0,−1)=m, causing the margin cancellation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example fixes μ=1/2 and does not vary an endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example uses explicit scalar matrices and a fixed finite triplet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "For the displayed fixed triplet, equal squared distances cancel and leave hinge value one for every feasible scalar m in step 1.1. This is a concrete obstruction to zero margin loss, rather than a necessary-and-sufficient characterization of all triplet conflicts.",
+            "item_sha256": "e69fc2e1cf9903bb04a7a22bcedd66d14570bfe201b1fbc21612a93114a233cf",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "For the displayed fixed triplet, equal squared distances cancel and leave hinge value one for every feasible scalar m in step 1.1. This is a concrete obstruction to zero margin loss, rather than a necessary-and-sufficient characterization of all triplet conflicts.",
+            "item_sha256": "e69fc2e1cf9903bb04a7a22bcedd66d14570bfe201b1fbc21612a93114a233cf",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "scalar-triplet-hinge",
+          "claim": "For every feasible scalar M=[m], m≥0, the designated hinge remains one.",
+          "result": "q_M(0,1)=m=q_M(0,−1), hence [1+m−m]_+=1 and its μ=1/2 contribution is 1/2."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-one-lmnn-projected-step-is-not-convergence": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lmnn-fixed-target-objective",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,C$, a finite labeled sample $(x_i,y_i)_{i=1}^{n}$ with $x_i\\in\\mathbb R^d$ and $y_i\\in\\{1,\\ldots,C\\}$, and a weight $\\mu\\in[0,1]$. For each $i$, fix in advance an integer $k_i$ with $0\\le k_i\\le|\\{j\\ne i:y_j=y_i\\}|$ and a fixed target-neighbor set $N_i\\subseteq\\{j\\ne i:y_j=y_i\\}$ with $|N_i|=k_i$. These target sets do not change with the matrix being optimized. Let $\\mathbb S_+^d$ denote the real symmetric matrices $M$ satisfying $v^TMv\\ge0$ for all $v\\in\\mathbb R^d$, and put $q_M(x,x')=(x-x')^TM(x-x')$. For a real number $z$, let $[z]_+=\\max\\{z,0\\}$. For $M\\in\\mathbb S_+^d$, define\n\n$$\\epsilon_{\\rm pull}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}q_M(x_i,x_j),\\qquad \\epsilon_{\\rm push}(M)=\\sum_{i=1}^{n}\\sum_{j\\in N_i}\\sum_{\\substack{1\\le l\\le n\\\\y_l\\ne y_i}}[1+q_M(x_i,x_j)-q_M(x_i,x_l)]_+,$$\n\nand $F_\\mu(M)=(1-\\mu)\\epsilon_{\\rm pull}(M)+\\mu\\epsilon_{\\rm push}(M)$. This is the fixed-target LMNN training surrogate; it is not a test-error or calibrated/generalization-risk quantity. The quantity $q_M$ is a squared distance, while its square root is the Mahalanobis pseudometric.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lmnn-explicit-subgradient-and-data-bound",
+          "source_section": "Statement",
+          "quote": "Fix the finite labeled sample, fixed target sets, and $\\mu\\in[0,1]$ of the LMNN objective. For each $j\\in N_i$ and each impostor index $l$ with $y_l\\ne y_i$, set $C_{ij}=(x_i-x_j)(x_i-x_j)^T$, $D_{ijl}=C_{ij}-C_{il}$, and $h_{ijl}(M)=1+\\langle M,D_{ijl}\\rangle_F$, where $\\langle A,B\\rangle_F=\\sum_{r,s}A_{rs}B_{rs}$. Define $\\gamma_{ijl}(M)=1$ if $h_{ijl}(M)>0$ and $\\gamma_{ijl}(M)=0$ if $h_{ijl}(M)\\le0$. Put\n\n$$G(M)=(1-\\mu)\\sum_i\\sum_{j\\in N_i}C_{ij}+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\gamma_{ijl}(M)D_{ijl}.$$\n\nFor the convex objective $F_\\mu$ on $\\mathbb S_+^d$, a Frobenius subgradient at $M$ means a symmetric matrix $G$ such that $F_\\mu(N)\\ge F_\\mu(M)+\\langle G,N-M\\rangle_F$ for every $N\\in\\mathbb S_+^d$. Then $G(M)$ is a subgradient at every $M\\in\\mathbb S_+^d$. Moreover, uniformly in $M$,\n\n$$\\|G(M)\\|_F\\le B_{\\rm data}:=(1-\\mu)\\sum_i\\sum_{j\\in N_i}\\|x_i-x_j\\|_2^2+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\bigl(\\|x_i-x_j\\|_2^2+\\|x_i-x_l\\|_2^2\\bigr).$$\n\nAt an exact hinge kink $h_{ijl}(M)=0$, the selected subgradient coefficient is $0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-lmnn-finite-budget-projected-subgradient",
+          "source_section": "Definition",
+          "quote": "Use the finite sample, fixed target sets, weight $\\mu\\in[0,1]$, and objective $F_\\mu$ defined by the LMNN objective item. The inputs are an integer budget $T\\ge1$, an initial matrix $M_0\\in\\mathbb S_+^d$, and positive step sizes $\\eta_0,\\ldots,\\eta_{T-1}$. Let $m=d(d+1)/2$ and use $\\operatorname{svec}:\\mathbb S^d\\to\\mathbb R^m$, the linear isometry that lists the diagonal entries followed by the $\\sqrt2$-scaled upper-triangle entries in lexicographic order. Set $C'=\\operatorname{svec}(\\mathbb S_+^d)$ and $f(z)=F_\\mu(\\operatorname{svec}^{-1}(z))$; this is a nonempty closed convex domain and $f$ is convex.\n\nInitialize $z_0=\\operatorname{svec}(M_0)$. At each $t=0,\\ldots,T-1$, put $M_t=\\operatorname{svec}^{-1}(z_t)$ and compute the Frobenius subgradient\n\n$$G_t=(1-\\mu)\\sum_i\\sum_{j\\in N_i}C_{ij}+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\gamma_{ijl}(M_t)(C_{ij}-C_{il}),$$\n\nwhere $C_{ij}=(x_i-x_j)(x_i-x_j)^T$, $h_{ijl}(M)=1+\\langle M,C_{ij}-C_{il}\\rangle_F$, $\\gamma_{ijl}(M)=1$ when $h_{ijl}(M)>0$, and $\\gamma_{ijl}(M)=0$ when $h_{ijl}(M)\\le0$. Supply the successful oracle response $(f(z_t),\\operatorname{svec}(G_t))$ to the finite-budget projected-subgradient method on $C'$ with step size $\\eta_t$. It updates $z_{t+1}=P_{C'}(z_t-\\eta_t\\operatorname{svec}(G_t))$, where $P_{C'}$ is the unique nearest point in the Euclidean norm. Equivalently, form $A_t=M_t-\\eta_tG_t$, choose an orthogonal eigendecomposition $A_t=U_t\\operatorname{diag}(\\lambda_{t,1},\\ldots,\\lambda_{t,d})U_t^T$, and set\n\n$$M_{t+1}=U_t\\operatorname{diag}\\bigl(\\max\\{\\lambda_{t,1},0\\},\\ldots,\\max\\{\\lambda_{t,d},0\\}\\bigr)U_t^T.$$\n\nAll $T$ oracle calls succeed; the generic method reports budget-exhausted after $T$ updates. The requested final iterate is $M_T$; its status, completed update count, weighted average, and least-index best observed iterate are also defined by the generic method. The explicit spectral-clipping implementation is choice-free. The equivalent abstract Hilbert-projection interface assumes Countable Choice, as in the general closest-point theorem; that axiom branch is retained separately for the conditional analysis. This finite procedure makes no unconditional convergence, optimality, empirical-error, or generalization claim.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a scalar feasible matrix $M=[m]$, $q_M(0,1)=q_M(1,0)=m$. Since the labels agree, there are no impostor terms; hence $F_0([m])=2m$, which is minimized over $m\\ge0$ at $m=0$. Therefore $F_0(M_0)=4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The two pull matrices are both $[1]$, and $\\mu=0$, so the selected subgradient is $G_0=[2]$ by [F2]. The update [F3] clips $M_0-\\eta_0G_0=[2-\\tfrac14\\cdot2]=[\\tfrac32]$ to the PSD cone, leaving $M_1=[\\tfrac32]$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Then $F_0(M_1)=3<4=F_0(M_0)$, but $F_0(M_1)=3>0=F_0([0])$. Thus the step decreases the objective while the finite returned iterate is still suboptimal, so this step supplies no convergence or optimality certificate.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a two-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 1.1 identify M*=[0] as the zero-objective minimizer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example uses exactly one update, T=1, with η_0=1/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example has no differently labelled impostors, so the push sum is empty and μ=0 leaves only the pull term."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes μ=0, an endpoint of the permitted interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the positive scalar update explicitly; PSD projection leaves it unchanged, so no choice is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The computed update from scalar 2 to 3/2 decreases the objective from 4 to 3 but leaves a gap above zero in step 2.1. This single witness refutes a convergence inference; it asserts no equivalence between decrease and any optimizer property.",
+            "item_sha256": "fc176ed8960307a9e2547cf80575d04fd4d3160ed89c43865b2a695f54584376",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/calibration_surrogate_repair",
+            "reason": "The computed update from scalar 2 to 3/2 decreases the objective from 4 to 3 but leaves a gap above zero in step 2.1. This single witness refutes a convergence inference; it asserts no equivalence between decrease and any optimizer property.",
+            "item_sha256": "fc176ed8960307a9e2547cf80575d04fd4d3160ed89c43865b2a695f54584376",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-step-scalar-update",
+          "claim": "With M_0=[2], η_0=1/4 and G_0=[2], the one-step PSD projection returns M_1=[3/2].",
+          "result": "M_0−η_0G_0=[2−(1/4)·2]=[3/2] is already PSD; F_0(M_0)=4 and F_0(M_1)=3>0=F_0([0])."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-24",
+        "notes": "Read all three verification steps and actual objective, explicit subgradient and finite LMNN algorithm. With d=1,n=2, one label, opposite singleton target sets and mu=0, both pull matrices are [1], no impostors exist, F([m])=2m for m>=0 and optimum is m=0. Starting m=2, G=2 and eta=1/4 give positive preprojection m=3/2, so clipping leaves it unchanged. Objective 4 to 3 is strictly decreasing but gap 3 persists. T=1 is admissible; this is a statement about the returned final point, not the generic best-observed point (which is M0 for this budget). No asymptotic failure or generalization claim is made, and no AC is used by explicit scalar clipping. No defect."
+      }
+    }
+  }
+}

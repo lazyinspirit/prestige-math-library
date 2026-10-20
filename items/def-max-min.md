@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-max-min.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -47,8 +48,14 @@ Let $S \subseteq \mathbb{R}$ and $m \in \mathbb{R}$.
 A set has at most one maximum: if $m_1$ and $m_2$ are both maxima then
 $m_1 \in S$ gives $m_1 \le m_2$ and $m_2 \in S$ gives $m_2 \le m_1$, so
 $m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy
-axiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).
+axiom of an ordered field (Ordered field, Complete ordered field (least-upper-bound property)).
 The same argument applies to minima, so we may write $\max S$ and $\min S$.
+
+## Definition references
+
+[[def-ordered-field]]
+
+[[def-complete-ordered-field]]
 
 ## Remarks
 

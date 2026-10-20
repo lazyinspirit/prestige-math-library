@@ -1,0 +1,139 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "67",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "703bad1105e14fb7a01e3002a2a32f3eddd1c559742c4550025d4f79975f1768",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The statement never identifies p_t with Law(X_t). For X_t=X_0+W_t with X_0~N(0,1), q is the Brownian heat kernel and the unrelated p_t=N(1,1+t) satisfies normalization, Chapman–Kolmogorov, the forward heat equations and the stated analytic assumptions. Its proposed reverse drift (1-x)/(1+T-u) is globally Lipschitz on the finite horizon, so the assumed reverse martingale problem is well posed for every initial law. The actual reverse drift is -x/(1+T-u). More directly, for s<t the displayed Bayes kernel has conditional mean ((1+s)/(1+t))*y+(t-s)/(1+t), whereas E[X_s|X_t=y]=((1+s)/(1+t))*y. Step 1.1 therefore has a false premise. Repaired by explicitly requiring P(X_t in A)=integral_A p_t(x)dx at every time, including zero; all existing conclusions and other hypotheses are retained.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2402.07487"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "disposition": "repaired",
+      "post_sha256": "236dade833835d616ab0ff2fabad4117130d6bfaa80a665162d46c174f1a8373",
+      "review_context_sha256": "be4abee16cd323ce646d7e1349f5499651ac60321266c105f515892efd8a2ed0",
+      "reason": "Added the missing actual-marginal hypothesis, which validates the joint-density Bayes calculation in 1.1 and the marginal premise of the F2 identification supplier in 2.1. Checked the complete current proof: compact coordinate/product tests reconstruct the auxiliary drift and bracket; bounded inverse yields ellipticity; stopped finite energy supplies occupation absolute continuity; the q/p positive-mixture argument identifies the reverse path law; predictable inverse-diffusion reconstruction supplies the original matrix orientation and raw-filtration Brownian version. F3 is used only for its unconditional formal adjoint product identity, not its stronger martingale conclusion. AC and the assumed reverse martingale-problem existence/uniqueness remain explicit. The proof body and dependencies are unchanged, and the existing strict contract passes. Corrected the Tang author initial and locator after reading Section 2, Theorem 2.1 and its full heuristic derivation on PDF pp. 4–5; this source is context, not a substitute for the local proof. No diagrams occur or are needed. This is repair-author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2402.07487"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-predictor-corrector-score-sampling"
+  ],
+  "downstream_uses": {
+    "alg-predictor-corrector-score-sampling": "items/alg-predictor-corrector-score-sampling.md, Definition paragraph beginning “Assume the marginal densities p_t” and Definition references first paragraph: the algorithm applies the theorem to the shifted process Xbar_r=X_(epsilon+r), expressly calls pbar_r=p_(epsilon+r) its marginal densities, and initializes from the actual terminal law P_T. Thus the added actual-marginal premise holds, all reverse coefficients and Bayes kernels remain valid, and no item repair or further-hop propagation is necessary. This is a draft frontier consumer in batch 68; retain in the ordinary frontier-owner examination inventory."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "finding": "Positive density solutions to the forward equation need not be the marginal densities of the given process; the shifted Gaussian family invalidates the claimed Bayes conditional law and reverse drift.",
+      "correction": "Explicitly require p_t to be the marginal density of X_t for every t in [0,T].",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2402.07487"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "severity": "nonfatal",
+      "defect_type": "other",
+      "locus": "frontmatter",
+      "finding": "The Tang–Zhao reference incorrectly names Y. Tang and Section 2.2.",
+      "correction": "Use W. Tang, Section 2, Theorem 2.1, equation (2.3), PDF pp. 4–5, retaining the explicit heuristic-proof caveat.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2402.07487"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim_and_conventions": "Reverse time u=T-t; a=sigma sigma^T; reverse drift -b+div(a)+a grad log(p). The density p is now explicitly the actual marginal family of X on the full finite horizon.",
+    "sources_consulted": [
+      {
+        "url": "https://arxiv.org/pdf/2402.07487",
+        "locator": "Author line; Section 2, Theorem 2.1, equation (2.3), complete heuristic derivation and qualifications on PDF pp. 4–5",
+        "establishes": "Uses the actual law density of X and states the reverse drift under suitable conditions; the heuristic derivation supplies no full density or martingale-problem proof."
+      }
+    ],
+    "statement_change": {
+      "before_statement_sha256": "d69a70dc52db3efee0d43004534cba383f5f7c64804b9746ffcf3c6efeb0b3b3",
+      "added_clause": "Assume $p_t$ is the marginal density of $X_t$ for every $t\\in[0,T]$, meaning $P(X_t\\in A)=\\int_A p_t(x)dx$ for every Borel set $A$.",
+      "other_statement_edits": false,
+      "proof_changed": false,
+      "after_statement_sha256": "8c01cbfa0411dfc5f9bfd087c0f4ff9d7122e52b052b27093aa664019f5f28d5"
+    },
+    "owning_metadata": "Read current batch-67 contract, manifest and both pages. No claim mirror or proof derivation is invalidated; dependencies, level, inventory, status and compact frontmatter-only pages remain valid. Existing historical contract risk-review attribution is preserved.",
+    "consumer_inventory": "Searched current items, library pages and articles by exact ID and title. Sole direct item consumer is alg-predictor-corrector-score-sampling; its actual marginal premise and shifted application are sound. The home page merely lists the theorem and has no Markdown body. No outside-frontier or published consumer was found, so no published-consumer-ledger change is proposed.",
+    "outside_scope_alerts": [
+      {
+        "ids": [
+          "thm-anderson-reverse-time-diffusion",
+          "def-reversed-transition-kernels-for-diffusions",
+          "lem-reversed-kernels-and-generator-identity",
+          "def-bayes-reversed-gaussian-smoothing-kernels",
+          "lem-reversed-smoothing-generator-and-martingale"
+        ],
+        "finding": "The Step-4 digest reports the same Tang author/Section 2.2 locator error outside this item. The current Bayes-kernel definition and generic generator lemma were opened and retain that error. Route bibliographic maintenance to their owners; the other three carriers were not reopened here. No outside item was edited."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-markov-diffusion-reversal-by-bayes-kernels.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-markov-diffusion-reversal-by-bayes-kernels.md --json",
+        "exit_code": 0,
+        "result": "1 item checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-67.proof-contracts.json --strict --items thm-markov-diffusion-reversal-by-bayes-kernels --json",
+        "exit_code": 0,
+        "result": "ok true; scoped item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-markov-diffusion-reversal-by-bayes-kernels.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects"
+      }
+    ],
+    "operational_notes": [
+      "CLI discovery: proof-contract --help returned usage (exit 2); precheck --help treated the flag as a filename (exit 1). rendercheck --help started its default corpus scan, so it was interrupted (exit 130); no result from that invocation is claimed. The explicit one-item invocations above are the actual focused checks."
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and schedules ordinary frontier effects, current independent rejudgment and certification; this fatal round cannot be terminal.",
+    "report_validation": "Passed identity/input-hash/exact-tuple/current-item-guard checks. Reversing only the added marginal clause and the two bibliographic edits recovers the assignment before guard and Statement hash exactly; the Proof is byte-identical."
+  }
+}

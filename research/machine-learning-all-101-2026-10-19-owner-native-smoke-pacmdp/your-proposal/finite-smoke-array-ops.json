@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": 82,
+  "operations": [
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-pac-mdp-value-functions",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "one-state gamma-zero deterministic MDP",
+          "inputs": "S={s}, A(s)={a}, gamma=0, reward r(s,a)=1/2, self-transition",
+          "calculation": "T*V(s)=1/2 for all V; the unique fixed point and optimal return are V*(s)=Q*(s,a)=1/2.",
+          "expected": "Bellman formula, contraction, and greedy attainment agree."
+        }
+      ],
+      "after": [
+        {
+          "name": "one-state gamma-zero deterministic MDP",
+          "inputs": "S={s}, A(s)={a}, gamma=0, reward r(s,a)=1/2, self-transition",
+          "calculation": "T*V(s)=1/2 for all V; the unique fixed point and optimal return are V*(s)=Q*(s,a)=1/2.",
+          "expected": "Bellman formula, contraction, and greedy attainment agree.",
+          "check": "ml101-pacmdp-value-functions",
+          "fixture": "one-state-gamma-zero",
+          "asserts": "For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-pac-mdp-adaptive-sample-concentration",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "deterministic one-state sample",
+          "inputs": "S={s}, reward=1/2, self-transition, m=1",
+          "calculation": "The empirical reward equals r and the empirical transition law is (1), so both errors are 0.",
+          "expected": "The fixed-m concentration inequalities hold for every positive tolerance."
+        }
+      ],
+      "after": [
+        {
+          "name": "deterministic one-state sample",
+          "inputs": "S={s}, reward=1/2, self-transition, m=1",
+          "calculation": "The empirical reward equals r and the empirical transition law is (1), so both errors are 0.",
+          "expected": "The fixed-m concentration inequalities hold for every positive tolerance.",
+          "check": "ml101-pacmdp-concentration",
+          "fixture": "deterministic-one-state-sample",
+          "asserts": "$$\\mathbb P\\!\\left(\\left|\\frac1m\\sum_{i=1}^m R_i-r(s,a)\\right|>x\\right)\\le 2e^{-2mx^2}\\qquad(x>0).$$"
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-pac-mdp-value-simulation",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "one-state gamma-zero perturbation",
+          "inputs": "one state/action; gamma=0; r1=1/2; r2=1/2+alpha, 0<=alpha<=1/2",
+          "calculation": "V1=1/2, V2=1/2+alpha, and transition L1 error=0.",
+          "expected": "Value difference alpha equals the stated upper bound."
+        }
+      ],
+      "after": [
+        {
+          "name": "one-state gamma-zero perturbation",
+          "inputs": "one state/action; gamma=0; r1=1/2; r2=1/2+alpha, 0<=alpha<=1/2",
+          "calculation": "V1=1/2, V2=1/2+alpha, and transition L1 error=0.",
+          "expected": "Value difference alpha equals the stated upper bound.",
+          "check": "ml101-pacmdp-value-simulation",
+          "fixture": "one-state-gamma-zero-perturbation",
+          "asserts": "$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$"
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-pac-mdp-escape-event-reduction",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "no-escape one-state optimal controller",
+          "inputs": "gamma=0, one action reward 1, Q=1, K contains the pair, eta=1/8, zeta=0",
+          "calculation": "V=V*=1; model policy value is 1; there are no updates or escapes.",
+          "expected": "N_{1/2}=0 and is below HM."
+        }
+      ],
+      "after": [
+        {
+          "name": "no-escape one-state optimal controller",
+          "inputs": "gamma=0, one action reward 1, Q=1, K contains the pair, eta=1/8, zeta=0",
+          "calculation": "V=V*=1; model policy value is 1; there are no updates or escapes.",
+          "expected": "N_{1/2}=0 and is below HM.",
+          "check": "ml101-pacmdp-escape",
+          "fixture": "no-escape-optimal-controller",
+          "asserts": "Then, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-r-max-empirical-model-accuracy",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "deterministic one-state R-MAX",
+          "inputs": "S=A=1, gamma=0, reward r, admissible U>=r, m>=1",
+          "calculation": "Every sample is (s,r); one sweep returns r after the pair is known.",
+          "expected": "Empirical and true trap models agree exactly."
+        }
+      ],
+      "after": [
+        {
+          "name": "deterministic one-state R-MAX",
+          "inputs": "S=A=1, gamma=0, reward r, admissible U>=r, m>=1",
+          "calculation": "Every sample is (s,r); one sweep returns r after the pair is known.",
+          "expected": "Empirical and true trap models agree exactly.",
+          "check": "ml101-pacmdp-rmax-accuracy",
+          "fixture": "deterministic-one-state-rmax",
+          "asserts": "every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$"
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-delayed-q-learning-optimism-and-update-counts",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "zero-slack one-state update",
+          "inputs": "gamma=0; U(a)=U(b)=V*=1; rewards (1,0); epsilon1=1/4",
+          "calculation": "The first b batch has mean 0 and satisfies 1-0>=2epsilon1, then Q(b)=epsilon1.",
+          "expected": "An update occurs with D(b)=0, covered by the +1 allowance."
+        }
+      ],
+      "after": [
+        {
+          "name": "zero-slack one-state update",
+          "inputs": "gamma=0; U(a)=U(b)=V*=1; rewards (1,0); epsilon1=1/4",
+          "calculation": "The first b batch has mean 0 and satisfies 1-0>=2epsilon1, then Q(b)=epsilon1.",
+          "expected": "An update occurs with D(b)=0, covered by the +1 allowance.",
+          "check": "ml101-pacmdp-delayed-update-count",
+          "fixture": "zero-slack-one-state-update",
+          "asserts": "The additive $1$ in each pair's update allowance is necessary, including when $U(s,a)=V^*(s)$."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-r-max-pac-bound",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "one-state deterministic R-MAX PAC branch",
+          "inputs": "gamma=0, S=A=1, U=Vmax=V*=1, epsilon=1/2, delta=1/2",
+          "calculation": "eta=1/8, E_eta contains the single pair, H=1, and m,M are finite.",
+          "expected": "The finite-instance count bound is defined."
+        }
+      ],
+      "after": [
+        {
+          "name": "one-state deterministic R-MAX PAC branch",
+          "inputs": "gamma=0, S=A=1, U=Vmax=V*=1, epsilon=1/2, delta=1/2",
+          "calculation": "eta=1/8, E_eta contains the single pair, H=1, and m,M are finite.",
+          "expected": "The finite-instance count bound is defined.",
+          "check": "ml101-pacmdp-rmax-pac",
+          "fixture": "one-state-deterministic-pac",
+          "asserts": "Then $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-delayed-q-learning-pac-bound",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "one-state zero-slack PAC branch",
+          "inputs": "gamma=0, S=1, A=2, Vmax=1, epsilon=1/2, delta=1/2, U=(1,1)",
+          "calculation": "eta=1/8, epsilon1=1/24, both gaps are 0, and G=2.",
+          "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive."
+        }
+      ],
+      "after": [
+        {
+          "name": "one-state zero-slack PAC branch",
+          "inputs": "gamma=0, S=1, A=2, Vmax=1, epsilon=1/2, delta=1/2, U=(1,1)",
+          "calculation": "eta=1/8, epsilon1=1/24, both gaps are 0, and G=2.",
+          "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive.",
+          "check": "ml101-pacmdp-delayed-pac",
+          "fixture": "one-state-zero-slack-pac",
+          "asserts": "The additive term remains when all heuristic slacks vanish."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-pac-mdp-nonpermanent-bad-steps",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "n=1 schedule",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); choose b at t=1,3 and a at t=2",
+          "calculation": "V*=1 and continuation values are 0,1,0.",
+          "expected": "For epsilon=1/2, exactly times 1 and 3 are bad."
+        }
+      ],
+      "after": [
+        {
+          "name": "n=1 schedule",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); choose b at t=1,3 and a at t=2",
+          "calculation": "V*=1 and continuation values are 0,1,0.",
+          "expected": "For epsilon=1/2, exactly times 1 and 3 are bad.",
+          "check": "ml101-pacmdp-nonpermanent",
+          "fixture": "n-one-schedule",
+          "asserts": "For $\\epsilon=1/2$, it has exactly $n+1$ bad steps, including one after a good step."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-pac-mdp-inadmissible-heuristic-fails",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "m=1 R-MAX failure",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); U=(0,0); tie order b before a; m=1",
+          "calculation": "After b is known Q(b)=0; unvisited Q(a)=0; tie order still selects b.",
+          "expected": "The behavior stays bad and U(a)<Q*(s,a)."
+        }
+      ],
+      "after": [
+        {
+          "name": "m=1 R-MAX failure",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); U=(0,0); tie order b before a; m=1",
+          "calculation": "After b is known Q(b)=0; unvisited Q(a)=0; tie order still selects b.",
+          "expected": "The behavior stays bad and U(a)<Q*(s,a).",
+          "check": "ml101-pacmdp-inadmissible",
+          "fixture": "m-one-rmax-failure",
+          "asserts": "It observes only $b$, chooses $b$ forever, and is $1/2$-bad at every time."
+        }
+      ]
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-pac-mdp-delayed-q-zero-slack",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "name": "m=1 zero-slack Delayed Q update",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); U=(1,1); tie order b first; m=1; epsilon1=1/4",
+          "calculation": "The first b target is 0; 1>=2epsilon1; Q(b) becomes epsilon1.",
+          "expected": "One zero-slack update occurs before the next action a."
+        }
+      ],
+      "after": [
+        {
+          "name": "m=1 zero-slack Delayed Q update",
+          "inputs": "gamma=0; rewards (a,b)=(1,0); U=(1,1); tie order b first; m=1; epsilon1=1/4",
+          "calculation": "The first b target is 0; 1>=2epsilon1; Q(b) becomes epsilon1.",
+          "expected": "One zero-slack update occurs before the next action a.",
+          "check": "ml101-pacmdp-delayed-zero-slack",
+          "fixture": "m-one-zero-slack-update",
+          "asserts": "Delayed Q-learning selects $b$ for its first $m$ samples and then lowers $Q(s,b)$, even though $\\sum_{s,a}[U(s,a)-V^*(s)]_+=0$."
+        }
+      ]
+    }
+  ],
+  "preservation": "All original smoke objects and their name/inputs/calculation/expected fields retained. Only check/fixture/asserts fields added. All unrelated contract fields and obligations unchanged."
+}

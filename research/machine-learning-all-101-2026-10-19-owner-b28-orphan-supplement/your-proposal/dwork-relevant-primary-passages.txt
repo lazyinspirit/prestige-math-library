@@ -1,0 +1,893 @@
+
+===== PDF PAGE 23 =====
+2.3. Formalizing diﬀerential privacy
+19
+less diﬀerentially private. That is, if an algorithm protects an individ-
+ual’s privacy, then a data analyst cannot increase privacy loss — either
+under the formal deﬁnition or even in any intuitive sense — simply by
+sitting in a corner and thinking about the output of the algorithm. For-
+mally, the composition of a data-independent mapping f with an (ε, δ)-
+diﬀerentially private algorithm M is also (ε, δ) diﬀerentially private:
+Proposition 2.1 (Post-Processing). Let M : N|X| →R be a randomized
+algorithm that is (ε, δ)-diﬀerentially private. Let f : R →R′ be an
+arbitrary randomized mapping. Then f ◦M : N|X| →R′ is (ε, δ)-
+diﬀerentially private.
+Proof. We
+prove
+the
+proposition
+for
+a
+deterministic
+function
+f : R →R′. The result then follows because any randomized mapping
+can be decomposed into a convex combination of deterministic func-
+tions, and a convex combination of diﬀerentially private mechanisms is
+diﬀerentially private.
+Fix any pair of neighboring databases x, y with ∥x −y∥1 ≤1, and
+ﬁx any event S ⊆R′. Let T = {r ∈R : f(r) ∈S}. We then have:
+Pr[f(M(x)) ∈S] = Pr[M(x) ∈T]
+≤exp(ϵ) Pr[M(y) ∈T] + δ
+= exp(ϵ) Pr[f(M(y)) ∈S] + δ
+which was what we wanted.
+It follows immediately from Deﬁnition 2.4 that (ε, 0)-diﬀerential pri-
+vacy composes in a straightforward way: the composition of two (ε, 0)-
+diﬀerentially private mechanisms is (2ε, 0)-diﬀerentially private. More
+generally (Theorem 3.16), “the epsilons and the deltas add up”: the
+composition of k diﬀerentially private mechanisms, where the ith mech-
+anism is (εi, δi)-diﬀerentially private, for 1 ≤i ≤k, is (P
+i εi, P
+i δi)-
+diﬀerentially private.
+Group privacy for (ε, 0)-diﬀerentially private mechanisms also fol-
+lows immediately from Deﬁnition 2.4, with the strength of the privacy
+guarantee drops linearly with the size of the group.
+
+===== PDF PAGE 35 =====
+3.3. The laplace mechanism
+31
+real numbers. One of the important parameters that will determine just
+how accurately we can answer such queries is their ℓ1 sensitivity:
+Deﬁnition 3.1 (ℓ1-sensitivity). The ℓ1-sensitivity of a function f :
+N|X| →Rk is:
+∆f =
+max
+x,y∈N|X|
+∥x−y∥1=1
+∥f(x) −f(y)∥1.
+The ℓ1 sensitivity of a function f captures the magnitude by which
+a single individual’s data can change the function f in the worst case,
+and therefore, intuitively, the uncertainty in the response that we must
+introduce in order to hide the participation of a single individual.
+Indeed, we will formalize this intuition: the sensitivity of a function
+gives an upper bound on how much we must perturb its output to pre-
+serve privacy. One noise distribution naturally lends itself to diﬀerential
+privacy.
+Deﬁnition 3.2 (The Laplace Distribution). The Laplace Distribution
+(centered at 0) with scale b is the distribution with probability density
+function:
+Lap(x|b) = 1
+2b exp
+
+−|x|
+b
+
+.
+The variance of this distribution is σ2 = 2b2. We will sometimes write
+Lap(b) to denote the Laplace distribution with scale b, and will some-
+times abuse notation and write Lap(b) simply to denote a random vari-
+able X ∼Lap(b).
+The Laplace distribution is a symmetric version of the exponential
+distribution.
+We will now deﬁne the Laplace Mechanism. As its name suggests,
+the Laplace mechanism will simply compute f, and perturb each coor-
+dinate with noise drawn from the Laplace distribution. The scale of the
+noise will be calibrated to the sensitivity of f (divided by ε).1
+1Alternately, using Gaussian noise with variance calibrated to ∆f ln(1/δ)/ε,
+one can achieve (ε, δ)-diﬀerential privacy (see Appendix A). Use of the Laplace
+mechanism is cleaner and the two mechanisms behave similarly under composition
+(Theorem 3.20).
+
+===== PDF PAGE 36 =====
+32
+Basic Techniques and Composition Theorems
+Deﬁnition 3.3 (The Laplace Mechanism). Given any function f
+:
+N|X| →Rk, the Laplace mechanism is deﬁned as:
+ML(x, f(·), ε) = f(x) + (Y1, . . . , Yk)
+where Yi are i.i.d. random variables drawn from Lap(∆f/ε).
+Theorem 3.6. The Laplace mechanism preserves (ε, 0)-diﬀerential
+privacy.
+Proof. Let x ∈N|X| and y ∈N|X| be such that ∥x −y∥1 ≤1, and
+let f(·) be some function f : N|X| →Rk. Let px denote the probabil-
+ity density function of ML(x, f, ε) , and let py denote the probability
+density function of ML(y, f, ε). We compare the two at some arbitrary
+point z ∈Rk
+px(z)
+py(z) =
+k
+Y
+i=1
+
+exp(−ε|f(x)i−zi|
+∆f
+)
+exp(−ε|f(y)i−zi|
+∆f
+)
+
+
+=
+k
+Y
+i=1
+exp
+ε(|f(y)i −zi| −|f(x)i −zi|)
+∆f
+
+≤
+k
+Y
+i=1
+exp
+ε|f(x)i −f(y)i|
+∆f
+
+= exp
+ε · ∥f(x) −f(y)∥1
+∆f
+
+≤exp(ε),
+where the ﬁrst inequality follows from the triangle inequality, and
+the last follows from the deﬁnition of sensitivity and the fact that
+∥x −y∥1 ≤1. That px(z)
+py(z) ≥exp(−ε) follows by symmetry.
+Example 3.1 (Counting Queries). Counting queries are queries of the
+form “How many elements in the database satisfy Property P?” We
+will return to these queries again and again, sometimes in this pure
+form, sometimes in fractional form (“What fraction of the elements
+in the databases...?”), sometimes with weights (linear queries), and
+sometimes in slightly more complex forms (e.g., apply h : N|X| →[0, 1]
+to each element in the database and sum the results). Counting is an
+
+===== PDF PAGE 37 =====
+3.3. The laplace mechanism
+33
+extremely powerful primitive. It captures everything learnable in the
+statistical queries learning model, as well as many standard datamining
+tasks and basic statistics. Since the sensitivity of a counting query is 1
+(the addition or deletion of a single individual can change a count by
+at most 1), it is an immediate consequence of Theorem 3.6 that (ε, 0)-
+diﬀerential privacy can be achieved for counting queries by the addition
+of noise scaled to 1/ε, that is, by adding noise drawn from Lap(1/ε).
+The expected distortion, or error, is 1/ε, independent of the size of the
+database.
+A ﬁxed but arbitrary list of m counting queries can be viewed as
+a vector-valued query. Absent any further information about the set
+of queries a worst-case bound on the sensitivity of this vector-valued
+query is m, as a single individual might change every count. In this
+case (ε, 0)-diﬀerential privacy can be achieved by adding noise scaled
+to m/ε to the true answer to each query.
+We sometimes refer to the problem of responding to large numbers
+of (possibly arbitrary) queries as the query release problem.
+Example 3.2 (Histogram Queries). In the special (but common) case in
+which the queries are structurally disjoint we can do much better —
+we don’t necessarily have to let the noise scale with the number of
+queries. An example is the histogram query. In this type of query the
+universe N|X| is partitioned into cells, and the query asks how many
+database elements lie in each of the cells. Because the cells are disjoint,
+the addition or removal of a single database element can aﬀect the
+count in exactly one cell, and the diﬀerence to that cell is bounded
+by 1, so histogram queries have sensitivity 1 and can be answered
+by adding independent draws from Lap(1/ε) to the true count in
+each cell.
+To understand the accuracy of the Laplace mechanism for general
+queries we use the following useful fact:
+Fact 3.7. If Y ∼Lap(b), then:
+Pr[|Y | ≥t · b] = exp(−t).
+
+===== PDF PAGE 42 =====
+38
+Basic Techniques and Composition Theorems
+range argument:
+∆u ≡max
+r∈R
+max
+x,y:∥x−y∥1≤1 |u(x, r) −u(y, r)|.
+The intuition behind the exponential mechanism is to output each pos-
+sible r ∈R with probability proportional to exp(εu(x, r)/∆u) and so
+the privacy loss is approximately:
+ln
+exp(εu(x, r)/∆u)
+exp(εu(y, r)/∆u)
+
+= ε[u(x, r) −u(y, r)]/∆u) ≤ε.
+This intuitive view overlooks some eﬀects of a normalization term which
+arises when an additional person in the database causes the utilities of
+some elements r ∈R to decrease and others to increase. The actual
+mechanism, deﬁned next, reserves half the privacy budget for changes
+in the normalization term.
+Deﬁnition 3.4 (The Exponential Mechanism). The exponential mech-
+anism ME(x, u, R) selects and outputs an element r ∈R with
+probability proportional to exp(εu(x,r)
+2∆u ).
+The exponential mechanism can deﬁne a complex distribution over
+a large arbitrary domain, and so it may not be possible to implement
+the exponential mechanism eﬃciently when the range of u is super-
+polynomially large in the natural parameters of the problem.
+Returning to the pumpkin example, utility for a price p on database
+x is simply the proﬁt obtained when the price is p and the demand curve
+is as described by x. It is important that the range of potential prices
+is independent of the actual bids. Otherwise there would exist a price
+with non-zero weight in one dataset and zero weight in a neighboring
+set, violating diﬀerential privacy.
+Theorem
+3.10. The
+exponential
+mechanism
+preserves
+(ε, 0)-
+diﬀerential privacy.
+Proof. For clarity, we assume the range R of the exponential mecha-
+nism is ﬁnite, but this is not necessary. As in all diﬀerential privacy
+proofs, we consider the ratio of the probability that an instantiation
+
+===== PDF PAGE 43 =====
+3.4. The exponential mechanism
+39
+of the exponential mechanism outputs some element r ∈R on two
+neighboring databases x ∈N|X| and y ∈N|X| (i.e., ∥x −y∥1 ≤1).
+Pr[ME(x, u, R) = r]
+Pr[ME(y, u, R) = r] =
+ 
+exp( εu(x,r)
+2∆u )
+P
+r′∈R exp( εu(x,r′)
+2∆u
+)
+!
+ 
+exp( εu(y,r)
+2∆u )
+P
+r′∈R exp( εu(y,r′)
+2∆u
+)
+!
+=
+ 
+exp(εu(x,r)
+2∆u )
+exp(εu(y,r)
+2∆u )
+!
+·
+
+
+P
+r′∈R exp(εu(y,r′)
+2∆u )
+P
+r′∈R exp(εu(x,r′)
+2∆u )
+
+
+= exp
+ε(u(x, r′) −u(y, r′))
+2∆u
+
+·
+
+
+P
+r′∈R exp(εu(y,r′)
+2∆u )
+P
+r′∈R exp(εu(x,r′)
+2∆u )
+
+
+≤exp
+ε
+2
+
+· exp
+ε
+2
+
+·
+
+
+P
+r′∈R exp(εu(x,r′)
+2∆u )
+P
+r′∈R exp(εu(x,r′)
+2∆u )
+
+
+= exp(ε).
+Similarly, Pr[ME(y,u)=r]
+Pr[ME(x,u)=r] ≥exp(−ε) by symmetry.
+The exponential mechanism can often give strong utility guarantees,
+because it discounts outcomes exponentially quickly as their quality
+score falls oﬀ. For a given database x and a given utility measure u :
+N|X| × R →R, let OPTu(x) = maxr∈R u(x, r) denote the maximum
+utility score of any element r ∈R with respect to database x. We will
+bound the probability that the exponential mechanism returns a “good”
+element of R, where good will be measured in terms of OPTu(x). The
+result is that it will be highly unlikely that the returned element r has
+a utility score that is inferior to OPTu(x) by more than an additive
+factor of O((∆u/ε) log |R|).
+Theorem 3.11. Fixing a database x, let ROPT = {r ∈R : u(x, r) =
+OPTu(x)} denote the set of elements in R which attain utility score
+
+===== PDF PAGE 44 =====
+40
+Basic Techniques and Composition Theorems
+OPTu(x). Then:
+Pr
+
+u(ME(x, u, R)) ≤OPTu(x) −2∆u
+ε
+
+ln
+
+|R|
+|ROPT|
+
++ t
+
+≤e−t
+Proof.
+Pr[u(ME(x, u, R)) ≤c] ≤
+|R| exp(εc/2∆u)
+|ROPT| exp(εOPTu(x)/2∆u)
+=
+|R|
+|ROPT| exp
+ε(c −OPTu(x))
+2∆u
+
+.
+The inequality follows from the observation that each r
+∈
+R
+with u(x, r)
+≤
+c has un-normalized probability mass at most
+exp(εc/2∆u), and hence the entire set of such “bad” elements r has
+total un-normalized probability mass at most |R| exp(εc/2∆u). In
+contrast, we know that there exist at least |ROPT| ≥1 elements
+with u(x, r) = OPTu(x), and hence un-normalized probability mass
+exp(εOPTu(x)/2∆u), and so this is a lower bound on the normalization
+term.
+The theorem follows from plugging in the appropriate value
+for c.
+Since we always have |ROPT| ≥1, we can more commonly make
+use of the following simple corollary:
+Corollary 3.12. Fixing a database x, we have:
+Pr
+
+u(ME(x, u, R)) ≤OPTu(x) −2∆u
+ε
+(ln (|R|) + t)
+
+≤e−t
+As seen in the proofs of Theorem 3.11 and Corollary 3.12, the Expo-
+nential Mechanism can be particularly easy to analyze.
+Example 3.6 (Best of Two). Consider the simple question of determin-
+ing which of exactly two medical conditions A and B is more common.
+Let the two true counts be 0 for condition A and c > 0 for condition B.
+Our notion of utility will be tied to the actual counts, so that conditions
+with bigger counts have higher utility and ∆u = 1. Thus, the utility
+of A is 0 and the utility of B is c. Using the Exponential Mechanism
+
+===== PDF PAGE 47 =====
+3.5. Composition theorems
+43
+Corollary 3.15. Let Mi : N|X| →Ri be an (εi, 0)-diﬀerentially private
+algorithm for i ∈[k]. Then if M[k] : N|X| →Qk
+i=1 Ri is deﬁned to be
+M[k](x) = (M1(x), . . . , Mk(x)), then M[k] is (Pk
+i=1 εi, 0)-diﬀerentially
+private.
+A proof of the generalization of this theorem to (ε, δ)-diﬀerential
+privacy appears in Appendix B:
+Theorem 3.16. Let Mi : N|X| →Ri be an (εi, δi)-diﬀerentially private
+algorithm for i ∈[k]. Then if M[k] : N|X| →Qk
+i=1 Ri is deﬁned to
+be M[k](x) = (M1(x), . . . , Mk(x)), then M[k] is (Pk
+i=1 εi, Pk
+i=1 δi)-
+diﬀerentially private.
+It is a strength of diﬀerential privacy that composition is
+“automatic,” in that the bounds obtained hold without any special
+eﬀort by the database curator.
+3.5.1
+Composition: some technicalities
+In the remainder of this section, we will prove a more sophisticated
+composition theorem. To this end, we will need some deﬁnitions and
+lemmas, rephrasing diﬀerential privacy in terms of distance measures
+between distributions. In the fractional quantities below, if the denom-
+inator is zero, then we deﬁne the value of the fraction to be inﬁnite
+(the numerators will always be positive).
+Deﬁnition
+3.5
+(KL-Divergence). The KL-Divergence, or Relative
+Entropy, between two random variables Y and Z taking values from
+the same domain is deﬁned to be:
+D(Y ∥Z) = Ey∼Y
+
+ln Pr[Y = y]
+Pr[Z = y]
+
+.
+It is known that D(Y ∥Z) ≥0, with equality if and only if Y and
+Z are identically distributed. However, D is not symmetric, does not
+satisfy the triangle inequality, and can even be inﬁnite, speciﬁcally when
+Supp(Y ) is not contained in Supp(Z).
+Deﬁnition 3.6 (Max Divergence). The Max Divergence between two
+random variables Y and Z taking values from the same domain is
+
+===== PDF PAGE 48 =====
+44
+Basic Techniques and Composition Theorems
+deﬁned to be:
+D∞(Y ∥Z) =
+max
+S⊆Supp(Y )
+
+ln Pr[Y ∈S]
+Pr[Z ∈S]
+
+.
+The δ-Approximate Max Divergence between Y and Z is deﬁned to be:
+Dδ
+∞(Y ∥Z) =
+max
+S⊆Supp(Y ):Pr[Y ∈S]≥δ
+
+ln Pr[Y ∈S] −δ
+Pr[Z ∈S]
+
+Remark 3.2. Note that a mechanism M is
+1. ε-diﬀerentially private if and only if on every two neigh-
+boring
+databases
+x
+and
+y,
+D∞(M(x)∥M(y))
+≤
+ε
+and
+D∞(M(y)∥M(x)) ≤ε; and is
+2. (ε, δ)-diﬀerentially private if and only if on every two neigh-
+boring databases x, y: Dδ
+∞(M(x)∥M(y)) ≤ε and Dδ
+∞(M(y)∥
+M(x)) ≤ε.
+One other distance measure that will be useful is the statistical
+distance between two random variables Y and Z, deﬁned as
+∆(Y, Z) def
+= max
+S
+| Pr[Y ∈S] −Pr[Z ∈S]|.
+We say that Y and Z are δ-close if ∆(Y, Z) ≤δ.
+We will use the following reformulations of approximate max-
+divergence in terms of exact max-divergence and statistical distance:
+Lemma 3.17.
+1. Dδ
+∞(Y ∥Z) ≤ε if and only if there exists a random variable Y ′
+such that ∆(Y, Y ′) ≤δ and D∞(Y ′∥Z) ≤ε.
+2. We have both Dδ
+∞(Y ∥Z) ≤ε and Dδ
+∞(Z∥Y ) ≤ε if and only if
+there exist random variables Y ′, Z′ such that ∆(Y, Y ′) ≤δ/(eε +
+1), ∆(Z, Z′) ≤δ/(eε + 1), and D∞(Y ′∥Z′) ≤ε.
+Proof. For Part 1, suppose there exists Y ′ δ-close to Y such that
+D∞(Y ∥Z) ≤ε. Then for every S,
+Pr[Y ∈S] ≤Pr[Y ′ ∈S] + δ ≤eε · Pr[Z ∈S] + δ,
+and thus Dδ
+∞(Y ∥Z) ≤ε.
+
+===== PDF PAGE 49 =====
+3.5. Composition theorems
+45
+Conversely, suppose that Dδ
+∞(Y ∥Z) ≤ε. Let S = {y : Pr[Y = y] >
+eε · Pr[Z = y]}. Then
+X
+y∈S
+(Pr[Y = y] −eε · Pr[Z = y]) = Pr[Y ∈S] −eε · Pr[Z ∈S] ≤δ.
+Moreover, if we let T = {y : Pr[Y = y] < Pr[Z = y]}, then we have
+X
+y∈T
+(Pr[Z = y] −Pr[Y = y]) =
+X
+y /∈T
+(Pr[Y = y] −Pr[Z = y])
+≥
+X
+y∈S
+(Pr[Y = y] −Pr[Z = y])
+≥
+X
+y∈S
+(Pr[Y = y] −eε · Pr[Z = y])/
+Thus, we can obtain Y ′ from Y by lowering the probabilities on S and
+raising the probabilities on T to satisfy:
+1. For all y ∈S, Pr[Y ′ = y] = eε · Pr[Z = y] < Pr[Y = y].
+2. For all y ∈T, Pr[Y = y] ≤Pr[Y ′ = y] ≤Pr[Z = y].
+3. For all y /∈S ∪T, Pr[Y ′ = y] = Pr[Y = y] ≤eε · Pr[Z = y].
+Then D∞(Y ′∥Z) ≤ε by inspection, and
+∆(Y, Y ′) = Pr[Y ∈S] −Pr[Y ′ ∈S] = Pr[Y ∈S] −eε · Pr[Z ∈S] ≤δ.
+We now prove Part 2. Suppose there exist random variables Y ′
+and Z′ as stated. Then, for every set S,
+Pr[Y ∈S] ≤Pr[Y ′ ∈S] +
+δ
+eε + 1
+≤eε · Pr[Z′ ∈S] +
+δ
+eε + 1
+≤eε ·
+
+Pr[Z ∈S] +
+δ
+eε + 1
+
++
+δ
+eε + 1
+= eε · Pr[Z ∈S] + δ.
+Thus Dδ
+∞(Y ∥Z) ≤ε, and by symmetry, Dδ
+∞(Z∥Y ) ≤ε.
+Conversely, given Y
+and Z such that Dδ
+∞(Y ∥Z)
+≤
+ε and
+Dδ
+∞(Z∥Y ) ≤ε, we proceed similarly to Part 1. However, instead of
+simply decreasing the probability mass of Y on S to obtain Y ′ and
+
+===== PDF PAGE 50 =====
+46
+Basic Techniques and Composition Theorems
+eliminate the gap with eε · Z, we also increase the probability mass of
+Z on S. Speciﬁcally, for every y ∈S, we’ll take
+Pr[Y ′ = y] = eε · Pr[Z′ = y]
+=
+eε
+1 + eε · (Pr[Y = y] + Pr[Z = y])
+∈[eε · Pr[Z = y], Pr[Y = y]].
+This also implies that for y ∈S, we have:
+Pr[Y = y] −Pr[Y ′ = y]
+= Pr[Z′ = y] −Pr[Z = y]Pr[Y = y] −eε · Pr[Z = y]
+eε + 1
+,
+and thus
+α def
+=
+X
+y∈S
+ Pr[Y = y] −Pr[Y ′ = y]
+
+=
+X
+y∈S
+ Pr[Z′ = y] −Pr[Z = y]
+
+= Pr[Y ∈S] −eε · Pr[Z ∈S]
+eε + 1
+≤
+δ
+eε + 1.
+Similarly on the set S′ = {y : Pr[Z = y] > eε · Pr[Y = y]}, we can
+decrease the probability mass of Z and increase the probability mass
+of Y by a total of some α′ ≤δ/(eε + 1) so that for every y ∈S′, we
+have Pr[Z′ = y] = eε · Pr[Y ′ = y].
+If α = α′, then we can take Pr[Z′ = y] = Pr[Z = y] and
+Pr[Y ′ = y] = Pr[Y = y] for all y /∈S ∪S′, giving D∞(Y ∥Z) ≤ε
+and ∆(Y, Y ′) = ∆(Z, Z′) = α. If α ̸= α′, say α > α′, then we need to
+still increase the probability mass of Y ′ and decrease the mass of Z′
+by a total of β = α −α′ on points outside of S ∪S′ in order to ensure
+that the probabilities sum to 1. That is, if we try to take the “mass
+functions” Pr[Y ′ = y] and Pr[Z′ = y] as deﬁned above, then while we
+do have the property that for every y, Pr[Y ′ = y] ≤eε · Pr[Z′ = y]
+and Pr[Z′ = y] ≤eε · Pr[Y ′ = y] we also have P
+y Pr[Y ′ = y] = 1 −β
+
+===== PDF PAGE 51 =====
+3.5. Composition theorems
+47
+and P
+y Pr[Z′ = y] = 1 + β. However, this means that if we let
+R = {y : Pr[Y ′ = y] < Pr[Z′ = y]}, then
+X
+y∈R
+ Pr[Z′ = y] −Pr[Y ′ = y]
+ ≥
+X
+y
+ Pr[Z′ = y] −Pr[Y ′ = y]
+ = 2β.
+So we can increase the probability mass of Y ′ on points in R by a total of
+β and decrease the probability mass of Z′ on points in R by a total of β,
+while retaining the property that for all y ∈R, Pr[Y ′ = y] ≤Pr[Z′ = y].
+The resulting Y ′ and Z′ have the properties we want: D∞(Y ′, Z′) ≤ε
+and ∆(Y, Y ′), ∆(Z, Z′) ≤α.
+Lemma
+3.18. Suppose that random variables Y
+and Z
+satisfy
+D∞(Y ∥Z) ≤ε and D∞(Z∥Y ) ≤ε. Then D(Y ∥Z) ≤ε · (eε −1).
+Proof. We know that for any Y and Z it is the case that D(Y ∥Z) ≥0
+(via the “log-sum inequality”), and so it suﬃces to bound D(Y ∥Z) +
+D(Z∥Y ). We get:
+D(Y ∥Z) ≤D(Y ∥Z) + D(Z∥Y )
+=
+X
+y
+Pr[Y = y] ·
+
+ln Pr[Y = y]
+Pr[Z = y] + ln Pr[Z = y]
+Pr[Y = y]
+
++ (Pr[Z = y] −Pr[Y = y]) ·
+
+ln Pr[Z = y]
+Pr[Y = y]
+
+≤
+X
+y
+[0 + |Pr[Z = y] −Pr[Y = y]| · ε]
+= ε ·
+X
+y
+[max{Pr[Y = y], Pr[Z = y]}
+−min{Pr[Y = y], Pr[Z = y]}]
+≤ε ·
+X
+y
+[(eε −1) · min{Pr[Y = y], Pr[Z = y]}]
+≤ε · (eε −1).
+Lemma 3.19 (Azuma’s Inequality). Let C1, . . . , Ck be real-valued ran-
+dom variables such that for every i ∈[k], Pr[|Ci| ≤α] = 1, and for
+
+===== PDF PAGE 52 =====
+48
+Basic Techniques and Composition Theorems
+every (c1, . . . , ci−1) ∈Supp(C1, . . . , Ci−1), we have
+E[Ci|C1 = c1, . . . , Ci−1 = ci−1] ≤β.
+Then for every z > 0, we have
+Pr
+" k
+X
+i=1
+Ci > kβ + z
+√
+k · α
+#
+≤e−z2/2.
+3.5.2
+Advanced composition
+In addition to allowing the parameters to degrade more slowly, we
+would like our theorem to be able to handle more complicated forms of
+composition. However, before we begin, we must discuss what exactly
+we mean by composition. We would like our deﬁnitions to cover the
+following two interesting scenarios:
+1. Repeated use of diﬀerentially private algorithms on the same
+database. This allows both the repeated use of the same
+mechanism multiple times, as well as the modular construction of
+diﬀerentially private algorithms from arbitrary private building
+blocks.
+2. Repeated use of diﬀerentially private algorithms on diﬀerent
+databases that may nevertheless contain information relating to
+the same individual. This allows us to reason about the cumu-
+lative privacy loss of a single individual whose data might be
+spread across multiple data sets, each of which may be used inde-
+pendently in a diﬀerentially private way. Since new databases are
+created all the time, and the adversary may actually inﬂuence the
+makeup of these new databases, this is a fundamentally diﬀerent
+problem than repeatedly querying a single, ﬁxed, database.
+We want to model composition where the adversary can adaptively
+aﬀect the databases being input to future mechanisms, as well as the
+queries to those mechanisms. Let F be a family of database access
+mechanisms. (For example F could be the set of all ε-diﬀerentially
+private mechanisms.) For a probabilistic adversary A, we consider two
+experiments, Experiment 0 and Experiment 1, deﬁned as follows.
+
+===== PDF PAGE 53 =====
+3.5. Composition theorems
+49
+Experiment b for family F and adversary A:
+For i = 1, . . . , k:
+1. A outputs two adjacent databases x0
+i and x1
+i , a mechanism
+Mi ∈F, and parameters wi.
+2. A receives yi ∈R Mi(wi, xi,b).
+We allow the adversary A above to be stateful throughout the exper-
+iment, and thus it may choose the databases, mechanisms, and the
+parameters adaptively depending on the outputs of previous mecha-
+nisms. We deﬁne A’s view of the experiment to be A’s coin tosses and
+all of the mechanism outputs (y1, . . . , yk). (The xj
+i’s, Mi’s, and wi’s
+can all be reconstructed from these.)
+For intuition, consider an adversary who always chooses x0
+i to hold
+Bob’s data and x1
+i to diﬀer only in that Bob’s data are deleted. Then
+experiment 0 can be thought of as the “real world,” where Bob allows
+his data to be used in many data releases, and Experiment 1 as an
+“ideal world,” where the outcomes of these data releases do not depend
+on Bob’s data. Our deﬁnitions of privacy still require these two exper-
+iments to be “close” to each other, in the same way as required by
+the deﬁnitions of diﬀerential privacy. The intuitive guarantee to Bob is
+that the adversary “can’t tell”, given the output of all k mechanisms,
+whether Bob’s data was ever used.
+Deﬁnition 3.7. We say that the family F of database access mecha-
+nisms satisﬁes ε-diﬀerential privacy under k-fold adaptive composition
+if for every adversary A, we have D∞(V 0∥V 1) ≤ε where V b denotes
+the view of A in k-fold Composition Experiment b above.
+(ε, δ)-diﬀerential privacy under k-fold adaptive composition instead
+requires that Dδ
+∞(V 0∥V 1) ≤ε.
+Theorem 3.20 (Advanced Composition). For all ε, δ, δ′ ≥0, the class of
+(ε, δ)-diﬀerentially private mechanisms satisﬁes (ε′, kδ + δ′)-diﬀerential
+privacy under k-fold adaptive composition for:
+ε′ =
+q
+2k ln(1/δ′)ε + kε(eε −1).
+
+===== PDF PAGE 54 =====
+50
+Basic Techniques and Composition Theorems
+Proof. A view of the adversary A consists of a tuple of the form v =
+(r, y1, . . . , yk), where r is the coin tosses of A and y1, . . . , yk are the
+outputs of the mechanisms M1, . . . , Mk. Let
+B = {v : Pr[V 0 = v] > eε′ · Pr[V 1 = v]}.
+We will show that Pr[V 0 ∈B] ≤δ, and hence for every set S, we have
+Pr[V 0 ∈S] ≤Pr[V 0 ∈B] + Pr[V 0 ∈(S \ B)] ≤δ + eε′ · Pr[V 1 ∈S].
+This is equivalent to saying that Dδ
+∞(V 0∥V 1) ≤ε′.
+It remains to show Pr[V 0 ∈B] ≤δ. Let random variable V 0 =
+(R0, Y 0
+1 , . . . , Y 0
+k ) denote the view of A in Experiment 0 and V 1 =
+(R1, Y 1
+1 , . . . , Y 1
+k ) the view of A in Experiment 1. Then for a ﬁxed view
+v = (r, y1, . . . , yk), we have
+ln
+ 
+Pr[V 0 = v]
+Pr[V 1 = v]
+!
+= ln
+ 
+Pr[R0 = r]
+Pr[R1 = r] ·
+k
+Y
+i=1
+Pr[Y 0
+i = yi|R0 = r, Y 0
+1 = y1, . . . , Y 0
+i−1 = yi−1]
+Pr[Y 1
+i = yi|R1 = r, Y 1
+1 = y1, . . . , Y 1
+i−1 = yi−1]
+!
+=
+k
+X
+i=1
+ln
+ 
+Pr[Y 0
+i = yi|R0 = r, Y 0
+1 = y1, . . . , Y 0
+i−1 = yi−1]
+Pr[Y 1
+i = yi|R1 = r, Y 1
+1 = y1, . . . , Y 1
+i−1 = yi−1]
+!
+def
+=
+k
+X
+i=1
+ci(r, y1, . . . , yi).
+Now for every preﬁx (r, y1, . . . , yi−1) we condition on R0 = r, Y 0
+1 =
+y1, . . . , Y 0
+i−1
+=
+yi−1, and analyze the expectation and maximum
+possible value of the random variable ci(R0, Y 0
+1 , . . . , Y 0
+i ) = ci(r, y1, . . .,
+yi−1, Y 0
+i ). Once the preﬁx is ﬁxed, the next pair of databases x0
+i and
+x1
+i , the mechanism Mi, and parameter wi output by A are also deter-
+mined (in both Experiment 0 and 1). Thus Y 0
+i is distributed according
+to Mi(wi, x0
+i ). Moreover for any value yi, we have
+ci(r, y1, . . . , yi−1, yi) = ln
+ 
+Pr[Mi(wi, x0
+i ) = yi]
+Pr[Mi(wi, x1
+i ) = yi]
+!
+.
+
+===== PDF PAGE 55 =====
+3.5. Composition theorems
+51
+By ε-diﬀerential privacy this is bounded by ε. We can also reason as
+follows:
+|ci(r, y1, . . . , yi−1, yi)|
+≤max{D∞(Mi(wi, x0
+i )∥Mi(wi, x1
+i )),
+D∞(Mi(wi, x1
+i )∥Mi(wi, x0
+i ))}
+= ε.
+By Lemma 3.18, we have:
+E[ci(R0, Y 0
+1 , . . . , Y 0
+i )|R0 = r, Y 0
+1 = y1, . . . , Y 0
+i−1 = yi−1]
+= D(Mi(wi, x0
+i )∥Mi(wi, x1
+i ))
+≤ε(eε −1).
+Thus we can apply Azuma’s Inequality to the random variables Ci =
+ci(R0, Y 0
+1 , . . . , Y 0
+i ) with α = ε, β = ε·ε0, and z =
+p
+2 ln(1/δ), to deduce
+that
+Pr[V 0 ∈B] = Pr
+"X
+i
+Ci > ε′
+#
+< e−z2/2 = δ,
+as desired.
+To extend the proof to composition of (ε, δ)-diﬀerentially private
+mechanisms, for δ > 0, we use the characterization of approximate max-
+divergence from Lemma 3.17 (Part 2) to reduce the analysis to the same
+situation as in the case of (ε, 0)-indistinguishable sequences. Speciﬁ-
+cally, using Lemma 3.17, Part 2 for each of the diﬀerentially private
+mechanisms selected by the adversary A and the triangle inequality
+for statistical distance, it follows that that V 0 is kδ-close to a random
+variable W = (R, Z1, . . . , Zk) such that for every preﬁx r, y1, . . . , yi−1,
+if we condition on R = R1 = r, Z1 = Y 1
+1 = y1, . . . , Zi−1 = Y 1
+i−1 = yi−1,
+then it holds that D∞(Zi∥Y 1
+i ) ≤ε and D∞(Y 1
+i ∥Zi) ≤ε.
+This suﬃces to show that Dδ′
+∞(W∥V 1) ≤ε′. Since V 0 is kδ-close to
+W, Lemma 3.17, Part 1 gives Dδ′+kδ(V 0∥W) ≤ε′.
+An immediate and useful corollary tells us a safe choice of ε for each
+of k mechanisms if we wish to ensure (ε′, kδ + δ′)-diﬀerential privacy
+for a given ε′, δ′.

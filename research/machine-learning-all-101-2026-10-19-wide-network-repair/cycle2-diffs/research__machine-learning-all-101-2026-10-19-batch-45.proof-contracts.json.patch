@@ -1,0 +1,363 @@
+--- research/machine-learning-all-101-2026-10-19-wide-network-repair/cycle1-frozen/proposed/research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json
+@@ -227,7 +227,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -334,6 +334,15 @@
+             "4.1",
+             "5.1"
+           ]
++        },
++        {
++          "fact": "F7",
++          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
++          "source_section": "Statement",
++          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
++          "uses": [
++            "4.1"
++          ]
+         }
+       ],
+       "derivations": [
+@@ -396,7 +405,7 @@
+         {
+           "id": "step-4-1",
+           "step": "4.1",
+-          "claim": "Suppose a finite-second-moment vector $V^{(h-1)}$ has mean $b^{(h-1)}$ and second-moment matrix $S^{(h-1)}$. Take $G\\sim N_n(0,S^{(h-1)})$ independently of this vector, and put $V^{(h)}=V^{(h-1)}+\\alpha\\sigma(G)$. Finite second moments follow from the growth bound and $(u+v)^2\\le2u^2+2v^2$. Independence gives $EV^{(h)}=b^{(h-1)}+\\alpha\\mu^{(h-1)}$ and $E[V_i^{(h)}V_j^{(h)}]=S_{ij}^{(h-1)}+\\alpha(b_i^{(h-1)}\\mu_j^{(h-1)}+b_j^{(h-1)}\\mu_i^{(h-1)})+\\alpha^2E[\\sigma(G_i)\\sigma(G_j)]=S_{ij}^{(h)}$. This constructs each successive vector through the finitely many layers, by [F6]. Its second-moment matrix and covariance are positive semidefinite by the expectation-of-a-square argument of step 3.2.",
++          "claim": "Suppose a finite-second-moment vector $V^{(h-1)}$ has mean $b^{(h-1)}$ and second-moment matrix $S^{(h-1)}$. Let $\\mu$ be the Borel law of this generally non-Gaussian vector and let $\\nu=N_n(0,S^{(h-1)})$, which exists by [F2]. Both are probability measures and hence sigma-finite. By [F7], on $(\\mathbb R^n\\times\\mathbb R^n,\\mu\\times\\nu)$ the coordinate projections $V$ and $G$ have laws $\\mu$ and $\\nu$ and are independent: for Borel sets $A,B$, the probability of $\\{V\\in A,G\\in B\\}$ is $\\mu(A)\\nu(B)$. Replace $V^{(h-1)}$ by its first-coordinate copy $V$ and put $V^{(h)}=V^{(h-1)}+\\alpha\\sigma(G)$. Finite second moments follow from the growth bound and $(u+v)^2\\le2u^2+2v^2$. Independence gives $EV^{(h)}=b^{(h-1)}+\\alpha\\mu^{(h-1)}$ and $E[V_i^{(h)}V_j^{(h)}]=S_{ij}^{(h-1)}+\\alpha(b_i^{(h-1)}\\mu_j^{(h-1)}+b_j^{(h-1)}\\mu_i^{(h-1)})+\\alpha^2E[\\sigma(G_i)\\sigma(G_j)]=S_{ij}^{(h)}$. This constructs each successive vector through the finitely many layers, by [F6]. Its second-moment matrix and covariance are positive semidefinite by the expectation-of-a-square argument of step 3.2.",
+           "inputs": [
+             "A1",
+             "A2",
+@@ -404,6 +413,7 @@
+             "F2",
+             "F4",
+             "F6",
++            "F7",
+             "step 3.2",
+             "construct",
+             "algebra"
+@@ -478,7 +488,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "2.1"
+           ]
+@@ -536,54 +546,47 @@
+         }
+       ],
+       "routine_steps": [],
+-      "finite_smoke": [
+-        {
+-          "case": "zero residual",
+-          "calculation": "u=y makes the gradient step zero and the first-order remainder zero.",
+-          "result": "The output remains unchanged.",
+-          "checked_in": "Steps 1.1\u20132.1"
+-        }
+-      ],
++      "finite_smoke": [],
+       "boundaries": [
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The output vector and finite parameter vector have positive dimensions."
++          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The Statement covers this boundary: The Statement includes the zero-residual case: the gradient step and first-order remainder vanish."
++          "evidence": "The Statement allows zero individual labels and zero initial loss; the loss proof treats zero loss as stationary. No argument divides by an individual feature or output value."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The Statement covers this boundary: For one observation the Jacobian has one row and the stated chain-rule identity still applies."
++          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The Statement covers this boundary: No invertibility is assumed; a rank-deficient Jacobian still gives the stated update identity."
++          "evidence": "The Statement excludes a zero terminal minimum eigenvalue, but allows singular intermediate Gaussian covariances. The covariance expectation proof extends to correlation endpoints."
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "There is no endpoint parameter."
++          "status": "checked",
++          "evidence": "The Statement assumes 0<delta<1 and strictly positive step size, with its sufficiently small constant; no endpoint confidence or zero-step guarantee is claimed."
+         },
+         {
+           "case": "nonempty-choice",
+-          "status": "not_applicable",
+-          "reason": "The finite-dimensional derivative argument uses no choice principle."
++          "status": "checked",
++          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement is an identity, not a biconditional."
++          "reason": "This is a one-way result, not a biconditional."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement is an identity, not a biconditional."
++          "reason": "This is a one-way result, not a biconditional."
+         }
+       ]
+     },
+@@ -998,7 +1001,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1008,7 +1011,7 @@
+           "fact": "F2",
+           "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
++          "quote": "Assume AC, DC and countable choice. Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -1029,6 +1032,36 @@
+           "source_section": "Statement",
+           "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+           "uses": [
++            "3.1"
++          ]
++        },
++        {
++          "fact": "A1",
++          "source": "def-axiom-of-choice",
++          "source_section": "Definition",
++          "quote": "The **Axiom of Choice** (AC) is the following statement.",
++          "uses": [
++            "1.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "A1",
++          "source": "def-dependent-choice",
++          "source_section": "Definition",
++          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
++          "uses": [
++            "1.1",
++            "3.1"
++          ]
++        },
++        {
++          "fact": "A1",
++          "source": "def-countable-choice",
++          "source_section": "Definition",
++          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
++          "uses": [
++            "1.1",
+             "3.1"
+           ]
+         }
+@@ -1040,6 +1073,7 @@
+           "claim": "The rows $i,j$ of $K^{(0)}$ coincide because $K_{i\\ell}^{(0)}=\\langle x_i,x_\\ell\\rangle=\\langle x_j,x_\\ell\\rangle=K_{j\\ell}^{(0)}$ for every $\\ell$. This is the base case.",
+           "inputs": [
+             "base",
++            "A1",
+             "F1",
+             "given",
+             "algebra"
+@@ -1063,6 +1097,7 @@
+           "step": "3.1",
+           "claim": "For the fixed $H$, let $P(h)$ assert that rows $i,j$ of $K^{(h)}$ coincide for $0\\le h\\le H$. The base case is step 1.1; step 2.1 proves $P(h)$ from $P(h-1)$ for each $1\\le h\\le H$. Applying [F4] by finite induction therefore gives equal terminal rows, including the case $H=1$. Let $v=e_i-e_j\\ne0$. Equal rows and symmetry imply $K^{(H)}v=0$. By [F2]\u2013[F3], all eigenvalues are nonnegative and zero is an eigenvalue, so the smallest eigenvalue is zero. This proves the example and discharges the induction.",
+           "inputs": [
++            "A1",
+             "F2",
+             "F3",
+             "F4",
+@@ -1125,7 +1160,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "2.1",
+             "3.1"
+@@ -1273,72 +1308,47 @@
+         }
+       ],
+       "routine_steps": [],
+-      "finite_smoke": [
+-        {
+-          "case": "n=1",
+-          "calculation": "e=1 and E[e^T Phi Phi^T e]=1.",
+-          "result": "The formula reduces to normalized single-feature variance.",
+-          "checked_in": "Steps 1.1\u20133.1"
+-        }
+-      ],
++      "finite_smoke": [],
+       "boundaries": [
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "The example assumes n>=1 and width m>=1."
++          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+         },
+         {
+           "case": "zero",
+           "status": "checked",
+-          "evidence": "The Example covers this boundary: The common-mode variance is positive because rho>0 in the example."
++          "evidence": "The Statement allows zero individual labels and zero initial loss; the loss proof treats zero loss as stationary. No argument divides by an individual feature or output value."
+         },
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "The Example covers this boundary: For n=1 the expected common-mode expression reduces to one."
++          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+         },
+         {
+           "case": "degenerate",
+           "status": "checked",
+-          "evidence": "The Example covers this boundary: A singular feature matrix is allowed; the conditional Gaussian argument only needs a nonnegative quadratic form."
++          "evidence": "The Statement excludes a zero terminal minimum eigenvalue, but allows singular intermediate Gaussian covariances. The covariance expectation proof extends to correlation endpoints."
+         },
+         {
+           "case": "endpoints",
+-          "status": "not_applicable",
+-          "reason": "The example fixes H=1 and has no limiting endpoint."
++          "status": "checked",
++          "evidence": "The Statement assumes 0<delta<1 and strictly positive step size, with its sufficiently small constant; no endpoint confidence or zero-step guarantee is claimed."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "The Example covers this boundary: AC is explicit for the scalar and multivariate Gaussian-law suppliers."
++          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+         },
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The example gives a one-way probability conclusion."
++          "reason": "This is a one-way result, not a biconditional."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The example gives a one-way probability conclusion."
+-        }
+-      ],
+-      "axioms": [
+-        {
+-          "id": "def-axiom-of-choice",
+-          "uses": [
+-            "1.1",
+-            "3.1"
+-          ],
+-          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+-        },
+-        {
+-          "id": "def-countable-choice",
+-          "uses": [
+-            "2.1",
+-            "3.1"
+-          ],
+-          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
++          "reason": "This is a one-way result, not a biconditional."
+         }
+       ]
+     },
+@@ -1348,7 +1358,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1358,7 +1368,7 @@
+           "fact": "F1",
+           "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
++          "quote": "Assume AC, DC and countable choice. Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+           "uses": [
+             "1.1",
+             "2.1"
+@@ -1377,7 +1387,7 @@
+           "fact": "F3",
+           "source": "lem-du-neighborhood-gram-and-hessian-control",
+           "source_section": "Statement",
+-          "quote": "Use either Du architecture with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
++          "quote": "Fix finite real parameters obeying either Du architecture recurrence, with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1495,7 +1505,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1736,7 +1746,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "3.1",
+             "4.1",
+@@ -1747,7 +1757,7 @@
+           "fact": "F1",
+           "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
++          "quote": "Assume AC, DC and countable choice. Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+           "uses": [
+             "3.1",
+             "4.1",
+@@ -1948,7 +1958,7 @@
+           "fact": "F1",
+           "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+           "source_section": "Definition",
+-          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
++          "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1959,7 +1969,7 @@
+           "fact": "F1",
+           "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+           "source_section": "Statement",
+-          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
++          "quote": "Assume AC, DC and countable choice. Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+           "uses": [
+             "1.1",
+             "2.1",
+@@ -1980,7 +1990,7 @@
+           "fact": "F3",
+           "source": "lem-du-neighborhood-gram-and-hessian-control",
+           "source_section": "Statement",
+-          "quote": "Use either Du architecture with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
++          "quote": "Fix finite real parameters obeying either Du architecture recurrence, with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
+           "uses": [
+             "1.1",
+             "2.1",

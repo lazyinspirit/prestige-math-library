@@ -1,0 +1,221 @@
+{
+  "group": "m",
+  "batches": [
+    "38"
+  ],
+  "pages_read": [
+    "automatic-differentiation-and-backpropagation",
+    "automatic-differentiation-and-backpropagation-examples"
+  ],
+  "items_read": [
+    "alg-backpropagation-through-shared-parameter-recurrence",
+    "thm-shared-parameter-backpropagation-gradient-formula",
+    "ex-checkpointed-reverse-sweep-recomputes-intermediate",
+    "ex-relu-kink-does-not-have-classical-ad-gradient",
+    "ex-shared-weight-neural-backpropagation"
+  ],
+  "conventions": [
+    {
+      "convention": "Parameter and state dimensions are positive; their domains are open. Derivatives are total derivatives, partial derivatives hold the other displayed argument fixed, and transposes are Euclidean adjoints.",
+      "fixed_by": "alg-backpropagation-through-shared-parameter-recurrence",
+      "matters_for": [
+        "thm-shared-parameter-backpropagation-gradient-formula",
+        "ex-shared-weight-neural-backpropagation"
+      ]
+    },
+    {
+      "convention": "Each parameter use contributes to the same accumulator; the direct loss contribution and the parameter-dependent initial-state contribution are both included. T=0 has an empty transition loop and sum.",
+      "fixed_by": "alg-backpropagation-through-shared-parameter-recurrence",
+      "matters_for": [
+        "thm-shared-parameter-backpropagation-gradient-formula",
+        "ex-shared-weight-neural-backpropagation"
+      ]
+    },
+    {
+      "convention": "Piecewise derivatives are used only on a unique strict active branch. A boundary or ambiguous selection returns NONDIFFERENTIABLE and no gradient; this is not a subgradient convention.",
+      "fixed_by": "alg-backpropagation-through-shared-parameter-recurrence",
+      "matters_for": [
+        "thm-shared-parameter-backpropagation-gradient-formula",
+        "ex-relu-kink-does-not-have-classical-ad-gradient"
+      ]
+    },
+    {
+      "convention": "Checkpoint replay uses identical deterministic real-arithmetic maps and checkpoint states. The example uses uniform-block mode with T=2, m=1, hence block length q=2.",
+      "fixed_by": "ex-checkpointed-reverse-sweep-recomputes-intermediate",
+      "matters_for": [
+        "ex-checkpointed-reverse-sweep-recomputes-intermediate"
+      ]
+    },
+    {
+      "convention": "The two network weights are constrained to the same scalar parameter; the input is fixed, activations are identities, biases are zero, and the loss is half the squared output.",
+      "fixed_by": "ex-shared-weight-neural-backpropagation",
+      "matters_for": [
+        "ex-shared-weight-neural-backpropagation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-shared-parameter-backpropagation-gradient-formula",
+      "statement": "For p,q≥1, open parameter and state domains, a nonnegative integer T, and the stated continuously differentiable initial map, transitions and scalar loss on open domains containing the trajectory, set A_t=D_θΦ_t, B_t=D_hΦ_t, λ_T=(D_hℓ)^T and λ_{t−1}=B_t^Tλ_t. The algorithm returns J and ∇_θJ=(D_θℓ)^T+Σ_{t=1}^T A_t^Tλ_t+(Dh_0)^Tλ_0. The sum is empty for T=0. The statement also applies on fixed strict C1 branches and makes no assertion at a branch boundary.",
+      "used_by": [
+        "ex-shared-weight-neural-backpropagation",
+        "lem-fixed-time-lazy-training-stability",
+        "rem-truncated-training-and-exact-hypergradients",
+        "alg-exact-tiled-softmax-attention",
+        "thm-tiled-attention-exactness",
+        "thm-low-rank-adapter-merging-and-gradients"
+      ]
+    },
+    {
+      "id": "alg-backpropagation-through-shared-parameter-recurrence",
+      "statement": "Evaluate and store the finite recurrence, initialize λ_T=(D_hℓ)^T and g=(D_θℓ)^T, then for t=T,…,1 add A_t^Tλ_t to g and set λ_{t−1}=B_t^Tλ_t. Finally add (Dh_0)^Tλ_0 and return (J,g). Undefined maps return DOMAIN_ERROR; piecewise branch boundaries or ambiguous selection return NONDIFFERENTIABLE and no gradient.",
+      "used_by": [
+        "thm-shared-parameter-backpropagation-gradient-formula",
+        "ex-relu-kink-does-not-have-classical-ad-gradient",
+        "ex-shared-weight-neural-backpropagation",
+        "thm-tiled-attention-exactness"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "The total-derivative and open-domain conventions underlying the recurrence and chain rule.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "C1 means total differentiability with continuous derivative matrix.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "used_for": "Finite unrolling, separate repeated parent slots, deterministic tapes and strict-branch diagnostics.",
+      "opened": true
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "used_for": "Reverse initialization, scalar-output seeding and accumulation over every parent slot.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating the recurrence and verifying the checkpointed composition.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "used_for": "The reverse-correctness supplier's prerequisite that the fixed-branch admissible domain is open and its output is C1.",
+      "opened": true
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "used_for": "Identifying the recurrence sweep with the exact scalar-output gradient.",
+      "opened": true
+    },
+    {
+      "id": "alg-checkpointed-reverse-schedules",
+      "used_for": "The exact uniform-block replay instructions with T=2 and m=1.",
+      "opened": true
+    },
+    {
+      "id": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "used_for": "Equality of checkpointed and uncheckpointed terminal values and initial cotangents under deterministic admissible replay.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Product-rule derivations of the square, tied-weight transitions and quadratic loss.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "The sine derivative in the checkpoint example and differentiability of cosine.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+      "used_for": "Continuity of cosine, establishing that sine is C1.",
+      "opened": true
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "used_for": "The ReLU example's specified boundary diagnostic and absence of a returned tangent.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The Definition contains inline hyperlinks at line 27, '([[def-euclidean-linear-map]])', and line 39, 'by [[def-norm-and-normed-space]]'. These interrupt the complete defining section and are not moved into an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-forward-mode-automatic-differentiation",
+      "finding": "The Definition begins at line 24, 'Input a graph from [[def-finite-straight-line-computational-program]], an admissible point'. This hyperlink interrupts the procedure definition; the required immediately following Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-reverse-mode-automatic-differentiation",
+      "finding": "The Definition begins at line 24, 'Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point'. This hyperlink interrupts the procedure definition; the required immediately following Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+      "finding": "The Statement at line 25 says 'transition sequences on a fixed strict branch defined in [[alg-checkpointed-reverse-schedules]], provided every schedule replay'. This inline hyperlink interrupts the complete theorem statement; no immediately following Statement references section separates it from the statement.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "automatic-differentiation-and-backpropagation",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "The tied-weight example uses the supplier's finite layered graph with identity activations and zero biases. Tying its two edge weights is an explicit constraint; no universality conclusion is imported."
+    },
+    {
+      "from": "nonconvex-gradient-descent-and-stationarity",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The page prerequisite is contextual. Its stationarity theorem assumes a C1 objective and a globally Lipschitz gradient directly; it does not claim that backpropagation supplies smoothness or convergence."
+    },
+    {
+      "from": "implicit-bias-of-gradient-training",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "No direct citation of the assigned algorithm or theorem occurs in this page's items. Its separately defined Clarke flow does not reinterpret the batch's strict-branch classical derivative as a boundary subgradient."
+    },
+    {
+      "from": "neural-tangent-kernels-and-lazy-training",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The stability lemma cites exact finite C1 parameter gradients and applies them to a finite network with C2 activation. Scalarizing each output and padding finite layer states supplies the recurrence representation; no branch-boundary derivative is asserted."
+    },
+    {
+      "from": "bilevel-learning-hypergradients-and-implicit-layers",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The finite-recurrence portion of rem-truncated-training-and-exact-hypergradients preserves positive dimensions, open domains, C1 and strict-branch assumptions, the direct loss term, initial-state term and T=0 convention. It distinguishes this derivative from stationary-branch sensitivity."
+    },
+    {
+      "from": "exact-tiled-attention-and-memory-aware-differentiation",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The exactness proof explicitly constructs a smooth scalar row-sum recurrence with shared parameter (Q,K,V), constant initial state and identity terminal loss. Tied maxima are handled through the equivalent smooth dense map, without differentiating the maximum primitive."
+    },
+    {
+      "from": "low-rank-adaptation-and-parameter-update-geometry",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The merging-and-gradients theorem constructs a finite scalar accumulator over the ordered minibatch, retains repeated indices, and invokes shared-parameter accumulation only on successful strict-branch evaluations."
+    },
+    {
+      "from": "preference-learning-and-direct-preference-optimization",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "The page prerequisite is contextual; its actual procedure and work lemma cite the published generic reverse-mode algorithm and correctness theorem. Their policy graphs require C1 neighborhoods or unique strict branches and preserve domain/boundary diagnostics."
+    }
+  ]
+}

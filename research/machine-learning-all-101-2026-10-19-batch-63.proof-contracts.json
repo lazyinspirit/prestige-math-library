@@ -1,0 +1,1221 @@
+{
+  "version": 1,
+  "scope": [
+    "def-integral-probability-metric",
+    "ex-weight-clipping-is-not-exact-lipschitz-enforcement",
+    "thm-wgan-ideal-critic-generator-gradient",
+    "cor-wgan-loss-differentiable-almost-everywhere-under-choice",
+    "fs-pointwise-integrable-generator-constants-imply-locally-lipschitz-wgan-loss",
+    "fs-pointwise-integrable-generator-constants-justify-critic-gradient-exchange"
+  ],
+  "contracts": {
+    "def-integral-probability-metric": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and Definition: The Definition requires a nonempty function class; the empty-class supremum is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and Definition: If P=Q, every integral difference is zero, so the IPM is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and Definition: A class with one integrable test function is allowed and gives that test's absolute integral difference."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Definition: The class containing only the zero function gives IPM zero for every pair; the Definition explicitly makes no separation claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval or parameter endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Definition: The Definition uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supremum of absolute integral differences defines d_F and guarantees symmetry and nonnegativity, while the text expressly withholds separation for arbitrary F. It asserts no equivalence between zero distance and equality of laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The supremum of absolute integral differences defines d_F and guarantees symmetry and nonnegativity, while the text expressly withholds separation for arbitrary F. It asserts no equivalence between zero distance and equality of laws.",
+            "item_sha256": "c67119cf20a35fa6ff0606823ea92d8a4673a975027b4105aa5b07580e467d10",
+            "row_sha256": "dc8d62f75f93fd3aff1aeac35041d9715be9399356cee863afaaf73b3a04f898"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The supremum of absolute integral differences defines d_F and guarantees symmetry and nonnegativity, while the text expressly withholds separation for arbitrary F. It asserts no equivalence between zero distance and equality of laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The supremum of absolute integral differences defines d_F and guarantees symmetry and nonnegativity, while the text expressly withholds separation for arbitrary F. It asserts no equivalence between zero distance and equality of laws.",
+            "item_sha256": "c67119cf20a35fa6ff0606823ea92d8a4673a975027b4105aa5b07580e467d10",
+            "row_sha256": "8ba3dc2cb71c472dfe4a4e3c0ab723f4df8da702e75cd44e3058713f02039bda"
+          }
+        }
+      ]
+    },
+    "thm-wgan-ideal-critic-generator-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integral-probability-metric",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\Sigma)$ be a measurable space, let $P$ and $Q$ be probability measures on it, and let $\\mathcal F$ be a nonempty class of real-valued $\\Sigma$-measurable functions that are integrable under both $P$ and $Q$. The **integral probability metric** induced by $\\mathcal F$ is\n$$d_{\\mathcal F}(P,Q):=\\sup_{f\\in\\mathcal F}\\left|\\int_S f\\,dP-\\int_S f\\,dQ\\right|\\in[0,+\\infty].$$\nIt is nonnegative and symmetric, and it may equal $+\\infty$; no separation property is asserted for an arbitrary class $\\mathcal F$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space. Let $\\mu,\\nu$ be countably additive Borel probability measures on $X$, and fix $x_0\\in X$. Let $\\Pi_X(\\mu,\\nu)$ be the Borel probability measures $\\gamma$ on the product-topology space $X\\times X$ satisfying $\\gamma(A\\times X)=\\mu(A)$ and $\\gamma(X\\times A)=\\nu(A)$ for every Borel set $A\\subseteq X$, and define $W_1^X(\\mu,\\nu)=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)$. Then $\\Pi_X(\\mu,\\nu)$ is nonempty and\n$$W_1^X(\\mu,\\nu)=\\sup\\left\\{\\int_X f\\,d\\mu-\\int_X f\\,d\\nu:\\ f:X\\to\\mathbb R,\\ f(x_0)=0,\\ |f(x)-f(y)|\\le d(x,y)\\text{ for all }x,y\\in X\\right\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a compact metric space. Write $\\mathcal B(X)$ for the sigma-algebra generated by the open sets of its metric topology. A Borel probability measure on $X$ is a countably additive measure on $\\mathcal B(X)$ with total mass one. For Borel probability measures $\\mu,\\nu$ on $X$, let $\\Pi_X(\\mu,\\nu)$ be the set of Borel probability measures $\\gamma$ on $X\\times X$, with its product topology and Borel sigma-algebra, such that for every $A\\in\\mathcal B(X)$,\n$$\\gamma(A\\times X)=\\mu(A),\\qquad \\gamma(X\\times A)=\\nu(A).$$\nDefine\n$$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$\nwhere the infimum is taken in the extended real line and $\\inf\\varnothing=+\\infty$. The integrand is nonnegative and Borel: the triangle inequality and symmetry give\n$$|d(x,y)-d(x',y')|\\le d(x,x')+d(y,y'),$$\nso $(x,y)\\mapsto d(x,y)$ is continuous for the product topology; nonnegativity follows from the metric axioms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of A measurable function between measurable spaces.\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\nThe Borel sigma-algebra of a topological space, the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then\n$\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n(Extended-real-valued measurable functions) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\nClosure properties of measurable functions used by the integral and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n(Real and imaginary parts, complex conjugation, and modulus), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ (The real numbers) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f_n : X \\to \\overline{\\mathbb{R}}$ be measurable for every $n \\in \\mathbb{N}$.\nThen the functions\n\n$$\\sup_n f_n,\\qquad \\inf_n f_n,\\qquad \\limsup_n f_n,\\qquad \\liminf_n f_n$$\n\nare measurable. The set\n\n$$\\{\\, x : \\lim_n f_n(x) \\text{ exists in } \\overline{\\mathbb{R}} \\,\\}$$\n\nis measurable. In particular, if $f_n \\to f$ pointwise, then $f$ is measurable.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F4] and [F6], every $P_\\theta$ is a probability measure. By [F5], $P_\\theta(A)=\\rho(G_\\theta^{-1}(A))$ for every Borel $A\\subseteq X$. If $s=\\sum_{j=1}^m c_j\\mathbf 1_{A_j}$ is nonnegative simple with disjoint Borel sets, [F7]–[F8] give $\\int s\\,dP_\\theta=\\sum_j c_jP_\\theta(A_j)=\\sum_jc_j\\rho(G_\\theta^{-1}(A_j))=\\int s\\circ G_\\theta\\,d\\rho$. For any bounded Borel real $f$, apply [F9] to $f^+$ and $f^-$; their increasing simple approximants are bounded by $\\|f\\|_\\infty$, whose integral is finite under both probability measures. Applying [F10] to the approximants and their compositions gives equality of the positive-part integrals and of the negative-part integrals; [F11] then yields $\\int f\\,dP_\\theta=\\int f(G_\\theta(z))\\,d\\rho(z)$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The zero function belongs to $\\mathcal F_1(X,x_0)$, so this class is nonempty; it is also symmetric under $f\\mapsto-f$, so its supremum of absolute integral differences equals its signed supremum. It is exactly the bounded Borel version of the compact KR test class in [F2]. Hence $V(\\theta)=W_1^X(\\mu,P_\\theta)$ for every $\\theta$, with the coupling-cost convention in [F3].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Fix $\\theta_0$ and its attaining critic, and choose $r>0$ such that the ball $B(\\theta_0,r)$ lies in the envelope neighborhood. Let $E$ be the intersection of its measurable full-measure set with a measurable full-measure set where the composite is Fréchet differentiable. Extend the measurable derivative by zero off $E$. On $E$ its norm is at most $K_{\\theta_0}$, by the envelope and the critic's $1$-Lipschitz inequality, so all coordinates are integrable. Write $R(h,z)=H_{\\theta_0}(\\theta_0+h,z)-H_{\\theta_0}(\\theta_0,z)-D_\\theta H_{\\theta_0}(\\theta_0,z)[h]$. For $j\\ge1$ put $s_j=\\min\\{r/2,1/j\\}$ and let $Q_j(z)$ be zero off $E$ and otherwise the supremum of $|R(q,z)|/\\|q\\|$ over rational $p$-tuples with $0<\\|q\\|<s_j$, including zero among the values. The explicit enumeration and [F13] give measurability; the envelope gives $0\\le Q_j\\le2K_{\\theta_0}$, and pointwise Fréchet differentiability gives $Q_j\\to0$ on $E$. By [F10], $\\int Q_j\\,d\\rho\\to0$. On $E$ the remainder ratio is continuous in nonzero $h$ by the envelope, so rational density [F12] bounds it by $Q_j$ for every real $0<\\|h\\|<s_j$. Therefore $|\\int R(h,z)\\,d\\rho|/\\|h\\|\\le\\int Q_j\\,d\\rho$ for all such $h$, proving the full Fréchet limit without a sequential-criterion choice step. Thus $\\Phi(\\theta)=\\int f_{\\theta_0}\\,d\\mu-\\int H_{\\theta_0}(\\theta,z)\\,d\\rho(z)$ has derivative $-\\int D_\\theta H_{\\theta_0}(\\theta_0,z)\\,d\\rho(z)$.",
+          "inputs": [
+            "given",
+            "F10",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Fix $\\theta_0$ and a ball $B(\\theta_0,r)\\subseteq\\Theta$. Put $s_j=\\min\\{r/2,1/j\\}$. On $Z_0$, let $S_j(z)$ be the supremum of $d(G_{\\theta_0+q}(z),G_{\\theta_0}(z))$ over rational $p$-tuples with $\\|q\\|<s_j$, and set it to zero off $Z_0$. It is measurable by the assumed distance measurability, [F12] and [F13], is bounded by $D$, and tends pointwise to zero by parameter continuity. Thus [F10] gives $\\int S_j\\,d\\rho\\to0$. Parameter continuity and rational density make $S_j$ dominate the same distance for all real increments $\\|h\\|<s_j$ on $Z_0$. For every critic $f$, step 1.1 and its $1$-Lipschitz property give $|\\Delta_{\\theta_0+h}(f)-\\Delta_{\\theta_0}(f)|\\le\\int S_j\\,d\\rho$, where $\\Delta_\\theta(f)=\\int f\\,d\\mu-\\int f\\,dP_\\theta$. The same bound holds for the difference of their absolute values and hence of the two suprema. It follows that $|V(\\theta_0+h)-V(\\theta_0)|\\le\\int S_j\\,d\\rho$ for all $\\|h\\|<s_j$, proving continuity.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "F10",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "Under the common-neighborhood envelope, the same estimate gives $|\\Delta_\\theta(f)-\\Delta_{\\theta'}(f)|\\le\\|\\theta-\\theta'\\|\\int K_{\\theta_0}\\,d\\rho$ for every $f\\in\\mathcal F_1(X,x_0)$ and $\\theta,\\theta'\\in U$. Taking absolute values and then suprema proves the stated local-Lipschitz bound for $V$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "By optimality, $\\Phi(\\theta_0)=V(\\theta_0)$ and $\\Phi(\\theta)\\le V(\\theta)$ for every $\\theta$. Thus $V-\\Phi$ has a local minimum of $0$ at $\\theta_0$. Along every direction $v$, differentiability and the two one-sided difference quotients at this minimum give $D(V-\\Phi)(\\theta_0)[v]=0$; since this holds for every $v$, the derivative of the difference is zero, giving the claimed gradient formula.",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: The Statement assumes a nonempty compact data space and a nonempty normalized test class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: If mu=P_theta, compact KR gives V=0; the gradient formula remains conditional on the stated differentiability and attainment hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: On a singleton compact space every law is identical and V=0; all formula branches remain valid when their local hypotheses hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: A constant generator or identical laws can give V=0; no optimizer uniqueness or derivative is inferred beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Theta is open and no parameter-boundary claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: The dual identification, continuity, local-envelope estimate, and conditional gradient proof are choice-free; the separate a.e. result is in the AC-dependent corollary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has successive sufficient assumptions for continuity, local Lipschitz regularity and an attained-critic gradient formula. Proof 1.3 and 3.1 use pointwise attainment and differentiability; no converse recovers these hypotheses from a gradient identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The Statement has successive sufficient assumptions for continuity, local Lipschitz regularity and an attained-critic gradient formula. Proof 1.3 and 3.1 use pointwise attainment and differentiability; no converse recovers these hypotheses from a gradient identity.",
+            "item_sha256": "8d437ef371206f6c90ca11eface4f0cb1ab3efea4496c2ddda13120cf4454723",
+            "row_sha256": "dcc4f3e4d257ee86c815a6f8900735a3ff4f4c821f0f958bff56ac33ab27ee7e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has successive sufficient assumptions for continuity, local Lipschitz regularity and an attained-critic gradient formula. Proof 1.3 and 3.1 use pointwise attainment and differentiability; no converse recovers these hypotheses from a gradient identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The Statement has successive sufficient assumptions for continuity, local Lipschitz regularity and an attained-critic gradient formula. Proof 1.3 and 3.1 use pointwise attainment and differentiability; no converse recovers these hypotheses from a gradient identity.",
+            "item_sha256": "8d437ef371206f6c90ca11eface4f0cb1ab3efea4496c2ddda13120cf4454723",
+            "row_sha256": "70b0a013b714117f8c51196386b9dbe040fe4a67d405c63e1f3771629eb29690"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Read all six proof steps, all 15 supplier interfaces, and the compact KR supplier proof (finite-net primal/dual comparison, Borel lift, weak duality, epsilon squeeze). Anchoring bounds every critic by D; symmetry converts absolute IPM to signed KR. Step 1.1 derives bounded signed law integration from simple functions and dominated convergence under probability measures. For continuity, the countable rational supremum S_j is measurable, bounded by D, converges to zero on the fixed full-measure continuity set, and controls all real increments by density. For gradient exchange, the one-neighborhood envelope bounds the derivative norm by K and remainder ratios by 2K; the rational suprema Q_j are measurable, tend to zero and control the full Frechet limit. Extending by zero is legitimate on the stated measurable full-measure set. The active fixed critic objective Phi touches V from below; differentiability of both at an interior point forces equal derivatives by the two signs of directional increments. No compact optimizer selection or attainment theorem is smuggled in; attainment and composite differentiability are explicit pointwise hypotheses. Empty Theta is vacuous, singleton X/D=0 gives V=0, all null-set choices are explicit measurable hypotheses; no AC or diagram is needed. Source Appendix C was checked independently; its latent-dependent neighborhoods do not yield the common envelope used here. No defect."
+      }
+    },
+    "cor-wgan-loss-differentiable-almost-everywhere-under-choice": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-wgan-ideal-critic-generator-gradient",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space, fix $x_0\\in X$, and let $D<\\infty$ satisfy $d(x,y)\\le D$ for all $x,y\\in X$. Let $\\mu$ be a Borel probability measure on $X$, let $(Z,\\Sigma,\\rho)$ be a probability space, and let $\\Theta\\subseteq\\mathbb R^p$ be open with $p\\ge1$. For every $\\theta\\in\\Theta$, let $G_\\theta:Z\\to X$ be measurable and define its law by $P_\\theta(B)=\\rho(G_\\theta^{-1}(B))$ for Borel $B\\subseteq X$. Assume $z\\mapsto d(G_\\theta(z),G_{\\theta'}(z))$ is $\\rho$-measurable for every $\\theta,\\theta'\\in\\Theta$, and that there is a measurable set $Z_0\\subseteq Z$ with $\\rho(Z_0)=1$ on which $\\theta\\mapsto G_\\theta(z)$ is continuous. Let $\\mathcal F_1(X,x_0)$ be the class of bounded Borel functions $f:X\\to\\mathbb R$ satisfying $f(x_0)=0$ and $|f(x)-f(y)|\\le d(x,y)$ for all $x,y\\in X$, and set $V(\\theta)=d_{\\mathcal F_1(X,x_0)}(\\mu,P_\\theta)$. Then $V(\\theta)=W_1^X(\\mu,P_\\theta)$ and $V$ is continuous on $\\Theta$.\n\nSuppose in addition that for every $\\theta_0\\in\\Theta$ there are an open neighborhood $U\\subseteq\\Theta$ of $\\theta_0$, a measurable $K_{\\theta_0}:Z\\to[0,+\\infty)$ with $\\int K_{\\theta_0}\\,d\\rho<\\infty$, and a measurable full-measure set $Z_{\\theta_0}\\subseteq Z$ such that, for every $z\\in Z_{\\theta_0}$ and every $\\theta,\\theta'\\in U$,\n$$\nd(G_\\theta(z),G_{\\theta'}(z))\\le K_{\\theta_0}(z)\\|\\theta-\\theta'\\|.\n$$\nThen $V$ is locally Lipschitz, with $|V(\\theta)-V(\\theta')|\\le\\|\\theta-\\theta'\\|\\int K_{\\theta_0}\\,d\\rho$ for $\\theta,\\theta'\\in U$. At any such $\\theta_0$ where $V$ is Fréchet differentiable, if the signed dual supremum at $\\theta_0$ is attained by $f_{\\theta_0}\\in\\mathcal F_1(X,x_0)$ and $H_{\\theta_0}(\\theta,z)=f_{\\theta_0}(G_\\theta(z))$ is Fréchet differentiable in $\\theta$ at $\\theta_0$ for $\\rho$-almost every $z$ with measurable derivative, then\n$$\n\\nabla V(\\theta_0)=-\\int_Z\\nabla_\\theta H_{\\theta_0}(\\theta_0,z)\\,d\\rho(z).\n$$\nHere Fréchet differentiability of a scalar function $F$ at $\\theta_0$ means there is a linear map $A$ such that $F(\\theta_0+h)=F(\\theta_0)+A[h]+o(\\|h\\|)$ as $h\\to0$. The attainment and composite-differentiability assumptions are pointwise hypotheses for the gradient formula; compact dual attainment is not asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rademacher-euclidean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every open $U\\subseteq\\mathbb R^n$ and locally Lipschitz map $u:U\\to\\mathbb R^m$ (each point has a neighborhood on which $|u(y)-u(z)|\\le L|y-z|$ for some finite $L$, [[def-lipschitz-holder-contraction]]), $u$ is Frechet differentiable outside a null subset of $U$. Here Frechet differentiability at $x$ means that a linear map $A:\\mathbb R^n\\to\\mathbb R^m$ satisfies $u(x+h)=u(x)+Ah+o(|h|)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], $V$ is a locally Lipschitz real-valued function on the open set $\\Theta\\subseteq\\mathbb R^p$.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Under [A1], apply [F2] to $V$ on $\\Theta$; it is Fréchet differentiable outside a Lebesgue-null subset of $\\Theta$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: If Theta is empty the conclusion is vacuous; otherwise Rademacher applies on the stated open domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: A constant zero value function is differentiable everywhere and satisfies the conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: The theorem applies when p=1 as a special case of finite-dimensional Euclidean Rademacher."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: No nondegeneracy assumption on the value function is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Theta is open; parameter boundary points are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: Full AC is explicitly assumed and is used only through the Rademacher supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Checked both proof steps against the current reviewed common-envelope WGAN theorem and exact Euclidean Rademacher Statement and proof. The supplier conclusion gives a finite real locally Lipschitz scalar V on open Theta in R^p, p>=1, so Rademacher applies with target dimension m=1. Full AC is stated in the corollary and declared as a dependency, matching the supplier use through ACL/Fubini/differentiation/null unions/Poincare and countable rational-ball localization. The source weaker pointwise hypothesis is not substituted for the common envelope. Empty Theta is vacuous; constant/singleton-data cases remain differentiable. The conclusion is Frechet differentiability outside one Lebesgue-null subset; no critic gradient formula is asserted at all such points. No diagrams, repair or outstanding defect."
+      }
+    },
+    "ex-weight-clipping-is-not-exact-lipschitz-enforcement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ (Sigma-algebras) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in A Dirac set function is a probability measure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirac-integral-evaluation",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a set $X$, let $x_0\\in X$, and let\n$\\delta_{x_0}$ be the Dirac probability measure on $(X,\\mathcal A)$. For every\nnonnegative $\\mathcal A$-measurable $f:X\\to[0,+\\infty]$,\n$$\\int_X f\\,d\\delta_{x_0}=f(x_0).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by\n$$\nW_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a compact metric space. Write $\\mathcal B(X)$ for the sigma-algebra generated by the open sets of its metric topology. A Borel probability measure on $X$ is a countably additive measure on $\\mathcal B(X)$ with total mass one. For Borel probability measures $\\mu,\\nu$ on $X$, let $\\Pi_X(\\mu,\\nu)$ be the set of Borel probability measures $\\gamma$ on $X\\times X$, with its product topology and Borel sigma-algebra, such that for every $A\\in\\mathcal B(X)$,\n$$\\gamma(A\\times X)=\\mu(A),\\qquad \\gamma(X\\times A)=\\nu(A).$$\nDefine\n$$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$\nwhere the infimum is taken in the extended real line and $\\inf\\varnothing=+\\infty$. The integrand is nonnegative and Borel: the triangle inequality and symmetry give\n$$|d(x,y)-d(x',y')|\\le d(x,x')+d(y,y'),$$\nso $(x,y)\\mapsto d(x,y)$ is continuous for the product topology; nonnegativity follows from the metric axioms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-probability-metric",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\Sigma)$ be a measurable space, let $P$ and $Q$ be probability measures on it, and let $\\mathcal F$ be a nonempty class of real-valued $\\Sigma$-measurable functions that are integrable under both $P$ and $Q$. The **integral probability metric** induced by $\\mathcal F$ is\n$$d_{\\mathcal F}(P,Q):=\\sup_{f\\in\\mathcal F}\\left|\\int_S f\\,dP-\\int_S f\\,dQ\\right|\\in[0,+\\infty].$$\nIt is nonnegative and symmetric, and it may equal $+\\infty$; no separation property is asserted for an arbitrary class $\\mathcal F$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ (Sigma-algebras). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of Series in the nonnegative extended real line.\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $t>0$, the second row sum $0$ and nonnegative entries force $\\pi_{21}=\\pi_{22}=0$; the first column sum $0$ then forces $\\pi_{11}=0$, and the first row sum $1$ forces $\\pi_{12}=1$, which also gives the required second column sum $1$. This is the unique feasible matrix, and [F3] gives finite-space cost $d(0,t)=t$. For $t=0$, the singleton probability vector has unique coupling $(1)$ and cost $0$.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F1], $P$ and $Q_t$ are Borel probability measures. If $\\gamma$ is any coupling of $P$ and $Q_t$, then $\\gamma(\\{0\\}\\times X)=1$ and $\\gamma(X\\times\\{t\\})=1$. The complement of their intersection is contained in the union of their two null complements, so finite subadditivity from [F6] gives $\\gamma(\\{(0,t)\\})=1$. A probability measure concentrated on the singleton $(0,t)$ equals its Dirac measure there: sets containing $(0,t)$ have mass $1$, and sets omitting it have mass $0$. The Dirac measure at $(0,t)$ has the required marginals, so it is the unique coupling. By [F2] and [F4], its cost is $d(0,t)=t$, so $W_1(P,Q_t)=t$, including $t=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Every function in the specified $1$-Lipschitz class satisfies $|f(0)-f(t)|\\le t$, and $f(x)=x$ belongs to the class and has $|f(0)-f(t)|=t$. By [F5], the IPM is exactly $t$.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "step": "1.4",
+          "claim": "If $t>0$, the mixture $(P+Q_t)/2$ assigns mass $1/2$ to each of $0$ and $t$. The finite sum definition gives $\\operatorname{KL}(P\\|(P+Q_t)/2)=\\log2$ and $\\operatorname{KL}(Q_t\\|(P+Q_t)/2)=\\log2$, so $\\operatorname{JS}(P,Q_t)=\\log2$. If $t=0$, the two laws agree, each KL term is $0$, and the JS value is $0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Under the weight bounds, the slope of $f_{a,b}(x)=abx$ has absolute value at most $c^2$. If $c>1$, the allowed choice $a=b=c$ gives slope $c^2>1$. If $0<c<1$, every allowed slope has magnitude less than $1$, so the function $x$ cannot occur. If $c=1$, every member is linear, while $x^2/2$ is $1$-Lipschitz because $|x^2-y^2|/2=|x-y|(x+y)/2\\le|x-y|$ on $[0,1]$; it is not linear, since its value at $1$ is $1/2$ and at $1/2$ is $1/8$. These three exhaustive cases prove the stated failure of exactness for every $c>0$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: The example fixes the nonempty compact interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: At t=0 the two Dirac laws coincide and W1, IPM, and JS are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: At t=1, the finite-space and compact-space W1 values and the IPM equal one, while JS equals log 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: At t=0 the coupling is the diagonal Dirac measure; at t>0 the marginals force the unique off-diagonal Dirac coupling."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: Both endpoints t=0 and t=1 are evaluated in the Example and Verification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: All calculations are finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–1.4 directly computes the transport, IPM and JS values, then 2.1 treats c>1, c<1 and c=1 to refute exact clipped-family equality. These are witness calculations, not an iff characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–1.4 directly computes the transport, IPM and JS values, then 2.1 treats c>1, c<1 and c=1 to refute exact clipped-family equality. These are witness calculations, not an iff characterization.",
+            "item_sha256": "3f3cbde54b49fe2f6156154a5fdf4f0f766911c95bdab395369936ab262e2c84",
+            "row_sha256": "4d2a1c6f56ff3e08de68aae7ab4aae64eaffb30efcee2da933d98a1ee20d557d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–1.4 directly computes the transport, IPM and JS values, then 2.1 treats c>1, c<1 and c=1 to refute exact clipped-family equality. These are witness calculations, not an iff characterization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–1.4 directly computes the transport, IPM and JS values, then 2.1 treats c>1, c<1 and c=1 to refute exact clipped-family equality. These are witness calculations, not an iff characterization.",
+            "item_sha256": "3f3cbde54b49fe2f6156154a5fdf4f0f766911c95bdab395369936ab262e2c84",
+            "row_sha256": "a9daa949b87bc80cb33dc1b978ac7f27ee92a8b1d3d2b492481ce6769c68ac49"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Reviewed Verification 1.1–2.1 against finite/compact transport definitions, Dirac evaluation, IPM and measure suppliers. Nonnegative zero row/column sums force the unique off-diagonal coupling for t>0; at t=0 the singleton matrix is (1). In the compact space the two full-mass marginal fibers intersect in {(0,t)}, giving the Dirac coupling and cost t. Lipschitz difference bounds the IPM by t and x attains it. The explicitly half-weighted JS convention gives log(2) for disjoint atoms and zero for coincident atoms. All c>0 are covered: c>1 admits slope c^2>1, 0<c<1 excludes slope 1, c=1 excludes x^2/2 despite its Lipschitz bound. No assertion about every network architecture is made. Endpoint t=0 and t=1 and degeneracy checked; no choice or diagrams; no defect."
+      }
+    },
+    "fs-pointwise-integrable-generator-constants-imply-locally-lipschitz-wgan-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a compact metric space. Write $\\mathcal B(X)$ for the sigma-algebra generated by the open sets of its metric topology. A Borel probability measure on $X$ is a countably additive measure on $\\mathcal B(X)$ with total mass one. For Borel probability measures $\\mu,\\nu$ on $X$, let $\\Pi_X(\\mu,\\nu)$ be the set of Borel probability measures $\\gamma$ on $X\\times X$, with its product topology and Borel sigma-algebra, such that for every $A\\in\\mathcal B(X)$,\n$$\\gamma(A\\times X)=\\mu(A),\\qquad \\gamma(X\\times A)=\\nu(A).$$\nDefine\n$$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$\nwhere the infimum is taken in the extended real line and $\\inf\\varnothing=+\\infty$. The integrand is nonnegative and Borel: the triangle inequality and symmetry give\n$$|d(x,y)-d(x',y')|\\le d(x,x')+d(y,y'),$$\nso $(x,y)\\mapsto d(x,y)$ is continuous for the product topology; nonnegativity follows from the metric axioms.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ (Sigma-algebras) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in A Dirac set function is a probability measure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map $$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$ in the sense of A measurable function between measurable spaces.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Its **law** or **distribution** is the set function $$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then $\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "If $g(X)$ is integrable, then $g$ is integrable with respect to $\\mathbb P_X$ and the same formula holds: $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n(Extended-real-valued measurable functions) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-extended-series",
+          "source_section": "Definition",
+          "quote": "Let $a=(a_k)_{k\\in\\mathbb N}$ take values in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$ (The extended real line $\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$, its order, and the arithmetic that is left undefined). Its **partial sums** are the unique sequence $(s_n)$ in $[0,+\\infty]$ satisfying\n\n$$s_0=0,\\qquad s_{n+1}=s_n+a_n.$$\n\nTo apply The recursion theorem with a fixed successor function, use the state space $\\mathbb N\\times[0,+\\infty]$ and the self-map $T(n,s)=(n+1,s+a_n)$, starting from $(0,0)$. Recursion gives a unique state sequence; induction makes its first coordinate $n$, and its second coordinates are exactly the unique $(s_n)$ satisfying the displayed recurrence. Addition of two nonnegative extended reals is always defined, including when either is $+\\infty$. The sequence $(s_n)$ is nondecreasing, and its **nonnegative extended sum** is\n\n$$\\sum_{k=0}^{\\infty}a_k:=\\sup_{n\\in\\mathbb N}s_n\\in[0,+\\infty],$$\n\nwhose existence follows from completeness of the extended real line (Every subset of $\\overline{\\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\\overline{\\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\\mathbb{R}$). More generally, for $m\\in\\mathbb N$,\n\n$$\\sum_{k\\ge m}a_k:=\\sum_{j=0}^{\\infty}a_{m+j}.$$\n\nFinite sums use the same recursion: $\\sum_{k<n}a_k=s_n$, so the empty sum at $n=0$ is $0$. A double sum such as $\\sum_i\\sum_j a_{ij}$ means that the inner nonnegative extended sum is formed first and the resulting nonnegative extended sequence is then summed.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Set $a_n=4^{-n}$, $b_n=64^{-n}$, $p_n=2^{-n}$, $t_n(\\theta)=\\max\\{1-|\\theta-a_n|/b_n,0\\}$ and $u_n(z)=\\max\\{1-4|z-n|,0\\}$. Put $g_\\theta(z)=\\sum_{n\\ge1}u_n(z)t_n(\\theta)$ and $\\rho(A)=\\sum_{n\\ge1}p_n\\mathbf1_A(n)$ for Borel $A$. The nonnegative-series formula is countably additive: for disjoint sets, equality holds first for finite partial sums and then by taking suprema of finite sums of nonnegative terms. By [F1] its total mass is one. Each $g_\\theta$ is Borel because the sum is pointwise a limit of continuous partial sums.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "On every bounded latent neighborhood only finitely many $u_n$ are nonzero, and the supports $[n-1/4,n+1/4]$ are disjoint. Each factor is bounded by one, $u_n$ is $4$-Lipschitz and $t_n$ is $b_n^{-1}$-Lipschitz. Thus each product is jointly Lipschitz with respect to $|\\theta-\\theta'|+|z-z'|$, and the locally finite sum is jointly locally Lipschitz and takes values in $[0,1]$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Write $I_n=[a_n-b_n,a_n+b_n]$. These intervals are pairwise disjoint: $a_n-a_{n+1}=3a_n/4$, while $b_n+b_{n+1}=(65/64)b_n\\le(65/1024)a_n<3a_n/4$. The measurable function $L(\\theta,z)=\\sum_{n\\ge1}(4+b_n^{-1})\\mathbf1_{I_n}(\\theta)\\mathbf1_{(n-1/2,n+1/2)}(z)$ supplies a local joint Lipschitz constant at every $(\\theta,z)$. If $\\theta\\notin I_n$, a small parameter neighborhood misses $I_n$; if $z$ is outside all active latent supports, a small latent neighborhood makes the function zero. At support boundaries the displayed positive constant bounds the piecewise-linear product. At a fixed $\\theta$ at most one $I_n$ is active, so $\\int L(\\theta,z)\\,d\\rho(z)$ is either zero or the finite number $p_n(4+b_n^{-1})$. In particular it is zero at $\\theta=0$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Every coupling of the point mass at zero and the pushforward law is the pushforward under y↦(0,y). Change of variables computes its cost as ∫gθ dρ. For a simple function, the atomic definition of ρ gives ∫s dρ=Σn p_n s(n); increasing simple approximation and monotone convergence extend this to gθ. Since gθ(n)=t_n(θ) and the parameter supports are disjoint, V(θ)=Σn p_n t_n(θ), so V(0)=0 and V(a_n)=p_n.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "A full-measure envelope set contains every integer atom because each has mass p_n>0. Comparing parameters 0 and a_n at atom n forces K(n)≥4^n for all sufficiently large n, so the atomic integral formula gives ∫K dρ≥Σn≥N 2^n=∞, contradicting integrability.",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The data interval and latent probability law are explicitly nonempty; indices start at1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The parameter zero and every local constant at zero are checked explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The parameter dimension is1 and the exact probability mass sums to1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The fixed real target is a Dirac law; no covariance or density nondegeneracy is needed on the target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: Every hat support endpoint is included in the displayed local-constant bounds; zero is an interior parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The witness uses explicit formulas; the density-latent witness declares Countable Choice for its Lebesgue interval supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The exact proposed implication is refuted by verified hypotheses and a failing conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: No converse is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Independently checked Refutation 1.1–5.1 and every direct supplier statement. The locally finite disjoint latent hats give joint local Lipschitzness even at theta=0, since any fixed latent neighborhood meets finitely many hats. Closed parameter intervals include corners; their disjointness and atomic probabilities make L(theta,.) integrable for each theta. The repaired continuous embedding y -> (0,y), Borel pullback and null-complement argument prove existence and uniqueness of the coupling; change of variables plus increasing simple approximation prove its atomic cost. V(0)=0, V(4^-n)=2^-n, so the quotient is 2^n. Every positive-mass integer lies in any full-measure envelope set, forcing divergent sum p_n K(n). No choice is needed; the source bare a.e. assertion is not refuted. Accepted the reader proof elaboration; Statement unchanged, no consumer interface change, no diagrams or remaining defect."
+      }
+    },
+    "fs-pointwise-integrable-generator-constants-justify-critic-gradient-exchange": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets (Finite, countably infinite, countable, uncountable) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then $$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\nThe indefinite integral of a nonnegative measurable function is a measure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a compact metric space. Write $\\mathcal B(X)$ for the sigma-algebra generated by the open sets of its metric topology. A Borel probability measure on $X$ is a countably additive measure on $\\mathcal B(X)$ with total mass one. For Borel probability measures $\\mu,\\nu$ on $X$, let $\\Pi_X(\\mu,\\nu)$ be the set of Borel probability measures $\\gamma$ on $X\\times X$, with its product topology and Borel sigma-algebra, such that for every $A\\in\\mathcal B(X)$,\n$$\\gamma(A\\times X)=\\mu(A),\\qquad \\gamma(X\\times A)=\\nu(A).$$\nDefine\n$$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$\nwhere the infimum is taken in the extended real line and $\\inf\\varnothing=+\\infty$. The integrand is nonnegative and Borel: the triangle inequality and symmetry give\n$$|d(x,y)-d(x',y')|\\le d(x,x')+d(y,y'),$$\nso $(x,y)\\mapsto d(x,y)$ is continuous for the product topology; nonnegativity follows from the metric axioms.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ (Sigma-algebras) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in A Dirac set function is a probability measure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space. Let $\\mu,\\nu$ be countably additive Borel probability measures on $X$, and fix $x_0\\in X$. Let $\\Pi_X(\\mu,\\nu)$ be the Borel probability measures $\\gamma$ on the product-topology space $X\\times X$ satisfying $\\gamma(A\\times X)=\\mu(A)$ and $\\gamma(X\\times A)=\\nu(A)$ for every Borel set $A\\subseteq X$, and define $W_1^X(\\mu,\\nu)=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)$. Then $\\Pi_X(\\mu,\\nu)$ is nonempty and\n$$W_1^X(\\mu,\\nu)=\\sup\\left\\{\\int_X f\\,d\\mu-\\int_X f\\,d\\nu:\\ f:X\\to\\mathbb R,\\ f(x_0)=0,\\ |f(x)-f(y)|\\le d(x,y)\\text{ for all }x,y\\in X\\right\\}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map $$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$ in the sense of A measurable function between measurable spaces.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Its **law** or **distribution** is the set function $$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then $\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "If $g(X)$ is integrable, then $g$ is integrable with respect to $\\mathbb P_X$ and the same formula holds: $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then $$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A measurable function\n$s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$\n(Extended-real-valued measurable functions) is a\n**nonnegative simple measurable function** when it has finite range.\n\nEquivalently, there are pairwise disjoint measurable sets\n$E_1,\\dots,E_m\\in\\mathcal A$ and coefficients $c_1,\\dots,c_m\\in[0,+\\infty)$\nsuch that\n$$s=\\sum_{j=1}^m c_j\\chi_{E_j}.$$\nAny such display is a **simple representation** of $s$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n(Nonnegative simple measurable functions) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure (Measures on sigma-algebras) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Set $a_n=4^{-n}$ for $n\\ge0$ and $p_n=2^{-n}$ for $n\\ge1$. Define a nonnegative piecewise-linear hat $\\alpha_n$ on $[0,+\\infty)$: it is zero outside $[a_{n+1},a_{n-1}]$, rises linearly from $0$ at $a_{n+1}$ to $1$ at $a_n$, then falls linearly to $0$ at $a_{n-1}$. On $[a_{n+1},a_n]$ only $\\alpha_n,\\alpha_{n+1}$ are nonzero and their sum is one. Thus $\\sum_{n\\ge1}\\alpha_n(r)=1$ for $0<r\\le1/4$. At each fixed positive $r$ only finitely many hat supports meet it.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Put $B_n=[n-1/8,n+1/8]$ and $q(z)=\\sum_{n\\ge1}4p_n\\mathbf1_{B_n}(z)$. Define $\\rho$ on Borel subsets of $\\mathbb R$ by $\\rho(A)=\\int_Aq\\,d\\lambda$, the restriction to Borel sets of the measure with density $q$. The density is Borel, and [F1]–[F4] give $\\rho(\\mathbb R)=\\sum_n4p_n\\lambda(B_n)=\\sum_np_n=1$. Let $u_n(z)$ be one when $|z-n|\\le1/8$, decrease linearly to zero when $1/8<|z-n|<1/4$, and be zero for $|z-n|\\ge1/4$. It is $8$-Lipschitz; its supports are disjoint, and $u_n=1$ on $B_n$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Set $b_n(\\theta)=\\theta\\alpha_n(|\\theta|)/p_n$ and $g_\\theta(z)=1/2+(1/16)\\sum_nu_n(z)b_n(\\theta)$. Since $|b_n|\\le a_{n-1}/p_n=2^{2-n}\\le2$ and at most one latent support is active, $3/8\\le g\\le5/8$. Each $b_n$ is continuous piecewise quadratic with compact support and bounded one-sided slopes, hence globally Lipschitz. More explicitly $|\\alpha_n'|\\le4/(3a_n)$ and $|\\theta|\\le4a_n$ on its support, so $|b_n'|\\le(1+16/3)/p_n=19/(3p_n)$ wherever the derivative exists; subdivision at finitely many corners gives this bound for all differences. Local finiteness in $z$ then proves joint local Lipschitzness of $g$ and Borel measurability of every section.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "A valid measurable local joint constant is $L(\\theta,z)=\\sum_n M_n\\mathbf1_{[a_{n+1},a_{n-1}]}(|\\theta|)\\mathbf1_{(n-1/2,n+1/2)}(z)$, with $M_n=(16+19/(3p_n))/16$: the two product terms are bounded using $|b_n|\\le2$, the $8$-Lipschitz $u_n$, and the bound in step 2.1. At any fixed nonzero $\\theta$ only finitely many parameter supports are active, so $\\int L(\\theta,z)\\,d\\rho<\\infty$. At $\\theta=0$ every $b_n$ vanishes on a neighborhood of zero, so for each fixed $z$ the locally finite sum is constant in a neighborhood of $(0,z)$; take $L(0,z)=0$. At latent or parameter support boundaries the displayed positive constants apply whenever needed, and outside the closed active supports a neighborhood has zero variation. Thus the original pointwise-local condition holds at every parameter.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "The density formula reduces ∫gθ dρ to ∫gθq dλ. The finite truncations q_N=Σn≤N 4p_n1_{B_n} give simple products with integrals Σn≤N p_n c_n(θ); monotone convergence yields Σn p_n c_n(θ)=1/2+(1/16)Σn p_n b_n(θ), and the hat partition makes this 1/2+θ/16 for 0<|θ|≤1/4, with value 1/2 at zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The map y↦(0,y) pushes Pθ to a coupling with δ0. Every coupling is concentrated on {0}×X and its second marginal fixes its mass there, so the coupling is unique. Change of variables computes its cost as ∫gθ dρ; therefore V(θ)=W1(δ0,Pθ)=∫gθ dρ.",
+          "inputs": [
+            "F5",
+            "F8",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Change of variables evaluates the signed objective of f(x)=-x as ∫gθ dρ=V(θ). The compact KR duality therefore makes f an attaining critic. Since gθ(z) is locally constant near zero for each fixed z, the composite derivative at zero is identically zero, while step 3.2 gives V′(0)=1/16.",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "Suppose there were a common-neighborhood generator envelope at zero: an open neighborhood $U$ of zero, a nonnegative measurable $K$ with $\\int K\\,d\\rho<\\infty$, and a measurable set $E$ with $\\rho(E)=1$ such that $|g_\\theta(z)-g_{\\theta'}(z)|\\le K(z)|\\theta-\\theta'|$ for every $z\\in E$ and every $\\theta,\\theta'\\in U$. Since $a_n\\to0$, there is $n_0$ such that $a_n\\in U$ for every $n\\ge n_0$. For every such $n$ and $z\\in B_n\\cap E$, the envelope then gives $K(z)\\ge |g_{a_n}(z)-g_0(z)|/a_n=1/(16p_n)$, because $u_n=1$ on $B_n$ and $\\alpha_n(a_n)=1$. By [F6], $\\rho(B_n\\setminus E)\\le\\rho(E^c)=0$, so $\\rho(B_n\\cap E)=\\rho(B_n)=p_n$ by step 1.2. The sets $B_n\\cap E$ are disjoint and each contributes at least $1/16$ to $\\int K\\,d\\rho$. Summing these nonnegative contributions, using [F2] to pass from finite partial sums to their limit, forces $\\int K\\,d\\rho=\\infty$, a contradiction. The counterexample therefore violates precisely the stronger corrected envelope premise while satisfying the original one.",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The data interval and latent probability law are explicitly nonempty; indices start at1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The parameter zero and every local constant at zero are checked explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The parameter dimension is1 and the exact probability mass sums to1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The fixed real target is a Dirac law; no covariance or density nondegeneracy is needed on the target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: Every hat support endpoint is included in the displayed local-constant bounds; zero is an interior parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The witness uses explicit formulas; the density-latent witness declares Countable Choice for its Lebesgue interval supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: The exact proposed implication is refuted by verified hypotheses and a failing conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: No converse is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-63",
+        "notes": "Independently read Refutation 1.1–6.1, all 19 supplier interfaces, law/change-of-variables and density-integration proofs, and the current compact KR proof. Adjacent hats sum to one for 0<|theta|<=1/4; closed endpoints and theta=0 are treated separately. Each fixed latent neighborhood meets finitely many u_n, hence the parameter accumulation at zero does not destroy joint local Lipschitzness. The coefficient bound |b_n|<=2 and derivative bound 19/(3p_n) validate the stated range and local constants, including all boundaries. Disjoint B_n have length 1/4 and mass p_n, giving total mass one under declared Countable Choice for the box supplier. Nonnegative simple density truncations increase even for negative theta because c_n>=3/8; monotone convergence and density integration therefore give E g_theta=1/2+theta/16 on both sides of zero. The repaired unique coupling and change-of-variables prove V=E g_theta. The normalized critic -x attains the signed dual by KR and has composite derivative identically zero at zero, whereas V prime is 1/16. Full-measure restriction preserves each B_n mass, forcing every common envelope integral to diverge by contributions 1/16 per tail block. Both derivatives exist, and only the original weak hypothesis is refuted. Accepted reader integration/coupling elaborations and renumbering; Statement unchanged, no consumer interface change, no diagrams or remaining defect."
+      }
+    }
+  }
+}

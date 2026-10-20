@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-conditional-expectation-as-an-ae-class.json
   audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
@@ -24,7 +25,21 @@ sources:
 
 Assume AC for the supplied existence theorem. Write $E[X\mid\mathcal G]$ for the unique class in $L^1(\Omega,\mathcal G,P|_{\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.
 
-Existence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.
+Existence is Conditional expectation exists by radon nikodym and uniqueness is Conditional expectation is unique almost surely, applied to Conditional expectation given a sigma algebra. The quotient is The space $L^p(\mu)$ as the quotient by null functions. If $X=X^{\ast}$ almost surely, Two integrable functions are equal almost everywhere exactly when all of their indefinite integrals agree gives identical event integrals, so the output class is independent of the input representative. The The Axiom of Choice assumption is inherited from RN existence.
+
+## Definition references
+
+[[thm-conditional-expectation-exists-by-radon-nikodym]]
+
+[[lem-conditional-expectation-is-unique-almost-surely]]
+
+[[def-conditional-expectation-given-a-sigma-algebra]]
+
+[[def-l-p-space-as-a-quotient-by-null-functions]]
+
+[[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]
+
+[[def-axiom-of-choice]]
 
 ## Source notes
 

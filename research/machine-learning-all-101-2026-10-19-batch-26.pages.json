@@ -1,0 +1,305 @@
+[
+  {
+    "order": 2746,
+    "id": "ml02-causal-pc",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "PC algorithm and Markov-equivalence structure learning",
+    "companion": "ml02-causal-pc-examples",
+    "requires": [
+      "central-limit-theorems",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "markov-kernels-and-markov-chains",
+      "structural-causal-models-dags-and-adjustment",
+      "mixed-effects-and-longitudinal-models"
+    ],
+    "items": [
+      {
+        "id": "def-causal-discovery-oracle-regime",
+        "kind": "definition",
+        "title": "Causally sufficient perfect-oracle discovery regime",
+        "strategy": "definition",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-independent-random-elements",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "def-faithfulness-of-a-dag-model",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-d-separation-in-a-dag",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-cpdag-markov-equivalence-class",
+        "kind": "definition",
+        "title": "DAG Markov equivalence, patterns, and CPDAGs",
+        "strategy": "definition",
+        "deps": [
+          "def-d-separation-in-a-dag"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pc-skeleton-separation",
+        "kind": "lemma",
+        "title": "DAG adjacency is equivalent to having no separating set",
+        "strategy": "direct",
+        "deps": [
+          "def-d-separation-in-a-dag"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-covered-edge-reversal-preserves-d-separation",
+        "kind": "lemma",
+        "title": "Covered edge reversal preserves d-separation",
+        "strategy": "direct",
+        "deps": [
+          "def-ancestral-moral-graph-of-a-dag",
+          "lem-d-separation-ancestral-moral-separation"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $G$ be a finite DAG and let $x\\to y$ be a covered arrow, meaning\n$\\operatorname{pa}_G(y)=\\operatorname{pa}_G(x)\\cup\\{x\\}$. Replacing $x\\to y$\nby $y\\to x$ gives a DAG $G'$ with exactly the same d-separation relations as\n$G$."
+      },
+      {
+        "id": "lem-chordal-components-admit-both-orientations",
+        "kind": "lemma",
+        "title": "Edges of finite chordal graphs admit both collider-free orientations",
+        "strategy": "direct",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "An undirected graph is **chordal** when it has no induced cycle of length at\nleast four. A vertex is **simplicial** when all of its neighbors are pairwise\nadjacent. A **perfect elimination order** is a total order in which the later\nneighbors of each vertex form a clique. For every finite chordal undirected\ngraph $H$ and every edge $\\{u,v\\}$ of $H$, there are acyclic orientations of\nall edges of $H$ with no unshielded collider $a\\to w\\leftarrow b$ with\n$a,b$ nonadjacent, one having $u\\to v$ and another having $v\\to u$."
+      },
+      {
+        "id": "def-gaussian-partial-correlation",
+        "kind": "definition",
+        "title": "Gaussian partial correlation",
+        "strategy": "definition",
+        "deps": [
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "thm-gaussian-zero-partial-correlation-is-conditional-independence"
+        ],
+        "statement": "Assume AC. Let $X=(X_1,\\ldots,X_p)$ have a nondegenerate multivariate-normal\nlaw with mean $\\mu$ and positive-definite covariance matrix $\\Sigma$. For\ndistinct indices $i,j$ and $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, define\nthe conditional covariance block\n$$\nK_{ij\\mid S}=\\Sigma_{\\{i,j\\},\\{i,j\\}}-\\Sigma_{\\{i,j\\},S}\\Sigma_{S,S}^{-1}\\Sigma_{S,\\{i,j\\}},\n$$\nwith $K_{ij\\mid\\varnothing}=\\Sigma_{\\{i,j\\},\\{i,j\\}}$. Whenever the diagonal\nentries of this block are positive, the **partial correlation** is\n$$\n\\rho_{ij\\mid S}=\\frac{(K_{ij\\mid S})_{12}}{\\sqrt{(K_{ij\\mid S})_{11}(K_{ij\\mid S})_{22}}}.\n$$\nThe nondegenerate Gaussian case makes the conditioning covariance block\ninvertible; the following theorem proves that $K_{ij\\mid S}$ is positive\ndefinite, so this definition applies to every such $i,j,S$."
+      },
+      {
+        "id": "lem-pc-separating-set-collider",
+        "kind": "lemma",
+        "title": "A separating set identifies an unshielded collider",
+        "strategy": "direct",
+        "deps": [
+          "def-cpdag-markov-equivalence-class",
+          "def-d-separation-in-a-dag"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-dag-markov-equivalence-skeleton-vstructures",
+        "kind": "theorem",
+        "title": "DAG Markov equivalence is determined by skeletons and unshielded colliders",
+        "strategy": "direct",
+        "deps": [
+          "def-cpdag-markov-equivalence-class",
+          "lem-pc-skeleton-separation",
+          "lem-covered-edge-reversal-preserves-d-separation"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-pc-causal-discovery",
+        "kind": "algorithm",
+        "title": "Population PC causal-discovery algorithm",
+        "strategy": "definition",
+        "deps": [
+          "def-causal-discovery-oracle-regime",
+          "def-cpdag-markov-equivalence-class"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "thm-pc-oracle-correctness"
+        ]
+      },
+      {
+        "id": "def-sample-partial-correlation",
+        "kind": "definition",
+        "title": "Sample partial correlation by residualization",
+        "strategy": "definition",
+        "deps": [
+          "def-gaussian-partial-correlation"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-pc-fisher-transform-uniform-concentration"
+        ]
+      },
+      {
+        "id": "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+        "kind": "theorem",
+        "title": "Zero Gaussian partial correlation is conditional independence",
+        "strategy": "direct",
+        "deps": [
+          "def-gaussian-partial-correlation",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-independent-random-elements",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pc-fisher-transform-uniform-concentration",
+        "kind": "lemma",
+        "title": "Uniform concentration of Gaussian sample partial correlations",
+        "strategy": "direct",
+        "deps": [
+          "def-sample-partial-correlation",
+          "def-gaussian-partial-correlation",
+          "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix $0\\le M<1$. There are constants $c_M>0$ and $C_M<\\infty$ such that the\nfollowing holds. Let $X^{(1)},\\ldots,X^{(n)}$ be independent observations from\na nondegenerate Gaussian law, and let $i,j,S$ be as in the definitions of\npopulation and sample partial correlation. Suppose\n$|\\rho_{ij\\mid S}|\\le M$ and $n-|S|-3>0$. Then, for $0<t\\le1$,\n$$ \\mathbb P\\!\\left(\\left|g(\\widehat\\rho_{ij\\mid S})-g(\\rho_{ij\\mid S})\\right|>t\\right) \\le C_M\\exp\\!\\left(-c_M(n-|S|-1)t^2\\right), $$\nwhere $g(r)=\\tfrac12\\log((1+r)/(1-r))$. The constants do not depend on\n$i,j,S,n$ or the Gaussian mean and covariance beyond the bound $M$."
+      },
+      {
+        "id": "lem-meek-rules-complete-for-cpdag",
+        "kind": "lemma",
+        "title": "The background-free Meek rules complete a CPDAG",
+        "strategy": "direct",
+        "deps": [
+          "alg-pc-causal-discovery",
+          "def-cpdag-markov-equivalence-class",
+          "thm-dag-markov-equivalence-skeleton-vstructures",
+          "lem-chordal-components-admit-both-orientations"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-pc-oracle-correctness",
+        "kind": "theorem",
+        "title": "The PC algorithm recovers the oracle CPDAG",
+        "strategy": "direct",
+        "deps": [
+          "def-causal-discovery-oracle-regime",
+          "def-cpdag-markov-equivalence-class",
+          "alg-pc-causal-discovery",
+          "lem-pc-skeleton-separation",
+          "lem-pc-separating-set-collider",
+          "lem-meek-rules-complete-for-cpdag",
+          "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "def-faithfulness-of-a-dag-model",
+          "def-axiom-of-choice",
+          "def-d-separation-in-a-dag"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume AC and the causally sufficient perfect-oracle discovery regime for a\nfinite observed DAG $G$ and its full-joint law. The population PC algorithm\nwith any fixed vertex order terminates and returns exactly the skeleton of $G$\nand records a d-separating set for every deleted pair. At its\ncollider-orientation stage it orients exactly the unshielded colliders of $G$;\nafter R1–R3 closure it returns the CPDAG for the Markov-equivalence class of\n$G$."
+      },
+      {
+        "id": "thm-pc-high-dimensional-consistency",
+        "kind": "theorem",
+        "title": "High-dimensional consistency of Gaussian PC structure learning",
+        "strategy": "direct",
+        "deps": [
+          "alg-pc-causal-discovery",
+          "def-causal-discovery-oracle-regime",
+          "def-cpdag-markov-equivalence-class",
+          "def-gaussian-partial-correlation",
+          "def-sample-partial-correlation",
+          "lem-pc-fisher-transform-uniform-concentration",
+          "lem-pc-skeleton-separation",
+          "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "thm-pc-oracle-correctness",
+          "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "def-faithfulness-of-a-dag-model",
+          "def-axiom-of-choice",
+          "def-d-separation-in-a-dag"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2747,
+    "id": "ml02-causal-pc-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "PC algorithm and Markov-equivalence structure learning — Examples",
+    "companion": "ml02-causal-pc",
+    "requires": [
+      "ml02-causal-pc"
+    ],
+    "items": [
+      {
+        "id": "ex-pc-chain-versus-collider-separating-sets",
+        "kind": "example",
+        "title": "PC distinguishes a chain from an unshielded collider",
+        "strategy": "direct",
+        "deps": [
+          "alg-pc-causal-discovery",
+          "def-causal-discovery-oracle-regime",
+          "def-cpdag-markov-equivalence-class",
+          "lem-pc-separating-set-collider",
+          "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-recursive-structural-causal-model-and-dag",
+          "def-d-separation-in-a-dag",
+          "def-axiom-of-choice",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-pc-oracle-correctness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-pc-latent-confounding-limitations",
+        "kind": "example",
+        "title": "A hidden common cause is observationally indistinguishable from an edge",
+        "strategy": "direct",
+        "deps": [
+          "alg-pc-causal-discovery",
+          "def-causal-discovery-oracle-regime",
+          "def-recursive-structural-causal-model-and-dag",
+          "def-independent-random-elements",
+          "def-standard-normal-and-normal-laws",
+          "def-multivariate-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "def-cpdag-markov-equivalence-class",
+          "thm-dag-markov-equivalence-skeleton-vstructures",
+          "def-axiom-of-choice",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-pc-oracle-correctness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-pc-markov-equivalent-dags",
+        "kind": "example",
+        "title": "A complete three-vertex skeleton has several equivalent DAGs",
+        "strategy": "direct",
+        "deps": [
+          "alg-pc-causal-discovery",
+          "def-cpdag-markov-equivalence-class",
+          "def-d-separation-in-a-dag",
+          "thm-dag-markov-equivalence-skeleton-vstructures",
+          "lem-meek-rules-complete-for-cpdag",
+          "def-causal-discovery-oracle-regime"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

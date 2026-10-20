@@ -1,0 +1,251 @@
+[
+  {
+    "order": 2996,
+    "id": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Semi-supervised graph propagation and pseudo-labeling limits",
+    "companion": "semi-supervised-graph-propagation-and-pseudolabeling-limits-examples",
+    "requires": [
+      "ml02-spectral-clustering",
+      "prediction-problems-risks-and-empirical-minimization"
+    ],
+    "items": [
+      {
+        "id": "alg-finite-round-confidence-pseudolabeling",
+        "kind": "algorithm",
+        "title": "Finite-round confidence-threshold pseudo-labeling",
+        "statement": "Let $q\\ge2$, let $\\mathcal C=\\{1,\\ldots,q\\}$, and let $(\\mathcal X,d)$ be a finite metric space, meaning $d:\\mathcal X\\times\\mathcal X\\to[0,\\infty)$ is symmetric, $d(x,y)=0$ iff $x=y$, and $d(x,z)\\le d(x,y)+d(y,z)$ for all $x,y,z$. The input is a nonempty ordered list $S_0=((x_i,y_i))_{i=1}^m$ of labeled examples with $y_i\\in\\mathcal C$, a finite ordered set $U_0\\subseteq\\mathcal X\\setminus\\{x_1,\\ldots,x_m\\}$ of unlabeled examples, an integer $k$ with $1\\le k\\le m$, a confidence threshold $\\tau\\in[1/q,1]$, a pseudo-label weight $\\lambda>0$, and a round cap $T\\in\\mathbb N_0$. A true labeled record has weight $1$; a pseudo-labeled record has weight $\\lambda$.\n\nMaintain an ordered training list $R_t$, initially $S_0$, a remaining unlabeled set $U_t$, initially $U_0$, and an initially empty pseudo-label log. To predict at $x\\in U_t$, order all records $(x_i,y_i,w_i)\\in R_t$ by increasing $(d(x,x_i),i)$, where $i$ is their stable record index, and take the first $k$ records $N_t(x)$. For $c\\in\\mathcal C$, put $V_{t,c}(x)=\\sum_{(x_i,y_i,w_i)\\in N_t(x)}w_i\\mathbf 1\\{y_i=c\\}$. Let $\\widehat y_t(x)$ be the smallest class index attaining $\\max_c V_{t,c}(x)$, and define confidence $\\kappa_t(x)=\\max_c V_{t,c}(x)/\\sum_cV_{t,c}(x)$. The denominator is positive because $k\\ge1$ and every record weight is positive.\n\nIf $U_0=\\varnothing$, set status $\\texttt{no-unlabeled-inputs}$ and skip the round loop. Otherwise, for rounds $t=0,\\ldots,T-1$, compute all predictions from the same current list $R_t$. Let $A_t=\\{x\\in U_t:\\kappa_t(x)\\ge\\tau\\}$. If $A_t=\\varnothing$, set status $\\texttt{no-additions}$ and leave the loop. Otherwise append one pseudo-labeled record for each $x\\in A_t$, in the supplied order on $U_0$, using its predicted class and weight $\\lambda$; append $(t,x,\\widehat y_t(x),\\lambda)$ to the pseudo-label log, and remove all points in $A_t$ from $U_t$. A pseudo-label is never revised. If the updated $U_t=\\varnothing$, set status $\\texttt{all-labelled}$ and leave the loop. If all $T$ rounds finish without an earlier stop and points remain in $U_t$, set status $\\texttt{round-cap}$; this includes the case $T=0$.\n\nFor any query $x\\in\\mathcal X$, define the returned classifier by the same nearest-record ordering and weighted vote using the final training list, with the smallest-index vote tie rule. In every case return that classifier, the pseudo-label log, the remaining unlabeled set, and the status. The procedure makes no population-risk or pseudo-label-correctness guarantee.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Definition: specify the finite weighted k-nearest-neighbor learner, deterministic vote and distance ties, confidence, threshold, simultaneous updates, round cap, stable ordering, and no-relabel rule.",
+        "sources": {
+          "references": [
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-real-cholesky-recurrence-computes-factorization",
+        "kind": "lemma",
+        "title": "The real Cholesky recurrence computes the positive-diagonal factor",
+        "statement": "Let $n\\ge1$ and let $M\\in\\mathbb R^{n\\times n}$ be symmetric positive definite, meaning $x^TMx>0$ for every nonzero $x\\in\\mathbb R^n$. Initialize $R$ as the zero $n\\times n$ matrix. For $j=1,\\ldots,n$ in order, set\n$$p_j=M_{jj}-\\sum_{k<j}R_{jk}^2,\\qquad R_{jj}=\\sqrt{p_j},$$\nand then, for $i=j+1,\\ldots,n$ in order, set\n$$R_{ij}=\\frac{M_{ij}-\\sum_{k<j}R_{ik}R_{jk}}{R_{jj}}.$$\nEvery pivot $p_j$ is positive, so the recurrence is well-defined and returns a lower-triangular matrix $R$ with positive diagonal satisfying $M=RR^T$.",
+        "deps": [
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "David Bindel, CS 4220: Numerical Analysis, Blocked LU and Cholesky",
+              "url": "https://www.cs.cornell.edu/courses/cs4220/2026sp/lec/2026-02-09.html"
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §2.9.3",
+              "url": "https://fncbook.com/structure/"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-graph-harmonic-label-extension",
+        "kind": "definition",
+        "title": "Graph-harmonic label extension on a finite weighted graph",
+        "statement": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices lie in the same connected component exactly when a finite path of support edges joins them; connected components include isolated singleton vertices. Let $B\\subseteq V$ be nonempty, put $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. Call the boundary anchored when every connected component meeting $U$ also meets $B$. For $f\\in\\mathbb R^V$ with $f|_B=y_B$, define the Dirichlet graph energy $E(f)=\\tfrac12 f^TLf$. A function is harmonic on $U$ when $(Lf)_u=0$ for every $u\\in U$. A graph-harmonic label extension is any minimizer of $E$ over the affine set of functions with the prescribed boundary values; the definition itself makes no uniqueness assertion.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Definition: state the finite weighted graph conventions, boundary data, componentwise anchoring, energy, and minimizer set without asserting uniqueness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojin Zhu, Zoubin Ghahramani, and John Lafferty, Semi-Supervised Learning Using Gaussian Fields and Harmonic Functions, ICML 2003",
+              "url": "https://mlg.eng.cam.ac.uk/pub/pdf/ZhuGhaLaf03a.pdf"
+            },
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-unlabeled-law-alone-does-not-identify-labels",
+        "kind": "theorem",
+        "title": "The unlabeled marginal alone does not identify labels",
+        "statement": "Let $\\mathcal X$ be a finite nonempty feature set with its discrete sigma-algebra, and let $\\mu:\\mathcal X\\to[0,1]$ satisfy $\\sum_{x\\in\\mathcal X}\\mu(x)=1$. Let $\\mathcal S\\subsetneq\\mathcal X$ be a nonempty set of observed labeled inputs, and choose $x_\\star\\in\\mathcal X\\setminus\\mathcal S$ with $q=\\mu(x_\\star)>0$. Let $h_0,h_1:\\mathcal X\\to\\{0,1\\}$ agree on $\\mathcal X\\setminus\\{x_\\star\\}$ and differ at $x_\\star$. For $j\\in\\{0,1\\}$, let $P_j$ be the joint law assigning mass $\\mu(x)$ to $(x,h_j(x))$. Both laws have the same feature marginal and the same observed labels on $\\mathcal S$. Let $\\mathcal H=\\{g:\\mathcal X\\to\\{0,1\\}\\}$, and let $Q:\\mathcal H\\to[0,1]$ satisfy $\\sum_{g\\in\\mathcal H}Q(g)=1$, so it is a probability vector; take the same $Q$ under both laws, as a predictor rule using their common information must do. For the zero-one population risk\n$$R_{P_j}(g)=\\sum_{x\\in\\mathcal X}\\mu(x)\\mathbf 1\\{g(x)\\ne h_j(x)\\},$$\nthe expected risks satisfy\n$$\\max_{j\\in\\{0,1\\}}\\sum_{g\\in\\mathcal H}Q(g)R_{P_j}(g)\\ge\\frac q2.$$",
+        "deps": [
+          "def-supervised-learning-problem",
+          "def-population-and-empirical-risk"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+        "kind": "theorem",
+        "title": "Anchored graph-harmonic extensions are unique and obey a maximum principle",
+        "statement": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$. Two vertices lie in the same connected component exactly when a finite path of support edges joins them. Let $B\\subseteq V$ be nonempty, $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. For index sets $S,T\\subseteq V$, let $L_{ST}$ denote the submatrix with rows in $S$ and columns in $T$, in increasing index order. Assume every support-graph component meeting $U$ also meets $B$. Then the energy $E(f)=\\tfrac12 f^TLf$, minimized over $f|_B=y_B$, has exactly one minimizer. If $U=\\varnothing$, it is $f=y_B$. If $U\\ne\\varnothing$, the principal block $L_{UU}$ is real symmetric positive definite, meaning $v^TL_{UU}v>0$ for every nonzero $v\\in\\mathbb R^U$, and the minimizer is $f_U=-L_{UU}^{-1}L_{UB}y_B$. Each $u\\in U$ has $d_u>0$ and $f_u=\\sum_jw_{uj}f_j/d_u$; hence $\\min_{b\\in B}y_b\\le f_u\\le\\max_{b\\in B}y_b$. For $C\\ge2$, if each boundary value is one-hot (one coordinate equals 1 and all others equal 0) in $\\mathbb R^C$, the coordinatewise energy minimizers have every row in the probability simplex $\\Delta_C=\\{p\\in[0,1]^C:\\sum_{c=1}^Cp_c=1\\}$.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-graph-harmonic-label-extension",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojin Zhu, Zoubin Ghahramani, and John Lafferty, Semi-Supervised Learning Using Gaussian Fields and Harmonic Functions, ICML 2003",
+              "url": "https://mlg.eng.cam.ac.uk/pub/pdf/ZhuGhaLaf03a.pdf"
+            },
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-graph-harmonic-label-propagation",
+        "kind": "algorithm",
+        "title": "Finite graph-harmonic label propagation with a residual status",
+        "statement": "Inputs are $n\\ge1$, $V=\\{1,\\ldots,n\\}$, a matrix $W\\in\\mathbb R^{n\\times n}$, a nonempty labeled subset $B\\subseteq V$, a boundary-label matrix $Y_B\\in\\mathbb R^{|B|\\times r}$ with $r\\ge1$, an operation cap $K\\in\\mathbb N_0$ per label coordinate, and a residual tolerance $\\varepsilon\\ge0$. Use exact real arithmetic in the mathematical specification. Reject with status $\\texttt{invalid-input}$ unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $U=V\\setminus B$, $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices are in the same connected component exactly when a finite path of support edges joins them. Use increasing vertex order for every submatrix, boundary vector, and returned output coordinate.\n\nInspect every connected component in increasing vertex order. If some component meeting $U$ misses $B$, return status $\\texttt{unanchored-component}$ and the unanchored components before forming a solve. If $U=\\varnothing$, return $Y_B$, an empty unlabeled output, and status $\\texttt{no-unlabeled-vertices}$. Otherwise set $M=L_{UU}$.\n\nFor each column $c=1,\\ldots,r$ in order, start a fresh counter at zero and form $b_c=-L_{UB}(Y_B)_{:,c}$, evaluating the matrix-vector product in increasing vertex order. Recompute a fresh lower-triangular Cholesky factor $R$ of $M$ for this column by the recurrence: initialize $R$ to zero; in increasing order $j=1,\\ldots,|U|$, compute $p_j=M_{jj}-\\sum_{k<j}R_{jk}^2$, return status $\\texttt{factorization-failure}$ if $p_j\\le0$, set $R_{jj}=\\sqrt{p_j}$, and for $i>j$ set $R_{ij}=(M_{ij}-\\sum_{k<j}R_{ik}R_{jk})/R_{jj}$. Recompute $R$ for each column so that the factorization cost is part of that column's cap.\n\nCount each real addition, subtraction, multiplication, division, comparison, and square root as one scalar operation. Evaluate every finite sum left-to-right in increasing index order, with an empty sum equal to zero. For each coordinate of $b_c$, implement the unary negation as one subtraction from zero and include that subtraction in the count. Input validation, degree/Laplacian construction, component scans, loop-control comparisons, and budget checks are outside the per-column count. The count for column $c$ includes forming $b_c$, its Cholesky recurrence, both triangular substitutions, and its residual calculation. Before each counted operation, if it would make the counter exceed $K$, return status $\\texttt{budget-exhausted}$ with outputs and residuals for only the fully completed columns before $c$. If a Cholesky pivot satisfies $p_j\\le0$, return status $\\texttt{factorization-failure}$ with outputs and residuals for only the fully completed columns before $c$.\n\nSolve $Rv_c=b_c$ by $v_{c,i}=((b_c)_i-\\sum_{j<i}R_{ij}v_{c,j})/R_{ii}$ in increasing $i$, and solve $R^Tz_c=v_c$ by $z_{c,i}=(v_{c,i}-\\sum_{j>i}R_{ji}z_{c,j})/R_{ii}$ in decreasing $i$, using the same counter and sum convention. Compute $e_{c,i}=\\sum_{j=1}^{|U|}M_{ij}z_{c,j}-(b_c)_i$ in increasing $i$, then $\\rho_c=(\\sum_{i=1}^{|U|}e_{c,i}^2)^{1/2}$, again using the same counter. If $\\rho_c>\\varepsilon$, return status $\\texttt{residual-failure}$ with candidate coordinates and residuals through column $c$. If all columns pass, return $Y_U=(z_1,\\ldots,z_r)$, the residuals, and status $\\texttt{residual-passed}$.",
+        "deps": [
+          "def-graph-harmonic-label-extension",
+          "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+          "lem-real-cholesky-recurrence-computes-factorization",
+          "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Algorithm: validate the finite graph and anchors, handle the empty and unanchored boundaries, form the exact SPD system, apply deterministic Cholesky and triangular substitutions under a finite budget, and report the residual status without a class-accuracy guarantee.",
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojin Zhu, Zoubin Ghahramani, and John Lafferty, Semi-Supervised Learning Using Gaussian Fields and Harmonic Functions, ICML 2003",
+              "url": "https://mlg.eng.cam.ac.uk/pub/pdf/ZhuGhaLaf03a.pdf"
+            },
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-semisupervised-cluster-assumptions",
+        "kind": "remark",
+        "title": "Structural assumptions behind semi-supervised gains",
+        "statement": "Here semi-supervised input means labeled examples together with unlabeled examples or their feature marginal $P_X$. The finite harmonic extension uses the supplied graph weights to prefer scores that vary little across large-weight edges; it does not identify the ground-truth conditional label law $P(Y\\mid X)$. A cluster assumption says a high-density connected cluster has one class; low-density separation says a classifier boundary lies only in a region of small $P_X$-mass; graph smoothness says scores vary little across large-weight edges of the chosen graph. These are additional modeling assumptions relating $P_X$ and $P(Y\\mid X)$, not consequences of observing $P_X$. The pseudo-label procedure is also a training heuristic. This batch states no general population-risk improvement, consistency, minimax, calibration, or graph-limit theorem. The exact harmonic maximum principle concerns the supplied boundary labels, not unknown true labels.",
+        "deps": [
+          "alg-finite-round-confidence-pseudolabeling",
+          "alg-graph-harmonic-label-propagation",
+          "thm-unlabeled-law-alone-does-not-identify-labels"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Scope remark: distinguish exact finite graph interpolation from population labels and state the extra structural assumptions needed before making a risk claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Xiaojin Zhu, Zoubin Ghahramani, and John Lafferty, Semi-Supervised Learning Using Gaussian Fields and Harmonic Functions, ICML 2003",
+              "url": "https://mlg.eng.cam.ac.uk/pub/pdf/ZhuGhaLaf03a.pdf"
+            },
+            {
+              "title": "Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien (editors), Semi-Supervised Learning, MIT Press, 2006",
+              "url": "https://mcube.lab.nycu.edu.tw/~cfung/docs/books/chapelle2006semi_supervised_learning.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2997,
+    "id": "semi-supervised-graph-propagation-and-pseudolabeling-limits-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Semi-supervised graph propagation and pseudo-labeling limits — Examples",
+    "companion": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+    "requires": [
+      "semi-supervised-graph-propagation-and-pseudolabeling-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-confident-pseudolabel-can-be-wrong",
+        "kind": "example",
+        "title": "A confident pseudo-label can be wrong and remain fixed",
+        "statement": "Take $\\mathcal X=\\{0,1,2,3,4,5\\}$ with distance $d(x,y)=|x-y|$ and classes $\\{1,2\\}$. The true labels at $0,1,2,3,4,5$ are $1,1,1,1,2,2$, but only the examples $(0,1),(1,1),(2,1),(3,1),(4,2)$ are labeled for the procedure. Run the finite confidence-threshold pseudo-labeling algorithm with unlabeled set $\\{5\\}$, $k=5$, threshold $\\tau=4/5$, pseudo-label weight $\\lambda=1$, and round cap $T=1$. The nearest labeled examples to $5$ have labels $2,1,1,1,1$, so confidence $4/5$ assigns the wrong label $1$; the no-relabel rule retains that assignment.",
+        "deps": [
+          "alg-finite-round-confidence-pseudolabeling"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-unlabeled-law-two-point-lower-bound",
+        "kind": "example",
+        "title": "Two indistinguishable laws leave error on an unseen atom",
+        "statement": "Let $\\mathcal X=\\{a,b\\}$ with the discrete sigma-algebra and feature marginal $P_X(a)=P_X(b)=1/2$, and observe only the labeled pair $(a,0)$. Under $P_0$, the labels at $a,b$ are $0,0$; under $P_1$, they are $0,1$. The common learner input consists of this labeled pair and the full marginal $P_X$. Let $\\mathcal H=\\{g:\\mathcal X\\to\\{0,1\\}\\}$, and let $Q:\\mathcal H\\to[0,1]$ satisfy $\\sum_{g\\in\\mathcal H}Q(g)=1$, selected from that common input, so it is the same under both laws. For $g\\in\\mathcal H$, define\n$$R_{P_0}(g)=\\tfrac12\\mathbf1\\{g(a)\\ne0\\}+\\tfrac12\\mathbf1\\{g(b)\\ne0\\},\\qquad R_{P_1}(g)=\\tfrac12\\mathbf1\\{g(a)\\ne0\\}+\\tfrac12\\mathbf1\\{g(b)\\ne1\\}.$$\nThe expected population risks satisfy $\\max_{j\\in\\{0,1\\}}\\sum_{g\\in\\mathcal H}Q(g)R_{P_j}(g)\\ge1/4$.",
+        "deps": [
+          "thm-unlabeled-law-alone-does-not-identify-labels",
+          "def-population-and-empirical-risk"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-graph-harmonic-path-interpolation",
+        "kind": "example",
+        "title": "Harmonic extension on a three-vertex path",
+        "statement": "Take the path with vertices $1,2,3$, unit weights on edges $\\{1,2\\}$ and $\\{2,3\\}$, labeled boundary $B=\\{1,3\\}$, and values $y_1=0$, $y_3=1$. The unique graph-harmonic extension assigns value $1/2$ to vertex 2 and has Dirichlet energy $1/4$.",
+        "deps": [
+          "def-graph-harmonic-label-extension",
+          "thm-graph-harmonic-extension-uniqueness-and-maximum-principle"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-graph-harmonic-unanchored-component-status",
+        "kind": "example",
+        "title": "An unanchored component is rejected before solving",
+        "statement": "Let $V=\\{1,2,3\\}$, with the single unit-weight edge $\\{1,2\\}$, labeled set $B=\\{1\\}$, boundary value $y_1=0$, and unlabeled set $U=\\{2,3\\}$. The isolated component $\\{3\\}$ contains no labeled vertex, so the graph-harmonic propagation algorithm returns status $\\texttt{unanchored-component}$ before forming a linear solve.",
+        "deps": [
+          "def-graph-harmonic-label-extension",
+          "alg-graph-harmonic-label-propagation"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "direct"
+      }
+    ]
+  }
+]

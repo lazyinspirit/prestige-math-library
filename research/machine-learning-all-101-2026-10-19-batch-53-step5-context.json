@@ -1,0 +1,314 @@
+{
+  "group": "r",
+  "batches": [
+    "53"
+  ],
+  "pages_read": [
+    "norm-and-margin-generalization-for-neural-networks",
+    "norm-and-margin-generalization-for-neural-networks-examples"
+  ],
+  "items_read": [
+    "def-sample-covering-number",
+    "def-spectral-network-complexity",
+    "lem-empirical-rademacher-covering-integral",
+    "def-multiclass-margin-ramp-loss",
+    "lem-spectral-network-matrix-cover",
+    "lem-multiclass-margin-rademacher-generalization",
+    "lem-spectral-network-output-covering-entropy",
+    "lem-bounded-spectral-class-margin-generalization",
+    "thm-spectral-margin-bound-for-multiclass-networks",
+    "ex-norm-margin-network-two-class-computation",
+    "ex-reference-network-changes-complexity-not-predictions",
+    "ex-small-margin-sample-does-not-fix-population-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Proper Frobenius covers have finitely many centers belonging to the covered nonempty set; distances use the unnormalized Euclidean norm of all matrix entries.",
+      "fixed_by": "def-sample-covering-number",
+      "matters_for": [
+        "lem-empirical-rademacher-covering-integral",
+        "lem-spectral-network-matrix-cover",
+        "lem-spectral-network-output-covering-entropy",
+        "lem-bounded-spectral-class-margin-generalization"
+      ]
+    },
+    {
+      "convention": "Networks have no biases and use fixed vector activations σ_i: R^{d_i} → R^{d_i} that fix zero and have fixed positive Lipschitz bounds ρ_i. Sample inputs and output scores are stored as rows.",
+      "fixed_by": "def-spectral-network-complexity",
+      "matters_for": [
+        "lem-spectral-network-output-covering-entropy",
+        "lem-multiclass-margin-rademacher-generalization",
+        "lem-bounded-spectral-class-margin-generalization",
+        "thm-spectral-margin-bound-for-multiclass-networks"
+      ]
+    },
+    {
+      "convention": "The mixed (2,1) norm sums Euclidean column norms; network reference distances apply this norm to A_iᵀ − M_iᵀ. The spectral norm is the induced Euclidean operator norm.",
+      "fixed_by": "def-spectral-network-complexity",
+      "matters_for": [
+        "lem-spectral-network-matrix-cover",
+        "lem-spectral-network-output-covering-entropy",
+        "thm-spectral-margin-bound-for-multiclass-networks",
+        "ex-norm-margin-network-two-class-computation",
+        "ex-reference-network-changes-complexity-not-predictions"
+      ]
+    },
+    {
+      "convention": "R_A is defined only when every layer matrix has nonzero operator norm. A zero layer instead gives the constant-zero score map, since all activations fix zero.",
+      "fixed_by": "def-spectral-network-complexity",
+      "matters_for": [
+        "thm-spectral-margin-bound-for-multiclass-networks",
+        "ex-norm-margin-network-two-class-computation",
+        "ex-reference-network-changes-complexity-not-predictions"
+      ]
+    },
+    {
+      "convention": "The margin is the true-label score minus the largest competing score; prediction breaks ties by the smallest class index. Empirical margin loss counts margins ≤ γ, including equality.",
+      "fixed_by": "def-multiclass-margin-ramp-loss",
+      "matters_for": [
+        "lem-multiclass-margin-rademacher-generalization",
+        "lem-bounded-spectral-class-margin-generalization",
+        "thm-spectral-margin-bound-for-multiclass-networks",
+        "ex-norm-margin-network-two-class-computation",
+        "ex-small-margin-sample-does-not-fix-population-error"
+      ]
+    },
+    {
+      "convention": "The ramp is applied to the negative margin: it equals zero below −γ, equals 1 + r/γ on [−γ,0], and equals one above zero. D is a Borel probability measure; completeness is not assumed.",
+      "fixed_by": "def-multiclass-margin-ramp-loss",
+      "matters_for": [
+        "lem-multiclass-margin-rademacher-generalization",
+        "lem-bounded-spectral-class-margin-generalization",
+        "thm-spectral-margin-bound-for-multiclass-networks"
+      ]
+    },
+    {
+      "convention": "Empirical Rademacher complexity is one-sided, without an absolute value, with 1/n normalization; zero need not belong to the function class.",
+      "fixed_by": "lem-empirical-rademacher-covering-integral",
+      "matters_for": [
+        "lem-multiclass-margin-rademacher-generalization",
+        "lem-bounded-spectral-class-margin-generalization"
+      ]
+    },
+    {
+      "convention": "The probabilistic generalization results assume AC. In the simultaneous theorem, architecture, activations, reference matrices and confidence level are fixed before sampling; the event is simultaneous over nonzero-layer networks and every γ > 0.",
+      "fixed_by": "thm-spectral-margin-bound-for-multiclass-networks",
+      "matters_for": [
+        "ex-norm-margin-network-two-class-computation",
+        "ex-reference-network-changes-complexity-not-predictions",
+        "ex-small-margin-sample-does-not-fix-population-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-spectral-network-matrix-cover",
+      "statement": "Let X ∈ R^{n×d}, M ∈ R^{d×m}, n,d,m ≥ 1, and a,s ≥ 0. If C = {A: ‖A−M‖₂,₁ ≤ a, ‖A‖σ ≤ s} is nonempty and U = {XA: A ∈ C}, then for every ε > 0, log N_F(U,ε) ≤ 5a²‖X‖_F² log(2dm)/ε². If a‖X‖_F = 0 or ε ≥ 2a‖X‖_F, then N_F(U,ε) = 1.",
+      "used_by": [
+        "lem-spectral-network-output-covering-entropy"
+      ]
+    },
+    {
+      "id": "lem-spectral-network-output-covering-entropy",
+      "statement": "For the fixed architecture and zero-origin Lipschitz activations, any sample matrix X ∈ R^{n×d₀}, positive caps s_i, nonnegative caps b_i, reference matrices M_i, and nonempty layer sets C_i = {A_i: ‖A_i‖σ ≤ s_i, ‖A_iᵀ−M_iᵀ‖₂,₁ ≤ b_i}, the attainable score-matrix set H_X satisfies, for every ε > 0, log N_F(H_X,ε) ≤ 5‖X‖_F² ε⁻² log(2W²) ∏_i(ρ_i s_i)² (Σ_i(b_i/s_i)^{2/3})³, where W is the maximum layer width and the cover is proper.",
+      "used_by": [
+        "lem-bounded-spectral-class-margin-generalization"
+      ]
+    },
+    {
+      "id": "lem-empirical-rademacher-covering-integral",
+      "statement": "For n ≥ 1, a fixed sample S, a nonempty class G of measurable [0,1]-valued functions, and 0 < α ≤ √n, the one-sided empirical complexity satisfies R̂_S(G) ≤ 4α/√n + (12/n)∫_α^{√n} √(log N_F(G|S,ε)) dε.",
+      "used_by": [
+        "lem-bounded-spectral-class-margin-generalization"
+      ]
+    },
+    {
+      "id": "lem-multiclass-margin-rademacher-generalization",
+      "statement": "Assume AC. For a fixed finite architecture and activations, a nonempty network class F constrained by positive spectral caps s_i and nonnegative reference-distance caps b_i, any Borel probability measure D, an iid sample S of size n ≥ 1, fixed γ > 0 and 0 < δ < 1, with probability at least 1−δ every F ∈ F satisfies L₀(F) ≤ L̂_{γ,S}(F) + 2R̂_S(L_γ) + 3√(log(2/δ)/(2n)), where L_γ is its ramp-loss class.",
+      "used_by": [
+        "lem-bounded-spectral-class-margin-generalization"
+      ]
+    },
+    {
+      "id": "lem-bounded-spectral-class-margin-generalization",
+      "statement": "Assume AC. Fix the architecture, activations and references, positive spectral caps s_i, nonnegative reference-distance caps b_i, and a nonempty constrained class F. For an iid sample of size n ≥ 1 from any Borel probability measure, fixed γ > 0 and 0 < δ < 1, with probability at least 1−δ every F_A ∈ F satisfies L₀(F_A) ≤ L̂_{γ,S}(F_A) + 8/n + [36√20 ‖X‖_F √log(2W²) log n/(γn)](∏_i ρ_i s_i)(Σ_i(b_i/s_i)^{2/3})^{3/2} + 3√(log(2/δ)/(2n)).",
+      "used_by": [
+        "thm-spectral-margin-bound-for-multiclass-networks"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Identifies Frobenius distance with Euclidean distance on matrix entries.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Defines the induced Euclidean operator norm used in layer constraints and propagation estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Identifies spectral and induced norms and supports transpose-norm equality.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Justifies equal operator norms of a real matrix and its transpose, including zero matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Bounds matrix products, atom coefficient mass and chaining residuals.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Convexity and continuity of norm constraints and Frobenius distance estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-hyperbolic-functions",
+      "used_for": "Defines cosh and tanh for the finite-sign exponential-moment estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-hyperbolic-identities-and-derivatives",
+      "used_for": "Derives cosh(x) ≤ exp(x²/2).",
+      "opened": true
+    },
+    {
+      "id": "thm-jensen-inequality-for-expectation",
+      "used_for": "Converts a finite maximum's exponential moment into its expected-maximum bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiates exp(−x²/2) in the sub-Gaussian sign estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiates the composite exponential in the sign-moment proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product differentiation in the sign-moment proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Turns derivative inequalities into monotonicity estimates for tanh and cosh.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Fixes the natural logarithm convention throughout entropy and confidence expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity and product identities in entropy and union-bound calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of feasible matrix and network-parameter sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-image-of-a-compact-space-is-compact",
+      "used_for": "Compactness of the constrained matrix-product image before projection.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Existence of nearest proper centers in the compact convex product set.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel measurability of scores, classification events and ramp losses.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-law and risk conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common-law assumptions in generalization bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Countable dense parameter selection and the explicit AC assumption inherited through McDiarmid.",
+      "opened": true
+    },
+    {
+      "id": "lem-q-and-irrationals-dense-r",
+      "used_for": "Constructs the rational-ball base used for measurable countable suprema.",
+      "opened": true
+    },
+    {
+      "id": "thm-mcdiarmid-bounded-differences",
+      "used_for": "Concentration of uniform ramp-risk deviation and empirical Rademacher complexity.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Continuity of population ramp risk in network parameters without input moment assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable product sample and ghost-sample spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product laws and pair-swap symmetry in symmetrization.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Expectation identities for bounded measurable sample statistics.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Finite and countable union bounds for confidence events.",
+      "opened": true
+    },
+    {
+      "id": "thm-product-of-countable",
+      "used_for": "Countability of the finite tuple of margin and norm-bin indices.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-spectral-network-output-covering-entropy",
+      "concern": "The source metadata and final Source reference identify the spectral output-cover result as “Lemma 3.1 and Appendix A.5”. In the linked paper, Lemma 3.1 is the margin-risk/Rademacher bound; the spectral covering result is Theorem 3.3, proved in Appendix A.6. Appendix A.5 supplies the general layerwise precursor. Checked against the paper's explicit Appendix A.6 heading and proof: [Bartlett, Foster and Telgarsky](https://arxiv.org/pdf/1706.08498). The local proof is sound; the locator needs correction.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "norm-and-margin-generalization-for-neural-networks",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "Opened the supplier page and def-feedforward-neural-network. The consumer calls this broader context and independently defines its zero-bias vector-activation architecture. It does not import scalar-node restrictions or universal approximation. The supplier does not depend back on this batch. The assigned schematic correctly depicts the stated layer recurrence."
+    },
+    {
+      "from": "norm-and-margin-generalization-for-neural-networks",
+      "to": "rademacher-complexity-and-generalization",
+      "faithful": true,
+      "note": "Opened the supplier page and def-rademacher-complexity. The consumer preserves the one-sided, nonabsolute 1/n convention and permits classes without zero. Translation in the covering-integral proof is justified by zero mean of the subtracted sign sum. The probabilistic consumer establishes measurable countable suprema before taking sample expectations. The supplier has no reverse dependency on this batch."
+    }
+  ]
+}

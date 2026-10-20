@@ -1,0 +1,243 @@
+{
+  "version": 2,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "71",
+  "group": "x",
+  "manifest_pre": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "manifest_post": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "added": [],
+  "removed": [],
+  "page_manifest_pre": [
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "page_manifest_post": [
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "pages_added": [],
+  "pages_removed": [],
+  "pages_touched": [],
+  "refuter_pages": [
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "page_order_anchors": {
+    "foundation-models-transfer-and-scaling-evidence": [
+      "def-foundation-model-as-broad-pretraining-and-adaptation"
+    ],
+    "foundation-models-transfer-and-scaling-evidence-examples": [
+      "ex-empirical-language-model-scaling-law",
+      "ex-pretraining-adaptation-interface-limitations"
+    ]
+  },
+  "touched": [],
+  "untouched": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "high_risk": [
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "refuter_scope": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "def-transformer-encoder-decoder-layer",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations",
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "opened": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "def-transformer-encoder-decoder-layer",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations",
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "not_opened": [],
+  "flagged": [
+    "def-transformer-encoder-decoder-layer"
+  ],
+  "refuter_findings": [
+    {
+      "obligation": "refuter:71:1",
+      "id": "def-transformer-encoder-decoder-layer",
+      "location": "## Definition, encoder equation (line 40) and decoder residual description (line 42)",
+      "defect": "ill-formed",
+      "evidence": "Line 40 adds MHA(X,X,X) to X, and line 42 adds each decoder attention output to a width-d residual input. The dependency def-multihead-self-attention (lines 27, 36) permits arbitrary positive output width d_o and gives MHA output shape R^{n_q×d_o}. Without requiring d_o=d for encoder self-attention, decoder self-attention, and decoder cross-attention, these additions are undefined when d_o≠d.",
+      "severity": "fatal",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac"
+    },
+    {
+      "obligation": "refuter:71:2",
+      "id": "def-transformer-encoder-decoder-layer",
+      "location": "## Definition, sequence dimensions (lines 30 and 42)",
+      "defect": "missing-hypothesis",
+      "evidence": "The Definition gives X∈R^{n×d} and decoder inputs U∈R^{m×d}, E∈R^{n×d} without requiring n,m≥1. The dependency def-multihead-self-attention (line 27) requires n_q,n_k to be positive integers. Zero-row inputs therefore fall outside the stated MHA domain; require positive sequence lengths.",
+      "severity": "fatal",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac"
+    }
+  ],
+  "reader_findings": [
+    {
+      "obligation": "reader:71:1",
+      "id": "def-measurable-function-between-measurable-spaces",
+      "location": "## Definition, opening sentence, line 29",
+      "defect": "ill-formed",
+      "evidence": "The complete Definition embeds the wikilink [[def-measurable-space]]. The uninterrupted-statement rule requires the link to move into an immediately following ## Definition references section. This published dependency is reached by the assigned consumer through def-source-target-distributions-and-shift.",
+      "severity": "fatal",
+      "subject_type": "published-dependency",
+      "consumer_id": "ex-pretraining-adaptation-interface-limitations",
+      "observed_sha256": "9c4bce80c57f4ceb1f896329066dbb7ecda7b86fa7127654de06cc6cf2253e03",
+      "pre_sha256": "f97b9edd05016bb956dda0f730349d9ab0dddb9a2ad1e11035d56c701c9784a6"
+    },
+    {
+      "obligation": "reader:71:2",
+      "id": "def-measure-kernel-and-probability-kernel",
+      "location": "## Definition, first paragraph, line 27",
+      "defect": "ill-formed",
+      "evidence": "The complete Definition embeds [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]. The uninterrupted-statement rule requires moving both links into an immediately following ## Definition references section. This published dependency is reached by the assigned consumer through def-source-target-distributions-and-shift.",
+      "severity": "fatal",
+      "subject_type": "published-dependency",
+      "consumer_id": "ex-pretraining-adaptation-interface-limitations",
+      "observed_sha256": "5d6697925feb7c1cf58927d4a54031214976162bed1fa2fa2c1a331b2141883f",
+      "pre_sha256": "1e0f50d204d8019b216e6e3660546e508c0117f951bb15c85eca3f0e47794ed6"
+    },
+    {
+      "obligation": "reader:71:3",
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "location": "## Definition, first paragraph, line 32",
+      "defect": "ill-formed",
+      "evidence": "The product-sigma-algebra Definition embeds [[def-measurable-rectangle]]. The uninterrupted-statement rule requires moving the link into an immediately following ## Definition references section. This published dependency is reached by the assigned consumer through def-source-target-distributions-and-shift.",
+      "severity": "fatal",
+      "subject_type": "published-dependency",
+      "consumer_id": "ex-pretraining-adaptation-interface-limitations",
+      "observed_sha256": "2b5e7b9b97face3c31173ce300b7199d13c9dcb816ad0b37c05ccd9becb6b8f3",
+      "pre_sha256": "04d3ea639e16a197ddb08d641c0fc587ae84b5d1490b0c6eba9a58f94a049cc6"
+    },
+    {
+      "obligation": "reader:71:4",
+      "id": "def-transformer-encoder-decoder-layer",
+      "location": "## Definition, encoder equation and decoder residual description (lines 40–42)",
+      "defect": "ill-formed",
+      "evidence": "The encoder equation adds MHA(X,X,X) to X, and the decoder description adds each attention output to a width-d residual input. The direct MHA supplier allows arbitrary output width d_o (def-multihead-self-attention, lines 27 and 36), so these additions are undefined unless each attention sublayer has output width d. The Definition does not state this condition. Specify d_o=d for encoder self-attention, decoder self-attention, and decoder cross-attention. This draft supplier is in current-run batch 36.",
+      "severity": "fatal",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac"
+    }
+  ],
+  "reader_report_sha256": "27e64979120506ce52353da03da9bdf4bdcba62beaca84c973960e1c293bdd50",
+  "refuter_report_sha256": "142f1a96a69fe2fbf9570dbd23d6ea8496bebd3cdd64f01f6002be4cc55c1d75"
+}

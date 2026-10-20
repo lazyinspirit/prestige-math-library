@@ -1,0 +1,113 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "29",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "thm-private-online-learning-regret-under-composition",
+      "model": "gpt-6-luna",
+      "context_sha256": "4a1008b62ae06328d841c0249097f2aef117513bbd3736aa01bec990ce902e42",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F8 omitted the supplier Statement condition T delta_r + delta_prime <= 1. This is an inaccurate dependency restatement, but both actual applications use delta_r=0 and delta_prime=delta in (0,1), so the claimed privacy and regret conclusions remain valid. Restored the full parameter domain in F8 and explicitly verified the condition in step 2.2.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-private-online-learning-regret-under-composition",
+      "disposition": "repaired",
+      "post_sha256": "3aae92e2ed2e2de6e3ed7f5218d8031a67a40d606ddc439fabe5394dfb221342",
+      "review_context_sha256": "118ecc6d6614d76c0c218ac3d2e8541b8f1b79452976f887b3475908362ba3cc",
+      "reason": "Checked the cumulative-weight potential pathwise for eta<=1 and the trivial eta>1 bound; the explicitly supplied conditional law gives centered losses in predictable intervals of length one. One-vector replacement bounds weight and normalizer ratios by exp(eta), giving ordered (2 eta,0) kernels. All three eta caps bound the composition summands by epsilon/2, and delta_r=0 meets the restored domain. Checked reciprocal-cap algebra, k=1, T=1, adaptive-regret versus fixed-input privacy quantifiers, and the assumed interactive kernel inequalities. AC is retained only for the cited Azuma and composition suppliers. Statement and page interface are unchanged; no diagrams are present or needed. This is repairer verification, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-private-online-learning-regret-under-composition",
+      "locus": "facts-block",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F8 now includes epsilon_r>=0, 0<=delta_r<=1 and T delta_r+delta_prime<=1; step 2.2 checks the latter as delta<1. Original Statement unchanged and all asserted conclusions preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "item": "thm-private-online-learning-regret-under-composition",
+    "claim": "Nonanticipating finite-action expected and high-probability regret, and fixed-sequence one-vector-replacement transcript privacy under the stated capped eta.",
+    "changed_sections": [
+      "Facts & Assumptions: F8",
+      "Proof: step 2.2"
+    ],
+    "statement_changed": false,
+    "contract": "research/machine-learning-all-101-2026-10-19-batch-29.proof-contracts.json",
+    "contract_changes": "Updated derivation-2.2 and exact supplier quotation mirrors for the six already examined prerequisite Definitions whose links have moved to reference sections. Shared lock acquired, carrier reread, scoped contract check passed, lock released. Other item contracts preserved.",
+    "sources_consulted": [
+      {
+        "url": "https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf",
+        "locators": "Theorem 3.20 and complete proof, printed pp. 49-51; section 11.2, printed pp. 222-226.",
+        "scope": "The source supplies the standard constants and fixed-vector-replacement setup. The local arbitrary-output supplier establishes the more general measurable-kernel interface; the assigned proof separately handles predictable adaptive losses with Azuma and retains its explicit parameter caps."
+      }
+    ],
+    "supplier_evidence": [
+      "items/thm-advanced-adaptive-composition-arbitrary-measurable-outputs.md: Statement and complete Proof",
+      "items/thm-azuma-hoeffding-inequality.md: Statement and Proof",
+      "items/lem-qa-30-exp-quadratic-bound.md: Statement and Proof",
+      "items/alg-private-randomized-weighted-majority.md: Definition and Verification",
+      "Other direct prerequisite Statement/Definition sections checked against this item and its contract."
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-29.proof-contracts.json --strict --items thm-private-online-learning-regret-under-composition",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-private-online-learning-regret-under-composition.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct proof passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-private-online-learning-regret-under-composition.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-private-online-learning-regret-under-composition.md",
+        "exit_code": 0,
+        "result": "1 item, 7 steps, 0 defects."
+      },
+      {
+        "command": "Read-only report identity, tuple, current itemHashGuard and frozen Statement hash assertions",
+        "exit_code": 0,
+        "result": "Exact pack digest and tuple match; current guard matches review and differs from assignment; Statement hash unchanged."
+      }
+    ],
+    "published_ledger_updates": [],
+    "outside_lane_findings": [],
+    "unresolved_obligations": [],
+    "next_action": "Assigned repair and focused checks complete. Controller collects evidence and owns independent rejudgment, downstream scheduling and certification.",
+    "statement_sha256": "d4b0f8e49a47c1876496753eb3cc344eeb5c496c1b0eec1a7e504c79dfb768fa"
+  }
+}

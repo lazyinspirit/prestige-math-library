@@ -1,0 +1,282 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "90",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-constrained-markov-decision-process",
+      "model": "gpt-6-luna",
+      "context_sha256": "71ce9c8c1c6534976794759839913e83b061a4d9605b216bd31a25a71cb0766e",
+      "outcome": "false_positive",
+      "reason": "The assigned item defines a CMDP as model data, not an optimization theorem. Its finite MDP, initial law, discount, cost signals and real thresholds are complete tuple data. The immediately subsequent def-discounted-cost-constraint explicitly defines J_g, J_r and feasibility by every J_ci <= b_i. Neither the model definition nor its contract claims optimality, existence of a feasible policy, or pathwise safety. Separating model data from the expected-cost convention is logically sound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "def-discounted-cost-constraint",
+      "model": "gpt-6-luna",
+      "context_sha256": "5bec62f5fb011baa5e66b6678471fcddc8c1adc757315e1157bd165990cdb4dc",
+      "outcome": "false_positive",
+      "reason": "def-finite-markov-decision-process explicitly requires a finite subset R of the real numbers. With nonempty S and nonempty action sets, transition normalization forces R nonempty. Therefore B=max_{rho in R}|rho| is finite and |r(s,a,rho,s′)|<=B. Probability finite-time transition weights imply each reward expectation has absolute value at most B, so lem-bounded-discounted-return-converges and lem-normalized-discounted-state-occupancy-is-probability give absolute convergence and |J_r|<=B/(1-gamma). The rejection overlooks an inherited hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-discounted-value-and-advantage-functions",
+      "model": "gpt-6-luna",
+      "context_sha256": "ae08c470a704b79db3724d4fe7c6a61f749723a2bea12e6e75a1ece6f301bf13",
+      "outcome": "false_positive",
+      "reason": "The CMDP inherits the finite real reward alphabet R from def-finite-markov-decision-process, hence |r|<=B=max_R|rho|<infinity. The probability-mass/convergence supplier applies to every Dirac initial law, giving |V_g|<=B/(1-gamma). The normalized finite action-value sum then satisfies |Q_g|<=B+gamma B/(1-gamma)=B/(1-gamma); A_g=Q_g-V_g is finite. This also covers gamma=0 and each bounded c_i. No unbounded reward is admitted by the interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "model": "gpt-6-luna",
+      "context_sha256": "f30b817c591d0a09d7c61c6bd5a96e63f9fe66d0430bd7b23c680fe43cc6a0b0",
+      "outcome": "false_positive",
+      "reason": "The inherited reward alphabet is a finite subset of R, so r(s,a,rho,s′)=rho is bounded by max_R|rho| and is a valid specialization of bounded g. Independently checked the complete local performance-difference telescoping identity, the column-stochastic resolvent occupancy estimate, and the finite weighted Pinsker argument. The proof bounds the residual by epsilon times the occupancy l1 change and obtains the coefficient 2 gamma epsilon/(1-gamma)^2. The KL branch preserves AC and explicitly treats infinite KL as trivial extended bounds, including zero error coefficients. No missing reward hypothesis or erroneous inference was found.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "model": "gpt-6-luna",
+      "context_sha256": "264ab13bf8676574b97287acbae2f5ace80c1a3e1381deddfab53e72b37d8dde",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The rejection correctly identifies a presentation defect: both exact and one-state sampled KL equal K=(1/5)log(20)+(4/5)log(80/99)<4. The actual disagreement is exact CPO cost feasibility (1/5>1/20) versus the conditional safe-row sample cost check (0<=1/20, sample probability 99/100). Retitled the item to name this cost-check disagreement and synchronized its manifest title. The Example and all proof steps remain unchanged; no claim that the sampled quadratic program produces this proposal is made.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-constrained-markov-decision-process",
+      "disposition": "unaffected",
+      "post_sha256": "77d0ae2e82fe8d58a9b32ed793c408194d0dae689a8bfbdfac74b1a7f1fe82aa",
+      "review_context_sha256": "ab5e58df4c2edeeeed55e897d5f20de7dfcf6efcc265f5371bf8d5f763008dd4",
+      "reason": "The assigned item defines a CMDP as model data, not an optimization theorem. Its finite MDP, initial law, discount, cost signals and real thresholds are complete tuple data. The immediately subsequent def-discounted-cost-constraint explicitly defines J_g, J_r and feasibility by every J_ci <= b_i. Neither the model definition nor its contract claims optimality, existence of a feasible policy, or pathwise safety. Separating model data from the expected-cost convention is logically sound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "def-discounted-cost-constraint",
+      "disposition": "unaffected",
+      "post_sha256": "1c92813681b37a5caef674580bba282cf12cdf5e09a53eaa7db4031645502f24",
+      "review_context_sha256": "78e1329ce2af90327eb8f248dfb743bd69ad0a6a6385b226f1ece080ec759fbc",
+      "reason": "def-finite-markov-decision-process explicitly requires a finite subset R of the real numbers. With nonempty S and nonempty action sets, transition normalization forces R nonempty. Therefore B=max_{rho in R}|rho| is finite and |r(s,a,rho,s′)|<=B. Probability finite-time transition weights imply each reward expectation has absolute value at most B, so lem-bounded-discounted-return-converges and lem-normalized-discounted-state-occupancy-is-probability give absolute convergence and |J_r|<=B/(1-gamma). The rejection overlooks an inherited hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-discounted-value-and-advantage-functions",
+      "disposition": "unaffected",
+      "post_sha256": "2101bf2ad3071e5d0c6ef3e78a96109543c14e451bad1f5b9af03c4add2f1d45",
+      "review_context_sha256": "fa95157651e830d596fe230f804142bb27706d3bf2084a7b3824b88d0a43fe0f",
+      "reason": "The CMDP inherits the finite real reward alphabet R from def-finite-markov-decision-process, hence |r|<=B=max_R|rho|<infinity. The probability-mass/convergence supplier applies to every Dirac initial law, giving |V_g|<=B/(1-gamma). The normalized finite action-value sum then satisfies |Q_g|<=B+gamma B/(1-gamma)=B/(1-gamma); A_g=Q_g-V_g is finite. This also covers gamma=0 and each bounded c_i. No unbounded reward is admitted by the interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "disposition": "unaffected",
+      "post_sha256": "9e15796410ce79499d66e849572c8d3ad2abd34571c8fee36f92ac3a7cd4a979",
+      "review_context_sha256": "c053592f426bc82b5b87b48771554f544cdaba291d390a63523d73ea7c6dee27",
+      "reason": "The inherited reward alphabet is a finite subset of R, so r(s,a,rho,s′)=rho is bounded by max_R|rho| and is a valid specialization of bounded g. Independently checked the complete local performance-difference telescoping identity, the column-stochastic resolvent occupancy estimate, and the finite weighted Pinsker argument. The proof bounds the residual by epsilon times the occupancy l1 change and obtains the coefficient 2 gamma epsilon/(1-gamma)^2. The KL branch preserves AC and explicitly treats infinite KL as trivial extended bounds, including zero error coefficients. No missing reward hypothesis or erroneous inference was found. Contract-only repair refreshed its stale A1 quotation from the current AC Definition after link relocation; the item carrier and guard are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "disposition": "repaired",
+      "post_sha256": "37ffd2bbf4323e529b9f828928ed79d4fe131c9e32d0ccdb08cfb20f6e3a20a1",
+      "review_context_sha256": "0c46099c4da009c82fccb264dc3484e3d4cf683b1a8cd3be8a92a0950afbdad8",
+      "reason": "The rejection correctly identifies a presentation defect: both exact and one-state sampled KL equal K=(1/5)log(20)+(4/5)log(80/99)<4. The actual disagreement is exact CPO cost feasibility (1/5>1/20) versus the conditional safe-row sample cost check (0<=1/20, sample probability 99/100). Retitled the item to name this cost-check disagreement and synchronized its manifest title. The Example and all proof steps remain unchanged; no claim that the sampled quadratic program produces this proposal is made.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-constrained-markov-decision-process",
+      "model": "gpt-6-luna",
+      "context_sha256": "71ce9c8c1c6534976794759839913e83b061a4d9605b216bd31a25a71cb0766e",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The assigned item defines a CMDP as model data, not an optimization theorem. Its finite MDP, initial law, discount, cost signals and real thresholds are complete tuple data. The immediately subsequent def-discounted-cost-constraint explicitly defines J_g, J_r and feasibility by every J_ci <= b_i. Neither the model definition nor its contract claims optimality, existence of a feasible policy, or pathwise safety. Separating model data from the expected-cost convention is logically sound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-discounted-cost-constraint",
+      "model": "gpt-6-luna",
+      "context_sha256": "5bec62f5fb011baa5e66b6678471fcddc8c1adc757315e1157bd165990cdb4dc",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "def-finite-markov-decision-process explicitly requires a finite subset R of the real numbers. With nonempty S and nonempty action sets, transition normalization forces R nonempty. Therefore B=max_{rho in R}|rho| is finite and |r(s,a,rho,s′)|<=B. Probability finite-time transition weights imply each reward expectation has absolute value at most B, so lem-bounded-discounted-return-converges and lem-normalized-discounted-state-occupancy-is-probability give absolute convergence and |J_r|<=B/(1-gamma). The rejection overlooks an inherited hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-discounted-value-and-advantage-functions",
+      "model": "gpt-6-luna",
+      "context_sha256": "ae08c470a704b79db3724d4fe7c6a61f749723a2bea12e6e75a1ece6f301bf13",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The CMDP inherits the finite real reward alphabet R from def-finite-markov-decision-process, hence |r|<=B=max_R|rho|<infinity. The probability-mass/convergence supplier applies to every Dirac initial law, giving |V_g|<=B/(1-gamma). The normalized finite action-value sum then satisfies |Q_g|<=B+gamma B/(1-gamma)=B/(1-gamma); A_g=Q_g-V_g is finite. This also covers gamma=0 and each bounded c_i. No unbounded reward is admitted by the interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "model": "gpt-6-luna",
+      "context_sha256": "f30b817c591d0a09d7c61c6bd5a96e63f9fe66d0430bd7b23c680fe43cc6a0b0",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The inherited reward alphabet is a finite subset of R, so r(s,a,rho,s′)=rho is bounded by max_R|rho| and is a valid specialization of bounded g. Independently checked the complete local performance-difference telescoping identity, the column-stochastic resolvent occupancy estimate, and the finite weighted Pinsker argument. The proof bounds the residual by epsilon times the occupancy l1 change and obtains the coefficient 2 gamma epsilon/(1-gamma)^2. The KL branch preserves AC and explicitly treats infinite KL as trivial extended bounds, including zero error coefficients. No missing reward hypothesis or erroneous inference was found.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "model": "gpt-6-luna",
+      "context_sha256": "264ab13bf8676574b97287acbae2f5ace80c1a3e1381deddfab53e72b37d8dde",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The rejection correctly identifies a presentation defect: both exact and one-state sampled KL equal K=(1/5)log(20)+(4/5)log(80/99)<4. The actual disagreement is exact CPO cost feasibility (1/5>1/20) versus the conditional safe-row sample cost check (0<=1/20, sample probability 99/100). Retitled the item to name this cost-check disagreement and synchronized its manifest title. The Example and all proof steps remain unchanged; no claim that the sampled quadratic program produces this proposal is made.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "reason": "All five assigned carriers are draft. No original Statement or Definition changed, no new prerequisite was created, and no necessary published-consumer repair was identified. The three stale quotations were repaired only in assigned contract rows; no published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-constrained-markov-decision-process",
+      "status": "reviewed_unchanged",
+      "evidence": "Read current item, owning contract, both frontmatter-only owning pages, def-finite-markov-decision-process and the subsequent feasibility definition. Achiam et al. main paper §§3–4 separates model, return and feasible-policy conventions. No AC use or diagram in this model definition. Captured review-contexts immediately after review. Next: verify discounted-return well-definedness and value functions before the performance theorem."
+    },
+    {
+      "id": "def-discounted-cost-constraint",
+      "status": "reviewed_unchanged",
+      "evidence": "def-finite-markov-decision-process explicitly requires a finite subset R of the real numbers. With nonempty S and nonempty action sets, transition normalization forces R nonempty. Therefore B=max_{rho in R}|rho| is finite and |r(s,a,rho,s′)|<=B. Probability finite-time transition weights imply each reward expectation has absolute value at most B, so lem-bounded-discounted-return-converges and lem-normalized-discounted-state-occupancy-is-probability give absolute convergence and |J_r|<=B/(1-gamma). The rejection overlooks an inherited hypothesis.",
+      "checks": "Current definition, contract boundary clauses, owning page interfaces, finite MDP and complete local bounded-return/probability arguments examined. No links interrupt the defining section; no diagrams present. Review hashes captured together on unchanged supplier state.",
+      "next_action": "Review performance identity and TV/KL prerequisites before the theorem."
+    },
+    {
+      "id": "def-discounted-value-and-advantage-functions",
+      "status": "reviewed_unchanged",
+      "evidence": "The CMDP inherits the finite real reward alphabet R from def-finite-markov-decision-process, hence |r|<=B=max_R|rho|<infinity. The probability-mass/convergence supplier applies to every Dirac initial law, giving |V_g|<=B/(1-gamma). The normalized finite action-value sum then satisfies |Q_g|<=B+gamma B/(1-gamma)=B/(1-gamma); A_g=Q_g-V_g is finite. This also covers gamma=0 and each bounded c_i. No unbounded reward is admitted by the interface.",
+      "checks": "Current definition, contract boundary clauses, owning page interfaces, finite MDP and complete local bounded-return/probability arguments examined. No links interrupt the defining section; no diagrams present. Review hashes captured together on unchanged supplier state.",
+      "next_action": "Review performance identity and TV/KL prerequisites before the theorem."
+    },
+    {
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "status": "reviewed_unchanged",
+      "evidence": "The inherited reward alphabet is a finite subset of R, so r(s,a,rho,s′)=rho is bounded by max_R|rho| and is a valid specialization of bounded g. Independently checked the complete local performance-difference telescoping identity, the column-stochastic resolvent occupancy estimate, and the finite weighted Pinsker argument. The proof bounds the residual by epsilon times the occupancy l1 change and obtains the coefficient 2 gamma epsilon/(1-gamma)^2. The KL branch preserves AC and explicitly treats infinite KL as trivial extended bounds, including zero error coefficients. No missing reward hypothesis or erroneous inference was found.",
+      "source_locators": "Achiam et al. main paper §5.1 Theorem 1, equation (7), Corollary 3 actually read. Complete local arguments read in lem-mdp-performance-difference-identity-with-arbitrary-baseline, lem-discounted-occupancy-change-bounded-by-average-tv and lem-finite-action-average-tv-controlled-by-kl. No claim to reading the supplementary source.",
+      "checks": "Compared supplied hypotheses and conventions to theorem Facts F1–F6 and all three proof steps; gamma=0 and infinite-KL branches preserved. Statement is uninterrupted; no diagrams. Captured review-contexts immediately after review.",
+      "next_action": "Repair example title without changing its mathematical description or proof; synchronize the owning manifest under shared write lock."
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "status": "repaired",
+      "changed_files": [
+        "items/ex-exact-trust-region-and-sampled-line-search-disagree.md",
+        "research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+        "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json"
+      ],
+      "evidence": "The rejection correctly identifies a presentation defect: both exact and one-state sampled KL equal K=(1/5)log(20)+(4/5)log(80/99)<4. The actual disagreement is exact CPO cost feasibility (1/5>1/20) versus the conditional safe-row sample cost check (0<=1/20, sample probability 99/100). Retitled the item to name this cost-check disagreement and synchronized its manifest title. The Example and all proof steps remain unchanged; no claim that the sampled quadratic program produces this proposal is made.",
+      "source_locators": "Actually read Achiam et al. main paper §§3–5.3 and §6.1, especially equation (10) and Algorithm 1. The ideal update constrains both exact cost surrogates and average KL; its sampled counterpart tests empirical surrogates. Read the complete local alg-constrained-policy-optimization procedure and actual logarithm/KL defining statements.",
+      "metadata_repair": "Under the shared write lock, reread/edit/check/release updated only the assigned manifest title and three assigned quotation mirrors: theorem A1, example A1, example F4. Current AC/KL definitions retain the same mathematical hypotheses and formulas while relocating supplier links. Inspected those current sections before refreshing mirrors, then reexamined theorem/example uses and captured both review contexts again. No claim of independent review of this repair.",
+      "propagation": "Only the title changed in item content. Original Statement and Definition sections are unchanged in every assigned item; the example description, proof, dependencies, status and ID are unchanged. No interface event or downstream maintenance is triggered.",
+      "unresolved_obligations": [],
+      "next_action": "Controller collects this report and owns any certification or renewed judgment; no judges, stamps, certificates or round transitions were launched."
+    },
+    {
+      "validation": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-constrained-markov-decision-process.md items/def-discounted-cost-constraint.md items/def-discounted-value-and-advantage-functions.md items/thm-policy-performance-bound-by-average-divergence.md items/ex-exact-trust-region-and-sampled-line-search-disagree.md --json",
+          "exit_code": 0,
+          "result": "5 files: 2 proof checks passed, 3 definitions not applicable, 0 failures."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/def-constrained-markov-decision-process.md items/def-discounted-cost-constraint.md items/def-discounted-value-and-advantage-functions.md items/thm-policy-performance-bound-by-average-divergence.md items/ex-exact-trust-region-and-sampled-line-search-disagree.md library/machine-learning/constrained-mdps-and-policy-safety.md library/machine-learning/constrained-mdps-and-policy-safety-examples.md --json",
+          "exit_code": 0,
+          "result": "7 files checked, no errors or warnings."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json --items def-constrained-markov-decision-process,def-discounted-cost-constraint,def-discounted-value-and-advantage-functions,thm-policy-performance-bound-by-average-divergence,ex-exact-trust-region-and-sampled-line-search-disagree --strict --json",
+          "exit_code": 0,
+          "result": "All 5 assigned contracts pass, no errors or warnings after quotation repairs. Initial run failed with exactly the 3 stale quotation diagnostics recorded above."
+        },
+        {
+          "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json --items ex-exact-trust-region-and-sampled-line-search-disagree --json",
+          "exit_code": 0,
+          "result": "ml101-cpo-exact-versus-sample passed; KL=0.42867188234223164, conditional safe-row mass 99/100, exact cost 1/5 versus sample cost zero. This checks only the fixed model."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/ex-exact-trust-region-and-sampled-line-search-disagree.md",
+          "exit_code": 0,
+          "result": "1 changed item, 4 steps, 0 defects; run after the final item edit. No later item edits or formatter."
+        }
+      ],
+      "scope": "Five assigned draft items are in the frozen frontier. Live state observed at 5.1-adjudicate; current Git log inspected. No assigned diagrams; no diagram is needed for these finite-sum definitions and scalar example. No assigned gate diagnostics. No unresolved mathematics or necessary outside repairs found."
+    }
+  ]
+}

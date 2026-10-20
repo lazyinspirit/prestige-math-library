@@ -1,0 +1,74 @@
+--- research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-owner-native-smoke-deep-wasserstein/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json
+@@ -91,7 +91,10 @@
+           "case": "softplus",
+           "calculation": "Softplus is continuous, nonzero and Lipschitz, so the proved bounds apply.",
+           "result": "Its Gaussian squared expectation is positive and finite.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-softplus-normalizer",
++          "asserts": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant\n\n$$c_\\sigma:=\\bigl(\\mathbb E[\\sigma(Z)^2]\\bigr)^{-1}$$\n\nis a well-defined positive finite real number.",
++          "fixture": "softplus"
+         }
+       ],
+       "boundaries": [
+@@ -196,7 +199,10 @@
+           "case": "zero residual",
+           "calculation": "r=0 forces R=0 by the remainder hypothesis.",
+           "result": "Both losses vanish.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-gram-loss-contraction",
++          "asserts": "Let $r\\in\\mathbb R^n$, let $G$ be a real symmetric matrix with eigenvalues in $[\\lambda,\\Lambda]$ for some $0<\\lambda\\le\\Lambda$, and suppose $0<\\eta\\Lambda\\le1$. If an update has the form $r^+=(I-\\eta G)r+R$ with $\\|R\\|_2\\le\\eta\\lambda\\|r\\|_2/4$, then for the quadratic loss $L=\\frac12\\|r\\|_2^2$ and $L^+=\\frac12\\|r^+\\|_2^2$,\n\n$$L^+\\le(1-\\eta\\lambda/2)L.$$",
++          "fixture": "zero-residual-and-gram-grid"
+         }
+       ],
+       "boundaries": [
+@@ -722,7 +728,10 @@
+           "case": "Phi=0",
+           "calculation": "The image norm, trace and operator norm all vanish.",
+           "result": "The probability event holds surely.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-zero-feature-output",
++          "asserts": "Assume AC, DC and countable choice. Fix hidden-layer feature vectors $\\phi_1,\\ldots,\\phi_n\\in\\mathbb R^m$, form the matrix $\\Phi\\in\\mathbb R^{n\\times m}$ with rows $\\phi_i^T$, and let the independent output-weight vector $a\\sim N_m(0,I_m)$. Put $u=\\Phi a$ and $G=\\Phi\\Phi^T$. Then for every $0<\\delta<1$,\n\n$$P\\left\\{\\|u\\|_2\\le\\sqrt{\\operatorname{tr}(G)}+\\|\\Phi\\|_{\\rm op}\\sqrt{2\\log(1/\\delta)}\\right\\}\\ge1-\\delta,$$\n\nwhere $\\|\\Phi\\|_{\\rm op}=\\sup_{\\|v\\|_2=1}\\|\\Phi v\\|_2$. The probability is conditional on the fixed hidden-layer features and is over $a$ only.",
++          "fixture": "zero-feature-matrix"
+         }
+       ],
+       "boundaries": [
+@@ -829,7 +838,10 @@
+           "case": "t=0",
+           "calculation": "The left and right derivatives are 0 and 1.",
+           "result": "The derivative does not exist.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-relu-one-sided-derivatives",
++          "asserts": "Let $\\sigma(t)=\\max\\{0,t\\}$ be the ReLU activation. It is not differentiable at $0$, so it is not analytic and does not satisfy the smooth-activation assumptions of the two finite-width convergence theorems.",
++          "fixture": "relu-at-zero"
+         }
+       ],
+       "boundaries": [
+@@ -916,7 +928,10 @@
+           "case": "H=3",
+           "calculation": "Substitute h=2 and h=3 into the residual recurrence.",
+           "result": "Both post-initial layers have identity skips.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-depth-three-residual-skips",
++          "asserts": "For depth $H=3$, the analyzed residual recurrence is $x^{(1)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(1)}x)$, $x^{(2)}=x^{(1)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(2)}x^{(1)})$, and $x^{(3)}=x^{(2)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(3)}x^{(2)})$. Each layer after the first adds its nonlinear branch to the immediately preceding representation.",
++          "fixture": "depth-three-residual"
+         }
+       ],
+       "boundaries": [
+@@ -1002,7 +1017,10 @@
+           "case": "one training example",
+           "calculation": "Both functions vanish at 0 and differ at 1.",
+           "result": "Training predictions agree while test predictions differ.",
+-          "checked_in": "Steps 1.1–2.1"
++          "checked_in": "Steps 1.1–2.1",
++          "check": "ml101-du-interpolation-test-counterexample",
++          "asserts": "Take one training input $x=0$ with label $y=0$, and one test input $x_*=1$. Define $g_0(x)=0$ and $g_1(x)=x$, and define the one-point empirical quadratic loss by $L_S(g)=\\frac12(g(0)-y)^2$. Both predictors have empirical loss zero, while their test predictions are $g_0(1)=0$ and $g_1(1)=1$. Therefore agreement with the training labels alone does not determine test predictions.",
++          "fixture": "one-training-point"
+         }
+       ],
+       "boundaries": [

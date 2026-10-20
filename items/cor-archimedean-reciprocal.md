@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-archimedean-reciprocal.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -34,22 +35,30 @@ sources:
 
 ## Statement
 
-Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let
+Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)) and let
 $\varepsilon \in F$ with $\varepsilon > 0$. Then there is a natural number
 $n \ge 1$ such that
 
 $$\frac{1}{n \cdot 1_F} < \varepsilon ,$$
 
-where $n \cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and
-$1/(n \cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard
+where $n \cdot 1_F$ is the canonical natural of $F$ (Every complete ordered field is Archimedean) and
+$1/(n \cdot 1_F)$ is its multiplicative inverse (Field). As is standard
 we abbreviate $n \cdot 1_F$ to $n$ and write the conclusion $1/n < \varepsilon$.
 
 This is the **reciprocal form** of the Archimedean property.
-[[thm-of-archimedean]] on its own delivers only the assertion that the canonical
+Every complete ordered field is Archimedean on its own delivers only the assertion that the canonical
 naturals are cofinal, $x < n \cdot 1_F$; the form actually used in analysis, that
 the reciprocals of the naturals get below every positive bound, is the statement
 above, and it is recorded separately so that no proof has to reconstruct the
 inversion step in passing.
+
+## Statement references
+
+[[def-complete-ordered-field]]
+
+[[thm-of-archimedean]]
+
+[[def-field]]
 
 ## Facts & Assumptions
 

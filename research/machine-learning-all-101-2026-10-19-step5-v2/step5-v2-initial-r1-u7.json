@@ -1,0 +1,91 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "7",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "thm-pac-bayes-kl-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "48020fa4ffc2ceb318046b45d61bf176a43ec2fd3e46074238a608e9cb4ee235",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a nonfatal interface omission: F1 supplies only supervised losses L(f(x),y), whereas the theorem uses a generic product-measurable loss. The existing fixed-parameter Hoeffding and joint Tonelli arguments are valid. Step 1.1 now supplies the exact supervised encoding X=Z, Y={*}, A=[0,C], f_theta(z)=ell(theta,z), L(a,*)=a, and P=D tensor delta_*, with rectangle measurability and Tonelli identification. No new mathematical supplier or weaker claim is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-finite-support-sample-compression",
+      "model": "gpt-6-luna",
+      "context_sha256": "bab59cb5f151f2955c70e1f37e5a6541e2493409dc899773dcd0bc69a4dbd8c9",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly included reproducing every sample label in the size-at-most-two requirement. The supplier defines consistency separately and only for target-labeled samples. This is nonfatal because verification 1.1 already proves consistency from the first-occurrence construction instead of assuming it. Reworded F1 and 1.1 to separate the definition from its verification; the example and exact risk law are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-pac-bayes-kl-bound",
+      "disposition": "repaired",
+      "post_sha256": "5de5bda757a038bdedb9c86d16e5d0c92ff4054fd7bfe26ae15b67d5c70cee0b",
+      "review_context_sha256": "a77b3b32d3d193fbfa6e375008fda68ca81cc28e23dc82ceef65eae821eea27d",
+      "reason": "Reviewed all five proof steps, the supervised interfaces, the complete local Hoeffding and change-of-measure proofs, and the contract/page interface. The explicit singleton-label encoding licenses F1. For C>0 the scaled MGF gives exp(lambda^2 C^2/(8m)); Tonelli yields one measurable positive finite mixture, Markov gives one event independent of rho, and bounded change of measure applies to every rho there. C=0, m=1 and infinite KL are handled. No choice or diagram is required. This is the repair author review, not an independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-finite-support-sample-compression",
+      "disposition": "repaired",
+      "post_sha256": "c6e791a8fcec86297dd6a4f705434a54f18e42c7e3f37a048204919b51627cb6",
+      "review_context_sha256": "4a32d01a6d55c2e1c850a670693b98901f9ca6ece972b877025a37bd964644ac",
+      "reason": "Reviewed the complete example, all three verification steps, compression Definition, the complete compression-generalization proof, supervised risk interfaces, and owning contract/page interface. F1 now distinguishes size from consistency, and step 1.1 proves consistency only on target-labeled samples. The finite discrete maps are total and measurable even on inconsistent labeled inputs; empty-sample consistency is vacuous. At least one observed 1 gives risk zero, whereas all zeros give risk 1/2 and probability 2^-m. For m>=3 and epsilon=1/4, 2^-m<=(3/4)^m is bounded by the nonnegative theorem sum. No choice or diagram is needed. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-pac-bayes-kl-bound",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "Facts & Assumptions F1 and proof step 1.1",
+      "reason": "Confirmed a nonfatal interface omission: F1 supplies only supervised losses L(f(x),y), whereas the theorem uses a generic product-measurable loss. The existing fixed-parameter Hoeffding and joint Tonelli arguments are valid. Step 1.1 now supplies the exact supervised encoding X=Z, Y={*}, A=[0,C], f_theta(z)=ell(theta,z), L(a,*)=a, and P=D tensor delta_*, with rectangle measurability and Tonelli identification. No new mathematical supplier or weaker claim is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-finite-support-sample-compression",
+      "outcome": "confirmed_nonfatal",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "Facts & Assumptions F1 and proof step 1.1",
+      "reason": "F1 incorrectly included reproducing every sample label in the size-at-most-two requirement. The supplier defines consistency separately and only for target-labeled samples. This is nonfatal because verification 1.1 already proves consistency from the first-occurrence construction instead of assuming it. Reworded F1 and 1.1 to separate the definition from its verification; the example and exact risk law are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed both assigned rejected tuples in increasing dependency order. Both findings are nonfatal: the original arguments already establish the mathematical conclusions, but their supplier-interface wording needed correction. Both item carriers changed; no statements, definitions, example descriptions, dependencies, publication statuses, page inventories, or contracts of unassigned items changed.",
+    "PAC-Bayes step 1.1 now encodes the generic measurable loss as an explicitly specified supervised problem with singleton labels, verifies section measurability on product rectangles, and identifies risks by Tonelli. F1 states the supervised scope accurately. Existing joint measurability, MGF, Markov and posterior-average argument remains valid, including C=0, m=1 and infinite KL.",
+    "Finite-support F1 separates the size-two scheme from its consistency property. Step 1.1 verifies the latter for target-labeled samples. First-occurrence indices are selected for every finite labeled sequence; reconstruction is fixed on all selected tuples. Checked empty, all-zero, all-one and mixed samples. Exact failure probability and theorem comparison remain unchanged.",
+    "Consulted current local files: def-supervised-learning-problem Definition; def-population-and-empirical-risk Definition; lem-population-and-empirical-risk-are-measurable complete proof; lem-bounded-variable-hoeffding-mgf complete proof; lem-pac-bayes-donsker-varadhan-inequality complete proof; def-sample-compression-scheme Definition; thm-compression-generalization-bound complete proof; owning batch-7 contracts and frontmatter-only A/B pages. Both topics are familiar; no external-source reading is claimed.",
+    "Contract integration: acquired/reread/regenerated/strict-checked/released through tools/step5-shared-write-lock.mjs separately for each completed item. Only the two assigned contract entries were synchronized, including current supplier citation quotations and actual step uses/derivations. Existing independent risk-review records were preserved.",
+    "Actual focused checks: one-file precheck for each item passed (one checked proof each, zero failures); one-file rendercheck for each item passed (zero errors/warnings); strict proof-contract check for each item passed after synchronization (zero errors/warnings); citecheck on both items passed (two scanned, zero warnings). Final node tools/proof-layout.mjs items/thm-pac-bayes-kl-bound.md items/ex-finite-support-sample-compression.md passed: two items, eight steps, zero defects. No item edits followed that final layout check.",
+    "Review-contexts was run immediately after each completed mathematical/contract review, before moving to the next item. The reported hashes are those actual snapshots; they were not retrospectively refreshed. No Statement or Definition changed, so downstream is empty. No new prerequisites, gate diagnostics, outside-lane mathematical defects, or unresolved mathematical obligations were found. Both assigned items are draft; no published-ledger update is required. Shared ledgers and workflow state were not edited."
+  ]
+}

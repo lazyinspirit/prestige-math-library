@@ -15,6 +15,7 @@ landmark: false
 short: "$d \\ge 0$"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-metric-nonnegativity.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -37,7 +38,7 @@ pipeline_run: null
 
 Let $X$ be a set and let $p : X \times X \to \mathbb{R}$ satisfy the reflexivity
 axiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of
-[[def-metric-space]]. Then:
+Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric. Then:
 
 1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \ge 0$ for all
    $x, y \in X$.
@@ -45,9 +46,13 @@ axiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of
    $p(x,y) \ge 0$ for all $x, y \in X$.
 
 In particular every metric, every pseudometric and every ultrametric
-([[def-metric-space]]) takes only nonnegative values. Nonnegativity is therefore
+(Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) takes only nonnegative values. Nonnegativity is therefore
 a theorem about the axiom list this library uses, not a fourth axiom, and no
 statement on this page needs to assume it separately.
+
+## Statement references
+
+[[def-metric-space]]
 
 ## Facts & Assumptions
 

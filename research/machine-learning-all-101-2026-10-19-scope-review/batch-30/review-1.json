@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "30",
+  "round": 1,
+  "reviewed_items": [
+    "def-federated-objective-and-client-sampling",
+    "alg-local-sgd",
+    "lem-relaxed-euclidean-squared-norm",
+    "lem-finite-martingale-difference-sum-variance",
+    "lem-local-sgd-weighted-recursion",
+    "lem-federated-recursion-averaging",
+    "lem-smooth-convex-gradient-difference",
+    "lem-convex-gradient-step-nonexpansive",
+    "alg-fedavg",
+    "alg-scaffold",
+    "lem-uniform-client-sampling-moments",
+    "lem-local-sgd-virtual-progress",
+    "lem-local-sgd-sampling-variance",
+    "lem-local-sgd-client-drift",
+    "lem-perturbed-strong-convexity",
+    "thm-local-sgd-convex-round-complexity",
+    "lem-fedavg-one-round-progress",
+    "lem-fedavg-local-drift",
+    "def-scaffold-analysis-trajectory-and-errors",
+    "thm-fedavg-under-gradient-dissimilarity",
+    "lem-scaffold-control-tracking-identity",
+    "lem-scaffold-convex-server-variance",
+    "lem-scaffold-convex-control-lag",
+    "lem-scaffold-convex-client-drift",
+    "lem-scaffold-convex-round-progress",
+    "lem-scaffold-nonconvex-server-variance",
+    "lem-scaffold-nonconvex-client-drift",
+    "lem-scaffold-nonconvex-control-lag",
+    "lem-scaffold-nonconvex-round-progress",
+    "thm-scaffold-convex-and-nonconvex-rates",
+    "fs-scaffold-general-convex-uniform-output-round-headline",
+    "ex-local-versus-periodic-synchronization",
+    "ex-client-data-locality-does-not-imply-dp",
+    "ex-two-client-shifted-optima",
+    "ex-scaffold-control-correction"
+  ],
+  "reviewed_pages": [
+    "ml02-federated-optimization",
+    "ml02-federated-optimization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The repaired proofs, interfaces, pages, and affected consumer uses check out. Escalate for approved-scope reconciliation: ML-29 also requires the standard (G,B) gradient-dissimilarity condition, which is absent; only its convex gap-form variant appears.",
+  "findings": [
+    {
+      "id": "thm-fedavg-under-gradient-dissimilarity",
+      "type": "scope",
+      "reason": "The approved ML-29 design requires defining N⁻¹∑ᵢ‖∇fᵢ(x)‖² ≤ G²+B²‖∇f(x)‖² and distinguishing the convex gap-form condition. The batch states only the gap form in lem-fedavg-one-round-progress §1.2, lem-fedavg-local-drift §2.1, and this theorem’s Statement/proof §1.1. The smallest missing scope element is the standard condition and its relation to the gap form; owner reconciliation is required on this final review."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ml02-federated-optimization",
+      "decision": "escalate",
+      "reason": "Its inventory contains the FedAvg chain but no item defining the approved standard (G,B) condition."
+    },
+    {
+      "id": "ml02-federated-optimization-examples",
+      "decision": "accept",
+      "reason": "The frontmatter-only page and example inventory are consistent."
+    },
+    {
+      "id": "lem-local-sgd-virtual-progress",
+      "decision": "accept",
+      "reason": "Its update and virtual-mean calculation match the finite local-SGD loop."
+    },
+    {
+      "id": "lem-local-sgd-sampling-variance",
+      "decision": "accept",
+      "reason": "Its independent component draws match the algorithm."
+    },
+    {
+      "id": "lem-local-sgd-client-drift",
+      "decision": "accept",
+      "reason": "Its index range, synchronization schedule, and terminal case are explicit and consistent."
+    },
+    {
+      "id": "thm-local-sgd-convex-round-complexity",
+      "decision": "accept",
+      "reason": "Its drift application uses only defined steps and satisfies the schedule condition."
+    },
+    {
+      "id": "ex-local-versus-periodic-synchronization",
+      "decision": "accept",
+      "reason": "The schedules and positive-probability coupled draws are valid."
+    },
+    {
+      "id": "lem-fedavg-one-round-progress",
+      "decision": "accept",
+      "reason": "The all-client hypothetical paths define its expectation and its gap-form assumption is explicit."
+    },
+    {
+      "id": "lem-fedavg-local-drift",
+      "decision": "accept",
+      "reason": "The sampled and hypothetical paths have matching clientwise laws under its stated sampling convention."
+    },
+    {
+      "id": "thm-fedavg-under-gradient-dissimilarity",
+      "decision": "escalate",
+      "reason": "Its proof is supported under the stated gap-form condition; reconcile the missing approved standard dissimilarity definition."
+    },
+    {
+      "id": "ex-two-client-shifted-optima",
+      "decision": "accept",
+      "reason": "Its full-participation update matches the repaired FedAvg algorithm."
+    },
+    {
+      "id": "def-scaffold-analysis-trajectory-and-errors",
+      "decision": "accept",
+      "reason": "Its differentiability assumptions and finite index ranges are explicit."
+    },
+    {
+      "id": "lem-scaffold-control-tracking-identity",
+      "decision": "accept",
+      "reason": "Its stored anchors and Option II update match the procedure."
+    },
+    {
+      "id": "lem-scaffold-convex-server-variance",
+      "decision": "accept",
+      "reason": "Its server decomposition and vector martingale use are justified."
+    },
+    {
+      "id": "lem-scaffold-convex-control-lag",
+      "decision": "accept",
+      "reason": "Its anchor replacement and sampling assumptions match the procedure."
+    },
+    {
+      "id": "lem-scaffold-convex-client-drift",
+      "decision": "accept",
+      "reason": "Its local update, controls, and drift bounds are consistent with the definitions."
+    },
+    {
+      "id": "lem-scaffold-convex-round-progress",
+      "decision": "accept",
+      "reason": "Its server, lag, and drift bounds support the potential recursion."
+    },
+    {
+      "id": "lem-scaffold-nonconvex-server-variance",
+      "decision": "accept",
+      "reason": "Its conditional mean and second-moment arguments are supported by the repaired vector lemma."
+    },
+    {
+      "id": "lem-scaffold-nonconvex-client-drift",
+      "decision": "accept",
+      "reason": "Its counterfactual paths and control state match the trajectory definition."
+    },
+    {
+      "id": "lem-scaffold-nonconvex-control-lag",
+      "decision": "accept",
+      "reason": "Its anchor update and server-moment dependencies are consistent."
+    },
+    {
+      "id": "lem-scaffold-nonconvex-round-progress",
+      "decision": "accept",
+      "reason": "The Young-inequality cross-term repair supports the displayed coefficients."
+    },
+    {
+      "id": "thm-scaffold-convex-and-nonconvex-rates",
+      "decision": "accept",
+      "reason": "Its finite-round outputs use the repaired procedure and trajectory quantities."
+    },
+    {
+      "id": "fs-scaffold-general-convex-uniform-output-round-headline",
+      "decision": "accept",
+      "reason": "Its counterexample uses the unchanged Option II transition and its calculations check out."
+    },
+    {
+      "id": "ex-scaffold-control-correction",
+      "decision": "accept",
+      "reason": "Its control cancellation calculation matches the SCAFFOLD updates."
+    },
+    {
+      "id": "thm-sgd-stability-convex-loss",
+      "decision": "accept",
+      "reason": "Its nonexpansive-step use satisfies the supplier hypotheses."
+    },
+    {
+      "id": "ex-sgd-convex-stability-linear-in-steps",
+      "decision": "accept",
+      "reason": "The stated step lies in the supplier’s admissible interval."
+    },
+    {
+      "id": "ex-sgd-nonlipschitz-loss-no-uniform-stability",
+      "decision": "accept",
+      "reason": "It correctly identifies the missing global value-Lipschitz hypothesis."
+    },
+    {
+      "id": "ex-sgd-stability-convex-vs-nonconvex-schedules",
+      "decision": "accept",
+      "reason": "The convex schedule satisfies the supplier’s step-size assumptions."
+    }
+  ]
+}

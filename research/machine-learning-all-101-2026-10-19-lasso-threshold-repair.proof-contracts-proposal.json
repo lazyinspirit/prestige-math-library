@@ -1,0 +1,574 @@
+{
+  "version": 1,
+  "scope": [
+    "fs-wainwright-lower-signed-support-threshold",
+    "fs-wainwright-signed-support-threshold-claim"
+  ],
+  "contracts": {
+    "fs-wainwright-lower-signed-support-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-sample-covariance-operator-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d_k,n_k\\ge1$ be integer sequences with $d_k/n_k\\to0$. For each $k$, let $G_k\\in\\mathbb R^{n_k\\times d_k}$ have mutually independent $N(0,1)$ entries. Then\n\n$$\\left\\|\\frac{G_k^{\\mathsf T}G_k}{n_k}-I_{d_k}\\right\\|_{\\mathrm{op}}\\xrightarrow[k\\to\\infty]{\\mathbb P}0.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-chi-square-degree-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $r_k,n_k$ be positive integers with $n_k\\to\\infty$ and $r_k/n_k\\to1$. For each $k$, let $Z_{k,1},\\ldots,Z_{k,r_k}$ be independent $N(0,1)$ random variables and set $D_k=\\sum_{j=1}^{r_k}Z_{k,j}^2$. Then $D_k/n_k\\to1$ in probability.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$ and fixed weights $w_g>0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lower-derivation-1",
+          "step": "1.1",
+          "claim": "Construct the explicit paired active/inactive Gaussian design, independent noise and signal/penalty sequence.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "lower-derivation-2",
+          "step": "2.1",
+          "claim": "Verify every active and full covariance hypothesis with fixed constants, including full eigenvalue bound3.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-3",
+          "step": "3.1",
+          "claim": "Check the exact original lower constant and strict sample-size failure inequality.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-4",
+          "step": "4.1",
+          "claim": "The active restricted candidate is positive with probability tending to one.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-5",
+          "step": "4.2",
+          "claim": "Prove the directional inverse-Gram chi-square identity with n-s+1 degrees and its s/n limit.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "lower-derivation-6",
+          "step": "5.1",
+          "claim": "Compute inactive centered conditional Gaussian dual variables and bound their common variance on a design/noise event.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-7",
+          "step": "6.1",
+          "claim": "Uniform conditional Gaussian tails make all inactive dual variables strictly feasible.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-8",
+          "step": "7.1",
+          "claim": "Direct objective expansion proves KKT sufficiency and success with probability tending to one, refuting the lower claim.",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The original asymptotic formulation assumes all three dimensions diverge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes strictly positive penalty and variance-one noise."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No fixed one-dimensional limit is asserted; this refutes a growing-dimensional implication."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies positive-definite covariance and the proof treats rank failure as a null event or excludes it on the spectral event."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the strict original threshold and all dimensional/tuning conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The full original Statement and A1 carry every choice hypothesis used by the finite Gaussian suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted branch is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted branch is an implication, not a biconditional."
+        }
+      ]
+    },
+    "fs-wainwright-signed-support-threshold-claim": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lasso-active-set-stationarity",
+          "source_section": "Statement",
+          "quote": "then $$\\widehat\\beta_S=(X_S^{\\mathsf T}X_S/n)^{-1}(X_S^{\\mathsf T}y/n-\\lambda b).$$",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-sample-covariance-operator-concentration",
+          "source_section": "Statement",
+          "quote": "Then $$\\left\\|\\frac{G_k^{\\mathsf T}G_k}{n_k}-I_{d_k}\\right\\|_{\\mathrm{op}}\\xrightarrow[k\\to\\infty]{\\mathbb P}0.$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-chi-square-degree-ratio",
+          "source_section": "Statement",
+          "quote": "Then $D_k/n_k\\to1$ in probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-gaussian-max-comparison",
+          "source_section": "Statement",
+          "quote": "then $\\mathbb E[\\max_iX_i]\\ge\\mathbb E[\\max_iY_i]$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-standard-gaussian-maximum-expectation-lower-bound",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E\\max_{1\\le i\\le m}G_i\\ge\\frac14\\sqrt{\\log m}.$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-standard-gaussian-lipschitz-concentration",
+          "source_section": "Statement",
+          "quote": "then for every $r>0$, $$P\\{f(Z)\\ge E f(Z)+r\\}\\le e^{-r^2/(2L^2)}.$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "then its law has Lebesgue density",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Then $X$ is a random element",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$",
+          "uses": [
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "then $$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of [[def-product-measure-on-sigma-finite-spaces]] is a measure on $\\mathcal A \\otimes \\mathcal B$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "asymptotic-hypotheses",
+          "step": "1.1",
+          "claim": "The constructed identity-covariance sequence satisfies every stated upper-branch size, incoherence, penalty, and beta-min condition at nu=1/2.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-design-rotation",
+          "step": "2.1",
+          "claim": "Orthogonal rotation preserves the standard Gaussian row law, yielding independent standard-normal entries and a chi-square residual degree count.",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-gram-and-block-decomposition",
+          "step": "3.1",
+          "claim": "Sample-covariance convergence and chi-square degree concentration produce a high-probability event controlling A, B, and d after the orthogonal active-coordinate rotation.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-noise-vanishes",
+          "step": "4.1",
+          "claim": "Conditional Gaussian tails and a union bound show the maximum active noise perturbation tends to zero.",
+          "inputs": [
+            "F10",
+            "F11",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "block-inverse-law",
+          "step": "4.2",
+          "claim": "Gaussian orthogonal decomposition and direct block multiplication give A^-1 1=n/d 1+Z with the stated conditional Gaussian covariance.",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-max-comparison",
+          "step": "5.1",
+          "claim": "The conditional increment variances and an independent product-space Gaussian comparison lower-bound the conditional expected maximum.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F10",
+            "F12",
+            "step 4.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-max-concentration",
+          "step": "6.1",
+          "claim": "Gaussian Lipschitz concentration turns the conditional expected-maximum lower bound into a high-probability lower bound.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F6",
+            "F7",
+            "step 4.2",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "penalty-amplification",
+          "step": "7.1",
+          "claim": "The chosen lambda times the maximum active inverse-Gram bias diverges like sqrt(k/log k).",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.2",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sign-recovery-impossible",
+          "step": "8.1",
+          "claim": "The active stationarity formula forces a negative coordinate whenever all signs are hypothesized positive, contradicting exact signed recovery with probability tending to one.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "step 7.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Sigma=I",
+          "result": "Cmin=Cmax=Dmax=epsilon=1 and both scheduled threshold constants equal one."
+        },
+        {
+          "case": "asymptotic scale",
+          "result": "n/s~5k, log(s)~k^2, lambda~(2log k)^-1/2, so lambda sqrt(s log(s)/n)~sqrt(k/(10log k)) diverges."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequence assumes s,n-s,N all diverge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The selected noise variance is one and lambda_k is positive for k>=2; the alleged upper condition is checked in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is an asymptotic sequence with dimensions diverging."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Sigma=I is positive definite and the active Gram is invertible on the high-probability event E_k in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda->0, n lambda^2/log N->infinity, and the stated beta-min limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC, DC, and countable choice are each assumed in the Statement and recorded in A1 and A2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement refutes a one-way sufficiency implication, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement refutes a one-way sufficiency implication, not an iff characterization."
+        }
+      ]
+    }
+  }
+}

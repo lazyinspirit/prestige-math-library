@@ -1,0 +1,244 @@
+[
+  {
+    "order": 2766,
+    "id": "attention-and-transformer-expressivity",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Attention, transformer universality, and sequence limits",
+    "companion": "attention-and-transformer-expressivity-examples",
+    "requires": [
+      "feedforward-networks-and-universal-approximation"
+    ],
+    "items": [
+      {
+        "id": "lem-2dyck-pcfg-prefix-mass-positive",
+        "kind": "lemma",
+        "title": "Exact 2DYCK PCFG prefix laws and positive paired-prefix mass",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-scaled-dot-product-attention",
+        "kind": "definition",
+        "title": "Scaled dot-product attention",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-positional-encoding-and-causal-mask",
+        "kind": "definition",
+        "title": "Positional encodings and causal masks",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-paired-crossentropy-mixture-bound",
+        "kind": "lemma",
+        "title": "Close paired predictions incur mixture entropy",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-multihead-self-attention",
+        "kind": "definition",
+        "title": "Multi-head attention and self-attention",
+        "deps": [
+          "def-scaled-dot-product-attention"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-hahn-hard-soft-attention-sequence-model",
+        "kind": "definition",
+        "title": "Hard and soft attention sequence models",
+        "deps": [
+          "def-scaled-dot-product-attention",
+          "def-feedforward-neural-network"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-transformer-encoder-decoder-layer",
+        "kind": "definition",
+        "title": "Transformer encoder, decoder, and fixed-width expressivity blocks",
+        "deps": [
+          "def-multihead-self-attention",
+          "def-positional-encoding-and-causal-mask",
+          "def-feedforward-neural-network"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-hard-attention-depth-reduction",
+        "kind": "lemma",
+        "title": "Hard-attention depth reduction under input restrictions",
+        "deps": [
+          "def-hahn-hard-soft-attention-sequence-model",
+          "thm-asymmetric-lovasz-local-lemma"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix a finite content alphabet $\\Sigma$ with $s=|\\Sigma|\\ge2$, a hard-attention model with fixed $H\\ge1$ heads per position and $L\\ge1$ layers, and an integer $c\\ge1$. At length $n$, the model input is $(x_1,\\ldots,x_{n-1},\\mathtt{eos})$, with the end marker fixed at position $n$. An input restriction assigns each content position $i<n$ either $*$ (free) or a fixed symbol of $\\Sigma$; its free positions are precisely the content positions marked $*$. Say that a layer-zero activation, including the activation at the end-marker position, depends on at most $c$ free positions if, with the restriction fixed, its value is determined by at most $c$ of the remaining free input symbols. Suppose the current restriction leaves at least $Cn$ content positions free for every sufficiently large $n$, where $0<C\\le1$, and every layer-zero activation depends on at most $c$ free positions. For every $0<C'<C$, there are an integer $c'\\ge1$ and a refinement, for every sufficiently large $n$, that leaves at least $C'n$ content positions free and preserves the model's output on every completion, while absorbing the first remaining attention layer into new layer-zero activations that each depend on at most $c'$ original content positions. Repeating this conclusion through the fixed $L$ layers gives a restriction with at least $C'n$ free content positions on which the output depends on at most a constant number of original content positions. The constants and the length threshold may depend on the fixed model, $c,C,C'$, but not on $n$."
+      },
+      {
+        "id": "thm-hard-attention-languages",
+        "kind": "theorem",
+        "title": "Fixed-depth hard attention cannot recognize PARITY or 2DYCK",
+        "deps": [
+          "lem-hard-attention-depth-reduction",
+          "def-hahn-hard-soft-attention-sequence-model"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-soft-attention-one-symbol-influence",
+        "kind": "lemma",
+        "title": "A nonfinal token has inverse-length influence under bounded soft attention",
+        "deps": [
+          "def-hahn-hard-soft-attention-sequence-model"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-soft-attention-parity-chance-limit",
+        "kind": "theorem",
+        "title": "Fixed soft attention has no parity advantage over the unigram predictor",
+        "deps": [
+          "def-hahn-hard-soft-attention-sequence-model",
+          "lem-paired-crossentropy-mixture-bound",
+          "lem-soft-attention-one-symbol-influence"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-transformer-forward-pass",
+        "kind": "algorithm",
+        "title": "Transformer encoder-decoder forward pass",
+        "deps": [
+          "def-transformer-encoder-decoder-layer"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-transformer-permutation-equivariance-without-position",
+        "kind": "theorem",
+        "title": "Position-free unmasked self-attention is permutation equivariant",
+        "deps": [
+          "def-transformer-encoder-decoder-layer",
+          "def-multihead-self-attention"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+        "kind": "lemma",
+        "title": "Paired-prefix lower bound for soft-attention 2DYCK prediction",
+        "deps": [
+          "def-hahn-hard-soft-attention-sequence-model",
+          "lem-soft-attention-one-symbol-influence",
+          "lem-paired-crossentropy-mixture-bound"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-transformer-formal-language-limits",
+        "kind": "theorem",
+        "title": "Hard and soft attention limits for formal-language prediction",
+        "deps": [
+          "def-hahn-hard-soft-attention-sequence-model",
+          "lem-hard-attention-depth-reduction",
+          "thm-hard-attention-languages",
+          "thm-soft-attention-parity-chance-limit",
+          "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+          "lem-soft-attention-one-symbol-influence",
+          "lem-2dyck-pcfg-prefix-mass-positive"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-yun-transformer-grid-lookup",
+        "kind": "lemma",
+        "title": "Two-head fixed-width Transformers implement finite-grid lookups",
+        "deps": [
+          "def-transformer-encoder-decoder-layer",
+          "def-positional-encoding-and-causal-mask",
+          "thm-transformer-permutation-equivariance-without-position"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-dense-attention-cost-and-path-length",
+        "kind": "lemma",
+        "title": "Dense full-attention interaction cost and path length",
+        "deps": [
+          "alg-transformer-forward-pass"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-fixed-width-transformer-lp-universality",
+        "kind": "theorem",
+        "title": "Fixed-width Transformer approximation on compact domains",
+        "deps": [
+          "def-transformer-encoder-decoder-layer",
+          "lem-yun-transformer-grid-lookup",
+          "thm-transformer-permutation-equivariance-without-position",
+          "def-countable-choice",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-heine-cantor-metric",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2767,
+    "id": "attention-and-transformer-expressivity-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Attention, transformer universality, and sequence limits — Examples",
+    "companion": "attention-and-transformer-expressivity",
+    "requires": [
+      "attention-and-transformer-expressivity"
+    ],
+    "items": [
+      {
+        "id": "ex-position-free-vs-position-encoded-token-order",
+        "kind": "example",
+        "title": "Position-free versus position-encoded token order",
+        "deps": [
+          "def-countable-choice",
+          "def-positional-encoding-and-causal-mask",
+          "thm-transformer-permutation-equivariance-without-position",
+          "thm-fixed-width-transformer-lp-universality"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-two-token-causal-next-token-mask",
+        "kind": "example",
+        "title": "A two-token causal next-token mask",
+        "deps": [
+          "alg-transformer-forward-pass",
+          "def-positional-encoding-and-causal-mask",
+          "def-scaled-dot-product-attention"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-fixed-length-vs-unbounded-sequence-limits",
+        "kind": "example",
+        "title": "Fixed-length universality and unbounded sequence limits",
+        "deps": [
+          "def-countable-choice",
+          "thm-fixed-width-transformer-lp-universality",
+          "thm-hard-attention-languages",
+          "thm-soft-attention-parity-chance-limit"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  }
+]

@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-identically-distributed-and-iid-random-variables.json
   audited: 2026-09-07
   judge:
     model: "gpt-5.6-terra"
@@ -22,4 +23,11 @@ sources:
 
 ## Definition
 
-Let $(X_i)_{i\in I}$ be random elements with the same measurable target $(E,\mathcal E)$. They are **identically distributed** if $\mathbb P(X_i\in B)=\mathbb P(X_j\in B)$ for all $i,j\in I$ and $B\in\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.
+Let $(X_i)_{i\in I}$ be random elements with the same measurable target $(E,\mathcal E)$. They are **identically distributed** if $\mathbb P(X_i\in B)=\mathbb P(X_j\in B)$ for all $i,j\in I$ and $B\in\mathcal E$, that is, their laws in Law or distribution of a random element agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in Independent random elements. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.
+
+## Definition references
+
+[[def-law-or-distribution-of-a-random-element]]
+
+[[def-independent-random-elements]]
+

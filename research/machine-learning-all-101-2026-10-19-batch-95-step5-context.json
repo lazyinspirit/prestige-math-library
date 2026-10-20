@@ -1,0 +1,172 @@
+{
+  "group": "af",
+  "batches": [
+    "95"
+  ],
+  "pages_read": [
+    "low-rank-adaptation-and-parameter-update-geometry",
+    "low-rank-adaptation-and-parameter-update-geometry-examples"
+  ],
+  "items_read": [
+    "def-low-rank-adaptation-of-a-linear-layer",
+    "alg-finite-budget-low-rank-adaptation",
+    "thm-low-rank-adapter-factorization-ambiguity",
+    "thm-low-rank-adapter-merging-and-gradients",
+    "rem-adaptation-rank-and-empirical-transfer",
+    "ex-low-rank-adapter-change-of-basis",
+    "ex-rank-one-adapter-cannot-realize-full-rank-update",
+    "ex-zero-zero-initialization-stalls-adaptation",
+    "ex-merged-and-unmerged-adapter-forward-pass-agree"
+  ],
+  "conventions": [
+    {
+      "convention": "Dimensions d,k are positive; 1 ≤ r ≤ min(d,k); c is a nonzero real scalar; A has shape r×k and B has shape d×r. W₀ is frozen and the update is cBA. No bias or dropout is included.",
+      "fixed_by": "def-low-rank-adaptation-of-a-linear-layer",
+      "matters_for": [
+        "alg-finite-budget-low-rank-adaptation",
+        "thm-low-rank-adapter-factorization-ambiguity",
+        "thm-low-rank-adapter-merging-and-gradients",
+        "rem-adaptation-rank-and-empirical-transfer"
+      ]
+    },
+    {
+      "convention": "Minibatches are finite nonempty ordered lists, with repeated indices counted separately. B₀=0, A₀ is supplied, and both factor updates use gradients at the current factors. T=0 evaluates no loss.",
+      "fixed_by": "alg-finite-budget-low-rank-adaptation",
+      "matters_for": [
+        "thm-low-rank-adapter-merging-and-gradients",
+        "ex-zero-zero-initialization-stalls-adaptation"
+      ]
+    },
+    {
+      "convention": "AD uses exact real arithmetic and C¹ primitives on open domains or unique strict piecewise-C¹ branches. Undefined calls and defined boundary/ambiguous calls return distinct failure statuses before updating. Branch choices may differ between steps.",
+      "fixed_by": "alg-finite-budget-low-rank-adaptation",
+      "matters_for": [
+        "thm-low-rank-adapter-merging-and-gradients",
+        "ex-zero-zero-initialization-stalls-adaptation",
+        "rem-adaptation-rank-and-empirical-transfer"
+      ]
+    },
+    {
+      "convention": "Matrix gradients use the Frobenius inner product tr(XᵀY). The count r(d+k) counts trainable coordinates, not identifiable degrees of freedom. Merge equalities assert real-arithmetic equality without floating-point guarantees.",
+      "fixed_by": "thm-low-rank-adapter-merging-and-gradients",
+      "matters_for": [
+        "rem-adaptation-rank-and-empirical-transfer",
+        "ex-zero-zero-initialization-stalls-adaptation",
+        "ex-merged-and-unmerged-adapter-forward-pass-agree"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-low-rank-adaptation-of-a-linear-layer",
+      "statement": "For positive d,k, 1 ≤ r ≤ min(d,k), nonzero real c, and frozen W₀∈R^(d×k), an adapter consists of trainable B∈R^(d×r), A∈R^(r×k), with W=W₀+cBA and output W₀x+cB(Ax).",
+      "used_by": [
+        "alg-finite-budget-low-rank-adaptation",
+        "thm-low-rank-adapter-factorization-ambiguity",
+        "thm-low-rank-adapter-merging-and-gradients"
+      ]
+    },
+    {
+      "id": "thm-low-rank-adapter-merging-and-gradients",
+      "statement": "Under the stated finite loss-program and strict-branch hypotheses, the Frobenius factor gradients are ∇B L=cGAᵀ and ∇A L=cBᵀG. Successful algorithm steps return these exact gradients for their ordered minibatch objectives. B=0 implies ∇A L=0, and A=B=0 also implies ∇B L=0. For every x, W₀x+cB(Ax)=(W₀+cBA)x. There are r(d+k) trainable factor coordinates. Under terminating value/status checks and primitive/strict-branch derivative evaluations, the procedure returns the first specified failure before updating, or SUCCESS after exactly T updates; T=0 returns immediately.",
+      "used_by": [
+        "alg-finite-budget-low-rank-adaptation",
+        "rem-adaptation-rank-and-empirical-transfer",
+        "ex-zero-zero-initialization-stalls-adaptation",
+        "ex-merged-and-unmerged-adapter-forward-pass-agree"
+      ]
+    },
+    {
+      "id": "thm-low-rank-adapter-factorization-ambiguity",
+      "statement": "For the stated dimensions and nonzero scale, rank(cBA)≤r; conversely every target update of rank at most r admits these factor shapes. Every invertible r×r matrix M preserves the update under (B,A)↦(BM,M⁻¹A). Every representable target has more than one factor pair, and targets of rank greater than r cannot be represented.",
+      "used_by": [
+        "rem-adaptation-rank-and-empirical-transfer",
+        "ex-low-rank-adapter-change-of-basis",
+        "ex-rank-one-adapter-cannot-realize-full-rank-update"
+      ]
+    },
+    {
+      "id": "alg-finite-budget-low-rank-adaptation",
+      "statement": "Initialize supplied A₀ and B₀=0. For each prescribed minibatch, check its finite scalar loss program at the current factors, return the specified failure without updating if encountered, otherwise obtain both gradients by reverse mode and simultaneously subtract their step-size multiples. After T successful updates return SUCCESS, A_T, B_T, and W₀+cB_TA_T; for T=0 return immediately without evaluating a loss.",
+      "used_by": [
+        "thm-low-rank-adapter-merging-and-gradients",
+        "ex-zero-zero-initialization-stalls-adaptation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "used_for": "Finite ordered graph, repeated parent slots, open primitive domains, exact arithmetic, and strict-branch/status conventions.",
+      "opened": true
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "used_for": "The adapter procedure's scalar-output reverse sweep, gradient ordering, and failure statuses.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Constructing factors for every target of rank at most r, including negative c by applying SVD to Δ/c.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating the adapter composition and checking the shared-parameter and reverse-mode suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "used_for": "Open strict-branch admissible domains and differentiability of finite loss programs supporting reverse-mode correctness.",
+      "opened": true
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "used_for": "Exact factor derivatives returned by reverse mode on every successful strict-branch evaluation.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "The open-domain total derivative convention underlying the chain rule and AD suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The C¹ convention used in finite-program and shared-parameter differentiability hypotheses.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "alg-reverse-mode-automatic-differentiation",
+      "finding": "The published item's Definition begins: “Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$.” This hyperlink interrupts the defining procedure. The uninterrupted-statement instruction requires moving it after the complete Definition into an immediately following Definition references section while preserving the prerequisite.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The published item's Definition contains “a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]])” and later “its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]”. Both hyperlinks occur inside the complete Definition, contrary to the uninterrupted-statement instruction requiring links in an immediately following Definition references section. The mathematical assumptions and dependencies must be retained.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "low-rank-adaptation-and-parameter-update-geometry",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "Inspected the prerequisite page and transformer-layer definition. This is architectural context only: the adapter claims import no attention universality or sequence-expressivity conclusion. Row-token transformer conventions do not alter the explicitly defined column-vector adapter convention."
+    },
+    {
+      "from": "low-rank-adaptation-and-parameter-update-geometry",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "Read the shared-parameter algorithm and gradient theorem. The adapter proof constructs a scalar running-sum recurrence with the same factor vector shared across minibatch entries, retaining repetitions. Open-domain, finite C¹, strict-branch and initial-state requirements match the supplier; no boundary derivative is claimed."
+    },
+    {
+      "from": "low-rank-adaptation-and-parameter-update-geometry",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "Read the finite feedforward definition. Identity output activation and zero bias give the linear matrix layer used by the adapter definition. No universal-approximation result or activation hypothesis is imported."
+    }
+  ]
+}

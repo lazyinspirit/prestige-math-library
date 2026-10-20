@@ -1,0 +1,62 @@
+# Step 3a Alpha — batch 87
+
+Run: `machine-learning-all-101-2026-10-19`; group: `batch-87`; covers: 87.
+
+Completed all ten HIGH/CRITICAL risk reviews in generated dependency order. No fatal defect or unresolved mathematical blocker was found. One independently discovered nonfatal notation/input-table defect was repaired with `repair_confidence: 1` and recorded as a supplemental `gate:` decision. No judge, stamp, dispatch or gate battery was initiated.
+
+## Routing and current carriers
+
+Read the dispatch/order task, scope, reader report, native refuter artifact, pre/post snapshots, current items and cited dependency interfaces. Scope retains original group `ac`; this adjudicator uses `batch-87`. There are no original touched, page, reader, refuter or authenticated foreign obligations. The reader and refuter found no defects; those conclusions were treated as evidence only. The decisions file contains only the independently found supplemental defect below.
+
+Pre-reader and reader-post item/contract/manifest projections and page snapshots are identical. All twelve current item hashes matched reader-post before this review's repair. The only item changed by Alpha is the final DR example; mathematical risk-review additions alter the batch contract. Both A/B pages remain draft, frontmatter-only, with `page_layout: compact-v1`, and retain their eight/four item inventories.
+
+## Independent reviews in item order
+
+- `thm-offline-coverage-impossibility-example`: Reviewed Statement and Proof 1.1–2.1 and the expectation definition. Both finite deterministic MDP rows normalize; every n≥1 behavior dataset is the same point mass. Target values are +1 and −1 and maximizing actions differ, so a common estimator expectation or selector distribution cannot identify both. Missing support is explicit; no AC or limiting argument is required for this finite witness. No defect.
+
+- `def-offline-reinforcement-learning-dataset`: Reviewed complete Definition and Remarks against the current batch-81 action-state-reward path-law statement and proof. AC, fixed start, stationary policies, finite nonempty state/action/reward sets and normalized joint reward-transition rows match. Summing terminal factors normalizes each finite path law; reachable target-positive paths have positive behavior factors under the stated sufficient support condition. H,n≥1 and γ∈[0,1] avoid empty samples and allow both discount endpoints; bounded returns are integrable. No defect.
+
+- `lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative`: Reviewed Proof 1.1–3.1 against all ten current dependency statements and the batch-81 path-law proof. Full absolute continuity passes to prefixes by inverse images. On behavior-positive atoms common positive transition factors cancel; target-zero atoms give zero products. Finite counting measure supplies the common finite exhaustion for RN existence and chain rule under the explicitly assumed AC. Values on behavior-null prefixes are irrelevant to the density class. Applying integration against a density to positive/negative parts proves both signed expectation and absolute integrability identities. Prefix expectations lift by the marginal law. No defect; H=1 and zero target factors are included.
+
+- `thm-doubly-robust-ope-is-unbiased-under-either-correct-component`: Reviewed all six proof steps, the DR procedure, current path-law proof, density lemma and five conditional-expectation interfaces. In condition 1 each residual is prefix measurable; changing measure and target action averaging makes the V terms telescope with fixed start and V_H=0. In condition 2 backward induction identifies V_0 with the target return, and dividing positive history atom masses yields the exact conditional transition law; exact Q gives zero conditional residual. Fixed finite multipliers make each history-measurable product bounded, so taking out what is known and total expectation apply without coverage. Finite state/action/reward/horizon ensure integrability; γ=0, γ=1, H=1, zero weights and missing support are permitted as stated. Independent evaluation/fixed nuisances prevent reuse bias. No defect.
+
+- `thm-trajectory-importance-sampling-is-unbiased`: Reviewed Proof 1.1–4.1, OIS/PDIS/WIS procedure and all current dependencies. Positive behavior trajectories have positive denominators, so unsupported inputs form a finite union of null atoms. Numerical returns are finite, including WIS zero-denominator return 0. The full density changes weighted returns, and prefix densities change individual rewards; finite linearity gives both unbiased sample means. No independence assumption beyond the dataset interface is needed for this linearity. H,n≥1, zero target ratios and γ=0,1 are sound. No unbiasedness is asserted for WIS. No defect.
+
+- `ex-offline-ope-exploding-trajectory-weights`: Reviewed Example and Verification 1.1–2.1 with current dataset/procedure dependencies. The all-b event has probability ε^H and score H ε^(−H); all other paths have zero target weight even when some rewards are positive. Direct first and second moments give H and H² ε^(−H), hence variance H²(ε^(−H)−1). Full coverage holds for 0<ε<1; H=1 and γ=1 are included; ε=0,1 are excluded and no infinite-horizon integrability is asserted. No defect.
+
+- `ex-offline-ope-full-support-and-missing-support`: Reviewed Example and Verification 1.1–2.1 against its four dependencies. Full-support scores 2 and 0 each have probability 1/2 and mean 1; at H=1 discount has no effect and PDIS agrees. Deterministic-a behavior instead gives a behavior-null target-b atom, so the coverage premise fails; the +1/−1 reward models have identical observed data and distinct target values as in the already reviewed impossibility supplier. The invalid-support case is not claimed to satisfy the algorithm preconditions. No defect.
+
+- `ex-offline-ope-weighted-and-clipped-estimators-can-be-biased`: Reviewed Example and Verification 1.1–3.1 with current dataset and IS algorithm. With K b-actions among n≥1 independent episodes, OIS is 2K/n, WIS is 1{K>0} including the prescribed all-zero-weight return, and clipping at 1 gives K/n. Thus expectations are 1, 1−2^(−n), and 1/2; the bias claims match target 1. H=1, n=1, zero total weight and independence are explicit. No defect.
+
+- `rem-offline-rl-distribution-shift-and-pessimism`: Reviewed the full prose section and all six current dependencies. Fixed finite dataset spaces imply finite second moments after finite null-event assignment; no uniform variance bound follows, as rare supported actions yield arbitrarily large ratios. Fixed-policy unbiasedness supplies neither a confidence statement nor dominance over behavior. Missing-support impossibility matches the reviewed supplier. Policy constraints, pessimistic adjustments and model exploitation are qualified conceptual descriptions consistent with Levine §§2.4,3.5,4.3–4.5,5.1; no generic safety theorem is asserted. No defect.
+
+- `ex-offline-ope-doubly-robust-correctness-branches`: Reviewed complete Example, Verification 1.1–2.1, current DR algorithm/theorem and dataset definition. Correct-ratio case has Q=0, scores 0 or 2, mean 1; the displayed half-weighted zero baseline equals the true deterministic-target baseline 0. Correct-model case has V0=1, V1=0 and observed residual 0 despite missing support. Found and repaired undefined state s in the multiplier prescription: use (s0,a),(s0,b), and explicitly define (z,c), all as 1, yielding a total finite nonnegative input table. This is a nonfatal notation/input-typing repair; values and claims are unchanged. TikZ vertices s0,z, a:0/b:1 arrows to z and c:0 self-loop match the dynamics; proof is independent of the diagram. No remaining defect; repair_confidence=1.
+
+## Repair and consumer review
+
+Defect `ml101-b87-dr-example-multiplier-state`, verdict `confirmed_nonfatal`: the second case of `ex-offline-ope-doubly-robust-correctness-branches` prescribed multipliers at an undefined state `s`, although its states are `s_0,z` and actions `a,b` belong only to `s_0`. The corrected complete table assigns multiplier 1 to `(s_0,a)`, `(s_0,b)` and `(z,c)`. No value, hypothesis, claim strength or dependency changes. The proof already evaluated the intended `(s_0,a)` multiplier. The example's provenance remains AI-generated and its existing manifest/dependency declarations remain accurate; contract derivations/citations and source provenance are unchanged because the proof and cited suppliers are unchanged. There is no judge record to invalidate.
+
+Searched actual item/page references to the changed example: only its own B-page inventory refers to it. That page consumes its stable ID, without a mathematical assertion needing repair. No downstream item consumer or outside-batch repair is required. The single closed defect-ledger row is owned at `3a-adjudicate` and referenced by `gate:ml101-b87-dr-example-multiplier-state` in the decisions file. No historical reader/refuter finding was invented or relabeled.
+
+## Sources and dependency evidence
+
+- [Sutton and Barto, §5.5, printed pp. 127–132](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf): retrieved the full Stanford PDF with curl after the browsing reader failed; extracted the relevant text with PyMuPDF. Checked action coverage and equations (5.3)–(5.5), including zero-denominator WIS and Example 5.5. The source's unbounded episode-length variance illustration differs from the local example's fixed finite horizon, whose moments were recomputed directly.
+- [Jiang and Li, §§3.2.2–4.2, PDF pp. 3–4](https://proceedings.mlr.press/v48/jiang16.pdf): checked equations (4)–(10), fixed evaluation-data requirements and Theorem 1. The proceedings text defers its proof; the local two-branch proof was reviewed directly rather than inferred from that citation.
+- [Levine et al., §§2.4, 3.1, 3.5, 4.3–4.5, 5.1](https://arxiv.org/html/2005.01643): checked the relevant support, estimator, constraint, uncertainty and model-exploitation passages. The tutorial's displayed equation (6) is not used to justify the local algebra; the authored DR formula is checked against Jiang–Li and its own proof. No broad tutorial claim substitutes for the local coverage, fixed-nuisance or terminal hypotheses.
+
+Current supplier `lem-finite-mdp-policy-action-state-reward-path-law` was read through its complete proof, not accepted from readiness metadata. Its finite kernel construction normalizes using the joint reward/next-state law, AC supplies the path law, and finite action sums give the stated marginals. Current published expectation, absolute-continuity, AC, independence, integrability, probability, RN-density, density-integration, integral-linearity and conditional-expectation statements were opened and matched to the actual uses. Finite counting measure satisfies the RN common-exhaustion hypotheses; all multipliers used in the conditional-expectation argument are bounded on the finite history space. This is an interface review, not an independent reproving of all transitive published measure theory.
+
+Updated the four owned consumer-batch cross-frontier records with the current supplier hash and exact uses, including the A-page prerequisite; refreshed the unified ledger using its native tool. No published supplier defect or affected published consumer was found, so the published-consumer ledger needs no entry. No proposed withdrawal exists in this scope.
+
+## Local checks and remaining work
+
+- Initial `risk-report` without `--require-reviewed`: 12 items routed, ten HIGH/CRITICAL, no errors.
+- Final `risk-report ... --require-reviewed`: passed; all ten required reviews complete.
+- `proof-contract ... --strict`: passed, 12/12 items, zero errors or warnings.
+- `tsx-run ... precheck.mts items/ex-offline-ope-doubly-robust-correctness-branches.md`: passed, one item.
+- Final batched changed-item `proof-layout`: passed, one item, three steps, zero defects; no later item edits or formatter.
+- Consumer search, page-body/inventory review, current/pre/post item comparison and JSON checks completed.
+
+Native live-status recomputation succeeded. The run remains at Step 3 with unrelated `3a-collect` blockers for batches 57 and 91; neither is within this dispatch's repair scope. No batch-87 escalation remains. Engine-owned decision hashing and the full gate battery remain pending.
+
+Final repaired item SHA-256: `4e81d2e29168b2467b73c1c48a5635790e20810deb963a38f0b3452ed3c70b8a`.

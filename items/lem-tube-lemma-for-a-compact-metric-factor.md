@@ -17,6 +17,7 @@ landmark: true
 short: "tube lemma (compact metric factor)"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-tube-lemma-for-a-compact-metric-factor.json
   precheck: pass
   verified:
     model: claude-sonnet-5
@@ -37,10 +38,10 @@ pipeline_run: null
 ## Statement
 
 Let $(X,d)$ be a metric space carrying its metric topology
-([[def-metric-topology]], [[def-metrizable-space]]), let $(Z, \mathcal{T}_Z)$ be
-a topological space ([[def-topological-space]]), and give $X \times Z$ the
-product topology ([[def-product-topology]]). Let $K \subseteq X$ be a compact
-subset ([[def-metric-compactness]]), let $z_0 \in Z$, and let $N \subseteq X \times Z$
+(The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement, Metrizable space: a topological space whose topology is induced by some metric; metrizability is topological, the metric is not), let $(Z, \mathcal{T}_Z)$ be
+a topological space (Topology on a set, open and closed sets, clopen sets, the closed-set axiomatisation, and the coarser/finer comparison), and give $X \times Z$ the
+product topology (The product set $\prod_{i \in I} X_i$ of functions choosing a point in each factor, the projections, the box topology, and the product topology as the initial topology of the projections; the empty product is a one-point space). Let $K \subseteq X$ be a compact
+subset (Open cover, subcover, compact metric space, and compact subset of a metric space), let $z_0 \in Z$, and let $N \subseteq X \times Z$
 be open with
 
 $$K \times \{z_0\} \;\subseteq\; N .$$
@@ -54,6 +55,18 @@ included and is settled by $W = Z$. **No choice principle is used at all**: the
 cover produced below is indexed by *pairs* of open sets, so the ambient form of
 compactness returns the second entries together with the indices and nothing has
 to be selected afterwards.
+
+## Statement references
+
+[[def-metric-topology]]
+
+[[def-metrizable-space]]
+
+[[def-topological-space]]
+
+[[def-product-topology]]
+
+[[def-metric-compactness]]
 
 ## Facts & Assumptions
 

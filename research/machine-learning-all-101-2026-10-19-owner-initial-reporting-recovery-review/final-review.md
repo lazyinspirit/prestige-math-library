@@ -1,0 +1,17 @@
+# Independent final review — approved
+
+Approved the exact six-file `your-proposal/revision-3/candidate/` packet for the bounded initial native reporting-context recovery. `approved-reviewed-hashes.json` records the verified before/after SHA256 inventory and independent executable snapshot. The snapshot was copied from frozen candidate bytes; live preimages still matched at verification. This approval covers the adapter and its guarded operational recipe, not mathematical acceptance or actual run execution.
+
+The actual original work floor remains 223 pairwise-disjoint subjects: 71 for original owner 1, 72 for owner 2 and 80 for owner 3. Every assigned original supplier and explicit pending consumer must receive genuine fresh native current review from its corresponding new persistent owner. Original reports, results, attempts, prompts, contexts, pack and historical findings remain unchanged. The original owner-3 uncertainty remains explicit historical uncertainty and does not acquire acceptance through current hashes.
+
+Independent verification of the repaired frozen bytes:
+
+- Focused initial/repeat recovery selection: 74 passed, 0 failed, including the scaled 223-subject complete flow.
+- Three independently authored blocking reproductions: all now pass. Later pending declarations cannot borrow earlier-pass recovery coverage; first scheduling rechecks the real paused/drained 5.2 hold and unchanged request/dispatch bindings; uncertainty cannot mask another malformed original review field.
+- Native reader-concern/safety selection: 16 passed, 1 failed. The same preexisting missing-persistent-reviewer assertion at reader-concern line 186 fails on the original implementation and both candidates. No broad green-suite or native gate claim is made.
+
+The actual-sized fixture verifies that ordinary collection rejects the uncertain original before and after recording, that the separate historical scheduling observation contains zero reviews/native acceptance, that 223 genuine fresh duties are scheduled, and that only accepted fresh current native owners close and certify the wave. Fresh uncertain/stale/missing rows, wrong homes or sessions, altered originals, false observation credit, changed current inputs and forged completion cannot supply closure. Existing repeat/default behavior, no-progress controls, round/repair budgets, source currency, native certification, judgments and gates remain owed.
+
+The existing WORKFLOW.md owner-hold allowance expressly permits the native `advance-impact` helper after writers drain and before gate permission/resume. Root should use the genuine stopped/paused, drained 5.2 boundary: verify current guards, preview and record the exact receipt, invoke that native helper to create real followup work, inspect its authentic assignments/session routing, then resume the ordinary engine without a false resolved-escalation or gate-permission assertion. Later drained holds use the same native helper only for genuinely owed passes. Root owns installation, fresh process loading, actual recording, current checks, recertification and every gate.
+
+The author addressed all three final findings as one consolidated review/repair set. No additional review/repair cycle is requested. This reviewer changed only the assigned research evidence directory and isolated temporary test snapshots; no live code, mathematical source, native control, report, pack, counter or gate was changed.

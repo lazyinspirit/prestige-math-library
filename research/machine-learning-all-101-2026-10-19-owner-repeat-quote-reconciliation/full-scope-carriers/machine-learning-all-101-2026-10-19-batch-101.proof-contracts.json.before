@@ -1,0 +1,1013 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-finite-round-confidence-pseudolabeling",
+    "lem-real-cholesky-recurrence-computes-factorization",
+    "def-graph-harmonic-label-extension",
+    "thm-unlabeled-law-alone-does-not-identify-labels",
+    "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+    "alg-graph-harmonic-label-propagation",
+    "rem-semisupervised-cluster-assumptions",
+    "ex-confident-pseudolabel-can-be-wrong",
+    "ex-unlabeled-law-two-point-lower-bound",
+    "ex-graph-harmonic-path-interpolation",
+    "ex-graph-harmonic-unanchored-component-status"
+  ],
+  "contracts": {
+    "thm-graph-harmonic-extension-uniqueness-and-maximum-principle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-graph-harmonic-label-extension",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices lie in the same connected component exactly when a finite path of support edges joins them; connected components include isolated singleton vertices. Let $B\\subseteq V$ be nonempty, put $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. Call the boundary anchored when every connected component meeting $U$ also meets $B$. For $f\\in\\mathbb R^V$ with $f|_B=y_B$, define the Dirichlet graph energy $E(f)=\\tfrac12 f^TLf$. A function is harmonic on $U$ when $(Lf)_u=0$ for every $u\\in U$. A graph-harmonic label extension is any minimizer of $E$ over the affine set of functions with the prescribed boundary values; the definition itself makes no uniqueness assertion.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $n\\ge 1$, and let $b\\in F^n$.\n\n1. If $L\\in M_n(F)$ is lower triangular with nonzero diagonal, the forward\n   substitution recursion of\n   [[def-forward-and-back-substitution-for-triangular-systems]] produces the\n   unique solution of $Lx=b$.\n2. If $U\\in M_n(F)$ is upper triangular with nonzero diagonal, the backward\n   substitution recursion produces the unique solution of $Ux=b$.\n\nEach solve uses exactly $n$ divisions,\n$\\frac{n(n-1)}{2}$ multiplications, and $\\frac{n(n-1)}{2}$ additions or\nsubtractions, hence $O(n^2)$ scalar operations.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb C)$ be Hermitian positive definite and let\n$A=LL^*$ be its Cholesky factorisation with positive diagonal.\n\n1. For every right-hand side $b\\in\\mathbb C^n$, the system $Ax=b$ is solved by\n   first solving $Ly=b$ and then solving $L^*x=y$.\n2. The two triangular solves cost $2n^2+O(n)$ scalar operations altogether, and\n   the dense Cholesky factorisation costs\n   $$\\frac{1}{3}n^3+O(n^2)$$\n   scalar operations, compared with\n   $$\\frac{2}{3}n^3+O(n^2)$$\n   for dense LU factorisation without exploiting symmetry.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $U=\\varnothing$, then $B=V$ and the affine set of extensions contains only $f=y_B$. It is therefore the unique minimizer; the maximum and minimum assertions over $U$ are vacuous, and the one-hot boundary rows are in $\\Delta_C$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $U\\ne\\varnothing$ and put $M=L_{UU}$. For nonzero $v\\in\\mathbb R^U$, extend $v$ by zero on $B$ to $\\widetilde v\\in\\mathbb R^V$. By [F3], $v^TMv=\\widetilde v^TL\\widetilde v=\\tfrac12\\sum_{i,j}w_{ij}(\\widetilde v_i-\\widetilde v_j)^2$. If this sum were zero, every positive-weight edge would have equal endpoint values, so $\\widetilde v$ would be constant on each support component. Every component meeting $U$ meets $B$, where $\\widetilde v=0$, forcing $v=0$, a contradiction. Thus $M$ is positive definite; it is symmetric as a principal block of the symmetric matrix $L$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], $M$ has a Cholesky factorization $M=RR^T$ with positive diagonal. By [F6] and [F7], solving $Rv=-L_{UB}y_B$ and then $R^Tz=v$ gives a unique vector $z=-M^{-1}L_{UB}y_B$ in finitely many scalar operations.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F5",
+            "F6",
+            "F7",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $f_B=y_B$ and $f_U=z$. For any $h\\in\\mathbb R^U$, block expansion and $Mz+L_{UB}y_B=0$ give $E(f+h)-E(f)=h^T(Mz+L_{UB}y_B)+\\tfrac12h^TMh=\\tfrac12h^TMh$. This is positive for $h\\ne0$ by step 1.2, so $f$ is the unique minimizer and has the stated block formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The equation solved in step 2.1 gives $(Lf)_u=0$ for every $u\\in U$. If $d_u=0$, then $u$ is an isolated support component contained in $U$, contradicting anchoring; hence $d_u>0$ and $f_u=\\sum_jw_{uj}f_j/d_u$, a weighted average of neighboring values.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $m=\\max_{i\\in V}f_i$. If $m>\\max_{b\\in B}y_b$, then no maximizing vertex lies in $B$, so choose a maximizing vertex $u_0\\in U$. At $u_0$, the weighted-average equation in step 3.2 and $f_j\\le m$ force $f_j=m$ for each neighbor with positive weight. Choose a shortest finite path in its support component to $B$; every interior vertex lies in $U$, so applying the same argument successively forces the boundary value at the end of the path to equal $m$, a contradiction. Therefore $\\max_{i\\in V}f_i\\le\\max_{b\\in B}y_b$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Apply step 4.1 to $-f$, whose boundary values are $-y_B$ and whose unlabeled coordinates satisfy the same weighted-average equations. This yields $\\min_{b\\in B}y_b\\le f_u$ for every $u\\in U$, completing the maximum-principle bounds.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For one-hot boundary data, let $f^{(c)}$ be the minimizer for coordinate $c$ and put $g=\\sum_{c=1}^C f^{(c)}$. By step 2.1 each coordinate satisfies $(Lf^{(c)})_u=0$, and by steps 4.1 and 5.1 each $f^{(c)}_u$ is between 0 and 1. Linearity gives $(Lg)_u=0$ on $U$, while the one-hot boundary data give $g|_B=1$. The constant-one function also has these properties because every row sum of $L=D-W$ is zero. The difference $h=g-\\mathbf1$ therefore has $h|_B=0$ and $L_{UU}h_U=0$; positive definiteness from step 1.2 forces $h_U=0$. Thus $g$ is identically 1, so every unlabeled row lies in $\\Delta_C$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The theorem explicitly permits U empty. Proof1.1 then has B=V and the affine feasible set contains only the boundary function, so the unique minimizer is y_B; extrema over U are vacuous and one-hot boundary rows already lie in the simplex. Inverting L_UU is reserved for nonempty U.",
+          "evidence": "Proof step 1.1 treats U empty before any principal-block inverse is formed: B=V, the feasible affine set contains only f=y_B, and that function is the unique minimizer. Bounds over U are vacuous and one-hot boundary rows already belong to the simplex."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every weight is zero and U is nonempty, each unlabeled singleton component is unanchored; when U is empty, step 1.1 applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the nonempty boundary is all of V, so step 1.1 covers the only case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Disconnected components and isolated labeled vertices are allowed; every component meeting U must meet B, as used in steps 1.2 and 3.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The empty-unlabeled case is step 1.1; equality at either boundary extremum is allowed by steps 4.1 and 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite vertices, finite paths, and finite-dimensional exact arithmetic are used; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The top-level support-graph conventions define edges by positive weights and shared components by finite edge paths. Accordingly every support edge has positive weight and every connected pair has a path; these conventions feed proof1.2 and the maximum-principle path argument.",
+          "evidence": "The Statement explicitly defines support edges exactly by positive weights and connected components exactly by finite support-edge paths. The forward directions supply positive weights for support edges and a path for connected vertices; proof step 1.2 then uses equality along those positive-weight edges."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Positive weights supply support edges, and finite paths supply component membership by the Statement definitions. The theorem uses those reverse definitional directions when zero energy propagates along edges and when an anchored component provides a path to the boundary.",
+          "evidence": "The Statement defines positive weights as support edges and finite support-edge paths as component membership. In proof step 1.2 this connects zero-energy edge equalities throughout each component; proof step 4.1 uses an anchored component path to reach a boundary vertex."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read all eight steps and exact seven supplier interfaces/current proofs: finite Laplacian definition and quadratic-form/kernel lemma, graph extension definition, positive-diagonal Cholesky definition/existence-uniqueness, triangular substitution correctness and Cholesky solve. Zero-extension quadratic form and anchoring force SPD when U nonempty; empty U handled separately. Cholesky hypotheses match real symmetric SPD, finite nonzero block, nonzero diagonal; forward/backward solves give all right-hand sides. Expansion has correct 1/2 energy normalization and positive difference. An isolated unlabeled vertex contradicts anchoring, so averaging denominators positive. Finite maximum propagates along a shortest path to B; apply to -f for minimum. Coordinate bounds plus row-sum-zero and zero-boundary SPD uniqueness prove simplex, even when only one class occurs on boundary. No connectedness of whole graph or AC needed. Zhu section 2 uses connected graph and supplies block/harmonic context; local proof proves componentwise generalization. Reader/refuter no local defect; two published inline-link issues separately routed."
+      }
+    },
+    "thm-unlabeled-law-alone-does-not-identify-labels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $j$, assigning mass $\\mu(x)$ to $(x,h_j(x))$ defines a probability law because the masses are nonnegative and sum to one. The feature marginal is $\\mu$ for both laws, and $h_0=h_1$ on $\\mathcal S$, so the observed labeled input and unlabeled marginal are identical. Finiteness and the discrete sigma-algebra make every predictor and zero-one loss measurable, so [F2] gives the risk formula in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $g\\in\\mathcal H$. At each $x\\ne x_\\star$, the two risk summands agree because $h_0(x)=h_1(x)$. At $x_\\star$, the binary labels differ, so exactly one of the two indicators $\\mathbf1\\{g(x_\\star)\\ne h_0(x_\\star)\\}$ and $\\mathbf1\\{g(x_\\star)\\ne h_1(x_\\star)\\}$ equals one. Therefore $R_{P_0}(g)+R_{P_1}(g)\\ge q$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply the inequality in step 2.1 by $Q(g)\\ge0$ and sum over the finite class $\\mathcal H$. Since $\\sum_gQ(g)=1$, the two expected risks sum to at least $q$, so at least one is at least $q/2$. This proves the claimed maximum.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The feature set and observed labeled-input set are explicitly nonempty, and the positive-mass unseen atom lies outside the latter. The full binary predictor class contains constant predictors and Q is a normalized probability vector; neither indexed risk sum nor predictor mixture is an empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The feature set and observed labeled-input set are explicitly nonempty, and the positive-mass unseen atom lies outside the latter. The full binary predictor class contains constant predictors and Q is a normalized probability vector; neither indexed risk sum nor predictor mixture is an empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The unseen atom must have positive mass q>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If Q is a point mass on one deterministic classifier, steps 2.1 and 3.1 still give the stated worst-law bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint q=1 is allowed; the same complementary-error calculation gives a worst expected risk of at least 1/2. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof uses only q>0 and remains valid at q=1. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The classifier set and all sums are finite; no choice function or axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a risk lower bound, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a risk lower bound, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read all three proof steps and current exact supervised-problem and population-risk definitions. Finite nonempty discrete X, all binary maps, deterministic joint masses and nonnegative zero-one loss meet measurable-space/predictor/loss hypotheses. h0,h1 differ only on positive atom outside observed S; laws agree on marginal and fixed observed labels. Exactly one binary prediction is wrong at that atom, and other losses are nonnegative, giving sum of risks >=q for every g; common normalized nonnegative Q averages to sum >=q, hence max >=q/2. Checked q=1 with observed zero-mass inputs, other zero-mass atoms, deterministic Q and finite randomization. Does not assert equality of full labeled sample distributions or impossibility with added label assumptions. Common-information rule and same Q explicitly assumed; finite sums require no interchange theorem/AC. Reader/refuter no defect."
+      }
+    },
+    "ex-confident-pseudolabel-can-be-wrong": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-round-confidence-pseudolabeling",
+          "source_section": "Definition",
+          "quote": "Let $q\\ge2$, let $\\mathcal C=\\{1,\\ldots,q\\}$, and let $(\\mathcal X,d)$ be a finite metric space, meaning $d:\\mathcal X\\times\\mathcal X\\to[0,\\infty)$ is symmetric, $d(x,y)=0$ iff $x=y$, and $d(x,z)\\le d(x,y)+d(y,z)$ for all $x,y,z$. The input is a nonempty ordered list $S_0=((x_i,y_i))_{i=1}^m$ of labeled examples with $y_i\\in\\mathcal C$, a finite ordered set $U_0\\subseteq\\mathcal X\\setminus\\{x_1,\\ldots,x_m\\}$ of unlabeled examples, an integer $k$ with $1\\le k\\le m$, a confidence threshold $\\tau\\in[1/q,1]$, a pseudo-label weight $\\lambda>0$, and a round cap $T\\in\\mathbb N_0$. A true labeled record has weight $1$; a pseudo-labeled record has weight $\\lambda$.\n\nMaintain an ordered training list $R_t$, initially $S_0$, a remaining unlabeled set $U_t$, initially $U_0$, and an initially empty pseudo-label log. To predict at $x\\in U_t$, order all records $(x_i,y_i,w_i)\\in R_t$ by increasing $(d(x,x_i),i)$, where $i$ is their stable record index, and take the first $k$ records $N_t(x)$. For $c\\in\\mathcal C$, put $V_{t,c}(x)=\\sum_{(x_i,y_i,w_i)\\in N_t(x)}w_i\\mathbf 1\\{y_i=c\\}$. Let $\\widehat y_t(x)$ be the smallest class index attaining $\\max_c V_{t,c}(x)$, and define confidence $\\kappa_t(x)=\\max_c V_{t,c}(x)/\\sum_cV_{t,c}(x)$. The denominator is positive because $k\\ge1$ and every record weight is positive.\n\nIf $U_0=\\varnothing$, set status $\\texttt{no-unlabeled-inputs}$ and skip the round loop. Otherwise, for rounds $t=0,\\ldots,T-1$, compute all predictions from the same current list $R_t$. Let $A_t=\\{x\\in U_t:\\kappa_t(x)\\ge\\tau\\}$. If $A_t=\\varnothing$, set status $\\texttt{no-additions}$ and leave the loop. Otherwise append one pseudo-labeled record for each $x\\in A_t$, in the supplied order on $U_0$, using its predicted class and weight $\\lambda$; append $(t,x,\\widehat y_t(x),\\lambda)$ to the pseudo-label log, and remove all points in $A_t$ from $U_t$. A pseudo-label is never revised. If the updated $U_t=\\varnothing$, set status $\\texttt{all-labelled}$ and leave the loop. If all $T$ rounds finish without an earlier stop and points remain in $U_t$, set status $\\texttt{round-cap}$; this includes the case $T=0$.\n\nFor any query $x\\in\\mathcal X$, define the returned classifier by the same nearest-record ordering and weighted vote using the final training list, with the smallest-index vote tie rule. In every case return that classifier, the pseudo-label log, the remaining unlabeled set, and the status. The procedure makes no population-risk or pseudo-label-correctness guarantee.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The distances from $5$ to labeled inputs $4,3,2,1,0$ are respectively $1,2,3,4,5$, so all five records are selected in that order. Their votes are $V_1=4$ and $V_2=1$, giving prediction $1$ and confidence $\\max(4,1)/(4+1)=4/5$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the confidence meets the threshold, the algorithm appends pseudo-label $(5,1)$ with weight $1$ and removes 5 from the unlabeled set. The output status is all-labelled, and the no-relabel rule retains the pseudo-label 1 even though the specified true label is 2.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one unlabeled input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All true and pseudo weights in the example are positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The round cap is T=1 and the unlabeled set is a singleton. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The five distances are distinct, so no distance tie occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses k=5, equal to the number of initial labeled records, and threshold 4/5."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Distance and class ties are resolved deterministically; no tie occurs in this data. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite algorithm execution, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite algorithm execution, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-unlabeled-law-two-point-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-unlabeled-law-alone-does-not-identify-labels",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a finite nonempty feature set with its discrete sigma-algebra, and let $\\mu:\\mathcal X\\to[0,1]$ satisfy $\\sum_{x\\in\\mathcal X}\\mu(x)=1$. Let $\\mathcal S\\subsetneq\\mathcal X$ be a nonempty set of observed labeled inputs, and choose $x_\\star\\in\\mathcal X\\setminus\\mathcal S$ with $q=\\mu(x_\\star)>0$. Let $h_0,h_1:\\mathcal X\\to\\{0,1\\}$ agree on $\\mathcal X\\setminus\\{x_\\star\\}$ and differ at $x_\\star$. For $j\\in\\{0,1\\}$, let $P_j$ be the joint law assigning mass $\\mu(x)$ to $(x,h_j(x))$. Both laws have the same feature marginal and the same observed labels on $\\mathcal S$. Let $\\mathcal H=\\{g:\\mathcal X\\to\\{0,1\\}\\}$, and let $Q:\\mathcal H\\to[0,1]$ satisfy $\\sum_{g\\in\\mathcal H}Q(g)=1$, so it is a probability vector; take the same $Q$ under both laws, as a predictor rule using their common information must do. For the zero-one population risk\n$$R_{P_j}(g)=\\sum_{x\\in\\mathcal X}\\mu(x)\\mathbf 1\\{g(x)\\ne h_j(x)\\},$$\nthe expected risks satisfy\n$$\\max_{j\\in\\{0,1\\}}\\sum_{g\\in\\mathcal H}Q(g)R_{P_j}(g)\\ge\\frac q2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here the unseen atom is $b$ and $q=P_X(b)=1/2$. The two laws agree at the observed point $a$ and have the same $P_X$, so the theorem in [F1] applies and gives a maximum expected risk of at least $q/2=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Directly, let $p=Q\\{g\\in\\mathcal H:g(b)=1\\}$. The two expected risks have the same nonnegative contribution from $a$. Their contributions at $b$ are respectively $p/2$ under $P_0$ and $(1-p)/2$ under $P_1$, so their sum is at least $1/2$ and their maximum is at least $1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two features and one observed labeled input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The unseen atom has mass 1/2>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a deterministic predictor distribution, p is either 0 or 1 and one law incurs risk 1/2 at b. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two laws differ at exactly the unseen atom b and agree at a. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both feature masses equal 1/2, so the theorem parameter is exactly q=1/2. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The feature set and classifier set are finite; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite risk calculation, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite risk calculation, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-graph-harmonic-path-interpolation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graph-harmonic-label-extension",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices lie in the same connected component exactly when a finite path of support edges joins them; connected components include isolated singleton vertices. Let $B\\subseteq V$ be nonempty, put $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. Call the boundary anchored when every connected component meeting $U$ also meets $B$. For $f\\in\\mathbb R^V$ with $f|_B=y_B$, define the Dirichlet graph energy $E(f)=\\tfrac12 f^TLf$. A function is harmonic on $U$ when $(Lf)_u=0$ for every $u\\in U$. A graph-harmonic label extension is any minimizer of $E$ over the affine set of functions with the prescribed boundary values; the definition itself makes no uniqueness assertion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$. Two vertices lie in the same connected component exactly when a finite path of support edges joins them. Let $B\\subseteq V$ be nonempty, $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. For index sets $S,T\\subseteq V$, let $L_{ST}$ denote the submatrix with rows in $S$ and columns in $T$, in increasing index order. Assume every support-graph component meeting $U$ also meets $B$. Then the energy $E(f)=\\tfrac12 f^TLf$, minimized over $f|_B=y_B$, has exactly one minimizer. If $U=\\varnothing$, it is $f=y_B$. If $U\\ne\\varnothing$, the principal block $L_{UU}$ is real symmetric positive definite, meaning $v^TL_{UU}v>0$ for every nonzero $v\\in\\mathbb R^U$, and the minimizer is $f_U=-L_{UU}^{-1}L_{UB}y_B$. Each $u\\in U$ has $d_u>0$ and $f_u=\\sum_jw_{uj}f_j/d_u$; hence $\\min_{b\\in B}y_b\\le f_u\\le\\max_{b\\in B}y_b$. For $C\\ge2$, if each boundary value is one-hot (one coordinate equals 1 and all others equal 0) in $\\mathbb R^C$, the coordinatewise energy minimizers have every row in the probability simplex $\\Delta_C=\\{p\\in[0,1]^C:\\sum_{c=1}^Cp_c=1\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $U=\\{2\\}$, $L_{UU}=[2]$, $L_{UB}=[-1\\ -1]$, and $y_B=(0,1)^T$. By [F2], $f_2=-[2]^{-1}((-1)0+(-1)1)=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any candidate value $t=f_2$, the two edge contributions give $E(t)=\\tfrac12(t^2+(1-t)^2)=\\tfrac14+(t-\\tfrac12)^2$. This is uniquely minimized at $t=1/2$ with energy $1/4$, confirming [F1] and [F2].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a three-vertex nonempty graph."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both graph edges have unit weight."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has three vertices and two boundary vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The support graph is a single connected path with no isolated vertices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "There is one unlabeled vertex between the two labeled endpoints; steps 1.1 and 2.1 compute its value and energy."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The graph is finite and no choice function is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a unique minimization calculation, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a unique minimization calculation, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read complete Example, both Verification steps, TikZ and actual current graph extension/theorem prerequisites. Unit symmetric weights give L_UU=[2], L_UB=[-1,-1], boundary (0,1) and anchored connected path; block solution is 1/2. Independently expanded half-quadratic energy as (t^2+(1-t)^2)/2=1/4+(t-1/2)^2, proving minimum and uniqueness. TikZ vertices 1:0,2,3:1 and undirected unit edges exactly match data and conventions; proof independent of diagram. No boundary/empty ambiguity or AC; reader/refuter no defect."
+      }
+    },
+    "ex-graph-harmonic-unanchored-component-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graph-harmonic-label-extension",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices lie in the same connected component exactly when a finite path of support edges joins them; connected components include isolated singleton vertices. Let $B\\subseteq V$ be nonempty, put $U=V\\setminus B$, and prescribe $y_B\\in\\mathbb R^B$. Call the boundary anchored when every connected component meeting $U$ also meets $B$. For $f\\in\\mathbb R^V$ with $f|_B=y_B$, define the Dirichlet graph energy $E(f)=\\tfrac12 f^TLf$. A function is harmonic on $U$ when $(Lf)_u=0$ for every $u\\in U$. A graph-harmonic label extension is any minimizer of $E$ over the affine set of functions with the prescribed boundary values; the definition itself makes no uniqueness assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-graph-harmonic-label-propagation",
+          "source_section": "Definition",
+          "quote": "Inputs are $n\\ge1$, $V=\\{1,\\ldots,n\\}$, a matrix $W\\in\\mathbb R^{n\\times n}$, a nonempty labeled subset $B\\subseteq V$, a boundary-label matrix $Y_B\\in\\mathbb R^{|B|\\times r}$ with $r\\ge1$, an operation cap $K\\in\\mathbb N_0$ per label coordinate, and a residual tolerance $\\varepsilon\\ge0$. Use exact real arithmetic in the mathematical specification. Reject with status $\\texttt{invalid-input}$ unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $U=V\\setminus B$, $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has edge $\\{i,j\\}$ exactly when $w_{ij}>0$; two vertices are in the same connected component exactly when a finite path of support edges joins them. Use increasing vertex order for every submatrix, boundary vector, and returned output coordinate.\n\nInspect every connected component in increasing vertex order. If some component meeting $U$ misses $B$, return status $\\texttt{unanchored-component}$ and the unanchored components before forming a solve. If $U=\\varnothing$, return $Y_B$, an empty unlabeled output, and status $\\texttt{no-unlabeled-vertices}$. Otherwise set $M=L_{UU}$.\n\nFor each column $c=1,\\ldots,r$ in order, start a fresh counter at zero and form $b_c=-L_{UB}(Y_B)_{:,c}$, evaluating the matrix-vector product in increasing vertex order. Recompute a fresh lower-triangular Cholesky factor $R$ of $M$ for this column by the recurrence: initialize $R$ to zero; in increasing order $j=1,\\ldots,|U|$, compute $p_j=M_{jj}-\\sum_{k<j}R_{jk}^2$, return status $\\texttt{factorization-failure}$ if $p_j\\le0$, set $R_{jj}=\\sqrt{p_j}$, and for $i>j$ set $R_{ij}=(M_{ij}-\\sum_{k<j}R_{ik}R_{jk})/R_{jj}$. Recompute $R$ for each column so that the factorization cost is part of that column's cap.\n\nCount each real addition, subtraction, multiplication, division, comparison, and square root as one scalar operation. Evaluate every finite sum left-to-right in increasing index order, with an empty sum equal to zero. For each coordinate of $b_c$, implement the unary negation as one subtraction from zero and include that subtraction in the count. Input validation, degree/Laplacian construction, component scans, loop-control comparisons, and budget checks are outside the per-column count. The count for column $c$ includes forming $b_c$, its Cholesky recurrence, both triangular substitutions, and its residual calculation. Before each counted operation, if it would make the counter exceed $K$, return status $\\texttt{budget-exhausted}$ with outputs and residuals for only the fully completed columns before $c$. If a Cholesky pivot satisfies $p_j\\le0$, return status $\\texttt{factorization-failure}$ with outputs and residuals for only the fully completed columns before $c$.\n\nSolve $Rv_c=b_c$ by $v_{c,i}=((b_c)_i-\\sum_{j<i}R_{ij}v_{c,j})/R_{ii}$ in increasing $i$, and solve $R^Tz_c=v_c$ by $z_{c,i}=(v_{c,i}-\\sum_{j>i}R_{ji}z_{c,j})/R_{ii}$ in decreasing $i$, using the same counter and sum convention. Compute $e_{c,i}=\\sum_{j=1}^{|U|}M_{ij}z_{c,j}-(b_c)_i$ in increasing $i$, then $\\rho_c=(\\sum_{i=1}^{|U|}e_{c,i}^2)^{1/2}$, again using the same counter. If $\\rho_c>\\varepsilon$, return status $\\texttt{residual-failure}$ with candidate coordinates and residuals through column $c$. If all columns pass, return $Y_U=(z_1,\\ldots,z_r)$, the residuals, and status $\\texttt{residual-passed}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The support components are $\\{1,2\\}$ and $\\{3\\}$. The first meets both $B$ and $U$, while $\\{3\\}\\subseteq U$ and $\\{3\\}\\cap B=\\varnothing$, so the anchor condition in [F1] fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], this failed anchor check returns status $\\texttt{unanchored-component}$ before forming a linear system; no singular solve is attempted.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three vertices and a nonempty boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Vertex 3 has degree zero and forms the deliberately unanchored singleton component. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The graph has three vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The support graph is disconnected; the component check distinguishes the anchored pair from the isolated unlabeled vertex. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the status rule."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Component inspection is a finite deterministic scan."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one failure branch, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one failure branch, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-finite-round-confidence-pseudolabeling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition gives the explicit no-unlabeled-inputs return when U0 is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits T=0; no update round runs, and if inputs remain the cap-reached status is round-cap."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits k=1 and a singleton unlabeled set; its positive vote denominator is stated in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition resolves equal distances by stable record index and equal votes by smallest class index."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes both threshold endpoints 1/q and 1 and requires every record weight to be positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies orders for S0 and U0 and deterministic tie rules, so each round is fixed without a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The finite metric input requires distance zero only on equal points; therefore d(x,y)=0 entails x=y by the metric axiom explicitly included in the Definition. This is a required input equivalence, not an unproved correctness condition on pseudo-labels.",
+          "evidence": "The Definition opening paragraph requires a finite metric with d(x,y)=0 iff x=y. Its forward direction is part of the supplied metric axiom: a zero distance implies equal points; no learned-label accuracy implication is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "The stated metric axiom also requires x=y to give d(x,y)=0. Both directions belong to the supplied finite metric structure; the later weighted-vote algorithm does not claim its pseudo-labels are equivalent to true labels.",
+          "evidence": "The Definition opening paragraph requires the reverse metric direction as well: equal points have zero distance. This is an input-structure condition used by nearest-record ordering, not a theorem that pseudo-labels match true labels."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read complete Definition: finite metric and stable ordered record indices settle distance ties; smallest class index settles vote ties; m>=k>=1 and positive true/pseudo weights keep all confidences defined. Predictions are simultaneous before each append, so no within-round order dependence. Checked empty U0, T=0, no additions, all-labelled, remaining round-cap, tau endpoints 1/q and 1, repeated initial records, and final query rule. Only finite supplied orders and finite loops are used; no choice or population correctness guarantee. Reader/refuter report no defect in this carrier."
+      }
+    },
+    "def-graph-harmonic-label-extension": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows U=empty when B=V, so the admissible affine set fixes every coordinate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows W=0; anchoring is defined separately and no positive-weight edge is presumed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition covers n=1: nonempty B then forces B=V and U=empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly includes isolated singleton components and defines anchoring component by component."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no scalar endpoint parameter or extremal inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The graph and every path in the Definition are finite; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "Under this Definition, an edge is present only with positive weight and common component membership entails a finite support-edge path. These are the two explicit exactly-when graph conventions, including isolated singleton components.",
+          "evidence": "The Definition specifies that a support edge has positive weight and that two vertices in a common connected component are joined by a finite path of support edges. Both forward directions are supplied definitions, including the isolated-singleton convention."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Every positive off-diagonal weight defines its support edge, and a finite path of those edges defines common component membership. Both reverse directions are definitional; graph-harmonic minimizers are not thereby claimed unique before the anchored theorem.",
+          "evidence": "The Definition creates a support edge from every positive weight and defines common component membership from a finite support-edge path. These are its reverse exactly-when clauses; uniqueness of the energy minimizer is expressly not part of the definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-graph-harmonic-label-propagation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition returns the boundary matrix and empty unlabeled output when U=empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits K=0 and epsilon=0 and specifies the unanchored-component status before any solve."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition covers n=1: nonempty B then forces U=empty and the no-unlabeled-vertices branch applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition inspects all components and returns unanchored-component for any component meeting U but missing B."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes epsilon=0 and K=0 and compares each residual with epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition fixes increasing vertex order for component scans, submatrices, columns, and output coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The algorithm defines a support edge to have positive weight and component membership to have a finite support-edge path. Thus a declared edge entails positive weight, and vertices declared in one component have such a path; these are explicit input graph conventions.",
+          "evidence": "The Definition first paragraph says an edge exists exactly when its weight is positive and two vertices share a component exactly when a finite support-edge path joins them. Thus edges have positive weights and component membership provides a path by the stated graph conventions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Positive weight creates the support edge, and a finite path of support edges places its endpoints in one component, by the two stated graph definitions. These reverse directions justify the finite component scan without asserting that residual success is equivalent to label correctness.",
+          "evidence": "In the Definition first paragraph, positive weight defines the support edge and a finite path of such edges defines common component membership. These reverse definitional implications are precisely the graph relations inspected by its component scan."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "rem-semisupervised-cluster-assumptions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Remark is qualitative and quantifies over no possibly empty sample or graph."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Remark states no numerical parameter or zero-value boundary claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Remark states no one-point or one-class theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Remark states no theorem about disconnected or degenerate input structures."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Remark has no scalar endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Remark contains no selection or choice claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark makes no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark makes no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-real-cholesky-recurrence-computes-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cholesky-factorisation-with-positive-diagonal",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 1$ and $A\\in M_n(\\mathbb C)$; over $\\mathbb R$ the same definition uses transpose\ninstead of conjugate transpose.\n\nThe matrix $A$ is **Hermitian positive definite** if $A=A^*$ and\n\n$$x^*Ax>0$$for every nonzero vector $x\\in \\mathbb C^n$. A **Cholesky factorisation with positive diagonal** of $A$ is a factorisation$$A=LL^*,$$\n\nwhere $L$ is lower triangular and every diagonal entry of $L$ is a positive real\nnumber.\n\nThe Hermitian terminology matches\n[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the\ntriangular terminology matches\n[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Induct on $j$. At $j=1$, testing $e_1$ in [A1] gives $p_1=M_{11}>0$. For $j>1$, suppose columns $1,\\ldots,j-1$ have been computed with positive diagonal and let $T=R_{\\{1,\\ldots,j-1\\},\\{1,\\ldots,j-1\\}}$ and $A=M_{\\{1,\\ldots,j-1\\},\\{1,\\ldots,j-1\\}}$; the induction hypothesis gives $A=TT^T$. The block $A$ is positive definite because extending any nonzero $x\\in\\mathbb R^{j-1}$ by zeros gives a nonzero vector to which [A1] applies. Its kernel is therefore zero; [F2] makes $A$ invertible. The lower-triangular matrix $T$ is invertible as well, since solving $Tx=0$ row by row with its positive diagonal forces every coordinate of $x$ to be zero. Put $m=(M_{1j},\\ldots,M_{j-1,j})^T$ and $u=(R_{j1},\\ldots,R_{j,j-1})^T$. The already computed recurrence at each column $i<j$ gives $M_{ij}=\\sum_{k<i}R_{ik}R_{jk}+R_{ii}R_{ji}$, so $Tu=m$. Since $A=TT^T$, this implies $m^TA^{-1}m=u^Tu$. The leading $j\\times j$ block $P$ of $M$ is positive definite by the same zero-extension argument. For the nonzero vector $(-A^{-1}m,1)$, its quadratic form under $P$ is $M_{jj}-m^TA^{-1}m=M_{jj}-u^Tu=p_j>0$. Thus $R_{jj}=\\sqrt{p_j}$ is positive and every division defining $R_{ij}$ is by a positive number. The recurrence is well-defined through column $j$, and the same formulas give the factorization identity on the leading $j\\times j$ block.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $j$, the pivot equation gives $M_{jj}=\\sum_{k<j}R_{jk}^2+R_{jj}^2=(RR^T)_{jj}$. For every $i>j$, rearranging the recurrence gives $M_{ij}=\\sum_{k<j}R_{ik}R_{jk}+R_{ij}R_{jj}=(RR^T)_{ij}$. These identities fill the diagonal and lower triangle; symmetry of $M$ and $RR^T$ fills the upper triangle. The initialized matrix remains lower triangular, and each diagonal entry is positive by step 1.1, so it is the required Cholesky factor.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "Although matrix dimension n is at least one, the recurrence has an empty prefix sum at column j=1. Proof1.1 explicitly uses p1=M11>0 from testing e1; the empty sum is zero, so no inverse of an empty leading block is used in the base case.",
+          "evidence": "Proof step 1.1 begins with column j=1 and p1=M11>0 by evaluating the positive-definite quadratic form at e1. The prefix sum over k<1 has no terms and is zero; the inverse leading-block argument is invoked only in the j>1 branch."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero matrix is not positive definite, as required by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 1.1 gives p1=M11>0 and defines the positive square root."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves every leading pivot is positive, so no zero-pivot degeneracy occurs for a positive-definite input."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no scalar endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite recurrence in the Statement fixes every index order and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts one recurrence correctness result, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts one recurrence correctness result, not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-101",
+        "notes": "Read both proof steps and direct suppliers def-cholesky-factorisation-with-positive-diagonal and thm-rank-nullity, including finite kernel-basis/image argument and dimension/cardinality interfaces. For j=1 SPD at e1 gives p1>0; at j>1 zero extension makes A and P SPD, rank-nullity gives A inverse, triangular positive diagonal gives T inverse. Checked Tu=m and A=TT^T imply m^T A^-1 m=u^T u; nonzero (-A^-1 m,1) gives strictly positive pivot. Induction preserves computed column equations and leading block identity; final diagonal/lower entries and symmetry yield M=RR^T. n=1 and empty sums valid; no n=0 or semidefinite input claimed, no AC. Cornell Cholesky section lines 100-104 explicitly leaves Schur positivity as exercise, supplied locally; FNC 2.9.3 supports SPD context. Reader/refuter no local mathematical defect. Published inline-link alerts are separately dispositioned, without altering mathematics."
+      }
+    }
+  }
+}

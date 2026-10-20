@@ -1,0 +1,172 @@
+
+===== thm-neural-operator-discretization-invariance =====
+
+
+## Statement
+
+Let a finite neural operator have bounded domains, continuous kernels and biases, continuous pointwise activations, and continuous pointwise lifting and projection networks. For every integral use finite measurable partitions whose cells have tags, volume weights, and maximal diameter tending to zero. Its compatible quadratures converge in the output supremum norm uniformly on every compact input set in $C(\bar D)$, and hence on compact subsets of any Banach input space continuously included in $C(\bar D)$. Intermediate values in these realizations are evaluated by their defining functions at all required tags and output queries; changing meshes does not change the continuum parameters.
+
+More generally, the same conclusion holds in the output Banach norm for the following compatible-space architecture. At each stage choose a Banach function space $X_t$ continuously included in $C(\bar D_t;\mathbb R^{q_t})$. For an integral layer from $X_t$ to an auxiliary Banach function space $Y_t$ of $\mathbb R^{q_{t+1}}$-valued functions on $\bar D_{t+1}$, require a continuous inclusion $Y_t\hookrightarrow C(\bar D_{t+1};\mathbb R^{q_{t+1}})$ and require that $y\mapsto\kappa_t(\cdot,y)$ be continuous from $\bar D_t$ into the space of linear maps $\mathbb R^{q_t}\to Y_t$, in operator norm. Every local linear term is a bounded map $X_t\to Y_t$, its bias belongs to $Y_t$, and its following activation is a continuous map $Y_t\to X_{t+1}$. Any separate lifting and projection maps are continuous between their specified Banach spaces. The same maps are used in the discrete and continuum constructions. No arbitrary output Banach norm follows from its continuous inclusion into the supremum norm alone.
+
+## Statement references
+
+[Kovachki et al., Theorem 8 and Appendix E](https://arxiv.org/pdf/2108.08481)
+
+## Facts & Assumptions
+
+**Given:** A finite composition and compatible tagged, volume-weighted partitions as in the Statement; all compact input sets use their specified norm topology.
+
+[F1] The neural-operator layer and compatible quadrature conventions are [[def-neural-operator]] and [[alg-neural-operator-mesh-discretization]].
+
+[F2] The scalar kernel quadrature estimate in the supremum norm is proved in [[lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs]]. The direct modulus argument below also handles bounded measurable domains without an extra Jordan-boundary assumption.
+
+## Proof
+
+1.1 Write $I(v)=\int_D\kappa(\cdot,y)v(y)\,dy$ for one compatible Banach layer, and let $C$ be a compact subset of its input space $X$. Its image in $C(\bar D)$ is compact: pulling an open cover back through the continuous inclusion and using compactness proves this directly. Thus $R=\sup_{v\in C}\|v\|_\infty<\infty$. This family has a common modulus of continuity tending to zero. Indeed a finite $\eta$-net in the supremum norm and uniform continuity of its finitely many functions give $|v(y)-v(z)|\le2\eta+\max_j|v_j(y)-v_j(z)|$ for every $v\in C$. Uniform continuity of the finitely many functions follows by the compact-domain subsequence contradiction. Let $B=\sup_y\|\kappa(\cdot,y)\|_{\mathcal L(\mathbb R^q,Y)}$ and let $\omega_\kappa$ be its norm modulus. Compactness similarly proves $B<\infty$ and $\omega_\kappa(h)\to0$. Therefore the $Y$-valued integrands $\Phi_v(y)=\kappa(\cdot,y)v(y)$ have common modulus bounded by $R\omega_\kappa(h)+B\omega_C(h)$. [given, F1, construct, algebra]
+
+2.1 A continuous $Y$-valued function $\Phi$ on $\bar D$ has an integral in $Y$: volume-weighted step sums on partitions of diameter $h$ form a Cauchy family, since comparing two sums on their common refinement bounds their difference by $|D|\omega_\Phi(h+h')$. Completeness of $Y$ gives a limit, independent of tags and partitions. Each coordinate of point evaluation on $Y$ is bounded by its specified continuous inclusion into $C(\bar D';\mathbb R^{q_{t+1}})$; explicitly, $|u_j(x)|\le c_Y\|u\|_Y$. Applying these bounded functionals to the convergent sums therefore identifies the limit with the pointwise integral in every coordinate. Comparing a fixed tagged sum to refinements and taking the limit gives $\|Q_n(v)-I(v)\|_Y\le |D|[R\omega_\kappa(h_n)+B\omega_C(h_n)]$ uniformly for $v\in C$. Also $\|Q_n(v)-Q_n(w)\|_Y\le |D|B\|v-w\|_\infty\le |D|Bc_X\|v-w\|_X$, where $c_X$ is the embedding bound. These estimates use only measurable disjoint cells, their volumes summing to $|D|$, and their diameter bound. [step 1.1, construct, algebra]
+
+3.1 Suppose inductively that the discrete inputs $v_n(a)$ converge in $X$ to the continuum inputs $v(a)$ uniformly for $a$ in the original compact set $K$. The continuum map is continuous by the bound for $I$ from step 2.1 and continuity of all other maps, so $C=v(K)$ is compact. Comparing preactivations at $v_n(a)$ and $v(a)$, the quadrature Lipschitz bound and the bounded local-map norm give an upper bound $(|D|Bc_X+\|W\|)\|v_n(a)-v(a)\|_X+\|Q_n(v(a))-I(v(a))\|_Y$, which tends to zero uniformly in $a$. The continuum preactivations form a compact set $P\subset Y$. A continuous map $T:Y\to X'$ takes perturbations tending uniformly to zero around $P$ to uniformly vanishing output errors: for a prescribed $\varepsilon$, cover $P$ by finitely many balls $B(p_i,r_i)$ on each of which $\|T(z)-T(p_i)\|<\varepsilon/2$ for $\|z-p_i\|<3r_i$, and use a positive perturbation bound smaller than $\min_i r_i$. If $p\in B(p_i,r_i)$ and $\|z-p\|<\min_i r_i$, both images are within $\varepsilon/2$ of $T(p_i)$. Apply this to the activation. The same argument treats continuous lifting or projection maps. Starting with the identical input and proceeding through the finitely many stages proves uniform convergence in the final Banach norm. [step 2.1, given, construct, algebra]
+
+4.1 For the supremum-norm architecture take every relevant $X$ and $Y$ to be the continuous-function space with its supremum norm. Joint continuity of $\kappa(x,y)$ on the compact product implies continuity of $y\mapsto\kappa(\cdot,y)$ in that norm, by its uniform modulus on the product. Finite matrix local terms are bounded in that norm. For any fixed continuous scalar activation, its induced map on continuous functions is continuous in the supremum norm: near a function of norm $R$, all scalar arguments lie in $[-R-1,R+1]$, where the activation is uniformly continuous. Pointwise finite networks are finite compositions of these continuous maps. Thus all conditions in steps 1.1–2.1 hold, proving the first clause and then its continuously embedded input-space version. [step 1.1, step 2.1, step 3.1, F1, F2, algebra] ∎
+
+## Remark
+
+For example, kernels continuous in the output $C^r$ norm and norm-continuous local and nonlinear maps give convergence in $C^r$. The preceding arbitrary Banach formulation is useful beyond such examples. The stronger original assertion is retained verbatim in the proposal's archived preimage and is explicitly refuted by the separate one-neuron $C^1$ counterexample; neither an open-problem label nor an unqualified norm upgrade is warranted.
+
+===== thm-neural-operator-input-output-spaces-have-ap =====
+
+
+## Statement
+
+Assume Countable Choice. Let $D\subset\mathbb R^d$ be a bounded Lipschitz domain. Each of the real spaces $L^p(D)$ for $1\le p<\infty$, $W^{m,p}(D)$ for $m\in\mathbb N$ and $1\le p<\infty$, and $C^m(\bar D)$ for $m\in\mathbb N_0$ has the approximation property: on every norm-compact subset, the identity can be approximated uniformly by bounded finite-rank linear maps. Here the $C^m$ norm is the maximum of the uniform norms of the derivatives through order $m$, extended continuously to $\bar D$. For any bounded Lipschitz domain $D'\subset\mathbb R^{d'}$, the corresponding real output spaces $L^{p_2}(D')$ for $1\le p_2<\infty$, $W^{m_2,p_2}(D')$ for $m_2\in\mathbb N$ and $1\le p_2<\infty$, and $C^{m_2}(\overline{D'})$ for $m_2\in\mathbb N_0$ also have the approximation property.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-approximation-property-and-bounded-approximation-property]]
+
+[Kovachki et al., Lemma 26](https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf)
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, a bounded Lipschitz domain and one of the listed real function spaces.
+
+[F1] For every listed space, every norm-compact set and every positive error, a bounded finite-rank map with that compact-uniform error exists, with range consisting of restrictions of compactly supported ambient smooth functions ([[lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains]]).
+
+[F2] AP for a Banach space means uniform approximation of the identity on each norm-compact subset by bounded finite-rank linear maps ([[def-approximation-property-and-bounded-approximation-property]]).
+
+[F3] Under Countable Choice, the integer-order Sobolev formula is a norm and $W^{0,p}=L^p$, and real $L^p$ is complete ([[def-sobolev-space-wkp-and-its-norm]], [[lem-sobolev-norm-is-well-defined-and-definite]], [[thm-riesz-fischer-completeness-of-l-p]]).
+
+[F4] Hölder bounds the integral pairing by the product of conjugate norms, including conjugate exponents $1$ and $\infty$ ([[thm-holder-inequality-for-integrals]]).
+
+[F5] For a continuously differentiable real curve on a compact interval, the integral of its derivative is its endpoint difference; a continuous integrand has its integral as a differentiable primitive ([[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]]).
+
+**Choice use:** Countable Choice supplies the $L^p$ completeness and weak-derivative interfaces in [F3], the calculus interface [F5], and the inward-mollification lemma [F1]. The final passage to AP makes no additional selections from infinite families.
+
+## Proof
+
+1.1 The listed Sobolev spaces are Banach under the stated Countable Choice hypothesis. Indeed, let $(u_n)$ be Cauchy in $W^{m,p}(D)$. By [F3], for each of the finitely many $|\alpha|\le m$, $D^\alpha u_n$ converges in $L^p$ to a class $v_\alpha$; put $u=v_0$. For any $\phi\in C_c^\infty(D)$, its derivatives are bounded with compact support, hence belong to the conjugate $L^{p'}$ space, including $p'=\infty$ when $p=1$. By [F4], both integrals in $\int_Du_nD^\alpha\phi=(-1)^{|\alpha|}\int_DD^\alpha u_n\phi$ converge to the corresponding integrals of $u$ and $v_\alpha$. Thus $v_\alpha$ is the weak derivative $D^\alpha u$ by [F3], so $u\in W^{m,p}(D)$, and the finite norm sum gives $u_n\to u$ in that norm. This includes $m=0$, which gives $L^p(D)$. [F3, F4, given, construct]
+
+1.2 The listed $C^m(\bar D)$ spaces are Banach as well. If $(u_n)$ is Cauchy in their norm, every derivative sequence has a uniform limit $g_\alpha$ on $\bar D$: pointwise real completeness gives the limit, and the uniform Cauchy estimate gives uniform convergence. Each $g_\alpha$ is continuous, since for a positive error one first approximates it uniformly by a fixed continuous $D^\alpha u_n$ and then applies continuity of that fixed function. Put $u=g_0$. For $|\alpha|<m$, an interior point $x$, and a coordinate direction $e_i$, take $h$ small enough that the segment $x+[0,h]e_i$ lies in $D$. By [F5], $D^\alpha u_n(x+he_i)-D^\alpha u_n(x)=\int_0^hD^{\alpha+e_i}u_n(x+se_i)\,ds$. Uniform convergence passes this identity to $g_\alpha(x+he_i)-g_\alpha(x)=\int_0^h g_{\alpha+e_i}(x+se_i)\,ds$, since the integral error is bounded by $|h|$ times the uniform error. By [F5], $\partial_i g_\alpha=g_{\alpha+e_i}$. Induction in $|\alpha|$ yields $D^\alpha u=g_\alpha$ in $D$ through order $m$, with the continuous extensions already supplied on $\bar D$. Thus $u\in C^m(\bar D)$ and $u_n\to u$ in norm. For $m=0$ only the uniform-limit continuity argument is needed. The displayed maximum is a norm because its order-zero term detects zero functions and the remaining norm axioms hold termwise. [F5, given, construct, algebra]
+
+2.1 Fix one listed space $X$, a norm-compact $K\subseteq X$, and $\varepsilon>0$. Its Banach-space status was established in the two preceding steps. Apply [F1], using $W^{0,p}=L^p$ in the Lebesgue case, to obtain a bounded finite-rank $F:X\to X$ with $\sup_{u\in K}\|Fu-u\|_X<\varepsilon$. These are exactly the quantified requirements of [F2], so every listed space has AP, including every $p=1$ case. [F1, F2, F3, step 1.1, step 1.2, given]
+
+3.1 The argument in step 2.1 holds for every Euclidean dimension, every nonnegative integer regularity and every finite exponent in the stated ranges. Applying it with the output dimension and output regularity parameters proves the output-space clause. The proof establishes AP for $C^m(\bar D)$ without any basis assertion. [step 2.1, given] ∎ 
+
+===== thm-pinn-linear-elliptic-consistency =====
+
+
+## Statement
+
+Assume the Axiom of Choice and Countable Choice. Use the corrected small-scale sampling, trial-class, exact-zero-witness, and exact regularization hypotheses of the regularized PINN theorem, with residual and boundary operators $L$ and boundary restriction. Let $d\ge2$ and let $U\subset\mathbb R^d$ be bounded Lipschitz with an exterior sphere at every boundary point. For $0<\alpha<1$, let $a_{ij}=a_{ji}\in C^{1,\alpha}(U)$ have minimum eigenvalue at least $\lambda_0>0$, let $b_i\in C^{1,\alpha}(U)$ and $c_i,d\in C^{0,\alpha}(U)$, and put
+$$L[u]=\sum_{i,j}D_i(a_{ij}D_j u)+\sum_iD_i(b_i u)+\sum_i c_iD_i u+du,$$
+$$\widetilde b_j=\sum_iD_i a_{ij}+b_j+c_j,\qquad \widetilde c=\sum_iD_i b_i+d\le0.$$
+All indicated Hölder norms are finite global norms. Retain the source coefficient bounds $\sum_{i,j}|a_{ij}|^2\le\Lambda$ and $\lambda_0^{-2}(|b|^2+|c|^2)+\lambda_0^{-1}|d|\le v^2$. Let $f\in C^{0,\alpha}(U)$ and $g\in C^{0,\alpha}(\partial U)$. There is exactly one $u^*\in C^{2,\alpha}_{\mathrm{loc}}(U)\cap C^0(\bar U)$ with $L[u^*]=f$ and $u^*=g$ on $\partial U$.
+
+Every sequence of global regularized empirical minimizers $h_m$ converges to $u^*$ in $C^0(U)$ almost surely as both sample counts tend to infinity. If $m_r=O(m_b^{d/(d-1)})$, the occupancy-event squared uniform error is $O(m_r^{-\alpha/d})$, with the probability and constants of the regularized-loss theorem. If each minimizer satisfies the boundary data exactly, the errors belong to $H^1_0(U)$ and converge to zero in $H^1(U)$ almost surely. If in addition $U$ is $C^{2,\alpha}$ and $g$ has a $C^{2,\alpha}$ lifting, the usual global $C^{2,\alpha}(\bar U)$ branch applies with its stated coefficient/data hypotheses. No global Hölder regularity is claimed from the exterior-sphere condition alone, and no optimizer convergence is asserted.
+
+## Statement references
+
+[[thm-pinn-regularized-loss-consistency]]
+
+[[thm-shin-elliptic-dirichlet-existence-and-residual-stability]]
+
+[[lem-shin-elliptic-energy-estimate]]
+
+[Shin et al., Theorems 3.3–3.4 and Appendices D–E](https://arxiv.org/pdf/2004.01806)
+
+## Facts & Assumptions
+
+**Given:** The stated coefficient, sampling, witness, global-minimizer, and choice hypotheses.
+
+[F1] The elliptic theorem gives unique local-Hölder classical existence with continuous boundary attainment, the smooth-boundary global branch under its extra hypotheses, and $H^1_0$ membership of every zero-boundary classical solution whose forcing is globally Hölder ([[thm-shin-elliptic-dirichlet-existence-and-residual-stability]]).
+
+[F2] The populated-cell proof gives both residual errors tending uniformly to zero almost surely, without weight comparability, and its quantitative occupancy-event bounds ([[thm-pinn-regularized-loss-consistency]]).
+
+[F3] The actual expanded coefficients satisfy the residual-stability estimate for any $C^2(U)\cap C(\bar U)$ error ([[def-shin-elliptic-divergence-form-operator]], [[lem-shin-elliptic-residual-stability]]).
+
+[F4] The source coefficient bound and $H^1_0$ membership give the elliptic energy estimate ([[lem-shin-elliptic-energy-estimate]]).
+
+[A1] The Axiom of Choice and Countable Choice are inherited from the existence supplier; the zero-boundary closure/energy convention retains Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]).
+
+## Proof
+
+1.1 The finite global $C^{1,\alpha}$ norms of $a,b$ make $\widetilde b,\widetilde c$ globally bounded and Hölder, with $\widetilde c\le0$. Thus [F1] yields the unique solution in the stated local class. Apply [F3] to $e_m=h_m-u^*$, whose boundary values are $h_m-g$ and whose forcing is $L[h_m]-f$. It gives $\|e_m\|_\infty\le C_L(\|L[h_m]-f\|_\infty+\|h_m-g\|_{\infty;\partial U})$. Both terms tend to zero almost surely by [F2]. Squaring this estimate transfers the occupancy-event rate and its event probability to the solution error. The constant may depend on the bounded expanded coefficients and thus their derivative bounds, not only $\Lambda,v$. [given, A1, F1, F2, F3, algebra]
+
+2.1 If the boundary data are exact, $e_m\in C^2(U)\cap C(\bar U)$ has zero boundary value and $L[e_m]=L[h_m]-f\in C^{0,\alpha}(U)$. The zero-boundary assertion in [F1] gives $e_m\in H^1_0(U)$; this is proved by zero extensions of the smooth approximants and weak convergence, not inferred from continuity alone. Since $|U|<\infty$, step 1.1 and [F2] imply $\|e_m\|_{L^2(U)}+\|L[e_m]\|_{L^2(U)}\to0$. Apply [F4] to obtain $\|e_m\|_{H^1(U)}\to0$. This statement is about the errors, and remains meaningful even if the individual nonzero-data solution is not in $H^1(U)$. [given, F1, F2, F4, step 1.1, algebra]
+
+3.1 Under the extra smooth-boundary/data hypotheses, [F1] supplies the stated global regularity branch for this same unique solution. The native sector counterexample refutes extending that conclusion to every exterior-sphere Lipschitz domain. This completes all the stated convergence and regularity assertions. [F1, step 1.1, step 2.1, algebra] ∎
+
+## Remarks
+
+The source's stronger global $C^{2,\alpha}(U)$ existence assertion for exterior-sphere domains is false for its own globally bounded Hölder convention; the native $2\pi/3$ cutoff-sector counterexample is retained. The exact original carrier is archived in the proposal. The active divergence formula counts $\operatorname{div}(bu)$ once, consistently with the expanded coefficients and energy calculation; the original repeated-index printed expression is recorded in the operator definition's source discrepancy. The minimizer conclusion uses the repaired populated-cell proof and the corrected small-scale sampling convention, with no hidden balance premise.
+
+===== thm-pinn-linear-parabolic-consistency =====
+
+
+## Statement
+
+Assume the Axiom of Choice and Countable Choice. Let $U\subset\mathbb R^d$ be bounded with an exterior ball at every spatial boundary point, $T>0$, and $Q=U\times(0,T)$. Use the full parabolic coefficient/data hypotheses of the variable-coefficient existence theorem: differentiability of $a_{ij},b_i$, symmetry and uniform ellipticity, the source weighted parabolic Hölder coefficient bounds, bounded locally parabolic Hölder expanded drift and potential, bounded locally parabolic Hölder forcing, compatible Hölder initial and lateral data, and one-sided local Hölder control at interior points of the final face. Use
+$$L_t[u]=\sum_{i,j}D_i(a_{ij}D_j u)+\sum_iD_i(b_i u)+\sum_i c_iD_i u+du,$$
+$$\widetilde b_i=\sum_jD_j a_{ij}+b_i+c_i,\qquad\widetilde c=\sum_iD_i b_i+d\le0.$$
+Retain the source pointwise bounds with constants $\lambda_0,\Lambda,v$ and its auxiliary $\theta>0$ condition $\theta^2a_{11}+\theta\widetilde b_1\ge1$; the direct parabolic time barrier also works without that auxiliary condition. Boundedness is part of the source's order-zero Hölder norm, not a consequence of its weighted $\delta^2f$ bound alone.
+
+Use the corrected small-scale sampling, data/trial-class, exact-zero-witness and exact regularization assumptions of the regularized PINN theorem in the ambient dimension $D=d+1$, with residual $-h_t+L_t[h]$, target $f$, and restriction to the initial-lateral boundary $\Gamma_T$ with target $\psi$ combining the compatible data. The Euclidean Hölder assumptions in this sampling interface are retained in addition to the parabolic PDE regularity assumptions. There is one classical solution $u^*\in C^{2,1}(Q)\cap C(\bar U\times[0,T])$, locally parabolic Hölder in its displayed derivatives, to $-u_t^*+L_t[u^*]=f$ and the prescribed data.
+
+Every sequence of global empirical regularized minimizers converges to $u^*$ in $C^0(Q)$ almost surely as both counts tend to infinity. For $m_r=O(m_b^{(d+1)/d})$, the occupancy-event squared uniform solution error is $O(m_r^{-\alpha/(d+1)})$, with the probability and constants of the regularized-loss theorem at dimension $D=d+1$. If all minimizers satisfy both initial and lateral data exactly and the displayed divergence expansion agrees distributionally with the classical operator (in particular if $a,b$ are spatially $C^1$ locally), then their errors belong to $L^2(0,T;H^1_0(U))$ and tend to zero in $L^2(0,T;H^1(U))$ almost surely. The energy conclusion uses the actual bounded divergence coefficients and their source $v$ bound. No closed-cylinder $C^{2,1}$ regularity of $u^*$ or convergence of an optimizer is asserted.
+
+## Statement references
+
+[[thm-shin-parabolic-initial-boundary-existence-and-residual-stability]]
+
+[[thm-pinn-regularized-loss-consistency]]
+
+[[lem-shin-zero-data-parabolic-classical-energy-identification]]
+
+[Shin et al., Theorems 3.6–3.7 and Appendices F–G](https://arxiv.org/pdf/2004.01806)
+
+## Facts & Assumptions
+
+**Given:** The parabolic problem, full sampling and exact regularizer hypotheses, global minimizers and choice assumptions in the Statement.
+
+[F1] The local variable-coefficient construction gives the unique classical solution with continuous initial/lateral/final boundary attainment and the residual stability estimate ([[thm-shin-parabolic-initial-boundary-existence-and-residual-stability]], [[lem-shin-parabolic-residual-stability]], [[def-shin-parabolic-operator-and-boundary]]).
+
+[F2] The populated-cell theorem gives uniform convergence of the PDE and prescribed-data residuals almost surely, together with its count-dependent occupancy-event rate; weight comparability is not a premise ([[thm-pinn-regularized-loss-consistency]]).
+
+[F3] A zero-data locally classical continuous error for the weak-compatible divergence operator has finite variational energy and zero $L^2$ initial trace ([[lem-shin-zero-data-parabolic-classical-energy-identification]]).
+
+[F4] The variational zero-spatial-trace energy estimate applies in that class ([[lem-shin-parabolic-energy-estimate]]).
+
+[A1] The existence and compactness suppliers carry AC and CC; the Sobolev energy-space convention carries CC ([[def-axiom-of-choice]], [[def-countable-choice]]).
+
+## Proof
+
+1.1 Apply [F1] under the full stated PDE hypotheses to obtain $u^*$. For $e_m=h_m-u^*$ the equation is $P[e_m]=-r_m$ with $r_m=f+(h_m)_t-L_t[h_m]$, and its boundary values are $h_m-\psi$. The residual stability estimate gives $\|e_m\|_{\infty;Q}\le C_P(\|r_m\|_{\infty;Q}+\|h_m-\psi\|_{\infty;\Gamma_T})$. By [F2] both terms tend to zero almost surely. Squaring this estimate transfers the occupied-cell error bound and its event probability to the solution error. With $D=d+1$, the count specialization in [F2] is exactly the one displayed here. [given, A1, F1, F2, algebra]
+
+2.1 Under exact initial and lateral data the errors have zero classical prescribed values and bounded globally Hölder residuals. Under the explicit weak-compatible divergence hypothesis, [F3] identifies each with the zero-initial variational Dirichlet solution, so $e_m\in L^2(0,T;H^1_0(U))$ with the required time derivative in the dual space. There is no inference from continuous zero trace alone. Since $Q$ has finite volume, [F2] implies $\|r_m\|_{L^2(Q)}\to0$. Apply [F4] with $e_m(0)=0$ to get both $\sup_t\|e_m(t)\|_2\to0$ and $\|\nabla e_m\|_{L^2(Q)}\to0$. Their sum implies the asserted $L^2(0,T;H^1(U))$ convergence. [given, F2, F3, F4, step 1.1, algebra] ∎
+
+## Remarks
+
+The source's pointwise word “differentiable” is retained for its classical problem. Its integration-by-parts energy argument additionally uses the weak divergence identity; this requirement is explicit here, with local spatial $C^1$ as a sufficient interpretation. Merely continuous zero boundary data do not prove energy membership. The new energy-identification helper supplies that separate step once the divergence equation has its intended weak meaning. The source's unusual weighted $C_{2+\alpha}$ convention is preserved in the definition; this theorem does not claim that the limiting continuous-data solution has the printed weighted global trial norm.

@@ -14,6 +14,7 @@ landmark: true
 short: "composition of continuous functions"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-composition-of-continuous-functions.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -41,21 +42,29 @@ Let $A, B \subseteq \mathbb{R}$, let $g : A \to \mathbb{R}$ with
 $g(A) \subseteq B$, and let $f : B \to \mathbb{R}$, so that the composite
 $f \circ g : A \to \mathbb{R}$ is defined. Let $c \in A$. If $g$ is continuous
 at $c$ and $f$ is continuous at $g(c) \in B$, then $f \circ g$ is continuous at
-$c$ ([[def-continuity-real]]).
+$c$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point).
 
 Consequently, if $g$ is continuous on $A$ and $f$ is continuous on $B$, then
 $f \circ g$ is continuous on $A$.
 
 **No side hypothesis is needed, and that is the whole point.** The composition
-theorem for limits, [[thm-composition-of-function-limits]], must assume one of
+theorem for limits, Composition of limits holds under either hypothesis: $f$ is defined at $L$ with value $M$, or $g$ avoids $L$ on a punctured neighbourhood of $c$, must assume one of
 two extra conditions: either $L \in B$ with $f(L) = M$, or $g \ne L$ on a
 punctured neighbourhood of $c$; with both dropped the statement is false, which
-is [[fs-naive-composition-of-limits]]. The first of those conditions is exactly
+is FALSE: $\lim_{x \to c} f(g(x)) = M$ whenever $\lim_{x \to c} g = L$ and $\lim_{y \to L} f = M$. The first of those conditions is exactly
 *continuity of $f$ at $L$* written out, so under the hypotheses above it holds
 automatically and nothing has to be assumed. The mechanism is visible in the
-proof: [[def-continuity-real]] quantifies over $|y - b| < \rho$ rather than over
+proof: Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point quantifies over $|y - b| < \rho$ rather than over
 $0 < |y - b| < \rho$, so the value $y = b$ that the limit version cannot control
 is precisely the one the continuity hypothesis does control.
+
+## Statement references
+
+[[def-continuity-real]]
+
+[[thm-composition-of-function-limits]]
+
+[[fs-naive-composition-of-limits]]
 
 ## Facts & Assumptions
 

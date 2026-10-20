@@ -1,0 +1,783 @@
+{
+  "version": 1,
+  "scope": [
+    "def-group-risk-score-and-calibration",
+    "def-positive-and-negative-score-balance",
+    "lem-score-means-as-threshold-rate-areas",
+    "thm-calibration-and-balance-incompatibility-for-risk-scores",
+    "ex-equal-base-rates-admit-constant-calibrated-score",
+    "ex-perfect-risk-prediction-with-unequal-base-rates",
+    "ex-threshold-rates-vary-under-score-balance"
+  ],
+  "contracts": {
+    "def-group-risk-score-and-calibration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "zero-mass bin",
+          "result": "If sum_sigma a[t,sigma] X[sigma,b]=0, nonnegativity makes every contributing term zero, so both sides of the calibration identity are 0.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "fixture": "zero-mass-bin"
+        },
+        {
+          "case": "deterministic perfect feature",
+          "result": "For p_sigma=0 or 1, assigning score 0 or 1 respectively gives the corresponding positive-mass identity exactly.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "fixture": "perfect-feature"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Feature types Sigma and score bins B are explicitly nonempty finite sets. The normalization sum over feature proportions is one in each of the two positive-mass groups, and every assignment row sums to one, so neither aggregate can be indexed by an empty set.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The aggregate detector sees the feature and bin sums, but their named finite sets are both nonempty and their probability normalizations independently rule out empty index sets. Zero-mass individual bins remain allowed by the cross-multiplied calibration identity."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: p_sigma=0 and v_b=0 are allowed; the calibration identity remains defined for zero positive mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: p_sigma=1 and v_b=1 are allowed and covered by the calibration identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: deterministic feature outcomes are allowed; the later theorem separately requires both outcome classes in each group."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: p_sigma and v_b range over the closed interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses finite sets and no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition fixes the finite joint law and names the cross-multiplied binwise calibration condition. Its perfect-prediction convention and the comparison with full reliability in Definition references introduce vocabulary, not a theorem equating those notions when duplicate score bins are present.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "This definition fixes the finite joint law and names the cross-multiplied binwise calibration condition. Its perfect-prediction convention and the comparison with full reliability in Definition references introduce vocabulary, not a theorem equating those notions when duplicate score bins are present.",
+            "item_sha256": "de073201e7f84d81dc0c4b450179cf2e0edc36408b6fd84e96b18c564b73dc04",
+            "row_sha256": "d2cb5812703eaaab4e92c8c06bbe09c16ce7207b2824c6f9e23cb1159b0cebfa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition fixes the finite joint law and names the cross-multiplied binwise calibration condition. Its perfect-prediction convention and the comparison with full reliability in Definition references introduce vocabulary, not a theorem equating those notions when duplicate score bins are present.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "This definition fixes the finite joint law and names the cross-multiplied binwise calibration condition. Its perfect-prediction convention and the comparison with full reliability in Definition references introduce vocabulary, not a theorem equating those notions when duplicate score bins are present.",
+            "item_sha256": "de073201e7f84d81dc0c4b450179cf2e0edc36408b6fd84e96b18c564b73dc04",
+            "row_sha256": "a6c6c14559c6d4d4708a92cfdbfaee58270690a28535f6f88426f673ab5f4f85"
+          }
+        }
+      ]
+    },
+    "def-positive-and-negative-score-balance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "constant score",
+          "result": "If S is constantly c in both groups and each outcome has positive mass, then alpha_1=alpha_2=c and beta_1=beta_2=c.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets, and let $t\\in\\{1,2\\}$ index two groups. In group $t$, feature type $\\sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A common randomized assignment sends feature type $\\sigma$ to bin $b\\in\\mathcal B$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$, independently of group and outcome; bin $b$ has score $v_b\\in[0,1]$. Set $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for each group, so both outcome classes have positive mass. Define the mean score among positive outcomes and among negative outcomes in group $t$ by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t},\n$$\nwhere the finite group law is $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$. The assignment is **balanced for positive outcomes** if $\\alpha_1=\\alpha_2$, and **balanced for negative outcomes** if $\\beta_1=\\beta_2$. These are class-conditioned mean-score criteria; they do not assert equal mean scores over whole groups or equal thresholded error rates.",
+          "fixture": "constant-balance"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both Sigma and B are nonempty finite sets and each group has N_t>0 and 0<mu_t<N_t. Thus both conditional outcome populations used for alpha_t and beta_t have positive mass; the double sums range over an existing finite feature-bin model.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The finite aggregate is over the explicitly nonempty feature/bin sets. The stronger nondegeneracy 0<rho_t<1 makes the two conditional means meaningful rather than invoking a vacuous empty outcome class."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: score values may equal 0; the conditional means are defined by the positive class masses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: score values may equal 1; the conditional means are defined by the negative class masses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: 0<mu_t<N_t is explicit; feature types with p_sigma=0 or 1 are still allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the score range is [0,1], including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle or selection from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Positive and negative balance are separately defined by equality of their corresponding conditional mean scores across the two groups. The last sentence expressly separates these criteria from equal thresholded error rates, and no implication in either direction between those different criteria is stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "Positive and negative balance are separately defined by equality of their corresponding conditional mean scores across the two groups. The last sentence expressly separates these criteria from equal thresholded error rates, and no implication in either direction between those different criteria is stated.",
+            "item_sha256": "c670fdd4b44c84631a4b8b0ed190af5c51f301a833fbfb22a2894965397111e1",
+            "row_sha256": "8ca74437e5e59c27b7530a03138214dc01b6069d236d1b2ce838bc592ae99135"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Positive and negative balance are separately defined by equality of their corresponding conditional mean scores across the two groups. The last sentence expressly separates these criteria from equal thresholded error rates, and no implication in either direction between those different criteria is stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "Positive and negative balance are separately defined by equality of their corresponding conditional mean scores across the two groups. The last sentence expressly separates these criteria from equal thresholded error rates, and no implication in either direction between those different criteria is stated.",
+            "item_sha256": "c670fdd4b44c84631a4b8b0ed190af5c51f301a833fbfb22a2894965397111e1",
+            "row_sha256": "20d637019a4ae5434aa530b75c8ad763f3eef85a26f445cd30a6e5e5d10d43f8"
+          }
+        }
+      ]
+    },
+    "lem-score-means-as-threshold-rate-areas": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each $j$, the threshold indicator is $\\mathbf1_{[0,s_j]}(u)$. Hence $\\operatorname{TPR}_t(u)=\\sum_{j=1}^m w_j^+\\mathbf1_{[0,s_j]}(u)$. Integrating this finite sum term by term gives $\\int_0^1\\operatorname{TPR}_t(u)\\,du=\\sum_{j=1}^m w_j^+s_j=\\mathbb E_t[S\\mid Y=1]$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The same indicator calculation gives $\\operatorname{FPR}_t(u)=\\sum_{j=1}^m w_j^-\\mathbf1_{[0,s_j]}(u)$ and $\\int_0^1\\operatorname{FPR}_t(u)\\,du=\\sum_{j=1}^m w_j^-s_j=\\mathbb E_t[S\\mid Y=0]$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "score endpoints",
+          "result": "For a class-conditional point mass at score 0 the threshold area and mean are 0; at score 1 both are 1.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Fix a group $t\\in\\{1,2\\}$ with a finite joint law $\\Pr_t$ for a binary outcome $Y\\in\\{0,1\\}$ and a score $S$ taking finitely many values in $[0,1]$, and assume $\\Pr_t(Y=1)>0$ and $\\Pr_t(Y=0)>0$. For each threshold $u\\in[0,1]$, define the true-positive rate $\\operatorname{TPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=1)$ and the false-positive rate $\\operatorname{FPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=0)$. These are finite step functions and\n$$\n\\mathbb E_t[S\\mid Y=1]=\\int_0^1\\operatorname{TPR}_t(u)\\,du,\\qquad \\mathbb E_t[S\\mid Y=0]=\\int_0^1\\operatorname{FPR}_t(u)\\,du.\n$$\nThe integrals are ordinary Riemann integrals of the finite step functions.",
+          "fixture": "threshold-area-endpoints"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a finite probability law and positive mass in both outcome classes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 integrate the interval [0,0], whose length is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 integrate the interval [0,1], whose length is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The outcome classes are nondegenerate by hypothesis; the score itself may be constant, and the finite-sum proof still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 include score values 0 and 1 through interval lengths."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof sums over a finite bin set and selects no element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives equalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives equalities, not a biconditional."
+        }
+      ]
+    },
+    "thm-calibration-and-balance-incompatibility-for-risk-scores": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-positive-and-negative-score-balance",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets, and let $t\\in\\{1,2\\}$ index two groups. In group $t$, feature type $\\sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A common randomized assignment sends feature type $\\sigma$ to bin $b\\in\\mathcal B$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$, independently of group and outcome; bin $b$ has score $v_b\\in[0,1]$. Set $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for each group, so both outcome classes have positive mass. Define the mean score among positive outcomes and among negative outcomes in group $t$ by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t},\n$$\nwhere the finite group law is $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$. The assignment is **balanced for positive outcomes** if $\\alpha_1=\\alpha_2$, and **balanced for negative outcomes** if $\\beta_1=\\beta_2$. These are class-conditioned mean-score criteria; they do not assert equal mean scores over whole groups or equal thresholded error rates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-score-means-as-threshold-rate-areas",
+          "source_section": "Statement",
+          "quote": "Fix a group $t\\in\\{1,2\\}$ with a finite joint law $\\Pr_t$ for a binary outcome $Y\\in\\{0,1\\}$ and a score $S$ taking finitely many values in $[0,1]$, and assume $\\Pr_t(Y=1)>0$ and $\\Pr_t(Y=0)>0$. For each threshold $u\\in[0,1]$, define the true-positive rate $\\operatorname{TPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=1)$ and the false-positive rate $\\operatorname{FPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=0)$. These are finite step functions and\n$$\n\\mathbb E_t[S\\mid Y=1]=\\int_0^1\\operatorname{TPR}_t(u)\\,du,\\qquad \\mathbb E_t[S\\mid Y=0]=\\int_0^1\\operatorname{FPR}_t(u)\\,du.\n$$\nThe integrals are ordinary Riemann integrals of the finite step functions.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Set $\\alpha=\\alpha_1=\\alpha_2$ and $\\beta=\\beta_1=\\beta_2$ by [F3]; since $S\\in[0,1]$, both common means lie in $[0,1]$. By [F4], these means are the respective areas under the groups' true-positive-rate and false-positive-rate threshold functions. Summing the calibration identity [F2] over all bins gives $\\mathbb E_t[S]=\\Pr_t(Y=1)=\\rho_t$ for each $t$. Partitioning this finite expectation by $Y$ gives $\\rho_t=\\rho_t\\alpha+(1-\\rho_t)\\beta$, hence $\\rho_t(1-\\alpha)=(1-\\rho_t)\\beta$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $\\alpha<1$, then $1-\\alpha>0$ and $1-\\rho_t>0$, so the last identity yields $\\rho_t/(1-\\rho_t)=\\beta/(1-\\alpha)$ for both groups. Therefore $\\rho_1/(1-\\rho_1)=\\rho_2/(1-\\rho_2)$; cross-multiplication gives $\\rho_1=\\rho_2$. If instead $\\alpha=1$, the identity and $1-\\rho_t>0$ give $\\beta=0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the branch $\\alpha=1$ and $\\beta=0$, each group has positive and negative mass by hypothesis. The score has finite support in $[0,1]$, so a conditional mean of one on $Y=1$ is possible only when every positive-mass score value is $1$; a conditional mean of zero on $Y=0$ is possible only when every positive-mass score value is $0$. Thus $S=Y$ almost surely in both groups. If a feature type $\\sigma$ with positive mass had $0<p_\\sigma<1$, both outcomes would have positive mass at $\\sigma$. The same assignment row $X_{\\sigma b}$ is used for both outcomes [F1], so their conditional score laws would agree, contradicting concentration at scores $1$ and $0$, respectively. Hence every occupied feature type has $p_\\sigma\\in\\{0,1\\}$, which permits perfect prediction.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "equal-rate constant-score exception",
+          "result": "Two groups with rho=1/2, one bin of score 1/2, and p_sigma=1/2 satisfy calibration and both balances without perfect prediction.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets. In group $t\\in\\{1,2\\}$, feature type $\\sigma\\in\\Sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with $p_\\sigma$ the same in both groups. A common randomized assignment chooses bin $b\\in\\mathcal B$ from feature type $\\sigma$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$; this choice is independent of group and outcome. Bin $b$ has score $v_b\\in[0,1]$, and $S=v_B$. Define $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for both groups. Define the positive- and negative-outcome mean scores by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma,b}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma,b}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t}.\n$$\nSuppose $\\alpha_1=\\alpha_2$ and $\\beta_1=\\beta_2$, and the assignment is calibrated within each group, meaning\n$$\n\\sum_\\sigma a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_\\sigma a_{t\\sigma}X_{\\sigma b}\n$$\nfor every group $t$ and bin $b$, and suppose the mean score among positive outcomes is equal across groups and the mean score among negative outcomes is equal across groups. Then either $\\rho_1=\\rho_2$ or $S=Y$ almost surely under each group law. In the latter case, every feature type with positive mass in either group has $p_\\sigma\\in\\{0,1\\}$, so the instance permits perfect prediction.",
+          "fixture": "equal-rate-constant"
+        },
+        {
+          "case": "perfect-prediction exception",
+          "result": "With p_sigma in {0,1}, scores S=Y give alpha=1 and beta=0 in both groups even when group proportions yield base rates 1/4 and 3/4.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets. In group $t\\in\\{1,2\\}$, feature type $\\sigma\\in\\Sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with $p_\\sigma$ the same in both groups. A common randomized assignment chooses bin $b\\in\\mathcal B$ from feature type $\\sigma$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$; this choice is independent of group and outcome. Bin $b$ has score $v_b\\in[0,1]$, and $S=v_B$. Define $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for both groups. Define the positive- and negative-outcome mean scores by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma,b}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma,b}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t}.\n$$\nSuppose $\\alpha_1=\\alpha_2$ and $\\beta_1=\\beta_2$, and the assignment is calibrated within each group, meaning\n$$\n\\sum_\\sigma a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_\\sigma a_{t\\sigma}X_{\\sigma b}\n$$\nfor every group $t$ and bin $b$, and suppose the mean score among positive outcomes is equal across groups and the mean score among negative outcomes is equal across groups. Then either $\\rho_1=\\rho_2$ or $S=Y$ almost surely under each group law. In the latter case, every feature type with positive mass in either group has $p_\\sigma\\in\\{0,1\\}$, so the instance permits perfect prediction.",
+          "fixture": "perfect-unequal-rates"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem uses nonempty finite Sigma and B, two groups of positive mass, and 0<mu_t<N_t. Calibration is summed over the existing bins in step 1.1, and the two conditional means refer to positive outcome masses; individual empty bins simply contribute zero.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "There is no empty feature/bin aggregate under the stated probability normalizations. The proof handles alpha=1 as its perfect-prediction branch, while positivity of both outcomes excludes empty conditioning populations."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: base rates are strictly positive, while score zero is allowed and included in the perfect branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: base rates are strictly below one, while score one is allowed and included in the perfect branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: deterministic feature outcomes are exactly the perfect-prediction branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: scores lie in [0,1]; class means 1 and 0 force endpoint scores on the respective classes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite sums and no choice function or arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an implication with an alternative, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an implication with an alternative, not a biconditional."
+        }
+      ]
+    },
+    "ex-equal-base-rates-admit-constant-calibrated-score": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-positive-and-negative-score-balance",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets, and let $t\\in\\{1,2\\}$ index two groups. In group $t$, feature type $\\sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A common randomized assignment sends feature type $\\sigma$ to bin $b\\in\\mathcal B$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$, independently of group and outcome; bin $b$ has score $v_b\\in[0,1]$. Set $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for each group, so both outcome classes have positive mass. Define the mean score among positive outcomes and among negative outcomes in group $t$ by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t},\n$$\nwhere the finite group law is $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$. The assignment is **balanced for positive outcomes** if $\\alpha_1=\\alpha_2$, and **balanced for negative outcomes** if $\\beta_1=\\beta_2$. These are class-conditioned mean-score criteria; they do not assert equal mean scores over whole groups or equal thresholded error rates.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In either group, $\\rho_t=a_{t\\sigma}p_\\sigma=1/2$. The sole bin has total mass $1$ and positive mass $1/2$, so its calibration identity is $1/2=(1/2)\\cdot1$. Since $S$ is constantly $1/2$, the positive and negative conditional mean scores are both $1/2$ in both groups, proving both balances.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The outcome takes both values with probability $1/2$, while $S=1/2$ always; hence $S\\ne Y$ almost surely. This is the equal-base-rate exception without perfect prediction.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-bin equal-rate witness",
+          "result": "For each group, rho=1/2, calibration residual is 1/2-(1/2)(1)=0, alpha=beta=1/2, and Pr(S=Y)=0.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma=\\{\\sigma\\}$ and $\\mathcal B=\\{b\\}$. In both groups take total mass $N_t=1$, feature proportion $a_{t\\sigma}=1$, positive-outcome probability $p_\\sigma=1/2$, and deterministic assignment $X_{\\sigma b}=1$ with score $v_b=1/2$. Each group then has base rate $1/2$ although the outcome is not determined by the feature, and the constant score is calibrated and balanced for both outcome classes.",
+          "fixture": "equal-rate-constant"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one nonempty feature type, one bin, and two groups."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All specified outcome probabilities and the score equal 1/2, so no zero endpoint is present."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "All specified outcome probabilities and the score equal 1/2, so no one endpoint is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both positive and negative outcomes have probability 1/2 in each group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No score or outcome probability is at an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses a single deterministic assignment and no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The one-feature, one-bin construction computes calibration and both means at one half while S differs from Y surely. It witnesses the equal-base-rate exception without perfect prediction; it does not state that constant scores are the only assignments satisfying the criteria.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The one-feature, one-bin construction computes calibration and both means at one half while S differs from Y surely. It witnesses the equal-base-rate exception without perfect prediction; it does not state that constant scores are the only assignments satisfying the criteria.",
+            "item_sha256": "10a4f76ce30011f3fb287d4098512d525be147984f78780071704ba95420319c",
+            "row_sha256": "e8f5a39811bad6794c0e7d031a723d3e00dfd27c827ecf95df3eb97a76db8e3d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The one-feature, one-bin construction computes calibration and both means at one half while S differs from Y surely. It witnesses the equal-base-rate exception without perfect prediction; it does not state that constant scores are the only assignments satisfying the criteria.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The one-feature, one-bin construction computes calibration and both means at one half while S differs from Y surely. It witnesses the equal-base-rate exception without perfect prediction; it does not state that constant scores are the only assignments satisfying the criteria.",
+            "item_sha256": "10a4f76ce30011f3fb287d4098512d525be147984f78780071704ba95420319c",
+            "row_sha256": "5e5a8bcb4e0388bcbf84d857b46b4fefc155248814e07de4ab44c3a23fe8ad44"
+          }
+        }
+      ]
+    },
+    "ex-perfect-risk-prediction-with-unequal-base-rates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-positive-and-negative-score-balance",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets, and let $t\\in\\{1,2\\}$ index two groups. In group $t$, feature type $\\sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A common randomized assignment sends feature type $\\sigma$ to bin $b\\in\\mathcal B$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$, independently of group and outcome; bin $b$ has score $v_b\\in[0,1]$. Set $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for each group, so both outcome classes have positive mass. Define the mean score among positive outcomes and among negative outcomes in group $t$ by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t},\n$$\nwhere the finite group law is $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$. The assignment is **balanced for positive outcomes** if $\\alpha_1=\\alpha_2$, and **balanced for negative outcomes** if $\\beta_1=\\beta_2$. These are class-conditioned mean-score criteria; they do not assert equal mean scores over whole groups or equal thresholded error rates.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each group, the positive mass is exactly its mass on $\\sigma_1$, so $\\rho_1=1/4$ and $\\rho_2=3/4$. In bin $b_0$, the positive mass is $0$ and the assigned mass is $a_{t\\sigma_0}$, giving $0=0\\cdot a_{t\\sigma_0}$; in bin $b_1$, the positive and assigned masses are both $a_{t\\sigma_1}$, giving $a_{t\\sigma_1}=1\\cdot a_{t\\sigma_1}$. Thus each group is calibrated.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The score is $0$ on $\\sigma_0$ and $1$ on $\\sigma_1$, exactly matching the deterministic outcome, so $S=Y$ in both groups. Therefore $\\alpha_1=\\alpha_2=1$ and $\\beta_1=\\beta_2=0$, which proves both balances despite the unequal base rates.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "two-feature perfect witness",
+          "result": "Group rates are 1/4 and 3/4; calibration residuals are 0 in b_0 and 0 in b_1; alpha=1 and beta=0 in both groups.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let $\\Sigma=\\{\\sigma_0,\\sigma_1\\}$ and $\\mathcal B=\\{b_0,b_1\\}$. Set $p_{\\sigma_0}=0$, $p_{\\sigma_1}=1$, assign $\\sigma_i$ deterministically to $b_i$, and give $b_0,b_1$ scores $0,1$, respectively. Let group 1 have feature proportions $(a_{1\\sigma_0},a_{1\\sigma_1})=(3/4,1/4)$ and group 2 have $(a_{2\\sigma_0},a_{2\\sigma_1})=(1/4,3/4)$, with $N_1=N_2=1$. The resulting base rates are $1/4$ and $3/4$; the score is perfectly predictive and satisfies all three criteria.",
+          "fixture": "perfect-unequal-rates"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two feature types, two bins, and both groups have positive mass."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: p_sigma0=0 and its score is 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: p_sigma1=1 and its score is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: both feature types have deterministic outcomes and the risk score is perfect."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: both endpoint scores 0 and 1 occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example specifies a deterministic feature-to-bin assignment."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The deterministic zero/one feature assignment produces base rates one quarter and three quarters and computes conditional score means one and zero. It realizes the perfect-prediction exception but makes no converse characterization of all unequal-base-rate assignments.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The deterministic zero/one feature assignment produces base rates one quarter and three quarters and computes conditional score means one and zero. It realizes the perfect-prediction exception but makes no converse characterization of all unequal-base-rate assignments.",
+            "item_sha256": "3896eaec8834a4e9e3d231dcc88ba4c84d2306948860bfebfb223bdb501c435e",
+            "row_sha256": "14274a10cb0040e17eb3786ed7681532f83bf1dc016bb1b122d73619057e4a18"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The deterministic zero/one feature assignment produces base rates one quarter and three quarters and computes conditional score means one and zero. It realizes the perfect-prediction exception but makes no converse characterization of all unequal-base-rate assignments.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The deterministic zero/one feature assignment produces base rates one quarter and three quarters and computes conditional score means one and zero. It realizes the perfect-prediction exception but makes no converse characterization of all unequal-base-rate assignments.",
+            "item_sha256": "3896eaec8834a4e9e3d231dcc88ba4c84d2306948860bfebfb223bdb501c435e",
+            "row_sha256": "0c096eba9f4b3d79c8446a0c656e27a54c9c2431b632ace69d4d38630a2cdd19"
+          }
+        }
+      ]
+    },
+    "ex-threshold-rates-vary-under-score-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-risk-score-and-calibration",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-positive-and-negative-score-balance",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets, and let $t\\in\\{1,2\\}$ index two groups. In group $t$, feature type $\\sigma$ has proportion $a_{t\\sigma}\\ge0$, where $\\sum_\\sigma a_{t\\sigma}=1$, and total mass $N_t>0$. The positive binary outcome $Y=1$ has probability $p_\\sigma\\in[0,1]$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A common randomized assignment sends feature type $\\sigma$ to bin $b\\in\\mathcal B$ with probability $X_{\\sigma b}\\ge0$, where $\\sum_bX_{\\sigma b}=1$, independently of group and outcome; bin $b$ has score $v_b\\in[0,1]$. Set $\\rho_t=\\sum_\\sigma a_{t\\sigma}p_\\sigma$ and $\\mu_t=N_t\\rho_t$. Assume $0<\\mu_t<N_t$ for each group, so both outcome classes have positive mass. Define the mean score among positive outcomes and among negative outcomes in group $t$ by\n$$\n\\alpha_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}p_\\sigma X_{\\sigma b}v_b}{\\rho_t},\\qquad \\beta_t=\\frac{\\sum_{\\sigma\\in\\Sigma}\\sum_{b\\in\\mathcal B}a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}v_b}{1-\\rho_t},\n$$\nwhere the finite group law is $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$. The assignment is **balanced for positive outcomes** if $\\alpha_1=\\alpha_2$, and **balanced for negative outcomes** if $\\beta_1=\\beta_2$. These are class-conditioned mean-score criteria; they do not assert equal mean scores over whole groups or equal thresholded error rates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-score-means-as-threshold-rate-areas",
+          "source_section": "Statement",
+          "quote": "Fix a group $t\\in\\{1,2\\}$ with a finite joint law $\\Pr_t$ for a binary outcome $Y\\in\\{0,1\\}$ and a score $S$ taking finitely many values in $[0,1]$, and assume $\\Pr_t(Y=1)>0$ and $\\Pr_t(Y=0)>0$. For each threshold $u\\in[0,1]$, define the true-positive rate $\\operatorname{TPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=1)$ and the false-positive rate $\\operatorname{FPR}_t(u)=\\Pr_t(S\\ge u\\mid Y=0)$. These are finite step functions and\n$$\n\\mathbb E_t[S\\mid Y=1]=\\int_0^1\\operatorname{TPR}_t(u)\\,du,\\qquad \\mathbb E_t[S\\mid Y=0]=\\int_0^1\\operatorname{FPR}_t(u)\\,du.\n$$\nThe integrals are ordinary Riemann integrals of the finite step functions.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In both groups the weighted score mean is $\\mathbb E_t[S]=1/2$. For group 1, $\\mathbb E_1[S^2]=\\tfrac12((1/5)^2+(4/5)^2)=17/50$. For group 2, $\\mathbb E_2[S^2]=\\tfrac9{32}(1/10)^2+\\tfrac{14}{32}(1/2)^2+\\tfrac9{32}(9/10)^2=17/50$. Each bin contains one feature type and its score equals that type's $p_\\sigma$, so its positive mass is its score times its assigned mass; hence calibration holds. The common positive mass/base rate is $1/2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By calibration, $\\mathbb E_t[S\\mathbf1_{\\{Y=1\\}}]=\\mathbb E_t[S^2]=17/50$ and $\\mathbb E_t[S\\mathbf1_{\\{Y=0\\}}]=\\mathbb E_t[S]-\\mathbb E_t[S^2]=8/50$. Dividing by the positive and negative masses $1/2$ gives $\\alpha_t=17/25$ and $\\beta_t=8/25$ for both groups, so both balances hold. By [F3], the two groups' TPR areas agree and their FPR areas agree.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "At $u=1/2$, group 1 has positive mass $(1/2)(4/5)=2/5$ and negative mass $(1/2)(1/5)=1/10$ at scores at least $1/2$, so its rates are $(2/5)/(1/2)=4/5$ and $(1/10)/(1/2)=1/5$. Group 2 has positive mass $(14/32)(1/2)+(9/32)(9/10)=151/320$ and negative mass $(14/32)(1/2)+(9/32)(1/10)=79/320$ at scores at least $1/2$, so its rates are $151/160$ and $79/160$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "At $u=9/10$, group 1 has no score at least $9/10$, so both rates are zero. Group 2's only qualifying score is $9/10$, contributing positive mass $(9/32)(9/10)=81/320$ and negative mass $(9/32)(1/10)=9/320$; dividing each by $1/2$ gives rates $81/160$ and $9/160$. These computations show threshold dependence despite the mean balances.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "exact two-group score distributions",
+          "result": "Group 1: E[S]=1/2, E[S^2]=17/50. Group 2: E[S]=1/2, E[S^2]=17/50. Both have alpha=17/25, beta=8/25.",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let group 1 have two feature types $\\sigma_1,\\sigma_2$, each of proportion $1/2$, with outcome probabilities $p_{\\sigma_1}=1/5$ and $p_{\\sigma_2}=4/5$. Let group 2 have three feature types $\\tau_1,\\tau_2,\\tau_3$ with proportions $9/32,14/32,9/32$ and outcome probabilities $p_{\\tau_1}=1/10$, $p_{\\tau_2}=1/2$, and $p_{\\tau_3}=9/10$. Each feature type is assigned deterministically to its own bin, whose score equals that type's outcome probability; this is one common feature-based assignment for both groups, with $N_1=N_2=1$. Both groups have base rate $1/2$, and the assignment is calibrated in each group with positive- and negative-outcome mean scores $17/25$ and $8/25$, respectively. At threshold $u=1/2$, the group 1 true-positive and false-positive rates are $4/5$ and $1/5$, while the group 2 rates are $151/160$ and $79/160$. At threshold $u=9/10$, group 1's two rates are $0,0$ and group 2's are $81/160,9/160$. Thus the threshold rates change with the threshold even though both class-conditioned mean-score criteria hold.",
+          "fixture": "balanced-moments"
+        },
+        {
+          "case": "threshold 1/2",
+          "result": "Group 1 TPR/FPR=(4/5,1/5); group 2 TPR/FPR=(151/160,79/160).",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let group 1 have two feature types $\\sigma_1,\\sigma_2$, each of proportion $1/2$, with outcome probabilities $p_{\\sigma_1}=1/5$ and $p_{\\sigma_2}=4/5$. Let group 2 have three feature types $\\tau_1,\\tau_2,\\tau_3$ with proportions $9/32,14/32,9/32$ and outcome probabilities $p_{\\tau_1}=1/10$, $p_{\\tau_2}=1/2$, and $p_{\\tau_3}=9/10$. Each feature type is assigned deterministically to its own bin, whose score equals that type's outcome probability; this is one common feature-based assignment for both groups, with $N_1=N_2=1$. Both groups have base rate $1/2$, and the assignment is calibrated in each group with positive- and negative-outcome mean scores $17/25$ and $8/25$, respectively. At threshold $u=1/2$, the group 1 true-positive and false-positive rates are $4/5$ and $1/5$, while the group 2 rates are $151/160$ and $79/160$. At threshold $u=9/10$, group 1's two rates are $0,0$ and group 2's are $81/160,9/160$. Thus the threshold rates change with the threshold even though both class-conditioned mean-score criteria hold.",
+          "fixture": "threshold-half"
+        },
+        {
+          "case": "threshold 9/10",
+          "result": "Group 1 TPR/FPR=(0,0); group 2 TPR/FPR=(81/160,9/160).",
+          "check": "ml101-risk-score-finite",
+          "asserts": "Let group 1 have two feature types $\\sigma_1,\\sigma_2$, each of proportion $1/2$, with outcome probabilities $p_{\\sigma_1}=1/5$ and $p_{\\sigma_2}=4/5$. Let group 2 have three feature types $\\tau_1,\\tau_2,\\tau_3$ with proportions $9/32,14/32,9/32$ and outcome probabilities $p_{\\tau_1}=1/10$, $p_{\\tau_2}=1/2$, and $p_{\\tau_3}=9/10$. Each feature type is assigned deterministically to its own bin, whose score equals that type's outcome probability; this is one common feature-based assignment for both groups, with $N_1=N_2=1$. Both groups have base rate $1/2$, and the assignment is calibrated in each group with positive- and negative-outcome mean scores $17/25$ and $8/25$, respectively. At threshold $u=1/2$, the group 1 true-positive and false-positive rates are $4/5$ and $1/5$, while the group 2 rates are $151/160$ and $79/160$. At threshold $u=9/10$, group 1's two rates are $0,0$ and group 2's are $81/160,9/160$. Thus the threshold rates change with the threshold even though both class-conditioned mean-score criteria hold.",
+          "fixture": "threshold-nine-tenths"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both feature sets, score bins, and groups have positive mass."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All specified probabilities and scores are strictly between 0 and 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "All specified probabilities and scores are strictly between 0 and 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both outcome classes have positive mass in each group and each score distribution has multiple values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No score or feature-type outcome probability is an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example specifies a deterministic finite assignment."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite tables have equal first and second score moments and therefore equal class-conditioned means, yet their TPR/FPR values differ at two thresholds. This is a counterexample to deriving threshold-rate equality from mean balance, not an equivalence involving the two notions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The finite tables have equal first and second score moments and therefore equal class-conditioned means, yet their TPR/FPR values differ at two thresholds. This is a counterexample to deriving threshold-rate equality from mean balance, not an equivalence involving the two notions.",
+            "item_sha256": "48246ebfe379996e2676261749fbfa6594bd71bfab05d2a75f86cac157c0c864",
+            "row_sha256": "25172ee7c8e9ae6d281529bd4501470a2cb50be036232c27255686309a7a115b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite tables have equal first and second score moments and therefore equal class-conditioned means, yet their TPR/FPR values differ at two thresholds. This is a counterexample to deriving threshold-rate equality from mean balance, not an equivalence involving the two notions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The finite tables have equal first and second score moments and therefore equal class-conditioned means, yet their TPR/FPR values differ at two thresholds. This is a counterexample to deriving threshold-rate equality from mean balance, not an equivalence involving the two notions.",
+            "item_sha256": "48246ebfe379996e2676261749fbfa6594bd71bfab05d2a75f86cac157c0c864",
+            "row_sha256": "17dde19e5ce1304ec6ab26ff2ee228a35b4e2f9e733900398eb61f5a218690da"
+          }
+        }
+      ]
+    }
+  }
+}

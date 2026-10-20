@@ -1,0 +1,3017 @@
+{
+  "version": 1,
+  "scope": [
+    "def-sample-covariance-directional-spectral-measure",
+    "lem-bounded-complex-iid-matrix-norm-bound",
+    "lem-complex-quadratic-form-fourth-moment-bound",
+    "lem-deformed-mp-fixed-point-solution-is-unique",
+    "lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound",
+    "lem-bounded-complex-resolvent-quadratic-form-concentration",
+    "lem-hermitian-resolvent-trace-concentration",
+    "lem-hermitian-spectral-measure-is-probability",
+    "lem-bounded-complex-resolvent-deterministic-equivalent",
+    "thm-general-population-sample-covariance-esd-limit-for-bounded-entries",
+    "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries",
+    "lem-complex-sample-covariance-norm-bound-from-real-edge",
+    "thm-directional-sample-covariance-resolvent-limit",
+    "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+    "cor-negative-axis-directional-resolvent-integrals",
+    "ex-anisotropic-sample-covariance-directional-condition",
+    "ex-isotropic-sample-covariance-directional-marchenko-pastur-limit",
+    "ex-critical-aspect-one-no-positive-edge-gap"
+  ],
+  "contracts": {
+    "def-sample-covariance-directional-spectral-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], diagonalize $T=U\\operatorname{diag}(t_1,\\ldots,t_d)U^*$ with each $t_j\\ge0$. Then $T^{1/2}:=U\\operatorname{diag}(\\sqrt{t_1},\\ldots,\\sqrt{t_d})U^*$ is Hermitian positive semidefinite. With $B=N^{-1/2}T^{1/2}X$, the matrix $A=BB^*$ is Hermitian and $v^*Av=\\|B^*v\\|_2^2\\ge0$ for every $v$; hence all its eigenvalues are nonnegative.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "2.1",
+          "claim": "Each displayed set function is a finite nonnegative linear combination of the point masses defined in [F2], which are Borel probability measures by [F3]; its coefficients are nonnegative because $\\operatorname{rank}(P_\\lambda)/d\\ge0$ and $\\|P_\\lambda x\\|_2^2\\ge0$. Thus both are finite Borel measures. By step 1.1 their finite supports lie in $[0,\\infty)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: Setting T=0 gives A=0; steps 1.1–2.1 still define both finite measures at the zero eigenvalue."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: For d=N=1 the formulas reduce to point masses at the single eigenvalue; verification steps 1.1–2.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The zero matrix T=0 is permitted by positive semidefiniteness; steps 1.1–2.1 define the resulting point-mass laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "one-dimensional population",
+          "result": "For d=N=1, T=[t] with t≥0 and X=[a], both measures equal the point mass δ_(t|a|²) for any unit direction; this matches the displayed formulas and support.",
+          "evidence": "Substitute the scalar matrices into Definition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-bounded-complex-iid-matrix-norm-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $K=0$, every entry is zero almost surely and the conclusion is immediate. Assume $K>0$. Regard the complex unit sphere in $\\mathbb C^d$ as the real unit sphere in $\\mathbb R^{2d}$. For $0<\\varepsilon<1/2$, a maximal $\\varepsilon$-separated subset is an $\\varepsilon$-net; the disjoint radius-$\\varepsilon/2$ balls about its points lie in the radius-$(1+\\varepsilon/2)$ ball, so volume comparison bounds its cardinality by $(1+2/\\varepsilon)^{2d}$. If $\\mathcal N_1,\\mathcal N_2$ are such nets for the two unit spheres and $A$ is an $n\\times N$ complex matrix, approximating unit vectors $u,v$ attaining $\\|A\\|_{\\mathrm{op}}=|u^*Av|$ gives\n$$\\|A\\|_{\\mathrm{op}}\\le (1-2\\varepsilon)^{-1}\\max_{u_0\\in\\mathcal N_1,\\ v_0\\in\\mathcal N_2}|u_0^*Av_0|.$$\nIndeed, the approximation error is at most $\\|u-u_0\\|\\|A\\|+\\|v-v_0\\|\\|A\\|\\le2\\varepsilon\\|A\\|$.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Fix deterministic unit vectors $u\\in\\mathbb C^n$ and $v\\in\\mathbb C^N$. Then $u^*X_nv=\\sum_{i,j}\\overline u_i v_j\\xi_{ij}$ is a sum of independent centered complex variables. Each real or imaginary summand is bounded in absolute value by $K|u_i||v_j|$. If a centered real variable $Y$ is bounded by $b$, convexity of the exponential on $[-b,b]$ and $\\mathbb EY=0$ give $\\mathbb E e^{\\lambda Y}\\le\\cosh(\\lambda b)\\le e^{\\lambda^2b^2/2}$. Independence, exponential Markov inequality [F3], and optimization in $\\lambda$ therefore give\n$$\\mathbb P\\{|u^*X_nv|>t\\}\\le4\\exp\\!\\left(-\\frac{t^2}{4K^2}\\right),$$\nbecause $\\sum_{i,j}K^2|u_i|^2|v_j|^2=K^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Choose $\\varepsilon=1/8$ in step 1.1. The product of the two net cardinalities is at most $17^{2(n+N_n)}$. Taking $t=L\\sqrt{n+N_n}$ with $L$ large enough that $L^2/(4K^2)>2\\log17+1$, the union bound and step 2.1 make the probability that the net maximum exceeds $t$ at most $4e^{-(n+N_n)}$. These probabilities are summable in $n$ because $N_n/n\\to1/c>0$. By [F2], the net maximum is at most $L\\sqrt{n+N_n}$ eventually almost surely. The net inequality in step 1.1 and boundedness of $n/N_n$ then yield $\\|X_n\\|_{\\mathrm{op}}\\le C\\sqrt{N_n}$ eventually, with deterministic $C=C(K,c)$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: The allowed K=0 case makes every entry zero almost surely; step 1.1 handles the zero norm branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: Aspect ratio c=1 is allowed by the Statement, which excludes neither square matrices nor this limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The degenerate K=0 branch is handled explicitly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "K=0 boundary",
+          "result": "Every entry vanishes almost surely, so the eventual norm bound holds with C=0.",
+          "evidence": "Explicit branch in proof step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-complex-quadratic-form-fourth-moment-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "First fix a deterministic complex matrix $A$. Centering the diagonal terms gives\n$$\\xi^*A\\xi-\\operatorname{tr}A=\\sum_iA_{ii}(|\\xi_i|^2-1)+\\sum_{i\\ne j}\\overline{\\xi_i}A_{ij}\\xi_j.$$\nIn the squared modulus, independence and $\\mathbb E\\xi_i=0$ make diagonal and off-diagonal parts uncorrelated; distinct diagonal terms are uncorrelated; and two off-diagonal terms have nonzero expectation only when their ordered index pairs agree or are reversed. Expanding those remaining terms yields\n$$\\mathbb E|\\xi^*A\\xi-\\operatorname{tr}A|^2=(\\mu_4-1)\\sum_i|A_{ii}|^2+\\sum_{i\\ne j}|A_{ij}|^2+|\\tau|^2\\sum_{i\\ne j}A_{ij}\\overline{A_{ji}}.$$\nHere $\\mu_4-1\\ge0$ by Cauchy–Schwarz, and $|\\tau|\\le\\mathbb E|\\xi_1|^2=1$. Also\n$$\\left|\\sum_{i\\ne j}A_{ij}\\overline{A_{ji}}\\right|\\le\\sum_{i\\ne j}|A_{ij}||A_{ji}|\\le\\sum_{i\\ne j}|A_{ij}|^2.$$\nThus the deterministic quadratic-form variance is at most $C_{\\mu_4,\\tau}\\|A\\|_F^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], $(\\xi,A)$ has product joint law. The integrand is integrable because\n$$|\\xi^*A\\xi-\\operatorname{tr}A|^2\\le2\\|A\\|_F^2\\|\\xi\\|_2^4+2d\\|A\\|_F^2,$$\nand $\\mathbb E\\|\\xi\\|_2^4<\\infty$ in finite dimension. Integrate the deterministic inequality from step 1.1 over the law of $A$; [F3] justifies the order of integration and gives the stated bound.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: If A=0, both the centered quadratic form and the right side vanish; this is included by the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: For d=1 the form is the scalar centered variable a(|ξ|²−1), covered by the displayed bound and finite check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The degenerate matrix A=0 gives equality 0≤0 in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "dimension-one diagonal case",
+          "result": "For d=1 and A=[a], the centered form is a(|xi|^2-1); direct expansion gives variance (mu4-1)|a|^2, within the stated constant.",
+          "evidence": "Substitute d=1 and a diagonal coefficient into proof step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-deformed-mp-fixed-point-solution-is-unique": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For either candidate $q$, set $u=-(1-c)/z+cq\\in\\mathbb C^+$. Since $t\\ge0$, $1+tu\\ne0$ for every $t$, and the fixed-point equation becomes $q=-z^{-1}\\int(1+tu)^{-1}\\,dH(t)$. Substituting this into $u=-(1-c)/z+cq$ and using $(1+tu)^{-1}=1-tu/(1+tu)$ gives\n$$z=-\\frac1u+c\\int_{[0,\\infty)}\\frac{t}{1+tu}\\,dH(t).$$\nAll integrals are finite because $|t/(1+tu)|\\le1/\\operatorname{Im}u$.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If $u_1\\ne u_2$ are the transforms of two solutions, subtracting their equations in step 1.1 and dividing by $u_1-u_2$ yields\n$$\\frac1{u_1u_2}=c\\int_{[0,\\infty)}\\frac{t^2}{(1+tu_1)(1+tu_2)}\\,dH(t).$$\nFor either solution $u$, taking imaginary parts in step 1.1 gives\n$$\\operatorname{Im}z=\\operatorname{Im}u\\left(\\frac1{|u|^2}-c\\int_{[0,\\infty)}\\frac{t^2}{|1+tu|^2}\\,dH(t)\\right)>0,$$\nso $c|u|^2\\int t^2|1+tu|^{-2}\\,dH(t)<1$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Taking absolute values in the identity of step 2.1 and applying Cauchy–Schwarz gives\n$$1\\le\\left(c|u_1|^2\\int\\frac{t^2}{|1+tu_1|^2}\\,dH(t)\\right)^{1/2}\\left(c|u_2|^2\\int\\frac{t^2}{|1+tu_2|^2}\\,dH(t)\\right)^{1/2}<1,$$\ncontradicting step 2.1. Hence $u_1=u_2$, and the relation $u=-(1-c)/z+cq$ with $c>0$ gives $q_1=q_2$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires H to be a probability measure of total mass one, so the empty measure is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For H=δ0 the equation forces q=−1/z, which meets the imaginary-part conditions; see step 1.1 and the finite check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The value c=1 is allowed by c>0; the proof steps 1.1–3.1 do not divide by c−1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The point-mass population H=δ0 is covered; step 1.1 reduces the equation to q=−1/z."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement fixes z in the open upper half-plane and asserts no boundary limit as Im z tends to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "zero population H=δ0",
+          "result": "The integral equation forces q=−1/z; it satisfies both positive-imaginary-part conditions because z∈C+, so the solution is unique.",
+          "evidence": "Substitute t=0 in the Statement and use Im(−1/z)>0."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], write $B=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)U^*$ with $\\lambda_j\\ge0$. If $c=U^*x$, then\n$$q:=x^*Rx=\\sum_j\\frac{|c_j|^2}{\\lambda_j-z},\\qquad \\operatorname{Im}q=\\eta\\sum_j\\frac{|c_j|^2}{|\\lambda_j-z|^2}=\\eta\\|Rx\\|_2^2.$$\nFor $x\\ne0$ this is positive, so $1+q\\ne0$; for $x=0$ the denominator is one.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "2.1",
+          "claim": "Direct multiplication, using step 1.1, gives\n$$ (B+xx^*-zI)\\left(R-\\frac{Rxx^*R}{1+x^*Rx}\\right)=I.$$\nThe Hermitian matrix $B+xx^*$ has a resolvent at nonreal $z$, so the displayed inverse is $R_x$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "3.1",
+          "claim": "The difference in step 2.1 is a rank-one matrix. Its trace norm equals the product of the two vector norms divided by $|1+q|$; normality of $R$ makes both vector norms $\\|Rx\\|_2$. Since $|1+q|\\ge\\operatorname{Im}q=\\eta\\|Rx\\|_2^2$, step 1.1 gives $\\|R_x-R\\|_1\\le1/\\eta$. The inequality $|\\operatorname{tr}M|\\le\\|M\\|_1$ then gives the trace bound. The case $x=0$ has both differences zero.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For x=0 the update is zero, 1+x*Rx=1, and both resolvent and trace-norm differences vanish by direct substitution in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: In dimension d=1 the Sherman–Morrison identity is the scalar rank-one resolvent identity in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The zero update vector is covered by direct substitution in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "zero update vector",
+          "result": "If s=0, the update is zero, the denominator is 1, and the resolvent difference and trace norm vanish.",
+          "evidence": "Direct substitution in the Sherman–Morrison identity."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-bounded-complex-resolvent-quadratic-form-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, let $x\\in\\mathbb C^d$, and let $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$. Set $R=(B-zI)^{-1}$ and $R_x=(B+xx^*-zI)^{-1}$. For the trace norm $\\|M\\|_1$, defined as the sum of the singular values of $M$, one has $1+x^*Rx\\ne0$,\n$$R_x=R-\\frac{Rxx^*R}{1+x^*Rx},\\qquad \\|R_x-R\\|_1\\le\\frac1\\eta,\\qquad |\\operatorname{tr}R_x-\\operatorname{tr}R|\\le\\frac1\\eta.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "We first prove a linear-form bound. If $\\zeta_i$ are independent centered complex variables with $|\\zeta_i|\\le K$ and $a_i\\in\\mathbb C$, expansion of $\\mathbb E|\\sum_i a_i\\zeta_i|^8$ has zero contribution whenever an index occurs exactly once. Each remaining equality pattern partitions the eight positions into blocks of sizes at least two. For a fixed pattern, the absolute sum is at most $K^8\\prod_B\\sum_i|a_i|^{|B|}\\le K^8(\\sum_i|a_i|^2)^4$, since $\\sum_i|a_i|^r\\le(\\sum_i|a_i|^2)^{r/2}$ for $r\\ge2$. There are finitely many such patterns, so $\\mathbb E|\\sum_i a_i\\zeta_i|^8\\le C_K(\\sum_i|a_i|^2)^4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Write $s_{n,j}=T_n^{1/2}X_{n,\\cdot j}/\\sqrt{N_n}$, $A_{n,j}=A_n-s_{n,j}s_{n,j}^*$, and $R_{n,j}=(A_{n,j}-zI)^{-1}$. By [F4],\n$$U_{n,j}:=x_n^*(R_n-R_{n,j})x_n=-\\frac{(x_n^*R_{n,j}s_{n,j})(s_{n,j}^*R_{n,j}x_n)}{1+s_{n,j}^*R_{n,j}s_{n,j}}.$$\nDiagonalizing $A_{n,j}$ as in [F6] gives $\\operatorname{Im}(z(1+s_{n,j}^*R_{n,j}s_{n,j}))\\ge\\eta$, hence the denominator has modulus at least $\\eta/|z|$. Conditional on all columns except $j$, each factor in the numerator is a linear form in the bounded independent entries of column $j$, with coefficient-vector norm at most $\\sqrt M/(\\eta\\sqrt{N_n})$. Step 1.1 and Cauchy–Schwarz therefore give $\\mathbb E|U_{n,j}|^4\\le C N_n^{-4}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Let $\\mathcal F_{n,j}=\\sigma(X_{n,\\cdot1},\\ldots,X_{n,\\cdot j})$, and let $E_{n,j}$ be the finite-product average over the remaining columns. By [F2]–[F3],\n$$x_n^*R_nx_n-\\mathbb E[x_n^*R_nx_n]=\\sum_{j=1}^{N_n}(E_{n,j}-E_{n,j-1})x_n^*R_nx_n.$$\nThe leave-one-column resolvent $R_{n,j}$ depends on all columns except $j$, so its product-integral averages under $E_{n,j}$ and $E_{n,j-1}$ agree. Therefore the $j$th summand is $D_{n,j}:=(E_{n,j}-E_{n,j-1})U_{n,j}$. Integrating over column $j$ shows $E_{n,j-1}D_{n,j}=0$, so these are martingale differences. Conditional Jensen gives $\\mathbb E|D_{n,j}|^4\\le16\\mathbb E|U_{n,j}|^4\\le C N_n^{-4}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Put $S_k=\\sum_{j\\le k}D_{n,j}$, $a_k=\\mathbb E|S_k|^4$, $v_k:=E_{n,k-1}|D_{n,k}|^2$, and $w_k:=E_{n,k-1}|D_{n,k}|^4$. Expanding $|S_{k-1}+D_{n,k}|^4$, the term linear in $D_{n,k}$ vanishes after conditional integration; $|\\operatorname{Re}(\\overline S_{k-1}D_{n,k})|\\le|S_{k-1}||D_{n,k}|$ and $4|S_{k-1}||D_{n,k}|^3\\le2|S_{k-1}|^2|D_{n,k}|^2+2|D_{n,k}|^4$ give\n$$a_k\\le a_{k-1}+8\\mathbb E(|S_{k-1}|^2v_k)+3\\mathbb E w_k.$$\nBy Cauchy–Schwarz and conditional Jensen, $\\mathbb E(|S_{k-1}|^2v_k)\\le\\sqrt{a_{k-1}}\\sqrt{\\mathbb E v_k^2}\\le\\sqrt{a_{k-1}}\\sqrt{\\mathbb E w_k}\\le C\\sqrt{a_{k-1}}/N_n^2$, while $\\mathbb E w_k\\le C/N_n^4$. Induction gives $a_k\\le C_0k^2/N_n^4$ for a fixed sufficiently large $C_0$ and $k\\le N_n$, hence $\\mathbb E|S_{N_n}|^4\\le C_0/N_n^2$.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Apply [F7] to $Y=|S_{N_n}|^4$ and $a=t^4$ to obtain the stated $C/(t^4N_n^2)$ tail bound. Since $N_n/n\\to\\kappa>0$, the probabilities are summable in $n$; [F5] proves almost-sure convergence for this fixed $z$.",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: T=0 makes A_n=0 and every directional resolvent equal −z^−1, so the deviation is identically zero under the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio κ=1 is included in the Statement’s interval (0,∞); no square-design exception is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The semidefinite population T_n may be zero, in which case the asserted deviation is exactly zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-hermitian-resolvent-trace-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, let $x\\in\\mathbb C^d$, and let $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$. Set $R=(B-zI)^{-1}$ and $R_x=(B+xx^*-zI)^{-1}$. For the trace norm $\\|M\\|_1$, defined as the sum of the singular values of $M$, one has $1+x^*Rx\\ne0$,\n$$R_x=R-\\frac{Rxx^*R}{1+x^*Rx},\\qquad \\|R_x-R\\|_1\\le\\frac1\\eta,\\qquad |\\operatorname{tr}R_x-\\operatorname{tr}R|\\le\\frac1\\eta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-first-borel-cantelli-lemma-for-events",
+          "source_section": "Statement",
+          "quote": "Let $(A_n)_{n\\in\\mathbb N}$ be events in a probability space. If\n$$\\sum_{n=0}^\\infty \\mathbb P(A_n)<+\\infty,$$\nthen\n$$\\mathbb P(A_n\\ \\mathrm{i.o.})=0.$$\n\nNo independence hypothesis is needed.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Replacing one column $Y_{n,j}$ by any other vector removes one positive rank-one term and adds another. Applying [F1] twice shows that $\\operatorname{tr}(B_n-zI)^{-1}$ changes by at most $2/\\eta$, so the real and imaginary parts of $M_n(z)$ each have coordinate oscillation at most $c_n:=2/(n\\eta)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Let $f$ be either real part of $M_n(z)$ and use [F2]–[F3] to form its product-integral Doob averages $F_j$ over the first $j$ columns, integrating the remaining columns against their marginal laws. Boundedness $|\\operatorname{tr}(B_n-zI)^{-1}|\\le n/\\eta$ makes these integrals finite. Then $D_j:=F_j-F_{j-1}$ has conditional mean zero and lies, conditionally on the first $j-1$ columns, in an interval of length at most $c_n$ by step 1.1.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If a real random variable $D$ has mean zero and lies in an interval of width $c$, then $\\log\\mathbb E e^{\\lambda D}$ has second derivative equal to a variance under an exponentially tilted law, at most $c^2/4$; the variance bound follows from $\\mathbb E[(D-a)(b-D)]\\ge0$ for interval endpoints $a\\le D\\le b$. Since the log moment and its first derivative vanish at $0$, integrating twice gives $\\mathbb E e^{\\lambda D}\\le e^{\\lambda^2c^2/8}$. Apply this conditional estimate to each $D_j$, iterate, and use [F5] with $\\lambda=4t/(N_nc_n^2)$ to obtain each one-sided tail $\\mathbb P\\{f-\\mathbb Ef\\ge t\\}\\le e^{-2t^2/(N_nc_n^2)}$. The same bound applies to the lower tail and to the imaginary part. If a complex number has modulus greater than $t$, one of its real or imaginary parts has magnitude greater than $t/\\sqrt2$, so the union bound and $c_n=2/(n\\eta)$ give the displayed probability inequality.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Since $N_n/n\\to\\kappa\\in(0,\\infty)$, for every fixed $t>0$ the step 3.1 bound is at most $4e^{-a_t n}$ for all sufficiently large $n$ and some $a_t>0$. The probabilities are summable. Apply [F4] for $t=1/m$, $m\\ge1$, and intersect the resulting countable probability-one events to conclude $M_n(z)-\\mathbb E M_n(z)\\to0$ almost surely.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: If every Y_{n,j}=0, then M_n(z)=−1/z deterministically and its centered deviation vanishes under the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio κ=1 is included in the Statement’s interval (0,∞)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: Zero column vectors are allowed and give a deterministic resolvent trace, as follows directly from the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-hermitian-spectral-measure-is-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sample-covariance-directional-spectral-measure",
+          "source_section": "Definition",
+          "quote": "For positive integers $d,N$, let $X\\in\\mathbb C^{d\\times N}$ and let $T\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, meaning $T=T^*$ and $v^*Tv\\ge0$ for every $v\\in\\mathbb C^d$. Let $T^{1/2}$ be its Hermitian positive semidefinite square root and set\n$$A:=\\frac1N T^{1/2}XX^*T^{1/2}.$$\nFor each distinct eigenvalue $\\lambda$ of the Hermitian matrix $A$, let $P_\\lambda$ be the orthogonal projection onto its eigenspace. The empirical spectral distribution of $A$, normalized by its dimension $d$, is\n$$\\mu_A:=\\frac1d\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\operatorname{rank}(P_\\lambda)\\,\\delta_\\lambda,$$\nwhere $\\delta_\\lambda$ is the unit point mass at $\\lambda$.\nFor a deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure is\n$$\\mu_A^x:=\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\|P_\\lambda x\\|_2^2\\,\\delta_\\lambda.$$\nFor a Borel set $B\\subseteq\\mathbb R$, set $\\mathbf1_B(A):=\\sum_{\\lambda\\in B\\cap\\operatorname{spec}(A)}P_\\lambda$; then $\\mu_A^x(B)=x^*\\mathbf1_B(A)x$. Both measures are supported on the nonnegative real axis.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], write $A=\\sum_{j=1}^r\\lambda_jP_j$ over its distinct eigenvalues, where the $P_j$ are mutually orthogonal projections, $\\sum_jP_j=I$, and $\\lambda_j\\ge0$. Taking traces gives $\\sum_j\\operatorname{rank}(P_j)=d$. Thus the nonnegative weights $\\operatorname{rank}(P_j)/d$ in [F2] sum to one; by [F3] and [F4], $\\mu_A$ is a Borel probability measure supported on $[0,\\infty)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For the unit vector $x$, the directional weights in [F2] are $\\|P_jx\\|_2^2\\ge0$, and orthogonality gives $\\sum_j\\|P_jx\\|_2^2=\\|\\sum_jP_jx\\|_2^2=\\|x\\|_2^2=1$. By [F3] and [F4], the finite Dirac sum is a Borel probability measure; its support is contained in the nonnegative spectrum of $A$ by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For A=0, both spectral laws reduce to δ0; steps 1.1–2.1 establish their unit mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: For d=1 the single eigenspace projection is I, and the proof gives μ_A=μ_A^x=δ_λ."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: A zero eigenvalue or the zero matrix is allowed; steps 1.1–2.1 show the law remains a probability measure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two eigenvalues and coordinate direction",
+          "result": "For A=diag(0,1) and x=(1,0), μ_A=(δ0+δ1)/2 and μ_A^x=δ0; both have total mass one and nonnegative support.",
+          "evidence": "Substitute the two spectral projections in proof steps 1.1 and 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-bounded-complex-resolvent-deterministic-equivalent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-complex-quadratic-form-fourth-moment-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\xi=(\\xi_1,\\ldots,\\xi_d)^\\mathsf T$ have independent identically distributed complex coordinates with $\\mathbb E\\xi_i=0$, $\\mathbb E|\\xi_i|^2=1$, and $\\mu_4:=\\mathbb E|\\xi_i|^4<\\infty$. Let $A$ be an independent random complex $d\\times d$ matrix with $\\mathbb E\\|A\\|_F^2<\\infty$, where $\\|A\\|_F^2:=\\sum_{i,j}|A_{ij}|^2$. Put $\\tau:=\\mathbb E\\xi_1^2$. Then\n$$\\mathbb E\\left|\\xi^*A\\xi-\\operatorname{tr}A\\right|^2\\le C_{\\mu_4,\\tau}\\,\\mathbb E\\|A\\|_F^2,\\qquad C_{\\mu_4,\\tau}:=\\max\\{\\mu_4-1,1+|\\tau|^2\\}.$$",
+          "uses": [
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hermitian-rank-one-resolvent-update-and-trace-norm-bound",
+          "source_section": "Statement",
+          "quote": "Let $B\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, let $x\\in\\mathbb C^d$, and let $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$. Set $R=(B-zI)^{-1}$ and $R_x=(B+xx^*-zI)^{-1}$. For the trace norm $\\|M\\|_1$, defined as the sum of the singular values of $M$, one has $1+x^*Rx\\ne0$,\n$$R_x=R-\\frac{Rxx^*R}{1+x^*Rx},\\qquad \\|R_x-R\\|_1\\le\\frac1\\eta,\\qquad |\\operatorname{tr}R_x-\\operatorname{tr}R|\\le\\frac1\\eta.$$",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-complex-resolvent-quadratic-form-concentration",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, unit second absolute moment, and absolute value at most $K$, where $K$ is independent of $n$. Let $T_n\\in\\mathbb C^{n\\times n}$ be deterministic Hermitian positive semidefinite with $\\|T_n\\|_{\\mathrm{op}}\\le M$, and let $x_n\\in\\mathbb C^n$ be deterministic with $\\|x_n\\|_2=1$. Assume $N_n/n\\to\\kappa\\in(0,\\infty)$. For fixed $z=u+i\\eta$ with $\\eta>0$, set\n$$A_n:=\\frac1{N_n}T_n^{1/2}X_nX_n^*T_n^{1/2},\\qquad R_n(z):=(A_n-zI)^{-1}.$$\nThen $x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]\\to0$ almost surely. Moreover, for every $t>0$ there is a constant $C=C(K,M,z,\\kappa)$ such that, for all sufficiently large $n$,\n$$\\mathbb P\\!\\left\\{|x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]|>t\\right\\}\\le\\frac{C}{t^4N_n^2}.$$",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-stieltjes-transform-of-a-real-probability-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$. For $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, its Stieltjes transform, with the $(x-z)^{-1}$ convention, is\n$$m_\\mu(z):=\\int_{\\mathbb R}\\frac{1}{x-z}\\,d\\mu(x).$$\nThe integral is finite because $|x-z|^{-1}\\le\\eta^{-1}$ for every real $x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix $n,z$, suppress the index $n$, write $N=N_n$, $s_j=T^{1/2}X_{\\cdot j}/\\sqrt N$, $R=(A-zI)^{-1}$, $R_j=(A-s_js_j^*-zI)^{-1}$, and $\\beta_j=(1+s_j^*R_js_j)^{-1}$. The companion matrix $\\widetilde A=N^{-1}X^*TX$ is positive semidefinite by [F4], so $q=N^{-1}\\mathbb E\\operatorname{tr}(\\widetilde A-zI)^{-1}$ is the Stieltjes transform of an expected probability measure on $[0,\\infty)$ by [F5] and has positive imaginary part. If $q=\\int(\\lambda-z)^{-1}\\,dG(\\lambda)$, then for every $t\\ge0$,\n$$\\operatorname{Im}\\{z(1+tq)\\}=\\eta+t\\int\\frac{\\lambda\\eta}{|\\lambda-z|^2}\\,dG(\\lambda)\\ge\\eta,$$\nso $C:=(I+qT)^{-1}$ exists and $\\|C\\|_{\\mathrm{op}}\\le |z|/\\eta$. The same spectral calculation applied to $A-s_js_j^*$ gives $|\\beta_j|\\le |z|/\\eta$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Set $b_j=(1+N^{-1}\\operatorname{tr}(TR_j))^{-1}$ and $\\xi_j=s_j^*R_js_j-N^{-1}\\operatorname{tr}(TR_j)$. The trace in $b_j$ is a Stieltjes transform with nonnegative weights: in an eigenbasis of $A-s_js_j^*$ its weights are $\\langle v_k,Tv_k\\rangle/N\\ge0$. The inequality in step 1.1 therefore also gives $|b_j|\\le |z|/\\eta$. Conditional on all columns except $j$, [F1] and $\\|T^{1/2}R_jT^{1/2}\\|_F^2\\le nM^2/\\eta^2$ give $\\mathbb E_j|\\xi_j|^2\\le C_1 n/N^2=O(N^{-1})$, where $\\mathbb E_j$ integrates column $j$. For any deterministic unit $x$, set\n$$\\alpha_j=x^*Cs_js_j^*R_jx-N^{-1}x^*CTR_jx.$$\nThis is a centered quadratic form in column $j$. Its coefficient matrix has rank at most one and Frobenius norm at most $M\\|C\\|/\\eta$, so [F1] gives $\\mathbb E_j|\\alpha_j|^2=O(N^{-2})$. Also $\\mathbb E_j\\alpha_j=0$ and $\\beta_j-b_j=-\\beta_jb_j\\xi_j$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "2.2",
+          "claim": "For all sufficiently large $n$ we have $N=N_n\\ge2$. Put $Y=[s_2\\ \\cdots\\ s_N]$, $D=Y^*Y-zI_{N-1}$, and $C_-=YY^*-zI_n=A-s_1s_1^*-zI_n$. The matrix $\\widetilde A-zI$ has block form\n$$\\begin{pmatrix}s_1^*s_1-z&s_1^*Y\\\\Y^*s_1&D\\end{pmatrix}.$$\nFor a block matrix $\\begin{pmatrix}a&b^*\\\\b&D\\end{pmatrix}$ with invertible $D$, solving its product with $(u,v)^T=(1,0)^T$ gives $v=-D^{-1}bu$ and $(a-b^*D^{-1}b)u=1$. Hence its inverse's upper-left entry is $(a-b^*D^{-1}b)^{-1}$. Here $(C_-)Y=YD$, so $(C_-)(I-YD^{-1}Y^*)=C_- -YY^*=-zI$ and $I-YD^{-1}Y^*=-zC_-^{-1}=-zR_1$. The Schur complement is therefore $s_1^*(I-YD^{-1}Y^*)s_1-z=-z(1+s_1^*R_1s_1)$, proving $(\\widetilde R)_{11}=-\\beta_1/z$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.1",
+          "claim": "By exchangeability of the columns and step 2.2, $zq=-N^{-1}\\sum_{j=1}^N\\mathbb E\\beta_j$. The identity $R^{-1}=\\sum_j s_js_j^*-zI$ gives $\\sum_j s_js_j^*R=I+zR$. The rank-one formula [F2] gives $s_js_j^*R=\\beta_js_js_j^*R_j$. Substituting these identities and the formula for $zq$ yields\n$$\\mathbb E R+\\frac1zC=\\frac1z\\sum_{j=1}^N\\mathbb E\\left[\\beta_j\\left(Cs_js_j^*R_j-N^{-1}CT\\,\\mathbb E R\\right)\\right].$$\nTesting against $x$ and adding then subtracting $N^{-1}x^*CTR_jx$ and $N^{-1}x^*CTRx$ decomposes the right side into three terms $\\delta_1+\\delta_2+\\delta_3$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For the first term, $\\delta_1=(N/z)\\mathbb E(\\beta_1\\alpha_1)$. Since $b_1$ is independent of column 1 and $\\mathbb E_1\\alpha_1=0$, we have $\\mathbb E(b_1\\alpha_1)=0$. Therefore step 2.1, Cauchy–Schwarz, and the uniform bounds on $\\beta_1,b_1$ imply\n$$|\\delta_1|\\le C_2N(\\mathbb E|\\xi_1|^2)^{1/2}(\\mathbb E|\\alpha_1|^2)^{1/2}=O(N^{-1/2}).$$",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.2",
+          "step": "4.2",
+          "claim": "For the second term, $R_1-R=\\beta_1R_1s_1s_1^*R_1$. Conditional second moments of the two linear forms $x^*CTR_1s_1$ and $s_1^*R_1x$ are each $O(N^{-1})$, uniformly in the other columns. Cauchy–Schwarz and boundedness of $\\beta_1$ yield $|\\delta_2|=O(N^{-1})$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "4.3",
+          "claim": "The third term is $\\delta_3=z^{-1}\\mathbb E[\\beta_1x^*CT(R-\\mathbb ER)x]$. Put $u=(CT)^*x$ and $v=x$; their norms are uniformly bounded by step 1.1. For $Q(w)=w^*(R-\\mathbb ER)w$, direct expansion gives\n$$u^*(R-\\mathbb ER)v=\\frac14\\{Q(u+v)-Q(u-v)-iQ(u+iv)+iQ(u-iv)\\}.$$\nAfter rescaling these vectors, [F3] and the union bound give a tail bounded by $C_3/(t^4N^2)$ for this bilinear form; zero vectors contribute zero. It is also bounded deterministically by $2\\|u\\|\\|v\\|/\\eta$. Integrating the tail after splitting at $t=N^{-1/2}$ gives $\\mathbb E|u^*(R-\\mathbb ER)v|^2=O(N^{-1})$. Since $\\beta_1$ is bounded, Cauchy–Schwarz gives $|\\delta_3|=O(N^{-1/2})$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "5.1",
+          "claim": "The bounds in steps 4.1, 4.2, and 4.3 tend to zero uniformly over deterministic unit $x$. The tested resolvent identity in step 3.1 therefore proves the asserted supremum limit.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "step 4.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For T_n=0, q_n=−1/z and the asserted resolvent equivalent is exact; see step 1.1 and the finite check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio κ=1 is included; the proof only uses N_n≥2 eventually, which follows from N_n/n→1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The allowed case T_n=0 makes both sides exact in step 1.1 and the finite check."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "T_n=0",
+          "result": "Both covariance matrices vanish, q_n=-1/z, and the asserted resolvent equivalent is exact.",
+          "evidence": "Substitute T_n=0 in the definitions."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "thm-general-population-sample-covariance-esd-limit-for-bounded-entries": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sample-covariance-empirical-spectral-distribution",
+          "source_section": "Definition",
+          "quote": "For positive integers $n$ and $p$, let $X\\in\\mathbb R^{n\\times p}$ and define its (uncentered, unit-variance-normalized) sample covariance matrix by\n$$S(X):=\\frac1nX^{\\mathsf T}X\\in\\mathbb R^{p\\times p}.$$\nIt is real symmetric and non-negative. If its eigenvalues, counted with multiplicity, are $\\lambda_1(S(X)),\\ldots,\\lambda_p(S(X))$, its empirical spectral distribution (ESD), normalized by the matrix dimension $p$, is\n$$\\mu_{S(X)}:=\\frac1p\\sum_{j=1}^p\\delta_{\\lambda_j(S(X))}.$$\nThe largest eigenvalue is $\\lambda_{\\max}(S(X)):=\\max_j\\lambda_j(S(X))$. When $S(X)$ has at least one positive eigenvalue, its smallest positive eigenvalue is $\\lambda_{\\min}^{+}(S(X)):=\\min\\{\\lambda_j(S(X)):\\lambda_j(S(X))>0\\}$. For a sequence $X_n\\in\\mathbb R^{n\\times p_n}$, write $S_n=S(X_n)$ and $\\mu_n=\\mu_{S_n}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-stieltjes-transform-of-a-real-probability-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$. For $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, its Stieltjes transform, with the $(x-z)^{-1}$ convention, is\n$$m_\\mu(z):=\\int_{\\mathbb R}\\frac{1}{x-z}\\,d\\mu(x).$$\nThe integral is finite because $|x-z|^{-1}\\le\\eta^{-1}$ for every real $x$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-bounded-complex-resolvent-deterministic-equivalent",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and $|X_{ij}|\\le K$ almost surely for a fixed $K$, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with induced Euclidean operator norm $\\|T_n\\|_{\\mathrm{op}}\\le M$. Define\n$$A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2},\\qquad \\widetilde A_n=N_n^{-1}X_n^*T_nX_n,$$\n$$R_n(z)=(A_n-zI_n)^{-1},\\qquad \\widetilde R_n(z)=(\\widetilde A_n-zI_{N_n})^{-1},\\qquad q_n(z)=\\mathbb E\\left[N_n^{-1}\\operatorname{tr}\\widetilde R_n(z)\\right].$$\nFor every fixed $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, the matrix $I_n+q_n(z)T_n$ is invertible and\n$$\\sup_{\\|x\\|_2=1}\\left|x^*\\left(\\mathbb E R_n(z)+\\frac1z(I_n+q_n(z)T_n)^{-1}\\right)x\\right|\\longrightarrow0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-hermitian-resolvent-trace-concentration",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $Y_{n,1},\\ldots,Y_{n,N_n}$ be independent random vectors in $\\mathbb C^n$, let $B_n=\\sum_{j=1}^{N_n}Y_{n,j}Y_{n,j}^*$, and assume $N_n/n\\to\\kappa\\in(0,\\infty)$. Fix $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, and define\n$$M_n(z):=\\frac1n\\operatorname{tr}(B_n-zI)^{-1}.$$\nThen for every $t>0$,\n$$\\mathbb P\\{|M_n(z)-\\mathbb E M_n(z)|>t\\}\\le4\\exp\\!\\left(-\\frac{t^2n^2\\eta^2}{4N_n}\\right),$$\nand $M_n(z)-\\mathbb E M_n(z)\\to0$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-deformed-mp-fixed-point-solution-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, let $H$ be a Borel probability measure on $[0,\\infty)$, and fix $z\\in\\mathbb C$ with $\\operatorname{Im}z>0$. There is at most one $q\\in\\mathbb C$ satisfying $\\operatorname{Im}q>0$, $u:=-(1-c)/z+cq$ with $\\operatorname{Im}u>0$, and\n$$q=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czq)-z}\\,dH(t).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-bounded-complex-iid-matrix-norm-bound",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $N_n$ be a positive integer with $n/N_n\\to c\\in(0,\\infty)$, and let $X_n\\in\\mathbb C^{n\\times N_n}$ have independent identically distributed entries $\\xi$ satisfying $\\mathbb E\\xi=0$ and $|\\xi|\\le K$ almost surely for a fixed $K<\\infty$. Then there is a finite constant $C=C(K,c)$ such that, almost surely, $\\|X_n\\|_{\\mathrm{op}}\\le C\\sqrt{N_n}$ for all sufficiently large $n$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-complex-hermitian-eigenvalues-lipschitz",
+          "source_section": "Statement",
+          "quote": "For Hermitian $A,B\\in\\mathbb C^{n\\times n}$, write their eigenvalues in\ndescending order with multiplicity as $\\lambda_1(A)\\ge\\cdots\\ge\\lambda_n(A)$\nand $\\lambda_1(B)\\ge\\cdots\\ge\\lambda_n(B)$. Then, for every $j$,\n$$|\\lambda_j(A)-\\lambda_j(B)|\\le\\|A-B\\|_2.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Write $c_n=n/N_n$, let $\\bar F_n(B)=\\mathbb E F_n(B)$, and let $\\bar G_n$ be defined similarly for $\\widetilde A_n=N_n^{-1}X_n^*T_nX_n$. By [F14], each ordered eigenvalue is continuous in the matrix entries, so these setwise expectations are defined for Borel $B$. For disjoint Borel sets, countable additivity of the random ESDs followed by [F13] gives countable additivity of $\\bar F_n$ and $\\bar G_n$; their total masses are one. Independence and unit second moment give $\\int t\\,d\\bar F_n(t)=n^{-1}\\operatorname{tr}T_n$ and $\\int t\\,d\\bar G_n(t)=N_n^{-1}\\operatorname{tr}T_n$. Both first moments are uniformly bounded because $c_n\\to c>0$ and $\\|T_n\\|_{\\mathrm{op}}$ is uniformly bounded. By [F4], their tails above $R$ are at most the corresponding first moment divided by $R$, so both expected-measure sequences are tight on $[0,\\infty)$. The half-line is Polish: it is a closed subset of the complete real line and $\\mathbb Q\\cap[0,\\infty)$ is dense. By [A1] and [F5], every subsequence of $\\bar F_n$ has a further weakly convergent subsequence.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F17",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Fix $z\\in\\mathbb C^+$ and take any such subsequence with $\\bar F_n\\Rightarrow G$. Let $m_G(z)=\\int(t-z)^{-1}dG(t)$ and $q_n(z)=\\int(t-z)^{-1}d\\bar G_n(t)$. By [F11], the two sample-covariance matrices have the same nonzero eigenvalues, so their transforms satisfy exactly $q_n=-(1-c_n)/z+c_n\\int(t-z)^{-1}d\\bar F_n(t)$. Hence $q_n\\to u:=-(1-c)/z+cm_G(z)$. Moreover $\\operatorname{Im}m_G(z)>0$. The first moments of $\\bar G_n$ are bounded, so at least half of each $\\bar G_n$ lies in some fixed interval $[0,L]$; consequently $\\operatorname{Im}q_n(z)\\ge\\eta/(2(L+|z|)^2)$ and $\\operatorname{Im}u>0$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F11",
+            "F16",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Apply [F6] to an orthonormal eigenbasis of $T_n$. Its uniform quadratic-form error implies\n$$\\int(t-z)^{-1}\\,d\\bar F_n(t)=-\\frac1{z n}\\operatorname{tr}(I+q_nT_n)^{-1}+o(1)=-\\frac1z\\int\\frac{1}{1+q_nt}\\,dH_n(t)+o(1).$$\nSince $H_n\\Rightarrow H$, all $H_n$ are supported in one compact interval, $q_n\\to u$, and $\\operatorname{Im}u>0$, the integrands converge uniformly on that interval to $-1/[z(1+ut)]$. Thus $m_G(z)=\\int[-z(1+ut)]^{-1}dH(t)$. The relation for $u$ in step 2.1 gives $-z(1+ut)=t(1-c-czm_G(z))-z$, so $m_G$ satisfies the fixed-point equation in the Statement. The argument applies to every $z\\in\\mathbb C^+$ and every weak subsequential limit $G$. By [F8], all such limits have the same transform; [F9] makes them equal. At least one such limit exists by step 1.1, so call it $F_{c,H}$. Tightness then implies $\\bar F_n\\Rightarrow F_{c,H}$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F8",
+            "F9",
+            "F16",
+            "F17",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "1.2",
+          "claim": "For each fixed $z\\in\\mathbb C^+$, [F7] gives $\\int(t-z)^{-1}dF_n(t)-\\int(t-z)^{-1}d\\bar F_n(t)\\to0$ almost surely. Intersect these probability-one events over the countable dense set $\\{a+ib:a,b\\in\\mathbb Q,\\ b>0\\}$.",
+          "inputs": [
+            "given",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "4.1",
+          "claim": "On the same event, [F10] gives $\\|A_n\\|_{\\mathrm{op}}\\le L_1$ eventually for a finite deterministic $L_1$, so the random measures $F_n$ are eventually supported on $[0,L_1]$ and are tight. The half-line is Polish by the metric facts in step 1.1 and [F15]. By [A1] and [F5], every subsequence has a weakly convergent further subsequence. For each dense-set $z$, its transform equals that of $F_{c,H}$ by steps 3.1 and 1.2, since the real and imaginary parts of $(t-z)^{-1}$ are bounded continuous and [F16] applies to each. For any probability law $\\mu$, its transform satisfies $|m_\\mu(z)-m_\\mu(w)|\\le |z-w|/(\\operatorname{Im}z\\operatorname{Im}w)$, so equality on the dense set extends to all $\\mathbb C^+$; [F9] identifies the subsequential limit as $F_{c,H}$. Every subsequence has the same further limit, and [F16] gives $F_n\\Rightarrow F_{c,H}$ almost surely.",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F9",
+            "F10",
+            "F15",
+            "F16",
+            "step 1.1",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For T_n=0, H=δ0 and F_n=δ0; the fixed-point equation gives m(z)=−1/z, as checked by direct substitution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio κ=1 is allowed by the Statement, and the fixed-point argument in steps 2.1–3.1 has no κ−1 denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The Statement permits H=δ0; the zero-population finite check verifies the limiting law and equation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 1.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "T_n=0 population",
+          "result": "H=delta_0 and A_n=0, so F_n=delta_0; the fixed-point equation gives m(z)=-1/z.",
+          "evidence": "Direct substitution in the fixed-point equation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sample-covariance-directional-spectral-measure",
+          "source_section": "Definition",
+          "quote": "For positive integers $d,N$, let $X\\in\\mathbb C^{d\\times N}$ and let $T\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, meaning $T=T^*$ and $v^*Tv\\ge0$ for every $v\\in\\mathbb C^d$. Let $T^{1/2}$ be its Hermitian positive semidefinite square root and set\n$$A:=\\frac1N T^{1/2}XX^*T^{1/2}.$$\nFor each distinct eigenvalue $\\lambda$ of the Hermitian matrix $A$, let $P_\\lambda$ be the orthogonal projection onto its eigenspace. The empirical spectral distribution of $A$, normalized by its dimension $d$, is\n$$\\mu_A:=\\frac1d\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\operatorname{rank}(P_\\lambda)\\,\\delta_\\lambda,$$\nwhere $\\delta_\\lambda$ is the unit point mass at $\\lambda$.\nFor a deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure is\n$$\\mu_A^x:=\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\|P_\\lambda x\\|_2^2\\,\\delta_\\lambda.$$\nFor a Borel set $B\\subseteq\\mathbb R$, set $\\mathbf1_B(A):=\\sum_{\\lambda\\in B\\cap\\operatorname{spec}(A)}P_\\lambda$; then $\\mu_A^x(B)=x^*\\mathbf1_B(A)x$. Both measures are supported on the nonnegative real axis.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hermitian-spectral-measure-is-probability",
+          "source_section": "Statement",
+          "quote": "For every Hermitian positive semidefinite $A\\in\\mathbb C^{d\\times d}$, its empirical spectral distribution $\\mu_A$ is a Borel probability measure supported on $[0,\\infty)$. For every deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure $\\mu_A^x$ is also a Borel probability measure supported on $[0,\\infty)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-complex-resolvent-deterministic-equivalent",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and $|X_{ij}|\\le K$ almost surely for a fixed $K$, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with induced Euclidean operator norm $\\|T_n\\|_{\\mathrm{op}}\\le M$. Define\n$$A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2},\\qquad \\widetilde A_n=N_n^{-1}X_n^*T_nX_n,$$\n$$R_n(z)=(A_n-zI_n)^{-1},\\qquad \\widetilde R_n(z)=(\\widetilde A_n-zI_{N_n})^{-1},\\qquad q_n(z)=\\mathbb E\\left[N_n^{-1}\\operatorname{tr}\\widetilde R_n(z)\\right].$$\nFor every fixed $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, the matrix $I_n+q_n(z)T_n$ is invertible and\n$$\\sup_{\\|x\\|_2=1}\\left|x^*\\left(\\mathbb E R_n(z)+\\frac1z(I_n+q_n(z)T_n)^{-1}\\right)x\\right|\\longrightarrow0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-general-population-sample-covariance-esd-limit-for-bounded-entries",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and absolute value bounded by one fixed finite constant, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with uniformly bounded induced Euclidean operator norm. Suppose the empirical eigenvalue measures $H_n=n^{-1}\\sum_{i=1}^n\\delta_{\\lambda_i(T_n)}$ converge weakly to a Borel probability measure $H$ on $[0,\\infty)$. Put $c=\\kappa^{-1}$ and $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$, and let $F_n=n^{-1}\\sum_{i=1}^n\\delta_{\\lambda_i(A_n)}$. Then there is a unique Borel probability measure $F_{c,H}$ on $[0,\\infty)$ such that, almost surely, $F_n$ converges weakly to $F_{c,H}$. Its Stieltjes transform $m_{c,H}(z)=\\int(t-z)^{-1}\\,dF_{c,H}(t)$ is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u:=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t)\\qquad(\\operatorname{Im}z>0).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bounded-complex-resolvent-quadratic-form-concentration",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, unit second absolute moment, and absolute value at most $K$, where $K$ is independent of $n$. Let $T_n\\in\\mathbb C^{n\\times n}$ be deterministic Hermitian positive semidefinite with $\\|T_n\\|_{\\mathrm{op}}\\le M$, and let $x_n\\in\\mathbb C^n$ be deterministic with $\\|x_n\\|_2=1$. Assume $N_n/n\\to\\kappa\\in(0,\\infty)$. For fixed $z=u+i\\eta$ with $\\eta>0$, set\n$$A_n:=\\frac1{N_n}T_n^{1/2}X_nX_n^*T_n^{1/2},\\qquad R_n(z):=(A_n-zI)^{-1}.$$\nThen $x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]\\to0$ almost surely. Moreover, for every $t>0$ there is a constant $C=C(K,M,z,\\kappa)$ such that, for all sufficiently large $n$,\n$$\\mathbb P\\!\\left\\{|x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]|>t\\right\\}\\le\\frac{C}{t^4N_n^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-bounded-complex-iid-matrix-norm-bound",
+          "source_section": "Statement",
+          "quote": "For each positive integer $n$, let $N_n$ be a positive integer with $n/N_n\\to c\\in(0,\\infty)$, and let $X_n\\in\\mathbb C^{n\\times N_n}$ have independent identically distributed entries $\\xi$ satisfying $\\mathbb E\\xi=0$ and $|\\xi|\\le K$ almost surely for a fixed $K<\\infty$. Then there is a finite constant $C=C(K,c)$ such that, almost surely, $\\|X_n\\|_{\\mathrm{op}}\\le C\\sqrt{N_n}$ for all sufficiently large $n$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-stieltjes-transform-of-a-real-probability-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$. For $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, its Stieltjes transform, with the $(x-z)^{-1}$ convention, is\n$$m_\\mu(z):=\\int_{\\mathbb R}\\frac{1}{x-z}\\,d\\mu(x).$$\nThe integral is finite because $|x-z|^{-1}\\le\\eta^{-1}$ for every real $x$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix $z\\in\\mathbb C^+$ and let $q_n(z)=\\mathbb E[N_n^{-1}\\operatorname{tr}(N_n^{-1}X_n^*T_nX_n-zI)^{-1}]$. By [F4], the empirical transforms of $A_n$ converge almost surely to $m_{c,H}(z)$; their absolute values are at most $1/\\operatorname{Im}z$, so [F6] gives convergence of their expectations. By [F10], the nonzero eigenvalue equality for $A_n$ and $N_n^{-1}X_n^*T_nX_n$ gives $q_n=-(1-c_n)/z+c_n\\mathbb E[n^{-1}\\operatorname{tr}(A_n-zI)^{-1}]$, with $c_n=n/N_n$. Hence $q_n(z)\\to u(z):=-(1-c)/z+cm_{c,H}(z)$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For deterministic unit $x_n$, [F3] and [F5] yield\n$$x_n^*(A_n-zI)^{-1}x_n+\\frac1z x_n^*(I+q_n(z)T_n)^{-1}x_n\\longrightarrow0\\quad\\text{almost surely}.$$\nThe matrix inverses are uniformly bounded by $|z|/\\operatorname{Im}z$ from the positive-measure resolvent estimate in the proof of [F3]. Since $T_n$ are uniformly bounded and $q_n\\to u$, the resolvent identity gives\n$$\\left\\|(I+q_nT_n)^{-1}-(I+uT_n)^{-1}\\right\\|_{\\mathrm{op}}\\le M(|z|/\\operatorname{Im}z)^2|q_n-u|\\longrightarrow0.$$",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $u\\in\\mathbb C^+$, $w=-1/u$ also lies in $\\mathbb C^+$ and $(I+uT_n)^{-1}=u^{-1}(T_n-wI)^{-1}$. The population-resolvent hypothesis at this fixed $w$ therefore gives $x_n^*(I+uT_n)^{-1}x_n\\to u^{-1}m_H(-1/u)$. By [F4], $m_{c,H}(z)=-z^{-1}\\int(1+ut)^{-1}dH(t)=-[zu]^{-1}m_H(-1/u)$. Step 2.1 now proves $x_n^*(A_n-zI)^{-1}x_n\\to m_{c,H}(z)$ almost surely for each fixed $z\\in\\mathbb C^+$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The resolvent in step 3.1 is the Stieltjes transform of $\\mu_n^{x_n}$ by [F1]. Intersect the probability-one events over a countable dense subset of $\\mathbb C^+$. By [F7], on this event the spectra of $A_n$ are eventually contained in one compact interval, so [F2] makes the directional measures a tight sequence of probabilities. The half-line is Polish: it is a closed subset of the complete real line with dense subset $\\mathbb Q\\cap[0,\\infty)$, in the sense of [F11]. By [A1] and [F8], every subsequence has a weakly convergent further subsequence. Its transform agrees with $m_{c,H}$ on the dense set by step 3.1; continuity of Stieltjes transforms extends equality to all $\\mathbb C^+$, and [F9] identifies that limit with $F_{c,H}$. Therefore every subsequence has the same further limit, which by the bounded-continuous-test definition [F12] proves $\\mu_n^{x_n}\\Rightarrow F_{c,H}$ almost surely.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "F12",
+            "F13",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: T_n=0 gives the directional law δ0 and transforms −1/z; the Statement includes this positive-semidefinite boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio κ=1 is allowed by the Statement and the bounded-directional argument in steps 1.1–4.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The Statement permits T_n=0; both directional measures are then δ0 and the proof’s transform identities remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 4.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "T_n=I isotropic case",
+          "result": "For every unit vector, x_n^*(I-wI)^-1x_n=(1-w)^-1 exactly, so the population directional premise is automatic.",
+          "evidence": "Direct scalar calculation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "lem-complex-sample-covariance-norm-bound-from-real-edge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-largest-sample-covariance-eigenvalue-upper-bound",
+          "source_section": "Statement",
+          "quote": "Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of real random variables with mean zero, variance one and finite fourth moment. For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$ and suppose $p_n/n\\to\\gamma\\in(0,\\infty)$. For $S_n=X_n^{\\mathsf T}X_n/n$, with $b_\\gamma=(1+\\sqrt\\gamma)^2$, the upper-edge bound is\n$$\\limsup_{n\\to\\infty}\\lambda_{\\max}(S_n)\\le b_\\gamma\\quad\\text{almost surely}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Write $\\kappa_n=N_n/n\\to1/c$, $\\sigma_R^2=\\mathbb E(\\operatorname{Re}\\xi_{11})^2$, and $\\sigma_I^2=\\mathbb E(\\operatorname{Im}\\xi_{11})^2$. Centering of $\\xi_{11}$ makes both real coordinates centered, and $\\sigma_R^2+\\sigma_I^2=\\tau^2$. If $\\sigma_R>0$, the matrices $Z_n=\\operatorname{Re}X_n/\\sigma_R$ are upper-left blocks of one real iid array with mean zero, variance one and finite fourth moment. Applying [F2] with $\\gamma=\\kappa=1/c$ and then [F3] gives\n$$\\limsup_n\\frac{\\|\\operatorname{Re}X_n\\|_{\\mathrm{op}}}{\\sqrt{N_n}}\\le\\sigma_R\\frac{1+\\sqrt\\kappa}{\\sqrt\\kappa}=\\sigma_R(1+\\sqrt c)\\quad\\text{almost surely}.$$\nIf $\\sigma_R=0$, the centered real part is zero almost surely, so the same bound holds. The identical argument for the imaginary part gives the bound with $\\sigma_I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The complex operator norm satisfies $\\|X_n\\|_{\\mathrm{op}}=\\|\\operatorname{Re}X_n+i\\operatorname{Im}X_n\\|_{\\mathrm{op}}\\le\\|\\operatorname{Re}X_n\\|_{\\mathrm{op}}+\\|\\operatorname{Im}X_n\\|_{\\mathrm{op}}$. Intersecting the two probability-one events from step 1.1 proves the asserted limsup bound. Finally, $\\sigma_R+\\sigma_I\\le\\sqrt{2(\\sigma_R^2+\\sigma_I^2)}=\\sqrt2\\tau$ by Cauchy–Schwarz, giving the unit-variance consequence.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: If E|ξ|²=0, then ξ=0 almost surely and the asserted limsup is zero; step 1.1 also handles a vanishing real or imaginary component."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio c=1 is included in c∈(0,∞); step 1.1 uses the real-edge bound at κ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The zero-variance entry law is permitted and gives a zero matrix; step 1.1 handles vanishing components."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "zero variance component",
+          "result": "A real or imaginary component with variance zero vanishes almost surely; the other normalized component gives the bound.",
+          "evidence": "Explicit branch in proof step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "thm-directional-sample-covariance-resolvent-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and absolute value bounded by a fixed finite constant, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with uniformly bounded induced Euclidean operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nFor $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$, define the directional spectral measure $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}\\Rightarrow F_{c,H}$, where $c=\\kappa^{-1}$ and $F_{c,H}$ is the probability measure characterized by\n$$m_{c,H}(z)=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm_{c,H}(z))-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-sample-covariance-norm-bound-from-real-edge",
+          "source_section": "Statement",
+          "quote": "Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of centered complex random variables with $\\mathbb E|\\xi_{11}|^2=\\tau^2<\\infty$ and $\\mathbb E|\\xi_{11}|^4<\\infty$. For positive integers $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$, and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$. Then almost surely\n$$\\limsup_{n\\to\\infty}\\frac{\\|X_n\\|_{\\mathrm{op}}}{\\sqrt{N_n}}\\le(\\sigma_R+\\sigma_I)(1+\\sqrt c),\\qquad \\sigma_R^2=\\mathbb E(\\operatorname{Re}\\xi_{11})^2,\\quad \\sigma_I^2=\\mathbb E(\\operatorname{Im}\\xi_{11})^2.$$\nIn particular, when $\\tau^2=1$, the right side is at most $\\sqrt2(1+\\sqrt c)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hermitian-spectral-measure-is-probability",
+          "source_section": "Statement",
+          "quote": "For every Hermitian positive semidefinite $A\\in\\mathbb C^{d\\times d}$, its empirical spectral distribution $\\mu_A$ is a Borel probability measure supported on $[0,\\infty)$. For every deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure $\\mu_A^x$ is also a Borel probability measure supported on $[0,\\infty)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-sample-covariance-directional-spectral-measure",
+          "source_section": "Definition",
+          "quote": "For positive integers $d,N$, let $X\\in\\mathbb C^{d\\times N}$ and let $T\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, meaning $T=T^*$ and $v^*Tv\\ge0$ for every $v\\in\\mathbb C^d$. Let $T^{1/2}$ be its Hermitian positive semidefinite square root and set\n$$A:=\\frac1N T^{1/2}XX^*T^{1/2}.$$\nFor each distinct eigenvalue $\\lambda$ of the Hermitian matrix $A$, let $P_\\lambda$ be the orthogonal projection onto its eigenspace. The empirical spectral distribution of $A$, normalized by its dimension $d$, is\n$$\\mu_A:=\\frac1d\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\operatorname{rank}(P_\\lambda)\\,\\delta_\\lambda,$$\nwhere $\\delta_\\lambda$ is the unit point mass at $\\lambda$.\nFor a deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure is\n$$\\mu_A^x:=\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\|P_\\lambda x\\|_2^2\\,\\delta_\\lambda.$$\nFor a Borel set $B\\subseteq\\mathbb R$, set $\\mathbf1_B(A):=\\sum_{\\lambda\\in B\\cap\\operatorname{spec}(A)}P_\\lambda$; then $\\mu_A^x(B)=x^*\\mathbf1_B(A)x$. Both measures are supported on the nonnegative real axis.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-stieltjes-transform-of-a-real-probability-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$. For $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, its Stieltjes transform, with the $(x-z)^{-1}$ convention, is\n$$m_\\mu(z):=\\int_{\\mathbb R}\\frac{1}{x-z}\\,d\\mu(x).$$\nThe integral is finite because $|x-z|^{-1}\\le\\eta^{-1}$ for every real $x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Let $\\xi$ have the common entry law. For integer $K$, set $\\xi^{(K)}=\\xi\\mathbf1_{\\{|\\xi|\\le K\\}}-\\mathbb E[\\xi\\mathbf1_{\\{|\\xi|\\le K\\}}]$, $\\sigma_K^2=\\mathbb E|\\xi^{(K)}|^2$, and $\\Delta^{(K)}=\\xi-\\xi^{(K)}$. Then $\\sigma_K\\to1$, and $\\tau_K^2:=\\mathbb E|\\Delta^{(K)}|^2\\to0$ because $\\mathbb E\\xi=0$ and $\\mathbb E|\\xi|^2<\\infty$. For all sufficiently large $K$, $\\sigma_K>0$; put $\\zeta^{(K)}=\\xi^{(K)}/\\sigma_K$. These entries are centered, bounded, iid and have unit second absolute moment, while $\\Delta^{(K)}$ is centered iid with finite fourth moment. At matrix level, $X_n=\\sigma_K Z_n^{(K)}+D_n^{(K)}$, where $Z_n^{(K)}$ and $D_n^{(K)}$ are the common upper-left blocks formed from $\\zeta^{(K)}$ and $\\Delta^{(K)}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each fixed sufficiently large integer $K$, [F2] applied to the original, standardized, and residual arrays gives almost surely\n$$\\limsup_n\\frac{\\|X_n\\|}{\\sqrt{N_n}}\\le C_c,\\quad \\limsup_n\\frac{\\|Z_n^{(K)}\\|}{\\sqrt{N_n}}\\le C_c,\\quad \\limsup_n\\frac{\\|D_n^{(K)}\\|}{\\sqrt{N_n}}\\le C_c\\tau_K,$$\nwhere $C_c=\\sqrt2(1+\\sqrt c)$. Intersect these events over the countable set of such $K$. Writing $A_n^{(K)}=N_n^{-1}T_n^{1/2}Z_n^{(K)}Z_n^{(K)*}T_n^{1/2}$, the identity $UU^*-VV^*=(U-V)U^*+V(U-V)^*$ yields\n$$\\limsup_n\\|A_n-\\sigma_K^2A_n^{(K)}\\|_{\\mathrm{op}}\\le M C_c^2(1+\\sigma_K)\\tau_K,\n\\qquad \\limsup_n\\|\\sigma_K^2A_n^{(K)}-A_n^{(K)}\\|_{\\mathrm{op}}\\le M C_c^2|\\sigma_K^2-1|,$$\nwhere $M=\\sup_n\\|T_n\\|_{\\mathrm{op}}$. For positive semidefinite $B,C$ and $z\\in\\mathbb C^+$, the resolvent identity gives $\\|(B-zI)^{-1}-(C-zI)^{-1}\\|_{\\mathrm{op}}\\le\\|B-C\\|_{\\mathrm{op}}/(\\operatorname{Im}z)^2$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Fix $z\\in\\mathbb C^+$ and a deterministic unit direction sequence $x_n$. For each such $K$, [F1] applied to $Z_n^{(K)}$ gives $x_n^*(A_n^{(K)}-zI)^{-1}x_n\\to m_{c,H}(z)$ almost surely, with the transform convention [F9]. By step 2.1,\n$$\\limsup_n\\left|x_n^*(A_n-zI)^{-1}x_n-m_{c,H}(z)\\right|\\le\\frac{M C_c^2}{(\\operatorname{Im}z)^2}\\left((1+\\sigma_K)\\tau_K+|\\sigma_K^2-1|\\right)$$\non the probability-one event obtained by intersecting the events from step 2.1 with the almost-sure convergence event for this fixed truncation level. The right side tends to zero as $K\\to\\infty$, so the directional Stieltjes transforms converge almost surely at every fixed $z\\in\\mathbb C^+$. Intersecting over a countable dense set gives simultaneous convergence there.",
+          "inputs": [
+            "given",
+            "F1",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "By [F2], $\\|A_n\\|_{\\mathrm{op}}\\le M\\|X_n\\|_{\\mathrm{op}}^2/N_n$ is almost surely eventually bounded. Thus the directional laws are eventually supported on one compact interval; [F3] makes them probability measures and [F8] gives their exact spectral-measure meaning. They are therefore tight. The half-line is Polish: it is closed in the complete real line and has dense subset $\\mathbb Q\\cap[0,\\infty)$, as required by [F6]. By [A1] and [F4], each subsequence has a weakly convergent further subsequence. Its transform equals $m_{c,H}$ on the dense set by step 3.1; continuity of Stieltjes transforms extends equality to $\\mathbb C^+$, and [F5] identifies the subsequential limit as $F_{c,H}$. The bounded-continuous-test definition [F10] yields the stated weak convergence. Every subsequence has the same further limit, proving the asserted almost-sure limit.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F10",
+            "F11",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: For a bounded entry law the truncation residual eventually vanishes, so the comparison reduces to the bounded theorem in step 1.1 and the finite check."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The aspect ratio c=1 is allowed by the Statement; the truncation proof in steps 1.1–4.1 has no excluded square case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The centered truncation residual may vanish identically for a bounded law; step 1.1 then reduces to the bounded-entry theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 4.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "bounded entry law",
+          "result": "If the entry law is bounded, the truncation residual is zero for all large cutoffs and sigma_K=1, reducing the comparison to the bounded theorem.",
+          "evidence": "Substitute Delta^(K)=0 and sigma_K=1 in proof steps 1.1–3.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "cor-isotropic-minimum-norm-risk-closure-under-edge-gap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-moore-penrose-products-are-orthogonal-projectors",
+          "source_section": "Statement",
+          "quote": "Let $M\\in\\mathbb F^{p\\times q}$ be any finite real or complex matrix, and let $M^\\dagger$ be its unique Moore-Penrose inverse. Then $P=MM^\\dagger$ and $Q=M^\\dagger M$ are self-adjoint idempotents. The range of $P$ is $\\operatorname{Ran}(M)$, and the range of $Q$ is $\\operatorname{Ran}(M^\\dagger)$. Thus both are orthogonal projections. If $M$ has full row rank, then $MM^\\dagger=I_p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-rank-equals-number-of-nonzero-singular-values",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. Then $\\operatorname{rank} T$ equals the number of positive\nsingular values of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+          "source_section": "Statement",
+          "quote": "Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of real random variables with mean zero, variance one and finite fourth moment. For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$ and suppose $p_n/n\\to\\gamma\\in(0,\\infty)$. Set $S_n=X_n^{\\mathsf T}X_n/n$ and let $\\lambda_{\\min}^{+}(S_n)$ denote its smallest positive eigenvalue whenever one exists. If $\\gamma<1$, then almost surely $X_n$ has full column rank for all sufficiently large $n$, so $S_n$ has no zero eigenvalues eventually and $\\lambda_{\\min}(S_n)\\to(1-\\sqrt\\gamma)^2$. If $\\gamma>1$, then almost surely $X_n$ has full row rank for all sufficiently large $n$, so $S_n$ has exactly $p_n-n$ zero eigenvalues and $\\lambda_{\\min}^{+}(S_n)\\to(\\sqrt\\gamma-1)^2$. If $\\gamma=1$, then almost surely $\\lambda_{\\min}^{+}(S_n)\\to0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-marchenko-pastur-law-for-sample-covariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For each positive integer $n$, let $p_n$ be a positive integer with $p_n/n\\to\\gamma\\in(0,\\infty)$, and let $X_n\\in\\mathbb R^{n\\times p_n}$ have mutually independent entries with one common law, mean zero, variance one, and finite fourth moment. Set $S_n=X_n^{\\mathsf T}X_n/n$ and let $\\mu_n$ be its empirical spectral distribution normalized by $p_n$. Then $\\mu_n$ converges weakly almost surely to the probability measure with density\n$$\\rho_\\gamma(x)=\\begin{cases}\\dfrac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x},&a_\\gamma<x<b_\\gamma,\\\\0,&x\\notin(a_\\gamma,b_\\gamma),\\end{cases}\\qquad a_\\gamma=(1-\\sqrt\\gamma)^2,\\quad b_\\gamma=(1+\\sqrt\\gamma)^2,$$\nand an atom of mass $(1-1/\\gamma)_+$ at zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-directional-sample-covariance-resolvent-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of complex random variables with $\\mathbb E\\xi_{11}=0$, $\\mathbb E|\\xi_{11}|^2=1$, and $\\mathbb E|\\xi_{11}|^4<\\infty$. For each positive integer $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$ be its upper-left block. Let $T_n$ be deterministic Hermitian positive semidefinite with uniformly bounded operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that, for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nDefine $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$ and $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}$ converges weakly to the probability measure $F_{c,H}$ whose Stieltjes transform is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-marchenko-pastur-measure",
+          "source_section": "Definition",
+          "quote": "For $\\gamma>0$, set\n$$a_\\gamma=(1-\\sqrt\\gamma)^2,\\qquad b_\\gamma=(1+\\sqrt\\gamma)^2,\\qquad r_+:=\\max\\{r,0\\}\\quad(r\\in\\mathbb R).$$\nDefine the Marchenko–Pastur set function on Borel $A\\subseteq\\mathbb R$ by\n$$\\mu_\\gamma(A):=\\int_{A\\cap(a_\\gamma,b_\\gamma)}\\frac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x}\\,d\\lambda(x)+\\left(1-\\frac1\\gamma\\right)_+\\delta_0(A),$$\nwhere $\\lambda$ is Lebesgue measure on $\\mathbb R$. The formula defines a finite Borel measure; its total mass is established by the Marchenko–Pastur law below.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+          "source_section": "Statement",
+          "quote": "For every $\\gamma>0$, the set function $\\mu_\\gamma$ in the definition of the Marchenko–Pastur measure is a Borel probability measure supported on $[0,\\infty)$. For every $z\\in\\mathbb C$ with $\\eta:=\\operatorname{Im}z>0$, its Stieltjes transform $m_\\gamma(z)$ satisfies\n$$1+z m_\\gamma(z)=\\frac{m_\\gamma(z)}{1+\\gamma m_\\gamma(z)},\\qquad \\operatorname{Im}\\bigl(1-\\gamma-z-\\gamma z m_\\gamma(z)\\bigr)\\le-\\eta.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-deformed-mp-fixed-point-solution-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, let $H$ be a Borel probability measure on $[0,\\infty)$, and fix $z\\in\\mathbb C$ with $\\operatorname{Im}z>0$. There is at most one $q\\in\\mathbb C$ satisfying $\\operatorname{Im}q>0$, $u:=-(1-c)/z+cq$ with $\\operatorname{Im}u>0$, and\n$$q=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czq)-z}\\,dH(t).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+          "source_section": "Statement",
+          "quote": "For every $\\gamma>0$, the set function $\\mu_\\gamma$ in the definition of the Marchenko–Pastur measure is a Borel probability measure supported on $[0,\\infty)$. For every $z\\in\\mathbb C$ with $\\eta:=\\operatorname{Im}z>0$, its Stieltjes transform $m_\\gamma(z)$ satisfies\n$$1+z m_\\gamma(z)=\\frac{m_\\gamma(z)}{1+\\gamma m_\\gamma(z)},\\qquad \\operatorname{Im}\\bigl(1-\\gamma-z-\\gamma z m_\\gamma(z)\\bigr)\\le-\\eta.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $P_{\\ker X_n}=I_{p_n}-X_n^+X_n$. For any fixed $v\\in\\mathbb R^{p_n}$, $\\mathbb E_{z_{0,n}}(z_{0,n}^{\\mathsf T}v)^2=v^{\\mathsf T}\\mathbb E[z_{0,n}z_{0,n}^{\\mathsf T}]v=\\|v\\|_2^2$, so the stated prediction risk equals $\\mathbb E_{\\varepsilon_n}[\\|\\widehat\\beta_n-\\beta_n\\|_2^2\\mid X_n]$. By [F2], $X_n^+X_n$ is the row-space projection, so $\\widehat\\beta_n-\\beta_n=-P_{\\ker X_n}\\beta_n+X_n^+\\varepsilon_n$. Conditional on $X_n$, the cross term has expectation zero because $\\mathbb E[\\varepsilon_n\\mid X_n]=0$. Its noise contribution is\n$$\\mathbb E_{\\varepsilon_n}\\|X_n^+\\varepsilon_n\\|_2^2=\\sigma^2\\operatorname{tr}(X_n^+(X_n^+)^{\\mathsf T})=\\sigma^2\\operatorname{tr}((X_n^{\\mathsf T}X_n)^+)=\\frac{\\sigma^2}{n}\\operatorname{tr}(S_n^+),$$\nwhere the middle equality follows by writing an SVD and the last uses $(aB)^+=a^{-1}B^+$ for $a>0$. With $x_n=\\beta_n/r$, this proves the exact identity\n$$\\mathcal R_n=r^2x_n^{\\mathsf T}P_{\\ker X_n}x_n+\\frac{\\sigma^2}{n}\\operatorname{tr}(S_n^+).$$",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Suppose $\\gamma<1$ and set $a=(1-\\sqrt\\gamma)^2>0$. By [F4], $X_n$ has full column rank eventually and every eigenvalue of $S_n$ is at least $a/2$ eventually. Thus the bias term in step 1.1 is zero and $p_n^{-1}\\operatorname{tr}(S_n^+)=\\int f(t)d\\mu_n(t)$ for the bounded continuous function $f(t)=1/\\max(t,a/2)$. By [F5] and [F8], this converges to $J_\\gamma=\\int t^{-1}d\\mu_\\gamma(t)$, since the Marchenko–Pastur support is bounded below by $a$. For $s>0$, define $m_\\gamma(-s)=\\int(t+s)^{-1}d\\mu_\\gamma(t)$. The integrands are bounded by $1/a$ and converge pointwise to $1/t$, so [F10] gives $m_\\gamma(-s)\\to J_\\gamma$ as $s\\downarrow0$. The fixed-point equation in [F7], initially stated for $z\\in\\mathbb C^+$, extends to $z=-s<0$ by dominated convergence in its defining integral; its denominator stays nonzero because $1+\\gamma m_\\gamma(-s)>0$. Taking $s\\downarrow0$ yields $1+(\\gamma-1)J_\\gamma=0$, hence $J_\\gamma=1/(1-\\gamma)$. Since $p_n/n\\to\\gamma$, step 1.1 gives $\\mathcal R_n\\to\\sigma^2\\gamma/(1-\\gamma)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Suppose $\\gamma>1$ and set $a=(\\sqrt\\gamma-1)^2>0$. By [F4], $X_n$ has full row rank eventually, $S_n$ has exactly $p_n-n$ zero eigenvalues, and all positive eigenvalues are at least $a/2$ eventually. The continuous function $g(t)=\\max(1-2t/a,0)$ equals one at zero and vanishes on the positive spectrum for all sufficiently large $n$. Hence $x_n^{\\mathsf T}P_{\\ker X_n}x_n=\\int g(t)d\\mu_n^{x_n}(t)\\to\\int g(t)dF_{\\gamma,\\delta_1}(t)=1-1/\\gamma$ by [F6], [F7], and [F9]; [F9] identifies the limit with $\\mu_\\gamma$, on whose positive support $g=0$ and whose zero atom has mass $1-1/\\gamma$. Define $h(0)=0$ and, for $t>0$, $h(t)=t^{-1}\\min(1,\\max(0,4t/a-1))$. This is bounded and continuous, equals zero at zero, and equals $1/t$ for $t\\ge a/2$. Therefore $p_n^{-1}\\operatorname{tr}(S_n^+)=\\int h(t)d\\mu_n(t)\\to J_\\gamma^+:=\\int_{(0,\\infty)}t^{-1}d\\mu_\\gamma(t)$ by [F5] and [F8]. [F7] gives $m_\\gamma(-s)=(1-1/\\gamma)/s+J_\\gamma^++o(1)$ as $s\\downarrow0$: subtract the zero atom and use [F10] by dominated convergence on the positive support, whose lower endpoint is $a>0$. To compute the constant term, write $\\alpha=1-1/\\gamma$ and substitute $m=\\alpha/s+J_\\gamma^++o(1)$ into $1+(\\gamma-1-s)m-\\gamma s m^2=0$, the fixed-point equation at $z=-s$ (again obtained by dominated convergence from [F7]). The coefficient of $s^{-1}$ vanishes because $\\gamma\\alpha=\\gamma-1$; the constant term is $1-\\alpha-(\\gamma-1)J_\\gamma^++o(1)$. It must vanish, so $J_\\gamma^+=1/[\\gamma(\\gamma-1)]$. Using $p_n/n\\to\\gamma$ in step 1.1 proves $\\mathcal R_n\\to r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: Zero noise variance is allowed and removes the variance term in the exact risk identity in step 1.1; the signal norm remains r>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The case γ=1 is explicitly excluded by the Statement because the positive-edge gap closes; the separate critical example treats it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The case σ²=0 is permitted and removes the noise term in step 1.1; r>0 prevents a zero signal."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement excludes γ=1 and makes no limit claim there; the assigned critical example treats that case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 2.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "zero noise variance",
+          "result": "If sigma^2=0, the variance term vanishes and the limits reduce to 0 below aspect one and r^2(1-1/gamma) above it.",
+          "evidence": "Set sigma^2=0 in the exact conditional risk identity."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "cor-negative-axis-directional-resolvent-integrals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-directional-sample-covariance-resolvent-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of complex random variables with $\\mathbb E\\xi_{11}=0$, $\\mathbb E|\\xi_{11}|^2=1$, and $\\mathbb E|\\xi_{11}|^4<\\infty$. For each positive integer $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$ be its upper-left block. Let $T_n$ be deterministic Hermitian positive semidefinite with uniformly bounded operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that, for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nDefine $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$ and $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}$ converges weakly to the probability measure $F_{c,H}$ whose Stieltjes transform is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sample-covariance-directional-spectral-measure",
+          "source_section": "Definition",
+          "quote": "For positive integers $d,N$, let $X\\in\\mathbb C^{d\\times N}$ and let $T\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, meaning $T=T^*$ and $v^*Tv\\ge0$ for every $v\\in\\mathbb C^d$. Let $T^{1/2}$ be its Hermitian positive semidefinite square root and set\n$$A:=\\frac1N T^{1/2}XX^*T^{1/2}.$$\nFor each distinct eigenvalue $\\lambda$ of the Hermitian matrix $A$, let $P_\\lambda$ be the orthogonal projection onto its eigenspace. The empirical spectral distribution of $A$, normalized by its dimension $d$, is\n$$\\mu_A:=\\frac1d\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\operatorname{rank}(P_\\lambda)\\,\\delta_\\lambda,$$\nwhere $\\delta_\\lambda$ is the unit point mass at $\\lambda$.\nFor a deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure is\n$$\\mu_A^x:=\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\|P_\\lambda x\\|_2^2\\,\\delta_\\lambda.$$\nFor a Borel set $B\\subseteq\\mathbb R$, set $\\mathbf1_B(A):=\\sum_{\\lambda\\in B\\cap\\operatorname{spec}(A)}P_\\lambda$; then $\\mu_A^x(B)=x^*\\mathbf1_B(A)x$. Both measures are supported on the nonnegative real axis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix $s>0$. The function $f_s(t)=(t+s)^{-1}$ is continuous on $[0,\\infty)$ and satisfies $0<f_s(t)\\le1/s$, so it is bounded. The measure is the directional spectral law in [F3].",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "On the probability-one event in [F1], apply the defining bounded-continuous-test property [F2] to $f_s$ to obtain the asserted integral convergence.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: Zero eigenvalues are allowed because t+s≥s>0; the integrand remains bounded and continuous for every fixed s>0 in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: For a one-dimensional spectral law the integral is the scalar resolvent (λ+s)^−1; the Statement requires only s>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: An atom at zero is allowed; the denominator t+s stays positive for every t≥0 and fixed s>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement and proof do not select from an arbitrary family; no choice-dependent supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-point directional law",
+          "result": "For μ=(δ1+δ3)/2, the negative-axis integral at s>0 is (1/2)((1+s)^−1+(3+s)^−1), agreeing with the resolvent quadratic form for A=diag(1,3) and x=(1,1)/√2.",
+          "evidence": "Evaluate the finite sum in the Definition and Statement."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "ex-anisotropic-sample-covariance-directional-condition": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-directional-sample-covariance-resolvent-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of complex random variables with $\\mathbb E\\xi_{11}=0$, $\\mathbb E|\\xi_{11}|^2=1$, and $\\mathbb E|\\xi_{11}|^4<\\infty$. For each positive integer $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$ be its upper-left block. Let $T_n$ be deterministic Hermitian positive semidefinite with uniformly bounded operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that, for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nDefine $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$ and $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}$ converges weakly to the probability measure $F_{c,H}$ whose Stieltjes transform is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sample-covariance-directional-spectral-measure",
+          "source_section": "Definition",
+          "quote": "For positive integers $d,N$, let $X\\in\\mathbb C^{d\\times N}$ and let $T\\in\\mathbb C^{d\\times d}$ be Hermitian positive semidefinite, meaning $T=T^*$ and $v^*Tv\\ge0$ for every $v\\in\\mathbb C^d$. Let $T^{1/2}$ be its Hermitian positive semidefinite square root and set\n$$A:=\\frac1N T^{1/2}XX^*T^{1/2}.$$\nFor each distinct eigenvalue $\\lambda$ of the Hermitian matrix $A$, let $P_\\lambda$ be the orthogonal projection onto its eigenspace. The empirical spectral distribution of $A$, normalized by its dimension $d$, is\n$$\\mu_A:=\\frac1d\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\operatorname{rank}(P_\\lambda)\\,\\delta_\\lambda,$$\nwhere $\\delta_\\lambda$ is the unit point mass at $\\lambda$.\nFor a deterministic unit vector $x\\in\\mathbb C^d$, its directional spectral measure is\n$$\\mu_A^x:=\\sum_{\\lambda\\in\\operatorname{spec}(A)}\\|P_\\lambda x\\|_2^2\\,\\delta_\\lambda.$$\nFor a Borel set $B\\subseteq\\mathbb R$, set $\\mathbf1_B(A):=\\sum_{\\lambda\\in B\\cap\\operatorname{spec}(A)}P_\\lambda$; then $\\mu_A^x(B)=x^*\\mathbf1_B(A)x$. Both measures are supported on the nonnegative real axis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-stieltjes-transform-of-a-real-probability-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$. For $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, its Stieltjes transform, with the $(x-z)^{-1}$ convention, is\n$$m_\\mu(z):=\\int_{\\mathbb R}\\frac{1}{x-z}\\,d\\mu(x).$$\nThe integral is finite because $|x-z|^{-1}\\le\\eta^{-1}$ for every real $x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The empirical eigenvalue measures $H_n$ of $T_n$ converge to $H=(\\delta_1+\\delta_2)/2$, since the proportions of diagonal entries equal to $1$ and $2$ both tend to $1/2$. For every $w\\in\\mathbb C\\setminus[0,\\infty)$, direct diagonal multiplication gives\n$$x_n^*(T_n-wI)^{-1}x_n=\\frac{\\lceil n/2\\rceil}{n(1-w)}+\\frac{\\lfloor n/2\\rfloor}{n(2-w)}\\longrightarrow\\frac12\\frac1{1-w}+\\frac12\\frac1{2-w}=m_H(w).$$\nThe vectors have norm one, so all hypotheses of [F1] hold with the transform convention [F3].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Applying [F1] to the calculation in step 1.1 proves almost-sure weak convergence of the directional spectral measures to the asserted $F_{c,H}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement fixes strictly positive population eigenvalues for this example; zero population spectrum is outside its specified construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The example allows c=1; its population-transform calculation in step 1.1 is independent of c."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes the two distinct positive population eigenvalues 1 and 2, so this degenerate population case is not in the example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 2.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "odd dimension rounding",
+          "result": "For n odd, ceil(n/2)/n differs from 1/2 by 1/(2n), so both limiting weights remain 1/2.",
+          "evidence": "Direct calculation in verification step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "ex-isotropic-sample-covariance-directional-marchenko-pastur-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-directional-sample-covariance-resolvent-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of complex random variables with $\\mathbb E\\xi_{11}=0$, $\\mathbb E|\\xi_{11}|^2=1$, and $\\mathbb E|\\xi_{11}|^4<\\infty$. For each positive integer $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$ be its upper-left block. Let $T_n$ be deterministic Hermitian positive semidefinite with uniformly bounded operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that, for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nDefine $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$ and $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}$ converges weakly to the probability measure $F_{c,H}$ whose Stieltjes transform is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-marchenko-pastur-measure",
+          "source_section": "Definition",
+          "quote": "For $\\gamma>0$, set\n$$a_\\gamma=(1-\\sqrt\\gamma)^2,\\qquad b_\\gamma=(1+\\sqrt\\gamma)^2,\\qquad r_+:=\\max\\{r,0\\}\\quad(r\\in\\mathbb R).$$\nDefine the Marchenko–Pastur set function on Borel $A\\subseteq\\mathbb R$ by\n$$\\mu_\\gamma(A):=\\int_{A\\cap(a_\\gamma,b_\\gamma)}\\frac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x}\\,d\\lambda(x)+\\left(1-\\frac1\\gamma\\right)_+\\delta_0(A),$$\nwhere $\\lambda$ is Lebesgue measure on $\\mathbb R$. The formula defines a finite Borel measure; its total mass is established by the Marchenko–Pastur law below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+          "source_section": "Statement",
+          "quote": "For every $\\gamma>0$, the set function $\\mu_\\gamma$ in the definition of the Marchenko–Pastur measure is a Borel probability measure supported on $[0,\\infty)$. For every $z\\in\\mathbb C$ with $\\eta:=\\operatorname{Im}z>0$, its Stieltjes transform $m_\\gamma(z)$ satisfies\n$$1+z m_\\gamma(z)=\\frac{m_\\gamma(z)}{1+\\gamma m_\\gamma(z)},\\qquad \\operatorname{Im}\\bigl(1-\\gamma-z-\\gamma z m_\\gamma(z)\\bigr)\\le-\\eta.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-deformed-mp-fixed-point-solution-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, let $H$ be a Borel probability measure on $[0,\\infty)$, and fix $z\\in\\mathbb C$ with $\\operatorname{Im}z>0$. There is at most one $q\\in\\mathbb C$ satisfying $\\operatorname{Im}q>0$, $u:=-(1-c)/z+cq$ with $\\operatorname{Im}u>0$, and\n$$q=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czq)-z}\\,dH(t).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The empirical eigenvalue law of $T_n=I_n$ is $H_n=\\delta_1$, and for every $w\\notin[0,\\infty)$,\n$$x_n^*(T_n-wI)^{-1}x_n=(1-w)^{-1}=\\int(t-w)^{-1}d\\delta_1(t).$$\nThus [F1] applies and gives almost-sure convergence to $F_{c,\\delta_1}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The transform of the Marchenko–Pastur law in [F3] satisfies the same fixed-point equation as $F_{c,\\delta_1}$ in [F1]; [F4] makes the solution unique, and [F5] identifies the two probability laws from their equal transforms. Hence the limit is the stated Marchenko–Pastur law.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: When c>1 the sample covariance may have a zero eigenspace; the Statement includes its mass in the limiting Marchenko–Pastur law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: The example allows c=1, and the isotropic specialization remains the aspect-one Marchenko–Pastur law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: Rank deficiency and zero eigenvalues are allowed for c>1; the Statement’s limit includes the zero atom."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 1.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "all directions at T=I",
+          "result": "For every unit vector and every w off [0,infinity), the population directional transform is (1-w)^-1.",
+          "evidence": "Exact scalar identity in verification step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    },
+    "ex-critical-aspect-one-no-positive-edge-gap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-directional-sample-covariance-resolvent-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of complex random variables with $\\mathbb E\\xi_{11}=0$, $\\mathbb E|\\xi_{11}|^2=1$, and $\\mathbb E|\\xi_{11}|^4<\\infty$. For each positive integer $n$, let $N_n$ be positive with $n/N_n\\to c\\in(0,\\infty)$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le N_n}$ be its upper-left block. Let $T_n$ be deterministic Hermitian positive semidefinite with uniformly bounded operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that, for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nDefine $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$ and $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}$ converges weakly to the probability measure $F_{c,H}$ whose Stieltjes transform is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-negative-axis-directional-resolvent-integrals",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of the sample-covariance resolvent deterministic-equivalent theorem, for each fixed $s>0$ the directional measures satisfy\n$$\\int_{[0,\\infty)}\\frac{1}{t+s}\\,d\\mu_n^{x_n}(t)\\longrightarrow\\int_{[0,\\infty)}\\frac{1}{t+s}\\,dF_{c,H}(t)\\quad\\text{almost surely}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-marchenko-pastur-measure",
+          "source_section": "Definition",
+          "quote": "For $\\gamma>0$, set\n$$a_\\gamma=(1-\\sqrt\\gamma)^2,\\qquad b_\\gamma=(1+\\sqrt\\gamma)^2,\\qquad r_+:=\\max\\{r,0\\}\\quad(r\\in\\mathbb R).$$\nDefine the Marchenko–Pastur set function on Borel $A\\subseteq\\mathbb R$ by\n$$\\mu_\\gamma(A):=\\int_{A\\cap(a_\\gamma,b_\\gamma)}\\frac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x}\\,d\\lambda(x)+\\left(1-\\frac1\\gamma\\right)_+\\delta_0(A),$$\nwhere $\\lambda$ is Lebesgue measure on $\\mathbb R$. The formula defines a finite Borel measure; its total mass is established by the Marchenko–Pastur law below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+          "source_section": "Statement",
+          "quote": "For every $\\gamma>0$, the set function $\\mu_\\gamma$ in the definition of the Marchenko–Pastur measure is a Borel probability measure supported on $[0,\\infty)$. For every $z\\in\\mathbb C$ with $\\eta:=\\operatorname{Im}z>0$, its Stieltjes transform $m_\\gamma(z)$ satisfies\n$$1+z m_\\gamma(z)=\\frac{m_\\gamma(z)}{1+\\gamma m_\\gamma(z)},\\qquad \\operatorname{Im}\\bigl(1-\\gamma-z-\\gamma z m_\\gamma(z)\\bigr)\\le-\\eta.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+          "source_section": "Statement",
+          "quote": "Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of real random variables with mean zero, variance one and finite fourth moment. For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$ and suppose $p_n/n\\to\\gamma\\in(0,\\infty)$. Set $S_n=X_n^{\\mathsf T}X_n/n$ and let $\\lambda_{\\min}^{+}(S_n)$ denote its smallest positive eigenvalue whenever one exists. If $\\gamma<1$, then almost surely $X_n$ has full column rank for all sufficiently large $n$, so $S_n$ has no zero eigenvalues eventually and $\\lambda_{\\min}(S_n)\\to(1-\\sqrt\\gamma)^2$. If $\\gamma>1$, then almost surely $X_n$ has full row rank for all sufficiently large $n$, so $S_n$ has exactly $p_n-n$ zero eigenvalues and $\\lambda_{\\min}^{+}(S_n)\\to(\\sqrt\\gamma-1)^2$. If $\\gamma=1$, then almost surely $\\lambda_{\\min}^{+}(S_n)\\to0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-deformed-mp-fixed-point-solution-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $c>0$, let $H$ be a Borel probability measure on $[0,\\infty)$, and fix $z\\in\\mathbb C$ with $\\operatorname{Im}z>0$. There is at most one $q\\in\\mathbb C$ satisfying $\\operatorname{Im}q>0$, $u:=-(1-c)/z+cq$ with $\\operatorname{Im}u>0$, and\n$$q=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czq)-z}\\,dH(t).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+          "source_section": "Statement",
+          "quote": "For every $\\gamma>0$, the set function $\\mu_\\gamma$ in the definition of the Marchenko–Pastur measure is a Borel probability measure supported on $[0,\\infty)$. For every $z\\in\\mathbb C$ with $\\eta:=\\operatorname{Im}z>0$, its Stieltjes transform $m_\\gamma(z)$ satisfies\n$$1+z m_\\gamma(z)=\\frac{m_\\gamma(z)}{1+\\gamma m_\\gamma(z)},\\qquad \\operatorname{Im}\\bigl(1-\\gamma-z-\\gamma z m_\\gamma(z)\\bigr)\\le-\\eta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "With $H=\\delta_1$ and $c=1$, the population-resolvent condition holds for every unit vector, so [F1] gives convergence to $F_{1,\\delta_1}$. The transform of the law in [F3] satisfies the same fixed-point equation; [F5] identifies $F_{1,\\delta_1}=\\mu_1$. Substituting $a_1=0$, $b_1=4$ into the density in [F3] gives $\\rho_1(t)=\\sqrt{4-t}/(2\\pi\\sqrt t)$ on $(0,4)$ and zero atom.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For fixed $s>0$, $t\\mapsto(t+s)^{-1}$ is bounded and continuous, so [F2] gives the asserted limit of the negative-axis integrals. For $0<t<1$, [F3] gives $\\rho_1(t)\\ge\\sqrt3(2\\pi)^{-1}t^{-1/2}$; hence $t^{-1}\\rho_1(t)\\ge\\sqrt3(2\\pi)^{-1}t^{-3/2}$, whose integral at zero diverges. Along $s_k=1/k$, the nonnegative functions $(t+s_k)^{-1}$ increase to $t^{-1}$ for $t>0$. The law has no atom at zero by [F3], and [F6] gives $\\int(t+s_k)^{-1}d\\mu_1(t)\\uparrow\\int t^{-1}d\\mu_1(t)=\\infty$. Since these integrals are nondecreasing as $s\\downarrow0$, the full limit is $+\\infty$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The nested-array and finite-fourth-moment hypotheses also satisfy [F4], so the smallest positive eigenvalue tends to zero almost surely. This excludes an eventual uniform positive lower bound and proves the stated gap failure without claiming convergence of the finite-sample reciprocal traces.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive integer dimensions and sample sizes; zero-dimensional matrices are outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof boundary: The limiting support reaches zero but has no zero atom; the Statement and step 1.1 retain this critical boundary explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and boundary case: Aspect ratio one is the stated case; the example treats the vanishing positive-edge gap directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and degenerate case: The zero endpoint belongs to the support but has no atom; the Statement distinguishes this from a positive edge gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no additional parameter-endpoint limit beyond its stated interior parameter range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes the Axiom of Choice; its cited use enters at step 1.1 through the weak-subsequence/Prokhorov route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "near-zero density lower bound",
+          "result": "For 0<t<1, sqrt(4-t)/(2pi sqrt(t)) >= sqrt(3)/(2pi)t^-1/2, so the reciprocal density dominates a nonintegrable multiple of t^-3/2.",
+          "evidence": "Explicit estimate in verification step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "Authoring self-review checked the statement, dependencies, conventions, boundary cases, and displayed proof. Independent native review, owner reconciliation, and later workflow gates remain open."
+      }
+    }
+  }
+}

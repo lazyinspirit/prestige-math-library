@@ -1,0 +1,39 @@
+---
+id: def-separable-space
+kind: definition
+title: "Separability: the existence of an at most countable dense subset"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+deps: [def-dense-top, def-countable]
+aliases: []
+landmark: true
+verification:
+  precheck: n/a
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-31
+  audited: 2026-07-31
+sources:
+  scraped: []
+  references:
+    - title: "UCR General Topology Notes"
+      url: "https://math.ucr.edu/~res/math205C-2016/gentop-notes.pdf"
+    - title: "Separable space (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Separable_space"
+pipeline_run: null
+---
+
+## Definition
+
+A topological space $X$ is **separable** if some at most countable subset $D\subseteq X$ is dense in $X$ (Dense, nowhere dense and codense subsets of a topological space, and the criterion by basic open sets, Finite, countably infinite, countable, uncountable). Equivalently, every nonempty open subset of $X$ meets $D$.
+
+## Definition references
+
+[[def-dense-top]]
+
+[[def-countable]]
+

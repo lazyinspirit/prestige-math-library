@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "40",
+  "round": 0,
+  "reviewed_items": [
+    "lem-sgd-trajectory-integrability",
+    "lem-independent-finite-random-index-extension",
+    "alg-stochastic-gradient-descent",
+    "alg-minibatch-stochastic-gradient-descent",
+    "thm-stochastic-direction-expected-average-stationarity",
+    "thm-nonconvex-sgd-random-iterate-stationarity",
+    "ex-constant-step-sgd-noise-floor",
+    "ex-empirical-risk-sgd-oracle-is-unbiased",
+    "ex-sgd-biased-direction-violates-alignment"
+  ],
+  "reviewed_pages": [
+    "stochastic-gradient-descent-for-learning",
+    "stochastic-gradient-descent-for-learning-examples"
+  ],
+  "decision": "repair",
+  "reason": "The mathematical claims, proofs, and supplier uses check out; the stationarity arguments match their stated source regimes ([Bottou et al.](https://arxiv.org/pdf/1606.04838), [Ghadimi and Lan](https://arxiv.org/pdf/1309.5549)). Request one local repair for the procedure input contracts and an inline Statement link. The affected algorithm consumer closure is within this reviewed batch and checks out.",
+  "findings": [
+    {
+      "id": "alg-stochastic-gradient-descent",
+      "type": "local",
+      "reason": "Make the finite requested horizon an explicit input and specify the loop bounds and returned trajectory indices; “each requested iteration” leaves the request and finite output length implicit."
+    },
+    {
+      "id": "alg-minibatch-stochastic-gradient-descent",
+      "type": "local",
+      "reason": "Make the finite requested horizon and loop/output indices explicit, and specify that batch size b is an integer at least 1."
+    },
+    {
+      "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+      "type": "local",
+      "reason": "The complete Statement contains an inline wikilink. Replace it there with plain wording and move the link to an immediately following “Statement references” section."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-minibatch-stochastic-gradient-descent",
+      "decision": "accept",
+      "reason": "Its averaged direction uses the single-direction update; it makes no unsupported unbiasedness or independence claim."
+    },
+    {
+      "id": "thm-stochastic-direction-expected-average-stationarity",
+      "decision": "accept",
+      "reason": "The finite-horizon update, adaptedness, moment assumptions, and use of the SGD procedure are consistent."
+    },
+    {
+      "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+      "decision": "accept",
+      "reason": "The finite-horizon oracle and update assumptions are consistent with the procedure; the weighted output proof is local."
+    },
+    {
+      "id": "ex-constant-step-sgd-noise-floor",
+      "decision": "accept",
+      "reason": "The finite recurrence and the two theorem comparisons use the stated update and their hypotheses."
+    },
+    {
+      "id": "ex-sgd-biased-direction-violates-alignment",
+      "decision": "accept",
+      "reason": "The deterministic recurrence uses the SGD update and correctly witnesses failure of positive alignment."
+    },
+    {
+      "id": "ex-empirical-risk-sgd-oracle-is-unbiased",
+      "decision": "accept",
+      "reason": "The finite with-replacement minibatch construction verifies its conditional mean and variance under the batch procedure."
+    }
+  ]
+}

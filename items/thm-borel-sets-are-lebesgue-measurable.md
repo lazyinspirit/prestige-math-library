@@ -14,6 +14,7 @@ landmark: true
 short: "Borel implies Lebesgue measurable"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-borel-sets-are-lebesgue-measurable.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -33,14 +34,22 @@ pipeline_run: null
 ## Statement
 
 Let $n \ge 1$ and **assume the Axiom of Countable Choice**
-([[def-countable-choice]]). Then
+(The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Then
 
 $$\mathcal{B}(\mathbb{R}^n) \;\subseteq\; \mathcal{L}(\mathbb{R}^n) :$$
 
-every Borel subset of $\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue
-measurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In
+every Borel subset of $\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue
+measurable (Lebesgue measurable sets, the family $\mathcal{L}(\mathbb{R}^n)$, and the restricted set function $\lambda_n$). In
 particular every open set, every closed set and every countable intersection of
 open sets is Lebesgue measurable.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-borel-sigma-algebra]]
+
+[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]
 
 ## Facts & Assumptions
 

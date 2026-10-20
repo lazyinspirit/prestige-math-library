@@ -18,6 +18,7 @@ justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-psd-nystrom-order-and-exactness.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -33,9 +34,13 @@ sources:
 
 ## Statement
 
-Let $\mathbb F\in\{\mathbb R,\mathbb C\}$, $n\ge1$, $s\ge0$, $A\in\mathbb F^{n\times n}$ be Hermitian positive semidefinite, and $S\in\mathbb F^{n\times s}$. In the Loewner order, where $B\preceq C$ means $C-B$ is positive semidefinite, the Nyström approximation in [[def-psd-nystrom-approximation]] satisfies
+Let $\mathbb F\in\{\mathbb R,\mathbb C\}$, $n\ge1$, $s\ge0$, $A\in\mathbb F^{n\times n}$ be Hermitian positive semidefinite, and $S\in\mathbb F^{n\times s}$. In the Loewner order, where $B\preceq C$ means $C-B$ is positive semidefinite, the Nyström approximation in The positive-semidefinite Nyström approximation satisfies
 $0\preceq\widehat A_{\mathrm{nys}}\preceq A$.
 If the sketch captures the range in the sense that $\operatorname{Ran}(AS)=\operatorname{Ran}(A)$, then $\widehat A_{\mathrm{nys}}=A$. Here rank, when used in the proof, means dimension of the range.
+
+## Statement references
+
+[[def-psd-nystrom-approximation]]
 
 ## Facts & Assumptions
 

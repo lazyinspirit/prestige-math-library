@@ -1,0 +1,1031 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-exp4-unbiased-expert-reward-estimates",
+    "lem-exp4-weighted-estimated-loss-second-moment",
+    "lem-exp4-potential-inequality",
+    "thm-exp4-expected-regret",
+    "ex-exp4-finite-two-expert-set",
+    "ex-exp4-duplicated-experts-change-prior-mass",
+    "ex-exp4-context-specific-expert-class"
+  ],
+  "contracts": {
+    "lem-exp4-unbiased-expert-reward-estimates": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "It is well-defined by induction: each row of $E(t)$ is a probability vector and each $Q_t$ is a probability vector, so $P_t\\in\\Delta_k$; the zero-probability convention and $P_{t,i}>0$ otherwise make every estimate finite; and positive finite exponential weights give a positive finite normalizing denominator and a probability vector $Q_{t+1}$ with all entries positive.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "An oblivious contextual bandit instance consists of reward vectors $x_t\\in[0,1]^k$ and advice matrices $E(t)\\in\\mathcal E$, for $t\\in[n]$, all fixed before the learner's private randomization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "The quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+          "source_section": "Statement",
+          "quote": "Then $$\n\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i},\\qquad \\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=\\frac{y_{t,i}^2}{P_{t,i}}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Zero sampling mass forces every expert's advice coefficient on that action to vanish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the positive-support conditional loss mean and zero-support coefficients to obtain each expert's conditional expected reward.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1, k>1, and M>1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves every zero-probability coordinate has zero advice mass for each expert."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes one action or one expert."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover both P_i=0 and P_i>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses 0<=x_i<=1, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to each of the finitely many experts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-support-coordinate",
+          "claim": "If P_i=0 and all Q_m>0, every E_{m,i}=0.",
+          "result": "Step 1.1 follows from a finite sum of nonnegative terms equaling zero."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Reviewed the positive-support hypothesis, zero-quotient branch, conditional calculation, and exact supplier excerpts."
+      }
+    },
+    "lem-exp4-weighted-estimated-loss-second-moment": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "When $P_{t,i}=0$, the action $A_t=i$ is impossible; in this case the quotient term is defined to be zero on every possible outcome.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "The matrix $E(t)$ is revealed before the round-$t$ action; its row $E(t)_m=(E(t)_{m,1},\\ldots,E(t)_{m,k})$ is expert $m$'s probability distribution over the $k$ actions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "The quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+          "source_section": "Statement",
+          "quote": "Then $$\n\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i},\\qquad \\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=\\frac{y_{t,i}^2}{P_{t,i}}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Remove zero-support coordinates and express the expert loss square with no cross terms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the positive-support second-moment identity and bound each coefficient square.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Weight by Q, substitute P=QE, and sum at most k terms each bounded by one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a finite nonempty action and expert set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 removes zero-support coordinates; step 3.1 bounds zero losses by zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes k=1 and M=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles P_i=0; step 3.1 sums the positive-support terms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses 0<=1-x_i<=1, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 sums over the finite action set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-supported-actions",
+          "claim": "For two deterministic experts, Q=(1/2,1/2), and losses (1,0), the conditional weighted squared loss is at most k.",
+          "result": "Direct finite calculation gives value 1<=2."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Reviewed the single-coordinate square identity, positive-support condition, zero-support case, and k-term sum."
+      }
+    },
+    "lem-exp4-potential-inequality": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "Q_{t+1,m}=\\frac{Q_{t,m}\\exp(\\eta\\widetilde X_{t,m})}{\\sum_{r=1}^M Q_{t,r}\\exp(\\eta\\widetilde X_{t,r})}.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-exp-negative-argument-second-order-upper-bound",
+          "source_section": "Statement",
+          "quote": "For every real $z\\le0$,\n$$\n\\exp(z)\\le1+z+\\frac{z^2}{2}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "Thus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Prove log(s)<=s-1 on both sides of one by the mean value theorem.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "cases",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Bound the one-round potential ratio with the negative-argument exponential inequality and logarithm inequality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Telescope the potential, lower-bound it by any fixed expert, and combine the bounds.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1 and M>1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies at estimated loss zero; the exponential inequality is equality at zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "M=1 is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the polynomial normalizer is positive and cites positive exponential weights."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to zero and every finite nonnegative estimated loss."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 compares with an arbitrary fixed expert in [M]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-estimated-loss",
+          "claim": "If all estimated expert losses are zero in a round, the potential ratio is exp(eta).",
+          "result": "Then S_t=1 and Z_{t+1}/Z_t=exp(eta), so the one-round upper bound is equality."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Reviewed both sides of the logarithm inequality, positivity of normalizers, exponential inequality direction, and comparator telescoping."
+      }
+    },
+    "thm-exp4-expected-regret": {
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "An oblivious contextual bandit instance consists of reward vectors $x_t\\in[0,1]^k$ and advice matrices $E(t)\\in\\mathcal E$, for $t\\in[n]$, all fixed before the learner's private randomization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "P_{t,i}=\\sum_{m=1}^M Q_{t,m}E(t)_{m,i},\\qquad i\\in[k].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-exp4-unbiased-expert-reward-estimates",
+          "source_section": "Statement",
+          "quote": "The assertion includes rounds where some actions have zero sampling probability; no componentwise unbiasedness claim is made for an unsupported action.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exp4-weighted-estimated-loss-second-moment",
+          "source_section": "Statement",
+          "quote": "Then $$\n\\mathbb E\\left[\\sum_{m=1}^M Q_{t,m}\\widetilde L_{t,m}^{2}\\,\\middle|\\,\\mathcal F_{t-1}\\right]\\le k.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exp4-potential-inequality",
+          "source_section": "Statement",
+          "quote": "$$\n\\sum_{t=1}^n\\widetilde X_{t,m^*}-\\sum_{t=1}^n\\sum_{m=1}^M Q_{t,m}\\widetilde X_{t,m}\\le\\frac{\\log M}{\\eta}+\\frac{\\eta}{2}\\sum_{t=1}^n\\sum_{m=1}^M Q_{t,m}\\widetilde L_{t,m}^{2}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-static-dynamic-and-strongly-adaptive-regret",
+          "source_section": "Definition",
+          "quote": "For randomized learners or environments, **expected regret** is the expectation of the specified regret random variable over their joint randomness, when that random variable is measurable and integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-nonnegative-square-root-exists-and-unique",
+          "source_section": "Statement",
+          "quote": "In a Dedekind-complete ordered field, every $x\\ge0$ has a unique $y\\ge0$ with",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a deterministic best expert and identify the conditional estimated comparator and mixture rewards at every finite history.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the pathwise potential inequality and sum the conditional quadratic bound over rounds.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Verify the tuned learning rate is positive and substitute it to obtain the stated constant.",
+          "step": "3.1",
+          "inputs": [
+            "F10",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1, k>1, and M>1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1 and 2.1 handle zero-support actions and zero estimated loss."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement excludes k=1 and M=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite estimates under the zero-quotient convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and local lemmas use the full reward range [0,1], including endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a maximum over the finite nonempty expert set [M]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-round-two-action-two-expert",
+          "claim": "For n=1,k=2,M=2, advice (1,0),(0,1), reward (1,0), expected regret is 1/2.",
+          "result": "The exact calculation is proved in ex-exp4-finite-two-expert-set; the theorem bound specializes to sqrt(4 log 2)."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Rechecked deterministic comparator, finite-history expectation conversion, zero-support convention, AC-free proof, k second-moment constant, and rate algebra."
+      }
+    },
+    "ex-exp4-finite-two-expert-set": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "The expected reward of expert $m$ on round $t$ is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "initialize $Q_{1,m}=1/M$ for $m\\in[M]",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exp4-expected-regret",
+          "source_section": "Statement",
+          "quote": "R_n\\le\\sqrt{2nk\\log M}.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compute the initial action mixture and expected reward.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute both expert rewards and the regret.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Specialize the general regret bound.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one round, two actions, and two experts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The reward vector has a zero coordinate, whose contribution is included in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly evaluate the one-round horizon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both positive action probabilities as 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 use both allowed reward endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 takes the maximum over two experts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "n1-k2-m2",
+          "claim": "The exact expected regret is 1/2.",
+          "result": "P_1=(1/2,1/2), E[X_1]=1/2, and the best expert reward is 1."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Recomputed the initial mixture, expected reward, comparator, and theorem specialization."
+      }
+    },
+    "ex-exp4-duplicated-experts-change-prior-mass": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "The matrix $E(t)$ is revealed before the round-$t$ action; its row $E(t)_m=(E(t)_{m,1},\\ldots,E(t)_{m,k})$ is expert $m$'s probability distribution over the $k$ actions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-exp4",
+          "source_section": "Definition",
+          "quote": "initialize $Q_{1,m}=1/M$ for $m\\in[M]",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exp4-expected-regret",
+          "source_section": "Statement",
+          "quote": "R_n\\le\\sqrt{2nk\\log M}.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compute the initial mixture and compare it to removing one duplicate.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Show equal advice rows receive identical updates and retain equal mass.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Specialize the theorem bound to k=2 and M=3.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty finite horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives positive mixture mass to both actions despite zero entries in the one-hot advice rows."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the first update Q_2 at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identical advice rows are the case verified in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 show the duplicate update for all rewards in [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses three experts and two actions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-experts-two-actions",
+          "claim": "The duplicated pair has combined initial mass 2/3.",
+          "result": "Q=(1/3,1/3,1/3) gives P_1=(2/3,1/3); removing one copy gives P'_1=(1/2,1/2)."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Checked the multiplicity effect, equality of duplicate updates, and tuned theorem rate."
+      }
+    },
+    "ex-exp4-context-specific-expert-class": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-contextual-bandit-protocol",
+          "source_section": "Definition",
+          "quote": "An oblivious contextual bandit instance consists of reward vectors $x_t\\in[0,1]^k$ and advice matrices $E(t)\\in\\mathcal E",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exp4-expected-regret",
+          "source_section": "Statement",
+          "quote": "R_n\\le\\sqrt{2nk\\log M}.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "$\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Verify the one-hot advice rows and count all context-to-action maps.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the theorem with M=k^c and simplify the logarithm.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The context set and horizon are nonempty by assumption."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sized set is considered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 allows c=1; then M=k and the same count and bound hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow maps with identical observed advice on the fixed context sequence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 allow rewards throughout [0,1], including endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 counts k^c maps with c>=1 and k>1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no claim requiring this boundary."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-contexts-two-actions",
+          "claim": "For c=2,k=2, M=4 and the regret bound is sqrt(8 n log 2).",
+          "result": "There are 2^2 maps; log 4=2 log 2 gives sqrt(2 n*2*2 log 2)."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 78 author self-review",
+        "notes": "Checked the one-hot construction, finite map count, theorem hypotheses, and logarithm simplification."
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+---
+id: def-latent-class-contrastive-learning
+kind: definition
+title: "Latent-class contrastive representation learning"
+status: draft
+origin: pipeline
+pipeline_run: machine-learning-all-101-2026-10-19
+dependency_level: 3
+deps:
+  - def-expectation-of-a-nonnegative-or-integrable-random-variable
+  - def-identically-distributed-and-iid-random-variables
+  - def-moments-variance-and-covariance
+  - def-operator-norm-on-a-finite-dimensional-inner-product-space
+  - def-population-and-empirical-risk
+  - def-probability-measure
+  - def-rademacher-complexity
+  - def-supervised-learning-problem
+  - lem-contrastive-hinge-and-logistic-loss-properties
+  - lem-population-and-empirical-risk-are-measurable
+  - thm-independent-random-elements-have-product-joint-law
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-20
+sources:
+  references:
+    - title: "Nikunj Saunshi et al., A Theoretical Analysis of Contrastive Unsupervised Representation Learning, Sections 2–5"
+      url: "https://proceedings.mlr.press/v97/saunshi19a/saunshi19a.pdf"
+    - title: "Yunwen Lei, Tianbao Yang, Yiming Ying, and Ding-Xuan Zhou, Generalization Analysis for Contrastive Representation Learning, Sections 2–4"
+      url: "https://arxiv.org/pdf/2302.12383"
+---
+
+## Definition
+
+Let $(\mathcal C,\mathcal C_0,\rho)$ be a measurable probability space and $(\mathcal X,\mathcal A)$ a measurable space. For each class $c\in\mathcal C$, let $D_c$ be a probability measure on $(\mathcal X,\mathcal A)$ and assume $c\mapsto D_c(A)$ is measurable for every $A\in\mathcal A$. Assume the displayed mixtures define probability measures. The positive-pair law $D_{\rm sim}$ and negative marginal $D_{\rm neg}$ are specified by
+
+$$D_{\rm sim}(A\times B):=\int_{\mathcal C}D_c(A)D_c(B)\,\rho(dc),\qquad D_{\rm neg}(A):=\int_{\mathcal C}D_c(A)\,\rho(dc)$$
+
+for measurable $A,B\in\mathcal A$. Equivalently, draw $C\sim\rho$ and then draw $X,X^+$ independently with law $D_C$ for a positive pair; draw a fresh independent class $C'\sim\rho$ and $X^-\sim D_{C'}$ for one negative. The class labels are latent: the learner observes the pair and negative data, not their classes.
+
+Let $d\ge1$, $R>0$, and let $\mathcal F$ be a nonempty class of measurable maps $f:\mathcal X\to\mathbb R^d$ satisfying $\sup_{x\in\mathcal X}\lVert f(x)\rVert_2\le R$. Use either one-negative loss $\ell_{\rm h}(t)=(1+t)_+$ or $\ell_{\rm log}(t)=\log_2(1+e^t)$ from the immediately preceding loss-properties lemma. The contrastive score and population loss are
+
+$$q_f(x,x^+,x^-):=f(x)^\top\bigl(f(x^-)-f(x^+)\bigr),\qquad L_{\rm un}(f):=\mathbb E_{(X,X^+)\sim D_{\rm sim},\,X^-\sim D_{\rm neg}}\bigl[\ell(q_f(X,X^+,X^-))\bigr].$$
+
+For $M\ge1$, an observed sample is $S=((x_j,x_j^+,x_j^-))_{j=1}^M$ of $M$ independent triplets with common law $D_{\rm sim}\otimes D_{\rm neg}$, and its empirical loss is $\widehat L_{\rm un}(f):=M^{-1}\sum_{j=1}^M\ell(q_f(x_j,x_j^+,x_j^-))$. For this sample define the unnormalized vector Rademacher complexity
+
+$$\mathcal R_S(\mathcal F):=\mathbb E_\varepsilon\sup_{f\in\mathcal F}\sum_{j=1}^M\sum_{t=1}^d\bigl(\varepsilon_{jt0}f_t(x_j)+\varepsilon_{jt+}f_t(x_j^+)+\varepsilon_{jt-}f_t(x_j^-)\bigr),$$
+
+where every $\varepsilon_{jt0},\varepsilon_{jt+},\varepsilon_{jt-}$ is an independent uniform sign. This is the one-sided convention with no absolute value and no $1/M$ factor.
+
+All vector and matrix expectations in this definition are taken entrywise in finite dimensions. The bound on $f$ makes each coordinate of $f(X)$ and every product defining a covariance entry integrable.
+
+Let $C_+,C_-\sim\rho$ be independent class draws and set $\tau:=\Pr(C_+=C_-)<1$. Assume the diagonal $\Delta:=\{(c,c):c\in\mathcal C\}$ and each $\Delta_A:=\{(c,c):c\in A\}$, $A\in\mathcal C_0$, are measurable. The average binary task draws $(C_+,C_-)$ conditional on $C_+\ne C_-$, then samples a label $Y$ uniformly from $\{+1,-1\}$ and an input $X$ from $D_{C_+}$ if $Y=+1$ or $D_{C_-}$ if $Y=-1$. For a vector representation $f$, a binary linear classifier uses a weight vector $w\in\mathbb R^d$ and loss $\ell(-Yw^\top f(X))$. Define $L_{\rm sup}(f)$ as the average over tasks of the infimum of this risk over $w\in\mathbb R^d$. Write $\mu_c:=\mathbb E_{X\sim D_c}f(X)$ and define the class-mean classifier by $w_\mu=\mu_{C_+}-\mu_{C_-}$; its average risk is $L^\mu_{\rm sup}(f)$. For $\gamma>0$, write $L^\mu_{\gamma,\rm sup}(f)$ for the same mean-classifier risk with margin loss $\ell_\gamma(t):=(1+t/\gamma)_+$ in place of $\ell$.
+
+For $\tau>0$, let $L^=_{\rm un}(f)$ and $L^\ne_{\rm un}(f)$ be the conditional contrastive risks given $C_+=C_-$ and $C_+\ne C_-$, respectively. Let $\nu$ be the class law conditioned on the collision event, namely $\nu(A):=(\rho\otimes\rho)(\Delta_A)/\tau$ for $A\in\mathcal C_0$; for an atomic class law this gives $\nu(\{c\})=\rho(\{c\})^2/\tau$. Define $\Sigma_f(c):=\mathbb E_{X\sim D_c}[(f(X)-\mu_c)(f(X)-\mu_c)^\top]$ and
+
+$$s(f):=\mathbb E_{C\sim\nu}\left[\sqrt{\lVert\Sigma_f(C)\rVert_{\rm op}}\,\mathbb E_{X\sim D_C}\lVert f(X)\rVert_2\right],\qquad \lVert\Sigma\rVert_{\rm op}:=\max_{\lVert u\rVert_2=1}\lVert\Sigma u\rVert_2.$$
+
+The assumed measurability of $\Delta$ and every $\Delta_A$ makes the displayed collision event and conditional class law well-defined; disjoint class sets give disjoint $\Delta_A$, so the formula for $\nu$ is countably additive and has total mass one. Assume also that $c\mapsto\mu_c$ and $c\mapsto\Sigma_f(c)$ are measurable for each $f$, and that the displayed class-conditional risks and random suprema used below are measurable.
+
+If $\tau=0$, there is no collision term; set $s(f):=0$ and use $L_{\rm un}(f)=L^\ne_{\rm un}(f)$. Any empirical minimizer or approximate minimizer used below is separately assumed to be a measurable selector; no selector-existence claim is part of this definition.
+
+## Definition references
+
+[[def-probability-measure]]: fixes probability laws and their total mass.
+
+[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]: supplies scalar expectations; vector and matrix expectations use the entrywise convention stated above.
+
+[[def-supervised-learning-problem]]
+
+[[def-population-and-empirical-risk]]: supply the measurable prediction-problem and population/empirical risk conventions.
+
+[[lem-population-and-empirical-risk-are-measurable]]: establishes measurability of fixed-predictor risks in the supervised interface.
+
+[[def-identically-distributed-and-iid-random-variables]]
+
+[[thm-independent-random-elements-have-product-joint-law]]: fix IID sampling and the product-law convention for independent draws.
+
+[[def-rademacher-complexity]]: supplies the one-sided sign-supremum convention; the vector form above is unnormalized as in the source.
+
+[[def-moments-variance-and-covariance]]
+
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]: define the within-class covariance matrix and its operator norm.
+
+[[lem-contrastive-hinge-and-logistic-loss-properties]]: defines the source hinge/logistic losses and the common constant $L_0$.
+
+[Saunshi et al., Sections 2–5, latent classes, pair/triplet sampling, mean classifier and one-negative objective](https://proceedings.mlr.press/v97/saunshi19a/saunshi19a.pdf).
+
+[Lei et al., Sections 2–4, contrastive sampling and a distinct unsupervised-loss generalization analysis](https://arxiv.org/pdf/2302.12383).
+
+## Sampling diagram
+
+The two class roots are sampled independently. The arrows show conditional sampling laws, not deterministic functions; $X$ and $X^+$ are independent conditional on $C_+$, and the negative example has its own independent class draw.
+
+```tikz
+\begin{tikzpicture}[>=stealth]
+  \node[draw, rounded corners] (cp) at (0,0) {$C_+\sim\rho$};
+  \node[draw, rounded corners] (x) at (-1.2,-1.2) {$X\sim D_{C_+}$};
+  \node[draw, rounded corners] (xp) at (1.2,-1.2) {$X^+\sim D_{C_+}$};
+  \node[draw, rounded corners] (cm) at (4,0) {$C_-\sim\rho$};
+  \node[draw, rounded corners] (xm) at (4,-1.2) {$X^-\sim D_{C_-}$};
+  \draw[->] (cp) -- (x);
+  \draw[->] (cp) -- (xp);
+  \draw[->] (cm) -- (xm);
+\end{tikzpicture}
+```
+
+## Remarks
+
+The transfer claims below concern the source's average binary tasks, one independent marginal negative, the stated hinge/logistic losses, and the class-mean linear classifier. They do not assert multiclass top-1 accuracy, universal invariance, an attained population minimizer, or a guarantee for empirical SimCLR outcomes. The source treats multiple-negative and block-similarity extensions separately.
+
+## Remarks references
+
+[Saunshi et al., Sections 4–6 and Supplementary Appendix B](https://proceedings.mlr.press/v97/saunshi19a/saunshi19a.pdf).
+
+[Chen et al., Sections 2–4, SimCLR's batch NT-Xent objective and reported experiments](https://proceedings.mlr.press/v119/chen20j/chen20j.pdf).

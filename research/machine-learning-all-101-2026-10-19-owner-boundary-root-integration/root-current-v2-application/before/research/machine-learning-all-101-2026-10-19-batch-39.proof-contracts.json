@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-smooth-bounded-below-gd-stationarity",
+    "ex-nonconvex-cosine-gradient-descent-has-distinct-basins",
+    "ex-nonconvex-gd-path-lower-bound-with-unbounded-objective"
+  ],
+  "contracts": {
+    "thm-smooth-bounded-below-gd-stationarity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix $t\\ge0$ and put $g_t=\\nabla F(w_t)$. The coordinate gradient is as in [F4], and [F1] gives $w_{t+1}=w_t-\\alpha g_t$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Apply [F3] at $x=w_t$, $y=w_{t+1}$; the continuously differentiable hypothesis is specified by [F2], and [F5] gives the Euclidean inner-product and norm identity. Thus $F(w_{t+1})\\le F(w_t)-\\alpha\\|g_t\\|_2^2+\\frac{L\\alpha^2}{2}\\|g_t\\|_2^2\\le F(w_t)-\\frac{\\alpha}{2}\\|g_t\\|_2^2$, because $L\\alpha\\le1$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Sum the inequality in step 1.2 for $t=0,\\ldots,T-1$; consecutive objective terms cancel, so $\\frac{\\alpha}{2}\\sum_{t=0}^{T-1}\\|\\nabla F(w_t)\\|_2^2\\le F(w_0)-F(w_T)\\le F(w_0)-\\underline F$. This proves the finite-sum bound for every $T\\ge1$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If the gradient norms did not tend to zero, some $\\varepsilon>0$ would satisfy $\\|\\nabla F(w_t)\\|_2\\ge\\varepsilon$ at infinitely many indices. The bound $2(F(w_0)-\\underline F)/(\\alpha\\varepsilon^2)$ is real; by [F7], $\\mathbb R$ is a complete ordered field, so [F6] supplies a canonical natural $q$ larger than it. The infinite set of such indices contains $q$ distinct indices; take $T$ larger than all of them. Step 2.1 then gives $q\\varepsilon^2\\le2(F(w_0)-\\underline F)/\\alpha$, a contradiction. Thus $\\|\\nabla F(w_t)\\|_2\\to0$; the finite selection of indices uses no choice axiom.",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 2.1",
+            "assume-hyp",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For each $T\\ge1$, $T\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\sum_{t=0}^{T-1}\\|\\nabla F(w_t)\\|_2^2$. Step 2.1 therefore gives the stated finite-horizon minimum-gradient bound.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "horizon T=1",
+          "calculation": "Step 1.2 gives (alpha/2)||grad F(w_0)||_2^2 <= F(w_0)-F(w_1), and the pathwise lower bound gives F(w_1)>=F_lower.",
+          "result": "||grad F(w_0)||_2^2 <= 2(F(w_0)-F_lower)/alpha, the stated finite-horizon minimum bound at T=1.",
+          "checked_in": "Steps 1.2, 2.1, and 4.1",
+          "check": "ml101-gd-one-step-lower-bound",
+          "asserts": "- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$.",
+          "selectors": {
+            "fixture": "quadratic-t1",
+            "horizon": 1
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and contains no empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 remains valid with equality when the current gradient is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 applies at T=1 and uses the single term bounded in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 forces every gradient term to vanish when F(w_0)=underline F."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the inclusive endpoint alpha=1/L."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes only finite selections from an infinite subset of the naturals and uses no choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        }
+      ]
+    },
+    "ex-nonconvex-cosine-gradient-descent-has-distinct-basins": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-bounded-below-gd-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $F:\\mathbb R^n\\to\\mathbb R$ be continuously Fréchet differentiable, and let $L>0$ satisfy\n$$\\|\\nabla F(x)-\\nabla F(y)\\|_2\\le L\\|x-y\\|_2\\qquad(x,y\\in\\mathbb R^n).$$\nChoose $w_0\\in\\mathbb R^n$, a fixed step $0<\\alpha\\le1/L$, and a real $\\underline F$ such that the fixed-step gradient-descent sequence $w_{t+1}=w_t-\\alpha\\nabla F(w_t)$ satisfies $F(w_t)\\ge\\underline F$ for every $t\\ge0$. Then, for every integer $T\\ge1$, the following bounds hold:\n\n- $\\sum_{t=0}^{T-1}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2}{\\alpha}\\bigl(F(w_0)-\\underline F\\bigr)$;\n- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$.\n\nMoreover, $\\|\\nabla F(w_t)\\|_2\\to0$ as $t\\to\\infty$. The lower bound is required only along this sequence; the conclusion is stationarity, not convergence of the iterates or attainment of a local or global minimum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "For all real $u,v$,\n\n$$|\\sin u-\\sin v|\\le|u-v|,$$\n\nand\n\n$$|\\cos u-\\cos v|\\le|u-v|.$$\n\nThus sine and cosine are Lipschitz functions on $\\mathbb R$, each with\nLipschitz constant $1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-monotone-converges-iff-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a monotone sequence of reals ([[def-sequence]],\n[[def-monotone-sequence]]). Then $(x_k)$ converges if and only if it is bounded,\nthat is if and only if there is $M \\in \\mathbb{R}$ with $|x_k| \\le M$ for every\n$k \\in \\mathbb{N}$.\n\nThe forward implication holds for every sequence and is\n[[lem-convergent-implies-bounded]]. What monotonicity buys is the converse, which\nis false for sequences in general.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F3, F4, F5], $F'(x)=\\sin x$. Then [F6] makes the gradient continuous and $1$-Lipschitz; [F9] gives $F(x)\\ge0$, and [F3, F8] give $F(0)=F(2\\pi)=0$. Thus the hypotheses of [F2] hold with $L=1$ and $\\alpha=1$, so every trajectory has gradient norm tending to zero.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Suppose $x_0\\in(0,\\pi)$. If $0<x_t\\le x_0$, [F7] gives $\\sin x_t>0$, and [F6] with $v=0$ gives $\\sin x_t\\le x_t$; hence $0\\le x_{t+1}=x_t-\\sin x_t<x_t$. If $x_t=0$, it stays at $0$. Induction shows $0\\le x_{t+1}\\le x_t\\le x_0$, so [F10] gives a limit $\\ell\\in[0,x_0]$. Given $\\varepsilon>0$, convergence gives an index after which both $|x_t-\\ell|<\\varepsilon/2$ and $|x_{t+1}-\\ell|<\\varepsilon/2$; hence $|x_t-x_{t+1}|\\to0$ and, by the update, $\\sin x_t\\to0$. Also [F6] gives $|\\sin x_t-\\sin\\ell|\\le|x_t-\\ell|\\to0$, so $\\sin\\ell=0$. By [F8], the only such zero in $[0,x_0]$ is $0$, so $\\ell=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose $x_0\\in(\\pi,2\\pi)$. If $x_0\\le x_t<2\\pi$, put $u_t=2\\pi-x_t\\in(0,\\pi)$. By [F7, F8, F9], $\\sin x_t=-\\sin u_t<0$, and [F6] gives $-\\sin x_t=\\sin u_t\\le u_t=2\\pi-x_t$. Therefore $x_t<x_{t+1}=x_t-\\sin x_t\\le2\\pi$; if $x_t=2\\pi$, it remains there. Induction gives a nondecreasing sequence bounded above by $2\\pi$, so [F10] gives a limit $\\ell\\in[x_0,2\\pi]$. Convergence implies $|x_{t+1}-x_t|\\to0$ by the same two-term estimate used in step 1.2, so $\\sin u_t\\to0$. Since $u_t=2\\pi-x_t\\to2\\pi-\\ell$, [F6] gives $|\\sin u_t-\\sin(2\\pi-\\ell)|\\le|u_t-(2\\pi-\\ell)|\\to0$, hence $\\sin(2\\pi-\\ell)=0$. By [F8], the only such zero with $0\\le2\\pi-\\ell<2\\pi-x_0<\\pi$ is $0$. Thus $\\ell=2\\pi$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "stationary interval endpoints",
+          "calculation": "sin(0)=sin(2pi)=0 and F(0)=F(2pi)=0; the update x -> x-sin(x) fixes both endpoints.",
+          "result": "The open-interval basin claims exclude these fixed boundary starts, as stated.",
+          "checked_in": "Facts F3 and F8; Verification steps 1.1, 1.2, and 2.1",
+          "check": "ml101-gd-cosine-fixed-endpoints",
+          "asserts": "[F3, F8] give $F(0)=F(2\\pi)=0$.",
+          "selectors": {
+            "fixture": "cosine-boundaries",
+            "horizon": 1
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has no empty finite object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 treat the stationary endpoints 0 and 2pi as fixed points when reached."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no one-count parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement uses open intervals and steps 1.2 and 1.3 make no trajectory claim for the stationary boundary point pi."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement uses open starting intervals; steps 1.2 and 1.3 identify the endpoint limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The iteration is deterministic and uses no choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        }
+      ]
+    },
+    "ex-nonconvex-gd-path-lower-bound-with-unbounded-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric ([[lem-standard-basis-of-f-n]] clause 5, [[def-euclidean-inner-product]], [[def-norm-and-normed-space]]). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-smooth-bounded-below-gd-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $F:\\mathbb R^n\\to\\mathbb R$ be continuously Fréchet differentiable, and let $L>0$ satisfy\n$$\\|\\nabla F(x)-\\nabla F(y)\\|_2\\le L\\|x-y\\|_2\\qquad(x,y\\in\\mathbb R^n).$$\nChoose $w_0\\in\\mathbb R^n$, a fixed step $0<\\alpha\\le1/L$, and a real $\\underline F$ such that the fixed-step gradient-descent sequence $w_{t+1}=w_t-\\alpha\\nabla F(w_t)$ satisfies $F(w_t)\\ge\\underline F$ for every $t\\ge0$. Then, for every integer $T\\ge1$, the following bounds hold:\n\n- $\\sum_{t=0}^{T-1}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2}{\\alpha}\\bigl(F(w_0)-\\underline F\\bigr)$;\n- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$.\n\nMoreover, $\\|\\nabla F(w_t)\\|_2\\to0$ as $t\\to\\infty$. The lower bound is required only along this sequence; the conclusion is stationarity, not convergence of the iterates or attainment of a local or global minimum.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $z=(x,y)$ and $v=(h,k)$, expansion gives $F(z+v)-F(z)-(2xh-2yk)=h^2-k^2$, whose absolute value is at most $h^2+k^2=\\|v\\|_2^2$. For every $\\varepsilon>0$, this is at most $\\varepsilon\\|v\\|_2$ when $\\|v\\|_2<\\varepsilon$, so [F1] gives the total derivative. The coordinate difference quotients are $2x+h$ and $-2y-k$, so [F2, F3] give $\\nabla F(x,y)=(2x,-2y)$. Therefore $\\|\\nabla F(z)-\\nabla F(z')\\|_2^2=4\\|z-z'\\|_2^2$, so $F$ is continuously differentiable and its gradient is globally $2$-Lipschitz.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F5] and the gradient formula in step 1.1, $w_{t+1}=(x_t/2,3y_t/2)$. Starting from $(1,0)$, induction gives $y_t=0$ and $x_t=2^{-t}$ for every $t\\ge0$.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Step 2.1 gives $F(w_t)=4^{-t}\\ge0$ and $w_t\\to(0,0)$ by [F7], while $F(0,s)=-s^2$ is unbounded below as $|s|\\to\\infty$. The gradient at the limit is zero, but $F(h,0)=h^2>F(0,0)$ and $F(0,h)=-h^2<F(0,0)$ for every $h\\ne0$, so the limit is neither a local minimum nor a local maximum. Finally $\\alpha=1/4\\le1/2=1/L$ and the iterates have lower bound $0$, so [F6] applies and gives vanishing gradient norms along this path.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "first two iterates",
+          "calculation": "From (1,0), grad F=(2,0), so w_1=(1/2,0) and F(w_1)=1/4; then grad F(w_1)=(1,0), so w_2=(1/4,0) and F(w_2)=1/16.",
+          "result": "The first two updates agree with w_t=(2^{-t},0) and F(w_t)=4^{-t}.",
+          "checked_in": "Verification steps 1.1 and 2.1",
+          "check": "ml101-gd-saddle-first-two-iterates",
+          "asserts": "The iterates are $w_t=(2^{-t},0)$, so $F(w_t)=4^{-t}\\ge0$",
+          "selectors": {
+            "fixture": "saddle-trajectory",
+            "horizon": 2
+          }
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example contains no empty finite set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the zero-gradient limit at the origin."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has no one-count parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the degenerate stationary endpoint and checks both signs of nearby objective values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example asserts no interval-endpoint result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The update and trajectory are deterministic and use no choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        }
+      ]
+    }
+  }
+}

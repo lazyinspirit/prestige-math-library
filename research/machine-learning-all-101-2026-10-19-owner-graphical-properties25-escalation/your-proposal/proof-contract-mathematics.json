@@ -1,0 +1,86 @@
+{
+  "purpose": "Mathematical evidence/interface for root contract authoring; not a native contract or approval",
+  "id": "lem-graphical-lasso-finite-budget-properties",
+  "proposed_metadata": {
+    "kind": "lemma",
+    "status": "draft",
+    "page": "ml02-graphical-models",
+    "batch": "25",
+    "dependency_level": 2,
+    "deps": [
+      "alg-graphical-lasso-coordinate-descent",
+      "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+    ],
+    "justified_by_note": "Optional algorithm justified_by registration is root-owned metadata; there is no reverse deps edge."
+  },
+  "provenance_note": "AI-altered statement and proof adapt existing locally authored property proof. Friedman URL supplies source-backed provenance for underlying block/lasso procedure, not a claim that the finite budgets, acceptance guard or bounds appear there. No new source-PDF consultation claimed.",
+  "restoration_map": [
+    {
+      "original": "Verification 1.1",
+      "restored": "Statement; Proof 1.1",
+      "claim": "Initialized W is SPD from x^TSx+lambda||x||²>0."
+    },
+    {
+      "original": "Verification 1.2",
+      "restored": "Statement; Proof 1.1-1.2",
+      "claim": "Principal V SPD; positive diagonal; unique soft-threshold coordinate minimizer of Q; finite sweeps well-defined."
+    },
+    {
+      "original": "Verification 2.1",
+      "restored": "Statement; Proof 2.1",
+      "claim": "Finite symmetric candidate, positive spectrum iff SPD, guarded SPD invariant until failure or completion."
+    },
+    {
+      "original": "Verification 2.2",
+      "restored": "Statement; Proof 2.2",
+      "claim": "Bounded-loop termination; on success inverse exists and is SPD; no convergence/optimizer assertion."
+    }
+  ],
+  "steps": [
+    {
+      "step": "1.1",
+      "uses": [
+        "given",
+        "F1"
+      ],
+      "derivation": "Quadratic form positivity at initialization; simultaneous permutation preserves form; extension by zero proves principal-block positivity."
+    },
+    {
+      "step": "1.2",
+      "uses": [
+        "F1",
+        "step 1.1"
+      ],
+      "derivation": "Expand scalar coordinate objective. Construct soft value a and u in [-1,1], ua=|a| and va-r+lambda u=0. Exact difference formula gives q(t)-q(a)>=v(t-a)^2/2, strictly positive for t!=a. Finite real operations divide by v>0."
+    },
+    {
+      "step": "2.1",
+      "uses": [
+        "F1",
+        "F2",
+        "step 1.1",
+        "step 1.2"
+      ],
+      "derivation": "Real finite entries and symmetry; orthogonal eigenbasis establishes iff spectrum test. Induction over actual original-coordinate blocks uses restored indexing."
+    },
+    {
+      "step": "2.2",
+      "uses": [
+        "given",
+        "F1",
+        "F2",
+        "step 1.2",
+        "step 2.1"
+      ],
+      "derivation": "At most Rp blocks times K(p-1) scalar updates; at most Rp tests. Exact finite matrix primitives assumed as in algorithm. Inverse eigenvalues positive."
+    }
+  ],
+  "boundary_checks": [
+    "p=2 leaves one coordinate and zero off-coordinate sum; all formulas still hold.",
+    "r=+lambda or -lambda belongs to |r|<=lambda and unique minimizer is 0.",
+    "Non-SPD candidate returns failure and is never installed as W.",
+    "The diagonal guard stays in the unchanged Definition, although invariant shows it is unreachable for admitted exact inputs.",
+    "No floating-point accuracy, bit complexity, convergence or global graphical-lasso optimum is claimed."
+  ],
+  "supplier_findings": "No supplier defect found in the actual claims/proofs used. Spectral theorem is read-only published context. Positivity and scalar minimization are proved locally, without undeclared convex-analysis/KKT suppliers."
+}

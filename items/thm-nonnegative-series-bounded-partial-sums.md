@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-nonnegative-series-bounded-partial-sums.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -36,21 +37,31 @@ pipeline_run: null
 
 Let $(a_k)$ be a sequence of reals with $a_k \ge 0$ for every $k \in \mathbb{N}$,
 let $s_n = \sum_{k<n} a_k$ be its partial sums and let
-$S = \{\, s_n : n \in \mathbb{N} \,\}$ be the range of $(s_n)$ ([[def-series]]).
+$S = \{\, s_n : n \in \mathbb{N} \,\}$ be the range of $(s_n)$ (Series, partial sums, convergence and the sum, divergence, and the tail series).
 Then:
 
-1. $(s_n)$ is nondecreasing ([[def-monotone-sequence]]) and $s_n \ge 0$ for every
+1. $(s_n)$ is nondecreasing (Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences) and $s_n \ge 0$ for every
    $n$;
 2. $\sum a_k$ converges **if and only if** $S$ is bounded above
-   ([[def-bounded-set]]), and in that case
+   (Lower bound, bounded below, bounded set), and in that case
    $$\sum_{k=0}^{\infty} a_k \;=\; \sup S ,$$
    so in particular $s_n \le \sum_{k=0}^{\infty} a_k$ for every $n$;
 3. if $S$ is not bounded above then $s_n \to +\infty$
-   ([[def-divergence-to-infinity]]) and $\sum a_k$ diverges.
+   (Divergence to $+\infty$ and to $-\infty$) and $\sum a_k$ diverges.
 
 This is the theorem that makes the nonnegative theory work: for terms of one
 sign, convergence is a boundedness question and no candidate limit is ever
 needed. Every comparison test on this page is an application of it.
+
+## Statement references
+
+[[def-series]]
+
+[[def-monotone-sequence]]
+
+[[def-bounded-set]]
+
+[[def-divergence-to-infinity]]
 
 ## Facts & Assumptions
 

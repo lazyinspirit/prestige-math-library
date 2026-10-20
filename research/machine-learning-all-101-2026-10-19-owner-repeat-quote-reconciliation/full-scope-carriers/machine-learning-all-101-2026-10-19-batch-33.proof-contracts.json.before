@@ -1,0 +1,1266 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "33",
+  "note": "Contracts are generated from the completed batch-33 arguments; structural validation does not constitute independent mathematical acceptance.",
+  "scope": [
+    "def-discrete-convolutional-layer",
+    "def-group-action-on-feature-maps",
+    "def-p4-p4m-lattice-symmetry-groups",
+    "def-equivariant-neural-layer",
+    "def-group-convolution",
+    "def-pointwise-nonlinearity-and-pooling-on-group-features",
+    "thm-group-convolution-equivariance",
+    "ex-translation-equivariance-and-zero-padding",
+    "ex-p4-and-p4m-orientation-indexed-features",
+    "ex-nonstrided-subgroup-and-coset-pooling"
+  ],
+  "contracts": {
+    "def-discrete-convolutional-layer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The Definition allows empty input/output index sets and any finite receptive-field K. If K is empty its sum is zero and y(p)=b; if O is empty the output is the unique empty function. Channel counts and stride coordinates remain positive.",
+          "evidence": "The Definition allows empty input/output index sets and any finite receptive-field K. If K is empty its sum is zero and y(p)=b; if O is empty the output is the unique empty function. Channel counts and stride coordinates remain positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The Definition allows empty input/output index sets and any finite receptive-field K. If K is empty its sum is zero and y(p)=b; if O is empty the output is the unique empty function. Channel counts and stride coordinates remain positive.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "1b7516526b02c1cbc19997e0bd752179987563769b4ef7fc75381897c82b0c72"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "With every filter matrix W_delta and bias b zero, the displayed finite sum is zero at each output site for any boundary extension; this is an admitted zero-output layer.",
+          "evidence": "Definition, the following declared clauses/formulas: `one matrix $W_\\delta\\in\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$ for each $\\delta\\in K$, and an output bias row vector $b\\in\\mathbb R^{C_{\\rm out}}$`; `y(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),`. With every filter matrix W_delta and bias b zero, the displayed finite sum is zero at each output site for any boundary extension; this is an admitted zero-output layer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "With every filter matrix W_delta and bias b zero, the displayed finite sum is zero at each output site for any boundary extension; this is an admitted zero-output layer.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "e15008477b079950ad77c9ff95d9c0d958e3b8f8b84a09fa90d56b67d848407c"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "For one input and output channel and a singleton receptive field K={delta}, the formula reduces to y(p)=b+xtilde(a+s* p+delta)W_delta, a single scalar weighted input plus bias.",
+          "evidence": "Definition, the following declared clauses/formulas: `let $C_{\\rm in},C_{\\rm out}$ be positive integers`; `Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$`; `y(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),`. For one input and output channel and a singleton receptive field K={delta}, the formula reduces to y(p)=b+xtilde(a+s* p+delta)W_delta, a single scalar weighted input plus bias.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "For one input and output channel and a singleton receptive field K={delta}, the formula reduces to y(p)=b+xtilde(a+s* p+delta)W_delta, a single scalar weighted input plus bias.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "3346f1648af7edde2df5eab003cf3e53da038b8a9136ba437b6829247ef0f08b"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "A receptive field with no offsets gives the spatially constant bias output, while an empty output set has no sites to evaluate. Neither case needs a nonexistent maximum or division in the convolution formula.",
+          "evidence": "Definition, the following declared clauses/formulas: `Let $D,O\\subseteq\\mathbb Z^2$ be input and output index sets`; `Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$`; `y(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),`. A receptive field with no offsets gives the spatially constant bias output, while an empty output set has no sites to evaluate. Neither case needs a nonexistent maximum or division in the convolution formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "A receptive field with no offsets gives the spatially constant bias output, while an empty output set has no sites to evaluate. Neither case needs a nonexistent maximum or division in the convolution formula.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "00c2d5c15608141c7133a333463e950da5e1c922a06d93b466bd7cee6920b589"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This layer is indexed by subsets of the integer lattice, not a varying interval parameter. Values beyond D are handled by the supplied boundary extension, and output cropping is fixed by O; no universal limiting or endpoint-symmetry claim is made.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "This layer is indexed by subsets of the integer lattice, not a varying interval parameter. Values beyond D are handled by the supplied boundary extension, and output cropping is fixed by O; no universal limiting or endpoint-symmetry claim is made.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "551c2415a71cdb92afc420942b160da03126b9db5dd0a311f2dde37e7601eae1"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The extension xtilde, filter matrices, bias, stride and origin are supplied data. The output is their explicit finite sum; the definition does not choose an extension or optimizer from an arbitrary family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The extension xtilde, filter matrices, bias, stride and origin are supplied data. The output is their explicit finite sum; the definition does not choose an extension or optimizer from an arbitrary family.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "6cb2b9225aa964e1ba9b71f1b9d11576c9d759efe19d818356625862939285ce"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed expression constructs a cross-correlation layer from its receptive field and channel weights. It is not a characterization asserting that every map with a locality property has this representation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The displayed expression constructs a cross-correlation layer from its receptive field and channel weights. It is not a characterization asserting that every map with a locality property has this representation.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "ea04b099ba5fcb9e1d1880fea3a818f4afd6b0814885df2f48b6ea4bdf6db5cd"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse infers filter sharing, padding or stride from an output behavior. The Definition explicitly notes that the chosen cropping/extension/stride need not preserve lattice symmetry.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse infers filter sharing, padding or stride from an output behavior. The Definition explicitly notes that the chosen cropping/extension/stride need not preserve lattice symmetry.",
+            "item_sha256": "0617cbbe31f4dc75ecc84f9af293a6d36a21aef356eb3e47662bedc77fa23339",
+            "row_sha256": "3f1148e376fe225452890b8f44c9cf23170e6d0694936ab7fc9caf25dd730abd"
+          }
+        }
+      ]
+    },
+    "def-group-action-on-feature-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every\nelement is invertible ([[def-invertible-element]]). Written out, a group is a set\n$G$ with a binary operation $*$ ([[def-binary-operation]]) and an element\n$e \\in G$ such that\n\n- **(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;\n- **(G2)** $e * x = x = x * e$ for every $x \\in G$;\n- **(G3)** for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.\n\nBy [[lem-identity-unique]] the element $e$ of (G2) is unique, and by\n[[lem-inverse-unique]] the element $y$ of (G3) is unique for each $x$ and is\ndetermined by either one of the two equations alone. So the notations $e$ for the\nidentity and $x^{-1}$ for the inverse of $x$ are legitimate, and asserting\n$y * x = e$ alone already says $y = x^{-1}$.\n\nA group is **abelian**, or **commutative**, when its operation is commutative:\n$x * y = y * x$ for all $x, y \\in G$.\n\n**Notation.** The operation is usually written multiplicatively, $xy$ for\n$x * y$, with identity $e$ (or $1$) and inverse $x^{-1}$. For an abelian group it\nis often written additively, $x + y$, with identity $0$ and inverse $-x$; the two\nnotations describe the same notion and nothing below depends on the choice. We\nwrite $G$ for the group when the operation is understood.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-action",
+          "claim": "For each $x\\in S$, $(L_e f)(x)=f(e^{-1}\\cdot x)=f(x)$ by the identity law in [F1], so $L_e f=f$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "composition-action",
+          "claim": "For $u,v\\in G$, the element $v^{-1}u^{-1}$ is a two-sided inverse of $uv$, since $(uv)(v^{-1}u^{-1})=u(vv^{-1})u^{-1}=e$ and $(v^{-1}u^{-1})(uv)=v^{-1}(u^{-1}u)v=e$. Two two-sided inverses $a,b$ of an element $z$ coincide because $a=a(zb)=(az)b=b$; hence $(uv)^{-1}=v^{-1}u^{-1}$. Therefore, for each $x\\in S$, $(L_u(L_v f))(x)=f(v^{-1}\\cdot(u^{-1}\\cdot x))=f((v^{-1}u^{-1})\\cdot x)=f((uv)^{-1}\\cdot x)=(L_{uv}f)(x)$ by [F1]. Thus $L_uL_v=L_{uv}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For S empty the unique feature map satisfies the identity and composition laws pointwise; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero-valued feature map both induced transformations remain zero; see step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the trivial group, step 1.1 is the identity and step 2.1 reduces to the same map."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A trivial site action still satisfies the two verified laws; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered or topological endpoint is part of the action definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use only the named group elements and their inverses; no choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item verifies a definition and does not state an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item verifies a definition and does not state an iff claim."
+        }
+      ]
+    },
+    "def-p4-p4m-lattice-symmetry-groups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every\nelement is invertible ([[def-invertible-element]]). Written out, a group is a set\n$G$ with a binary operation $*$ ([[def-binary-operation]]) and an element\n$e \\in G$ such that\n\n- **(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;\n- **(G2)** $e * x = x = x * e$ for every $x \\in G$;\n- **(G3)** for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.\n\nBy [[lem-identity-unique]] the element $e$ of (G2) is unique, and by\n[[lem-inverse-unique]] the element $y$ of (G3) is unique for each $x$ and is\ndetermined by either one of the two equations alone. So the notations $e$ for the\nidentity and $x^{-1}$ for the inverse of $x$ are legitimate, and asserting\n$y * x = e$ alone already says $y = x^{-1}$.\n\nA group is **abelian**, or **commutative**, when its operation is commutative:\n$x * y = y * x$ for all $x, y \\in G$.\n\n**Notation.** The operation is usually written multiplicatively, $xy$ for\n$x * y$, with identity $e$ (or $1$) and inverse $x^{-1}$. For an abelian group it\nis often written additively, $x + y$, with identity $0$ and inverse $-x$; the two\nnotations describe the same notion and nothing below depends on the choice. We\nwrite $G$ for the group when the operation is understood.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "point-groups",
+          "claim": "The matrices satisfy $\\rho^4=I$, $\\sigma^2=I$, and $\\sigma\\rho\\sigma=\\rho^{-1}$. The rotation matrices are $I,\\rho,-I,-\\rho$, hence distinct; their products add exponents modulo $4$, and $(\\rho^j)^{-1}=\\rho^{-j}$. The four matrices $\\sigma,\\rho\\sigma,-\\sigma,-\\rho\\sigma$ are distinct, have determinant $-1$, and differ from the rotations, which have determinant $1$. Thus $C_4$ has four elements and $D_4$ has eight. Writing elements of $D_4$ as $\\rho^j\\sigma^\\epsilon$ with $\\epsilon\\in\\{0,1\\}$, the relation $\\sigma\\rho^j=\\rho^{-j}\\sigma$ shows products stay in $D_4$, and $(\\rho^j\\sigma^\\epsilon)^{-1}=\\rho^{-(-1)^\\epsilon j}\\sigma^\\epsilon$ also lies in $D_4$. Both matrix groups preserve $\\mathbb Z^2$ because $\\rho$ and $\\sigma$ are signed permutation matrices.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "affine-groups",
+          "claim": "For either matrix group $A$, the pair multiplication is closed on $\\mathbb Z^2\\times A$. It is associative because both parenthesizations of three factors $(t,M),(s,N),(r,Q)$ equal $(t+Ms+MN r,MNQ)$. Its identity is $(0,I)$. For every pair $(t,M)$, the pair $(-M^{-1}t,M^{-1})$ belongs to the same set by 1.1, and $(t,M)(-M^{-1}t,M^{-1})=(0,I)=(-M^{-1}t,M^{-1})(t,M)$. Thus $P_{C_4}$ and $P_{D_4}$ satisfy the group axioms in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lattice-actions-and-size",
+          "claim": "The identity pair acts identically because $(0,I)\\cdot x=x$. The affine maps respect pair multiplication because $M(Nx+s)+t=MNx+Ms+t$, so $((t,M)(s,N))\\cdot x=(t,M)\\cdot((s,N)\\cdot x)$ and [F2] holds. The translations $(t,I)$ are distinct as $t$ ranges over $\\mathbb Z^2$, so each full group is infinite.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The affine pair sets contain the identity pair, so an empty group is outside this definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At zero translation, (0,I) is the identity pair; see step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity matrix I and pair (0,I) are explicitly used in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two finite point groups C4 and D4 are separately handled before the pair construction; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The groups are discrete algebraic sets; there is no ordered interval or endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite matrix groups and explicit inverse formula require no choices; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition and verification do not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition and verification do not state a biconditional."
+        }
+      ]
+    },
+    "def-equivariant-neural-layer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "If X is empty, a supplied layer Phi:X->Y is the unique empty function and the displayed equivariance identity is vacuous. If Y is empty and X is nonempty no such supplied function exists; that pair is outside the layer data.",
+          "evidence": "Definition, the following declared clauses/formulas: `A layer is a function $\\Phi:X\\to Y$.`; `\\Phi(T_gx)=T'_g\\Phi(x)\\qquad(g\\in G,\\ x\\in X).`. If X is empty, a supplied layer Phi:X->Y is the unique empty function and the displayed equivariance identity is vacuous. If Y is empty and X is nonempty no such supplied function exists; that pair is outside the layer data.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "If X is empty, a supplied layer Phi:X->Y is the unique empty function and the displayed equivariance identity is vacuous. If Y is empty and X is nonempty no such supplied function exists; that pair is outside the layer data.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "88892fe118b57cfa3b6c495b4f775e6ef7f280afc53b8dbec35d752c0432388c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The feature spaces X and Y are arbitrary acted-on sets; the definition supplies neither addition nor a distinguished zero element, so a zero-vector boundary is not part of these data.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The feature spaces X and Y are arbitrary acted-on sets; the definition supplies neither addition nor a distinguished zero element, so a zero-vector boundary is not part of these data.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "f5b88a44feb0977ae6784de235b6b21d48ed29fc0ca37e3e5510f05b28df9717"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "For the one-element group the only action element is the identity, so equivariance reduces to Phi(x)=Phi(x) and every supplied function is equivariant. This follows directly from the displayed action identity.",
+          "evidence": "Definition, the following declared clauses/formulas: `Let a group $G$ act on sets $X$ and $Y$ by left actions $T$ and $T'$, respectively.`; `\\Phi(T_gx)=T'_g\\Phi(x)\\qquad(g\\in G,\\ x\\in X).`. For the one-element group the only action element is the identity, so equivariance reduces to Phi(x)=Phi(x) and every supplied function is equivariant. This follows directly from the displayed action identity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "For the one-element group the only action element is the identity, so equivariance reduces to Phi(x)=Phi(x) and every supplied function is equivariant. This follows directly from the displayed action identity.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "4680a948f12afe6046b78659a6649f32fc1d1e00d1d28394dc1dc2a1d0b70cc5"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "A trivial output action is explicitly admitted: Tprime_g is the identity for every g, and the Definition names the resulting equivariant condition G-invariance. Input and output actions are not required to coincide.",
+          "evidence": "A trivial output action is explicitly admitted: Tprime_g is the identity for every g, and the Definition names the resulting equivariant condition G-invariance. Input and output actions are not required to coincide.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "A trivial output action is explicitly admitted: Tprime_g is the identity for every g, and the Definition names the resulting equivariant condition G-invariance. Input and output actions are not required to coincide.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "bc98f70be96dadcea1fee086df7d05daf972adae0c9e3d534f0fec56961a0bf1"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Equivariance quantifies over group elements and points of acted-on sets. No metric, parameter interval or continuous limiting process is specified, so it has no numerical endpoint case.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Equivariance quantifies over group elements and points of acted-on sets. No metric, parameter interval or continuous limiting process is specified, so it has no numerical endpoint case.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "d4fee37ec5699e2109e754f8dec0fbd9d86dfd135a1788219cd0f7b5707dceba"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both actions and the function Phi are already supplied. Testing their equality at each (g,x) requires no choice of orbit representatives or selected map from a family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Both actions and the function Phi are already supplied. Testing their equality at each (g,x) requires no choice of orbit representatives or selected map from a family.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "e53672d587b632dd7c04c9e07ff05668c06df1a36907d9a1062eeb1948550b49"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "By the defining criterion, a layer called G-equivariant satisfies Phi(T_g x)=Tprime_g Phi(x) for every g and x. This is the forward reading of its stated property definition.",
+          "evidence": "By the defining criterion, a layer called G-equivariant satisfies Phi(T_g x)=Tprime_g Phi(x) for every g and x. This is the forward reading of its stated property definition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "By the defining criterion, a layer called G-equivariant satisfies Phi(T_g x)=Tprime_g Phi(x) for every g and x. This is the forward reading of its stated property definition.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "494907eb7ff85570867e4b39c0cedbdd39c9587226f3f2442bc7ca8d3adf23e7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Conversely, a supplied layer satisfying the displayed identity for all group elements and inputs meets exactly the Definition of G-equivariance; no equality of the input and output actions is additionally required.",
+          "evidence": "Conversely, a supplied layer satisfying the displayed identity for all group elements and inputs meets exactly the Definition of G-equivariance; no equality of the input and output actions is additionally required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Conversely, a supplied layer satisfying the displayed identity for all group elements and inputs meets exactly the Definition of G-equivariance; no equality of the input and output actions is additionally required.",
+            "item_sha256": "4f662385fff3fe4b12fabc4a5e86f82998473da4e4925c38831bdc881a11956e",
+            "row_sha256": "77603711ecef29a8b1b4c9f49145708165fa4df4d30f778f3513935b968c2745"
+          }
+        }
+      ]
+    },
+    "def-group-convolution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "A filter with empty support is the zero filter and both displayed correlations are zero; the corresponding sums converge absolutely. The group itself cannot be empty because it contains its identity, and channel counts stay positive.",
+          "evidence": "Definition, the following declared clauses/formulas: `(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).`; `(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).`; `Each displayed sum is required to have finite support or to converge absolutely in every output coordinate.`. A filter with empty support is the zero filter and both displayed correlations are zero; the corresponding sums converge absolutely. The group itself cannot be empty because it contains its identity, and channel counts stay positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "A filter with empty support is the zero filter and both displayed correlations are zero; the corresponding sums converge absolutely. The group itself cannot be empty because it contains its identity, and channel counts stay positive.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "f7403686627ddb841ef87561ea19dc35d1708e73e6f37d3a98146aa75f0d0f63"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "If f or Psi is identically zero, each matrix-product summand vanishes, so the output correlation is zero at every g. This meets the stated finite-support/absolute-convergence requirement.",
+          "evidence": "Definition, the following declared clauses/formulas: `(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).`; `(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).`; `Each displayed sum is required to have finite support or to converge absolutely in every output coordinate.`. If f or Psi is identically zero, each matrix-product summand vanishes, so the output correlation is zero at every g. This meets the stated finite-support/absolute-convergence requirement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "If f or Psi is identically zero, each matrix-product summand vanishes, so the output correlation is zero at every g. This meets the stated finite-support/absolute-convergence requirement.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "dc56e08a01ab13a87a0b90a725dfdb3cbcab9747f9fe4e09b292a9b008e156b8"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "For a one-element group G={e}, the group-to-group correlation has the single term f(e)Psi(e). With one input and output channel it is ordinary scalar multiplication; the lattice-to-group formula retains its own lattice index set.",
+          "evidence": "Definition, the following declared clauses/formulas: `Let $G$ be a discrete group`; `Let $C_{\\rm in},C_{\\rm out}$ be positive integers`; `(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).`. For a one-element group G={e}, the group-to-group correlation has the single term f(e)Psi(e). With one input and output channel it is ordinary scalar multiplication; the lattice-to-group formula retains its own lattice index set.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "For a one-element group G={e}, the group-to-group correlation has the single term f(e)Psi(e). With one input and output channel it is ordinary scalar multiplication; the lattice-to-group formula retains its own lattice index set.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "528c58a09d81080b38397a367e9e3b38e652a5b7c74c80e92ea17b33d8717c38"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "No invertibility or full-rank condition is imposed on the filter matrices. Zero or singular channel-mixing matrices are admitted and their products are still defined, subject only to the explicit support/convergence condition.",
+          "evidence": "Definition, the following declared clauses/formulas: `a filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$`; `(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).`; `Each displayed sum is required to have finite support or to converge absolutely in every output coordinate.`. No invertibility or full-rank condition is imposed on the filter matrices. Zero or singular channel-mixing matrices are admitted and their products are still defined, subject only to the explicit support/convergence condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No invertibility or full-rank condition is imposed on the filter matrices. Zero or singular channel-mixing matrices are admitted and their products are still defined, subject only to the explicit support/convergence condition.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "adb4394ef260b33b1993bb01c3f6419bc06958693a3782c8173063cdfb434800"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The indexing objects are a discrete group and the full lattice, with no ordered interval or finite-horizon endpoint. The stated support/absolute-convergence condition governs the sums rather than a boundary truncation limit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The indexing objects are a discrete group and the full lattice, with no ordered interval or finite-horizon endpoint. The stated support/absolute-convergence condition governs the sums rather than a boundary truncation limit.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "77d699eb3973dce65fde0dc358284a9acdf155231b4de1af6dca3cd5a04cb2f2"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Group multiplication/inversion and the given feature/filter maps determine each summand. No selection of group representatives or minimizers is needed to define either correlation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Group multiplication/inversion and the given feature/filter maps determine each summand. No selection of group representatives or minimizers is needed to define either correlation.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "c4afd0f9c83a9c180945e4fa8c3d8db50dc8a0ea5c5b033df497b8c27f5200a4"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition supplies two correlation formulas on their distinct input spaces, not an equivalence saying every equivariant map has a convolution representation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The definition supplies two correlation formulas on their distinct input spaces, not an equivalence saying every equivariant map has a convolution representation.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "898694448129018ca682ff27a61dcd27ef8953549bcbf737f338d7c1e3aaf3ef"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse derives feature/filter data from a group-indexed output. The text expressly allows noncommutative correlation and does not assert a commutativity equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse derives feature/filter data from a group-indexed output. The text expressly allows noncommutative correlation and does not assert a commutativity equivalence.",
+            "item_sha256": "e8175f85a5436a9df384bf8cd43641a50b130591f964f9f47360a59094bb4eb7",
+            "row_sha256": "717980338543bd29f6c6305a34a864a79a1d6779cc15ba450dd59e5fa95bad5a"
+          }
+        }
+      ]
+    },
+    "def-pointwise-nonlinearity-and-pooling-on-group-features": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is\na **subgroup** of $G$, written $H \\le G$, when\n\n- **(S1)** $e \\in H$;\n- **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$\n  ([[def-binary-operation]]);\n- **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.\n\nBy (S2) the operation of $G$ restricts to a binary operation on $H$; it is\nassociative there because it is associative on $G$, the element $e$ of (S1) is a\ntwo-sided identity for it ([[def-identity-element]]), and (S3) supplies for each\n$x \\in H$ a two-sided inverse lying in $H$ ([[def-invertible-element]]). So a\nsubgroup, with the restricted operation, is itself a group, and its identity and\nits inverses are those of $G$.\n\nEvery group $G$ has the two **trivial subgroups** $\\{e\\}$ and $G$ itself; a\nsubgroup $H$ with $H \\ne G$ is called **proper**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-coset",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $H\\le G$ be a subgroup ([[def-group]],\n[[def-subgroup]]). For $g\\in G$, the **left coset** and **right coset** of $H$\nrepresented by $g$ are\n\n$$gH:=\\{gh:h\\in H\\},\\qquad Hg:=\\{hg:h\\in H\\}.$$\n\nThe element $g$ is a **representative** of these cosets. The notation denotes\nsubsets of $G$; it does not assert that either subset is a subgroup.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coset-action",
+          "claim": "If $gH=g'H$, then $g'=g'e\\in g'H=gH$, so [F2] gives $g'=gh_0$ for some $h_0\\in H$. By [F1], $h_0H\\subseteq H$; conversely, every $k\\in H$ equals $h_0(h_0^{-1}k)$ with $h_0^{-1}k\\in H$, so $H\\subseteq h_0H$. Hence $h_0H=H$ and $(ag')H=(ag h_0)H=ag(h_0H)=agH$, proving that $a\\cdot(gH)=(ag)H$ is independent of the representative. It satisfies the identity and composition laws in [F3] because $eg=g$ and $(ab)g=a(bg)$. Thus it is a left action on $G/H$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coset-pool",
+          "claim": "If $g'=gh_0$ with $h_0\\in H$, then $h_0H=H$: closure gives $h_0H\\subseteq H$, and for $k\\in H$, $k=h_0(h_0^{-1}k)\\in h_0H$ by [F1]. Hence $\\{g'h:h\\in H\\}=\\{gh:h\\in H\\}$, so the componentwise maximum defining $Q_HF(gH)$ is independent of the representative.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "operations-defined",
+          "claim": "By [F1], $H$ contains the identity, so $H$ and the given set $U$ are nonempty and finite. Each displayed maximum therefore exists in $\\mathbb R$; the pointwise operation and subgroup restriction are also functions on their stated domains. Thus all four operators in the Definition are well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Neighborhood pooling explicitly requires U finite and nonempty. A subgroup H contains the identity, so H, every coset gH, the group G and its coset set are nonempty; proof step 2.1 therefore takes maxima only over nonempty finite sets. The phrase indexed by names these nonempty domains, not an empty pooling case.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Neighborhood pooling explicitly requires U finite and nonempty. A subgroup H contains the identity, so H, every coset gH, the group G and its coset set are nonempty; proof step 2.1 therefore takes maxima only over nonempty finite sets. The phrase indexed by names these nonempty domains, not an empty pooling case. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
+            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\bindexed by\\b)"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a zero feature map every finite maximum is zero; see steps 1.2 and 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With U={e} or H={e}, the pool is the single indexed value; see steps 1.2 and 1.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cases H={e} and finite H=G are included in the representative and maximum arguments; see steps 1.1–1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The indexing sets are groups and cosets, not ordered intervals with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The formula is independent of coset representatives and takes maxima over finite sets; no representative is chosen in steps 1.1–1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition verification is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition verification is not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Independently checked Definition and steps 1.1, 1.2, 2.1 against def-subgroup, def-coset, def-group-action and induced feature actions. Equal cosets give gprime=g h0; multiplication by h0 permutes H, proving representative independence for action and maxima. H contains e; H and U are finite nonempty where maxima occur. H={e}, H=G finite, zero/constant features and channelwise evaluation are valid. Infinite H is allowed for restriction/action, never for finite max pooling. No normality or AC is assumed. Cohen–Welling §§6.2–6.3 equations 14–17 agree with right-neighborhood and left-action conventions. Reader/refuter report no findings; no defect or missing prerequisite confirmed."
+      }
+    },
+    "thm-group-convolution-equivariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$ (Semigroup and monoid) in which every\nelement is invertible (Left inverse, right inverse, and invertible element of a monoid). Written out, a group is a set\n$G$ with a binary operation $*$ (Binary operation on a set; associativity, commutativity, and a subset closed under the operation) and an element\n$e \\in G$ such that\n\n- **(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;\n- **(G2)** $e * x = x = x * e$ for every $x \\in G$;\n- **(G3)** for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.\n\nBy A left identity and a right identity for the same binary operation are equal; hence there is at most one two-sided identity the element $e$ of (G2) is unique, and by\nIn a monoid, a left inverse and a right inverse of the same element are equal; hence an invertible element has exactly one inverse, and it is two-sided the element $y$ of (G3) is unique for each $x$ and is\ndetermined by either one of the two equations alone. So the notations $e$ for the\nidentity and $x^{-1}$ for the inverse of $x$ are legitimate, and asserting\n$y * x = e$ alone already says $y = x^{-1}$.\n\nA group is **abelian**, or **commutative**, when its operation is commutative:\n$x * y = y * x$ for all $x, y \\in G$.\n\n**Notation.** The operation is usually written multiplicatively, $xy$ for\n$x * y$, with identity $e$ (or $1$) and inverse $x^{-1}$. For an abelian group it\nis often written additively, $x + y$, with identity $0$ and inverse $-x$; the two\nnotations describe the same notion and nothing below depends on the choice. We\nwrite $G$ for the group when the operation is understood.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group-action-on-feature-maps",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group acting on the left on a set $S$, and let $V$ be a set of feature values. A feature map is a function $f:S\\to V$. For $u\\in G$, the induced transformation of feature maps is\n\n$$\n(L_u f)(x)=f(u^{-1}\\cdot x)\\qquad(x\\in S).\n$$\n\nIt is a left action on the set of feature maps: the group acts by reindexing sites and leaves the feature values unchanged. In particular, for maps $F:G\\to V$ on the group itself with its left multiplication action, $(L_uF)(g)=F(u^{-1}g)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-group-convolution",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a discrete group acting on the lattice $\\mathbb Z^2$ on the left. Let $C_{\\rm in},C_{\\rm out}$ be positive integers, and regard channel vectors as row vectors. For a feature map $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the group-to-group cross-correlation is the map $C_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation is the map $E_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).\n$$\n\nEach displayed sum is required to have finite support or to converge absolutely in every output coordinate. The first operation takes group-indexed features and filters; the second takes lattice-indexed image features and filters and returns group-indexed features. These are cross-correlations, with the filter argument displayed as written; they need not be commutative, and no finiteness of $G$ is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-group-convolution",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a discrete group acting on the lattice $\\mathbb Z^2$ on the left. Let $C_{\\rm in},C_{\\rm out}$ be positive integers, and regard channel vectors as row vectors. For a feature map $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the group-to-group cross-correlation is the map $C_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation is the map $E_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).\n$$\n\nEach displayed sum is required to have finite support or to converge absolutely in every output coordinate. The first operation takes group-indexed features and filters; the second takes lattice-indexed image features and filters and returns group-indexed features. These are cross-correlations, with the filter argument displayed as written; they need not be commutative, and no finiteness of $G$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-pointwise-nonlinearity-and-pooling-on-group-features",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $F:G\\to\\mathbb R^C$ be a feature map with $C$ channels. A pointwise nonlinearity determined by $\\nu:\\mathbb R\\to\\mathbb R$ is $N_\\nu F$, where $(N_\\nu F)(g)_c=\\nu(F(g)_c)$. For a nonempty finite set $U\\subseteq G$, non-strided neighborhood max pooling is $P_UF$, where $(P_UF)(g)_c=\\max_{u\\in U}F(gu)_c$; the output is still indexed by $G$. For a subgroup $H\\le G$, subgroup sampling is the restriction $R_HF=F|_H$, indexed by $H$.\n\nThe left-coset set is $G/H=\\{gH:g\\in G\\}$, where $gH=\\{gh:h\\in H\\}$. Its left $G$-action is $a\\cdot(gH)=(ag)H$. For finite $H$, left-coset max pooling is the map $Q_HF:G/H\\to\\mathbb R^C$ given by $(Q_HF)(gH)_c=\\max_{h\\in H}F(gh)_c$. All maxima are taken separately in each channel. When $H=G$ is finite, $G/H$ has one element and $Q_HF$ is a group-invariant summary.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-equivariant-neural-layer",
+          "source_section": "Definition",
+          "quote": "Let a group $G$ act on sets $X$ and $Y$ by left actions $T$ and $T'$, respectively. A layer is a function $\\Phi:X\\to Y$. It is $G$-equivariant when\n\n$$\n\\Phi(T_gx)=T'_g\\Phi(x)\\qquad(g\\in G,\\ x\\in X).\n$$\n\nThe input and output actions need not be the same. The layer is $G$-invariant when $\\Phi(T_gx)=\\Phi(x)$ for every $g\\in G$ and $x\\in X$; equivalently, it is equivariant into $Y$ equipped with the trivial action.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-discrete-convolutional-layer",
+          "source_section": "Definition",
+          "quote": "Let $D,O\\subseteq\\mathbb Z^2$ be input and output index sets, let $C_{\\rm in},C_{\\rm out}$ be positive integers, and let $x:D\\to\\mathbb R^{C_{\\rm in}}$ assign a row vector of input channels to each input site. A boundary extension is a function $\\widetilde x:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ whose restriction to $D$ is $x$; zero padding is the extension that is zero off $D$. Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$, a positive integer stride vector $s\\in\\mathbb Z_{>0}^2$, an origin $a\\in\\mathbb Z^2$, one matrix $W_\\delta\\in\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$ for each $\\delta\\in K$, and an output bias row vector $b\\in\\mathbb R^{C_{\\rm out}}$. The discrete convolutional layer is the map $y:O\\to\\mathbb R^{C_{\\rm out}}$ given by\n\n$$\ny(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),\n$$\n\nwhere $s\\odot p$ is coordinatewise multiplication. Thus each output uses only the input sites in its receptive field, mixes input channels by matrix multiplication, and uses the same weights and bias at every output site. With unit stride on the full lattice and no boundary truncation, this formula is a discrete cross-correlation; many machine-learning software packages call it convolution. Mathematical convolution instead reverses the kernel offsets. The choices of $O$, the extension $\\widetilde x$, and the stride specify cropping, padding, and subsampling, and need not preserve a symmetry of the full lattice.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-p4-p4m-lattice-symmetry-groups",
+          "source_section": "Definition",
+          "quote": "Let $\\rho=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ be the quarter-turn matrix and $\\sigma=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ a reflection matrix. Let $C_4=\\{\\rho^j:j=0,1,2,3\\}$ and $D_4=\\{\\rho^j,\\rho^j\\sigma:j=0,1,2,3\\}$, with matrix multiplication. For $A=C_4$ or $D_4$, define $P_A=\\mathbb Z^2\\times A$ with multiplication\n\n$$\n(t,M)(s,N)=(t+Ms,MN).\n$$\n\nEach pair $(t,M)$ acts on lattice sites by $x\\mapsto Mx+t$. The p4 lattice-symmetry group is $P_{C_4}$, generated by integer translations and quarter-turns. The p4m lattice-symmetry group is $P_{D_4}$, generated by integer translations, quarter-turns, and reflections. The point groups $C_4$ and $D_4$ have four and eight elements, respectively, but both full groups are infinite because they contain every integer translation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-equivariant-map-of-group-actions",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be $G$-sets (Left group actions, transitive actions, and faithful actions). A function\n$f:X\\to Y$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain) is **$G$-equivariant** when\n\n$$f(g\\cdot x)=g\\cdot f(x)$$\n\nfor every $g\\in G$ and $x\\in X$. An **isomorphism of $G$-sets** is an\nequivariant bijection (Injection, surjection, bijection). Two actions are\n**equivariantly isomorphic** when such a bijection exists between their\n$G$-sets.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group (Group and abelian group) with identity $e$. A subset $H \\subseteq G$ is\na **subgroup** of $G$, written $H \\le G$, when\n\n- **(S1)** $e \\in H$;\n- **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$\n  (Binary operation on a set; associativity, commutativity, and a subset closed under the operation);\n- **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.\n\nBy (S2) the operation of $G$ restricts to a binary operation on $H$; it is\nassociative there because it is associative on $G$, the element $e$ of (S1) is a\ntwo-sided identity for it (Left identity, right identity, and two-sided identity for a binary operation), and (S3) supplies for each\n$x \\in H$ a two-sided inverse lying in $H$ (Left inverse, right inverse, and invertible element of a monoid). So a\nsubgroup, with the restricted operation, is itself a group, and its identity and\nits inverses are those of $G$.\n\nEvery group $G$ has the two **trivial subgroups** $\\{e\\}$ and $G$ itself; a\nsubgroup $H$ with $H \\ne G$ is called **proper**.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-coset",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $H\\le G$ be a subgroup (Group and abelian group,\nSubgroup). For $g\\in G$, the **left coset** and **right coset** of $H$\nrepresented by $g$ are\n\n$$gH:=\\{gh:h\\in H\\},\\qquad Hg:=\\{hg:h\\in H\\}.$$\n\nThe element $g$ is a **representative** of these cosets. The notation denotes\nsubsets of $G$; it does not assert that either subset is a subgroup.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "group-correlation",
+          "claim": "For group-to-group correlation, $(C_\\Psi(L_uf))(g)=\\sum_{h\\in G}f(u^{-1}h)\\Psi(g^{-1}h)$. Reindex by the bijection $h=uk$ to obtain $\\sum_{k\\in G}f(k)\\Psi(g^{-1}uk)$. The identity $(u^{-1}g)^{-1}=g^{-1}u$ follows because both products of $u^{-1}g$ and $g^{-1}u$ are $e$ by associativity and the two-sided inverse laws; two two-sided inverses $a,b$ of $z$ coincide since $a=a(zb)=(az)b=b$. Hence the sum is $\\sum_{k\\in G}f(k)\\Psi((u^{-1}g)^{-1}k)=(C_\\Psi f)(u^{-1}g)=(L_u(C_\\Psi f))(g)$. The reindexing is valid for finite support or absolute convergence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pointwise-and-neighborhood-pool",
+          "claim": "For every channel $c$, $(N_\\nu(L_uF))(g)_c=\\nu(F(u^{-1}g)_c)=(L_u(N_\\nu F))(g)_c$. Likewise, $(P_U(L_uF))(g)_c=\\max_{v\\in U}F(u^{-1}gv)_c=(P_UF)(u^{-1}g)_c=(L_u(P_UF))(g)_c$. Thus both operators commute with the left action.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "subgroup-and-coset-pool",
+          "claim": "For $a\\in H$ and $h\\in H$, $(R_H(L_aF))(h)=F(a^{-1}h)=(L_a(R_HF))(h)$ because $a^{-1}h\\in H$ by [F11]; this proves only $H$-equivariance after subgroup restriction. For finite $H$ and arbitrary $a\\in G$, $(Q_H(L_aF))(gH)_c=\\max_{h\\in H}F(a^{-1}gh)_c=(Q_HF)((a^{-1}g)H)_c=(L_a^{G/H}(Q_HF))(gH)_c$, using the left-coset indexing in [F12] and the action stated in [F6]. If $H=G$ is finite then $G/H$ is a singleton, whose action is trivial, so the output is invariant.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F6",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "image-to-group",
+          "claim": "For the first-layer operation, $(E_\\Psi(L_uf))(g)=\\sum_{x\\in\\mathbb Z^2}f(u^{-1}\\cdot x)\\Psi(g^{-1}\\cdot x)$. The map $x=u\\cdot y$ is a bijection of $\\mathbb Z^2$ with inverse $y=u^{-1}\\cdot x$ by [F1], so reindexing gives $\\sum_{y\\in\\mathbb Z^2}f(y)\\Psi(g^{-1}\\cdot(u\\cdot y))=\\sum_{y\\in\\mathbb Z^2}f(y)\\Psi((g^{-1}u)\\cdot y)=(E_\\Psi f)(u^{-1}g)=(L_u(E_\\Psi f))(g)$, using the inverse identity in 1.1. Absolute convergence or finite support justifies the reindexing. For $G=\\mathbb Z^2$ acting by translations, $\\Psi(\\delta)=W_\\delta$ with finite support, full-lattice input and output domains, unit stride, and origin $a=0$, setting $x=p+\\delta$ identifies the sum in this formula with the cross-correlation term of the layer in [F8]. For any fixed origin $a$, that sum is instead $(E_\\Psi f)(p+a)$, which remains translation-equivariant because translations of $\\mathbb Z^2$ commute. The layer's output bias is constant across $p$, so the induced translation action fixes it; adding it preserves equivariance of the full layer.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stacking-and-scope",
+          "claim": "If $\\Phi$ and $\\Psi$ are equivariant maps for compatible input, intermediate, and output actions, then $(\\Psi\\circ\\Phi)(T_gx)=\\Psi(T'_g\\Phi(x))=T''_g(\\Psi\\circ\\Phi)(x)$ by [F7] and [F10]; induction gives equivariance of any finite stack. The reindexings in steps 1.1 and 2.1 require actual group actions on the full index sets, while [F8] permits arbitrary finite-grid boundary and stride choices; therefore those choices are covered only when compatible with the actions. In particular [F9] shows no finite-group assumption was used for p4 or p4m.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty support gives zero sums on both sides of the correlations; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero feature maps give equal zero correlation outputs; see step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group or U={e} reduces the relevant equalities to the identity action; see steps 1.1 and 1.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The subgroup H=G finite case yields a singleton coset and invariance; see step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or endpoint is used; the finite-grid boundary condition is separately stated in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Reindexings use explicit bijections h=uk and x=u·y and require no choice; see steps 1.1 and 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts equivariance implications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts equivariance implications, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Checked all six proof steps and all twelve current supplier interfaces independently. In 1.1 h=u k is a bijection, with (u^-1 g)^-1=g^-1 u; in 2.1 x=u.y is bijective by the action inverse laws. Finite support or coordinatewise absolute convergence permits both reindexings, without interchanging infinite channel sums. First-layer output is group-indexed while input is lattice-indexed. Unit stride/full lattice identifies translation correlation, fixed origin commutes with translations and constant bias is fixed. Steps 1.2/1.3 correctly use right neighborhoods and left cosets; restriction guarantees only subgroup equivariance and finite H=G yields a singleton invariant. Compatible-action composition is proved and finite-grid compatibility remains explicit. Zero filters, trivial groups/subgroups, singleton neighborhoods and empty finite stacks cause no counterexample; no AC or normality is needed. Checked square arrows X->Y, T_u down X and Tprime_u down Y: both paths equal the stated intertwining equation, independent of proof. Cohen–Welling §§2,4–6 equations 1,4–5,7–12,14–17 support conventions; reader/refuter findings empty. Only reader change was contract quotation normalization to the corrected point-group supplier; source is unchanged and sound."
+      }
+    },
+    "ex-translation-equivariance-and-zero-padding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-convolutional-layer",
+          "source_section": "Definition",
+          "quote": "Let $D,O\\subseteq\\mathbb Z^2$ be input and output index sets, let $C_{\\rm in},C_{\\rm out}$ be positive integers, and let $x:D\\to\\mathbb R^{C_{\\rm in}}$ assign a row vector of input channels to each input site. A boundary extension is a function $\\widetilde x:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ whose restriction to $D$ is $x$; zero padding is the extension that is zero off $D$. Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$, a positive integer stride vector $s\\in\\mathbb Z_{>0}^2$, an origin $a\\in\\mathbb Z^2$, one matrix $W_\\delta\\in\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$ for each $\\delta\\in K$, and an output bias row vector $b\\in\\mathbb R^{C_{\\rm out}}$. The discrete convolutional layer is the map $y:O\\to\\mathbb R^{C_{\\rm out}}$ given by\n\n$$\ny(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),\n$$\n\nwhere $s\\odot p$ is coordinatewise multiplication. Thus each output uses only the input sites in its receptive field, mixes input channels by matrix multiplication, and uses the same weights and bias at every output site. With unit stride on the full lattice and no boundary truncation, this formula is a discrete cross-correlation; many machine-learning software packages call it convolution. Mathematical convolution instead reverses the kernel offsets. The choices of $O$, the extension $\\widetilde x$, and the stride specify cropping, padding, and subsampling, and need not preserve a symmetry of the full lattice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group-action-on-feature-maps",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group acting on the left on a set $S$, and let $V$ be a set of feature values. A feature map is a function $f:S\\to V$. For $u\\in G$, the induced transformation of feature maps is\n\n$$\n(L_u f)(x)=f(u^{-1}\\cdot x)\\qquad(x\\in S).\n$$\n\nIt is a left action on the set of feature maps: the group acts by reindexing sites and leaves the feature values unchanged. In particular, for maps $F:G\\to V$ on the group itself with its left multiplication action, $(L_uF)(g)=F(u^{-1}g)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-convolution-equivariance",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a discrete group acting on the left on the square lattice $\\mathbb Z^2$, and let feature maps take values in finite-dimensional row-vector channel spaces. Assume every group or lattice sum below has finite support or converges absolutely in each output coordinate. For group-indexed features $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a matrix-valued filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, group-to-group cross-correlation satisfies\n\n$$\nC_\\Psi(L_u f)=L_u(C_\\Psi f)\\qquad(u\\in G).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation also satisfies\n\n$$\nE_\\Psi(L_u f)=L_u(E_\\Psi f)\\qquad(u\\in G),\n$$\n\nwhere the input action is induced by the action on $\\mathbb Z^2$ and the output action is the left action on maps on $G$. The bias-free sum in the ordinary full-lattice, unit-stride discrete layer with origin $a=0$ is the translation-group instance of this formula; any fixed origin shift and the layer's constant output bias preserve translation equivariance. Componentwise pointwise nonlinearities and finite-neighborhood max pooling without subsampling commute with the left action. Restricting a group feature map to a subgroup $H\\le G$ preserves $H$-equivariance; for finite $H$, left-coset max pooling produces a $G$-equivariant feature map on $G/H$, and when $H=G$ is finite it is invariant. Finite compositions of equivariant layers remain equivariant.\n\nThe full p4 and p4m lattice symmetry groups are infinite because they contain all integer translations; no finiteness assumption on $G$ is made. On a finite grid, the theorem applies only when the domain, output sampling, and boundary convention respect the stated actions. Arbitrary cropping, padding, or stride need not do so. No continuous-rotation, universal-approximation, or empirical-superiority claim follows.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "full-lattice-translation",
+          "claim": "The formula $C_wf(p)=\\sum_{\\delta\\in K}f(p+\\delta)w_\\delta$ is the first-layer translation correlation with finite filter support, so [F3] gives $C_w(L_tf)=L_t(C_wf)$ for every $t\\in\\mathbb Z^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "zero-padding-witness",
+          "claim": "Since $\\tau$ swaps $0$ and $e_1$, $Tf=(0,1)$. Zero extension gives $C_0f(0)=\\overline f(-e_1)=0$ and $C_0f(e_1)=\\overline f(0)=1$, so $C_0f=(0,1)$ and $T(C_0f)=(1,0)$. In turn, $C_0(Tf)(0)=\\overline{Tf}(-e_1)=0$ and $C_0(Tf)(e_1)=Tf(0)=0$, so $C_0(Tf)=(0,0)$. These outputs differ, proving the stated failure.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If K is empty, the full-lattice sum is zero and the translation identity still holds; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For f=0 the full-lattice outputs agree; the fixed nonzero witness is treated separately in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary witness uses a single receptive-field offset; see step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two-site domain is the finite boundary witness; see step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The disagreement occurs at the zero-padded boundary site 0; see step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit finite witness in step 2.1 requires no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality and a counterexample, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an equality and a counterexample, not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Checked both verification steps and all three supplier interfaces. Full-lattice finite-filter identity also follows directly by expanding sum f(p+delta-t) w_delta; empty K and zero weights give the zero layer. The two-site example explicitly uses a swap action, not an asserted restriction of the lattice translation action. With column values ordered (0,e1), the zero-padded operator is (a,b)->(0,a): C0f=(0,1), T C0f=(1,0), C0 Tf=(0,0) for f=(1,0). This is a concrete failure for the stated boundary/action; it does not deny symmetry-compatible periodic boundaries. Cohen–Welling §5 eqs.7–8 supports the full-lattice convention; local finite calculation supplies the boundary proof. No AC or infinite limiting step; reader/refuter findings empty and no defect found."
+      }
+    },
+    "ex-p4-and-p4m-orientation-indexed-features": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-p4-p4m-lattice-symmetry-groups",
+          "source_section": "Definition",
+          "quote": "Let $\\rho=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ be the quarter-turn matrix and $\\sigma=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ a reflection matrix. Let $C_4=\\{\\rho^j:j=0,1,2,3\\}$ and $D_4=\\{\\rho^j,\\rho^j\\sigma:j=0,1,2,3\\}$, with matrix multiplication. For $A=C_4$ or $D_4$, define $P_A=\\mathbb Z^2\\times A$ with multiplication\n\n$$\n(t,M)(s,N)=(t+Ms,MN).\n$$\n\nEach pair $(t,M)$ acts on lattice sites by $x\\mapsto Mx+t$. The p4 lattice-symmetry group is $P_{C_4}$, generated by integer translations and quarter-turns. The p4m lattice-symmetry group is $P_{D_4}$, generated by integer translations, quarter-turns, and reflections. The point groups $C_4$ and $D_4$ have four and eight elements, respectively, but both full groups are infinite because they contain every integer translation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group-action-on-feature-maps",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group acting on the left on a set $S$, and let $V$ be a set of feature values. A feature map is a function $f:S\\to V$. For $u\\in G$, the induced transformation of feature maps is\n\n$$\n(L_u f)(x)=f(u^{-1}\\cdot x)\\qquad(x\\in S).\n$$\n\nIt is a left action on the set of feature maps: the group acts by reindexing sites and leaves the feature values unchanged. In particular, for maps $F:G\\to V$ on the group itself with its left multiplication action, $(L_uF)(g)=F(u^{-1}g)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-convolutional-layer",
+          "source_section": "Definition",
+          "quote": "Let $D,O\\subseteq\\mathbb Z^2$ be input and output index sets, let $C_{\\rm in},C_{\\rm out}$ be positive integers, and let $x:D\\to\\mathbb R^{C_{\\rm in}}$ assign a row vector of input channels to each input site. A boundary extension is a function $\\widetilde x:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ whose restriction to $D$ is $x$; zero padding is the extension that is zero off $D$. Choose a finite receptive-field offset set $K\\subseteq\\mathbb Z^2$, a positive integer stride vector $s\\in\\mathbb Z_{>0}^2$, an origin $a\\in\\mathbb Z^2$, one matrix $W_\\delta\\in\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$ for each $\\delta\\in K$, and an output bias row vector $b\\in\\mathbb R^{C_{\\rm out}}$. The discrete convolutional layer is the map $y:O\\to\\mathbb R^{C_{\\rm out}}$ given by\n\n$$\ny(p)=b+\\sum_{\\delta\\in K}\\widetilde x(a+s\\odot p+\\delta)W_\\delta\\qquad(p\\in O),\n$$\n\nwhere $s\\odot p$ is coordinatewise multiplication. Thus each output uses only the input sites in its receptive field, mixes input channels by matrix multiplication, and uses the same weights and bias at every output site. With unit stride on the full lattice and no boundary truncation, this formula is a discrete cross-correlation; many machine-learning software packages call it convolution. Mathematical convolution instead reverses the kernel offsets. The choices of $O$, the extension $\\widetilde x$, and the stride specify cropping, padding, and subsampling, and need not preserve a symmetry of the full lattice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-group-convolution",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a discrete group acting on the lattice $\\mathbb Z^2$ on the left. Let $C_{\\rm in},C_{\\rm out}$ be positive integers, and regard channel vectors as row vectors. For a feature map $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the group-to-group cross-correlation is the map $C_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(C_\\Psi f)(g)=\\sum_{h\\in G} f(h)\\Psi(g^{-1}h).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation is the map $E_\\Psi f:G\\to\\mathbb R^{C_{\\rm out}}$ defined by\n\n$$\n(E_\\Psi f)(g)=\\sum_{x\\in\\mathbb Z^2} f(x)\\Psi(g^{-1}\\cdot x).\n$$\n\nEach displayed sum is required to have finite support or to converge absolutely in every output coordinate. The first operation takes group-indexed features and filters; the second takes lattice-indexed image features and filters and returns group-indexed features. These are cross-correlations, with the filter argument displayed as written; they need not be commutative, and no finiteness of $G$ is assumed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-group-convolution-equivariance",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a discrete group acting on the left on the square lattice $\\mathbb Z^2$, and let feature maps take values in finite-dimensional row-vector channel spaces. Assume every group or lattice sum below has finite support or converges absolutely in each output coordinate. For group-indexed features $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a matrix-valued filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, group-to-group cross-correlation satisfies\n\n$$\nC_\\Psi(L_u f)=L_u(C_\\Psi f)\\qquad(u\\in G).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation also satisfies\n\n$$\nE_\\Psi(L_u f)=L_u(E_\\Psi f)\\qquad(u\\in G),\n$$\n\nwhere the input action is induced by the action on $\\mathbb Z^2$ and the output action is the left action on maps on $G$. The bias-free sum in the ordinary full-lattice, unit-stride discrete layer with origin $a=0$ is the translation-group instance of this formula; any fixed origin shift and the layer's constant output bias preserve translation equivariance. Componentwise pointwise nonlinearities and finite-neighborhood max pooling without subsampling commute with the left action. Restricting a group feature map to a subgroup $H\\le G$ preserves $H$-equivariance; for finite $H$, left-coset max pooling produces a $G$-equivariant feature map on $G/H$, and when $H=G$ is finite it is invariant. Finite compositions of equivariant layers remain equivariant.\n\nThe full p4 and p4m lattice symmetry groups are infinite because they contain all integer translations; no finiteness assumption on $G$ is made. On a finite grid, the theorem applies only when the domain, output sampling, and boundary convention respect the stated actions. Arbitrary cropping, padding, or stride need not do so. No continuous-rotation, universal-approximation, or empirical-superiority claim follows.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "orientation-counts",
+          "claim": "At a fixed translation $t$, the p4 index has the four values $\\rho^j$ and p4m has the eight distinct values $\\rho^j\\sigma^\\epsilon$, by [F1]. Distinct translations give infinitely many full group elements in each case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "group-layer-equivariance",
+          "claim": "For either full group $G=P_{C_4}$ or $P_{D_4}$, apply [F5] to the group-correlation operator in [F4]. Its input and output actions are the left actions in [F2], so every such group layer is equivariant without treating $G$ as finite.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "fixed-filter-rotation-witness",
+          "claim": "Since $\\rho(0)=0$, $L_\\rho\\delta_0=\\delta_0$. In the displayed planar correlation, only $y=0$ contributes, and $\\delta_{e_1}(e_1)=1$, so $\\delta_0\\star\\delta_{e_1}=\\delta_{-e_1}$. Therefore $L_\\rho(\\delta_0\\star\\delta_{e_1})=\\delta_{\\rho(-e_1)}=\\delta_{-e_2}$, whereas $(L_\\rho\\delta_0)\\star\\delta_{e_1}=\\delta_{-e_1}$. As $e_1\\ne e_2$, these outputs differ.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated rotation witness uses nonzero point-mass input and filter; empty support is outside that witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated failure witness fixes f=delta_0 and psi=delta_e1, not the zero input."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses the nonidentity quarter-turn rho, not the identity transformation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rotation acts on the lattice point masses at -e1 and -e2, which are distinct; see step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness is on the full lattice and has no finite-window endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All input and filter supports are singletons and every output is computed explicitly; see step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample to a universal equivariance claim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample to a universal equivariance claim, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Checked all three verification steps and all five current supplier interfaces. C4/D4 have four/eight distinct matrices by supplier determinant/distinctness calculation, while translations keep full groups infinite. Applied theorem only with its finite-support/absolute-convergence condition (F5), never from a finite group assumption. Independently computed delta0 star delta_e1=delta_-e1, rotation fixes delta0 and moves -e1 to -e2; evaluation at -e1 distinguishes outputs. Reflections are indices in the point group, not orientation-preserving transformations; reader F1/reference terminology correction is accepted without changing the example statement. Cohen–Welling §§4.2–4.4, §5 eq.9 and §6.1 eqs.10–12 agree. Zero filters or symmetric filters do not contradict the existential fixed-filter witness. No AC, citation mismatch or missing prerequisite; reader/refuter findings empty."
+      }
+    },
+    "ex-nonstrided-subgroup-and-coset-pooling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pointwise-nonlinearity-and-pooling-on-group-features",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $F:G\\to\\mathbb R^C$ be a feature map with $C$ channels. A pointwise nonlinearity determined by $\\nu:\\mathbb R\\to\\mathbb R$ is $N_\\nu F$, where $(N_\\nu F)(g)_c=\\nu(F(g)_c)$. For a nonempty finite set $U\\subseteq G$, non-strided neighborhood max pooling is $P_UF$, where $(P_UF)(g)_c=\\max_{u\\in U}F(gu)_c$; the output is still indexed by $G$. For a subgroup $H\\le G$, subgroup sampling is the restriction $R_HF=F|_H$, indexed by $H$.\n\nThe left-coset set is $G/H=\\{gH:g\\in G\\}$, where $gH=\\{gh:h\\in H\\}$. Its left $G$-action is $a\\cdot(gH)=(ag)H$. For finite $H$, left-coset max pooling is the map $Q_HF:G/H\\to\\mathbb R^C$ given by $(Q_HF)(gH)_c=\\max_{h\\in H}F(gh)_c$. All maxima are taken separately in each channel. When $H=G$ is finite, $G/H$ has one element and $Q_HF$ is a group-invariant summary.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p4-p4m-lattice-symmetry-groups",
+          "source_section": "Definition",
+          "quote": "Let $\\rho=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ be the quarter-turn matrix and $\\sigma=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ a reflection matrix. Let $C_4=\\{\\rho^j:j=0,1,2,3\\}$ and $D_4=\\{\\rho^j,\\rho^j\\sigma:j=0,1,2,3\\}$, with matrix multiplication. For $A=C_4$ or $D_4$, define $P_A=\\mathbb Z^2\\times A$ with multiplication\n\n$$\n(t,M)(s,N)=(t+Ms,MN).\n$$\n\nEach pair $(t,M)$ acts on lattice sites by $x\\mapsto Mx+t$. The p4 lattice-symmetry group is $P_{C_4}$, generated by integer translations and quarter-turns. The p4m lattice-symmetry group is $P_{D_4}$, generated by integer translations, quarter-turns, and reflections. The point groups $C_4$ and $D_4$ have four and eight elements, respectively, but both full groups are infinite because they contain every integer translation.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-convolution-equivariance",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a discrete group acting on the left on the square lattice $\\mathbb Z^2$, and let feature maps take values in finite-dimensional row-vector channel spaces. Assume every group or lattice sum below has finite support or converges absolutely in each output coordinate. For group-indexed features $f:G\\to\\mathbb R^{C_{\\rm in}}$ and a matrix-valued filter $\\Psi:G\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, group-to-group cross-correlation satisfies\n\n$$\nC_\\Psi(L_u f)=L_u(C_\\Psi f)\\qquad(u\\in G).\n$$\n\nFor an image feature map $f:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}}$ and a lattice filter $\\Psi:\\mathbb Z^2\\to\\mathbb R^{C_{\\rm in}\\times C_{\\rm out}}$, the first-layer image-to-group cross-correlation also satisfies\n\n$$\nE_\\Psi(L_u f)=L_u(E_\\Psi f)\\qquad(u\\in G),\n$$\n\nwhere the input action is induced by the action on $\\mathbb Z^2$ and the output action is the left action on maps on $G$. The bias-free sum in the ordinary full-lattice, unit-stride discrete layer with origin $a=0$ is the translation-group instance of this formula; any fixed origin shift and the layer's constant output bias preserve translation equivariance. Componentwise pointwise nonlinearities and finite-neighborhood max pooling without subsampling commute with the left action. Restricting a group feature map to a subgroup $H\\le G$ preserves $H$-equivariance; for finite $H$, left-coset max pooling produces a $G$-equivariant feature map on $G/H$, and when $H=G$ is finite it is invariant. Finite compositions of equivariant layers remain equivariant.\n\nThe full p4 and p4m lattice symmetry groups are infinite because they contain all integer translations; no finiteness assumption on $G$ is made. On a finite grid, the theorem applies only when the domain, output sampling, and boundary convention respect the stated actions. Arbitrary cropping, padding, or stride need not do so. No continuous-rotation, universal-approximation, or empirical-superiority claim follows.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is\na **subgroup** of $G$, written $H \\le G$, when\n\n- **(S1)** $e \\in H$;\n- **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$\n  ([[def-binary-operation]]);\n- **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.\n\nBy (S2) the operation of $G$ restricts to a binary operation on $H$; it is\nassociative there because it is associative on $G$, the element $e$ of (S1) is a\ntwo-sided identity for it ([[def-identity-element]]), and (S3) supplies for each\n$x \\in H$ a two-sided inverse lying in $H$ ([[def-invertible-element]]). So a\nsubgroup, with the restricted operation, is itself a group, and its identity and\nits inverses are those of $G$.\n\nEvery group $G$ has the two **trivial subgroups** $\\{e\\}$ and $G$ itself; a\nsubgroup $H$ with $H \\ne G$ is called **proper**.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "non-strided-pool",
+          "claim": "The set $U$ is finite and nonempty, so the non-strided max pool is defined; [F3] gives $P_U(L_aF)=L_a(P_UF)$ for every $a\\in G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "rotation-subgroup",
+          "claim": "The p4 multiplication in [F2] gives $(0,I)\\in H$, $(0,\\rho^j)(0,\\rho^k)=(0,\\rho^{j+k})\\in H$, and $(0,\\rho^j)^{-1}=(0,\\rho^{-j})\\in H$, so [F4] confirms $H\\le G$. For $a,h\\in H$, $a^{-1}h\\in H$, and restricting $L_aF$ to $H$ equals applying the left $H$-action to $F|_H$. The theorem therefore retains exactly the subgroup equivariance claimed after restriction.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coset-indexing",
+          "claim": "By the p4 pair product in [F2], $(t,\\rho^r)H=\\{(t,\\rho^{r+j}):j=0,1,2,3\\}$, so each left coset fixes $t$ and includes all four rotations.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quotient-and-invariance",
+          "claim": "The coset-pooling theorem [F3] makes $Q_HF$ equivariant on $G/H$. If $H=G$ is finite, there is one coset, and the induced left action on this singleton is the identity, so the pooled value is invariant.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "U is nonempty and H is a subgroup, so empty pooling sets are outside the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If F is zero, all max-pool outputs are zero; see steps 1.1 and 1.4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The neighborhood U includes the identity; for U={e}, the pool is the identity map, as in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite H=G case collapses to one coset and an invariant value; see step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or endpoint is used in the group and coset indices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The C4 coset is listed explicitly from the pair law, with no representative choice; see step 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives direct symmetry properties, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives direct symmetry properties, not an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Checked Example and steps 1.1–2.1 against all four current dependencies. U={e,rho} is nonempty finite; pair multiplication proves the four origin rotations form H. Multiplying (t,rho^r)(0,rho^j) leaves t fixed and visits all four rotations, identifying left cosets with translation positions without assuming H normal. The induced full G action on G/H is affine, so orientation pooling remains equivariant, not rotation-invariant at each fixed position. Restriction guarantees H-equivariance only; the separate H=G finite case has one coset and is not applied to infinite p4. Constant/zero features and trivial subgroup cases in suppliers agree; no AC. Cohen–Welling §6.3 eqs.16–17 and its p4/R example support conventions. Reader/refuter findings empty. Native source unchanged; touched contract only replaces the prior point-group terminology quotation. No defect found."
+      }
+    }
+  }
+}

@@ -14,16 +14,17 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Sections 3.2.2-3.2.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-ito-isometry-and-linearity-in-predictable-l2.json
   audited: 2026-09-22
 ---
 
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$. For predictable
+Elementary predictable Brownian integrands. Fix $T>0$. For predictable
 $H,K$ with finite energy $E\int_0^TH^2ds,E\int_0^TK^2ds<\infty$ the integrals
 $\int_0^TH\,dB$ of
-[[def-ito-integral-for-square-integrable-predictable-processes]] satisfy
+Ito integral for square-integrable predictable processes satisfy
 $$\int_0^T(H+K)\,dB=\int_0^TH\,dB+\int_0^TK\,dB,\qquad \int_0^T(aH)\,dB=a\int_0^TH\,dB\quad(a\in\mathbb R),$$
 and the identities are equalities of $L^2(P)$-classes (almost sure
 equalities). Moreover the map $H\mapsto\int_0^TH\,dB$ is an isometry,
@@ -34,6 +35,12 @@ $$E\Bigl[\Bigl(\int_0^TH\,dB\Bigr)\Bigl(\int_0^TK\,dB\Bigr)\Bigr]=E\int_0^TH_sK_
 holds for all such $H,K$. In particular the image of the map is a closed
 subspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and
 $H\mapsto\int_0^TH\,dB$ is injective up to the $(\mathrm dt\otimes P)$-class.
+
+## Statement references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-ito-integral-for-square-integrable-predictable-processes]]
 
 ## Facts & Assumptions
 

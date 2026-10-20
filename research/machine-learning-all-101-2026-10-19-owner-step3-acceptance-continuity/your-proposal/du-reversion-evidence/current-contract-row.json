@@ -1,0 +1,256 @@
+{
+  "citations": [
+    {
+      "fact": "F1",
+      "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+      "source_section": "Definition",
+      "quote": "Assume AC, DC and countable choice for the Gaussian probability-law constructions below. The displayed finite real network recurrences and empirical loss are deterministic definitions for fixed parameters. Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence\n\n$$x^{(0)}=x,\\qquad x^{(h)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(h)}x^{(h-1)})\\quad(1\\le h\\le H),\\qquad f_{\\rm fc}(x,\\theta)=a^Tx^{(H)},$$\n\nwhere $W^{(1)}\\in\\mathbb R^{m\\times d}$, $W^{(h)}\\in\\mathbb R^{m\\times m}$ for $h\\ge2$, $a\\in\\mathbb R^m$, and $\\sigma$ acts coordinatewise. The residual network uses the same first layer and then\n\n$$x^{(1)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(1)}x),\\qquad x^{(h)}=x^{(h-1)}+\\frac{c_{\\rm res}}{H\\sqrt m}\\,\\sigma(W^{(h)}x^{(h-1)})\\quad(2\\le h\\le H),\\qquad f_{\\rm res}(x,\\theta)=a^Tx^{(H)},$$\n\nwith $0<c_{\\rm res}<1$. In either architecture, random initialization means all entries of all matrices $W^{(h)}$ and of $a$ are independent $N(0,1)$ random variables; all these entries are trained by full-batch gradient descent. The empirical quadratic loss is $L(\\theta)=\\frac12\\sum_{i=1}^n(f(x_i,\\theta)-y_i)^2$.\n\nFor the fully connected architecture and the same fixed data, define the population matrices by\n\n$$K_{ij}^{(0)}=\\langle x_i,x_j\\rangle.$$\n\nFor $1\\le h<H$, let $(U_{ij}^{(h)},V_{ij}^{(h)})$ be a centered bivariate normal vector with covariance\n\n$$A_{ij}^{(h)}=\\begin{pmatrix}K_{ii}^{(h-1)}&K_{ij}^{(h-1)}\\\\K_{ji}^{(h-1)}&K_{jj}^{(h-1)}\\end{pmatrix},$$\n\nand put $K_{ij}^{(h)}=c_\\sigma\\mathbb E[\\sigma(U_{ij}^{(h)})\\sigma(V_{ij}^{(h)})]$. For $h=H$, use the same bivariate-normal definition with $A_{ij}^{(H)}$ formed from $K^{(H-1)}$, and set\n\n$$K_{ij}^{(H)}=c_\\sigma K_{ij}^{(H-1)}\\mathbb E[\\sigma'(U_{ij}^{(H)})\\sigma'(V_{ij}^{(H)})].$$\n\nWhen $H=1$, this last formula uses $K^{(0)}$ directly and there are no intermediate activation-covariance matrices. For the fully connected theorem, this terminal matrix is denoted $K_{\\rm fc}^{(H)}$.\n\nFor the residual architecture with $H\\ge2$, use a separate sequence $S^{(h)}$ and mean vector $b^{(h)}$. Set $S^{(0)}=K^{(0)}$. For $G^{(0)}\\sim N_n(0,S^{(0)})$, put\n\n$$S_{ij}^{(1)}=c_\\sigma\\mathbb E[\\sigma(G_i^{(0)})\\sigma(G_j^{(0)})],\\qquad b_i^{(1)}=\\sqrt{c_\\sigma}\\mathbb E[\\sigma(G_i^{(0)})].$$\n\nWrite $\\alpha=c_{\\rm res}/H$. For $2\\le h<H$, take a fresh centered Gaussian vector $G^{(h-1)}$ with covariance $S^{(h-1)}$, put $\\mu_i^{(h-1)}=\\mathbb E[\\sigma(G_i^{(h-1)})]$, and define\n\n$$S_{ij}^{(h)}=S_{ij}^{(h-1)}+\\alpha\\bigl(b_i^{(h-1)}\\mu_j^{(h-1)}+b_j^{(h-1)}\\mu_i^{(h-1)}\\bigr)+\\alpha^2\\mathbb E[\\sigma(G_i^{(h-1)})\\sigma(G_j^{(h-1)})],\\qquad b_i^{(h)}=b_i^{(h-1)}+\\alpha\\mu_i^{(h-1)}.$$\n\nFor $G\\sim N_n(0,S^{(H-1)})$, define the residual terminal matrix by\n\n$$K_{{\\rm res},ij}^{(H)}=\\frac{c_{\\rm res}^2}{H^2}S_{ij}^{(H-1)}\\mathbb E[\\sigma'(G_i)\\sigma'(G_j)].$$\n\nThe fully connected and residual convergence statements use $K_{\\rm fc}^{(H)}$ and $K_{\\rm res}^{(H)}$, respectively. At $H=1$, the two architectures coincide; define $K_{\\rm res}^{(1)}=K_{\\rm fc}^{(1)}$. The residual recursion above is the scalar specialization of the source's general mean/second-moment recursion, equation (16); in particular it includes the mean cross terms. Its terminal Gaussian covariance is $S^{(H-1)}$, as determined by the finite-width last-layer Gram formula (14).\n\nThe residual recurrence has one identity contribution from $x^{(h-1)}$ and one nonlinear contribution at every layer $2\\le h\\le H$; the arrows below depict that convention for one generic layer and do not enter any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,node distance=1.3cm]\n  \\node (in) {$x^{(h-1)}$};\n  \\node[draw,rectangle,right=1.7cm of in] (act) {$\\frac{c_{\\rm res}}{H\\sqrt m}\\sigma(W^{(h)}x^{(h-1)})$};\n  \\node[draw,circle,right=2.0cm of act] (sum) {$+$};\n  \\node[right=1.2cm of sum] (out) {$x^{(h)}$};\n  \\draw[->] (in) -- (act);\n  \\draw[->] (act) -- (sum);\n  \\draw[->] (in) to[bend right=28] (sum);\n  \\draw[->] (sum) -- (out);\n\\end{tikzpicture}\n```",
+      "uses": [
+        "1.1",
+        "2.1",
+        "3.1",
+        "3.3",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F2",
+      "source": "thm-shared-parameter-backpropagation-gradient-formula",
+      "source_section": "Statement",
+      "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and\n\n$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$\n\nwhere the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+      "uses": [
+        "1.1",
+        "3.1",
+        "3.2",
+        "3.3",
+        "4.1"
+      ]
+    },
+    {
+      "fact": "F3",
+      "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "source_section": "Statement",
+      "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+      "uses": [
+        "3.1",
+        "3.3",
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F4",
+      "source": "lem-taylor-integral-remainder",
+      "source_section": "Statement",
+      "quote": "Let $n\\ge0$, let $f$ have continuous derivatives through order $n+1$ on an\nopen interval containing the segment between $c$ and $x$, and put\n$$\nP_n(x)=\\sum_{j=0}^n\\frac{f^{(j)}(c)}{j!}(x-c)^j.\n$$\nThen\n$$\nf(x)-P_n(x)=\\frac1{n!}\\int_c^x f^{(n+1)}(t)(x-t)^n\\,dt.\n$$\nIf $M\\ge0$ and $|f^{(n+1)}(t)|\\le M$ between $c$ and $x$, then\n$$\n|f(x)-P_n(x)|\\le\\frac{M|x-c|^{n+1}}{(n+1)!}.\n$$\nThe formula and bound include $x=c$ and oriented endpoints.",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F5",
+      "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "source_section": "Statement",
+      "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+      "uses": [
+        "5.1"
+      ]
+    },
+    {
+      "fact": "F6",
+      "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "source_section": "Definition",
+      "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F6",
+      "source": "def-frobenius-matrix-norm",
+      "source_section": "Definition",
+      "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+      "uses": [
+        "1.1"
+      ]
+    },
+    {
+      "fact": "F7",
+      "source": "def-p-norms-on-rn",
+      "source_section": "Definition",
+      "quote": "Let $n \\in \\mathbb{N}$ and let $\\mathbb{R}^{n}$ be the function space of\n[[def-euclidean-inner-product]], with $x_k := x(k)$ for $k < n$.\n\n### The $p$-norm, for a rational exponent $p \\ge 1$\n\nLet $p \\in \\mathbb{Q}$ with $p \\ge 1$. For $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_p \\;:=\\; \\Bigl(\\sum_{k<n} |x_k|^{p}\\Bigr)^{1/p},$$\n\nwhere $|\\cdot|$ is the absolute value ([[def-abs-value]]), the sum is the finite\nsum of [[def-finite-sum]], and both powers are the **rational** powers of\n[[def-rational-power]].\n\n**Every power written here is defined.** Each base $|x_k|$ is a nonnegative real\nand $p > 0$, so $|x_k|^{p}$ is given by [[def-rational-power]] for $|x_k| > 0$\nand by its supplementary clause $0^{p} = 0$ for $|x_k| = 0$; the sum of these\nnonnegative terms is nonnegative ([[lem-finite-sum-laws]] clause 4), and\n$1/p$ is a positive rational, so the outer power is defined for the same two\nreasons. The value does not depend on which representative of $p$ or of $1/p$ is\nused ([[lem-rational-power-well-defined]]).\n\n**The exponent is rational in this definition.**\n[[def-rational-power]] supplies the nonnegative-base powers used here, and\n[[thm-minkowski-finite]] supplies the corresponding triangle inequality for\nrational $p \\ge 1$. This item makes no claim with $p$ ranging over a real\ninterval; its rational domain is unchanged.\n\n### The maximum norm\n\nFor $n \\ge 1$ and $x \\in \\mathbb{R}^{n}$ put\n\n$$\\lVert x\\rVert_\\infty \\;:=\\; \\max\\{\\, |x_k| \\;:\\; k < n \\,\\},$$\n\nthe maximum of a nonempty finite set of reals, which exists and is one of its\nelements ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**The hypothesis $n \\ge 1$ is required and propagates.** At $n = 0$ the set\n$\\{|x_k| : k<n\\}$ is empty and has no maximum ([[def-max-min]]). This is the same\nrestriction the published [[lem-metrics-on-rn]] carries, for the same reason, and\n**every statement on this page that mentions $\\lVert\\cdot\\rVert_\\infty$ inherits\nit**. The $p$-norms for rational $p \\ge 1$ carry no such restriction: at $n = 0$\neach is the empty sum raised to a positive rational power, hence $0$.\n\n### The three cases the rest of the page uses\n\n- $\\lVert x\\rVert_1 = \\sum_{k<n}|x_k|$, since $t^{1} = t$ for $t \\ge 0$\n  ([[lem-rational-power-laws]], and $0^{1} = 0$ by the supplementary clause).\n- $\\lVert x\\rVert_2 = \\bigl(\\sum_{k<n}|x_k|^{2}\\bigr)^{1/2} = \\sqrt{\\sum_{k<n}x_k^{2}}$,\n  which is exactly the Euclidean norm of [[def-euclidean-inner-product]]: the\n  exponent $2$ agrees with the integer power, so $|x_k|^{2} = x_k^{2}$\n  ([[lem-of-abs-value]]), and $t^{1/2}$ is the unique nonnegative square root of\n  $t$, which is $\\sqrt{t}$ ([[def-rational-power]], [[thm-of-square-roots]]).\n  **The two notations denote the same function and no second Euclidean norm is\n  introduced.**\n- $\\lVert x\\rVert_\\infty$ as above, for $n \\ge 1$.\n\nThat each of these is a norm in the sense of [[def-norm-and-normed-space]], and\nthat the metrics they induce are exactly the published $d_1$, $d_2$ and\n$d_\\infty$ of [[lem-metrics-on-rn]], is\n[[lem-p-norms-are-norms-and-induce-the-published-metrics]]; it is proved there\nand is not assumed here.",
+      "uses": [
+        "3.3"
+      ]
+    }
+  ],
+  "derivations": [
+    {
+      "id": "step-1-1",
+      "step": "1.1",
+      "claim": "Write $z_h=W_hx_{h-1}$ and $s_1=\\sqrt{c_\\sigma}$ in both architectures, $s_h=\\sqrt{c_\\sigma}$ for fully connected $h\\ge2$, and $s_h=c_{\\rm res}/H$ for residual $h\\ge2$. A layer has feature Jacobian $P_h=(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))W_h$ in the fully connected case, and $P_h=I+(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))W_h$ in residual layers $h\\ge2$. Within the stated ball, $\\|W_h\\|\\le(B_w+D/\\sqrt m)\\sqrt m$. Products of consecutive $P_h$, $h\\ge2$, therefore have norm at most $A^H$ in the fully connected case and $\\prod_h(1+C/H)\\le e^C$ in the residual case. All estimates below use only $h\\ge2$ for matrix operator norms; the input is fixed.",
+      "inputs": [
+        "F1",
+        "F2",
+        "given",
+        "algebra",
+        "F6"
+      ]
+    },
+    {
+      "id": "step-2-1",
+      "step": "2.1",
+      "claim": "Let $e_h=\\|x_h(\\theta)-x_h(\\theta_0)\\|$. Lipschitz continuity gives $e_1\\le\\sqrt{c_\\sigma}LD/\\sqrt m$. For fully connected layers, $e_h\\le C e_{h-1}+CA_0^H D/\\sqrt m$; for residual layers it gives $e_h\\le(1+C/H)e_{h-1}+CD/(H\\sqrt m)$, using the fixed upper feature bound in the residual case and the initial exponential envelope in the fully connected case. Summing the geometric recurrences gives $e_h\\le TD/\\sqrt m$ in the first case and $e_h\\le CD/\\sqrt m$ in the second. The imposed smallness of $D/\\sqrt m$ keeps all feature norms in the required bounds and justifies the recurrences successively. Also $\\|z_h(\\theta)-z_h(\\theta_0)\\|\\le TD$ or $CD$, since it is bounded by $\\|W_h(\\theta)\\|e_{h-1}+D\\|x_{h-1}(\\theta_0)\\|$ for $h\\ge2$, and by $D$ for $h=1$.",
+      "inputs": [
+        "F1",
+        "step 1.1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-3-1",
+      "step": "3.1",
+      "claim": "For a unit parameter direction $v$, let $\\xi_h=D x_h[v]$. At the first layer $\\|\\xi_1\\|\\le C\\|v_{W_1}\\|/\\sqrt m$. Subsequent layers obey $\\xi_h=P_h\\xi_{h-1}+(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))v_{W_h}x_{h-1}$. The product bounds in step 1.1, the feature bounds in step 2.1, and Cauchy–Schwarz over layer blocks give $\\max_h\\|\\xi_h\\|\\le T/\\sqrt m$ or $C/\\sqrt m$. For the residual case use $\\sum_{h\\ge2}s_h\\|v_{W_h}\\|\\le c_{\\rm res}(\\sum_{h\\ge2}\\|v_{W_h}\\|^2)^{1/2}/\\sqrt H\\le C$, retaining the separate first-layer term. Thus $\\|D z_h[v]\\|\\le T$ or $C$, uniformly in $h$. Since $Df_i[v]=v_a^Tx_H+a^T\\xi_H$ and $\\|a\\|\\le C\\sqrt m$, each output gradient has norm at most $T$ or $C$, proving $\\|J\\|\\le T\\sqrt n$ or $C\\sqrt n$. This explicitly retains the output and first-layer terms with no $1/H$ bound.",
+      "inputs": [
+        "F1",
+        "F2",
+        "step 1.1",
+        "step 2.1",
+        "algebra",
+        "F3"
+      ]
+    },
+    {
+      "id": "step-3-2",
+      "step": "3.2",
+      "claim": "Put $d_h=b_h(\\theta)-b_h(\\theta_0)$. The backward recurrence is $b_{h-1}=P_h^Tb_h$, with $d_H=a-a_0$. Decompose its difference as $P_h(\\theta)^Td_h+(P_h(\\theta)-P_h(\\theta_0))^Tb_h(\\theta_0)$. The latter is the sum of a weight-difference term bounded by $Ts_hD$ (respectively $Cs_hD$) and a gate-difference term bounded by $Cs_h B_bM\\|z_h(\\theta)-z_h(\\theta_0)\\|$, because $\\|\\operatorname{diag}(\\sigma'(z_h)-\\sigma'(z_{h,0}))b_{h,0}\\|\\le\\beta B_bM\\|z_h-z_{h,0}\\|$. Summing the backward recurrence with the product bounds gives $\\|d_h\\|\\le TM D$ or $CM D$. Hence $\\|b_h(\\theta)\\|_\\infty\\le TM(1+D)$ or $CM(1+D)$. The crude $\\ell_2$ bound $\\|b_h(\\theta)\\|_2\\le T\\sqrt m$ or $C\\sqrt m$ follows separately from step 1.1 and $\\|a\\|_2\\le C\\sqrt m$.",
+      "inputs": [
+        "F2",
+        "step 1.1",
+        "step 2.1",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-3-3",
+      "step": "3.3",
+      "claim": "For the last-hidden-layer Gram, put $X_i=x_i^{(H-1)}$, $Z_i=W_HX_i$ and $\\gamma=c_\\sigma$ or $c_{\\rm res}^2/H^2$. Direct differentiation gives $G_{H,ij}=\\gamma\\langle X_i,X_j\\rangle m^{-1}\\sum_ra_r^2\\sigma'(Z_{i,r})\\sigma'(Z_{j,r})$. Subtract its initialized version in three parts: feature-inner-product change, derivative-gate change with $a_0^2$, and output-weight-square change. Step 2.1 bounds the first part by $T D/\\sqrt m$ or $CD/\\sqrt m$ before multiplying by $\\gamma$. For the second part, Cauchy–Schwarz gives $m^{-1}\\sum_ra_{0,r}^2|\\Delta Z_{i,r}|\\le m^{-1}\\|a_0\\|_4^2\\|\\Delta Z_i\\|_2\\le C\\|\\Delta Z_i\\|_2/\\sqrt m$; multiply by $\\beta L$, and use step 2.1. For the third part, $m^{-1}\\sum_r|a_r^2-a_{0,r}^2|\\le m^{-1}\\|a-a_0\\|_2(\\|a\\|_2+\\|a_0\\|_2)\\le CD/\\sqrt m$. Feature norms and $|\\sigma'|\\le L$ bound all remaining factors. The entry error is consequently at most $TD/\\sqrt m$ or $CD/(H^2\\sqrt m)$. The operator norm is at most $n$ times this entry bound.",
+      "inputs": [
+        "F1",
+        "F2",
+        "step 2.1",
+        "algebra",
+        "F3",
+        "F7"
+      ]
+    },
+    {
+      "id": "step-4-1",
+      "step": "4.1",
+      "claim": "For two unit parameter directions $v,w$, twice differentiating the output gives the mixed output-weight terms $v_a^TDx_H[w]+w_a^TDx_H[v]$, and the sum over layers of $\\frac{s_h}{\\sqrt m}b_h^T\\left(\\operatorname{diag}(\\sigma''(z_h))(Dz_h[v]\\odot Dz_h[w])+\\operatorname{diag}(\\sigma'(z_h))(v_{W_h}Dx_{h-1}[w]+w_{W_h}Dx_{h-1}[v])\\right).$ This identity follows by differentiating every primitive twice and propagating each resulting second-order term through its downstream Jacobians; the linear skip has zero second derivative. The coordinate-product inequality $\\|p\\odot q\\|_1\\le\\|p\\|_2\\|q\\|_2$, steps 3.1–3.2, and $\\sum_hs_h\\le CH$ or $C$ bound the first part by $TM(1+D)/\\sqrt m$ or $CM(1+D)/\\sqrt m$. The terms involving $v_{W_h}Dx_{h-1}[w]$ use the $\\ell_2$ backward bound and $\\|Dx_{h-1}[w]\\|\\le T/\\sqrt m$ or $C/\\sqrt m$; summing with Cauchy–Schwarz over matrix blocks gives the same bound. The output-weight mixed terms are at most $T/\\sqrt m$ or $C/\\sqrt m$. This proves the output-Hessian bound, with polynomial factors in $H$ absorbed into $A^H$ only for the fully connected case.",
+      "inputs": [
+        "F1",
+        "F2",
+        "step 3.1",
+        "step 3.2",
+        "algebra"
+      ]
+    },
+    {
+      "id": "step-5-1",
+      "step": "5.1",
+      "claim": "The identity $\\nabla^2L=J^TJ+\\sum_i r_i\\nabla^2f_i$ gives $\\|\\nabla^2L\\|\\le\\|J\\|^2+\\sqrt n\\|r\\|\\max_i\\|\\nabla^2f_i\\|$. Integrating the Jacobian along the straight segment to initialization gives $\\|r\\|\\le\\|r_0\\|+T\\sqrt nD$ or $\\|r_0\\|+C\\sqrt nD$. Substitution of steps 3.1 and 4.1 proves the claimed loss-Hessian bound, after enlarging $A,C$ to absorb squares of fixed exponential envelopes. For each coordinate the integral Taylor formula is $f_i(\\theta+h)-f_i(\\theta)-Df_i(\\theta)h=\\int_0^1(1-t)D^2f_i(\\theta+th)[h,h]\\,dt$. Step 4.1 bounds its absolute value by $TM(1+D)\\|h\\|^2/(2\\sqrt m)$ or the corresponding residual constant. Summing coordinate squares gives the stated vector Taylor bound.",
+      "inputs": [
+        "step 3.1",
+        "step 4.1",
+        "algebra",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    }
+  ],
+  "routine_steps": [],
+  "finite_smoke": [],
+  "boundaries": [
+    {
+      "case": "empty",
+      "status": "not_applicable",
+      "reason": "The architecture supplies positive width, data count and depth, so the feature and Jacobian coordinate maxima refer to actual finite arrays. At depth one the range of later-layer matrix factors is empty and acts as the identity; the proof explicitly treats the fixed input and first-layer contribution separately.",
+      "template_review": {
+        "upheld": true,
+        "by": "/root/step2_reverse68",
+        "reason": "The architecture supplies positive width, data count and depth, so the feature and Jacobian coordinate maxima refer to actual finite arrays. At depth one the range of later-layer matrix factors is empty and acts as the identity; the proof explicitly treats the fixed input and first-layer contribution separately.",
+        "item_sha256": "613d46cb0f37f079fb56f15ba8756ef646f58a9101ad0ab91c828846f7698c1e",
+        "row_sha256": "46e81f0d724782fc23aa18c6b21250fc9fc38d67b2ea14604fab95f093b7e652"
+      }
+    },
+    {
+      "case": "zero",
+      "status": "checked",
+      "evidence": "The Statement includes D=0 and h=0; the perturbation and Taylor estimates then vanish exactly, with no division by these increments."
+    },
+    {
+      "case": "one",
+      "status": "checked",
+      "evidence": "Proof steps 1.1, 3.1, 3.3 and 4.1 (first-layer feature, derivative, last-layer Gram and Hessian estimates): A depth-one network is covered by the first-layer feature and readout derivative estimates rather than a fictitious hidden skip. The residual Gram perturbation improvement with a squared-depth divisor is asserted only for residual depth at least two; its first-layer and output derivatives retain their separate bounds.",
+      "template_review": {
+        "upheld": true,
+        "by": "/root/step2_reverse68",
+        "reason": "A depth-one network is covered by the first-layer feature and readout derivative estimates rather than a fictitious hidden skip. The residual Gram perturbation improvement with a squared-depth divisor is asserted only for residual depth at least two; its first-layer and output derivatives retain their separate bounds.",
+        "item_sha256": "613d46cb0f37f079fb56f15ba8756ef646f58a9101ad0ab91c828846f7698c1e",
+        "row_sha256": "2dc7eafd23dcd3d939064acbf372f3454161029ab28105b4c3e3efa3408b96b7"
+      }
+    },
+    {
+      "case": "degenerate",
+      "status": "checked",
+      "evidence": "The Statement assumes deterministic finite initialization bounds and permits zero individual features, output weights and singular Gram matrices; this lemma alone does not assume spectral positivity."
+    },
+    {
+      "case": "endpoints",
+      "status": "checked",
+      "evidence": "The Statement includes the closed radius and every segment contained in it. There is no step-size or confidence parameter in this deterministic lemma."
+    },
+    {
+      "case": "nonempty-choice",
+      "status": "checked",
+      "evidence": "Proof steps 1.1, 3.1, 3.3 and 4.1 (first-layer feature, derivative, last-layer Gram and Hessian estimates): This item fixes finite real parameter values and deterministic initialization bounds. The radius ball and each parameter direction are specified Euclidean objects; the proof uses finite differentiation and norm estimates and constructs no Gaussian law or independent initialization.",
+      "template_review": {
+        "upheld": true,
+        "by": "/root/step2_reverse68",
+        "reason": "This item fixes finite real parameter values and deterministic initialization bounds. The radius ball and each parameter direction are specified Euclidean objects; the proof uses finite differentiation and norm estimates and constructs no Gaussian law or independent initialization.",
+        "item_sha256": "613d46cb0f37f079fb56f15ba8756ef646f58a9101ad0ab91c828846f7698c1e",
+        "row_sha256": "5f30c583766e00d4c6a23a5f97b9f5870ddfcf611aaca3299ee30d8d0901f8d9"
+      }
+    },
+    {
+      "case": "iff-forward",
+      "status": "not_applicable",
+      "reason": "The parameter-ball lemma derives one-sided Lipschitz, Gram-perturbation, Hessian and Taylor-remainder estimates from its fixed initialization envelopes and radius restriction. It does not characterize all admissible balls or claim those estimates are necessary for training convergence.",
+      "template_review": {
+        "upheld": true,
+        "by": "/root/step2_reverse68",
+        "reason": "The parameter-ball lemma derives one-sided Lipschitz, Gram-perturbation, Hessian and Taylor-remainder estimates from its fixed initialization envelopes and radius restriction. It does not characterize all admissible balls or claim those estimates are necessary for training convergence.",
+        "item_sha256": "613d46cb0f37f079fb56f15ba8756ef646f58a9101ad0ab91c828846f7698c1e",
+        "row_sha256": "0594931a0553095cf50f891d96ebb9a5f0c82fb60a333112ce5c6bde0aba56fb"
+      }
+    },
+    {
+      "case": "iff-reverse",
+      "status": "not_applicable",
+      "reason": "The parameter-ball lemma derives one-sided Lipschitz, Gram-perturbation, Hessian and Taylor-remainder estimates from its fixed initialization envelopes and radius restriction. It does not characterize all admissible balls or claim those estimates are necessary for training convergence.",
+      "template_review": {
+        "upheld": true,
+        "by": "/root/step2_reverse68",
+        "reason": "The parameter-ball lemma derives one-sided Lipschitz, Gram-perturbation, Hessian and Taylor-remainder estimates from its fixed initialization envelopes and radius restriction. It does not characterize all admissible balls or claim those estimates are necessary for training convergence.",
+        "item_sha256": "613d46cb0f37f079fb56f15ba8756ef646f58a9101ad0ab91c828846f7698c1e",
+        "row_sha256": "19c07776925022cc86150a7c740975ef6ae2376a14fdee9e5641b4afa65272fd"
+      }
+    }
+  ],
+  "risk_review": {
+    "status": "complete",
+    "reviewer": "alpha-batch-45",
+    "notes": "Reviewed every step and all exact chain-rule/norm/Taylor suppliers. Reconsideration establishes that the original stronger weight-difference estimate in 3.2 is sound: downstream Jacobian products and ||a0||2≤Ba sqrt(m) give ||b(h,0)||2≤T sqrt(m), hence (sh/sqrt(m))||Delta W|| ||diag(sigma prime)b0||2≤T sh D without M. The gate-difference term still uses Bb M, giving the final TM D bound. Reader-added M is a valid weakening but unnecessary; reverted it and its derivation mirror to the authenticated pre-reader content. Forward variations, p=4 Gram gates, full second variations and mixed output-weight terms yield the asserted bounds; residual sum sh is bounded and FC polynomial factors absorb into A^H. H=1,D=0 and arbitrary input dimension checked. No mathematical defect in original step 3.2."
+  }
+}

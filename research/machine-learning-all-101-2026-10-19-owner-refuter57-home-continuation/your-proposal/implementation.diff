@@ -1,0 +1,781 @@
+--- a/tools/auditor-created-items.mjs
++++ b/tools/auditor-created-items.mjs
+@@ -6,6 +6,7 @@
+ // id absent from both the immutable stage baseline and the item filesystem at
+ // that boundary, and remains current only while its hash-bound carriers match.
+ 
++import { registeredHomeAlphaResult, homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
+ import { createHash } from 'node:crypto';
+ import { existsSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from 'node:fs';
+ import { dirname, join, resolve } from 'node:path';
+@@ -1125,7 +1126,8 @@
+         || approval.current_complete_proof_and_contract_adjudicated !== true
+         || approval.native_authorship_of_owner_reconciliation !== false
+         || native.result.path !== `research/${run}-dispatch/${native.result_file}`
+-        || result.run !== run || !authorResultAllowed(3, result)
++        || result.run !== run || !authorResultAllowed(3, result, { root, run })
++        || (homeAlphaReviewIdentity(root, run, row.batch).registered && native.result.path !== homeAlphaReviewIdentity(root, run, row.batch).stable_path)
+         || resolve(root, native.log.path) !== resolve(result.log)
+         || !result.covers.map(String).includes(row.batch)
+         || snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
+@@ -1196,6 +1198,7 @@
+           || evidence.owner_native_mirror_authorization?.owner !== true) return null;
+       }
+       const native = evidence.native_review;
++      if (homeAlphaReviewIdentity(root, run, row.batch).registered && native?.result?.path !== homeAlphaReviewIdentity(root, run, row.batch).stable_path) return null;
+       const linked = link => {
+         const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
+         if (sha(bytes) !== link?.sha256) throw Error('Stale native review evidence');
+@@ -1204,7 +1207,7 @@
+       const resultBytes = linked(native?.result), result = JSON.parse(resultBytes);
+       const resultPath = `research/${run}-dispatch/${native.result_file}`;
+       const started = Date.parse(result.started_at), ended = Date.parse(result.ended_at);
+-      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(3, result)
++      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(3, result, { root, run })
+         || !Number.isFinite(started) || !Number.isFinite(ended) || started > ended
+         || started < Date.parse(stageBaseline(root, run, 3).at)
+         || !result.covers.map(String).some(value => value === row.batch || value === 'all')) return null;
+@@ -1542,11 +1545,12 @@
+   return { path, reused: false, items: current.items.length };
+ }
+ 
+-export function authorResultAllowed(step, row) {
++export function authorResultAllowed(step, row, { root = null, run = null } = {}) {
+   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
+   const label = String(row.label ?? '');
+   if (Number(step) === LEGACY_AUTHOR_STEP) return row.role === 'alpha-high'
+     && /^(?:step3b-[a-z]+|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
++  if (Number(step) === 3 && registeredHomeAlphaResult(root, run, row)) return true;
+   if (Number(step) === 3) return row.role === 'alpha'
+     && /^(?:3a-[a-z]+|3a-batch-[1-9]\d*|3b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|3a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|3[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
+   if (Number(step) === 5) return (row.role === 'final-adjudicator'
+@@ -1561,7 +1565,7 @@
+ // Stable aliases remain readable for existing receipts. Historical write windows
+ // may additionally use exact, successfully completed immutable native attempts.
+ function immutableAuthorResult(root, run, step, file, row) {
+-  if (row.run !== run || !authorResultAllowed(step, row)
++  if (row.run !== run || !authorResultAllowed(step, row, { root, run })
+     || !Number.isSafeInteger(row.attempt) || row.attempt < 1
+     || !new RegExp(`^\\.attempt-${row.attempt}(?:\\.replay-[1-9]\\d*)?$`).test(row.evidence_tag ?? '')
+     || file !== `${row.role}-${row.label}${row.evidence_tag}.result.json`
+@@ -1594,7 +1598,7 @@
+   for (const file of readdirSync(dir).filter(name => name.endsWith('.result.json')).sort()) {
+     try {
+       const text = readFileSync(join(dir, file), 'utf8'), row = JSON.parse(text);
+-      if (row.run !== run || !authorResultAllowed(step, row)) continue;
++      if (row.run !== run || !authorResultAllowed(step, row, { root, run })) continue;
+       if (file.includes('.attempt-')) {
+         if (immutableAuthorResult(root, run, step, file, row))
+           rows.push({ ...row, result_file: file, immutable_result_file: file });
+--- /dev/null
++++ b/tools/autopilot/stages/home-alpha-continuations.mts
+@@ -0,0 +1,25 @@
++import { homeAlphaContinuations } from '../../step3-owner-home-alpha-continuations.mjs';
++export function withHomeAlphaContinuation(original: any): any {
++ if(original.id!=='3a-adjudicate')return original;
++ const entries=(ctx:any,beforeDispatch=false,selected:string[]|null=null)=>homeAlphaContinuations(ctx.repo,ctx.run,{beforeDispatch,units:original.units(ctx).map(String),selected});
++ return {...original,
++  pattern:(ctx:any)=>{
++   const pattern=typeof original.pattern==='function'?original.pattern(ctx):original.pattern;
++   const rows=entries(ctx);if(!rows.length)return pattern;
++   const old=rows.map(({entry:e}:any)=>`alpha-(?:alpha-)?3a-batch-${e.unit}\\.result\\.json`).join('|');
++   const fresh=rows.map(({entry:e}:any)=>`alpha-${e.label}\\.result\\.json`).join('|');
++   return new RegExp(`^(?!(?:${old})$)(?:${pattern.source}|${fresh})$`,pattern.flags);
++  },
++  plan:(ctx:any,pending:string[])=>{
++   const rows=entries(ctx),selected=pending.map(String).filter(unit=>rows.some(({entry:e}:any)=>e.unit===unit));
++   // The original real Alpha planner writes its order task. Guard the selected
++   // correction BEFORE calling it; an invalid/exhausted route writes nothing.
++   if(selected.length&&!ctx.doctor)entries(ctx,true,selected);
++   return original.plan(ctx,pending).map((plan:any)=>{
++    const route=rows.find(({entry:e}:any)=>plan.covers?.length===1&&String(plan.covers[0])===e.unit);
++    if(!route)return plan;
++    const e=route.entry;return {...plan,label:e.label,task:[...(Array.isArray(plan.task)?plan.task:[plan.task]),e.task.path]};
++   });
++  },
++ };
++}
+--- a/tools/autopilot/stages/mathlib.step3.mts
++++ b/tools/autopilot/stages/mathlib.step3.mts
+@@ -6,6 +6,9 @@
+ const continuationURL = new URL('./refuter-continuations.mts', import.meta.url);
+ continuationURL.search = new URL(import.meta.url).search;
+ const { withRefuterContinuation } = await import(continuationURL.href);
++const homeContinuationURL = new URL('./home-alpha-continuations.mts', import.meta.url);
++homeContinuationURL.search = new URL(import.meta.url).search;
++const { withHomeAlphaContinuation } = await import(homeContinuationURL.href);
+ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+ import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
+ import { holdStep3 } from './step3-hold.mts';
+@@ -213,7 +216,7 @@
+       }],
+       gatesWaived: 'The close tool verifies current final routing and manifest-to-plan correspondence before freezing the exact closure receipt; the native Step 3a adjudication battery has already passed.',
+     },
+-  ].map(stage => withRefuterContinuation(stage));
++  ].map(stage => withHomeAlphaContinuation(withRefuterContinuation(stage)));
+ }
+ 
+ export default { step3Stages };
+--- /dev/null
++++ b/tools/autopilot/test/home-alpha-continuations.test.mts
+@@ -0,0 +1,123 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,cpSync,readdirSync,existsSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {resolve,dirname,relative} from 'node:path';
++import {fileURLToPath,pathToFileURL} from 'node:url';
++import {execFileSync} from 'node:child_process';
++import {createHash} from 'node:crypto';
++const repo=process.cwd(),candidateTools=fileURLToPath(new URL('../../',import.meta.url));
++const runtime=mkdtempSync(resolve(tmpdir(),'home-alpha-code-'));
++for(const p of execFileSync('git',['ls-files','tools'],{cwd:repo,encoding:'utf8'}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(resolve(runtime,p)),{recursive:true});cpSync(resolve(repo,p),resolve(runtime,p));}
++// Overlay only these code candidates, never an untracked tool tree or state.
++for(const p of ['step3-owner-home-alpha-continuations.mjs','step3-scope.mjs','step3-adjudication-order.mjs','step3-close.mjs','auditor-created-items.mjs','step3-owner-source-identical-continuity.mjs','step3-owner-stabilized-source-identical-continuity.mjs','step3-owner-unchanged-page-repairs.mjs','step3-manifest-history.mjs','autopilot-report-reopen.mjs','autopilot/stages/home-alpha-continuations.mts','autopilot/stages/mathlib.step3.mts']) {
++ const input=resolve(candidateTools,p);assert.ok(existsSync(input),`missing candidate ${p}`);const output=resolve(runtime,'tools',p);mkdirSync(dirname(output),{recursive:true});cpSync(input,output);
++}
++const api=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-home-alpha-continuations.mjs')).href);
++const foreign=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-foreign-refuter-routes.mjs')).href);
++const {withHomeAlphaContinuation}=await import(pathToFileURL(resolve(runtime,'tools/autopilot/stages/home-alpha-continuations.mts')).href);
++const {covered}=await import(pathToFileURL(resolve(runtime,'tools/autopilot/src/coverage.mts')).href);
++const {authorResultAllowed}=await import(pathToFileURL(resolve(runtime,'tools/auditor-created-items.mjs')).href);
++const sha=(x:any)=>createHash('sha256').update(x).digest('hex');
++const run='r',id='lem-foreign',P='research/r-';
++function fixture(t:any){
++ const root=mkdtempSync(resolve(tmpdir(),'home-alpha-case-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
++ const put=(p:string,x:any)=>{mkdirSync(dirname(resolve(root,p)),{recursive:true});writeFileSync(resolve(root,p),typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return {path:p,sha256:sha(readFileSync(resolve(root,p)))};};
++ const link=(p:string)=>({path:p,sha256:sha(readFileSync(resolve(root,p)))});
++ const finding1={id,location:'Facts F1 / Proof1.1',defect:'unlicensed-inference',severity:'nonfatal',evidence:'Supporting line requires its actual differentiability argument.'};
++ const finding2={id,location:'Statement references',defect:'citation-inaccurate',severity:'nonfatal',evidence:'The cited source proves a more restricted step size statement.'};
++ const report57={batch:'57',opened:['def-owned',id],not_opened:[],flagged:[finding1,finding2],coverage_note:'Actual extra context read without a declared dependency.'};
++ const original_report=put(P+'archive-refute57.json',report57), origin_scope=put(P+'archive-scope57.json',{version:2,run,batch:'57',refuter_scope:['def-owned']});
++ const prompt57=put(P+'dispatch/refuter-refute-57.attempt-1.prompt.md','Actual original refuter57 task.');
++ const native57=put(P+'dispatch/refuter-refute-57.attempt-1.result.json',{run,role:'refuter',label:'refute-57',attempt:1,ok:true,exit_code:0,process_exit_code:0,covers:['57'],ended_at:'2026-10-19T12:53:00Z',prompt:resolve(root,prompt57.path),tail:JSON.stringify(report57)});
++ put(P+'step3-scope-57.json',{version:2,run,batch:'57',refuter_scope:['def-owned']});
++ put(P+'batch-57.pages.json',[{id:'owned-page',category:'test',items:[{id:'def-owned',deps:[]}]}]);
++ const manifest=[{id:'home-page',category:'test',items:[{id,deps:[]}]}];
++ put(P+'batch-30.pages.json',manifest);put(P+'alpha-groups.json',[{label:'j',covers:['30']},{label:'s',covers:['57']}]);
++ const source=(word:string)=>`---\nid: ${id}\nkind: lemma\nstatus: draft\npipeline_run: r\ndeps: []\n---\n## Statement\nClaim.\n## Proof\n${word}\n`;
++ const before=put(P+'before-source.md',source('Old proof.')),after=put(P+'after-source.md',source('Corrected proof.'));
++ put(`items/${id}.md`,source('Corrected proof.'));put('library/test/home-page.md','---\npage: home-page\nstatus: draft\nitems: [lem-foreign]\nexamples: []\n---\nHome page.\n');
++ put(P+'batch-30.proof-contracts.json',{version:1,scope:[id],contracts:{[id]:{}}});
++ const application=put(P+'root-application.json',{run,owner_identity:'/root',native_finding_unchanged:true,files:[{path:`items/${id}.md`,before_sha256:before.sha256,after_sha256:after.sha256}]});
++ const evidence=put(P+'consumer-evidence.json',{actual_fixture_consumers_read:true});
++ const review=put(P+'review.json',{run,id,original_obligation:'refuter:57:1',source_before_sha256:before.sha256,source_after_sha256:after.sha256,full_current_proof_read:true,consumer_checks_complete:true,native_acceptance_claimed:false,evidence_refs:[evidence],evidence:'Actual fixture full proof reading and explicit citation correction plus unchanged consumer uses, distinct from all independent native acceptance and coverage obligations.'});
++ const routes=[finding1,finding2].map((finding,index)=>{
++  const defect_id=index?'citation':'supporting-line',finding_sha256=foreign.foreignRefuterHash(finding);
++  const defect_record=put(P+`pending-${index}.json`,{defect_id,run,subject:id,batch:'30',class:'mathematical',subclass:finding.defect,severity:finding.severity,location:finding.location,caught_at_stage:'3a-adjudicate',disposition:'open',owner_identity:'/root',native_adjudication_claimed:false,original_obligation:`refuter:57:${index+1}`,original_finding_sha256:finding_sha256});
++  const owner_review=put(P+`review-${index}.json`,{...JSON.parse(readFileSync(resolve(root,review.path),'utf8')),original_obligation:`refuter:57:${index+1}`});
++  return {version:1,run,at:'2026-10-19T13:01:00Z',policy:foreign.FOREIGN_REFUTER_POLICY,owner_identity:'/root',reviewed:true,mathematical_acceptance:false,edit_permission:false,historical_observation_bound:false,observation_basis:'unbound-native-refuter; owner-registration capture only',origin_batch:'57',target_batch:'30',index:index+1,id,defect_id,finding,finding_sha256,original_report,native_result:native57,prompt:prompt57,origin_scope,source_before:before,source_after:after,application,owner_review,defect_record,reason:'Owner retains two genuine separately indexed external native findings at the actual unique current-run home, without any supplier edge or inherited mathematical acceptance.'};
++ });
++ put(P+'step3-owner-foreign-refuter-routes.json',{version:1,run,policy:foreign.FOREIGN_REFUTER_POLICY,authorized_by:'owner',authorization:'Owner authorizes exact required separate normal native home obligations for these two original flags.',routes});
++ const scope={version:2,run,batch:'30',group:'j',manifest_post:[id],page_manifest_post:['home-page'],touched:[id],pages_touched:[],reader_findings:[],refuter_findings:[],added:[]};
++ const previous_scope=put(P+'archive-scope30.json',scope);put(P+'step3-scope-30.json',scope);
++ const reportPath=P+'alpha-batch-30-3a.md',decisionsPath=P+'alpha-batch-30-3a-decisions.json';
++ const report='Actual old native Alpha30 report; source before later owner correction.\n';
++ const decisions={version:1,run,group:'batch-30',decisions:[{obligation:`touched:30:${id}`,id,route:'touched',verdict:'accepted_repair',defect_ids:['old-defect'],repair_confidence:1,evidence:'Actual old native conclusion, not current acceptance.'}]};
++ const previous_report=put(P+'archive-alpha30.md',report),previous_decisions=put(P+'archive-decisions30.json',decisions);
++ put(reportPath,report);put(decisionsPath,decisions);
++ const previous_prompt=put(P+'dispatch/alpha-3a-batch-30.attempt-1.prompt.md','Actual original Alpha30 canonical task.');
++ const old={run,role:'alpha',label:'3a-batch-30',attempt:1,evidence_tag:'.attempt-1',session_id:'actual-old-session',ok:true,exit_code:0,process_exit_code:0,timed_out:false,covers:['30'],started_at:'2026-10-19T12:05:00Z',ended_at:'2026-10-19T12:12:00Z',terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true},prompt:resolve(root,previous_prompt.path),tail:`Completed. [Report](${reportPath}) [Decisions](${decisionsPath})`};
++ const previous_result=put(P+'dispatch/alpha-3a-batch-30.result.json',old),previous_attempt=put(P+'dispatch/alpha-3a-batch-30.attempt-1.result.json',old);
++ const registration_manifest=put(P+'registration-manifest30.json',manifest);
++ const current_inputs=[P+'step3-scope-30.json',P+'batch-30.pages.json',P+'batch-30.proof-contracts.json',`items/${id}.md`,'library/test/home-page.md'].map(link);
++ const owner_capture=put(P+'home-capture.json',{version:1,run,unit:'30',owner_identity:'/root',native_acceptance_claimed:false,original_artifact_bytes_native_bound:false,report_sha256:previous_report.sha256,decisions_sha256:previous_decisions.sha256,scope_sha256:previous_scope.sha256,old_result_sha256:previous_result.sha256});
++ const task=put(P+'home-task.md',`Fresh independent native review of all old owed obligations plus gate:supporting-line and gate:citation; canonical group batch-30 and outputs ${reportPath} ${decisionsPath}. No inherited acceptance.`);
++ const entry={version:1,run,owner_identity:'/root',unit:'30',label:api.homeAlphaLabel('30'),canonical_group:'batch-30',mathematical_acceptance:false,previous_acceptance_inherited:false,historical_artifact_basis:'owner-captured current completed-native artifacts; no structured-output byte attestation',reason:'A genuine unrelated refuter57 discovered two separately retained findings after the ordinary completed home Alpha30. This one fresh native read adjudicates all old and new obligations independently.',writers_drained_at:'2026-10-19T13:01:00Z',previous_result,previous_attempt,previous_prompt,previous_report,previous_decisions,previous_scope,registration_manifest,current_inputs,foreign_refuter_routes:foreign.loadForeignRefuterRoutes(root,run).filter((x:any)=>x.e.target_batch==='30').map((x:any)=>x.binding),owner_capture,task};
++ const registry={version:1,run,policy:api.HOME_ALPHA_POLICY,authorized_by:'owner',authorization:'Owner authorizes exactly one fresh normal native home Alpha30 context for this retained foreign finding pair.',continuations:[entry]};
++ const save=()=>put(P+'step3-home-alpha-continuations.json',registry);save();
++ const complete=()=>{const prefix=P+'dispatch/alpha-'+entry.label;const prompt=put(prefix+'.attempt-1.prompt.md',`# This dispatch\n\nrun: r\nrole: alpha\nlabel: ${entry.label}\ncovers: 30\n${readFileSync(resolve(root,task.path),'utf8')}`);const fresh={...old,label:entry.label,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-19T13:02:00Z',ended_at:'2026-10-19T13:03:00Z',prompt:resolve(root,prompt.path)};put(prefix+'.attempt-1.result.json',fresh);put(prefix+'.result.json',fresh);return prefix;};
++ const ctx={repo:root,run,doctor:false},dispatchDir=resolve(root,P+'dispatch');let baseCalls=0;
++ const original={id:'3a-adjudicate',units:()=>['30','47'],pattern:/^alpha-(?:alpha-)?3a-(?:[a-z]+|batch-[1-9]\d*)\.result\.json$/,modelProfile:()=> 'sol61-medium',gates:['unchanged-battery'],artifacts:(_ctx:any,u:string)=>[P+`alpha-batch-${u}-3a.md`,P+`alpha-batch-${u}-3a-decisions.json`],plan:(_ctx:any,pending:string[])=>{baseCalls++;return pending.map(unit=>({role:'alpha',label:`3a-batch-${unit}`,covers:[unit],brief:'briefs/alpha-step3.md',job:'adjudication',task:['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md'],timeout:14400}));}};
++ return {root,put,link,entry,registry,save,ctx,original,dispatchDir,reportPath,decisionsPath,complete,baseCalls:()=>baseCalls};
++}
++test.after(()=>rmSync(runtime,{recursive:true,force:true}));
++test('registered fresh native home read preserves normal descriptor and canonical artifacts',t=>{
++ const f=fixture(t),stage=withHomeAlphaContinuation(f.original),[fresh,sibling]=stage.plan(f.ctx,['30','47']);
++ assert.equal(fresh.label,'3a-batch-30-foreign-refuter-continuation-1');assert.equal(fresh.role,'alpha');assert.deepEqual(fresh.covers,['30']);assert.equal(fresh.brief,'briefs/alpha-step3.md');assert.equal(fresh.timeout,14400);assert.deepEqual(fresh.task.slice(0,2),['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md']);assert.equal(fresh.task[2],f.entry.task.path);assert.equal(sibling.label,'3a-batch-47');assert.equal(stage.modelProfile,f.original.modelProfile);assert.equal(stage.gates,f.original.gates);assert.deepEqual(stage.artifacts(f.ctx,'30'),[f.reportPath,f.decisionsPath]);
++ assert.equal(api.homeAlphaReviewIdentity(f.root,run,'30').stable_path,P+'dispatch/alpha-3a-batch-30-foreign-refuter-continuation-1.result.json');
++ assert.equal(api.homeAlphaRequiredObligations(f.root,run,'30')[0].obligation,`touched:30:${id}`);
++ assert.equal(foreign.foreignRefuterObligations(f.root,run,'30').length,2);
++});
++test('coverage excludes original single and duplicate-role aliases, admits only exact new stable',t=>{
++ const f=fixture(t),p=withHomeAlphaContinuation(f.original).pattern(f.ctx);
++ for(const name of ['alpha-3a-batch-30.result.json','alpha-alpha-3a-batch-30.result.json','alpha-3a-batch-30-foreign-refuter-continuation-1.attempt-1.result.json','alpha-3a-batch-30-foreign-refuter-continuation-2.result.json'])assert.equal(p.test(name),false,name);
++ assert.equal(p.test('alpha-3a-batch-47.result.json'),true);assert.equal(p.test('alpha-3a-batch-30-foreign-refuter-continuation-1.result.json'),true);
++ assert.equal(covered(f.dispatchDir,p).has('30'),false);
++ f.put(P+'dispatch/alpha-3a-batch-30-foreign-refuter-continuation-1.result.json',{ok:true,covers:['30']});assert.equal(covered(f.dispatchDir,p).has('30'),true);
++});
++const negatives={
++ 'no genuine old success':(f:any)=>{const x=JSON.parse(readFileSync(resolve(f.root,f.entry.previous_result.path),'utf8'));x.ok=false;f.entry.previous_result=f.put(f.entry.previous_result.path,x);f.entry.previous_attempt=f.put(f.entry.previous_attempt.path,x);f.save();},
++ 'wrong immutable attempt':(f:any)=>{f.entry.previous_attempt=f.put(f.entry.previous_attempt.path,{});f.save();},
++ 'wrong original native prompt':(f:any)=>{f.put(f.entry.previous_prompt.path,'changed');},
++ 'wrong origin archive':(f:any)=>{f.put(f.entry.previous_report.path,'changed original artifact');},
++ 'fake structured output attestation':(f:any)=>{f.entry.historical_artifact_basis='full original report bound by stdout';f.save();},
++ 'native acceptance inherited':(f:any)=>{f.entry.previous_acceptance_inherited=true;f.save();},
++ 'wrong canonical group':(f:any)=>{f.entry.canonical_group='batch-30-foreign-refuter-continuation-1';f.save();},
++ 'wrong unit':(f:any)=>{f.entry.unit='55';f.save();},
++ 'missing one foreign flag':(f:any)=>{f.entry.foreign_refuter_routes.pop();f.save();},
++ 'duplicate foreign flag binding':(f:any)=>{f.entry.foreign_refuter_routes=[f.entry.foreign_refuter_routes[0],f.entry.foreign_refuter_routes[0]];f.save();},
++ 'wrong current guarded source':(f:any)=>{f.put(`items/${id}.md`,'changed');},
++ 'missing current contract guard':(f:any)=>{f.entry.current_inputs=f.entry.current_inputs.filter((x:any)=>!x.path.endsWith('proof-contracts.json'));f.save();},
++ 'changed old canonical decisions before dispatch':(f:any)=>{f.put(f.decisionsPath,{version:1,run,group:'batch-30',decisions:[]});},
++ 'completed fresh failure':(f:any)=>{f.put(P+'dispatch/alpha-'+f.entry.label+'.result.json',{ok:false,covers:['30']});},
++ 'completed attempt without stable alias':(f:any)=>{f.put(P+'dispatch/alpha-'+f.entry.label+'.attempt-1.result.json',{ok:false,covers:['30']});},
++ 'scope group mismatch':(f:any)=>{f.entry.previous_scope=f.put(f.entry.previous_scope.path,{version:2,run,batch:'30',group:'wrong'});f.save();},
++ 'unrelated task':(f:any)=>{f.entry.task=f.put(f.entry.task.path,'arbitrary context');f.save();},
++};
++for(const [name,mutate]of Object.entries(negatives))test(`reject ${name} BEFORE original Alpha planner writes its task`,t=>{const f=fixture(t);mutate(f);assert.throws(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['30']));assert.equal(f.baseCalls(),0);});
++test('doctor and unselected siblings retain historical validation without consuming completed30 budget',t=>{const f=fixture(t);f.put(P+'dispatch/alpha-'+f.entry.label+'.result.json',{ok:false,covers:['30']});assert.doesNotThrow(()=>withHomeAlphaContinuation(f.original).plan({...f.ctx,doctor:true},['30']));assert.doesNotThrow(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['47']));});
++test('native-origin label admitted only with exact registered root/run/unit and real fresh completion',t=>{const f=fixture(t);const synthetic={run,role:'alpha',label:f.entry.label,attempt:1,ok:true,started_at:'2026-10-19',ended_at:'2026-10-20',covers:['30']};assert.equal(authorResultAllowed(3,synthetic,{root:f.root,run}),false);const prefix=f.complete(),row=JSON.parse(readFileSync(resolve(f.root,prefix+'.result.json'),'utf8'));assert.equal(authorResultAllowed(3,row),false);assert.equal(authorResultAllowed(3,row,{root:f.root,run}),true);assert.equal(authorResultAllowed(3,{...row,attempt:2},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,covers:['47']},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,label:'3a-batch-31-foreign-refuter-continuation-1'},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,label:'3a-batch-47'}),true);});
++test('original archives survive canonical overwrite and freeze exact history',t=>{const f=fixture(t);const before=readFileSync(resolve(f.root,f.entry.previous_report.path));f.put(f.reportPath,'Genuine fresh native report.');f.put(f.decisionsPath,{version:1,run,group:'batch-30',decisions:[]});assert.doesNotThrow(()=>api.homeAlphaContinuations(f.root,run));assert.deepEqual(readFileSync(resolve(f.root,f.entry.previous_report.path)),before);f.complete();const hashes=api.homeAlphaClosureEvidence(f.root,run);assert.equal(hashes[f.entry.previous_report.path],f.entry.previous_report.sha256);assert.ok(hashes[P+'step3-home-alpha-continuations.json']);});
++
++test('actual native stage table generates all old and both foreign obligations at canonical home30',async t=>{
++ const f=fixture(t);const {stages}=await import(pathToFileURL(resolve(runtime,'tools/autopilot/stages/mathlib.mts')).href);
++ const stage=stages.find((s:any)=>s.id==='3a-adjudicate'),ctx={...f.ctx,dispatchDir:f.dispatchDir};
++ const [plan]=stage.plan(ctx,['30']);assert.equal(plan.label,f.entry.label);assert.equal(plan.role,'alpha');assert.deepEqual(plan.covers,['30']);assert.equal(plan.brief,'briefs/alpha-step3.md');assert.equal(plan.timeout,14400);
++ const order=readFileSync(resolve(f.root,P+'alpha-batch-30-3a-order.task.md'),'utf8');
++ for(const obligation of [`touched:30:${id}`,'gate:supporting-line','gate:citation'])assert.ok(order.includes(obligation),obligation);
++ assert.deepEqual(stage.artifacts(ctx,'30'),[f.reportPath,f.decisionsPath]);
++ assert.equal(stage.pattern(ctx).test('alpha-3a-batch-30.result.json'),false);
++ assert.equal(stage.pattern(ctx).test('alpha-'+f.entry.label+'.result.json'),true);
++});
++
++test('closure requires exact successful fresh native receipt, attempt1 and prompt',t=>{const f=fixture(t);assert.throws(()=>api.homeAlphaClosureEvidence(f.root,run));const prefix=f.complete();assert.ok(api.homeAlphaClosureEvidence(f.root,run)[prefix+'.result.json']);f.put(prefix+'.attempt-1.result.json',{});assert.throws(()=>api.homeAlphaClosureEvidence(f.root,run));});
+--- a/tools/autopilot/test/step3-pipeline.test.mts
++++ b/tools/autopilot/test/step3-pipeline.test.mts
+@@ -86,8 +86,8 @@
+   assert.deepEqual([...ex.unitsComplete(stage as any)], ['1', '2']);
+   assert.equal(await ex.dispatchStage(stage as any, ex.ctx()), 'ok');
+   assert.equal(ex.inflight.size, 0);
+-  assert.equal(stage.pattern.test('alpha-3a-batch-1.result.json'), true);
+-  assert.equal(stage.pattern.test('alpha-3b-lead.result.json'), false);
++  assert.equal((typeof stage.pattern === 'function' ? stage.pattern(ex.ctx()) : stage.pattern).test('alpha-3a-batch-1.result.json'), true);
++  assert.equal((typeof stage.pattern === 'function' ? stage.pattern(ex.ctx()) : stage.pattern).test('alpha-3b-lead.result.json'), false);
+   writeFileSync(join(dispatchDir, 'alpha-3a-a.result.json'), JSON.stringify({ role: 'alpha', label: '3a-a', covers: ['1', '2'], ok: false }));
+   assert.deepEqual(stage.artifacts(ex.ctx(), '1'), ['research/r-alpha-batch-1-3a.md', 'research/r-alpha-batch-1-3a-decisions.json'],
+     'a failed legacy group must not redirect a fresh batch worker to the shared report');
+--- a/tools/autopilot-report-reopen.mjs
++++ b/tools/autopilot-report-reopen.mjs
+@@ -1,5 +1,6 @@
+ // Guarded pre-report recovery. Historical successes are archived, never reused
+ // as fresh suffix coverage. No Git/index or mathematical carrier is mutated.
++import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
+ import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, unlinkSync, renameSync, readdirSync, lstatSync, appendFileSync } from 'node:fs';
+ import { join, resolve, relative, dirname } from 'node:path';
+ import { spawnSync, execFileSync } from 'node:child_process';
+@@ -122,9 +123,10 @@
+       prefix_sha256: sha(briefBytes.subarray(0, prefixBytes)), suffix_sha256: sha(briefBytes.subarray(prefixBytes)), owners: [...new Set(owners)].sort(),
+       reports: [...new Set(reports)].sort().map(path => {
+         const match = /^research\/([a-z0-9-]+)-alpha-batch-(\d+)-3a\.md$/.exec(path);
+-        const resultPath = `research/${match[1]}-dispatch/alpha-3a-batch-${match[2]}.result.json`;
++        const identity = homeAlphaReviewIdentity(repo, match[1], match[2]);
++        const resultPath = identity.stable_path;
+         const result = json(physical(repo, resultPath));
+-        if (result.run !== match[1] || result.role !== 'alpha' || result.label !== `3a-batch-${match[2]}` || result.ok !== true || result.written_by === 'autopilot') fail('foreign Alpha report lacks genuine successful native result');
++        if (result.run !== match[1] || result.role !== 'alpha' || result.label !== identity.label || result.ok !== true || result.written_by === 'autopilot') fail('foreign Alpha report lacks genuine successful native result');
+         return { path, sha256: sha(readFileSync(physical(repo, path))), native_result: resultPath, native_result_sha256: sha(readFileSync(join(repo, resultPath))) };
+       }) };
+     rows.set(briefPath, `${briefPath}\0${briefAppend.before}`);
+--- a/tools/step3-adjudication-order.mjs
++++ b/tools/step3-adjudication-order.mjs
+@@ -1,4 +1,5 @@
+ // Generate one Step-3 batch's exact item order, retaining legacy group support.
++import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
+ import { foreignRefuterObligations } from './step3-owner-foreign-refuter-routes.mjs';
+ import { readFileSync, writeFileSync } from 'node:fs';
+ import { join } from 'node:path';
+@@ -24,6 +25,10 @@
+     };
+     for (const target of foreignRefuterObligations(root, run, batch, { beforeDispatch: true })) {
+       add(target.id, target.obligation); foreignWork.push(target);
++    }
++    for (const target of homeAlphaRequiredObligations(root, run, batch)) {
++      add(target.id, target.obligation);
++      otherWork.push(`${target.obligation}: original home obligation must be independently re-reviewed; ${JSON.stringify(target)}`);
+     }
+     for (const id of scope.touched ?? []) add(id, 'touched');
+     if (scope.version === 3) for (const id of scope.items ?? []) add(id, 'direct review');
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -2,6 +2,7 @@
+ // Freeze dependency-ordered Step 3a after the passed native gate and exact carrier/plan currency checks.
+ // Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
+ 
++import { homeAlphaClosureEvidence } from './step3-owner-home-alpha-continuations.mjs';
+ import { foreignRefuterClosureEvidence } from './step3-owner-foreign-refuter-routes.mjs';
+ import { createHash } from 'node:crypto';
+ import { spawnSync } from 'node:child_process';
+@@ -50,6 +51,7 @@
+   ...Object.fromEntries(artifactNames(version).map((name) => [
+     `research/${name}`, sha256(readFileSync(R('research', name))),
+   ])),
++  ...(version === 3 ? homeAlphaClosureEvidence(root, run) : {}),
+   ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),
+   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
+   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+--- a/tools/step3-manifest-history.mjs
++++ b/tools/step3-manifest-history.mjs
+@@ -1,4 +1,5 @@
+ // Exact historical manifest bytes; current routing is checked by each caller.
++import {homeAlphaReviewIdentity} from './step3-owner-home-alpha-continuations.mjs';
+ import {createHash} from 'node:crypto';
+ import {readFileSync,lstatSync,existsSync} from 'node:fs';
+ import {resolve,relative,isAbsolute} from 'node:path';
+@@ -155,10 +156,11 @@
+     return JSON.stringify(value);
+   };
+   assert(identity(historical)===identity(frozenArtifacts?closureCapture:current),'changed historical/current page or item identity');
+-  const prefix=`research/${run}-dispatch/alpha-3a-batch-${batch}`;
++  const reviewIdentity=homeAlphaReviewIdentity(root,run,batch);
++  const prefix=reviewIdentity.prefix;
+   assert(new RegExp(`^${prefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result?.path),'nonimmutable Alpha result');
+   const result=JSON.parse(ownRef(e.native_result));
+-  assert(result.run===run&&result.role==='alpha'&&result.label===`3a-batch-${batch}`
++  assert(result.run===run&&result.role==='alpha'&&result.label===reviewIdentity.label
+     &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
+     &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
+     &&result.terminal_summary.final_response_present===true
+--- /dev/null
++++ b/tools/step3-owner-home-alpha-continuations.md
+@@ -0,0 +1,148 @@
++# One fresh native home Alpha for registered foreign-refuter findings
++
++This opt-in normal-planner adapter reopens one already completed standalone
++home Alpha unit once. It grants no old acceptance, extra mathematical cycle,
++source permission, native observation, state reset or gate waiver. Existing
++foreign-refuter registration and the separate origin refuter coverage
++continuation remain required. Nothing edits the original native reports.
++
++Root registers `research/RUN-step3-home-alpha-continuations.json`:
++
++```
++{
++  "version": 1,
++  "run": "RUN",
++  "policy": "owner-step3-foreign-refuter-home-alpha-continuation-v1",
++  "authorized_by": "owner",
++  "authorization": "Concrete genuine root authorization, at least 40 characters",
++  "continuations": [ENTRY]
++}
++```
++
++`ENTRY` has:
++
++- `version:1`, exact `run`, `owner_identity:"/root"`, positive string `unit:"30"`,
++  `label:"3a-batch-30-foreign-refuter-continuation-1"`, `canonical_group:"batch-30"`;
++- `mathematical_acceptance:false`, `previous_acceptance_inherited:false`,
++  `historical_artifact_basis:"owner-captured current completed-native artifacts; no structured-output byte attestation"`;
++- concrete `reason` at least80characters and genuine `writers_drained_at` after
++  the successful old native completion and relevant actual writer drain;
++- own-run raw SHA256 `{path,sha256}` references `previous_result`,
++  `previous_attempt`, `previous_prompt`, `previous_report`,
++  `previous_decisions`, `previous_scope`, `registration_manifest`,
++  `owner_capture`, `task`;
++- `current_inputs:[{path,sha256},...]`, exactly the initial actual source/carrier
++  path set described below;
++- `foreign_refuter_routes:[{path,entry_sha256},...]`, exactly every registered
++  foreign-refuter entry targeted at this home unit, without duplicates.
++
++The previous result is the **unchanged actual stable**
++`research/RUN-dispatch/alpha-3a-batch-30.result.json`; previous attempt and prompt
++are its actual `.attempt-N.result.json` and `.attempt-N.prompt.md`. Stable and
++attempt bytes must match; successful native Alpha must cover exactly30, retain
++normal process/terminal completion, prompt binding and timestamps. Legacy
++multi-unit Alpha dispatches are not supported by this narrow route. The old
++native receipt remains old evidence; it never authenticates the new canonical
++report or supplies fresh coverage.
++
++Previous report, decisions and scope MUST be immutable own-run archives, not
++the mutable canonical paths. Root already captured these for this issue in
++`RUN-owner-refuter57-original-evidence/`. Their hashes remain exact after fresh
++native output overwrites the canonical report/decisions. Old native completion
++stdout links both canonical artifacts; it does not contain their full bytes.
++The explicit historical-artifact basis honestly records root's capture instead
++of inventing a structured native-output attestation.
++
++The archived decisions must have `version:1`, exact run, `group:"batch-30"`,
++unique obligations and an array of decisions. Scope must be version2, exact run
++and batch30, assignment `group:"j"` (the current actual assignment, distinct from
++canonical output group). `registration_manifest` archives the actual CURRENT
++`RUN-batch-30.pages.json` after the root mathematical correction/metadata
++integration. Its unique item/page inventory must match archived scope's
++manifest_post/page_manifest_post. Current source mathematics is bound separately
++from historical old review.
++
++`current_inputs` contains exactly, once each:
++
++- `research/RUN-step3-scope-30.json` (same raw hash as previous_scope archive),
++- `research/RUN-batch-30.pages.json` (same raw hash as registration_manifest),
++- `research/RUN-batch-30.proof-contracts.json`,
++- every `items/ID.md` listed in that complete manifest,
++- every `library/CATEGORY/PAGE.md` in that manifest.
++
++All these current guards and both old canonical report/decisions archives are
++checked before the real base Alpha planner can write its order task. A stale
++or exhausted route therefore mutates no task. Doctor checks historical
++authority only; planning unrelated units does not spend this unit's budget.
++
++`owner_capture` is a genuine root capture record:
++
++```
++{version:1,run,unit:"30",owner_identity:"/root",
++ native_acceptance_claimed:false,original_artifact_bytes_native_bound:false,
++ report_sha256:PREVIOUS_REPORT_RAW,
++ decisions_sha256:PREVIOUS_DECISIONS_RAW,
++ scope_sha256:PREVIOUS_SCOPE_RAW,old_result_sha256:PREVIOUS_RESULT_RAW}
++```
++
++It supplements the existing original-evidence receipt without rewriting it.
++This record asserts actual captured bytes, not a new native verdict.
++
++The task must contain canonical group and both exact canonical output paths,
++and every required foreign `gate:DEFECT_ID`. It should explicitly require
++independent redecision of ALL old owed obligations (archived scope/decisions
++and generated ordinary order), both new findings, actual corrected proof,
++full risk review and all normal closed ledger rules. State that prior native
++acceptance/root proof repair supplies no new acceptance and that original
++observed bytes remain unbound where so recorded. Require the normal report and
++canonical decisions group, not the new dispatch-label suffix. The ordinary
++brief has an explicit exact-label rule preserving canonical `G=batch-30`.
++
++For this issue the two existing foreign routes are origin57:index1 and
++origin57:index2, SAME actual lemma/home30, distinct genuine defect IDs:
++
++- `ml101-b57-3a-convex-supporting-line`
++- `ml101-b57-3a-convex-citation`
++
++They remain separately mandatory ordinary gate decisions. Their registry uses
++stable per-entry bindings, so appending them does not change existing47 entry
++or continuation36 bindings. Continuation57's existing refuter wrapper must
++reference BOTH exact entries. No edge57→30 is invented. Preserve original57's
++incorrect home55 prose as native historical evidence, not routing authority.
++
++The stage matcher excludes only old unit30 stable receipts (single and legacy
++duplicate role-prefix aliases) under authenticated registration. It admits
++only exact fresh `alpha-3a-batch-30-foreign-refuter-continuation-1.result.json`;
++attempt files, suffix2, unregistered labels or old stable30 give no coverage.
++Other units and all gates/model/role/brief/covers/timeout/artifacts stay normal.
++Any completed fresh result OR completed attempt, including failure, consumes
++the one shot. A new source/core review cycle or automatic unchanged retry is
++not authorized.
++
++All original owed scope obligations and previous gate decisions are rederived
++for planning, stamp and adjudication/final checks even if a later projection
++omits one. The new native worker must independently write all decisions.
++The full old report/decisions are immutable history, never copied by a tool
++into a fresh verdict. Normal Alpha may independently confirm fatal/nonfatal,
++reject a false positive, amend current source or escalate; all ordinary proof,
++carrier, ledger, risk and native gates apply.
++
++Current report consumers select the registered fresh result identity when
++this route exists. The old stable30 receipt cannot authenticate new report
++bytes. Generic native-created-item eligibility admits the exact registered
++attempt1 only with root/run context; all immutable native provenance checks
++remain. No creation markers are invented for pre-Step3 owner additions.
++
++Closure freezes the full home registry, all old archives/receipt/prompt/task/
++capture refs AND authenticated successful fresh stable receipt, identical
++immutable attempt1 and actual prompt with exact run/role/label/covers/canonical
++assignment. Missing/failed/mismatched fresh completion cannot close. Later
++source amendments do not rewrite the preserved historical source/context.
++
++Apply code only after independent review; root owns registration, genuine
++current guards, source integration/metadata currency, module reload, normal
++planner dispatch, all gates and commits. Never reset state or manually dispatch
++an LLM. If initial home writer is active, drain it before authorization.
++
++Focused durable test:
++`node tools/tsx-run.mjs --test tools/autopilot/test/home-alpha-continuations.test.mts`.
+--- /dev/null
++++ b/tools/step3-owner-home-alpha-continuations.mjs
+@@ -0,0 +1,145 @@
++// One owner-registered fresh native home adjudication; never inherited acceptance.
++import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
++import { resolve, relative, isAbsolute } from 'node:path';
++import { createHash } from 'node:crypto';
++import { loadForeignRefuterRoutes, foreignRefuterHash } from './step3-owner-foreign-refuter-routes.mjs';
++export const HOME_ALPHA_POLICY = 'owner-step3-foreign-refuter-home-alpha-continuation-v1';
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const need=(x,m)=>{if(!x)throw Error(`home Alpha continuation: ${m}`);};
++const fileFor=run=>`research/${run}-step3-home-alpha-continuations.json`;
++const batch=x=>typeof x==='string'&&/^[1-9]\d*$/.test(x);
++function bytes(root,p){
++ need(typeof p==='string'&&!isAbsolute(p)&&!p.includes('\\'),'invalid path');
++ const full=resolve(root,p),rel=relative(resolve(root),full);need(rel&&!rel.startsWith('..')&&!isAbsolute(rel),'escaping path');
++ let at=resolve(root);for(const part of rel.split('/')){at=resolve(at,part);need(!lstatSync(at).isSymbolicLink(),'symlink evidence');}
++ need(lstatSync(full).isFile(),'nonregular evidence');return readFileSync(full);
++}
++const parse=b=>JSON.parse(b.toString());
++function ref(root,run,r){need(r&&typeof r.path==='string'&&r.path.startsWith(`research/${run}-`)&&/^[a-f0-9]{64}$/.test(r.sha256??''),'invalid reference');const b=bytes(root,r.path);need(sha(b)===r.sha256,`changed evidence ${r.path}`);return b;}
++const pages=d=>Array.isArray(d)?d:d.pages??[];
++const ids=d=>pages(d).flatMap(p=>(p.items??[]).map(x=>typeof x==='string'?x:x.id));
++const exact=(a,b)=>a.length===b.length&&new Set(a).size===a.length&&a.every(x=>b.includes(x));
++export const homeAlphaLabel=unit=>`3a-batch-${unit}-foreign-refuter-continuation-1`;
++export function homeAlphaContinuations(root,run,{beforeDispatch=false,units=null,selected=null}={}){
++ need(/^[a-zA-Z0-9_-]+$/.test(run),'invalid run');const path=fileFor(run);
++ if(!existsSync(resolve(root,path)))return [];
++ const registry=bytes(root,path),doc=parse(registry);
++ need(doc.version===1&&doc.run===run&&doc.policy===HOME_ALPHA_POLICY&&doc.authorized_by==='owner'
++  &&typeof doc.authorization==='string'&&doc.authorization.trim().length>=40&&Array.isArray(doc.continuations)&&doc.continuations.length,'invalid owner authority');
++ need(new Set(doc.continuations.map(e=>e.unit)).size===doc.continuations.length,'duplicate unit');
++ if(units)need(doc.continuations.length<=units.length&&doc.continuations.every(e=>units.map(String).includes(e.unit)),'unit outside native stage');
++ const assignments=parse(bytes(root,`research/${run}-alpha-groups.json`));const groups=Array.isArray(assignments)?assignments:assignments.groups??[];
++ return doc.continuations.map(e=>{
++  const unit=e.unit,canonical=`batch-${unit}`,oldPrefix=`research/${run}-dispatch/alpha-3a-${canonical}`;
++  need(e.version===1&&e.run===run&&e.owner_identity==='/root'&&batch(unit)&&e.label===homeAlphaLabel(unit)
++   &&e.canonical_group===canonical&&e.mathematical_acceptance===false&&e.previous_acceptance_inherited===false
++   &&e.historical_artifact_basis==='owner-captured current completed-native artifacts; no structured-output byte attestation'
++   &&typeof e.reason==='string'&&e.reason.trim().length>=80&&Number.isFinite(Date.parse(e.writers_drained_at)),'invalid entry');
++  const owners=groups.filter(g=>g.covers?.map(String).includes(unit));need(owners.length===1,'ambiguous Alpha assignment');
++  const stable=ref(root,run,e.previous_result),old=parse(stable),attempt=ref(root,run,e.previous_attempt),prompt=ref(root,run,e.previous_prompt);
++  need(e.previous_result.path===oldPrefix+'.result.json'&&Number.isSafeInteger(old.attempt)&&old.attempt>=1
++   &&e.previous_attempt.path===oldPrefix+`.attempt-${old.attempt}.result.json`&&attempt.equals(stable)
++   &&e.previous_prompt.path===oldPrefix+`.attempt-${old.attempt}.prompt.md`
++   &&old.run===run&&old.role==='alpha'&&old.label===`3a-${canonical}`&&old.ok===true&&old.exit_code===0&&old.process_exit_code===0
++   &&typeof old.session_id==='string'&&old.session_id.length>0&&old.timed_out!==true&&old.covers?.length===1&&String(old.covers[0])===unit
++   &&old.terminal_summary?.task_completed===true&&old.terminal_summary.task_aborted===false&&old.terminal_summary.final_response_present===true
++   &&typeof old.prompt==='string'&&old.prompt.endsWith('/'+e.previous_prompt.path)
++   &&Number.isFinite(Date.parse(old.started_at))&&Number.isFinite(Date.parse(old.ended_at))&&Date.parse(old.started_at)<=Date.parse(old.ended_at)
++   &&Date.parse(old.ended_at)<=Date.parse(e.writers_drained_at)&&prompt.length>0,'not genuine original standalone home Alpha completion');
++  const reportPath=`research/${run}-alpha-${canonical}-3a.md`,decisionsPath=`research/${run}-alpha-${canonical}-3a-decisions.json`,scopePath=`research/${run}-step3-scope-${unit}.json`;
++  need(e.previous_report.path!==reportPath&&e.previous_decisions.path!==decisionsPath&&e.previous_scope.path!==scopePath,'original artifact must be immutable archive');
++  const report=ref(root,run,e.previous_report),decisionBytes=ref(root,run,e.previous_decisions),decisions=parse(decisionBytes),scopeBytes=ref(root,run,e.previous_scope),scope=parse(scopeBytes);
++  need(typeof old.tail==='string'&&old.tail.includes(reportPath)&&old.tail.includes(decisionsPath)&&report.length>0,'native completion lacks canonical artifacts');
++  need(decisions.version===1&&decisions.run===run&&decisions.group===canonical&&Array.isArray(decisions.decisions)
++   &&new Set(decisions.decisions.map(d=>d.obligation)).size===decisions.decisions.length,'wrong original decisions');
++  need(scope.version===2&&scope.run===run&&String(scope.batch)===unit&&scope.group===String(owners[0].label),'wrong original scope/group');
++  const manifest=parse(ref(root,run,e.registration_manifest)),itemIds=ids(manifest),pageIds=pages(manifest).map(p=>p.id);
++  need(itemIds.length>0&&new Set(itemIds).size===itemIds.length&&new Set(pageIds).size===pageIds.length
++   &&exact(itemIds,scope.manifest_post??[])&&exact(pageIds,scope.page_manifest_post??[]),'scope/manifest membership changed');
++  const requiredPaths=[scopePath,`research/${run}-batch-${unit}.pages.json`,`research/${run}-batch-${unit}.proof-contracts.json`,
++    ...itemIds.map(id=>`items/${id}.md`),...pages(manifest).map(p=>`library/${p.category}/${p.id}.md`)];
++  need(Array.isArray(e.current_inputs)&&exact(e.current_inputs.map(x=>x.path),requiredPaths)
++   &&e.current_inputs.every(x=>/^[a-f0-9]{64}$/.test(x.sha256??'')),'incomplete current guards');
++  const byPath=new Map(e.current_inputs.map(x=>[x.path,x.sha256]));
++  need(byPath.get(scopePath)===e.previous_scope.sha256&&byPath.get(`research/${run}-batch-${unit}.pages.json`)===e.registration_manifest.sha256,'scope/manifest registration mismatch');
++  const foreignPath=`research/${run}-step3-owner-foreign-refuter-routes.json`,foreign=parse(bytes(root,foreignPath));
++  need(foreign.version===1&&foreign.run===run&&foreign.authorized_by==='owner'&&Array.isArray(foreign.routes),'missing foreign route authority');
++  const homeRoutes=foreign.routes.filter(x=>x.target_batch===unit);
++  need(homeRoutes.length>0&&Array.isArray(e.foreign_refuter_routes)&&e.foreign_refuter_routes.length===homeRoutes.length
++   &&new Set(e.foreign_refuter_routes.map(foreignRefuterHash)).size===e.foreign_refuter_routes.length,'missing/duplicate foreign home bindings');
++  for(const route of homeRoutes)need(e.foreign_refuter_routes.some(r=>r.path===foreignPath&&r.entry_sha256===foreignRefuterHash(route)),'changed exact foreign entry');
++  need(homeRoutes.some(r=>!decisions.decisions.some(d=>d.obligation===`gate:${r.defect_id}`)),'no newly owed foreign gate');
++  const task=ref(root,run,e.task).toString();
++  need(task.includes(reportPath)&&task.includes(decisionsPath)&&task.includes(canonical)
++   &&homeRoutes.every(r=>task.includes(`gate:${r.defect_id}`)),'fresh task omits canonical identity/mandatory gates');
++  const captured=ref(root,run,e.owner_capture),capture=parse(captured);
++  need(capture.version===1&&capture.run===run&&capture.unit===unit&&capture.owner_identity==='/root'
++   &&capture.native_acceptance_claimed===false&&capture.original_artifact_bytes_native_bound===false
++   &&capture.report_sha256===e.previous_report.sha256&&capture.decisions_sha256===e.previous_decisions.sha256
++   &&capture.scope_sha256===e.previous_scope.sha256&&capture.old_result_sha256===e.previous_result.sha256,'missing honest owner artifact capture');
++  if(beforeDispatch&&(selected===null||selected.map(String).includes(unit))){
++   const freshPrefix=`alpha-${e.label}`;need(!readdirSync(resolve(root,`research/${run}-dispatch`)).some(n=>n===freshPrefix+'.result.json'||new RegExp('^'+freshPrefix+'\\.attempt-[1-9]\\d*\\.result\\.json$').test(n)),'one fresh native home attempt already completed');
++   need(bytes(root,reportPath).equals(report)&&bytes(root,decisionsPath).equals(decisionBytes),'canonical original artifact changed before launch');
++   for(const input of e.current_inputs)need(sha(bytes(root,input.path))===input.sha256,`current input changed ${input.path}`);
++   const currentRoutes=loadForeignRefuterRoutes(root,run).filter(x=>x.e.target_batch===unit);
++   need(exact(currentRoutes.map(x=>foreignRefuterHash(x.binding)),e.foreign_refuter_routes.map(foreignRefuterHash)),'foreign current route changed');
++  }
++  return {entry:e,binding:{path,entry_sha256:foreignRefuterHash(e)},old_decisions:decisions,old_scope:scope};
++ });
++}
++export function homeAlphaReviewIdentity(root,run,unit){
++ const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===String(unit));
++ const label=route?route.entry.label:`3a-batch-${unit}`;
++ if(route&&existsSync(resolve(root,`research/${run}-dispatch/alpha-${label}.result.json`)))freshHomeAlphaEvidence(root,run,route.entry);
++ return {registered:Boolean(route),label,group:`batch-${unit}`,prefix:`research/${run}-dispatch/alpha-${label}`,stable_path:`research/${run}-dispatch/alpha-${label}.result.json`};
++}
++export function registeredHomeAlphaResult(root,run,row){
++ if(!root||!run||row?.run!==run||row.role!=='alpha')return false;
++ const m=/^3a-batch-([1-9]\d*)-foreign-refuter-continuation-1$/.exec(row.label??'');if(!m)return false;
++ const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===m[1]);
++ if(!(route&&row.attempt===1&&row.label===route.entry.label&&row.covers?.length===1&&String(row.covers[0])===m[1]))return false;
++ try {freshHomeAlphaEvidence(root,run,route.entry);return foreignRefuterHash(row)===foreignRefuterHash(parse(bytes(root,`research/${run}-dispatch/alpha-${route.entry.label}.result.json`)));}
++ catch{return false;}
++}
++function freshHomeAlphaEvidence(root,run,e){
++ const prefix=`research/${run}-dispatch/alpha-${e.label}`;
++ const stable=bytes(root,prefix+'.result.json'),result=parse(stable),attempt=bytes(root,prefix+'.attempt-1.result.json'),prompt=bytes(root,prefix+'.attempt-1.prompt.md');
++ need(stable.equals(attempt)&&result.run===run&&result.role==='alpha'&&result.label===e.label&&result.attempt===1
++  &&result.evidence_tag==='.attempt-1'&&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
++  &&result.covers?.length===1&&String(result.covers[0])===e.unit&&typeof result.session_id==='string'&&result.session_id.length>0
++  &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false&&result.terminal_summary.final_response_present===true
++  &&Number.isFinite(Date.parse(result.started_at))&&Number.isFinite(Date.parse(result.ended_at))&&Date.parse(result.started_at)<=Date.parse(result.ended_at)
++  &&Date.parse(result.started_at)>=Date.parse(e.writers_drained_at)
++  &&typeof result.prompt==='string'&&result.prompt.endsWith('/'+prefix+'.attempt-1.prompt.md'),'fresh native completion is missing/failed/wrong or not exact one-shot');
++ const text=prompt.toString(),identity=`run: ${run}\nrole: alpha\nlabel: ${e.label}\ncovers: ${e.unit}`;
++ need(text.includes(identity)&&text.includes(`research/${run}-alpha-${e.canonical_group}-3a.md`)
++  &&text.includes(`research/${run}-alpha-${e.canonical_group}-3a-decisions.json`),'fresh native prompt lacks authentic canonical assignment');
++ return {[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
++}
++export function homeAlphaClosureEvidence(root,run){
++ const path=fileFor(run);if(!existsSync(resolve(root,path)))return {};
++ const doc=parse(bytes(root,path)),out={[path]:sha(bytes(root,path))};
++ // Historical inputs remain exact after genuine native source amendments.
++ for(const e of doc.continuations??[]){
++  for(const key of ['previous_result','previous_attempt','previous_prompt','previous_report','previous_decisions','previous_scope','registration_manifest','owner_capture','task']){ref(root,run,e[key]);out[e[key].path]=e[key].sha256;}
++  Object.assign(out,freshHomeAlphaEvidence(root,run,e));
++ }
++ return out;
++}
++
++// Preserve every old owed decision independently of a later scope projection.
++export function homeAlphaRequiredObligations(root,run,unit){
++ const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===String(unit));if(!route)return [];
++ const {old_scope:s,binding,old_decisions:doc}=route,targets=new Map();
++ const add=t=>targets.set(t.obligation,{...t,batch:String(unit),owner_home_alpha_continuation:binding});
++ for(const id of s.touched??[])add({obligation:`touched:${unit}:${id}`,id,route:'touched',added:(s.added??[]).includes(id)});
++ for(const id of s.pages_touched??[])add({obligation:`page:${unit}:${id}`,id,route:'page',order_anchor:s.page_order_anchors?.[id]??[]});
++ for(const finding of s.reader_findings??[])add({...finding,route:'reader'});
++ for(const finding of s.refuter_findings??[])add({...finding,route:'flagged'});
++ for(const d of doc.decisions)if(!targets.has(d.obligation)){
++  need(d.route==='gate'&&d.obligation===`gate:${d.defect_ids?.[0]}`&&d.defect_ids?.length===1
++    &&(s.manifest_post??[]).concat(s.page_manifest_post??[]).includes(d.id),'original decision is not a supported owed scope/gate obligation');
++  add({obligation:d.obligation,id:d.id,route:'gate'});
++ }
++ return [...targets.values()];
++}
+--- a/tools/step3-owner-required-page-routes.test.mjs
++++ b/tools/step3-owner-required-page-routes.test.mjs
+@@ -138,11 +138,11 @@
+  const evaluate=(source,version)=>{
+   let calls=0;
+   const fn=Function('artifactNames','sha256','readFileSync','R','requiredPageClosureEvidence','root','run',
+-   'foreignRefuterClosureEvidence','downstreamConsumerClosureEvidence','closureEvidence','ownerRepairEvidenceClosure','nativeOriginClosureEvidence',
++   'homeAlphaClosureEvidence','foreignRefuterClosureEvidence','downstreamConsumerClosureEvidence','closureEvidence','ownerRepairEvidenceClosure','nativeOriginClosureEvidence',
+    'OBSERVATION_EVIDENCE_POLICY','OWNER_REPAIR_EVIDENCE_FREEZE_POLICY','NATIVE_ORIGIN_FREEZE_POLICY',
+    extract(source)+'\nreturn artifactHashes;')(
+    ()=>names,sha,path=>'fixture bytes for '+path,(...parts)=>parts.join('/'),()=>{calls++;return {};},'/fixture','r',
+-   ()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),'fixture-observation-policy','fixture-repair-policy','fixture-native-policy');
++   ()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),()=>({}),'fixture-observation-policy','fixture-repair-policy','fixture-native-policy');
+   const value=fn(version);return {value,calls};
+  };
+  for(const version of [2,3]) {
+--- a/tools/step3-owner-source-identical-continuity.mjs
++++ b/tools/step3-owner-source-identical-continuity.mjs
+@@ -1,4 +1,5 @@
+ // Explicit continuity of an existing native acceptance; never new audit coverage.
++import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
+ import { readFileSync, existsSync } from "node:fs";
+ import { join, resolve } from "node:path";
+ import { createHash } from "node:crypto";
+@@ -156,7 +157,7 @@
+       entry.post_reader_snapshot?.path !==
+         `research/${run}-step3-hash-${target.batch}-post.json` ||
+       entry.native_result?.path !==
+-        `research/${run}-dispatch/alpha-3a-batch-${target.batch}.result.json` ||
++        homeAlphaReviewIdentity(root, run, target.batch).stable_path ||
+       entry.native_report?.path !==
+         `research/${run}-alpha-batch-${target.batch}-3a.md` ||
+       entry.native_assignment?.path !==
+--- a/tools/step3-owner-stabilized-source-identical-continuity.mjs
++++ b/tools/step3-owner-stabilized-source-identical-continuity.mjs
+@@ -1,5 +1,6 @@
+ // Continuity of genuine native acceptance across authenticated review metadata.
+ // This policy supplies no review, origin certification, ledger or gate waiver.
++import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
+ import { readFileSync, existsSync, lstatSync } from 'node:fs';
+ import { resolve, join, isAbsolute, dirname } from 'node:path';
+ import { createHash } from 'node:crypto';
+@@ -38,8 +39,8 @@
+   return bytes.toString('utf8');
+ };
+ const jsonRef = (root, run, ref) => JSON.parse(textRef(root, run, ref));
+-const successful = (result, run, batch) => result.run === run && result.role === 'alpha'
+-  && result.label === `3a-batch-${batch}` && Number.isInteger(result.attempt) && result.attempt >= 1
++const successful = (result, run, batch, label = `3a-batch-${batch}`) => result.run === run && result.role === 'alpha'
++  && result.label === label && Number.isInteger(result.attempt) && result.attempt >= 1
+   && result.evidence_tag === `.attempt-${result.attempt}` && result.ok === true
+   && result.exit_code === 0 && result.process_exit_code === 0 && result.timed_out !== true
+   && result.covers?.map(String).includes(String(batch)) && result.terminal_summary?.task_completed === true
+@@ -72,17 +73,18 @@
+   return matches[0];
+ }
+ function nativeReview(root, run, batch, id, evidence, verdicts, proofRequired = true) {
+-  assert(evidence?.result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}.result.json`
++  const identity = homeAlphaReviewIdentity(root, run, batch);
++  assert(evidence?.result?.path === identity.stable_path
+     && evidence.report?.path === `research/${run}-alpha-batch-${batch}-3a.md`, 'Wrong current native review paths');
+   const stableText = textRef(root, run, evidence.result), result = JSON.parse(stableText);
+-  assert(successful(result, run, batch), 'Native stable result is not genuine complete success');
+-  assert(evidence.immutable_result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.result.json`
++  assert(successful(result, run, batch, identity.label), 'Native stable result is not genuine complete success');
++  assert(evidence.immutable_result?.path === `${identity.prefix}${result.evidence_tag}.result.json`
+     && textRef(root, run, evidence.immutable_result) === stableText
+     && readFileSync(researchPath(root, run, evidence.immutable_result.path)).equals(
+       readFileSync(researchPath(root, run, evidence.result.path))), 'Stable alias differs from actual immutable attempt result');
+   const originalAssignmentPath = `research/${run}-alpha-batch-${batch}-3a-order.task.md`;
+   if (evidence.assignment_kind === 'native-dispatch-prompt') {
+-    const promptPath = `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.prompt.md`;
++    const promptPath = `${identity.prefix}${result.evidence_tag}.prompt.md`;
+     assert(evidence.assignment?.path === promptPath && typeof result.prompt === 'string'
+       && [promptPath, resolve(root, promptPath)].includes(result.prompt)
+       && evidence.original_assignment?.path === originalAssignmentPath,
+@@ -92,7 +94,7 @@
+     'Unsupported native assignment kind/path');
+   const report = textRef(root, run, evidence.report);
+   const assignment = textRef(root, run, evidence.assignment);
+-  assert(successful(result, run, batch) && assignment.includes(id), 'Native review not genuine complete coverage');
++  assert(successful(result, run, batch, identity.label) && assignment.includes(id), 'Native review not genuine complete coverage');
+   const decision = acceptedDocument(root, run, evidence.decisions, evidence.obligation, id, evidence.decision_sha256);
+   assert(verdicts.includes(decision.verdict) && decision.repair_confidence === 1, 'Wrong native review verdict/confidence');
+   const liveDoc = readJSON(join(root, 'research', `${run}-alpha-batch-${batch}-3a-decisions.json`));
+--- a/tools/step3-owner-unchanged-page-repairs.mjs
++++ b/tools/step3-owner-unchanged-page-repairs.mjs
+@@ -1,5 +1,6 @@
+ // A changed defining procedure can repair its unchanged same-batch page summary.
+ // This grants only the unchanged-carrier exception, never acceptance or coverage.
++import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
+ import { createHash } from 'node:crypto';
+ import { readFileSync, readdirSync, lstatSync } from 'node:fs';
+ import { resolve, relative, isAbsolute, join } from 'node:path';
+@@ -243,9 +244,10 @@
+     requireThat(Array.isArray(archivedRows) && archivedRows.length === 2
+       && archivedRows.some(row => equal(row, pageRow)) && archivedRows.some(row => equal(row, causeRow)));
+     const alphaResult = parse(refs.alpha_result);
+-    nativeResult(alphaResult, run, batch, 'alpha', '3a-batch-' + batch);
++    const identity = homeAlphaReviewIdentity(root, run, batch);
++    nativeResult(alphaResult, run, batch, 'alpha', identity.label);
+     requireThat(Number.isSafeInteger(alphaResult.attempt) && alphaResult.attempt >= 1);
+-    const prefix = 'research/' + run + '-dispatch/alpha-3a-batch-' + batch;
++    const prefix = identity.prefix;
+     requireThat(bytesAt(root, prefix + '.result.json').equals(refs.alpha_result)
+       && bytesAt(root, prefix + '.attempt-' + alphaResult.attempt + '.result.json').equals(refs.alpha_result)
+       && bytesAt(root, prefix + '.attempt-' + alphaResult.attempt + '.prompt.md').equals(refs.alpha_prompt)
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -11,6 +11,7 @@
+ // Each batch owns a separate scope file. Concurrent pipeline lanes must never
+ // read-modify-write one shared JSON file and erase a sibling's route.
+ 
++import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
+ import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
+ import { createHash } from 'node:crypto';
+ import { spawnSync } from 'node:child_process';
+@@ -1089,6 +1090,8 @@
+       for (const finding of scope.reader_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'reader' });
+       for (const finding of scope.refuter_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'flagged' });
+     }
++    for (const batch of group.covers) for (const target of homeAlphaRequiredObligations(ROOT, run, batch))
++      if (!expected.has(target.obligation)) expected.set(target.obligation, target);
+     const path = decisionsPath(group.label);
+     const doc = readJson(path, `group ${group.label} decisions`);
+     if (!Array.isArray(doc.decisions)) fail(`group ${group.label} decisions must contain an array`, 1);
+@@ -1462,6 +1465,8 @@
+           owed.push({ ...finding, route: 'flagged' });
+         }
+       }
++      for (const batch of group.covers) for (const target of homeAlphaRequiredObligations(ROOT, run, batch))
++        if (!owed.some(row => row.obligation === target.obligation)) owed.push(target);
+       const path = decisionsPath(group.label);
+       if (!existsSync(path)) { error('decisions-missing', `group ${group.label} has no 3a decisions file`); continue; }
+       const doc = readJson(path, `group ${group.label} decisions`);
+--- a/briefs/tasks/alpha-3a-adjudicate.md
++++ b/briefs/tasks/alpha-3a-adjudicate.md
+@@ -1,5 +1,6 @@
+ # Step 3a adjudication — adjudicator G, run `<run>`
+ 
++- An owner-registered fresh dispatch `3a-batch-N-foreign-refuter-continuation-1` retains canonical `G=batch-N`, covers exactly batch N, and writes the normal `alpha-batch-N-3a.md` and `alpha-batch-N-3a-decisions.json` with `group: batch-N`. Its fresh result filename is separate. Read the authenticated continuation task and original archived report/decisions/scope; independently re-review every old owed obligation, current risk review and every new required foreign gate. Old acceptance supplies history, never your verdict. For all other labels, follow the ordinary rule below.
+ - Set `G` to the suffix of your dispatch label: `3a-batch-13` means `G` is `batch-13`; a retained legacy dispatch `3a-b` means `G` is `b`. Use that suffix in every path and in the decisions file's `group` field below. The scope file's original assignment group stays unchanged.
+ - Work only on your `covers:` batches. New dispatches cover exactly one batch. For each batch, read `research/<run>-step3-scope-<i>.json`, its reader report and findings, refuter report, current carriers, and every cited dependency.
+ - Follow `research/<run>-alpha-G-3a-order.task.md` within your dispatched batches. Adjudicate routed items from lowest to highest in-run dependency level, complete each item's risk review before moving higher, and keep all findings for one item together. Page-only obligations retain their own scope. Escalate affected consumers outside your dispatched batches to the owner for supplier-first repair rather than editing another adjudicator's files.

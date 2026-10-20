@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "26",
+  "round": 0,
+  "reviewed_items": [
+    "def-causal-discovery-oracle-regime",
+    "def-cpdag-markov-equivalence-class",
+    "lem-pc-skeleton-separation",
+    "lem-covered-edge-reversal-preserves-d-separation",
+    "lem-chordal-components-admit-both-orientations",
+    "def-gaussian-partial-correlation",
+    "lem-pc-separating-set-collider",
+    "thm-dag-markov-equivalence-skeleton-vstructures",
+    "alg-pc-causal-discovery",
+    "def-sample-partial-correlation",
+    "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+    "lem-pc-fisher-transform-uniform-concentration",
+    "lem-meek-rules-complete-for-cpdag",
+    "thm-pc-oracle-correctness",
+    "thm-pc-high-dimensional-consistency",
+    "ex-pc-chain-versus-collider-separating-sets",
+    "ex-pc-latent-confounding-limitations",
+    "ex-pc-markov-equivalent-dags"
+  ],
+  "reviewed_pages": [
+    "ml02-causal-pc",
+    "ml02-causal-pc-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete batch against the current ML-25 design and actual supplier arguments. The approved scope is otherwise preserved. One local repair pass should address the findings and the listed consumers.",
+  "findings": [
+    {
+      "id": "alg-pc-causal-discovery",
+      "type": "local",
+      "reason": "The Definition ends with a termination argument. Move this property and proof to a separate proved result, preserving the algorithm instructions, and route consumers that rely on termination through that result."
+    },
+    {
+      "id": "lem-meek-rules-complete-for-cpdag",
+      "type": "local",
+      "reason": "Proof step 3.2 uses a topological order of G, but step 1.1 only establishes that G remains a consistent extension. Justify locally that every finite DAG has a topological order, for example by repeatedly removing a source."
+    },
+    {
+      "id": "ex-pc-chain-versus-collider-separating-sets",
+      "type": "prerequisite",
+      "reason": "Facts F1 and verification steps 1.1–1.2 use closure of independent Gaussian inputs under finite affine maps to assert joint Gaussianity, but the cited definitions do not state that closure. Add the affine-sum and scalar-normal facts needed for the projection argument or prove it locally; also identify the displayed density factors as the required parent probability kernels."
+    },
+    {
+      "id": "ex-pc-latent-confounding-limitations",
+      "type": "prerequisite",
+      "reason": "Verification step 1.1 uses a scalar uniqueness theorem on R to infer equality of the two R² laws from their vector characteristic functions. Add and use lem-characteristic-function-of-a-multivariate-normal-law (whose proof uses Cramér–Wold), or prove vector uniqueness locally. The same finite-affine Gaussian closure issue as in ex-pc-chain also applies; in step 2.1, state the direct-edge model's parent-kernel factorization to place it in the oracle regime."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-meek-rules-complete-for-cpdag",
+      "decision": "repair",
+      "reason": "Uses the algorithm's repeated R1–R3 closure; after moving termination out of the Definition, cite the separate termination result to establish that a closed pattern is reached."
+    },
+    {
+      "id": "thm-pc-oracle-correctness",
+      "decision": "repair",
+      "reason": "Verification step 4.1 currently relies on the Definition for finite-search termination; cite the separate termination result."
+    },
+    {
+      "id": "thm-pc-high-dimensional-consistency",
+      "decision": "repair",
+      "reason": "Uses the PC procedure through its levels and orientation closure; preserve the termination justification through the separate result."
+    },
+    {
+      "id": "ex-pc-chain-versus-collider-separating-sets",
+      "decision": "repair",
+      "reason": "Both claimed PC outputs rely on the algorithm returning; cite the separate termination result or prove termination for these finite cases."
+    },
+    {
+      "id": "ex-pc-latent-confounding-limitations",
+      "decision": "repair",
+      "reason": "The claimed two-vertex PC output relies on the algorithm returning; cite the separate termination result or prove termination for this finite case."
+    },
+    {
+      "id": "ex-pc-markov-equivalent-dags",
+      "decision": "repair",
+      "reason": "Verification step 2.1 relies on PC reaching closure; cite the separate termination result."
+    }
+  ]
+}

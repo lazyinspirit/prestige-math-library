@@ -1,0 +1,104 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-equivariant-neural-layer",
+      "model": "gpt-6-luna",
+      "context_sha256": "b9a45046306a37216b4d480173fbcd4d716909c5011f388ad7df058040997ed4",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original final Definition sentence makes a trivial output action sufficient for invariance without requiring equivariance. Let C2 swap X={0,1}, let its action on Y={0,1} be trivial, and set Phi(x)=x. That sentence calls Phi invariant although Phi(T_s 0)=1 differs from Phi(0)=0. Replaced the clause by Phi(T_g x)=Phi(x) for all g,x, equivalently equivariance into Y equipped with the trivial action. This repairs a false defining criterion, hence a fatal logic defect.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-equivariant-neural-layer",
+      "disposition": "repaired",
+      "post_sha256": "3d176e75675609186d4a741bbcc4547808d8507178a2c22c758dc51d3f7f8fbf",
+      "review_context_sha256": "d13e0bf608730c5e2ee7403cffed4141b9cc08a52c7e5115a317878cd1e0fe6c",
+      "reason": "Reviewed the complete Definition, its function and left-action prerequisites, the generic equivariant-map definition, owning contract, and page placement. Equivariance still means the original intertwining identity between possibly different actions. Invariance now explicitly requires constancy under every input transformation; substituting the trivial output action into the intertwining identity gives exactly this equation. Empty input makes both conditions vacuous; a supplied function from nonempty X to empty Y cannot exist; for the trivial group both identities hold for every supplied function. No choice principle or new prerequisite is needed. The contract already describes invariance as the resulting equivariant condition with trivial output action and needs no edit. The page is frontmatter-only with compact layout. There is no diagram or proof phase in this definition. This is repair-author checking, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-group-convolution-equivariance"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-equivariant-neural-layer",
+      "locus": "statement",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "The original Definition labels arbitrary functions into a trivially acted-on output set invariant. The two-point C2 swap with Phi(x)=x disproves this criterion. The corrected final sentence explicitly imposes Phi(T_g x)=Phi(x) for all g,x and identifies its equivalence with equivariance into the trivial output action.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/def-equivariant-neural-layer.md"
+    ],
+    "interface_change": {
+      "section": "Definition",
+      "before": "The input and output actions need not be the same. The layer is $G$-invariant when the output action $T'_g$ is the identity on $Y$ for every $g\\in G$.",
+      "after": "The input and output actions need not be the same. The layer is $G$-invariant when $\\Phi(T_gx)=\\Phi(x)$ for every $g\\in G$ and $x\\in X$; equivalently, it is equivariant into $Y$ equipped with the trivial action."
+    },
+    "consumer_dispositions": [
+      {
+        "id": "thm-group-convolution-equivariance",
+        "path": "items/thm-group-convolution-equivariance.md",
+        "route": "frontier-owner",
+        "disposition": "unchanged_sound",
+        "affected_use": "Statement references links the layer definition; Facts [F7] repeats the unchanged equivariance equation; Proof 3.1 uses [F7] for composition. Statement and Proof 1.3 also call finite H=G coset pooling invariant.",
+        "invalidated_claim": "None. F7 and Proof 3.1 use the unchanged equation. Proof 1.3 first establishes Q_H(L_a F)=L_a^{G/H}(Q_H F); when H=G the index set is a singleton, so its induced feature-map action is the identity. Consequently Q_G(L_a F)=Q_G(F), exactly the repaired invariance criterion.",
+        "minimality": "No consumer edit is needed. Its defining Statement is unchanged, so examination stops at this hop. The commutative square has Phi horizontally and T_u and Tprime_u vertically and correctly expresses the unchanged equivariance equation."
+      }
+    ],
+    "page_interface": "library/machine-learning/convolution-and-group-equivariance.md places the assigned definition before its theorem consumer, has no body and retains page_layout: compact-v1. Its examples companion is also frontmatter-only. No page repair is necessary.",
+    "discovery": "A current literal-ID search of items and library finds only thm-group-convolution-equivariance as a direct item dependency/reference consumer. The assigned definition has no aliases in the frozen pack. No outside direct consumer or ungraphed mathematical use was identified.",
+    "contract": "research/machine-learning-all-101-2026-10-19-batch-33.proof-contracts.json: contracts.def-equivariant-neural-layer was read in full. Existing degenerate boundary already requires the resulting equivariant condition; other rows concern unchanged action/function data and intertwining equation. Existing historical template_review records were preserved, with no new stamp or independent acceptance claimed.",
+    "published_ledger": "No published item was edited or found mathematically defective through this interface change; no published-ledger update is proposed. Step-4 presentation alerts about outside suppliers are historical evidence; the currently inspected def-function and def-equivariant-map-of-group-actions already have separate Definition references sections.",
+    "source_basis": "Familiar elementary definitions of group actions, equivariance and invariance, checked directly using the local suppliers. No external source was consulted or claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-equivariant-neural-layer.md --json",
+        "exit_code": 0,
+        "result": "checked 1; errors []; warnings []"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-equivariant-neural-layer.md --json",
+        "exit_code": 0,
+        "result": "files 1; checked proofs 0; failed 0; status not-applicable"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-equivariant-neural-layer.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items def-equivariant-neural-layer",
+        "exit_code": 0,
+        "result": "The exact post_sha256 and review_context_sha256 are copied into the review row; captured immediately after completing the repaired item review."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, ordinary frontier consumer routing, certification and required independent rejudgment; no worker-launched judgment or certification."
+  }
+}

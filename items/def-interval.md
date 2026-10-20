@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-interval.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -32,8 +33,8 @@ sources:
 ## Definition
 
 Throughout, $\mathbb{R}$ is the complete ordered field
-([[def-complete-ordered-field]], [[def-ordered-field]]) with its order
-([[def-real-order]]).
+(Complete ordered field (least-upper-bound property), Ordered field) with its order
+(Order on the reals).
 
 A subset $I \subseteq \mathbb{R}$ is **order-convex** when
 
@@ -60,17 +61,17 @@ $(a,b]$ are **half-open**.
 mark which side carries no endpoint condition at all; the five forms in the right
 column are defined by the displayed conditions on $x$ alone, and no arithmetic is
 ever performed with $\infty$. This is the same refusal to extend $\mathbb{R}$
-silently that [[rem-sup-conventions]] records for suprema.
+silently that Conventions: $\sup \emptyset$, unbounded sets, and the extended reals records for suprema.
 
 **Every one of the nine forms is order-convex.** Each is defined by a conjunction
 of at most two conditions, each of the shape $a < x$, $a \le x$, $x < b$ or
 $x \le b$, and each such condition is inherited by an intermediate point: if
 $a < x$ and $x \le z$ then $a < z$, and if $z \le y$ and $y < b$ then $z < b$,
-by transitivity of the order ([[def-ordered-field]]). Applying this to whichever
+by transitivity of the order (Ordered field). Applying this to whichever
 one or two conditions define the form in question gives $z \in I$ whenever
 $x, y \in I$ and $x \le z \le y$.
 
-**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly
+**Bounded intervals.** An interval is **bounded** (Lower bound, bounded below, bounded set) exactly
 when it is of one of the four forms in the left column: for those, $a$ is a lower
 bound and $b$ an upper bound. The other five forms are unbounded, on the side or
 sides written with $\infty$; the verification is in the remarks below.
@@ -87,7 +88,7 @@ endpoints $a$ and $b$:
 The only assertion here that is not immediate from the defining conditions is
 that $a < b$ makes $(a,b)$ nonempty with at least two points. It holds because
 $a < (a+b)/2 < b$, which follows from $a < b$ by adding $a$, respectively $b$, to
-both sides and halving ([[def-ordered-field]]); repeating the halving inside
+both sides and halving (Ordered field); repeating the halving inside
 $(a, (a+b)/2)$ produces a second point.
 
 **Closed bounded intervals.** These are the sets $[a,b]$ with $a \le b$, which is
@@ -106,6 +107,18 @@ $(c,c)$ for any other $c$, while each of these presentations has length $0$, so
 nothing inconsistent arises; but the endpoints are named explicitly at every
 point where a length is used in this library, and never inferred from the set.
 Unbounded intervals are assigned no length.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
+
+[[def-real-order]]
+
+[[rem-sup-conventions]]
+
+[[def-bounded-set]]
 
 ## Remarks
 

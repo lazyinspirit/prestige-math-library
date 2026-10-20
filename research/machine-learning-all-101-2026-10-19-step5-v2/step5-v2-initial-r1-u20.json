@@ -1,0 +1,147 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "20",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "thm-lloyd-objective-monotonicity-and-termination",
+      "model": "gpt-6-luna",
+      "context_sha256": "aff7331ef6e5244e2599a6adfdd0ab8ce4433b34ccd6e32989c5ac5d1adaf99c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Proof 2.1 excludes a repeated labeling even at initialization, although for n=p=K=1, x_1=0 and mu_1^(0)=1, z^(1)=z^(0)=(1) while J decreases from 1 to 0. The initial objective need not equal the mean-minimized objective of its labeling. Repaired 2.1 by restricting label recurrence and the finite-label count to post-update states t>=1; strict descent then proves termination.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-gaussian-mixture-em",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b4b848f7a443802a0c8fb2cfad19895bbca6c98ded54681687b1411e770242e",
+      "outcome": "false_positive",
+      "reason": "The proposed pi=(1,0) input is excluded: the algorithm requires theta_0 in the domain of def-finite-gaussian-mixture, whose Definition explicitly requires every pi_k>0. SPD covariances make all Gaussian component densities finite and strictly positive, hence gamma_ik>0 and N_k>0. The full-affine-span hypothesis and the exact M-step supplier preserve SPD scatters and weights N_k/n>0 at every iteration. There is no inactive component and no zero divisor in the permitted execution.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-lloyd-objective-monotonicity-and-termination",
+      "disposition": "repaired",
+      "post_sha256": "e259fce98eba94a26c040bfe2cc306ab9521bf0c88712102ee044a2f23c431ea",
+      "review_context_sha256": "d668d804aad048011ed017a3b30749f8dfdd66593e0f3c0df2daae0dfa092646",
+      "reason": "Checked the actual retention-on-ties algorithm, the finite squared-distance objective, and the finite-dimensional least-squares supplier. A changed label strictly reduces distance; the injective constant-vector map gives the unique nonempty-cluster mean; empty centers remain fixed. Repaired only proof 2.1: after the first update J depends only on labels, so at most K^n-1 further nonterminal iterations occur. The Statement, arbitrary initialization, fixed-point conclusion and choice-free proof remain unchanged. The owning contract derivation was synchronized. This is repair authorship, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-gaussian-mixture-em",
+      "disposition": "unaffected",
+      "post_sha256": "97b3e25e422a081b35dc2f080ce241399034cdb27812ce9009fcb425210c0b19",
+      "review_context_sha256": "8354d99281a2dc1da6341b8ad83b5f78b3a261d7d84b08aa8308b4d35ba4f49a",
+      "reason": "Checked the complete procedure and its actual positive-weight mixture domain, normalized Gaussian formula, exact M-step proof, AC assumption and generic EM interface. At each finite update every gamma_ik and N_k is positive; v^T S_k v=0 would force v^T x_i constant for all i, contradicting full affine span. Thus each updated covariance is SPD and each new weight is positive with sum one. The weighted mean and covariance use the same responsibilities and newly updated mean. For the generic exact EM interpretation, the finite K^n-label posterior has positive masses, finite logarithms and finite KL; the proved Q maximizer is attained in the same domain. The positive integer T gives a finite loop and the stated sequence output; no convergence claim is made. No carrier, contract or page edit was needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-lloyd-objective-monotonicity-and-termination",
+      "locus": "proof-step",
+      "step": "2.1",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Initial labels may recur at the first update with a lower objective. Proof 2.1 now counts only post-update labels, with at most K^n-1 subsequent nonterminal transitions. Statement unchanged; no interface propagation."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-gaussian-mixture-em",
+      "locus": "definition",
+      "status": "dismissed",
+      "reason": "The alleged zero-weight initial parameter violates the referenced finite-mixture domain, which requires all weights strictly positive. Positive responsibilities and full affine span keep the M-step in that domain. No repair is required."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "reviewed_files": [
+      "items/thm-lloyd-objective-monotonicity-and-termination.md",
+      "items/alg-lloyd-k-means.md",
+      "items/def-k-means-objective.md",
+      "items/thm-least-squares-solutions-and-normal-equation.md",
+      "items/alg-gaussian-mixture-em.md",
+      "items/def-finite-gaussian-mixture.md",
+      "items/thm-gaussian-mixture-exact-m-step-maximizes-q.md",
+      "items/thm-finite-gaussian-component-density-normalized.md",
+      "items/alg-expectation-maximization.md",
+      "items/def-axiom-of-choice.md",
+      "research/machine-learning-all-101-2026-10-19-batch-20.proof-contracts.json",
+      "research/machine-learning-all-101-2026-10-19-batch-20.pages.json",
+      "library/machine-learning/ml02-clustering-mixtures.md",
+      "library/machine-learning/ml02-clustering-mixtures-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-lloyd-objective-monotonicity-and-termination.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-lloyd-objective-monotonicity-and-termination.md --json",
+        "exit_code": 0,
+        "result": "1 checked file, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-20.proof-contracts.json --items thm-lloyd-objective-monotonicity-and-termination --strict --json",
+        "exit_code": 0,
+        "result": "ok, 1 selected contract, no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-gaussian-mixture-em.md --json",
+        "exit_code": 0,
+        "result": "not-applicable, 0 checked proofs and 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-gaussian-mixture-em.md --json",
+        "exit_code": 0,
+        "result": "1 checked file, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-20.proof-contracts.json --items alg-gaussian-mixture-em --strict --json",
+        "exit_code": 0,
+        "result": "ok, 1 selected contract, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-lloyd-objective-monotonicity-and-termination.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; run once after the final item edit"
+      },
+      {
+        "command": "Read-only Node verification using itemHashGuard, statementHash and SHA-256(JSON.stringify(initial-1 pack))",
+        "exit_code": 0,
+        "result": "Exact task input hash and tuple coverage verified; both captured guards still match; repaired/unaffected dispositions agree with assignment guards; both original interface hashes are unchanged."
+      }
+    ],
+    "unresolved_obligations": [],
+    "source_reading": "Familiar finite-dimensional arguments; no external source consulted or claimed.",
+    "next_action": "Controller collection, independent rejudgment and subsequent native closure remain engine-owned.",
+    "interface_comparison": "Both complete original Statement/Definition sections equal the unchanged assigned manifest text byte-for-byte after trimming section-edge whitespace. Only Lloyd proof step 2.1 and its owning contract derivation changed; neither assigned item has diagrams or hyperlinks interrupting its complete statement/definition. No interface event, new prerequisite or downstream propagation arises.",
+    "published_ledger": "No assigned item is published and no potentially defective published consumer was found; no published-ledger modification is proposed. Step-4 outside presentation alerts are not assigned repairs; the opened AC and generic EM carriers now have their links in Definition references.",
+    "repair_complete": true,
+    "contract_integration": "Acquired tools/step5-shared-write-lock.mjs as step5-v2-initial-r1-u20, reread the batch contract, changed only the theorem 2.1 derivation claim, passed its focused strict check and released the lock before review-context capture."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-20.proof-contracts.json": "eaf4fdb4ec89fefe87b9f1c438291b227fb9cead4b2a4bada7508885b0490018"
+  }
+}

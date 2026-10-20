@@ -13,8 +13,8 @@ aliases: []
 landmark: true
 proof_strategy: cases
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-geometric-series.json
   precheck: pass
-  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/thm-geometric-series.json
 sources:
   scraped: []
   references:
@@ -29,16 +29,22 @@ pipeline_run: null
 
 ## Statement
 
-Let $r \in \mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),
+Let $r \in \mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$),
 so that $r^0 = 1$ for every $r$, including $r = 0$.
 
-1. If $|r| < 1$ then the series $\sum r^k$ converges ([[def-series]]) and
+1. If $|r| < 1$ then the series $\sum r^k$ converges (Series, partial sums, convergence and the sum, divergence, and the tail series) and
    $$\sum_{k=0}^{\infty} r^{k} \;=\; \frac{1}{1-r} .$$
 2. If $|r| \ge 1$ then $\sum r^k$ diverges.
 
 The series starts at $k = 0$ and its first term is $r^0 = 1$; in particular
 $\sum_{k=0}^{\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to
 $1$. Which starting index is meant has to be said, and it is said here.
+
+## Statement references
+
+[[def-integer-power]]
+
+[[def-series]]
 
 ## Facts & Assumptions
 

@@ -12,6 +12,7 @@ deps: [def-matrix-product-and-identity-matrix,
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-moore-penrose-pseudoinverse.json
   audited: 2026-08-31
   precheck: n/a
   judge:
@@ -41,5 +42,11 @@ When such a matrix exists and is unique, it is denoted by $A^+$.
 
 The four displayed relations are the **Penrose equations**. They are written in
 the matrix product and adjoint conventions of
-[[def-matrix-product-and-identity-matrix]] and
-[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].
+Rectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes and
+In orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix.
+
+## Definition references
+
+[[def-matrix-product-and-identity-matrix]]
+
+[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]

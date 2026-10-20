@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-gaussian-process.json
   audited: 2026-09-14
 sources:
   references:
@@ -20,8 +21,8 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process
-$X=(X_t)_{t\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]
+Assume the Axiom of Choice The Axiom of Choice. A real stochastic process
+$X=(X_t)_{t\in I}$ Stochastic processes and their finite-dimensional distributions
 is a **Gaussian process** if, for every integer $n\ge 1$, every time list
 $t_1,\ldots,t_n\in I$, and every $a_1,\ldots,a_n\in\mathbb R$, the random
 variable
@@ -34,7 +35,7 @@ included.
 
 Equivalently, for every such time list the evaluation vector
 $(X_{t_1},\ldots,X_{t_n})$ has a possibly singular multivariate normal law in
-the sense of [[def-multivariate-normal-law]]. Indeed, that definition says
+the sense of Multivariate normal law, including singular covariance. Indeed, that definition says
 exactly that every scalar projection of the vector is normal. This also covers
 repeated times, zero coefficients, and singular covariance matrices; no
 distinct-time convention is needed for this definition.
@@ -43,6 +44,14 @@ Choice is declared because the library's scalar and multivariate normal-law
 interfaces construct their probability laws and independent standard-normal
 realizations under AC. The equivalence itself is only an unpacking of the
 finite-dimensional projection definition and makes no further selection.
+
+## Definition references
+
+[[def-axiom-of-choice]]
+
+[[def-stochastic-process-and-finite-dimensional-distributions]]
+
+[[def-multivariate-normal-law]]
 
 ## Source notes
 

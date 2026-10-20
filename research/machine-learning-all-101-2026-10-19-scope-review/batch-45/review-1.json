@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "45",
+  "round": 1,
+  "reviewed_items": [
+    "lem-du-activation-normalizer-finite-positive",
+    "lem-du-conditional-loss-contraction-under-gram-control",
+    "def-du-overparameterized-network-architectures-and-gram-kernels",
+    "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+    "lem-du-output-gradient-gram-update-identity",
+    "lem-du-initial-output-gaussian-concentration",
+    "lem-du-local-pl-descent-and-path-length",
+    "lem-du-neighborhood-gram-and-hessian-control",
+    "lem-du-simultaneous-initialization-event",
+    "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+    "thm-residual-network-polynomial-width-training-convergence",
+    "ex-du-relu-outside-analytic-activation-class",
+    "ex-du-residual-skip-at-every-layer",
+    "ex-du-interpolation-does-not-imply-test-fit",
+    "ex-du-duplicate-inputs-force-singular-gram",
+    "ex-du-initial-output-common-mode-variance"
+  ],
+  "reviewed_pages": [
+    "overparameterized-training-and-interpolation",
+    "overparameterized-training-and-interpolation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The batch and both compact pages were reviewed. The prior findings were resolved except for the newly identified local issues below. This final review remains unsatisfied, so both issues are escalated to the owner.",
+  "findings": [
+    {
+      "id": "lem-du-local-pl-descent-and-path-length",
+      "type": "prerequisite",
+      "reason": "Proof step 1.1 bounds |gᵀ∇²L g| by S||g||² using only the induced operator-norm bound. The operator-norm definition supplies a bound on ||∇²L g||, but the proof does not supply the Euclidean Cauchy–Schwarz pairing or an explicit self-adjoint spectral argument for this quadratic-form bound. The smallest missing result is Euclidean Cauchy–Schwarz or a local derivation of the bound."
+    },
+    {
+      "id": "ex-du-duplicate-inputs-force-singular-gram",
+      "type": "local",
+      "reason": "The repaired proof now gives separate fully connected and residual inductions, but Facts & Assumptions F2 states symmetry only for the terminal matrix. Steps 2.1 and 3.2 use symmetry of intermediate K^(h) and S^(h) matrices. The declared population-gram supplier establishes those all-layer properties; F2 and its step uses need to state that scope explicitly."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+      "decision": "escalate",
+      "reason": "Proof step 4.1 applies lem-du-local-pl-descent-and-path-length to establish confinement and loss contraction; its unresolved step 1.1 quadratic-form estimate affects this application."
+    },
+    {
+      "id": "thm-residual-network-polynomial-width-training-convergence",
+      "decision": "escalate",
+      "reason": "Proof step 4.1 applies lem-du-local-pl-descent-and-path-length to establish confinement and loss contraction; its unresolved step 1.1 quadratic-form estimate affects this application."
+    }
+  ]
+}

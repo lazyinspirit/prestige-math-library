@@ -15,6 +15,7 @@ sources:
     - title: "S. R. S. Varadhan, Probability Theory, Section 3.1"
       url: "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-independent-sigma-algebras-and-events.json
   audited: 2026-09-05
   precheck: n/a
   judge:
@@ -29,7 +30,7 @@ Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space.
 
 A family $(\mathcal F_i)_{i\in I}$ of sub-sigma-algebras of $\mathcal F$ is
 **independent** when it is independent as a family of event classes in the
-sense of [[def-independent-families-of-event-classes]].
+sense of Independent families of event classes.
 
 A family $(A_i)_{i\in I}$ of events is **independent** when the singleton event
 classes $\bigl(\{A_i\}\bigr)_{i\in I}$ are independent. Equivalently, for every
@@ -39,3 +40,8 @@ $$\mathbb P\left(\bigcap_{k<n}A_{i_k}\right)=\prod_{k<n}\mathbb P(A_{i_k}).$$
 
 For two events this reduces to the familiar identity
 $\mathbb P(A\cap B)=\mathbb P(A)\mathbb P(B)$.
+
+## Definition references
+
+[[def-independent-families-of-event-classes]]
+

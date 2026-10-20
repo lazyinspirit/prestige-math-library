@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "84",
+  "round": 0,
+  "reviewed_items": [
+    "def-differentiable-stochastic-policy",
+    "lem-policy-score-has-zero-conditional-mean",
+    "thm-policy-gradient-theorem",
+    "alg-one-step-actor-critic",
+    "alg-reinforce",
+    "lem-action-independent-baseline-does-not-bias-policy-gradient",
+    "alg-reinforce-with-baseline",
+    "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "ex-reinforce-one-step-bernoulli-mdp",
+    "ex-action-independent-baseline-eliminates-variance",
+    "cex-policy-gradient-without-start-time-discount"
+  ],
+  "reviewed_pages": [
+    "policy-gradients-reinforce-and-actor-critic",
+    "policy-gradients-reinforce-and-actor-critic-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the full batch, approved ML-76 scope, body-free compact pages, and actual supplier statements and proofs. The gradient, baseline, and example arguments check out. Request the single local repair for the score lemma's conditional-expectation existence step and the three algorithm interfaces. No outside-batch item consumers were found. Sutton and Barto's Chapters 13.2–13.5 cross-check the discounted score update, baseline cancellation, and one-step actor–critic procedure ([PDF](https://web.stanford.edu/class/psych209/Readings/SuttonBartoRL.pdf)).",
+  "findings": [
+    {
+      "id": "lem-policy-score-has-zero-conditional-mean",
+      "type": "prerequisite",
+      "reason": "Step 2.1 infers existence from F4, which only defines a conditional-expectation version. Since H_t has finitely many atoms and the score is bounded, repair locally by defining the conditional expectation as the finite conditional average on each positive-mass atom, assigning any value on null atoms, and verifying F4."
+    },
+    {
+      "id": "alg-one-step-actor-critic",
+      "type": "local",
+      "reason": "The Definition initializes S and I but supplies no initial theta or w and states no output. Add explicit inputs, output, and admissibility conditions, including almost-sure termination under the within-episode parameter updates."
+    },
+    {
+      "id": "alg-reinforce",
+      "type": "local",
+      "reason": "The Definition leaves the current theta implicit, names no output, and does not make episode termination admissibility explicit. Specify the single-round input and returned parameter, and the required termination condition for each sampled episode."
+    },
+    {
+      "id": "alg-reinforce-with-baseline",
+      "type": "local",
+      "reason": "The Definition names the baseline and step size but leaves the current theta implicit, names no output, and does not make episode termination admissibility explicit. Specify the single-round input and returned parameter and the required termination condition."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-policy-gradient-theorem",
+      "decision": "accept",
+      "reason": "Its step 3.1 use of the zero-score lemma to remove earlier rewards is valid once the lemma locally constructs the conditional-expectation version; no theorem edit is needed."
+    },
+    {
+      "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "decision": "accept",
+      "reason": "Its step 1.1 use of the zero-score lemma with the bounded state baseline is valid once the local supplier proof is completed; no lemma edit is needed."
+    },
+    {
+      "id": "alg-reinforce-with-baseline",
+      "decision": "repair",
+      "reason": "Its use of the frozen-policy REINFORCE procedure is sound, and its own Definition needs the same explicit input, output, and termination conditions requested for alg-reinforce."
+    },
+    {
+      "id": "ex-actor-critic-bootstrap-can-bias-policy-update",
+      "decision": "accept",
+      "reason": "The example supplies theta, w, step sizes, and a terminating two-decision model; the stated first-update computation remains valid under the clarified algorithm interface."
+    },
+    {
+      "id": "ex-reinforce-one-step-bernoulli-mdp",
+      "decision": "accept",
+      "reason": "The example specifies its current theta and one-step terminating episode; its estimator calculation is unchanged by the interface clarification."
+    },
+    {
+      "id": "ex-action-independent-baseline-eliminates-variance",
+      "decision": "accept",
+      "reason": "The example specifies its current theta and fixed baseline; its one-step expectations and variances remain unchanged."
+    },
+    {
+      "id": "policy-gradients-reinforce-and-actor-critic",
+      "decision": "accept",
+      "reason": "The A-page item inventory and placement remain correct under the requested algorithm interface clarifications."
+    },
+    {
+      "id": "policy-gradients-reinforce-and-actor-critic-examples",
+      "decision": "accept",
+      "reason": "The B-page example inventory and placement remain correct; no example statement requires revision."
+    }
+  ]
+}

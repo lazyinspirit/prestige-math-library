@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/def-finite-sum.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-sum.json
 id: def-finite-sum
 kind: definition
 title: "Finite sums and finite products, by recursion"
@@ -32,15 +32,15 @@ pipeline_run: null
 ## Definition
 
 Throughout this page $\mathbb{R}$ is the complete ordered field
-([[def-complete-ordered-field]]), in particular an ordered field
-([[def-ordered-field]]) and a field ([[def-field]]), and $\mathbb{N}$ is the set
-of natural numbers ([[def-natural-numbers]]) with successor $\sigma(n) = n + 1$
-([[def-nat-addition]]).
+(Complete ordered field (least-upper-bound property)), in particular an ordered field
+(Ordered field) and a field (Field), and $\mathbb{N}$ is the set
+of natural numbers (The natural numbers $\mathbb{N}$ (von Neumann)) with successor $\sigma(n) = n + 1$
+(Addition of natural numbers).
 
 Let $a : \mathbb{N} \to \mathbb{R}$ be a sequence of reals, written $a_k$ for
 $a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the
 upper index**, which is legitimate because of the recursion theorem
-([[thm-recursion]]). That theorem produces a function of one variable, so the
+(The recursion theorem). That theorem produces a function of one variable, so the
 running index has to be carried along inside the value: applying it to the set
 $A = \mathbb{N} \times \mathbb{R}$, the starting element $(0, 0)$ and the function
 $f(n, s) = (\sigma(n),\, s + a_n)$ gives a unique
@@ -51,7 +51,7 @@ $$g(0) = (0, 0), \qquad g(\sigma(n)) = f(g(n)) \quad (n \in \mathbb{N}).$$
 Write $g(n) = \big(\pi_1(g(n)),\, \Sigma_n\big)$ for its two coordinates.
 
 **The first coordinate is the index itself, and that is a small induction, not an
-observation** ([[thm-induction-principle]]). Indeed $\pi_1(g(0)) = 0$; and if
+observation** (The principle of mathematical induction). Indeed $\pi_1(g(0)) = 0$; and if
 $\pi_1(g(n)) = n$, then
 $g(\sigma(n)) = f\big(\pi_1(g(n)), \Sigma_n\big) = \big(\sigma(\pi_1(g(n))),\, \Sigma_n + a_{\pi_1(g(n))}\big) = \big(\sigma(n),\, \Sigma_n + a_n\big)$,
 so $\pi_1(g(\sigma(n))) = \sigma(n)$. By induction $\pi_1(g(n)) = n$ for every
@@ -63,7 +63,7 @@ $$\Sigma_0 = 0, \qquad \Sigma_{\sigma(n)} = \Sigma_n + a_n .$$
 $\Sigma$ is moreover the **unique** function $\mathbb{N} \to \mathbb{R}$ with those
 two properties: if $\Sigma'$ also has them then $n \mapsto (n, \Sigma'_n)$ satisfies
 the two clauses defining $g$, hence equals $g$ by the uniqueness clause of
-[[thm-recursion]], so $\Sigma' = \Sigma$.
+The recursion theorem, so $\Sigma' = \Sigma$.
 
 We write $\sum_{k < n} a_k := \Sigma_n$. The same construction with starting
 element $(0, 1)$ and $f(n, p) = (\sigma(n),\, p \cdot a_n)$, with the same
@@ -80,9 +80,9 @@ $$\sum_{k=0}^{n} a_k := \sum_{k < n+1} a_k, \qquad \prod_{k=0}^{n} a_k := \prod_
 
 and, for a general lower index $m$ with $m \le n + 1$, let $d$ be the
 unique natural number satisfying $m+d=n+1$. Existence is the definition of
-natural order ([[def-nat-order]]); if $m+d=m+e$, commutativity
-([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation
-([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,
+natural order (Order on the natural numbers); if $m+d=m+e$, commutativity
+(Addition is commutative) gives $d+m=e+m$, so cancellation
+(Addition is cancellative) gives $d=e$. On these admissible bounds only,
 we may write this unique additive gap as $d=n+1-m$; no total natural subtraction
 operation is presupposed. With $d$ thus fixed, define
 
@@ -107,6 +107,28 @@ $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ is also used for a list
 $a_0, \dots, a_{n-1}$ of reals given without reference to any extension of the
 list to all of $\mathbb{N}$: extend the list by $a_k = 0$ (respectively
 $a_k = 1$) for $k \ge n$ and apply the definition above.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
+
+[[def-field]]
+
+[[def-natural-numbers]]
+
+[[def-nat-addition]]
+
+[[thm-recursion]]
+
+[[thm-induction-principle]]
+
+[[def-nat-order]]
+
+[[lem-nat-add-commutative]]
+
+[[lem-nat-add-cancellative]]
 
 ## Remarks
 

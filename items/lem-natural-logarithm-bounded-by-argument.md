@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-natural-logarithm-bounded-by-argument.json
 id: lem-natural-logarithm-bounded-by-argument
 kind: lemma
 title: "The natural logarithm is bounded above by its positive argument minus one"
@@ -30,8 +32,12 @@ sources:
 ## Statement
 
 For every real $x\ge1$, the natural logarithm of
-[[def-natural-logarithm]] satisfies
+The natural logarithm as the inverse of the exponential function satisfies
 $$0\le\log x\le x-1\le x.$$
+
+## Statement references
+
+[[def-natural-logarithm]]
 
 ## Facts & Assumptions
 

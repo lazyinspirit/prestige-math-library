@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [thm-iterated-section-measures-agree-on-product-measurable-sets, prop-sigma-finite-section-measure-functions-are-measurable]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-product-measure-on-sigma-finite-spaces.json
   audited: 2026-08-29
   precheck: n/a
   judge:
@@ -29,6 +30,13 @@ spaces. For $E \in \mathcal A \otimes \mathcal B$, define
 $$(\mu \times \nu)(E) := \int_X \nu(E_x)\,d\mu = \int_Y \mu(E^y)\,d\nu.$$
 
 The two displayed integrals are well-defined by
-[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by
-[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the
+For sigma-finite measures, the section-measure functions are measurable and equal by
+For sigma-finite measures, the two section-measure integrals of a measurable set agree. This is the
 **product measure** of $\mu$ and $\nu$.
+
+## Definition references
+
+[[prop-sigma-finite-section-measure-functions-are-measurable]]
+
+[[thm-iterated-section-measures-agree-on-product-measurable-sets]]
+

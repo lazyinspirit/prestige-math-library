@@ -1,0 +1,419 @@
+PDF PAGE 4
+page
+Mehryar Mohri - Foundations of Machine Learning
+Empirical Rademacher Complexity
+Definition:
+•    family of functions mapping from set    to       .
+• sample                      .
+•      (Rademacher variables): independent uniform 
+random variables taking values in             .
+4
+G
+Z
+[a, b]
+S =(z1, . . . , zm)
+σis
+{−1, +1}
+correlation with random noise
+bRS(G) = E
+σ
+
+sup
+g2G
+1
+m
+σ1...
+σm
+#
+·
+g(z1)
+...
+g(zm)
+##
+= E
+σ
+
+sup
+g2G
+1
+m
+m
+X
+i=1
+σig(zi)
+#
+.
+
+PDF PAGE 5
+page
+Mehryar Mohri - Foundations of Machine Learning
+Rademacher Complexity
+Definitions: let    be a family of functions mapping 
+from    to       .
+• Empirical Rademacher complexity of    :
+• Rademacher complexity of    :
+5
+G
+Z
+[a, b]
+G
+where      are independent uniform random variables 
+taking values in              and                      .
+σis
+{−1, +1}
+G
+Rm(G) =
+E
+S∼Dm[!RS(G)].
+!RS(G) = E
+σ
+"
+sup
+g∈G
+1
+m
+m
+#
+i=1
+σig(zi)
+$
+,
+S =(z1, . . . , zm)
+
+PDF PAGE 6
+page
+Mehryar Mohri - Foundations of Machine Learning
+Rademacher Complexity Bound
+Theorem: Let    be a family of functions mapping 
+from    to       . Then, for any       , with probability 
+at least       , the following holds for all        :
+Proof: Apply McDiarmid’s inequality to
+6
+G
+Z
+δ>0
+1−δ
+g∈G
+[0, 1]
+E[g(z)] ≤1
+m
+m
+!
+i=1
+g(zi) + 2Rm(G) +
+⇥
+log 1
+δ
+2m .
+E[g(z)] ≤1
+m
+m
+!
+i=1
+g(zi) + 2⇥RS(G) + 3
+⇤
+log 2
+δ
+2m .
+(Koltchinskii and Panchenko, 2002)
+Φ(S) = sup
+g∈G
+E[g] −!ES[g].
+
+PDF PAGE 7
+page
+Mehryar Mohri - Foundations of Machine Learning
+• Changing one point of   changes        by at most 
+• Thus, by McDiarmid’s inequality, with probability at 
+least 
+• We are left with bounding the expectation.
+7
+S
+Φ(S)
+1 −δ
+2
+Φ(S) ≤E
+S[Φ(S)] +
+!
+log 2
+δ
+2m .
+1
+m.
+Φ(S0) −Φ(S) = sup
+g2G
+{E[g] −bES0[g]} −sup
+g2G
+{E[g] −bES[g]}
+sup
+g2G
+{{E[g] −bES0[g]} −{E[g] −bES[g]}}
+= sup
+g2G
+{bES[g] −bES0[g]} = sup
+g2G
+1
+m(g(zm) −g(z0
+m)) 1
+m.
+
+PDF PAGE 8
+page
+Mehryar Mohri - Foundations of Machine Learning
+• Series of observations:
+8
+E
+S[Φ(S)] = E
+S
+⇥
+sup
+g2G
+E[g] −bES(g)
+⇤
+= E
+S
+⇥
+sup
+g2G
+E
+S0[bES0(g) −bES(g)]
+⇤
+(sub-add. of sup) E
+S,S0
+⇥
+sup
+g2G
+bES0(g) −bES(g)
+⇤
+= E
+S,S0
+⇥
+sup
+g2G
+1
+m
+m
+X
+i=1
+(g(z0
+i) −g(zi))
+⇤
+(swap zi and z0
+i) =
+E
+σ,S,S0
+⇥
+sup
+g2G
+1
+m
+m
+X
+i=1
+σi(g(z0
+i) −g(zi))
+⇤
+(sub-additiv. of sup) E
+σ,S0
+⇥
+sup
+g2G
+1
+m
+m
+X
+i=1
+σig(z0
+i)
+⇤
++ E
+σ,S
+⇥
+sup
+g2G
+1
+m
+m
+X
+i=1
+−σig(zi)
+⇤
+= 2 E
+σ,S
+⇥
+sup
+g2G
+1
+m
+m
+X
+i=1
+σig(zi)
+⇤
+= 2Rm(G).
+
+PDF PAGE 9
+page
+Mehryar Mohri - Foundations of Machine Learning
+• Now, changing one point of   makes          vary by 
+at most    . Thus, again by McDiarmid’s inequality, 
+with probability at least         ,
+• Thus, by the union bound, with probability at   
+least       ,
+9
+!RS(G)
+S
+Rm(G) ≤!RS(G) +
+⇥
+log 2
+δ
+2m .
+1−δ
+Φ(S) ≤2!RS(G) + 3
+⇥
+log 2
+δ
+2m .
+1 −δ
+2
+1
+m
+
+PDF PAGE 15
+page
+Mehryar Mohri - Foundations of Machine Learning
+Massart’s Lemma
+Theorem: Let            be a finite set, with                 , 
+then, the following holds:
+Proof: 
+15
+A ⊆Rm
+R=max
+x∈A ∥x∥2
+E
+σ
+! 1
+m sup
+x∈A
+m
+⇤
+i=1
+σixi
+⇥
+≤R
+⌅
+2 log |A|
+m
+.
+(Massart, 2000)
+exp
+!
+t E
+σ
+"
+sup
+x∈A
+m
+#
+i=1
+σixi
+$%
+≤E
+σ
+!
+exp
+"
+t sup
+x∈A
+m
+#
+i=1
+σixi
+$%
+(Jensen’s ineq.)
+= E
+σ
+!
+sup
+x∈A
+exp
+"
+t
+m
+#
+i=1
+σixi
+$%
+≤
+#
+x∈A
+E
+σ
+!
+exp
+"
+t
+m
+#
+i=1
+σixi
+$%
+=
+#
+x∈A
+m
+&
+i=1
+E
+σ (exp [tσixi])
+(Hoeffding’s ineq.) ≤
+#
+x∈A
+'
+exp
+()m
+i=1 t2(2|xi|)2
+8
+*+
+≤|A|e
+t2R2
+2 .
+
+PDF PAGE 16
+page
+Mehryar Mohri - Foundations of Machine Learning
+• Taking the log yields:
+• Minimizing the bound by choosing                   
+gives
+16
+E
+σ
+!
+sup
+x∈A
+m
+⇤
+i=1
+σixi
+⇥
+≤log |A|
+t
++ tR2
+2 .
+t =
+√
+2 log |A|
+R
+E
+σ
+!
+sup
+x∈A
+m
+⇤
+i=1
+σixi
+⇥
+≤R
+⌅
+2 log |A|.

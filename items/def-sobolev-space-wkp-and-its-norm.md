@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-sobolev-space-wkp-and-its-norm.json
   judge:
     model: "gpt-6-sol"
     verdict: pass
@@ -47,12 +48,12 @@ This is a finite nonempty set: every coordinate of such an $\alpha$ lies in
 $\{0,\ldots,k\}$, and it contains the zero multi-index.
 
 The real and complex $L^p$ classes use the conventions in
-[[def-l-p-space-as-a-quotient-by-null-functions]] and
-[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient
+The space $L^p(\mu)$ as the quotient by null functions and
+Complex Lp classes and Euclidean test-function conventions. Their quotient
 norm values are supplied by
-[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
+The $L^p$ norm descends to the quotient and makes $L^p$ a normed space for $1 \le p \le \infty$
 for real scalars and
-[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.
+Complex Holder, Minkowski, and the quotient norm for complex scalars.
 
 Define $W^{k,p}(\Omega;\mathbb K)$ to be the set of classes
 $u\in L^p(\Omega;\mathbb K)$ such that, for every $\alpha\in\mathcal A_k$,
@@ -60,11 +61,11 @@ there is an $L^p(\Omega;\mathbb K)$ class with a locally integrable
 representative $v_\alpha$ satisfying
 $$\int_\Omega u\,D^\alpha\varphi\,dx =(-1)^{|\alpha|}\int_\Omega v_\alpha\varphi\,dx \qquad\text{for every }\varphi\in C_c^\infty(\Omega).$$
 Here the weak derivative is the one in
-[[def-weak-derivative-of-a-locally-integrable-function]]. Under
-[[def-countable-choice]], local integrability of $L^p$ representatives and
+Weak derivative of a locally integrable function. Under
+The Axiom of Countable Choice ($\mathrm{AC}_\omega$), local integrability of $L^p$ representatives and
 invariance under null-set changes follow from
-[[lem-weak-derivative-is-independent-of-lp-representatives]], while
-[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each
+Weak differentiation ignores null-set changes, while
+Uniqueness of a weak derivative as an almost-everywhere class gives uniqueness of each
 locally integrable derivative class. Thus this condition is a condition on the
 $L^p$ class $u$, and each resulting derivative determines one $L^p$ class,
 denoted $D^\alpha u$. The test pairing is bilinear, without conjugation.
@@ -85,3 +86,22 @@ $U$.
 
 If $\Omega=\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain
 only the zero class, and the displayed norm expression is zero.
+
+## Definition references
+
+[[def-l-p-space-as-a-quotient-by-null-functions]]
+
+[[def-complex-lp-and-euclidean-test-function-conventions]]
+
+[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
+
+[[thm-complex-holder-minkowski-and-the-quotient-norm]]
+
+[[def-weak-derivative-of-a-locally-integrable-function]]
+
+[[def-countable-choice]]
+
+[[lem-weak-derivative-is-independent-of-lp-representatives]]
+
+[[lem-weak-derivatives-are-unique-almost-everywhere]]
+

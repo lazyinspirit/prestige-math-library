@@ -1,0 +1,984 @@
+[
+  {
+    "order": 2750,
+    "id": "ml02-differential-privacy",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Differential privacy mechanisms and composition",
+    "companion": "ml02-differential-privacy-examples",
+    "requires": [
+      "conditional-distributions-and-regular-conditional-probability",
+      "measures-and-their-basic-properties",
+      "probability-spaces-random-variables-and-expectation",
+      "sigma-algebras-and-borel-sets",
+      "structural-causal-models-dags-and-adjustment",
+      "parametric-survival-and-reliability",
+      "feynman-kac-particle-filters",
+      "measure-theoretic-information-and-conditioning"
+    ],
+    "items": [
+      {
+        "id": "def-differential-privacy-and-adjacency",
+        "kind": "definition",
+        "title": "Differential privacy, databases, and add/remove adjacency",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let U be a nonempty record universe and let N0={0,1,2,...}. A database is a finite-support function D:U→N0; D(u) counts occurrences. The domain D of databases has its power-set sigma-algebra. D,D′ are neighbors exactly when one is obtained by adding or removing one occurrence of one record. A mechanism into a measurable output space (Y,B) is a probability kernel K. For ε≥0 and 0≤δ≤1, K is (ε,δ)-DP when K(D,A)≤e^εK(D′,A)+δ for every ordered neighboring pair and every A∈B; δ=0 is pure ε-DP.",
+        "proof_obligations": [
+          "State the add/remove convention, variable-size database domain, output event space, and both DP parameters exactly; distinguish this relation from replace-one adjacency."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "def-laplace-distribution",
+        "kind": "definition",
+        "title": "Laplace noise distribution",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-countable-choice",
+          "def-borel-sigma-algebra",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-exponential-and-weibull-survival-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For b>0, let Exp(1/b) be the probability law on (0,+∞) with density x↦b⁻¹e^(−x/b). For every Borel set A⊆R, define Lap(b)(A)=½ Exp(1/b)(A∩(0,+∞))+½ Exp(1/b)({x>0:−x∈A}). Define Lap(0) to be the point mass at 0. Thus Lap(b) is the equal mixture of a positive exponential noise law and its reflection.",
+        "proof_obligations": [
+          "Verify that both mixture terms are probability measures on the stated Borel output space and that the zero-scale branch is a probability measure."
+        ],
+        "axiom_use": "Countable Choice is inherited from the published construction of the real exponential probability law; no full Axiom of Choice is used."
+      },
+      {
+        "id": "def-global-l1-sensitivity",
+        "kind": "definition",
+        "title": "Global L1 sensitivity",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let d≥1 and let f:D→R^d be a query on the database domain with add/remove adjacency. When the set of adjacent-pair differences has an attained finite maximum, the global L1 sensitivity of f is Δ₁f=max_{D∼D′}||f(D)−f(D′)||₁, where ||x||₁=∑_{j=1}^d|x_j|. The sensitivity is finite when this maximum is finite.",
+        "proof_obligations": [
+          "Specify the finite-dimensional query codomain, adjacency relation, and attainment/finite-value condition needed for the maximum to be defined."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "thm-laplace-density-from-exponential-law",
+        "kind": "theorem",
+        "title": "Laplace noise has its stated Lebesgue density",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-laplace-distribution",
+          "def-countable-choice",
+          "thm-exponential-and-weibull-survival-laws",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For every b>0, the probability measure Lap(b) is absolutely continuous with respect to Lebesgue measure on R and has density z↦(2b)⁻¹exp(−|z|/b).",
+        "proof_obligations": [
+          "Derive the positive and reflected negative half-line densities from the exponential density and reflection invariance; handle the singleton {0}."
+        ],
+        "axiom_use": "Countable Choice is inherited from the exponential-law and Lebesgue-reflection suppliers.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-laplace-product-density",
+        "kind": "lemma",
+        "title": "Finite independent Laplace noise has product density",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "thm-laplace-density-from-exponential-law",
+          "thm-exponential-addition-formula",
+          "def-countable-choice",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "def-independent-random-elements"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For b>0 and finite d≥1, the product probability law Lap(b)^{⊗d} on R^d has Lebesgue density z↦(2b)⁻ᵈexp(−||z||₁/b); its coordinate projections are independent and each has law Lap(b).",
+        "proof_obligations": [
+          "Show the product density integrates to one, agrees with the finite product Laplace law on measurable rectangles, and therefore agrees on the product sigma-algebra."
+        ],
+        "axiom_use": "Countable Choice is inherited through the real exponential/Lebesgue suppliers; finite product formation adds no stronger choice principle.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-laplace-mechanism",
+        "kind": "algorithm",
+        "title": "Laplace mechanism",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-global-l1-sensitivity",
+          "def-laplace-distribution",
+          "lem-finite-products-of-probability-kernels",
+          "def-countable-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-borel-sigma-algebra",
+          "cor-continuous-functions-are-borel-measurable"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Input a database D, a finite-dimensional query f:D→R^d with finite global L1 sensitivity Δ₁f, and ε>0. If Δ₁f>0, draw Z from the finite product law Lap(Δ₁f/ε)^{⊗d} and release f(D)+Z. If Δ₁f=0, release f(D) deterministically. The output space is R^d with its Borel sigma-algebra.",
+        "proof_obligations": [
+          "Give the exact noise scale, independent-coordinate law, zero-sensitivity branch, and measurable output space; justify the probability-kernel construction from the finite product law."
+        ],
+        "axiom_use": "Countable Choice is inherited from the real Laplace probability law; the finite product and mechanism construction use no stronger choice principle."
+      },
+      {
+        "id": "thm-laplace-mechanism-privacy",
+        "kind": "theorem",
+        "title": "Laplace mechanism privacy",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "alg-laplace-mechanism",
+          "def-global-l1-sensitivity",
+          "def-differential-privacy-and-adjacency",
+          "lem-laplace-product-density",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For every finite-dimensional query f with finite global L1 sensitivity and every ε>0, the Laplace mechanism is (ε,0)-differentially private under add/remove adjacency.",
+        "proof_obligations": [
+          "Prove the positive-sensitivity density-ratio bound in both directions, integrate over every Borel event, and handle Δ₁f=0 separately."
+        ],
+        "axiom_use": "Countable Choice is inherited from the real-valued Laplace mechanism; the privacy-ratio argument itself is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-exponential-mechanism-utility-sensitivity",
+        "kind": "definition",
+        "title": "Exponential-mechanism utility sensitivity",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let R be a nonempty finite set independent of the database, and let u:D×R→R be a real-valued utility. When the adjacent-pair utility-difference set has an attained finite maximum, its global utility sensitivity is Δᵤ=max_{D∼D′, r∈R}|u(D,r)−u(D′,r)|.",
+        "proof_obligations": [
+          "State database-independent finite range, real-valued utility, add/remove adjacency, and the attained finite maximum convention; the exponential mechanism below requires Δᵤ>0."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "alg-exponential-mechanism",
+        "kind": "algorithm",
+        "title": "Exponential mechanism",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-exponential-mechanism-utility-sensitivity",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Input D, ε>0, a nonempty finite database-independent range R, and utility u with finite positive global utility sensitivity Δᵤ. For each r∈R set w_D(r)=exp(εu(D,r)/(2Δᵤ)), set Z_D=∑_{s∈R}w_D(s), and output r with probability w_D(r)/Z_D. Since R is finite nonempty and all scores are real, 0<Z_D<∞.",
+        "proof_obligations": [
+          "Verify the finite positive normalization and keep the database-independent range and positive-sensitivity hypotheses explicit."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "thm-exponential-mechanism-privacy-and-utility",
+        "kind": "theorem",
+        "title": "Exponential mechanism privacy and utility",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "alg-exponential-mechanism",
+          "def-exponential-mechanism-utility-sensitivity",
+          "def-differential-privacy-and-adjacency",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Under the exponential-mechanism hypotheses, the output law is (ε,0)-differentially private. For D fixed, let R_OPT={r∈R:u(D,r)=OPTᵤ(D)}. For every t>0, P[u(D,M(D))≤OPTᵤ(D)−(2Δᵤ/ε)(ln(|R|/|R_OPT|)+t)]≤e^(−t).",
+        "proof_obligations": [
+          "Bound both the point-probability and normalizer ratios; for utility, bound bad unnormalized mass and lower-bound the normalizer using all maximizers; verify R_OPT is nonempty."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-dp-test-function-extension",
+        "kind": "lemma",
+        "title": "Differential privacy inequality for bounded measurable functions",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integral-of-a-nonnegative-simple-function",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let P,Q be probability measures and suppose P(A)≤e^εQ(A)+δ for every measurable A, with ε≥0 and 0≤δ≤1. Then for every measurable g with 0≤g≤1, ∫g dP≤e^ε∫g dQ+δ.",
+        "proof_obligations": [
+          "Approximate g from below by dyadic simple functions, apply the event inequality to each level set, and pass to the limit by monotone convergence."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-dp-postprocessing",
+        "kind": "theorem",
+        "title": "Differential privacy is preserved under randomized postprocessing",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "lem-dp-test-function-extension",
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "If K is an (ε,δ)-differentially private probability kernel from databases to a measurable output space and L is any data-independent probability kernel from that output space to another measurable space, then the composed kernel KL is (ε,δ)-differentially private.",
+        "proof_obligations": [
+          "For each output event B, apply the bounded-function extension to g(y)=L(y,B), then identify the integrals with the composed-kernel event probabilities."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-dp-pure-privacy-loss-kl-bound",
+        "kind": "lemma",
+        "title": "Pure differential privacy bounds relative entropy",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-standard-borel-space",
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-kullback-leibler-is-nonnegative",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-natural-logarithm-laws",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let P and Q be probability measures on a standard-Borel space satisfying P(A)≤e^εQ(A) and Q(A)≤e^εP(A) for every measurable A, where ε≥0. Then D(P||Q)≤ε(e^ε−1).",
+        "proof_obligations": [
+          "Construct common Radon–Nikodym densities, derive the pointwise likelihood-ratio bounds, bound the symmetrized KL integrand, and establish nonnegativity of the reverse KL."
+        ],
+        "axiom_use": "AC is used for the Radon–Nikodym densities; no stronger axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-dp-approximate-kernel-purification",
+        "kind": "lemma",
+        "title": "Approximate-DP kernels admit a nearby pure-DP kernel on standard-Borel targets",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-standard-borel-space",
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "thm-measurability-of-integration-against-a-kernel",
+          "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let H and Y be standard-Borel spaces, λ a probability measure on H, and K,L probability kernels H→Y. If for λ-almost every h the pair K(h,·),L(h,·) satisfies both (ε,δ)-DP event inequalities, then there is a probability kernel K* such that for λ-almost every h and every measurable A, e^(−ε)L(h,A)≤K*(h,A)≤e^εL(h,A), and ∫TV(K(h,·),K*(h,·))λ(dh)≤δ, where TV(P,Q)=sup_A|P(A)−Q(A)|.",
+        "proof_obligations": [
+          "Use jointly measurable Radon–Nikodym densities relative to (K+L)/2, clip the density into [e^(−ε)q,e^εq], renormalize within the available slack, prove TV≤δ, and define the kernel measurably on one common conull set."
+        ],
+        "axiom_use": "AC is used through the published jointly measurable RN-kernel supplier and the countable measure-determining algebra; no additional choice principle is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-basic-adaptive-composition",
+        "kind": "theorem",
+        "title": "Basic adaptive composition",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "lem-dp-test-function-extension",
+          "def-composition-of-probability-kernels",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "thm-exponential-addition-formula"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let k≥1 mechanisms be adaptively composed, with round i conditional on every prior transcript being (εᵢ,δᵢ)-differentially private under the same neighboring-database relation. If εᵢ≥0, δᵢ≥0, and ∑ᵢδᵢ≤1, then the full transcript is (∑ᵢεᵢ,∑ᵢδᵢ)-differentially private.",
+        "proof_obligations": [
+          "Prove by induction on k; cap each conditional future-event probability at one, apply the bounded-function extension to the prefix kernel, and identify the iterated-kernel event probability."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-advanced-adaptive-composition-standard-borel-outputs",
+        "kind": "theorem",
+        "title": "Advanced adaptive composition for standard-Borel outputs",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-standard-borel-space",
+          "def-axiom-of-choice",
+          "lem-dp-pure-privacy-loss-kl-bound",
+          "lem-dp-approximate-kernel-purification",
+          "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "def-conditional-kl-for-probability-kernels",
+          "thm-conditional-kl-is-measurable",
+          "thm-azuma-hoeffding-inequality",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "lem-dp-test-function-extension",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Assume AC. Let each round output space and every finite transcript-prefix space be standard Borel. For k≥1 adaptive rounds, if each round conditional on every prior transcript is (ε,δ)-differentially private, where ε≥0, 0≤δ≤1, and 0<δ′<1 with kδ+δ′≤1, then the full transcript is (ε′,kδ+δ′)-differentially private, where ε′=√(2k ln(1/δ′))ε+kε(e^ε−1).",
+        "proof_obligations": [
+          "For the pure case, factor the transcript likelihood ratio into conditional RN ratios, bound their conditional KL means and apply Azuma. For approximate DP, purify each round under a base law dominating original and modified transcript prefixes, bound prefix TV cumulatively by kδ, then compose the pure result."
+        ],
+        "axiom_use": "Assume full AC for the measurable RN-kernel versions and Azuma supplier. The standard-Borel output assumption is explicit and is the current scope boundary.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-dp-joint-measure-purification",
+        "kind": "lemma",
+        "title": "Approximate privacy admits purification of a joint measure with fixed history marginal",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "AC is used only through the ordinary finite-measure Radon–Nikodym theorem. No regular conditional distribution or kernel Radon–Nikodym version is used.",
+        "page": "ml02-differential-privacy",
+        "sources": {
+          "references": [
+            {
+              "title": "Dwork and Roth, The Algorithmic Foundations of Differential Privacy, Lemma 3.17 and Theorem 3.20",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Assume AC. Let $H,Y$ be arbitrary measurable spaces, let $\\lambda$ be a probability measure on $H$, and let $K,L$ be probability kernels from $H$ to $Y$. Suppose $\\varepsilon\\ge0$, $0\\le\\delta\\le1$, and, for every $h$ and every measurable $A\\subseteq Y$,\n$$K(h,A)\\le e^\\varepsilon L(h,A)+\\delta,\\qquad L(h,A)\\le e^\\varepsilon K(h,A)+\\delta.$$\nDefine probability measures on the product sigma-algebra by\n$$R(B)=\\int_H K(h,B_h)\\lambda(dh),\\qquad S(B)=\\int_H L(h,B_h)\\lambda(dh).$$\nThere is a probability measure $T$ on $H\\times Y$ whose $H$ marginal is $\\lambda$, such that, as inequalities of measures,\n$$e^{-\\varepsilon}S\\le T\\le e^\\varepsilon S,\\qquad \\operatorname{TV}(R,T)\\le\\delta.$$\nHere $\\operatorname{TV}(U,V)=\\sup_B|U(B)-V(B)|$. No countability or topological condition is imposed on either measurable space.",
+        "proof_obligations": [
+          "Construct ordinary joint-measure RN densities, and bound conditional clipping excesses by localized section-event inequalities.",
+          "Give measurable mass correction within [q/a,aq], including a=1, preserve the history marginal, and prove TV≤δ without disintegration."
+        ]
+      },
+      {
+        "id": "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+        "kind": "theorem",
+        "title": "Advanced adaptive composition on arbitrary measurable output spaces",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-axiom-of-choice",
+          "lem-dp-joint-measure-purification",
+          "lem-dp-test-function-extension",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-azuma-hoeffding-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "AC is used through ordinary finite-measure Radon–Nikodym derivatives and the Azuma supplier. No kernel Radon–Nikodym version or regular conditional law is used.",
+        "page": "ml02-differential-privacy",
+        "sources": {
+          "references": [
+            {
+              "title": "Dwork and Roth, The Algorithmic Foundations of Differential Privacy, Theorem 3.20",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Vadhan, The Complexity of Differential Privacy, Lemma 2.4 and Claim 2.5",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Assume AC. Let $\\mathcal D$ be a set equipped with its power-set sigma-algebra and a symmetric adjacency relation $\\sim$; this includes finite-support record-count databases with neighbors differing by one added or removed occurrence. Let $k\\ge1$, let $Y_1,\\ldots,Y_k$ be arbitrary measurable output spaces, and let round $i$ be a probability kernel $K_i(D,h,\\cdot)$ on $Y_i$, measurable in the previous transcript $h\\in H_{i-1}=\\prod_{j<i}Y_j$ for each database $D$. Suppose that for every ordered neighboring pair $D\\sim D'$, every $i$, every $h$, and every measurable $A\\subseteq Y_i$,\n$$K_i(D,h,A)\\le e^\\varepsilon K_i(D',h,A)+\\delta,$$\nwhere $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$. If $0<\\delta'<1$ and $k\\delta+\\delta'\\le1$, then the full transcript, on the finite product sigma-algebra, is $(\\varepsilon',k\\delta+\\delta')$-differentially private, where\n$$\\varepsilon'=\\varepsilon\\sqrt{2k\\ln(1/\\delta')}+k\\varepsilon(e^\\varepsilon-1).$$",
+        "proof_obligations": [
+          "Construct the finite original and modified prefix laws on arbitrary measurable product spaces.",
+          "Prove the global RN density chain relative to the original reference path law and TV contraction recursion with total error kδ.",
+          "Prove conditional normalization, entropy drift≤ε(e^ε−1), and actual conditional-expectation integral identities.",
+          "Apply Azuma with increment interval width2ε, handle ε=0, repeat with databases swapped, and derive the exact advanced parameters."
+        ]
+      },
+      {
+        "id": "thm-basic-and-advanced-composition",
+        "kind": "theorem",
+        "title": "Basic and advanced adaptive composition",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "thm-basic-adaptive-composition",
+          "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let databases be finite-support record-count functions, with neighbors differing by one added or removed record occurrence. For $k\\ge1$, let round $i$ be a probability kernel $K_i(D,h,\\cdot)$ from the $i$th arbitrary measurable output space, conditional on every prior transcript $h$. Suppose that for every ordered neighboring pair $D\\sim D'$, every $h$, and every measurable round-$i$ event $A$,\n$$\nK_i(D,h,A)\\le e^{\\varepsilon_i}K_i(D',h,A)+\\delta_i,\n$$\nwhere $\\varepsilon_i\\ge0$ and $\\delta_i\\ge0$. If $\\sum_i\\delta_i\\le1$, the full transcript on the finite product sigma-algebra is $(\\sum_i\\varepsilon_i,\\sum_i\\delta_i)$-differentially private. Also, assuming AC, if every conditional round has the same parameters $(\\varepsilon,\\delta)$ with $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, then for any $0<\\delta'<1$ with $k\\delta+\\delta'\\le1$, advanced composition on arbitrary measurable output spaces gives parameters $(\\varepsilon',k\\delta+\\delta')$, where\n$$\n\\varepsilon'=\\sqrt{2k\\ln(1/\\delta')}\\,\\varepsilon+k\\varepsilon(e^\\varepsilon-1).\n$$",
+        "proof_obligations": [
+          "Apply the proved arbitrary-output basic and advanced suppliers with their complete hypotheses, declaring AC only for the advanced clause."
+        ],
+        "axiom_use": "The basic clause is choice-free. Assume AC for the advanced clause, through the ordinary finite-measure Radon–Nikodym theorem and Azuma supplier; no regular conditional law is used."
+      },
+      {
+        "id": "rem-differential-privacy-scope-and-limitations",
+        "kind": "remark",
+        "title": "Record-level scope and limits of differential privacy",
+        "page": "ml02-differential-privacy",
+        "deps": [
+          "def-differential-privacy-and-adjacency"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "The definition on this page is central, record-level privacy for add/remove adjacency. It does not by itself define client-level or local privacy, and keeping data on a device or applying secure aggregation does not establish the event inequalities in this definition. Differential privacy limits the effect of one record on a release; it does not prevent conclusions about an attribute that is strongly correlated with other records or public information.",
+        "proof_obligations": [
+          "Keep central record adjacency distinct from local randomization and secure aggregation; preserve the correlated-attribute limitation without claiming unconditional secrecy."
+        ],
+        "axiom_use": "No choice axiom is used."
+      }
+    ]
+  },
+  {
+    "order": 2751,
+    "id": "ml02-differential-privacy-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Differential privacy mechanisms and composition — Examples",
+    "companion": "ml02-differential-privacy",
+    "requires": [
+      "ml02-differential-privacy"
+    ],
+    "items": [
+      {
+        "id": "ex-add-remove-noisy-count",
+        "kind": "example",
+        "title": "Add/remove noisy count",
+        "page": "ml02-differential-privacy-examples",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-global-l1-sensitivity",
+          "alg-laplace-mechanism",
+          "thm-laplace-mechanism-privacy",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For a predicate P on U that is satisfied by at least one possible record, let f(D) count the records of D satisfying P. Its add/remove global L1 sensitivity is 1, so for ε>0 the scalar Laplace mechanism releases f(D)+Z with Z∼Lap(1/ε) and is (ε,0)-differentially private.",
+        "proof_obligations": [
+          "Verify the count changes by at most one and that a satisfying record witnesses attainment of sensitivity one; instantiate the proved Laplace theorem at that sensitivity."
+        ],
+        "axiom_use": "Countable Choice is inherited from the Laplace noise law; the sensitivity calculation is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-finite-range-private-selection",
+        "kind": "example",
+        "title": "Finite-range private selection",
+        "page": "ml02-differential-privacy-examples",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-exponential-mechanism-utility-sensitivity",
+          "alg-exponential-mechanism",
+          "thm-exponential-mechanism-privacy-and-utility"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Let R={a,b} and ε>0. The constant utility u(D,a)=1,u(D,b)=0 has Δᵤ=0 and is inadmissible for the positive-sensitivity exponential mechanism. Fix a record u* and set s(D)=1 exactly when D(u*)>0; define instead u(D,a)=1,u(D,b)=1−s(D). Then Δᵤ=1, the mechanism is (ε,0)-differentially private, and it selects a with probability e^(ε/2)/(e^(ε/2)+e^(ε(1−s(D))/2)).",
+        "proof_obligations": [
+          "Check the first assignment has zero sensitivity and is excluded; for the second, compute Δᵤ=1, normalize both weights, and instantiate the privacy theorem."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-postprocessing-private-noisy-count",
+        "kind": "example",
+        "title": "Thresholding a private noisy count",
+        "page": "ml02-differential-privacy-examples",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-global-l1-sensitivity",
+          "alg-laplace-mechanism",
+          "thm-laplace-mechanism-privacy",
+          "thm-dp-postprocessing",
+          "def-countable-choice",
+          "def-borel-sigma-algebra"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Release a Laplace-noised count of records satisfying a fixed predicate, then output 1 exactly when the released real number is at least a fixed threshold c∈R. The threshold decision is a data-independent deterministic postprocessing of the private noisy count and retains the same (ε,0) guarantee.",
+        "proof_obligations": [
+          "Identify the threshold map as a Borel-measurable deterministic kernel independent of the database, then apply the Laplace and postprocessing theorems."
+        ],
+        "axiom_use": "Countable Choice is inherited from the Laplace noise law.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-record-level-versus-client-level-adjacency",
+        "kind": "example",
+        "title": "Record-level versus client-level adjacency",
+        "page": "ml02-differential-privacy-examples",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "rem-differential-privacy-scope-and-limitations"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "Suppose a client contributes 100 records to a database. Under the page definition, adding or removing one of those records is one neighboring step; adding or removing the client’s full 100-record contribution is not one neighboring step. A client-level guarantee therefore requires a client-level adjacency relation and a proof using that relation.",
+        "proof_obligations": [
+          "Count the changed records in each comparison and identify which one satisfies the stated adjacency definition; make no client-level privacy claim from record-level DP."
+        ],
+        "axiom_use": "No choice axiom is used.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

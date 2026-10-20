@@ -1,0 +1,90 @@
+[
+  {
+    "kind": "item",
+    "consumer": "alg-flow-matching-training-and-sampling",
+    "supplier": "def-neural-ode",
+    "status": "verified",
+    "evidence": "Inspected the current neural-ODE definition and its source interface. The algorithm uses only the exact parameterized initial-value problem stated by this supplier; this is author-level interface verification, not independent proof approval.",
+    "required_hypotheses": "A field v on an open time interval, a parameter theta, an initial time s, and an initial state z_s; the supplier defines a trajectory as a differentiable solution of the stated initial-value problem.",
+    "affected_claims": [
+      "alg-flow-matching-training-and-sampling: the final sampling phase solves the fitted state-velocity ODE from the supplied initial draw."
+    ],
+    "local_route": "Use the supplier definition to identify the sampling ODE; use thm-neural-ode-global-smooth-flow for existence, uniqueness, and continuity of the terminal map under its stronger global hypotheses.",
+    "examined_supplier_items": [
+      "def-neural-ode"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-neural-ode",
+        "section": "Definition",
+        "excerpt": "A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem $$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$ where $s\\in I$ and $z_s\\in\\mathbb R^d$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-flow-matching-training-and-sampling",
+    "supplier": "thm-neural-ode-global-smooth-flow",
+    "status": "verified",
+    "evidence": "Inspected the actual theorem statement and complete proof. Its hypotheses supply the exact global solution and smooth terminal map used by the algorithm; the ordinary full-run Step-1 snapshot currently has no unresolved work row for this supplier. This is author-level interface verification, not independent proof approval.",
+    "required_hypotheses": "The field extends to an open time interval containing [0,1], is jointly C-infinity, and on each compact parameter set has uniform state-Lipschitz and origin bounds on [0,1]. The theorem then supplies a unique global flow on [0,1] and smooth dependence on initial state and parameter.",
+    "affected_claims": [
+      "alg-flow-matching-training-and-sampling: the exact ODE output exists for all t in [0,1], and the terminal map is Borel measurable."
+    ],
+    "local_route": "The algorithm restates the finite-interval smoothness, state-Lipschitz, and origin-bound hypotheses, then invokes only global existence and uniqueness plus smoothness of the flow map. It makes no numerical solver or solver-error claim.",
+    "examined_supplier_items": [
+      "thm-neural-ode-global-smooth-flow"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "thm-neural-ode-global-smooth-flow",
+        "section": "Statement",
+        "excerpt": "the neural ODE has a unique solution on all of $[0,T]$."
+      }
+    ]
+  },
+  {
+    "kind": "page",
+    "consumer": "conditional-flow-matching-and-transport-paths",
+    "supplier": "compact-metric-kantorovich-rubinstein-duality",
+    "status": "verified",
+    "evidence": "The A-page requires field was preserved from the current assigned manifest. Inspected the actual compact-metric KR theorem body: it states arbitrary compact-metric Borel-probability duality without an AC premise and does not assert primal or dual attainment. No item-level claim in this batch uses KR or W1. This records the scheduled page interface, not independent proof approval.",
+    "required_hypotheses": "Only the page-level requirement is retained. The batch makes no W1 claim and has no item-level logical dependency on the compact-metric KR theorem.",
+    "affected_claims": [
+      "conditional-flow-matching-and-transport-paths: scheduled page requires metadata only; no mathematical claim is imported from KR."
+    ],
+    "local_route": "Preserve the scheduled page requirement; do not cite KR in any item proof or derive a Wasserstein-1 claim. The Gaussian quadratic-cost optimality result is proved locally by the affine coupling inequality.",
+    "examined_supplier_items": [
+      "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+        "section": "Statement",
+        "excerpt": "Let $(X,d)$ be a nonempty compact metric space."
+      },
+      {
+        "item": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+        "section": "Remarks",
+        "excerpt": "The coupling cost is an infimum; neither compact primal attainment nor compact dual attainment is asserted here."
+      }
+    ]
+  },
+  {
+    "kind": "page",
+    "consumer": "conditional-flow-matching-and-transport-paths",
+    "supplier": "neural-odes-and-continuous-normalizing-flows",
+    "status": "verified",
+    "evidence": "Current actual declared dependency: research/machine-learning-all-101-2026-10-19-batch-69.pages.json#requires, library/machine-learning/conditional-flow-matching-and-transport-paths.md#requires. The native author explicitly records reading the neural-ODE definition and global-flow theorem; existing item review rows specify the exact IVP and finite-horizon smooth-flow interfaces. Attribution: research/machine-learning-all-101-2026-10-19-batch-69.notes.md#Supplier inspection. Existing batch69 neural-ODE item review rows document both exact suppliers used by the sampling algorithm; this page row records the already declared page closure, without adding a logical claim.",
+    "declarations": [
+      "research/machine-learning-all-101-2026-10-19-batch-69.pages.json#requires",
+      "library/machine-learning/conditional-flow-matching-and-transport-paths.md#requires"
+    ],
+    "review_attribution": {
+      "native_notes": "research/machine-learning-all-101-2026-10-19-batch-69.notes.md",
+      "native_notes_sha256": "f59111fe59bee521ed9c460844c2f7882d6193c4097baa026229e97f33005436",
+      "scope": "The native author explicitly records reading the neural-ODE definition and global-flow theorem; existing item review rows specify the exact IVP and finite-horizon smooth-flow interfaces."
+    },
+    "normalization_recorded_at": "2026-10-19T05:03:36.268467+00:00"
+  }
+]

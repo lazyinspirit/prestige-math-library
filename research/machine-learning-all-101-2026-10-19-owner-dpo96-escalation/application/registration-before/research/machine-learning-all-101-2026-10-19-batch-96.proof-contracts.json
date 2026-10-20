@@ -1,0 +1,916 @@
+{
+  "version": 1,
+  "scope": [
+    "def-kl-regularized-policy-improvement",
+    "def-bradley-terry-preference-model",
+    "thm-finite-action-gibbs-policy-optimum",
+    "thm-dpo-reward-policy-reparameterization",
+    "rem-preference-coverage-and-model-misspecification",
+    "alg-direct-preference-optimization-finite-budget",
+    "ex-two-response-kl-regularized-gibbs-policy",
+    "cex-disconnected-comparison-support-does-not-identify-policy",
+    "ex-prompt-reward-offset-leaves-policy-unchanged",
+    "cex-zero-reference-support-breaks-dpo-log-ratio"
+  ],
+  "contracts": {
+    "def-kl-regularized-policy-improvement": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a finite nonempty response set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero first-coordinate terms are omitted; positive mass at a zero reference coordinate is assigned +infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-element response set is allowed and gives a finite objective when the reference is supported."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The coefficient is restricted to beta>0 and rewards are finite-valued."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The logarithm is applied only to positive ratios; the support convention handles q_y=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses finite sums and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        }
+      ]
+    },
+    "def-bradley-terry-preference-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition uses finite prompt/response sets and at least two responses per prompt."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Finite reward differences give sigmoid probabilities strictly between zero and one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Self-comparisons are excluded and each response set has at least two elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal rewards give sigma(0)=1/2 and complementary reverse probability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Finite rewards never yield comparison probabilities 0 or 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition evaluates each supplied ordered pair and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional."
+        }
+      ]
+    },
+    "thm-finite-action-gibbs-policy-optimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\times\\mathcal Y\\to[0,+\\infty]$ whose section $q\\mapsto S(q,j)$ is Borel measurable for every label $j$. If the true label distribution is $p\\in\\Delta_K$ and the reported forecast is $q\\in\\Delta_K$, its expected score loss is $\\bar S(p,q)=\\sum_{j=1}^Kp_jS(q,j)$, where a term with $p_j=0$ contributes zero even when $S(q,j)=+\\infty$. The loss is **proper** if $\\bar S(p,p)\\le\\bar S(p,q)$ for every $p,q\\in\\Delta_K$, and **strictly proper** if equality implies $q=p$. The logarithmic loss is $S_{\\log}(q,j)=-\\log q_j$, with $-\\log0=+\\infty$, where $\\log$ is the natural logarithm; the Brier loss is $S_{\\mathrm B}(q,j)=\\sum_{i=1}^K(q_i-\\mathbf1_{\\{i=j\\}})^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-log-and-brier-strict-propriety",
+          "source_section": "Statement",
+          "quote": "For every $K\\ge2$ and $p,q\\in\\Delta_K$, the logarithmic and Brier losses in the definition of finite-label score loss satisfy $\\bar S(p,p)\\le\\bar S(p,q)$, with equality only when $q=p$. The expected logarithmic loss at the truthful forecast is finite, including when some coordinates of $p$ vanish.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "partition-normalization",
+          "step": "1.1",
+          "claim": "Finite positive weights give a positive finite partition and a full-support probability vector.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gibbs-objective-gap",
+          "step": "2.1",
+          "claim": "Taking logs of the Gibbs formula gives beta KL(p||p*) = beta log Z - F(p).",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "maximum-value-and-gap",
+          "step": "3.1",
+          "claim": "Substitution of p=p* gives F(p*)=beta log Z and the exact objective-gap identity.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-maximizer",
+          "step": "4.1",
+          "claim": "Finite log-loss propriety makes the gap nonnegative and zero only at p=p*.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite nonempty response set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The candidate p may have zero coordinates; those terms are omitted and the log-loss supplier covers this boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a singleton response set the normalized policy is (1) and the objective gap is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Full-support q and finite rewards make all Gibbs weights positive; beta is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem excludes beta=0 and zero reference coordinates; p may lie on the simplex boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums are used; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: If p=p*, then D(p||p*)=0 and the objective gap vanishes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: If the gap vanishes, strict log-loss propriety forces p=p*."
+        }
+      ]
+    },
+    "thm-dpo-reward-policy-reparameterization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reward-log-ratio",
+          "step": "1.1",
+          "claim": "Taking logs of the normalized Gibbs formula yields reward as policy log-ratio plus prompt-only beta log partition.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pairwise-partition-cancellation",
+          "step": "2.1",
+          "claim": "Subtracting two reward identities cancels the prompt-only term, and Bradley–Terry gives the comparison probability.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "policy-to-reward-converse",
+          "step": "1.2",
+          "claim": "Any full-support policy is the Gibbs policy of its log-ratio reward; a prompt-only shift cancels on normalization.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dpo-likelihood",
+          "step": "2.2",
+          "claim": "The implicit reward makes each BT probability sigma(u_i), so negative log likelihood is log(1+exp(-u_i)).",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "softplus-derivative",
+          "step": "1.3",
+          "claim": "Differentiating gives d/du log(1+exp(-u))=-sigma(-u).",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dpo-gradient",
+          "step": "3.1",
+          "claim": "The chain rule through the policy log-probabilities and finite sample sum yields the stated gradient.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dataset is required to have n>=1 and each response set has at least two elements."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Reference and policy probabilities are full support on used responses, so all log ratios are finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies to a single record n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: u_i=0 is allowed; sigma(-u_i)=1/2 and the derivative exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Beta is positive and all policy/reference logarithm arguments are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite data and finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        }
+      ]
+    },
+    "alg-direct-preference-optimization-finite-budget": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dataset requires n>=1 and every supplied mini-batch is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Eta_t=0 is allowed; T=0 returns the initial parameter and loss."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: One-record datasets and one-index batches are valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At u=0 the explicit derivative uses sigma(0)=1/2; AD does not differentiate the value-only max/absolute-value expression."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Policy/reference probabilities are full support, beta>0, and step sizes are finite and nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Mini-batch indices are fixed inputs; the algorithm makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure states no biconditional."
+        }
+      ]
+    },
+    "rem-preference-coverage-and-model-misspecification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark concerns a finite nonempty response set and its observed comparison graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The Gibbs component-mass argument uses the explicitly stated full-support reference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A disconnected graph has at least two nonempty connected components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A common shift across components preserves the policy; distinct shifts can change relative component mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Rewards are finite and beta>0, so component Gibbs sums are finite and positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All component sums are finite; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        }
+      ]
+    },
+    "ex-two-response-kl-regularized-gibbs-policy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "$$F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)\\ge0.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "Thus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-response-partition",
+          "step": "1.1",
+          "claim": "Using exp(log 3)=3 gives Z=2 and p*=(1/4,3/4).",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-response-maximum",
+          "step": "2.1",
+          "claim": "The Gibbs gap proves uniqueness and the maximum value beta log 2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-element set {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference and maximizing policy are positive; the theorem also covers zero coordinates of competing p."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has exactly two responses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta is any positive real and beta log 3 is finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The reference is full support and all logarithm/exponential arguments are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses only explicit finite values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        }
+      ]
+    },
+    "cex-disconnected-comparison-support-does-not-identify-policy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "Thus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-observed-edge-probabilities",
+          "step": "1.1",
+          "claim": "Each observed edge joins equal-reward vertices under both rewards, so each BT probability is one half.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-gibbs-policies",
+          "step": "2.1",
+          "claim": "Gibbs weights give the uniform policy for r0 and the distinct (1/8,1/8,3/8,3/8) policy for r1.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "refutation",
+          "step": "3.1",
+          "claim": "Identical exact edge probabilities with different policies refute unique identification.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses the four-element response set {a,b,c,d}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference is uniform and positive at every response."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: There are two observed edges and two connected components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta=1; equal endpoint rewards yield comparison probability 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Rewards are finite and Gibbs weights are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness uses explicit finite responses and rewards."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        }
+      ]
+    },
+    "ex-prompt-reward-offset-leaves-policy-unchanged": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "offset-comparison-invariance",
+          "step": "1.1",
+          "claim": "The prompt-only constant cancels from every reward difference.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "offset-policy-invariance",
+          "step": "2.1",
+          "claim": "The common exponential factor cancels between Gibbs weights and the partition sum.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a finite nonempty response set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference is full support and finite rewards give positive Gibbs weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formula holds for every distinct pair; a singleton has no pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The case c_x=0 is included and leaves all quantities unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Beta is positive and all rewards are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        }
+      ]
+    },
+    "cex-zero-reference-support-breaks-dpo-log-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dpo-reward-policy-reparameterization",
+          "source_section": "Statement",
+          "quote": "$q_x(y)>0$ for every $y\\in Y_x$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-support-maximizer",
+          "step": "1.1",
+          "claim": "Any p with positive b-mass has infinite KL and objective minus infinity; delta_a has objective zero and is the unique maximizer.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "undefined-log-ratio",
+          "step": "2.1",
+          "claim": "At b the optimal/reference ratio is 0/0 and outside the positive logarithm domain; the full-support premise fails.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses the two-element set {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example deliberately sets q_b=p_b*=0 and applies the stated extended KL convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Exactly one response is supported by q and one is not."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta=1 and finite rewards (0,1) are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The disputed ratio is 0/0, outside the logarithm domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite two-point calculation uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        }
+      ]
+    }
+  }
+}

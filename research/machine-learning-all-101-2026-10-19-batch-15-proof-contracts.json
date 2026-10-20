@@ -1,0 +1,1378 @@
+{
+  "version": 1,
+  "scope": [
+    "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+    "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+    "thm-canonical-rkhs-construction-and-reproducing-property",
+    "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+    "thm-finite-sample-representer-theorem-in-an-rkhs",
+    "def-hard-and-soft-margin-support-vector-machines",
+    "lem-soft-margin-svm-primal-attainment",
+    "thm-soft-margin-svm-dual-and-kkt-conditions",
+    "ex-linear-and-polynomial-kernels",
+    "ex-gaussian-radial-kernel",
+    "ex-separable-hard-margin-svm",
+    "ex-overlapping-soft-margin-svm-score-and-kkt"
+  ],
+  "contracts": {
+    "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits X empty; the finite coefficient space and its forms are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition explicitly includes zero Gram forms and the null-space quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes the n=1 finite Gram-form case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition quotients every zero-seminorm coefficient vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no optimization parameter or endpoint claim in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a definition; the existence theorem separately states its countable-choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-dimensional-projection-in-a-real-inner-product-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "the vector $P_Wv$ is the unique point of $W$ nearest to $v$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Equivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-ambient-reduction",
+          "step": "1.1",
+          "claim": "Reduce to a finite-dimensional ambient space containing the point and subspace, then obtain its nearest-point projection.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "orthogonal-residual",
+          "step": "2.1",
+          "claim": "The projection residual is orthogonal to the finite-dimensional subspace.",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "norm-and-uniqueness",
+          "step": "3.1",
+          "claim": "Pythagoras gives norm contraction and shows every orthogonal-residual candidate is the unique nearest point.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes M={0}; span(M union {f}) remains finite-dimensional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 applies when f=0 and yields p=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 also applies when M has dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result assumes a positive-definite real inner product; degenerate forms are handled before quotienting in the kernel construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family is selected; the proof uses one finite-dimensional span."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-canonical-rkhs-construction-and-reproducing-property": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric",
+          "uses": [
+            "1.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-metric-completion",
+          "source_section": "Definition",
+          "quote": "A **completion** of $(X,d)$ is a pair",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-metric-completion-exists",
+          "source_section": "Statement",
+          "quote": "every metric space has a completion",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "source_section": "Statement",
+          "quote": "With this structure, $\\widehat X$ is a Banach space.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Equivalently, a completion of a normed space is a completion of its norm metric",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-semidefinite-form",
+          "step": "1.1",
+          "claim": "The finite Gram condition makes the bilinear form symmetric, bilinear, and nonnegative.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "semidefinite-cauchy-schwarz",
+          "step": "2.1",
+          "claim": "Nonnegativity of the quadratic polynomial proves Cauchy-Schwarz for the semidefinite form.",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "null-radical-quotient",
+          "step": "3.1",
+          "claim": "The null vectors form the radical, so the quotient has a well-defined positive-definite inner product.",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "hilbert-completion",
+          "step": "4.1",
+          "claim": "Countable choice and the published completion theorem provide the Hilbert completion with its extended inner product.",
+          "inputs": [
+            "step 3.1",
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "kernel-sections-dense",
+          "step": "5.1",
+          "claim": "Each kernel section is a completion element, and their span is dense.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "evaluation-extension",
+          "step": "6.1",
+          "claim": "Finite evaluation pairings are representative-independent and extend to the completion by a Cauchy-limit argument.",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "reproducing-identity",
+          "step": "7.1",
+          "claim": "The completed kernel sections reproduce the associated functions and have the prescribed kernel pairings.",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "function-identification",
+          "step": "8.1",
+          "claim": "Density of kernel sections makes the associated-function map injective.",
+          "inputs": [
+            "step 5.1",
+            "step 7.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–8.1 remain valid for X empty: E0 and its completion are zero and section claims are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 quotient zero sections when k(x,x)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–7.1 include a singleton X; its Gram form may be zero or positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 removes every zero-seminorm direction before completion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 6.1 use only the stated Axiom of Countable Choice; the proof does not assume full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Then $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "spectral-diagonalization",
+          "step": "1.1",
+          "claim": "The finite kernel Gram matrix is symmetric self-adjoint and therefore has an orthonormal eigenbasis.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "nonnegative-eigenvalues",
+          "step": "2.1",
+          "claim": "Each eigenvalue is nonnegative by the PSD quadratic-form condition.",
+          "inputs": [
+            "step 1.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "factorization",
+          "step": "3.1",
+          "claim": "Square-root-scaled eigenvector coordinates give Euclidean vectors whose Gram matrix is the original matrix.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1; the zero-size matrix case is outside its quantified domain.",
+          "evidence": "Statement assumes n>=1; the zero-size matrix case is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows every eigenvalue to be zero, and step 3.1 then gives zero feature vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes n=1, so the same real spectral decomposition and square-root construction applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly permits zero eigenvalues, so no full-rank assumption is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite-dimensional orthonormal eigenbasis is supplied by the spectral theorem; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-sample-representer-theorem-in-an-rkhs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sample-span-projection",
+          "step": "1.1",
+          "claim": "Project the minimizer onto the finite span of sample sections.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "evaluation-preservation",
+          "step": "2.1",
+          "claim": "Orthogonality and reproduction show every sample evaluation is preserved.",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "objective-nonincreasing",
+          "step": "3.1",
+          "claim": "Projection norm contraction and nondecreasing penalty give a nonincreasing objective.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "minimizer-in-span",
+          "step": "4.1",
+          "claim": "The projected candidate is also a minimizer and has the finite kernel expansion.",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement permits n=0; step 1.1 then projects onto M={0}, and step 4.1 returns the zero minimizer if one exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero sample sections because their evaluations are zero by the reproducing identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-span argument in step 1.1 includes a single training point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 only uses the finite span, so repeated or linearly dependent sample sections cause no problem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter endpoint beyond the stated nondecreasing penalty domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem is conditional on an existing minimizer and uses a single finite-dimensional projection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-hard-and-soft-margin-support-vector-machines": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits feature vectors equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition supplies the finite-sample constraints for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no rank or strict-positivity condition on the sample Gram matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly restricts the soft-margin parameter to C>0 and excludes C=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a conditional definition for a supplied feature Hilbert space; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-soft-margin-svm-primal-attainment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "For a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in X$, and $y_i\\in\\{-1,+1\\}$, the **soft-margin support-vector machine** with cost $C>0$ is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "The following are equivalent. 1. $A$ is compact. 2. $A$ is closed and bounded. 3. $A$ is pseudocompact. 4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-feasible-value",
+          "step": "1.1",
+          "claim": "A feasible point bounds the infimum above and nonnegativity bounds it below.",
+          "inputs": [
+            "given",
+            "A1"
+          ]
+        },
+        {
+          "id": "finite-span-reduction",
+          "step": "1.2",
+          "claim": "Projection to the finite feature span preserves margins and does not increase the objective.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "single-label-boundary",
+          "step": "2.1",
+          "claim": "All-one-class samples have an explicit zero-objective feasible minimizer.",
+          "inputs": [
+            "step 1.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "mixed-label-sublevel",
+          "step": "3.1",
+          "claim": "For mixed labels, the nonempty feasible sublevel set is closed and bounded by norm, slack, and bias estimates, so the objective attains its minimum.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid with R=0 when all feature vectors vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles every all-one-class sample, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the finite span and its dimension; M may be {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses C>0 to bound each slack; C=0 is outside the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the stated ZF closed-bounded compactness/extreme-value supplier, not a selected minimizing sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-soft-margin-svm-dual-and-kkt-conditions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-soft-margin-svm-primal-attainment",
+          "source_section": "Statement",
+          "quote": "The soft-margin SVM primal has a finite attained minimum.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+          "source_section": "Statement",
+          "quote": "There are vectors $z_1,\\ldots,z_n\\in\\mathbb R^n$ such that",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-program-duality-and-slater-condition",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $m,p\\in\\mathbb N$ with zero allowed, let $f_0,g_1,\\ldots,g_m$ be proper closed convex functions on $\\mathbb R^n$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-slater-strong-duality-and-dual-attainment",
+          "source_section": "Statement",
+          "quote": "Then there are $\\lambda_*\\ge0$ and $\\nu_*$ such that $$q(\\lambda_*,\\nu_*)=d^*=p^*.$$",
+          "uses": [
+            "3.1",
+            "4.2",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "The $C^2$ inequality program is to minimize $f(x)$ subject to $h(x)=0$ and $g_i(x)\\le0$ for every $i$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "source_section": "Statement",
+          "quote": "If a feasible tuple $(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then $x_*$ is a global minimizer over the feasible set $C$.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-primal-span",
+          "step": "1.1",
+          "claim": "Any primal minimizer lies in the finite feature span because projection preserves constraints and any nonzero orthogonal residual strictly raises the norm penalty.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "convex-program-form",
+          "step": "2.1",
+          "claim": "The feature-span formulation is a proper closed convex finite-dimensional program with affine nonremovable inequalities and no equality rows.",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "relative-interior-slater",
+          "step": "3.1",
+          "claim": "The point w=b=0, xi=2 is a strict relative-interior Slater point, and primal attainment is already known.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F6"
+          ]
+        },
+        {
+          "id": "lagrangian",
+          "step": "3.2",
+          "claim": "The two inequality families and their nonnegative multipliers give the stated Lagrangian.",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "dual-feasibility",
+          "step": "4.1",
+          "claim": "Minimization over w, b, and unrestricted slacks yields the bias equality, box constraints, and quadratic dual objective.",
+          "inputs": [
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "dual-concavity-and-row-rank",
+          "step": "5.1",
+          "claim": "The dual quadratic matrix is a Gram matrix and its single equality row is independent.",
+          "inputs": [
+            "step 4.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "strong-duality-and-complementarity",
+          "step": "4.2",
+          "claim": "Slater supplies an attained dual optimum with zero gap and complementarity for both inequality families.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "stationarity-and-kkt",
+          "step": "5.2",
+          "claim": "Differentiating the attained Lagrangian gives the w, bias, and slack stationarity equations and the two complementary-slackness equations.",
+          "inputs": [
+            "step 4.2",
+            "step 3.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "global-optimality-and-score",
+          "step": "6.1",
+          "claim": "Convex KKT sufficiency verifies global optimality and stationarity gives the kernel score expansion.",
+          "inputs": [
+            "step 5.2",
+            "step 2.1",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 remains valid for a zero Gram matrix; its Euclidean feature vectors are all zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 and the one-row bias equality apply when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 uses the Gram factorization without any full-rank assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes C>0; the C=0 boundary is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem is conditional on a supplied feature Hilbert space and its proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-linear-and-polynomial-kernels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-kernel-form",
+          "step": "1.1",
+          "claim": "The linear Gram quadratic form is a squared Euclidean norm and is nonnegative.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "polynomial-feature-expansion",
+          "step": "1.2",
+          "claim": "The multinomial theorem expresses the polynomial kernel as a finite feature inner product.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "polynomial-gram-nonnegative",
+          "step": "2.1",
+          "claim": "The polynomial Gram quadratic form is a finite sum of squares.",
+          "inputs": [
+            "step 1.2",
+            "F1"
+          ]
+        },
+        {
+          "id": "quadratic-two-variable-map",
+          "step": "3.1",
+          "claim": "The p=2,d=2 feature coordinates reproduce the stated six-term polynomial expansion.",
+          "inputs": [
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the empty Gram sum as zero; the polynomial Gram sum is also empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers zero input vectors, and step 1.2 covers the constant term when d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply to a sample of one point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 is a sum of squares and permits dependent or zero feature vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the degree endpoint d=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums and a finite multi-index set occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states positive semidefiniteness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states positive semidefiniteness, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-gaussian-radial-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-factorization",
+          "step": "1.1",
+          "claim": "The squared-distance identity factors the finite Gram form into a weighted exponential inner-product form.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "absolute-multiindex-expansion",
+          "step": "1.2",
+          "claim": "The exponential power series is absolutely convergent for each sample pair, permitting rearrangement of the finite sample sums.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "sum-of-squares-gram-form",
+          "step": "2.1",
+          "claim": "The Gaussian Gram quadratic form is an absolutely convergent sum of nonnegative squares and the kernel is symmetric.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated sample size is m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid for zero coefficients or zero sample points."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, step 2.1 is a single nonnegative square sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits repeated points and singular Gram matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement requires sigma>0; sigma=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite sample sums and absolutely convergent series."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states PSD, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states PSD, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-separable-hard-margin-svm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "The **hard-margin** problem removes the slack variables and minimizes $\\frac12\\|w\\|_{\\mathcal H}^2$ subject to $y_i(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b)\\ge1$ for every $i$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-linear-and-polynomial-kernels",
+          "source_section": "Example",
+          "quote": "the linear kernel $k_{\\rm lin}(x,z)=x^Tz$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hard-margin-constraints",
+          "step": "1.1",
+          "claim": "The explicit feature realization is a valid linear kernel and the two constraints imply w>=1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "hard-margin-minimum",
+          "step": "2.1",
+          "claim": "The objective is at least one half and the candidate w=1,b=0 attains that value.",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "hard-margin-score",
+          "step": "3.1",
+          "claim": "The score equals x and both sample signed margins equal one.",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a two-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero feature points -1 and 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two-point sample has nonzero one-dimensional features."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the unit-margin boundary constraints exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite calculation involves no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-overlapping-soft-margin-svm-score-and-kkt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "the **soft-margin support-vector machine** with cost $C>0$ is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-soft-margin-svm-dual-and-kkt-conditions",
+          "source_section": "Statement",
+          "quote": "For every primal minimizer there are dual multipliers $\\alpha_i$ and $\\mu_i$ such that",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "ex-linear-and-polynomial-kernels",
+          "source_section": "Example",
+          "quote": "the linear kernel $k_{\\rm lin}(x,z)=x^Tz$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "candidate-margins",
+          "step": "1.1",
+          "claim": "The candidate tuple has margins 1,-1,1, feasible slacks, and objective 2C.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "objective-lower-bound",
+          "step": "2.1",
+          "claim": "The two contradictory labels at x=1 force total slack at least 2, so every objective is at least 2C.",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "optimality-and-kkt-tuple",
+          "step": "3.1",
+          "claim": "The candidate attains the lower bound and the displayed alpha and mu satisfy stationarity and both complementarity families.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "dual-value-and-score",
+          "step": "4.1",
+          "claim": "The dual value equals 2C and the SVM score, empirical frequency, and separate logistic transform are distinct stated finite-sample quantities.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a three-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the optimum w=0 and its finite objective."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three observations with both labels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the repeated input x=1 with opposite labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use the strict condition C>0 and hold for every such C."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct finite verification, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct finite verification, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -14,6 +14,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-binomial-coefficient.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -39,17 +40,17 @@ For a finite set $A$ and $k \in \mathbb{N}$ put
 $$[A]^{k} := \{\, S \subseteq A \ :\ \lvert S\rvert = k \,\},$$
 
 the set of $k$-element subsets of $A$. Every $S \subseteq A$ is finite
-([[thm-subset-of-a-finite-set]]), so the condition $\lvert S\rvert = k$ makes
+(A subset of a finite set is finite, with $\lvert B\rvert \le \lvert A\rvert$, and equality holds if and only if $B = A$), so the condition $\lvert S\rvert = k$ makes
 sense for every subset.
 
 **$[A]^{k}$ is finite.** It is a subset of $\mathcal{P}(A)$, which is finite by
-[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.
+$\lvert\mathcal{P}(A)\rvert = 2^{\lvert A\rvert}$ for finite $A$, so A subset of a finite set is finite, with $\lvert B\rvert \le \lvert A\rvert$, and equality holds if and only if $B = A$ applies.
 
 **$\lvert [A]^{k}\rvert$ depends only on $\lvert A\rvert$.** Let $h : A \to A'$ be
 a bijection of finite sets. The direct image map $S \mapsto h[S]$ carries
 $[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$
 onto $h[S]$ and so $\lvert h[S]\rvert = \lvert S\rvert = k$ by the transport
-clause of [[def-finite-cardinality]]; the map $T \mapsto h^{-1}[T]$ is its
+clause of The cardinality $\lvert A\rvert$ of a finite set; the map $T \mapsto h^{-1}[T]$ is its
 two-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a
 bijection $h$. So $[A]^{k} \approx [A']^{k}$ and the two have the same
 cardinality.
@@ -65,27 +66,39 @@ $$\big\lvert [A]^{k}\big\rvert = \binom{\lvert A\rvert}{k} \qquad \text{for ever
 **$\binom{n}{k}$ is a count, so it is a natural number by construction.** It is
 *not* defined as $n!/(k!\,(n-k)!)$: that expression involves a division, hence
 lives in $\mathbb{R}$, and the assertion that its value is a natural number is a
-theorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a
+theorem, proved in $\binom{n}{k}\,k!\,(n-k)! = n!$ for $k \le n$; hence $\binom{n}{k}\,k! = n^{\underline{k}}$, the quotient $n!/(k!(n-k)!)$ is a natural number, and $\binom{n}{k} = \binom{n}{n-k}$. Defining the coefficient as a
 count makes integrality free and leaves the closed formula something to prove.
 
 **Boundary values, read off the definition and not stipulated.**
 
 - $\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of
   cardinality $0$ are exactly the subsets equal to $\varnothing$
-  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \{\varnothing\}$, a
+  (The cardinality $\lvert A\rvert$ of a finite set, clause (b)), so $[n]^{0} = \{\varnothing\}$, a
   one-element set. No empty-product convention is involved.
 - $\binom{n}{n} = 1$: if $S \subseteq n$ has $\lvert S\rvert = n = \lvert n\rvert$
-  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so
+  then $S = n$ by clause 3 of A subset of a finite set is finite, with $\lvert B\rvert \le \lvert A\rvert$, and equality holds if and only if $B = A$, so
   $[n]^{n} = \{n\}$.
 - $\binom{n}{k} = 0$ for $k > n$: a subset $S \subseteq n$ has
-  $\lvert S\rvert \le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so
+  $\lvert S\rvert \le n$ by clause 2 of A subset of a finite set is finite, with $\lvert B\rvert \le \lvert A\rvert$, and equality holds if and only if $B = A$, so
   $\lvert S\rvert = k > n$ is impossible and $[n]^{k} = \varnothing$
-  ([[lem-nat-trichotomy]]).
+  (Trichotomy of the order on $\mathbb{N}$).
 - $\binom{n}{1} = n$: a subset of cardinality $1$ is $\{x\}$ for exactly one
   $x \in n$, since $\lvert S\rvert = 1$ means $S \approx \{0\}$; so
   $S \mapsto$ its unique element is a bijection $[n]^{1} \to n$.
 - $\binom{0}{0} = 1$ and $\binom{0}{k} = 0$ for $k \ge 1$, both instances of the
   above.
+
+## Definition references
+
+[[thm-subset-of-a-finite-set]]
+
+[[cor-cardinality-of-the-power-set]]
+
+[[def-finite-cardinality]]
+
+[[thm-binomial-closed-formula]]
+
+[[lem-nat-trichotomy]]
 
 ## Remarks
 

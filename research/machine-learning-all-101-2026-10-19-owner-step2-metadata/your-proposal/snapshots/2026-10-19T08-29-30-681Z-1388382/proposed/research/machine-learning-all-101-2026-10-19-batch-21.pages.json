@@ -1,0 +1,342 @@
+[
+  {
+    "order": 2736,
+    "id": "ml02-spectral-clustering",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Spectral clustering and graph cuts",
+    "companion": "ml02-spectral-clustering-examples",
+    "requires": [
+      "algebraic-and-spectral-graph-theory",
+      "ml02-clustering-mixtures",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-finite-weighted-graph-laplacian",
+        "kind": "definition",
+        "title": "Finite weighted graph Laplacian",
+        "statement": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Definition: specify the finite symmetric nonnegative zero-diagonal weight matrix, degrees, Laplacians, support graph, isolates, and the positive-degree domain of the normalized Laplacian.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-trace-minimization",
+        "kind": "lemma",
+        "title": "Finite-dimensional trace minimization under orthonormal constraints",
+        "statement": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric, let $\\lambda_1\\le\\cdots\\le\\lambda_n$ be its real eigenvalues repeated with multiplicity, and define $\\operatorname{tr}(B)=\\sum_i B_{ii}$ for square $B$. For $1\\le k\\le n$, $$\\min_{Q\\in\\mathbb R^{n\\times k},\\ Q^TQ=I_k}\\operatorname{tr}(Q^TAQ)=\\sum_{i=1}^k\\lambda_i.$$ The minimum is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $k$ smallest eigenvalues, counted with multiplicity; when an eigenvalue at the cutoff is repeated, the minimizer need not be unique.",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "cor-rayleigh-quotient-extreme-eigenvalue-characterisation"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "For k=1 use the published minimum Rayleigh-quotient result; for k≥2 prove the multi-vector minimum by diagonalizing A and proving the eigenbasis weights lie in [0,1] and sum to k.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-deterministic-eigenspace-basis",
+        "kind": "lemma",
+        "title": "Projected coordinate vectors give a deterministic orthonormal basis",
+        "statement": "Let $m\\ge1$, let $E$ be a subspace of $\\mathbb R^m$ with its standard inner product, and let $P_E$ be the orthogonal projection onto $E$. Let $e_1,\\ldots,e_m$ be the standard coordinate vectors. Start a list with an optional unit vector $q_0\\in E$. For each $i=1,\\ldots,m$ in order, set $v_i=P_Ee_i$, subtract from $v_i$ its orthogonal projections onto the vectors already in the list, discard the residual if it is zero, and otherwise append the residual divided by its Euclidean norm. The resulting list is an orthonormal basis of $E$, beginning with $q_0$ when it is supplied.",
+        "deps": [
+          "def-orthogonal-projection"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Show the projected coordinate vectors span E, then prove the finite Gram-Schmidt scan preserves span and appends orthonormal vectors.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-ratio-cut-and-normalized-cut",
+        "kind": "definition",
+        "title": "RatioCut and normalized cut for a finite weighted graph",
+        "statement": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Definition: state cut and volume conventions, nonempty partition domains, positive-volume Ncut domain, and both normalized indicator columns.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+        "kind": "lemma",
+        "title": "Quadratic form and kernel of a weighted graph Laplacian",
+        "statement": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Directly expand f^T(D-W)f, use symmetry to obtain the weighted-square identity, then characterize equality componentwise along positive-weight edges.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ratio-cut-indicator-trace-identities",
+        "kind": "lemma",
+        "title": "RatioCut and Ncut as indicator-matrix traces",
+        "statement": "Let $W,D,L,V,V_+$ be as in the finite weighted graph definition. For a square matrix $B$, set $\\operatorname{tr}(B)=\\sum_i B_{ii}$. If $A_1,\\ldots,A_k$ partition $V$, define $H_R\\in\\mathbb R^{n\\times k}$ by $(H_R)_{ir}=|A_r|^{-1/2}$ for $i\\in A_r$ and $0$ otherwise. Then $H_R^TH_R=I_k$ and $\\operatorname{RatioCut}(A_1,\\ldots,A_k)=\\operatorname{tr}(H_R^TLH_R)$. If $A_1,\\ldots,A_k$ partition $V_+$, define $H_N\\in\\mathbb R^{n\\times k}$ by $(H_N)_{ir}=\\operatorname{vol}(A_r)^{-1/2}$ for $i\\in A_r$ and $0$ otherwise. Then $H_N^TDH_N=I_k$ and $\\operatorname{Ncut}(A_1,\\ldots,A_k)=\\operatorname{tr}(H_N^TLH_N)$.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Verify the indicator constraints from disjoint supports; apply the weighted quadratic identity to each column and sum the diagonal entries.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-weighted-ratio-and-normalized-cut-relaxations",
+        "kind": "theorem",
+        "title": "Weighted RatioCut and Ncut spectral relaxations",
+        "statement": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Put $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. If $V_+\\ne\\varnothing$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$ and set $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$. The matrices $L$ and, when defined, $L_{\\mathrm{sym},+}$ are positive semidefinite. For square $B$, define $\\operatorname{tr}(B)=\\sum_iB_{ii}$. For $1\\le k\\le n$, let $R_k$ be the minimum of $\\sum_r\\operatorname{cut}(A_r,A_r^c)/|A_r|$ over partitions of $V$ into $k$ nonempty sets. Then $$\\min_{H\\in\\mathbb R^{n\\times k},\\ H^TH=I_k}\\operatorname{tr}(H^TLH)=\\sum_{i=1}^k\\lambda_i(L),$$ where the eigenvalues, repeated with multiplicity, are ordered increasingly, and a minimizer consists of orthonormal eigenvectors for the $k$ smallest eigenvalues. This relaxed minimum is a lower bound for $R_k$. When $1\\le k\\le|V_+|$, let $N_k$ be the minimum of $\\sum_r\\operatorname{cut}(A_r,A_r^c)/\\operatorname{vol}(A_r)$ over partitions of $V_+$ into $k$ nonempty sets. Then $$\\min_{H\\in\\mathbb R^{|V_+|\\times k},\\ H^TD_+H=I_k}\\operatorname{tr}(H^TL_+H)=\\sum_{i=1}^k\\lambda_i(L_{\\mathrm{sym},+}),$$ attained at $H=D_+^{-1/2}Q$ for bottom-$k$ orthonormal eigenvectors $Q$ of $L_{\\mathrm{sym},+}$. The corresponding columns $u=D_+^{-1/2}q$ satisfy $L_+u=\\lambda D_+u$, and the relaxed minimum is a lower bound for $N_k$. These lower bounds make no approximation guarantee for a subsequent rounding. Isolated vertices are excluded from the Ncut objective and may be reported separately as singleton outputs.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "lem-ratio-cut-indicator-trace-identities",
+          "lem-finite-trace-minimization"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Map every discrete indicator partition into the real orthonormal constraint set, apply the local trace-minimization lemma, and for Ncut use the invertible change Q=D_+^{1/2}H.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "alg-weighted-spectral-clustering",
+        "kind": "algorithm",
+        "title": "Deterministic weighted spectral clustering with explicit isolate and eigenspace conventions",
+        "statement": "**Inputs.** Integers $n,p\\ge1$, data $x_1,\\ldots,x_n\\in\\mathbb R^p$, a fixed deterministic graph-construction procedure $G:(\\mathbb R^p)^n\\to\\mathbb R^{n\\times n}$, mode $\\texttt{ratio}$ or $\\texttt{normalized}$, and cluster count $k\\ge1$. In normalized mode also supply a Boolean row-normalization option, defaulting to false.\n\n1. Compute $W=G(x_1,\\ldots,x_n)$. Reject the input unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_i)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$.\n\n2. In ratio mode require $k\\le n$, use all vertices in increasing index order, and set $M=L$. In normalized mode, if $V_+=\\varnothing$, return every vertex as a separately reported singleton with status $\\texttt{no-positive-degree-vertices}$. Otherwise require $k\\le|V_+|$, use only $V_+$ in increasing index order, and set $M=D_+^{-1/2}L_+D_+^{-1/2}$.\n\n3. Compute the exact real eigenspaces of $M$ and order its eigenvalues increasingly with multiplicity. For each eigenspace $E_\\lambda$, use the deterministic projected-coordinate basis rule: for $\\lambda=0$, first use $n^{-1/2}\\mathbf1$ in ratio mode or $D_+^{1/2}\\mathbf1/\\sqrt{\\sum_{i\\in V_+}d_i}$ in normalized mode; then process the standard coordinate vectors in vertex order, project each onto $E_\\lambda$, orthogonalize against accepted vectors, skip zero residuals, and normalize each nonzero residual. Take the first $k$ eigenvectors as columns of $U$.\n\n4. In normalized mode, if row normalization is true, replace each row $u_i$ by $u_i/\\|u_i\\|_2$, where $\\|v\\|_2=\\sqrt{\\sum_{j=1}^k v_j^2}$. The prescribed first zero-mode vector has positive entries on every active vertex, so every active row norm is positive.\n\n5. Treat the rows of $U$ as points in $\\mathbb R^k$ with Euclidean distance $\\|a-b\\|_2$. Initialize the first Lloyd center at the row of the smallest active vertex index. For each subsequent center, choose an unused row maximizing its minimum distance to previously chosen centers, breaking ties by smallest vertex index. Assign each row initially to a nearest center, breaking ties by smallest center index. At each later assignment retain its current label when it is among the nearest centers; otherwise choose the smallest nearest-center index. Replace each nonempty center by the mean of its assigned rows, leave empty-cluster centers unchanged, and repeat until both labels and centers stop changing.\n\n6. Return the nonempty label sets. In normalized mode append every isolate as a separately reported singleton. Graph rule, edge weights, bandwidth, kNN symmetrization, and cluster count are modeling inputs; this procedure makes no rounding, approximation, graph-consistency, or manifold-recovery guarantee.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "thm-weighted-ratio-and-normalized-cut-relaxations",
+          "alg-lloyd-k-means",
+          "thm-lloyd-objective-monotonicity-and-termination",
+          "lem-deterministic-eigenspace-basis"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "strategy": "Algorithm definition: graph builder, mode-specific isolate handling, exact deterministic eigenspace basis, optional normalized rows, deterministic farthest-first centers, and tie-sensitive Lloyd updates; no approximation claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            },
+            {
+              "title": "Trevor Hastie, Robert Tibshirani, and Jerome Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2737,
+    "id": "ml02-spectral-clustering-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Spectral clustering and graph cuts — Examples",
+    "companion": "ml02-spectral-clustering",
+    "requires": [
+      "ml02-spectral-clustering"
+    ],
+    "items": [
+      {
+        "id": "ex-knn-symmetrization-changes-ratio-cut",
+        "kind": "example",
+        "title": "KNN symmetrization changes a graph cut",
+        "statement": "Take $x_1=0$, $x_2=1$, and $x_3=3$ on $\\mathbb R$, and let each point choose its unique nearest neighbor ($k=1$). Define the union graph to contain a unit-weight edge when either directed nearest-neighbor choice selects it, and the mutual graph to contain a unit-weight edge only when both directions select it. For the partition $\\{1,2\\},\\{3\\}$, the RatioCut is $3/2$ on the union graph and $0$ on the mutual graph.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Compute the directed nearest-neighbor choices, construct both symmetric supports, then evaluate the two cut terms for the fixed partition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-disconnected-weighted-components-spectral-clustering",
+        "kind": "example",
+        "title": "Disconnected weighted components are zero-cut clusters",
+        "statement": "Let $V=\\{1,2,3,4\\}$ and set $w_{12}=w_{21}=2$, $w_{34}=w_{43}=3$, with every other entry zero. For the algorithm inputs, take $n=4$, $p=1$, $x_i=i\\in\\mathbb R$ for $1\\le i\\le4$, and the constant deterministic graph builder $G:(\\mathbb R^1)^4\\to\\mathbb R^{4\\times4}$ defined by $G(y_1,y_2,y_3,y_4)=W=(w_{ij})$ for every input tuple. Use mode $\\texttt{ratio}$ and $k=2$. The partition $\\{1,2\\},\\{3,4\\}$ has RatioCut and Ncut equal to $0$, and deterministic unnormalized spectral clustering with $k=2$ returns these two components under the specified eigenspace and farthest-first tie rules.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "alg-weighted-spectral-clustering"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Compute degrees, cuts, volumes, and the two zero modes; verify the prescribed embedding has exactly two distinct rows and Lloyd returns their partition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-isolated-vertex-in-normalized-cut",
+        "kind": "example",
+        "title": "An isolate is excluded from Ncut and reinserted separately",
+        "statement": "Let $V=\\{1,2,3\\}$ with $w_{12}=w_{21}=1$ and every other weight zero. For the algorithm inputs, take $n=3$, $p=1$, $x_i=i\\in\\mathbb R$ for $1\\le i\\le3$, and the constant deterministic graph builder $G:(\\mathbb R^1)^3\\to\\mathbb R^{3\\times3}$ defined by $G(y_1,y_2,y_3)=W=(w_{ij})$ for every input tuple. In mode $\\texttt{normalized}$ with $k=1$ and row normalization disabled (the default), the positive-degree vertex set is $V_+=\\{1,2\\}$, the active Ncut cluster is $\\{1,2\\}$ with value $0$, and vertex $3$ is returned separately as the singleton $\\{3\\}$ without entering any Ncut denominator.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "def-ratio-cut-and-normalized-cut",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "alg-weighted-spectral-clustering"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Compute the active degrees and normalized zero eigenvector, then check the active Ncut value and separate isolate output.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-concentric-circles-spectral-embedding",
+        "kind": "example",
+        "title": "A disconnected graph on concentric circles separates the rings",
+        "statement": "Let $V=\\{1,\\ldots,8\\}$ and, for $j\\in\\{0,1,2,3\\}$, set $x_{j+1}=(\\cos(\\pi j/2),\\sin(\\pi j/2))$ and $x_{j+5}=3(\\cos(\\pi j/2),\\sin(\\pi j/2))$. Build a graph with unit-weight edges $\\{1,2\\},\\{2,3\\},\\{3,4\\},\\{4,1\\}$ and $\\{5,6\\},\\{6,7\\},\\{7,8\\},\\{8,5\\}$, and no other edges. Deterministic unnormalized spectral clustering with $k=2$ and no row normalization returns the two concentric rings as its clusters. This finite graph example makes no statement about manifold recovery for other graph constructions.",
+        "deps": [
+          "def-finite-weighted-graph-laplacian",
+          "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "alg-weighted-spectral-clustering"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "strategy": "Identify the two connected components and zero eigenspace, compute the deterministic two-vector embedding, and verify Lloyd separates its two distinct row values.",
+        "sources": {
+          "references": [
+            {
+              "title": "Ulrike von Luxburg, A Tutorial on Spectral Clustering, Statistics and Computing 17(4), 2007",
+              "url": "https://cs.brown.edu/courses/csci1820/spring-2022/resources/vonLuxburg_2007.pdf"
+            },
+            {
+              "title": "Jean Gallier, Notes on Elementary Spectral Graph Theory: Applications to Graph Clustering Using Normalized Cuts, 2013",
+              "url": "https://arxiv.org/pdf/1311.2492"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

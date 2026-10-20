@@ -1,0 +1,477 @@
+{
+  "group": "y",
+  "batches": [
+    "75"
+  ],
+  "pages_read": [
+    "mirror-descent-and-adaptive-regularization",
+    "mirror-descent-and-adaptive-regularization-examples"
+  ],
+  "items_read": [
+    "def-mirror-map-and-bregman-divergence",
+    "lem-psd-matrix-has-unique-psd-square-root",
+    "lem-bregman-three-point-identity",
+    "lem-bregman-divergence-nonnegative",
+    "lem-negative-entropy-geometry-of-simplex",
+    "alg-adagrad",
+    "lem-adagrad-accumulated-gram-matrix-is-psd",
+    "alg-online-mirror-descent",
+    "lem-adagrad-projection-exists",
+    "lem-adagrad-diagonal-scale-coordinatewise",
+    "lem-mirror-descent-bregman-projection-exists",
+    "thm-mirror-descent-regret",
+    "fs-mirror-descent-halved-regret-constants",
+    "ex-adagrad-singular-adaptive-metric",
+    "ex-negative-entropy-mirror-descent-on-simplex",
+    "ex-euclidean-mirror-descent-is-projected-ogd"
+  ],
+  "conventions": [
+    {
+      "convention": "B_R(x‖y)=R(x)−R(y)−⟨∇R(y),x−y⟩; its first argument belongs to K∪U and its second to U.",
+      "fixed_by": "def-mirror-map-and-bregman-divergence",
+      "matters_for": [
+        "lem-bregman-three-point-identity",
+        "lem-bregman-divergence-nonnegative",
+        "lem-mirror-descent-bregman-projection-exists",
+        "thm-mirror-descent-regret",
+        "ex-negative-entropy-mirror-descent-on-simplex",
+        "ex-euclidean-mirror-descent-is-projected-ogd"
+      ]
+    },
+    {
+      "convention": "Mirror regularizers are continuous on compact K and C² on open convex U, with positive-definite Hessians there. Strong convexity uses the Euclidean quadratic term mλ(1−λ)‖x−y‖²/2.",
+      "fixed_by": "def-mirror-map-and-bregman-divergence",
+      "matters_for": [
+        "lem-bregman-divergence-nonnegative",
+        "lem-negative-entropy-geometry-of-simplex",
+        "lem-mirror-descent-bregman-projection-exists",
+        "thm-mirror-descent-regret"
+      ]
+    },
+    {
+      "convention": "Local squared primal and dual norms use H_R(z) and H_R(z)⁻¹ respectively, for z∈U.",
+      "fixed_by": "def-mirror-map-and-bregman-divergence",
+      "matters_for": [
+        "thm-mirror-descent-regret",
+        "fs-mirror-descent-halved-regret-constants"
+      ]
+    },
+    {
+      "convention": "Agile OMD initializes at the regularizer minimizer in U. Every dual solution and projected iterate must remain in U; these are explicit admissibility conditions.",
+      "fixed_by": "alg-online-mirror-descent",
+      "matters_for": [
+        "thm-mirror-descent-regret",
+        "fs-mirror-descent-halved-regret-constants",
+        "ex-negative-entropy-mirror-descent-on-simplex",
+        "ex-euclidean-mirror-descent-is-projected-ogd"
+      ]
+    },
+    {
+      "convention": "AdaGrad accumulates G_t=Σ_{s=1}^t g_sg_sᵀ from G_0=0. Its diagonal scale takes square roots of diagonal entries of G_t, not diagonal entries of G_t^{1/2}. Singular scales use the Moore–Penrose pseudoinverse and permit any projection minimizer.",
+      "fixed_by": "alg-adagrad",
+      "matters_for": [
+        "lem-adagrad-accumulated-gram-matrix-is-psd",
+        "lem-adagrad-projection-exists",
+        "lem-adagrad-diagonal-scale-coordinatewise",
+        "ex-adagrad-singular-adaptive-metric"
+      ]
+    },
+    {
+      "convention": "AdaGrad coordinate labels are one-based relabelings of the library's zero-based coordinates.",
+      "fixed_by": "alg-adagrad",
+      "matters_for": [
+        "lem-adagrad-accumulated-gram-matrix-is-psd",
+        "lem-adagrad-diagonal-scale-coordinatewise",
+        "ex-adagrad-singular-adaptive-metric"
+      ]
+    },
+    {
+      "convention": "For n≥2 the simplex uses independent coordinates q_i=p_i for i<n and p_n=1−Σq_i, with 0 log 0=0. The Euclidean strong-convexity claim concerns these independent coordinates.",
+      "fixed_by": "lem-negative-entropy-geometry-of-simplex",
+      "matters_for": [
+        "ex-negative-entropy-mirror-descent-on-simplex"
+      ]
+    },
+    {
+      "convention": "The regret bound retains the full initial potential divided by η and the local-norm term multiplied by η/2. D_R² denotes the range of R, while D_R is its square root.",
+      "fixed_by": "thm-mirror-descent-regret",
+      "matters_for": [
+        "fs-mirror-descent-halved-regret-constants"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-mirror-map-and-bregman-divergence",
+      "statement": "A mirror regularizer is continuous on K, twice continuously differentiable on U, and has symmetric positive-definite Hessian on U. B_R(x‖y)=R(x)−R(y)−⟨∇R(y),x−y⟩ for x∈K∪U and y∈U.",
+      "used_by": [
+        "lem-bregman-three-point-identity",
+        "lem-bregman-divergence-nonnegative",
+        "lem-negative-entropy-geometry-of-simplex",
+        "alg-online-mirror-descent",
+        "lem-mirror-descent-bregman-projection-exists",
+        "thm-mirror-descent-regret",
+        "fs-mirror-descent-halved-regret-constants",
+        "ex-negative-entropy-mirror-descent-on-simplex",
+        "ex-euclidean-mirror-descent-is-projected-ogd"
+      ]
+    },
+    {
+      "id": "lem-mirror-descent-bregman-projection-exists",
+      "statement": "Under the stated nonempty closed bounded convex K and strongly convex mirror-regularizer hypotheses, R and B_R(·‖y) each have a unique minimizer on K. If x_+(y)∈U, then for every u∈K, ⟨∇R(x_+(y))−∇R(y),u−x_+(y)⟩≥0 and B_R(u‖y)≥B_R(u‖x_+(y))+B_R(x_+(y)‖y).",
+      "used_by": [
+        "alg-online-mirror-descent",
+        "thm-mirror-descent-regret",
+        "ex-negative-entropy-mirror-descent-on-simplex",
+        "ex-euclidean-mirror-descent-is-projected-ogd"
+      ]
+    },
+    {
+      "id": "lem-bregman-three-point-identity",
+      "statement": "For a∈K∪U and b,c∈U, ⟨a−b,∇R(c)−∇R(b)⟩=B_R(a‖b)−B_R(a‖c)+B_R(b‖c).",
+      "used_by": [
+        "lem-mirror-descent-bregman-projection-exists",
+        "thm-mirror-descent-regret"
+      ]
+    },
+    {
+      "id": "lem-bregman-divergence-nonnegative",
+      "statement": "For a mirror regularizer that is m-strongly convex on K, B_R(x‖y)≥0 for x,y∈U, strictly when x≠y; and B_R(x‖y)≥m‖x−y‖²/2 for x∈K and y∈K∩U.",
+      "used_by": [
+        "thm-mirror-descent-regret",
+        "ex-negative-entropy-mirror-descent-on-simplex"
+      ]
+    },
+    {
+      "id": "lem-psd-matrix-has-unique-psd-square-root",
+      "statement": "Let d≥1 and let G∈R^{d×d} be symmetric and positive semidefinite. Then there is a unique symmetric positive-semidefinite matrix H such that H²=G; an orthogonal diagonalization gives H by taking nonnegative square roots of the eigenvalues.",
+      "used_by": [
+        "alg-adagrad",
+        "lem-adagrad-accumulated-gram-matrix-is-psd"
+      ]
+    },
+    {
+      "id": "lem-adagrad-projection-exists",
+      "statement": "For d≥1, nonempty bounded closed convex K⊆R^d, a fixed real positive-semidefinite H, and y∈R^d, the function x↦(x−y)ᵀH(x−y) attains a minimum on K. Singular H is allowed and uniqueness is not claimed.",
+      "used_by": [
+        "alg-adagrad",
+        "ex-adagrad-singular-adaptive-metric"
+      ]
+    },
+    {
+      "id": "lem-negative-entropy-geometry-of-simplex",
+      "statement": "For n≥2, negative entropy in the specified independent simplex coordinates is continuous on K_n, C² on its interior, 1-strongly convex in the Euclidean norm, and satisfies −log n≤R≤0, with equality at the uniform point and vertices respectively.",
+      "used_by": [
+        "ex-negative-entropy-mirror-descent-on-simplex"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Convex decision sets and feasible segments.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Convex loss and regularizer conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Pairings, norms, coordinates, and quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Gradient coordinate convention.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Open mirror domains and closed decision sets.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-interior-closure-boundary",
+      "used_for": "Mirror-domain and simplex interior/closure conditions.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-bounded-diameter",
+      "used_for": "Bounded decision sets.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Hessian definition.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthogonal diagonalization in the PSD-root proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Real symmetry, adjoints, and transpose conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Outer products, Gram matrices, and entrywise calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-multiplication-laws",
+      "used_for": "Associativity in existence and uniqueness of the PSD root.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Nonnegative scalar roots of eigenvalues and diagonal entries.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Second-order intermediate-Hessian identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiation of entropy summands.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Scalar affine substitutions in entropy derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Derivative of log on positive arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Entropy range, continuity, and multiplicative-weights algebra.",
+      "opened": true
+    },
+    {
+      "id": "cor-second-derivative-characterises-convexity",
+      "used_for": "Convexity of scalar restrictions and s log s.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-jensen-inequality-in-euclidean-space",
+      "used_for": "The negative-entropy lower bound −log n.",
+      "opened": true
+    },
+    {
+      "id": "lem-natural-logarithm-bounded-by-argument",
+      "used_for": "Continuity of s log s at zero.",
+      "opened": true
+    },
+    {
+      "id": "def-online-decision-protocol",
+      "used_for": "Outside-batch draft prerequisite: play-before-feedback timing.",
+      "opened": true
+    },
+    {
+      "id": "def-adversary-and-feedback-model",
+      "used_for": "Outside-batch draft prerequisite: full-information feedback.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "Singular AdaGrad update and the example's Penrose-equation check.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Existence and uniqueness of H_t's pseudoinverse.",
+      "opened": true
+    },
+    {
+      "id": "def-transpose-of-a-matrix",
+      "used_for": "Entrywise Gram-matrix symmetry.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Nonnegativity of squared real coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-subgradient-and-subdifferential",
+      "used_for": "The nonsmooth supporting-vector branch.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Linear upper bound on comparator loss differences.",
+      "opened": true
+    },
+    {
+      "id": "def-semicontinuity-on-euclidean-subsets",
+      "used_for": "Continuity implies lower semicontinuity of projection objectives.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-semicontinuous-extreme-value-theorem",
+      "used_for": "Attainment of projection minima and regularizer extrema.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of nonempty closed bounded decision sets.",
+      "opened": true
+    },
+    {
+      "id": "def-static-dynamic-and-strongly-adaptive-regret",
+      "used_for": "Outside-batch draft prerequisite: fixed-comparator pointwise regret.",
+      "opened": true
+    },
+    {
+      "id": "alg-hedge",
+      "used_for": "Outside-batch draft seam supplier: unit weights and normalized multiplicative updates, with sampled expert choices distinguished from distributions.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Log/exp inverse identities and positivity of exponential weights.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential weights in the simplex example.",
+      "opened": true
+    },
+    {
+      "id": "alg-online-gradient-descent",
+      "used_for": "Outside-batch draft seam supplier: comparison with the projected-gradient one-step map at a matching step size.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-convex-subset-of-euclidean-space",
+      "finding": "def-convex-subset-of-euclidean-space, Definition: “t∈[0,1]$ ([[def-interval]])” contains an inline wikilink within the complete definition, contrary to the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "finding": "def-convex-and-strictly-convex-functions-on-euclidean-sets, Definition: “be convex ([[def-convex-subset-of-euclidean-space]])” and “closed interval of [[def-interval]]” interrupt the definition with hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "def-euclidean-inner-product, Definition: “([[def-natural-numbers]], [[lem-nat-order-is-membership]])” and numerous later wikilinks occur inside the definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-jacobian-matrix-and-gradient",
+      "finding": "def-jacobian-matrix-and-gradient, Definition: “([[lem-standard-basis-of-f-n]])” and “[[def-directional-and-partial-derivatives]]” are inline hyperlinks within the definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-metric-topology",
+      "finding": "def-metric-topology, Definition: “metric space ([[def-metric-space]])” and later links to def-metric-ball and def-equivalent-metrics remain inside the definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-metric-interior-closure-boundary",
+      "finding": "def-metric-interior-closure-boundary, Definition: “metric space ([[def-metric-space]])”, “[[def-metric-ball]]”, and “[[def-metric-topology]]” interrupt the defining section with hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-metric-bounded-diameter",
+      "finding": "def-metric-bounded-diameter, Definition: “metric space ([[def-metric-space]])” and many subsequent supplier wikilinks remain within the complete definition instead of Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-hessian-and-euclidean-critical-point",
+      "finding": "def-hessian-and-euclidean-critical-point, Definition: “matrix space of [[def-matrix-space]]”, “[[def-ck-and-multi-index-notation-in-several-variables]]”, and “[[def-jacobian-matrix-and-gradient]]” are inline hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-square-roots",
+      "finding": "thm-of-square-roots, Statement: “complete ordered field ([[def-complete-ordered-field]])” contains an inline hyperlink within the statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "finding": "thm-multivariable-taylor-formula-with-lagrange-remainder, Statement: “canonical-natural map of [[def-multivariable-taylor-polynomial]]” contains a hyperlink before the complete conclusion.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-algebra-of-derivatives",
+      "finding": "thm-algebra-of-derivatives, Statement: “([[def-limit-point-r]])” and “([[def-derivative]])” occur inline among the hypotheses; additional supplier links also remain in this section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-chain-rule",
+      "finding": "thm-chain-rule, Statement: “([[def-limit-point-r]])” and “([[def-derivative]])” interrupt the hypotheses with hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-natural-logarithm-bounded-by-argument",
+      "finding": "lem-natural-logarithm-bounded-by-argument, Statement: “the natural logarithm of [[def-natural-logarithm]] satisfies” embeds a hyperlink before the displayed conclusion.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-moore-penrose-pseudoinverse",
+      "finding": "def-moore-penrose-pseudoinverse, Definition: “[[def-matrix-product-and-identity-matrix]]” and “[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]]” remain inside the defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "finding": "thm-moore-penrose-pseudoinverse-exists-and-is-unique, Statement: “satisfying the four Penrose equations of [[def-moore-penrose-pseudoinverse]]” embeds a hyperlink in the statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-sign-rules",
+      "finding": "lem-of-sign-rules, Statement: “ordered field ([[def-ordered-field]])” contains an inline hyperlink among the hypotheses.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-subgradient-and-subdifferential",
+      "finding": "def-subgradient-and-subdifferential, Definition: “([[def-convex-and-strictly-convex-functions-on-euclidean-sets]])” and “[[def-euclidean-inner-product]]” remain inline within the definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "finding": "thm-differentiable-convex-functions-and-gradient-inequality, Statement: “([[def-subgradient-and-subdifferential]], [[def-jacobian-matrix-and-gradient]])” remains in the statement's equivalent formulation.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-semicontinuity-on-euclidean-subsets",
+      "finding": "def-semicontinuity-on-euclidean-subsets, Definition: “([[lem-metrics-on-rn]], [[def-metric-ball]])” and “([[def-metric-continuity]])” are inline hyperlinks within the defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-heine-borel-rn",
+      "finding": "thm-heine-borel-rn, Statement: “([[lem-metrics-on-rn]])”, “([[def-metric-compactness]])”, and further supplier links remain inside its hypotheses, conclusions, and statement-section qualifications.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "def-natural-logarithm, Definition: “because [[cor-exponential-is-a-bijection-onto-positive-reals]] states” embeds a supplier hyperlink in the complete definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "def-real-exponential-function-and-e, Definition: “[[lem-exponential-series-has-infinite-radius]]” and the subsequent factorial, canonical-natural, power, and series supplier links remain within the definition.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "mirror-descent-and-adaptive-regularization",
+      "to": "hedge-and-online-gradient-descent",
+      "faithful": true,
+      "note": "Checked both supplier procedures against the consuming examples. The entropy example matches Hedge's normalized distributions at ε=η and explicitly distinguishes Hedge's sampled expert from OMD's distribution output. The quadratic example claims equality of one-step projected maps at a matching step size, preserving the supplier's varying-step schedule rather than asserting identical full trajectories. The A-page prerequisite is retained; the actual citations occur in its paired B-page examples."
+    }
+  ]
+}

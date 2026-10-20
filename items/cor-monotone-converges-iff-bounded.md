@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-monotone-converges-iff-bounded.json
   precheck: pass
   verified:
     model: claude-sonnet-5
@@ -35,14 +36,22 @@ sources:
 
 ## Statement
 
-Let $(x_k)$ be a monotone sequence of reals ([[def-sequence]],
-[[def-monotone-sequence]]). Then $(x_k)$ converges if and only if it is bounded,
+Let $(x_k)$ be a monotone sequence of reals (Sequences of reals: bounded, eventually, frequently, tails, subsequences,
+Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences). Then $(x_k)$ converges if and only if it is bounded,
 that is if and only if there is $M \in \mathbb{R}$ with $|x_k| \le M$ for every
 $k \in \mathbb{N}$.
 
 The forward implication holds for every sequence and is
-[[lem-convergent-implies-bounded]]. What monotonicity buys is the converse, which
+Every convergent sequence is bounded. What monotonicity buys is the converse, which
 is false for sequences in general.
+
+## Statement references
+
+[[def-sequence]]
+
+[[def-monotone-sequence]]
+
+[[lem-convergent-implies-bounded]]
 
 ## Facts & Assumptions
 

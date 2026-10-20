@@ -1,0 +1,10 @@
+
+for(const[name,mutate]of[
+ ['duplicate maintenance paragraph',f=>{const t=readFileSync(join(f.root,f.e.maintenance.path),'utf8'),q=readFileSync(join(f.root,f.e.maintenance.quote_archive.path),'utf8').trim();f.put(f.e.maintenance.path,t+'\n'+q+'\n')}],
+ ['stale source archive',f=>f.put(f.e.supplier.archive.path,'changed')],
+ ['changed assignment with refreshed digest',f=>f.updateRef(f.e.native_assignment,readFileSync(join(f.root,f.e.native_assignment.path),'utf8')+'\nchanged')],
+ ['changed active row with refreshed claimed row hash',f=>{f.row.location='proof';f.e.active_row_sha256='a'.repeat(64)}],
+ ['consumer duplicated at another home',f=>{f.put(`research/${run}-batch-999.pages.json`,[{id:'fake',items:[{id:f.e.consumer_id,deps:[f.e.supplier_id]}]}])}],
+ ['owner review source-repair claim',f=>{const d=JSON.parse(readFileSync(join(f.root,f.e.owner_review.path)));d.source_repaired=true;f.updateRef(f.e.owner_review,d)}],
+ ['wrong run invocation',f=>{assert.throws(()=>check(f.root,'other-run',f.registry,[f.row],f.groups));f.e.run='other-run'}]
+])test('independent rejection '+name,()=>withFixture(f=>{mutate(f);assert.throws(f.current)}));

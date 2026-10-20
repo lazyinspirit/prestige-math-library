@@ -1,0 +1,457 @@
+{
+  "group": "aa",
+  "batches": ["82"],
+  "pages_read": [
+    "pac-mdp-exploration",
+    "pac-mdp-exploration-examples"
+  ],
+  "items_read": [
+    "def-pac-mdp-bounded-reward-model",
+    "thm-pac-mdp-value-functions",
+    "lem-pac-mdp-adaptive-sample-concentration",
+    "def-pac-mdp-sample-complexity",
+    "def-admissible-mdp-heuristic",
+    "lem-pac-mdp-value-simulation",
+    "def-pac-mdp-known-state-action-mdp",
+    "alg-r-max",
+    "alg-delayed-q-learning",
+    "thm-pac-mdp-escape-event-reduction",
+    "lem-r-max-empirical-model-accuracy",
+    "lem-delayed-q-learning-optimism-and-update-counts",
+    "thm-zero-tolerance-pac-mdp-boundary",
+    "thm-r-max-pac-bound",
+    "thm-delayed-q-learning-pac-bound",
+    "ex-pac-mdp-nonpermanent-bad-steps",
+    "ex-pac-mdp-inadmissible-heuristic-fails",
+    "ex-pac-mdp-discount-factor-dependence",
+    "ex-pac-mdp-delayed-q-zero-slack"
+  ],
+  "conventions": [
+    {
+      "convention": "State and admissible action sets are finite and nonempty; rewards lie in [0,1]; 0 ≤ γ < 1. The joint next-state/reward kernel permits dependence between its two coordinates.",
+      "fixed_by": "def-pac-mdp-bounded-reward-model",
+      "matters_for": [
+        "thm-pac-mdp-value-functions",
+        "lem-pac-mdp-adaptive-sample-concentration",
+        "alg-r-max",
+        "alg-delayed-q-learning"
+      ]
+    },
+    {
+      "convention": "AC is assumed for infinite trajectory laws and the conditional-expectation suppliers. Finite Bellman maximization uses only finite choice.",
+      "fixed_by": "thm-pac-mdp-value-functions",
+      "matters_for": [
+        "def-pac-mdp-sample-complexity",
+        "lem-pac-mdp-adaptive-sample-concentration",
+        "thm-pac-mdp-escape-event-reduction",
+        "thm-zero-tolerance-pac-mdp-boundary"
+      ]
+    },
+    {
+      "convention": "Bad times start at t = 1 and use the algorithm's history-conditioned continuation value, with a strict inequality V^{A_t}(h_t) < V*(s_t) − ε. A finite count imposes no prefix condition.",
+      "fixed_by": "def-pac-mdp-sample-complexity",
+      "matters_for": [
+        "thm-pac-mdp-escape-event-reduction",
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound",
+        "thm-zero-tolerance-pac-mdp-boundary",
+        "ex-pac-mdp-nonpermanent-bad-steps"
+      ]
+    },
+    {
+      "convention": "The supplied heuristic satisfies Q* ≤ U ≤ V0 ≤ 1/(1−γ), and the effective cap is Vmax = max{1,V0}.",
+      "fixed_by": "def-admissible-mdp-heuristic",
+      "matters_for": [
+        "lem-r-max-empirical-model-accuracy",
+        "lem-delayed-q-learning-optimism-and-update-counts",
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    },
+    {
+      "convention": "Each unknown pair has its own absorbing sink; both its entrance reward and sink reward equal (1−γ)q(s,a), giving the unknown pair value exactly q(s,a).",
+      "fixed_by": "def-pac-mdp-known-state-action-mdp",
+      "matters_for": [
+        "thm-pac-mdp-escape-event-reduction",
+        "lem-r-max-empirical-model-accuracy",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    },
+    {
+      "convention": "Concentration applies to deterministic sample sizes or fixed-size batches begun at observable histories; it does not assert uniform confidence at a sample size selected after observing its samples.",
+      "fixed_by": "lem-pac-mdp-adaptive-sample-concentration",
+      "matters_for": [
+        "lem-r-max-empirical-model-accuracy",
+        "lem-delayed-q-learning-optimism-and-update-counts"
+      ]
+    },
+    {
+      "convention": "The escape reduction requires actual fixed-order greedy action selection. Its Q-table cap Qc is distinct from the cap W on unknown-pair values.",
+      "fixed_by": "thm-pac-mdp-escape-event-reduction",
+      "matters_for": [
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    },
+    {
+      "convention": "Delayed Q-learning succeeds at old value minus batch mean ≥ 2ε1 and replaces the value by batch mean + ε1. The update allowance includes one additional update per pair even at zero heuristic slack.",
+      "fixed_by": "alg-delayed-q-learning",
+      "matters_for": [
+        "lem-delayed-q-learning-optimism-and-update-counts",
+        "thm-delayed-q-learning-pac-bound",
+        "ex-pac-mdp-delayed-q-zero-slack"
+      ]
+    },
+    {
+      "convention": "Positive-tolerance parameter formulas are never evaluated at ε = 0; zero tolerance is treated by separate impossibility and zero-value branches.",
+      "fixed_by": "thm-zero-tolerance-pac-mdp-boundary",
+      "matters_for": [
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-pac-mdp-escape-event-reduction",
+      "statement": "Under its stated AC, greedy-action, known-set stability, cap and parameter hypotheses, if simultaneous optimism, policy accuracy and an update-plus-escape bound ζ hold with probability at least 1−ρ, then with probability at least 1−2ρ the PAC-MDP count satisfies N_{4η} ≤ HM, for the displayed q, H and M.",
+      "used_by": [
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    },
+    {
+      "id": "lem-pac-mdp-adaptive-sample-concentration",
+      "statement": "Under AC, independent per-pair potential streams reproduce the interaction's finite-trajectory law. Fixed-size reward means obey 2 exp(−2mx²) tails; empirical transition L1 error has expectation at most sqrt(|S|/m) and upper deviation sqrt(2 ln(1/δ)/m) with failure at most δ. Bounded adapted targets in [0,B] obey the stated martingale-difference tail bound.",
+      "used_by": [
+        "lem-r-max-empirical-model-accuracy",
+        "lem-delayed-q-learning-optimism-and-update-counts"
+      ]
+    },
+    {
+      "id": "thm-pac-mdp-value-functions",
+      "statement": "Assume the Axiom of Choice. Every history-dependent behavior has a trajectory law and a measurable integrable discounted return in [0,1/(1−γ)]. Stationary values satisfy their Bellman equations; the optimality operator is a γ contraction with unique fixed point V*, equal to the supremum over history-dependent behaviors and attained by a deterministic stationary greedy policy.",
+      "used_by": [
+        "def-pac-mdp-sample-complexity",
+        "def-admissible-mdp-heuristic",
+        "lem-pac-mdp-value-simulation",
+        "thm-pac-mdp-escape-event-reduction",
+        "lem-r-max-empirical-model-accuracy",
+        "lem-delayed-q-learning-optimism-and-update-counts"
+      ]
+    },
+    {
+      "id": "lem-r-max-empirical-model-accuracy",
+      "statement": "For its displayed m and β, with probability at least 1−δ, simultaneously at all times the true and empirical trap-model policy values differ by at most η/8, Q approximates the empirical optimum within β, optimism and policy accuracy hold to η, and rebuilds plus outside-known-set selections total at most (m+1)|Eη|.",
+      "used_by": [
+        "thm-r-max-pac-bound"
+      ]
+    },
+    {
+      "id": "lem-delayed-q-learning-optimism-and-update-counts",
+      "statement": "For the stated batch-size threshold, with probability at least 1−δ all estimates remain optimistic, every attempted update begun outside K succeeds, successful updates total at most G = sum(1+D(s,a)/ε1), and visits outside K total at most 2mG.",
+      "used_by": [
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    },
+    {
+      "id": "lem-pac-mdp-value-simulation",
+      "statement": "With common value cap V and reward/transition errors α, β, stationary-policy and optimal-value errors are at most (α+γVβ)/(1−γ). In its trap-model form, a 2W cap for M1 and γβ ≤ (1−γ)/2 give error at most 2(α+2γWβ)/(1−γ), without a tight cap for M2.",
+      "used_by": [
+        "lem-r-max-empirical-model-accuracy"
+      ]
+    },
+    {
+      "id": "thm-zero-tolerance-pac-mdp-boundary",
+      "statement": "Under AC and the stated information restriction, no finite uniform zero-tolerance bound exists even for one-state two-action Bernoulli bandits at γ=0. Fixed finite legal R-MAX and Delayed Q-learning parameters have the stated infinite-bad-count witnesses; if V* vanishes everywhere, every behavior has N0=0.",
+      "used_by": [
+        "thm-r-max-pac-bound",
+        "thm-delayed-q-learning-pac-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel requirements for the bounded-reward model.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "The reward-coordinate measurable structure.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint state/reward spaces and finite observed-history spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-cartesian-product",
+      "used_for": "The state/reward product sample space.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Mean rewards and discounted-return expectations.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Reward bounds, monotonicity and scaling of nonnegative integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice assumption inherited by path laws and conditional expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "History-dependent trajectory laws and countable potential-stream construction under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Splitting bounded reward-plus-continuation integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Evaluating functions of the next state using its marginal law.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-agrees-with-the-finite-weighted-sum",
+      "used_for": "Finite state and action expectation formulas in Bellman recursions.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+      "used_for": "Measurability of the discounted-return limit.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing from finite nonnegative discounted sums to infinite-horizon expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Discounted-value bounds and truncation errors, including γ=0.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "Coordinatewise convergence of Bellman iterates.",
+      "opened": true
+    },
+    {
+      "id": "def-countable",
+      "used_for": "Finiteness as bijection with a natural number and enumeration of the finite pair set.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Attainment of finite action maxima.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite Bellman sums, order estimates and finite coupling computations.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Supremum-norm contraction estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-choice",
+      "used_for": "Selecting one maximizing action at each of finitely many states.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Sample-history and stopped-trial filtrations; no completeness assumption is required.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-difference-sequence",
+      "used_for": "Centered adapted sample increments.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Centering, conditional order bounds and conditional expectation algebra.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+      "used_for": "Exponential moments with predictable endpoints of deterministic bounded width.",
+      "opened": true
+    },
+    {
+      "id": "thm-tower-property-of-conditional-expectation",
+      "used_for": "Iteration of conditional exponential-moment and trial estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Removing bounded history-measurable exponential factors from conditional expectations.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Exponential tail bounds for sample sums and trial-success counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-azuma-hoeffding-inequality",
+      "used_for": "Empirical transition L1 concentration through a Doob martingale with predictable increment ranges.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Bounding coordinatewise empirical absolute errors by their second moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "The estimate sum sqrt(pj) ≤ sqrt(|S|).",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-union-bound",
+      "used_for": "Combining finitely many pairwise and batchwise concentration failures.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurable continuation values and observable bad-time tests.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Finite history-tree coupling in the zero-tolerance impossibility proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Choosing an integer horizon T greater than twice a prescribed finite bad-step bound.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-delayed-q-learning-pac-bound",
+      "concern": "Proof 1.3 writes the Bellman expression T^{π_t}_{M_t}V_t and then takes a maximum difference over states, but V_t has only been defined on the original state set, whereas M_t also contains dedicated absorbing sinks. The immediate completion is to extend V_t to each sink by Q_t(s,a); sink residuals and value differences then vanish. State this extension or explicitly use the reduced operator on original states.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "ex-pac-mdp-nonpermanent-bad-steps",
+      "concern": "The title, 'A finite bad-step count need not be a permanent stopping time', is ambiguous about the distinction being illustrated. The witness proves that a good step can precede a later bad step; it also has a deterministic permanent good-time threshold n+3. It therefore does not illustrate absence of a permanent stopping time. Clarify the title's intended count-versus-time distinction.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "def-measure-kernel-and-probability-kernel, Definition: 'Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]'. These hyperlinks interrupt the complete Definition rather than appearing in an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-borel-sigma-algebra",
+      "finding": "def-borel-sigma-algebra, Definition: 'and is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].' This and the inline topological-space link remain inside the Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "def-product-sigma-algebra-and-finite-product-sigma-algebras, Definition: '[[def-measurable-rectangle]].' This citation occurs before the subsequent empty-product and recursive finite-product clauses, interrupting the complete Definition rather than following it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-cartesian-product",
+      "finding": "def-cartesian-product, Definition: '[[def-axiom-schema-of-separation]] applied inside that set produces the'. This and the ordered-pair links remain within the defining construction instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "def-expectation-of-a-nonnegative-or-integrable-random-variable, Definition: 'of [[def-integrable-real-and-complex-functions-and-their-integrals]], its'. The integrability citation interrupts the complete Definition; it has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice, Definition: '> ([[def-choice-function]]).' The hyperlink is inside the Definition before its written-out and equivalent-product formulations, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable",
+      "finding": "def-countable, Definition: '([[def-equinumerous]]).' This and the natural-number/order links occur before the finite/countably infinite/uncountable definitions, rather than after the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-expectation-agrees-with-the-finite-weighted-sum",
+      "finding": "cor-expectation-agrees-with-the-finite-weighted-sum, Statement: '[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with'. This and the finite-probability-space theorem link interrupt the Statement before its expectation formula instead of appearing in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-choice",
+      "finding": "lem-finite-choice, Statement: '([[def-choice-function]]).' This and the AC/natural-number links remain inside the complete Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-set-has-max",
+      "finding": "lem-finite-set-has-max, Statement: 'merely assumed**: [[lem-finite-subsets-listable]] proves that the two'. This and the maximum/minimum link remain within the Statement, contrary to the required reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "lem-finite-sum-laws, Statement: 'finite products as in [[def-finite-sum]]. Then:'. This and the links in the scaling clause interrupt the complete six-clause Statement instead of appearing afterward in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-triangle-inequality-finite",
+      "finding": "lem-triangle-inequality-finite, Statement: 'with finite sums as in [[def-finite-sum]] and the absolute value as in'. The finite-sum and absolute-value links precede the conclusion inside the Statement instead of following it in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-geometric-series",
+      "finding": "thm-geometric-series, Statement: '1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and'. This and the integer-power link interrupt the complete Statement rather than appearing in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-reals-cauchy-complete",
+      "finding": "thm-reals-cauchy-complete, Statement: 'number. Together with [[thm-reals-ordered-field]], this completes the'. This and the real-limit link remain inside the Statement instead of an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "def-filtration-and-filtered-probability-space, Definition contains 'is a probability space [[def-probability-measure]]' and 'is a sigma-algebra on' followed by [[def-sigma-algebra]]. These inline links interrupt the defining paragraph instead of appearing in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-difference-sequence",
+      "finding": "def-martingale-difference-sequence, Definition begins 'Assume AC [[def-axiom-of-choice]] for conditional-expectation existence.' It also links adaptedness and conditional-expectation classes within the Definition. These links violate the required uninterrupted Definition/reference-section layout.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "thm-cauchy-schwarz-and-the-euclidean-norm, Statement: 'are the published [[thm-cauchy-schwarz-finite]], stated there for two lists of'. This and the inner-product, norm and metric links remain inside the complete Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-archimedean",
+      "finding": "thm-of-archimedean, Statement: '([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.' This and the complete-ordered-field link remain inside the Statement instead of a following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "pac-mdp-exploration",
+      "to": "tabular-prediction-and-control",
+      "faithful": true,
+      "note": "The actual item edge is alg-delayed-q-learning → alg-q-learning. The supplier specifies the one-step reward-plus-discounted-greedy-successor target, and the consumer cites precisely that target. The consumer defines its own delayed batch procedure and bounded-real-reward model; it does not invoke the supplier's finite-reward-alphabet procedure or its convergence theorem. The required page contains alg-q-learning, so the page requirement and item citation agree."
+    }
+  ]
+}

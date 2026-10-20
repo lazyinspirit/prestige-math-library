@@ -1,0 +1,117 @@
+PDF PAGE 1
+Stronger Generalization Bounds for Deep Nets via a Compression Approach
+A. Supplementary Discussions for Sections 2 and 3
+In this section we elaborate on some of the discussions in Sections 2 and 3 and give proofs of the various statements.
+A.1. Generalization Bounds from Compression
+We will ﬁrst prove Theorem 2.1, which gives generalization guarantees for the compressed function.
+Proof. (Theorem 2.1) For each A ∈A, the training loss ˆL0(gA) is just the average of m i.i.d. Bernoulli random variables
+with expectation equal to L0(gA). Therefore by Chernoff bound we have
+Pr[L0(gA) −ˆL0(gA) ≥τ] ≤exp(−2τ 2m).
+Therefore, suppose we choose τ =
+q
+q log r
+m
+
+, with probability at least 1−exp(−2q log r) we have L0(gA) ≤ˆL0(gA)+τ.
+There are only rq different A ∈A, hence by union bound, with probability at least 1 −exp(−q log r), for all A ∈A we
+have
+L0(gA) ≤ˆL0(gA) +
+ r
+q log r
+m
+!
+.
+Next, since f is (γ, S)-compressible with respect to g, there exists A ∈A such that for x ∈S and any y we have
+|f(x)[y] −gA(x)[y]| ≤γ.
+For these training examples, as long as the original function f has margin at least γ, the new function gA classiﬁes the
+example correctly. Therefore
+ˆL0(gA) ≤ˆLγ(f).
+Combining these two steps, we immediately get the result.
+Using the same approach, we can also prove the following Corollaries that allow the compression to fail with some
+probability
+Corollary A.1. In the setting of Theorem 2.1, if the compression works for 1 −ζ fraction of the training sample, then with
+high probability
+L0(gA) ≤ˆLγ(f) + ζ + O
+ r
+q log r
+m
+!
+.
+Proof. The proof is using the same approach, except in this case we have
+ˆL0(gA) ≤ˆLγ(f) + ζ.
+A.2. Example 1: Compress a Vector
+This section gives detailed calculations supporting the ﬁrst example in Section 2.
+Lemma 4. Algorithm 2 Vector-Compress(γ, c) returns a vector ˆc such that for any ﬁxed u (independent of choice of ˆc),
+with probability at least 1 −η, |ˆc⊤u −c⊤u| ≤γ. The vector ˆc has at most O((log h)/ηγ2) non-zero entries with high
+probability.
+Proof. By the construction in Algorithm 2, it is easy to check that for all i, E[ˆci] = ci. Also, Var[ˆc] = 2pi(1 −pi) c2
+i
+p2
+i ≤
+2c2
+i
+pi ≤ηγ2.
+Therefore, for any vector u that is independent with the choice of ˆc, we have E[ˆc⊤u] = c⊤u and Var[ˆc⊤u] ≤∥u∥2/4 ≤ηγ2.
+Therefore by Chebyshev’s inequality we know Pr[|ˆc⊤u −c⊤u| ≥γ] ≤η.
+
+PDF PAGE 2
+Stronger Generalization Bounds for Deep Nets via a Compression Approach
+Algorithm 2 Vector-Compress(γ, c)
+Require: vector c with ∥c∥≤1, η.
+Ensure: vector ˆc s.t. for any ﬁxed vector ∥u∥≤1, with probability at least 1 −η, |c⊤u −ˆc⊤u| ≤γ. Vector ˆc has
+O((log h)/ηγ2) nonzero entries.
+for i = 1 to d do
+Let zi = 1 with probability pi = 2c2
+i
+ηγ2 (and 0 otherwise)
+Let ˆci = zici/pi.
+end for
+Return ˆc
+On the other hand, the expected number of non-zero entries in ˆc is Pd
+i=1 pi = 2/ηγ2. By Chernoff bound we know with
+high probability the number of non-zero entries is at most O((log h)/ηγ2).
+Next we handle the discretization:
+Lemma 5. Let ˜c = Vector-Compress(γ/2, c). For each coordinate i, let ˆci = 0 if |˜ci| ≥2ηγ
+√
+h, otherwise let ˆci be the
+rounding of ˜ci to the nearest multiple of γ/2
+√
+h. For any ﬁxed u with probability at least 1 −η, |ˆc⊤u −c⊤u| ≤γ.
+Proof. Let c′ be a truncated version of c: c′
+i = ci if |ci| ≥γ/4
+√
+h, and c′
+i = 0 otherwise. It is easy to check that ∥c′ −c∥≤
+γ/4. By Algorithm 2, we observe that ˜c = Vector-Compress(γ/2, c′) (|˜ci| ≥2ηγ
+√
+h if and only if |ci| ≤γ/4
+√
+h). Finally,
+by the rounding we know ∥ˆc −˜c∥≤γ/4. Combining these three terms, we know with probability at least 1 −η,
+|ˆc⊤u −c⊤u| ≤|ˆc⊤u −˜c⊤u| + |˜c⊤u −(c′)⊤u| + |(c′)⊤u −c⊤u|
+≤γ/4 + γ/2 + γ/4 = γ.
+Combining the above two lemmas, we know there is a compression algorithm with O((log h)/ηγ2) discrete parameters that
+works with probability at least 1 −η. Applying Corollary A.1 we get
+Lemma 6. For any number of sample m, there is an efﬁcient algorithm to generate a compressed vector ˆc, such that
+L(ˆc) ≤˜O((1/γ2m)1/3).
+Proof. We will choose η = (1/γ2m)1/3. By Lemma 4 and Lemma 5, we know there is a compression algorithm that works
+with probability 1 −η, and has at most ˜O((log h)/ηγ2) parameters. By Corollary A.1, we know
+L(ˆc) ≤˜O(η +
+p
+1/ηγ2m) ≤˜O((1/γ2m)1/3).
+Note that the rate we have here is not optimal as it depends on m1/3 instead of √m. This is mostly due to Lemma 4 cannot
+give a high probability bound (indeed if we consider all the basis vectors as the test vectors u, Vector-Compress is always
+going to fail on some of them).
+Compression with helper string
+To ﬁx this problem we use a different algorithm that uses a helper string, see Algorithm 3
+Note that in Algorithm 3, the parameters for the output are the zi’s. The vectors vi’s are sampled independently, and hence
+can be considered to be in the helper string.
+Lemma 7. For any ﬁxed vector u, Algorithm 3 Vector-Project(c, γ) produces a vector ˆc such that with probability at least
+1 −η, we have |ˆc⊤u −c⊤u| ≤γ.
+Proof. This is in fact a well-known corollary of Johnson-Lindenstrauss Lemma. Observe that
+ˆc⊤u = 1
+k
+k
+X
+i=1
+⟨vi, c⟩⟨vi, u⟩.

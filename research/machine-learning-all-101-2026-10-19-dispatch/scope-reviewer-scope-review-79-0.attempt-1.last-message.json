@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "79",
+  "round": 0,
+  "reviewed_items": [
+    "lem-linucb-elliptical-potential",
+    "lem-linucb-trace-determinant-bound",
+    "lem-linucb-predictable-mgf-substitution",
+    "def-linear-contextual-bandit-model",
+    "lem-linucb-ridge-information-matrix",
+    "lem-linucb-ridge-estimates-are-measurable",
+    "lem-linucb-gaussian-mixture-supermartingale",
+    "alg-linucb",
+    "thm-self-normalized-linear-confidence-ellipsoid",
+    "thm-linucb-regret",
+    "cor-linucb-expected-regret",
+    "ex-linucb-feature-norm-violation",
+    "ex-linucb-two-context-two-action-update",
+    "ex-linucb-unbounded-parameter-norm",
+    "ex-linucb-mean-range-exceeds-one"
+  ],
+  "reviewed_pages": [
+    "linear-contextual-bandits-and-linucb",
+    "linear-contextual-bandits-and-linucb-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved scope, page inventories, and actual supplier claims and proofs were reviewed. The mathematical confidence and regret arguments are supported; local specification and proof-boundary repairs are needed.",
+  "findings": [
+    {
+      "id": "alg-linucb",
+      "type": "local",
+      "reason": "The Definition gives inputs and procedure steps but no explicit outputs. The current regret theorem does not separately establish termination or computational cost. Add explicit outputs and separate proved algorithm-property result(s), linking any well-definedness result through justified_by as required."
+    },
+    {
+      "id": "lem-linucb-elliptical-potential",
+      "type": "local",
+      "reason": "Proof step 1.2 applies integral monotonicity at u=0, where the interval [1,1+u] is degenerate and the supplier theorem requires a<b. Handle u=0 separately."
+    },
+    {
+      "id": "def-linear-contextual-bandit-model",
+      "type": "local",
+      "reason": "The Definition references describe def-online-decision-protocol as permitting all information available before feedback. The actual supplier restricts choices to prior history and private randomness; the model locally adds current context and feature information. Clarify that the supplier provides feedback timing and this model adds contextual side information."
+    },
+    {
+      "id": "ex-linucb-feature-norm-violation",
+      "type": "local",
+      "reason": "The example supplies only round-1 data without specifying the horizon. State n=1."
+    },
+    {
+      "id": "ex-linucb-unbounded-parameter-norm",
+      "type": "local",
+      "reason": "The Example does not specify δ, but its Verification uses δ=1/2. State that confidence level or prove the example for an arbitrary fixed δ."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-linucb-regret",
+      "decision": "accept",
+      "reason": "Uses the existing score and confidence schedule; explicit output and algorithm-property results do not change its premises or bound."
+    },
+    {
+      "id": "cor-linucb-expected-regret",
+      "decision": "accept",
+      "reason": "Uses the same confidence schedule and regret theorem; the proposed algorithm clarification does not change either."
+    },
+    {
+      "id": "ex-linucb-two-context-two-action-update",
+      "decision": "accept",
+      "reason": "Its calculations use the unchanged score, tie rule, and ridge update."
+    },
+    {
+      "id": "ex-linucb-mean-range-exceeds-one",
+      "decision": "accept",
+      "reason": "Its indirect use through thm-linucb-regret relies on the unchanged mean-range premise."
+    },
+    {
+      "id": "linear-contextual-bandits-and-linucb",
+      "decision": "accept",
+      "reason": "The page inventory use is unchanged by the proposed algorithm clarification."
+    },
+    {
+      "id": "linear-contextual-bandits-and-linucb-examples",
+      "decision": "accept",
+      "reason": "Its indirect page dependency is unaffected."
+    }
+  ]
+}

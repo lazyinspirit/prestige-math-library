@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "48",
+  "round": 0,
+  "reviewed_items": [
+    "def-ridgeless-minimum-norm-regression",
+    "lem-iid-uniform-fill-distance-rate",
+    "lem-ridgeless-risk-decomposition",
+    "lem-dense-cube-polynomial-norming-and-reproduction",
+    "lem-gaussian-rbf-power-function-fill-distance-bound",
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+    "lem-zero-signal-isotropic-risk-limit",
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+    "lem-isotropic-minimum-norm-risk-components",
+    "ex-double-descent-in-neural-and-tree-models",
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+  ],
+  "reviewed_pages": [
+    "minimum-norm-interpolation-and-double-descent",
+    "minimum-norm-interpolation-and-double-descent-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Whole batch reviewed, including current suppliers and consumer uses. The finite-fourth-moment risk claims follow the approved local proof route; Hastie's cited theorem itself assumes a 4+η moment, while the assigned items derive the broader claim from the local corollary [Hastie et al.](https://arxiv.org/pdf/1903.08560). The neural/tree example is limited to reported experiments, and the cited interpolation result is noiseless [Belkin et al.](https://arxiv.org/pdf/1812.11118). An outside-batch prerequisite proof gap requires owner resolution; local proof repairs are also identified.",
+  "findings": [
+    {
+      "id": "lem-bounded-complex-resolvent-deterministic-equivalent",
+      "type": "prerequisite",
+      "reason": "Outside the assigned batch. In step 2.1, α_j is a centered quadratic form in the raw column, but the stated coefficient Frobenius bound is only O(1) before the proof infers E_j|α_j|²=O(N^-2). Since s_j=T_n^(1/2)X_{n,·j}/√N, the coefficient has an additional 1/N factor; state the sharper O(N^-1) bound so step 4.1's δ1 estimate follows. This supplier feeds thm-directional-sample-covariance-resolvent-limit-for-bounded-entries, then thm-directional-sample-covariance-resolvent-limit and cor-isotropic-minimum-norm-risk-closure-under-edge-gap."
+    },
+    {
+      "id": "lem-iid-uniform-fill-distance-rate",
+      "type": "local",
+      "reason": "Proof step 1.1 closes the final grid intervals at the cube boundary. Those cells are not all the half-open boxes covered by [F1], so their measurability and normalized probability m^-d are not established as written. Add a boundary-face null-measure argument or otherwise justify the cell probabilities before the empty-cell estimate."
+    },
+    {
+      "id": "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+      "type": "local",
+      "reason": "The Statement allows a closed cube without specifying axis alignment, while proof step 3.1 applies the fill-distance supplier whose Statement covers only product cubes. Add the orthogonal-isometry transfer for the uniform sample and Euclidean fill distance, preserving the approved scope."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-zero-signal-isotropic-risk-limit",
+      "decision": "escalate",
+      "reason": "Uses cor-isotropic-minimum-norm-risk-closure-under-edge-gap, which depends on the unresolved resolvent supplier proof."
+    },
+    {
+      "id": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "decision": "escalate",
+      "reason": "Its nonzero-signal case uses the affected risk-closure corollary; its zero-signal case uses lem-zero-signal-isotropic-risk-limit."
+    },
+    {
+      "id": "lem-isotropic-minimum-norm-risk-components",
+      "decision": "escalate",
+      "reason": "Uses the affected zero-signal lemma and isotropic risk theorem."
+    },
+    {
+      "id": "ex-isotropic-risk-components-and-signal-to-noise-regimes",
+      "decision": "escalate",
+      "reason": "Uses lem-isotropic-minimum-norm-risk-components, whose prerequisite chain is unresolved."
+    },
+    {
+      "id": "minimum-norm-interpolation-and-double-descent",
+      "decision": "escalate",
+      "reason": "Its page-level prerequisite sample-covariance-resolvent-limits contains the affected risk-closure corollary."
+    },
+    {
+      "id": "minimum-norm-interpolation-and-double-descent-examples",
+      "decision": "escalate",
+      "reason": "Requires minimum-norm-interpolation-and-double-descent, whose sample-covariance prerequisite is unresolved."
+    },
+    {
+      "id": "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+      "decision": "repair",
+      "reason": "Its fill-distance use needs the local isometry transfer for cubes beyond the axis-aligned supplier scope."
+    }
+  ]
+}

@@ -16,6 +16,7 @@ sources:
     - title: "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23"
       url: "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-real-and-complex-inner-product-space.json
   audited: 2026-09-22
 ---
 
@@ -23,10 +24,10 @@ verification:
 
 Let $\mathbb F$ be $\mathbb R$ or $\mathbb C$, with **conjugation** $z\mapsto\overline z$
 the identity on $\mathbb R$ and complex conjugation on $\mathbb C$
-([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or
+(Real and imaginary parts, complex conjugation, and modulus). A **real** or
 **complex inner-product space** is an $\mathbb F$-vector space $V$ together with
 an inner product $\langle\cdot,\cdot\rangle:V\times V\to\mathbb F$ in the sense
-of [[def-inner-product-space]]: for all $u,v,w\in V$ and $a,b\in\mathbb F$,
+of Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\in V$ and $a,b\in\mathbb F$,
 
 $$\langle au+bv,w\rangle=a\langle u,w\rangle+b\langle v,w\rangle,\qquad \langle u,v\rangle=\overline{\langle v,u\rangle},\qquad \langle v,v\rangle\ge0,\quad \langle v,v\rangle=0\iff v=0 .$$
 
@@ -39,7 +40,7 @@ $$\langle w,au+bv\rangle=\overline{\langle au+bv,w\rangle}=\overline{a\langle u,
 
 $$\|v\|:=\sqrt{\langle v,v\rangle},$$
 
-which is exactly the published [[def-inner-product-norm]]: positive definiteness
+which is exactly the published The norm $\lVert v\rVert=\sqrt{\langle v,v\rangle}$ induced by a real or complex inner product: positive definiteness
 makes $\langle v,v\rangle$ a nonnegative real with a unique nonnegative square
 root, so that $\|v\|\ge0$, $\|v\|=0$ exactly for $v=0$, and
 $\langle v,v\rangle=\|v\|^2$.
@@ -51,3 +52,12 @@ In the real case conjugation is the identity and $|z|$ is the absolute value of
 $\mathbb R$; in the complex case they are complex conjugation and the complex
 modulus. All statements below are therefore written once and read in either
 scalar field.
+
+## Definition references
+
+[[def-complex-conjugate-real-imaginary-part-and-modulus]]
+
+[[def-inner-product-space]]
+
+[[def-inner-product-norm]]
+

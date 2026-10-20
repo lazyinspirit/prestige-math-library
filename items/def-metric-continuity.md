@@ -13,6 +13,7 @@ aliases: [def-continuous-map-metric]
 landmark: true
 short: "$\\varepsilon$-$\\delta$ continuity"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-continuity.json
   precheck: n/a
   verified:
     model: Codex
@@ -36,7 +37,7 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let
+Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), let
 $f : X \to Y$ be a function and let $a \in X$.
 
 $f$ is **continuous at $a$** if for every real $\varepsilon > 0$ there is a real
@@ -49,7 +50,7 @@ $X$.
 
 **The same condition in balls.** Since $d_X(x,a) < \delta$ says $x \in B_X(a,\delta)$
 and $d_Y(f(x),f(a)) < \varepsilon$ says $f(x) \in B_Y(f(a),\varepsilon)$
-([[def-metric-ball]]), continuity at $a$ reads: for every $\varepsilon > 0$ there
+(Open ball, closed ball and sphere in a metric space), continuity at $a$ reads: for every $\varepsilon > 0$ there
 is $\delta > 0$ with
 
 $$f\big[B_X(a,\delta)\big] \subseteq B_Y\big(f(a), \varepsilon\big).$$
@@ -58,14 +59,22 @@ Both forms are used below and are the same statement written twice.
 
 **Both metrics matter, and both are named.** Continuity is a property of the
 triple $(d_X, d_Y, f)$, not of $f$ alone. When several metrics on the same
-underlying sets are in play, as in [[def-equivalent-metrics]], the metrics are
+underlying sets are in play, as in Topologically, uniformly and Lipschitz equivalent metrics on a set, the metrics are
 always written out.
 
 **Quantifier order.** The $\delta$ is allowed to depend on $\varepsilon$ **and on
 the point $a$**. Requiring one $\delta$ to work at every point simultaneously is
 a strictly stronger condition, uniform continuity; it is defined on a later page
 of this library, and at this point in the reading order it is written out in full
-where needed ([[def-equivalent-metrics]]).
+where needed (Topologically, uniformly and Lipschitz equivalent metrics on a set).
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-metric-ball]]
+
+[[def-equivalent-metrics]]
 
 ## Remarks
 

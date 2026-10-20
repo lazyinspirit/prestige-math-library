@@ -13,7 +13,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
-  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-zero-domain/def-total-derivative-in-euclidean-space/application/repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-total-derivative-in-euclidean-space.json
 sources:
   scraped: []
   references:
@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Definition
 
-Let $m,n\in\mathbb N$, let $U\subseteq\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\in U$, and let $f:U\to\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\mathbb R^m\to\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\varepsilon>0$ there is $\delta>0$ for which
+Let $m,n\in\mathbb N$, let $U\subseteq\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\in U$, and let $f:U\to\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\mathbb R^m\to\mathbb R^n$ (A linear map $L:\mathbb{R}^m\to\mathbb{R}^n$ in Euclidean coordinates) such that for every $\varepsilon>0$ there is $\delta>0$ for which
 
 $$\|f(a+h)-f(a)-Lh\|_2\le\varepsilon\|h\|_2\qquad\text{whenever }a+h\in U\text{ and }\|h\|_2<\delta.$$
 
@@ -36,4 +36,10 @@ $$\lim_{h\to0}\frac{\|f(a+h)-f(a)-Lh\|_2}{\|h\|_2}=0,$$
 
 where the quotient is considered for $h\ne0$ with $a+h\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.
 
-When $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\{0\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\mathbb R^0\to\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\mathbb R^0$ likewise have zero remainder, in every source dimension.
+When $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\{0\}$; its Euclidean norm and induced metric exist by A norm on a real vector space, the induced metric, and the dictionary with the metric axioms. The unique linear map $L:\mathbb R^0\to\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\mathbb R^0$ likewise have zero remainder, in every source dimension.
+
+## Definition references
+
+[[def-euclidean-linear-map]]
+
+[[def-norm-and-normed-space]]

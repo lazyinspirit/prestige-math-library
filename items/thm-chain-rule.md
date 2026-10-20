@@ -14,6 +14,7 @@ landmark: true
 short: "the chain rule"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-chain-rule.json
   audited: 2026-07-28
   precheck: pass
   judge:
@@ -41,8 +42,8 @@ pipeline_run: null
 Let $A, B \subseteq \mathbb{R}$, let $g : A \to \mathbb{R}$ with
 $g[A] \subseteq B$ and let $f : B \to \mathbb{R}$, so that the composite
 $f \circ g : A \to \mathbb{R}$ is defined. Let $c \in A$ be a limit point of
-$A$ ([[def-limit-point-r]]) at which $g$ is differentiable
-([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$
+$A$ (Limit point, isolated point, adherent point, derived set, and dense subset of $\mathbb{R}$) at which $g$ is differentiable
+(The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set), put $b := g(c)$, and suppose $b$ is a limit point of $B$
 at which $f$ is differentiable. Then $f \circ g$ is differentiable at $c$ and
 
 $$(f \circ g)'(c) \;=\; f'\bigl(g(c)\bigr)\,g'(c) .$$
@@ -59,6 +60,12 @@ writes $\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \cdot \frac{g(x) - g(c)}{x - c}$
 and then has to say what happens where $g(x) = g(c)$, which may occur at points
 arbitrarily close to $c$. Carathéodory's factorisation never divides by the
 inner increment, so the difficulty does not arise.
+
+## Statement references
+
+[[def-limit-point-r]]
+
+[[def-derivative]]
 
 ## Facts & Assumptions
 

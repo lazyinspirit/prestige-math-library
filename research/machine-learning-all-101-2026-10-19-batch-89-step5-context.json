@@ -1,0 +1,269 @@
+{
+  "group": "ad",
+  "batches": [
+    "89"
+  ],
+  "pages_read": [
+    "imitation-learning-and-dagger",
+    "imitation-learning-and-dagger-examples"
+  ],
+  "items_read": [
+    "lem-dagger-strongly-convex-follow-the-leader-regret",
+    "lem-finite-horizon-mdp-policy-occupancy",
+    "def-imitation-learning-and-expert-surrogate-loss",
+    "alg-dagger",
+    "lem-dagger-mixture-occupancy",
+    "lem-dagger-task-cost-from-expert-surrogate",
+    "thm-dagger-no-regret-reduction",
+    "thm-dagger-finite-sample-generalization",
+    "ex-behavior-cloning-covariate-shift",
+    "ex-dagger-interactive-expert-labels",
+    "ex-surrogate-loss-fails-task-cost-control"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon T is a positive integer; average occupancy uses decision-time state marginals at times 0 through T−1 from a common initial probability vector. Policies are stationary Markov policies, and occupancy is constructed by finite recursion without an infinite-path extension.",
+      "fixed_by": "lem-finite-horizon-mdp-policy-occupancy",
+      "matters_for": [
+        "def-imitation-learning-and-expert-surrogate-loss",
+        "lem-dagger-mixture-occupancy",
+        "lem-dagger-task-cost-from-expert-surrogate",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization",
+        "ex-behavior-cloning-covariate-shift"
+      ]
+    },
+    {
+      "convention": "The expert is deterministic. An expert surrogate takes values in [0,1] and dominates the learner's expert-action disagreement probability at every state.",
+      "fixed_by": "def-imitation-learning-and-expert-surrogate-loss",
+      "matters_for": [
+        "alg-dagger",
+        "lem-dagger-task-cost-from-expert-surrogate",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization",
+        "ex-surrogate-loss-fails-task-cost-control"
+      ]
+    },
+    {
+      "convention": "Expert mixing occurs independently at each decision, rather than once per trajectory. Every visited state receives an expert training label; that label is executed only when the expert-use coin selects it. Aggregation retains multiplicities.",
+      "fixed_by": "alg-dagger",
+      "matters_for": [
+        "lem-dagger-mixture-occupancy",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization",
+        "ex-dagger-interactive-expert-labels"
+      ]
+    },
+    {
+      "convention": "FTL starts from an arbitrary supplied parameter θ₁ and updates θᵢ₊₁ using losses 1 through i. Cumulative minima must be attained. H₀=0.",
+      "fixed_by": "lem-dagger-strongly-convex-follow-the-leader-regret",
+      "matters_for": [
+        "alg-dagger",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization"
+      ]
+    },
+    {
+      "convention": "The task-cost conversion requires u≥0 and the expert cost-to-go gap bound at every state, time and admissible action, including states absent from expert rollouts.",
+      "fixed_by": "lem-dagger-task-cost-from-expert-surrogate",
+      "matters_for": [
+        "thm-dagger-no-regret-reduction"
+      ]
+    },
+    {
+      "convention": "Finite-sample concentration uses one trajectory-average loss per martingale increment, with the parameter measurable before its round and an explicit conditional rollout-mean identity. AC is assumed; neither independent time steps within a trajectory nor a finite-sample task-cost conclusion is asserted.",
+      "fixed_by": "thm-dagger-finite-sample-generalization",
+      "matters_for": [
+        "thm-dagger-finite-sample-generalization"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-dagger-strongly-convex-follow-the-leader-regret",
+      "statement": "For N≥1, nonempty convex K⊆Rᵈ, G≥0, μ>0, and [0,1]-valued G-Lipschitz μ-strongly convex losses whose cumulative sums attain minima, exact FTL from any θ₁∈K satisfies ∑ᵢ Lᵢ(θᵢ)−minθ∈K ∑ᵢ Lᵢ(θ) ≤ 1+(4G²/μ)Hₙ₋₁, where the harmonic index is N−1.",
+      "used_by": [
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization"
+      ]
+    },
+    {
+      "id": "lem-dagger-mixture-occupancy",
+      "statement": "For stationary policies π*, π̂, common initial distribution, positive horizon T, β∈[0,1], and πβ=βπ*+(1−β)π̂, every g:S→[0,1] satisfies |∑s dπβ(s)g(s)−∑s dπ̂(s)g(s)| ≤ 1−(1−β)ᵀ ≤ min{1,Tβ}.",
+      "used_by": [
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization"
+      ]
+    },
+    {
+      "id": "lem-dagger-task-cost-from-expert-surrogate",
+      "statement": "In the defined finite-horizon setting, if u≥0, Q*t(s,a)−V*t(s)≤u at every time, state and admissible action, and ℓ(s,θ) dominates expert-action disagreement at every state, then J(πθ)−J(π*)≤uT∑s dπθ(s)ℓ(s,θ).",
+      "used_by": [
+        "thm-dagger-no-regret-reduction"
+      ]
+    },
+    {
+      "id": "lem-finite-horizon-mdp-policy-occupancy",
+      "statement": "For a finite MDP with nonempty state set, finite nonempty action sets, normalized initial vector, stationary Markov policy and integer T≥1, the stated finite recursion produces probability vectors μt, and dπ=T⁻¹∑t=0ᵀ⁻¹μt is a probability vector without an infinite-path probability extension.",
+      "used_by": [
+        "def-imitation-learning-and-expert-surrogate-loss",
+        "lem-dagger-mixture-occupancy",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization"
+      ]
+    },
+    {
+      "id": "alg-dagger",
+      "statement": "For supplied finite-horizon imitation-learning data, N,m≥1, mixing probabilities, initial parameter and deterministic selector for attained cumulative minima, each round collects m mixed-policy trajectories, queries every visited state's expert label, aggregates with multiplicity, and updates by exact cumulative empirical-loss minimization. The population idealization replaces empirical losses by occupancy expectations.",
+      "used_by": [
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization",
+        "ex-dagger-interactive-expert-labels"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite sums, reindexing and normalization in the occupancy construction.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Finite-sum scaling, additivity, nonnegativity and termwise inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+      "used_for": "Interchanging finite sums in transition-row and state-occupancy normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite occupancy recursion and elementary geometric and Bernoulli estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Nested information sigma-algebras, time-zero convention and infinite zero extension of the sample filtration.",
+      "opened": true
+    },
+    {
+      "id": "def-adapted-and-integrable-stochastic-process",
+      "used_for": "Timewise adaptedness and integrability of bounded trajectory-loss increments.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-difference-sequence",
+      "used_for": "Centered integrable adapted increments indexed from one.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-submartingale-and-supermartingale",
+      "used_for": "The martingale interface used in finite-sample concentration.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure class interpretation of conditional rollout means and inherited AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited assumption for conditional-expectation and martingale suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Linearity when centering each trajectory-average loss.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditioning-a-known-variable-and-an-independent-variable",
+      "used_for": "Conditioning the preceding-information-measurable population loss to itself; its independence clause is not needed.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of finite policy-occupancy recursions and loss expressions.",
+      "opened": true
+    },
+    {
+      "id": "thm-martingales-and-martingale-differences-correspond",
+      "used_for": "Summing the centered trajectory-loss increments from M₀=0 to obtain a martingale.",
+      "opened": true
+    },
+    {
+      "id": "thm-azuma-hoeffding-inequality",
+      "used_for": "Upper-tail concentration with mN increments and deterministic predictable endpoints −1 and 1, yielding the stated square-root term.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-sum-over-a-finite-index-set",
+      "finding": "def-sum-over-a-finite-index-set, Definition, contains inline links including “([[def-finite-cardinality]])” and “([[def-equinumerous]])”, followed by further supplier links inside the defining section. This violates the required uninterrupted Definition and immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "lem-finite-sum-laws, Statement, includes “with finite sums and finite products as in [[def-finite-sum]]” and inline links to lem-of-q-embeds and lem-of-naturals-positive in clause 2. These links interrupt the Statement instead of appearing in an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+      "finding": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged, Statement, includes “[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]]” and “This is not a clause of [[thm-sum-rule]].” These hyperlinks remain inside the complete Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "def-filtration-and-filtered-probability-space, Definition, contains “is a probability space [[def-probability-measure]]” and “is a sigma-algebra on ... [[def-sigma-algebra]]”. These inline supplier links violate the uninterrupted Definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-adapted-and-integrable-stochastic-process",
+      "finding": "def-adapted-and-integrable-stochastic-process, Definition, opens “On a filtered probability space [[def-filtration-and-filtered-probability-space]]” and also links the random-variable and expectation definitions within the defining prose. The required separate Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-difference-sequence",
+      "finding": "def-martingale-difference-sequence, Definition, contains “Assume AC [[def-axiom-of-choice]] for conditional-expectation existence” and additional inline links to the process and conditional-expectation definitions. These interrupt the Definition contrary to the reference-placement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-submartingale-and-supermartingale",
+      "finding": "def-martingale-submartingale-and-supermartingale, Definition, contains “Assume AC [[def-axiom-of-choice]]” and inline links to def-adapted-and-integrable-stochastic-process and def-conditional-expectation-as-an-ae-class. The defining section is not hyperlink-free.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-as-an-ae-class",
+      "finding": "def-conditional-expectation-as-an-ae-class, Definition, states “Existence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]]” and retains further inline supplier links. These belong after the complete Definition in Definition references under the stated editorial rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice, Definition, interrupts its blockquoted formulation with “([[def-choice-function]])” before the written-out quantifiers and equivalent product formulation. This violates the uninterrupted Definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "finding": "thm-arithmetic-and-lattice-operations-preserve-measurability, Statement, contains “from [[def-measurable-pointwise-extended-real-product]]” and “[[def-positive-and-negative-parts-of-a-function]]” before its four conclusions. The links interrupt the complete Statement and have no immediately following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "imitation-learning-and-dagger",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "Checked the current finite-MDP definition against its occupancy and imitation-learning uses. Consumers explicitly require nonempty S, preserve finite nonempty action sets and stationary randomized policies, and derive the transition marginal from the joint reward-transition law. They use only finite-horizon recursion and do not import infinite-path or discounted-return conclusions."
+    },
+    {
+      "from": "imitation-learning-and-dagger",
+      "to": "hedge-and-online-gradient-descent",
+      "faithful": true,
+      "note": "The page prerequisite is present, but no assigned item invokes a Hedge or OGD regret proposition. The batch supplies and proves its own strongly convex FTL bound. Its online timing citation is to def-online-decision-protocol, whose current definition permits loss selection after the learner's choice and supplies no unstated regret guarantee."
+    }
+  ]
+}

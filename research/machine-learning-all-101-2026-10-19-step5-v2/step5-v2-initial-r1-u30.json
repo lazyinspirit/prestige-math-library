@@ -1,0 +1,543 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "30",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "lem-finite-martingale-difference-sum-variance",
+      "model": "gpt-6-luna",
+      "context_sha256": "52848691294b7e58afdc9976195881d3ea43450483dddf5cd463db67000bcb58",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The scalar coordinates 1,...,d conflict with the supplied function domain d={0,...,d-1}. Reindexed the statement and both coordinate expansions; this is a notation defect, with no change to the moment inequality or its orthogonality argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-local-sgd-virtual-progress",
+      "model": "gpt-6-luna",
+      "context_sha256": "b9925269822fc3fc65e7caec7eadc32a22edf381596650222f280f220b37eeea",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly names the proposal x rather than z. The proof only uses the worker mean, which synchronization preserves. Corrected F1 and explicitly derived the invariant mean update; the gap and drift coefficients follow from smoothness, strong convexity, Young and Jensen.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-fedavg-one-round-progress",
+      "model": "gpt-6-luna",
+      "context_sha256": "7e8d94970228d17a9e12d91429fe197aa0a552b714a7663969b0fda4c8fa95e3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original oracle assumptions allow one shared Rademacher error with N=S=6, K=1 and x=x*=0. Actual squared error is t^2 sigma^2, exceeding 5t^2 sigma^2/6. Required full joint prequery conditional moments explicitly, including earlier draws from other clients and the revealed sample, to license the chronological martingale bound. Also carried the existing proof AC prerequisite into the Statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-scaffold-control-correction",
+      "model": "gpt-6-luna",
+      "context_sha256": "f05c3a5924167bfe4a8bcbb69d3fe88ca1bb3c65e4ed298b125bf4848a90117f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example itself already specifies the exact corrected direction using the full gradient, so its invariant is valid for that deterministic specialization. F2 inaccurately restates the general algorithm with a full gradient, and F1 cites a definition with no control update. Corrected both supplier attributions and explicitly named g_i=gradient f_i in F2; no change to the Example claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-scaffold-nonconvex-client-drift",
+      "model": "gpt-6-luna",
+      "context_sha256": "08934cf2c3f9b589a35eebad7f881dd57fabc8d62e891288c45a3c43c5493e4d",
+      "outcome": "confirmed_fatal",
+      "reason": "F5 attributes the oracle moment hypotheses to general probability/expectation interfaces. They are actually supplied by A1 and the trajectory definition full-prequery convention. Corrected F5 to state only expectation rules and identify A1 as the moment source. Also made the existing proof AC prerequisite explicit in the Statement and beta>0 explicit for its reciprocal step bound. The separate AC omission is a fatal undisclosed dependency in the original Statement, even though the original fact-attribution concern alone is nonfatal.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "lem-scaffold-nonconvex-round-progress",
+      "model": "gpt-6-luna",
+      "context_sha256": "f005c39f1bca869c24110eb25fa09d49f2c47a02f342949fc54dc360a132885c",
+      "outcome": "confirmed_fatal",
+      "reason": "F3 publicly supplies norm bounds, not the exact conditional-mean formula attributed to it. The formula is valid (and appears in that supplier proof); derived it locally from the update, full-prequery centering, sample-independent hypothetical paths, uniform inclusion probabilities, cancellation of population controls and the finite-gradient-average rule. Added that actual dependency and made the existing AC prerequisite explicit. The separate AC omission is a fatal undisclosed dependency in the original Statement, even though the original fact-attribution concern alone is nonfatal.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "thm-scaffold-convex-and-nonconvex-rates",
+      "model": "gpt-6-luna",
+      "context_sha256": "0b891a727b616f17fd760e72b54185dc78b3c5f3868ee1ee6183ec12f5572251",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The theorem Statement omitted AC, although A2 explicitly adds it and F8 invokes conditional-expectation existence through an AC-dependent supplied interface. This leaves a real prerequisite undisclosed. Added the Axiom of Choice to the Statement, preserving all three rate claims and their output rules.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-finite-martingale-difference-sum-variance",
+      "disposition": "repaired",
+      "post_sha256": "dcd1288bd56fd1f55b2c159e31383169e04a1737933ea373db3817659af337ae",
+      "review_context_sha256": "a1140cc9fa82ecb7f9f2099e0289531dd1b847d38db28887c441c3772b4a1f03",
+      "reason": "Checked all scalar integrability and taking-out hypotheses. Earlier residuals are measurable, products are L1 by 2|ab|<=a^2+b^2, cross moments vanish, and the final relaxed square yields the unchanged factor-two inequality. Reindexed coordinates to ell<d.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-local-sgd-virtual-progress",
+      "disposition": "repaired",
+      "post_sha256": "69166392d210ac577a616fc5e6a3a155b17a46acc4e8b2c1d9efb0ea8ae899b5",
+      "review_context_sha256": "f91073b93530c1bd976ee60a79153c2880d8edc0b98b3f51f07f80665f0d6339",
+      "reason": "Corrected the proposal/iterate distinction. Verified finite fresh-index averaging cancels the noise cross term, the gap coefficient is -eta+2L eta^2<=-eta/2, and both negative Jensen substitutions have the right sign. Statement unchanged; no downstream event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-fedavg-one-round-progress",
+      "disposition": "repaired",
+      "post_sha256": "b34c109abecc41d1e753442ec715b776488830068058d8b9fa414689638e9b91",
+      "review_context_sha256": "07d651e23e15a36bc9352ebc7860854cdbebc8228d7f5cfaccebd8da2595df41",
+      "reason": "Explicit joint prequery centering excludes the common-noise counterexample and licenses the 2sigma^2/(KS) martingale-error bound in 1.2. Checked perturbed strong convexity, Jensen/Lipschitz drift and sampling coefficients; the existing conclusion follows under the corrected oracle interface and explicit AC.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-scaffold-control-correction",
+      "disposition": "repaired",
+      "post_sha256": "f2febdce9cb9f1b4bc4fb1fc8edcea7225dcf53eea0be7e4924425b06526a991",
+      "review_context_sha256": "a8ad0d3cf84887072e8da31249a6e7e5bad5df5d043891e0bc672e79380bc784",
+      "reason": "Differentiated both quadratics: controls -1 and +1 have mean zero, and the exact-gradient corrected directions vanish at zero. Finite induction proves every local step remains there. Repaired F1 source and F2 deterministic specialization; Example section unchanged and no diagrams needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-scaffold-nonconvex-client-drift",
+      "disposition": "repaired",
+      "post_sha256": "93e54b8911d7148c3927299a3342e00902247899fa6016a46dd3e7617022dc3f",
+      "review_context_sha256": "2f6e1ddf416a6b8ced5e54b3282f0ee55336783cded6727c33954319271db1b1",
+      "reason": "Repaired the oracle-hypothesis attribution and explicit AC prerequisite. The average control-direction moment is at most 3(G+beta^2 Xi+sigma^2/K). Conditional centering gives the scalar drift recurrence and its <24K geometric sum, yielding 72K^2 eta_l^2 and 96K eta_l^2. K=1 is handled before dividing by K-1.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "lem-scaffold-nonconvex-round-progress",
+      "disposition": "repaired",
+      "post_sha256": "bd272c3f1f994348786fd88745f1fc4f4a76aab248e65a992adaa517375e89a8",
+      "review_context_sha256": "a79c16162ef046de6aeebc402709c50f7c77d95f30bfbd2f1e9937497f6707cd",
+      "reason": "Derived the mean identity locally with the exact update and participation/oracle assumptions, distinguishing it from F3 norm bounds. Rechecked the potential coefficient algebra and p-dependent step cap: tracking coefficient is negative, gradient coefficient <=-1/3, and total variance <=10beta t^2 sigma^2(1+S/eta_g^2)/(KS). Carried AC into the Statement.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "thm-scaffold-convex-and-nonconvex-rates",
+      "disposition": "repaired",
+      "post_sha256": "3356a9099bb3e3c0c21935541079c4ae444d0b825b96de090599f36a0bd61fa6",
+      "review_context_sha256": "7d7f96b10e5057ed0539ec93cf874e776ef7d4bb56e2fd3f40e5670bd1c7b06a",
+      "reason": "Added the actual AC hypothesis used by F8/A2. Checked geometric and uniform telescoping, variance constants 19 and 60, C0<=2beta F, both reciprocal-step optimizations and the D=0/F=0 return branches. All three quantitative rate claims and output laws remain unchanged. No direct item consumer/reference was found in the current inventory; owning pages have empty bodies.",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-fedavg-one-round-progress",
+    "lem-scaffold-convex-server-variance",
+    "lem-scaffold-nonconvex-server-variance",
+    "thm-fedavg-under-gradient-dissimilarity",
+    "lem-scaffold-nonconvex-round-progress",
+    "thm-scaffold-convex-and-nonconvex-rates"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-local-sgd-sampling-variance",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "Confirmed the Step-4 digest concern directly: Statement says each worker has b independent draws, while Given and Proof 1.1 assume every distinct draw is independent across workers and fresh relative to earlier indices. For n=K=2,b=1, f1(z)=z and f2(z)=-z at fixed zero worker points, shared fresh uniform index gives variance 1 rather than the claimed 1/2.",
+      "affected_use": "Statement sampling clause and Proof 1.1 cancellation of cross-worker centered inner products.",
+      "invalidated_claim": "The standalone sigma^2/(bK) guarantee under merely within-worker independent samples.",
+      "minimality": "State mutual independence of all current worker/batch draws and independence from prior history, matching alg-local-sgd; no change to the variance conclusion is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-scaffold-convex-server-variance",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "The current Statement omits AC while the supplied argument uses AC-dependent conditional-expectation interfaces. The owner should inspect and carry the actual Foundations prerequisite into the public hypothesis.",
+      "affected_use": "F8/A2 and Proof 2.1-2.2",
+      "minimality": "A focused assumption disclosure should suffice; retain the numerical conclusion and reexamine direct consumers only after a real Statement edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-scaffold-nonconvex-server-variance",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "The current Statement omits AC while the supplied argument uses AC-dependent conditional-expectation interfaces. The owner should inspect and carry the actual Foundations prerequisite into the public hypothesis.",
+      "affected_use": "F8/A2 and Proof 1.1-1.2",
+      "minimality": "A focused assumption disclosure should suffice; retain the numerical conclusion and reexamine direct consumers only after a real Statement edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-scaffold-nonconvex-control-lag",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "The current Statement omits AC while the supplied argument uses AC-dependent conditional-expectation interfaces. The owner should inspect and carry the actual Foundations prerequisite into the public hypothesis.",
+      "affected_use": "F7/A2 and Proof 1.1-2.1",
+      "minimality": "A focused assumption disclosure should suffice; retain the numerical conclusion and reexamine direct consumers only after a real Statement edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-scaffold-control-tracking-identity",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "The current Statement omits AC while the supplied argument uses AC-dependent conditional-expectation interfaces. The owner should inspect and carry the actual Foundations prerequisite into the public hypothesis.",
+      "affected_use": "the supplied conditional-expectation and stored-residual argument",
+      "minimality": "A focused assumption disclosure should suffice; retain the numerical conclusion and reexamine direct consumers only after a real Statement edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-scaffold-convex-round-progress",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "The current Statement omits AC while the supplied argument uses AC-dependent conditional-expectation interfaces. The owner should inspect and carry the actual Foundations prerequisite into the public hypothesis.",
+      "affected_use": "the supplied conditional-expectation and potential-recursion argument",
+      "minimality": "A focused assumption disclosure should suffice; retain the numerical conclusion and reexamine direct consumers only after a real Statement edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-finite-martingale-difference-sum-variance",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The scalar coordinates 1,...,d conflict with the supplied function domain d={0,...,d-1}. Reindexed the statement and both coordinate expansions; this is a notation defect, with no change to the moment inequality or its orthogonality argument.",
+      "post_sha256": "dcd1288bd56fd1f55b2c159e31383169e04a1737933ea373db3817659af337ae",
+      "review_context_sha256": "a1140cc9fa82ecb7f9f2099e0289531dd1b847d38db28887c441c3772b4a1f03",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-local-sgd-virtual-progress",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly names the proposal x rather than z. The proof only uses the worker mean, which synchronization preserves. Corrected F1 and explicitly derived the invariant mean update; the gap and drift coefficients follow from smoothness, strong convexity, Young and Jensen.",
+      "post_sha256": "69166392d210ac577a616fc5e6a3a155b17a46acc4e8b2c1d9efb0ea8ae899b5",
+      "review_context_sha256": "f91073b93530c1bd976ee60a79153c2880d8edc0b98b3f51f07f80665f0d6339",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-fedavg-one-round-progress",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original oracle assumptions allow one shared Rademacher error with N=S=6, K=1 and x=x*=0. Actual squared error is t^2 sigma^2, exceeding 5t^2 sigma^2/6. Required full joint prequery conditional moments explicitly, including earlier draws from other clients and the revealed sample, to license the chronological martingale bound. Also carried the existing proof AC prerequisite into the Statement.",
+      "post_sha256": "b34c109abecc41d1e753442ec715b776488830068058d8b9fa414689638e9b91",
+      "review_context_sha256": "07d651e23e15a36bc9352ebc7860854cdbebc8228d7f5cfaccebd8da2595df41",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "ex-scaffold-control-correction",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example itself already specifies the exact corrected direction using the full gradient, so its invariant is valid for that deterministic specialization. F2 inaccurately restates the general algorithm with a full gradient, and F1 cites a definition with no control update. Corrected both supplier attributions and explicitly named g_i=gradient f_i in F2; no change to the Example claim.",
+      "post_sha256": "f2febdce9cb9f1b4bc4fb1fc8edcea7225dcf53eea0be7e4924425b06526a991",
+      "review_context_sha256": "a8ad0d3cf84887072e8da31249a6e7e5bad5df5d043891e0bc672e79380bc784",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-scaffold-nonconvex-client-drift",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F5 attributes the oracle moment hypotheses to general probability/expectation interfaces. They are actually supplied by A1 and the trajectory definition full-prequery convention. Corrected F5 to state only expectation rules and identify A1 as the moment source. Also made the existing proof AC prerequisite explicit in the Statement and beta>0 explicit for its reciprocal step bound. The separate AC omission is a fatal undisclosed dependency in the original Statement, even though the original fact-attribution concern alone is nonfatal.",
+      "post_sha256": "93e54b8911d7148c3927299a3342e00902247899fa6016a46dd3e7617022dc3f",
+      "review_context_sha256": "2f6e1ddf416a6b8ced5e54b3282f0ee55336783cded6727c33954319271db1b1",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-scaffold-nonconvex-round-progress",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F3 publicly supplies norm bounds, not the exact conditional-mean formula attributed to it. The formula is valid (and appears in that supplier proof); derived it locally from the update, full-prequery centering, sample-independent hypothetical paths, uniform inclusion probabilities, cancellation of population controls and the finite-gradient-average rule. Added that actual dependency and made the existing AC prerequisite explicit. The separate AC omission is a fatal undisclosed dependency in the original Statement, even though the original fact-attribution concern alone is nonfatal.",
+      "post_sha256": "bd272c3f1f994348786fd88745f1fc4f4a76aab248e65a992adaa517375e89a8",
+      "review_context_sha256": "a79c16162ef046de6aeebc402709c50f7c77d95f30bfbd2f1e9937497f6707cd",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "thm-scaffold-convex-and-nonconvex-rates",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The theorem Statement omitted AC, although A2 explicitly adds it and F8 invokes conditional-expectation existence through an AC-dependent supplied interface. This leaves a real prerequisite undisclosed. Added the Axiom of Choice to the Statement, preserving all three rate claims and their output rules.",
+      "post_sha256": "3356a9099bb3e3c0c21935541079c4ae444d0b825b96de090599f36a0bd61fa6",
+      "review_context_sha256": "7d7f96b10e5057ed0539ec93cf874e776ef7d4bb56e2fd3f40e5670bd1c7b06a",
+      "uncertain": false,
+      "source_urls": [
+        "https://cs.nyu.edu/~mohri/pub/scaffold.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "reason": "All seven assigned items and all direct item consumers examined here are draft. No published carrier was edited, no published-consumer repair was required by these interface changes, and no publication/audit credit is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-fedavg-under-gradient-dissimilarity",
+      "status": "open",
+      "route": "frontier owner, outside unit 30 assignment",
+      "reason": "Its Facts F1/Proof 1.1 consume the repaired FedAvg moment bound but its Statement does not specify full joint prequery centering and also omits the AC used in F8/A2. The original common-noise issue therefore requires owner attention to this direct consumer.",
+      "affected_use": "Proof 1.1 uses 5sigma^2/(KS) from the one-round supplier to build the noise coefficient b=11sigma^2/(2KS)+sampling.",
+      "invalidated_claim": "The stated stochastic guarantee is unsupported when errors from different clients are allowed a common centered component.",
+      "minimality": "Carry AC and conditional centering/variance given all earlier revealed cross-client oracle draws into the theorem Statement, preserving the quantitative claim.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "independent_review_of_repairs": false,
+    "evidence": [
+      {
+        "id": "lem-finite-martingale-difference-sum-variance",
+        "finding": "Coordinate relabeling only: all d coordinates are now indexed by 0<=ell<d, matching functions d->R. Orthogonality follows by taking out earlier L2 coordinates; 2|ab|<=a^2+b^2 supplies product integrability. The zero-dimensional case has empty coordinate sums. No diagram occurs or is needed.",
+        "before_statement": "\nAssume the Axiom of Choice. Let\n$\\mathcal F_0\\subseteq\\mathcal F_1\\subseteq\\cdots\\subseteq\\mathcal F_m$\nbe a finite filtration and let $Z_j\\in L^2(\\Omega;\\mathbb R^d)$ be\n$\\mathcal F_j$-measurable for $1\\le j\\le m$, where $m\\ge1$. For each\n$1\\le\\ell\\le d$, define\n$M_j^\\ell=\\mathbb E[Z_j^\\ell\\mid\\mathcal F_{j-1}]$ by scalar conditional\nexpectation and put $M_j=(M_j^1,\\ldots,M_j^d)$ and $\\xi_j=Z_j-M_j$. Assume\n$\\xi_j\\in L^2(\\Omega;\\mathbb R^d)$. If\n$$ \\mathbb E[\\|\\xi_j\\|_2^2\\mid\\mathcal F_{j-1}]\\le v_j \\quad\\text{almost surely}, $$\nwhere each $v_j\\ge0$ is integrable and $\\mathcal F_{j-1}$-measurable, then\n$$ \\mathbb E\\left\\|\\sum_{j=1}^m Z_j\\right\\|_2^2 \\le2\\mathbb E\\left\\|\\sum_{j=1}^m M_j\\right\\|_2^2 +2\\sum_{j=1}^m\\mathbb E[v_j]. $$\n"
+      },
+      {
+        "supplier": "lem-finite-martingale-difference-sum-variance",
+        "consumer_examinations": [
+          {
+            "id": "lem-fedavg-one-round-progress",
+            "path": "items/lem-fedavg-one-round-progress.md",
+            "affected_use": "F9 and Proof 1.2 apply the dimension-free martingale-error sum bound after dividing by KS.",
+            "disposition": "Coordinate relabeling leaves that bound unchanged; separate oracle-history defect is repaired in its assigned review.",
+            "source_excerpt": "[F9] [[lem-finite-martingale-difference-sum-variance]]: a finite sum of conditionally centered local-gradient errors has second moment at most twice the sum of its conditional variance bounds."
+          },
+          {
+            "id": "lem-scaffold-convex-server-variance",
+            "path": "items/lem-scaffold-convex-server-variance.md",
+            "affected_use": "F6 and Proof 2.2 bound A, the normalized sum of predictable gradient differences and current oracle errors.",
+            "disposition": "Coordinate relabeling leaves the dimension-free bound unchanged. Outside assignment; separate missing Statement AC assumption requires owner review.",
+            "source_excerpt": "[F6] [[lem-finite-martingale-difference-sum-variance]]: for the current chronologically ordered oracle errors $\\xi_j$, with predictable conditional means $d_j$, the normalized local-query average obeys $\\mathbb E\\| (KS)^{-1}\\sum_j(d_j+\\xi_j)\\|_2^2 \\le2\\mathbb E\\|(KS)^{-1}\\sum_jd_j\\|_2^2+2\\sigma^2/(KS)$."
+          },
+          {
+            "id": "lem-scaffold-nonconvex-server-variance",
+            "path": "items/lem-scaffold-nonconvex-server-variance.md",
+            "affected_use": "F4 and Proof 1.2 bound A by 2 beta^2 E_r+2 sigma^2/(KS).",
+            "disposition": "Coordinate relabeling leaves the dimension-free bound unchanged. Outside assignment; separate missing Statement AC assumption requires owner review.",
+            "source_excerpt": "[F4] [[lem-finite-martingale-difference-sum-variance]]: a finite sum of predictable conditional means plus centered local errors has second moment at most twice the mean-sum second moment plus twice the total conditional variance bound."
+          }
+        ]
+      },
+      {
+        "id": "lem-fedavg-one-round-progress",
+        "before_statement": "\nLet $N,d,K\\ge1$ be positive integers and $1\\le S\\le N$. Let\n$f_i:\\mathbb R^d\\to\\mathbb R$ be differentiable, $\\mu$-strongly convex\nand $\\beta$-smooth, with $0<\\mu\\le\\beta$, and put\n$f=N^{-1}\\sum_{i=1}^Nf_i$. Suppose $f$ attains its minimum at $x^\\star$ with\nvalue $f^\\star$. At a round-start server point $x$, run the uniform-client\nanalysis mode of FedAvg with $S$ clients sampled uniformly without\nreplacement, $K$ local steps, local step $\\eta_l>0$, and global scale\n$\\eta_g\\ge\\sqrt S$. The client sample is independent of the fresh local-oracle\nrandomness. Assume conditionally unbiased local stochastic gradients with\nwithin-client conditional variance at most $\\sigma^2$. Suppose\n$B\\ge1$, $G\\ge0$, and\n$$ \\frac1N\\sum_i\\|\\nabla f_i(z)\\|_2^2 \\le G^2+2\\beta B^2(f(z)-f^\\star) \\quad(z\\in\\mathbb R^d). $$\nAlternatively, assume the standard $(G,B)$-bounded gradient-dissimilarity condition\n$$ \\frac1N\\sum_i\\|\\nabla f_i(z)\\|_2^2\\le G^2+B^2\\|\\nabla f(z)\\|_2^2 \\quad(z\\in\\mathbb R^d). $$\nEither assumption gives all the conclusions below with the same $G,B$ and\nstepsize restrictions.\nLet $\\widetilde\\eta=K\\eta_l\\eta_g$. For each client $i$, define a hypothetical\nlocal path $y_{i,0}=x,y_{i,1},\\ldots,y_{i,K}$ by the same local update rule\nwith fresh oracle draws independent of the client sample. For selected clients\nthis path is the actual local execution; for unselected clients it is a\ncounterfactual copy used only in the expectation below. Independence among\ndifferent clients' oracle draws is not required. Define\n$$ E=\\frac1{KN}\\sum_{i=1}^N\\sum_{k=1}^K \\mathbb E\\|y_{i,k-1}-x\\|_2^2. $$\nIf $0<\\widetilde\\eta\\le[32(B^2+1)\\beta]^{-1}$, then the next server iterate\n$x^+$ satisfies\n$$ \\begin{aligned} \\mathbb E\\|x^+-x^\\star\\|_2^2 &\\le(1-\\mu\\widetilde\\eta/2)\\|x-x^\\star\\|_2^2 -\\widetilde\\eta(f(x)-f^\\star) +\\frac{5\\widetilde\\eta^2\\sigma^2}{KS} +8\\left(1-\\frac SN\\right)\\frac{\\widetilde\\eta^2G^2}{S} +3\\beta\\widetilde\\eta E. \\end{aligned} $$\nExpectation is conditional on the round-start history and averages the client\nsample and local stochastic-gradient draws.\n",
+        "repair": "Preserved the conclusion and constants; corrected the admissible oracle model rather than claiming a shared-noise reduction. Full-history centering, not mutual independence, suffices. Source Appendix D.3 Lemma 7 read in full; its constants are not substituted for the independently checked local proof. F5 gives the -2t gap and -mu t/2 distance terms; two relaxed squares give 4 beta^2 t^2 E, sampling coefficient 8 and noise coefficient 4, then the step bound yields the stated coefficient 5."
+      },
+      {
+        "supplier": "lem-fedavg-one-round-progress",
+        "consumer_examinations": [
+          {
+            "id": "thm-fedavg-under-gradient-dissimilarity",
+            "path": "items/thm-fedavg-under-gradient-dissimilarity.md",
+            "affected_use": "Facts F1 and Proof 1.1 invoke the one-round 5t^2 sigma^2/(KS) bound to form b=11sigma^2/(2KS)+8(1-S/N)G^2/S.",
+            "invalidated_claim": "The Statement states only within-client conditional moments and omits AC, while F8/A2 require AC; it does not explicitly supply the repaired full joint-history oracle hypothesis.",
+            "minimality": "Owner should carry AC and precisely the joint prequery moments into the Statement; the existing recurrence and constants then remain applicable. Do not propagate beyond this consumer unless its Statement/Definition is actually repaired.",
+            "disposition": "Outside this assigned lane; route to frontier owner for necessary interface repair.",
+            "source_excerpt": "[F1] [[lem-fedavg-one-round-progress]]: with $\\widetilde\\eta$ as above, one round gives distance contraction, a negative objective-gap term, sampling variance and client-drift error."
+          }
+        ]
+      },
+      {
+        "id": "lem-scaffold-nonconvex-client-drift",
+        "before_statement": "\nLet $f_i:\\mathbb R^d\\to\\mathbb R$ have $\\beta$-Lipschitz gradients and\nlet $f=N^{-1}\\sum_i f_i$ be bounded below. Run Option II SCAFFOLD with\n$1\\le S\\le N$ uniformly sampled clients, $K\\ge1$ local steps, server scale\n$\\eta_g\\ge1$, and fresh conditionally unbiased local stochastic gradients\nwith within-client variance at most $\\sigma^2$. Initialize\n$c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$. Let\n$\\widetilde\\eta=K\\eta_l\\eta_g$ and let $E_r,\\Xi_{r-1}$ be the query-point\ndrift and anchor-tracking errors in the SCAFFOLD analysis-trajectory\ndefinition. If\n$$ 0<\\widetilde\\eta\\le\\frac{(S/N)^{2/3}}{24\\beta}, $$\nthen\n$$ E_r\\le72K^2\\eta_l^2\\left( \\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2 +\\beta^2\\Xi_{r-1}\\right)+96K\\eta_l^2\\sigma^2. $$\n",
+        "repair": "Checked the v_i decomposition and average residual variance sigma^2/K using the control-tracking supplier. For K>=2, the centered-noise cross term vanishes under full prequery history. q<=(1+3/K) and the geometric sum<24K give constants 72 and 96; K=1 has E_r=0. Source Appendix E.2 Lemma 16 read completely, including continuation on the next page; the local larger constants follow independently from its displayed recurrence. No diagram in the assigned item."
+      },
+      {
+        "supplier": "lem-scaffold-nonconvex-client-drift",
+        "consumer_examinations": [
+          {
+            "id": "lem-scaffold-nonconvex-round-progress",
+            "path": "items/lem-scaffold-nonconvex-round-progress.md",
+            "affected_use": "Facts F5 and Proof 3.1 replace E_r by 72t^2(G+beta^2 Xi)/eta_g^2+96t^2 sigma^2/(K eta_g^2).",
+            "disposition": "The numerical bound is unchanged; the consumer needs AC carried into its Statement and is next in this assigned review. beta>0 is already explicit there.",
+            "source_excerpt": "[F5] [[lem-scaffold-nonconvex-client-drift]]: $E_r\\le72t^2(\\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2+\\beta^2\\Xi_{r-1})/\\eta_g^2+96t^2\\sigma^2/(K\\eta_g^2)$."
+          }
+        ]
+      },
+      {
+        "id": "lem-scaffold-nonconvex-round-progress",
+        "before_statement": "\nLet $f_i:\\mathbb R^d\\to\\mathbb R$ have $\\beta$-Lipschitz gradients with $\\beta>0$, and let $f=N^{-1}\\sum_i f_i$ be bounded below by $f^\\star$. Run Option II SCAFFOLD with $1\\le S\\le N$ uniformly sampled clients, $K\\ge1$ local steps, server scale $\\eta_g\\ge1$, and fresh conditionally unbiased local stochastic gradients of within-client variance at most $\\sigma^2$. Initialize $c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$. Client samples are fresh and independent of prior history and counterfactual oracle draws. Let $p=S/N$, $t=\\widetilde\\eta=K\\eta_l\\eta_g$, and let $\\Xi_r$ be the control-anchor tracking error. If\n$$ 0<t\\le\\frac{p^{2/3}}{100\\beta}, $$\nthen the potential\n$$ P_r=\\mathbb E[f(x_r)-f^\\star]+\\frac{24\\beta^3t^2}{p}\\Xi_r $$\nsatisfies\n$$ P_r\\le P_{r-1}-\\frac t3\\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2+\\frac{10\\beta t^2\\sigma^2}{KS}\\left(1+\\frac S{\\eta_g^2}\\right). $$\n",
+        "repair": "The missing derivation is now in step 1.1. Independently checked d=1/2+51h+864h^3/p+192h^3/p^2<1.1, the negative tracking coefficient -5.0352, gradient coefficient -0.476456<=-1/3 and variance coefficient 9.2592+1.056S/eta_g^2<=10(1+S/eta_g^2). The zero-noise branch avoids division by zero. Source Lemma 17 complete argument pp.34-35 consulted; local constants differ deliberately and were checked directly. No diagram in assigned item."
+      },
+      {
+        "supplier": "lem-scaffold-nonconvex-round-progress",
+        "consumer_examinations": [
+          {
+            "id": "thm-scaffold-convex-and-nonconvex-rates",
+            "path": "items/thm-scaffold-convex-and-nonconvex-rates.md",
+            "affected_use": "Facts F2 and Proof 1.3 telescope P_r with Xi_0=0, eta_g^2=S and noise coefficient at most 20beta t^2 sigma^2/(KS).",
+            "disposition": "All constants and the step cap are unchanged; explicit AC is required in the consumer Statement and will be repaired in its assigned review.",
+            "source_excerpt": "[F2] [[lem-scaffold-nonconvex-round-progress]]: with $\\widetilde\\eta\\le(S/N)^{2/3}/(100\\beta)$, the nonnegative potential $P_r=\\mathbb E[f(x_r)-f^\\star]+24\\beta^3\\widetilde\\eta^2(N/S)\\Xi_r$ decreases by at least $\\widetilde\\eta\\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2/3$ apart from $10\\beta\\widetilde\\eta^2\\sigma^2(1+S/\\eta_g^2)/(KS)$."
+          }
+        ]
+      },
+      {
+        "id": "thm-scaffold-convex-and-nonconvex-rates",
+        "before_statement": "\nLet $N,d,K,R\\ge1$ be positive integers, let $1\\le S\\le N$, and let\n$f_i:\\mathbb R^d\\to\\mathbb R$ have $\\beta$-Lipschitz gradients, with $\\beta>0$. Put\n$f=N^{-1}\\sum_{i=1}^Nf_i$, and suppose $f$ is bounded below by $f^\\star$.\nRun Option II SCAFFOLD with a fresh uniform size-$S$ client sample in every round, independent of the preceding history and the fresh local oracle randomness,\nfresh conditionally unbiased local stochastic gradients whose variance on\neach client is at most $\\sigma^2$, and gradient-consistent initialization\n$c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$. Set\n$F=f(x_0)-f^\\star$, and put $D=\\|x_0-x^\\star\\|_2$ when a minimizer $x^\\star$ exists.\nIn both convex cases below, assume $f^\\star=f(x^\\star)$.\n\n1. **Strongly convex case.** Suppose every $f_i$ is $\\mu$-strongly convex\nfor $0<\\mu\\le\\beta$ and $f$ attains its minimum at $x^\\star$. Set\n$\\eta_g=\\sqrt S$ and choose\n$$ 0<\\eta_l\\le\\min\\left\\{\\frac1{81\\beta K\\eta_g}, \\frac{S}{15\\mu NK\\eta_g}\\right\\}, \\qquad \\widetilde\\eta=K\\eta_l\\eta_g. $$\nFor $R\\ge1$, independently of the optimization randomness choose $J\\in\\{0,\\ldots,R-1\\}$ with probabilities\nproportional to $(1-\\mu\\widetilde\\eta/2)^{-(J+1)}$ and return\n$\\bar x_R=x_J$. Then\n$$ \\mathbb E[f(\\bar x_R)-f^\\star] \\le\\frac{V_0}{\\widetilde\\eta W_R} +\\frac{19\\widetilde\\eta\\sigma^2}{KS}, \\quad V_0=D^2+\\frac{14N\\widetilde\\eta^2}{S}C_0, \\quad W_R=\\sum_{r=1}^R(1-\\mu\\widetilde\\eta/2)^{-r}, $$\nwhere $C_0=N^{-1}\\sum_i\\|\\nabla f_i(x_0)-\\nabla f_i(x^\\star)\\|_2^2$.\nConsequently, a suitable $\\widetilde\\eta$ and\n$$ R=\\widetilde O\\left( \\frac{\\sigma^2}{\\mu KS\\epsilon} +\\frac\\beta\\mu+\\frac NS \\right) $$\ncommunication rounds suffice for expected objective error at most\n$\\epsilon>0$.\n\n2. **General convex case.** Suppose every $f_i$ is convex and differentiable,\nand $f$ attains its minimum at $x^\\star$. Set $\\eta_g=\\sqrt S$ and choose\n$0<\\widetilde\\eta=K\\eta_l\\eta_g\\le1/(81\\beta)$. For independent uniform\n$J\\in\\{0,\\ldots,R-1\\}$ and $\\bar x_R=x_J$,\n$$ \\frac1R\\sum_{r=0}^{R-1}\\mathbb E[f(x_r)-f^\\star] \\le\\frac{D^2+28\\beta N\\widetilde\\eta^2F/S} {\\widetilde\\eta R} +\\frac{19\\widetilde\\eta\\sigma^2}{KS}. $$\nFor $D>0$ and $\\epsilon>0$, set $A=28\\beta NF/S$ and choose\n$$ \\widetilde\\eta=\\min\\left\\{\\frac1{81\\beta},\\frac{D}{\\sqrt A},\\frac{\\epsilon KS}{57\\sigma^2}\\right\\}, $$\nomitting a restriction whose denominator is zero. Taking an integer\n$R\\ge\\max\\{1,6D^2/(\\widetilde\\eta\\epsilon)\\}$ ensures expected objective error at most $\\epsilon$. Consequently the sufficient round bound is\n$$ R=O\\left(1+\\frac{\\sigma^2D^2}{KS\\epsilon^2}+\\frac{\\beta D^2}{\\epsilon}+\\frac{D\\sqrt{\\beta NF/S}}{\\epsilon}\\right). $$\nIf $D=0$, return $x_0$, which already minimizes $f$.\n\n3. **Nonconvex case.** Suppose only that $f$ is $\\beta$-smooth and bounded\nbelow by $f^\\star$. Set $\\eta_g=\\sqrt S$ and choose\n$$ 0<\\widetilde\\eta=K\\eta_l\\eta_g \\le\\frac1{100\\beta}\\left(\\frac SN\\right)^{2/3}. $$\nFor independent uniform $J\\in\\{0,\\ldots,R-1\\}$ and $\\bar x_R=x_J$,\n$$ \\mathbb E\\|\\nabla f(\\bar x_R)\\|_2^2 \\le\\frac{3F}{\\widetilde\\eta R} +\\frac{60\\beta\\widetilde\\eta\\sigma^2}{KS}. $$\nThus a choice of $\\widetilde\\eta$ and\n$$ R=O\\left(1+ \\frac{\\beta\\sigma^2F}{KS\\epsilon^2} +\\left(\\frac NS\\right)^{2/3}\\frac{\\beta F}{\\epsilon} \\right) $$\nrounds suffice to make the expected squared gradient norm at the returned\niterate at most $\\epsilon>0$. If $F=0$, return $x_0$, whose gradient vanishes.\n\nThe convex rates concern the equal-client objective and their stated\nserver-iterate outputs. They do not assert a rate for the count-weighted\ndeployment objective. No gradient-dissimilarity condition is used for\nSCAFFOLD, and the quadratic-only Hessian-dissimilarity improvement is not\nclaimed for general smooth losses.\n",
+        "repair": "Checked the three finite-round estimates against the exact current recurrence statements. eta_g^2=S gives variance constants 19 and 60; C0<=2beta F gives the convex initial potential. Verified the geometric sum W_R and logarithmic iteration bound, the convex min-step optimization and D=0 branch, and the nonconvex min-step choice with F=0 branch. The only theorem edit carries the existing AC dependency into its public hypotheses. No diagram in assigned item."
+      },
+      {
+        "page_interface": "library/machine-learning/ml02-federated-optimization.md and companion are YAML-only and retain compact-v1 with unchanged inventories. None of the assigned seven items contains TikZ/tikzcd. The contextual alg-scaffold communication arrows correctly send (x,c) to selected clients and return (Delta x_i,Delta c_i).",
+        "statement_events": [
+          "lem-finite-martingale-difference-sum-variance",
+          "lem-fedavg-one-round-progress",
+          "lem-scaffold-nonconvex-client-drift",
+          "lem-scaffold-nonconvex-round-progress",
+          "thm-scaffold-convex-and-nonconvex-rates"
+        ],
+        "no_interface_event": [
+          "lem-local-sgd-virtual-progress",
+          "ex-scaffold-control-correction"
+        ]
+      }
+    ],
+    "integration": {
+      "lock_owner": "step5-v2-initial-r1-u30",
+      "lock_protocol": "acquire, reread current carriers, regenerate only seven assigned contract entries, update the assigned round-progress manifest dependency, run focused strict contract check, release",
+      "contracts": "research/machine-learning-all-101-2026-10-19-batch-30.proof-contracts.json",
+      "manifest": "research/machine-learning-all-101-2026-10-19-batch-30.pages.json",
+      "preserved": "All other contract entries, historical independent-review/risk notes, page inventories, statuses and compact-v1 flags remain unchanged. No judgments, stamps, certificates or round state were written."
+    },
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-finite-martingale-difference-sum-variance.md items/lem-local-sgd-virtual-progress.md items/lem-fedavg-one-round-progress.md items/ex-scaffold-control-correction.md items/lem-scaffold-nonconvex-client-drift.md items/lem-scaffold-nonconvex-round-progress.md items/thm-scaffold-convex-and-nonconvex-rates.md",
+        "exit_code": 0,
+        "result": "7 proofs checked, 0 failures, all pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/lem-finite-martingale-difference-sum-variance.md items/lem-local-sgd-virtual-progress.md items/lem-fedavg-one-round-progress.md items/ex-scaffold-control-correction.md items/lem-scaffold-nonconvex-client-drift.md items/lem-scaffold-nonconvex-round-progress.md items/thm-scaffold-convex-and-nonconvex-rates.md library/machine-learning/ml02-federated-optimization.md library/machine-learning/ml02-federated-optimization-examples.md",
+        "exit_code": 0,
+        "result": "9 carriers checked, 0 errors and 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-30.proof-contracts.json --items lem-finite-martingale-difference-sum-variance,lem-local-sgd-virtual-progress,lem-fedavg-one-round-progress,ex-scaffold-control-correction,lem-scaffold-nonconvex-client-drift,lem-scaffold-nonconvex-round-progress,thm-scaffold-convex-and-nonconvex-rates --strict --json",
+        "exit_code": 0,
+        "result": "All 7 assigned contract entries pass with 0 errors and 0 warnings after exact-quote and step-input synchronization. Initial stale/missing mirrors were repaired."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-30.proof-contracts.json --items ex-scaffold-control-correction --json",
+        "exit_code": 0,
+        "result": "Shifted-gradient fixture passes for 32 explicit trajectories. This bounded computation is not a proof of the general finite induction."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-30.proof-contracts.json --items lem-finite-martingale-difference-sum-variance --json",
+        "exit_code": 0,
+        "result": "Two-Rademacher fixture passes on all four sign atoms: LHS 2, mean-sum second moment 0, variance budget 2 and RHS 4."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-finite-martingale-difference-sum-variance.md items/lem-local-sgd-virtual-progress.md items/lem-fedavg-one-round-progress.md items/ex-scaffold-control-correction.md items/lem-scaffold-nonconvex-client-drift.md items/lem-scaffold-nonconvex-round-progress.md items/thm-scaffold-convex-and-nonconvex-rates.md",
+        "exit_code": 0,
+        "result": "After final item edits: 7 items, 23 numbered steps, 0 defects."
+      },
+      {
+        "check": "Report tuple coverage and current itemHashGuard comparison",
+        "exit_code": 0,
+        "result": "Exactly 7 assigned decisions and 7 reviews, all current item guards match; no creations and 6 unique downstream inventory entries."
+      },
+      {
+        "check": "Read-only reviewMatchesCurrent and manifest dependency-set comparison",
+        "exit_code": 0,
+        "result": "7 reviews current; no review hashes were refreshed. No assigned manifest dependency-set mismatch. Initial order-sensitive comparison was corrected because the library inventory sorts dependency IDs."
+      }
+    ],
+    "outside_lane_obligations": "Open findings are proposals for controller/owner routing, not edits or adjudications of those outside items. All assigned repairs are complete; no run-wide certification or independent acceptance of these repairs is claimed.",
+    "tooling_note": "An initial direct .mts invocation failed with ERR_UNKNOWN_FILE_EXTENSION; the actual focused precheck used tools/tsx-run.mjs and passed. A rendercheck help probe was interrupted (exit 130) because that tool defaults to scanning without an explicit file list; no whole-corpus validation credit is claimed.",
+    "checks_complete": true,
+    "unresolved_assigned_mathematics": []
+  }
+}

@@ -14,6 +14,7 @@ landmark: true
 short: "algebra of derivatives"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-algebra-of-derivatives.json
   precheck: pass
   verified:
     model: gpt-6-sol
@@ -40,8 +41,8 @@ pipeline_run: null
 ## Statement
 
 Let $A \subseteq \mathbb{R}$, let $c \in A$ be a limit point of $A$
-([[def-limit-point-r]]), let $f, g : A \to \mathbb{R}$ be differentiable at $c$
-([[def-derivative]]) and let $\alpha \in \mathbb{R}$. Then:
+(Limit point, isolated point, adherent point, derived set, and dense subset of $\mathbb{R}$), let $f, g : A \to \mathbb{R}$ be differentiable at $c$
+(The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set) and let $\alpha \in \mathbb{R}$. Then:
 
 1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;
 2. $\alpha f$ is differentiable at $c$ and $(\alpha f)'(c) = \alpha f'(c)$;
@@ -59,14 +60,26 @@ it has the stated value. Both are proved.
 vanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$
 is forced. That the restriction still has $c$ as a limit point, so that a
 derivative there means anything at all, is not free either, and it is the last
-claim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis
+claim of If $\lim_{x \to c} f(x) = L \ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis
 is $g(c) \ne 0$, not "$g$ vanishes nowhere".
 
 **Everything is proved through
-[[thm-caratheodory-characterisation]].** No difference quotient is estimated and
+Carathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\varphi : A \to \mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \varphi(x)(x - c)$ for every $x \in A$, and then $\varphi$ is unique and $\varphi(c) = f'(c)$.** No difference quotient is estimated and
 no limit theorem beyond continuity is used, so no choice principle is spent.
 The four identities are four algebraic rearrangements of an increment, each
-followed by a reading of [[thm-algebra-of-continuous-functions]].
+followed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.
+
+## Statement references
+
+[[def-limit-point-r]]
+
+[[def-derivative]]
+
+[[lem-sign-preservation-near-a-limit]]
+
+[[thm-caratheodory-characterisation]]
+
+[[thm-algebra-of-continuous-functions]]
 
 ## Facts & Assumptions
 

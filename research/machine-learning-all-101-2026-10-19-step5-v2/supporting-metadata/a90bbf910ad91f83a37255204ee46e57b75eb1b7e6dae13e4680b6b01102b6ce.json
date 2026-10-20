@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "57",
+  "pair": "reconstruction-and-masked-autoencoders",
+  "scope": [
+    "def-reconstruction-autoencoder",
+    "alg-masked-autoencoder-pretraining",
+    "ex-reconstruction-objective-shortcut"
+  ],
+  "contracts": {
+    "def-reconstruction-autoencoder": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The image grid and empirical risk have M,q,n>=1. A finite corruption set C_i cannot be empty because its weights must sum to 1; masked risks use 1<=k<M, so the visible, masked, and uniform mask families all have positive cardinality.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The normalized corruption family is genuinely nonempty even though finiteness alone would allow the empty set; its unit-weight sum supplies the exclusion."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: M, q, and n are positive integers; the masked branch further requires M≥2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition clauses: `Fix integers $M,q\\ge1$`; `with $n\\ge1$`; `fix an integer $k$ with $1\\le k<M$`; `s(u):=\\left(\\frac1q\\sum_{r=1}^q(u_r-\\bar u)^2\\right)^{1/2}>0`. Unmasked risks permit M=1 and q=1. Masked risks permit k=1 with M>=2; q=1 is permitted only for the raw target, since every one-pixel patch has zero variance. For normalized targets, the positive-variance hypothesis excludes that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For the normalized target, the population statement now requires A={X in D_norm} to be measurable with P(A)=1 and defines the loss integrand to be zero on A^c, making the expectation well-defined and independent of its value on the null complement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the masked branch excludes k=0 and k=M, so at least one patch is visible and at least one is scored."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: masks are averaged over the specified finite nonempty family; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Raw, denoising and masked risks are separately assigned expectations, and the text expressly declines equality or unbiasedness between them. Those conventions do not assert an equivalence to be proved in either direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Raw, denoising and masked risks are separately assigned expectations, and the text expressly declines equality or unbiasedness between them. Those conventions do not assert an equivalence to be proved in either direction.",
+            "item_sha256": "a201de27fd78924aca5f7cb9946bfa8d298c1f6cec15e9a4db7531bdd178e87c",
+            "row_sha256": "524c3a80ced8d246c2bec57593d36321f5ca7230b49ebc11b2d0fad78daf6dcb"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Raw, denoising and masked risks are separately assigned expectations, and the text expressly declines equality or unbiasedness between them. Those conventions do not assert an equivalence to be proved in either direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Raw, denoising and masked risks are separately assigned expectations, and the text expressly declines equality or unbiasedness between them. Those conventions do not assert an equivalence to be proved in either direction.",
+            "item_sha256": "a201de27fd78924aca5f7cb9946bfa8d298c1f6cec15e9a4db7531bdd178e87c",
+            "row_sha256": "f9a257dde3507199b8e52f44cd6e1fffa713a1770969a297b32a78810225c699"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-57",
+        "notes": "Independently checked all eight direct supplier definitions and the complete current Definition against authenticated reader pre/post bytes. Positive n,M,q and 1<=k<M exclude empty sampling and zero denominators; normalized targets require positive patch variance (so q=1 has no admissible normalized data), measurable full-probability A, a zero extension on its null complement, and explicitly measurable losses. Nonnegative expectations may be infinite; finite corruption weights sum to one and masks form a finite nonempty family. The independent-uniform-mask identity is the finite weighted-sum identity, not equality with full-image reconstruction. No AC, limit interchange, identifiability or convergence theorem is imported. He §3, Goodfellow §14.5 pp507–508 and Vincent §2.3 eq5 were read directly. Six published inline-link violations are presentation defects only; the refuter paragraph allegation is contradicted by the unchanged authenticated reader-post source. Reader domain repair accepted; no further source edit."
+      }
+    },
+    "alg-masked-autoencoder-pretraining": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When J=0, the update index set and optimizer schedule are empty; the loop executes no steps and returns E_phi0 and theta0. The statement explicitly requires n,M,q>=1, and 1<=k<M makes both the visible and masked patch sets nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the algorithm requires n,M,q>=1, 1<=k<M, J>=0, and finite gradients on reached iterates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition clauses: `Choose a visible count $k$ with $1\\le k<M$, a finite update count $J\\ge0$`; `provided every patch of every training image has positive standard deviation`; `Return the trained encoder $E_{\\phi_J}$ and parameter vector $\\theta_J$.`. J=0 returns the initial encoder and vector. n=1 and k=1 with M=2 are admissible; q=1 is admissible with raw targets only. Normalized targets require positive variance in every training patch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the normalized target branch requires positive standard deviation for every training patch; the raw target branch does not."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: mask-count endpoints k=0 and k=M are excluded; every admissible mask has visible and masked positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: each mask is sampled from a specified finite nonempty family, with no arbitrary choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure specifies mask sampling, visible-only encoding and optimizer updates, with a return after J steps; it does not state a necessary-and-sufficient criterion for learned semantic information.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The procedure specifies mask sampling, visible-only encoding and optimizer updates, with a return after J steps; it does not state a necessary-and-sufficient criterion for learned semantic information.",
+            "item_sha256": "2f4c541c35a7f9b99e9f9708d79a08f39c16f3c4477a939d1a38e2b2d844247e",
+            "row_sha256": "0321c6ba0da0e0612f00809a8e8bab922ed58e1513bee17982be989aff7fef1b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure specifies mask sampling, visible-only encoding and optimizer updates, with a return after J steps; it does not state a necessary-and-sufficient criterion for learned semantic information.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The procedure specifies mask sampling, visible-only encoding and optimizer updates, with a return after J steps; it does not state a necessary-and-sufficient criterion for learned semantic information.",
+            "item_sha256": "2f4c541c35a7f9b99e9f9708d79a08f39c16f3c4477a939d1a38e2b2d844247e",
+            "row_sha256": "45f4c1a2684facc1c9cfef9530371e518be6e8a9601c7c56bc82eee2cc05eae1"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-57",
+        "notes": "Read every instruction and input condition against both actual supplier definitions and He §3/Appendix A.1, Goodfellow §14.5 and Vincent §2.3. Positive n,M,q makes the image-index draw and MSE meaningful; 1<=k<M makes the finite uniform mask family nonempty and scored denominator positive. Normalized targets exclude zero patch variance, finite gradients are explicitly required on reached iterates, and total U_t maps preserve Theta x S. J=0 returns initial parameters without sampling or updating. Decoder receives restored visible tokens and shared mask tokens with position indices; the diagram has the same directions and scores only missing patches. No convergence, complexity or semantic-quality property is claimed. Reader input-domain repair accepted; no source changes needed."
+      }
+    },
+    "ex-reconstruction-objective-shortcut": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reconstruction-autoencoder",
+          "source_section": "Definition",
+          "quote": "Fix integers $M,q\\ge1$, set $[M]=\\{1,\\ldots,M\\}$, and write the image space on a fixed patch grid as $\\mathcal X=(\\mathbb R^q)^M$. A measurable space is a set with a specified sigma-algebra; equip $\\mathcal X$ and a finite-dimensional latent space $\\mathcal Z$ with such structures. An image is $x=(x_1,\\ldots,x_M)\\in\\mathcal X$, with $q$ real pixel values in each of its $M$ patches. Let $S=(x^{(1)},\\ldots,x^{(n)})$ be a finite training set with $n\\ge1$. For $u\\in\\mathbb R^q$, set $\\|u\\|_2^2=\\sum_{r=1}^q u_r^2$. For $V\\subseteq[M]$ let $\\mathcal Z^V=\\{(z_j)_{j\\in V}:z_j\\in\\mathcal Z\\}$. For unmasked reconstruction, the encoder and decoder are deterministic measurable maps $E_\\phi:\\mathcal X\\to\\mathcal Z$ and $D_\\psi:\\mathcal Z\\to\\mathcal X$. For masked reconstruction, the encoder is a measurable deterministic map $(V,(x_j)_{j\\in V})\\mapsto(z_j)_{j\\in V}\\in\\mathcal Z^V$, and the decoder maps the ordered length-$M$ sequence of encoded visible tokens and mask tokens to an element of $\\mathcal X$. Each mask token is one learned vector $m\\in\\mathcal Z$ reused at every masked position. All maps take finite real values; when implemented by feedforward neural networks, each is a finite computation graph evaluated in the layered order of its vertices.\n\nLet $X:\\Omega\\to\\mathcal X$ be a measurable random image on a probability space. Assume that the displayed squared-loss random variables are measurable. The **population reconstruction risk** is\n$$R_{\\rm rec}(\\phi,\\psi;X):=\\mathbb E\\left[\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(X))_j-X_j\\|_2^2\\right]\\in[0,+\\infty].$$\nA stochastic denoising corruption is any measurable random image $\\widetilde X:\\Omega\\to\\mathcal X$ on the same probability space as the clean image $X$; their dependence may be arbitrary, with no restriction on support. The **population denoising risk** reconstructs the clean image:\n$$R_{\\rm den}(\\phi,\\psi;X,\\widetilde X):=\\mathbb E\\left[\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(\\widetilde X))_j-X_j\\|_2^2\\right]\\in[0,+\\infty].$$\nThese expectations use the extended integral of a nonnegative measurable random variable, so they may be infinite.\n\nThe **empirical reconstruction risk** on uncorrupted images is\n$$R_{\\rm rec}^{\\rm emp}(\\phi,\\psi;S):=\\frac1{nMq}\\sum_{i=1}^n\\sum_{j=1}^M\\|D_\\psi(E_\\phi(x^{(i)}))_j-x^{(i)}_j\\|_2^2.$$\n\nA **finite denoising corruption law** assigns to each training image $x^{(i)}$ a finite set $C_i$ of corrupted images and weights $c_i(\\tilde x)\\ge0$ with $\\sum_{\\tilde x\\in C_i}c_i(\\tilde x)=1$. The empirical denoising risk is the finite-support specialization of the population risk:\n$$R_{\\rm den}^{\\rm emp}(\\phi,\\psi;S,C):=\\frac1n\\sum_{i=1}^n\\sum_{\\tilde x\\in C_i}c_i(\\tilde x)\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(\\tilde x))_j-x^{(i)}_j\\|_2^2.$$\n\nFor masked autoencoding, fix an integer $k$ with $1\\le k<M$ and let $\\mathcal V_k=\\{V\\subseteq[M]:|V|=k\\}$, a set with cardinality $\\binom{M}{k}$. A mask $V$ is sampled uniformly from $\\mathcal V_k$; the patches in $V$ are visible and the patches in $[M]\\setminus V$ are masked. The encoder receives only the visible patches, with their positions, and no mask tokens. The decoder receives the encoded visible patches and a shared learned mask token at each missing position, with position information for all $M$ slots, and outputs predictions $\\hat x_j(\\phi,\\psi;x,V)\\in\\mathbb R^q$ for every patch position.\n\nThe original-pixel target map is $T_{\\rm raw}(u)=u$. The optional normalized-pixel target is defined for $u=(u_1,\\ldots,u_q)$ with positive standard deviation by\n$$\\bar u:=\\frac1q\\sum_{r=1}^q u_r,\\qquad s(u):=\\left(\\frac1q\\sum_{r=1}^q(u_r-\\bar u)^2\\right)^{1/2}>0,\\qquad T_{\\rm norm}(u):=\\frac{u-\\bar u\\mathbf 1}{s(u)},$$\nwhere $\\mathbf 1=(1,\\ldots,1)\\in\\mathbb R^q$.\nThe target choice $T$ is one of these maps. Define\n$$\\mathcal D_{\\rm norm}:=\\{x\\in\\mathcal X:s(x_j)>0\\text{ for every }j\\in[M]\\}.$$\nFor $T=T_{\\rm norm}$, the masked-objective formulas below are defined only on $\\mathcal D_{\\rm norm}$, so a finite empirical objective requires $x^{(i)}\\in\\mathcal D_{\\rm norm}$ for every $i$. For a population objective, require the event $A:=\\{X\\in\\mathcal D_{\\rm norm}\\}$ to be measurable with $\\mathbb P(A)=1$; interpret each loss integrand by its displayed formula on $A$ and by $0$ on $A^c$. Since $A^c$ is null, any other measurable extension there gives the same expectation. The raw target has no such restriction. The **per-example masked-patch mean squared error**, its population objective, and its finite empirical objective are\n$$\\ell_{\\rm MAE}(\\phi,\\psi;x,V,T):=\\frac1{(M-k)q}\\sum_{j\\in[M]\\setminus V}\\|\\hat x_j(\\phi,\\psi;x,V)-T(x_j)\\|_2^2,$$\n$$R_{\\rm MAE}(\\phi,\\psi;X,k,T):=\\frac1{\\binom Mk}\\sum_{V\\in\\mathcal V_k}\\mathbb E[\\ell_{\\rm MAE}(\\phi,\\psi;X,V,T)],$$\n$$R_{\\rm MAE}^{\\rm emp}(\\phi,\\psi;S,k,T):=\\frac1{n\\binom Mk}\\sum_{i=1}^n\\sum_{V\\in\\mathcal V_k}\\ell_{\\rm MAE}(\\phi,\\psi;x^{(i)},V,T).$$\nThe population objective averages the expectation over the image law for each fixed mask; equivalently, it is the joint expectation for an independent uniform mask. The finite empirical objective averages over every training image and mask.\n\nBecause the encoder input and decoder output depend on $V$ and the loss is evaluated only on $[M]\\setminus V$, this is an expectation of a mask-dependent loss. It is not defined as an estimator of the separate full-image risk $R_{\\rm rec}$, and no equality or unbiasedness between these objectives is asserted. Neither loss alone guarantees that a learned code retains distinctions needed for a downstream label (semantic sufficiency), uniquely determines an underlying data-generating parameter (identifiability), or improves performance on a specified later task (downstream feature quality).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-masked-autoencoder-pretraining",
+          "source_section": "Definition",
+          "quote": "Let $S=(x^{(1)},\\ldots,x^{(n)})$ be a finite image training set with $n\\ge1$ on a fixed grid with $M,q\\ge1$ (that is, $M$ patches of $q$ pixel values each). Choose a visible count $k$ with $1\\le k<M$, a finite update count $J\\ge0$, differentiable encoder and decoder families parameterized by $\\theta=(\\phi,\\psi,m)\\in\\Theta\\subseteq\\mathbb R^p$, an initial parameter vector $\\theta_0\\in\\Theta$, an optimizer state set $\\mathcal S$, and an initial optimizer state $s_0\\in\\mathcal S$. Choose either the original-pixel target $T(u)=u$ or, provided every patch of every training image has positive standard deviation, the normalized target $T(u)=(u-\\bar u\\mathbf 1)/s(u)$, where $\\bar u=q^{-1}\\sum_{r=1}^q u_r$ and $s(u)=(q^{-1}\\sum_{r=1}^q(u_r-\\bar u)^2)^{1/2}$. For each $V\\subseteq[M]$ with $|V|=k$, the encoder is a map from $V$ and the visible patch values to one encoded token at each position in $V$; it receives no mask tokens. The decoder is a map from the ordered length-$M$ sequence of encoded visible tokens and one shared learned vector $m$ at every position in $[M]\\setminus V$ to predictions $\\hat x_j\\in\\mathbb R^q$ at every patch position. Position $j$ is supplied to the maps as its index. Require that the masked mean squared error\n$$\\frac1{(M-k)q}\\sum_{j\\in[M]\\setminus V}\\|\\hat x_j-T(x_j)\\|_2^2$$\nhas a finite parameter gradient at every iterate reached by the procedure.\n\nAn **optimizer update schedule** is a supplied finite family of maps $U_t:(\\Theta\\times\\mathcal S)\\times\\mathbb R^p\\to\\Theta\\times\\mathcal S$ for $0\\le t<J$, each defined on its entire displayed domain. When $\\Theta=\\mathbb R^p$, plain stochastic gradient descent with step sizes $\\eta_t>0$ is the special case $U_t((\\theta,s),g)=(\\theta-\\eta_tg,s)$.\n\nFor each $t=0,\\ldots,J-1$, perform the following steps.\n\n1. Sample $I_t$ uniformly from $\\{1,\\ldots,n\\}$ and, independently, sample $V_t$ uniformly from $\\mathcal V_k=\\{V\\subseteq[M]:|V|=k\\}$. Sampling is with replacement across different update steps.\n2. Apply the encoder to the visible patch values at positions in $V_t$. Restore their original order, insert the shared learned vector $m$ at every position in $[M]\\setminus V_t$, and supply each position index to the decoder. Apply the decoder to this full ordered sequence to obtain $\\hat x_{t,j}\\in\\mathbb R^q$ for every $j\\in[M]$.\n3. Compute $L_t=((M-k)q)^{-1}\\sum_{j\\in[M]\\setminus V_t}\\|\\hat x_{t,j}-T(x^{(I_t)}_j)\\|_2^2$, compute $g_t=\\nabla_\\theta L_t$, and update $(\\theta_{t+1},s_{t+1})=U_t((\\theta_t,s_t),g_t)$.\n\nReturn the trained encoder $E_{\\phi_J}$ and parameter vector $\\theta_J$. The decoder is used during pretraining and may be discarded afterward. The mask ratio is $\\rho=(M-k)/M$. The procedure defines finite stochastic updates only; it does not assert that the updates converge to a minimizer or that the returned representation is semantically sufficient.\n\nThe diagram records the data flow. Solid arrows pass data or predictions; the bottom comparison uses only positions in $[M]\\setminus V$. The definitions and numbered instructions specify the algorithm completely, and no proof or property relies on the diagram.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.78,transform shape]\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (input) at (0,0) {Input patch\\\\sequence};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (mask) at (2.7,0) {Uniformly sample\\\\visible positions};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (enc) at (5.4,0) {Encoder sees\\\\visible patches only};\n  \\node[draw,rounded corners,align=center,minimum width=2.4cm,minimum height=0.8cm] (restore) at (8.3,0) {Insert learned tokens\\\\at missing positions};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (dec) at (11.2,0) {Decoder};\n  \\node[draw,rounded corners,align=center,minimum width=2.3cm,minimum height=0.8cm] (pred) at (14,0) {Predictions at\\\\all positions};\n  \\node[draw,rounded corners,align=center,minimum width=3.0cm,minimum height=0.8cm] (loss) at (8.3,-1.7) {Masked-patch MSE\\\\only};\n  \\node[draw,rounded corners,align=center,minimum width=2.8cm,minimum height=0.8cm] (target) at (3.4,-1.7) {Clean targets at\\\\missing positions};\n  \\draw[->] (input) -- (mask);\n  \\draw[->] (mask) -- node[above] {visible subset} (enc);\n  \\draw[->] (enc) -- (restore);\n  \\draw[->] (restore) -- (dec);\n  \\draw[->] (dec) -- (pred);\n  \\draw[->] (pred) |- (loss);\n  \\draw[->] (target) -- (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-feedforward-neural-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A finite feedforward computation graph from $\\mathbb R^d$ to $\\mathbb R^r$ consists of a finite directed graph $(V,E)$ with no directed cycle; pairwise disjoint input, hidden, and output vertex sets $I,H,O$ whose union is $V$; exactly $d$ input vertices and $r$ output vertices; and a specified ordering of $V$ in which the tail of every directed edge precedes its head. The input vertices are labelled bijectively by the coordinates $1,\\ldots,d$, and input vertex $i$ has value $x_i$ for $x\\in\\mathbb R^d$. Each non-input vertex $v$ has a real bias $b_v$, a real weight $w_{uv}$ for every edge $u\\to v$, and a real activation function $\\rho_v$. In the specified order, its value is\n\n$$z_v=\\rho_v\\!\\left(b_v+\\sum_{u:\\,u\\to v}w_{uv}z_u\\right).$$\n\nThe network output is the vector of values at $O$. A layered multilayer perceptron is the specialization with layers $V_0,\\ldots,V_L$, where $V_0=I$, $V_L=O$, and every edge goes from $V_{\\ell-1}$ to $V_\\ell$ for some $\\ell$; the hidden vertices use a shared activation and the output vertices use the identity activation. A fully connected layered perceptron includes every edge between consecutive layers. The fixed ordering makes the recursive evaluation unambiguous and is part of the graph data.\n\nThe diagram shows the edge direction and evaluation convention for a fully connected scalar-output perceptron with one hidden layer. Each circle is one scalar-valued node; the hidden nodes apply $\\sigma$ and the output node is linear. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.5cm]\n  \\node[draw,circle] (x1) {$x_1$};\n  \\node[draw,circle,below of=x1] (x2) {$x_2$};\n  \\node[draw,circle,right of=x1,yshift=-0.35cm] (h1) {$\\sigma$};\n  \\node[draw,circle,below of=h1] (h2) {$\\sigma$};\n  \\node[draw,circle,right of=h1,yshift=-0.35cm] (y) {$y$};\n  \\draw[->] (x1) -- (h1);\n  \\draw[->] (x1) -- (h2);\n  \\draw[->] (x2) -- (h1);\n  \\draw[->] (x2) -- (h2);\n  \\draw[->] (h1) -- (y);\n  \\draw[->] (h2) -- (y);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $p_0$, the mean is $1/4$ and the standard deviation is $1/4$; for $p_1$, they are $3/4$ and $1/4$. Hence [F1] gives $T_{\\rm norm}(p_0)=(-1,1)=T_{\\rm norm}(p_1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Both patches of either image have this same normalized target. By [F2], each mask leaves exactly one masked patch, and the decoder predicts $(-1,1)$ there. Its squared error is zero, so the per-example loss [F1] is zero for every image-mask outcome. The finite expectation [F3] is therefore zero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed visible set $V$, the encoder returns the identical indexed token family $(z_*)_{j\\in V}$ for both differently labelled images. Any deterministic classifier applied only to this representation has the same output on both images at that $V$, so it cannot classify both labels correctly. Allowing the classifier to use $V$ does not change this conclusion, since $V$ is independent of the equally weighted label. The constant token map and decoder are permitted finite feedforward maps by [F4], taking zero incoming weights, identity output activations, and fixed biases.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example has two images, two patches per image, and one visible patch.: the stated positive-size input domain excludes an empty training set or patch grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: there are no zero-sized patches or pixel vectors; q=2 and both patch types are nonzero vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: M=2, q=2, n=2, and k=1, the smallest masked grid with one visible and one masked patch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: both patch standard deviations equal 1/4, so the normalized target is defined and no zero-variance convention is invoked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: the only admissible masks are {1} and {2}, and both have zero loss."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: the finite image-mask law has four outcomes, all explicitly assigned zero loss; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–1.2 calculates the same normalized patch target and zero loss for all four image-mask outcomes; 2.1 gives the constant-code label failure. This constructed witness, plus a reported experiment, is not an equivalence claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–1.2 calculates the same normalized patch target and zero loss for all four image-mask outcomes; 2.1 gives the constant-code label failure. This constructed witness, plus a reported experiment, is not an equivalence claim.",
+            "item_sha256": "4a0007be126d06fdefceeb0fc56bfa69d95793b9fa67c269be27f8c81440bf39",
+            "row_sha256": "0576568353993c8afabf849641110dda8dd650bf0a8d02de66009b9a0fbdc0ca"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–1.2 calculates the same normalized patch target and zero loss for all four image-mask outcomes; 2.1 gives the constant-code label failure. This constructed witness, plus a reported experiment, is not an equivalence claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–1.2 calculates the same normalized patch target and zero loss for all four image-mask outcomes; 2.1 gives the constant-code label failure. This constructed witness, plus a reported experiment, is not an equivalence claim.",
+            "item_sha256": "4a0007be126d06fdefceeb0fc56bfa69d95793b9fa67c269be27f8c81440bf39",
+            "row_sha256": "62a886aec5aab1c2148610ff569b5854d34c274b2b9e8601706730605e9430f7"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-57",
+        "notes": "Read the entire Example, empirical qualifications, F1–F4 and all three verification steps against their complete current suppliers and contract quotes. Direct calculation gives means 1/4,3/4 and standard deviations 1/4,1/4, hence both normalized patches equal (-1,1). With M=q=n=2 and k=1, all four independent image-mask outcomes have loss zero. The same constant code on two differently labelled inputs prevents any code-only deterministic classifier from classifying both; identity output activations, zero weights and fixed biases implement the constant maps. No training attainability or raw-pixel zero loss is asserted. Read He §3 target convention, §4/Table1 and Appendix A.1/Tables8–9: the stated 84.9% is a reported unnormalized-target ViT-L/16 fine-tuning result under its specified protocol, separate from the finite normalized witness. No AC, infinite expectation or degenerate variance is used. No mathematical or citation defect; prior source unchanged."
+      }
+    }
+  }
+}

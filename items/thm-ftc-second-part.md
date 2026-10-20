@@ -15,6 +15,7 @@ landmark: true
 short: "second fundamental theorem"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-ftc-second-part.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -39,9 +40,9 @@ pipeline_run: null
 ## Statement
 
 Let $a < b$ be reals, let $G : [a,b] \to \mathbb{R}$ be differentiable at every
-point of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$
+point of $[a,b]$ as a function on $[a,b]$ (The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set; at $a$ and $b$
 this is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable
-on $[a,b]$ ([[def-darboux-integral]]). Then
+on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$). Then
 
 $$\int_a^b f \;=\; G(b) - G(a) .$$
 
@@ -55,6 +56,12 @@ companion page.
 **No continuity of $f$ is assumed**, which is what makes this the working form:
 the theorem evaluates $\int_a^b f$ for every integrable derivative, not only for
 continuous integrands.
+
+## Statement references
+
+[[def-derivative]]
+
+[[def-darboux-integral]]
 
 ## Facts & Assumptions
 

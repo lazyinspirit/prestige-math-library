@@ -1,0 +1,2409 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-gaussian-vector-norm-concentration",
+    "lem-gaussian-sample-mean-signal-alignment",
+    "cor-one-sample-natural-classification-error-gaussian-mixture",
+    "thm-robust-sample-upper-bound-gaussian-mixture",
+    "lem-common-shift-robust-risk-lower-bound",
+    "lem-gaussian-normal-prior-posterior",
+    "thm-robust-sample-lower-bound-gaussian-mixture",
+    "lem-finite-independent-sign-sum-tail",
+    "lem-bernoulli-coordinate-posterior-odds-bound",
+    "thm-architecture-dependent-robustness-binary-feature-model",
+    "ex-gaussian-robust-risk-dimension-radius-scaling",
+    "ex-bernoulli-perturbations-preserve-signs",
+    "ex-natural-and-robust-risk-on-gaussian-model"
+  ],
+  "contracts": {
+    "lem-gaussian-vector-norm-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Q=\\sum_{j=1}^d Z_j^2$ for the independent standard normal coordinates in [F1]. For $0<\\lambda<1/2$, integrating their scalar density and substituting $u=\\sqrt{1-2\\lambda}\\,x$ gives $\\mathbb E e^{\\lambda Z_j^2}=(1-2\\lambda)^{-1/2}$. By [F2] and the exponential addition formula, $\\mathbb E e^{\\lambda(Q-d)}=e^{-d\\lambda}(1-2\\lambda)^{-d/2}$. With $u=2\\lambda$, [F4] gives $-\\log(1-2\\lambda)-2\\lambda\\le (2\\lambda)^2/[2(1-2\\lambda)]$, so $\\log\\mathbb E e^{\\lambda(Q-d)}\\le d\\lambda^2/(1-2\\lambda)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any unit vector $u$, [F1] gives $\\langle u,G\\rangle\\sim N(0,\\sigma^2)$. Completing the square in the scalar normal density gives $\\mathbb E e^{v\\langle u,G\\rangle}=e^{v^2\\sigma^2/2}$. Applying [F3] with $v=s/\\sigma^2$ to the upper tail and with $v=-s/\\sigma^2$ to the lower tail proves both one-sided projection bounds for $s>0$; for $s=0$ they hold because each right side is $1$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $r>0$, apply [F3] to $e^{\\lambda(Q-d)}$ at threshold $e^{\\lambda(2\\sqrt{dr}+2r)}$. Choosing $\\lambda=\\sqrt r/(\\sqrt d+2\\sqrt r)$ gives $0<\\lambda<1/2$ and, by step 1.1, the exponent $-\\lambda(2\\sqrt{dr}+2r)+d\\lambda^2/(1-2\\lambda)=-r$. Therefore $\\mathbb P(Q\\ge d+2\\sqrt{dr}+2r)\\le e^{-r}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t>0$, set $a=t/\\sigma$ and $r=a^2/2$. The event $\\|G\\|_2\\ge\\sigma(\\sqrt d+a)$ is $Q\\ge d+2\\sqrt d\\,a+a^2$, and this threshold is at least $d+2\\sqrt{dr}+2r=d+\\sqrt{2d}\\,a+a^2$. Step 2.1 bounds its probability by $e^{-a^2/2}$. When $t=0$, the claimed upper bound is $1$ and holds directly.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the two one-sided bounds in step 1.2 to each coordinate unit vector and combine them with [F5]. This gives $\\mathbb P(\\|G\\|_\\infty>s)\\le2d e^{-s^2/(2\\sigma^2)}$. For $d\\ge2$, substitute $s=2\\sigma\\sqrt{2\\log d}$; the failure probability is at most $2d e^{-4\\log d}=2/d^3\\le1/d$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires d≥1, so no zero-dimensional or empty Gaussian vector is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 3.1 and 1.2 prove the t=0 and s=0 tail endpoints directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows d=1 for all tails; the final maximum-coordinate consequence separately requires d≥2 in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis σ>0 excludes degenerate covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 handles the minimum d=2 for the stated consequence and all nonnegative tail parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly assumes AC for the finite-dimensional Gaussian construction in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-gaussian-sample-mean-signal-alignment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-two-class-spherical-gaussian-mixture-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $d\\ge1$, a vector $\\theta\\in\\mathbb R^d$, and $\\sigma>0$, the two-class spherical Gaussian model is the Borel probability law $P_{\\theta,\\sigma}$ on $\\mathbb R^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\sigma}(C)=\\frac12\\sum_{y\\in\\{-1,+1\\}}N_d(y\\theta,\\sigma^2 I_d)(C_y),\\qquad C_y:=\\{x\\in\\mathbb R^d:(x,y)\\in C\\},$$\nfor every Borel set $C\\subseteq\\mathbb R^d\\times\\{-1,+1\\}$. Thus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, $X$ has law $N_d(y\\theta,\\sigma^2I_d)$. In the normalized model used below, $\\|\\theta\\|_2=\\sqrt d$. Independent training and test observations are drawn from the corresponding finite product law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-gaussian-vector-norm-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, $\\sigma>0$, and $G\\sim N_d(0,\\sigma^2I_d)$. For every $t\\ge0$ and $s\\ge0$,\n$$\\mathbb P(\\|G\\|_2\\ge \\sigma\\sqrt d+t)\\le \\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\|G\\|_\\infty>s)\\le 2d\\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nFor every unit vector $u\\in\\mathbb R^d$ and $s\\ge0$, each one-sided projection tail satisfies\n$$\\mathbb P(\\langle u,G\\rangle\\ge s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\langle u,G\\rangle\\le-s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nConsequently, for $d\\ge2$,\n$$\\mathbb P\\!\\left(\\|G\\|_\\infty\\le 2\\sigma\\sqrt{2\\log d}\\right)\\ge1-\\frac1d.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$, the map $(x,y)\\mapsto yx$ is Borel, so [F5] makes $Z_i:=Y_iX_i$ independent. For each $u\\in\\mathbb R^d$ and $y\\in\\{-1,+1\\}$, [F1]–[F2] give the conditional characteristic function $\\mathbb E[e^{it\\langle u,yX_i\\rangle}\\mid Y_i=y]=\\exp(it\\langle u,\\theta\\rangle-t^2\\sigma^2\\|u\\|_2^2/2)$: the mean term uses $y^2=1$ and the variance term uses $y^2=1$. This does not depend on $y$, so the same formula holds after averaging over the two labels. By [F3] each projection has law $N(\\langle u,\\theta\\rangle,\\sigma^2\\|u\\|_2^2)$, and [F4] identifies $Z_i\\sim N_d(\\theta,\\sigma^2I_d)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $E_i=Z_i-\\theta$. They remain independent by [F5]. For each fixed $u$, their projections are independent scalar $N(0,\\sigma^2\\|u\\|_2^2)$ variables by step 1.1 and [F2]. By [F6], the characteristic function of $n^{-1}\\sum_i\\langle u,E_i\\rangle$ is $\\exp(-t^2\\sigma^2\\|u\\|_2^2/(2n))$; [F3] identifies this as $N(0,\\sigma^2\\|u\\|_2^2/n)$. Since this holds for every $u$, [F4] gives $\\overline E:=n^{-1}\\sum_iE_i\\sim N_d(0,\\sigma^2I_d/n)$. Thus $W=\\theta+\\overline E$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $\\eta=\\sigma/\\sqrt n$. Apply the norm tail in [F7] to $\\overline E$ with $t=\\eta\\sqrt d$. Except on an event of probability at most $e^{-d/2}$, $\\|\\overline E\\|_2<2\\eta\\sqrt d$, so $\\|W\\|_2\\le\\sqrt d+2\\sigma\\sqrt{d/n}=(1+2\\sigma/\\sqrt n)\\sqrt d$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Apply the projection tail in [F7] to $u=\\theta/\\sqrt d$ and $s=\\sqrt d/(2\\sqrt n)$. Except on an event of probability at most $e^{-d/(8\\sigma^2)}$, $\\langle\\overline E,\\theta\\rangle>-d/(2\\sqrt n)$, hence $\\langle W,\\theta\\rangle>d(1-1/(2\\sqrt n))>0$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the intersection of the events in steps 3.1 and 3.2, $W\\ne0$, and division by the positive upper bound for $\\|W\\|_2$ yields $\\langle\\widehat W,\\theta\\rangle\\ge\\frac{1-1/(2\\sqrt n)}{1+2\\sigma/\\sqrt n}\\sqrt d=\\frac{2\\sqrt n-1}{2\\sqrt n+4\\sigma}\\sqrt d$. By [F8], the failure probability is at most $e^{-d/2}+e^{-d/(8\\sigma^2)}\\le2e^{-d/(8(\\sigma^2+1))}$, since both exponents dominate $d/(8(\\sigma^2+1))$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "A1",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires n,d≥1 and excludes an empty training sample or zero dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement defines the direction as e₁ when W=0; step 4.1 proves W≠0 on the claimed alignment event."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The n=1 endpoint is included in the exact coefficient and is used by Corollary 19."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis σ>0 excludes a degenerate Gaussian likelihood."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 3.1–4.1 include n=1 and all σ>0; the confidence event uses the stated inclusive tail thresholds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 states AC and steps 1.1–2.1 identify Gaussian laws through the AC uniqueness and Cramer–Wold suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "cor-one-sample-natural-classification-error-gaussian-mixture": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-sample-mean-signal-alignment",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d,n\\ge1$ be integers, let $\\sigma>0$, let $\\theta\\in\\mathbb R^d$ satisfy $\\|\\theta\\|_2=\\sqrt d$, and draw independent observations $(X_i,Y_i)_{i=1}^n$ from the two-class spherical Gaussian model with parameters $\\theta,\\sigma$. Put $W=n^{-1}\\sum_{i=1}^nY_iX_i$, and define $\\widehat W=W/\\|W\\|_2$ when $W\\ne0$ and $\\widehat W=e_1$ when $W=0$. Then\n$$\\mathbb P\\!\\left(\\langle\\widehat W,\\theta\\rangle\\le\\frac{2\\sqrt n-1}{2\\sqrt n+4\\sigma}\\sqrt d\\right)\\le2\\exp\\!\\left(-\\frac{d}{8(\\sigma^2+1)}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gaussian-vector-norm-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, $\\sigma>0$, and $G\\sim N_d(0,\\sigma^2I_d)$. For every $t\\ge0$ and $s\\ge0$,\n$$\\mathbb P(\\|G\\|_2\\ge \\sigma\\sqrt d+t)\\le \\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\|G\\|_\\infty>s)\\le 2d\\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nFor every unit vector $u\\in\\mathbb R^d$ and $s\\ge0$, each one-sided projection tail satisfies\n$$\\mathbb P(\\langle u,G\\rangle\\ge s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\langle u,G\\rangle\\le-s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nConsequently, for $d\\ge2$,\n$$\\mathbb P\\!\\left(\\|G\\|_\\infty\\le 2\\sigma\\sqrt{2\\log d}\\right)\\ge1-\\frac1d.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] with $n=1$. With probability at least $1-2e^{-d/(8(\\sigma^2+1))}$ over the training pair, the learned unit vector satisfies $\\langle\\widehat W,\\theta\\rangle\\ge a:=\\sqrt d/(2+4\\sigma)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any unit vector $u$ with $c:=\\langle u,\\theta\\rangle\\ge a$. Conditional on $Y=y$, the characteristic function of $Y\\langle u,X\\rangle$ at $t$ is $\\exp(itc-\\sigma^2t^2/2)$ by [F2], independently of $y$. Thus the signed test margin has law $N(c,\\sigma^2)$. The tie convention implies $\\{h_u(X)\\ne Y\\}\\subseteq\\{Y\\langle u,X\\rangle\\le0\\}$, so [F3] gives $\\operatorname{err}_{\\theta,\\sigma}(u)\\le\\exp(-c^2/(2\\sigma^2))\\le\\exp(-a^2/(2\\sigma^2))$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\beta\\ge1/2$, then $c>0$ and symmetry of the centered normal in [F3] gives $\\operatorname{err}_{\\theta,\\sigma}(u)\\le\\mathbb P(G\\le0)=1/2\\le\\beta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $\\beta<1/2$ and put $L=\\log(1/\\beta)$. By [F4], $L>\\log2>1/2$. Since $d^{1/4}\\ge1$, the hypothesis gives $2+4\\sigma\\le(2+4\\sqrt2/5)d^{1/4}$ and $\\sigma^2L\\le\\sqrt d/25$. Therefore $2(2+4\\sigma)^2\\sigma^2L\\le\\frac{2}{25}(2+4\\sqrt2/5)^2d<d$, where the final strict inequality follows from $2+4\\sqrt2/5<5/\\sqrt2$. Hence $a^2/(2\\sigma^2)>L$, and step 1.2 gives $\\operatorname{err}_{\\theta,\\sigma}(u)\\le e^{-L}=\\beta$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the alignment event in step 1.1, the unit vector $u=\\widehat W$ meets the hypothesis of step 1.2. Steps 2.1 and 2.2 cover the two exhaustive cases for $\\beta$, so its natural error is at most $\\beta$ throughout that event. The event probability from step 1.1 is the asserted lower bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example is explicitly one training pair, so n=0 is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-vector classifier convention is defined in the Statement; step 1.1 shows the good alignment event has strictly positive signal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The sole training sample is the n=1 case used in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis σ>0 excludes degenerate test noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 2.1 and 2.2 split the full open β range at β=1/2 and prove both sides, including β=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 declares AC and the proof uses the Gaussian suppliers under that axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-robust-sample-upper-bound-gaussian-mixture": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-sample-mean-signal-alignment",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d,n\\ge1$ be integers, let $\\sigma>0$, let $\\theta\\in\\mathbb R^d$ satisfy $\\|\\theta\\|_2=\\sqrt d$, and draw independent observations $(X_i,Y_i)_{i=1}^n$ from the two-class spherical Gaussian model with parameters $\\theta,\\sigma$. Put $W=n^{-1}\\sum_{i=1}^nY_iX_i$, and define $\\widehat W=W/\\|W\\|_2$ when $W\\ne0$ and $\\widehat W=e_1$ when $W=0$. Then\n$$\\mathbb P\\!\\left(\\langle\\widehat W,\\theta\\rangle\\le\\frac{2\\sqrt n-1}{2\\sqrt n+4\\sigma}\\sqrt d\\right)\\le2\\exp\\!\\left(-\\frac{d}{8(\\sigma^2+1)}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-two-class-spherical-gaussian-mixture-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $d\\ge1$, a vector $\\theta\\in\\mathbb R^d$, and $\\sigma>0$, the two-class spherical Gaussian model is the Borel probability law $P_{\\theta,\\sigma}$ on $\\mathbb R^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\sigma}(C)=\\frac12\\sum_{y\\in\\{-1,+1\\}}N_d(y\\theta,\\sigma^2 I_d)(C_y),\\qquad C_y:=\\{x\\in\\mathbb R^d:(x,y)\\in C\\},$$\nfor every Borel set $C\\subseteq\\mathbb R^d\\times\\{-1,+1\\}$. Thus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, $X$ has law $N_d(y\\theta,\\sigma^2I_d)$. In the normalized model used below, $\\|\\theta\\|_2=\\sqrt d$. Independent training and test observations are drawn from the corresponding finite product law.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gaussian-vector-norm-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, $\\sigma>0$, and $G\\sim N_d(0,\\sigma^2I_d)$. For every $t\\ge0$ and $s\\ge0$,\n$$\\mathbb P(\\|G\\|_2\\ge \\sigma\\sqrt d+t)\\le \\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\|G\\|_\\infty>s)\\le 2d\\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nFor every unit vector $u\\in\\mathbb R^d$ and $s\\ge0$, each one-sided projection tail satisfies\n$$\\mathbb P(\\langle u,G\\rangle\\ge s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\langle u,G\\rangle\\le-s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nConsequently, for $d\\ge2$,\n$$\\mathbb P\\!\\left(\\|G\\|_\\infty\\le 2\\sigma\\sqrt{2\\log d}\\right)\\ge1-\\frac1d.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adversarial-threat-set-and-robust-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ and $(\\mathcal Y,\\Sigma_Y)$ be measurable spaces, let $\\mathcal A$ be a measurable action space, and let $P$ be a probability measure on $(\\mathcal X\\times\\mathcal Y,\\Sigma_X\\otimes\\Sigma_Y)$. A threat correspondence is a map $\\Delta:\\mathcal X\\to\\mathcal P(\\mathcal X)$ with $\\Delta(x)\\ne\\varnothing$ for every $x$. It is measurable when its graph $\\{(x,x')\\in\\mathcal X^2:x'\\in\\Delta(x)\\}$ belongs to $\\Sigma_X\\otimes\\Sigma_X$. For a measurable predictor $f:\\mathcal X\\to\\mathcal A$ and a nonnegative measurable loss $\\ell:\\mathcal A\\times\\mathcal Y\\to[0,+\\infty]$, the pointwise robust loss is\n$$L_{\\Delta,f}(x,y)=\\sup_{x'\\in\\Delta(x)}\\ell(f(x'),y).$$\nIts robust risk is the outer expectation\n$$R^{\\mathrm{rob}}_{P,\\Delta}(f)=\\mathbb E_P^*[L_{\\Delta,f}(X,Y)] :=\\inf\\{\\mathbb E_P[g(X,Y)]:g\\ge L_{\\Delta,f}\\text{ and }g\\text{ is nonnegative measurable}\\}.$$\nIf $L_{\\Delta,f}$ is measurable, this is its ordinary expectation. The supremum need not be attained. For a metric $\\rho$ on $\\mathcal X$ and a radius $\\epsilon\\ge0$, the closed-ball threat is $\\Delta_\\epsilon(x)=\\{x'\\in\\mathcal X:\\rho(x,x')\\le\\epsilon\\}$. On $\\mathbb R^d$, $\\|u\\|_\\infty:=\\max_{1\\le j\\le d}|u_j|$ and the $\\ell_\\infty$ threat is $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$. For a binary classifier $f:\\mathcal X\\to\\{-1,+1\\}$, the robust zero-one loss is $\\mathbf1\\{\\exists x'\\in\\Delta_\\epsilon(x):f(x')\\ne y\\}$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A_n=(2\\sqrt n-1)/(2\\sqrt n+4\\sigma)$. By [F1], except with probability $2e^{-d/(8(\\sigma^2+1))}$, $W\\ne0$ and $U:=W/\\|W\\|_2$ is a unit vector with $\\langle U,\\theta\\rangle\\ge A_n\\sqrt d$. On this event $f_W=f_U$, since normalization is by a positive scalar.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any unit vector $u$ and write $c=\\langle u,\\theta\\rangle$. Conditional on $Y=y$, [F2] gives the characteristic function $\\exp(itc-\\sigma^2t^2/2)$ for $M:=Y\\langle u,X\\rangle$, independent of $y$; hence the same law holds after averaging over $Y$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For every perturbation $\\delta$ with $\\|\\delta\\|_\\infty\\le\\epsilon$, $Y\\langle u,X+\\delta\\rangle=M+Y\\langle u,\\delta\\rangle\\ge M-\\epsilon\\|u\\|_1$. Thus if the robust loss is one then $M\\le\\epsilon\\|u\\|_1$, including the $+1$ tie convention. Consequently the pointwise robust loss is bounded above by the measurable indicator $\\mathbf1_{\\{M\\le\\epsilon\\|u\\|_1\\}}$, which is an admissible majorant in [F5].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the final assertion put $D=d^{1/4}\\ge1$ and $k=\\sqrt{2\\log100}$. By [F6], $\\log100<\\log256=8\\log2<8$, so $k<4$. Under $\\sigma\\le D/32$, this implies $k\\sigma/\\sqrt d<1/(8D)$. The robust-radius threshold from the first assertion at $\\beta=1/100$ is $A_n-k\\sigma/\\sqrt d$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $c\\ge A_n\\sqrt d$ and $\\epsilon\\le A_n-\\sigma\\sqrt{2\\log(1/\\beta)}/\\sqrt d$, [F4] gives $c-\\epsilon\\|u\\|_1\\ge\\sigma\\sqrt{2\\log(1/\\beta)}\\ge0$. By step 1.2, $M-c$ is centered normal with variance $\\sigma^2$; [F3] and step 1.3 show the robust risk is at most $\\exp(-(c-\\epsilon\\|u\\|_1)^2/(2\\sigma^2))\\le\\beta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $0\\le\\epsilon\\le1/(4D)$ and $n\\ge1$, then $A_n\\ge A_1=1/(2+4\\sigma)\\ge1/(2+D/8)$. Since $D\\ge1$, $2+D/8\\le17D/8$, so $A_n-k\\sigma/\\sqrt d>8/(17D)-1/(8D)=47/(136D)>1/(4D)\\ge\\epsilon$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "If $1/(4D)\\le\\epsilon\\le1/4$ and $n\\ge64\\epsilon^2D^2$, set $q=\\epsilon D$. Then $q\\ge1/4$, $q\\le D/4$, and $2\\sqrt n\\ge16q$. The function $s\\mapsto(s-1)/(s+4\\sigma)$ is increasing for $s>0$, and it decreases as $\\sigma$ increases when $s>1$. Hence $A_n\\ge(16q-1)/(16q+D/8)\\ge12q/((33/8)D)=32\\epsilon/11$. As $1/(8D)\\le\\epsilon/2$, step 1.4 gives $A_n-k\\sigma/\\sqrt d> (32/11-1/2)\\epsilon=53\\epsilon/22\\ge\\epsilon$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the event in step 1.1, use $u=U$ in step 2.1. This proves the first assertion with the probability stated there.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under either sample-size condition in step 2.2 or step 2.3, the first assertion applies with $\\beta=1/100$. Its training-sample failure probability remains $2e^{-d/(8(\\sigma^2+1))}$, proving the second assertion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires n≥1, so the empty training sample is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first assertion permits ε=0, and step 2.2 covers the zero-radius endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 uses n=1 in the small-radius sufficient branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Gaussian noise has σ>0; step 1.1 also shows W is nonzero on the alignment event despite its explicit zero fallback."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 2.2–2.3 cover the inclusive radius ranges and the overlapping crossover endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 assumes AC through the stated Gaussian model and concentration interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-common-shift-robust-risk-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-adversarial-threat-set-and-robust-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ and $(\\mathcal Y,\\Sigma_Y)$ be measurable spaces, let $\\mathcal A$ be a measurable action space, and let $P$ be a probability measure on $(\\mathcal X\\times\\mathcal Y,\\Sigma_X\\otimes\\Sigma_Y)$. A threat correspondence is a map $\\Delta:\\mathcal X\\to\\mathcal P(\\mathcal X)$ with $\\Delta(x)\\ne\\varnothing$ for every $x$. It is measurable when its graph $\\{(x,x')\\in\\mathcal X^2:x'\\in\\Delta(x)\\}$ belongs to $\\Sigma_X\\otimes\\Sigma_X$. For a measurable predictor $f:\\mathcal X\\to\\mathcal A$ and a nonnegative measurable loss $\\ell:\\mathcal A\\times\\mathcal Y\\to[0,+\\infty]$, the pointwise robust loss is\n$$L_{\\Delta,f}(x,y)=\\sup_{x'\\in\\Delta(x)}\\ell(f(x'),y).$$\nIts robust risk is the outer expectation\n$$R^{\\mathrm{rob}}_{P,\\Delta}(f)=\\mathbb E_P^*[L_{\\Delta,f}(X,Y)] :=\\inf\\{\\mathbb E_P[g(X,Y)]:g\\ge L_{\\Delta,f}\\text{ and }g\\text{ is nonnegative measurable}\\}.$$\nIf $L_{\\Delta,f}$ is measurable, this is its ordinary expectation. The supremum need not be attained. For a metric $\\rho$ on $\\mathcal X$ and a radius $\\epsilon\\ge0$, the closed-ball threat is $\\Delta_\\epsilon(x)=\\{x'\\in\\mathcal X:\\rho(x,x')\\le\\epsilon\\}$. On $\\mathbb R^d$, $\\|u\\|_\\infty:=\\max_{1\\le j\\le d}|u_j|$ and the $\\ell_\\infty$ threat is $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$. For a binary classifier $f:\\mathcal X\\to\\{-1,+1\\}$, the robust zero-one loss is $\\mathbf1\\{\\exists x'\\in\\Delta_\\epsilon(x):f(x')\\ne y\\}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f$ is Borel, the event $A:=\\{f(Z)=+1\\}$ belongs to $\\sigma(Z)$, which is independent of $\\sigma(Y)$ by [F3]. Thus $\\mathbb P(f(Z)\\ne Y)=\\mathbb P(A)\\mathbb P(Y=-1)+\\mathbb P(A^c)\\mathbb P(Y=+1)=\\frac12\\mathbb P(A)+\\frac12\\mathbb P(A^c)=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each outcome, the perturbation $\\delta=-Y\\mu$ satisfies $\\|\\delta\\|_\\infty\\le\\epsilon$ by [A1], and $X+\\delta=Z$. Hence the pointwise robust loss is at least $\\mathbf1\\{f(Z)\\ne Y\\}$. This indicator is measurable because $f$ and the coordinate variables are measurable.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every measurable nonnegative majorant $g$ in the definition of robust risk therefore satisfies $g(X,Y)\\ge\\mathbf1\\{f(Z)\\ne Y\\}$. By [F2] and step 1.1, its expectation is at least $1/2$. Taking the infimum over all such majorants gives $R^{\\mathrm{rob}}_{P,\\Delta_\\epsilon}(f)\\ge1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires d≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The endpoint ε=0 is included when μ=0; the admissible shift in step 1.2 is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coordinate proof in step 1.2 applies unchanged in dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits an arbitrary Borel law for Z, including a point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The equality ‖μ‖∞=ε is included; step 1.2 still gives an admissible boundary shift."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: The proof uses one explicit perturbation and finite averaging and declares no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-gaussian-normal-prior-posterior": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n\\ge1$, the joint density of $(\\Theta,Z_1,\\ldots,Z_n)$ is proportional to $\\exp\\!\\left(-\\frac12\\|\\theta\\|_2^2-\\frac1{2\\sigma^2}\\sum_{i=1}^n\\|z_i-\\theta\\|_2^2\\right)$. Indeed, the prior density and each conditional Gaussian density are given by [F2], and their product is the joint density by conditional independence and [F1]. The independent labels contribute a constant factor $2^{-n}$, so conditioning on their observed values does not change the $\\theta$-dependent factor.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\bar z=n^{-1}\\sum_i z_i$. Expanding squares gives $\\sum_i\\|z_i-\\theta\\|_2^2=\\sum_i\\|z_i-\\bar z\\|_2^2+n\\|\\theta-\\bar z\\|_2^2$. Completing the remaining square in $\\theta$ yields $\\|\\theta\\|_2^2+\\frac n{\\sigma^2}\\|\\theta-\\bar z\\|_2^2 =\\frac{\\sigma^2+n}{\\sigma^2}\\left\\|\\theta-\\frac n{\\sigma^2+n}\\bar z\\right\\|_2^2 +\\frac n{\\sigma^2+n}\\|\\bar z\\|_2^2$. The final term is independent of $\\theta$. The normalized conditional density is therefore the Gaussian density in the Statement, with positive covariance $\\frac{\\sigma^2}{\\sigma^2+n}I_d$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The density ratio in step 2.1 defines a measurable probability kernel in the observed vectors because its mean is linear in $\\bar z$ and its covariance is fixed; [F2] gives unit mass. Applying [F3] to the nonnegative joint density verifies the conditional-law identity on every pair of Borel sets. Since the labels are independent of $(\\Theta,Z_1,\\ldots,Z_n)$, the same kernel is the conditional law after adjoining the labels.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "When $n=0$, the observed sigma-algebra contains no data, so conditioning leaves the prior law unchanged; the labels, if supplied, are independent of $\\Theta$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The no-observation case n=0 is an explicit clause, proved in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The hypotheses require σ>0, so the observation covariance is nondegenerate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1–3.1 specialize directly to a single observation n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For every allowed n, σ>0 keeps the posterior covariance positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 treats n=0 separately, while steps 1.1–3.1 cover every integer n≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 declares AC for the Gaussian construction and density suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-robust-sample-lower-bound-gaussian-mixture": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-two-class-spherical-gaussian-mixture-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $d\\ge1$, a vector $\\theta\\in\\mathbb R^d$, and $\\sigma>0$, the two-class spherical Gaussian model is the Borel probability law $P_{\\theta,\\sigma}$ on $\\mathbb R^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\sigma}(C)=\\frac12\\sum_{y\\in\\{-1,+1\\}}N_d(y\\theta,\\sigma^2 I_d)(C_y),\\qquad C_y:=\\{x\\in\\mathbb R^d:(x,y)\\in C\\},$$\nfor every Borel set $C\\subseteq\\mathbb R^d\\times\\{-1,+1\\}$. Thus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, $X$ has law $N_d(y\\theta,\\sigma^2I_d)$. In the normalized model used below, $\\|\\theta\\|_2=\\sqrt d$. Independent training and test observations are drawn from the corresponding finite product law.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-normal-prior-posterior",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $\\sigma>0$, and $n\\ge1$. Let $\\Theta\\sim N_d(0,I_d)$, and, conditional on $\\Theta$, let $Z_1,\\ldots,Z_n$ be independent with law $N_d(\\Theta,\\sigma^2I_d)$. Let $Y_1,\\ldots,Y_n$ be independent uniform signs, independent of $(\\Theta,Z_1,\\ldots,Z_n)$. Put $\\bar Z=n^{-1}\\sum_{i=1}^n Z_i$. The conditional law of $\\Theta$ given $(Z_1,\\ldots,Z_n,Y_1,\\ldots,Y_n)$ is\n$$N_d\\!\\left(\\frac{n}{\\sigma^2+n}\\bar Z,\\frac{\\sigma^2}{\\sigma^2+n}I_d\\right).$$\nFor $n=0$, with no observations, the conditional law is the prior $N_d(0,I_d)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adversarial-threat-set-and-robust-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ and $(\\mathcal Y,\\Sigma_Y)$ be measurable spaces, let $\\mathcal A$ be a measurable action space, and let $P$ be a probability measure on $(\\mathcal X\\times\\mathcal Y,\\Sigma_X\\otimes\\Sigma_Y)$. A threat correspondence is a map $\\Delta:\\mathcal X\\to\\mathcal P(\\mathcal X)$ with $\\Delta(x)\\ne\\varnothing$ for every $x$. It is measurable when its graph $\\{(x,x')\\in\\mathcal X^2:x'\\in\\Delta(x)\\}$ belongs to $\\Sigma_X\\otimes\\Sigma_X$. For a measurable predictor $f:\\mathcal X\\to\\mathcal A$ and a nonnegative measurable loss $\\ell:\\mathcal A\\times\\mathcal Y\\to[0,+\\infty]$, the pointwise robust loss is\n$$L_{\\Delta,f}(x,y)=\\sup_{x'\\in\\Delta(x)}\\ell(f(x'),y).$$\nIts robust risk is the outer expectation\n$$R^{\\mathrm{rob}}_{P,\\Delta}(f)=\\mathbb E_P^*[L_{\\Delta,f}(X,Y)] :=\\inf\\{\\mathbb E_P[g(X,Y)]:g\\ge L_{\\Delta,f}\\text{ and }g\\text{ is nonnegative measurable}\\}.$$\nIf $L_{\\Delta,f}$ is measurable, this is its ordinary expectation. The supremum need not be attained. For a metric $\\rho$ on $\\mathcal X$ and a radius $\\epsilon\\ge0$, the closed-ball threat is $\\Delta_\\epsilon(x)=\\{x'\\in\\mathcal X:\\rho(x,x')\\le\\epsilon\\}$. On $\\mathbb R^d$, $\\|u\\|_\\infty:=\\max_{1\\le j\\le d}|u_j|$ and the $\\ell_\\infty$ threat is $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$. For a binary classifier $f:\\mathcal X\\to\\{-1,+1\\}$, the robust zero-one loss is $\\mathbf1\\{\\exists x'\\in\\Delta_\\epsilon(x):f(x')\\ne y\\}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-common-shift-robust-risk-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer, let $\\epsilon\\ge0$, let $\\mu\\in\\mathbb R^d$ satisfy $\\|\\mu\\|_\\infty\\le\\epsilon$, and let $Y$ be uniform on $\\{-1,+1\\}$ and independent of an arbitrary Borel random vector $Z\\in\\mathbb R^d$. Set $X=Y\\mu+Z$, let $P$ be the joint law of $(X,Y)$, and let $f:\\mathbb R^d\\to\\{-1,+1\\}$ be any Borel classifier. For the closed $\\ell_\\infty$ threat $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$ and robust zero-one risk defined by outer expectation, $R^{\\mathrm{rob}}_{P,\\Delta_\\epsilon}(f)\\ge1/2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-gaussian-vector-norm-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, $\\sigma>0$, and $G\\sim N_d(0,\\sigma^2I_d)$. For every $t\\ge0$ and $s\\ge0$,\n$$\\mathbb P(\\|G\\|_2\\ge \\sigma\\sqrt d+t)\\le \\exp\\!\\left(-\\frac{t^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\|G\\|_\\infty>s)\\le 2d\\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nFor every unit vector $u\\in\\mathbb R^d$ and $s\\ge0$, each one-sided projection tail satisfies\n$$\\mathbb P(\\langle u,G\\rangle\\ge s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right),\\qquad \\mathbb P(\\langle u,G\\rangle\\le-s)\\le \\exp\\!\\left(-\\frac{s^2}{2\\sigma^2}\\right).$$\nConsequently, for $d\\ge2$,\n$$\\mathbb P\\!\\left(\\|G\\|_\\infty\\le 2\\sigma\\sqrt{2\\log d}\\right)\\ge1-\\frac1d.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta$. For any $u\\in\\mathbb R^d$ and label $y$, the characteristic function of $\\langle u,Y_iX_i\\rangle$ conditional on $Y_i=y$ is $\\exp(it\\langle u,\\theta\\rangle-t^2\\sigma^2\\|u\\|_2^2/2)$: multiplying the conditional normal projection by $y$ multiplies its mean by $y$ and its frequency by $y$, so $y^2=1$ in both terms. This law is independent of $y$; scalar uniqueness [F1] identifies each projection, and Cramer–Wold [F1] gives $Y_iX_i\\sim N_d(\\theta,\\sigma^2I_d)$ independent of $Y_i$. Independence of the training pairs and measurable coordinate transformations preserve independence across $i$, so the class-weighted observations have the independent Gaussian likelihood and labels required by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F9",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], for every realized sample $S$, the posterior mean is $m(S)$ and the posterior covariance is $vI_d$ where $v=\\sigma^2/(\\sigma^2+n)$. The formula also gives $m=0,v=1$ when $n=0$. The map $S\\mapsto m(S)$ is Borel because it is a finite sum of coordinate products and division by the positive constant $\\sigma^2+n$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix $\\theta,S$ with $\\|m(S)\\|_\\infty\\le\\epsilon$. For a fresh test pair write $X=Y\\theta+G$ with $Y$ uniform and $G\\sim N_d(0,\\sigma^2I_d)$ independent. The perturbation $\\delta=-Ym(S)$ is admissible by [F3] and sends $X$ to $Y(\\theta-m(S))+G$. Thus the pointwise robust loss is at least $\\mathbf1\\{F(S,Y(\\theta-m(S))+G)\\ne Y\\}$. This indicator is measurable in the test pair, so every measurable majorant in [F3] has expectation at least its probability; therefore the fixed-parameter robust risk is at least that probability.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $H(S,\\theta)$ to be zero when $\\|m(S)\\|_\\infty>\\epsilon$, and otherwise to be the probability in step 1.3. The classifier family and $m$ are Borel, so the shifted error indicator is product-measurable in $(S,\\theta,Y,G)$; [F5] makes $H$ measurable. Step 1.3 gives $H(S,\\theta)\\le R^{\\mathrm{rob}}_{P_{\\theta,\\sigma},\\Delta_\\epsilon}(f_S)$ pointwise. By [F4], taking the outer expectation over $(\\Theta,S)$ yields a lower bound by $\\mathbb E[H(\\Theta,S)]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conditional on $S$, write $\\Theta=m(S)+R$ with $R\\sim N_d(0,vI_d)$ by [F2]. The fresh label $Y$ and noise $G$ are independent of $R$. For either sign $y$, $yR+G$ has law $N_d(0,(v+\\sigma^2)I_d)$: each projection has the product characteristic function of independent centered scalar normals, and [F1] identifies the vector law. This conditional law is the same for both labels, so $U:=YR+G$ is independent of the uniform label. By [F6], $\\mathbb P(F(S,U)\\ne Y\\mid S)=1/2$. Tonelli and the posterior identity [F2] now give $\\mathbb E[H(\\Theta,S)]=\\frac12\\mathbb P_S(\\|m(S)\\|_\\infty\\le\\epsilon)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $n\\ge1$, conditional on $\\Theta$, the sample mean $\\bar Z=n^{-1}\\sum_iY_iX_i$ has all projections $N(\\langle u,\\Theta\\rangle,\\sigma^2\\|u\\|_2^2/n)$ by the independent normal laws in step 1.1 and [F1]. Averaging the scalar characteristic function over $\\Theta\\sim N_d(0,I_d)$ shows each projection of $\\bar Z$ is $N(0,(1+\\sigma^2/n)\\|u\\|_2^2)$; [F1] then gives $\\bar Z\\sim N_d(0,(1+\\sigma^2/n)I_d)$. Since $m=\\frac{n}{\\sigma^2+n}\\bar Z$, its law is $N_d(0,\\frac{n}{\\sigma^2+n}I_d)$. For $n=0$, $m=0$ and the same event probability is one. Therefore $\\mathbb P_S(\\|m(S)\\|_\\infty\\le\\epsilon)=\\mathbb P_{V\\sim N_d(0,I_d)}(\\sqrt{n/(\\sigma^2+n)}\\|V\\|_\\infty\\le\\epsilon)$. Combining this with step 3.1 proves the first inequality.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "F1",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $d\\ge2$ and $n\\le\\epsilon^2\\sigma^2/(8\\log d)$. If $n=0$, the event in step 4.1 has probability one. If $n>0$, then $\\sqrt{n/(\\sigma^2+n)}\\le\\sqrt n/\\sigma\\le\\epsilon/\\sqrt{8\\log d}$ by [F8] and the sample-size hypothesis. On the event $\\|V\\|_\\infty\\le2\\sqrt{2\\log d}$ from [F7], it follows that $\\sqrt{n/(\\sigma^2+n)}\\|V\\|_\\infty\\le\\epsilon$. Thus the probability in step 4.1 is at least $1-1/d$, and the first inequality gives the second assertion.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: The theorem includes n=0; steps 1.2 and 4.1 identify the prior-only posterior and zero-mean statistic."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 treats ε=0, which forces n=0 under the corollary hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The base inequality allows d=1; the corollary explicitly starts at d=2 in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The model assumes σ>0; no zero-variance Gaussian likelihood is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 handles the inclusive sample-size threshold and the minimum d=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 declares AC for the Gaussian posterior, characteristic-function, Cramer–Wold, and concentration suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-finite-independent-sign-sum-tail": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For one sign variable $\\xi$ with $p=\\mathbb P(\\xi=+1)$ and $\\mu=\\mathbb E\\xi=2p-1$, put $\\psi(s)=\\log\\mathbb E e^{s(\\xi-\\mu)}$. The two-point formula gives $\\psi(s)=\\log(pe^s+(1-p)e^{-s})-s\\mu$, so $\\psi(0)=\\psi'(0)=0$ and $\\psi''(s)=\\frac{4p(1-p)}{(pe^s+(1-p)e^{-s})^2}\\le1$. The inequality follows from $4ab\\le(a+b)^2$ with $a=pe^s$ and $b=(1-p)e^{-s}$. Integrating the second-derivative bound twice from $0$ to $s$, in either direction, gives $\\psi(s)\\le s^2/2$ for every real $s$; if $p=0$ or $p=1$, $\\psi$ is identically zero and the same bound holds.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply step 1.1 to each $\\xi_i$ with $s=\\lambda c_i$. The functions $x\\mapsto e^{\\lambda c_i(x-\\mathbb E\\xi_i)}$ are nonnegative Borel functions, so [F6] factors their expectations; [F4] combines the exponentials. Thus $\\mathbb E e^{\\lambda S}=\\prod_{i=1}^m\\mathbb E e^{\\lambda c_i(\\xi_i-\\mathbb E\\xi_i)}\\le \\exp\\!\\left(\\frac{\\lambda^2}{2}\\sum_{i=1}^m c_i^2\\right)=e^{\\lambda^2V/2}$ for every real $\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F6",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $V>0$ and choose $\\lambda=t/V>0$. Markov's inequality [F3] applied to $e^{\\lambda S}$ and the MGF bound in step 2.1 give $\\mathbb P(S\\ge t)\\le e^{-\\lambda t+\\lambda^2V/2}=e^{-t^2/(2V)}$. Applying the same argument to $-S$ gives $\\mathbb P(S\\le-t)\\le e^{-t^2/(2V)}$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F5], $\\mathbb P(|S|\\ge t)\\le\\mathbb P(S\\ge t)+\\mathbb P(S\\le-t)$, which gives the stated two-sided bound from step 3.1. If $V=0$, every $c_i=0$, so $S=0$ almost surely; the empty-sum case is the same.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty sum m=0 is included and proved in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The V=0 case is explicit in the Statement and step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The proof includes the one-variable case m=1 in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint sign laws p=0 and p=1 are separately handled in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The strict t>0 endpoint and the separate V=0 branch are stated and proved in steps 3.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: The finite MGF proof is explicitly choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-bernoulli-coordinate-posterior-odds-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-feature-bernoulli-model",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $\\theta\\in\\{-1,+1\\}^d$, and let $0<\\tau\\le1/2$. The $(\\theta,\\tau)$ binary-feature Bernoulli model is the probability law $P_{\\theta,\\tau}$ on $\\{-1,+1\\}^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\tau}(\\{(x,y)\\})=\\frac12\\prod_{j=1}^d\\left[\\left(\\frac12+\\tau\\right)\\mathbf1_{\\{x_j=y\\theta_j\\}}+\\left(\\frac12-\\tau\\right)\\mathbf1_{\\{x_j=-y\\theta_j\\}}\\right].$$\nThus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, the feature coordinates are independent, with $X_j=y\\theta_j$ with probability $1/2+\\tau$ and $X_j=-y\\theta_j$ with probability $1/2-\\tau$. The displayed masses sum to one because each coordinate factor sums to one over its two possible signs and the label weights sum to one. The uniform-prior experiment used below draws $\\Theta$ uniformly from $\\{-1,+1\\}^d$ and then draws observations conditionally independently from $P_{\\Theta,\\tau}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-sign-sum-tail",
+          "source_section": "Statement",
+          "quote": "Let $\\xi_1,\\ldots,\\xi_m$ be independent random variables with values in $\\{-1,+1\\}$, let $c_1,\\ldots,c_m\\in\\mathbb R$, and put $V=\\sum_{i=1}^m c_i^2$ and $S=\\sum_{i=1}^m c_i(\\xi_i-\\mathbb E\\xi_i)$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(S\\ge t)\\le e^{-t^2/(2V)},\\qquad \\mathbb P(S\\le-t)\\le e^{-t^2/(2V)},\\qquad \\mathbb P(|S|\\ge t)\\le2e^{-t^2/(2V)}.$$\nIf $V=0$, then $S=0$ almost surely and all three tail probabilities are zero. The empty sum $m=0$ is included with $V=S=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a sample $S=((x_i,y_i))_{i=1}^n$. The prior mass of each $\\theta$ is $2^{-d}$, and the likelihood factors over coordinates because the model's conditional coordinate probabilities do. Write $L_j(t)=\\prod_i[(1/2+\\tau)\\mathbf1_{\\{y_ix_{ij}=t\\}}+(1/2-\\tau)\\mathbf1_{\\{y_ix_{ij}=-t\\}}]$ for $t\\in\\{-1,+1\\}$. The posterior mass at $\\theta$ is proportional to $\\prod_jL_j(\\theta_j)$, and its normalizing sum is $\\prod_j(L_j(+1)+L_j(-1))$; hence it factors as a product of coordinate posterior masses, proving conditional independence. The $j$th marginal odds are $L_j(+1)/L_j(-1)=((1/2+\\tau)/(1/2-\\tau))^{\\sum_i y_ix_{ij}}$. Bayes' finite formula and [F2] give the displayed log identity. Positivity of both coordinate probabilities makes each posterior denominator nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $a_\\tau=\\log((1+2\\tau)/(1-2\\tau))$. With $x=2\\tau\\le1/2$, [F2] gives $a_\\tau=2\\int_0^x(1-u^2)^{-1}\\,du$. For $0\\le u\\le1/2$, $(1-u^2)^{-1}=1+u^2/(1-u^2)\\le1+4u^2/3$, so $a_\\tau\\le2x+8x^3/9=4\\tau+64\\tau^3/9\\le40\\tau/9<5\\tau$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Assume $n>0$, fix $\\theta$ and $j$, and put $\\xi_i=\\theta_jY_iX_{ij}$. By [F1], these are independent signs with mean $2\\tau$. Let $t=\\sqrt{2n\\log(2d/\\delta)}$. [F3] with all coefficients equal to one gives conditional failure probability at most $2e^{-t^2/(2n)}=\\delta/d$ for $|\\sum_i(\\xi_i-2\\tau)|>t$. Since $|\\sum_iY_iX_{ij}|=|\\sum_i\\xi_i|$, this proves $\\mathbb P(|\\sum_iY_iX_{ij}|>2\\tau n+t\\mid\\Theta=\\theta)\\le\\delta/d$. By [F4] and averaging over the finite prior, with probability at least $1-\\delta$ every coordinate obeys $|\\sum_iY_iX_{ij}|\\le2\\tau n+t$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $n\\le\\tau^{-2}$, $\\tau n\\le\\sqrt n$. Also $2d/\\delta\\ge2$ and $\\log2=\\int_1^2 dx/x>1/2$, so $t\\ge\\sqrt n$. On the event from step 1.3, step 1.1 and step 1.2 now yield $|L_j(S)|\\le5\\tau(2\\tau n+t)\\le15\\tau t$ for every $j$, which is the asserted bound. If $n=0$, the posterior equals the uniform prior, so every $L_j=0$ and the claimed bound holds with equality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty sample n=0 has posterior odds one and zero log odds, handled in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At n=0 the concentration right side is zero and step 2.1 proves equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The hypotheses permit d=1 and n=1; steps 1.1 and 1.3 apply to that finite case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both coordinate likelihood probabilities stay positive because τ≤1/4<1/2; step 1.1 checks posterior denominators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The inclusive τ=1/4 and n=τ⁻² endpoints are covered by steps 1.2 and 2.1; δ is explicitly restricted to (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: All prior and sample spaces are finite and the item declares the calculation choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-coordinate, one-observation posterior odds",
+          "method": "exact finite enumeration",
+          "input": {
+            "d": 1,
+            "n": 1,
+            "tau": "1/4",
+            "z": "Y_1 X_{11}=±1"
+          },
+          "calculation": "For z=+1 the two likelihoods have ratio (3/4)/(1/4)=3; for z=-1 the ratio is 1/3. The item formula gives odds 3^z in both outcomes, and the prior has equal mass."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-architecture-dependent-robustness-binary-feature-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-feature-bernoulli-model",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $\\theta\\in\\{-1,+1\\}^d$, and let $0<\\tau\\le1/2$. The $(\\theta,\\tau)$ binary-feature Bernoulli model is the probability law $P_{\\theta,\\tau}$ on $\\{-1,+1\\}^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\tau}(\\{(x,y)\\})=\\frac12\\prod_{j=1}^d\\left[\\left(\\frac12+\\tau\\right)\\mathbf1_{\\{x_j=y\\theta_j\\}}+\\left(\\frac12-\\tau\\right)\\mathbf1_{\\{x_j=-y\\theta_j\\}}\\right].$$\nThus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, the feature coordinates are independent, with $X_j=y\\theta_j$ with probability $1/2+\\tau$ and $X_j=-y\\theta_j$ with probability $1/2-\\tau$. The displayed masses sum to one because each coordinate factor sums to one over its two possible signs and the label weights sum to one. The uniform-prior experiment used below draws $\\Theta$ uniformly from $\\{-1,+1\\}^d$ and then draws observations conditionally independently from $P_{\\Theta,\\tau}$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernoulli-coordinate-posterior-odds-bound",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer, $0<\\tau\\le1/4$, and let $n\\ge0$ be an integer with $n\\le\\tau^{-2}$. Draw $\\Theta$ uniformly from $\\{-1,+1\\}^d$ and, conditionally on $\\Theta$, draw $n$ independent observations $S=((X_i,Y_i))_{i=1}^n$ from the binary-feature Bernoulli model with parameters $\\Theta,\\tau$. For each coordinate $j$, define the posterior log odds $L_j(S):=\\log\\bigl(\\mathbb P(\\Theta_j=+1\\mid S)/\\mathbb P(\\Theta_j=-1\\mid S)\\bigr)$; these probabilities are positive for every sample because $\\tau<1/2$. Then for every $j$ and every sample $S$,\n$$L_j(S)=\\log\\!\\left(\\frac{1+2\\tau}{1-2\\tau}\\right)\\sum_{i=1}^nY_iX_{ij}.$$Moreover, the coordinates of $\\Theta$ are conditionally independent given $S$. For every $0<\\delta<1$, with probability at least $1-\\delta$ over the joint prior-sample experiment,$$\\max_{1\\le j\\le d}|L_j(S)|\\le15\\tau\\sqrt{2n\\log\\!\\left(\\frac{2d}{\\delta}\\right)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-sign-sum-tail",
+          "source_section": "Statement",
+          "quote": "Let $\\xi_1,\\ldots,\\xi_m$ be independent random variables with values in $\\{-1,+1\\}$, let $c_1,\\ldots,c_m\\in\\mathbb R$, and put $V=\\sum_{i=1}^m c_i^2$ and $S=\\sum_{i=1}^m c_i(\\xi_i-\\mathbb E\\xi_i)$. For every $t>0$, if $V>0$ then\n$$\\mathbb P(S\\ge t)\\le e^{-t^2/(2V)},\\qquad \\mathbb P(S\\le-t)\\le e^{-t^2/(2V)},\\qquad \\mathbb P(|S|\\ge t)\\le2e^{-t^2/(2V)}.$$\nIf $V=0$, then $S=0$ almost surely and all three tail probabilities are zero. The empty sum $m=0$ is included with $V=S=0$.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-adversarial-threat-set-and-robust-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ and $(\\mathcal Y,\\Sigma_Y)$ be measurable spaces, let $\\mathcal A$ be a measurable action space, and let $P$ be a probability measure on $(\\mathcal X\\times\\mathcal Y,\\Sigma_X\\otimes\\Sigma_Y)$. A threat correspondence is a map $\\Delta:\\mathcal X\\to\\mathcal P(\\mathcal X)$ with $\\Delta(x)\\ne\\varnothing$ for every $x$. It is measurable when its graph $\\{(x,x')\\in\\mathcal X^2:x'\\in\\Delta(x)\\}$ belongs to $\\Sigma_X\\otimes\\Sigma_X$. For a measurable predictor $f:\\mathcal X\\to\\mathcal A$ and a nonnegative measurable loss $\\ell:\\mathcal A\\times\\mathcal Y\\to[0,+\\infty]$, the pointwise robust loss is\n$$L_{\\Delta,f}(x,y)=\\sup_{x'\\in\\Delta(x)}\\ell(f(x'),y).$$\nIts robust risk is the outer expectation\n$$R^{\\mathrm{rob}}_{P,\\Delta}(f)=\\mathbb E_P^*[L_{\\Delta,f}(X,Y)] :=\\inf\\{\\mathbb E_P[g(X,Y)]:g\\ge L_{\\Delta,f}\\text{ and }g\\text{ is nonnegative measurable}\\}.$$\nIf $L_{\\Delta,f}$ is measurable, this is its ordinary expectation. The supremum need not be attained. For a metric $\\rho$ on $\\mathcal X$ and a radius $\\epsilon\\ge0$, the closed-ball threat is $\\Delta_\\epsilon(x)=\\{x'\\in\\mathcal X:\\rho(x,x')\\le\\epsilon\\}$. On $\\mathbb R^d$, $\\|u\\|_\\infty:=\\max_{1\\le j\\le d}|u_j|$ and the $\\ell_\\infty$ threat is $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$. For a binary classifier $f:\\mathcal X\\to\\{-1,+1\\}$, the robust zero-one loss is $\\mathbf1\\{\\exists x'\\in\\Delta_\\epsilon(x):f(x')\\ne y\\}$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "alg-coordinate-threshold-preprocessing",
+          "source_section": "Definition",
+          "quote": "Input: an integer $d\\ge1$ and a vector $x\\in\\mathbb R^d$. Output $T(x)\\in\\{-1,+1\\}^d$ with\n$$T(x)_i= \\begin{cases} +1,&x_i\\ge0,\\\\ -1,&x_i<0 \\end{cases} \\qquad (1\\le i\\le d).$$",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the lower-bound branch put $\\Lambda=\\log(4d/\\gamma)$. Since $4d/\\gamma>8$ and $\\log8=3\\log2>3/2>1$ by [F5], the sample-size hypothesis and $\\epsilon<3\\tau$, $\\gamma<1/2$ imply $n<9/(20000\\tau^2)<\\tau^{-2}$. Apply [F2] with $\\delta=\\gamma/2$. With probability at least $1-\\gamma/2$ over $(\\Theta,S)$, every posterior log odds obeys $|L_j(S)|\\le B:=15\\tau\\sqrt{2n\\Lambda}$. Moreover $B\\le(3/10)\\epsilon\\gamma/\\tau<9/20<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the thresholded upper branch, fix $\\theta$ and a training pair $(X_0,Y_0)$. The signs $R_j=Y_0X_{0j}\\theta_j$ are independent with mean $2\\tau$ by [F1]. Apply [F3] with coefficients all one and $t=\\tau d$ to obtain $\\mathbb P(\\langle W,\\theta\\rangle\\le\\tau d)\\le e^{-\\tau^2d/2}$. Outside this event, $u=W/\\sqrt d$ is unit and $\\langle u,\\theta\\rangle>\\tau\\sqrt d$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $m_j(S)=\\mathbb E[\\Theta_j\\mid S]$. If $r_j=e^{L_j(S)}$ is the posterior odds, then $m_j=(r_j-1)/(r_j+1)$ by the inverse relation in [F5], so on the event in step 1.1, $|m_j|\\le(e^B-1)/2$. For $0\\le x\\le1$, [F6] and $x^k\\le x$ give $e^x-1\\le x\\sum_{k\\ge1}1/k!=(e-1)x<2x$: indeed induction using $k+1\\ge2$ gives $k!\\ge2^{k-1}$ for $k\\ge1$, strictly for some $k$, so $e<1+1+\\sum_{k\\ge2}2^{-(k-1)}=3$. Therefore $|m_j|\\le B$. Set $a:=2\\tau B=30\\tau^2\\sqrt{2n\\Lambda}$. The sample-size condition yields $a\\le(3/5)\\epsilon\\gamma<9\\tau/10\\le9/40<1$ and $a/\\gamma\\le3\\epsilon/5<\\epsilon$ when $\\epsilon>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix a sample $S$ in the event of step 1.1 and its learned vector $w$. Conditional on $S$, the posterior coordinates $\\Theta_j$ are independent by [F2]. For a fresh pair put $Q_j=YX_j$. Conditional on $\\Theta_j=t$, $Q_j=t$ with probability $1/2+\\tau$ and $Q_j=-t$ with probability $1/2-\\tau$, independently across coordinates and independently of the value of $Y$. Averaging over the product posterior shows that the $Q_j$ are independent of one another and of $Y$, with $\\mathbb E[Q_j\\mid S]=2\\tau m_j(S)$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "For a fresh pair, the signs $R_j=YX_j\\theta_j$ are independent with mean $2\\tau$. The signed margin of $f_W$ is $Y\\langle u,X\\rangle=\\sum_j u_j\\theta_jR_j$, whose mean is $2\\tau\\langle u,\\theta\\rangle$ and whose centered coefficient square-sum is $\\sum_j(u_j\\theta_j)^2=1$. If $f_W(X)\\ne Y$, then this signed margin is at most zero under the stated tie rule. By [F3], its probability is at most $\\exp(-2\\tau^2\\langle u,\\theta\\rangle^2)\\le e^{-2\\tau^4d}\\le\\beta$, where the last inequality is the assumed lower bound on $\\tau$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $j$ with $w_j\\ne0$, the sign $V_j:=\\operatorname{sgn}(w_j)Q_j$ has mean at most $a$ and is supported on $\\{-1,+1\\}$. Couple independent signs $E_j$ of mean $a$ using independent uniform variables so that $V_j\\le E_j$ coordinatewise: if $p_j=\\mathbb P(V_j=+1\\mid S)\\le(1+a)/2$, use the same uniform variable to set $V_j=+1$ below $p_j$ and $E_j=+1$ below $(1+a)/2$. Coordinates with $w_j=0$ contribute zero. Thus the margin $M:=\\sum_jw_jQ_j$ is stochastically at most $\\widetilde M:=\\sum_j|w_j|E_j$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Represent each $E_j=A_j+B_j$, where $A_j$ is Bernoulli with mean $a$, $B_j=0$ if $A_j=1$, and conditional on $A_j=0$, $B_j$ is a uniform sign. Then $\\mathbb E\\sum_j|w_j|A_j=a\\|w\\|_1$. If $w\\ne0$ and $a>0$, [F4] gives $\\mathbb P(\\sum_j|w_j|A_j>a\\|w\\|_1/\\gamma)\\le\\gamma$. Conditional on the vector $(A_j)$, the sum $\\sum_j|w_j|B_j$ is symmetric about zero, so it is nonpositive with probability at least $1/2$. Hence $\\mathbb P(\\widetilde M\\le a\\|w\\|_1/\\gamma)\\ge(1-\\gamma)/2$, and step 3.1 gives the same lower bound for $\\mathbb P(M\\le a\\|w\\|_1/\\gamma\\mid S)$. The same conclusion holds if $a=0$ by taking $A_j=0$ surely. If $w=0$, the constant classifier has robust error $1/2$ under the balanced labels.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $\\epsilon>0$ and $w\\ne0$. On the event in step 4.1, step 2.1 gives $M\\le(a/\\gamma)\\|w\\|_1<\\epsilon\\|w\\|_1$. For the fresh label $Y$, choose $\\delta_j=-\\epsilon Y$ if $w_j>0$, choose $\\delta_j=+\\epsilon Y$ if $w_j<0$, and choose $\\delta_j=0$ if $w_j=0$. By [F8], $\\|\\delta\\|_\\infty\\le\\epsilon$ and $Y\\langle w,X+\\delta\\rangle=M-\\epsilon\\|w\\|_1<0$, so this perturbation misclassifies. Thus on every good training sample the posterior-averaged robust risk is at least $(1-\\gamma)/2$. If $\\epsilon=0$, the sample-size hypothesis forces $n=0$; after averaging the uniform prior, $X$ is uniform on the hypercube independently of $Y$, so every classifier has natural and robust error $1/2$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The good training-sample event has probability at least $1-\\gamma/2$ by step 1.1. The expected robust risk is therefore at least $(1-\\gamma/2)(1-\\gamma)/2\\ge1/2-\\gamma$, since the difference is $\\gamma/4+\\gamma^2/4\\ge0$. The zero-weight and $\\epsilon=0$ cases in step 5.1 satisfy the same final bound.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "If $x\\in\\{-1,+1\\}^d$ and $\\|\\delta\\|_\\infty\\le\\epsilon<1$, then $x_j+\\delta_j>0$ when $x_j=+1$ and $x_j+\\delta_j<0$ when $x_j=-1$. By [F9], $T(x+\\delta)=x$ coordinatewise. Thus every allowed adversarial perturbation leaves $f_W(T(x+\\delta))=f_W(x)$, so its robust error equals the natural error bounded in step 2.3. The failure probability is at most $e^{-\\tau^2d/2}$ by step 1.2.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.3",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: The lower branch permits n=0; steps 4.1–5.1 handle a=0 and the prior-only case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 treats ε=0, which forces n=0, and the constant-weight case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: Both Bernoulli branches allow d=1; steps 1.1 and 1.2 are coordinatewise and include it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The upper branch includes τ=1/2 (deterministic coordinate noise), while the lower branch restricts τ≤1/4; the sign-tail proof permits degenerate sign laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 5.1 and 7.1 preserve the strict ε<3τ and ε<1 boundaries; τ endpoints are separated by branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Both branches are finite or use finite sign sums and declare no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "no-sample one-dimensional lower branch",
+          "method": "exact finite enumeration",
+          "input": {
+            "d": 1,
+            "n": 0,
+            "tau": "1/4",
+            "epsilon": "1/8",
+            "gamma": "1/4"
+          },
+          "calculation": "The sample-size premise holds because n=0. Averaging the uniform parameter prior makes X independent of Y, so every fixed linear classifier has natural and radius-1/8 robust error 1/2, above the claimed lower target 1/4."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-gaussian-robust-risk-dimension-radius-scaling": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-robust-sample-upper-bound-gaussian-mixture",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d,n\\ge1$ be integers, let $\\theta\\in\\mathbb R^d$ satisfy $\\|\\theta\\|_2=\\sqrt d$, let $\\sigma>0$, and draw independent training pairs $(X_i,Y_i)_{i=1}^n$ from the two-class spherical Gaussian model with parameters $\\theta,\\sigma$. Set $W=n^{-1}\\sum_{i=1}^nY_iX_i$ and let $f_W(x)=+1$ when $\\langle W,x\\rangle\\ge0$ and $f_W(x)=-1$ otherwise. For $0<\\beta<1$, if\n$$0\\le\\epsilon\\le\\frac{2\\sqrt n-1}{2\\sqrt n+4\\sigma}-\\frac{\\sigma\\sqrt{2\\log(1/\\beta)}}{\\sqrt d},$$\nthen with probability at least $1-2\\exp(-d/(8(\\sigma^2+1)))$ over the training sample, the $\\ell_\\infty$ robust risk of $f_W$ under $P_{\\theta,\\sigma}$ at radius $\\epsilon$ is at most $\\beta$.\n\nIn particular, if $\\sigma\\le d^{1/4}/32$, then each of the following two conditions is sufficient for $\\ell_\\infty$ robust risk at most $1/100$ with the same training-sample probability:\n\n- $0\\le\\epsilon\\le(1/4)d^{-1/4}$ and $n\\ge1$;\n- $(1/4)d^{-1/4}\\le\\epsilon\\le1/4$ and $n\\ge64\\epsilon^2\\sqrt d$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-robust-sample-lower-bound-gaussian-mixture",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, let $n\\ge0$ be an integer, let $\\sigma>0$ and $\\epsilon\\ge0$, draw $\\Theta\\sim N_d(0,I_d)$, and, conditional on $\\Theta$, draw $n$ independent training pairs $S=((X_i,Y_i))_{i=1}^n$ from the two-class spherical Gaussian model with parameters $\\Theta,\\sigma$. Let $\\mathcal S_n=(\\mathbb R^d\\times\\{-1,+1\\})^n$, and let $F:\\mathcal S_n\\times\\mathbb R^d\\to\\{-1,+1\\}$ be a Borel learning rule; write $f_S(x)=F(S,x)$. Define $m(S)=(\\sigma^2+n)^{-1}\\sum_{i=1}^nY_iX_i$, with the empty sum equal to zero. Define the expected robust risk as the outer expectation over $(\\Theta,S)$ of $R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)$, using the same measurable-majorant convention as robust risk; when this random robust risk is measurable, this is its ordinary expectation. Then\n$$\\mathbb E^*_{\\Theta,S}\\!\\left[R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)\\right]\\ge\\frac12\\,\\mathbb P_{V\\sim N_d(0,I_d)}\\!\\left(\\sqrt{\\frac{n}{\\sigma^2+n}}\\,\\|V\\|_\\infty\\le\\epsilon\\right).$$Consequently, if $d\\ge2$ and $n\\le\\epsilon^2\\sigma^2/(8\\log d)$, then$$\\mathbb E^*_{\\Theta,S}\\!\\left[R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)\\right]\\ge\\frac12\\left(1-\\frac1d\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The chosen variance satisfies $\\sigma=d^{1/4}/32$, and $d\\ge2$ makes $1/(4d^{1/4})\\le1/4=\\epsilon$. The upper-bound condition becomes $n\\ge64(1/4)^2\\sqrt d=4\\sqrt d$. Apply [F1] to obtain the first assertion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the lower bound, $\\epsilon^2\\sigma^2/(8\\log d)=(1/16)(\\sqrt d/1024)/(8\\log d)=\\sqrt d/(131072\\log d)$. Thus the stated lower sample-size condition is exactly the premise of [F2], which gives the second assertion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: The lower-bound branch permits n=0; the upper sufficient bound requires n≥4√d."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes ε=1/4 and σ=d¹/⁴/32, both positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example gives dimension-dependent sample thresholds and makes no separate n=1 claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The chosen Gaussian variance is strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Steps 1.1–2.1 use inclusive sample-size thresholds and d≥2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 declares AC inherited from both Gaussian theorem suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-bernoulli-perturbations-preserve-signs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-binary-feature-bernoulli-model",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $\\theta\\in\\{-1,+1\\}^d$, and let $0<\\tau\\le1/2$. The $(\\theta,\\tau)$ binary-feature Bernoulli model is the probability law $P_{\\theta,\\tau}$ on $\\{-1,+1\\}^d\\times\\{-1,+1\\}$ defined by\n$$P_{\\theta,\\tau}(\\{(x,y)\\})=\\frac12\\prod_{j=1}^d\\left[\\left(\\frac12+\\tau\\right)\\mathbf1_{\\{x_j=y\\theta_j\\}}+\\left(\\frac12-\\tau\\right)\\mathbf1_{\\{x_j=-y\\theta_j\\}}\\right].$$\nThus $Y$ is uniform on $\\{-1,+1\\}$ and, conditional on $Y=y$, the feature coordinates are independent, with $X_j=y\\theta_j$ with probability $1/2+\\tau$ and $X_j=-y\\theta_j$ with probability $1/2-\\tau$. The displayed masses sum to one because each coordinate factor sums to one over its two possible signs and the label weights sum to one. The uniform-prior experiment used below draws $\\Theta$ uniformly from $\\{-1,+1\\}^d$ and then draws observations conditionally independently from $P_{\\Theta,\\tau}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-coordinate-threshold-preprocessing",
+          "source_section": "Definition",
+          "quote": "Input: an integer $d\\ge1$ and a vector $x\\in\\mathbb R^d$. Output $T(x)\\in\\{-1,+1\\}^d$ with\n$$T(x)_i= \\begin{cases} +1,&x_i\\ge0,\\\\ -1,&x_i<0 \\end{cases} \\qquad (1\\le i\\le d).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adversarial-threat-set-and-robust-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ and $(\\mathcal Y,\\Sigma_Y)$ be measurable spaces, let $\\mathcal A$ be a measurable action space, and let $P$ be a probability measure on $(\\mathcal X\\times\\mathcal Y,\\Sigma_X\\otimes\\Sigma_Y)$. A threat correspondence is a map $\\Delta:\\mathcal X\\to\\mathcal P(\\mathcal X)$ with $\\Delta(x)\\ne\\varnothing$ for every $x$. It is measurable when its graph $\\{(x,x')\\in\\mathcal X^2:x'\\in\\Delta(x)\\}$ belongs to $\\Sigma_X\\otimes\\Sigma_X$. For a measurable predictor $f:\\mathcal X\\to\\mathcal A$ and a nonnegative measurable loss $\\ell:\\mathcal A\\times\\mathcal Y\\to[0,+\\infty]$, the pointwise robust loss is\n$$L_{\\Delta,f}(x,y)=\\sup_{x'\\in\\Delta(x)}\\ell(f(x'),y).$$\nIts robust risk is the outer expectation\n$$R^{\\mathrm{rob}}_{P,\\Delta}(f)=\\mathbb E_P^*[L_{\\Delta,f}(X,Y)] :=\\inf\\{\\mathbb E_P[g(X,Y)]:g\\ge L_{\\Delta,f}\\text{ and }g\\text{ is nonnegative measurable}\\}.$$\nIf $L_{\\Delta,f}$ is measurable, this is its ordinary expectation. The supremum need not be attained. For a metric $\\rho$ on $\\mathcal X$ and a radius $\\epsilon\\ge0$, the closed-ball threat is $\\Delta_\\epsilon(x)=\\{x'\\in\\mathcal X:\\rho(x,x')\\le\\epsilon\\}$. On $\\mathbb R^d$, $\\|u\\|_\\infty:=\\max_{1\\le j\\le d}|u_j|$ and the $\\ell_\\infty$ threat is $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$. For a binary classifier $f:\\mathcal X\\to\\{-1,+1\\}$, the robust zero-one loss is $\\mathbf1\\{\\exists x'\\in\\Delta_\\epsilon(x):f(x')\\ne y\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-architecture-dependent-robustness-binary-feature-model",
+          "source_section": "Statement",
+          "quote": "For $w\\in\\mathbb R^d$, let $f_w(x)=+1$ when $\\langle w,x\\rangle\\ge0$ and $f_w(x)=-1$ otherwise. In the following lower-bound branch, let $d\\ge1$, $0<\\tau\\le1/4$, $0<\\gamma<1/2$, and $0\\le\\epsilon<3\\tau$. Draw $\\Theta$ uniformly from $\\{-1,+1\\}^d$ and, conditional on $\\Theta$, draw $n\\ge0$ independent training observations $S$ from the binary-feature Bernoulli model with parameters $\\Theta,\\tau$. Let $g_n$ be any function from the finite sample space to $\\mathbb R^d$, set $w=g_n(S)$, and use $f_w$. If\n$$n\\le\\frac{\\epsilon^2\\gamma^2}{5000\\tau^4\\log(4d/\\gamma)},$$\nthen the expected robust risk for the closed threat $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$ of $f_w$, averaged over $\\Theta,S$, and a fresh test pair from $P_{\\Theta,\\tau}$, is at least $1/2-\\gamma$.\n\nIn the separate thresholded upper-bound branch, let $d\\ge1$, $0<\\tau\\le1/2$, $0<\\beta<1$, and let $\\theta\\in\\{-1,+1\\}^d$ satisfy $\\tau\\ge(\\log(1/\\beta)/(2d))^{1/4}$. Draw one training pair $(X_0,Y_0)$ from $P_{\\theta,\\tau}$, set $W=Y_0X_0$, and define $T:\\mathbb R^d\\to\\{-1,+1\\}^d$ by $T(x)_j=+1$ when $x_j\\ge0$ and $T(x)_j=-1$ otherwise. Then for every $0\\le\\epsilon<1$, with training-sample probability at least $1-e^{-\\tau^2d/2}$, the robust risk for the closed threat $\\Delta_\\epsilon(x)=\\{x+\\delta:\\|\\delta\\|_\\infty\\le\\epsilon\\}$ of $f_W\\circ T$ under $P_{\\theta,\\tau}$ is at most $\\beta$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x\\in\\{-1,+1\\}^d$ and any $\\delta$ with $\\|\\delta\\|_\\infty\\le\\epsilon<1$. If $x_j=+1$, then $x_j+\\delta_j\\ge1-\\epsilon>0$, so [F2] gives $T(x+\\delta)_j=+1=x_j$. If $x_j=-1$, then $x_j+\\delta_j\\le-1+\\epsilon<0$, so $T(x+\\delta)_j=-1=x_j$. Hence $T(x+\\delta)=x$ for every admissible perturbation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each support point $(x,y)$, every allowed perturbation therefore makes $g(T(x+\\delta))=g(x)$. The robust zero-one loss of $g\\circ T$ equals $\\mathbf1\\{g(x)\\ne y\\}$ pointwise. Taking expectation under $P_{\\theta,\\tau}$ proves the displayed equality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the final $\\tau,\\beta$ condition, [F4] gives the one-sample risk bound for $f_{Y_0X_0}\\circ T$ with the stated probability. The pointwise identity in step 2.1 explains why every radius $\\epsilon<1$ has the same risk.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d≥1 and does not treat an empty feature space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The radius ε=0 is included; step 1.1 then uses the zero perturbation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the single-coordinate case d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The model endpoint τ=1/2 is allowed, and the sign-preservation calculation does not require nondegenerate feature noise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hypothesis ε<1 is strict and is used in step 1.1 to keep every perturbed coordinate away from zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: The argument is coordinatewise and the finite model branch is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-coordinate threshold at the radius boundary",
+          "method": "exact endpoint calculation",
+          "input": {
+            "d": 1,
+            "epsilon": "9/10",
+            "x": [
+              "+1",
+              "-1"
+            ]
+          },
+          "calculation": "For x=+1 the smallest perturbed value is 1/10>0; for x=-1 the largest is -1/10<0. Thus T returns x for both vertices at every allowed perturbation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-natural-and-robust-risk-on-gaussian-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-one-sample-natural-classification-error-gaussian-mixture",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, let $\\theta\\in\\mathbb R^d$ satisfy $\\|\\theta\\|_2=\\sqrt d$, let $0<\\beta<1$, and let $\\sigma>0$ satisfy $\\sigma\\le d^{1/4}/(5\\sqrt{\\log(1/\\beta)})$. Draw one training pair $(X_0,Y_0)$ from the two-class spherical Gaussian model with parameters $\\theta,\\sigma$. Set $W=Y_0X_0$ and define the unit vector $\\widehat W=W/\\|W\\|_2$ for $W\\ne0$ and $\\widehat W=e_1$ for $W=0$. Define $h_u(x)=+1$ when $\\langle u,x\\rangle\\ge0$ and $h_u(x)=-1$ otherwise, and define its natural error by $\\operatorname{err}_{\\theta,\\sigma}(u)=\\mathbb P_{(X,Y)\\sim P_{\\theta,\\sigma}}(h_u(X)\\ne Y)$. Then\n$$\\mathbb P_{(X_0,Y_0)\\sim P_{\\theta,\\sigma}}\\!\\left(\\operatorname{err}_{\\theta,\\sigma}(\\widehat W)\\le\\beta\\right)\\ge1-2\\exp\\!\\left(-\\frac{d}{8(\\sigma^2+1)}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-robust-sample-lower-bound-gaussian-mixture",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be an integer, let $n\\ge0$ be an integer, let $\\sigma>0$ and $\\epsilon\\ge0$, draw $\\Theta\\sim N_d(0,I_d)$, and, conditional on $\\Theta$, draw $n$ independent training pairs $S=((X_i,Y_i))_{i=1}^n$ from the two-class spherical Gaussian model with parameters $\\Theta,\\sigma$. Let $\\mathcal S_n=(\\mathbb R^d\\times\\{-1,+1\\})^n$, and let $F:\\mathcal S_n\\times\\mathbb R^d\\to\\{-1,+1\\}$ be a Borel learning rule; write $f_S(x)=F(S,x)$. Define $m(S)=(\\sigma^2+n)^{-1}\\sum_{i=1}^nY_iX_i$, with the empty sum equal to zero. Define the expected robust risk as the outer expectation over $(\\Theta,S)$ of $R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)$, using the same measurable-majorant convention as robust risk; when this random robust risk is measurable, this is its ordinary expectation. Then\n$$\\mathbb E^*_{\\Theta,S}\\!\\left[R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)\\right]\\ge\\frac12\\,\\mathbb P_{V\\sim N_d(0,I_d)}\\!\\left(\\sqrt{\\frac{n}{\\sigma^2+n}}\\,\\|V\\|_\\infty\\le\\epsilon\\right).$$Consequently, if $d\\ge2$ and $n\\le\\epsilon^2\\sigma^2/(8\\log d)$, then$$\\mathbb E^*_{\\Theta,S}\\!\\left[R^{\\mathrm{rob}}_{P_{\\Theta,\\sigma},\\Delta_\\epsilon}(f_S)\\right]\\ge\\frac12\\left(1-\\frac1d\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $100<256=2^8$ and $\\log2=\\int_1^2dx/x<1$, [F3] gives $\\log100<8$. Hence $5\\sqrt{\\log100}<5\\sqrt8<32$, so $\\sigma=d^{1/4}/32\\le d^{1/4}/(5\\sqrt{\\log100})$. Apply [F1] with $\\beta=1/100$ to get the fixed-parameter natural-risk assertion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We have $2^{10}=1024>10^3$, hence $2^{47}=2^7(2^{10})^4>128\\cdot10^{12}>10^{14}=d$. Since $\\log2<1$, [F3] gives $\\log d<\\log(2^{47})=47\\log2<47$. Therefore $\\frac{\\epsilon^2\\sigma^2}{8\\log d}=\\frac{\\sqrt d}{131072\\log d}>\\frac{10^7}{131072\\cdot47}>1=n$, where $131072\\cdot47=6{,}160{,}384<10{,}000{,}000$. Since $d\\ge2$, [F2] applies and proves the Gaussian-prior robust-risk lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes d=10¹⁴ and n=1, so an empty dimension or sample is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes β=1/100, ε=1/4, and σ>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-sample natural-risk conclusion is exactly the n=1 case in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The chosen Gaussian variance is strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the inclusive lower sample-size condition n≤ε²σ²/(8 log d)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: A1 declares AC inherited from the Gaussian model and both risk-bound suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: this claim is a one-way result and has no iff-reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

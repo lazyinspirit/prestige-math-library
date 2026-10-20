@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-finite-set-has-max.json
   precheck: pass
   verified:
     model: gpt-5.6-sol-codex-subscription
@@ -38,7 +39,7 @@ pipeline_run: null
 ## Statement
 
 For every $n \in \mathbb{N}$ and all $a_0, a_1, \dots, a_n \in \mathbb{R}$, the
-set $\{a_0, a_1, \dots, a_n\}$ has a maximum and a minimum ([[def-max-min]]).
+set $\{a_0, a_1, \dots, a_n\}$ has a maximum and a minimum (Maximum and minimum of a set).
 
 What is proved below is exactly the displayed statement, by induction on $n$.
 
@@ -47,13 +48,19 @@ maximum and a minimum*, follows once one identifies the nonempty finite subsets
 of $\mathbb{R}$ with the sets listable as $\{a_0, \dots, a_n\}$. That
 identification is recorded as a stipulation in the Given below, because this page
 has no definition of finiteness to prove it against. **It is discharged, not
-merely assumed**: [[lem-finite-subsets-listable]] proves that the two
+merely assumed**: The nonempty finite subsets of $\mathbb{R}$ are exactly the listable ones proves that the two
 descriptions of a nonempty finite subset of $\mathbb{R}$ agree. That lemma is
 recorded in `justified_by` rather than in `deps`, since it is about the sets this
 lemma quantifies over and therefore depends on this one. This is what licenses
 the notation
 $\max\{a_1, \dots, a_n\}$ and $\min\{a_1, \dots, a_n\}$ for finite sets of
 **real** numbers from this page onwards.
+
+## Statement references
+
+[[def-max-min]]
+
+[[lem-finite-subsets-listable]]
 
 ## Facts & Assumptions
 

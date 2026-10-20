@@ -14,13 +14,14 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-ito-integral-of-an-elementary-predictable-process.json
   audited: 2026-09-22
 ---
 
 ## Definition
 
 Assume the Axiom of Choice and work under the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]: a filtered probability space
+Elementary predictable Brownian integrands: a filtered probability space
 with a standard Brownian motion $B$ adapted to the filtration, with increments
 $B_t-B_s$ independent of $\mathcal F_s$ of law $N(0,t-s)$. Fix $T>0$ and an
 elementary predictable integrand
@@ -56,7 +57,7 @@ Three conventions are part of the definition.
 
 3. **Dependence on the representation is temporary.** The definition attaches
    $I_t(H)$ to a *chosen* elementary representation.
-   [[lem-elementary-ito-integral-is-independent-of-the-step-representation]] proves that
+   Elementary Ito integrals do not depend on step representation proves that
    two representations that agree $(\mathrm dt\otimes P)$-almost everywhere
    produce the same random variables almost surely at each fixed time, so that
    $I_t(H)$ is a function of the $(\mathrm dt\otimes P)$-class of $H$ alone.
@@ -65,6 +66,13 @@ Three conventions are part of the definition.
 
 The Axiom of Choice is declared because the standing hypothesis (H) is part of
 the Brownian interface of
-[[def-elementary-predictable-brownian-integrand]], which assumes it; the
+Elementary predictable Brownian integrands, which assumes it; the
 definition of the finite sum uses no choice. The countable-choice obligations
 inherited from that interface are declared as dependencies of this item.
+
+## Definition references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[lem-elementary-ito-integral-is-independent-of-the-step-representation]]
+

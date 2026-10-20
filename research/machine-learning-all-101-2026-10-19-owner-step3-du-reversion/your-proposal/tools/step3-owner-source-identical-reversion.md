@@ -1,0 +1,15 @@
+# Source-identical native reversion with an added risk review
+
+The ordinary `reverted_change` rule remains strict equality to the pre-reader carrier. `source_identical_reversions` in the version-1 run owner repair evidence is an explicit opt-in for the authenticated batch45 DU reversion. Policy `step3-source-identical-reversion-risk-only-v1` supplies continuity evidence, never a new verdict, proof review, ledger disposition or native coverage claim.
+
+This first policy deliberately supports only `machine-learning-all-101-2026-10-19`, batch45, `lem-du-neighborhood-gram-and-hessian-control`. It pins the actual immutable successful Alpha result and prompt, completed report, generated assignment, original complete decision archive and PRE snapshot/full source/full manifest/full contract. Each evidence reference must match the known native case bytes; regular files and nonsymlink paths are required. No operational log or transcript reference is added to the registry or closure.
+
+The original and current decision must have identical semantics, including verdict, evidence and defect IDs. Only `subject_sha256` may differ through ordinary root restamping. The target must remain the original nonadded, nonstabilized touched obligation. The current carrier and target are independently bound by the evidence entry.
+
+Current source bytes must equal the full authenticated PRE source. The unique current manifest item with its page identity must equal the PRE projection. The selected PRE contract must match the original snapshot. PRE must have no `risk_review`; removing that one added key from the current contract must reproduce the complete PRE contract. The added review must be the exact complete native Alpha45 review, with its original reviewer and notes. Any other contract change fails. Whole archive files remain authenticated, while equality concerns the assigned item's selected projections rather than unrelated batch rows.
+
+The helper only answers this carrier-comparison question. Ordinary decision stamping, native success/authentication, ledger ownership/disposition, risk checks, scope routing, source validation and all gates remain required. Invalid or absent opt-in evidence cannot authorize a reversion exception. The original findings, native decisions and append-only history remain unchanged.
+
+Root integrates the two exact substring operations in `integration-operations.json`, installs the new module/docs/tests, then independently approves and merges `evidence-entry.json` as one entry in `source_identical_reversions`, preserving other registry keys. No full-file scope or registry replacement is proposed.
+
+Run the focused test with `node --test tools/step3-owner-source-identical-reversion.test.mjs`. Its actual-native cases use the separately archived operational fixture under `research/machine-learning-all-101-2026-10-19-owner-step3-du-reversion/your-proposal/`; they explicitly skip when that optional fixture is unavailable. The absent-registration fail-closed test always runs. Recorded operational results are fixture checks, not native gates or mathematical acceptance.

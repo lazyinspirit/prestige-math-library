@@ -1,0 +1,159 @@
+[
+  {
+    "kind": "item",
+    "consumer": "def-pac-mdp-bounded-reward-model",
+    "supplier": "def-finite-markov-decision-process",
+    "status": "verified",
+    "supplier_status": "draft",
+    "current_readiness": "ready",
+    "evidence": "Inspected the current supplier Definition body and its target formula/interface. The existing ordinary full-run Step-1 record is closed and ready; this verifies the interface, not independent acceptance.",
+    "required_hypotheses": "Finite state set, finite nonempty state-dependent action sets, normalized joint next-state/reward law. The supplier’s finite reward alphabet is deliberately replaced by the local Borel kernel on [0,1].",
+    "affected_claims": [
+      "def-pac-mdp-bounded-reward-model: imports only the finite state/action skeleton, admissible pairs, and the joint next-state/reward convention; its Borel [0,1] reward law is supplied locally."
+    ],
+    "local_route": "The local definition explicitly constructs the Borel product model and keeps the finite state/action hypotheses; it does not use the finite-reward support restriction.",
+    "supplier_excerpt_ref": "def-finite-markov-decision-process",
+    "readiness_record": {
+      "item": "def-finite-markov-decision-process",
+      "decision": "ready",
+      "owner": true,
+      "sha256": "c2dab4d4007e619d36bc9db7ff372df846764d7a905c92f0a19c6c2bc50079c7",
+      "at": "2026-10-18T21:55:41.640Z"
+    },
+    "readiness_evidence": "The current item record is ready and has owner:true; that existing owner decision is recorded without treating it as a new review.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-delayed-q-learning",
+    "supplier": "alg-q-learning",
+    "status": "verified",
+    "supplier_status": "draft",
+    "current_readiness": "ready",
+    "evidence": "Inspected the current supplier Definition body and its target formula/interface. The existing ordinary full-run Step-1 record is closed and ready; this verifies the interface, not independent acceptance.",
+    "required_hypotheses": "Finite state/action domain and 0<=gamma<1. The reward/next-state sample is drawn from the local bounded joint kernel; no reward-next-state independence is used.",
+    "affected_claims": [
+      "alg-delayed-q-learning: uses the one-step target R+gamma max_b Q(S',b) and updates only the visited coordinate; it asserts no convergence result."
+    ],
+    "local_route": "The local algorithm batches the exact sampled Q-learning target over its fixed m experiences and makes no claim about convergence.",
+    "supplier_excerpt_ref": "alg-q-learning",
+    "readiness_record": {
+      "item": "alg-q-learning",
+      "decision": "ready",
+      "owner": false,
+      "sha256": "021ab61a604d1d75d83661b58906ce977c1ade12030c87f1228eb4d58305d620",
+      "at": "2026-10-18T22:15:36.041Z"
+    },
+    "readiness_evidence": "The current item record is ready and hash-current in the ordinary full-run snapshot.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "pac-mdp-exploration",
+    "supplier": "martingale-inequalities-and-convergence",
+    "status": "verified",
+    "supplier_status": "published",
+    "current_readiness": "published",
+    "evidence": "Inspected the actual published page and complete relevant supplier proofs for conditional Hoeffding and Azuma; the page is published. This is a prerequisite record, not a new approval.",
+    "required_hypotheses": "Conditional Hoeffding is used under AC with predictable finite endpoints of deterministic width; Azuma is used for a martingale with predictable increment endpoints and the stated width sequence. These hypotheses are checked in the local concentration proof.",
+    "affected_claims": [
+      "lem-pac-mdp-adaptive-sample-concentration: conditional bounded-target tail and empirical transition concentration."
+    ],
+    "local_route": "The local lemma verifies the endpoint/range hypotheses for rewards, transition indicators, the Doob martingale, and the predictable batch target before invoking the published inequalities.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "page",
+    "consumer": "pac-mdp-exploration",
+    "supplier": "tabular-prediction-and-control",
+    "status": "verified",
+    "supplier_status": "draft",
+    "current_readiness": "current-ready; page remains draft",
+    "evidence": "The actual draft page and direct alg-q-learning target/interface body were inspected. The final full-run Step-1 check has no outstanding row for this page or its item inventory. This records current authoring readiness only, not independent mathematical approval.",
+    "required_hypotheses": "The direct imported item is alg-q-learning: finite discounted MDP with 0<=gamma<1 and its sampled reward/next-state target. Batch 82 imports no convergence claim or convergence hypothesis from the unrelated theorem.",
+    "affected_claims": [
+      "alg-delayed-q-learning: uses the Q-learning sampled target and updates only the visited coordinate; it asserts no convergence result.",
+      "pac-mdp-exploration: its required tabular page has current authoring-readiness records in the final full-run check; no Q-learning convergence theorem is used."
+    ],
+    "local_route": "Batch 82 proves its own bounded-reward model, exploration algorithms, and PAC bounds. The current page-level readiness is recorded from the native check, with no separate proof review or acceptance claimed.",
+    "readiness_record": {
+      "item": "thm-tabular-q-learning-convergence-under-robbins-monro-conditions",
+      "decision": "ready",
+      "owner": false,
+      "sha256": "f3ca80334e72a2317164e9d9dc4772ee85e975c7627056e478b4d9f8e75b67dc",
+      "at": "2026-10-18T22:54:24.537Z"
+    },
+    "readiness_evidence": "The stored Q-learning convergence item record is ready and hash-current in the final full-run check; no outstanding item row is reported for tabular-prediction-and-control. This is workflow readiness, not independent mathematical approval.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-zero-tolerance-pac-mdp-boundary",
+    "supplier": "def-finite-probability-space-and-event",
+    "status": "verified",
+    "supplier_status": "published",
+    "evidence": "Current proposal independently inspected the actual complete supplier interface and the used proof, where applicable; this is mathematical use review, not readiness or native gate credit.",
+    "required_hypotheses": "Finite nonnegative weights summing to one.",
+    "affected_claims": [
+      "thm-zero-tolerance-pac-mdp-boundary: finite coupling and zero-tolerance impossibility"
+    ],
+    "local_route": "Finite length-T coupling is built from normalized conditional weights; no infinite coupled process is invoked.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-zero-tolerance-pac-mdp-boundary",
+    "supplier": "lem-finite-sum-laws",
+    "status": "verified",
+    "supplier_status": "published",
+    "evidence": "Current proposal independently inspected the actual complete supplier interface and the used proof, where applicable; this is mathematical use review, not readiness or native gate credit.",
+    "required_hypotheses": "Finite sums/products of real weights and finite indices.",
+    "affected_claims": [
+      "thm-zero-tolerance-pac-mdp-boundary: finite coupling and zero-tolerance impossibility"
+    ],
+    "local_route": "Multiply conditional weights, sum marginals, and bound finite unions using finite-sum monotonicity. Full actual proof independently read.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-zero-tolerance-pac-mdp-boundary",
+    "supplier": "thm-of-archimedean",
+    "status": "verified",
+    "supplier_status": "published",
+    "evidence": "Current proposal independently inspected the actual complete supplier interface and the used proof, where applicable; this is mathematical use review, not readiness or native gate credit.",
+    "required_hypotheses": "A finite real bound in an ordered real field.",
+    "affected_claims": [
+      "thm-zero-tolerance-pac-mdp-boundary: finite coupling and zero-tolerance impossibility"
+    ],
+    "local_route": "Select a natural T>2B; full actual proof independently read.",
+    "alpha_review": {
+      "reviewer": "alpha-batch-82",
+      "status": "reviewed_no_defect",
+      "evidence": "Current supplier interface and owned consumer actual use independently checked; finite-alphabet contextual definitions are not substituted for the Borel reward law. Conditional endpoint/AC hypotheses checked for concentration uses. See research/machine-learning-all-101-2026-10-19-alpha-batch-82-3a.md."
+    }
+  }
+]

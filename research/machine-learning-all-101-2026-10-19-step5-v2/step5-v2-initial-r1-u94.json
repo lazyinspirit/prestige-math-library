@@ -1,0 +1,96 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "94",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-attention-block-summary",
+      "model": "gpt-6-luna",
+      "context_sha256": "3a01905a50f6f7b19a9b759c770d449047f3bbb0c85327f9430b8b5acb637f73",
+      "outcome": "false_positive",
+      "reason": "The Definition explicitly fixes the local scores s_ij=c sum_r Q_ir K_jr for arbitrary real c; it does not assert equality to Attn(Q,K,V) at the supplier's standard scale. Its final phrase refers to softmax attention on these specified scores. For nonempty S, ell>0 and cancelling exp(-m) gives z/ell=(sum_S exp(s_ij)v_j)/(sum_S exp(s_ij)). This is also the supplier's standard attention applied to queries c sqrt(d) Q and keys restricted to S, including c=0 or negative c. The supplier supplies the row-softmax and nonempty-mask convention, not a restriction on the locally declared c. No mathematical defect is confirmed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-tiled-attention-two-merge-orders",
+      "model": "gpt-6-luna",
+      "context_sha256": "8c9575a76d5249e6178976adb83d57a12274ef72bc1bdcb0a3f408067ba80bea",
+      "outcome": "false_positive",
+      "reason": "The exactness theorem's Statement identifies Y as the forward output of alg-exact-tiled-softmax-attention, whose Forward procedure step 3 writes Y_i=z_i/ell_i. The theorem's Proof 1.1 establishes the summary invariant and 2.1 explicitly divides z_i by ell_i to obtain dense masked attention. Thus F2 is a valid consequence in the named theorem's stated algorithmic setting, not an unsupported assertion. Independently, F1 already defines this quotient as the output: either singleton merge gives m=ln(2), ell=1/2+1=3/2, z=(1/2)0+3=3, hence output 2. No additional theorem about arbitrary merge orders is required for this explicit two-block computation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-attention-block-summary",
+      "disposition": "unaffected",
+      "post_sha256": "e2dd452dce6da8c209cdd08f8e101b331f4f42284acff33d728e68fe8141a024",
+      "review_context_sha256": "9be2c367ceb1797014f72f9f6709200e93039533e321db18a6984ef179075d83",
+      "reason": "Reviewed the complete Definition, the scaled-dot-product supplier, its owning contract and compact home page. Finite nonempty S has a finite maximum and ell>=1; its shifted sums define z/ell at every real c. The merge rescales each disjoint summand to m'=max(m(S),m(T)), giving the defining sums on S union T; the empty state has no numeric maximum. The local scale generalization is explicit. There are no hyperlinks within the Definition and no diagrams. No item, contract or page edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-tiled-attention-two-merge-orders",
+      "disposition": "unaffected",
+      "post_sha256": "973e79b5f8d7ef022d89a6a788126a793752fbba4be853a448aa487e8b9b256a",
+      "review_context_sha256": "b2a05c2daf2e5fca380ff7c889a33cbe2b196c1207bcb038095e08b60f331b97",
+      "reason": "Reviewed the complete Example, Facts, Verification, owning contract and compact examples page, together with the complete summary definition, tiled algorithm and exactness theorem. Both queries have scores 0 and ln(2), nonempty singleton blocks and scalar values 0 and 3. Substitution in the merge formula in either order gives (ln(2),3/2,3); its positive normalizer gives output 2. Here d=1 and c=1 also equal the standard attention scale. F2 follows from the theorem's named algorithm and is explicitly justified in its proof; the two verification steps need no new supplier. The Example is uninterrupted by links, the numbered steps have separated paragraphs and final tags, and there are no diagrams. No source or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete",
+    "completed_items": [
+      "def-attention-block-summary",
+      "ex-tiled-attention-two-merge-orders"
+    ],
+    "sources_consulted": [
+      "items/def-scaled-dot-product-attention.md: Definition",
+      "items/def-attention-block-summary.md: Definition",
+      "research/machine-learning-all-101-2026-10-19-batch-94.proof-contracts.json: contracts.def-attention-block-summary",
+      "library/machine-learning/exact-tiled-attention-and-memory-aware-differentiation.md",
+      "items/ex-tiled-attention-two-merge-orders.md: Example, Facts & Assumptions, Verification",
+      "items/alg-exact-tiled-softmax-attention.md: Definition, Forward procedure step 3",
+      "items/thm-tiled-attention-exactness.md: Statement and Proof 1.1-2.1 (complete item read)",
+      "research/machine-learning-all-101-2026-10-19-batch-94.proof-contracts.json: contracts.ex-tiled-attention-two-merge-orders",
+      "library/machine-learning/exact-tiled-attention-and-memory-aware-differentiation-examples.md"
+    ],
+    "source_reading": "Local mathematical carriers and contracts only; no external source reading is claimed. The checks use familiar finite exponential sums and elementary algebra.",
+    "unresolved_obligations": [],
+    "next_action": "Engine collection; no item changes, creations, interface changes or downstream repair requests.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-attention-block-summary.md items/ex-tiled-attention-two-merge-orders.md --json",
+        "exit_code": 0,
+        "result": "2 files; definition not-applicable; example direct verification pass; 1 checked proof, 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-attention-block-summary.md items/ex-tiled-attention-two-merge-orders.md --json",
+        "exit_code": 0,
+        "result": "2 checked; errors=[], warnings=[]."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-attention-block-summary.md items/ex-tiled-attention-two-merge-orders.md",
+        "exit_code": 0,
+        "result": "2 items, 2 steps, 0 defects."
+      }
+    ],
+    "operational_note": "The initial attempt to invoke tools/precheck.mts directly for CLI discovery failed with ERR_UNKNOWN_FILE_EXTENSION. The actual scoped precheck above used the repository tsx runner and passed.",
+    "ledger_note": "No confirmed defect or new published-consumer finding requires a canonical defect-ledger or published-ledger update. The Step-4 digest retains its separate outside presentation alerts; no repair or independent review of those outside items is claimed.",
+    "interface_note": "Both item guards equal initial-1.json before guards; no Statement, Definition, Example, contract or page was changed. Therefore downstream examination inventory is empty."
+  }
+}

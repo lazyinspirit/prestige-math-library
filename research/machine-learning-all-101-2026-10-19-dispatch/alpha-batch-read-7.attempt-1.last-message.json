@@ -1,0 +1,480 @@
+{
+  "group": "b",
+  "batches": ["7"],
+  "pages_read": [
+    "compression-and-pac-bayes-generalization",
+    "compression-and-pac-bayes-generalization-examples"
+  ],
+  "items_read": [
+    "def-pac-bayes-prior-and-posterior",
+    "lem-compression-binomial-sum-bound",
+    "lem-pac-bayes-donsker-varadhan-inequality",
+    "def-sample-compression-scheme",
+    "thm-pac-bayes-kl-bound",
+    "thm-compression-generalization-bound",
+    "cor-pac-bayes-risk-bound",
+    "cor-compression-sample-size-bound",
+    "ex-pac-bayes-single-hypothesis-posterior",
+    "cex-pac-bayes-data-dependent-prior-fails",
+    "ex-finite-support-sample-compression"
+  ],
+  "conventions": [
+    {
+      "convention": "The prior is fixed independently of the training sample; a posterior is a probability measure absolutely continuous with respect to that prior.",
+      "fixed_by": "def-pac-bayes-prior-and-posterior",
+      "matters_for": [
+        "lem-pac-bayes-donsker-varadhan-inequality",
+        "thm-pac-bayes-kl-bound",
+        "cor-pac-bayes-risk-bound",
+        "ex-pac-bayes-single-hypothesis-posterior",
+        "cex-pac-bayes-data-dependent-prior-fails"
+      ]
+    },
+    {
+      "convention": "Relative entropy is the supremum of divergences over finite measurable partitions. Zero-numerator terms are zero; positive numerator over zero denominator is infinite. Infinite relative entropy makes the risk bound vacuous.",
+      "fixed_by": "def-pac-bayes-prior-and-posterior",
+      "matters_for": [
+        "lem-pac-bayes-donsker-varadhan-inequality",
+        "thm-pac-bayes-kl-bound",
+        "cor-pac-bayes-risk-bound",
+        "ex-pac-bayes-single-hypothesis-posterior",
+        "cex-pac-bayes-data-dependent-prior-fails"
+      ]
+    },
+    {
+      "convention": "The PAC-Bayes loss is jointly product-measurable and takes values in [0,C], including C=0. The sample has product law D^m with m≥1. The positive tuning parameter is fixed before observing the sample; the event controls every absolutely continuous posterior simultaneously and bounds posterior-average risk.",
+      "fixed_by": "thm-pac-bayes-kl-bound",
+      "matters_for": [
+        "cor-pac-bayes-risk-bound",
+        "ex-pac-bayes-single-hypothesis-posterior",
+        "cex-pac-bayes-data-dependent-prior-fails"
+      ]
+    },
+    {
+      "convention": "The tuning grid is a nonempty finite subset of the positive reals fixed independently of the sample; its simultaneous bound pays log(N/δ).",
+      "fixed_by": "cor-pac-bayes-risk-bound",
+      "matters_for": ["cor-pac-bayes-risk-bound"]
+    },
+    {
+      "convention": "Compression selects at most d indices, including the empty subset, and supplies their labeled entries in increasing index order. Reconstruction is jointly measurable, uses no other side information, and need not lie in the concept class. Consistency is required on every target-labeled sample.",
+      "fixed_by": "def-sample-compression-scheme",
+      "matters_for": [
+        "thm-compression-generalization-bound",
+        "cor-compression-sample-size-bound",
+        "ex-finite-support-sample-compression"
+      ]
+    },
+    {
+      "convention": "Compression sizes include d=0; the generalization theorem requires m>d and ε∈(0,1), and failure means risk strictly greater than ε.",
+      "fixed_by": "thm-compression-generalization-bound",
+      "matters_for": [
+        "cor-compression-sample-size-bound",
+        "ex-finite-support-sample-compression"
+      ]
+    },
+    {
+      "convention": "Natural numbers and binomial counts in real expressions denote their canonical real images; e=exp(1).",
+      "fixed_by": "lem-compression-binomial-sum-bound",
+      "matters_for": [
+        "lem-compression-binomial-sum-bound",
+        "cor-compression-sample-size-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-pac-bayes-kl-bound",
+      "statement": "For a sample-independent prior π, product-measurable loss ℓ:Θ×Z→[0,C], an IID sample of size m≥1, fixed λ>0 and δ∈(0,1), with probability at least 1−δ, simultaneously for every probability measure ρ≪π: EρR ≤ EρR̂S + λC²/(8m) + (KL(ρ‖π)+log(1/δ))/λ. Infinite relative entropy makes the bound vacuous.",
+      "used_by": [
+        "cor-pac-bayes-risk-bound",
+        "ex-pac-bayes-single-hypothesis-posterior",
+        "cex-pac-bayes-data-dependent-prior-fails"
+      ]
+    },
+    {
+      "id": "thm-compression-generalization-bound",
+      "statement": "For a fixed measurable binary target, IID instance sample with law D^m, fixed jointly measurable reconstructors G0,…,Gd, m>d, and ε∈(0,1), the measurable event that some index subset I of size at most d reconstructs a classifier consistent on all m observations and of risk greater than ε has probability at most Σ(i=0,…,d) binom(m,i)(1−ε)^(m−i).",
+      "used_by": [
+        "cor-compression-sample-size-bound",
+        "ex-finite-support-sample-compression"
+      ]
+    },
+    {
+      "id": "lem-pac-bayes-donsker-varadhan-inequality",
+      "statement": "For probability measures π and ρ on a measurable space with ρ≪π, and every bounded measurable real function f, Eρf ≤ KL(ρ‖π)+log Eπexp(f), with the inequality vacuous when KL(ρ‖π)=∞.",
+      "used_by": ["thm-pac-bayes-kl-bound"]
+    },
+    {
+      "id": "def-sample-compression-scheme",
+      "statement": "A deterministic size-at-most-d sample-compression scheme consists of measurable index-selection maps for every natural sample length and fixed jointly measurable reconstruction maps using only the selected labeled entries in their sample order; consistency means reconstructing every label of every sample labeled by a concept in the specified class.",
+      "used_by": [
+        "thm-compression-generalization-bound",
+        "cor-compression-sample-size-bound",
+        "ex-finite-support-sample-compression"
+      ]
+    },
+    {
+      "id": "def-pac-bayes-prior-and-posterior",
+      "statement": "A prior is a probability measure fixed independently of the training sample. A posterior relative to it is an absolutely continuous probability measure. Their relative entropy is the supremum of finite measurable partition divergences with the stated zero and infinity conventions.",
+      "used_by": [
+        "lem-pac-bayes-donsker-varadhan-inequality",
+        "thm-pac-bayes-kl-bound",
+        "ex-pac-bayes-single-hypothesis-posterior",
+        "cex-pac-bayes-data-dependent-prior-fails"
+      ]
+    },
+    {
+      "id": "lem-compression-binomial-sum-bound",
+      "statement": "For natural numbers m,d with 1≤d≤m, Σ(i=0,…,d) binom(m,i) ≤ (em/d)^d.",
+      "used_by": ["cor-compression-sample-size-bound"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measurable-space",
+      "used_for": "Measurable parameter, instance and observation spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Prior, posterior, data laws and total mass one.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithms in partition entropy and confidence penalties.",
+      "opened": true
+    },
+    {
+      "id": "def-binomial-coefficient",
+      "used_for": "Counting index subsets of each compression size.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite real sums and empty-sum conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Termwise comparison and scaling in the binomial-sum proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-binomial-theorem",
+      "used_for": "Expanding (1+x)^m.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Natural powers in binomial estimates and product probabilities.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-monotone",
+      "used_for": "Comparing nonnegative bases and exponents in compression bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Positivity of real images of positive sample sizes.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding 1+x by exp(x) and (1−ε)^n by exp(−nε).",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Factoring exponential moments and simplifying exponential bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The exponential function and e=exp(1).",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Sample lengths and compression sizes include zero.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-natural",
+      "used_for": "Interpreting counts and sample sizes in real formulas.",
+      "opened": true
+    },
+    {
+      "id": "lem-it-finite-log-sum-inequality",
+      "used_for": "The finite-valued change-of-measure inequality.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive exponential integrals, reciprocal identities and logarithm domains.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Expanding partition divergences and confidence terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Exponential comparison and bounded approximation estimates.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectations as Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability of bounded measurable functions.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Boundedness and simple-function approximation arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-simple-measurable-function",
+      "used_for": "Finite-valued measurable approximants.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Finite partition formulas for expectations.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integral comparison and positive homogeneity.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Rescaling the Hoeffding MGF and controlling approximation errors.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of reconstructors and finite partition preimages.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability of continuous scalar functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Measurability under scalar composition.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint measurability and finite sample spaces, including the empty product.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Cardinality of selected index subsets.",
+      "opened": true
+    },
+    {
+      "id": "lem-bounded-variable-hoeffding-mgf",
+      "used_for": "The choice-free unit-range centered exponential-moment estimate; its proof was also inspected.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common observation law.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of the fixed-parameter losses.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Factoring the finite product of exponential losses.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Identifying expected observation losses with population risk.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Finite product laws, rectangle probabilities and coordinate permutation invariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Measurable section risks and exchanging prior/sample or selected/remaining-coordinate integrals.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "A single measurable high-probability PAC-Bayes event.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of finite arithmetic expressions and mismatch events; its proof was also inspected.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Finite union bounds and complementary probabilities.",
+      "opened": true
+    },
+    {
+      "id": "lem-natural-logarithm-bounded-by-argument",
+      "used_for": "The explicit log(4)≤3 estimate in the counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-measurable-space",
+      "finding": "def-measurable-space, Definition: “sigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]])”. The hyperlink occurs inside the complete defining section rather than in an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "def-probability-measure, Definition: “$\\mathbb P(X)=1$ ([[def-measure]])”. This and the def-measure-space hyperlink remain inside the defining section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "def-natural-logarithm, Definition: “because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that”. The supplier hyperlink interrupts the defining section instead of appearing in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-binomial-coefficient",
+      "finding": "def-binomial-coefficient, Definition: “([[thm-subset-of-a-finite-set]])”. This and several further supplier hyperlinks occur within the complete defining section; they have not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-sum",
+      "finding": "def-finite-sum, Definition: “([[def-complete-ordered-field]])”. This and numerous other supplier hyperlinks remain within the complete defining section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "lem-finite-sum-laws, Statement: “with finite sums and finite products as in [[def-finite-sum]]”. The statement also links canonical-image suppliers in clause 2. These links occur before the complete statement ends rather than in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-binomial-theorem",
+      "finding": "thm-binomial-theorem, Statement: “the powers are the integer powers of [[def-integer-power]]”. Further finite-sum and canonical-natural links also remain in the complete Statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integer-power",
+      "finding": "def-integer-power, Definition: “([[def-ordered-field]], [[def-field]])”. This and many further supplier links occur within the complete defining section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-power-monotone",
+      "finding": "lem-power-monotone, Statement: “an ordered field ([[def-ordered-field]])” and “with powers as in [[def-integer-power]]”. These hyperlinks interrupt the complete statement rather than appearing in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-naturals-positive",
+      "finding": "lem-of-naturals-positive, Statement: “with field structure as in [[def-field]]”. The hyperlink occurs within the complete statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "def-real-exponential-function-and-e, Definition: “proved in [[lem-exponential-series-has-infinite-radius]]”. Factorial, canonical-image, power and series hyperlinks likewise remain inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-numbers",
+      "finding": "def-natural-numbers, Definition: “([[def-inductive-set]])”. This and the existence/axiom supplier hyperlinks occur inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-canonical-natural",
+      "finding": "def-canonical-natural, Definition: “Let $F$ be a field ([[def-field]])”. Recursion and natural-number hyperlinks likewise remain within the defining section instead of Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "def-expectation-of-a-nonnegative-or-integrable-random-variable, Definition: “in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. The hyperlink is inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "finding": "def-integrable-real-and-complex-functions-and-their-integrals, Definition: “[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]”. This and the complex-coordinate supplier hyperlink remain inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nonnegative-lebesgue-integral",
+      "finding": "def-nonnegative-lebesgue-integral, Definition: “([[def-extended-real-valued-measurable-function]])”. Simple-integral and simple-function links also remain inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nonnegative-simple-measurable-function",
+      "finding": "def-nonnegative-simple-measurable-function, Definition: “([[def-extended-real-valued-measurable-function]])”. This hyperlink occurs inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integral-of-a-nonnegative-simple-function",
+      "finding": "def-integral-of-a-nonnegative-simple-function, Definition: “([[def-nonnegative-simple-measurable-function]])” and “([[def-measure]])”. Both links remain inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "def-measurable-function-between-measurable-spaces, Definition: “([[def-measurable-space]])”. The hyperlink occurs inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "def-product-sigma-algebra-and-finite-product-sigma-algebras, Definition: “[[def-measurable-rectangle]]”. The supplier link occurs before the finite-product and empty-product clauses finish the complete defining section rather than in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-cardinality",
+      "finding": "def-finite-cardinality, Definition: “([[def-natural-numbers]])”. This and numerous other supplier hyperlinks remain within the complete defining section instead of Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-identically-distributed-and-iid-random-variables",
+      "finding": "def-identically-distributed-and-iid-random-variables, Definition: “their laws in [[def-law-or-distribution-of-a-random-element]] agree” and “independent in [[def-independent-random-elements]]”. Both hyperlinks interrupt the complete definition rather than appearing in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "finding": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, Statement clause 1: “[[def-product-measure-on-sigma-finite-spaces]]”. The hyperlink occurs inside the complete four-clause statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "finding": "thm-arithmetic-and-lattice-operations-preserve-measurability, Statement: “from [[def-measurable-pointwise-extended-real-product]]” and “as in [[def-positive-and-negative-parts-of-a-function]]”. These hyperlinks interrupt the complete statement instead of appearing in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-natural-logarithm-bounded-by-argument",
+      "finding": "lem-natural-logarithm-bounded-by-argument, Statement: “[[def-natural-logarithm]] satisfies”. The hyperlink interrupts the complete statement rather than appearing in Statement references.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "compression-and-pac-bayes-generalization",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Read the supplier page and def-supervised-learning-problem, def-population-and-empirical-risk, and lem-population-and-empirical-risk-are-measurable, including the lemma's proof. Comparing consumer uses back to their exact interfaces, binary compression satisfies the supervised measurable-space and loss conventions. Conversely, the parameter-indexed PAC-Bayes theorem does not infer joint measurability from the fixed-predictor lemma: it explicitly assumes a product-measurable parameterized loss and supplies the additional Tonelli argument. No independence or finite-risk hypothesis is incorrectly imported from the supplier definitions."
+    }
+  ]
+}

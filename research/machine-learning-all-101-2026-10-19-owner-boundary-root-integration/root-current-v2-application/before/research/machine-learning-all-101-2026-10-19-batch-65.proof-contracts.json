@@ -1,0 +1,647 @@
+{
+  "version": 1,
+  "scope": [
+    "def-neural-ode",
+    "thm-neural-ode-global-smooth-flow",
+    "thm-instantaneous-change-of-variables-for-ode-flow",
+    "alg-adjoint-sensitivity-method",
+    "ex-numerical-adjoint-error"
+  ],
+  "contracts": {
+    "def-neural-ode": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires positive state and parameter dimensions and an open time interval; an empty ODE domain is not part of its interface."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits a zero vector field; it still specifies the constant trajectory from each initial state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows d=q=1 and specifies the scalar parameterized initial-value problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no nondegeneracy or architecture condition on the vector field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition gives the initial condition at any s in the open interval and defines solutions on intervals containing s."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition names a single parameter and initial state; it makes no choice or existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces an initial-value problem and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces an initial-value problem and states no biconditional."
+        }
+      ]
+    },
+    "thm-neural-ode-global-smooth-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-neural-ode",
+          "source_section": "Definition",
+          "quote": "Let $d,q\\ge1$, let $I\\subseteq\\mathbb R$ and $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$. For a parameter $\\theta\\in\\Theta$, write $v_\\theta(t,z):=v(t,z,\\theta)$. A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem\n\n$$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$\n\nwhere $s\\in I$ and $z_s\\in\\mathbb R^d$. A trajectory on an interval $J\\subseteq I$ containing $s$ is a differentiable function $z:J\\to\\mathbb R^d$ satisfying both displayed conditions. Here $v_\\theta$ is the state-velocity field. The term names this parameterized vector-field model and imposes no particular neural-network architecture. This definition alone asserts neither solution existence beyond its stated interval nor numerical accuracy.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ode-extension-from-a-compact-interior-region",
+          "source_section": "Statement",
+          "quote": "Let $x:(\\alpha,\\beta)\\to\\mathbb R^n$ solve a Picard-Lindelof ODE and suppose $\\beta<\\infty$. If there are $t_j\\uparrow\\beta$ for which $(t_j,x(t_j))$ lies in one compact subset $K$ of the open ODE domain, then $x$ extends to a solution beyond $\\beta$. A solution whose graph has a sequence approaching a compact interior endpoint state extends past that endpoint. The reflected statement holds at a finite left endpoint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-fundamental-theorem-for-nonautonomous-smooth-odes",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open and let\n$F:D\\to\\mathbb R^n$ be smooth. For every base point $(t_0,x_0)\\in D$ there are\n$h>0$ and an open neighbourhood $W$ of $(t_0,x_0)$ such that each initial pair\n$(s,y)\\in W$ has a unique solution on $[s-h,s+h]$, and the resulting local\nsolution map is smooth in the initial time and initial state.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-c1-dependence-of-solutions-on-initial-data",
+          "source_section": "Statement",
+          "quote": "Let $F:D\\subseteq\\mathbb R\\times\\mathbb R^n\\to\\mathbb R^n$ be continuous and\n$C^1$ in the state variable. Fix data $(t_0,x_0)\\in D$ and a compact time\ninterval $I=[t_0-h,t_0+h]$ on which the corresponding solutions through nearby\ninitial states all exist. Then the solution map\n\n$$\\Phi:I\\times U_0\\to\\mathbb R^n,\\qquad \\Phi(t,y)=x(t;y),$$\n\nis $C^1$ in the initial-state variable $y$ on some neighbourhood $U_0$ of\n$x_0$. For each $y\\in U_0$, the derivative matrix\n$D_y\\Phi(t,y)$ is the solution of the variational equation along $t\\mapsto x(t;y)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-field-is-locally-lipschitz",
+          "claim": "Fix $(t_0,z_0,\\theta_0)\\in I\\times\\mathbb R^d\\times\\Theta$. Choose a closed time interval and a closed state ball about $(t_0,z_0)$ whose product lies in the open domain; it is compact by [F4]. The continuous function $(t,z)\\mapsto\\|D_zv(t,z,\\theta_0)\\|$ is bounded there by [F3]. For each fixed nearby $t$, [F2] on the open state ball gives a state-Lipschitz bound, while smoothness gives continuity of the field. Thus the Picard–Lindelöf hypotheses hold locally at every point of the ODE domain.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "choice-free-finite-interval-existence",
+          "claim": "For each fixed $\\theta$ and initial data, [F5] gives the unique local solution and [F6] gives its unique maximal solution on an open interval. Fix now a nonempty compact $K\\subseteq\\Theta$ and a bounded ball $B$ of initial states. For every $\\theta\\in K$, the assumptions imply $\\|v(t,z,\\theta)\\|_2\\le M_K+L_K\\|z\\|_2$ on $[0,T]$. For a trajectory starting at $s$ in $B$, its integral equation gives $u(\\tau):=\\|z(s+\\tau)\\|_2\\le \\sup_{x\\in B}\\|x\\|_2+M_K\\tau+L_K\\int_0^\\tau u(\\sigma)\\,d\\sigma$ whenever $s+\\tau\\in[0,T]$. Apply [F7] with the nondecreasing function $a(\\tau)=\\sup_{x\\in B}\\|x\\|_2+M_K\\tau$; time reversal gives the same bound backward. Thus every such maximal trajectory while it lies in $[0,T]$ has norm at most $R:=(\\sup_{x\\in B}\\|x\\|_2+M_KT)e^{L_KT}$. If a right endpoint $\\beta$ of its maximal interval belonged to $(s,T]$, the explicitly defined sequence $t_j=\\beta-(\\beta-s)/(j+1)$ would increase to $\\beta$, and each graph point $(t_j,z(t_j))$ would lie in the compact cylinder $[0,T]\\times\\overline B_R\\subset I\\times\\mathbb R^d$. By [F8] the solution would extend past $\\beta$, contradicting maximality. The explicit sequence $t_j=\\alpha+(s-\\alpha)/(j+1)$ gives the same contradiction at any left endpoint $\\alpha\\in[0,s)$. Therefore every maximal solution contains all of $[0,T]$, and uniqueness follows from [F6]. The sequences are specified by their endpoint and use no choice axiom.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-smooth-flow-composition",
+          "claim": "Fix a base initial state, parameter, and times $s,t$; choose compact neighborhoods $B$ and $K$ of the state and parameter. Step 2.1 places the trajectories for these data in one closed bounded state ball, so $[0,T]\\times\\overline B_R\\times K$ is compact by [F4]. At every point of this cylinder, [F9] and [F10] applied to the smooth augmented field $(z,\\theta)'=(v(t,z,\\theta),0)$ give an open neighborhood of initial time, state, and parameter, and a positive time radius on which the local transition map is smooth. A finite subcover exists by [F4], and the minimum of its finitely many time radii is positive. Partition the interval from $s$ to $t$ into finitely many segments shorter than this minimum. Each base trajectory node belongs to a selected chart; continuity lets us shrink the initial state and parameter neighborhoods successively so each perturbed node remains in the next chart. The full transition is therefore a finite composition of smooth local maps on a neighborhood of the base data. Since the base data were arbitrary, $(z_s,\\theta)\\mapsto\\Phi^\\theta_{t,s}(z_s)$ is locally $C^\\infty$ for every fixed $s,t$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F9",
+            "F10",
+            "given",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "inverse-flow-diffeomorphism",
+          "claim": "By uniqueness from step 2.1, solving from $s$ to $t$ and then from $t$ back to $s$ returns the original initial value; hence $\\Phi^\\theta_{s,t}\\circ\\Phi^\\theta_{t,s}$ and $\\Phi^\\theta_{t,s}\\circ\\Phi^\\theta_{s,t}$ are both identity maps. Both maps are smooth by step 3.1, so each $\\Phi^\\theta_{t,s}$ is a global $C^\\infty$ diffeomorphism with the stated inverse.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "variational-jacobian",
+          "claim": "Fix $s,\\theta,z_s$. At every interior time $r\\in(0,T)$, smoothness of the field and [F10] give a common local interval for nearby initial states at $z_r:=\\Phi^\\theta_{r,s}(z_s)$. The hypotheses of [F11] hold there, so $A(t):=D_y\\Phi^\\theta_{t,r}(z_r)$ satisfies $A'(r)=D_zv(r,z_r,\\theta)$ and $A(r)=I_d$. Uniqueness gives $\\Phi^\\theta_{t,s}=\\Phi^\\theta_{t,r}\\circ\\Phi^\\theta_{r,s}$ near $t=r$; differentiating this identity in $z_s$ using [F12] yields $J_{t,s}=A(t)J_{r,s}$. Differentiating at $t=r$ therefore gives $\\frac{d}{dt}J_{t,s}=D_zv(r,\\Phi^\\theta_{r,s}(z_s),\\theta)J_{r,s}$. Since $r$ was arbitrary this holds on $(0,T)$; the local transitions at $0,T$ give the corresponding one-sided derivatives. At $t=s$, the transition is the identity and so $J_{s,s}=I_d$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement assumes d,q>=1, an open nonempty parameter neighborhood at each base point, and T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits v=0 with L_K=M_K=0; the flow is the identity and J is I_d."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits d=q=1; all existence, compact-tube, and local-flow arguments are dimension independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires no nonsingular vector field; diffeomorphism refers to the solution map, whose inverse is reverse-time flow in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement gives solutions on all of [0,T] and explicitly assigns one-sided time derivatives at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use explicitly defined finite-endpoint sequences and a finite subcover of a compact cylinder; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives existence, smoothness, diffeomorphism, and a variational equation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives existence, smoothness, diffeomorphism, and a variational equation, not a biconditional."
+        }
+      ]
+    },
+    "thm-instantaneous-change-of-variables-for-ode-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-neural-ode",
+          "source_section": "Definition",
+          "quote": "Let $d,q\\ge1$, let $I\\subseteq\\mathbb R$ and $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$. For a parameter $\\theta\\in\\Theta$, write $v_\\theta(t,z):=v(t,z,\\theta)$. A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem\n\n$$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$\n\nwhere $s\\in I$ and $z_s\\in\\mathbb R^d$. A trajectory on an interval $J\\subseteq I$ containing $s$ is a differentiable function $z:J\\to\\mathbb R^d$ satisfying both displayed conditions. Here $v_\\theta$ is the state-velocity field. The term names this parameterized vector-field model and imposes no particular neural-network architecture. This definition alone asserts neither solution existence beyond its stated interval nor numerical accuracy.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-neural-ode-global-smooth-flow",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, let $I\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$. For every compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that, for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nThen for each $\\theta\\in\\Theta$, $s,t\\in[0,T]$, and $z_s\\in\\mathbb R^d$, the neural ODE has a unique solution on all of $[0,T]$. Write $\\Phi^\\theta_{t,s}(z_s)$ for its value at time $t$. For each fixed $s,t$, the map $(z_s,\\theta)\\mapsto\\Phi^\\theta_{t,s}(z_s)$ is locally $C^\\infty$. For each fixed $\\theta$, $\\Phi^\\theta_{t,s}:\\mathbb R^d\\to\\mathbb R^d$ is a $C^\\infty$ diffeomorphism with inverse $\\Phi^\\theta_{s,t}$. Its state Jacobian $J_{t,s}:=D_{z_s}\\Phi^\\theta_{t,s}(z_s)$ satisfies\n\n$$\\frac{d}{dt}J_{t,s}=D_zv(t,\\Phi^\\theta_{t,s}(z_s),\\theta)J_{t,s},\\qquad J_{s,s}=I_d.$$\n\nTime derivatives at $0$ and $T$ are one-sided.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-flow-log-density-equation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, $U_0\\subseteq\\mathbb R^d$ be open, $T>0$, and let $f$ be jointly $C^1$ on an open time-state domain. Suppose the ODE $x'(t)=f(t,x(t))$ has a common flow\n$$\\Phi:[0,T]\\times U_0\\to\\mathbb R^d,\\qquad x(t)=\\Phi_t(x_0),$$\nwhose time slices $\\Phi_t:U_0\\to U_t$ are $C^1$ diffeomorphisms onto open sets $U_t$, with $\\Phi_0=\\operatorname{id}_{U_0}$. Let $p_0:U_0\\to(0,\\infty)$ be a continuous probability density with respect to Lebesgue measure, let $\\mu_t$ be the pushforward of $p_0(x)\\,dx$ under $\\Phi_t$, and define\n$$p_t(y):=\\begin{cases}\\dfrac{p_0(\\Phi_t^{-1}(y))}{|\\det D\\Phi_t(\\Phi_t^{-1}(y))|},&y\\in U_t,\\\\0,&y\\notin U_t.\\end{cases}$$\nThen $p_t$ is a density of $\\mu_t$ on $\\mathbb R^d$, the flow Jacobian has positive determinant, and\n$$p_t(\\Phi_t(x_0))=\\frac{p_0(x_0)}{\\det D\\Phi_t(x_0)}>0,$$\nand, for $0<t<T$,\n$$\\frac{d}{dt}\\log p_t(x(t))=-\\operatorname{div}_x f(t,x(t)),\\qquad \\operatorname{div}_x f:=\\operatorname{tr}D_xf=\\sum_{i=1}^d\\partial_{x_i}f_i.$$\nThe derivative at $0$ or $T$ is understood one-sided.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ode-flow-matches-density-interface",
+          "claim": "Fix $\\theta$. By [F1] this is a first-order IVP, and [F2] supplies its flow $\\Phi_t$ on all of $[0,T]$; every slice is a $C^1$ diffeomorphism of $\\mathbb R^d$ and $\\Phi_0$ is the identity. Hence the flow and initial density satisfy the hypotheses of [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "instantiate-continuous-density-formula",
+          "claim": "Apply [F3] using the assumed Countable Choice [A1]. It gives that the displayed $p_t$ is a density of the pushforward and that $p_t(\\Phi_t(z_0))=p_0(z_0)/\\det J_t>0$ with logarithmic derivative $-\\operatorname{tr}(D_zv(t,z_t,\\theta))$. By the definition of trace as the sum of diagonal entries, this is $-\\sum_{i=1}^d\\partial_{z_i}v_i(t,z_t,\\theta)$; [F3] gives the stated endpoint convention.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement assumes d>=1 and a positive finite interval T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires p0(z)>0 everywhere; a zero-valued density is excluded. The zero vector field remains allowed and gives p_t=p0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes d=1, where the trace is the single derivative partial_z v."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows v=0; then the flow is identity, J_t=I_d, and the formula gives zero log-density change."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement specifies one-sided derivatives at t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes Countable Choice explicitly; step 2.1 uses it only through the generic change-of-variables density theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts a density identity and differential equation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts a density identity and differential equation, not a biconditional."
+        }
+      ]
+    },
+    "alg-adjoint-sensitivity-method": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition assumes positive state and parameter dimensions, T>0, and a nonempty open parameter neighborhood."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows zero running loss and zero parameter derivatives; the displayed output remains defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits scalar state and scalar parameter, with all Jacobians reducing to ordinary derivatives."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows the objective and dynamics to be independent of theta; then the displayed formula gives G(theta)=0 without requiring an inverse derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition initializes the adjoint at T, solves it backward to 0, and integrates over the closed interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses unique exact IVPs and a finite integral; it invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition specifies a procedure and output formula, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition specifies a procedure and output formula, with no biconditional."
+        }
+      ]
+    },
+    "ex-numerical-adjoint-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-neural-ode",
+          "source_section": "Definition",
+          "quote": "Let $d,q\\ge1$, let $I\\subseteq\\mathbb R$ and $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$. For a parameter $\\theta\\in\\Theta$, write $v_\\theta(t,z):=v(t,z,\\theta)$. A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem\n\n$$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$\n\nwhere $s\\in I$ and $z_s\\in\\mathbb R^d$. A trajectory on an interval $J\\subseteq I$ containing $s$ is a differentiable function $z:J\\to\\mathbb R^d$ satisfying both displayed conditions. Here $v_\\theta$ is the state-velocity field. The term names this parameterized vector-field model and imposes no particular neural-network architecture. This definition alone asserts neither solution existence beyond its stated interval nor numerical accuracy.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-neural-ode-global-smooth-flow",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, let $I\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$. For every compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that, for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nThen for each $\\theta\\in\\Theta$, $s,t\\in[0,T]$, and $z_s\\in\\mathbb R^d$, the neural ODE has a unique solution on all of $[0,T]$. Write $\\Phi^\\theta_{t,s}(z_s)$ for its value at time $t$. For each fixed $s,t$, the map $(z_s,\\theta)\\mapsto\\Phi^\\theta_{t,s}(z_s)$ is locally $C^\\infty$. For each fixed $\\theta$, $\\Phi^\\theta_{t,s}:\\mathbb R^d\\to\\mathbb R^d$ is a $C^\\infty$ diffeomorphism with inverse $\\Phi^\\theta_{s,t}$. Its state Jacobian $J_{t,s}:=D_{z_s}\\Phi^\\theta_{t,s}(z_s)$ satisfies\n\n$$\\frac{d}{dt}J_{t,s}=D_zv(t,\\Phi^\\theta_{t,s}(z_s),\\theta)J_{t,s},\\qquad J_{s,s}=I_d.$$\n\nTime derivatives at $0$ and $T$ are one-sided.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-adjoint-sensitivity-method",
+          "source_section": "Definition",
+          "quote": "Let $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$ on an open time interval $I$ containing $[0,T]$. For each compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nLet $\\Omega\\subseteq\\Theta$ be open with compact closure contained in $\\Theta$, let $U_0\\subseteq\\Theta$ be an open neighborhood of $\\overline\\Omega$, and let $u_0:U_0\\to\\mathbb R^d$ be $C^1$. Write $u_\\theta$ for the exact solution of $\\dot u_\\theta(t)=v(t,u_\\theta(t),\\theta)$, $u_\\theta(0)=u_0(\\theta)$, and let $\\mathcal T:=\\{(t,u_\\theta(t),\\theta):t\\in[0,T],\\theta\\in\\overline\\Omega\\}$ be its common compact trajectory tube. Let\n\n$$\\mathcal T_T:=\\{(u_\\theta(T),\\theta):\\theta\\in\\overline\\Omega\\}$$\n\nbe the terminal state-parameter slice. Let $U_\\phi\\subseteq\\mathbb R^d\\times\\Theta$ and $U_\\ell\\subseteq I\\times\\mathbb R^d\\times\\Theta$ be open sets containing $\\mathcal T_T$ and $\\mathcal T$, respectively, and let $\\phi:U_\\phi\\to\\mathbb R$ and $\\ell:U_\\ell\\to\\mathbb R$ be $C^1$. Assume their first derivatives, measured in Euclidean operator norms, are bounded and uniformly continuous on $\\mathcal T_T$ and $\\mathcal T$, respectively. Define\n\n$$\\mathcal J(\\theta)=\\phi(u_\\theta(T),\\theta)+\\int_0^T\\ell(t,u_\\theta(t),\\theta)\\,dt.$$\n\nFor each $\\theta\\in\\Omega$, the exact continuous adjoint sensitivity procedure is:\n\n1. Solve the state initial-value problem forward on $[0,T]$.\n2. Solve the terminal adjoint problem backward,\n   $$-p'(t)=D_u v(t,u_\\theta(t),\\theta)^T p(t)+D_u\\ell(t,u_\\theta(t),\\theta)^T,\\qquad p(T)=D_u\\phi(u_\\theta(T),\\theta)^T.$$\n3. Return the vector\n   $$G(\\theta)=D_\\theta\\phi(u_\\theta(T),\\theta)^T+D_\\theta u_0(\\theta)^Tp(0)+\\int_0^T\\left(D_\\theta\\ell(t,u_\\theta(t),\\theta)^T+D_\\theta v(t,u_\\theta(t),\\theta)^Tp(t)\\right)dt.$$\n\nHere $D_u$ and $D_\\theta$ denote Jacobian matrices in the displayed variables, $p(t)\\in\\mathbb R^d$, and $G(\\theta)\\in\\mathbb R^q$. All state and adjoint equations and the integral are exact continuous mathematical objects. Replacing them by numerical solver outputs defines a finite computation and is outside this algorithm's accuracy guarantees.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-ode-adjoint-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Assume $T>0$. Let $u_\\theta$ solve the parameter-dependent ODE of [[lem-parameter-ode-flow-tangent-on-common-tube]] on $[0,T]$. Let\n$$J(\\theta)=\\phi(u_\\theta(T),\\theta)+\\int_0^T\\ell(t,u_\\theta(t),\\theta)\\,dt,$$\nwhere $\\phi$ and $\\ell$ are $C^1$ on a neighborhood of the trajectory tube and their first derivatives are bounded and uniformly continuous there. Let $S=D_\\theta u_\\theta$ be the tangent from that lemma. Let $p$ solve the terminal adjoint problem\n$$-p'(t)=D_u f(t,u_\\theta(t),\\theta)^Tp(t)+D_u\\ell(t,u_\\theta(t),\\theta)^T,\\qquad p(T)=D_u\\phi(u_\\theta(T),\\theta)^T.$$\nThen\n$$\\nabla_\\theta J=D_\\theta\\phi(u_\\theta(T),\\theta)^T+D_\\theta u_0(\\theta)^Tp(0)+\\int_0^T\\bigl(D_\\theta\\ell(t,u_\\theta,\\theta)^T+D_\\theta f(t,u_\\theta,\\theta)^Tp(t)\\bigr)\\,dt.$$\nThis formula separates initial, terminal, running-cost and vector-field parameter terms. It applies only while the common-tube and differentiability hypotheses hold.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parameterized-finite-state-step-objective",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta\\subseteq\\mathbb R^m$ be open, let $N\\ge1$, and for $0\\le n\\le N$ let $U_n\\subseteq\\mathbb R^{d_n}$ be open. A finite parameterized state-step graph consists of a $C^1$ initial map $x_0:\\Theta\\to U_0$ and $C^1$ step maps $\\Psi_n:U_n\\times\\Theta\\to U_{n+1}$ for $0\\le n<N$, such that the recursion $x_{n+1}(\\theta)=\\Psi_n(x_n(\\theta),\\theta)$ is defined for every $\\theta$ in the chosen parameter neighborhood. A $C^1$ running objective consists of maps $\\ell_n:U_n\\times\\Theta\\to\\mathbb R$ and a terminal objective $\\phi:U_N\\times\\Theta\\to\\mathbb R$, all $C^1$. Its reduced objective is\n$$J(\\theta)=\\phi(x_N(\\theta),\\theta)+\\sum_{n=0}^{N-1}\\ell_n(x_n(\\theta),\\theta).$$\nThe maps and objective define one finite real-arithmetic graph. A gradient of this graph is the derivative of this finite composition; it is not the derivative of an exact implicit solution unless the step map itself is that solution map.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-discrete-adjoint-gradient-recursion",
+          "source_section": "Statement",
+          "quote": "Use the setting of [[def-parameterized-finite-state-step-objective]]. Write $A_n=D_x\\Psi_n(x_n,\\theta)$, $B_n=D_\\theta\\Psi_n(x_n,\\theta)$, and let $S_n=D_\\theta x_n$. Then\n$$S_0=D x_0(\\theta),\\qquad S_{n+1}=A_nS_n+B_n.$$\nDefine $p_N=D_x\\phi(x_N,\\theta)^T$ and, backward for $n=N-1,\\ldots,0$,\n$$p_n=D_x\\ell_n(x_n,\\theta)^T+A_n^Tp_{n+1}.$$\nThe exact gradient of the finite objective is\n$$\\nabla_\\theta J=D_\\theta\\phi(x_N,\\theta)^T+S_0^Tp_0+\\sum_{n=0}^{N-1}\\bigl(D_\\theta\\ell_n(x_n,\\theta)^T+B_n^Tp_{n+1}\\bigr).$$\nThe recursion is the reverse derivative of the finite graph in exact real arithmetic; it makes no convergence claim about an iteration used to choose $\\theta$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-flow-and-gradient",
+          "claim": "By [F7, F8, F10], $u_1(t)=\\exp(-t)$ and $u_2(t)=\\exp(\\theta t)$ satisfy the displayed ODE and initial data. By [F2] this is the unique flow, so $\\mathcal J(\\theta)=\\exp(\\theta)$ and $\\mathcal J'(-100)=\\exp(-100)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-euler-adjoint-gradient",
+          "claim": "The Euler transition is the C1 map $\\Psi_k(u,\\theta)=((1-1/N)u_1,(1+\\theta/N)u_2)$. It is a finite state-step objective as in [F5], and induction gives $u_{2,N}=(1+\\theta/N)^N$. By [F10], differentiating this polynomial gives $(1+\\theta/N)^{N-1}$; by [F6], the finite discrete adjoint returns exactly this derivative.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "F10",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "continuous-adjoint-specialization",
+          "claim": "For the continuous adjoint, $D_u v=\\operatorname{diag}(-1,\\theta)$, $p(1)=(0,1)$, and $p(t)=(0,\\exp(\\theta(1-t)))$ solves the terminal adjoint equation by [F8, F10]. Substituting into [F4] gives $\\int_0^1\\exp(\\theta t)\\exp(\\theta(1-t))\\,dt=\\int_0^1\\exp(\\theta)\\,dt=\\exp(\\theta)$ by [F11], which is also the output expression defined by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-resolution-comparison",
+          "claim": "At $\\theta=-100$, $N=50$ gives $(1-2)^{49}=-1$, while $N=100$ gives $(1-1)^{99}=0$. By [F9], $\\exp(-100)>0$, so both finite gradients differ from the exact continuous gradient; the two finite gradients also differ from each other. This establishes only the stated finite witness, not a general error bound.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes d=2, T=1, and a nonempty parameter neighborhood around -100."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 include N=100, where the second Euler multiplier is zero and the finite polynomial derivative is still defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows every N>=1; step 2.1's formula also gives the N=1 derivative as (1+theta)^0=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At N=100 the second state multiplier vanishes, but the finite C1 objective and its zero derivative remain well-defined by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses the terminal value at T=1, and step 1.2 applies the continuous adjoint terminal condition p(1)=(0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example values are explicit real exponentials and finite polynomial evaluations; the verification makes no choice-axiom use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example compares two exact finite gradients with one exact continuous gradient and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example compares two exact finite gradients with one exact continuous gradient and states no biconditional."
+        }
+      ]
+    }
+  }
+}

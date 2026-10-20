@@ -15,6 +15,7 @@ landmark: true
 short: "Accumulating agreement forces identity"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-identity-theorem-holomorphic-functions.json
   precheck: pass
   judge:
     model: "deepseek-v4-pro + claude-opus-5[1m]"
@@ -35,7 +36,11 @@ pipeline_run: null
 
 If two holomorphic functions on a complex domain agree on a set with an accumulation point in the domain, then they agree everywhere on the domain.
 
-Precisely, let $\Omega\subseteq\mathbb C$ be a complex domain ([[def-complex-domain]]), let $f,g:\Omega\to\mathbb C$ be holomorphic, and suppose that some $a\in\Omega$ is an accumulation point of $\{z\in\Omega:f(z)=g(z)\}$. Then $f=g$ on $\Omega$. The requirement $a\in\Omega$ is essential.
+Precisely, let $\Omega\subseteq\mathbb C$ be a complex domain (A complex domain is a nonempty connected open subset of $\mathbb C$), let $f,g:\Omega\to\mathbb C$ be holomorphic, and suppose that some $a\in\Omega$ is an accumulation point of $\{z\in\Omega:f(z)=g(z)\}$. Then $f=g$ on $\Omega$. The requirement $a\in\Omega$ is essential.
+
+## Statement references
+
+[[def-complex-domain]]
 
 ## Facts & Assumptions
 

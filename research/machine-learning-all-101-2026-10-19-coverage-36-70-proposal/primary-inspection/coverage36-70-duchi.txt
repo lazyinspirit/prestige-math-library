@@ -1,0 +1,1133 @@
+PDF PAGE 1
+Journal of Machine Learning Research 12 (2011) 2121-2159
+Submitted 3/10; Revised 3/11; Published 7/11
+Adaptive Subgradient Methods for
+Online Learning and Stochastic Optimization∗
+John Duchi
+JDUCHI@CS.BERKELEY.EDU
+Computer Science Division
+University of California, Berkeley
+Berkeley, CA 94720 USA
+Elad Hazan
+EHAZAN@IE.TECHNION.AC.IL
+Technion - Israel Institute of Technology
+Technion City
+Haifa, 32000, Israel
+Yoram Singer
+SINGER@GOOGLE.COM
+Google
+1600 Amphitheatre Parkway
+Mountain View, CA 94043 USA
+Editor: Tong Zhang
+Abstract
+We present a new family of subgradient methods that dynamically incorporate knowledge of the
+geometry of the data observed in earlier iterations to perform more informative gradient-based
+learning. Metaphorically, the adaptation allows us to ﬁnd needles in haystacks in the form of very
+predictive but rarely seen features. Our paradigm stems from recent advances in stochastic op-
+timization and online learning which employ proximal functions to control the gradient steps of
+the algorithm. We describe and analyze an apparatus for adaptively modifying the proximal func-
+tion, which signiﬁcantly simpliﬁes setting a learning rate and results in regret guarantees that are
+provably as good as the best proximal function that can be chosen in hindsight. We give several
+efﬁcient algorithms for empirical risk minimization problems with common and important regu-
+larization functions and domain constraints. We experimentally study our theoretical analysis and
+show that adaptive subgradient methods outperform state-of-the-art, yet non-adaptive, subgradient
+algorithms.
+Keywords: subgradient methods, adaptivity, online learning, stochastic convex optimization
+1. Introduction
+In many applications of online and stochastic learning, the input instances are of very high di-
+mension, yet within any particular instance only a few features are non-zero. It is often the case,
+however, that infrequently occurring features are highly informative and discriminative. The infor-
+mativeness of rare features has led practitioners to craft domain-speciﬁc feature weightings, such as
+TF-IDF (Salton and Buckley, 1988), which pre-emphasize infrequently occurring features. We use
+this old idea as a motivation for applying modern learning-theoretic techniques to the problem of
+online and stochastic learning, focusing concretely on (sub)gradient methods.
+∗. A preliminary version of this work was published in COLT 2010.
+c⃝2011 John Duchi, Elad Hazan and Yoram Singer.
+
+PDF PAGE 2
+DUCHI, HAZAN AND SINGER
+Standard stochastic subgradient methods largely follow a predetermined procedural scheme that
+is oblivious to the characteristics of the data being observed. In contrast, our algorithms dynamically
+incorporate knowledge of the geometry of the data observed in earlier iterations to perform more
+informative gradient-based learning. Informally, our procedures give frequently occurring features
+very low learning rates and infrequent features high learning rates, where the intuition is that each
+time an infrequent feature is seen, the learner should “take notice.” Thus, the adaptation facilitates
+ﬁnding and identifying very predictive but comparatively rare features.
+1.1 The Adaptive Gradient Algorithm
+Before introducing our adaptive gradient algorithm, which we term ADAGRAD, we establish no-
+tation. Vectors and scalars are lower case italic letters, such as x ∈X . We denote a sequence of
+vectors by subscripts, that is, xt,xt+1,..., and entries of each vector by an additional subscript, for
+example, xt, j. The subdifferential set of a function f evaluated at x is denoted ∂f(x), and a partic-
+ular vector in the subdifferential set is denoted by f ′(x) ∈∂f(x) or gt ∈∂ft(xt). When a function
+is differentiable, we write ∇f(x). We use ⟨x,y⟩to denote the inner product between x and y. The
+Bregman divergence associated with a strongly convex and differentiable function ψ is
+Bψ(x,y) = ψ(x)−ψ(y)−⟨∇ψ(y),x−y⟩.
+We also make frequent use of the following two matrices. Let g1:t = [g1 ··· gt] denote the matrix
+obtained by concatenating the subgradient sequence. We denote the ith row of this matrix, which
+amounts to the concatenation of the ith component of each subgradient we observe, by g1:t,i. We
+also deﬁne the outer product matrix Gt = ∑t
+τ=1 gτgτ⊤.
+Online learning and stochastic optimization are closely related and basically interchangeable
+(Cesa-Bianchi et al., 2004). In order to keep our presentation simple, we conﬁne our discussion and
+algorithmic descriptions to the online setting with the regret bound model. In online learning, the
+learner repeatedly predicts a point xt ∈X ⊆Rd, which often represents a weight vector assigning
+importance values to various features. The learner’s goal is to achieve low regret with respect to a
+static predictor x∗in the (closed) convex set X ⊆Rd (possibly X = Rd) on a sequence of functions
+ft(x), measured as
+R(T) =
+T
+∑
+t=1
+ft(xt)−inf
+x∈X
+T
+∑
+t=1
+ft(x) .
+At every timestep t, the learner receives the (sub)gradient information gt ∈∂ft(xt). Standard sub-
+gradient algorithms then move the predictor xt in the opposite direction of gt while maintaining
+xt+1 ∈X via the projected gradient update (e.g., Zinkevich, 2003)
+xt+1 = ΠX (xt −ηgt) = argmin
+x∈X
+∥x−(xt −ηgt)∥2
+2 .
+In contrast, let the Mahalanobis norm ∥·∥A =
+p
+⟨·,A·⟩and denote the projection of a point y onto X
+according to A by ΠA
+X (y) = argminx∈X ∥x−y∥A = argminx∈X ⟨x−y,A(x−y)⟩. Using this notation,
+our generalization of standard gradient descent employs the update
+xt+1 = ΠG1/2
+t
+X
+
+xt −ηG−1/2
+t
+gt
+
+.
+2122
+
+PDF PAGE 3
+ADAPTIVE SUBGRADIENT METHODS
+The above algorithm is computationally impractical in high dimensions since it requires computa-
+tion of the root of the matrix Gt, the outer product matrix. Thus we specialize the update to
+xt+1 = Πdiag(Gt)1/2
+X
+
+xt −ηdiag(Gt)−1/2gt
+
+.
+(1)
+Both the inverse and root of diag(Gt) can be computed in linear time. Moreover, as we discuss later,
+when the gradient vectors are sparse the update above can often be performed in time proportional
+to the support of the gradient. We now elaborate and give a more formal discussion of our setting.
+In this paper we consider several different online learning algorithms and their stochastic convex
+optimization counterparts. Formally, we consider online learning with a sequence of composite
+functions φt. Each function is of the form φt(x) = ft(x)+ϕ(x) where ft and ϕ are (closed) convex
+functions. In the learning settings we study, ft is either an instantaneous loss or a stochastic estimate
+of the objective function in an optimization task. The function ϕ serves as a ﬁxed regularization
+function and is typically used to control the complexity of x. At each round the algorithm makes a
+prediction xt ∈X and then receives the function ft. We deﬁne the regret with respect to the ﬁxed
+(optimal) predictor x∗as
+Rφ(T) ≜
+T
+∑
+t=1
+[φt(xt)−φt(x∗)] =
+T
+∑
+t=1
+[ft(xt)+ϕ(xt)−ft(x∗)−ϕ(x∗)] .
+(2)
+Our goal is to devise algorithms which are guaranteed to suffer asymptotically sub-linear regret,
+namely, Rφ(T) = o(T).
+Our analysis applies to related, yet different, methods for minimizing the regret (2). The ﬁrst
+is Nesterov’s primal-dual subgradient method (2009), and in particular Xiao’s (2010) extension,
+regularized dual averaging, and the follow-the-regularized-leader (FTRL) family of algorithms (see
+for instance Kalai and Vempala, 2003; Hazan et al., 2006). In the primal-dual subgradient method
+the algorithm makes a prediction xt on round t using the average gradient ¯gt = 1
+t ∑t
+τ=1 gτ. The update
+encompasses a trade-off between a gradient-dependent linear term, the regularizer ϕ, and a strongly-
+convex term ψt for well-conditioned predictions. Here ψt is the proximal term. The update amounts
+to solving
+xt+1 = argmin
+x∈X
+
+η⟨¯gt,x⟩+ηϕ(x)+ 1
+t ψt(x)
+
+,
+(3)
+where η is a ﬁxed step-size and x1 = argminx∈X ϕ(x). The second method similarly has numer-
+ous names, including proximal gradient, forward-backward splitting, and composite mirror descent
+(Tseng, 2008; Duchi et al., 2010). We use the term composite mirror descent. The composite mirror
+descent method employs a more immediate trade-off between the current gradient gt, ϕ, and staying
+close to xt using the proximal function ψ,
+xt+1 = argmin
+x∈X
+
+η⟨gt,x⟩+ηϕ(x)+Bψt(x,xt)
+	
+.
+(4)
+Our work focuses on temporal adaptation of the proximal function in a data driven way, while
+previous work simply sets ψt ≡ψ, ψt(·) = √tψ(·), or ψt(·) = tψ(·) for some ﬁxed ψ.
+We provide formal analyses equally applicable to the above two updates and show how to au-
+tomatically choose the function ψt so as to achieve asymptotically small regret. We describe and
+analyze two algorithms. Both algorithms use squared Mahalanobis norms as their proximal func-
+tions, setting ψt(x) = ⟨x,Htx⟩for a symmetric matrix Ht ⪰0. The ﬁrst uses diagonal matrices while
+2123
+
+PDF PAGE 8
+DUCHI, HAZAN AND SINGER
+(Xiao, 2010, Theorem 3):
+Rφ(T) ≤
+√
+Tψ(x∗)+
+1
+2
+√
+T
+T
+∑
+t=1
+ f ′
+t (xt)
+2
+∗.
+(8)
+The problem of adapting to data and obtaining tighter data-dependent bounds for algorithms
+such as those above is a natural one and has been studied in the mistake-bound setting for online
+learning in the past. A framework that is somewhat related to ours is the conﬁdence weighted
+learning scheme by Crammer et al. (2008) and the adaptive regularization of weights algorithm
+(AROW) of Crammer et al. (2009). These papers provide mistake-bound analyses for second-
+order algorithms, which in turn are similar in spirit to the second-order Perceptron algorithm (Cesa-
+Bianchi et al., 2005). The analyses by Crammer and colleagues, however, yield mistake bounds
+dependent on the runs of the individual algorithms and are thus difﬁcult to compare with our regret
+bounds.
+AROW maintains a mean prediction vector µt ∈Rd and a covariance matrix Σt ∈Rd×d over µt
+as well. At every step of the algorithm, the learner receives a pair (zt,yt) where zt ∈Rd is the tth
+example and yt ∈{−1,+1} is the label. Whenever the predictor µt attains a margin value smaller
+than 1, AROW performs the update
+βt =
+1
+⟨zt,Σtzt⟩+λ,
+αt = [1−yt ⟨zt,µt⟩]+ ,
+µt+1 = µt +αtΣtytzt,
+Σt+1 = Σt −βtΣtxtx⊤
+t Σt.
+(9)
+In the above scheme, one can force Σt to be diagonal, which reduces the run-time and storage
+requirements of the algorithm but still gives good performance (Crammer et al., 2009). In contrast
+to AROW, the ADAGRAD algorithm uses the root of the inverse covariance matrix, a consequence of
+our formal analysis. Crammer et al.’s algorithm and our algorithms have similar run times, generally
+linear in the dimension d, when using diagonal matrices. However, when using full matrices the
+runtime of AROW algorithm is O(d2), which is faster than ours as it requires computing the root of
+a matrix.
+In concurrent work, McMahan and Streeter (2010) propose and analyze an algorithm which
+is very similar to some of the algorithms presented in this paper. Our analysis builds on recent
+advances in online learning and stochastic optimization (Duchi et al., 2010; Xiao, 2010), whereas
+McMahan and Streeter use ﬁrst-principles to derive their regret bounds. As a consequence of our
+approach, we are able to apply our analysis to algorithms for composite minimization with a known
+additional objective term ϕ. We are also able to generalize and analyze both the mirror descent and
+dual-averaging family of algorithms. McMahan and Streeter focus on what they term the compet-
+itive ratio, which is the ratio of the worst case regret of the adaptive algorithm to the worst case
+regret of a non-adaptive algorithm with the best proximal term ψ chosen in hindsight. We touch on
+this issue brieﬂy in the sequel, but refer the interested reader to McMahan and Streeter (2010) for
+this alternative elegant perspective. We believe that both analyses shed insights into the problems
+studied in this paper and complement each other.
+There are also other lines of work on adaptive gradient methods that are not directly related to
+our work but nonetheless relevant. Tighter regret bounds using the variation of the cost functions ft
+were proposed by Cesa-Bianchi et al. (2007) and derived by Hazan and Kale (2008). Bartlett et al.
+(2007) explore another adaptation technique for ηt where they adapt the step size to accommodate
+2128
+
+PDF PAGE 9
+ADAPTIVE SUBGRADIENT METHODS
+both strongly and weakly convex functions. Our approach differs from previous approaches as it
+does not focus on a particular loss function or mistake bound. Instead, we view the problem of
+adapting the proximal function as a meta-learning problem. We then obtain a bound comparable to
+the bound obtained using the best proximal function chosen in hindsight.
+2. Adaptive Proximal Functions
+Examining the bounds (7) and (8), we see that most of the regret depends on dual norms of f ′
+t (xt),
+and the dual norms in turn depend on the choice of ψ. This naturally leads to the question of whether
+we can modify the proximal term ψ along the run of the algorithm in order to lower the contribution
+of the aforementioned norms. We achieve this goal by keeping second order information about the
+sequence ft and allow ψ to vary on each round of the algorithms.
+We begin by providing two corollaries based on previous work that give the regret of our base
+algorithms when the proximal function ψt is allowed to change. These corollaries are used in
+the sequel in our regret analysis. We assume that ψt is monotonically non-decreasing, that is,
+ψt+1(x) ≥ψt(x). We also assume that ψt is 1-strongly convex with respect to a time-dependent
+semi-norm ∥·∥ψt. Formally, ψ is 1-strongly convex with respect to ∥·∥ψ if
+ψ(y) ≥ψ(x)+⟨∇ψ(x),y−x⟩+ 1
+2 ∥x−y∥2
+ψ .
+Strong convexity is guaranteed if and only if Bψt(x,y) ≥1
+2 ∥x−y∥2
+ψt. We also denote the dual norm
+of ∥·∥ψt by ∥·∥ψ∗t . For completeness, we provide the proofs of following two results in Appendix F,
+as they build straightforwardly on work by Duchi et al. (2010) and Xiao (2010). For the primal-dual
+subgradient update, the following bound holds.
+Proposition 2 Let the sequence {xt} be deﬁned by the update (3). For any x∗∈X ,
+T
+∑
+t=1
+ft(xt)+ϕ(xt)−ft(x∗)−ϕ(x∗) ≤1
+ηψT(x∗)+ η
+2
+T
+∑
+t=1
+f ′
+t (xt)
+2
+ψ∗
+t−1 .
+(10)
+For composite mirror descent algorithms a similar result holds.
+Proposition 3 Let the sequence {xt} be deﬁned by the update (4). Assume w.l.o.g. that ϕ(x1) = 0.
+For any x∗∈X ,
+T
+∑
+t=1
+ft(xt)+ϕ(xt)−ft(x∗)−ϕ(x∗)
+≤1
+ηBψ1(x∗,x1)+ 1
+η
+T−1
+∑
+t=1
+
+Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1)
+
++ η
+2
+T
+∑
+t=1
+ f ′
+t (xt)
+2
+ψ∗t .
+(11)
+The above corollaries allow us to prove regret bounds for a family of algorithms that iteratively
+modify the proximal functions ψt in attempt to lower the regret bounds.
+2129
+
+PDF PAGE 10
+DUCHI, HAZAN AND SINGER
+INPUT: η > 0, δ ≥0
+VARIABLES: s ∈Rd,H ∈Rd×d, g1:t,i ∈Rt for i ∈{1,...,d}
+INITIALIZE x1 = 0, g1:0 = []
+FOR t = 1 to T
+Suffer loss ft(xt)
+Receive subgradient gt ∈∂ft(xt) of ft at xt
+UPDATE g1:t = [g1:t−1 gt], st,i = ∥g1:t,i∥2
+SET Ht = δI +diag(st), ψt(x) = 1
+2⟨x,Ht x⟩
+Primal-Dual Subgradient Update (3):
+xt+1 = argmin
+x∈X
+(
+η
+*
+1
+t
+t
+∑
+τ=1
+gτ,x
++
++ηϕ(x)+ 1
+t ψt(x)
+)
+.
+Composite Mirror Descent Update (4):
+xt+1 = argmin
+x∈X
+
+η⟨gt,x⟩+ηϕ(x)+Bψt(x,xt)
+	
+.
+Figure 1: ADAGRAD with diagonal matrices
+3. Diagonal Matrix Proximal Functions
+We begin by restricting ourselves to using diagonal matrices to deﬁne matrix proximal functions
+and (semi)norms. This restriction serves a two-fold purpose. First, the analysis for the general case
+is somewhat complicated and thus the analysis of the diagonal restriction serves as a proxy for better
+understanding. Second, in problems with high dimension where we expect this type of modiﬁcation
+to help, maintaining more complicated proximal functions is likely to be prohibitively expensive.
+Whereas earlier analysis requires a learning rate to slow changes between predictors xt and xt+1, we
+will instead automatically grow the proximal function we use to achieve asymptotically low regret.
+To remind the reader, g1:t,i is the ith row of the matrix obtained by concatenating the subgradients
+from iteration 1 through t in the online algorithm.
+To provide some intuition for the algorithm we show in Algorithm 1, let us examine the problem
+min
+s
+T
+∑
+t=1
+d
+∑
+i=1
+g2
+t,i
+si
+s.t. s ⪰0, ⟨1,s⟩≤c .
+This problem is solved by setting si = ∥g1:T,i∥2 and scaling s so that ⟨s,1⟩= c. To see this, we can
+write the Lagrangian of the minimization problem by introducing multipliers λ ⪰0 and θ ≥0 to get
+L(s,λ,θ) =
+d
+∑
+i=1
+∥g1:T,i∥2
+2
+si
+−⟨λ,s⟩+θ(⟨1,s⟩−c).
+Taking partial derivatives to ﬁnd the inﬁmum of L, we see that −∥g1:T,i∥2
+2 /s2
+i −λi+θ = 0, and com-
+plementarity conditions on λisi (Boyd and Vandenberghe, 2004) imply that λi = 0. Thus we have
+si = θ−1
+2 ∥g1:T,i∥2, and normalizing appropriately using θ gives that si = c∥g1:T,i∥2 /∑d
+j=1
+g1:T, j
+
+2.
+2130
+
+PDF PAGE 11
+ADAPTIVE SUBGRADIENT METHODS
+As a ﬁnal note, we can plug si into the objective above to see
+inf
+s
+(
+T
+∑
+t=1
+d
+∑
+i=1
+g2
+t,i
+si
+: s ⪰0,⟨1,s⟩≤c
+)
+= 1
+c
+ 
+d
+∑
+i=1
+∥g1:T,i∥2
+!2
+.
+(12)
+Let diag(v) denote the diagonal matrix with diagonal v. It is natural to suspect that for s achieving
+the inﬁmum in Equation (12), if we use a proximal function similar to ψ(x) = ⟨x,diag(s)x⟩with
+associated squared dual norm ∥x∥2
+ψ∗=
+
+x,diag(s)−1x
+
+, we should do well lowering the gradient
+terms in the regret bounds (10) and (11).
+To prove a regret bound for our Algorithm 1, we note that both types of updates suffer losses that
+include a term depending solely on the gradients obtained along their run. The following lemma
+is applicable to both updates, and was originally proved by Auer and Gentile (2000), though we
+provide a proof in Appendix C. McMahan and Streeter (2010) also give an identical lemma.
+Lemma 4 Let gt = f ′
+t (xt) and g1:t and st be deﬁned as in Algorithm 1. Then
+T
+∑
+t=1
+
+gt,diag(st)−1gt
+
+≤2
+d
+∑
+i=1
+∥g1:T,i∥2 .
+To obtain a regret bound, we need to consider the terms consisting of the dual-norm of the sub-
+gradient in the regret bounds (10) and (11), which is ∥f ′
+t (xt)∥2
+ψ∗t . When ψt(x) = ⟨x,(δI +diag(st))x⟩,
+it is easy to see that the associated dual-norm is
+∥g∥2
+ψ∗t =
+
+g,(δI +diag(st))−1g
+
+.
+From the deﬁnition of st in Algorithm 1, we clearly have ∥f ′
+t (xt)∥2
+ψ∗t ≤
+
+gt,diag(st)−1gt
+
+. Note that
+if st,i = 0 then gt,i = 0 by deﬁnition of st,i. Thus, for any δ ≥0, Lemma 4 implies
+T
+∑
+t=1
+ f ′
+t (xt)
+2
+ψ∗t ≤2
+d
+∑
+i=1
+∥g1:T,i∥2 .
+(13)
+To obtain a bound for a primal-dual subgradient method, we set δ ≥maxt ∥gt∥∞, in which case
+∥gt∥2
+ψ∗
+t−1 ≤
+
+gt,diag(st)−1gt
+
+, and we follow the same lines of reasoning to achieve the inequal-
+ity (13).
+It remains to bound the various Bregman divergence terms for Corollary 3 and the term ψT(x∗)
+for Corollary 2. We focus ﬁrst on the composite mirror-descent update. Examining the bound (11)
+and Algorithm 1, we notice that
+Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1) = 1
+2 ⟨x∗−xt+1,diag(st+1 −st)(x∗−xt+1)⟩
+≤1
+2 max
+i (x∗
+i −xt+1,i)2 ∥st+1 −st∥1 .
+Since ∥st+1 −st∥1 = ⟨st+1 −st,1⟩and ⟨sT,1⟩= ∑d
+i=1 ∥g1:T,i∥2, we have
+T−1
+∑
+t=1
+Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1) ≤1
+2
+T−1
+∑
+t=1
+∥x∗−xt+1∥2
+∞⟨st+1 −st,1⟩
+≤
+1
+2 max
+t≤T ∥x∗−xt∥2
+∞
+d
+∑
+i=1
+∥g1:T,i∥2 −1
+2 ∥x∗−x1∥2
+∞⟨s1,1⟩.
+(14)
+2131
+
+PDF PAGE 12
+DUCHI, HAZAN AND SINGER
+We also have
+ψT(x∗) = δ∥x∗∥2
+2 +⟨x∗,diag(sT)x∗⟩≤δ∥x∗∥2
+2 +∥x∗∥2
+∞
+d
+∑
+i=1
+∥g1:T,i∥2 .
+Combining the above arguments with Corollaries 2 and 3, and using (14) with the fact that Bψ1(x∗,x1) ≤
+1
+2 ∥x∗−x1∥2
+∞⟨1,s1⟩, we have proved the following theorem.
+Theorem 5 Let the sequence {xt} be deﬁned by Algorithm 1. For xt generated using the primal-
+dual subgradient update (3) with δ ≥maxt ∥gt∥∞, for any x∗∈X ,
+Rφ(T) ≤δ
+η ∥x∗∥2
+2 + 1
+η ∥x∗∥2
+∞
+d
+∑
+i=1
+∥g1:T,i∥2 +η
+d
+∑
+i=1
+∥g1:T,i∥2 .
+For xt generated using the composite mirror-descent update (4), for any x∗∈X
+Rφ(T) ≤1
+2η max
+t≤T ∥x∗−xt∥2
+∞
+d
+∑
+i=1
+∥g1:T,i∥2 +η
+d
+∑
+i=1
+∥g1:T,i∥2 .
+The above theorem is a bit unwieldy. We thus perform a few algebraic simpliﬁcations to get the
+next corollary, which has a more intuitive form. Let us assume that X is compact and set D∞=
+supx∈X ∥x−x∗∥∞. Furthermore, deﬁne
+γT ≜
+d
+∑
+i=1
+∥g1:T,i∥2 = inf
+s
+(
+T
+∑
+t=1
+
+gt,diag(s)−1gt
+
+: ⟨1,s⟩≤
+d
+∑
+i=1
+∥g1:T,i∥2 , s ⪰0
+)
+.
+Also w.l.o.g. let 0 ∈X . The following corollary is immediate (this is equivalent to Corollary 1,
+though we have moved the
+√
+d term in the earlier bound).
+Corollary 6 Assume that D∞and γT are deﬁned as above. For {xt} generated by Algorithm 1 using
+the primal-dual subgradient update (3) with η = ∥x∗∥∞, for any x∗∈X we have
+Rφ(T) ≤2∥x∗∥∞γT +δ ∥x∗∥2
+2
+∥x∗∥∞
+≤2∥x∗∥∞γT +δ∥x∗∥1 .
+Using the composite mirror descent update (4) to generate {xt} and setting η = D∞/
+√
+2, we have
+Rφ(T) ≤
+√
+2D∞
+d
+∑
+i=1
+∥g1:T,i∥2 =
+√
+2D∞γT .
+We now give a short derivation of Corollary 1 from the introduction: use Theorem 5, Corollary 6,
+and the fact that
+inf
+s
+(
+T
+∑
+t=1
+d
+∑
+i=1
+g2
+t,i
+si
+: s ⪰0,⟨1,s⟩≤d
+)
+= 1
+d
+ 
+d
+∑
+i=1
+∥g1:T,i∥2
+!2
+.
+as in (12) in the beginning of Section 3. Plugging the γT term in from Corollary 6 and multiplying
+D∞by
+√
+d completes the proof of the corollary.
+2132
+
+PDF PAGE 13
+ADAPTIVE SUBGRADIENT METHODS
+As discussed in the introduction, Algorithm 1 should have lower regret than non-adaptive algo-
+rithms on sparse data, though this depends on the geometry of the underlying optimization space
+X . For example, suppose that our learning problem is a logistic regression with 0/1-valued features.
+Then the gradient terms are likewise based on 0/1-valued features and sparse, so the gradient terms
+in the bound ∑d
+i=1 ∥g1:T,i∥2 should all be much smaller than
+√
+T. If some features appear much more
+frequently than others, then the inﬁmal representation of γT and the inﬁmal equality in Corollary 1
+show that we have signiﬁcantly lower regret by using higher learning rates for infrequent features
+and lower learning rates on commonly appearing features. Further, if the optimal predictor is rela-
+tively dense, as is often the case in predictions problems with sparse inputs, then ∥x∗∥∞is the best
+p-norm we can have in the regret.
+More precisely, McMahan and Streeter (2010) show that if X is contained within an ℓ∞ball
+of radius R and contains an ℓ∞ball of radius r, then the bound in the above corollary is within a
+factor of
+√
+2R/r of the regret of the best diagonal proximal matrix, chosen in hindsight. So, for
+example, if X = {x ∈Rd : ∥x∥p ≤C}, then R/r = d1/p, which shows that the domain X does effect
+the guarantees we can give on optimality of ADAGRAD.
+4. Full Matrix Proximal Functions
+In this section we derive and analyze new updates when we estimate a full matrix for the divergence
+ψt instead of a diagonal one. In this generalized case, we use the root of the matrix of outer products
+of the gradients that we have observed to update our parameters. As in the diagonal case, we build
+on intuition garnered from an optimization problem, and in particular, we seek a matrix S which is
+the solution to the following minimization problem:
+min
+S
+T
+∑
+t=1
+
+gt,S−1gt
+
+s.t. S ⪰0, tr(S) ≤c .
+(15)
+The solution is obtained by deﬁning Gt = ∑t
+τ=1 gτgτ⊤and setting S to be a normalized version of
+the root of GT, that is, S = cG1/2
+T /tr(G1/2
+T ). For a proof, see Lemma 15 in Appendix E, which also
+shows that when GT is not full rank we can instead use its pseudo-inverse. If we iteratively use
+divergences of the form ψt(x) =
+D
+x,G1/2
+t
+x
+E
+, we might expect as in the diagonal case to attain low
+regret by collecting gradient information. We achieve our low regret goal by employing a similar
+doubling lemma to Lemma 4 and bounding the gradient norm terms. The resulting algorithm is
+given in Algorithm 2, and the next theorem provides a quantitative analysis of the brief motivation
+above.
+Theorem 7 Let Gt be the outer product matrix deﬁned above and the sequence {xt} be deﬁned by
+Algorithm 2. For xt generated using the primal-dual subgradient update of (3) and δ ≥maxt ∥gt∥2,
+for any x∗∈X
+Rφ(T) ≤δ
+η ∥x∗∥2
+2 + 1
+η ∥x∗∥2
+2 tr(G1/2
+T )+ηtr(G1/2
+T ).
+For xt generated with the composite mirror-descent update of (4), if x∗∈X and δ ≥0
+Rφ(T) ≤δ
+η ∥x∗∥2
+2 + 1
+2η max
+t≤T ∥x∗−xt∥2
+2 tr(G1/2
+T )+ηtr(G1/2
+T ).
+2133
+
+PDF PAGE 14
+DUCHI, HAZAN AND SINGER
+INPUT: η > 0, δ ≥0
+VARIABLES: St ∈Rd×d, Ht ∈Rd×d, Gt ∈Rd×d
+INITIALIZE x1 = 0, S0 = 0, H0 = 0, G0 = 0
+FOR t = 1 to T
+Suffer loss ft(xt)
+Receive subgradient gt ∈∂ft(xt) of ft at xt
+UPDATE Gt = Gt−1 +gtg⊤
+t , St = G
+1
+2t
+SET Ht = δI +St, ψt(x) = 1
+2⟨x,Ht x⟩
+Primal-Dual Subgradient Update ((3)):
+xt+1 = argmin
+x∈X
+(
+η
+*
+1
+t
+t
+∑
+τ=1
+gτ,x
++
++ηϕ(x)+ 1
+t ψt(x)
+)
+.
+Composite Mirror Descent Update ((4)):
+xt+1 = argmin
+x∈X
+
+η⟨gt,x⟩+ηϕ(x)+Bψt(x,xt)
+	
+.
+Figure 2: ADAGRAD with full matrices
+Proof To begin, we consider the difference between the divergence terms at time t + 1 and time t
+from the regret (11) in Corollary 3. Let λmax(M) denote the largest eigenvalue of a matrix M. We
+have
+Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1) = 1
+2
+D
+x∗−xt+1,(Gt+11/2 −Gt1/2)(x∗−xt+1)
+E
+≤
+1
+2 ∥x∗−xt+1∥2
+2 λmax(G1/2
+t+1 −G1/2
+t
+) ≤1
+2 ∥x∗−xt+1∥2
+2 tr(G1/2
+t+1 −G1/2
+t
+) .
+For the last inequality we used the fact that the trace of a matrix is equal to the sum of its eigenvalues
+along with the property Gt+11/2 −Gt1/2 ⪰0 (see Lemma 13 in Appendix B) and therefore tr(G1/2
+t+1 −
+G1/2
+t
+) ≥λmax(G1/2
+t+1 −G1/2
+t
+). Thus, we get
+T−1
+∑
+t=1
+Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1) ≤1
+2
+T−1
+∑
+t=1
+∥x∗−xt+1∥2
+2
+
+tr(G1/2
+t+1)−tr(G1/2
+t
+)
+
+.
+Now we use the fact that G1 is a rank 1 PSD matrix with non-negative trace to see that
+T−1
+∑
+t=1
+∥x∗−xt+1∥2
+2
+
+tr(G1/2
+t+1)−tr(G1/2
+t
+)
+
+≤max
+t≤T ∥x∗−xt∥2
+2 tr(GT 1/2)−∥x∗−x1∥2
+2 tr(G1/2
+1 ) .
+(16)
+It remains to bound the gradient terms common to all our bounds. We use the following three
+lemmas, which essentially directly applicable. We prove the ﬁrst two in Appendix D.
+Lemma 8 Let B ⪰0 and B−1/2 denote the root of the inverse of B when B ≻0 and the root of the
+pseudo-inverse of B otherwise. For any ν such that B−νgg⊤⪰0 the following inequality holds.
+2tr((B−νgg⊤)1/2) ≤2tr(B1/2)−νtr(B−1/2gg⊤) .
+2134
+
+PDF PAGE 15
+ADAPTIVE SUBGRADIENT METHODS
+Lemma 9 Let δ ≥∥g∥2 and A ⪰0, then
+
+g,(δI +A1/2)−1g
+
+≤
+D
+g,
+ (A+gg⊤)†1/2 g
+E
+.
+Lemma 10 Let St = Gt1/2 be as deﬁned in Algorithm 2 and A† denote the pseudo-inverse of A.
+Then
+T
+∑
+t=1
+D
+gt,S†
+t gt
+E
+≤2
+T
+∑
+t=1
+D
+gt,S†
+Tgt
+E
+= 2tr(GT 1/2) .
+Proof We prove the lemma by induction. The base case is immediate, since we have
+D
+g1,(G†
+1)1/2g1
+E
+= ⟨g1,g1⟩
+∥g1∥2
+= ∥g1∥2 ≤2∥g1∥2 .
+Now, assume the lemma is true for T −1, so from the inductive assumption we get
+T
+∑
+t=1
+D
+gt,S†
+t gt
+E
+≤2
+T−1
+∑
+t=1
+D
+gt,S†
+T−1gt
+E
++
+D
+gT,S†
+TgT
+E
+.
+Since ST−1 does not depend on t we can rewrite ∑T−1
+t=1
+D
+gt,S†
+T−1gt
+E
+as
+tr
+ 
+S†
+T−1,
+T−1
+∑
+t=1
+gtg⊤
+t
+!
+= tr((G†
+T−1)1/2GT−1) ,
+where the right-most equality follows from the deﬁnitions of St and Gt. Therefore, we get
+T
+∑
+t=1
+D
+gt,S†
+t gt
+E
+≤
+2tr((G†
+T−1)1/2GT−1)+
+D
+gT,(G†
+T)1/2gT
+E
+=
+2tr(G1/2
+T−1)+
+D
+gT,(G†
+T)1/2gT
+E
+.
+Using Lemma 8 with the substitution B = GT, ν = 1, and g = gt lets us exploit the concavity of the
+function tr(A1/2) to bound the above sum by 2tr(G1/2
+T ).
+▲
+We can now ﬁnalize our proof of the theorem. As in the diagonal case, we have that the squared
+dual norm (seminorm when δ = 0) associated with ψt is
+∥x∥2
+ψ∗t =
+
+x,(δI +St)−1x
+
+.
+Thus it is clear that ∥gt∥2
+ψ∗t ≤
+D
+gt,S†
+t gt
+E
+. For the dual-averaging algorithms, we use Lemma 9 above
+show that ∥gt∥2
+ψ∗
+t−1 ≤
+D
+gt,S†
+t gt
+E
+so long as δ ≥∥gt∥2. Lemma 10’s doubling inequality then implies
+that
+T
+∑
+t=1
+ f ′
+t (xt)
+2
+ψ∗t ≤2tr(G1/2
+T ) and
+T
+∑
+t=1
+f ′
+t (xt)
+2
+ψ∗
+t−1 ≤2tr(G1/2
+T )
+(17)
+for the mirror-descent and primal-dual subgradient algorithm, respectively.
+To ﬁnish the proof, Note that Bψ1(x∗,x1) ≤1
+2 ∥x∗−x1∥2
+2 tr(G1/2
+1 ) when δ = 0. By combining this
+with the ﬁrst of the bounds (17) and the bound (16) on ∑T−1
+t=1 Bψt+1(x∗,xt+1)−Bψt(x∗,xt+1), Corol-
+lary 3 gives the theorem’s statement for the mirror-descent family of algorithms. Combining the
+2135
+
+PDF PAGE 16
+DUCHI, HAZAN AND SINGER
+fact that ∑T
+t=1 ∥f ′
+t (xt)∥2
+ψ∗
+t−1 ≤2tr(G1/2
+T ) and the bound (16) with Corollary 2 gives the desired bound
+on Rφ(T) for the primal-dual subgradient algorithms, which completes the proof of the theorem.
+As before, we can give a corollary that simpliﬁes the bound implied by Theorem 7. The inﬁmal
+equality in the corollary uses Lemma 15 in Appendix B. The corollary underscores that for learn-
+ing problems in which there is a rotation U of the space for which the gradient vectors gt have
+small inner products ⟨gt,Ugt⟩(essentially a sparse basis for the gt) then using full-matrix proximal
+functions can attain signiﬁcantly lower regret.
+Corollary 11 Assume that ϕ(x1) = 0. Then the regret of the sequence {xt} generated by Algorithm 2
+when using the primal-dual subgradient update with η = ∥x∗∥2 is
+Rφ(T) ≤2∥x∗∥2 tr(G1/2
+T )+δ∥x∗∥2 .
+Let X be compact set so that supx∈X ∥x−x∗∥2 ≤D. Taking η = D/
+√
+2 and using the composite
+mirror descent update with δ = 0, we have
+Rφ(T) ≤
+√
+2Dtr(G1/2
+T ) =
+√
+2dD
+v
+u
+u
+tinf
+S
+(
+T
+∑
+t=1
+g⊤
+t S−1gt : S ⪰0,tr(S) ≤d
+)
+.
+5. Derived Algorithms
+In this section, we derive updates using concrete regularization functions ϕ and settings of the
+domain X for the ADAGRAD framework. We focus on showing how to solve Equations (3) and (4)
+with the diagonal matrix version of the algorithms we have presented. We focus on the diagonal
+case for two reasons. First, the updates often take closed-form in this case and carry some intuition.
+Second, the diagonal case is feasible to implement in very high dimensions, whereas the full matrix
+version is likely to be conﬁned to a few thousand dimensions. We also discuss how to efﬁciently
+compute the updates when the gradient vectors are sparse.
+We begin by noting a simple but useful fact. Let Gt denote either the outer product matrix of
+gradients or its diagonal counterpart and let Ht = δI + G1/2
+t
+, as usual. Simple algebraic manipula-
+tions yield that each of the updates (3) and (4) in the prequel can be written in the following form
+(omitting the stepsize η):
+xt+1 = argmin
+x∈X
+
+⟨u,x⟩+ϕ(x)+ 1
+2 ⟨x,Htx⟩
+
+.
+(18)
+In particular, at time t for the RDA update, we have u = ηt ¯gt. For the composite gradient update (4),
+η⟨gt,x⟩+ 1
+2 ⟨x−xt,Ht(x−xt)⟩= ⟨ηgt −Htxt,x⟩+ 1
+2 ⟨x,Htx⟩+ 1
+2 ⟨xt,Htxt⟩
+so that u = ηgt −Htxt. We now derive algorithms for solving the general update (18). Since most
+of the derivations are known, we generally provide only the closed-form solutions or algorithms for
+the solutions in the remainder of the subsection, deferring detailed derivations to Appendix G for
+the interested reader.
+2136
+
+PDF PAGE 17
+ADAPTIVE SUBGRADIENT METHODS
+5.1 ℓ1-regularization
+We begin by considering how to solve the minimization problems necessary for Algorithm 1 with
+diagonal matrix divergences and ϕ(x) = λ∥x∥1. We consider the two updates we proposed and
+denote the ith diagonal element of the matrix Ht = δI + diag(st) from Algorithm 1 by Ht,ii = δ +
+∥g1:t,i∥2. For the primal-dual subgradient update, the solution to (3) amounts to the following simple
+update for xt+1,i:
+xt+1,i = sign(−¯gt,i) ηt
+Ht,ii
+[| ¯gt,i|−λ]+ .
+(19)
+Comparing the update (19) to the standard dual averaging update (Xiao, 2010), which is
+xt+1,i = sign(−¯gt,i)η
+√
+t [| ¯gt,i|−λ]+ ,
+it is clear that the difference distills to the step size employed for each coordinate. Our generalization
+of RDA yields a dedicated step size for each coordinate inversely proportional to the time-based
+norm of the coordinate in the sequence of gradients. Due to the normalization by this term the step
+size scales linearly with t, so when Ht,ii is small, gradient information on coordinate i is quickly
+incorporated.
+The composite mirror-descent update (4) has a similar form that essentially amounts to iterative
+shrinkage and thresholding, where the shrinkage differs per coordinate:
+xt+1,i = sign
+
+xt,i −η
+Ht,ii
+gt,i
+xt,i −η
+Ht,ii
+gt,i
+−λη
+Ht,ii
+
++
+.
+We compare the actual performance of the newly derived algorithms to previously studied versions
+in the next section.
+For both updates it is clear that we can perform “lazy” computation when the gradient vectors
+are sparse, a frequently occurring setting when learning for instance from text corpora. Suppose
+that from time step t0 through t, the ith component of the gradient is 0. Then we can evaluate the
+above updates on demand since Ht,ii remains intact. For composite mirror-descent, at time t when
+xt,i is needed, we update
+xt,i = sign(xt0,i)
+
+|xt0,i|−λη
+Ht0,ii
+(t −t0)
+
++
+.
+Even simpler just in time evaluation can be performed for the the primal-dual subgradient update.
+Here we need to keep an unnormalized version of the average ¯gt. Concretely, we keep track of
+ut = t ¯gt = ∑t
+τ=1 gτ = ut−1 +gt, then use the update (19):
+xt,i = sign(−ut,i) ηt
+Ht,ii
+|ut,i|
+t
+−λ
+
++
+,
+where Ht can clearly be updated lazily in a similar fashion.
+5.2 ℓ1-ball Projections
+We next consider the setting in which ϕ ≡0 and X = {x : ∥x∥1 ≤c}, for which it is straightfor-
+ward to adapt efﬁcient solutions to continuous quadratic knapsack problems (Brucker, 1984). We
+2137

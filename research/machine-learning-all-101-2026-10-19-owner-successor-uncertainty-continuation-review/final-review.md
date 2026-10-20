@@ -1,0 +1,18 @@
+# Independent final review — approved
+
+Approved the exact seven-file successor-uncertainty `your-proposal/revision-2/candidate/` packet after the consolidated first-round repair. `approved-hashes.json` records every verified candidate SHA256, matching live preimage hash and the reviewer's independent executable snapshot `/tmp/successor-review-approved-ojnenzg2`. This is approval of the bounded adapter and guarded operational recipe, not mathematical acceptance or actual-run execution.
+
+Independent results on those exact bytes:
+
+- Focused successor/shared regression selection: 98 passed, 0 failed.
+- Nine independently authored adversarial/E2E cases: 9 passed. These include both first-round findings, malformed uncertainty fields, changed progress, exact persistent home, unchanged and indirect consumer omissions, strict original collection, fresh accepted coverage and forged historical-phase closure.
+- The same new regression on an independently copied original `c1af5167e7` tools baseline fails at `invalid review 3/ex-historical-use`; the approved adapter passes that complete proof-repair-to-real-resume scenario.
+- Native reader-concern/safety selection: 16 passed, 1 failed. The failure is the same preexisting `missing persistent reviewer or conflicting reviewer suppliers blocks continuation` assertion already reproduced on the original implementation. No whole-suite or native gate success is claimed.
+
+Both consolidated findings are repaired. Unrelated outside authoring no longer invalidates scheduling through a whole-corpus post-map comparison; every prepared frontier source and relevant context remains bound. Any frontier mathematical guard delta outside the exact completed supplier/consumer repair scope fails. The historical observation and exact original uncertainty remain immutable and supply no new mathematical acceptance. Separately authenticated clean current native rows retain only their genuine existing evidence outside the mandatory affected floor.
+
+The new ordinary pass genuinely resumes the actual successful persistent owner-3 reporting session. Its supplier and all affected direct/indirect consumers require fresh accepted current native rows even if an earlier clean consumer context still matches. Original 223 recovery duties, scoped native currency, latest-wave pending obligations, no-progress checks, budgets, maintenance, certification, judgments and all gates remain owed. Ordinary original collection still rejects the uncertain handoff before and after recording; fresh uncertainty cannot close. No source statement or history is weakened or rewritten by admission.
+
+For the actual run, root must first complete the separately assigned mathematical repair and all affected consumer dispositions, preserve its exact before/after evidence, and prepare current guarded inputs. This reviewer did not assess or certify the proof. At the actual stopped/paused, drained 5.2 boundary, root may CAS-install only these reviewed bytes, load fresh processes, preview and record the exact one-shot continuation, use the existing permitted native `advance-impact` helper, inspect its real new pack/session bindings, then resume the ordinary engine. This supplies no false resolved-escalation attestation or gate permission. Unsupported scope, a changed live hold/progress/request, unrelated mathematical edits, missing consumers or changed original native evidence fail closed.
+
+The two findings were resolved in one consolidated review/repair cycle followed by this final independent review. No further repair round is requested. This reviewer changed only the assigned research evidence directory and temporary isolated fixtures, and made no live code/source/control/native-gate changes.

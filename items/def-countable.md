@@ -13,6 +13,7 @@ aliases: [def-finite-set, def-countably-infinite, def-uncountable]
 landmark: true
 short: "finite, countable, uncountable"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-countable.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -43,21 +44,31 @@ pipeline_run: null
 ## Definition
 
 Recall that a natural number is a von Neumann natural
-([[def-natural-numbers]]): $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$, so
+(The natural numbers $\mathbb{N}$ (von Neumann)): $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$, so
 that
 
 $$n = \{\, m \in \mathbb{N} : m < n \,\} = \{0, 1, \dots, n-1\}$$
 
 is itself the set of its predecessors. Here $<$ is the order of
-[[def-nat-order]], which is defined additively, so the displayed identity is a
-theorem and not a convention: it is [[lem-nat-order-is-membership]], proved
+Order on the natural numbers, which is defined additively, so the displayed identity is a
+theorem and not a convention: it is On $\mathbb{N}$ the order is membership: $m < n \iff m \in n$, proved
 immediately above. Let $A$ be a set, and let $\approx$ be equinumerosity
-([[def-equinumerous]]).
+(Equinumerous sets, $A \approx B$ and $A \preceq B$).
 
 - $A$ is **finite** if $A \approx n$ for some $n \in \mathbb{N}$.
 - $A$ is **countably infinite** if $A \approx \mathbb{N}$.
 - $A$ is **at most countable** if it is finite or countably infinite.
 - $A$ is **uncountable** if it is not at most countable.
+
+## Definition references
+
+[[def-natural-numbers]]
+
+[[def-nat-order]]
+
+[[lem-nat-order-is-membership]]
+
+[[def-equinumerous]]
 
 ## Remarks
 

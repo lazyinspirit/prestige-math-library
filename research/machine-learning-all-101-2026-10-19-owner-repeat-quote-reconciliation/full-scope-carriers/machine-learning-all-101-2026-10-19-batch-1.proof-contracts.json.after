@@ -1,0 +1,1665 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "note": "Batch-1 authoring contracts for the Gaussian smoothing density, score, and endpoint-limit pair; exact supplier sections are quoted and mapped to the proof steps that cite them.",
+  "scope": [
+    "lem-deterministic-ito-integral-has-gaussian-independent-increments",
+    "def-gaussian-smoothed-data-law-and-transition-density",
+    "thm-gaussian-smoothing-density-and-forward-equation",
+    "thm-gaussian-mixture-score-and-global-lipschitz-bound",
+    "thm-gaussian-smoothing-endpoint-weak-limit",
+    "ex-gaussian-two-point-mixture-smoothing-density",
+    "ex-singular-line-law-has-smooth-positive-time-density",
+    "ex-gaussian-point-mass-score-lipschitz-blows-up-at-zero",
+    "ex-gaussian-point-mass-endpoint-coupling-bound"
+  ],
+  "contracts": {
+    "lem-deterministic-ito-integral-has-gaussian-independent-increments": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-d-dimensional-brownian-motion",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and let $d\\ge1$ be a finite integer. An\n$\\mathbb R^d$-valued process $B=(B_t)_{t\\ge0}$ is a **standard\n$d$-dimensional Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the vector increments\n   $$B_{t_j}-B_{t_{j-1}},\\qquad 1\\le j\\le n,$$\n   are mutually independent and have laws\n   $N_d(0,(t_j-t_{j-1})I_d)$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous from $[0,\\infty)$ to\n   $\\mathbb R^d$ for every $\\omega\\in A$.\n\nEquivalently, its $d$ coordinate processes $B^\\alpha=(B_t^\\alpha)_{t\\ge0}$\nare independent standard one-dimensional Brownian motions. Here independence\nof the processes means the following precise assertion. Put\n$I=[0,\\infty)$ and equip $\\mathbb R^I$ with its cylinder sigma-algebra. The\nmaps\n$$ \\Phi_\\alpha:\\Omega\\longrightarrow\\mathbb R^I, \\qquad \\Phi_\\alpha(\\omega)(t)=B_t^\\alpha(\\omega), \\qquad 1\\le\\alpha\\le d, $$\nare independent random elements.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-elementary-predictable-brownian-integrand",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice The Axiom of Choice, and fix a probability space\n$(\\Omega,\\mathcal F,P)$ with a continuous-time filtration\n$(\\mathcal F_t)_{t\\ge0}$\nContinuous-time filtrations and all-pairs martingales and a standard\nBrownian motion $B$ Brownian motion on it. **Standing hypothesis\n(H).** $B$ is adapted to $(\\mathcal F_t)$ and for all $0\\le s<t$ the increment\n$B_t-B_s$ is independent of $\\mathcal F_s$ and has law $N(0,t-s)$. The raw\nnatural filtration and the usual augmented natural filtration\nNatural and usual augmented Brownian filtrations both satisfy (H) for a\nstandard Brownian motion, by\nFuture-path Markov property; for a general filtration, (H) is\npart of the data and is not automatic. Every statement in this development\nnames (H) when it is used.\n\nThroughout, fix a finite horizon $T>0$. An **elementary predictable Brownian\nintegrand** on $[0,T]$ is a process of the form\n$$H_s(\\omega)=\\sum_{k=0}^{m-1}\\xi_k(\\omega)\\,1_{(t_k,t_{k+1}]}(s),\\qquad s\\in[0,T],$$\nwhere $0=t_0<t_1<\\cdots<t_m=T$ is a finite partition of $[0,T]$, each\n$\\xi_k$ is a bounded real $\\mathcal F_{t_k}$-measurable random variable, and\nthe values at the partition points are irrelevant because the intervals are\nleft-open and right-closed. The **mesh** of the representation is\n$\\max_k(t_{k+1}-t_k)$, and the **supremum norm** of the representation is\n$\\max_k\\|\\xi_k\\|_\\infty$. The integrand itself is the process $H$; a second\nlist of the same name with different coefficients is the same elementary\nintegrand only if the two processes coincide in the almost-everywhere sense\nmade precise below.\n\nThe following properties are part of the definition and are used at once.\n\n1. **Predictability.** $H$ is predictable\n   Progressively measurable and predictable processes. Indeed, for a\n   Borel set $\\Gamma\\subseteq\\mathbb R$,\n   $$\\{H\\in\\Gamma\\}=Z_\\Gamma\\cup\\bigcup_{k=0}^{m-1}\\bigl((t_k,t_{k+1}]\\times\\{\\xi_k\\in\\Gamma\\}\\bigr), \\qquad Z_\\Gamma:=\\begin{cases}\\{0\\}\\times\\Omega,&0\\in\\Gamma,\\\\\\varnothing,&0\\notin\\Gamma,\\end{cases}$$\n   a finite union of generators of the predictable sigma-algebra because\n   $\\{\\xi_k\\in\\Gamma\\}\\in\\mathcal F_{t_k}$ and\n   $\\{0\\}\\times\\Omega$ is a time-zero generator. Consequently $H$ is progressively\n   measurable and measurable for the product sigma-algebra\n   $\\mathcal B([0,T])\\otimes\\mathcal F$, and $H$ belongs to\n   $L^2([0,T]\\times\\Omega,\\mathrm dt\\otimes P)$: with\n   $c:=\\max_k\\|\\xi_k\\|_\\infty<\\infty$ one has\n   $E\\int_0^TH_s^2\\,ds\\le c^2T<\\infty$.\n\n2. **Endpoint and null-set conventions.** Replacing the intervals by\n   $(t_k,t_{k+1}]$ makes the value at $s=0$ zero for every elementary\n   integrand. More generally, if two elementary integrands agree for all\n   $s\\in[0,T]$ except at finitely many deterministic times, then they agree\n   $(\\mathrm dt\\otimes P)$-almost everywhere, since a finite set of times is\n   Lebesgue-null and Tonelli computes\n   $\\mathrm dt\\otimes P(\\{u\\}\\times\\Omega)=0$. All integrands and all\n   integrals below are therefore elements of the quotient spaces of\n   $L^2(\\mathrm dt\\otimes P)$ and $L^2(P)$; a claim about a process is a claim\n   about its almost-everywhere class unless a representative is explicitly\n   named, and path statements name the continuous representative.\n\n3. **Deterministic coefficients.** If every $\\xi_k$ is a deterministic real\n   number, $H$ is a deterministic step function on $[0,T]$, so the elementary\n   integrands include all step functions with deterministic coefficients. These\n   are the integrands for which the integral is a Gaussian variable below.\n\nThe Axiom of Choice is declared because the Brownian construction and the\nconditional-expectation interface used in items 6, 7 and 13 assume it; the\ndefinition itself, including the predictability computation of clause 1, uses\nno choice. The countable-choice obligations inherited from that interface are declared\nas dependencies of this item.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ito-integral-of-an-elementary-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and work under the standing hypothesis (H) of\nElementary predictable Brownian integrands: a filtered probability space\nwith a standard Brownian motion $B$ adapted to the filtration, with increments\n$B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$. Fix $T>0$ and an\nelementary predictable integrand\n$$H_s=\\sum_{k=0}^{m-1}\\xi_k\\,1_{(t_k,t_{k+1}]}(s),\\qquad 0=t_0<\\cdots<t_m=T,$$\nwith bounded $\\mathcal F_{t_k}$-measurable coefficients $\\xi_k$. The **Ito\nintegral of $H$ against $B$** is the process\n$$I_t(H):=\\sum_{k=0}^{m-1}\\xi_k\\bigl(B_{t\\wedge t_{k+1}}-B_{t\\wedge t_k}\\bigr),\\qquad 0\\le t\\le T,$$\nalso written $\\int_0^tH_s\\,dB_s$ or $(H\\cdot B)_t$. The sum is finite and is\nevaluated with the Brownian path of the given representative; on the event\nwhere $t\\mapsto B_t$ is continuous it is continuous in $t$, and $I_0(H)=0$\nbecause $0\\wedge t_k=0$ for every $k$.\n\nThree conventions are part of the definition.\n\n1. **Adaptedness and continuity.** For fixed $t$, each summand\n   $\\xi_k(B_{t\\wedge t_{k+1}}-B_{t\\wedge t_k})$ is $\\mathcal F_t$-measurable:\n   if $t<t_k$, the Brownian difference and hence the summand are zero; if\n   $t\\ge t_k$, then $\\mathcal F_{t_k}\\subseteq\\mathcal F_t$, while\n   $B_{t\\wedge u}$ is $\\mathcal F_t$-measurable for every $u$ because\n   $t\\wedge u\\le t$. Thus\n   $I(H)$ is adapted. For each fixed $\\omega$ the map\n   $t\\mapsto B_{t\\wedge t_{k+1}}(\\omega)-B_{t\\wedge t_k}(\\omega)$ is continuous\n   outside the single exceptional null set of (H) on which the Brownian path is\n   discontinuous; the finite sum is therefore continuous on the same event.\n\n2. **Linearity on a common refinement.** If $H$ and $K$ are elementary\n   integrands and a partition refines both representations, then the defining\n   sums of $H$, $K$, $H+K$ and $aH$ are taken over that common partition, and\n   the finite sums give $I_t(H+K)=I_t(H)+I_t(K)$ and $I_t(aH)=aI_t(H)$ for real\n   $a$ identically. In particular $I_t(H)-I_t(K)=I_t(H-K)$ for the\n   elementary integrand $H-K$ represented on that refinement. This is a\n   rearrangement of finitely many terms, not a limiting statement.\n\n3. **Dependence on the representation is temporary.** The definition attaches\n   $I_t(H)$ to a *chosen* elementary representation.\n   Elementary Ito integrals do not depend on step representation proves that\n   two representations that agree $(\\mathrm dt\\otimes P)$-almost everywhere\n   produce the same random variables almost surely at each fixed time, so that\n   $I_t(H)$ is a function of the $(\\mathrm dt\\otimes P)$-class of $H$ alone.\n   Until then, every statement about an elementary integrand names the\n   representation it uses.\n\nThe Axiom of Choice is declared because the standing hypothesis (H) is part of\nthe Brownian interface of\nElementary predictable Brownian integrands, which assumes it; the\ndefinition of the finite sum uses no choice. The countable-choice obligations\ninherited from that interface are declared as dependencies of this item.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ito-integral-for-square-integrable-predictable-processes",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Fix a horizon $T>0$ and let\n$\\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\\times\\Omega$\nProgressively measurable and predictable processes. Let $H$ be a\npredictable process with\n$$E\\int_0^TH_s^2\\,ds=\\int_{[0,T]\\times\\Omega}H^2\\,d(\\mathrm dt\\otimes P)<\\infty ,$$\nso that $H$ is an element of the quotient space\n$L^2(\\mathrm dt\\otimes P)$ over $\\mathcal P_T$; its class is what is integrated.\nThe **Ito integral** $\\int_0^TH_s\\,dB_s$, also written $H\\cdot B$ or $I_T(H)$,\nis defined as follows.\n\n1. **Construction.** By the density theorem\n   Density of elementary predictable processes in predictable L2 there\n   is a sequence $(H^n)$ of bounded elementary predictable integrands\n   Elementary predictable Brownian integrands with\n   $\\|H^n-H\\|_{L^2(\\mathrm dt\\otimes P)}\\to0$. For such a sequence the\n   elementary integrals $I_T(H^n)$\n   Ito integral of an elementary predictable process form a Cauchy\n   sequence in $L^2(P)$: by the elementary isometry\n   Ito isometry for elementary integrands and the well-definedness of\n   the elementary integral,\n   $$E\\bigl(I_T(H^n)-I_T(H^m)\\bigr)^2=E\\int_0^T(H^n-H^m)^2ds=\\|H^n-H^m\\|^2_{L^2(\\mathrm dt\\otimes P)} ,$$\n   and the right-hand side tends to $0$. Since $L^2(P)$ is complete\n   Riesz-Fischer completeness of $L^p$ for $1 \\le p \\le \\infty$, the classes $I_T(H^n)$ converge\n   in $L^2(P)$; the limit is a class in $L^2(P)$, and\n   $$\\int_0^TH_s\\,dB_s:=\\lim_{n\\to\\infty}I_T(H^n)\\qquad\\text{in }L^2(P).$$\n   The limit is a random variable only up to almost-sure equality; statements\n   about it are statements about that class. The limit does not depend on the\n   chosen sequence: if another elementary sequence $K^n\\to H$ is used, then\n   the elementary isometry and linearity give\n   $$\\|I_T(H^n)-I_T(K^n)\\|_{L^2(P)} =\\|H^n-K^n\\|_{L^2(\\mathrm dt\\otimes P)} \\le\\|H^n-H\\|_2+\\|K^n-H\\|_2\\longrightarrow0,$$\n   so the two $L^2(P)$ limits agree.\n\n2. **Integrals at a time.** For $t\\in[0,T]$ put\n   $\\int_0^tH_s\\,dB_s:=\\int_0^TH_s1_{[0,t]}(s)\\,dB_s$, the construction of\n   clause 1 applied to the truncated process $H1_{[0,t]}$. That process is\n   predictable: $H$ is $\\mathcal P_T$-measurable and $1_{[0,t]}$ is a\n   deterministic predictable indicator, so the product is\n   $\\mathcal P_T$-measurable; and it is square-integrable because\n   $|H1_{[0,t]}|\\le|H|$ pointwise. The same construction applied to $H$\n   itself gives $t=T$. The family\n   $\\bigl(\\int_0^tH\\,dB\\bigr)_{t\\in[0,T]}$ is a family of $L^2(P)$-classes\n   indexed by $t$; its continuous version is supplied by item 13, and no path\n   property is asserted by this definition.\n\n3. **Consistency with elementary integrands.** If $H$ is itself elementary,\n   then the constant sequence $H^n:=H$ is admissible in clause 1, so\n   $\\int_0^TH\\,dB$ is the limit of the constant sequence of elementary sums,\n   namely the elementary sum $I_T(H)$ of\n   Ito integral of an elementary predictable process. The same argument\n   with $H1_{[0,t]}$ in place of $H$, and the finite telescoping of the\n   elementary sum over a refinement containing $t$, gives\n   $\\int_0^tH\\,dB=I_t(H)$ for every $t\\in[0,T]$. In particular the general\n   definition extends, rather than replaces, the elementary definition.\n\n4. **Linearity in the integrand is not asserted here.** Clause 1 defines each\n   integral separately from an arbitrary approximating sequence; the linear and\n   isometric properties of the extension are item 12. Until item 12 is proved,\n   linearity may be used only for elementary integrands, where it is part of\n   Ito integral of an elementary predictable process.\n\n5. **Comparison with deterministic Riemann integration.** The integral is a\n   stochastic integral: the integrand is paired with the Brownian path through\n   left-endpoint sums and an $L^2(P)$ limit. This definition does not assert\n   convergence of arbitrary tagged Riemann--Stieltjes sums for a general\n   predictable integrand. Particular integrands can have a pathwise\n   interpretation: for $H\\equiv1$ every tagged sum telescopes to $B_T-B_0$,\n   which is also its Ito integral by clause 3 (the value at time zero is\n   irrelevant to its product-measure class). The notation $\\int_0^TH\\,dB$\n   here always refers to the $L^2(P)$-class defined above.\n\nThe Axiom of Choice is declared because the construction selects an\napproximating sequence and uses the completeness and conditional-expectation\ninterfaces that assume it; the inherited obligations are declared as\ndependencies of this item. An alternative construction that avoids selecting the sequence is\nnot needed, because clause 1 shows every sequence gives the same class.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Fix $T>0$. For predictable\n$H,K$ with finite energy $E\\int_0^TH^2ds,E\\int_0^TK^2ds<\\infty$ the integrals\n$\\int_0^TH\\,dB$ of\nIto integral for square-integrable predictable processes satisfy\n$$\\int_0^T(H+K)\\,dB=\\int_0^TH\\,dB+\\int_0^TK\\,dB,\\qquad \\int_0^T(aH)\\,dB=a\\int_0^TH\\,dB\\quad(a\\in\\mathbb R),$$\nand the identities are equalities of $L^2(P)$-classes (almost sure\nequalities). Moreover the map $H\\mapsto\\int_0^TH\\,dB$ is an isometry,\n$$E\\Bigl(\\int_0^TH\\,dB\\Bigr)^2=E\\int_0^TH^2ds=\\|H\\|^2_{L^2(\\mathrm dt\\otimes P)},$$\nit takes values in the mean-zero subspace of $L^2(P)$, and the bilinear cross\nidentity\n$$E\\Bigl[\\Bigl(\\int_0^TH\\,dB\\Bigr)\\Bigl(\\int_0^TK\\,dB\\Bigr)\\Bigr]=E\\int_0^TH_sK_s\\,ds$$\nholds for all such $H,K$. In particular the image of the map is a closed\nsubspace of $L^2(P)$ isometric to the predictable $L^2$ space of $H$'s, and\n$H\\mapsto\\int_0^TH\\,dB$ is injective up to the $(\\mathrm dt\\otimes P)$-class.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. For $1\\le p<\\infty$, the rule\n   $$\\|[f]\\|_p:=\\|f\\|_p\\qquad([f]\\in L^p(\\mu))$$\n   is well defined on the quotient classes.\n2. For $p=\\infty$, the rule\n   $$\\|[f]\\|_\\infty:=\\|f\\|_\\infty\\qquad([f]\\in L^\\infty(\\mu))$$\n   is well defined.\n3. In either case, with the quotient vector-space operations of\n   Coset equality, well-defined quotient operations, and the canonical projection with kernel $W$, the resulting pair\n   $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of\n   A norm on a real vector space, the induced metric, and the dictionary with the metric axioms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-ito-integral-process-has-a-continuous-martingale-version",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Let $H$ be a predictable\nprocess with $E\\int_0^TH_s^2ds<\\infty$ for every finite $T$. Then there is an\nadapted process $M=(M_t)_{t\\ge0}$ with continuous paths such that\n$M_t=\\int_0^tH_s\\,dB_s$ almost surely for every $t\\ge0$\nIto integral for square-integrable predictable processes, and $M$ is a\nsquare-integrable martingale relative to $(\\mathcal F_t)$\nContinuous-time adapted processes and martingales: $EM_t^2=E\\int_0^tH_s^2ds<\\infty$\nfor every $t$. Any two such continuous versions agree at every time on one\nmeasurable event of probability one; in particular the continuous version is\nunique in this common-full-measure-event sense, and it is the only continuous\nsquare-integrable martingale whose value at each deterministic $t$ is the\nintegral class.\n\nThis conclusion is deliberately distinguished from the exact definition of\nindistinguishability in\nProcess law, modification, and indistinguishability. On a\nnoncomplete probability space the full equality set, although it contains the\nmeasurable probability-one event constructed below, need not itself be\nmeasurable. On a complete probability space the two notions coincide, because\nthe complement of the equality set is then a measurable subset of a null set.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $0\\le s<t\\le T$ and put $H(r)=g(r)1_{(s,t]}(r)$. By [F4], choose elementary predictable approximants $H_n(r,\\omega)=\\sum_k\\xi_{n,k}(\\omega)1_{(r_{n,k},r_{n,k+1}]}(r)$ converging to $H$ in $L^2(dr\\otimes P)$. On each interval define the deterministic coefficient $\\bar\\xi_{n,k}=E[\\xi_{n,k}]$ and let $\\bar H_n=\\sum_k\\bar\\xi_{n,k}1_{(r_{n,k},r_{n,k+1}]}$. Boundedness of the elementary coefficients makes these expectations finite. For every $r$ in the kth interval, nonnegativity of $\\operatorname{Var}(\\xi_{n,k}-H(r))$ from [F6] gives $|\\bar\\xi_{n,k}-H(r)|^2\\le E|\\xi_{n,k}-H(r)|^2$. Integrating and applying [F7], with Tonelli [F8] to exchange the time integral and expectation of this nonnegative integrand, yields $\\|\\bar H_n-H\\|_{L^2([0,T])}^2\\le E\\int_0^T|H_n-H|^2dr\\to0$. Set $H_n^0=\\bar H_n1_{(s,t]}$; it remains a deterministic step integrand and its error cannot increase, because $H=0$ outside $(s,t]$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $H_n^0=\\sum_j a_{n,j}1_{(u_{n,j},u_{n,j+1}]}$ on a partition of $[s,t]$. By [F3], its vector integral is $Z_n=\\sum_j a_{n,j}(W_{u_{n,j+1}}-W_{u_{n,j}})$. For $\\theta\\in\\mathbb R^d$, independence and the Gaussian increment laws in [F1] give $E e^{i\\theta\\cdot Z_n}=\\prod_j\\exp(-a_{n,j}^2(u_{n,j+1}-u_{n,j})|\\theta|^2/2)=\\exp(-|\\theta|^2\\int_s^t(H_n^0)^2dr/2)$. The same factorization holds with any indicator $1_A$, $A\\in\\mathcal F_s$, inserted: each increment is independent of the sigma-algebra at its left endpoint, which contains $A$ and all preceding increments, so repeated factorization gives $E[1_Ae^{i\\theta\\cdot Z_n}]=P(A)E e^{i\\theta\\cdot Z_n}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Z=M_t-M_s$. By [F5] applied to the deterministic step integrands, $E|Z_n-Z|^2=d\\int_s^t|H_n^0(r)-g(r)|^2dr\\to0$. Since $|e^{i\\theta\\cdot z}-e^{i\\theta\\cdot w}|\\le|\\theta||z-w|$, nonnegativity of the variance of $|Z_n-Z|$ in [F6] gives convergence of both the ordinary and $1_A$-weighted characteristic functions. Also $\\int_s^t(H_n^0)^2dr\\to\\int_s^tg(r)^2dr=v(t)-v(s)$ by the square-integrable norm convergence in step 1.1 and the norm-continuity result [F7]. Passing to the limit in step 1.2 therefore gives $Ee^{i\\theta\\cdot Z}=\\exp(-|\\theta|^2(v(t)-v(s))/2)$ and $E[1_Ae^{i\\theta\\cdot Z}]=P(A)\\exp(-|\\theta|^2(v(t)-v(s))/2)$ for every $\\theta$ and every $A\\in\\mathcal F_s$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "F6",
+            "F7",
+            "F10",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The multivariate-normal convention [F9] identifies the Gaussian law from its one-dimensional normal projections, and [F10] gives the characteristic function in step 2.1 for those projections. For any $A\\in\\mathcal F_s$ with $P(A)>0$, the probability measure $B\\mapsto P(Z\\in B,A)/P(A)$ has the same characteristic function by the second identity, so uniqueness in [F10] identifies it with that same Gaussian law. If $P(A)=0$, the joint probability is zero. Thus $Z$ is independent of $\\mathcal F_s$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F9",
+            "F10",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F11], $M$ has an adapted continuous version. For any finite increasing list $0=t_0<\\cdots<t_n$, the increments through time $t_{j-1}$ are $\\mathcal F_{t_{j-1}}$-measurable. Step 3.1 makes the next increment independent of that sigma-algebra; induction on $j$ therefore factors the joint probabilities of all increment Borel sets into the product of their marginal probabilities. This proves mutual independence over the list.",
+          "step": "4.1",
+          "inputs": [
+            "F11",
+            "step 3.1",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes s<t, so there is no empty integration interval."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The coefficient has a strictly positive lower bound and s<t, so v(t)-v(s)>0; zero variance is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers d=1 as the one-coordinate Gaussian increment case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Strict positivity of g and t-s excludes a degenerate Gaussian covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes s=0 and t=T using (s,t]; step 4.1 establishes the finite-list endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects square-integrable approximants under inherited Full AC; the choice use is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an increment-law assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an increment-law assertion, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-constant-integrand-increment",
+          "asserts": "Assume the Axiom of Choice. Fix a finite integer $d\\ge1$, a horizon $T>0$, and a complete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$. Let $W=(W_t)_{0\\le t\\le T}$ be a standard $d$-dimensional Brownian motion adapted to the filtration, and assume that for every $0\\le s<t\\le T$ the vector increment $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(t-s)I_d)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with constants $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, set $v(t)=\\int_0^t g(r)^2\\,dr$, and define $M_t=(\\int_0^t g(r)\\,dW_r^1,\\ldots,\\int_0^t g(r)\\,dW_r^d)$ by coordinatewise scalar Itô integration. For every $0\\le s<t\\le T$, the increment $M_t-M_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(v(t)-v(s))I_d)$. Consequently, the increments of $M$ over every finite increasing time list are mutually independent.",
+          "claim": "The scalar constant-integrand case agrees with the Gaussian variance and independent-increment formulas proved for arbitrary deterministic g.",
+          "checked_in": "Statement and steps 1.1, 1.2, 2.1, 3.1, 4.1",
+          "dimension": 1,
+          "intervals": 2,
+          "fixture": "scalar-adjacent-gaussian-integrals"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read all five proof steps and exact statements of all twelve suppliers. Bounded elementary coefficients admit deterministic means; variance nonnegativity and Tonelli contract their L2 approximation error. Truncation to (s,t] preserves predictability. Coordinatewise isometry and norm continuity give Gaussian characteristic-function limits. Weighted characteristic functions for every past event establish filtration independence (including null events); adapted continuous versions then give finite-list independence. Checked d=1, s=0, strictly positive variance and finite T. Full AC is inherited from Ito and Gaussian interfaces. Constant g gives variance g^2(t-s). Reader:1:1 is a nonfatal stale fixture locator, now corrected to actual steps; no mathematical interface changed."
+      },
+      "repair_confidence": 1
+    },
+    "def-gaussian-smoothed-data-law-and-transition-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n$d$-dimensional Brownian motion adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector Itô equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized Itô integral from\nContinuous Brownian Ito processes, clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nItô integral of Ito integral for square-integrable predictable processes;\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\nProcess law, modification, and indistinguishability. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian Itô processes\nContinuous Brownian Ito processes. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.\n\nBrownian motion here means the finite-horizon version of the cited definition:\n$W_0=0$ almost surely, with continuous paths and the stated increments on\n$[0,T]$. All cited stochastic-calculus interfaces are used on this interval.\nTheir constructions require no extension of $W$ beyond $T$: elementary\nintegrals use only increments between partition points in $[0,T]$, and their\n$L^2$ limits and continuous versions are constructed on that same interval.\nFor a predictable scalar integrand $H$ with finite pathwise energy, localize\nat $\\rho_n=\\inf\\{t\\in[0,T]:\\int_0^t H_s^2ds\\ge n\\}\\wedge T$.\nHere $\\inf\\varnothing=+\\infty$.\nThe stopped integrands have expected energy at most $n$; their continuous\nintegrals agree up to the smaller stop by the finite-energy stopping identity.\nOn the full event of finite energy, $\\rho_n=T$ for all sufficiently large\n$n$, so these integrals paste uniquely on the whole closed interval $[0,T]$,\nexactly as in the localized construction of\nContinuous Brownian Ito processes. At $T=0$ every integral is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\nItô SDE data and strong solution on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-deterministic-ito-integral-has-gaussian-independent-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a finite integer $d\\ge1$, a horizon $T>0$, and a complete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$. Let $W=(W_t)_{0\\le t\\le T}$ be a standard $d$-dimensional Brownian motion adapted to the filtration, and assume that for every $0\\le s<t\\le T$ the vector increment $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(t-s)I_d)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with constants $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, set $v(t)=\\int_0^t g(r)^2\\,dr$, and define $M_t=(\\int_0^t g(r)\\,dW_r^1,\\ldots,\\int_0^t g(r)\\,dW_r^d)$ by coordinatewise scalar Itô integration. For every $0\\le s<t\\le T$, the increment $M_t-M_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(v(t)-v(s))I_d)$. Consequently, the increments of $M$ over every finite increasing time list are mutually independent.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By The standard normal density has total mass one and The indefinite integral of a nonnegative measurable function is a measure, gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. The law of a random element is a probability measure makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in The Dirac set function at a point.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $b(t,x)=0$ and $\\sigma(t,x)=g(t)I_d$, the state-Lipschitz constant is zero and $\\|\\sigma(t,x)\\|_F=\\sqrt d\\,g(t)\\le\\sqrt d\\,g_{\\max}$, so the linear-growth bound in [F2] holds with $K=\\sqrt d\\,g_{\\max}$. Since $|X_0|\\le R$ almost surely, $E|X_0|^2\\le R^2$. The complete usual filtration, Brownian independence, and initial-value hypotheses are exactly those of [F2]; [F3] therefore gives the unique strong solution used in the definition.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $g(r)\\ge g_{\\min}>0$, $v(t)>0$ for $t>0$ and $v(t)-v(s)\\ge g_{\\min}^2(t-s)>0$ for $s<t$. The one-dimensional density $(2\\pi a)^{-1/2}e^{-u^2/(2a)}$ is obtained from the standard normal density in [F8] by the $C^1$ scaling $u\\mapsto\\sqrt a\\,u$ in [F10], so it is positive and has integral one by [F9]. The product formula for $\\phi_a$ is therefore positive; Tonelli [F11] gives $\\int_{\\mathbb R^d}\\phi_a(z)\\,dz=\\prod_{j=1}^d1=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The bound $\\phi_{v(t)}(x-z)\\le(2\\pi v(t))^{-d/2}$ and $\\mu(\\mathbb R^d)=1$ show $p_t(x)<\\infty$. Since $\\phi_{v(t)}(x-z)>0$ for every $z$ and $\\mu$ has mass one, $p_t(x)>0$. Tonelli and translation change of variables give $\\int_{\\mathbb R^d}p_t(x)\\,dx=\\int_{\\mathbb R^d}\\left(\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,dx\\right)\\mu(dz)=\\int_{\\mathbb R^d}1\\,\\mu(dz)=1.$ The same argument proves that $q(s,x;t,\\cdot)$ is positive, finite, and normalized for every $s<t$ and $x$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F9",
+            "F10",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $Z_t=X_t-X_0=\\int_0^t g(r)\\,dW_r$. By [F4], $Z_t$ is independent of $X_0$, which is measurable at time zero, and has law $N_d(0,v(t)I_d)$. By [F12] this law is the product of $d$ scalar normal laws of variance $v(t)$; [F8]–[F11] show that this product law has density $\\phi_{v(t)}$. The independent-random-elements product law [F6] and the continuous addition map give, for every Borel $A$, $P(X_t\\in A)=\\int_{\\mathbb R^d}\\int_{\\mathbb R^d}\\mathbf1_A(z+w)\\phi_{v(t)}(w)\\,dw\\,\\mu(dz)=\\int_A\\left(\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz)\\right)dx,$ where Tonelli and translation were used in the last equality. Thus $p_t$ is the law density.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $0\\le s<t\\le T$. The vector $Z_{s,t}=X_t-X_s$ is independent of $\\mathcal F_s$ by [F4], and $X_s$ is $\\mathcal F_s$-measurable by the strong-solution conclusion of [F3]. Thus $X_s$ and $Z_{s,t}$ are independent random elements. The same product-law calculation as in step 2.1, now with $Z_{s,t}$ of law $N_d(0,(v(t)-v(s))I_d)$, gives for Borel $A,B$ $P(X_s\\in A,\\ X_t\\in B)=\\int_A\\left(\\int_B\\phi_{v(t)-v(s)}(y-x)\\,dy\\right)\\mu_s(dx).$ This is the asserted transition-density identity.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $0\\le s<r<t\\le T$, put $a=v(r)-v(s)>0$ and $b=v(t)-v(r)>0$. In one coordinate, completing the square gives $\\frac{(z-x)^2}{a}+\\frac{(y-z)^2}{b}=\\frac{a+b}{ab}\\left(z-\\frac{bx+ay}{a+b}\\right)^2+\\frac{(y-x)^2}{a+b}.$ Applying this identity in each of the $d$ coordinates and integrating the centered Gaussian factor using [F9]–[F11] yields $\\int\\phi_a(z-x)\\phi_b(y-z)\\,dz=\\phi_{a+b}(y-x)$. Since $a+b=v(t)-v(s)$, this is exactly the claimed Chapman–Kolmogorov identity.",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "F11",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The coordinate product has at least one factor because d>=1, and the initial measure has mass one. Empty Borel events A or B are allowed: step 3.1 integrates their indicators to zero on both sides of the transition identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 normalize the Gaussian kernel and mixture; R=0 remains allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The product-kernel calculation in step 1.2 includes d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 allows R=0, and steps 2.1 and 3.1 identify the point-mass initial case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement leaves mu at t=0 and defines transition densities only for s<t; steps 2.1 and 3.1 permit s=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the independent-product law with all nonempty probability factors explicitly normalized."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states density and transition identities without an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states density and transition identities without an iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-point-mass-and-gaussian-convolution",
+          "asserts": "$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$",
+          "claim": "The point-mass specialization and scalar Gaussian convolution agree with steps 3.1 and 6.1.",
+          "checked_in": "Definition and steps 1.2, 1.3, 2.1, 3.1, 4.1",
+          "dimension": 1,
+          "atoms": 1,
+          "fixture": "scalar-point-and-convolution"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read all six proof steps and the exact thirteen supplier statements/definitions, including the completed level-0 increment proof. SDE coefficients b=0 and sigma=g I meet joint measurability, zero state Lipschitz and bounded growth; compact support gives initial L2 and the usual filtration is explicit. Positive g_min ensures positive marginal/increment variances including s=0. Scalar scaling, finite Gaussian product and Tonelli give finite positive normalized kernels; addition pushforwards and past independence identify the marginal/transition laws without a density for mu. Completing the square gives covariance a+b and all normalization constants in Chapman-Kolmogorov. Full AC covers all imported AC/CC interfaces. Checked R=0, d=1 and s=0. Reader:1:2 is confirmed nonfatal: replaced nonexistent step 6.1 by the actual Definition and kernel/law/transition/convolution steps. No Definition change."
+      },
+      "repair_confidence": 1
+    },
+    "thm-gaussian-smoothing-density-and-forward-equation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n$d$-dimensional Brownian motion adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector Itô equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized Itô integral from\nContinuous Brownian Ito processes, clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nItô integral of Ito integral for square-integrable predictable processes;\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\nProcess law, modification, and indistinguishability. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian Itô processes\nContinuous Brownian Ito processes. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.\n\nBrownian motion here means the finite-horizon version of the cited definition:\n$W_0=0$ almost surely, with continuous paths and the stated increments on\n$[0,T]$. All cited stochastic-calculus interfaces are used on this interval.\nTheir constructions require no extension of $W$ beyond $T$: elementary\nintegrals use only increments between partition points in $[0,T]$, and their\n$L^2$ limits and continuous versions are constructed on that same interval.\nFor a predictable scalar integrand $H$ with finite pathwise energy, localize\nat $\\rho_n=\\inf\\{t\\in[0,T]:\\int_0^t H_s^2ds\\ge n\\}\\wedge T$.\nHere $\\inf\\varnothing=+\\infty$.\nThe stopped integrands have expected energy at most $n$; their continuous\nintegrals agree up to the smaller stop by the finite-energy stopping identity.\nOn the full event of finite energy, $\\rho_n=T$ for all sufficiently large\n$n$, so these integrals paste uniquely on the whole closed interval $[0,T]$,\nexactly as in the localized construction of\nContinuous Brownian Ito processes. At $T=0$ every integral is zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\nItô SDE data and strong solution on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in Integrable real and complex functions, and their integrals. No completeness or coupling is required.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a>0$, direct differentiation gives $\\partial_a\\phi_a(z)=\\tfrac12\\Delta_z\\phi_a(z)$. Every finite spatial derivative of $\\phi_a(z)$ is a polynomial in $z$ and $a^{-1}$ times $\\phi_a(z)$. Fix $\\epsilon>0$ and compact sets $K\\subset\\mathbb R^d$ and $J\\subset[\\epsilon,T]$. Since $a=v(t)$ is bounded above and away from zero on $J$, and $z$ lies in the compact support of $\\mu$, each such derivative is uniformly bounded for $x\\in K$, $t\\in J$, and $z\\in\\operatorname{supp}\\mu$. Difference quotients are bounded by the same type of constant on a slightly larger compact set, by the one-variable fundamental theorem of calculus. Dominated convergence [F4] therefore permits differentiation under the finite measure $\\mu$ to every spatial order and once in time. The chain rule and $v'(t)=g(t)^2$ give $\\partial_t p_t(x)=\\int \\frac{g(t)^2}{2}\\Delta_x\\phi_{v(t)}(x-z)\\,\\mu(dz)=\\frac{g(t)^2}{2}\\Delta_xp_t(x).$ Positivity follows from the positive kernel and the nonzero probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The SDE setup in [F2] and well-posedness theorem [F3] give a common continuous-path event. For bounded continuous $f$, $X_t\\to X_s$ almost surely as $t\\to s$ on that event, and [F4] applied to the bounded variables $f(X_t)$ gives $\\mathbb E f(X_t)\\to\\mathbb E f(X_s)$. By [F9], these expectations are $\\int f\\,d\\mu_t$; also $\\mu_0=\\mu$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix $t\\in(0,T]$ and $f\\in C_c^\\infty(\\mathbb R^d)$. For $0\\le s<t$ set $h(s,x)=\\int_{\\mathbb R^d}f(x+z)\\phi_{v(t)-v(s)}(z)\\,dz,\\qquad h(t,x)=f(x).$ For $a=v(t)-v(s)>0$, write $P_af(x)=\\int f(x+z)\\phi_a(z)\\,dz$. Differentiating the explicit Gaussian and integrating by parts twice, with boundary terms zero because $f$ is compactly supported, gives $\\partial_aP_af=\\tfrac12P_a\\Delta f$. Thus $\\partial_sh+\\tfrac12g(s)^2\\Delta_xh=0$ for $s<t$. Spatial derivatives may be moved onto $f$, so $h$, $\\nabla h$, and $\\Delta h$ are bounded by the corresponding sup norms of $f$, $\\nabla f$, and $\\Delta f$. For any such derivative $q$ and $\\eta>0$, $\\sup_x|P_aq(x)-q(x)|\\le\\|\\nabla q\\|_\\infty\\eta+2\\|q\\|_\\infty\\int_{|z|>\\eta}\\phi_a(z)\\,dz.$ The tail equals $\\int_{|u|>\\eta/\\sqrt a}\\phi_1(u)\\,du$ and tends to zero as $a\\downarrow0$ because $\\phi_1$ is integrable. Letting first $a\\downarrow0$ and then $\\eta\\downarrow0$ proves uniform convergence of $P_aq$ to $q$, including $q=\\Delta f$; hence the backward equation and bounds extend continuously to $s=t$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $t=0$ the weak identity has equal endpoint terms and a zero right-hand integral. For $t>0$, fix an admissible test $\\psi$ and $0<\\delta<t$. On the common compact spatial support, $p_s$ and $\\partial_s p_s$ are continuous and bounded for $s\\in[\\delta,t]$ by step 1.1. Differentiation under the space integral is therefore justified by [F4]. Using step 1.1 and integrating by parts twice in each coordinate, with no boundary terms because $\\psi$ has compact spatial support, gives $\\frac{d}{ds}\\int\\psi(s,x)p_s(x)\\,dx=\\int\\left(\\partial_s\\psi(s,x)+\\frac{g(s)^2}{2}\\Delta_x\\psi(s,x)\\right)p_s(x)\\,dx.$ Integrating from $\\delta$ to $t$ gives the weak identity with lower endpoint $\\int\\psi(\\delta,x)\\,\\mu_\\delta(dx)$. Its difference from $\\int\\psi(0,x)\\,\\mu(dx)$ tends to zero: the term $\\sup_x|\\psi(\\delta,x)-\\psi(0,x)|$ tends to zero by the bounded continuous time derivative on the common compact support, and $\\int\\psi(0,\\cdot)\\,d\\mu_\\delta\\to\\int\\psi(0,\\cdot)\\,d\\mu$ by step 1.2. The omitted right-hand integral over $[0,\\delta]$ tends to zero because each $\\mu_s$ has mass one and the derivatives of $\\psi$ and $g$ are bounded on the common compact support. Letting $\\delta\\downarrow0$ proves the weak identity, so $\\mu_t$ is a weak forward solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $(\\nu_s)_{0\\le s\\le T}$ be any weak forward solution with initial law $\\mu$. Choose a smooth cutoff $\\chi_L$ equal to one on $|x|\\le L$ and zero on $|x|\\ge2L$, with $|\\nabla\\chi_L|\\le C/L$ and $|\\Delta\\chi_L|\\le C/L^2$. For completeness, take $\\chi_L(x)=\\eta(|x|^2/L^2)$, where $\\rho(u)=0$ for $u\\le0$, $\\rho(u)=e^{-1/u}$ for $u>0$, and $\\eta(u)=\\rho(4-u)/(\\rho(4-u)+\\rho(u-1))$. When $t<T$, extend $h$ to $t<s\\le T$ by $h(s,x)=f(x)-\\tfrac12(s-t)g(t)^2\\Delta f(x)$. Its value and spatial derivatives through order two match at $t$, and both one-sided time derivatives equal $-\\tfrac12g(t)^2\\Delta f$ by step 1.3. Thus $\\psi_L(s,x)=\\chi_L(x)h(s,x)$ is an admissible test on all of $[0,T]$. On $[0,t]$, step 1.3 gives $\\partial_s\\psi_L+\\frac{g(s)^2}{2}\\Delta\\psi_L=\\frac{g(s)^2}{2}\\left(2\\nabla\\chi_L\\cdot\\nabla h+h\\Delta\\chi_L\\right),$ whose absolute value is at most $C_t(L^{-1}\\|\\nabla f\\|_\\infty+L^{-2}\\|f\\|_\\infty)$. Since each $\\nu_s$ is a probability, the time-integrated error tends to zero as $L\\to\\infty$. For all sufficiently large $L$, $\\chi_L=1$ on the support of $f$ and on the support of $\\mu$. Letting $L\\to\\infty$ in the weak identity therefore gives $\\int f\\,d\\nu_t=\\int h(0,x)\\,\\mu(dx).$ The same cutoff argument applied to the weak solution $\\mu_t$ from step 2.1 gives $\\int f\\,d\\mu_t=\\int h(0,x)\\,\\mu(dx)$. Thus $\\nu_t$ and $\\mu_t$ agree on every compactly supported smooth real function.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any fixed $t>0$, any $\\theta\\in\\mathbb R^d$, and integer $n\\ge1$, apply step 3.1 to $\\chi_n(x)\\cos(\\theta\\cdot x)$ and $\\chi_n(x)\\sin(\\theta\\cdot x)$ and combine the resulting identities into one complex identity. Let $n\\to\\infty$. The left side converges to the characteristic function of $\\nu_t$ by dominated convergence [F4]. For each fixed $x$, the backward averages on the right converge by [F4] and [F10] to $e^{i\\theta\\cdot x}e^{-v(t)|\\theta|^2/2}$; they are bounded by one, so another application of [F4] gives the limit $e^{-v(t)|\\theta|^2/2}\\int e^{i\\theta\\cdot x}\\,\\mu(dx)$. By [F1], $\\mu_t$ is the convolution of $\\mu$ with the centered Gaussian of covariance $v(t)I_d$; Fubini [F5] and [F10] show that its characteristic function is exactly this product. Hence the vector characteristic functions of $\\nu_t$ and $\\mu_t$ agree for every $\\theta$. For each $u\\in\\mathbb R^d$, take $\\theta=ru$ for arbitrary $r\\in\\mathbb R$; scalar uniqueness [F7] gives equality of the laws of $u\\cdot x$ under the two measures, and [F8] then gives $\\nu_t=\\mu_t$. This holds for every $t>0$; at $t=0$ both laws equal $\\mu$ by the initial condition, proving uniqueness. AC is used only through the inherited Brownian/Itô interfaces and the cited Fourier-uniqueness results.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F10",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Positive dimension supplies a nonempty coordinate product; T>0 supplies the time interval, and every weak-solution measure is a probability. The uniqueness comparison in step 4.1 concerns these mass-one laws, never an empty family of measures.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The product detector recognizes the Gaussian coordinate product, whose index range is nonempty by d>=1. Narrowly continuous probability families are indexed by the nonempty closed time interval, so the hypothesized empty aggregate is excluded."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 remain valid for R=0 and a point-mass initial law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coordinatewise heat equation and integration-by-parts argument in steps 1.1 and 1.3 include d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 permit R=0 and a point-mass initial law, and the statement makes no density claim at t=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 take the lower endpoint limit from delta down to zero; the statement explicitly keeps mu at zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 invokes the Full-AC Fourier uniqueness and Cramer–Wold suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a unique weak forward solution, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a unique weak forward solution, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-point-mass-heat-equation",
+          "asserts": "$$\\partial_t p_t(x)=\\frac{g(t)^2}{2}\\Delta_xp_t(x),\\qquad \\Delta_x=\\sum_{j=1}^d\\partial_{x_j}^2.$$",
+          "claim": "The explicit Gaussian derivative agrees with the heat equation in step 1.1; the cutoff argument covers the singular initial endpoint.",
+          "checked_in": "Statement and steps 1.1–4.1",
+          "dimension": 1,
+          "fixture": "scalar-heat-finite-differences"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read all six proof steps, exact eleven supplier statements and Hunter Theorem 5.5 with its Lp-data restriction. Compact support and v>=v(epsilon)>0 give uniform kernel/difference-quotient majorants and mixed continuity; v prime=g squared gives the forward coefficient g squared/2. Continuous SDE paths give narrow continuity even at zero. Integration by parts for compact-support C1,2 tests and bounded derivatives justify delta down to zero. Backward P_(v(t)-v(s))f has bounded gradient/Laplacian and uniform terminal derivative convergence; its cutoff residual is O(1/L+1/L^2) against probability laws, without moments for competing solutions. The backward test restricted to [0,t] has an immediate C1,2 continuation after t by f-(s-t)g(t)^2 Delta f/2, making it admissible on [0,T]. Cutoff Fourier tests are bounded by one and scalar uniqueness plus Cramer-Wold identify vector laws. Checked t=0, t=T, d=1, R=0 and singular initial measures. AC is inherited, not a source-based replacement of local measure-data proof. No fatal defect or repair required."
+      }
+    },
+    "thm-gaussian-mixture-score-and-global-lipschitz-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-smoothing-density-and-forward-equation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix $d\\ge1$, $T>0$, a finite $R\\ge0$, and a Borel probability measure $\\mu$ on $\\mathbb R^d$ supported in $\\overline B(0,R)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, let $X_0$ be measurable at time zero with law $\\mu$ and independent of future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ for every $s<t$, and let $X$ be the unique strong solution of $X_t=X_0+\\int_0^t g(r)\\,dW_r$. For $a>0$ define $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ set\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),$$\n\nand set $\\mu_0=\\mu$. Let $C_c^\\infty(\\mathbb R^d)$ denote the real infinitely differentiable functions with compact support. For every $t>0$, $p_t$ is positive and infinitely differentiable in $x$. On each interval $[\\epsilon,T]$ with $0<\\epsilon<T$, it is continuously differentiable in time and satisfies\n\n$$\\partial_t p_t(x)=\\frac{g(t)^2}{2}\\Delta_xp_t(x),\\qquad \\Delta_x=\\sum_{j=1}^d\\partial_{x_j}^2.$$\n\nA family $(\\nu_t)_{0\\le t\\le T}$ of Borel probability measures is narrowly continuous when $t\\mapsto\\int f\\,d\\nu_t$ is continuous for every bounded continuous real function $f$. It is a weak forward solution with initial law $\\mu$ when it is narrowly continuous, $\\nu_0=\\mu$, and, for every $t\\in[0,T]$ and every real-valued function $\\psi:[0,T]\\times\\mathbb R^d\\to\\mathbb R$ with continuous first time derivative and continuous spatial derivatives through order two, whose spatial support lies in one compact set for all $s$, it satisfies\n\n$$\\int_{\\mathbb R^d}\\psi(t,x)\\,\\nu_t(dx)-\\int_{\\mathbb R^d}\\psi(0,x)\\,\\mu(dx)=\\int_0^t\\int_{\\mathbb R^d}\\left(\\partial_s\\psi(s,x)+\\frac{g(s)^2}{2}\\Delta_x\\psi(s,x)\\right)\\nu_s(dx)\\,ds.$$\n\nThen $(\\mu_t)_{0\\le t\\le T}$, where $\\mu_t(dx)=p_t(x)\\,dx$ for $t>0$ and $\\mu_0=\\mu$, is the unique narrowly continuous weak forward solution with initial law $\\mu$. No density for $\\mu$ at $t=0$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $t>0$, positivity in [F1] makes the quotient defining $\\nu_{t,x}$ meaningful. Its density relative to $\\mu$ is measurable and nonnegative, and its integral equals $p_t(x)/p_t(x)=1$, so it is a probability measure. By [F4], it is supported in $\\overline B(0,R)$ and has finite first and second moments. The regularity conclusion [F2] applies on $[\\epsilon,T]$. On each compact set of $x$ values, every spatial derivative of $\\phi_{v(t)}(x-z)$ is bounded uniformly for $z\\in\\overline B(0,R)$ because $v(t)>0$ is fixed and the Gaussian derivatives are polynomials times a Gaussian. The finite measure $\\mu$ supplies an integrable constant majorant. Difference quotients have the same kind of bound on a slightly larger compact set by the fundamental theorem of calculus, so [F3] justifies differentiating the convolution and its bounded-moment numerators under the integral.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each coordinate $i$, differentiation of $p_t$ gives $\\partial_i p_t(x)=\\int -\\frac{x_i-z_i}{v(t)}\\phi_{v(t)}(x-z)\\,\\mu(dz)=-\\frac{x_i-m_{t,x,i}}{v(t)}p_t(x).$ Dividing by the positive $p_t(x)$ proves $\\nabla\\log p_t(x)=-(x-m_{t,x})/v(t)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Differentiate $m_{t,x,j}=p_t(x)^{-1}\\int z_j\\phi_{v(t)}(x-z)\\,\\mu(dz)$ in coordinate $i$. The quotient rule and $\\partial_i\\phi_{v(t)}(x-z)=-(x_i-z_i)\\phi_{v(t)}(x-z)/v(t)$ yield $\\partial_i m_{t,x,j}=\\frac1{v(t)}\\left(\\int z_jz_i\\,\\nu_{t,x}(dz)-m_{t,x,j}m_{t,x,i}\\right)=(C_{t,x})_{ji} / v(t).$ All terms are finite by [F4], and the derivative is justified by step 1.1. Differentiating the score identity from step 2.1 therefore gives $D_xs_t=-I_d/v(t)+C_{t,x}/v(t)^2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The matrix $C_{t,x}$ is positive semidefinite because for every $u\\in\\mathbb R^d$, $u^{\\mathsf T}C_{t,x}u=\\int(u\\cdot(z-m_{t,x}))^2\\,\\nu_{t,x}(dz)\\ge0$. Also $u^{\\mathsf T}C_{t,x}u=\\int(u\\cdot z)^2\\,d\\nu_{t,x}-\\left(\\int u\\cdot z\\,d\\nu_{t,x}\\right)^2\\le\\int|u|^2|z|^2\\,d\\nu_{t,x}\\le R^2|u|^2.$ Thus $\\|C_{t,x}\\|_{\\mathrm{op}}\\le R^2$. Since $v$ is increasing and $v(t)\\ge v(\\epsilon)>0$, the Jacobian formula in step 3.1 and the triangle inequality for operator norms give the stated uniform derivative bound. The mean satisfies $|m_{t,x}|\\le\\int|z|\\,d\\nu_{t,x}\\le R$, so the score formula in step 2.1 gives the displayed growth bound.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For any $x,y$, the fundamental theorem of calculus along the segment $y+r(x-y)$ gives $s_t(x)-s_t(y)=\\int_0^1D_xs_t(y+r(x-y))(x-y)\\,dr$. Taking norms and using step 4.1 proves the global Lipschitz bound uniformly for $t\\in[\\epsilon,T]$. Since $g\\ge g_{\\min}>0$, $v(\\epsilon)\\downarrow0$ as $\\epsilon\\downarrow0$; the bound therefore supplies no uniform-in-$\\epsilon$ constant.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Gaussian product has d>=1 factors and the posterior is normalized from an initial probability measure. Step 1.1 proves its total mass is one, so no empty posterior support can enter the mean or covariance calculation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The detected aggregate is the explicitly positive-dimensional Gaussian product. The score proof differentiates a mass-one posterior, not an arbitrarily indexed possibly empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 includes R=0, where the posterior covariance vanishes and the 1/v term remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The posterior mean, covariance, and operator-norm estimates in steps 2.1–5.1 include d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A point mass has zero posterior covariance; step 4.1 reduces the derivative bound to 1/v(epsilon)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The claim is only on [epsilon,T], epsilon>0, and step 5.1 identifies the loss of a uniform constant as epsilon tends to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 inherits the Full-AC smoothing interface; the posterior measure is explicitly normalized rather than selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states identities and bounds, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states identities and bounds, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-symmetric-two-point-posterior",
+          "asserts": "$$s_t(x)=-\\frac{x-m_{t,x}}{v(t)},\\qquad D_xs_t(x)=-\\frac{I_d}{v(t)}+\\frac{C_{t,x}}{v(t)^2}.$$",
+          "claim": "The posterior mean/covariance formulas have the stated signs and the R^2 covariance bound is attained at this symmetric two-point posterior.",
+          "checked_in": "Statement and steps 2.1–4.1",
+          "dimension": 1,
+          "atoms": 2,
+          "fixture": "scalar-symmetric-mixture"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read all five proof steps and all five exact supplier statements. Positive convolution normalizes nu; compact support gives all posterior moments and local majorants for differentiating both p and z-weighted numerators. Quotient differentiation gives partial_i m_j=C_ji/v with correct positive sign and hence D score=-I/v+C/v^2. For arbitrary u, posterior variance <=E(u dot Z)^2<=R^2|u|^2, and symmetric positive semidefiniteness yields the operator norm bound without an erroneous 4R^2 substitution. |m|<=R gives the growth estimate; segment integration yields global Lipschitz uniformly on [epsilon,T]. Checked d=1, R=0 (zero covariance), singular and atomic laws and epsilon down to zero; no uniform endpoint bound asserted. Full AC inherited. Tang et al. section 1 is Gaussian Tweedie context; covariance bound and differentiability are proved locally. No defect or repair."
+      }
+    },
+    "thm-gaussian-smoothing-endpoint-weak-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-deterministic-ito-integral-has-gaussian-independent-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a finite integer $d\\ge1$, a horizon $T>0$, and a complete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$. Let $W=(W_t)_{0\\le t\\le T}$ be a standard $d$-dimensional Brownian motion adapted to the filtration, and assume that for every $0\\le s<t\\le T$ the vector increment $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(t-s)I_d)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with constants $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, set $v(t)=\\int_0^t g(r)^2\\,dr$, and define $M_t=(\\int_0^t g(r)\\,dW_r^1,\\ldots,\\int_0^t g(r)\\,dW_r^d)$ by coordinatewise scalar Itô integration. For every $0\\le s<t\\le T$, the increment $M_t-M_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(v(t)-v(s))I_d)$. Consequently, the increments of $M$ over every finite increasing time list are mutually independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ito-sde-and-strong-solution",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice as required by the stochastic-integral interfaces\nbelow. Fix a finite horizon $T\\ge0$ and finite integers $d,m\\ge1$. Work on\na complete filtered probability space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$ whose filtration is\nright-continuous and contains every $P$-null subset of $\\mathcal F$ in\n$\\mathcal F_0$ (the usual conditions).\n\nLet $W=(W_t)_{0\\le t\\le T}$ be a standard $m$-dimensional Brownian motion\n$d$-dimensional Brownian motion adapted to this filtration, with\n$W_t-W_s$ independent of $\\mathcal F_s$ and distributed as\n$N_m(0,(t-s)I_m)$ for $0\\le s<t\\le T$. Let\n$X_0:\\Omega\\to\\mathbb R^d$ be $\\mathcal F_0$-measurable, satisfy\n$E|X_0|^2<\\infty$, and be independent of the future Brownian increments.\nExplicitly, $X_0$ is independent of the sigma-algebra\n$\\sigma(W_t-W_0:0\\le t\\le T)$.\n\nContinuity of a process means continuity on one measurable event of\nprobability one. We use an everywhere-continuous adapted representative: if\nthe chosen process is continuous only on such an event $A$, replace it off $A$\nby its initial value. Since $A^c$ is a null set and the filtration is complete,\n$A^c\\in\\mathcal F_0$; the replacement preserves adaptedness and changes the\nSDE identity only on a null event, hence preserves it up to\nindistinguishability.\n\nThe drift and diffusion coefficients are jointly Borel maps\n$$b:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d,\\qquad \\sigma:[0,T]\\times\\mathbb R^d\\to\\mathbb R^{d\\times m}.$$\nFor nonnegative finite constants $L,K$, assume for every $t\\in[0,T]$ and\n$x,y\\in\\mathbb R^d$ that\n$$|b(t,x)-b(t,y)|+\\|\\sigma(t,x)-\\sigma(t,y)\\|_F\\le L|x-y|,$$\n$$|b(t,x)|+\\|\\sigma(t,x)\\|_F\\le K(1+|x|).$$\nHere $|\\cdot|$ is the Euclidean norm and\n$\\|A\\|_F^2=\\sum_{i=1}^d\\sum_{k=1}^m|A^{ik}|^2$ is the Frobenius norm.\n\nFor an adapted continuous candidate $X:[0,T]\\times\\Omega\\to\\mathbb R^d$,\nthe vector Itô equation\n$$X_t=X_0+\\int_0^t b(s,X_s)\\,ds+\\left(\\sum_{k=1}^m\\int_0^t\\sigma^{ik}(s,X_s)\\,dW_s^k\\right)_{i=1}^d,\\qquad 0\\le t\\le T.$$\nuses a pathwise Lebesgue integral for the drift and, in each coordinate, the\nlocalized Itô integral from\nContinuous Brownian Ito processes, clause 2. Require\n$\\int_0^T|b(s,X_s)|ds<\\infty$ and\n$\\int_0^T\\|\\sigma(s,X_s)\\|_F^2ds<\\infty$ almost surely; these are the local\ncoefficient-integrability conditions in that definition. When a coordinate\nintegrand has finite expected energy, its integral is the square-integrable\nItô integral of Ito integral for square-integrable predictable processes;\nthe Picard estimates below establish that stronger condition for every input\nin $\\mathcal H_T$. Equality of processes means\nequality for every $t$ on one measurable event of probability one, that is,\nindistinguishability\nProcess law, modification, and indistinguishability. A **strong\nsolution on $[0,T]$** is an adapted continuous process satisfying this\nintegral equation indistinguishably. No moment bound is included in the\ndefinition; the existence theorem proves its $L^2$ path-sup bound.\nThe usual-filtration, continuity, and finite-coordinate conventions agree\nwith the multidimensional class of continuous Brownian Itô processes\nContinuous Brownian Ito processes. This definition makes no ellipticity,\ntransition-density, forward-equation, or time-reversal assertion.\n\nBrownian motion here means the finite-horizon version of the cited definition:\n$W_0=0$ almost surely, with continuous paths and the stated increments on\n$[0,T]$. All cited stochastic-calculus interfaces are used on this interval.\nTheir constructions require no extension of $W$ beyond $T$: elementary\nintegrals use only increments between partition points in $[0,T]$, and their\n$L^2$ limits and continuous versions are constructed on that same interval.\nFor a predictable scalar integrand $H$ with finite pathwise energy, localize\nat $\\rho_n=\\inf\\{t\\in[0,T]:\\int_0^t H_s^2ds\\ge n\\}\\wedge T$.\nHere $\\inf\\varnothing=+\\infty$.\nThe stopped integrands have expected energy at most $n$; their continuous\nintegrals agree up to the smaller stop by the finite-energy stopping identity.\nOn the full event of finite energy, $\\rho_n=T$ for all sufficiently large\n$n$, so these integrals paste uniquely on the whole closed interval $[0,T]$,\nexactly as in the localized construction of\nContinuous Brownian Ito processes. At $T=0$ every integral is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "source_section": "Statement",
+          "quote": "Assume the data and hypotheses of\nItô SDE data and strong solution on $[0,T]$, with $T\\ge0$, finite\ndimensions $d,m\\ge1$, Lipschitz constant $L$, and linear-growth constant\n$K$. There is a strong solution $X$ on the given filtered probability space.\nIt is unique up to indistinguishability among strong solutions with the same\ninitial value and Brownian driver, and it satisfies\n$$E\\sup_{0\\le t\\le T}|X_t|^2\\le(1+3E|X_0|^2)e^{C_TT},\\qquad C_T:=6K^2T+24mK^2.$$\nThe bound is independent of any later numerical mesh.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is Continuity of a map between metric spaces, at a point and globally, in the $\\varepsilon$-$\\delta$ form. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in Integrable real and complex functions, and their integrals. No completeness or coupling is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wasserstein-two-space-and-couplings",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathbb R^d$ have its Euclidean norm and Borel sigma-algebra. Define $\\mathcal P_2(\\mathbb R^d)$ to be the Borel probability measures $\\mu$ with $\\int |x|^2\\,d\\mu(x)<\\infty$. A coupling of $\\mu,\\nu\\in\\mathcal P_2(\\mathbb R^d)$ is a Borel probability measure $\\pi$ on $\\mathbb R^d\\times\\mathbb R^d$ whose first and second coordinate marginals are $\\mu$ and $\\nu$; write $\\Gamma(\\mu,\\nu)$ for the set of couplings. Define\n$$W_2(\\mu,\\nu)=\\left(\\inf_{\\pi\\in\\Gamma(\\mu,\\nu)}\\int_{\\mathbb R^d\\times\\mathbb R^d}|x-y|^2\\,d\\pi(x,y)\\right)^{1/2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The coefficients $b(t,x)=0$ and $\\sigma(t,x)=g(t)I_d$ are jointly Borel, globally Lipschitz in $x$ with constant zero, and satisfy $|b|+\\|\\sigma\\|_F=\\sqrt d\\,g(t)\\le\\sqrt d\\,g_{\\max}$. The initial support gives $\\mathbb E|X_0|^2\\le R^2$, and the complete usual filtered space, adapted Brownian increments, and independence of $X_0$ are hypotheses of the statement. Thus [F3] supplies the unique continuous strong solution. By [F2], $X_\\epsilon-X_0=\\int_0^\\epsilon g(r)\\,dW_r$. The characteristic-function identity in [F1] identifies this vector with $N_d(0,v(\\epsilon)I_d)$, whose coordinate variances sum to $d\\,v(\\epsilon)$. Thus $\\mathbb E|X_\\epsilon-X_0|^2=d\\,v(\\epsilon)$. Also $v(\\epsilon)\\le g_{\\max}^2\\epsilon\\to0$. For every $a>0$, $|X_\\epsilon-X_0|^2\\ge a^2\\mathbf1_{\\{|X_\\epsilon-X_0|>a\\}}$; taking expectations gives $P(|X_\\epsilon-X_0|>a)\\le d\\,v(\\epsilon)/a^2\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The support condition gives $\\mathbb E|X_0|^2\\le R^2$, and step 1.1 gives $\\mathbb E|X_\\epsilon|^2\\le2R^2+2d\\,v(T)<\\infty$. Hence both laws lie in the quadratic Wasserstein space. The measurable pair $(X_\\epsilon,X_0)$ has a Borel law on $\\mathbb R^d\\times\\mathbb R^d$ by [F8]; by [F5] its marginals are $\\mu_\\epsilon$ and $\\mu$, and [F4] identifies $\\mu_\\epsilon$ as the smoothed law from the definition. Thus it is a coupling. Its cost is $\\mathbb E|X_\\epsilon-X_0|^2=d\\,v(\\epsilon)$. Taking the infimum in [F7] proves $W_2(\\mu_\\epsilon,\\mu)\\le\\sqrt{d\\,v(\\epsilon)}$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix bounded continuous $f$ and let $K=\\overline B(0,R+1)$. Its restriction to compact $K$ is uniformly continuous; define $\\omega_K(\\delta)=\\sup\\{|f(x)-f(y)|:x,y\\in K,\\ |x-y|\\le\\delta\\}$, which tends to zero as $\\delta\\downarrow0$. For $0<\\delta<1$, on the event $|X_\\epsilon-X_0|\\le\\delta$, both vectors belong to $K$, so their $f$-values differ by at most $\\omega_K(\\delta)$. On the complementary event the difference is at most $2\\|f\\|_\\infty$. Step 1.1 and Markov's inequality therefore give $\\left|\\int f\\,d\\mu_\\epsilon-\\int f\\,d\\mu\\right|\\le\\omega_K(\\delta)+2\\|f\\|_\\infty\\frac{d\\,v(\\epsilon)}{\\delta^2}.$ For fixed $\\delta$ the second term tends to zero as $\\epsilon\\downarrow0$; then letting $\\delta\\downarrow0$ proves convergence for every such $f$. This is weak convergence by [F6]. The estimates establish only the endpoint statements in the theorem.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d>=1 and a probability initial law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 permits R=0 and the increment cost remains d v(epsilon)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the scalar case by setting d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A point-mass initial law is allowed; the coupling construction in step 2.1 remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement allows epsilon=T and proves the limit epsilon down to zero in steps 1.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the inherited Full-AC Brownian/Itô and SDE interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The endpoint limit is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The endpoint limit is not stated as a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-point-mass-endpoint-cost",
+          "asserts": "$$\\mathbb E|X_\\epsilon-X_0|^2=d\\,v(\\epsilon),\\qquad W_2(\\mu_\\epsilon,\\mu)\\le\\sqrt{d\\,v(\\epsilon)}.$$",
+          "claim": "The endpoint estimate specializes to the exact point-mass Gaussian displacement used by the B example.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "dimension": 1,
+          "fixture": "scalar-endpoint-second-moment"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read all three proof steps and nine exact suppliers, including the current batch-50 W2 Definition and its product-coupling/Tonelli proof. SDE hypotheses match; bounded initial support gives finite second moments, Gaussian coordinate variances sum to d v(epsilon), and v(epsilon)<=g_max^2 epsilon. The ordered pair (X_epsilon,X_0) is measurable on the Euclidean Borel product and has the claimed marginals/cost. The indicator inequality proves the probability tail estimate, then compact-neighborhood uniform continuity proves bounded-continuous-test convergence. Checked epsilon=T, epsilon down to zero, d=1 and R=0, without assuming an initial density. Full AC inherited. No learned-score or discretization claim is imported. No defect or consumer repair; batch-50 page-interface workflow row remains separately open."
+      }
+    },
+    "ex-gaussian-two-point-mixture-smoothing-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The measure $\\mu$ is a Borel probability supported in the closed ball of radius $\\max(|a|,|b|)$, so [F1] applies. For $0<t\\le T$, substitute $\\mu=\\alpha\\delta_a+(1-\\alpha)\\delta_b$ in the defining integral. By the defining property of point masses, integration of any nonnegative Borel function $h$ gives $\\int h(z)\\,\\mu(dz)=\\alpha h(a)+(1-\\alpha)h(b)$. Taking $h(z)=\\phi_{v(t)}(x-z)$ yields the displayed formula, using $\\phi_c(z)=\\phi_c(-z)$. The initial law is $\\mu$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $a=b$, the two weights sum to one and both Gaussian terms have the same center. If $\\alpha=1$, only the first term remains; if $\\alpha=0$, only the second remains. In each case the stated single Gaussian is normalized and positive by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimension is positive and the initial law has total mass one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats alpha=0 and alpha=1, when one mixture weight vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The product Gaussian formula in the statement and step 1.1 include d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats a=b, when the two atoms coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 records the original atomic law at time zero, while the formula is for t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite mixture is explicit and step 1.1 uses the Full-AC smoothing definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit density, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit density, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-mixture-weight-boundaries",
+          "asserts": "At time zero its law remains $\\mu$. If $a=b$, or if $\\alpha$ is $0$ or $1$, the displayed density reduces to the single Gaussian centered at the atom carrying all mass.",
+          "claim": "All three stated degenerate mixture cases are evaluated exactly.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "dimension": 1,
+          "fixture": "scalar-mixture-degeneracies"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read both proof steps and exact two suppliers. Finite atoms lie in the closed ball of radius max(|a|,|b|), so the smoothing supplier applies under inherited Full AC. Dirac integration gives the weighted Gaussian formula; positivity/normalization hold also at alpha=0, alpha=1 and a=b. t=0 retains the original possibly singular atomic law, and no positive-time formula is evaluated at zero variance. Checked d=1 and coincident/zero atoms; no defect or repair."
+      }
+    },
+    "ex-singular-line-law-has-smooth-positive-time-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets (Finite, countably infinite, countable, uncountable) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-smoothing-density-and-forward-equation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix $d\\ge1$, $T>0$, a finite $R\\ge0$, and a Borel probability measure $\\mu$ on $\\mathbb R^d$ supported in $\\overline B(0,R)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, let $X_0$ be measurable at time zero with law $\\mu$ and independent of future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ for every $s<t$, and let $X$ be the unique strong solution of $X_t=X_0+\\int_0^t g(r)\\,dW_r$. For $a>0$ define $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ set\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),$$\n\nand set $\\mu_0=\\mu$. Let $C_c^\\infty(\\mathbb R^d)$ denote the real infinitely differentiable functions with compact support. For every $t>0$, $p_t$ is positive and infinitely differentiable in $x$. On each interval $[\\epsilon,T]$ with $0<\\epsilon<T$, it is continuously differentiable in time and satisfies\n\n$$\\partial_t p_t(x)=\\frac{g(t)^2}{2}\\Delta_xp_t(x),\\qquad \\Delta_x=\\sum_{j=1}^d\\partial_{x_j}^2.$$\n\nA family $(\\nu_t)_{0\\le t\\le T}$ of Borel probability measures is narrowly continuous when $t\\mapsto\\int f\\,d\\nu_t$ is continuous for every bounded continuous real function $f$. It is a weak forward solution with initial law $\\mu$ when it is narrowly continuous, $\\nu_0=\\mu$, and, for every $t\\in[0,T]$ and every real-valued function $\\psi:[0,T]\\times\\mathbb R^d\\to\\mathbb R$ with continuous first time derivative and continuous spatial derivatives through order two, whose spatial support lies in one compact set for all $s$, it satisfies\n\n$$\\int_{\\mathbb R^d}\\psi(t,x)\\,\\nu_t(dx)-\\int_{\\mathbb R^d}\\psi(0,x)\\,\\mu(dx)=\\int_0^t\\int_{\\mathbb R^d}\\left(\\partial_s\\psi(s,x)+\\frac{g(s)^2}{2}\\Delta_x\\psi(s,x)\\right)\\nu_s(dx)\\,ds.$$\n\nThen $(\\mu_t)_{0\\le t\\le T}$, where $\\mu_t(dx)=p_t(x)\\,dx$ for $t>0$ and $\\mu_0=\\mu$, is the unique narrowly continuous weak forward solution with initial law $\\mu$. No density for $\\mu$ at $t=0$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n(Axis-parallel rectangles in $\\mathbb{R}^m$ and their volume). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of Half-open boxes in $\\mathbb{R}^n$ and their volume, and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ (Assuming countable choice, $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\\lambda_n$ is a complete measure extending elementary volume).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $u\\mapsto(u,0)$ is continuous and hence Borel measurable; [F4] makes the formula in the statement its pushforward measure, and [A2, F3] give its total mass $\\lambda_1([0,1])=1$. It assigns mass one to the Borel segment $L$. For each integer $n\\ge1$, the segment lies in the rectangle $[0,1]\\times[-1/n,1/n]$, whose Lebesgue area is $2/n$ by [F3]. Therefore its outer measure is at most $2/n$ for every $n$, hence its Lebesgue measure is zero. Since $\\mu(L)=1$ and Lebesgue measure of $L$ is zero, $\\mu$ is singular with respect to two-dimensional Lebesgue measure.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the convolution formula [F1] to $\\mu$ gives $p_t(x)=\\int_0^1\\phi_{v(t)}(x-(u,0))\\,du$. In dimension two, $\\phi_{v(t)}(x-(u,0))=(2\\pi v(t))^{-1}\\exp(-((x_1-u)^2+x_2^2)/(2v(t)))$, which is the displayed expression. The integrand is strictly positive for every $u$, so its integral over a unit interval is strictly positive; [F2] gives infinite spatial differentiability for every $t>0$. Thus the initial singularity does not prevent positive-time smoothing.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The support segment [0,1] is nonempty and the ambient dimension is two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that the planar support is Lebesgue-null while it carries unit probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the unit interval and its positive one-dimensional Lebesgue mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The support is one-dimensional inside R^2; step 1.1 identifies the singular boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement contrasts the singular initial law with every positive-time density in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable-Choice hypothesis of the box-volume supplier; step 2.1 inherits Full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a smoothing calculation, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a smoothing calculation, not an iff claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-line-density-integrand",
+          "asserts": "$$p_t(x_1,x_2)=\\frac1{2\\pi v(t)}\\int_0^1\\exp\\!\\left(-\\frac{(x_1-u)^2+x_2^2}{2v(t)}\\right)du.$$",
+          "claim": "The displayed line integral is positive and its local derivative bounds match the smoothing theorem.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "dimension": 2,
+          "support_segments": 1,
+          "fixture": "planar-unit-segment"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Read both proof steps and all six exact suppliers, including the published box-measure Statement and its proof and CC interface. The continuous embedding u->(u,0) pushes unit-interval Lebesgue probability to a Borel law supported in the unit ball; rectangles of area 2/n show its supporting segment is planar null (also the supplier degenerate-box case). Thus singularity is genuine. The two-dimensional kernel normalization is 1/(2 pi v) and the pushforward integral gives the stated exponent; positivity holds on the unit interval and the completed smoothing theorem supplies infinite spatial differentiability for t>0. Full AC covers the explicit CC box use. No endpoint density claimed. Published box supplier has a Hunter-title/Golse-URL bibliographic mismatch recorded read-only for owner maintenance; its sound exact volume conclusion suffices and needs no consumer repair. No local mathematical defect."
+      }
+    },
+    "ex-gaussian-point-mass-score-lipschitz-blows-up-at-zero": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-mixture-score-and-global-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "For $a>0$, define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. The operator norm below is induced by the Euclidean norm on $\\mathbb R^d$.\n\nAssume the Axiom of Choice and the hypotheses of the compactly supported Gaussian smoothing setup: $d\\ge1$, $T>0$, $\\mu$ is a Borel probability measure supported in $\\overline B(0,R)$ for finite $R\\ge0$, $g:[0,T]\\to(0,\\infty)$ is continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, $v(t)=\\int_0^t g(r)^2\\,dr$, and $p_t(x)=\\int\\phi_{v(t)}(x-z)\\,\\mu(dz)$ for $t>0$. Fix $0<\\epsilon<T$. For $t\\in[\\epsilon,T]$ and $x\\in\\mathbb R^d$, define the probability measure\n\n$$\\nu_{t,x}(dz)=\\frac{\\phi_{v(t)}(x-z)}{p_t(x)}\\,\\mu(dz),\\qquad m_{t,x}=\\int z\\,\\nu_{t,x}(dz),$$\n\nand the matrix\n\n$$C_{t,x}=\\int (z-m_{t,x})(z-m_{t,x})^{\\mathsf T}\\,\\nu_{t,x}(dz).$$\n\nThe density $p_t$ is positive and smooth, and its score $s_t(x):=\\nabla_x\\log p_t(x)$ satisfies\n\n$$s_t(x)=-\\frac{x-m_{t,x}}{v(t)},\\qquad D_xs_t(x)=-\\frac{I_d}{v(t)}+\\frac{C_{t,x}}{v(t)^2}.$$\n\nFor all $t\\in[\\epsilon,T]$ and $x,y\\in\\mathbb R^d$,\n\n$$\\|D_xs_t(x)\\|_{\\mathrm{op}}\\le\\frac1{v(\\epsilon)}+\\frac{R^2}{v(\\epsilon)^2},\\qquad |s_t(x)|\\le\\frac{|x|+R}{v(\\epsilon)},$$\n\nso $s_t$ is globally Lipschitz in $x$, uniformly over this truncated time interval, with Lipschitz constant at most $1/v(\\epsilon)+R^2/v(\\epsilon)^2$. No such bound is asserted uniformly as $\\epsilon\\downarrow0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $\\mu=\\delta_a$ into [F1] gives $p_t(x)=\\phi_{v(t)}(x-a)$. The posterior measure $\\nu_{t,x}$ is then $\\delta_a$, so its mean is $a$ and its covariance matrix is zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] yields $s_t(x)=-(x-a)/v(t)$ and $D_xs_t=-I_d/v(t)$. For any $x\\ne y$, $|s_t(x)-s_t(y)|=|x-y|/v(t)$, so the global Lipschitz constant is exactly $1/v(t)$. On $[\\epsilon,T]$, $v$ is increasing, making the largest such constant $1/v(\\epsilon)$. Since $v(\\epsilon)\\le g_{\\max}^2\\epsilon\\to0$ and $v(\\epsilon)>0$, this bound tends to infinity.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d>=1 and a single point mass."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The center a=0 is allowed; step 2.1 still gives exact Lipschitz constant 1/v(t)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Jacobian formula and exact norm calculation in step 2.1 include d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 makes the posterior covariance zero for a point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the truncated constant diverges as epsilon down to zero; t=0 itself is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 inherits the Full-AC Gaussian smoothing and score interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states explicit formulas, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states explicit formulas, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-translated-gaussian-score",
+          "asserts": "$$s_t(x)=\\nabla\\log p_t(x)=-\\frac{x-a}{v(t)},\\qquad D_xs_t(x)=-\\frac{I_d}{v(t)}.$$",
+          "claim": "The point-mass case has zero posterior covariance and attains the 1/v term.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "dimension": 1,
+          "atoms": 1,
+          "fixture": "scalar-translated-log-density"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "authoring-beta",
+        "notes": "Critical checks: the point-mass posterior covariance is zero, the score sign is correct, and the truncated constant diverges as epsilon decreases."
+      }
+    },
+    "ex-gaussian-point-mass-endpoint-coupling-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-smoothed-data-law-and-transition-density",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, $T>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ supported in the closed ball $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, and set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, take $X_0$ with law $\\mu$, measurable at time zero and independent of the future Brownian increments. Let $W$ be a standard $d$-dimensional Brownian motion adapted to the filtration, with $W_t-W_s$ independent of $\\mathcal F_s$ and distributed as $N_d(0,(t-s)I_d)$ for every $0\\le s<t\\le T$. Let $X$ be the strong solution of $dX_t=g(t)\\,dW_t$ with initial value $X_0$. For $a>0$ define the product Gaussian density $\\phi_a(z)=\\prod_{j=1}^d(2\\pi a)^{-1/2}\\exp(-z_j^2/(2a))$. For $t>0$ and $0\\le s<t\\le T$, define\n\n$$p_t(x)=\\int_{\\mathbb R^d}\\phi_{v(t)}(x-z)\\,\\mu(dz),\\qquad q(s,x;t,y)=\\phi_{v(t)-v(s)}(y-x).$$\n\nThen $p_t$ is a finite, strictly positive, normalized Lebesgue density of the law of $X_t$. For each $x$, $q(s,x;t,\\cdot)$ is a finite, strictly positive, normalized Lebesgue density, and for all Borel sets $A,B\\subseteq\\mathbb R^d$,\n\n$$P(X_s\\in A,\\ X_t\\in B)=\\int_A\\int_B q(s,x;t,y)\\,dy\\,\\mu_s(dx),\\qquad \\mu_s:=\\operatorname{Law}(X_s).$$\n\nFor $0\\le s<r<t\\le T$, these transition densities satisfy\n\n$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$\n\nNo Lebesgue density for the initial law $\\mu$ is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-smoothing-endpoint-weak-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix $d\\ge1$, $T>0$, and a Borel probability measure $\\mu$ on $\\mathbb R^d$ supported in $\\overline B(0,R)$ for some finite $R\\ge0$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable and satisfy $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$; set $v(t)=\\int_0^t g(r)^2\\,dr$. On a complete filtered probability space with the usual conditions, let $X_0$ be measurable at time zero with law $\\mu$ and independent of future Brownian increments. Let $W$ be a standard adapted $d$-dimensional Brownian motion whose increment $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(t-s)I_d)$ for $0\\le s<t\\le T$. Let $X$ be the unique strong solution of $X_t=X_0+\\int_0^t g(r)\\,dW_r$, and write $\\mu_t=\\operatorname{Law}(X_t)$. For Borel probability laws $\\alpha,\\beta$ with finite second moments, write $W_2(\\alpha,\\beta)$ for the square root of the infimum of $\\int|x-y|^2\\,d\\pi(x,y)$ over Borel probability couplings $\\pi$ of $\\alpha$ and $\\beta$. For every $0<\\epsilon\\le T$,\n\n$$\\mathbb E|X_\\epsilon-X_0|^2=d\\,v(\\epsilon),\\qquad W_2(\\mu_\\epsilon,\\mu)\\le\\sqrt{d\\,v(\\epsilon)}.$$\n\nAs $\\epsilon\\downarrow0$, $X_\\epsilon\\to X_0$ in probability and $\\mu_\\epsilon$ converges weakly to $\\mu$, meaning that $\\int f\\,d\\mu_\\epsilon\\to\\int f\\,d\\mu$ for every bounded continuous real function $f$ on $\\mathbb R^d$. This estimate controls endpoint truncation only: it gives no bound for learned-score error or numerical-discretization error, and asserts no density or score regularity at $\\epsilon=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wasserstein-two-space-and-couplings",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathbb R^d$ have its Euclidean norm and Borel sigma-algebra. Define $\\mathcal P_2(\\mathbb R^d)$ to be the Borel probability measures $\\mu$ with $\\int |x|^2\\,d\\mu(x)<\\infty$. A coupling of $\\mu,\\nu\\in\\mathcal P_2(\\mathbb R^d)$ is a Borel probability measure $\\pi$ on $\\mathbb R^d\\times\\mathbb R^d$ whose first and second coordinate marginals are $\\mu$ and $\\nu$; write $\\Gamma(\\mu,\\nu)$ for the set of couplings. Define\n$$W_2(\\mu,\\nu)=\\left(\\inf_{\\pi\\in\\Gamma(\\mu,\\nu)}\\int_{\\mathbb R^d\\times\\mathbb R^d}|x-y|^2\\,d\\pi(x,y)\\right)^{1/2}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "source_section": "Statement",
+          "quote": "Let $m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\none has\n$$\\mathcal B(\\mathbb R^m)\\otimes\\mathcal B(\\mathbb R^n) = \\mathcal B(\\mathbb R^{m+n}).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The density in [F1] is the product of $d$ one-dimensional normal densities translated by $a$. Each coordinate has mean $a_j$ and variance $c^2\\epsilon$, so its second moment about $a$ is $d c^2\\epsilon$; both laws therefore have finite second moments.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If π is any coupling of μ_ε and δ_a, its second marginal assigns mass one to {a}, hence π(R^d×{a})=1. Its quadratic cost is ∫|x−y|² dπ=∫|x−a|² dμ_ε=d c²ε. There is at least one coupling: the continuous map x↦(x,a) pushes μ_ε forward to a Borel probability on R^d×R^d with marginals μ_ε and δ_a by [F4]. Thus the infimum over all couplings equals this common cost. Taking the square root gives the stated equality. The endpoint bound [F2] has the same value because v(ε)=c²ε.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d>=1, epsilon>0, and a probability point mass."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes c>0 and epsilon>0; zero noise and the singular time-zero endpoint are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The cost calculation in step 2.1 includes d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The first marginal is exactly the degenerate point mass delta_a, handled in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example holds for every 0<epsilon<T; its cost tends to zero as epsilon down to zero in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a coupling as a continuous pushforward and uses the Full-AC W2/smoothing definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes an exact distance, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes an exact distance, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "ml101-constant-noise-point-coupling",
+          "asserts": "$$W_2(\\mu_\\epsilon,\\delta_a)=\\sqrt{d}\\,c\\sqrt{\\epsilon}.$$",
+          "claim": "The coupling lower and upper bounds coincide exactly in the point-mass case.",
+          "checked_in": "Statement and steps 1.1–2.1",
+          "dimension": 1,
+          "fixture": "scalar-dirac-coupling-cost"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "notes": "Independently read both current proof steps and all six exact suppliers, including batch-50 W2 Definition/product-coupling proof. Authenticated original/post-reader source archives have raw hashes equal to pre/post snapshot item_sha256, and current item equals the post-reader archive exactly. Reader changes only step 2.1 from reversed marginals to the stated order. Every coupling of (mu_epsilon,delta_a) has second coordinate a a.s.; projection onto its first marginal makes every cost d c^2 epsilon. Continuous x->(x,a) supplies an actual Borel coupling, so both bounds coincide. Normal moments ensure domain P2; c>0 and epsilon>0 justify the positive square root. Checked d=1, a=0, arbitrary translated a and epsilon down to zero; no numerical/score claim. Original reverse-order omission closes immediately by coordinate swap and is nonfatal polish. Accept the reader repair without rewriting it."
+      },
+      "repair_confidence": 1
+    }
+  }
+}

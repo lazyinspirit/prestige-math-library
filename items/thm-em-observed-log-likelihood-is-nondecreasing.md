@@ -25,6 +25,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-em-observed-log-likelihood-is-nondecreasing.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -42,11 +43,15 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice. Let $p(\theta,x,z)$ be a jointly measurable normalized complete-data density as in [[def-latent-variable-joint-and-observed-data-factorization]], and fix observed data $x$. Put $m_\theta(x)=\int p(\theta,x,z)\,\mu(dz)$. Let $\theta_t$ and $\theta$ satisfy $0<m_{\theta_t}(x),m_\theta(x)<\infty$. Define $q_t(z)=p(\theta_t,x,z)/m_{\theta_t}(x)$ and $q_\theta^x(z)=p(\theta,x,z)/m_\theta(x)$. Assume
+Assume the Axiom of Choice. Let $p(\theta,x,z)$ be a jointly measurable normalized complete-data density as in Latent-variable joint and observed-data factorization, and fix observed data $x$. Put $m_\theta(x)=\int p(\theta,x,z)\,\mu(dz)$. Let $\theta_t$ and $\theta$ satisfy $0<m_{\theta_t}(x),m_\theta(x)<\infty$. Define $q_t(z)=p(\theta_t,x,z)/m_{\theta_t}(x)$ and $q_\theta^x(z)=p(\theta,x,z)/m_\theta(x)$. Assume
 $$q_t\mu\ll q_\theta^x\mu,\qquad \int q_t(z)\bigl(|\log p(\theta_t,x,z)|+|\log p(\theta,x,z)|\bigr)\,\mu(dz)<\infty,$$
 and $D(q_t\mu\|q_\theta^x\mu)<\infty$. Use $\log0=-\infty$ and set $q_t|\log p|=0$ wherever $q_t=0$. Then, with $Q(\theta\mid\theta_t)=\int q_t(z)\log p(\theta,x,z)\,\mu(dz)$,
 $$\ell_x(\theta)-\ell_x(\theta_t) =Q(\theta\mid\theta_t)-Q(\theta_t\mid\theta_t) +D(q_t\mu\|q_\theta^x\mu).$$
 Consequently, any admissible update with $Q(\theta\mid\theta_t)\ge Q(\theta_t\mid\theta_t)$ does not decrease $\ell_x$. An exact M-step has this property when its maximum is attained over an admissible candidate set containing $\theta_t$. No equality-of-parameter conclusion is asserted when the KL divergence is zero.
+
+## Statement references
+
+[[def-latent-variable-joint-and-observed-data-factorization]]
 
 ## Facts & Assumptions
 

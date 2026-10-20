@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope_before_sha256": "01adb9a07cd1f9acedb7f1e6d5f02172b2a22be733bc587688f9c112d0c2a9dd",
+  "operations": [
+    {
+      "path": "tools/step3-scope.mjs",
+      "before": "import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';",
+      "after": "import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';\nimport { sourceIdenticalReversionContinuity } from './step3-owner-source-identical-reversion.mjs';"
+    },
+    {
+      "path": "tools/step3-scope.mjs",
+      "before": "              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {",
+      "after": "              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)\n                && !(ownerEvidence?.source_identical_reversions ?? []).some(entry =>\n                  sourceIdenticalReversionContinuity(ROOT, run, decision, target, preValue, currentValue, entry))) {"
+    }
+  ]
+}

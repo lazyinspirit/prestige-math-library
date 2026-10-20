@@ -1,0 +1,462 @@
+{
+  "group": "aa",
+  "batches": ["80"],
+  "pages_read": [
+    "finite-mdps-and-bellman-operators",
+    "finite-mdps-and-bellman-operators-examples"
+  ],
+  "items_read": [
+    "def-finite-markov-decision-process",
+    "lem-bounded-discounted-return-converges",
+    "lem-finite-state-sup-norm-space-is-complete",
+    "thm-finite-mdp-policy-induces-reward-state-chain",
+    "def-policy-bellman-operator",
+    "def-bellman-optimality-operator",
+    "def-discounted-return-and-value-functions",
+    "thm-bellman-contraction-and-unique-fixed-point",
+    "alg-value-iteration",
+    "lem-policy-value-satisfies-bellman-equation",
+    "thm-value-iteration-convergence-error-bound",
+    "alg-policy-iteration",
+    "thm-policy-improvement",
+    "ex-undiscounted-single-state-mdp-diverges",
+    "ex-finite-mdp-common-reward-shift",
+    "ex-value-iteration-attains-error-rate",
+    "ex-policy-iteration-tie-retention"
+  ],
+  "conventions": [
+    {
+      "convention": "The state set may be empty; every statewise action set is finite and nonempty. Rewards have a finite real alphabet and a joint next-state/reward law. Reward and next state need not be independent.",
+      "fixed_by": "def-finite-markov-decision-process",
+      "matters_for": [
+        "thm-finite-mdp-policy-induces-reward-state-chain",
+        "def-policy-bellman-operator",
+        "def-bellman-optimality-operator",
+        "def-discounted-return-and-value-functions",
+        "lem-policy-value-satisfies-bellman-equation",
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "convention": "For an empty state set, the value-function space is a singleton, its sup metric and sup norm are zero, and Bellman operators are its unique self-map.",
+      "fixed_by": "lem-finite-state-sup-norm-space-is-complete",
+      "matters_for": [
+        "thm-bellman-contraction-and-unique-fixed-point",
+        "thm-value-iteration-convergence-error-bound",
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "convention": "Discounts satisfy 0 ≤ γ < 1. Reward sequences start at index 1, discount powers start at index 0, the N-term partial sum is empty at N=0, and γ⁰=1 even for γ=0.",
+      "fixed_by": "lem-bounded-discounted-return-converges",
+      "matters_for": [
+        "def-discounted-return-and-value-functions",
+        "lem-policy-value-satisfies-bellman-equation",
+        "thm-value-iteration-convergence-error-bound",
+        "ex-value-iteration-attains-error-rate"
+      ]
+    },
+    {
+      "convention": "Nonempty-state policy path laws assume the Axiom of Choice. The reward-state chain starts at (s,0), where 0 is a dummy reward; the first return reward is R₁. Empty-state values require no path law or Choice.",
+      "fixed_by": "def-discounted-return-and-value-functions",
+      "matters_for": [
+        "lem-policy-value-satisfies-bellman-equation",
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "convention": "Policy iteration evaluates policies exactly, retains every currently greedy action, and otherwise selects the earliest maximizing action in a supplied finite action list.",
+      "fixed_by": "alg-policy-iteration",
+      "matters_for": [
+        "thm-policy-improvement",
+        "ex-policy-iteration-tie-retention"
+      ]
+    },
+    {
+      "convention": "Value iteration takes an integer iteration budget m≥0 and returns V_m; its procedure does not claim convergence in finitely many iterations.",
+      "fixed_by": "alg-value-iteration",
+      "matters_for": [
+        "thm-value-iteration-convergence-error-bound",
+        "ex-value-iteration-attains-error-rate"
+      ]
+    },
+    {
+      "convention": "The policy-improvement theorem compares expected discounted values of stationary policies; deterministic policies are embedded as point-mass stationary policies.",
+      "fixed_by": "thm-policy-improvement",
+      "matters_for": [
+        "thm-policy-improvement"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-finite-markov-decision-process",
+      "statement": "A finite MDP has a finite state set S, possibly empty, finite nonempty action sets A(s), a finite real reward alphabet, and nonnegative joint masses p(s′,ρ|s,a) summing to one for each admissible pair. Expected rewards and state-transition probabilities are the corresponding finite sums.",
+      "used_by": [
+        "thm-finite-mdp-policy-induces-reward-state-chain",
+        "def-policy-bellman-operator",
+        "def-bellman-optimality-operator",
+        "def-discounted-return-and-value-functions",
+        "alg-value-iteration",
+        "alg-policy-iteration",
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "id": "thm-bellman-contraction-and-unique-fixed-point",
+      "statement": "For a finite MDP and 0≤γ<1, every stationary-policy Bellman operator and the Bellman optimality operator satisfy the sup-norm contraction inequality with constant γ. Each has exactly one fixed point in the real-valued functions on S.",
+      "used_by": [
+        "thm-value-iteration-convergence-error-bound",
+        "alg-policy-iteration",
+        "thm-policy-improvement",
+        "ex-finite-mdp-common-reward-shift",
+        "ex-value-iteration-attains-error-rate",
+        "ex-policy-iteration-tie-retention"
+      ]
+    },
+    {
+      "id": "lem-bounded-discounted-return-converges",
+      "statement": "For M≥0, 0≤γ<1, and any real sequence with |ρ_j|≤M, the series ∑_{j≥0}γʲρ_{j+1} converges absolutely. Its sum and every partial sum have absolute value at most M/(1−γ), and the remainder after N terms is at most Mγᴺ/(1−γ), including N=0.",
+      "used_by": [
+        "def-discounted-return-and-value-functions",
+        "lem-policy-value-satisfies-bellman-equation"
+      ]
+    },
+    {
+      "id": "lem-finite-state-sup-norm-space-is-complete",
+      "statement": "For any finite set S, the real-valued functions on S form a complete metric space under the maximum absolute coordinate difference, with distance zero on the singleton function space when S is empty.",
+      "used_by": [
+        "thm-bellman-contraction-and-unique-fixed-point",
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "id": "thm-finite-mdp-policy-induces-reward-state-chain",
+      "statement": "Assume the Axiom of Choice. For a finite MDP with nonempty S and a stationary Markov policy, the policy mixture of the joint reward-transition law defines a probability kernel on S×(R∪{0}); from every (s,0) there is a path law whose coordinate process is a homogeneous chain with that kernel relative to its natural filtration.",
+      "used_by": [
+        "def-discounted-return-and-value-functions",
+        "lem-policy-value-satisfies-bellman-equation"
+      ]
+    },
+    {
+      "id": "lem-policy-value-satisfies-bellman-equation",
+      "statement": "For a finite MDP, 0≤γ<1, and any stationary Markov policy π, the expected discounted state value satisfies T^π V^π=V^π. The empty-state case needs no Choice; otherwise Choice is assumed for the path-law definition.",
+      "used_by": [
+        "thm-policy-improvement"
+      ]
+    },
+    {
+      "id": "thm-policy-improvement",
+      "statement": "Under the stated discounted finite-MDP hypotheses and Choice in the nonempty-state branch, a deterministic policy greedy with respect to V^π weakly improves every state value. A strict one-step improvement gives a strict value improvement. Exact tie-retaining policy iteration makes at most N_det−1 changes and terminates at a deterministic policy with value V*, which dominates every stationary-policy value.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit Choice assumptions for policy path laws.",
+      "opened": true
+    },
+    {
+      "id": "def-cartesian-product",
+      "used_for": "State-action and state-reward product domains.",
+      "opened": true
+    },
+    {
+      "id": "def-cauchy-in-metric",
+      "used_for": "Cauchy condition in the finite-coordinate completeness proof.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-metric-space",
+      "used_for": "Completeness and Banach's hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-countable",
+      "used_for": "Finiteness means bijection with a natural number.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expected discounted returns as finite Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-integer-power",
+      "used_for": "Power recursion and γ⁰=1, including γ=0.",
+      "opened": true
+    },
+    {
+      "id": "def-lipschitz-holder-contraction",
+      "used_for": "The undiscounted example's failure of any contraction constant below one.",
+      "opened": true
+    },
+    {
+      "id": "def-max-min",
+      "used_for": "Attained action maxima and their uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability sections and measurable event sections.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-convergence",
+      "used_for": "Sup-metric convergence tested with positive rational tolerances.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-space",
+      "used_for": "Metric axioms, including the empty-state singleton case.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total mass one and integrability of constant bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurability of history-coordinate projections.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Reward coordinates as measurable random variables.",
+      "opened": true
+    },
+    {
+      "id": "def-real-limit",
+      "used_for": "Real Cauchy and convergence conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-series",
+      "used_for": "N-term partial sums, empty sums, and tail-series indexing.",
+      "opened": true
+    },
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite sums over states and actions.",
+      "opened": true
+    },
+    {
+      "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+      "used_for": "Almost-sure conditional transition identity relative to the natural filtration.",
+      "opened": true
+    },
+    {
+      "id": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+      "used_for": "Interchanging finite action, state, and reward sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Existence of reward bounds and greedy action values.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Scaling, monotonicity, splitting, and finite-coordinate estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Decay of discounted remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-limit-of-tail",
+      "used_for": "The finite-horizon values and their one-index shift have the same limit.",
+      "opened": true
+    },
+    {
+      "id": "lem-limit-preserves-order",
+      "used_for": "Passing non-strict bounds and policy-value comparisons to limits.",
+      "opened": true
+    },
+    {
+      "id": "lem-limit-unique",
+      "used_for": "Unique coordinate limits and identification of the Bellman equation.",
+      "opened": true
+    },
+    {
+      "id": "lem-metrics-on-rn",
+      "used_for": "The maximum metric after enumeration of a nonempty finite state set.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Absolute-value algebra in reward and return bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-power-laws",
+      "used_for": "Integer-power identities in the sharp value-iteration example.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-line-is-a-metric-space",
+      "used_for": "The usual real metric in the undiscounted countermodel.",
+      "opened": true
+    },
+    {
+      "id": "lem-series-linearity",
+      "used_for": "Scaling the convergent geometric majorant.",
+      "opened": true
+    },
+    {
+      "id": "lem-series-tail-invariance",
+      "used_for": "Convergent series tails and their relation to partial sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Finite-sum absolute-value bounds cited by the MDP definition.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of finite discounted return sums.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Integrable constant majorants and bounds on finite-return integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-limits",
+      "used_for": "Passing coordinate limits through finite Bellman sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-banach-fixed-point",
+      "used_for": "Unique Bellman fixed points and convergence of policy-operator iterates.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-criterion-via-lub",
+      "used_for": "Existence of limits of real coordinate Cauchy sequences.",
+      "opened": true
+    },
+    {
+      "id": "thm-direct-comparison-test",
+      "used_for": "Convergence of the nonnegative absolute-reward majorant series.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Integrability of discounted returns and convergence of finite-return expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Discounted sums and the γ=1 divergence example.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite threshold maxima, value-iteration estimates, and monotone policy iterates.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "Path-space existence, prescribed prefix laws, and the homogeneous-chain specialization under Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-nat-linear-order",
+      "used_for": "Constructing the maximum of finitely many natural thresholds.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-series-bounded-partial-sums",
+      "used_for": "Each finite geometric partial sum is bounded by the full sum.",
+      "opened": true
+    },
+    {
+      "id": "thm-product-rule",
+      "used_for": "Finiteness of reward-state spaces and the deterministic-policy space.",
+      "opened": true
+    },
+    {
+      "id": "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+      "used_for": "Measurability of full discounted returns as pointwise limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-subset-of-a-finite-set",
+      "used_for": "Finiteness of subsets used in the reward-state construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-sum-rule",
+      "used_for": "Finiteness of state-action unions and finite-support probability additivity.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-characterising-property-of-ordered-pairs",
+      "used_for": "Disjointness and coordinate uniqueness of state-action blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Least convergence thresholds and least representatives of nonempty disjoint finite-support events.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-bounded-discounted-return-converges",
+      "concern": "Proof 1.1 establishes convergence of the absolute-value series and concludes absolute convergence. Proof 2.1 then says the signed finite tail sums converge to G 'by step 1.1', without supplying the implication from absolute convergence to convergence. That implication is not part of the cited def-series or comparison theorem. The existing published lem-absolute-convergence-implies-convergence, opened for this check, supplies exactly the missing implication but is absent from deps and Facts. The claim is true; this is a short missing justification before G and its tail limits are used.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-bounded-discounted-return-converges",
+      "concern": "Fact F4 attributes 'the absolute value of a finite sum is at most the sum of the absolute values' to lem-of-abs-value and lem-finite-sum-laws. Neither cited statement supplies the triangle inequality: lem-of-abs-value states positivity, separation, sign bounds, symmetry and multiplicativity, while lem-finite-sum-laws states algebra and order rules. The opened published lem-triangle-inequality-finite supplies the exact inequality but is absent from this item's deps and F4. Steps 1.2 and 2.1 use that inequality.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "tabular-prediction-and-control",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "Checked the actual finite-MDP, path-law, policy-value, Bellman-fixed-point and bounded-return citations in the tabular definitions, algorithms and relevant proofs. They preserve the joint finite reward-transition law and discount range. Path-law/value consumers state Choice; the greedy-policy lemma proves the stronger adapted-continuation optimality claim locally."
+    },
+    {
+      "from": "average-reward-regret-and-ucrl2",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "The bounded-reward definition explicitly identifies its Borel [0,1] reward law as an extension of the supplier's finite reward alphabet. It imports the finite state/action and joint-law conventions, rather than treating the discounted-return results as average-reward theorems. The communicating/diameter definition preserves legal statewise actions."
+    },
+    {
+      "from": "model-based-planning-dyna-and-model-exploitation",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "The learned-model definition faithfully derives expected rewards and state marginals from the joint law. The stochastic-shortest-path definition supplies its own absorbing-goal and positive-cost assumptions. Dyna-Q explicitly restricts its stored-response model to deterministic dynamics and rewards; it does not import an unsupported discounted convergence claim."
+    },
+    {
+      "from": "pomdps-and-belief-state-planning",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "The finite-POMDP definition faithfully imports the joint next-state/reward masses and their marginals, with a common finite action set as a special case. Its finite-horizon allowance γ=1 is stated locally and does not invoke the supplier's infinite discounted-return theorem."
+    },
+    {
+      "from": "imitation-learning-and-dagger",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "The finite-horizon occupancy lemma and imitation-learning definition use the actual normalized transition marginals and stationary-policy rows. Their finite-sum occupancy construction explicitly avoids an infinite-path extension, so it does not silently inherit a path-law conclusion without Choice."
+    },
+    {
+      "from": "constrained-mdps-and-policy-safety",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "The CMDP definition preserves the nonempty finite state/action/reward model and joint masses. The occupancy proof establishes normalization of finite-time masses before applying the bounded-return lemma to bounded deterministic sequences of expected transition signals. The discounted-cost definition distinguishes expected constraints from trajectory bounds."
+    }
+  ]
+}

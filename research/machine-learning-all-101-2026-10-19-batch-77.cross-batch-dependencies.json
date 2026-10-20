@@ -1,0 +1,158 @@
+[
+  {
+    "kind": "page",
+    "consumer": "adversarial-bandits-and-importance-weighted-feedback",
+    "supplier": "hedge-and-online-gradient-descent",
+    "status": "verified",
+    "evidence": "Read the actual Batch 74 page frontmatter and the current alg-hedge Definition. The page provides the required exponential-weight notation. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. The page dependency is supplied by alg-hedge, whose current readiness record/hash is closed and which is absent from unresolved work.",
+    "required_hypotheses": "Finite arm set and horizon; the supplier's full-information Hedge update is used only for normalized exponential-weight notation. The Exp3 proof does not apply Hedge's bounded-loss regret theorem to importance-weighted estimates.",
+    "affected_claims": [
+      "alg-exp3: exponential weights are normalized to form strictly positive arm probabilities.",
+      "ex-exp3-and-full-information-hedge-differ: the comparison branch uses the supplier's full-information Hedge update."
+    ],
+    "local_route": "Use the actual alg-hedge Definition as the exponential-weight interface; derive Exp3's probabilities and regret locally from the importance-weighted estimator and potential argument.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-hedge",
+        "section": "Definition",
+        "excerpt": "After observing the whole vector $\\ell_t$, update $$W_{t+1}(i):=W_t(i)\\exp(-\\epsilon\\ell_t(i)),\\qquad i\\in[N].$$"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "def-bandit-importance-weighted-estimator",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 Definition body. It supplies the choice-before-current-feedback order used by the estimator protocol. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "The finite-valued action is selected using prior history before the current reward feedback is observed.",
+    "affected_claims": [
+      "def-bandit-importance-weighted-estimator: action A_t is sampled before X_t is observed.",
+      "thm-exp3-expected-regret: P_t is determined before the current action draw."
+    ],
+    "local_route": "Define x_t and P_t at the pre-action history, sample A_t conditionally, and reveal only the played reward X_t.",
+    "supplier_excerpts": [
+      {
+        "item": "def-online-decision-protocol",
+        "section": "Definition",
+        "excerpt": "The learner does not observe $f_t$ before choosing $x_t$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "def-bandit-importance-weighted-estimator",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 adversary/feedback Definition. It distinguishes fixed reward sequences, past-history adaptive timing, and current-action-reactive timing. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "The oblivious reward vector is fixed before learner randomization; in the optional extension the vector is chosen from past history before A_t. No current-action-reactive policy-regret interface is imported.",
+    "affected_claims": [
+      "def-bandit-importance-weighted-estimator: the current reward vector is chosen before A_t.",
+      "thm-exp3-expected-regret: the main and past-adaptive timing branches are distinct from current-action-reactive rewards."
+    ],
+    "local_route": "State the pre-action condition explicitly and define the adaptive comparator as max_i E[sum_t(x_{t,i}-X_t)] with the maximum outside expectation.",
+    "supplier_excerpts": [
+      {
+        "item": "def-adversary-and-feedback-model",
+        "section": "Definition",
+        "excerpt": "A **non-anticipating adaptive adversary** chooses $f_t$ from the history available before $x_t$ is chosen, so $f_t$ may depend on earlier choices and feedback but not on the current choice or the learner's current private randomization."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-exp3",
+    "supplier": "alg-hedge",
+    "status": "verified",
+    "evidence": "Read the actual Batch 74 alg-hedge Definition and matched its normalized exponential-weight update to the Exp3 probability rule. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "The Hedge item supplies only the exponential-weight normalization convention. Exp3 uses the loss estimate with an unbounded negative tail and proves its own properties.",
+    "affected_claims": [
+      "alg-exp3: normalized exponentials of cumulative estimated rewards define P_t.",
+      "thm-exp3-expected-regret: the algorithm is not analyzed through thm-hedge-static-regret."
+    ],
+    "local_route": "Give the full Exp3 sampling and update instructions, prove their finite positive denominators by induction, and prove the bandit regret bound locally.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-hedge",
+        "section": "Definition",
+        "excerpt": "At round $t$, set $$x_t(i):=\\frac{W_t(i)}{\\sum_{j=1}^{N}W_t(j)},\\qquad i\\in[N],$$"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-exp3-expected-regret",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 Definition body. It supplies the round ordering used in the conditional calculation. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "The arm draw precedes current feedback, and P_t is selected from the pre-action history.",
+    "affected_claims": [
+      "thm-exp3-expected-regret: condition on the pre-action history before applying the estimator moments."
+    ],
+    "local_route": "Use the pre-action filtration and finite conditional arm sums throughout the proof.",
+    "supplier_excerpts": [
+      {
+        "item": "def-online-decision-protocol",
+        "section": "Definition",
+        "excerpt": "The learner does not observe $f_t$ before choosing $x_t$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-exp3-expected-regret",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 adversary/feedback Definition and used its pre-action versus current-action-reactive distinction. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "The main branch is oblivious; the optional extension is pre-action past-adaptive with expected fixed-arm regret. No current-action-reactive policy regret is claimed.",
+    "affected_claims": [
+      "thm-exp3-expected-regret: scope and comparator convention for both adversary branches."
+    ],
+    "local_route": "Prove the conditional estimate bound for vectors fixed at each pre-action history and state the maximum-outside-expectation comparator explicitly.",
+    "supplier_excerpts": [
+      {
+        "item": "def-adversary-and-feedback-model",
+        "section": "Definition",
+        "excerpt": "A **non-anticipating adaptive adversary** chooses $f_t$ from the history available before $x_t$ is chosen, so $f_t$ may depend on earlier choices and feedback but not on the current choice or the learner's current private randomization."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-exp3-expected-regret",
+    "supplier": "def-static-dynamic-and-strongly-adaptive-regret",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 fixed-comparator and expected-regret Definition. The theorem states the finite-arm reward counterpart with the comparator convention written explicitly. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "Expected regret is an expectation of a measurable integrable regret variable; the comparator is fixed in [k]. The adaptive branch takes max_i outside expectation.",
+    "affected_claims": [
+      "thm-exp3-expected-regret: meaning of the oblivious expected-regret expression and fixed-arm adaptive extension."
+    ],
+    "local_route": "Define both regret expressions in the Statement and derive each fixed-arm gap before taking the finite maximum.",
+    "supplier_excerpts": [
+      {
+        "item": "def-static-dynamic-and-strongly-adaptive-regret",
+        "section": "Definition",
+        "excerpt": "For randomized learners or environments, **expected regret** is the expectation of the specified regret random variable over their joint randomness, when that random variable is measurable and integrable."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-exp3-and-full-information-hedge-differ",
+    "supplier": "alg-hedge",
+    "status": "verified",
+    "evidence": "Read the actual Batch 74 alg-hedge Definition. The example compares one full-information Hedge loss update with Exp3's one-action feedback update. Current ordinary full-run Step 1 recomputation: 1,037 items, 771 current-ready, run-wide closure still false. This item is absent from unresolved work, so its current readiness record/hash is closed.",
+    "required_hypotheses": "Hedge receives the whole loss vector after its choice and updates weights by exp(-eta times loss); the example uses the same eta as Exp3.",
+    "affected_claims": [
+      "ex-exp3-and-full-information-hedge-differ: the displayed full-information next distribution."
+    ],
+    "local_route": "Compute the Hedge weights from the fixed loss vector (0,1), and compute Exp3's two possible updates from its observed reward only.",
+    "supplier_excerpts": [
+      {
+        "item": "alg-hedge",
+        "section": "Definition",
+        "excerpt": "After observing the whole vector $\\ell_t$, update $$W_{t+1}(i):=W_t(i)\\exp(-\\epsilon\\ell_t(i)),\\qquad i\\in[N].$$"
+      }
+    ]
+  }
+]

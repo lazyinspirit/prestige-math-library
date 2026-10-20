@@ -1,0 +1,329 @@
+{
+  "group": "t",
+  "batches": [
+    "59"
+  ],
+  "pages_read": [
+    "energy-models-score-matching-and-contrastive-divergence",
+    "energy-models-score-matching-and-contrastive-divergence-examples"
+  ],
+  "items_read": [
+    "def-energy-based-density-and-partition-function",
+    "lem-energy-based-density-is-a-probability-measure",
+    "thm-score-matching-integration-by-parts-identity",
+    "alg-contrastive-divergence-k",
+    "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+    "ex-short-run-contrastive-divergence-bias"
+  ],
+  "conventions": [
+    {
+      "convention": "Energies are real-valued and measurable; normalization is defined only for parameters satisfying 0 < Zθ < ∞, relative to the specified reference measure.",
+      "fixed_by": "def-energy-based-density-and-partition-function",
+      "matters_for": [
+        "lem-energy-based-density-is-a-probability-measure",
+        "thm-score-matching-integration-by-parts-identity",
+        "alg-contrastive-divergence-k",
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "convention": "The data score is ∇log p on {p > 0} and zero on {p = 0}; the model score is −∇Eθ. Divergence uses locally integrable weak-derivative representatives.",
+      "fixed_by": "thm-score-matching-integration-by-parts-identity",
+      "matters_for": [
+        "thm-score-matching-integration-by-parts-identity"
+      ]
+    },
+    {
+      "convention": "Score matching assumes Countable Choice and finite p-integrals of the squared data score, squared model score and absolute weak divergence; it assumes no pointwise boundary limit at infinity.",
+      "fixed_by": "thm-score-matching-integration-by-parts-identity",
+      "matters_for": [
+        "thm-score-matching-integration-by-parts-identity"
+      ]
+    },
+    {
+      "convention": "CD-k starts each reconstruction chain from the data law, uses k ≥ 1 transitions, and updates θ ← θ − η ĝk. Its population direction is the data energy-gradient mean minus the reconstruction energy-gradient mean.",
+      "fixed_by": "alg-contrastive-divergence-k",
+      "matters_for": [
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "convention": "Finite-state probability vectors are row vectors, qk,θ = q0 Kθ^k, and Kθ^0 = I. The transition matrix is strictly positive; q0 may have zero coordinates. KL uses natural logarithms and zero-mass terms contribute zero.",
+      "fixed_by": "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+      "matters_for": [
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "convention": "The scalar CD objective retains parameter dependence through the reconstruction law; the stop-gradient update omits it and is not asserted to equal either the exact CD gradient or the likelihood gradient.",
+      "fixed_by": "alg-contrastive-divergence-k",
+      "matters_for": [
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-energy-based-density-and-partition-function",
+      "statement": "For a measure space (X, A, μ) and measurable real energies Eθ, Zθ := ∫ exp(−Eθ) dμ, Θμ := {θ : 0 < Zθ < ∞}, and Pθ(A) := Zθ⁻¹ ∫A exp(−Eθ) dμ for θ ∈ Θμ.",
+      "used_by": [
+        "lem-energy-based-density-is-a-probability-measure",
+        "thm-score-matching-integration-by-parts-identity",
+        "alg-contrastive-divergence-k",
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "id": "alg-contrastive-divergence-k",
+      "statement": "For an admissible energy model, a data probability law Q0 and an invariant probability kernel Kθ, define Qj+1,θ(A) = ∫ Kθ(x,A) Qj,θ(dx). For k ≥ 1 and m ≥ 1, draw independent data starts and conditionally independent k-transition reconstructions, form ĝk = m⁻¹ Σi(∇θEθ(xi) − ∇θEθ(xi,k)), and update θ ← θ − ηĝk. When the gradients are integrable under Q0 and Qk,θ, the population direction is their corresponding difference of integrals.",
+      "used_by": [
+        "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "id": "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+      "statement": "On a finite nonempty state space, with open parameter domain, continuously coordinate-differentiable energies and strictly positive stochastic transition entries, invariant model law pθ, fixed probability vector q0 and k ≥ 1, ∂jL = Σx q0(x)∂jEθ(x) − Σx pθ(x)∂jEθ(x), while ∂jCDk = Σx q0(x)∂jEθ(x) − Σx qk,θ(x)∂jEθ(x) − Σx ∂jqk,θ(x) log(qk,θ(x)/pθ(x)), where ∂jqk,θ = Σs=0,…,k−1 q0Kθ^s(∂jKθ)Kθ^(k−1−s).",
+      "used_by": [
+        "ex-short-run-contrastive-divergence-bias"
+      ]
+    },
+    {
+      "id": "lem-energy-based-density-is-a-probability-measure",
+      "statement": "For every measure space (X, A, μ), measurable real energy Eθ, and parameter θ with 0 < Zθ := ∫ exp(−Eθ) dμ < ∞, the normalized measure Pθ(A) := Zθ⁻¹ ∫A exp(−Eθ) dμ is a probability measure on (X, A).",
+      "used_by": [
+        "def-energy-based-density-and-partition-function"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measure-space",
+      "used_for": "The reference measure-space interface in the energy-model definition.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of energies.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Partition functions and nonnegative density integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Constructing the normalized energy law and the score-matching data law.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total-mass-one criteria for energy, data and finite path laws.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The power-series definition of exponential in the normalization proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-series-has-infinite-radius",
+      "used_for": "All-real convergence of the exponential series.",
+      "opened": true
+    },
+    {
+      "id": "cor-power-series-sums-are-continuous",
+      "used_for": "Continuity of t ↦ exp(−t).",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability of continuous exponential, density and cutoff functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Measurability of exp(−Eθ).",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positivity of energy-model weights in normalization and finite-state calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "The reference measure and measurable sets for score matching.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Lebesgue measure, completeness and box-volume estimates under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption carried by the score-matching analytic interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Score-matching integrability hypotheses and the algorithm's finite entropy and population-gradient integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passing mollified test identities to C1 tests and removing expanding cutoffs.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "The everywhere total differentiability and continuous-derivative convention.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-derivative-of-a-locally-integrable-function",
+      "used_for": "The signed compactly supported test-function identity for weak derivatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-weak-derivatives-are-unique-almost-everywhere",
+      "used_for": "Representative independence of the weak divergence integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Lebesgue measurability of continuous and zero-extended score functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-bump-between-concentric-euclidean-balls",
+      "used_for": "A smooth cutoff equal to one on the unit ball and supported in the radius-two ball.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed balls supporting cutoff and mollification estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Bounds on continuous compactly supported functions and their derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Products, rescalings, logarithmic compositions and translated test-function derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The data-score identity ∇p = p∇log p where p is positive, and finite-state log-density derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Identifying gradient coordinates with coordinate partial derivatives.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Bounding and normalizing the smooth bump's integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Unit mass of rescaled mollifiers and the translated convolution formula.",
+      "opened": true
+    },
+    {
+      "id": "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+      "used_for": "The scaled unit-mass smooth convolution kernels.",
+      "opened": true
+    },
+    {
+      "id": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+      "used_for": "Smoothness of mollified C1 compactly supported test functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiation-under-the-integral-sign",
+      "used_for": "Differentiating the translated C1 function inside its mollifier integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-fermat-for-euclidean-local-extrema",
+      "used_for": "Vanishing of ∇p wherever the nonnegative differentiable density p is zero.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+      "used_for": "Continuity of C1 functions and openness of the positive-density locus.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "The algorithm's specified pointwise transition kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-composition-of-probability-kernels",
+      "used_for": "Composing the singleton-source initial-law kernel with successive transitions.",
+      "opened": true
+    },
+    {
+      "id": "lem-kernel-composition-is-well-defined-and-associative",
+      "used_for": "Ensuring each finite reconstruction-law composition is a probability kernel.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of integration against the algorithm's probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-vector",
+      "used_for": "Nonnegative finite coordinates summing to one, retaining zero data coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Coordinate derivatives on open parameter intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Finite sum, product and quotient differentiation in the CD theorem and example.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Coordinate differentiation of exponential and logarithmic compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Differentiating energy weights and the two-state model probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Verifying countable additivity of the finite path law.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "The integrability, conditioning measurability and event-integral criterion for the finite path conditional-expectation version.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": []
+}

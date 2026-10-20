@@ -1,0 +1,1367 @@
+{
+  "version": 1,
+  "scope": [
+    "prop-covariance-factor-model-rotation-ambiguity",
+    "lem-ica-whitening-reduces-mixing-to-orthogonal",
+    "prop-poisson-nmf-loglikelihood",
+    "prop-poisson-nmf-factorization-invariances",
+    "lem-poisson-nmf-updates-preserve-positivity",
+    "ex-gaussian-factor-rotation",
+    "ex-ica-sign-permutation-ambiguity",
+    "ex-poisson-nmf-nonunique-factorizations",
+    "ex-poisson-nmf-zero-count-update",
+    "lem-local-gaussian-characteristic-function-is-global",
+    "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+    "thm-square-ica-identifiability-at-most-one-gaussian"
+  ],
+  "contracts": {
+    "prop-covariance-factor-model-rotation-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-factor-model",
+          "source_section": "Definition",
+          "quote": "Let $p,q$ be positive integers with $q<p$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $S:\\Omega\\to\\mathbb R^q$ and $\\varepsilon:\\Omega\\to\\mathbb R^p$ be measurable random vectors with finite second moments. For finite-second-moment random vectors $U,V$, define\n\n$$\\operatorname{Cov}(U,V)=\\mathbb E[(U-\\mathbb E U)(V-\\mathbb E V)^T], \\qquad \\operatorname{Cov}(U)=\\operatorname{Cov}(U,U),$$\n\nwhere expectation is integration with respect to $\\mathbb P$. A **covariance factor model** is a representation\n\n$$X=AS+\\varepsilon$$\n\nwith a fixed matrix $A\\in\\mathbb R^{p\\times q}$ and assumptions\n\n$$\\mathbb E S=0, \\qquad \\mathbb E\\varepsilon=0, \\qquad \\operatorname{Cov}(S)=I_q, \\qquad \\operatorname{Cov}(\\varepsilon)=D=\\operatorname{diag}(d_1,\\ldots,d_p), \\quad d_i>0, \\qquad \\operatorname{Cov}(S,\\varepsilon)=0.$$\n\nThe model assumes only the stated moment and cross-covariance conditions; it does not assume that $S$ and $\\varepsilon$ are independent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "covariance-expansion",
+          "claim": "By [F1], bilinearity of covariance gives $\\operatorname{Cov}(X)=A\\operatorname{Cov}(S)A^T+A\\operatorname{Cov}(S,\\varepsilon)+\\operatorname{Cov}(\\varepsilon,S)A^T+\\operatorname{Cov}(\\varepsilon)=AA^T+D$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "orthogonal-rotation",
+          "claim": "The transformed factors have mean zero, covariance $R I_q R^T=I_q$, and cross-covariance $\\operatorname{Cov}(RS,\\varepsilon)=R\\operatorname{Cov}(S,\\varepsilon)=0$. Also $A_RS_R=AR^TRS=AS$, and $A_RA_R^T+D=AR^TRA^T+D=AA^T+D$. Hence the transformed pair is another covariance factor model with the same covariance.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes positive dimensions with q<p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 impose no nonzero-rank condition on A, so A=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes q=1, where the orthogonal matrices are R=1 and R=-1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no rank assumption on A, so rank-deficient loading matrices are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proposition has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-ica-whitening-reduces-mixing-to-orthogonal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge 1$ and let $X,S$ be random vectors in $\\mathbb R^p$, considered through their probability laws. A **square independent-component representation** of $X$ is a representation in distribution\n\n$$X\\overset{d}=AS$$\n\nwhere $A\\in GL_p(\\mathbb R)$ is an invertible mixing matrix and $S=(S_1,\\ldots,S_p)^T$ has mutually independent real-valued components. Mutual independence means that for all Borel sets $B_1,\\ldots,B_p\\subseteq\\mathbb R$,\n\n$$\\mathbb P(S_1\\in B_1,\\ldots,S_p\\in B_p)=\\prod_{j=1}^p\\mathbb P(S_j\\in B_j).$$\n\nEach source is standardized: $\\mathbb E S_j=0$ and $\\mathbb E S_j^2=1$. A source is **Gaussian** if its law has density $(2\\pi)^{-1/2}e^{-x^2/2}$, and is **non-Gaussian** otherwise. All vectors are columns and matrix transposes use the standard Euclidean inner product. The definition specifies a latent representation, not a claim that it can be recovered uniquely from the law of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-covariance",
+          "claim": "By [F1], $C=\\operatorname{Cov}(X)=A I_p A^T=AA^T$. For every nonzero $v\\in\\mathbb R^p$, $v^TCv=\\lVert A^Tv\\rVert^2>0$ because $A$ is invertible; hence $C$ is symmetric positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "spectral-inverse-root",
+          "claim": "By [F2], write $A=U\\Sigma V^T$ with $U,V$ orthogonal. Since $A$ is invertible, every diagonal entry of $\\Sigma$ is positive. Thus $C=U\\Sigma^2U^T$, and $B=U\\Sigma^{-1}U^T$ is symmetric positive definite with $B^2=C^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-inverse-root",
+          "claim": "If $K$ is another symmetric positive-definite matrix with $K^2=C^{-1}$, then $K$ commutes with $C^{-1}$ and preserves each eigenspace $E_\\lambda$ of $C^{-1}$. On each such subspace, [F3] gives an orthonormal eigenbasis for $K|_{E_\\lambda}$. Its eigenvalues $\\mu$ are positive and satisfy $\\mu^2=\\lambda$, so $K|_{E_\\lambda}=\\sqrt\\lambda I$. This determines $K$ uniquely and agrees with $B$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "orthogonal-whitened-mixing",
+          "claim": "Therefore $C^{-1/2}=B$ and $C^{-1/2}A=U\\Sigma^{-1}U^TU\\Sigma V^T=UV^T$. Since $(UV^T)^T(UV^T)=I_p$, the whitened mixing is orthogonal and $C^{-1/2}X\\overset d=(UV^T)S$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "An invertible A cannot be the zero matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 is valid for p=1, where the whitened mixing is 1 or -1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Invertibility of A makes C=AA^T positive definite, so zero eigenvalues are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter occurs in the whitening calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied finite-dimensional spectral and SVD bases and makes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a direct implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a direct implication, not an equivalence."
+        }
+      ]
+    },
+    "prop-poisson-nmf-loglikelihood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p,r$ be positive integers and write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. An observed count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ is admissible when every row and every column contains a positive entry. A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices\n\n$$W\\in[0,\\infty)^{n\\times r}, \\qquad H\\in[0,\\infty)^{r\\times p}, \\qquad \\lambda_{ij}=(WH)_{ij}=\\sum_{k=1}^r W_{ik}H_{kj}.$$\n\nAt this parameter, the random counts $Y_{ij}$ are mutually independent and have Poisson means $\\lambda_{ij}$. For $\\lambda>0$, the Poisson law is\n\n$$\\mathbb P(Y=m)=e^{-\\lambda}\\frac{\\lambda^m}{m!}, \\qquad m\\in\\mathbb N_0;$$\n\nfor $\\lambda=0$, it assigns probability $1$ to $m=0$ and probability $0$ to every $m>0$. This model defines a likelihood for the observed matrix; it makes no convexity or global-optimality assertion about the factor parameters.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-rate-likelihood",
+          "claim": "When all rates are positive, [F1] and independence give joint likelihood $L(W,H)=\\prod_{i,j} e^{-\\lambda_{ij}}\\lambda_{ij}^{x_{ij}}/x_{ij}!$. Taking logarithms and using $\\log\\prod a_{ij}=\\sum\\log a_{ij}$ gives the displayed formula.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-rate-boundary",
+          "claim": "If $\\lambda_{ij}=0$, [F1] gives cell likelihood $1$ when $x_{ij}=0$ and $0$ when $x_{ij}>0$; their log-likelihoods are respectively $0$ and $-\\infty$, exactly the stated conventions. The factorial term depends only on the fixed data, so removing it leaves the same maximizing objective in $W,H$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Admissible Poisson NMF inputs have positive row and column dimensions, so the cell index set is nonempty. The sum/product notation refers to those finitely many cells, not an arbitrary family; zero-rate cells remain allowed and their likelihoods are evaluated in step 2.1.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "Admissible Poisson NMF inputs have positive row and column dimensions, so the cell index set is nonempty. The sum/product notation refers to those finitely many cells, not an arbitrary family; zero-rate cells remain allowed and their likelihoods are evaluated in step 2.1."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats x=0 and lambda=0 explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is a finite product and remains valid for a single cell."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the degenerate zero-rate Poisson law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the boundary lambda=0 and its log-likelihood values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition is not an equivalence."
+        }
+      ]
+    },
+    "prop-poisson-nmf-factorization-invariances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p,r$ be positive integers and write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. An observed count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ is admissible when every row and every column contains a positive entry. A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices\n\n$$W\\in[0,\\infty)^{n\\times r}, \\qquad H\\in[0,\\infty)^{r\\times p}, \\qquad \\lambda_{ij}=(WH)_{ij}=\\sum_{k=1}^r W_{ik}H_{kj}.$$\n\nAt this parameter, the random counts $Y_{ij}$ are mutually independent and have Poisson means $\\lambda_{ij}$. For $\\lambda>0$, the Poisson law is\n\n$$\\mathbb P(Y=m)=e^{-\\lambda}\\frac{\\lambda^m}{m!}, \\qquad m\\in\\mathbb N_0;$$\n\nfor $\\lambda=0$, it assigns probability $1$ to $m=0$ and probability $0$ to every $m>0$. This model defines a likelihood for the observed matrix; it makes no convexity or global-optimality assertion about the factor parameters.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "component-rescaling",
+          "claim": "For the rescaled factors, each entry is $(W'H')_{ij}=\\sum_{k=1}^r(c_kW_{ik})(c_k^{-1}H_{kj})=\\sum_{k=1}^rW_{ik}H_{kj}=(WH)_{ij}$. Thus every rate is unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "component-permutation",
+          "claim": "For the permuted factors, $(W''H'')_{ij}=\\sum_{k=1}^rW_{i,\\pi(k)}H_{\\pi(k),j}=(WH)_{ij}$ because $\\pi$ reorders the finite sum. Equal rate matrices give the same independent Poisson law and likelihood by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model fixes a positive inner dimension r."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid when factor entries are zero because the scale factors are positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes r=1, whose only permutation is the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The calculation in step 1.1 does not assume either factor matrix has full rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The scale parameters satisfy c_k>0; zero scaling is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only a finite sum and a finite permutation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts invariance, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts invariance, not an equivalence."
+        }
+      ]
+    },
+    "lem-poisson-nmf-updates-preserve-positivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p,r$ be positive integers and write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. An observed count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ is admissible when every row and every column contains a positive entry. A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices\n\n$$W\\in[0,\\infty)^{n\\times r}, \\qquad H\\in[0,\\infty)^{r\\times p}, \\qquad \\lambda_{ij}=(WH)_{ij}=\\sum_{k=1}^r W_{ik}H_{kj}.$$\n\nAt this parameter, the random counts $Y_{ij}$ are mutually independent and have Poisson means $\\lambda_{ij}$. For $\\lambda>0$, the Poisson law is\n\n$$\\mathbb P(Y=m)=e^{-\\lambda}\\frac{\\lambda^m}{m!}, \\qquad m\\in\\mathbb N_0;$$\n\nfor $\\lambda=0$, it assigns probability $1$ to $m=0$ and probability $0$ to every $m>0$. This model defines a likelihood for the observed matrix; it makes no convexity or global-optimality assertion about the factor parameters.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-poisson-nmf-multiplicative-updates",
+          "source_section": "Definition",
+          "quote": "Input an admissible count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ with no all-zero row or column, an inner dimension $r\\ge1$, a finite sweep count $T\\in\\mathbb N_0$, and strictly positive initial factors $W^{(0)}\\in(0,\\infty)^{n\\times r}$ and $H^{(0)}\\in(0,\\infty)^{r\\times p}$. For $t=0,\\ldots,T-1$, perform the following simultaneous updates:\n\n1. Set $\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t)}H_{kj}^{(t)}$.\n2. For every $i,k$, set\n\n   $$W_{ik}^{(t+1)}=W_{ik}^{(t)}\\frac{\\sum_{j=1}^p H_{kj}^{(t)}x_{ij}/\\lambda_{ij}^{(t)}}{\\sum_{j=1}^p H_{kj}^{(t)}}.$$\n\n3. Recompute $\\widetilde\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t+1)}H_{kj}^{(t)}$.\n4. For every $k,j$, set\n\n   $$H_{kj}^{(t+1)}=H_{kj}^{(t)}\\frac{\\sum_{i=1}^n W_{ik}^{(t+1)}x_{ij}/\\widetilde\\lambda_{ij}^{(t)}}{\\sum_{i=1}^n W_{ik}^{(t+1)}}.$$\n\nThe first factor block uses the current $H^{(t)}$; the second uses the new $W^{(t+1)}$ and the recomputed intermediate rates.\n\nReturn $W^{(T)},H^{(T)}$. The local well-definedness result proves that every denominator and rate in these finite sweeps is positive under the stated assumptions. This algorithm makes no likelihood-monotonicity, convergence, stationary-point, or global-optimality claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-w-update",
+          "claim": "Since $W,H$ are strictly positive, every current rate $\\lambda_{ij}=\\sum_k W_{ik}H_{kj}$ is positive. For each row $i$, choose $j_0$ with $x_{ij_0}>0$ using [F1]. Then for every $k$, the numerator $\\sum_jH_{kj}x_{ij}/\\lambda_{ij}$ has the positive term $H_{kj_0}x_{ij_0}/\\lambda_{ij_0}$, while its denominator $\\sum_jH_{kj}$ is positive. Thus every updated $W_{ik}$ is positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-h-update",
+          "claim": "The intermediate rates $\\widetilde\\lambda_{ij}=\\sum_kW_{ik}^{\\mathrm{new}}H_{kj}$ are positive. For each column $j$, choose $i_0$ with $x_{i_0j}>0$ using [F1]. For every $k$, the numerator $\\sum_iW_{ik}^{\\mathrm{new}}x_{ij}/\\widetilde\\lambda_{ij}$ has the positive term at $i_0$, and its denominator $\\sum_iW_{ik}^{\\mathrm{new}}$ is positive. Thus every updated $H_{kj}$ is positive. Repeating this argument inductively proves the claim for each finite sweep.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires positive n, p, and r."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero cells but uses a positive count somewhere in each row."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply when n=p=r=1 and the sole count is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "All-zero rows or columns and zero initial factors are excluded by the hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The initialization is strictly positive; zero-valued starting factors are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 choose one positive cell in each of finitely many rows and columns; no arbitrary-index choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way well-definedness result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way well-definedness result."
+        }
+      ]
+    },
+    "ex-gaussian-factor-rotation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-covariance-factor-model-rotation-ambiguity",
+          "source_section": "Statement",
+          "quote": "In the covariance factor model, write $X=AS+\\varepsilon$ with $A\\in\\mathbb R^{p\\times q}$, $q<p$, $\\mathbb E[S]=\\mathbb E[\\varepsilon]=0$, $\\operatorname{Cov}(S)=I_q$, $\\operatorname{Cov}(\\varepsilon)=D$ diagonal positive, and $\\operatorname{Cov}(S,\\varepsilon)=0$. Then\n\n$$\\operatorname{Cov}(X)=AA^T+D.$$\n\nFor every orthogonal matrix $R\\in\\mathbb R^{q\\times q}$, the transformed loadings and factors $A_R=AR^T$ and $S_R=RS$ give another representation with the same covariance matrix. Thus covariance alone does not identify a unique loading matrix or latent orientation. This is a covariance-model claim; if the factors are additionally required to be mutually independent, the proposition does not claim that arbitrary rotations preserve that extra requirement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covariance-factor-model",
+          "source_section": "Definition",
+          "quote": "Let $p,q$ be positive integers with $q<p$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $S:\\Omega\\to\\mathbb R^q$ and $\\varepsilon:\\Omega\\to\\mathbb R^p$ be measurable random vectors with finite second moments. For finite-second-moment random vectors $U,V$, define\n\n$$\\operatorname{Cov}(U,V)=\\mathbb E[(U-\\mathbb E U)(V-\\mathbb E V)^T], \\qquad \\operatorname{Cov}(U)=\\operatorname{Cov}(U,U),$$\n\nwhere expectation is integration with respect to $\\mathbb P$. A **covariance factor model** is a representation\n\n$$X=AS+\\varepsilon$$\n\nwith a fixed matrix $A\\in\\mathbb R^{p\\times q}$ and assumptions\n\n$$\\mathbb E S=0, \\qquad \\mathbb E\\varepsilon=0, \\qquad \\operatorname{Cov}(S)=I_q, \\qquad \\operatorname{Cov}(\\varepsilon)=D=\\operatorname{diag}(d_1,\\ldots,d_p), \\quad d_i>0, \\qquad \\operatorname{Cov}(S,\\varepsilon)=0.$$\n\nThe model assumes only the stated moment and cross-covariance conditions; it does not assume that $S$ and $\\varepsilon$ are independent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-observation",
+          "claim": "Direct multiplication gives $R^TR=I_2$ and $(AR^T)(RS)=AS$, so the transformed representation yields the same $X$ for every outcome. By [F1], its covariance is unchanged; here $AA^T+I_3=\\begin{pmatrix}2&0&1\\\\0&2&1\\\\1&1&3\\end{pmatrix}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gaussian-rotation-law",
+          "claim": "The density of $RS$ is $(2\\pi)^{-1}\\exp(-\\lVert R^Ts\\rVert^2/2)|\\det R|=(2\\pi)^{-1}\\exp(-\\lVert s\\rVert^2/2)$ because $R$ is orthogonal and $|\\det R|=1$. Thus $RS$ again has independent standard Gaussian coordinates; it remains independent of $\\varepsilon$, and [F2] shows both parameterizations satisfy the model. Since $R$ has four nonzero entries, it is not a signed permutation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes p=3 and q=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes positive source and residual variances."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns two latent factors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the explicit nonsingular residual covariance and the full covariance matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrices and Gaussian densities are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        }
+      ]
+    },
+    "ex-ica-sign-permutation-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge 1$ and let $X,S$ be random vectors in $\\mathbb R^p$, considered through their probability laws. A **square independent-component representation** of $X$ is a representation in distribution\n\n$$X\\overset{d}=AS$$\n\nwhere $A\\in GL_p(\\mathbb R)$ is an invertible mixing matrix and $S=(S_1,\\ldots,S_p)^T$ has mutually independent real-valued components. Mutual independence means that for all Borel sets $B_1,\\ldots,B_p\\subseteq\\mathbb R$,\n\n$$\\mathbb P(S_1\\in B_1,\\ldots,S_p\\in B_p)=\\prod_{j=1}^p\\mathbb P(S_j\\in B_j).$$\n\nEach source is standardized: $\\mathbb E S_j=0$ and $\\mathbb E S_j^2=1$. A source is **Gaussian** if its law has density $(2\\pi)^{-1/2}e^{-x^2/2}$, and is **non-Gaussian** otherwise. All vectors are columns and matrix transposes use the standard Euclidean inner product. The definition specifies a latent representation, not a claim that it can be recovered uniquely from the law of $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "signed-permutation-sources",
+          "claim": "The matrix $Q$ is a signed permutation, so $Q^TS=(S_2,-S_1)^T$. The two coordinates remain independent, centered, and unit variance; the even Laplace density is unchanged by sign reversal, so both coordinates are still non-Gaussian.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "same-observed-law",
+          "claim": "Since $Q^TQ=I_2$, $(AQ)(Q^TS)=AS$ exactly. Thus the observed law is unchanged while the source order/sign representation changes.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two source coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses nondegenerate standardized Laplace sources."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has p=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that both displayed source laws remain nondegenerate Laplace laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The permutation and sign matrix are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits one ambiguity and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example exhibits one ambiguity and asserts no equivalence."
+        }
+      ]
+    },
+    "ex-poisson-nmf-nonunique-factorizations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p,r$ be positive integers and write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. An observed count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ is admissible when every row and every column contains a positive entry. A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices\n\n$$W\\in[0,\\infty)^{n\\times r}, \\qquad H\\in[0,\\infty)^{r\\times p}, \\qquad \\lambda_{ij}=(WH)_{ij}=\\sum_{k=1}^r W_{ik}H_{kj}.$$\n\nAt this parameter, the random counts $Y_{ij}$ are mutually independent and have Poisson means $\\lambda_{ij}$. For $\\lambda>0$, the Poisson law is\n\n$$\\mathbb P(Y=m)=e^{-\\lambda}\\frac{\\lambda^m}{m!}, \\qquad m\\in\\mathbb N_0;$$\n\nfor $\\lambda=0$, it assigns probability $1$ to $m=0$ and probability $0$ to every $m>0$. This model defines a likelihood for the observed matrix; it makes no convexity or global-optimality assertion about the factor parameters.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-poisson-nmf-factorization-invariances",
+          "source_section": "Statement",
+          "quote": "Let $W\\in[0,\\infty)^{n\\times r}$ and $H\\in[0,\\infty)^{r\\times p}$. For any positive scalars $c_1,\\ldots,c_r$, replacing column $k$ of $W$ by $c_kW_{\\cdot k}$ and row $k$ of $H$ by $c_k^{-1}H_{k\\cdot}$ leaves $WH$ unchanged. For any permutation $\\pi$ of $\\{1,\\ldots,r\\}$, replacing $W_{\\cdot k}$ by $W_{\\cdot\\pi(k)}$ and $H_{k\\cdot}$ by $H_{\\pi(k)\\cdot}$ also leaves $WH$ unchanged. Therefore both transformations preserve every Poisson rate and the corresponding likelihood.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "common-unit-rate",
+          "claim": "Each row of $W_\\alpha$ sums to $1$, while each entry of $H$ is $1$, so $(W_\\alpha H)_{ij}=\\alpha+(1-\\alpha)=1$ for every cell. This verifies the common positive rate matrix.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "not-trivial-equivalence",
+          "claim": "Under the transformations in [F2], each rank-one component matrix $W_{\\cdot k}H_{k\\cdot}$ is unchanged except for reordering. At $\\alpha=1/2$ the multiset of component matrices is $\\{\\tfrac12X,\\tfrac12X\\}$, whereas at $\\alpha=1/3$ it is $\\{\\tfrac13X,\\tfrac23X\\}$. These multisets differ, so the factorizations are not related by scale or permutation.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes 2 by 2 matrices and inner dimension 2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every data and factor entry in this example is positive except no factor entries are zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the rank-one rate matrix has a positive two-component factorization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts alpha to 0<alpha<1, so zero-factor endpoints are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two factorizations use the explicit values alpha=1/2 and alpha=1/3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to uniqueness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to uniqueness, not an equivalence."
+        }
+      ]
+    },
+    "ex-poisson-nmf-zero-count-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-poisson-nmf-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p,r$ be positive integers and write $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. An observed count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ is admissible when every row and every column contains a positive entry. A Poisson nonnegative matrix-factorization parameter of inner dimension $r$ consists of matrices\n\n$$W\\in[0,\\infty)^{n\\times r}, \\qquad H\\in[0,\\infty)^{r\\times p}, \\qquad \\lambda_{ij}=(WH)_{ij}=\\sum_{k=1}^r W_{ik}H_{kj}.$$\n\nAt this parameter, the random counts $Y_{ij}$ are mutually independent and have Poisson means $\\lambda_{ij}$. For $\\lambda>0$, the Poisson law is\n\n$$\\mathbb P(Y=m)=e^{-\\lambda}\\frac{\\lambda^m}{m!}, \\qquad m\\in\\mathbb N_0;$$\n\nfor $\\lambda=0$, it assigns probability $1$ to $m=0$ and probability $0$ to every $m>0$. This model defines a likelihood for the observed matrix; it makes no convexity or global-optimality assertion about the factor parameters.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-poisson-nmf-multiplicative-updates",
+          "source_section": "Definition",
+          "quote": "Input an admissible count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ with no all-zero row or column, an inner dimension $r\\ge1$, a finite sweep count $T\\in\\mathbb N_0$, and strictly positive initial factors $W^{(0)}\\in(0,\\infty)^{n\\times r}$ and $H^{(0)}\\in(0,\\infty)^{r\\times p}$. For $t=0,\\ldots,T-1$, perform the following simultaneous updates:\n\n1. Set $\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t)}H_{kj}^{(t)}$.\n2. For every $i,k$, set\n\n   $$W_{ik}^{(t+1)}=W_{ik}^{(t)}\\frac{\\sum_{j=1}^p H_{kj}^{(t)}x_{ij}/\\lambda_{ij}^{(t)}}{\\sum_{j=1}^p H_{kj}^{(t)}}.$$\n\n3. Recompute $\\widetilde\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t+1)}H_{kj}^{(t)}$.\n4. For every $k,j$, set\n\n   $$H_{kj}^{(t+1)}=H_{kj}^{(t)}\\frac{\\sum_{i=1}^n W_{ik}^{(t+1)}x_{ij}/\\widetilde\\lambda_{ij}^{(t)}}{\\sum_{i=1}^n W_{ik}^{(t+1)}}.$$\n\nThe first factor block uses the current $H^{(t)}$; the second uses the new $W^{(t+1)}$ and the recomputed intermediate rates.\n\nReturn $W^{(T)},H^{(T)}$. The local well-definedness result proves that every denominator and rate in these finite sweeps is positive under the stated assumptions. This algorithm makes no likelihood-monotonicity, convergence, stationary-point, or global-optimality claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-poisson-nmf-updates-preserve-positivity",
+          "source_section": "Statement",
+          "quote": "Suppose $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ has at least one positive entry in every row and every column. If $W\\in(0,\\infty)^{n\\times r}$ and $H\\in(0,\\infty)^{r\\times p}$, then one complete Poisson NMF multiplicative-update sweep produces strictly positive updated factors and strictly positive rates at both update stages. Consequently every finite number of sweeps from a strictly positive initialization is well-defined.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-w-sweep",
+          "claim": "Initially every rate is $2$. For each $i,k$, the $W$ numerator is $0/2+1/2=1/2$ and the denominator is $1+1=2$, so $W_{ik}^{(1)}=1/4$. The recomputed intermediate rates are all $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-h-sweep",
+          "claim": "For each $k,j$, the $H$ numerator is $\\tfrac14(0/(1/2)) + \\tfrac14(1/(1/2))=1/2$ and the denominator is $1/4+1/4=1/2$, hence $H_{kj}^{(1)}=1$. Every division is by a positive rate as guaranteed by [F3], and a zero-count cell contributes $0/(1/2)=0$, not an indeterminate quotient.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive 2 by 2 dimensions and inner dimension 2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly compute both zero-count cells."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a fixed 2 by 2 calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows all intermediate rates remain positive despite zero observations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The initial factors are strictly positive and no endpoint parameter is varied."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrices and indices are explicitly fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite computation, not an equivalence."
+        }
+      ]
+    },
+    "lem-local-gaussian-characteristic-function-is-global": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-characteristic-function-of-a-real-random-variable",
+          "source_section": "Definition",
+          "quote": "For a real random variable $X$ on $(\\Omega,\\mathcal F,\\mathbb P)$, its **characteristic function** is\n$$\\varphi_X(t)=\\mathbb E[e^{itX}]=\\int_{\\mathbb R}e^{itx}\\,\\mathbb P_X(dx),\\qquad t\\in\\mathbb R.$$\nFor a specified Borel probability measure $\\mu$ on $\\mathbb R$, write $\\varphi_\\mu(t)=\\int e^{itx}\\,\\mu(dx)$.\n\nThe complex integral means the sum of the real integral and $i$ times the imaginary integral, as in [[def-integrable-real-and-complex-functions-and-their-integrals]]. Euler's formula in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] gives $e^{itx}=\\cos(tx)+i\\sin(tx)$, a continuous function of $x$ with modulus one. Its components are bounded and measurable, hence integrable against a probability measure. [[thm-change-of-variables-for-expectation]] therefore applies to this bounded Borel function and proves the displayed identity. [[thm-integral-triangle-inequality]] gives $|\\varphi_\\mu(t)|\\le\\int1\\,d\\mu=1$.\n\nNo moment assumption is imposed. In particular $X=0$ gives $\\varphi_X\\equiv1$ and a constant $X=c$ gives $\\varphi_X(t)=e^{itc}$. These definitions require no choice of representatives or new use of AC.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-moments-give-derivatives-of-the-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a nonnegative integer, and suppose $\\mathbb E|X|^k<\\infty$, with $|X|^0=1$. Then $\\varphi_X\\in C^k(\\mathbb R)$ and $$\\varphi_X^{(j)}(t)=\\mathbb E[(iX)^j e^{itX}],\\qquad 0\\le j\\le k.$$ No converse is asserted.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-measure-uniqueness-on-a-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ and let $\\mathcal A=\\sigma_X(\\mathcal P)$. If finite measures $\\mu$ and $\\nu$ on $(X,\\mathcal A)$ agree on $\\mathcal P$ and satisfy $\\mu(X)=\\nu(X)$, then $\\mu=\\nu$ on $\\mathcal A$.\n\nThe total-mass equality is separate because this library's pi-system convention does not require $X\\in\\mathcal P$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-1-1",
+          "claim": "By [F9], substitution $x=\\sqrt2 u$ in [F6] gives $\\int g(x)\\,dx=1$, so $g$ defines a probability law $\\gamma$. These integrals can be read as Lebesgue integrals: on each $[-m,m]$, the uniform dyadic lower and upper sums of the continuous integrand converge to the same Riemann integral and bound its Lebesgue integral; increasing truncations then give the whole-line equality by [F3]. For each integer $k\\ge0$, $|x|^k g(x)$ is integrable: its tail is bounded by a constant times $e^{-x^2/4}$, since $|x|^k e^{-x^2/4}$ is bounded (differentiate it on $x>0$). If $G$ has law $\\gamma$, integration by parts [F8] on $[-m,m]$, followed by [F3], using $g'(x)=-xg(x)$ and vanishing polynomial times Gaussian boundary terms, gives $\\mathbb E G^{2n}=(2n-1)\\mathbb E G^{2n-2}$ and odd moments zero. Hence $m_{2n}:=\\mathbb E G^{2n}=(2n)!/(2^n n!)$. Also $\\varphi_G'(t)=\\int ix e^{itx}g(x)\\,dx=-t\\varphi_G(t)$ by the same integration by parts, justified by $\\int |x|g(x)\\,dx<\\infty$. By [F11], differentiation of $e^{t^2/2}\\varphi_G(t)$ gives zero and its value at zero is one: $\\varphi_G(t)=e^{-t^2/2}$ for every real $t$. All integrations by parts first concern smooth functions on compact intervals, whose derivatives are continuous and therefore integrable by [F10]; the same dyadic comparison identifies their Riemann and Lebesgue integrals.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-2-1",
+          "claim": "Fix an integer $n\\ge1$ and define $H_{n,t}(x)=(2\\sin(tx/2)/t)^{2n}$ for $t\\ne0$. It is nonnegative and bounded for fixed $t$. The binomial theorem and $2i\\sin(v/2)=e^{iv/2}-e^{-iv/2}$ give $$H_{n,t}(x)=(-1)^n t^{-2n}\\sum_{k=0}^{2n}(-1)^k\\binom{2n}{k}e^{i(n-k)tx}.$$ For $0<|t|<r/n$, its expectation under $Y$ therefore equals its expectation under $G$, since every frequency $(n-k)t$ lies in $(-r,r)$. On the prescribed sequence $t_\\ell=r/(2n\\ell)$, $H_{n,t_\\ell}(x)\\to x^{2n}$; moreover $H_{n,t}(x)\\le |x|^{2n}$ because $|\\sin v|\\le |v|$. By [F3] applied to $G$, $\\mathbb E H_{n,t_\\ell}(G)\\to m_{2n}$. Fatou's lemma [F2] applied to $Y$ now gives $\\mathbb E|Y|^{2n}\\le m_{2n}<\\infty$. Applying [F3] again, now with the integrable majorant $|Y|^{2n}$, shows equality $\\mathbb E Y^{2n}=m_{2n}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-3-1",
+          "claim": "Every absolute moment of $Y$ is finite, since $|y|^k\\le1+|y|^{2k}$. By [F4], equality of $\\varphi$ and $\\varphi_G$ on a neighborhood of zero implies equality of their derivatives there, hence $\\mathbb E Y^k=\\mathbb E G^k$ for every $k\\ge0$. For every $a\\ge0$, the nonnegative partial sums of $\\cosh(aY)$ increase to it; [F3] and step 2.1 give $$\\mathbb E\\cosh(aY)=\\sum_{n=0}^\\infty\\frac{a^{2n}m_{2n}}{(2n)!}=e^{a^2/2}.$$ Since $e^{a|y|}\\le2\\cosh(ay)$, $\\mathbb E e^{a|Y|}<\\infty$. The identical calculation applies to $G$. For every real $t$, the partial sums of the exponential series for $e^{itY}$ have modulus at most $e^{|t||Y|}$, so [F3] and moment equality yield $$\\varphi(t)=\\sum_{k=0}^\\infty\\frac{(it)^k\\mathbb E Y^k}{k!}=\\sum_{k=0}^\\infty\\frac{(it)^k\\mathbb E G^k}{k!}=e^{-t^2/2}.$$ This proves global equality without presupposing analyticity of $\\varphi$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-4-1",
+          "claim": "For completeness identify the law directly, without importing a general Fourier uniqueness theorem. For $\\varepsilon>0$ set $g_\\varepsilon(y)=\\varepsilon^{-1}g(y/\\varepsilon)$. The Gaussian transform computed in step 1.1, with the substitution $s=\\varepsilon t$, gives $$g_\\varepsilon(y)=\\frac1{2\\pi}\\int_{\\mathbb R}e^{-ity}e^{-\\varepsilon^2t^2/2}\\,dt.$$ If $\\mu$ is the law of $Y$, then $h_{\\mu,\\varepsilon}(z)=\\int g_\\varepsilon(z-x)\\,\\mu(dx)$ is a probability density by Tonelli. Substituting the displayed identity and applying Fubini gives $$h_{\\mu,\\varepsilon}(z)=\\frac1{2\\pi}\\int e^{-itz}e^{-\\varepsilon^2t^2/2}\\varphi(t)\\,dt.$$ Absolute integrability for this interchange follows from $\\mu(\\mathbb R)=1$ and $\\int e^{-\\varepsilon^2t^2/2}\\,dt<\\infty$. By step 3.1 this density equals $h_{\\gamma,\\varepsilon}$ for every $z$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-5-1",
+          "claim": "For a bounded continuous real $f$, Fubini and substitution give $$\\int f(z)h_{\\mu,\\varepsilon}(z)\\,dz=\\int\\!\\int f(x+\\varepsilon u)g(u)\\,du\\,\\mu(dx).$$ The product-integrand is bounded in absolute integral by $\\lVert f\\rVert_\\infty$. Along $\\varepsilon=1/\\ell$, dominated convergence gives limit $\\int f\\,d\\mu$; the same holds for $\\gamma$. Step 4.1 therefore implies $\\int f\\,d\\mu=\\int f\\,d\\gamma$ for every such $f$. For $a\\in\\mathbb R$ take the continuous functions $f_{a,n}(x)$ equal to $1$ on $x\\le a$, equal to $1-n(x-a)$ on $a<x<a+1/n$, and zero on $x\\ge a+1/n$. They are bounded by one and converge pointwise to $\\mathbf1_{(-\\infty,a]}$, so [F3] gives equality of both measures on every such half-line. These half-lines are a pi-system generating the Borel sets: open intervals are countable unions and differences of half-lines with rational endpoints, and every open subset of $\\mathbb R$ is the union of the rational-endpoint intervals contained in it. Both measures have total mass one; [F7] proves $\\mu=\\gamma$. This proves the assertion.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F9",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Y has a probability law of total mass one, so an empty underlying probability space or empty law cannot satisfy the hypothesis. The moment series in step 3.1 starts at n=0 with constant term one; it is not an arbitrary possibly empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: phi(0)=1; the finite-difference identity uses only nonzero t, with a prescribed sequence tending to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: n=1 is included and first yields the second moment, without assuming one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1–5.1: Y may initially have any Borel law, including discrete or singular candidates; Gaussianity is a conclusion, not an assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1: t_l=r/(2 n l) puts every frequency strictly in (-r,r), so endpoint equality is never assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-difference times are prescribed as r/(2n ell) in step 2.1, smoothing scales as 1/ell in step 5.1, and approximating half-line functions are explicit. No selection from an arbitrary family is needed to identify the law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "The sole claim takes local equality of the characteristic function as hypothesis and derives the standard Gaussian law. The finite-difference moment argument and smoothing identification establish this implication in steps 2.1 through 5.1; no converse is asserted.",
+            "item_sha256": "ffedfdbfe4c669c959ac47168b8b43abb1951e579aa8d8cd5480011a1e0bc772",
+            "row_sha256": "aabda9bb8a0071e10206110b75bdb1bfda43076a77e4d798e486b07086f61289"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "The sole claim takes local equality of the characteristic function as hypothesis and derives the standard Gaussian law. The finite-difference moment argument and smoothing identification establish this implication in steps 2.1 through 5.1; no converse is asserted.",
+            "item_sha256": "ffedfdbfe4c669c959ac47168b8b43abb1951e579aa8d8cd5480011a1e0bc772",
+            "row_sha256": "7b397a1f93a170369f56dbb816a991d08377ab1277bebc60604420b9d6aac81e"
+          }
+        }
+      ]
+    },
+    "lem-orthogonal-independent-mixing-shared-columns-gaussian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge 1$ and let $X,S$ be random vectors in $\\mathbb R^p$, considered through their probability laws. A **square independent-component representation** of $X$ is a representation in distribution\n\n$$X\\overset{d}=AS$$\n\nwhere $A\\in GL_p(\\mathbb R)$ is an invertible mixing matrix and $S=(S_1,\\ldots,S_p)^T$ has mutually independent real-valued components. Mutual independence means that for all Borel sets $B_1,\\ldots,B_p\\subseteq\\mathbb R$,\n\n$$\\mathbb P(S_1\\in B_1,\\ldots,S_p\\in B_p)=\\prod_{j=1}^p\\mathbb P(S_j\\in B_j).$$\n\nEach source is standardized: $\\mathbb E S_j=0$ and $\\mathbb E S_j^2=1$. A source is **Gaussian** if its law has density $(2\\pi)^{-1/2}e^{-x^2/2}$, and is **non-Gaussian** otherwise. All vectors are columns and matrix transposes use the standard Euclidean inner product. The definition specifies a latent representation, not a claim that it can be recovered uniquely from the law of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-moments-give-derivatives-of-the-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a nonnegative integer, and suppose $\\mathbb E|X|^k<\\infty$, with $|X|^0=1$. Then $\\varphi_X\\in C^k(\\mathbb R)$ and $$\\varphi_X^{(j)}(t)=\\mathbb E[(iX)^j e^{itX}],\\qquad 0\\le j\\le k.$$ No converse is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-local-gaussian-characteristic-function-is-global",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a real random variable. If there is $r>0$ such that $\\mathbb E e^{itY}=e^{-t^2/2}$ for every $|t|<r$, then $Y$ has the standard Gaussian law, with density $g(x)=(2\\pi)^{-1/2}e^{-x^2/2}$. No moment or density assumption on $Y$ is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-1-1",
+          "claim": "Let $\\varphi_i(u)=\\mathbb E e^{iuS_i}$ and $\\theta_j(v)=\\mathbb E e^{ivT_j}$. Each $T_j$ has a finite second moment, since $(\\sum_iO_{ji}S_i)^2\\le(\\sum_iO_{ji}^2)(\\sum_iS_i^2)$ pointwise. Thus [F2] makes all these functions $C^2$, and each is one at zero. Choose $\\delta>0$ such that none vanishes on $(-\\delta,\\delta)$; this is possible by continuity and finiteness of the families. Define $$\\psi_i(u)=\\int_0^u\\frac{\\varphi_i'(s)}{\\varphi_i(s)}\\,ds,\\qquad \\chi_j(v)=\\int_0^v\\frac{\\theta_j'(s)}{\\theta_j(s)}\\,ds.$$ By [F5] applied on every compact subinterval, these are complex-valued $C^2$ functions on that interval, equal to zero at zero. Differentiation shows $(e^{-\\psi_i}\\varphi_i)'=0$, so $e^{\\psi_i}=\\varphi_i$; likewise $e^{\\chi_j}=\\theta_j$. Moreover $\\psi_i'(0)=0$ and $\\psi_i''(0)=\\varphi_i''(0)-\\varphi_i'(0)^2=-1$. This constructs the needed local logarithms without any global nonvanishing hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-2-1",
+          "claim": "For $\\lVert t\\rVert<\\delta$, also $\\lVert O^Tt\\rVert<\\delta$. Factoring the characteristic function of $t^TT=(O^Tt)^TS$ in both independent coordinate systems by [F3] gives $$\\prod_i\\varphi_i((O^Tt)_i)=\\prod_j\\theta_j(t_j).$$ Consequently $D(t):=\\sum_i\\psi_i((O^Tt)_i)-\\sum_j\\chi_j(t_j)$ has $e^{D(t)}=1$. It is continuous on the ball, is zero at zero, and takes values in the discrete set $2\\pi i\\mathbb Z$. Along each line segment $s\\mapsto st$ the intermediate value property of its imaginary part makes it constant; hence $D(t)=0$ throughout the ball. Differentiating this $C^2$ identity with respect to distinct coordinates $t_j,t_k$ gives $$\\sum_i O_{ji}O_{ki}\\psi_i''((O^Tt)_i)=0\\qquad(j\\ne k).$$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-3-1",
+          "claim": "Fix $i$ and two distinct rows $j,k$ with $O_{ji}O_{ki}\\ne0$. Orthogonality maps the ball onto itself, so in the last identity one may set $O^Tt=u$ for every $\\lVert u\\rVert<\\delta$. First take $u=ve_i$, $|v|<\\delta$, and then $u=0$. Subtraction cancels all summands except the $i$th, giving $O_{ji}O_{ki}(\\psi_i''(v)-\\psi_i''(0))=0$. Thus $\\psi_i''(v)=-1$ throughout $(-\\delta,\\delta)$. With $\\psi_i'(0)=\\psi_i(0)=0$, [F6] applied successively to $\\psi_i\\prime(v)+v$ and $\\psi_i(v)+v^2/2$ gives $\\psi_i(v)=-v^2/2$ and $\\varphi_i(v)=e^{-v^2/2}$ there. By [F4], $S_i$ is standard Gaussian.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-4-1",
+          "claim": "The contrapositive of step 3.1 says that a non-Gaussian source column has at most one nonzero entry. Its squared norm is one because $O^TO=I$, so it has exactly one entry, whose square is one. This proves both assertions.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The premise fixes a column with two distinct nonzero rows; thus that branch cannot arise in dimension one or with an empty coordinate list. Step 4.1 uses unit column norm to exclude an empty nonzero support for every non-Gaussian column."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: zero O entries are allowed and only a selected nonzero product O_ji O_ki is divided out."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: if p=1 the shared-column implication has no antecedent, and the norm-one column is still a signed coordinate vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1: finite variance alone gives C2 local logs; no density, global CF nonvanishing or higher moments are assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use an open ball and strict |v|<delta, avoiding every interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Continuity at zero for the finitely many characteristic functions supplies one common positive delta in step 1.1. Step 3.1 fixes only a single column and a finite pair of rows, then constructs its local logarithm by an integral; no family-choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "Two nonzero entries in a fixed orthogonal column imply Gaussianity by the Hessian subtraction in step 3.1. The converse is not claimed: a Gaussian column can itself be a signed coordinate vector. The final non-Gaussian assertion is the contrapositive, not a biconditional.",
+            "item_sha256": "d99e8992bac1d16e5390c7ad7024761a5f1b246ad956dcc18fb98c690518e8b9",
+            "row_sha256": "aabda9bb8a0071e10206110b75bdb1bfda43076a77e4d798e486b07086f61289"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "Two nonzero entries in a fixed orthogonal column imply Gaussianity by the Hessian subtraction in step 3.1. The converse is not claimed: a Gaussian column can itself be a signed coordinate vector. The final non-Gaussian assertion is the contrapositive, not a biconditional.",
+            "item_sha256": "d99e8992bac1d16e5390c7ad7024761a5f1b246ad956dcc18fb98c690518e8b9",
+            "row_sha256": "7b397a1f93a170369f56dbb816a991d08377ab1277bebc60604420b9d6aac81e"
+          }
+        }
+      ]
+    },
+    "thm-square-ica-identifiability-at-most-one-gaussian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-square-ica-model",
+          "source_section": "Definition",
+          "quote": "Let $p\\ge 1$ and let $X,S$ be random vectors in $\\mathbb R^p$, considered through their probability laws. A **square independent-component representation** of $X$ is a representation in distribution\n\n$$X\\overset{d}=AS$$\n\nwhere $A\\in GL_p(\\mathbb R)$ is an invertible mixing matrix and $S=(S_1,\\ldots,S_p)^T$ has mutually independent real-valued components. Mutual independence means that for all Borel sets $B_1,\\ldots,B_p\\subseteq\\mathbb R$,\n\n$$\\mathbb P(S_1\\in B_1,\\ldots,S_p\\in B_p)=\\prod_{j=1}^p\\mathbb P(S_j\\in B_j).$$\n\nEach source is standardized: $\\mathbb E S_j=0$ and $\\mathbb E S_j^2=1$. A source is **Gaussian** if its law has density $(2\\pi)^{-1/2}e^{-x^2/2}$, and is **non-Gaussian** otherwise. All vectors are columns and matrix transposes use the standard Euclidean inner product. The definition specifies a latent representation, not a claim that it can be recovered uniquely from the law of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+          "source_section": "Statement",
+          "quote": "Let $S=(S_1,\\ldots,S_p)^T$ have mutually independent centered real coordinates with $\\mathbb E S_i^2=1$, and let $O\\in\\mathbb R^{p\\times p}$ be orthogonal. Suppose the coordinates of $T=OS$ are mutually independent. If column $i$ of $O$ contains nonzero entries in two different rows, then $S_i$ has the standard Gaussian law. Thus each non-Gaussian source column has exactly one nonzero entry, which is $1$ or $-1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-1-1",
+          "claim": "Work on the probability space of $S$ and define $T=A'^{-1}AS$. The given equality $AS\\overset d=A'S'$ implies $T\\overset d=S'$ by applying the fixed invertible linear map $A'^{-1}$ to both laws. In particular the coordinates of $T$ are mutually independent, centered and have unit variance. Write $O=A'^{-1}A$, so $T=OS$ on this probability space. Independence and centering give $\\operatorname{Cov}(S)=\\operatorname{Cov}(T)=I_p$, and covariance under this linear map yields $OO^T=I_p$. Since $O$ is square and invertible, also $O^TO=I_p$; it is orthogonal. This covariance calculation is the relative whitening reduction and requires neither a density nor moments beyond the given second moments.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-2-1",
+          "claim": "By [F2], every non-Gaussian column of $O$ is a signed coordinate vector. Distinct such columns occupy distinct rows, because they are orthogonal. There are at least $p-1$ such columns. If there are $p$ they occupy all rows and $O$ is already a signed-permutation matrix. Otherwise there are exactly $p-1$, leaving one row $r$ and the one possible Gaussian column $i$. Its inner product with each occupied signed coordinate column is zero, so $O_{ji}=0$ on every occupied row $j$. Its norm is one, so $O_{ri}=1$ or $-1$. Thus $O$ is a signed-permutation matrix also in this case. For $p=1$ the same argument has zero occupied rows and its single norm-one column is $1$ or $-1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "proof-3-1",
+          "claim": "Put $Q=O^T$, again a signed-permutation matrix. From $O=A'^{-1}A$ and $O^{-1}=O^T$ we get $A'=AO^T=AQ$. Also $S'\\overset d=T=OS=Q^TS$. These are exactly the asserted matrix and source-law conclusions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "When p=1 and the sole source is Gaussian, the occupied non-Gaussian-column list is empty. Step 2.1 explicitly handles its zero occupied rows: the remaining norm-one column is +1 or -1, so the signed-permutation conclusion still follows.",
+          "evidence": "When p=1 and the sole source is Gaussian, the occupied non-Gaussian-column list is empty. Step 2.1 explicitly handles its zero occupied rows: the remaining norm-one column is +1 or -1, so the signed-permutation conclusion still follows."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: zero O entries are allowed; column norm excludes an entirely zero column."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles p=1 with zero occupied nonGaussian rows and the single remaining column norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover both zeroGaussian and exactly oneGaussian source. Invertibility and unit variance are explicit original hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the inclusive boundary of exactly oneGaussian source is handled by the sole leftover row and column; twoGaussian sources are outside the hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof defines T=A-prime inverse times AS on the already given probability space in step 1.1 and sets Q=O transpose in step 3.1. The remaining row in step 2.1 is determined by a finite orthogonal matrix; no new coupling or infinite-family selection is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "The at-most-one-Gaussian hypothesis implies the signed-permutation relation after the covariance reduction. It is not claimed that every identifiable model has at most one Gaussian source; steps 1.1 through 3.1 prove only the stated sufficient condition.",
+            "item_sha256": "4112cf7fc44a19b8eedbb8d235c4b67059e1fdda2fd3f7f3c67a2886306058eb",
+            "row_sha256": "aabda9bb8a0071e10206110b75bdb1bfda43076a77e4d798e486b07086f61289"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "These are implications, not biconditionals.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-boundary-batches23-26",
+            "reason": "The at-most-one-Gaussian hypothesis implies the signed-permutation relation after the covariance reduction. It is not claimed that every identifiable model has at most one Gaussian source; steps 1.1 through 3.1 prove only the stated sufficient condition.",
+            "item_sha256": "4112cf7fc44a19b8eedbb8d235c4b67059e1fdda2fd3f7f3c67a2886306058eb",
+            "row_sha256": "7b397a1f93a170369f56dbb816a991d08377ab1277bebc60604420b9d6aac81e"
+          }
+        }
+      ]
+    }
+  }
+}

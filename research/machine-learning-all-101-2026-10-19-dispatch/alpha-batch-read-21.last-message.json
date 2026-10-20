@@ -1,0 +1,169 @@
+{
+  "group": "g",
+  "batches": ["21"],
+  "pages_read": [
+    "ml02-spectral-clustering",
+    "ml02-spectral-clustering-examples"
+  ],
+  "items_read": [
+    "def-finite-weighted-graph-laplacian",
+    "lem-finite-trace-minimization",
+    "lem-deterministic-eigenspace-basis",
+    "def-ratio-cut-and-normalized-cut",
+    "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+    "lem-ratio-cut-indicator-trace-identities",
+    "thm-weighted-ratio-and-normalized-cut-relaxations",
+    "alg-weighted-spectral-clustering",
+    "ex-knn-symmetrization-changes-ratio-cut",
+    "ex-disconnected-weighted-components-spectral-clustering",
+    "ex-isolated-vertex-in-normalized-cut",
+    "ex-concentric-circles-spectral-embedding"
+  ],
+  "conventions": [
+    {
+      "convention": "W is finite, real, symmetric, entrywise nonnegative and zero-diagonal; L=D−W. Support edges have strictly positive weight, and isolated vertices are singleton components.",
+      "fixed_by": "def-finite-weighted-graph-laplacian",
+      "matters_for": [
+        "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+        "lem-ratio-cut-indicator-trace-identities",
+        "thm-weighted-ratio-and-normalized-cut-relaxations",
+        "alg-weighted-spectral-clustering"
+      ]
+    },
+    {
+      "convention": "RatioCut partitions all vertices into nonempty parts; Ncut partitions only positive-degree vertices. Each objective sums the one-sided cut divided by cardinality or volume, respectively, without an additional factor of one half.",
+      "fixed_by": "def-ratio-cut-and-normalized-cut",
+      "matters_for": [
+        "lem-ratio-cut-indicator-trace-identities",
+        "thm-weighted-ratio-and-normalized-cut-relaxations",
+        "ex-knn-symmetrization-changes-ratio-cut",
+        "ex-disconnected-weighted-components-spectral-clustering",
+        "ex-isolated-vertex-in-normalized-cut"
+      ]
+    },
+    {
+      "convention": "Eigenvalues are ordered increasingly and repeated with multiplicity; the trace minimum uses the first k eigenvalues, with nonunique minimizers allowed at a repeated cutoff.",
+      "fixed_by": "lem-finite-trace-minimization",
+      "matters_for": [
+        "thm-weighted-ratio-and-normalized-cut-relaxations",
+        "alg-weighted-spectral-clustering"
+      ]
+    },
+    {
+      "convention": "Eigenspace bases use projected coordinate vectors in vertex order, discarding exactly zero residuals. The zero eigenspace begins with the prescribed positive unit vector.",
+      "fixed_by": "alg-weighted-spectral-clustering",
+      "matters_for": [
+        "ex-disconnected-weighted-components-spectral-clustering",
+        "ex-isolated-vertex-in-normalized-cut",
+        "ex-concentric-circles-spectral-embedding"
+      ]
+    },
+    {
+      "convention": "Lloyd initialization uses smallest-index and farthest-first choices; later nearest-center ties retain the current label, empty centers remain unchanged, and stopping requires unchanged labels and centers. Only nonempty label sets are returned; normalized mode appends isolates separately.",
+      "fixed_by": "alg-weighted-spectral-clustering",
+      "matters_for": [
+        "ex-disconnected-weighted-components-spectral-clustering",
+        "ex-isolated-vertex-in-normalized-cut",
+        "ex-concentric-circles-spectral-embedding"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+      "statement": "For every real vector f, fᵀLf=(1/2)Σᵢⱼwᵢⱼ(fᵢ−fⱼ)². Consequently L is positive semidefinite, and its kernel consists exactly of vectors constant on each support component, including isolated singleton components.",
+      "used_by": [
+        "lem-ratio-cut-indicator-trace-identities",
+        "thm-weighted-ratio-and-normalized-cut-relaxations",
+        "alg-weighted-spectral-clustering",
+        "ex-disconnected-weighted-components-spectral-clustering",
+        "ex-isolated-vertex-in-normalized-cut",
+        "ex-concentric-circles-spectral-embedding",
+        "thm-graph-harmonic-extension-uniqueness-and-maximum-principle"
+      ]
+    },
+    {
+      "id": "lem-finite-trace-minimization",
+      "statement": "For real symmetric A with eigenvalues λ₁≤⋯≤λₙ and 1≤k≤n, min over QᵀQ=Iₖ of tr(QᵀAQ) equals Σᵢ₌₁ᵏλᵢ, attained by bottom-k orthonormal eigenvectors.",
+      "used_by": [
+        "thm-weighted-ratio-and-normalized-cut-relaxations"
+      ]
+    },
+    {
+      "id": "lem-ratio-cut-indicator-trace-identities",
+      "statement": "The cardinality-normalized indicator matrix satisfies H_RᵀH_R=I and RatioCut=tr(H_RᵀLH_R). The volume-normalized indicators of a partition of V₊, zero on isolates, satisfy H_NᵀDH_N=I and Ncut=tr(H_NᵀLH_N).",
+      "used_by": [
+        "thm-weighted-ratio-and-normalized-cut-relaxations"
+      ]
+    },
+    {
+      "id": "thm-weighted-ratio-and-normalized-cut-relaxations",
+      "statement": "For admissible k, the RatioCut relaxation has minimum Σᵢ₌₁ᵏλᵢ(L); the active Ncut relaxation has minimum Σᵢ₌₁ᵏλᵢ(D₊⁻¹ᐟ²L₊D₊⁻¹ᐟ²). These are lower bounds for the respective discrete minima and give no approximation guarantee for subsequent rounding.",
+      "used_by": [
+        "alg-weighted-spectral-clustering"
+      ]
+    },
+    {
+      "id": "lem-deterministic-eigenspace-basis",
+      "statement": "For a subspace E of real coordinate space, scanning projected coordinate vectors in order and orthonormalizing nonzero residuals produces an orthonormal basis of E, beginning with an optional supplied unit vector in E.",
+      "used_by": [
+        "alg-weighted-spectral-clustering"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "An orthonormal eigenbasis for the real symmetric matrix in finite trace minimization.",
+      "opened": true
+    },
+    {
+      "id": "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+      "used_for": "The k=1 trace-minimization case; its decreasing eigenvalue convention is correctly translated to the batch's increasing convention.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "used_for": "The unique orthogonal decomposition underlying projected-coordinate basis construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "The external Lloyd termination supplier proves the sample mean uniquely minimizes each nonempty cluster's squared-distance contribution using this theorem.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-knn-symmetrization-changes-ratio-cut",
+      "concern": "The complete '## Graph diagrams' section, including its explanatory paragraph and TikZ block, appears twice: before Facts & Assumptions and after Verification. The diagrams themselves correctly show the union path and mutual single edge. The earlier copy also says 'The verification above computes the cuts' although Verification follows it.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-concentric-circles-spectral-embedding",
+      "concern": "The diagram caption says 'The drawing uses the exact vertex order and support specified in the Example.' The Example places vertices 1,2,3,4 at (1,0),(0,1),(−1,0),(0,−1), whereas TikZ places them at (0,1),(1,0),(0,−1),(−1,0), with the same discrepancy on the outer ring. The support and clustering argument remain correct, but the claimed coordinate fidelity is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-orthogonal-projection",
+      "finding": "The published def-orthogonal-projection Definition contains 'The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives' before the complete definition. This inline wikilink interrupts the defining section, contrary to the required uninterrupted-definition policy; there is no immediately following Definition references section carrying it. The mathematical definition supports its actual use here.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-spectral-clustering",
+      "to": "ml02-clustering-mixtures",
+      "faithful": true,
+      "note": "Read the supplier page, K-means objective, Lloyd algorithm and termination theorem. The spectral procedure supplies finite Euclidean embedding rows, admissible k and initial centers, and preserves initial smallest-index ties, subsequent label retention, unchanged empty centers and joint label/center stopping. No global optimization guarantee is imported."
+    },
+    {
+      "from": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+      "to": "ml02-spectral-clustering",
+      "faithful": true,
+      "note": "Read the consumer page, harmonic-extension definition and theorem, propagation algorithm and structural-assumptions remark. The actual imports preserve symmetric nonnegative zero-diagonal weights, L=D−W, support components including isolates, and the quadratic-form/kernel identity. Anchoring excludes unlabeled isolated components; the consumer does not infer true-label recovery from the spectral relaxation."
+    }
+  ]
+}

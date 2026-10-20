@@ -43751,3 +43751,3686 @@ Run: `non-ml-math-remaining-81-2026-10-18`; owner: `step5-v2-gate-r1-u3`. These 
 |---|---|---|
 | `lem-qc-tqc-zero-logical-error-forces-zero-leakage` | Its general isometric encoding permits a zero-dimensional code; the old empty-case contract incorrectly excluded it. The item's own Proof 1.1–2.1 gives P=JJ*=0 and both error maps zero. | Corrected only the batch-29 empty-case row to checked, with the zero-space calculation. Item unchanged; no Statement/Definition event or consumer propagation. Focused owner review complete; central gates remain owed. |
 | `thm-a1-arbitrary-framing-geometric-sl2-action` | The two iff template-review explanations omitted the (-1)^v signs in the displayed cycle basis. The item retains those signs; unsigned coefficients require a rescaled basis. | Corrected only those explanations in batch 53, preserving their previous review records. Item unchanged; no Statement/Definition event or consumer propagation. Focused owner review complete; central gates remain owed. |
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-spectral21-normal-classification:begin -->
+
+### thm-real-normal-endomorphism-classification: complete conjugation-compatible eigenspace construction
+
+Run: machine-learning-all-101-2026-10-19. Group: owner-spectral21. Local published proof correction; original Statement preserved.
+
+Current content SHA256: 120a02f2e004291f388233f28fdf2a03f26b17b5f82c5786f5c0114ea6a3f47c. Root independently checked full proof, actual Gram–Schmidt/complex spectral/coordinate suppliers, and algorithm/example uses. Delegated chain dispositions: research/machine-learning-all-101-2026-10-19-owner-spectral21-escalation/your-proposal/repair-evidence.json. This records no new whole-item audit or native review credit.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-spectral21-normal-classification:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-optimizer42-square-roots:begin -->
+
+### thm-of-square-roots: explicit reciprocal positivity in square-root existence proof
+
+Run: machine-learning-all-101-2026-10-19. Group: owner-optimizer42. Original complete ordered-field square-root Statement preserved.
+
+Current content SHA256: 5b3d8bd38eee578541dcda466069a671f0ceefdfc9cbc7c6b9651a01336f7c3e. Existing inverse-positivity supplier now explicitly justifies positive quotients and half choices in both contradiction cases. Prior publication commit: 31d4b0ed7f052dbba90ec13749f72d42e8b7f289. Previous local repair remains preserved: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-ROOT-1035/thm-of-square-roots.repair.json. Focused root/consumer evidence: research/machine-learning-all-101-2026-10-19-owner-optimizer42-escalation/your-proposal/repair-evidence.json. No new whole-item audit or native review credit.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-optimizer42-square-roots:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-ode65-open-domain:begin -->
+Owner /root local published proof correction for thm-fundamental-theorem-for-nonautonomous-smooth-odes. Run machine-learning-all-101-2026-10-19, group owner-ode65. The augmented field (1,F) is defined on its actual open domain D; the autonomous local-flow theorem applies there with a common interval and neighborhood inside D. Full original Statement unchanged; reported neural-ODE/global-flow/change-of-variables/adjoint/example uses checked by the same repair owner. Current content_sha256 92af966eb973fff728268564fb1531d46644f462f32b8984009de3d10872134e. Genuine before audit and publication commit60230185170ede732b1b8710e8937571051169cd retained in research/machine-learning-all-101-2026-10-19-owner-ode65-escalation/application/thm-fundamental-theorem-for-nonautonomous-smooth-odes.md.before. Actual precheck and single-file render PASS; this is a recorded local repair, not a new whole-item audit or native review. Receipt research/machine-learning-all-101-2026-10-19-owner-ode65-escalation/application/repair.json.
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-ode65-open-domain:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-euclidean80-rational-tolerance:begin -->
+Owner /root local published proof correction for thm-euclidean-space-complete. Run machine-learning-all-101-2026-10-19, group owner-euclidean80. A positive rational below the real epsilon/(2n) tolerance makes each coordinate threshold set nonempty; least thresholds and their finite maximum retain the choice-free proof. Full Statement and Remarks unchanged; actual in-run OGD and LMNN uses checked by the same repair owner. Current content_sha256 a9d1cb53864af29f85e26a92c013038e7cd236d18bef005da48e3dfe1c852371. Genuine before audit and publication commit87236c123ed79ac00648bde922ccf690be34513f retained in research/machine-learning-all-101-2026-10-19-owner-euclidean80-escalation/application/thm-euclidean-space-complete.md.before. Actual precheck and single-file render PASS; this is a recorded local repair, not a new whole-item audit or native review. Receipt research/machine-learning-all-101-2026-10-19-owner-euclidean80-escalation/application/repair.json.
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-euclidean80-rational-tolerance:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-forward-mode-automatic-differentiation:begin -->
+
+### Step 4 focused supplier correction: alg-forward-mode-automatic-differentiation
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: cc896dd4d61442870216b3bbfbe97593a0ea6061d847aefa6abc650ad7aced22.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-forward-mode-automatic-differentiation.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-forward-mode-automatic-differentiation:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-differentiate-finite-fixed-point-iteration:begin -->
+
+### Step 4 focused supplier correction: alg-differentiate-finite-fixed-point-iteration
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0472d7110c745d6d41d30d8798d54e7ad65e6138b12cbdea6998ca4d8f4246e5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-differentiate-finite-fixed-point-iteration.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-differentiate-finite-fixed-point-iteration:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ordered-field:begin -->
+
+### Step 4 focused supplier correction: def-ordered-field
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 94124f71b3f077c06f51771fd20b6e110749ca8807efa8643d6c2966052b6f49.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-ordered-field.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ordered-field:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-complete-ordered-field:begin -->
+
+### Step 4 focused supplier correction: def-complete-ordered-field
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ad2a8c89d0bc464131feb97fbd8dd1975ae57ad5a9df28132ff052d1a5e6007a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-complete-ordered-field.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-complete-ordered-field:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-rat-embeds-dense:begin -->
+
+### Step 4 focused supplier correction: lem-rat-embeds-dense
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 19c1e5bd65435e8de5f1793feb5d60ef86d38f369e98c0d5ba15f459640151d8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-rat-embeds-dense.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-rat-embeds-dense:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-cartesian-product:begin -->
+
+### Step 4 focused supplier correction: def-cartesian-product
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: fa44687b640964b63bf1719095273630d6387bf0c39495a67a1de0365bab7cc2.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-cartesian-product.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-cartesian-product:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-reals-cauchy-complete:begin -->
+
+### Step 4 focused supplier correction: thm-reals-cauchy-complete
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: df09efc2431400ddb8f41da31a5505ecedff4dc20b9366e8e81e4e7ad1a6969b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-reals-cauchy-complete.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-reals-cauchy-complete:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-cauchy-reals-lub-complete:begin -->
+
+### Step 4 focused supplier correction: cor-cauchy-reals-lub-complete
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e026d44a83d50892b6384ffd1da864fe0872ee69c6837231cfe91538e3966b93.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-cauchy-reals-lub-complete.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-cauchy-reals-lub-complete:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sigma-algebra:begin -->
+
+### Step 4 focused supplier correction: def-sigma-algebra
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4326c0944935d7597fdca7362bd7e6ee37d75c286f4b1462160346188660653d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-sigma-algebra.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sigma-algebra:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-extended-reals:begin -->
+
+### Step 4 focused supplier correction: def-extended-reals
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e27822ac70944538d5373f93c730c02588c2734cd624e19777ace08cdd7f5285.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-extended-reals.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-extended-reals:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-extended-reals-complete:begin -->
+
+### Step 4 focused supplier correction: lem-extended-reals-complete
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6badc1001af2c9d4e223d5c2a1b7be7ca54a0b75286b9a3cccbf45f1185291ea.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-extended-reals-complete.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-extended-reals-complete:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-extended-series:begin -->
+
+### Step 4 focused supplier correction: def-nonnegative-extended-series
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1671ce01214b5da2aa1e5cf9fa5de4ca29080efde942c5eaf407d64a1b917124.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nonnegative-extended-series.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-extended-series:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure:begin -->
+
+### Step 4 focused supplier correction: def-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f67794f292b01cc6fcc6d7d03a74b356c11b42b054889fc1ea51ce5c572abe8f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-probability-measure:begin -->
+
+### Step 4 focused supplier correction: def-probability-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: cf48b451fef18a4023d37eeb905bec156c7c737a05a5018261dc43efda2a3aa4.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-probability-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-probability-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measurable-space:begin -->
+
+### Step 4 focused supplier correction: def-measurable-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 85d55da38d336ccb06469f439aee8425243fe16d5394526213f1345455668a6f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-measurable-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measurable-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measurable-function-between-measurable-spaces:begin -->
+
+### Step 4 focused supplier correction: def-measurable-function-between-measurable-spaces
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0595b90cedfdff312b31826a12214013f18e2a8cf3d3cd08866ba7c51bdc4068.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-measurable-function-between-measurable-spaces.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measurable-function-between-measurable-spaces:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-borel-sigma-algebra:begin -->
+
+### Step 4 focused supplier correction: def-borel-sigma-algebra
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7960bd0e631c2dc2d57afe6d5468fe40d18c6bbda4f80ba02621fd18befaac58.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-borel-sigma-algebra.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-borel-sigma-algebra:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-random-element-and-real-random-variable:begin -->
+
+### Step 4 focused supplier correction: def-random-element-and-real-random-variable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8e663cbbd143c0c900cfc08696715d15883827190307fe78e7632f600f3b1bbf.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-random-element-and-real-random-variable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-random-element-and-real-random-variable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-almost-sure-convergence-of-random-variables:begin -->
+
+### Step 4 focused supplier correction: def-almost-sure-convergence-of-random-variables
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ddf43dda1e00d5a7641c5c68708c7090d81486ca51eb4bb29ff8a0914aff40a7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-almost-sure-convergence-of-random-variables.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-almost-sure-convergence-of-random-variables:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-group:begin -->
+
+### Step 4 focused supplier correction: def-group
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4a03efca52e02b2f7707557c96f78201b4f9367843b4420557ea000f854acce6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-group.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-group:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-subgroup:begin -->
+
+### Step 4 focused supplier correction: def-subgroup
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 86353666594646282f41cb00466bb39f132e54278dd2a531385a008de93a1e9f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-subgroup.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-subgroup:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-coset:begin -->
+
+### Step 4 focused supplier correction: def-coset
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: fb6b696baad0ee101deba2a7d58059395a729975f4a40e05876094c9fd39e93c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-coset.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-coset:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-max-min:begin -->
+
+### Step 4 focused supplier correction: def-max-min
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2125e22d15ed414328a499f68aaf340458415e8e4e5bf077be4ef908a4dc2074.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-max-min.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-max-min:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-set-has-max:begin -->
+
+### Step 4 focused supplier correction: lem-finite-set-has-max
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b604f87b6006c0383a0afea79d52bcd8ca986a6fcb1e5fd43035f7630e36f85d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-finite-set-has-max.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-set-has-max:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-space:begin -->
+
+### Step 4 focused supplier correction: def-metric-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: afc8e513be51c2e00aabe87c34e4f507a8a1b2566c9dbe3f97c7f777db746d72.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-metric-nonnegativity:begin -->
+
+### Step 4 focused supplier correction: lem-metric-nonnegativity
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e8a3cab2a67ca6f4b8cdfcc310f7c78f95326d1d543e2a4c4b3c6e0340445f1f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-metric-nonnegativity.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-metric-nonnegativity:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-ball:begin -->
+
+### Step 4 focused supplier correction: def-metric-ball
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d0ffaf278efa0cb44cd272db4df0bcef18b542a15ba3e6e0907f31e727abaa5f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-ball.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-ball:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-euclidean-spheres-and-closed-balls:begin -->
+
+### Step 4 focused supplier correction: def-euclidean-spheres-and-closed-balls
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9175af5fd473394719adfb066e5cf5595fdffee1cbbb61b8c8f67e74d7f429e8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-euclidean-spheres-and-closed-balls.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-euclidean-spheres-and-closed-balls:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-numbers:begin -->
+
+### Step 4 focused supplier correction: def-natural-numbers
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3c8e63b03ee2d3de8e1207cf37dbba49475342a57f824078053ce4a67cfb1369.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-natural-numbers.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-numbers:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nat-order:begin -->
+
+### Step 4 focused supplier correction: def-nat-order
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0c910ab2c9862ab88b742404f2df13c246da025ed5996341533f3c78fd7ed796.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nat-order.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nat-order:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-nat-order-is-membership:begin -->
+
+### Step 4 focused supplier correction: lem-nat-order-is-membership
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: cece48a1567d02f6041993285ed6dfc351c7688ed8ad6136393a5d402eba859a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-nat-order-is-membership.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-nat-order-is-membership:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-countable:begin -->
+
+### Step 4 focused supplier correction: def-countable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a895679ed069ba3bf3124aac182bc513d1c3eb1ac8cb876c4ff4b8b58d55bee3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-countable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-countable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-sigma-finite-and-semifinite-measures:begin -->
+
+### Step 4 focused supplier correction: def-finite-sigma-finite-and-semifinite-measures
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3aba91ea9179a7257d66f1ea6b708b610e1c0b1e68e3311c966390875f4890e5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-finite-sigma-finite-and-semifinite-measures.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-sigma-finite-and-semifinite-measures:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-independent-sigma-algebras-and-events:begin -->
+
+### Step 4 focused supplier correction: def-independent-sigma-algebras-and-events
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a86d314154cb181e17052746e4b1857cca40f992c7ca5cfd2dafbebea1c4b850.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-independent-sigma-algebras-and-events.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-independent-sigma-algebras-and-events:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-independent-random-elements:begin -->
+
+### Step 4 focused supplier correction: def-independent-random-elements
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c18aef975050dad7625d10219d2b4a34e2550d921ec10a048a8e79f389ca9832.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-independent-random-elements.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-independent-random-elements:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-identically-distributed-and-iid-random-variables:begin -->
+
+### Step 4 focused supplier correction: def-identically-distributed-and-iid-random-variables
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a6700c4c795bba53798c15b4e7c0bb08c9e827ba05dbab5fcd5211b7f8fcbe1e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-identically-distributed-and-iid-random-variables.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-identically-distributed-and-iid-random-variables:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-axiom-of-choice:begin -->
+
+### Step 4 focused supplier correction: def-axiom-of-choice
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c921a1f153115a7caa518137653b2b9aed18ea7cd31b51e78defe40b652cec22.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-axiom-of-choice.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-axiom-of-choice:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-brownian-motion:begin -->
+
+### Step 4 focused supplier correction: def-brownian-motion
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6cd184de373a598f43481a44dee7b9eb9d8352e9a150d06e77de94becd4be04a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-brownian-motion.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-brownian-motion:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-elementary-predictable-brownian-integrand:begin -->
+
+### Step 4 focused supplier correction: def-elementary-predictable-brownian-integrand
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d897a3fd570c49e2c18f116f8da7ce079d449b1e4344be1d4437b960d882fc64.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-elementary-predictable-brownian-integrand.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-elementary-predictable-brownian-integrand:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-continuous-brownian-ito-process:begin -->
+
+### Step 4 focused supplier correction: def-continuous-brownian-ito-process
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 56ecd1123f6f48a1936d6604dafe599008cac73c1399c01f7ea41803eacea47e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-continuous-brownian-ito-process.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-continuous-brownian-ito-process:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-integral-of-an-elementary-predictable-process:begin -->
+
+### Step 4 focused supplier correction: def-ito-integral-of-an-elementary-predictable-process
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1a0a9110cad0b739d2812b73fdbbc5b2b8d2f8926516ecbacb7306ce8d076949.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-ito-integral-of-an-elementary-predictable-process.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-integral-of-an-elementary-predictable-process:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-l-p-space-as-a-quotient-by-null-functions:begin -->
+
+### Step 4 focused supplier correction: def-l-p-space-as-a-quotient-by-null-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 13b78b64c16b2ad1ee8c065235f90eeeb0d881974ff285227bf657b4fd714e16.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-l-p-space-as-a-quotient-by-null-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-l-p-space-as-a-quotient-by-null-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space:begin -->
+
+### Step 4 focused supplier correction: thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Relocate Statement hyperlinks without changing rendered prose and move the existing L2/L3 tags after the complete displayed proof paragraph; preserve the mathematical argument.
+
+Current content SHA256: 29c05b865aac9ebc87f8210dd2ecdd163ea00680718abe8c5f3d3a57292e66c7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-riesz-fischer-completeness-of-l-p:begin -->
+
+### Step 4 focused supplier correction: thm-riesz-fischer-completeness-of-l-p
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6cd81a3dd8618ce7761b20a5718f8e8d1b4700ae0475234747b8f3af5d22e632.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-riesz-fischer-completeness-of-l-p.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-riesz-fischer-completeness-of-l-p:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-integral-for-square-integrable-predictable-processes:begin -->
+
+### Step 4 focused supplier correction: def-ito-integral-for-square-integrable-predictable-processes
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f1f467f5486c2cb6eef66b055e5a414911e71a296c2c71ddbccd45179887ced5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-ito-integral-for-square-integrable-predictable-processes.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-integral-for-square-integrable-predictable-processes:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-sde-and-strong-solution:begin -->
+
+### Step 4 focused supplier correction: def-ito-sde-and-strong-solution
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9d9e968e9cf337be37e65bea3e64b3dcdca46d1700114bd2be7a027ee8d28af7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-ito-sde-and-strong-solution.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ito-sde-and-strong-solution:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-topology:begin -->
+
+### Step 4 focused supplier correction: def-metric-topology
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7d254fab82be5e9c0f622523b116f16c87d2416176fb8b73e9af07d7294f4515.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-topology.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-topology:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-interior-closure-boundary:begin -->
+
+### Step 4 focused supplier correction: def-metric-interior-closure-boundary
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e0a74d8a65426b0adda0ce2dc7c2b0b1dfda3391241257b6dfdab8dd4682194f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-interior-closure-boundary.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-interior-closure-boundary:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-extended-real-valued-measurable-function:begin -->
+
+### Step 4 focused supplier correction: def-extended-real-valued-measurable-function
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 81cfe5c10c32cf3ee9ead07e119cac7c1b8662fb5b4e6f23834627f942046876.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-extended-real-valued-measurable-function.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-extended-real-valued-measurable-function:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-simple-measurable-function:begin -->
+
+### Step 4 focused supplier correction: def-nonnegative-simple-measurable-function
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9c1cef406d7f478663b0c15e5f15575d73a92854c0dd168ab238da0dcd2eaf19.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nonnegative-simple-measurable-function.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-simple-measurable-function:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integral-of-a-nonnegative-simple-function:begin -->
+
+### Step 4 focused supplier correction: def-integral-of-a-nonnegative-simple-function
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4c6e6ce16ce5abfe1e0185d0b735dbe3881f3c01bb6336a3460f898a6b799f1a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-integral-of-a-nonnegative-simple-function.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integral-of-a-nonnegative-simple-function:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-lebesgue-integral:begin -->
+
+### Step 4 focused supplier correction: def-nonnegative-lebesgue-integral
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9c7b42bddd67c39d45fd7c74062b6d14857088c7e455f7a009743330d5e489f3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nonnegative-lebesgue-integral.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-lebesgue-integral:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-sigma-algebra-and-finite-product-sigma-algebras:begin -->
+
+### Step 4 focused supplier correction: def-product-sigma-algebra-and-finite-product-sigma-algebras
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6cf2de3efb438c44e7de0695c95d9252142e2f2764ac969f30b1a35b42e1eed6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-product-sigma-algebra-and-finite-product-sigma-algebras.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-sigma-algebra-and-finite-product-sigma-algebras:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sequence:begin -->
+
+### Step 4 focused supplier correction: def-sequence
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8a6a4ddfe24286e35a01cd06106506cf84fcebb0390f8f24e7ba7be139436f4b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-sequence.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sequence:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-countable-choice:begin -->
+
+### Step 4 focused supplier correction: def-countable-choice
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3c1487f760558598b516adc70b7dc711333f73a5f4133e71234ff7ace6503ab5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-countable-choice.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-countable-choice:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets:begin -->
+
+### Step 4 focused supplier correction: lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f2f91ad11b18fe6500462e208a289cc19f612599713217560ba1b94589ab8b37.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-abs-value:begin -->
+
+### Step 4 focused supplier correction: def-abs-value
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e1684c41b059ef5e16df7030cc4f69291754c97b4ab97e25947f1d02371c6920.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-abs-value.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-abs-value:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-zero-mult:begin -->
+
+### Step 4 focused supplier correction: lem-of-zero-mult
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d1afbbfa638627da03377d7919e8a3288e37bebd70dee229e023ac30bbf93ca9.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-zero-mult.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-zero-mult:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-sign-rules:begin -->
+
+### Step 4 focused supplier correction: lem-of-sign-rules
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b92fbbbc14507926cff3912a4f6302ee3e45b2dc8523f6d9007ebcc006285a71.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-sign-rules.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-sign-rules:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-abs-value:begin -->
+
+### Step 4 focused supplier correction: lem-of-abs-value
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7950d5e57c81677e82c4eda2c952f13811da7418224109c3519ae22eb5f6ab8e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-abs-value.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-abs-value:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-triangle-inequality:begin -->
+
+### Step 4 focused supplier correction: lem-of-triangle-inequality
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6930b293dadd4b493f7f73336442ec1e2e2c875fb733998782ff4cd11b73671e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-triangle-inequality.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-triangle-inequality:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-naturals-positive:begin -->
+
+### Step 4 focused supplier correction: lem-of-naturals-positive
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: fcb749bb378d936169e8dbff6f1092689e435ffe4d7316e09cc4d7e71d88ca65.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-naturals-positive.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-naturals-positive:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-sum:begin -->
+
+### Step 4 focused supplier correction: def-finite-sum
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8c486f359680448c69fbd2f5d18a8dd9184fa0f5c6d5dc4f1300aa168bb7349f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-finite-sum.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-sum:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-sum-laws:begin -->
+
+### Step 4 focused supplier correction: lem-finite-sum-laws
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 771a16e4f0dd838bd65a0541977f7f429cdff8881eeb3de4b8186478cd19bcbe.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-finite-sum-laws.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-sum-laws:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-interval:begin -->
+
+### Step 4 focused supplier correction: def-interval
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 46671bf8faf41005f5b7d7f04a39fe0f3f14d67c301ba8ce5c6a065cb84f2faf.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-interval.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-interval:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-additivity-over-subintervals:begin -->
+
+### Step 4 focused supplier correction: thm-additivity-over-subintervals
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7a876f1895d283abdc4255aa10287718859b9da1139f1cb719e29fb3d68dd0b4.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-additivity-over-subintervals.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-additivity-over-subintervals:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-square-positive:begin -->
+
+### Step 4 focused supplier correction: lem-of-square-positive
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6d7c02fe51e367840dd33e5db1180df9d6aec982a7c88cda4e2732a0199cd6c1.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-square-positive.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-square-positive:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-inverse-positive:begin -->
+
+### Step 4 focused supplier correction: lem-of-inverse-positive
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 241be68680c63cca8114fa94bb3e52f370f3a9c3180b733ccec460453425644f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-of-inverse-positive.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-of-inverse-positive:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-of-square-roots:begin -->
+
+### Step 4 focused supplier correction: thm-of-square-roots
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-optimizer42.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8ee155048d9461c3c18e73ad954a2caef688e17e283c185e2acd2239035535f6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-of-square-roots.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-of-square-roots:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integer-power:begin -->
+
+### Step 4 focused supplier correction: def-integer-power
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0d4ca480aa4f2571525c119d182de62749c354c023c880d75745cb1ec0578aa7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-integer-power.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integer-power:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-euclidean-inner-product:begin -->
+
+### Step 4 focused supplier correction: def-euclidean-inner-product
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c614fb6351357f225a6033801a698efc323d85bd240141df60acb77528619b5c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-euclidean-inner-product.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-euclidean-inner-product:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-schwarz-finite:begin -->
+
+### Step 4 focused supplier correction: thm-cauchy-schwarz-finite
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a80c5c2b1089e7084759ba29d478438290c1873877832ef1fdd2fd24d5c14ecb.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-cauchy-schwarz-finite.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-schwarz-finite:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-schwarz-and-the-euclidean-norm:begin -->
+
+### Step 4 focused supplier correction: thm-cauchy-schwarz-and-the-euclidean-norm
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 358e8bf83f5ef75f886d00a60f41a88a83b4dca439ccfd6319da9cf4e913a7ed.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-cauchy-schwarz-and-the-euclidean-norm.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-schwarz-and-the-euclidean-norm:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-logarithm:begin -->
+
+### Step 4 focused supplier correction: def-natural-logarithm
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a554bd1e0f036bfdda90dd648073fe21cd8668f8cc69ef18ae2e16a232b7615d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-natural-logarithm.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-logarithm:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-canonical-natural:begin -->
+
+### Step 4 focused supplier correction: def-canonical-natural
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 105db4e11ff8ac2d9c8f798381e7cc0d63292805f3fc300e6777b53e0450f12d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-canonical-natural.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-canonical-natural:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-factorial-and-falling-factorial:begin -->
+
+### Step 4 focused supplier correction: def-factorial-and-falling-factorial
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6a5f6fe05e9d8be34d9129dabff54e7c614d42254d232ca05f01c019aa2b93bc.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-factorial-and-falling-factorial.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-factorial-and-falling-factorial:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-series:begin -->
+
+### Step 4 focused supplier correction: def-series
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 43942a0a7951a24113aa9e877df626ab062caa93dca4073893ca7a38b0eab2e1.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-series.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-series:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-real-exponential-function-and-e:begin -->
+
+### Step 4 focused supplier correction: def-real-exponential-function-and-e
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 772b7c44045387738ffebc75bda043a9927de5a2577e34f3cd459329034a9f16.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-real-exponential-function-and-e.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-real-exponential-function-and-e:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-derivative:begin -->
+
+### Step 4 focused supplier correction: def-derivative
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 737cafa87cb00f885641f54adb89ac88742fd25fb1779007573327619d20486a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-derivative.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-derivative:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-algebra-of-continuous-functions:begin -->
+
+### Step 4 focused supplier correction: thm-algebra-of-continuous-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8bc715507b0fa2ae68397f016bee348f5b39483e712262002792aee47b5d2e19.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-algebra-of-continuous-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-algebra-of-continuous-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-mean-value-theorem:begin -->
+
+### Step 4 focused supplier correction: cor-mean-value-theorem
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: df0dc22f28b3e4a8fed7fb0df31bdc2fc30a7f11784868d2dfd2ba29f9b4be09.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-mean-value-theorem.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-mean-value-theorem:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-algebra-of-derivatives:begin -->
+
+### Step 4 focused supplier correction: thm-algebra-of-derivatives
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1c024cbd87d7aaf90ec387acc91c1ff73f621df032376673fced1e6ea474339b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-algebra-of-derivatives.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-algebra-of-derivatives:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-natural-logarithm-laws:begin -->
+
+### Step 4 focused supplier correction: thm-natural-logarithm-laws
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-math-03.
+
+Derive exp(0)=1 from exponential addition and positivity before applying inverse identities, with all three required supplier tags; preserve the original Statement.
+
+Current content SHA256: fb080f5e2c5bd3410b7c58945fd929d0d31a82c317d9f0668847026aff89c2bb.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-natural-logarithm-laws.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-natural-logarithm-laws:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-kullback-leibler-divergence:begin -->
+
+### Step 4 focused supplier correction: def-kullback-leibler-divergence
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 826feb94d2cff94b85ba3d890db6019148a108a9d2c3798f6a8427e9e7ccece8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-kullback-leibler-divergence.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-kullback-leibler-divergence:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-measure-on-sigma-finite-spaces:begin -->
+
+### Step 4 focused supplier correction: def-product-measure-on-sigma-finite-spaces
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9dcdf44d33967c82f9e08e62d260945e3dbb45db788fe80051feac823dd75943.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-product-measure-on-sigma-finite-spaces.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-measure-on-sigma-finite-spaces:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique:begin -->
+
+### Step 4 focused supplier correction: thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f740e437488fcc254ad129d1766fdb977321050c7a5d7ca29bbe1676cf7c2d2a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-latent-variable-joint-and-observed-data-factorization:begin -->
+
+### Step 4 focused supplier correction: def-latent-variable-joint-and-observed-data-factorization
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a9ac9efb519af2996f65a990a8946e75c6672f0670f99ac47bbfe668cf95ce4f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-latent-variable-joint-and-observed-data-factorization.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-latent-variable-joint-and-observed-data-factorization:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure-kernel-and-probability-kernel:begin -->
+
+### Step 4 focused supplier correction: def-measure-kernel-and-probability-kernel
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 282c1c169db5b590ec417e405b91bce48eb8bee63db5f289f28a437e72b4d8e8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-measure-kernel-and-probability-kernel.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure-kernel-and-probability-kernel:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-arithmetic-and-lattice-operations-preserve-measurability:begin -->
+
+### Step 4 focused supplier correction: thm-arithmetic-and-lattice-operations-preserve-measurability
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 671a7096eb6f43a12cfabe3711175bf83d588e6551f3aa29108934f30014b0eb.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-arithmetic-and-lattice-operations-preserve-measurability.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-arithmetic-and-lattice-operations-preserve-measurability:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-of-archimedean:begin -->
+
+### Step 4 focused supplier correction: thm-of-archimedean
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 49d994597b9f6cdcec03114e56b26d64a6dd7a4f8b2f409eefbc4f6b30b82628.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-of-archimedean.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-of-archimedean:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-observed-density-is-latent-marginal-under-tonelli:begin -->
+
+### Step 4 focused supplier correction: thm-observed-density-is-latent-marginal-under-tonelli
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: aa280409a51093310ea13c3a663928cb446ffe154b1f1ab68496ece4e29cf601.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-observed-density-is-latent-marginal-under-tonelli.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-observed-density-is-latent-marginal-under-tonelli:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-expectation-maximization:begin -->
+
+### Step 4 focused supplier correction: alg-expectation-maximization
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c363894d2d33dfdd966d6f90a8b223a4ab0576b1a389105f259cd0b3195296a0.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-expectation-maximization.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-expectation-maximization:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure-with-density:begin -->
+
+### Step 4 focused supplier correction: def-measure-with-density
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 5a011673f3b69d9d2960aab002ffb70af8ec1d0c5f320f5676506666ce722db9.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-measure-with-density.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-measure-with-density:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-archimedean-reciprocal:begin -->
+
+### Step 4 focused supplier correction: cor-archimedean-reciprocal
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3b4f9cc0363e7dedecbece11479999a34137295708b6d84e4c744ce37e6eced1.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-archimedean-reciprocal.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-archimedean-reciprocal:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-continuous-implies-integrable:begin -->
+
+### Step 4 focused supplier correction: thm-continuous-implies-integrable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Relocate Statement hyperlinks without changing rendered prose; establish boundedness from uniform continuity and a finite mesh, aligning the compactness-use Remark and preserving the full Statement.
+
+Current content SHA256: 9142b77fa5f65ae6ae63ac2e812c71d99695b29805883f30b8b5ade77676ad7f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-continuous-implies-integrable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-continuous-implies-integrable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotonicity-of-the-integral:begin -->
+
+### Step 4 focused supplier correction: thm-monotonicity-of-the-integral
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3d0f7f874a8a203a408aa705d85909d42ae793502a5ac799a23ba02ab9b2a179.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-monotonicity-of-the-integral.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotonicity-of-the-integral:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-kullback-leibler-is-nonnegative:begin -->
+
+### Step 4 focused supplier correction: thm-kullback-leibler-is-nonnegative
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2a95a9a47d6b791325afd395753944648389945a44fbffe6487a5c8820ae2dee.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-kullback-leibler-is-nonnegative.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-kullback-leibler-is-nonnegative:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-em-observed-log-likelihood-is-nondecreasing:begin -->
+
+### Step 4 focused supplier correction: thm-em-observed-log-likelihood-is-nondecreasing
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f6e61672b53edeb5bfadd1251244916926633c713c1ae1280a06fd4eb97d4525.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-em-observed-log-likelihood-is-nondecreasing.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-em-observed-log-likelihood-is-nondecreasing:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-global-strong-well-posedness-for-lipschitz-ito-sdes:begin -->
+
+### Step 4 focused supplier correction: thm-global-strong-well-posedness-for-lipschitz-ito-sdes
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 64daaa229b5528a4a6b4bdaf5bdc3bb07ea9ab6a2025d4a8412bda98c96694d5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-global-strong-well-posedness-for-lipschitz-ito-sdes.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-global-strong-well-posedness-for-lipschitz-ito-sdes:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integrable-real-and-complex-functions-and-their-integrals:begin -->
+
+### Step 4 focused supplier correction: def-integrable-real-and-complex-functions-and-their-integrals
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0ab9d16d2990d4526477d04fe0e32a49a8d65057bed69ba7aa88b183ae46ab25.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-integrable-real-and-complex-functions-and-their-integrals.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-integrable-real-and-complex-functions-and-their-integrals:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-expectation-of-a-nonnegative-or-integrable-random-variable:begin -->
+
+### Step 4 focused supplier correction: def-expectation-of-a-nonnegative-or-integrable-random-variable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 208da60fb3d50a3fcdadf6f6904ad91a0e2501878fce0143e666369b42d9588c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-expectation-of-a-nonnegative-or-integrable-random-variable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-expectation-of-a-nonnegative-or-integrable-random-variable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-expectation-given-a-sigma-algebra:begin -->
+
+### Step 4 focused supplier correction: def-conditional-expectation-given-a-sigma-algebra
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a6802fd4cf90b85e1eaf6856150cb1463d44d3bb278e5eae30b390670e905ad8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-conditional-expectation-given-a-sigma-algebra.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-expectation-given-a-sigma-algebra:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-expectation-as-an-ae-class:begin -->
+
+### Step 4 focused supplier correction: def-conditional-expectation-as-an-ae-class
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 816e5335e7e8afafa26d37bf9bd0f8813fa682ee36f68d0495d6abce19f5cf8f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-conditional-expectation-as-an-ae-class.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-expectation-as-an-ae-class:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-isometry-and-linearity-in-predictable-l2:begin -->
+
+### Step 4 focused supplier correction: thm-ito-isometry-and-linearity-in-predictable-l2
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 497530710cf8cd91678513f796dc163b719b38ddfb21394406df9999196ad8d2.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-ito-isometry-and-linearity-in-predictable-l2.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-isometry-and-linearity-in-predictable-l2:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotonicity-from-the-derivative:begin -->
+
+### Step 4 focused supplier correction: thm-monotonicity-from-the-derivative
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 246b07e2c3cd6dcc6e4e5cdffb702e9ae203429e6f1b5af0e73cdb182ff82abb.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-monotonicity-from-the-derivative.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotonicity-from-the-derivative:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-one-sided-coordinate-rademacher-contraction:begin -->
+
+### Step 4 focused supplier correction: thm-one-sided-coordinate-rademacher-contraction
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: cbd969122ca582990350f08b240a77bd74c5719810bf08b6ccf9834464845af3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-one-sided-coordinate-rademacher-contraction.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-one-sided-coordinate-rademacher-contraction:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-exchangeable-random-elements:begin -->
+
+### Step 4 focused supplier correction: def-exchangeable-random-elements
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 03f5b78ebf3a7a4577476d17dc9192596c9c8d3ec3627ab3506a07eaa07e0924.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-exchangeable-random-elements.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-exchangeable-random-elements:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-statistical-experiment:begin -->
+
+### Step 4 focused supplier correction: def-statistical-experiment
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9bb566ed5b4c2cbee8150b52aa816d6e01a9c1457f2f648bbddaa765c671ea1c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-statistical-experiment.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-statistical-experiment:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-statistic-and-estimator:begin -->
+
+### Step 4 focused supplier correction: def-statistic-and-estimator
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1755c43903a5e644ce6263953784ef69547334f0b5d6e7b2420775096538dbe8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-statistic-and-estimator.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-statistic-and-estimator:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conformal-nonconformity-score-and-rank-pvalue:begin -->
+
+### Step 4 focused supplier correction: def-conformal-nonconformity-score-and-rank-pvalue
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2edde9eb5b3305412bf1f5a01a5b4a5fbc58e3ccaa5be8d69d334e7d584a5663.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-conformal-nonconformity-score-and-rank-pvalue.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conformal-nonconformity-score-and-rank-pvalue:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-split-conformal-prediction-set:begin -->
+
+### Step 4 focused supplier correction: alg-split-conformal-prediction-set
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9192e45145ababa71f9e74068d08552e0f52781c8177390263e86d8411f8cf51.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-split-conformal-prediction-set.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-split-conformal-prediction-set:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-regular-conditional-distribution:begin -->
+
+### Step 4 focused supplier correction: def-regular-conditional-distribution
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 25af03bd7c69109027fdd3de42bf50aa4cede056dce6eeb3544a6d7b8f9f0d8e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-regular-conditional-distribution.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-regular-conditional-distribution:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-split-conformal-marginal-coverage:begin -->
+
+### Step 4 focused supplier correction: thm-split-conformal-marginal-coverage
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-01.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 32f84c7577362827faf206de32c25e5e57775de28b7174cd66a41edf47c793bc.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-split-conformal-marginal-coverage.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-split-conformal-marginal-coverage:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-continuous-functions-are-borel-measurable:begin -->
+
+### Step 4 focused supplier correction: cor-continuous-functions-are-borel-measurable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 027225454d46747b1ebf6ec49c924160098e02bcee965b67818c0660230cb740.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-continuous-functions-are-borel-measurable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-continuous-functions-are-borel-measurable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-composition-of-probability-kernels:begin -->
+
+### Step 4 focused supplier correction: def-composition-of-probability-kernels
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1b2d41292464fcd8dde5e0db26425cee94841559e7b36aae8a94ec67d1346917.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-composition-of-probability-kernels.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-composition-of-probability-kernels:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-directional-and-partial-derivatives:begin -->
+
+### Step 4 focused supplier correction: def-directional-and-partial-derivatives
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 635c4ea97537782111cea65ea65c193d34029cf30ac6986acf805e0d55e205e5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-directional-and-partial-derivatives.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-directional-and-partial-derivatives:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-jacobian-matrix-and-gradient:begin -->
+
+### Step 4 focused supplier correction: def-jacobian-matrix-and-gradient
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 573fdb3d30ee9b7e65167fed29f1172f307d132d11169c995b4aadba514c4de6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-jacobian-matrix-and-gradient.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-jacobian-matrix-and-gradient:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-choice:begin -->
+
+### Step 4 focused supplier correction: lem-finite-choice
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f8e0f1dff178dec3e3b9d1175addff22176c1c3fb061803b54308ca3d01d99cf.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-finite-choice.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-finite-choice:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-topology:begin -->
+
+### Step 4 focused supplier correction: def-product-topology
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 88804e21a95be6ef83b7106dc2953b60a9e156bb863ddee8f2ad0a0399be69fe.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-product-topology.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-product-topology:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-cardinality:begin -->
+
+### Step 4 focused supplier correction: def-finite-cardinality
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 81eb2e4febc9faef19690b42609bd03c3dd3d16dee143c42b148e51a3021e06b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-finite-cardinality.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-cardinality:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sum-over-a-finite-index-set:begin -->
+
+### Step 4 focused supplier correction: def-sum-over-a-finite-index-set
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 21c89504f93624a79c7334b19b9044e2ddd01a3686af34b787b5fdfc02e4aec3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-sum-over-a-finite-index-set.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sum-over-a-finite-index-set:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-compactness:begin -->
+
+### Step 4 focused supplier correction: def-metric-compactness
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 826b43e8fa8b8c2b9ee97b351ab33c4978ae24bbb1dc09ac7090d276a3580469.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-compactness.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-compactness:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-closed-subset-of-a-compact-space-is-compact:begin -->
+
+### Step 4 focused supplier correction: lem-closed-subset-of-a-compact-space-is-compact
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0724c1d8d781caff2a3c5d9a5c2ace4f1a9bb7912f2d23e60886ab89ffacdd01.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-closed-subset-of-a-compact-space-is-compact.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-closed-subset-of-a-compact-space-is-compact:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-expectation-of-products-of-independent-random-variables:begin -->
+
+### Step 4 focused supplier correction: thm-expectation-of-products-of-independent-random-variables
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1a109c1f2f2619a010d02fc42806ce279c886baa29cc97209c1bdc8fc30e4948.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-expectation-of-products-of-independent-random-variables.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-expectation-of-products-of-independent-random-variables:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-bounded-diameter:begin -->
+
+### Step 4 focused supplier correction: def-metric-bounded-diameter
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2e157cad8f257b4cd3996f1e8ce0d650ab79412384f9db1a4858f8c8604c37e3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-bounded-diameter.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-bounded-diameter:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-real-line-is-a-metric-space:begin -->
+
+### Step 4 focused supplier correction: lem-real-line-is-a-metric-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 85eabe306bc56ba85c111f1863663f14abdf9592d8b7bb885e25596247edada6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-real-line-is-a-metric-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-real-line-is-a-metric-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotone-convergence:begin -->
+
+### Step 4 focused supplier correction: thm-monotone-convergence
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3c86c9404164cc4107c6f72371bd015571ddd16bbebf25b98a811421ec88107c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-monotone-convergence.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-monotone-convergence:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nested-interval-property:begin -->
+
+### Step 4 focused supplier correction: thm-nested-interval-property
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3bd3603948dd59b159d43a71f367edc8ba7df1ed59d36b6c1054a8e373473f6f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-nested-interval-property.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nested-interval-property:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-power-monotone:begin -->
+
+### Step 4 focused supplier correction: lem-power-monotone
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: da64c81977049829587fc088c3be0f892c294930139028d710e60c9eec3af5dc.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-power-monotone.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-power-monotone:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-geometric-sequence-null:begin -->
+
+### Step 4 focused supplier correction: lem-geometric-sequence-null
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9c2c2540ab06a684b23ac3a469d370cef58a73770d3dadb781e8c089c4973d00.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-geometric-sequence-null.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-geometric-sequence-null:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-heine-borel-rn:begin -->
+
+### Step 4 focused supplier correction: thm-heine-borel-rn
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2bb866e4988638ba64fb6de7b994d599ff79125b4a09c1779165c11970eca170.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-heine-borel-rn.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-heine-borel-rn:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-operator-norm-is-the-largest-singular-value:begin -->
+
+### Step 4 focused supplier correction: thm-operator-norm-is-the-largest-singular-value
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 955befe04a90da34c4691d628090ba985e7fc130c675e10aff2006e74d053794.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-operator-norm-is-the-largest-singular-value.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-operator-norm-is-the-largest-singular-value:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-filtration-and-filtered-probability-space:begin -->
+
+### Step 4 focused supplier correction: def-filtration-and-filtered-probability-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: fcde8b668b4e0ecc136e97c6dd210aa001e9ef026a058ca6dc4d19b39bf98aab.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-filtration-and-filtered-probability-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-filtration-and-filtered-probability-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-adapted-and-integrable-stochastic-process:begin -->
+
+### Step 4 focused supplier correction: def-adapted-and-integrable-stochastic-process
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2e24858d61ab7dc3a59ebd719ef83f578495e966e6a66bda88018756df39733f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-adapted-and-integrable-stochastic-process.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-adapted-and-integrable-stochastic-process:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-variance:begin -->
+
+### Step 4 focused supplier correction: def-conditional-variance
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 96eda533989d6f6af5e7c184994665d2262e16a532c277d023aabf2ecf62d922.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-conditional-variance.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-variance:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-stochastic-gradient-oracle-and-unconstrained-update:begin -->
+
+### Step 4 focused supplier correction: def-stochastic-gradient-oracle-and-unconstrained-update
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 13f5adf0f9bdb393de0e49001707469fa6e5dfd63b62c1f18563aadf052fba20.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-stochastic-gradient-oracle-and-unconstrained-update.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-stochastic-gradient-oracle-and-unconstrained-update:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-stochastic-gradient-biased-noise-floor:begin -->
+
+### Step 4 focused supplier correction: thm-stochastic-gradient-biased-noise-floor
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-02.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ef4f3f23a9df0aa3a1ab56857e27c3d33d8b49013ea63225d4dbc4b495b12473.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-stochastic-gradient-biased-noise-floor.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-stochastic-gradient-biased-noise-floor:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-glm-observation-family:begin -->
+
+### Step 4 focused supplier correction: def-glm-observation-family
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c14a8686f0e0c6303962eadd25d6a904cc64ff322cba2ea8ed6c4a76efefcca3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-glm-observation-family.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-glm-observation-family:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-generalized-linear-model:begin -->
+
+### Step 4 focused supplier correction: def-generalized-linear-model
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a1112c37435a83948a0b09d936dd785b4b41c4f859847a070497dd6805af0695.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-generalized-linear-model.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-generalized-linear-model:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-composition-of-continuous-functions:begin -->
+
+### Step 4 focused supplier correction: thm-composition-of-continuous-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7e8c5f74179197469b477d1a2e7e018e9e2f357b35184ec0dcf4fae7db50ef3c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-composition-of-continuous-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-composition-of-continuous-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-chain-rule:begin -->
+
+### Step 4 focused supplier correction: thm-chain-rule
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4caf32df3320d0cfe85d7b216350f7d7a3276148d83984512a84fd532df12a0b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-chain-rule.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-chain-rule:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-glm-general-link-score-and-information:begin -->
+
+### Step 4 focused supplier correction: thm-glm-general-link-score-and-information
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ebc05e1e9ba64dcc95e920d4d8ba372e046ba3e6032e0b557ab10f5d41dfc785.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-glm-general-link-score-and-information.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-glm-general-link-score-and-information:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-moore-penrose-pseudoinverse:begin -->
+
+### Step 4 focused supplier correction: def-moore-penrose-pseudoinverse
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 30705d73dd60a8f114d07283e54097148f4f9ca12e12818cde8f295316ef5019.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-moore-penrose-pseudoinverse.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-moore-penrose-pseudoinverse:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-moore-penrose-pseudoinverse-exists-and-is-unique:begin -->
+
+### Step 4 focused supplier correction: thm-moore-penrose-pseudoinverse-exists-and-is-unique
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c6cb4db27a55badabe867d6c187401d7f84fce3936baac2248c14d9525fa4acb.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-moore-penrose-pseudoinverse-exists-and-is-unique.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-moore-penrose-pseudoinverse-exists-and-is-unique:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-fisher-scoring-irls:begin -->
+
+### Step 4 focused supplier correction: alg-fisher-scoring-irls
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 904e49f035727dd8457aaa8f4c0a2f1dda6da30007a5dd17a8d1731adeee0e88.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-fisher-scoring-irls.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-fisher-scoring-irls:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-dirac-measure:begin -->
+
+### Step 4 focused supplier correction: def-dirac-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3847c084251a86b896399dca546a1934c78b9027b5a30fc134dab6c4475a0ae4.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-dirac-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-dirac-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-standard-normal-and-normal-laws:begin -->
+
+### Step 4 focused supplier correction: def-standard-normal-and-normal-laws
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d72bc6c9d9811eb3316699dd25866ed1d487b7ce79c1845737bffc0fa11257f4.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-standard-normal-and-normal-laws.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-standard-normal-and-normal-laws:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-continuity:begin -->
+
+### Step 4 focused supplier correction: def-metric-continuity
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a44f389bf23635f20fe99c8141869deb626697f1e5a842f5a08d146219741310.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-metric-continuity.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-metric-continuity:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-weak-convergence-of-borel-probability-measures:begin -->
+
+### Step 4 focused supplier correction: def-weak-convergence-of-borel-probability-measures
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0556b7a6d85cd09e2c683e28e49c334335dff83db9bc7cb2b013e9d656832676.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-weak-convergence-of-borel-probability-measures.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-weak-convergence-of-borel-probability-measures:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-deterministic-ito-integrals-are-gaussian:begin -->
+
+### Step 4 focused supplier correction: cor-deterministic-ito-integrals-are-gaussian
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1e58e7f34092d1e8522b8915a1b2111497e8c1b28f0ee415917a4c928c3e4237.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-deterministic-ito-integrals-are-gaussian.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-deterministic-ito-integrals-are-gaussian:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-binomial-coefficient:begin -->
+
+### Step 4 focused supplier correction: def-binomial-coefficient
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3f360a6600ef6be418b9b90374131832b3067bdb2d9bc522a4c8e18680e4a85b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-binomial-coefficient.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-binomial-coefficient:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-forward-and-back-substitution-for-triangular-systems:begin -->
+
+### Step 4 focused supplier correction: def-forward-and-back-substitution-for-triangular-systems
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a8e4b88de57783cbb494e1fc527433659e04b6c217a2f98916eb261cdba82561.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-forward-and-back-substitution-for-triangular-systems.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-forward-and-back-substitution-for-triangular-systems:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-martingale-submartingale-and-supermartingale:begin -->
+
+### Step 4 focused supplier correction: def-martingale-submartingale-and-supermartingale
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ec5f6cbedd6249017b05136daa72e37cecb2f9e186d41d7cdb4eccc3be65c68c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-martingale-submartingale-and-supermartingale.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-martingale-submartingale-and-supermartingale:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-test-supermartingale:begin -->
+
+### Step 4 focused supplier correction: def-nonnegative-test-supermartingale
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6eadf71462c3d595d2e60aeeff8406cb845982eb70faf19f59d688de15bcfa8e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nonnegative-test-supermartingale.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-test-supermartingale:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-radon-nikodym-derivative:begin -->
+
+### Step 4 focused supplier correction: def-radon-nikodym-derivative
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 34ff1053d274f3591312d01f31b2eba843af28971e01fe04c715e9714b815c6d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-radon-nikodym-derivative.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-radon-nikodym-derivative:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-support-of-a-borel-measure:begin -->
+
+### Step 4 focused supplier correction: def-support-of-a-borel-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a0e7ea7bb58750bbe9d341dd50d81a5e13e0a65148efdedbe962c0547777625b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-support-of-a-borel-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-support-of-a-borel-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-compact-metric-space-has-a-countable-dense-subset:begin -->
+
+### Step 4 focused supplier correction: lem-compact-metric-space-has-a-countable-dense-subset
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d1181188748a28bfa54e5f8bbc902c8bd04393a9efcbe67d862741ac86c0ef51.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-compact-metric-space-has-a-countable-dense-subset.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-compact-metric-space-has-a-countable-dense-subset:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-natural-logarithm-bounded-by-argument:begin -->
+
+### Step 4 focused supplier correction: lem-natural-logarithm-bounded-by-argument
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: aef84a310fcaa367977096c5fef63f6cabfcd860dd06d1aec50cc2a0c22bd840.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-natural-logarithm-bounded-by-argument.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-natural-logarithm-bounded-by-argument:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-extreme-value-metric:begin -->
+
+### Step 4 focused supplier correction: thm-extreme-value-metric
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f820924cd855ef4e62a71c9d8e12ccd66a370d87930d56a7774d03f41a55dc8f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-extreme-value-metric.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-extreme-value-metric:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-heine-cantor-metric:begin -->
+
+### Step 4 focused supplier correction: thm-heine-cantor-metric
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 801906cc3413c3b74c02d0ff813e8b3f2430e1e614610689da3a0153d39bde83.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-heine-cantor-metric.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-heine-cantor-metric:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-lebesgue-measure-and-the-lebesgue-sigma-algebra:begin -->
+
+### Step 4 focused supplier correction: def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 20fb6aba2d4f1266970737f69095ae066567b9a398a57d18889ff99c18276762.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-lebesgue-measure-and-the-lebesgue-sigma-algebra:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-measure-is-a-complete-measure:begin -->
+
+### Step 4 focused supplier correction: thm-lebesgue-measure-is-a-complete-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0bea3156c248f801020be8ede698f7cce807a85f6885e9bd7ce4c157c0ae1e38.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-lebesgue-measure-is-a-complete-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-measure-is-a-complete-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n:begin -->
+
+### Step 4 focused supplier correction: thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ead29fc904224fa80808c039644993f945a3aeb76486a4426fb83d99567d4751.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-product-of-countable:begin -->
+
+### Step 4 focused supplier correction: thm-product-of-countable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 5fc0fdef3293be354793359a85830c7d9621eb209eb7195bd34668d300d2992d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-product-of-countable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-product-of-countable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-stochastic-gradient-nonconvex-randomized-iterate-bound:begin -->
+
+### Step 4 focused supplier correction: thm-stochastic-gradient-nonconvex-randomized-iterate-bound
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-03.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ebfd9113b7bf9e7bbe65ab40c71b602d59aea76b6152a798abf077bd5f9dda7f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-stochastic-gradient-nonconvex-randomized-iterate-bound.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-stochastic-gradient-nonconvex-randomized-iterate-bound:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-expectation-agrees-with-the-finite-weighted-sum:begin -->
+
+### Step 4 focused supplier correction: cor-expectation-agrees-with-the-finite-weighted-sum
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c15ce3ff8da221bf8a9752bdca7bf94c157f450805fcd6e7d2459f8e27f4a967.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-expectation-agrees-with-the-finite-weighted-sum.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-expectation-agrees-with-the-finite-weighted-sum:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-function:begin -->
+
+### Step 4 focused supplier correction: def-function
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e39c0dda2dfcd287a693f97d24f8c6f93a0112ff79cdee1c3937fcd7cfd4e994.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-function.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-function:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-dependent-choice:begin -->
+
+### Step 4 focused supplier correction: def-dependent-choice
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e4fef1cc557a69474e074416449b5319e3c03d1cc3cb6b7ab33a777cdd914688.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-dependent-choice.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-dependent-choice:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-weighted-sum-of-measures:begin -->
+
+### Step 4 focused supplier correction: def-nonnegative-weighted-sum-of-measures
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: fce9eb732cea852b30618d61d9d811df7422d75e84669520720bdeb0c1c00df7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nonnegative-weighted-sum-of-measures.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nonnegative-weighted-sum-of-measures:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-singular-values-of-an-endomorphism:begin -->
+
+### Step 4 focused supplier correction: def-singular-values-of-an-endomorphism
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7eb11b1bebd82399b23b847444d71dadf4dea250947989b8869fdfb69d9d77d9.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-singular-values-of-an-endomorphism.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-singular-values-of-an-endomorphism:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-total-derivative-in-euclidean-space:begin -->
+
+### Step 4 focused supplier correction: def-total-derivative-in-euclidean-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ace3364b51e8616f7fc46af1a72754037c4c190b4aab314ef51edd56b242c145.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-total-derivative-in-euclidean-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-total-derivative-in-euclidean-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-derivative-of-a-power:begin -->
+
+### Step 4 focused supplier correction: lem-derivative-of-a-power
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 77cf8fbeab41ca0777fee3ee1f1de012105abb12b406df6900c4c44e0f1f86e3.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-derivative-of-a-power.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-derivative-of-a-power:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions:begin -->
+
+### Step 4 focused supplier correction: thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1b4f571ff174439cebb9fd0a0ab75bc935d7f27ce51e0bf7afe02538996e01d7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-normal-location-scale-density:begin -->
+
+### Step 4 focused supplier correction: lem-normal-location-scale-density
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4d570f4235f7ce60964ffbfab761b3d44cfccb1cbeef75e8676d3901270042ce.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-normal-location-scale-density.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-normal-location-scale-density:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-q-and-irrationals-dense-r:begin -->
+
+### Step 4 focused supplier correction: lem-q-and-irrationals-dense-r
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8ae95bc325549562ef1c17c8b38100e09246ce0f52dc72e67e5f3e6939708b71.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-q-and-irrationals-dense-r.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-q-and-irrationals-dense-r:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-reverse-mode-automatic-differentiation:begin -->
+
+### Step 4 focused supplier correction: alg-reverse-mode-automatic-differentiation
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0f207791c0f8d4d59de5dea1fee157a9331d382d193b937a9fc1248dc74c5a72.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-reverse-mode-automatic-differentiation.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-reverse-mode-automatic-differentiation:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds:begin -->
+
+### Step 4 focused supplier correction: thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d891c4d2782294eb61ff92517aa2153e3158ae3e06c311b40e549274b85e6a0c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-gaussian-process:begin -->
+
+### Step 4 focused supplier correction: def-gaussian-process
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 38904e52096eba9392900a96622bc5317a9a3b8635dcb3dd5ab79d5ad32b6af1.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-gaussian-process.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-gaussian-process:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost:begin -->
+
+### Step 4 focused supplier correction: thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 33d9dac134d852570780bf8910601801cb0a32c434eed7ef449ddd29c9538768.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-finite-gaussian-process-posterior-and-predictive-laws:begin -->
+
+### Step 4 focused supplier correction: thm-finite-gaussian-process-posterior-and-predictive-laws
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e46e167a8461718b21c86df8d1cdc0fb41a0dff52f0f37f5ecaa2f6c9f399d8d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-finite-gaussian-process-posterior-and-predictive-laws.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-finite-gaussian-process-posterior-and-predictive-laws:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-convex-subset-of-euclidean-space:begin -->
+
+### Step 4 focused supplier correction: def-convex-subset-of-euclidean-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b9201deec8ecd84c9b905632154ea85ed9e211cf1e03716dec345d004b11a74d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-convex-subset-of-euclidean-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-convex-subset-of-euclidean-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-convex-and-strictly-convex-functions-on-euclidean-sets:begin -->
+
+### Step 4 focused supplier correction: def-convex-and-strictly-convex-functions-on-euclidean-sets
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 456e060e32ed28487845ea34919b9be629325fcc02abe01b5990a4b560ceca9a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-convex-and-strictly-convex-functions-on-euclidean-sets.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-convex-and-strictly-convex-functions-on-euclidean-sets:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ck-and-multi-index-notation-in-several-variables:begin -->
+
+### Step 4 focused supplier correction: def-ck-and-multi-index-notation-in-several-variables
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: bd97d952ba53de9536c4b39cfa08f231c870c938d88d963b3366723475eac317.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-ck-and-multi-index-notation-in-several-variables.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-ck-and-multi-index-notation-in-several-variables:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-hessian-and-euclidean-critical-point:begin -->
+
+### Step 4 focused supplier correction: def-hessian-and-euclidean-critical-point
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: deea4ec8988977f2d8651be15dc320bb5780e0d285045c5182b44530f5451710.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-hessian-and-euclidean-critical-point.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-hessian-and-euclidean-critical-point:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-hessian-characterises-convexity:begin -->
+
+### Step 4 focused supplier correction: thm-hessian-characterises-convexity
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 8b8aec6576fce3fe9eec85c7e41576b95f0be4b7d954ba00aa5448fb6e5d6c47.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-hessian-characterises-convexity.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-hessian-characterises-convexity:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-multivariable-taylor-formula-with-lagrange-remainder:begin -->
+
+### Step 4 focused supplier correction: thm-multivariable-taylor-formula-with-lagrange-remainder
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e6f77db9bb23ccb7e021182714ec1988b4c54e533649da7a696ea7f658ae90af.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-multivariable-taylor-formula-with-lagrange-remainder.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-multivariable-taylor-formula-with-lagrange-remainder:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-product-rule:begin -->
+
+### Step 4 focused supplier correction: thm-product-rule
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4088cf0651a27e683ac3fb98c87b3be06eae810906b47231c8af4baed92feadd.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-product-rule.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-product-rule:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-strict-separation-of-a-point-from-a-closed-convex-set:begin -->
+
+### Step 4 focused supplier correction: thm-strict-separation-of-a-point-from-a-closed-convex-set
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-04.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6978d1bda2fe2c74f850f31cb25e374b6381d3b17ef8fce681b7baa2972a5bc7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-strict-separation-of-a-point-from-a-closed-convex-set.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-strict-separation-of-a-point-from-a-closed-convex-set:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-forward-over-reverse-hessian-vector-product:begin -->
+
+### Step 4 focused supplier correction: alg-forward-over-reverse-hessian-vector-product
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d34417a149872d49274bbce0510ef9b25f9172408734df74eb85b16e568799a7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-forward-over-reverse-hessian-vector-product.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-forward-over-reverse-hessian-vector-product:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-kl-for-probability-kernels:begin -->
+
+### Step 4 focused supplier correction: def-conditional-kl-for-probability-kernels
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 606c42110eaaacc546fb1598274a458ff704e3c6dbc2defb76049fd8529bf65e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-conditional-kl-for-probability-kernels.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-conditional-kl-for-probability-kernels:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-real-and-complex-inner-product-space:begin -->
+
+### Step 4 focused supplier correction: def-real-and-complex-inner-product-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4e3de4e4b8b0df9e22170d19b414b3094199fd8bdfbe349deacb4ba15eb37ba8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-real-and-complex-inner-product-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-real-and-complex-inner-product-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sobolev-space-wkp-and-its-norm:begin -->
+
+### Step 4 focused supplier correction: def-sobolev-space-wkp-and-its-norm
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: d86c2786362c177edea4cc403fa42d5bf268efde6b97cd27389f2acca9ca3fe8.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-sobolev-space-wkp-and-its-norm.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-sobolev-space-wkp-and-its-norm:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-total-variation-distance-for-probability-laws:begin -->
+
+### Step 4 focused supplier correction: def-total-variation-distance-for-probability-laws
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7f1a4f734922168a9557e6b88d418882d2add2106c74b0bb701ddbfee1b5ba28.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-total-variation-distance-for-probability-laws.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-total-variation-distance-for-probability-laws:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-distance-to-set-is-lipschitz:begin -->
+
+### Step 4 focused supplier correction: lem-distance-to-set-is-lipschitz
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 28053215d9f825062dee3e910005c6bb1d0cfca7c58070e2f96a086ef37a6f6a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-distance-to-set-is-lipschitz.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-distance-to-set-is-lipschitz:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-frobenius-matrix-norm:begin -->
+
+### Step 4 focused supplier correction: def-frobenius-matrix-norm
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-math-01.
+
+Declare the existing proved inner-product norm-axiom corollary and relocate Definition links, preserving the complete original mathematical assertion and rendered labels.
+
+Current content SHA256: a0de2be1a1cfd413fafc7da1f51f9bbe9043792b38b7fd1b02851813bb7e4c86.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-frobenius-matrix-norm.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-frobenius-matrix-norm:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison:begin -->
+
+### Step 4 focused supplier correction: thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7bbd4d4d90f33c1637c65559f60d33d7ae7f71d033a617a52b59e08533cf8a2a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-geometric-series:begin -->
+
+### Step 4 focused supplier correction: thm-geometric-series
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 5439205493d318d5e0cfb6221a512edf61ee3c4202e91fc4f712f5c0261accb0.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-geometric-series.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-geometric-series:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-normalized-complex-rangefinder-direct-spectral-expectation:begin -->
+
+### Step 4 focused supplier correction: lem-normalized-complex-rangefinder-direct-spectral-expectation
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 43e3f928ed6d220aead45ef912c45fb79de0dc59220be5d05c01d086edbc619f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-normalized-complex-rangefinder-direct-spectral-expectation.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-normalized-complex-rangefinder-direct-spectral-expectation:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-loss-function-and-risk:begin -->
+
+### Step 4 focused supplier correction: def-loss-function-and-risk
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 73fc72d903ae9dfff807adc0b6c7af66945197f8cd8088f96978e0f5505283ee.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-loss-function-and-risk.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-loss-function-and-risk:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-bayes-rule-minimizes-prior-risk:begin -->
+
+### Step 4 focused supplier correction: thm-bayes-rule-minimizes-prior-risk
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2073ca83346e2458df38bdc35a95f72f09927c9c96457f9130f6ed765a676113.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-bayes-rule-minimizes-prior-risk.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-bayes-rule-minimizes-prior-risk:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-first-fundamental-theorem-of-calculus-for-l-one:begin -->
+
+### Step 4 focused supplier correction: thm-first-fundamental-theorem-of-calculus-for-l-one
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c5d97e2b82654929a87831eb7ad015ed573b82c3de2f7879eb970a46427a830b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-first-fundamental-theorem-of-calculus-for-l-one.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-first-fundamental-theorem-of-calculus-for-l-one:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-identity-theorem-holomorphic-functions:begin -->
+
+### Step 4 focused supplier correction: thm-identity-theorem-holomorphic-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b0b82618db31cf518b1bc122fbdc346f72e4db9723afec9eb94e4d65edadd214.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-identity-theorem-holomorphic-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-identity-theorem-holomorphic-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-borel-sets-are-lebesgue-measurable:begin -->
+
+### Step 4 focused supplier correction: thm-borel-sets-are-lebesgue-measurable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: e432cbdddca0bd44ba5525e7e1747043ea03521c17020ad37ac9f52266d74946.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-borel-sets-are-lebesgue-measurable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-borel-sets-are-lebesgue-measurable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-measure-of-a-box-of-every-kind:begin -->
+
+### Step 4 focused supplier correction: thm-lebesgue-measure-of-a-box-of-every-kind
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3cfca4a969cbf8087af9d1c286563763b4ecafc3a739708263de43d77c66a602.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-lebesgue-measure-of-a-box-of-every-kind.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-measure-of-a-box-of-every-kind:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-psd-nystrom-order-and-exactness:begin -->
+
+### Step 4 focused supplier correction: thm-psd-nystrom-order-and-exactness
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0b724fd11b1cded8fef3b3aa7f5f7906f4805dd777c95ccd2a53e208d88e9e7e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-psd-nystrom-order-and-exactness.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-psd-nystrom-order-and-exactness:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ftc-second-part:begin -->
+
+### Step 4 focused supplier correction: thm-ftc-second-part
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 96ff49f04a62ea976b8625150329e890436730b4c8f485a07be2da74ee269133.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-ftc-second-part.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ftc-second-part:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-substitution:begin -->
+
+### Step 4 focused supplier correction: thm-substitution
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-05.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 389112ec3c7ab6e6f54cfc84059bcb21f3182208e80342643f75e18b2c4e506f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-substitution.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-substitution:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-gradient-descent:begin -->
+
+### Step 4 focused supplier correction: alg-gradient-descent
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 86b70b0ed4ece7f65234a9e6b3fd4d0fae1a5b2cc245f0220b254a689fd2b21a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-gradient-descent.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-gradient-descent:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-monotone-converges-iff-bounded:begin -->
+
+### Step 4 focused supplier correction: cor-monotone-converges-iff-bounded
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0e49ef7951a2095ec13480998d11933d5ca2c5709274d3b45d5122da3ede3c5e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-monotone-converges-iff-bounded.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-monotone-converges-iff-bounded:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nat-power:begin -->
+
+### Step 4 focused supplier correction: def-nat-power
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c6d5a7428e13fa06d70197f5fa7776354809fb9eb5d99332def2678acb052148.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-nat-power.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-nat-power:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-orthogonal-projection:begin -->
+
+### Step 4 focused supplier correction: def-orthogonal-projection
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9a9398f88910d5daadea317d8f7c1193a26f901d2e6309ca1a05f009e4dadca6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-orthogonal-projection.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-orthogonal-projection:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-translation-of-a-set-in-rn:begin -->
+
+### Step 4 focused supplier correction: def-translation-of-a-set-in-rn
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f3f6f63268786aec65fde51a7743814b3915b09cd81f567b70c3890a0f704bfa.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-translation-of-a-set-in-rn.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-translation-of-a-set-in-rn:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-binomial-theorem:begin -->
+
+### Step 4 focused supplier correction: thm-binomial-theorem
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c0484b2cc8e34ffe35787cd0059d64326dfe096aac8563d0dd9938b8dff91a81.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-binomial-theorem.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-binomial-theorem:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-integration-by-parts:begin -->
+
+### Step 4 focused supplier correction: thm-integration-by-parts
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6b6d8676bec0338dc882649f5a638e7442f70477eff01354417eccc5160b5815.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-integration-by-parts.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-integration-by-parts:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-outer-measure-and-measurability-are-translation-invariant:begin -->
+
+### Step 4 focused supplier correction: thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 2c469c5b7b0e6066128be9d373bab75e1b13e803745a866e05df1c8bdbf535de.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-lebesgue-outer-measure-and-measurability-are-translation-invariant.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-outer-measure-and-measurability-are-translation-invariant:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nonnegative-series-bounded-partial-sums:begin -->
+
+### Step 4 focused supplier correction: thm-nonnegative-series-bounded-partial-sums
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-06.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 57df27a9d53be9e36c8aef7c805f0fa0ea96a9f40c385627007d5fd8c739cfe6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-nonnegative-series-bounded-partial-sums.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nonnegative-series-bounded-partial-sums:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-zero-derivative-implies-constant:begin -->
+
+### Step 4 focused supplier correction: cor-zero-derivative-implies-constant
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 80e0ee610308b758988656d4734bc689aa972091220a6db9e3406c7ba1fbbe80.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/cor-zero-derivative-implies-constant.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-cor-zero-derivative-implies-constant:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-limsup-liminf:begin -->
+
+### Step 4 focused supplier correction: def-limsup-liminf
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ef24b6b7686a85f3678f86c8dc820414864429fcf1038af2eb6b4e3755784df7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-limsup-liminf.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-limsup-liminf:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-parametric-statistical-model:begin -->
+
+### Step 4 focused supplier correction: def-parametric-statistical-model
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 928a345f0fe7b0d211df9e4f844c3d7ca0b26cbf11db97effbd631f402ae5d96.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-parametric-statistical-model.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-parametric-statistical-model:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-variational-family-and-elbo:begin -->
+
+### Step 4 focused supplier correction: def-variational-family-and-elbo
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 126bcc714bde79fcc28f65ac856fcb736da0b2e6b480931d1a37e30bda091db7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-variational-family-and-elbo.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-variational-family-and-elbo:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-total-variation-half-l1-formula-on-a-countable-space:begin -->
+
+### Step 4 focused supplier correction: lem-total-variation-half-l1-formula-on-a-countable-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6bb0af820a735fcf15af50af31c3039c8733cdfbb4ac6621772bf03c806c727e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-total-variation-half-l1-formula-on-a-countable-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-total-variation-half-l1-formula-on-a-countable-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-continuous-ode-adjoint-gradient-formula:begin -->
+
+### Step 4 focused supplier correction: thm-continuous-ode-adjoint-gradient-formula
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c51f784a8e31fb2a59fe7947a715190ab23824217730b1d06f0689a0209b7d31.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-continuous-ode-adjoint-gradient-formula.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-continuous-ode-adjoint-gradient-formula:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ftc-first-part:begin -->
+
+### Step 4 focused supplier correction: thm-ftc-first-part
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 17eee8fbf0c16d66696f181465757bd37a497eca324774f9ec3460f6587194ae.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-ftc-first-part.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ftc-first-part:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-intermediate-value:begin -->
+
+### Step 4 focused supplier correction: thm-intermediate-value
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4b3aa3f0846adbb5f5a4cc1b63ab83c16f155cc970c83d28148edcf3698c9162.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-intermediate-value.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-intermediate-value:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets:begin -->
+
+### Step 4 focused supplier correction: thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7ad3a76b5ebb01ef722a160cd2f72008d3f9d30c059e0dee4552e2acc3665b5b.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nonnegative-weighted-sums-of-measures:begin -->
+
+### Step 4 focused supplier correction: thm-nonnegative-weighted-sums-of-measures
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 5e143705754abd4376a58f2a71f5b00994ca8c47d947495b20ca83e2966b0cc2.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-nonnegative-weighted-sums-of-measures.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-nonnegative-weighted-sums-of-measures:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-villes-inequality:begin -->
+
+### Step 4 focused supplier correction: thm-villes-inequality
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-07.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0be35532d9a6466b8348376b7622d62e2a9038520e4052c6701ea8d9665b97f5.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-villes-inequality.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-villes-inequality:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-characteristic-function-of-a-real-random-variable:begin -->
+
+### Step 4 focused supplier correction: def-characteristic-function-of-a-real-random-variable
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 327a398b350ade9a37b4889d9320ad456e5ef435be28b0f770aacc544c4ac4f7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-characteristic-function-of-a-real-random-variable.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-characteristic-function-of-a-real-random-variable:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-invertible-matrix-and-general-linear-group:begin -->
+
+### Step 4 focused supplier correction: def-invertible-matrix-and-general-linear-group
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 647b8c6091eee76ed28048f8f1db6ca4e2cc523778ff7f3b5610e1eaf9d218b7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-invertible-matrix-and-general-linear-group.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-invertible-matrix-and-general-linear-group:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-number-coding-of-finite-sequences:begin -->
+
+### Step 4 focused supplier correction: def-natural-number-coding-of-finite-sequences
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ca5cb91e443b561a51f4fb5feb30926e824a446bfcb195b227c82ffb7dcb0052.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-natural-number-coding-of-finite-sequences.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-natural-number-coding-of-finite-sequences:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-predictable-discrete-time-process:begin -->
+
+### Step 4 focused supplier correction: def-predictable-discrete-time-process
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 05f07a5cc851e8bad97f74b91e3d6319ee2cc1903f1d8a86d9d8590798c6ae8a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-predictable-discrete-time-process.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-predictable-discrete-time-process:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-second-countable-space:begin -->
+
+### Step 4 focused supplier correction: def-second-countable-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 56d4e23deb5e67aed921efde51966bae20495295bcf17c419faff9fbfd8d6925.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-second-countable-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-second-countable-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-vc-class-of-sets-and-index:begin -->
+
+### Step 4 focused supplier correction: def-vc-class-of-sets-and-index
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9c2ff0922bed0741e91e4eb3d8477325ca3a6d85deb49cb2ddb1ce29ef2bb9fe.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-vc-class-of-sets-and-index.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-vc-class-of-sets-and-index:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-triangle-inequality-finite:begin -->
+
+### Step 4 focused supplier correction: lem-triangle-inequality-finite
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 9e9e776db91b561d581b6d7f1b42f622eff67eacd1b459fd459f5f9601dab524.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-triangle-inequality-finite.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-triangle-inequality-finite:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-subgradient-and-subdifferential:begin -->
+
+### Step 4 focused supplier correction: def-subgradient-and-subdifferential
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ce4341785203f2f5e278aea7e627056f03c3ee8c1905adb1d0354764999fab03.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-subgradient-and-subdifferential.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-subgradient-and-subdifferential:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-differentiable-convex-functions-and-gradient-inequality:begin -->
+
+### Step 4 focused supplier correction: thm-differentiable-convex-functions-and-gradient-inequality
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 1754c9e4d3b27c00e03e101567e21dd5b75c84fa2691120211c81d93ee11972c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-differentiable-convex-functions-and-gradient-inequality.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-differentiable-convex-functions-and-gradient-inequality:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-irls-is-fisher-scoring-step:begin -->
+
+### Step 4 focused supplier correction: thm-irls-is-fisher-scoring-step
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 70de7a3b9d02d61829025be37553eb3c6833931cee88823f91c5ede2ede1acc4.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-irls-is-fisher-scoring-step.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-irls-is-fisher-scoring-step:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-linear-change-of-variables-for-lebesgue-measure:begin -->
+
+### Step 4 focused supplier correction: thm-linear-change-of-variables-for-lebesgue-measure
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 70c36e52bd4347df4870348569480d65e6d9a434b4220830b4b3c40e44af2f0d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-linear-change-of-variables-for-lebesgue-measure.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-linear-change-of-variables-for-lebesgue-measure:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-riesz-representation-for-hilbert-space:begin -->
+
+### Step 4 focused supplier correction: thm-riesz-representation-for-hilbert-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 0bbab49d25d4f6ab49298469343166c04a46681dfa815bd011b30efd49630aae.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-riesz-representation-for-hilbert-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-riesz-representation-for-hilbert-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-w-one-infinity-functions-have-lipschitz-representatives:begin -->
+
+### Step 4 focused supplier correction: thm-w-one-infinity-functions-have-lipschitz-representatives
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-08.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b4458e13b8f6c1068bbe143b796affc8df63f2672c8fb1ca49a53044a9009541.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-w-one-infinity-functions-have-lipschitz-representatives.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-w-one-infinity-functions-have-lipschitz-representatives:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-unadjusted-langevin-algorithm:begin -->
+
+### Step 4 focused supplier correction: alg-unadjusted-langevin-algorithm
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c7e3e12a1b6dfb66036333018f1f5439709a0796fab4d6d16ea6acb41e1a92e9.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/alg-unadjusted-langevin-algorithm.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-alg-unadjusted-langevin-algorithm:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-cholesky-factorisation-with-positive-diagonal:begin -->
+
+### Step 4 focused supplier correction: def-cholesky-factorisation-with-positive-diagonal
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 6c6ab5268ed662915457f88b5bb7a2e6a70340829ed72b6d5c233e8486dfa363.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-cholesky-factorisation-with-positive-diagonal.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-cholesky-factorisation-with-positive-diagonal:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-equivariant-map-of-group-actions:begin -->
+
+### Step 4 focused supplier correction: def-equivariant-map-of-group-actions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: eae5ced29b63226ab1cba3a6df0dafb98f5149c487f599bdfc0ebb89aefddc1c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-equivariant-map-of-group-actions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-equivariant-map-of-group-actions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-kullback-leibler-divergence:begin -->
+
+### Step 4 focused supplier correction: def-finite-kullback-leibler-divergence
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 86219c7eb60eb6e432938c53921461aaedbc00fb17e1f2c300d0f15f705984cf.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-finite-kullback-leibler-divergence.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-kullback-leibler-divergence:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-martingale-difference-sequence:begin -->
+
+### Step 4 focused supplier correction: def-martingale-difference-sequence
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 609567202a71af1fc4e3192ff747b03c7a4a8f3d340a5dfbd3dacc1a7d7894ee.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-martingale-difference-sequence.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-martingale-difference-sequence:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-semicontinuity-on-euclidean-subsets:begin -->
+
+### Step 4 focused supplier correction: def-semicontinuity-on-euclidean-subsets
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 62c2cb2db38ef996d3072098096a8f13e97b23041a3d5683bf877582d80bd19c.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-semicontinuity-on-euclidean-subsets.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-semicontinuity-on-euclidean-subsets:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-tube-lemma-for-a-compact-metric-factor:begin -->
+
+### Step 4 focused supplier correction: lem-tube-lemma-for-a-compact-metric-factor
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 49aef2ba8a97825c045f6e763c1316f01ba059353a5c74fee3ec81ae6bd47301.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-tube-lemma-for-a-compact-metric-factor.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-tube-lemma-for-a-compact-metric-factor:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cardinality-of-a-set-of-functions:begin -->
+
+### Step 4 focused supplier correction: thm-cardinality-of-a-set-of-functions
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 3b60f41f1eb595e81507c8e08720dd2de11249f713422f0e8b317366827dceec.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-cardinality-of-a-set-of-functions.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cardinality-of-a-set-of-functions:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-discrete-adjoint-gradient-recursion:begin -->
+
+### Step 4 focused supplier correction: thm-discrete-adjoint-gradient-recursion
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 618e7e0cfc442ed41e1178f35ac0f16a56744f959f9d29bca6a8d603fbe0d847.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-discrete-adjoint-gradient-recursion.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-discrete-adjoint-gradient-recursion:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-integral-process-has-a-continuous-martingale-version:begin -->
+
+### Step 4 focused supplier correction: thm-ito-integral-process-has-a-continuous-martingale-version
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: a64a111c084608bbbae8fce19216da23357431ed558f932cdfa66861ce1a03a6.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-ito-integral-process-has-a-continuous-martingale-version.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-integral-process-has-a-continuous-martingale-version:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-formula-one-dimensional:begin -->
+
+### Step 4 focused supplier correction: thm-ito-formula-one-dimensional
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: c7f7ccf031a6cf6cecef8e0b683a6fe3bc9cf614d5a69bd43e1e5aaa3a381df7.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-ito-formula-one-dimensional.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-ito-formula-one-dimensional:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-mcdiarmid-bounded-differences:begin -->
+
+### Step 4 focused supplier correction: thm-mcdiarmid-bounded-differences
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-09.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: f520ff81d3d2c70c0cd26d1c76298cd84026816348f79c64b0b0b9ab9cbd1b77.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-mcdiarmid-bounded-differences.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-mcdiarmid-bounded-differences:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-adjoint-of-a-linear-map-between-inner-product-spaces:begin -->
+
+### Step 4 focused supplier correction: def-adjoint-of-a-linear-map-between-inner-product-spaces
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: ec1c34da826f43c025547580ec69b2fa6e4dd4c163820106907a28f3259c55e2.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-adjoint-of-a-linear-map-between-inner-product-spaces.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-adjoint-of-a-linear-map-between-inner-product-spaces:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-real-random-variable-and-distribution:begin -->
+
+### Step 4 focused supplier correction: def-finite-real-random-variable-and-distribution
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 4a1feea85738b7ff7f408d6c10ca576dd17799acd0a652bf3231dc04b7d0efab.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-finite-real-random-variable-and-distribution.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-finite-real-random-variable-and-distribution:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-hilbert-space:begin -->
+
+### Step 4 focused supplier correction: def-hilbert-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 41e8052db395399a29abda04919be7fa36fb2f5238957371ca7202a74afd058d.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-hilbert-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-hilbert-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-separable-space:begin -->
+
+### Step 4 focused supplier correction: def-separable-space
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: b40a1dadf21438b80d0a7179069b8ad5cef1debccf65f69d21b270f2b2362b99.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/def-separable-space.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-def-separable-space:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-a-double-sum-over-finite-index-sets-may-be-interchanged:begin -->
+
+### Step 4 focused supplier correction: lem-a-double-sum-over-finite-index-sets-may-be-interchanged
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 21200ffbf9620f94545bb70efd442729f6ea261dbc371f71771bd123b47f0d0a.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/lem-a-double-sum-over-finite-index-sets-may-be-interchanged.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-lem-a-double-sum-over-finite-index-sets-may-be-interchanged:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null:begin -->
+
+### Step 4 focused supplier correction: prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: cd50d945b70681e817f72adbe85054733a80d62f28c2451d874b6a36783cde22.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-condensation:begin -->
+
+### Step 4 focused supplier correction: thm-cauchy-condensation
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 7181480d7023e6728ade729fb28d9dd8673f45332436ed27c955584cc4ec7e6e.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-cauchy-condensation.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-cauchy-condensation:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-elbo-kl-decomposition:begin -->
+
+### Step 4 focused supplier correction: thm-elbo-kl-decomposition
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-format-10.
+
+Move hyperlinks out of the complete mathematical Statement or Definition into immediately following references, preserving exact renderer display labels, all hypotheses, conclusions, proof text, dependencies and publication status.
+
+Current content SHA256: 789bc26634293ced4468c57fc0d07cf69bed04c45619ed53e435e5e28220d37f.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-elbo-kl-decomposition.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-elbo-kl-decomposition:end -->
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-c1-dependence-of-solutions-on-initial-data:begin -->
+
+### Step 4 focused supplier correction: thm-c1-dependence-of-solutions-on-initial-data
+
+Run: machine-learning-all-101-2026-10-19; original ownership: owner-step4-math-02.
+
+Replace the invalid single-cylinder/secant argument by a compact tube, two-sided first-exit estimates and uniform variational remainder/continuity estimates, preserving the full original Statement and common interval.
+
+Current content SHA256: 81b14dfdf4e674b98dc867a9e38932c109bf77827e243236d2673a2417675819.
+
+Exact independently approved candidate and current local checks: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/review/review.json; research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/checks/thm-c1-dependence-of-solutions-on-initial-data.json. No new native review coverage or publication is claimed. Original mathematical interface meaning is preserved.
+
+<!-- local-published-repair:machine-learning-all-101-2026-10-19-step4-thm-c1-dependence-of-solutions-on-initial-data:end -->
+

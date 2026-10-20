@@ -1,0 +1,17 @@
+import{readFileSync,writeFileSync,openSync,closeSync,readdirSync}from'node:fs';
+import{createHash}from'node:crypto';import{spawnSync}from'node:child_process';import assert from'node:assert/strict';
+import{runGate}from'/home/lazyinspirit/Projects/prestige-math-library/tools/autopilot/src/gates.mts';
+import{frontierGateBattery}from'/home/lazyinspirit/Projects/prestige-math-library/tools/step5-frontier-gate.mjs';
+const repo=process.cwd(),run='machine-learning-all-101-2026-10-19';
+const out=`${repo}/research/${run}-owner-step5-gate-liveness-output-review-r1`;
+const tmp=JSON.parse(readFileSync(`${out}/summary.json`,'utf8')).root;
+const argv=[process.execPath,`${tmp}/fixed/tools/defect-ledger.mjs`,'check','--run',run,'--adjudications',`research/${run}-judge-adjudications.jsonl`,'--reader-decisions',`research/${run}-step5-alert-decisions.jsonl`,'--closure',`research/${run}-judge-closure.json`];
+const [gate]=frontierGateBattery({repo,run},[{id:'defect-ledger',argv,liveness:{pattern:'(\\d+) defect row\\(s\\) checked',min:1,unit:'defect rows'}}]);
+const proposed=await runGate(gate,{cwd:repo});assert.equal(proposed.ok,true);assert.equal(proposed.rawOutput,proposed.output);assert.equal(proposed.code,0);writeFileSync(`${out}/actual-proposed.json`,JSON.stringify(proposed));
+const baselineGate={...gate,argv:gate.argv.map((arg:string)=>arg===argv[1]?`${tmp}/baseline/tools/defect-ledger.mjs`:arg)};
+const baseline=await runGate(baselineGate,{cwd:repo});assert.equal(baseline.ok,false);assert.equal(baseline.code,0);assert.match(baseline.why,/liveness unreadable/);writeFileSync(`${out}/actual-baseline.json`,JSON.stringify(baseline));
+const stdout=openSync(`${out}/actual-baseline-file.stdout`,'w'),stderr=openSync(`${out}/actual-baseline-file.stderr`,'w');const [cmd,...args]=baselineGate.argv;const result=spawnSync(cmd,args,{cwd:repo,stdio:['ignore',stdout,stderr]});closeSync(stdout);closeSync(stderr);assert.equal(result.status,0);assert.equal(readFileSync(`${out}/actual-baseline-file.stderr`,'utf8'),'');assert.equal(readFileSync(`${out}/actual-baseline-file.stdout`,'utf8'),proposed.output);
+const ledger=readFileSync('research/defect-ledger.jsonl','utf8').split('\n').filter(Boolean).map(JSON.parse).filter((row:any)=>row.run===run);
+const frontier=new Set(JSON.parse(readFileSync(`research/${run}-step5-v2/frontier.json`,'utf8')).ids);
+const known=new Set(readdirSync('items').filter((name:string)=>name.endsWith('.md')).map((name:string)=>name.slice(0,-3)));const outside=ledger.filter((row:any)=>!frontier.has(row.subject)&&known.has(row.subject));const prefix='Step 5 outside findings excluded, not passed: ';const excluded=JSON.parse(proposed.output.split('\n').find((line:string)=>line.startsWith(prefix)).slice(prefix.length));assert.ok(JSON.stringify(excluded)===JSON.stringify(outside.map((evidence:any)=>({kind:'ledger-row',evidence}))), 'exact excluded rows match');assert.equal(proposed.checked,ledger.length-outside.length);
+const summary={run,baseline:{ok:baseline.ok,code:baseline.code,bytes:Buffer.byteLength(baseline.output),why:baseline.why},proposed:{ok:proposed.ok,code:proposed.code,checked:proposed.checked,bytes:Buffer.byteLength(proposed.output),sha256:createHash('sha256').update(proposed.output).digest('hex')},actualRows:ledger.length,outsideRows:outside.length,regularFileBaselineEqualsProposed:true,completeExcludedRowsEqualActualLedger:true};writeFileSync(`${out}/actual-summary.json`,JSON.stringify(summary,null,2));console.log(JSON.stringify(summary));

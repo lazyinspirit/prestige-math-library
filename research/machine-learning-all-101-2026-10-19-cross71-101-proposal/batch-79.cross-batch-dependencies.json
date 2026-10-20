@@ -1,0 +1,48 @@
+[
+  {
+    "kind": "page",
+    "consumer": "linear-contextual-bandits-and-linucb",
+    "supplier": "ml02-linear-sparse-models",
+    "status": "open",
+    "evidence": "This page requirement is retained from the dispatched plan-spec row. I inspected the current draft page and its actual def-linear-regression-objectives carrier. That definition supplies fixed-design least-squares and ridge objective vocabulary only; the detailed ML-71 design calls for linear-model vocabulary only. The contextual feature map, conditional noise law, and sample-sum normalization are stated locally, and no claim uses an unsupported theorem from this page. This records the current interface, not owner acceptance.\nUnresolved native metadata check, not independently discharged by this normalization: The detailed prose labels the vocabulary prerequisite ML-12, while the dispatched page ID is ml02-linear-sparse-models. No ml12 page is named in this run; owner reconciliation of the label is recorded in batch notes.",
+    "required_hypotheses": "Fixed design matrix X, response vector y, finite-dimensional coefficient vector beta, and positive ridge parameter. No contextual action set, filtration, or conditional MGF claim is supplied.",
+    "affected_claims": [
+      "def-linear-contextual-bandit-model: local contextual feature-map and reward-model formulation",
+      "def-linear-contextual-bandit-model: sample-sum ridge normalization"
+    ],
+    "local_route": "Use the source item only for fixed-design least-squares/ridge vocabulary. State the contextual action-feature map, predictable timing, conditional 1-sub-Gaussian noise, and V_t = lambda I + sum A_s A_s^T locally. Use the published Tikhonov definition and unique-minimizer theorem for estimator well-definedness.",
+    "unresolved_check": "The detailed prose labels the vocabulary prerequisite ML-12, while the dispatched page ID is ml02-linear-sparse-models. No ml12 page is named in this run; owner reconciliation of the label is recorded in batch notes."
+  },
+  {
+    "kind": "page",
+    "consumer": "linear-contextual-bandits-and-linucb",
+    "supplier": "online-decision-protocols",
+    "status": "verified",
+    "evidence": "The page is an in-run prerequisite in batch 73 and its current draft frontmatter and item carriers were inspected. The actual def-online-decision-protocol Definition states that the learner chooses using prior history before current feedback is received. The local model further specifies that context and the selected feature are available before the reward noise. Draft status is retained; this is interface verification, not acceptance.",
+    "required_hypotheses": "Positive finite horizon, nonempty action set, prior history available before the current choice, and current-round reward/feedback revealed after the choice.",
+    "affected_claims": [
+      "def-linear-contextual-bandit-model: context and action are observed before eta_t",
+      "alg-linucb: predictable selection precedes reward observation"
+    ],
+    "local_route": "The model cites the actual def-online-decision-protocol item and defines the filtration, feature map, MGF condition, and reward equation locally. The item-level edge is declared only from def-linear-contextual-bandit-model to def-online-decision-protocol."
+  },
+  {
+    "kind": "item",
+    "consumer": "def-linear-contextual-bandit-model",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "The actual current draft Definition was read. Relevant excerpt: the learner chooses x_t using only h_{t-1} before the environment's current loss and receives feedback afterward. The local reward model specializes this timing to an observed context/action feature followed by X_t = <theta*, A_t> + eta_t. This records a readable interface and does not assert supplier acceptance.",
+    "required_hypotheses": "The learner's choice is based on prior history and available private randomization; current-round loss/reward feedback follows the choice.",
+    "affected_claims": [
+      "def-linear-contextual-bandit-model: A_t is selected before eta_t",
+      "alg-linucb: action selection is based only on current pre-reward information"
+    ],
+    "supplier_excerpts": [
+      {
+        "item": "def-online-decision-protocol",
+        "section": "Definition",
+        "excerpt": "Before round $t$, the learner has the history $h_{t-1}$ consisting of its earlier choices and all feedback and loss information revealed in earlier rounds. It chooses $x_t\\in K$ using only $h_{t-1}$ and any learner-private randomization available by that time."
+      }
+    ]
+  }
+]

@@ -1,0 +1,405 @@
+{
+  "native_gate": false,
+  "whole_registry_selftest": false,
+  "bindings": [
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-policy-cpo/your-proposal/candidates/tools/finite-smoke-policy-cpo.mjs",
+      "sha256": "0609355624b5243c08f5213f3cd3518f6df1b3b2b73b63dd30d6e666f442528b"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-verifier-group/your-proposal/candidates/finite-smoke-verifier-group-ml.mjs",
+      "sha256": "f55c23fe1d413468818883ed0f80744fc9661b37386359933e5fd4297d48d184"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-deep-wasserstein/your-proposal/proposed/tools/finite-smoke-deep-wasserstein-ml.mjs",
+      "sha256": "de925dd2e96d47ced643c9b89756fe99c795212c5175299b99d7774fa5cfe8c3"
+    }
+  ],
+  "results": [
+    {
+      "group": "policy-cpo",
+      "id": "lem-policy-score-has-zero-conditional-mean",
+      "check": "ml101-policy-score-finite-support",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "15 positive normalized three-action histories: independent log finite differences have zero weighted mean; stopped-history score is zero; no infinite-path claim checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "thm-policy-gradient-theorem",
+      "check": "ml101-policy-gradient-one-step",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "15 bounded one-decision models: enumerate reward/score directions and independently differentiate the return; no general differentiation or convergence claim checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "check": "ml101-policy-baseline-zero-mean",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "20 bounded action/baseline enumerations preserve the mean; an adverse baseline increases variance, so no universal variance claim is inferred"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-actor-critic-bootstrap-can-bias-policy-update",
+      "check": "ml101-actor-critic-bootstrap-bias",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "two enumerated terminal paths: expected first increment=0.1250000000164314, independently differentiated zero-return objective=0; admissible first updates and zero second updates checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-reinforce-one-step-bernoulli-mdp",
+      "check": "ml101-reinforce-bernoulli",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "15 bounded one-decision models: enumerate reward/score directions and independently differentiate the return; no general differentiation or convergence claim checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-action-independent-baseline-eliminates-variance",
+      "check": "ml101-baseline-eliminates-variance",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "enumerated directions [0,2.0000000002629026] and [1.0000000001342269,1.0000000001314513] have variances 1.0000000002629026 and 1.925929944387236e-24; this baseline/model only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "cex-policy-gradient-without-start-time-discount",
+      "check": "ml101-policy-start-time-discount-witness",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "five bounded two-path models: direct return differentiation gives 1/2; omitting gamma^t gives 1 and retaining it gives 1/2; finite witness only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+      "check": "ml101-cpo-discounted-cost-pathwise",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "all 128 seven-action paths give violation numerator 5217031/10000000>1/2; 24 discounted expectations plus bounded tail enclose 1/9 below 1/8; no general safety inference"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-empirical-cost-satisfaction-can-miss-population-violation",
+      "check": "ml101-cpo-safe-sample",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "all 1024 independent rollout outcomes: true cost 0.1>0.05, all-safe empirical mean zero with exact mass 3486784401/10000000000; finite sample witness only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "check": "ml101-cpo-exact-versus-sample",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "direct two-action costs/advantages and KL=0.42867188234223164: exact cost rejects 1/5, while the conditional zero-estimate safe row (mass99/100) passes sample tests if proposed; no QP-output claim"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "policy-cpo",
+      "id": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+      "check": "ml101-cpo-old-residual-witness",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "enumerated one-state joint reward-transition law: return difference0, malformed lower/upper bounds1, corrected residual difference0; explicit false-claim witness only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "alg-budgeted-verifier-guided-generation",
+      "check": "ml101-verifier-one-draw",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "2 one-draw outcomes: accepted c mass1/4, failure mass3/4; each stops after one draw"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "thm-independent-generation-success-and-verifier-error",
+      "check": "ml101-verifier-independent-and-union",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "4 independent response pairs give success7/16; 3 enumerated dependent false-acceptance couplings with marginals1/4 satisfy bound1/2"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "lem-finite-response-likelihood-ratio-change-of-measure",
+      "check": "ml101-finite-response-ratio-cancellation",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "2 response entries: computed ratios2/3,4/3, both f-weighted sums0 and reweighted mass1"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "alg-finite-group-relative-policy-update",
+      "check": "ml101-group-equal-rewards",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "G=3 rewards(7,7,7): mean7,sd0,advantages0,clipped terms0; candidate(3/4,1/4) vs reference(1/2,1/2) retains a strictly negative beta=1/2 KL penalty"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "lem-finite-response-score-gradient-identities",
+      "check": "ml101-bernoulli-score-identities",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "theta1/4 two-response policy: independent central differences of log masses and expected reward give scores(4,-4/3), score mean0 and reward-gradient1 within1e-7"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "thm-group-centered-score-estimator-factor",
+      "check": "ml101-group-centered-factor",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "4 independently weighted Bernoulli G=2 groups: raw mean1, same-group-centered mean1/2, leave-one-out mean1 within1e-7"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "ex-equal-group-rewards-zero-advantages",
+      "check": "ml101-group-equal-rewards",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "G=3 rewards(7,7,7): mean7,sd0,advantages0,clipped terms0; candidate(3/4,1/4) vs reference(1/2,1/2) retains a strictly negative beta=1/2 KL penalty"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "ex-perfect-and-false-positive-verifiers",
+      "check": "ml101-perfect-and-false-positive-verifiers",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "4 response pairs: perfect success15/16; accept-all always stops at draw1 with false mass1/4, below union bound1/2"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "ex-repeated-dependent-copies-no-sampling-gain",
+      "check": "ml101-dependent-response-copies",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "2 dependent copied outcomes give union1/2,joint1/2; separate 4-outcome independent product gives union3/4"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "verifier-group",
+      "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+      "check": "ml101-pass-and-selected-accuracy",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "9 product-law response pairs: pass1=1/4,oracle pass2=7/16,accepted55/64,correct-return22/64,conditional selected accuracy2/5"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "lem-du-activation-normalizer-finite-positive",
+      "check": "ml101-du-softplus-normalizer",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "softplus squared Gaussian integral on [-10,10]: 0.9212459088592962, independent refinement 0.9212459088592938; positive interval lower fixture 0.08606198841265149, affine moment upper bound 2.960906027836403; finite fixture only, no general activation theorem"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "lem-du-conditional-loss-contraction-under-gram-control",
+      "check": "ml101-du-gram-loss-contraction",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "500 direct matrix/remainder updates including 20 zero-residual fixtures; both quadratic losses zero for r=0, contraction checked on the finite grid only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "lem-du-initial-output-gaussian-concentration",
+      "check": "ml101-du-zero-feature-output",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "243 zero-matrix image/Gram/threshold evaluations across dimensions1..3; every sampled output is zero and inside the zero threshold, no nonzero Gaussian tail theorem checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-du-relu-outside-analytic-activation-class",
+      "check": "ml101-du-relu-one-sided-derivatives",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "24 dyadic one-sided quotient pairs computed from max(0,t): left0/right1; only the stated kink fixture checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-du-residual-skip-at-every-layer",
+      "check": "ml101-du-depth-three-residual-skips",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "scalar softplus H=3 recurrence evaluated: states 1.0148585050755001,1.0915203699003784,1.259293656539584; explicit unrolling and subtracting each nonlinear branch recover both nonzero identity skips"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-du-interpolation-does-not-imply-test-fit",
+      "check": "ml101-du-interpolation-test-counterexample",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "direct predictor evaluation: training losses 0,0, test predictions 0,1; the one-point counterexample only"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "thm-wasserstein-two-metric-topology",
+      "check": "ml101-w2-tight-tail-dirac-witness",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "5 forced point-target joint tables, including (3/4)delta0+(1/4)delta2, have total mass1 and computed transport cost1; no tightness/narrow-limit theorem proved"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "lem-smooth-unit-mass-compact-bump-on-euclidean-space",
+      "check": "ml101-bump-one-dimensional-mass",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "1D explicit exp bump: Simpson normalizer 0.133086120844994; independent midpoint mass 1.0000000000000036, 7 positive interior and 6 zero boundary/exterior samples; no all-orders smoothness claim"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "lem-smooth-unit-mass-compact-bump-on-euclidean-space",
+      "check": "ml101-bump-two-dimensional-mass",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "2D explicit product bump: direct 65536-cell integral 1, 4 positive interior and 5 zero boundary/exterior fixtures; no general Tonelli/smoothness proof"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-wasserstein-translation-of-a-dirac-mass",
+      "check": "ml101-w2-translated-dirac-action",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "15 point-pair coupling costs give speed3; action independently accumulated over 5 path increments is 18; only the finite translated path fixture checked"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-isotropic-gaussian-wasserstein-geodesic",
+      "check": "ml101-w2-isotropic-gaussian-geodesic",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "Gaussian shared-coordinate quadrature: endpoint cost 7.999999999999986, midpoint mean 0.9999999999999981, scale 1.9999999999999987; 25 three-atom subsegment models enumerate all6 permutation couplings and have the expected speed; no general Gaussian optimality proof"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-separated-and-nonseparated-initialization",
+      "check": "ml101-meanfield-radial-separation",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "64 straight sphere-to-sphere paths have computed unit-circle intersections; the exhibited positive radial segment has minimum norm 0.5 and avoids the origin; no assertion about all continuous paths or flow limits"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-mixture-convexity-not-displacement-convex",
+      "check": "ml101-meanfield-sine-dirac-geodesic",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "Dirac path energies 0,1,1.4997597826618576e-32 give endpoint0/midpoint1; 80 direct at-most-two-atom mixture fixtures satisfy convexity, without claiming a general measure proof"
+      },
+      "invalid_probes_rejected": 5
+    },
+    {
+      "group": "deep-wasserstein",
+      "id": "ex-quadratic-feature-energy-flow",
+      "check": "ml101-meanfield-quadratic-particle-flow",
+      "assertion_present": true,
+      "positive": {
+        "ok": true,
+        "summary": "7 empirical-energy finite differences check weighted particle gradients; RK4 and refinement at 5 times match exp(-t), its one-atom pushforward and Dirac transport scaling; no general PDE uniqueness or particle-limit claim"
+      },
+      "invalid_probes_rejected": 5
+    }
+  ]
+}

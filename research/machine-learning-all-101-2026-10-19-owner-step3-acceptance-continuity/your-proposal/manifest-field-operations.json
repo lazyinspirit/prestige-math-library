@@ -1,0 +1,949 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "proposal_only": true,
+  "operations": [
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-1.pages.json",
+      "batch": 1,
+      "id": "ex-gaussian-point-mass-endpoint-coupling-bound",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "For $a\\in\\mathbb R^d$, $\\delta_a$ denotes the probability measure concentrated at $a$. For $q>0$, write $\\phi_q(z)=(2\\pi q)^{-d/2}\\exp(-|z|^2/(2q))$.\n\nFix an integer $d\\ge1$, a horizon $T>0$, $0<\\epsilon<T$, $a\\in\\mathbb R^d$, and $c>0$. Take $\\mu=\\delta_a$ and constant scalar noise $g(t)=c$, so $v(\\epsilon)=c^2\\epsilon$. Let $\\mu_\\epsilon$ be the Gaussian-smoothed law with density $\\phi_{c^2\\epsilon}(x-a)$. For Borel probability laws with finite second moments, define $W_2$ as the square root of the infimum of the quadratic cost over all Borel couplings. Then\n\n$$W_2(\\mu_\\epsilon,\\delta_a)=\\sqrt{d}\\,c\\sqrt{\\epsilon}.$$\n\nThe coupling bound from the endpoint theorem is therefore an equality in this case.",
+      "source": {
+        "path": "items/ex-gaussian-point-mass-endpoint-coupling-bound.md",
+        "sha256": "363a69ac98e705354e8b2e718a0030c648d7b8b882bd12579fba299fd1491a72"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "7cc593a7ce3ea5a50f659f623973a13d68d25e3dcb172d216d3beac1afceaf28"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-4.pages.json",
+      "batch": 4,
+      "id": "lem-vc-loss-rademacher-bound",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space and let $H$ be a nonempty class of measurable binary functions on $\\mathcal X$ with finite VC dimension $d$. Put $\\mathcal Z=\\mathcal X\\times\\{0,1\\}$ with its product sigma-algebra and $G_H=\\{g_h:h\\in H\\}$, where $g_h(x,y)=\\mathbf1\\{h(x)\\ne y\\}$. For any integer $m\\ge1$ and any fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs and define\n\n$$\\widehat{\\mathfrak R}_S(G_H):=\\mathbb E_\\sigma\\sup_{h\\in H}\\frac1m\\sum_{i=1}^m\\sigma_i g_h(z_i).$$\n\nSet $K_0:=3e^2/(e-1)$, $K:=4K_0$, $A:=12eK+2$, and\n\n$$C_{\\rm VC}:=3\\sqrt{8A}\\left(\\sqrt{\\log A}+2\\sqrt{\\log 2}\\right).$$\n\nThen, for every such finite sample,\n\n$$\\widehat{\\mathfrak R}_S(G_H)\\le C_{\\rm VC}\\sqrt{\\frac{d+1}{m}}.$$\n\nNo countability or Axiom of Choice premise is used; the supremum over classifiers reduces to the finite set of loss traces on $S$.",
+      "source": {
+        "path": "items/lem-vc-loss-rademacher-bound.md",
+        "sha256": "64e78e6034cc88f387e0a095e96f49192e2fe4ab4844454acb9d869b35d33c77"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "aa2b4303cd0459bf8be9e3bf211df93d469bc1de46d26f92e6847b329c7f5e0f"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-23.pages.json",
+      "batch": 23,
+      "id": "alg-poisson-nmf-multiplicative-updates",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Input an admissible count matrix $X=(x_{ij})\\in\\mathbb N_0^{n\\times p}$ with no all-zero row or column, an inner dimension $r\\ge1$, a finite sweep count $T\\in\\mathbb N_0$, and strictly positive initial factors $W^{(0)}\\in(0,\\infty)^{n\\times r}$ and $H^{(0)}\\in(0,\\infty)^{r\\times p}$. For each $t=0,\\ldots,T-1$, perform one complete sweep in the stated order:\n\n1. Set $\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t)}H_{kj}^{(t)}$.\n2. For every $i,k$, set\n\n   $$W_{ik}^{(t+1)}=W_{ik}^{(t)}\\frac{\\sum_{j=1}^p H_{kj}^{(t)}x_{ij}/\\lambda_{ij}^{(t)}}{\\sum_{j=1}^p H_{kj}^{(t)}}.$$\n\n3. Recompute $\\widetilde\\lambda_{ij}^{(t)}=\\sum_{k=1}^rW_{ik}^{(t+1)}H_{kj}^{(t)}$.\n4. For every $k,j$, set\n\n   $$H_{kj}^{(t+1)}=H_{kj}^{(t)}\\frac{\\sum_{i=1}^n W_{ik}^{(t+1)}x_{ij}/\\widetilde\\lambda_{ij}^{(t)}}{\\sum_{i=1}^n W_{ik}^{(t+1)}}.$$\n\nThe first factor block uses the current $H^{(t)}$; the second uses the new $W^{(t+1)}$ and the recomputed intermediate rates.\n\nReturn $W^{(T)},H^{(T)}$. The local well-definedness result proves that every denominator and rate in these finite sweeps is positive under the stated assumptions. This algorithm makes no likelihood-monotonicity, convergence, stationary-point, or global-optimality claim.",
+      "source": {
+        "path": "items/alg-poisson-nmf-multiplicative-updates.md",
+        "sha256": "9d2e9d930f0a69f9ecbfc369aa0d5c2741a3a305b9c44ca2636881243c445be0"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "d3f1a828f3ac763d5ed1cb11d9ebbba18a761b5998da04df191665d23313b239"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "def-mahalanobis-pseudometric",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Fix an integer $d\\ge1$. A real matrix $M\\in\\mathbb R^{d\\times d}$ is positive semidefinite, written $M\\succeq0$, when it is symmetric and $v^{T}Mv\\ge0$ for every $v\\in\\mathbb R^d$. For $x,x'\\in\\mathbb R^d$, define the squared Mahalanobis distance and its nonnegative square root by\n\n$$q_M(x,x') := (x-x')^{T}M(x-x'),\\qquad d_M(x,x') := \\sqrt{q_M(x,x')}.$$\n\nThe square root is defined because $q_M(x,x')\\ge0$. A pseudometric is a nonnegative symmetric function that vanishes on the diagonal and satisfies the triangle inequality, but may assign distance zero to distinct points. The function $d_M$ is called the Mahalanobis pseudometric associated with $M$; $q_M=d_M^2$ is its squared-distance form. The theorem on this page proves the pseudometric properties and the equivalent linear-feature representation.",
+      "source": {
+        "path": "items/def-mahalanobis-pseudometric.md",
+        "sha256": "8105b0d33258f14b94f3d9b3a246c0b5a27c6146a9417864fb7ea72cef1351b2"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "lem-positive-semidefinite-cone-is-frobenius-closed",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "For an integer $d\\ge1$, let $\\mathbb S^d$ be the real symmetric $d\\times d$ matrices and let $\\mathbb S_+^d=\\{M\\in\\mathbb S^d:v^TMv\\ge0\\text{ for every }v\\in\\mathbb R^d\\}$. With the Frobenius norm $\\|A\\|_F=(\\sum_{i,j}A_{ij}^2)^{1/2}$, the set $\\mathbb S_+^d$ is closed in $\\mathbb S^d$.",
+      "source": {
+        "path": "items/lem-positive-semidefinite-cone-is-frobenius-closed.md",
+        "sha256": "8aa9fe03edc606c742bc527e481f2bd8f4a50e8c6ed2506b34447eb275dc8834"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "lem-symmetric-matrix-frobenius-isometry",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge1$, let $\\mathbb S^d$ be the real vector space of symmetric $d\\times d$ matrices, and set $m=d(d+1)/2$. Equip $\\mathbb S^d$ with the Frobenius inner product $\\langle A,B\\rangle_F:=\\sum_{i=1}^{d}\\sum_{j=1}^{d}A_{ij}B_{ij}$ and its induced norm. Define $\\operatorname{svec}:\\mathbb S^d\\to\\mathbb R^m$ by listing $A_{11},\\ldots,A_{dd}$ first, followed by $\\sqrt2 A_{ij}$ for $1\\le i<j\\le d$ in lexicographic order. Then $\\operatorname{svec}$ is a linear bijection and preserves inner products and norms; in particular, $\\|\\operatorname{svec}(A)-\\operatorname{svec}(B)\\|_2=\\|A-B\\|_F$ for all $A,B\\in\\mathbb S^d$.",
+      "source": {
+        "path": "items/lem-symmetric-matrix-frobenius-isometry.md",
+        "sha256": "ef4e5a54cc6388df9d3f31195d49250d04150ade76df7a44b70d51b2143eeb5e"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge1$ and let $A\\in\\mathbb R^{d\\times d}$ be symmetric. There exists an orthogonal eigendecomposition $A=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)U^T$. For any such decomposition define $\\lambda_i^+=\\max\\{\\lambda_i,0\\}$ and $A_+=U\\operatorname{diag}(\\lambda_1^+,\\ldots,\\lambda_d^+)U^T$. Let $\\mathbb S_+^d$ be the set of real symmetric matrices $Z$ with $v^TZv\\ge0$ for every $v\\in\\mathbb R^d$, and let $\\|B\\|_F=(\\sum_{i,j}B_{ij}^2)^{1/2}$. Then $A_+$ is the unique minimizer of $\\|A-Z\\|_F$ over $Z\\in\\mathbb S_+^d$, so its value is independent of the chosen orthogonal eigendecomposition.",
+      "source": {
+        "path": "items/thm-frobenius-projection-onto-psd-cone-is-spectral-clipping.md",
+        "sha256": "0b24970a7afa20c62e979801e9acd779cc2778b4f5c20540ad678a8fa3290262"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "thm-mahalanobis-distance-is-pseudometric",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge1$ and let $M\\in\\mathbb R^{d\\times d}$ be real symmetric and positive semidefinite, meaning $v^TMv\\ge0$ for every $v\\in\\mathbb R^d$. Define $q_M(x,x')=(x-x')^TM(x-x')$ and $d_M(x,x')=\\sqrt{q_M(x,x')}$. Then there is a real matrix $L\\in\\mathbb R^{d\\times d}$ with $M=L^TL$ and, for all $x,x'\\in\\mathbb R^d$, $d_M(x,x')=\\|Lx-Lx'\\|_2$. Consequently $d_M$ is nonnegative, symmetric, zero on the diagonal, and satisfies the triangle inequality, without asserting separation of distinct points.",
+      "source": {
+        "path": "items/thm-mahalanobis-distance-is-pseudometric.md",
+        "sha256": "bad2c76794cf693b92e9f5bd2bf7f963541e1c7a2f31d332ea685bacf18713c3"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-24.pages.json",
+      "batch": 24,
+      "id": "lem-lmnn-explicit-subgradient-and-data-bound",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Fix the finite labeled sample, fixed target sets, and $\\mu\\in[0,1]$ of the LMNN objective. For each $j\\in N_i$ and each impostor index $l$ with $y_l\\ne y_i$, set $C_{ij}=(x_i-x_j)(x_i-x_j)^T$, $D_{ijl}=C_{ij}-C_{il}$, and $h_{ijl}(M)=1+\\langle M,D_{ijl}\\rangle_F$, where $\\langle A,B\\rangle_F=\\sum_{r,s}A_{rs}B_{rs}$. Define $\\gamma_{ijl}(M)=1$ if $h_{ijl}(M)>0$ and $\\gamma_{ijl}(M)=0$ if $h_{ijl}(M)\\le0$. Put\n\n$$G(M)=(1-\\mu)\\sum_i\\sum_{j\\in N_i}C_{ij}+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\gamma_{ijl}(M)D_{ijl}.$$\n\nFor the convex objective $F_\\mu$ on $\\mathbb S_+^d$, a Frobenius subgradient at $M$ means a symmetric matrix $G$ such that $F_\\mu(N)\\ge F_\\mu(M)+\\langle G,N-M\\rangle_F$ for every $N\\in\\mathbb S_+^d$. Then $G(M)$ is a subgradient at every $M\\in\\mathbb S_+^d$. Moreover, uniformly in $M$,\n\n$$\\|G(M)\\|_F\\le B_{\\rm data}:=(1-\\mu)\\sum_i\\sum_{j\\in N_i}\\|x_i-x_j\\|_2^2+\\mu\\sum_i\\sum_{j\\in N_i}\\sum_{l:y_l\\ne y_i}\\bigl(\\|x_i-x_j\\|_2^2+\\|x_i-x_l\\|_2^2\\bigr).$$\n\nAt an exact hinge kink $h_{ijl}(M)=0$, the selected subgradient coefficient is $0$.",
+      "source": {
+        "path": "items/lem-lmnn-explicit-subgradient-and-data-bound.md",
+        "sha256": "23ffbaba229c2323c719e5b74a0c4ab909913ac347c43d193c47e3b230e6723f"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "030c5cd7d8569e062bab90311110da436bab8bb5191ad1399f5f8847f4ad7f34"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-26.pages.json",
+      "batch": 26,
+      "id": "def-gaussian-partial-correlation",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC. Let $X=(X_1,\\ldots,X_p)$ have a nondegenerate multivariate-normal\nlaw with mean $\\mu$ and positive-definite covariance matrix $\\Sigma$. For\ndistinct indices $i,j$ and $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, define\nthe conditional covariance block\n$$\nK_{ij\\mid S}=\\Sigma_{\\{i,j\\},\\{i,j\\}}-\\Sigma_{\\{i,j\\},S}\\Sigma_{S,S}^{-1}\\Sigma_{S,\\{i,j\\}},\n$$\nwith $K_{ij\\mid\\varnothing}=\\Sigma_{\\{i,j\\},\\{i,j\\}}$. Whenever the diagonal\nentries of this block are positive, the **partial correlation** is\n$$\n\\rho_{ij\\mid S}=\\frac{(K_{ij\\mid S})_{12}}{\\sqrt{(K_{ij\\mid S})_{11}(K_{ij\\mid S})_{22}}}.\n$$\nThe nondegenerate Gaussian case makes the conditioning covariance block\ninvertible; the following theorem proves that $K_{ij\\mid S}$ is positive\ndefinite, so this definition applies to every such $i,j,S$.",
+      "source": {
+        "path": "items/def-gaussian-partial-correlation.md",
+        "sha256": "10707b9ba3fa76e8892748ef20ab787cda290da34a8ab9b003341cbc2e96ca01"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "f6204a246a9fb5de4d7c4f384511224abe9d725e211e48dc57af9eb6b43a7304"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-26.pages.json",
+      "batch": 26,
+      "id": "lem-chordal-components-admit-both-orientations",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "An undirected graph is **chordal** when it has no induced cycle of length at\nleast four. A vertex is **simplicial** when all of its neighbors are pairwise\nadjacent. A **perfect elimination order** is a total order in which the later\nneighbors of each vertex form a clique. For every finite chordal undirected\ngraph $H$ and every edge $\\{u,v\\}$ of $H$, there are acyclic orientations of\nall edges of $H$ with no unshielded collider $a\\to w\\leftarrow b$ with\n$a,b$ nonadjacent, one having $u\\to v$ and another having $v\\to u$.",
+      "source": {
+        "path": "items/lem-chordal-components-admit-both-orientations.md",
+        "sha256": "024e099ed267ad293b8fe317628181e2ed99fb98b8179e99ad381e18d5b34fd7"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "f6204a246a9fb5de4d7c4f384511224abe9d725e211e48dc57af9eb6b43a7304"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-26.pages.json",
+      "batch": 26,
+      "id": "lem-covered-edge-reversal-preserves-d-separation",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $G$ be a finite DAG and let $x\\to y$ be a covered arrow, meaning\n$\\operatorname{pa}_G(y)=\\operatorname{pa}_G(x)\\cup\\{x\\}$. Replacing $x\\to y$\nby $y\\to x$ gives a DAG $G'$ with exactly the same d-separation relations as\n$G$.",
+      "source": {
+        "path": "items/lem-covered-edge-reversal-preserves-d-separation.md",
+        "sha256": "839a200649a25cfe6865f51b9f09c4982240f58300efe589a9171710ba81749e"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "f6204a246a9fb5de4d7c4f384511224abe9d725e211e48dc57af9eb6b43a7304"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-26.pages.json",
+      "batch": 26,
+      "id": "lem-pc-fisher-transform-uniform-concentration",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Fix $0\\le M<1$. There are constants $c_M>0$ and $C_M<\\infty$ such that the\nfollowing holds. Let $X^{(1)},\\ldots,X^{(n)}$ be independent observations from\na nondegenerate Gaussian law, and let $i,j,S$ be as in the definitions of\npopulation and sample partial correlation. Suppose\n$|\\rho_{ij\\mid S}|\\le M$ and $n-|S|-3>0$. Then, for $0<t\\le1$,\n$$ \\mathbb P\\!\\left(\\left|g(\\widehat\\rho_{ij\\mid S})-g(\\rho_{ij\\mid S})\\right|>t\\right) \\le C_M\\exp\\!\\left(-c_M(n-|S|-1)t^2\\right), $$\nwhere $g(r)=\\tfrac12\\log((1+r)/(1-r))$. The constants do not depend on\n$i,j,S,n$ or the Gaussian mean and covariance beyond the bound $M$.",
+      "source": {
+        "path": "items/lem-pc-fisher-transform-uniform-concentration.md",
+        "sha256": "712a6a98ee736de54c0fa94af91b2bd5a64039eef2cbb78253b3577c8a3b6ed2"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "f6204a246a9fb5de4d7c4f384511224abe9d725e211e48dc57af9eb6b43a7304"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-26.pages.json",
+      "batch": 26,
+      "id": "thm-pc-oracle-correctness",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC and the causally sufficient perfect-oracle discovery regime for a\nfinite observed DAG $G$ and its full-joint law. The population PC algorithm\nwith any fixed vertex order terminates and returns exactly the skeleton of $G$\nand records a d-separating set for every deleted pair. At its\ncollider-orientation stage it orients exactly the unshielded colliders of $G$;\nafter R1–R3 closure it returns the CPDAG for the Markov-equivalence class of\n$G$.",
+      "source": {
+        "path": "items/thm-pc-oracle-correctness.md",
+        "sha256": "f031f3841803bec550b4242eec8eb94c08e7c978195d9a75d3967aa966f85ce7"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "f6204a246a9fb5de4d7c4f384511224abe9d725e211e48dc57af9eb6b43a7304"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-29.pages.json",
+      "batch": 29,
+      "id": "ex-online-one-round-replacement",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $k=2$, $T=3$, and $\\eta>0$. Compare the all-zero loss sequence with the sequence whose second loss vector is $(1,0)$ and whose first and third vectors are zero. These two fixed inputs differ by replacement of one complete time-step vector. For both inputs the first- and second-round action kernels are uniform on $\\{1,2\\}$. At round three the all-zero input has weights $(1,1)$ and probabilities $(1/2,1/2)$, while the replaced input has weights $(e^{-\\eta},1)$ and probabilities $(1/(1+e^\\eta),e^\\eta/(1+e^\\eta))$. In particular, the event that the third action is $1$ has probability ratio $(1+e^\\eta)/2$ between the all-zero and replaced inputs.",
+      "source": {
+        "path": "items/ex-online-one-round-replacement.md",
+        "sha256": "5d1aa9140f4380f54f0e1f53e492e7d7c31403f14a1ee4c5e1aded4fc5cfb823"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "cbadacb4d591d9b0df4c6eae2f3aa4e1bb4e43effab7f0181765be337f3ef6e4"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-30.pages.json",
+      "batch": 30,
+      "id": "ex-client-data-locality-does-not-imply-dp",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let the database be a finite record set, use add/remove adjacency, and let a\ndistributed system release the exact number of records after each client has\nkept its own record locally. This deterministic count release is not\n$(\\varepsilon,\\delta)$-differentially private for any finite\n$\\varepsilon\\ge0$ and any $0\\le\\delta<1$.",
+      "source": {
+        "path": "items/ex-client-data-locality-does-not-imply-dp.md",
+        "sha256": "91226d2cbc2e890f8884312d21303109059835f0e9e799131d3cdfb2dac8fde4"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "300ce478a14d306b23b74e1a0500ab90e55407c312c595b5d1d7eb15f94171fb"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-36.pages.json",
+      "batch": 36,
+      "id": "lem-hard-attention-depth-reduction",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Fix a finite content alphabet $\\Sigma$ with $s=|\\Sigma|\\ge2$, a hard-attention model with fixed $H\\ge1$ heads per position and $L\\ge1$ layers, and an integer $c\\ge1$. At length $n$, the model input is $(x_1,\\ldots,x_{n-1},\\mathtt{eos})$, with the end marker fixed at position $n$. An input restriction assigns each content position $i<n$ either $*$ (free) or a fixed symbol of $\\Sigma$; its free positions are precisely the content positions marked $*$. Say that a layer-zero activation, including the activation at the end-marker position, depends on at most $c$ free positions if, with the restriction fixed, its value is determined by at most $c$ of the remaining free input symbols. Suppose the current restriction leaves at least $Cn$ content positions free for every sufficiently large $n$, where $0<C\\le1$, and every layer-zero activation depends on at most $c$ free positions. For every $0<C'<C$, there are an integer $c'\\ge1$ and a refinement, for every sufficiently large $n$, that leaves at least $C'n$ content positions free and preserves the model's output on every completion, while absorbing the first remaining attention layer into new layer-zero activations that each depend on at most $c'$ original content positions. Repeating this conclusion through the fixed $L$ layers gives a restriction with at least $C'n$ free content positions on which the output depends on at most a constant number of original content positions. The constants and the length threshold may depend on the fixed model, $c,C,C'$, but not on $n$.",
+      "source": {
+        "path": "items/lem-hard-attention-depth-reduction.md",
+        "sha256": "095f1ebe88a26a6e3b76230a687778b2e5adc4a49e43ae0142a012930ea35b47"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5d8825881733d1872312e2860d60b47c8308ecd61cf47756c0dea82867be2d75"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-40.pages.json",
+      "batch": 40,
+      "id": "ex-empirical-risk-sgd-oracle-is-unbiased",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC for the conditional-expectation stationarity bound below. Take instance space $(\\{*\\},2^{\\{*\\}})$, action and label spaces $(\\mathbb R,\\mathcal B(\\mathbb R))$, the population law $P_{\\mathrm{pop}}=\\delta_{(*,0)}$, the nonempty predictor class $\\mathcal F=\\{h_\\theta:\\theta\\in\\mathbb R\\}$ with $h_\\theta(*)=\\theta$, and squared loss $\\ell(a,y)=\\frac12(a-y)^2$. Fix an ordered sample $S=((*,y_1),\\ldots,(*,y_m))$ of integer length $m\\ge1$ with $y_i\\in\\mathbb R$, and let $\\bar y=m^{-1}\\sum_i y_i$ and $v_S=m^{-1}\\sum_i(y_i-\\bar y)^2$. Fix a deterministic initial parameter $\\theta_1\\in\\mathbb R$, a constant stepsize $0<\\alpha\\le1$, an integer batch size $b\\ge1$, and an integer horizon $T\\ge1$. On the finite uniform probability space $(\\Omega,2^\\Omega,Q)$, where $\\Omega=\\{1,\\ldots,m\\}^{bT}$ and each point has $Q$-mass $m^{-bT}$, write $I_{t,j}$ for the coordinate indices, independently uniform with replacement, for $1\\le t\\le T$ and $1\\le j\\le b$. Set $\\mathcal F_t=\\sigma(I_{s,j}:1\\le s<t,\\ 1\\le j\\le b)$ for $1\\le t\\le T+1$, so $\\mathcal F_1$ is trivial. At each iteration $t=1,\\ldots,T$, average the component gradients to form $G_t=b^{-1}\\sum_{j=1}^b(\\theta_t-y_{I_{t,j}})$ and set $\\theta_{t+1}=\\theta_t-\\alpha G_t$. For the fixed-sample empirical risk $\\widehat R_S(h_\\theta)$, this direction has conditional mean $\\mathbb E_Q[G_t\\mid\\mathcal F_t]=\\theta_t-\\bar y=\\frac{d}{d\\theta}\\widehat R_S(h_{\\theta_t})$ and conditional variance $\\operatorname{Var}_Q(G_t\\mid\\mathcal F_t)=v_S/b$. The objective has $1$-Lipschitz gradient and global infimum $v_S/2$, so the expected-average theorem yields\n$$\\frac1T\\sum_{t=1}^T\\mathbb E_Q\\left|\\frac{d}{d\\theta}\\widehat R_S(h_{\\theta_t})\\right|^2\\le\\frac{\\alpha v_S}{b}+\\frac{(\\theta_1-\\bar y)^2}{T\\alpha}.$$\nThe sampling law here is over the fixed empirical sample; no population-risk gradient identity is asserted.",
+      "source": {
+        "path": "items/ex-empirical-risk-sgd-oracle-is-unbiased.md",
+        "sha256": "e84d27a0ba58893b4e2aec4693d68fd320dbe2af37f1e9815c21985d69a5926c"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "d60c03dafafbeb02cfaf5add2cf55c3b8c1686044e273a0eb630f15c9f2416ec"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-45.pages.json",
+      "batch": 45,
+      "id": "thm-residual-network-polynomial-width-training-convergence",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC, DC and countable choice. Fix positive integers $d,n,H,m$, training data $x_1,\\ldots,x_n\\in\\mathbb R^d$ and labels $y_1,\\ldots,y_n\\in\\mathbb R$ with $\\|x_i\\|_2=1$ and $|y_i|\\le C_y$ for a fixed finite constant $C_y$. Let the activation satisfy the Lipschitz and smoothness conditions $|\\sigma(0)|\\le C_\\sigma$, $|\\sigma(z)-\\sigma(z')|\\le L|z-z'|$, and $|\\sigma'(z)-\\sigma'(z')|\\le\\beta|z-z'|$ for finite constants, and also be analytic and nonpolynomial. Use the residual architecture with fixed $0<c_{\\rm res}<1$ and the population matrix $K_{\\rm res}^{(H)}$ defined on this page, initialized with independent standard normal entries in all weight matrices and the output vector, and trained in all layers by full-batch gradient descent on $L(\\theta)=\\frac12\\sum_{i=1}^n(f_{\\rm res}(x_i,\\theta)-y_i)^2$. Write $K^{(H)}=K_{\\rm res}^{(H)}$ and put $\\lambda_0=\\lambda_{\\min}(K^{(H)})$ and assume $\\lambda_0>0$. For $0<\\delta<1$, if\n\n$$m=\\Omega\\!\\left(\\max\\left\\{\\frac{n^4H^6}{\\lambda_0^4},\\frac{n^2}{\\lambda_0^2H^2},\\frac{n}{\\delta},\\frac{n^2\\log(Hn/\\delta)}{\\lambda_0^2}\\right\\}\\right),\\qquad 0<\\eta=O\\!\\left(\\frac{\\lambda_0H^2}{n^2}\\right),$$\n\nthen with probability at least $1-\\delta$ over initialization, every gradient-descent iterate $k\\ge1$ satisfies\n\n$$L(\\theta^{(k)})\\le\\left(1-\\frac{\\eta\\lambda_0}{2}\\right)^kL(\\theta^{(0)}).$$\n\nThe constants hidden in $O$ and $\\Omega$ may depend on the fixed activation, label, and residual-scaling bounds but not on $n,H,m,\\delta$; the step-size constant is small enough that $0<\\eta\\lambda_0/2<1$. In particular, $L(\\theta^{(k)})\\to0$ geometrically as $k\\to\\infty$.",
+      "source": {
+        "path": "items/thm-residual-network-polynomial-width-training-convergence.md",
+        "sha256": "7ee278d93152e2e09aea0cd2b956e7cea456fc2bde7cc522c08d2ccb920ef95f"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "e8e587af8ae90c9d1c4d5adafd407533e916e5b2e6d178594445a6030f6fb6ea"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-46.pages.json",
+      "batch": 46,
+      "id": "def-marchenko-pastur-measure",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Countable Choice.\n\nFor $\\gamma>0$, set\n$$a_\\gamma=(1-\\sqrt\\gamma)^2,\\qquad b_\\gamma=(1+\\sqrt\\gamma)^2,\\qquad r_+:=\\max\\{r,0\\}\\quad(r\\in\\mathbb R).$$\nDefine the Marchenko–Pastur set function on Borel $A\\subseteq\\mathbb R$ by\n$$\\mu_\\gamma(A):=\\int_{A\\cap(a_\\gamma,b_\\gamma)}\\frac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x}\\,d\\lambda(x)+\\left(1-\\frac1\\gamma\\right)_+\\delta_0(A),$$\nwhere $\\lambda$ is Lebesgue measure on $\\mathbb R$. The formula defines a finite Borel measure; its total mass is established by the Marchenko–Pastur law below.",
+      "source": {
+        "path": "items/def-marchenko-pastur-measure.md",
+        "sha256": "1e7a5283e623af16b496053f835e9e401a5dfb598113f721b9545b9a640e700b"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "64d359708b8fc38e23456ab7c1be1f2563faac9e73f29db9efed9f6d694dd01f"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-46.pages.json",
+      "batch": 46,
+      "id": "lem-adapted-resolvent-trace-concentration",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice, and let all random vectors below be defined on one common probability space. For each positive integer $n$, let $d_n$ be a positive integer, let $Y_{n,1},\\ldots,Y_{n,n}$ be independent random vectors in $\\mathbb R^{d_n}$, let $B_n=\\sum_{j=1}^{n}Y_{n,j}Y_{n,j}^{\\mathsf T}$, and let $z=u+i\\eta$ with fixed $u\\in\\mathbb R$ and $\\eta>0$. Define\n$$M_n(z):=\\frac1{d_n}\\operatorname{tr}(B_n-zI)^{-1}.$$\nIf $d_n/n\\to c$ for some $c\\in(0,\\infty)$, then $M_n(z)-\\mathbb E[M_n(z)]\\to0$ almost surely. More precisely, for every $t>0$,\n$$\\Pr\\left\\{|M_n(z)-\\mathbb E M_n(z)|>t\\right\\} \\le4\\exp\\left(-\\frac{t^2d_n^2\\eta^2}{4n}\\right).$$",
+      "source": {
+        "path": "items/lem-adapted-resolvent-trace-concentration.md",
+        "sha256": "ec26566b52722c47ec9d7eaf2ccc590f5bc061eee6566d3af4780586df6e07fc"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "64d359708b8fc38e23456ab7c1be1f2563faac9e73f29db9efed9f6d694dd01f"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-46.pages.json",
+      "batch": 46,
+      "id": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Countable Choice.\n\nLet $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal.",
+      "source": {
+        "path": "items/lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line.md",
+        "sha256": "64649f45a98764760f6dfdbcae0b6bc42e091d50c4a1564464dada8cccd9b919"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "64d359708b8fc38e23456ab7c1be1f2563faac9e73f29db9efed9f6d694dd01f"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-46.pages.json",
+      "batch": 46,
+      "id": "thm-marchenko-pastur-law-for-sample-covariance",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice, and let all the matrices $X_n$ be defined on one common probability space. For each positive integer $n$, let $p_n$ be a positive integer with $p_n/n\\to\\gamma\\in(0,\\infty)$, and let $X_n\\in\\mathbb R^{n\\times p_n}$ have mutually independent entries. Assume that all entries of all the matrices $X_n$ have one common law with mean zero, variance one, and finite fourth moment. Set $S_n=X_n^{\\mathsf T}X_n/n$ and let $\\mu_n$ be its empirical spectral distribution normalized by $p_n$. Then $\\mu_n$ converges weakly almost surely to the probability measure with density\n$$\\rho_\\gamma(x)=\\begin{cases}\\dfrac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x},&a_\\gamma<x<b_\\gamma,\\\\0,&x\\notin(a_\\gamma,b_\\gamma),\\end{cases}\\qquad a_\\gamma=(1-\\sqrt\\gamma)^2,\\quad b_\\gamma=(1+\\sqrt\\gamma)^2,$$\nand an atom of mass $(1-1/\\gamma)_+$ at zero.",
+      "source": {
+        "path": "items/thm-marchenko-pastur-law-for-sample-covariance.md",
+        "sha256": "e356dbc9781ded30f4defe46f8b9abe498fdd960659d5d9723a09a0bea74f9c7"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "64d359708b8fc38e23456ab7c1be1f2563faac9e73f29db9efed9f6d694dd01f"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.pages.json",
+      "batch": 47,
+      "id": "lem-bounded-complex-iid-matrix-norm-bound",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "On a common probability space, for each positive integer $n$, let $N_n$ be a positive integer with $n/N_n\\to c\\in(0,\\infty)$, and let $X_n\\in\\mathbb C^{n\\times N_n}$ have independent identically distributed entries $\\xi$ satisfying $\\mathbb E\\xi=0$ and $|\\xi|\\le K$ almost surely for a fixed $K<\\infty$. Then there is a finite constant $C=C(K,c)$ such that, almost surely, $\\|X_n\\|_{\\mathrm{op}}\\le C\\sqrt{N_n}$ for all sufficiently large $n$.",
+      "source": {
+        "path": "items/lem-bounded-complex-iid-matrix-norm-bound.md",
+        "sha256": "ca9ac922b66b814e27936f08b5acc3ca7f3b0bb0ecc654af8de9e7ffaf71f054"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5790d82d79ef91abee8113d5e5768a183f2c6baea0034c734eb05155c4ddbe14"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.pages.json",
+      "batch": 47,
+      "id": "lem-bounded-complex-resolvent-quadratic-form-concentration",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "On a common probability space, for each positive integer $n$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, unit second absolute moment, and absolute value at most $K$, where $K$ is independent of $n$. Let $T_n\\in\\mathbb C^{n\\times n}$ be deterministic Hermitian positive semidefinite with $\\|T_n\\|_{\\mathrm{op}}\\le M$, and let $x_n\\in\\mathbb C^n$ be deterministic with $\\|x_n\\|_2=1$. Assume $N_n/n\\to\\kappa\\in(0,\\infty)$. For fixed $z=u+i\\eta$ with $\\eta>0$, set\n$$A_n:=\\frac1{N_n}T_n^{1/2}X_nX_n^*T_n^{1/2},\\qquad R_n(z):=(A_n-zI)^{-1}.$$\nThen $x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]\\to0$ almost surely. Moreover, for every $t>0$ there is a constant $C=C(K,M,z,\\kappa)$ such that, for all sufficiently large $n$,\n$$\\mathbb P\\!\\left\\{|x_n^*R_n(z)x_n-\\mathbb E[x_n^*R_n(z)x_n]|>t\\right\\}\\le\\frac{C}{t^4N_n^2}.$$",
+      "source": {
+        "path": "items/lem-bounded-complex-resolvent-quadratic-form-concentration.md",
+        "sha256": "bb55703fca0f9193cfcaa615a33fb10ae4cddf54c8f38bb1974072d4799f5daa"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5790d82d79ef91abee8113d5e5768a183f2c6baea0034c734eb05155c4ddbe14"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.pages.json",
+      "batch": 47,
+      "id": "lem-hermitian-resolvent-trace-concentration",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "On a common probability space, for each positive integer $n$, let $Y_{n,1},\\ldots,Y_{n,N_n}$ be independent random vectors in $\\mathbb C^n$, let $B_n=\\sum_{j=1}^{N_n}Y_{n,j}Y_{n,j}^*$, and assume $N_n/n\\to\\kappa\\in(0,\\infty)$. Fix $z=u+i\\eta$ with $u\\in\\mathbb R$ and $\\eta>0$, and define\n$$M_n(z):=\\frac1n\\operatorname{tr}(B_n-zI)^{-1}.$$\nThen for every $t>0$,\n$$\\mathbb P\\{|M_n(z)-\\mathbb E M_n(z)|>t\\}\\le4\\exp\\!\\left(-\\frac{t^2n^2\\eta^2}{4N_n}\\right),$$\nand $M_n(z)-\\mathbb E M_n(z)\\to0$ almost surely.",
+      "source": {
+        "path": "items/lem-hermitian-resolvent-trace-concentration.md",
+        "sha256": "c6b3f1adf48e621830c23ffce13ea50f91d47542c288ad8a85fef0dfd5ff76ce"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5790d82d79ef91abee8113d5e5768a183f2c6baea0034c734eb05155c4ddbe14"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.pages.json",
+      "batch": 47,
+      "id": "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice. On a common probability space, for each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and absolute value bounded by a fixed finite constant, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with uniformly bounded induced Euclidean operator norm and empirical eigenvalue measures $H_n=n^{-1}\\sum_i\\delta_{\\lambda_i(T_n)}\\Rightarrow H$. Let $x_n\\in\\mathbb C^n$ be deterministic unit vectors such that for every $w\\in\\mathbb C\\setminus[0,\\infty)$,\n$$x_n^*(T_n-wI_n)^{-1}x_n\\longrightarrow m_H(w):=\\int_{[0,\\infty)}(t-w)^{-1}\\,dH(t).$$\nFor $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$, define the directional spectral measure $\\mu_n^{x_n}(B)=x_n^*\\mathbf1_B(A_n)x_n$ for Borel $B\\subseteq[0,\\infty)$. Then almost surely $\\mu_n^{x_n}\\Rightarrow F_{c,H}$, where $c=\\kappa^{-1}$ and $F_{c,H}$ is the probability measure characterized by\n$$m_{c,H}(z)=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm_{c,H}(z))-z}\\,dH(t),\\qquad \\operatorname{Im}z>0.$$",
+      "source": {
+        "path": "items/thm-directional-sample-covariance-resolvent-limit-for-bounded-entries.md",
+        "sha256": "6cc23ee5cfe944a947e604a11e5bea89952e9f06e908b99473ae6a7fb1578a68"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5790d82d79ef91abee8113d5e5768a183f2c6baea0034c734eb05155c4ddbe14"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.pages.json",
+      "batch": 47,
+      "id": "thm-general-population-sample-covariance-esd-limit-for-bounded-entries",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice. On a common probability space, for each positive integer $n$, let $N_n$ be a positive integer with $N_n/n\\to\\kappa\\in(0,\\infty)$, let $X_n\\in\\mathbb C^{n\\times N_n}$ have entries from one common iid law with mean zero, second absolute moment one and absolute value bounded by one fixed finite constant, and let $T_n$ be deterministic Hermitian positive semidefinite (self-adjoint with $v^*T_nv\\ge0$ for every $v$) with uniformly bounded induced Euclidean operator norm. Suppose the empirical eigenvalue measures $H_n=n^{-1}\\sum_{i=1}^n\\delta_{\\lambda_i(T_n)}$ converge weakly to a Borel probability measure $H$ on $[0,\\infty)$. Put $c=\\kappa^{-1}$ and $A_n=N_n^{-1}T_n^{1/2}X_nX_n^*T_n^{1/2}$, and let $F_n=n^{-1}\\sum_{i=1}^n\\delta_{\\lambda_i(A_n)}$. Then there is a unique Borel probability measure $F_{c,H}$ on $[0,\\infty)$ such that, almost surely, $F_n$ converges weakly to $F_{c,H}$. Its Stieltjes transform $m_{c,H}(z)=\\int(t-z)^{-1}\\,dF_{c,H}(t)$ is the unique $m\\in\\mathbb C$ satisfying $\\operatorname{Im}m>0$, $u:=-(1-c)/z+cm$ with $\\operatorname{Im}u>0$, and\n$$m=\\int_{[0,\\infty)}\\frac{1}{t(1-c-czm)-z}\\,dH(t)\\qquad(\\operatorname{Im}z>0).$$",
+      "source": {
+        "path": "items/thm-general-population-sample-covariance-esd-limit-for-bounded-entries.md",
+        "sha256": "8b1f02251ffa1400e74ebf657a250ac7f6fb156546b49466e0766e822d6ae427"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5790d82d79ef91abee8113d5e5768a183f2c6baea0034c734eb05155c4ddbe14"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-49.pages.json",
+      "batch": 49,
+      "id": "thm-sequential-infinite-width-ntk-limit",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC. Fix a finite list $x_1,\\ldots,x_N\\in\\mathbb R^{n_0}$ with $N,n_0\\ge1$, a depth $L\\ge2$, a bias scale $\\beta>0$, and a globally Lipschitz activation $\\sigma:\\mathbb R\\to\\mathbb R$. Let $s$ be any bounded Borel representative of the almost-everywhere derivative of $\\sigma$, meaning that it agrees with the ordinary derivative outside a Lebesgue-null set; such a representative exists and is bounded by the Lipschitz constant. For each tuple of positive integer hidden widths $\\mathbf n=(n_1,\\ldots,n_{L-1})$, let $\\mathbb P_{\\mathbf n}$ be a probability law carrying the product standard-normal initialization marginal and any auxiliary randomness used by training; take all probabilities in the width limit under these laws. Use the width-normalized network with scalar linear output.\n\nPut\n\n$$\\Sigma^1_{ij}=\\frac{x_i\\cdot x_j}{n_0}+\\beta^2.$$\n\nFor $r=2,\\ldots,L$, let $(U_i,U_j)$ have the centered Gaussian law with variances $\\Sigma^{r-1}_{ii},\\Sigma^{r-1}_{jj}$ and covariance $\\Sigma^{r-1}_{ij}$, and define\n\n$$\\Sigma^r_{ij}=\\mathbb E[\\sigma(U_i)\\sigma(U_j)]+\\beta^2,\\qquad \\dot\\Sigma^r_{ij}=\\mathbb E[s(U_i)s(U_j)].$$\n\nThese Gaussian laws may be singular; their marginal variances are at least $\\beta^2$, and their laws and expectations depend only on the displayed covariance. Define $\\Theta^1_{ij}=\\Sigma^1_{ij}$ and, for $r=2,\\ldots,L$,\n\n$$\\Theta^r_{ij}=\\Theta^{r-1}_{ij}\\dot\\Sigma^r_{ij}+\\Sigma^r_{ij},\\qquad K_\\infty=(\\Theta^L_{ij})_{i,j=1}^N.$$\n\nAt initialization, the finite-data neural tangent Gram matrix $K_0$ converges in probability to $K_\\infty$ under the sequential hidden-width limit $n_1\\to\\infty$ first, then $n_2\\to\\infty$, and so on through $n_{L-1}$.\n\nFor the training conclusion, fix a horizon $T\\ge0$. In addition, assume that $\\sigma$ is twice continuously differentiable with bounded second derivative. For each width tuple, let $d_{\\mathbf n}$ and $\\theta_{\\mathbf n}$ be jointly measurable in the probability outcome and time; for $\\mathbb P_{\\mathbf n}$-almost every outcome, assume $d_{\\mathbf n}$ is integrable on $[0,T]$ and $\\theta_{\\mathbf n}$ is differentiable there and satisfies, with width and probability-outcome subscripts suppressed in the equation,\n\n$$\\dot\\theta_p(t)=-\\frac1N\\sum_{i=1}^N\\partial_{\\theta_p}f_{\\theta(t)}(x_i)d_i(t).$$\n\nWrite $f_t(x)=f_{\\theta(t)}(x)$ and $K_t(i,j)=K_{\\theta(t)}(x_i,x_j)$, where $K_\\theta$ is the finite-network neural tangent kernel; width and probability-outcome subscripts are suppressed. The sample paths of $K_t$ are continuous, so joint measurability makes the supremum events below measurable. Define $\\|v\\|_N=(N^{-1}\\sum_i|v_i|^2)^{1/2}$. Suppose $\\int_0^T\\|d_{\\mathbf n}(t)\\|_Ndt$ is stochastically bounded in the prescribed sequential limit, meaning that for every $\\varepsilon>0$ some $M<\\infty$ satisfies $\\limsup_{n_{L-1}\\to\\infty}\\cdots\\limsup_{n_1\\to\\infty}\\mathbb P_{\\mathbf n}(\\int_0^T\\|d_{\\mathbf n}(t)\\|_Ndt>M)<\\varepsilon$. Then\n\n$$\\sup_{0\\le t\\le T}\\|K_t-K_\\infty\\|_{op}\\longrightarrow0\\quad\\text{in probability},$$\n\nwhere $\\|\\cdot\\|_{op}$ is the Euclidean operator norm. Along the path,\n\n$$\\dot f_t(x_i)=-\\frac1N\\sum_{j=1}^N K_t(i,j)d_j(t),$$\n\nand\n\n$$\\sup_{0\\le t\\le T}\\left\\|f_t-f_0+\\frac1N\\int_0^tK_\\infty d(s)\\,ds\\right\\|_N\\longrightarrow0\\quad\\text{in probability}.$$\n\nThus the finite-time output equation has the deterministic limiting kernel as its generator in the precise integrated-error sense displayed above.",
+      "source": {
+        "path": "items/thm-sequential-infinite-width-ntk-limit.md",
+        "sha256": "1e84c48871e75d29cff1a8c653aca6793cdc78b71c36537a1d351fb9ff735739"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "d75bfee67b0099211e6d1a418e587f9187ff00a89e9a07c55d87b416ac6f4783"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-49.pages.json",
+      "batch": 49,
+      "id": "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC. Fix $N,n_0\\ge1$, a data set $x_1,\\ldots,x_N\\in\\mathbb R^{n_0}$, a depth $L\\ge2$, a bias scale $\\beta>0$, and the scalar-output source-normalized network with independent standard-normal initialization under its product law. Let $\\sigma(u)=\\tanh u=(e^{2u}-1)/(e^{2u}+1)$. For each finite hidden-width tuple, take the unique gradient-flow path as a measurable function of the initialized parameters on $[0,1]$, satisfying\n\n$$\\dot\\theta_p(t)=-\\frac1N\\sum_{i=1}^N\\partial_{\\theta_p}f_{\\theta(t)}(x_i),\\qquad 0\\le t\\le1,$$\n\nso the empirical training direction is $d_i(t)=1$ for every datum and time. The finite-width path exists on every finite interval, and its integrated empirical direction norm on $[0,1]$ equals $1$. Consequently, as the hidden widths tend to infinity sequentially, the finite-data neural tangent kernel remains uniformly close in probability on $[0,1]$ to the deterministic recursive limiting kernel $K_\\infty$ for this network and data set.",
+      "source": {
+        "path": "items/ex-wide-tanh-network-lazy-on-a-fixed-time-horizon.md",
+        "sha256": "1d6af46dcca14e828dd1a7065c9442e06c11b227b96f1e6fd3aafdbd34e3fe3c"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "d75bfee67b0099211e6d1a418e587f9187ff00a89e9a07c55d87b416ac6f4783"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-52.pages.json",
+      "batch": 52,
+      "id": "lem-bounded-domain-degree-properties",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge1$, let $U\\subset\\mathbb R^d$ be bounded and open, and let $f:\\overline U\\to\\mathbb R^d$ be continuous. For $y\\notin f(\\partial U)$, put $K=f^{-1}(\\{y\\})\\cap U$ and define $D(f,U,y)$ by\n\n$$f_*[U]_K=D(f,U,y)[\\mathbb R^d]_{\\{y\\}}\\quad\\text{in }H_d(\\mathbb R^d,\\mathbb R^d\\setminus\\{y\\};\\mathbb Z),$$\n\nwhere $[U]_K$ is the unique relative orientation class restricting to the standard local generator on $K$, and $[\\mathbb R^d]_{\\{y\\}}$ is the positive local generator. This integer is well-defined. It is nonzero only if $f^{-1}(y)\\cap U\\ne\\varnothing$, and $D(\\operatorname{id},U,y)=1$ whenever $y\\in U$. If $U_1,U_2\\subset U$ are disjoint bounded open sets, $y\\notin f(\\partial U_i)$ for $i=1,2$, and every point of $f^{-1}(y)\\cap U$ lies in $U_1\\cup U_2$, then\n\n$$D(f,U,y)=D(f,U_1,y)+D(f,U_2,y).$$\n\nIf $H:[0,1]\\times\\overline U\\to\\mathbb R^d$ and $y:[0,1]\\to\\mathbb R^d$ are continuous and $y(t)\\notin H_t(\\partial U)$ for every $t$, then $D(H_0,U,y(0))=D(H_1,U,y(1))$.",
+      "source": {
+        "path": "items/lem-bounded-domain-degree-properties.md",
+        "sha256": "a8dc58af2e01bb29eed9290513a918008176d5313362c320aff63b79db4b3345"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "d7f927af51a2ba865730cbb4c21d0ef0d754fad9e385981cd0fc6929c806d7b0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-52.pages.json",
+      "batch": 52,
+      "id": "lem-feature-energy-continuous-under-w2-on-a-common-cutoff",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the feature-energy hypotheses on a closed convex set $Q_r\\subseteq\\Omega$, and let $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$ be concentrated on $Q_r$, with finite feature energy and $W_2(\\mu_n,\\mu)\\to0$. Then $F(\\mu_n)\\to F(\\mu)$.",
+      "source": {
+        "path": "items/lem-feature-energy-continuous-under-w2-on-a-common-cutoff.md",
+        "sha256": "220ee6248b545ae16a80cdef08862f0964905be9fbe4708afafa0c23f214d987"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "d7f927af51a2ba865730cbb4c21d0ef0d754fad9e385981cd0fc6929c806d7b0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-52.pages.json",
+      "batch": 52,
+      "id": "lem-mean-field-projection-identities",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge2$, let $\\mathcal H$ be a real Hilbert space, let $R:\\mathcal H\\to[0,\\infty)$ be continuous, and let $\\Phi:\\mathbb R^d\\to\\mathcal H$ and $V:\\mathbb R^d\\to[0,\\infty)$ be continuous and positively two-homogeneous. For a finite nonnegative Borel measure $\\lambda$ on $\\mathbb R^d$ with finite second moment, define the feature-measure energy\n$$F(\\lambda):=R\\!\\left(\\int_{\\mathbb R^d}\\Phi(u)d\\lambda(u)\\right)+\\int_{\\mathbb R^d}V(u)d\\lambda(u).$$\nThe integrals are finite because the continuous two-homogeneous maps grow at most quadratically. For every such $\\mu$,\n\n$$\\int_{\\mathbb R^d}\\Phi(u)d\\mu(u)=\\int_{\\mathbb S^{d-1}}\\Phi(\\theta)dh^2(\\mu)(\\theta),\\qquad\\int_{\\mathbb R^d}V(u)d\\mu(u)=\\int_{\\mathbb S^{d-1}}V(\\theta)dh^2(\\mu)(\\theta).$$\n\nIf $(\\mu_n)$ is a sequence of such measures and $h^2(\\mu_n)$ converges weakly as finite measures on the compact sphere to a finite nonnegative measure $\\nu$, then the feature integrals converge in Hilbert norm, the regularizer integrals converge, and $F(\\mu_n)\\to R(\\int_{\\mathbb S^{d-1}}\\Phi d\\nu)+\\int_{\\mathbb S^{d-1}}Vd\\nu$. The continuity of $R$ is the risk premise used for this energy conclusion; it holds in particular under the feature-energy hypotheses.\n\nFor the partially one-homogeneous model, let $\\Theta$ be a closed Euclidean subset, let $\\varphi:\\Theta\\to\\mathcal H$ be bounded and norm-continuous into a separable real Hilbert space, and let $\\widetilde V:\\Theta\\to[0,\\infty)$ be bounded and measurable. Put $\\Phi(w,\\theta)=w\\varphi(\\theta)$ and $V(w,\\theta)=|w|\\widetilde V(\\theta)$. For every finite nonnegative Borel measure $\\mu$ on $\\mathbb R\\times\\Theta$ with $\\int|w|d\\mu<\\infty$ and every $z\\in\\mathcal H$, the exact feature identity is\n$$\\left\\langle z,\\int w\\varphi(\\theta)d\\mu\\right\\rangle=\\int\\langle z,\\varphi(\\theta)\\rangle dh^1(\\mu),$$\nusing the scalar pairing defined in the partial projection, and the penalty inequality is $\\int|w|\\widetilde V(\\theta)d\\mu\\ge\\int\\widetilde Vdh^1(\\mu)$. Define the lifted energy in this model by $F(\\mu)=R(\\int w\\varphi(\\theta)d\\mu)+\\int|w|\\widetilde V(\\theta)d\\mu$. If finite signed projections $h^1(\\mu_n)$ converge narrowly to $\\nu$, meaning convergence against every bounded continuous real test on $\\Theta$, then their feature moments converge weakly in $\\mathcal H$ when $\\varphi$ is bounded and continuous. If AC holds, then for closed Euclidean $\\Theta$ and bounded norm-continuous $\\varphi$ into a separable Hilbert space, they converge in Hilbert norm. Signed projection convergence alone does not imply penalty or full energy convergence for arbitrary lifts.",
+      "source": {
+        "path": "items/lem-mean-field-projection-identities.md",
+        "sha256": "0f33f68e2188cfdd103b026bd393ab025f004066bbb3a86e31b0c3514e863647"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "d7f927af51a2ba865730cbb4c21d0ef0d754fad9e385981cd0fc6929c806d7b0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-54.pages.json",
+      "batch": 54,
+      "id": "thm-finite-description-compression-bound",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "The following corrected finite-description form of Arora, Ge, Neyshabur, and Zhang's compression bound applies to a measurable sample-dependent score classifier. Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let $\\mathcal Y=\\{1,\\ldots,K\\}$ have the discrete sigma-algebra with $K\\ge2$, put $\\Sigma_Z=\\Sigma_X\\otimes2^{\\mathcal Y}$ on $Z=\\mathcal X\\times\\mathcal Y$, and let $P$ be a probability law on $(Z,\\Sigma_Z)$. Let $m\\ge1$ and draw $S=((X_1,Y_1),\\ldots,(X_m,Y_m))$ independently and identically distributed (IID) with law $P$, with sample space $Z^m$ carrying $\\Sigma_Z^{\\otimes m}$. Fix integers $q\\ge0$, $r\\ge1$, a helper string $s$ independent of $S$, finite nonempty parameter sets $D_1,\\ldots,D_q$ with $|D_j|\\le r$, a nonempty code set $\\mathcal A\\subseteq\\prod_{j=1}^qD_j$ (with the empty product a singleton when $q=0$), a distortion tolerance $\\epsilon>0$, and a confidence level $0<\\delta<1$. For any score map $u$ with measurable coordinates, write $h_u(x)$ for the classifier that chooses the least index attaining the largest coordinate of $u(x)$. For each $a\\in\\mathcal A$, let $g_{s,a}:\\mathcal X\\to\\mathbb R^K$ have measurable coordinates and put $h_{s,a}:=h_{g_{s,a}}$. Equip $\\mathbb R^K$ with its Borel sigma-algebra. Let $F:Z^m\\times\\mathcal X\\to\\mathbb R^K$ be measurable for $\\Sigma_Z^{\\otimes m}\\otimes\\Sigma_X$, write $f_S(x)=F(S,x)$, and let $\\alpha:Z^m\\to\\mathcal A$ be measurable for the discrete sigma-algebra on $\\mathcal A$. Suppose that, for $P^m$-almost every $S$,\n$$\\max_{k\\in\\mathcal Y}|f_S(X_i)_k-g_{s,\\alpha(S)}(X_i)_k|\\le\\epsilon\\qquad(1\\le i\\le m)$$\nWith natural logarithms, define\n$$R_P(h):=P\\{(x,y):h(x)\\ne y\\},\\qquad \\widehat R_S(h):=\\frac1m\\sum_{i=1}^m\\mathbf1\\{h(X_i)\\ne Y_i\\},$$\n$$M_{f_S}(x,y):=f_S(x)_y-\\max_{j\\ne y}f_S(x)_j,\\qquad \\widehat L_\\gamma(f_S;S):=\\frac1m\\sum_{i=1}^m\\mathbf1\\{M_{f_S}(X_i,Y_i)\\le\\gamma\\},\\qquad \\gamma\\ge0.$$\nThen, with probability at least $1-\\delta$ over $S$,\n$$R_P\\bigl(h_{s,\\alpha(S)}\\bigr)\\le\\widehat L_{2\\epsilon}(f_S;S)+\\sqrt{\\frac{q\\log r+\\log(1/\\delta)}{2m}}.$$\nIn particular, the coordinatewise distortion $\\epsilon$ only guarantees preservation of an observed label when its original score margin is strictly greater than $2\\epsilon$. The conclusion bounds the selected compressed classifier $h_{s,\\alpha(S)}$; it does not bound the original classifier $h_{f_S}$ unless a separate all-domain loss-preservation argument is supplied. The theorem assumes a suitable fixed-helper compressor and makes no claim that a network compression construction exists or that layer-stability or cushion hypotheses hold.",
+      "source": {
+        "path": "items/thm-finite-description-compression-bound.md",
+        "sha256": "1c37320d02bfda16346edb77e7c9a55e80f0f82e7d2d172c1f8b8fb9c4673286"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "ba394fb682dcc44cf273ac8ef6bc468b76dbe5c2cfd0bab07b441a4c0579c746"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-55.pages.json",
+      "batch": 55,
+      "id": "thm-sgd-stability-nonconvex-loss",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $n\\ge2$, $T,d\\ge1$, and let $\\beta,c>0$ and $L\\ge0$. Let $(\\mathsf X,\\Sigma_X)$, $(\\mathsf Y,\\Sigma_Y)$, and $(\\mathsf A,\\Sigma_A)$ be measurable spaces, let $P$ be a probability measure on $\\mathsf X\\times\\mathsf Y$, let $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty)$ be a measurable loss, and let $f_w:\\mathsf X\\to\\mathsf A$ be a measurable predictor for every $w\\in\\mathbb R^d$. For $z=(x,y)$ set $g(w,z)=\\ell(f_w(x),y)$. Assume $(w,z)\\mapsto g(w,z)$ and $(w,z)\\mapsto\\nabla_wg(w,z)$ are jointly measurable. For every $z$, assume $g(\\cdot,z)$ is totally differentiable, takes values in $[0,1]$, is $L$-Lipschitz in values, and has a $\\beta$-Lipschitz Euclidean gradient; these mean, respectively,\n\n$$|g(w,z)-g(v,z)|\\le L\\|w-v\\|_2,\\qquad \\|\\nabla_wg(w,z)-\\nabla_wg(v,z)\\|_2\\le\\beta\\|w-v\\|_2$$\n\nfor all $v,w\\in\\mathbb R^d$. No convexity is assumed. Let $S=(Z_1,\\ldots,Z_n)$ be IID with law $P$, and abbreviate $R_P(f_w)=\\int g(w,z)\\,P(dz)$ and $\\widehat R_S(f_w)=n^{-1}\\sum_{i=1}^ng(w,Z_i)$. Let $I_1,\\ldots,I_T$ be random indices in $\\{1,\\ldots,n\\}$, independent of $S$ and satisfying $\\mathbb P(I_t=i)=1/n$ for every $1\\le t\\le T$ and $1\\le i\\le n$; dependence between indices at different times is allowed. From a fixed $w_0\\in\\mathbb R^d$, define\n\n$$w_t=w_{t-1}-\\alpha_t\\nabla_wg(w_{t-1},Z_{I_t}),\\qquad 1\\le t\\le T,$$\n\nwhere $0\\le\\alpha_T\\le\\cdots\\le\\alpha_1$ and $\\alpha_t\\le c/t$. Assume the resulting random variables $R_P(f_{w_T})$ and $\\widehat R_S(f_{w_T})$ are measurable; they are integrable because $0\\le g\\le1$. Then the randomized procedure has uniform replacement stability and absolute expected population-minus-empirical risk gap at most\n\n$$\\left(1+\\frac1{\\beta c}\\right)\\frac{(2cL^2)^{1/(\\beta c+1)}}{n-1}\\,T^{\\beta c/(\\beta c+1)}.$$\n\nIf $L=0$, the right side is interpreted as $0$. The conclusion concerns only this expected gap for the stated random sample-selection procedure; it does not assert generalization for every stochastic-gradient oracle.",
+      "source": {
+        "path": "items/thm-sgd-stability-nonconvex-loss.md",
+        "sha256": "3efb64de4645f1d104cbc9bf0549b5e80726636d59531decb998df2766750f2e"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "de5ad24a6cb1b3b0f8b1de9348fbce6a85d6f3ae2f15659bfa22159c790c3d95"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-56.pages.json",
+      "batch": 56,
+      "id": "def-latent-class-contrastive-learning",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $(\\mathcal C,\\mathcal C_0,\\rho)$ be a measurable probability space and $(\\mathcal X,\\mathcal A)$ a measurable space. For each class $c\\in\\mathcal C$, let $D_c$ be a probability measure on $(\\mathcal X,\\mathcal A)$ and assume $c\\mapsto D_c(A)$ is measurable for every $A\\in\\mathcal A$. Assume the displayed mixtures define probability measures. The positive-pair law $D_{\\rm sim}$ and negative marginal $D_{\\rm neg}$ are specified by\n\n$$D_{\\rm sim}(A\\times B):=\\int_{\\mathcal C}D_c(A)D_c(B)\\,\\rho(dc),\\qquad D_{\\rm neg}(A):=\\int_{\\mathcal C}D_c(A)\\,\\rho(dc)$$\n\nfor measurable $A,B\\in\\mathcal A$. Equivalently, draw $C\\sim\\rho$ and then draw $X,X^+$ independently with law $D_C$ for a positive pair; draw a fresh independent class $C'\\sim\\rho$ and $X^-\\sim D_{C'}$ for one negative. The class labels are latent: the learner observes the pair and negative data, not their classes.\n\nLet $d\\ge1$, $R>0$, and let $\\mathcal F$ be a nonempty class of measurable maps $f:\\mathcal X\\to\\mathbb R^d$ satisfying $\\sup_{x\\in\\mathcal X}\\lVert f(x)\\rVert_2\\le R$. Use either one-negative loss $\\ell_{\\rm h}(t)=(1+t)_+$ or $\\ell_{\\rm log}(t)=\\log_2(1+e^t)$ from the immediately preceding loss-properties lemma. The contrastive score and population loss are\n\n$$q_f(x,x^+,x^-):=f(x)^\\top\\bigl(f(x^-)-f(x^+)\\bigr),\\qquad L_{\\rm un}(f):=\\mathbb E_{(X,X^+)\\sim D_{\\rm sim},\\,X^-\\sim D_{\\rm neg}}\\bigl[\\ell(q_f(X,X^+,X^-))\\bigr].$$\n\nFor $M\\ge1$, an observed sample is $S=((x_j,x_j^+,x_j^-))_{j=1}^M$ of $M$ independent triplets with common law $D_{\\rm sim}\\otimes D_{\\rm neg}$, and its empirical loss is $\\widehat L_{\\rm un}(f):=M^{-1}\\sum_{j=1}^M\\ell(q_f(x_j,x_j^+,x_j^-))$. For this sample define the unnormalized vector Rademacher complexity\n\n$$\\mathcal R_S(\\mathcal F):=\\mathbb E_\\varepsilon\\sup_{f\\in\\mathcal F}\\sum_{j=1}^M\\sum_{t=1}^d\\bigl(\\varepsilon_{jt0}f_t(x_j)+\\varepsilon_{jt+}f_t(x_j^+)+\\varepsilon_{jt-}f_t(x_j^-)\\bigr),$$\n\nwhere every $\\varepsilon_{jt0},\\varepsilon_{jt+},\\varepsilon_{jt-}$ is an independent uniform sign. This is the one-sided convention with no absolute value and no $1/M$ factor.\n\nAll vector and matrix expectations in this definition are taken entrywise in finite dimensions. The bound on $f$ makes each coordinate of $f(X)$ and every product defining a covariance entry integrable.\n\nLet $C_+,C_-\\sim\\rho$ be independent class draws and set $\\tau:=\\Pr(C_+=C_-)<1$. Assume the diagonal $\\Delta:=\\{(c,c):c\\in\\mathcal C\\}$ and each $\\Delta_A:=\\{(c,c):c\\in A\\}$, $A\\in\\mathcal C_0$, are measurable. The average binary task draws $(C_+,C_-)$ conditional on $C_+\\ne C_-$, then samples a label $Y$ uniformly from $\\{+1,-1\\}$ and an input $X$ from $D_{C_+}$ if $Y=+1$ or $D_{C_-}$ if $Y=-1$. For a vector representation $f$, a binary linear classifier uses a weight vector $w\\in\\mathbb R^d$ and loss $\\ell(-Yw^\\top f(X))$. Define $L_{\\rm sup}(f)$ as the average over tasks of the infimum of this risk over $w\\in\\mathbb R^d$. Write $\\mu_c:=\\mathbb E_{X\\sim D_c}f(X)$ and define the class-mean classifier by $w_\\mu=\\mu_{C_+}-\\mu_{C_-}$; its average risk is $L^\\mu_{\\rm sup}(f)$. For $\\gamma>0$, write $L^\\mu_{\\gamma,\\rm sup}(f)$ for the same mean-classifier risk with margin loss $\\ell_\\gamma(t):=(1+t/\\gamma)_+$ in place of $\\ell$.\n\nFor $\\tau>0$, let $L^=_{\\rm un}(f)$ and $L^\\ne_{\\rm un}(f)$ be the conditional contrastive risks given $C_+=C_-$ and $C_+\\ne C_-$, respectively. Let $\\nu$ be the class law conditioned on the collision event, namely $\\nu(A):=(\\rho\\otimes\\rho)(\\Delta_A)/\\tau$ for $A\\in\\mathcal C_0$; for an atomic class law this gives $\\nu(\\{c\\})=\\rho(\\{c\\})^2/\\tau$. Define $\\Sigma_f(c):=\\mathbb E_{X\\sim D_c}[(f(X)-\\mu_c)(f(X)-\\mu_c)^\\top]$ and\n\n$$s(f):=\\mathbb E_{C\\sim\\nu}\\left[\\sqrt{\\lVert\\Sigma_f(C)\\rVert_{\\rm op}}\\,\\mathbb E_{X\\sim D_C}\\lVert f(X)\\rVert_2\\right],\\qquad \\lVert\\Sigma\\rVert_{\\rm op}:=\\max_{\\lVert u\\rVert_2=1}\\lVert\\Sigma u\\rVert_2.$$\n\nThe assumed measurability of $\\Delta$ and every $\\Delta_A$ makes the displayed collision event and conditional class law well-defined; disjoint class sets give disjoint $\\Delta_A$, so the formula for $\\nu$ is countably additive and has total mass one. Assume also that $c\\mapsto\\mu_c$ and $c\\mapsto\\Sigma_f(c)$ are measurable for each $f$, and that the displayed class-conditional risks and random suprema used below are measurable.\n\nIf $\\tau=0$, there is no collision term; set $s(f):=0$ and use $L_{\\rm un}(f)=L^\\ne_{\\rm un}(f)$. Any empirical minimizer or approximate minimizer used below is separately assumed to be a measurable selector; no selector-existence claim is part of this definition.",
+      "source": {
+        "path": "items/def-latent-class-contrastive-learning.md",
+        "sha256": "f24a2e11063a44c4d97fe660ac035e3173e5d1e014a03cbc7c327eb7c6966962"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "dd4d39943a46961514a61a3b47735affee0f4675f25475807b1517686ed90be4"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-56.pages.json",
+      "batch": 56,
+      "id": "ex-logistic-loss-not-covered-by-hinge-margin-comparison",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Consider two equally likely deterministic classes $a,b$ and the scalar representation $f(a)=2$, $f(b)=4$, so $R=4$, $\\tau=1/2$, and the classwise centered representation has sub-Gaussian proxy $\\sigma^2=0$. For the distinct-class tasks, the mean classifier has logistic risk\n\n$$L^\\mu_{\\rm sup}(f)=\\frac12\\bigl[\\log_2(1+e^4)+\\log_2(1+e^{-8})\\bigr]>\\frac52,$$\n\nwhile its source hinge margin risk at $\\gamma=1$ is exactly $L^\\mu_{1,\\rm sup}(f)=5/2$. The logistic contrastive risk conditioned on distinct classes has the same value as the displayed logistic mean-classifier risk. Consequently, for every $0<\\epsilon\\le1$ smaller than the positive gap, the source hinge margin comparison $L^\\ne_{\\rm un}(f)\\le\\gamma L^\\mu_{\\gamma,\\rm sup}(f)+\\epsilon$ fails for logistic contrastive loss. In particular, the hinge-margin corollary cannot be transferred unchanged to logistic training.\n\nFor the optional transfer comparison, assume the Axiom of Choice, fix $M\\ge1$ and $0<\\delta<1$, impose the corollary's remaining model, risk and supremum measurability, and measurable exact-empirical-minimizer hypotheses, and use the singleton $\\mathcal F=\\{f\\}$. The proposed extension is\n\n$$L^\\mu_{\\rm sup}(\\widehat f)\\le\\gamma L^\\mu_{\\gamma,\\rm sup}(f)+\\epsilon+\\frac{\\sqrt2L_0\\tau s(f)+2\\Gamma^{\\rm log}_M(S,\\delta)}{1-\\tau},$$\n\nwhere $L^\\mu_{\\rm sup}(\\widehat f)$ uses logistic task loss, $L^\\mu_{\\gamma,\\rm sup}(f)$ uses the scaled hinge margin loss, $\\gamma=1$ here, and\n\n$$\\Gamma^{\\rm log}_M(S,\\delta):=\\frac{2\\sqrt{18}L_0R\\,\\mathcal R_S(\\mathcal F)}{M}+3B_{\\ell_{\\rm log},R}\\sqrt{\\frac{\\ln(4/\\delta)}{2M}}$$\n\nuses the logistic loss oscillation. The example tests this claimed mean-classifier bound with logistic contrastive training.",
+      "source": {
+        "path": "items/ex-logistic-loss-not-covered-by-hinge-margin-comparison.md",
+        "sha256": "92e24b923cdffe16492114fb22a243bfe330db3dc3c789453375d1d6ca7ba324"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "dd4d39943a46961514a61a3b47735affee0f4675f25475807b1517686ed90be4"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-58.pages.json",
+      "batch": 58,
+      "id": "ex-vae-inference-gap",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC and use Lebesgue measure for the latent densities. In the first model, a scalar latent variable $Z$ has prior $N(0,4)$, and conditional on $Z=z$ the observation is $X=(Y_1,Y_2)$ with $Y_1,Y_2$ IID $N(z,1)$. At the observed value $x=(2,4)$, the evidence is finite and positive and the posterior is $N(8/3,4/9)$. Restrict the encoder family to $q_m(z\\mid x)=N(m,4/9)$ for $m\\in[-1,1]$ and choose $m=0$. This encoder is admissible and its reverse-KL gap, with $D_{\\rm KL}(q\\|\\pi):=\\int q(z)\\log(q(z)/\\pi(z))\\,dz$, is $D_{\\rm KL}(q_0(\\cdot\\mid x)\\|\\pi(\\cdot\\mid x))=8>0$, so its ELBO is exactly $8$ below the log evidence.\n\nIn a second model, let $Z\\sim N(0,1)$ and use the standard normal density $h(x)=(2\\pi)^{-1/2}e^{-x^2/2}$ for $p(x\\mid z)=h(x)$, independent of $z$. For every observation $x\\in\\mathbb R$, the evidence is $0<h(x)<\\infty$ and the posterior equals the prior. Choose the constant encoder $q(z\\mid x)=N(0,1)$ for every $x$. Its reverse-KL gap is zero and its ELBO equals the log evidence on every fibre. Thus $q(z\\mid x)=p_\\theta(z\\mid x)=p(z)$ for all $x$, a posterior-collapse configuration in which the decoder ignores the latent variable; this is one model configuration, not a claim that VAE training always collapses.",
+      "source": {
+        "path": "items/ex-vae-inference-gap.md",
+        "sha256": "e8ede620a345d7432e6ce6180ebb004b7b74ffe029e4711ed2db42346a94d523"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "4dd789f22d21b239041ccfbbd1602b3454dbadcc586f825eea9e2df0957ec7bf"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-63.pages.json",
+      "batch": 63,
+      "id": "fs-pointwise-integrable-generator-constants-imply-locally-lipschitz-wgan-loss",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $X=([0,1],|x-y|)$, let $g:\\mathbb R\\times\\mathbb R\\to[0,1]$ be jointly locally Lipschitz, and write $g_\\theta(z):=g(\\theta,z)$. Let $\\rho$ be a Borel probability measure on latent $\\mathbb R$. Suppose for every $(\\theta,z)$ there is a finite local joint Lipschitz constant $L(\\theta,z)\\ge0$ and an open neighborhood $U_{\\theta,z}$ on which\n$$\n|g(\\theta_1,z_1)-g(\\theta_2,z_2)|\\le L(\\theta,z)(|\\theta_1-\\theta_2|+|z_1-z_2|)\n$$\nfor all $(\\theta_1,z_1),(\\theta_2,z_2)\\in U_{\\theta,z}$. Assume for every $\\theta$ that $z\\mapsto L(\\theta,z)$ is Borel measurable and $\\int_{\\mathbb R}L(\\theta,z)\\,d\\rho(z)<+\\infty$. Define the pushforward probability $P_\\theta(B):=\\rho(\\{z:g_\\theta(z)\\in B\\})$ for Borel $B\\subseteq[0,1]$, and let $V(\\theta):=W_1^X(\\delta_0,P_\\theta)$. The proposed implication is that $V$ is locally Lipschitz at every parameter.",
+      "source": {
+        "path": "items/fs-pointwise-integrable-generator-constants-imply-locally-lipschitz-wgan-loss.md",
+        "sha256": "c953512f9571245cc680cce010a0a73e248ca61bf69480774709388b55ccf495"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "10ce81c7849e9792a5b6fc2e9e056dd86741e272e1573189541cd8a8a94f3b50"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-63.pages.json",
+      "batch": 63,
+      "id": "fs-pointwise-integrable-generator-constants-justify-critic-gradient-exchange",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $X=([0,1],|x-y|)$, let $g:\\mathbb R\\times\\mathbb R\\to[0,1]$ be jointly locally Lipschitz, and write $g_\\theta(z):=g(\\theta,z)$. Let $\\rho$ be a Borel probability measure on latent $\\mathbb R$ with a nonnegative Lebesgue-measurable density $q$, meaning $\\rho(A)=\\int_Aq\\,d\\lambda$ for every Borel $A\\subseteq\\mathbb R$, with $\\int_{\\mathbb R}q\\,d\\lambda=1$. Suppose for every $(\\theta,z)$ there is a finite local joint Lipschitz constant $L(\\theta,z)\\ge0$ and an open neighborhood $U_{\\theta,z}$ on which\n$$\n|g(\\theta_1,z_1)-g(\\theta_2,z_2)|\\le L(\\theta,z)(|\\theta_1-\\theta_2|+|z_1-z_2|)\n$$\nfor all $(\\theta_1,z_1),(\\theta_2,z_2)\\in U_{\\theta,z}$. Assume for every $\\theta$ that $z\\mapsto L(\\theta,z)$ is Borel measurable and $\\int_{\\mathbb R}L(\\theta,z)\\,d\\rho(z)<+\\infty$. Define $P_\\theta(B):=\\rho(\\{z:g_\\theta(z)\\in B\\})$ for Borel $B\\subseteq[0,1]$ and $V(\\theta):=W_1^X(\\delta_0,P_\\theta)$. The proposed implication is that for a function $f:[0,1]\\to\\mathbb R$ with $f(0)=0$ and $|f(x)-f(y)|\\le|x-y|$ that attains the signed dual supremum at $\\theta_0$, whenever $V'(\\theta_0)$ and the Lebesgue integral $\\int_{\\mathbb R}\\partial_\\theta[f(g_\\theta(z))]|_{\\theta_0}\\,d\\rho(z)$ are defined, one has\n$$\nV'(\\theta_0)=-\\int_{\\mathbb R}\\partial_\\theta[f(g_\\theta(z))]|_{\\theta_0}\\,d\\rho(z).\n$$",
+      "source": {
+        "path": "items/fs-pointwise-integrable-generator-constants-justify-critic-gradient-exchange.md",
+        "sha256": "9d195799b7985b3451b7329f5977cfed124d6a57ffae9eba2f5da29a1c7a694d"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "10ce81c7849e9792a5b6fc2e9e056dd86741e272e1573189541cd8a8a94f3b50"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-64.pages.json",
+      "batch": 64,
+      "id": "def-normalizing-flow",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that both $T$ and $T^{-1}$ are continuously differentiable. Here $C^1$ means totally differentiable at every point with continuous derivative matrix. Such a map is a **global $C^1$ diffeomorphism**. A finite composition $T=T_K\\circ\\cdots\\circ T_1$ of global $C^1$ diffeomorphisms between open subsets of $\\mathbb R^d$ is a **normalizing flow**.\n\nA **base density** on $U$ is a Lebesgue-measurable function $p_U:U\\to[0,\\infty]$ with $\\int_U p_U\\,d\\lambda_d=1$. It defines the probability measure $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$.\n\nFor the model-measure construction, assume the Axiom of Countable Choice. The model measure on $V$ is $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. This value is defined because the inverse $C^1$ diffeomorphism maps Borel sets to Lebesgue-measurable sets under Countable Choice. When this measure has a Lebesgue density, that density is the model density.",
+      "source": {
+        "path": "items/def-normalizing-flow.md",
+        "sha256": "30a9212131aa91321182724281dfd0d5e5ce6ab21ba8234cad8d03e63ec80b99"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "17a0841177596bf98e32d9a617dc55cf3bb87ca22821a0f253fa6369f1e87070"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-67.pages.json",
+      "batch": 67,
+      "id": "lem-continuous-local-martingale-quadratic-variation",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC. Let $M$ be a real continuous local martingale on $[0,T]$ with $M_0=0$, where a local martingale means that some increasing stopping times tending to $T$ make the stopped processes martingales. Then there is a unique continuous increasing process $[M]$ with $[M]_0=0$ such that the step-endpoint and partial-increment sums of squared increments along every deterministic partition sequence whose mesh tends to zero converge uniformly in probability to $[M]$. Moreover $M_t^2-[M]_t$ is a continuous local martingale. For a continuous $d$-dimensional local martingale $M$ started at zero, polarization defines continuous covariations $[M^i,M^j]$ with $M^iM^j-[M^i,M^j]$ local martingales. More generally, if $X=M+A$ and $Z=N+C$ with continuous local martingales $M,N$ and continuous finite-variation processes $A,C$, then left-step sums define the localized integrals against $M,N$ and\n$$X_tZ_t-X_0Z_0=\\int_0^t X_s\\,dZ_s+\\int_0^t Z_s\\,dX_s+[M,N]_t,$$\nwhere finite-variation integrals are pathwise Lebesgue–Stieltjes integrals and local-martingale integrals are the limits of the displayed left-step sums. Stopping a continuous local martingale at a bounded stopping time preserves its local-martingale property; if the stopped process is bounded, it is a true martingale. A continuous finite-variation local martingale is constant.",
+      "source": {
+        "path": "items/lem-continuous-local-martingale-quadratic-variation.md",
+        "sha256": "57d56de5e1f010563f3a8fc06b553d72f2a729c2e5a3ae32595067afd70cf003"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "29b7b316e4ca7345c10b85a3b8eebf13cb872c97f927c7c5f2b7fcd6aef12ca1"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-67.pages.json",
+      "batch": 67,
+      "id": "lem-continuous-local-martingale-quadratic-variation",
+      "field": "deps",
+      "before_present": true,
+      "before": [
+        "cor-cauchy-schwarz-for-random-variables",
+        "def-axiom-of-choice",
+        "def-continuous-time-adapted-process-and-martingale",
+        "def-continuous-time-stopping-time",
+        "def-quadratic-covariation-of-brownian-ito-processes",
+        "lem-martingale-differences-are-orthogonal-in-l2",
+        "thm-dominated-convergence",
+        "thm-doob-lp-maximal-inequality",
+        "thm-riesz-fischer-completeness-of-l-p",
+        "thm-monotone-convergence-for-the-integral",
+        "thm-optional-sampling-for-bounded-stopping-times"
+      ],
+      "after": [
+        "cor-cauchy-schwarz-for-random-variables",
+        "def-axiom-of-choice",
+        "def-continuous-time-adapted-process-and-martingale",
+        "def-continuous-time-stopping-time",
+        "def-quadratic-covariation-of-brownian-ito-processes",
+        "lem-martingale-differences-are-orthogonal-in-l2",
+        "thm-optional-sampling-for-bounded-stopping-times",
+        "thm-dominated-convergence",
+        "thm-doob-lp-maximal-inequality",
+        "thm-riesz-fischer-completeness-of-l-p",
+        "thm-monotone-convergence-for-the-integral"
+      ],
+      "source": {
+        "path": "items/lem-continuous-local-martingale-quadratic-variation.md",
+        "sha256": "57d56de5e1f010563f3a8fc06b553d72f2a729c2e5a3ae32595067afd70cf003"
+      },
+      "source_section": "frontmatter.deps",
+      "before_file_sha256": "29b7b316e4ca7345c10b85a3b8eebf13cb872c97f927c7c5f2b7fcd6aef12ca1"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-67.pages.json",
+      "batch": 67,
+      "id": "lem-elliptic-local-martingale-brownian-representation",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice. Let $(M_t)_{0\\le t\\le T}$ be a continuous adapted $d$-dimensional local martingale with $M_0=0$. Let $(\\sigma_t)_{0\\le t\\le T}$ be a continuous adapted process of invertible $d\\times d$ matrices such that $\\|\\sigma_t^{-1}\\|\\le C$ for a deterministic finite constant $C$, and suppose every entry of $\\sigma$ is locally square-integrable in time almost surely. Write $[M^i,M^j]$ for the continuous bracket characterized by the local-martingale property of $M^iM^j-[M^i,M^j]$, and assume\n$$[M^i,M^j]_t=\\int_0^t(\\sigma_s\\sigma_s^{\\mathsf T})_{ij}\\,ds\\qquad(1\\le i,j\\le d).$$\nThen the stochastic integral $B_t=\\int_0^t\\sigma_s^{-1}\\,dM_s$, constructed as the localized $L^2$ limit of left-step sums, has a continuous version with $[B^i,B^j]_t=\\delta_{ij}t$. Consequently $B$ is a standard $d$-dimensional Brownian motion relative to the given filtration.",
+      "source": {
+        "path": "items/lem-elliptic-local-martingale-brownian-representation.md",
+        "sha256": "52e9e5548804f236a7ab60966ae5684619b4a6b8f5ef044fd42a914f19ef2948"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "29b7b316e4ca7345c10b85a3b8eebf13cb872c97f927c7c5f2b7fcd6aef12ca1"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-67.pages.json",
+      "batch": 67,
+      "id": "lem-elliptic-local-martingale-brownian-representation",
+      "field": "deps",
+      "before_present": true,
+      "before": [
+        "cor-vector-levy-characterization",
+        "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "thm-quadratic-covariation-of-brownian-ito-processes",
+        "def-axiom-of-choice",
+        "def-continuous-time-adapted-process-and-martingale",
+        "def-progressively-measurable-and-predictable-process",
+        "lem-adapted-continuous-processes-are-progressively-measurable",
+        "thm-doob-lp-maximal-inequality",
+        "thm-riesz-fischer-completeness-of-l-p",
+        "def-conditional-expectation-as-an-ae-class",
+        "lem-continuous-local-martingale-quadratic-variation",
+        "thm-dominated-convergence",
+        "thm-monotone-convergence-for-the-integral",
+        "cor-cauchy-schwarz-for-random-variables"
+      ],
+      "after": [
+        "cor-vector-levy-characterization",
+        "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+        "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+        "thm-quadratic-covariation-of-brownian-ito-processes",
+        "def-axiom-of-choice",
+        "def-continuous-time-adapted-process-and-martingale",
+        "def-progressively-measurable-and-predictable-process",
+        "lem-adapted-continuous-processes-are-progressively-measurable",
+        "thm-doob-lp-maximal-inequality",
+        "thm-riesz-fischer-completeness-of-l-p",
+        "thm-dominated-convergence",
+        "thm-monotone-convergence-for-the-integral",
+        "cor-cauchy-schwarz-for-random-variables",
+        "def-conditional-expectation-as-an-ae-class",
+        "lem-continuous-local-martingale-quadratic-variation"
+      ],
+      "source": {
+        "path": "items/lem-elliptic-local-martingale-brownian-representation.md",
+        "sha256": "52e9e5548804f236a7ab60966ae5684619b4a6b8f5ef044fd42a914f19ef2948"
+      },
+      "source_section": "frontmatter.deps",
+      "before_file_sha256": "29b7b316e4ca7345c10b85a3b8eebf13cb872c97f927c7c5f2b7fcd6aef12ca1"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-67.pages.json",
+      "batch": 67,
+      "id": "thm-anderson-reverse-time-diffusion",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC. Fix $t_0<T$, integers $d,r\\ge1$, and a filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t_0\\le t\\le T},P)$ satisfying the usual conditions. Let $W$ be an adapted standard $r$-dimensional Brownian motion such that $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_r(0,(t-s)I_r)$ for every $t_0\\le s<t\\le T$. Let $X_{t_0}$ be $\\mathcal F_{t_0}$-measurable, almost surely bounded, and independent of the future Brownian increments $\\sigma(W_t-W_{t_0}:t_0\\le t\\le T)$. Let\n$$dX_t=b(X_t,t)\\,dt+\\sigma(X_t,t)\\,dW_t,\\qquad X_t\\in\\mathbb R^d,$$\nfor $t\\in[t_0,T]$. Assume the drift and diffusion path integrals satisfy $\\int_{t_0}^T|b(X_s,s)|ds<\\infty$ and $\\int_{t_0}^T\\|\\sigma(X_s,s)\\|_F^2ds<\\infty$ almost surely, and that this SDE has a unique nonexplosive strong solution. Put $a=\\sigma\\sigma^{\\mathsf T}$. Also assume the strong restart property: for each deterministic $s\\in[t_0,T]$, the future path $(X_r)_{s\\le r\\le T}$ is almost surely a measurable function of $X_s$ and $(W_r-W_s)_{s\\le r\\le T}$. Assume the coefficients and densities are smooth enough for the displayed derivatives and Itô identities to hold. Assume the marginal density $p_t(x)$ is positive wherever used and is a unique smooth solution of\n$$\\partial_t p_t=L_t^*p_t,\\qquad L_t^*r=-\\sum_i\\partial_i(b_i r)+\\tfrac12\\sum_{i,j}\\partial_i\\partial_j(a_{ij}r).$$\nDefine the $r$-vector process $\\widetilde W$ by $\\widetilde W_{t_0}=0$ and\n$$d\\widetilde W_t^k=dW_t^k+c_k(X_t,t)\\,dt,\\qquad c_k(x,t)=p_t(x)^{-1}\\sum_i\\partial_i\\!\\left(p_t(x)\\sigma_{ik}(x,t)\\right).$$\nAssume the augmented process $(X,\\widetilde W)$ has a unique smooth joint density solving its augmented forward Kolmogorov equation for $t>t_0$, and for every $t>s\\ge t_0$ its conditional joint density given $\\widetilde W_s$ is the unique smooth solution of the corresponding conditional augmented equation; all displayed derivatives and density integrals are valid. Then the following hold.\n\n1. For $t>s\\ge t_0$, $X_t$ is independent of $\\widetilde W_t-\\widetilde W_s$, and this increment has law $N_r(0,(t-s)I_r)$.\n2. Put $U=T-t_0$, $Y_u=X_{T-u}$, and $B_u=\\widetilde W_{T-u}-\\widetilde W_T$ for $0\\le u\\le U$. With $\\mathcal G_u=\\sigma(Y_v,B_v:0\\le v\\le u)$, $B$ is a standard $r$-dimensional Brownian motion relative to $(\\mathcal G_u)$.\n3. In the backward Itô convention, $Y$ satisfies\n$$dY_u=\\left[-b(Y_u,T-u)+(\\nabla\\!\\cdot a)(Y_u,T-u)+a(Y_u,T-u)\\nabla\\log p_{T-u}(Y_u)\\right]du+\\sigma(Y_u,T-u)\\,dB_u,$$\nwhere $(\\nabla\\!\\cdot a)_i=\\sum_j\\partial_j a_{ij}$. The score is asserted only where $p_{T-u}>0$; no density or score regularity beyond the stated hypotheses is implied.",
+      "source": {
+        "path": "items/thm-anderson-reverse-time-diffusion.md",
+        "sha256": "92b1504bbc3e8147e4229117eb17c007c4ff6a6fa7856eff4dbd7c36149da391"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "29b7b316e4ca7345c10b85a3b8eebf13cb872c97f927c7c5f2b7fcd6aef12ca1"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-74.pages.json",
+      "batch": 74,
+      "id": "thm-online-gradient-descent-regret",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $d,T\\ge1$ be integers, let $K\\subseteq\\mathbb R^d$ be nonempty, closed, and convex, and let $D,G\\ge0$ be finite bounds such that $\\|u-v\\|_2\\le D$ for all $u,v\\in K$ and $\\|g_t\\|_2\\le G$ for every round. Supply $x_1\\in K$. On each round, either $f_t$ is differentiable and convex on an open convex neighborhood of $K$ and $g_t=\\nabla f_t(x_t)$, or $f_t:C_t\\to\\mathbb R$ is convex on a convex set $C_t\\supseteq K$ and a vector $g_t\\in\\partial f_t(x_t)$ is supplied with $f_t(u)\\ge f_t(x_t)+\\langle g_t,u-x_t\\rangle$ explicitly required for every $u\\in K$; here $\\partial f_t(x_t)$ is the set of vectors satisfying that supporting inequality for every point of $C_t$. Run projected online gradient descent with $\\eta_t=D/(G\\sqrt t)$ when $D,G>0$, and with the no-op branch $x_{t+1}=x_t$ if $D=0$ or $G=0$. Assume the Axiom of Countable Choice only when $D,G>0$. For every realization satisfying these hypotheses and every $u\\in K$,\n$$\\sum_{t=1}^T\\bigl(f_t(x_t)-f_t(u)\\bigr)\\le\\frac32DG\\sqrt T.$$\nIf $D=0$ or $G=0$, this sum is nonpositive. Whenever the finite-horizon loss sum attains a finite minimum on $K$, the static regret, defined as $\\sum_{t=1}^T f_t(x_t)-\\min_{u\\in K}\\sum_{t=1}^T f_t(u)$, is therefore at most $\\frac32DG\\sqrt T$.",
+      "source": {
+        "path": "items/thm-online-gradient-descent-regret.md",
+        "sha256": "824e4c71c32016729da05d5aa18be6f0b2466e4290200e8e35fa2a0082c57336"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "2362164dfce24cb4f02a06b4553ea75cb5cefc93cf7714ab809fce6a94db33e8"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-76.pages.json",
+      "batch": 76,
+      "id": "alg-upper-confidence-bound-bandit",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Input integers $k,n$ with $1\\le k\\le n$, a confidence parameter $\\delta\\in(0,1)$, and access to an $n$-round $k$-armed stochastic bandit. Output the selected arms $A_1,\\ldots,A_n$.\n\n1. Initialize by choosing each arm once: set $A_t=t$ for $t=1,\\ldots,k$, and observe each reward.\n2. For each round $t=k+1,\\ldots,n$, compute $T_i(t-1)=\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}$ for every arm $i$. If $T_i(t-1)>0$, first set $\\widehat\\mu_i(t-1)=\\bigl(\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}Y_s\\bigr)/T_i(t-1)$ and then set $U_i(t-1)=\\widehat\\mu_i(t-1)+\\sqrt{2\\log(1/\\delta)/T_i(t-1)}$. If $T_i(t-1)=0$, set $U_i(t-1)=+\\infty$.\n3. Choose the least index $i$ attaining $\\max_{j\\in[k]}U_j(t-1)$ as $A_t$, then observe $Y_t$.",
+      "source": {
+        "path": "items/alg-upper-confidence-bound-bandit.md",
+        "sha256": "79afec6c444d5d3a76ea78977ca4f4b5824cd94984a258d3bde34dcbcf24a0be"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "a934aa5eaefc49c566ebe5d81c2521e178eade0527b1bb526063f2ae6b6678d0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-76.pages.json",
+      "batch": 76,
+      "id": "thm-explore-then-commit-expected-regret",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $k,n,m$ be positive integers with $mk\\le n$. In an $n$-round $k$-armed stochastic bandit, suppose all reward-stack entries are 1-sub-Gaussian. Run explore-then-commit with exploration count $m$. Its expected reward regret satisfies\n$$\nR_n\\le m\\sum_{i=1}^k\\Delta_i+(n-mk)\\sum_{i=1}^k\\Delta_i\\exp\\!\\left(-\\frac{m\\Delta_i^2}{4}\\right).\n$$\nThis is an expected-regret bound, not a high-probability guarantee.",
+      "source": {
+        "path": "items/thm-explore-then-commit-expected-regret.md",
+        "sha256": "2d0553be370f185c9d7023a35a0dd0afb068e8ba07d621255b3d044e7343ab19"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "a934aa5eaefc49c566ebe5d81c2521e178eade0527b1bb526063f2ae6b6678d0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-79.pages.json",
+      "batch": 79,
+      "id": "lem-linucb-gaussian-mixture-supermartingale",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC and Countable Choice and the finite-dimensional linear contextual bandit model. Put $S_t=\\sum_{s=1}^tA_s\\eta_s$, $G_t=\\sum_{s=1}^tA_sA_s^{\\mathsf T}$, and $V_t=\\lambda I_d+G_t$. Let $\\mathcal H_t:=\\mathcal F_{t+1}$ be the information after round $t$ has been observed. Then\n\n$$Z_t:=\\sqrt{\\frac{\\det(V_0)}{\\det(V_t)}}\\exp\\!\\left(\\frac12 S_t^{\\mathsf T}V_t^{-1}S_t\\right),\\qquad Z_0:=1,$$\n\nis a nonnegative integrable supermartingale with respect to $(\\mathcal H_t)_{t=0}^n$.",
+      "source": {
+        "path": "items/lem-linucb-gaussian-mixture-supermartingale.md",
+        "sha256": "92c02f514f247d81ad3a54585177f096797e417fc12d827a841444f8d5fd7158"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "85e035abd34fabcdff358ca189cd8efa26317530614c1b07de4d48d22de32de0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-79.pages.json",
+      "batch": 79,
+      "id": "alg-linucb",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "**Inputs and admissibility.** Take the finite-dimensional linear contextual bandit model and a confidence level $\\delta\\in(0,1)$. At each round, the nonempty available action set is finite and ordered with its feature vectors, or the available feature set is compact with a supplied attained measurable predictable maximizer for the score below. In the finite case evaluate the score for each action's feature and resolve ties by the first action. All model assumptions, including $\\lambda>0$, the feature and parameter bounds, pre-reward information, and the conditional noise bound, are in force.\n\n**Outputs.** Before each reward is observed, output the selected feature $A_t$; after the reward $X_t$ is observed, record it. At the horizon return the online sequence $(A_t,X_t)_{t=1}^n$ and terminal state $(V_n,b_n,\\widehat\\theta_n)$.\n\nInitialize $V_0=\\lambda I_d$, $b_0=0$, $\\widehat\\theta_0=0$, $W_0=\\lambda^{-1}I_d$, and $D_0=\\lambda^d$. At each round $t=1,\\ldots,n$, compute\n\n$$\\rho_t=\\sqrt\\lambda\\,m_2+\\sqrt{2\\log(1/\\delta)+\\log(D_{t-1}/D_0)},\\qquad \\beta_t=\\max\\{1,\\rho_t^2\\},$$\n\nNext select an available feature vector\n\n$$A_t\\in\\arg\\max_{a\\in\\mathcal A_t}\\left\\{\\langle\\widehat\\theta_{t-1},a\\rangle+\\sqrt{\\beta_t}\\,\\sqrt{a^{\\mathsf T}W_{t-1}a}\\right\\}.$$\n\nFor a finite ordered action set, evaluate every action's score and take the first maximizing action's feature; for a compact feature set, call the supplied selector once. After observing reward $X_t$, update\n\n$$V_t=V_{t-1}+A_tA_t^{\\mathsf T},\\qquad b_t=b_{t-1}+A_tX_t.$$\n\nThen compute the updated matrix state $W_t,D_t$ from $V_t$ by the following exact row procedure. Form the augmented matrix $M=[V_t\\mid I_d]$, set $s=1$ and $D=1$, and for $k=0,\\ldots,d-1$ choose the least row index $i\\ge k$ whose current left-block entry $M_{ik}$ is nonzero. If no such row exists, return failure. If $i\\ne k$, swap rows $i$ and $k$ and replace $s$ by $-s$. Set $p_k=M_{kk}$, replace $D$ by $Dp_k$, divide row $k$ by $p_k$, and for every $j\\ne k$ set $\\operatorname{row}_j\\leftarrow\\operatorname{row}_j-M_{jk}\\operatorname{row}_k$. After the loop set $W_t$ to the right block and $D_t=sD$, and set $\\widehat\\theta_t=W_tb_t$. For a compact feature set the supplied selector must return an attained maximizing feature measurably from pre-reward information.",
+      "source": {
+        "path": "items/alg-linucb.md",
+        "sha256": "2497388f17218276503f16ca8cbce0a7a643a027fcca63c0be301260ea92037b"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "85e035abd34fabcdff358ca189cd8efa26317530614c1b07de4d48d22de32de0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-79.pages.json",
+      "batch": 79,
+      "id": "thm-linucb-regret",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume AC and Countable Choice, the finite-dimensional linear contextual bandit model, and LinUCB with $\\beta_t=\\max\\{1,\\rho_t^2\\}$ as defined in the algorithm. Let $\\delta\\in(0,1)$ be the confidence input to LinUCB. Suppose also that for every round $t$,\n\n$$\\sup_{a,b\\in\\mathcal A_t}\\langle\\theta^*,a-b\\rangle\\le1.$$\n\nDefine the random pseudo-regret by\n\n$$\\widehat R_n:=\\sum_{t=1}^n\\left(\\max_{a\\in\\mathcal A_t}\\langle\\theta^*,a\\rangle-\\langle\\theta^*,A_t\\rangle\\right).$$\n\nThen, with probability at least $1-\\delta$,\n\n$$\\widehat R_n\\le\\sqrt{8n\\beta_n\\log\\!\\left(\\frac{\\det V_n}{\\det V_0}\\right)}\\le\\sqrt{8dn\\beta_n\\log\\!\\left(1+\\frac{nL^2}{d\\lambda}\\right)}.$$\n\n**Algorithm properties.** For every admissible model input, the algorithm also completes exactly $n$ rounds and outputs $(A_t,X_t)_{t=1}^n$ and $(V_n,b_n,\\widehat\\theta_n)$. Count exact real arithmetic operations, comparisons, square roots, and logarithms with unit cost, and exclude generation of contexts, features, and rewards. Let $F$ be the rounds with finite action sets and let $m_t$ be the number of available actions at round $t\\in F$; let $K$ be the compact-feature rounds. The procedure makes exactly $|K|$ calls to the supplied maximizing selector and uses $O(nd^3+d^2\\sum_{t\\in F}m_t)$ operations apart from selector costs.",
+      "source": {
+        "path": "items/thm-linucb-regret.md",
+        "sha256": "780a84066857a33dffc19e29c181a905d739367e95c944487c963cd463c295b7"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "85e035abd34fabcdff358ca189cd8efa26317530614c1b07de4d48d22de32de0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-79.pages.json",
+      "batch": 79,
+      "id": "cor-linucb-expected-regret",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the hypotheses of the LinUCB high-probability regret theorem, with $d\\ge1$, $\\lambda>0$, $L\\ge1$, $m_2\\ge0$, and horizon $n\\ge2$. Run LinUCB with $\\delta=1/n$. Let $\\widehat R_n$ be its random pseudo-regret and define expected pseudo-regret by $R_n:=\\mathbb E[\\widehat R_n]$. Put\n\n$$q_n:=\\log\\!\\left(1+\\frac{nL^2}{d\\lambda}\\right),\\qquad B_n:=\\sqrt{8dn\\beta_nq_n},$$\n\nwhere $\\beta_n$ is the algorithm's confidence schedule, and set\n\n$$c:=1+\\frac{\\log(1+L/\\lambda)}{\\log2},\\qquad C_1:=4+2c+\\frac{1+2\\lambda m_2^2}{\\log2},\\qquad C:=\\sqrt{8C_1c}+\\frac{1}{\\sqrt2\\log2}.$$\n\nHere $B_n$ is generally random through $\\beta_n$ and the design matrix. Then\n\n$$R_n\\le\\mathbb E[B_n]+1\\le C\\,d\\sqrt n\\log(nL).$$\n\nThis is an expected pseudo-regret bound; it is distinct from a high-probability bound on realized reward regret.",
+      "source": {
+        "path": "items/cor-linucb-expected-regret.md",
+        "sha256": "51514a2816d45bf45976502b5343b38182bf5b76b425d1d7f6bdb2003fcb0666"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "85e035abd34fabcdff358ca189cd8efa26317530614c1b07de4d48d22de32de0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+      "batch": 84,
+      "id": "def-differentiable-stochastic-policy",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+      "source": {
+        "path": "items/def-differentiable-stochastic-policy.md",
+        "sha256": "02b21be78a5428eb4118f334a6cf98f801f96a66a4c008064788bf6bfbc68e29"
+      },
+      "source_section": "Definition",
+      "before_file_sha256": "e5bf0b777cec5329deb3dd3deff283bfbedd903fc036a1d672086c6e4e82079b"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-85.pages.json",
+      "batch": 85,
+      "id": "thm-bellman-error-unlearnability-example",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Assume the Axiom of Choice to form the infinite trajectory laws. Fix $0\\leq\\gamma<1$. An actionless finite Markov reward process (MRP) here means a nonempty finite state set with a joint probability law for next state and reward at each state. Consider the following two MRPs, each with its stated stationary state-weighting distribution, meaning that one transition leaves the distribution unchanged.\n\nIn MRP 1 the state set is $\\{A,B\\}$, with transitions $A\\to B$ receiving reward $0$ deterministically and $B\\to A$ receiving reward $1$ with probability $1/2$ or $B\\to B$ receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_1(A)=1/3$, $\\mu_1(B)=2/3$.\n\nIn MRP 2 the state set is $\\{A,B,B'\\}$, with transitions $A\\to B$ and $A\\to B'$ each receiving reward $0$ with probability $1/2$, $B\\to A$ receiving reward $1$ deterministically, and $B'\\to B$ or $B'\\to B'$ each receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_2(A)=\\mu_2(B)=\\mu_2(B')=1/3$.\n\nIn both processes the observed feature is $\\psi(A)=(1,0)$ and $\\psi(B)=\\psi(B')=(0,1)$, so a parameter $w=(a,b)^\\mathsf T$ assigns values $v_w(A)=a$ and $v_w(B)=v_w(B')=b$. Starting from the stated stationary weighting, the two processes induce the same probability law on the observed feature/reward sequence $((\\psi(S_n),R_{n+1}))_{n\\geq0}$. Their mean square Bellman errors, defined as the stationary-weighted square of the conditional expected one-step TD error, are\n$$\n\\begin{aligned}\\operatorname{BE}_1(a,b)&=\\frac13(\\gamma b-a)^2+\\frac23\\left(\\frac{\\gamma}{2}(a+b)-b\\right)^2,\\\\ \\operatorname{BE}_2(a,b)&=\\frac13\\left((\\gamma b-a)^2+(1+\\gamma a-b)^2+(-1+(\\gamma-1)b)^2\\right).\\end{aligned}\n$$\nMRP 1 has the unique minimizer $(a,b)=(0,0)$ and minimum $0$. With $D=1+\\gamma+\\gamma^2$, MRP 2 has the unique minimizer $(a,b)=\\left(-\\frac{\\gamma}{D},\\frac{\\gamma}{2D}\\right)$ and minimum $\\frac{(\\gamma+2)^2}{6D}$; also $\\operatorname{BE}_2(0,0)=2/3$. For every $0<\\gamma<1$ the minimizing parameters differ. Thus the Bellman-error objective and, for positive discount, its minimizing parameter are not determined by the observable feature/reward sequence law. An MRP here has no action-dependent policy; it is not an unseen-action offline-MDP policy-impossibility claim.",
+      "source": {
+        "path": "items/thm-bellman-error-unlearnability-example.md",
+        "sha256": "14e91da25d6ec6ac2e8aa09ca87aeddd6d23f9488791cd1dfcfc34de8aafb55f"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "447cc9f2b024b0a37f430fac0027b34fe5ac04619d2e91911fa08454acb08dc0"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+      "batch": 90,
+      "id": "lem-discounted-occupancy-change-bounded-by-average-tv",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let a finite discounted CMDP and two stationary policies $\\pi,\\pi'$ be given, with normalized discounted occupancies $d^\\pi,d^{\\pi'}$. Define\n\n$$\\operatorname{TV}_s(\\pi',\\pi):=\\frac12\\sum_{a\\in A(s)}|\\pi'(a\\mid s)-\\pi(a\\mid s)|$$\n\nand $\\|x\\|_1:=\\sum_{s\\in S}|x(s)|$ for a state vector. Then\n\n$$\\|d^{\\pi'}-d^\\pi\\|_1\\le\\frac{2\\gamma}{1-\\gamma}\\sum_{s\\in S}d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi).$$",
+      "source": {
+        "path": "items/lem-discounted-occupancy-change-bounded-by-average-tv.md",
+        "sha256": "695abc92e894289573053b8ca70cc9e3550fe13c389a4ad65a81dbd4888be541"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "5892458746922eeb64d6adaf2690cb98ff0466ccb4409bad4ac153986ce55da9"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-97.pages.json",
+      "batch": 97,
+      "id": "thm-masking-chain-posterior",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$ be the survival schedule of the finite masking chain. Fix a clean sequence $x\\in V^L$ and grid indices $0\\le s<t\\le N$. For every state $z_t\\in(V\\cup\\{m\\})^L$ with $\\Pr(Z_t=z_t\\mid X=x)>0$, the conditional law of $Z_s$ given $X=x,Z_t=z_t$ is a product over coordinates. At coordinate $i$, if $z_{t,i}\\in V$, then $Z_{s,i}=z_{t,i}$ with probability one. If $z_{t,i}=m$, then, with $c_{s,t}=(\\alpha_s-\\alpha_t)/(1-\\alpha_t)$, the only possible values are $x_i$ and $m$, with probabilities\n$$\\Pr(Z_{s,i}=x_i\\mid X=x,Z_{t,i}=m)=c_{s,t},\\qquad \\Pr(Z_{s,i}=m\\mid X=x,Z_{t,i}=m)=\\frac{1-\\alpha_s}{1-\\alpha_t}.$$\nThe denominator is positive because $t\\ge1$ implies $\\alpha_t<1$; at $s=0$ the mask posterior has zero mass.",
+      "source": {
+        "path": "items/thm-masking-chain-posterior.md",
+        "sha256": "b4f69ddf6b95e6e6c0a68d7c930f5889c9a395d512abb844b9e175025cb81949"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "b0003347712342e3f6b7f0da9514e1976f07918acef4545213226fb27b46aa18"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-97.pages.json",
+      "batch": 97,
+      "id": "lem-finite-masking-path-reversal-factorization",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Fix a clean string $x\\in V^L$ and let $q_x$ be the finite forward path law of the absorbing-mask chain. For every path $(z_0,\\ldots,z_N)$ with $q_x(z_0,\\ldots,z_N)>0$, the reversed path probability factors as\n$$q_x(z_0,\\ldots,z_N)=q_x(Z_N=z_N)\\prod_{j=N}^{1}q_x(Z_{j-1}=z_{j-1}\\mid Z_j=z_j).$$\nEach factor on the right is the true one-step posterior conditional on the clean string $x$; the identity is asserted only on positive-probability paths.",
+      "source": {
+        "path": "items/lem-finite-masking-path-reversal-factorization.md",
+        "sha256": "98333a4b5c45a79864346c208cebb480fc394be589d66346bbe605c22ca2dd60"
+      },
+      "source_section": "Statement",
+      "before_file_sha256": "b0003347712342e3f6b7f0da9514e1976f07918acef4545213226fb27b46aa18"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-97.pages.json",
+      "batch": 97,
+      "id": "ex-masked-diffusion-single-token-posterior",
+      "field": "statement",
+      "before_present": false,
+      "before": null,
+      "after": "Take $V=\\{a,b\\}$, $L=1$, $N=2$, $\\alpha_0=1$, $\\alpha_1=1/2$, $\\alpha_2=0$, and clean token $X=a$. At the reverse pair $(s,t)=(1,2)$, observing $Z_2=m$ has probability one and the true posterior assigns probability $1/2$ to $Z_1=a$ and $1/2$ to $Z_1=m$. At the reverse pair $(s,t)=(0,1)$, conditional on the positive-probability event $Z_1=m$, the true posterior removes the mask with probability one.",
+      "source": {
+        "path": "items/ex-masked-diffusion-single-token-posterior.md",
+        "sha256": "d434bd71e1f4278808cfb6e973fdfa237eec0756b029e78e556d7676b019f1e3"
+      },
+      "source_section": "Example",
+      "before_file_sha256": "b0003347712342e3f6b7f0da9514e1976f07918acef4545213226fb27b46aa18"
+    }
+  ],
+  "source_proof_changes": false,
+  "preserve_unknown_fields": true
+}

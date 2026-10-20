@@ -1,0 +1,13 @@
+# Batch 46: review 0
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 46
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: marchenko-pastur-law-and-edge-bounds, marchenko-pastur-law-and-edge-bounds-examples
+Items: def-sample-covariance-empirical-spectral-distribution, def-stieltjes-transform-of-a-real-probability-measure, def-marchenko-pastur-measure, lem-fourth-moment-quadratic-form-resolvent-bound, lem-rank-one-resolvent-update-and-trace-bound, lem-uniform-row-partial-sums-of-nested-finite-variance-array, lem-fixed-degree-covariance-trace-and-edge-witnesses, lem-sample-covariance-empirical-law-is-a-probability-measure, lem-adapted-resolvent-trace-concentration, lem-marchenko-pastur-formula-defines-a-finite-measure, lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line, lem-nested-iid-fourth-moment-truncation-and-diagonal-control, thm-marchenko-pastur-law-for-sample-covariance, lem-nonbacktracking-covariance-high-moment-bound, lem-largest-sample-covariance-eigenvalue-lower-bound, lem-sample-covariance-spectrum-confinement, lem-largest-sample-covariance-eigenvalue-upper-bound, thm-bai-yin-smallest-singular-value-limits, thm-largest-eigenvalue-sample-covariance-edge, thm-smallest-positive-eigenvalue-sample-covariance-edge, ex-marchenko-pastur-law-and-edges-at-aspect-one-quarter, ex-marchenko-pastur-law-and-edges-at-aspect-four, ex-marchenko-pastur-law-and-closing-edge-at-aspect-one
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

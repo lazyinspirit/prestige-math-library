@@ -1,0 +1,295 @@
+{
+  "group": "j",
+  "batches": [
+    "29"
+  ],
+  "pages_read": [
+    "ml02-private-learning",
+    "ml02-private-learning-examples"
+  ],
+  "items_read": [
+    "alg-private-randomized-weighted-majority",
+    "alg-private-finite-class-erm",
+    "thm-private-online-learning-regret-under-composition",
+    "thm-private-erm-excess-risk",
+    "ex-online-one-round-replacement",
+    "ex-private-threshold-class-erm",
+    "ex-private-erm-large-finite-class"
+  ],
+  "conventions": [
+    {
+      "convention": "Actions are indexed by [k]={1,...,k}; a round's loss vector is fixed before its fresh action draw and revealed afterward. Updates use the entire loss vector.",
+      "fixed_by": "alg-private-randomized-weighted-majority",
+      "matters_for": [
+        "thm-private-online-learning-regret-under-composition",
+        "ex-online-one-round-replacement"
+      ]
+    },
+    {
+      "convention": "Online privacy compares fixed loss sequences differing by replacement of one complete time-step vector and releases the full action transcript. Adaptive-loss regret has separate nonanticipating input quantifiers.",
+      "fixed_by": "thm-private-online-learning-regret-under-composition",
+      "matters_for": [
+        "ex-online-one-round-replacement"
+      ]
+    },
+    {
+      "convention": "The online expected-regret argument is choice-free; the stated concentration and advanced-composition guarantees assume AC.",
+      "fixed_by": "thm-private-online-learning-regret-under-composition",
+      "matters_for": [
+        "ex-online-one-round-replacement"
+      ]
+    },
+    {
+      "convention": "Private ERM fixes n≥1 and uses weights exp(-εn times empirical risk/2) on databases of any size m≥n. Statistical samples carry finite product sigma-algebras; private databases carry the power-set sigma-algebra.",
+      "fixed_by": "alg-private-finite-class-erm",
+      "matters_for": [
+        "thm-private-erm-excess-risk",
+        "ex-private-threshold-class-erm",
+        "ex-private-erm-large-finite-class"
+      ]
+    },
+    {
+      "convention": "ERM adjacency adds or removes one record occurrence, counts multiplicities, and requires both databases to have size at least n. The instance space and finite measurable binary class are nonempty.",
+      "fixed_by": "thm-private-erm-excess-risk",
+      "matters_for": [
+        "ex-private-threshold-class-erm",
+        "ex-private-erm-large-finite-class"
+      ]
+    },
+    {
+      "convention": "The large-class computational count concerns literal exhaustive evaluation only; it is not a lower bound for implementations exploiting class structure.",
+      "fixed_by": "ex-private-erm-large-finite-class",
+      "matters_for": [
+        "ex-private-erm-large-finite-class"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-private-erm-excess-risk",
+      "statement": "For a nonempty measurable instance space, finite nonempty measurable binary class C, n≥1 and ε>0, the selector with weights exp(-εn times empirical risk/2) is pure ε-DP under add/remove adjacency restricted to database sizes at least n. For n IID observations and 0<β<1, its output H has excess population risk at most 2 sqrt((ln|C|+ln(4/β))/(2n)) + 2(ln|C|+ln(2/β))/(εn), with probability at least 1-β over sample and selection. For |C|≥2 and 0<α,β<1, n≥24 max{(ln|C|+ln(1/β))/(εα),(ln|C|+ln(1/β))/α²} suffices for excess risk at most α. Singleton classes have zero excess risk.",
+      "used_by": [
+        "ex-private-threshold-class-erm",
+        "ex-private-erm-large-finite-class"
+      ]
+    },
+    {
+      "id": "thm-private-online-learning-regret-under-composition",
+      "statement": "For k,T≥1, η>0 and the stated nonanticipating filtered full-information loss process, E R_T≤η+ln(k)/(ηT). Under AC, R_T≤η+ln(k)/(ηT)+sqrt(ln(1/β)/(2T)) with probability at least 1-β for 0<β<1. For fixed loss-sequence inputs under one-vector replacement, every common-history action kernel obeys ordered (2η,0) privacy inequalities. Under AC, ε>0 and 0<δ<1, choosing η=min{ε/sqrt(32T ln(1/δ)),1/2,sqrt(ε/(16T))} makes the full action transcript (ε,δ)-DP. The same privacy conclusion holds for interactive strategies satisfying the stated common-history kernel inequalities.",
+      "used_by": [
+        "ex-online-one-round-replacement"
+      ]
+    },
+    {
+      "id": "alg-private-finite-class-erm",
+      "statement": "Given a nonempty measurable instance space, finite nonempty measurable binary classifier class C, integer n≥1 and ε>0, on an ordered sample or underlying multiset of size m≥n, output h with probability proportional to exp(-εn times its empirical zero-one risk/2).",
+      "used_by": [
+        "thm-private-erm-excess-risk",
+        "ex-private-threshold-class-erm",
+        "ex-private-erm-large-finite-class"
+      ]
+    },
+    {
+      "id": "alg-private-randomized-weighted-majority",
+      "statement": "For positive integers k,T and η>0, initialize all weights to one. At each round draw an action from normalized current weights using fresh randomness independent of the already fixed current loss vector, observe the full vector, and multiply each action weight by exp(-η times its loss). Return the action transcript.",
+      "used_by": [
+        "thm-private-online-learning-regret-under-composition",
+        "ex-online-one-round-replacement"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive finite weights and reciprocal identities.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Input and history sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Probability-kernel conditions for randomized procedures.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalization of finite output distributions.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential weights and exp(0)=1.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-rectangle",
+      "used_for": "Measurability of binary mismatch sets.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Ordered sample spaces and finite transcript products.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of empirical risks, normalizers and finite event sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-with-borel-functions-preserves-measurability",
+      "used_for": "Measurability after applying exponentials and other scalar maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability of continuous scalar functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Continuity and monotonicity of exponential weights.",
+      "opened": true
+    },
+    {
+      "id": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+      "used_for": "Measurability of reciprocal normalizers.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit assumption inherited by composition and Azuma.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Integral characterization of the conditional mean loss.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Nonanticipating filtration and predictable losses.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-difference-sequence",
+      "used_for": "Centered realized losses in the regret concentration argument.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Inverse exponential identities and logarithmic constants.",
+      "opened": true
+    },
+    {
+      "id": "lem-qa-30-exp-quadratic-bound",
+      "used_for": "Scalar potential bound and e^(2η)-1≤4η when 2η≤1.",
+      "opened": true
+    },
+    {
+      "id": "thm-azuma-hoeffding-inequality",
+      "used_for": "Regret concentration with predictable increment intervals of length one.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Weight products, likelihood ratios and cumulative-loss identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Elementary derivation of ln(z)≤z-1.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Potential telescoping, inverse identities and confidence-parameter algebra.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Combining utility and deviation failure probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-class-uniform-deviation",
+      "used_for": "Checking the choice-free deviation argument underlying the cited agnostic ERM supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-measurable-space",
+      "finding": "The Definition contains 'sigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]])'. This inline hyperlink remains inside the complete defining section, contrary to the uninterrupted-statement requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "The Definition contains 'Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]'. These hyperlinks interrupt the defining section and have not been moved into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The Definition contains '$\\mathbb P(X)=1$ ([[def-measure]])' and 'probability space ... ([[def-measure-space]])'. Both hyperlinks remain inside the defining section, contrary to the uninterrupted-statement requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The Definition contains 'provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]' and further inline supplier links for factorials, powers and series. These remain inside the complete Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "The Definition contains 'generated by the measurable rectangles of [[def-measurable-rectangle]]' before continuing with empty and nonempty finite products. The hyperlink interrupts the complete defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "finding": "The Statement contains 'from [[def-measurable-pointwise-extended-real-product]]' and 'as in [[def-positive-and-negative-parts-of-a-function]]' before its four conclusions. These hyperlinks interrupt the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition includes the blockquote 'Every family of nonempty sets has a choice function ([[def-choice-function]])' before its written-out and equivalent formulations. The inline hyperlink violates the uninterrupted Definition requirement. The prose Remarks section also contains inline wikilinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "The Definition ends with 'Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]' and 'Integrable representatives use [[def-l-one-of-a-measure]]'. These links remain within the Definition rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "The Definition contains 'is a probability space [[def-probability-measure]]' and 'is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]]' within its defining sentence. These hyperlinks interrupt the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-difference-sequence",
+      "finding": "The Definition begins 'Assume AC [[def-axiom-of-choice]] for conditional-expectation existence' and later links adaptedness and conditional-expectation conventions inside the same section. These hyperlinks violate the uninterrupted Definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition contains 'This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that' before completing its inverse-function description. The hyperlink remains inside the Definition.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-private-learning",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "Checked the prerequisite page, the complete agnostic ERM theorem and its uniform-deviation supplier. The consumer uses only simultaneous two-sided deviation with m=n and confidence β/2, giving sqrt((ln|C|+ln(4/β))/(2n)). Its finite measurable binary class and IID joint law meet the supplier hypotheses. It does not treat the randomized selector as deterministic ERM or import a choice assumption."
+    },
+    {
+      "from": "ml02-private-learning",
+      "to": "ml02-differential-privacy",
+      "faithful": true,
+      "note": "Checked the prerequisite page, adjacency definition, arbitrary-output advanced-composition theorem and its purification/test-function arguments. Private ERM preserves ordered add/remove inequalities on its explicitly restricted domain. Online composition uses symmetric replacement adjacency, power-set inputs, finite measurable transcript outputs, common-history (2η,0) inequalities, AC and δ'=δ∈(0,1); therefore Tδ_round+δ'=δ≤1. The quoted parameter formula and all three caps on η agree with the supplier."
+    }
+  ]
+}

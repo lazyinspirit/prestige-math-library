@@ -1,0 +1,1532 @@
+{
+  "version": 1,
+  "scope": [
+    "def-probability-path-and-velocity-field",
+    "lem-conditional-mixture-is-a-probability-path",
+    "lem-conditional-to-marginal-continuity-equation",
+    "lem-affine-conditional-path-velocity",
+    "lem-affine-dilation-is-quadratic-cost-optimal",
+    "thm-conditional-flow-matching-gradient-identity",
+    "thm-gaussian-conditional-optimal-transport-map",
+    "ex-gaussian-prior-to-data-conditional-interpolation",
+    "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity",
+    "lem-flow-matching-training-and-exact-sampling-properties"
+  ],
+  "contracts": {
+    "def-probability-path-and-velocity-field": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition assumes d>=1 and the nonempty state space R^d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: The Definition allows density zero at individual states; only the endpoint-a.e. state integral must equal one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: The Definition permits d=1 and the interval [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: A point-mass endpoint law is permitted; normalization is stated pi-almost everywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: Density normalization includes t=0 and t=1, while the PDE is required only on (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: The Definition supplies lambda and pi as inputs and uses no selection or existence axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "lem-conditional-mixture-is-a-probability-path": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-path-and-velocity-field",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a sigma-finite measure $\\lambda$ on the Borel subsets of $\\mathbb R^d$, and a Borel probability measure $\\pi$ on $\\mathbb R^d$. Here sigma-finite means that there are Borel sets $E_n$ with $\\mathbb R^d=\\bigcup_{n\\ge1}E_n$ and $\\lambda(E_n)<\\infty$ for each $n$. A **conditional probability-density path** with endpoint law $\\pi$ is a function measurable for $\\mathcal B([0,1])\\otimes\\mathcal B(\\mathbb R^d)\\otimes\\mathcal B(\\mathbb R^d)$ on time, state, and endpoint variables\n$$\\rho:[0,1]\\times\\mathbb R^d\\times\\mathbb R^d\\to[0,\\infty]$$\nsuch that, for every $t\\in[0,1]$, $\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)=1$ for $\\pi$-almost every endpoint $x_1$. Its **mixture function** is\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$\nFor a vector field $u_t(x\\mid x_1)=(u_t^1,\\ldots,u_t^d)$ measurable for the same product sigma-algebra, call it a **conditional velocity field** for $\\rho$ when $\\rho_t(\\cdot\\mid x_1)$ and each component of $\\rho_t(\\cdot\\mid x_1)u_t(\\cdot\\mid x_1)$ are continuously differentiable in $(t,x)$ on $(0,1)\\times\\mathbb R^d$ for $\\pi$-almost every $x_1$, and\n$$\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)=0$$\nthere. The sum is the spatial divergence of the conditional probability flux. At any $(t,x)$ where $p_t(x)>0$ and the numerator is finite, the **marginal velocity field** is\n$$u_t(x):=\\frac{\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)}.$$\nThis definition assigns no value to the quotient where $p_t(x)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $t\\in[0,1]$. The measures $\\lambda$ and $\\pi$ are sigma-finite, and $(x,x_1)\\mapsto\\rho_t(x\\mid x_1)$ is nonnegative and product-measurable by [F1]. Tonelli's theorem [F2] therefore makes $x\\mapsto p_t(x)$ measurable and gives $$\\int_{\\mathbb R^d}p_t(x)\\,\\lambda(dx)=\\int_{\\mathbb R^d}\\left(\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)\\right)\\pi(dx_1).$$",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The inner integral in step 1.1 equals $1$ for $\\pi$-almost every $x_1$ by [F1]. Since $\\pi$ is a probability measure, the right-hand side is $\\int 1\\,d\\pi=1$. The mixture is nonnegative by [F1], so $p_t$ is a probability density with respect to $\\lambda$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "single-endpoint-mixture",
+          "asserts": "For pi=delta_x1 the mixture p_t equals rho_t(.-|x1) and has integral one.",
+          "claim": "Degenerate endpoint law boundary.",
+          "checked_in": "Verification steps 1.1, 2.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require a probability endpoint law and normalized conditional densities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: A conditional density may vanish on a set; the proof use nonnegativity and total mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The proof applies for d=1 and every t in [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: For pi concentrated at one endpoint, the proof reduce to conditional normalization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof fixes arbitrary t in the closed interval, so both endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof use Tonelli and probability normalization, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "lem-conditional-to-marginal-continuity-equation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-path-and-velocity-field",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a sigma-finite measure $\\lambda$ on the Borel subsets of $\\mathbb R^d$, and a Borel probability measure $\\pi$ on $\\mathbb R^d$. Here sigma-finite means that there are Borel sets $E_n$ with $\\mathbb R^d=\\bigcup_{n\\ge1}E_n$ and $\\lambda(E_n)<\\infty$ for each $n$. A **conditional probability-density path** with endpoint law $\\pi$ is a function measurable for $\\mathcal B([0,1])\\otimes\\mathcal B(\\mathbb R^d)\\otimes\\mathcal B(\\mathbb R^d)$ on time, state, and endpoint variables\n$$\\rho:[0,1]\\times\\mathbb R^d\\times\\mathbb R^d\\to[0,\\infty]$$\nsuch that, for every $t\\in[0,1]$, $\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)=1$ for $\\pi$-almost every endpoint $x_1$. Its **mixture function** is\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$\nFor a vector field $u_t(x\\mid x_1)=(u_t^1,\\ldots,u_t^d)$ measurable for the same product sigma-algebra, call it a **conditional velocity field** for $\\rho$ when $\\rho_t(\\cdot\\mid x_1)$ and each component of $\\rho_t(\\cdot\\mid x_1)u_t(\\cdot\\mid x_1)$ are continuously differentiable in $(t,x)$ on $(0,1)\\times\\mathbb R^d$ for $\\pi$-almost every $x_1$, and\n$$\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)=0$$\nthere. The sum is the spatial divergence of the conditional probability flux. At any $(t,x)$ where $p_t(x)>0$ and the numerator is finite, the **marginal velocity field** is\n$$u_t(x):=\\frac{\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)}.$$\nThis definition assigns no value to the quotient where $p_t(x)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix a compact neighborhood $K$ of an interior point $(t,x)$. For any sequence of nonzero increments $h_n\\to0$ small enough that the time segment from $t$ to $t+h_n$ stays in $K$, the mean value theorem [F2] bounds the difference quotient of $\\rho_{t+h_n}(x\\mid x_1)-\\rho_t(x\\mid x_1)$ by $G_K(x_1)$. The quotient converges for $\\pi$-almost every $x_1$ to $\\partial_t\\rho_t(x\\mid x_1)$. Dominated convergence [F3] therefore gives $$\\partial_t p_t(x)=\\int_{\\mathbb R^d}\\partial_t\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$ The same argument for each flux component on its spatial coordinate segment gives $$\\partial_{x_j}J_t^j(x)=\\int_{\\mathbb R^d}\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)\\pi(dx_1).$$ The local continuity of these derivatives follows from their pointwise continuity in $(t,x)$ and the same integrable majorant.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Integrate the conditional continuity equation over $\\pi$. All terms are integrable by $G_K$, so linearity [F4] and the identities of step 1.1 yield $$\\partial_t p_t(x)+\\sum_{j=1}^d\\partial_{x_j}J_t^j(x) =\\int_{\\mathbb R^d}\\left(\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}(\\rho_tu_t^j)(x\\mid x_1)\\right)\\pi(dx_1)=0.$$ By definition $J_t=p_tu_t$ wherever $p_t>0$, proving the marginal continuity equation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "single-endpoint-marginal-pde",
+          "asserts": "For pi=delta_x1, p_t=rho_t and J_t=rho_t u_t, so the marginal PDE is the assumed conditional PDE.",
+          "claim": "One-point endpoint law boundary.",
+          "checked_in": "Verification steps 1.1, 2.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires d>=1 and a Borel endpoint probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: Zero conditional flux is allowed; the proof gives the marginal equation with zero flux."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The coordinatewise proof includes d=1 with one flux derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: For a one-point endpoint law the conclusion is the assumed conditional PDE."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The claim is restricted to interior times and makes no endpoint derivative assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof use explicit difference quotients, DCT, and linearity, not choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "lem-affine-conditional-path-velocity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $t\\in[0,1]$. Since $\\sigma_t(x_1)>0$, solving $x=\\sigma_t(x_1)z+\\mu_t(x_1)$ gives the unique inverse $z=(x-\\mu_t(x_1))/\\sigma_t(x_1)$. Both the map and inverse are continuously differentiable in $z$, so $\\psi_t(\\cdot\\mid x_1)$ is a diffeomorphism.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For fixed $z$, differentiation gives $\\frac{d}{dt}\\psi_t(z\\mid x_1)=\\dot\\sigma_t(x_1)z+\\dot\\mu_t(x_1)$. Substitute the inverse expression from step 1.1 to obtain $$\\frac{d}{dt}\\psi_t(z\\mid x_1)=\\frac{\\dot\\sigma_t(x_1)}{\\sigma_t(x_1)}\\bigl(\\psi_t(z\\mid x_1)-\\mu_t(x_1)\\bigr)+\\dot\\mu_t(x_1).$$ Thus the displayed $u_t$ satisfies the flow equation.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "If another field $\\widetilde u_t$ satisfies the same equation for every $z$, then for any $x$ choose the explicit inverse value $z=\\psi_t^{-1}(x\\mid x_1)$. The flow equation forces $\\widetilde u_t(x\\mid x_1)=\\frac{\\dot\\sigma_t(x_1)}{\\sigma_t(x_1)}(x-\\mu_t(x_1))+\\dot\\mu_t(x_1)$, proving uniqueness.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires d>=1 and strictly positive scale."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: Zero time derivatives of mean and scale produce the zero field; the proof remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The inverse and derivative formulas apply directly for d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: Constant positive scale and constant mean give a stationary path and unique zero field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: One-sided derivatives at t=0 and t=1 are included in the C1 schedule."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof uses the explicit inverse value, not a choice from an unspecified set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "lem-affine-dilation-is-quadratic-cost-optimal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then\n$\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The affine maps $T(x)=a+sx$ and $x\\mapsto(x,T(x))$ are continuous, so their Borel preimages are Borel by [F5]; their laws are probability measures by [F2, F4]. Let $(X,Y)$ have joint law $\\gamma$. The first marginal gives $\\mathbb E_\\gamma X=0$ and $\\mathbb E_\\gamma\\|X\\|_2^2=m_2$. The second marginal is the law of $a+sX$ under $\\mu$, so change of variables [F3] and linearity [F6] give $\\mathbb E_\\gamma(Y-a)=0$ and $\\mathbb E_\\gamma\\|Y-a\\|_2^2=s^2m_2$. These second moments make all displayed costs finite; Cauchy–Schwarz [F8, F9] makes the cross term integrable.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Expand $Y-X=a+(Y-a)-X$. The expectation of the cross term with $a$ vanishes because $\\mathbb E_\\gamma(Y-a)=\\mathbb E_\\gamma X=0$, so $$\\mathbb E_\\gamma\\|Y-X\\|_2^2=\\|a\\|_2^2+(1+s^2)m_2-2\\mathbb E_\\gamma\\langle X,Y-a\\rangle.$$ By [F8], pointwise $|\\langle X,Y-a\\rangle|\\le\\|X\\|_2\\|Y-a\\|_2$. Applying [F9] to the two scalar norms gives $\\mathbb E_\\gamma\\langle X,Y-a\\rangle\\le\\sqrt{m_2\\,s^2m_2}=s m_2$. Substitution proves the lower bound.",
+          "inputs": [
+            "step 1.1",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The law of $(X,T(X))$ for $X\\sim\\mu$ is a coupling with marginals $\\mu$ and $\\nu$ by [F2, F4, F5]. Under this coupling $Y-a=sX$, so $\\mathbb E\\langle X,Y-a\\rangle=sm_2$. The expansion in step 2.1 therefore gives cost $\\|a\\|_2^2+(1-s)^2m_2$, attaining the lower bound.",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "unit-scale-boundary",
+          "asserts": "At s=1 the lower bound is ||a||_2^2 and Y=a+X attains it.",
+          "claim": "Exact boundary value s=1.",
+          "checked_in": "Verification steps 1.1, 2.1, 3.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires positive finite dimension d and a Borel probability measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: the proof gives cost ||a||^2 when m2=0, attained in the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: All steps apply for scalar state d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: At s=1 the displacement is a and the formula gives ||a||^2; at a=0 it gives (1-s)^2m2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no time parameter or interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The graph coupling is explicit and the lower bound treats an arbitrary supplied coupling."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "thm-conditional-flow-matching-gradient-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-path-and-velocity-field",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a sigma-finite measure $\\lambda$ on the Borel subsets of $\\mathbb R^d$, and a Borel probability measure $\\pi$ on $\\mathbb R^d$. Here sigma-finite means that there are Borel sets $E_n$ with $\\mathbb R^d=\\bigcup_{n\\ge1}E_n$ and $\\lambda(E_n)<\\infty$ for each $n$. A **conditional probability-density path** with endpoint law $\\pi$ is a function measurable for $\\mathcal B([0,1])\\otimes\\mathcal B(\\mathbb R^d)\\otimes\\mathcal B(\\mathbb R^d)$ on time, state, and endpoint variables\n$$\\rho:[0,1]\\times\\mathbb R^d\\times\\mathbb R^d\\to[0,\\infty]$$\nsuch that, for every $t\\in[0,1]$, $\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)=1$ for $\\pi$-almost every endpoint $x_1$. Its **mixture function** is\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$\nFor a vector field $u_t(x\\mid x_1)=(u_t^1,\\ldots,u_t^d)$ measurable for the same product sigma-algebra, call it a **conditional velocity field** for $\\rho$ when $\\rho_t(\\cdot\\mid x_1)$ and each component of $\\rho_t(\\cdot\\mid x_1)u_t(\\cdot\\mid x_1)$ are continuously differentiable in $(t,x)$ on $(0,1)\\times\\mathbb R^d$ for $\\pi$-almost every $x_1$, and\n$$\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)=0$$\nthere. The sum is the spatial divergence of the conditional probability flux. At any $(t,x)$ where $p_t(x)>0$ and the numerator is finite, the **marginal velocity field** is\n$$u_t(x):=\\frac{\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)}.$$\nThis definition assigns no value to the quotient where $p_t(x)=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-mixture-is-a-probability-path",
+          "source_section": "Statement",
+          "quote": "Let $\\lambda$, $\\pi$, and $\\rho$ satisfy the conditional probability-density path definition, and for each $t\\in[0,1]$ set $p_t(x)=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1)$. Then $p_t$ is a nonnegative measurable function and $\\int_{\\mathbb R^d}p_t(x)\\,\\lambda(dx)=1$ for every $t$; hence it is a probability density with respect to $\\lambda$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditional-to-marginal-continuity-equation",
+          "source_section": "Statement",
+          "quote": "Let $\\lambda$, $\\pi$, and $\\rho$ be as in the conditional probability-path definition. Suppose that for $\\pi$-almost every $x_1$, the conditional continuity equation holds for all $(t,x)\\in(0,1)\\times\\mathbb R^d$. Suppose also that for every compact $K\\subset(0,1)\\times\\mathbb R^d$ there is a nonnegative $G_K\\in L^1(\\pi)$ which, for $\\pi$-almost every $x_1$, bounds on $K$ the absolute values of $\\rho_t(x\\mid x_1)$, $\\partial_t\\rho_t(x\\mid x_1)$, each component of $\\rho_t(x\\mid x_1)u_t(x\\mid x_1)$, and each derivative $\\partial_{x_j}(\\rho_tu_t^j)(x\\mid x_1)$. If $p_t(x)>0$ on $(0,1)\\times\\mathbb R^d$, define\n$$J_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1), \\qquad u_t(x):=\\frac{J_t(x)}{p_t(x)}.$$\nThen $\\partial_t p_t$ and each indicated flux derivative $\\partial_{x_j}J_t^j$ exist and are continuous locally in $(t,x)$, and the marginal continuity equation\n$$\\partial_t p_t(x)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(p_t(x)u_t^j(x)\\right)=0$$\nholds on $(0,1)\\times\\mathbb R^d$. The domination hypothesis is a sufficient Leibniz condition for the time and spatial derivatives to pass through the $x_1$ integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [F1] and the mixture normalization result [F2], each $p_t$ is a probability density with respect to $\\lambda$. Positivity makes $u^m=J/p$ well-defined on the open time interval. The hypotheses on $G_K$ are exactly the local domination assumptions of [F3], so the conditional continuity equation passes to the marginal and $\\partial_tp+\\operatorname{div}_x(pu^m)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Let $Q$ be the measure on time, state, and endpoint variables with density $\\rho_t(x\\mid x_1)$ relative to $dt\\,\\lambda(dx)\\,\\pi(dx_1)$. Product measurability from [F1], conditional normalization, and Tonelli [F14] show that $Q$ has total mass one and that its time-state marginal has density $p_t(x)$ relative to $dt\\,\\lambda(dx)$. In particular, Tonelli gives $\\mathcal L_M(\\theta)=\\int\\|v-u^m\\|_2^2\\,dQ$, so the finite marginal loss makes $v-u^m$ square-integrable under $Q$. The same identity gives $C=\\int\\|u^c-u^m\\|_2^2\\,dQ$, so $u^c-u^m$ is square-integrable under $Q$. By Euclidean Cauchy–Schwarz [F9] and random-variable Cauchy–Schwarz [F10], their inner-product term is integrable. At every $t,x$ where the integrals are defined, the definition of $J_t$ and $u^m_t$ gives $$\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\bigl(u^c_t(x\\mid x_1)-u^m_t(x)\\bigr)\\,\\pi(dx_1)=J_t(x)-p_t(x)u^m_t(x)=0.$$ Expanding $v-u^c=(v-u^m)+(u^m-u^c)$ by bilinearity [F4], integrating first over $x_1$, and using Fubini [F5] for the integrable cross term gives $$\\mathcal L_C(\\theta)=\\mathcal L_M(\\theta)+\\int_0^1\\!\\int\\!\\int\\rho_t(x\\mid x_1)\\|u^c_t(x\\mid x_1)-u^m_t(x)\\|_2^2\\,\\pi(dx_1)\\lambda(dx)dt.$$ The last integral is independent of $\\theta$ and is the finite constant $C$ defined in the Statement.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "F10",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Fix $\\theta_0\\in\\Theta$ and choose a compact parameter ball $H\\subset\\Theta$ whose interior contains $\\theta_0$. For each coordinate direction, the chain and product rules give $$\\partial_{\\theta_j}\\|v(t,x;\\theta)-w\\|_2^2 =2\\langle\\partial_{\\theta_j}v(t,x;\\theta),v(t,x;\\theta)-w\\rangle,$$ where $w$ is either $u^c_t(x\\mid x_1)$ or $u^m_t(x)$. The functions $G^C_{H,j}$ and $G^M_{H,j}$ dominate the weighted derivatives on $H$. For a sequence of nonzero increments tending to zero in coordinate $j$, the mean value theorem [F6] bounds the weighted difference quotients by the same majorants; the pointwise quotients converge to the displayed derivatives. Dominated convergence [F7] therefore differentiates both objectives under their integrals. Applying the same domination to convergent parameter sequences shows the derivative integrals are continuous in $\\theta$, so both objectives are $C^1$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Step 1.2 proves $\\mathcal L_C(\\theta)=\\mathcal L_M(\\theta)+C$ for every $\\theta$, with one finite constant independent of $\\theta$. Both sides are differentiable by step 1.3, so differentiating this identity gives $\\nabla_\\theta\\mathcal L_C(\\theta)=\\nabla_\\theta\\mathcal L_M(\\theta)$.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires d,q>=1 and an open nonempty parameter domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: If u^c=u^m, C=0 and the proof gives identical objectives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: The parameter and state dimensions may be one; the proof differentiates one scalar coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: A single endpoint law is allowed whenever positivity, PDE, and integrability hypotheses hold."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: Losses integrate over [0,1], while PDE and local derivative exchange are interior claims."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof use supplied measures, Fubini, Cauchy–Schwarz, MVT, and DCT."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "thm-gaussian-conditional-optimal-transport-map": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-affine-conditional-path-velocity",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, fix $x_1\\in\\mathbb R^d$, and let $t\\mapsto\\mu_t(x_1)\\in\\mathbb R^d$ and $t\\mapsto\\sigma_t(x_1)\\in(0,\\infty)$ be continuously differentiable on $[0,1]$, with one-sided derivatives at the endpoints. For $z\\in\\mathbb R^d$, define the affine map\n$$\\psi_t(z\\mid x_1):=\\sigma_t(x_1)z+\\mu_t(x_1).$$\nFor each $t$, this map is a diffeomorphism with inverse $\\psi_t^{-1}(x\\mid x_1)=(x-\\mu_t(x_1))/\\sigma_t(x_1)$. The unique vector field satisfying\n$$\\frac{d}{dt}\\psi_t(z\\mid x_1)=u_t(\\psi_t(z\\mid x_1)\\mid x_1)$$\nfor every $z\\in\\mathbb R^d$ is\n$$u_t(x\\mid x_1)=\\frac{\\dot\\sigma_t(x_1)}{\\sigma_t(x_1)}(x-\\mu_t(x_1))+\\dot\\mu_t(x_1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-affine-dilation-is-quadratic-cost-optimal",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ with finite second moment, mean $\\int x\\,\\mu(dx)=0$, and $m_2:=\\int\\|x\\|_2^2\\,\\mu(dx)<\\infty$. Fix $a\\in\\mathbb R^d$ and $s>0$, define $T(x):=a+sx$, and let $\\nu$ be the law of $T(X)$ when $X$ has law $\\mu$. For every Borel probability measure $\\gamma$ on $\\mathbb R^d\\times\\mathbb R^d$ whose coordinate marginals are $\\mu$ and $\\nu$,\n$$\\int_{\\mathbb R^d\\times\\mathbb R^d}\\|y-x\\|_2^2\\,\\gamma(dx,dy)\\ \\ge\\ \\|a\\|_2^2+(1-s)^2m_2.$$\nThe law of $(X,T(X))$ under $\\mu$ attains equality. Thus $T$ is an optimal transport map for the squared Euclidean cost between $\\mu$ and its translated dilation $\\nu$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Since $\\sigma_t=(1-t)+t\\sigma_{\\min}>0$, every affine map $\\psi_t$ is invertible. For each $v\\in\\mathbb R^d$, the projection of $\\psi_t(Z\\mid x_1)$ is $v^T\\mu_t(x_1)+\\sigma_t v^TZ$. By [F1], this is normal with mean $v^T\\mu_t(x_1)$ and variance $\\sigma_t^2\\|v\\|_2^2$. Thus $P_t(\\cdot\\mid x_1)$ is multivariate normal with mean $\\mu_t(x_1)$ and covariance $\\sigma_t^2I_d$, which is positive definite.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "By [F2], the Lebesgue density of $P_t(\\cdot\\mid x_1)$ is $$\\rho_t(x\\mid x_1)=(2\\pi\\sigma_t^2)^{-d/2} \\exp\\!\\left(-\\frac{\\|x-\\mu_t(x_1)\\|_2^2}{2\\sigma_t^2}\\right).$$ It integrates to one for every $x_1$ and is continuous in $(t,x,x_1)$ because $\\sigma_t>0$. Therefore for any endpoint probability law $\\pi$ it is product-measurable and satisfies the conditional-density requirement in [[def-probability-path-and-velocity-field]].",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "We have $\\dot\\mu_t(x_1)=x_1$ and $\\dot\\sigma_t=\\sigma_{\\min}-1$. Applying [F3] gives $u_t(x\\mid x_1)=x_1+\\frac{\\sigma_{\\min}-1}{\\sigma_t}(x-tx_1)$. The density formula in step 1.2 and this affine field are continuously differentiable in $(t,x)$ by the algebra, chain, and exponential derivative rules [F6, F7, F8]. Thus $\\rho_t$ and each component of $\\rho_tu_t$ meet the regularity clauses of the conditional probability-path definition.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "F3",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "At $t=0$ the parameters are $\\mu_0=0,\\sigma_0=1$; at $t=1$ they are $\\mu_1=x_1,\\sigma_1=\\sigma_{\\min}$. Thus the endpoints are the standard Gaussian law and the law of $x_1+\\sigma_{\\min}Z$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Put $r=x-tx_1$ and write $\\dot\\sigma=\\sigma_{\\min}-1$. We have $\\partial_t r=-x_1$ and $\\partial_t(\\sigma_t^{-d})=-d\\dot\\sigma\\sigma_t^{-d-1}$ by the product and quotient rules [F6]. Applying the chain rule [F7] to $-\\|r\\|_2^2/(2\\sigma_t^2)$ and then the exponential derivative [F8] gives $$\\partial_t\\rho_t=\\rho_t\\left(-d\\frac{\\dot\\sigma}{\\sigma_t} +\\frac{\\langle r,x_1\\rangle}{\\sigma_t^2} +\\frac{\\dot\\sigma\\|r\\|_2^2}{\\sigma_t^3}\\right), \\qquad \\nabla_x\\rho_t=-\\rho_t\\frac{r}{\\sigma_t^2}.$$ The field in step 2.1 has $\\operatorname{div}_x u_t=d\\dot\\sigma/\\sigma_t$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The product rule gives $$\\operatorname{div}_x(\\rho_tu_t) =\\langle\\nabla_x\\rho_t,u_t\\rangle+\\rho_t\\operatorname{div}_xu_t =\\rho_t\\left(-\\frac{\\langle r,x_1\\rangle}{\\sigma_t^2} -\\frac{\\dot\\sigma\\|r\\|_2^2}{\\sigma_t^3} +d\\frac{\\dot\\sigma}{\\sigma_t}\\right).$$ Adding this to $\\partial_t\\rho_t$ in step 3.1 cancels each term, so the conditional continuity equation holds.",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "The standard Gaussian vector has mean $0$ and covariance $I_d$ by [F1]. Summing its $d$ coordinate second moments gives $\\int\\|z\\|_2^2\\,N_d(0,I_d)(dz)=d$. The endpoint law is the affine image under $T(z)=x_1+\\sigma_{\\min}z$. Applying [F4] with $a=x_1$, $s=\\sigma_{\\min}$, and $m_2=d$ shows that every coupling has cost at least $\\|x_1\\|_2^2+d(1-\\sigma_{\\min})^2$, and that the law of $(Z,T(Z))$ attains equality.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "stationary-standard-gaussian",
+          "asserts": "For x1=0 and sigma_min=1, sigma_t=1, mu_t=0, u_t=0, and the endpoint cost is 0.",
+          "claim": "Degenerate stationary Gaussian boundary.",
+          "checked_in": "Verification steps 1.1, 1.2, 2.1, 2.2, 3.1, 4.1, 5.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires d>=1, a fixed endpoint, and sigma_min>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: At x1=0 and sigma_min=1 the path is stationary and the proof gives zero cost."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The formulas and cost apply for d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: At sigma_min=1 the scale is constant and the translation map remains optimal."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: the proof evaluates distributions at t=0 and t=1 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: The statement explicitly assumes AC for Gaussian suppliers; the local affine cost lemma is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "ex-gaussian-prior-to-data-conditional-interpolation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-conditional-optimal-transport-map",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, fix $x_1\\in\\mathbb R^d$, and choose $\\sigma_{\\min}>0$. Let $Z$ have the standard multivariate normal law $N_d(0,I_d)$. For $t\\in[0,1]$, define\n$$\\mu_t(x_1):=t x_1,\\qquad \\sigma_t:=1-(1-\\sigma_{\\min})t,\\qquad \\psi_t(z\\mid x_1):=\\sigma_t z+\\mu_t(x_1),$$\nand let $P_t(\\cdot\\mid x_1)$ be the law of $\\psi_t(Z\\mid x_1)$. Then $P_t(\\cdot\\mid x_1)$ is the Gaussian probability path with mean $\\mu_t(x_1)$ and covariance $\\sigma_t^2I_d$, and its Lebesgue density is\n$$\\rho_t(x\\mid x_1)=(2\\pi\\sigma_t^2)^{-d/2} \\exp\\!\\left(-\\frac{\\|x-\\mu_t(x_1)\\|_2^2}{2\\sigma_t^2}\\right).$$\nA conditional velocity field for this path is\n$$u_t(x\\mid x_1)=\\frac{\\sigma_{\\min}-1}{\\sigma_t}(x-tx_1)+x_1.$$\nFor each endpoint $x_1$, these densities and fields form a conditional path in the probability-path definition; hence they can be mixed against any Borel endpoint law. At $t=0$ the law is $N_d(0,I_d)$, and at $t=1$ it is the law of $x_1+\\sigma_{\\min}Z$, a Gaussian with mean $x_1$ and covariance $\\sigma_{\\min}^2I_d$. The affine endpoint map $T(z)=x_1+\\sigma_{\\min}z$ is optimal for squared Euclidean cost between these two laws: every coupling has cost at least\n$$\\|x_1\\|_2^2+d(1-\\sigma_{\\min})^2,$$\nand the law of $(Z,T(Z))$ attains this value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Apply [F1] with $d=1$ and $x_1=a$. It gives the law and density of $X_t$, the field $u_t(x\\mid a)$, and the optimality of $T(z)=a+\\sigma_{\\min}z$ with cost $a^2+(1-\\sigma_{\\min})^2$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For fixed $z$, differentiation gives $\\frac{d}{dt}(\\sigma_tz+ta)=(\\sigma_{\\min}-1)z+a$. Substituting $x=\\sigma_tz+ta$ into the displayed field yields $$u_t(x\\mid a)=a+\\frac{\\sigma_{\\min}-1}{\\sigma_t}\\,\\sigma_tz=a+(\\sigma_{\\min}-1)z,$$ which is that particle derivative. Since $\\sigma_t>0$, its dependence on $t$ is affine and the endpoints are $z$ and $a+\\sigma_{\\min}z$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "scalar-rational-endpoint-cost",
+          "asserts": "For a=1 and sigma_min=1/4, T(z)=1+z/4 and the optimal cost is 1+(3/4)^2=25/16.",
+          "claim": "Exact scalar instance of the example.",
+          "checked_in": "Verification steps 1.1, 2.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes scalar state dimension and a standard normal law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: At a=0 the cost is (1-sigma_min)^2 and the theorem specialization remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: At sigma_min=1 scale is constant, T is translation, and cost is a^2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: At a=0 and sigma_min=1 the map is identity and the cost is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: Verification the proof evaluate t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: The Example explicitly assumes AC for the Gaussian supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-conditional-optimal-transport-map",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, fix $x_1\\in\\mathbb R^d$, and choose $\\sigma_{\\min}>0$. Let $Z$ have the standard multivariate normal law $N_d(0,I_d)$. For $t\\in[0,1]$, define\n$$\\mu_t(x_1):=t x_1,\\qquad \\sigma_t:=1-(1-\\sigma_{\\min})t,\\qquad \\psi_t(z\\mid x_1):=\\sigma_t z+\\mu_t(x_1),$$\nand let $P_t(\\cdot\\mid x_1)$ be the law of $\\psi_t(Z\\mid x_1)$. Then $P_t(\\cdot\\mid x_1)$ is the Gaussian probability path with mean $\\mu_t(x_1)$ and covariance $\\sigma_t^2I_d$, and its Lebesgue density is\n$$\\rho_t(x\\mid x_1)=(2\\pi\\sigma_t^2)^{-d/2} \\exp\\!\\left(-\\frac{\\|x-\\mu_t(x_1)\\|_2^2}{2\\sigma_t^2}\\right).$$\nA conditional velocity field for this path is\n$$u_t(x\\mid x_1)=\\frac{\\sigma_{\\min}-1}{\\sigma_t}(x-tx_1)+x_1.$$\nFor each endpoint $x_1$, these densities and fields form a conditional path in the probability-path definition; hence they can be mixed against any Borel endpoint law. At $t=0$ the law is $N_d(0,I_d)$, and at $t=1$ it is the law of $x_1+\\sigma_{\\min}Z$, a Gaussian with mean $x_1$ and covariance $\\sigma_{\\min}^2I_d$. The affine endpoint map $T(z)=x_1+\\sigma_{\\min}z$ is optimal for squared Euclidean cost between these two laws: every coupling has cost at least\n$$\\|x_1\\|_2^2+d(1-\\sigma_{\\min})^2,$$\nand the law of $(Z,T(Z))$ attains this value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-path-and-velocity-field",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a sigma-finite measure $\\lambda$ on the Borel subsets of $\\mathbb R^d$, and a Borel probability measure $\\pi$ on $\\mathbb R^d$. Here sigma-finite means that there are Borel sets $E_n$ with $\\mathbb R^d=\\bigcup_{n\\ge1}E_n$ and $\\lambda(E_n)<\\infty$ for each $n$. A **conditional probability-density path** with endpoint law $\\pi$ is a function measurable for $\\mathcal B([0,1])\\otimes\\mathcal B(\\mathbb R^d)\\otimes\\mathcal B(\\mathbb R^d)$ on time, state, and endpoint variables\n$$\\rho:[0,1]\\times\\mathbb R^d\\times\\mathbb R^d\\to[0,\\infty]$$\nsuch that, for every $t\\in[0,1]$, $\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)=1$ for $\\pi$-almost every endpoint $x_1$. Its **mixture function** is\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$\nFor a vector field $u_t(x\\mid x_1)=(u_t^1,\\ldots,u_t^d)$ measurable for the same product sigma-algebra, call it a **conditional velocity field** for $\\rho$ when $\\rho_t(\\cdot\\mid x_1)$ and each component of $\\rho_t(\\cdot\\mid x_1)u_t(\\cdot\\mid x_1)$ are continuously differentiable in $(t,x)$ on $(0,1)\\times\\mathbb R^d$ for $\\pi$-almost every $x_1$, and\n$$\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)=0$$\nthere. The sum is the spatial divergence of the conditional probability flux. At any $(t,x)$ where $p_t(x)>0$ and the numerator is finite, the **marginal velocity field** is\n$$u_t(x):=\\frac{\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)}.$$\nThis definition assigns no value to the quotient where $p_t(x)=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditional-mixture-is-a-probability-path",
+          "source_section": "Statement",
+          "quote": "Let $\\lambda$, $\\pi$, and $\\rho$ satisfy the conditional probability-density path definition, and for each $t\\in[0,1]$ set $p_t(x)=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1)$. Then $p_t$ is a nonnegative measurable function and $\\int_{\\mathbb R^d}p_t(x)\\,\\lambda(dx)=1$ for every $t$; hence it is a probability density with respect to $\\lambda$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-to-marginal-continuity-equation",
+          "source_section": "Statement",
+          "quote": "Let $\\lambda$, $\\pi$, and $\\rho$ be as in the conditional probability-path definition. Suppose that for $\\pi$-almost every $x_1$, the conditional continuity equation holds for all $(t,x)\\in(0,1)\\times\\mathbb R^d$. Suppose also that for every compact $K\\subset(0,1)\\times\\mathbb R^d$ there is a nonnegative $G_K\\in L^1(\\pi)$ which, for $\\pi$-almost every $x_1$, bounds on $K$ the absolute values of $\\rho_t(x\\mid x_1)$, $\\partial_t\\rho_t(x\\mid x_1)$, each component of $\\rho_t(x\\mid x_1)u_t(x\\mid x_1)$, and each derivative $\\partial_{x_j}(\\rho_tu_t^j)(x\\mid x_1)$. If $p_t(x)>0$ on $(0,1)\\times\\mathbb R^d$, define\n$$J_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1), \\qquad u_t(x):=\\frac{J_t(x)}{p_t(x)}.$$\nThen $\\partial_t p_t$ and each indicated flux derivative $\\partial_{x_j}J_t^j$ exist and are continuous locally in $(t,x)$, and the marginal continuity equation\n$$\\partial_t p_t(x)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(p_t(x)u_t^j(x)\\right)=0$$\nholds on $(0,1)\\times\\mathbb R^d$. The domination hypothesis is a sufficient Leibniz condition for the time and spatial derivatives to pass through the $x_1$ integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Apply [F1] to the two endpoints $x_1=a$ and $x_1=-a$. Their conditional densities are positive and continuous in $(t,x)$, as are their time derivatives, fluxes, and spatial flux derivatives; $\\sigma_t>0$ throughout $[0,1]$. Hence for each compact $K\\subset(0,1)\\times\\mathbb R$ the finitely many such functions are bounded on $K$ by [F4]. Taking a common bound as the constant function $G_K$ gives an element of $L^1(\\pi)$ because $\\pi$ has total mass one. Thus [F5] applies. The mixture density is normalized by [F3] and is strictly positive because it is a sum of two positive Gaussian densities.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Put $$A_+(t,x):=\\exp\\!\\left(-\\frac{(x-ta)^2}{2\\sigma_t^2}\\right),\\qquad A_-(t,x):=\\exp\\!\\left(-\\frac{(x+ta)^2}{2\\sigma_t^2}\\right).$$ The common Gaussian normalizing factor cancels in the endpoint-weighted mean, so [F2] gives $$m_t(x):=\\frac{\\int x_1\\rho_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)} =a\\frac{A_+(t,x)-A_-(t,x)}{A_+(t,x)+A_-(t,x)}.$$ Expanding the two squares gives $A_+/A_-=\\exp(2atx/\\sigma_t^2)$ by [F7] and [F9]. Multiplying numerator and denominator by $\\exp(-atx/\\sigma_t^2)$ therefore yields $m_t(x)=a\\tanh(atx/\\sigma_t^2)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For endpoint $x_1\\in\\{-a,a\\}$, [F1] gives $$u^c_t(x\\mid x_1)=cx+(1-tc)x_1, \\qquad c:=\\frac{\\sigma_{\\min}-1}{\\sigma_t}.$$ Taking the endpoint-weighted mean and using step 1.2 gives $u^m_t(x)=cx+(1-tc)m_t(x)$. Since $\\sigma_t=1+t(\\sigma_{\\min}-1)$, we have $\\sigma_t-t(\\sigma_{\\min}-1)=1$ and hence $1-tc=1/\\sigma_t$. Substitution gives the marginal velocity formula in the Example.",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Fix $t\\in(0,1)$ and put $\\beta:=a/\\sigma_t>0$ and $k:=at/\\sigma_t^2>0$. The formula for $\\tanh$ and [F9] give $\\tanh(-y)=-\\tanh(y)$, so $u^m_t$ is odd. For $y>0$, put $r:=\\exp(2y)>1$ and $s:=(r-1)/(r+1)\\in(0,1)$ by [F6, F8]. Rewriting $\\tanh(y)$ and $\\tanh(2y)$ using [F7, F9] gives $$\\tanh(y)=s,\\qquad \\tanh(2y)=\\frac{r^2-1}{r^2+1}=\\frac{2s}{1+s^2}<2s.$$ Thus for every $x>0$, step 2.1 gives $$u^m_t(2x)-2u^m_t(x)=\\beta\\bigl(\\tanh(2kx)-2\\tanh(kx)\\bigr)<0.$$ An odd affine function must be linear through the origin, and every such function has $u(2x)-2u(x)=0$. Hence $u^m_t$ is not affine and is nonlinear.",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "two-point-symmetric-mixture",
+          "asserts": "For a=1, sigma_min=1, t=1/2, u_t^m(x)=tanh(x/2) and u_t^m(2)-2u_t^m(1)=tanh(1)-2tanh(1/2)<0.",
+          "claim": "Finite symbolic check of the nonlinear marginal field.",
+          "checked_in": "Verification steps 1.1, 1.2, 2.1, 3.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires a>0 so the endpoint atoms are distinct."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The boundary a=0 is excluded because the strict nonlinear term would vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement: At sigma_min=1 the scale stays positive and the proof still proves nonlinearity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement: At t=0 the tanh term vanishes; the statement claims nonlinearity only for t in (0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement: Statement boundary: The nonlinear claim is restricted to interior times and makes no endpoint regularity claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Statement: The Example explicitly assumes AC for its Gaussian density supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose forward implication needs checking."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item has no biconditional whose reverse implication needs checking."
+        }
+      ]
+    },
+    "lem-flow-matching-training-and-exact-sampling-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-path-and-velocity-field",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a sigma-finite measure $\\lambda$ on the Borel subsets of $\\mathbb R^d$, and a Borel probability measure $\\pi$ on $\\mathbb R^d$. Here sigma-finite means that there are Borel sets $E_n$ with $\\mathbb R^d=\\bigcup_{n\\ge1}E_n$ and $\\lambda(E_n)<\\infty$ for each $n$. A **conditional probability-density path** with endpoint law $\\pi$ is a function measurable for $\\mathcal B([0,1])\\otimes\\mathcal B(\\mathbb R^d)\\otimes\\mathcal B(\\mathbb R^d)$ on time, state, and endpoint variables\n$$\\rho:[0,1]\\times\\mathbb R^d\\times\\mathbb R^d\\to[0,\\infty]$$\nsuch that, for every $t\\in[0,1]$, $\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\lambda(dx)=1$ for $\\pi$-almost every endpoint $x_1$. Its **mixture function** is\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1).$$\nFor a vector field $u_t(x\\mid x_1)=(u_t^1,\\ldots,u_t^d)$ measurable for the same product sigma-algebra, call it a **conditional velocity field** for $\\rho$ when $\\rho_t(\\cdot\\mid x_1)$ and each component of $\\rho_t(\\cdot\\mid x_1)u_t(\\cdot\\mid x_1)$ are continuously differentiable in $(t,x)$ on $(0,1)\\times\\mathbb R^d$ for $\\pi$-almost every $x_1$, and\n$$\\partial_t\\rho_t(x\\mid x_1)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(\\rho_t(x\\mid x_1)u_t^j(x\\mid x_1)\\right)=0$$\nthere. The sum is the spatial divergence of the conditional probability flux. At any $(t,x)$ where $p_t(x)>0$ and the numerator is finite, the **marginal velocity field** is\n$$u_t(x):=\\frac{\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1)}{p_t(x)}.$$\nThis definition assigns no value to the quotient where $p_t(x)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-conditional-flow-matching-gradient-identity",
+          "source_section": "Statement",
+          "quote": "Let $d,q\\ge1$, let $\\lambda$ be a sigma-finite measure on the Borel subsets of $\\mathbb R^d$, let $\\pi$ be a Borel probability measure on $\\mathbb R^d$, and let $(\\rho,u^c)$ be a conditional probability-density path and conditional velocity field relative to $(\\lambda,\\pi)$. Set\n$$p_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1),\\qquad J_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u^c_t(x\\mid x_1)\\,\\pi(dx_1).$$\nAssume $0<p_t(x)<\\infty$ and $J_t(x)$ is finite on $[0,1]\\times\\mathbb R^d$, and define $u^m_t(x):=J_t(x)/p_t(x)$. Suppose the conditional continuity equation holds on $(0,1)\\times\\mathbb R^d$, and for every compact $K\\subset(0,1)\\times\\mathbb R^d$ there is a nonnegative $G_K\\in L^1(\\pi)$ that bounds on $K$, for $\\pi$-almost every $x_1$, the absolute values of $\\rho_t(x\\mid x_1)$, $\\partial_t\\rho_t(x\\mid x_1)$, each component of $\\rho_tu^c_t$, and each corresponding spatial flux derivative.\n\nLet $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:\\,[0,1]\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly measurable and continuously differentiable in $\\theta$, with jointly measurable parameter derivative. Define\n$$\\mathcal L_C(\\theta):=\\int_0^1\\!\\int_{\\mathbb R^d}\\!\\int_{\\mathbb R^d} \\rho_t(x\\mid x_1)\\|v(t,x;\\theta)-u^c_t(x\\mid x_1)\\|_2^2\\,\\pi(dx_1)\\lambda(dx)\\,dt,$$\nand\n$$\\mathcal L_M(\\theta):=\\int_0^1\\!\\int_{\\mathbb R^d} p_t(x)\\|v(t,x;\\theta)-u^m_t(x)\\|_2^2\\,\\lambda(dx)\\,dt.$$\nAssume $\\mathcal L_C(\\theta)$ and $\\mathcal L_M(\\theta)$ are finite for every $\\theta\\in\\Theta$, and define\n$$C:=\\int_0^1\\!\\int_{\\mathbb R^d}\\!\\int_{\\mathbb R^d} \\rho_t(x\\mid x_1)\\|u^c_t(x\\mid x_1)-u^m_t(x)\\|_2^2\\,\\pi(dx_1)\\lambda(dx)\\,dt,$$\nand assume $C<\\infty$. For every compact $H\\subset\\Theta$ and coordinate $j$, suppose there are nonnegative integrable majorants $G^C_{H,j}$ on $dt\\,\\lambda(dx)\\,\\pi(dx_1)$ and $G^M_{H,j}$ on $dt\\,\\lambda(dx)$ such that for every $\\theta\\in H$, outside fixed null sets,\n$$2\\rho_t(x\\mid x_1)\\left|\\left\\langle\\partial_{\\theta_j}v(t,x;\\theta),v(t,x;\\theta)-u^c_t(x\\mid x_1)\\right\\rangle\\right|\\le G^C_{H,j}(t,x,x_1),$$\nand\n$$2p_t(x)\\left|\\left\\langle\\partial_{\\theta_j}v(t,x;\\theta),v(t,x;\\theta)-u^m_t(x)\\right\\rangle\\right|\\le G^M_{H,j}(t,x).$$\nThen both objectives are finite and continuously differentiable on $\\Theta$, and $\\mathcal L_C(\\theta)=\\mathcal L_M(\\theta)+C$. In particular, $C$ is independent of $\\theta$ and $\\nabla_\\theta\\mathcal L_C(\\theta)=\\nabla_\\theta\\mathcal L_M(\\theta)$. Under the stated local domination, $(p,u^m)$ also satisfies the marginal continuity equation on $(0,1)\\times\\mathbb R^d$. Uniform boundedness of $u^c,u^m,v,D_\\theta v$ on compact parameter neighborhoods is a sufficient special case of the integrability and derivative-majorant assumptions above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-neural-ode",
+          "source_section": "Definition",
+          "quote": "Let $d,q\\ge1$, let $I\\subseteq\\mathbb R$ and $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$. For a parameter $\\theta\\in\\Theta$, write $v_\\theta(t,z):=v(t,z,\\theta)$. A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem\n\n$$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$\n\nwhere $s\\in I$ and $z_s\\in\\mathbb R^d$. A trajectory on an interval $J\\subseteq I$ containing $s$ is a differentiable function $z:J\\to\\mathbb R^d$ satisfying both displayed conditions. Here $v_\\theta$ is the state-velocity field. The term names this parameterized vector-field model and imposes no particular neural-network architecture. This definition alone asserts neither solution existence beyond its stated interval nor numerical accuracy.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-neural-ode-global-smooth-flow",
+          "source_section": "Statement",
+          "quote": "Let $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, let $I\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$. For every compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that, for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nThen for each $\\theta\\in\\Theta$, $s,t\\in[0,T]$, and $z_s\\in\\mathbb R^d$, the neural ODE has a unique solution on all of $[0,T]$. Write $\\Phi^\\theta_{t,s}(z_s)$ for its value at time $t$. For each fixed $s,t$, the map $(z_s,\\theta)\\mapsto\\Phi^\\theta_{t,s}(z_s)$ is locally $C^\\infty$. For each fixed $\\theta$, $\\Phi^\\theta_{t,s}:\\mathbb R^d\\to\\mathbb R^d$ is a $C^\\infty$ diffeomorphism with inverse $\\Phi^\\theta_{s,t}$. Its state Jacobian $J_{t,s}:=D_{z_s}\\Phi^\\theta_{t,s}(z_s)$ satisfies\n\n$$\\frac{d}{dt}J_{t,s}=D_zv(t,\\Phi^\\theta_{t,s}(z_s),\\theta)J_{t,s},\\qquad J_{s,s}=I_d.$$\n\nTime derivatives at $0$ and $T$ are one-sided.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $k$ and a history for which $\\theta_k=\\theta\\in\\Theta$ and both losses at $\\theta$ are finite. Choose a compact parameter box $H\\subset\\Theta$ with $\\theta$ in its interior. Changing coordinates one at a time, the mean value theorem [F14] and the derivative majorants in [F2] bound the differences between each loss integrand at $\\theta'$ and at $\\theta$ by the corresponding sums of $|\\theta'_j-\\theta_j|G^C_{H,j}$ and $|\\theta'_j-\\theta_j|G^M_{H,j}$. Integrating these bounds proves local finiteness of both losses throughout the interior of $H$, so [F2] applies there and gives $\\nabla_\\theta\\mathcal L_C(\\theta)=\\nabla_\\theta\\mathcal L_M(\\theta)$. The sample gradient is the parameter gradient of the conditional squared loss by [F5]; since its triple has law $Q$, the expectation change-of-variables formula [F10] identifies its $Q$-mean with $\\nabla_\\theta\\mathcal L_C(\\theta)$. Thus its $Q$-mean is $\\nabla_\\theta\\mathcal L_M(\\theta)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F10",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each $\\zeta_{k,b}$, and hence $g_k$, is integrable by the explicit batch-integrability assumption. For fixed $\\theta$, put $m(\\theta):=\\int_Q\\zeta(\\theta,w)\\,Q(dw)$. Joint measurability, Tonelli [F13], and the local derivative majorants make $m$ measurable and finite; at each visited parameter step 1.1 gives $m(\\theta_k)=\\nabla_\\theta\\mathcal L_M(\\theta_k)$. Fubini [F11] and the integral triangle inequality [F12] show that each coordinate of $m(\\theta_k)$ is integrable, with its absolute expectation bounded by that of the corresponding sample-gradient coordinate. For every $A\\in\\mathcal F_k$, independence and the product-law fact [F9], the change-of-variables formula [F10], and Fubini [F11] give $$\\mathbb E[\\mathbf1_A g_k]=\\mathbb E\\!\\left[\\mathbf1_A\\int_{Q^{\\otimes B}}\\frac1B\\sum_{b=1}^B\\zeta(\\theta_k,w_b)\\,Q^{\\otimes B}(d(w_1,\\ldots,w_B))\\right]=\\mathbb E[\\mathbf1_A\\nabla_\\theta\\mathcal L_M(\\theta_k)],$$ where step 1.1 identifies each fixed-parameter $Q$-mean and [F6] gives linearity. Thus [F8] makes $\\nabla_\\theta\\mathcal L_M(\\theta_k)$ a version of $\\mathbb E[g_k\\mid\\mathcal F_k]$; the batch estimate is unbiased conditionally on its pre-batch history. The arithmetic update is defined for every nonnegative step size when $\\theta_k\\in\\Theta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra",
+            "F13"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the realized $\\theta_N$ satisfying the exact-flow bounds, [F3] identifies the sampling equation as a neural ODE and [F4] gives its unique solution on the full interval and joint continuity of $(x,\\theta)\\mapsto\\Phi^\\theta_{1,0}(x)$. The terminal output is therefore measurable as a function of the independent initial draw and the training history. Conditional on $\\mathcal F_N$, $\\theta_N$ is fixed, so [F7] identifies the conditional output law by $\\mu_0(\\{x:\\Phi^{\\theta_N}_{1,0}(x)\\in A\\})$ for each Borel set $A$. This verifies that the exact-flow output is defined; it makes no claim that the learned field realizes the target path.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly handles N=0; no batch update, exact-flow output still applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 2.1 permits zero prescribed step sizes; Statement includes N=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1-2.1 permits B=1 and one training round."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1-2.1 permits zero sample gradients and degenerate supplied probability laws under the stated integrability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 covers the full exact-flow interval[0,1], including terminal time1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Input laws and samplers supplied; proof uses finite batches and integral identities, no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion."
+        }
+      ],
+      "finite_smoke": [],
+      "routine_steps": []
+    }
+  }
+}

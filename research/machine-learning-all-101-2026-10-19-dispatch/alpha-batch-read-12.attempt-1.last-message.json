@@ -1,0 +1,162 @@
+{
+  "group": "d",
+  "batches": ["12"],
+  "pages_read": [
+    "fairness-criteria-and-impossibility-boundaries",
+    "fairness-criteria-and-impossibility-boundaries-examples"
+  ],
+  "items_read": [
+    "def-group-risk-score-and-calibration",
+    "def-positive-and-negative-score-balance",
+    "lem-score-means-as-threshold-rate-areas",
+    "thm-calibration-and-balance-incompatibility-for-risk-scores",
+    "ex-equal-base-rates-admit-constant-calibrated-score",
+    "ex-perfect-risk-prediction-with-unequal-base-rates",
+    "ex-threshold-rates-vary-under-score-balance"
+  ],
+  "conventions": [
+    {
+      "convention": "Feature types and bins are nonempty finite sets; scores lie in [0,1]. Outcome probabilities and the row-stochastic feature-to-bin assignment are common to both groups; assignment randomization is independent of outcome conditional on feature type.",
+      "fixed_by": "def-group-risk-score-and-calibration",
+      "matters_for": [
+        "def-positive-and-negative-score-balance",
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "convention": "Calibration is imposed separately for every bin using a cross-multiplied identity, including zero-mass bins. When different bins share a score, reliability conditional on the score gives only their aggregate identity.",
+      "fixed_by": "def-group-risk-score-and-calibration",
+      "matters_for": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "convention": "Both outcome classes have positive mass in each group: 0 < μ_t < N_t. Positive and negative balance mean equality across groups of the respective outcome-conditioned mean scores.",
+      "fixed_by": "def-positive-and-negative-score-balance",
+      "matters_for": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "convention": "Threshold decisions use S ≥ u, including equality at atoms; threshold areas are ordinary Riemann integrals over [0,1].",
+      "fixed_by": "lem-score-means-as-threshold-rate-areas",
+      "matters_for": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "convention": "A perfectly predictive assignment satisfies S = Y almost surely in each group. An instance permits perfect prediction when every feature type occupied in either group has outcome probability zero or one.",
+      "fixed_by": "def-group-risk-score-and-calibration",
+      "matters_for": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-group-risk-score-and-calibration",
+      "statement": "The finite group law is Pr_t(Σ=σ,Y=1,B=b)=a_tσ p_σ X_σb and Pr_t(Σ=σ,Y=0,B=b)=a_tσ(1−p_σ)X_σb. Calibration within group t requires, for every bin b, Σ_σ a_tσ p_σ X_σb = v_b Σ_σ a_tσ X_σb.",
+      "used_by": [
+        "def-positive-and-negative-score-balance",
+        "lem-score-means-as-threshold-rate-areas",
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "id": "def-positive-and-negative-score-balance",
+      "statement": "Under the finite common-assignment model with 0 < μ_t < N_t, define α_t=E_t[S|Y=1] and β_t=E_t[S|Y=0]. Positive balance means α_1=α_2; negative balance means β_1=β_2.",
+      "used_by": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-equal-base-rates-admit-constant-calibrated-score",
+        "ex-perfect-risk-prediction-with-unequal-base-rates",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    },
+    {
+      "id": "lem-score-means-as-threshold-rate-areas",
+      "statement": "For a finite joint law of binary Y and finitely supported S ∈ [0,1], with both outcomes having positive probability, E_t[S|Y=1]=∫₀¹TPR_t(u)du and E_t[S|Y=0]=∫₀¹FPR_t(u)du, where TPR_t(u)=Pr_t(S≥u|Y=1) and FPR_t(u)=Pr_t(S≥u|Y=0). The integrals are ordinary Riemann integrals.",
+      "used_by": [
+        "thm-calibration-and-balance-incompatibility-for-risk-scores",
+        "ex-threshold-rates-vary-under-score-balance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "The external calibration definition identifies its event-integral identities with the conditional-expectation characterization; no conditional-version existence theorem is used by the finite batch proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Total-mass-one probability laws in the external calibration and supervised-prediction definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel score and simplex events in the external calibration definition.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Measurable-space terminology in the supervised-prediction prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurable predictor terminology in the supervised-prediction prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Product measurable-space terminology in the supervised-prediction prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "Contextual parameter-indexed sampling-law terminology in the supervised-prediction prerequisite; no experiment theorem is used in the assigned proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "The supervised-prediction prerequisite's clarification that parameter labels need not be identifiable.",
+      "opened": true
+    },
+    {
+      "id": "def-loss-function-and-risk",
+      "used_for": "Loss and risk terminology in the supervised-prediction prerequisite; no risk integration result is used in the assigned finite calculations.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-positive-and-negative-score-balance",
+      "concern": "Definition references says def-group-risk-score-and-calibration “fixes ... the nondegeneracy condition” 0 < μ_t < N_t. That supplier's Definition permits base rates zero and one and imposes no such condition. Nondegeneracy is correctly introduced in this balance definition itself, so the mathematics is unaffected, but the supplier attribution is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "fairness-criteria-and-impossibility-boundaries",
+      "to": "calibration-proper-losses-and-surrogate-classification",
+      "faithful": true,
+      "note": "Checked the required page inventory and its def-probability-calibration interface against the consuming definition. Binary reliability specializes to calibration at each distinct score; the consumer explicitly preserves the distinction between aggregate score calibration and stronger binwise calibration when scores repeat. No converse is asserted without the distinct-score qualification. The finite proofs require no other result from the prerequisite page. Independently checked the main theorem against KMR §§1.1–2, including the complete Theorem 1.1 argument: [original paper](https://arxiv.org/pdf/1609.05807v2). Exact rational recomputation confirmed both means and all four threshold-rate pairs in the final example."
+    }
+  ]
+}

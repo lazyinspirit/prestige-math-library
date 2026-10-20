@@ -1,0 +1,129 @@
+[
+  {
+    "order": 2857,
+    "id": "rl-function-approximation-and-off-policy-limits",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Function approximation, off-policy instability, and deep-RL limits",
+    "companion": "rl-function-approximation-and-off-policy-limits-examples",
+    "requires": [
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+      "tabular-prediction-and-control",
+      "ml02-gaussian-process-regression"
+    ],
+    "items": [
+      {
+        "id": "lem-projected-bellman-error-is-well-defined",
+        "kind": "lemma",
+        "title": "The weighted feature projection is well-defined",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-sum-over-a-finite-index-set",
+          "lem-finite-span-orthogonal-projection-in-inner-product-space",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-projected-bellman-error",
+        "kind": "definition",
+        "title": "State-weighted Bellman error and projected Bellman error",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-sum-over-a-finite-index-set",
+          "lem-projected-bellman-error-is-well-defined"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "forward_refs": []
+      },
+      {
+        "id": "thm-bairds-counterexample-off-policy-td-diverges",
+        "kind": "theorem",
+        "title": "Expected off-policy TD(0) diverges in Baird’s seven-state example",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-projected-bellman-error",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "lem-geometric-sequence-null",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-bellman-error-unlearnability-example",
+        "kind": "theorem",
+        "title": "Feature-reward data do not determine the Bellman error or, at positive discount, its minimizer",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-projected-bellman-error",
+          "thm-finite-mdp-policy-induces-reward-state-chain",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": [],
+      "statement": "Assume the Axiom of Choice to form the infinite trajectory laws. Fix $0\\leq\\gamma<1$. An actionless finite Markov reward process (MRP) here means a nonempty finite state set with a joint probability law for next state and reward at each state. Consider the following two MRPs, each with its stated stationary state-weighting distribution, meaning that one transition leaves the distribution unchanged.\n\nIn MRP 1 the state set is $\\{A,B\\}$, with transitions $A\\to B$ receiving reward $0$ deterministically and $B\\to A$ receiving reward $1$ with probability $1/2$ or $B\\to B$ receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_1(A)=1/3$, $\\mu_1(B)=2/3$.\n\nIn MRP 2 the state set is $\\{A,B,B'\\}$, with transitions $A\\to B$ and $A\\to B'$ each receiving reward $0$ with probability $1/2$, $B\\to A$ receiving reward $1$ deterministically, and $B'\\to B$ or $B'\\to B'$ each receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_2(A)=\\mu_2(B)=\\mu_2(B')=1/3$.\n\nIn both processes the observed feature is $\\psi(A)=(1,0)$ and $\\psi(B)=\\psi(B')=(0,1)$, so a parameter $w=(a,b)^\\mathsf T$ assigns values $v_w(A)=a$ and $v_w(B)=v_w(B')=b$. Starting from the stated stationary weighting, the two processes induce the same probability law on the observed feature/reward sequence $((\\psi(S_n),R_{n+1}))_{n\\geq0}$. Their mean square Bellman errors, defined as the stationary-weighted square of the conditional expected one-step TD error, are\n$$\n\\begin{aligned}\\operatorname{BE}_1(a,b)&=\\frac13(\\gamma b-a)^2+\\frac23\\left(\\frac{\\gamma}{2}(a+b)-b\\right)^2,\\\\ \\operatorname{BE}_2(a,b)&=\\frac13\\left((\\gamma b-a)^2+(1+\\gamma a-b)^2+(-1+(\\gamma-1)b)^2\\right).\\end{aligned}\n$$\nMRP 1 has the unique minimizer $(a,b)=(0,0)$ and minimum $0$. With $D=1+\\gamma+\\gamma^2$, MRP 2 has the unique minimizer $(a,b)=\\left(-\\frac{\\gamma}{D},\\frac{\\gamma}{2D}\\right)$ and minimum $\\frac{(\\gamma+2)^2}{6D}$; also $\\operatorname{BE}_2(0,0)=2/3$. For every $0<\\gamma<1$ the minimizing parameters differ. Thus the Bellman-error objective and, for positive discount, its minimizing parameter are not determined by the observable feature/reward sequence law. An MRP here has no action-dependent policy; it is not an unseen-action offline-MDP policy-impossibility claim."
+      }
+    ]
+  },
+  {
+    "order": 2858,
+    "id": "rl-function-approximation-and-off-policy-limits-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Function approximation, off-policy instability, and deep-RL limits — Examples",
+    "companion": "rl-function-approximation-and-off-policy-limits",
+    "requires": [
+      "rl-function-approximation-and-off-policy-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-on-policy-one-state-linear-td-is-stable",
+        "kind": "example",
+        "title": "A one-state on-policy linear TD(0) update contracts to zero",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-projected-bellman-error",
+          "lem-geometric-sequence-null"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-bairds-seven-state-star-expected-update",
+        "kind": "example",
+        "title": "A finite Baird-star update has exact expected weights",
+        "deps": [
+          "thm-bairds-counterexample-off-policy-td-diverges"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-matched-observation-mrps-have-distinct-bellman-errors",
+        "kind": "example",
+        "title": "At discount one-half, identical observable laws hide different Bellman-error minima",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-projected-bellman-error",
+          "thm-bellman-error-unlearnability-example"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

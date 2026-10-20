@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "actual_metadata_edits": false,
+  "operations": [
+    {
+      "operation": "replace-exact-contract-key",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-87.proof-contracts.json",
+      "key": "thm-trajectory-importance-sampling-is-unbiased",
+      "before": {
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "def-offline-reinforcement-learning-dataset",
+            "source_section": "Definition",
+            "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+            "uses": [
+              "1.1",
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "alg-trajectory-importance-sampling-ope",
+            "source_section": "Definition",
+            "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nAll three outputs are finite under the finite-MDP, finite-horizon and coverage hypotheses. The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+            "source_section": "Statement",
+            "quote": "Assume AC and the finite-horizon dataset conditions of the preceding definition, with full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For $0\\le t<H$, let $\\Omega_{t+1}$ be the finite set of trajectory prefixes through $(R_{t+1},S_{t+1})$, and let $P^\\sigma_{t+1}$ be the marginal law of this prefix under policy $\\sigma\\in\\{\\pi,\\mu\\}$. On a behavior-positive prefix define\n\n$$W_{0:t}=\\prod_{k=0}^{t}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},$$\n\nand set $W_{0:t}=0$ on behavior-null prefixes. Then $P^\\pi_{t+1}\\ll P^\\mu_{t+1}$, and $W_{0:t}$ is a version of $dP^\\pi_{t+1}/dP^\\mu_{t+1}$ up to $P^\\mu_{t+1}$-almost-everywhere equality. In particular, for every real $G$ integrable under $P^\\pi_H$, the full-horizon weight $W_{0:H-1}$ satisfies\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:H-1}G]=\\mathbb E_{P^\\pi_H}[G],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:H-1}|G|]<\\infty.$$\n\nThe same identity holds prefixwise: for each $0\\le t<H$ and every real $g$ integrable under $P^\\pi_{t+1}$, with $g$ evaluated on the observed prefix,\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:t}g]=\\mathbb E_{P^\\pi_H}[g],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:t}|g|]<\\infty.$$",
+            "uses": [
+              "1.1",
+              "1.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+            "source_section": "Statement",
+            "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "derivation-1.1",
+            "step": "1.1",
+            "claim": "Fix a logged trajectory index $i$. By [F1], its law is $P^\\mu_H$, and [F3] applied to $G_i$ gives $\\mathbb E_\\mu[W_{i,H-1}G_i]=\\mathbb E_\\pi[G_H]=J_H(\\pi;s_0)$. Linearity [F4] gives $\\mathbb E_\\mu[\\widehat J_{\\mathrm{OIS}}]=n^{-1}\\sum_{i=1}^nJ_H(\\pi;s_0)=J_H(\\pi;s_0)$.",
+            "inputs": [
+              "given",
+              "A1",
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "derivation-1.2",
+            "step": "1.2",
+            "claim": "Fix $i$ and $0\\le t<H$. The reward $R_{t+1}^i$ is a function of the prefix through $(R_{t+1},S_{t+1})$, so [F3] gives $\\mathbb E_\\mu[W_{i,t}R_{t+1}^i]=\\mathbb E_\\pi[R_{t+1}]$. Multiplying each equality by the fixed $\\gamma^t$ and summing the finite range $0\\le t<H$, [F4] yields $\\mathbb E_\\mu[\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i]=J_H(\\pi;s_0)$.",
+            "inputs": [
+              "given",
+              "F1",
+              "F2",
+              "F3",
+              "F4",
+              "algebra"
+            ]
+          },
+          {
+            "id": "derivation-2.1",
+            "step": "2.1",
+            "claim": "Each of the $n$ PDIS trajectory scores in [F2] has expectation $J_H(\\pi;s_0)$ by step 1.2. Their finite sample average has the same expectation by [F4], proving $\\mathbb E_\\mu[\\widehat J_{\\mathrm{PDIS}}]=J_H(\\pi;s_0)$. Step 1.1 proves the ordinary-estimator claim.",
+            "inputs": [
+              "step 1.1",
+              "step 1.2",
+              "F2",
+              "F4",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "finite_smoke": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The statement assumes H≥1 and n≥1 and contains no empty model or empty dataset case."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Step 1.2 applies the prefix density identity to each reward, including zero rewards and zero weights."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "The statement allows H=1 and n=1; steps 1.1–3.1 use finite averages valid in these cases."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Step 1.1 handles the single-trajectory OIS average; the density lemma includes behavior-null atoms."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "The finite sums in steps 1.1–2.1 cover γ=0 and γ=1 and the terminal index H−1."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Statement and A1 explicitly assumes AC for the trajectory-law and RN-density suppliers."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+          }
+        ]
+      },
+      "after": {
+        "citations": [
+          {
+            "fact": "A1",
+            "source": "def-axiom-of-choice",
+            "source_section": "Definition",
+            "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$. An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$. Here $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that $f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by itself, such an $f$ is precisely a choice function for it.",
+            "uses": [
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "def-offline-reinforcement-learning-dataset",
+            "source_section": "Definition",
+            "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state. Fix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are $$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$ For a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.1",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "alg-trajectory-importance-sampling-ope",
+            "source_section": "Definition",
+            "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator $$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$ the per-decision estimator $$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$ and the self-normalized weighted estimator $$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$ The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+            "source_section": "Statement",
+            "quote": "Assume AC and the finite-horizon dataset conditions of the preceding definition, with full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For $0\\le t<H$, let $\\Omega_{t+1}$ be the finite set of trajectory prefixes through $(R_{t+1},S_{t+1})$, and let $P^\\sigma_{t+1}$ be the marginal law of this prefix under policy $\\sigma\\in\\{\\pi,\\mu\\}$. On a behavior-positive prefix define $$W_{0:t}=\\prod_{k=0}^{t}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},$$ and set $W_{0:t}=0$ on behavior-null prefixes. Then $P^\\pi_{t+1}\\ll P^\\mu_{t+1}$, and $W_{0:t}$ is a version of $dP^\\pi_{t+1}/dP^\\mu_{t+1}$ up to $P^\\mu_{t+1}$-almost-everywhere equality. In particular, for every real $G$ integrable under $P^\\pi_H$, the full-horizon weight $W_{0:H-1}$ satisfies $$\\mathbb E_{P^\\mu_H}[W_{0:H-1}G]=\\mathbb E_{P^\\pi_H}[G],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:H-1}|G|]<\\infty.$$ The same identity holds prefixwise: for each $0\\le t<H$ and every real $g$ integrable under $P^\\pi_{t+1}$, with $g$ evaluated on the observed prefix, $$\\mathbb E_{P^\\mu_H}[W_{0:t}g]=\\mathbb E_{P^\\pi_H}[g],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:t}|g|]<\\infty.$$",
+            "uses": [
+              "3.1",
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+            "source_section": "Statement",
+            "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+            "uses": [
+              "3.1",
+              "3.2",
+              "4.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "step": "1.1",
+            "claim": "On any input where the algorithm returns numerical estimates, each propensity ratio is finite: when $\\mu(A_t^i\\mid S_t^i)>0$, it is a quotient of finite probabilities by a positive probability; when both probabilities are zero, the algorithm sets the ratio to zero. If $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, the algorithm returns `unsupported` instead. Thus every cumulative weight is finite. Each return and every finite sum in OIS and PDIS is finite because the reward set, horizon, and dataset are finite. The WIS numerator and denominator are finite, and the procedure either divides by a positive finite denominator or returns zero.",
+            "inputs": [
+              "F1",
+              "F2",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "step": "2.1",
+            "claim": "An observed pair with $\\mu(A_t^i\\mid S_t^i)=0$ lies on a behavior-null trajectory atom by [F1]. Since the trajectory space, horizon, and sample size are finite, the event that any observed pair has zero behavior propensity is a finite union of null events. The algorithm therefore returns numerical estimates almost surely under the behavior sample law. Extending the three estimator expressions by any fixed finite values on the `unsupported` null event does not change their expectations.",
+            "inputs": [
+              "F1",
+              "F2",
+              "step 1.1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "step": "3.1",
+            "claim": "Fix a logged trajectory index $i$. By [F1], its law is $P^\\mu_H$, and [F3] applied to $G_i$ gives $\\mathbb E_\\mu[W_{i,H-1}G_i]=\\mathbb E_\\pi[G_H]=J_H(\\pi;s_0)$. Linearity [F4] gives $\\mathbb E_\\mu[\\widehat J_{\\mathrm{OIS}}]=n^{-1}\\sum_{i=1}^nJ_H(\\pi;s_0)=J_H(\\pi;s_0)$.",
+            "inputs": [
+              "F1",
+              "F3",
+              "F4",
+              "A1",
+              "F2",
+              "step 2.1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-3-2",
+            "step": "3.2",
+            "claim": "Fix $i$ and $0\\le t<H$. The reward $R_{t+1}^i$ is a function of the prefix through $(R_{t+1},S_{t+1})$, so [F3] gives $\\mathbb E_\\mu[W_{i,t}R_{t+1}^i]=\\mathbb E_\\pi[R_{t+1}]$. Multiplying each equality by the fixed $\\gamma^t$ and summing the finite range $0\\le t<H$, [F4] yields $\\mathbb E_\\mu[\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i]=J_H(\\pi;s_0)$.",
+            "inputs": [
+              "F3",
+              "F4",
+              "F1",
+              "F2",
+              "step 2.1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "step": "4.1",
+            "claim": "Each of the $n$ PDIS trajectory scores in [F2] has expectation $J_H(\\pi;s_0)$ by step 3.2. Their finite sample average has the same expectation by [F4], proving $\\mathbb E_\\mu[\\widehat J_{\\mathrm{PDIS}}]=J_H(\\pi;s_0)$. Step 3.1 proves the ordinary-estimator claim.",
+            "inputs": [
+              "F2",
+              "step 3.2",
+              "F4",
+              "step 3.1",
+              "step 2.1",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "finite_smoke": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The statement assumes H≥1 and n≥1 and contains no empty model or empty dataset case."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Step 1.2 applies the prefix density identity to each reward, including zero rewards and zero weights."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "The statement allows H=1 and n=1; steps 1.1–3.1 use finite averages valid in these cases."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Step 1.1 handles the single-trajectory OIS average; the density lemma includes behavior-null atoms."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "The finite sums in steps 1.1–2.1 cover γ=0 and γ=1 and the terminal index H−1."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "checked",
+            "evidence": "Statement and A1 explicitly assumes AC for the trajectory-law and RN-density suppliers."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+          }
+        ]
+      }
+    },
+    {
+      "operation": "replace-exact-citation-quote",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-87.proof-contracts.json",
+      "key": "ex-offline-ope-full-support-and-missing-support",
+      "index": 1,
+      "before_citation": {
+        "fact": "F2",
+        "source": "alg-trajectory-importance-sampling-ope",
+        "source_section": "Definition",
+        "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nAll three outputs are finite under the finite-MDP, finite-horizon and coverage hypotheses. The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      "after_quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator $$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$ the per-decision estimator $$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$ and the self-normalized weighted estimator $$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$ The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+      "reason": "Preserve native completed removal of the finite-output property from the algorithm Definition; its property now has the native completed theorem proof."
+    },
+    {
+      "operation": "replace-exact-citation-quote",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-87.proof-contracts.json",
+      "key": "ex-offline-ope-exploding-trajectory-weights",
+      "index": 1,
+      "before_citation": {
+        "fact": "F2",
+        "source": "alg-trajectory-importance-sampling-ope",
+        "source_section": "Definition",
+        "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nAll three outputs are finite under the finite-MDP, finite-horizon and coverage hypotheses. The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+        "uses": [
+          "1.1",
+          "2.1"
+        ]
+      },
+      "after_quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator $$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$ the per-decision estimator $$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$ and the self-normalized weighted estimator $$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$ The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+      "reason": "Preserve native completed removal of the finite-output property from the algorithm Definition; its property now has the native completed theorem proof."
+    },
+    {
+      "operation": "replace-exact-citation-quote",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-87.proof-contracts.json",
+      "key": "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+      "index": 1,
+      "before_citation": {
+        "fact": "F2",
+        "source": "alg-trajectory-importance-sampling-ope",
+        "source_section": "Definition",
+        "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nAll three outputs are finite under the finite-MDP, finite-horizon and coverage hypotheses. The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+        "uses": [
+          "1.1",
+          "2.1",
+          "3.1"
+        ]
+      },
+      "after_quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator $$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$ the per-decision estimator $$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$ and the self-normalized weighted estimator $$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$ The procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+      "reason": "Preserve native completed removal of the finite-output property from the algorithm Definition; its property now has the native completed theorem proof."
+    },
+    {
+      "operation": "set-manifest-item-property",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-87.pages.json",
+      "id": "alg-trajectory-importance-sampling-ope",
+      "property": "justified_by",
+      "before_property_present": false,
+      "before_value": null,
+      "after_value": [
+        "thm-trajectory-importance-sampling-is-unbiased"
+      ]
+    }
+  ]
+}

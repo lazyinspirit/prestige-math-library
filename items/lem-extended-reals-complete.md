@@ -14,6 +14,7 @@ landmark: true
 short: "$\\overline{\\mathbb{R}}$ is order complete"
 proof_strategy: cases
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-extended-reals-complete.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -35,25 +36,25 @@ pipeline_run: null
 ## Statement
 
 Let $A \subseteq \overline{\mathbb{R}}$ be **any** subset of the extended real
-line ([[def-extended-reals]]) and write $A_{\mathbb{R}} := A \cap \mathbb{R}$.
+line (The extended real line $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, its order, and the arithmetic that is left undefined) and write $A_{\mathbb{R}} := A \cap \mathbb{R}$.
 Then $A$ has a least upper bound and a greatest lower bound in
-$\overline{\mathbb{R}}$ ([[def-upper-bound]]), each unique, which we write
+$\overline{\mathbb{R}}$ (Upper bound, least upper bound, and strict upper bound), each unique, which we write
 $\sup A$ and $\inf A$ with the ambient set always $\overline{\mathbb{R}}$.
 Explicitly:
 
 - $\sup A = +\infty$ if $+\infty \in A$, or if $A_{\mathbb{R}}$ is not bounded above in $\mathbb{R}$;
 - $\sup A = -\infty$ if $+\infty \notin A$ and $A_{\mathbb{R}} = \emptyset$;
-- $\sup A$ is the real supremum $\sup A_{\mathbb{R}}$ ([[def-complete-ordered-field]]) if $+\infty \notin A$ and $A_{\mathbb{R}}$ is nonempty and bounded above in $\mathbb{R}$;
+- $\sup A$ is the real supremum $\sup A_{\mathbb{R}}$ (Complete ordered field (least-upper-bound property)) if $+\infty \notin A$ and $A_{\mathbb{R}}$ is nonempty and bounded above in $\mathbb{R}$;
 
 and dually, with $-\infty$ and $+\infty$ exchanged and "above" replaced by
-"below", for $\inf A$ ([[def-infimum]], [[thm-infimum-property]]).
+"below", for $\inf A$ (Greatest lower bound (infimum), Every nonempty set bounded below has an infimum).
 
 **Agreement.** If $A \subseteq \mathbb{R}$ is nonempty and bounded above in
-$\mathbb{R}$ ([[def-bounded-set]]) then $\sup A$ computed in
+$\mathbb{R}$ (Lower bound, bounded below, bounded set) then $\sup A$ computed in
 $\overline{\mathbb{R}}$ is the real number $\sup A$ of
-[[def-complete-ordered-field]]; if $A \subseteq \mathbb{R}$ is nonempty and
+Complete ordered field (least-upper-bound property); if $A \subseteq \mathbb{R}$ is nonempty and
 bounded below then $\inf A$ computed in $\overline{\mathbb{R}}$ is the real
-number $\inf A$ of [[thm-infimum-property]]. In particular the notation is
+number $\inf A$ of Every nonempty set bounded below has an infimum. In particular the notation is
 unambiguous on the sets for which the real supremum and infimum are defined, and
 $\sup \emptyset = -\infty$, $\inf \emptyset = +\infty$ in
 $\overline{\mathbb{R}}$.
@@ -64,6 +65,20 @@ rather than for bounded ones only. It is also not a weakening of the discipline
 this library keeps around suprema: the operation supplied here is a *different*
 operation, taken in a *different* ordered set, and the agreement clause records
 exactly where the two coincide.
+
+## Statement references
+
+[[def-extended-reals]]
+
+[[def-upper-bound]]
+
+[[def-complete-ordered-field]]
+
+[[def-infimum]]
+
+[[thm-infimum-property]]
+
+[[def-bounded-set]]
 
 ## Facts & Assumptions
 

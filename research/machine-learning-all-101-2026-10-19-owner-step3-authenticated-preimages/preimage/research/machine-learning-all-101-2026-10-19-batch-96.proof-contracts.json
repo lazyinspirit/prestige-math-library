@@ -1,0 +1,1205 @@
+{
+  "version": 1,
+  "scope": [
+    "def-kl-regularized-policy-improvement",
+    "def-bradley-terry-preference-model",
+    "thm-finite-action-gibbs-policy-optimum",
+    "thm-dpo-reward-policy-reparameterization",
+    "rem-preference-coverage-and-model-misspecification",
+    "alg-direct-preference-optimization-finite-budget",
+    "ex-two-response-kl-regularized-gibbs-policy",
+    "cex-disconnected-comparison-support-does-not-identify-policy",
+    "ex-prompt-reward-offset-leaves-policy-unchanged",
+    "cex-zero-reference-support-breaks-dpo-log-ratio",
+    "lem-finite-budget-dpo-properties-and-work"
+  ],
+  "contracts": {
+    "def-kl-regularized-policy-improvement": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Y is finite nonempty and p,q are normalized probability vectors. The KL sum may omit zero p coordinates, but normalization guarantees at least one positive p coordinate; the family wording does not admit an empty response set or empty probability law.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Y is finite nonempty and p,q are normalized probability vectors. The KL sum may omit zero p coordinates, but normalization guarantees at least one positive p coordinate; the family wording does not admit an empty response set or empty probability law."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero first-coordinate terms are omitted; positive mass at a zero reference coordinate is assigned +infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A one-element response set is allowed and gives a finite objective when the reference is supported."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The coefficient is restricted to beta>0 and rewards are finite-valued."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The logarithm is applied only to positive ratios; the support convention handles q_y=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses finite sums and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition constructs directed finite KL with an explicit support convention and the reward-minus-beta-KL objective to maximize. It does not equate two optimization or statistical properties by an if-and-only-if theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The definition constructs directed finite KL with an explicit support convention and the reward-minus-beta-KL objective to maximize. It does not equate two optimization or statistical properties by an if-and-only-if theorem.",
+            "item_sha256": "5d047a3dd2576c72e2fb0e373280f1a07f8db7af0a4f6de717fc9a6d66b9d6ad",
+            "row_sha256": "2eeab07904639b6599b5860f1627c5086c409dd6c1c78a3931043458f279cc8a"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition constructs directed finite KL with an explicit support convention and the reward-minus-beta-KL objective to maximize. It does not equate two optimization or statistical properties by an if-and-only-if theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The definition constructs directed finite KL with an explicit support convention and the reward-minus-beta-KL objective to maximize. It does not equate two optimization or statistical properties by an if-and-only-if theorem.",
+            "item_sha256": "5d047a3dd2576c72e2fb0e373280f1a07f8db7af0a4f6de717fc9a6d66b9d6ad",
+            "row_sha256": "f87a2d020ede7fa4b09045beab47dab131907f8641312793e8cd52435958b1c0"
+          }
+        }
+      ]
+    },
+    "def-bradley-terry-preference-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition uses finite prompt/response sets and at least two responses per prompt."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Finite reward differences give sigmoid probabilities strictly between zero and one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Self-comparisons are excluded and each response set has at least two elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal rewards give sigma(0)=1/2 and complementary reverse probability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Finite rewards never yield comparison probabilities 0 or 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition evaluates each supplied ordered pair and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Bradley–Terry assigns sigmoid reward-difference probabilities to ordered distinct response pairs. Specifying that statistical model does not assert a converse characterization of human preferences or rewards from observed comparisons.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Bradley–Terry assigns sigmoid reward-difference probabilities to ordered distinct response pairs. Specifying that statistical model does not assert a converse characterization of human preferences or rewards from observed comparisons.",
+            "item_sha256": "251b000bbb100759752a0347f1d362323fcc305d3c308f875e124a3f6e1834f6",
+            "row_sha256": "7181cae01ae8e17a19dec3bb3ca5df3daa84e99de86078309a7d18573ba0bfb7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Bradley–Terry assigns sigmoid reward-difference probabilities to ordered distinct response pairs. Specifying that statistical model does not assert a converse characterization of human preferences or rewards from observed comparisons.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Bradley–Terry assigns sigmoid reward-difference probabilities to ordered distinct response pairs. Specifying that statistical model does not assert a converse characterization of human preferences or rewards from observed comparisons.",
+            "item_sha256": "251b000bbb100759752a0347f1d362323fcc305d3c308f875e124a3f6e1834f6",
+            "row_sha256": "ece3f505300d50765c6703800ba1fe7eee0f6d87a4995a4740c6623f87a1671b"
+          }
+        }
+      ]
+    },
+    "thm-finite-action-gibbs-policy-optimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a finite nonempty set. A probability vector on $Y$ is a family $p=(p_y)_{y\\in Y}$ with $p_y\\ge0$ and $\\sum_{y\\in Y}p_y=1$. For probability vectors $p,q$, define the finite relative entropy\n$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$\nwhen $p_y=0$ whenever $q_y=0$, and define $D(p\\|q)=+\\infty$ otherwise. Terms with $p_y=0$ are omitted. Given a real reward $r:Y\\to\\mathbb R$ and a coefficient $\\beta>0$, define\n$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$\nThe finite KL-regularized policy-improvement problem is to maximize $F_{q,r,\\beta}$ over all probability vectors $p$ on $Y$. The reference $q$ has full support when $q_y>0$ for every $y\\in Y$; in that case $F_{q,r,\\beta}(p)$ is finite for every $p$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\times\\mathcal Y\\to[0,+\\infty]$ whose section $q\\mapsto S(q,j)$ is Borel measurable for every label $j$. If the true label distribution is $p\\in\\Delta_K$ and the reported forecast is $q\\in\\Delta_K$, its expected score loss is $\\bar S(p,q)=\\sum_{j=1}^Kp_jS(q,j)$, where a term with $p_j=0$ contributes zero even when $S(q,j)=+\\infty$. The loss is **proper** if $\\bar S(p,p)\\le\\bar S(p,q)$ for every $p,q\\in\\Delta_K$, and **strictly proper** if equality implies $q=p$. The logarithmic loss is $S_{\\log}(q,j)=-\\log q_j$, with $-\\log0=+\\infty$, where $\\log$ is the natural logarithm; the Brier loss is $S_{\\mathrm B}(q,j)=\\sum_{i=1}^K(q_i-\\mathbf1_{\\{i=j\\}})^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-log-and-brier-strict-propriety",
+          "source_section": "Statement",
+          "quote": "For every $K\\ge2$ and $p,q\\in\\Delta_K$, the logarithmic and Brier losses in the definition of finite-label score loss satisfy $\\bar S(p,p)\\le\\bar S(p,q)$, with equality only when $q=p$. The expected logarithmic loss at the truthful forecast is finite, including when some coordinates of $p$ vanish.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "partition-normalization",
+          "step": "1.1",
+          "claim": "Since $Y$ is finite and each $q_y e^{r(y)/\\beta}$ is a positive finite real, their sum $Z$ is positive and finite. The coordinates of $p^*$ are positive and sum to $1$, so $p^*$ is a full-support probability vector.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gibbs-objective-gap",
+          "step": "2.1",
+          "claim": "For each $y$, the definition of $p^*$ gives $\\log(p_y^*/q_y)=r(y)/\\beta-\\log Z$. Substitution into the finite sum for $D(p\\|p^*)$, omitting zero coordinates of $p$, yields $\\beta D(p\\|p^*)=\\beta D(p\\|q)-\\sum_y p_y r(y)+\\beta\\log Z=\\beta\\log Z-F_{q,r,\\beta}(p)$. All sums are finite, and all logarithm arguments in the sums are positive.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "maximum-value-and-gap",
+          "step": "3.1",
+          "claim": "Substituting $p=p^*$ in step 2.1 gives $F_{q,r,\\beta}(p^*)=\\beta\\log Z$, because $D(p^*\\|p^*)=0$. Therefore for every $p$, step 2.1 gives $F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-maximizer",
+          "step": "4.1",
+          "claim": "Since $p^*$ has full support, the difference $\\bar S_{\\log}(p,p^*)-\\bar S_{\\log}(p,p)$ is the finite sum $\\sum_{y:p_y>0}p_y\\log(p_y/p_y^*)=D(p\\|p^*)$ by [F1] and [F2]. By [F3], this difference is nonnegative and is zero only when $p=p^*$. As $\\beta>0$, step 3.1 proves the stated inequality and uniqueness.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Gibbs theorem assumes finite nonempty Y and positive q on every response. Therefore its partition sum contains at least one positive term, as explicitly used in proof1.1; the indexed partition formula does not allow an empty response alphabet.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The Gibbs theorem assumes finite nonempty Y and positive q on every response. Therefore its partition sum contains at least one positive term, as explicitly used in proof1.1; the indexed partition formula does not allow an empty response alphabet."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The candidate p may have zero coordinates; those terms are omitted and the log-loss supplier covers this boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a singleton response set the normalized policy is (1) and the objective gap is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Full-support q and finite rewards make all Gibbs weights positive; beta is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem excludes beta=0 and zero reference coordinates; p may lie on the simplex boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums are used; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: If p=p*, then D(p||p*)=0 and the objective gap vanishes."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: If the gap vanishes, strict log-loss propriety forces p=p*."
+        }
+      ]
+    },
+    "thm-dpo-reward-policy-reparameterization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a finite nonempty prompt set. For each $x\\in X$, let $Y_x$ be a finite response set with at least two elements, and let $r_x:Y_x\\to\\mathbb R$ be a real-valued reward. The Bradley–Terry model assigns to each ordered pair of distinct responses $a,b\\in Y_x$ the two-outcome comparison $a\\succ b$ or $b\\succ a$, with\n$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$\nHere $a\\succ b$ means that response $a$ is preferred to response $b$ at prompt $x$; the probability of the reverse outcome is $1-\\Pr(a\\succ b\\mid x)=\\sigma(r_x(b)-r_x(a))$. This is a statistical model for pairwise comparisons, not a universal law of human preference.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a finite nonempty set. A probability vector on $Y$ is a family $p=(p_y)_{y\\in Y}$ with $p_y\\ge0$ and $\\sum_{y\\in Y}p_y=1$. For probability vectors $p,q$, define the finite relative entropy\n$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$\nwhen $p_y=0$ whenever $q_y=0$, and define $D(p\\|q)=+\\infty$ otherwise. Terms with $p_y=0$ are omitted. Given a real reward $r:Y\\to\\mathbb R$ and a coefficient $\\beta>0$, define\n$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$\nThe finite KL-regularized policy-improvement problem is to maximize $F_{q,r,\\beta}$ over all probability vectors $p$ on $Y$. The reference $q$ has full support when $q_y>0$ for every $y\\in Y$; in that case $F_{q,r,\\beta}(p)$ is finite for every $p$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a finite nonempty set, let $q$ be a probability vector on $Y$ with $q_y>0$ for every $y$, let $r:Y\\to\\mathbb R$, and let $\\beta>0$. Define\n$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$\nThen $Z$ is finite and positive, $p^*$ is a full-support probability vector, the maximum objective value is $F_{q,r,\\beta}(p^*)=\\beta\\log Z$, and for every probability vector $p$ on $Y$,\n$$F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)\\ge0.$$\nEquality holds exactly when $p=p^*$. Thus $p^*$ is the unique maximizer of the finite KL-regularized policy-improvement objective.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reward-log-ratio",
+          "step": "1.1",
+          "claim": "For each $y\\in Y_x$, the Gibbs formula and positivity of $q_x(y)$ and $p_x^*(y)$ give $r_x(y)=\\beta\\log(p_x^*(y)/q_x(y))+\\beta\\log Z_x$.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "policy-to-reward-converse",
+          "step": "1.2",
+          "claim": "For any full-support probability vector $\\pi_x$, define $\\widehat r_x(y)=\\beta\\log(\\pi_x(y)/q_x(y))$. Its partition sum is $\\sum_y q_x(y)e^{\\widehat r_x(y)/\\beta}=\\sum_y\\pi_x(y)=1$. By the objective definition [F2], the policy is optimized over the finite simplex; the formula and uniqueness in [F3] then return $\\pi_x$ as the unique Gibbs maximizer. Adding $c_x$ multiplies both the numerator and partition sum by $e^{c_x/\\beta}$, preserving that policy.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "softplus-derivative",
+          "step": "1.3",
+          "claim": "For real $u$, [F5] and [F6] give $\\frac{d}{du}\\log(1+e^{-u})=-\\frac{e^{-u}}{1+e^{-u}}=-\\sigma(-u)$. The logarithm arguments are positive for every finite $u$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pairwise-partition-cancellation",
+          "step": "2.1",
+          "claim": "Subtracting the identities in step 1.1 for $a$ and $b$ cancels the common $\\beta\\log Z_x$ term. Applying [F1] to the remaining reward difference gives the displayed Bradley–Terry probability formula. If $r_x$ is replaced by $r_x+c_x$, the reward difference is unchanged, so the comparison probability is unchanged.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dpo-likelihood",
+          "step": "2.2",
+          "claim": "For each record $i$, apply step 1.2 to $\\pi_\\theta(\\cdot\\mid x_i)$. Its implicit reward is $\\widehat r_\\theta$, and [F1] gives the preferred-outcome probability $\\sigma(u_i(\\theta))$. Since $\\sigma(u)=(1+e^{-u})^{-1}$, its negative logarithm is $\\log(1+e^{-u})$. Summing over the $n$ records proves the stated finite negative log likelihood.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-dpo-gradient",
+          "step": "3.1",
+          "claim": "Each $\\pi_\\theta(y_i^w\\mid x_i)$ and $\\pi_\\theta(y_i^l\\mid x_i)$ is positive and continuously differentiable on $\\Theta$, so the logarithms are continuously differentiable. Applying [F4] to each $u_i$ gives $\\nabla_\\theta u_i=\\beta(\\nabla_\\theta\\log\\pi_\\theta(y_i^w\\mid x_i)-\\nabla_\\theta\\log\\pi_\\theta(y_i^l\\mid x_i))$, because $q_{x_i}$ is fixed. The finite-sum chain rule with step 1.3 gives the displayed gradient.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every response set has at least two elements and the ordered preference dataset has n at least one, so partition and empirical-loss sums are nonempty and n is nonzero. An empty open parameter domain merely has no theta at which a gradient is claimed; it is not used to define an empty empirical average.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Every response set has at least two elements and the ordered preference dataset has n at least one, so partition and empirical-loss sums are nonempty and n is nonzero. An empty open parameter domain merely has no theta at which a gradient is claimed; it is not used to define an empty empirical average."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Reference and policy probabilities are full support on used responses, so all log ratios are finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The proof applies to a single record n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: u_i=0 is allowed; sigma(-u_i)=1/2 and the derivative exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Beta is positive and all policy/reference logarithm arguments are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite data and finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        }
+      ]
+    },
+    "alg-direct-preference-optimization-finite-budget": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input dataset has n at least one, each response set has at least two elements, and each scheduled mini-batch is nonempty. These are the indexed families used in loss averages. An empty update schedule is separately allowed by T=0 and explicitly returns the initial pair; it is not an empty dataset or an undefined average.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The input dataset has n at least one, each response set has at least two elements, and each scheduled mini-batch is nonempty. These are the indexed families used in loss averages. An empty update schedule is separately allowed by T=0 and explicitly returns the initial pair; it is not an empty dataset or an undefined average."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Eta_t=0 is allowed; T=0 returns the initial parameter and loss."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: One-record datasets and one-index batches are valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At u=0 the explicit derivative uses sigma(0)=1/2; AD does not differentiate the value-only max/absolute-value expression."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Policy/reference probabilities are full support, beta>0, and step sizes are finite and nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Mini-batch indices are fixed inputs; the algorithm makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure states no biconditional."
+        }
+      ]
+    },
+    "rem-preference-coverage-and-model-misspecification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark concerns a finite nonempty response set and its observed comparison graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The Gibbs component-mass argument uses the explicitly stated full-support reference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A disconnected graph has at least two nonempty connected components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A common shift across components preserves the policy; distinct shifts can change relative component mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Rewards are finite and beta>0, so component Gibbs sums are finite and positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All component sums are finite; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no biconditional."
+        }
+      ]
+    },
+    "ex-two-response-kl-regularized-gibbs-policy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a finite nonempty set. A probability vector on $Y$ is a family $p=(p_y)_{y\\in Y}$ with $p_y\\ge0$ and $\\sum_{y\\in Y}p_y=1$. For probability vectors $p,q$, define the finite relative entropy\n$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$\nwhen $p_y=0$ whenever $q_y=0$, and define $D(p\\|q)=+\\infty$ otherwise. Terms with $p_y=0$ are omitted. Given a real reward $r:Y\\to\\mathbb R$ and a coefficient $\\beta>0$, define\n$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$\nThe finite KL-regularized policy-improvement problem is to maximize $F_{q,r,\\beta}$ over all probability vectors $p$ on $Y$. The reference $q$ has full support when $q_y>0$ for every $y\\in Y$; in that case $F_{q,r,\\beta}(p)$ is finite for every $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a finite nonempty set, let $q$ be a probability vector on $Y$ with $q_y>0$ for every $y$, let $r:Y\\to\\mathbb R$, and let $\\beta>0$. Define\n$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$\nThen $Z$ is finite and positive, $p^*$ is a full-support probability vector, the maximum objective value is $F_{q,r,\\beta}(p^*)=\\beta\\log Z$, and for every probability vector $p$ on $Y$,\n$$F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)\\ge0.$$\nEquality holds exactly when $p=p^*$. Thus $p^*$ is the unique maximizer of the finite KL-regularized policy-improvement objective.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-response-partition",
+          "step": "1.1",
+          "claim": "By [F3], $e^{r(a)/\\beta}=1$ and $e^{r(b)/\\beta}=e^{\\log3}=3$. Hence $Z=(1/2)1+(1/2)3=2$, and [F2] gives $p^*(a)=1/4$ and $p^*(b)=3/4$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-response-maximum",
+          "step": "2.1",
+          "claim": "By [F1], the objective being maximized is $F_{q,r,\\beta}$. Its gap identity in [F2] gives $F(p^*)-F(p)=\\beta D(p\\|p^*)\\ge0$ for every probability vector $p$, with equality only at $p=p^*$. Substituting $Z=2$ into $F(p^*)=\\beta\\log Z$ gives the maximum value $\\beta\\log2$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-element set {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference and maximizing policy are positive; the theorem also covers zero coordinates of competing p."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has exactly two responses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta is any positive real and beta log 3 is finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The reference is full support and all logarithm/exponential arguments are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses only explicit finite values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prescribed two-response rewards yield partition sum two and probabilities one quarter and three quarters, with maximum beta times log two. The computation does not characterize all rewards and references producing those numerical values.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The prescribed two-response rewards yield partition sum two and probabilities one quarter and three quarters, with maximum beta times log two. The computation does not characterize all rewards and references producing those numerical values.",
+            "item_sha256": "3d10a2f2de43d183dded96e215bc1eaff9e13d9570671a673615879f1b5fe020",
+            "row_sha256": "77dc56b427ceac0d22b282d0ae7c0df423f3836b7ee0924fb63450426bf9dd20"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prescribed two-response rewards yield partition sum two and probabilities one quarter and three quarters, with maximum beta times log two. The computation does not characterize all rewards and references producing those numerical values.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The prescribed two-response rewards yield partition sum two and probabilities one quarter and three quarters, with maximum beta times log two. The computation does not characterize all rewards and references producing those numerical values.",
+            "item_sha256": "3d10a2f2de43d183dded96e215bc1eaff9e13d9570671a673615879f1b5fe020",
+            "row_sha256": "61b3b979dda97be3bde8360c54dc33787ad023923422edf12cee3f41e01323ee"
+          }
+        }
+      ]
+    },
+    "cex-disconnected-comparison-support-does-not-identify-policy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a finite nonempty prompt set. For each $x\\in X$, let $Y_x$ be a finite response set with at least two elements, and let $r_x:Y_x\\to\\mathbb R$ be a real-valued reward. The Bradley–Terry model assigns to each ordered pair of distinct responses $a,b\\in Y_x$ the two-outcome comparison $a\\succ b$ or $b\\succ a$, with\n$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$\nHere $a\\succ b$ means that response $a$ is preferred to response $b$ at prompt $x$; the probability of the reverse outcome is $1-\\Pr(a\\succ b\\mid x)=\\sigma(r_x(b)-r_x(a))$. This is a statistical model for pairwise comparisons, not a universal law of human preference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a finite nonempty set, let $q$ be a probability vector on $Y$ with $q_y>0$ for every $y$, let $r:Y\\to\\mathbb R$, and let $\\beta>0$. Define\n$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$\nThen $Z$ is finite and positive, $p^*$ is a full-support probability vector, the maximum objective value is $F_{q,r,\\beta}(p^*)=\\beta\\log Z$, and for every probability vector $p$ on $Y$,\n$$F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)\\ge0.$$\nEquality holds exactly when $p=p^*$. Thus $p^*$ is the unique maximizer of the finite KL-regularized policy-improvement objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-observed-edge-probabilities",
+          "step": "1.1",
+          "claim": "Let $r_0(a)=r_0(b)=r_0(c)=r_0(d)=0$ and let $r_1(a)=r_1(b)=0$, $r_1(c)=r_1(d)=\\log3$. On each observed edge the two endpoint rewards agree under both functions, so [F1] gives the same comparison probability $\\sigma(0)=1/2$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-gibbs-policies",
+          "step": "2.1",
+          "claim": "Under $r_0$, [F2] has four unnormalized weights $1/4$, so $Z_0=1$ and $p_0^*=(1/4,1/4,1/4,1/4)$. Under $r_1$, [F3] gives unnormalized weights $(1/4,1/4,3/4,3/4)$, hence $Z_1=2$ and $p_1^*=(1/8,1/8,3/8,3/8)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "refutation",
+          "step": "3.1",
+          "claim": "The observed edge probabilities are identical by step 1.1, while the two Gibbs policies differ by step 2.1. Therefore the exact comparison probabilities on this disconnected graph do not uniquely determine the policy, refuting the Statement.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses the four-element response set {a,b,c,d}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference is uniform and positive at every response."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: There are two observed edges and two connected components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta=1; equal endpoint rewards yield comparison probability 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Rewards are finite and Gibbs weights are positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness uses explicit finite responses and rewards."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        }
+      ]
+    },
+    "ex-prompt-reward-offset-leaves-policy-unchanged": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bradley-terry-preference-model",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a finite nonempty prompt set. For each $x\\in X$, let $Y_x$ be a finite response set with at least two elements, and let $r_x:Y_x\\to\\mathbb R$ be a real-valued reward. The Bradley–Terry model assigns to each ordered pair of distinct responses $a,b\\in Y_x$ the two-outcome comparison $a\\succ b$ or $b\\succ a$, with\n$$\\Pr(a\\succ b\\mid x)=\\sigma\\bigl(r_x(a)-r_x(b)\\bigr),\\qquad \\sigma(t)=\\frac{1}{1+e^{-t}}.$$\nHere $a\\succ b$ means that response $a$ is preferred to response $b$ at prompt $x$; the probability of the reverse outcome is $1-\\Pr(a\\succ b\\mid x)=\\sigma(r_x(b)-r_x(a))$. This is a statistical model for pairwise comparisons, not a universal law of human preference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a finite nonempty set. A probability vector on $Y$ is a family $p=(p_y)_{y\\in Y}$ with $p_y\\ge0$ and $\\sum_{y\\in Y}p_y=1$. For probability vectors $p,q$, define the finite relative entropy\n$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$\nwhen $p_y=0$ whenever $q_y=0$, and define $D(p\\|q)=+\\infty$ otherwise. Terms with $p_y=0$ are omitted. Given a real reward $r:Y\\to\\mathbb R$ and a coefficient $\\beta>0$, define\n$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$\nThe finite KL-regularized policy-improvement problem is to maximize $F_{q,r,\\beta}$ over all probability vectors $p$ on $Y$. The reference $q$ has full support when $q_y>0$ for every $y\\in Y$; in that case $F_{q,r,\\beta}(p)$ is finite for every $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-action-gibbs-policy-optimum",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a finite nonempty set, let $q$ be a probability vector on $Y$ with $q_y>0$ for every $y$, let $r:Y\\to\\mathbb R$, and let $\\beta>0$. Define\n$$Z=\\sum_{y\\in Y}q_y e^{r(y)/\\beta},\\qquad p_y^*=\\frac{q_y e^{r(y)/\\beta}}{Z}.$$\nThen $Z$ is finite and positive, $p^*$ is a full-support probability vector, the maximum objective value is $F_{q,r,\\beta}(p^*)=\\beta\\log Z$, and for every probability vector $p$ on $Y$,\n$$F_{q,r,\\beta}(p^*)-F_{q,r,\\beta}(p)=\\beta D(p\\|p^*)\\ge0.$$\nEquality holds exactly when $p=p^*$. Thus $p^*$ is the unique maximizer of the finite KL-regularized policy-improvement objective.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "offset-comparison-invariance",
+          "step": "1.1",
+          "claim": "For any distinct $a,b\\in Y_x$, $r'_x(a)-r'_x(b)=(r_x(a)+c_x)-(r_x(b)+c_x)=r_x(a)-r_x(b)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "offset-policy-invariance",
+          "step": "2.1",
+          "claim": "The objective being optimized is the one in [F2], and [F3] gives its normalized weights. The shifted unnormalized weight is $q_x(y)e^{r'_x(y)/\\beta}=e^{c_x/\\beta}q_x(y)e^{r_x(y)/\\beta}$, so $Z'_x=e^{c_x/\\beta}Z_x$. Dividing each shifted weight by $Z'_x$ cancels the common factor and gives $p_x^{*'}(y)=p_x^*(y)$ for every $y$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a finite nonempty response set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The reference is full support and finite rewards give positive Gibbs weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The formula holds for every distinct pair; a singleton has no pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The case c_x=0 is included and leaves all quantities unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Beta is positive and all rewards are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Adding a prompt-only constant cancels in reward differences and in the normalized Gibbs weights. This example proves invariance under that specified transformation, not a converse that every invariant reward change must have that form.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Adding a prompt-only constant cancels in reward differences and in the normalized Gibbs weights. This example proves invariance under that specified transformation, not a converse that every invariant reward change must have that form.",
+            "item_sha256": "3e574b65752175d7bee2a4ef0cea0351c05aae2c3a85114359629704f8afda24",
+            "row_sha256": "1f1552d08556de8130f8f7b7d844f815ab6b836d401d7344d97dff5c5eab7e22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Adding a prompt-only constant cancels in reward differences and in the normalized Gibbs weights. This example proves invariance under that specified transformation, not a converse that every invariant reward change must have that form.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Adding a prompt-only constant cancels in reward differences and in the normalized Gibbs weights. This example proves invariance under that specified transformation, not a converse that every invariant reward change must have that form.",
+            "item_sha256": "3e574b65752175d7bee2a4ef0cea0351c05aae2c3a85114359629704f8afda24",
+            "row_sha256": "7016c861e03f87864a410dc3ebc36262727c80a85b575d577911db7d00171645"
+          }
+        }
+      ]
+    },
+    "cex-zero-reference-support-breaks-dpo-log-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kl-regularized-policy-improvement",
+          "source_section": "Definition",
+          "quote": "Let $Y$ be a finite nonempty set. A probability vector on $Y$ is a family $p=(p_y)_{y\\in Y}$ with $p_y\\ge0$ and $\\sum_{y\\in Y}p_y=1$. For probability vectors $p,q$, define the finite relative entropy\n$$D(p\\|q)=\\sum_{y:p_y>0}p_y\\log\\frac{p_y}{q_y}$$\nwhen $p_y=0$ whenever $q_y=0$, and define $D(p\\|q)=+\\infty$ otherwise. Terms with $p_y=0$ are omitted. Given a real reward $r:Y\\to\\mathbb R$ and a coefficient $\\beta>0$, define\n$$F_{q,r,\\beta}(p)=\\sum_{y\\in Y}p_y r(y)-\\beta D(p\\|q).$$\nThe finite KL-regularized policy-improvement problem is to maximize $F_{q,r,\\beta}$ over all probability vectors $p$ on $Y$. The reference $q$ has full support when $q_y>0$ for every $y\\in Y$; in that case $F_{q,r,\\beta}(p)$ is finite for every $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dpo-reward-policy-reparameterization",
+          "source_section": "Statement",
+          "quote": "For each prompt $x$ under consideration, let $Y_x$ be a finite response set with at least two elements, let $q_x$ be a probability vector with $q_x(y)>0$ for every $y\\in Y_x$, let $r_x:Y_x\\to\\mathbb R$, and let $\\beta>0$. Define $Z_x=\\sum_{y\\in Y_x}q_x(y)e^{r_x(y)/\\beta}$ and $p_x^*(y)=q_x(y)e^{r_x(y)/\\beta}/Z_x$. For every distinct $a,b\\in Y_x$,\n$$r_x(a)-r_x(b)=\\beta\\log\\frac{p_x^*(a)}{q_x(a)}-\\beta\\log\\frac{p_x^*(b)}{q_x(b)},$$\nso the Bradley–Terry probability is\n$$\\Pr(a\\succ b\\mid x)=\\sigma\\!\\left(\\beta\\log\\frac{p_x^*(a)}{q_x(a)}-\\beta\\log\\frac{p_x^*(b)}{q_x(b)}\\right).$$\nConversely, every full-support probability vector $\\pi_x$ on $Y_x$ is the unique Gibbs policy for reward $\\widehat r_x(y)=\\beta\\log(\\pi_x(y)/q_x(y))$; adding any prompt-only constant $c_x$ to this reward leaves both the Gibbs policy and the Bradley–Terry probabilities unchanged.\n\nLet $D=((x_i,y_i^w,y_i^l))_{i=1}^n$ be a finite ordered dataset with $n\\ge1$, $y_i^w,y_i^l\\in Y_{x_i}$, and $y_i^w\\ne y_i^l$. Let $\\Theta\\subseteq\\mathbb R^d$ be open and let each conditional policy $\\pi_\\theta(\\cdot\\mid x_i)$ be a probability vector with $\\pi_\\theta(y\\mid x_i)>0$ for every $y\\in Y_{x_i}$, whose coordinates are continuously differentiable in $\\theta\\in\\Theta$. Put\n$$u_i(\\theta)=\\beta\\left(\\log\\frac{\\pi_\\theta(y_i^w\\mid x_i)}{q_{x_i}(y_i^w)}-\\log\\frac{\\pi_\\theta(y_i^l\\mid x_i)}{q_{x_i}(y_i^l)}\\right),\\qquad \\mathcal L_D(\\theta)=\\frac1n\\sum_{i=1}^n\\log(1+e^{-u_i(\\theta)}).$$\nThen $\\mathcal L_D$ is the finite direct preference optimization (DPO) loss: the average negative log likelihood for the Bradley–Terry model with implicit reward $\\widehat r_\\theta(x_i,y)=\\beta\\log\\!\\bigl(\\pi_\\theta(y\\mid x_i)/q_{x_i}(y)\\bigr)$. Its Euclidean gradient is\n$$\\nabla_\\theta\\mathcal L_D(\\theta)=-\\frac{\\beta}{n}\\sum_{i=1}^n\\sigma(-u_i(\\theta))\\left(\\nabla_\\theta\\log\\pi_\\theta(y_i^w\\mid x_i)-\\nabla_\\theta\\log\\pi_\\theta(y_i^l\\mid x_i)\\right).$$\nHere $\\nabla_\\theta$ is the column vector of Euclidean partial derivatives on the open set $\\Theta$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-support-maximizer",
+          "step": "1.1",
+          "claim": "If a probability vector $p$ on $Y$ has $p_b>0$, [F1] gives $D(p\\|q)=+\\infty$ and hence $F_{q,r,1}(p)=-\\infty$, since the reward expectation is finite. If $p_b=0$, then $p=\\delta_a$, $D(p\\|q)=0$, and $F_{q,r,1}(p)=0$. Thus $p^*=\\delta_a$ is the unique maximizer.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "undefined-log-ratio",
+          "step": "2.1",
+          "claim": "At response $b$, $p_b^*=q_b=0$, so $p_b^*/q_b$ is the undefined ratio $0/0$ and is not in the domain of the logarithm in [F3]. The stated identity therefore cannot be defined at every response. This example violates the full-support hypothesis of [F2], showing that the identity cannot be extended to zero reference support as stated.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses the two-element set {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example deliberately sets q_b=p_b*=0 and applies the stated extended KL convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Exactly one response is supported by q and one is not."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Beta=1 and finite rewards (0,1) are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The disputed ratio is 0/0, outside the logarithm domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite two-point calculation uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is not an iff."
+        }
+      ]
+    },
+    "lem-finite-budget-dpo-properties-and-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-direct-preference-optimization-finite-budget",
+          "source_section": "Definition",
+          "quote": "Input a finite ordered preference dataset $D=((x_i,y_i^w,y_i^l))_{i=1}^n$ with $n\\ge1$, finite response sets $Y_{x_i}$ of size at least two, distinct $y_i^w,y_i^l\\in Y_{x_i}$, reference probability vectors $q_{x_i}$ with all coordinates positive, a coefficient $\\beta>0$, a parameter domain $\\Theta\\subseteq\\mathbb R^d$ that is open, and a conditional policy family $\\pi_\\theta(\\cdot\\mid x_i)$ that is a probability vector with all coordinates positive on each $Y_{x_i}$ for every $\\theta\\in\\Theta$, with coordinates totally differentiable in $\\theta$ and continuous derivative. Also input an initial value $\\theta_0\\in\\Theta$, a finite integer $T\\ge0$, a list of finite nonempty mini-batches $B_t=(i_{t,1},\\ldots,i_{t,m_t})$ with indices in $\\{1,\\ldots,n\\}$ for each $0\\le t<T$, and finite step sizes $\\eta_t\\ge0$. Duplicated indices in a mini-batch are allowed. Require each observed scalar log-probability $\\theta\\mapsto\\log\\pi_\\theta(y_i^w\\mid x_i)$ and $\\theta\\mapsto\\log\\pi_\\theta(y_i^l\\mid x_i)$ to be represented by a finite real-arithmetic graph whose primitive maps are totally differentiable with continuous derivative matrices on an open neighborhood of every evaluated parameter; a piecewise-$C^1$ primitive is allowed only on a unique strict branch.\n\nAlso supply an exact membership oracle $M_\\Theta:\\mathbb R^d\\to\\{0,1\\}$ that returns $1$ exactly on $\\Theta$ and terminates on every call, with finite declared per-call cost $c_\\Theta(z)$. Use this oracle for the candidate-parameter test below. Supply terminating exact evaluators for the policy-graph primitive values, derivative-transpose applications, and primitive-domain and strict-branch tests. In the work model, each such primitive call and each scalar arithmetic operation, comparison, exponential, logarithm, maximum, or absolute value costs one unit; vector operations count their scalar entries. Membership-oracle calls are counted separately and their costs added. These supplied oracle operations are part of the input model; openness of $\\Theta$ alone is not asserted to provide a computable membership test, nor is a bit-complexity or floating-point bound asserted.\n\nFor real $u$, evaluate the per-record loss by the equivalent stable expression\n$$s(u)=\\max(0,-u)+\\log(1+e^{-|u|})=\\log(1+e^{-u}).$$\nSet $u_i(\\theta)=\\beta[\\log(\\pi_\\theta(y_i^w\\mid x_i)/q_{x_i}(y_i^w))-\\log(\\pi_\\theta(y_i^l\\mid x_i)/q_{x_i}(y_i^l))]$ and initially compute $L_D(\\theta_0)=n^{-1}\\sum_i s(u_i(\\theta_0))$. Store $(\\theta_{\\mathrm{last}},L_{\\mathrm{last}})=(\\theta_0,L_D(\\theta_0))$.\n\nFor $t=0,\\ldots,T-1$, compute the mini-batch objective $L_t(\\theta)=m_t^{-1}\\sum_{j=1}^{m_t}s(u_{i_{t,j}}(\\theta))$. For each index in the batch, use reverse-mode AD on the finite policy-log-probability graphs to compute the Euclidean gradients of the two log probabilities, and form the exact loss gradient from the finite DPO gradient formula proved on the A page:\n$$g_t=-\\frac{\\beta}{m_t}\\sum_{j=1}^{m_t}\\sigma(-u_{i_{t,j}}(\\theta_t))\\left(\\nabla_\\theta\\log\\pi_{\\theta_t}(y_{i_{t,j}}^w\\mid x_{i_{t,j}})-\\nabla_\\theta\\log\\pi_{\\theta_t}(y_{i_{t,j}}^l\\mid x_{i_{t,j}})\\right).$$\nDo not differentiate through the max/absolute-value expression used only to evaluate $s(u)$; use this explicit derivative formula. If reverse mode returns `DOMAIN_ERROR` or `NONDIFFERENTIABLE`, stop and return $(\\theta_{\\mathrm{last}},L_{\\mathrm{last}})$ with that status. Otherwise set $\\theta'=\\theta_t-\\eta_tg_t$. Evaluate $M_\\Theta(\\theta')$. If its value is $0$, so $\\theta'\\notin\\Theta$, stop and return the last valid pair with status `DOMAIN_ERROR`. If its value is $1$, so $\\theta'\\in\\Theta$, set $\\theta_{t+1}=\\theta'$, evaluate $L_D(\\theta_{t+1})$, and update $(\\theta_{\\mathrm{last}},L_{\\mathrm{last}})=(\\theta_{t+1},L_D(\\theta_{t+1}))$.\n\nAfter all $T$ updates, return $(\\theta_T,L_D(\\theta_T))$ with status `COMPLETED`. Thus $T=0$ returns the initial parameters and initial full-data loss. The procedure uses the fixed mini-batch indices and step-size schedule as supplied; it makes no convergence or statistical-optimality assertion.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dpo-reward-policy-reparameterization",
+          "source_section": "Statement",
+          "quote": "For each prompt $x$ under consideration, let $Y_x$ be a finite response set with at least two elements, let $q_x$ be a probability vector with $q_x(y)>0$ for every $y\\in Y_x$, let $r_x:Y_x\\to\\mathbb R$, and let $\\beta>0$. Define $Z_x=\\sum_{y\\in Y_x}q_x(y)e^{r_x(y)/\\beta}$ and $p_x^*(y)=q_x(y)e^{r_x(y)/\\beta}/Z_x$. For every distinct $a,b\\in Y_x$,\n$$r_x(a)-r_x(b)=\\beta\\log\\frac{p_x^*(a)}{q_x(a)}-\\beta\\log\\frac{p_x^*(b)}{q_x(b)},$$\nso the Bradley–Terry probability is\n$$\\Pr(a\\succ b\\mid x)=\\sigma\\!\\left(\\beta\\log\\frac{p_x^*(a)}{q_x(a)}-\\beta\\log\\frac{p_x^*(b)}{q_x(b)}\\right).$$\nConversely, every full-support probability vector $\\pi_x$ on $Y_x$ is the unique Gibbs policy for reward $\\widehat r_x(y)=\\beta\\log(\\pi_x(y)/q_x(y))$; adding any prompt-only constant $c_x$ to this reward leaves both the Gibbs policy and the Bradley–Terry probabilities unchanged.\n\nLet $D=((x_i,y_i^w,y_i^l))_{i=1}^n$ be a finite ordered dataset with $n\\ge1$, $y_i^w,y_i^l\\in Y_{x_i}$, and $y_i^w\\ne y_i^l$. Let $\\Theta\\subseteq\\mathbb R^d$ be open and let each conditional policy $\\pi_\\theta(\\cdot\\mid x_i)$ be a probability vector with $\\pi_\\theta(y\\mid x_i)>0$ for every $y\\in Y_{x_i}$, whose coordinates are continuously differentiable in $\\theta\\in\\Theta$. Put\n$$u_i(\\theta)=\\beta\\left(\\log\\frac{\\pi_\\theta(y_i^w\\mid x_i)}{q_{x_i}(y_i^w)}-\\log\\frac{\\pi_\\theta(y_i^l\\mid x_i)}{q_{x_i}(y_i^l)}\\right),\\qquad \\mathcal L_D(\\theta)=\\frac1n\\sum_{i=1}^n\\log(1+e^{-u_i(\\theta)}).$$\nThen $\\mathcal L_D$ is the finite direct preference optimization (DPO) loss: the average negative log likelihood for the Bradley–Terry model with implicit reward $\\widehat r_\\theta(x_i,y)=\\beta\\log\\!\\bigl(\\pi_\\theta(y\\mid x_i)/q_{x_i}(y)\\bigr)$. Its Euclidean gradient is\n$$\\nabla_\\theta\\mathcal L_D(\\theta)=-\\frac{\\beta}{n}\\sum_{i=1}^n\\sigma(-u_i(\\theta))\\left(\\nabla_\\theta\\log\\pi_\\theta(y_i^w\\mid x_i)-\\nabla_\\theta\\log\\pi_\\theta(y_i^l\\mid x_i)\\right).$$\nHere $\\nabla_\\theta$ is the column vector of Euclidean partial derivatives on the open set $\\Theta$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Give input coordinate $i$ a label $\\mathrm{in}_i$ distinct from all operation indices, and set $z_{\\mathrm{in}_i}=x_i$ and $E_{\\mathrm{in}_i}=\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot is either an input label $\\mathrm{in}_i$ or an operation index $\\ell<j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-reverse-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Require every primitive to be $C^1$ on its declared open domain or supplied as a piecewise-$C^1$ primitive with the branch rules of the graph definition. Evaluate and store all primal values in topological order. Initialize every operation cotangent and every input cotangent to zero. Seed the scalar output by setting its cotangent to $1$: if $o$ is an operation, set $\\bar z_o=1$; if $o$ is input coordinate $i$, set $\\bar x_i=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, compute the contribution\n$$c_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j$$\nand add it to the cotangent accumulator of that parent: use $\\bar x_i$ if the parent is input coordinate $i$, and $\\bar z_\\ell$ if it is operation node $\\ell$. If the same parent node occurs in multiple slots, add every slot contribution. Return the scalar output $f(x)$ and the input cotangents $(\\bar x_1,\\ldots,\\bar x_n)$ as the Euclidean gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an accepted parameter in $\\Theta$. The reference and policy coordinates are positive, so every log ratio is a finite real and each $u_i$ is finite. By [F5], $1+e^{-u_i}>0$ and its logarithm is finite. For $u\\ge0$, the stable evaluation expression is exactly $\\log(1+e^{-u})$. For $u<0$, put $a=-u>0$ and $b=\\log(1+e^u)$. The exponential addition and reciprocal identities give $e^{a+b}=e^{-u}(1+e^u)=1+e^{-u}$, so [F5] gives $a+b=\\log(1+e^{-u})$. Thus the stable expression equals the same finite loss on both branches, including $u=0$, and finite dataset and batch averages are finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Each supplied graph is finite and its specified exact primitive value, pullback and domain/branch tests terminate. Therefore its forward and reverse traversals terminate. At every successful strict-branch evaluation, [F4] gives both exact policy-log-probability gradients. Apply [F2] to the ordered batch of size $m_t\\ge1$, counting duplicated indices with their multiplicity; its gradient is exactly $g_t$. The algorithm does not differentiate the nonsmooth max/absolute-value implementation of the loss value.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "There are finitely many record graphs with fixed finite node, slot and value-space dimensions. Forward evaluation, cotangent initialization and reverse accumulation consequently have a finite uniform upper bound in the declared unit-cost primitive model; finite branch tables are covered by their supplied terminating tests. Choose $C\\ge d+1$ large enough to bound either one record's loss evaluation or its value-and-gradient computation, including the scalar sigmoid and loss operations. This bound depends on graph sizes and dimensions, not on parameter values, since primitive calls have unit cost in this model.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial parameter lies in $\\Theta$, and step 1.1 makes its full-data loss finite, proving the stored-pair invariant at initialization. Suppose it holds before an attempted update. A reverse-mode diagnostic returns that unchanged pair. Otherwise step 1.2 gives a finite vector $g_t$, and the finite step size gives a finite trial $\\theta'$. The supplied exact oracle terminates and decides its membership. On rejection the unchanged valid pair is returned, without a policy evaluation at $\\theta'$. On acceptance $\\theta'\\in\\Theta$, so step 1.1 gives its finite full-data loss; replacing the stored pair preserves the invariant. Finite induction therefore proves the invariant at every attempted update and every return.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every attempted update traverses only finite graph and coordinate lists, finitely many records, and at most one terminating membership call. Hence it finishes or exits with the specified diagnostic. The outer loop has only $T$ entries, so there are at most $T$ attempts and no infinite search or convergence test. If none exits early, [F1] returns the pair after update $T$ with `COMPLETED`; for $T=0$ it performs no updates and returns the initialized pair.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The procedure evaluates the full-data loss initially and after at most $T$ accepted updates, using at most $n(T+1)$ record loss computations. Computing all attempted mini-batch objectives and gradients uses at most a constant times $M$ record computations, even if their forward values are recomputed. The remaining vector updates, loop and status bookkeeping cost $O((d+1)(T+1))$, bounded by $O(C(T+1))$. Step 1.3 gives the stated total work excluding membership. Each attempt makes at most one membership call, so $Q\\le T$; the actual costs sum to a finite number and, when bounded uniformly, to at most $TC_\\Theta$. This proves the work bound without assigning any general computability property to arbitrary open $\\Theta$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof step 2.1/3.1 handle T=0 without attempted updates; n and mini-batches are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes u=0 and proof step 2.1 permits zero finite step size."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.2 includes batch size1; proof step 3.1 includes T=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 returns last valid pair on rejection/diagnostic and permits repeated batch indices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 covers both stable-loss branches at zero; proof step 3.1 includes final attempted update and early exit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 3.1 uses supplied terminating exact evaluators and oracle in finite loops; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The supplied exact-call model implies finite losses, the last-valid-pair invariant and finite work bounds. These are sufficient procedure properties; no converse says finite work supplies an oracle for every arbitrary open parameter domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The supplied exact-call model implies finite losses, the last-valid-pair invariant and finite work bounds. These are sufficient procedure properties; no converse says finite work supplies an oracle for every arbitrary open parameter domain.",
+            "item_sha256": "6149254edd59861e6f54858f5386be675dca3345403b076c40cf72dd3bd27a70",
+            "row_sha256": "9ec927e67e2ca45b15e70c3fadfb773acacdd86a857550ed3654de548fb1d15b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The supplied exact-call model implies finite losses, the last-valid-pair invariant and finite work bounds. These are sufficient procedure properties; no converse says finite work supplies an oracle for every arbitrary open parameter domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The supplied exact-call model implies finite losses, the last-valid-pair invariant and finite work bounds. These are sufficient procedure properties; no converse says finite work supplies an oracle for every arbitrary open parameter domain.",
+            "item_sha256": "6149254edd59861e6f54858f5386be675dca3345403b076c40cf72dd3bd27a70",
+            "row_sha256": "839158aead12d0714e75b72ff0c606fc83bc029836e173d9655a86ee6cf1c329"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "routine_steps": []
+    }
+  }
+}

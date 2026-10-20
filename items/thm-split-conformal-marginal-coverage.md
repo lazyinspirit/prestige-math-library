@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-split-conformal-marginal-coverage.json
   precheck: pass
 sources:
   references:
@@ -35,18 +36,26 @@ Let $Z_i=(X_i,Y_i)$, $1\le i\le m+1$, be random elements of one measurable
 example space $(\mathcal Z,\mathscr Z)$, and let $\mathcal T$ be the training
 sigma-field. Suppose the tuple $Z=(Z_1,\ldots,Z_{m+1})$ has a regular
 conditional distribution $Q_\omega$ given $\mathcal T$ in the sense of
-[[def-regular-conditional-distribution]], whose sections have joint laws
+Regular conditional distribution, whose sections have joint laws
 invariant under every coordinate permutation, as in
-[[def-exchangeable-random-elements]], for almost every $\omega$. Let $H$ be a $\mathcal T$-measurable
+Exchangeable random elements, for almost every $\omega$. Let $H$ be a $\mathcal T$-measurable
 training statistic, and let $s:\mathcal H\times\mathcal Z\to\mathbb R$ be a
 jointly measurable split score rule. Use the split set in
-[[alg-split-conformal-prediction-set]] at $0<\alpha<1$. Then
+Split conformal prediction set at $0<\alpha<1$. Then
 $$\mathbb P\{Y_{m+1}\in C(X_{m+1})\mid\mathcal T\}\ge1-\alpha\quad\text{almost surely}.$$
 If the tie-randomized set $C_U$ is used with one $U$ of Lebesgue probability
 law on $[0,1]$ independent of $\mathcal T\vee\sigma(Z)$, then
 $$\mathbb P\{Y_{m+1}\in C_U(X_{m+1})\mid\mathcal T\}=1-\alpha\quad\text{almost surely}.$$
 In either case, integration over the training sigma-field gives the same
 marginal lower bound or exact marginal coverage.
+
+## Statement references
+
+[[def-regular-conditional-distribution]]
+
+[[def-exchangeable-random-elements]]
+
+[[alg-split-conformal-prediction-set]]
 
 ## Facts & Assumptions
 

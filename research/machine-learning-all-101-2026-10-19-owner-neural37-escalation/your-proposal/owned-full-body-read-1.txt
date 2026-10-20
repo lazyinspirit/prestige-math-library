@@ -1,0 +1,277 @@
+
+===== alg-empirical-pinn-objective =====
+
+
+## Definition
+
+Inputs are a dimension $d\ge1$, the data and operators specified in the physics-informed residual loss definition, $0<\alpha\le1$, positive weights $\lambda_r,\lambda_b$, and an admissible trial function $h$. The procedure returns the scalar empirical objective value $J_m(h)$. It uses the realized sample points and target values as inputs; it does not generate random samples.
+
+For $d\ge2$, also supply positive integer counts $m_r,m_b$, residual samples $x_r^1,\ldots,x_r^{m_r}\in U$ with their observed values $f(x_r^i)$, boundary samples $x_b^1,\ldots,x_b^{m_b}\in\Gamma$ with their observed values $g(x_b^j)$, constants $c_r,c_b,C_r,C_b>0$, and small-scale cutoffs $\ell_{0,i},\rho_{0,i}>0$. At the selected partition scales $0<\ell_i\le\ell_{0,i}$, require cells $U_j^{\ell_r}$ and $\Gamma_j^{\ell_b}$ with masses at least $c_r\ell_r^d$ and $c_b\ell_b^{d-1}$, each contained in a cube of side $\ell_i$. Require upper ball-mass bounds $\mu_r(\overline B_\rho(x)\cap U)\le C_r\rho^d$ and $\mu_b(\overline B_\rho(y)\cap\Gamma)\le C_b\rho^{d-1}$ for every center and for all $0<\rho\le\rho_{0,i}$. The admissible counts satisfy, for $i\in\{r,b\}$,
+$$m_i\ge\max\{1,c_i^{-2}\ell_{0,i}^{-2s_i},c_i^{-2}d^{s_i}\rho_{0,i}^{-2s_i}\},$$
+so the computed partition scales and fill radii lie in the specified ranges.
+
+For $d=1$, supply a positive integer $m_r$, residual samples $x_r^1,\ldots,x_r^{m_r}\in U$ with observed values $f(x_r^i)$, constants $c_r,C_r>0$, and cutoffs $\ell_{0,r},\rho_{0,r}>0$. At the residual scale $\ell_r$ below, require a finite measurable partition with each cell contained in an interval of length $\ell_r$ and mass at least $c_r\ell_r$, and require upper ball-mass bounds $\mu_r(\overline B_\rho(x)\cap U)\le C_r\rho$ for every center $x\in U$ and all $0<\rho\le\rho_{0,r}$. The admissible count satisfies
+$$m_r\ge\max\{1,c_r^{-2}\ell_{0,r}^{-2},c_r^{-2}\rho_{0,r}^{-2}\},$$
+so $\ell_r=\delta_r$ is in the specified ranges. Supply the observed boundary values at every point of the finite set $\Gamma$ with their masses $\mu_b(\{y\})$. No random boundary sample or boundary sample count is used.
+
+For $d\ge2$, set $s_r=d$, $s_b=d-1$, and, for $i\in\{r,b\}$, compute
+$$\ell_i=(c_i\sqrt{m_i})^{-1/s_i},\qquad \delta_i=\sqrt d\,\ell_i,\qquad \kappa_i=C_i/c_i,$$
+$$C_m=3\max_{i\in\{r,b\}}\{\kappa_i d^{s_i/2}m_i^{1/2}\},\qquad
+\widehat\lambda^R_{i,m}=\frac{3\lambda_i\delta_i^{2\alpha}}{C_m}.$$
+For $d=1$, compute
+$$\ell_r=\delta_r=(c_r\sqrt{m_r})^{-1},\qquad \kappa_r=C_r/c_r,\qquad C_m=3\kappa_r m_r^{1/2},$$
+$$\widehat\lambda^R_{r,m}=\frac{3\lambda_r\delta_r^{2\alpha}}{C_m}
+=\frac{\lambda_r c_r^{-2\alpha}}{\kappa_r}m_r^{-\alpha-1/2},\qquad \widehat\lambda^R_{b,m}=0.$$
+For $d\ge2$, use supplied regularization weights $\lambda^R_{i,m}$ satisfying $\lambda^R_{i,m}\ge\widehat\lambda^R_{i,m}$ componentwise; for a sequence of sample counts also require $\|\lambda_m^R\|_\infty=O(\|\widehat\lambda_m^R\|_\infty)$. For $d=1$, set $\lambda^R_{b,m}=0$ and choose $\lambda^R_{r,m}\ge\widehat\lambda^R_{r,m}$, with the corresponding one-coordinate max-norm order condition across a sequence of counts. If no residual weights are supplied, set them equal to their thresholds.
+
+Finally evaluate and return $J_m(h)=\operatorname{Loss}_m(h;\lambda,\lambda_m^R)$ using the realized residual values, the realized boundary values when $d\ge2$, the exact weighted full-boundary contribution when $d=1$, and the residual seminorm penalty when $d=1$ or both seminorm penalties when $d\ge2$. The regularization thresholds are the source's exact thresholds and cannot be replaced by a generic positive penalty.
+
+## Definition references
+[[def-physics-informed-neural-network-loss|physics informed neural network loss]]
+
+[Shin et al., equations (3.1)–(3.3): exact thresholds, scaling condition, and objective](https://arxiv.org/pdf/2004.01806)
+
+## Remark
+
+For $d\ge2$, the exact residual and boundary threshold coordinates are
+$$\widehat\lambda^R_{r,m}=\frac{3\lambda_r(\sqrt d)^{2\alpha}c_r^{-2\alpha/d}m_r^{-\alpha/d}}{C_m},\qquad \widehat\lambda^R_{b,m}=\frac{3\lambda_b(\sqrt d)^{2\alpha}c_b^{-2\alpha/(d-1)}m_b^{-\alpha/(d-1)}}{C_m},$$
+where $C_m=3\max\{(C_r/c_r)(\sqrt d)^d m_r^{1/2},(C_b/c_b)(\sqrt d)^{d-1}m_b^{1/2}\}$. For $d=1$, the residual threshold is $\widehat\lambda^R_{r,m}=(\lambda_r c_r^{-2\alpha}/\kappa_r)m_r^{-\alpha-1/2}$, with $\kappa_r=C_r/c_r$, and the boundary threshold is zero. The weight vector must satisfy the componentwise lower bound and max-norm order condition in the Algorithm.
+
+The original all-$\varepsilon>0$ sampling quantifier has no probability-measure instances; it is preserved and refuted in the all-scale inconsistency lemma. The small-scale range above is the corrected active sampling convention. No lower-mass constant normalization is implicit in this algorithm.
+
+===== alg-neural-operator-mesh-discretization =====
+
+
+## Definition
+
+For the continuous-function architecture, given a finite partition of $D$ into measurable cells $E_1,\dots,E_N$, choose tags $\xi_j\in E_j$ and weights $\omega_j=|E_j|$. For input samples $v_0(\xi_j)$, replace each integral layer by
+$$v_{t+1}^{(i)}=\sigma_t\!\left(W_tv_t^{(i)}+\sum_{j=1}^N\omega_j\kappa_t(\xi_i,\xi_j)v_t^{(j)}+b_t(\xi_i)\right),\qquad 1\le i\le N.$$
+At an arbitrary output query $x\in\bar D'$, evaluate the same layer formula using $x$ in the first kernel argument and the stored input-cell values in the sum. Apply the pointwise lifting and projection networks with the same parameters at every discretization. A refinement changes the cells, tags, and weights, but not the continuum parameters $W_t,\kappa_t,b_t$ or the pointwise network parameters.
+
+## Definition references
+[Kovachki et al., Appendix E: compatible finite-dimensional Riemann-sum maps](https://arxiv.org/pdf/2108.08481)
+
+## Remark
+
+At every refinement, each cell contributes its volume weight, all kernels and pointwise-network parameters are shared with the continuum operator, and the output can be evaluated at any query point. Changing only the mesh size without preserving these three conventions does not instantiate the discretization family defined above.
+
+The integral universality subclass also admits $L^1$ input equivalence classes. Point samples of those classes are not canonical; this algorithm uses continuous representatives when applying sampling and makes no assertion of an intrinsic point-sampling rule on arbitrary $L^1$ classes. Norm convergence of the reconstructions requires the hypotheses of the discretization theorem for the chosen norm.
+
+===== cex-neural-operator-sup-norm-discretization-does-not-control-c1 =====
+
+
+## Statement refuted
+
+Let $D\subset\mathbb R^d$ and $D'\subset\mathbb R^{d'}$ be bounded domains. Let $A$ and $U$ be real Banach function spaces on $D$ and $D'$ that embed continuously into $C(\bar D)$ and $C(\bar D')$, respectively. Let $\sigma_1,\sigma_2,\sigma_3:\mathbb R\to\mathbb R$ be continuous, and let $G:A\to U$ be any $N$-layer neural operator in the function-space class defined by the neural-operator construction. Then compatible finite-dimensional Riemann-sum realizations of $G$, using the same parameters at each refinement, converge to $G$ uniformly on every compact input set in the output-space norm $U$.
+
+This is the exact originally authored stronger theorem statement, retained verbatim. Assume Countable Choice for the counterexample below. The assertion fails for input space $C([0,1])$, output space $C^1([0,1])$, and the singleton compact input set consisting of the constant function $1$, with a one-neuron final kernel in the specified integral subclass.
+
+## Statement references
+
+[Kovachki et al., Theorem 8 and Appendix E](https://arxiv.org/pdf/2108.08481)
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $D=D'=(0,1)$, $A=C([0,1])$ with the supremum norm, and $U=C^1([0,1])$ with norm $\|u\|_U=\|u\|_\infty+\|u'\|_\infty$.
+
+[F1] Smooth plateau cutoffs exist with prescribed nested compact supports by [[lem-schwartz-cutoffs-from-the-standard-smooth-step]]. In particular fix a smooth $\beta:\mathbb R\to[0,1]$, supported in $(-1,1)$, with $\beta(0)=1$.
+
+[F2] A general integral-kernel neural operator and its volume-weighted tagged quadratures are defined in [[def-neural-operator]] and [[alg-neural-operator-mesh-discretization]].
+
+[F3] Under Countable Choice, continuous nonpolynomial scalar activations give fixed-depth compact-uniform MLP density, by [[thm-single-hidden-layer-universal-approximation]]; the stated choice principle is [[def-countable-choice]].
+
+## Counterexample
+
+1.1 For integers $n\ge2$ put $t_n=3\cdot2^{-n-2}$, $w_n=2^{-4n-4}$, $H_n=2^{2n}$ and $\rho_n(s)=H_n\beta((s-t_n)/w_n)$. Their supports are disjoint subintervals of $(0,1)$: successive centers differ by $3\cdot2^{-n-3}$, which exceeds $w_n+w_{n+1}$, and each radius is smaller than its center. Define $\rho(s)=\sum_{n\ge2}\rho_n(s)$ for $s>0$, and $\rho(s)=0$ for $s\le0$. On each compact subinterval of $(0,\infty)$ only finitely many summands are nonzero. Moreover $m_n=\int\rho_n\le2H_nw_n=2^{-2n-3}$, so $B=\sum_{n\ge2}m_n<1$. Define $\sigma(s)=\int_0^s\rho(t)\,dt$ for $s\ge0$ and $\sigma(s)=0$ for $s<0$. The tail mass bound proves continuity at zero and uniform convergence of the primitives $\sigma_n(s)=\int_0^s\rho_n(t)\,dt$; thus $\sigma=\sum\sigma_n$ is continuous on $\mathbb R$, bounded by $B$, and smooth on $(0,\infty)$. It is a legitimate continuous activation. It is bounded and nonconstant, hence is not polynomial even almost everywhere: continuity would make an almost-everywhere polynomial identity hold everywhere, and a bounded polynomial is constant. Thus [F3] also places it in every finite-dimensional $\mathcal A_0$ class if that premise is imposed when defining the source integral subclass. ReLU belongs to $\mathcal A_0^L$ by the same supplier and its linear growth. [given, F1, F3, construct, algebra]
+
+2.1 Set $\kappa(x,y)=\sigma(x+y)$ and $G(a)(x)=\int_0^1\sigma(x+y)a(y)\,dy$. The kernel is exactly a one-hidden-unit network on $(x,y)$ with weights $(1,1)$, activation $\sigma$, output weight $1$, and zero biases. The other activations can be the identity. Each $G_n^*(a)(x)=\int_0^1\sigma_n(x+y)a(y)\,dy$ is $C^1$, with derivative $\int_0^1\rho_n(x+y)a(y)\,dy$, and both its function norm and derivative norm are at most $m_n\|a\|_\infty$. Consequently both the function series and derivative series converge uniformly. To verify differentiation without an interchange assumption, the finite partial sums satisfy $S_N(x)-S_N(0)=\int_0^x S_N'(t)\,dt$; uniform convergence permits passage to the limit in this equality, and the fundamental theorem of calculus gives a continuous derivative. Hence $G:A\to U$ is bounded linear, with $\|G(a)\|_U\le2B\|a\|_\infty$. Both $A$ and $U$ embed continuously into $C([0,1])$. To instantiate the source integral subclass as well, take $S_0$ and $S_1$ to have constant kernel $1$ and zero bias, and use $\kappa(x,y)=\sigma(x+y)$ as the final kernel, choosing ReLU for the input and intermediate kernel networks and activations. No intermediate activation occurs at depth $N=2$. This yields $\widehat G(a)=(\int_0^1a)G(1)$, a bounded map $A\to U$. For $a=1$, both preceding integral layers and their quadratures are exactly the constant $1$, so its final continuum and quadrature outputs are precisely those analyzed below. Constant kernels are exact networks through their affine output biases. [step 1.1, F2, construct, algebra]
+
+3.1 At refinement $n$ partition $(0,1)$ into $2^n$ dyadic cells of length $h_n=2^{-n}$. Choose the first tag to be $t_n\in(0,h_n)$ and choose the midpoint of every other cell. Let $Q_n(a)(x)=h_n\sum_{j=1}^{2^n}\sigma(x+\xi_{n,j})a(\xi_{n,j})$. These are compatible tagged Riemann sums, with mesh diameter tending to zero and the same continuum parameters at every refinement. Since every tag is positive, each summand is smooth in a neighborhood of $[0,1]$, so $Q_n(a)\in U$. For $a=1$, all derivative summands are nonnegative and $Q_n(1)'(0)\ge h_n\rho(t_n)=h_nH_n=2^n$. On the other hand, substitution in the continuum integral gives $G(1)(x)=\int_x^{x+1}\sigma(s)\,ds$ and $G(1)'(0)=\sigma(1)-\sigma(0)=B$. Thus $\|Q_n(1)-G(1)\|_U\ge2^n-B\to\infty$. [step 1.1, step 2.1, F2, construct, algebra]
+
+4.1 The set $K=\{1\}\subset A$ is compact. The continuous integrand $(x,y)\mapsto\sigma(x+y)$ on $[0,1]^2$ is uniformly continuous: otherwise pairs at distances tending to zero with a fixed positive function gap have convergent subsequences in the compact square and contradict continuity. Writing its modulus of continuity as $\omega$, the cellwise estimate gives $\|Q_n(1)-G(1)\|_\infty\le\omega(h_n)\to0$. Thus the genuine supremum-norm conclusion coexists with divergence in the admissible output norm, refuting the asserted inference. [step 3.1, step 1.1, algebra] ∎
+
+## Remark
+
+The defect occurs in Appendix E's opening reduction from continuous embeddings to equality with $C(\bar D)$. Such an embedding bounds the supremum norm by the Banach norm; it supplies no reverse inequality. This counterexample also uses a network kernel, rather than only an arbitrary continuous kernel. It refutes the specified volume-weighted tagged quadratures in the asserted norm; it does not assert that no other finite-dimensional approximation to this bounded integral operator can exist.
+
+===== cex-pinn-regularization-thresholds-need-balanced-sample-counts =====
+
+
+## Statement refuted
+
+For $d\ge2$, $0<\alpha\le1$, and positive constants in equation (3.1), the count condition $m_r=O(m_b^{d/(d-1)})$ alone does not imply that the two threshold coordinates have bounded max-to-min ratio. In particular, choosing $\lambda_m^R=\widehat\lambda_m^R$ satisfies the stated coordinatewise lower bound and norm upper bound, while that ratio can diverge.
+
+## Statement references
+[Shin et al., equations (3.1)–(3.2) and Appendix C: threshold and minimizer comparison](https://arxiv.org/pdf/2004.01806)
+
+[Shin et al., Appendix C, equation (21): claimed regularizer-coordinate comparability](https://arxiv.org/pdf/2004.01806)
+
+## Facts & Assumptions
+
+**Given:** The threshold definitions for $d\ge2$, positive fixed $\lambda_r,\lambda_b,c_r,c_b$, and the sample-count condition in the Statement.
+
+[F1] The exact thresholds are
+$$\widehat\lambda^R_{r,m}=\frac{3\lambda_r(\sqrt d)^{2\alpha}c_r^{-2\alpha/d}m_r^{-\alpha/d}}{C_m},\qquad \widehat\lambda^R_{b,m}=\frac{3\lambda_b(\sqrt d)^{2\alpha}c_b^{-2\alpha/(d-1)}m_b^{-\alpha/(d-1)}}{C_m},$$
+where the same positive $C_m$ divides both coordinates ([[alg-empirical-pinn-objective]]).
+
+## Proof
+
+**Proof strategy:** explicit sample-count sequence.
+
+1.1 Set $m_r=m_b=n$ for integers $n\ge1$. Since $d/(d-1)>1$, we have $n\le n^{d/(d-1)}$, so the required count condition holds. Choose $\lambda_m^R=\widehat\lambda_m^R$; then the coordinatewise lower-bound condition is equality and the max norm is exactly the prescribed comparison scale. [given, F1, algebra, choose]
+
+2.1 Cancelling the common factor $C_m$ in [F1] gives $$\frac{\lambda^R_{r,m}}{\lambda^R_{b,m}}=\frac{\widehat\lambda^R_{r,m}}{\widehat\lambda^R_{b,m}}=\frac{\lambda_r c_r^{-2\alpha/d}}{\lambda_b c_b^{-2\alpha/(d-1)}}\,n^{\alpha/(d-1)-\alpha/d}=C\,n^{\alpha/(d(d-1))},$$ where $C>0$ is independent of $n$. The exponent is positive, so the ratio tends to infinity. Thus the two coordinates need not be comparable under the stated count condition. [step 1.1, F1, algebra] ∎
+
+
+===== cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain =====
+
+
+## Statement refuted
+
+The following assertion is false under the library's bounded global Hölder norm: every bounded Lipschitz domain satisfying an exterior sphere condition at each boundary point, with a strictly elliptic operator having Hölder coefficients and nonpositive expanded zero-order coefficient, has for every Hölder forcing and continuous Dirichlet data a unique solution in $C^{2,\alpha}(U)\cap C^0(\bar U)$.
+
+## Statement references
+[Shin et al., Theorem D.1: the exterior-sphere classical Dirichlet assertion](https://arxiv.org/pdf/2004.01806)
+
+[Shin et al., Theorem D.1, PDF p.25: existence claim refuted here](https://arxiv.org/pdf/2004.01806)
+
+[Hunter, §2.3: weak maximum principle used for uniqueness](https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf)
+
+## Facts & Assumptions
+
+**Given:** $0<\alpha<1$ and the source's claimed $C^{2,\alpha}(U)\cap C^0(\bar U)$ solution class.
+
+[F1] The library's $C^{2,\alpha}(U)$ is the bounded global Hölder class; its norm includes the supremum of every second derivative over all of $U$ ([[def-holder-spaces-c-k-alpha-and-their-scaled-norms]]).
+
+[F2] For $L=\Delta$, a bounded-domain function $w\in C^2(U)\cap C^0(\bar U)$ with $\Delta w=0$ and $w|_{\partial U}=0$ vanishes identically ([[lem-shin-elliptic-residual-stability]]).
+
+[F3] The locally proved radial profile $\chi$ is smooth, equals $1$ for $r\le1/4$, and equals $0$ for $r\ge1/2$ ([[lem-shin-radial-smooth-cutoff]]).
+
+[F4] The Laplacian of a scalar $C^2$ function on an open subset of $\mathbb R^2$ is $w_{xx}+w_{yy}$ ([[def-laplacian-of-a-c2-function]]).
+
+[F5] The total chain rule applies to the smooth local polar-coordinate change on $r>0$ ([[thm-chain-rule-for-total-derivatives]]).
+
+## Counterexample
+
+1.1 Let $U=\{(r\cos\theta,r\sin\theta):0<r<1,\ 0<\theta<2\pi/3\}$. It is bounded and Lipschitz: its boundary consists of two line segments and a circular arc, meeting at finitely many corners of angles $2\pi/3$ and $\pi/2$. At a smooth boundary point, a sufficiently small ball tangent on the exterior side is disjoint from $U$; on the circular arc one can use a ball outside the unit disk. At a corner of interior angle $\beta<\pi$, choose a ball tangent at the corner with its center on the exterior angle bisector. Directions from the vertex to points in this ball lie within angle $\pi/2$ of the center direction, while the sector directions are at angular distance at least $\pi-\beta/2>\pi/2$; hence the ball is exterior. Therefore $U$ satisfies the exterior sphere condition everywhere. [given, cases]
+
+1.2 Let $\chi$ be the profile supplied by [F3]. Set $$u(r,\theta)=\chi(r)r^{3/2}\sin(3\theta/2),\qquad L=\Delta,\qquad f=\Delta u,\qquad g=0.$$ Since $r>0$ on $U$, $u\in C^\infty(U)$. It extends continuously by zero at the vertex, vanishes on both straight sides because the sine factor vanishes, and vanishes on the circular arc because $\chi(1)=0$. To compute $\Delta w$ for any $C^2$ function in local polar coordinates, write $c=\cos\theta$ and $s=\sin\theta$. The chain rule [F5] gives $$w_{xx}=c^2w_{rr}+\frac{s^2}{r}w_r+\frac{s^2}{r^2}w_{\theta\theta}-\frac{2sc}{r}w_{r\theta}+\frac{2sc}{r^2}w_\theta,\quad w_{yy}=s^2w_{rr}+\frac{c^2}{r}w_r+\frac{c^2}{r^2}w_{\theta\theta}+\frac{2sc}{r}w_{r\theta}-\frac{2sc}{r^2}w_\theta.$$ By [F4], adding yields $\Delta w=w_{rr}+r^{-1}w_r+r^{-2}w_{\theta\theta}$. For $w=r^{3/2}\sin(3\theta/2)$, these derivatives are $w_r=\frac32r^{1/2}\sin(3\theta/2)$, $w_{rr}=\frac34r^{-1/2}\sin(3\theta/2)$, and $w_{\theta\theta}=-\frac94r^{3/2}\sin(3\theta/2)$, so the polar Laplacian is zero on $r<1/4$. On the annulus where $\chi$ varies, $r$ is bounded away from zero and all factors are smooth; outside $r<1/2$, $u=0$. Thus $f$ is smooth and supported in $1/4\le r\le1/2$. The domain $U$ is convex, so boundedness of $\nabla f$ gives a Lipschitz bound on $f$ along each segment in $U$; since $U$ is bounded and $0<\alpha<1$, this implies $f\in C^{0,\alpha}(U)$. [given, F3, F4, F5, algebra]
+
+2.1 Along the ray $\theta=\pi/3$ and for $0<r<1/4$, $\partial_{rr}u=(3/4)r^{-1/2}$, which is unbounded as $r\downarrow0$. A bounded global $C^{2,\alpha}$ norm bounds every Cartesian second derivative and hence every unit-direction second derivative, so [F1] implies $u\notin C^{2,\alpha}(U)$. The coefficients of $L=\Delta$ are smooth, the ellipticity constant is $1$, and the expanded zero-order coefficient is $0\le0$. [step 1.2, F1, algebra]
+
+3.1 The displayed $u$ is a classical solution in $C^2(U)\cap C^0(\bar U)$ of $\Delta u=f$ with zero Dirichlet data. Any other solution in that class differs from $u$ by a zero-boundary harmonic function, which vanishes by [F2]. Hence it is the unique classical solution, and no solution in the asserted global $C^{2,\alpha}(U)\cap C^0(\bar U)$ class exists. This refutes the assertion. [step 1.2, step 2.1, F2, algebra] ∎
+
+
+===== def-discretization-invariant-operator-family =====
+
+
+## Definition
+
+Let $A$ and $U$ be real Banach spaces of functions on bounded domains $D$ and $D'$, with the input point evaluations used below defined. For every $n\ge1$, choose finite-dimensional normed spaces $E_n,F_n$, an exactly defined sampling map $S_n:A\to E_n$ (for example, $S_n(a)=(a(\xi_{n,1}),\ldots,a(\xi_{n,N_n}))$ at specified input points), a finite-dimensional map $\widetilde G_n:E_n\to F_n$, and an output reconstruction map $R_n:F_n\to U$. The reconstruction supplies a function with a defined value at every point of $D'$. The corresponding continuum-valued discrete map is
+$$G_n(a):=R_n\bigl(\widetilde G_n(S_n(a))\bigr)\in U.$$
+A family $(G_n)_{n\ge1}$ is a **discretization-invariant approximation** of an operator $G:A\to U$ if its sampling maps and output reconstructions are part of the family and it approximates this single continuum operator as the input discretization is refined. In the compact-uniform version, for every compact $K\subset A$,
+$$\sup_{a\in K}\|G_n(a)-G(a)\|_U\longrightarrow0.$$
+When $A$ consists of almost-everywhere equivalence classes, the sampling map must be explicitly defined on those classes or use a specified representative convention; point evaluation is not inferred from the equivalence class alone. This definition does not identify unrelated grid-specific maps as one operator family.
+
+## Definition references
+[[[def-metric-compactness|metric compactness]]]
+
+[Kovachki et al., Definition 4 and §3.1: discretization-invariance conditions](https://arxiv.org/pdf/2108.08481)
+
+
+===== def-fourier-neural-operator-layer =====
+
+
+## Definition
+
+Let $\mathbb T^d=(\mathbb R/\mathbb Z)^d$ with normalized Lebesgue measure, represented by the unit cube $[0,1]^d$, and let $v\in C(\mathbb T^d;\mathbb R^q)$ be a periodic vector field. Let $K\ge0$ be a frequency cutoff, and let $R_k\in\mathbb C^{q'\times q}$ be trainable matrices for integer multi-indices $k$ with $\|k\|_\infty\le K$. Define the truncated Fourier integral layer by
+$$\mathcal K_Rv(x)=\sum_{\|k\|_\infty\le K}e^{2\pi i k\cdot x}R_k\widehat v(k),\qquad \widehat v(k)=\int_{\mathbb T^d}e^{-2\pi i k\cdot y}v(y)\,dy.$$
+For real-valued outputs require $R_{-k}=\overline{R_k}$ and $R_0$ real. A Fourier neural-operator layer is
+$$v_{t+1}(x)=\sigma\bigl(W_tv_t(x)+\mathcal K_Rv_t(x)+b_t(x)\bigr),$$
+where $W_t$ is a real pointwise channel map, $b_t$ is a real bias function, and $\sigma$ acts coordinatewise. This definition gives a Fourier-parameterized layer only. It does not assert that the architecture is universal in any specified function-space topology.
+
+## Definition references
+[[[def-neural-operator|neural operator]]]
+
+[[[def-measure-space|measure space]]]
+
+[[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra|lebesgue measure and the lebesgue sigma algebra]]]
+
+[[[def-integrable-real-and-complex-functions-and-their-integrals|integrable real and complex functions and their integrals]]]
+
+[[[def-integral-over-a-measurable-set|integral over a measurable set]]]
+
+[Kovachki et al., §5.3, equation (22): Fourier neural-operator layer](https://arxiv.org/pdf/2108.08481)
+
+
+===== def-neural-operator =====
+
+
+## Definition
+
+Let $D\subset\mathbb R^d$ and $D'\subset\mathbb R^{d'}$ be bounded domains. Let $A$ and $U$ be real Banach spaces of scalar functions whose elements have continuous representatives on $\bar D$ and $\bar D'$, respectively, and suppose the inclusions into $C(\bar D)$ and $C(\bar D')$ are continuous. In the continuous-function setting, a **neural operator** is a composition of a pointwise lifting map, finitely many integral-kernel layers, and a pointwise projection map. A layer with channel dimensions $q_t,q_{t+1}\ge1$ has the form
+$$v_{t+1}(x)=\sigma_t\!\left(W_tv_t(x)+\int_D\kappa_t(x,y)v_t(y)\,dy+b_t(x)\right),\qquad x\in\bar D,$$
+where $v_t:\bar D\to\mathbb R^{q_t}$ is continuous, $W_t\in\mathbb R^{q_{t+1}\times q_t}$, $\kappa_t:\bar D\times\bar D\to\mathbb R^{q_{t+1}\times q_t}$ and $b_t:\bar D\to\mathbb R^{q_{t+1}}$ are continuous, and the scalar activation $\sigma_t$ is applied coordinatewise. The lifting and projection maps are finite feedforward networks applied pointwise, with their input and output channel dimensions chosen to make the composition well-defined. All integrals are Lebesgue integrals, which exist because the integrands are continuous on a compact set. For distinct input and output domains the final integral layer has kernel on $\bar D'\times\bar D$, integrates over $D$, and has zero local matrix term; subsequent projection acts on $\bar D'$. For any stronger specified output space, the selected composition is required actually to map into that space.
+
+The **integral universality subclass** is defined separately on $L^1(D;\mathbb R^{q_0})$, including almost-everywhere equivalence classes. Fix continuous activations $\sigma_1,\sigma_2,\sigma_3$ with $\sigma_1$ of at most linear growth, $N\ge2$, and channel dimensions $q_1,\ldots,q_N\ge1$. For $0\le t\le N-1$ let
+$$S_t(v)(x)=\int_D\kappa_t(x,y)v(y)\,dy+b_t(x),\qquad x\in\bar D,$$
+where $\kappa_t:\mathbb R^d\times\mathbb R^d\to\mathbb R^{q_{t+1}\times q_t}$ and $b_t:\mathbb R^d\to\mathbb R^{q_{t+1}}$ are finite MLPs with hidden activation $\sigma_2$ and affine output. Set $v_1=S_0(a)$, $v_2=S_1(v_1)$, and $v_{t+1}=S_t(\sigma_1(v_t))$ for $2\le t\le N-1$. An element of $\mathrm{NO}_N$ is
+$$G(a)(x)=\int_D\kappa_N(x,y)v_N(y)\,dy,\qquad x\in\bar D',$$
+where $\kappa_N:\mathbb R^{d'}\times\mathbb R^d\to\mathbb R^{q_{\mathrm{out}}\times q_N}$ is a finite MLP with activation $\sigma_3$ and affine output. There are exactly $N-2$ intermediate $\sigma_1$ activations. Scalar input and output mean $q_0=q_{\mathrm{out}}=1$. The final integral is over $D$, with output variable in $D'$. This class has identity lifting and projection and zero local matrix terms. It specializes the architectural scheme with its first layer extended to $L^1$ classes; it does not require continuous input representatives.
+
+The first integral is invariant under null changes and obeys $\|S_0(a)\|_\infty\le\|\kappa_0\|_\infty\|a\|_1+\|b_0\|_\infty$. Uniform continuity of its kernel on the compact product implies continuity of its output by the same $L^1$ estimate. All later fields are continuous and bounded, so their integrals and activations are defined; the output is continuous on $\bar D'$. Viewing it in a stronger Banach space $U$ requires the selected kernels actually to produce outputs in $U$. The universality theorem constructs such kernels; arbitrary continuous kernels alone do not guarantee this condition.
+
+For equal input and output domains, the diagram records the composition order: a pointwise lift, integral-kernel layers on $D$, and a pointwise output projection. Each $\mathcal K_t$ box denotes the integral layer defined above; arrows denote function composition and do not assert a theorem.
+
+```tikz
+\begin{tikzpicture}[>=stealth,node distance=2.7cm]
+  \node[draw,rounded corners,minimum width=2cm,align=center] (a) {$a\in A$};
+  \node[draw,rounded corners,minimum width=2cm,align=center,right of=a] (p) {$P$ pointwise lift};
+  \node[draw,rounded corners,minimum width=2cm,align=center,right of=p] (k) {$\sigma_t,\mathcal K_t$\ integral layers};
+  \node[draw,rounded corners,minimum width=2cm,align=center,right of=k] (q) {$Q$ pointwise projection};
+  \node[draw,rounded corners,minimum width=2cm,align=center,right of=q] (g) {$G(a)\in U$};
+  \draw[->] (a) -- (p);
+  \draw[->] (p) -- (k);
+  \draw[->] (k) -- (q);
+  \draw[->] (q) -- (g);
+\end{tikzpicture}
+```
+
+This schematic is only a depiction of the composition defined above; it is not used in the discretization or universality proofs.
+
+## Definition references
+[[[def-feedforward-neural-network|feedforward neural network]]]
+
+[[[def-banach-space|banach space]]]
+
+[[[def-continuous-real-functions-on-a-compact-metric-space|continuous real functions on a compact metric space]]]
+
+[[[def-measure-space|measure space]]]
+
+[[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra|lebesgue measure and the lebesgue sigma algebra]]]
+
+[[[def-integrable-real-and-complex-functions-and-their-integrals|integrable real and complex functions and their integrals]]]
+
+[[[def-integral-over-a-measurable-set|integral over a measurable set]]]
+
+[Kovachki et al., Definition 3 and equations (13)–(17): integral-kernel neural-operator layers](https://arxiv.org/pdf/2108.08481)
+
+[Lu et al., §2: fixed-sensor branch network and output-coordinate trunk network](https://arxiv.org/pdf/1910.03193)
+
+
+===== def-neural-operator-activation-classes =====
+
+
+## Definition
+
+Fix an input dimension $q\ge1$ and an integer $m\ge0$. Let $\mathcal A_m^{(q)}$ be the class of continuous scalar activations $\sigma:\mathbb R\to\mathbb R$ for which there is one depth $n\in\mathbb N$ such that, for every compact $K\subset\mathbb R^q$, the scalar-output depth-$n$ multilayer perceptrons with activation $\sigma$ are dense in $C^m(K)$ in the $C^m$ norm. For vector outputs, stack scalar-output networks of that same depth. The source notation $\mathcal A_m$ suppresses the input dimension fixed by the finite-dimensional network under consideration. Let $\mathcal A_m^{L,(q)}$ be the subclass whose members are Borel measurable and have at most linear growth, meaning
+$$\sup_{s\in\mathbb R}\frac{|\sigma(s)|}{1+|s|}<\infty.$$
+For an integer $q\ge1$, define $\mathrm{BA}_q$ to consist of those $\sigma\in\mathcal A_0^{(q)}$ for which, for every compact $K\subset\mathbb R^q$, every $\varepsilon>0$, and every $C\ge\operatorname{diam}_2(K)$, there is a finite multilayer perceptron $f:\mathbb R^q\to\mathbb R^q$ with
+$$|f(x)-x|_2\le\varepsilon\quad(x\in K),\qquad |f(x)|_2\le C\quad(x\in\mathbb R^q).$$
+Here $\operatorname{diam}_2(K)=\sup_{x,y\in K}|x-y|_2$. The diameter-based global bound is part of this definition and is retained verbatim; its nonemptiness is checked separately.
+
+## Definition references
+[[[def-feedforward-neural-network|feedforward neural network]]]
+
+[Kovachki et al., Definitions 5–7: activation classes $\mathcal A_m$, $\mathcal A_m^L$, and BA](https://arxiv.org/pdf/2108.08481)
+

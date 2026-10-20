@@ -1,0 +1,7 @@
+## Definition
+
+Let $N,T\ge1$ be integers, let $[N]=\{1,\ldots,N\}$ be the expert set, and let $\epsilon>0$. At each round $t=1,\ldots,T$, a finite loss vector $\ell_t=(\ell_t(1),\ldots,\ell_t(N))\in[0,\infty)^N$ is revealed after the learner's choice. Initialize $W_1(i)=1$ for every $i\in[N]$. At round $t$, set
+$$x_t(i):=\frac{W_t(i)}{\sum_{j=1}^{N}W_t(j)},\qquad i\in[N],$$
+draw a measurable expert choice $I_t\in[N]$ with $\mathbb P(I_t=i)=x_t(i)$, and play $I_t$. After observing the whole vector $\ell_t$, update
+$$W_{t+1}(i):=W_t(i)\exp(-\epsilon\ell_t(i)),\qquad i\in[N].$$
+The output is the distributions $x_1,\ldots,x_T$, the sampled choices $I_1,\ldots,I_T$, and the final weights. Every factor $\exp(-\epsilon\ell_t(i))$ is a positive finite real; from the positive finite initial weights it follows by induction that every normalizing denominator is positive and finite. The protocol assumes a probability space carrying the stated measurable draws; no probability-space construction is claimed.

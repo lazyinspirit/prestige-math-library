@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "96",
+  "round": 0,
+  "reviewed_items": [
+    "def-kl-regularized-policy-improvement",
+    "def-bradley-terry-preference-model",
+    "thm-finite-action-gibbs-policy-optimum",
+    "thm-dpo-reward-policy-reparameterization",
+    "rem-preference-coverage-and-model-misspecification",
+    "alg-direct-preference-optimization-finite-budget",
+    "ex-two-response-kl-regularized-gibbs-policy",
+    "cex-disconnected-comparison-support-does-not-identify-policy",
+    "ex-prompt-reward-offset-leaves-policy-unchanged",
+    "cex-zero-reference-support-breaks-dpo-log-ratio"
+  ],
+  "reviewed_pages": [
+    "preference-learning-and-direct-preference-optimization",
+    "preference-learning-and-direct-preference-optimization-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The mathematical claims, proofs, and examples check under their stated finite-support and differentiability assumptions. The primary DPO paper’s §4 and Appendix A.2 support the reward substitution and loss; Appendix A.4’s final gradient orientation conflicts with its defined variable, while the local proof derives the correct gradient directly ([arXiv v3 PDF](https://arxiv.org/pdf/2305.18290v3)). Escalation is required because the assigned algorithm scope lacks a separate proved result for its properties.",
+  "findings": [
+    {
+      "id": "def-kl-regularized-policy-improvement",
+      "type": "local",
+      "reason": "The Definition section contains two embedded wikilinks to the finite f-divergence and its admissibility lemma. Preserve the mathematical wording and move both links into separate, labeled paragraphs in the immediately following Definition references section."
+    },
+    {
+      "id": "alg-direct-preference-optimization-finite-budget",
+      "type": "scope",
+      "reason": "The approved scope includes the finite-budget algorithm but no separate result proving its correctness, finite termination, and work bound. The procedure instructions cannot serve as that proof. The smallest resolution is a separately proved theorem or proposition, with a new item ID and A-page inventory entry; that exceeds this batch’s approved item scope. The affected page is preference-learning-and-direct-preference-optimization, with its required consumer page preference-learning-and-direct-preference-optimization-examples."
+    },
+    {
+      "id": "alg-direct-preference-optimization-finite-budget",
+      "type": "prerequisite",
+      "reason": "The update branch tests whether θ′ belongs to an arbitrary open set Θ, but no terminating membership procedure is supplied. Specify an exact membership test as an input and account for its cost, or make admissibility guarantee all iterates remain in Θ and remove the test branch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-finite-action-gibbs-policy-optimum",
+      "decision": "accept",
+      "reason": "Its objective and finite KL support use match the definition; the uniqueness proof is valid."
+    },
+    {
+      "id": "thm-dpo-reward-policy-reparameterization",
+      "decision": "accept",
+      "reason": "Its reward and gradient arguments use the finite objective with full-support references; the local derivative is correct."
+    },
+    {
+      "id": "rem-preference-coverage-and-model-misspecification",
+      "decision": "accept",
+      "reason": "The stated finite-response and full-support limits and disconnected-component argument are sound."
+    },
+    {
+      "id": "alg-direct-preference-optimization-finite-budget",
+      "decision": "escalate",
+      "reason": "Its use of the KL objective is sound, but the separate algorithm-property result and executable Θ-membership prerequisite remain unresolved."
+    },
+    {
+      "id": "ex-two-response-kl-regularized-gibbs-policy",
+      "decision": "accept",
+      "reason": "The partition sum, optimizer probabilities, and maximum value compute correctly."
+    },
+    {
+      "id": "cex-disconnected-comparison-support-does-not-identify-policy",
+      "decision": "accept",
+      "reason": "The two rewards yield identical observed edge probabilities and distinct Gibbs policies."
+    },
+    {
+      "id": "ex-prompt-reward-offset-leaves-policy-unchanged",
+      "decision": "accept",
+      "reason": "The reward-difference and normalization-factor calculations are correct."
+    },
+    {
+      "id": "cex-zero-reference-support-breaks-dpo-log-ratio",
+      "decision": "accept",
+      "reason": "The extended objective has the stated unique maximizer, and the zero-coordinate ratio is undefined."
+    },
+    {
+      "id": "preference-learning-and-direct-preference-optimization",
+      "decision": "escalate",
+      "reason": "Its inventory includes the algorithm whose required separate property result is missing from approved scope."
+    },
+    {
+      "id": "preference-learning-and-direct-preference-optimization-examples",
+      "decision": "escalate",
+      "reason": "Its required A-page prerequisite remains unresolved pending owner reconciliation."
+    }
+  ]
+}

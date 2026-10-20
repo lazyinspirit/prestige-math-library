@@ -1,0 +1,106 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "ex-nonseparable-perceptron-cycles",
+      "model": "gpt-6-luna",
+      "context_sha256": "7fd1c4f5bb402a7b621b82d96e9262a129328a49500b2fa813ea24e0887f4236",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title incorrectly calls this a two-pass cycle. Under the cited algorithm, margins 0 and -1 trigger updates (0,0) -> (0,1) -> (0,0) within one pass. The Example and Verification already prove the correct nontermination claim; only the title and its manifest mirror require correction to two-update cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-nonseparable-perceptron-cycles",
+      "disposition": "repaired",
+      "post_sha256": "399491e5002d34456545a09a72617f5d198f6b1069bed11914ee81b61fc88900",
+      "review_context_sha256": "65367da057c55b8e4513cb37594a8519095a950d6a412f9bfb25f5969a24a6c2",
+      "reason": "Checked the complete Example, both Verification steps, algorithm Definition, F1 citation, owning proof contract and frontmatter-only examples page. The two opposite labels at the same augmented input cannot both have positive signed margin. Starting at zero, the two updates restore zero and repeat each pass, so termination never occurs. Corrected the title to two-update cycle and synchronized its manifest title; all mathematical text and dependencies are unchanged. This is the repairer review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-nonseparable-perceptron-cycles",
+      "locus": "frontmatter",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "The former title claimed a two-pass cycle although the verified weight cycle takes two updates in one pass.",
+      "correction": "Replaced two-pass cycle with two-update cycle in the item title and owning manifest mirror.",
+      "post_sha256": "399491e5002d34456545a09a72617f5d198f6b1069bed11914ee81b61fc88900",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-ledger",
+      "action": "no-update",
+      "id": "ex-nonseparable-perceptron-cycles",
+      "reason": "The assigned item remains draft, and this title correction neither changes a supplier interface nor affects any published consumer.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "items": [
+      "ex-nonseparable-perceptron-cycles"
+    ],
+    "claim_and_conventions": "Ordered sample (0,+1),(0,-1); augmented input (0,1); zero initialization; update on signed margin <= 0; stop only after a complete pass without updates. The exact repeat is (0,0) -> (0,1) -> (0,0).",
+    "evidence_paths": [
+      "items/ex-nonseparable-perceptron-cycles.md",
+      "items/alg-cyclic-perceptron.md",
+      "research/machine-learning-all-101-2026-10-19-batch-14.proof-contracts.json",
+      "research/machine-learning-all-101-2026-10-19-batch-14.pages.json",
+      "library/machine-learning/ml02-linear-classification-examples.md"
+    ],
+    "source_reading": "Direct finite arithmetic and the complete local procedure suffice; no external source was consulted.",
+    "dependencies": [
+      "alg-cyclic-perceptron"
+    ],
+    "interface_comparison": "Only the item title changed. The complete Markdown body, including Example, Facts & Assumptions and Verification, is byte-identical to the assigned carrier. There is no original Statement or Definition section and no new interface, so propagation is not triggered.",
+    "diagrams": "No TikZ or tikzcd diagrams occur in the assigned item; the explicit two-update arithmetic is complete without a diagram.",
+    "shared_metadata": "Acquired step5 shared-write lock, reread owning manifest, changed only the assigned title mirror, checked JSON and equality to the corrected title, then released the lock.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-nonseparable-perceptron-cycles.md --json",
+        "exit_code": 0,
+        "result": "1 file; 1 proof checked; 0 failed."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-nonseparable-perceptron-cycles.md library/machine-learning/ml02-linear-classification-examples.md --json",
+        "exit_code": 0,
+        "result": "2 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-14.proof-contracts.json --items ex-nonseparable-perceptron-cycles --strict --json",
+        "exit_code": 0,
+        "result": "Assigned contract passed; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-nonseparable-perceptron-cycles.md",
+        "exit_code": 0,
+        "result": "1 item; 2 steps; 0 defects."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and performs its required certification and rejudgment; no judges, stamps or round transitions were launched."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-14.pages.json": "4e2c3bd4455b23cbbd56e0107e51f68352626db7848f306f04df3e21d6d46bcb"
+  }
+}

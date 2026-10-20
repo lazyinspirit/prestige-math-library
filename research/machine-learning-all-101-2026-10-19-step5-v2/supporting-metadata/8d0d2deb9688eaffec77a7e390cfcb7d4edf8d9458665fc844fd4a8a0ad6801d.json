@@ -1,0 +1,983 @@
+{
+  "version": 1,
+  "scope": [
+    "def-marginal-score-function",
+    "thm-probability-flow-ode-marginals",
+    "ex-stationary-ornstein-uhlenbeck-probability-flow",
+    "alg-predictor-corrector-score-sampling",
+    "ex-singular-data-score-truncation",
+    "ex-vp-finite-terminal-prior-mismatch"
+  ],
+  "contracts": {
+    "def-marginal-score-function": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The The definition fixes d≥1 and R^d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The The statement explicitly excludes zero or infinite densities from the score domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The The definition includes d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof address the density-domain exclusion explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition allows any time interval I; the stated density-domain condition controls each endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a term and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a term and states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-probability-flow-ode-marginals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-marginal-score-function",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $I\\subseteq\\mathbb R$ be a time interval, and let $P_t$ be a probability law on $\\mathbb R^d$ for each $t\\in I$. Suppose $P_t$ has a density $p_t$ with respect to Lebesgue measure, meaning $P_t(A)=\\int_A p_t(x)\\,dx$ for every Borel set $A\\subseteq\\mathbb R^d$. On the set of points $x$ where $0<p_t(x)<\\infty$ and the map $x\\mapsto p_t(x)$ is differentiable, the **marginal score** of $P_t$ is\n\n$$s_t(x):=\\nabla_x\\log p_t(x).$$\n\nThe score is a spatial vector field; this definition asserts no value where the density is zero, infinite, or not differentiable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For symmetric $a_t$, the product rule gives $\\sum_{i,j}\\partial_i\\partial_j(a_{t,ij}p_t)=\\nabla\\!\\cdot((\\nabla\\!\\cdot a_t)p_t+a_t\\nabla p_t)$, since $\\sum_j\\partial_j(a_{t,ij}p_t)=(\\nabla\\!\\cdot a_t)_ip_t+\\sum_j a_{t,ij}\\partial_jp_t$. By [F1], $\\nabla p_t=p_ts_t$. Substitution into the Fokker–Planck equation therefore yields $\\partial_t p_t+\\nabla\\!\\cdot(v_tp_t)=0$. For a time-dependent test $\\varphi$ with common compact spatial support, differentiate $\\int\\varphi(t,x)p_t(x)dx$, substitute this equation, and integrate by parts; this gives exactly the weak continuity identity stated above.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $Z_t=\\Phi_{t,0}(Z_0)$ and any continuously differentiable time-dependent test $\\varphi$ with common compact spatial support, the pathwise chain rule gives $\\frac{d}{dt}\\varphi(t,Z_t)=\\partial_t\\varphi(t,Z_t)+\\nabla_x\\varphi(t,Z_t)\\cdot v_t(Z_t)$. The derivative is bounded on the compact support by continuity of $v$ and $\\varphi$, so it is integrable; taking expectations and integrating in time proves that $Q_t:=\\operatorname{Law}(Z_t)$ satisfies the same weak continuity equation and has $Q_0=P_0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $t\\in[0,T]$ and $\\psi\\in C_c^1(\\mathbb R^d)$, and set $\\varphi(r,x)=\\psi(\\Phi_{t,r}(x))$ for $0\\le r\\le t$. The flow identities in [A1] imply $\\partial_r\\varphi+v_r\\cdot\\nabla_x\\varphi=0$; the support stays compact because it is the image of $\\operatorname{supp}\\psi$ under the continuous maps $\\Phi_{r,t}$ on the compact interval $[0,t]$. Applying the weak equation from steps 1.1 and 1.2 gives $\\int\\psi\\,dP_t=\\int\\psi(\\Phi_{t,0}(x))\\,P_0(dx)=\\int\\psi\\,dQ_t$. Thus $P_t$ and $Q_t$ agree on every $C_c^1$ test.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a bounded rational open box $R=\\prod_{i=1}^d(a_i,b_i)$, let $h(z)$ be $0$ for $z\\le0$, $3z^2-2z^3$ for $0<z<1$, and $1$ for $z\\ge1$. Its derivative is $6z(1-z)\\ge0$ on $(0,1)$ and is $0$ at the joins, so $h$ is nondecreasing and $C^1$. Set $\\theta_n(u)=h(nu)$ and $g_n(x)=\\prod_i\\theta_n(x_i-a_i)\\theta_n(b_i-x_i)$. Then $g_n\\in C_c^1$, $0\\le g_n\\le1$, and $g_n\\uparrow\\mathbf1_R$ pointwise. Step 2.1 and [F2] give $P_t(R)=Q_t(R)$. Bounded rational open boxes, together with $\\varnothing$ and $\\mathbb R^d$, form a $\\pi$-system. They generate the Borel sets because every point of an open set lies in a bounded rational open box contained in that set. The class $\\mathcal D=\\{A\\text{ Borel}:P_t(A)=Q_t(A)\\}$ contains $\\mathbb R^d$, is closed under complements by equality of the total masses, and is closed under disjoint countable unions by countable additivity; hence it is a $\\lambda$-system. By [F3], [F4], and the definition of law, $P_t=Q_t$ on all Borel sets, proving equality of the one-time marginals.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes d≥1 and T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the identity also when a=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies in dimension d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Strictly positive finite densities are assumed; singular laws are outside the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes t=0 and t=T with one-sided derivatives."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is choice-free and selects no element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a direct implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a direct implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-68",
+        "notes": "Read every proof step 1.1–3.1 and the four exact supplier statements. The adjoint product rule gives the divergence term and continuity equation; compact supports justify all integrations and bounded expectations. Inverse-flow images over compact [0,t] keep characteristic tests in one compact set. Nondecreasing cubic cutoffs recover rational boxes by MCT; empty intersections, complements and countable disjoint unions meet pi-lambda hypotheses. Positive finite densities avoid score division by zero; endpoints are one-sided; zero velocity and degenerate covariance remain valid. Global jointly C1 diffeomorphism flow is an assumption, not inferred. Only one-time laws are identified. No reader/refuter finding targets this theorem; no defect found."
+      }
+    },
+    "ex-stationary-ornstein-uhlenbeck-probability-flow": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-continuous-brownian-ito-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands: $B$ is a standard Brownian\nmotion on a filtered probability space, adapted to $(\\mathcal F_t)_{t\\ge0}$,\nwith $B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$ for $0\\le s<t$.\nFor this localized-calculus definition the filtration satisfies the usual\nconditions, as required by\nLocally square-integrable predictable Brownian integrands.\n\n1. **Real continuous Brownian Ito process.** A real progressively measurable process\n   $X=(X_t)_{t\\ge0}$ is a **continuous Brownian Ito process** when there are\n   * a finite real $\\mathcal F_0$-measurable $X_0$,\n   * a real progressively measurable process $b=(b_s)_{s\\ge0}$\n     Progressively measurable and predictable processes with\n     $\\int_0^t|b_s|\\,ds<\\infty$ almost surely for every finite $t\\ge0$, and\n   * a real predictable process $\\sigma=(\\sigma_s)_{s\\ge0}$, locally\n     square-integrable in the sense that $\\int_0^t\\sigma_s^2\\,ds<\\infty$\n     almost surely for every finite $t$\n     Locally square-integrable predictable Brownian integrands,\n\n   such that, up to equality at all times on a measurable probability-one event,\n   $$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s,\\qquad t\\ge0,$$\n   where the first integral is the pathwise Lebesgue integral of $s\\mapsto\n   b_s(\\omega)$ and the second is the localized Ito integral\n   $\\sigma\\cdot B$ of Localized Ito integral. One writes\n   $\\displaystyle dX_t=b_t\\,dt+\\sigma_t\\,dB_t$ for the display, and $b$ is\n   called the **drift** and $\\sigma$ the **diffusion coefficient** of this\n   representation.\n\n2. **Multidimensional Brownian-driven process.** Let $d\\ge1$ and $m\\ge1$ be\n   finite integers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional\n   Brownian motion $d$-dimensional Brownian motion that is adapted to\n   $(\\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of\n   $\\mathcal F_s$ for $0\\le s<t$, let $X_0$ be a finite\n   $\\mathcal F_0$-measurable $\\mathbb R^d$-valued random vector, let $b$ be an\n   $\\mathbb R^d$-valued progressively measurable process with\n   $\\int_0^t|b^i_s|\\,ds<\\infty$ almost surely for every $i$ and finite $t$, and let\n   $\\sigma=(\\sigma^{ik})$ be an $\\mathbb R^{d\\times m}$-valued predictable\n   process, each entry predictable\n   Progressively measurable and predictable processes, with\n   $\\int_0^t(\\sigma^{ik}_s)^2\\,ds<\\infty$ almost surely for every $i,k$ and finite $t$.\n   Then\n   $$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\n   defines an $\\mathbb R^d$-valued **continuous Brownian Ito process** driven by\n   $B$, using the progressive integral versions of Localized Ito integral. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.\n\nThe following well-definedness clauses are part of the definition and are used\nthroughout.\n\n3. **The drift integral is a genuine pathwise integral.** Progressive\n   measurability gives measurable sections and makes the positive and negative\n   integrals $\\mathcal F_t$-measurable by the parameter-integral part of Tonelli\n   Tonelli's theorem for nonnegative measurable functions on a sigma-finite product, applied to Lebesgue measure on $[0,t]$ and the probability measure on $\\mathcal F_t$.\n   On the event where both extended integrals are finite, their difference is\n   the drift integral; set it to zero otherwise. This is an adapted measurable\n   convention, is finite everywhere, and on one probability-one event is\n   absolutely continuous on every finite interval (take the countable\n   intersection over integer horizons). It is progressive: the map\n   $(t,\\omega)\\mapsto\\int_0^tb_s(\\omega)\\,ds$, with the preceding finite-value\n   convention, is measurable on every $[0,T]\\times\\Omega$ by parameter\n   integration, and is adapted. Thus the definition uses the standard\n   almost-sure drift and local-energy classes under the usual conditions.\n\n4. **The stochastic integral exists, is unique and is continuous.** By\n   Locally square-integrable predictable Brownian integrands and\n   Localized Ito integral the localized integral $\\sigma\\cdot B$ is a\n   well-defined adapted process with continuous paths, unique up to\n   indistinguishability, and each of its finite-energy pieces is a\n   square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has\n   continuous paths, $X_t$ is finite almost surely for each $t$, and\n   $M^i_t:=\\sum_k\\int_0^t\\sigma^{ik}_s\\,dB^k_s$ is a continuous local\n   martingale relative to $(\\mathcal F_t)$ in the sense of\n   Continuous-time adapted processes and martingales for every $i$, with the common energy localizers described in clause 6.\n\n5. **The coefficients are not part of the process.** A continuous Brownian Ito\n   process may admit several representations $X=X_0+b\\cdot\\mathrm{Leb}\n   +\\sigma\\cdot B$ with different pointwise representatives $(b,\\sigma)$ (for example, altering a coefficient only at the single time zero), even for the same Brownian\n   motion and filtration; this does not assert nonuniqueness of their equivalence classes modulo $\\mathrm dt\\otimes P$; conversely, two processes with the same displayed\n   integral representation and the same $X_0$ are indistinguishable. Every\n   statement on this page that mentions a decomposition uses only properties\n   common to all representations of the given process. The separate\n   quadratic-covariation definition that follows this item on its owning page\n   is formulated from $X$ itself and not from $(b,\\sigma)$; no\n   quadratic-covariation definition is made inside this item.\n\n6. **The class is closed under stopping and under linear combinations.**\n   If $\\tau$ is a stopping time, the literal stopped process $X^\\tau$ is\n   progressive. Indeed on $[0,T]\\times\\Omega$ the map\n   $(t,\\omega)\\mapsto(t\\wedge\\tau(\\omega),\\omega)$ is measurable into\n   $\\mathcal B([0,T])\\otimes\\mathcal F_T$: the truncated time $\\tau\\wedge T$\n   is $\\mathcal F_T$-measurable, minimum is continuous, and rectangle inverse\n   images give the assertion. Compose with the progressive restriction of $X$.\n   Its drift is $b1_{[0,\\tau]}$ and its diffusion is\n   $\\sigma1_{[0,\\tau]}$; these retain almost-sure integrability and the required\n   progressive/predictable measurability. The drift identity is pathwise.\n   For the stochastic identity, apply the finite-energy stopping identity of\n   Localized Ito integral, clause 4, on the canonical energy intervals\n   of $\\sigma$. The truncated integrand has finite energy on these same\n   intervals. Comparing its canonical intervals with them at their pairwise\n   minima by clause 4 identifies the localized integrals there. Countably\n   many full-event agreements and exhaustion then give the identity at all\n   times on one full event. Thus stopping closure uses localization, not a\n   direct application of clause 4 to a possibly infinite-energy integrand.\n   For finitely many coefficients, use the common continuous energy\n   $E_t=\\sum_{i,k}\\int_0^t(\\sigma^{ik}_s)^2ds$ and times\n   $\\kappa_n=\\inf\\{t:E_t\\ge n\\}\\wedge n$, $n\\ge1$.\n   The same continuous-energy test as in the local-integrability definition\n   makes these stopping times increasing to infinity almost surely, and bounds\n   every stopped coefficient's expected energy by $n$. The preceding\n   pairwise-minimum comparison shows that every integral stopped there is its\n   finite-energy integral. Finite sums of these square-integrable martingales\n   are martingales: finite sums preserve adaptation and integrability, and summing the integral test over any $A\\in\\mathcal F_s$ proves the conditional-expectation identity; hence their sums\n   are local martingales with this common sequence. For fixed real constants,\n   finite linear combinations of processes driven by the same vector Brownian\n   motion have the combined coefficients. Their integrability follows from\n   the triangle inequality and $(\\sum_{j=1}^r u_j)^2\\le r\\sum_j u_j^2$.\n\n7. **No pathwise integral against Brownian motion is defined.** The display\n   defines the stochastic integral only as the localized limit of\n   Localized Ito integral; no integral $\\int_0^tH_s(\\omega)\\,dB_s(\\omega)$\n   along the individual path is asserted, and the page's examples show that\n   the pathwise Riemann--Stieltjes route is unavailable.\n\nNo choice beyond the declared AC of the ambient interfaces enters the\nconstruction: the coefficients $b,\\sigma$ and the process are given data, and\nthe canonically localized integral is constructed in\nLocalized Ito integral. The Axiom of Choice is declared because the\nconditional-expectation and $L^2$ interfaces used downstream assume it, and\nthe countable-choice obligations inherited from those interfaces are declared\nas dependencies of this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ito-formula-one-dimensional",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Let\n$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s$ be a real continuous Brownian\nIto process Continuous Brownian Ito processes, under its usual-filtration\nconditions, and let\n$f\\in C^{1,2}([0,\\infty)\\times\\mathbb R)$, meaning that $f$, its first time\nderivative $\\partial_tf$ and its first two space derivatives\n$\\partial_xf,\\partial^2_{x}f$ exist and are continuous on\n$[0,\\infty)\\times\\mathbb R$. Then, up to indistinguishability, for every\n$t\\ge0$\n$$f(t,X_t)=f(0,X_0)+\\int_0^t\\Bigl(\\partial_tf+b\\,\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf\\Bigr)(s,X_s)\\,ds+\\int_0^t\\sigma_s\\,\\partial_xf(s,X_s)\\,dB_s,$$\nFor the displayed integrands use the following representative convention.\nIntersect the measurable full events of continuity of $X$, validity of its\ndecomposition, and local integrability of its coefficients at integer horizons.\nIts complement is an $\\mathcal F_0$-measurable null event by the usual\nconditions. Replace $X,X_0,b,\\sigma$ by zero there. This preserves the\ndecomposition up to indistinguishability and all coefficient classes, and\nmakes $X$ continuous everywhere and its coefficient path integrals locally\nfinite everywhere. All integrands below refer to these representatives.\nThe stochastic integral is the localized Ito integral of the predictable\nlocally square-integrable process $\\sigma_s\\partial_xf(s,X_s)$\nLocalized Ito integral and the Lebesgue integral is the pathwise\nintegral of the progressively measurable process\n$s\\mapsto(\\partial_tf+b\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf)(s,X_s)$,\nwhich is pathwise integrable and finite almost surely for every $t$. In differential notation,\n$df(t,X_t)=(\\partial_tf+b\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf)(t,X_t)\\,dt+\\sigma_t\\partial_xf(t,X_t)\\,dB_t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-deterministic-ito-integrals-are-gaussian",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Fix $T>0$ and let\n$h\\in L^2[0,T]$ be deterministic, choose a Borel representative of its\nLebesgue-equivalence class, and set $h(s,\\omega):=h(s)$. This process is\npredictable with finite energy. Then the Ito integral\n$\\int_0^Th_s\\,dB_s$\nIto integral for square-integrable predictable processes is centered\nnormal with variance $\\int_0^Th^2ds$: its law is $N(0,\\int_0^Th^2ds)$ in the\nconvention of Standard normal and normal laws, where $N(0,0)$ is the\nDirac law at $0$. More generally, for deterministic $h_1,\\dots,h_d\\in L^2[0,T]$\nthe vector of integrals is jointly Gaussian in the sense of\nMultivariate normal law, including singular covariance: its law is $N_d(0,\\Sigma)$ with\n$$\\Sigma_{jk}=\\int_0^Th_j(s)h_k(s)\\,ds .$$\nIn particular the covariance of the pair is\n$\\operatorname{Cov}(\\int h_jdB,\\int h_kdB)=\\int h_jh_k$, the integrals are\nuncorrelated exactly when $\\int h_jh_k=0$, and integrals of deterministic\nintegrands with disjoint supports are independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\nIndependent sigma-algebras and independent events.\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from The sigma-algebra generated by a function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ito-integral-for-square-integrable-predictable-processes",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\nElementary predictable Brownian integrands. Fix a horizon $T>0$ and let\n$\\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\\times\\Omega$\nProgressively measurable and predictable processes. Let $H$ be a\npredictable process with\n$$E\\int_0^TH_s^2\\,ds=\\int_{[0,T]\\times\\Omega}H^2\\,d(\\mathrm dt\\otimes P)<\\infty ,$$\nso that $H$ is an element of the quotient space\n$L^2(\\mathrm dt\\otimes P)$ over $\\mathcal P_T$; its class is what is integrated.\nThe **Ito integral** $\\int_0^TH_s\\,dB_s$, also written $H\\cdot B$ or $I_T(H)$,\nis defined as follows.\n\n1. **Construction.** By the density theorem\n   Density of elementary predictable processes in predictable L2 there\n   is a sequence $(H^n)$ of bounded elementary predictable integrands\n   Elementary predictable Brownian integrands with\n   $\\|H^n-H\\|_{L^2(\\mathrm dt\\otimes P)}\\to0$. For such a sequence the\n   elementary integrals $I_T(H^n)$\n   Ito integral of an elementary predictable process form a Cauchy\n   sequence in $L^2(P)$: by the elementary isometry\n   Ito isometry for elementary integrands and the well-definedness of\n   the elementary integral,\n   $$E\\bigl(I_T(H^n)-I_T(H^m)\\bigr)^2=E\\int_0^T(H^n-H^m)^2ds=\\|H^n-H^m\\|^2_{L^2(\\mathrm dt\\otimes P)} ,$$\n   and the right-hand side tends to $0$. Since $L^2(P)$ is complete\n   Riesz-Fischer completeness of $L^p$ for $1 \\le p \\le \\infty$, the classes $I_T(H^n)$ converge\n   in $L^2(P)$; the limit is a class in $L^2(P)$, and\n   $$\\int_0^TH_s\\,dB_s:=\\lim_{n\\to\\infty}I_T(H^n)\\qquad\\text{in }L^2(P).$$\n   The limit is a random variable only up to almost-sure equality; statements\n   about it are statements about that class. The limit does not depend on the\n   chosen sequence: if another elementary sequence $K^n\\to H$ is used, then\n   the elementary isometry and linearity give\n   $$\\|I_T(H^n)-I_T(K^n)\\|_{L^2(P)} =\\|H^n-K^n\\|_{L^2(\\mathrm dt\\otimes P)} \\le\\|H^n-H\\|_2+\\|K^n-H\\|_2\\longrightarrow0,$$\n   so the two $L^2(P)$ limits agree.\n\n2. **Integrals at a time.** For $t\\in[0,T]$ put\n   $\\int_0^tH_s\\,dB_s:=\\int_0^TH_s1_{[0,t]}(s)\\,dB_s$, the construction of\n   clause 1 applied to the truncated process $H1_{[0,t]}$. That process is\n   predictable: $H$ is $\\mathcal P_T$-measurable and $1_{[0,t]}$ is a\n   deterministic predictable indicator, so the product is\n   $\\mathcal P_T$-measurable; and it is square-integrable because\n   $|H1_{[0,t]}|\\le|H|$ pointwise. The same construction applied to $H$\n   itself gives $t=T$. The family\n   $\\bigl(\\int_0^tH\\,dB\\bigr)_{t\\in[0,T]}$ is a family of $L^2(P)$-classes\n   indexed by $t$; its continuous version is supplied by item 13, and no path\n   property is asserted by this definition.\n\n3. **Consistency with elementary integrands.** If $H$ is itself elementary,\n   then the constant sequence $H^n:=H$ is admissible in clause 1, so\n   $\\int_0^TH\\,dB$ is the limit of the constant sequence of elementary sums,\n   namely the elementary sum $I_T(H)$ of\n   Ito integral of an elementary predictable process. The same argument\n   with $H1_{[0,t]}$ in place of $H$, and the finite telescoping of the\n   elementary sum over a refinement containing $t$, gives\n   $\\int_0^tH\\,dB=I_t(H)$ for every $t\\in[0,T]$. In particular the general\n   definition extends, rather than replaces, the elementary definition.\n\n4. **Linearity in the integrand is not asserted here.** Clause 1 defines each\n   integral separately from an arbitrary approximating sequence; the linear and\n   isometric properties of the extension are item 12. Until item 12 is proved,\n   linearity may be used only for elementary integrands, where it is part of\n   Ito integral of an elementary predictable process.\n\n5. **Comparison with deterministic Riemann integration.** The integral is a\n   stochastic integral: the integrand is paired with the Brownian path through\n   left-endpoint sums and an $L^2(P)$ limit. This definition does not assert\n   convergence of arbitrary tagged Riemann--Stieltjes sums for a general\n   predictable integrand. Particular integrands can have a pathwise\n   interpretation: for $H\\equiv1$ every tagged sum telescopes to $B_T-B_0$,\n   which is also its Ito integral by clause 3 (the value at time zero is\n   irrelevant to its product-measure class). The notation $\\int_0^TH\\,dB$\n   here always refers to the $L^2(P)$-class defined above.\n\nThe Axiom of Choice is declared because the construction selects an\napproximating sequence and uses the completeness and conditional-expectation\ninterfaces that assume it; the inherited obligations are declared as\ndependencies of this item. An alternative construction that avoids selecting the sequence is\nnot needed, because clause 1 shows every sequence gives the same class.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-almost-sure-subsequence-from-convergence-in-probability",
+          "source_section": "Statement",
+          "quote": "If $X_n\\to X$ in probability, then some subsequence $X_{n_k}$ converges to\n$X$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof Standard normal and normal laws has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-marginal-score-function",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $I\\subseteq\\mathbb R$ be a time interval, and let $P_t$ be a probability law on $\\mathbb R^d$ for each $t\\in I$. Suppose $P_t$ has a density $p_t$ with respect to Lebesgue measure, meaning $P_t(A)=\\int_A p_t(x)\\,dx$ for every Borel set $A\\subseteq\\mathbb R^d$. On the set of points $x$ where $0<p_t(x)<\\infty$ and the map $x\\mapsto p_t(x)$ is differentiable, the **marginal score** of $P_t$ is\n\n$$s_t(x):=\\nabla_x\\log p_t(x).$$\n\nThe score is a spatial vector field; this definition asserts no value where the density is zero, infinite, or not differentiable.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-probability-flow-ode-marginals",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, $T>0$, and let $P_t$ be Borel probability laws on $\\mathbb R^d$ for $0\\le t\\le T$. Suppose each $P_t$ has a positive finite Lebesgue density $p_t$ with $\\int_{\\mathbb R^d}p_t(x)\\,dx=1$. Let $b_t(x)\\in\\mathbb R^d$ and $\\sigma_t(x)\\in\\mathbb R^{d\\times m}$, where $m\\ge1$, and put $a_t(x)=\\sigma_t(x)\\sigma_t(x)^{\\mathsf T}$. Assume $a_t$ is symmetric, all displayed derivatives exist continuously, and time derivatives at the endpoints are one-sided. Suppose $p_t$ satisfies the forward Fokker–Planck equation\n\n$$\\partial_t p_t=-\\sum_i\\partial_i(b_{t,i}p_t)+\\frac12\\sum_{i,j}\\partial_i\\partial_j(a_{t,ij}p_t).$$\n\nDefine $s_t(x)=\\nabla_x\\log p_t(x)$ and $(\\nabla\\!\\cdot a_t)_i(x)=\\sum_j\\partial_j a_{t,ij}(x)$, and set $v_t(x)=b_t(x)-\\tfrac12(\\nabla\\!\\cdot a_t)(x)-\\tfrac12a_t(x)s_t(x)$. Assume $v$ has a global $C^1$ flow of diffeomorphisms $\\Phi_{t,s}:\\mathbb R^d\\to\\mathbb R^d$ for $0\\le s,t\\le T$, with $\\Phi_{s,s}$ the identity, $\\Phi_{t,r}\\circ\\Phi_{r,s}=\\Phi_{t,s}$, $\\partial_t\\Phi_{t,s}(x)=v_t(\\Phi_{t,s}(x))$, and $\\partial_s\\Phi_{t,s}(x)=-D_x\\Phi_{t,s}(x)v_s(x)$, where $D_x$ denotes the Jacobian matrix in the state variable. For $Z_0$ with law $P_0$, let $Z_t=\\Phi_{t,0}(Z_0)$. Then $Z_t$ has law $P_t$ for every $t\\in[0,T]$. Thus the deterministic probability-flow ordinary differential equation (ODE) has the same one-time marginals as the probability-law solution of the displayed forward equation; no equality of path laws is asserted.\n\nWrite $C_c^1(\\mathbb R^d)$ for continuously differentiable real-valued functions with compact support. Here a time-dependent family of probability laws $\\mu_t$ weakly solves $\\partial_t\\mu_t+\\nabla\\!\\cdot(v_t\\mu_t)=0$ if, for every continuously differentiable $\\varphi(t,x)$ with a common compact spatial support,\n\n$$\\int\\varphi(t,x)\\,\\mu_t(dx)-\\int\\varphi(0,x)\\,\\mu_0(dx)=\\int_0^t\\int(\\partial_r\\varphi(r,x)+v_r(x)\\cdot\\nabla_x\\varphi(r,x))\\,\\mu_r(dx)\\,dr.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $M_t=\\int_0^t e^{\\gamma r}\\,dW_r$, so $X_t=e^{-\\gamma t}(X_0+\\sqrt{2\\gamma\\theta}M_t)$. Apply [F2] to $f(t,x)=e^{-\\gamma t}x$ and the continuous Itô process $X_0+\\sqrt{2\\gamma\\theta}M_t$. Its drift is zero and its diffusion coefficient is $\\sqrt{2\\gamma\\theta}e^{\\gamma t}$; the product rule gives $dX_t=-\\gamma X_t\\,dt+\\sqrt{2\\gamma\\theta}\\,dW_t$, as asserted.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For fixed $t$, [F3] gives $M_t\\sim N(0,\\int_0^t e^{2\\gamma r}dr)$. Equivalently the stochastic term in the Example is centered normal with variance $2\\gamma\\theta\\int_0^t e^{-2\\gamma(t-r)}dr=\\theta(1-e^{-2\\gamma t})$. Its deterministic-integrand Itô approximants are measurable functions of Brownian increments, and [F4] gives a Brownian-process-measurable version of their limit; that version is independent of $X_0$, and almost-sure equality preserves the joint law. The first term is $N(0,\\theta e^{-2\\gamma t})$, and [F5] gives $X_t\\sim N(0,\\theta e^{-2\\gamma t}+\\theta(1-e^{-2\\gamma t}))=N(0,\\theta)$. By [F6], its density is the one displayed in the Example.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the density in [F6] gives $\\partial_xp=-(x/\\theta)p$ and $\\partial_{xx}p=(x^2/\\theta^2-1/\\theta)p$. With $b(x)=-\\gamma x$ and $a=2\\gamma\\theta$, the Fokker–Planck right-hand side is $-\\partial_x(bp)+\\tfrac12\\partial_{xx}(ap)=\\gamma\\partial_x(xp)+\\gamma\\theta\\partial_{xx}p=0$ by substitution of these derivatives. Thus $p_t=p$ is a positive smooth solution of the forward equation and [F7] gives $s(x)=-x/\\theta$.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The diffusion covariance $a=\\sigma^2=2\\gamma\\theta$ is constant, so $\\partial_xa=0$. Substituting $b=-\\gamma x$, $a=2\\gamma\\theta$, and $s=-x/\\theta$ into the probability-flow velocity gives $v(x)=-\\gamma x-\\tfrac12(2\\gamma\\theta)(-x/\\theta)=0$. Its global flow is $\\Phi_{t,s}(x)=x$, jointly smooth and a diffeomorphism satisfying the flow composition and both time-derivative identities since $v=0$. Step 1.2 identifies $p_t=p$ as a normalized probability density; $p$, $b$, and $a$ are smooth, and step 2.1 verifies the forward equation. Thus every hypothesis of [F8] holds, so the deterministic flow started with law $N(0,\\theta)$ preserves that law at each time, including $T$.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The The example fixes a real state space and positive T."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 1.2 include the zero-time integral and initial law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example is the scalar case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "θ>0 excludes a degenerate Gaussian initial law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 1.2 include t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No element is selected from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–3.1 identifies the stationary Gaussian marginals and zero probability-flow field for the given OU process. It does not characterize all stationary flows or reverse the sufficient Gaussian setup.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–3.1 identifies the stationary Gaussian marginals and zero probability-flow field for the given OU process. It does not characterize all stationary flows or reverse the sufficient Gaussian setup.",
+            "item_sha256": "1a10b65d334ca6f2c3a6fa658c0a14951bdcc0b28fdd26203986a37136776af1",
+            "row_sha256": "f9bd25e509ba5d4872add6099fdb580acaeffcfd50fd89d7d7e61cf26c5f5227"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1–3.1 identifies the stationary Gaussian marginals and zero probability-flow field for the given OU process. It does not characterize all stationary flows or reverse the sufficient Gaussian setup.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.1–3.1 identifies the stationary Gaussian marginals and zero probability-flow field for the given OU process. It does not characterize all stationary flows or reverse the sufficient Gaussian setup.",
+            "item_sha256": "1a10b65d334ca6f2c3a6fa658c0a14951bdcc0b28fdd26203986a37136776af1",
+            "row_sha256": "78c4fd701bcccbcceb370ecf39e12daed096e6d80433c6d93ba284ed383601e2"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-68",
+        "notes": "Read every verification step 1.1–3.1 and actual Ito, deterministic Gaussian integral, normal-density, independence, measurable-map, subsequence, Brownian and probability-flow supplier statements. AC and usual-filtration Brownian increment assumptions are explicit. Deterministic integrands have finite energy on finite intervals. Brownian-measurable integral versions are independent of X0; variances theta exp(-2 gamma t) plus theta(1-exp(-2 gamma t)) equal theta, including t=0. Gaussian FP terms cancel and score -x/theta gives zero velocity with identity global C1 flow. gamma,theta,T>0 exclude degeneracy of density. No rate, path-law identity or terminal standard-normal approximation is inferred. No reader/refuter finding targets this example; no defect found."
+      }
+    },
+    "alg-predictor-corrector-score-sampling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The The definition requires d≥1, N≥1, and T>ε."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires a positive mesh and positive corrector steps."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes dimension d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive normalized densities and invertible diffusion are explicit input requirements."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition evaluates reverse drift only before S and includes the score at t_N=ε."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure takes independent Gaussian randomness as input and does not select from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm is a procedure definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm is a procedure definition, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "procedure": [
+        {
+          "step": "reverse-time grid",
+          "claim": "Set S=T-ε, h=S/N, u_k=kh, and t_k=T-u_k; define reverse drift from b, a, and the exact score on [ε,T].",
+          "inputs": [
+            "T",
+            "ε",
+            "N",
+            "b",
+            "a",
+            "p_t"
+          ],
+          "supplier_interfaces": [
+            {
+              "source": "thm-markov-diffusion-reversal-by-bayes-kernels",
+              "source_section": "Statement",
+              "quote": "Consequently $Y$ solves the reverse SDE $$dY_u=\\left[-b_{T-u}(Y_u)+(\\nabla\\!\\cdot a_{T-u})(Y_u)+a_{T-u}(Y_u)\\nabla\\log p_{T-u}(Y_u)\\right]du+\\sigma_{T-u}(Y_u)dB_u.$$"
+            }
+          ]
+        },
+        {
+          "step": "predictor",
+          "claim": "Take one explicit Euler–Maruyama increment with an independent standard Gaussian vector.",
+          "inputs": [
+            "Y_k",
+            "h",
+            "reverse drift",
+            "reverse diffusion",
+            "G_k"
+          ],
+          "supplier_interfaces": [
+            {
+              "source": "def-multivariate-normal-law",
+              "source_section": "Definition",
+              "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates."
+            }
+          ],
+          "interface_note": "The required Euler–Maruyama page contains an autonomous algorithm; the assigned item defines this time-inhomogeneous recurrence directly and imports no convergence/error theorem."
+        },
+        {
+          "step": "corrector",
+          "claim": "Apply one ULA step to target density p_{t_{k+1}} with independent Gaussian noise.",
+          "inputs": [
+            "Ŷ_{k+1}",
+            "η_k",
+            "s_{t_{k+1}}",
+            "ξ_k"
+          ],
+          "supplier_interfaces": [
+            {
+              "source": "alg-unadjusted-langevin-algorithm",
+              "source_section": "Definition",
+              "quote": "$$X_{k+1}=\\widetilde X_{k+1}+\\sqrt{2\\gamma}\\,Z_{k+1}.$$"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "Root independently read the complete current Definition/reference derivation/Remarks and exact repaired main theorem. Its original full Statement is preserved; the deterministic shifted process, usual filtration and independent Brownian increments, pathwise energies, positive densities, uniform inverse bound and assumed reverse MP all match. The genuine fresh native67reviewer and same supplier lead separately checked the sampler. The old open prerequisite is now locally proved and independently reviewed. Positive cutoff and actual terminal-law initialization remain explicit, with no finite solver exactness or convergence claim.",
+        "prior_native_review": {
+          "status": "open",
+          "reviewer": "alpha-batch-68",
+          "notes": "Read the complete Definition, reference derivation and Remarks, reader/refuter findings, exact archived pre/post bytes and actual ULA, score, Brownian, Ito, normal and reversal supplier interfaces. The current raw hash equals native reader-post 6775c301f4d21fe20cc94e4abf8fd25d9863d64b5b06a9194de7669c9e36ec07; the reader only separated labeled references. h=(T-epsilon)/N is positive, t_N=epsilon, predictor uses t_k and corrector uses t_(k+1); signs and sqrt(h),sqrt(2 eta_k) match Euler/ULA. N=1,d=1 and zero scores remain valid. U=-log p is C1 with normalizer one. The finite procedure makes no solver exactness or convergence claim; AC is declared and independent Gaussian inputs are supplied. However its reference paragraph asserts the shifted process has the reverse Brownian driver using batch-67 theorem step 2.1, which relies on the unresolved generator lemma. Read that current lemma, contract and manifest: no uniform partition-error domination is stated or proved. DCT and Fubini do not supply it; Anderson Section 3 has additional joint-density uniqueness assumptions and Tang-Zhao Theorem 2.1 is heuristic. Supplier-first owner repair and renewed sampler interface review are required. Risk is deliberately OPEN, not a complete acceptance."
+        },
+        "owner_resolution_evidence": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/root-owner68-resolution/application.json",
+        "owner_current_source_raw_sha256": "bcae1a0529b97cfff343a5decaca74167cb8ac429712b4e476602b7c17122456",
+        "same_supplier_lead_review": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/your-proposal/formal-adjoint-routing-only/report.json",
+        "owner_reference_formatting_successor": {
+          "path": "research/machine-learning-all-101-2026-10-19-owner-step3-battery-1-root-repairs/format-application.json",
+          "sha256": "883d4e9315ed59080d98601f5a82617a685674187a4dc12cbdb70712d28c9486",
+          "review": "Root re-read the complete current source and exact four reference-line joins; the entire Definition remains byte-identical, all original reference-derivation words and order preserved. This refresh records current formatting only; original root supplier resolution and prior native risk history remain unchanged."
+        }
+      }
+    },
+    "ex-singular-data-score-truncation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-brownian-motion",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real process\n$B=(B_t)_{t\\ge0}$ is a **standard Brownian motion** if:\n\n1. $B_0=0$ almost surely;\n2. for every finite list $0=t_0<t_1<\\cdots<t_n$, the increments\n   $B_{t_j}-B_{t_{j-1}}$ are mutually independent and have laws\n   $N(0,t_j-t_{j-1})$; and\n3. there is one measurable event $A$ with $P(A)=1$ such that\n   $t\\mapsto B_t(\\omega)$ is continuous on $[0,\\infty)$ for every\n   $\\omega\\in A$.\n\nBy\n[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]],\nthe first two clauses are equivalent to saying that $B$ is a centered Gaussian\nprocess with covariance $\\min(s,t)$. Clause 3 is additional: it cannot be\nrecovered from finite-dimensional distributions alone.\n\nNo filtration is part of this definition. In particular, no completed or\nright-continuous filtration and no Markov or martingale assertion is silently\nimposed. Modifications and indistinguishability retain the distinct meanings in\n[[def-law-modification-and-indistinguishability-of-processes]]. The cases\n$n=0$, $t_1=0$, and zero-length increments are respectively vacuous or already\ncovered by $B_0=0$; the increment list itself is strictly increasing.\n\nChoice is declared because the normal-law and Gaussian/increment-equivalence\ninterfaces construct and identify normal laws under AC. The continuity clause\nselects no path and makes no additional use of choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-marginal-score-function",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $I\\subseteq\\mathbb R$ be a time interval, and let $P_t$ be a probability law on $\\mathbb R^d$ for each $t\\in I$. Suppose $P_t$ has a density $p_t$ with respect to Lebesgue measure, meaning $P_t(A)=\\int_A p_t(x)\\,dx$ for every Borel set $A\\subseteq\\mathbb R^d$. On the set of points $x$ where $0<p_t(x)<\\infty$ and the map $x\\mapsto p_t(x)$ is differentiable, the **marginal score** of $P_t$ is\n\n$$s_t(x):=\\nabla_x\\log p_t(x).$$\n\nThe score is a spatial vector field; this definition asserts no value where the density is zero, infinite, or not differentiable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], [F1], and [F2], for each $t>0$ the law of $W_t$ has the displayed Gaussian density. Differentiation gives $\\partial_x\\log p_t(x)=-x/t$, so [F3] gives the stated score. At $t=0$, [F1] and [F4] give $P_0(\\{0\\})=1$. Any measure with a Lebesgue density assigns mass $\\int_{\\{0\\}}p(x)\\,dx=0$ to this singleton, so $P_0$ has no Lebesgue density.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], changing variables $x=\\sqrt\\epsilon z$ yields $\\mathbb E|W_\\epsilon|^2=\\int_{\\mathbb R}x^2\\frac{e^{-x^2/(2\\epsilon)}}{\\sqrt{2\\pi\\epsilon}}\\,dx=\\epsilon\\int_{\\mathbb R}z^2\\frac{e^{-z^2/2}}{\\sqrt{2\\pi}}\\,dz=\\epsilon$. For the last equality, integration by parts gives $\\int z^2e^{-z^2/2}dz=\\int e^{-z^2/2}dz$ over $\\mathbb R$: the boundary term $-ze^{-z^2/2}$ tends to $0$ at both ends, and the normalized standard-normal density integrates to $1$. Hence the second moment tends to zero.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix any sequence $\\epsilon_n>0$ with $\\epsilon_n\\to0$. On the common continuity event from [F1], $W_{\\epsilon_n}\\to W_0=0$, so for bounded continuous $f$, $f(W_{\\epsilon_n})\\to f(0)$ almost surely and $|f(W_{\\epsilon_n})|\\le\\|f\\|_\\infty$. Applying [F5] gives $\\int f\\,dP_{\\epsilon_n}=\\mathbb E f(W_{\\epsilon_n})\\to f(0)=\\int f\\,dP_0$. Since this holds for every such sequence, the limit holds as $\\epsilon\\downarrow0$; [F6] identifies it as $P_\\epsilon\\Rightarrow P_0$. The positive-time score conclusion in step 1.1 and the absence of a score at zero prove the stated truncation consequence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The The example fixes a real state space and T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the zero-time law is singular."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The The Brownian example is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof address the point-mass endpoint explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 treat t=0, ε>0, and the limit ε↓0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC is declared for interfaces, but the local argument makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an explicit Brownian density and score for t>0, then weak convergence to a singular time-zero law. Its cutoff consequence is one-way and supplies no equivalence between weak convergence and existence of an endpoint score.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The example proves an explicit Brownian density and score for t>0, then weak convergence to a singular time-zero law. Its cutoff consequence is one-way and supplies no equivalence between weak convergence and existence of an endpoint score.",
+            "item_sha256": "e635f95b83b17336f2264e7b2777c69283602f02da62107c58f404c4715fe51b",
+            "row_sha256": "373c9f05db4bd5a759b7f0e0732bf5eed5da01cf4cc97f7579761ce3c39fbea3"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an explicit Brownian density and score for t>0, then weak convergence to a singular time-zero law. Its cutoff consequence is one-way and supplies no equivalence between weak convergence and existence of an endpoint score.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The example proves an explicit Brownian density and score for t>0, then weak convergence to a singular time-zero law. Its cutoff consequence is one-way and supplies no equivalence between weak convergence and existence of an endpoint score.",
+            "item_sha256": "e635f95b83b17336f2264e7b2777c69283602f02da62107c58f404c4715fe51b",
+            "row_sha256": "febb4881f276b1ef9345ab96f240504a5a2ac644ea624bf6f8ee8a139a9c9658"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "Root independently read the complete current Example and Verification and checked its actual sampler use; the mathematical body is byte-exact to the original native review. Only its dependency_level4to5 label reflects the deeper proved supplier DAG. Positive-time score and weak-limit/finite-terminal-law conclusions are unchanged, with no inferred sampler accuracy or singular-time score.",
+        "prior_native_review": {
+          "status": "complete",
+          "reviewer": "alpha-batch-68",
+          "notes": "Read Verification 1.1–2.1 and actual Brownian, normal-density, marginal-score, law, DCT and weak-convergence statements. At t>0 the Gaussian density is positive finite and score -x/t; singleton mass at t=0 rules out a Lebesgue density. The explicit Gaussian substitution and vanishing integration-by-parts boundary give E W_epsilon^2=epsilon. One common continuous-path event yields W_epsilon ->0, and for each bounded continuous f, the single constant majorant ||f||_infinity is integrable on the probability space; sequential DCT gives the full weak limit. AC is explicit. The example uses only the sampler requirement for a positive-time score, not its unresolved reverse martingale theorem; no numerical output or accuracy claim is deduced. Empty events, t=0 and positive epsilon<T are covered. No local defect found."
+        },
+        "owner_resolution_evidence": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/root-owner68-resolution/application.json",
+        "owner_current_source_raw_sha256": "e21bcc446fa8630cb3312db57f4184a71ab17a2fc861fb22fa6aef4de0583a00",
+        "same_supplier_lead_review": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/your-proposal/formal-adjoint-routing-only/report.json"
+      }
+    },
+    "ex-vp-finite-terminal-prior-mismatch": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-continuous-brownian-ito-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]: $B$ is a standard Brownian\nmotion on a filtered probability space, adapted to $(\\mathcal F_t)_{t\\ge0}$,\nwith $B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$ for $0\\le s<t$.\nFor this localized-calculus definition the filtration satisfies the usual\nconditions, as required by\n[[def-locally-square-integrable-predictable-brownian-integrand]].\n\n1. **Real continuous Brownian Ito process.** A real progressively measurable process\n   $X=(X_t)_{t\\ge0}$ is a **continuous Brownian Ito process** when there are\n   * a finite real $\\mathcal F_0$-measurable $X_0$,\n   * a real progressively measurable process $b=(b_s)_{s\\ge0}$\n     [[def-progressively-measurable-and-predictable-process]] with\n     $\\int_0^t|b_s|\\,ds<\\infty$ almost surely for every finite $t\\ge0$, and\n   * a real predictable process $\\sigma=(\\sigma_s)_{s\\ge0}$, locally\n     square-integrable in the sense that $\\int_0^t\\sigma_s^2\\,ds<\\infty$\n     almost surely for every finite $t$\n     [[def-locally-square-integrable-predictable-brownian-integrand]],\n\n   such that, up to equality at all times on a measurable probability-one event,\n   $$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s,\\qquad t\\ge0,$$\n   where the first integral is the pathwise Lebesgue integral of $s\\mapsto\n   b_s(\\omega)$ and the second is the localized Ito integral\n   $\\sigma\\cdot B$ of [[thm-localized-ito-integral]]. One writes\n   $\\displaystyle dX_t=b_t\\,dt+\\sigma_t\\,dB_t$ for the display, and $b$ is\n   called the **drift** and $\\sigma$ the **diffusion coefficient** of this\n   representation.\n\n2. **Multidimensional Brownian-driven process.** Let $d\\ge1$ and $m\\ge1$ be\n   finite integers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional\n   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to\n   $(\\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of\n   $\\mathcal F_s$ for $0\\le s<t$, let $X_0$ be a finite\n   $\\mathcal F_0$-measurable $\\mathbb R^d$-valued random vector, let $b$ be an\n   $\\mathbb R^d$-valued progressively measurable process with\n   $\\int_0^t|b^i_s|\\,ds<\\infty$ almost surely for every $i$ and finite $t$, and let\n   $\\sigma=(\\sigma^{ik})$ be an $\\mathbb R^{d\\times m}$-valued predictable\n   process, each entry predictable\n   [[def-progressively-measurable-and-predictable-process]], with\n   $\\int_0^t(\\sigma^{ik}_s)^2\\,ds<\\infty$ almost surely for every $i,k$ and finite $t$.\n   Then\n   $$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\n   defines an $\\mathbb R^d$-valued **continuous Brownian Ito process** driven by\n   $B$, using the progressive integral versions of [[thm-localized-ito-integral]]. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.\n\nThe following well-definedness clauses are part of the definition and are used\nthroughout.\n\n3. **The drift integral is a genuine pathwise integral.** Progressive\n   measurability gives measurable sections and makes the positive and negative\n   integrals $\\mathcal F_t$-measurable by the parameter-integral part of Tonelli\n   [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], applied to Lebesgue measure on $[0,t]$ and the probability measure on $\\mathcal F_t$.\n   On the event where both extended integrals are finite, their difference is\n   the drift integral; set it to zero otherwise. This is an adapted measurable\n   convention, is finite everywhere, and on one probability-one event is\n   absolutely continuous on every finite interval (take the countable\n   intersection over integer horizons). It is progressive: the map\n   $(t,\\omega)\\mapsto\\int_0^tb_s(\\omega)\\,ds$, with the preceding finite-value\n   convention, is measurable on every $[0,T]\\times\\Omega$ by parameter\n   integration, and is adapted. Thus the definition uses the standard\n   almost-sure drift and local-energy classes under the usual conditions.\n\n4. **The stochastic integral exists, is unique and is continuous.** By\n   [[def-locally-square-integrable-predictable-brownian-integrand]] and\n   [[thm-localized-ito-integral]] the localized integral $\\sigma\\cdot B$ is a\n   well-defined adapted process with continuous paths, unique up to\n   indistinguishability, and each of its finite-energy pieces is a\n   square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has\n   continuous paths, $X_t$ is finite almost surely for each $t$, and\n   $M^i_t:=\\sum_k\\int_0^t\\sigma^{ik}_s\\,dB^k_s$ is a continuous local\n   martingale relative to $(\\mathcal F_t)$ in the sense of\n   [[def-continuous-time-adapted-process-and-martingale]] for every $i$, with the common energy localizers described in clause 6.\n\n5. **The coefficients are not part of the process.** A continuous Brownian Ito\n   process may admit several representations $X=X_0+b\\cdot\\mathrm{Leb}\n   +\\sigma\\cdot B$ with different pointwise representatives $(b,\\sigma)$ (for example, altering a coefficient only at the single time zero), even for the same Brownian\n   motion and filtration; this does not assert nonuniqueness of their equivalence classes modulo $\\mathrm dt\\otimes P$; conversely, two processes with the same displayed\n   integral representation and the same $X_0$ are indistinguishable. Every\n   statement on this page that mentions a decomposition uses only properties\n   common to all representations of the given process. The separate\n   quadratic-covariation definition that follows this item on its owning page\n   is formulated from $X$ itself and not from $(b,\\sigma)$; no\n   quadratic-covariation definition is made inside this item.\n\n6. **The class is closed under stopping and under linear combinations.**\n   If $\\tau$ is a stopping time, the literal stopped process $X^\\tau$ is\n   progressive. Indeed on $[0,T]\\times\\Omega$ the map\n   $(t,\\omega)\\mapsto(t\\wedge\\tau(\\omega),\\omega)$ is measurable into\n   $\\mathcal B([0,T])\\otimes\\mathcal F_T$: the truncated time $\\tau\\wedge T$\n   is $\\mathcal F_T$-measurable, minimum is continuous, and rectangle inverse\n   images give the assertion. Compose with the progressive restriction of $X$.\n   Its drift is $b1_{[0,\\tau]}$ and its diffusion is\n   $\\sigma1_{[0,\\tau]}$; these retain almost-sure integrability and the required\n   progressive/predictable measurability. The drift identity is pathwise.\n   For the stochastic identity, apply the finite-energy stopping identity of\n   [[thm-localized-ito-integral]], clause 4, on the canonical energy intervals\n   of $\\sigma$. The truncated integrand has finite energy on these same\n   intervals. Comparing its canonical intervals with them at their pairwise\n   minima by clause 4 identifies the localized integrals there. Countably\n   many full-event agreements and exhaustion then give the identity at all\n   times on one full event. Thus stopping closure uses localization, not a\n   direct application of clause 4 to a possibly infinite-energy integrand.\n   For finitely many coefficients, use the common continuous energy\n   $E_t=\\sum_{i,k}\\int_0^t(\\sigma^{ik}_s)^2ds$ and times\n   $\\kappa_n=\\inf\\{t:E_t\\ge n\\}\\wedge n$, $n\\ge1$.\n   The same continuous-energy test as in the local-integrability definition\n   makes these stopping times increasing to infinity almost surely, and bounds\n   every stopped coefficient's expected energy by $n$. The preceding\n   pairwise-minimum comparison shows that every integral stopped there is its\n   finite-energy integral. Finite sums of these square-integrable martingales\n   are martingales: finite sums preserve adaptation and integrability, and summing the integral test over any $A\\in\\mathcal F_s$ proves the conditional-expectation identity; hence their sums\n   are local martingales with this common sequence. For fixed real constants,\n   finite linear combinations of processes driven by the same vector Brownian\n   motion have the combined coefficients. Their integrability follows from\n   the triangle inequality and $(\\sum_{j=1}^r u_j)^2\\le r\\sum_j u_j^2$.\n\n7. **No pathwise integral against Brownian motion is defined.** The display\n   defines the stochastic integral only as the localized limit of\n   [[thm-localized-ito-integral]]; no integral $\\int_0^tH_s(\\omega)\\,dB_s(\\omega)$\n   along the individual path is asserted, and the page's examples show that\n   the pathwise Riemann--Stieltjes route is unavailable.\n\nNo choice beyond the declared AC of the ambient interfaces enters the\nconstruction: the coefficients $b,\\sigma$ and the process are given data, and\nthe canonically localized integral is constructed in\n[[thm-localized-ito-integral]]. The Axiom of Choice is declared because the\nconditional-expectation and $L^2$ interfaces used downstream assume it, and\nthe countable-choice obligations inherited from those interfaces are declared\nas dependencies of this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-continuous-brownian-ito-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]: $B$ is a standard Brownian\nmotion on a filtered probability space, adapted to $(\\mathcal F_t)_{t\\ge0}$,\nwith $B_t-B_s$ independent of $\\mathcal F_s$ of law $N(0,t-s)$ for $0\\le s<t$.\nFor this localized-calculus definition the filtration satisfies the usual\nconditions, as required by\n[[def-locally-square-integrable-predictable-brownian-integrand]].\n\n1. **Real continuous Brownian Ito process.** A real progressively measurable process\n   $X=(X_t)_{t\\ge0}$ is a **continuous Brownian Ito process** when there are\n   * a finite real $\\mathcal F_0$-measurable $X_0$,\n   * a real progressively measurable process $b=(b_s)_{s\\ge0}$\n     [[def-progressively-measurable-and-predictable-process]] with\n     $\\int_0^t|b_s|\\,ds<\\infty$ almost surely for every finite $t\\ge0$, and\n   * a real predictable process $\\sigma=(\\sigma_s)_{s\\ge0}$, locally\n     square-integrable in the sense that $\\int_0^t\\sigma_s^2\\,ds<\\infty$\n     almost surely for every finite $t$\n     [[def-locally-square-integrable-predictable-brownian-integrand]],\n\n   such that, up to equality at all times on a measurable probability-one event,\n   $$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s,\\qquad t\\ge0,$$\n   where the first integral is the pathwise Lebesgue integral of $s\\mapsto\n   b_s(\\omega)$ and the second is the localized Ito integral\n   $\\sigma\\cdot B$ of [[thm-localized-ito-integral]]. One writes\n   $\\displaystyle dX_t=b_t\\,dt+\\sigma_t\\,dB_t$ for the display, and $b$ is\n   called the **drift** and $\\sigma$ the **diffusion coefficient** of this\n   representation.\n\n2. **Multidimensional Brownian-driven process.** Let $d\\ge1$ and $m\\ge1$ be\n   finite integers, let $B=(B^1,\\dots,B^m)$ be a standard $m$-dimensional\n   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to\n   $(\\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of\n   $\\mathcal F_s$ for $0\\le s<t$, let $X_0$ be a finite\n   $\\mathcal F_0$-measurable $\\mathbb R^d$-valued random vector, let $b$ be an\n   $\\mathbb R^d$-valued progressively measurable process with\n   $\\int_0^t|b^i_s|\\,ds<\\infty$ almost surely for every $i$ and finite $t$, and let\n   $\\sigma=(\\sigma^{ik})$ be an $\\mathbb R^{d\\times m}$-valued predictable\n   process, each entry predictable\n   [[def-progressively-measurable-and-predictable-process]], with\n   $\\int_0^t(\\sigma^{ik}_s)^2\\,ds<\\infty$ almost surely for every $i,k$ and finite $t$.\n   Then\n   $$X^i_t=X^i_0+\\int_0^tb^i_s\\,ds+\\sum_{k=1}^m\\int_0^t\\sigma^{ik}_s\\,dB^k_s, \\qquad i=1,\\dots,d,$$\n   defines an $\\mathbb R^d$-valued **continuous Brownian Ito process** driven by\n   $B$, using the progressive integral versions of [[thm-localized-ito-integral]]. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.\n\nThe following well-definedness clauses are part of the definition and are used\nthroughout.\n\n3. **The drift integral is a genuine pathwise integral.** Progressive\n   measurability gives measurable sections and makes the positive and negative\n   integrals $\\mathcal F_t$-measurable by the parameter-integral part of Tonelli\n   [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], applied to Lebesgue measure on $[0,t]$ and the probability measure on $\\mathcal F_t$.\n   On the event where both extended integrals are finite, their difference is\n   the drift integral; set it to zero otherwise. This is an adapted measurable\n   convention, is finite everywhere, and on one probability-one event is\n   absolutely continuous on every finite interval (take the countable\n   intersection over integer horizons). It is progressive: the map\n   $(t,\\omega)\\mapsto\\int_0^tb_s(\\omega)\\,ds$, with the preceding finite-value\n   convention, is measurable on every $[0,T]\\times\\Omega$ by parameter\n   integration, and is adapted. Thus the definition uses the standard\n   almost-sure drift and local-energy classes under the usual conditions.\n\n4. **The stochastic integral exists, is unique and is continuous.** By\n   [[def-locally-square-integrable-predictable-brownian-integrand]] and\n   [[thm-localized-ito-integral]] the localized integral $\\sigma\\cdot B$ is a\n   well-defined adapted process with continuous paths, unique up to\n   indistinguishability, and each of its finite-energy pieces is a\n   square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has\n   continuous paths, $X_t$ is finite almost surely for each $t$, and\n   $M^i_t:=\\sum_k\\int_0^t\\sigma^{ik}_s\\,dB^k_s$ is a continuous local\n   martingale relative to $(\\mathcal F_t)$ in the sense of\n   [[def-continuous-time-adapted-process-and-martingale]] for every $i$, with the common energy localizers described in clause 6.\n\n5. **The coefficients are not part of the process.** A continuous Brownian Ito\n   process may admit several representations $X=X_0+b\\cdot\\mathrm{Leb}\n   +\\sigma\\cdot B$ with different pointwise representatives $(b,\\sigma)$ (for example, altering a coefficient only at the single time zero), even for the same Brownian\n   motion and filtration; this does not assert nonuniqueness of their equivalence classes modulo $\\mathrm dt\\otimes P$; conversely, two processes with the same displayed\n   integral representation and the same $X_0$ are indistinguishable. Every\n   statement on this page that mentions a decomposition uses only properties\n   common to all representations of the given process. The separate\n   quadratic-covariation definition that follows this item on its owning page\n   is formulated from $X$ itself and not from $(b,\\sigma)$; no\n   quadratic-covariation definition is made inside this item.\n\n6. **The class is closed under stopping and under linear combinations.**\n   If $\\tau$ is a stopping time, the literal stopped process $X^\\tau$ is\n   progressive. Indeed on $[0,T]\\times\\Omega$ the map\n   $(t,\\omega)\\mapsto(t\\wedge\\tau(\\omega),\\omega)$ is measurable into\n   $\\mathcal B([0,T])\\otimes\\mathcal F_T$: the truncated time $\\tau\\wedge T$\n   is $\\mathcal F_T$-measurable, minimum is continuous, and rectangle inverse\n   images give the assertion. Compose with the progressive restriction of $X$.\n   Its drift is $b1_{[0,\\tau]}$ and its diffusion is\n   $\\sigma1_{[0,\\tau]}$; these retain almost-sure integrability and the required\n   progressive/predictable measurability. The drift identity is pathwise.\n   For the stochastic identity, apply the finite-energy stopping identity of\n   [[thm-localized-ito-integral]], clause 4, on the canonical energy intervals\n   of $\\sigma$. The truncated integrand has finite energy on these same\n   intervals. Comparing its canonical intervals with them at their pairwise\n   minima by clause 4 identifies the localized integrals there. Countably\n   many full-event agreements and exhaustion then give the identity at all\n   times on one full event. Thus stopping closure uses localization, not a\n   direct application of clause 4 to a possibly infinite-energy integrand.\n   For finitely many coefficients, use the common continuous energy\n   $E_t=\\sum_{i,k}\\int_0^t(\\sigma^{ik}_s)^2ds$ and times\n   $\\kappa_n=\\inf\\{t:E_t\\ge n\\}\\wedge n$, $n\\ge1$.\n   The same continuous-energy test as in the local-integrability definition\n   makes these stopping times increasing to infinity almost surely, and bounds\n   every stopped coefficient's expected energy by $n$. The preceding\n   pairwise-minimum comparison shows that every integral stopped there is its\n   finite-energy integral. Finite sums of these square-integrable martingales\n   are martingales: finite sums preserve adaptation and integrability, and summing the integral test over any $A\\in\\mathcal F_s$ proves the conditional-expectation identity; hence their sums\n   are local martingales with this common sequence. For fixed real constants,\n   finite linear combinations of processes driven by the same vector Brownian\n   motion have the combined coefficients. Their integrability follows from\n   the triangle inequality and $(\\sum_{j=1}^r u_j)^2\\le r\\sum_j u_j^2$.\n\n7. **No pathwise integral against Brownian motion is defined.** The display\n   defines the stochastic integral only as the localized limit of\n   [[thm-localized-ito-integral]]; no integral $\\int_0^tH_s(\\omega)\\,dB_s(\\omega)$\n   along the individual path is asserted, and the page's examples show that\n   the pathwise Riemann--Stieltjes route is unavailable.\n\nNo choice beyond the declared AC of the ambient interfaces enters the\nconstruction: the coefficients $b,\\sigma$ and the process are given data, and\nthe canonically localized integral is constructed in\n[[thm-localized-ito-integral]]. The Axiom of Choice is declared because the\nconditional-expectation and $L^2$ interfaces used downstream assume it, and\nthe countable-choice obligations inherited from those interfaces are declared\nas dependencies of this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ito-formula-one-dimensional",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Let\n$X_t=X_0+\\int_0^tb_s\\,ds+\\int_0^t\\sigma_s\\,dB_s$ be a real continuous Brownian\nIto process [[def-continuous-brownian-ito-process]], under its usual-filtration\nconditions, and let\n$f\\in C^{1,2}([0,\\infty)\\times\\mathbb R)$, meaning that $f$, its first time\nderivative $\\partial_tf$ and its first two space derivatives\n$\\partial_xf,\\partial^2_{x}f$ exist and are continuous on\n$[0,\\infty)\\times\\mathbb R$. Then, up to indistinguishability, for every\n$t\\ge0$\n$$f(t,X_t)=f(0,X_0)+\\int_0^t\\Bigl(\\partial_tf+b\\,\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf\\Bigr)(s,X_s)\\,ds+\\int_0^t\\sigma_s\\,\\partial_xf(s,X_s)\\,dB_s,$$\nFor the displayed integrands use the following representative convention.\nIntersect the measurable full events of continuity of $X$, validity of its\ndecomposition, and local integrability of its coefficients at integer horizons.\nIts complement is an $\\mathcal F_0$-measurable null event by the usual\nconditions. Replace $X,X_0,b,\\sigma$ by zero there. This preserves the\ndecomposition up to indistinguishability and all coefficient classes, and\nmakes $X$ continuous everywhere and its coefficient path integrals locally\nfinite everywhere. All integrands below refer to these representatives.\nThe stochastic integral is the localized Ito integral of the predictable\nlocally square-integrable process $\\sigma_s\\partial_xf(s,X_s)$\n[[thm-localized-ito-integral]] and the Lebesgue integral is the pathwise\nintegral of the progressively measurable process\n$s\\mapsto(\\partial_tf+b\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf)(s,X_s)$,\nwhich is pathwise integrable and finite almost surely for every $t$. In differential notation,\n$df(t,X_t)=(\\partial_tf+b\\partial_xf+\\tfrac12\\sigma^2\\partial^2_xf)(t,X_t)\\,dt+\\sigma_t\\partial_xf(t,X_t)\\,dB_t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-deterministic-ito-integrals-are-gaussian",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the standing hypothesis (H) of\n[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$ and let\n$h\\in L^2[0,T]$ be deterministic, choose a Borel representative of its\nLebesgue-equivalence class, and set $h(s,\\omega):=h(s)$. This process is\npredictable with finite energy. Then the Ito integral\n$\\int_0^Th_s\\,dB_s$\n[[def-ito-integral-for-square-integrable-predictable-processes]] is centered\nnormal with variance $\\int_0^Th^2ds$: its law is $N(0,\\int_0^Th^2ds)$ in the\nconvention of [[def-standard-normal-and-normal-laws]], where $N(0,0)$ is the\nDirac law at $0$. More generally, for deterministic $h_1,\\dots,h_d\\in L^2[0,T]$\nthe vector of integrals is jointly Gaussian in the sense of\n[[def-multivariate-normal-law]]: its law is $N_d(0,\\Sigma)$ with\n$$\\Sigma_{jk}=\\int_0^Th_j(s)h_k(s)\\,ds .$$\nIn particular the covariance of the pair is\n$\\operatorname{Cov}(\\int h_jdB,\\int h_kdB)=\\int h_jh_k$, the integrals are\nuncorrelated exactly when $\\int h_jh_k=0$, and integrals of deterministic\nintegrands with disjoint supports are independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof [[def-standard-normal-and-normal-laws]] has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-marginal-score-function",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer, let $I\\subseteq\\mathbb R$ be a time interval, and let $P_t$ be a probability law on $\\mathbb R^d$ for each $t\\in I$. Suppose $P_t$ has a density $p_t$ with respect to Lebesgue measure, meaning $P_t(A)=\\int_A p_t(x)\\,dx$ for every Borel set $A\\subseteq\\mathbb R^d$. On the set of points $x$ where $0<p_t(x)<\\infty$ and the map $x\\mapsto p_t(x)$ is differentiable, the **marginal score** of $P_t$ is\n\n$$s_t(x):=\\nabla_x\\log p_t(x).$$\n\nThe score is a spatial vector field; this definition asserts no value where the density is zero, infinite, or not differentiable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-predictor-corrector-score-sampling",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix $T>0$, $0<\\epsilon<T$, an integer $d\\ge1$, and an integer $N\\ge1$. Let $X_t\\in\\mathbb R^d$ be a continuous nonexplosive Markov diffusion on $[\\epsilon,T]$, where nonexplosive means its paths remain in $\\mathbb R^d$ on the whole interval, and Markov means its conditional future law given the past depends only on its current state. Write $P_t(A)=P(X_t\\in A)$ for its law on each Borel set $A$. On a complete filtered probability space with the usual conditions, let $W$ be an adapted standard $d$-dimensional Brownian motion whose increments are independent of the earlier filtration and have laws $N_d(0,(t-s)I_d)$. Let $b_t(x)\\in\\mathbb R^d$ and $\\sigma_t(x)\\in\\mathbb R^{d\\times d}$ be Borel maps. The process is a continuous Brownian Itô process in the sense that, up to indistinguishability,\n\n$$X_t=X_\\epsilon+\\int_\\epsilon^t b_r(X_r)\\,dr+\\left(\\sum_{j=1}^d\\int_\\epsilon^t\\sigma_{ij}(r,X_r)\\,dW_r^j\\right)_{i=1}^d,$$\n\nwhere the drift integrals are pathwise Lebesgue integrals and the coordinate stochastic integrals are localized Itô integrals; assume $\\int_\\epsilon^T|b_r(X_r)|\\,dr<\\infty$ and $\\int_\\epsilon^T\\|\\sigma_r(X_r)\\|_F^2\\,dr<\\infty$ almost surely, with $\\|M\\|_F^2=\\sum_{i,j}|M_{ij}|^2$. Assume also that $\\sigma_t(x)$ is invertible with $\\sup_{t,x}\\|\\sigma_t(x)^{-1}\\|<\\infty$. Put $a_t(x)=\\sigma_t(x)\\sigma_t(x)^{\\mathsf T}$. A transition density $q(s,x;t,y)$ means that $P(X_t\\in dy\\mid X_s=x)=q(s,x;t,y)\\,dy$.\n\nAssume the marginal densities $p_t$ and transition densities $q(s,x;t,y)$ are positive, finite, and normalized with respect to Lebesgue measure; $p_t$ has one continuous time derivative and two continuous state derivatives. For $\\epsilon\\le s<t\\le T$, assume\n\n$$p_t(y)=\\int_{\\mathbb R^d}p_s(x)q(s,x;t,y)\\,dx,\\qquad q(s,x;t,y)=\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz\\quad(s<r<t).$$\n\nFor $L_t\\phi=b_t\\cdot\\nabla\\phi+\\tfrac12\\sum_{i,j}a_{t,ij}\\partial_i\\partial_j\\phi$, define $L_t^*r=-\\sum_i\\partial_i(b_{t,i}r)+\\tfrac12\\sum_{i,j}\\partial_i\\partial_j(a_{t,ij}r)$. Assume $\\partial_t p_t=L_t^*p_t$ and $\\partial_tq(s,x;t,y)=L_t^{*,y}q(s,x;t,y)$ classically. For every compactly supported smooth test, assume transition integrals and their time derivatives are absolutely integrable, differentiation under those integrals is valid, and integration by parts in space has no boundary term.\n\nFor $0\\le u<T-\\epsilon$, set $s=T-u$ and define the reverse score $s_s(x)=\\nabla_x\\log p_s(x)$. With $a=\\sigma\\sigma^{\\mathsf T}$ and $(\\nabla\\!\\cdot a)_i=\\sum_j\\partial_j a_{ij}$, define the reverse drift supplied by the positive-density reversal interface:\n\n$$\\widetilde b_u(x)=-b_{T-u}(x)+(\\nabla\\!\\cdot a_{T-u})(x)+a_{T-u}(x)s_{T-u}(x),\\qquad \\widetilde\\sigma_u(x)=\\sigma_{T-u}(x).$$\n\nWrite $C_c^\\infty(\\mathbb R^d)$ for infinitely differentiable real functions with compact support. For $\\phi\\in C_c^\\infty(\\mathbb R^d)$, define $\\widetilde L_u\\phi=\\widetilde b_u\\cdot\\nabla\\phi+\\tfrac12\\sum_{i,j}a_{T-u,ij}\\partial_i\\partial_j\\phi$. Assume that for every reverse initial law the martingale problem for $\\widetilde L_u$ has a unique nonexplosive continuous solution in law; this means that each compact-test compensated process $\\phi(Y_u)-\\phi(Y_0)-\\int_0^u\\widetilde L_r\\phi(Y_r)\\,dr$ is a local martingale and its law is unique. The current reversal supplier's proof uses AC through its Brownian-reconstruction lemma, so AC is an explicit algorithm assumption here.\n\nSet $S=T-\\epsilon$, $h=S/N$, $u_k=kh$, and $t_k=T-u_k$ for $0\\le k\\le N$. Given step sizes $\\eta_k>0$, the **predictor-corrector score-sampling algorithm** takes an initial draw $Y_0\\sim P_T$ and mutually independent vectors $G_k,\\xi_k\\sim N_d(0,I_d)$, independent of $Y_0$. For $k=0,\\ldots,N-1$, perform the following two operations:\n\n1. **Predictor.** Compute one Euler–Maruyama step for the reverse equation:\n   $$\\widehat Y_{k+1}=Y_k+h\\widetilde b_{u_k}(Y_k)+\\sqrt h\\,\\widetilde\\sigma_{u_k}(Y_k)G_k.$$\n\n2. **Corrector.** Let $U_{k+1}(x)=-\\log p_{t_{k+1}}(x)$, so $e^{-U_{k+1}}$ is the normalized target density $p_{t_{k+1}}$. Apply one unadjusted Langevin update with step size $\\eta_k$:\n   $$Y_{k+1}=\\widehat Y_{k+1}-\\eta_k\\nabla U_{k+1}(\\widehat Y_{k+1})+\\sqrt{2\\eta_k}\\,\\xi_k=\\widehat Y_{k+1}+\\eta_k s_{t_{k+1}}(\\widehat Y_{k+1})+\\sqrt{2\\eta_k}\\,\\xi_k.$$\n\nReturn $Y_N$, the finite-step state at forward time $\\epsilon$. The procedure requires an exact marginal score on $[\\epsilon,T]$ and starts from the actual terminal law $P_T$; it does not replace $P_T$ by $N_d(0,I_d)$ unless they are equal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $K_t=\\int_0^t e^{B(r)/2}\\sqrt{\\beta(r)}\\,dW_r$, whose deterministic integrand is square-integrable because $B$ and $\\beta$ are continuous on $[0,T]$. Since $B'(t)=\\beta(t)$, apply [F2] to $f(t,x)=e^{-B(t)/2}x$ and the continuous Itô process $K_t$. The product rule gives $dX_t=-\\tfrac12\\beta(t)X_t\\,dt+\\sqrt{\\beta(t)}\\,dW_t$ and $X_0=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], $K_t$ is centered normal with variance $\\int_0^t e^{B(r)}\\beta(r)\\,dr$. Differentiating $e^{B(r)}$ gives $\\frac{d}{dr}e^{B(r)}=e^{B(r)}\\beta(r)$, so this variance is $e^{B(t)}-1$. Multiplication by $e^{-B(t)/2}$ therefore gives $X_t\\sim N(0,e^{-B(t)}(e^{B(t)}-1))=N(0,v_t)$. For $t>0$, positivity of $\\beta$ implies $v_t>0$; [F4] supplies its displayed density.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the density in step 1.2 gives $\\partial_x\\log p_t(x)=-x/v_t$, so [F5] yields the score for every $t>0$. At $t=0$, $X_0=0$ almost surely; its law assigns mass one to $\\{0\\}$ and therefore has no Lebesgue density, since every Lebesgue-density measure assigns zero mass to that singleton.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Continuity of $\\beta$ on the compact interval makes $B(T)$ finite, and strict positivity gives $B(T)>0$. Hence $v_T=1-e^{-B(T)}$ lies strictly between zero and one. For any $v>0$, the density in [F4] and the substitution $x=\\sqrt v z$ give $\\int_{\\mathbb R}x^2\\frac{e^{-x^2/(2v)}}{\\sqrt{2\\pi v}}\\,dx=v\\int_{\\mathbb R}z^2\\frac{e^{-z^2/2}}{\\sqrt{2\\pi}}\\,dz=v$. Indeed integration by parts yields $\\int z^2e^{-z^2/2}dz=\\int e^{-z^2/2}dz$ over $\\mathbb R$, because $ze^{-z^2/2}\\to0$ at both ends, and the normalized standard-normal density integrates to one. Thus $E_{P_T}X^2=v_T$ by step 1.2, whereas $E_{N(0,1)}Z^2=1$. If the laws were equal these finite second moments would be equal, a contradiction. Step 2.1 shows the exact positive-time score is available at $T$, and [F7] prescribes initialization from $P_T$; replacing it by $N(0,1)$ changes that initial law.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The The example fixes a real state space and T>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the time-zero law is singular."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes a scalar state space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof address the degenerate initial law explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes t=0 and T, and step 1.2 computes both laws."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC is declared for interfaces, but the proof selects no family element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 1.2–3.1 calculates v_T strictly between zero and one and distinguishes terminal laws by their second moments. This is a finite-schedule counterexample to exact standard-prior matching, not an iff criterion for schedules.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.2–3.1 calculates v_T strictly between zero and one and distinguishes terminal laws by their second moments. This is a finite-schedule counterexample to exact standard-prior matching, not an iff criterion for schedules.",
+            "item_sha256": "0a4a050a89ae328799121ac8dc44bee6771bb68845cada56d244e3acc35d5b7d",
+            "row_sha256": "164ef52615eff040d381eb7955f21d1bbc5020b71d167f0ce049ae9879382366"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.2–3.1 calculates v_T strictly between zero and one and distinguishes terminal laws by their second moments. This is a finite-schedule counterexample to exact standard-prior matching, not an iff criterion for schedules.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "Verification 1.2–3.1 calculates v_T strictly between zero and one and distinguishes terminal laws by their second moments. This is a finite-schedule counterexample to exact standard-prior matching, not an iff criterion for schedules.",
+            "item_sha256": "0a4a050a89ae328799121ac8dc44bee6771bb68845cada56d244e3acc35d5b7d",
+            "row_sha256": "e5e9c554e90c39101702fb28fba95f68cd06f38fb17cc651abe1797c05757aa1"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "Root independently read the complete current Example and Verification and checked its actual sampler use; the mathematical body is byte-exact to the original native review. Only its dependency_level4to5 label reflects the deeper proved supplier DAG. Positive-time score and weak-limit/finite-terminal-law conclusions are unchanged, with no inferred sampler accuracy or singular-time score.",
+        "prior_native_review": {
+          "status": "complete",
+          "reviewer": "alpha-batch-68",
+          "notes": "Read Verification 1.1–3.1 and actual Ito, deterministic Gaussian integral, normal-density, score, law and sampler input interfaces. Continuous positive beta on [0,T] makes B C1 and deterministic integrating factor square integrable. Ito product gives the VP SDE; integrating (exp B) prime gives variance 1-exp(-B(t)). Its endpoint t=0 is Dirac; for all t>0 the density/score is valid. 0<B(T)<infinity implies 0<v_T<1; the explicit Gaussian second-moment integral distinguishes P_T from N(0,1). AC and filtration increment hypotheses match suppliers. Its only sampler use is the explicit P_T initial draw, independent of the unresolved general reverse martingale proof. Finite T is essential; no infinite-horizon or convergence-rate conclusion is asserted. No local defect found."
+        },
+        "owner_resolution_evidence": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/root-owner68-resolution/application.json",
+        "owner_current_source_raw_sha256": "12c3659de0941a3076b17cfd08a28cdb5097aeb89eae4d682fc4562055fd5c3b",
+        "same_supplier_lead_review": "research/machine-learning-all-101-2026-10-19-owner-step3-reverse67-domination/your-proposal/formal-adjoint-routing-only/report.json"
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ deps: [def-real-numbers, def-real-order, thm-reals-ordered-field, thm-reals-fiel
 aliases: []
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-rat-embeds-dense.json
   precheck: pass
   verified:
     model: claude-opus-5
@@ -30,11 +31,15 @@ pipeline_run: null
 
 ## Statement
 
-The map $q \mapsto \hat q$ ([[def-real-numbers]]) is an embedding of ordered
+The map $q \mapsto \hat q$ (The real numbers) is an embedding of ordered
 fields. Every real is approximated by rationals: for $x \in \mathbb{R}$ and
 rational $\varepsilon > 0$ there is $q \in \mathbb{Q}$ with
 $|x - \hat q| < \hat\varepsilon$. Consequently, strictly between any two
 reals lies a rational.
+
+## Statement references
+
+[[def-real-numbers]]
 
 ## Facts & Assumptions
 

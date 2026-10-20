@@ -14,6 +14,7 @@ landmark: true
 short: "additivity over subintervals"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-additivity-over-subintervals.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -38,20 +39,28 @@ pipeline_run: null
 ## Statement
 
 Let $a < c < b$ be reals and let $f : [a,b] \to \mathbb{R}$ be bounded
-([[def-bounded-set]]). Then:
+(Lower bound, bounded below, bounded set). Then:
 
-1. $f$ is integrable on $[a,b]$ ([[def-darboux-integral]]) **if and only if** its
+1. $f$ is integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$) **if and only if** its
    restrictions to $[a,c]$ and to $[c,b]$ are integrable;
 2. and in that case
    $$\int_a^b f \;=\; \int_a^c f \;+\; \int_c^b f .$$
 3. **Oriented form.** Let $\alpha < \beta$ be reals, let $f : [\alpha,\beta] \to
    \mathbb{R}$ be integrable, and let $u, v, w \in [\alpha,\beta]$ be arbitrary.
-   Then, with the convention of [[def-oriented-integral]],
+   Then, with the convention of The integral with oriented limits: $\int_a^a f := 0$ and $\int_b^a f := -\int_a^b f$,
    $$\int_u^v f \;+\; \int_v^w f \;=\; \int_u^w f .$$
 
-Claim 3 is where [[def-oriented-integral]] earns its place: it holds for every
+Claim 3 is where The integral with oriented limits: $\int_a^a f := 0$ and $\int_b^a f := -\int_a^b f$ earns its place: it holds for every
 arrangement of the three points, including the degenerate ones, and it is the
 form used everywhere below.
+
+## Statement references
+
+[[def-bounded-set]]
+
+[[def-darboux-integral]]
+
+[[def-oriented-integral]]
 
 ## Facts & Assumptions
 

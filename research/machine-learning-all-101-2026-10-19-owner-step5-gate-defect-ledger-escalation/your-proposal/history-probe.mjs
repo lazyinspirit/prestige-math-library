@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+
+const run='machine-learning-all-101-2026-10-19',dir=path.dirname(new URL(import.meta.url).pathname),root=path.join(dir,'history-fixture');
+fs.mkdirSync(path.join(root,'tools'),{recursive:true});
+for(const name of fs.readdirSync('tools').filter(n=>n.endsWith('.mjs')))fs.copyFileSync(path.join('tools',name),path.join(root,'tools',name));
+for(const name of fs.readdirSync(path.join(dir,'candidate/tools')))fs.copyFileSync(path.join(dir,'candidate/tools',name),path.join(root,'tools',name));
+const {historicalStep3Manifest}=await import(path.join(root,'tools/step3-manifest-history.mjs'));
+const sha=b=>createHash('sha256').update(b).digest('hex'),read=p=>fs.readFileSync(p),copy=p=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.copyFileSync(p,path.join(root,p));};
+const registryPath=`research/${run}-step3-owner-required-page-routes.json`,closurePath=`research/${run}-step3-closure.json`;
+const closureRaw=read(closurePath),closure=JSON.parse(closureRaw),registryRaw=read(registryPath),entry=JSON.parse(registryRaw).routes[0],manifest=entry.manifest;
+const archivePath=`research/${run}-step5-v2/supporting-metadata/${manifest.sha256}.json`,archive=read(path.join(dir,`recovered-${manifest.sha256}.json`));
+for(const p of [registryPath,closurePath,manifest.path])copy(p);
+fs.mkdirSync(path.dirname(path.join(root,archivePath)),{recursive:true});fs.writeFileSync(path.join(root,archivePath),archive);
+const route={kind:'required-page',registry:registryPath,index:0,field:'manifest'},call=()=>historicalStep3Manifest(root,run,'8',manifest,route,{preclosure:true,frozenArtifacts:closure.artifacts});
+for(const ref of Object.values(entry))if(ref&&typeof ref==='object'&&typeof ref.path==='string'&&ref.path!==manifest.path)copy(ref.path);
+const {requiredPageClosureEvidence}=await import(path.join(root,'tools/step3-owner-required-page-routes.mjs'));
+const routeEvidence=requiredPageClosureEvidence(root,run,{frozenArtifacts:closure.artifacts});
+for(const [p,h] of Object.entries(routeEvidence))assert.equal(closure.artifacts[p],h);
+const result=call();assert.equal(sha(result.historical),manifest.sha256);assert(result.historical.equals(archive));assert(result.current.equals(read(manifest.path)));assert.equal(result.archived,true);
+const checks=['genuine exact archive accepted under unchanged frozen map; current carrier retained'];
+function reject(label,p,b){const before=read(path.join(root,p));fs.writeFileSync(path.join(root,p),b);assert.throws(call);fs.writeFileSync(path.join(root,p),before);checks.push(label);}
+reject('tampered archive rejected',archivePath,Buffer.concat([archive,Buffer.from(' ')]));
+reject('tampered sealed registry rejected',registryPath,Buffer.concat([registryRaw,Buffer.from(' ')]));
+const altered=structuredClone(closure);altered.artifacts[manifest.path]='0'.repeat(64);reject('changed original artifact map rejected',closurePath,JSON.stringify(altered));
+fs.unlinkSync(path.join(root,archivePath));assert.throws(call);fs.writeFileSync(path.join(root,archivePath),archive);checks.push('missing archive rejected');
+assert.throws(()=>historicalStep3Manifest(root,run,'8',{...manifest,sha256:'0'.repeat(64)},route,{preclosure:true,frozenArtifacts:closure.artifacts}));checks.push('wrong/unbound manifest hash rejected');
+assert(read(closurePath).equals(closureRaw));assert(read(registryPath).equals(registryRaw));checks.push('original live closure and registry unchanged');
+console.log(JSON.stringify({ok:true,checks,original_artifact_keys:Object.keys(closure.artifacts).length,required_page_evidence_keys:Object.keys(routeEvidence).length,required_page_evidence_matches_original_slots:true,recovered_sha256:sha(archive),recovered_bytes:archive.length},null,2));

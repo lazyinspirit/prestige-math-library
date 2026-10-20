@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/quantum-hopf-hecke-75-2026-10-15-owner/published-repairs/def-metric-bounded-diameter.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-bounded-diameter.json
 id: def-metric-bounded-diameter
 kind: definition
 title: "Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space"
@@ -35,11 +35,11 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]) and let
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let
 $A, B \subseteq X$.
 
 **Bounded subset.** $A$ is **bounded** if $A = \emptyset$ or there are $x_0 \in X$
-and a real $r > 0$ with $A \subseteq B(x_0, r)$ ([[def-metric-ball]]). The space
+and a real $r > 0$ with $A \subseteq B(x_0, r)$ (Open ball, closed ball and sphere in a metric space). The space
 $(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.
 
 **Diameter, for nonempty bounded $A$ only.** Suppose $A$ is nonempty and
@@ -50,19 +50,19 @@ $$D(A) := \{\, d(a,b) : a, b \in A \,\} \subseteq \mathbb{R}.$$
 Then $D(A)$ is nonempty, since $A$ is, and it is bounded above: fixing $x_0$ and
 $r$ with $A \subseteq B(x_0,r)$, every $a, b \in A$ satisfy
 $d(a,b) \le d(a,x_0) + d(x_0,b) < r + r$ by the triangle inequality, symmetry
-([[def-metric-space]]) and addition of inequalities ([[lem-of-add-order]],
-[[def-ordered-field]]), so $r + r$ is an upper bound of $D(A)$
-([[def-bounded-set]]). Hence $D(A)$ has a least upper bound in $\mathbb{R}$ by
-the least-upper-bound property ([[def-complete-ordered-field]]), and that bound
-is unique ([[lem-sup-unique]]). Define
+(Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and addition of inequalities (Order is preserved by adding a constant and by adding inequalities,
+Ordered field), so $r + r$ is an upper bound of $D(A)$
+(Lower bound, bounded below, bounded set). Hence $D(A)$ has a least upper bound in $\mathbb{R}$ by
+the least-upper-bound property (Complete ordered field (least-upper-bound property)), and that bound
+is unique (Suprema and infima are unique). Define
 
 $$\operatorname{diam}(A) := \sup D(A).$$
 
 **Distance from a point to a set, for nonempty $A$ only.** Let $x \in X$ and let
 $A$ be nonempty, and put $E(x,A) := \{\, d(x,a) : a \in A \,\}$. Then $E(x,A)$ is
 nonempty and bounded below by $0$, since a metric is nonnegative
-([[lem-metric-nonnegativity]], [[def-bounded-set]]), so it has a greatest lower
-bound ([[thm-infimum-property]], [[def-infimum]]), unique by [[lem-sup-unique]].
+(Nonnegativity of a metric is a consequence of the other axioms, not an axiom, Lower bound, bounded below, bounded set), so it has a greatest lower
+bound (Every nonempty set bounded below has an infimum, Greatest lower bound (infimum)), unique by Suprema and infima are unique.
 Define
 
 $$d(x,A) := \inf E(x,A).$$
@@ -75,8 +75,8 @@ $$d(A,B) := \inf E(A,B).$$
 
 **Every one of the three scope restrictions is load bearing.** In this library
 $\sup$ and $\inf$ denote real numbers and are written only after existence has
-been established; the least-upper-bound property of [[def-complete-ordered-field]] and the
-greatest-lower-bound property of [[thm-infimum-property]] apply to nonempty
+been established; the least-upper-bound property of Complete ordered field (least-upper-bound property) and the
+greatest-lower-bound property of Every nonempty set bounded below has an infimum apply to nonempty
 real sets with the respective bounds. Empty or unbounded sets acquire no
 real supremum or infimum by convention. Accordingly:
 
@@ -86,6 +86,28 @@ real supremum or infimum by convention. Accordingly:
 - $d(x,A)$ is defined exactly when $A \ne \emptyset$, and $d(A,B)$ exactly when
   both $A$ and $B$ are nonempty. No boundedness is needed for these two, because
   $0$ is always a lower bound.
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-metric-ball]]
+
+[[lem-of-add-order]]
+
+[[def-ordered-field]]
+
+[[def-bounded-set]]
+
+[[def-complete-ordered-field]]
+
+[[lem-sup-unique]]
+
+[[lem-metric-nonnegativity]]
+
+[[thm-infimum-property]]
+
+[[def-infimum]]
 
 ## Remarks
 

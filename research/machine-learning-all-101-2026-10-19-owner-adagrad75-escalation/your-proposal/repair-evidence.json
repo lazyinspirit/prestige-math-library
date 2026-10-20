@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "75",
+  "outside_cycle": 1,
+  "status": "Proposal only; no native review, audit or gate credit claimed.",
+  "confirmation": {
+    "report": "research/machine-learning-all-101-2026-10-19-scope-review/batch-75/review-1.json",
+    "actual_defect": "Current alg-adagrad embeds v^T G_t v=sum_s(g_s^T v)^2>=0 inside its Definition. Its existing matrix-root lemma requires an already symmetric PSD G; it does not prove this property of the actual accumulator. The property must be separately proved and linked by justified_by.",
+    "minimal_prerequisite": "lem-adagrad-accumulated-gram-matrix-is-psd",
+    "already_native_repairs_preserved": "Initialization G_0=0 and explicit finite t=1,...,T loop, prior supplier attribution/dependency repairs, and negative-entropy/Euclidean examples receive no operations."
+  },
+  "proposal": {
+    "new_result": "Complete draft lemma depending on alg-adagrad, matrix-product/transpose definitions, sign rules, matrix-root lemma and scalar-root theorem. It proves the accumulator identity, symmetry, PSD and diagonal sums, then checks both scales are finite symmetric PSD, including zero/singular cases.",
+    "existing_changes": "Four exact unique algorithm spans: add justified_by helper; explicitly map one-based vector/matrix labels to underlying zero-based coordinates; retain PSD assertion but remove only inline proof; add Definition reference. All input domains, accumulator formulas, eta, constraints, updates, minimizer selection and output are preserved.",
+    "metadata": "Root owns canonical metadata/levels/helper registration/current bindings. No new verification field or fabricated source-reading claim is proposed."
+  },
+  "proof_use_evidence": [
+    {
+      "supplier": "def-matrix-product-and-identity-matrix; def-transpose-of-a-matrix",
+      "reading": "Full current local Definitions read.",
+      "use": "Outer product has entry g_{s,i}g_{s,j}; finite sums permit entrywise symmetry and expansion/regrouping of v^T G_t v. The empty sum agrees with G_0=0."
+    },
+    {
+      "supplier": "lem-of-sign-rules",
+      "reading": "Full current Statement/Facts/proof read.",
+      "use": "Positive and negative products show real squares nonnegative (zero separately); nonnegative coefficients and square terms prove diagonal-scale PSD. No strict positive-definiteness is asserted."
+    },
+    {
+      "supplier": "lem-psd-matrix-has-unique-psd-square-root",
+      "reading": "Full actual Statement/Facts/proof read, including the native associativity dependency.",
+      "use": "The new lemma supplies its exact hypotheses. Its proof diagonalizes symmetric G, shows eigenvalues nonnegative by q^T G q, constructs the root from nonnegative scalar roots, and proves uniqueness by commuting with G and scalar action on each eigenspace. Singular eigenspaces remain allowed."
+    },
+    {
+      "supplier": "thm-of-square-roots",
+      "reading": "Full current local Statement/Facts/proof read.",
+      "use": "Applies to each nonnegative diagonal entry; the zero-root case is explicit in proof1.1. No epsilon or positive diagonal floor is required."
+    },
+    {
+      "supplier": "lem-adagrad-projection-exists",
+      "reading": "Full actual Statement/Facts/proof read.",
+      "use": "Its independent fixed-PSD-metric argument expands the quadratic to prove continuity on bounded K, invokes closed+bounded compactness and lower-semicontinuous minimum attainment. The new helper supplies PSD for either scale; singularity and nonuniqueness cause no gap. Existing pseudoinverse scope and algorithm formula are unchanged."
+    }
+  ],
+  "consumer_scope": {
+    "method": "Independent recursive canonical item-ID token search across all current items/, library/, articles/, including body/frontmatter/nonlogical references. Reached alias declarations checked: none, including seed. See consumer-trace.json and captured context.",
+    "original_interface_change": "Only removal of the inline proof sentence from original Definition; PSD assertion retained verbatim in meaning, and every procedure operation is exact unchanged. Still checked full direct/indirect closure as required.",
+    "closure_items": [
+      "alg-adagrad",
+      "lem-adagrad-projection-exists",
+      "lem-adagrad-diagonal-scale-coordinatewise",
+      "ex-adagrad-singular-adaptive-metric"
+    ],
+    "page_carriers": [
+      "library/machine-learning/mirror-descent-and-adaptive-regularization.md",
+      "library/machine-learning/mirror-descent-and-adaptive-regularization-examples.md"
+    ],
+    "no_regret_consumer": "No current direct or indirect item reference from alg-adagrad reaches the mirror-descent regret theorem or halved-constants false-statement. These are neighboring page placements, not affected uses; none of their constants or scope is edited."
+  },
+  "consumer_dispositions": [
+    {
+      "id": "lem-adagrad-projection-exists",
+      "disposition": "No edit. Its Statement assumes any fixed real PSD H and arbitrary y, and makes no uniqueness claim. Existing F1 matches the preserved algorithm objective. New helper now explicitly supplies the formerly inline PSD premise for both scales. Continuity/compact minimum proof checked as above."
+    },
+    {
+      "id": "lem-adagrad-diagonal-scale-coordinatewise",
+      "disposition": "No edit. Full actual proof expands (G_t)_{ii}=sum_s g_{s,i}^2 and then takes nonnegative scalar roots. Accumulator and diagonal-scale definitions are unchanged. New helper establishes their nonnegative radicands independently."
+    },
+    {
+      "id": "ex-adagrad-singular-adaptive-metric",
+      "disposition": "No edit. Full actual witness checked: K=[-1,1]^2, T=1, eta=1, gradient(1,0), G_1=H_1=diag(1,0). The same diagonal matrix satisfies the four pseudoinverse equations; y_2=(-1,0); objective(a+1)^2 has exactly minimizers(-1,s),s in[-1,1]. New helper permits this singular scale and preserves nonunique selection."
+    },
+    {
+      "id": "mirror-descent-and-adaptive-regularization",
+      "disposition": "Full current page is frontmatter only. Existing algorithm/projection/coordinate placements remain correct. Root must register the new helper coherently; no proposed alteration to approved existing inventories or page prose."
+    },
+    {
+      "id": "mirror-descent-and-adaptive-regularization-examples",
+      "disposition": "Full current page is frontmatter only. Singular example placement and required parent remain correct; no edit."
+    }
+  ],
+  "source_use": {
+    "external_fulltext": "None consulted for this owner resolution. The new lemma is proved from fully read local suppliers. Its Duchi URL is background attribution inherited from the algorithm, not a claim of external fulltext consultation.",
+    "local_fulltext": "Algorithm, PSD-root lemma, projection lemma, coordinate lemma, singular example, matrix-product/transpose definitions, transpose/adjoint theorem, sign rules, scalar-root theorem, both page carriers, native review1 and repair1; snapshots in before/ and context/."
+  },
+  "mechanical_checks": {
+    "performed": "Four algorithm old spans each occur uniquely; replay equals full candidate. All five current-before snapshots still match live sources; helper target absent. Final explicit candidate precheck: algorithm not-applicable, helper pass, failed=0. Final explicit proof-layout: 2 items,3 steps,0 defects. Files candidate-precheck.json and candidate-layout.txt record actual outputs. These are format checks separate from mathematical proof validity.",
+    "not_performed": "No live source/metadata/manifest/engine edits, hash, run gates, audit or native review credit. Root owns registration and integrated current-input checks.",
+    "intermediate_format_fixes": "Initial precheck exposed untagged display-spanning step; a preliminary tag placement passed neither full layout nor phase normalization. Replaced that proof expansion by equivalent complete tagged prose and normalized dependent phases. Final checks above are on the resulting candidate."
+  },
+  "remaining_gaps": "None identified within this issue. Root must apply guarded operations, register helper, normalize metadata and bind/check current inputs.",
+  "editorial_followup": {
+    "instruction": "Root requested uninterrupted Statement and explicit ordinal-index relabeling; this is not another mathematical review cycle.",
+    "changes": "Removed inline algorithm link from helper Statement (reference section retained); inserted g_i=g(i-1), G_ij=G(i-1,j-1) convention in algorithm and g_s,i/g_s(i-1), (G_t)_ij/G_t(i-1,j-1) convention in helper Statement with Given mirror. Normalized proof dependency phases 1.1,2.1,3.1.",
+    "consumer_consistency": "Projection proof uses the same finite entry labels i,j=1,...,d; the explicit relabeling preserves its objective and double sums. Coordinate lemma uses i=1,...,d for the identical scalar sums. Singular example names two coordinates (a,b), so its 2x2 matrices and gradient(1,0) retain the first/second-coordinate meaning. No consumer edit is required."
+  }
+}

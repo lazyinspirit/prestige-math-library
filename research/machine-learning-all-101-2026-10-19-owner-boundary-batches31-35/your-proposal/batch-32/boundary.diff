@@ -1,0 +1,415 @@
+--- research/machine-learning-all-101-2026-10-19-batch-32.proof-contracts.json
++++ proposed-boundaries-only
+@@ -124,13 +124,15 @@
+         },
+         {
+           "case": "iff-forward",
+-          "status": "not_applicable",
+-          "reason": "Connected activation-pattern regions states no biconditional."
++          "status": "checked",
++          "reason": "The Definition assigns s_i^ell=1 exactly when the preactivation is strictly positive; hence an assigned active bit entails positivity. The nonpositive case, including zero, is explicitly assigned bit zero.",
++          "evidence": "The Definition assigns s_i^ell=1 exactly when the preactivation is strictly positive; hence an assigned active bit entails positivity. The nonpositive case, including zero, is explicitly assigned bit zero."
+         },
+         {
+           "case": "iff-reverse",
+-          "status": "not_applicable",
+-          "reason": "Connected activation-pattern regions states no biconditional."
++          "status": "checked",
++          "reason": "Conversely, a strictly positive preactivation is assigned bit one by the defining rule. Together with the explicit nonpositive/inactive convention, this exhausts all real preactivation values, including identically zero cells.",
++          "evidence": "Conversely, a strictly positive preactivation is assigned bit one by the defining rule. Together with the explicit nonpositive/inactive convention, this exhausts all real preactivation values, including identically zero cells."
+         }
+       ],
+       "axioms": [],
+@@ -166,7 +168,7 @@
+         {
+           "id": "derive-2-1",
+           "step": "2.1",
+-          "claim": "Induction over the hidden layers gives at most $\\prod_{\\ell=1}^H(n_\\ell+1)$ intervals; the affine output adds no breakpoints. For $H\\ge1$, AM–GM gives $\\prod(n_\\ell+1)\\le(1+H^{-1}\\sum n_\\ell)^H=(1+U/H)^H$. With no hidden layer the output is affine on the entire interval.",
++          "claim": "Induction over the hidden layers gives at most $\\prod_{\\ell=1}^H(n_\\ell+1)$ intervals; the affine output adds no breakpoints. For $H\\ge1$, AM\u2013GM gives $\\prod(n_\\ell+1)\\le(1+H^{-1}\\sum n_\\ell)^H=(1+U/H)^H$. With no hidden layer the output is affine on the entire interval.",
+           "inputs": [
+             "step 1.1",
+             "algebra"
+@@ -178,8 +180,9 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "status": "checked",
++          "reason": "The Statement explicitly admits H=0 hidden layers. Then the empty product is one and the affine output is affine on the entire interval, as concluded in proof step 2.1. The formula involving U/H is restricted to H>=1 and is not evaluated at zero.",
++          "evidence": "The Statement explicitly admits H=0 hidden layers. Then the empty product is one and the affine output is affine on the entire interval, as concluded in proof step 2.1. The formula involving U/H is restricted to H>=1 and is not evaluated at zero."
+         },
+         {
+           "case": "zero",
+@@ -597,12 +600,24 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Local Taylor approximation on a Sobolev grid has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "reason": "Dimensions and smoothness order satisfy d,n>=1 and the grid resolution is N>=2. The tensor grid has (N+1)^d centers and the Taylor sum includes the zero multi-index; neither aggregate is empty, although hats at a given point may vanish.",
++          "reviewed": {
++            "upheld": true,
++            "by": "policy_gradient_cpo_repair focused boundary metadata review",
++            "reason": "Dimensions and smoothness order satisfy d,n>=1 and the grid resolution is N>=2. The tensor grid has (N+1)^d centers and the Taylor sum includes the zero multi-index; neither aggregate is empty, although hats at a given point may vanish. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
++            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\\\prod_\\{)"
++          }
+         },
+         {
+           "case": "zero",
+           "status": "not_applicable",
+-          "reason": "Local Taylor approximation on a Sobolev grid has no separate zero parameter or assertion beyond its stated hypotheses."
++          "reason": "The detector fragment dt^n in proof step 2.1 is the differential-operator notation d^n/dt^n, not division by a zero-valued step variable. Actual numerical denominators are n! with n>=1 and powers of N>=2; no zero grid resolution or zero smoothness order is admitted.",
++          "reviewed": {
++            "upheld": true,
++            "by": "policy_gradient_cpo_repair focused boundary metadata review",
++            "reason": "The detector fragment dt^n in proof step 2.1 is the differential-operator notation d^n/dt^n, not division by a zero-valued step variable. Actual numerical denominators are n! with n>=1 and powers of N>=2; no zero grid resolution or zero smoothness order is admitted. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
++            "actual_detector_why": "the proof divides by a symbolic denominator (dt^n) \u2014 the zero case is a real obligation unless a hypothesis excludes it"
++          }
+         },
+         {
+           "case": "one",
+@@ -622,7 +637,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
++          "evidence": "Proof step 1.1 invokes the AC-based W^{1,infinity} representative supplier for each derivative below order n, and F2 derives Countable Choice for interior mollification. Those inherited choices are explicitly assumed; the tensor hats and finite grid sums add no arbitrary family selection."
+         },
+         {
+           "case": "iff-forward",
+@@ -769,7 +784,7 @@
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
++          "evidence": "Proof step 1.1 invokes the AC-dependent Sobolev Taylor-grid supplier F1 under A1. The remaining architecture is fixed by grid size and accuracy, with only Taylor coefficients depending on f; its finite product subnetworks do not add a choice axiom or a continuous-weight-selection claim."
+         },
+         {
+           "case": "iff-forward",
+@@ -941,12 +956,12 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement and proof steps 1.1–5.1: the representative and residual construction include both endpoints."
++          "evidence": "Statement and proof steps 1.1\u20135.1: the representative and residual construction include both endpoints."
+         },
+         {
+           "case": "nonempty-choice",
+           "status": "checked",
+-          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
++          "evidence": "Proof step 1.1 uses the stated AC and its Countable Choice consequence through F1 to obtain the Lipschitz representative and its unique endpoint extension. Subsequent cache quantization and the choices of m,T,delta are finite explicit constructions; no continuous targetwise parameter selector is asserted."
+         },
+         {
+           "case": "iff-forward",
+@@ -1069,7 +1084,7 @@
+         {
+           "id": "derive-4-1",
+           "step": "4.1",
+-          "claim": "Write $H=L-2$ and let $U$ be its hidden unit count. Discard units with no path to the output and absorb input-independent units into their downstream biases; this preserves the restricted function and does not increase the remaining hidden unit count. Partition the remaining hidden units by topological rank, where rank is the greatest number of hidden units on an input-to-that-unit path. Every rank is at most $H$, and every predecessor hidden unit has smaller rank. Let $n_\\ell$ count rank $\\ell$, setting $n_\\ell=0$ for unused ranks; these are counts in a partition, not inserted computation layers. Maintain a common affine partition for the input and all earlier unit outputs, retaining those outputs when the next rank is processed. Every preactivation at that rank is affine on each existing interval, including all skip-edge terms, so its at most $n_\\ell$ zeros split that interval into at most $n_\\ell+1$ pieces. Thus the interval count in [F1] applies to this rank partition, and $\\sum_\\ell n_\\ell\\le U$. By AM–GM, the restricted network has at most $M\\le\\prod_{\\ell=1}^{H}(n_\\ell+1)\\le(1+U/H)^H$ affine intervals. One has length $h\\ge1/M$. On this interval the network output $r$ is affine. If $g''\\ge c_0$, midpoint convexity applied to $g(t)-c_0t^2/2$ gives $g(a)+g(b)-2g((a+b)/2)\\ge c_0h^2/4$; in the other case apply this to $-g$. The affine second difference of $r$ is zero; the three uniform errors bound the absolute second difference of $g$ by $4\\varepsilon$. Thus $\\varepsilon\\ge c_0/(16M^2)$. Rearranging gives $U\\ge c(f,L)\\varepsilon^{-1/(2H)}$ for small $\\varepsilon$. Each hidden unit has a counted bias parameter, so the number of weights is at least $U$, proving clause (iii). AC and its countable-choice consequence are inherited through the stated Sobolev representative and width suppliers; the finite sign and segment constructions require no additional choice.",
++          "claim": "Write $H=L-2$ and let $U$ be its hidden unit count. Discard units with no path to the output and absorb input-independent units into their downstream biases; this preserves the restricted function and does not increase the remaining hidden unit count. Partition the remaining hidden units by topological rank, where rank is the greatest number of hidden units on an input-to-that-unit path. Every rank is at most $H$, and every predecessor hidden unit has smaller rank. Let $n_\\ell$ count rank $\\ell$, setting $n_\\ell=0$ for unused ranks; these are counts in a partition, not inserted computation layers. Maintain a common affine partition for the input and all earlier unit outputs, retaining those outputs when the next rank is processed. Every preactivation at that rank is affine on each existing interval, including all skip-edge terms, so its at most $n_\\ell$ zeros split that interval into at most $n_\\ell+1$ pieces. Thus the interval count in [F1] applies to this rank partition, and $\\sum_\\ell n_\\ell\\le U$. By AM\u2013GM, the restricted network has at most $M\\le\\prod_{\\ell=1}^{H}(n_\\ell+1)\\le(1+U/H)^H$ affine intervals. One has length $h\\ge1/M$. On this interval the network output $r$ is affine. If $g''\\ge c_0$, midpoint convexity applied to $g(t)-c_0t^2/2$ gives $g(a)+g(b)-2g((a+b)/2)\\ge c_0h^2/4$; in the other case apply this to $-g$. The affine second difference of $r$ is zero; the three uniform errors bound the absolute second difference of $g$ by $4\\varepsilon$. Thus $\\varepsilon\\ge c_0/(16M^2)$. Rearranging gives $U\\ge c(f,L)\\varepsilon^{-1/(2H)}$ for small $\\varepsilon$. Each hidden unit has a counted bias parameter, so the number of weights is at least $U$, proving clause (iii). AC and its countable-choice consequence are inherited through the stated Sobolev representative and width suppliers; the finite sign and segment constructions require no additional choice.",
+           "inputs": [
+             "F1",
+             "step 1.3",
+@@ -1083,7 +1098,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement; Statement has nonempty unit ball and cube; n,d,W≥1."
++          "evidence": "Statement; Statement has nonempty unit ball and cube; n,d,W\u22651."
+         },
+         {
+           "case": "zero",
+@@ -1113,12 +1128,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The three clauses impose distinct selector/architecture/depth hypotheses and derive their corresponding weight lower inequalities. None is stated as a necessary-and-sufficient condition for approximability."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The theorem supplies no converse construction achieving these rates. In particular, the continuous-selection lower bound is not claimed to imply continuity for arbitrary targetwise weights in the separate shattering clause."
+         }
+       ],
+       "axioms": [
+@@ -1158,8 +1173,9 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Hyperplane arrangement upper count and general-position count has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "status": "checked",
++          "reason": "Zero hyperplanes m=0 are explicitly admitted. Proof step 1.1 gives R(0,d)=1, the entire ambient space as one region; the j=0 binomial term is one and all j>0 terms vanish. The separate zero-dimensional image likewise has one cell.",
++          "evidence": "Zero hyperplanes m=0 are explicitly admitted. Proof step 1.1 gives R(0,d)=1, the entire ambient space as one region; the j=0 binomial term is one and all j>0 terms vanish. The separate zero-dimensional image likewise has one cell."
+         },
+         {
+           "case": "zero",
+@@ -1253,8 +1269,9 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "Rank-sensitive layer recursion for ReLU regions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "status": "checked",
++          "reason": "The terminal continuation with no layers left is explicitly R_{L+1}(r)=1. At rank r=0 the recurrence sum has its j=0 term, so it is one-term rather than empty. Proof step 2.1 inducts backward from exactly this terminal base.",
++          "evidence": "The terminal continuation with no layers left is explicitly R_{L+1}(r)=1. At rank r=0 the recurrence sum has its j=0 term, so it is one-term rather than empty. Proof step 2.1 inducts backward from exactly this terminal base."
+         },
+         {
+           "case": "zero",
+@@ -1347,7 +1364,13 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Rank-sensitive upper bound for ReLU linear regions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "reason": "The input dimension, hidden-layer count and every width are at least one. The tuple set J is nonempty because the all-zero tuple satisfies every index bound, and each product has L factors. At the first layer the absent earlier-width terms are explicitly omitted, not an undefined minimum over an empty family.",
++          "reviewed": {
++            "upheld": true,
++            "by": "policy_gradient_cpo_repair focused boundary metadata review",
++            "reason": "The input dimension, hidden-layer count and every width are at least one. The tuple set J is nonempty because the all-zero tuple satisfies every index bound, and each product has L factors. At the first layer the absent earlier-width terms are explicitly omitted, not an undefined minimum over an empty family. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
++            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\\\prod_\\{)"
++          }
+         },
+         {
+           "case": "zero",
+@@ -1441,8 +1464,9 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "A width-n ReLU block makes n+1 full folds has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "status": "checked",
++          "reason": "An individual folding block has width n>=3. For an empty composition of blocks, the layer-product convention gives one and the unprocessed input interval is one affine activation region, the initial case of the layer induction in proof step 3.1; no width-zero folding block is claimed.",
++          "evidence": "An individual folding block has width n>=3. For an empty composition of blocks, the layer-product convention gives one and the unprocessed input interval is one affine activation region, the initial case of the layer induction in proof step 3.1; no width-zero folding block is claimed."
+         },
+         {
+           "case": "zero",
+@@ -1462,7 +1486,7 @@
+         {
+           "case": "endpoints",
+           "status": "checked",
+-          "evidence": "Statement and steps 1.1–2.1: the first and last fold intervals include their endpoint values."
++          "evidence": "Statement and steps 1.1\u20132.1: the first and last fold intervals include their endpoint values."
+         },
+         {
+           "case": "nonempty-choice",
+@@ -1559,8 +1583,9 @@
+       "boundaries": [
+         {
+           "case": "empty",
+-          "status": "not_applicable",
+-          "reason": "One-dimensional and multidimensional ReLU region lower bounds has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "status": "checked",
++          "reason": "The multidimensional bound includes L=1. Its product over layers1 through L-1 is then empty and equals one; proof step 3.1 uses the last-layer hyperplane arrangement directly on the unmodified input cube. Each actual layer width and input dimension still meets its positive lower bound.",
++          "evidence": "The multidimensional bound includes L=1. Its product over layers1 through L-1 is then empty and equals one; proof step 3.1 uses the last-layer hyperplane arrangement directly on the unmodified input cube. Each actual layer width and input dimension still meets its positive lower bound."
+         },
+         {
+           "case": "zero",
+@@ -1621,7 +1646,7 @@
+         {
+           "id": "derive-2-1",
+           "step": "2.1",
+-          "claim": "Independence gives $\\mathbb E S=\\sum_{i=1}^N\\mathbb E X_i=Nx$ and $\\operatorname{Var}(S)=\\sum_{i=1}^N\\operatorname{Var}(X_i)=Nx(1-x)$, because each Bernoulli variable has variance $x(1-x)$. Therefore Cauchy–Schwarz yields $\\mathbb E|S/N-x|\\le\\sqrt{\\mathbb E(S/N-x)^2}=\\sqrt{x(1-x)/N}\\le1/(2\\sqrt N)$. The estimate holds for every $x$, proving the uniform bound.",
++          "claim": "Independence gives $\\mathbb E S=\\sum_{i=1}^N\\mathbb E X_i=Nx$ and $\\operatorname{Var}(S)=\\sum_{i=1}^N\\operatorname{Var}(X_i)=Nx(1-x)$, because each Bernoulli variable has variance $x(1-x)$. Therefore Cauchy\u2013Schwarz yields $\\mathbb E|S/N-x|\\le\\sqrt{\\mathbb E(S/N-x)^2}=\\sqrt{x(1-x)/N}\\le1/(2\\sqrt N)$. The estimate holds for every $x$, proving the uniform bound.",
+           "inputs": [
+             "step 1.1",
+             "algebra"
+@@ -1634,7 +1659,13 @@
+         {
+           "case": "empty",
+           "status": "not_applicable",
+-          "reason": "Uniform error bound for Bernstein approximation of a Lipschitz function has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
++          "reason": "The polynomial degree N is an integer at least one, so the Bernstein sum includes indices j=0 through N and is never empty. The domain is the specified closed interval [0,1]; degree N=0 is excluded from the formula containing j/N.",
++          "reviewed": {
++            "upheld": true,
++            "by": "policy_gradient_cpo_repair focused boundary metadata review",
++            "reason": "The polynomial degree N is an integer at least one, so the Bernstein sum includes indices j=0 through N and is never empty. The domain is the specified closed interval [0,1]; degree N=0 is excluded from the formula containing j/N. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
++            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)"
++          }
+         },
+         {
+           "case": "zero",
+@@ -1725,7 +1756,7 @@
+         {
+           "id": "derive-2-1",
+           "step": "2.1",
+-          "claim": "It follows that the threshold classifier $1[g(z)\\ge1/2]$ is constant on at most $C=(1+\\beta^\\ell)\\prod_{i=1}^{\\ell}(1+tm_i\\alpha\\beta^{i-1})$ open intervals. Identically zero threshold polynomials contribute no roots. Since every factor's nonconstant term is at least one, $C\\le2(2t\\alpha)^\\ell\\beta^{\\ell(\\ell+1)/2}\\prod_i m_i\\le2(2t\\alpha m/\\ell)^\\ell\\beta^{\\ell(\\ell+1)/2}\\le B$, where the penultimate inequality is AM–GM. The same partition argument applies for every fixed offset of the remaining coordinates.",
++          "claim": "It follows that the threshold classifier $1[g(z)\\ge1/2]$ is constant on at most $C=(1+\\beta^\\ell)\\prod_{i=1}^{\\ell}(1+tm_i\\alpha\\beta^{i-1})$ open intervals. Identically zero threshold polynomials contribute no roots. Since every factor's nonconstant term is at least one, $C\\le2(2t\\alpha)^\\ell\\beta^{\\ell(\\ell+1)/2}\\prod_i m_i\\le2(2t\\alpha m/\\ell)^\\ell\\beta^{\\ell(\\ell+1)/2}\\le B$, where the penultimate inequality is AM\u2013GM. The same partition argument applies for every fixed offset of the remaining coordinates.",
+           "inputs": [
+             "step 1.2",
+             "algebra"
+@@ -1768,7 +1799,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement; Statement sets every parameter and m≥1; the maximum defining B is nonempty."
++          "evidence": "Statement; Statement sets every parameter and m\u22651; the maximum defining B is nonempty."
+         },
+         {
+           "case": "zero",
+@@ -1778,7 +1809,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement; proof argument handles ℓ=1 and s=1 explicitly."
++          "evidence": "Statement; proof argument handles \u2113=1 and s=1 explicitly."
+         },
+         {
+           "case": "degenerate",
+@@ -1798,12 +1829,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The theorem gives a crossing-budget lower bound and sufficient gate-parameter conditions for error at least1/64, plus an independent tree bound. It does not identify those sufficient conditions as necessary."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "No converse recovers the budget condition from a depth-separation outcome. The explicit high-degree witness only shows that dropping the condition uniformly is unsound, not a complete iff classification."
+         }
+       ],
+       "axioms": [],
+@@ -1872,7 +1903,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement; Counterexample fixes k=d=t=α=1."
++          "evidence": "Statement; Counterexample fixes k=d=t=\u03b1=1."
+         },
+         {
+           "case": "degenerate",
+@@ -1892,12 +1923,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The counterexample refutes a universal all-gate-parameter error lower bound using one polynomial gate of degree 2^22. Its target claim is an inequality, not an equivalence with a forward direction."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The witness error at most 1/128 contradicts the asserted 1/64 bound. No converse characterizes all shallow approximators from that particular witness."
+         }
+       ],
+       "axioms": [],
+@@ -2260,7 +2291,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement; Counterexample fixes k=d=t=α=1."
++          "evidence": "Statement; Counterexample fixes k=d=t=\u03b1=1."
+         },
+         {
+           "case": "degenerate",
+@@ -2280,12 +2311,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The false statement is a uniform lower inequality over every positive gate-parameter triple. The refutation supplies an admissible degree-2^22 one-node polynomial with smaller error, rather than addressing a forward implication of an equivalence."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The refuted universal lower bound has no converse assertion. The construction does not claim that every violation must use the stated Bernstein gate or the small-k parameter choice."
+         }
+       ],
+       "axioms": [],
+@@ -2433,12 +2464,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The fixed-architecture lemma supplies two VC upper estimates and a derived logarithmic estimate, with either strict or nonnegative threshold convention. It gives upper inequalities, not a necessary-and-sufficient shattering criterion."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "No converse infers a network architecture, depth or weight count from satisfaction of these VC upper inequalities; the two threshold conventions are parallel conclusions rather than directions of an iff."
+         }
+       ],
+       "axioms": [],
+@@ -2554,7 +2585,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement; Statement: sphere is nonempty for every m≥0."
++          "evidence": "Statement; Statement: sphere is nonempty for every m\u22650."
+         },
+         {
+           "case": "zero",
+@@ -2564,7 +2595,7 @@
+         {
+           "case": "one",
+           "status": "checked",
+-          "evidence": "Statement; proof argument handle m=1 via RP⁰."
++          "evidence": "Statement; proof argument handle m=1 via RP\u2070."
+         },
+         {
+           "case": "degenerate",
+@@ -2584,12 +2615,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "Borsuk\u2013Ulam asserts existence of an antipodal equal-image pair for every continuous sphere map. The proof rules out an odd map to the lower sphere; it does not state an equivalence requiring a forward-direction worksheet."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "There is no claimed converse deriving continuity or the dimension of the codomain from one coincident antipodal pair. The m=0 direct case is an existence conclusion as well."
+         }
+       ],
+       "axioms": [
+@@ -2684,7 +2715,7 @@
+         {
+           "case": "empty",
+           "status": "checked",
+-          "evidence": "Statement; Statement: d,n,W≥1; cube and sphere used are nonempty."
++          "evidence": "Statement; Statement: d,n,W\u22651; cube and sphere used are nonempty."
+         },
+         {
+           "case": "zero",
+@@ -2714,12 +2745,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The theorem gives a worst-case approximation lower inequality for every continuous selector and arbitrary decoder. The subsequent accuracy-to-weight consequence is a one-sided deduction, not an equivalence between approximation and continuity."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "No converse asserts that enough parameters suffice or that any decoder/selector achieves the lower estimate. The antipodal-pair argument supplies an obstruction only."
+         }
+       ],
+       "axioms": [
+@@ -2863,12 +2894,12 @@
+         {
+           "case": "iff-forward",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "The result bounds strict, binary and ternary polynomial sign-pattern counts by explicit expressions. These are upper inequalities and not an equivalence characterizing polynomial families that attain them."
+         },
+         {
+           "case": "iff-reverse",
+           "status": "not_applicable",
+-          "reason": "The statement asserts no biconditional."
++          "reason": "Restricting the parameter domain can only remove sign vectors. No converse says a bounded pattern count implies a degree bound or a polynomial representation."
+         }
+       ],
+       "axioms": [],
+@@ -2879,4 +2910,4 @@
+       }
+     }
+   }
+-}
++}

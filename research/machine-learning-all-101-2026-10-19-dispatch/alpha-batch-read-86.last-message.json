@@ -1,0 +1,305 @@
+{
+  "group": "ac",
+  "batches": ["86"],
+  "pages_read": [
+    "model-based-planning-dyna-and-model-exploitation",
+    "model-based-planning-dyna-and-model-exploitation-examples"
+  ],
+  "items_read": [
+    "def-learned-mdp-model",
+    "def-finite-stochastic-shortest-path-problem",
+    "def-finite-horizon-mdp-return",
+    "alg-real-time-dynamic-programming",
+    "lem-finite-policy-kernel-tv-propagation",
+    "thm-finite-stochastic-shortest-path-value-exists",
+    "rem-ensemble-disagreement-is-not-calibrated-uncertainty",
+    "alg-dyna-q",
+    "alg-model-predictive-control",
+    "thm-single-policy-finite-horizon-simulation-bound",
+    "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+    "thm-rtdp-recurrently-backed-state-convergence",
+    "cex-rtdp-optimal-relevant-state-convergence-fails",
+    "def-model-exploitation",
+    "ex-model-accurate-on-behavior-support",
+    "ex-short-versus-long-model-rollouts",
+    "ex-model-exploitation-off-support"
+  ],
+  "conventions": [
+    {
+      "convention": "Learned models share nonempty finite state/action domains with the true model; true rewards and estimated reward means lie in [0,1]. Transition error is total variation, equal to half the finite L1 distance. Both uniform errors on an empty pair set are defined as zero.",
+      "fixed_by": "def-learned-mdp-model",
+      "matters_for": [
+        "lem-finite-policy-kernel-tv-propagation",
+        "thm-single-policy-finite-horizon-simulation-bound",
+        "def-model-exploitation",
+        "ex-model-accurate-on-behavior-support",
+        "ex-short-versus-long-model-rollouts",
+        "ex-model-exploitation-off-support"
+      ]
+    },
+    {
+      "convention": "Finite-horizon return uses H≥1, time indices 0 through H−1, a possibly randomized time-dependent Markov policy, no discount, and no terminal continuation value.",
+      "fixed_by": "def-finite-horizon-mdp-return",
+      "matters_for": [
+        "alg-model-predictive-control",
+        "thm-single-policy-finite-horizon-simulation-bound",
+        "def-model-exploitation",
+        "ex-short-versus-long-model-rollouts",
+        "ex-model-exploitation-off-support"
+      ]
+    },
+    {
+      "convention": "SSP goals have exactly one absorbing action with deterministic zero reward. Every nonglobal expected cost is at least a common c_min>0. Proper stationary policies have survival probabilities tending to zero from every initial state; their existence is a separate hypothesis.",
+      "fixed_by": "def-finite-stochastic-shortest-path-problem",
+      "matters_for": [
+        "alg-real-time-dynamic-programming",
+        "thm-finite-stochastic-shortest-path-value-exists",
+        "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+        "thm-rtdp-recurrently-backed-state-convergence",
+        "cex-rtdp-optimal-relevant-state-convergence-fails"
+      ]
+    },
+    {
+      "convention": "RTDP computes action values from the pre-backup table, executes a fresh uniform greedy action, and updates only the current state. Trial resets change no table entry and are not Bellman transitions. Reward values V correspond to costs f through V=−f.",
+      "fixed_by": "alg-real-time-dynamic-programming",
+      "matters_for": [
+        "thm-rtdp-recurrently-backed-state-convergence",
+        "cex-rtdp-optimal-relevant-state-convergence-fails"
+      ]
+    },
+    {
+      "convention": "RTDP recurrent-state convergence requires outcome-backup fairness. Convergence at all optimal-relevant states additionally requires Bellman-subsolution initialization f_0≤Tf_0; non-overestimating initialization alone does not provide it.",
+      "fixed_by": "thm-rtdp-recurrently-backed-state-convergence",
+      "matters_for": [
+        "thm-rtdp-recurrently-backed-state-convergence",
+        "cex-rtdp-optimal-relevant-state-convergence-fails"
+      ]
+    },
+    {
+      "convention": "Dyna-Q is restricted to deterministic rewards and transitions, queries only previously experienced pairs, and samples a seen state uniformly followed by a seen action uniformly. It makes no convergence claim.",
+      "fixed_by": "alg-dyna-q",
+      "matters_for": ["alg-dyna-q"]
+    },
+    {
+      "convention": "MPC receives a complete ordered action listing at every state, uses it for deterministic tie-breaking, and executes only the first action of its horizon-H plan.",
+      "fixed_by": "alg-model-predictive-control",
+      "matters_for": [
+        "def-model-exploitation",
+        "ex-model-exploitation-off-support"
+      ]
+    },
+    {
+      "convention": "Off-support exploitation is relative to an observed-pair set B and a finite nonempty deterministic Markov-policy class. It requires learned-model optimality, positive learned occupancy outside B, strict overprediction, and strict true suboptimality within that class.",
+      "fixed_by": "def-model-exploitation",
+      "matters_for": ["ex-model-exploitation-off-support"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-finite-stochastic-shortest-path-value-exists",
+      "statement": "Assume the Axiom of Choice and a finite positive-cost SSP with at least one proper stationary policy. The infimum of total expected cost over all history-dependent policies is finite at every state, is the unique finite nonnegative solution of the stated goal-zero Bellman equations, and is attained from every initial state by a proper deterministic stationary minimizing policy.",
+      "used_by": [
+        "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+        "thm-rtdp-recurrently-backed-state-convergence"
+      ]
+    },
+    {
+      "id": "def-learned-mdp-model",
+      "statement": "On the true finite MDP's common nonempty finite state/action domain, a learned model supplies reward estimates in [0,1] and a probability transition row at every admissible pair. Reward error is the absolute difference of reward means; transition error is half the L1 difference of transition rows. Uniform errors on a nonempty pair set are their maxima, and on the empty set both are zero.",
+      "used_by": [
+        "def-finite-horizon-mdp-return",
+        "lem-finite-policy-kernel-tv-propagation",
+        "rem-ensemble-disagreement-is-not-calibrated-uncertainty",
+        "alg-dyna-q",
+        "alg-model-predictive-control",
+        "thm-single-policy-finite-horizon-simulation-bound",
+        "def-model-exploitation",
+        "ex-model-accurate-on-behavior-support",
+        "ex-short-versus-long-model-rollouts"
+      ]
+    },
+    {
+      "id": "lem-finite-policy-kernel-tv-propagation",
+      "statement": "For finite nonempty state/action sets, probability transition rows P and P-hat, policy rows π, and state laws d and d-hat, if row TV error is at most ε≥0 whenever d-hat(s)>0 and π(a|s)>0, then TV(dK^π,d-hat K-hat^π)≤TV(d,d-hat)+ε.",
+      "used_by": ["thm-single-policy-finite-horizon-simulation-bound"]
+    },
+    {
+      "id": "thm-single-policy-finite-horizon-simulation-bound",
+      "statement": "For two finite models on common nonempty finite state/action sets with reward means in [0,1], a common initial law, H≥1, and one fixed possibly time-dependent randomized Markov policy, reward and transition-TV errors bounded by ε_r and ε_p on the union of true and learned reachable pairs imply |J_H−J-hat_H|≤Hε_r+binom(H,2)ε_p. This does not bound a policy selected by optimizing the learned model.",
+      "used_by": [
+        "ex-model-accurate-on-behavior-support",
+        "ex-short-versus-long-model-rollouts"
+      ]
+    },
+    {
+      "id": "def-finite-stochastic-shortest-path-problem",
+      "statement": "A finite SSP has a nonempty finite state set, finite nonempty action sets, a nonempty goal set with singleton absorbing zero-reward actions, and a common strictly positive lower bound on nonglobal expected costs. A stationary policy is proper precisely when its recursively defined finite-step survival probabilities tend to zero from every state. A proper policy need not exist.",
+      "used_by": [
+        "alg-real-time-dynamic-programming",
+        "thm-finite-stochastic-shortest-path-value-exists",
+        "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+        "thm-rtdp-recurrently-backed-state-convergence",
+        "cex-rtdp-optimal-relevant-state-convergence-fails"
+      ]
+    },
+    {
+      "id": "def-finite-horizon-mdp-return",
+      "statement": "For H≥1, finite probability transition rows, reward means in [0,1], initial law μ, and time-dependent Markov policy rows π_t, propagate the state laws from d_0=μ and sum d_t(s)π_t(a|s)r(s,a) over t=0,…,H−1 and all admissible pairs. The learned-model return replaces r and P by their estimates.",
+      "used_by": [
+        "alg-model-predictive-control",
+        "thm-single-policy-finite-horizon-simulation-bound",
+        "def-model-exploitation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice hypothesis in SSP existence, asynchronous iteration, and RTDP convergence; inherited path-law and conditional-expectation assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-row and measurable-section requirements for finite transition tables and policy mixtures.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum normalization of total variation.",
+      "opened": true
+    },
+    {
+      "id": "lem-total-variation-half-l1-formula-on-a-countable-space",
+      "used_for": "Finite half-L1 formula and equal positive/negative mass of a difference of probability laws.",
+      "opened": true
+    },
+    {
+      "id": "lem-total-variation-coupling-and-kernel-contraction",
+      "used_for": "Applying one probability kernel to two laws cannot increase their total variation.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Attainment of finite action extrema, finite error maxima, and finite policy-class return maxima.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-abs-value",
+      "used_for": "Nonnegativity, sign symmetry, and multiplicativity of absolute value.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-triangle-inequality",
+      "used_for": "Two-term scalar triangle inequalities in model-error and return estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-triangle-inequality-finite",
+      "used_for": "Finite-sum triangle inequalities in policy mixtures and accumulated return error.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Expansion, scaling, and monotonicity of finite sums in the TV propagation proof.",
+      "opened": true
+    },
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite sums and bijective reindexing in TV propagation.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "Existence of history-dependent policy trajectory laws under the stated AC hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence",
+      "used_for": "Limits of bounded monotone real sequences, rather than interchange of limits and integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-tower-property-of-conditional-expectation",
+      "used_for": "Iterating bounded finite-prefix conditional expectations and conditional avoidance estimates in RTDP.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-finite-policy-kernel-tv-propagation",
+      "concern": "Proof 2.1 says 'The scalar triangle inequality [F5]'. F5 cites lem-of-abs-value and states nonnegativity and multiplicativity, not the triangle inequality. The argument is valid using the already supplied finite-sum triangle inequality F6 with two terms, but the specific F5 attribution is inaccurate.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice, Definition, interrupts its formulation with '([[def-choice-function]])' immediately after 'Every family of nonempty sets has a choice function'. The hyperlink remains inside the complete Definition rather than an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "def-measure-kernel-and-probability-kernel, Definition, says 'Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]'. These hyperlinks occur within the Definition, before its remaining kernel conventions and boundary cases; no following Definition references section separates them.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-variation-distance-for-probability-laws",
+      "finding": "def-total-variation-distance-for-probability-laws, Definition, includes '([[def-probability-measure]])' in its opening hypothesis and '[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here' later in the same section. These hyperlinks remain inside the complete Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-total-variation-half-l1-formula-on-a-countable-space",
+      "finding": "lem-total-variation-half-l1-formula-on-a-countable-space, Statement, includes '([[def-total-variation-distance-for-probability-laws]])' after introducing probability laws and before stating the equality and remaining conclusions. This interrupts the Statement with a hyperlink; there is no immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-set-has-max",
+      "finding": "lem-finite-set-has-max, Statement, ends its opening assertion with '([[def-max-min]])' and later links '[[lem-finite-subsets-listable]]' inside the same Statement section. The complete Statement is therefore not hyperlink-free and lacks the required following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-abs-value",
+      "finding": "lem-of-abs-value, Statement, opens 'Let $F$ be an ordered field ([[def-ordered-field]])' and introduces absolute value with '([[def-abs-value]])' before the conclusions. Both hyperlinks interrupt the Statement rather than appearing in a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-triangle-inequality",
+      "finding": "lem-of-triangle-inequality, Statement, opens 'Let $F$ be an ordered field ([[def-ordered-field]])'. This hyperlink occurs before the displayed conclusion inside the Statement; it has not been moved to a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-triangle-inequality-finite",
+      "finding": "lem-triangle-inequality-finite, Statement, specifies 'finite sums as in [[def-finite-sum]] and the absolute value as in [[def-abs-value]]' before its conclusion. These hyperlinks interrupt the Statement and lack a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "lem-finite-sum-laws, Statement, includes 'finite products as in [[def-finite-sum]]' before its six conclusions and '([[lem-of-q-embeds]], [[lem-of-naturals-positive]])' within conclusion 2. These links remain inside the complete Statement instead of a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-sum-over-a-finite-index-set",
+      "finding": "def-sum-over-a-finite-index-set, Definition, opens with the cardinality link '([[def-finite-cardinality]])' and contains further inline supplier links, including '[[lem-finite-sum-permutation-invariance]]', throughout its definition and enumeration-independence clauses. The complete Definition is interrupted by hyperlinks and lacks a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-monotone-convergence",
+      "finding": "thm-monotone-convergence, Statement, introduces its sequence with '([[def-sequence]])' and places links to def-monotone-sequence, def-bounded-set, and def-real-limit inside conclusion 1, before conclusion 2 and the remaining qualifications. These links interrupt the complete Statement rather than following it in Statement references.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "model-based-planning-dyna-and-model-exploitation",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "Read the prerequisite page and def-finite-markov-decision-process. The learned-model branch explicitly restricts rewards to [0,1] and states to nonempty sets; the SSP branch separately uses negative expected rewards and absorbing singleton goal actions. Both correctly derive P and r from the joint reward-transition law. No discounted Bellman theorem is used as an undiscounted SSP supplier."
+    },
+    {
+      "from": "model-based-planning-dyna-and-model-exploitation",
+      "to": "tabular-prediction-and-control",
+      "faithful": true,
+      "note": "Read the prerequisite page, alg-q-learning, and def-optimal-action-value-bellman-operator. Dyna-Q uses the same single-coordinate reward-plus-discounted-greedy-continuation update, specializes the environment to deterministic responses, and makes no claim to inherit stochastic-approximation convergence. The cited procedure and its actual use agree."
+    }
+  ]
+}

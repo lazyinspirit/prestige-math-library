@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { sourceIdenticalAcceptanceContinuity } from '../../../../tools/step3-owner-source-identical-continuity.mjs';
+const run='machine-learning-all-101-2026-10-19';
+const base=`research/${run}-owner-step3-acceptance-continuity-b80-83/your-proposal/`;
+const out=base+'b83-final-mirror-confirmation/report.json';
+if(fs.existsSync(out))throw Error('create-only report already exists');
+const read=p=>JSON.parse(fs.readFileSync(p));
+const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+const hash=x=>sha(JSON.stringify(canonical(x))??'undefined');
+const refs=p=>({path:p,sha256:sha(fs.readFileSync(p))});
+const registryPath=`research/${run}-step3-owner-repair-evidence.json`,registry=read(registryPath);
+const inputs=read(base+'after-root-manifest-mirrors/policy-inputs.json');
+const rows=[];
+for(const old of inputs){
+ const matches=registry.source_identical_acceptance_continuities.filter(e=>e.id===old.id&&e.obligation===old.entry.obligation);
+ if(matches.length!==1)throw Error('nonunique registered entry');
+ const entry=matches[0],batch=old.batch;
+ const manifestPath=`research/${run}-batch-${batch}.pages.json`,contractPath=`research/${run}-batch-${batch}.proof-contracts.json`;
+ const doc=read(manifestPath),pages=Array.isArray(doc)?doc:doc.pages;
+ const manifestRows=pages.flatMap(p=>(p.items??[]).filter(x=>x.id===old.id).map(x=>({...x,__step4_page_id:p.id})));
+ if(manifestRows.length!==1)throw Error('nonunique manifest subject');
+ const contract=read(contractPath).contracts[old.id],sourcePath=`items/${old.id}.md`;
+ const current={item_sha256:sha(fs.readFileSync(sourcePath)),contract_sha256:hash(contract??null),manifest_sha256:hash(manifestRows[0])};
+ const decisionsPath=`research/${run}-alpha-batch-${batch}-3a-decisions.json`;
+ const decision=read(decisionsPath).decisions.find(d=>d.obligation===old.decision.obligation&&d.id===old.id);
+ const eligible=sourceIdenticalAcceptanceContinuity(process.cwd(),run,decision,old.target,old.before,current,entry);
+ rows.push({id:old.id,batch,entry_unchanged:hash(entry)===hash(old.entry),source_unchanged:current.item_sha256===old.current.item_sha256,manifest_row_unchanged:current.manifest_sha256===old.current.manifest_sha256,contract_unchanged:current.contract_sha256===old.current.contract_sha256,current_carrier_matches_registered:hash(current)===entry.current_carrier_sha256,native_decision_unchanged:hash(decision)===hash(old.decision),focused_policy_eligible:eligible,source:refs(sourcePath),current});
+}
+const receipt=`research/${run}-owner-step3-battery-2-root-repairs/b83-final-three-mirrors/application.json`;
+const report={version:1,run,proposal_only:true,receipt:refs(receipt),registry:refs(registryPath),current_batch83_manifest:refs(`research/${run}-batch-83.pages.json`),review:'Actual helper and carrier implementation bind each item manifest row plus __step4_page_id, not the entire raw batch manifest. The 3 additional mirrored primary sections belong to other IDs than these 11 registered continuity subjects. Full current 3 source carriers read; no source/proof alteration or new mathematical review credit.',results:rows,needed_successors:[],proposed_cas:[],live_mutations:false,native_gates_or_stamps:false};
+fs.writeFileSync(out,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({checked:rows.length,valid:rows.filter(r=>r.focused_policy_eligible).length,all_fields_unchanged:rows.every(r=>r.entry_unchanged&&r.source_unchanged&&r.manifest_row_unchanged&&r.contract_unchanged&&r.native_decision_unchanged&&r.current_carrier_matches_registered),needed_successors:0},null,2));
+if(rows.some(r=>!r.focused_policy_eligible))process.exitCode=1;

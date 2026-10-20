@@ -19,6 +19,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/alg-fisher-scoring-irls.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -39,6 +40,17 @@ Inputs are an observed response vector $y$ with $f_i(y_i;\theta_i,\phi)>0$ for e
 1. Compute $\eta_i=x_i^\mathsf T\beta$ and $\mu_i=g^{-1}(\eta_i)$.
 2. Compute the **working response** and positive weight
 $$z_i=\eta_i+\frac{y_i-\mu_i}{\dot\mu_i},\qquad w_i=\frac{\dot\mu_i^2}{a(\phi)V_i}.$$
-3. Form $W^{1/2}=\operatorname{diag}(\sqrt{w_i})$ using [[thm-of-square-roots]], and put $A=W^{1/2}X$, $r=W^{1/2}z$. By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form $A^+$. Return $\beta_{\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]].
+3. Form $W^{1/2}=\operatorname{diag}(\sqrt{w_i})$ using Square roots exist: a unique $\sqrt{a} \ge 0$ with $(\sqrt{a})^2 = a$; the positives are $\{x^2 : x \neq 0\}$, and put $A=W^{1/2}X$, $r=W^{1/2}z$. By The Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations and Every finite real or complex matrix has a unique Moore--Penrose pseudoinverse, form $A^+$. Return $\beta_{\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by For every right-hand side $b$, $A^+b$ is the unique least-squares solution of minimum Euclidean norm.
 
-The Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]] and [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]. The output need not lie in $\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.
+The Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from Every finite real or complex matrix has a unique Moore--Penrose pseudoinverse and For every right-hand side $b$, $A^+b$ is the unique least-squares solution of minimum Euclidean norm. The output need not lie in $\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.
+
+## Definition references
+
+[[thm-of-square-roots]]
+
+[[def-moore-penrose-pseudoinverse]]
+
+[[thm-moore-penrose-pseudoinverse-exists-and-is-unique]]
+
+[[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]
+

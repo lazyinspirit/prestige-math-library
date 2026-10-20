@@ -1,0 +1,138 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-65-1",
+  "inventory": {
+    "pages": [
+      "neural-odes-and-continuous-normalizing-flows",
+      "neural-odes-and-continuous-normalizing-flows-examples"
+    ],
+    "items": [
+      "def-neural-ode",
+      "thm-neural-ode-global-smooth-flow",
+      "thm-instantaneous-change-of-variables-for-ode-flow",
+      "alg-adjoint-sensitivity-method",
+      "ex-numerical-adjoint-error"
+    ],
+    "pairs": [
+      "neural-odes-and-continuous-normalizing-flows"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-neural-ode.md",
+    "items/thm-neural-ode-global-smooth-flow.md",
+    "items/thm-instantaneous-change-of-variables-for-ode-flow.md",
+    "items/alg-adjoint-sensitivity-method.md",
+    "items/ex-numerical-adjoint-error.md",
+    "library/machine-learning/neural-odes-and-continuous-normalizing-flows.md",
+    "library/machine-learning/neural-odes-and-continuous-normalizing-flows-examples.md"
+  ],
+  "write_batches": [
+    "65",
+    "69"
+  ],
+  "consumer_scope": [
+    {
+      "id": "alg-adjoint-sensitivity-method",
+      "path": [
+        "def-neural-ode",
+        "alg-adjoint-sensitivity-method"
+      ],
+      "paths": [
+        [
+          "def-neural-ode",
+          "alg-adjoint-sensitivity-method"
+        ],
+        [
+          "thm-neural-ode-global-smooth-flow",
+          "alg-adjoint-sensitivity-method"
+        ]
+      ]
+    },
+    {
+      "id": "alg-flow-matching-training-and-sampling",
+      "path": [
+        "def-neural-ode",
+        "alg-flow-matching-training-and-sampling"
+      ],
+      "paths": [
+        [
+          "def-neural-ode",
+          "alg-flow-matching-training-and-sampling"
+        ],
+        [
+          "thm-neural-ode-global-smooth-flow",
+          "alg-flow-matching-training-and-sampling"
+        ]
+      ]
+    },
+    {
+      "id": "ex-numerical-adjoint-error",
+      "path": [
+        "def-neural-ode",
+        "ex-numerical-adjoint-error"
+      ],
+      "paths": [
+        [
+          "def-neural-ode",
+          "ex-numerical-adjoint-error"
+        ],
+        [
+          "thm-neural-ode-global-smooth-flow",
+          "ex-numerical-adjoint-error"
+        ],
+        [
+          "alg-adjoint-sensitivity-method",
+          "ex-numerical-adjoint-error"
+        ]
+      ]
+    },
+    {
+      "id": "thm-instantaneous-change-of-variables-for-ode-flow",
+      "path": [
+        "def-neural-ode",
+        "thm-instantaneous-change-of-variables-for-ode-flow"
+      ],
+      "paths": [
+        [
+          "def-neural-ode",
+          "thm-instantaneous-change-of-variables-for-ode-flow"
+        ],
+        [
+          "thm-neural-ode-global-smooth-flow",
+          "thm-instantaneous-change-of-variables-for-ode-flow"
+        ]
+      ]
+    },
+    {
+      "id": "thm-neural-ode-global-smooth-flow",
+      "path": [
+        "def-neural-ode",
+        "thm-neural-ode-global-smooth-flow"
+      ],
+      "paths": [
+        [
+          "def-neural-ode",
+          "thm-neural-ode-global-smooth-flow"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-neural-ode": [
+      "## Definition\n\nLet $d,q\\ge1$, let $I\\subseteq\\mathbb R$ and $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$. For a parameter $\\theta\\in\\Theta$, write $v_\\theta(t,z):=v(t,z,\\theta)$. A **parameterized neural ordinary differential equation**, or **neural ODE**, on $I$ is the initial-value problem\n\n$$\\dot z(t)=v_\\theta(t,z(t)),\\qquad z(s)=z_s,$$\n\nwhere $s\\in I$ and $z_s\\in\\mathbb R^d$. A trajectory on an interval $J\\subseteq I$ containing $s$ is a differentiable function $z:J\\to\\mathbb R^d$ satisfying both displayed conditions. Here $v_\\theta$ is the state-velocity field. The term names this parameterized vector-field model and imposes no particular neural-network architecture. This definition alone asserts neither solution existence beyond its stated interval nor numerical accuracy."
+    ],
+    "thm-neural-ode-global-smooth-flow": [
+      "## Statement\n\nLet $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, let $I\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$. For every compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that, for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nThen for each $\\theta\\in\\Theta$, $s,t\\in[0,T]$, and $z_s\\in\\mathbb R^d$, the neural ODE has a unique solution on all of $[0,T]$. Write $\\Phi^\\theta_{t,s}(z_s)$ for its value at time $t$. For each fixed $s,t$, the map $(z_s,\\theta)\\mapsto\\Phi^\\theta_{t,s}(z_s)$ is locally $C^\\infty$. For each fixed $\\theta$, $\\Phi^\\theta_{t,s}:\\mathbb R^d\\to\\mathbb R^d$ is a $C^\\infty$ diffeomorphism with inverse $\\Phi^\\theta_{s,t}$. Its state Jacobian $J_{t,s}:=D_{z_s}\\Phi^\\theta_{t,s}(z_s)$ satisfies\n\n$$\\frac{d}{dt}J_{t,s}=D_zv(t,\\Phi^\\theta_{t,s}(z_s),\\theta)J_{t,s},\\qquad J_{s,s}=I_d.$$\n\nTime derivatives at $0$ and $T$ are one-sided."
+    ],
+    "thm-instantaneous-change-of-variables-for-ode-flow": [
+      "## Statement\n\nAssume Countable Choice. Let $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, let $I\\subseteq\\mathbb R$ be an open interval containing $[0,T]$, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$. For every compact $K\\subseteq\\Theta$, assume there are constants $L_K,M_K\\ge0$ such that, for all $t\\in[0,T]$, $\\eta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\eta)-v(t,w,\\eta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\eta)\\|_2\\le M_K.$$\n\nFix $\\theta\\in\\Theta$ and let $\\Phi_t:=\\Phi^\\theta_{t,0}:\\mathbb R^d\\to\\mathbb R^d$ be its flow. Let $p_0:\\mathbb R^d\\to(0,\\infty)$ be a continuous probability density with respect to Lebesgue measure, define $\\mu_0(E):=\\int_Ep_0(z)\\,dz$ for Borel $E$, and define the pushforward measure $\\mu_t(E):=\\mu_0(\\Phi_t^{-1}(E))$. For $y\\in\\mathbb R^d$, set\n\n$$p_t(y):=\\frac{p_0(\\Phi_t^{-1}(y))}{|\\det D\\Phi_t(\\Phi_t^{-1}(y))|}.$$\n\nThen $p_t$ is a density of $\\mu_t$. For every $z_0\\in\\mathbb R^d$, write $z_t:=\\Phi_t(z_0)$ and $J_t:=D\\Phi_t(z_0)$; the determinant of $J_t$ is positive and\n\n$$p_t(\\Phi_t(z_0))=\\frac{p_0(z_0)}{\\det J_t}>0,\\qquad \\frac{d}{dt}\\log p_t(z_t)=-\\operatorname{tr}(D_zv(t,z_t,\\theta))=-\\sum_{i=1}^d\\partial_{z_i}v_i(t,z_t,\\theta),$$\n\nThe derivative identity holds for $0<t<T$ and has one-sided meanings at $0$ and $T$."
+    ],
+    "alg-adjoint-sensitivity-method": [
+      "## Definition\n\nLet $T>0$, let $d,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^q$ be open, and let $v:I\\times\\mathbb R^d\\times\\Theta\\to\\mathbb R^d$ be jointly $C^\\infty$ on an open time interval $I$ containing $[0,T]$. For each compact $K\\subseteq\\Theta$, suppose there are constants $L_K,M_K\\ge0$ such that for all $t\\in[0,T]$, $\\theta\\in K$, and $z,w\\in\\mathbb R^d$,\n\n$$\\|v(t,z,\\theta)-v(t,w,\\theta)\\|_2\\le L_K\\|z-w\\|_2,\\qquad \\|v(t,0,\\theta)\\|_2\\le M_K.$$\n\nLet $\\Omega\\subseteq\\Theta$ be open with compact closure contained in $\\Theta$, let $U_0\\subseteq\\Theta$ be an open neighborhood of $\\overline\\Omega$, and let $u_0:U_0\\to\\mathbb R^d$ be $C^1$. Write $u_\\theta$ for the exact solution of $\\dot u_\\theta(t)=v(t,u_\\theta(t),\\theta)$, $u_\\theta(0)=u_0(\\theta)$, and let $\\mathcal T:=\\{(t,u_\\theta(t),\\theta):t\\in[0,T],\\theta\\in\\overline\\Omega\\}$ be its common compact trajectory tube. Let\n\n$$\\mathcal J(\\theta)=\\phi(u_\\theta(T),\\theta)+\\int_0^T\\ell(t,u_\\theta(t),\\theta)\\,dt,$$\n\nwhere the real-valued functions $\\phi$ and $\\ell$ are $C^1$ on an open neighborhood of the common trajectory tube $\\{(t,u_\\theta(t),\\theta):t\\in[0,T],\\theta\\in\\overline\\Omega\\}$, and their first derivatives are bounded and uniformly continuous on that tube. For each $\\theta\\in\\Omega$, the exact continuous adjoint sensitivity procedure is:\n\n1. Solve the state initial-value problem forward on $[0,T]$.\n2. Solve the terminal adjoint problem backward,\n   $$-p'(t)=D_u v(t,u_\\theta(t),\\theta)^T p(t)+D_u\\ell(t,u_\\theta(t),\\theta)^T,\\qquad p(T)=D_u\\phi(u_\\theta(T),\\theta)^T.$$\n3. Return the vector\n   $$G(\\theta)=D_\\theta\\phi(u_\\theta(T),\\theta)^T+D_\\theta u_0(\\theta)^Tp(0)+\\int_0^T\\left(D_\\theta\\ell(t,u_\\theta(t),\\theta)^T+D_\\theta v(t,u_\\theta(t),\\theta)^Tp(t)\\right)dt.$$\n\nHere $D_u$ and $D_\\theta$ denote Jacobian matrices in the displayed variables, $p(t)\\in\\mathbb R^d$, and $G(\\theta)\\in\\mathbb R^q$. All state and adjoint equations and the integral are exact continuous mathematical objects. Replacing them by numerical solver outputs defines a finite computation and is outside this algorithm's accuracy guarantees."
+    ],
+    "ex-numerical-adjoint-error": []
+  }
+}

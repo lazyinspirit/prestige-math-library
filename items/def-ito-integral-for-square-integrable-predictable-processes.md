@@ -13,15 +13,16 @@ sources:
     - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Definition 5.25"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-ito-integral-for-square-integrable-predictable-processes.json
   audited: 2026-09-22
 ---
 
 ## Definition
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Fix a horizon $T>0$ and let
+Elementary predictable Brownian integrands. Fix a horizon $T>0$ and let
 $\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\times\Omega$
-[[def-progressively-measurable-and-predictable-process]]. Let $H$ be a
+Progressively measurable and predictable processes. Let $H$ be a
 predictable process with
 $$E\int_0^TH_s^2\,ds=\int_{[0,T]\times\Omega}H^2\,d(\mathrm dt\otimes P)<\infty ,$$
 so that $H$ is an element of the quotient space
@@ -30,18 +31,18 @@ The **Ito integral** $\int_0^TH_s\,dB_s$, also written $H\cdot B$ or $I_T(H)$,
 is defined as follows.
 
 1. **Construction.** By the density theorem
-   [[thm-density-of-elementary-predictable-processes-in-predictable-l2]] there
+   Density of elementary predictable processes in predictable L2 there
    is a sequence $(H^n)$ of bounded elementary predictable integrands
-   [[def-elementary-predictable-brownian-integrand]] with
+   Elementary predictable Brownian integrands with
    $\|H^n-H\|_{L^2(\mathrm dt\otimes P)}\to0$. For such a sequence the
    elementary integrals $I_T(H^n)$
-   [[def-ito-integral-of-an-elementary-predictable-process]] form a Cauchy
+   Ito integral of an elementary predictable process form a Cauchy
    sequence in $L^2(P)$: by the elementary isometry
-   [[thm-ito-isometry-for-elementary-integrands]] and the well-definedness of
+   Ito isometry for elementary integrands and the well-definedness of
    the elementary integral,
    $$E\bigl(I_T(H^n)-I_T(H^m)\bigr)^2=E\int_0^T(H^n-H^m)^2ds=\|H^n-H^m\|^2_{L^2(\mathrm dt\otimes P)} ,$$
    and the right-hand side tends to $0$. Since $L^2(P)$ is complete
-   [[thm-riesz-fischer-completeness-of-l-p]], the classes $I_T(H^n)$ converge
+   Riesz-Fischer completeness of $L^p$ for $1 \le p \le \infty$, the classes $I_T(H^n)$ converge
    in $L^2(P)$; the limit is a class in $L^2(P)$, and
    $$\int_0^TH_s\,dB_s:=\lim_{n\to\infty}I_T(H^n)\qquad\text{in }L^2(P).$$
    The limit is a random variable only up to almost-sure equality; statements
@@ -67,7 +68,7 @@ is defined as follows.
    then the constant sequence $H^n:=H$ is admissible in clause 1, so
    $\int_0^TH\,dB$ is the limit of the constant sequence of elementary sums,
    namely the elementary sum $I_T(H)$ of
-   [[def-ito-integral-of-an-elementary-predictable-process]]. The same argument
+   Ito integral of an elementary predictable process. The same argument
    with $H1_{[0,t]}$ in place of $H$, and the finite telescoping of the
    elementary sum over a refinement containing $t$, gives
    $\int_0^tH\,dB=I_t(H)$ for every $t\in[0,T]$. In particular the general
@@ -77,7 +78,7 @@ is defined as follows.
    integral separately from an arbitrary approximating sequence; the linear and
    isometric properties of the extension are item 12. Until item 12 is proved,
    linearity may be used only for elementary integrands, where it is part of
-   [[def-ito-integral-of-an-elementary-predictable-process]].
+   Ito integral of an elementary predictable process.
 
 5. **Comparison with deterministic Riemann integration.** The integral is a
    stochastic integral: the integrand is paired with the Brownian path through
@@ -94,3 +95,18 @@ approximating sequence and uses the completeness and conditional-expectation
 interfaces that assume it; the inherited obligations are declared as
 dependencies of this item. An alternative construction that avoids selecting the sequence is
 not needed, because clause 1 shows every sequence gives the same class.
+
+## Definition references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-progressively-measurable-and-predictable-process]]
+
+[[thm-density-of-elementary-predictable-processes-in-predictable-l2]]
+
+[[def-ito-integral-of-an-elementary-predictable-process]]
+
+[[thm-ito-isometry-for-elementary-integrands]]
+
+[[thm-riesz-fischer-completeness-of-l-p]]
+

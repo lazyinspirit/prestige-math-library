@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "kind": "delegated-escalation-investigation",
+  "run": "machine-learning-all-101-2026-10-19",
+  "agent": "/root/anm_identifiability_repair",
+  "recorded_at": "2026-10-18T20:53:10.875680+00:00",
+  "review_repair_cycle": 2,
+  "maximum_cycles": 2,
+  "status": "complete-delegated-local-repair-root-planning-merge-and-recertification-remain",
+  "native_evidence_unchanged": true,
+  "native_coverage_adopted": false,
+  "source_edits": [
+    {
+      "file": "items/lem-positive-minimal-dags-have-a-conditioned-reversal.md",
+      "before_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/before/items/lem-positive-minimal-dags-have-a-conditioned-reversal.md",
+      "before_raw_sha256": "120b758c15b6e7413be9838a6a1f3e13dfa120966858a7bc50fee74c4a53d7d4",
+      "current_raw_sha256": "034fe595f573a39f35274dbbacd5e60276fff4632fc945ae927ec0712ee24c35",
+      "old": "Let two distinct finite causally sufficient additive-noise models on the same\nvertex set have the same observational law, a strictly positive joint density,\nand causal minimality in each model.",
+      "new": "Let two finite causally sufficient additive-noise models on distinct DAGs\nwith the same vertex set have the same observational law, a strictly positive\njoint density, and causal minimality in each model.",
+      "reason": "Explicit distinct-DAG premise already required by proof and source Proposition29; preserve intended theorem."
+    }
+  ],
+  "writer_observation": {
+    "state_file": ".autopilot/machine-learning-all-101-2026-10-19/state.json",
+    "dispatch": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-27",
+      "covers": [
+        "27"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-18T18:28:32.671Z",
+      "endedAt": null,
+      "lastExitOk": null
+    }
+  },
+  "escalations": [
+    {
+      "id": "def-additive-noise-model",
+      "file": "research/machine-learning-all-101-2026-10-19-step1-def-additive-noise-model.json",
+      "classification": "same planning-scope ambiguity; current source already uses source-standard parent-coordinate essentiality"
+    },
+    {
+      "id": "def-restricted-additive-noise-model",
+      "file": "research/machine-learning-all-101-2026-10-19-step1-def-restricted-additive-noise-model.json",
+      "classification": "same planning-scope ambiguity; current source already uses source-standard parent-coordinate essentiality"
+    },
+    {
+      "id": "lem-anm-parent-dependence-persists-under-conditioning",
+      "file": "research/machine-learning-all-101-2026-10-19-step1-lem-anm-parent-dependence-persists-under-conditioning.json",
+      "classification": "same planning-scope ambiguity; current source already uses source-standard parent-coordinate essentiality"
+    },
+    {
+      "id": "lem-positive-minimal-dags-have-a-conditioned-reversal",
+      "file": "research/machine-learning-all-101-2026-10-19-step1-lem-positive-minimal-dags-have-a-conditioned-reversal.json",
+      "classification": "same planning-scope ambiguity; current source already uses source-standard parent-coordinate essentiality"
+    },
+    {
+      "id": "thm-restricted-anm-population-identification",
+      "file": "research/machine-learning-all-101-2026-10-19-step1-thm-restricted-anm-population-identification.json",
+      "classification": "same planning-scope ambiguity; current source already uses source-standard parent-coordinate essentiality"
+    }
+  ],
+  "confirmed_defect": {
+    "locus": "research/plan-machine-learning-track.md ML-26 and canonical plan-spec page description",
+    "old": "causal minimality (each $f_j$ nonconstant)",
+    "replacement": "causal minimality (each parent coordinate of every nonroot structural function is essential; roots have no parent-coordinate condition)",
+    "explanation": "Aggregate nonconstancy does not exclude redundant edges; the source and authored definition quantify over each parent coordinate. Current source interface needs no change."
+  },
+  "source_reading": {
+    "url": "https://jmlr.org/papers/volume15/peters14a/peters14a.pdf",
+    "fetch_attempts": 1,
+    "full_pdf": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/sources/peters14a.pdf",
+    "sha256": "333f16ef62b40d5b848a55f1939be4381a33ebea29f912e545b8ba5bfa55c4b7",
+    "extracted_text": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/sources/peters14a.txt",
+    "actually_read": [
+      "Definition 16 and Proposition 17, printed p.2021",
+      "Definition 27, Theorem 28 and Proposition 29, printed p.2025",
+      "complete Appendix A.4",
+      "complete Appendix A.10",
+      "complete Appendix A.11",
+      "complete Appendix A.12",
+      "complete Appendix A.15"
+    ],
+    "exact_quote": "For these models causal minimality reduces to the condition that each function fj is not constant in any of its arguments:",
+    "formal_quantifier": "for all j and i \u2208 PAj there are some x_PA_j_without_i and some xi != xi_prime such that fj(x_other,xi) != fj(x_other,xi_prime)",
+    "proof_justification": "Parent-noise independence gives conditional translated densities; equality of two translates implies equal shifts since a probability law has no nonzero period. Positivity upgrades conditional almost-everywhere to Lebesgue almost-everywhere, and continuity extends constancy to all parent inputs. Positive-density intersection then preserves dependence for every intermediate nondescendant conditioning set. This is the local authored proof, avoiding the source A.4 unnecessary finite-mean simplification."
+  },
+  "counterexample": {
+    "construction": "Independent standard normals H,N_X,N_Z,N_Y; X=H+N_X, Z=H+N_Z, Y=X+N_Y. DAG1 has H\u2192X,H\u2192Z,X\u2192Y; DAG2 adds Z\u2192Y with f_Y(x,z)=x. Both give the same positive observational density; all nonroot functions are aggregate-nonconstant, but Z is an inessential parent.",
+    "consequence": "Refutes aggregate nonconstancy as a definition sufficient for parent-dependence and conditioned-reversal.",
+    "limit": "The second model is not restricted: for edge Z\u2192Y the structural slice is constant, so f_prime=0 and no Condition19 witness exists. This example must not be described as a counterexample to the full restricted-ANM theorem."
+  },
+  "additional_focused_finding": {
+    "id": "lem-positive-minimal-dags-have-a-conditioned-reversal",
+    "locus": "Statement first paragraph",
+    "classification": "literal hypothesis missing distinct-DAG condition",
+    "current_excerpt": "Let two distinct finite causally sufficient additive-noise models on the same\nvertex set have the same observational law, a strictly positive joint density,\nand causal minimality in each model.",
+    "proposed_replacement": "Let two finite causally sufficient additive-noise models on distinct DAGs\nwith the same vertex set have the same observational law, a strictly positive\njoint density, and causal minimality in each model.",
+    "counterexample": "One root with X=N versus X=1+(N-1), with a positive normal density. The models differ but have identical one-vertex DAGs and law, with minimality vacuous; no reversed edge exists.",
+    "source": "Proposition29 explicitly assumes two different DAGs; proof Given and step1.1 already require that.",
+    "interface_impact": "Makes explicit intended existing premise; direct consumer theorem step1.1 already assumes G differs from G_prime, so no consumer proof edit needed.",
+    "edit_status": "repaired-after-authenticated-writer-drain",
+    "consumer_review": "Read complete theorem Statement/Facts/Proof; direct consumer step1.1 explicitly supposes a second model with a different DAG G_prime, satisfying corrected premise. Its theorem Statement remains unchanged, so propagation stops. Literal source and transitive dependency census found no further consumer of this graph lemma outside the theorem."
+  },
+  "source_bindings": {
+    "alg-resit": {
+      "file": "items/alg-resit.md",
+      "raw_sha256": "9ce0333f5c54f2f47d1216bb617923dd1c8368c0d3ac026c259c2f1f52ac506c"
+    },
+    "def-additive-noise-model": {
+      "file": "items/def-additive-noise-model.md",
+      "raw_sha256": "256d6d58d686994212c796e8d4cee01bc99ee96a0e45b2ef1a300a32fc1d7374"
+    },
+    "def-restricted-additive-noise-model": {
+      "file": "items/def-restricted-additive-noise-model.md",
+      "raw_sha256": "49f82703c26d42fa61eecba078803bf0c99798ecaab0aa4f584b18b06a849a23"
+    },
+    "ex-identifiable-nonlinear-additive-noise-model": {
+      "file": "items/ex-identifiable-nonlinear-additive-noise-model.md",
+      "raw_sha256": "b47552335804aaf74d87ba2418aeddd47af17012d3563025b905ec8db4fc6056"
+    },
+    "ex-latent-confounding-mimics-anm-direction": {
+      "file": "items/ex-latent-confounding-mimics-anm-direction.md",
+      "raw_sha256": "728244285071ebc652319dfe332a9868487ed54ed4c2a3d6c2310302247aaa94"
+    },
+    "ex-linear-gaussian-reversible-additive-noise-model": {
+      "file": "items/ex-linear-gaussian-reversible-additive-noise-model.md",
+      "raw_sha256": "a938fad8473a199705aa804e676c4a73f2524e4bb81f56355c7b9c728bc20593"
+    },
+    "lem-anm-density-factorization-implies-dsep-conditional-independence": {
+      "file": "items/lem-anm-density-factorization-implies-dsep-conditional-independence.md",
+      "raw_sha256": "74cd51d87854e44cd3e9d622e8beff1e0738f1c5f506e8fd2096983be96a939d"
+    },
+    "lem-anm-joint-density": {
+      "file": "items/lem-anm-joint-density.md",
+      "raw_sha256": "5b9f4045dbd5367eb72cafb61ae165b67e6a6925c91e399193ec90707d81813a"
+    },
+    "lem-anm-noise-independent-of-nondescendants": {
+      "file": "items/lem-anm-noise-independent-of-nondescendants.md",
+      "raw_sha256": "13342cdd4621ed27473f9dfcc6a1439727e5828f526d75ba5ae888e1b4adca82"
+    },
+    "lem-anm-parent-dependence-persists-under-conditioning": {
+      "file": "items/lem-anm-parent-dependence-persists-under-conditioning.md",
+      "raw_sha256": "9c8e9cb99add2faef3d4fcfc1f44ee8be6570846346039217360f25d49b8cfb7"
+    },
+    "lem-positive-minimal-dags-have-a-conditioned-reversal": {
+      "file": "items/lem-positive-minimal-dags-have-a-conditioned-reversal.md",
+      "raw_sha256": "120b758c15b6e7413be9838a6a1f3e13dfa120966858a7bc50fee74c4a53d7d4"
+    },
+    "lem-youngest-child-descendants-conditionally-independent": {
+      "file": "items/lem-youngest-child-descendants-conditionally-independent.md",
+      "raw_sha256": "194994a841e3e2c22fe241bd716032c8ae861a989df607923a82a8376581496d"
+    },
+    "thm-bivariate-additive-noise-identifiability": {
+      "file": "items/thm-bivariate-additive-noise-identifiability.md",
+      "raw_sha256": "ff6f5aa76897e9488b6a6fe50dae99114cb8fa5d4547b806df1a5db9fcc18fd7"
+    },
+    "thm-restricted-anm-population-identification": {
+      "file": "items/thm-restricted-anm-population-identification.md",
+      "raw_sha256": "902868439269605a487fba6120c4383e5a1b83c37e202e51f8c6f04c98c07d91"
+    }
+  },
+  "consumer_census": {
+    "method": "Read current item deps using parsed YAML; transitive reverse closure seeded by all five escalations; separately searched literal references in items and library. No source interface has been changed.",
+    "ids": [
+      "alg-resit",
+      "def-additive-noise-model",
+      "def-restricted-additive-noise-model",
+      "ex-identifiable-nonlinear-additive-noise-model",
+      "ex-latent-confounding-mimics-anm-direction",
+      "ex-linear-gaussian-reversible-additive-noise-model",
+      "lem-anm-density-factorization-implies-dsep-conditional-independence",
+      "lem-anm-joint-density",
+      "lem-anm-noise-independent-of-nondescendants",
+      "lem-anm-parent-dependence-persists-under-conditioning",
+      "lem-positive-minimal-dags-have-a-conditioned-reversal",
+      "lem-youngest-child-descendants-conditionally-independent",
+      "thm-bivariate-additive-noise-identifiability",
+      "thm-restricted-anm-population-identification"
+    ],
+    "logical_edges": {
+      "alg-resit": [
+        "def-additive-noise-model"
+      ],
+      "def-additive-noise-model": [],
+      "def-restricted-additive-noise-model": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density"
+      ],
+      "ex-identifiable-nonlinear-additive-noise-model": [
+        "def-additive-noise-model",
+        "def-restricted-additive-noise-model",
+        "thm-bivariate-additive-noise-identifiability",
+        "lem-anm-joint-density"
+      ],
+      "ex-latent-confounding-mimics-anm-direction": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density"
+      ],
+      "ex-linear-gaussian-reversible-additive-noise-model": [
+        "def-additive-noise-model",
+        "def-restricted-additive-noise-model",
+        "lem-anm-joint-density"
+      ],
+      "lem-anm-density-factorization-implies-dsep-conditional-independence": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density"
+      ],
+      "lem-anm-joint-density": [
+        "def-additive-noise-model"
+      ],
+      "lem-anm-noise-independent-of-nondescendants": [
+        "def-additive-noise-model"
+      ],
+      "lem-anm-parent-dependence-persists-under-conditioning": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density",
+        "lem-anm-noise-independent-of-nondescendants"
+      ],
+      "lem-positive-minimal-dags-have-a-conditioned-reversal": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density",
+        "lem-anm-noise-independent-of-nondescendants",
+        "lem-anm-parent-dependence-persists-under-conditioning",
+        "lem-anm-density-factorization-implies-dsep-conditional-independence"
+      ],
+      "lem-youngest-child-descendants-conditionally-independent": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density"
+      ],
+      "thm-bivariate-additive-noise-identifiability": [
+        "def-additive-noise-model",
+        "lem-anm-joint-density",
+        "def-restricted-additive-noise-model"
+      ],
+      "thm-restricted-anm-population-identification": [
+        "def-additive-noise-model",
+        "def-restricted-additive-noise-model",
+        "lem-anm-joint-density",
+        "lem-anm-noise-independent-of-nondescendants",
+        "lem-anm-parent-dependence-persists-under-conditioning",
+        "lem-youngest-child-descendants-conditionally-independent",
+        "lem-positive-minimal-dags-have-a-conditioned-reversal",
+        "alg-resit",
+        "thm-bivariate-additive-noise-identifiability"
+      ]
+    },
+    "external_consumers": [],
+    "page_placements": [
+      "library/machine-learning/ml02-causal-anm.md",
+      "library/machine-learning/ml02-causal-anm-examples.md"
+    ],
+    "disposition": "All current consumers already receive the edgewise minimality interface. No interface delta follows from clarifying planning prose. Any distinct-DAG statement correction requires focused consumer check of thm-restricted-anm-population-identification step1.1, which already supplies different DAGs."
+  },
+  "integration_guards": {
+    "policy": "Root owns shared plan/spec merges and planning-source whole-file hash refresh; do not overwrite staged foreign metadata. Re-read each current field and require unique exact old excerpt immediately before replacement. Native results/prompts/logs/readiness remain immutable until owner records truthful resolution.",
+    "track_excerpt_count_required": 1,
+    "spec_target": "page id ml02-causal-anm description only",
+    "original_planning_hashes": "Root to bind actual current complete planning sources after guarded merge; no digest guessed here."
+  },
+  "validation": {
+    "status": "pass",
+    "scope": "all 16 batch27 items; render also exact two A/B pages",
+    "checks": [
+      {
+        "name": "proof-layout",
+        "command": "node tools/proof-layout.mjs items/def-additive-noise-model.md items/lem-probability-measure-has-no-nonzero-period.md items/lem-smooth-residual-independence-has-pointwise-density-factorization.md items/alg-resit.md items/lem-anm-joint-density.md items/lem-anm-noise-independent-of-nondescendants.md items/def-restricted-additive-noise-model.md items/lem-anm-density-factorization-implies-dsep-conditional-independence.md items/lem-anm-parent-dependence-persists-under-conditioning.md items/lem-youngest-child-descendants-conditionally-independent.md items/lem-positive-minimal-dags-have-a-conditioned-reversal.md items/thm-bivariate-additive-noise-identifiability.md items/thm-restricted-anm-population-identification.md items/ex-latent-confounding-mimics-anm-direction.md items/ex-linear-gaussian-reversible-additive-noise-model.md items/ex-identifiable-nonlinear-additive-noise-model.md",
+        "exit_code": 0,
+        "output_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/proof-layout.txt",
+        "output_raw_sha256": "dc19da2d2d6904e65e55fa0b029650fc73145c186b6887ecedb9037e3975e71e"
+      },
+      {
+        "name": "precheck",
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-additive-noise-model.md items/lem-probability-measure-has-no-nonzero-period.md items/lem-smooth-residual-independence-has-pointwise-density-factorization.md items/alg-resit.md items/lem-anm-joint-density.md items/lem-anm-noise-independent-of-nondescendants.md items/def-restricted-additive-noise-model.md items/lem-anm-density-factorization-implies-dsep-conditional-independence.md items/lem-anm-parent-dependence-persists-under-conditioning.md items/lem-youngest-child-descendants-conditionally-independent.md items/lem-positive-minimal-dags-have-a-conditioned-reversal.md items/thm-bivariate-additive-noise-identifiability.md items/thm-restricted-anm-population-identification.md items/ex-latent-confounding-mimics-anm-direction.md items/ex-linear-gaussian-reversible-additive-noise-model.md items/ex-identifiable-nonlinear-additive-noise-model.md --json",
+        "exit_code": 0,
+        "output_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/precheck.txt",
+        "output_raw_sha256": "c590a0774dfa82fd54e0cf3a93cef3790515cd28b0027f06a95cf1131b56fbc5"
+      },
+      {
+        "name": "rendercheck",
+        "command": "node tools/rendercheck.mjs items/def-additive-noise-model.md items/lem-probability-measure-has-no-nonzero-period.md items/lem-smooth-residual-independence-has-pointwise-density-factorization.md items/alg-resit.md items/lem-anm-joint-density.md items/lem-anm-noise-independent-of-nondescendants.md items/def-restricted-additive-noise-model.md items/lem-anm-density-factorization-implies-dsep-conditional-independence.md items/lem-anm-parent-dependence-persists-under-conditioning.md items/lem-youngest-child-descendants-conditionally-independent.md items/lem-positive-minimal-dags-have-a-conditioned-reversal.md items/thm-bivariate-additive-noise-identifiability.md items/thm-restricted-anm-population-identification.md items/ex-latent-confounding-mimics-anm-direction.md items/ex-linear-gaussian-reversible-additive-noise-model.md items/ex-identifiable-nonlinear-additive-noise-model.md library/machine-learning/ml02-causal-anm.md library/machine-learning/ml02-causal-anm-examples.md --json",
+        "exit_code": 0,
+        "output_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/rendercheck.txt",
+        "output_raw_sha256": "db577c15470bac354e0e1028ca930f6e09574f6df59693b8821716cd2d85bc87"
+      },
+      {
+        "name": "strict-contracts",
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-27.proof-contracts.json --strict --items def-additive-noise-model,lem-probability-measure-has-no-nonzero-period,lem-smooth-residual-independence-has-pointwise-density-factorization,alg-resit,lem-anm-joint-density,lem-anm-noise-independent-of-nondescendants,def-restricted-additive-noise-model,lem-anm-density-factorization-implies-dsep-conditional-independence,lem-anm-parent-dependence-persists-under-conditioning,lem-youngest-child-descendants-conditionally-independent,lem-positive-minimal-dags-have-a-conditioned-reversal,thm-bivariate-additive-noise-identifiability,thm-restricted-anm-population-identification,ex-latent-confounding-mimics-anm-direction,ex-linear-gaussian-reversible-additive-noise-model,ex-identifiable-nonlinear-additive-noise-model --json",
+        "exit_code": 0,
+        "output_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/strict-contracts.txt",
+        "output_raw_sha256": "d021e6e8089cc7e3ca56e396e3c5eaa600f2aa610267466d028a7195b3364b4d"
+      }
+    ],
+    "summary": {
+      "proof_layout": "16 items,61 steps,0 defects",
+      "precheck": "16 files,13 checked proofs,0 failures;3 not-applicable",
+      "rendercheck": "18 files,0 errors,0 warnings",
+      "strict_contracts": "16 items passed"
+    }
+  },
+  "writer_drain": {
+    "verified_at": "2026-10-18T20:54:27.091259+00:00",
+    "state": {
+      "stage": "1-scaffold",
+      "role": "beta",
+      "label": "batch-27",
+      "covers": [
+        "27"
+      ],
+      "attempt": 1,
+      "attempts": 1,
+      "startedAt": "2026-10-18T18:28:32.671Z",
+      "endedAt": "2026-10-18T20:53:45.845Z",
+      "lastExitOk": true
+    },
+    "immutable_result": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-27.attempt-1.result.json",
+    "ok": true,
+    "native_execution_credit_added": false
+  },
+  "contract_edit": {
+    "file": "research/machine-learning-all-101-2026-10-19-batch-27.proof-contracts.json",
+    "before_file": "research/machine-learning-all-101-2026-10-19-anm-identifiability-repair/before/research/machine-learning-all-101-2026-10-19-batch-27.proof-contracts.json",
+    "before_raw_sha256": "5fdb125afb425db6c65a3d8e0fd7e1ce2fdc80d0dad6e5b5d33201cece44c1c7",
+    "current_raw_sha256": "d93883ef68220ea92188694f5917d09d65a97e3642816e2f7bf4e700c43165e9",
+    "pointer": "/contracts/thm-restricted-anm-population-identification/citations/F1/quote",
+    "old": "Let two distinct finite causally sufficient additive-noise models on the same\nvertex set have the same observational law, a strictly positive joint density,\nand",
+    "new": "Let two finite causally sufficient additive-noise models on distinct DAGs\nwith the same vertex set have the same observational law, a strictly positive\njoint density, and causal minimality in each model.",
+    "guard": "only this parsed quote field changed; all other parsed fields equal"
+  },
+  "completed_at": "2026-10-18T20:55:05.074473+00:00",
+  "final_current_bindings": {
+    "items/def-additive-noise-model.md": "256d6d58d686994212c796e8d4cee01bc99ee96a0e45b2ef1a300a32fc1d7374",
+    "items/lem-probability-measure-has-no-nonzero-period.md": "7033a27bb95bdf5935173be5a40cc34fd407a1bc15860abbb983b5dffbd1b593",
+    "items/lem-smooth-residual-independence-has-pointwise-density-factorization.md": "5126cc58f36d97a43796354e0321d61ea530e3d94b37f205b99b80d72bcd6670",
+    "items/alg-resit.md": "9ce0333f5c54f2f47d1216bb617923dd1c8368c0d3ac026c259c2f1f52ac506c",
+    "items/lem-anm-joint-density.md": "5b9f4045dbd5367eb72cafb61ae165b67e6a6925c91e399193ec90707d81813a",
+    "items/lem-anm-noise-independent-of-nondescendants.md": "13342cdd4621ed27473f9dfcc6a1439727e5828f526d75ba5ae888e1b4adca82",
+    "items/def-restricted-additive-noise-model.md": "49f82703c26d42fa61eecba078803bf0c99798ecaab0aa4f584b18b06a849a23",
+    "items/lem-anm-density-factorization-implies-dsep-conditional-independence.md": "74cd51d87854e44cd3e9d622e8beff1e0738f1c5f506e8fd2096983be96a939d",
+    "items/lem-anm-parent-dependence-persists-under-conditioning.md": "9c8e9cb99add2faef3d4fcfc1f44ee8be6570846346039217360f25d49b8cfb7",
+    "items/lem-youngest-child-descendants-conditionally-independent.md": "194994a841e3e2c22fe241bd716032c8ae861a989df607923a82a8376581496d",
+    "items/lem-positive-minimal-dags-have-a-conditioned-reversal.md": "034fe595f573a39f35274dbbacd5e60276fff4632fc945ae927ec0712ee24c35",
+    "items/thm-bivariate-additive-noise-identifiability.md": "ff6f5aa76897e9488b6a6fe50dae99114cb8fa5d4547b806df1a5db9fcc18fd7",
+    "items/thm-restricted-anm-population-identification.md": "902868439269605a487fba6120c4383e5a1b83c37e202e51f8c6f04c98c07d91",
+    "items/ex-latent-confounding-mimics-anm-direction.md": "728244285071ebc652319dfe332a9868487ed54ed4c2a3d6c2310302247aaa94",
+    "items/ex-linear-gaussian-reversible-additive-noise-model.md": "a938fad8473a199705aa804e676c4a73f2524e4bb81f56355c7b9c728bc20593",
+    "items/ex-identifiable-nonlinear-additive-noise-model.md": "b47552335804aaf74d87ba2418aeddd47af17012d3563025b905ec8db4fc6056",
+    "research/machine-learning-all-101-2026-10-19-batch-27.proof-contracts.json": "d93883ef68220ea92188694f5917d09d65a97e3642816e2f7bf4e700c43165e9",
+    "research/machine-learning-all-101-2026-10-19-batch-27.pages.json": "f48a72c02c1697ce2f6925bcbdd81918572ce845fc74159f2cb41a8e8f156203",
+    "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-27.attempt-1.result.json": "0e1502a644172e6d4a76cc606a59fc71034800f4f677e2bf21001b2aecb924c1"
+  },
+  "proof_justification": {
+    "minimality": "Every parent coordinate is essential exactly as Proposition17. The authored parent-dependence proof derives shift equality from conditional independence and uses nonperiodicity plus continuity to contradict essentiality, then a positive-density Fubini intersection argument for larger nondescendant sets. No missing prerequisite for this clarification.",
+    "distinct_dag": "The graph proof begins deleting equal common sinks. Nonempty remainder is guaranteed only when graphs differ; the corrected Statement now supplies exactly that premise. All later finite graph arguments and diagram keep their original scope and content. No diagram edit needed: it depicts the five incident-edge classes consistently with G/G_prime.",
+    "consumer": "The sole consumer theorem explicitly assumes a different DAG G_prime at step1.1 before applying graph lemma F1. Graph identification result therefore remains unchanged. Its full Statement, all Facts and complete Proof were read, and only F1 literal source quote changed in the contract. No further theorem-interface delta exists."
+  },
+  "remaining_owner_work": [
+    "Guarded ML26 shared plan/spec minimality clarification and whole-source planning hash mirrors",
+    "Owner truthful resolution/recertification of five original escalated records and changed source/contract currency; no native report or prompt rewriting",
+    "Ordinary later native reviews and full gate batteries"
+  ]
+}

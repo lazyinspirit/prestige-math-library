@@ -13,6 +13,7 @@ aliases: [def-omega, natural-numbers]
 landmark: true
 short: "$\\mathbb{N}=\\omega$, smallest inductive set"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-natural-numbers.json
   precheck: n/a
   audited: 2026-07-25
 sources:
@@ -32,13 +33,13 @@ pipeline_run: null
 ## Definition
 
 The set of **natural numbers** is the **smallest inductive set**
-([[def-inductive-set]]),
+(Inductive set),
 
 $$\mathbb{N} = \omega := \bigcap\,\{\, I : I \text{ is inductive} \,\},$$
 
-which exists and is itself inductive by [[lem-omega-smallest-inductive]] (the
-Axiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to
-intersect within, and Separation, [[def-axiom-schema-of-separation]], makes the
+which exists and is itself inductive by The natural numbers exist: a smallest inductive set (the
+Axiom of Infinity, The Axiom of Infinity: there is a set containing a set with no elements and closed under $y \mapsto y \cup \{y\}$, supplies one inductive set to
+intersect within, and Separation, The Axiom Schema of Separation: for each formula $\varphi$, $\forall \bar p\,\forall x\,\exists y\,\forall z\,(z \in y \leftrightarrow (z \in x \wedge \varphi(z,\bar p)))$, makes the
 intersection a set). On $\mathbb{N}$ we take
 
 $$0 := \varnothing, \qquad \sigma(n) := n \cup \{n\},$$
@@ -46,6 +47,16 @@ $$0 := \varnothing, \qquad \sigma(n) := n \cup \{n\},$$
 the distinguished element and the successor function. Thus
 $0 = \varnothing$, $1 = \{0\}$, $2 = \{0, 1\}$, $3 = \{0, 1, 2\}$, and in general
 $n = \{0, 1, \dots, n-1\}$ is the set of its predecessors.
+
+## Definition references
+
+[[def-inductive-set]]
+
+[[lem-omega-smallest-inductive]]
+
+[[def-axiom-of-infinity]]
+
+[[def-axiom-schema-of-separation]]
 
 ## Remarks
 

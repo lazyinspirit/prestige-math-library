@@ -11,6 +11,7 @@ provenance:
 deps: [def-countable-choice, def-l-one-of-a-measure, thm-differentiation-along-families-shrinking-nicely]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-first-fundamental-theorem-of-calculus-for-l-one.json
   audited: 2026-09-04
   precheck: pass
   judge:
@@ -27,13 +28,17 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]).
+Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)).
 
 Let $a<b$ and let $f\in L^1([a,b])$. Define
 $$F(x):=\int_a^x f(t)\,dt\qquad(a\le x\le b).$$
 Then $F$ is differentiable for almost every $x\in(a,b)$ and
 $$F'(x)=f(x)$$
 at every such point.
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

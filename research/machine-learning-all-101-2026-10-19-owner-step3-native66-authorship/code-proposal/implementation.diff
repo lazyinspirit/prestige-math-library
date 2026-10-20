@@ -1,0 +1,413 @@
+--- a/tools/step3-native-creation-origin.mjs
++++ b/tools/step3-native-creation-origin.mjs
+@@ -1,4 +1,5 @@
+ // Pre-certification native birth evidence. This records origin, never acceptance.
++import { replayNative66, native66EvidenceRefs, NATIVE66_ORIGIN_POLICY, NATIVE66_EVIDENCE_POLICY } from './step3-native66-static-replay.mjs';
+ import { createHash } from 'node:crypto';
+ import { existsSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs';
+ import { join, resolve } from 'node:path';
+@@ -35,7 +36,7 @@
+   need(sha(JSON.stringify(JSON.parse(baselineBytes))) === receipt.baseline_sha256, 'changed original baseline');
+   const out = { [originPath]: sha(readFileSync(resolve(root, originPath))), [baselinePath]: sha(baselineBytes) };
+   for (const ref of [receipt.native_item, receipt.native_manifest, receipt.native_contract,
+-    receipt.native_metadata_capture, receipt.author_evidence.result, receipt.author_evidence.prompt]) {
++    ...(receipt.policy===NATIVE66_ORIGIN_POLICY?native66EvidenceRefs(receipt):[receipt.native_metadata_capture]), receipt.author_evidence.result, receipt.author_evidence.prompt]) {
+     bound(root, ref);
+     need(out[ref.path] === undefined || out[ref.path] === ref.sha256, 'conflicting original marker');
+     out[ref.path] = ref.sha256;
+@@ -179,13 +180,15 @@
+   return JSON.parse(result.stdout);
+ }
+ 
++function replayOrigin(root,run,id,receipt){return receipt.policy===NATIVE66_ORIGIN_POLICY?replayNative66(root,run,id,receipt,r=>bound(root,r)):replay(bound(root,receipt.author_evidence.log),run,id,receipt.replay);}
++
+ function validate(root, run, id, receipt, context) {
+   const { baseline, authors, row } = context;
+   need(Object.keys(receipt).every(k => ['version', 'policy', 'run', 'step', 'id', 'owner_identity',
+     'native_execution_credit', 'mathematical_acceptance', 'recorded_at', 'reason', 'baseline_sha256',
+     'page', 'batch', 'author_result', 'author_evidence', 'native_item', 'native_manifest',
+-    'native_contract', 'native_metadata_capture', 'carriers', 'replay', 'native_write_binding'].includes(k)), 'unknown origin field');
+-  need(receipt?.version === 1 && receipt.policy === POLICY && receipt.run === run
++    'native_contract', 'native_metadata_capture', 'carriers', 'replay', 'native_write_binding', ...(receipt.policy===NATIVE66_ORIGIN_POLICY?['metadata_replay']:[])].includes(k)), 'unknown origin field');
++  need(((receipt?.version === 1 && receipt.policy === POLICY) || (receipt?.version === 2 && receipt.policy === NATIVE66_ORIGIN_POLICY)) && receipt.run === run
+     && receipt.step === 3 && receipt.id === id && receipt.owner_identity === '/root'
+     && receipt.native_execution_credit === false && receipt.mathematical_acceptance === false
+     && Number.isFinite(Date.parse(receipt.recorded_at)) && String(receipt.reason ?? '').trim().length >= 40,
+@@ -208,6 +211,9 @@
+   const original = bound(root, receipt.native_item).toString('utf8');
+   const manifest = JSON.parse(bound(root, receipt.native_manifest));
+   const contracts = JSON.parse(bound(root, receipt.native_contract));
++  if(receipt.policy===NATIVE66_ORIGIN_POLICY) {
++    need(receipt.replay===undefined,'v2 uses explicit case-bound metadata_replay only');
++  } else {
+   const capture = JSON.parse(bound(root, receipt.native_metadata_capture));
+   need(Date.parse(capture.captured_at) >= Date.parse(author.ended_at)
+     && Date.parse(capture.captured_at) <= Date.parse(receipt.recorded_at), 'invalid metadata capture time');
+@@ -218,6 +224,7 @@
+       && captured[0].owner_modified_source === false
+       && Date.parse(captured[0].source_stat_at_capture?.mtime_utc) >= Date.parse(author.started_at) - 1500
+       && Date.parse(captured[0].source_stat_at_capture?.mtime_utc) <= Date.parse(author.ended_at), 'original metadata not bound by actual native-window capture');
++  }
+   }
+   const meta = yaml().parse(split(original).fm) ?? {};
+   need(meta.id === id && meta.status === 'draft' && meta.pipeline_run === run, 'invalid original item identity');
+@@ -249,8 +256,8 @@
+     step3_subject_sha256: hash({ item_sha256: itemHash, manifest_sha256: manifestHash, contract_sha256: contractHash }) };
+   need(keys.every(k => receipt.carriers?.[k] === expected[k]), 'original carrier mismatch');
+   if (existsSync(resolve(root, receipt.author_evidence.log.path))) {
+-    const replayed = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
+-    need(replayed.item_sha256 === itemHash && hash(replayed) === hash(receipt.native_write_binding),
++    const replayed = replayOrigin(root,run,id,receipt);
++    need(replayed.item_sha256 === itemHash && (receipt.policy!==NATIVE66_ORIGIN_POLICY || replayed.manifest_sha256===manifestHash&&replayed.contract_sha256===contractHash) && hash(replayed) === hash(receipt.native_write_binding),
+       'original source not reproduced by successful native writes');
+   } else {
+     frozenOrigin(root, run, id, receipt);
+@@ -270,7 +277,7 @@
+     if (requireLiveLog) {
+       const receipt = JSON.parse(readFileSync(pathFor(root, run, id)));
+       need(existsSync(resolve(root, receipt.author_evidence?.log?.path ?? '')), 'first closure requires original operational log');
+-      const replayed = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
++      const replayed = replayOrigin(root,run,id,receipt);
+       need(hash(replayed) === hash(receipt.native_write_binding), 'closure replay differs from registered native writes');
+     }
+     const { receipt } = loadNativeCreationOrigin(root, run, id, contextForId(id));
+@@ -291,13 +298,18 @@
+ export function recordNativeCreationOrigin(root, run, step, id, evidence, context) {
+   need(Number(step) === 3, 'only Step 3 is supported');
+   const input = JSON.parse(bound(root, evidence));
+-  need(input.policy === 'native-created-step3-origin-evidence-v1', 'wrong registration evidence');
++  need(input.policy === 'native-created-step3-origin-evidence-v1' || input.policy===NATIVE66_EVIDENCE_POLICY, 'wrong registration evidence');
+   need(input.recorded_at === undefined && input.native_write_binding === undefined,
+     'registration time and replay binding are tool-derived');
+-  const receipt = { ...input, policy: POLICY, recorded_at: new Date().toISOString() };
+-  receipt.native_write_binding = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
++  const receipt = { ...input, policy: input.policy===NATIVE66_EVIDENCE_POLICY?NATIVE66_ORIGIN_POLICY:POLICY, recorded_at: new Date().toISOString() };
++  receipt.native_write_binding = replayOrigin(root,run,id,receipt);
+   validate(root, run, id, receipt, context);
+   const path = pathFor(root, run, id);
++  if(receipt.policy===NATIVE66_ORIGIN_POLICY&&!existsSync(path)){
++    const liveItem=readFileSync(join(root,'items',id+'.md'));
++    const liveContract=JSON.parse(readFileSync(join(root,'research',`${run}-batch-${receipt.batch}.proof-contracts.json`)));
++    need(sha(liveItem)===receipt.carriers.item_file_sha256&&hash({...context.row.manifest_entry,__step4_page_id:context.row.page})===receipt.carriers.manifest_sha256&&hash(liveContract.contracts?.[id])===receipt.carriers.contract_sha256,'v2 initial current carriers differ; no unreviewed current successor');
++  }
+   if (existsSync(path)) {
+     const prior = loadNativeCreationOrigin(root, run, id, context);
+     const { recorded_at: _old, ...a } = prior.receipt, { recorded_at: _new, ...b } = receipt;
+--- /dev/null
++++ b/tools/step3-native66-static-replay.mjs
+@@ -0,0 +1,138 @@
++// Explicit case-bound native provenance; never executes code from the log.
++import {createHash} from 'node:crypto';
++import {spawnSync} from 'node:child_process';
++import {split,yaml} from './pathway-lib.mjs';
++export const NATIVE66_ORIGIN_POLICY='native-created-step3-origin-replay-v2';
++export const NATIVE66_EVIDENCE_POLICY='native-created-step3-origin-evidence-replay-v2';
++const need=(x,m)=>{if(!x)throw Error('Step-3 native66 replay: '+m);};
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const canon=x=>Array.isArray(x)?x.map(canon):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])):x;
++const hash=x=>sha(JSON.stringify(canon(x)));
++export function native66EvidenceRefs(receipt){const s=receipt.metadata_replay;return [s.restoration,s.manifest_before_restore,...s.source_inputs.map(x=>x.archive)];}
++export function replayNative66(root,run,id,receipt,read){
++ const s=receipt.metadata_replay;
++ const expected='research/machine-learning-all-101-2026-10-19-dispatch/alpha-3a-batch-66.attempt-1';
++ need(run==='machine-learning-all-101-2026-10-19'&&id==='lem-diffusion-objective-estimator-expectation'&&String(receipt.batch)==='66'&&receipt.page==='discrete-diffusion-and-variational-objectives'
++  &&receipt.author_result==='alpha-3a-batch-66.attempt-1.result.json'&&receipt.author_evidence?.result?.path===expected+'.result.json'&&receipt.author_evidence?.prompt?.path===expected+'.prompt.md'&&receipt.author_evidence?.log?.path===expected+'.log'
++  &&sha(read(receipt.author_evidence.result))==='b452c472c7b3d87b5b2a2b3aff7c5c49c9f2380f63a2802d93c764d5dac3e75b','wrong exact native case/home/result identity');
++ need(receipt.native_metadata_capture===undefined&&s&&Object.keys(s).every(k=>['policy','historical_manifest_mtime','restoration','manifest_before_restore','source_inputs'].includes(k))
++  &&s.policy==='native66-heredoc-selected-metadata-v1'&&s.historical_manifest_mtime==='unavailable; exact native writes and root byte-identical restore used instead'
++  &&Array.isArray(s.source_inputs)&&s.source_inputs.length===6,'explicit missing-time evidence route required');
++ const sources={};for(const v of s.source_inputs){need(Object.keys(v).length===2&&typeof v.id==='string'&&!Object.hasOwn(sources,v.id),'duplicate/malformed quote input');const text=read(v.archive).toString();need(yaml().parse(split(text).fm)?.id===v.id,'quote archive identity');sources[v.id]=text;}
++ const log=read(receipt.author_evidence.log).toString();
++ const result=spawnSync('python3',['-I','-c',SCRIPT],{input:JSON.stringify({log,run,id,sources}),encoding:'utf8',timeout:15000,maxBuffer:4*1024*1024});
++ need(!result.error&&result.status===0,'static parser rejected evidence: '+(result.stderr||result.error||''));
++ const replay=JSON.parse(result.stdout),manifest=JSON.parse(read(receipt.native_manifest)),contract=JSON.parse(read(receipt.native_contract));
++ const rows=(Array.isArray(manifest)?manifest:manifest.pages??[]).flatMap(p=>(p.items??[]).filter(x=>x.id===id).map(x=>({page:p.id,item:x})));
++ need(rows.length===1&&rows[0].page===receipt.page&&hash(rows[0].item)===hash(replay.manifest_entry),'authored manifest row differs');
++ need(hash(contract.contracts?.[id])===hash(replay.contract),'authored complete contract differs');
++ need(sha(replay.source)===receipt.native_item.sha256&&read(receipt.native_item).toString()===replay.source,'authored full item differs');
++ const restore=JSON.parse(read(s.restoration)),archive=read(s.manifest_before_restore),author=JSON.parse(read(receipt.author_evidence.result));
++ const path=`research/${run}-batch-${receipt.batch}.pages.json`;
++ need(restore.run===run&&restore.owner_identity==='/root'&&Number.isFinite(Date.parse(restore.at))&&Date.parse(restore.at)>=Date.parse(author.ended_at)&&Date.parse(restore.at)<=Date.parse(receipt.recorded_at)
++  &&archive.equals(read(receipt.native_manifest))&&s.manifest_before_restore.sha256===receipt.native_manifest.sha256
++  &&restore.restoration_rows?.filter(r=>r.path===path&&r.kind==='restore-exact-no-semantic-change-bytes'&&r.after_sha256===receipt.native_manifest.sha256&&/^[a-f0-9]{64}$/.test(r.before_sha256??'')&&r.before_sha256!==r.after_sha256).length===1,'missing genuine root byte-identical restore');
++ return {policy:s.policy,item_sha256:sha(replay.source),manifest_sha256:hash({...replay.manifest_entry,__step4_page_id:receipt.page}),contract_sha256:hash(replay.contract),commands:replay.commands,native_quote_inputs:replay.native_quote_inputs,failed_compound_basis:replay.failed_compound_basis,historical_manifest_mtime_unavailable:true};
++}
++
++const SCRIPT = String.raw`import ast,hashlib,json,re,shlex,sys
++x=json.load(sys.stdin);log=x['log'];target='lem-diffusion-objective-estimator-expectation'
++def need(ok,msg):
++ if not ok:raise ValueError(msg)
++sha=lambda s:hashlib.sha256(s.encode()).hexdigest()
++need(x['id']==target and x['run']=='machine-learning-all-101-2026-10-19','unsupported native case')
++need(sha(log)=='c206f68dda3bfa1a45f42265bef0edd1770cbea5c13de5acb58f346851f503b8','changed complete native log')
++pat=r'^exec\n(/bin/bash -lc [\s\S]*?) in /home/lazyinspirit/Projects/prestige-math-library\n (succeeded in [^\n]*|exited [^\n]*)'
++ms=list(re.finditer(pat,log,re.M));commands=[]
++for i,m in enumerate(ms):
++ a=shlex.split(m[1]);need(len(a)==3 and a[:2]==['/bin/bash','-lc'],'shell grammar')
++ output=log[m.end():ms[i+1].start() if i+1<len(ms)else len(log)];output=re.split(r'\n(?:codex|thinking)\n',output,maxsplit=1)[0]
++ commands.append({'hash':sha(m[1]),'shell':a[2],'status':m[2],'output':output,'at':m.start()})
++pins=['349f36987868264e2ee8f2094d1c9faf0f55a70eeeb71231203b9624033838af','51024284a1681032fccf146df23e118a08e5bbbc0dae880b4d11605e08879bac','c55779e2e755a45024d8de7657d738f5db69bc14b704a78b9cfbe28727e3cb15','46b3a560f5eac02bb0e388910af814e2fefe5aa9bc970f32af9fd9295ce1760f']
++selected=[]
++for pin in pins:
++ hits=[c for c in commands if c['hash']==pin];need(len(hits)==1,'missing/ambiguous native command');selected+=hits
++need([c['at'] for c in selected]==sorted(c['at'] for c in selected),'native writer ordering')
++need([c['status'] for c in selected]==['succeeded in 0ms:','exited 1 in 475ms:','succeeded in 196ms:','succeeded in 0ms:'],'changed native compound status')
++need('unchanged items/'+target+'.md\n' in selected[1]['output'] and 'REPAIR items/'+target+'.md:' in selected[1]['output'],'failed compound lacks no-op reflow/precheck evidence')
++def literal(n,env):
++ if isinstance(n,ast.Constant) and type(n.value) in (str,int,bool,type(None)):return n.value
++ if isinstance(n,ast.Name) and n.id in env:return env[n.id]
++ if isinstance(n,ast.List):return[literal(v,env)for v in n.elts]
++ if isinstance(n,ast.Dict):return{literal(k,env):literal(v,env)for k,v in zip(n.keys,n.values)}
++ if isinstance(n,ast.BinOp) and isinstance(n.op,ast.Add):return literal(n.left,env)+literal(n.right,env)
++ raise ValueError('unsupported literal')
++def tree(c):return ast.parse(c['shell'].split("python3 - <<'PY'\n",1)[1].split('\nPY',1)[0])
++def constants(t):return{n.targets[0].id:n.value.value for n in t.body if isinstance(n,ast.Assign)and len(n.targets)==1 and isinstance(n.targets[0],ast.Name)and isinstance(n.value,ast.Constant)and type(n.value.value)in(str,int)}
++anchor="cat > items/"+target+".md <<'EOF'\n";shell=selected[0]['shell'];need(shell.startswith(anchor),'wrong heredoc destination');source=shell[len(anchor):shell.index('\nEOF\n')]+'\n';initial=source
++# Only recursively parse literal .replace chains, never execute the logged AST.
++def replace(n,s):
++ if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='read_text'and isinstance(n.func.value,ast.Name)and n.func.value.id=='p'and not n.args and not n.keywords:return s
++ if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='replace'and len(n.args)==2 and not n.keywords:
++  s=replace(n.func.value,s);a,b=[literal(v,{})for v in n.args];need(type(a)==str and a and type(b)==str and a in s,'unmatched literal edit');return s.replace(a,b)
++ raise ValueError('unsupported source edit')
++for command in selected[1:3]:
++ t=tree(command);env=constants(t);active=False;value=None;count=0
++ for n in t.body:
++  if isinstance(n,ast.Assign)and len(n.targets)==1 and isinstance(n.targets[0],ast.Name):
++   var=n.targets[0].id
++   if var=='p':
++    active=False
++    if isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Name)and n.value.func.id=='Path'and len(n.value.args)==1:
++     try:active=literal(n.value.args[0],env)=='items/'+target+'.md'
++     except ValueError:pass
++   elif var=='s'and active:value=replace(n.value,source)
++  if active and isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Attribute)and isinstance(n.value.func.value,ast.Name)and n.value.func.value.id=='p'and n.value.func.attr=='write_text':
++   need(value is not None and len(n.value.args)==1 and isinstance(n.value.args[0],ast.Name)and n.value.args[0].id=='s','unsupported write');source=value;count+=1
++ need(count==1,'source edit multiplicity')
++# Manifest row is a literal data argument of the pinned native append/write.
++t=tree(selected[0]);env=constants(t);manifest=[];boundaries=None;iff_reason=None
++for n in ast.walk(t):
++ if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='append'and len(n.args)==1 and isinstance(n.args[0],ast.Dict):
++  try:d=literal(n.args[0],env)
++  except ValueError:continue
++  if d.get('id')==target:manifest.append(d)
++ if isinstance(n,ast.For)and isinstance(n.iter,ast.Call)and isinstance(n.iter.func,ast.Attribute)and n.iter.func.attr=='items'and isinstance(n.iter.func.value,ast.Dict):boundaries=literal(n.iter.func.value,env)
++ if isinstance(n,ast.Dict):
++  for k,v in zip(n.keys,n.values):
++   if isinstance(k,ast.Constant)and k.value=='reason'and isinstance(v,ast.Constant):iff_reason=v.value
++need(len(manifest)==1 and boundaries is not None and iff_reason=='The lemma asserts expected-output identities, no biconditional.','missing native metadata data')
++facts=re.findall(r'^\[([AF]\d+)\].*?\[\[([^]|]+)',initial,re.M);need(set(x['sources'])==set(s for _,s in facts),'incomplete source quote inputs')
++c={'citations':[],'derivations':[],'routine_steps':[],'finite_smoke':[],'boundaries':[]};quote_pins=[]
++for fact,sid in facts:
++ section='Definition'if sid.startswith(('def-','alg-'))else'Statement';body=x['sources'][sid];quote=body.split('## '+section+'\n',1)[1].split('\n## ',1)[0].strip()
++ def native_section(output):
++  # A batched supplier dump has explicit source+section boundaries.
++  h=re.search(r'^SUPPLIER '+re.escape(sid)+r'\n## '+re.escape(section)+r'\n',output,re.M)
++  if h:
++   tail=output[h.end():];end=re.search(r'^(?:SUPPLIER |## )',tail,re.M)
++   return (tail[:end.start()]if end else tail).strip()
++  # Direct cat/read output retains the full source frontmatter id. Bound the
++  # body before any following source, then extract the COMPLETE typed section.
++  h=re.search(r'^id: '+re.escape(sid)+r'$',output,re.M)
++  if not h:return None
++  tail=output[h.end():];fmend=re.search(r'^---\n',tail,re.M)
++  if not fmend:return None
++  body=tail[fmend.end():].split('\n---\n',1)[0]
++  h=re.search(r'^## '+re.escape(section)+r'\n',body,re.M)
++  if not h:return None
++  tail=body[h.end():];end=re.search(r'^## ',tail,re.M)
++  return (tail[:end.start()]if end else tail).strip()
++ reads=[z for z in commands if z['status'].startswith('succeeded')and z['at']<selected[0]['at']and native_section(z['output'])==quote]
++ need(reads,'complete quote section not bound to native successful supplier output '+sid);quote_pins.append({'source':sid,'quote_sha256':sha(quote),'read_command_sha256':reads[0]['hash']})
++ c['citations'].append({'fact':fact,'source':sid,'source_section':section,'quote':quote,'uses':[]})
++for case,e in boundaries.items():c['boundaries'].append({'case':case,'status':'checked','evidence':'Statement and steps 1.1–2.1: '+e.replace('Step 3.1','Step 2.1')})
++for case in ['iff-forward','iff-reverse']:c['boundaries'].append({'case':case,'status':'not_applicable','reason':iff_reason})
++# Final pinned metadata command15580 rebuilds every derivation, use list and
++# boundary prefix from the final source; reproduce that exact pure computation.
++for line in source.splitlines():
++ m=re.match(r'^(\d+\.\d+) (.*)',line)
++ if not m:continue
++ claim,tags=m[2].rsplit(' [',1);tags=tags.removesuffix(' ∎').removesuffix(']');c['derivations'].append({'id':'expectation-'+m[1].replace('.','-'),'claim':claim,'step':m[1],'inputs':tags.split(', ')})
++for citation in c['citations']:citation['uses']=[d['step']for d in c['derivations']if citation['fact']in d['inputs']]
++risks=[]
++for n in ast.walk(tree(selected[1])):
++ if isinstance(n,ast.Assign)and len(n.targets)==1 and ast.unparse(n.targets[0])=="d['contracts'][id]['risk_review']":risks.append(literal(n.value,constants(tree(selected[1]))))
++need(len(risks)==1,'missing exact native risk review');c['risk_review']=risks[0]
++print(json.dumps({'source':source,'manifest_entry':manifest[0],'contract':c,'commands':[{'sha256':z['hash'],'status':z['status']}for z in selected],'native_quote_inputs':quote_pins,'failed_compound_basis':'Straight-line literal Python writes precede exact no-op reflow and failing read-only precheck; full native creator job succeeds. No whole-compound success or historical mtime is inferred.'}))
++`;
+--- /dev/null
++++ b/tools/step3-native66-static-replay.test.mjs
+@@ -0,0 +1,96 @@
++import test from 'node:test';import assert from 'node:assert/strict';
++import{mkdtempSync,mkdirSync,readFileSync,writeFileSync,copyFileSync,rmSync,existsSync}from'node:fs';
++import{resolve,dirname}from'node:path';import{tmpdir}from'node:os';import{pathToFileURL,fileURLToPath}from'node:url';import{execFileSync}from'node:child_process';import{createHash}from'node:crypto';
++const repo=process.cwd(),run='machine-learning-all-101-2026-10-19',id='lem-diffusion-objective-estimator-expectation',stem=`research/${run}-dispatch/alpha-3a-batch-66.attempt-1`,logPath=stem+'.log';
++const code=mkdtempSync(resolve(tmpdir(),'native66-code-'));test.after(()=>rmSync(code,{recursive:true,force:true}));
++for(const p of execFileSync('git',['ls-files','tools'],{encoding:'utf8',cwd:repo}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(resolve(code,p)),{recursive:true});copyFileSync(resolve(repo,p),resolve(code,p));}
++for(const name of ['step3-native-creation-origin.mjs','step3-native66-static-replay.mjs'])copyFileSync(fileURLToPath(new URL(name,import.meta.url)),resolve(code,'tools',name));
++const api=await import(pathToFileURL(resolve(code,'tools/step3-native-creation-origin.mjs'))),extra=await import(pathToFileURL(resolve(code,'tools/step3-native66-static-replay.mjs'))),item=await import(pathToFileURL(resolve(code,'tools/item-hash.mjs')));
++const sha=x=>createHash('sha256').update(x).digest('hex'),canon=x=>Array.isArray(x)?x.map(canon):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])):x,hash=x=>sha(JSON.stringify(canon(x)));
++const available=existsSync(resolve(repo,logPath));
++const realOriginPath=`research/${run}-step3-native-origin-${id}.json`;
++const actualOrigin=existsSync(resolve(repo,realOriginPath))?JSON.parse(readFileSync(resolve(repo,realOriginPath))):null;
++const realOrigin=actualOrigin??(process.env.NATIVE66_IMMUTABLE_TEST_ORIGIN?JSON.parse(readFileSync(process.env.NATIVE66_IMMUTABLE_TEST_ORIGIN)):null);
++// After real registration, immutable origin archives are the sole fixture
++// inputs. Later Step4/5 edits to live carriers cannot rewrite this birth case.
++const birthPath=(kind,fallback)=>realOrigin?realOrigin[kind].path:fallback;
++function fixture(t){
++ const root=mkdtempSync(resolve(tmpdir(),'native66-case-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
++ const put=(p,x)=>{mkdirSync(dirname(resolve(root,p)),{recursive:true});writeFileSync(resolve(root,p),Buffer.isBuffer(x)||typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return{path:p,sha256:sha(readFileSync(resolve(root,p)))};};
++ const real=p=>readFileSync(resolve(repo,p)),copy=p=>put(p,real(p)),archive=(n,p)=>put(`research/${run}-unit-native66/${n}`,real(p));
++ const baseline=JSON.parse(real(`research/${run}-step3-auditor-baseline.json`));copy(`research/${run}-step3-auditor-baseline.json`);
++ const author=JSON.parse(real(stem+'.result.json'));copy(stem+'.result.json');copy(stem+'.prompt.md');copy(logPath);
++ // Unit context substitutes local paths only in the trusted caller's authors
++ // view; exact genuine result/prompt/log bytes remain unchanged. These tests
++ // grant no actual-run native authentication or coverage.
++ const authors=[{...author,result_file:'alpha-3a-batch-66.attempt-1.result.json',immutable_result_file:'alpha-3a-batch-66.attempt-1.result.json',log:logPath,prompt:stem+'.prompt.md'}];
++ const raw=real(birthPath('native_item','items/'+id+'.md')),manifest=JSON.parse(real(birthPath('native_manifest',`research/${run}-batch-66.pages.json`))),contracts=JSON.parse(real(birthPath('native_contract',`research/${run}-batch-66.proof-contracts.json`)));
++ const page=manifest.find(p=>p.items.some(x=>x.id===id)),entry=page.items.find(x=>x.id===id),contract=contracts.contracts[id];
++ put('items/'+id+'.md',raw);put(`research/${run}-batch-66.pages.json`,real(birthPath('native_manifest',`research/${run}-batch-66.pages.json`)));put(`research/${run}-batch-66.proof-contracts.json`,real(birthPath('native_contract',`research/${run}-batch-66.proof-contracts.json`)));
++ const native_item=archive('item.md',birthPath('native_item','items/'+id+'.md')),native_manifest=archive('manifest.json',birthPath('native_manifest',`research/${run}-batch-66.pages.json`)),native_contract=archive('contract.json',birthPath('native_contract',`research/${run}-batch-66.proof-contracts.json`));
++ const restoration=archive('restoration.json',realOrigin?realOrigin.metadata_replay.restoration.path:`research/${run}-owner-step3-current-input-preparation-1/minimal-metadata-successor.json`),manifest_before_restore=archive('preparation-before-manifest.json',realOrigin?realOrigin.metadata_replay.manifest_before_restore.path:`research/${run}-owner-step3-current-input-preparation-1/before/research/${run}-batch-66.pages.json`);
++ const source_inputs=contract.citations.map(c=>({id:c.source,archive:archive(c.source+'.md',realOrigin?realOrigin.metadata_replay.source_inputs.find(x=>x.id===c.source).archive.path:'items/'+c.source+'.md')}));
++ const carriers={guard_sha256:item.itemHashGuard(raw.toString()),judge_sha256:item.itemHashJudge(raw.toString()),item_file_sha256:sha(raw),manifest_sha256:hash({...entry,__step4_page_id:page.id}),contract_sha256:hash(contract)};carriers.step3_subject_sha256=hash({item_sha256:carriers.item_file_sha256,manifest_sha256:carriers.manifest_sha256,contract_sha256:carriers.contract_sha256});
++ const evidence={version:2,policy:extra.NATIVE66_EVIDENCE_POLICY,run,step:3,id,owner_identity:'/root',native_execution_credit:false,mathematical_acceptance:false,reason:'Explicit unit fixture of actual native birth with replayed selected carrier writes and genuine root byte-identical restore; never a mathematical verdict.',baseline_sha256:sha(JSON.stringify(baseline)),page:page.id,batch:'66',author_result:authors[0].result_file,author_evidence:{result:{path:stem+'.result.json',sha256:sha(real(stem+'.result.json'))},prompt:{path:stem+'.prompt.md',sha256:sha(real(stem+'.prompt.md'))},log:{path:logPath,sha256:sha(real(logPath))}},native_item,native_manifest,native_contract,carriers,metadata_replay:{policy:'native66-heredoc-selected-metadata-v1',historical_manifest_mtime:'unavailable; exact native writes and root byte-identical restore used instead',restoration,manifest_before_restore,source_inputs}};
++ const context={baseline,authors,row:{id,batch:'66',page:page.id,manifest_entry:entry}};
++ const save=()=>put(`research/${run}-unit-native66/evidence.json`,evidence);
++ const register=()=>api.recordNativeCreationOrigin(root,run,3,id,save(),context);
++ return{root,put,evidence,context,save,register,real,raw,entry,contract};
++}
++const actual={skip:!available};
++test('explicit actual-native66 replay proves complete source/selected metadata without fabricated mtime',actual,t=>{const f=fixture(t),r=f.register(),d=JSON.parse(readFileSync(r.path));assert.equal(d.version,2);assert.equal(d.policy,extra.NATIVE66_ORIGIN_POLICY);assert.equal(d.native_metadata_capture,undefined);assert.equal(d.native_write_binding.historical_manifest_mtime_unavailable,true);assert.equal(d.native_write_binding.contract_sha256,f.evidence.carriers.contract_sha256);assert.equal(d.native_write_binding.manifest_sha256,f.evidence.carriers.manifest_sha256);assert.equal(d.native_write_binding.commands[1].status,'exited 1 in 475ms:');assert.ok(api.loadNativeCreationOrigin(f.root,run,id,f.context));const freeze=api.nativeOriginClosureEvidence(f.root,run,()=>f.context,{requireLiveLog:true});assert.equal(freeze[f.evidence.metadata_replay.restoration.path],f.evidence.metadata_replay.restoration.sha256);for(const s of f.evidence.metadata_replay.source_inputs)assert.equal(freeze[s.archive.path],s.archive.sha256);assert.equal(f.register().reused,true);});
++const negatives={
++ 'baseline existed':f=>{f.context.baseline.existing_item_files.push(id);f.evidence.baseline_sha256=sha(JSON.stringify(f.context.baseline));},
++ 'native creator not successful':f=>{f.context.authors=[];},
++ 'creator wrong home coverage':f=>{f.context.authors[0].covers=['65'];},
++ 'unsupported item':f=>{f.evidence.id='lem-other';},
++ 'log byte drift':f=>{f.evidence.author_evidence.log=f.put(logPath,f.real(logPath).toString()+'\n');},
++ 'missing or partial metadata command':f=>{f.evidence.author_evidence.log=f.put(logPath,f.real(logPath).toString().replace("c['derivations']=[]",'c["derivations"]=[]'));},
++ 'later unrecognized overwrite':f=>{f.evidence.author_evidence.log=f.put(logPath,f.real(logPath).toString()+"\nexec\n/bin/bash -lc 'echo altered > items/"+id+".md' in /home/lazyinspirit/Projects/prestige-math-library\n succeeded in 0ms:\n");},
++ 'invented old metadata capture':f=>{f.evidence.native_metadata_capture=f.put(`research/${run}-unit-native66/fake-capture.json`,{captured_at:'2026-10-19T13:30:00Z',sources:[]});},
++ 'invented old mtime declaration':f=>{f.evidence.metadata_replay.historical_manifest_mtime='2026-10-19T13:26:00Z';},
++ 'missing restoration':f=>{delete f.evidence.metadata_replay.restoration;},
++ 'wrong restoration bytes':f=>{f.evidence.metadata_replay.manifest_before_restore=f.put(`research/${run}-unit-native66/wrong-manifest.json`,{});},
++ 'unapproved restore owner':f=>{const d=JSON.parse(readFileSync(resolve(f.root,f.evidence.metadata_replay.restoration.path)));d.owner_identity='/root/other';f.evidence.metadata_replay.restoration=f.put(f.evidence.metadata_replay.restoration.path,d);},
++ 'restoration predates native completion':f=>{const d=JSON.parse(readFileSync(resolve(f.root,f.evidence.metadata_replay.restoration.path)));d.at='2026-10-19T12:00:00Z';f.evidence.metadata_replay.restoration=f.put(f.evidence.metadata_replay.restoration.path,d);},
++ 'quote substitution cannot self validate':f=>{const s=f.evidence.metadata_replay.source_inputs[0];s.archive=f.put(s.archive.path,readFileSync(resolve(f.root,s.archive.path),'utf8').replace('## Definition','## Definition\nUNAUTHENTICATED'));},
++ 'duplicate quote source':f=>{f.evidence.metadata_replay.source_inputs[1]=f.evidence.metadata_replay.source_inputs[0];},
++ 'claimed contract substituted':f=>{const p=f.evidence.native_contract.path,d=JSON.parse(readFileSync(resolve(f.root,p)));d.contracts[id].boundaries[0].evidence+=' forged';f.evidence.native_contract=f.put(p,d);},
++ 'claimed manifest substituted':f=>{const p=f.evidence.native_manifest.path,d=JSON.parse(readFileSync(resolve(f.root,p)));d[0].items.find(x=>x.id===id).title+=' forged';f.evidence.native_manifest=f.put(p,d);},
++ 'current item drift':f=>f.put('items/'+id+'.md',f.raw.toString()+'\n'),
++ 'current manifest drift':f=>{f.context.row.manifest_entry={...f.entry,title:'changed'};},
++ 'current contract drift':f=>{const p=`research/${run}-batch-66.proof-contracts.json`,d=JSON.parse(readFileSync(resolve(f.root,p)));d.contracts[id].finite_smoke.push({check:'changed'});f.put(p,d);},
++};
++for(const[name,mutate]of Object.entries(negatives))test('reject '+name,actual,t=>{const f=fixture(t);mutate(f);assert.throws(()=>f.register());assert.equal(existsSync(resolve(f.root,`research/${run}-step3-native-origin-${id}.json`)),false);});
++for(const key of ['guard_sha256','judge_sha256','item_file_sha256','manifest_sha256','contract_sha256','step3_subject_sha256'])test('all six current/native carrier fields guarded: '+key,actual,t=>{const f=fixture(t);f.evidence.carriers[key]='0'.repeat(64);assert.throws(()=>f.register());});
++test('version1 cannot opt into the replacement timing route',actual,t=>{const f=fixture(t);f.evidence.version=1;f.evidence.policy='native-created-step3-origin-evidence-v1';assert.throws(()=>f.register());});
++test('historical origin permits later source amendment but initial registration rejects it',actual,t=>{const f=fixture(t);f.register();f.put('items/'+id+'.md',f.raw.toString()+'\n');assert.ok(api.loadNativeCreationOrigin(f.root,run,id,f.context));assert.equal(JSON.parse(readFileSync(resolve(f.root,`research/${run}-step3-native-origin-${id}.json`))).carriers.item_file_sha256,sha(f.raw));});
++
++function readBound(f,r){const b=readFileSync(resolve(f.root,r.path));assert.equal(sha(b),r.sha256);return b;}
++for(const mode of ['truncated','cross-source'])test('complete native quote section rejects self-validating '+mode,actual,t=>{
++ const f=fixture(t),v=f.evidence.metadata_replay.source_inputs.find(x=>x.id==='def-axiom-of-choice');
++ const body=readBound(f,v.archive).toString(),head=body.split('## Definition\n',1)[0];
++ const d=JSON.parse(readBound(f,f.evidence.native_contract));const citation=d.contracts[id].citations.find(x=>x.source===v.id);
++ const quote=mode==='truncated'?citation.quote.split('\n')[0]:d.contracts[id].citations.find(x=>x.source!==v.id).quote;
++ v.archive=f.put(v.archive.path,head+'## Definition\n\n'+quote+'\n');citation.quote=quote;f.evidence.native_contract=f.put(f.evidence.native_contract.path,d);
++ assert.throws(()=>extra.replayNative66(f.root,run,id,{...f.evidence,recorded_at:new Date().toISOString()},r=>readBound(f,r)),/complete quote section/);
++});
++for(const [name,mutate]of Object.entries({page:f=>{f.evidence.page='forged-page';f.context.row.page='forged-page';},batch:f=>{f.evidence.batch='65';f.context.row.batch='65';},author:f=>{f.evidence.author_result='alpha-3a-batch-65.attempt-1.result.json';}}))test('explicit case pin rejects wrong '+name,actual,t=>{const f=fixture(t);mutate(f);assert.throws(()=>extra.replayNative66(f.root,run,id,{...f.evidence,recorded_at:new Date().toISOString()},r=>readBound(f,r)),/wrong exact native case/);});
++test('default version1 still rejects missing genuine native-window metadata timing',actual,t=>{
++ const f=fixture(t),registered=f.register(),d=JSON.parse(readFileSync(registered.path));d.version=1;d.policy='native-created-step3-origin-v1';delete d.metadata_replay;d.replay={policy:'literal-python-item-writer-v1',writer_script:'/tmp/legacy-writer.py'};
++ d.native_metadata_capture=f.put(`research/${run}-unit-native66/fake-old-time.json`,{captured_at:d.recorded_at,sources:[[d.native_manifest,'pages'],[d.native_contract,'proof-contracts']].map(([r,suffix])=>({source:`research/${run}-batch-66.${suffix}.json`,archive:r.path,raw_sha256:r.sha256,owner_modified_source:false,source_stat_at_capture:{mtime_utc:'2026-10-19T15:00:00Z'}}))});
++ rmSync(registered.path);writeFileSync(registered.path,JSON.stringify(d));assert.throws(()=>api.loadNativeCreationOrigin(f.root,run,id,f.context),/original metadata not bound by actual native-window capture/);
++});
++
++// This version1 timing regression is synthetic and ALWAYS runs, including
++// clones without the optional operational native66 log.
++test('version1 timing validation always runs without operational native66 fixture',t=>{
++ const root=mkdtempSync(resolve(tmpdir(),'legacy-native-origin-'));t.after(()=>rmSync(root,{recursive:true,force:true}));const r='unit-v1',i='lem-unit-v1';
++ const put=(p,x)=>{mkdirSync(dirname(resolve(root,p)),{recursive:true});const b=typeof x==='string'?x:JSON.stringify(x);writeFileSync(resolve(root,p),b);return{path:p,sha256:sha(b)};};
++ const baseline={at:'2020-01-01T00:00:00Z',items:[],existing_item_files:[]};put('research/unit-v1-step3-auditor-baseline.json',baseline);
++ const prefix='research/unit-v1-dispatch/alpha-3a-batch-1.attempt-1',author={role:'alpha',label:'3a-batch-1',evidence_tag:'.attempt-1',result_file:'alpha-3a-batch-1.attempt-1.result.json',immutable_result_file:'alpha-3a-batch-1.attempt-1.result.json',log:prefix+'.log',covers:['1'],started_at:'2020-01-01T00:01:00Z',ended_at:'2020-01-01T00:02:00Z'};
++ const native_item=put('research/unit-v1-item.md','---\nid: lem-unit-v1\nkind: lemma\nstatus: draft\npipeline_run: unit-v1\n---\n'),native_manifest=put('research/unit-v1-manifest.json',[{id:'p',items:[{id:i,kind:'lemma'}]}]),native_contract=put('research/unit-v1-contract.json',{version:1,scope:[i],contracts:{[i]:{}}});
++ const capture=put('research/unit-v1-capture.json',{captured_at:'2020-01-01T00:03:00Z',sources:[[native_manifest,'pages'],[native_contract,'proof-contracts']].map(([a,suffix])=>({source:`research/unit-v1-batch-1.${suffix}.json`,archive:a.path,raw_sha256:a.sha256,owner_modified_source:false,source_stat_at_capture:{mtime_utc:'2020-01-01T00:04:00Z'}}))});
++ const receipt={version:1,policy:'native-created-step3-origin-v1',run:r,step:3,id:i,owner_identity:'/root',native_execution_credit:false,mathematical_acceptance:false,recorded_at:'2020-01-01T00:05:00Z',reason:'Synthetic default-policy timing regression with no real execution credit.',baseline_sha256:sha(JSON.stringify(baseline)),page:'p',batch:'1',author_result:author.result_file,author_evidence:{result:put(prefix+'.result.json','{}'),prompt:put(prefix+'.prompt.md','unit fixture'),log:{path:prefix+'.log',sha256:'0'.repeat(64)}},native_item,native_manifest,native_contract,native_metadata_capture:capture,carriers:{},replay:{},native_write_binding:{}};
++ put('research/unit-v1-step3-native-origin-lem-unit-v1.json',receipt);assert.throws(()=>api.loadNativeCreationOrigin(root,r,i,{baseline,authors:[author],row:{id:i,page:'p',batch:'1',manifest_entry:{id:i,kind:'lemma'}}}),/original metadata not bound by actual native-window capture/);
++});
+--- a/tools/auditor-created-items.md
++++ b/tools/auditor-created-items.md
+@@ -464,3 +464,75 @@
+ current evidence and recertifies changed carriers normally. This mechanism
+ preserves historical context; it creates no native result, mathematical
+ judgment, creation origin or gate waiver.
++
++## Explicit native66 replay origin (version2 opt-in)
++
++`native-created-step3-origin-evidence-replay-v2` records only the exact
++`machine-learning-all-101-2026-10-19` native Alpha66 birth of
++`lem-diffusion-objective-estimator-expectation`. It writes origin receipt
++`native-created-step3-origin-replay-v2`, version2. Other runs/items/logs do not
++match this case-bound policy. Version1 and its original actual-mtime capture
++requirements remain unchanged. This route is provenance, never proof review,
++mathematical acceptance, extra native coverage, or owner-created attribution.
++
++Use the ordinary native-origin command with version2 and the usual baseline,
++authentic successful immutable author result/prompt/log, original item and
++complete metadata archives, original page/batch and six-carrier fields. Omit
++`replay` and `native_metadata_capture`; do not construct fictitious old stats.
++Instead supply `metadata_replay`:
++
++```
++{policy:"native66-heredoc-selected-metadata-v1",
++ historical_manifest_mtime:"unavailable; exact native writes and root byte-identical restore used instead",
++ restoration:{path,sha256}, manifest_before_restore:{path,sha256},
++ source_inputs:[{id:SUPPLIER_ID,archive:{path,sha256}}, ...six actual suppliers]}
++```
++
++The complete original native log and four exact native source/metadata command
++hashes are pinned. Restricted static shell/AST parsing reconstructs the literal
++heredoc, both literal replacement chains, authored manifest entry and ENTIRE
++helper contract. No logged Python/shell code is executed. The final derivation,
++citation-use and boundary rebuild is reproduced. Citation strings are extracted
++from the separately bound supplier archives and must also match successful
++native supplier-read output before creation, with actual source/section identity.
++The COMPLETE section is independently extracted between native source/section
++boundaries and must equal the archived section; substring/truncated/cross-source
++quotes cannot establish provenance. Exact immutable native result and original
++batch66/page identities are independently pinned.
++The claimed contract is only the comparison target, never replay input.
++
++The F2 correction's compound command really exited1 because its later read-only
++precheck rejected phase numbering. Its earlier straight-line literal writes and
++exact `unchanged` reflow output are retained separately. The final native job
++and later correction commands succeeded. This is not a false claim that each
++compound command succeeded. A changed/ambiguous/incomplete/later command stream
++fails the complete-log pin.
++
++Native manifest/contract selected projections and full item bytes must equal
++the retained archives and all six declared hashes. Complete metadata files are
++retained, but no historical replay claim is made about their unrelated rows.
++The genuine root restoration receipt must bind the exact whole manifest bytes
++to its preserved pre-preparation archive and explicit byte-identical restore,
++after native completion and before origin registration. Missing original
++manifest mtime stays unavailable. Native source/metadata write provenance,
++baseline exclusion and exact current initial item/manifest/contract linkage
++replace that one unavailable timing basis for this opt-in case only.
++
++Registration requires current selected carriers still equal the authenticated
++birth carriers. Later actual outside changes use ordinary explicit owner
++recertification, preserving native author identity and the complete truthful
++repair chain. Initial/closure replay still requires the operational native log;
++closure freezes origin, baseline, all metadata/source/quote/restore archives and
++result/prompt markers. Frozen-log relocation handling is unchanged. Neither
++origin registration nor recertification replaces native certification/gates.
++
++The case-specific durable replay tests require the original operational log
++and intentionally skip that operational fixture when the log is absent. Once
++a real origin exists, they prefer its immutable native_item/native_manifest/
++native_contract and six source-input archives over live source/carrier files;
++later native Step4/5 edits cannot silently redefine the birth fixture. A
++separate synthetic version1 native-window timing regression always runs.
++
++Before live registration, `NATIVE66_IMMUTABLE_TEST_ORIGIN=PATH` can exercise
++that same immutable-archive fixture branch using a prepared evidence JSON;
++it is a test-only input and never overrides an existing real origin.

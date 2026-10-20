@@ -1,0 +1,1827 @@
+{
+  "version": 1,
+  "scope": [
+    "def-verifier-and-generation-protocol",
+    "alg-budgeted-verifier-guided-generation",
+    "thm-independent-generation-success-and-verifier-error",
+    "lem-finite-response-likelihood-ratio-change-of-measure",
+    "alg-finite-group-relative-policy-update",
+    "lem-finite-response-score-gradient-identities",
+    "thm-group-centered-score-estimator-factor",
+    "rem-reasoning-training-evidence-and-evaluation-targets",
+    "ex-equal-group-rewards-zero-advantages",
+    "ex-perfect-and-false-positive-verifiers",
+    "ex-repeated-dependent-copies-no-sampling-gain",
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+    "lem-budgeted-verifier-generation-termination-and-calls",
+    "lem-finite-group-relative-update-termination-and-calls"
+  ],
+  "contracts": {
+    "def-verifier-and-generation-protocol": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires nonempty prompt, response, and support sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns zero mass outside the fixed support and defines scores only on supported responses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a singleton support; normalization gives its only response probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows the verifier to equal correctness or to differ from it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition requires an open parameter domain and makes no boundary-parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition gives finite response lists and no arbitrary-index selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This protocol specifies truncated responses, fixed supported policy masses, binary correctness/verifier maps and the product law used to mean independent draws. It does not characterize a property by two equivalent mathematical conditions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This protocol specifies truncated responses, fixed supported policy masses, binary correctness/verifier maps and the product law used to mean independent draws. It does not characterize a property by two equivalent mathematical conditions.",
+            "item_sha256": "52bb7864fb0412b82b3ea77120dc0462e90ba9ada7a9beca3acc5e09b061dc27",
+            "row_sha256": "7ab9fa56d7e815e328c992e182d8aa98ac2e45e2f7fab8cafcb197bf7403ab8e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This protocol specifies truncated responses, fixed supported policy masses, binary correctness/verifier maps and the product law used to mean independent draws. It does not characterize a property by two equivalent mathematical conditions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This protocol specifies truncated responses, fixed supported policy masses, binary correctness/verifier maps and the product law used to mean independent draws. It does not characterize a property by two equivalent mathematical conditions.",
+            "item_sha256": "52bb7864fb0412b82b3ea77120dc0462e90ba9ada7a9beca3acc5e09b061dc27",
+            "row_sha256": "bf22de9f3d0d7c6e9a446b73740e17cb254c711fcb2fe5198ae6c3383c02fd63"
+          }
+        }
+      ]
+    },
+    "alg-budgeted-verifier-guided-generation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "N=1 rejection search",
+          "result": "For a two-response law with π(c)=1/4, π(w)=3/4, A(c)=1, and A(w)=0, the procedure returns c with probability 1/4 and otherwise returns failure after its single draw.",
+          "check": "ml101-verifier-one-draw",
+          "fixture": "ml101-verifier-one-draw",
+          "asserts": "1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires N at least one and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly returns failure after the budget if no verifier accepts."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows N=1 and either returns that accepted response or failure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition resolves equal best-of-N scores by the fixed total order."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition makes no asymptotic statement as N grows."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite sampling procedure uses no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rejection stops at the first accepted response or the Nth rejection; best-of-N returns the least score maximizer. These are two operational mode definitions, not equivalent mathematical predicates requiring forward and reverse proofs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Rejection stops at the first accepted response or the Nth rejection; best-of-N returns the least score maximizer. These are two operational mode definitions, not equivalent mathematical predicates requiring forward and reverse proofs.",
+            "item_sha256": "6dc9211830b453bbbad9931b491378e6ebd864d3d209ad185f8654d852d55b32",
+            "row_sha256": "b42afa99c388c67e0bca72464bfab4bbd63f1ab4f3fcbbd3b7b82ef6e2d0edbc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Rejection stops at the first accepted response or the Nth rejection; best-of-N returns the least score maximizer. These are two operational mode definitions, not equivalent mathematical predicates requiring forward and reverse proofs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Rejection stops at the first accepted response or the Nth rejection; best-of-N returns the least score maximizer. These are two operational mode definitions, not equivalent mathematical predicates requiring forward and reverse proofs.",
+            "item_sha256": "6dc9211830b453bbbad9931b491378e6ebd864d3d209ad185f8654d852d55b32",
+            "row_sha256": "96562be58cee753f9c1593557880aa381192502a31c2daae3cd6b0e3a6a2cf60"
+          }
+        }
+      ]
+    },
+    "thm-independent-generation-success-and-verifier-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "For a fixed prompt $q$, take the finite truncated response set $Y_q$, sampling policy $\\pi_\\theta(\\cdot\\mid q)$, verifier $A_q$, and selection score $u_q$ from the generation protocol. Given an integer budget $N\\ge1$, choose exactly one of the following modes. Response draws, verifier and score evaluations, and comparisons of real scores and of the supplied tie order are supplied terminating exact operations with finite per-call costs. Each draw returns a response from the specified policy support with the stipulated independent law; no construction of a random source is asserted.\n\n1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first.\n\n2. **Best-of-$N$.** Draw exactly $N$ responses independently from $\\pi_\\theta(\\cdot\\mid q)$. Return a response with maximal value of $u_q$; if several responses have maximal score, return the $\\prec_q$-least one. Return status `selected`. This mode does not use the verifier to select its output and does not declare the selected response correct.\n\nIts output law is the one induced by the specified prompt, finite response set, length budget, truncation marker, policy, verifier or score, and tie order.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-budgeted-verifier-generation-termination-and-calls",
+          "source_section": "Statement",
+          "quote": "For every input of budgeted verifier-guided generation, with integer $N\\ge1$ and its supplied terminating exact operations, rejection search terminates with the first verifier-accepted response and status `accepted`, or with `failure` and no response exactly when all $N$ responses are rejected. It uses at most $N$ response draws and at most $N$ verifier evaluations. For a complete presampled tuple $(y_1,\\ldots,y_N)$, it succeeds exactly when at least one $A_q(y_i)=1$.\n\nBest-of-$N$ terminates after exactly $N$ response draws and can return the stipulated least maximizer using $N$ score evaluations, at most $N-1$ score comparisons and at most $N-1$ tie-order comparisons. It returns status `selected` and makes no correctness or verifier-acceptance assertion. Both modes therefore use finitely many supplied calls and have finite total cost equal to their finite bookkeeping cost plus the sum of actual finite per-call costs. The draw-count and output conclusions hold for every realized response tuple; independence is needed only for probabilistic calculations that separately assume it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-1-1",
+          "step": "1.1",
+          "claim": "Under $A_q=C_q$, rejection search succeeds exactly on the event $\\bigcup_{i=1}^N\\{C_q(Y_i)=1\\}$. Its complement is the intersection of the $N$ failure events. By independence [F4], that complement has probability $(1-p)^N$, so the success probability is $1-(1-p)^N$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-1-2",
+          "step": "1.2",
+          "claim": "Let $F_i$ be the event that the first $i$ adaptive responses are all incorrect, with $F_0$ the whole sample space. Enumerate the finite response histories lexicographically using the fixed response list in [F1], and partition $F_{i-1}$ into its positive-probability histories $h$. By [A1], each satisfies $\\Pr(C_q(Y_i)=0\\mid h)\\le1-p$, so finite additivity gives $\\Pr(F_i)=\\sum_{h\\subseteq F_{i-1}}\\Pr(h)\\Pr(C_q(Y_i)=0\\mid h)\\le(1-p)\\Pr(F_{i-1})$. Induction from $\\Pr(F_0)=1$ yields $\\Pr(F_N)\\le(1-p)^N$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-2-1",
+          "step": "2.1",
+          "claim": "For each draw let $B_i=\\{A_q(Y_i)=1,\\ C_q(Y_i)=0\\}$. Any accepted incorrect output selected from the $N$ candidates lies in $\\bigcup_{i=1}^{N}B_i$. For every outcome, $\\mathbf1_{\\cup_iB_i}\\le\\sum_{i=1}^{N}\\mathbf1_{B_i}$; summing this pointwise inequality against the nonnegative finite outcome masses gives $\\Pr(\\bigcup_iB_i)\\le\\sum_{i=1}^{N}\\Pr(B_i)\\le N\\epsilon$. Thus the false-acceptance probability is at most $N\\epsilon$. No factorization or independence is used in this step.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "perfect verifier, p=1/4, N=2",
+          "result": "Independent success is 1-(3/4)^2=7/16; with false-acceptance marginal bound ε=1/4, the finite union bound is Nε=1/2 without independence.",
+          "check": "ml101-verifier-independent-and-union",
+          "fixture": "ml101-verifier-independent-and-union",
+          "asserts": "1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a positive finite budget and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement part 1 gives success probability 0 at p=0, and part 3 gives zero success upper bound at that endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement part 1 gives success probability 1 at p=1, and part 3 gives zero failure bound at that endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement part 1 remains defined when every draw is incorrect (p=0) or correct (p=1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no continuous parameter-boundary or limiting claim; p=0 and p=1 are covered under the zero and one cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite event and history sums use the fixed finite response list and require no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The three claims are a perfect-verifier success formula, a false-acceptance union upper bound and an adaptive failure upper bound. Their stated sampling and verifier assumptions imply those bounds; no converse reconstructs independence or verifier perfection from a probability value.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The three claims are a perfect-verifier success formula, a false-acceptance union upper bound and an adaptive failure upper bound. Their stated sampling and verifier assumptions imply those bounds; no converse reconstructs independence or verifier perfection from a probability value.",
+            "item_sha256": "f2908432362c7b0a23472e0b1df5ed62ca7c45597503bc3527a385ad4c74b093",
+            "row_sha256": "8fd431384f372fe2d0c008d270099df0c10e7c08bdc3ea010babd4069a4b650e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The three claims are a perfect-verifier success formula, a false-acceptance union upper bound and an adaptive failure upper bound. Their stated sampling and verifier assumptions imply those bounds; no converse reconstructs independence or verifier perfection from a probability value.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The three claims are a perfect-verifier success formula, a false-acceptance union upper bound and an adaptive failure upper bound. Their stated sampling and verifier assumptions imply those bounds; no converse reconstructs independence or verifier perfection from a probability value.",
+            "item_sha256": "f2908432362c7b0a23472e0b1df5ed62ca7c45597503bc3527a385ad4c74b093",
+            "row_sha256": "6c25ea72006314e401390ea7c9421c40e3bc0b57c1ab07907b9a1929f0da4798"
+          }
+        }
+      ]
+    },
+    "lem-finite-response-likelihood-ratio-change-of-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-response-likelihood-ratio-change-of-measure-1-1",
+          "step": "1.1",
+          "claim": "For each index $j$, if $q(y_j)=0$, support inclusion forces $p(y_j)=0$ and the definition gives $q(y_j)\\rho(y_j)=p(y_j)=0$. If $q(y_j)>0$, the quotient is defined and $q(y_j)\\rho(y_j)=p(y_j)$. Thus this equality holds for every $j=1,\\ldots,m$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-likelihood-ratio-change-of-measure-2-1",
+          "step": "2.1",
+          "claim": "Multiplying the pointwise equality in step 1.1 by $f(y_j)$ and summing over $j$ using [F3] gives the stated identity. Taking $f(y_j)=1$ gives $\\sum_{j=1}^{m}q(y_j)\\rho(y_j)=\\sum_{j=1}^{m}p(y_j)=1$. Every operation is a finite sum, so no choice or sigma-finite measure hypothesis is used.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Y={a,b}, p=(1/3,2/3), q=(1/2,1/2)",
+          "result": "ρ=(2/3,4/3); for f=(2,-1), both weighted sums equal 0, and Σ_y q(y)ρ(y)=1.",
+          "check": "ml101-finite-response-ratio-cancellation",
+          "fixture": "ml101-finite-response-ratio-cancellation",
+          "asserts": "Let $Y$ be a finite nonempty response set with a fixed enumeration $(y_1,\\ldots,y_m)$, and let $p$ and $q$ be probability mass functions on $Y$ satisfying $p(y)>0\\Rightarrow q(y)>0$. Define $\\rho(y)=p(y)/q(y)$ when $q(y)>0$ and $\\rho(y)=0$ when $q(y)=0$. Then, for every real-valued function $f$ on $Y$,\n\n$$\\sum_{j=1}^{m}q(y_j)\\rho(y_j)f(y_j)=\\sum_{j=1}^{m}p(y_j)f(y_j).$$\n\nIn particular, $\\sum_{j=1}^{m}q(y_j)\\rho(y_j)=1$. This is a finite response identity; it asserts no change-of-measure result on an arbitrary trajectory space."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The response set Y is explicitly finite nonempty and p,q are probability masses. The indexed sum therefore has at least one listed response; zero q entries are separately handled in proof1.1 without making the underlying response list empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The response set Y is explicitly finite nonempty and p,q are probability masses. The indexed sum therefore has at least one listed response; zero q entries are separately handled in proof1.1 without making the underlying response list empty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles q(y_j)=0 and uses support inclusion to obtain p(y_j)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 with f=1 proves normalization, including a singleton finite response list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In the Statement, p=q makes rho=1 on positive masses, so both finite sums agree term by term."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is a finite mass identity and has no parameter endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement fixes an enumeration of the finite response set; all sums use that enumeration without arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Support inclusion permits pointwise cancellation q times rho equals p, then finite summation yields the weighted identity and mass one. No converse derives support inclusion from a single equality or claims that every change-of-measure factor is identified by one test function.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Support inclusion permits pointwise cancellation q times rho equals p, then finite summation yields the weighted identity and mass one. No converse derives support inclusion from a single equality or claims that every change-of-measure factor is identified by one test function.",
+            "item_sha256": "e6ea89324b65eb268b4b6fe0fa3c2636537d1a4a3439304ce7bbf838df289070",
+            "row_sha256": "ddd5c20307fa0a3e67d02b1b7cb142c659a772771546271766512b2ea382bf40"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Support inclusion permits pointwise cancellation q times rho equals p, then finite summation yields the weighted identity and mass one. No converse derives support inclusion from a single equality or claims that every change-of-measure factor is identified by one test function.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Support inclusion permits pointwise cancellation q times rho equals p, then finite summation yields the weighted identity and mass one. No converse derives support inclusion from a single equality or claims that every change-of-measure factor is identified by one test function.",
+            "item_sha256": "e6ea89324b65eb268b4b6fe0fa3c2636537d1a4a3439304ce7bbf838df289070",
+            "row_sha256": "43444820e6b14346563cb697b422d6272fdb85eb500b5f477e13c2eda87414d6"
+          }
+        }
+      ]
+    },
+    "alg-finite-group-relative-policy-update": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "G=3 and rewards (7,7,7)",
+          "result": "The population standard deviation is 0, so A=(0,0,0); every clipped reward term is 0 and the separately defined KL penalty remains.",
+          "check": "ml101-group-equal-rewards",
+          "fixture": "ml101-group-equal-rewards",
+          "asserts": "Set $A_{\\ell,i}:=(R_{\\ell,i}-\\overline R_\\ell)/s_\\ell$ when $s_\\ell>0$, and set $A_{\\ell,i}=0$ for every $i$ when $s_\\ell=0$. Hold the responses, rewards, and advantages fixed through the $K$ inner steps. For a candidate parameter $\\theta\\in U$, use the sequence-level ratio"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The prompt list is explicitly nonempty; G is at least two, T and K are positive integers, and every response policy has nonempty fixed support. Thus neither the group averages nor the KL support sum ranges over an empty list; the family detector has found an indexed formula inside this excluded empty input.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The prompt list is explicitly nonempty; G is at least two, T and K are positive integers, and every response policy has nonempty fixed support. Thus neither the group averages nor the KL support sum ranges over an empty list; the family detector has found an indexed formula inside this excluded empty input."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition sets every advantage to zero when the group population standard deviation s_l is zero, while retaining the separately defined KL term."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition requires G at least two and K,T at least one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition specifies the equal-reward case through s_l=0 and assigns all group advantages the value zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition restricts epsilon to (0,1) and step sizes to positive values; it makes no claim at parameter or hyperparameter limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses finite prompt, response, group, and update lists; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The group update uses an exact gradient oracle and domain oracle to accept a proposal or return the previous valid parameter. Its clipped finite objective and loop instructions assert no equivalence between policy improvement and an update condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The group update uses an exact gradient oracle and domain oracle to accept a proposal or return the previous valid parameter. Its clipped finite objective and loop instructions assert no equivalence between policy improvement and an update condition.",
+            "item_sha256": "c54d1384c620d3694b40965fd84605d8a6afdcd80db8911bbc1bc9102faae55e",
+            "row_sha256": "ac94e22f0e7ce492261104db8e81fa959b04ae1e6dab96803bdb9e8b2c2def17"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The group update uses an exact gradient oracle and domain oracle to accept a proposal or return the previous valid parameter. Its clipped finite objective and loop instructions assert no equivalence between policy improvement and an update condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The group update uses an exact gradient oracle and domain oracle to accept a proposal or return the previous valid parameter. Its clipped finite objective and loop instructions assert no equivalence between policy improvement and an update condition.",
+            "item_sha256": "c54d1384c620d3694b40965fd84605d8a6afdcd80db8911bbc1bc9102faae55e",
+            "row_sha256": "69b1c6366d4dc331c5ec99610218f37892fa06eb1ce09dd123d0377c91ca08ca"
+          }
+        }
+      ]
+    },
+    "lem-finite-response-score-gradient-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-response-score-gradient-identities-1-1",
+          "step": "1.1",
+          "claim": "For each coordinate $a=1,\\ldots,d$ and supported response $b_j$, [F2] supplies differentiability and positive mass, so [F3] and [F1] give $\\pi_\\theta(b_j\\mid q)S_{\\theta,a}(q,b_j)=\\partial_{\\theta_a}\\pi_\\theta(b_j\\mid q)$. This holds for every coordinate of each score vector.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-score-gradient-identities-2-1",
+          "step": "2.1",
+          "claim": "Fix a coordinate $a$. By [F4], differentiate the finite normalization identity $\\sum_{j=1}^m\\pi_\\theta(b_j\\mid q)=1$ in coordinate $a$ term by term. Using step 1.1 and [F6], the $a$th coordinate of the expected score is $\\sum_{j=1}^m\\pi_\\theta(b_j\\mid q)S_{\\theta,a}(q,b_j)=\\sum_{j=1}^m\\partial_{\\theta_a}\\pi_\\theta(b_j\\mid q)=\\partial_{\\theta_a}1=0$. This holds for every $a$, proving the vector identity.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-score-gradient-identities-3-1",
+          "step": "3.1",
+          "claim": "Fix a coordinate $a$. Since $r(b_j)$ is fixed and finite, [F4] differentiates $J(\\theta)=\\sum_{j=1}^m\\pi_\\theta(b_j\\mid q)r(b_j)$ in coordinate $a$ term by term. Substituting step 1.1, the $a$th coordinate of $\\nabla_\\theta J(\\theta)$ is $\\sum_{j=1}^m r(b_j)\\partial_{\\theta_a}\\pi_\\theta(b_j\\mid q)=\\sum_{j=1}^m\\pi_\\theta(b_j\\mid q)r(b_j)S_{\\theta,a}(q,b_j)$. By [F6], these are the coordinates of the stated vector expectation; since this holds for every $a$, the vector identity follows.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Bernoulli policy at θ=1/4",
+          "result": "For π(a)=θ, π(b)=1-θ, scores are (4,-4/3); their expectation is 0. With r=(1,0), J(θ)=θ and E[rS]=1=J′(θ).",
+          "check": "ml101-bernoulli-score-identities",
+          "fixture": "ml101-bernoulli-score-identities",
+          "asserts": "Fix a prompt $q$, an open parameter set $U\\subseteq\\mathbb R^d$, and the finite response policy with nonempty fixed support $(b_1,\\ldots,b_m)$ and score vectors $S_\\theta(q,b_j)$ from the generation protocol. For any fixed finite reward function $r$ on that support, define\n\n$$J(\\theta):=\\sum_{j=1}^{m}\\pi_\\theta(b_j\\mid q)r(b_j).$$\n\nThen, for every $\\theta\\in U$,\n\n$$\\mathbb E_\\theta[S_\\theta(q,Y)\\mid q]=0,\\qquad \\mathbb E_\\theta[r(Y)S_\\theta(q,Y)\\mid q]=\\nabla_\\theta J(\\theta).$$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed policy support is explicitly nonempty and its positive masses sum to one. Thus the displayed finite reward sum and coordinatewise expectations never range over an empty support; proof1.1 and subsequent coordinate sums use that normalized finite list.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The fixed policy support is explicitly nonempty and its positive masses sum to one. Thus the displayed finite reward sum and coordinatewise expectations never range over an empty support; proof1.1 and subsequent coordinate sums use that normalized finite list."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that the finite score expectation is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 differentiates the normalization sum; for a singleton support this says the only probability has derivative zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant reward, step 3.1 and the zero-score identity in step 2.1 give both sides equal to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to the open parameter domain U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement fixes an enumerated finite support and the proof uses only finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Differentiating normalization gives zero expected score and differentiating the finite reward sum gives the reward-score gradient. The theorem does not conversely characterize differentiable policies from these expectation equalities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Differentiating normalization gives zero expected score and differentiating the finite reward sum gives the reward-score gradient. The theorem does not conversely characterize differentiable policies from these expectation equalities.",
+            "item_sha256": "a4c317c0103a9f2a75d8712ce156f85778ae85d47e34a91a3fe32106e97e2d14",
+            "row_sha256": "e7e51e1c96736fdb2ce210985144760d0ebda422272f83f2f8cde554c977aa1c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Differentiating normalization gives zero expected score and differentiating the finite reward sum gives the reward-score gradient. The theorem does not conversely characterize differentiable policies from these expectation equalities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Differentiating normalization gives zero expected score and differentiating the finite reward sum gives the reward-score gradient. The theorem does not conversely characterize differentiable policies from these expectation equalities.",
+            "item_sha256": "a4c317c0103a9f2a75d8712ce156f85778ae85d47e34a91a3fe32106e97e2d14",
+            "row_sha256": "9a8b3661cf151207fd970ead266fd0ab2c83789c1068fe98ca8b0de7ae411c11"
+          }
+        }
+      ]
+    },
+    "thm-group-centered-score-estimator-factor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-response-score-gradient-identities",
+          "source_section": "Statement",
+          "quote": "Fix a prompt $q$, an open parameter set $U\\subseteq\\mathbb R^d$, and the finite response policy with nonempty fixed support $(b_1,\\ldots,b_m)$ and score vectors $S_\\theta(q,b_j)$ from the generation protocol. For any fixed finite reward function $r$ on that support, define\n\n$$J(\\theta):=\\sum_{j=1}^{m}\\pi_\\theta(b_j\\mid q)r(b_j).$$\n\nThen, for every $\\theta\\in U$,\n\n$$\\mathbb E_\\theta[S_\\theta(q,Y)\\mid q]=0,\\qquad \\mathbb E_\\theta[r(Y)S_\\theta(q,Y)\\mid q]=\\nabla_\\theta J(\\theta).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-group-centered-score-estimator-factor-1-1",
+          "step": "1.1",
+          "claim": "For each coordinate $a=1,\\ldots,d$, [F2] gives $\\mathbb E[R_iS_i^{(a)}\\mid q]=\\partial_{\\theta_a}J(\\theta)$ and $\\mathbb E[S_i^{(a)}\\mid q]=0$ for every $i$. Scalar linearity from [F3] yields $\\mathbb E[G^{-1}\\sum_i R_iS_i^{(a)}\\mid q]=\\partial_{\\theta_a}J(\\theta)$. Since this holds in every coordinate, [F5] gives $\\mathbb E[G^{-1}\\sum_i R_iS_i\\mid q]=\\nabla_\\theta J(\\theta)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-1-2",
+          "step": "1.2",
+          "claim": "For $i\\ne j$ and each coordinate $a$, expand the finite expectation over response pairs $(Y_i,Y_j)=(b_{q,k},b_{q,\\ell})$. By [F1] and [F4], their joint mass is $\\pi_\\theta(b_{q,k}\\mid q)\\pi_\\theta(b_{q,\\ell}\\mid q)$, so scalar finite-sum distributivity gives $\\mathbb E[R_jS_i^{(a)}\\mid q]=\\left(\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)S_{\\theta,a}(q,b_{q,k})\\right)\\left(\\sum_{\\ell=1}^{n_q}\\pi_\\theta(b_{q,\\ell}\\mid q)r(b_{q,\\ell})\\right)=0$ by the zero-score identity in [F2]. This proves the zero cross expectation in every coordinate under [F5].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-2-1",
+          "step": "2.1",
+          "claim": "Expand $\\overline R=G^{-1}\\sum_jR_j$, so $G^{-1}\\sum_i\\overline R S_i=G^{-2}\\sum_{i,j}R_jS_i$. For each coordinate $a$, scalar linearity from [F3], the $G$ diagonal expectations $\\partial_{\\theta_a}J(\\theta)$ from [F2], and the zero cross expectations from step 1.2 give $\\mathbb E[G^{-1}\\sum_i\\overline R S_i^{(a)}\\mid q]=G^{-2}G\\partial_{\\theta_a}J(\\theta)=G^{-1}\\partial_{\\theta_a}J(\\theta)$. By [F5] this is the coordinatewise vector identity. Subtracting it from step 1.1 proves the first identity.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-3-1",
+          "step": "3.1",
+          "claim": "For each $i$ and coordinate $a$, every term in $\\overline R_{-i}S_i^{(a)}$ has the form $R_jS_i^{(a)}$ with $j\\ne i$, so scalar linearity and step 1.2 give $\\mathbb E[\\overline R_{-i}S_i^{(a)}\\mid q]=0$. This holds for every coordinate, so [F5] gives the zero vector expectation. Subtracting these zero means from step 1.1 proves the leave-one-out identity coordinatewise.",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Bernoulli policy at θ=1/2, r=(1,0), G=2",
+          "result": "The raw score gradient is 1. The same-group centered estimator has expectation 1/2=(1-1/G)·1; the leave-one-out estimator has expectation 1.",
+          "check": "ml101-group-centered-factor",
+          "fixture": "ml101-group-centered-factor",
+          "asserts": "Fix a prompt $q$, a parameter $\\theta$ in the open domain of its finite response policy, a finite real reward function $r$ on the policy support, and an integer $G\\ge2$. Let $Y_1,\\ldots,Y_G$ be independent responses with common law $\\pi_\\theta(\\cdot\\mid q)$, let $R_i:=r(Y_i)$, let $S_i:=\\nabla_\\theta\\log\\pi_\\theta(Y_i\\mid q)$, and set\n$\\overline R:=G^{-1}\\sum_{j=1}^{G}R_j$ and $J(\\theta):=\\mathbb E_\\theta[r(Y)\\mid q]$.\nThen\n$$\\mathbb E_\\theta\\left[\\frac1G\\sum_{i=1}^{G}(R_i-\\overline R)S_i\\mid q\\right]=\\left(1-\\frac1G\\right)\\nabla_\\theta J(\\theta).$$\nIf instead $\\overline R_{-i}:=(G-1)^{-1}\\sum_{j\\ne i}R_j$, then\n$$\\mathbb E_\\theta\\left[\\frac1G\\sum_{i=1}^{G}(R_i-\\overline R_{-i})S_i\\mid q\\right]=\\nabla_\\theta J(\\theta).$$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The group size is an integer G at least two, and the underlying response policy has nonempty normalized support. Both the group sum and every leave-one-out group contain entries; G minus one is positive, so the empty-group interpretation is excluded.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The group size is an integer G at least two, and the underlying response policy has nonempty normalized support. Both the group sum and every leave-one-out group contain entries; G minus one is positive, so the empty-group interpretation is excluded."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For r identically zero, the Statement has J=0 and both centered estimators vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement assumes G at least two; its leave-one-out mean is undefined for G=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant r, every same-group centered reward difference is zero and the leave-one-out difference is zero; the score identity in step 1.1 gives nabla J=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to a parameter theta in the open policy domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement uses an explicitly finite group and finite response support; the proof uses finite pair sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Independent same-policy groups give the factor one minus one over G; the leave-one-out center gives the unscaled gradient. These two computed identities are not asserted equivalent and neither is a criterion for independence or unbiasedness of clipped normalized updates.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Independent same-policy groups give the factor one minus one over G; the leave-one-out center gives the unscaled gradient. These two computed identities are not asserted equivalent and neither is a criterion for independence or unbiasedness of clipped normalized updates.",
+            "item_sha256": "6d174ec41bf7d45ca1def5922127b7f63a1ce79fcbd096a8579bd3bee40e8ce7",
+            "row_sha256": "7804d325e8e2622b03f40b913b0f88d0da5e27a2beb5e08557963120e88deb27"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Independent same-policy groups give the factor one minus one over G; the leave-one-out center gives the unscaled gradient. These two computed identities are not asserted equivalent and neither is a criterion for independence or unbiasedness of clipped normalized updates.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Independent same-policy groups give the factor one minus one over G; the leave-one-out center gives the unscaled gradient. These two computed identities are not asserted equivalent and neither is a criterion for independence or unbiasedness of clipped normalized updates.",
+            "item_sha256": "6d174ec41bf7d45ca1def5922127b7f63a1ce79fcbd096a8579bd3bee40e8ce7",
+            "row_sha256": "74d1fab67dd10e5ccee030ba5c726cedd4056de87c772d0c3a5418d85f8183e9"
+          }
+        }
+      ]
+    },
+    "rem-reasoning-training-evidence-and-evaluation-targets": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This explanatory remark concerns the nonempty finite response protocols specified in its cited definitions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark makes no theorem about a zero reward or zero policy probability."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark makes no special one-sample boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark distinguishes evaluation targets and states limitations, not a degenerate-case theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no limiting claim in token budget, sample count, or policy parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite ratio caveat is explicitly conditional on AC; the local response results do not require it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark asserts no biconditional."
+        }
+      ]
+    },
+    "ex-equal-group-rewards-zero-advantages": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-group-relative-policy-update",
+          "source_section": "Definition",
+          "quote": "Fix a nonempty finite ordered prompt list $(q_1,\\ldots,q_M)$ with no repeated prompt. For each prompt $q_\\ell$, take the finite truncated response set $Y_{q_\\ell}$, ordered policy support $B_{q_\\ell}$, and policy family $\\pi_\\theta(\\cdot\\mid q_\\ell)$ from the generation protocol, with open parameter domain $U$. Fix a reference probability mass function $\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell)$ that is positive on exactly $B_{q_\\ell}$, a finite reward function $r_{q_\\ell}:B_{q_\\ell}\\to\\mathbb R$, an initial parameter $\\theta_0\\in U$, group size $G\\ge2$, a positive integer number $T$ of outer iterations, a positive integer number $K$ of inner steps per outer iteration, a clipping threshold $\\epsilon\\in(0,1)$, a penalty weight $\\beta\\ge0$, and positive step sizes $\\eta_{t,k}$ for $1\\le t\\le T$ and $1\\le k\\le K$. The prompt weights are uniform. Response draws, reward and policy-mass evaluations, scalar arithmetic, square roots, logarithms and comparisons are supplied terminating exact operations with finite per-call costs. Draws return supported responses with the specified independent law. Also supply an exact total domain oracle $M_U:\\mathbb R^d\\to\\{0,1\\}$, returning $1$ exactly on $U$, and an exact objective-gradient oracle: given the frozen outer-iteration data and a parameter in $U$, it returns the Euclidean gradient of $F_t$ when that total derivative exists and returns undefined-gradient otherwise. Both oracles terminate on every call with finite per-call cost. The gradient oracle includes the fixed finite objective data and any policy evaluations needed for its decision. This is a supplied-oracle model; it asserts neither an algorithm for deciding differentiability of arbitrary functions nor a general membership algorithm for arbitrary open sets.\n\nAt outer iteration $t$, freeze $\\theta_{t-1}$ and, for each prompt $q_\\ell$, draw $G$ independent responses $Y_{\\ell,1},\\ldots,Y_{\\ell,G}$ from $\\pi_{\\theta_{t-1}}(\\cdot\\mid q_\\ell)$. Compute the finite rewards $R_{\\ell,i}:=r_{q_\\ell}(Y_{\\ell,i})$, their mean\n\n$$\\overline R_\\ell:=\\frac1G\\sum_{i=1}^{G}R_{\\ell,i},$$\n\nand their population standard deviation\n\n$$s_\\ell:=\\sqrt{\\frac1G\\sum_{i=1}^{G}(R_{\\ell,i}-\\overline R_\\ell)^2}.$$\n\nSet $A_{\\ell,i}:=(R_{\\ell,i}-\\overline R_\\ell)/s_\\ell$ when $s_\\ell>0$, and set $A_{\\ell,i}=0$ for every $i$ when $s_\\ell=0$. Hold the responses, rewards, and advantages fixed through the $K$ inner steps. For a candidate parameter $\\theta\\in U$, use the sequence-level ratio\n\n$$\\rho_{\\ell,i}(\\theta):=\\frac{\\pi_\\theta(Y_{\\ell,i}\\mid q_\\ell)}{\\pi_{\\theta_{t-1}}(Y_{\\ell,i}\\mid q_\\ell)}.$$\n\nThe denominator is positive. Define $\\operatorname{clip}(x,1-\\epsilon,1+\\epsilon):=\\min(1+\\epsilon,\\max(1-\\epsilon,x))$, and use the exact finite-distribution forward KL penalty\n\n$$D_{\\mathrm{KL}}(\\pi_\\theta(\\cdot\\mid q_\\ell)\\Vert\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell)):=\\sum_{j=1}^{n_{q_\\ell}}\\pi_\\theta(b_{q_\\ell,j}\\mid q_\\ell)\\log\\frac{\\pi_\\theta(b_{q_\\ell,j}\\mid q_\\ell)}{\\pi_{\\mathrm{ref}}(b_{q_\\ell,j}\\mid q_\\ell)},$$\n\nwhere $(b_{q,1},\\ldots,b_{q,n_q})$ is the ordered support from the generation protocol. The empirical objective is\n\n$$F_t(\\theta):=\\frac1M\\sum_{\\ell=1}^{M}\\left[\\frac1G\\sum_{i=1}^{G}\\min\\left\\{\\rho_{\\ell,i}(\\theta)A_{\\ell,i},\\operatorname{clip}(\\rho_{\\ell,i}(\\theta),1-\\epsilon,1+\\epsilon)A_{\\ell,i}\\right\\}-\\beta D_{\\mathrm{KL}}(\\pi_\\theta(\\cdot\\mid q_\\ell)\\Vert\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell))\\right].$$\n\nFor each outer iteration, set $\\theta^{(0)}:=\\theta_{t-1}$. For each inner step $k$, call the supplied objective-gradient oracle at $\\theta^{(k-1)}$. If it returns a gradient, form the proposed update\n\n$$\\theta^{(k)}:=\\theta^{(k-1)}+\\eta_{t,k}\\nabla F_t(\\theta^{(k-1)})$$\n\nand call $M_U$ at that proposal. If $M_U$ returns $1$, apply it; the stipulated fixed positive support then holds on $U$. If the gradient oracle returns undefined-gradient, stop and return the last valid parameter with status undefined-gradient. If $M_U$ returns $0$, stop and return the last valid parameter with status invalid-update. After $K$ successful inner steps set $\\theta_t:=\\theta^{(K)}$ and continue to the next outer iteration. After $T$ successful outer iterations return $\\theta_T$ with status complete. This procedure asserts no monotone improvement, unbiasedness, or convergence guarantee.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-equal-group-rewards-zero-advantages-1-1",
+          "step": "1.1",
+          "claim": "Since every reward is $7$, the group mean is $\\overline R=(7+7+7)/3=7$, and each difference $R_i-\\overline R$ is zero. Thus the population standard deviation is $s=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-equal-group-rewards-zero-advantages-2-1",
+          "step": "2.1",
+          "claim": "By the specified zero-standard-deviation branch in [F2], each $A_i=0$. For every sampled response and candidate parameter, both arguments of the clipped minimum are zero, so its average reward-surrogate contribution is zero. The objective's separately defined KL term remains.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "G=3 and rewards (7,7,7)",
+          "result": "Mean 7, population standard deviation 0, all advantages 0, and the KL term remains.",
+          "check": "ml101-group-equal-rewards",
+          "fixture": "ml101-group-equal-rewards",
+          "asserts": "For any prompt, suppose every response in the policy support receives reward $7$ and the group size is $G=3$. Then every sampled group has mean reward $7$, population standard deviation $0$, and normalized advantages $A_i=0$. The reward surrogate contribution to the finite group-relative objective is exactly zero for every candidate policy parameter; the separately specified KL penalty remains in the objective formula."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires three group draws and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives population standard deviation s=0 for the stated equal rewards, triggering the definition’s zero-advantage branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes G=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example is the equal-reward degenerate group; step 1.1 computes its mean and zero deviations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example makes no parameter-boundary claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example is a direct finite calculation and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example assumes constant reward seven and group size three; mean seven and zero standard deviation force all advantages and clipped reward terms to vanish. It does not claim that vanishing advantages conversely characterize this particular reward value or group size.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The example assumes constant reward seven and group size three; mean seven and zero standard deviation force all advantages and clipped reward terms to vanish. It does not claim that vanishing advantages conversely characterize this particular reward value or group size.",
+            "item_sha256": "ccf1afb0fb40bbf9302ea4a49930ec8f6d0e6e20dc8f4d033d15f9b768fb57aa",
+            "row_sha256": "6917e5144358d223010e71374315829997a56d2efc526028188674057d7726e8"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example assumes constant reward seven and group size three; mean seven and zero standard deviation force all advantages and clipped reward terms to vanish. It does not claim that vanishing advantages conversely characterize this particular reward value or group size.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The example assumes constant reward seven and group size three; mean seven and zero standard deviation force all advantages and clipped reward terms to vanish. It does not claim that vanishing advantages conversely characterize this particular reward value or group size.",
+            "item_sha256": "ccf1afb0fb40bbf9302ea4a49930ec8f6d0e6e20dc8f4d033d15f9b768fb57aa",
+            "row_sha256": "29fefae2d95985f0d75d4ae1fb0288a218098db48e16122a456bdde220d0292f"
+          }
+        }
+      ]
+    },
+    "ex-perfect-and-false-positive-verifiers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "For a fixed prompt $q$, take the finite truncated response set $Y_q$, sampling policy $\\pi_\\theta(\\cdot\\mid q)$, verifier $A_q$, and selection score $u_q$ from the generation protocol. Given an integer budget $N\\ge1$, choose exactly one of the following modes. Response draws, verifier and score evaluations, and comparisons of real scores and of the supplied tie order are supplied terminating exact operations with finite per-call costs. Each draw returns a response from the specified policy support with the stipulated independent law; no construction of a random source is asserted.\n\n1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first.\n\n2. **Best-of-$N$.** Draw exactly $N$ responses independently from $\\pi_\\theta(\\cdot\\mid q)$. Return a response with maximal value of $u_q$; if several responses have maximal score, return the $\\prec_q$-least one. Return status `selected`. This mode does not use the verifier to select its output and does not declare the selected response correct.\n\nIts output law is the one induced by the specified prompt, finite response set, length budget, truncation marker, policy, verifier or score, and tie order.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-budgeted-verifier-generation-termination-and-calls",
+          "source_section": "Statement",
+          "quote": "For every input of budgeted verifier-guided generation, with integer $N\\ge1$ and its supplied terminating exact operations, rejection search terminates with the first verifier-accepted response and status `accepted`, or with `failure` and no response exactly when all $N$ responses are rejected. It uses at most $N$ response draws and at most $N$ verifier evaluations. For a complete presampled tuple $(y_1,\\ldots,y_N)$, it succeeds exactly when at least one $A_q(y_i)=1$.\n\nBest-of-$N$ terminates after exactly $N$ response draws and can return the stipulated least maximizer using $N$ score evaluations, at most $N-1$ score comparisons and at most $N-1$ tie-order comparisons. It returns status `selected` and makes no correctness or verifier-acceptance assertion. Both modes therefore use finitely many supplied calls and have finite total cost equal to their finite bookkeeping cost plus the sum of actual finite per-call costs. The draw-count and output conclusions hold for every realized response tuple; independence is needed only for probabilistic calculations that separately assume it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "Fix a prompt $q$, a budget $N\\ge1$, and the finite response law, correctness predicate, and verifier from the generation protocol. In part 1, $Y_1,\\ldots,Y_N$ are independent draws from that law and $p:=\\Pr(C_q(Y_1)=1)$ is their common one-draw correctness probability. Parts 2 and 3 state their own sampling hypotheses.\n\n1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws.\n\n3. For an adaptive sampler, let $p\\in[0,1]$. Suppose that for every $i\\le N$ and every positive-probability history $h=(Y_1,\\ldots,Y_{i-1})$ with no earlier correct response, the conditional probability of correctness at draw $i$ is at least $p$. Then the probability of no correct response in the first $N$ draws is at most $(1-p)^N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "Fix a prompt $q$, a budget $N\\ge1$, and the finite response law, correctness predicate, and verifier from the generation protocol. In part 1, $Y_1,\\ldots,Y_N$ are independent draws from that law and $p:=\\Pr(C_q(Y_1)=1)$ is their common one-draw correctness probability. Parts 2 and 3 state their own sampling hypotheses.\n\n1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws.\n\n3. For an adaptive sampler, let $p\\in[0,1]$. Suppose that for every $i\\le N$ and every positive-probability history $h=(Y_1,\\ldots,Y_{i-1})$ with no earlier correct response, the conditional probability of correctness at draw $i$ is at least $p$. Then the probability of no correct response in the first $N$ draws is at most $(1-p)^N$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-perfect-and-false-positive-verifiers-1-1",
+          "step": "1.1",
+          "claim": "For the perfect verifier, $p=3/4$ and rejection succeeds iff at least one of the two independent draws is $c$. Its failure probability is $(1-3/4)^2=1/16$, so its success probability is $15/16$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-perfect-and-false-positive-verifiers-2-1",
+          "step": "2.1",
+          "claim": "For the accept-all verifier, the first draw is always accepted. It is incorrect exactly when it is $w$, an event of probability $1/4$. Each draw has false-acceptance probability $\\epsilon=1/4$, so [F4] gives the valid bound $N\\epsilon=1/2$; the exact first-draw probability $1/4$ is below it.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "π(c)=3/4, π(w)=1/4, N=2",
+          "result": "A perfect verifier succeeds with probability 15/16. An accept-all verifier returns an incorrect first draw with probability 1/4, below the union bound 2·(1/4)=1/2.",
+          "check": "ml101-perfect-and-false-positive-verifiers",
+          "fixture": "ml101-perfect-and-false-positive-verifiers",
+          "asserts": "Let a prompt have one correct response $c$ with probability $3/4$ and one incorrect response $w$ with probability $1/4$. With a perfect verifier $A=C$, rejection search with budget $N=2$ returns an accepted response with probability $15/16$. With a false-positive verifier that accepts both $c$ and $w$, rejection search always returns its first draw, so its false-acceptance probability is $1/4$; the per-draw union bound gives $2(1/4)=1/2$."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a two-element response support and N=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes correctness probability 3/4 and does not treat the p=0 boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example compares a perfect verifier and an accept-all verifier on a nonconstant correctness event; it makes no deterministic-outcome claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example uses probabilities 3/4 and 1/4, not parameter endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite sums on a two-response space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-response witness computes perfect-verifier success fifteen sixteenths and accept-all false acceptance one quarter. It does not assert that either output probability uniquely characterizes the verifier or sampling law.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-response witness computes perfect-verifier success fifteen sixteenths and accept-all false acceptance one quarter. It does not assert that either output probability uniquely characterizes the verifier or sampling law.",
+            "item_sha256": "b42ccbf74003cbe6deca24800cbc03df1723913693930b7256e80fd18ced00fa",
+            "row_sha256": "e07dae2b299751cb4bd03d96993137403817149734c035b11d24bffa754ceb5d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two-response witness computes perfect-verifier success fifteen sixteenths and accept-all false acceptance one quarter. It does not assert that either output probability uniquely characterizes the verifier or sampling law.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-response witness computes perfect-verifier success fifteen sixteenths and accept-all false acceptance one quarter. It does not assert that either output probability uniquely characterizes the verifier or sampling law.",
+            "item_sha256": "b42ccbf74003cbe6deca24800cbc03df1723913693930b7256e80fd18ced00fa",
+            "row_sha256": "b878027182811ac94551317f89b68433b6d9f89977a2df252ded2fcd21f1600c"
+          }
+        }
+      ]
+    },
+    "ex-repeated-dependent-copies-no-sampling-gain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "Fix a prompt $q$, a budget $N\\ge1$, and the finite response law, correctness predicate, and verifier from the generation protocol. In part 1, $Y_1,\\ldots,Y_N$ are independent draws from that law and $p:=\\Pr(C_q(Y_1)=1)$ is their common one-draw correctness probability. Parts 2 and 3 state their own sampling hypotheses.\n\n1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws.\n\n3. For an adaptive sampler, let $p\\in[0,1]$. Suppose that for every $i\\le N$ and every positive-probability history $h=(Y_1,\\ldots,Y_{i-1})$ with no earlier correct response, the conditional probability of correctness at draw $i$ is at least $p$. Then the probability of no correct response in the first $N$ draws is at most $(1-p)^N$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-repeated-dependent-copies-no-sampling-gain-1-1",
+          "step": "1.1",
+          "claim": "Since $Y_1=Y_2=Y$, the event that at least one candidate is correct equals $\\{C(Y)=1\\}$, so its probability is $1/2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-repeated-dependent-copies-no-sampling-gain-2-1",
+          "step": "2.1",
+          "claim": "The copies are not independent because $\\Pr(Y_1\\text{ correct},Y_2\\text{ correct})=1/2\\ne(1/2)^2$. Applying [F2] to genuinely independent draws with the same marginal would give $1-(1-1/2)^2=3/4$, which differs from the repeated-copy probability in step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "two copies of one Bernoulli draw with p=1/2",
+          "result": "Repeated-copy success is 1/2 and the joint success probability is 1/2; independent draws would give 1-(1/2)^2=3/4.",
+          "check": "ml101-dependent-response-copies",
+          "fixture": "ml101-dependent-response-copies",
+          "asserts": "Let a single response $Y$ be correct with probability $1/2$, and define two candidates by $Y_1:=Y_2:=Y$. With a perfect verifier, the probability that at least one candidate is correct is $1/2$. The independent-draw formula at $N=2$ would give $3/4$, but these duplicated candidates are dependent and do not provide a second opportunity for success."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a two-element response support and two copies."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes one-draw correctness probability 1/2 and does not treat a zero-success endpoint."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes two repeated copies."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example isolates dependence between duplicate draws and does not treat a constant correctness outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example uses one-draw success probability 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is one finite Bernoulli draw repeated twice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The repeated-copy construction gives joint correctness one half instead of the independent product one quarter. It is a counterexample to treating copies as fresh samples, not an if-and-only-if criterion for dependence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The repeated-copy construction gives joint correctness one half instead of the independent product one quarter. It is a counterexample to treating copies as fresh samples, not an if-and-only-if criterion for dependence.",
+            "item_sha256": "71fd9e92f80cc2c313c460b31d5878b50cb45ee871f29b8552b6a874b13ca2bc",
+            "row_sha256": "e89b860cf69c466d46de2a0d41995c640c3f7060e4ca36e6d8da0a9117ff203c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The repeated-copy construction gives joint correctness one half instead of the independent product one quarter. It is a counterexample to treating copies as fresh samples, not an if-and-only-if criterion for dependence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The repeated-copy construction gives joint correctness one half instead of the independent product one quarter. It is a counterexample to treating copies as fresh samples, not an if-and-only-if criterion for dependence.",
+            "item_sha256": "71fd9e92f80cc2c313c460b31d5878b50cb45ee871f29b8552b6a874b13ca2bc",
+            "row_sha256": "59a84e59bbad824849ec5966a58ffee6d8e2e27aedcd55ac745aad4410274c88"
+          }
+        }
+      ]
+    },
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "For a fixed prompt $q$, take the finite truncated response set $Y_q$, sampling policy $\\pi_\\theta(\\cdot\\mid q)$, verifier $A_q$, and selection score $u_q$ from the generation protocol. Given an integer budget $N\\ge1$, choose exactly one of the following modes. Response draws, verifier and score evaluations, and comparisons of real scores and of the supplied tie order are supplied terminating exact operations with finite per-call costs. Each draw returns a response from the specified policy support with the stipulated independent law; no construction of a random source is asserted.\n\n1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first.\n\n2. **Best-of-$N$.** Draw exactly $N$ responses independently from $\\pi_\\theta(\\cdot\\mid q)$. Return a response with maximal value of $u_q$; if several responses have maximal score, return the $\\prec_q$-least one. Return status `selected`. This mode does not use the verifier to select its output and does not declare the selected response correct.\n\nIts output law is the one induced by the specified prompt, finite response set, length budget, truncation marker, policy, verifier or score, and tie order.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-budgeted-verifier-generation-termination-and-calls",
+          "source_section": "Statement",
+          "quote": "For every input of budgeted verifier-guided generation, with integer $N\\ge1$ and its supplied terminating exact operations, rejection search terminates with the first verifier-accepted response and status `accepted`, or with `failure` and no response exactly when all $N$ responses are rejected. It uses at most $N$ response draws and at most $N$ verifier evaluations. For a complete presampled tuple $(y_1,\\ldots,y_N)$, it succeeds exactly when at least one $A_q(y_i)=1$.\n\nBest-of-$N$ terminates after exactly $N$ response draws and can return the stipulated least maximizer using $N$ score evaluations, at most $N-1$ score comparisons and at most $N-1$ tie-order comparisons. It returns status `selected` and makes no correctness or verifier-acceptance assertion. Both modes therefore use finitely many supplied calls and have finite total cost equal to their finite bookkeeping cost plus the sum of actual finite per-call costs. The draw-count and output conclusions hold for every realized response tuple; independence is needed only for probabilistic calculations that separately assume it.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "Fix a prompt $q$, a budget $N\\ge1$, and the finite response law, correctness predicate, and verifier from the generation protocol. In part 1, $Y_1,\\ldots,Y_N$ are independent draws from that law and $p:=\\Pr(C_q(Y_1)=1)$ is their common one-draw correctness probability. Parts 2 and 3 state their own sampling hypotheses.\n\n1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws.\n\n3. For an adaptive sampler, let $p\\in[0,1]$. Suppose that for every $i\\le N$ and every positive-probability history $h=(Y_1,\\ldots,Y_{i-1})$ with no earlier correct response, the conditional probability of correctness at draw $i$ is at least $p$. Then the probability of no correct response in the first $N$ draws is at most $(1-p)^N$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-1",
+          "step": "1.1",
+          "claim": "A single sample is correct exactly when it is $c$, so its pass@1 probability is $1/4$. The $M$ replicas have joint mass $\\prod_{m=1}^{M}\\pi(y_m)$ on the finite product $Y_q^M$ by [F8]; summing this mass over all tuples gives $(\\sum_{y\\in Y_q}\\pi(y))^M=1$ by [F7], so it is a finite probability space. Summing over the other $M-1$ coordinates gives each replica's marginal $\\pi$, hence each correctness indicator has expectation $1/4$. The indicators and their average are bounded and integrable; by [F5]–[F6] the average's expectation is the average of their expectations, also $1/4$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-2",
+          "step": "1.2",
+          "claim": "With two independent candidates, the probability neither is correct is $(1-1/4)^2=9/16$. Therefore oracle pass@2 is $1-9/16=7/16$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-3",
+          "step": "1.3",
+          "claim": "A response is accepted with probability $1/4+3/8=5/8$. By the product law for independent candidates [F8], rejection search fails only if both candidates are $w_2$, which has probability $(3/8)^2=9/64$, so the probability it returns an accepted response is $55/64$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-2-1",
+          "step": "2.1",
+          "claim": "By [F8], it returns a correct response if the first draw is $c$, or if the first is rejected $w_2$ and the second is $c$, an event of probability $1/4+(3/8)(1/4)=11/32=22/64$. Conditional on an accepted output, the selected accuracy is therefore $(22/64)/(55/64)=2/5$, distinct from the pass@1 and oracle pass@2 values above.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F8",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "π(c)=1/4, π(w1)=π(w2)=3/8, A(c)=A(w1)=1, A(w2)=0, N=2",
+          "result": "Pass@1 is 1/4, oracle pass@2 is 7/16, rejection success is 55/64, and conditional verifier-selected accuracy is (22/64)/(55/64)=2/5.",
+          "check": "ml101-pass-and-selected-accuracy",
+          "fixture": "ml101-pass-and-selected-accuracy",
+          "asserts": "For one prompt let the finite response law assign mass $1/4$ to a correct response $c$ and mass $3/8$ to each of two incorrect responses $w_1,w_2$. Let the verifier accept $c$ and $w_1$ but reject $w_2$. The single-response pass@1 rate is $1/4$; for any integer $M\\ge1$, the empirical pass@1 over $M$ independent replicas from this same law has expectation $1/4$. Oracle pass@2, the event that at least one of two independent candidates is correct, has probability $7/16$; verifier-selected accuracy, the probability the rejection-search output is correct conditional on its being accepted, is $2/5$."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses three responses with positive masses and two draws."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assigns each of its three responses positive mass and uses no zero-mass response."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example compares one-sample pass@1 with two-sample oracle pass@2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example has nonconstant correctness and verifier outcomes and makes no deterministic-outcome claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All response masses are strictly between zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every metric is a finite sum or ratio on the explicitly listed response law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This three-response witness computes pass-at-one one quarter, oracle pass-at-two seven sixteenths and conditional selected accuracy two fifths. The distinct numerical outputs are not a converse characterization of candidate distributions or verifier rules.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This three-response witness computes pass-at-one one quarter, oracle pass-at-two seven sixteenths and conditional selected accuracy two fifths. The distinct numerical outputs are not a converse characterization of candidate distributions or verifier rules.",
+            "item_sha256": "b31911a443541cd01302e80bbc61aabf364b5c21f14b2a89fa423cd38d1ee457",
+            "row_sha256": "8d0eca0408137f66e5183391ce748d37f34693c338d415a2608897fdc258e57e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This three-response witness computes pass-at-one one quarter, oracle pass-at-two seven sixteenths and conditional selected accuracy two fifths. The distinct numerical outputs are not a converse characterization of candidate distributions or verifier rules.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This three-response witness computes pass-at-one one quarter, oracle pass-at-two seven sixteenths and conditional selected accuracy two fifths. The distinct numerical outputs are not a converse characterization of candidate distributions or verifier rules.",
+            "item_sha256": "b31911a443541cd01302e80bbc61aabf364b5c21f14b2a89fa423cd38d1ee457",
+            "row_sha256": "284b1ccd2ae37e9fec9eb01cd7edbf6979f44b30944d26dafacbb55b1bf3b07d"
+          }
+        }
+      ]
+    },
+    "lem-budgeted-verifier-generation-termination-and-calls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "For a fixed prompt $q$, take the finite truncated response set $Y_q$, sampling policy $\\pi_\\theta(\\cdot\\mid q)$, verifier $A_q$, and selection score $u_q$ from the generation protocol. Given an integer budget $N\\ge1$, choose exactly one of the following modes. Response draws, verifier and score evaluations, and comparisons of real scores and of the supplied tie order are supplied terminating exact operations with finite per-call costs. Each draw returns a response from the specified policy support with the stipulated independent law; no construction of a random source is asserted.\n\n1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first.\n\n2. **Best-of-$N$.** Draw exactly $N$ responses independently from $\\pi_\\theta(\\cdot\\mid q)$. Return a response with maximal value of $u_q$; if several responses have maximal score, return the $\\prec_q$-least one. Return status `selected`. This mode does not use the verifier to select its output and does not declare the selected response correct.\n\nIts output law is the one induced by the specified prompt, finite response set, length budget, truncation marker, policy, verifier or score, and tie order.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In rejection mode, after $i<N$ rejected draws the procedure either accepts the next response or advances its counter to $i+1$. Each draw and verifier evaluation terminates by the supplied-call assumption. Thus no more than $N$ such pairs of calls occur. If one is accepted, the stop rule returns the first such response; if none is accepted, it stops after the $N$th rejection with failure. For a presampled tuple this is exactly the event that some verifier value is one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In best-of-$N$, initialize a running best response with the first draw and its score. For each further candidate, compare its score with the running maximum, replace the running best on a strict increase, and on equality keep the lesser response in the supplied tie order. Induction on the scanned prefix shows the running best is its least score maximizer. Repeated identical responses cause no ambiguity: when two responses are equal, retaining either occurrence returns the same response.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After the finite scan in step 1.2, the result is the stipulated least maximizer. There were $N$ draws and score evaluations and only $N-1$ scan steps, with at most one score comparison and one tie-order comparison each. Rejection has the bounds in step 1.1. All other bookkeeping traverses finite lists; summing the finitely many supplied finite call costs proves finite total cost and termination in both modes. No pointwise step uses independence or equates the verifier with correctness.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement (algorithm inputs): N>=1 and response support nonempty are explicit premises; no empty candidate maximum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 includes zero accepted responses returning failure; zero scores remain finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1-2.1 covers N=1 with zero comparisons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.2 covers repeated identical responses and tied scores via the supplied strict order."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 covers first/last draw acceptance and all N rejections."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.2 constructs the least maximizer by a finite scan; no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof step 1.1 proves rejection succeeds exactly when at least one presampled verifier value is1, in both directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof step 1.1 proves rejection succeeds exactly when at least one presampled verifier value is1, in both directions."
+        }
+      ],
+      "finite_smoke": [],
+      "routine_steps": []
+    },
+    "lem-finite-group-relative-update-termination-and-calls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-group-relative-policy-update",
+          "source_section": "Definition",
+          "quote": "Fix a nonempty finite ordered prompt list $(q_1,\\ldots,q_M)$ with no repeated prompt. For each prompt $q_\\ell$, take the finite truncated response set $Y_{q_\\ell}$, ordered policy support $B_{q_\\ell}$, and policy family $\\pi_\\theta(\\cdot\\mid q_\\ell)$ from the generation protocol, with open parameter domain $U$. Fix a reference probability mass function $\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell)$ that is positive on exactly $B_{q_\\ell}$, a finite reward function $r_{q_\\ell}:B_{q_\\ell}\\to\\mathbb R$, an initial parameter $\\theta_0\\in U$, group size $G\\ge2$, a positive integer number $T$ of outer iterations, a positive integer number $K$ of inner steps per outer iteration, a clipping threshold $\\epsilon\\in(0,1)$, a penalty weight $\\beta\\ge0$, and positive step sizes $\\eta_{t,k}$ for $1\\le t\\le T$ and $1\\le k\\le K$. The prompt weights are uniform. Response draws, reward and policy-mass evaluations, scalar arithmetic, square roots, logarithms and comparisons are supplied terminating exact operations with finite per-call costs. Draws return supported responses with the specified independent law. Also supply an exact total domain oracle $M_U:\\mathbb R^d\\to\\{0,1\\}$, returning $1$ exactly on $U$, and an exact objective-gradient oracle: given the frozen outer-iteration data and a parameter in $U$, it returns the Euclidean gradient of $F_t$ when that total derivative exists and returns undefined-gradient otherwise. Both oracles terminate on every call with finite per-call cost. The gradient oracle includes the fixed finite objective data and any policy evaluations needed for its decision. This is a supplied-oracle model; it asserts neither an algorithm for deciding differentiability of arbitrary functions nor a general membership algorithm for arbitrary open sets.\n\nAt outer iteration $t$, freeze $\\theta_{t-1}$ and, for each prompt $q_\\ell$, draw $G$ independent responses $Y_{\\ell,1},\\ldots,Y_{\\ell,G}$ from $\\pi_{\\theta_{t-1}}(\\cdot\\mid q_\\ell)$. Compute the finite rewards $R_{\\ell,i}:=r_{q_\\ell}(Y_{\\ell,i})$, their mean\n\n$$\\overline R_\\ell:=\\frac1G\\sum_{i=1}^{G}R_{\\ell,i},$$\n\nand their population standard deviation\n\n$$s_\\ell:=\\sqrt{\\frac1G\\sum_{i=1}^{G}(R_{\\ell,i}-\\overline R_\\ell)^2}.$$\n\nSet $A_{\\ell,i}:=(R_{\\ell,i}-\\overline R_\\ell)/s_\\ell$ when $s_\\ell>0$, and set $A_{\\ell,i}=0$ for every $i$ when $s_\\ell=0$. Hold the responses, rewards, and advantages fixed through the $K$ inner steps. For a candidate parameter $\\theta\\in U$, use the sequence-level ratio\n\n$$\\rho_{\\ell,i}(\\theta):=\\frac{\\pi_\\theta(Y_{\\ell,i}\\mid q_\\ell)}{\\pi_{\\theta_{t-1}}(Y_{\\ell,i}\\mid q_\\ell)}.$$\n\nThe denominator is positive. Define $\\operatorname{clip}(x,1-\\epsilon,1+\\epsilon):=\\min(1+\\epsilon,\\max(1-\\epsilon,x))$, and use the exact finite-distribution forward KL penalty\n\n$$D_{\\mathrm{KL}}(\\pi_\\theta(\\cdot\\mid q_\\ell)\\Vert\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell)):=\\sum_{j=1}^{n_{q_\\ell}}\\pi_\\theta(b_{q_\\ell,j}\\mid q_\\ell)\\log\\frac{\\pi_\\theta(b_{q_\\ell,j}\\mid q_\\ell)}{\\pi_{\\mathrm{ref}}(b_{q_\\ell,j}\\mid q_\\ell)},$$\n\nwhere $(b_{q,1},\\ldots,b_{q,n_q})$ is the ordered support from the generation protocol. The empirical objective is\n\n$$F_t(\\theta):=\\frac1M\\sum_{\\ell=1}^{M}\\left[\\frac1G\\sum_{i=1}^{G}\\min\\left\\{\\rho_{\\ell,i}(\\theta)A_{\\ell,i},\\operatorname{clip}(\\rho_{\\ell,i}(\\theta),1-\\epsilon,1+\\epsilon)A_{\\ell,i}\\right\\}-\\beta D_{\\mathrm{KL}}(\\pi_\\theta(\\cdot\\mid q_\\ell)\\Vert\\pi_{\\mathrm{ref}}(\\cdot\\mid q_\\ell))\\right].$$\n\nFor each outer iteration, set $\\theta^{(0)}:=\\theta_{t-1}$. For each inner step $k$, call the supplied objective-gradient oracle at $\\theta^{(k-1)}$. If it returns a gradient, form the proposed update\n\n$$\\theta^{(k)}:=\\theta^{(k-1)}+\\eta_{t,k}\\nabla F_t(\\theta^{(k-1)})$$\n\nand call $M_U$ at that proposal. If $M_U$ returns $1$, apply it; the stipulated fixed positive support then holds on $U$. If the gradient oracle returns undefined-gradient, stop and return the last valid parameter with status undefined-gradient. If $M_U$ returns $0$, stop and return the last valid parameter with status invalid-update. After $K$ successful inner steps set $\\theta_t:=\\theta^{(K)}$ and continue to the next outer iteration. After $T$ successful outer iterations return $\\theta_T$ with status complete. This procedure asserts no monotone improvement, unbiasedness, or convergence guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty set $Q$ of prompts. For each $q\\in Q$, fix a finite nonempty ordinary-token alphabet $V$, a positive integer generation budget $L_q$, an end-of-sequence token $e\\notin V$, and a truncation marker $\\tau\\notin V\\cup\\{e\\}$. Generate at most $L_q$ tokens from $V\\cup\\{e\\}$. A permitted response is the sampled prefix through its first $e$ if $e$ occurs within the budget; otherwise it is the full $L_q$-token prefix followed by the unsampled marker $\\tau$. Fix a nonempty finite ordered list of distinct permitted responses $(y_{q,1},\\ldots,y_{q,m_q})$ and let $Y_q$ be its underlying set. The prompt set, tokenizer alphabet, budget, terminal markers, and response list are part of the evaluation protocol; changing them changes the response distribution being evaluated.\n\nFor each $q$, fix a strict total order $\\prec_q$ on $Y_q$, meaning an irreflexive, transitive relation for which either $y\\prec_q z$ or $z\\prec_q y$ holds for every pair of distinct responses $y,z$. Let $U\\subseteq\\mathbb R^d$ be open. For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$: $\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$. Each mass is totally differentiable in $\\theta$. Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$. At a fixed prompt this is the finite-action policy of a one-decision finite Markov decision process, with response strings as actions. Its score vector on the support is\n\n$$S_\\theta(q,y):=\\nabla_\\theta\\log\\pi_\\theta(y\\mid q),\\qquad y\\in B_q.$$\n\nFor finite sums over supported responses, write\n$$\\mathbb E_\\theta[f(Y)\\mid q]:=\\sum_{k=1}^{n_q}\\pi_\\theta(b_{q,k}\\mid q)f(b_{q,k}).$$\n\nFor each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable. $C_q(y)=1$ means that response $y$ is correct for the stated task criterion; $A_q(y)=1$ means that the verifier accepts it. A false acceptance is an output with $A_q(y)=1$ and $C_q(y)=0$. The verifier is not assumed to equal the correctness predicate.\n\nAlso fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them. The total order $\\prec_q$ resolves equal selection scores by choosing the $\\prec_q$-least maximizer. Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-sign-rules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c \\in F$.\n\n1. If $a > 0$ and $b > 0$ then $ab > 0$.\n2. If $a > 0$ and $b < 0$ then $ab < 0$.\n3. If $a < 0$ and $b < 0$ then $ab > 0$.\n4. If $c > 0$ then $a < b \\iff ac < bc$.\n5. If $c < 0$ then $a < b \\iff bc < ac$ (multiplication by a negative reverses order).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix an outer iteration begun at a valid parameter. Every returned response belongs to its finite fixed support. The $G$ rewards have a finite mean; their squared deviations have a finite nonnegative mean. By [F3], the standard deviation is a finite nonnegative real. If it is positive, the normalized advantages are finite quotients; if it is zero, the explicit branch sets them to zero and makes no division.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At any candidate parameter in $U$, old and new supported policy masses are positive by [F2], so each sampled sequence ratio is finite and has a nonzero denominator. The positive reference masses make every KL log ratio a finite real by [F4]; its sum over each finite support is finite. Clipping, products, minima and finite averages in the exact displayed objective therefore produce a finite real value. This requires no differentiability of the clipped minimum at a boundary.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Initially the last valid parameter is $\\theta_0\\in U$. Suppose it is valid before an inner attempt. The supplied exact gradient oracle terminates; if the total derivative does not exist, it reports undefined-gradient and the procedure returns the unchanged valid parameter. Otherwise its gradient is a finite vector in $\\mathbb R^d$, so the finite step size gives a finite proposal. The supplied exact domain oracle terminates and returns zero or one. A zero returns the previous parameter with invalid-update; a one places the new parameter in $U$, where fixed positive support holds. Induction over inner and outer iterations proves the invariant and stated return statuses. The frozen data and objective are well-defined by steps 1.1 and 1.2.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each reached outer iteration uses exactly $MG$ supported response draws and reward evaluations, followed by at most $K$ inner attempts. Every attempt makes one gradient-oracle call and at most one domain-oracle call. There are at most $T$ reached outer iterations, so the respective counts are at most $TMG$, $TMG$, $TK$ and $TK$. Every support, group and coordinate computation is finite, and every supplied call has finite cost. Thus the finite sum of actual call costs and finite bookkeeping costs is finite; the procedure completes the prescribed loops or exits earlier as described in step 2.1. This argument decides neither arbitrary differentiability nor arbitrary open-set membership without the supplied oracles.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement (algorithm inputs): Given T,K>=1,G>=2 and finite nonempty prompts/supports; no empty normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 uses zero standard deviation branch with zero advantages, no division by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 3.1 covers one outer iteration, one inner attempt, one prompt."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 covers undefined gradient and rejected proposal returning last valid parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 3.1 allows early exit or completion of every prescribed iteration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement (algorithm inputs): Supplied draws/evaluators/oracles and finite loops, no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        }
+      ],
+      "finite_smoke": [],
+      "routine_steps": []
+    }
+  }
+}

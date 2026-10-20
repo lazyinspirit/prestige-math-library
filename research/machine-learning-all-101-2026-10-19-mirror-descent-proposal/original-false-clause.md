@@ -1,0 +1,1 @@
+For convex losses state Hazan's bound $\mathrm{Regret}_T(u)\le\frac{\eta}{4}\sum_{t=1}^T\|g_t\|_{*,t}^2+\frac{R(u)-R(x_1)}{2\eta}$; if $D_R^2=\max_{x,y\in K}(R(x)-R(y))$ and $\|g_t\|_{*,t}\le G_R$, the choice $\eta=D_R/(G_R\sqrt T)$ gives $D_RG_R\sqrt T$.

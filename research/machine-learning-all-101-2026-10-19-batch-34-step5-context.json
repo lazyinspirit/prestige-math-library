@@ -1,0 +1,131 @@
+{
+  "group": "k",
+  "batches": [
+    "34"
+  ],
+  "pages_read": [
+    "message-passing-graph-neural-networks",
+    "message-passing-graph-neural-networks-examples"
+  ],
+  "items_read": [
+    "def-finite-labeled-graph",
+    "def-multiset",
+    "def-graph-isomorphism",
+    "def-message-passing-gnn",
+    "def-one-dimensional-weisfeiler-lehman-test",
+    "lem-countable-bounded-multiset-sum-encoding",
+    "alg-message-passing-forward-pass",
+    "def-graph-isomorphism-network",
+    "lem-one-wl-isomorphism-invariance",
+    "thm-message-passing-gnn-no-more-powerful-than-1wl",
+    "thm-injective-message-passing-matches-1wl",
+    "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl",
+    "ex-mean-max-aggregation-lose-multiplicity",
+    "ex-gin-irrational-self-weight-encoding"
+  ],
+  "conventions": [
+    {
+      "convention": "Graphs are finite, simple, undirected and vertex-labeled; compared graphs use the same label set. Empty vertex sets are permitted.",
+      "fixed_by": "def-finite-labeled-graph",
+      "matters_for": [
+        "def-graph-isomorphism",
+        "def-message-passing-gnn",
+        "def-one-dimensional-weisfeiler-lehman-test",
+        "lem-one-wl-isomorphism-invariance",
+        "thm-message-passing-gnn-no-more-powerful-than-1wl",
+        "thm-injective-message-passing-matches-1wl",
+        "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl"
+      ]
+    },
+    {
+      "convention": "Finite multisets are finitely supported nonnegative integer multiplicity functions; size counts multiplicity, and the empty multiset has size zero.",
+      "fixed_by": "def-multiset",
+      "matters_for": [
+        "def-message-passing-gnn",
+        "def-one-dimensional-weisfeiler-lehman-test",
+        "lem-countable-bounded-multiset-sum-encoding",
+        "ex-mean-max-aggregation-lose-multiplicity"
+      ]
+    },
+    {
+      "convention": "Message-passing maps are shared across compared graphs. Initialization depends only on labels; no vertex identities or graph-wide information enter before the final multiset readout. Depth may be zero.",
+      "fixed_by": "def-message-passing-gnn",
+      "matters_for": [
+        "alg-message-passing-forward-pass",
+        "def-graph-isomorphism-network",
+        "thm-message-passing-gnn-no-more-powerful-than-1wl",
+        "thm-injective-message-passing-matches-1wl"
+      ]
+    },
+    {
+      "convention": "WL starts at round zero with the original labels and uses canonical ordered pairs of center color and neighbor-color multiset. Distinguishability means unequal graph color multisets at some finite round.",
+      "fixed_by": "def-one-dimensional-weisfeiler-lehman-test",
+      "matters_for": [
+        "lem-one-wl-isomorphism-invariance",
+        "thm-message-passing-gnn-no-more-powerful-than-1wl",
+        "thm-injective-message-passing-matches-1wl",
+        "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl"
+      ]
+    },
+    {
+      "convention": "The GIN definition imposes no injectivity on its finite MLPs or readout and makes no claim that a fixed finite architecture realizes an arbitrary injection.",
+      "fixed_by": "def-graph-isomorphism-network",
+      "matters_for": [
+        "thm-injective-message-passing-matches-1wl",
+        "ex-gin-irrational-self-weight-encoding"
+      ]
+    },
+    {
+      "convention": "Matching WL requires injectivity on the labels, neighbor multisets, center-state/aggregate pairs and final multisets encountered across the compared pair. Sum-code existence additionally uses a countable universe and fixed multiset-size bounds.",
+      "fixed_by": "thm-injective-message-passing-matches-1wl",
+      "matters_for": [
+        "thm-injective-message-passing-matches-1wl"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-one-dimensional-weisfeiler-lehman-test",
+      "statement": "Round zero colors are vertex labels; each next color is the ordered pair of the previous center color and neighbor-color multiset. Two graphs are distinguished at round t exactly when their graph color multisets differ.",
+      "used_by": [
+        "lem-one-wl-isomorphism-invariance",
+        "thm-message-passing-gnn-no-more-powerful-than-1wl",
+        "thm-injective-message-passing-matches-1wl",
+        "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl"
+      ]
+    },
+    {
+      "id": "def-message-passing-gnn",
+      "statement": "Each layer aggregates the finite multiset of previous neighbor states and updates the previous center state using shared functions; graph output is a shared function of the final node-state multiset.",
+      "used_by": [
+        "alg-message-passing-forward-pass",
+        "def-graph-isomorphism-network",
+        "thm-message-passing-gnn-no-more-powerful-than-1wl",
+        "thm-injective-message-passing-matches-1wl",
+        "ex-mean-max-aggregation-lose-multiplicity"
+      ]
+    },
+    {
+      "id": "lem-countable-bounded-multiset-sum-encoding",
+      "statement": "For a countable set X and M ≥ 0, there is a positive integer-valued map φ whose sum is injective on multisets of total multiplicity at most M. For every irrational ε, (c,S) ↦ (1+ε)φ(c)+Σ_{x∈S}φ(x) is injective on center/multiset pairs with the same bound.",
+      "used_by": [
+        "thm-injective-message-passing-matches-1wl",
+        "ex-gin-irrational-self-weight-encoding"
+      ]
+    },
+    {
+      "id": "thm-message-passing-gnn-no-more-powerful-than-1wl",
+      "statement": "For finite labeled graphs and a shared depth-K message-passing network, equal WL graph color multisets at every round 0 through K imply equal network graph outputs. Equivalently, network distinction implies WL distinction at some round at most K.",
+      "used_by": []
+    },
+    {
+      "id": "thm-injective-message-passing-matches-1wl",
+      "statement": "If WL distinguishes a finite labeled graph pair at round K, a shared depth-K message-passing network distinguishes it when initialization, aggregation, update and readout satisfy the stated injectivity conditions on the encountered inputs. The GIN sum-code clause assumes countability and fixed size bounds and does not assert arbitrary injection realization by a fixed finite MLP.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": []
+}

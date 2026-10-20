@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-zero-mult.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -32,7 +33,11 @@ pipeline_run: null
 
 ## Statement
 
-In any field $F$ ([[def-field]]), for every $a \in F$ we have $0 \cdot a = 0$.
+In any field $F$ (Field), for every $a \in F$ we have $0 \cdot a = 0$.
+
+## Statement references
+
+[[def-field]]
 
 ## Facts & Assumptions
 

@@ -26,6 +26,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-observed-density-is-latent-marginal-under-tonelli.json
   judge:
     model: "gpt-6-luna"
     verdict: pass
@@ -40,7 +41,7 @@ sources:
 ## Statement
 
 Assume the hypotheses of
-[[def-latent-variable-joint-and-observed-data-factorization]]. Then
+Latent-variable joint and observed-data factorization. Then
 $m(\theta,x)=\int p(\theta,x,z)\,\mu(dz)$ is jointly measurable in
 $(\theta,x)$. For each fixed $\theta$, it is an observed-data probability
 density: it is $\mathcal A$-measurable and
@@ -52,6 +53,10 @@ measurable and
 $\int |h(\theta,x,z)|p(\theta,x,z)\,d(\nu\otimes\mu)<\infty$ for a fixed
 $\theta$, Fubini permits exchanging the latent and observed integrals of
 $hp$. No exchange is claimed without this absolute integrability.
+
+## Statement references
+
+[[def-latent-variable-joint-and-observed-data-factorization]]
 
 ## Facts & Assumptions
 

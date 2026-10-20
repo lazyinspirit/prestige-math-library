@@ -1,0 +1,155 @@
+{
+  "group": "f",
+  "batches": ["18"],
+  "pages_read": [
+    "ml02-random-forests",
+    "ml02-random-forests-examples"
+  ],
+  "items_read": [
+    "alg-bagged-random-forest",
+    "thm-infinite-forest-vote-limit",
+    "thm-random-forest-strength-correlation-bound",
+    "thm-regression-forest-risk-under-unbiased-randomized-trees",
+    "ex-random-forest-zero-margin-vote-limit",
+    "ex-random-forest-out-of-bag-diagnostic",
+    "ex-random-forest-strength-correlation-tradeoff"
+  ],
+  "conventions": [
+    {
+      "convention": "Training data and forest settings are fixed. Bootstrap indices and node feature subsets are mutually independent; tree randomizations have a common law conditional on those fixed inputs.",
+      "fixed_by": "alg-bagged-random-forest",
+      "matters_for": [
+        "thm-infinite-forest-vote-limit",
+        "thm-random-forest-strength-correlation-bound",
+        "thm-regression-forest-risk-under-unbiased-randomized-trees",
+        "ex-random-forest-zero-margin-vote-limit",
+        "ex-random-forest-out-of-bag-diagnostic"
+      ]
+    },
+    {
+      "convention": "Bootstrap positions remain distinct despite repeated original observations. Splits use adjacent-distinct-value midpoints, nonempty children, and coordinate-then-cut-index ties. Classification leaf and forest ties select the least class index.",
+      "fixed_by": "alg-bagged-random-forest",
+      "matters_for": [
+        "ex-random-forest-zero-margin-vote-limit",
+        "ex-random-forest-out-of-bag-diagnostic"
+      ]
+    },
+    {
+      "convention": "An observation's out-of-bag set consists precisely of trees whose bootstrap count for that observation is zero; an empty set returns no prediction.",
+      "fixed_by": "alg-bagged-random-forest",
+      "matters_for": ["ex-random-forest-out-of-bag-diagnostic"]
+    },
+    {
+      "convention": "Finite-forest risk integrates actual tie-broken classification error over the test law, conditional on the tree randomizations. Its asserted strict-margin limit requires P{m=0}=0.",
+      "fixed_by": "thm-infinite-forest-vote-limit",
+      "matters_for": ["ex-random-forest-zero-margin-vote-limit"]
+    },
+    {
+      "convention": "The strongest wrong class uses the least maximizing class index. Strength is E_P m and must be strictly positive. The correlation parameter is expected independent-pair covariance divided by (E_Q sd)^2, with a separate zero-denominator branch.",
+      "fixed_by": "thm-random-forest-strength-correlation-bound",
+      "matters_for": ["ex-random-forest-strength-correlation-tradeoff"]
+    },
+    {
+      "convention": "Regression unbiasedness means E_P Y = E_P h(X,θ) for every allowed θ. Residual covariance is taken over the shared test pair, with two independent tree randomizations; both risks vanish when E_Q sd=0.",
+      "fixed_by": "thm-regression-forest-risk-under-unbiased-randomized-trees",
+      "matters_for": ["thm-regression-forest-risk-under-unbiased-randomized-trees"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-bagged-random-forest",
+      "statement": "On fixed finite training data, independently bootstrap n observations for each tree and independently sample m candidate features at each possible node. Grow midpoint-split CART trees to the finite depth cap using the specified scores and deterministic ties. Aggregate regression predictions by averaging and classification predictions by majority vote with least-index ties. Out-of-bag predictions use exactly the trees omitting the observation and are absent when that set is empty.",
+      "used_by": [
+        "thm-infinite-forest-vote-limit",
+        "thm-random-forest-strength-correlation-bound",
+        "thm-regression-forest-risk-under-unbiased-randomized-trees",
+        "ex-random-forest-zero-margin-vote-limit",
+        "ex-random-forest-out-of-bag-diagnostic",
+        "ex-random-forest-strength-correlation-tradeoff"
+      ]
+    },
+    {
+      "id": "thm-infinite-forest-vote-limit",
+      "statement": "For a jointly measurable classifier with a finite ordered class set of size J≥2, IID tree randomizations whose sequence is independent of the test pair, and P{m=0}=0, the conditional finite-forest risks converge almost surely in the randomization sequence to P{m<0}.",
+      "used_by": ["ex-random-forest-zero-margin-vote-limit"]
+    },
+    {
+      "id": "thm-random-forest-strength-correlation-bound",
+      "statement": "For the stated jointly measurable finite-class classifier, independent common-law randomizations whose pair is independent of the test pair, and strength s=E_P m>0, put d=E_Q sd. If d=0, P{m<0}=0. If d>0, define ρ as expected independent-pair raw-margin covariance divided by d²; then ρ≥0 and P{m<0}≤ρ(1−s²)/s².",
+      "used_by": ["ex-random-forest-strength-correlation-tradeoff"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common laws of the tree randomizations in the vote-limit proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of class-indicator sequences obtained from independent randomizations.",
+      "opened": true
+    },
+    {
+      "id": "thm-kolmogorov-iid-l1-strong-law",
+      "used_for": "Almost-sure convergence of each bounded class-vote proportion.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product laws for independent tree pairs and test pairs, treating the entire randomization sequence as one random element where required; finite independent bootstrap and stump calculations in the examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Measurability of integrated class probabilities, exchange of test and tree integrals, transfer of almost-sure vote convergence, and covariance identities. Regression product integrability is established before exchanging integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Convergence of conditional classification risks under domination by one, and the contradiction from the zero-margin example's constant odd-subsequence expected risk.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Interpretation of expectations as probability integrals throughout the risk and correlation calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered variance and covariance definitions, zero-variance branches, and the two-stump computation.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Bounds on squared means, expected standard deviations, and regression residual-product integrability.",
+      "opened": true
+    },
+    {
+      "id": "cor-chebyshev-inequality-for-random-variables",
+      "used_for": "P{m<0}≤Var_P(m)/s² when s>0.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-identically-distributed-and-iid-random-variables",
+      "finding": "The published Definition contains the inline links “their laws in [[def-law-or-distribution-of-a-random-element]] agree” and “the whole family is independent in [[def-independent-random-elements]]”. These interrupt the complete Definition, contrary to the uninterrupted-statement instruction; there is no following Definition references section containing these links. The mathematical IID convention itself supports the assigned consumer.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The published Definition says “integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. This inline hyperlink interrupts the Definition, contrary to the uninterrupted-statement instruction; the link is not moved to an immediately following Definition references section. The expectation definition itself supports the assigned consumers.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-random-forests",
+      "to": "ml02-cart",
+      "faithful": true,
+      "note": "Checked the supplier page and actual empirical-tree definition, leaf-mean theorem, and CART procedure against the forest's uses. Bootstrap positions preserve multiplicity while satisfying the supplier's finite-sample conventions. Midpoint candidates, nonempty children, child scores, coordinate/cut ties, depth stopping, and least-index leaf ties agree. With m=p the forest uses the supplied CART procedure; with m<p it explicitly restricts candidate coordinates. The out-of-bag example also faithfully uses the classification leaf rule. Its corresponding cross-batch ledger row remains marked open; this reading supplies current interface evidence for its owner."
+    }
+  ]
+}

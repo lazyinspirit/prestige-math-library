@@ -23,6 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/1010.3760"
       locator: "§1, compactly supported measures and their potentials"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-support-of-a-borel-measure.json
   audited: 2026-10-02
   precheck: n/a
   judge:
@@ -33,18 +34,26 @@ verification:
 
 ## Definition
 
-Let $\mu$ be a finite positive Borel measure on $\mathbb C$ ([[def-radon-measure-on-an-lch-space]]).
+Let $\mu$ be a finite positive Borel measure on $\mathbb C$ (Radon measure on an LCH space).
 Call an open set $V\subseteq\mathbb C$ **$\mu$-null** when $\mu(V)=0$. The
 **support** of $\mu$ is the complement of the union of all open $\mu$-null sets,
 
 $$\operatorname{supp}\mu:=\mathbb C\setminus\bigcup\{V\subseteq\mathbb C:V\text{ open and }\mu(V)=0\},$$
 
-which is a closed subset of $\mathbb C$ ([[def-metric-interior-closure-boundary]]).
+which is a closed subset of $\mathbb C$ (Interior, closure, boundary, limit point, isolated point and dense subset of a metric space).
 Equivalently, $x\in\operatorname{supp}\mu$ if and only if $\mu(V)>0$ for every
 open set $V\ni x$. A measure is **carried by** a Borel set $A$ when
 $\mu(\mathbb C\setminus A)=0$, the terminology of
-[[def-measure-concentrated-on-a-measurable-set]]. We say $\mu$ has **compact
+A positive, signed, or complex measure concentrated on a measurable set. We say $\mu$ has **compact
 support** when it is carried by some compact subset of $\mathbb C$.
+
+## Definition references
+
+[[def-radon-measure-on-an-lch-space]]
+
+[[def-metric-interior-closure-boundary]]
+
+[[def-measure-concentrated-on-a-measurable-set]]
 
 ## Remark
 

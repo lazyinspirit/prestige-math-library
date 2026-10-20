@@ -10,7 +10,7 @@ provenance:
 deps: [def-borel-and-lebesgue-measurable-function-on-rn, thm-continuous-preimages-of-borel-sets-are-borel]
 proof_strategy: direct
 verification:
-  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-cor-continuous-functions-are-borel-measurable-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-continuous-functions-are-borel-measurable.json
   precheck: pass
 sources:
   references:
@@ -22,7 +22,11 @@ sources:
 
 Assume the Axiom of Countable Choice. Let $n,m\ge1$. Every continuous map
 $f : \mathbb{R}^n \to \mathbb{R}^m$ is Borel measurable in
-the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].
+the sense of Borel measurable and Lebesgue measurable functions on $\mathbb{R}^n$.
+
+## Statement references
+
+[[def-borel-and-lebesgue-measurable-function-on-rn]]
 
 ## Facts & Assumptions
 

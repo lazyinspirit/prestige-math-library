@@ -1,0 +1,212 @@
+{
+  "group": "l",
+  "batches": ["35"],
+  "pages_read": [
+    "recurrent-and-state-space-networks",
+    "recurrent-and-state-space-networks-examples"
+  ],
+  "items_read": [
+    "def-recurrent-neural-network",
+    "def-linear-state-space-model",
+    "alg-radix-two-fft",
+    "lem-woodbury-dplr-bilinear-inverse",
+    "def-lstm-cell",
+    "def-s4-dplr-parameterization",
+    "lem-roots-of-unity-fft-complexity",
+    "alg-cauchy-matvec-at-roots-of-unity",
+    "thm-hippo-leg-matrices-have-low-rank-structure",
+    "alg-s4-state-space-recurrence-and-convolution",
+    "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+    "thm-dplr-discretized-step-linear-cost",
+    "lem-s4-convolution-root-of-unity-reduction",
+    "thm-cauchy-root-grid-matvec-numerical-cost",
+    "thm-s4-convolution-filter-complexity",
+    "ex-lstm-scalar-gates",
+    "ex-s4-scalar-recurrent-and-convolutional-views",
+    "ex-s4-filter-cost-excludes-training"
+  ],
+  "conventions": [
+    {
+      "convention": "The forward DFT uses ω = exp(−2πi/M); the inverse uses the conjugate root and divides by M. M = 1 is allowed.",
+      "fixed_by": "alg-radix-two-fft",
+      "matters_for": [
+        "lem-roots-of-unity-fft-complexity",
+        "alg-cauchy-matvec-at-roots-of-unity",
+        "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+        "alg-s4-state-space-recurrence-and-convolution",
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "convention": "Continuous-time inputs have measurable real and imaginary coordinates integrable on compact subintervals; trajectories are locally absolutely continuous and satisfy the state equation outside a Lebesgue-null set. Countable Choice is explicitly assumed for the Lebesgue measure setting.",
+      "fixed_by": "def-linear-state-space-model",
+      "matters_for": [
+        "def-s4-dplr-parameterization"
+      ]
+    },
+    {
+      "convention": "The LSTM has no peephole connections or projection. Its gates use coordinatewise sigmoid, its candidate uses tanh, and its matrices and biases are shared across time.",
+      "fixed_by": "def-lstm-cell",
+      "matters_for": [
+        "ex-lstm-scalar-gates"
+      ]
+    },
+    {
+      "convention": "DPLR means A = Λ − PQ*, where * is conjugate transpose. B and C are columns and the scalar output is C*x. Bilinear discretization requires I − ΔA/2 invertible; discrete kernel indexing starts at j = 0 with zero initial state x₋₁.",
+      "fixed_by": "def-s4-dplr-parameterization",
+      "matters_for": [
+        "alg-s4-state-space-recurrence-and-convolution",
+        "thm-dplr-discretized-step-linear-cost",
+        "lem-s4-convolution-root-of-unity-reduction",
+        "thm-s4-convolution-filter-complexity",
+        "ex-s4-scalar-recurrent-and-convolutional-views"
+      ]
+    },
+    {
+      "convention": "Filter evaluation receives the transformed vector C̃_M = (I − Ā^M)*C. Its operation count excludes forming this vector from C. A direct term Du_t is separate from the state kernel.",
+      "fixed_by": "def-s4-dplr-parameterization",
+      "matters_for": [
+        "alg-s4-state-space-recurrence-and-convolution",
+        "lem-s4-convolution-root-of-unity-reduction",
+        "thm-s4-convolution-filter-complexity",
+        "ex-s4-filter-cost-excludes-training"
+      ]
+    },
+    {
+      "convention": "LegS retains its time-dependent factor 1/t. Original HiPPO LagT has diagonal −1. The raw LegT matrix first undergoes the specified nonunitary diagonal similarity; its resulting normal part is then unitarily diagonalized.",
+      "fixed_by": "thm-hippo-leg-matrices-have-low-rank-structure",
+      "matters_for": [
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "convention": "The filter transform length is the least power of two M ≥ L. At z = −1 the filter uses the finite direct value (Δ/2)C̃_M*B. Diagonal entries λ_j = −2/Δ contribute constants rather than mapped Cauchy poles.",
+      "fixed_by": "alg-s4-state-space-recurrence-and-convolution",
+      "matters_for": [
+        "lem-s4-convolution-root-of-unity-reduction",
+        "thm-s4-convolution-filter-complexity",
+        "ex-s4-filter-cost-excludes-training"
+      ]
+    },
+    {
+      "convention": "Numerical Cauchy evaluation uses the positive root order exp(2πik/M), repeated poles are permitted, and accuracy is η max(1,A/d). Costs count variable-precision scalar operations and words, with supplied certified approximations and precision/routing certificates; they do not count bits or certificate construction.",
+      "fixed_by": "thm-cauchy-root-grid-matvec-numerical-cost",
+      "matters_for": [
+        "thm-s4-convolution-filter-complexity",
+        "ex-s4-filter-cost-excludes-training"
+      ]
+    },
+    {
+      "convention": "Filter complexity treats r as fixed. Its numerical guarantee requires certified block bounds, correction inverse bounds, Cauchy separation and weight bounds, and an exact partition of entries equal or unequal to −2/Δ. The conditioning factor is κ = 64r w²(b+1)²s.",
+      "fixed_by": "thm-s4-convolution-filter-complexity",
+      "matters_for": [
+        "ex-s4-filter-cost-excludes-training"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-woodbury-dplr-bilinear-inverse",
+      "statement": "For invertible D ∈ C^(N×N), U,V ∈ C^(N×r), and W = I_r + V*D⁻¹U, D + UV* is invertible if and only if W is invertible. When invertible, (D + UV*)⁻¹ = D⁻¹ − D⁻¹UW⁻¹V*D⁻¹.",
+      "used_by": [
+        "alg-s4-state-space-recurrence-and-convolution",
+        "thm-dplr-discretized-step-linear-cost",
+        "lem-s4-convolution-root-of-unity-reduction"
+      ]
+    },
+    {
+      "id": "lem-roots-of-unity-fft-complexity",
+      "statement": "For M = 2^q, q ≥ 0, and F_kj = exp(−2πijk/M), F*F = MI and the inverse DFT is M⁻¹F*. The radix-two procedure computes either transform exactly in O(M log(2+M)) complex arithmetic operations and O(M) space. Two polynomials of degree less than n, n ≥ 1, multiply exactly in O(n log(2+n)) operations and O(n) space by radix-two zero-padding to length at least 2n−1.",
+      "used_by": [
+        "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "id": "lem-s4-convolution-root-of-unity-reduction",
+      "statement": "For the stated finite DPLR data, Δ > 0, 1 ≤ L ≤ M = 2^q, invertible G = I − ΔA/2, C̃_M = (I − Ā^M)*C, and invertible root-grid diagonal resolvents R(z) and corrections W(z) for z ≠ −1, the length-M truncated generating value is H_M(z) = 2/(1+z)[C̃_M*R(z)B − C̃_M*R(z)P W(z)⁻¹Q*R(z)B]. For even M, H_M(−1) = (Δ/2)C̃_M*B. The four scaled resolvent-block families reduce to (r+1)² roots-of-unity Cauchy products, with λ_j = −2/Δ handled by constants.",
+      "used_by": [
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "id": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+      "statement": "For n ≥ 1, M = 2^q ≥ 1, a primitive Mth root ω, complex poles μ_j and weights a_j satisfying μ_j ≠ ω^k for every j,k, the balanced product-tree procedure computes y_k = Σ_j a_j/(ω^k−μ_j) exactly using O((n+M) log²(2+n+M)) complex arithmetic operations and O(n+M) space. Repeated poles are allowed.",
+      "used_by": [
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "id": "thm-cauchy-root-grid-matvec-numerical-cost",
+      "statement": "For n ≥ 0, M = 2^q ≥ 1, z_k = exp(2πik/M), complex weights and poles with |z_k−μ_j| ≥ d > 0, A ≥ Σ_j|a_j|, s = max(1,A/d), and 0 < η ≤ 1/2, approximations satisfy max_k|ŷ_k−y_k| ≤ ηs using O((n+M) log(2+M) log(1/η)) scalar operations and O(n+M) scalar words. This uses the stated certified variable-precision arithmetic, supplied constants, routing enclosures and finite-circuit precision certificate, excluding bit cost and construction of supplied constants/certificates. Absolute error δ, 0 < δ ≤ 1/2, costs O((n+M) log(2+M) log(s/δ)).",
+      "used_by": [
+        "thm-s4-convolution-filter-complexity"
+      ]
+    },
+    {
+      "id": "thm-dplr-discretized-step-linear-cost",
+      "statement": "For N,r ≥ 1, A = Λ − PQ* with diagonal Λ, B,C ∈ C^N, Δ > 0, and invertible G = I − ΔA/2, one bilinear recurrent update and scalar output cost O(N(r+1)²+(r+1)³) exact complex arithmetic operations and O(N(r+1)+(r+1)²) working space. For fixed r both are O(N). An invertible diagonal base has an invertible Woodbury correction; a singular diagonal base with invertible G has an invertible bordered correction of size at most 2r.",
+      "used_by": [
+        "alg-s4-state-space-recurrence-and-convolution"
+      ]
+    },
+    {
+      "id": "thm-s4-convolution-filter-complexity",
+      "statement": "For the stated fixed-rank DPLR model, Δ > 0, invertible bilinear matrix and all required root-grid diagonal resolvents/corrections, M the least power of two ≥ L, and supplied C̃_M = (I−Ā^M)*C, the filter procedure returns K_L using at most (r+1)² Cauchy products, O((N+L) log²(2+N+L)) exact operations and O(N+L) working space. Under the additional certified numerical bounds, exact exceptional-entry partition and variable-precision circuit hypotheses in the Statement, it achieves infinity-norm error ε, 0 < ε ≤ 1/2, in O((N+L) log(2+N+L) log(κ/ε)) scalar operations and O(N+L) scalar words, where κ = 64r w²(b+1)²s. Counts exclude forming C̃_M, certificate construction and bit cost, and imply no complete training-cost or empirical accuracy guarantee.",
+      "used_by": [
+        "ex-s4-filter-cost-excludes-training"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit Countable Choice assumption in the continuous-time model's Lebesgue measure setting.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Coordinatewise Lebesgue integrability of continuous-time inputs on compact subintervals.",
+      "opened": true
+    },
+    {
+      "id": "def-absolutely-continuous-function",
+      "used_for": "The epsilon–delta definition of absolute continuity used for state trajectories.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "The measurable-set family and restricted Lebesgue set function used in the continuous-time definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Under Countable Choice, the Lebesgue-measurable sets form a sigma-algebra and Lebesgue measure is complete.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Measurability of bounded intervals with arbitrary endpoint conventions, followed by the continuous-time definition's countable-union argument for general intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Unitary diagonalization of the normal parts of the three explicitly decomposed HiPPO generators.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-cauchy-matvec-at-roots-of-unity",
+      "concern": "The Definition includes the standalone complexity assertion, “This root search and reindexing use $O(M)$ operations.” The assertion is sound and is justified in thm-cauchy-matvec-at-roots-of-unity-exact-cost, Proof 2.2, but the dispatch's algorithm rule places complexity properties in separate proved result items rather than in the defining procedure.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-s4-state-space-recurrence-and-convolution",
+      "concern": "The Definition instructs calling alg-cauchy-matvec-at-roots-of-unity on the root grid, then says, “The root $-1$ is handled directly and is never included in this Cauchy evaluation.” The called algorithm evaluates all M roots and has no excluded-root input. For even M it therefore also evaluates the auxiliary Cauchy sums at −1. Those evaluations are harmless: lem-s4-convolution-root-of-unity-reduction, Proof 1.2, proves that no mapped nonexceptional pole equals −1. The instructions should distinguish discarding that auxiliary output from excluding the root from the called routine.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

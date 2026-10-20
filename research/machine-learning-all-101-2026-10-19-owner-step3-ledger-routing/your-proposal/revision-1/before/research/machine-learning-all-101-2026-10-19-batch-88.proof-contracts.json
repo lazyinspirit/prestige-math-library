@@ -1,0 +1,1596 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-cardinality-of-finite-natural-initial-segment",
+    "lem-finite-pomdp-belief-update-is-probability-kernel",
+    "thm-belief-mdp-sufficient-statistic",
+    "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+    "ex-pomdp-two-state-bayes-update",
+    "ex-pomdp-observation-aliasing-preserves-belief",
+    "ex-pomdp-zero-likelihood-observation-is-not-updated",
+    "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+  ],
+  "contracts": {
+    "lem-cardinality-of-finite-natural-initial-segment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by\n\n$$m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n),$$\n\nand the **strict order** by $m < n \\iff (m \\le n \\text{ and } m \\neq n)$, using\naddition ([[def-nat-addition]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nat-order-is-membership",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N} = \\omega$ be the von Neumann naturals, with $0 = \\varnothing$ and\n$\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $\\le$ and $<$ be\nthe order defined additively by $m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n)$\nand $m < n \\iff (m \\le n$ and $m \\ne n)$ ([[def-nat-order]]). Then $\\mathbb{N}$ is\na **transitive set**: every element of a natural number is itself a natural\nnumber. Moreover, for all $m, n \\in \\mathbb{N}$:\n\n1. $m < n \\iff m \\in n$;\n2. $m \\le n \\iff m \\subseteq n$;\n3. $n < \\sigma(n)$, and $m < \\sigma(n) \\iff m \\le n$;\n4. $0 \\le n$, and $0 \\in n$ whenever $n \\ne 0$.\n\nConsequently $n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ for every $n$: a natural\nnumber is exactly the set of the naturals below it.\n\n**Why this is proved here.** [[def-nat-order]] defines the order additively and\nrecords the identification with membership only as an orienting remark, without\nproof. The countability arguments on this page use that identification as a\nworking fact, so it is established here, from the additive order and induction\nalone. Nothing below uses ordinals or any later material.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The final equality in [F1] says precisely that the set $\\{t\\in\\mathbb N:t<n\\}$ is $n$, so $I_n=n$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $n$ is finite and $|n|=n$. Substituting $I_n=n$ from step 1.1 gives that $I_n$ is finite and $|I_n|=n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "n=0 empty initial segment",
+          "inputs": "n=0; I_0={t\u2208N:t<0}",
+          "calculation": "No natural is less than 0, so I_0=\u2205=0.",
+          "result": "|I_0|=0."
+        },
+        {
+          "case": "n=1 singleton initial segment",
+          "inputs": "n=1; I_1={t\u2208N:t<1}",
+          "calculation": "The sole predecessor of 1 is 0, so I_1={0}=1.",
+          "result": "|I_1|=1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At n=0 the initial segment is empty and has cardinality 0; the finite check and step 2.1 cover this boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value n=0 is included; step 2.1 gives |I_0|=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the initial segment is {0} and has cardinality 1; the finite check agrees with step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The empty case n=0 is included by the statement, the finite check, and step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement quantifies over every n in N, including 0; step 2.1 applies the cardinality definition for every n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The equality I_n=n and cardinality |n|=n are supplier facts; steps 1.1\u20132.1 make no selections from arbitrary families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim identifies I_n with n and states its cardinality; it contains no biconditional, so there is no forward implication to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim identifies I_n with n and states its cardinality; it contains no biconditional, so there is no reverse implication to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "lem-finite-pomdp-belief-update-is-probability-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bayes-formula-for-dominated-kernels",
+          "source_section": "Statement",
+          "quote": "Let $\\pi$ be a prior probability on $(E,\\mathcal S)$ and let $Q:E\\to T$ be a probability kernel dominated by a sigma-finite measure $\\nu$ on $(T,\\mathcal T)$, with specified nonnegative jointly measurable density $\\ell:E\\times T\\to[0,\\infty]$:\n$$Q(\\theta,B)=\\int_B\\ell(\\theta,y)\\,\\nu(dy)\\quad\\text{for every }\\theta\\in E,\\ B\\in\\mathcal T.$$\n\nDefine $m(y)=\\int_E\\ell(\\theta,y)\\,\\pi(d\\theta)$. Under the joint law with density $\\ell$ relative to $\\pi\\times\\nu$, a conditional law of the parameter given the observation is\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_A\\ell(\\theta,y)\\,\\pi(d\\theta)}{m(y)},&0<m(y)<\\infty,\\\\ \\pi(A),&m(y)=0\\text{ or }m(y)=\\infty.\\end{cases}$$\n\nThe observation marginal is $m\\,d\\nu$, and the filled fibres have marginal mass zero. This is a choice-free assertion about the explicit kernel and event identities.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "Let K be a finite kernel from $(S,\\Sigma)$ to $(T,\\Tau)$, in particular a probability kernel, or a uniformly sigma-finite kernel with the specified exhaustion of the kernel definition. For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function\n$$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$\nis $\\Sigma$-measurable, with infinity allowed. For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function. No assertion here is made for a general kernel lacking a common measurable finite-mass exhaustion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+          "source_section": "Statement",
+          "quote": "Let $S$ and $T$ be finite sets and let $a : S \\times T \\to \\mathbb{R}$, or\n$a : S \\times T \\to \\mathbb{N}$, written $a_{ij}$ for $a(i,j)$. Then $S \\times T$\nis finite and\n\n$$\\sum_{i \\in S}\\Big(\\sum_{j \\in T} a_{ij}\\Big) \\;=\\; \\sum_{p \\in S \\times T} a_p \\;=\\; \\sum_{j \\in T}\\Big(\\sum_{i \\in S} a_{ij}\\Big),$$\n\nall three sums being the sums over a finite index set of\n[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]] when the\nvalues are real and by [[def-nat-finite-sum-and-product]] when they are natural.\n\n**This is not a clause of [[thm-sum-rule]].** That theorem splits one sum along a\npartition of *its own* index set; the identity above exchanges the roles of two\n*different* index sets, and it is what an argument that counts a set of pairs in\ntwo ways needs. Both outer index sets may be empty, in which case all three\nquantities are $0$ (respectively $1$ for the product form of the underlying\nrecursion), since a sum over the empty index set is the empty sum.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $s,a$, the mass $J(s',\\rho,o\\mid s,a)=p(s',\\rho\\mid s,a)O(o\\mid s')$ is nonnegative. Summing first over observations gives $\\sum_{s',\\rho,o}J=\\sum_{s',\\rho}p(s',\\rho\\mid s,a)\\sum_oO(o\\mid s')=\\sum_{s',\\rho}p(s',\\rho\\mid s,a)=1$ by [F1]; all index sets are finite, so the reordering is justified by [F6] and [F7]. Thus the joint next-state/reward/observation mass is normalized.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The predicted coordinates $\\bar b_{b,a}(s')$ are nonnegative, and $\\sum_{s'}\\bar b_{b,a}(s')=\\sum_s b(s)\\sum_{s'}T(s'\\mid s,a)=\\sum_s b(s)=1$ by [F1], [F2], and finite double-sum interchange [F7]. Hence $\\bar b_{b,a}$ is a probability distribution.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every $q(o\\mid b,a)$ is nonnegative, and $\\sum_o q(o\\mid b,a)=\\sum_{s'}\\bar b_{b,a}(s')\\sum_oO(o\\mid s')=\\sum_{s'}\\bar b_{b,a}(s')=1$ by [F1], step 1.2, and [F7]. Thus $q(\\cdot\\mid b,a)$ is a probability distribution, so each $q$ is finite and lies in $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $o$ with $q(o\\mid b,a)>0$. Apply [F4] with prior $\\pi=\\bar b_{b,a}$ on the finite state set, observation kernel $Q(s',\\cdot)=O(\\cdot\\mid s')$, counting measure on finite $\\Omega$, and density $\\ell(s',o)=O(o\\mid s')$. The density is nonnegative and jointly measurable, and its marginal is exactly $q(o\\mid b,a)$, which is finite and positive by step 2.1. The theorem's posterior is therefore $\\tau(b,a,o)$, with coordinates summing to one. At $q=0$ the Bayes theorem supplies a filler for its everywhere kernel, but the partial update defined here remains undefined and $K$ omits that zero-mass observation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For fixed $b,a$, the formula for $K$ is a finite nonnegative sum of point masses at the defined $\\tau(b,a,o)$. For pairwise disjoint Borel sets $(C_n)_{n\\ge1}$, each point $\\tau(b,a,o)$ lies in at most one $C_n$, so $1_{\\cup_nC_n}(\\tau)=\\sum_n1_{C_n}(\\tau)$ with at most one nonzero term. Since there are finitely many observations, distributing the finite weighted sum over these finitely many nonzero terms gives $K(\\cup_nC_n)=\\sum_nK(C_n)$. Also $K(\\Delta(S))=\\sum_{o:q>0}q(o\\mid b,a)=1$ by step 2.1. Thus $K(\\cdot\\mid b,a)$ is a probability measure.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $\\Delta(S)\\times A$, the predicted law $\\bar K(\\{s'\\}\\mid b,a)=\\bar b_{b,a}(s')$ is a probability kernel: step 1.2 gives probability sections, and each evaluation is a finite linear function of $b$ on each discrete action. The function $((b,a),s')\\mapsto O(o\\mid s')$ is product-measurable, so [F5] makes $q(o\\mid b,a)=\\int O(o\\mid s')\\bar K(ds'\\mid b,a)$ measurable; its displayed finite formula also shows it is continuous in $b$. On the Borel set where $q(o\\mid b,a)>0$, every coordinate of $\\tau$ is a quotient of continuous functions with positive denominator and is Borel. For Borel $C$, the function equal to $q(o\\mid b,a)1_C(\\tau(b,a,o))$ there and zero where $q=0$ is Borel; summing these functions over the finite set $\\Omega$ proves that $K(C\\mid b,a)$ is Borel measurable. By [F3], $K$ is a probability kernel.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The only conditional law used in step 3.1 is the explicit dominated-kernel formula at a positive finite marginal. The finite history beliefs are ratios on positive-probability atoms, and all other constructions use specified finite sums and kernels; no version selection or arbitrary-family choice is used.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "one-state one-observation filter",
+          "inputs": "S={s}, A={a}, \u03a9={o}, b(s)=T(s|s,a)=O(o|s)=1",
+          "calculation": "b\u0304(s)=1, q(o|b,a)=1, \u03c4(b,a,o)(s)=1, and K({\u03b4_s}|b,a)=1.",
+          "result": "The filter and belief transition normalize."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The q=0 observation fibre is omitted rather than assigned a posterior in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 treats q=0 separately and leaves tau undefined; step 5.1 still gives total mass one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When all observation mass is one, steps 2.1 and 3.1 give q=1 and a unit-mass belief transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement allows point-mass priors; step 5.1 uses only the normalized predicted law and positive q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20133.1 cover q in [0,1], including q=0 and q=1, with division only for q>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite observation sum and explicit Bayes formula are choice-free; step 5.1 records this use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts normalization, posterior validity, and kernel measurability as conclusions, not as an if-and-only-if criterion.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse characterization of when a finite belief update is a probability kernel is stated in this lemma.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Independently checked all seven proof steps: sum pO first over observations, then use finite double-sum interchange to normalize predicted states and observation probabilities. Bayes supplier applies to the finite prior, counting measure and specified jointly measurable O; q is finite and the quotient is used only at q>0. K is a finite weighted Dirac measure of total mass one; disjoint-event additivity reduces to finitely many nonzero contributions. Each posterior coordinate is continuous on its positive-normalizer Borel domain; multiplying its indicator by q there and extending the scalar function by zero gives measurable event evaluations. No null-fibre posterior is assigned, no AC is used, and no diagram occurs. Checked current probability-kernel, dominated-Bayes, kernel-integration and finite-sum supplier statements; MIT lines 16\u201324 and Waterloo slides 4, 7\u20138 corroborate conventions. Reader and refuter have no findings. No defect found."
+      }
+    },
+    "thm-belief-mdp-sufficient-statistic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "source_section": "Statement",
+          "quote": "Let a finite POMDP be fixed, let $b\\in\\Delta(S)$ and $a\\in A$, and put $\\bar b(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$, $q(o)=\\sum_{s'\\in S}O(o\\mid s')\\bar b(s')$, and, when $q(o)>0$, $\\tau(o)(s')=O(o\\mid s')\\bar b(s')/q(o)$. For Borel $C\\subseteq\\Delta(S)$ define $K(C)=\\sum_{o:q(o)>0}q(o)1_C(\\tau(o))$. Then the joint next-state/reward/observation mass in the POMDP definition is normalized; $\\bar b$ and $q$ are probability distributions; every defined $\\tau(o)$ is a probability distribution and is the conditional law of the next state given observation $o$; and $K$ is a probability measure. Moreover, $(b,a)\\mapsto K(C\\mid b,a)$ is Borel measurable for each Borel $C$, so $K$ is a probability kernel from $\\Delta(S)\\times A$ to $\\Delta(S)$. No Axiom of Choice is used.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $h_t$ and $a$ as in the statement. By [F2], $b_t(s)=\\Pr(S_t=s\\mid h_t)$. Conditioning first on $S_t$ and using the POMDP's specified one-step law [F1] gives $\\Pr(S_{t+1}=s',O_{t+1}=o\\mid h_t,A_t=a)=\\sum_{s\\in S}b_t(s)T(s'\\mid s,a)O(o\\mid s')$. The action selection does not alter $b_t$ after conditioning on $h_t$, because its randomization depends only on that history and is conditionally independent of the hidden state.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Summing the joint probability in step 1.1 over $s'$ yields $q(o\\mid b_t,a)$ by [F2]. If this is positive, dividing the joint mass by it gives $\\Pr(S_{t+1}=s'\\mid h_t,A_t=a,O_{t+1}=o)=\\tau(b_t,a,o)(s')$; if it is zero, the observation event has probability zero and no conditional quotient is used. By [F3], these positive branches form the probability kernel $K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conditioning the immediate reward on the current hidden state and chosen action gives $\\mathbb E[R_t\\mid h_t,A_t=a]=\\sum_{s\\in S}b_t(s)r(s,a)=\\bar r(b_t,a)$ by [F1] and [F2]. Thus the conditional immediate reward and next-belief law depend on the history only through $b_t$ and $a$, which proves the stated controlled belief-state transition and reward description.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "We prove the finite-horizon recursion by induction on $n$. With no decisions remaining, the reward sum is empty, so $V_0(b)=0$. Suppose the optimal $n$-step continuation value is the function $V_n$ of the current belief. If action $a$ is taken at belief $b$, its immediate expected reward is $\\bar r(b,a)$ by step 2.2, and for each positive-probability observation $o$ the remaining belief is $\\tau(b,a,o)$ by step 2.1. Conditional expectation over the finite observation set therefore gives the $n+1$ step action value $Q_{n+1}(b,a):=\\bar r(b,a)+\\gamma\\sum_{o:q>0}q(o\\mid b,a)V_n(\\tau(b,a,o))$. The set $\\{Q_{n+1}(b,a):a\\in A\\}$ is a nonempty finite image of $A$ in $\\mathbb R$, so [F4] gives an attained maximum. Taking that maximum gives the displayed $V_{n+1}(b)$. The expression depends only on $b$, completing the induction and proving history sufficiency for every finite horizon.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If the action at a history is randomized with probabilities $\\lambda_a$, its expected action value is $\\sum_{a\\in A}\\lambda_a Q_{n+1}(b,a)$, where $Q_{n+1}$ is the finite action value from step 3.1, $\\lambda_a\\ge0$, and $\\sum_a\\lambda_a=1$. Since each $Q_{n+1}(b,a)\\le\\max_{c\\in A}Q_{n+1}(b,c)$, [F5] gives $\\sum_a\\lambda_a Q_{n+1}(b,a)\\le\\max_{c\\in A}Q_{n+1}(b,c)$. Randomization cannot improve the finite-horizon value.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "one-state zero-reward control",
+          "inputs": "S={s}, A={a}, \u03a9={o}, T=O=1, r(s,a)=0",
+          "calculation": "For every n, V_0(\u03b4_s)=0 and the recursion gives V_{n+1}(\u03b4_s)=0+\u03b3\u00b71\u00b70=0.",
+          "result": "The belief is sufficient and the value recursion is consistent in the singleton model."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero-decision horizon has empty reward sum and V_0=0 in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An observation of zero conditional probability is omitted in step 3.1; action randomization probabilities may also be zero in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite action maximum in step 3.1 applies when A is a singleton as well as for larger finite A."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The conditional factorization in step 1.1 holds for every belief, including point masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The recursion in step 3.1 uses only the finite-horizon objective and applies at gamma=0 and gamma=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The attained finite action maximum in step 3.1 and randomization bound in step 4.1 use no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a conditional-law factorization and Bellman recursion; neither conclusion is stated as an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not claim that sufficiency implies any converse model representation.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Checked the current complete proof and hash-matched original preimage. Accepted the reader clarification defining Q and taking the nonempty finite real image of A before applying the finite-maximum supplier. Conditioning on a selected positive-probability action preserves the history belief by policy independence. Summing the specified pO law yields T, q and expected reward; rewards remain unobserved, including when correlated with next state. Backward induction starts at the empty reward sum, uses only positive observation branches and finitely many attained continuation choices, and works at gamma=0 and gamma=1. Convex combinations of finite action values cannot improve their maximum. For a belief-only policy the one-step conditional law depends on current belief (and the stage for time-dependent policies), giving the stated Markov property. A finite fixed action ordering also gives measurable maximizers if needed: backward values and action values are Borel by finite sums on positive-q domains and finite maxima. No AC or diagram issue; MIT lines 18\u201324 and Waterloo slides 7\u201310 support conventions; reader/refuter findings empty. No defect."
+      }
+    },
+    "thm-finite-horizon-pomdp-piecewise-linear-convex-value": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-pomdp-witness-backup",
+          "source_section": "Definition",
+          "quote": "Input a finite POMDP, a horizon $H\\in\\mathbb N$, and its discount $\\gamma\\in[0,1]$. A depth-zero policy tree is the empty continuation and has the zero vector $\\alpha_0:S\\to\\mathbb R$. Recursively, a depth-$(h+1)$ policy tree consists of a root action $a\\in A$ and one depth-$h$ continuation tree for each observation $o\\in\\Omega$. If the continuation vectors are $(\\alpha_o)_{o\\in\\Omega}$, assign the tree the vector\n\n$$\\alpha_{a,(\\alpha_o)}(s)=r(s,a)+\\gamma\\sum_{s'\\in S}T(s'\\mid s,a)\\sum_{o\\in\\Omega}O(o\\mid s')\\alpha_o(s')\\qquad(s\\in S).$$\n\nSet $\\Gamma_0=\\{\\alpha_0\\}$. For each $h=0,\\ldots,H-1$, form $\\Gamma_{h+1}$ from every action $a\\in A$ and every tuple $(\\alpha_o)_{o\\in\\Omega}\\in\\Gamma_h^{\\Omega}$ using the displayed formula, treating $\\Gamma_{h+1}$ as a set so equal vectors are stored once. Return $(\\Gamma_0,\\ldots,\\Gamma_H)$. This procedure exhaustively enumerates finite policy-tree vectors; it does not perform linear-program witness pruning and makes no bit-complexity or polynomial-time claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-belief-mdp-sufficient-statistic",
+          "source_section": "Statement",
+          "quote": "Let a finite POMDP with known model be fixed. A deterministic history policy chooses an action from the finite action set using only preceding actions and observations; a randomized history policy assigns an action distribution using only that history, with its randomization conditionally independent of the hidden state. For every positive-probability history $h_t$ with belief $b_t$ and every action $a$ having positive conditional selection probability at that history,\n\n$$\\Pr(S_{t+1}=s',O_{t+1}=o\\mid h_t,A_t=a)=\\sum_{s\\in S}b_t(s)T(s'\\mid s,a)O(o\\mid s').$$\n\nConsequently the observation probability is $q(o\\mid b_t,a)$, the next belief is $\\tau(b_t,a,o)$ whenever that probability is positive, and the conditional expected reward is $\\bar r(b_t,a)$. The controlled belief-state model has the fully observed Borel state space $\\Delta(S)$, action set $A$, transition kernel $K$, and reward $\\bar r$; under a policy depending only on the current belief, the belief process is Markov. For every remaining finite horizon $n$, the optimal value depends on the history only through $b$ and satisfies\n\n$$V_0(b)=0,\\qquad V_{n+1}(b)=\\max_{a\\in A}\\left[\\bar r(b,a)+\\gamma\\sum_{o:q(o\\mid b,a)>0}q(o\\mid b,a)V_n(\\tau(b,a,o))\\right].$$\n\nEach maximum is attained; randomizing an action cannot increase the value. An observation with zero probability requires no posterior update. The conclusion holds for $\\gamma\\in[0,1]$ and uses no Axiom of Choice.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "5.2",
+            "5.3",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "5.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "2.1",
+            "5.4",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1",
+            "5.4",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nat-power",
+          "source_section": "Definition",
+          "quote": "Let $m \\in \\mathbb{N}$. By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{N}$, the starting element $1$ and the function\n$f(x) = x \\cdot m$ ([[def-nat-multiplication]]), there is a unique function\n$\\mathbb{N} \\to \\mathbb{N}$, written $n \\mapsto m^{n}$, with\n\n$$m^{0} = 1, \\qquad m^{\\sigma(n)} = m^{n} \\cdot m \\quad (n \\in \\mathbb{N}).$$\n\nBoth the base and the value are natural numbers, so $m^n \\in \\mathbb{N}$ for all\n$m, n$. In particular $m^{1} = m^{0}\\cdot m = m$ and $m^{2} = m \\cdot m$.\n\n**Why a new item is needed.** [[def-integer-power]] defines $a^{n}$ for a\n**real** base $a$, so its value is a real number. The counts on this page,\n$\\lvert A^{B}\\rvert$ and $\\lvert\\mathcal{P}(A)\\rvert$ among them, are natural\nnumbers, and an identity between them has to be an identity in $\\mathbb{N}$. The\ntwo operations are related by clause (d) below and by nothing weaker.\n\n**(a) $0^{0} = 1$ and $0^{n} = 0$ for $n \\ge 1$.** The first is the base clause.\nFor the second, $0^{\\sigma(n)} = 0^{n}\\cdot 0 = 0$, the clause $x \\cdot 0 = 0$\nbeing definitional ([[def-nat-multiplication]]), and every $n \\ge 1$ is a\nsuccessor.\n\n**(b) $1^{n} = 1$ for every $n$.** Induction: $1^{0} = 1$, and\n$1^{\\sigma(n)} = 1^{n}\\cdot 1 = 1^{n}$ ([[lem-nat-mult-identity]],\n[[thm-induction-principle]]).\n\n**(c) $m^{p+q} = m^{p}\\,m^{q}$ and $(m p)^{q} = m^{q} p^{q}$.** Both by induction\non $q$, using associativity and commutativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]). For the first, at\n$q = 0$ we have $m^{p+0} = m^{p} = m^{p}\\cdot 1 = m^{p}m^{0}$, and\n$m^{p+\\sigma(q)} = m^{\\sigma(p+q)} = m^{p+q}\\cdot m = (m^{p}m^{q})\\cdot m = m^{p}\\,m^{\\sigma(q)}$,\nusing $p + \\sigma(q) = \\sigma(p+q)$ ([[def-nat-addition]]). For the second, at\n$q = 0$ both sides are $1$, and\n$(mp)^{\\sigma(q)} = (mp)^{q}(mp) = m^{q}p^{q}mp = m^{\\sigma(q)}p^{\\sigma(q)}$.\n\n**(d) The bridge into $\\mathbb{R}$.** With $\\iota : \\mathbb{N} \\to \\mathbb{R}$\nthe canonical natural ([[def-canonical-natural]]) and $x^{n}$ the integer power\nof [[def-integer-power]],\n\n$$\\iota\\big(m^{n}\\big) = \\iota(m)^{n} \\qquad (m, n \\in \\mathbb{N}).$$\n\nInduction on $n$: at $n = 0$ both sides are $1$, since $\\iota(1) = 1$; and\n$\\iota(m^{\\sigma(n)}) = \\iota(m^{n}\\cdot m) = \\iota(m^{n})\\,\\iota(m) = \\iota(m)^{n}\\iota(m) = \\iota(m)^{\\sigma(n)}$,\nthe second equality being the multiplicativity of $\\iota$ (clause 0 of\n[[lem-nat-finite-sum-laws-and-the-canonical-embedding]]) and the last the\nrecursion clause of [[def-integer-power]].\n\n**(e) $m^{n}$ is a constant product.** $m^{n} = \\prod_{k<n} m$, the\n$\\mathbb{N}$-valued product of the constant list\n([[def-nat-finite-sum-and-product]]). Induction: at $n = 0$ both sides are $1$,\nand $\\prod_{k<\\sigma(n)} m = \\big(\\prod_{k<n} m\\big)\\cdot m = m^{n}\\cdot m = m^{\\sigma(n)}$.",
+          "uses": [
+            "5.4",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "4.1",
+            "7.1",
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At horizon $h=0$, there is one empty-continuation policy tree and the backup returns $\\Gamma_0=\\{0\\}$. Its conditional value is zero at every state, and the optimal zero-step value is $V_0(b)=0=\\sum_s b(s)0$ for each belief. Thus $P(0)$ holds.",
+          "step": "1.1",
+          "inputs": [
+            "base",
+            "given",
+            "L1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $h\\in\\mathbb N$ and assume $P(h)$.",
+          "step": "1.2",
+          "inputs": [
+            "ih",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A depth-$(h+1)$ policy tree is a root action $a$ and a depth-$h$ continuation tree $\\pi_o$ for each $o\\in\\Omega$. From initial hidden state $s$, its expected immediate reward plus discounted continuation value is $\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\sum_{o\\in\\Omega}p(s',\\rho\\mid s,a)O(o\\mid s')\\bigl(\\rho+\\gamma\\alpha_h^{\\pi_o}(s')\\bigr)$. By the induction hypothesis [L1], each continuation vector $\\alpha_h^{\\pi_o}$ is represented in $\\Gamma_h$. Since the continuation is selected from $o$ alone, not from the unobserved reward $\\rho$, finite-sum linearity and reindexing [F5], together with $\\sum_oO(o\\mid s')=1$ from [F1], rewrite this expectation as $\\sum_{s',\\rho}\\rho p(s',\\rho\\mid s,a)+\\gamma\\sum_{s'}\\bigl(\\sum_\\rho p(s',\\rho\\mid s,a)\\bigr)\\sum_oO(o\\mid s')\\alpha_h^{\\pi_o}(s')$. The first term is $r(s,a)$ and the inner next-state marginal is $T(s'\\mid s,a)$ by [F1], so this is exactly the vector formed by [F3]. Conversely, each tuple generated by [F3] has a depth-$h$ tree for each continuation vector by [L1]; since $\\Omega$ is finite, choose these finitely many trees successively and adjoin the root action to obtain a depth-$(h+1)$ tree. Therefore $\\Gamma_{h+1}$ is exactly the set of distinct conditional-value vectors of those trees. The candidate set $A\\times\\Gamma_h^{\\Omega}$ is finite by [F8]\u2013[F9], so its image $\\Gamma_{h+1}$ under the vector formula is finite; it is nonempty by the nonempty action set and a constant continuation tuple.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F3",
+            "F5",
+            "F8",
+            "F9",
+            "construct",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each depth-$(h+1)$ tree $\\pi$, conditioning on the initial hidden state gives value $\\sum_s b(s)\\alpha^\\pi_{h+1}(s)$ from belief $b$. Every deterministic history policy is such a tree: its first action is the root and its restriction after each observation is the corresponding subtree; conversely every tree prescribes such a policy. Since $\\Gamma_{h+1}$ is finite and nonempty by step 2.1, its value set $\\{\\sum_s b(s)\\alpha(s):\\alpha\\in\\Gamma_{h+1}\\}$ is a nonempty finite image in $\\mathbb R$, so [F6] gives an attained maximum. By [F4], randomized policies cannot improve it. Hence $V_{h+1}(b)=\\max_{\\alpha\\in\\Gamma_{h+1}}\\sum_s b(s)\\alpha(s)$. This completes $P(h+1)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The base step 1.1 and successor steps 2.1\u20133.1 prove $P(h)$ for every natural $h$ by induction. The recursion in [F3] depends only on the preceding stage, so a call with horizon at least $h$ has the same $\\Gamma_h$ as a call with horizon exactly $h$. In particular, the displayed alpha-vector representation holds for every $0\\le h\\le H$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L1",
+            "F3",
+            "F11",
+            "discharge-induction",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For each $\\alpha\\in\\Gamma_h$, its maximizing region $R_\\alpha$ is the simplex intersected with the finitely many half-spaces $\\sum_s b(s)(\\alpha(s)-\\beta(s))\\ge0$, one for each $\\beta\\in\\Gamma_h$. These regions cover $\\Delta(S)$ because the maximum in step 4.1 is attained, and on $R_\\alpha$ the value equals the linear function $b\\mapsto\\sum_s b(s)\\alpha(s)$. This proves piecewise linearity.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "For arbitrary $b,c\\in\\Delta(S)$ and $\\lambda\\in[0,1]$, the vector $\\lambda b+(1-\\lambda)c$ is again in $\\Delta(S)$ by [F2]: its coordinates are nonnegative and sum to $\\lambda+(1-\\lambda)=1$. Finite-sum linearity [F5] gives $\\sum_s(\\lambda b(s)+(1-\\lambda)c(s))\\alpha(s)=\\lambda\\sum_s b(s)\\alpha(s)+(1-\\lambda)\\sum_s c(s)\\alpha(s)$ for each $\\alpha$. Taking the maximum over $\\Gamma_h$ and bounding each summand by the corresponding maxima gives $V_h(\\lambda b+(1-\\lambda)c)\\le\\lambda V_h(b)+(1-\\lambda)V_h(c)$. Thus $V_h$ is convex.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "F2",
+            "F5",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-3",
+          "claim": "Define $\\Gamma_h^{\\rm wit}=\\{\\alpha\\in\\Gamma_h:\\exists b\\in\\Delta(S),\\ \\sum_s b(s)\\alpha(s)=V_h(b)\\}$. For arbitrary $b$, [F6] gives a maximizing $\\alpha_b\\in\\Gamma_h$; that same $b$ witnesses $\\alpha_b$, so $\\alpha_b\\in\\Gamma_h^{\\rm wit}$. Therefore $\\max_{\\alpha\\in\\Gamma_h^{\\rm wit}}\\sum_s b(s)\\alpha(s)=V_h(b)$; deleting all vectors with no witness preserves the value at every belief.",
+          "step": "5.3",
+          "inputs": [
+            "step 4.1",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-4",
+          "claim": "Let $\\mathcal P_0$ contain only the empty continuation and $\\mathcal P_{h+1}=A\\times\\mathcal P_h^{\\Omega}$. A depth-$(h+1)$ tree is uniquely its root action and a function from observations to depth-$h$ trees. By [F8]\u2013[F9], these sets are finite and their cardinalities satisfy $N_0=1$ and $N_{h+1}=|A|N_h^{|\\Omega|}$; [F10] fixes the natural-power convention. The map from trees to conditional-value vectors has image $\\Gamma_h$, the set of distinct exhaustive candidates by step 2.1. Enumerating the $N_h$ trees shows that this image has at most $N_h$ vectors, and the witness vectors form a subset, so their count is no larger.",
+          "step": "5.4",
+          "inputs": [
+  "step 4.1",
+  "F3",
+  "F7",
+  "F8",
+  "F9",
+  "F10",
+  "step 2.1"
+]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "In the case $|A|=2$, $|\\Omega|=1$, let $Q(h)$ be the claim $N_h=2^h$. The base case is $N_0=1=2^0$.",
+          "step": "6.1",
+          "inputs": [
+            "base",
+            "step 5.4",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "Fix $h$ and assume $Q(h)$. Step 5.4 gives $N_{h+1}=2N_h=2\\cdot2^h=2^{h+1}$ by the natural-power recursion [F10], so $Q(h+1)$ holds.",
+          "step": "6.2",
+          "inputs": [
+            "ih",
+            "step 5.4",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The base and successor steps prove $N_h=2^h$ for every $h$ by [F11]. Thus exhaustive tree candidates can grow exponentially, although duplicate vectors or pruning may reduce the stored set.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "step 6.2",
+            "F11",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The induction conclusions in steps 4.1 and 7.1, together with the envelope and convexity arguments in steps 5.1 and 5.2, witness pruning in step 5.3, and the general tree count in step 5.4, establish all claims. No Axiom of Choice is used: branches are selected only over the finite observation set, maxima are attained in finite sets, and the cited sufficiency, finite-sum, finite-function-set, product, and induction arguments make no arbitrary-family choice.",
+          "step": "8.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "step 5.3",
+            "step 5.4",
+            "step 7.1",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "F11",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "horizon zero",
+          "inputs": "\u0393_0={0}",
+          "calculation": "For the unique empty tree, b\u00b70=0 for every belief b.",
+          "result": "V_0(b)=0, with a finite attained maximum."
+        },
+        {
+          "case": "one-step singleton state, two actions",
+          "inputs": "S={s}, A={a_0,a_1}, \u03a9={o}, T=O=1, r(s,a_0)=0, r(s,a_1)=1, \u03b3=1",
+          "calculation": "\u0393_1={0,1} and \u0394(S)={\u03b4_s}; V_1(\u03b4_s)=max(0,1)=1.",
+          "result": "The one-step envelope is finite, attained, and convex on the singleton simplex."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The base horizon h=0 has the unique empty continuation and V_0=0 in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-normalizer observations are omitted in the belief recursion used at step 7.1; gamma=0 is also allowed by the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The policy-tree recurrence in step 7.1 includes singleton action or observation sets; step 8.1 checks |O|=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Point-mass beliefs are in the simplex and may witness vectors; step 6.2 proves pruning at every belief."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite proof uses gamma only in finite backups and covers both gamma=0 and gamma=1; see step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite continuation tuples and attained maxima are used in steps 2.1\u20133.1; step 8.1 records the choice-free argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states envelope, convexity, pruning, and count conclusions; it asserts no biconditional about them.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse direction for the value-envelope or pruning claims in the statement.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Independently checked all thirteen proof steps and hash-matched preimage: accepted reader finite-image clarifications in 2.1, 3.1 and 5.4. The empty tree gives Gamma_0={0}; each root/observation-continuation tuple gives exactly the specified pO conditional expectation. Summing out unobserved rewards yields r plus gamma times T/O continuation; even correlated reward and next state do not alter this linear expectation. Finite choices of representing subtrees prove the converse without AC. A times Gamma_h^Omega is finite and nonempty; its image is finite and nonempty, and each belief gives a finite real value set with attained maximum. Deterministic histories give trees; sufficiency bounds randomized policies. Maximizing half-space regions cover the simplex, and the finite-max inequality has the correct convexity direction, including lambda=0,1. At each belief an attained maximizer witnesses itself, so simultaneous removal of all never-maximizing vectors preserves the envelope, including ties. Tree counts are N_0=1 and N_(h+1)=|A|N_h^|Omega|; candidate/witness counts are image/subset bounds, not equalities. Singleton observations and two actions give 2^h trees even when vectors coincide; the separate example supplies distinct vectors. Checked H=0, gamma=0, gamma=1, duplicate vectors and null branches. Current product, function-cardinality, natural-power, finite-cardinality, finite-maximum/listability, sum and induction statements license each use. The algorithm diagram correctly branches on observations x,y to continuation actions; no proof relies on it. Brown CS-96-08 sections 3.1\u20133.4 and 4.1\u20134.2, PDF pages 9\u201316, independently retrieved with curl and read using PyMuPDF after browser failure, support conventions; Waterloo slides 7\u201315 and 19 support the finite-envelope/count context. Reader/refuter findings empty. No defect."
+      }
+    },
+    "ex-pomdp-two-state-bayes-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "source_section": "Statement",
+          "quote": "Let a finite POMDP be fixed, let $b\\in\\Delta(S)$ and $a\\in A$, and put $\\bar b(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$, $q(o)=\\sum_{s'\\in S}O(o\\mid s')\\bar b(s')$, and, when $q(o)>0$, $\\tau(o)(s')=O(o\\mid s')\\bar b(s')/q(o)$. For Borel $C\\subseteq\\Delta(S)$ define $K(C)=\\sum_{o:q(o)>0}q(o)1_C(\\tau(o))$. Then the joint next-state/reward/observation mass in the POMDP definition is normalized; $\\bar b$ and $q$ are probability distributions; every defined $\\tau(o)$ is a probability distribution and is the conditional law of the next state given observation $o$; and $K$ is a probability measure. Moreover, $(b,a)\\mapsto K(C\\mid b,a)$ is Borel measurable for each Borel $C$, so $K$ is a probability kernel from $\\Delta(S)\\times A$ to $\\Delta(S)$. No Axiom of Choice is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The transition marginal is the identity on $S$, so the predicted law after action $a$ is $\\bar b_1(s_0)=3/4$ and $\\bar b_1(s_1)=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The observation normalizer is $q(x\\mid b_0,a)=(3/4)(3/4)+(1/4)(1/4)=9/16+1/16=5/8>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The update gives $b_1(s_0)=(3/4)(3/4)/(5/8)=(9/16)/(10/16)=9/10$ and $b_1(s_1)=(1/4)(1/4)/(5/8)=(1/16)/(10/16)=1/10$. Both coordinates are nonnegative and sum to one, in agreement with [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "displayed observation x",
+          "inputs": "b=(3/4,1/4), T=I, O(x|s_0)=3/4, O(x|s_1)=1/4",
+          "calculation": "q(x)=9/16+1/16=5/8; \u03c4=(9/16,1/16)/(10/16)=(9/10,1/10).",
+          "result": "The positive-normalizer Bayes update matches steps 3.1\u20132.1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-state, one-action, two-observation model; empty model sets are outside its stated data.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both observation normalizers in this example are positive; it illustrates a positive-likelihood update.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-action case and one-step horizon are explicit in the example; steps 1.1\u20133.1 compute its unique update."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The prior has two positive coordinates and both state likelihoods for x are positive.",
+          "evidence": ""
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example sets gamma=1 and horizon H=1; steps 1.1\u20133.1 use the specified finite endpoint model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All displayed sets are finite and nonempty; steps 1.1\u20133.1 use only their explicit sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example computes one positive-likelihood posterior from explicit probabilities; it states no iff claim.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The displayed posterior calculation has no claimed converse implication.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Checked all three verification steps against identity transition and normalized x/y observation laws. Products for x are 9/16 and 1/16, hence q=10/16=5/8 and posterior (9/10,1/10); the claimed odds are correct. All state/action/observation sets are nonempty, reward law is normalized, and positive-q conditioning is legitimate. Checked model, filter, kernel lemma and finite sums. No AC, diagram or reader/refuter finding; no defect."
+      }
+    },
+    "ex-pomdp-observation-aliasing-preserves-belief": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "source_section": "Statement",
+          "quote": "Let a finite POMDP be fixed, let $b\\in\\Delta(S)$ and $a\\in A$, and put $\\bar b(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$, $q(o)=\\sum_{s'\\in S}O(o\\mid s')\\bar b(s')$, and, when $q(o)>0$, $\\tau(o)(s')=O(o\\mid s')\\bar b(s')/q(o)$. For Borel $C\\subseteq\\Delta(S)$ define $K(C)=\\sum_{o:q(o)>0}q(o)1_C(\\tau(o))$. Then the joint next-state/reward/observation mass in the POMDP definition is normalized; $\\bar b$ and $q$ are probability distributions; every defined $\\tau(o)$ is a probability distribution and is the conditional law of the next state given observation $o$; and $K$ is a probability measure. Moreover, $(b,a)\\mapsto K(C\\mid b,a)$ is Borel measurable for each Borel $C$, so $K$ is a probability kernel from $\\Delta(S)\\times A$ to $\\Delta(S)$. No Axiom of Choice is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The hidden-state transition is the identity, so the predicted distribution is $\\bar b(s_0)=2/3$ and $\\bar b(s_1)=1/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The normalizer is $q(x\\mid b_0,a)=1\\cdot(2/3)+1\\cdot(1/3)=1>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The posterior coordinates are $\\tau(b_0,a,x)(s_0)=1\\cdot(2/3)/1=2/3$ and $\\tau(b_0,a,x)(s_1)=1\\cdot(1/3)/1=1/3$. They sum to one as required by [F3], so the observation leaves the belief unchanged.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "uninformative singleton observation",
+          "inputs": "b=(2/3,1/3), T=I, O(x|s_0)=O(x|s_1)=1",
+          "calculation": "q(x)=2/3+1/3=1; \u03c4=(2/3,1/3).",
+          "result": "The posterior equals the prior."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes nonempty state, action, observation, and reward sets.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The sole observation has normalizer q=1; no zero-likelihood branch occurs.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The observation and action sets are singletons, and step 3.1 computes q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The likelihood is identical in both states, so step 3.1 verifies that this uninformative observation preserves the prior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example fixes gamma=1 and H=1; the posterior computation in steps 1.1\u20133.1 is valid at those values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only singleton finite action/observation choices occur; steps 1.1\u20133.1 use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies that one state-independent likelihood preserves the chosen prior; it makes no biconditional claim.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives no converse characterization of observations that preserve a belief.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Checked all three verification steps and the actual example, rather than inferring the title for arbitrary transitions: the hidden-state transition is identity and the singleton observation has likelihood one in both states. Predicted belief is (2/3,1/3), q=1, and positive-domain division preserves both coordinates. Reward zero and singleton action/observation are admissible; no division by zero, choice or diagram. Checked the finite model, filter, normalization lemma and finite-sum suppliers. Reader/refuter findings empty. No defect."
+      }
+    },
+    "ex-pomdp-zero-likelihood-observation-is-not-updated": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "source_section": "Statement",
+          "quote": "Let a finite POMDP be fixed, let $b\\in\\Delta(S)$ and $a\\in A$, and put $\\bar b(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$, $q(o)=\\sum_{s'\\in S}O(o\\mid s')\\bar b(s')$, and, when $q(o)>0$, $\\tau(o)(s')=O(o\\mid s')\\bar b(s')/q(o)$. For Borel $C\\subseteq\\Delta(S)$ define $K(C)=\\sum_{o:q(o)>0}q(o)1_C(\\tau(o))$. Then the joint next-state/reward/observation mass in the POMDP definition is normalized; $\\bar b$ and $q$ are probability distributions; every defined $\\tau(o)$ is a probability distribution and is the conditional law of the next state given observation $o$; and $K$ is a probability measure. Moreover, $(b,a)\\mapsto K(C\\mid b,a)$ is Borel measurable for each Borel $C$, so $K$ is a probability kernel from $\\Delta(S)\\times A$ to $\\Delta(S)$. No Axiom of Choice is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The hidden-state transition is the identity, so the predicted state distribution after $a$ is $\\bar b(s_0)=1$ and $\\bar b(s_1)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The normalizers are $q(y\\mid b_0,a)=O(y\\mid s_0)\\bar b(s_0)+O(y\\mid s_1)\\bar b(s_1)=0$ and $q(x\\mid b_0,a)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $q(y\\mid b_0,a)=0$, the definition makes $\\tau(b_0,a,y)$ undefined and omits the $y$ term from $K$. The only positive observation branch is $x$ with mass one by step 2.1, so $K$ assigns total mass one to $\\tau(b_0,a,x)$ and no mass to an impossible $y$ update, as required by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "impossible observation y",
+          "inputs": "b=(1,0), T=I, O(y|s_0)=0, O(y|s_1)=1, O(x|s_0)=1, O(x|s_1)=0",
+          "calculation": "q(y)=0\u00b71+1\u00b70=0; q(x)=1\u00b71+0\u00b70=1.",
+          "result": "\u03c4(y) is undefined and the transition uses the sole positive-mass x branch."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-state, one-action, two-observation model.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalizer q(y)=0 and the undefined update are computed in step 3.1 and handled in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The complementary observation has q(x)=1; step 3.1 shows the belief transition has total mass one on that branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The prior is the point mass at s_0 and the impossible y branch is excluded in steps 1.1\u20133.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The model has gamma=1 and H=1; the boundary distinction is in the normalizer calculation at step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite model has one action and finite observations; steps 1.1\u20133.1 require no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks the q(y)=0 boundary and undefined update directly; it states no equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not assert a reverse implication from an undefined posterior to zero likelihood.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Checked all three verification steps at boundary prior (1,0). Identity transition leaves this prior; y has q=0 and x has q=1. The partial filter remains undefined at y and K omits that branch, while x yields the same point-mass belief and total mass one. No 0/0 or illicit arbitrary posterior is used. Model, filter, kernel lemma and finite-sum statements agree; reader/refuter findings empty; no AC or diagram; no defect."
+      }
+    },
+    "ex-pomdp-policy-tree-enumeration-grows-exponentially": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-pomdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-pomdp-witness-backup",
+          "source_section": "Definition",
+          "quote": "Input a finite POMDP, a horizon $H\\in\\mathbb N$, and its discount $\\gamma\\in[0,1]$. A depth-zero policy tree is the empty continuation and has the zero vector $\\alpha_0:S\\to\\mathbb R$. Recursively, a depth-$(h+1)$ policy tree consists of a root action $a\\in A$ and one depth-$h$ continuation tree for each observation $o\\in\\Omega$. If the continuation vectors are $(\\alpha_o)_{o\\in\\Omega}$, assign the tree the vector\n\n$$\\alpha_{a,(\\alpha_o)}(s)=r(s,a)+\\gamma\\sum_{s'\\in S}T(s'\\mid s,a)\\sum_{o\\in\\Omega}O(o\\mid s')\\alpha_o(s')\\qquad(s\\in S).$$\n\nSet $\\Gamma_0=\\{\\alpha_0\\}$. For each $h=0,\\ldots,H-1$, form $\\Gamma_{h+1}$ from every action $a\\in A$ and every tuple $(\\alpha_o)_{o\\in\\Omega}\\in\\Gamma_h^{\\Omega}$ using the displayed formula, treating $\\Gamma_{h+1}$ as a set so equal vectors are stored once. Return $(\\Gamma_0,\\ldots,\\Gamma_H)$. This procedure exhaustively enumerates finite policy-tree vectors; it does not perform linear-program witness pruning and makes no bit-complexity or polynomial-time claim.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+          "source_section": "Statement",
+          "quote": "Fix a finite POMDP, horizon $H\\in\\mathbb N$, and discount $\\gamma\\in[0,1]$. For $0\\le h\\le H$, let $\\Gamma_h$ be the finite alpha-vector set returned by the exhaustive backup, with set semantics for duplicate vectors. Then, for every belief $b\\in\\Delta(S)$,\n\n$$V_h(b)=\\max_{\\alpha\\in\\Gamma_h}\\sum_{s\\in S}b(s)\\alpha(s),$$\n\nwhere $V_h$ is the optimal expected $h$-step discounted reward. Thus $V_h$ is the upper envelope of finitely many linear functions on $\\Delta(S)$: it is linear on each region $R_\\alpha=\\{b\\in\\Delta(S):\\sum_s b(s)\\alpha(s)\\ge\\sum_s b(s)\\beta(s)\\text{ for every }\\beta\\in\\Gamma_h\\}$ and is convex. Define a **witness belief** for $\\alpha\\in\\Gamma_h$ to be any $b\\in\\Delta(S)$ with $\\sum_s b(s)\\alpha(s)=V_h(b)$. Removing every vector with no witness belief leaves $V_h$ unchanged. For the count, $\\mathcal P_0$ contains the empty continuation and each $\\mathcal P_{h+1}$ consists of a root action and one depth-$h$ continuation for each observation; with $N_h=|\\mathcal P_h|$, $N_0=1$ and $N_{h+1}=|A|N_h^{|\\Omega|}$. The exhaustive candidate and witness-vector counts are bounded by $N_h$, which can grow exponentially in $h$. No infinite-horizon representation or polynomial-time pruning claim is made.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nat-power",
+          "source_section": "Definition",
+          "quote": "Let $m \\in \\mathbb{N}$. By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{N}$, the starting element $1$ and the function\n$f(x) = x \\cdot m$ ([[def-nat-multiplication]]), there is a unique function\n$\\mathbb{N} \\to \\mathbb{N}$, written $n \\mapsto m^{n}$, with\n\n$$m^{0} = 1, \\qquad m^{\\sigma(n)} = m^{n} \\cdot m \\quad (n \\in \\mathbb{N}).$$\n\nBoth the base and the value are natural numbers, so $m^n \\in \\mathbb{N}$ for all\n$m, n$. In particular $m^{1} = m^{0}\\cdot m = m$ and $m^{2} = m \\cdot m$.\n\n**Why a new item is needed.** [[def-integer-power]] defines $a^{n}$ for a\n**real** base $a$, so its value is a real number. The counts on this page,\n$\\lvert A^{B}\\rvert$ and $\\lvert\\mathcal{P}(A)\\rvert$ among them, are natural\nnumbers, and an identity between them has to be an identity in $\\mathbb{N}$. The\ntwo operations are related by clause (d) below and by nothing weaker.\n\n**(a) $0^{0} = 1$ and $0^{n} = 0$ for $n \\ge 1$.** The first is the base clause.\nFor the second, $0^{\\sigma(n)} = 0^{n}\\cdot 0 = 0$, the clause $x \\cdot 0 = 0$\nbeing definitional ([[def-nat-multiplication]]), and every $n \\ge 1$ is a\nsuccessor.\n\n**(b) $1^{n} = 1$ for every $n$.** Induction: $1^{0} = 1$, and\n$1^{\\sigma(n)} = 1^{n}\\cdot 1 = 1^{n}$ ([[lem-nat-mult-identity]],\n[[thm-induction-principle]]).\n\n**(c) $m^{p+q} = m^{p}\\,m^{q}$ and $(m p)^{q} = m^{q} p^{q}$.** Both by induction\non $q$, using associativity and commutativity of multiplication\n([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]). For the first, at\n$q = 0$ we have $m^{p+0} = m^{p} = m^{p}\\cdot 1 = m^{p}m^{0}$, and\n$m^{p+\\sigma(q)} = m^{\\sigma(p+q)} = m^{p+q}\\cdot m = (m^{p}m^{q})\\cdot m = m^{p}\\,m^{\\sigma(q)}$,\nusing $p + \\sigma(q) = \\sigma(p+q)$ ([[def-nat-addition]]). For the second, at\n$q = 0$ both sides are $1$, and\n$(mp)^{\\sigma(q)} = (mp)^{q}(mp) = m^{q}p^{q}mp = m^{\\sigma(q)}p^{\\sigma(q)}$.\n\n**(d) The bridge into $\\mathbb{R}$.** With $\\iota : \\mathbb{N} \\to \\mathbb{R}$\nthe canonical natural ([[def-canonical-natural]]) and $x^{n}$ the integer power\nof [[def-integer-power]],\n\n$$\\iota\\big(m^{n}\\big) = \\iota(m)^{n} \\qquad (m, n \\in \\mathbb{N}).$$\n\nInduction on $n$: at $n = 0$ both sides are $1$, since $\\iota(1) = 1$; and\n$\\iota(m^{\\sigma(n)}) = \\iota(m^{n}\\cdot m) = \\iota(m^{n})\\,\\iota(m) = \\iota(m)^{n}\\iota(m) = \\iota(m)^{\\sigma(n)}$,\nthe second equality being the multiplicativity of $\\iota$ (clause 0 of\n[[lem-nat-finite-sum-laws-and-the-canonical-embedding]]) and the last the\nrecursion clause of [[def-integer-power]].\n\n**(e) $m^{n}$ is a constant product.** $m^{n} = \\prod_{k<n} m$, the\n$\\mathbb{N}$-valued product of the constant list\n([[def-nat-finite-sum-and-product]]). Induction: at $n = 0$ both sides are $1$,\nand $\\prod_{k<\\sigma(n)} m = \\big(\\prod_{k<n} m\\big)\\cdot m = m^{n}\\cdot m = m^{\\sigma(n)}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), in particular an ordered field\n([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set\nof natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$\n([[def-nat-addition]]).\n\nLet $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for\n$a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the\nupper index**, which is legitimate because of the recursion theorem\n([[thm-recursion]]). That theorem produces a function of one variable, so the\nrunning index has to be carried along inside the value: applying it to the set\n$A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function\n$f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique\n$g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with\n\n$$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$\n\nWrite $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates.\n\n**The first coordinate is the index itself, and that is a small induction, not an\nobservation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if\n$\\pi_1(g(n)) = n$, then\n$g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$,\nso $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every\n$n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed\nclauses be read off, and doing so gives\n\n$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$\n\n$\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those\ntwo properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies\nthe two clauses defining $g$, hence equals $g$ by the uniqueness clause of\n[[thm-recursion]], so $\\Sigma' = \\Sigma$.\n\nWe write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting\nelement $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same\ninduction on the first coordinate and the same uniqueness argument, gives the\nunique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with\n\n$$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$\n\nand we write $\\prod_{k < n} a_k := \\Pi_n$.\n\n**Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate\n\n$$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$\n\nand, for a general lower index $m$ with $m \\le n + 1$, let $d$ be the\nunique natural number satisfying $m+d=n+1$. Existence is the definition of\nnatural order ([[def-nat-order]]); if $m+d=m+e$, commutativity\n([[lem-nat-add-commutative]]) gives $d+m=e+m$, so cancellation\n([[lem-nat-add-cancellative]]) gives $d=e$. On these admissible bounds only,\nwe may write this unique additive gap as $d=n+1-m$; no total natural subtraction\noperation is presupposed. With $d$ thus fixed, define\n\n$$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$\n\nWhen $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is\nnotation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the\nempty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of\n$\\mathbb{N}$ and is only a way of writing \"no terms\".\n\nEquivalently, for naturals $m \\le r$, the half-open endpoint notation\n$\\sum_{k=m}^{r-1}a_k$ and $\\prod_{k=m}^{r-1}a_k$ means\n$\\sum_{j<d}a_{m+j}$ and $\\prod_{j<d}a_{m+j}$, respectively, where $d$ is the\nunique natural with $m+d=r$. Here $r-1$ is an endpoint label for the terms\nbefore $r$, so this notation needs no total subtraction operation. For $m=r$,\nthe unique gap is $0$ because $m+0=m$, giving the empty sum and product; the\ncase $m=r=0$ is the $-1$ endpoint convention just stipulated.\n\nOnly finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation\n$\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list\n$a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the\nlist to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively\n$a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-belief-state-and-bayes-filter",
+          "source_section": "Definition",
+          "quote": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-nat-order-is-membership",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N} = \\omega$ be the von Neumann naturals, with $0 = \\varnothing$ and\n$\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $\\le$ and $<$ be\nthe order defined additively by $m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n)$\nand $m < n \\iff (m \\le n$ and $m \\ne n)$ ([[def-nat-order]]). Then $\\mathbb{N}$ is\na **transitive set**: every element of a natural number is itself a natural\nnumber. Moreover, for all $m, n \\in \\mathbb{N}$:\n\n1. $m < n \\iff m \\in n$;\n2. $m \\le n \\iff m \\subseteq n$;\n3. $n < \\sigma(n)$, and $m < \\sigma(n) \\iff m \\le n$;\n4. $0 \\le n$, and $0 \\in n$ whenever $n \\ne 0$.\n\nConsequently $n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ for every $n$: a natural\nnumber is exactly the set of the naturals below it.\n\n**Why this is proved here.** [[def-nat-order]] defines the order additively and\nrecords the identification with membership only as an orienting remark, without\nproof. The countability arguments on this page use that identification as a\nworking fact, so it is established here, from the additive order and induction\nalone. Nothing below uses ordinals or any later material.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-nat-transitive-irreflexive",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$: (a) $n$ is transitive, i.e. $x \\in n \\Rightarrow x \\subseteq n$; and (b) $n \\notin n$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-cardinality-of-finite-natural-initial-segment",
+          "source_section": "Statement",
+          "quote": "For each $n\\in\\mathbb N$, let $I_n=\\{t\\in\\mathbb N:t<n\\}$. Then $I_n=n$, so $I_n$ is finite and $|I_n|=n$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F10], $I_n$ is finite with cardinality $n$. Hence the function set $\\{0,1\\}^{I_n}$ has cardinality $2^n$ by [F4] and [F6], and the product rule [F5] gives $|S|=n2^n$. Since $0<n$, [F9] gives $0\\in I_n$, so $(x^\\circ,0)\\in S$ and its point mass is a probability distribution. The action, observation, and reward sets are finite and nonempty. For each state and action the specified joint mass assigns one next-state/reward pair probability one, and the singleton observation law has total mass one; thus the data satisfy [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With one observation, the tree-count recurrence in [F3] gives $N_0=1$ and $N_{h+1}=2N_h$: each tree is determined by its root action and its unique observation continuation.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induction using [F11] and the recursion for powers [F6] gives $N_h=2^h$ for every $h$: the base is $N_0=1=2^0$, and $N_{h+1}=2N_h=2\\cdot2^h=2^{h+1}$. A depth-$n$ tree with one observation is exactly an action string $y:I_n\\to\\{0,1\\}$, so there are exactly $2^n$ such trees by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F4",
+            "F6",
+            "F11",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $c_k$ be the clock coordinate after $k$ transitions from the initial clock $0$. We prove by induction that $k\\in I_n$ implies $c_k=k$. At $k=0$ this holds. If $\\sigma(k)\\in I_n$, then $k\\in\\sigma(k)$ by [F9], and transitivity of the natural $n=I_n$ from [F10] gives $k\\in I_n$; the induction hypothesis gives $c_k=k$. Since $\\sigma(k)\\in I_n$, the transition rule advances to $c_{\\sigma(k)}=\\sigma(k)$. If $\\sigma(k)\\notin I_n$, the successor case of the implication is vacuous. The induction principle [F11] proves the claim for every $k$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F9",
+            "F10",
+            "F11",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore, at each decision time $t\\in I_n$ from initial state $(x,0)$, the hidden state is $(x,t)$. Under the tree $y$ its reward at that time is $1_{\\{x(t)=y(t)\\}}$, and the finite horizon sum with $\\gamma=1$ gives $\\alpha_y(x,0)=\\sum_{t<n}1_{\\{x(t)=y(t)\\}}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each string $y$, the point mass $\\delta_{(y,0)}$ is a belief by [F8], and [F3] evaluates its tree there as $\\alpha_y(y,0)=n$. If $z\\ne y$, some coordinate $t$ differs, so the sum for $\\alpha_z(y,0)$ has at least one zero term and all other terms at most one; its value is strictly less than $n$. Thus $y$ is the unique maximizing tree at $\\delta_{(y,0)}$, so its vector is witnessed. If $y\\ne z$, their values at $\\delta_{(y,0)}$ differ, so their vectors are distinct. By step 2.1 there are $2^n$ strings; hence the example has exactly $2^n$ distinct witnessed vectors.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "n=1 family",
+          "inputs": "I_1={0}; x,y\u2208{0,1}; H=1",
+          "calculation": "There are two action strings. Their alpha values at states (0,0),(1,0) are (1,0) and (0,1), respectively.",
+          "result": "Each vector is distinct and is uniquely witnessed by the matching point mass."
+        },
+        {
+          "case": "n=2 family",
+          "inputs": "I_2={0,1}; x,y\u2208{0,1}^2; H=2",
+          "calculation": "There are four action strings; the matching string scores 2 at its point mass and every different string scores at most 1.",
+          "result": "All four alpha vectors are distinct and witnessed."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>0; the empty horizon and initial segment are not part of this family.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The sole observation always has probability one, so this family has no zero-likelihood branch.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 member has two states, two actions, one observation, and two distinct witnessed vectors; see finite check and steps 4.1\u20134.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Point-mass beliefs witness the action strings, and deterministic transitions/rewards are verified in steps 1.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each member uses gamma=1 and finite horizon H=n; steps 4.1\u20132.2 derive its tree values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The family uses finite function sets and the explicit recursion; steps 1.1\u20132.1 and 2.1 are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example constructs 2^n distinct witnessed vectors; it does not formulate an iff statement about exponential growth.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The construction has no claimed converse from an exponential vector count to this clocked model.",
+          "evidence": ""
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-88",
+        "notes": "Checked all six verification steps against the complete model: n>0 makes clock zero a valid element and S nonempty; I_n=n gives exactly n clock states, and binary function count/product give |S|=n*2^n. The capped clock remains in I_n; induction on the implication k in I_n => c_k=k uses transitivity and has a vacuous successor case beyond the clock. Starting at clock zero, depth-n singleton-observation trees are exactly n-bit action strings. Their values at (x,0) count coordinate matches. At delta_(y,0), y has value n and every distinct z has at most n-1, proving both distinctness and a unique witness for every vector. n=1 works with a stationary capped clock; n=0 is explicitly excluded. Witnesses range over the full simplex and are explicitly allowed to be unreachable from b0; there is no false fixed-state-size growth claim since |S| grows with n. Checked all declared supplier statements including natural order, successor, transitivity, finite initial-segment, power, product, function count, finite sums and induction. The local finite-horizon theorem proves the witness/value interface. No AC or diagram; reader/refuter findings empty; no defect."
+      }
+    }
+  }
+}

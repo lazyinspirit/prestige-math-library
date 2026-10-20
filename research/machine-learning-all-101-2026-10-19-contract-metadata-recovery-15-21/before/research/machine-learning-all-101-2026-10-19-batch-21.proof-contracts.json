@@ -1,0 +1,1124 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-weighted-graph-laplacian",
+    "lem-finite-trace-minimization",
+    "lem-deterministic-eigenspace-basis",
+    "def-ratio-cut-and-normalized-cut",
+    "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+    "lem-ratio-cut-indicator-trace-identities",
+    "thm-weighted-ratio-and-normalized-cut-relaxations",
+    "alg-weighted-spectral-clustering",
+    "ex-knn-symmetrization-changes-ratio-cut",
+    "ex-disconnected-weighted-components-spectral-clustering",
+    "ex-isolated-vertex-in-normalized-cut",
+    "ex-concentric-circles-spectral-embedding"
+  ],
+  "contracts": {
+    "lem-finite-trace-minimization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+          "source_section": "Statement",
+          "quote": "If $T$ is self-adjoint on a nonzero finite-dimensional real inner product space and its\neigenvalues are ordered as\n\n$$\\lambda_1\\ge\\cdots\\ge\\lambda_n,$$\n\nthen\n\n$$\\lambda_1=\\max_{v\\ne0} R_T(v)\\qquad\\text{and}\\qquad \\lambda_n=\\min_{v\\ne0} R_T(v).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-trace-minimization-1-1",
+          "claim": "If $k=1$, every feasible $Q$ is a unit column $q$, so $\\operatorname{tr}(Q^TAQ)=q^TAq=R_A(q)$. By [F2], its minimum is the smallest eigenvalue, which is $\\lambda_1$ in the increasing order of the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-trace-minimization-1-2",
+          "claim": "Suppose $k\\ge2$. By [F1], choose an orthonormal eigenbasis $u_1,\\ldots,u_n$ with eigenvalues $\\lambda_1\\le\\cdots\\le\\lambda_n$, and let $U$ be the matrix with these columns. For any feasible $Q$, put $C=U^TQ$; then $C^TC=I_k$ and $Q^TAQ=C^T\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_n)C$. Writing $c_{ij}$ for the entries of $C$ and $p_i=\\sum_{j=1}^k c_{ij}^2$, direct expansion of the diagonal sum gives $\\operatorname{tr}(Q^TAQ)=\\sum_{i=1}^n\\lambda_i p_i$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "lem-finite-trace-minimization-2-1",
+          "claim": "The matrix $P=CC^T$ is symmetric and idempotent because $C^TC=I_k$. Hence it is the orthogonal projection onto the column space of $C$, and $p_i=e_i^TPe_i=\\|Pe_i\\|_2^2$ lies in $[0,1]$. Also $\\sum_i p_i=\\sum_{i,j}c_{ij}^2=\\sum_j(C^TC)_{jj}=k$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-trace-minimization-3-1",
+          "claim": "Using $\\sum_i p_i=k$, subtract the bottom-$k$ eigenvalue sum to obtain $$\\sum_i\\lambda_i p_i-\\sum_{i=1}^k\\lambda_i=\\sum_{i=1}^k(\\lambda_k-\\lambda_i)(1-p_i)+\\sum_{i=k+1}^n(\\lambda_i-\\lambda_k)p_i\\ge0.$$ Every term on the right is nonnegative. Taking $Q=(u_1,\\ldots,u_k)$ gives equality, so the stated minimum is attained. This proves the claim for $k\\ge2$ as well as the $k=1$ case of step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n≥1 and 1≤k≤n; an empty matrix is outside the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero gap when all eigenvalues are zero, including A=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the k=1 Rayleigh boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 remains nonnegative when λ_k is repeated; the stated eigenbasis attains the minimum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover k=1 and k=n; the latter has an empty upper-index sum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite spectral suppliers provide individual eigenvectors; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a minimum formula, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a minimum formula, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "lem-deterministic-eigenspace-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-deterministic-eigenspace-basis-1-1",
+          "claim": "Write $x=\\sum_{i=1}^m x_i e_i$. The unique decompositions of two vectors add, and scalar multiples of a decomposition remain decompositions, so uniqueness makes $P_E$ linear. If $x\\in E$, its decomposition is $x+0$, hence $P_Ex=x$. Therefore $x=P_Ex=\\sum_i x_iP_Ee_i$, and the projected coordinate vectors span $E$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-deterministic-eigenspace-basis-2-1",
+          "claim": "Start with $q_0$ if supplied, then process $v_i=P_Ee_i$ in order. Each residual $r_i=v_i-\\sum_j\\langle v_i,b_j\\rangle b_j$ lies in $E$ and is orthogonal to every previously accepted orthonormal vector $b_j$. If $r_i=0$, then $v_i$ is already in their span; if $r_i\\ne0$, appending $r_i/\\|r_i\\|_2$ preserves orthonormality and the span of all processed vectors. By induction, after the finite scan the accepted list is orthonormal and spans the initial vector together with all $P_Ee_i$. Step 1.1 shows this span is $E$, and the initial unit vector is first when present.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If E={0} and no q0 is supplied, steps 1.1–2.1 show all projected residuals are zero and the empty list spans E."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly discards each zero residual without changing the accumulated span."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional E, step 2.1 appends the first nonzero projected coordinate vector and skips the remaining dependent vectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove the construction for arbitrary finite dimension, including repeated-eigenvalue eigenspaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the finite scan when m=1, whose sole coordinate vector spans any one-dimensional E."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The ordered coordinate scan and fixed residual rule are deterministic and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a basis-construction assertion, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a basis-construction assertion, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "lem-weighted-graph-laplacian-quadratic-form-and-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel-1-1",
+          "claim": "By [F1], $f^TLf=\\sum_i d_i f_i^2-\\sum_{i,j}w_{ij}f_if_j$. Replacing $d_i$ by $\\sum_jw_{ij}$, using $w_{ij}=w_{ji}$ to identify the two square sums, and collecting terms gives $f^TLf=\\frac12\\sum_{i,j}w_{ij}(f_i^2-2f_if_j+f_j^2)=\\frac12\\sum_{i,j}w_{ij}(f_i-f_j)^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel-2-1",
+          "claim": "The displayed sum is nonnegative for every $f$, and $L$ is symmetric because both $D$ and $W$ are symmetric. Therefore $L$ is positive semidefinite.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel-2-2",
+          "claim": "If $Lf=0$, then $f^TLf=0$. By step 1.1 this is a finite sum of nonnegative terms, so every term with $w_{ij}>0$ vanishes and $f_i=f_j$ on every support edge. Equality propagates along each finite path, hence $f$ is constant on every connected component, including an isolated singleton.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-weighted-graph-laplacian-quadratic-form-and-kernel-3-1",
+          "claim": "Conversely, suppose $f$ is constant on each support component. For each vertex $i$, every $j$ with $w_{ij}>0$ lies in the same component, so $f_i=f_j$. Hence $(Lf)_i=d_if_i-\\sum_jw_{ij}f_j=\\sum_jw_{ij}(f_i-f_j)=0$ for every $i$, and $Lf=0$. The two inclusions give the stated kernel equality.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1; the empty vertex set is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero energy when every weight is zero; steps 2.2 and 3.1 then identify the kernel as all vectors, constant on singleton components."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the sums are empty and the sole vertex is an isolated singleton; steps 1.1–3.1 apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 cover disconnected support graphs and isolated components."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter in this identity or kernel characterization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite sums and finite paths; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves every kernel vector is constant on each component."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every componentwise-constant vector lies in the kernel."
+        }
+      ]
+    },
+    "lem-ratio-cut-indicator-trace-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ratio-cut-and-normalized-cut",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ratio-cut-indicator-trace-identities-1-1",
+          "claim": "The supports of distinct RatioCut indicator columns are disjoint, and each column has $|A_r|$ entries equal to $|A_r|^{-1/2}$. Thus each column has squared norm $1$ and distinct columns have inner product $0$, so $H_R^TH_R=I_k$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ratio-cut-indicator-trace-identities-1-2",
+          "claim": "The supports of distinct Ncut indicator columns are disjoint, and $h_r^TDh_r=\\operatorname{vol}(A_r)^{-1}\\sum_{i\\in A_r}d_i=1$. Distinct columns have $D$-inner product $0$, so $H_N^TDH_N=I_k$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ratio-cut-indicator-trace-identities-1-3",
+          "claim": "By [F3], the energy of a RatioCut indicator column is $\\frac12\\sum_{i,j}w_{ij}(h_i-h_j)^2$. Terms with both indices inside or both outside $A_r$ vanish. Each ordered crossing pair has squared difference $|A_r|^{-1}$; symmetry makes the two directed crossing sums equal, so the factor $1/2$ leaves $h_r^TLh_r=\\operatorname{cut}(A_r,A_r^c)/|A_r|$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ratio-cut-indicator-trace-identities-1-4",
+          "claim": "For a Ncut indicator column the same finite energy sum has zero terms except across $A_r$ and its complement, and each crossing squared difference is $\\operatorname{vol}(A_r)^{-1}$. Pairing the two equal directed sums gives $h_r^TLh_r=\\operatorname{cut}(A_r,A_r^c)/\\operatorname{vol}(A_r)$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ratio-cut-indicator-trace-identities-2-1",
+          "claim": "By the stated trace definition, $\\operatorname{tr}(H_R^TLH_R)=\\sum_r h_r^TLh_r$ and $\\operatorname{tr}(H_N^TLH_N)=\\sum_r h_r^TLh_r$. Summing steps 1.3 and 1.4 gives the RatioCut and Ncut identities, while steps 1.1 and 1.2 give their respective indicator constraints.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty vertex set and nonempty partition parts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 give zero trace and zero cut when all crossing weights vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 verify the one-column constraints for k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The trace identities are finite algebraic equalities and do not involve eigenvalues or eigenspace multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 apply for singleton partitions and for a partition into all allowed vertices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The partitions are supplied finite input; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives two trace identities and feasibility constraints, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives two trace identities and feasibility constraints, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-weighted-ratio-and-normalized-cut-relaxations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ratio-cut-and-normalized-cut",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ratio-cut-indicator-trace-identities",
+          "source_section": "Statement",
+          "quote": "Let $W,D,L,V,V_+$ be as in the finite weighted graph definition. For a square matrix $B$, set $\\operatorname{tr}(B)=\\sum_i B_{ii}$. If $A_1,\\ldots,A_k$ partition $V$, define $H_R\\in\\mathbb R^{n\\times k}$ by $(H_R)_{ir}=|A_r|^{-1/2}$ for $i\\in A_r$ and $0$ otherwise. Then $H_R^TH_R=I_k$ and $\\operatorname{RatioCut}(A_1,\\ldots,A_k)=\\operatorname{tr}(H_R^TLH_R)$. If $A_1,\\ldots,A_k$ partition $V_+$, define $H_N\\in\\mathbb R^{n\\times k}$ by $(H_N)_{ir}=\\operatorname{vol}(A_r)^{-1/2}$ for $i\\in A_r$ and $0$ otherwise. Then $H_N^TDH_N=I_k$ and $\\operatorname{Ncut}(A_1,\\ldots,A_k)=\\operatorname{tr}(H_N^TLH_N)$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-trace-minimization",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{n\\times n}$ be symmetric, let $\\lambda_1\\le\\cdots\\le\\lambda_n$ be its real eigenvalues repeated with multiplicity, and define $\\operatorname{tr}(B)=\\sum_i B_{ii}$ for square $B$. For $1\\le k\\le n$, $$\\min_{Q\\in\\mathbb R^{n\\times k},\\ Q^TQ=I_k}\\operatorname{tr}(Q^TAQ)=\\sum_{i=1}^k\\lambda_i.$$ The minimum is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $k$ smallest eigenvalues, counted with multiplicity; when an eigenvalue at the cutoff is repeated, the minimizer need not be unique.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-1-1",
+          "claim": "By [F1] and [F3], $L$ is symmetric positive semidefinite. If $x\\in\\mathbb R^{|V_+|}$, extend it by zero on isolates to $\\widetilde x\\in\\mathbb R^n$; then $x^TL_+x=\\widetilde x^TL\\widetilde x\\ge0$, so $L_+$ is positive semidefinite. Since $D_+^{-1/2}$ is a real diagonal matrix, $y^TL_{\\mathrm{sym},+}y=(D_+^{-1/2}y)^TL_+(D_+^{-1/2}y)\\ge0$. Thus both Laplacians in the Statement are positive semidefinite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-1-2",
+          "claim": "For every partition of $V$ into $k$ nonempty sets, [F4] supplies a feasible $H_R$ for the real constraint $H^TH=I_k$ with trace equal to that partition's RatioCut. The relaxed feasible set therefore contains every discrete indicator matrix, so the infimum over the relaxed feasible set is at most the minimum over the finite nonempty family of partitions.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-1-3",
+          "claim": "Let $A_1,\\ldots,A_k$ partition $V_+$. By [F4], their normalized indicators, restricted to $V_+$, satisfy $H^TD_+H=I_k$ and have trace objective equal to Ncut. Indeed, if $i$ is isolated then $d_i=0$ and $\\sum_jw_{ij}=0$ with $w_{ij}\\ge0$ forces every $w_{ij}=0$, so row and column $i$ of $L$ vanish; extending $H$ by zero on isolates leaves the active trace unchanged. Thus the active real feasible set contains every discrete Ncut indicator, and the infimum over the active real feasible set is at most $N_k$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-2-1",
+          "claim": "The matrix $L$ is real symmetric by [F1]. Applying [F5] with $A=L$ gives $\\min_{H^TH=I_k}\\operatorname{tr}(H^TLH)=\\sum_{i=1}^k\\lambda_i(L)$, attained by orthonormal eigenvectors for the $k$ smallest eigenvalues. Together with step 1.2 this is the claimed RatioCut lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-2-2",
+          "claim": "The diagonal entries of $D_+$ are strictly positive, so $Q=D_+^{1/2}H$ is a bijection from $H^TD_+H=I_k$ to $Q^TQ=I_k$. It also gives $\\operatorname{tr}(H^TL_+H)=\\operatorname{tr}(Q^TD_+^{-1/2}L_+D_+^{-1/2}Q)=\\operatorname{tr}(Q^TL_{\\mathrm{sym},+}Q)$. Applying [F5] to $L_{\\mathrm{sym},+}$ gives the stated Ncut relaxed minimum and optimizer $H=D_+^{-1/2}Q$; with step 1.3 this is the claimed lower bound.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 1.3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-3-1",
+          "claim": "If $L_{\\mathrm{sym},+}q=\\lambda q$ and $u=D_+^{-1/2}q$, multiplying by $D_+^{1/2}$ gives $L_+u=\\lambda D_+u$. Conversely, if $L_+u=\\lambda D_+u$, then $q=D_+^{1/2}u$ satisfies $L_{\\mathrm{sym},+}q=\\lambda q$. Thus the symmetric normalized problem is equivalent to the generalized eigenproblem stated.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-weighted-ratio-and-normalized-cut-relaxations-4-1",
+          "claim": "Every Ncut part is a nonempty subset of $V_+$, so its volume is positive; an isolate has zero volume but is excluded from $N_k$ and can only be reinserted as a separately reported singleton. Steps 1.2, 1.3, 2.1, and 2.2 compare feasible sets and compute the lower bounds; they do not bound the RatioCut or Ncut value after an arbitrary rounding.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n≥1 and k in the stated feasible range."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves both matrices positive semidefinite; when all weights vanish the RatioCut relaxation is zero and the Ncut clause is vacuous because V+ is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 apply the trace-minimization supplier for k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 allow repeated zero eigenvalues and nonunique minimizing subspaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite trace-minimization supplier and steps 2.1–2.2 apply at k=n and k=|V+|."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrix spaces and partitions are finite-dimensional; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states minima and lower bounds, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states minima and lower bounds, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-knn-symmetrization-changes-ratio-cut": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ratio-cut-and-normalized-cut",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-knn-symmetrization-changes-ratio-cut-1-1",
+          "claim": "The pairwise Euclidean distances are $|x_1-x_2|=1$, $|x_2-x_3|=2$, and $|x_1-x_3|=3$. Therefore the directed choices are $1\\to2$, $2\\to1$, and $3\\to2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-knn-symmetrization-changes-ratio-cut-2-1",
+          "claim": "The union rule keeps an edge selected in either direction, so its undirected edges are $\\{1,2\\}$ and $\\{2,3\\}$. The mutual rule keeps only edges selected in both directions, so its only edge is $\\{1,2\\}$. Both weight matrices satisfy [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-knn-symmetrization-changes-ratio-cut-3-1",
+          "claim": "In the union graph, the only crossing edge for $A_1=\\{1,2\\}$ and $A_2=\\{3\\}$ is $\\{2,3\\}$, of weight $1$; hence both one-sided cuts equal $1$. In the mutual graph there is no crossing edge, so both cuts equal $0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-knn-symmetrization-changes-ratio-cut-4-1",
+          "claim": "By [F2], the union RatioCut is $1/2+1=3/2$, while the mutual RatioCut is $0/2+0/1=0$. Thus the fixed data, neighbor count, and partition have different cut values under the two symmetrizations.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three data points and two nonempty partition parts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 compute the mutual graph crossing weights and RatioCut as zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the k=1 nearest-neighbor choices and their distances."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "All three pairwise distances are distinct, so no nearest-neighbor tie occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses the smallest positive neighbor count k=1 and computes both symmetrizations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Nearest-neighbor and center-index ties are resolved deterministically; none occurs in this data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two finite objective values, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example compares two finite objective values, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-disconnected-weighted-components-spectral-clustering": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ratio-cut-and-normalized-cut",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-weighted-spectral-clustering",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n,p\\ge1$, data $x_1,\\ldots,x_n\\in\\mathbb R^p$, a fixed deterministic graph-construction procedure $G:(\\mathbb R^p)^n\\to\\mathbb R^{n\\times n}$, mode $\\texttt{ratio}$ or $\\texttt{normalized}$, and cluster count $k\\ge1$. In normalized mode also supply a Boolean row-normalization option, defaulting to false.\n\n1. Compute $W=G(x_1,\\ldots,x_n)$. Reject the input unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_i)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$.\n\n2. In ratio mode require $k\\le n$, use all vertices in increasing index order, and set $M=L$. In normalized mode, if $V_+=\\varnothing$, return every vertex as a separately reported singleton with status $\\texttt{no-positive-degree-vertices}$. Otherwise require $k\\le|V_+|$, use only $V_+$ in increasing index order, and set $M=D_+^{-1/2}L_+D_+^{-1/2}$.\n\n3. Compute the exact real eigenspaces of $M$ and order its eigenvalues increasingly with multiplicity. For each eigenspace $E_\\lambda$, use the deterministic projected-coordinate basis rule: for $\\lambda=0$, first use $n^{-1/2}\\mathbf1$ in ratio mode or $D_+^{1/2}\\mathbf1/\\sqrt{\\sum_{i\\in V_+}d_i}$ in normalized mode; then process the standard coordinate vectors in vertex order, project each onto $E_\\lambda$, orthogonalize against accepted vectors, skip zero residuals, and normalize each nonzero residual. Take the first $k$ eigenvectors as columns of $U$.\n\n4. In normalized mode, if row normalization is true, replace each row $u_i$ by $u_i/\\|u_i\\|_2$, where $\\|v\\|_2=\\sqrt{\\sum_{j=1}^k v_j^2}$. The prescribed first zero-mode vector has positive entries on every active vertex, so every active row norm is positive.\n\n5. Treat the rows of $U$ as points in $\\mathbb R^k$ with Euclidean distance $\\|a-b\\|_2$. Initialize the first Lloyd center at the row of the smallest active vertex index. For each subsequent center, choose an unused row maximizing its minimum distance to previously chosen centers, breaking ties by smallest vertex index. Assign each row initially to a nearest center, breaking ties by smallest center index. At each later assignment retain its current label when it is among the nearest centers; otherwise choose the smallest nearest-center index. Replace each nonempty center by the mean of its assigned rows, leave empty-cluster centers unchanged, and repeat until both labels and centers stop changing.\n\n6. Return the nonempty label sets. In normalized mode append every isolate as a separately reported singleton. Graph rule, edge weights, bandwidth, kNN symmetrization, and cluster count are modeling inputs; this procedure makes no rounding, approximation, graph-consistency, or manifold-recovery guarantee.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-disconnected-weighted-components-spectral-clustering-1-1",
+          "claim": "The degrees are $(2,2,3,3)$ and $$L=\\begin{pmatrix}2&-2&0&0\\\\-2&2&0&0\\\\0&0&3&-3\\\\0&0&-3&3\\end{pmatrix}.$$ Each $2\\times2$ block with edge weight $a$ has eigenvectors $(1,1)$ and $(1,-1)$ with eigenvalues $0$ and $2a$. Thus the eigenvalues of $L$ are $0,0,4,6$, and [F3] identifies the zero eigenspace as the componentwise-constant vectors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-disconnected-weighted-components-spectral-clustering-2-1",
+          "claim": "For $A_1=\\{1,2\\}$ and $A_2=\\{3,4\\}$ there is no crossing edge, so both cuts are $0$; the part sizes are $2,2$ and volumes are $4,6$. Therefore both RatioCut and Ncut equal $0$. Since their summands are nonnegative, this partition attains the combinatorial minimum for both objectives.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-disconnected-weighted-components-spectral-clustering-2-2",
+          "claim": "The prescribed first zero-mode vector is $q_0=\\frac12(1,1,1,1)$. The projection of $e_1$ onto the zero eigenspace is $(1/2,1/2,0,0)$; subtracting its projection onto $q_0$ gives $(1/4,1/4,-1/4,-1/4)$, whose norm is $1/2$. Thus the second basis vector is $q_1=\\frac12(1,1,-1,-1)$. The first two eigenvectors therefore give the two row values $(1/2,1/2)$ on vertices $1,2$ and $(1/2,-1/2)$ on vertices $3,4$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "ex-disconnected-weighted-components-spectral-clustering-3-1",
+          "claim": "The first farthest-first center is the row for vertex $1$; a farthest row is in the second component, and the smallest-index tie rule selects vertex $3$. Each component's row has distance $0$ to its corresponding center and distance $1$ to the other. The initial assignments are therefore exactly $\\{1,2\\}$ and $\\{3,4\\}$; their means equal the two centers, so the first Lloyd update leaves both labels and centers unchanged and the algorithm returns this partition. Together with steps 2.1 and 2.2, this verifies the stated exact example output.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four vertices and two nonempty components."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both cut objectives as zero and notes their nonnegativity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has two two-vertex components and k=2, not a one-vertex boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 handle the two-dimensional zero eigenspace and its deterministic basis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses k=2 for two support components and computes the complete returned partition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The eigenspace and farthest-first ties use fixed vertex order; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-isolated-vertex-in-normalized-cut": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ratio-cut-and-normalized-cut",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ be symmetric, entrywise nonnegative, and zero-diagonal. Define $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$. For $A\\subseteq V$, put $A^c=V\\setminus A$, $\\operatorname{cut}(A,A^c)=\\sum_{i\\in A,j\\in A^c}w_{ij}$, and $\\operatorname{vol}(A)=\\sum_{i\\in A}d_i$. For a partition $\\mathcal A=(A_1,\\ldots,A_k)$ of $V$ into pairwise disjoint nonempty sets, define $$\\operatorname{RatioCut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{|A_r|}.$$ For a partition of $V_+$ into pairwise disjoint nonempty sets, each of positive volume, define $$\\operatorname{Ncut}(\\mathcal A)=\\sum_{r=1}^k\\frac{\\operatorname{cut}(A_r,A_r^c)}{\\operatorname{vol}(A_r)}.$$ For these partitions, the RatioCut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{|A_r|}$, and the Ncut indicator column is $h_r=\\mathbf1_{A_r}/\\sqrt{\\operatorname{vol}(A_r)}$, extended by zero on isolated vertices.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-weighted-spectral-clustering",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n,p\\ge1$, data $x_1,\\ldots,x_n\\in\\mathbb R^p$, a fixed deterministic graph-construction procedure $G:(\\mathbb R^p)^n\\to\\mathbb R^{n\\times n}$, mode $\\texttt{ratio}$ or $\\texttt{normalized}$, and cluster count $k\\ge1$. In normalized mode also supply a Boolean row-normalization option, defaulting to false.\n\n1. Compute $W=G(x_1,\\ldots,x_n)$. Reject the input unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_i)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$.\n\n2. In ratio mode require $k\\le n$, use all vertices in increasing index order, and set $M=L$. In normalized mode, if $V_+=\\varnothing$, return every vertex as a separately reported singleton with status $\\texttt{no-positive-degree-vertices}$. Otherwise require $k\\le|V_+|$, use only $V_+$ in increasing index order, and set $M=D_+^{-1/2}L_+D_+^{-1/2}$.\n\n3. Compute the exact real eigenspaces of $M$ and order its eigenvalues increasingly with multiplicity. For each eigenspace $E_\\lambda$, use the deterministic projected-coordinate basis rule: for $\\lambda=0$, first use $n^{-1/2}\\mathbf1$ in ratio mode or $D_+^{1/2}\\mathbf1/\\sqrt{\\sum_{i\\in V_+}d_i}$ in normalized mode; then process the standard coordinate vectors in vertex order, project each onto $E_\\lambda$, orthogonalize against accepted vectors, skip zero residuals, and normalize each nonzero residual. Take the first $k$ eigenvectors as columns of $U$.\n\n4. In normalized mode, if row normalization is true, replace each row $u_i$ by $u_i/\\|u_i\\|_2$, where $\\|v\\|_2=\\sqrt{\\sum_{j=1}^k v_j^2}$. The prescribed first zero-mode vector has positive entries on every active vertex, so every active row norm is positive.\n\n5. Treat the rows of $U$ as points in $\\mathbb R^k$ with Euclidean distance $\\|a-b\\|_2$. Initialize the first Lloyd center at the row of the smallest active vertex index. For each subsequent center, choose an unused row maximizing its minimum distance to previously chosen centers, breaking ties by smallest vertex index. Assign each row initially to a nearest center, breaking ties by smallest center index. At each later assignment retain its current label when it is among the nearest centers; otherwise choose the smallest nearest-center index. Replace each nonempty center by the mean of its assigned rows, leave empty-cluster centers unchanged, and repeat until both labels and centers stop changing.\n\n6. Return the nonempty label sets. In normalized mode append every isolate as a separately reported singleton. Graph rule, edge weights, bandwidth, kNN symmetrization, and cluster count are modeling inputs; this procedure makes no rounding, approximation, graph-consistency, or manifold-recovery guarantee.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-isolated-vertex-in-normalized-cut-1-1",
+          "claim": "The degrees are $(1,1,0)$, so $V_+=\\{1,2\\}$, $D_+=I_2$, and $L_+=L_{\\mathrm{sym},+}=\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-isolated-vertex-in-normalized-cut-2-1",
+          "claim": "The active support graph is connected, so [F3] gives a one-dimensional zero eigenspace spanned by $(1,1)$. Its prescribed unit vector is $q_0=(1,1)/\\sqrt2$, and it is the single eigenvector used when $k=1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-isolated-vertex-in-normalized-cut-3-1",
+          "claim": "Both embedding rows are $1/\\sqrt2$. The first and only Lloyd center is the first row; both points receive its label, its mean remains $1/\\sqrt2$, and the labels and center are unchanged. Thus the active cluster returned is $\\{1,2\\}$, after which [F4] appends $\\{3\\}$ separately.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-isolated-vertex-in-normalized-cut-4-1",
+          "claim": "The active part has cut $0$ and volume $d_1+d_2=2$, so its Ncut value is $0$. Vertex $3$ has volume $0$ but is not in $V_+$, so it appears in no Ncut denominator.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The graph has three vertices and one positive-weight edge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 explicitly check the zero-degree isolate and its exclusion from the Ncut denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The active normalized problem uses k=1 and step 2.1 verifies its one-dimensional zero mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1, and 4.1 treat vertex 3 as an isolate, return it separately, and exclude its zero volume from Ncut."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 compute the active set, k=1 embedding, returned cluster, and isolate output."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The row order, one-center initialization, and isolate handling are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-concentric-circles-spectral-embedding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-weighted-graph-laplacian",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $V=\\{1,\\ldots,n\\}$, and let $W=(w_{ij})\\in\\mathbb R^{n\\times n}$ satisfy $w_{ij}=w_{ji}\\ge0$ and $w_{ii}=0$. Define $d_i=\\sum_{j=1}^n w_{ij}$, $D=\\operatorname{diag}(d_1,\\ldots,d_n)$, and $L=D-W$. The support graph has vertex set $V$ and edge $\\{i,j\\}$ exactly when $w_{ij}>0$; isolated vertices are singleton connected components. Put $V_+=\\{i\\in V:d_i>0\\}$, let $D_+$ and $L_+$ be the principal submatrices indexed by $V_+$, and, only when $V_+\\ne\\varnothing$, define $L_{\\mathrm{sym},+}=D_+^{-1/2}L_+D_+^{-1/2}$ on $\\mathbb R^{V_+}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+          "source_section": "Statement",
+          "quote": "Let $V=\\{1,\\ldots,n\\}$ with $n\\ge1$, let $W$ be symmetric, nonnegative, and zero-diagonal, let $D=\\operatorname{diag}(\\sum_jw_{ij})$, let $L=D-W$, and let the support graph have edge $\\{i,j\\}$ exactly when $w_{ij}>0$. For every $f\\in\\mathbb R^n$, $$f^TLf=\\frac12\\sum_{i,j=1}^n w_{ij}(f_i-f_j)^2.$$ Consequently $L$ is positive semidefinite and $$\\ker L=\\{f\\in\\mathbb R^n:f\\text{ is constant on each connected component of the support graph}\\},$$ including isolated singleton components.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-weighted-spectral-clustering",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Integers $n,p\\ge1$, data $x_1,\\ldots,x_n\\in\\mathbb R^p$, a fixed deterministic graph-construction procedure $G:(\\mathbb R^p)^n\\to\\mathbb R^{n\\times n}$, mode $\\texttt{ratio}$ or $\\texttt{normalized}$, and cluster count $k\\ge1$. In normalized mode also supply a Boolean row-normalization option, defaulting to false.\n\n1. Compute $W=G(x_1,\\ldots,x_n)$. Reject the input unless $W$ is symmetric, entrywise nonnegative, and zero-diagonal. Set $d_i=\\sum_jw_{ij}$, $D=\\operatorname{diag}(d_i)$, $L=D-W$, and $V_+=\\{i:d_i>0\\}$.\n\n2. In ratio mode require $k\\le n$, use all vertices in increasing index order, and set $M=L$. In normalized mode, if $V_+=\\varnothing$, return every vertex as a separately reported singleton with status $\\texttt{no-positive-degree-vertices}$. Otherwise require $k\\le|V_+|$, use only $V_+$ in increasing index order, and set $M=D_+^{-1/2}L_+D_+^{-1/2}$.\n\n3. Compute the exact real eigenspaces of $M$ and order its eigenvalues increasingly with multiplicity. For each eigenspace $E_\\lambda$, use the deterministic projected-coordinate basis rule: for $\\lambda=0$, first use $n^{-1/2}\\mathbf1$ in ratio mode or $D_+^{1/2}\\mathbf1/\\sqrt{\\sum_{i\\in V_+}d_i}$ in normalized mode; then process the standard coordinate vectors in vertex order, project each onto $E_\\lambda$, orthogonalize against accepted vectors, skip zero residuals, and normalize each nonzero residual. Take the first $k$ eigenvectors as columns of $U$.\n\n4. In normalized mode, if row normalization is true, replace each row $u_i$ by $u_i/\\|u_i\\|_2$, where $\\|v\\|_2=\\sqrt{\\sum_{j=1}^k v_j^2}$. The prescribed first zero-mode vector has positive entries on every active vertex, so every active row norm is positive.\n\n5. Treat the rows of $U$ as points in $\\mathbb R^k$ with Euclidean distance $\\|a-b\\|_2$. Initialize the first Lloyd center at the row of the smallest active vertex index. For each subsequent center, choose an unused row maximizing its minimum distance to previously chosen centers, breaking ties by smallest vertex index. Assign each row initially to a nearest center, breaking ties by smallest center index. At each later assignment retain its current label when it is among the nearest centers; otherwise choose the smallest nearest-center index. Replace each nonempty center by the mean of its assigned rows, leave empty-cluster centers unchanged, and repeat until both labels and centers stop changing.\n\n6. Return the nonempty label sets. In normalized mode append every isolate as a separately reported singleton. Graph rule, edge weights, bandwidth, kNN symmetrization, and cluster count are modeling inputs; this procedure makes no rounding, approximation, graph-consistency, or manifold-recovery guarantee.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-concentric-circles-spectral-embedding-1-1",
+          "claim": "The support components are $C_1=\\{1,2,3,4\\}$ and $C_2=\\{5,6,7,8\\}$. By [F2], $L\\succeq0$ and $E_0=\\ker L=\\operatorname{span}(\\mathbf1_{C_1},\\mathbf1_{C_2})$ has dimension $2$, so the two smallest eigenvalues are both $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-concentric-circles-spectral-embedding-2-1",
+          "claim": "The prescribed first vector is $q_0=\\mathbf1/\\sqrt8$. The projection of $e_1$ onto $E_0$ is $\\frac14\\mathbf1_{C_1}$. Its inner product with $q_0$ is $1/\\sqrt8$, so subtracting that projection gives $\\frac18(\\mathbf1_{C_1}-\\mathbf1_{C_2})$, with norm $1/\\sqrt8$. Thus the next vector is $q_1=(\\mathbf1_{C_1}-\\mathbf1_{C_2})/\\sqrt8$. The embedding rows are $(1/\\sqrt8,1/\\sqrt8)$ on $C_1$ and $(1/\\sqrt8,-1/\\sqrt8)$ on $C_2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-concentric-circles-spectral-embedding-3-1",
+          "claim": "The first center is the row for vertex $1$. Every outer-ring row is farther from it than any other inner-ring row, so farthest-first chooses vertex $5$ by the smallest-index tie rule. Each ring's rows equal its center, while the two ring row values are distinct; nearest-center assignments are therefore exactly $C_1,C_2$. Their means equal the selected centers, so the first Lloyd update is fixed and the algorithm returns the two rings.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes eight data points on two four-cycles."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the two zero modes associated with the disconnected cycles."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example requests k=2 for two ring components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute and resolve the repeated zero eigenspace by the prescribed coordinate rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses the first two eigenvectors for the two components and verifies the complete returned partition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The zero-mode basis and farthest-first initialization are deterministic in vertex order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a concrete finite output, not an if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

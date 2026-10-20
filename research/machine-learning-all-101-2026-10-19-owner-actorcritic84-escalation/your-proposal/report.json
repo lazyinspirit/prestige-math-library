@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "84",
+  "cycle": 1,
+  "distinct_issue": "Adaptive actor-critic incorrectly cites a fixed stationary-policy path law",
+  "proposal_only": true,
+  "native_finding": "research/machine-learning-all-101-2026-10-19-scope-review/batch-84/review-1.json",
+  "confirmed_defect": "Step 3 changes theta before the next draw. The stationary-policy path-law lemma assumes the same pi at every step; it does not justify this adaptive episode law. The numerical algorithm is not false and its adaptive scope must remain intact.",
+  "repair": "One existing source only. Replace the inapplicable direct supplier and Definition reference by the full history-dependent Ionescu\u2013Tulcea theorem. Make the already declared AC dependency explicit in admissibility and specify discrete-history adaptive draw semantics. No supplier edit or new helper is needed.",
+  "full_local_sources_read": [
+    "alg-one-step-actor-critic",
+    "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "thm-ionescu-tulcea-construction-of-a-markov-chain",
+    "lem-finite-mdp-policy-action-state-reward-path-law",
+    "def-finite-markov-decision-process",
+    "def-episodic-returns-td-errors-and-policy-support",
+    "def-differentiable-stochastic-policy",
+    "def-measure-kernel-and-probability-kernel",
+    "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+    "def-total-derivative-in-euclidean-space",
+    "def-jacobian-matrix-and-gradient",
+    "def-axiom-of-choice"
+  ],
+  "full_supplier_review": {
+    "statement": "Ionescu\u2013Tulcea explicitly assumes Choice and arbitrary measurable spaces E_n, an initial probability, and probability kernels K_n from the entire prefix to the next space; it concludes unique iterated-prefix law. The homogeneous Markov specialization is an optional final clause, not a restriction on the main result.",
+    "proof": "All seven actual steps read. 1.1 constructs consistent prefix measures; 2.1 obtains the cylinder law using Choice; 3.1 and 4.1 establish continuity at the empty set through decreasing conditional prefix probabilities and a recursively selected positive-mass path; 5.1 extends the premeasure under Choice; 6.1 proves uniqueness on the generating cylinder pi-system; 7.1 treats the optional homogeneous specialization. The adaptive use requires the main conclusion through 6.1, not step 7.1.",
+    "premises_matched": [
+      "AC remains a direct dependency and is explicit in the candidate Definition.",
+      "Finite MDP data and fixed initial parameters are deterministic inputs.",
+      "All coordinate spaces are finite discrete record spaces; all finite prefixes therefore have the discrete sigma-algebra.",
+      "Each kernel section is a normalized nonnegative finite distribution, and every history-event section is measurable on its finite discrete domain."
+    ],
+    "no_external_source_reading_claim": "This escalation independently checks the complete actual local proved supplier. Existing bibliographic citations remain unchanged; no new external text reading is represented."
+  },
+  "independent_construction": [
+    "Let Z consist of the finite records (s,a,r,s_next), using the finite MDP alphabets; add a fixed stop symbol. Take E_0={s_0} with its point mass and E_n=Z union {stop} for n>=1, all with discrete sigma-algebras. Nonempty S and normalized p imply a nonempty reward alphabet. This is only a coding of the existing trajectory, not an enlargement of its output or a change to p.",
+    "At a consistent positive-probability nonterminal history h of length n, recursively evaluate exactly the original instructions from the fixed inputs. They determine theta(h), w(h), I=gamma^n, and current s(h). Only supported sampled actions require score evaluation; fixed positive support ensures their logarithms and derivatives exist. The original admissibility condition ensures all proposed updates on these histories lie in U and W. Set the next-record atom mass to pi_{theta(h)}(a|s(h))*p(s_next,r|s(h),a) for records with this current state; give all other atoms mass zero.",
+    "All atom masses are nonnegative and their sum is sum_a pi_{theta(h)}(a|s(h))*sum_{s_next,r}p(s_next,r|s(h),a)=1. Since the target is finite, these masses define a probability measure. On each finite history space every event section is measurable, regardless of how irregular the derivative as a function of an ambient continuous parameter might be. No C1 strengthening, Borel-gradient lemma or independence of successive adaptive parameters is assumed.",
+    "After a terminal state use the point mass at stop and keep padding. For inconsistent, previously stopped or zero-probability histories not operationally generated, assign the point mass at stop without evaluating out-of-support logarithms or out-of-domain derivatives. These auxiliary kernel values cannot affect any generated positive-probability prefix. At each finite time the union of zero-probability prefixes is finite and null. These conventions supply pointwise probability kernels on the entire product domain as required by the theorem, rather than asserting kernel properties only almost surely.",
+    "Apply the full history-dependent theorem under AC. Its iterated finite-prefix laws give exactly the successive conditional action and transition draws, with theta and w updated at every step as originally written. The assumed almost-sure finite hitting time guarantees the declared return of parameters. Terminal-start returns unchanged inputs. This construction supplies existence/interpretation only: no convergence, unbiasedness or new termination theorem is asserted."
+  ],
+  "preservation": {
+    "numbered_operational_steps": "byte-identical",
+    "initialization_terminal_start_return": "byte-identical",
+    "input_data": "byte-identical",
+    "admissibility": "same update-domain and adaptive almost-sure termination qualifications, with existing AC premise made explicit",
+    "discount_trace": "I=gamma^t preserved exactly",
+    "both_updates_use_preupdate_parameters": "preserved exactly",
+    "critic_bootstrap_and_terminal_continuation": "preserved exactly",
+    "no_convergence_caveats": "preserved exactly",
+    "all_other_source_files": "not edited",
+    "current_level": "unchanged; root owns reconciliation"
+  },
+  "consumers": [
+    {
+      "id": "ex-actor-critic-bootstrap-can-bias-policy-update",
+      "kind": "only direct and transitive item consumer; also only nonlogical item mention",
+      "disposition": "retain unchanged",
+      "independent_review": "The first draw is Bernoulli(1/2). Action 0 gives delta=0 and increment 0; action 1 gives delta=1/2 and score 2, hence increment 1/4. Mean increment is 1/8 while every reward and the true objective derivative are zero. Updated theta is 1/2 or 3/4. Critic step size zero leaves its vector fixed; each second-state unique action has zero score, and the next state is terminal d. Thus full two-decision adaptive admissibility and finite termination hold. The existing AC dependency and Remarks already match the candidate; F4 quotes only unchanged update/terminal/domain instructions."
+    },
+    {
+      "id": "policy-gradients-reinforce-and-actor-critic",
+      "kind": "only actual page mention",
+      "disposition": "retain unchanged",
+      "independent_review": "Frontmatter-only A-page placement; no law or fixed-policy assertion. Root may need page requires reconciliation for the newly direct published probability supplier, but no mathematical page text exists."
+    },
+    {
+      "id": "policy-gradients-reinforce-and-actor-critic-examples",
+      "kind": "companion context",
+      "disposition": "retain unchanged",
+      "independent_review": "Frontmatter inventory of the checked example and other examples; no algorithm law assertion."
+    }
+  ],
+  "closure": "All actual item files were scanned for deps/justified_by with alias resolution, plus complete ID/alias mentions and all actual library page mentions. Algorithm has no aliases. Only example is reachable; it has no consumers. Existing graph scans use actual bytes; this is not a synthetic acceptance run. Unrelated malformed YAML observations are exposed in consumer-discovery.json and narrow list discovery used for those carriers; no reached carrier is malformed.",
+  "local_checks": {
+    "native_statement_first_inspect": "pass, zero errors",
+    "proof_layout": "1 item, 0 proof steps, 0 defects",
+    "precheck": "not-applicable; 1 file, 0 checked proofs, 0 failures",
+    "rendercheck": "1 checked, 0 errors, 0 warnings",
+    "exact_operations_preservation": "pass; actual target remains exact before bytes; operational instructions byte-identical"
+  },
+  "root_handoff": [
+    "Review candidate and independent kernel construction.",
+    "Apply only exact-before one-source operation after root review; helper creation is not needed.",
+    "Mirror changed direct dependency and any Definition quotation in actual manifest/contracts/page requirements as needed; existing example F4 quote is unchanged. Numeric levels, canonical plan context and current-input bindings remain root-owned.",
+    "No proof approval, native execution coverage, recertification, readiness or gate credit is claimed."
+  ],
+  "prohibitions_observed": {
+    "live_writes": false,
+    "source_hashing": false,
+    "engine_controls": false,
+    "gates": false,
+    "native_review_credit": false,
+    "other_math_cycles_reopened": false
+  }
+}

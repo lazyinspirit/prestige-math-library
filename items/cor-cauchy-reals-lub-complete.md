@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-cauchy-reals-lub-complete.json
   precheck: pass
   verified:
     model: gpt-5.6-sol-codex-subscription
@@ -37,8 +38,14 @@ pipeline_run: null
 
 The Cauchy-sequence reals $\mathbb{R}_C$ have the **least-upper-bound property**:
 every nonempty $S \subseteq \mathbb{R}_C$ that is bounded above has a least upper
-bound $\sup S \in \mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],
-$\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).
+bound $\sup S \in \mathbb{R}_C$. Hence, together with The reals form a totally ordered field,
+$\mathbb{R}_C$ is a **complete ordered field** (Complete ordered field (least-upper-bound property)).
+
+## Statement references
+
+[[thm-reals-ordered-field]]
+
+[[def-complete-ordered-field]]
 
 ## Facts & Assumptions
 

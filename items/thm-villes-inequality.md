@@ -17,6 +17,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-villes-inequality.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -37,9 +38,13 @@ sources:
 Assume AC. Let $\mathcal P_0$ be a family of probability laws on a common
 discrete filtered measurable space and let $E=(E_t)_{t\ge0}$ be a nonnegative
 test supermartingale for $\mathcal P_0$
-[[def-nonnegative-test-supermartingale]]. For every $P\in\mathcal P_0$ and
+Nonnegative test supermartingales. For every $P\in\mathcal P_0$ and
 every $\alpha\in(0,1)$,
 $$P\!\left(\sup_{t\ge0}E_t\ge\frac1\alpha\right)\le\alpha.$$
+
+## Statement references
+
+[[def-nonnegative-test-supermartingale]]
 
 ## Facts & Assumptions
 

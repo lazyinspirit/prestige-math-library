@@ -1,0 +1,1422 @@
+{
+  "version": 1,
+  "scope": [
+    "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+    "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+    "thm-canonical-rkhs-construction-and-reproducing-property",
+    "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+    "thm-finite-sample-representer-theorem-in-an-rkhs",
+    "def-hard-and-soft-margin-support-vector-machines",
+    "lem-soft-margin-svm-primal-attainment",
+    "thm-soft-margin-svm-dual-and-kkt-conditions",
+    "ex-linear-and-polynomial-kernels",
+    "ex-gaussian-radial-kernel",
+    "ex-separable-hard-margin-svm",
+    "ex-overlapping-soft-margin-svm-score-and-kkt"
+  ],
+  "contracts": {
+    "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits X empty; the finite coefficient space and its forms are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition explicitly includes zero Gram forms and the null-space quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes the n=1 finite Gram-form case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition quotients every zero-seminorm coefficient vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no optimization parameter or endpoint claim in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a definition; the existence theorem separately states its countable-choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-dimensional-projection-in-a-real-inner-product-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-ambient-reduction",
+          "step": "1.1",
+          "claim": "Set $V:=\\operatorname{span}(M\\cup\\{f\\})$. Since $M$ is finite-dimensional and adjoining one vector increases dimension by at most one, $V$ is a finite-dimensional real inner-product space with the inherited inner product; $M$ is a subspace of $V$ and $f\\in V$. Apply [F1] inside $V$ and set $p:=P_Mf$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "orthogonal-residual",
+          "step": "2.1",
+          "claim": "By [F2], $p\\in M$ and $f-p\\in M^\\perp$.",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "norm-and-uniqueness",
+          "step": "3.1",
+          "claim": "Since $p\\in M$ and $f-p\\in M^\\perp$, Pythagoras [F3] gives $\\|f\\|^2=\\|p\\|^2+\\|f-p\\|^2\\ge\\|p\\|^2$, so $\\|p\\|\\le\\|f\\|$. If $q\\in M$ also has $f-q\\in M^\\perp$, then for every $r\\in M$, [F3] gives $\\|f-r\\|^2=\\|f-q\\|^2+\\|q-r\\|^2\\ge\\|f-q\\|^2$. Thus $q$ is a nearest point to $f$, and [F1] forces $q=p$.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes M={0}; span(M union {f}) remains finite-dimensional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 applies when f=0 and yields p=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 also applies when M has dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The result assumes a positive-definite real inner product; degenerate forms are handled before quotienting in the kernel construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family is selected; the proof uses one finite-dimensional span."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-canonical-rkhs-construction-and-reproducing-property": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-metric-completion",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]). A **completion** of $(X,d)$\nis a pair $\\big((\\widehat{X}, \\widehat{d}),\\, \\iota\\big)$ in which\n\n- $(\\widehat{X}, \\widehat{d})$ is a **complete** metric space\n  ([[def-complete-metric-space]]);\n- $\\iota : X \\to \\widehat{X}$ is an **isometric embedding**, that is\n  $\\widehat{d}(\\iota(x), \\iota(y)) = d(x,y)$ for all $x,y \\in X$\n  ([[def-isometry-and-metric-embedding]]);\n- $\\iota[X]$ is **dense** in $\\widehat{X}$, that is\n  $\\overline{\\iota[X]} = \\widehat{X}$\n  ([[def-metric-interior-closure-boundary]]).\n\n**The embedding is part of the data, not an afterthought.** A completion is a\npair, and two completions of the same space are compared through their embeddings\n([[thm-metric-completion-unique]]); the underlying complete space alone carries\nno information about where $X$ sits inside it. This is the same discipline as for\nthe metric itself: a metric space is a pair, not a set.\n\n**$\\iota$ identifies $X$ with a subspace of $\\widehat{X}$, metric and topology\nincluded.** An isometric embedding is injective, is an isometry onto its image,\nand carries the metric topology of $X$ onto the subspace topology of $\\iota[X]$\n([[lem-isometry-is-an-embedding]]). So \"$X$ is a dense subspace of a complete\nspace\" is an accurate reading of the definition, and the pedantic version with\n$\\iota$ written out is used only where two completions have to be compared.\n\n**Existence and uniqueness are theorems, not part of the definition.** Under\nCountable Choice, every metric space has a completion\n([[thm-metric-completion-exists]]) and any two are isometric by a unique\nisometry commuting with the embeddings\n[[thm-metric-completion-unique]]. Until the first of those is proved, the phrase\n*the* completion is not licensed, and it is not used here.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-metric-completion-exists",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice for assertion 5 and the consequent\nexistence claim ([[def-countable-choice]]). Let $(X,d)$ be a metric space\n([[def-metric-space]]) and let $\\mathcal{C}$ be the set of all Cauchy sequences\nin $X$ ([[def-cauchy-in-metric]]). Then:\n\n1. For all $x = (x_n)$ and $y = (y_n)$ in $\\mathcal{C}$ the real sequence\n   $\\big(d(x_n,y_n)\\big)_n$ converges, so\n   $$\\rho(x,y) \\;:=\\; \\lim_{n} d(x_n,y_n)$$\n   is a single well-determined real ([[thm-cauchy-criterion-via-lub]],\n   [[lem-limit-unique]]).\n2. The relation $x \\sim y :\\Longleftrightarrow \\rho(x,y) = 0$ is an equivalence\n   relation on $\\mathcal{C}$. Write $\\widehat{X} := \\mathcal{C}/\\!\\sim$ for the\n   set of its classes and $[x]$ for the class of $x$.\n3. $\\widehat{d}\\big([x],[y]\\big) := \\rho(x,y)$ does not depend on the chosen\n   representatives, and $\\widehat{d}$ is a metric on $\\widehat{X}$.\n4. The map $\\iota : X \\to \\widehat{X}$ sending $p$ to the class of the constant\n   sequence at $p$ is an isometric embedding with dense image\n   ([[def-isometry-and-metric-embedding]],\n   [[def-metric-interior-closure-boundary]]).\n5. $(\\widehat{X}, \\widehat{d})$ is complete.\n\nConsequently $\\big((\\widehat{X},\\widehat{d}), \\iota\\big)$ is a completion of\n$(X,d)$ ([[def-metric-completion]]), and **every metric space has a\ncompletion**.\n\n**The notation is kept honest.** A Cauchy sequence in $X$ need not converge in\n$X$, so no symbol $\\lim_n x_n$ appears anywhere below; the only limits taken are\nlimits of *real* sequences, and each is written only after its existence has been\nproved. The equivalence relation is defined and verified here rather than cited, as was\ndone for [[def-integers]], so that the construction is self-contained and its\ntransitivity argument is visible at the point of use.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a\nnormed space. The published metric completion of the norm metric on $X$ admits\na unique vector-space structure and norm whose induced metric is the\npublished completion metric and such that the constant sequence embedding\n$i:X\\to \\widehat X$ is a dense linear isometry. With this structure,\n$\\widehat X$ is a Banach space.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a normed space. A **completion of $X$** is a pair\n$\\bigl(\\widehat X,\\iota\\bigr)$ such that\n\n- $\\widehat X$ is a Banach space ([[def-banach-space]]);\n- $\\iota:X\\to \\widehat X$ is a linear isometry\n  ([[def-linear-isometry-and-isometric-isomorphism]]);\n- $\\iota[X]$ is dense in $\\widehat X$\n  ([[def-metric-interior-closure-boundary]]).\n\nEquivalently, a completion of a normed space is a completion of its norm metric\n([[def-metric-completion]]) together with compatible linear structure on the\ncomplete space.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "6.1",
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-semidefinite-form",
+          "step": "1.1",
+          "claim": "Let $E_0$ be the finitely supported functions on $X$ and define $B(a,b)=\\sum_{x,z}a(x)b(z)k(x,z)$, where each sum is over the finite supports. Symmetry and bilinearity follow from symmetry of $k$ and finite-sum algebra. For any $a$, listing its finite support gives $B(a,a)\\ge0$ by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "semidefinite-cauchy-schwarz",
+          "step": "2.1",
+          "claim": "For $a,b\\in E_0$ and $t\\in\\mathbb R$, $0\\le B(a+tb,a+tb)=B(a,a)+2tB(a,b)+t^2B(b,b)$. If $B(b,b)>0$, nonnegativity of this quadratic for all $t$ gives $B(a,b)^2\\le B(a,a)B(b,b)$; if $B(b,b)=0$, its linear coefficient must vanish, so $B(a,b)=0$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "null-radical-quotient",
+          "step": "3.1",
+          "claim": "It follows that every $a\\in N:=\\{a:B(a,a)=0\\}$ satisfies $B(a,b)=0$ for every $b\\in E_0$. Hence $N$ is a subspace and the form descends to a well-defined positive definite inner product on $Q:=E_0/N$: changing a representative by an element of $N$ does not change any pairing, and a quotient class has zero squared norm exactly when it is the zero class.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hilbert-completion",
+          "step": "4.1",
+          "claim": "The induced inner product makes $Q$ a real inner-product space. By [F2] and [A1], its norm metric has a metric completion with compatible Banach structure, hence a norm completion; the inner product extends uniquely and makes the completion $\\widehat Q$ a real Hilbert space.",
+          "inputs": [
+            "step 3.1",
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "kernel-sections-dense",
+          "step": "5.1",
+          "claim": "For each $x\\in X$, the image $k_x$ of $[\\delta_x]\\in Q$ satisfies $\\|k_x\\|^2=B(\\delta_x,\\delta_x)=k(x,x)\\ge0$. Thus the finite kernel sections are elements of $\\widehat Q$, and their span is dense because the image of $Q$ is dense in its completion.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "evaluation-extension",
+          "step": "6.1",
+          "claim": "For $a\\in E_0$, the quotient pairing gives $\\langle[a],k_x\\rangle=\\sum_{z\\in\\operatorname{supp}(a)}a(z)k(z,x)$, independently of the representative by [step 3.1]. Given $h\\in\\widehat Q$, density in [step 4.1] provides an approximating sequence $[a_m]\\to h$. By [F3], the real sequence $\\langle[a_m],k_x\\rangle$ is Cauchy, and if $[b_m]\\to h$ is another such sequence then $|\\langle[a_m-b_m],k_x\\rangle|\\le\\|[a_m-b_m]\\|\\|k_x\\|\\to0$, so its limit is independent of the approximants. The extended inner product also satisfies [F3], hence this limit equals $\\langle h,k_x\\rangle$.",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "reproducing-identity",
+          "step": "7.1",
+          "claim": "Define the associated function of $h\\in\\widehat Q$ by $h(x):=\\langle h,k_x\\rangle$. Applying the extended pairing to $k_z$ gives $k_z(x)=\\langle k_z,k_x\\rangle=B(\\delta_z,\\delta_x)=k(z,x)=k(x,z)$, so $k_x$ is exactly the section $k(\\cdot,x)$ and $\\langle h,k_x\\rangle=h(x)$ for every $h$.",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "function-identification",
+          "step": "8.1",
+          "claim": "If $h(x)=0$ for every $x\\in X$, then $h$ is orthogonal to every section $k_x$ and therefore to their dense span from [step 5.1]. Continuity of the inner product gives $\\langle h,h\\rangle=0$, so positive definiteness gives $h=0$. Thus the associated-function map is injective and identifies $\\widehat Q$ with a Hilbert space of functions having reproducing kernel $k$.",
+          "inputs": [
+            "step 5.1",
+            "step 7.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–8.1 remain valid for X empty: E0 and its completion are zero and section claims are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 quotient zero sections when k(x,x)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–7.1 include a singleton X; its Gram form may be zero or positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 removes every zero-seminorm direction before completion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 6.1 use only the stated Axiom of Countable Choice; the proof does not assume full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "spectral-diagonalization",
+          "step": "1.1",
+          "claim": "Regard $K$ as an endomorphism of $\\mathbb R^n$ with its usual dot product. By [A1], $K$ is symmetric, hence self-adjoint. By [F1], there are an orthonormal eigenbasis $q_1,\\ldots,q_n$ and real eigenvalues $\\lambda_1,\\ldots,\\lambda_n$ with $Kq_\\ell=\\lambda_\\ell q_\\ell$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "nonnegative-eigenvalues",
+          "step": "2.1",
+          "claim": "Since $\\|q_\\ell\\|_2=1$, [A1] gives $\\lambda_\\ell=q_\\ell^TKq_\\ell\\ge0$ for each $\\ell$. Thus each $\\sqrt{\\lambda_\\ell}$ is a real number, including when $\\lambda_\\ell=0$.",
+          "inputs": [
+            "step 1.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "factorization",
+          "step": "3.1",
+          "claim": "For $1\\le i\\le n$, define $z_i=(\\sqrt{\\lambda_1}(q_1)_i,\\ldots,\\sqrt{\\lambda_n}(q_n)_i)\\in\\mathbb R^n$. The spectral decomposition $K=\\sum_{\\ell=1}^n\\lambda_\\ell q_\\ell q_\\ell^T$ then gives $z_i^Tz_j=\\sum_{\\ell=1}^n\\lambda_\\ell(q_\\ell)_i(q_\\ell)_j=K_{ij}=k(x_i,x_j)$ for all $i,j$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1; the zero-size matrix case is outside its quantified domain.",
+          "evidence": "Statement assumes n>=1; the zero-size matrix case is outside its quantified domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows every eigenvalue to be zero, and step 3.1 then gives zero feature vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes n=1, so the same real spectral decomposition and square-root construction applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly permits zero eigenvalues, so no full-rank assumption is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite-dimensional orthonormal eigenbasis is supplied by the spectral theorem; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-sample-representer-theorem-in-an-rkhs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a real inner-product space, let $M\\subseteq E$ be a finite-dimensional subspace, and let $f\\in E$. There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$, and it satisfies $\\|p\\|\\le\\|f\\|$. The conclusion does not require $E$ to be complete.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sample-span-projection",
+          "step": "1.1",
+          "claim": "Let $M:=\\operatorname{span}\\{k_{x_i}:1\\le i\\le n\\}$. It is finite-dimensional. Apply [F2] to $f$ and $M$, and write $f=p+h$ with $p\\in M$ and $h\\perp M$.",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "evaluation-preservation",
+          "step": "2.1",
+          "claim": "For every $i$, [F1] gives $h(x_i)=\\langle h,k_{x_i}\\rangle=0$, so $p(x_i)=f(x_i)$. Hence the loss terms in $J(p)$ and $J(f)$ agree.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "objective-nonincreasing",
+          "step": "3.1",
+          "claim": "The norm-contraction clause of [F2] gives $\\|p\\|_{\\mathcal H}\\le\\|f\\|_{\\mathcal H}$. Monotonicity of $\\Omega$ therefore gives $J(p)\\le J(f)$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "minimizer-in-span",
+          "step": "4.1",
+          "claim": "Since $f$ is a minimizer, $J(f)\\le J(p)$. Thus $J(p)=J(f)$ and $p$ is also a minimizer; by its definition $p$ is a finite linear combination of the sample kernel sections.",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement permits n=0; step 1.1 then projects onto M={0}, and step 4.1 returns the zero minimizer if one exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero sample sections because their evaluations are zero by the reproducing identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-span argument in step 1.1 includes a single training point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 only uses the finite span, so repeated or linearly dependent sample sections cause no problem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or optimization parameter endpoint beyond the stated nondecreasing penalty domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem is conditional on an existing minimizer and uses a single finite-dimensional projection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-hard-and-soft-margin-support-vector-machines": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits feature vectors equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition supplies the finite-sample constraints for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no rank or strict-positivity condition on the sample Gram matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly restricts the soft-margin parameter to C>0 and excludes C=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a conditional definition for a supplied feature Hilbert space; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an equivalence theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-soft-margin-svm-primal-attainment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set, let $\\mathcal H$ be a real Hilbert space, and let $\\phi:X\\to\\mathcal H$ be a feature map. Define its kernel by $k(x,z):=\\langle\\phi(x),\\phi(z)\\rangle_{\\mathcal H}$. For a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in X$, and $y_i\\in\\{-1,+1\\}$, the **soft-margin support-vector machine** with cost $C>0$ is\n\n$$\\min_{w\\in\\mathcal H,\\ b\\in\\mathbb R,\\ \\xi\\in\\mathbb R^n}\\ \\frac12\\|w\\|_{\\mathcal H}^2+C\\sum_{i=1}^n\\xi_i$$\n\nsubject to\n\n$$y_i\\bigl(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b\\bigr)\\ge1-\\xi_i,\\qquad \\xi_i\\ge0\\quad(1\\le i\\le n).$$\n\nThe bias $b$ is unpenalized. The associated real score is $s_{w,b}(x):=\\langle w,\\phi(x)\\rangle_{\\mathcal H}+b$. If a binary label is required, use the deterministic rule $+1$ when $s_{w,b}(x)\\ge0$ and $-1$ otherwise. The score is not defined as a probability, and this optimization includes no probability-calibration map.\n\nThe **hard-margin** problem removes the slack variables and minimizes $\\frac12\\|w\\|_{\\mathcal H}^2$ subject to $y_i(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b)\\ge1$ for every $i$. In this library, “margin-separable sample” means exactly that this hard-margin feasible set is nonempty; no hard-margin conclusion is asserted for a sample that fails this condition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a real inner-product space, let $M\\subseteq E$ be a finite-dimensional subspace, and let $f\\in E$. There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$, and it satisfies $\\|p\\|\\le\\|f\\|$. The conclusion does not require $E$ to be complete.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-feasible-value",
+          "step": "1.1",
+          "claim": "The tuple $w=0$, $b=0$, and $\\xi_i=1$ is feasible and has objective $Cn$. Every feasible objective is nonnegative, so the primal infimum lies in $[0,Cn]$.",
+          "inputs": [
+            "given",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-span-reduction",
+          "step": "1.2",
+          "claim": "Let $M=\\operatorname{span}\\{\\phi(x_i):1\\le i\\le n\\}$. For any feasible tuple, project $w$ onto $M$ using [F1]. The residual is orthogonal to every $\\phi(x_i)$, so all sample scores and constraints are unchanged, while the norm does not increase. Thus minimizing over $M\\times\\mathbb R\\times\\mathbb R^n$ has the same infimum as minimizing over the full feature space.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "single-label-boundary",
+          "step": "2.1",
+          "claim": "If all labels are $+1$, then $w=0$, $b=1$, and $\\xi=0$ is feasible with objective $0$, which is globally minimal by step 1.1. If all labels are $-1$, then $w=0$, $b=-1$, and $\\xi=0$ gives the same conclusion.",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "mixed-label-sublevel",
+          "step": "3.1",
+          "claim": "Suppose both labels occur. Set $R=\\max_i\\|\\phi(x_i)\\|$ and let $S$ be the subset of $M\\times\\mathbb R\\times\\mathbb R^n$ consisting of feasible tuples with objective at most $Cn$. By step 1.1, $S$ is nonempty. It is closed because the constraints are continuous affine inequalities and the objective is continuous; continuity of each score follows from [F2]. Every tuple in $S$ satisfies $\\|w\\|\\le\\sqrt{2Cn}$ and $0\\le\\xi_i\\le n$. Choose indices $i_+$ and $i_-$ with labels $+1$ and $-1$. Their constraints and [F2] give $b\\ge1-n-\\sqrt{2Cn}R$ and $b\\le n-1+\\sqrt{2Cn}R$, so $b$ is bounded. By [F3], an orthonormal basis identifies the finite-dimensional product space with $\\mathbb R^d$ for some $d\\ge1$; hence $S$ is a nonempty closed bounded subset of that Euclidean space. By [F4], the continuous objective attains a minimum on $S$. Any feasible tuple outside $S$ has objective greater than $Cn$, whereas $S$ contains a feasible tuple of objective $Cn$; therefore this minimum is also the global primal minimum. By step 1.2 it is a full-space minimizer with $w\\in M$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid with R=0 when all feature vectors vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 handles every all-one-class sample, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the finite span and its dimension; M may be {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof uses C>0 to bound each slack; C=0 is outside the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the stated ZF closed-bounded compactness/extreme-value supplier, not a selected minimizing sequence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-soft-margin-svm-dual-and-kkt-conditions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-soft-margin-svm-primal-attainment",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C>0$, and let $(x_i,y_i)_{i=1}^n$ be a finite labeled sample with $y_i\\in\\{-1,+1\\}$ in a real Hilbert feature space $\\mathcal H$, with feature map $\\phi$. The soft-margin SVM primal has a finite attained minimum. At least one minimizing tuple has its weight vector in $M:=\\operatorname{span}\\{\\phi(x_i):1\\le i\\le n\\}$. This conclusion includes samples with only one label and does not assert uniqueness of the bias or slack variables.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a real inner-product space, let $M\\subseteq E$ be a finite-dimensional subspace, and let $f\\in E$. There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$, and it satisfies $\\|p\\|\\le\\|f\\|$. The conclusion does not require $E$ to be complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a real positive semidefinite kernel on a set $X$, let $n\\ge1$, and let $x_1,\\ldots,x_n\\in X$. There are vectors $z_1,\\ldots,z_n\\in\\mathbb R^n$ such that $k(x_i,x_j)=z_i^Tz_j$ for every $1\\le i,j\\le n$. The vectors may be zero and need not be linearly independent.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-program-duality-and-slater-condition",
+          "source_section": "Definition",
+          "quote": "A subset is convex when it contains the segment joining each pair of its\npoints ([[def-convex-subset-of-euclidean-space]]). A function\n$F:\\mathbb R^n\\to(-\\infty,+\\infty]$ is proper if it never equals\n$-\\infty$ and is finite at at least one point. Its domain is\n$\\operatorname{dom}F=\\{x:F(x)<+\\infty\\}$. Its epigraph is\n$\\operatorname{epi}F=\\{(x,t):F(x)\\le t\\}$. It is closed convex when its\nepigraph is a closed convex set. For a nonempty convex set $S$,\n$\\operatorname{aff}S$ is its smallest containing affine subspace and\n$\\operatorname{ri}S$ is its interior relative to $\\operatorname{aff}S$.\n\nLet $n\\ge1$, let $m,p\\in\\mathbb N$ with zero allowed, let\n$f_0,g_1,\\ldots,g_m$ be proper closed convex functions on $\\mathbb R^n$,\nlet $A\\in\\mathbb R^{p\\times n}$ have full row rank, and let\n$b\\in\\mathbb R^p$. Full row rank means that the rows are linearly\nindependent, vacuously when $p=0$. The common domain is\n$D=\\operatorname{dom}f_0\\cap\\bigcap_{i=1}^m\\operatorname{dom}g_i$. The primal\nproblem is to minimize $f_0(x)$ over $x\\in D$ satisfying $Ax=b$ and\n$g_i(x)\\le0$. An inequality is removable if, with\n$D_{-i}=\\operatorname{dom}f_0\\cap\\bigcap_{j\\ne i}\\operatorname{dom}g_j$,\n$D_{-i}\\subseteq\\operatorname{dom}g_i$ and $g_i(x)\\le0$ for every $x\\in D_{-i}$.\nThen $D=D_{-i}$, so removing that function and its inequality leaves the\nfeasible set unchanged. While a removable inequality exists, delete the one\nwith smallest original index, recomputing $D_{-i}$ using the currently retained\nfamily after each deletion. Stop when none is removable, then relabel the\nremaining inequalities consecutively in their original order and let $m$\ndenote their number. An inequality that is nonpositive only on $D$\nbut whose function domain restricts $D$ is not removable. Unless stated\notherwise, the inequalities below are the remaining ones after only these\ndomain-preserving deletions. The primal value is\n$$\np^*=\\inf\\{f_0(x):x\\in D,\\ Ax=b,\\ g_i(x)\\le0\\text{ for all }i\\}.\n$$\n\nFor $\\lambda\\in\\mathbb R^m_+$ and $\\nu\\in\\mathbb R^p$, the extended\nLagrangian is\n$$\nL(x,\\lambda,\\nu)=\\begin{cases}f_0(x)+\\lambda^Tg(x)+\\nu^T(Ax-b),&x\\in D,\\\\+\\infty,&x\\notin D.\\end{cases}\n$$\nThe dual function and dual value are\n$$\nq(\\lambda,\\nu)=\\inf_{x\\in\\mathbb R^n}L(x,\\lambda,\\nu),\\qquad d^*=\\sup_{\\lambda\\ge0,\\ \\nu\\in\\mathbb R^p}q(\\lambda,\\nu).\n$$\nThe dual supremum is attained when some admissible $(\\lambda,\\nu)$ has\n$q(\\lambda,\\nu)=d^*$; the optimal duality gap is $p^*-d^*$ when both values\nare finite.\n\nSlater's condition means that there is\n$x_s\\in\\operatorname{ri}(\\operatorname{dom}f_0)\\cap\n\\bigcap_i\\operatorname{ri}(\\operatorname{dom}g_i)$ with $Ax_s=b$ and\n$g_i(x_s)<0$ for every remaining inequality. Relative interior is used in\nthe affine hull of each domain, so the domain need not have ambient interior.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-slater-strong-duality-and-dual-attainment",
+          "source_section": "Statement",
+          "quote": "Consider the finite-dimensional convex program of\n[[def-convex-program-duality-and-slater-condition]]. Assume its equality\nmatrix has independent rows, Slater's condition holds, and the finite primal\nvalue $p^*\\in\\mathbb R$ is attained at $x_*$. Then there are\n$\\lambda_*\\ge0$ and $\\nu_*$ such that\n$$q(\\lambda_*,\\nu_*)=d^*=p^*.$$\nMoreover, every inequality multiplier satisfies\n$\\lambda_{*,i}g_i(x_*)=0$. The Slater and attainment hypotheses do not assert\nthat a primal minimizer is unique.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inequality-constrained-program-and-kkt-geometry",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $f:U\\to\\mathbb R$\nbe $C^2$. Let $p,m\\in\\mathbb N$ with zero allowed; when the target\ndimension is positive, let $h:U\\to\\mathbb R^p$ and\n$g=(g_1,\\ldots,g_m):U\\to\\mathbb R^m$ be componentwise $C^2$, and when it\nis zero use the unique empty map. The $C^2$ convention for positive\ndimensions is [[def-ck-euclidean-maps-and-diffeomorphisms]].\nThe $C^2$ inequality program is to minimize $f(x)$ subject to\n$h(x)=0$ and $g_i(x)\\le0$ for every $i$. Its feasible set is\n$C=\\{x\\in U:h(x)=0,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. A feasible point $x_*$ is\na local minimizer if some open neighborhood $V$ of $x_*$ satisfies\n$f(x_*)\\le f(y)$ for every $y\\in C\\cap V$.\n\nAt a feasible $x$, the active set is\n$I(x)=\\{i:g_i(x)=0\\}$. The Bouligand tangent cone and linearized cone are,\nrespectively,\n$$\nT_C(x)=\\{d:\\exists\\,t_k>0,\\ t_k\\downarrow0,\\ d_k\\to d,\\ x+t_kd_k\\in C\\},\n$$\nand\n$$\n\\mathcal L_C(x)=\\{d:Dh(x)d=0,\\ Dg_i(x)d\\le0\\text{ for every }i\\in I(x)\\}.\n$$\nGradients are column vectors and $Dg_i(x)d=\\nabla g_i(x)^Td$.\n\nThe linear independence constraint qualification (LICQ) holds at $x$ when the rows of $Dh(x)$ together with\n$\\{\\nabla g_i(x)^T:i\\in I(x)\\}$ are linearly independent. MFCQ holds at $x$\nwhen $Dh(x)$ has full row rank (its rows are linearly independent) and there is $w\\in\\ker Dh(x)$ with\n$Dg_i(x)w<0$ for every active $i$; the latter condition is vacuous if\n$I(x)=\\varnothing$. Here full row rank for a matrix with zero rows is\nunderstood vacuously.\n\nThe Mangasarian–Fromovitz constraint qualification (MFCQ) is the condition\njust stated. The Karush–Kuhn–Tucker (KKT) system is the stationarity,\nfeasibility, dual-feasibility, and complementarity system below.\n\nFor $\\nu\\in\\mathbb R^p$ and $\\lambda\\in\\mathbb R^m$, the Lagrangian and KKT\nsystem are\n$$\nL(x,\\nu,\\lambda)=f(x)+\\nu^Th(x)+\\lambda^Tg(x),\n$$\n$$\nh(x)=0,\\quad g(x)\\le0,\\quad \\lambda\\ge0,\\quad \\lambda_i g_i(x)=0\\ (1\\le i\\le m),\\quad \\nabla_xL(x,\\nu,\\lambda)=0.\n$$\nThe critical cone for a KKT tuple is\n$\\mathcal K(x,\\nu,\\lambda)=\\mathcal L_C(x)\\cap\n\\{d:\\nabla f(x)^Td=0\\}$. These definitions use the differentiability and\ngradient conventions of [[def-ck-euclidean-maps-and-diffeomorphisms]],\n[[def-euclidean-inner-product]], and [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge0$ be an integer. Let $U\\subseteq\\mathbb R^n$ be open and convex,\nand suppose the objective $f:U\\to\\mathbb R$ and inequalities\n$g_i:U\\to\\mathbb R$ $(1\\le i\\le m)$ are differentiable and convex.\nLet the equalities be $Ax=b$ and define the feasible set\n$C=\\{x\\in U:Ax=b,\\ g_i(x)\\le0\\ (1\\le i\\le m)\\}$. If a feasible tuple\n$(x_*,\\nu,\\lambda)$ satisfies the KKT conditions with $\\lambda\\ge0$, then\n$x_*$ is a global minimizer over the feasible set $C$. Moreover,\n$-\\nabla f(x_*)\\in N_C(x_*)$, where the normal cone has the convention of\n[[def-kkt-residual-and-normal-cone]].",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-primal-span",
+          "step": "1.1",
+          "claim": "Let $(w_*,b_*,\\xi_*)$ be any primal minimizer, which exists by [F1], and let $M=\\operatorname{span}\\{\\phi(x_i):1\\le i\\le n\\}$. Project $w_*$ onto $M$ using [F2]; its residual is orthogonal to every $\\phi(x_i)$, so the projection preserves all margins and slacks. If the residual were nonzero, [F3] would give a strictly smaller squared norm and hence a strictly smaller objective, contradicting minimality because the regularization coefficient is $1/2>0$. Thus every primal minimizer has $w_*\\in M$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "convex-program-form",
+          "step": "2.1",
+          "claim": "Identify $M$ with a Euclidean space using an orthonormal basis. In the finite-dimensional variable space $M\\times\\mathbb R\\times\\mathbb R^n$, the objective is a proper continuous convex function and the $2n$ inequality constraints are continuous affine functions with the sign convention [F7]. No inequality is removed by the domain-preserving convention in [F5]: all functions have full domain, and sending the corresponding $\\xi_i\\to-\\infty$ makes either constraint function positive. There are no primal equality rows, so the full-row-rank condition in [F5] holds vacuously.",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "relative-interior-slater",
+          "step": "3.1",
+          "claim": "The point $w=0$, $b=0$, $\\xi_i=2$ has strict slack in every constraint: $1-\\xi_i-y_i(\\langle w,\\phi(x_i)\\rangle+b)=-1<0$ and $-\\xi_i=-2<0$. The objective and all constraint domains are the whole finite-dimensional variable space, so this point lies in their relative interiors. Together with the finite attained primal value from [F1], this verifies every hypothesis of [F6].",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "lagrangian",
+          "step": "3.2",
+          "claim": "Write the margin constraints as $g_i^{(m)}:=1-\\xi_i-y_i(\\langle w,\\phi(x_i)\\rangle+b)\\le0$ and the nonnegative-slack constraints as $g_i^{(s)}:=-\\xi_i\\le0$. Give them multipliers $\\alpha_i\\ge0$ and $\\mu_i\\ge0$, respectively. The Lagrangian is $L=\\frac12\\|w\\|^2+C\\sum_i\\xi_i+\\sum_i\\alpha_i g_i^{(m)}+\\sum_i\\mu_i g_i^{(s)}$.",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "dual-feasibility",
+          "step": "4.1",
+          "claim": "Put $v:=\\sum_i\\alpha_i y_i\\phi(x_i)$. The terms of $L$ depending on $w$ are $\\frac12\\|w\\|^2-\\langle w,v\\rangle=\\frac12\\|w-v\\|^2-\\frac12\\|v\\|^2$, so their infimum is $-\\frac12\\|v\\|^2$. The infimum over the unrestricted bias $b$ is finite exactly when $\\sum_i\\alpha_i y_i=0$, and the infimum over each unrestricted $\\xi_i$ is finite exactly when $C-\\alpha_i-\\mu_i=0$. Thus the dual-feasible conditions are $\\sum_i\\alpha_i y_i=0$ and $0\\le\\alpha_i\\le C$.",
+          "inputs": [
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strong-duality-and-complementarity",
+          "step": "4.2",
+          "claim": "Apply [F6] using the verified hypotheses in [step 3.1]. It gives an attained dual optimum $(\\alpha,\\mu)$ with the same value as the primal optimum and complementarity for both families $g_i^{(m)}$ and $g_i^{(s)}$. At any fixed primal minimizer, these equal values and complementarity make $L$ attain its unconstrained infimum; its derivatives in $w$, $b$, and each $\\xi_i$ therefore vanish.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-concavity-and-row-rank",
+          "step": "5.1",
+          "claim": "For any finite list $u_1,\\ldots,u_m\\in X$ and $c_1,\\ldots,c_m\\in\\mathbb R$, symmetry and bilinearity of the real inner product give $\\sum_{r,s}c_rc_sk(u_r,u_s)=\\langle\\sum_r c_r\\phi(u_r),\\sum_s c_s\\phi(u_s)\\rangle=\\|\\sum_r c_r\\phi(u_r)\\|^2\\ge0$. Thus the feature-induced kernel $k$ is real positive semidefinite, so its sample Gram matrix satisfies the hypothesis of [F4]. Since $k(x_i,x_j)=\\langle\\phi(x_i),\\phi(x_j)\\rangle$, $\\|v\\|^2=\\sum_{i,j}\\alpha_i\\alpha_jy_iy_jk(x_i,x_j)$. By [F4], the matrix $(y_iy_jk(x_i,x_j))_{i,j}$ is the Gram matrix of $y_i z_i$, so its quadratic form is nonnegative. Hence the displayed dual objective is concave. Its equality row has coefficient vector $y\\ne0$, because $n\\ge1$ and each $y_i\\in\\{-1,+1\\}$, so that row is independent.",
+          "inputs": [
+            "step 4.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stationarity-and-kkt",
+          "step": "5.2",
+          "claim": "Differentiating the Lagrangian of [step 3.2] gives $w=\\sum_i\\alpha_i y_i\\phi(x_i)$, $\\sum_i\\alpha_i y_i=0$, and $C-\\alpha_i-\\mu_i=0$. The last equation and $\\mu_i\\ge0$ give $\\alpha_i\\le C$; together with $\\alpha_i\\ge0$ these are the dual box constraints. The complementarity equations supplied by [F6] are $\\alpha_i g_i^{(m)}=0$ and $\\mu_i g_i^{(s)}=0$, which are exactly the two equations in the Statement.",
+          "inputs": [
+            "step 4.2",
+            "step 3.2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-optimality-and-score",
+          "step": "6.1",
+          "claim": "The finite-dimensional primal has differentiable convex objective and affine convex constraints on the open convex variable space identified in [step 2.1]. Thus [F8] certifies that any feasible tuple satisfying the stationarity and complementarity equations is a global primal minimizer. If $0<\\alpha_i<C$, then $\\mu_i=C-\\alpha_i>0$, so $\\mu_i\\xi_i=0$ forces $\\xi_i=0$; then $\\alpha_i g_i^{(m)}=0$ forces the signed margin to equal $1$. Finally, for any input $x$, stationarity gives the score $s(x)=\\sum_i\\alpha_i y_i k(x_i,x)+b$.",
+          "inputs": [
+            "step 5.2",
+            "step 2.1",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 remains valid for a zero Gram matrix; its Euclidean feature vectors are all zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 and the one-row bias equality apply when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 uses the Gram factorization without any full-rank assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem assumes C>0; the C=0 boundary is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem is conditional on a supplied feature Hilbert space and its proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-linear-and-polynomial-kernels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "linear-kernel-form",
+          "step": "1.1",
+          "claim": "For any finite sample $x_1,\\ldots,x_m\\in\\mathbb R^p$ and coefficients $c_1,\\ldots,c_m\\in\\mathbb R$, the linear Gram quadratic form is $\\sum_{i,j}c_ic_jx_i^Tx_j=\\|\\sum_i c_ix_i\\|_2^2\\ge0$. Thus $k_{\\rm lin}$ satisfies the nonnegative-form condition in [F1], and it is symmetric because $x^Tz=z^Tx$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "polynomial-feature-expansion",
+          "step": "1.2",
+          "claim": "For $\\alpha=(\\alpha_0,\\ldots,\\alpha_p)\\in\\mathbb N_0^{p+1}$ with $|\\alpha|=d$, define $\\psi_\\alpha(x)=\\sqrt{d!/\\alpha_0!\\cdots\\alpha_p!}\\prod_{r=1}^p x_r^{\\alpha_r}$. The multinomial theorem gives $(1+x^Tz)^d=\\sum_{|\\alpha|=d}\\psi_\\alpha(x)\\psi_\\alpha(z)$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "polynomial-gram-nonnegative",
+          "step": "2.1",
+          "claim": "Therefore, for every finite sample and coefficients, $\\sum_{i,j}c_ic_jk_d(x_i,x_j)=\\sum_{|\\alpha|=d}(\\sum_i c_i\\psi_\\alpha(x_i))^2\\ge0$. The polynomial kernel is symmetric and positive semidefinite by [F1].",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-two-variable-map",
+          "step": "3.1",
+          "claim": "When $p=2$ and $d=2$, the six multi-indices in [step 1.2] give $h(x)=(1,\\sqrt2x_1,\\sqrt2x_2,x_1^2,x_2^2,\\sqrt2x_1x_2)$, so the stated feature identity holds.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the empty Gram sum as zero; the polynomial Gram sum is also empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers zero input vectors, and step 1.2 covers the constant term when d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 apply to a sample of one point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 is a sum of squares and permits dependent or zero feature vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the degree endpoint d=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sums and a finite multi-index set occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states positive semidefiniteness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states positive semidefiniteness, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-gaussian-radial-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-factorization",
+          "step": "1.1",
+          "claim": "For each sample point put $a_i=c_i\\exp(-\\|x_i\\|_2^2/(2\\sigma^2))$. The identity $\\|x_i-x_j\\|_2^2=\\|x_i\\|_2^2+\\|x_j\\|_2^2-2x_i^Tx_j$ gives $\\sum_{i,j}c_ic_jk_\\sigma(x_i,x_j)=\\sum_{i,j}a_i a_j\\exp(x_i^Tx_j/\\sigma^2)$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "absolute-multiindex-expansion",
+          "step": "1.2",
+          "claim": "For each fixed pair $i,j$, the exponential series has the absolutely convergent multi-index expansion $\\exp(x_i^Tx_j/\\sigma^2)=\\sum_{\\alpha\\in\\mathbb N_0^p}(x_i^\\alpha x_j^\\alpha)/(\\sigma^{2|\\alpha|}\\alpha!)$, since the corresponding series of absolute values is $\\prod_{r=1}^p\\exp(|x_{ir}x_{jr}|/\\sigma^2)<\\infty$. The sample sums are finite, so they can be interchanged with this absolutely convergent series.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sum-of-squares-gram-form",
+          "step": "2.1",
+          "claim": "Substitution into [step 1.1] yields $\\sum_{i,j}c_ic_jk_\\sigma(x_i,x_j)=\\sum_{\\alpha\\in\\mathbb N_0^p}\\frac{1}{\\sigma^{2|\\alpha|}\\alpha!}(\\sum_i a_ix_i^\\alpha)^2\\ge0$. Symmetry of $k_\\sigma$ is immediate from $\\|x-z\\|_2=\\|z-x\\|_2$, so [F1] proves positive semidefiniteness; zero eigenvalues or repeated points do not affect the sum-of-squares argument.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated sample size is m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid for zero coefficients or zero sample points."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, step 2.1 is a single nonnegative square sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits repeated points and singular Gram matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement requires sigma>0; sigma=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only finite sample sums and absolutely convergent series."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states PSD, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states PSD, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-separable-hard-margin-svm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set, let $\\mathcal H$ be a real Hilbert space, and let $\\phi:X\\to\\mathcal H$ be a feature map. Define its kernel by $k(x,z):=\\langle\\phi(x),\\phi(z)\\rangle_{\\mathcal H}$. For a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in X$, and $y_i\\in\\{-1,+1\\}$, the **soft-margin support-vector machine** with cost $C>0$ is\n\n$$\\min_{w\\in\\mathcal H,\\ b\\in\\mathbb R,\\ \\xi\\in\\mathbb R^n}\\ \\frac12\\|w\\|_{\\mathcal H}^2+C\\sum_{i=1}^n\\xi_i$$\n\nsubject to\n\n$$y_i\\bigl(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b\\bigr)\\ge1-\\xi_i,\\qquad \\xi_i\\ge0\\quad(1\\le i\\le n).$$\n\nThe bias $b$ is unpenalized. The associated real score is $s_{w,b}(x):=\\langle w,\\phi(x)\\rangle_{\\mathcal H}+b$. If a binary label is required, use the deterministic rule $+1$ when $s_{w,b}(x)\\ge0$ and $-1$ otherwise. The score is not defined as a probability, and this optimization includes no probability-calibration map.\n\nThe **hard-margin** problem removes the slack variables and minimizes $\\frac12\\|w\\|_{\\mathcal H}^2$ subject to $y_i(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b)\\ge1$ for every $i$. In this library, “margin-separable sample” means exactly that this hard-margin feasible set is nonempty; no hard-margin conclusion is asserted for a sample that fails this condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-linear-and-polynomial-kernels",
+          "source_section": "Example",
+          "quote": "For $x,z\\in\\mathbb R^p$ with $p\\ge1$, the linear kernel $k_{\\rm lin}(x,z)=x^Tz$ and, for each integer $d\\ge0$, the inhomogeneous polynomial kernel $k_d(x,z)=(1+x^Tz)^d$ are positive semidefinite. When $p=2$ and $d=2$, the polynomial kernel has the explicit feature map $h(x)=(1,\\sqrt2x_1,\\sqrt2x_2,x_1^2,x_2^2,\\sqrt2x_1x_2)$ with $k_2(x,z)=h(x)^Th(z)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hard-margin-constraints",
+          "step": "1.1",
+          "claim": "The feature realization is valid by [F2]. With $w,b\\in\\mathbb R$, the two hard-margin constraints are $w-b\\ge1$ and $w+b\\ge1$. Adding them gives $w\\ge1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hard-margin-minimum",
+          "step": "2.1",
+          "claim": "Hence every feasible objective satisfies $\\frac12w^2\\ge\\frac12$. The candidate $w=1,b=0$ satisfies both constraints with equality and has objective $1/2$, so it attains the minimum.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hard-margin-score",
+          "step": "3.1",
+          "claim": "For this minimizer, $s(x)=wx+b=x$. Thus the signed margins at $(-1,-1)$ and $(1,+1)$ are both $1$, as stated.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a two-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero feature points -1 and 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two-point sample has nonzero one-dimensional features."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the unit-margin boundary constraints exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite calculation involves no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-overlapping-soft-margin-svm-score-and-kkt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hard-and-soft-margin-support-vector-machines",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set, let $\\mathcal H$ be a real Hilbert space, and let $\\phi:X\\to\\mathcal H$ be a feature map. Define its kernel by $k(x,z):=\\langle\\phi(x),\\phi(z)\\rangle_{\\mathcal H}$. For a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in X$, and $y_i\\in\\{-1,+1\\}$, the **soft-margin support-vector machine** with cost $C>0$ is\n\n$$\\min_{w\\in\\mathcal H,\\ b\\in\\mathbb R,\\ \\xi\\in\\mathbb R^n}\\ \\frac12\\|w\\|_{\\mathcal H}^2+C\\sum_{i=1}^n\\xi_i$$\n\nsubject to\n\n$$y_i\\bigl(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b\\bigr)\\ge1-\\xi_i,\\qquad \\xi_i\\ge0\\quad(1\\le i\\le n).$$\n\nThe bias $b$ is unpenalized. The associated real score is $s_{w,b}(x):=\\langle w,\\phi(x)\\rangle_{\\mathcal H}+b$. If a binary label is required, use the deterministic rule $+1$ when $s_{w,b}(x)\\ge0$ and $-1$ otherwise. The score is not defined as a probability, and this optimization includes no probability-calibration map.\n\nThe **hard-margin** problem removes the slack variables and minimizes $\\frac12\\|w\\|_{\\mathcal H}^2$ subject to $y_i(\\langle w,\\phi(x_i)\\rangle_{\\mathcal H}+b)\\ge1$ for every $i$. In this library, “margin-separable sample” means exactly that this hard-margin feasible set is nonempty; no hard-margin conclusion is asserted for a sample that fails this condition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-soft-margin-svm-dual-and-kkt-conditions",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $C>0$, let $\\mathcal H$ be a real Hilbert space, and let $\\phi:X\\to\\mathcal H$ be a feature map with kernel $k(x,z)=\\langle\\phi(x),\\phi(z)\\rangle_{\\mathcal H}$. For any finite sample $(x_i,y_i)_{i=1}^n$ with $y_i\\in\\{-1,+1\\}$, the soft-margin SVM primal attains its minimum. Its Lagrangian dual is\n\n$$\\max_{\\alpha\\in\\mathbb R^n}\\ \\sum_{i=1}^n\\alpha_i-\\frac12\\sum_{i=1}^n\\sum_{j=1}^n\\alpha_i\\alpha_jy_iy_jk(x_i,x_j)$$\n\nsubject to $0\\le\\alpha_i\\le C$ for every $i$ and $\\sum_i\\alpha_i y_i=0$. The dual maximum is attained and equals the primal minimum. For every primal minimizer there are dual multipliers $\\alpha_i$ and $\\mu_i$ such that\n\n$$w=\\sum_{i=1}^n\\alpha_i y_i\\phi(x_i),\\qquad \\sum_{i=1}^n\\alpha_i y_i=0,\\qquad C-\\alpha_i-\\mu_i=0,$$\n\n$$\\alpha_i\\bigl(1-\\xi_i-y_i(\\langle w,\\phi(x_i)\\rangle+b)\\bigr)=0,\\qquad \\mu_i\\xi_i=0,$$\n\nwith $\\alpha_i\\ge0$ and $\\mu_i\\ge0$. Conversely, any primal-feasible tuple and nonnegative multipliers satisfying these stationarity and complementarity equations are globally optimal. An index with $\\alpha_i>0$ is a support vector; if $0<\\alpha_i<C$, then $\\xi_i=0$ and its signed margin equals $1$. The single dual equality row is independent because $(y_1,\\ldots,y_n)\\ne0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "ex-linear-and-polynomial-kernels",
+          "source_section": "Example",
+          "quote": "For $x,z\\in\\mathbb R^p$ with $p\\ge1$, the linear kernel $k_{\\rm lin}(x,z)=x^Tz$ and, for each integer $d\\ge0$, the inhomogeneous polynomial kernel $k_d(x,z)=(1+x^Tz)^d$ are positive semidefinite. When $p=2$ and $d=2$, the polynomial kernel has the explicit feature map $h(x)=(1,\\sqrt2x_1,\\sqrt2x_2,x_1^2,x_2^2,\\sqrt2x_1x_2)$ with $k_2(x,z)=h(x)^Th(z)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "candidate-margins",
+          "step": "1.1",
+          "claim": "The feature map in [F3] realizes the stated linear kernel. At $w=0$, $b=-1$, the scores at all three observations equal $-1$. Their signed margins are respectively $1,-1,1$, so $\\xi=(0,2,0)$ satisfies every soft-margin constraint, with objective $2C$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "objective-lower-bound",
+          "step": "2.1",
+          "claim": "For any feasible tuple, let $t=w+b$, the score at $x=1$. The two observations at $x=1$ require $\\xi_2\\ge\\max(0,1-t)$ and $\\xi_3\\ge\\max(0,1+t)$. If $-1\\le t\\le1$ these lower bounds sum to $2$; if $t>1$, the second is $1+t>2$; and if $t<-1$, the first is $1-t>2$. Thus $\\xi_2+\\xi_3\\ge2$ for every feasible tuple, and its objective is at least $C(\\xi_2+\\xi_3)\\ge2C$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "optimality-and-kkt-tuple",
+          "step": "3.1",
+          "claim": "The candidate in [step 1.1] is therefore globally optimal. For $\\alpha=(0,C,C)$ and $\\mu=(C,0,0)$, $\\sum_i\\alpha_i y_i\\phi(x_i)=C-C=0=w$, $\\sum_i\\alpha_i y_i=C-C=0$, and $C-\\alpha_i-\\mu_i=0$ for all three indices. Each margin constraint is active, so $\\alpha_i g_i^{(m)}=0$; also $\\mu_i\\xi_i=0$ for each $i$. These are the KKT conditions in [F2].",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "dual-value-and-score",
+          "step": "4.1",
+          "claim": "The dual objective is $\\sum_i\\alpha_i-\\frac12\\|\\sum_i\\alpha_i y_i\\phi(x_i)\\|^2=2C$, equal to the primal value. The score at $x=1$ is $-1$, while the empirical positive-label frequency among the two observations at $x=1$ is $1/2$. The logistic transform of the score is $(1+e)^{-1}\\ne1/2$; the SVM optimization does not assert that this transformed value is a probability.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a three-point sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the optimum w=0 and its finite objective."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three observations with both labels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the repeated input x=1 with opposite labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use the strict condition C>0 and hold for every such C."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct finite verification, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct finite verification, not an iff."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

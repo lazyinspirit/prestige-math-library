@@ -1,0 +1,499 @@
+{
+  "group": "z",
+  "batches": ["79"],
+  "pages_read": [
+    "linear-contextual-bandits-and-linucb",
+    "linear-contextual-bandits-and-linucb-examples"
+  ],
+  "items_read": [
+    "lem-linucb-elliptical-potential",
+    "lem-linucb-trace-determinant-bound",
+    "lem-linucb-predictable-mgf-substitution",
+    "def-linear-contextual-bandit-model",
+    "lem-linucb-ridge-information-matrix",
+    "lem-linucb-ridge-estimates-are-measurable",
+    "lem-linucb-gaussian-mixture-supermartingale",
+    "alg-linucb",
+    "thm-self-normalized-linear-confidence-ellipsoid",
+    "thm-linucb-regret",
+    "cor-linucb-expected-regret",
+    "ex-linucb-feature-norm-violation",
+    "ex-linucb-two-context-two-action-update",
+    "ex-linucb-unbounded-parameter-norm",
+    "ex-linucb-mean-range-exceeds-one"
+  ],
+  "conventions": [
+    {
+      "convention": "The filtration F_t contains current context and available features before round-t noise; A_t is F_t-measurable and η_t is F_{t+1}-measurable. Post-round information is H_t = F_{t+1}. Independence between rounds is not assumed.",
+      "fixed_by": "def-linear-contextual-bandit-model",
+      "matters_for": [
+        "lem-linucb-ridge-estimates-are-measurable",
+        "lem-linucb-gaussian-mixture-supermartingale",
+        "alg-linucb",
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret"
+      ]
+    },
+    {
+      "convention": "The ridge objective uses the unaveraged sample sum plus λ times the squared Euclidean parameter norm; V_0 = λI, b_0 = 0, and the initial estimate is zero.",
+      "fixed_by": "def-linear-contextual-bandit-model",
+      "matters_for": [
+        "lem-linucb-ridge-information-matrix",
+        "alg-linucb",
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "ex-linucb-two-context-two-action-update",
+        "ex-linucb-unbounded-parameter-norm"
+      ]
+    },
+    {
+      "convention": "Dimension and horizon are positive integers, λ > 0, L ≥ 1, and m_2 ≥ 0; every available feature has norm at most L and the deterministic true parameter has norm at most m_2.",
+      "fixed_by": "def-linear-contextual-bandit-model",
+      "matters_for": [
+        "lem-linucb-ridge-information-matrix",
+        "lem-linucb-gaussian-mixture-supermartingale",
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret",
+        "cor-linucb-expected-regret",
+        "ex-linucb-feature-norm-violation"
+      ]
+    },
+    {
+      "convention": "Finite action sets are ordered and ties select the first maximizer; compact feature sets require a supplied attained measurable predictable maximizing selector.",
+      "fixed_by": "alg-linucb",
+      "matters_for": [
+        "thm-linucb-regret",
+        "ex-linucb-two-context-two-action-update"
+      ]
+    },
+    {
+      "convention": "The round-t confidence radius uses V_{t-1}, and the algorithm uses β_t = max{1, ρ_t²}.",
+      "fixed_by": "alg-linucb",
+      "matters_for": [
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret",
+        "cor-linucb-expected-regret",
+        "ex-linucb-unbounded-parameter-norm"
+      ]
+    },
+    {
+      "convention": "The regret bound concerns random pseudo-regret formed from true linear means and assumes each available set has true-mean range at most one.",
+      "fixed_by": "thm-linucb-regret",
+      "matters_for": [
+        "cor-linucb-expected-regret",
+        "ex-linucb-mean-range-exceeds-one"
+      ]
+    },
+    {
+      "convention": "The expected-regret corollary takes n ≥ 2 and δ = 1/n; B_n is generally random, and the displayed constant C explicitly depends on λ, m_2, and L.",
+      "fixed_by": "cor-linucb-expected-regret",
+      "matters_for": ["cor-linucb-expected-regret"]
+    },
+    {
+      "convention": "The Gaussian-mixture, confidence, and regret results explicitly assume AC and Countable Choice; conditional expectations are interpreted almost surely without a completed-filtration assumption.",
+      "fixed_by": "lem-linucb-gaussian-mixture-supermartingale",
+      "matters_for": [
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret",
+        "cor-linucb-expected-regret"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-linear-contextual-bandit-model",
+      "statement": "The model specifies predictable bounded features, a deterministic norm-bounded parameter, conditionally 1-sub-Gaussian reward noise, attained measurable maxima, and the unaveraged ridge estimate.",
+      "used_by": [
+        "lem-linucb-ridge-information-matrix",
+        "lem-linucb-ridge-estimates-are-measurable",
+        "lem-linucb-gaussian-mixture-supermartingale",
+        "alg-linucb",
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret",
+        "cor-linucb-expected-regret",
+        "ex-linucb-feature-norm-violation",
+        "ex-linucb-two-context-two-action-update",
+        "ex-linucb-unbounded-parameter-norm",
+        "ex-linucb-mean-range-exceeds-one"
+      ]
+    },
+    {
+      "id": "lem-linucb-gaussian-mixture-supermartingale",
+      "statement": "Assume AC and Countable Choice and the finite-dimensional linear contextual bandit model. With S_t = Σ_{s≤t} A_sη_s and H_t = F_{t+1}, Z_t = sqrt(det(V_0)/det(V_t)) exp(S_tᵀV_t⁻¹S_t/2), Z_0 = 1, is a nonnegative integrable supermartingale with respect to (H_t) from t = 0 to n.",
+      "used_by": ["thm-self-normalized-linear-confidence-ellipsoid"]
+    },
+    {
+      "id": "thm-self-normalized-linear-confidence-ellipsoid",
+      "statement": "Assume AC and Countable Choice and the model. For δ ∈ (0,1), the ellipsoids centered at the round-(t−1) ridge estimate with radius sqrt(λ)m_2 + sqrt(2 log(1/δ) + log(det(V_{t−1})/λ^d)) contain θ* simultaneously for every 1 ≤ t ≤ n with probability at least 1−δ.",
+      "used_by": [
+        "thm-linucb-regret",
+        "ex-linucb-unbounded-parameter-norm"
+      ]
+    },
+    {
+      "id": "lem-linucb-elliptical-potential",
+      "statement": "For d,n ≥ 1, λ > 0, V_0 = λI_d, and arbitrary a_1,…,a_n ∈ R^d, define V_t = V_{t−1}+a_ta_tᵀ and u_t = a_tᵀV_{t−1}⁻¹a_t. Every V_t is positive definite, u_t ≥ 0, det V_t = det V_{t−1}(1+u_t), and Σ min{1,u_t} ≤ 2 log(det V_n/det V_0).",
+      "used_by": ["thm-linucb-regret"]
+    },
+    {
+      "id": "lem-linucb-ridge-information-matrix",
+      "statement": "In the model, every V_t for 0 ≤ t ≤ n is symmetric positive definite and invertible, det V_t ≥ λ^d > 0, and xᵀV_t⁻¹x ≤ ||x||_2²/λ for every x ∈ R^d.",
+      "used_by": [
+        "lem-linucb-ridge-estimates-are-measurable",
+        "lem-linucb-gaussian-mixture-supermartingale",
+        "alg-linucb",
+        "thm-self-normalized-linear-confidence-ellipsoid",
+        "thm-linucb-regret"
+      ]
+    },
+    {
+      "id": "lem-linucb-predictable-mgf-substitution",
+      "statement": "Assume AC. If every fixed real q satisfies the integrable conditional MGF bound E[exp(qη) | G] ≤ exp(q²/2) almost surely, then every bounded real G-measurable Q satisfies E[exp(Qη−Q²/2) | G] ≤ 1 almost surely.",
+      "used_by": ["lem-linucb-gaussian-mixture-supermartingale"]
+    },
+    {
+      "id": "lem-linucb-trace-determinant-bound",
+      "statement": "For d,n ≥ 1, λ > 0, L ≥ 0, and ||a_t||_2 ≤ L, the ridge matrices have positive determinants and log(det V_n/det V_0) ≤ d log(1+nL²/(dλ)).",
+      "used_by": [
+        "thm-linucb-regret",
+        "cor-linucb-expected-regret"
+      ]
+    },
+    {
+      "id": "thm-linucb-regret",
+      "statement": "Under AC, Countable Choice, the model, LinUCB, and per-round true-mean range at most one, with probability at least 1−δ the pseudo-regret is at most sqrt(8nβ_n log(det V_n/det V_0)) ≤ sqrt(8dnβ_n log(1+nL²/(dλ))). The stated exact-real procedure also completes n rounds with O(nd³+d²Σ_{t∈F}m_t) operations apart from compact-selector costs.",
+      "used_by": [
+        "cor-linucb-expected-regret",
+        "ex-linucb-mean-range-exceeds-one"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+      "used_for": "Measurability of determinants and adjugate entries.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Taking expectations in the pseudo-regret bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-of-an-indicator-is-probability",
+      "used_for": "Bounding the failure-event contribution by nP(E complement).",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "The stopped-supermartingale crossing bound.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "An integrable Lipschitz envelope in predictable MGF substitution.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Eigenvalue proofs of inverse and trace-determinant bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Separating noise and ridge bias in the confidence proof.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit conditional-expectation and optional-sampling assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Vector, matrix, and product measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Positive-definite matrices and positive determinant signs.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure conditional inequalities and the supermartingale interface.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Conditional MGF hypotheses and event-integral identification.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit Gaussian-integral and change-of-variables assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Determinant notation and identity-matrix determinant values.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Feature norms, quadratic forms, and matrix-coordinate identities.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Noise moment and expected pseudo-regret definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Increasing information sigma-algebras and time indexing.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Weighted norms in confidence ellipsoids.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-submartingale-and-supermartingale",
+      "used_for": "The integrable adapted supermartingale definition.",
+      "opened": true
+    },
+    {
+      "id": "def-matrices-over-a-commutative-ring",
+      "used_for": "Finite matrix coordinates in the measurability proof.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-minors-cofactors-and-adjugate",
+      "used_for": "Measurable inverse entries, including the size-one empty minor.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Ridge updates and finite coordinate products.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Entrywise Euclidean matrix spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Feature maps and measurable matrix/vector constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Confidence radii and determinant potentials.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint measurability of the Gaussian-mixture integrand.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable contexts, features, noise, and rewards.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Positive-definite weighted inner products.",
+      "opened": true
+    },
+    {
+      "id": "def-ring-matrix-product-identity-and-transpose",
+      "used_for": "Outer products and transposes.",
+      "opened": true
+    },
+    {
+      "id": "def-sigma-algebra",
+      "used_for": "Measurability of finite intersections of confidence events.",
+      "opened": true
+    },
+    {
+      "id": "def-tikhonov-regularised-least-squares",
+      "used_for": "The sample-sum ridge objective and the linear-regression seam.",
+      "opened": true
+    },
+    {
+      "id": "lem-determinant-rank-one-update-over-a-commutative-ring",
+      "used_for": "The elliptical-potential determinant recursion.",
+      "opened": true
+    },
+    {
+      "id": "lem-field-is-a-commutative-ring",
+      "used_for": "Applying the ring adjugate identity over the reals.",
+      "opened": true
+    },
+    {
+      "id": "lem-positive-definite-gaussian-integral",
+      "used_for": "Gaussian-mixture normalization and completed-square evaluation.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of mixture integrands and their sections.",
+      "opened": true
+    },
+    {
+      "id": "thm-adjugate-identity-over-a-commutative-ring",
+      "used_for": "Rank-one determinant updates and measurable matrix inverses.",
+      "opened": true
+    },
+    {
+      "id": "thm-am-gm",
+      "used_for": "Bounding the determinant by the averaged eigenvalue raised to d.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurable sums, products, estimates, and confidence events.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, order, total expectation, and L1 contraction; two local facts additionally attribute an unstated bounded pull-out property to it.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Translating the completed-square Gaussian integral.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Bounding fixed-vector predictable coefficients by L times the vector norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Optimism, confidence widths, and summing instantaneous regret.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating the exponential used in predictable MGF substitution.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Positive determinant signs of ridge matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-expectation-exists-by-radon-nikodym",
+      "used_for": "Existence of conditional-expectation versions under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of reciprocal and exponential compositions.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "The predictable-substitution Lipschitz envelope.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Cholesky and spectral determinant identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Determinants of Cholesky factors and λI.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-transpose",
+      "used_for": "Positive determinant and orthogonal diagonalization calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-under-elementary-row-operations",
+      "used_for": "Correctness of the algorithm's stored determinant.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The scalar inequality min{1,u} ≤ 2 log(1+u).",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Truncating unbounded exponential-supermartingale factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "The scalar logarithm lower bound on a positively oriented interval.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Log-determinant telescoping, monotonicity, and expected-regret estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-optional-sampling-for-bounded-stopping-times",
+      "used_for": "The finite-horizon time-uniform crossing bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Invertibility of positive-definite ridge matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-field",
+      "used_for": "Real-matrix specialization of ring identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+      "used_for": "The ridge estimator formula and compatibility with the linear-regression page.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Mixture measurability and exchanging nonnegative event integrals with Gaussian integration.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-linucb-predictable-mgf-substitution",
+      "concern": "Fact F2 attributes to thm-basic-algebra-and-order-properties-of-conditional-expectation that conditional expectation 'pulls out bounded G-measurable factors'. The opened supplier's Statement and proof establish scalar linearity, order, constants, total expectation, modulus control, and strict order, but no bounded measurable pull-out rule. Step 1.1 uses the indicator case. That case follows immediately by testing the defining event integrals on intersections with B_j, so this is a citation gap rather than a false conclusion.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-linucb-gaussian-mixture-supermartingale",
+      "concern": "Fact F6 says thm-basic-algebra-and-order-properties-of-conditional-expectation 'pulls out bounded measurable factors', although the opened supplier neither states nor proves that rule. Step 2.1 uses it for W_k and indicator-times-W_k. Bounded nonnegative pull-out follows from the defining event-integral property by simple approximation and monotone convergence, but this justification or an exact supplier is missing.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "linear-contextual-bandits-and-linucb",
+      "to": "ml02-linear-sparse-models",
+      "faithful": true,
+      "note": "Checked the supplier page, def-linear-regression-objectives, and thm-ols-and-ridge-solutions against the contextual model. Both use the unaveraged ridge objective and inverse normal-equation formula with λ > 0. The contextual model cites the common published Tikhonov suppliers directly; no stronger claim is attributed to the cross-batch page."
+    },
+    {
+      "from": "linear-contextual-bandits-and-linucb",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "Checked the supplier page and def-online-decision-protocol. The contextual model explicitly identifies current context and available features as additional side information, preserves selection before current reward feedback, and requires measurable predictable choices. It does not attribute contextual side information or a regret guarantee to the generic protocol."
+    }
+  ]
+}

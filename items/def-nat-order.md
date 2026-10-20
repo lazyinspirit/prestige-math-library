@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 short: "$m\\le n\\iff\\exists k\\,(m+k=n)$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-nat-order.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -40,7 +41,11 @@ For $m, n \in \mathbb{N}$, define the **order** by
 $$m \le n \iff \exists k \in \mathbb{N}\ (m + k = n),$$
 
 and the **strict order** by $m < n \iff (m \le n \text{ and } m \neq n)$, using
-addition ([[def-nat-addition]]).
+addition (Addition of natural numbers).
+
+## Definition references
+
+[[def-nat-addition]]
 
 ## Remarks
 

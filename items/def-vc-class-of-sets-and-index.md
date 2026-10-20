@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-vc-class-of-sets-and-index.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -30,10 +31,15 @@ Let $\mathcal C\subseteq\mathcal P(X)$ be a family of subsets of an arbitrary se
 
 $$\mathcal C|_T:=\{C\cap T:C\in\mathcal C\}.$$
 
-The family $\mathcal C$ **shatters** $T$ when $\mathcal C|_T=\mathcal P(T)$. This extends the finite-ground-set trace convention of [[def-shattering-and-vc-dimension]]: any finite $T$ can be relabeled by $[|T|]$, and relabeling preserves all traces and their cardinalities.
+The family $\mathcal C$ **shatters** $T$ when $\mathcal C|_T=\mathcal P(T)$. This extends the finite-ground-set trace convention of Shattering and the Vapnik–Chervonenkis dimension of a set family: any finite $T$ can be relabeled by $[|T|]$, and relabeling preserves all traces and their cardinalities.
 
 For a nonempty class, its **VC dimension** $d(\mathcal C)$ is the greatest size of a finite shattered set if those sizes are bounded, is $0$ if no singleton is shattered, and is $+\infty$ if finite shattered sets have unbounded size. When the dimension is finite, its **VC index** is
 
 $$V(\mathcal C):=d(\mathcal C)+1,$$
 
 equivalently the least positive integer $V$ such that no $V$-point subset is shattered. The empty class is assigned $V=0$ by convention and is treated separately in the entropy theorem.
+
+## Definition references
+
+[[def-shattering-and-vc-dimension]]
+

@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-brownian-motion.json
   audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
@@ -22,7 +23,7 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice [[def-axiom-of-choice]]. A real process
+Assume the Axiom of Choice The Axiom of Choice. A real process
 $B=(B_t)_{t\ge0}$ is a **standard Brownian motion** if:
 
 1. $B_0=0$ almost surely;
@@ -34,7 +35,7 @@ $B=(B_t)_{t\ge0}$ is a **standard Brownian motion** if:
    $\omega\in A$.
 
 By
-[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]],
+Brownian covariance is equivalent to independent stationary normal increments,
 the first two clauses are equivalent to saying that $B$ is a centered Gaussian
 process with covariance $\min(s,t)$. Clause 3 is additional: it cannot be
 recovered from finite-dimensional distributions alone.
@@ -42,13 +43,21 @@ recovered from finite-dimensional distributions alone.
 No filtration is part of this definition. In particular, no completed or
 right-continuous filtration and no Markov or martingale assertion is silently
 imposed. Modifications and indistinguishability retain the distinct meanings in
-[[def-law-modification-and-indistinguishability-of-processes]]. The cases
+Process law, modification, and indistinguishability. The cases
 $n=0$, $t_1=0$, and zero-length increments are respectively vacuous or already
 covered by $B_0=0$; the increment list itself is strictly increasing.
 
 Choice is declared because the normal-law and Gaussian/increment-equivalence
 interfaces construct and identify normal laws under AC. The continuity clause
 selects no path and makes no additional use of choice.
+
+## Definition references
+
+[[def-axiom-of-choice]]
+
+[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]]
+
+[[def-law-modification-and-indistinguishability-of-processes]]
 
 ## Source notes
 

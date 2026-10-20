@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-riesz-representation-for-hilbert-space.json
   audited: 2026-09-22
   judge:
     model: "gpt-5.6-terra"
@@ -28,11 +29,17 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ ([[def-dual-space-of-a-normed-space]]). Then there is a unique $y\in H$ with
+Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ (The dual space X^* of a normed space and its dual norm). Then there is a unique $y\in H$ with
 
 $$f(x)=\langle x,y\rangle\qquad\text{for every }x\in H,$$
 
-and $\|f\|=\|y\|$, where $\|f\|$ is the dual norm ([[def-operator-norm]]). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\overline a\,y_1+\overline b\,y_2$.
+and $\|f\|=\|y\|$, where $\|f\|$ is the dual norm (The operator norm as the least bound and as the unit-sphere or unit-ball supremum). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\overline a\,y_1+\overline b\,y_2$.
+
+## Statement references
+
+[[def-dual-space-of-a-normed-space]]
+
+[[def-operator-norm]]
 
 ## Facts & Assumptions
 

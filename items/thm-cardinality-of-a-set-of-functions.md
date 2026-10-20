@@ -17,6 +17,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-cardinality-of-a-set-of-functions.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -46,7 +47,7 @@ Let $A$ and $B$ be finite sets and write
 $$A^{B} := \{\, f : f \text{ is a function } B \to A \,\}.$$
 
 Then $A^{B}$ is finite and $\lvert A^{B}\rvert = \lvert A\rvert^{\lvert B\rvert}$,
-the power being the $\mathbb{N}$-valued exponentiation of [[def-nat-power]].
+the power being the $\mathbb{N}$-valued exponentiation of Exponentiation of natural numbers, $m^{n}$, and its agreement with the integer power in $\mathbb{R}$.
 
 Both degenerate cases are covered and neither is a stipulation. If
 $B = \varnothing$ there is exactly one function $B \to A$, the empty function, so
@@ -54,6 +55,10 @@ $\lvert A^{\varnothing}\rvert = 1 = \lvert A\rvert^{0}$ **even when
 $A = \varnothing$**. If $A = \varnothing$ and $B \ne \varnothing$ there is no
 function at all, so $\lvert A^{B}\rvert = 0 = 0^{\lvert B\rvert}$ with
 $\lvert B\rvert \ge 1$.
+
+## Statement references
+
+[[def-nat-power]]
 
 ## Facts & Assumptions
 

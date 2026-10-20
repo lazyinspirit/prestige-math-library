@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "31",
+  "pair": "feedforward-networks-and-universal-approximation",
+  "scope": [
+    "thm-single-hidden-layer-universal-approximation",
+    "ex-relu-and-sigmoid-activations-meet-the-universality-conditions"
+  ],
+  "contracts": {
+    "thm-single-hidden-layer-universal-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-activation-class-locally-essentially-bounded-ae-continuous",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Lebesgue-measure convention. A real-valued function $\\sigma:\\mathbb R\\to\\mathbb R$ belongs to the activation class $\\mathcal M$ when it is Lebesgue measurable, is locally essentially bounded, and the closure of its discontinuity set has one-dimensional Lebesgue measure zero. Here locally essentially bounded means that for every compact interval $J\\subset\\mathbb R$ there is a finite $M_J$ such that $|\\sigma(t)|\\le M_J$ for Lebesgue-almost every $t\\in J$. The discontinuity set is $\\{t:\\sigma\\text{ is not continuous at }t\\}$. The function is a polynomial almost everywhere when there is a real algebraic polynomial $p$ such that $\\sigma=p$ outside a Lebesgue-null set.\n\nThe subclass $\\mathcal M_{\\mathrm{pt}}$ consists of those $\\sigma\\in\\mathcal M$ that are also pointwise locally bounded: $\\sup_{t\\in J}|\\sigma(t)|<\\infty$ for every compact interval $J$. This extra condition distinguishes pointwise uniform approximation from approximation in the essential-supremum norm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-single-hidden-layer-network",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ and let $\\sigma:\\mathbb R\\to\\mathbb R$ be an activation function. For a finite width $m\\in\\mathbb N_0$, output weights $a_1,\\ldots,a_m\\in\\mathbb R$, input weights $w_1,\\ldots,w_m\\in\\mathbb R^d$, hidden biases $b_1,\\ldots,b_m\\in\\mathbb R$, and output bias $c\\in\\mathbb R$, the scalar single-hidden-layer realization is\n\n$$N(x)=c+\\sum_{j=1}^{m}a_j\\sigma(w_j\\cdot x+b_j),\\qquad x\\in\\mathbb R^d.$$\n\nThe family $\\mathcal N_\\sigma^{(d)}$ consists of all such functions as $m$ and the real parameters vary; $m=0$ is allowed and gives constant functions. This is the scalar-output, one-hidden-layer specialization of a layered multilayer perceptron with linear output.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-rough-nonpolynomial-activation-universal-on-compact-sets",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, let $K\\subseteq\\mathbb R^d$ be compact, and let $\\sigma\\in\\mathcal M_{\\mathrm{pt}}$ not agree almost everywhere with any polynomial. Then the finite scalar single-hidden-layer networks with activation $\\sigma$ are uniformly dense in $C(K,\\mathbb R)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-continuous-functions-dense-in-lp-for-compactly-supported-finite-borel-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a finite regular Borel measure on $\\mathbb R^d$ concentrated on a compact set $K\\subseteq\\mathbb R^d$, and let $1\\le p<\\infty$. Form the real $L^p(\\mu)$ space using the Borel $\\sigma$-algebra. Then restrictions to $K$ of real-valued compactly supported continuous functions on $\\mathbb R^d$ are dense in $L^p(\\mu;\\mathbb R)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-linear-ridge-pullback-of-null-sets-is-null",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $w\\in\\mathbb R^d\\setminus\\{0\\}$, $b\\in\\mathbb R$, and let $E\\subseteq\\mathbb R$ have Lebesgue outer measure zero. Then\n\n$$\\{x\\in\\mathbb R^d:w\\cdot x+b\\in E\\}$$\n\nis Lebesgue measurable and has $d$-dimensional Lebesgue measure zero. Consequently, if two Lebesgue measurable real functions on $\\mathbb R$ agree outside a null set, their compositions with the same nonconstant affine form $x\\mapsto w\\cdot x+b$ agree almost everywhere on $\\mathbb R^d$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nonzero-real-polynomial-zero-set-is-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every integer $d\\ge1$, if\n\n$$P(x_1,\\ldots,x_d)=\\sum_{\\alpha\\in\\mathbb N_0^d}c_\\alpha x_1^{\\alpha_1}\\cdots x_d^{\\alpha_d},$$\n\nis a nonzero real polynomial with finitely many nonzero coefficients, then its zero set $\\{x\\in\\mathbb R^d:P(x)=0\\}$ is Lebesgue measurable and has $d$-dimensional Lebesgue measure zero.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-polynomial-activation-bounded-degree-obstruction",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $d\\ge1$, $q\\in\\mathbb N_0$, and let $\\sigma:\\mathbb R\\to\\mathbb R$ be measurable and equal almost everywhere to a polynomial of degree at most $q$ (including the zero polynomial). For every finite single-hidden-layer network with activation $\\sigma$, its restriction to the segment $K=\\{te_1:0\\le t\\le1\\}\\subset\\mathbb R^d$ cannot approximate the target $f(te_1)=t^{q+1}$ uniformly with error less than\n\n$$\\varepsilon_q=\\frac{(q+1)!}{2^{q+2}(q+1)^{q+1}}>0.$$\n\nConsequently these networks are not uniformly dense in $C(K,\\mathbb R)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-calligraphic-l-p-on-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $p$ be a real number with\n$0<p<\\infty$. Write $\\mathcal M(X,\\mu)$ for the measurable functions\n$f:X\\to\\mathbb R$. For $f\\in\\mathcal M(X,\\mu)$ define the extended-valued\n$p$-functional\n\n$$\\|f\\|_p:=\\begin{cases}\\left(\\int |f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int |f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int |f|^p\\,d\\mu=+\\infty.\\end{cases}$$\n\nThe finite power uses [[def-real-power]], while the second clause avoids\napplying real powers to the extended value $+\\infty$. The integral is the\nnonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].\n\nThe class\n\n$$\\mathcal L^p(\\mu):=\\{f\\in\\mathcal M(X,\\mu): \\|f\\|_p<\\infty\\}$$\n\nis the measurable-function space used on this page before passing to\nalmost-everywhere equivalence classes.\n\nFor $1\\le p<\\infty$, the pointwise operations make $\\mathcal L^p(\\mu)$ a real\nvector space by\n[[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]].",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\sigma\\in\\mathcal M_{\\mathrm{pt}}$ is nonpolynomial almost everywhere, [F3] proves pointwise uniform density on every compact $K$. If $\\sigma$ is polynomial almost everywhere, [F7] gives a specific compact segment on which density fails.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Now let $\\sigma\\in\\mathcal M$ and put $C=\\overline{D_\\sigma}$, its closed null discontinuity set. Definition [F1] supplies the local essential bound and null-closure hypotheses. Define $\\widetilde\\sigma=\\sigma$ off $C$ and $\\widetilde\\sigma=0$ on $C$. This is measurable and equals $\\sigma$ almost everywhere. For a compact interval $J$, choose a larger compact interval $J'$ containing $J$ in its interior and an essential bound $M_{J'}$ for $\\sigma$ there. At any $t\\in J\\setminus C$, continuity of $\\sigma$ implies $|\\sigma(t)|\\le M_{J'}$: a strict violation would, by continuity, give an interval of positive measure inside $J'$ on which $|\\sigma|>M_{J'}$. Thus $\\widetilde\\sigma$ is pointwise locally bounded; outside $C$ it is continuous, so the closure of its discontinuities is contained in $C$. It belongs to $\\mathcal M_{\\mathrm{pt}}$; if $\\sigma$ is nonpolynomial almost everywhere, so is $\\widetilde\\sigma$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the converse, suppose $\\sigma=p_0$ almost everywhere for a polynomial $p_0$ of degree $q$. By [F5] and [F8], every nonconstant unit equals $p_0(w_j\\cdot x+b_j)$ for $\\mu$-almost every $x$; constant-input units can be absorbed into the output bias. Hence every network represents, in $L^p(\\mu)$, a polynomial of total degree at most $q$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F8",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any finite $\\widetilde\\sigma$-network, a unit with $w_j\\ne0$ differs from the corresponding $\\sigma$-unit only on the null pullback $\\{x:w_j\\cdot x+b_j\\in C\\}$, null by [F5]. Replace the output bias by $c+\\sum_{w_j=0}a_j(\\widetilde\\sigma(b_j)-\\sigma(b_j))$ to absorb the constant-input units. The resulting $\\sigma$-network equals the $\\widetilde\\sigma$-network almost everywhere in $\\mathbb R^d$, and hence defines the same Borel $L^p(\\mu)$ class under the representative convention when $\\mu\\ll\\lambda_d$. For nonpolynomial-almost-everywhere $\\sigma$, applying [F3] to $\\widetilde\\sigma$ and transferring these approximants proves essential-supremum density for $\\mathcal M$ on every compact $K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "F5",
+            "F8",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Assume $\\mu(K)>0$ and let $P_q$ be the vector space of real polynomials in $d$ variables of total degree at most $q$. In a monomial basis its coefficient space is finite dimensional. The map $P\\mapsto\\|P\\|_{L^p(\\mu)}$ is continuous in the coefficients because $K$ is compact and $\\mu$ is finite. It is strictly positive on every nonzero coefficient vector: by [F6] its zero set is Lebesgue null, hence $\\mu$-null by [F8], while $\\mu(K)>0$. The coefficient unit sphere is closed and bounded, hence compact by [F9]; the norm map has a positive minimum $a$ there, so $\\|P\\|_{L^p(\\mu)}\\ge a|\\operatorname{coeff}(P)|$. Any $L^p$-Cauchy sequence in $P_q$ has Cauchy coefficients and converges to a polynomial in $P_q$, so $P_q$ is closed in $L^p(\\mu)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F6",
+            "F8",
+            "F9",
+            "F10",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "To justify the Borel convention, $C$ is closed, $\\widetilde\\sigma=0$ on $C$, and $\\widetilde\\sigma$ is continuous on the open complement of $C$, so $\\widetilde\\sigma$ is Borel measurable. For any raw $\\sigma$-network $N$, replace only its nonconstant units by $\\widetilde\\sigma$-units and keep each constant-input value $a_j\\sigma(b_j)$ in the output bias. The resulting Borel function $N^*$ is bounded on $K$ by pointwise local boundedness of $\\widetilde\\sigma$ and compactness of each affine image. It equals $N$ outside the finite union of the closed Lebesgue-null sets $\\{x:w_j\\cdot x+b_j\\in C\\}$ with $w_j\\ne0$, by [F5]. Hence $N^*$ lies in $L^p(\\mu)$. Any two Borel representatives of $N$ agreeing with it Lebesgue-almost everywhere differ on a Borel Lebesgue-null set, which is $\\mu$-null by [F8], so they define the same class. This also justifies the polynomial representatives in step 1.3 and the transfers in step 2.1 without assuming raw networks are Borel measurable.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "F2",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The polynomial $r(x)=x_1^{q+1}$ is not in $P_q$ modulo $\\mu$-almost-everywhere equality: for every $P\\in P_q$, $r-P$ is a nonzero polynomial, so [F6]–[F8] imply $\\mu(\\{x\\in K:r(x)=P(x)\\})=0<\\mu(K)$. Thus the closed subspace $P_q$ is proper and cannot be dense. Step 1.3 places the whole network family inside it, proving failure of $L^p$ density for polynomial-almost-everywhere activations.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.3",
+            "step 2.2",
+            "F6",
+            "F8",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Suppose $\\mu(K)>0$. By [F10], $\\mu$ is a measure, and the real Borel $L^p$ convention is fixed in the Statement. To prove the positive $L^p$ sufficiency, choose any real class $[f]\\in L^p(\\mu;\\mathbb R)$ and $\\varepsilon>0$. By [F4], choose $u\\in C_c(\\mathbb R^d,\\mathbb R)$ with $\\|f-u\\|_{L^p(\\mu)}<\\varepsilon/2$. Apply [F3] to $\\widetilde\\sigma$ on $K$ to choose a network $N_{\\widetilde\\sigma}$ with $\\sup_{x\\in K}|N_{\\widetilde\\sigma}(x)-u(x)|<\\varepsilon/(2\\mu(K)^{1/p})$. By step 2.1 replace it by a $\\sigma$-network equal $\\mu$-almost everywhere. Using the Borel representative supplied by steps 2.1 and 3.1, $\\|N-u\\|_{L^p(\\mu)}=\\|N_{\\widetilde\\sigma}-u\\|_{L^p(\\mu)}\\le\\mu(K)^{1/p}\\sup_K|N_{\\widetilde\\sigma}-u|$. The triangle inequality yields $\\|N-f\\|_{L^p(\\mu)}<\\varepsilon$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F4",
+            "F8",
+            "F10",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $\\mu=0$, every measurable real function represents the zero class in $L^p(\\mu;\\mathbb R)$, and the network family contains zero by width zero and output bias zero. Thus it is dense regardless of $\\sigma$. Together with steps 4.1 and 3.2, this proves the stated $L^p$ equivalence and its zero-measure boundary.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "step 3.2",
+            "F2",
+            "F8",
+            "F10",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Finally take $\\mu$ to be Lebesgue measure restricted to $[0,1]^d$. If a polynomial-almost-everywhere activation gave essential-supremum approximation to every continuous target there, the estimate $\\|N-f\\|_{L^p(\\mu)}\\le\\|N-f\\|_{L^\\infty(\\mu)}$ would contradict step 3.2 for $f(x)=x_1^{q+1}$. This proves the essential-supremum obstruction on the cube and completes both compact-set equivalences.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.2",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty K gives a vacuous pointwise approximation clause and a zero Lebesgue essential-supremum seminorm; zero mass is proved in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 proves Lp(0)={0}; step 1.1 and its polynomial supplier include q=0. Constant-input units are preserved in steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "d=1 is included throughout, and the affine-null supplier treats it explicitly; singletons are null for Lebesgue measure so the essential-sup clause is vacuous there. Output bias realizes all singleton values. (Statement; step 1.1; A1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 constructs bounded Borel representatives without changing raw pointwise networks; positivity is assumed in steps 2.2 and 3.2, with zero mass isolated in step 5.1. The Remarks give delta0 as the positive atomic boundary outside the AC hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 bounds sigma off C using a larger interval Jprime with J inside its interior, including endpoints and singleton intervals. The pointwise obstruction in step 1.1 uses the complete closed-segment supplier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicit; it is inherited by the Lebesgue/distribution suppliers. All network transfers involve finitely many units; no new full AC or DC premise is used. (Statement; step 1.1; A1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves Mpt pointwise sufficiency; step 2.1 proves M essential-sup sufficiency; step 4.1 proves nonpolynomial-a.e. Lp sufficiency for positive compact-supported finite regular Borel mu<<lambda."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3, 2.2 and 3.2 put polynomial-a.e. activations in a proper closed polynomial subspace for positive mu<<lambda; step 6.1 yields essential-sup failure on the cube. Step 1.1 supplies pointwise failure on a segment. Step 5.1 isolates zero mu."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ],
+          "reason": "Countable Choice is used only through the declared Lebesgue, convolution, and regular-distribution prerequisites; no full AC or DC is used."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-delegated-universality-interface-repair",
+        "notes": "Second/final bounded repair after root initial review; independently checked pointwise spike and zero-measure witnesses, full local universality proof chain and authoritative complete Leshno proof. These focused repairs confer no native certification or independent gate coverage."
+      }
+    },
+    "ex-relu-and-sigmoid-activations-meet-the-universality-conditions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-activation-class-locally-essentially-bounded-ae-continuous",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the Lebesgue-measure convention. A real-valued function $\\sigma:\\mathbb R\\to\\mathbb R$ belongs to the activation class $\\mathcal M$ when it is Lebesgue measurable, is locally essentially bounded, and the closure of its discontinuity set has one-dimensional Lebesgue measure zero. Here locally essentially bounded means that for every compact interval $J\\subset\\mathbb R$ there is a finite $M_J$ such that $|\\sigma(t)|\\le M_J$ for Lebesgue-almost every $t\\in J$. The discontinuity set is $\\{t:\\sigma\\text{ is not continuous at }t\\}$. The function is a polynomial almost everywhere when there is a real algebraic polynomial $p$ such that $\\sigma=p$ outside a Lebesgue-null set.\n\nThe subclass $\\mathcal M_{\\mathrm{pt}}$ consists of those $\\sigma\\in\\mathcal M$ that are also pointwise locally bounded: $\\sup_{t\\in J}|\\sigma(t)|<\\infty$ for every compact interval $J$. This extra condition distinguishes pointwise uniform approximation from approximation in the essential-supremum norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-single-hidden-layer-universal-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix $d\\ge1$ and use the finite scalar single-hidden-layer family\n\n$$\\mathcal N_\\sigma^{(d)}=\\left\\{x\\mapsto c+\\sum_{j=1}^m a_j\\sigma(w_j\\cdot x+b_j):m\\in\\mathbb N_0,\\ c,a_j,b_j\\in\\mathbb R,\\ w_j\\in\\mathbb R^d\\right\\}.$$\n\nFor every compact $K\\subseteq\\mathbb R^d$, if $\\sigma\\in\\mathcal M_{\\mathrm{pt}}$ is not equal almost everywhere to a polynomial, then $\\mathcal N_\\sigma^{(d)}$ is uniformly dense in $C(K,\\mathbb R)$. More generally, if $\\sigma\\in\\mathcal M$ is not polynomial almost everywhere, this family is dense for the essential-supremum seminorm on each such $K$ with respect to $d$-dimensional Lebesgue measure. If instead $\\sigma$ agrees almost everywhere with a polynomial of degree at most $q$ for some $q\\in\\mathbb N_0$ (including the zero polynomial), the family is not uniformly dense on the segment $\\{te_1:0\\le t\\le1\\}$, and is not dense in the Lebesgue essential-supremum seminorm on $[0,1]^d$. Thus pointwise compact-uniform density for $\\mathcal M_{\\mathrm{pt}}$, and essential-supremum density for $\\mathcal M$, each hold on every compact set if and only if $\\sigma$ is not polynomial almost everywhere.\n\nLet $1<p<\\infty$, and let $\\mu$ be a finite regular Borel measure concentrated on a compact $K\\subseteq\\mathbb R^d$ and absolutely continuous with respect to Lebesgue measure. Form the real $L^p(\\mu)$ space using the Borel $\\sigma$-algebra. For $\\sigma\\in\\mathcal M$, a network is interpreted in this space through any Borel representative agreeing with it outside a Lebesgue-null set; these representatives exist, are integrable on $K$, and give a unique $L^p(\\mu)$ class. This convention does not alter the actual pointwise network used in the uniform clause. For $\\sigma\\in\\mathcal M$ and $\\mu(\\mathbb R^d)>0$, $\\mathcal N_\\sigma^{(d)}$ is dense in $L^p(\\mu;\\mathbb R)$ if and only if $\\sigma$ is not polynomial almost everywhere. If $\\mu=0$, then $L^p(\\mu;\\mathbb R)=\\{0\\}$ and the network family is dense for every $\\sigma\\in\\mathcal M$, including polynomial activations.\n\nThese are existence statements without a quantitative width bound. They imply neither trainability nor statistical generalization, and compact-uniform approximation does not mean uniform approximation on all of $\\mathbb R^d$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "ReLU and logistic sigmoid are continuous, hence their discontinuity sets are empty; ReLU is bounded on each compact interval and sigmoid is globally bounded between zero and one. Thus both lie in the pointwise locally bounded activation class.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Neither is a polynomial almost everywhere. If a continuous function equals a polynomial almost everywhere on $\\mathbb R$, their difference is continuous and must vanish everywhere, since any nonzero value would persist on an open interval of positive measure. ReLU vanishes on $(-\\infty,0)$ but is positive on $(0,\\infty)$; the sigmoid is bounded and nonconstant. These properties exclude a polynomial identity for each.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the pointwise $\\mathcal M_{\\mathrm{pt}}$ branch of [F2] separately to each activation proves the stated compact-uniform approximation property. Both activations and their networks are continuous, so they are already Borel representatives when the theorem's $L^p$ clause is used. The theorem is an existence statement only and supplies no uniform width bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-domain or empty-family boundary changes this item beyond the explicitly stated domain. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The sigmoid remains positive and ReLU vanishes on a half-line; neither degenerates to the zero polynomial (step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem applies for every d>=1, including d=1 (Statement, step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No other degenerate configuration changes the stated hypotheses or conclusion. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No additional endpoint or boundary-value case occurs beyond those explicitly stated. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no unlicensed arbitrary selection; any Countable Choice premise is stated explicitly. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional requiring a separate forward implication. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional requiring a separate reverse implication. This item concerns ReLU and logistic sigmoid as pointwise locally bounded nonpolynomial activations."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "Countable Choice is declared by this item and its actual uses are recorded."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-delegated-universality-interface-repair",
+        "notes": "Same owner checked continuous Mpt membership and nonpolynomial-a.e. property of both activations against the current theorem; explicitly selects its pointwise branch. No Statement change or next-hop item consumer."
+      }
+    }
+  }
+}

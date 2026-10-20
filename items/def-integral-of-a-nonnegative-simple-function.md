@@ -10,6 +10,7 @@ provenance:
 deps: [def-nonnegative-simple-measurable-function, def-measure]
 justified_by: [lem-well-definedness-of-the-simple-integral]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-integral-of-a-nonnegative-simple-function.json
   audited: 2026-08-27
   precheck: n/a
   judge:
@@ -27,13 +28,20 @@ sources:
 
 Let $s=\sum_{j=1}^m c_j\chi_{E_j}$ be a simple representation of a
 nonnegative simple measurable function
-([[def-nonnegative-simple-measurable-function]]) on a measure space
+(Nonnegative simple measurable functions) on a measure space
 $(X,\mathcal A,\mu)$, so the $E_j\in\mathcal A$ are pairwise disjoint and
 $c_j\ge0$. Its
 **simple integral** is
 $$\int s\,d\mu:=\sum_{j=1}^m c_j\mu(E_j),$$
-where $\mu$ is the given measure ([[def-measure]]) and the convention
+where $\mu$ is the given measure (Measures on sigma-algebras) and the convention
 $0\cdot(+\infty)=0$ is fixed once and for all.
 
 The next lemma proves that this value is independent of the chosen simple
 representation.
+
+## Definition references
+
+[[def-nonnegative-simple-measurable-function]]
+
+[[def-measure]]
+

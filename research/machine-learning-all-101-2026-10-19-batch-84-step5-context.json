@@ -1,0 +1,299 @@
+{
+  "group": "ab",
+  "batches": [
+    "84"
+  ],
+  "pages_read": [
+    "policy-gradients-reinforce-and-actor-critic",
+    "policy-gradients-reinforce-and-actor-critic-examples"
+  ],
+  "items_read": [
+    "def-differentiable-stochastic-policy",
+    "lem-policy-score-has-zero-conditional-mean",
+    "thm-policy-gradient-theorem",
+    "alg-one-step-actor-critic",
+    "alg-reinforce",
+    "lem-action-independent-baseline-does-not-bias-policy-gradient",
+    "alg-reinforce-with-baseline",
+    "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "ex-reinforce-one-step-bernoulli-mdp",
+    "ex-action-independent-baseline-eliminates-variance",
+    "cex-policy-gradient-without-start-time-discount"
+  ],
+  "conventions": [
+    {
+      "convention": "Policy parameters lie in an open Euclidean domain; each state has a fixed nonempty supported action set, positive throughout that domain, and the score is the gradient of the logarithm only on supported actions.",
+      "fixed_by": "def-differentiable-stochastic-policy",
+      "matters_for": [
+        "lem-policy-score-has-zero-conditional-mean",
+        "thm-policy-gradient-theorem",
+        "alg-one-step-actor-critic",
+        "alg-reinforce",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient",
+        "alg-reinforce-with-baseline"
+      ]
+    },
+    {
+      "convention": "Episodes stop at the first terminal state; 0 ≤ γ < 1; G_t discounts relative to time t, whereas the start-state gradient estimator includes the additional factor γ^t.",
+      "fixed_by": "thm-policy-gradient-theorem",
+      "matters_for": [
+        "alg-reinforce",
+        "alg-reinforce-with-baseline",
+        "alg-one-step-actor-critic",
+        "cex-policy-gradient-without-start-time-discount"
+      ]
+    },
+    {
+      "convention": "The score is zero after termination, and conditioning is on the entire history through the current state before sampling its action.",
+      "fixed_by": "lem-policy-score-has-zero-conditional-mean",
+      "matters_for": [
+        "thm-policy-gradient-theorem",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient"
+      ]
+    },
+    {
+      "convention": "The episodic gradient theorem assumes AC, almost-sure termination in a parameter neighborhood, summably dominated return-weighted likelihood remainders, absolute convergence of the derivative sum, and integrability of the discounted score-reward double sum.",
+      "fixed_by": "thm-policy-gradient-theorem",
+      "matters_for": [
+        "alg-reinforce",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient",
+        "alg-reinforce-with-baseline"
+      ]
+    },
+    {
+      "convention": "REINFORCE freezes the generating parameter throughout an episode and evaluates every score at that same parameter before making one accumulated update.",
+      "fixed_by": "alg-reinforce",
+      "matters_for": [
+        "alg-reinforce-with-baseline",
+        "ex-reinforce-one-step-bernoulli-mdp",
+        "ex-action-independent-baseline-eliminates-variance"
+      ]
+    },
+    {
+      "convention": "The baseline is a fixed finite-valued state function independent of episode actions; preserving the mean does not assert variance reduction for every baseline.",
+      "fixed_by": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "matters_for": [
+        "alg-reinforce-with-baseline",
+        "ex-action-independent-baseline-eliminates-variance"
+      ]
+    },
+    {
+      "convention": "Actor and critic updates both use pre-update parameters; terminal continuation is zero, I starts at one and is multiplied by γ, and admissibility requires domain preservation and almost-sure termination of the adaptive procedure.",
+      "fixed_by": "alg-one-step-actor-critic",
+      "matters_for": [
+        "ex-actor-critic-bootstrap-can-bias-policy-update"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-differentiable-stochastic-policy",
+      "statement": "Each policy mass is totally differentiable on an open parameter domain; each state has a fixed nonempty support with positive masses throughout the domain, and the score on that support is ∇θ log πθ(a|s).",
+      "used_by": [
+        "lem-policy-score-has-zero-conditional-mean",
+        "thm-policy-gradient-theorem",
+        "alg-one-step-actor-critic",
+        "alg-reinforce",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient",
+        "alg-reinforce-with-baseline",
+        "ex-actor-critic-bootstrap-can-bias-policy-update",
+        "ex-reinforce-one-step-bernoulli-mdp",
+        "ex-action-independent-baseline-eliminates-variance",
+        "cex-policy-gradient-without-start-time-discount"
+      ]
+    },
+    {
+      "id": "thm-policy-gradient-theorem",
+      "statement": "Under the stated finite-MDP, AC, fixed-support, neighborhood termination, dominated trajectory-differentiation and double-sum integrability hypotheses, J is totally differentiable at θ₀ and ∇J(θ₀) = Eθ₀[Σ_{t<T} γ^t G_t ∇θ log πθ₀(A_t|S_t)].",
+      "used_by": [
+        "alg-reinforce",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient",
+        "alg-reinforce-with-baseline"
+      ]
+    },
+    {
+      "id": "lem-policy-score-has-zero-conditional-mean",
+      "statement": "Under the stated AC, finite-model, fixed-support policy and terminating-episode hypotheses, Eθ[ψ_t|H_t] = 0 almost surely for every t ≥ 0, coordinate by coordinate, with ψ_t = 0 after termination.",
+      "used_by": [
+        "thm-policy-gradient-theorem",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient"
+      ]
+    },
+    {
+      "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "statement": "Under the episodic policy-gradient theorem's hypotheses at θ₀, any fixed finite-valued state baseline chosen independently of episode actions satisfies Eθ₀[Σ_{t<T} γ^t(G_t-b(S_t))∇θ log πθ₀(A_t|S_t)] = ∇J(θ₀).",
+      "used_by": [
+        "alg-reinforce-with-baseline",
+        "ex-action-independent-baseline-eliminates-variance"
+      ]
+    },
+    {
+      "id": "alg-one-step-actor-critic",
+      "statement": "For the specified admissible adaptive episode, compute δ = R + γC − V̂_w(S), using zero terminal continuation, and update θ′ = θ + αIδ∇θ log πθ(A|S) and w′ = w + βδ∇w V̂_w(S) from the same pre-update parameters.",
+      "used_by": [
+        "ex-actor-critic-bootstrap-can-bias-policy-update"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Normwise total differentiability, derivative maps, and direct constant/identity derivative calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "The Euclidean coordinate-gradient convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of positive policy masses composed with logarithm.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The reciprocal derivative of logarithm and the Bernoulli score calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice premise inherited by general trajectory-law constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable",
+      "used_for": "Finite alphabets and countability terminology in the terminal-trajectory series.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-number-coding-of-finite-sequences",
+      "used_for": "Injectively coding finite trajectory records by natural numbers.",
+      "opened": true
+    },
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite action sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-total-derivatives",
+      "used_for": "Finite sum differentiation in the score normalization identity.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Extending the binary derivative sum rule to finitely many actions.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Interpreting integrable trajectory-score expectations as Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "The uniform baseline-score bound using Σ_{t≥0}γ^t = 1/(1−γ), including γ = 0.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "The bounded-bilinear product rule for finite trajectory likelihoods.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "The AC-dependent successive-draw law, including history-dependent kernels in actor–critic.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Verifying the zero conditional score mean by integrals over finite history atoms.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Removing measurable past rewards and state baselines from conditional score expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Differentiating the dominated trajectory series and passing from finite time sums to full expectations.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-policy-gradient-theorem",
+      "concern": "Proof 1.2 writes “Dp_{θ₀}(τ)=p_{θ₀}(τ)Σ_{t=0}^{m−1}ψ_{θ₀}(s_t,a_t)”. The left side is a linear functional on R^d, while the right side is a vector in R^d. The statement correctly distinguishes derivative maps from scores, and Proof 2.1 supplies the intended inner-product application to h. The displayed equality needs that application or a gradient on the left.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The Definition contains “([[def-euclidean-linear-map]])” within its opening hypothesis paragraph and later “[[def-norm-and-normed-space]]” within the zero-dimensional clause. These hyperlinks interrupt the complete Definition instead of appearing in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-jacobian-matrix-and-gradient",
+      "finding": "The Definition ends with “with coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].” Both hyperlinks remain inside the Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition's quoted formulation includes “Every family of nonempty sets has a choice function > ([[def-choice-function]]).” The choice-function hyperlink interrupts the formulation; no immediately following Definition references section separates it from the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable",
+      "finding": "The Definition includes “([[def-natural-numbers]])”, “[[def-nat-order]]”, “[[lem-nat-order-is-membership]]”, and “([[def-equinumerous]])” before its finite/countably-infinite clauses. These are inline hyperlinks inside the complete Definition rather than references after it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-number-coding-of-finite-sequences",
+      "finding": "The Definition includes “By [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of binary numerals inside W(a) is effectively and uniquely decodable”. The supplier link remains within the Definition instead of an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-sum-over-a-finite-index-set",
+      "finding": "The Definition begins “Let S be a finite set, n := |S| ([[def-finite-cardinality]])” and contains additional inline supplier links throughout its enumeration-independence and three-clause discussion. The complete Definition is interrupted by hyperlinks rather than followed by a Definition references section containing them.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition's integrable-variable clause says “integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. This hyperlink is embedded in the Definition instead of an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-geometric-series",
+      "finding": "The Statement contains “integer power ([[def-integer-power]])” and “converges ([[def-series]])”. Both hyperlinks interrupt the complete Statement instead of appearing afterward in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "The Definition includes “Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]”. These links remain in the Definition; the next heading is Source notes, not an immediately following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "policy-gradients-reinforce-and-actor-critic",
+      "to": "tabular-prediction-and-control",
+      "faithful": true,
+      "note": "Read the tabular page and its action-state-reward path-law and episodic-return suppliers. The batch preserves finite joint reward-transition masses, AC for general path laws, first-terminal stopping, relative-time returns and zero terminal continuation. The fixed-start path law supports the uses made here."
+    },
+    {
+      "from": "constrained-mdps-and-policy-safety",
+      "to": "policy-gradients-reinforce-and-actor-critic",
+      "faithful": true,
+      "note": "The constrained page explicitly declares this prerequisite. Its sample-based constrained-policy algorithm cites the differentiable-policy definition for fixed common support and adds local twice-continuous differentiability for its Hessian. It does not claim an episodic-gradient or unbiased-estimator guarantee from that definition."
+    },
+    {
+      "from": "verifiable-generation-and-test-time-sampling",
+      "to": "policy-gradients-reinforce-and-actor-critic",
+      "faithful": true,
+      "note": "Read the generation page, protocol definition, finite-response score lemma and group-relative update. Their actual supplier use preserves finite normalized masses, fixed positive support, total differentiability and logarithmic scores. The finite-response lemma proves its identities directly by finite sums and explicitly avoids importing trajectory differentiation or choice assumptions. The page omits an explicit requires field, but item dependency edges identify the prerequisite."
+    }
+  ]
+}

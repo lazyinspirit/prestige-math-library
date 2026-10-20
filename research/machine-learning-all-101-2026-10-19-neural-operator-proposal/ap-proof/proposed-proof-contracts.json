@@ -1,0 +1,528 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "37",
+  "pair": "neural-operators-and-physics-informed-learning",
+  "scope": [
+    "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+    "thm-neural-operator-input-output-spaces-have-ap"
+  ],
+  "contracts": {
+    "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "For the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.",
+          "uses": [
+            "2.2",
+            "2.4",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-sobolev-norm-is-well-defined-and-definite",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the weak-derivative uniqueness interface. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, $k\\in\\mathbb N_0$, and\n$1\\le p\\le\\infty$. For either real or complex scalars, the displayed\n$W^{k,p}(\\Omega)$ formula from\n[[def-sobolev-space-wkp-and-its-norm]] is independent of the representatives\nof its Sobolev and derivative classes and defines a norm: it is finite,\nabsolutely homogeneous, subadditive, and zero exactly on the zero $L^p$ class.\nThis holds at $p=1$ and $p=\\infty$, and when $k=0$.",
+          "uses": [
+            "2.2",
+            "2.4",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "source_section": "Statement",
+          "quote": "Under the page measure convention, if a finite family of open sets $U_j\\subset\\mathbb R^n$ covers compact K, there are smooth nonnegative $\\chi_j$ with compact support in $U_j$ such that $\\sum_j\\chi_j=1$ on a neighborhood of K. These are ambient smooth functions, also when K is only a $C^1$ hypersurface.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $u\\in W^{k,p}(\\Omega;\\mathbb K)$ with $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\rho\\in C_c^\\infty(\\mathbb R^n)$ be nonnegative with\n$\\int_{\\mathbb R^n}\\rho=1$ and $\\operatorname{supp}\\rho\\subseteq\\overline B_1(0)$.\nFor $\\varepsilon>0$ put $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$\nand\n$$\\Omega_\\varepsilon=\\{x\\in\\Omega:\\operatorname{dist}(x,\\mathbb R^n\\setminus\\Omega)>\\varepsilon\\},\\qquad\\Omega_\\varepsilon=\\mathbb R^n\\ \\text{when }\\Omega=\\mathbb R^n .$$\nThen $\\rho_\\varepsilon*u$ is defined and smooth on $\\Omega_\\varepsilon$, and\nfor every multi-index $\\alpha$ with $|\\alpha|\\le k$,\n$$D^\\alpha(\\rho_\\varepsilon*u)=\\rho_\\varepsilon*(D^\\alpha u)\\qquad\\text{on }\\Omega_\\varepsilon,$$\nas pointwise smooth functions for the constructed representatives and as\nalmost-everywhere classes. Here $D^\\alpha u$ is extended by zero off $\\Omega$\nin the convolution.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-translation-and-approximate-identity-interfaces",
+          "source_section": "Statement",
+          "quote": "Assume countable choice, let $n\\ge1$, and use Lebesgue measure on $\\mathbb R^n$. Translation $\\tau_hf(x)=f(x-h)$ is an isometry of complex $L^p$ for $1\\le p\\le\\infty$ and depends norm-continuously on $h$ for $p<\\infty$.\n\nFor complex $K\\in L^1$ and $f\\in L^p$, the convolution\n$$(K*f)(x)=\\int K(y)f(x-y)\\,dy$$\nexists absolutely a.e., defines a measurable class independent of representatives, and satisfies $\\|K*f\\|_p\\le\\|K\\|_1\\|f\\|_p$.\n\nIf $K_\\varepsilon\\in L^1(\\mathbb R^n;\\mathbb C)$ satisfy\n$$\\int K_\\varepsilon=1,\\qquad M:=\\sup_{\\varepsilon>0}\\|K_\\varepsilon\\|_1<\\infty,\\qquad \\int_{|y|\\ge\\delta}|K_\\varepsilon(y)|\\,dy\\longrightarrow0\\quad(\\delta>0),$$\nthen $K_\\varepsilon*f\\to f$ in $L^p$ for $p<\\infty$, and uniformly for $f\\in C_0(\\mathbb R^n;\\mathbb C)$. For fixed $K\\in L^1$, $K*f\\in C_0$ when $f\\in C_0$. These assertions allow complex and sign-changing kernels. In particular $K_\\varepsilon(x)=\\varepsilon^{-n}K(x/\\varepsilon)$ is such an approximate identity whenever $K\\in L^1$ and $\\int K=1$.\n\nIf $\\rho\\in C_c^\\infty(\\mathbb R^n;\\mathbb R)$ has mass one, $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$, and $f$ is complex locally integrable, then $\\rho_\\varepsilon*f$ is smooth and\n$$\\partial^\\alpha(\\rho_\\varepsilon*f)=(\\partial^\\alpha\\rho_\\varepsilon)*f.$$\nA compactly supported input gives a compactly supported output. No general $L^\\infty$ translation-continuity or approximate-identity convergence is asserted.",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-minkowski-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mu)$ and $(Y,\\nu)$ be sigma-finite measure spaces, let\n$1 \\le p < \\infty$, and let $F : X \\times Y \\to \\mathbb{C}$ be measurable with\n\n$$ \\int_Y \\|F(\\cdot,y)\\|_{L^p(X)}\\,d\\nu(y) < \\infty. $$\n\nThen the function\n$$ H(x) := \\int_Y |F(x,y)|\\,d\\nu(y) $$\nbelongs to $L^p(X)$ and\n\n$$ \\|H\\|_{L^p(X)} \\le \\int_Y \\|F(\\cdot,y)\\|_{L^p(X)}\\,d\\nu(y). $$",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, let $k\\in\\mathbb N_0$, and let $u:\\Omega\\to\\mathbb C$ have real\nand imaginary parts of class $C^k$. For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$. By the uniqueness lemma, it represents the unique\nlocally integrable weak-derivative class. For $\\alpha=0$, this says\n$D^0u=u$.",
+          "uses": [
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\eta\\in C^\\infty(\\Omega;\\mathbb K)$ and\n$u\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$. For\n$\\alpha\\in\\mathbb N_0^n$, suppose that for every $\\gamma\\le\\alpha$ there is\n$v_\\gamma\\in L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ with\n$D^\\gamma u=v_\\gamma$ weakly. Then $\\eta u$ has a weak $\\alpha$-derivative,\nand its almost-everywhere class is\n$$D^\\alpha(\\eta u)=\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}(D^\\beta\\eta)D^{\\alpha-\\beta}u\\quad\\text{in }L^1_{\\mathrm{loc}}(\\Omega;\\mathbb K).$$\nwhere $D^\\beta\\eta$ is the classical derivative and products are pointwise\nproducts of representatives. The resulting class does not depend on the\nrepresentatives.\n\nFor $k\\in\\mathbb N_0$ and $1\\le p\\le\\infty$, if\n$u\\in W^{k,p}(\\Omega;\\mathbb K)$ and $D^\\beta\\eta\\in L^\\infty(\\Omega)$ for\nevery $|\\beta|\\le k$, then $\\eta u\\in W^{k,p}(\\Omega;\\mathbb K)$ and the same\nformula holds in $L^p$ for every $|\\alpha|\\le k$. In particular,\n$\\eta\\in C_c^\\infty(\\Omega;\\mathbb K)$ is a sufficient condition on the\nmultiplier for this global conclusion.\n\nFor $\\Omega=\\varnothing$ all classes are zero and the identity holds. The\npairing convention is bilinear, with no complex conjugation.",
+          "uses": [
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-smooth-bump-between-concentric-euclidean-balls",
+          "source_section": "Statement",
+          "quote": "Let $0<r<R$ and $n\\ge 1$. Then there exists a smooth function $\\rho:\\mathbb R^n\\to [0,1]$ such that $\\rho=1$ on $\\overline B_r(0)$ and $\\operatorname{supp}(\\rho)\\subseteq B_R(0)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $D=\\varnothing$, $X$ is the zero space and $F=0$ has all the required properties; if $K=\\varnothing$, $F=0$ suffices as well. Henceforth both sets are nonempty. In particular $0<|D|<\\infty$, because $D$ contains a ball and is bounded. Fix one boundary chart $Q$, with Lipschitz graph function $\\varphi$ of constant $L$, and an ambient neighborhood $U$ of its boundary point with $\\bar U\\subset Q$ compact. In chart coordinates set $v=(L+2)e_d$. For $x\\in\\bar D\\cap\\bar U$, $|z|\\le1$, and sufficiently small $t>0$, uniformly in $x,z$, the point $y=x+tv-tz$ stays in $Q$ because $t(|v|+1)<\\operatorname{dist}(\\bar U,Q^c)$. Moreover $y_d-\\varphi(y')\\ge x_d-\\varphi(x')+t(L+2)-t|z_d|-Lt|z'|\\ge t>0$. Thus $\\overline B(x+tv,t)\\Subset D$. Rotate $v$ back to the original coordinates.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The compact boundary admits finitely many such $U_j$, $1\\le j\\le J$, covering it. The compact remainder $\\bar D\\setminus\\bigcup_{j=1}^JU_j$ lies in $D$; cover it by finitely many balls with closures in $D$, and let $U_0$ be their union, omitting it if the remainder is empty. Then $\\bar U_0\\Subset D$, so $v_0=0$ has the same ball property for sufficiently small $t$. Apply [F2] to this finite open cover of $\\bar D$, obtaining $\\psi_j\\in C_c^\\infty(U_j)$ with $\\sum_j\\psi_j=1$ near $\\bar D$. The minimum of the finitely many positive bounds on $t$ gives $t_0>0$ such that $\\overline B(x+tv_j,t)\\Subset D$ for every $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$ and $0<t<t_0$. Taking the family of all admissible chart neighborhoods before extracting a finite subcover avoids selecting a chart independently at every boundary point.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F9] choose a nonnegative smooth bump compactly supported in $B_1(0)$ and positive on $\\overline B_{1/2}(0)$, and divide it by its positive integral to obtain $\\rho\\in C_c^\\infty(B_1(0))$ with $\\int\\rho=1$. Put $\\rho_t(w)=t^{-d}\\rho(w/t)$. Every $u\\in X$ belongs continuously to $L^1(D)$: use [F8] for Sobolev spaces, and $\\|u\\|_1\\le |D|\\|u\\|_{C^m}$ for $C^m$. For its zero extension $E_0u$ define $H_{j,t}u(x)=(\\rho_t*E_0u)(x+tv_j)$ and $S_tu=\\sum_j\\psi_jH_{j,t}u$. By [F4] these are well-defined linear constructions independent of representatives and $S_tu\\in C_c^\\infty(\\mathbb R^d)$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F8",
+            "F9",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "First take $X=W^{m,p}(D)$. For every $|\\gamma|\\le m$ and $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$, [F3] and step 1.2 give\n$$D^\\gamma H_{j,t}u(x)=\\int\\rho(z)(E_0D^\\gamma u)(x+t(v_j-z))\\,dz.$$\nThe translated center has distance greater than $t$ from $D^c$: the entire closed ball of radius $t$ is a compact subset of $D$. The identity consequently holds on a neighborhood of each indicated $x$. Equivalently the defining weak-derivative identity can be tested against $y\\mapsto\\rho_t(x+tv_j-y)$, whose support is compact in $D$; its two derivative signs cancel. Only interior values are used, with no assertion that derivatives commute with zero extension across $\\partial D$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "claim": "For $f\\in L^p(\\mathbb R^d)$ define $T_{j,t}f(x)=\\int\\rho(z)f(x+t(v_j-z))\\,dz$ and $\\omega_f(r)=\\sup_{|h|\\le r}\\|f(\\cdot+h)-f\\|_p$. Translation invariance and [F5] give $\\|T_{j,t}f\\|_p\\le\\|f\\|_p$ and\n$$\\|T_{j,t}f-f\\|_p\\le\\omega_f((|v_j|+1)t).$$\nBy [F4], $\\omega_f(r)\\to0$ as $r\\downarrow0$. The integral estimates also apply when $p=1$, where [F5] follows directly from Tonelli.",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.4",
+          "claim": "Set $f_\\gamma=E_0D^\\gamma u$. The finite Leibniz rule [F6], step 2.2 and $\\sum_j\\psi_j=1$ near $\\bar D$ give, for $|\\alpha|\\le m$, the a.e. identity on $D$\n$$D^\\alpha(S_tu-u)=\\sum_j\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}(D^\\beta\\psi_j)\\bigl(T_{j,t}f_{\\alpha-\\beta}-D^{\\alpha-\\beta}u\\bigr).$$\nEvery derivative $D^\\beta\\psi_j$ vanishes off $\\operatorname{supp}\\psi_j$, so step 2.2 supplies exactly the identities used in this formula. All these fixed multiplier derivatives are bounded. Step 2.3 and the finite norm sum [F1] therefore imply $\\|S_tu-u\\|_{W^{m,p}}\\to0$. The same Leibniz formula without subtracting $u$, and $\\|T_{j,t}f_\\gamma\\|_p\\le\\|f_\\gamma\\|_p\\le\\|u\\|_{W^{m,p}}$, give $\\sup_{0<t<t_0}\\|S_t\\|_{X\\to X}\\le M_X<\\infty$. For example take the $\\ell^p$ norm over $\\alpha$ of $\\sum_{j,\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}\\|D^\\beta\\psi_j\\|_\\infty$. This argument includes $m=0$ and $p=1$.",
+          "step": "2.4",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.2",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Now take $X=C^m(\\bar D)$. By [F6] each bounded classical derivative is its weak derivative, so $u\\in W^{m,1}(D)$ and step 2.2 applies. Each $D^\\gamma u$ is uniformly continuous on $\\bar D$ by [F7]. For $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$, every sampled $y=x+t(v_j-z)$ lies in $D$ and $|y-x|\\le(|v_j|+1)t$. Positivity and mass one of $\\rho$ thus give\n$$\\sup_{x\\in\\bar D\\cap\\operatorname{supp}\\psi_j}|D^\\gamma H_{j,t}u(x)-D^\\gamma u(x)|\\le\\sup_{\\substack{x,y\\in\\bar D\\\\|x-y|\\le(|v_j|+1)t}}|D^\\gamma u(y)-D^\\gamma u(x)|\\longrightarrow0.$$\nThe formula of step 2.4, first on $D$ and then by continuity on $\\bar D$, gives $\\|S_tu-u\\|_{C^m}\\to0$. Bounding each averaged derivative by $\\|D^\\gamma u\\|_\\infty$ and summing the same fixed multiplier constants gives $\\sup_{0<t<t_0}\\|S_t\\|_{X\\to X}\\le M_X<\\infty$ also in this case.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.2",
+            "step 2.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Fix $0<t<t_0$. Write $k_t(x,y)=\\sum_j\\psi_j(x)\\rho_t(x+tv_j-y)$, so $S_tu(x)=\\int_D k_t(x,y)u(y)\\,dy$. Fix a closed box $Q$ containing $\\bar D$. The finitely many $D_x^\\alpha k_t$, $|\\alpha|\\le m$, are smooth and uniformly continuous on the compact set $\\bar D\\times Q$ by [F7]. For any $\\eta>0$, partition $Q$ into finitely many measurable cells $Q_\\ell$ of small enough diameter, assigning shared and outer faces consistently, and choose $y_\\ell\\in Q_\\ell$. Their diameters can be chosen so that $|D_x^\\alpha k_t(x,y)-D_x^\\alpha k_t(x,y_\\ell)|<\\eta$ for $x\\in\\bar D$, $y\\in Q_\\ell$ and $|\\alpha|\\le m$. The point $y_\\ell$ need not lie in $D$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "Define\n$$F_{t,\\eta}u(x)=\\sum_\\ell k_t(x,y_\\ell)\\int_{D\\cap Q_\\ell}u(y)\\,dy.$$\nEach coefficient is a bounded linear functional by step 2.1, and there are finitely many coefficients. Each range function $k_t(\\cdot,y_\\ell)$ belongs to $C_c^\\infty(\\mathbb R^d)$, so the operator has finite rank with the required smooth range. Comparison with the integral for $S_t$ gives\n$$\\max_{|\\alpha|\\le m}\\sup_{\\bar D}|D^\\alpha(F_{t,\\eta}-S_t)u|\\le\\eta\\|u\\|_{L^1(D)}.$$\nFor $X=C^m(\\bar D)$, this yields $\\|F_{t,\\eta}-S_t\\|_{X\\to X}\\le |D|\\eta$. For $X=W^{m,p}(D)$ let $A_m$ be the finite number of multi-indices of order at most $m$. Taking the derivative $L^p$ norms and then applying [F8] gives $\\|F_{t,\\eta}-S_t\\|_{X\\to X}\\le A_m^{1/p}|D|^{1/p}\\eta |D|^{1-1/p}=A_m^{1/p}|D|\\eta$. This includes $p=1$, and it shows each $F_{t,\\eta}$ is bounded because $S_t$ is bounded.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 2.1",
+            "step 2.4",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "By steps 2.4 and 3.1 the operators $S_t:X\\to X$ converge pointwise to the identity and satisfy $\\|S_t\\|\\le M_X$. Choose $\\delta<\\varepsilon/[4(M_X+1)]$. Compactness gives a finite $\\delta$-net $u_1,\\ldots,u_N$ in $K$. Pointwise convergence permits one $t\\in(0,t_0)$ such that $\\max_i\\|S_tu_i-u_i\\|<\\varepsilon/4$. For any $u\\in K$, choose one net point within $\\delta$; then $\\|S_tu-u\\|\\le(M_X+1)\\delta+\\max_i\\|S_tu_i-u_i\\|<\\varepsilon/2$. Compactness also makes $R=\\sup_{u\\in K}\\|u\\|$ finite: a finite cover by unit balls bounds all these norms by one plus the largest center norm.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.4",
+            "step 3.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.2",
+          "claim": "Choose $\\eta>0$ small enough that the relevant bound in step 4.2 is below $\\varepsilon/[2(R+1)]$. For $F=F_{t,\\eta}$,\n$$\\sup_{u\\in K}\\|Fu-u\\|\\le\\|F-S_t\\|R+\\sup_{u\\in K}\\|S_tu-u\\|<\\varepsilon.$$\nIts range is a finite span of ambient compactly supported smooth functions by step 4.2. Applying this conclusion to the singleton compact set $K=\\{u\\}$ proves smooth-restriction density for every $u\\in X$. All net, partition and representative-point choices here are finite; Countable Choice enters only the analytical interfaces stated above.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.2",
+            "step 5.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Helper step 1.1 treats empty D and empty K by the zero map; the target applies the same quantified helper."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Helper steps 2.4 and 3.1 include m=0; zero functions are fixed by every linear construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The inward graph estimate of helper step 1.1 works for d=1, with no horizontal coordinates; compact singleton K yields density in step 5.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Empty interior remainders and empty integration cells are omitted or contribute zero; finite-rank spans may have dependent or zero generators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Helper steps 2.3–2.4 explicitly use Tonelli/Minkowski at p=1; p=infinity is excluded for Sobolev approximation. All Cm orders m>=0 are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is an explicit hypothesis for the analytical interfaces. Chart subcovers, cell representatives and compact nets require only finite selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "5.2"
+          ],
+          "reason": "Explicit hypothesis; used by the Sobolev/Lebesgue/translation/mollification and, in the target, completeness/calculus interfaces. Geometric and compact-net selections are finite."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "ap-proof-proposal-author",
+        "notes": "Complete local derivations authored for independent parent review. This proposed contract supplies no workflow acceptance, gate pass, or transitive prerequisite audit."
+      }
+    },
+    "thm-neural-operator-input-output-spaces-have-ap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subseteq\\mathbb R^d$ be bounded and Lipschitz, with $d\\ge1$, and let $m\\in\\mathbb N_0$. Let $X$ be either $W^{m,p}(D;\\mathbb R)$ for $1\\le p<\\infty$, including $W^{0,p}(D)=L^p(D)$, or $C^m(\\bar D;\\mathbb R)$. In the latter space derivatives in $D$ extend continuously to $\\bar D$, and the norm is $\\max_{|\\alpha|\\le m}\\sup_{\\bar D}|D^\\alpha u|$. For every norm-compact $K\\subseteq X$ and every $\\varepsilon>0$, there is a bounded finite-rank linear map $F:X\\to X$ such that $\\sup_{u\\in K}\\|Fu-u\\|_X<\\varepsilon$ and whose range is contained in the restrictions to $D$ of functions in $C_c^\\infty(\\mathbb R^d)$, with their continuous boundary values in the $C^m$ case. In particular, such smooth restrictions are norm-dense in $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-approximation-property-and-bounded-approximation-property",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a Banach space. It has the **approximation property** (AP) if for\nevery norm-compact set $C\\subseteq X$ and every $\\varepsilon>0$ there is a\nbounded finite-rank operator $T:X\\to X$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "For the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sobolev-norm-is-well-defined-and-definite",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the weak-derivative uniqueness interface. Let\n$\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, $k\\in\\mathbb N_0$, and\n$1\\le p\\le\\infty$. For either real or complex scalars, the displayed\n$W^{k,p}(\\Omega)$ formula from\n[[def-sobolev-space-wkp-and-its-norm]] is independent of the representatives\nof its Sobolev and derivative classes and defines a norm: it is finite,\nabsolutely homogeneous, subadditive, and zero exactly on the zero $L^p$ class.\nThis holds at $p=1$ and $p=\\infty$, and when $k=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Lebesgue-measure interfaces. Let $X$ be a real or complex Banach space, let $a<b$, and let $f:[a,b]\\to X$ be continuous. Differentiation uses the underlying real structure. Then $G(t):=\\int_a^t f(s)\\,ds$ is differentiable on $(a,b)$ and has the corresponding one-sided derivatives at $a,b$, with $G'(t)=f(t)$, and this derivative extends continuously to $[a,b]$. Consequently, if $\\varphi:[a,b]\\to X$ is continuous, differentiable on $(a,b)$ with $\\varphi'$ continuous on $(a,b)$ and extendable to a continuous $X$-valued function on $[a,b]$, then $\\int_a^b\\varphi'(s)\\,ds=\\varphi(b)-\\varphi(a)$. The Bochner integral here is the one of [[def-bochner-integrable-function]]; the identities also hold for continuous curves on $[0,\\infty)$ restricted to compact subintervals.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The listed Sobolev spaces are Banach under the stated Countable Choice hypothesis. Indeed, let $(u_n)$ be Cauchy in $W^{m,p}(D)$. By [F3], for each of the finitely many $|\\alpha|\\le m$, $D^\\alpha u_n$ converges in $L^p$ to a class $v_\\alpha$; put $u=v_0$. For any $\\phi\\in C_c^\\infty(D)$, its derivatives are bounded with compact support, hence belong to the conjugate $L^{p'}$ space, including $p'=\\infty$ when $p=1$. By [F4], both integrals in $\\int_Du_nD^\\alpha\\phi=(-1)^{|\\alpha|}\\int_DD^\\alpha u_n\\phi$ converge to the corresponding integrals of $u$ and $v_\\alpha$. Thus $v_\\alpha$ is the weak derivative $D^\\alpha u$ by [F3], so $u\\in W^{m,p}(D)$, and the finite norm sum gives $u_n\\to u$ in that norm. This includes $m=0$, which gives $L^p(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The listed $C^m(\\bar D)$ spaces are Banach as well. If $(u_n)$ is Cauchy in their norm, every derivative sequence has a uniform limit $g_\\alpha$ on $\\bar D$: pointwise real completeness gives the limit, and the uniform Cauchy estimate gives uniform convergence. Each $g_\\alpha$ is continuous, since for a positive error one first approximates it uniformly by a fixed continuous $D^\\alpha u_n$ and then applies continuity of that fixed function. Put $u=g_0$. For $|\\alpha|<m$, an interior point $x$, and a coordinate direction $e_i$, take $h$ small enough that the segment $x+[0,h]e_i$ lies in $D$. By [F5], $D^\\alpha u_n(x+he_i)-D^\\alpha u_n(x)=\\int_0^hD^{\\alpha+e_i}u_n(x+se_i)\\,ds$. Uniform convergence passes this identity to $g_\\alpha(x+he_i)-g_\\alpha(x)=\\int_0^h g_{\\alpha+e_i}(x+se_i)\\,ds$, since the integral error is bounded by $|h|$ times the uniform error. By [F5], $\\partial_i g_\\alpha=g_{\\alpha+e_i}$. Induction in $|\\alpha|$ yields $D^\\alpha u=g_\\alpha$ in $D$ through order $m$, with the continuous extensions already supplied on $\\bar D$. Thus $u\\in C^m(\\bar D)$ and $u_n\\to u$ in norm. For $m=0$ only the uniform-limit continuity argument is needed. The displayed maximum is a norm because its order-zero term detects zero functions and the remaining norm axioms hold termwise.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Fix one listed space $X$, a norm-compact $K\\subseteq X$, and $\\varepsilon>0$. Its Banach-space status was established in steps 1.1–1.2. Apply [F1], using $W^{0,p}=L^p$ in the Lebesgue case, to obtain a bounded finite-rank $F:X\\to X$ with $\\sup_{u\\in K}\\|Fu-u\\|_X<\\varepsilon$. These are exactly the quantified requirements of [F2], so every listed space has AP, including every $p=1$ case.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "The argument in step 2.1 holds for every Euclidean dimension, every nonnegative integer regularity and every finite exponent in the stated ranges. Applying it with the output dimension and output regularity parameters proves the output-space clause. The proof establishes AP for $C^m(\\bar D)$ without any basis assertion.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Helper step 1.1 treats empty D and empty K by the zero map; the target applies the same quantified helper."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove completeness including W0p=Lp and C0; step 2.1 applies the full approximation helper."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The inward graph estimate of helper step 1.1 works for d=1, with no horizontal coordinates; compact singleton K yields density in step 5.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Empty interior remainders and empty integration cells are omitted or contribute zero; finite-rank spans may have dependent or zero generators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Helper steps 2.3–2.4 explicitly use Tonelli/Minkowski at p=1; p=infinity is excluded for Sobolev approximation. All Cm orders m>=0 are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is an explicit hypothesis for the analytical interfaces. Chart subcovers, cell representatives and compact nets require only finite selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ],
+          "reason": "Explicit hypothesis; used by the Sobolev/Lebesgue/translation/mollification and, in the target, completeness/calculus interfaces. Geometric and compact-net selections are finite."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "ap-proof-proposal-author",
+        "notes": "Complete local derivations authored for independent parent review. This proposed contract supplies no workflow acceptance, gate pass, or transitive prerequisite audit."
+      }
+    }
+  }
+}

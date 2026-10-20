@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-probability-measure.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -28,5 +29,11 @@ pipeline_run: null
 
 ## Definition
 
-A **probability measure** on a measurable space $(X,\mathcal A)$ is a measure $\mathbb P$ with $\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\mathcal A,\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\mathcal A$ are its events.
+A **probability measure** on a measurable space $(X,\mathcal A)$ is a measure $\mathbb P$ with $\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\mathcal A,\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\mathcal A$ are its events.
+
+## Definition references
+
+[[def-measure]]
+
+[[def-measure-space]]
 

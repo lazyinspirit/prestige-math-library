@@ -1,0 +1,178 @@
+[
+  {
+    "order": 2744,
+    "id": "ml02-graphical-models",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Undirected graphical models and sparse precision estimation",
+    "companion": "ml02-graphical-models-examples",
+    "requires": [
+      "central-limit-theorems",
+      "convex-and-semicontinuous-functions-on-rn",
+      "markov-kernels-and-markov-chains",
+      "probability-spaces-random-variables-and-expectation",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "hierarchical-bayesian-models-and-partial-pooling"
+    ],
+    "items": [
+      {
+        "id": "def-undirected-graphical-model-and-markov-properties",
+        "kind": "definition",
+        "title": "Finite undirected graphs, Markov properties, and clique factorization",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $G=(V,E)$ be a finite simple undirected graph, with $E$ a set of unordered two-element subsets of $V$. A clique is a nonempty subset $C\\subseteq V$ whose distinct vertices are adjacent. Let $(X_i)_{i\\in V}$ be random elements on a common probability space, and for $U\\subseteq V$ put $\\mathcal F_U=\\sigma(X_i:i\\in U)$, with $\\mathcal F_\\emptyset=\\{\\emptyset,\\Omega\\}$. A path is a finite sequence of distinct vertices with adjacent consecutive vertices; $C$ separates $A$ from $B$ if every path from $A$ to $B$ meets $C$. The pairwise Markov property is $\\mathcal F_{\\{i\\}}\\perp\\!\\!\\!\\perp\\mathcal F_{\\{j\\}}\\mid\\mathcal F_{V\\setminus\\{i,j\\}}$ whenever $i\\ne j$ and $\\{i,j\\}\\notin E$. The global Markov property is $\\mathcal F_A\\perp\\!\\!\\!\\perp\\mathcal F_B\\mid\\mathcal F_C$ whenever $A,B,C\\subseteq V$ are pairwise disjoint and $C$ separates $A$ from $B$. If each $X_i$ takes values in a finite nonempty state space $\\mathcal X_i$, a finite-state clique-factorized mass function on $G$ is $p(x)=Z^{-1}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$, where $\\mathcal C$ is a finite collection of nonempty cliques, $\\psi_C:\\prod_{i\\in C}\\mathcal X_i\\to(0,\\infty)$, and $Z=\\sum_{x\\in\\prod_{i\\in V}\\mathcal X_i}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$. The product state space and sum are finite, and every potential is positive and finite, so $0<Z<\\infty$ and $p$ is a probability mass function. No equivalence between the clique-factorized class and either Markov property is asserted here."
+      },
+      {
+        "id": "def-graphical-lasso-objective",
+        "kind": "definition",
+        "title": "Gaussian sparse-precision objective with the all-entry penalty",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "For $N,p\\ge1$ and data $x_1,\\ldots,x_N\\in\\mathbb R^p$, put $\\bar x=N^{-1}\\sum_{r=1}^N x_r$ and $S=N^{-1}\\sum_{r=1}^N(x_r-\\bar x)(x_r-\\bar x)^T$. For any symmetric positive-semidefinite $S$ and any $\\Theta\\in\\mathbb S_{++}^p$, set $\\ell_S(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)$, where $\\mathbb S_{++}^p$ is the cone of symmetric positive-definite $p\\times p$ matrices. Define $\\|\\Theta\\|_1=\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$, including diagonal entries, and for $\\lambda>0$ define $F_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\|\\Theta\\|_1$. The off-diagonal-only convention $F^{\\mathrm{off}}_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\sum_{i\\ne j}|\\Theta_{ij}|$ is a separate objective."
+      },
+      {
+        "id": "def-restricted-boltzmann-machine",
+        "kind": "definition",
+        "title": "Binary restricted Boltzmann machine, exact likelihood gradient, and finite contrastive divergence",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $m,n\\ge1$, visible states $v\\in\\{0,1\\}^m$, hidden states $h\\in\\{0,1\\}^n$, biases $a\\in\\mathbb R^m$ and $b\\in\\mathbb R^n$, and weights $W\\in\\mathbb R^{m\\times n}$; a finite bipartite graph is specified by requiring $W_{ij}=0$ at every absent visible-hidden edge. Define $E(v,h)=-a^Tv-b^Th-v^TWh$, $Z=\\sum_{v,h}\\exp(-E(v,h))$, and $p(v,h)=Z^{-1}\\exp(-E(v,h))$; $Z$ is finite and positive. Set $p(v)=\\sum_h p(v,h)$, and let $V,H$ be the coordinate variables under $p$. For a finite mass function $q$, write $\\mathbb E_q[g]=\\sum_xq(x)g(x)$. With $\\sigma(t)=(1+\\exp(-t))^{-1}$, and $\\operatorname{Bernoulli}(u;r)$ the mass on $\\{0,1\\}$ with probability $r$ at $1$, the layer conditionals factorize as\n$$p(h\\mid v)=\\prod_{j=1}^n\\operatorname{Bernoulli}\\!\\left(h_j;\\sigma\\!\\left(b_j+(W^Tv)_j\\right)\\right),\\qquad p(v\\mid h)=\\prod_{i=1}^m\\operatorname{Bernoulli}\\!\\left(v_i;\\sigma\\!\\left(a_i+(Wh)_i\\right)\\right),$$\nso each layer is conditionally independent given the other. For one observed $v$, the exact gradients are\n$$\\frac{\\partial\\log p(v)}{\\partial W_{ij}}=v_i\\mathbb E_{p(h\\mid v)}[h_j]-\\mathbb E_p[V_iH_j],\\qquad \\frac{\\partial\\log p(v)}{\\partial a_i}=v_i-\\mathbb E_p[V_i],\\qquad \\frac{\\partial\\log p(v)}{\\partial b_j}=\\mathbb E_{p(h\\mid v)}[h_j]-\\mathbb E_p[H_j].$$\nThese are ambient derivatives in all parameters, evaluated at the specified $W$; when a graph fixes absent-edge weights to zero, retain only allowed-edge derivatives as free parameters. Define $K(v,v')=\\sum_h p(h\\mid v)p(v'\\mid h)$, a row-stochastic transition matrix. Starting from $q_0^v=\\delta_v$, let $q_k^v=q_0^vK^k$ for a finite integer $k\\ge1$. For one observed $v$, define the finite contrastive-divergence components by\n$$\\widehat g^{(k)}_{W_{ij}}(v)=v_i\\mathbb E_{p(h\\mid v)}[h_j]-\\sum_{v'}q_k^v(v')v'_i\\mathbb E_{p(h\\mid v')}[h_j],\\quad \\widehat g^{(k)}_{a_i}(v)=v_i-\\sum_{v'}q_k^v(v')v'_i,\\quad \\widehat g^{(k)}_{b_j}(v)=\\mathbb E_{p(h\\mid v)}[h_j]-\\sum_{v'}q_k^v(v')\\mathbb E_{p(h\\mid v')}[h_j].$$\nThey replace the exact negative-phase expectations under $p(v')$ by expectations under the finite $k$-step law $q_k^v$ and conditional hidden law $p(h\\mid v')$. This finite-chain statistic is an approximation; no equality to the exact likelihood gradient or chain-convergence claim is asserted."
+      },
+      {
+        "id": "thm-gaussian-precision-zero-conditional-independence",
+        "kind": "theorem",
+        "title": "Gaussian precision zeros characterize pairwise conditional independence",
+        "deps": [
+          "def-undirected-graphical-model-and-markov-properties",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-conditional-density-formula",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "def-countable-choice",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $p\\ge2$ and let $X=(X_1,\\ldots,X_p)$ have multivariate normal law $N_p(\\mu,\\Sigma)$ with real symmetric positive-definite covariance $\\Sigma$; put $\\Theta=\\Sigma^{-1}$. For every pair of distinct indices $i,j$, $X_i$ and $X_j$ are conditionally independent given $\\sigma(X_k:k\\notin\\{i,j\\})$ if and only if $\\Theta_{ij}=0$. Thus the graph whose edges are exactly the nonzero off-diagonal entries of $\\Theta$ is the Gaussian pairwise conditional-dependence graph."
+      },
+      {
+        "id": "lem-graphical-lasso-profiled-gaussian-likelihood",
+        "kind": "lemma",
+        "title": "The Gaussian profile likelihood reduces to the trace score",
+        "deps": [
+          "def-graphical-lasso-objective",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-measure-kernel-and-probability-kernel",
+          "lem-finite-products-of-dominated-kernels-have-product-density",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $N,p\\ge1$, let $x_1,\\ldots,x_N\\in\\mathbb R^p$ be independent observations with common law $N_p(\\mu,\\Sigma)$, where $\\Sigma$ is real symmetric positive definite; put $\\Theta=\\Sigma^{-1}$, $\\bar x=N^{-1}\\sum_{r=1}^N x_r$, and $S=N^{-1}\\sum_{r=1}^N(x_r-\\bar x)(x_r-\\bar x)^T$. The log-likelihood maximized over $\\mu$ is\n$$-\\frac{Np}{2}\\log(2\\pi)+\\frac N2\\bigl(\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)\\bigr).$$\nThus, after removing the additive constant and multiplying by $2/N$, the normalized Gaussian profile-likelihood score is $\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)$."
+      },
+      {
+        "id": "alg-graphical-lasso-coordinate-descent",
+        "kind": "algorithm",
+        "title": "Finite-budget block and cyclic-coordinate graphical-lasso procedure",
+        "deps": [
+          "def-graphical-lasso-objective",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 1,
+        "statement": "Input an integer $p\\ge2$, a real symmetric positive-semidefinite matrix $S\\in\\mathbb S_+^p$, a real $\\lambda>0$, and positive integers $R,K$. The output is either `failure` or a matrix $\\Theta\\in\\mathbb S_{++}^p$. Let $I_p$ be the $p\\times p$ identity, $t_+=\\max(t,0)$, $\\operatorname{sign}(t)=1$ for $t>0$, $0$ for $t=0$, and $-1$ for $t<0$, and $\\mathsf{Soft}(t,\\lambda)=\\operatorname{sign}(t)(|t|-\\lambda)_+$. Initialize $W=S+\\lambda I_p$.\n\nFor each outer sweep $r=1,\\ldots,R$, and within it for each original-coordinate index $j=1,\\ldots,p$, use the temporary coordinate order $\\pi_j=(1,\\ldots,j-1,j+1,\\ldots,p,j)$. Form the same reindexing of both matrices, $S^{(j)}_{ab}=S_{\\pi_j(a),\\pi_j(b)}$ and $W^{(j)}_{ab}=W_{\\pi_j(a),\\pi_j(b)}$, for $1\\le a,b\\le p$. Set $V=(W^{(j)}_{ab})_{a,b<p}$, $s=(S^{(j)}_{a,p})_{a<p}$, and $d=W^{(j)}_{pp}$. Initialize $\\beta=0\\in\\mathbb R^{p-1}$. For each of $K$ inner sweeps, update coordinates $\\ell=1,\\ldots,p-1$ in increasing order: if $V_{\\ell\\ell}\\le0$, return `failure`; otherwise set\n$$\\beta_\\ell\\leftarrow\\frac{\\mathsf{Soft}\\!\\left(s_\\ell-\\sum_{\\substack{1\\le k<p\\\\k\\ne\\ell}}V_{\\ell k}\\beta_k,\\lambda\\right)}{V_{\\ell\\ell}}.$$\n\nAfter the inner sweeps, form $\\widetilde W^{(j)}=\\begin{pmatrix}V&V\\beta\\\\(V\\beta)^T&d\\end{pmatrix}$. Restore original indexing by forming the candidate matrix $W^{\\mathrm{cand}}$ with $W^{\\mathrm{cand}}_{\\pi_j(a),\\pi_j(b)}=\\widetilde W^{(j)}_{ab}$ for all $1\\le a,b\\le p$. Compute a symmetric eigendecomposition of $W^{\\mathrm{cand}}$; if any eigenvalue is nonpositive, return `failure`. Otherwise set $W=W^{\\mathrm{cand}}$ before proceeding to the next original-coordinate index $j$. After all $R$ sweeps, return $\\Theta=W^{-1}$. This bounded truncation of the coupled block and lasso updates makes no convergence or optimizer claim.",
+        "justified_by": [
+          "lem-graphical-lasso-finite-budget-properties"
+        ]
+      },
+      {
+        "id": "lem-graphical-lasso-finite-budget-properties",
+        "kind": "lemma",
+        "title": "Coordinate minimization, positive-definiteness invariant and termination of the finite-budget graphical-lasso procedure",
+        "deps": [
+          "alg-graphical-lasso-coordinate-descent",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $p\\ge2$ be an integer, $S\\in\\mathbb S_+^p$ be real symmetric positive semidefinite, $\\lambda>0$, and $R,K$ be positive integers. Execute the finite-budget block and cyclic-coordinate graphical-lasso procedure with these inputs in exact real arithmetic, treating its finite-dimensional matrix operations as exact operations. The initialized matrix and every accepted matrix $W$ are symmetric positive definite. In every block reached before failure, its principal matrix $V$ is positive definite, every $V_{\\ell\\ell}>0$, and every coordinate update is well-defined and uniquely minimizes\n$$Q_{V,s}(\\beta)=\\tfrac12\\beta^TV\\beta-s^T\\beta+\\lambda\\sum_{k=1}^{p-1}|\\beta_k|$$\nwith all other coordinates fixed. Each candidate matrix is finite and symmetric; it is accepted exactly when positive definite. The procedure terminates after at most $RpK(p-1)$ coordinate updates and $Rp$ candidate eigenvalue tests, returning either `failure` or a symmetric positive-definite matrix $\\Theta=W^{-1}$. These assertions do not assert convergence of the iterates or global optimality for the sparse-precision objective."
+      },
+      {
+        "id": "thm-graphical-lasso-convexity-and-kkt",
+        "kind": "theorem",
+        "title": "The all-entry graphical-lasso objective has a unique KKT optimizer",
+        "deps": [
+          "def-graphical-lasso-objective",
+          "thm-non-negative-operator-characterisations",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-hessian-characterises-convexity",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\mathbb S_+^p$ be the real symmetric positive-semidefinite $p\\times p$ matrices and $\\mathbb S_{++}^p$ the real symmetric positive-definite ones. For $p\\ge1$, $S\\in\\mathbb S_+^p$ and $\\lambda>0$, maximize\n$$F_{S,\\lambda}(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)-\\lambda\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$$\nover $\\Theta\\in\\mathbb S_{++}^p$. The objective is strictly concave and attains a unique maximizer $\\Theta^*$. A feasible $\\Theta$ is this unique maximizer if and only if there is a symmetric matrix $\\Gamma$ such that $\\Theta^{-1}-S-\\lambda\\Gamma=0$, with $\\Gamma_{ii}=1$, $\\Gamma_{ij}=\\operatorname{sign}(\\Theta_{ij})$ when $\\Theta_{ij}\\ne0$, and $\\Gamma_{ij}\\in[-1,1]$ when $\\Theta_{ij}=0$."
+      }
+    ]
+  },
+  {
+    "order": 2745,
+    "id": "ml02-graphical-models-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Undirected graphical models and sparse precision estimation — Examples",
+    "companion": "ml02-graphical-models",
+    "requires": [
+      "ml02-graphical-models"
+    ],
+    "items": [
+      {
+        "id": "ex-rbm-visible-units-conditionally-independent-given-hidden",
+        "kind": "example",
+        "title": "Visible RBM units are conditionally independent but dependent marginally",
+        "deps": [
+          "def-restricted-boltzmann-machine",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume AC. In a binary restricted Boltzmann machine with two visible units, one hidden unit, $a=(0,0)$, $b=0$ and $W_{11}=W_{21}=\\log3$, the visible units are independent conditional on the hidden unit. Each conditional success probability is $1/2$ when $H=0$ and $3/4$ when $H=1$. Marginally, $P(V_1=1)=P(V_2=1)=7/10$ and $P(V_1=1,V_2=1)=1/2\\ne49/100$, so $V_1$ and $V_2$ are dependent."
+      },
+      {
+        "id": "ex-three-node-gaussian-chain",
+        "kind": "example",
+        "title": "A three-node Gaussian chain has conditionally independent endpoints",
+        "deps": [
+          "def-undirected-graphical-model-and-markov-properties",
+          "thm-gaussian-precision-zero-conditional-independence",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC. Let $\\Theta=\\begin{pmatrix}2&-1&0\\\\-1&2&-1\\\\0&-1&2\\end{pmatrix}$, $\\Sigma=\\Theta^{-1}$, and $X\\sim N_3(0,\\Sigma)$. Put an edge between $i$ and $j$ exactly when $\\Theta_{ij}\\ne0$. Then the graph is the path $1-2-3$, and $X_1$ and $X_3$ are conditionally independent given $X_2$."
+      },
+      {
+        "id": "ex-graphical-lasso-penalty-sparsity-threshold",
+        "kind": "example",
+        "title": "Increasing λ creates an exact zero edge in a two-variable graphical lasso",
+        "deps": [
+          "def-graphical-lasso-objective",
+          "thm-graphical-lasso-convexity-and-kkt"
+        ],
+        "dependency_level": 2,
+        "statement": "Take observations $x_1=(1,1)^T$ and $x_2=(-1,-1)^T$, so their centered sample covariance is $S=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$. Under the all-entry penalty objective, every $\\lambda\\ge1$ gives the unique maximizer $\\Theta=(1+\\lambda)^{-1}I_2$ with $\\Theta_{12}=0$, while for $0<\\lambda<1$ every optimizer has $\\Theta_{12}\\ne0$. In particular, $\\lambda=2$ yields a zero edge and $\\lambda=\\tfrac12$ yields a nonzero edge."
+      }
+    ]
+  }
+]

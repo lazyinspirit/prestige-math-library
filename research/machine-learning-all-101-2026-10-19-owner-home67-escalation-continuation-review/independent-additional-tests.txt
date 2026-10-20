@@ -1,0 +1,17 @@
+
+for(const [name,mutate] of Object.entries({
+ 'unchanged historical report':f=>f.put(f.reportPath,fs.readFileSync(path.join(f.root,f.entry.previous_report.path),'utf8')),
+ 'wrong canonical group':f=>{const d=f.read(f.decisionsPath);d.group='v';f.put(f.decisionsPath,d)},
+ 'old obligation omitted':f=>{const d=f.read(f.decisionsPath);d.decisions.shift();f.put(f.decisionsPath,d)},
+ 'helper obligation omitted':f=>{const d=f.read(f.decisionsPath);d.decisions=d.decisions.filter(x=>x.id!==f.helper);f.put(f.decisionsPath,d)},
+ 'changed obligation route':f=>{const d=f.read(f.decisionsPath);d.decisions[0].route='gate';f.put(f.decisionsPath,d)},
+ 'changed obligation id':f=>{const d=f.read(f.decisionsPath);d.decisions[0].id=f.helper;f.put(f.decisionsPath,d)},
+ 'duplicate current decision':f=>{const d=f.read(f.decisionsPath);d.decisions.push(d.decisions[0]);f.put(f.decisionsPath,d)},
+ 'still escalated':f=>{const d=f.read(f.decisionsPath);d.decisions[0].verdict='escalated';f.put(f.decisionsPath,d)},
+ 'uncertain repair':f=>{const d=f.read(f.decisionsPath);d.decisions[0].repair_confidence=0.9;f.put(f.decisionsPath,d)},
+ 'fresh unsuccessful result':f=>{const p=f.P+'dispatch/alpha-'+f.entry.label;const d=f.read(p+'.result.json');d.ok=false;f.put(p+'.result.json',d);f.put(p+'.attempt-1.result.json',d)},
+ 'fresh attempt mismatch':f=>{const p=f.P+'dispatch/alpha-'+f.entry.label;f.put(p+'.attempt-1.result.json',{})},
+ 'fresh prompt task dropped':f=>{const p=f.P+'dispatch/alpha-'+f.entry.label;f.put(p+'.attempt-1.prompt.md','# This dispatch\n\nrun: r\nrole: alpha\nlabel: '+f.entry.label+'\ncovers: 67\noutput: '+f.reportPath+'\n\nUnregistered instructions.')},
+ 'fresh result wrong covers':f=>{const p=f.P+'dispatch/alpha-'+f.entry.label;const d=f.read(p+'.result.json');d.covers=['68'];f.put(p+'.result.json',d);f.put(p+'.attempt-1.result.json',d)},
+ 'fresh result before drained':f=>{const p=f.P+'dispatch/alpha-'+f.entry.label;const d=f.read(p+'.result.json');d.started_at='2026-01-01T00:00:00Z';f.put(p+'.result.json',d);f.put(p+'.attempt-1.result.json',d)}
+})){test('independent fresh output guard rejects '+name,t=>{const f=fixture(t),row=f.complete();mutate(f);assert.equal(api.registeredHomeAlphaResult(f.root,f.run,row),false);assert.throws(()=>api.homeAlphaReviewIdentity(f.root,f.run,'67'));assert.throws(()=>api.homeAlphaClosureEvidence(f.root,f.run));});}

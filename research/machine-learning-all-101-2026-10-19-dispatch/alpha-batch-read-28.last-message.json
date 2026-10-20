@@ -1,0 +1,376 @@
+{
+  "group": "i",
+  "batches": ["28"],
+  "pages_read": [
+    "ml02-differential-privacy",
+    "ml02-differential-privacy-examples"
+  ],
+  "items_read": [
+    "def-differential-privacy-and-adjacency",
+    "def-laplace-distribution",
+    "def-global-l1-sensitivity",
+    "thm-laplace-density-from-exponential-law",
+    "lem-laplace-product-density",
+    "alg-laplace-mechanism",
+    "thm-laplace-mechanism-privacy",
+    "def-exponential-mechanism-utility-sensitivity",
+    "alg-exponential-mechanism",
+    "thm-exponential-mechanism-privacy-and-utility",
+    "lem-dp-test-function-extension",
+    "thm-dp-postprocessing",
+    "lem-dp-pure-privacy-loss-kl-bound",
+    "lem-dp-approximate-kernel-purification",
+    "thm-basic-adaptive-composition",
+    "thm-advanced-adaptive-composition-standard-borel-outputs",
+    "lem-dp-joint-measure-purification",
+    "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+    "thm-basic-and-advanced-composition",
+    "rem-differential-privacy-scope-and-limitations",
+    "ex-add-remove-noisy-count",
+    "ex-finite-range-private-selection",
+    "ex-postprocessing-private-noisy-count",
+    "ex-record-level-versus-client-level-adjacency"
+  ],
+  "conventions": [
+    {
+      "convention": "Databases are finite-support nonnegative integer count functions on a nonempty record universe, equipped with the power-set sigma-algebra. Adjacency adds or removes one occurrence, including repeated records.",
+      "fixed_by": "def-differential-privacy-and-adjacency",
+      "matters_for": [
+        "def-global-l1-sensitivity",
+        "def-exponential-mechanism-utility-sensitivity",
+        "thm-laplace-mechanism-privacy",
+        "thm-exponential-mechanism-privacy-and-utility",
+        "ex-record-level-versus-client-level-adjacency"
+      ]
+    },
+    {
+      "convention": "Differential privacy quantifies over every ordered neighboring pair and every measurable output event; epsilon is nonnegative and delta lies in [0,1]. Symmetric adjacency supplies both directions.",
+      "fixed_by": "def-differential-privacy-and-adjacency",
+      "matters_for": [
+        "thm-dp-postprocessing",
+        "thm-basic-adaptive-composition",
+        "thm-advanced-adaptive-composition-standard-borel-outputs",
+        "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+        "thm-basic-and-advanced-composition"
+      ]
+    },
+    {
+      "convention": "Global L1 sensitivity is defined only when the adjacent-pair differences have an attained finite maximum.",
+      "fixed_by": "def-global-l1-sensitivity",
+      "matters_for": [
+        "alg-laplace-mechanism",
+        "thm-laplace-mechanism-privacy",
+        "ex-add-remove-noisy-count",
+        "ex-postprocessing-private-noisy-count"
+      ]
+    },
+    {
+      "convention": "Lap(0) is the point mass at zero. The Laplace mechanism requires epsilon > 0 and releases the query deterministically when sensitivity is zero.",
+      "fixed_by": "alg-laplace-mechanism",
+      "matters_for": ["thm-laplace-mechanism-privacy"]
+    },
+    {
+      "convention": "Exponential-mechanism utility sensitivity is an attained finite maximum; the procedure requires positive sensitivity and a finite nonempty database-independent range.",
+      "fixed_by": "def-exponential-mechanism-utility-sensitivity",
+      "matters_for": [
+        "alg-exponential-mechanism",
+        "thm-exponential-mechanism-privacy-and-utility",
+        "ex-finite-range-private-selection"
+      ]
+    },
+    {
+      "convention": "Adaptive round privacy holds at every common prior transcript, including histories of zero probability. Transcript events use the finite product sigma-algebra.",
+      "fixed_by": "thm-basic-adaptive-composition",
+      "matters_for": [
+        "thm-advanced-adaptive-composition-standard-borel-outputs",
+        "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+        "thm-basic-and-advanced-composition"
+      ]
+    },
+    {
+      "convention": "Total variation is sup over events of the absolute probability difference, with no additional factor; for equal-mass densities it equals half the L1 distance.",
+      "fixed_by": "lem-dp-approximate-kernel-purification",
+      "matters_for": [
+        "thm-advanced-adaptive-composition-standard-borel-outputs",
+        "lem-dp-joint-measure-purification",
+        "thm-advanced-adaptive-composition-arbitrary-measurable-outputs"
+      ]
+    },
+    {
+      "convention": "Advanced composition assumes AC, 0 < delta-prime < 1, and k delta + delta-prime ≤ 1. The arbitrary-space argument constructs joint measures with fixed history marginals and does not assert disintegration.",
+      "fixed_by": "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+      "matters_for": ["thm-basic-and-advanced-composition"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-differential-privacy-and-adjacency",
+      "statement": "Given epsilon ≥ 0 and 0 ≤ delta ≤ 1, the mechanism is (epsilon,delta)-differentially private if, for every ordered neighboring pair D ∼ D′ and every output event A, K(D,A) ≤ exp(epsilon)K(D′,A)+delta.",
+      "used_by": [
+        "thm-laplace-mechanism-privacy",
+        "thm-exponential-mechanism-privacy-and-utility",
+        "thm-dp-postprocessing",
+        "thm-basic-adaptive-composition",
+        "thm-advanced-adaptive-composition-arbitrary-measurable-outputs"
+      ]
+    },
+    {
+      "id": "lem-dp-joint-measure-purification",
+      "statement": "Assume AC. For arbitrary measurable H,Y, a history probability lambda, and probability kernels K,L satisfying both (epsilon,delta) event inequalities at every history, the joint measures R=lambda⊗K and S=lambda⊗L admit a probability T with history marginal lambda, exp(-epsilon)S ≤ T ≤ exp(epsilon)S, and TV(R,T) ≤ delta.",
+      "used_by": ["thm-advanced-adaptive-composition-arbitrary-measurable-outputs"]
+    },
+    {
+      "id": "lem-dp-test-function-extension",
+      "statement": "If probability measures P,Q satisfy P(A) ≤ exp(epsilon)Q(A)+delta for every measurable A, with epsilon ≥ 0 and 0 ≤ delta ≤ 1, then every measurable 0 ≤ g ≤ 1 satisfies integral g dP ≤ exp(epsilon) integral g dQ + delta.",
+      "used_by": [
+        "thm-dp-postprocessing",
+        "thm-basic-adaptive-composition",
+        "thm-advanced-adaptive-composition-standard-borel-outputs",
+        "thm-advanced-adaptive-composition-arbitrary-measurable-outputs"
+      ]
+    },
+    {
+      "id": "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+      "statement": "Assume AC. For k ≥ 1 history-measurable adaptive probability kernels on arbitrary measurable output spaces, with (epsilon,delta) event inequalities at every history for every ordered adjacent input pair, the full transcript is (epsilon-prime,k delta+delta-prime)-DP when 0 < delta-prime < 1 and k delta+delta-prime ≤ 1, where epsilon-prime = epsilon sqrt(2k ln(1/delta-prime)) + k epsilon(exp(epsilon)-1).",
+      "used_by": ["thm-basic-and-advanced-composition"]
+    },
+    {
+      "id": "lem-dp-approximate-kernel-purification",
+      "statement": "Assume AC. For standard-Borel H,Y, a probability lambda on H, and kernels K,L satisfying both approximate privacy inequalities for lambda-almost every history and every event, there is a probability kernel K-star satisfying exp(-epsilon)L ≤ K-star ≤ exp(epsilon)L almost everywhere and integral TV(K,K-star) d lambda ≤ delta.",
+      "used_by": ["thm-advanced-adaptive-composition-standard-borel-outputs"]
+    },
+    {
+      "id": "lem-dp-pure-privacy-loss-kl-bound",
+      "statement": "Assume AC. For probability measures P,Q on a standard-Borel space satisfying both pure epsilon event inequalities, D(P||Q) ≤ epsilon(exp(epsilon)-1).",
+      "used_by": ["thm-advanced-adaptive-composition-standard-borel-outputs"]
+    },
+    {
+      "id": "thm-basic-adaptive-composition",
+      "statement": "For k ≥ 1 adaptive rounds on measurable output spaces satisfying the stated conditional (epsilon_i,delta_i) inequalities at every history, if sum delta_i ≤ 1, the full transcript is (sum epsilon_i,sum delta_i)-differentially private.",
+      "used_by": ["thm-basic-and-advanced-composition"]
+    },
+    {
+      "id": "thm-laplace-mechanism-privacy",
+      "statement": "For every finite-dimensional query f with d ≥ 1 and finite global L1 sensitivity, and every epsilon > 0, the Laplace mechanism is (epsilon,0)-differentially private under add/remove adjacency.",
+      "used_by": [
+        "ex-add-remove-noisy-count",
+        "ex-postprocessing-private-noisy-count"
+      ]
+    },
+    {
+      "id": "thm-exponential-mechanism-privacy-and-utility",
+      "statement": "For a nonempty finite database-independent range and real utility with finite positive attained sensitivity, the exponential mechanism is pure epsilon-DP and its probability of utility at most OPT minus (2 Delta_u/epsilon)(ln(|R|/|R_OPT|)+t) is at most exp(-t), for every t > 0.",
+      "used_by": ["ex-finite-range-private-selection"]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"def-measurable-space","used_for":"Measurable source and output spaces.","opened":true},
+    {"id":"def-probability-measure","used_for":"Probability laws and normalized finite output weights.","opened":true},
+    {"id":"def-measure-kernel-and-probability-kernel","used_for":"Pointwise kernel conditions and measurable event evaluations.","opened":true},
+    {"id":"def-countable-choice","used_for":"Choice assumptions inherited by real Laplace laws and Lebesgue suppliers.","opened":true},
+    {"id":"def-borel-sigma-algebra","used_for":"Real-valued output events and threshold measurability.","opened":true},
+    {"id":"cor-continuous-functions-are-borel-measurable","used_for":"Reflection and translation measurability.","opened":true},
+    {"id":"thm-exponential-and-weibull-survival-laws","used_for":"Existence and density of the positive exponential law.","opened":true},
+    {"id":"thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions","used_for":"Reflection and translation of Laplace densities.","opened":true},
+    {"id":"thm-lebesgue-measure-of-a-box-of-every-kind","used_for":"The singleton at zero is Lebesgue null.","opened":true},
+    {"id":"thm-exponential-addition-formula","used_for":"Product densities, likelihood ratios and composition parameters.","opened":true},
+    {"id":"def-product-sigma-algebra-and-finite-product-sigma-algebras","used_for":"Finite output products, rectangles and empty history.","opened":true},
+    {"id":"thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique","used_for":"Finite product noise laws and rectangular factorization.","opened":true},
+    {"id":"thm-tonelli-theorem-for-sigma-finite-product-spaces","used_for":"Repeated integration of product Laplace densities.","opened":true},
+    {"id":"thm-measure-uniqueness-on-a-sigma-finite-pi-system","used_for":"Identifying the product density law on all events.","opened":true},
+    {"id":"thm-indefinite-integral-of-a-nonnegative-function-is-a-measure","used_for":"Constructing density measures and purified joint laws.","opened":true},
+    {"id":"def-independent-random-elements","used_for":"Independence of finite product noise coordinates.","opened":true},
+    {"id":"lem-finite-products-of-probability-kernels","used_for":"Existence of finite independent-coordinate noise laws.","opened":true},
+    {"id":"thm-exponential-is-strictly-increasing","used_for":"Exponential inequalities and clipping bounds.","opened":true},
+    {"id":"cor-exponential-reciprocal-and-positivity","used_for":"Positive likelihood ratios and reciprocal bounds.","opened":true},
+    {"id":"def-real-exponential-function-and-e","used_for":"Finite exponential weights.","opened":true},
+    {"id":"def-natural-logarithm","used_for":"Utility thresholds and privacy-loss logarithms.","opened":true},
+    {"id":"thm-natural-logarithm-laws","used_for":"Logarithmic likelihood products, reciprocals and utility thresholds.","opened":true},
+    {"id":"def-expectation-of-a-nonnegative-or-integrable-random-variable","used_for":"Bounded test-function and privacy-loss integrals.","opened":true},
+    {"id":"def-integral-of-a-nonnegative-simple-function","used_for":"Dyadic level-set proof of the test-function extension.","opened":true},
+    {"id":"thm-monotone-convergence-for-the-integral","used_for":"Test-function limits, countable additivity and extension of integral identities.","opened":true},
+    {"id":"def-composition-of-probability-kernels","used_for":"Postprocessing and finite adaptive transcript construction.","opened":true},
+    {"id":"lem-kernel-composition-is-well-defined-and-associative","used_for":"Existence of composed probability kernels.","opened":true},
+    {"id":"def-standard-borel-space","used_for":"Scope of kernel purification and the standard-Borel composition proof.","opened":true},
+    {"id":"def-axiom-of-choice","used_for":"Explicit assumption for RN densities, KL and concentration.","opened":true},
+    {"id":"def-kullback-leibler-divergence","used_for":"Directional entropy and privacy-loss expectations.","opened":true},
+    {"id":"thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality","used_for":"Ordinary densities of finite joint and prefix measures.","opened":true},
+    {"id":"thm-integration-against-a-radon-nikodym-derivative","used_for":"Changing measures in density and entropy calculations; nonnegative extensions are explicitly supplied where needed.","opened":true},
+    {"id":"thm-kullback-leibler-is-nonnegative","used_for":"Dropping the reverse KL term in the symmetrized entropy bound.","opened":true},
+    {"id":"thm-composition-with-borel-functions-preserves-measurability","used_for":"Clipping, reciprocals and scalar correction formulas.","opened":true},
+    {"id":"lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels","used_for":"Common-conull-set kernel density representations in standard-Borel purification and composition.","opened":true},
+    {"id":"thm-measurability-of-integration-against-a-kernel","used_for":"Measurability of section integrals and history-dependent corrections.","opened":true},
+    {"id":"cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras","used_for":"Common measurable representation sets, event approximation and TV measurability.","opened":true},
+    {"id":"thm-sections-of-product-measurable-functions-are-measurable","used_for":"Measurable transcript-event sections and joint density sections.","opened":true},
+    {"id":"def-conditional-kl-for-probability-kernels","used_for":"Interpretation of conditional privacy-loss means in the standard-Borel proof.","opened":true},
+    {"id":"thm-conditional-kl-is-measurable","used_for":"Measurability of fiberwise entropy.","opened":true},
+    {"id":"thm-azuma-hoeffding-inequality","used_for":"Privacy-loss martingale tails with predictable interval length 2 epsilon.","opened":true},
+    {"id":"lem-finite-products-of-standard-borel-spaces-are-standard-borel","used_for":"Standard-Borel finite history spaces.","opened":true},
+    {"id":"thm-ionescu-tulcea-construction-of-a-markov-chain","used_for":"Standard-Borel proof's transcript laws, with singleton continuation after the finite horizon.","opened":true},
+    {"id":"def-conditional-expectation-given-a-sigma-algebra","used_for":"Checking conditional privacy-loss means by history-event integral identities.","opened":true},
+    {"id":"thm-logarithm-derivative-and-integral","used_for":"Deriving log x ≤ x-1 in the arbitrary-space entropy calculation.","opened":true}
+  ],
+  "concerns": [
+    {
+      "id": "def-laplace-distribution",
+      "concern": "The Definition begins 'For b>0, let mu_b be the probability measure...' without stating Countable Choice. The item's axiom_use and its exponential-law supplier explicitly require Countable Choice. The complete defining section should expose this inherited assumption.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-laplace-density-from-exponential-law",
+      "concern": "The Statement says 'For every b>0' without its inherited Countable Choice assumption, although Facts A1 and the cited exponential-law and change-of-variables statements impose it.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-laplace-product-density",
+      "concern": "The Statement omits Countable Choice, which is explicitly assumed in Facts A1 and inherited from the one-dimensional density construction.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-laplace-mechanism",
+      "concern": "The Definition omits Countable Choice although Facts A1 and axiom_use assume it for the noise law. Also, its probability-kernel well-definedness argument remains in an internal Verification with justified_by empty; the dispatch directs that such proved properties be separate result items linked through justified_by.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-laplace-mechanism-privacy",
+      "concern": "The Statement gives an unconditional privacy guarantee, while Facts A1 explicitly inherits Countable Choice from construction of the real Laplace probability law. Carry that assumption into the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "id": "alg-exponential-mechanism",
+      "concern": "Probability-kernel well-definedness is proved in an internal Verification, with justified_by empty. The dispatch requires algorithm properties and well-definedness results to be separate proved items, using justified_by for the latter. The finite normalization argument itself is sound.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-add-remove-noisy-count",
+      "concern": "The Example omits Countable Choice, although Facts A1 and axiom_use explicitly inherit it for the real-valued Laplace release.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-postprocessing-private-noisy-count",
+      "concern": "The Example omits Countable Choice, although Facts A1 and axiom_use explicitly inherit it for construction of the noisy count.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-measurable-space",
+      "finding": "def-measurable-space embeds '[[def-sigma-algebra]]' inside its Definition. This interrupts the complete defining section with a hyperlink, contrary to the uninterrupted-statement rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "def-probability-measure embeds '[[def-measure]]' and '[[def-measure-space]]' inside its Definition. These are inline hyperlinks within the complete defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "def-measure-kernel-and-probability-kernel says 'Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]' inside its Definition. These hyperlinks violate the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable-choice",
+      "finding": "def-countable-choice includes '[[def-choice-function]]' and '[[def-countable]]' in the Definition's equivalent formulation. Hyperlinks remain inside the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-borel-sigma-algebra",
+      "finding": "def-borel-sigma-algebra includes '[[def-topological-space]]' and '[[thm-generated-sigma-algebra-exists-and-is-minimal]]' inside its Definition, contrary to the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-continuous-functions-are-borel-measurable",
+      "finding": "cor-continuous-functions-are-borel-measurable ends its Statement with 'in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]]'. The hyperlink is inside the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "finding": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions begins its Statement 'Assume the Axiom of Countable Choice ([[def-countable-choice]])'. This inline hyperlink violates the uninterrupted-statement rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "finding": "thm-lebesgue-measure-of-a-box-of-every-kind includes '[[def-countable-choice]]', '[[def-multidimensional-rectangle-and-volume]]', '[[def-half-open-box]]', and '[[thm-lebesgue-measure-is-a-complete-measure]]' inside its Statement. The complete Statement remains interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "def-product-sigma-algebra-and-finite-product-sigma-algebras says 'generated by the measurable rectangles of [[def-measurable-rectangle]]' inside its Definition. This is an inline hyperlink within the defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "finding": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique includes '[[def-product-measure-on-sigma-finite-spaces]]' in clause 1 of its Statement. The complete Statement contains a hyperlink.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "def-independent-random-elements includes '[[def-independent-sigma-algebras-and-events]]' and '[[def-sigma-algebra-generated-by-a-function]]' inside its Definition. These violate the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "def-real-exponential-function-and-e includes '[[lem-exponential-series-has-infinite-radius]]' and further supplier wikilinks inside its Definition. The defining section is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "def-natural-logarithm says 'because [[cor-exponential-is-a-bijection-onto-positive-reals]] states...' inside its Definition. This hyperlink interrupts the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "def-expectation-of-a-nonnegative-or-integrable-random-variable includes '[[def-integrable-real-and-complex-functions-and-their-integrals]]' within its Definition. This violates the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integral-of-a-nonnegative-simple-function",
+      "finding": "def-integral-of-a-nonnegative-simple-function embeds '[[def-nonnegative-simple-measurable-function]]' and '[[def-measure]]' inside its Definition. Hyperlinks remain within the complete defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-composition-of-probability-kernels",
+      "finding": "def-composition-of-probability-kernels includes 'The kernel convention is [[def-measure-kernel-and-probability-kernel]]' and further supplier links inside its Definition. This violates the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice includes '[[def-choice-function]]' in the Definition's displayed axiom prose. This hyperlink remains inside the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-kullback-leibler-divergence",
+      "finding": "def-kullback-leibler-divergence begins with '([[def-probability-measure]])' and contains numerous additional supplier wikilinks throughout its Definition. The complete defining section violates the uninterrupted-definition rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-kullback-leibler-is-nonnegative",
+      "finding": "thm-kullback-leibler-is-nonnegative includes '[[def-kullback-leibler-divergence]]', '[[def-measure-space]]', and '[[def-finite-sigma-finite-and-semifinite-measures]]' inside its Statement. The complete Statement is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-kl-for-probability-kernels",
+      "finding": "def-conditional-kl-for-probability-kernels says 'The integrand is measurable by [[thm-conditional-kl-is-measurable]]' within its Definition. This is an inline hyperlink inside the complete defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "def-conditional-expectation-given-a-sigma-algebra includes 'Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]' and '[[def-l-one-of-a-measure]]' within its Definition. These violate the uninterrupted-definition rule.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-private-learning",
+      "to": "ml02-differential-privacy",
+      "faithful": true,
+      "note": "The private-online theorem invokes the arbitrary-measurable-output composition theorem with AC, pure round parameters, and delta-prime equal to its target delta. Its fixed loss-sequence adjacency and conditional interactive extension fit that supplier's expressly generalized symmetric adjacency scope. The ERM theorem explicitly restricts add/remove adjacency to databases of size at least n and proves privacy directly using a sensitivity upper bound; it does not misapply the attained-maximum exponential-mechanism convention. The DP page makes no reverse claim about these consumers."
+    },
+    {
+      "from": "ml02-federated-optimization",
+      "to": "ml02-differential-privacy",
+      "faithful": true,
+      "note": "The federated page's dependency is contextual. FedAvg and SCAFFOLD remarks expressly avoid claiming differential privacy. The companion example ex-client-data-locality-does-not-imply-dp uses the ordered event inequality correctly: exact counts on the empty and singleton databases force 1 ≤ delta. This agrees with the supplier's record-level scope and the owned limitation remark; no converse implication from local storage to privacy is asserted."
+    }
+  ]
+}

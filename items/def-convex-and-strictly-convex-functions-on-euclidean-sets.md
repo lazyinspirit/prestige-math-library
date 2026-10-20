@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-convex-and-strictly-convex-functions-on-euclidean-sets.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -30,6 +31,13 @@ pipeline_run: null
 
 ## Definition
 
-Let $C\subseteq\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\to\mathbb R$ is convex when $f((1-t)x+ty)\le(1-t)f(x)+tf(y)$ for all $x,y\in C$ and $t\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].
+Let $C\subseteq\mathbb R^n$ be convex (A convex subset of $\mathbb{R}^m$ contains every line segment between two of its points). The function $f:C\to\mathbb R$ is convex when $f((1-t)x+ty)\le(1-t)f(x)+tf(y)$ for all $x,y\in C$ and $t\in[0,1]$. The parameter interval is the closed interval of Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length.
 
 It is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.
+
+## Definition references
+
+[[def-convex-subset-of-euclidean-space]]
+
+[[def-interval]]
+

@@ -1,0 +1,59 @@
+# Step 3a adjudication — batch 7
+
+Run: `machine-learning-all-101-2026-10-19`; group: `batch-7`; scope assignment group remains `b`.
+
+Scope: four touched obligations, no reader/refuter findings or page obligations; nine risk reviews. Read the generated order, scope, reader report/findings, refuter report, pre/post snapshots and current sources. Work follows ascending dependency levels. No judging, stamping or engine transitions performed.
+
+## Completed reviews
+
+- Level 0, `lem-compression-binomial-sum-bound`: reviewed both steps and all 12 supplier interfaces. The weighting x=d/m is positive, finite binomial expansion and nonnegative extension apply, and exponential comparison followed by positive division proves the bound. Checked d=1, m=d=1, m=d; d=0 is excluded. Recorded complete risk review. Corrected a worksheet sentence: at m=d the weighting comparison, rather than the exponential comparison, is equality. No item change or mathematical defect.
+
+- Level 1, `def-sample-compression-scheme`: retained reader mathematics and amended its manifest after exact pre/post comparison and review of all six supplier interfaces. The total measurable encoder, finite discrete output index set, empty sample convention and no-side-information rule are coherent. Searched all item references: only the compression theorem, sample-size corollary and finite-support example consume it. Read all three; none needs repair (the corollary assumes the measurable event explicitly; the example uses finite discrete spaces). Manifest dependencies synchronized; no new content edit.
+
+- Level 1, `lem-pac-bayes-donsker-varadhan-inequality`: retained reader analytic-prerequisite repair and amended its manifest and contract citation records, exact pre/post hashes verified. Read all five steps and all 19 supplier interfaces. Bounded integrability and simple-function expectations license the log-sum argument; uniform approximants control the posterior expectation and the logarithmic exponential integral to error 1/n. Null partition cells and infinite KL are handled. Source: Alquier, Lemma 2.2 and proof, PDF pp.12–13, https://arxiv.org/pdf/2110.11216v4. No density/partition equivalence is presumed: this inequality has its own complete partition proof. Recorded complete risk review and synchronized manifest.
+
+- Level 3, `thm-compression-generalization-bound`: `reviewed_no_defect`, `audit_enrichment`. Source unchanged across exact pre/post/current bytes; archived contract diff is solely the updated F1 definition quote. Read the three-step product/Tonelli/finite-union proof and all 14 suppliers. Empty selected tuple, d=0,m=1, m=d+1, repeated observations and risk 0/1 are valid. The theorem does not need a measurable uncountable union or a regular conditional distribution. Complete risk review recorded. Source: Floyd–Warmuth Theorem 5, printed p.279 and entire Appendix proof, pp.302–303, https://mwarmuth.bitbucket.io/pubs/J30.pdf.
+
+- Level 3, `thm-pac-bayes-kl-bound`: all five steps, 23 supplier interfaces and the current Hoeffding MGF proof checked. The negative rescaling parameter yields the correct lambda-squared factor. Tonelli and Markov construct one measurable event independent of the posterior; change of measure then holds for every posterior on that event. C=0, m=1, infinite KL and fixed-prior/fixed-lambda scope are sound. Complete risk review recorded; no routed decision owed. Source: Alquier Theorem 2.1 and full proof, PDF pp.12–13.
+
+- Level 4, `cor-compression-sample-size-bound`: Read all three steps and nine cited suppliers. With d=0 the sum is (1-epsilon)^m<=exp(-m*epsilon)<=delta. For 1<=d<m each residual exponent m-i>=m-d, so exponential domination and the reviewed binomial-sum lemma give exp(d*log(em/d)-epsilon*(m-d))<=delta. The learner event is measurable by explicit hypothesis and is contained in the existence event. Checked d=0,m=1, d=m-1, equality of the sample-size condition, epsilon/delta in the open unit interval, and excluded d=m and division by zero. No choice or diagram. Floyd–Warmuth Theorem 5/Appendix supports the input probability bound; this particular sufficient condition is derived locally. Complete risk review recorded.
+
+- Level 4, `cor-pac-bayes-risk-bound`: Read both proof steps, all four cited supplier interfaces and Alquier Theorem 2.4 with proof (PDF pp.20–21). A nonempty finite sample-independent grid has N>=1 and eta=delta/N in (0,1). Each fixed-lambda theorem provides a measurable event controlling every posterior; their finite intersection loses at most N*eta=delta. Checked N=1, C=0,m=1, infinite KL and excluded lambda=0; no optimization over all positive lambdas or sample-chosen grid is asserted. No choice or diagram. Complete risk review recorded.
+
+- Level 4, `cex-pac-bayes-data-dependent-prior-fails`: Read all four proof steps and eight cited supplier interfaces including the logarithm upper-bound proof. Every length-10 sample on 20 points leaves at least 10 unseen points; lexicographic finite selection is total and measurable. Its selected hypothesis has exactly 10 errors in 20 population points and no sample errors, including samples with repeats. Equal prior/posterior point masses give zero KL for every partition. At m=10,lambda=20,delta=1/4 the RHS is <=1/4+3/20=2/5<1/2, so failure probability is one. Absolute continuity holds pointwise; only the fixed-prior requirement fails. No AC or diagram; the example is local, while Alquier supplies the valid fixed-prior theorem. Complete risk review recorded.
+
+- Level 4, `ex-finite-support-sample-compression`: Read all three verification steps and four cited supplier interfaces. On any labeled sequence the first occurrence of each of two inputs gives a total deterministic finite discrete encoder selecting at most two entries; arbitrary inconsistent labels still define a total encoder/reconstructor, and target-consistent sequences reconstruct all observed labels. Empty sample consistency is vacuous. For m>=3 risk is 1/2 precisely on the all-zero sample, otherwise zero (an unseen zero gets the correct default). Independence gives 2^-m; this is <=(3/4)^m, the i=0 term of the nonnegative sum. Checked all-zero/all-one/mixed samples, m=3 and zero sample for the scheme. Source bytes are unchanged pre/post; only the exact F1 definition quote was enriched. No choice or diagram. Complete risk review recorded.
+
+- Level 4, `ex-pac-bayes-single-hypothesis-posterior`: Read both verification steps and all four cited supplier interfaces. Uniform prior on two distinct points has only the empty null set, so the h0 point mass is absolutely continuous. Finite partitions either join the points (divergence 0) or separate them (divergence log2); singleton partition attains log2. Evaluating posterior integrals at h0 and applying the reviewed fixed-prior theorem proves the formula. Checked m=1,C=0, positive fixed lambda, confidence in (0,1), and distinction from a uniform bound on arbitrary posterior draws. No choice or diagram. Alquier §2.1.1/Theorem 2.1 supports the theorem context. Complete risk review recorded.
+
+## Local validation in progress
+
+Initial focused strict contract check identified 18 mechanical citation-quote/use-mapping errors in the reader-added Donsker–Varadhan worksheet. Replaced paraphrased quotations with the exact current supplier sections already read, and mapped every fact to all five-step proof uses as applicable. This changes no item mathematics. Precheck passed all three proof-bearing touched carriers; definition is not applicable. Rendercheck passed all four touched sources. Risk report with `--require-reviewed` passed all nine required reviews.
+
+## Final disposition
+
+Four decisions: two `amended_repair` for the compression definition and change-of-measure lemma (reader source bytes retained, required manifest/citation records synchronized), and two `reviewed_no_defect` / `audit_enrichment` for the theorem and finite-support example (reader changed only the definition quote). Two closed nonfatal historical defect rows record the encoder interface omission and missing analytic prerequisite declarations. Contract-only check failures created no defect rows. No reader/refuter findings are owed.
+
+All eleven batch sources were reviewed as carriers or actual prerequisites. All assigned statement/definition/example/refuted-statement sections are uninterrupted by links, with references in the immediately following reference sections. No assigned TikZ/tikzcd diagrams occur and these scalar probabilistic arguments require none. No algorithm conversion is applicable. Pages have no routed decision and their compact frontmatter-only layout is preserved.
+
+The batch-owned cross-batch input now records independent current checks for every actual risk-definition supplier use and resolves its open page prerequisite edge using the current supplier inventory and the three actual supplier interfaces. Ran the required frontier-ledger refresh successfully. No defective published supplier or affected outside consumer was found; published content remained read-only and no published ledger row was required. No escalation, historical-byte uncertainty or proposed withdrawal arose.
+
+## Checks and limits
+
+- Risk report before review: nine HIGH/CRITICAL items; final `--require-reviewed`: zero errors, all nine reviewed.
+- Strict proof contract: initial 18 citation quote/use mapping errors corrected; rerun: zero errors, zero warnings, 9/9 proof-bearing items.
+- Precheck on all four touched paths: three proof-bearing items pass; definition not applicable.
+- Rendercheck on all four touched paths: pass, including actual KaTeX and YAML parsing.
+- Final batched `node tools/proof-layout.mjs items/def-sample-compression-scheme.md items/lem-pac-bayes-donsker-varadhan-inequality.md items/thm-compression-generalization-bound.md items/ex-finite-support-sample-compression.md`: four items, eleven steps, zero defects. No item was edited after this check.
+- Appended exactly two closed defect rows through the locked ledger tool and regenerated its view.
+
+Sources read: Floyd–Warmuth §3, Theorem 5 and full Appendix proof; Alquier Lemma 2.2, Theorem 2.1 and their full proofs, and Theorem 2.4 and full proof. Reviewed the actual local supplier interfaces rather than substituting source authority for a local proof. This is batch adjudication and focused local checking; it is not a fresh audit of every transitive foundational proof. The engine owns current hash stamps, remaining gate battery and transitions.
+
+
+## Owner alert outside batch 7
+
+Run-wide `node tools/defect-ledger.mjs validate --run machine-learning-all-101-2026-10-19` returned eight schema errors in four batch-11 rows: `ml101-b11-3a-sign-tail-source-locator` and `ml101-b11-3a-posterior-odds-source-locator` use location `sources-and-statement-references` and have evidence entries lacking paths; `ml101-b11-3a-dimension-radius-borel-hypothesis` and `ml101-b11-3a-natural-robust-borel-hypothesis` use subclass `hypothesis-missing` and location `example-and-facts`, outside the validator enums. These are bookkeeping diagnostics, not new mathematical findings or defect rows. Left outside records unchanged; batch-11 owner should normalize its records. This does not leave any batch-7 mathematical obligation open.
+
+Final consistency: authenticated archived pre-contract hashes for both quote-only touched carriers and the change-of-measure lemma match the immutable pre snapshot. Every current batch-7 item raw hash equals the native reader-post snapshot. The decisions file contains exactly the four scope obligations, with group `batch-7`; no subject hashes were self-stamped.
+
+Final focused reruns: strict proof contracts passed (9/9, zero errors/warnings); required risk reviews passed (nine items); isolated validation of the exact two current batch-7 ledger rows passed (two rows, zero errors). No batch-7 blocker remains.

@@ -1,0 +1,254 @@
+{
+  "group": "w",
+  "batches": ["68"],
+  "pages_read": [
+    "score-sdes-and-reverse-time-generation",
+    "score-sdes-and-reverse-time-generation-examples"
+  ],
+  "items_read": [
+    "def-marginal-score-function",
+    "thm-probability-flow-ode-marginals",
+    "alg-predictor-corrector-score-sampling",
+    "ex-stationary-ornstein-uhlenbeck-probability-flow",
+    "ex-singular-data-score-truncation",
+    "ex-vp-finite-terminal-prior-mismatch"
+  ],
+  "conventions": [
+    {
+      "convention": "The score is the spatial gradient of the log of the specified density, defined only where that density is positive, finite and differentiable.",
+      "fixed_by": "def-marginal-score-function",
+      "matters_for": [
+        "thm-probability-flow-ode-marginals",
+        "alg-predictor-corrector-score-sampling",
+        "ex-stationary-ornstein-uhlenbeck-probability-flow",
+        "ex-singular-data-score-truncation",
+        "ex-vp-finite-terminal-prior-mismatch"
+      ]
+    },
+    {
+      "convention": "For state-dependent covariance a, probability-flow velocity is b − (div a)/2 − a score/2. The theorem assumes a global jointly C1 flow of diffeomorphisms and asserts equality of one-time marginals.",
+      "fixed_by": "thm-probability-flow-ode-marginals",
+      "matters_for": [
+        "ex-stationary-ornstein-uhlenbeck-probability-flow"
+      ]
+    },
+    {
+      "convention": "Reverse time increases as u = T − t. The reverse drift is −b + div a + a score, evaluated at forward time T − u.",
+      "fixed_by": "alg-predictor-corrector-score-sampling",
+      "matters_for": [
+        "alg-predictor-corrector-score-sampling"
+      ]
+    },
+    {
+      "convention": "The sampler assumes AC, uses 0 < ε < T and N ≥ 1, starts from the actual terminal law P_T, and returns a finite-step state at forward time ε. Each predictor precedes a corrector targeting the next forward-time density, with mutually independent standard Gaussian inputs.",
+      "fixed_by": "alg-predictor-corrector-score-sampling",
+      "matters_for": [
+        "ex-singular-data-score-truncation",
+        "ex-vp-finite-terminal-prior-mismatch"
+      ]
+    },
+    {
+      "convention": "N(0, θ) uses θ as variance; the VP schedule has continuous strictly positive β on a finite compact time interval.",
+      "fixed_by": "ex-vp-finite-terminal-prior-mismatch",
+      "matters_for": [
+        "ex-vp-finite-terminal-prior-mismatch"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-marginal-score-function",
+      "statement": "On the set of points x where 0 < p_t(x) < ∞ and the map x ↦ p_t(x) is differentiable, the marginal score of P_t is s_t(x) := ∇_x log p_t(x).",
+      "used_by": [
+        "thm-probability-flow-ode-marginals",
+        "alg-predictor-corrector-score-sampling",
+        "ex-stationary-ornstein-uhlenbeck-probability-flow",
+        "ex-singular-data-score-truncation",
+        "ex-vp-finite-terminal-prior-mismatch"
+      ]
+    },
+    {
+      "id": "thm-probability-flow-ode-marginals",
+      "statement": "For positive classical probability densities satisfying the stated Fokker–Planck equation, assume the velocity v = b − (div a)/2 − a∇log p/2 has the specified global C1 flow of diffeomorphisms. For Z_0 with law P_0 and Z_t = Φ_{t,0}(Z_0), Z_t has law P_t for every t ∈ [0,T]; no equality of path laws is asserted.",
+      "used_by": [
+        "ex-stationary-ornstein-uhlenbeck-probability-flow"
+      ]
+    },
+    {
+      "id": "alg-predictor-corrector-score-sampling",
+      "statement": "Given the stated positive-density diffusion and reversal hypotheses, AC, 0 < ε < T, N ≥ 1 and positive corrector step sizes, initialize Y_0 ∼ P_T. At each of N time levels perform the displayed reverse Euler–Maruyama predictor and one unadjusted Langevin corrector using the next-time exact marginal score. Return Y_N at forward time ε.",
+      "used_by": [
+        "ex-singular-data-score-truncation",
+        "ex-vp-finite-terminal-prior-mismatch"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Probability laws as pushforwards and equality on Borel sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "used_for": "Extend equality on rational open boxes to equality of Borel probability laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Pass from increasing compactly supported C1 tests to open-box indicators.",
+      "opened": true
+    },
+    {
+      "id": "alg-unadjusted-langevin-algorithm",
+      "used_for": "The corrector update and its positive-step target caveat.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-continuous-brownian-ito-process",
+      "used_for": "Forward diffusion, localized stochastic integrals and filtration conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-d-dimensional-brownian-motion",
+      "used_for": "Vector Brownian increments and covariance conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian randomness in predictor and corrector updates.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Scalar normal laws, affine scaling and zero variance.",
+      "opened": true
+    },
+    {
+      "id": "def-brownian-motion",
+      "used_for": "Brownian Gaussian marginals and the common full-measure continuity event.",
+      "opened": true
+    },
+    {
+      "id": "cor-deterministic-ito-integrals-are-gaussian",
+      "used_for": "Gaussian laws and variances of the explicit OU and VP stochastic integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-ito-integral-for-square-integrable-predictable-processes",
+      "used_for": "Elementary approximation and L2 construction of deterministic stochastic integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of the OU initial value and the Brownian process.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Affine Gaussian transforms and products of transforms for independent summands.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of Brownian-measurable integral versions from the OU initial value.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-location-scale-density",
+      "used_for": "Positive-variance Gaussian density formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-almost-sure-subsequence-from-convergence-in-probability",
+      "used_for": "Obtain a Brownian-process-measurable version of an L2 limit.",
+      "opened": true
+    },
+    {
+      "id": "thm-ito-formula-one-dimensional",
+      "used_for": "Verify the explicit OU and VP processes solve their displayed SDEs.",
+      "opened": true
+    },
+    {
+      "id": "def-weak-convergence-of-borel-probability-measures",
+      "used_for": "Interpret convergence to the singular Brownian initial law.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Pass bounded continuous tests through the Brownian endpoint limit.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "alg-unadjusted-langevin-algorithm",
+      "finding": "alg-unadjusted-langevin-algorithm, Definition, begins “Assume AC ([[def-axiom-of-choice]])” and includes further inline supplier links throughout the target definition and instructions. These interrupt the complete defining section; the dispatch requires all such links in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice places “([[def-choice-function]])” inside the quoted defining assertion, before its written-out formulation and equivalent product formulation. This violates the required uninterrupted Definition and reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-standard-normal-and-normal-laws",
+      "finding": "def-standard-normal-and-normal-laws, Definition, says “By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]” before completing the normal-law construction. Additional links remain in the same paragraph. The complete Definition needs the prescribed following references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-continuous-brownian-ito-process",
+      "finding": "def-continuous-brownian-ito-process, Definition, begins with “the standing hypothesis (H) of [[def-elementary-predictable-brownian-integrand]]” and contains supplier links throughout its seven defining clauses. The complete Definition is interrupted by hyperlinks, contrary to the dispatch's reference-placement requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-brownian-motion",
+      "finding": "def-brownian-motion, Definition, begins “Assume the Axiom of Choice [[def-axiom-of-choice]]” and later links the Gaussian/increment equivalence and modification conventions within the defining section. These links require relocation after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "def-independent-random-elements, Definition, includes “[[def-independent-sigma-algebras-and-events]]” before the final Borel-convention paragraph, which itself links “[[def-sigma-algebra-generated-by-a-function]]”. Both links interrupt the complete Definition and need the prescribed Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-ito-integral-for-square-integrable-predictable-processes",
+      "finding": "def-ito-integral-for-square-integrable-predictable-processes, Definition, opens with “the standing hypothesis (H) of [[def-elementary-predictable-brownian-integrand]]” and embeds supplier links throughout the construction and five clauses. This violates the uninterrupted-definition policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-deterministic-ito-integrals-are-gaussian",
+      "finding": "cor-deterministic-ito-integrals-are-gaussian, Statement, embeds “[[def-elementary-predictable-brownian-integrand]]”, “[[def-ito-integral-for-square-integrable-predictable-processes]]”, and normal-law links before completing its scalar and vector conclusions. The complete Statement needs an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-normal-location-scale-density",
+      "finding": "lem-normal-location-scale-density, Statement, says “the normal law N(m, σ²) of [[def-standard-normal-and-normal-laws]] has Lebesgue density” before its displayed conclusion. This inline link violates the required uninterrupted Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-ito-formula-one-dimensional",
+      "finding": "thm-ito-formula-one-dimensional, Statement, embeds “[[def-elementary-predictable-brownian-integrand]]”, “[[def-continuous-brownian-ito-process]]” and “[[thm-localized-ito-integral]]” within its hypotheses and representative conventions. These links interrupt the complete Statement and require the prescribed following references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-weak-convergence-of-borel-probability-measures",
+      "finding": "def-weak-convergence-of-borel-probability-measures, Definition, includes “Continuity is [[def-metric-continuity]]” and later “[[def-integrable-real-and-complex-functions-and-their-integrals]]” before finishing its conventions. These links violate the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "score-sdes-and-reverse-time-generation",
+      "to": "anderson-reverse-time-diffusion",
+      "faithful": true,
+      "note": "Read the supplier page and thm-markov-diffusion-reversal-by-bayes-kernels. The sampler explicitly translates [ε,T] to [0,T−ε], translates the filtration and Brownian increments, and retains positive densities, classical forward equations, integral qualifications, uniform nonsingularity, AC and reverse martingale-problem well-posedness. Its reverse drift, covariance and Bayes kernels agree with the supplier under that translation. The supplier imposes no dependency on the consuming score-SDE page."
+    }
+  ]
+}

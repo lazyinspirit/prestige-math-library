@@ -1,0 +1,31 @@
+--- items/ex-mixture-convexity-not-displacement-convex.md
++++ research/machine-learning-all-101-2026-10-19-mixture-b-leaf-proposal/proposed/items/ex-mixture-convexity-not-displacement-convex.md
+@@ -6,7 +6,7 @@
+ dependency_level: 4
+ origin: pipeline
+ pipeline_run: machine-learning-all-101-2026-10-19
+-deps: [def-feature-measure-energy, def-generalized-wasserstein-geodesic-and-strong-subgradient, def-axiom-of-choice, ex-euclidean-norm-and-squared-norm-are-convex]
++deps: [def-feature-measure-energy, def-generalized-wasserstein-geodesic-and-strong-subgradient, def-axiom-of-choice]
+ justified_by: []
+ proof_strategy: direct
+ axiom_use: "AC is inherited from the generalized-geodesic transport framework; the scalar convexity and Dirac coupling calculation are choice-free."
+@@ -40,8 +40,6 @@
+ 
+ **Given:** The feature-energy data in the Example.
+ 
+-[F1] The real square is convex: $(1-t)a^2+tb^2-((1-t)a+tb)^2=t(1-t)(a-b)^2\ge0$. [[ex-euclidean-norm-and-squared-norm-are-convex]]
+-
+ [F2] The unique coupling of two Dirac probability measures is concentrated on their support-point pair, so their $W_2$ geodesic is the linear interpolation of those points. [[def-generalized-wasserstein-geodesic-and-strong-subgradient]]
+ 
+ ## Proof
+@@ -49,6 +47,8 @@
+ 
+ **Given:** $F$, $\mu_0,\mu_1$, and AC as in the Example.
+ 
+-1.1 For finite nonnegative measures $\mu_0,\mu_1$, write $a=\int\sin x\,d\mu_0$ and $b=\int\sin x\,d\mu_1$. Linearity of integration gives $F((1-t)\mu_0+t\mu_1)=((1-t)a+tb)^2\le(1-t)a^2+tb^2=(1-t)F(\mu_0)+tF(\mu_1)$ by [F1]. Thus $F$ is mixture-convex. [F1, algebra]
++1.1 For $a,b\in\mathbb R$ and $0\le t\le1$, expansion gives $(1-t)a^2+tb^2-((1-t)a+tb)^2=t(1-t)(a-b)^2\ge0$. Thus the real square obeys the convexity inequality, including $t=0,1$ and $a=b$, by core algebra alone. [given, algebra]
+ 
+-2.1 For $\mu_0=\delta_0$ and $\mu_1=\delta_\pi$, [F2] gives the geodesic $\mu_t=\delta_{\pi t}$. Then $F(\mu_0)=F(\mu_1)=0$, whereas $F(\mu_{1/2})=\sin^2(\pi/2)=1$. The convexity inequality at $t=1/2$ would require $1\le0$, which is false. Hence mixture convexity does not imply displacement convexity. [F2, given] ∎
++2.1 For finite nonnegative measures $\mu_0,\mu_1$, write $a=\int\sin x\,d\mu_0$ and $b=\int\sin x\,d\mu_1$. Linearity of integration gives $F((1-t)\mu_0+t\mu_1)=((1-t)a+tb)^2\le(1-t)a^2+tb^2=(1-t)F(\mu_0)+tF(\mu_1)$ by step 1.1. Thus $F$ is mixture-convex. [step 1.1, algebra]
++
++3.1 For $\mu_0=\delta_0$ and $\mu_1=\delta_\pi$, [F2] gives the geodesic $\mu_t=\delta_{\pi t}$. Then $F(\mu_0)=F(\mu_1)=0$, whereas $F(\mu_{1/2})=\sin^2(\pi/2)=1$. The convexity inequality at $t=1/2$ would require $1\le0$, which is false. Hence mixture convexity does not imply displacement convexity. [F2, step 2.1, given] ∎

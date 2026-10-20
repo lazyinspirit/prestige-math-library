@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-cauchy-schwarz-and-the-euclidean-norm.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -39,15 +40,15 @@ pipeline_run: null
 ## Statement
 
 Let $n \in \mathbb{N}$ and let $x, y \in \mathbb{R}^{n}$, with the Euclidean
-inner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:
+inner product and the Euclidean norm as in The Euclidean inner product $\langle x,y\rangle = \sum_{k<n} x_k y_k$ on $\mathbb{R}^n$. Then:
 
 1. **Cauchy-Schwarz.**
    $$\lvert\langle x,y\rangle\rvert \;\le\; \lVert x\rVert_2\,\lVert y\rVert_2 ,$$
    with equality if and only if there is a pair $(\lambda,\mu) \ne (0,0)$ of
    reals with $\lambda x_k = \mu y_k$ for every $k < n$.
 2. **$\lVert\cdot\rVert_2$ is a norm on $\mathbb{R}^{n}$**
-   ([[def-norm-and-normed-space]]), for **every** $n \in \mathbb{N}$; the metric
-   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \ge 1$.
+   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \in \mathbb{N}$; the metric
+   it induces is $d_2$ of $\mathbb{R}^n$ as the set of functions $n \to \mathbb{R}$, and $d_1$, $d_2$, $d_\infty$ are metrics on it whenever $n \ge 1$.
 3. **Parallelogram law.**
    $$\lVert x+y\rVert_2^{2} + \lVert x-y\rVert_2^{2} \;=\; 2\lVert x\rVert_2^{2} + 2\lVert y\rVert_2^{2} .$$
 4. **Polarisation.**
@@ -55,10 +56,20 @@ inner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then
    so the inner product is recovered from the norm it induces.
 
 **Clause 1 is a citation, not a new proof.** The inequality and its equality case
-are the published [[thm-cauchy-schwarz-finite]], stated there for two lists of
+are the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of
 reals; all that happens below is that it is read in the vector notation of
-[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one
+The Euclidean inner product $\langle x,y\rangle = \sum_{k<n} x_k y_k$ on $\mathbb{R}^n$. Re-proving it here would put two proofs of one
 statement in the library.
+
+## Statement references
+
+[[def-euclidean-inner-product]]
+
+[[def-norm-and-normed-space]]
+
+[[lem-metrics-on-rn]]
+
+[[thm-cauchy-schwarz-finite]]
 
 ## Facts & Assumptions
 

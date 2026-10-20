@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-strict-separation-of-a-point-from-a-closed-convex-set.json
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -29,7 +30,11 @@ pipeline_run: null
 
 ## Statement
 
-Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty, closed, and convex, and let $x\notin C$. Then there are $a\ne0$ and $b\in\mathbb R$ such that $\langle a,z\rangle\le b<\langle a,x\rangle$ for every $z\in C$. Thus a hyperplane strictly separates $x$ from $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).
+Let $n\ge1$, let $C\subseteq\mathbb R^n$ be nonempty, closed, and convex, and let $x\notin C$. Then there are $a\ne0$ and $b\in\mathbb R$ such that $\langle a,z\rangle\le b<\langle a,x\rangle$ for every $z\in C$. Thus a hyperplane strictly separates $x$ from $C$ (Supporting and strictly separating hyperplanes in Euclidean space).
+
+## Statement references
+
+[[def-supporting-hyperplane-to-a-convex-set]]
 
 ## Facts & Assumptions
 

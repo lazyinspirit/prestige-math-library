@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "95",
+  "round": 0,
+  "reviewed_items": [
+    "def-low-rank-adaptation-of-a-linear-layer",
+    "alg-finite-budget-low-rank-adaptation",
+    "thm-low-rank-adapter-factorization-ambiguity",
+    "thm-low-rank-adapter-merging-and-gradients",
+    "rem-adaptation-rank-and-empirical-transfer",
+    "ex-low-rank-adapter-change-of-basis",
+    "ex-rank-one-adapter-cannot-realize-full-rank-update",
+    "ex-zero-zero-initialization-stalls-adaptation",
+    "ex-merged-and-unmerged-adapter-forward-pass-agree"
+  ],
+  "reviewed_pages": [
+    "low-rank-adaptation-and-parameter-update-geometry",
+    "low-rank-adaptation-and-parameter-update-geometry-examples"
+  ],
+  "decision": "repair",
+  "reason": "The supplier statements and proofs support the factorization, merging, gradient, and example claims; the empirical caveats are appropriately qualified by Hu et al. [§§4.1–5](https://arxiv.org/pdf/2106.09685). Request one local repair for the algorithm contract and its separate termination result. The batch is not accepted pending those fixes and owner reconciliation of the shared ML-87 scope conflict.",
+  "findings": [
+    {
+      "id": "alg-finite-budget-low-rank-adaptation",
+      "type": "local",
+      "reason": "The Definition requires every evaluation to be defined, C1, and on a strict branch, making its DOMAIN_ERROR and NONDIFFERENTIABLE branches unreachable. Specify admissibility per step: check the current primal evaluation, return the relevant status before updating on failure or a branch boundary, and call reverse mode only on an admissible strict branch. A successful later step need not stay on the same branch as earlier steps."
+    },
+    {
+      "id": "thm-low-rank-adapter-merging-and-gradients",
+      "type": "local",
+      "reason": "The finite-T procedure asserts termination, but no separate proved result establishes it. In this assigned theorem, add a distinct conclusion and proof that, assuming each finite primitive evaluation returns, the procedure returns a failure status before updating at its first invalid or boundary evaluation, or returns SUCCESS after T updates. The procedure instructions themselves do not prove this property."
+    },
+    {
+      "id": "ML-87 shared prerequisite reconciliation",
+      "type": "scope",
+      "reason": "The shared supplier table in research/plan-machine-learning-track.md:62 lists ML-87 as consuming EM results and Bayesian cross-validation, while the controlling ML-87 design and current assigned pages/items contain no such uses or dependency edges. This shared scope conflict is outside the assigned write scope and needs owner reconciliation; no EM/CV premise is missing from the reviewed arguments."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-low-rank-adapter-merging-and-gradients",
+      "decision": "repair",
+      "reason": "Its current gradient and merge arguments are sound. It is the local target for the separate finite-termination result and must be rechecked after that statement/proof change."
+    },
+    {
+      "id": "ex-zero-zero-initialization-stalls-adaptation",
+      "decision": "accept",
+      "reason": "The example uses an everywhere-defined polynomial loss and a successful one-step execution; its calculations remain valid under the proposed runtime-status clarification."
+    },
+    {
+      "id": "rem-adaptation-rank-and-empirical-transfer",
+      "decision": "accept",
+      "reason": "Its claims rely on the existing factorization and merge results and make no convergence or transfer guarantee; the proposed changes preserve those claims."
+    },
+    {
+      "id": "ex-merged-and-unmerged-adapter-forward-pass-agree",
+      "decision": "accept",
+      "reason": "The example uses the unchanged real-arithmetic merge identity and exact matrix arithmetic."
+    },
+    {
+      "id": "low-rank-adaptation-and-parameter-update-geometry",
+      "decision": "accept",
+      "reason": "The page is body-free and its current item inventory remains valid under the proposed source repairs."
+    },
+    {
+      "id": "low-rank-adaptation-and-parameter-update-geometry-examples",
+      "decision": "accept",
+      "reason": "The page remains a leaf containing the reviewed examples; the successful-step and merge uses remain valid."
+    }
+  ]
+}

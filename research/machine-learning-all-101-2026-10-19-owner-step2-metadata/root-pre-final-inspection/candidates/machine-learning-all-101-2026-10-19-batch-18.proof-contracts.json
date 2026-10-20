@@ -1,0 +1,952 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-bagged-random-forest",
+    "thm-infinite-forest-vote-limit",
+    "thm-random-forest-strength-correlation-bound",
+    "thm-regression-forest-risk-under-unbiased-randomized-trees",
+    "ex-random-forest-zero-margin-vote-limit",
+    "ex-random-forest-out-of-bag-diagnostic",
+    "ex-random-forest-strength-correlation-tradeoff"
+  ],
+  "contracts": {
+    "alg-bagged-random-forest": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure requires n>=1 and every recursive child is required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The classification entropy convention explicitly defines 0 log 0 = 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A one-position bootstrap node has defined regression mean and classification proportion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A node with no distinct feature values has no candidate and remains a leaf."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Only midpoints between distinct observed values are formed, so every selected split has two nonempty children."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: A finite candidate set is minimized with fixed coordinate and cut-index tie order; class votes use least-index ties."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-infinite-forest-vote-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "class-vote-frequencies-converge",
+          "claim": "Fix a test pair $(x,y)$ outside the zero-margin set. For each class $c_j$, the variables $\\mathbf1\\{h(x,\\Theta_b)=c_j\\}$ are identically distributed because they use the same measurable map on randomizations with common law, independent by [F3], and integrable because they are bounded by $1$. Applying [F4] to each of the finitely many classes shows that every vote proportion converges almost surely to $p_j(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "finite-decision-converges-away-from-zero-margin",
+          "claim": "On a sequence where those proportions converge, if $m(x,y)>0$, the true class has a strictly larger limiting vote proportion than each wrong class, so the finite forest eventually predicts $y$. If $m(x,y)<0$, a wrong class attaining the finite maximum in the definition of $m$ has a strictly larger limiting proportion than $y$, so the finite forest eventually predicts a wrong class. Thus the finite-forest error indicator converges almost surely in the randomizations to $\\mathbf1\\{m(x,y)<0\\}$ for $P$-almost every test pair.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "product-almost-everywhere-transfer",
+          "claim": "The functions $p_j(x)$ are measurable by [F6] applied to the bounded jointly measurable indicators $\\mathbf1\\{h(x,\\theta)=c_j\\}$. Hence the error indicators and the limiting margin indicator are jointly measurable and bounded. Independence of the sequence-valued randomization and test pair lets [F5] give their product joint law. Applying [F6] to the indicator of the nonconvergence set and using step 2.1 shows that for almost every randomization sequence the error indicators converge for $P$-almost every test pair.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "conditional-risk-limit",
+          "claim": "For each such sequence, the error indicators are dominated by the integrable constant $1$ on the probability space $(\\mathcal X\\times\\mathcal C,P)$. By [F7] their integrals converge to the integral of $\\mathbf1\\{m<0\\}$, which by [F8] is $P\\{m<0\\}$. These integrals are exactly $PE_B(\\Theta_{1:B})$, proving the claimed limit.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a test probability law and a nonempty finite class set with J>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero-margin set is assumed P-null; finite vote ties are immaterial away from that set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite class count J is at least two, so every wrong-class maximum is over a nonempty finite set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof treats both strictly positive and strictly negative margins; the remaining zero case is P-null."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Strict sign gives a positive gap from every competing class because the class set is finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Finite class maxima and the fixed least-index tie rule make every finite vote prediction defined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-random-forest-strength-correlation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "raw-margin-conditional-mean",
+          "claim": "For each fixed $z=(x,y)$, the definition of $\\hat j$ gives $\\mathbb E_Q[r_\\Theta(z)]=p_k(x)-p_{\\hat j(x,y)}(x)=m(z)$. Also $|r_\\theta(z)|\\le1$, so all displayed means and covariances are finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "margin-variance-covariance-identity",
+          "claim": "The bounded jointly measurable class indicators and [F5] make $p_j$ and the finite maximizer $\\hat j$ measurable. By [F4] the pair $(\\Theta,\\Theta',Z)$ has product law, and [F5] permits exchanging the integrals of these bounded functions. Thus $\\mathbb E_{Q\\times Q}[\\operatorname{Cov}_P(r_\\Theta,r_{\\Theta'})]=\\mathbb E_P[m(Z)^2]-s^2=\\operatorname{Var}_P(m(Z))$. Indeed, the product of the two conditional raw-margin means is $m(z)^2$, while the product of their $P$-means integrates to $(\\mathbb E_Pm)^2=s^2$. If both standard deviations are positive, covariance equals correlation times their product; if either is zero, both the covariance and the weighted correlation term are zero. Thus the covariance expression for $\\rho$ is exactly Breiman's weighted mean raw-margin correlation.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "raw-margin-variance-control",
+          "claim": "Suppose $d>0$. From step 2.1, $\\rho=\\operatorname{Var}_P(m)/d^2\\ge0$. Since $r_\\theta^2\\le1$, $\\mathbb E_Q[sd(\\Theta)^2]=\\mathbb E_{Q\\times P}[r_\\Theta^2]-\\mathbb E_Q[(\\mathbb E_Pr_\\Theta)^2]\\le1-s^2$. The final inequality uses $\\mathbb E_Q[(\\mathbb E_Pr_\\Theta)^2]\\ge(\\mathbb E_Q\\mathbb E_Pr_\\Theta)^2=s^2$, by [F6] with one factor equal to $1$; [F5] and step 1.1 give $\\mathbb E_Q\\mathbb E_Pr_\\Theta=s$. The same inequality gives $d^2\\le\\mathbb E_Q[sd(\\Theta)^2]$. Therefore $\\operatorname{Var}_P(m)=\\rho d^2\\le\\rho(1-s^2)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "chebyshev-error-bound",
+          "claim": "Since $s>0$, the event $\\{m(Z)<0\\}$ is contained in $\\{|m(Z)-s|\\ge s\\}$. Applying [F7] and then step 3.1 gives $P\\{m(Z)<0\\}\\le\\operatorname{Var}_P(m(Z))/s^2\\le\\rho(1-s^2)/s^2$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-denominator-case",
+          "claim": "If $d=0$, then $sd\\ge0$ and $\\mathbb E_Qsd=0$. For each $n\\ge1$, $Q\\{sd\\ge1/n\\}=0$, since otherwise $\\mathbb E_Qsd>0$; taking the countable union gives $sd=0$ $Q$-almost everywhere. For each such $\\theta$, $\\mathbb E_P(r_\\theta-\\mathbb E_Pr_\\theta)^2=0$, so the same nonnegative-integral argument makes $r_\\theta(Z)=\\mathbb E_Pr_\\theta$ $P$-almost surely. By [F5], $m(Z)=\\mathbb E_Qr_\\Theta(Z)$ is therefore the constant $\\mathbb E_Pm(Z)=s>0$ for $P$-almost every $Z$. Hence $P\\{m(Z)<0\\}=0$, as claimed in this case.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The wrong-class maximum requires J>=2 and P,Q are probability laws."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The d=0 case is proved separately; if d>0, rho is defined and rho>=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single-class problem has no wrong class and is excluded by J>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Raw margins are bounded; zero variance and zero average standard deviation are handled explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Positive strength s>0 makes the Chebyshev threshold s nonzero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite nonempty wrong-class set has a least-index maximizing class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-regression-forest-risk-under-unbiased-randomized-trees": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "centered-residual-covariance",
+          "claim": "For every allowed $\\theta$, the mean condition gives $\\mathbb E_Pe_\\theta(Z)=0$. Hence [F3] gives $\\operatorname{Cov}_P(e_\\theta,e_{\\theta'})=\\mathbb E_P[e_\\theta e_{\\theta'}]$. If both residual standard deviations are positive, define their correlation as this covariance divided by their product; if either is zero, the covariance is zero. Thus the covariance expression for $\\rho$ agrees with Breiman's weighted mean residual correlation, including zero-standard-deviation pairs. The products are integrable by [F6] and square-integrability. Also $\\mathbb E_{P\\times Q}e_\\Theta^2<\\infty$, since $(a-b)^2\\le2a^2+2b^2$ and both $Y$ and $h(X,\\Theta)$ are square-integrable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forest-risk-covariance-identity",
+          "claim": "By [F4] the pair $(\\Theta,\\Theta',Z)$ has product law. For $P$-almost every $z$, [F6] gives $(\\mathbb E_Q|e_\\Theta(z)|)^2\\le\\mathbb E_Qe_\\Theta(z)^2$; integrating and using step 1.1 shows $e_\\theta(z)e_{\\theta'}(z)$ is integrable on $P\\times Q\\times Q$. Thus [F5] permits the following integrations. The $Q$-average is the infinite-forest prediction obtained from the same regression tree predictions that the algorithm averages at finite $B$ [F1]. Also $\\mathbb E_Qe_\\Theta(Z)=Y-\\mathbb E_Qh(X,\\Theta)$ for $P$-almost every $Z$. Consequently $PE^*(\\mathrm{forest})=\\mathbb E_P[(\\mathbb E_Qe_\\Theta(Z))^2]=\\mathbb E_{Q\\times Q}[\\mathbb E_P(e_\\Theta(Z)e_{\\Theta'}(Z))]=\\mathbb E_{Q\\times Q}[\\operatorname{Cov}_P(e_\\Theta(Z),e_{\\Theta'}(Z))]$. Thus when $d>0$, $PE^*(\\mathrm{forest})=\\rho d^2$ and $\\rho\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tree-risk-and-correlation-bound",
+          "claim": "The zero-mean condition and [F3] give $PE^*(\\mathrm{tree})=\\mathbb E_Q[sd(\\Theta)^2]$. By [F6] with one factor equal to $1$, $d^2=(\\mathbb E_Qsd(\\Theta))^2\\le\\mathbb E_Q[sd(\\Theta)^2]$. For $d>0$, combining with step 2.1 and $\\rho\\ge0$ yields $PE^*(\\mathrm{forest})\\le\\rho\\,PE^*(\\mathrm{tree})$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-denominator-risks",
+          "claim": "If $d=0$, then the nonnegative function $sd$ vanishes $Q$-almost everywhere: each set $\\{sd\\ge1/n\\}$ has measure zero since otherwise $\\mathbb E_Qsd>0$. For $Q$-almost every $\\theta$, the mean-zero residual has variance zero, so the same argument applied to $(e_\\theta-\\mathbb E_Pe_\\theta)^2$ gives $e_\\theta=0$ $P$-almost surely. Fubini then gives $e_\\Theta(Z)=0$ for $P\\times Q$-almost every $(Z,\\Theta)$; both displayed risks are zero.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes probability laws P and Q and square-integrable residuals."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The d=0 case is proved separately; the covariance ratio is used only when d>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no class count in this regression theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Zero residual variance implies zero centered residual almost surely under the stated mean-zero condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The randomization pair has product law and all expectations are finite by the square-integrability hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-random-forest-zero-margin-vote-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-infinite-forest-vote-limit",
+          "source_section": "Statement",
+          "quote": "Fix a finite training dataset and a classifier $h(x,\\theta)$ taking values in an ordered finite class set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$ with $J\\ge2$. Let $\\Theta_1,\\Theta_2,\\ldots$ be IID random elements of a measurable space $(\\mathsf T,\\mathcal T)$ with common law $Q$. Regard the sequence as a random element of $(\\mathsf T^{\\mathbb N},\\mathcal T^{\\otimes\\mathbb N})$ and assume it is independent of a test pair $(X,Y)$ with law $P$ on $\\mathcal X\\times\\mathcal C$. Assume $h$ is jointly measurable in $(x,\\theta)$. For $j\\in\\{1,\\ldots,J\\}$ define $p_j(x)=Q\\{\\theta:h(x,\\theta)=c_j\\}$, and let\n\n$$\nm(x,y)=p_{k}(x)-\\max_{j\\ne k}p_j(x),\\qquad y=c_k.\n$$\n\nFor each $B\\ge1$, let $G_B(x)$ be the class with the largest number of votes among $h(x,\\Theta_1),\\ldots,h(x,\\Theta_B)$, choosing the least class index in a tie. Define the finite-forest conditional risk by\n\n$$\nPE_B(\\Theta_{1:B})=\\int_{\\mathcal X\\times\\mathcal C}\\mathbf1\\{G_B(x)\\ne y\\}\\,dP(x,y).\n$$\n\nIf $P\\{(x,y):m(x,y)=0\\}=0$, then, almost surely with respect to the IID tree-randomization sequence,\n\n$$\nPE_B(\\Theta_{1:B})\\longrightarrow P\\{(x,y):m(x,y)<0\\}.\n$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bootstrap-count-cases",
+          "claim": "There are four equally likely ordered bootstrap draws. The count vectors $(2,0)$ and $(0,2)$ each have probability $1/4$, and the mixed count vector $(1,1)$ has probability $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "feature-randomization-class-probability",
+          "claim": "With counts $(2,0)$ the only leaf predicts $0$, and with counts $(0,2)$ it predicts $1$. With mixed counts, either feature separates the two training points at $1/2$. The selected feature is uniform: feature $1$ sends $x^*$ to the class-$0$ leaf, while feature $2$ sends it to the class-$1$ leaf. Hence $Q\\{h(x^*,\\Theta)=1\\}=1/4+(1/2)(1/2)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-margin-and-finite-risk-expectation",
+          "claim": "At the point-mass test pair, $p_0(x^*)=p_1(x^*)=1/2$, so $m(x^*,1)=0$ and $P\\{m<0\\}=0$; the zero-margin hypothesis in [F4] fails. For every odd $B$, the class-$1$ vote count has a symmetric binomial law with no tie; exactly half of its outcomes are below $B/2$. The conditional risk is the error indicator at this single test pair, so $\\mathbb E_Q[PE_B]=1/2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-almost-sure-strict-margin-limit",
+          "claim": "If $PE_{2k+1}\\to0$ almost surely, then the bounded random variables $PE_{2k+1}\\in[0,1]$ would have expectations tending to zero by [F3]. This is incompatible with step 3.1, so the full risk sequence cannot converge almost surely to the strict-margin value $0$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two training observations and a point-mass test pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The two randomized features give equal class probabilities at x*, so the margin is exactly zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The odd subsequence includes B=1 and has no vote ties."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: A repeated-row bootstrap has one class and no split; a mixed bootstrap has distinct values in both features."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The test coordinates 1/4 lie strictly to the left of both split thresholds 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The root feature subset has exactly one element and each mixed-bootstrap split has nonempty children."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-random-forest-out-of-bag-diagnostic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-bootstrap-event-probability",
+          "claim": "Each tree draws two independent uniform indices from $\\{1,2\\}$. The probability of counts $(2,0)$ for tree $1$ is $1/4$, and the probability of counts $(0,2)$ for tree $2$ is $1/4$. Independence of the two trees gives probability $(1/4)(1/4)=1/16$ for the stated event.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stump-leaf-predictions",
+          "claim": "With depth cap zero, each tree is a single leaf. Its bootstrap sample contains only label $0$ for counts $(2,0)$ and only label $1$ for counts $(0,2)$, so [F2] gives predictions $0$ and $1$, respectively.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "oob-full-forest-difference",
+          "claim": "The full forest has one vote for each class, so its least-index tie rule returns $0$. For observation $1$, the first tree has $N_{11}=2$ and is excluded from the out-of-bag set, while the second has $N_{21}=0$ and is the only included tree; its prediction is $1$. The two predictions differ on the positive-probability event from step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample and both bootstrap samples are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The second tree has bootstrap count zero for observation 1 and is included in its OOB set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: A depth-zero tree is a single nonempty leaf with a defined class prediction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Each specified bootstrap sample is pure and requires no split."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example uses depth-zero trees and no threshold endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The full-forest one-to-one vote tie is resolved by the stated least-index rule."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-random-forest-strength-correlation-tradeoff": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-bagged-random-forest",
+          "source_section": "Definition",
+          "quote": "Fix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-random-forest-strength-correlation-bound",
+          "source_section": "Statement",
+          "quote": "Fix a finite training dataset and a classifier $h(x,\\theta)$ taking values in an ordered finite class set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$ with $J\\ge2$. Assume $h$ is jointly measurable on the product of the test-feature space and the randomization space. Let $Z=(X,Y)$ have test law $P$. Let $\\Theta,\\Theta'$ be independent randomizations with common law $Q$, and assume the pair $(\\Theta,\\Theta')$ is independent of $Z$. For $j\\in\\{1,\\ldots,J\\}$ define $p_j(x)=Q\\{\\theta:h(x,\\theta)=c_j\\}$. For $y=c_k$, let $\\hat j(x,y)$ be the least index attaining $\\max_{j\\ne k}p_j(x)$, and define the limiting margin\n\n$$\nm(x,y)=p_k(x)-p_{\\hat j(x,y)}(x),\\qquad s=\\mathbb E_P[m(Z)].\n$$\n\nAssume $s>0$. For a tree randomization $\\theta$, define the raw margin $r_\\theta(x,y)=\\mathbf1\\{h(x,\\theta)=y\\}-\\mathbf1\\{h(x,\\theta)=c_{\\hat j(x,y)}\\}$ and $sd(\\theta)=\\sqrt{\\operatorname{Var}_P(r_\\theta(Z))}$. Put $d=\\mathbb E_Q[sd(\\Theta)]$. If $d=0$, then $P\\{m(Z)<0\\}=0$. If $d>0$, define\n\n$$\n\\rho=\\frac{\\mathbb E_{Q\\times Q}[\\operatorname{Cov}_P(r_\\Theta(Z),r_{\\Theta'}(Z))]}{d^2}.\n$$\n\nThen $\\rho\\ge0$ and\n\n$$\nP\\{m(Z)<0\\}\\le \\rho\\frac{1-s^2}{s^2}.\n$$\n\nThe covariance formula for $\\rho$ is Breiman's weighted mean raw-margin correlation written without undefined zero-standard-deviation correlation terms.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "strength-and-error",
+          "claim": "By the tree-vote convention [F1], at $Z=(0,0)$ the correct class receives probability $3/4$ and the wrong class $1/4$, giving margin $1/2$. At $Z=(1,1)$, the correct class receives probability $1/4$ and the wrong class $3/4$, giving margin $-1/2$. Therefore $s=(3/4)(1/2)+(1/4)(-1/2)=1/4$ and $PE^*=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "raw-margin-standard-deviations",
+          "claim": "For tree type $A$, the raw margin is $+1$ at $(0,0)$ and $-1$ at $(1,1)$; its mean is $1/2$ and its second moment is $1$, so its variance is $3/4$. Type $B$ reverses the two signs, giving mean $-1/2$ and the same variance $3/4$. Thus $sd(A)=sd(B)=\\sqrt{3/4}$ and $d^2=3/4$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-covariance",
+          "claim": "The independent pair has probabilities $P(A,A)=9/16$, $P(B,B)=1/16$, and total mixed probability $6/16$. The covariance over $Z$ is $3/4$ for equal types and $-3/4$ for mixed types, so its expectation is $[(9+1-6)/16](3/4)=3/16$. By [F2] and [F5], $\\rho=(3/16)/(3/4)=1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bound-evaluation",
+          "claim": "Substitution gives $\\rho(1-s^2)/s^2=(1/4)(15/16)/(1/16)=15/4$, and the example's error $1/4$ satisfies the bound.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The test distribution and both tree types are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Strength is s=1/4>0 and the mean raw-margin standard deviation satisfies d^2=3/4>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The finite class set has two classes and every wrong-class probability is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Both stump types have variance 3/4 under the nondegenerate two-point test law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite example has no threshold endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The two stump randomizations are independent with probabilities 3/4 and 1/4."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an iff statement."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

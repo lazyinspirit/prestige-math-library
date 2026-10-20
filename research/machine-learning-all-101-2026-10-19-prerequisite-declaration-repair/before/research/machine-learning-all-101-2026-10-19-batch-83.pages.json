@@ -1,0 +1,446 @@
+[
+  {
+    "order": 2853,
+    "id": "average-reward-regret-and-ucrl2",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Average-reward regret and UCRL2",
+    "companion": "average-reward-regret-and-ucrl2-examples",
+    "requires": [
+      "discrete-time-martingales",
+      "finite-mdps-and-bellman-operators",
+      "markov-kernels-and-markov-chains",
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "lem-almost-additive-sequence-has-limit",
+        "kind": "lemma",
+        "title": "Almost-additive sequences have a normalized limit",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $(a_n)_{n\\ge1}$ be a real sequence for which there is a finite constant $K$ with $|a_n|\\le Kn$ for every $n\\ge1$. Suppose there is a finite constant $C\\ge0$ such that $|a_{m+n}-a_m-a_n|\\le C$ for all positive integers $m,n$. Then $a_n/n$ has a finite limit as $n\\to\\infty$.",
+        "strategy": "Shift by ±C to obtain subadditive and superadditive sequences, apply the sourced Fekete limit lemma to each, and use their vanishing normalized gap to conclude.",
+        "sources": {
+          "references": [
+            {
+              "title": "Sébastien Gouëzel, Theory Fekete, Archive of Formal Proofs, lemma almost_additive_converges",
+              "url": "https://isa-afp.org/browser_info/current/AFP/Ergodic_Theory/Fekete.html",
+              "locator": "Subsection Almost additive sequences, lemma almost_additive_converges, lines 277–323."
+            },
+            {
+              "title": "Wojciech Szpankowski, Average Case Analysis of Algorithms on Sequences",
+              "url": "https://www.cs.purdue.edu/homes/spa/courses/pg17/mybook.pdf",
+              "locator": "§5.1, Theorem 5.1 (Fekete), PDF pp. 100–101."
+            },
+            {
+              "title": "Sacha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction",
+              "url": "https://www.unige.ch/math/folks/velenik/smbook/Mathematical_Appendix.pdf",
+              "locator": "Appendix B.1.3, Lemma B.5, PDF pp. 2–3 / printed pp. 479–480."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-bounded-reward-finite-mdp",
+        "kind": "definition",
+        "title": "Finite MDP with bounded real rewards",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-borel-sigma-algebra",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $S$ be a finite nonempty state set and let $A(s)$ be a finite nonempty action set for each $s\\in S$, as in the finite-MDP convention. Put $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$ with its discrete sigma-algebra. Equip $S$ with its power-set sigma-algebra, $[0,1]$ with its Borel sigma-algebra, and $S\\times[0,1]$ with the product sigma-algebra. A finite MDP with bounded real rewards specifies a probability kernel $Q$ from $D$ to $S\\times[0,1]$; equivalently, each admissible $(s,a)$ has a probability measure $Q(\\cdot\\mid s,a)$ on that product measurable space. The reward-coordinate projection $(s',\\rho)\\mapsto\\rho$ is measurable because the preimage of each Borel set $B\\subseteq[0,1]$ is the product rectangle $S\\times B$. Define the next-state law by $P(s'\\mid s,a)=Q(\\{s'\\}\\times[0,1]\\mid s,a)$ and the mean reward by $r(s,a)=\\int_{S\\times[0,1]}\\rho\\,Q(ds',d\\rho\\mid s,a)\\in[0,1]$. At each time, conditional on the observed history and the selected action, the next-state/reward pair has this law. Assume the Axiom of Choice for the path-space construction under policies.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF pp. 2–3"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed pp. 222–228"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-extended-value-iteration",
+        "kind": "algorithm",
+        "title": "Extended value iteration for a confidence set",
+        "deps": [
+          "def-bounded-reward-finite-mdp"
+        ],
+        "dependency_level": 2,
+        "statement": "Input finite nonempty state and action sets, upper reward estimates $\\widetilde r(s,a)$, empirical transition laws $\\widehat P(\\cdot\\mid s,a)$, nonnegative transition radii $b_p(s,a)$, a tolerance $\\varepsilon>0$, and fixed orders of the states and actions for tie-breaking. For a vector $v\\in\\mathbb R^S$, write $\\operatorname{span}(v)=\\max_s v(s)-\\min_s v(s)$ and let $\\Delta(S)$ be the probability simplex on $S$. Initialize $u_0(s)=0$. At iteration $i\\ge1$, compute\n$$u_i(s)=\\max_{a\\in A(s)}\\left[\\widetilde r(s,a)+\\max_{q\\in\\Delta(S):\\|q-\\widehat P(\\cdot\\mid s,a)\\|_1\\le b_p(s,a)}q\\cdot u_{i-1}\\right].$$\nFor each state, record the first action in the fixed order attaining the outer maximum and a maximizing transition vector $q_i(\\cdot\\mid s)$; the inner maximum exists because each nonempty feasible subset of $\\Delta(S)$ is compact. If $\\operatorname{span}(u_i-u_{i-1})<\\varepsilon$, return the recorded stationary deterministic policy, maximizing transition vectors, the vector $u_{i-1}$ used in that backup, and the iteration index. A deterministic maximizing transition vector can be computed by moving up to $\\min\\{1,b_p(s,a)/2\\}$ probability mass from the lowest-valued states to a highest-valued state, with the fixed state order resolving equal values; stop moving mass when that state reaches probability one. This finite rule makes the returned quantities measurable functions of the estimates. Otherwise continue. The algorithm is a partial procedure unless a separate termination result is established.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§3.1, Algorithm 2, PDF pp. 6–7"
+            },
+            {
+              "title": "Puterman and Chan, Markov Decision Processes and Reinforcement Learning, Chapter 7",
+              "url": "https://raw.githubusercontent.com/martyput/MDP_book/master/07%20Chapter/Book___chapter07.pdf",
+              "locator": "Chapter 7, §§7.3–7.4"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-communicating-mdp-and-diameter",
+        "kind": "definition",
+        "title": "Communicating MDP and diameter",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "def-finite-markov-decision-process",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "dependency_level": 2,
+        "statement": "For a finite MDP with bounded rewards, a policy assigns a probability distribution on $A(s)$ to each finite observed history ending in state $s$, with each action probability a measurable function of the history; deterministic policies are included. For states $x,y$, start at $S_0=x$ and define $\\tau_y=\\inf\\{t\\ge0:S_t=y\\}$. The MDP is communicating if $\\inf_\\pi\\mathbb E_x^\\pi[\\tau_y]<\\infty$ for every ordered pair $(x,y)$. Its raw diameter is $D_0=\\max_{x,y}\\inf_\\pi\\mathbb E_x^\\pi[\\tau_y]$, and its normalized diameter is $D=\\max\\{1,D_0\\}$. Thus a one-state MDP has $D_0=0$ and $D=1$.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF p. 3"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed pp. 222–223"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-ucrl2-adaptive-sample-tape-representation",
+        "kind": "lemma",
+        "title": "Adaptive MDP visits admit fixed sample tapes",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Fix a finite-horizon interaction of length $T$ in a finite MDP with bounded rewards and any nonanticipating policy: each action distribution is a measurable function of the revealed history, and policy randomization is independent of unexposed MDP samples. On an enlarged probability space with the same law for the observed interaction, for each admissible pair $(s,a)$ there is a sequence $Z_{s,a,1},\\ldots,Z_{s,a,T}$ of independent samples with common law $Q(\\cdot\\mid s,a)$ such that the $j$th observed next-state/reward pair at $(s,a)$ is $Z_{s,a,j}$ whenever that visit occurs.",
+        "strategy": "Construct a finite product array with the Ionescu–Tulcea kernel theorem and couple adaptive visits by revealing the next unused coordinate for the selected pair.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§4.1; adaptive sampling argument is supplied locally"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-ucrl2-evi-termination",
+        "kind": "lemma",
+        "title": "Termination of extended value iteration under communicating assumptions",
+        "deps": [
+          "alg-extended-value-iteration",
+          "def-communicating-mdp-and-diameter"
+        ],
+        "dependency_level": 3,
+        "statement": "For every finite nonempty state/action system, bounded real upper rewards, probability-vector empirical centers, strictly positive transition radii, and tolerance $\\varepsilon>0$, extended value iteration terminates. More precisely, write $F$ for its optimistic Bellman operator, put $\\eta=\\min_{s,a}\\min\\{1,b_p(s,a)/2\\}>0$, and set $u_0=0$, $u_i=F(u_{i-1})$. Then\n$$\\operatorname{span}(u_i-u_{i-1})\\le(1-\\eta)^{i-1}\\operatorname{span}(u_1),\\qquad i\\ge1.$$\nWhen $\\eta=1$, the span is zero for $i\\ge2$. In particular, the positive UCRL2 confidence radii give finite stopping with tolerance $1/\\sqrt{t_k}$ in every episode of a finite communicating MDP, including episodes whose confidence set misses the true model.",
+        "strategy": "Decompose each positive L1 ball into a common positive mass and a residual subprobability; prove a span contraction and geometric decay.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "Appendix B, PDF pp. 22–23"
+            },
+            {
+              "title": "Puterman and Chan, Markov Decision Processes and Reinforcement Learning, Chapter 7",
+              "url": "https://raw.githubusercontent.com/martyput/MDP_book/master/07%20Chapter/Book___chapter07.pdf",
+              "locator": "Proposition 7.3; proof omitted"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-ucrl2-uniform-confidence-bounds",
+        "kind": "lemma",
+        "title": "Uniform empirical reward and transition confidence bounds",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "lem-ucrl2-adaptive-sample-tape-representation",
+          "def-martingale-difference-sequence",
+          "thm-martingales-and-martingale-differences-correspond",
+          "thm-azuma-hoeffding-inequality",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Let a finite MDP have $S\\ge1$ states and at most $A\\ge1$ actions per state, and let $T\\ge1$ be an integer and $\\delta\\in(0,1)$. For each state-action pair $(s,a)$, whenever it has received $n$ visits by time $T$, let $\\widehat r_n(s,a)$ be the mean of those first $n$ rewards and let $\\widehat P_n(\\cdot\\mid s,a)$ be the empirical law of those next states. With probability at least $1-\\delta$, simultaneously for all such pairs and all $1\\le n\\le T$,\n$$|\\widehat r_n(s,a)-r(s,a)|\\le\\sqrt{\\frac{7\\log(4SAT/\\delta)}{2n}},\\qquad \\|\\widehat P_n(\\cdot\\mid s,a)-P(\\cdot\\mid s,a)\\|_1\\le\\sqrt{\\frac{14S\\log(4AT/\\delta)}{n}},$$\nwhere $\\log$ is the natural logarithm.",
+        "strategy": "Apply Azuma–Hoeffding to fixed tape prefixes, convert transition ℓ1 error to a maximum over subsets, and union over pairs and sample counts.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "Appendix A and §4.1, PDF pp. 10–11 and 22–24"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed pp. 224–227"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-communicating-mdp-common-optimal-average-reward",
+        "kind": "theorem",
+        "title": "Communicating MDPs have a common optimal average reward",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "def-communicating-mdp-and-diameter",
+          "lem-almost-additive-sequence-has-limit",
+          "def-axiom-of-choice",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-tower-property-of-conditional-expectation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 3,
+        "statement": "For a finite communicating MDP with rewards in $[0,1]$, let $V_n(s)$ be the supremum of the expected sum of the first $n$ rewards over all history-dependent policies starting from state $s$. For every state $s$, the limit $\\lim_{n\\to\\infty}V_n(s)/n$ exists, is independent of $s$, and belongs to $[0,1]$.",
+        "strategy": "Bound the finite-horizon value span by the diameter using a target-hitting policy, then show the maximum values are almost additive and invoke the proved normalized-limit lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2 and Theorem 2, PDF pp. 2–4"
+            },
+            {
+              "title": "Puterman and Chan, Markov Decision Processes and Reinforcement Learning, Chapter 7",
+              "url": "https://raw.githubusercontent.com/martyput/MDP_book/master/07%20Chapter/Book___chapter07.pdf",
+              "locator": "Chapter 7, average-reward optimality"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-ucrl2",
+        "kind": "algorithm",
+        "title": "UCRL2 for finite communicating MDPs",
+        "deps": [
+          "alg-extended-value-iteration",
+          "lem-ucrl2-uniform-confidence-bounds",
+          "lem-ucrl2-evi-termination"
+        ],
+        "dependency_level": 4,
+        "statement": "Input a finite communicating MDP, horizon $T\\ge1$, confidence parameter $\\delta\\in(0,1)$, and fixed orders of states/actions. Start one episode at $t_1=1$. At the start $t_k$ of episode $k$, let $N_k(s,a)$ be the number of visits to $(s,a)$ before $t_k$, with empirical reward mean $\\widehat r_k(s,a)=0$ and a fixed default probability vector when $N_k(s,a)=0$. Otherwise use the empirical mean reward and empirical next-state distribution. Put $n_k(s,a)=\\max\\{1,N_k(s,a)\\}$ and\n$$b^r_k(s,a)=\\sqrt{\\frac{7\\log(2SAt_k/\\delta)}{2n_k(s,a)}},\\qquad b^p_k(s,a)=\\sqrt{\\frac{14S\\log(2At_k/\\delta)}{n_k(s,a)}}.$$\nSet $\\widetilde r_k(s,a)=\\min\\{1,\\widehat r_k(s,a)+b^r_k(s,a)\\}$. Run extended value iteration with these estimates/radii and tolerance $1/\\sqrt{t_k}$, obtaining a stationary deterministic policy $\\pi_k$. Let $v_k(s,a)$ start at zero and count visits within this episode. Follow $\\pi_k$ until some $v_k(s,a)$ reaches $\\max\\{1,N_k(s,a)\\}$, or until $T$ observations have been made; then start the next episode if time remains. All ties use the fixed orders. The positive radii ensure finite inner termination by the separate termination lemma. In particular, always $v_k(s,a)\\le\\max\\{1,N_k(s,a)\\}$; when $N_k(s,a)>0$, a completed triggering episode doubles that pair's total count.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§3, Algorithms 1 and 2, PDF pp. 5–7"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed pp. 224–228"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-average-reward-and-regret",
+        "kind": "definition",
+        "title": "Average reward and pathwise regret",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "thm-communicating-mdp-common-optimal-average-reward",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 4,
+        "statement": "For a finite communicating MDP, let $\\rho^*$ denote the common optimal average reward. The existence and independence of this value from the initial state are proved in the immediately cited theorem. Under any policy, write $R_T=\\sum_{t=1}^T\\rho_t$ for the realized cumulative reward over the first $T$ interactions. The pathwise regret is the random variable $\\Delta_T=T\\rho^*-R_T$. Its expected regret is $\\mathbb E[\\Delta_T]=T\\rho^*-\\mathbb E[R_T]$. The pathwise random variable and its expectation are distinct objects.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF pp. 2–3"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed p. 223"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-ucrl2-high-probability-regret",
+        "kind": "theorem",
+        "title": "UCRL2 high-probability pathwise regret bound",
+        "deps": [
+          "alg-extended-value-iteration",
+          "alg-ucrl2",
+          "lem-ucrl2-evi-termination",
+          "lem-ucrl2-uniform-confidence-bounds",
+          "def-average-reward-and-regret",
+          "def-communicating-mdp-and-diameter",
+          "lem-ucrl2-adaptive-sample-tape-representation",
+          "thm-azuma-hoeffding-inequality",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice for the path-law and martingale suppliers. Let a finite communicating MDP have $S\\ge1$ states, at most $A\\ge1$ actions per state, rewards in $[0,1]$, and normalized diameter $D$. For each initial state, integer horizon $T\\ge2$, and $\\delta\\in(0,1)$, UCRL2 with confidence parameter $\\delta$ satisfies\n$$\\Pr\\!\\left(\\Delta_T\\le34DS\\sqrt{AT\\log(T/\\delta)}\\right)\\ge1-\\delta.$$\nFor every integer $T\\ge1$, the same algorithm also satisfies\n$$\\Pr\\!\\left(\\Delta_T\\le34DS\\sqrt{AT\\log(2T/\\delta)}\\right)\\ge1-\\delta.$$\nHere $\\Delta_T=T\\rho^*-R_T$ is realized, pathwise regret and logarithms are natural. These are assertions for each fixed horizon and initial state. The original formula with $\\log(T/\\delta)$ and $T\\ge1$ is false, as refuted below.",
+        "strategy": "Use fixed-tape anytime confidence, the local EVI contraction, finite-horizon span control, predictable martingale increments, count doubling, and explicit constants; refute the exact original T=1 formula.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "Theorem 2 and §4, PDF pp. 4 and 10–16"
+            },
+            {
+              "title": "Dimitrakakis and Ortner, Decision Making Under Uncertainty and Reinforcement Learning",
+              "url": "https://www.cse.chalmers.se/~chrdimi/downloads/book.pdf",
+              "locator": "Chapter 10.3.1, printed pp. 225–228"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-ucrl2-regret-lower-bound",
+        "kind": "theorem",
+        "title": "Expected regret lower bound for communicating MDPs",
+        "deps": [
+          "def-average-reward-and-regret",
+          "def-communicating-mdp-and-diameter",
+          "thm-pinsker",
+          "thm-total-variation-bounds-for-expectations",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice inherited by the probability and Pinsker suppliers. For all integers $S,A\\ge10$, all real $D\\ge\\max\\{1,20\\log_A S\\}$, all integers $T\\ge DSA$, every learning algorithm, and every prescribed initial state label, there exists a finite communicating MDP with exactly $S$ states including that label, exactly $A$ actions in each state, rewards in $[0,1]$, and normalized diameter at most $D$, such that the algorithm's expected regret from that initial state satisfies\n$$\\mathbb E[T\\rho^*-R_T]\\ge0.015\\sqrt{DSAT}.$$\nThe MDP may depend on the algorithm, parameters, and prescribed initial state. The original planned statement with reversed minimax quantifiers and no feasibility condition $D\\ge1$ is false; it is retained and refuted below.",
+        "strategy": "Prove the corrected minimax constant by an exact-state/action two-state-pair tree and separate small-diameter bandit construction, with finite-history KL/Pinsker and complete constant transfer; refute original infeasible scope.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "Theorem 5 and §6, PDF pp. 4 and 19–22; Appendix E, PDF pp. 30–31"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2854,
+    "id": "average-reward-regret-and-ucrl2-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Average-reward regret and UCRL2 — Examples",
+    "companion": "average-reward-regret-and-ucrl2",
+    "requires": [
+      "average-reward-regret-and-ucrl2"
+    ],
+    "items": [
+      {
+        "id": "ex-noncommunicating-mdp-has-state-dependent-gain",
+        "kind": "example",
+        "title": "A noncommunicating MDP can have state-dependent average reward",
+        "deps": [
+          "def-bounded-reward-finite-mdp"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $S=\\{0,1\\}$ and let each state have one action. Both states are absorbing. The reward is always $0$ in state $0$ and always $1$ in state $1$. The MDP is not communicating, and its long-run average reward is $0$ from initial state $0$ and $1$ from initial state $1$.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Jaksch, Ronald Ortner, and Peter Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF pp. 2–3, communicating-MDP hypothesis."
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-one-state-diameter-convention",
+        "kind": "example",
+        "title": "One-state MDP and normalized diameter",
+        "deps": [
+          "def-bounded-reward-finite-mdp",
+          "def-communicating-mdp-and-diameter",
+          "thm-communicating-mdp-common-optimal-average-reward",
+          "def-average-reward-and-regret"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $S=\\{s\\}$, $A(s)=\\{a\\}$, let the transition return to $s$ with probability one, and let every reward equal $1$. Then the MDP is communicating, its raw diameter is $D_0=0$, its normalized diameter is $D=1$, its optimal average reward is $1$, and its unique policy has regret $0$ at every horizon.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF p. 3"
+            }
+          ]
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-pathwise-and-expected-regret-are-different",
+        "kind": "example",
+        "title": "A random reward separates pathwise and expected regret",
+        "deps": [
+          "def-average-reward-and-regret",
+          "def-bounded-reward-finite-mdp",
+          "thm-communicating-mdp-common-optimal-average-reward"
+        ],
+        "dependency_level": 5,
+        "statement": "Let there be one state and one action, with deterministic self-transition and independent Bernoulli$(1/2)$ rewards. Then $\\rho^*=1/2$. At horizon $T=1$, pathwise regret equals $1/2$ when the reward is $0$ and equals $-1/2$ when the reward is $1$, although expected regret is $0$.",
+        "strategy": "State the exact finite-state model, conventions, and hypotheses; justify the stated conclusion from the cited interfaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jaksch, Ortner, and Auer, Near-optimal Regret Bounds for Reinforcement Learning",
+              "url": "https://www.jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+              "locator": "§2, PDF p. 3"
+            }
+          ]
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

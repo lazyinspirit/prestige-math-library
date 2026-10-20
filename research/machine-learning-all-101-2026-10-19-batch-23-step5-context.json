@@ -1,0 +1,272 @@
+{
+  "group": "h",
+  "batches": [
+    "23"
+  ],
+  "pages_read": [
+    "ml02-latent-representations",
+    "ml02-latent-representations-examples"
+  ],
+  "items_read": [
+    "def-covariance-factor-model",
+    "def-square-ica-model",
+    "def-poisson-nmf-model",
+    "prop-covariance-factor-model-rotation-ambiguity",
+    "lem-ica-whitening-reduces-mixing-to-orthogonal",
+    "prop-poisson-nmf-factorization-invariances",
+    "prop-poisson-nmf-loglikelihood",
+    "lem-local-gaussian-characteristic-function-is-global",
+    "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+    "thm-square-ica-identifiability-at-most-one-gaussian",
+    "alg-poisson-nmf-multiplicative-updates",
+    "lem-poisson-nmf-updates-preserve-positivity",
+    "ex-ica-sign-permutation-ambiguity",
+    "ex-gaussian-factor-rotation",
+    "ex-poisson-nmf-nonunique-factorizations",
+    "ex-poisson-nmf-zero-count-update"
+  ],
+  "conventions": [
+    {
+      "convention": "Covariance factors and residuals have finite second moments, zero means, identity factor covariance, strictly positive diagonal residual covariance, and zero factor–residual cross-covariance. Independence is not assumed.",
+      "fixed_by": "def-covariance-factor-model",
+      "matters_for": [
+        "prop-covariance-factor-model-rotation-ambiguity",
+        "ex-gaussian-factor-rotation"
+      ]
+    },
+    {
+      "convention": "Square ICA representations are equalities in distribution with invertible real mixing matrices and mutually independent centered unit-variance sources. Gaussian means the standard Gaussian density; vectors are columns.",
+      "fixed_by": "def-square-ica-model",
+      "matters_for": [
+        "lem-ica-whitening-reduces-mixing-to-orthogonal",
+        "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+        "thm-square-ica-identifiability-at-most-one-gaussian",
+        "ex-ica-sign-permutation-ambiguity"
+      ]
+    },
+    {
+      "convention": "NMF dimensions are positive integers, factors are nonnegative, and admissible count matrices have at least one positive entry in every row and column. A zero-rate Poisson cell is concentrated at zero.",
+      "fixed_by": "def-poisson-nmf-model",
+      "matters_for": [
+        "prop-poisson-nmf-factorization-invariances",
+        "prop-poisson-nmf-loglikelihood",
+        "alg-poisson-nmf-multiplicative-updates",
+        "lem-poisson-nmf-updates-preserve-positivity",
+        "ex-poisson-nmf-nonunique-factorizations",
+        "ex-poisson-nmf-zero-count-update"
+      ]
+    },
+    {
+      "convention": "Use 0 log 0 = 0; a positive observed count at zero rate gives log-likelihood −∞.",
+      "fixed_by": "prop-poisson-nmf-loglikelihood",
+      "matters_for": [
+        "alg-poisson-nmf-multiplicative-updates"
+      ]
+    },
+    {
+      "convention": "A sweep updates W using the old H, recomputes intermediate rates, then updates H using the new W. Initialization is strictly positive and the finite sweep count may be zero.",
+      "fixed_by": "alg-poisson-nmf-multiplicative-updates",
+      "matters_for": [
+        "lem-poisson-nmf-updates-preserve-positivity",
+        "ex-poisson-nmf-zero-count-update"
+      ]
+    },
+    {
+      "convention": "The ICA identifiability hypothesis permits at most one Gaussian coordinate of S; no Gaussian-count restriction is separately imposed on S′. Conclusions about sources are in distribution.",
+      "fixed_by": "thm-square-ica-identifiability-at-most-one-gaussian",
+      "matters_for": [
+        "thm-square-ica-identifiability-at-most-one-gaussian"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-local-gaussian-characteristic-function-is-global",
+      "statement": "Let Y be a real random variable. If there is r > 0 such that E exp(itY) = exp(−t²/2) for every |t| < r, then Y has the standard Gaussian law. No moment or density assumption on Y is required.",
+      "used_by": [
+        "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+        "thm-square-ica-identifiability-at-most-one-gaussian"
+      ]
+    },
+    {
+      "id": "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+      "statement": "Let S have mutually independent centered real coordinates with E S_i² = 1, and let O be orthogonal. Suppose the coordinates of T = OS are mutually independent. If column i of O contains nonzero entries in two different rows, then S_i has the standard Gaussian law. Thus each non-Gaussian source column has exactly one nonzero entry, which is 1 or −1.",
+      "used_by": [
+        "thm-square-ica-identifiability-at-most-one-gaussian"
+      ]
+    },
+    {
+      "id": "def-square-ica-model",
+      "statement": "A square independent-component representation is X equal in distribution to AS, where A is an invertible real p × p matrix and S has mutually independent centered unit-variance real components.",
+      "used_by": [
+        "lem-ica-whitening-reduces-mixing-to-orthogonal",
+        "lem-orthogonal-independent-mixing-shared-columns-gaussian",
+        "thm-square-ica-identifiability-at-most-one-gaussian",
+        "ex-ica-sign-permutation-ambiguity"
+      ]
+    },
+    {
+      "id": "def-poisson-nmf-model",
+      "statement": "For positive integers n, p, r, an admissible observed nonnegative integer matrix has a positive entry in every row and column. Nonnegative W and H specify mutually independent Poisson counts with rate matrix WH, including the stated degenerate law at zero rate.",
+      "used_by": [
+        "prop-poisson-nmf-factorization-invariances",
+        "prop-poisson-nmf-loglikelihood",
+        "alg-poisson-nmf-multiplicative-updates",
+        "lem-poisson-nmf-updates-preserve-positivity",
+        "ex-poisson-nmf-nonunique-factorizations",
+        "ex-poisson-nmf-zero-count-update"
+      ]
+    },
+    {
+      "id": "alg-poisson-nmf-multiplicative-updates",
+      "statement": "Given admissible counts, inner dimension r ≥ 1, finite T ≥ 0, and strictly positive initial factors, perform T ordered multiplicative-update sweeps: update W using current rates and H, recompute rates, then update H using the new W; return the final factors.",
+      "used_by": [
+        "lem-poisson-nmf-updates-preserve-positivity",
+        "ex-poisson-nmf-zero-count-update"
+      ]
+    },
+    {
+      "id": "lem-poisson-nmf-updates-preserve-positivity",
+      "statement": "If every row and column of X contains a positive count and W,H are strictly positive, one complete Poisson NMF sweep produces strictly positive updated factors and strictly positive rates at both update stages. Consequently every finite number of sweeps from a strictly positive initialization is well-defined.",
+      "used_by": [
+        "alg-poisson-nmf-multiplicative-updates",
+        "ex-poisson-nmf-zero-count-update"
+      ]
+    },
+    {
+      "id": "prop-covariance-factor-model-rotation-ambiguity",
+      "statement": "In the stated covariance factor model, Cov(X) = AAᵀ + D. For every orthogonal R, transformed loadings ARᵀ and factors RS give another representation with the same covariance matrix.",
+      "used_by": [
+        "ex-gaussian-factor-rotation"
+      ]
+    },
+    {
+      "id": "prop-poisson-nmf-factorization-invariances",
+      "statement": "Positive reciprocal rescaling of corresponding factor columns and rows, or simultaneous permutation of components, leaves WH and the corresponding Poisson likelihood unchanged.",
+      "used_by": [
+        "ex-poisson-nmf-nonunique-factorizations"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Real orthogonal left and right bases and singular values used to construct the whitening matrix.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Uniqueness of the positive-definite symmetric inverse square root, by diagonalizing its restriction to each eigenspace.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-function-of-a-real-random-variable",
+      "used_for": "Characteristic functions as bounded complex expectations against probability laws.",
+      "opened": true
+    },
+    {
+      "id": "lem-moments-give-derivatives-of-the-characteristic-function",
+      "used_for": "C² regularity and derivatives at zero for standardized sources; higher derivative identities after even-moment finiteness has been proved.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Factoring characteristic functions of the independent linear sums in both coordinate systems.",
+      "opened": true
+    },
+    {
+      "id": "thm-fatou-lemma",
+      "used_for": "Obtaining finite Gaussian upper bounds for all even moments from nonnegative finite differences.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Gaussian moment limits, characteristic-function series, Gaussian smoothing limits, and bounded continuous approximations to half-lines.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Whole-line truncations and increasing nonnegative partial sums of cosh.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Absolutely integrable Gaussian Fourier smoothing and bounded test-function interchanges.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Normalization of nonnegative Gaussian convolution densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-integral",
+      "used_for": "Normalization of the standard Gaussian density after scaling.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-measure-uniqueness-on-a-pi-system",
+      "used_for": "Identifying the law from agreement on all lower closed half-lines and equality of total masses.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Gaussian moment recurrence and the Gaussian characteristic-function differential equation, first on compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-substitution",
+      "used_for": "Gaussian scaling and convolution changes of variable, with compact applications followed by integrable-tail limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Compact integrability of smooth integrands and local logarithmic derivatives; uniform partition comparison of Riemann and Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "cor-zero-derivative-implies-constant",
+      "used_for": "Solving the Gaussian transform differential equation and identifying local logarithms and quadratic primitives, componentwise.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-first-part",
+      "used_for": "Differentiating the componentwise integral construction of local complex logarithms.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-characteristic-function-of-a-real-random-variable",
+      "finding": "The Definition contains inline hyperlinks, including “as in [[def-integrable-real-and-complex-functions-and-their-integrals]]” and “[[thm-change-of-variables-for-expectation]] therefore applies”. These interrupt the complete defining section and are not moved to an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-integration-by-parts",
+      "finding": "The Statement includes “as functions on [a,b] ([[def-derivative]])” and integrability references to [[def-darboux-integral]], followed later by [[thm-continuous-implies-integrable]]. These hyperlinks remain inside the complete Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-substitution",
+      "finding": "The Statement contains inline links to [[def-derivative]], [[def-darboux-integral]], [[def-interval]], [[def-continuity-real]], and [[def-oriented-integral]]. There is no immediately following Statement references section separating these hyperlinks from the complete statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-continuous-implies-integrable",
+      "finding": "The Statement contains inline links to [[def-continuity-real]], [[def-bounded-set]], and [[def-darboux-integral]], violating the uninterrupted-statement instruction. Its additional sentence “Uniform continuity ... is the only place where the compactness of [a,b] is used” also conflicts with Proof 1.1, which explicitly uses compactness and boundedness fact L2 to establish boundedness before constructing Darboux sums.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-zero-derivative-implies-constant",
+      "finding": "The Statement begins “Let I ... be order-convex ([[def-interval]])” and includes inline links to [[def-continuity-real]], [[def-interior-closure-boundary-r]], and [[def-derivative]]. These links interrupt the statement and have not been moved to a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-ftc-first-part",
+      "finding": "The Statement embeds [[def-darboux-integral]], [[def-the-integral-function]], [[def-continuity-real]], and [[def-derivative]] in its hypotheses and endpoint explanation. They remain within the complete Statement without a following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": []
+}

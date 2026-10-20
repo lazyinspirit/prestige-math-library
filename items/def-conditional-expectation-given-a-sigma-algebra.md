@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-conditional-expectation-given-a-sigma-algebra.json
   audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
@@ -24,7 +25,13 @@ sources:
 
 Let $(\Omega,\mathcal F,P)$ be a probability space, $\mathcal G\subseteq\mathcal F$ a sub-sigma-algebra, and $X:\Omega\to\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\mathcal G$** is a real, $\mathcal G$-measurable, integrable function $Y$ such that $\int_A Y\,dP=\int_A X\,dP$ for every $A\in\mathcal G$. No completeness of $\mathcal G$ is assumed.
 
-Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.
+Expectation means the integral of Expectation of a nonnegative or integrable random variable. Integrable representatives use The class $L^1(\mu)$ of integrable functions; quotient notation is introduced after uniqueness.
+
+## Definition references
+
+[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]
+
+[[def-l-one-of-a-measure]]
 
 ## Source notes
 

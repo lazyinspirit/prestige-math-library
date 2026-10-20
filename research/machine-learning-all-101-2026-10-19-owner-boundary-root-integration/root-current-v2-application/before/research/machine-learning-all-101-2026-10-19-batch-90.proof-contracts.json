@@ -1,0 +1,1729 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-action-average-tv-controlled-by-kl",
+    "def-constrained-markov-decision-process",
+    "def-normalized-discounted-state-occupancy",
+    "def-discounted-cost-constraint",
+    "lem-normalized-discounted-state-occupancy-is-probability",
+    "def-discounted-value-and-advantage-functions",
+    "lem-discounted-occupancy-change-bounded-by-average-tv",
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+    "thm-policy-performance-bound-by-average-divergence",
+    "alg-constrained-policy-optimization",
+    "rem-cpo-implementation-is-approximate",
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "ex-empirical-cost-satisfaction-can-miss-population-violation",
+    "ex-exact-trust-region-and-sampled-line-search-disagree",
+    "cex-arbitrary-baseline-bound-without-old-policy-residual",
+    "lem-cpo-sample-update-well-defined-and-finite-search"
+  ],
+  "contracts": {
+    "lem-finite-action-average-tv-controlled-by-kl": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pinsker",
+          "source_section": "Statement",
+          "quote": "Assume AC. For probability measures $P,Q$ on one measurable space, with\n$$\\|P-Q\\|_{\\rm TV}:=\\sup_{A}|P(A)-Q(A)|,$$\nthe event-supremum convention without a factor $1/2$,\n$$\\|P-Q\\|_{\\rm TV}\\le\\sqrt{\\frac12D(P\\|Q)}.$$\nIf $P\\not\\ll Q$, the right side is $+\\infty$ by the definition of KL\ndivergence.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-action-average-tv-controlled-by-kl-step-1-1",
+          "step": "1.1",
+          "claim": "Fix one state $s$. Write $\\Delta_a=q_s(a)-p_s(a)$; since both distributions have mass one, $\\sum_a\\Delta_a=0$. The set $B=\\{a:\\Delta_a\\ge0\\}$ consists of the nonnegative differences. The positive and negative parts of $\\Delta$ therefore have equal sum, each equal to $\\frac12\\sum_a|\\Delta_a|$. For every subset $C\\subseteq A(s)$, $|\\sum_{a\\in C}\\Delta_a|$ is at most this common sum, and $C=B$ attains it. Thus the event-supremum total variation in [F2] equals $\\operatorname{TV}_{A(s)}(q_s,p_s)$.",
+          "inputs": [
+            "F2",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-finite-action-average-tv-controlled-by-kl-step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F3] to the probability measures $q_s$ and $p_s$ on the finite power-set space, and use step 1.1. This gives $\\operatorname{TV}_{A(s)}(q_s,p_s)\\le\\sqrt{D_{\\rm KL}(q_s\\|p_s)/2}$, including the infinite-divergence case.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "lem-finite-action-average-tv-controlled-by-kl-step-3-1",
+          "step": "3.1",
+          "claim": "If $K=+\\infty$, the asserted inequality holds because each total-variation term is at most one. Suppose $K<\\infty$ and put $m=K/2$. When $m=0$, step 2.1 gives $D_{\\rm KL}(q_s\\|p_s)\\ge2\\operatorname{TV}_{A(s)}(q_s,p_s)^2\\ge0$ for every state. Since their $d$-weighted sum is zero, every state with $d(s)>0$ has zero divergence, so step 2.1 also gives zero total variation there. When $m>0$, for every $x\\ge0$ the square $(\\sqrt{x}-\\sqrt m)^2\\ge0$ gives $\\sqrt{x}\\le(\\sqrt m+x/\\sqrt m)/2$. Apply this with $x=D_{\\rm KL}(q_s\\|p_s)/2$ for states with $d(s)>0$, multiply by $d(s)$, and sum. Since $\\sum_sd(s)=1$ and $\\sum_sd(s)x_s=m$, the result is $\\sum_sd(s)\\sqrt{x_s}\\le\\sqrt m$. Step 2.1 now yields the claimed bound.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The statement assumes a finite nonempty state set and nonempty action sets. zero: When K=0, step 3.1 treats m=0 and the average total variation is zero. one: No one-dimensional parameter or unit-valued boundary is asserted. degenerate: For q_s=p_s at every positive-weight state, step 1.1 gives zero total variation and step 3.1 gives equality. endpoints: Zero probabilities are covered by the KL infinity convention and Pinsker application in step 2.1. nonempty-choice: The statement assumes AC, used only when applying Pinsker in step 2.1; the finite-sum argument in step 1.1 is choice-free. iff-forward: The lemma is a one-way inequality, not an equivalence. iff-reverse: The lemma is a one-way inequality, not an equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "def-constrained-markov-decision-process": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The definition explicitly requires a nonempty state set and nonempty action sets. zero: This is a model definition and has no zero-boundary proof phase. one: This is a model definition and has no one-boundary proof phase. degenerate: No degenerate case is asserted in the definition. endpoints: The discount range is specified directly in the definition. nonempty-choice: The finite model definition is choice-free and supplies no proof phase. iff-forward: The definition is not an equivalence claim. iff-reverse: The definition is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "def-normalized-discounted-state-occupancy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The definition applies to a CMDP with nonempty state set. zero: This is a definition; the gamma=0 boundary is proved in its well-definedness lemma. one: Gamma=1 is excluded in the definition. degenerate: No degenerate case is asserted in the definition. endpoints: Endpoint behavior is a proof obligation of the linked well-definedness lemma. nonempty-choice: The finite sum definition is choice-free and has no proof phase. iff-forward: The definition is not an equivalence claim. iff-reverse: The definition is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "def-discounted-cost-constraint": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The definition applies to a nonempty finite CMDP. zero: This is a definition; zero discount is treated by its well-definedness supplier and examples. one: Gamma=1 is excluded in the definition. degenerate: No degenerate case is asserted in the definition. endpoints: Endpoint behavior is handled by the well-definedness supplier. nonempty-choice: The finite-sum definition is choice-free and has no proof phase. iff-forward: The definition is not an equivalence claim. iff-reverse: The definition is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "lem-normalized-discounted-state-occupancy-is-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-normalized-discounted-state-occupancy",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP and a stationary policy $\\pi$ be given. The **column transition matrix** $K_\\pi$ has entry\n\n$$K_\\pi(s',s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\pi(a\\mid s)p(s',\\rho\\mid s,a),$$\n\nso that its column indexed by $s$ gives the next-state distribution from current state $s$. With the state-mass column vectors $\\mu_t^\\pi$ from the CMDP definition, the **normalized discounted state occupancy** is\n\n$$d^\\pi(s):=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\mu_t^\\pi(s).$$\n\nThis normalization is part of the definition; the occupancy is a probability distribution by the separate well-definedness result below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-bounded-discounted-return-converges",
+          "source_section": "Statement",
+          "quote": "Let $M\\ge0$, $0\\le\\gamma<1$, and let $(\\rho_j)_{j\\ge1}$ be any real sequence with $|\\rho_j|\\le M$. Then the series\n\n$$ \\sum_{j=0}^{\\infty}\\gamma^j\\rho_{j+1} $$\n\nconverges absolutely. Every partial sum and the limit satisfy\n\n$$ \\left|\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M}{1-\\gamma}, \\qquad |G|\\le\\frac{M}{1-\\gamma}. $$\n\nFor every integer $N\\ge0$,\n\n$$ \\left|G-\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M\\gamma^N}{1-\\gamma}, $$\n\nwhere the partial sum at $N=0$ is empty and $\\gamma^0=1$, including when $\\gamma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-normalized-discounted-state-occupancy-is-probability-step-1-1",
+          "step": "1.1",
+          "claim": "The initial vector $\\mu_0^\\pi=\\mu$ is nonnegative and sums to one. If $\\mu_t^\\pi$ is a probability distribution, then the recurrence and [F2]–[F3] give nonnegative next masses and $\\sum_{s'}\\mu_{t+1}^\\pi(s')=\\sum_s\\sum_{a\\in A(s)}\\mu_t^\\pi(s)\\pi(a\\mid s)\\sum_{s',\\rho}p(s',\\rho\\mid s,a)=\\sum_s\\mu_t^\\pi(s)=1$. By [F8], every $\\mu_t^\\pi$ is a probability distribution.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-normalized-discounted-state-occupancy-is-probability-step-2-1",
+          "step": "2.1",
+          "claim": "By [F4] and step 1.1, $d^\\pi(s)\\ge0$ and $\\sum_s d^\\pi(s)=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\sum_s\\mu_t^\\pi(s)=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t=1$ by [F6]. Interchanging the finite state sum with the nonnegative series is valid because $S$ is finite. Thus $d^\\pi$ is a probability distribution.",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-normalized-discounted-state-occupancy-is-probability-step-3-1",
+          "step": "3.1",
+          "claim": "For each $t$, the finite transition weights $\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)$ are nonnegative and sum to one by step 1.1 and [F2]–[F3]. Hence their weighted sum of $g$ has absolute value at most $B$. Apply [F7] to this bounded sequence of time-$t$ signal sums; the series in [F5] converges absolutely and its absolute value is at most $B/(1-\\gamma)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The CMDP statement requires nonempty states and action sets. zero: At gamma=0, step 2.1 leaves only the t=0 mass and still sums to one. one: Gamma=1 is excluded by the statement. degenerate: For B=0, step 3.1 bounds every signal sum by zero and gives J=0. endpoints: The included endpoint gamma=0 is handled in step 2.1; gamma=1 is outside the statement. nonempty-choice: The induction and finite-sum proof is choice-free. iff-forward: The lemma is not an equivalence claim. iff-reverse: The lemma is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "def-discounted-value-and-advantage-functions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The definition applies to a nonempty finite CMDP. zero: This is a definition and has no phase-proof boundary worksheet. one: This is a definition and has no phase-proof boundary worksheet. degenerate: No degenerate case is asserted in the definition. endpoints: The discount domain is specified by the CMDP definition. nonempty-choice: The finite-sum definitions are choice-free and have no proof phase. iff-forward: The definition is not an equivalence claim. iff-reverse: The definition is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "lem-discounted-occupancy-change-bounded-by-average-tv": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normalized-discounted-state-occupancy",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP and a stationary policy $\\pi$ be given. The **column transition matrix** $K_\\pi$ has entry\n\n$$K_\\pi(s',s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\pi(a\\mid s)p(s',\\rho\\mid s,a),$$\n\nso that its column indexed by $s$ gives the next-state distribution from current state $s$. With the state-mass column vectors $\\mu_t^\\pi$ from the CMDP definition, the **normalized discounted state occupancy** is\n\n$$d^\\pi(s):=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\mu_t^\\pi(s).$$\n\nThis normalization is part of the definition; the occupancy is a probability distribution by the separate well-definedness result below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-normalized-discounted-state-occupancy-is-probability",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP, a stationary policy $\\pi$, its finite-time state-mass vectors $\\mu_t^\\pi$, its normalized discounted occupancy $d^\\pi$, and the expected discounted signal $J_g^\\pi(\\mu)$ be as defined above. Each $\\mu_t^\\pi$ is a probability distribution, $d^\\pi$ is a probability distribution, and for every bounded transition signal $g$ with $|g|\\le B$, the series defining $J_g^\\pi(\\mu)$ converges absolutely and satisfies $|J_g^\\pi(\\mu)|\\le B/(1-\\gamma)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-discounted-occupancy-change-bounded-by-average-tv-step-1-1",
+          "step": "1.1",
+          "claim": "For $\\sigma\\in\\{\\pi,\\pi'\\}$, every entry of $K_\\sigma$ is nonnegative and each column sums to one by [F1]. Thus $K_\\sigma^t$ is column-stochastic for every $t$, and its induced matrix $1$-norm $\\|A\\|_1:=\\max_s\\sum_{s'}|A(s',s)|$ is one. The matrix series $G_\\sigma:=\\sum_{t=0}^{\\infty}\\gamma^tK_\\sigma^t$ converges in this norm by [F4]; its finite partial sums satisfy $(I-\\gamma K_\\sigma)\\sum_{t=0}^{N}\\gamma^tK_\\sigma^t=I-\\gamma^{N+1}K_\\sigma^{N+1}$, whose remainder norm tends to zero by [F5]. The same identity with multiplication on the other side shows $G_\\sigma=(I-\\gamma K_\\sigma)^{-1}$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-discounted-occupancy-change-bounded-by-average-tv-step-1-2",
+          "step": "1.2",
+          "claim": "By [F1], for each coordinate $s'$ of $(K_{\\pi'}-K_\\pi)d^\\pi$, the triangle inequality gives $\\sum_{s'}|((K_{\\pi'}-K_\\pi)d^\\pi)(s')|\\le\\sum_{s,a,s'}d^\\pi(s)|\\pi'(a\\mid s)-\\pi(a\\mid s)|P(s'\\mid s,a)=2\\sum_s d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi)$, because $\\sum_{s'}P(s'\\mid s,a)=1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-discounted-occupancy-change-bounded-by-average-tv-step-2-1",
+          "step": "2.1",
+          "claim": "The recurrence in [F1] and the matrix definition in [F2] give $\\mu_t^\\sigma=K_\\sigma^t\\mu$, hence $d^\\sigma=(1-\\gamma)G_\\sigma\\mu$. The inverse identity $G_{\\pi'}-G_\\pi=G_{\\pi'}[(I-\\gamma K_\\pi)-(I-\\gamma K_{\\pi'})]G_\\pi$ therefore yields $d^{\\pi'}-d^\\pi=\\gamma G_{\\pi'}(K_{\\pi'}-K_\\pi)d^\\pi$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-discounted-occupancy-change-bounded-by-average-tv-step-3-1",
+          "step": "3.1",
+          "claim": "Since $\\|G_{\\pi'}\\|_1\\le\\sum_{t\\ge0}\\gamma^t=1/(1-\\gamma)$ by [F4] and column-stochasticity, combine step 2.1 with step 1.2 to obtain the claimed $1$-norm bound.",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The CMDP requires a nonempty finite state set. zero: At gamma=0 the occupancy is the initial law under either policy, so step 2.1 gives zero difference. one: Gamma=1 is excluded by the statement. degenerate: When pi'=pi, step 2.1 has K'=K and gives d'=d. endpoints: The included endpoint gamma=0 is covered by step 2.1; gamma=1 is outside the statement. nonempty-choice: The finite matrix and norm proof is choice-free. iff-forward: The lemma is not an equivalence claim. iff-reverse: The lemma is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normalized-discounted-state-occupancy",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP and a stationary policy $\\pi$ be given. The **column transition matrix** $K_\\pi$ has entry\n\n$$K_\\pi(s',s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\pi(a\\mid s)p(s',\\rho\\mid s,a),$$\n\nso that its column indexed by $s$ gives the next-state distribution from current state $s$. With the state-mass column vectors $\\mu_t^\\pi$ from the CMDP definition, the **normalized discounted state occupancy** is\n\n$$d^\\pi(s):=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\mu_t^\\pi(s).$$\n\nThis normalization is part of the definition; the occupancy is a probability distribution by the separate well-definedness result below.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-normalized-discounted-state-occupancy-is-probability",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP, a stationary policy $\\pi$, its finite-time state-mass vectors $\\mu_t^\\pi$, its normalized discounted occupancy $d^\\pi$, and the expected discounted signal $J_g^\\pi(\\mu)$ be as defined above. Each $\\mu_t^\\pi$ is a probability distribution, $d^\\pi$ is a probability distribution, and for every bounded transition signal $g$ with $|g|\\le B$, the series defining $J_g^\\pi(\\mu)$ converges absolutely and satisfies $|J_g^\\pi(\\mu)|\\le B/(1-\\gamma)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline-step-1-1",
+          "step": "1.1",
+          "claim": "Fix a policy $\\sigma$. For each $t$, let $e_t^\\sigma$ be the finite transition-mass sum of $g$ at time $t$, and let $h_t^\\sigma:=\\sum_s\\mu_t^\\sigma(s)f(s)$. By [F1] and the definition of $\\delta_f^g$, the finite sum of $\\delta_f^g$ at time $t$ is $e_t^\\sigma+\\gamma h_{t+1}^\\sigma-h_t^\\sigma$. Summing after multiplication by $\\gamma^t$ for $t=0,\\ldots,N$ telescopes to $\\sum_{t=0}^N\\gamma^t e_t^\\sigma-h_0^\\sigma+\\gamma^{N+1}h_{N+1}^\\sigma$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline-step-2-1",
+          "step": "2.1",
+          "claim": "The remainder satisfies $|\\gamma^{N+1}h_{N+1}^\\sigma|\\le\\gamma^{N+1}\\|f\\|_\\infty\\to0$ by [F4] and [F5]. Also $|\\delta_f^g|\\le\\|g\\|_\\infty+(1+\\gamma)\\|f\\|_\\infty$, so [F4] makes its discounted series convergent. Passing to the limit in step 1.1 and using [F2]–[F3] gives $J_g^\\sigma(\\mu)=\\sum_s\\mu(s)f(s)+(1-\\gamma)^{-1}\\sum_s d^\\sigma(s)\\bar\\delta_f^{g,\\sigma}(s)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline-step-3-1",
+          "step": "3.1",
+          "claim": "Apply the identity in step 2.1 to $\\sigma=\\pi'$ and $\\sigma=\\pi$ and subtract; the initial terms $\\sum_s\\mu(s)f(s)$ cancel. Add and subtract $\\sum_s d^\\pi(s)\\bar\\delta_f^{g,\\pi'}(s)$. The first resulting term is $L_{\\pi,f}^g(\\pi')$ by its definition, and the second is $\\sum_s(d^{\\pi'}(s)-d^\\pi(s))\\bar\\delta_f^{g,\\pi'}(s)$. Dividing by $1-\\gamma>0$ gives the claimed identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The finite CMDP statement requires a nonempty state set. zero: At gamma=0 the terminal remainder vanishes and step 2.1 uses only the initial transition. one: Gamma=1 is excluded. degenerate: For pi'=pi the difference and both sides in step 3.1 are zero. endpoints: Gamma=0 is included in steps 1.1–2.1; gamma=1 is outside the statement. nonempty-choice: The finite-mass telescoping argument is choice-free. iff-forward: The identity is not an equivalence claim. iff-reverse: The identity is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "thm-policy-performance-bound-by-average-divergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normalized-discounted-state-occupancy",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP and a stationary policy $\\pi$ be given. The **column transition matrix** $K_\\pi$ has entry\n\n$$K_\\pi(s',s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\pi(a\\mid s)p(s',\\rho\\mid s,a),$$\n\nso that its column indexed by $s$ gives the next-state distribution from current state $s$. With the state-mass column vectors $\\mu_t^\\pi$ from the CMDP definition, the **normalized discounted state occupancy** is\n\n$$d^\\pi(s):=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\mu_t^\\pi(s).$$\n\nThis normalization is part of the definition; the occupancy is a probability distribution by the separate well-definedness result below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-normalized-discounted-state-occupancy-is-probability",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP, a stationary policy $\\pi$, its finite-time state-mass vectors $\\mu_t^\\pi$, its normalized discounted occupancy $d^\\pi$, and the expected discounted signal $J_g^\\pi(\\mu)$ be as defined above. Each $\\mu_t^\\pi$ is a probability distribution, $d^\\pi$ is a probability distribution, and for every bounded transition signal $g$ with $|g|\\le B$, the series defining $J_g^\\pi(\\mu)$ converges absolutely and satisfies $|J_g^\\pi(\\mu)|\\le B/(1-\\gamma)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP, a bounded transition signal $g$, a bounded function $f:S\\to\\mathbb R$, and stationary policies $\\pi,\\pi'$ be given. All sums below over $a,\\rho,s'$ range over $A(s),\\mathcal R,S$, respectively. For a policy $\\sigma$ define\n\n$$\\delta_f^g(s,a,\\rho,s'):=g(s,a,\\rho,s')+\\gamma f(s')-f(s),\\qquad \\bar\\delta_{f}^{g,\\sigma}(s):=\\sum_{a,\\rho,s'}\\sigma(a\\mid s)p(s',\\rho\\mid s,a)\\delta_f^g(s,a,\\rho,s').$$\n\nPut\n\n$$L_{\\pi,f}^g(\\pi'):=\\sum_s d^\\pi(s)\\bigl(\\bar\\delta_f^{g,\\pi'}(s)-\\bar\\delta_f^{g,\\pi}(s)\\bigr).$$\n\nThen the exact performance-difference identity is\n\n$$J_g^{\\pi'}(\\mu)-J_g^\\pi(\\mu)=\\frac{L_{\\pi,f}^g(\\pi')}{1-\\gamma}+\\frac{1}{1-\\gamma}\\sum_s\\bigl(d^{\\pi'}(s)-d^\\pi(s)\\bigr)\\bar\\delta_f^{g,\\pi'}(s).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-discounted-occupancy-change-bounded-by-average-tv",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP and two stationary policies $\\pi,\\pi'$ be given, with normalized discounted occupancies $d^\\pi,d^{\\pi'}$. Define\n\n$$\\operatorname{TV}_s(\\pi',\\pi):=\\frac12\\sum_{a\\in A(s)}|\\pi'(a\\mid s)-\\pi(a\\mid s)|$$\n\nand $\\|x\\|_1:=\\sum_{s\\in S}|x(s)|$ for a state vector. Then\n\n$$\\|d^{\\pi'}-d^\\pi\\|_1\\le\\frac{2\\gamma}{1-\\gamma}\\sum_{s\\in S}d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-action-average-tv-controlled-by-kl",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a finite nonempty set, let $d$ be a probability distribution on $S$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set with probability distributions $q_s$ and $p_s$. On the power-set sigma-algebra of $A(s)$, define\n\n$$\\operatorname{TV}_{A(s)}(q_s,p_s):=\\frac12\\sum_{a\\in A(s)}|q_s(a)-p_s(a)|.$$\n\nUse the directional Kullback–Leibler divergence with natural logarithms, defined by\n\n$$D_{\\rm KL}(q_s\\|p_s):=\\begin{cases}\\displaystyle\\sum_{a:q_s(a)>0}q_s(a)\\log\\frac{q_s(a)}{p_s(a)},&q_s(a)>0\\Rightarrow p_s(a)>0,\\\\+\\infty,&\\text{otherwise,}\\end{cases}$$\n\nand the convention $0\\log0=0$. Put\n\n$$K:=\\sum_{s:d(s)>0}d(s)D_{\\rm KL}(q_s\\|p_s)\\in[0,+\\infty].$$\n\nThen\n\n$$\\sum_{s\\in S}d(s)\\operatorname{TV}_{A(s)}(q_s,p_s)\\le\\sqrt{K/2},$$\n\nwhere the right side is $+\\infty$ when $K=+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-policy-performance-bound-by-average-divergence-step-1-1",
+          "step": "1.1",
+          "claim": "By [F1] and [F3], $S$ is finite, $d^\\pi,d^{\\pi'}$ are probability distributions, and each finite sum defining $\\bar\\delta_f^{g,\\pi'}(s)$ is bounded by $\\|g\\|_\\infty+(1+\\gamma)\\|f\\|_\\infty$; hence $\\epsilon_f^g(\\pi')$ is finite. By [F2], the returns are the defined bounded-signal discounted sums. The identity [F4] writes their difference as $L_{\\pi,f}^g(\\pi')/(1-\\gamma)$ plus the remainder $(1-\\gamma)^{-1}\\sum_s(d^{\\pi'}(s)-d^\\pi(s))\\bar\\delta_f^{g,\\pi'}(s)$. The triangle inequality gives $|\\sum_s(d^{\\pi'}-d^\\pi)\\bar\\delta_f^{g,\\pi'}|\\le\\sum_s|d^{\\pi'}-d^\\pi||\\bar\\delta_f^{g,\\pi'}|\\le\\epsilon_f^g(\\pi')\\|d^{\\pi'}-d^\\pi\\|_1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-performance-bound-by-average-divergence-step-2-1",
+          "step": "2.1",
+          "claim": "Substitute [F5] into the remainder bound in step 1.1. The resulting error is at most $2\\gamma\\epsilon_f^g(\\pi')(1-\\gamma)^{-2}\\sum_s d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi)$, which gives the two total-variation inequalities.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-performance-bound-by-average-divergence-step-3-1",
+          "step": "3.1",
+          "claim": "Assume AC. If $\\overline D_{\\rm KL}^{\\pi}(\\pi'\\|\\pi)=+\\infty$, the stated extended KL inequalities are immediate. Otherwise [F6] bounds the average total variation in step 2.1 by $\\sqrt{\\overline D_{\\rm KL}^{\\pi}(\\pi'\\|\\pi)/2}$. Replacing the nonnegative error term by this upper bound gives the two KL-form inequalities. This step alone uses AC; steps 1.1–2.1 do not.",
+          "inputs": [
+            "A1",
+            "F6",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The statement assumes a nonempty finite state set. zero: At gamma=0 the error coefficient is zero in step 2.1 and the identity is exact. one: Gamma=1 is excluded by the statement. degenerate: When pi'=pi, the return difference, L, and TV terms vanish by steps 1.1–2.1. endpoints: The included gamma=0 case is covered by step 2.1; gamma=1 is excluded. nonempty-choice: Only the KL substitution invokes AC, in step 3.1; steps 1.1–2.1 prove the TV branch choice-free. iff-forward: The theorem is a pair of inequalities, not an equivalence. iff-reverse: The theorem is a pair of inequalities, not an equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "alg-constrained-policy-optimization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The algorithm assumes a finite CMDP with nonempty states/actions. zero: The algorithm definition has no phase-proof worksheet; gamma=0 is covered by finite examples. one: The algorithm definition has no phase-proof worksheet. degenerate: No algorithm correctness proof is supplied in this definition. endpoints: The parameter, Hessian, and hyperparameter domains are specified in the procedure. nonempty-choice: The finite procedure is choice-free; AC is declared only for the cited KL theorem interpretation. iff-forward: The algorithm definition is not an equivalence claim. iff-reverse: The algorithm definition is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "rem-cpo-implementation-is-approximate": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes its state/action or probability-law domain. The Definition supplies admissible inputs and no phase proof is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: This is a prose scope remark, not a phase proof. zero: This is a prose scope remark, not a phase proof. one: This is a prose scope remark, not a phase proof. degenerate: This is a prose scope remark, not a phase proof. endpoints: This is a prose scope remark, not a phase proof. nonempty-choice: The remark distinguishes the AC branch but contains no proof worksheet. iff-forward: The remark is not an equivalence claim. iff-reverse: The remark is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety-step-1-1",
+          "step": "1.1",
+          "claim": "At every time $t$, the state is $s$ and the expected one-step cost is $1/10$. Thus by [F2] and [F3], $J_c^\\pi(\\mu)=\\sum_{t=0}^{\\infty}(1/10)^t(1/10)=(1/10)/(1-1/10)=1/9$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety-step-2-1",
+          "step": "2.1",
+          "claim": "Since $1/9<1/8=b$, the policy is feasible under the expected discounted-cost constraint.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety-step-3-1",
+          "step": "3.1",
+          "claim": "The probability that all seven independent action draws are `safe` is $(9/10)^7=4{,}782{,}969/10{,}000{,}000$. Hence the probability of at least one cost is $1-(9/10)^7=5{,}217{,}031/10{,}000{,}000>1/2$, as claimed.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "ml101-cpo-discounted-cost-pathwise",
+          "asserts": "Its expected discounted cost is $1/9<1/8$, so it is feasible, while the probability of at least one cost during those seven decisions is $5{,}217{,}031/10{,}000{,}000>1/2$.",
+          "claim": "The displayed geometric series and exact complement probability verify the finite witness by rational arithmetic.",
+          "checked_in": "Example and steps 1.1–3.1",
+          "states": 1,
+          "actions": 2,
+          "horizon": 7,
+          "fixture": "seven-independent-actions"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The example fixes one nonempty state and two actions. zero: The example fixes a positive risky-action probability and gamma=1/10. one: No unit parameter boundary is asserted. degenerate: The example fixes a nondegenerate randomized policy. endpoints: The example uses the fixed interior discount gamma=1/10. nonempty-choice: Only finite probability calculations are used. iff-forward: The example is not an equivalence claim. iff-reverse: The example is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "ex-empirical-cost-satisfaction-can-miss-population-violation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-empirical-cost-satisfaction-can-miss-population-violation-step-1-1",
+          "step": "1.1",
+          "claim": "The policy's expected one-step cost is $(1/10)\\cdot1+(9/10)\\cdot0=1/10$. Since $\\gamma=0$, [F2] gives $J_c^\\pi(\\mu)=1/10>1/20=b$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-empirical-cost-satisfaction-can-miss-population-violation-step-2-1",
+          "step": "2.1",
+          "claim": "Each of the ten independent rollouts is safe with probability $9/10$, so the probability all ten are safe is $(9/10)^{10}=3{,}486{,}784{,}401/10{,}000{,}000{,}000$. On this event the empirical mean is $0\\le b$, despite step 1.1 showing that the population constraint is violated.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "ml101-cpo-safe-sample",
+          "asserts": "The true expected discounted cost is $1/10>b$. In ten independent one-step rollouts, the empirical mean cost is zero whenever every action is `safe`, an event of probability $(9/10)^{10}=3{,}486{,}784{,}401/10{,}000{,}000{,}000$.",
+          "claim": "The population expectation and exact tenth power verify the finite-sample witness by rational arithmetic.",
+          "checked_in": "Example and steps 1.1–2.1",
+          "states": 1,
+          "actions": 2,
+          "rollouts": 10,
+          "fixture": "ten-independent-rollouts"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The example fixes one state and two actions. zero: At gamma=0, step 1.1 reduces the population objective to the first one-step cost. one: No unit parameter boundary is asserted. degenerate: The example fixes a nondegenerate 1/10 risky-action probability. endpoints: The included endpoint gamma=0 is used in step 1.1. nonempty-choice: The finite Bernoulli calculation is choice-free. iff-forward: The example is not an equivalence claim. iff-reverse: The example is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "ex-exact-trust-region-and-sampled-line-search-disagree": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discounted-value-and-advantage-functions",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP, a stationary policy $\\pi$, and a bounded transition signal $g$ be given. For $s\\in S$, let $\\delta_s$ be the initial distribution assigning probability one to $s$. The **state value** is $V_g^\\pi(s):=J_g^\\pi(\\delta_s)$. For $a\\in A(s)$, define the **action value** and **advantage** by\n\n$$Q_g^\\pi(s,a):=\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}p(s',\\rho\\mid s,a)\\bigl(g(s,a,\\rho,s')+\\gamma V_g^\\pi(s')\\bigr),\\qquad A_g^\\pi(s,a):=Q_g^\\pi(s,a)-V_g^\\pi(s).$$\n\nTaking $g=r$ gives reward values and advantages; taking $g=c_i$ gives the value and advantage for the $i$th cost. These quantities are finite because the signal is bounded, $0\\le\\gamma<1$, and the transition law is normalized.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-constrained-policy-optimization",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the theoretical average-KL comparison, and let a finite discounted CMDP have cost signals $c_1,\\ldots,c_m$ with thresholds $b_1,\\ldots,b_m$. Let $\\theta\\mapsto\\pi_\\theta$ be a stationary policy family on an open subset of $\\mathbb R^d$ with fixed common support, and assume its policy coordinates are twice continuously differentiable on a neighborhood of the current parameter $\\theta_k$. Choose a trust radius $\\delta>0$, a backtracking factor $\\beta\\in(0,1)$, and a finite backtracking budget $L\\ge0$. At iteration $k$, the finite data batch consists of $N\\ge1$ rows $(s_j,a_j,\\omega_j,\\widehat A_j^r,\\widehat A_{1,j}^c,\\ldots,\\widehat A_{m,j}^c)$ from trajectories generated in the CMDP under the current policy $\\pi_{\\theta_k}$, where $\\omega_j\\ge0$, $\\sum_j\\omega_j=1$, and $\\pi_{\\theta_k}(a_j\\mid s_j)>0$. The advantage estimates are real numbers held fixed during the update, and the batch also includes real baseline-cost estimates $\\widehat J_{i,k}$. The weights and estimates may come from any fixed rollout or critic estimator; this procedure assumes no accuracy property for them. It specifies the exact finite-data trust-region subproblem and line search; implementations that approximate the subproblem solve are discussed separately.\n\nFor $\\theta$ near $\\theta_k$, define the finite sample surrogates\n\n$$\\widehat L_r(\\theta):=\\sum_{j=1}^N\\omega_j\\left(\\frac{\\pi_\\theta(a_j\\mid s_j)}{\\pi_{\\theta_k}(a_j\\mid s_j)}-1\\right)\\widehat A_j^r,\\qquad \\widehat L_i^c(\\theta):=\\sum_{j=1}^N\\omega_j\\left(\\frac{\\pi_\\theta(a_j\\mid s_j)}{\\pi_{\\theta_k}(a_j\\mid s_j)}-1\\right)\\widehat A_{i,j}^c.$$\n\nand $\\widehat K(\\theta):=\\sum_j\\omega_jD_{\\rm KL}(\\pi_\\theta(\\cdot\\mid s_j)\\|\\pi_{\\theta_k}(\\cdot\\mid s_j))$. Put $g=\\nabla\\widehat L_r(\\theta_k)$, $u_i=(1-\\gamma)^{-1}\\nabla\\widehat L_i^c(\\theta_k)$, $H=\\nabla^2\\widehat K(\\theta_k)$, and $q_i=\\widehat J_{i,k}-b_i$. The update procedure is:\n\n1. If $H$ is not symmetric positive definite, meaning $x^THx>0$ for every nonzero $x\\in\\mathbb R^d$, return `no-step`. Otherwise form the local quadratic program\n\n   $$\\max_{x\\in\\mathbb R^d} g^Tx\\quad\\text{subject to}\\quad q_i+u_i^Tx\\le0\\ (i=1,\\ldots,m),\\qquad \\frac12x^THx\\le\\delta.$$\n\n2. If this program is feasible, let $x^*$ be its lexicographically least global maximizer. The feasible set is a closed subset of the compact ellipsoid, so the maximizer set is nonempty and compact. Minimize the first coordinate on that set, restrict to its nonempty compact minimizers, and repeat for each coordinate; the resulting point is the lexicographically least maximizer. If the program is infeasible and $m=1$, compute $v=H^{-1}u_1$. If $u_1=0$, return `no-step`, since the linearized cost cannot be reduced. Otherwise $u_1^Tv>0$ by positive definiteness, and use the cost-recovery proposal $x^*=-\\sqrt{2\\delta/(u_1^Tv)}\\,v$. If the program is infeasible and $m>1$, return `no-step`.\n\n3. For $j=0,\\ldots,L$, set $\\theta_j=\\theta_k+\\beta^jx^*$. Accept the first $\\theta_j$ in the policy family's parameter domain for which $\\widehat K(\\theta_j)\\le\\delta$ and every sample cost estimate $\\widehat J_{i,k}+(1-\\gamma)^{-1}\\widehat L_i^c(\\theta_j)$ is at most $b_i$. If no candidate passes this sample check, return `no-step`; otherwise output the accepted parameter as $\\theta_{k+1}$.\n\nFor finite constants $D_i\\ge0$, optional nonnegative bounded transition signals $\\Delta_i:\\mathcal X\\to[0,D_i]$ may be included in the supplied cost-advantage and baseline estimates by estimating the shaped costs $c_i+\\Delta_i$. The exact theorem concerns exact policies and expectations; the line search above checks only the supplied sample estimates.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-policy-performance-bound-by-average-divergence",
+          "source_section": "Statement",
+          "quote": "Let a finite discounted CMDP, a bounded transition signal $g$, a bounded function $f:S\\to\\mathbb R$, and stationary policies $\\pi,\\pi'$ be given. For each state define\n\n$$\\bar\\delta_f^{g,\\sigma}(s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\sigma(a\\mid s)p(s',\\rho\\mid s,a)\\bigl(g(s,a,\\rho,s')+\\gamma f(s')-f(s)\\bigr),\\qquad \\sigma\\in\\{\\pi,\\pi'\\}.$$\n\nSet $\\epsilon_f^g(\\pi'):=\\max_{s\\in S}|\\bar\\delta_f^{g,\\pi'}(s)|$ and\n\n$$L_{\\pi,f}^g(\\pi'):=\\sum_{s\\in S}d^\\pi(s)\\bigl(\\bar\\delta_f^{g,\\pi'}(s)-\\bar\\delta_f^{g,\\pi}(s)\\bigr),\\qquad D_{\\pi,f}^{\\pm,g}(\\pi'):=\\frac{L_{\\pi,f}^g(\\pi')}{1-\\gamma}\\pm\\frac{2\\gamma\\epsilon_f^g(\\pi')}{(1-\\gamma)^2}\\sum_{s\\in S}d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi),$$\n\nwhere $\\operatorname{TV}_s(\\pi',\\pi):=\\frac12\\sum_{a\\in A(s)}|\\pi'(a\\mid s)-\\pi(a\\mid s)|$. Then\n\n$$D_{\\pi,f}^{-,g}(\\pi')\\le J_g^{\\pi'}(\\mu)-J_g^\\pi(\\mu)\\le D_{\\pi,f}^{+,g}(\\pi').$$\n\nThese total-variation bounds are choice-free. Under the additional Axiom of Choice, define\n\n$$\\overline D_{\\rm KL}^{\\pi}(\\pi'\\|\\pi):=\\sum_{s:d^\\pi(s)>0}d^\\pi(s)D_{\\rm KL}\\bigl(\\pi'(\\cdot\\mid s)\\|\\pi(\\cdot\\mid s)\\bigr),$$\n\nusing natural logarithms and $+\\infty$ when the first action law is not absolutely continuous with respect to the second. The same inequalities hold after replacing $\\sum_s d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi)$ by $\\sqrt{\\overline D_{\\rm KL}^{\\pi}(\\pi'\\|\\pi)/2}$; when the average KL is infinite, these KL-form inequalities are interpreted as the trivial extended bounds $-\\infty\\le J_g^{\\pi'}(\\mu)-J_g^\\pi(\\mu)\\le+\\infty$. Taking $g=r$ gives the reward bound, and taking $g=c_i$ gives the corresponding bound for each discounted cost.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-exact-trust-region-and-sampled-line-search-disagree-step-1-1",
+          "step": "1.1",
+          "claim": "The old expected cost is $J_c^\\pi(\\mu)=1/100$, while the proposed expected cost is $J_c^{\\pi'}(\\mu)=1/5$. Since $1/5>1/20$, the exact cost constraint rejects $\\pi'$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-exact-trust-region-and-sampled-line-search-disagree-step-1-2",
+          "step": "1.2",
+          "claim": "By [F4], the average KL at the single state is $K=(1/5)\\log20+(4/5)\\log(80/99)$. The second logarithm is negative. Also [F5] gives $\\log20=\\int_1^{20}dt/t<19<20$, so $K<(1/5)20=4=\\delta$. Thus the proposal satisfies the exact average-KL radius despite violating the exact cost limit.",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-exact-trust-region-and-sampled-line-search-disagree-step-2-1",
+          "step": "2.1",
+          "claim": "The ideal CPO cost advantage under $\\pi$ is $A_c^\\pi(s,\\text{risky})=1-1/100=99/100$ and $A_c^\\pi(s,\\text{safe})=0-1/100=-1/100$. Its exact surrogate is therefore $J_c^\\pi+(1-\\gamma)^{-1}\\mathbb E_{a\\sim\\pi'}A_c^\\pi(s,a)=1/100+(1/5)(99/100)+(4/5)(-1/100)=1/5>1/20$. By [F7], this is the proposed policy's exact expected cost at $\\gamma=0$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-exact-trust-region-and-sampled-line-search-disagree-step-3-1",
+          "step": "3.1",
+          "claim": "Under $\\pi$, one sampled action is `safe` with probability $99/100$. On that event the observed cost is zero; choosing the corresponding supplied baseline-cost estimate and cost-advantage estimate as zero makes the sample cost surrogate at $\\pi'$ equal zero. Since $0\\le b$, the line search in [F6] accepts this sample check if $\\pi'$ is proposed, even though step 1.1 gives its exact expected cost $1/5$.",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "check": "ml101-cpo-exact-versus-sample",
+          "asserts": "If a one-row rollout sample from the old policy observes `safe` and supplies zero baseline-cost and advantage estimates, the empirical line-search cost is zero and passes the threshold; this sample occurs with probability $99/100$.",
+          "claim": "The two action probabilities give the exact costs and KL expression; the displayed logarithm bound proves the strict radius inequality, and the safe sample gives the empirical zero-cost check.",
+          "checked_in": "Example and steps 1.1–3.1",
+          "states": 1,
+          "actions": 2,
+          "sample_rows": 1,
+          "fixture": "one-row-safe-line-search"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The example fixes one state and two actions. zero: Gamma=0 makes the exact cost surrogate equal the one-step return in steps 1.1–2.1. one: No unit parameter boundary is asserted. degenerate: The old and proposed policies are distinct and both action probabilities are positive. endpoints: The included endpoint gamma=0 is used in steps 1.1–2.1; the policy probabilities are interior. nonempty-choice: AC is assumed for the KL/theorem comparison in step 1.2; the finite cost arithmetic is independent of it. iff-forward: The example is not an equivalence claim. iff-reverse: The example is not an equivalence claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "cex-arbitrary-baseline-bound-without-old-policy-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-constrained-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,\\mathcal R,(A(s))_{s\\in S},p)$ be a finite Markov decision process with nonempty state set $S$ and finite nonempty action set $A(s)$ at each state. Put $\\mathcal X=\\{(s,a,\\rho,s'):s\\in S,\\ a\\in A(s),\\ \\rho\\in\\mathcal R,\\ s'\\in S\\}$. Let $\\mu$ be a probability distribution on $S$, let $\\gamma\\in[0,1)$, let $m\\ge1$ be an integer, and for each $i\\in\\{1,\\ldots,m\\}$ let $b_i\\in\\mathbb R$, $C_i\\ge0$, and $c_i:\\mathcal X\\to[-C_i,C_i]$. A **finite discounted constrained Markov decision process (CMDP)** is the tuple consisting of $M$, $\\mu$, $\\gamma$, and the bounded transition-cost functions and thresholds $(c_i,b_i)_{i=1}^m$. Its immediate reward signal is $r(s,a,\\rho,s')=\\rho$.\n\nFor a stationary Markov policy $\\pi$, define the state-mass sequence recursively by $\\mu_0^\\pi=\\mu$ and\n\n$$\\mu_{t+1}^\\pi(s'):=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a).$$\n\nThis recurrence defines nonnegative finite-time masses; the result that each $\\mu_t^\\pi$ is a probability distribution is established separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normalized-discounted-state-occupancy",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP and a stationary policy $\\pi$ be given. The **column transition matrix** $K_\\pi$ has entry\n\n$$K_\\pi(s',s):=\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\pi(a\\mid s)p(s',\\rho\\mid s,a),$$\n\nso that its column indexed by $s$ gives the next-state distribution from current state $s$. With the state-mass column vectors $\\mu_t^\\pi$ from the CMDP definition, the **normalized discounted state occupancy** is\n\n$$d^\\pi(s):=(1-\\gamma)\\sum_{t=0}^{\\infty}\\gamma^t\\mu_t^\\pi(s).$$\n\nThis normalization is part of the definition; the occupancy is a probability distribution by the separate well-definedness result below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discounted-cost-constraint",
+          "source_section": "Definition",
+          "quote": "Let a finite discounted CMDP have initial distribution $\\mu$, discount $\\gamma\\in[0,1)$, $m$ bounded transition signals $c_i$, thresholds $b_i$, and finite-time state masses $\\mu_t^\\pi$ under a stationary policy $\\pi$, as defined in the CMDP model. For any bounded transition signal $g$ on $(s,a,\\rho,s')$, define its **expected discounted sum** under $\\pi$ by\n\n$$J_g^\\pi(\\mu):=\\sum_{t=0}^{\\infty}\\gamma^t\\sum_{s\\in S}\\sum_{a\\in A(s)}\\sum_{\\rho\\in\\mathcal R}\\sum_{s'\\in S}\\mu_t^\\pi(s)\\pi(a\\mid s)p(s',\\rho\\mid s,a)g(s,a,\\rho,s').$$\n\nThe expected discounted reward is $J^\\pi:=J_r^\\pi(\\mu)$ for the immediate reward signal $r(s,a,\\rho,s')=\\rho$, and the $i$th expected discounted cost is $J_{c_i}^\\pi(\\mu)$. The policy $\\pi$ is **feasible** for the discounted-cost constraints exactly when $J_{c_i}^\\pi(\\mu)\\le b_i$ for every $i\\in\\{1,\\ldots,m\\}$. Feasibility constrains these expectations; it does not assert a per-trajectory bound.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-arbitrary-baseline-bound-without-old-policy-residual-step-1-1",
+          "step": "1.1",
+          "claim": "The deterministic transition and policy masses are normalized, and both the reward and cost are bounded, so this is a finite CMDP. By [F2] its occupancy has $d^\\pi(s)=d^{\\pi'}(s)=1$ at $\\gamma=0$. By [F3] both reward returns satisfy $J_r^\\pi(\\mu)=J_r^{\\pi'}(\\mu)=1$, so $J_r^{\\pi'}(\\mu)-J_r^\\pi(\\mu)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-arbitrary-baseline-bound-without-old-policy-residual-step-2-1",
+          "step": "2.1",
+          "claim": "Since $f=0$ and the reward is $1$, the residual is $\\delta_f=1$ and $\\epsilon_f=1$. The stated surrogate is $L_{\\pi,f}(\\pi')=1$. Identical policies have statewise total variation zero, so $D^-_{\\pi,f}(\\pi')=D^+_{\\pi,f}(\\pi')=1$. The asserted lower inequality is $1\\le0$, which is false by step 1.1. Subtracting the old-policy residual expectation instead gives the corrected surrogate $1-1=0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "explicit finite witness",
+          "status": "checked_by_exact_calculation",
+          "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula.",
+          "check": "ml101-cpo-old-residual-witness",
+          "asserts": "The asserted lower inequality is $1\\le0$, which is false by step 1.1. Subtracting the old-policy residual expectation instead gives the corrected surrogate $1-1=0$.",
+          "fixture": "identical-policy-zero-discount"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The explicit finite model has a nonempty state and action set. zero: Zero probability endpoints are excluded in the Bernoulli witness; the CPO witness explicitly uses discount zero. one: The state/action sizes are explicitly fixed in the witness. degenerate: Every model mass and reward is explicit; deterministic transitions are intentional. endpoints: The Bernoulli parameter is interior; discount zero in the CPO witness is included with gamma^0=1. nonempty-choice: The episode law and every required value are computed explicitly from finite masses without a choice principle. iff-forward: The refuted assertion is not an equivalence. iff-reverse: The refuted assertion is not an equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement refuted and Counterexample is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement refuted and Counterexample is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    },
+    "lem-cpo-sample-update-well-defined-and-finite-search": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-constrained-policy-optimization",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the theoretical average-KL comparison, and let a finite discounted CMDP have cost signals $c_1,\\ldots,c_m$ with thresholds $b_1,\\ldots,b_m$. Let $\\theta\\mapsto\\pi_\\theta$ be a stationary policy family on an open subset of $\\mathbb R^d$ with fixed common support, and assume its policy coordinates are twice continuously differentiable on a neighborhood of the current parameter $\\theta_k$. Choose a trust radius $\\delta>0$, a backtracking factor $\\beta\\in(0,1)$, and a finite backtracking budget $L\\ge0$. At iteration $k$, the finite data batch consists of $N\\ge1$ rows $(s_j,a_j,\\omega_j,\\widehat A_j^r,\\widehat A_{1,j}^c,\\ldots,\\widehat A_{m,j}^c)$ from trajectories generated in the CMDP under the current policy $\\pi_{\\theta_k}$, where $\\omega_j\\ge0$, $\\sum_j\\omega_j=1$, and $\\pi_{\\theta_k}(a_j\\mid s_j)>0$. The advantage estimates are real numbers held fixed during the update, and the batch also includes real baseline-cost estimates $\\widehat J_{i,k}$. The weights and estimates may come from any fixed rollout or critic estimator; this procedure assumes no accuracy property for them. It specifies the exact finite-data trust-region subproblem and line search; implementations that approximate the subproblem solve are discussed separately.\n\nFor $\\theta$ near $\\theta_k$, define the finite sample surrogates\n\n$$\\widehat L_r(\\theta):=\\sum_{j=1}^N\\omega_j\\left(\\frac{\\pi_\\theta(a_j\\mid s_j)}{\\pi_{\\theta_k}(a_j\\mid s_j)}-1\\right)\\widehat A_j^r,\\qquad \\widehat L_i^c(\\theta):=\\sum_{j=1}^N\\omega_j\\left(\\frac{\\pi_\\theta(a_j\\mid s_j)}{\\pi_{\\theta_k}(a_j\\mid s_j)}-1\\right)\\widehat A_{i,j}^c.$$\n\nand $\\widehat K(\\theta):=\\sum_j\\omega_jD_{\\rm KL}(\\pi_\\theta(\\cdot\\mid s_j)\\|\\pi_{\\theta_k}(\\cdot\\mid s_j))$. Put $g=\\nabla\\widehat L_r(\\theta_k)$, $u_i=(1-\\gamma)^{-1}\\nabla\\widehat L_i^c(\\theta_k)$, $H=\\nabla^2\\widehat K(\\theta_k)$, and $q_i=\\widehat J_{i,k}-b_i$. The update procedure is:\n\n1. If $H$ is not symmetric positive definite, meaning $x^THx>0$ for every nonzero $x\\in\\mathbb R^d$, return `no-step`. Otherwise form the local quadratic program\n\n   $$\\max_{x\\in\\mathbb R^d} g^Tx\\quad\\text{subject to}\\quad q_i+u_i^Tx\\le0\\ (i=1,\\ldots,m),\\qquad \\frac12x^THx\\le\\delta.$$\n\n2. If this program is feasible, let $x^*$ be its lexicographically least global maximizer. The feasible set is a closed subset of the compact ellipsoid, so the maximizer set is nonempty and compact. Minimize the first coordinate on that set, restrict to its nonempty compact minimizers, and repeat for each coordinate; the resulting point is the lexicographically least maximizer. If the program is infeasible and $m=1$, compute $v=H^{-1}u_1$. If $u_1=0$, return `no-step`, since the linearized cost cannot be reduced. Otherwise $u_1^Tv>0$ by positive definiteness, and use the cost-recovery proposal $x^*=-\\sqrt{2\\delta/(u_1^Tv)}\\,v$. If the program is infeasible and $m>1$, return `no-step`.\n\n3. For $j=0,\\ldots,L$, set $\\theta_j=\\theta_k+\\beta^jx^*$. Accept the first $\\theta_j$ in the policy family's parameter domain for which $\\widehat K(\\theta_j)\\le\\delta$ and every sample cost estimate $\\widehat J_{i,k}+(1-\\gamma)^{-1}\\widehat L_i^c(\\theta_j)$ is at most $b_i$. If no candidate passes this sample check, return `no-step`; otherwise output the accepted parameter as $\\theta_{k+1}$.\n\nFor finite constants $D_i\\ge0$, optional nonnegative bounded transition signals $\\Delta_i:\\mathcal X\\to[0,D_i]$ may be included in the supplied cost-advantage and baseline estimates by estimating the shaped costs $c_i+\\Delta_i$. The exact theorem concerns exact policies and expectations; the line search above checks only the supplied sample estimates.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $q$ be a positive definite quadratic form on $\\mathbb R^n$. Then some $c>0$ satisfies $q(u)\\ge c$ whenever $\\|u\\|_2=1$. For a negative definite $q$, some $c>0$ satisfies $q(u)\\le-c$ on the same sphere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-invertible-matrix-theorem",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_n(F)$, the following are equivalent:\n\n1. $A$ is invertible;\n2. $x\\mapsto Ax$ is a linear isomorphism;\n3. $N(A)=\\{0\\}$;\n4. $\\operatorname{rank}(A)=n$;\n5. $A$ has a pivot in every row and every column;\n6. the RREF of $A$ is $I_n$;\n7. for every $b\\in F^n$, the equation $Ax=b$ has exactly one solution.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First consider $d\\ge1$ and symmetric positive definite $H$. By homogeneity, [F2] gives $x^THx\\ge c\\|x\\|_2^2$ for all $x$, with zero handled directly. Put $C=\\sum_{a,b}|H_{ab}|$. Coordinate bounds in [F6] and the identity $x_ax_b-y_ay_b=(x_a-y_a)x_b+y_a(x_b-y_b)$ give $|x^THx-y^THy|\\le C\\|x-y\\|_2(\\|x\\|_2+\\|y\\|_2)$, so the quadratic form is continuous. The ellipsoid $E=\\{x:x^THx/2\\le\\delta\\}$ is therefore closed and contained in the ball of radius $\\sqrt{2\\delta/c}$, hence compact by [F3]. Each linear functional $x\\mapsto v^Tx$ is continuous because $|v^T(x-y)|\\le\\|v\\|_2\\|x-y\\|_2$. Thus the feasible set $F=E\\cap\\bigcap_i\\{x:q_i+u_i^Tx\\le0\\}$ is a closed subset of $E$, and is compact.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $F$ is nonempty, [F4] gives an attained maximum $M$ of $g^Tx$ on $F$. Its maximizer set $K_0=\\{x\\in F:g^Tx=M\\}$ is nonempty and compact by closedness and [F3]. Successively for coordinates $h=1,\\ldots,d$, let $a_h$ be the minimum of coordinate $h$ on $K_{h-1}$ and set $K_h=\\{x\\in K_{h-1}:x_h=a_h\\}$. Each minimum exists by [F4], and each restriction remains nonempty and compact by [F3]. After $d$ restrictions all coordinates are fixed, so $K_d$ is a singleton. For any other maximizer, the first coordinate where it differs from this singleton must be greater, by the construction of that coordinate's minimum. The singleton is therefore exactly the unique lexicographically least maximizer. As a member of $F$, it satisfies all stated constraints.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $Hz=0$, then $z^THz=0$ and positive definiteness forces $z=0$. Thus [F5] supplies $H^{-1}$. In the single-cost recovery branch write $u=u_1\\ne0$, $v=H^{-1}u$. Then $v\\ne0$, $Hv=u$ and $a=u^Tv=v^THv>0$. For every $x\\in E$, nonnegativity of the quadratic form at $x-(u^Tx/a)v$ gives $0\\le x^THx-(u^Tx)^2/a$, using symmetry. Consequently $u^Tx\\ge-\\sqrt{2\\delta a}$. For $x^*=-\\sqrt{2\\delta/a}\\,v$, direct substitution gives $(x^*)^THx^*=2\\delta$ and $u^Tx^*=-\\sqrt{2\\delta a}$, attaining the bound. If another point attains it, equality in the preceding inequalities gives $(x-(u^Tx/a)v)^TH(x-(u^Tx/a)v)=0$, hence $x=(u^Tx/a)v=x^*$ by positive definiteness. The recovery proposal is therefore unique, and its linearized cost is $q_1-\\sqrt{2\\delta a}$. Since it is the minimum over $E$, infeasibility implies that this last value is strictly positive, rather than implying feasibility.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The remaining proposal branches are the explicit returns in [F1]: non-positive-definite $H$, infeasible single-cost problem with $u_1=0$, and infeasible problem with $m>1$ all return `no-step`. If $d=0$, the only parameter displacement is the zero vector, so a feasible program has that unique maximizer, and in the infeasible case all $u_i=0$ and one of the specified no-step branches applies. Thus zero dimension introduces no missing proposal case. Together with steps 2.1 and 2.2, every branch either gives one uniquely specified proposal or returns `no-step`.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For a proposal $x^*$, the candidates $\\theta_k+\\beta^jx^*$ for integer $j=0,\\ldots,L$ form a prescribed ordered list of $L+1$ points. The parameter-domain check precedes evaluation of the policy tests, so no value outside the domain is required. On the domain, the finite common-support policy probabilities define the empirical KL and surrogates in [F1]. Either there is a least passing index in this finite list, or there is none; [F1] returns its candidate or `no-step`, respectively. Inspecting successive indices therefore terminates in at most $L+1$ candidate tests. The definition of passing supplies exactly the stated sample inequalities. All choices and returns are single-valued by steps 2.1, 2.2 and 3.1 and this least-index rule, establishing the asserted output and finite-search properties. No step in this argument compares the sample estimates to population expectations.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 3.1 handles infeasible local program with specified no-step/recovery branches."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 3.1 handles zero parameter dimension and zero recovery gradient; proof step 4.1 covers L=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 2.2 handles one cost; proof step 4.1 covers one backtracking candidate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 3.1 handles non-SPD matrix and infeasible multiple-cost problem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.2 attains quadratic boundary exactly; proof step 4.1 tests ordered indices0 throughL."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1-2.1 establishes nonempty compact maximizer before coordinatewise finite minimization; existing algorithm AC retained, no additional use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        }
+      ],
+      "finite_smoke": [],
+      "routine_steps": []
+    }
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "alg-exponential-mechanism": {
+    "focus": "The input requires nonempty finite database-independent R, real utilities, epsilon>0 and finite Delta_u>0. Verification1.1 proves every weight positive and normalizer finite positive, including countable additivity on finite R;2.1 proves source measurability by the database power-set sigma-algebra.",
+    "axis": {
+      "nonempty-choice": "Verification1.1 forms the complete finite list of weights and normalizes it;2.1 uses the power-set database sigma-algebra. No maximizing output or arbitrary family representative is selected."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "R is required nonempty, so Z_D is positive by Verification1.1. Empty output event A is permitted: its finite sum is0; the empty database is also an admitted finite-support count function."
+      },
+      "zero": {
+        "status": "not_applicable",
+        "reason": "Epsilon and Delta_u are both strictly positive inputs. Verification1.1 establishes Z_D>0 before every division; zero utility scores merely give weight1 and require no separate branch."
+      }
+    }
+  },
+  "alg-laplace-mechanism": {
+    "focus": "The Definition branches on finite sensitivity zero versus positive, with d>=1 and epsilon>0. Verification1.1 constructs the positive-scale finite-product noise under Countable Choice;2.1 assigns the point mass for zero sensitivity and proves measurability on the discrete database domain.",
+    "axis": {
+      "zero": "Verification2.1 assigns the point mass at f(D) when Delta_1f=0;1.1 only divides by the positive epsilon and uses positive scale in its branch.",
+      "nonempty-choice": "Verification1.1 invokes Countable Choice through the scalar Laplace law and its finite products; the output law is the explicit translation pushforward, with no stronger choice requirement."
+    },
+    "overrides": {}
+  },
+  "def-differential-privacy-and-adjacency": {
+    "focus": "The Definition allows the zero database and arbitrary output events, requires the record universe nonempty, defines neighbors by adding or removing exactly one occurrence, and includes epsilon>=0 and delta in[0,1]. The ordered-pair quantifier includes both directions; there is no equivalence theorem.",
+    "axis": {
+      "empty": "The zero count function is a database with empty support, and every output event includes empty A with both kernel values0.",
+      "zero": "Epsilon=0 is included and gives K(D,A)<=K(D-prime,A)+delta; delta=0 is explicitly called pure privacy.",
+      "nonempty-choice": "The record universe, output space and probability kernel are supplied; the Definition uses no choice axiom and does not assert existence of a mechanism."
+    },
+    "overrides": {
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Definition explicitly admits delta=0 and delta=1 and epsilon=0. The same event inequality defines those cases, with delta=0 designated pure privacy."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "A data-independent deterministic point mass is allowed as a probability kernel and has equal neighboring laws. At delta=1 every event inequality is automatically true since kernel probabilities lie in[0,1]."
+      }
+    }
+  },
+  "def-exponential-mechanism-utility-sensitivity": {
+    "focus": "The Definition fixes nonempty finite R and add/remove adjacency and defines Delta_u only when the real differences have an attained finite maximum. It distinguishes a positive sensitivity from zero; the downstream exponential procedure uses only the positive case.",
+    "axis": {
+      "empty": "The empty database is admitted. The output range R and the adjacent-pair difference set are nonempty: a record exists, the zero database is adjacent to its singleton, and R has an element.",
+      "zero": "The attained maximum can be0, in which case every adjacent output score difference is0. The final sentence separately reserves the exponential procedure for Delta_u>0.",
+      "one": "A singleton range R is allowed; the maximum then ranges over that single output and all adjacent database pairs.",
+      "nonempty-choice": "An attained maximum is an explicit hypothesis for the definition; it does not select maximizers simultaneously for databases or arbitrary utilities."
+    },
+    "overrides": {
+      "degenerate": {
+        "status": "checked",
+        "reason": "Utilities constant across neighboring databases have every adjacent score difference0 and hence Delta_u=0. Such a sensitivity is defined, but the final sentence excludes it from the positive-sensitivity exponential-mechanism interface."
+      }
+    }
+  },
+  "def-global-l1-sensitivity": {
+    "focus": "The Definition fixes d>=1 and defines the L1 norm as the finite coordinate sum, then defines sensitivity only when adjacent-pair differences have an attained finite maximum. Constant queries have sensitivity0, and d=1 is included without a separate construction.",
+    "axis": {
+      "zero": "A constant query has all neighboring L1 differences0, so its attained global sensitivity is0.",
+      "one": "For d=1 the displayed norm sum is the single absolute coordinate difference.",
+      "nonempty-choice": "Existence of an attained finite maximum is a condition of this definition, not a theorem producing maximizers or selecting a family of witnesses."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "Dimension d is required at least1, so the coordinate sum is not empty. Empty databases are nevertheless admitted by add/remove adjacency, and the maximum includes the zero database and each one-record neighbor."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If every adjacent pair has equal query output, the difference set is{0} and the attained maximum is0; the Definition imposes no positive-sensitivity restriction."
+      }
+    }
+  },
+  "def-laplace-distribution": {
+    "focus": "The Definition constructs the positive-scale law as the equal mixture of a positive exponential measure and its reflection, with Countable Choice inherited from the exponential supplier. It explicitly defines Lap(0) as the point mass at0, rather than applying a positive-scale density there.",
+    "axis": {
+      "zero": "The final sentence explicitly defines Lap(0)=delta_0.",
+      "nonempty-choice": "The positive exponential law is the published supplier under Countable Choice; reflection and the fixed two-measure mixture require no new family of selections."
+    },
+    "overrides": {
+      "endpoints": {
+        "status": "checked",
+        "reason": "The scale domain includes the endpoint b=0 by its explicit point-mass definition; b>0 uses the exponential/reflection mixture. Negative scales are not defined."
+      }
+    }
+  },
+  "lem-laplace-product-density": {
+    "focus": "The Statement assumes b>0 and finite d>=1 under Countable Choice. Proof1.1 multiplies the scalar densities and proves integral1 by repeated Tonelli;2.1 matches rectangle probabilities and identifies the product law. For d=1 both constructions reduce to the scalar Laplace law.",
+    "axis": {
+      "one": "At d=1 Proof1.1 has one factor and gives (2b)^-1 exp(-|z|/b);2.1 compares that single marginal law.",
+      "nonempty-choice": "Proof1.1 uses Countable Choice through the scalar density and finite-product/Tonelli suppliers; it constructs the candidate density explicitly, not by choosing conditional laws."
+    },
+    "overrides": {
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The finite product has d>=1 by the Statement, so an empty coordinate product is excluded. Empty measurable rectangles or events have integral0 in the density identities of1.1\u20132.1."
+      },
+      "degenerate": {
+        "status": "not_applicable",
+        "reason": "The Statement assumes b>0; the point-mass scale b=0 is outside this Lebesgue-density lemma and is separately defined by the Laplace-law definition."
+      }
+    }
+  },
+  "thm-laplace-density-from-exponential-law": {
+    "focus": "For b>0 the proof splits each Borel event into positive and negative parts, changes variables under reflection, and discards the Lebesgue-null singleton at0 in1.1;2.1 obtains the density and absolute continuity. The zero-scale point mass is outside this positive-scale density assertion.",
+    "axis": {
+      "nonempty-choice": "Proof1.1 uses the declared Countable Choice branch through exponential-law existence and Lebesgue change of variables. Reflection is explicitly T(x)=-x with absolute Jacobian1, and no full AC is invoked."
+    },
+    "overrides": {}
+  },
+  "thm-laplace-mechanism-privacy": {
+    "focus": "The Statement has d>=1, finite nonnegative sensitivity and epsilon>0. Proof1.1\u20132.1 treats positive scale using the density ratio and integrates over arbitrary events;3.1 separately handles zero sensitivity by identical deterministic neighboring outputs. Countable Choice is explicit through the noise law.",
+    "axis": {
+      "zero": "Proof3.1 handles Delta_1f=0: neighboring query values coincide and deterministic output laws are identical. The scale formula in1.1 is used only when sensitivity is positive.",
+      "one": "For d=1 the coordinatewise triangle argument in2.1 consists of one absolute-value inequality; unit sensitivity gives b=1/epsilon.",
+      "nonempty-choice": "The declared Countable Choice branch supplies the real Laplace law and finite product in1.1; the ratio proof and deterministic branch require no additional choice."
+    },
+    "overrides": {
+      "degenerate": {
+        "status": "checked",
+        "reason": "Proof3.1 handles the deterministic zero-sensitivity mechanism with identical neighboring output laws, giving pure privacy directly."
+      },
+      "empty": {
+        "status": "checked",
+        "reason": "The event A in2.1 is arbitrary, including empty A, where integration yields0<=0. The database domain includes its empty count function; the same sensitivity bound applies to its one-record neighbors."
+      }
+    }
+  },
+  "thm-exponential-mechanism-privacy-and-utility": {
+    "focus": "The finite nonempty range, positive finite sensitivity and epsilon>0 ensure positive weights and normalization. Proof1.1 sums both neighboring point-mass bounds over events;2.1 bounds the utility tail using the nonempty maximizing set and explicitly includes empty bad events. The utility tail uses t>0.",
+    "axis": {
+      "empty": "Proof2.1 explicitly gives probability0 for an empty utility bad event, and1.1 sums over arbitrary output events including empty A.",
+      "zero": "The procedure assumes epsilon>0 and Delta_u>0, so the divisions in the weights and utility threshold are valid; zero scores themselves have positive weight1.",
+      "one": "A singleton output range has its unique output as a maximizer and |R_OPT|=|R|=1; the bad event in2.1 is empty for t>0.",
+      "nonempty-choice": "Proof2.1 uses the entire nonempty finite maximizing set rather than selecting one maximizer;1.1 constructs all weights and sums directly."
+    },
+    "overrides": {
+      "zero": {
+        "status": "not_applicable",
+        "reason": "The Statement assumes epsilon>0, Delta_u>0 and t>0. Every normalizer is a nonempty sum of positive weights; zero scores are permitted but do not make denominators zero."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If all current-database utilities tie, the maximizing set is all of R and the mechanism is uniform. For t>0 the utility bad event in2.1 is empty, so its probability0 satisfies the stated bound."
+      }
+    }
+  },
+  "lem-dp-test-function-extension": {
+    "focus": "The proof explicitly constructs dyadic level approximations g_m in1.1, applies event inequalities and finite sums in2.1, and uses monotone convergence in3.1. The domain is probability measures and measurable g in[0,1], with epsilon>=0 and delta in[0,1]; no choice axiom is used.",
+    "axis": {
+      "zero": "For g=0 all dyadic level sets in1.1 are empty and both integrals in3.1 are0; epsilon=0 and delta=0 are also included in the same inequalities.",
+      "nonempty-choice": "Proof1.1 defines g_m by all dyadic levels j/2^m. The approximation sequence is explicit and uses no choice axiom."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "Empty measurable level sets have probability0 in2.1; a probability space itself cannot be empty. The case g=0 makes every level set empty and yields the required integral inequality."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "For g=1 each level set in1.1 is the whole space, hence g_m=1 and the conclusion reads1<=exp(epsilon)+delta."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Identical or point-mass probabilities and constant test functions are allowed; the dyadic construction and eventwise inequalities in1.1\u20133.1 remain valid."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The allowed test range includes g=0 and g=1, handled by the dyadic level sets, and the privacy parameters include epsilon=0 and delta=0 or1 without parameter division."
+      }
+    }
+  },
+  "thm-dp-postprocessing": {
+    "focus": "For a supplied data-independent probability kernel L, Proof1.1 sets g(y)=L(y,B) in[0,1] for any output event and2.1 applies the bounded-function extension to the two neighboring laws, then identifies the composition integrals. It allows arbitrary measurable output spaces and requires no choice axiom.",
+    "axis": {
+      "zero": "Proof2.1 applies the extension with epsilon=0 or delta=0 unchanged; a zero event probability also causes no division.",
+      "nonempty-choice": "The kernel L and event B are supplied, and1.1 explicitly defines g=L(.,B). The composition theorem and bounded-function extension used in2.1 require no additional selection."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "Proof1.1 permits B=empty, giving the zero test function and zero composed probabilities. The source database can be the empty database as well."
+      },
+      "one": {
+        "status": "not_applicable",
+        "reason": "No round count or dimension parameter occurs; a one-point intermediate or output space is already permitted by the arbitrary measurable-space/kernel hypotheses."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "A deterministic postprocessing kernel is included, since1.1 only uses measurability and0<=L(y,B)<=1. Constant output kernels and identical neighboring input laws therefore satisfy the same2.1 inequality."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Statement includes epsilon=0 and delta=0 or1;2.1 applies the extension with those exact parameters and never divides by them."
+      }
+    }
+  },
+  "lem-dp-pure-privacy-loss-kl-bound": {
+    "focus": "The lemma assumes AC and standard-Borel probability laws with two pure event inequalities. Proof1.1 selects one RN density;2.1 bounds it in[a^-1,a];3.1 computes TV via its sign set;4.1 uses the reciprocal density and finite divergences. Epsilon=0 forces equality of both laws.",
+    "axis": {
+      "zero": "At epsilon=0,2.1 confines r to[1,1] almost everywhere, so P=Q and4.1 gives KL0 with bound0.",
+      "nonempty-choice": "Proof1.1 assumes AC and chooses the ordinary RN density supplied by F2;3.1 defines the extremal event E={r>=1} explicitly rather than selecting a maximizing family."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "An empty underlying space cannot carry P or Q of total mass1. Empty measurable events are included in the assumptions with probabilities0 and do not affect the sign-set calculation."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "One-point laws have P=Q and RN density1, so4.1 gives KL0, below the nonnegative bound."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "When P=Q, r=1 almost everywhere, t=0 in3.1 and both divergences vanish in4.1. This includes coincident point masses."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Epsilon=0 is included; no division by epsilon occurs. The denominator a+1 in3.1 is at least2 because a=exp(epsilon)>=1."
+      }
+    }
+  },
+  "lem-dp-approximate-kernel-purification": {
+    "focus": "Under the explicit AC/standard-Borel kernel interfaces, Proof1.1 constructs a conull measurable history set,3.1 clips density between q/a and aq,4.1 corrects normalization in three separate m<1,m=1,m>1 branches and uses L off the conull set;5.1 bounds TV. It includes epsilon=0 and delta=0.",
+    "axis": {
+      "zero": "For epsilon=0,a=c=1, clipping in3.1 gives p0=q and m=1;4.1 uses its m=1 branch without dividing by a-m or m-c. At delta=0,5.1 gives zero TV.",
+      "nonempty-choice": "Proof1.1 invokes the declared kernel RN supplier under AC to obtain jointly measurable densities on a common conull history set; it then fixes the countable generating algebra and explicitly constructs G."
+    },
+    "overrides": {
+      "empty": {
+        "status": "checked",
+        "reason": "The supplied history probability excludes an empty history space, and probability kernels from its nonempty domain exclude an empty output space. Empty output events have zero probabilities in every clipped/corrected density integral."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "Proof4.1 explicitly sets r=p0 when the clipped mass m=1; this also covers a one-point output law without division."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "For identical kernels clipping leaves p=q and normalized mass1, and4.1 gives K*=L=K. Off the conull history set4.1 also assigns the supplied probability kernel L."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Statement admits epsilon=0 and delta endpoints0,1. Proof4.1 uses only positive denominators within m<1 and m>1 branches;5.1 gives the TV bound also at delta=0."
+      }
+    }
+  },
+  "thm-basic-adaptive-composition": {
+    "focus": "For k>=1 and arbitrary measurable round outputs, Proof1.1 starts at a one-point empty history and builds finite transcript laws. Proof2.1 inducts the exact additive epsilon/delta bounds using a clipped[0,1] test function, with no choice and no privacy-parameter division.",
+    "axis": {
+      "empty": "Proof1.1 explicitly sets H0={*}, the empty-tuple history, and every event inequality includes empty B. The actual round sequence has k>=1.",
+      "zero": "Proof2.1 starts with E0=D0=0 and handles round epsilon_i=0 or delta_i=0 by the same finite sums and test-function inequality.",
+      "one": "At k=1,2.1 applies its single induction step to the unit prefix law and returns exactly the assumed(epsilon_1,delta_1) event bound.",
+      "nonempty-choice": "Proof1.1 builds transcript laws by finitely composing the supplied kernels on arbitrary measurable spaces;2.1 uses an explicit clipped test function. No choice axiom is used."
+    },
+    "overrides": {
+      "degenerate": {
+        "status": "checked",
+        "reason": "Deterministic or identical neighboring round kernels are allowed:1.1 only needs probability kernels, and2.1 retains the same clipped-test-function inequality."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Nonnegative round epsilon_i and delta_i may be0, and the permitted total delta sum may equal1. Proof2.1 uses addition and multiplication only, so those endpoints remain included."
+      }
+    }
+  },
+  "thm-advanced-adaptive-composition-standard-borel-outputs": {
+    "focus": "Under AC with standard-Borel outputs, Proof1.1 pads the finite sequence with singleton kernels,1.2 constructs modified kernels,3.1\u20134.2 constructs bounded likelihood losses and the martingale,5.1 separates epsilon=0, and6.1\u20137.1 compares both original transcript directions. The exact k>=1,delta-prime in(0,1),kdelta+delta-prime<=1 conditions remain.",
+    "axis": {
+      "empty": "Proof1.2 starts from the point mass at the empty history, while1.1 appends singleton outputs after the supplied k>=1 rounds. Empty transcript events have probability0.",
+      "zero": "Proof5.1 explicitly handles epsilon=0: each X_i=0 and P*=Q, avoiding the positive-epsilon concentration division. Delta=0 is permitted by1.2 and6.1.",
+      "one": "For k=1,1.1 constructs the one-round marginal and4.1 has the single RN density factor; the same5.1\u20137.1 bound applies.",
+      "nonempty-choice": "Proof1.1 declares AC via the path-law supplier,1.2 uses the measurable purification kernel, and3.1 uses the declared kernel RN supplier; no database-pair-measurable simultaneous selection is claimed."
+    },
+    "overrides": {
+      "degenerate": {
+        "status": "checked",
+        "reason": "Identical or point-mass kernels are allowed by the probability-kernel hypotheses;3.1 clips positive likelihood ratios and5.1 includes the zero-loss case without requiring nontrivial support."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The additive constraint includes equality kdelta+delta-prime=1 and delta=0;5.1 separately treats epsilon=0. The strict0<delta-prime<1 excludes divergent or nonpositive logarithmic threshold endpoints."
+      }
+    }
+  },
+  "rem-differential-privacy-scope-and-limitations": {
+    "focus": "This Remark distinguishes central record-level add/remove privacy from client-level or local privacy, data locality and secure aggregation. It explicitly limits protection to one-record changes and allows inference from correlations with other records or public information; it asserts no construction or theorem proof.",
+    "axis": {
+      "one": "The Remark explicitly says privacy limits the effect of one record on a release, rather than a whole client contribution.",
+      "nonempty-choice": "The Remark uses the already defined privacy interface and states interpretive limitations; it constructs no law or selected family and invokes no choice axiom."
+    },
+    "overrides": {}
+  },
+  "lem-dp-joint-measure-purification": {
+    "focus": "This is the arbitrary-measurable-space joint-measure implication under AC:1.1 chooses an ordinary finite-measure RN density;2.1 localizes over history events;3.1 clips and corrects with the same history marginal;4.1 obtains measure bounds and TV. Its conclusions are not an iff and do not claim a conditional kernel or disintegration.",
+    "axis": {},
+    "overrides": {}
+  },
+  "thm-advanced-adaptive-composition-arbitrary-measurable-outputs": {
+    "focus": "The Statement is a sufficient advanced-privacy implication under AC on arbitrary measurable spaces. Proof1.1 constructs finite prefix laws,2.1 purifies joint measures,3.1 uses ordinary prefix-law RN derivatives,6.1 handles epsilon=0 separately and7.1 exchanges ordered databases. It does not assert necessity of the privacy parameters or an equivalence.",
+    "axis": {},
+    "overrides": {}
+  },
+  "thm-basic-and-advanced-composition": {
+    "focus": "The two Statement clauses are sufficient composition bounds. Proof1.1 instantiates the choice-free heterogeneous basic theorem;2.1 assumes AC and instantiates the arbitrary-measurable advanced theorem with the exact epsilon and additive error. Neither clause asserts that these parameter bounds are necessary.",
+    "axis": {},
+    "overrides": {}
+  },
+  "ex-add-remove-noisy-count": {
+    "focus": "For a supplied nonzero binary predicate, Verification1.1 bounds each add/remove count change by1 and attains it at empty versus one satisfying record;2.1 applies the unit-sensitivity Laplace theorem. The Example declares Countable Choice through its scalar noise law.",
+    "axis": {
+      "empty": "Verification1.1 uses f(empty)=0 and f({u0})=1 for a satisfying record u0.",
+      "zero": "The empty database has count0 in1.1; the scale is1/epsilon with epsilon>0, never a zero-scale density.",
+      "one": "Verification1.1 proves exactly one-occurrence sensitivity1 and attains it at a satisfying singleton.",
+      "nonempty-choice": "The positive predicate assumption supplies one satisfying record for the sensitivity witness; Countable Choice is declared through the Laplace-law supplier used in the privacy step."
+    },
+    "overrides": {}
+  },
+  "ex-finite-range-private-selection": {
+    "focus": "The Example compares constant positive-sensitivity-forbidden utilities with a modified count-indicator construction on two outputs. Verification1.1 obtains sensitivity0 for the first utility,1.2 proves sensitivity1 for the second, and2.1 computes uniform probabilities when s=0 and the displayed tilted weight when s=1; it asserts no converse to the exponential theorem.",
+    "axis": {
+      "empty": "The empty database has s=0, giving the uniform two-output distribution in Verification2.1.",
+      "zero": "The initial database-independent utilities have sensitivity0 and are outside the positive-sensitivity mechanism; the modified utility has sensitivity1 and its s=0 state is uniform.",
+      "nonempty-choice": "Both output scores and their two normalized weights are explicitly specified; the sensitivity witness uses the supplied satisfying record rather than a family of maximizers."
+    },
+    "overrides": {}
+  },
+  "ex-postprocessing-private-noisy-count": {
+    "focus": "The supplied threshold c defines phi(x)=1 on[c,infinity) and0 below c. Verification2.1 identifies the two Borel preimages, and the postprocessing theorem preserves the unit-sensitivity noisy-count privacy. The noise branch assumes epsilon>0 and inherited Countable Choice.",
+    "axis": {
+      "empty": "The count mechanism is defined also at the empty database; its thresholded output uses the same fixed Borel map and privacy conclusion.",
+      "zero": "The raw count may equal0, including at the empty database; threshold membership is still defined by x>=c and the Laplace scale remains1/epsilon.",
+      "one": "Verification2.1 includes equality x=c in the1-output preimage[c,infinity), and the output space is the specified pair{0,1}.",
+      "nonempty-choice": "The threshold map is explicit, and Countable Choice is inherited only from the noisy-count Laplace law; the postprocessing invocation chooses no new noise law."
+    },
+    "overrides": {
+      "endpoints": {
+        "status": "checked",
+        "reason": "The threshold equality is included in the upper preimage[c,infinity) and excluded from(-infinity,c), exactly as Verification2.1 states. There is no continuity assumption at the threshold."
+      }
+    }
+  },
+  "ex-record-level-versus-client-level-adjacency": {
+    "focus": "The Example represents a client contribution as100 record occurrences, allowing repeats. Verification1.1 adds those occurrences one at a time, each a single add/remove neighbor, while Verification2.1 shows the complete count-function difference has L1 distance100 and is not one record step. It is a finite combinatorial observation.",
+    "axis": {
+      "empty": "The occurrence path may start at an empty database; every partial count function has finite support and remains an admitted database.",
+      "one": "Verification1.1 makes every path increment exactly one occurrence; the total contribution has distance100 rather than1.",
+      "nonempty-choice": "The contribution is supplied as100 listed occurrences and the path is their successive additions; repeated records are retained with multiplicity and no choice axiom is used."
+    },
+    "overrides": {}
+  }
+}

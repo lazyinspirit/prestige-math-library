@@ -1,0 +1,243 @@
+{
+  "group": "v",
+  "batches": ["66"],
+  "pages_read": [
+    "discrete-diffusion-and-variational-objectives",
+    "discrete-diffusion-and-variational-objectives-examples"
+  ],
+  "items_read": [
+    "def-forward-gaussian-diffusion-chain",
+    "lem-isotropic-gaussian-kl-formula",
+    "thm-gaussian-forward-and-posterior-kernels",
+    "thm-ddpm-elbo-decomposition",
+    "alg-epsilon-prediction-diffusion-training",
+    "lem-diffusion-objective-estimator-expectation",
+    "ex-scalar-gaussian-diffusion-chain",
+    "ex-weighted-and-simple-diffusion-losses"
+  ],
+  "conventions": [
+    {
+      "convention": "Finite integers d,T≥1; 0<β_t<1; α_t=1−β_t; barα_0=1 and barα_t is the product of α_s for s=1,…,t. Reverse means are finite-valued Borel maps and reverse variances are fixed positive finite numbers.",
+      "fixed_by": "def-forward-gaussian-diffusion-chain",
+      "matters_for": [
+        "thm-gaussian-forward-and-posterior-kernels",
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation",
+        "ex-scalar-gaussian-diffusion-chain",
+        "ex-weighted-and-simple-diffusion-losses"
+      ]
+    },
+    {
+      "convention": "The conditioned Gaussian posterior formula applies only for t≥2. At t=1, conditioning on x_0 produces a point mass; the learned reconstruction likelihood remains a separate positive-variance Gaussian density. Conditioning additionally on x_0 does not establish Gaussianity of the unconditional reverse law.",
+      "fixed_by": "thm-gaussian-forward-and-posterior-kernels",
+      "matters_for": [
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation",
+        "ex-scalar-gaussian-diffusion-chain"
+      ]
+    },
+    {
+      "convention": "KL is directional: D_KL(Q‖P) integrates the log density ratio under Q. Gaussian covariance arguments v and w are variances, and log is the natural logarithm. AC is assumed.",
+      "fixed_by": "lem-isotropic-gaussian-kl-formula",
+      "matters_for": [
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation"
+      ]
+    },
+    {
+      "convention": "The exact ELBO identity requires a finite positive marginal likelihood, forward-to-posterior absolute continuity, and absolute integrability of both log path densities. The finite-horizon terminal-prior KL is retained. The simple loss averages unweighted noise errors over all t=1,…,T.",
+      "fixed_by": "thm-ddpm-elbo-decomposition",
+      "matters_for": [
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation",
+        "ex-weighted-and-simple-diffusion-losses"
+      ]
+    },
+    {
+      "convention": "Data and time indices are independently uniform on their nonempty finite index sets; Gaussian noise is independent of both. Weighted branches multiply the selected decoder or interior contribution by T and add the terminal KL once. Each mode has its own integrability requirements.",
+      "fixed_by": "alg-epsilon-prediction-diffusion-training",
+      "matters_for": ["lem-diffusion-objective-estimator-expectation"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-gaussian-forward-and-posterior-kernels",
+      "statement": "Assume AC and the finite Gaussian forward chain. For each fixed x_0 and 1≤t≤T, q(x_t|x_0)=N_d(√barα_t x_0,(1−barα_t)I_d). For 2≤t≤T, q(x_{t−1}|x_t,x_0) is Gaussian with mean [√barα_{t−1} β_t x_0+√α_t(1−barα_{t−1})x_t]/(1−barα_t) and covariance [β_t(1−barα_{t−1})/(1−barα_t)]I_d.",
+      "used_by": [
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation",
+        "ex-scalar-gaussian-diffusion-chain"
+      ]
+    },
+    {
+      "id": "thm-ddpm-elbo-decomposition",
+      "statement": "Under AC and the stated finite-chain, Borel-mean, positive-variance, support and log-integrability hypotheses, log p_θ(x_0)=ELBO_θ(x_0)+D_KL(Q_{x_0}‖Π_{θ,x_0}), with nonnegative KL. The negative ELBO equals terminal-prior KL plus expected negative reconstruction log likelihood plus the sum of expected conditioned-posterior-to-reverse-kernel KL terms for t=2,…,T. In the epsilon parameterization each interior term is E[w_t‖ε−ε_θ(x_t,t)‖²+C_t], where w_t=β_t²/[2σ_t²α_t(1−barα_t)] and C_t=d[tildeβ_t/σ_t²−1+log(σ_t²/tildeβ_t)]/2. The unweighted simple loss is not in general the exact maximum-likelihood objective.",
+      "used_by": [
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation",
+        "ex-weighted-and-simple-diffusion-losses"
+      ]
+    },
+    {
+      "id": "def-forward-gaussian-diffusion-chain",
+      "statement": "Assume AC. The forward path density for fixed x_0 is the product, over t=1,…,T, of Gaussian transition densities with mean √α_t x_{t−1} and covariance β_t I_d. The reverse joint density is a standard Gaussian prior at x_T times Gaussian reverse transition densities with finite-valued Borel means and fixed positive finite variances.",
+      "used_by": [
+        "thm-gaussian-forward-and-posterior-kernels",
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "ex-scalar-gaussian-diffusion-chain",
+        "ex-weighted-and-simple-diffusion-losses"
+      ]
+    },
+    {
+      "id": "lem-isotropic-gaussian-kl-formula",
+      "statement": "Assume AC. Let d≥1, m,n∈R^d, and v,w>0. If Q=N_d(m,vI_d) and P=N_d(n,wI_d), then D_KL(Q‖P)=d(v/w−1+log(w/v))/2+‖m−n‖²/(2w).",
+      "used_by": [
+        "thm-ddpm-elbo-decomposition",
+        "alg-epsilon-prediction-diffusion-training",
+        "lem-diffusion-objective-estimator-expectation"
+      ]
+    },
+    {
+      "id": "lem-diffusion-objective-estimator-expectation",
+      "statement": "Assume AC and admissible estimator inputs. The returned real random variable Y has finite expectation. In simple mode E[Y]=N⁻¹Σ_i L_simple(θ;x_0^(i)); in weighted-elbo mode E[Y]=N⁻¹Σ_i[−ELBO_θ(x_0^(i))]. Both identities include N=1 and T=1.",
+      "used_by": ["alg-epsilon-prediction-diffusion-training"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit inherited choice assumption in Gaussian, KL and ELBO interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "The reference measures underlying the Gaussian path densities.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian projection characterization, specified means and covariances, and finite second moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identification of finite product Lebesgue integration with Euclidean path-space integration on Borel sets; AC supplies its countable-choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Existence and rectangle identities for finite product reference measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Successive integration and normalization of nonnegative Gaussian transition products.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Strictly positive Gaussian density formulas for positive-definite covariances.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectation conventions and finite integrability of objective estimators.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional Radon–Nikodym log-ratio convention and its AC hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural-logarithm convention in Gaussian densities and divergences.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "used_for": "Joint Gaussianity of finite innovation stacks and adjacent-state constructions, including singular covariance blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariate-normal-conditional-law",
+      "used_for": "Conditional mean and Schur-complement covariance with positive-definite observed covariance.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Pushforward probability-law convention in the path-space ELBO application.",
+      "opened": true
+    },
+    {
+      "id": "def-variational-family-and-elbo",
+      "used_for": "Finite positive normalizer, support condition, absolute log-integrability and finite ELBO definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "used_for": "Exact evidence/ELBO/reverse-KL identity and nonnegativity under AC.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-epsilon-prediction-diffusion-training",
+      "concern": "The Definition begins “Fix finite integers” and never explicitly states AC, although its axiom_use metadata declares inherited AC and its Gaussian-law and objective suppliers assume AC. The expectation lemma explicitly assumes AC. This is a public-hypothesis presentation omission under the repository's stated choice-bookkeeping convention.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition interrupts its formulation with “([[def-choice-function]])” before “Written out:” and the equivalent product formulation. This violates the required uninterrupted-definition/reference-section layout.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "finding": "The Definition includes “([[def-lebesgue-outer-measure]])” in its opening sentence and further supplier wikilinks before the definition is complete. The links remain inside Definition instead of an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "finding": "The Statement begins “Assume the Axiom of Countable Choice ([[def-countable-choice]]).” This hyperlink precedes the remaining hypotheses and conclusion, violating the uninterrupted-statement requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "finding": "Statement clause 1 contains “[[def-product-measure-on-sigma-finite-spaces]]” before clauses 2–4. The complete proposition is interrupted by a hyperlink rather than followed by Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition includes “of [[def-integrable-real-and-complex-functions-and-their-integrals]]” inside its integrable-variable clause, before defining that expectation and giving the positive/negative-parts identity. This violates the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-kullback-leibler-divergence",
+      "finding": "The Definition opens with “([[def-probability-measure]])” and continues with numerous inline supplier wikilinks before completing the divergence definition and conventions. Required links have not been moved after the complete Definition into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states” before its remaining inverse-function identities. This inline supplier link interrupts the complete definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-variational-family-and-elbo",
+      "finding": "The Definition contains “The induced density set functions are measures by [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]” before admissibility, ELBO, variational-family and mean-field definitions are complete. Further inline links occur throughout. The required uninterrupted Definition and following Definition references layout is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-elbo-kl-decomposition",
+      "finding": "The Statement begins “Let ... satisfy [[def-variational-family-and-elbo]]” before presenting its identity and inequality. The supplier hyperlink interrupts the complete proposition and has no following Statement references placement.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": []
+}

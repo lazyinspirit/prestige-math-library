@@ -1,0 +1,157 @@
+{
+  "group": "ab",
+  "batches": ["85"],
+  "pages_read": [
+    "rl-function-approximation-and-off-policy-limits",
+    "rl-function-approximation-and-off-policy-limits-examples"
+  ],
+  "items_read": [
+    "lem-projected-bellman-error-is-well-defined",
+    "def-projected-bellman-error",
+    "thm-bairds-counterexample-off-policy-td-diverges",
+    "thm-bellman-error-unlearnability-example",
+    "ex-on-policy-one-state-linear-td-is-stable",
+    "ex-bairds-seven-state-star-expected-update",
+    "ex-matched-observation-mrps-have-distinct-bellman-errors"
+  ],
+  "conventions": [
+    {
+      "convention": "The state weighting μ is a probability distribution and need not be stationary for the target policy. Zero weights and dependent features are permitted. Projection acts on the weighted quotient space; the Bellman residual is formed from the actual parameterized function before taking its class.",
+      "fixed_by": "def-projected-bellman-error",
+      "matters_for": [
+        "thm-bairds-counterexample-off-policy-td-diverges",
+        "thm-bellman-error-unlearnability-example",
+        "ex-on-policy-one-state-linear-td-is-stable"
+      ]
+    },
+    {
+      "convention": "BE is the weighted square of the conditional expected TD residual, rather than the expectation of the squared sampled TD error; PBE projects that residual onto the feature span.",
+      "fixed_by": "def-projected-bellman-error",
+      "matters_for": [
+        "thm-bellman-error-unlearnability-example",
+        "ex-matched-observation-mrps-have-distinct-bellman-errors"
+      ]
+    },
+    {
+      "convention": "Baird's features are unnormalized: upper-state features are 2e_i+e_8 and the lower-state feature is e_7+2e_8. Both expected update directions include uniform state averaging by 1/7. Divergence concerns deterministic expected updates, with no almost-sure stochastic-trajectory assertion.",
+      "fixed_by": "thm-bairds-counterexample-off-policy-td-diverges",
+      "matters_for": ["ex-bairds-seven-state-star-expected-update"]
+    },
+    {
+      "convention": "The observable process pairs the current feature with the next reward: Y_n=(ψ(S_n),R_{n+1}). Both MRPs start in their specified stationary distributions. Choice is assumed for infinite path laws, and the discount satisfies 0≤γ<1.",
+      "fixed_by": "thm-bellman-error-unlearnability-example",
+      "matters_for": ["ex-matched-observation-mrps-have-distinct-bellman-errors"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-projected-bellman-error-is-well-defined",
+      "statement": "The weighted quotient H_μ is a finite-dimensional real inner-product space; its finite feature span admits a unique orthogonal projection. For each fixed parameter w, the Bellman residual class and its squared norm and projected squared norm are well-defined, including zero state weights and dependent features.",
+      "used_by": ["def-projected-bellman-error"]
+    },
+    {
+      "id": "def-projected-bellman-error",
+      "statement": "For a nonempty finite MDP, 0≤γ<1, a stationary policy, a probability state weighting μ and a positive-dimensional real feature map, define δ_w=[T^πv_w−v_w]_μ, BE_μ(w)=‖δ_w‖²_μ and PBE_μ(w)=‖Π_μδ_w‖²_μ.",
+      "used_by": [
+        "thm-bairds-counterexample-off-policy-td-diverges",
+        "thm-bellman-error-unlearnability-example",
+        "ex-on-policy-one-state-linear-td-is-stable",
+        "ex-matched-observation-mrps-have-distinct-bellman-errors"
+      ]
+    },
+    {
+      "id": "thm-bairds-counterexample-off-policy-td-diverges",
+      "statement": "For the stated seven-state model, γ=0.99, unnormalized eight-dimensional features and initial vector (1,1,1,1,1,1,10,1), every α>0 makes both the specified expected importance-weighted TD(0) recurrence and synchronous expected DP recurrence diverge in Euclidean norm.",
+      "used_by": ["ex-bairds-seven-state-star-expected-update"]
+    },
+    {
+      "id": "thm-bellman-error-unlearnability-example",
+      "statement": "Under Choice, the two specified stationary MRPs induce identical observed feature/reward path laws. For 0≤γ<1, MRP 1 has unique BE minimizer (0,0) and minimum 0; with D=1+γ+γ², MRP 2 has unique minimizer (−γ/D,γ/(2D)) and minimum (γ+2)²/(6D). Their objectives differ, and their minimizers differ for 0<γ<1.",
+      "used_by": ["ex-matched-observation-mrps-have-distinct-bellman-errors"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite state sums, including empty sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Bilinearity of weighted sums and the implication that a finite sum of nonnegative terms vanishes only when every term vanishes.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "The external projection lemma constructs the projection from a finite orthonormal basis, allowing dimension zero.",
+      "opened": true
+    },
+    {
+      "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+      "used_for": "The nonzero left eigenvector of the reduced Baird matrix identifies a positive eigenvalue of its transpose.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Geometric growth in Baird's expected recurrence and geometric decay in the one-state example.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "A diverging scalar pairing gives a diverging lower bound on the reduced weight norm.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit assumption inherited by the infinite-trajectory existence and uniqueness suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+      "used_for": "Existence and uniqueness of path laws with prescribed finite-prefix kernels, including the common observed three-symbol process.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-sum-over-a-finite-index-set",
+      "finding": "The Definition contains inline supplier links, including “n := \\lvert S\\rvert$ ([[def-finite-cardinality]])” and “([[def-equinumerous]])”, followed by further links throughout its defining clauses. These interrupt the complete Definition under the uninterrupted-statements instruction; no immediately following Definition references section collects them.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "The Statement says “with finite sums and finite products as in [[def-finite-sum]]” and includes “([[lem-of-q-embeds]], [[lem-of-naturals-positive]])” inside clause 2. These inline links violate the uninterrupted-statements instruction and have not been moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-geometric-sequence-null",
+      "finding": "The Statement contains “integer power ([[def-integer-power]])”, “([[def-real-limit]])”, and “([[def-divergence-to-infinity]])”, with additional supplier links before Facts & Assumptions. The complete Statement is interrupted by hyperlinks contrary to the uninterrupted-statements instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "The Statement contains “as in [[def-euclidean-inner-product]]”, links inside clause 2, and “the published [[thm-cauchy-schwarz-finite]]” in its final paragraph. These links remain inside the complete Statement instead of an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition's axiom quotation contains “Every family of nonempty sets has a choice function” followed by “([[def-choice-function]])” before the written-out formulation and equivalent product formulation. This hyperlink interrupts the complete Definition under the uninterrupted-statements instruction.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "rl-function-approximation-and-off-policy-limits",
+      "to": "tabular-prediction-and-control",
+      "faithful": true,
+      "note": "Read the prerequisite page and its TD(0) algorithm. The batch explicitly defines its linear continuing and off-policy expected updates; it does not invoke the episodic tabular algorithm outside its admissible conditions or import a convergence guarantee."
+    },
+    {
+      "from": "rl-function-approximation-and-off-policy-limits",
+      "to": "ml02-gaussian-process-regression",
+      "faithful": true,
+      "note": "Read the prerequisite page and its finite-span orthogonal-projection lemma. The weighted quotient is first proved to be a real inner-product space and its feature span finite-dimensional, satisfying the exact projection hypotheses. No feature independence or positive weight at every state is assumed."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+--- tools/step3-scope.mjs
++++ research/machine-learning-all-101-2026-10-19-owner-reader80-foreign-routing/your-proposal/tools/step3-scope.mjs
+@@ -11,6 +11,7 @@
+ // Each batch owns a separate scope file. Concurrent pipeline lanes must never
+ // read-modify-write one shared JSON file and erase a sibling's route.
+ 
++import { loadForeignReaderRoutes, foreignReaderRoute, bindForeignReaderFinding, validateForeignReaderFinding } from './step3-owner-foreign-reader-routes.mjs';
+ import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
+ import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
+ import { createHash } from 'node:crypto';
+@@ -274,6 +275,13 @@
+     String(target.obligation).split(':')[1], target);
+   if (target?.owner_required_page_route) return requiredPageCarrier(ROOT, run,
+     String(target.obligation).split(':')[1], target);
++  if (target?.owner_foreign_reader_route) {
++    const origin = String(target.obligation).split(':')[1];
++    const route = foreignReaderRoute(ROOT, run, origin, target);
++    const carrier = producerCarrier(target.id, route.e.producer_batch);
++    validateForeignReaderFinding(ROOT, run, origin, target, carrier);
++    return { ...carrier, owner_foreign_reader_route: route.binding };
++  }
+   if (target?.subject_type === 'in-run-dependency') {
+     return producerCarrier(target.id, target.producer_batch);
+   }
+@@ -547,6 +555,13 @@
+     if (!route.historical.has(finding.consumer_id)) route.historical.set(finding.consumer_id, new Map());
+     route.historical.get(finding.consumer_id).set(finding.obligation, finding);
+   }
++  // Explicit extra reads retain the original foreign consumer attribution.
++  // Empty consumers maps deliberately assert no reachability from assigned roots.
++  for (const route of loadForeignReaderRoutes(ROOT, run).values()) if (route.e.origin_batch === String(batch)) {
++    const old = dependencies.get(route.e.id);
++    if (old && old.producer_batch !== route.e.producer_batch) throw Error('foreign reader producer conflicts with ordinary graph');
++    if (!old) dependencies.set(route.e.id, { producer_batch: route.e.producer_batch, consumers: new Map() });
++  }
+   return dependencies;
+ }
+ 
+@@ -598,6 +613,8 @@
+ }
+ 
+ function bindInRunFinding(finding, batch, dependencies, reportError) {
++  const foreign = foreignReaderRoute(ROOT, run, batch, finding);
++  if (foreign && bindForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;
+   const route = dependencies.get(finding.id), path = route?.consumers.get(finding.consumer_id);
+   if (!route || !path) { reportError(`${finding.obligation} must name an assigned consumer reaching another exact current-run draft producer`); return; }
+   const historicalBindings = route.historical?.get(finding.consumer_id);
+@@ -636,6 +653,8 @@
+ }
+ 
+ function validateInRunFinding(finding, batch, dependencies, reportError) {
++  const foreign = foreignReaderRoute(ROOT, run, batch, finding);
++  if (foreign && validateForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;
+   if (finding.observed_source !== undefined && (!finding.observed_source
+     || Object.keys(finding.observed_source).some(key => !['snapshot', 'item_sha256'].includes(key))
+     || !['pre', 'current'].includes(finding.observed_source.snapshot)
+@@ -675,6 +694,8 @@
+     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
+     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
+     owner_required_page_route: _requiredPageRoute,
++    owner_foreign_reader_route: _foreignReaderRoute,
++    owner_foreign_reader_obligation: _foreignReaderObligation,
+     owner_downstream_consumer_route: _downstreamRoute,
+     owner_downstream_reader_obligation: _downstreamReader,
+     owner_partial_reader_repair: _ownerPartialReaderRepair,
+@@ -1028,6 +1049,7 @@
+       if (source) {
+         const carrier = producerCarrier(source.id, source.producer_batch);
+         finding.subject_type = 'in-run-dependency';
++        if (source.owner_foreign_reader_route) finding.owner_foreign_reader_obligation = source.obligation;
+         finding.consumer_id = source.consumer_id;
+         finding.observed_source = { snapshot: 'current', item_sha256: carrier?.item_sha256 };
+         bindInRunFinding(finding, batch, inRun, error);

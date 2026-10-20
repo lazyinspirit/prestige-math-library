@@ -1,0 +1,817 @@
+{
+  "version": 1,
+  "scope": [
+    "def-low-rank-adaptation-of-a-linear-layer",
+    "alg-finite-budget-low-rank-adaptation",
+    "thm-low-rank-adapter-factorization-ambiguity",
+    "thm-low-rank-adapter-merging-and-gradients",
+    "rem-adaptation-rank-and-empirical-transfer",
+    "ex-low-rank-adapter-change-of-basis",
+    "ex-rank-one-adapter-cannot-realize-full-rank-update",
+    "ex-zero-zero-initialization-stalls-adaptation",
+    "ex-merged-and-unmerged-adapter-forward-pass-agree"
+  ],
+  "contracts": {
+    "def-low-rank-adaptation-of-a-linear-layer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires positive layer dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The scale is required to be nonzero; zero factors are still admitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition supplies a model interface and no proof obligation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate ranks and factors are analyzed by the dependent theorems."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This definition makes no existence claim requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        }
+      ]
+    },
+    "alg-finite-budget-low-rank-adaptation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition statement: The explicit T=0 branch returns A0, B0=0, and W0 without evaluating a loss."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition statement: The admissible input includes A0=0 and B0 is initialized to 0; the algorithm has no division by a factor entry."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition statement: A single data point and a single update are allowed by n>=1 and T=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition statement: Zero factors are valid shapes; a primitive failure returns the unchanged current factors and a status."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition statement: A branch boundary returns NONDIFFERENTIABLE, and an undefined primitive returns DOMAIN_ERROR before an update."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses a fixed finite list, no internal random initialization, and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-95",
+        "notes": "Independently reviewed the entire Definition, reader report, refuter:95:1, and exact graph/reverse-mode supplier Definitions. All factor shapes and flattened gradient blocks agree; finite nonempty ordered minibatches retain repeats and make averaging defined. T=0 skips loss evaluation; zero A0 and B0, eta=0, n=1 and r=1 are admissible. Each ordered primal failure returns unchanged factors before updating; strict branches may change between steps. No randomness or choice is used. The justified_by discharge is expressly permitted by SCHEMA.md Items and Algorithms and excluded from prerequisite cycle edges by tools/depcheck.mjs:456-485; the algorithm never assumes its later correctness theorem. The reported cycle is false-positive, requiring no source edit. Hu et al. v2 section 4.1 and MIT OCW chapter 8 sections 8.3.1-8.4 support the factor model and reverse sweep; termination requires the explicit finite primitive/status/derivative evaluation hypotheses of the separate theorem."
+      }
+    },
+    "thm-low-rank-adapter-factorization-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-low-rank-adaptation-of-a-linear-layer",
+          "source_section": "Definition",
+          "quote": "Let $d,k$ be positive integers, let $1\\le r\\le\\min(d,k)$, let $c\\in\\mathbb R\\setminus\\{0\\}$, and fix a matrix $W_0\\in\\mathbb R^{d\\times k}$. A rank-$r$ adapter for the linear layer $x\\mapsto W_0x$ consists of trainable factor matrices $B\\in\\mathbb R^{d\\times r}$ and $A\\in\\mathbb R^{r\\times k}$ and the updated weight matrix\n\n$$W=W_0+cBA.$$\n\nIts output on $x\\in\\mathbb R^k$ is $Wx=W_0x+cB(Ax)\\in\\mathbb R^d$. The base matrix $W_0$ is frozen, meaning that an adaptation procedure does not update its entries; only entries of $A$ and $B$ are trainable in this definition. The update matrix is $W-W_0=cBA$, whose rank is the dimension of its image as a linear map from $\\mathbb R^k$ to $\\mathbb R^d$. No bias, dropout, random initialization, optimization rule, or convergence guarantee is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rank-capacity",
+          "claim": "The image of $BA$ is contained in the image of $B$, whose dimension is at most the number $r$ of columns of $B$. Multiplication by the nonzero scalar $c$ preserves image dimension, so $\\operatorname{rank}(cBA)\\le r$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "svd-target",
+          "claim": "Let $\\Delta\\in\\mathbb R^{d\\times k}$ have rank $q\\le r$. If $q=0$, then $\\Delta=0$ and the zero factors give $\\Delta=cBA$. If $q>0$, apply [F2] to the real linear map $\\Delta/c:\\mathbb R^k\\to\\mathbb R^d$. Since $c\\ne0$, this map has rank $q$, so its SVD has exactly $q$ positive terms: $\\Delta/c=\\sum_{j=1}^q s_j u_jv_j^{\\mathsf T}$, with $s_j>0$ and orthonormal vectors $u_j\\in\\mathbb R^d$, $v_j\\in\\mathbb R^k$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "latent-change",
+          "claim": "If $M\\in\\mathbb R^{r\\times r}$ is invertible, associativity gives $(BM)(M^{-1}A)=B(MM^{-1})A=BA$, so the transformation preserves $cBA$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "padded-factors",
+          "claim": "For $j\\le q$, set the $j$th column of $B$ to $\\sqrt{s_j}u_j$ and the $j$th row of $A$ to $\\sqrt{s_j}v_j^{\\mathsf T}$; fill the remaining columns of $B$ and rows of $A$ with zero. These matrices have the required shapes and $BA=\\sum_{j=1}^q s_ju_jv_j^{\\mathsf T}=\\Delta/c$, hence $cBA=\\Delta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "capacity-and-nonuniqueness",
+          "claim": "If $\\operatorname{rank}(\\Delta)>r$, step 1.1 rules out a factor representation. If $\\Delta\\ne0$ has rank at most $r$, step 2.1 gives a representation with $B\\ne0$; the matrix $M=2I_r$, where $I_r$ is the identity on $\\mathbb R^r$, is invertible with inverse $\\tfrac12 I_r$, and $BM=2B\\ne B$, so step 1.3 gives a distinct factor pair with the same product. If $\\Delta=0$, let $A'$ have entry $1$ in position $(1,1)$ and all other entries $0$; then $(B,A)=(0,0)$ and $(B,A)=(0,A')$ are distinct factor pairs for the zero update. Thus every representable target update has multiple factor pairs.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes positive ambient dimensions and a positive rank budget."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 represents a zero target by zero factors; step 3.1 gives a second factorization with B=0 and A' nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows r=1, including the invertible scalar change M=2I1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-zero target is treated separately in step 1.2 and in the nonuniqueness case of step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement includes r=min(d,k), covered by the same padding construction; c=0 is excluded by hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a finite-dimensional SVD and finite zero-padding are used; no arbitrary choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves every factorized update has rank at most r."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20132.2 construct factors for every target update of rank at most r."
+        }
+      ]
+    },
+    "thm-low-rank-adapter-merging-and-gradients": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-low-rank-adaptation-of-a-linear-layer",
+          "source_section": "Definition",
+          "quote": "Let $d,k$ be positive integers, let $1\\le r\\le\\min(d,k)$, let $c\\in\\mathbb R\\setminus\\{0\\}$, and fix a matrix $W_0\\in\\mathbb R^{d\\times k}$. A rank-$r$ adapter for the linear layer $x\\mapsto W_0x$ consists of trainable factor matrices $B\\in\\mathbb R^{d\\times r}$ and $A\\in\\mathbb R^{r\\times k}$ and the updated weight matrix\n\n$$W=W_0+cBA.$$\n\nIts output on $x\\in\\mathbb R^k$ is $Wx=W_0x+cB(Ax)\\in\\mathbb R^d$. The base matrix $W_0$ is frozen, meaning that an adaptation procedure does not update its entries; only entries of $A$ and $B$ are trainable in this definition. The update matrix is $W-W_0=cBA$, whose rank is the dimension of its image as a linear map from $\\mathbb R^k$ to $\\mathbb R^d$. No bias, dropout, random initialization, optimization rule, or convergence guarantee is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-budget-low-rank-adaptation",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,k,n$, an integer $1\\le r\\le\\min(d,k)$, a frozen matrix $W_0\\in\\mathbb R^{d\\times k}$, a nonzero scale $c\\in\\mathbb R$, a finite ordered data list $(x_i,y_i)_{i=1}^n$ with $x_i\\in\\mathbb R^k$, and, for each data entry, a loss program $\\ell_i$ that returns a real scalar wherever its primitive calls are defined. Let $T\\ge0$ be a finite integer, let $I_0,\\ldots,I_{T-1}$ be fixed finite nonempty ordered lists of indices in $\\{1,\\ldots,n\\}$ (repeated indices are allowed), let $\\eta_0,\\ldots,\\eta_{T-1}\\ge0$ be finite step sizes, and supply an initial matrix $A_0\\in\\mathbb R^{r\\times k}$. The procedure has no dropout or random initialization; any random initialization must be sampled externally and supplied as $A_0$. Set $B_0=0\\in\\mathbb R^{d\\times r}$.\n\nRepresent each loss evaluation by a specified finite real-arithmetic program with a scalar output. Each primitive is continuously differentiable on a declared open domain or is piecewise continuously differentiable, with finitely many open branch regions, a continuously differentiable formula on each region, and a separately specified primal boundary value when one is defined. Here $C^1$ means totally differentiable with continuous derivative. Check admissibility at the current factors on each step; a strict branch used at one step need not be the branch used at another.\n\n$$L_t(A,B)=\\frac{1}{|I_t|}\\sum_{i\\in I_t}\\ell_i\\!\\left((W_0+cBA)x_i\\right)$$\n\nStarting with $t=0$, perform the following finite loop while $t<T$:\n\n1. Evaluate the displayed program at $(A_t,B_t)$, visiting its primitive calls in evaluation order. At the first call with no primal value, return `DOMAIN_ERROR` with the current factors and step index $t$. At the first defined piecewise primitive whose input lies on a branch boundary or has ambiguous branch selection, return `NONDIFFERENTIABLE` with the current factors and step index $t$. If every primitive call has a value and every piecewise primitive is on a unique strict branch, run reverse-mode automatic differentiation on this same scalar-output program at $(A_t,B_t)$, with the selected branch choices, with respect to the ordered list of all entries of $A_t$ followed by all entries of $B_t$, each matrix flattened row by row. If reverse mode returns either failure status, return it with the current factors and step index $t$. No factor update is made on a failure status.\n2. If reverse mode returns gradients, reshape the first and second blocks into $G^A_t\\in\\mathbb R^{r\\times k}$ and $G^B_t\\in\\mathbb R^{d\\times r}$, respectively, and set\n\n$$A_{t+1}=A_t-\\eta_tG^A_t,\\qquad B_{t+1}=B_t-\\eta_tG^B_t.$$\n\n   Increment $t$ by one.\n\nAfter $T$ successful updates, return `SUCCESS`, the matrices $A_T,B_T$, and the merged weight $W_0+cB_TA_T$. At $T=0$ return the supplied $A_0$, zero $B_0$, and $W_0$ without evaluating a loss. This is a finite real-arithmetic procedure; it asserts no convergence, minimization, generalization, floating-point accuracy, speed, or memory guarantee.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and\n\n$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$\n\nwhere the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-1",
+          "claim": "Fix perturbations $H\\in\\mathbb R^{d\\times r}$ and $K\\in\\mathbb R^{r\\times k}$ of $B$ and $A$. Expanding the product gives $W_0+c(B+\\varepsilon H)(A+\\varepsilon K)=W+\\varepsilon c(HA+BK)+\\varepsilon^2cHK$, so the derivative of $(A,B)\\mapsto W_0+cBA$ in direction $(K,H)$ is $c(HA+BK)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-2",
+          "claim": "At a successful step $t$, write $I_t=(i_{t,1},\\ldots,i_{t,m_t})$, retaining repeated indices. Set $\\theta$ to the ordered vector of all entries of $A$ and $B$, put $h_0=0$, and define $h_s=h_{s-1}+m_t^{-1}\\ell_{i_{t,s}}((W_0+cBA)x_{i_{t,s}})$ for $1\\le s\\le m_t$. On the strict branches selected at this step, this is a finite $C^1$ recurrence on open domains with one shared parameter input and terminal scalar $h_{m_t}=\\mathcal L_t(W_0+cBA)$. Thus the recurrence gradient formula in [F3] applies, including repeated parameter uses.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-3",
+          "claim": "Associativity of matrix multiplication gives $W_0x+cB(Ax)=(W_0+cBA)x$. Counting entries of the two trainable factors gives $rk+dr=r(d+k)$; the base matrix is frozen.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-2-1",
+          "claim": "By the chain rule, the derivative of $(A,B)\\mapsto\\mathcal L(W_0+cBA)$ in direction $(K,H)$ is $\\langle G,c(HA+BK)\\rangle_F$; the same calculation applies to each batch objective $\\mathcal L_t$ with its gradient $G_t$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-3-1",
+          "claim": "The trace identity $\\operatorname{tr}(G^{\\mathsf T}HA)=\\operatorname{tr}((GA^{\\mathsf T})^{\\mathsf T}H)$ gives $\\langle G,HA\\rangle_F=\\langle GA^{\\mathsf T},H\\rangle_F$. The trace identity $\\operatorname{tr}(G^{\\mathsf T}BK)=\\operatorname{tr}((B^{\\mathsf T}G)^{\\mathsf T}K)$ gives $\\langle G,BK\\rangle_F=\\langle B^{\\mathsf T}G,K\\rangle_F$; these identities also hold with $G_t$ for each $\\mathcal L_t$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-4-1",
+          "claim": "The Frobenius inner product determines a matrix uniquely from its pairing with every perturbation. Since $H$ and $K$ are arbitrary, step 3.1 therefore identifies the gradients as $\\nabla_B\\mathcal L=cGA^{\\mathsf T}$ and $\\nabla_A\\mathcal L=cB^{\\mathsf T}G$, and the same formulas hold for each batch objective with $G_t$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-5-1",
+          "claim": "At a successful step $t$, the algorithm evaluates the finite scalar program for $\\mathcal L_t(W_0+cBA)$. By [F5], its reverse-mode call returns the exact input derivative on the strict branches selected at that step. Therefore its returned factor gradients equal the derivatives identified in step 4.1 for $G_t$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 4.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-5-2",
+          "claim": "If $B=0$, the formula for $\\nabla_A\\mathcal L$ in step 4.1 is zero; if also $A=0$, the formula for $\\nabla_B\\mathcal L$ is zero.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-low-rank-adapter-merging-and-gradients-step-6-1",
+          "claim": "Under the termination hypothesis, each loop iteration makes finitely many primitive calls in its stated evaluation order. It either encounters the first undefined or boundary/ambiguous primitive, in which case the algorithm returns the corresponding status before updating, or completes the primal evaluation on strict branches. In the latter case the reverse sweep traverses finitely many nodes and parent slots, and every local derivative evaluation returns its specified derivative by assumption; the algorithm then performs one finite update and increments $t$. Induction on $t$ shows there can be at most $T$ successful updates. If no failure occurs, the loop reaches $t=T$ and returns `SUCCESS`; if $T=0$, its explicit zero-step case returns immediately.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empirical loss has m at least one, excluding an empty loss average. The separate finite-budget termination clause does permit T=0, and proof6.1 states it returns SUCCESS immediately without evaluating a loss. The family detector does not contradict either explicitly distinguished case; zero update count is not an empty empirical dataset.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The empirical loss has m at least one, excluding an empty loss average. The separate finite-budget termination clause does permit T=0, and proof6.1 states it returns SUCCESS immediately without evaluating a loss. The family detector does not contradict either explicitly distinguished case; zero update count is not an empty empirical dataset."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.2 proves the A gradient is zero at B=0 and both gradients vanish at A=B=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows m=1 and a single successful update; the recurrence in step 1.2 has one transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.2 evaluates zero factors; the formulas contain no factor inverses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement assumes open C1 domains and a fixed strict branch; branch boundaries are excluded and the algorithm reports them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sums, parameter vectors and matrix operations are finite; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives formulas and an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives formulas and an identity, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-95",
+        "notes": "Read all nine current proof steps and exact F1-F5 source statements and arguments. The polynomial factor map has Frechet derivative c(HA+BK), with quadratic remainder cHK; strict open branch domains and finite composition give a C1 weight loss locally. Trace cyclicity gives d-by-r gradient cGA^T and r-by-k gradient cB^TG. For step t the ordered nonempty minibatch has m_t entries including repeats; take p=rk+dr, q=1, H=R, h0=0, transition h -> h + ell_i((W0+cBA)x_i)/m_t and terminal loss h to apply the shared-parameter formula locally. Reverse-mode correctness applies on that step's strict branches, not globally fixed branches across training. Zero B annihilates the A gradient; zero A and B annihilate both. Associativity proves merging for all x, including x=0, and the entry count is coordinates rather than identifiable dimension. Finite primitive/status/derivative evaluation hypotheses imply first-failure return before an update or exactly T updates; T=0 skips all loss calls. eta=0, m=1, repeated indices, r=1 and rank-deficient factors cause no division/inversion issue. No AC, convergence or floating-point claim. Compared authenticated pre-reader and post-reader full source bytes: accept the reader's explicit L_t/G_t binding, retaining the general fixed empirical-loss formula. All direct consumers checked; no source edits needed. The refuter cycle finding is false-positive under the ordinary justified_by discharge rule. Hu v2 section 4.1 and MIT sections 8.3.1-8.4 checked; local sources supply the exact strict-domain and termination qualifications."
+      }
+    },
+    "rem-adaptation-rank-and-empirical-transfer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark is not an equivalence."
+        }
+      ]
+    },
+    "ex-low-rank-adapter-change-of-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-factorization-ambiguity",
+          "source_section": "Statement",
+          "quote": "Fix positive integers $d,k$, an integer $1\\le r\\le\\min(d,k)$, a nonzero real number $c$, and a base matrix $W_0\\in\\mathbb R^{d\\times k}$. For every pair $B\\in\\mathbb R^{d\\times r}$ and $A\\in\\mathbb R^{r\\times k}$, the adapter update $\\Delta=cBA$ has matrix rank at most $r$, where rank is the dimension of the image of the associated linear map. Conversely, every target update $\\Delta\\in\\mathbb R^{d\\times k}$ of rank at most $r$ has at least one representation $\\Delta=cBA$ with these factor shapes. For any such factors and any invertible matrix $M\\in\\mathbb R^{r\\times r}$, the transformed factors $BM$ and $M^{-1}A$ represent the same update. Thus the factorization is not identifiable: every target update of rank at most $r$ has more than one factor pair. A target update of rank greater than $r$ cannot be represented.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "original-product",
+          "claim": "Direct multiplication gives $BA=\\begin{pmatrix}3&4\\\\6&8\\end{pmatrix}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "changed-product",
+          "claim": "Since $M=3$ is invertible, $B'=(3,6)^{\\mathsf T}$ and $A'=(1,4/3)$, and direct multiplication gives $B'A'=\\begin{pmatrix}3&4\\\\6&8\\end{pmatrix}=BA$, as also guaranteed by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses a nonzero rank-one update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly uses rank budget r=1 and an invertible scalar M=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The selected factorization and update are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All quantities are finite real matrices with no domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit finite matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        }
+      ]
+    },
+    "ex-rank-one-adapter-cannot-realize-full-rank-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-factorization-ambiguity",
+          "source_section": "Statement",
+          "quote": "Fix positive integers $d,k$, an integer $1\\le r\\le\\min(d,k)$, a nonzero real number $c$, and a base matrix $W_0\\in\\mathbb R^{d\\times k}$. For every pair $B\\in\\mathbb R^{d\\times r}$ and $A\\in\\mathbb R^{r\\times k}$, the adapter update $\\Delta=cBA$ has matrix rank at most $r$, where rank is the dimension of the image of the associated linear map. Conversely, every target update $\\Delta\\in\\mathbb R^{d\\times k}$ of rank at most $r$ has at least one representation $\\Delta=cBA$ with these factor shapes. For any such factors and any invertible matrix $M\\in\\mathbb R^{r\\times r}$, the transformed factors $BM$ and $M^{-1}A$ represent the same update. Thus the factorization is not identifiable: every target update of rank at most $r$ has more than one factor pair. A target update of rank greater than $r$ cannot be represented.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-rank",
+          "claim": "The identity matrix $I_2$ maps $\\mathbb R^2$ onto $\\mathbb R^2$, so $\\operatorname{rank}(I_2)=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rank-obstruction",
+          "claim": "For every $B\\in\\mathbb R^{2\\times1}$ and $A\\in\\mathbb R^{1\\times2}$, $\\operatorname{im}(BA)\\subseteq\\operatorname{im}(B)$ and $\\dim\\operatorname{im}(B)\\le1$; hence $\\operatorname{rank}(BA)\\le1$ by [F1]. This contradicts step 1.1 if $BA=I_2$, so no such factors represent the target.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target identity is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement fixes rank budget r=1 and target rank two; step 1.1 computes the target rank."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The target is nonsingular and nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rank calculation uses only explicit finite-dimensional images."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a concrete impossibility, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a concrete impossibility, not an equivalence."
+        }
+      ]
+    },
+    "ex-zero-zero-initialization-stalls-adaptation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-merging-and-gradients",
+          "source_section": "Statement",
+          "quote": "Fix dimensions and matrices as in the definition of a low-rank adapter. Let $m\\ge1$, let $x_1,\\ldots,x_m\\in\\mathbb R^k$, and let each $\\ell_j$ be a finite real-arithmetic loss program with scalar real output wherever its primitive calls are defined. Each primitive map is $C^1$ on a declared open domain or is piecewise $C^1$ with finitely many open branch regions and a $C^1$ formula on each region; when defined, a boundary primal value is specified separately. Here $C^1$ means totally differentiable with continuous derivative. Define the finite empirical loss on a weight matrix $U\\in\\mathbb R^{d\\times k}$ by the following formula wherever all the programs return scalar values:\n\n$$\\mathcal L(U)=\\frac1m\\sum_{j=1}^m\\ell_j(Ux_j).$$\n\nAt any $W=W_0+cBA$ where all primitive calls have values and every piecewise primitive call is on a unique strict branch, write $G=\\nabla_W\\mathcal L(W)$ for the Frobenius gradient, defined by $D\\mathcal L(W)[H]=\\langle G,H\\rangle_F$ for every $H\\in\\mathbb R^{d\\times k}$, where $\\langle X,Y\\rangle_F=\\operatorname{tr}(X^{\\mathsf T}Y)$. Then the factor gradients are\n\n$$\\nabla_B\\mathcal L(W_0+cBA)=cGA^{\\mathsf T},\\qquad \\nabla_A\\mathcal L(W_0+cBA)=cB^{\\mathsf T}G.$$\n\nAt every successful step $t$ of the finite-budget adaptation algorithm, write its ordered minibatch as $I_t=(i_{t,1},\\ldots,i_{t,m_t})$, retaining repeated indices, and define\n\n$$\\mathcal L_t(U)=\\frac1{m_t}\\sum_{s=1}^{m_t}\\ell_{i_{t,s}}(Ux_{i_{t,s}}).$$\n\nWith $W_t=W_0+cB_tA_t$ and $G_t=\\nabla_W\\mathcal L_t(W_t)$, all primitive calls in this batch objective have values and each piecewise primitive call is on a unique strict branch; branch choices may differ between successful steps. Reverse-mode automatic differentiation returns the exact real-arithmetic gradients $\\nabla_{B_t}\\mathcal L_t(W_t)=cG_tA_t^{\\mathsf T}$ and $\\nabla_{A_t}\\mathcal L_t(W_t)=cB_t^{\\mathsf T}G_t$. If $B=0$, then $\\nabla_A\\mathcal L=0$ for every such empirical loss; if also $A=0$, then $\\nabla_B\\mathcal L=0$. For every input $x\\in\\mathbb R^k$, the unmerged and merged layer outputs agree:\n\n$$W_0x+cB(Ax)=(W_0+cBA)x.$$\n\nThe factor matrices contain $rk+dr=r(d+k)$ trainable scalar coordinates, excluding the frozen entries of $W_0$; this coordinate count is not an assertion about identifiable degrees of freedom. All equalities are in real arithmetic and imply no floating-point, convergence, task-transfer, or hardware-performance guarantee.\n\nLet $T\\ge0$ be the finite horizon of the procedure. The finite-budget procedure also has the following termination and status property. Suppose each primal value/status check terminates, and each defined primitive evaluation and each local derivative evaluation on a strict branch returns its specified real-arithmetic value or derivative in finite time. Then at the first step whose ordered primal evaluation encounters a primitive with no value or a defined piecewise primitive on a boundary or ambiguous branch, the procedure returns `DOMAIN_ERROR` or `NONDIFFERENTIABLE`, respectively, before updating the factors at that step. If no such evaluation occurs, it returns `SUCCESS` after exactly $T$ updates. For $T=0$, it returns immediately without evaluating a loss.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-budget-low-rank-adaptation",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,k,n$, an integer $1\\le r\\le\\min(d,k)$, a frozen matrix $W_0\\in\\mathbb R^{d\\times k}$, a nonzero scale $c\\in\\mathbb R$, a finite ordered data list $(x_i,y_i)_{i=1}^n$ with $x_i\\in\\mathbb R^k$, and, for each data entry, a loss program $\\ell_i$ that returns a real scalar wherever its primitive calls are defined. Let $T\\ge0$ be a finite integer, let $I_0,\\ldots,I_{T-1}$ be fixed finite nonempty ordered lists of indices in $\\{1,\\ldots,n\\}$ (repeated indices are allowed), let $\\eta_0,\\ldots,\\eta_{T-1}\\ge0$ be finite step sizes, and supply an initial matrix $A_0\\in\\mathbb R^{r\\times k}$. The procedure has no dropout or random initialization; any random initialization must be sampled externally and supplied as $A_0$. Set $B_0=0\\in\\mathbb R^{d\\times r}$.\n\nRepresent each loss evaluation by a specified finite real-arithmetic program with a scalar output. Each primitive is continuously differentiable on a declared open domain or is piecewise continuously differentiable, with finitely many open branch regions, a continuously differentiable formula on each region, and a separately specified primal boundary value when one is defined. Here $C^1$ means totally differentiable with continuous derivative. Check admissibility at the current factors on each step; a strict branch used at one step need not be the branch used at another.\n\n$$L_t(A,B)=\\frac{1}{|I_t|}\\sum_{i\\in I_t}\\ell_i\\!\\left((W_0+cBA)x_i\\right)$$\n\nStarting with $t=0$, perform the following finite loop while $t<T$:\n\n1. Evaluate the displayed program at $(A_t,B_t)$, visiting its primitive calls in evaluation order. At the first call with no primal value, return `DOMAIN_ERROR` with the current factors and step index $t$. At the first defined piecewise primitive whose input lies on a branch boundary or has ambiguous branch selection, return `NONDIFFERENTIABLE` with the current factors and step index $t$. If every primitive call has a value and every piecewise primitive is on a unique strict branch, run reverse-mode automatic differentiation on this same scalar-output program at $(A_t,B_t)$, with the selected branch choices, with respect to the ordered list of all entries of $A_t$ followed by all entries of $B_t$, each matrix flattened row by row. If reverse mode returns either failure status, return it with the current factors and step index $t$. No factor update is made on a failure status.\n2. If reverse mode returns gradients, reshape the first and second blocks into $G^A_t\\in\\mathbb R^{r\\times k}$ and $G^B_t\\in\\mathbb R^{d\\times r}$, respectively, and set\n\n$$A_{t+1}=A_t-\\eta_tG^A_t,\\qquad B_{t+1}=B_t-\\eta_tG^B_t.$$\n\n   Increment $t$ by one.\n\nAfter $T$ successful updates, return `SUCCESS`, the matrices $A_T,B_T$, and the merged weight $W_0+cB_TA_T$. At $T=0$ return the supplied $A_0$, zero $B_0$, and $W_0$ without evaluating a loss. This is a finite real-arithmetic procedure; it asserts no convergence, minimization, generalization, floating-point accuracy, speed, or memory guarantee.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "loss-gradient",
+          "claim": "At either initialization, $W_0+cB_0A_0=0$, so the scalar loss derivative with respect to the weight is $G=\\ell_1'(0)=0-1=-1$. The loss is a polynomial defined and differentiable on all of $\\mathbb R$, so the one-step reverse-mode call is admissible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-zero-stall",
+          "claim": "If $A_0=B_0=0$, [F1] gives $\\nabla_B\\mathcal L=(-1)0=0$ and $\\nabla_A\\mathcal L=0(-1)=0$. By [F2], subtracting these zero gradients leaves $A_1=B_1=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonzero-a-moves",
+          "claim": "If $A_0=1$ and $B_0=0$, [F1] gives $\\nabla_A\\mathcal L=0$ and $\\nabla_B\\mathcal L=(-1)(1)=-1$. The update in [F2] therefore gives $A_1=1-\\eta_0\\cdot0=1$ and $B_1=0-\\eta_0(-1)=\\eta_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one datum and one update."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the initialization A0=B0=0 and shows both gradients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement fixes one datum and one update; step 1.1 evaluates its scalar loss gradient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compare the zero-zero case with A0=1,B0=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The polynomial loss is defined on all real weights and has no branch boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses fixed scalar data and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite calculation, not an equivalence."
+        }
+      ]
+    },
+    "ex-merged-and-unmerged-adapter-forward-pass-agree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-merging-and-gradients",
+          "source_section": "Statement",
+          "quote": "Fix dimensions and matrices as in the definition of a low-rank adapter. Let $m\\ge1$, let $x_1,\\ldots,x_m\\in\\mathbb R^k$, and let each $\\ell_j$ be a finite real-arithmetic loss program with scalar real output wherever its primitive calls are defined. Each primitive map is $C^1$ on a declared open domain or is piecewise $C^1$ with finitely many open branch regions and a $C^1$ formula on each region; when defined, a boundary primal value is specified separately. Here $C^1$ means totally differentiable with continuous derivative. Define the finite empirical loss on a weight matrix $U\\in\\mathbb R^{d\\times k}$ by the following formula wherever all the programs return scalar values:\n\n$$\\mathcal L(U)=\\frac1m\\sum_{j=1}^m\\ell_j(Ux_j).$$\n\nAt any $W=W_0+cBA$ where all primitive calls have values and every piecewise primitive call is on a unique strict branch, write $G=\\nabla_W\\mathcal L(W)$ for the Frobenius gradient, defined by $D\\mathcal L(W)[H]=\\langle G,H\\rangle_F$ for every $H\\in\\mathbb R^{d\\times k}$, where $\\langle X,Y\\rangle_F=\\operatorname{tr}(X^{\\mathsf T}Y)$. Then the factor gradients are\n\n$$\\nabla_B\\mathcal L(W_0+cBA)=cGA^{\\mathsf T},\\qquad \\nabla_A\\mathcal L(W_0+cBA)=cB^{\\mathsf T}G.$$\n\nAt every successful step $t$ of the finite-budget adaptation algorithm, write its ordered minibatch as $I_t=(i_{t,1},\\ldots,i_{t,m_t})$, retaining repeated indices, and define\n\n$$\\mathcal L_t(U)=\\frac1{m_t}\\sum_{s=1}^{m_t}\\ell_{i_{t,s}}(Ux_{i_{t,s}}).$$\n\nWith $W_t=W_0+cB_tA_t$ and $G_t=\\nabla_W\\mathcal L_t(W_t)$, all primitive calls in this batch objective have values and each piecewise primitive call is on a unique strict branch; branch choices may differ between successful steps. Reverse-mode automatic differentiation returns the exact real-arithmetic gradients $\\nabla_{B_t}\\mathcal L_t(W_t)=cG_tA_t^{\\mathsf T}$ and $\\nabla_{A_t}\\mathcal L_t(W_t)=cB_t^{\\mathsf T}G_t$. If $B=0$, then $\\nabla_A\\mathcal L=0$ for every such empirical loss; if also $A=0$, then $\\nabla_B\\mathcal L=0$. For every input $x\\in\\mathbb R^k$, the unmerged and merged layer outputs agree:\n\n$$W_0x+cB(Ax)=(W_0+cBA)x.$$\n\nThe factor matrices contain $rk+dr=r(d+k)$ trainable scalar coordinates, excluding the frozen entries of $W_0$; this coordinate count is not an assertion about identifiable degrees of freedom. All equalities are in real arithmetic and imply no floating-point, convergence, task-transfer, or hardware-performance guarantee.\n\nLet $T\\ge0$ be the finite horizon of the procedure. The finite-budget procedure also has the following termination and status property. Suppose each primal value/status check terminates, and each defined primitive evaluation and each local derivative evaluation on a strict branch returns its specified real-arithmetic value or derivative in finite time. Then at the first step whose ordered primal evaluation encounters a primitive with no value or a defined piecewise primitive on a boundary or ambiguous branch, the procedure returns `DOMAIN_ERROR` or `NONDIFFERENTIABLE`, respectively, before updating the factors at that step. If no such evaluation occurs, it returns `SUCCESS` after exactly $T$ updates. For $T=0$, it returns immediately without evaluating a loss.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "merged-computation",
+          "claim": "Multiplication gives $BA=\\begin{pmatrix}3&6\\\\4&8\\end{pmatrix}$, so $W_0+2BA=\\begin{pmatrix}7&12\\\\8&17\\end{pmatrix}$ and $(W_0+2BA)x=(19,25)^{\\mathsf T}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unmerged-computation",
+          "claim": "In the unmerged calculation, $W_0x=(1,1)^{\\mathsf T}$ and $Ax=3$, so $W_0x+2B(Ax)=(1,1)^{\\mathsf T}+2(3,4)^{\\mathsf T}3=(19,25)^{\\mathsf T}$, in agreement with [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive 2-by-2 dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses nonzero factors and a nonzero scale."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement uses rank budget r=1 and step 1.1 computes the finite merged matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No factor or input is degenerate in the selected witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example contains no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit finite matrices and vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        }
+      ]
+    }
+  }
+}

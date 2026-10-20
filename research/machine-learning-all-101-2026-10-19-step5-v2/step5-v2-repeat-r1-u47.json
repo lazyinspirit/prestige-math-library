@@ -1,0 +1,123 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "47",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "lem-hermitian-spectral-measure-is-probability",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "42b3dc132e9e379ed33bfa117b28581515d0ce337ac5249d3386ffb07c04e29d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed missing domain hypothesis: the 0-by-0 matrix is Hermitian positive semidefinite, but the empirical Dirac sum divides by d=0. The cited definition explicitly assumes positive integers d,N. Added positive integer d to the Statement and Given clause, preserving all intended positive-dimensional cases. This is a logic defect (an undefined claimed probability law), not an incorrect citation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-hermitian-spectral-measure-is-probability",
+      "disposition": "repaired",
+      "post_sha256": "68ae0457b95bf797202eccde486f6a26d40b017745279b5ede2cdc74c214ab31",
+      "review_context_sha256": "cdb65b6b1a56664f95356913a9dc12fb78821e798552d04e7a5d2d08cb485fd5",
+      "reason": "For positive d, orthogonal eigenspace projections sum to I, so their ranks sum to d and the empirical weights sum to one. For unit x, the orthogonal projection energies sum to its squared norm, one. Finite nonnegative sums of Dirac probabilities are countably additive, and PSD gives nonnegative eigenvalues. Repeated and zero eigenvalues and zero individual directional weights remain allowed. No AC or new prerequisite is needed; the statement is uninterrupted and no diagram is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries",
+    "thm-directional-sample-covariance-resolvent-limit"
+  ],
+  "downstream_uses": {
+    "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries": "items/thm-directional-sample-covariance-resolvent-limit-for-bounded-entries.md, Facts F2 and Proof 4.1: uses the lemma to make the directional spectral measures probabilities before tightness and weak subsequence extraction. The Statement explicitly indexes positive integers n, A_n is n-by-n PSD, and x_n is unit, so d=n>0 satisfies the repaired hypothesis. The use and consumer Statement remain sound; no item edit is required.",
+    "thm-directional-sample-covariance-resolvent-limit": "items/thm-directional-sample-covariance-resolvent-limit.md, Facts F3 and Proof 4.1: uses the lemma to make the directional spectral laws probabilities before tightness and Prokhorov extraction. The Statement explicitly assumes positive integers n, A_n is n-by-n PSD, and x_n is unit, so d=n>0 satisfies the repaired hypothesis. The use and consumer Statement remain sound; no item edit is required."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-hermitian-spectral-measure-is-probability",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "Confirmed missing domain hypothesis: the 0-by-0 matrix is Hermitian positive semidefinite, but the empirical Dirac sum divides by d=0. The cited definition explicitly assumes positive integers d,N. Added positive integer d to the Statement and Given clause, preserving all intended positive-dimensional cases. This is a logic defect (an undefined claimed probability law), not an incorrect citation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim_and_conventions": "Positive-dimensional complex Hermitian PSD matrices; empirical weights rank(P)/d, directional weights ||Px||^2 for unit x; nonnegative spectral support. Only d>0 was missing. Both full numbered proof steps remain unchanged.",
+    "local_evidence": [
+      "items/def-sample-covariance-directional-spectral-measure.md, Definition: positive integers d,N and both finite Dirac sums",
+      "items/thm-complex-spectral-theorem-for-normal-endomorphisms.md, Statement and Proof: orthonormal eigenbasis",
+      "items/def-probability-measure.md, Definition; items/def-dirac-measure.md, Definition; items/prop-dirac-measure-is-a-probability-measure.md, full argument",
+      "research/machine-learning-all-101-2026-10-19-batch-47.proof-contracts.json, assigned lemma entry: positive-dimension empty boundary and both derivations",
+      "library/machine-learning/sample-covariance-resolvent-limits.md: frontmatter-only compact-v1 inventory; no mathematical prose uses"
+    ],
+    "dependencies": [
+      "def-sample-covariance-directional-spectral-measure",
+      "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "def-probability-measure",
+      "def-dirac-measure",
+      "prop-dirac-measure-is-a-probability-measure"
+    ],
+    "consumer_examination": "Direct dependency/reference search over current items and library yields exactly the two listed draft frontier consumers and the owning page inventory. Both consumers meet d>0; their unchanged interfaces stop propagation. No outside or published consumer was found; no published-consumer-ledger update or maintenance repair is proposed.",
+    "step4_digest": "Read the rejection-blind batch-47 digest first. Its two presentation concerns concern unassigned examples, not this lemma or its direct consumers; no outside-lane edits were made.",
+    "validation": [
+      {
+        "command": "node tools/proof-layout.mjs items/lem-hermitian-spectral-measure-is-probability.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-hermitian-spectral-measure-is-probability.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof, 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-hermitian-spectral-measure-is-probability.md library/machine-learning/sample-covariance-resolvent-limits.md --json",
+        "exit_code": 0,
+        "result": "2 carriers checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-47.proof-contracts.json --strict --items lem-hermitian-spectral-measure-is-probability --json",
+        "exit_code": 0,
+        "result": "Assigned lemma passes, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-47.proof-contracts.json --strict --items lem-hermitian-spectral-measure-is-probability,thm-directional-sample-covariance-resolvent-limit-for-bounded-entries,thm-directional-sample-covariance-resolvent-limit --json",
+        "exit_code": 1,
+        "result": "Both repaired-supplier quotation mismatches resolved. Five unrelated pre-existing citation-quote-mismatch diagnostics remain: bounded theorem A1 (def-axiom-of-choice), F12 (def-weak-convergence-of-borel-probability-measures); finite-fourth-moment theorem A1 (def-axiom-of-choice), F7 (def-identically-distributed-and-iid-random-variables), F10 (def-weak-convergence-of-borel-probability-measures). These were already present before the two quotation updates. Escalated for owning metadata reconciliation; no full consumer-contract pass claimed."
+      }
+    ],
+    "next_action": "Controller to collect this report, schedule ordinary frontier consumer/context work and required independent rejudgment, and reconcile the five unrelated quotation diagnostics. No certification or gate waiver is claimed.",
+    "contract_repair": "Under step5-shared-write-lock acquire/reread/edit/check/release, updated only the two exact lemma Statement quotation mirrors in research/machine-learning-all-101-2026-10-19-batch-47.proof-contracts.json. Both consumers already assume positive n. The assigned lemma contract needs no derivation or boundary change: its existing empty-boundary explanation already requires positive dimension.",
+    "owner_metadata_followup": {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-47.proof-contracts.json",
+      "affected_entries": {
+        "thm-directional-sample-covariance-resolvent-limit-for-bounded-entries": [
+          "citations A1",
+          "citations F12"
+        ],
+        "thm-directional-sample-covariance-resolvent-limit": [
+          "citations A1",
+          "citations F7",
+          "citations F10"
+        ]
+      },
+      "reason": "The focused consumer check reports exact-source quotation drift for other suppliers. These unassigned interfaces and historical review records were preserved; the controller/owner should reconcile the five current-source quote mirrors through its ordinary metadata route."
+    },
+    "unresolved_mathematics": []
+  }
+}

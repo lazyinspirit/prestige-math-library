@@ -1,0 +1,128 @@
+[
+  {
+    "order": 2982,
+    "id": "exact-tiled-attention-and-memory-aware-differentiation",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Exact tiled attention and memory-aware differentiation",
+    "companion": "exact-tiled-attention-and-memory-aware-differentiation-examples",
+    "requires": [
+      "attention-and-transformer-expressivity",
+      "automatic-differentiation-and-backpropagation",
+      "automatic-differentiation-and-computational-graphs"
+    ],
+    "items": [
+      {
+        "id": "def-attention-block-summary",
+        "kind": "definition",
+        "title": "Stable summary of an attention key block",
+        "deps": [
+          "def-scaled-dot-product-attention"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-exact-tiled-softmax-attention",
+        "kind": "algorithm",
+        "title": "Exact tiled softmax attention with block-recomputed vector-Jacobian products",
+        "deps": [
+          "def-attention-block-summary",
+          "def-scaled-dot-product-attention",
+          "thm-shared-parameter-backpropagation-gradient-formula"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-tiled-attention-exactness",
+        "kind": "theorem",
+        "title": "Tiled attention and its recomputed reverse pass are exact",
+        "deps": [
+          "alg-exact-tiled-softmax-attention",
+          "def-attention-block-summary",
+          "def-scaled-dot-product-attention",
+          "def-finite-straight-line-computational-program",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-reverse-mode-computes-gradient",
+          "alg-backpropagation-through-shared-parameter-recurrence",
+          "thm-shared-parameter-backpropagation-gradient-formula"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "thm-tiled-attention-workspace-and-work",
+        "kind": "theorem",
+        "title": "Tiled attention uses linear retained memory and quadratic arithmetic",
+        "deps": [
+          "alg-exact-tiled-softmax-attention",
+          "def-attention-block-summary",
+          "thm-tiled-attention-exactness"
+        ],
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "rem-attention-io-model-and-roundoff",
+        "kind": "remark",
+        "title": "The scalar workspace result is not a hardware I/O bound",
+        "deps": [
+          "alg-exact-tiled-softmax-attention",
+          "thm-tiled-attention-workspace-and-work"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2983,
+    "id": "exact-tiled-attention-and-memory-aware-differentiation-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Exact tiled attention and memory-aware differentiation — Examples",
+    "companion": "exact-tiled-attention-and-memory-aware-differentiation",
+    "requires": [
+      "exact-tiled-attention-and-memory-aware-differentiation"
+    ],
+    "items": [
+      {
+        "id": "ex-tiled-attention-one-key",
+        "kind": "example",
+        "title": "One-key tiled attention",
+        "deps": [
+          "alg-exact-tiled-softmax-attention",
+          "thm-tiled-attention-exactness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-tiled-attention-empty-first-masked-block",
+        "kind": "example",
+        "title": "An empty first masked key block",
+        "deps": [
+          "alg-exact-tiled-softmax-attention",
+          "thm-tiled-attention-exactness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-tiled-attention-two-merge-orders",
+        "kind": "example",
+        "title": "Two merge orders give the same attention summary",
+        "deps": [
+          "def-attention-block-summary",
+          "thm-tiled-attention-exactness"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-tiled-attention-replay-dropout-mask",
+        "kind": "example",
+        "title": "A different dropout mask changes the reverse result",
+        "deps": [
+          "alg-exact-tiled-softmax-attention"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

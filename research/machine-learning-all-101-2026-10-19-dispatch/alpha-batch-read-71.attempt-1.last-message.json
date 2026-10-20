@@ -1,0 +1,116 @@
+{
+  "group": "x",
+  "batches": ["71"],
+  "pages_read": [
+    "foundation-models-transfer-and-scaling-evidence",
+    "foundation-models-transfer-and-scaling-evidence-examples"
+  ],
+  "items_read": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "conventions": [
+    {
+      "convention": "Foundation-model status is qualitative, architecture-independent, and provides no numerical size threshold or downstream performance guarantee. In-context learning keeps pretrained parameters fixed.",
+      "fixed_by": "def-foundation-model-as-broad-pretraining-and-adaptation",
+      "matters_for": [
+        "ex-empirical-language-model-scaling-law",
+        "ex-pretraining-adaptation-interface-limitations"
+      ]
+    },
+    {
+      "convention": "Source and target laws share a measurable input/label product space. Conditional label kernels are supplied rather than asserted to exist; covariate shift additionally requires target-almost-everywhere kernel equality and target marginal absolute continuity with respect to the source marginal.",
+      "fixed_by": "def-source-target-distributions-and-shift",
+      "matters_for": [
+        "def-foundation-model-as-broad-pretraining-and-adaptation",
+        "ex-pretraining-adaptation-interface-limitations"
+      ]
+    },
+    {
+      "convention": "N excludes embedding parameters, D counts tokens, and the three loss fits apply separately in their specified training regimes and measured ranges. Empirical exponents do not imply capability or universal transfer guarantees.",
+      "fixed_by": "ex-empirical-language-model-scaling-law",
+      "matters_for": ["ex-empirical-language-model-scaling-law"]
+    },
+    {
+      "convention": "The finite spaces carry power-set sigma-algebras, the source and target laws are point masses at (a,0) and (b,1), and parameter ERM is specified only for nonempty samples when its infimum is attained.",
+      "fixed_by": "ex-pretraining-adaptation-interface-limitations",
+      "matters_for": ["ex-pretraining-adaptation-interface-limitations"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-foundation-model-as-broad-pretraining-and-adaptation",
+      "statement": "In the usage of the 2021 Bommasani et al. report, a foundation model is a model trained on broad data, generally using self-supervision at scale, that can be adapted to a wide range of downstream tasks. The definition makes no general transfer, capability-emergence, or reliability claim from a pretraining loss.",
+      "used_by": [
+        "ex-empirical-language-model-scaling-law",
+        "ex-pretraining-adaptation-interface-limitations"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+      "used_for": "The null-set implication defining target marginal absolute continuity; the singleton {b} disproves it in the finite example.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability conventions used by the source/target supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel requirements; the explicitly supplied constant point-mass kernels satisfy them.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "The common product measurable space and rectangle-generation convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of nonnegative section integrals for the supplied probability kernels. Its finite-kernel hypothesis covers the use.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-empirical-language-model-scaling-law",
+      "concern": "The Example gives “C_min=6NB_crit S” and defines S as “the number of training steps.” With actual steps S at batch size B, Kaplan et al. §5.1 equations (5.4)–(5.5) instead give S_min=S/(1+B_crit/B) and C_min=6NBS/(1+B/B_crit)=6NB_crit S_min. Thus the displayed equality is generally false with the stated unadjusted meaning of S. Although §6.1 of the paper itself writes the abbreviated formula reproduced here, the example needs to distinguish actual and adjusted step counts. Source checked: [Kaplan et al., §§5.1 and 6.1](https://arxiv.org/html/2001.08361).",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "The Definition contains “([[def-measurable-space]])” between its measurable-space hypotheses and the definition of a measurable function. This interrupts the complete defining section with a hyperlink, contrary to the required uninterrupted-statement policy; the link has no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "The Definition contains “Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]”. These hyperlinks occur inside the complete defining section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "The Definition describes the generating rectangles as those “of [[def-measurable-rectangle]]” before proceeding to the empty and finite product conventions. This hyperlink interrupts the complete Definition and has not been moved to a following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "foundation-models-transfer-and-scaling-evidence",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "Opened the current decoder-layer definition and its feedforward, positional-mask, multihead, and scaled-attention prerequisites. The scaling example uses causal decoder-stack notation only and imports no expressivity theorem. Current supplier widths and positive lengths support its attention operations; the cited mask admits j≤i."
+    },
+    {
+      "from": "foundation-models-transfer-and-scaling-evidence",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "The owned definition faithfully repeats the supplied-kernel and absolute-continuity conditions without asserting kernel existence. The finite example supplies valid kernels and correctly disproves domination using {b}. Its support diagram matches both joint laws; the foundation-model diagram correctly separates fixed-parameter prompting from parameter optimization."
+    }
+  ]
+}

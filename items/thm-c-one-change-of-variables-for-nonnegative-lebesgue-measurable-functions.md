@@ -10,7 +10,7 @@ provenance:
 deps: [lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands, lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets, thm-monotone-convergence-for-the-integral, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-measure-uniqueness-on-a-sigma-finite-pi-system, cor-additivity-of-the-nonnegative-lebesgue-integral, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, def-countable-choice]
 proof_strategy: direct
 verification:
-  repair: research/bayesian-computational-statistics-62-owner-step2-b17-thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions-published-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.json
 sources:
   references:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 2.47"
@@ -19,11 +19,15 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
+Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Let
 $U,V \subseteq \mathbb R^n$ be open and let $T : U \to V$ be a
 $C^1$ diffeomorphism. For every nonnegative Lebesgue measurable
 $f : V \to [0,\infty]$,
 $$ \int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x). $$
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

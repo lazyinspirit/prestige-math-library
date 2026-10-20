@@ -1,0 +1,129 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "lem-pseudo-residuals-are-negative-score-gradient",
+      "model": "gpt-6-luna",
+      "context_sha256": "e556dd0f277875f325feb41646e3e0255321e4ef7a286f6f54fbdf157c9689d1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F1 defines pseudo-residuals only for finite-valued losses on Y × R, whereas the original Statement admitted sampled loss sections defined only on open U. Thus the original final invocation of F1 lacked its domain hypothesis (a dependency-citation defect). The repair explicitly defines the local pseudo-residual without narrowing U or any differentiability hypothesis, and proves compatibility with F1 by extending sampled sections by zero outside U; the extension has identical derivatives near every sample score.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-pseudo-residuals-are-negative-score-gradient",
+      "disposition": "repaired",
+      "post_sha256": "f16da322a041f5c42c779b601c03f5a4ed8d447bebf17844e3729be049c14444",
+      "review_context_sha256": "5e6a3fe5b9793906e1b99a19236e42f9cebf0ca468a36f22e31a4fd209d7fc8d",
+      "reason": "Checked the complete derivative argument and all seven actual suppliers: coordinate projections have zero remainder, each scalar derivative supplies its total derivative, the chain and finite-sum rules yield the stated linear functional, and coordinate evaluation gives the Euclidean gradient (with harmless relabeling from zero-based coordinates). The revised local pseudo-residual is now explicit. Extending each sampled section by zero outside open U preserves the section near its score and hence its derivative, so the global-domain definition applies to that extension. All original local hypotheses and derivative conclusions remain. No continuity of derivatives, AC, or new prerequisite is needed; N=1, repeated observations, and zero derivatives remain covered. This is the repairer's review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-gradient-boosting",
+    "ex-gradient-boosting-zero-tree-direction"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-pseudo-residuals-are-negative-score-gradient",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "status": "fixed",
+      "reason": "F1 defines pseudo-residuals only for finite-valued losses on Y × R, whereas the original Statement admitted sampled loss sections defined only on open U. Thus the original final invocation of F1 lacked its domain hypothesis (a dependency-citation defect). The repair explicitly defines the local pseudo-residual without narrowing U or any differentiability hypothesis, and proves compatibility with F1 by extending sampled sections by zero outside U; the extension has identical derivatives near every sample score.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "record-no-published-consumer-impact",
+      "id": "lem-pseudo-residuals-are-negative-score-gradient",
+      "status": "no-published-consumer-repair-required",
+      "reason": "The complete current item/reference search found only alg-gradient-boosting and ex-gradient-boosting-zero-tree-direction as direct item consumers; both are draft frozen-frontier items and remain sound. The four Step-4 outside published-definition presentation alerts remain owner-routed evidence; the three derivative/gradient suppliers actually opened here already have uninterrupted Definitions and following reference sections. No published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-19.proof-contracts.json": "e8f956a9cbed8c0137e4aac650320cf30c8b3e711972c5fad80968074e9f02c5"
+  },
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_files": [
+      "items/lem-pseudo-residuals-are-negative-score-gradient.md",
+      "research/machine-learning-all-101-2026-10-19-batch-19.proof-contracts.json"
+    ],
+    "interface_change": "Only the final Statement paragraph changes: it now explicitly defines r_i(f)=-partial_2 ell(y_i,z_i) for possibly local losses and states agreement with the global definition. No hypothesis is strengthened and the derivative and negative-gradient conclusions are preserved.",
+    "proof_change": "F1 now includes its actual global-domain hypothesis. Proof 4.1 constructs a zero extension on the finite sampled label set times R, uses openness to preserve all derivatives at the sample scores, and applies F1 to the extension.",
+    "contract_change": "Under the shared write lock, reread the current owning contract, changed only this item's entry, mirrored the new Proof 4.1 claim/inputs, and refreshed its citation quotes from the current seven suppliers. Historical risk/boundary review records were retained. Scoped strict contract validation passed before lock release.",
+    "downstream_examination": [
+      {
+        "id": "alg-gradient-boosting",
+        "path": "items/alg-gradient-boosting.md",
+        "affected_use": "Definition step 2: 'This tree fit approximates the unrestricted negative score gradient.' Definition references link the lemma as 'The pseudo-residual vector is the negative score-space gradient'.",
+        "invalidated_claim": "None: the algorithm assumes finite-valued ell:Y × R → R differentiable at every score used; take U=R in the revised lemma.",
+        "minimality": "The explicit local convention agrees with the algorithm's global pseudo-residual definition, so no Definition or dependency edit is necessary.",
+        "disposition": "unaffected",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "ex-gradient-boosting-zero-tree-direction",
+        "path": "items/ex-gradient-boosting-zero-tree-direction.md",
+        "affected_use": "Facts F2 identifies pseudo-residuals with the negative empirical-score gradient; Verification 1.1 uses F2 to conclude nabla Phi(0)=(-1,+1), and step 3.1 recalls that nonzero gradient.",
+        "invalidated_claim": "None: ell(y,z)=(z-y)^2/2 is finite-valued and differentiable on R, and the zero-score calculation uses U=R and N=2.",
+        "minimality": "The unchanged negative-gradient identity supplies exactly the same coordinates, so the Example and Verification require no repair.",
+        "disposition": "unaffected",
+        "route": "frontier-owner"
+      }
+    ],
+    "page_interface": "Read ml02-boosting and ml02-boosting-examples completely. Both are frontmatter-only with page_layout: compact-v1. The repaired lemma retains its owning page, placement, status, dependencies and full contract scope; no page metadata edit is needed.",
+    "diagrams": "The assigned lemma has no TikZ/tikzcd diagram; its coordinatewise calculus argument needs none.",
+    "source_evidence": "Mathematics is familiar elementary finite-dimensional differentiation. Read the actual seven local supplier files and the two direct consumers; no external source was consulted and no source-reading claim is made.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-pseudo-residuals-are-negative-score-gradient.md --json",
+        "exit_code": 0,
+        "result": "1 file; 1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-pseudo-residuals-are-negative-score-gradient.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-pseudo-residuals-are-negative-score-gradient.md",
+        "exit_code": 0,
+        "result": "1 item; 4 steps; 0 defects. Run once after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-19.proof-contracts.json --strict --items lem-pseudo-residuals-are-negative-score-gradient --json",
+        "exit_code": 0,
+        "result": "Selected assigned item checked; ok true; no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items lem-pseudo-residuals-are-negative-score-gradient",
+        "exit_code": 0,
+        "result": "Recorded the returned post_sha256 and review_context_sha256 immediately after the completed review and contract reconciliation."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller merges ledger proposals and routes the two frontier consumer effects; independent rejudgment and native certification remain controller duties."
+  }
+}

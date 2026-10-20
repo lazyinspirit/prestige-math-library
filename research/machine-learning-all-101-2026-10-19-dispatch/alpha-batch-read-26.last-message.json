@@ -1,0 +1,243 @@
+{
+  "group": "i",
+  "batches": ["26"],
+  "pages_read": [
+    "ml02-causal-pc",
+    "ml02-causal-pc-examples"
+  ],
+  "items_read": [
+    "def-causal-discovery-oracle-regime",
+    "def-cpdag-markov-equivalence-class",
+    "lem-pc-skeleton-separation",
+    "lem-covered-edge-reversal-preserves-d-separation",
+    "lem-chordal-components-admit-both-orientations",
+    "def-gaussian-partial-correlation",
+    "lem-pc-separating-set-collider",
+    "thm-dag-markov-equivalence-skeleton-vstructures",
+    "alg-pc-causal-discovery",
+    "def-sample-partial-correlation",
+    "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+    "lem-pc-fisher-transform-uniform-concentration",
+    "lem-meek-rules-complete-for-cpdag",
+    "thm-pc-oracle-correctness",
+    "thm-pc-high-dimensional-consistency",
+    "ex-pc-chain-versus-collider-separating-sets",
+    "ex-pc-latent-confounding-limitations",
+    "ex-pc-markov-equivalent-dags"
+  ],
+  "conventions": [
+    {
+      "convention": "The oracle regime assumes AC, a finite observed-only Markovian recursive SCM, a full-joint topological parent-kernel factorization, faithfulness, and exact conditional-independence answers.",
+      "fixed_by": "def-causal-discovery-oracle-regime",
+      "matters_for": [
+        "alg-pc-causal-discovery",
+        "thm-pc-oracle-correctness",
+        "thm-pc-high-dimensional-consistency",
+        "ex-pc-chain-versus-collider-separating-sets",
+        "ex-pc-latent-confounding-limitations"
+      ]
+    },
+    {
+      "convention": "Markov equivalence means equality of all d-separation relations for pairwise disjoint vertex sets. A consistent extension preserves directed edges and creates no previously absent unshielded collider. CPDAG arrows are compelled throughout the equivalence class.",
+      "fixed_by": "def-cpdag-markov-equivalence-class",
+      "matters_for": [
+        "thm-dag-markov-equivalence-skeleton-vstructures",
+        "lem-meek-rules-complete-for-cpdag",
+        "thm-pc-oracle-correctness",
+        "ex-pc-markov-equivalent-dags"
+      ]
+    },
+    {
+      "convention": "PC processes unordered pairs and conditioning subsets in fixed lexicographic order, reads current adjacency sets including same-level deletions, searches subsets from both endpoints, records the first separator, and uses only background-free R1–R3.",
+      "fixed_by": "alg-pc-causal-discovery",
+      "matters_for": [
+        "lem-meek-rules-complete-for-cpdag",
+        "thm-pc-oracle-correctness",
+        "thm-pc-high-dimensional-consistency"
+      ]
+    },
+    {
+      "convention": "Population partial correlations use the Schur complement of a positive-definite Gaussian covariance; an empty conditioning set uses the principal two-coordinate covariance block.",
+      "fixed_by": "def-gaussian-partial-correlation",
+      "matters_for": [
+        "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+        "lem-pc-fisher-transform-uniform-concentration",
+        "thm-pc-high-dimensional-consistency"
+      ]
+    },
+    {
+      "convention": "Sample residualization includes an intercept. Sample partial correlation requires a positive-definite sample covariance block; Fisher statistics require n−|S|−3>0.",
+      "fixed_by": "def-sample-partial-correlation",
+      "matters_for": [
+        "lem-pc-fisher-transform-uniform-concentration",
+        "thm-pc-high-dimensional-consistency"
+      ]
+    },
+    {
+      "convention": "The consistency theorem caps conditioning levels at q_n and declares independence when sqrt(n−|S|−3)|atanh(sample partial correlation)| ≤ sqrt(n)c_n/2. Invalid covariance blocks receive 'dependent'; the threshold uses the unknown population lower bound c_n.",
+      "fixed_by": "thm-pc-high-dimensional-consistency",
+      "matters_for": [
+        "thm-pc-high-dimensional-consistency"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-meek-rules-complete-for-cpdag",
+      "statement": "Let G be a finite DAG. Start with its skeleton, orient exactly the edges in its unshielded colliders, and leave all other edges undirected. Repeatedly apply the background-free rules R1–R3 from the PC algorithm until no rule applies. The resulting partially directed graph is the CPDAG for the Markov-equivalence class of G.",
+      "used_by": [
+        "thm-pc-oracle-correctness",
+        "ex-pc-markov-equivalent-dags"
+      ]
+    },
+    {
+      "id": "lem-pc-skeleton-separation",
+      "statement": "Let G be a finite DAG on V. For distinct vertices i,j ∈ V, the pair {i,j} is an edge of the skeleton of G if and only if there is no S ⊆ V∖{i,j} that d-separates i and j in G.",
+      "used_by": [
+        "thm-dag-markov-equivalence-skeleton-vstructures",
+        "thm-pc-oracle-correctness",
+        "thm-pc-high-dimensional-consistency"
+      ]
+    },
+    {
+      "id": "thm-dag-markov-equivalence-skeleton-vstructures",
+      "statement": "Two finite DAGs on the same vertex set are Markov equivalent, meaning that they induce the same d-separation relations, if and only if they have the same skeleton and the same unshielded colliders.",
+      "used_by": [
+        "lem-meek-rules-complete-for-cpdag",
+        "ex-pc-latent-confounding-limitations",
+        "ex-pc-markov-equivalent-dags"
+      ]
+    },
+    {
+      "id": "thm-pc-oracle-correctness",
+      "statement": "Assume AC and the causally sufficient perfect-oracle discovery regime for a finite observed DAG G and its full-joint law. Population PC with any fixed vertex order terminates, returns exactly the skeleton of G, records a d-separating set for every deleted pair, orients exactly the unshielded colliders at its collider stage, and returns the CPDAG after R1–R3 closure.",
+      "used_by": [
+        "thm-pc-high-dimensional-consistency",
+        "ex-pc-chain-versus-collider-separating-sets",
+        "ex-pc-latent-confounding-limitations"
+      ]
+    },
+    {
+      "id": "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+      "statement": "Assume AC and X ∼ N_p(μ,Σ) with Σ positive definite. For distinct i,j and S excluding i,j, K_{ij|S} is positive definite, and ρ_{ij|S}=0 if and only if σ(X_i) and σ(X_j) are conditionally independent given σ(X_S).",
+      "used_by": [
+        "lem-pc-fisher-transform-uniform-concentration",
+        "thm-pc-high-dimensional-consistency",
+        "ex-pc-chain-versus-collider-separating-sets"
+      ]
+    },
+    {
+      "id": "lem-pc-fisher-transform-uniform-concentration",
+      "statement": "Fix 0≤M<1. There exist c_M>0 and C_M<∞ such that, for independent observations from a nondegenerate Gaussian law, |ρ_{ij|S}|≤M and n−|S|−3>0 imply P(|g(sample partial correlation)−g(ρ_{ij|S})|>t) ≤ C_M exp(−c_M(n−|S|−1)t²) for 0<t≤1. Constants are uniform in indices, sample size, mean and covariance beyond M.",
+      "used_by": [
+        "thm-pc-high-dimensional-consistency"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-d-separation-in-a-dag",
+      "used_for": "Active-path, collider, conditioned-descendant and empty-endpoint conventions underlying the graph arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-ancestral-moral-graph-of-a-dag",
+      "used_for": "Ancestor and moral-graph constructions in the covered reversal proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-d-separation-ancestral-moral-separation",
+      "used_for": "Converting covered reversal's moral-separation comparison into equality of d-separation models.",
+      "opened": true
+    },
+    {
+      "id": "def-recursive-structural-causal-model-and-dag",
+      "used_for": "Observed versus latent vertices, recursive equations and mutually independent exogenous variables.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of exogenous variables, Gaussian coordinates and regression residuals.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable finite vertex subvectors, including the empty-product convention.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "The normalized parent-kernel factorization required in the oracle regime.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-independence-given-a-sigma-algebra",
+      "used_for": "The bounded-function conditional-product identity and its AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-faithfulness-of-a-dag-model",
+      "used_for": "Conditional independence implies d-separation; factorization supplies the converse separately.",
+      "opened": true
+    },
+    {
+      "id": "thm-dag-factorization-implies-d-separation-conditional-independence",
+      "used_for": "Global Markovness under the explicitly required topological probability-kernel factorization.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Choice assumptions inherited by Gaussian and conditional-expectation interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Normal exogenous laws and the examples' explicit parent kernels.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Normality of finite affine combinations in the examples.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "Scalar normal transforms, means and variances.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Identifying scalar projection laws of affine Gaussian constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian projection characterization, covariance conventions and AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Equality of the latent and direct-edge models' full observed vector laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Gaussian block-density factorization, rotational invariance and probability-zero rank failures.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-meek-rules-complete-for-cpdag",
+      "concern": "Proof 4.3 says that if a→b was added by R3, there are nonadjacent d,e with d→b, e→b, 'and undirected a-d, a-e', then applies R3 to a-c in the final closed pattern P. Those edges were undirected when R3 oriented a→b, but may have been oriented subsequently; their remaining undirected in P has not been established. Cover the subsequent-orientation cases or justify that reduction. The theorem itself agrees with Meek's Theorem 3 and Appendix Lemma 1 (https://arxiv.org/pdf/1302.4972); this is a local proof gap.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-meek-rules-complete-for-cpdag",
+      "concern": "Proof 3.2 invokes 'the claim in step 2.1' to establish chordal undirected components, although step 2.1 explicitly leaves its final case unresolved and that case is discharged only in steps 4.1–4.3. Move step 3.2 after that discharge so the proof follows supplier-before-consumer order.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

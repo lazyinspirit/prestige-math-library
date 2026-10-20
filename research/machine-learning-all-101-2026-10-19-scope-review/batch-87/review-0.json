@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "87",
+  "round": 0,
+  "reviewed_items": [
+    "thm-offline-coverage-impossibility-example",
+    "def-offline-reinforcement-learning-dataset",
+    "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+    "alg-trajectory-importance-sampling-ope",
+    "alg-doubly-robust-ope",
+    "thm-trajectory-importance-sampling-is-unbiased",
+    "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+    "rem-offline-rl-distribution-shift-and-pessimism",
+    "ex-offline-ope-full-support-and-missing-support",
+    "ex-offline-ope-exploding-trajectory-weights",
+    "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+    "ex-offline-ope-doubly-robust-correctness-branches"
+  ],
+  "reviewed_pages": [
+    "offline-reinforcement-learning-and-off-policy-evaluation",
+    "offline-reinforcement-learning-and-off-policy-evaluation-examples"
+  ],
+  "decision": "repair",
+  "reason": "Request one local repair for the dependency-cycle encoding, the unsupported coverage implication, the algorithm property placement, and the remark's missing unbiasedness supplier. The current consumers of the proposed algorithm and theorem edits are checked below.",
+  "findings": [
+    {
+      "id": "def-offline-reinforcement-learning-dataset",
+      "type": "prerequisite",
+      "reason": "Its deps include lem-finite-mdp-policy-action-state-reward-path-law, whose deps point back to this definition. The actual path-law result establishes the trajectory law's well-definedness; move it from deps to justified_by to use the permitted definition-well-definedness relation."
+    },
+    {
+      "id": "def-offline-reinforcement-learning-dataset",
+      "type": "local",
+      "reason": "The Definition asserts that state-action support implies full trajectory coverage without giving the finite-atom argument. Add that derivation in a following Remarks section while leaving the Definition unchanged."
+    },
+    {
+      "id": "alg-trajectory-importance-sampling-ope",
+      "type": "local",
+      "reason": "The Definition states that all three outputs are finite, an algorithm property that belongs in a separate proved result. Move it into thm-trajectory-importance-sampling-is-unbiased with a proof; preserve the estimator formulas and make no WIS unbiasedness claim."
+    },
+    {
+      "id": "rem-offline-rl-distribution-shift-and-pessimism",
+      "type": "prerequisite",
+      "reason": "Its claim that OIS and PDIS identities estimate expected return uses thm-trajectory-importance-sampling-is-unbiased, which is absent from deps and references. Add that local supplier."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-trajectory-importance-sampling-is-unbiased",
+      "decision": "repair",
+      "reason": "Add the separate finite-output result and proof when moving it out of the algorithm Definition; its existing unbiasedness argument uses the retained formulas."
+    },
+    {
+      "id": "rem-offline-rl-distribution-shift-and-pessimism",
+      "decision": "repair",
+      "reason": "Add thm-trajectory-importance-sampling-is-unbiased as the supplier for the existing OIS/PDIS identity claim."
+    },
+    {
+      "id": "ex-offline-ope-full-support-and-missing-support",
+      "decision": "accept",
+      "reason": "Its calculation uses the retained OIS formula and proves the example directly."
+    },
+    {
+      "id": "ex-offline-ope-exploding-trajectory-weights",
+      "decision": "accept",
+      "reason": "Its finite-horizon calculation uses the retained OIS formula directly."
+    },
+    {
+      "id": "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+      "decision": "accept",
+      "reason": "Its calculation uses the retained WIS formula and zero-denominator convention directly."
+    },
+    {
+      "id": "offline-reinforcement-learning-and-off-policy-evaluation",
+      "decision": "accept",
+      "reason": "Its item placement remains unchanged; the page includes the assigned theorem that will carry the finiteness result."
+    },
+    {
+      "id": "offline-reinforcement-learning-and-off-policy-evaluation-examples",
+      "decision": "accept",
+      "reason": "Its inventory remains unchanged, and its examples use explicit formulas and calculations."
+    }
+  ]
+}

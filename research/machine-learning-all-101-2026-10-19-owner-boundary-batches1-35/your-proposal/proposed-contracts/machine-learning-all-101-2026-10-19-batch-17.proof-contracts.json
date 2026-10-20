@@ -1,0 +1,827 @@
+{
+  "version": 1,
+  "scope": [
+    "def-empirical-decision-tree",
+    "thm-node-mean-minimizes-squared-error",
+    "def-cost-complexity-pruning",
+    "alg-cart-greedy-split",
+    "alg-weakest-link-pruning",
+    "ex-cart-subtrees-same-fit-different-penalties",
+    "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+    "thm-weakest-link-pruning-terminates",
+    "ex-cart-one-dimensional-threshold-tree"
+  ],
+  "contracts": {
+    "def-empirical-decision-tree": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The root index set has n>=1 elements and every internal split is required to have two nonempty sample children. Consequently each leaf's N_I is positive, making its mean and impurity denominators defined. Classification also fixes K>=1 labels, so its maximum and entropy/Gini sums have a nonempty class set.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The displayed feature and label aggregates all have explicitly positive finite sizes. Zero empirical frequency for an individual class is permitted and entropy assigns 0 log0=0; it is not an empty leaf or empty label universe."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the entropy impurity explicitly uses 0 log 0 = 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a leaf with one observation has a defined mean and class proportion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a stored split is admitted only when both children are nonempty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: thresholds with an empty child are excluded by the nonempty-child condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: class ties and candidate-score ties use specified deterministic orders."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition or algorithm, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This carrier is a definition or algorithm, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-node-mean-minimizes-squared-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "source_section": "Definition",
+          "quote": "Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]). An **adjoint** of $T$ is a linear map $T^*:W\\to V$ such that\n\n$$\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$$\n\nfor every $v\\in V$ and $w\\in W$. Existence is not part of the definition; in finite dimensions it will follow from Riesz representation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-design-instance",
+          "claim": "Enumerate $I$ in increasing sample-index order as $i_1,\\ldots,i_N$ and define $T(c)=(c,\\ldots,c)$ and $b=(y_{i_1},\\ldots,y_{i_N})$. For all scalars $a,c,d\\in\\mathbb R$, $T(ac+d)=aT(c)+T(d)$ coordinatewise, so $T$ is linear.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normal-equation-mean",
+          "claim": "Identify $\\mathbb R$ with $\\mathbb R^1$. By [F2] for $n=1$ and $n=N$, the standard coordinate inner products make $\\mathbb R$ and $\\mathbb R^N$ finite-dimensional inner-product spaces. Hence $\\lVert Tc-b\\rVert^2=\\sum_{i\\in I}(y_i-c)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "square-expansion",
+          "claim": "Define $S:\\mathbb R^N\\to\\mathbb R$ by $S(v_1,\\ldots,v_N)=\\sum_{k=1}^Nv_k$. This map is linear, and for every $c\\in\\mathbb R$ and $v\\in\\mathbb R^N$, $\\langle T(c),v\\rangle_{\\mathbb R^N}=c\\sum_{k=1}^Nv_k=\\langle c,S(v)\\rangle_{\\mathbb R}$. Thus $S$ is an adjoint of $T$ by [F3]. If another map also satisfied this identity, its value at each $v$ would differ from $S(v)$ by a scalar pairing to zero with every $c\\in\\mathbb R$, hence would equal $S(v)$ by positive definiteness. Therefore $T^*=S$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now [F4] applies to the linear map $T$ between these finite-dimensional inner-product spaces, with its adjoint established in step 3.1. The normal equation $T^*(Tc-b)=0$ is $Nc-\\sum_{i\\in I}y_i=0$, whose unique solution is $c=\\bar y_I$ because $N\\ge1$. By [F4], this solution is the unique minimizer.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Expanding around $\\bar y_I$ gives $\\sum_{i\\in I}(y_i-c)^2=\\sum_{i\\in I}(y_i-\\bar y_I)^2+N(c-\\bar y_I)^2$, since $\\sum_{i\\in I}(y_i-\\bar y_I)=0$. Therefore the minimum value is $\\sum_{i\\in I}(y_i-\\bar y_I)^2$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite index set I is assumed nonempty, so N=|I|>=1. The proof's constant-vector map T has N coordinates and its normal equation Nc=sum_i y_i has a unique solution; an empty I would instead make every constant minimize the zero loss and is explicitly outside this theorem.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "Nonemptiness is essential to uniqueness, not a cosmetic sample convention: division by N and the strictly positive coefficient in the squared-error decomposition both rely on it."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: when every response is zero, the formula reduces to N c^2 and is uniquely minimized at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for N=1 the formula is (y_i-c)^2=(y_i-y_i)^2+(c-y_i)^2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: if all responses equal a, then the mean is a and the loss is N(a-c)^2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The constant c ranges over all of R; no constrained interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the given increasing sample-index order, and Step 2.1 gives an explicit mean; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a unique-minimizer formula, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a unique-minimizer formula, not an iff assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-cost-complexity-pruning": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every permitted subtree retains the root and has at least one terminal node, and inherited empirical-tree rules give positive sample counts at each leaf. Thus R(T) sums over a nonempty finite leaf set. If the tree has no internal node, there is simply no weakest-link quotient g(t) to define; it is restricted to nonterminal t.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The aggregate detector matches the leaf sum, which cannot be empty in a rooted finite empirical tree on n>=1 observations. An absent internal-node set does not create a zero-denominator quotient because g(t) is only defined for a current nonterminal node."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: substituting alpha=0 gives C_0(T)=R(T)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a tree with one leaf has |T|=1, so its cost is R(T)+alpha."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: for an internal node the descendant tree has at least two leaves, so the denominator |T_t|-1 is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the penalty domain includes the endpoint alpha=0 and requires alpha>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition specifies quantities and makes no selection among candidate nodes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The carrier is a definition, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The carrier is a definition, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-cart-greedy-split": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The input sample and every current leaf sample set are nonempty, but step 1 explicitly allows an empty candidate set when every coordinate has only one distinct observed value. Step 3 then leaves that node as a leaf; step 2's minimization is performed only when candidates exist. In particular a one-observation node stops without selecting a nonexistent split."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if candidate scores are all zero, the fixed coordinate/cut-index order resolves their tie."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a node with one distinct value in every coordinate has no candidate and remains a leaf."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated coordinate values are reduced to distinct sorted values before candidates are formed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: only midpoints between adjacent distinct values are candidates, so both children are nonempty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: a finite candidate list is minimized with a deterministic lexicographic tie order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The carrier is an algorithm definition, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The carrier is an algorithm definition, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-weakest-link-pruning": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is an empirical tree on a sample with n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if the input already has one root leaf, the initial tree is returned without a collapse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-leaf root is the stopping case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: tied quotient values are resolved by the fixed lexicographic node-address order."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: once the root leaf is reached, no further collapse is performed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: with multiple leaves the internal-node set is finite and ties use a fixed order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The carrier is an algorithm definition, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The carrier is an algorithm definition, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-cart-subtrees-same-fit-different-penalties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cost-complexity-pruning",
+          "source_section": "Definition",
+          "quote": "Let $T_0$ be a fixed finite binary tree grown on the sample from an empirical decision tree. A subtree $T\\subseteq T_0$ is obtained by collapsing zero or more internal nodes and all their descendants to leaves. For each leaf $m$ of $T$, let $N_m$ be its sample count and let $Q_m(T)$ be its regression squared-error impurity or its chosen classification impurity, computed as in the empirical decision-tree definition. Define the total training impurity $R(T)=\\sum_{m\\in\\mathrm{leaves}(T)}N_mQ_m(T)$, the terminal-node count $|T|$, and for $\\alpha\\ge0$ the cost-complexity criterion $C_\\alpha(T)=R(T)+\\alpha|T|$.\n\nFor a current nonterminal node $t$, let $I_t$ be its sample set and let $T_t$ be its current descendant subtree. Let $R(t)=N_tQ_t$ be the training impurity if $t$ is collapsed to a leaf, using the same response or class rule as for a leaf; let $R(T_t)$ be the sum of the impurities of the current descendant leaves. Define the weakest-link quotient $g(t)=[R(t)-R(T_t)]/(|T_t|-1)$. The denominator is the number of leaves removed by collapsing $t$. This definition makes no claim that a weakest-link sequence globally minimizes $C_\\alpha$ for every $\\alpha$ or that validation selection guarantees test-risk performance.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cost-complexity-pruning",
+          "source_section": "Definition",
+          "quote": "Let $T_0$ be a fixed finite binary tree grown on the sample from an empirical decision tree. A subtree $T\\subseteq T_0$ is obtained by collapsing zero or more internal nodes and all their descendants to leaves. For each leaf $m$ of $T$, let $N_m$ be its sample count and let $Q_m(T)$ be its regression squared-error impurity or its chosen classification impurity, computed as in the empirical decision-tree definition. Define the total training impurity $R(T)=\\sum_{m\\in\\mathrm{leaves}(T)}N_mQ_m(T)$, the terminal-node count $|T|$, and for $\\alpha\\ge0$ the cost-complexity criterion $C_\\alpha(T)=R(T)+\\alpha|T|$.\n\nFor a current nonterminal node $t$, let $I_t$ be its sample set and let $T_t$ be its current descendant subtree. Let $R(t)=N_tQ_t$ be the training impurity if $t$ is collapsed to a leaf, using the same response or class rule as for a leaf; let $R(T_t)$ be the sum of the impurities of the current descendant leaves. Define the weakest-link quotient $g(t)=[R(t)-R(T_t)]/(|T_t|-1)$. The denominator is the number of leaves removed by collapsing $t$. This definition makes no claim that a weakest-link sequence globally minimizes $C_\\alpha$ for every $\\alpha$ or that validation selection guarantees test-risk performance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-weakest-link-pruning",
+          "source_section": "Definition",
+          "quote": "The input is a fixed finite empirical decision tree $T_0$. Start with the current tree $T=T_0$ and output sequence $(T_0)$. At each iteration, if $T$ consists of its root leaf, stop and return the sequence. Otherwise, for every current nonterminal node $t$, compute $g(t)=[R(t)-R(T_t)]/(|T_t|-1)$ using the current subtree quantities from the cost-complexity definition. Select a node minimizing $g(t)$; if several tie, select the node whose root-to-node address is least in lexicographic order with $L<R$. Collapse the current descendant subtree at that node to a leaf, using the empirical tree's leaf prediction rule on its sample set, and append the resulting subtree to the output sequence. Repeat on that new current tree.\n\nThe sequence contains the initial tree and each successive collapse through the root leaf. This procedure makes no claim that its subtrees globally minimize the cost-complexity criterion for every penalty or that a validation choice of penalty guarantees test-risk performance.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equal-fit-trees",
+          "claim": "In $T_1$, the leaf on $\\{0,1\\}$ has mean $0$ and the leaf on $\\{2\\}$ has mean $1$, so both residual sums are $0$. Splitting the first leaf in $T_2$ gives singleton leaves with responses $0$ and $0$, so $T_2$ also has residual sum $0$ and has one additional leaf.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "leaf-penalty-costs",
+          "claim": "By [F2], $C_1(T_1)=0+1\\cdot2=2$ and $C_1(T_2)=0+1\\cdot3=3$. Thus the subtrees have equal fit and different leaf penalties.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-weakest-link",
+          "claim": "Collapsing the left branch of $T_2$ has loss $0$, equal to its descendant-leaf loss, and removes one leaf, so $g(t_L)=0$. Collapsing the root predicts the full-sample mean $1/3$ and has loss $(0-1/3)^2+(0-1/3)^2+(1-1/3)^2=2/3$; the current three leaves have loss $0$, so $g(\\mathrm{root})=(2/3-0)/(3-1)=1/3$. By [F4], the first collapse is therefore the left branch.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three observations and all displayed leaf sets are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: both subtrees have residual sum of squares zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the right leaf and the two new leaves of T2 are singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the redundant left split has g=0 while the root has g=1/3."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the two valid midpoint splits; every displayed child is nonempty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: the current candidate values satisfy 0<1/3, so the minimizing node is unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies numerical costs and one pruning step, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies numerical costs and one pruning step, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-cart-greedy-split-is-best-listed-split-and-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-node-mean-minimizes-squared-error",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a nonempty finite set of sample indices and let $y_i\\in\\mathbb R$ for every $i\\in I$. Put $N=|I|$ and $\\bar y_I=N^{-1}\\sum_{i\\in I}y_i$. Among all constants $c\\in\\mathbb R$, the unique minimizer of $\\sum_{i\\in I}(y_i-c)^2$ is $c=\\bar y_I$, and the minimum value is $\\sum_{i\\in I}(y_i-\\bar y_I)^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-cart-greedy-split",
+          "source_section": "Definition",
+          "quote": "The inputs are observations $(x_i,y_i)_{i=1}^n$ with $n\\ge1$ and $x_i\\in\\mathbb R^p$ for an integer $p\\ge1$, a response mode (regression with $y_i\\in\\mathbb R$ or classification with labels in a fixed finite ordered class set), a fixed classification impurity criterion when in classification mode, and a finite integer maximum depth $d_{\\max}\\ge0$. The root has sample set $\\{1,\\ldots,n\\}$ and depth $0$. At a current leaf with nonempty sample set $I$ and depth $d<d_{\\max}$, perform the following procedure.\n\n1. For each coordinate $j\\in\\{1,\\ldots,p\\}$, sort the distinct observed values in that coordinate as $u_1<\\cdots<u_r$. For each $k=1,\\ldots,r-1$, form the candidate threshold $t=(u_k+u_{k+1})/2$ and its child sets $I_L=\\{i\\in I:x_{ij}\\le t\\}$ and $I_R=\\{i\\in I:x_{ij}>t\\}$. These are the finite candidates at the node; if no coordinate has at least two distinct values, the candidate set is empty.\n\n2. For each candidate, compute its child score. In regression the score is $\\sum_{i\\in I_L}(y_i-\\bar y_{I_L})^2+\\sum_{i\\in I_R}(y_i-\\bar y_{I_R})^2$. In classification it is $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ for the fixed chosen impurity criterion. Select the candidate with the smallest score; when scores tie, select the least pair $(j,k)$ by comparing coordinate first and cut index second.\n\n3. Store the selected coordinate and threshold at the current node, create its left and right children, and apply this procedure to the left child and then the right child at depth $d+1$. If $d=d_{\\max}$ or the candidate set is empty, leave the current node as a leaf.\n\nThe output is the finite tree whose leaves use the regression means or classification majority labels from the empirical decision-tree definition. No strictly positive loss reduction is required for a split below the depth cap, and the returned tree is not asserted to be globally optimal among all trees.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "midpoint-candidate-coverage",
+          "claim": "At a node with finite nonempty sample set $I$, each coordinate has finitely many distinct observed values. Arrange them in increasing order $u_1<\\cdots<u_r$. For every $k<r$, the midpoint between $u_k$ and $u_{k+1}$ gives two nonempty children. Conversely, any real threshold with two nonempty children has a unique gap $u_k\\le s<u_{k+1}$ and induces the same partition as that midpoint. Thus the algorithm's candidate list is finite and contains every nonempty partition produced by one coordinate threshold.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-candidate-minimum",
+          "claim": "For each candidate the child score is a finite real sum. If the candidate list is nonempty, repeatedly comparing its finite list of scores produces a minimum, and the coordinate/cut-index order selects a unique first minimizer among ties. By [F2], the regression child means attain the least squared error on each child; by [F1], the classification score is the declared weighted impurity. The chosen candidate therefore minimizes the declared child loss over all such partitions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "bounded-recursion",
+          "claim": "Every recursive call increases depth by one, and calls at depth $d_{\\max}$ stop. Each split creates two disjoint nonempty sample sets from its parent, so every terminal leaf contains at least one of the $n$ sample indices. Each split increases the number of leaves by one; hence there are at most $n-1$ splits. The recursion terminates with depth at most $d_{\\max}$ and all created children nonempty.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n>=1 and considers only nonempty nodes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: if every candidate score is zero, the finite lexicographic tie rule still selects a minimum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: a node with no coordinate variation has no nonempty threshold partition and is not split."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 deduplicates repeated coordinate values before forming gaps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes thresholds with an empty child and covers every nonempty threshold partition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 obtains a minimum from a finite nonempty score list and uses a fixed tie order."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a finite minimization and termination result, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a finite minimization and termination result, not an iff claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-weakest-link-pruning-terminates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cost-complexity-pruning",
+          "source_section": "Definition",
+          "quote": "Let $T_0$ be a fixed finite binary tree grown on the sample from an empirical decision tree. A subtree $T\\subseteq T_0$ is obtained by collapsing zero or more internal nodes and all their descendants to leaves. For each leaf $m$ of $T$, let $N_m$ be its sample count and let $Q_m(T)$ be its regression squared-error impurity or its chosen classification impurity, computed as in the empirical decision-tree definition. Define the total training impurity $R(T)=\\sum_{m\\in\\mathrm{leaves}(T)}N_mQ_m(T)$, the terminal-node count $|T|$, and for $\\alpha\\ge0$ the cost-complexity criterion $C_\\alpha(T)=R(T)+\\alpha|T|$.\n\nFor a current nonterminal node $t$, let $I_t$ be its sample set and let $T_t$ be its current descendant subtree. Let $R(t)=N_tQ_t$ be the training impurity if $t$ is collapsed to a leaf, using the same response or class rule as for a leaf; let $R(T_t)$ be the sum of the impurities of the current descendant leaves. Define the weakest-link quotient $g(t)=[R(t)-R(T_t)]/(|T_t|-1)$. The denominator is the number of leaves removed by collapsing $t$. This definition makes no claim that a weakest-link sequence globally minimizes $C_\\alpha$ for every $\\alpha$ or that validation selection guarantees test-risk performance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-weakest-link-pruning",
+          "source_section": "Definition",
+          "quote": "The input is a fixed finite empirical decision tree $T_0$. Start with the current tree $T=T_0$ and output sequence $(T_0)$. At each iteration, if $T$ consists of its root leaf, stop and return the sequence. Otherwise, for every current nonterminal node $t$, compute $g(t)=[R(t)-R(T_t)]/(|T_t|-1)$ using the current subtree quantities from the cost-complexity definition. Select a node minimizing $g(t)$; if several tie, select the node whose root-to-node address is least in lexicographic order with $L<R$. Collapse the current descendant subtree at that node to a leaf, using the empirical tree's leaf prediction rule on its sample set, and append the resulting subtree to the output sequence. Repeat on that new current tree.\n\nThe sequence contains the initial tree and each successive collapse through the root leaf. This procedure makes no claim that its subtrees globally minimize the cost-complexity criterion for every penalty or that a validation choice of penalty guarantees test-risk performance.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weakest-link-quotients-defined",
+          "claim": "If the current tree has more than one leaf, its root is nonterminal. Every nonterminal node $t$ has two finite child subtrees. Starting at either child and following descendants must reach a leaf because the tree is finite, so $|T_t|\\ge2$ and every denominator in [F2] is positive. The tree has finitely many nonterminal nodes, and every loss in [F2] is a finite real number because the sample and chosen impurity formulas are finite. Hence the candidate quotients form a finite nonempty set of real numbers, which has a minimum by repeated pairwise comparison.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "leaf-count-decreases",
+          "claim": "By [F3], the algorithm selects a minimizing candidate, using its fixed tie rule. If that node has $k=|T_t|\\ge2$ descendant leaves, collapsing it replaces those $k$ leaves by one, reducing the current leaf count by $k-1\\ge1$. The resulting tree is still a finite subtree of $T_0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "root-termination",
+          "claim": "Starting from $L_0$ leaves, each collapse strictly decreases the positive integer leaf count, so there are at most $L_0-1$ collapses. If more than one leaf remains, the root is nonterminal and is among the available candidates by step 1.1; therefore the algorithm cannot stop early. A nonterminal root has at least two descendant leaves by step 1.1, so a tree with one leaf is the root leaf.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite empirical tree with at least one sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: a one-leaf input terminates immediately with zero collapses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers L0=1 and gives the zero-collapse bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: ties use a fixed path order, and every selected collapse still reduces leaves."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: the root leaf is the terminal state."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: whenever L>1 the finite nonempty candidate set has a minimum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is termination, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is termination, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-cart-one-dimensional-threshold-tree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-cart-greedy-split",
+          "source_section": "Definition",
+          "quote": "The inputs are observations $(x_i,y_i)_{i=1}^n$ with $n\\ge1$ and $x_i\\in\\mathbb R^p$ for an integer $p\\ge1$, a response mode (regression with $y_i\\in\\mathbb R$ or classification with labels in a fixed finite ordered class set), a fixed classification impurity criterion when in classification mode, and a finite integer maximum depth $d_{\\max}\\ge0$. The root has sample set $\\{1,\\ldots,n\\}$ and depth $0$. At a current leaf with nonempty sample set $I$ and depth $d<d_{\\max}$, perform the following procedure.\n\n1. For each coordinate $j\\in\\{1,\\ldots,p\\}$, sort the distinct observed values in that coordinate as $u_1<\\cdots<u_r$. For each $k=1,\\ldots,r-1$, form the candidate threshold $t=(u_k+u_{k+1})/2$ and its child sets $I_L=\\{i\\in I:x_{ij}\\le t\\}$ and $I_R=\\{i\\in I:x_{ij}>t\\}$. These are the finite candidates at the node; if no coordinate has at least two distinct values, the candidate set is empty.\n\n2. For each candidate, compute its child score. In regression the score is $\\sum_{i\\in I_L}(y_i-\\bar y_{I_L})^2+\\sum_{i\\in I_R}(y_i-\\bar y_{I_R})^2$. In classification it is $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ for the fixed chosen impurity criterion. Select the candidate with the smallest score; when scores tie, select the least pair $(j,k)$ by comparing coordinate first and cut index second.\n\n3. Store the selected coordinate and threshold at the current node, create its left and right children, and apply this procedure to the left child and then the right child at depth $d+1$. If $d=d_{\\max}$ or the candidate set is empty, leave the current node as a leaf.\n\nThe output is the finite tree whose leaves use the regression means or classification majority labels from the empirical decision-tree definition. No strictly positive loss reduction is required for a split below the depth cap, and the returned tree is not asserted to be globally optimal among all trees.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+          "source_section": "Statement",
+          "quote": "Fix a finite labeled sample, response mode, classification impurity criterion when needed, and finite maximum depth as in greedy CART growth. At any node where the procedure splits, its selected coordinate and midpoint threshold minimize the declared child-weighted empirical loss among all nonempty coordinate-threshold partitions of that node's sample, with the specified lexicographic tie rule. The procedure produces a finite tree of depth at most the maximum depth, with nonempty children at every split. This is a nodewise candidate-optimality result only; it gives no global tree-optimality claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "threshold-candidate-scores",
+          "claim": "The four distinct coordinate values are $0<1<2<3$, so the midpoint candidates are exactly $0.5$, $1.5$, and $2.5$. At $0.5$, the right child has responses $0,1,1$, mean $2/3$, and residual sum $2/3$. At $1.5$, both children have constant responses, so the score is $0$. At $2.5$, the left child has responses $0,0,1$, mean $1/3$, and residual sum $2/3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-greedy-split",
+          "claim": "The middle threshold is therefore the unique minimum-scoring candidate. By [F3], it is the best listed split and the procedure chooses it. Its two leaves have means $0$ and $1$, as displayed.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "depth-stop",
+          "claim": "The root split has depth $1=d_{\\max}$, so the procedure stops there and returns the stated two-leaf tree. The diagram merely records the split and leaf predictions; the previously computed scores and the depth cap establish the output independently of the diagram.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observations and every displayed sample set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the middle candidate has score zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the first and last candidates create singleton children."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the two endpoint scores tie at 2/3, while the middle score is uniquely lower."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the first and last valid midpoint thresholds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the finite candidate list has a unique minimum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a numerical split calculation, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a numerical split calculation, not an iff theorem."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

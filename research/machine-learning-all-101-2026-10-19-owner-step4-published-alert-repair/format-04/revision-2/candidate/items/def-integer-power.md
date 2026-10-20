@@ -1,0 +1,122 @@
+---
+id: def-integer-power
+kind: definition
+title: "Integer powers $a^m$"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-of-zero-mult, thm-int-ordered-ring]
+justified_by: [lem-power-laws]
+forward_refs: [def-real-power]
+aliases: [def-power]
+landmark: false
+verification:
+  precheck: n/a
+  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/receipts/def-integer-power.json
+sources:
+  scraped: []
+  references:
+    - title: "J. Aspnes, Summation Notation"
+      url: "https://www.cs.yale.edu/homes/aspnes/pinewiki/SummationNotation.html"
+    - title: "M. Fochler, Recursive sums, products, and powers"
+      url: "https://people.math.binghamton.edu/mfochler/bu-mfx/bu-math-arv/math-330-arv/math-330-2019-08/html/lec-notes/bu-ln-330-m330-solns-2019-12-03.pdf"
+    - title: "Exponentiation (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Exponentiation"
+    - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1"
+      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+    - title: "T. Tao, Analysis I, 3rd ed., §4.3"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+pipeline_run: null
+---
+
+## Definition
+
+Let $a \in \mathbb{R}$, where $\mathbb{R}$ is the ambient ordered field
+(Ordered field, Field).
+
+**Natural exponents.** By the recursion theorem (The recursion theorem) applied to
+the set $\mathbb{R}$, the starting element $1$ and the function
+$f(x) = x \cdot a$, there is a unique function $\mathbb{N} \to \mathbb{R}$,
+written $n \mapsto a^n$, with
+
+$$a^0 = 1, \qquad a^{n+1} = a^n \cdot a \quad (n \in \mathbb{N}).$$
+
+Thus $a^1 = a$, $a^2 = a \cdot a$, and so on. Note that this is defined for
+**every** $a$, including $a = 0$.
+
+**Negative exponents.** If $a \ne 0$ and $n \in \mathbb{N}$ with $n \ge 1$, set
+
+$$a^{-n} := (a^n)^{-1}.$$
+
+**Why that is legitimate.** The right-hand side presupposes that $a^n$ is
+invertible, that is, that $a^n \ne 0$. This is a proof obligation and not an
+observation, and it is discharged by claim 2 of Laws of integer exponents: for $a \ne 0$
+in a field, $a^n \ne 0$ for every $n \in \mathbb{N}$, proved there by induction on
+$n$ from the fact that a field has no zero divisors (A field has no zero divisors: $ab = 0 \Rightarrow a = 0$ or $b = 0$).
+That lemma is a statement *about* the operation introduced here, so it depends on
+this definition and is recorded in this item's `justified_by` rather than in its
+`deps` (SCHEMA §3). Given $a^n \ne 0$, the value $(a^n)^{-1}$ is a single
+well-determined element, because multiplicative inverses in a field are unique
+(Identities and inverses in a field are unique).
+
+**Integer exponents.** Every integer $m$ (The integers as equivalence classes of pairs of naturals) is either
+$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the
+embedding $\iota : \mathbb{N} \to \mathbb{Z}$ (The naturals embed in the integers,
+Arithmetic on the integers). This too is a citation and not a slogan: the order on
+$\mathbb{Z}$ is total (The integers form a totally ordered ring), so $m \ge 0$ or $m < 0$; the
+image of $\iota$ is exactly the set of nonnegative integers, and each of them is
+$n$ for a unique natural $n$ (The naturals embed in the integers); and if $m < 0$ then
+$-m > 0$, by compatibility of the order with addition (The integers form a totally ordered ring),
+so $-m = n$ and $m = -n$, with $n$ unique because $\iota$ is
+injective. The two clauses above therefore define $a^m$ for every
+$m \in \mathbb{Z}$ whenever $a \ne 0$, and for every $m \in \mathbb{N}$ for
+arbitrary $a$. The two exponent domains are disjoint: the natural clause
+handles $m \ge 0$, including $m = 0$, while the negative clause requires
+$n \ge 1$ and therefore handles only $m < 0$.
+
+## Definition references
+
+[[def-ordered-field]]
+
+[[def-field]]
+
+[[thm-recursion]]
+
+[[lem-power-laws]]
+
+[[lem-of-no-zero-divisors]]
+
+[[lem-of-inverse-unique]]
+
+[[def-integers]]
+
+[[lem-nat-embeds-int]]
+
+[[def-int-operations]]
+
+[[thm-int-ordered-ring]]
+
+## Remarks
+
+- **The convention $0^0 = 1$ is adopted here**, and it is not a matter of taste
+  but of agreement with the recursion above: $a^0 = 1$ is the starting value for
+  every $a$, exactly as the empty product is $1$ ([[def-finite-sum]]). This is
+  the convention that makes the empty product, the binomial theorem, and
+  polynomial notation $\sum_k c_k x^k$ work at $x = 0$ without an exception. The
+  competing convention "$0^0$ undefined" belongs to contexts where $x^y$ is
+  studied as a function of two *real* variables and one wants continuity, which
+  is unavailable and irrelevant here: the exponent in $a^m$ is an integer, never
+  a real.
+- $0^n = 0$ for every $n \ge 1$, since $0^{n} = 0^{n-1} \cdot 0 = 0$, a product
+  with a zero factor ([[lem-of-zero-mult]]); and
+  $0^{-n}$ is not defined for $n \ge 1$, since $0$ has no inverse.
+- The exponent is an integer and stays an integer. Rational exponents are a
+  separate construction resting on the existence of roots
+  ([[thm-nth-roots-exist]], [[def-rational-power]]), and real exponents are not
+  available at this point in the reading order; they are introduced later in
+  [[def-real-power]] (see [[rem-real-exponents-deferred]]).
+- The laws $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$ are
+  proved, not assumed, in [[lem-power-laws]]; the order behaviour of $a \mapsto a^n$
+  is [[lem-power-monotone]].

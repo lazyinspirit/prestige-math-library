@@ -1,0 +1,553 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "proposal_only": true,
+  "module": {
+    "candidate": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/finite-smoke-optimization-ml.mjs",
+    "target": "tools/finite-smoke-optimization-ml.mjs",
+    "create_only": true,
+    "export": "optimizationMLChecks",
+    "review_revision": 2,
+    "reviewed_bytes_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/reviewed-module-current.mjs",
+    "revision_1_before": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/revision-1.module-before.mjs"
+  },
+  "contract_array_operations": [
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-39.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-smooth-bounded-below-gd-stationarity",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "horizon T=1",
+          "calculation": "Step 1.2 gives (alpha/2)||grad F(w_0)||_2^2 <= F(w_0)-F(w_1), and the pathwise lower bound gives F(w_1)>=F_lower.",
+          "result": "||grad F(w_0)||_2^2 <= 2(F(w_0)-F_lower)/alpha, the stated finite-horizon minimum bound at T=1.",
+          "checked_in": "Steps 1.2, 2.1, and 4.1"
+        }
+      ],
+      "after": [
+        {
+          "case": "horizon T=1",
+          "calculation": "Step 1.2 gives (alpha/2)||grad F(w_0)||_2^2 <= F(w_0)-F(w_1), and the pathwise lower bound gives F(w_1)>=F_lower.",
+          "result": "||grad F(w_0)||_2^2 <= 2(F(w_0)-F_lower)/alpha, the stated finite-horizon minimum bound at T=1.",
+          "checked_in": "Steps 1.2, 2.1, and 4.1",
+          "check": "ml101-gd-one-step-lower-bound",
+          "asserts": "- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$.",
+          "selectors": {
+            "fixture": "quadratic-t1",
+            "horizon": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/thm-smooth-bounded-below-gd-stationarity.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/thm-smooth-bounded-below-gd-stationarity.md",
+        "exact_assertion": "- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-39.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-nonconvex-cosine-gradient-descent-has-distinct-basins",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "stationary interval endpoints",
+          "calculation": "sin(0)=sin(2pi)=0 and F(0)=F(2pi)=0; the update x -> x-sin(x) fixes both endpoints.",
+          "result": "The open-interval basin claims exclude these fixed boundary starts, as stated.",
+          "checked_in": "Facts F3 and F8; Verification steps 1.1, 1.2, and 2.1"
+        }
+      ],
+      "after": [
+        {
+          "case": "stationary interval endpoints",
+          "calculation": "sin(0)=sin(2pi)=0 and F(0)=F(2pi)=0; the update x -> x-sin(x) fixes both endpoints.",
+          "result": "The open-interval basin claims exclude these fixed boundary starts, as stated.",
+          "checked_in": "Facts F3 and F8; Verification steps 1.1, 1.2, and 2.1",
+          "check": "ml101-gd-cosine-fixed-endpoints",
+          "asserts": "[F3, F8] give $F(0)=F(2\\pi)=0$.",
+          "selectors": {
+            "fixture": "cosine-boundaries",
+            "horizon": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-nonconvex-cosine-gradient-descent-has-distinct-basins.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-nonconvex-cosine-gradient-descent-has-distinct-basins.md",
+        "exact_assertion": "[F3, F8] give $F(0)=F(2\\pi)=0$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-39.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-nonconvex-gd-path-lower-bound-with-unbounded-objective",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "first two iterates",
+          "calculation": "From (1,0), grad F=(2,0), so w_1=(1/2,0) and F(w_1)=1/4; then grad F(w_1)=(1,0), so w_2=(1/4,0) and F(w_2)=1/16.",
+          "result": "The first two updates agree with w_t=(2^{-t},0) and F(w_t)=4^{-t}.",
+          "checked_in": "Verification steps 1.1 and 2.1"
+        }
+      ],
+      "after": [
+        {
+          "case": "first two iterates",
+          "calculation": "From (1,0), grad F=(2,0), so w_1=(1/2,0) and F(w_1)=1/4; then grad F(w_1)=(1,0), so w_2=(1/4,0) and F(w_2)=1/16.",
+          "result": "The first two updates agree with w_t=(2^{-t},0) and F(w_t)=4^{-t}.",
+          "checked_in": "Verification steps 1.1 and 2.1",
+          "check": "ml101-gd-saddle-first-two-iterates",
+          "asserts": "The iterates are $w_t=(2^{-t},0)$, so $F(w_t)=4^{-t}\\ge0$",
+          "selectors": {
+            "fixture": "saddle-trajectory",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-nonconvex-gd-path-lower-bound-with-unbounded-objective.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-nonconvex-gd-path-lower-bound-with-unbounded-objective.md",
+        "exact_assertion": "The iterates are $w_t=(2^{-t},0)$, so $F(w_t)=4^{-t}\\ge0$"
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-sgd-trajectory-integrability",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "scalar-two-step-integrability",
+          "asserts": "For d=1, f(x)=x^2/2, x_0=1, G_0=2, G_1=3, \u03b1_0=1/2, and \u03b1_1=1/3, the iterates are x_1=0 and x_2=-1; each iterate, gradient, and objective has a finite second moment or absolute expectation.",
+          "claim": "The explicit finite deterministic trajectory confirms the recurrence indices and the moment conclusion at the initial, interior, and terminal iterates.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "horizon": 2
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-scalar-two-step-integrability",
+          "asserts": "Then every $x_k$ and $\\nabla f(x_k)$ for $0\\le k\\le N$ has finite second moment, and every $f(x_k)$ has finite absolute expectation.",
+          "claim": "The explicit finite deterministic trajectory confirms the recurrence indices and the moment conclusion at the initial, interior, and terminal iterates.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "horizon": 2,
+          "original_check": "scalar-two-step-integrability",
+          "original_asserts": "For d=1, f(x)=x^2/2, x_0=1, G_0=2, G_1=3, \u03b1_0=1/2, and \u03b1_1=1/3, the iterates are x_1=0 and x_2=-1; each iterate, gradient, and objective has a finite second moment or absolute expectation.",
+          "selectors": {
+            "fixture": "deterministic-trajectory",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/lem-sgd-trajectory-integrability.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/lem-sgd-trajectory-integrability.md",
+        "exact_assertion": "Then every $x_k$ and $\\nabla f(x_k)$ for $0\\le k\\le N$ has finite second moment, and every $f(x_k)$ has finite absolute expectation."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-independent-finite-random-index-extension",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "two-point-weighted-expectation",
+          "asserts": "Take \u03a9={a,b}, P(a)=1/4, P(b)=3/4, p_1=1/3, p_2=2/3, H_1(a,b)=(2,4), and H_2(a,b)=(0,6). Then E[H_1]=7/2, E[H_2]=9/2, and E[H_R]=(1/3)(7/2)+(2/3)(9/2)=25/6.",
+          "claim": "The finite extension assigns mass p_kP({\u03c9}) to slice (\u03c9,k), giving the weighted expectation formula directly.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, 4.1, and 5.1",
+          "indices": 2
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-two-point-weighted-expectation",
+          "asserts": "the lifted random variable $H_R(\\omega,k)=H_k(\\omega)$ is integrable on the extension and satisfies $\\mathbb E[H_R]=\\sum_{k=1}^N p_k\\mathbb E[H_k]$.",
+          "claim": "The finite extension assigns mass p_kP({\u03c9}) to slice (\u03c9,k), giving the weighted expectation formula directly.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, 4.1, and 5.1",
+          "indices": 2,
+          "original_check": "two-point-weighted-expectation",
+          "original_asserts": "Take \u03a9={a,b}, P(a)=1/4, P(b)=3/4, p_1=1/3, p_2=2/3, H_1(a,b)=(2,4), and H_2(a,b)=(0,6). Then E[H_1]=7/2, E[H_2]=9/2, and E[H_R]=(1/3)(7/2)+(2/3)(9/2)=25/6.",
+          "selectors": {
+            "fixture": "finite-product-law",
+            "indices": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/lem-independent-finite-random-index-extension.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/lem-independent-finite-random-index-extension.md",
+        "exact_assertion": "the lifted random variable $H_R(\\omega,k)=H_k(\\omega)$ is integrable on the extension and satisfies $\\mathbb E[H_R]=\\sum_{k=1}^N p_k\\mathbb E[H_k]$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-stochastic-direction-expected-average-stationarity",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "one-step-smoothness-descent-equality",
+          "asserts": "For f(x)=x^2/2, x_1=1, G_1=1, L=1, \u03b1=1/2, and zero conditional variance, f(x_2)=1/8=f(x_1)-\u03b1|\u2207f(x_1)|^2+(L\u03b1^2/2)|G_1|^2.",
+          "claim": "The deterministic quadratic attains the smoothness descent inequality used in step 1.2 and checks its constants.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "iterations": 1
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-one-step-smoothness-equality",
+          "asserts": "$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+(L/2)\\|y-x\\|_2^2$.",
+          "claim": "The deterministic quadratic attains the smoothness descent inequality used in step 1.2 and checks its constants.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "iterations": 1,
+          "original_check": "one-step-smoothness-descent-equality",
+          "original_asserts": "For f(x)=x^2/2, x_1=1, G_1=1, L=1, \u03b1=1/2, and zero conditional variance, f(x_2)=1/8=f(x_1)-\u03b1|\u2207f(x_1)|^2+(L\u03b1^2/2)|G_1|^2.",
+          "selectors": {
+            "fixture": "quadratic-descent",
+            "iterations": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/thm-stochastic-direction-expected-average-stationarity.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/thm-stochastic-direction-expected-average-stationarity.md",
+        "exact_assertion": "$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+(L/2)\\|y-x\\|_2^2$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "single-iterate-weighted-bound-equality",
+          "asserts": "For f(x)=x^2/2, x_1=1, L=1, N=1, \u03b3_1=1, G_1=1, \u03c3=0, and f*=0, one has a_1=S_1=1, D_f^2=1, and (1/L)E|\u2207f(x_R)|^2=1=(D_f^2+\u03c3^2\u03b3_1^2)/S_1.",
+          "claim": "The one-step deterministic quadratic reaches equality in the main weighted bound and confirms the D_f normalization.",
+          "checked_in": "Statement and steps 2.1, 3.1, 4.1, and 5.1",
+          "iterations": 1
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-single-iterate-weighted-equality",
+          "asserts": "$$\\frac1L\\mathbb E\\|\\nabla f(x_R)\\|_2^2\\le\\frac{D_f^2+\\sigma^2\\sum_{k=1}^N\\gamma_k^2}{\\sum_{k=1}^N(2\\gamma_k-L\\gamma_k^2)}.$$",
+          "claim": "The one-step deterministic quadratic reaches equality in the main weighted bound and confirms the D_f normalization.",
+          "checked_in": "Statement and steps 2.1, 3.1, 4.1, and 5.1",
+          "iterations": 1,
+          "original_check": "single-iterate-weighted-bound-equality",
+          "original_asserts": "For f(x)=x^2/2, x_1=1, L=1, N=1, \u03b3_1=1, G_1=1, \u03c3=0, and f*=0, one has a_1=S_1=1, D_f^2=1, and (1/L)E|\u2207f(x_R)|^2=1=(D_f^2+\u03c3^2\u03b3_1^2)/S_1.",
+          "selectors": {
+            "fixture": "weighted-one-index",
+            "iterations": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/thm-nonconvex-sgd-random-iterate-stationarity.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/thm-nonconvex-sgd-random-iterate-stationarity.md",
+        "exact_assertion": "$$\\frac1L\\mathbb E\\|\\nabla f(x_R)\\|_2^2\\le\\frac{D_f^2+\\sigma^2\\sum_{k=1}^N\\gamma_k^2}{\\sum_{k=1}^N(2\\gamma_k-L\\gamma_k^2)}.$$"
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-constant-step-sgd-noise-floor",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "two-step-sign-cube-moment",
+          "asserts": "With \u03b1=1/4, b=0, \u03c3=1, x_0=0, and N=2, q=3/4; the formula gives E[x_1^2]=1/16, E[x_2^2]=25/256, and limiting floor 1/7.",
+          "claim": "Enumerating the two sign coordinates gives the displayed recurrence moments and a positive unbiased noise floor.",
+          "checked_in": "Example and steps 1.1, 1.2, 2.1, and 3.1",
+          "horizon": 2
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-two-step-sign-cube-moment",
+          "asserts": "$$\\mathbb E[x_t^2]=\\bigl(q^t x_0-b(1-q^t)\\bigr)^2+\\frac{\\alpha\\sigma^2}{2-\\alpha}(1-q^{2t}),$$",
+          "claim": "Enumerating the two sign coordinates gives the displayed recurrence moments and a positive unbiased noise floor.",
+          "checked_in": "Example and steps 1.1, 1.2, 2.1, and 3.1",
+          "horizon": 2,
+          "original_check": "two-step-sign-cube-moment",
+          "original_asserts": "With \u03b1=1/4, b=0, \u03c3=1, x_0=0, and N=2, q=3/4; the formula gives E[x_1^2]=1/16, E[x_2^2]=25/256, and limiting floor 1/7.",
+          "selectors": {
+            "fixture": "noise-sign-cube",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-constant-step-sgd-noise-floor.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-constant-step-sgd-noise-floor.md",
+        "exact_assertion": "$$\\mathbb E[x_t^2]=\\bigl(q^t x_0-b(1-q^t)\\bigr)^2+\\frac{\\alpha\\sigma^2}{2-\\alpha}(1-q^{2t}),$$"
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-empirical-risk-sgd-oracle-is-unbiased",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "two-observation-minibatch",
+          "asserts": "For S=((*,0),(*,2)), \u03b8_1=2, and batch size b=2, one has y-bar=1, v_S=1, conditional direction mean 1, and variance 1/2. With T=1 and \u03b1=1, the objective gap is 1/2, so the theorem bound is 1/2+1=3/2 while the gradient square is 1.",
+          "claim": "Enumerating the four ordered index pairs gives direction values 2,1,1,0, mean 1, and variance 1/2, confirming the with-replacement variance and substituted bound.",
+          "checked_in": "Example and steps 1.1, 1.2, and 2.1",
+          "sample_size": 2,
+          "batch_size": 2
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-two-observation-minibatch",
+          "asserts": "this minibatch direction has conditional mean $\\theta_t-\\bar y=\\frac{d}{d\\theta}\\widehat R_S(h_{\\theta_t})$ and conditional variance $v_S/b$.",
+          "claim": "Enumerating the four ordered index pairs gives direction values 2,1,1,0, mean 1, and variance 1/2, confirming the with-replacement variance and substituted bound.",
+          "checked_in": "Example and steps 1.1, 1.2, and 2.1",
+          "sample_size": 2,
+          "batch_size": 2,
+          "original_check": "two-observation-minibatch",
+          "original_asserts": "For S=((*,0),(*,2)), \u03b8_1=2, and batch size b=2, one has y-bar=1, v_S=1, conditional direction mean 1, and variance 1/2. With T=1 and \u03b1=1, the objective gap is 1/2, so the theorem bound is 1/2+1=3/2 while the gradient square is 1.",
+          "selectors": {
+            "fixture": "ordered-with-replacement",
+            "sample_size": 2,
+            "batch_size": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-empirical-risk-sgd-oracle-is-unbiased.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-empirical-risk-sgd-oracle-is-unbiased.md",
+        "exact_assertion": "this minibatch direction has conditional mean $\\theta_t-\\bar y=\\frac{d}{d\\theta}\\widehat R_S(h_{\\theta_t})$ and conditional variance $v_S/b$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-sgd-biased-direction-violates-alignment",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "check": "one-step-negative-alignment",
+          "asserts": "For x_0=1 and \u03b1=1/2, the update gives x_1=3/2, f(x_1)=9/8>1/2=f(x_0), and \u2207f(x_0)G_0=1(-1)=-1<0 while |G_0|=|\u2207f(x_0)|=1.",
+          "claim": "The first deterministic step verifies objective increase and failure of every positive alignment constant.",
+          "checked_in": "Example and steps 1.1, 2.1, and 3.1",
+          "iterations": 1
+        }
+      ],
+      "after": [
+        {
+          "check": "ml101-sgd-one-step-negative-alignment",
+          "asserts": "$x_{t+1}=(1+\\alpha)x_t$, so $f(x_1)=(1+\\alpha)^2f(x_0)>f(x_0)$.",
+          "claim": "The first deterministic step verifies objective increase and failure of every positive alignment constant.",
+          "checked_in": "Example and steps 1.1, 2.1, and 3.1",
+          "iterations": 1,
+          "original_check": "one-step-negative-alignment",
+          "original_asserts": "For x_0=1 and \u03b1=1/2, the update gives x_1=3/2, f(x_1)=9/8>1/2=f(x_0), and \u2207f(x_0)G_0=1(-1)=-1<0 while |G_0|=|\u2207f(x_0)|=1.",
+          "selectors": {
+            "fixture": "reversed-gradient",
+            "iterations": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-sgd-biased-direction-violates-alignment.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-sgd-biased-direction-violates-alignment.md",
+        "exact_assertion": "$x_{t+1}=(1+\\alpha)x_t$, so $f(x_1)=(1+\\alpha)^2f(x_0)>f(x_0)$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-42.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-rmsprop",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "rho=0, epsilon=1, eta=1, x1=0, g1=2",
+          "result": "r1=4 and x2=-2/3, since sqrt(r1)+epsilon=3."
+        }
+      ],
+      "after": [
+        {
+          "case": "rho=0, epsilon=1, eta=1, x1=0, g1=2",
+          "result": "r1=4 and x2=-2/3, since sqrt(r1)+epsilon=3.",
+          "check": "ml101-rmsprop-outside-root-epsilon",
+          "asserts": "$$x_{t+1,i}=x_{t,i}-\\eta_t\\frac{g_{t,i}}{\\sqrt{r_{t,i}}+\\epsilon}\\qquad(1\\le i\\le d).$$",
+          "selectors": {
+            "fixture": "rmsprop-round-one",
+            "horizon": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/alg-rmsprop.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/alg-rmsprop.md",
+        "exact_assertion": "$$x_{t+1,i}=x_{t,i}-\\eta_t\\frac{g_{t,i}}{\\sqrt{r_{t,i}}+\\epsilon}\\qquad(1\\le i\\le d).$$"
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-42.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-adam",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "T=1, beta1=0, beta2=1/2, epsilon=1, alpha=1, x1=0, g1=1",
+          "result": "m1=1, v1=1/2, denominator sqrt(3/2), and clipped x2=-sqrt(2/3) lies in [-1,1]."
+        }
+      ],
+      "after": [
+        {
+          "case": "T=1, beta1=0, beta2=1/2, epsilon=1, alpha=1, x1=0, g1=1",
+          "result": "m1=1, v1=1/2, denominator sqrt(3/2), and clipped x2=-sqrt(2/3) lies in [-1,1].",
+          "check": "ml101-adam-inside-root-epsilon",
+          "asserts": "Set $\\alpha_t=\\alpha/\\sqrt t$, compute $y_{t+1}=x_t-\\alpha_t m_t/\\sqrt{v_t+\\epsilon}$, and set $x_{t+1}=\\max(-1,\\min(1,y_{t+1}))$.",
+          "selectors": {
+            "fixture": "uncorrected-adam-round-one",
+            "horizon": 1
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/alg-adam.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/alg-adam.md",
+        "exact_assertion": "Set $\\alpha_t=\\alpha/\\sqrt t$, compute $y_{t+1}=x_t-\\alpha_t m_t/\\sqrt{v_t+\\epsilon}$, and set $x_{t+1}=\\max(-1,\\min(1,y_{t+1}))$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-42.proof-contracts.json",
+      "path": [
+        "contracts",
+        "alg-amsgrad",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "one coordinate, beta2=1/2, gradients 2 then 0",
+          "result": "v1=2, v2=1, and the historical maximum is 2 at both rounds."
+        }
+      ],
+      "after": [
+        {
+          "case": "one coordinate, beta2=1/2, gradients 2 then 0",
+          "result": "v1=2, v2=1, and the historical maximum is 2 at both rounds.",
+          "check": "ml101-amsgrad-raw-moment-maximum",
+          "asserts": "$$\\widehat v_{t,i}=\\max\\{\\widehat v_{t-1,i},v_{t,i}\\}.$$",
+          "selectors": {
+            "fixture": "amsgrad-raw-max",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/alg-amsgrad.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/alg-amsgrad.md",
+        "exact_assertion": "$$\\widehat v_{t,i}=\\max\\{\\widehat v_{t-1,i},v_{t,i}\\}.$$"
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-42.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-amsgrad-historical-maximum",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "the stated two-round sequence",
+          "result": "the recurrence gives v1=2, v2=1, and vhat1=vhat2=2."
+        }
+      ],
+      "after": [
+        {
+          "case": "the stated two-round sequence",
+          "result": "the recurrence gives v1=2, v2=1, and vhat1=vhat2=2.",
+          "check": "ml101-amsgrad-example-historical-maximum",
+          "asserts": "The raw second moment decreases from $v_1=2$ to $v_2=1$, while the historical maximum remains $\\widehat v_1=\\widehat v_2=2$.",
+          "selectors": {
+            "fixture": "amsgrad-two-linear-losses",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-amsgrad-historical-maximum.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-amsgrad-historical-maximum.md",
+        "exact_assertion": "The raw second moment decreases from $v_1=2$ to $v_2=1$, while the historical maximum remains $\\widehat v_1=\\widehat v_2=2$."
+      }
+    },
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-42.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-amsgrad-constant-beta-outside-decaying-schedule",
+        "finite_smoke"
+      ],
+      "before": [
+        {
+          "case": "T=2",
+          "result": "v1=1/2 and v2=3/4; the theorem correction term is positive and the proved lower bound 4T^(3/2)/9 applies."
+        }
+      ],
+      "after": [
+        {
+          "case": "T=2",
+          "result": "v1=1/2 and v2=3/4; the theorem correction term is positive and the proved lower bound 4T^(3/2)/9 applies.",
+          "check": "ml101-amsgrad-constant-beta-correction",
+          "asserts": "the second, first-moment correction term in its displayed bound is at least $4T^{3/2}/9$ for $T\\ge2$.",
+          "selectors": {
+            "fixture": "constant-beta-bound-term",
+            "horizon": 2
+          }
+        }
+      ],
+      "source_guard": {
+        "target": "items/ex-amsgrad-constant-beta-outside-decaying-schedule.md",
+        "before_path": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/items/ex-amsgrad-constant-beta-outside-decaying-schedule.md",
+        "exact_assertion": "the second, first-moment correction term in its displayed bound is at least $4T^{3/2}/9$ for $T\\ge2$."
+      }
+    }
+  ],
+  "registry_registration_operations": [
+    {
+      "before": "import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';",
+      "after": "import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';\nimport { optimizationMLChecks } from './finite-smoke-optimization-ml.mjs';"
+    },
+    {
+      "before": "  ...frontier81TLCherednikChecks,",
+      "after": "  ...frontier81TLCherednikChecks,\n  ...optimizationMLChecks,"
+    }
+  ],
+  "registry_target": "tools/finite-smoke.mjs",
+  "registry_before": "research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal/before/finite-smoke.mjs",
+  "source_changes": 0,
+  "hashing": false,
+  "gates": false
+}

@@ -1,0 +1,251 @@
+PDF PAGE 3
+On the importance of initialization and momentum in deep learning
+certain situations. In particular, for general smooth
+(non-strongly) convex functions and a deterministic
+gradient, NAG achieves a global convergence rate of
+O(1/T 2) (versus the O(1/T) of gradient descent), with
+constant proportional to the Lipschitz coeﬃcient of the
+derivative and the squared Euclidean distance to the
+solution. While NAG is not typically thought of as a
+type of momentum, it indeed turns out to be closely re-
+lated to classical momentum, di↵ering only in the pre-
+cise update of the velocity vector v, the signiﬁcance of
+which we will discuss in the next sub-section. Speciﬁ-
+cally, as shown in the appendix, the NAG update may
+be rewritten as:
+vt+1
+=
+µvt −"rf(✓t + µvt)
+(3)
+✓t+1
+=
+✓t + vt+1
+(4)
+While the classical convergence theories for both meth-
+ods rely on noiseless gradient estimates (i.e., not
+stochastic), with some care in practice they are both
+applicable to the stochastic setting. However, the the-
+ory predicts that any advantages in terms of asymp-
+totic local rate of convergence will be lost (Orr, 1996;
+Wiegerinck et al., 1999), a result also conﬁrmed in ex-
+periments (LeCun et al., 1998).
+For these reasons,
+interest in momentum methods diminished after they
+had received substantial attention in the 90’s. And be-
+cause of this apparent incompatibility with stochastic
+optimization, some authors even discourage using mo-
+mentum or downplay its potential advantages (LeCun
+et al., 1998).
+However, while local convergence is all that matters
+in terms of asymptotic convergence rates (and on cer-
+tain very simple/shallow neural network optimization
+problems it may even dominate the total learning
+time), in practice, the “transient phase” of convergence
+(Darken & Moody, 1993), which occurs before ﬁne lo-
+cal convergence sets in, seems to matter a lot more
+for optimizing deep neural networks. In this transient
+phase of learning, directions of reduction in the ob-
+jective tend to persist across many successive gradient
+estimates and are not completely swamped by noise.
+Although the transient phase of learning is most no-
+ticeable in training deep learning models, it is still no-
+ticeable in convex objectives.
+The convergence rate
+of stochastic gradient descent on smooth convex func-
+tions is given by O(L/T + σ/
+p
+T), where σ is the
+variance in the gradient estimate and L is the Lip-
+shits coeﬃcient of rf. In contrast, the convergence
+rate of an accelerated gradient method of Lan (2010)
+(which is related to but di↵erent from NAG, in that
+it combines Nesterov style momentum with dual aver-
+aging) is O(L/T 2 + σ/
+p
+T). Thus, for convex objec-
+tives, momentum-based methods will outperform SGD
+in the early or transient stages of the optimization
+where L/T is the dominant term. However, the two
+methods will be equally e↵ective during the ﬁnal stages
+Figure 1.
+(Top) Classical Momentum (Bottom) Nes-
+terov Accelerated Gradient
+of the optimization where σ/
+p
+T is the dominant term
+(i.e., when the optimization problem resembles an es-
+timation one).
+2.1. The Relationship between CM and NAG
+From Eqs. 1-4 we see that both CM and NAG compute
+the new velocity by applying a gradient-based correc-
+tion to the previous velocity vector (which is decayed),
+and then add the velocity to ✓t. But while CM com-
+putes the gradient update from the current position
+✓t, NAG ﬁrst performs a partial update to ✓t, comput-
+ing ✓t + µvt, which is similar to ✓t+1, but missing the
+as yet unknown correction. This benign-looking dif-
+ference seems to allow NAG to change v in a quicker
+and more responsive way, letting it behave more sta-
+bly than CM in many situations, especially for higher
+values of µ.
+Indeed, consider the situation where the addition of
+µvt results in an immediate undesirable increase in
+the objective f.
+The gradient correction to the ve-
+locity vt is computed at position ✓t + µvt and if µvt
+is indeed a poor update, then rf(✓t + µvt) will point
+back towards ✓t more strongly than rf(✓t) does, thus
+providing a larger and more timely correction to vt
+than CM. See ﬁg. 1 for a diagram which illustrates
+this phenomenon geometrically. While each iteration
+of NAG may only be slightly more e↵ective than CM
+at correcting a large and inappropriate velocity, this
+di↵erence in e↵ectiveness may compound as the al-
+gorithms iterate. To demonstrate this compounding,
+we applied both NAG and CM to a two-dimensional
+oblong quadratic objective, both with the same mo-
+mentum and learning rate constants (see ﬁg. 2 in the
+appendix). While the optimization path taken by CM
+exhibits large oscillations along the high-curvature ver-
+tical direction, NAG is able to avoid these oscillations
+almost entirely, conﬁrming the intuition that it is much
+more e↵ective than CM at decelerating over the course
+of multiple iterations, thus making NAG more tolerant
+of large values of µ compared to CM.
+In order to make these intuitions more rigorous and
+
+PDF PAGE 4
+On the importance of initialization and momentum in deep learning
+help quantify precisely the way in which CM and
+NAG di↵er, we analyzed the behavior of each method
+when applied to a positive deﬁnite quadratic objective
+q(x) = x>Ax/2 + b>x. We can think of CM and NAG
+as operating independently over the di↵erent eigendi-
+rections of A. NAG operates along any one of these
+directions equivalently to CM, except with an e↵ective
+value of µ that is given by µ(1 −λ"), where λ is the
+associated eigenvalue/curvature.
+The ﬁrst step of this argument is to reparameterize
+q(x) in terms of the coeﬃcients of x under the basis
+of eigenvectors of A. Note that since A = U >DU for
+a diagonal D and orthonormal U (as A is symmetric),
+we can reparameterize q(x) by the matrix transform
+U and optimize y = Ux using the objective p(y) ⌘
+q(x) = q(U >y) = y>U
+!
+U >DU
+"
+U >y/2 + b>U >y =
+y>Dy/2 + c>y, where c = Ub. We can further rewrite
+p as p(y) = Pn
+i=1[p]i([y]i), where [p]i(t) = λit2/2+[c]it
+and λi > 0 are the diagonal entries of D (and thus
+the eigenvalues of A) and correspond to the curva-
+ture along the associated eigenvector directions. As
+shown in the appendix (Proposition 6.1), both CM
+and NAG, being ﬁrst-order methods, are “invariant”
+to these kinds of reparameterizations by orthonormal
+transformations such as U. Thus when analyzing the
+behavior of either algorithm applied to q(x), we can in-
+stead apply them to p(y), and transform the resulting
+sequence of iterates back to the default parameteriza-
+tion (via multiplication by U −1 = U >).
+Theorem 2.1. Let p(y) = Pn
+i=1[p]i([y]i) such that
+[p]i(t) = λit2/2 + cit.
+Let " be arbitrary and ﬁxed.
+Denote by CM x(µ, p, y, v) and CM v(µ, p, y, v) the pa-
+rameter vector and the velocity vector respectively, ob-
+tained by applying one step of CM (i.e., Eq. 1 and then
+Eq. 2) to the function p at point y, with velocity v,
+momentum coeﬃcient µ, and learning rate ". Deﬁne
+NAGx and NAGv analogously.
+Then the following
+holds for z 2 {x, v}:
+CM z(µ, p, y, v) =
+2
+64
+CM z(µ, [p]1, [y]1, [v]1)
+...
+CM z(µ, [p]n, [y]n, [v]n)
+3
+75
+NAGz(µ, p, y, v) =
+2
+64
+CM z(µ(1 −λ1"), [p]1, [y]1, [v]1)
+...
+CM z(µ(1 −λn"), [p]n, [y]n, [v]n)
+3
+75
+Proof. See the appendix.
+The theorem has several implications. First, CM and
+NAG become equivalent when " is small (when "λ ⌧1
+for every eigenvalue λ of A), so NAG and CM are
+distinct only when " is reasonably large. When " is
+relatively large, NAG uses smaller e↵ective momentum
+for the high-curvature eigen-directions, which prevents
+oscillations (or divergence) and thus allows the use of
+a larger µ than is possible with CM for a given ".
+3. Deep Autoencoders
+The aim of our experiments is three-fold.
+First, to
+investigate the attainable performance of stochastic
+momentum methods on deep autoencoders starting
+from well-designed random initializations; second, to
+explore the importance and e↵ect of the schedule for
+the momentum parameter µ assuming an optimal ﬁxed
+choice of the learning rate "; and third, to compare the
+performance of NAG versus CM.
+For our experiments with feed-forward nets, we fo-
+cused on training the three deep autoencoder prob-
+lems described in Hinton & Salakhutdinov (2006) (see
+sec. A.2 for details).
+The task of the neural net-
+work autoencoder is to reconstruct its own input sub-
+ject to the constraint that one of its hidden layers is
+of low-dimension.
+This “bottleneck” layer acts as a
+low-dimensional code for the original input, similar to
+other dimensionality reduction techniques like Princi-
+ple Component Analysis (PCA). These autoencoders
+are some of the deepest neural networks with pub-
+lished results, ranging between 7 and 11 layers, and
+have become a standard benchmarking problem (e.g.,
+Martens, 2010; Glorot & Bengio, 2010; Chapelle & Er-
+han, 2011; Raiko et al., 2011). See the appendix for
+more details.
+Because the focus of this study is on optimization, we
+only report training errors in our experiments. Test
+error depends strongly on the amount of overﬁtting in
+these problems, which in turn depends on the type and
+amount of regularization used during training. While
+regularization is an issue of vital importance when de-
+signing systems of practical utility, it is outside the
+scope of our discussion.
+And while it could be ob-
+jected that the gains achieved using better optimiza-
+tion methods are only due to more exact ﬁtting of the
+training set in a manner that does not generalize, this
+is simply not the case in these problems, where under-
+trained solutions are known to perform poorly on both
+the training and test sets (underﬁtting).
+The networks we trained used the standard sigmoid
+nonlinearity and were initialized using the “sparse ini-
+tialization” technique (SI) of Martens (2010) that is
+described in sec. 3.1.
+Each trial consists of 750,000
+parameter updates on minibatches of size 200. No reg-
+ularization is used. The schedule for µ was given by
+the following formula:
+µt = min(1 −2−1−log2(bt/250c+1), µmax )
+(5)
+where
+µmax
+was
+chosen
+from
+{0.999, 0.995, 0.99, 0.9, 0}.
+This schedule was mo-
+tivated by Nesterov (1983) who advocates using what
+amounts to µt = 1−3/(t+5) after some manipulation

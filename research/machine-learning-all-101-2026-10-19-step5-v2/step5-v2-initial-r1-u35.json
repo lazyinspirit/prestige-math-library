@@ -1,0 +1,266 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "35",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-radix-two-fft",
+      "model": "gpt-6-luna",
+      "context_sha256": "cb6992f2ce930f220ec30ca05d9f31737185ec5be3e7fc78b85b73251f29cbc1",
+      "outcome": "false_positive",
+      "reason": "The separate lemma lem-roots-of-unity-fft-complexity already states exactness and proves it in Proof 2.1: splitting even/odd indices gives both butterflies, and induction from M=1 proves the recursion computes the DFT. Proof 1.1 proves the inverse identity. The algorithm supplies complete inputs, base case, recursive calls and outputs; its contract and owning compact page agree. No correctness prerequisite is missing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-cauchy-root-grid-matvec-numerical-cost",
+      "model": "gpt-6-luna",
+      "context_sha256": "5dd91168b99f4a312bf95eb6d63e64bfa59ea7ba3b99b722fa81b9d824a6d8af",
+      "outcome": "false_positive",
+      "reason": "Proof 4.1 scopes initialization inside 'At a fixed depth', before the h loop, and discards that depth's arrays before advancing. Thus at degree h, t_k=(-(z_k-c_I))^h and w_{j,I}=a_j/(c_I-mu_j)^(h+1), so the accumulated polynomial is exactly Proof 3.1. Proofs 1.1-2.1 partition interactions with O(n log(2+M)) pairs; the geometric remainder and gate-error recurrence prove the stated certified scalar-operation bound. No power is carried between depths.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+      "model": "gpt-6-luna",
+      "context_sha256": "60b85bd4ffdb1e6edd790bd53c62c2f5c3b963b0a707bddb86e752cf7e730629",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title omitted the essential nonunitary LegT similarity, although the Statement and Proof 1.3 already state it correctly. Changed only the title to specify similarities. Entrywise, S0^-1 G^T S0 = -D^(1/2) S D^(1/2)/theta - D^(1/2) R D^(1/2)/theta, where S is skew-symmetric and R is the sum of two parity-indicator outer products. LegS and original LagT have the displayed rank-one corrections and normal scalar-shifted skew parts. The spectral theorem applies to these normal parts; the input/output transformations S^-1 B and S* C preserve the state model. N=1 and an empty parity column are harmless. Sources consulted: S4 Appendix C.1 and HiPPO Sections 2.3 and 3; the source LagT diagonal -1/2 differs from the original HiPPO diagonal -1, which the local proof correctly retains. Statement and proof unchanged; no interface propagation.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.00396",
+        "https://arxiv.org/pdf/2008.07669"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "thm-s4-convolution-filter-complexity",
+      "model": "gpt-6-luna",
+      "context_sha256": "c7e095b57191f736cbfd3e91345c6d208d67765e9fd0919359ae4efcaf7ce48a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified HiPPO application in the Statement and Proof 1.1 conflates a fixed LegS coefficient matrix with the original time-dependent LegS dynamics. HiPPO Theorem 2 has coefficient G^S/t; already at N=1 its forced zero-state solution is x(t)=t^-1 integral_{t0}^t u(s) ds for x(t0)=0 and t0>0, which has no time-translation-invariant lag kernel. Repaired the application, F5 and Proof 1.1 to specify fixed G^S,G^T,G^L used as constant state matrices, with the same invertibility hypotheses, and explicitly distinguish the original LegS ODE. Preserved every general DPLR filter, accuracy and complexity claim. The resolvent reduction, (r+1)^2 block count, root permutation, M<2L, inverse-DFT norm <=1, e=r*delta perturbation and full-circuit rounding bound establish the remaining claims. No new prerequisite or choice principle is required.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2008.07669",
+        "https://arxiv.org/pdf/2111.00396"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-radix-two-fft",
+      "disposition": "unaffected",
+      "post_sha256": "3aca83a73c3da9ddf0810044466d1b155117dab5474141a918a0c7fcb2c59c76",
+      "review_context_sha256": "d6a67711beb1e0204880280f40cabc82acfd9b68fb561109b76badbf19b519f0",
+      "reason": "Checked the algorithm inputs, M=1 branch, decreasing half-length recursive calls, butterfly outputs and inverse scaling against its owning page and contract. The existing companion lemma proves exactness in step 2.1 and the inverse in step 1.1; no item change is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-cauchy-root-grid-matvec-numerical-cost",
+      "disposition": "unaffected",
+      "post_sha256": "ed884aa255e77ed25960a465609b3a1d700f3912ee8ee9d2b099f3e6d193ea1c",
+      "review_context_sha256": "ca89a4ca9abd84552354b37db66bc32e5c565b6e763d125089380486a1d0a66b",
+      "reason": "Checked the full six-step proof and boundary contract. At every depth, powers restart at one and weights at a_j/(c_I-mu_j); the degree recurrence produces the geometric polynomial. Interaction packing, remainder, streaming space and the supplied precision certificate prove the claim, including n=0, M=1 and repeated poles. The item remains unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+      "disposition": "repaired",
+      "post_sha256": "0247a137436cf33fec19ddcebbc338921140bf61bbcac747890698284a910ded",
+      "review_context_sha256": "b19521e2fbf910c08a96a7eeb635adbdacf859e53200489f891b15f6d1774fc9",
+      "reason": "Changed only the overbroad title and mirrored it in the manifest. Checked the entrywise rank-one LegS/LagT decompositions, the explicit diagonal LegT similarity with rank-two parity correction, the spectral-theorem hypotheses and the S^-1 B, S* C transformations. Statement and proof are unchanged; the matrix claim already retains the LegS 1/t caveat.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.00396",
+        "https://arxiv.org/pdf/2008.07669"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "thm-s4-convolution-filter-complexity",
+      "disposition": "repaired",
+      "post_sha256": "b40f7bfe752cfb3fe129fc6d9916aece88bfd06b675529c4b97385b79f564cc9",
+      "review_context_sha256": "4dc592e01b390125f558c3f73cf8361f49d01da11b92b6d3cf084b23d4209d34",
+      "reason": "Repaired only the HiPPO applicability clause, F5 and Proof 1.1; mirrored the Statement and derivation in owning metadata. Checked the general filter reduction, exact counts, root permutation, empty/exceptional sums, perturbation estimate, inverse-DFT error bound and full-circuit precision argument. All general DPLR guarantees are preserved. The direct consumer uses only those unchanged guarantees and remains sound.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2008.07669",
+        "https://arxiv.org/pdf/2111.00396"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-s4-filter-cost-excludes-training"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-radix-two-fft",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "Existing companion lemma Proof 2.1 proves FFT correctness; no missing correctness result.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-cauchy-root-grid-matvec-numerical-cost",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "Fixed-depth initialization in Proof 4.1 resets powers before every degree loop; no cross-depth carry.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "Repaired title to retain the essential LegT diagonal similarity; precise Statement and proof unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.00396",
+        "https://arxiv.org/pdf/2008.07669"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "thm-s4-convolution-filter-complexity",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Repaired unqualified LegS application: constant G^S is covered; original time-dependent G^S/t dynamics is not a fixed convolution.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2008.07669",
+        "https://arxiv.org/pdf/2111.00396"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-update",
+      "reason": "All assigned carriers and the sole direct S4 consumer are draft frontier items. No published direct consumer or defective published prerequisite was identified; the normal spectral-theorem interface applies with its finite complex hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-outside-assignment-finding",
+      "id": "alg-cauchy-matvec-at-roots-of-unity",
+      "status": "owner-review-required",
+      "reason": "Outside assignment, retained Step-4 presentation finding: Definition includes the separate property sentence “This root search and reindexing use $O(M)$ operations.” The actual proof is thm-cauchy-matvec-at-roots-of-unity-exact-cost, Proof 2.2. Route removal/relocation of this already proved property to its frontier owner; no mathematical cost bound is refuted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-outside-assignment-finding",
+      "id": "alg-s4-state-space-recurrence-and-convolution",
+      "status": "owner-review-required",
+      "reason": "Outside assignment, retained Step-4 presentation finding: Definition says the root -1 “is never included in this Cauchy evaluation”, but the called Cauchy algorithm evaluates all M roots and accepts no excluded-root argument. lem-s4-convolution-root-of-unity-reduction, Proof 1.2 shows mapped nonexceptional poles cannot equal -1, so the harmless auxiliary -1 output should be described as discarded, while H(-1) uses its direct formula. Route this minimal procedural clarification to its frontier owner.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "items": [
+      "alg-radix-two-fft",
+      "thm-cauchy-root-grid-matvec-numerical-cost",
+      "thm-hippo-leg-matrices-have-low-rank-structure",
+      "thm-s4-convolution-filter-complexity"
+    ],
+    "interface_changes": [
+      {
+        "id": "thm-s4-convolution-filter-complexity",
+        "section": "Statement",
+        "before": "This bound applies in particular to the equivalent DPLR state coordinates of the stated HiPPO generators.",
+        "after": "Applicability explicitly concerns fixed G^S,G^T,G^L as constant state matrices, with the same invertibility hypotheses; excludes an asserted convolution representation for G^S/t.",
+        "preserved": "All fixed-DPLR exact and numerical filter guarantees, exceptional cases, supplied-parameter interface and conditioning qualifications."
+      }
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "thm-s4-convolution-filter-complexity",
+        "id": "ex-s4-filter-cost-excludes-training",
+        "path": "items/ex-s4-filter-cost-excludes-training.md",
+        "affected_use": "Example final paragraph and Facts F1, Proofs 1.1 and 3.1 use the fixed-DPLR filter operation/space and conditional numerical error bounds, with transformed output supplied.",
+        "invalidated_claim": "None: its explicit constant A=Lambda-PQ* hypotheses do not use the original LegS ODE or the qualified HiPPO application.",
+        "disposition": "unchanged_sound",
+        "minimality": "No consumer edit is needed. Its Example, F1 and proof remain valid from the preserved general theorem. Its own interface is unchanged, so propagation stops here."
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/machine-learning/recurrent-and-state-space-networks.md",
+        "affected_use": "Frontmatter items inventory places the S4 theorem after its supplier results. There is no page-body claim about LegS dynamics.",
+        "disposition": "unchanged_sound"
+      }
+    ],
+    "diagrams": "None of the four assigned items contains a TikZ/tikzcd diagram; these algebraic arguments require no diagram.",
+    "repair_complete": true,
+    "metadata_repairs": [
+      "Under step5-shared-write-lock acquire/reread/edit/check/release, mirrored the HiPPO title and S4 application clause in research/machine-learning-all-101-2026-10-19-batch-35.pages.json and S4 Proof 1.1 in research/machine-learning-all-101-2026-10-19-batch-35.proof-contracts.json. Preserved all other parsed rows.",
+      "Reexamined these exact mirrors after integration and recaptured HiPPO/S4 review contexts; both hashes remained identical to the immediate post-review captures. No supplier mathematics changed afterward."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-radix-two-fft.md items/thm-cauchy-root-grid-matvec-numerical-cost.md items/thm-hippo-leg-matrices-have-low-rank-structure.md items/thm-s4-convolution-filter-complexity.md --json",
+        "exit_code": 0,
+        "result": "3 proofs pass; algorithm not-applicable. Subsequently reran both changed theorem paths after final edits: 2 proofs pass, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-hippo-leg-matrices-have-low-rank-structure.md items/thm-s4-convolution-filter-complexity.md --json",
+        "exit_code": 0,
+        "result": "2 changed files, zero errors/warnings. Earlier check also covered the two unchanged files, with no errors/warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-35.proof-contracts.json --items alg-radix-two-fft,thm-cauchy-root-grid-matvec-numerical-cost,thm-hippo-leg-matrices-have-low-rank-structure,thm-s4-convolution-filter-complexity --strict --json",
+        "exit_code": 0,
+        "result": "All four assigned contracts pass; no errors/warnings, after metadata integration."
+      },
+      {
+        "command": "Scoped inspectStatement calls via tools/statement-first.mjs on all four assigned item bodies",
+        "exit_code": 0,
+        "result": "4 statements checked, zero errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-hippo-leg-matrices-have-low-rank-structure.md items/thm-s4-convolution-filter-complexity.md",
+        "exit_code": 0,
+        "result": "2 items, 13 steps, 0 defects; run once after final item edits."
+      }
+    ],
+    "operational_note": "Direct node invocation of tools/precheck.mts failed with ERR_UNKNOWN_FILE_EXTENSION; the documented tools/tsx-run.mjs wrapper passed. An accidental rendercheck --help invocation was interrupted and supplies no scoped check evidence.",
+    "unresolved_obligations": [],
+    "source_locators": [
+      "S4 paper: Sections 2.1-2.3; complete Appendix C.1 decomposition argument; Appendix C.3 opening, generating-function definition and inverse-DFT argument. The original LagT normalization differs and the local entrywise proof was checked directly.",
+      "Original HiPPO paper: Section 2.3 equations (1)-(2), and Section 3 Theorem 2 equations (3)-(4), explicitly retaining the factor 1/t.",
+      "Pan: Section 6.1 Lemma 6.1 and Corollary 6.1 geometric expansion, consulted as context; the local Cauchy routing, streaming and precision proof was checked directly rather than inferred from Pan."
+    ]
+  }
+}

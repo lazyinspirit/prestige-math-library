@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-translation-of-a-set-in-rn.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -28,8 +29,13 @@ pipeline_run: null
 
 ## Definition
 
-Let $n\ge 1$, let $E\subseteq\mathbb R^n$, and let $a\in\mathbb R^n$ ([[def-euclidean-inner-product]]). The **translate** of $E$ by $a$ is
+Let $n\ge 1$, let $E\subseteq\mathbb R^n$, and let $a\in\mathbb R^n$ (The Euclidean inner product $\langle x,y\rangle = \sum_{k<n} x_k y_k$ on $\mathbb{R}^n$). The **translate** of $E$ by $a$ is
 
 $$E+a:=\{x+a:x\in E\}.$$
 
 Translation by $a$ is the bijection $\tau_a(x)=x+a$, whose inverse is $\tau_{-a}$. In particular, $\varnothing+a=\varnothing$.
+
+## Definition references
+
+[[def-euclidean-inner-product]]
+

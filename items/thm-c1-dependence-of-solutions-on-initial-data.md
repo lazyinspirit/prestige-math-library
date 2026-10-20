@@ -18,6 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-c1-dependence-of-solutions-on-initial-data.json
   audited: 2026-08-29
   precheck: pass
 sources:
@@ -63,46 +64,16 @@ $D_y\Phi(t,y)$ is the solution of the variational equation along $t\mapsto x(t;y
 
 **Proof technique:** direct.
 
-1.1 By [L1], after shrinking $U_0$ if needed, every solution graph $(t,\Phi(t,y))$ with $y\in U_0$ lies in one compact cylinder $K\subseteq D$. Fix $y\in U_0$, and let $A_y:I\to M_n(\mathbb R)$ be the unique solution of the variational equation below. [F1, L1, L2]
+1.1 Write $x_*(t):=\Phi(t,x_0)$. Its graph $G:=\{(t,x_*(t)):t\in I\}$ is compact and lies in the open ODE domain $D$. Hence it has a positive interior margin: there is $r>0$ such that the compact tube $K:=\{(t,x):t\in I,\ \|x-x_*(t)\|_2\le r\}$ lies in $D$. Indeed, a finite cover of $G$ by open balls whose doubled balls lie in $D$ gives a positive uniform distance from $G$ to the complement of $D$; choose $r$ smaller than that distance. The tube is closed and bounded because $x_*$ is continuous. On $K$, the continuous state Jacobian is bounded by $M:=\sup_K\|D_xF\|<\infty$ and uniformly continuous. Each time slice of $K$ is a convex state ball, so integrating $D_xF$ on its state segments gives the state-Lipschitz bound $M$ on that slice. [given, construct, algebra]
 
-$$A_y'(t)=D_xF(t,\Phi(t,y))A_y(t),\qquad A_y(t_0)=I_n,$$
+2.1 Shrink the given initial-state neighbourhood to an open ball $U_0$ about $x_0$ with $e^{Mh}\|y-x_0\|_2<r/2$ for every $y\in U_0$. Every given solution through $y\in U_0$ stays within distance $r/2$ of $x_*$ on all of $I$: up to a hypothetical first time when its distance from $x_*$ reaches $r/2$, both paths and their connecting state segment lie in $K$. Subtracting their Volterra equations and applying the norm inequality and Gronwall gives $\|\Phi(t,y)-x_*(t)\|_2\le e^{M|t-t_0|}\|y-x_0\|_2<r/2$, contradicting that first time. The reflected estimate gives the identical contradiction backward from $t_0$. Thus any two such paths and every same-time state segment joining them lie in $K$. Subtraction and the same estimate now give $\sup_{t\in I}\|\Phi(t,y')-\Phi(t,y)\|_2\le e^{Mh}\|y'-y\|_2$ for $y,y'\in U_0$. This proves uniform-in-time continuous dependence on the entire given interval, without assuming that a single product cylinder covers the base graph. [F2, L3, L4, step 1.1, choose, algebra]
 
-whose existence on $I$ is given by [L2]. Because $D_xF$ is continuous on the compact set $K$, it is bounded and uniformly continuous there.
+3.1 Fix $y\in U_0$ and set $C_y(t):=D_xF(t,\Phi(t,y))$. This is continuous on $I$ with $\|C_y(t)\|\le M$. By [L2] the variational equation $A_y'(t)=C_y(t)A_y(t)$, $A_y(t_0)=I_n$, has a unique solution on $I$. For each unit vector $v$, apply the vector norm inequality and Gronwall to the integral equation of $A_y(t)v$, whose initial norm is $1$; taking the supremum over $v$ gives $\sup_{t\in I}\|A_y(t)\|\le e^{Mh}$ in the Euclidean operator norm. [F1, F2, L2, L3, L4, step 1.1, step 2.1, algebra]
 
-2.1 Fix $y\in U_0$ and an increment $u\in\mathbb R^n$ with $y+u\in U_0$. By [F2], the difference $z_u(t):=\Phi(t,y+u)-\Phi(t,y)$ satisfies the Volterra equation below, and the state-variable mean-value formula gives the matrix field $B_u$. [F2, L1, step 1.1, algebra]
+3.2 Let $u\in\mathbb R^n$ with $y+u\in U_0$ and put $z_u(t):=\Phi(t,y+u)-\Phi(t,y)$. By [F2], $z_u(t)=u+\int_{t_0}^t B_u(s)z_u(s)\,ds$, where $B_u(s):=\int_0^1D_xF(s,\Phi(s,y)+\theta z_u(s))\,d\theta$. This state-variable fundamental-theorem-of-calculus formula is legitimate because step 2.1 puts every displayed secant point in $K\subseteq D$. In particular $\|B_u(s)\|\le M$. Also step 2.1 gives $\sup_I\|z_u\|_2\le e^{Mh}\|u\|_2\to0$, so uniform continuity of $D_xF$ on $K$ gives $\varepsilon_y(u):=\sup_{s\in I}\|B_u(s)-C_y(s)\|\to0$ as $u\to0$. [F2, L3, step 1.1, step 2.1, algebra]
 
-$$z_u(t)=u+\int_{t_0}^{t}\bigl(F(s,\Phi(s,y+u))-F(s,\Phi(s,y))\bigr)\,ds.$$
+4.1 Put $\rho_u(t):=z_u(t)-A_y(t)u$. Subtracting the integral equations gives $\rho_u(t)=\int_{t_0}^t B_u(s)\rho_u(s)\,ds+\int_{t_0}^t(B_u(s)-C_y(s))A_y(s)u\,ds$. On either oriented half of $I$, the norm inequality and Gronwall, with forcing bounded by $h e^{Mh}\varepsilon_y(u)\|u\|_2$, yield $\sup_{t\in I}\|\rho_u(t)\|_2\le h e^{2Mh}\varepsilon_y(u)\|u\|_2$. Dividing by $\|u\|_2$ for $u\ne0$ and using step 3.2 shows that the remainder tends to zero uniformly in $t$. Hence $D_y\Phi(t,y)=A_y(t)$ for every $t\in I$. [L3, L4, step 3.1, step 3.2, algebra]
 
-For each $s\in I$, the one-variable mean-value formula in the state variable gives
+4.2 For $y,y'\in U_0$, set $E(t):=A_{y'}(t)-A_y(t)$. Subtracting the variational integral equations gives $E(t)=\int_{t_0}^t C_{y'}(s)E(s)\,ds+\int_{t_0}^t(C_{y'}(s)-C_y(s))A_y(s)\,ds$. Steps 1.1 and 2.1 imply $\delta(y',y):=\sup_{s\in I}\|C_{y'}(s)-C_y(s)\|\to0$ as $y'\to y$. The same two-sided Gronwall estimate gives $\sup_{t\in I}\|E(t)\|\le h e^{2Mh}\delta(y',y)\to0$. Thus $y\mapsto A_y$ is continuous in the uniform norm; continuity of each $A_y$ in time also makes $(t,y)\mapsto A_y(t)$ jointly continuous. [L3, L4, step 1.1, step 2.1, step 3.1, algebra]
 
-$$F(s,\Phi(s,y+u))-F(s,\Phi(s,y))=B_u(s)\,z_u(s),$$
-
-where
-
-$$B_u(s):=\int_0^1 D_xF\bigl(s,\Phi(s,y)+\theta z_u(s)\bigr)\,d\theta.$$
-
-By [L1], $z_u\to0$ uniformly on $I$ as $u\to0$, so the uniform continuity of $D_xF$ on $K$ gives
-
-$$\varepsilon(u):=\sup_{s\in I}\|B_u(s)-D_xF(s,\Phi(s,y))\|\longrightarrow 0.$$
-
-3.1 Put $\rho_u(t):=z_u(t)-A_y(t)u$. Subtracting the Volterra equations for $z_u$ and $A_yu$ gives the identity below. [L3, L4, step 1.1, step 2.1, algebra]
-
-$$\rho_u(t)=\int_{t_0}^{t}B_u(s)\rho_u(s)\,ds+\int_{t_0}^{t}\bigl(B_u(s)-D_xF(s,\Phi(s,y))\bigr)A_y(s)u\,ds.$$
-
-Let $M:=\sup_K\|D_xF\|$ and $C_y:=\sup_{s\in I}\|A_y(s)\|$. Then $\|B_u(s)\|\le M$, and [L3] gives, for $t\ge t_0$,
-
-$$\|\rho_u(t)\|_2\le M\int_{t_0}^{t}\|\rho_u(s)\|_2\,ds + C_y\varepsilon(u)\|u\|(t-t_0).$$
-
-Applying [L4] on $[t_0,t]$ and its time-reflected form on $[t,t_0]$ yields a constant $C'_y$ independent of $u$ such that $\sup_{t\in I}\|\rho_u(t)\|_2\le C'_y\varepsilon(u)\|u\|$. Since $\varepsilon(u)\to0$, this proves
-
-$$\sup_{t\in I}\frac{\|\Phi(t,y+u)-\Phi(t,y)-A_y(t)u\|_2}{\|u\|}\longrightarrow 0.$$
-
-Therefore $A_y(t)=D_y\Phi(t,y)$ for every $t\in I$.
-
-4.1 For $y,y'\in U_0$, write $E(t):=A_{y'}(t)-A_y(t)$ and $C_y(t):=D_xF(t,\Phi(t,y))$. Then the continuity estimate below, together with the same Gronwall argument as in step 3.1, proves continuity of the derivative matrix. [L1, L3, L4, step 1.1, step 3.1, algebra]
-
-$$E(t)=\int_{t_0}^{t}C_{y'}(s)E(s)\,ds+\int_{t_0}^{t}\bigl(C_{y'}(s)-C_y(s)\bigr)A_y(s)\,ds.$$
-
-By [L1], $\Phi(\,\cdot\,,y')\to\Phi(\,\cdot\,,y)$ uniformly on $I$ as $y'\to y$, so the uniform continuity of $D_xF$ on $K$ gives $\sup_{s\in I}\|C_{y'}(s)-C_y(s)\|\to0$. Applying [L3] and [L4] exactly as in step 3.1 shows $\sup_{t\in I}\|E(t)\|_2\to0$. Hence $y\mapsto D_y\Phi(t,y)=A_y(t)$ is continuous for each $t$, and the derivative matrix is exactly the variational-equation solution.
-
-5.1 Steps 3.1 and 4.1 prove that $\Phi$ is $C^1$ in the initial-state variable and that its derivative matrix is the solution of the variational equation. [step 3.1, step 4.1] ∎
+5.1 Steps 4.1 and 4.2 prove that $\Phi$ is $C^1$ in the initial-state variable and that its derivative is the unique solution of the variational equation along each trajectory. [step 3.1, step 4.1, step 4.2] ∎

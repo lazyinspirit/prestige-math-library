@@ -14,6 +14,7 @@ landmark: true
 short: "Heine-Borel in $\\mathbb{R}^n$"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-heine-borel-rn.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -36,18 +37,18 @@ pipeline_run: null
 
 Let $n \in \mathbb{N}$ with $n \ge 1$, let $\mathbb{R}^n$ be the set of functions
 $n \to \mathbb{R}$ and let $d_2$ be the Euclidean metric on it
-([[lem-metrics-on-rn]]). Then:
+($\mathbb{R}^n$ as the set of functions $n \to \mathbb{R}$, and $d_1$, $d_2$, $d_\infty$ are metrics on it). Then:
 
 1. **Closed boxes are compact.** For reals $a_k \le b_k$ $(k < n)$ the box
    $Q = \{\, x \in \mathbb{R}^n : a_k \le x_k \le b_k \text{ for every } k < n \,\}$
-   is a compact subset of $(\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).
+   is a compact subset of $(\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).
 2. **Heine-Borel.** A subset $K \subseteq \mathbb{R}^n$ is a compact subset of
    $(\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\mathbb{R}^n$
-   ([[def-metric-topology]]) and bounded
-   ([[def-metric-bounded-diameter]]).
+   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded
+   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).
 3. **The real line.** A subset $K \subseteq \mathbb{R}$ is a compact subset of
    $(\mathbb{R}, d_{\mathbb{R}})$, the usual metric $d_{\mathbb{R}}(x,y) = |x-y|$
-   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in
+   (The absolute value makes $\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in
    $\mathbb{R}$ and bounded.
 
 **No choice principle is used.** The bisection below halves one coordinate at a
@@ -55,11 +56,25 @@ time and takes the **left** half whenever the left half still fails to be finite
 covered, the right half otherwise: a rule with two outcomes, decided by a
 property of the box, not a selection. That is the whole reason the theorem is
 available in ZF, while the general "complete and totally bounded implies compact"
-([[thm-complete-and-totally-bounded-implies-compact]]) is not.
+(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.
 
-The hypothesis $n \ge 1$ is inherited from [[lem-metrics-on-rn]], which defines
+The hypothesis $n \ge 1$ is inherited from $\mathbb{R}^n$ as the set of functions $n \to \mathbb{R}$, and $d_1$, $d_2$, $d_\infty$ are metrics on it, which defines
 $\mathbb{R}^n$ and its metrics only there; the last remark below records what
 happens at $n = 0$.
+
+## Statement references
+
+[[lem-metrics-on-rn]]
+
+[[def-metric-compactness]]
+
+[[def-metric-topology]]
+
+[[def-metric-bounded-diameter]]
+
+[[lem-real-line-is-a-metric-space]]
+
+[[thm-complete-and-totally-bounded-implies-compact]]
 
 ## Facts & Assumptions
 

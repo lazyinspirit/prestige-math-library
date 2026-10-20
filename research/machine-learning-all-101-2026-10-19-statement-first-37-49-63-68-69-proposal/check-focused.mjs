@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {dirname,resolve} from 'node:path';import {fileURLToPath,pathToFileURL} from 'node:url';
+const base=dirname(fileURLToPath(import.meta.url)),root=resolve(base,'../..');const {inspectStatement}=await import(pathToFileURL(resolve(root,'tools/statement-first.mjs')).href);const ops=JSON.parse(fs.readFileSync(resolve(base,'integration-guards.json'))).operations;const results=[];
+for(const op of ops){const raw=fs.readFileSync(resolve(root,op.proposed_path),'utf8'),fm=raw.split('---')[1],body=raw.split('---').slice(2).join('---'),kind=fm.match(/^kind:\s*(\S+)/m)[1];results.push({id:op.id,batch:op.batch,errors:await inspectStatement(op.id,kind,body)});}
+console.log(JSON.stringify({items:results.length,errors:results.flatMap(x=>x.errors),results},null,2));if(results.some(x=>x.errors.length))process.exitCode=1;

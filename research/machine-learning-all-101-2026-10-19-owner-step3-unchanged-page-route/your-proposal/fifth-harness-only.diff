@@ -1,0 +1,66 @@
+--- a/tools/step3-owner-required-page-routes.test.mjs
++++ b/tools/step3-owner-required-page-routes.test.mjs
+@@ -1,18 +1,25 @@
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync, symlinkSync, readdirSync } from 'node:fs';
++import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, copyFileSync, symlinkSync, readdirSync, existsSync } from 'node:fs';
+ import { tmpdir } from 'node:os';
+ import { join, resolve } from 'node:path';
+ import { createHash } from 'node:crypto';
++import { spawnSync } from 'node:child_process';
+ import { pathToFileURL, fileURLToPath } from 'node:url';
+ const repo=resolve(process.env.HH_PROPOSAL_REPO ?? process.cwd());
+ const proposal=resolve(process.env.HH_PROPOSAL_DIR ?? fileURLToPath(new URL('..', import.meta.url)));
+ const toolRoot=mkdtempSync(join(tmpdir(),'required-page-code-'));
+-for(const name of ['pathway-lib.mjs','item-hash.mjs','paths.mjs'])copyFileSync(join(repo,'tools',name),join(toolRoot,name));
+-copyFileSync(join(proposal,'tools/step3-owner-required-page-routes.mjs'),join(toolRoot,'step3-owner-required-page-routes.mjs'));
++// Keep the tracked dependency graph in its production hierarchy. A flat
++// three-helper clone omits step3-manifest-history and its workflow imports.
++const trackedTools=spawnSync('git',['ls-files','-z','tools'],{cwd:repo,encoding:'utf8'});assert.equal(trackedTools.status,0);
++for(const path of trackedTools.stdout.split('\0').filter(p=>/\.(?:mjs|mts|json)$/.test(p))) {
++  mkdirSync(join(toolRoot,path,'..'),{recursive:true});copyFileSync(join(repo,path),join(toolRoot,path));
++}
++const toolSource=name=>existsSync(join(proposal,'tools',name)) ? join(proposal,'tools',name) : join(repo,'tools',name);
++copyFileSync(toolSource('step3-owner-required-page-routes.mjs'),join(toolRoot,'tools/step3-owner-required-page-routes.mjs'));
+ process.env.PRESTIGE_MATH_REPO=repo;
+-const {loadRequiredPageRoutes,requiredPageCarrier,requiredPageHash,requiredPageClosureEvidence}=await import(pathToFileURL(join(toolRoot,'step3-owner-required-page-routes.mjs')));
+-const {itemHashGuard}=await import(pathToFileURL(join(toolRoot,'item-hash.mjs')));
++const {loadRequiredPageRoutes,requiredPageCarrier,requiredPageHash,requiredPageClosureEvidence}=await import(pathToFileURL(join(toolRoot,'tools/step3-owner-required-page-routes.mjs')));
++const {itemHashGuard}=await import(pathToFileURL(join(toolRoot,'tools/item-hash.mjs')));
+ const sha=x=>createHash('sha256').update(x).digest('hex');
+ function fixture() {
+  const root=mkdtempSync(join(tmpdir(),'required-page-fixture-'));const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');};
+@@ -50,7 +57,7 @@
+   for(const path of tracked.stdout.split('\0').filter(p=>/\.(?:mjs|mts|json)$/.test(p))) {
+     mkdirSync(join(f.root,path,'..'),{recursive:true});copyFileSync(join(repo,path),join(f.root,path));
+   }
+-  for(const name of ['step3-owner-required-page-routes.mjs','step3-scope.mjs','step3-close.mjs'])copyFileSync(join(proposal,'tools',name),join(f.root,'tools',name));
++  for(const name of ['step3-owner-required-page-routes.mjs','step3-scope.mjs','step3-close.mjs'])copyFileSync(toolSource(name),join(f.root,'tools',name));
+   const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});
+   const ok=(...args)=>{const r=run(...args);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
+   f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n\nAssigned page.\n');
+@@ -122,7 +129,7 @@
+  // Pin the historical expression so this remains a regression after the
+  // proposed implementation becomes the live tools file.
+  const original='const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [\n  `research/${name}`, sha256(readFileSync(R(\'research\', name))),\n]));\nconst jsonl =';
+- const proposed=readFileSync(join(proposal,'tools/step3-close.mjs'),'utf8');
++ const proposed=readFileSync(toolSource('step3-close.mjs'),'utf8');
+  const extract=source=>source.slice(source.indexOf('const artifactHashes ='),source.indexOf('const jsonl ='));
+  // The real native artifact projection is evaluated with deterministic read
+  // inputs. Include punctuation/case keys whose locale ordering differs from
+@@ -130,8 +137,12 @@
+  const names=['r-step3-hash-Z.json','r-step3-hash-a.json','r-step3-hash-_context.json'].sort();
+  const evaluate=(source,version)=>{
+   let calls=0;
+-  const fn=Function('artifactNames','sha256','readFileSync','R','requiredPageClosureEvidence','root','run',extract(source)+'\nreturn artifactHashes;')(
+-   ()=>names,sha,path=>'fixture bytes for '+path,(...parts)=>parts.join('/'),()=>{calls++;return {};},'/fixture','r');
++  const fn=Function('artifactNames','sha256','readFileSync','R','requiredPageClosureEvidence','root','run',
++   'downstreamConsumerClosureEvidence','closureEvidence','ownerRepairEvidenceClosure','nativeOriginClosureEvidence',
++   'OBSERVATION_EVIDENCE_POLICY','OWNER_REPAIR_EVIDENCE_FREEZE_POLICY','NATIVE_ORIGIN_FREEZE_POLICY',
++   extract(source)+'\nreturn artifactHashes;')(
++   ()=>names,sha,path=>'fixture bytes for '+path,(...parts)=>parts.join('/'),()=>{calls++;return {};},'/fixture','r',
++   ()=>({}),()=>({}),()=>({}),()=>({}),'fixture-observation-policy','fixture-repair-policy','fixture-native-policy');
+   const value=fn(version);return {value,calls};
+  };
+  for(const version of [2,3]) {

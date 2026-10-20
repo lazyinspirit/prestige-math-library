@@ -1,0 +1,346 @@
+{
+  "group": "j",
+  "batches": ["30"],
+  "pages_read": [
+    "ml02-federated-optimization",
+    "ml02-federated-optimization-examples"
+  ],
+  "items_read": [
+    "def-federated-objective-and-client-sampling",
+    "alg-local-sgd",
+    "lem-relaxed-euclidean-squared-norm",
+    "lem-finite-martingale-difference-sum-variance",
+    "lem-local-sgd-weighted-recursion",
+    "lem-federated-recursion-averaging",
+    "lem-smooth-convex-gradient-difference",
+    "lem-convex-gradient-step-nonexpansive",
+    "alg-fedavg",
+    "alg-scaffold",
+    "lem-uniform-client-sampling-moments",
+    "lem-local-sgd-virtual-progress",
+    "lem-local-sgd-sampling-variance",
+    "lem-local-sgd-client-drift",
+    "lem-perturbed-strong-convexity",
+    "thm-local-sgd-convex-round-complexity",
+    "def-bounded-client-gradient-dissimilarity",
+    "lem-standard-client-dissimilarity-implies-gap-form",
+    "lem-fedavg-one-round-progress",
+    "lem-fedavg-local-drift",
+    "def-scaffold-analysis-trajectory-and-errors",
+    "thm-fedavg-under-gradient-dissimilarity",
+    "lem-scaffold-control-tracking-identity",
+    "lem-scaffold-convex-server-variance",
+    "lem-scaffold-convex-control-lag",
+    "lem-scaffold-convex-client-drift",
+    "lem-scaffold-convex-round-progress",
+    "lem-scaffold-nonconvex-server-variance",
+    "lem-scaffold-nonconvex-client-drift",
+    "lem-scaffold-nonconvex-control-lag",
+    "lem-scaffold-nonconvex-round-progress",
+    "thm-scaffold-convex-and-nonconvex-rates",
+    "fs-scaffold-general-convex-uniform-output-round-headline",
+    "ex-local-versus-periodic-synchronization",
+    "ex-client-data-locality-does-not-imply-dp",
+    "ex-two-client-shifted-optima",
+    "ex-scaffold-control-correction"
+  ],
+  "conventions": [
+    {
+      "convention": "The sample-count-weighted objective and equal-client objective use separate function families. Uniform size-S client sampling is without replacement, with independent samples across rounds unless otherwise stated.",
+      "fixed_by": "def-federated-objective-and-client-sampling",
+      "matters_for": [
+        "alg-fedavg",
+        "alg-scaffold",
+        "lem-uniform-client-sampling-moments",
+        "thm-fedavg-under-gradient-dissimilarity",
+        "thm-scaffold-convex-and-nonconvex-rates"
+      ]
+    },
+    {
+      "convention": "Local SGD draws component indices mutually independently across workers, times and within-step draws. Synchronization occurs after the local proposals; time zero counts when measuring the maximum synchronization gap, and T is a synchronization time.",
+      "fixed_by": "alg-local-sgd",
+      "matters_for": [
+        "lem-local-sgd-sampling-variance",
+        "lem-local-sgd-client-drift",
+        "thm-local-sgd-convex-round-complexity",
+        "ex-local-versus-periodic-synchronization"
+      ]
+    },
+    {
+      "convention": "FedAvg has distinct count-weighted deployment and uniform-client analysis branches. The convergence theorem analyzes only the uniform-client branch and equal-client objective.",
+      "fixed_by": "alg-fedavg",
+      "matters_for": [
+        "lem-fedavg-one-round-progress",
+        "lem-fedavg-local-drift",
+        "thm-fedavg-under-gradient-dissimilarity",
+        "ex-two-client-shifted-optima"
+      ]
+    },
+    {
+      "convention": "The analyzed SCAFFOLD control update is Option II, with gradient-consistent initial client controls. The server control is the population average of client controls.",
+      "fixed_by": "alg-scaffold",
+      "matters_for": [
+        "lem-scaffold-control-tracking-identity",
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-nonconvex-server-variance",
+        "thm-scaffold-convex-and-nonconvex-rates",
+        "fs-scaffold-general-convex-uniform-output-round-headline"
+      ]
+    },
+    {
+      "convention": "SCAFFOLD drift averages gradient-query points y(i,k−1), not post-update endpoints. Stored anchors retain their realized gradient draws. Convex control lag retains anchor randomness inside the squared norm; nonconvex tracking averages squared anchor distances from the current server model.",
+      "fixed_by": "def-scaffold-analysis-trajectory-and-errors",
+      "matters_for": [
+        "lem-scaffold-control-tracking-identity",
+        "lem-scaffold-convex-control-lag",
+        "lem-scaffold-convex-client-drift",
+        "lem-scaffold-convex-round-progress",
+        "lem-scaffold-nonconvex-control-lag",
+        "lem-scaffold-nonconvex-client-drift",
+        "lem-scaffold-nonconvex-round-progress"
+      ]
+    },
+    {
+      "convention": "Counterfactual local paths use fresh oracle randomness independent of participation. Oracle moment conditions are conditional on the full prequery history, including earlier revealed draws in the round.",
+      "fixed_by": "def-scaffold-analysis-trajectory-and-errors",
+      "matters_for": [
+        "lem-scaffold-control-tracking-identity",
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-nonconvex-server-variance",
+        "lem-scaffold-nonconvex-control-lag"
+      ]
+    },
+    {
+      "convention": "Standard gradient dissimilarity uses G²+B² times the squared global gradient; gap-form dissimilarity uses G²+2βB² times the objective gap. These are separate from within-client stochastic variance.",
+      "fixed_by": "def-bounded-client-gradient-dissimilarity",
+      "matters_for": [
+        "lem-standard-client-dissimilarity-implies-gap-form",
+        "lem-fedavg-one-round-progress",
+        "lem-fedavg-local-drift",
+        "thm-fedavg-under-gradient-dissimilarity"
+      ]
+    },
+    {
+      "convention": "The local-SGD output is the quadratic-weighted average of worker trajectories over times 0 through T−1.",
+      "fixed_by": "thm-local-sgd-convex-round-complexity",
+      "matters_for": ["thm-local-sgd-convex-round-complexity"]
+    },
+    {
+      "convention": "Strongly convex SCAFFOLD selects a geometrically weighted pre-round server iterate; general-convex and nonconvex SCAFFOLD select a uniform pre-round server iterate. The nonconvex guarantee concerns expected squared gradient norm.",
+      "fixed_by": "thm-scaffold-convex-and-nonconvex-rates",
+      "matters_for": [
+        "thm-scaffold-convex-and-nonconvex-rates",
+        "fs-scaffold-general-convex-uniform-output-round-headline"
+      ]
+    },
+    {
+      "convention": "The refuted headline quantifies over one constant local stepsize and a uniform server-iterate output, with a universal complexity constant independent of objective scale.",
+      "fixed_by": "fs-scaffold-general-convex-uniform-output-round-headline",
+      "matters_for": ["fs-scaffold-general-convex-uniform-output-round-headline"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-scaffold-control-tracking-identity",
+      "statement": "For Option II SCAFFOLD with gradient-consistent initialization, fresh uniform participation independent of preceding history, and conditionally unbiased local gradients of variance at most σ², each client control equals the average of its stored realized gradient draws. Its expected residual from the average full gradient at stored anchors is zero and its residual second moment is at most σ²/K. The server control equals the population average of client controls for every realization.",
+      "used_by": [
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-convex-client-drift",
+        "lem-scaffold-nonconvex-server-variance",
+        "lem-scaffold-nonconvex-client-drift",
+        "thm-scaffold-convex-and-nonconvex-rates"
+      ]
+    },
+    {
+      "id": "lem-smooth-convex-gradient-difference",
+      "statement": "For convex continuously differentiable h₁,…,h_N with β-Lipschitz gradients, β>0, and x★ minimizing f=N⁻¹Σᵢhᵢ, N⁻¹Σᵢ‖∇hᵢ(x)−∇hᵢ(x★)‖² ≤ 2β(f(x)−f(x★)) for every x in Rᵈ.",
+      "used_by": [
+        "lem-fedavg-one-round-progress",
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-convex-control-lag",
+        "lem-scaffold-convex-client-drift",
+        "thm-scaffold-convex-and-nonconvex-rates"
+      ]
+    },
+    {
+      "id": "lem-uniform-client-sampling-moments",
+      "statement": "For fixed vectors v₁,…,v_N and a uniform size-S subset, the sample mean is unbiased. For N>1 its centered second moment equals (1−S/N)/(S(N−1)) times Σᵢ‖vᵢ−v̄‖², and is at most 2(1−S/N)/S times N⁻¹Σᵢ‖vᵢ‖². For N=1, S=1 and the sample mean equals the population mean.",
+      "used_by": [
+        "lem-fedavg-one-round-progress",
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-nonconvex-server-variance",
+        "lem-scaffold-nonconvex-control-lag"
+      ]
+    },
+    {
+      "id": "lem-finite-martingale-difference-sum-variance",
+      "statement": "Assume AC. For adapted square-integrable vectors Z_j with predictable conditional means M_j, square-integrable residuals ξ_j=Z_j−M_j, and conditional residual second moments bounded by nonnegative integrable predictable v_j, E‖Σ_j Z_j‖² ≤ 2E‖Σ_j M_j‖²+2Σ_j E[v_j].",
+      "used_by": [
+        "lem-fedavg-one-round-progress",
+        "lem-scaffold-convex-server-variance",
+        "lem-scaffold-nonconvex-server-variance"
+      ]
+    },
+    {
+      "id": "lem-convex-gradient-step-nonexpansive",
+      "statement": "For convex differentiable h:Rᵈ→R with β-Lipschitz gradient, β>0, every 0≤η≤2/β and x,y satisfy ‖x−y−η(∇h(x)−∇h(y))‖ ≤ ‖x−y‖.",
+      "used_by": [
+        "lem-fedavg-local-drift",
+        "lem-scaffold-convex-client-drift",
+        "thm-sgd-stability-convex-loss"
+      ]
+    },
+    {
+      "id": "lem-scaffold-convex-round-progress",
+      "statement": "Under its stated convex-client, oracle, initialization and stepsize hypotheses, with t=Kη_lη_g and ρ=(2+34βt)/3, V_r ≤ (1−μt/2)V_(r−1)−t E[f(x_(r−1))−f★]+(18/(KS)+ρ/(Kη_g²))t²σ², where V_r=E‖x_r−x★‖²+14Nt²C_r/S. The hypotheses permit μ=0; when μ>0 they additionally require t≤S/(15μN), and always t≤1/(81β).",
+      "used_by": ["thm-scaffold-convex-and-nonconvex-rates"]
+    },
+    {
+      "id": "lem-scaffold-nonconvex-round-progress",
+      "statement": "Under its stated smoothness, lower-bound, Option II, oracle and initialization hypotheses, put p=S/N and 0<t≤p^(2/3)/(100β). Then P_r ≤ P_(r−1)−(t/3)E‖∇f(x_(r−1))‖²+10βt²σ²(1+S/η_g²)/(KS), where P_r=E[f(x_r)−f★]+24β³t²Ξ_r/p.",
+      "used_by": ["thm-scaffold-convex-and-nonconvex-rates"]
+    },
+    {
+      "id": "lem-federated-recursion-averaging",
+      "statement": "For nonnegative distance and gap sequences, the stated uncontracted descent recurrence yields the uniform-average gap bound d₀/(aηR)+(bη+cη²)/a. For the stated contracted recurrence with 0<ρη<1, geometric weights w_r=(1−ρη)^(−r) yield the weighted gap bound d₀/(aηW_R)+(bη+cη²)/a.",
+      "used_by": [
+        "thm-fedavg-under-gradient-dissimilarity",
+        "thm-scaffold-convex-and-nonconvex-rates"
+      ]
+    },
+    {
+      "id": "lem-local-sgd-virtual-progress",
+      "statement": "For an L-smooth, μ-strongly convex finite-sum objective with attained minimum and 0<μ≤L, local SGD with η_t≤1/(4L) satisfies E‖x̄_(t+1)−x★‖² ≤ (1−μη_t)E‖x̄_t−x★‖²+η_t²E‖g_t−ḡ_t‖²−(η_t/2)E[f(x̄_t)−f★]+(2η_tL/K)Σ_k E‖x̄_t−x_t^k‖².",
+      "used_by": ["thm-local-sgd-convex-round-complexity"]
+    },
+    {
+      "id": "lem-standard-client-dissimilarity-implies-gap-form",
+      "statement": "For differentiable clients with β-Lipschitz gradients, β>0, and a finite global lower bound f★ for their equal-client objective, ‖∇f(x)‖²≤2β(f(x)−f★). Standard (G,B)-bounded gradient dissimilarity consequently implies the gap form with unchanged G,B,β,f★; neither convexity nor attainment is required.",
+      "used_by": [
+        "lem-fedavg-one-round-progress",
+        "lem-fedavg-local-drift",
+        "thm-fedavg-under-gradient-dissimilarity"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-expectation-agrees-with-the-finite-weighted-sum",
+      "used_for": "Finite index-law expectations in local SGD and fixed-size client sampling.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Linearity and averaging of integrable inequalities throughout the stochastic analyses.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice assumption used by the conditional-expectation supplier interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Coordinatewise conditional expectations and almost-sure interpretation of conditional moment bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Convexity in gradient-difference and nonexpansiveness proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Squared-norm expansions, vector averages and coordinatewise arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectations of nonnegative squared errors and integrable gradients.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Round-start and prequery histories; finite martingale-difference arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independent component-index draws in local SGD.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "The measurable count-output space in the privacy counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Interpreting deterministic count release as a probability kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-space and deterministic-mechanism conventions in the privacy example.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-gradient-is-average",
+      "used_for": "Unbiased component gradients and gradients of equal-client objectives.",
+      "opened": true
+    },
+    {
+      "id": "lem-l-smoothness-descent-inequality",
+      "used_for": "Smooth descent, gradient self-bounds, nonexpansiveness and nonconvex progress.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, expectation preservation and conditional moment inequalities.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean triangle inequality in the standard-to-gap dissimilarity implication.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-jensen-inequality-in-euclidean-space",
+      "used_for": "Finite averaging in local-SGD progress and its weighted output guarantee.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Removing history-measurable factors in martingale orthogonality and conditional update expansions.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-local-sgd-sampling-variance",
+      "concern": "The Statement, lines 34–35, says only that 'each' worker gradient averages b independent uniform component gradients. It does not explicitly require independence across workers or independence of current draws from the earlier history. The proof's Given instead asserts 'mutually independent uniform indices in the Statement', and Step 1.1 uses independence of every distinct draw. Without the cross-worker requirement the stated 1/K reduction is false: take n=K=2, b=1, scalar f₁(x)=x and f₂(x)=−x, both worker points fixed at zero, σ²=1, and use the same fresh uniform component index for both workers. Every worker batch satisfies the written sampling condition, but E|g_t−ḡ_t|²=1>1/2. The mutually independent sampling in alg-local-sgd and in thm-local-sgd-convex-round-complexity supports the intended result; the standalone lemma's Statement needs that scope made explicit.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "ml02-federated-optimization",
+      "to": "ml02-differential-privacy",
+      "faithful": true,
+      "note": "Opened the supplier page and def-differential-privacy-and-adjacency. The companion count-release example uses add/remove neighbors and the ordered privacy inequality faithfully: the singleton count event forces 1≤δ. Restricting the supplier's multiset database domain to finite record sets supports this witness."
+    },
+    {
+      "from": "ml02-federated-optimization",
+      "to": "ml02-linear-sparse-models",
+      "faithful": true,
+      "note": "Opened the supplier page and def-linear-regression-objectives. The shifted-optima example specializes the empirical loss ‖y−Xw‖²/(2n) to one observation per client. Its client gradients, equal-client minimizer −3/5 and one-round FedAvg value −9/32 agree with that normalization."
+    },
+    {
+      "from": "algorithmic-stability-of-stochastic-training",
+      "to": "ml02-federated-optimization",
+      "faithful": true,
+      "note": "Opened the consumer page and its SGD stability theorems. thm-sgd-stability-convex-loss cites lem-convex-gradient-step-nonexpansive with precisely convex differentiable losses, β-Lipschitz gradients and steps in [0,2/β]. Its coupled-run proof uses the supplier in that range. The nonconvex theorem does not import this convex-only result."
+    }
+  ]
+}

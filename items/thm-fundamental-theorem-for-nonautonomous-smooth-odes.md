@@ -14,8 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
-  precheck: pass
+  repair: research/machine-learning-all-101-2026-10-19-owner-ode65-escalation/application/repair.json
 sources:
   scraped: []
   references:
@@ -46,10 +45,6 @@ solution map is smooth in the initial time and initial state.
 
 **Proof technique:** direct.
 
-1.1 Introduce an extra variable $s$ and consider the autonomous system below on $\mathbb R\times\mathbb R^n$. [L1]
-
-$$s'(t)=1,\qquad x'(t)=F(s(t),x(t)).$$
-
-Its right-hand side is smooth. By [L1], this augmented autonomous system has a unique local smooth flow.
+1.1 On the open state domain $D\subseteq\mathbb R\times\mathbb R^n$, define the augmented autonomous field $V(s,x)=(1,F(s,x))$, so its equations are $s'(r)=1$ and $x'(r)=F(s(r),x(r))$. This field is smooth on $D$. Apply [L1] with open state domain $U=D$ at $(t_0,x_0)$: there are $h>0$ and an open neighbourhood $W\subseteq D$ of $(t_0,x_0)$ such that every initial pair in $W$ has a unique augmented solution on the common elapsed-time interval $[-h,h]$, taking values in $D$. [given, L1, construct]
 
 2.1 The first equation forces $s(t)=s_0+t$ when $s(0)=s_0$, so the second equation becomes exactly the original nonautonomous system with initial time $s_0$. Reading the initial value $(s_0,x_0)$ as a parameter, [L2] makes the resulting solution map smooth in $(s_0,x_0)$. This is precisely the claimed local theorem for nonautonomous smooth ODEs. [L2, step 1.1] ∎

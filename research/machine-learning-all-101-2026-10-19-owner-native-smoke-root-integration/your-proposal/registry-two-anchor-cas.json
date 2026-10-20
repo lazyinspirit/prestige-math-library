@@ -1,0 +1,17 @@
+{
+  "target": "tools/finite-smoke.mjs",
+  "observed_raw_sha256": "5e5bdfe62e761c7bd1ca3b2346640873f8f8776dafe6bc62fb734489d4b563d5",
+  "edits": [
+    {
+      "before": "import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';\n\nconst REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');\nconst argv = process.argv.slice(2);\nconst asJson = argv.includes('--json');\nconst requested = option('--items')?.split(',').map((value) => value.trim()).filter(Boolean) ?? null;\nconst CHECKS = makeChecks();\n\nif (argv.includes('--self-test')) {\n  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name]({}) }));",
+      "after": "import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';\nimport { ml101CheckGroups, ml101SelfTestFixtures, mergeCheckRegistries } from './finite-smoke-ml101.mjs';\n\nconst REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');\nconst argv = process.argv.slice(2);\nconst asJson = argv.includes('--json');\nconst requested = option('--items')?.split(',').map((value) => value.trim()).filter(Boolean) ?? null;\nconst CHECKS = makeChecks();\n\nif (argv.includes('--self-test')) {\n  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name](Object.hasOwn(ml101SelfTestFixtures, name) ? ml101SelfTestFixtures[name] : {}) }));"
+    },
+    {
+      "before": "function makeChecks() { return {\n  ...quantumQCChecks,\n  ...quantumQueryChecks,\n  ...quantumEstimationChecks,\n  ...numericalChecks,\n  ...frontier81ClassicalChecks,\n  ...frontier81QuantumChecks,\n  ...frontier81TLCherednikChecks,\n",
+      "after": "function makeChecks() { return mergeCheckRegistries([\n  ['quantumQCChecks', quantumQCChecks],\n  ['quantumQueryChecks', quantumQueryChecks],\n  ['quantumEstimationChecks', quantumEstimationChecks],\n  ['numericalChecks', numericalChecks],\n  ['frontier81ClassicalChecks', frontier81ClassicalChecks],\n  ['frontier81QuantumChecks', frontier81QuantumChecks],\n  ['frontier81TLCherednikChecks', frontier81TLCherednikChecks],\n  ['inline-core', makeInlineCoreChecks()],\n  ...ml101CheckGroups,\n]); }\nfunction makeInlineCoreChecks() { return {\n"
+    }
+  ],
+  "normal_contract_runner_unchanged": true,
+  "legacy_inline_callback_body_byte_identical": true,
+  "self_test": "Only new keys receive exact genuine fixed proposed rows; all legacy keys still receive {}. No callback or global self-test executed."
+}

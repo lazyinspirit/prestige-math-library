@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-moore-penrose-pseudoinverse-exists-and-is-unique.json
   audited: 2026-08-31
   precheck: pass
   judge:
@@ -32,7 +33,11 @@ sources:
 For every matrix $A\in M_{m\times n}(\mathbb F)$ over $\mathbb F=\mathbb R$ or
 $\mathbb C$, there exists a unique matrix $A^+\in M_{n\times m}(\mathbb F)$
 satisfying the four Penrose equations of
-[[def-moore-penrose-pseudoinverse]].
+The Moore--Penrose pseudoinverse $A^+$ as the solution of the four Penrose equations.
+
+## Statement references
+
+[[def-moore-penrose-pseudoinverse]]
 
 ## Facts & Assumptions
 

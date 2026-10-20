@@ -1,0 +1,148 @@
+{
+  "group": "s",
+  "batches": ["57"],
+  "pages_read": [
+    "reconstruction-and-masked-autoencoders",
+    "reconstruction-and-masked-autoencoders-examples"
+  ],
+  "items_read": [
+    "def-reconstruction-autoencoder",
+    "alg-masked-autoencoder-pretraining",
+    "ex-reconstruction-objective-shortcut"
+  ],
+  "conventions": [
+    {
+      "convention": "Images have M≥1 patches with q≥1 real values each; empirical datasets have n≥1 images. Masked reconstruction requires 1≤k<M. V denotes visible positions, sampled uniformly among size-k subsets; loss averages only over the complement, with denominator (M−k)q.",
+      "fixed_by": "def-reconstruction-autoencoder",
+      "matters_for": [
+        "alg-masked-autoencoder-pretraining",
+        "ex-reconstruction-objective-shortcut"
+      ]
+    },
+    {
+      "convention": "Patch normalization uses variance q⁻¹ times the sum of squared deviations. Every normalized empirical target patch must have positive standard deviation. Population normalization requires this simultaneously for all patches almost surely, with measurable loss extended by zero on the exceptional null event. Raw targets have no positive-variance restriction.",
+      "fixed_by": "def-reconstruction-autoencoder",
+      "matters_for": [
+        "alg-masked-autoencoder-pretraining",
+        "ex-reconstruction-objective-shortcut"
+      ]
+    },
+    {
+      "convention": "Population losses are measurable nonnegative random variables whose expectations may be infinite; the population masked objective averages over an independent uniform mask.",
+      "fixed_by": "def-reconstruction-autoencoder",
+      "matters_for": [
+        "ex-reconstruction-objective-shortcut"
+      ]
+    },
+    {
+      "convention": "The encoder receives visible patches and their positions without mask tokens. The decoder receives all positions, using one shared learned mask vector at missing positions.",
+      "fixed_by": "def-reconstruction-autoencoder",
+      "matters_for": [
+        "alg-masked-autoencoder-pretraining",
+        "ex-reconstruction-objective-shortcut"
+      ]
+    },
+    {
+      "convention": "The update budget J is a nonnegative integer; iterations run from t=0 through J−1. Optimizer maps preserve the parameter/state domain, and every reached loss must have a finite parameter gradient. No convergence or semantic-sufficiency guarantee is asserted.",
+      "fixed_by": "alg-masked-autoencoder-pretraining",
+      "matters_for": [
+        "ex-reconstruction-objective-shortcut"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-reconstruction-autoencoder",
+      "statement": "For 1≤k<M, the masked loss is ((M−k)q)⁻¹ times the sum, over j outside V, of squared errors between the predicted patch and T(x_j). Its population objective uniformly averages the expected loss over size-k visible sets; its empirical objective uniformly averages over training images and those visible sets. Normalized targets require positive patch standard deviations, with the stated almost-sure restriction and null-event extension for population losses.",
+      "used_by": [
+        "alg-masked-autoencoder-pretraining",
+        "ex-reconstruction-objective-shortcut"
+      ]
+    },
+    {
+      "id": "alg-masked-autoencoder-pretraining",
+      "statement": "For each t=0,…,J−1, sample a uniform training index and an independent uniform size-k visible set, encode visible patches only, insert shared mask tokens at missing positions, decode all positions, compute masked-target MSE and its parameter gradient, and apply the supplied optimizer update. Return the trained encoder and final parameter vector.",
+      "used_by": [
+        "ex-reconstruction-objective-shortcut"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-sigma-algebra",
+      "used_for": "Closure under complements and countable unions in the measurable image-space setup.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "The specified measurable structures on image and latent spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "The preimage definition of measurability for encoders, decoders and random images.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability spaces and total probability mass one in population risks.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Random images as measurable maps from a probability space.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Extended nonnegative expectations of measurable reconstruction losses.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Finite empirical averages and the zero-loss example's finite expectation.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-sigma-algebra",
+      "finding": "The Definition contains “$\\mathcal A$ ([[def-algebra-of-subsets]])” inside its mathematical formulation, and has no following Definition references section. This violates the uninterrupted-definition instruction; the cited algebra dependency is mathematically appropriate.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-space",
+      "finding": "The Definition contains “sigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]])” inside its formulation, and has no following Definition references section. The hyperlink must follow the complete definition under the required reference heading.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "The Definition places “([[def-measurable-space]])” between the introduction of the two measurable spaces and the definition of a measurable function. It has no following Definition references section, contrary to the uninterrupted-definition instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The Definition embeds “([[def-measure]])” after the probability-measure condition and “([[def-measure-space]])” after the probability-space definition. Both hyperlinks remain inside the complete defining paragraph rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-random-element-and-real-random-variable",
+      "finding": "The Definition includes “in the sense of [[def-measurable-function-between-measurable-spaces]]” and later “[[def-borel-sigma-algebra]]” before completing the real-random-variable definition. There is no following Definition references section; both links interrupt the defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition includes “of [[def-integrable-real-and-complex-functions-and-their-integrals]]” within the integrable-variable branch, before its expectation formula and final positive/negative-parts identity. The hyperlink is not moved to a following Definition references section as required.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "reconstruction-and-masked-autoencoders",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "The prerequisite page contains def-feedforward-neural-network. Its finite acyclic graph, ordered evaluation, real weights/biases and identity-output MLP conventions support the assigned network descriptions and the constant-map witness. The batch imports no universal-approximation conclusion or unstated activation hypothesis. The supplier diagram agrees with its stated edge and evaluation conventions."
+    }
+  ]
+}

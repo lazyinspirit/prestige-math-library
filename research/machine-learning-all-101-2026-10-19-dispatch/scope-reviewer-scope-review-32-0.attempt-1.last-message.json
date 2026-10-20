@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "32",
+  "round": 0,
+  "reviewed_items": [
+    "def-relu-network",
+    "def-relu-linear-region",
+    "lem-univariate-relu-affine-interval-count",
+    "lem-relu-tent-iterate-depth",
+    "lem-relu-square-approximation",
+    "lem-relu-bounded-product-approximation",
+    "lem-sobolev-taylor-grid-approximation",
+    "thm-yarotsky-fixed-architecture-sobolev-approximation-rate",
+    "thm-yarotsky-adaptive-one-dimensional-lipschitz-approximation",
+    "thm-borsuk-ulam-general",
+    "thm-warren-polynomial-sign-pattern-bound",
+    "thm-sobolev-continuous-nonlinear-width-lower-bound",
+    "lem-relu-network-vc-dimension-bound",
+    "thm-yarotsky-approximation-lower-bounds",
+    "lem-hyperplane-arrangement-region-count",
+    "lem-relu-rank-sensitive-region-recursion",
+    "thm-relu-linear-region-upper-bound",
+    "lem-relu-folding-block",
+    "thm-relu-linear-region-lower-bounds",
+    "lem-bernstein-polynomial-lipschitz-error",
+    "thm-telgarsky-depth-separation-l1",
+    "fs-telgarsky-unrestricted-gate-parameter-separation",
+    "cex-telgarsky-small-k-large-degree-gate",
+    "ex-relu-tent-map-depth-vs-width",
+    "ex-target-specific-vs-target-independent-approximation",
+    "ex-linear-regions-do-not-guarantee-learning"
+  ],
+  "reviewed_pages": [
+    "relu-approximation-rates-and-depth-expressivity",
+    "relu-approximation-rates-and-depth-expressivity-examples"
+  ],
+  "decision": "repair",
+  "reason": "I reviewed the full batch, approved scope, and actual supplier claims and proofs. The remaining defects are locally repairable; no irreducible prerequisite gap requires owner escalation. No source statement changed in this read-only review, so consumer_checks is empty; recheck affected consumers after the requested repair.",
+  "findings": [
+    {
+      "id": "def-relu-network",
+      "type": "local",
+      "reason": "The supplier defines a DAG with a topological order but no layers, while this Definition measures depth by layers even for graphs with skips. Specify a canonical layer or longest-path convention and input/output counting; clarify whether approximation domains restrict a globally defined network formula. Recheck all assigned depth and region consumers if this Definition changes."
+    },
+    {
+      "id": "def-relu-linear-region",
+      "type": "scope",
+      "reason": "The cited Serra convention defines regions by activation patterns on the global input space, with a unit inactive whenever its output is zero; this Definition instead requires strictly negative preactivations and removes all zero sets. An identically zero preactivation is not a cell boundary, so the stated convention excludes degenerate full-dimensional patterns. Align the convention or explicitly preserve a separate scope and adjust consumers, including lem-relu-rank-sensitive-region-recursion and the region theorems. [Serra et al., §2](https://proceedings.mlr.press/v80/serra18b/serra18b.pdf)"
+    },
+    {
+      "id": "lem-relu-rank-sensitive-region-recursion",
+      "type": "local",
+      "reason": "If the region Definition is aligned to the cited zero-inactive convention, step 1.1 must handle a preactivation identically zero on the current affine image: it yields an inactive full-dimensional pattern, not an empty complement. Treat such a preactivation as noncutting and establish the same arrangement bound."
+    },
+    {
+      "id": "lem-relu-square-approximation",
+      "type": "local",
+      "reason": "Step 3.1 asserts O(m) size after computing the m tent iterates but does not specify sharing. Independent applications of the tent-network lemma cost O(m²). Give the shared sequential construction and its skip readout so the O(m) claim is proved."
+    },
+    {
+      "id": "thm-relu-linear-region-lower-bounds",
+      "type": "local",
+      "reason": "Step 3.1 needs every final arrangement chamber to intersect each folded image cube. The supplier only gives a general-position arrangement in the full space. Scale and translate chamber representatives into the interior of the unit cube before composing."
+    },
+    {
+      "id": "ex-relu-tent-map-depth-vs-width",
+      "type": "local",
+      "reason": "The verification counts 1,024 affine intervals but compares that number with a bound on activation regions. Show that the tent construction's activation patterns distinguish those intervals, or state the comparison using the same quantity on both sides."
+    }
+  ],
+  "consumer_checks": []
+}

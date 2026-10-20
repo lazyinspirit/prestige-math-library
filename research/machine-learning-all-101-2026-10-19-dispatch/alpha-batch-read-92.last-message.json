@@ -1,0 +1,279 @@
+{
+  "group": "ae",
+  "batches": ["92"],
+  "pages_read": [
+    "sketched-kernel-learning-and-certified-solves",
+    "sketched-kernel-learning-and-certified-solves-examples"
+  ],
+  "items_read": [
+    "def-regularized-kernel-prediction-system",
+    "lem-regularized-gram-matrix-inverse-bound",
+    "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+    "thm-kernel-ridge-gram-perturbation-bound",
+    "thm-kernel-ridge-residual-prediction-certificate",
+    "alg-nystrom-kernel-ridge-fit",
+    "rem-statistical-and-numerical-kernel-errors",
+    "ex-kernel-ridge-singular-and-zero-gram-matrices",
+    "ex-kernel-ridge-nystrom-exact-range",
+    "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+    "ex-training-gram-does-not-control-test-prediction"
+  ],
+  "conventions": [
+    {
+      "convention": "The kernel and RKHS are real, the ordered training list has length n ≥ 1, λ > 0, and the mean-square objective uses τ = nλ in the coefficient system.",
+      "fixed_by": "def-regularized-kernel-prediction-system",
+      "matters_for": [
+        "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+        "ex-kernel-ridge-singular-and-zero-gram-matrices",
+        "ex-training-gram-does-not-control-test-prediction",
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "convention": "For every symmetric PSD matrix G, a_G = (G + τI)⁻¹y and u_G = Ga_G = y − τa_G; singular and zero G are allowed.",
+      "fixed_by": "def-regularized-kernel-prediction-system",
+      "matters_for": [
+        "thm-kernel-ridge-gram-perturbation-bound",
+        "thm-kernel-ridge-residual-prediction-certificate",
+        "ex-kernel-ridge-singular-and-zero-gram-matrices",
+        "ex-kernel-ridge-nystrom-exact-range",
+        "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error"
+      ]
+    },
+    {
+      "convention": "Matrix norms are induced Euclidean operator norms. The Nyström specialization requires full row rank of the leading sketch block; r = 0 is vacuous, λ_(n+1) = 0, and empty blocks have norm zero.",
+      "fixed_by": "thm-kernel-ridge-gram-perturbation-bound",
+      "matters_for": [
+        "ex-kernel-ridge-nystrom-exact-range",
+        "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "convention": "The certificate uses the actual original-system residual r = y − (K + τI)b and controls Kb, whereas the algorithm returns the fitted vector from the Nyström matrix.",
+      "fixed_by": "thm-kernel-ridge-residual-prediction-certificate",
+      "matters_for": [
+        "alg-nystrom-kernel-ridge-fit",
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "convention": "The algorithm uses exact real arithmetic, permits sketch width zero and budget zero, tests both actual residuals, and assigns certified status only when both residual norms meet η.",
+      "fixed_by": "alg-nystrom-kernel-ridge-fit",
+      "matters_for": [
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "convention": "The optional GP comparison assumes AC, zero mean, an actual real RKHS, and independent observation noise with covariance τI; Gaussian range-finder expectations retain Countable Choice and variance-one normalized complex entries.",
+      "fixed_by": "rem-statistical-and-numerical-kernel-errors",
+      "matters_for": [
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-regularized-gram-matrix-inverse-bound",
+      "statement": "For symmetric PSD M,N and τ > 0, A = M + τI and B = N + τI are positive definite and invertible, their inverse norms are at most 1/τ, and A⁻¹ − B⁻¹ = A⁻¹(N − M)B⁻¹ with norm at most ‖M − N‖₂/τ².",
+      "used_by": [
+        "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+        "thm-kernel-ridge-gram-perturbation-bound",
+        "thm-kernel-ridge-residual-prediction-certificate",
+        "alg-nystrom-kernel-ridge-fit",
+        "rem-statistical-and-numerical-kernel-errors",
+        "ex-kernel-ridge-singular-and-zero-gram-matrices"
+      ]
+    },
+    {
+      "id": "def-regularized-kernel-prediction-system",
+      "statement": "For the stated real kernel, RKHS, nonempty training list, response y and λ > 0, set τ = nλ and J(f) = n⁻¹Σ_i(y_i − f(x_i))² + λ‖f‖². For any finite real symmetric PSD G, define a_G = (G + τI)⁻¹y and u_G = Ga_G = y − τa_G.",
+      "used_by": [
+        "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+        "thm-kernel-ridge-gram-perturbation-bound",
+        "thm-kernel-ridge-residual-prediction-certificate",
+        "alg-nystrom-kernel-ridge-fit",
+        "ex-kernel-ridge-singular-and-zero-gram-matrices",
+        "ex-kernel-ridge-nystrom-exact-range",
+        "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+        "ex-training-gram-does-not-control-test-prediction"
+      ]
+    },
+    {
+      "id": "thm-kernel-ridge-gram-perturbation-bound",
+      "statement": "For symmetric PSD K and K̃, n ≥ 1, y ∈ Rⁿ and τ > 0, ‖K − K̃‖₂ ≤ δ implies ‖a_K − a_K̃‖₂ ≤ δ‖y‖₂/τ² and ‖u_K − u_K̃‖₂ ≤ δ‖y‖₂/τ. For the stated Nyström sketch with full-row-rank leading block, δ may be the displayed deterministic spectral residual bound.",
+      "used_by": [
+        "rem-statistical-and-numerical-kernel-errors",
+        "ex-kernel-ridge-nystrom-exact-range",
+        "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error"
+      ]
+    },
+    {
+      "id": "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+      "statement": "Under the stated real PSD kernel and real RKHS hypotheses, with n ≥ 1, λ > 0 and τ = nλ, f₀ = Σ_i a_i k(·,x_i), a = (K + τI)⁻¹y, uniquely minimizes J over the RKHS, and its training evaluation vector is Ka = y − τa.",
+      "used_by": [
+        "rem-statistical-and-numerical-kernel-errors",
+        "ex-kernel-ridge-singular-and-zero-gram-matrices",
+        "ex-training-gram-does-not-control-test-prediction"
+      ]
+    },
+    {
+      "id": "thm-kernel-ridge-residual-prediction-certificate",
+      "statement": "For symmetric PSD K, n ≥ 1, y ∈ Rⁿ, τ > 0, a = (K + τI)⁻¹y and arbitrary b ∈ Rⁿ, the actual residual r = y − (K + τI)b satisfies ‖b − a‖₂ ≤ ‖r‖₂/τ and ‖Kb − Ka‖₂ ≤ ‖K‖₂‖r‖₂/τ.",
+      "used_by": [
+        "alg-nystrom-kernel-ridge-fit",
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Orthogonal diagonalization of real symmetric PSD matrices with nonnegative eigenvalues.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "The four Penrose equations used in the Nyström formula and algorithm.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Existence and uniqueness for singular and empty sketch matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-psd-nystrom-approximation",
+      "used_for": "The exact Nyström compression formula, including zero-width sketches.",
+      "opened": true
+    },
+    {
+      "id": "thm-psd-nystrom-order-and-exactness",
+      "used_for": "Positive semidefiniteness of the approximation and exactness under range capture.",
+      "opened": true
+    },
+    {
+      "id": "thm-nystrom-deterministic-spectral-residual-bound",
+      "used_for": "The conditional spectral error substituted into the owned perturbation theorem, with matching full-row-rank and empty-block conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-nystrom-square-root-projector-identity",
+      "used_for": "Checking the projection identity underlying the cited Nyström order and residual results.",
+      "opened": true
+    },
+    {
+      "id": "lem-moore-penrose-products-are-orthogonal-projectors",
+      "used_for": "Checking the projector and full-row-rank identities underlying the Nyström suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Checking the square-root hypotheses in the Nyström and GP suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Checking the finite-matrix decomposition interface used by the pseudoinverse and spectral suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Checking the operator-norm interface used by the Nyström residual supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Checking the finite least-squares interface invoked by the GP/KRR seam supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The optional GP comparison's stated choice assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The Gaussian-law choice assumption retained in the scope remark.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-real-and-normalized-complex-gaussian-matrix-law",
+      "used_for": "Real standard and variance-one normalized complex Gaussian conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-rangefinder-expected-spectral-error",
+      "used_for": "Checking that the scope remark faithfully preserves expectation-only conclusions, dimension restrictions and Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-gaussian-rangefinder-expected-spectral-error",
+      "used_for": "Checking the real-field statement supporting the cited combined expectation theorem.",
+      "opened": true
+    },
+    {
+      "id": "lem-normalized-complex-rangefinder-direct-spectral-expectation",
+      "used_for": "Checking the normalized-complex statement supporting the cited combined expectation theorem.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-training-gram-does-not-control-test-prediction",
+      "concern": "Verification 1.1 fixes the model index j and then writes “Σ_{i,j} c_i c_j k_j(t_i,t_j) = ‖Σ_i c_i φ_j(t_i)‖₂²”. The summation rebinds j on the left while j remains the fixed model index on the right. Use distinct summation indices to make the intended PSD identity unambiguous.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-moore-penrose-pseudoinverse",
+      "finding": "The Definition ends with “The four displayed relations ... are written in the matrix product and adjoint conventions of [[def-matrix-product-and-identity-matrix]] and [[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].” These hyperlinks remain inside the complete Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "finding": "The Statement says “satisfying the four Penrose equations of [[def-moore-penrose-pseudoinverse]].” This hyperlink interrupts the Statement and has not been moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-psd-nystrom-order-and-exactness",
+      "finding": "The Statement says “the Nyström approximation in [[def-psd-nystrom-approximation]] satisfies”. This supplier hyperlink remains inside the Statement rather than an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition contains “Every family of nonempty sets has a choice function ([[def-choice-function]]).” The hyperlink occurs before the written-out and equivalent formulations, violating the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable-choice",
+      "finding": "The Definition says “Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has a choice function.” Both hyperlinks remain inside the Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-operator-norm-is-the-largest-singular-value",
+      "finding": "The Statement ends “the maximum in [[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at a right-singular vector for s_1.” The hyperlink remains within the Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-normalized-complex-rangefinder-direct-spectral-expectation",
+      "finding": "The Statement specifies the basis “returned by [[alg-gaussian-randomized-range-finder]], and put P=QQ*” before displaying its conclusion. This hyperlink interrupts the Statement and should be preserved in a following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "sketched-kernel-learning-and-certified-solves",
+      "to": "ml02-gaussian-process-regression",
+      "faithful": true,
+      "note": "The scope remark specializes the actual GP/KRR theorem to zero mean, an explicitly assumed real RKHS, σ = √τ, independent noise covariance τI and AC. The resulting training conditional-mean identity agrees with the supplier and is stated almost surely."
+    },
+    {
+      "from": "sketched-kernel-learning-and-certified-solves",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "The owned definition and minimization theorem use the supplier's real symmetric PSD-kernel predicate and reproducing identities for a given real RKHS. They do not infer canonical RKHS existence without the construction's Countable Choice assumption; the test-prediction example constructs its finite RKHSs explicitly."
+    }
+  ]
+}

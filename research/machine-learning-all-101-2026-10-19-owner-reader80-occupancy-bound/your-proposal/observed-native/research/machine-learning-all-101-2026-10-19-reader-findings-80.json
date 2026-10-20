@@ -1,0 +1,32 @@
+{
+  "batch": "80",
+  "findings": [
+    {
+      "id": "lem-optimal-action-value-is-attained-by-greedy-policy",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "thm-tabular-q-learning-convergence-under-robbins-monro-conditions",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "8c9c18625fb75c8861dbcd2d49cc2cbc79c9622181e3530a9c91194f1aa80eba"
+      },
+      "location": "Statement; Proof steps 2.2 and 5.1",
+      "defect": "ill-formed",
+      "evidence": "The item defines π* as a deterministic function but applies T^{π*} and V^{π*}. Its declared Bellman-operator and value-function definitions accept stationary probability-family policies, and the item does not define the point-mass embedding π̂*(a|s)=1_{a=π*(s)} or justify an extension. Define that embedding and use it consistently, or prove a suitable extension. The assigned consumer thm-tabular-q-learning-convergence-under-robbins-monro-conditions directly depends on this lemma.",
+      "severity": "fatal"
+    },
+    {
+      "id": "lem-normalized-discounted-state-occupancy-is-probability",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "def-constrained-markov-decision-process",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "ca15a33b8d1ff3c1fed6620e7ef46f461aadd719a5998e68a88ac0a5b9db5e7a"
+      },
+      "location": "Statement, discounted-signal bound clause; Proof step 3.1",
+      "defect": "ill-formed",
+      "evidence": "The statement claims |J_g^π(μ)|≤B/(1−γ) for every bounded transition signal g with |g|≤B, but B is not quantified or introduced. Step 3.1 uses B as a finite uniform bound. Quantify B≥0 and require |g(s,a,ρ,s')|≤B for every transition, or state the chosen finite bound. The assigned consumer def-constrained-markov-decision-process directly depends on this lemma.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Reviewed all 17 assigned batch-80 items, both assigned pages, needed supplier arguments, and the affected downstream consumer closure. These two findings are out-of-batch current-run drafts; their source hashes were rechecked at split. The stale pre-edit template_review hashes on alg-policy-iteration require owner boundary review. Autopilot status also reports three-failure 3a-collect blockers for batches 57 and 91, outside batch 80. Mathematical source checks included Sutton–Barto §§3.6–3.8, 4.2–4.4 ([PDF](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf)), Brown CS-96-08 §§2.1–2.3 ([report](https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf)), and Mozgovoy Example 1.65 and Theorem 3.19 ([notes](https://www.maths.tcd.ie/~mozgovoy/data/notes_MS_2014.pdf)); other consulted sources are listed in the reader report."
+}

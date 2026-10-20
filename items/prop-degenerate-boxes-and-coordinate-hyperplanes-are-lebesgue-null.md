@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -32,7 +33,7 @@ pipeline_run: null
 ## Statement
 
 Let $n \ge 1$ and **assume the Axiom of Countable Choice**
-([[def-countable-choice]]). Then:
+(The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Then:
 
 1. **Degenerate boxes.** If $a_i \le b_i$ are reals with $a_{i_0} = b_{i_0}$ for
    some $i_0 < n$, then every set $R$ between the open box
@@ -43,6 +44,10 @@ Let $n \ge 1$ and **assume the Axiom of Countable Choice**
    is Lebesgue measurable with $\lambda_n(H_{i_0,c}) = 0$.
 
 At $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\{c\}$.
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

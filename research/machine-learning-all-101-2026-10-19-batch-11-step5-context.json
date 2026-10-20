@@ -1,0 +1,389 @@
+{
+  "group": "d",
+  "batches": [
+    "11"
+  ],
+  "pages_read": [
+    "adversarial-robustness-and-robust-risk",
+    "adversarial-robustness-and-robust-risk-examples"
+  ],
+  "items_read": [
+    "def-adversarial-threat-set-and-robust-risk",
+    "def-two-class-spherical-gaussian-mixture-model",
+    "def-binary-feature-bernoulli-model",
+    "alg-gaussian-mixture-robust-mean-classifier",
+    "alg-coordinate-threshold-preprocessing",
+    "lem-gaussian-vector-norm-concentration",
+    "lem-gaussian-sample-mean-signal-alignment",
+    "cor-one-sample-natural-classification-error-gaussian-mixture",
+    "thm-robust-sample-upper-bound-gaussian-mixture",
+    "lem-common-shift-robust-risk-lower-bound",
+    "lem-gaussian-normal-prior-posterior",
+    "thm-robust-sample-lower-bound-gaussian-mixture",
+    "lem-finite-independent-sign-sum-tail",
+    "lem-bernoulli-coordinate-posterior-odds-bound",
+    "thm-architecture-dependent-robustness-binary-feature-model",
+    "ex-gaussian-robust-risk-dimension-radius-scaling",
+    "ex-bernoulli-perturbations-preserve-signs",
+    "ex-natural-and-robust-risk-on-gaussian-model"
+  ],
+  "conventions": [
+    {
+      "convention": "Robust risk is the outer expectation of the pointwise supremum, defined through nonnegative measurable majorants; graph measurability of a threat correspondence does not assert measurability of that supremum. Perturbation balls are closed.",
+      "fixed_by": "def-adversarial-threat-set-and-robust-risk",
+      "matters_for": [
+        "lem-common-shift-robust-risk-lower-bound",
+        "thm-robust-sample-upper-bound-gaussian-mixture",
+        "thm-robust-sample-lower-bound-gaussian-mixture",
+        "thm-architecture-dependent-robustness-binary-feature-model",
+        "ex-gaussian-robust-risk-dimension-radius-scaling",
+        "ex-bernoulli-perturbations-preserve-signs",
+        "ex-natural-and-robust-risk-on-gaussian-model"
+      ]
+    },
+    {
+      "convention": "Gaussian branches assume AC, have finite dimension d ≥ 1 and σ > 0, and use balanced labels. Fixed normalized parameters satisfy ||θ||₂ = √d; this normalization is not imposed on the separate Gaussian-prior experiment.",
+      "fixed_by": "def-two-class-spherical-gaussian-mixture-model",
+      "matters_for": [
+        "lem-gaussian-sample-mean-signal-alignment",
+        "cor-one-sample-natural-classification-error-gaussian-mixture",
+        "thm-robust-sample-upper-bound-gaussian-mixture",
+        "thm-robust-sample-lower-bound-gaussian-mixture",
+        "ex-gaussian-robust-risk-dimension-radius-scaling",
+        "ex-natural-and-robust-risk-on-gaussian-model"
+      ]
+    },
+    {
+      "convention": "Linear classifiers assign score zero to +1; the sample-mean procedure requires n ≥ 1.",
+      "fixed_by": "alg-gaussian-mixture-robust-mean-classifier",
+      "matters_for": [
+        "thm-robust-sample-upper-bound-gaussian-mixture",
+        "cor-one-sample-natural-classification-error-gaussian-mixture"
+      ]
+    },
+    {
+      "convention": "Coordinate thresholding maps zero to +1. Exact preservation of hypercube coordinates is asserted only for perturbation radius ε < 1.",
+      "fixed_by": "alg-coordinate-threshold-preprocessing",
+      "matters_for": [
+        "thm-architecture-dependent-robustness-binary-feature-model",
+        "ex-bernoulli-perturbations-preserve-signs"
+      ]
+    },
+    {
+      "convention": "The Bernoulli parameter lies in the sign hypercube; conditional feature signs match yθ coordinatewise with probability 1/2 + τ. The prior experiment uses a uniform parameter and conditionally independent observations.",
+      "fixed_by": "def-binary-feature-bernoulli-model",
+      "matters_for": [
+        "lem-bernoulli-coordinate-posterior-odds-bound",
+        "thm-architecture-dependent-robustness-binary-feature-model"
+      ]
+    },
+    {
+      "convention": "The Gaussian lower bound permits n = 0, uses an empty sum equal to zero, quantifies over jointly Borel deterministic learning rules, and takes an outer expectation over parameter and sample.",
+      "fixed_by": "thm-robust-sample-lower-bound-gaussian-mixture",
+      "matters_for": [
+        "ex-gaussian-robust-risk-dimension-radius-scaling",
+        "ex-natural-and-robust-risk-on-gaussian-model"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-adversarial-threat-set-and-robust-risk",
+      "statement": "The pointwise robust loss is sup over x′ ∈ Δ(x) of ℓ(f(x′),y); its robust risk is the infimum of expectations of nonnegative measurable functions dominating that loss.",
+      "used_by": [
+        "lem-common-shift-robust-risk-lower-bound",
+        "thm-robust-sample-upper-bound-gaussian-mixture",
+        "thm-robust-sample-lower-bound-gaussian-mixture",
+        "thm-architecture-dependent-robustness-binary-feature-model",
+        "ex-bernoulli-perturbations-preserve-signs"
+      ]
+    },
+    {
+      "id": "lem-gaussian-vector-norm-concentration",
+      "statement": "Assume AC. For d ≥ 1, σ > 0 and G ∼ N_d(0,σ²I_d), P(||G||₂ ≥ σ√d+t) ≤ exp(−t²/(2σ²)) for t ≥ 0, and P(||G||∞ > s) ≤ 2d exp(−s²/(2σ²)) for s ≥ 0. Each unit-vector projection has the stated upper and lower one-sided Gaussian tail bounds. For d ≥ 2, P(||G||∞ ≤ 2σ√(2 log d)) ≥ 1−1/d.",
+      "used_by": [
+        "lem-gaussian-sample-mean-signal-alignment",
+        "cor-one-sample-natural-classification-error-gaussian-mixture",
+        "thm-robust-sample-upper-bound-gaussian-mixture",
+        "thm-robust-sample-lower-bound-gaussian-mixture"
+      ]
+    },
+    {
+      "id": "lem-finite-independent-sign-sum-tail",
+      "statement": "For independent sign variables ξ_i, real coefficients c_i, V = Σc_i² and S = Σc_i(ξ_i−Eξ_i), each one-sided tail at t > 0 is at most exp(−t²/(2V)) when V > 0, and the two-sided tail is at most twice that quantity. When V = 0, including the empty sum, all three tail probabilities are zero.",
+      "used_by": [
+        "lem-bernoulli-coordinate-posterior-odds-bound",
+        "thm-architecture-dependent-robustness-binary-feature-model"
+      ]
+    },
+    {
+      "id": "lem-gaussian-sample-mean-signal-alignment",
+      "statement": "Assume AC. For d,n ≥ 1, σ > 0, ||θ||₂ = √d and independent Gaussian-model observations, let W = n⁻¹ΣY_iX_i and normalize it, using e₁ when W = 0. Then P(⟨Ŵ,θ⟩ ≤ ((2√n−1)/(2√n+4σ))√d) ≤ 2 exp(−d/(8(σ²+1))).",
+      "used_by": [
+        "cor-one-sample-natural-classification-error-gaussian-mixture",
+        "thm-robust-sample-upper-bound-gaussian-mixture"
+      ]
+    },
+    {
+      "id": "lem-gaussian-normal-prior-posterior",
+      "statement": "Assume AC. Under prior Θ ∼ N_d(0,I_d), n ≥ 1 conditionally independent observations Z_i ∼ N_d(Θ,σ²I_d), and independent uniform labels, the posterior is N_d((n/(σ²+n))Z̄,(σ²/(σ²+n))I_d). With n = 0 it is the prior.",
+      "used_by": [
+        "thm-robust-sample-lower-bound-gaussian-mixture"
+      ]
+    },
+    {
+      "id": "lem-bernoulli-coordinate-posterior-odds-bound",
+      "statement": "For the uniform-prior Bernoulli experiment with d ≥ 1, 0 < τ ≤ 1/4 and 0 ≤ n ≤ τ⁻², posterior coordinates are conditionally independent and L_j(S) = log((1+2τ)/(1−2τ))ΣY_iX_ij. For 0 < δ < 1, with probability at least 1−δ, max_j|L_j(S)| ≤ 15τ√(2n log(2d/δ)).",
+      "used_by": [
+        "thm-architecture-dependent-robustness-binary-feature-model"
+      ]
+    },
+    {
+      "id": "thm-robust-sample-lower-bound-gaussian-mixture",
+      "statement": "Assume AC. In the Gaussian-prior experiment with d ≥ 1, n ≥ 0, σ > 0 and ε ≥ 0, every jointly Borel learning rule has expected outer robust risk at least (1/2)P(√(n/(σ²+n))||V||∞ ≤ ε), where V ∼ N_d(0,I_d). Consequently, for d ≥ 2 and n ≤ ε²σ²/(8 log d), this risk is at least (1−1/d)/2.",
+      "used_by": [
+        "ex-gaussian-robust-risk-dimension-radius-scaling",
+        "ex-natural-and-robust-risk-on-gaussian-model"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Ordinary expectations underlying outer-risk majorants and moment-generating functions.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-law conventions in the threat and data-model definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-function",
+      "used_for": "Threat correspondences and predictor maps.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Instance, label and action measurable spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Predictor and loss measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Joint-law, graph and finite-sample measurable spaces, including empty products.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumptions on every Gaussian branch.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian construction, independent-coordinate representation and scalar projection laws.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Training observations, coordinate signs and independent labels.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Scalar Gaussian densities used in the moment-generating-function calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Finite products of Gaussian and sign-variable moment-generating functions.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Chernoff bounds and the Bernoulli lower-bound margin decomposition.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-union-bound",
+      "used_for": "Coordinate-tail and training-event failure probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Domains and inverse-exponential identities in sample-size and posterior formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Logarithmic integral inequalities, posterior-odds estimates and numerical constants.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential-series bound used to control posterior means.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Combining finite exponential factors in moment-generating functions.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence after class-weighting and centering training observations.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Gaussian sample means, signed margins and posterior-predictive sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "Identification and symmetry of scalar normal laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Identification of scalar Gaussian projections from their transforms.",
+      "opened": true
+    },
+    {
+      "id": "thm-cramer-wold-device",
+      "used_for": "Identification of vector Gaussian laws from all scalar projection laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithmic monotonicity and product laws in probability and sample-size comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "The bound ||u||₁ ≤ √d for unit Euclidean vectors.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Passing measurable lower bounds through every majorant defining outer risk.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Finite independent Gaussian likelihoods and independent labels.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Positive-definite Gaussian prior and likelihood densities in the posterior calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Verification of the posterior kernel and measurable parameter integrals in the Gaussian lower bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "The second derivative of the centered sign log moment-generating function.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite weighted expectations in the Bernoulli margin decomposition.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-robust-sample-lower-bound-gaussian-mixture",
+      "concern": "The Statement joins display delimiters directly to prose: '$$Consequently, if' and 'then$$'. Separate the complete displays from the intervening sentence. The inequalities themselves check out.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-bernoulli-coordinate-posterior-odds-bound",
+      "concern": "The Statement joins display delimiters directly to prose: '$$Moreover, the coordinates' and 'experiment,$$'. Separate these displays from prose without changing the posterior identity or bound.",
+      "severity": "presentation"
+    },
+    {
+      "id": "adversarial-robustness-and-robust-risk",
+      "concern": "The page declares 'mixed-effects-and-longitudinal-models' in requires, but research/machine-learning-all-101-2026-10-19-batch-11.cross-batch-dependencies.json contains only the other three required-page rows. The owning writer should record the missing page edge and its actual supplier use, including the Gaussian density prerequisite.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition interrupts its integrable-variable clause with 'of [[def-integrable-real-and-complex-functions-and-their-integrals]]'. This hyperlink belongs after the complete Definition in Definition references under the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The Definition contains '([[def-measure]])' and '([[def-measure-space]])' inside its defining paragraph. These links interrupt the complete Definition and lack the required following Definition references placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-function",
+      "finding": "The Definition contains inline supplier links, including '\"relation\" is as in [[def-relation-domain-range-and-field]]' and '([[thm-the-characterising-property-of-ordered-pairs]])'. Move the links after the complete Definition while preserving its domain, range and codomain conventions.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-space",
+      "finding": "The defining sentence contains '([[def-sigma-algebra]])'. This hyperlink interrupts the Definition instead of appearing in a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "The Definition opens with measurable spaces followed by '([[def-measurable-space]])' before stating the measurability condition. The hyperlink must follow the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "The Definition says 'generated by the measurable rectangles of [[def-measurable-rectangle]]' before continuing to the empty and finite product conventions. The link interrupts the complete Definition and should follow it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition's quoted axiom ends with '([[def-choice-function]])' before the expanded formulation and product formulation. This link should follow the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "The Definition contains '[[def-independent-sigma-algebras-and-events]]' and '[[def-sigma-algebra-generated-by-a-function]]' inside its defining prose. These links need placement after the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-standard-normal-and-normal-laws",
+      "finding": "The Definition contains inline links beginning with 'By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]' and continuing through the Dirac-law clause. These links interrupt the complete Definition and should be retained in a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition contains 'because [[cor-exponential-is-a-bijection-onto-positive-reals]] states' before completing the inverse-function identities. The hyperlink should follow the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The Definition contains inline links beginning with 'proved in [[lem-exponential-series-has-infinite-radius]]', followed by links explaining factorials, powers and series. Preserve those conventions and move all links after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "The Statement contains inline links including 'as in [[def-euclidean-inner-product]]', '([[def-norm-and-normed-space]])', and '[[thm-cauchy-schwarz-finite]]'. The complete four-clause statement and attribution should precede a Statement references section containing these links.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "adversarial-robustness-and-robust-risk",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "Opened the prerequisite page, def-realizable-and-agnostic-pac and thm-finite-class-sample-complexity. The prerequisite supplies PAC/sample-size context only; the assigned items prove their model-specific bounds directly and do not invoke a finite-class distribution-free guarantee. Neither side asserts a converse or applies the finite-class theorem to the continuous linear-classifier family."
+    }
+  ]
+}

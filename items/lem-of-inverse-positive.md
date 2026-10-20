@@ -11,6 +11,7 @@ deps: [def-ordered-field, lem-of-sign-rules, cor-of-one-positive]
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-inverse-positive.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -32,11 +33,15 @@ proof_strategy: direct
 
 ## Statement
 
-Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and
+Let $F$ be an ordered field (Ordered field) with positive cone $P$, and
 let $a, b \in F$.
 
 1. If $a > 0$ then $a^{-1} > 0$.
 2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.
+
+## Statement references
+
+[[def-ordered-field]]
 
 ## Facts & Assumptions
 

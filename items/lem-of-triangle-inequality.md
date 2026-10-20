@@ -13,6 +13,7 @@ landmark: true
 short: "Triangle ineq."
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-triangle-inequality.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -33,9 +34,13 @@ pipeline_run: null
 
 ## Statement
 
-Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \in F$. Then
+Let $F$ be an ordered field (Ordered field) and let $x, y \in F$. Then
 
 $$|x + y| \le |x| + |y|.$$
+
+## Statement references
+
+[[def-ordered-field]]
 
 ## Facts & Assumptions
 

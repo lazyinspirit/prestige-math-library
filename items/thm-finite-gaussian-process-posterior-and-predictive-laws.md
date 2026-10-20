@@ -24,6 +24,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-finite-gaussian-process-posterior-and-predictive-laws.json
   judge:
     model: "gpt-6-luna"
     verdict: pass
@@ -41,7 +42,7 @@ sources:
 Assume AC and let $f=(f_t)_{t\in T}$ be a real Gaussian process with mean
 $m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,
 the canonical cylinder-space process exists by
-[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]].
+A mean and positive-semidefinite kernel define a Gaussian process.
 Let $X=(x_1,\ldots,x_n)\in T^n$ and $X_*=(x_1^*,\ldots,x_p^*)\in T^p$,
 where $n,p\ge1$ and repeated indices are allowed. Write
 $f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,
@@ -66,6 +67,10 @@ $P_Y$-almost surely.
 For computation, the occurrences of $C^{-1}v$ mean solving $Cu=v$. Since
 $C$ is positive definite, its Cholesky factorization and forward/back
 substitution evaluate these solves without forming $C^{-1}$.
+
+## Statement references
+
+[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]]
 
 ## Facts & Assumptions
 

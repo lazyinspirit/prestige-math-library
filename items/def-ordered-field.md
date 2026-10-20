@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 short: "ordered field"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-ordered-field.json
   precheck: n/a
   audited: 2026-07-25
 sources:
@@ -28,7 +29,7 @@ pipeline_run: null
 
 ## Definition
 
-An **ordered field** is a field $F$ ([[def-field]]) together with a subset
+An **ordered field** is a field $F$ (Field) together with a subset
 $P \subseteq F$, the set of **positive** elements (the *positive cone*),
 satisfying:
 
@@ -42,6 +43,10 @@ $$a < b \;:\Longleftrightarrow\; b - a \in P, \qquad a \le b \;:\Longleftrightar
 
 Thus $a > b$ means $b < a$, and $a \ge b$ means $b \le a$. An element $x$ with
 $-x \in P$ (equivalently $x < 0$) is called **negative**.
+
+## Definition references
+
+[[def-field]]
 
 ## Remarks
 

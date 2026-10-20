@@ -1,0 +1,257 @@
+{
+  "group": "e",
+  "batches": [
+    "14"
+  ],
+  "pages_read": [
+    "ml02-linear-classification",
+    "ml02-linear-classification-examples"
+  ],
+  "items_read": [
+    "def-linear-score-classifier",
+    "def-indicator-response-least-squares-classifier",
+    "lem-indicator-response-least-squares-minimum-norm-fit",
+    "def-generative-lda-and-qda-models",
+    "thm-lda-and-qda-log-posterior-scores",
+    "def-binary-logistic-and-multiclass-softmax-models",
+    "def-binary-logistic-log-likelihood-and-l1-penalty",
+    "thm-binary-logistic-derivatives-and-irls-update",
+    "thm-complete-separation-precludes-finite-logistic-mle",
+    "alg-cyclic-perceptron",
+    "thm-perceptron-margin-mistake-bound",
+    "ex-generative-lda-and-logistic-share-a-boundary",
+    "ex-separated-logistic-sample-has-unattained-supremum",
+    "ex-nonseparable-perceptron-cycles"
+  ],
+  "conventions": [
+    {
+      "convention": "Affine class scores use finite ordered labels 1 through K; ties select the smallest maximizing label.",
+      "fixed_by": "def-linear-score-classifier",
+      "matters_for": [
+        "def-indicator-response-least-squares-classifier",
+        "thm-lda-and-qda-log-posterior-scores",
+        "def-binary-logistic-and-multiclass-softmax-models",
+        "ex-generative-lda-and-logistic-share-a-boundary"
+      ]
+    },
+    {
+      "convention": "Indicator-response fitting selects the least-squares minimizer of smallest Frobenius norm, allows rank-deficient designs, and includes an intercept only when supplied as a design column.",
+      "fixed_by": "def-indicator-response-least-squares-classifier",
+      "matters_for": [
+        "lem-indicator-response-least-squares-minimum-norm-fit"
+      ]
+    },
+    {
+      "convention": "Gaussian generative models assume AC, strictly positive class priors, and symmetric positive-definite covariance matrices; LDA shares one covariance.",
+      "fixed_by": "def-generative-lda-and-qda-models",
+      "matters_for": [
+        "thm-lda-and-qda-log-posterior-scores",
+        "ex-generative-lda-and-logistic-share-a-boundary"
+      ]
+    },
+    {
+      "convention": "Binary logistic labels are 0 and 1; a zero logit predicts 0. Softmax labels are 1 through K with smallest-index ties. Neither conditional model assumes Gaussian features.",
+      "fixed_by": "def-binary-logistic-and-multiclass-softmax-models",
+      "matters_for": [
+        "def-binary-logistic-log-likelihood-and-l1-penalty",
+        "thm-binary-logistic-derivatives-and-irls-update",
+        "thm-complete-separation-precludes-finite-logistic-mle",
+        "ex-generative-lda-and-logistic-share-a-boundary"
+      ]
+    },
+    {
+      "convention": "The likelihood uses a nonempty finite fixed design and conditionally independent binary responses. With an intercept, its coefficient is unpenalized; without an intercept, every coefficient receives the L1 penalty. No optimizer existence is asserted.",
+      "fixed_by": "def-binary-logistic-log-likelihood-and-l1-penalty",
+      "matters_for": [
+        "thm-binary-logistic-derivatives-and-irls-update",
+        "thm-complete-separation-precludes-finite-logistic-mle",
+        "ex-separated-logistic-sample-has-unattained-supremum"
+      ]
+    },
+    {
+      "convention": "The perceptron augments inputs as (x,1), starts at zero, visits the fixed sample order, updates on signed margin ≤ 0, predicts −1 at a score tie, and stops only after a complete pass without updates.",
+      "fixed_by": "alg-cyclic-perceptron",
+      "matters_for": [
+        "thm-perceptron-margin-mistake-bound",
+        "ex-nonseparable-perceptron-cycles"
+      ]
+    },
+    {
+      "convention": "The logistic Newton/IRLS identities concern one unpenalized update at finite coefficients; inverse formulas require full column rank and assert no iterative convergence.",
+      "fixed_by": "thm-binary-logistic-derivatives-and-irls-update",
+      "matters_for": [
+        "thm-binary-logistic-derivatives-and-irls-update"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-binary-logistic-and-multiclass-softmax-models",
+      "statement": "The sigmoid is σ(t)=(1+e^(−t))^(−1). Binary logistic conditional probabilities use finite affine logits, with label 0 at a zero logit; softmax probabilities normalize exponentials of finite affine class logits.",
+      "used_by": [
+        "def-binary-logistic-log-likelihood-and-l1-penalty",
+        "thm-binary-logistic-derivatives-and-irls-update",
+        "thm-complete-separation-precludes-finite-logistic-mle",
+        "ex-generative-lda-and-logistic-share-a-boundary",
+        "def-bradley-terry-preference-model"
+      ]
+    },
+    {
+      "id": "def-binary-logistic-log-likelihood-and-l1-penalty",
+      "statement": "For the specified finite fixed design and conditionally independent responses, ℓ(β)=Σ_i[y_i x_iᵀβ−log(1+exp(x_iᵀβ))]. The L1 objective leaves a reserved intercept unpenalized and otherwise penalizes all coefficients; no optimizer existence is asserted.",
+      "used_by": [
+        "thm-binary-logistic-derivatives-and-irls-update",
+        "thm-complete-separation-precludes-finite-logistic-mle",
+        "ex-separated-logistic-sample-has-unattained-supremum"
+      ]
+    },
+    {
+      "id": "alg-cyclic-perceptron",
+      "statement": "Starting at w=0 with augmented inputs (x_i,1), visit the nonempty finite ordered sample repeatedly, update w by y_i(x_i,1) whenever the signed margin is nonpositive, and return w after a full pass without updates; otherwise continue.",
+      "used_by": [
+        "thm-perceptron-margin-mistake-bound",
+        "ex-nonseparable-perceptron-cycles"
+      ]
+    },
+    {
+      "id": "thm-lda-and-qda-log-posterior-scores",
+      "statement": "Under AC, positive priors and positive-definite Gaussian covariances, the defined log posterior differs by a class-independent term from the displayed affine LDA score under common covariance, or the displayed quadratic QDA score with class-specific covariances. Ties select the smallest class index.",
+      "used_by": [
+        "ex-generative-lda-and-logistic-share-a-boundary"
+      ]
+    },
+    {
+      "id": "thm-complete-separation-precludes-finite-logistic-mle",
+      "statement": "For a nonempty finite binary logistic sample, if a vector v satisfies (2y_i−1)x_iᵀv>0 for every i, then sup over finite β of ℓ(β) is zero and no finite coefficient vector attains it.",
+      "used_by": [
+        "ex-separated-logistic-sample-has-unattained-supremum"
+      ]
+    },
+    {
+      "id": "lem-indicator-response-least-squares-minimum-norm-fit",
+      "statement": "Among all minimizers of the indicator-response squared Frobenius residual there is a unique minimum-Frobenius-norm coefficient matrix. It is V_r D_r^(−1) U_rᵀY for positive rank, and zero for rank zero; all minimizers are B_*+N with XN=0.",
+      "used_by": [
+        "def-indicator-response-least-squares-classifier"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence, normal equations and kernel description of ordinary and weighted finite-dimensional least-squares minimizers.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Thin SVD, row/kernel orthogonality and the rank-zero branch of the minimum-norm indicator fit.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumption in the Gaussian model, score theorem and shared-boundary example.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Meaning and existence of the Gaussian conditional laws, with their AC qualification.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Positive-definite Gaussian density used to derive LDA and QDA posterior scores.",
+      "opened": true
+    },
+    {
+      "id": "thm-hessian-characterises-convexity",
+      "used_for": "Convexity of the smooth negative logistic log-likelihood on the open convex domain R^q.",
+      "opened": true
+    },
+    {
+      "id": "def-glm-observation-family",
+      "used_for": "Finite Bernoulli response-family support, normalization, moments and local derivative-envelope requirements.",
+      "opened": true
+    },
+    {
+      "id": "def-generalized-linear-model",
+      "used_for": "Canonical Bernoulli-logit GLM and common scale a=1.",
+      "opened": true
+    },
+    {
+      "id": "thm-glm-general-link-score-and-information",
+      "used_for": "Specialization of score, expected information and positive weights to Bernoulli logistic regression.",
+      "opened": true
+    },
+    {
+      "id": "alg-fisher-scoring-irls",
+      "used_for": "Working response, positive weights and weighted least-squares convention for one IRLS update.",
+      "opened": true
+    },
+    {
+      "id": "thm-irls-is-fisher-scoring-step",
+      "used_for": "Identification of the full-rank Bernoulli IRLS update with Fisher scoring after verifying the supplier's regularity hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Comparison of separator progress with weight norm in the perceptron update bound.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-nonseparable-perceptron-cycles",
+      "concern": "The title says “repeat a two-pass cycle”, whereas the Example and Verification show w=0 → (0,1) → 0 within every single pass. The repeated cycle consists of two updates in one pass; the title misdescribes its period.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-separated-logistic-sample-has-unattained-supremum",
+      "concern": "Verification 2.1 says “Every finite coefficient has likelihood strictly below zero by [F2]”. The cited theorem and calculation concern log-likelihood. The likelihood itself is positive, with unattained supremum one; “likelihood” here should read “log-likelihood”.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice interrupts its Definition with “Every family of nonempty sets has a choice function ([[def-choice-function]]).” The link occurs before the subsequent written-out and equivalent formulations, rather than in an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-hessian-characterises-convexity",
+      "finding": "thm-hessian-characterises-convexity includes “Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].” inside Statement. These supplier links have not been moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-glm-observation-family",
+      "finding": "def-glm-observation-family includes “The coordinate responses are independent in the sense of [[def-independent-random-elements]].” and “Every scientific application also records a [[def-scientific-statistical-model-contract]]” inside its continuing Definition. Both links interrupt the complete defining section instead of appearing afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-generalized-linear-model",
+      "finding": "def-generalized-linear-model places supplier links inside Definition, including “the response family in [[def-glm-observation-family]]” and “The joint sampling density is the product density from [[lem-glm-product-density]].” The Definition continues after both links; the required separate Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-glm-general-link-score-and-information",
+      "finding": "thm-glm-general-link-score-and-information begins Statement with “Consider [[def-generalized-linear-model]]” and places “from [[def-glm-observation-family]]” in its regularity hypotheses. These hyperlinks interrupt the theorem statement instead of appearing after the complete statement in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-fisher-scoring-irls",
+      "finding": "alg-fisher-scoring-irls embeds supplier links in Definition instruction 3, including “using [[thm-of-square-roots]]” and “By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form A^+”, and adds further linked suppliers in the final defining paragraph. The complete procedure is therefore interrupted by hyperlinks rather than followed by Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-irls-is-fisher-scoring-step",
+      "finding": "thm-irls-is-fisher-scoring-step begins Statement with “Under the admissibility hypotheses of [[alg-fisher-scoring-irls]]” and embeds links to def-glm-observation-family and thm-glm-general-link-score-and-information before its conclusion. These links belong after the complete statement in Statement references under the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "preference-learning-and-direct-preference-optimization",
+      "to": "ml02-linear-classification",
+      "faithful": true,
+      "note": "The consumer page declares this prerequisite. Its def-bradley-terry-preference-model declares the logistic-model dependency and cites precisely the same finite-real sigmoid σ(t)=(1+e^(−t))^(−1). Finite real reward differences satisfy that interface; reversing a comparison uses σ(−t)=1−σ(t). The supplier imposes no Gaussian feature law, independence across comparisons, or deterministic preference interpretation, and the consumer imports none of those."
+    }
+  ]
+}

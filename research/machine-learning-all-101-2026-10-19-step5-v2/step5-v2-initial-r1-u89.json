@@ -1,0 +1,297 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "89",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "model": "gpt-6-luna",
+      "context_sha256": "e8115f35fc12a8b5750835ad56567efe507a7c44fb6189926705311d6b008fc7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Definition leaves theta_i unbound in L_i(theta_i), so gamma_N is undetermined. This is a logical defect rather than recoverable policy notation: on one state, two parameters may represent the same expert policy while their admissible surrogate values are 0 and 1; the same current policy then gives different realized losses and regrets. Repaired by specifying the current parameter theta_i in K and hat_pi_i=pi_{theta_i}, and taking a positive integer N of iterations. No cost, occupancy, loss-domination or comparator clause was weakened.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-behavior-cloning-covariate-shift",
+      "model": "gpt-6-luna",
+      "context_sha256": "752858f9536e50dbbe2de2cf0815ad7bf18cc522ab41ade423276ac64a0d96f5",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly attributes equality of surrogate and disagreement probability to the supplier, which permits every [0,1]-valued upper bound. The Example itself explicitly chooses equality, so step 1.1 and the cost calculation remain valid. Repaired F1 to state the general domination condition and separately identify the local equality choice; no claim or verification step changes.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "disposition": "repaired",
+      "post_sha256": "f328cf7211e391cc773c3dd5b144e59a08663527962e1806960dc96520fbc172",
+      "review_context_sha256": "7af438f685ce23391ca111695ba36ac216a0aa0080facb311f06ef888e0f7e3a",
+      "reason": "Reviewed the complete Definition, its three prerequisite carriers, owning contract and both compact pages. The finite normalized occupancy and task-cost recursions agree with their suppliers; deterministic expert actions are admissible, e is a probability, ell in [0,1] dominates e, and attained finite-hindsight minima suffice without AC. The repair binds the actual learner parameter and positive round count, so gamma_N now denotes its realized average loss minus the stated comparator. The Definition remains hyperlink-free. There is no diagram or phase proof in this item. This is repairer verification, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-behavior-cloning-covariate-shift",
+      "disposition": "repaired",
+      "post_sha256": "ffbbbf04ef264a197be31f7770740b530d910ca8a6938d355debb850870c2357",
+      "review_context_sha256": "5f17b631d363af4b7f32dbebf03c8a1b46632da0d16eeee07ed76feea6141f51",
+      "reason": "Reviewed the complete Example, all five Verification steps, corrected supplier, owning contract and compact home page. Under the expert all marginals are delta_g and the chosen loss is epsilon at g. With q=1-epsilon, learner mass at g is q^t, so decision cost is 1-q^(t+1). Bernoulli gives 1-q^k<=k epsilon; for T>=2 reciprocal Bernoulli gives 1-q^k>=k epsilon/(1+k epsilon)>=k epsilon/2 for k<=T, yielding the stated lower bound; T=1 including epsilon=1 is handled separately. Both transition loops and the g-to-b e/1 and b-to-g r/0 arrows match the model. The proof is independent of the diagram. F1 now accurately separates the supplier upper bound from the Example equality. No Statement or Definition changes. This is repairer verification, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-dagger",
+    "lem-dagger-mixture-occupancy",
+    "lem-dagger-task-cost-from-expert-surrogate",
+    "ex-behavior-cloning-covariate-shift",
+    "ex-surrogate-loss-fails-task-cost-control",
+    "thm-dagger-no-regret-reduction",
+    "thm-dagger-finite-sample-generalization",
+    "ex-dagger-interactive-expert-labels"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-resolved-finding",
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "definition",
+      "disposition": "fixed",
+      "reason": "The Definition leaves theta_i unbound in L_i(theta_i), so gamma_N is undetermined. This is a logical defect rather than recoverable policy notation: on one state, two parameters may represent the same expert policy while their admissible surrogate values are 0 and 1; the same current policy then gives different realized losses and regrets. Repaired by specifying the current parameter theta_i in K and hat_pi_i=pi_{theta_i}, and taking a positive integer N of iterations. No cost, occupancy, loss-domination or comparator clause was weakened.",
+      "evidence": "Before: hat_pi_i is only called the current learner, while gamma_N evaluates L_i(theta_i). After: hat_pi_i=pi_{theta_i} with theta_i in K and N a positive integer. Review and current hashes are recorded above.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true,
+      "class": "accuracy",
+      "subclass": "undefined-notation",
+      "location_detail": "Definition, final paragraph defining gamma_N",
+      "caught_at_stage": "5.1-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "subject": "def-imitation-learning-and-expert-surrogate-loss"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-resolved-finding",
+      "id": "ex-behavior-cloning-covariate-shift",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "reason": "F1 incorrectly attributes equality of surrogate and disagreement probability to the supplier, which permits every [0,1]-valued upper bound. The Example itself explicitly chooses equality, so step 1.1 and the cost calculation remain valid. Repaired F1 to state the general domination condition and separately identify the local equality choice; no claim or verification step changes.",
+      "evidence": "Before F1 attributes exact disagreement loss to a definition allowing upper bounds; after F1 states that upper-bound condition and attributes equality to the local Example. The five proof steps and Example are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": true,
+      "class": "accuracy",
+      "subclass": "citation-inaccurate",
+      "location_detail": "Facts & Assumptions, F1",
+      "caught_at_stage": "5.1-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "subject": "ex-behavior-cloning-covariate-shift"
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "no-change",
+      "reason": "Both assigned carriers and all eight direct item consumers are draft frozen-frontier items. Current dependency/reference and imitation-learning prose searches found no outside or published consumer of this interface change, so no published-consumer defect or repair row is proposed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed both assigned repairs in increasing dependency order, captured each mathematical review context immediately, and examined all eight direct dependency/reference consumers. No new prerequisite, downstream item-body edit, status change, AC requirement, page change, judge invocation or stamp was made. No unresolved mathematics remains in this assignment; unrelated unassigned contract diagnostics are routed separately below.",
+    "Consulted Ross\u2013Gordon\u2013Bagnell PDF sections 2 and 2.1 and Algorithm 3.1 (PDF pages 2\u20134): average decision-state occupancy, bounded costs, surrogate 0\u20131 loss or upper bound, expert-distribution training and current-policy mixture. The explicit two-state calculation is checked locally rather than attributed to that source. No other listed book or lecture source was consulted.",
+    "The initial focused strict-contract check correctly detected the stale full-Definition F1 quotation after the supplier edit. A first in-memory quotation synchronization aborted on a duplicate-replacement assertion before writing the file; no contract change was made. The lock was released. A broader read-only check additionally found seven unrelated stale quotations in thm-dagger-finite-sample-generalization (F6, F8-F12, F15), routed to its owner for metadata reconciliation; no mathematical defect is inferred from a quote mismatch alone.",
+    "Published-consumer ledger proposal: no new row is needed. Both repaired items and all eight direct item consumers are draft members of the frozen frontier; no outside consumer was found by current item/library ID search. Both pages were inspected and require no change. Historical Step-4 presentation alerts concern outside prerequisite items and are not new findings from this assigned review.",
+    "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, synchronized only the full-Definition source quotations for this repaired supplier in the owning batch-89 contract: lem-dagger-mixture-occupancy, lem-dagger-task-cost-from-expert-surrogate, thm-dagger-no-regret-reduction, thm-dagger-finite-sample-generalization, ex-behavior-cloning-covariate-shift, ex-dagger-interactive-expert-labels, ex-surrogate-loss-fails-task-cost-control. The focused strict check passed inside the critical section, then the lock was released. No proof-contract derivation, boundary finding or independent reviewer attribution was changed."
+  ],
+  "downstream_reviews": [
+    {
+      "id": "alg-dagger",
+      "path": "items/alg-dagger.md",
+      "affected_use": "Definition, opening inputs and round step 1: learner class {pi_theta:theta in K}, supplied theta_1, and explicit hat_pi_i=pi_{theta_i}; population output uses L_i(theta)=sum_s d_pi_i(s) ell(s,theta).",
+      "disposition": "unaffected",
+      "reason": "The algorithm already binds the learner parameter exactly as the repaired definition now does. Its attained minimizer selector and positive integer N agree; no procedure instruction or public interface requires repair."
+    },
+    {
+      "id": "lem-dagger-mixture-occupancy",
+      "path": "items/lem-dagger-mixture-occupancy.md",
+      "affected_use": "Statement defines pi_beta=beta pi*+(1-beta) hat_pi; F1 and proof 1.1-2.1 use finite transition recursion and d_pi=T^{-1} sum_{t<T} mu_t^pi.",
+      "disposition": "unaffected",
+      "reason": "The new parameter binding concerns only indexed training iterates. This comparison uses arbitrary fixed policies and unchanged finite-horizon occupancies; its proof does not use gamma_N."
+    },
+    {
+      "id": "lem-dagger-task-cost-from-expert-surrogate",
+      "path": "items/lem-dagger-task-cost-from-expert-surrogate.md",
+      "affected_use": "Statement and F1 define J, Q*, V* and d_pi_theta; proof 2.1-4.1 uses the expert-action zero gap, uniform cost-to-go bound and statewise ell>=e.",
+      "disposition": "unaffected",
+      "reason": "All finite cost recursions and the disagreement-domination condition are unchanged. This fixed-policy hybrid-cost argument does not use training iterates or regret."
+    },
+    {
+      "id": "ex-behavior-cloning-covariate-shift",
+      "path": "items/ex-behavior-cloning-covariate-shift.md",
+      "affected_use": "F1 and Verification 1.1-1.2 use average decision-state occupancy and expert-action disagreement to compute expert loss epsilon and cost sum_{k=1}^T (1-(1-epsilon)^k).",
+      "disposition": "repaired",
+      "reason": "The new theta_i binding has no effect on this fixed-policy calculation. Its separately assigned inaccurate F1 restatement was repaired without changing its Example, claim, diagram or proof steps."
+    },
+    {
+      "id": "ex-surrogate-loss-fails-task-cost-control",
+      "path": "items/ex-surrogate-loss-fails-task-cost-control.md",
+      "affected_use": "F1 and Verification 1.1-2.1 use disagreement sum_{a!=pi*(s)} pi_theta(a|s), the required loss domination, and J as a finite sum of task costs.",
+      "disposition": "unaffected",
+      "reason": "The one-state zero-score witness uses none of the indexed regret notation. Its zero score still fails ell>=e=1, while learner and expert costs remain T and zero; both self-loop labels agree."
+    },
+    {
+      "id": "thm-dagger-no-regret-reduction",
+      "path": "items/thm-dagger-no-regret-reduction.md",
+      "affected_use": "Statement defines mixed rollout L_i and epsilon_N; F1, proof 1.1 and 2.1 use L_i(theta_i) and identify learner own-occupancy loss ell(s,theta_i) under hat_pi_i.",
+      "disposition": "unaffected",
+      "reason": "Population DAgger already supplies theta_i through the algorithm whose step 1 binds hat_pi_i=pi_theta_i. The repaired definition makes that same identification explicit. Loss class, comparator, FTL hypotheses and cost conversion are unchanged."
+    },
+    {
+      "id": "thm-dagger-finite-sample-generalization",
+      "path": "items/thm-dagger-finite-sample-generalization.md",
+      "affected_use": "Statement explicitly sets hat_pi_i=pi_{theta_i}; F1 and proof 1.2, 2.1 and 4.1 use true L_i(theta_i), bounded occupancies, conditional rollout means and learner own-state losses.",
+      "disposition": "unaffected",
+      "reason": "Its binding of theta_i, positive N and mixed policy already coincide with the repair. The true loss formula, empirical comparator, explicit conditional-mean hypothesis and inherited AC assumptions remain unchanged."
+    },
+    {
+      "id": "ex-dagger-interactive-expert-labels",
+      "path": "items/ex-dagger-interactive-expert-labels.md",
+      "affected_use": "Example fixes two learner policies and two rounds; F1 and Verification 1.1-3.1 use expert labels at learner-visited g,b and empirical disagreement minimization.",
+      "disposition": "unaffected",
+      "reason": "The finite two-policy class can use the two policy names as parameters; the algorithm already binds each current parameter to its learner. The recovery label and unique good-policy minimizer are unchanged; the diagram transitions agree."
+    }
+  ],
+  "page_review": {
+    "paths": [
+      "library/machine-learning/imitation-learning-and-dagger.md",
+      "library/machine-learning/imitation-learning-and-dagger-examples.md"
+    ],
+    "disposition": "unaffected",
+    "reason": "Both pages contain only YAML frontmatter, retain page_layout compact-v1, list the assigned draft items and correct A/B prerequisite edge, and contain no mathematical body use of the changed defining clause."
+  },
+  "validation": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/def-imitation-learning-and-expert-surrogate-loss.md items/ex-behavior-cloning-covariate-shift.md",
+      "exit_code": 0,
+      "result": "2 files; definition not-applicable; example direct proof pass; checked 1, failed 0."
+    },
+    {
+      "command": "node tools/rendercheck.mjs --json items/def-imitation-learning-and-expert-surrogate-loss.md items/ex-behavior-cloning-covariate-shift.md library/machine-learning/imitation-learning-and-dagger.md library/machine-learning/imitation-learning-and-dagger-examples.md",
+      "exit_code": 0,
+      "result": "4 checked, no errors or warnings."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-imitation-learning-and-expert-surrogate-loss.md items/ex-behavior-cloning-covariate-shift.md",
+      "exit_code": 0,
+      "result": "2 items, 5 steps, 0 defects; run after all item edits."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-89.proof-contracts.json --strict --items def-imitation-learning-and-expert-surrogate-loss,ex-behavior-cloning-covariate-shift --json",
+      "exit_code": 0,
+      "result": "ok true; both assigned items checked; no errors or warnings, after source quotation synchronization."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-89.proof-contracts.json --strict --items alg-dagger,lem-dagger-mixture-occupancy,lem-dagger-task-cost-from-expert-surrogate,ex-surrogate-loss-fails-task-cost-control,thm-dagger-no-regret-reduction,thm-dagger-finite-sample-generalization,ex-dagger-interactive-expert-labels --json",
+      "exit_code": 1,
+      "result": "All seven selected consumer contracts checked. Six pass; thm-dagger-finite-sample-generalization has only the seven unrelated citation-quote-mismatch diagnostics in owner_routes. Every quotation of the repaired definition now matches. No warnings."
+    },
+    {
+      "command": "Read-only itemHashGuard reversal comparison and canonical JSON pack SHA-256 verification",
+      "exit_code": 0,
+      "result": "Reversing exactly the described two item edits recovers each initial-1.json before guard. Current guards match the captured reviews. SHA-256 of JSON.stringify(parsed initial-1.json) equals the task input_sha256 exactly."
+    }
+  ],
+  "owner_routes": [
+    {
+      "id": "thm-dagger-finite-sample-generalization",
+      "route": "frontier-owner",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-89.proof-contracts.json",
+      "affected_use": "citations F6, F8, F9, F10, F11, F12 and F15 fail exact source-section quotation matching against their current supplier carriers.",
+      "invalidated_claim": "Only the literal quote-mirror assertions failed the focused contract tool; no change to the theorem mathematics is proposed or justified by that diagnostic.",
+      "minimality": "Owning lane should examine and synchronize the seven source quotations against current sources without rewriting theorem statements or proofs unless a separate mathematical defect is confirmed.",
+      "diagnostics": [
+        {
+          "fact": "F6",
+          "source": "def-martingale-difference-sequence",
+          "section": "Definition"
+        },
+        {
+          "fact": "F8",
+          "source": "def-filtration-and-filtered-probability-space",
+          "section": "Definition"
+        },
+        {
+          "fact": "F9",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "section": "Definition"
+        },
+        {
+          "fact": "F10",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "section": "Definition"
+        },
+        {
+          "fact": "F11",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "section": "Definition"
+        },
+        {
+          "fact": "F12",
+          "source": "def-axiom-of-choice",
+          "section": "Definition"
+        },
+        {
+          "fact": "F15",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "section": "Statement"
+        }
+      ]
+    }
+  ],
+  "interface_changes": [
+    {
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "section": "Definition",
+      "before_excerpt": "where $\\hat\\pi_i$ is the current learner",
+      "after_excerpt": "where $\\hat\\pi_i=\\pi_{\\theta_i}$ is the current learner with parameter $\\theta_i\\in K$",
+      "additional_change": "Replaced In the infinite-sample analysis define by For a positive integer $N$ of iterations, in the infinite-sample analysis define.",
+      "consumers": [
+        "alg-dagger",
+        "lem-dagger-mixture-occupancy",
+        "lem-dagger-task-cost-from-expert-surrogate",
+        "ex-behavior-cloning-covariate-shift",
+        "ex-surrogate-loss-fails-task-cost-control",
+        "thm-dagger-no-regret-reduction",
+        "thm-dagger-finite-sample-generalization",
+        "ex-dagger-interactive-expert-labels"
+      ],
+      "reason": "Direct section comparison confirms a Definition change, triggering the complete one-hop inventory above. No consumer Statement or Definition was changed, so no further hop is triggered."
+    }
+  ]
+}

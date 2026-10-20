@@ -13,6 +13,7 @@ aliases: [def-limsup, def-liminf]
 landmark: true
 short: "$\\limsup$, $\\liminf$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-limsup-liminf.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -35,24 +36,24 @@ pipeline_run: null
 
 ## Definition
 
-Let $(x_k)$ be a sequence of reals ([[def-sequence]]). For $n \in \mathbb{N}$ let
+Let $(x_k)$ be a sequence of reals (Sequences of reals: bounded, eventually, frequently, tails, subsequences). For $n \in \mathbb{N}$ let
 
 $$T_n \;:=\; \{\, x_k : k \in \mathbb{N},\ k \ge n \,\} \subseteq \mathbb{R}$$
 
 be the **$n$-th tail range** of $(x_k)$, a nonempty subset of $\mathbb{R}$ since
 $x_n \in T_n$. Regard $T_n$ as a subset of $\overline{\mathbb{R}}$
-([[def-extended-reals]]) and put
+(The extended real line $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, its order, and the arithmetic that is left undefined) and put
 
 $$s_n \;:=\; \sup T_n \in \overline{\mathbb{R}}, \qquad i_n \;:=\; \inf T_n \in \overline{\mathbb{R}},$$
 
 the supremum and infimum taken in $\overline{\mathbb{R}}$, which exist for every
-$n$ and for every sequence by [[lem-extended-reals-complete]]. The **limit
+$n$ and for every sequence by Every subset of $\overline{\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\overline{\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\mathbb{R}$. The **limit
 superior** and **limit inferior** of $(x_k)$ are then
 
 $$\limsup_{k} x_k \;:=\; \inf \{\, s_n : n \in \mathbb{N} \,\}, \qquad \liminf_{k} x_k \;:=\; \sup \{\, i_n : n \in \mathbb{N} \,\},$$
 
 again taken in $\overline{\mathbb{R}}$ and again existing by
-[[lem-extended-reals-complete]], since $\{s_n : n \in \mathbb{N}\}$ and
+Every subset of $\overline{\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\overline{\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\mathbb{R}$, since $\{s_n : n \in \mathbb{N}\}$ and
 $\{i_n : n \in \mathbb{N}\}$ are subsets of $\overline{\mathbb{R}}$ on which no
 hypothesis is needed. Both are elements of $\overline{\mathbb{R}}$, and either may
 be $+\infty$ or $-\infty$. The notations $\limsup_{k \to \infty} x_k$,
@@ -61,27 +62,45 @@ elsewhere; this library writes $\limsup_k x_k$.
 
 **Every quantity written here exists, and that is why the extended line was
 introduced.** Each of the four operations above is an application of
-[[lem-extended-reals-complete]] to a subset of $\overline{\mathbb{R}}$ carrying no
+Every subset of $\overline{\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\overline{\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\mathbb{R}$ to a subset of $\overline{\mathbb{R}}$ carrying no
 hypothesis whatever. Written with the real supremum of
-[[def-complete-ordered-field]] and the real infimum of [[thm-infimum-property]]
+Complete ordered field (least-upper-bound property) and the real infimum of Every nonempty set bounded below has an infimum
 instead, the definition would be available only for sequences that are bounded
-([[def-bounded-set]]): $\sup T_n$ needs $T_n$ bounded above, and
+(Lower bound, bounded below, bounded set): $\sup T_n$ needs $T_n$ bounded above, and
 $\inf\{s_n\}$ needs $\{s_n\}$ nonempty, bounded below, and made of real numbers
-([[def-infimum]]). None of those is automatic, and the discipline recorded in
-[[rem-sup-conventions]] forbids papering over the gap with a convention. The
+(Greatest lower bound (infimum)). None of those is automatic, and the discipline recorded in
+Conventions: $\sup \emptyset$, unbounded sets, and the extended reals forbids papering over the gap with a convention. The
 extended supremum is a different operation in a different ordered set, and it is
 total.
 
 **Values, when the sequence is bounded.** If $(x_k)$ is bounded, say
 $|x_k| \le M$ for every $k$, then each $T_n$ is a nonempty subset of $\mathbb{R}$
 bounded above by $M$ and below by $-M$, so by the agreement clause of
-[[lem-extended-reals-complete]] each $s_n$ and each $i_n$ is the *real* supremum
+Every subset of $\overline{\mathbb{R}}$ has a least upper bound and a greatest lower bound in $\overline{\mathbb{R}}$, agreeing with the real supremum and infimum on nonempty sets bounded in $\mathbb{R}$ each $s_n$ and each $i_n$ is the *real* supremum
 or infimum of $T_n$, and lies in $[-M, M]$. The family $\{s_n\}$ is then a
 nonempty set of reals bounded below by $-M$, so $\limsup_k x_k$ is likewise the
 real infimum of $\{s_n\}$ and lies in $[-M, M]$; dually for $\liminf_k x_k$. So
 for a bounded sequence both quantities are ordinary real numbers computed with
 the ordinary real supremum and infimum, and the extended line is doing no work.
 It is only for unbounded sequences that the values $\pm\infty$ occur.
+
+## Definition references
+
+[[def-sequence]]
+
+[[def-extended-reals]]
+
+[[lem-extended-reals-complete]]
+
+[[def-complete-ordered-field]]
+
+[[thm-infimum-property]]
+
+[[def-bounded-set]]
+
+[[def-infimum]]
+
+[[rem-sup-conventions]]
 
 ## Remarks
 

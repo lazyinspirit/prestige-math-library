@@ -17,6 +17,7 @@ landmark: false
 short: "$d(\\cdot,A)$ is $1$-Lipschitz"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-distance-to-set-is-lipschitz.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -37,14 +38,20 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]), let $A \subseteq X$ be
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), let $A \subseteq X$ be
 nonempty and let $x, y \in X$. Then
 
 $$|d(x,A) - d(y,A)| \le d(x,y),$$
 
-with $d(\cdot,A)$ the distance to a nonempty set ([[def-metric-bounded-diameter]]).
+with $d(\cdot,A)$ the distance to a nonempty set (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).
 Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$
 between $u$ and $v$: it is **$1$-Lipschitz**.
+
+## Statement references
+
+[[def-metric-space]]
+
+[[def-metric-bounded-diameter]]
 
 ## Facts & Assumptions
 

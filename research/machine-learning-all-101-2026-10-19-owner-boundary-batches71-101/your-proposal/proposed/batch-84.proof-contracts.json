@@ -1,0 +1,1884 @@
+{
+  "version": 1,
+  "scope": [
+    "def-differentiable-stochastic-policy",
+    "lem-policy-score-has-zero-conditional-mean",
+    "thm-policy-gradient-theorem",
+    "alg-one-step-actor-critic",
+    "alg-reinforce",
+    "lem-action-independent-baseline-does-not-bias-policy-gradient",
+    "alg-reinforce-with-baseline",
+    "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "ex-reinforce-one-step-bernoulli-mdp",
+    "ex-action-independent-baseline-eliminates-variance",
+    "cex-policy-gradient-without-start-time-discount"
+  ],
+  "contracts": {
+    "def-differentiable-stochastic-policy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires nonempty states, action sets and fixed support at each state; an open parameter domain is used only where a parameter is given.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "978e4540893ac9b1ce18f62135f03ad4de0696070c1484e41bcea7d8f0dd6a49"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: zero-probability action: Unsupported actions are excluded from B(s), so their log score is never defined. singleton support: A one-action support is normalized with probability one and has zero score. parameter-domain boundary: U is open; differentiability and common support are required throughout U."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "6b66874d088b70430079afa7a2809996f235e70f449e8b373ca4f26281ac4590"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "1bcd3defee8baf6713a9409af1261a37c484f42c886bd5a60986b5a58db1df32"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition permits actions outside the common support to have identically zero probability, but defines logarithmic scores only on strictly positive support throughout the open domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "44405ae9bae5d819ef5e2c80f70000516dba9fac830a6f6b064e3ddc23913486"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs its finite data directly and its contract declares no new choice premise.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "b82075e60a74e106bf5e2590107c8e916abb97e89f173dc802b365feb9f78545"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "2c5eb2e6d2383ac4cd912c284c723a9fc79f6746408d4539c36cca7aaf4a47a5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed nonempty action support is positive throughout an open parameter domain, making every sampled logarithmic score defined. Unsupported probabilities remain identically zero and require no logarithm; singleton support has constant probability one and therefore zero score, without a trajectory-law existence assertion.",
+            "item_sha256": "043e45e34392f50cd70e845b44e0b55f9fb11e605ef43a3a3f49b01c2e6829d5",
+            "row_sha256": "e9db589bb224bfdd19d08611af2b93d9d0bfc41bcc3b0858492e54d04a1238ca"
+          }
+        }
+      ]
+    },
+    "lem-policy-score-has-zero-conditional-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-policy-score-has-zero-conditional-mean-step-1-1",
+          "step": "1.1",
+          "claim": "Fix $t$ and a positive-probability atom $h$ of $\\mathcal H_t$ contained in $\\{T>t\\}$, and let $s$ be its current state. By [F3], adjoining action $a$ and next outcome $(s',r)$ multiplies the mass of $h$ by $\\pi_\\theta(a\\mid s)p(s',r\\mid s,a)$. Summing over the finite next-state and reward sets and using [F1] gives $\\Pr(A_t=a\\mid h)=\\pi_\\theta(a\\mid s)$. On atoms contained in $\\{T\\le t\\}$, $\\psi_t=0$ by definition; on zero-probability atoms no conditional value is prescribed.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-policy-score-has-zero-conditional-mean-step-2-1",
+          "step": "2.1",
+          "claim": "Enumerate the finite support as $B(s)=\\{a_0,\\ldots,a_{m-1}\\}$. By induction on the number of terms, [F5] gives the derivative of this finite sum as the sum of the derivatives: the empty sum has derivative zero, and adjoining one term uses the binary sum rule. For each positive-probability history $h\\subseteq\\{T>t\\}$ ending at $s$, the conditional score mean is $\\sum_{a\\in B(s)}\\pi_\\theta(a\\mid s)\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)=\\sum_{a\\in B(s)}\\nabla_\\theta\\pi_\\theta(a\\mid s)=\\nabla_\\theta 1=0$. The first equality uses positivity on the support and the derivative of the logarithm; the second uses [F5], [F6], and the normalization in [F2].",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "To verify that this mean is a conditional-expectation version, note that $\\mathcal H_t$ has finitely many atoms because its state, action, and reward alphabets are finite. The score coordinates are bounded at fixed $\\theta$, since there are finitely many state-action pairs. On each positive-probability atom $h$ of $\\mathcal H_t$, define $Y_t$ to have the constant value $\\mathbb P_\\theta(h)^{-1}\\int_h\\psi_t\\,d\\mathbb P_\\theta$; set $Y_t=0$ on every null atom. If $h\\subseteq\\{T>t\\}$, step 1.1 and the displayed calculation show that this value is zero; if $h\\subseteq\\{T\\le t\\}$, $\\psi_t=0$ on $h$ by definition, so the value is again zero. Thus $Y_t$ is the zero, integrable, $\\mathcal H_t$-measurable vector. Every event in $\\mathcal H_t$ is a union of finitely many atoms, and summing the atom integral identities gives $\\int_EY_t\\,d\\mathbb P_\\theta=\\int_E\\psi_t\\,d\\mathbb P_\\theta$ for every $E\\in\\mathcal H_t$, including null atoms. This verifies [F4], so $Y_t$ is a version of $\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]$ and is zero almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "finite normalized action support",
+          "status": "checked_by_exact_calculation",
+          "calculation": "At each fixed state, sum_a pi(a|s) grad log pi(a|s)=sum_a grad pi(a|s)=grad(1)=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 sets scores to zero on already-terminated histories, and step 2.1 uses the empty derivative sum as its finite-sum induction base.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "2bc3b3dd312fcbce62122982671d91de9543efe8e0d2f9d7ca8a1c39284885cb"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: zero-probability history: Conditional values on zero-probability atoms do not affect the almost-sure assertion. terminal history: The score is defined as zero at and after termination. singleton action support: The normalized probability is constant one, so its score is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "c7c6c9213f926b33ad5350a0f96d2dd74eec639bba63c49b3b590693329f269f"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "9f3ce453a8e9cf853acc445226eb5529e20ce8fd81ce8f4b42e9dfd263f634ba"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "5de654b52fef63e459bae0758f4d8a515a395d7b8a42835892bfa1e56d6e6ab7"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "8ddf70166cbc48dded33206af5754bdb5eaf19e4769cef99989482e197d526d7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "cb970ac60c308410d5bfea9d716dba8b2a6398ee19d5f19b1c6af47d51dfb52c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite history atoms identify the pre-action distribution, and differentiating its normalized fixed-support probabilities makes the weighted score sum vanish. The proof explicitly pads terminal scores with zero and checks event-integral identities on all atoms, including null atoms, under the declared path-law premise.",
+            "item_sha256": "089528c8fc94c54b3d420f220f8319d631ba669ad3c9499c4e1014b1c647a57b",
+            "row_sha256": "1927aff7d4c7f62dd3ab4288024c227639c9d43615c1aa88b9d3146d4b3f8542"
+          }
+        }
+      ]
+    },
+    "thm-policy-gradient-theorem": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-number-coding-of-finite-sequences",
+          "source_section": "Definition",
+          "quote": "Write $\\operatorname{bin}(n)$ for the canonical binary numeral of $n$, with\n$\\operatorname{bin}(0)=0$. For a binary word $w$, let\n$$ c(w):=1^{|w|}0w. $$\n\nFor a finite sequence of natural numbers\n$$ a=(a_0,\\dots,a_{k-1}), $$\ndefine its **sequence word**\n$$ W(a):=1\\,1^k0\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_{k-1})). $$\nThe leading $1$ keeps the whole word a canonical positive binary numeral even\nwhen $k=0$.\n\nThe **natural-number code** of $a$ is the unique natural number\n$$ \\ulcorner a\\urcorner_{\\mathrm{seq}} $$\nwhose binary numeral is $W(a)$. In particular, the empty sequence has code\n$\\ulcorner()\\urcorner_{\\mathrm{seq}}=2$, because $W(())=10$.\n\nBy [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of\nbinary numerals inside $W(a)$ is effectively and uniquely decodable, so this\nconstruction gives an injective coding of finite sequences of natural numbers\nby natural numbers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-policy-score-has-zero-conditional-mean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a nonempty finite state set, let each $A(s)$ be a finite nonempty action set, and let $p(s',r\\mid s,a)$ be a fixed normalized joint law for the next state and reward. Fix an initial state and a terminal set $S_\\dagger\\subseteq S$. Under a differentiable stationary policy family with a support that is fixed and strictly positive on that support throughout its open parameter domain, assume the induced episode terminates almost surely. For $t\\ge0$, let $\\mathcal H_t=\\sigma(S_0,A_0,R_1,\\ldots,A_{t-1},R_t,S_t)$ be the information available just before the time-$t$ action, and let $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ when $t<T$, where $T$ is the first terminal time. Define $\\psi_t=0$ when $t\\ge T$. Then, coordinate by coordinate,\n\n$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-policy-gradient-theorem-step-1-1",
+          "step": "1.1",
+          "claim": "If $s_0\\in S_\\dagger$, then $T=0$, the return and gradient are zero, and the sum in the conclusion is empty. Otherwise, the transition-record alphabet is finite by [F1] and [F4]. Fix an enumeration of that alphabet; every finite terminal path becomes a finite sequence of natural-number indices, so [F5] injects $\\mathcal T$ into $\\mathbb N$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-step-1-2",
+          "step": "1.2",
+          "claim": "Fix $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)\\in\\mathcal T$. By [F4], its probability is the displayed product. Repeatedly applying the bounded-bilinear product rule [F6] to its finitely many policy factors, and using [F2], [F7], and [F8], gives $Dp_{\\theta_0}(\\tau)=p_{\\theta_0}(\\tau)\\sum_{t=0}^{m-1}\\psi_{\\theta_0}(s_t,a_t)$. Paths with a zero transition mass or an unsupported action have probability zero throughout $U_0$ and are omitted from $\\mathcal T$. The empty trajectory has empty product $1$ and empty score sum $0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-step-2-1",
+          "step": "2.1",
+          "claim": "The episode termination assumption makes the masses of $\\mathcal T$ sum to one, and [F3] identifies $J(\\theta)=\\sum_{\\tau\\in\\mathcal T}p_\\theta(\\tau)R_\\gamma(\\tau)$. By [A2] and [F11], the derivative of this series at $\\theta_0$ is the absolutely convergent sum $\\sum_\\tau R_\\gamma(\\tau)Dp_{\\theta_0}(\\tau)$. Substituting step 1.2 shows that, for every direction $h\\in\\mathbb R^d$, $DJ(\\theta_0)h=\\mathbb E_{\\theta_0}[R_\\gamma(\\tau)\\langle\\sum_{t<T}\\psi_{\\theta_0}(S_t,A_t),h\\rangle]$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F11",
+            "F12",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-step-3-1",
+          "step": "3.1",
+          "claim": "Expand $R_\\gamma=\\sum_{k<T}\\gamma^kR_{k+1}$. For each $k<t$, the event $t<T$ and the past reward $R_{k+1}$ are $\\mathcal H_t$-measurable. By [F9] and [F10], each coordinate of $\\mathbb E[\\mathbf1_{\\{t<T\\}}R_{k+1}\\psi_t]$ is zero. The bound [A3] dominates every finite rectangular truncation of the double sum by an integrable random variable, so [F11] permits passing to the full sum. All terms with $k<t$ therefore vanish in step 2.1.",
+          "inputs": [
+            "A3",
+            "F9",
+            "F10",
+            "F11",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-step-4-1",
+          "step": "4.1",
+          "claim": "The remaining terms have $k\\ge t$, and the return definition [F3] gives $\\sum_{k=t}^{T-1}\\gamma^kR_{k+1}=\\gamma^tG_t$. Hence step 2.1 becomes $DJ(\\theta_0)h=\\langle\\mathbb E_{\\theta_0}[\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_{\\theta_0}(S_t,A_t)],h\\rangle$. Since this holds for every $h$, the vector inside the inner product is the Euclidean gradient of $J$ at $\\theta_0$, proving the assertion.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-decision Bernoulli reward",
+          "status": "checked_by_exact_calculation",
+          "calculation": "For pi_theta(1)=theta, reward 1 on action 1 and 0 on action 0, T=1 so gamma^0=1; E[G_0 grad log pi(A_0)]=theta(1/theta)=1=grad(theta)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles a terminal initial state with zero return, zero gradient and empty conclusion sum; step 1.2 gives the empty trajectory unit probability and zero score sum.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "4c1022b34fbd495e4c34cfb5924bcd971c340f3b232575d10f725903f5638127"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: start already terminal: T=0 gives an empty update sum and J is locally constant at zero return. gamma equals zero: The factor gamma^t leaves only t=0; later rewards have zero weight in J. zero transition mass or unsupported action: Such paths are omitted from the positive-likelihood trajectory set. failure of dominated differentiation or integrability: The theorem explicitly assumes both; no interchange is asserted without them. continuing average reward: The theorem is episodic; its Remarks specify the separate stationary-distribution premise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "c7c6c9213f926b33ad5350a0f96d2dd74eec639bba63c49b3b590693329f269f"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "9f3ce453a8e9cf853acc445226eb5529e20ce8fd81ce8f4b42e9dfd263f634ba"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "5de654b52fef63e459bae0758f4d8a515a395d7b8a42835892bfa1e56d6e6ab7"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "8ddf70166cbc48dded33206af5754bdb5eaf19e4769cef99989482e197d526d7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "cb970ac60c308410d5bfea9d716dba8b2a6398ee19d5f19b1c6af47d51dfb52c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The exact dominated likelihood-remainder assumption justifies differentiating the countable terminal-path series. The integrable score-reward double sum then removes past rewards using conditional zero score, leaving the discounted future return; terminal-start empty trajectories and common support are handled explicitly.",
+            "item_sha256": "1e25732b4fc16257bc9897848a32f8b0df26b8dd38c88e2c70fa0fff5356af51",
+            "row_sha256": "1927aff7d4c7f62dd3ab4288024c227639c9d43615c1aa88b9d3146d4b3f8542"
+          }
+        }
+      ]
+    },
+    "alg-one-step-actor-critic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition returns the initial actor/critic parameters immediately when the initial state is terminal, with no transition or update.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "c84981d5281e19df9ce7d83546d58b3560ec39c7d66c82c187c94aa20d68e8c1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: gamma equals zero: The actor trace becomes zero after the first transition; the procedure remains defined. proposed parameter leaves U or W: The statement assumes every proposed update remains inside both open parameter domains. inaccurate critic: The example verifies that bootstrapping may change the expected actor direction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "6b66874d088b70430079afa7a2809996f235e70f449e8b373ca4f26281ac4590"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "1bcd3defee8baf6713a9409af1261a37c484f42c886bd5a60986b5a58db1df32"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "ad6276a807d86502bb4233ceb909226a93de25564ebd455f21334dfeb4ba2ac8"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "0298932e3b6ceae7e60cb78e6d284a72e022239b2ff31f323ebc2186d667e0bf"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "2c5eb2e6d2383ac4cd912c284c723a9fc79f6746408d4539c36cca7aaf4a47a5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Both parameter increments use the same pre-update actor and critic values, and the next action may use their updated values within the episode. Terminal starts return immediately and terminal successors have zero continuation; history-dependent episode laws explicitly require choice, domain preservation and actual-policy finite termination.",
+            "item_sha256": "4237986b1ebc8ee030c23fda1e26c634f077244cadef128183f9d6c2fcbb5214",
+            "row_sha256": "e9db589bb224bfdd19d08611af2b93d9d0bfc41bcc3b0858492e54d04a1238ca"
+          }
+        }
+      ]
+    },
+    "alg-reinforce": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly sets episode length zero at a terminal initial state; the empty score-return sum gives no parameter change.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "464e3373b66df967bcbe4889846ec94baf8b916cddefb0cdecd748be42ef7b63"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: gamma equals zero: Only the first decision contributes to the start-state objective update. proposed theta leaves U: The statement assumes every proposed update remains in the policy parameter domain. within-episode parameter updates: The procedure freezes theta until the complete episode has been collected."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "6b66874d088b70430079afa7a2809996f235e70f449e8b373ca4f26281ac4590"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "1bcd3defee8baf6713a9409af1261a37c484f42c886bd5a60986b5a58db1df32"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "ad6276a807d86502bb4233ceb909226a93de25564ebd455f21334dfeb4ba2ac8"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "0298932e3b6ceae7e60cb78e6d284a72e022239b2ff31f323ebc2186d667e0bf"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "2c5eb2e6d2383ac4cd912c284c723a9fc79f6746408d4539c36cca7aaf4a47a5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "The actor parameter is frozen throughout the sampled episode, so returns and scores correspond to the generating policy. A terminal starting state gives an empty update sum and returns the initial parameter; the gradient interpretation separately inherits the cited trajectory differentiation, integrability and choice hypotheses.",
+            "item_sha256": "79546a1cce0771d9ec5b3face43de4db5687c1539ff6d42cc70d6472aa09ec08",
+            "row_sha256": "e9db589bb224bfdd19d08611af2b93d9d0bfc41bcc3b0858492e54d04a1238ca"
+          }
+        }
+      ]
+    },
+    "lem-action-independent-baseline-does-not-bias-policy-gradient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-policy-gradient-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite Markov decision process have nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, and fixed joint transition-reward masses $p(s',r\\mid s,a)$. Fix an initial state $s_0\\in S$, a terminal set $S_\\dagger\\subseteq S$, and $0\\le\\gamma<1$. Let $U\\subseteq\\mathbb R^d$ be open, let $\\theta_0\\in U$, and let $\\pi_\\theta$ be a differentiable stationary policy family with fixed common support on an open neighborhood $U_0$ of $\\theta_0$. Suppose every episode from $s_0$ under $\\pi_\\theta$, for $\\theta\\in U_0$, reaches $S_\\dagger$ in finite time almost surely. Let $T$ be the first terminal time, let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}\\quad(t<T),\\qquad G_T=0,$$\n\nand set $J(\\theta)=V^{\\pi_\\theta}(s_0)=\\mathbb E_\\theta[\\sum_{k=0}^{T-1}\\gamma^kR_{k+1}]$. Let $\\mathcal T$ be the set of finite trajectories that use only actions in the common policy support, have positive transition masses, and stop at their first terminal state. For $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)\\in\\mathcal T$, define\n\n$$p_\\theta(\\tau)=\\prod_{t=0}^{m-1}\\pi_\\theta(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t),\\qquad R_\\gamma(\\tau)=\\sum_{k=0}^{m-1}\\gamma^kr_{k+1}.$$\n\nAssume the trajectory masses $p_\\theta(\\tau)$ are totally differentiable at $\\theta_0$, the linear map $h\\mapsto\\sum_{\\tau\\in\\mathcal T}R_\\gamma(\\tau)Dp_{\\theta_0}(\\tau)h$ is defined by an absolutely convergent sum, and there is a summable $H:\\mathcal T\\to[0,\\infty)$ that dominates the return-weighted normalized remainders below and for which those remainders tend to zero pathwise:\n\n$$\\frac{|R_\\gamma(\\tau)|\\,|p_{\\theta_0+h}(\\tau)-p_{\\theta_0}(\\tau)-Dp_{\\theta_0}(\\tau)h|}{\\|h\\|_2}\\le H(\\tau),\\qquad \\frac{|R_\\gamma(\\tau)|\\,|p_{\\theta_0+h}(\\tau)-p_{\\theta_0}(\\tau)-Dp_{\\theta_0}(\\tau)h|}{\\|h\\|_2}\\longrightarrow0$$\n\nfor every $\\tau\\in\\mathcal T$ as $h\\to0$, with $\\sum_{\\tau\\in\\mathcal T}H(\\tau)<\\infty$.\n\nAlso assume\n\n$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t<T}\\sum_{k<T}\\gamma^k\\|\\psi_{\\theta_0}(S_t,A_t)\\|_2\\,|R_{k+1}|\\right]<\\infty,$$\n\nwhere $\\psi_\\theta(s,a)=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)$ on the common support. Then $J$ is totally differentiable at $\\theta_0$ and\n\n$$\\nabla_\\theta J(\\theta_0)=\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\,\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\,G_t\\right].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-policy-score-has-zero-conditional-mean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a nonempty finite state set, let each $A(s)$ be a finite nonempty action set, and let $p(s',r\\mid s,a)$ be a fixed normalized joint law for the next state and reward. Fix an initial state and a terminal set $S_\\dagger\\subseteq S$. Under a differentiable stationary policy family with a support that is fixed and strictly positive on that support throughout its open parameter domain, assume the induced episode terminates almost surely. For $t\\ge0$, let $\\mathcal H_t=\\sigma(S_0,A_0,R_1,\\ldots,A_{t-1},R_t,S_t)$ be the information available just before the time-$t$ action, and let $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ when $t<T$, where $T$ is the first terminal time. Define $\\psi_t=0$ when $t\\ge T$. Then, coordinate by coordinate,\n\n$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-step-1-1",
+          "step": "1.1",
+          "claim": "Because $S$ is finite, $b$ is bounded; because the state-action support is finite, [F3] gives $C_\\psi:=\\max_{s,a\\in B(s)}\\|\\psi_{\\theta_0}(s,a)\\|_2<\\infty$. For every episode, [F6] bounds the baseline-score sum by $\\sum_{t<T}\\gamma^t|b(S_t)|\\|\\psi_t\\|_2\\le \\|b\\|_\\infty C_\\psi/(1-\\gamma)$. For each fixed $t$, $\\mathbf1_{\\{t<T\\}}b(S_t)$ is $\\mathcal H_t$-measurable, so [F2] and [F5] give $\\mathbb E[\\gamma^t\\mathbf1_{\\{t<T\\}}b(S_t)\\psi_t]=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-step-2-1",
+          "step": "2.1",
+          "claim": "The partial baseline-score sums converge almost surely to the full sum because $T<\\infty$ almost surely, and the bound in step 1.1 is an integrable constant majorant. By [F7], the expectation of the full baseline-score sum is the limit of its finite partial-sum expectations, each zero by step 1.1; hence $\\mathbb E[\\sum_{t<T}\\gamma^tb(S_t)\\psi_t]=0$.",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-step-3-1",
+          "step": "3.1",
+          "claim": "Subtracting the zero vector in step 2.1 from the policy-gradient expectation in [F1] gives the displayed identity.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-state Bernoulli baseline term",
+          "status": "checked_by_exact_calculation",
+          "calculation": "For b(s)=b, E[b score]=b(theta/theta+(1-theta)(-1/(1-theta)))=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For a terminal initial state the inherited episode has no pre-terminal baseline terms; proof step 1.1 bounds that empty sum by the same finite geometric majorant.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "3557d12331b876841b61cf706882ef09520462203ff18f37eb18cd02aeeb80ab"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: gamma equals zero: The geometric bound and baseline-score identity remain valid. gamma equals one: The stated geometric-series bound requires gamma<1. action-dependent baseline: The zero conditional score argument requires the baseline to be measurable before the action."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "c7c6c9213f926b33ad5350a0f96d2dd74eec639bba63c49b3b590693329f269f"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "9f3ce453a8e9cf853acc445226eb5529e20ce8fd81ce8f4b42e9dfd263f634ba"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "5de654b52fef63e459bae0758f4d8a515a395d7b8a42835892bfa1e56d6e6ab7"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "8ddf70166cbc48dded33206af5754bdb5eaf19e4769cef99989482e197d526d7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "cb970ac60c308410d5bfea9d716dba8b2a6398ee19d5f19b1c6af47d51dfb52c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "Finite state and support sets bound the baseline and score at the fixed parameter, giving a deterministic geometric majorant. Conditional zero score removes every finite baseline term, then dominated convergence passes to the full episode without assuming integrable episode length or claiming universal variance reduction.",
+            "item_sha256": "9bd229e1f46c9aa81e8422bf3f379d34545d4b9f17fc55d11c25157dc26ea708",
+            "row_sha256": "1927aff7d4c7f62dd3ab4288024c227639c9d43615c1aa88b9d3146d4b3f8542"
+          }
+        }
+      ]
+    },
+    "alg-reinforce-with-baseline": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits a terminal initial state and a zero-length episode, whose baseline-adjusted update sum is empty.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "d3c6b7b3c95167b2a69b5fa00eb3bb8f294473e05b4f5ac17dec42833d45c400"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: gamma equals zero: The baseline term at later times is multiplied by zero. baseline updated from the same episode before actor update: The baseline is fixed before the episode and held fixed through its update. proposed theta leaves U: The statement assumes every proposed update remains in U."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "6b66874d088b70430079afa7a2809996f235e70f449e8b373ca4f26281ac4590"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "1bcd3defee8baf6713a9409af1261a37c484f42c886bd5a60986b5a58db1df32"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "ad6276a807d86502bb4233ceb909226a93de25564ebd455f21334dfeb4ba2ac8"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition retains the declared AC premise through its cited supplier context; all actual phase citations are mapped separately and no new axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "0298932e3b6ceae7e60cb78e6d284a72e022239b2ff31f323ebc2186d667e0bf"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "2c5eb2e6d2383ac4cd912c284c723a9fc79f6746408d4539c36cca7aaf4a47a5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "A fixed state baseline is chosen before the frozen-policy episode and remains conditionally action-independent. Its finite adjusted return-score sum defines the update, with terminal-start empty episodes and domain-preserving parameters; the cited baseline lemma adds no claim that every baseline reduces variance.",
+            "item_sha256": "d090e3e4bcde6e4046ada42fc8fd0e6a062dd1fcf50f7cbb955cc4d9232876cc",
+            "row_sha256": "e9db589bb224bfdd19d08611af2b93d9d0bfc41bcc3b0858492e54d04a1238ca"
+          }
+        }
+      ]
+    },
+    "ex-actor-critic-bootstrap-can-bias-policy-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-one-step-actor-critic",
+          "source_section": "Definition",
+          "quote": "**Inputs:** a finite episodic MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, joint transition-reward law $p$, terminal set $S_\\dagger\\subseteq S$, and initial state $s_0\\in S$; a discount $0\\le\\gamma<1$; a differentiable stationary policy family $\\pi_\\theta$ with fixed positive support on an open set $U\\subseteq\\mathbb R^d$; a value approximation $\\widehat V_w:S\\to\\mathbb R$ differentiable in $w$ on an open set $W\\subseteq\\mathbb R^m$; initial parameters $(\\theta_0,w_0)\\in U\\times W$; and step sizes $\\alpha,\\beta\\ge0$.\n\n**Admissible conditions:** assume AC for the adaptive episode law; every proposed actor and critic update remains in $U$ and $W$, respectively, and the episode generated by this procedure, including its within-episode parameter updates, reaches $S_\\dagger$ after finitely many transitions almost surely.\n\nFor the sampling instruction, condition on the complete finite transition history and use the current parameters computed from that history. The successive-draw law uses these history-dependent kernels on discrete transition-record spaces, with a fixed stop symbol padding the records after termination.\n\n**Output:** the final actor and critic parameters $(\\theta_{\\mathrm{out}},w_{\\mathrm{out}})$ after one episode.\n\nSet $(\\theta,w)=(\\theta_0,w_0)$, $S=s_0$, and $I=1$. If $S\\in S_\\dagger$, return $(\\theta_0,w_0)$. Otherwise, while $S\\notin S_\\dagger$, using the current pre-update parameters $(\\theta,w)$:\n\n1. Sample $A\\sim\\pi_\\theta(\\cdot\\mid S)$ and then sample $(S',R)$ with joint law $p(S',R\\mid S,A)$.\n2. Set $C=0$ if $S'\\in S_\\dagger$ and $C=\\widehat V_w(S')$ otherwise. Compute the temporal-difference error $\\delta=R+\\gamma C-\\widehat V_w(S)$.\n3. Compute both updates from these pre-update parameters: $\\theta'=\\theta+\\alpha I\\delta\\nabla_\\theta\\log\\pi_\\theta(A\\mid S)$ and $w'=w+\\beta\\delta\\nabla_w\\widehat V_w(S)$. Replace $(\\theta,w)$ by $(\\theta',w')$.\n4. Set $I\\leftarrow\\gamma I$ and $S\\leftarrow S'$.\n\nWhen the loop ends, return the current $(\\theta,w)$ as $(\\theta_{\\mathrm{out}},w_{\\mathrm{out}})$.\n\nThe critic uses a one-step bootstrapped target; the actor uses the current TD error and the accumulated start-state discount $I=\\gamma^t$. The procedure itself asserts no convergence result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-step-1-1",
+          "step": "1.1",
+          "claim": "Every reward in this MDP is zero and the episode reaches $d$ in two decisions, so its total return is zero for every sampled action sequence. Hence $J(\\theta)=0$ for every $\\theta\\in(0,1)$ and $\\nabla_\\theta J(1/2)=0$ by [F6].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-step-1-2",
+          "step": "1.2",
+          "claim": "At $\\theta=1/2$, the score at $s$ is $\\nabla_\\theta\\log\\theta=2$ for action $1$ and $\\nabla_\\theta\\log(1-\\theta)=-2$ for action $0$, by [F2] and [F5].",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-step-2-1",
+          "step": "2.1",
+          "claim": "If $A_0=0$, then $S_1=x_0$ and $\\delta_0=0+(1/2)\\cdot0-0=0$, so the first actor increment is zero. If $A_0=1$, then $S_1=x_1$ and $\\delta_0=0+(1/2)\\cdot1-0=1/2$, so the first increment is $(1/4)\\cdot1\\cdot(1/2)\\cdot2=1/4$ by [F4] and step 1.2. Both proposed values, $1/2$ and $3/4$, are in the policy domain $(0,1)$. At the second decision the unique action at $x_i$ has score zero, and $\\beta=0$ leaves the critic unchanged; the second updates therefore remain in $(0,1)\\times W$ and the next state is terminal $d$. This verifies within-episode admissibility and finite termination.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-step-3-1",
+          "step": "3.1",
+          "claim": "The two actions each have probability $1/2$, so the expected first actor increment is $(1/2)\\cdot0+(1/2)\\cdot(1/4)=1/8$. This differs from the true gradient $0$ in step 1.1, proving the stated bias.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta=1/2 and critic Vhat(x0)=0,Vhat(x1)=1",
+          "status": "checked_by_exact_calculation",
+          "calculation": "Action 0 gives increment 0; action 1 gives delta=1/2, score 2, and alpha=1/4, hence increment 1/4. The equiprobable mean is 1/8 while J(theta)=0 has gradient 0; both proposed actor parameters remain in (0,1)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "85d94e4b136c9dd50c4a613155b4de87c70c6385eaa68d41bbfd6fee7721437c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: theta at 0 or 1: The example uses theta in (0,1) so both policy actions have positive probability and finite scores. zero rewards: The true return and objective gradient are exactly zero, while the critic bootstrap creates the nonzero sample update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "19a39bd59b7ab81b09cc9aa28ea92196f7255133dab2956df4795b36fb4fdb14"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "5f06419ab9b422729e154149e85a5559794906387b1671aedda8b1d252bd8f1d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "2e260704755a3d3b2bbe4b7bbd3763cf18bcea7bd67d7288460f5f2b74f0f7e4"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Remarks preserve the inherited AC context from the cited general algorithms; the explicit finite verification has no phase step invoking A1, and no operational axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "fa12acd4518b0f3a4b864d79176ca5912c17ec7083c943ba1720e7622fd1245d"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "b010715c21d4a04b38947cc89a66a403c3224fe45bcc0ee7de6bbb7443214882"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "All true rewards vanish, but a fixed inaccurate successor critic creates a nonzero first expected actor increment. The explicit finite second decision has a singleton action with zero score and a zero critic step, verifying that every update stays inside the open domains and the episode terminates.",
+            "item_sha256": "e7f1feb29bbbdda5751bd3902ab5f31af2ecdba507d25b319b360579b5b00332",
+            "row_sha256": "32b00946154482cee7d92f461875919022bd89e065d6825bb0897d69f151dbdf"
+          }
+        }
+      ]
+    },
+    "ex-reinforce-one-step-bernoulli-mdp": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce",
+          "source_section": "Definition",
+          "quote": "**Inputs:** a finite episodic MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, joint transition-reward law $p$, terminal set $S_\\dagger\\subseteq S$, and initial state $s_0\\in S$; a discount $0\\le\\gamma<1$; a differentiable stationary policy family $\\pi_\\theta$ with fixed positive support on an open set $U\\subseteq\\mathbb R^d$; an initial parameter $\\theta_0\\in U$; and a step size $\\alpha\\ge0$.\n\n**Admissible conditions:** the episode sampled from $s_0$ under the frozen policy $\\pi_{\\theta_0}$ reaches $S_\\dagger$ after finitely many transitions almost surely, and the proposed update remains in $U$.\n\n**Output:** the updated policy parameter $\\theta_1$ after one training round.\n\nHold $\\theta=\\theta_0$ fixed while sampling one episode $(S_0,A_0,R_1,\\ldots,S_T)$ from $s_0$ until its first terminal state; if $s_0\\in S_\\dagger$, take $T=0$. For each $t<T$, compute the return $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$ and score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ using $\\theta=\\theta_0$. After the episode is complete, set\n\n$$\\theta_1=\\theta_0+\\alpha\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_t$$\n\nand return $\\theta_1$. All returns, scores, and the full sum use the same parameter value $\\theta_0$ that generated the episode; no policy update occurs while that episode is being sampled.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-step-1-1",
+          "step": "1.1",
+          "claim": "Action $1$ occurs with probability $\\theta$ and gives reward $1$, while action $0$ occurs with probability $1-\\theta$ and gives reward $0$. By [F3], this one-decision episode has $G_0=R_1$, so its expected return is $J(\\theta)=\\theta$ and $\\nabla_\\theta J(\\theta)=1$ by [F1] and [F6].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-step-1-2",
+          "step": "1.2",
+          "claim": "By [F2] and [F5], the score is $1/\\theta$ when $A_0=1$ and $-1/(1-\\theta)$ when $A_0=0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-step-2-1",
+          "step": "2.1",
+          "claim": "When $A_0=1$, $Z=1/\\theta$; when $A_0=0$, $Z=0$. Hence $\\mathbb E_\\theta[Z]=\\theta(1/\\theta)+(1-\\theta)0=1$, which equals the gradient from step 1.1.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta in (0,1), one-decision Bernoulli reward",
+          "status": "checked_by_exact_calculation",
+          "calculation": "The sample estimator is 1/theta on action 1 (probability theta) and 0 on action 0, so its expectation is 1=grad(theta)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "85d94e4b136c9dd50c4a613155b4de87c70c6385eaa68d41bbfd6fee7721437c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: theta at 0 or 1: The log score is defined only on the fixed positive support, so the example restricts theta to (0,1). gamma equals zero: T=1 and gamma^0=1, so the calculation is unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "19a39bd59b7ab81b09cc9aa28ea92196f7255133dab2956df4795b36fb4fdb14"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "5f06419ab9b422729e154149e85a5559794906387b1671aedda8b1d252bd8f1d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "2e260704755a3d3b2bbe4b7bbd3763cf18bcea7bd67d7288460f5f2b74f0f7e4"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Remarks preserve the inherited AC context from the cited general algorithms; the explicit finite verification has no phase step invoking A1, and no operational axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "fa12acd4518b0f3a4b864d79176ca5912c17ec7083c943ba1720e7622fd1245d"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "b010715c21d4a04b38947cc89a66a403c3224fe45bcc0ee7de6bbb7443214882"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "For every interior Bernoulli parameter, the reward-one score is its reciprocal and the reward-zero contribution vanishes. Their finite probability-weighted mean equals the derivative of the explicit linear objective; this computation does not extend the score to excluded probability endpoints.",
+            "item_sha256": "74ab5577eb4168973d4e076fb138fd833bf36a5f7af31a0f150cf26f18daee55",
+            "row_sha256": "32b00946154482cee7d92f461875919022bd89e065d6825bb0897d69f151dbdf"
+          }
+        }
+      ]
+    },
+    "ex-action-independent-baseline-eliminates-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce",
+          "source_section": "Definition",
+          "quote": "**Inputs:** a finite episodic MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, joint transition-reward law $p$, terminal set $S_\\dagger\\subseteq S$, and initial state $s_0\\in S$; a discount $0\\le\\gamma<1$; a differentiable stationary policy family $\\pi_\\theta$ with fixed positive support on an open set $U\\subseteq\\mathbb R^d$; an initial parameter $\\theta_0\\in U$; and a step size $\\alpha\\ge0$.\n\n**Admissible conditions:** the episode sampled from $s_0$ under the frozen policy $\\pi_{\\theta_0}$ reaches $S_\\dagger$ after finitely many transitions almost surely, and the proposed update remains in $U$.\n\n**Output:** the updated policy parameter $\\theta_1$ after one training round.\n\nHold $\\theta=\\theta_0$ fixed while sampling one episode $(S_0,A_0,R_1,\\ldots,S_T)$ from $s_0$ until its first terminal state; if $s_0\\in S_\\dagger$, take $T=0$. For each $t<T$, compute the return $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$ and score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ using $\\theta=\\theta_0$. After the episode is complete, set\n\n$$\\theta_1=\\theta_0+\\alpha\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_t$$\n\nand return $\\theta_1$. All returns, scores, and the full sum use the same parameter value $\\theta_0$ that generated the episode; no policy update occurs while that episode is being sampled.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce-with-baseline",
+          "source_section": "Definition",
+          "quote": "**Inputs:** a finite episodic MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, joint transition-reward law $p$, terminal set $S_\\dagger\\subseteq S$, and initial state $s_0\\in S$; a discount $0\\le\\gamma<1$; a differentiable stationary policy family $\\pi_\\theta$ with fixed positive support on an open set $U\\subseteq\\mathbb R^d$; an initial parameter $\\theta_0\\in U$; a fixed finite-valued state function $b:S\\to\\mathbb R$ chosen independently of the episode actions; and a step size $\\alpha\\ge0$.\n\n**Admissible conditions:** the episode sampled from $s_0$ under the frozen policy $\\pi_{\\theta_0}$ reaches $S_\\dagger$ after finitely many transitions almost surely, and the proposed update remains in $U$.\n\n**Output:** the updated policy parameter $\\theta_1$ after one training round.\n\nHold $\\theta=\\theta_0$ fixed and select $b$ before sampling one complete episode from $s_0$ under $\\pi_{\\theta_0}$, stopping at its first terminal state; if $s_0\\in S_\\dagger$, take $T=0$. For each $t<T$, compute $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$, the score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ using $\\theta=\\theta_0$, and the baseline-adjusted return $G_t-b(S_t)$. After termination, set\n\n$$\\theta_1=\\theta_0+\\alpha\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\psi_t$$\n\nand return $\\theta_1$. The baseline is fixed throughout the episode and is not updated from it before the actor update; it depends on the state and is independent of each episode action conditional on the state and past.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of the discounted episodic policy-gradient theorem at a fixed parameter $\\theta_0$, including the Axiom of Choice, common support, almost-sure finite termination, dominated trajectory differentiation, and the stated integrability of discounted return-score products. Let $b:S\\to\\mathbb R$ be any fixed finite-valued function of the state, chosen independently of the actions in the episode. Then\n\n$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\right]=\\nabla_\\theta J(\\theta_0).$$\n\nThe baseline is action-independent conditional on the state and past. This identity says that subtracting it preserves the expected update; it does not say that every baseline reduces variance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-step-1-1",
+          "step": "1.1",
+          "claim": "At $\\theta=1/2$, the two actions have probability $1/2$ and scores $2$ and $-2$ by [F2] and [F6]. The specified deterministic reward-transition law [F1] and return convention [F3] give $G_0=A_0$ and $J(\\theta)=\\theta$, so the true gradient is $1$ by [F7].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-step-2-1",
+          "step": "2.1",
+          "claim": "Without a baseline, $Z=2$ when $A_0=1$ and $Z=0$ when $A_0=0$. Therefore $\\mathbb E[Z]=1$ and $\\operatorname{Var}(Z)=\\tfrac12(2-1)^2+\\tfrac12(0-1)^2=1$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-step-2-2",
+          "step": "2.2",
+          "claim": "With $b(s)=1/2$, the baseline-adjusted value is $(1-1/2)2=1$ when $A_0=1$ and $(0-1/2)(-2)=1$ when $A_0=0$. Thus $Z_b=1$ surely, so $\\mathbb E[Z_b]=1$ and $\\operatorname{Var}(Z_b)=0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-step-3-1",
+          "step": "3.1",
+          "claim": "The two estimators have the same expectation, equal to the true gradient in step 1.1, while their variances are $1$ and $0$ by steps 2.1 and 2.2. This verifies variance reduction for this baseline and this MDP only.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta=1/2 and b(s)=1/2",
+          "status": "checked_by_exact_calculation",
+          "calculation": "Unadjusted Z has values 2 and 0 with equal probability, mean 1 and variance 1. Adjusted Z_b=1 on both actions, hence mean 1 and variance 0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "85d94e4b136c9dd50c4a613155b4de87c70c6385eaa68d41bbfd6fee7721437c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: theta at 0 or 1: The example restricts theta to (0,1) to keep both action probabilities positive. gamma equals zero: The one-step return is multiplied by gamma^0=1. other baselines: Only b(s)=1/2 is shown to eliminate variance; no universal variance claim is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "19a39bd59b7ab81b09cc9aa28ea92196f7255133dab2956df4795b36fb4fdb14"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "5f06419ab9b422729e154149e85a5559794906387b1671aedda8b1d252bd8f1d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "2e260704755a3d3b2bbe4b7bbd3763cf18bcea7bd67d7288460f5f2b74f0f7e4"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Remarks preserve the inherited AC context from the cited general algorithms; the explicit finite verification has no phase step invoking A1, and no operational axiom use is invented.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "fa12acd4518b0f3a4b864d79176ca5912c17ec7083c943ba1720e7622fd1245d"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate forward implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "b010715c21d4a04b38947cc89a66a403c3224fe45bcc0ee7de6bbb7443214882"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not an equivalence assertion requiring a separate reverse implication worksheet.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated boundary reader /root/ucrl2_repair (proposal)",
+            "reason": "At the interior symmetric policy, the two score values have opposite sign and the fixed half-unit baseline makes both adjusted sample directions equal to one. Direct two-outcome moments establish zero variance only for this specific estimator, while the Remarks retain the general cited algorithm choice context.",
+            "item_sha256": "fa63d73fb82b03e4f007b18e5b3cc55a62275fe890041ab42977451aaeb1abb5",
+            "row_sha256": "32b00946154482cee7d92f461875919022bd89e065d6825bb0897d69f151dbdf"
+          }
+        }
+      ]
+    },
+    "cex-policy-gradient-without-start-time-discount": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-policy-gradient-without-start-time-discount-step-1-1",
+          "step": "1.1",
+          "claim": "Every episode has $T=2$, $R_1=0$ and $R_2=A_1$. The given deterministic transition masses are normalized, and the displayed policy probabilities are normalized and positive on fixed support for every $\\theta\\in(0,1)$. Both terminal-path masses are affine in $\\theta$, so differentiation through their finite sum is exact with identically zero remainders; all score-return products are finite at every fixed interior parameter. Thus all the asserted regularity and termination conditions hold.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-policy-gradient-without-start-time-discount-step-2-1",
+          "step": "2.1",
+          "claim": "The objective is $J(\\theta)=\\mathbb E_\\theta[R_1+\\gamma R_2]=\\theta/2$, so $\\nabla J(\\theta)=1/2$. The time-zero score is zero. At time one the score is $1/\\theta$ on action $1$ and $-1/(1-\\theta)$ on action $0$, while $G_1=A_1$. Hence the claimed right-hand side is $\\theta(1/\\theta)+(1-\\theta)0=1\\ne1/2$. Including the missing factor $\\gamma^1$ changes this expectation to $1/2$, as required.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "explicit finite witness",
+          "status": "checked_by_exact_calculation",
+          "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample fixes its state/action or probability-law domain. The explicit model/hypotheses and step 1.1 govern whether empty trajectories or zero terms occur."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample and the exact local formulas govern zero probabilities, rewards, scores, discount or increments; no division is extended beyond the declared positive support. Original specialized worksheet details: empty: The explicit finite model has a nonempty state and action set. zero: Zero probability endpoints are excluded in the Bernoulli witness; the CPO witness explicitly uses discount zero. one: The state/action sizes are explicitly fixed in the witness. degenerate: Every model mass and reward is explicit; deterministic transitions are intentional. endpoints: The Bernoulli parameter is interior; discount zero in the CPO witness is included with gamma^0=1. nonempty-choice: The episode law and every required value are computed explicitly from finite masses without a choice principle. iff-forward: The refuted assertion is not an equivalence. iff-reverse: The refuted assertion is not an equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample fixes the model sizes and supported action probabilities. Singleton supports have probability one and zero logarithmic score when present; explicit examples retain exactly their stated finite sizes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample retains its stated terminal, deterministic-transition, integrability, fixed-support and algorithm admissibility conventions. The original specialized boundary details recorded under zero above are retained without changing any claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample supplies its actual parameter domain and discount range. No excluded probability endpoint, discount-one limit, nonterminating episode or update outside the open domain is admitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement refuted and Counterexample constructs its finite data directly and its contract declares no new choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement refuted and Counterexample is not an equivalence assertion requiring a separate forward implication worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement refuted and Counterexample is not an equivalence assertion requiring a separate reverse implication worksheet."
+        }
+      ]
+    }
+  }
+}

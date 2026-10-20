@@ -1,0 +1,87 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "impact-repeat",
+  "round": 2,
+  "unit": "1",
+  "input_sha256": "c3b0e674462bfdef1d8e0e4f4672e9a9152ed3dfa5e3bf75649d9d514c43ec20",
+  "decisions": [],
+  "reviews": [
+    {
+      "id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+      "disposition": "unaffected",
+      "post_sha256": "73e4a7da89c21b08efbfc34f994bcd37196ba3cd85c0f85f7e17bac629a6b573",
+      "review_context_sha256": "c40dd14ead74ae7cd3fc7c16bca4ce261b6ead6d31e34c35b9f37370b186b108",
+      "reason": "F2 and steps 2.1–3.1 use the unchanged volume-weighted raw integral quadrature. The dyadic cells already have maximal diameter 2^{-n} tending to zero, and normalized reconstruction preserves the constant witness input 1 exactly. The summable spike masses bound the continuum operator into C1 by 2B, while the first positive tag gives Q_n(1)′(0) >= 2^n and hence C1 error >= 2^n-B; kernel uniform continuity still gives supremum convergence. The added supplier hypothesis therefore invalidates no use or conclusion. The owning contract already quotes the corrected Definition and accurately mirrors the four proof steps; the item remains byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2108.08481"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_review_complete",
+    "changed_item_paths": [],
+    "claim_and_conventions": "On (0,1), A=C([0,1]) with supremum norm and U=C1([0,1]) with sum of function and derivative supremum norms; Countable Choice is retained. A continuous bounded nonpolynomial activation with narrow derivative spikes produces a one-neuron kernel sigma(x+y). Fixed parameters and dyadic volume weights yield supremum convergence and divergent C1 error for the singleton compact input {1}.",
+    "supplier_effect": {
+      "id": "alg-neural-operator-mesh-discretization",
+      "locus": "Definition, finite-sampling supremum-norm transfer clause; consumer F2 and Counterexample 2.1–4.1",
+      "change": "The added maximal-cell-diameter hypothesis h_n tending to zero already holds in step 3.1. No raw quadrature instruction or stronger-norm premise used by this counterexample changed.",
+      "disposition": "unaffected"
+    },
+    "sources_read": [
+      {
+        "path": "https://arxiv.org/pdf/2108.08481",
+        "locator": "Theorem 8, printed page 51; complete Appendix E, printed pages 92–93, including opening reduction and equations (49)–(50).",
+        "check": "The source reduction replaces continuously embedded Banach spaces by the continuous-function space with supremum norm; this does not establish convergence in a stronger Banach norm. The local counterexample proves the failure for the specified tagged quadratures and expressly makes no claim that all alternative finite-dimensional approximations fail."
+      }
+    ],
+    "repository_context_read": [
+      "items/cex-neural-operator-sup-norm-discretization-does-not-control-c1.md: complete item",
+      "items/alg-neural-operator-mesh-discretization.md: complete item",
+      "items/def-neural-operator.md: Definition, including schematic composition diagram",
+      "items/lem-finite-sampling-reconstruction-bridge-for-neural-operator-quadratures.md: Statement",
+      "items/lem-schwartz-cutoffs-from-the-standard-smooth-step.md: Statement",
+      "items/def-neural-operator-activation-classes.md: Definition",
+      "items/def-activation-class-locally-essentially-bounded-ae-continuous.md: Definition",
+      "items/thm-single-hidden-layer-universal-approximation.md: Statement",
+      "items/def-countable-choice.md: Definition",
+      "research/machine-learning-all-101-2026-10-19-batch-37.proof-contracts.json: assigned item contract"
+    ],
+    "proof_checks": [
+      "Disjoint spikes have masses m_n <= 2^{-2n-3}, so their primitives and the integrated derivative series converge uniformly; each continuum derivative term is bounded by m_n times the input supremum norm.",
+      "The bounded continuous nonconstant activation and ReLU meet the cited pointwise activation hypotheses under the unchanged Countable Choice assumption. Constant preceding kernels realize the N=2 integral subclass and preserve input 1 under every quadrature.",
+      "Every tag is positive, making every finite quadrature output smooth near [0,1]; t_n lies in the first cell and h_n H_n=2^n, whereas the continuum derivative at zero is B.",
+      "The continuous kernel on the compact square gives the cellwise supremum error bound by its modulus at h_n. This supplies no derivative bound, exactly as the stronger-norm caveat requires."
+    ],
+    "presentation_and_diagrams": "The Statement refuted contains no hyperlinks; its references follow in their own section. The four proof paragraphs have separated numbered steps and valid trailing tags. There is no assigned TikZ/tikzcd diagram, and no diagram is needed for the explicit analytic witness. The context supplier composition diagram agrees with its defining order.",
+    "metadata_and_ledger": "No contract, manifest, page or ledger change is necessary for this unchanged consumer. The supplier repair and no-published-consumer-effects proposals concern the supplier owner; the Caratheodory ODE proposal is outside this lane. No duplicate mathematical finding or outside maintenance proposal is introduced.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+        "exit_code": 0,
+        "result": "Run immediately after the mathematical review; both returned hashes copied into the review."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-37.proof-contracts.json --items cex-neural-operator-sup-norm-discretization-does-not-control-c1 --strict --json",
+        "exit_code": 0,
+        "result": "ok true; assigned contract checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cex-neural-operator-sup-norm-discretization-does-not-control-c1.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-neural-operator-sup-norm-discretization-does-not-control-c1.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; item was not edited."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this unchanged-consumer review and performs the remaining native closure, certification and gate obligations."
+  }
+}

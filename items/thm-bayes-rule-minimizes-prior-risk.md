@@ -29,6 +29,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-bayes-rule-minimizes-prior-risk.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -48,13 +49,13 @@ Assume the Axiom of Choice. Let $K$ be a probability
 kernel from a standard-Borel parameter space $(\Theta,\mathcal T)$ to a
 standard-Borel data space $(\mathcal X,\mathcal A)$, where standard Borel means
 measurably isomorphic to a Polish space
-([[def-standard-borel-space]]). Let $\pi$ be a prior,
+(Standard Borel spaces). Let $\pi$ be a prior,
 and let $L:\Theta\times\mathsf D\to[0,+\infty]$ be jointly measurable for a
 measurable action space $(\mathsf D,\mathcal G)$. Let $J$ be the joint prior-data
-law of [[lem-prior-and-model-kernel-define-joint-law]], let $M$ be its data
+law of A prior and model kernel define a joint law, let $M$ be its data
 marginal, and let $\Pi_x(d\theta)$ be a regular posterior distribution of
 $\theta$ given $x$ (the disintegration is supplied by
-[[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]]).
+Disintegration of a joint law on standard borel spaces).
 Define posterior risk
 $$q(x,a)=\int_\Theta L(\theta,a)\,\Pi_x(d\theta).$$
 Suppose a measurable deterministic rule $d^*:\mathcal X\to\mathsf D$
@@ -65,6 +66,14 @@ rules $\delta$:
 $$r_\pi(d^*)\leq r_\pi(\delta).$$
 No conclusion is asserted when a measurable posterior minimizer does not
 exist. All risks may be $+\infty$.
+
+## Statement references
+
+[[def-standard-borel-space]]
+
+[[lem-prior-and-model-kernel-define-joint-law]]
+
+[[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "issue": "Native45 final two local supplier-use findings",
+  "cycle": 1,
+  "actual_full_sources_read": [
+    "items/lem-du-local-pl-descent-and-path-length.md",
+    "items/ex-du-duplicate-inputs-force-singular-gram.md",
+    "items/thm-cauchy-schwarz-and-the-euclidean-norm.md",
+    "items/thm-cauchy-schwarz-finite.md",
+    "items/def-operator-norm-on-a-finite-dimensional-inner-product-space.md",
+    "items/lem-du-population-gram-kernels-are-finite-symmetric-psd.md",
+    "items/def-du-overparameterized-network-architectures-and-gram-kernels.md",
+    "items/thm-wide-network-gradient-descent-reaches-zero-training-loss.md",
+    "items/thm-residual-network-polynomial-width-training-convergence.md"
+  ],
+  "proof_uses": [
+    {
+      "id": "lem-du-local-pl-descent-and-path-length",
+      "native_defect": "Induced norm bounds vector H_sg but a scalar pairing bound needs Cauchy-Schwarz.",
+      "published_supplier": "thm-cauchy-schwarz-and-the-euclidean-norm clause1 supplies |a^Tb|<=||a||||b|| for real finite vectors; full proof read.",
+      "repair": "Add exactly that dep and F4, then in1.1 compute psi_second=g^T H_sg, apply Cauchy-Schwarz with a=g,b=H_sg, and use induced norm scaling to get <=||g||||H_s||||g||<=S||g||². The zero-gradient case is immediate.",
+      "retained": "Complete Statement and all PL/rate/path constants, closed-ball/first-exit argument, step-size restriction and choice-free status. No Hessian spectral argument or new regularity premise required."
+    },
+    {
+      "id": "ex-du-duplicate-inputs-force-singular-gram",
+      "native_defect": "Old F2 only stated symmetry/PSD of terminal K^(H), while2.1 and3.2 use intermediate symmetry.",
+      "actual_supplier_scope": "Population-Gram lemma Statement covers every fully connected K^(h), every residual S^(h), and both terminal matrices; proof1.1/2.1/3.1 give all K matrices,3.2/4.1 give S,5.1 gives residual terminal. S0=K0 by actual definition.",
+      "repair": "Replace F2 with exactly this scope and explicit S0=K0; existing2.1 already cites F2, and3.2 now explicitly invokes F2 for S0 and S^(h-1) symmetry and includes trailing F2.",
+      "retained": "Entire Example, separate full fully-connected and residual inductions, H=1 architecture coincidence and H>=2 residual mean/second-moment branch, all choice assumptions, nonzero null vector and smallest-eigenvalue conclusion."
+    }
+  ],
+  "consumer_search": {
+    "command": "rg -n thm-wide-network-gradient-descent-reaches-zero-training-loss|thm-residual-network-polynomial-width-training-convergence|lem-du-local-pl-descent-and-path-length|ex-du-duplicate-inputs-force-singular-gram items library",
+    "exit_code": 0,
+    "output": "library/machine-learning/overparameterized-training-and-interpolation-examples.md:10:  - ex-du-duplicate-inputs-force-singular-gram\nlibrary/machine-learning/overparameterized-training-and-interpolation.md:12:  - lem-du-local-pl-descent-and-path-length\nlibrary/machine-learning/overparameterized-training-and-interpolation.md:15:  - thm-wide-network-gradient-descent-reaches-zero-training-loss\nlibrary/machine-learning/overparameterized-training-and-interpolation.md:16:  - thm-residual-network-polynomial-width-training-convergence\nitems/thm-wide-network-gradient-descent-reaches-zero-training-loss.md:2:id: thm-wide-network-gradient-descent-reaches-zero-training-loss\nitems/thm-wide-network-gradient-descent-reaches-zero-training-loss.md:17:  - lem-du-local-pl-descent-and-path-length\nitems/thm-wide-network-gradient-descent-reaches-zero-training-loss.md:67:[F4] Local Gram positivity and loss-Hessian control confine all GD iterates by a first-exit argument and give geometric loss contraction. [[lem-du-local-pl-descent-and-path-length]]\nitems/lem-du-local-pl-descent-and-path-length.md:2:id: lem-du-local-pl-descent-and-path-length\nitems/ex-du-duplicate-inputs-force-singular-gram.md:2:id: ex-du-duplicate-inputs-force-singular-gram\nitems/thm-residual-network-polynomial-width-training-convergence.md:2:id: thm-residual-network-polynomial-width-training-convergence\nitems/thm-residual-network-polynomial-width-training-convergence.md:17:  - lem-du-local-pl-descent-and-path-length\nitems/thm-residual-network-polynomial-width-training-convergence.md:67:[F4] Local Gram positivity and loss-Hessian control confine all GD iterates by a first-exit argument and give geometric loss contraction. [[lem-du-local-pl-descent-and-path-length]]\n",
+    "aliases": "Neither repaired carrier declares aliases.",
+    "dispositions": [
+      {
+        "id": "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "decision": "Focused supplier use remains compatible; no source repair",
+        "proof_use": "F4/4.1 apply local lemma with lambda=lambda0, ball radius D=4sqrt(Enq/lambda), initial norm<=sqrt(Enq), J_H J_H^T>=lambda I/2 from2.1 and S=Tdoubleprime n²/lambda from3.1. D strictly exceeds2sqrt2||r0||/sqrtlambda and eta<=1/S. Corrected scalar Hessian estimate proves the same unchanged local conclusion, so geometric loss rate/path/confined-ball result remains.",
+        "scope_preserved": "All-layer training, exponential fully connected depth dependence, stated full width terms and initialization probability."
+      },
+      {
+        "id": "thm-residual-network-polynomial-width-training-convergence",
+        "decision": "Focused supplier use remains compatible; no source repair",
+        "proof_use": "F4/4.1 use D=4sqrt(Cnq/lambda), Gram>=lambda I/2 on ball from2.1, S=Cn²/(lambda H²) from3.1 and eta<=1/S; radius meets strict local lemma bound. H>=2 derivation and H=1 fully-connected reduction remain unchanged.",
+        "scope_preserved": "Full approved polynomial-depth width restriction including n⁴H⁶/lambda⁴, residual cross terms and scaling, all-layer training and stated probability/rate."
+      },
+      {
+        "id": "ex-du-duplicate-inputs-force-singular-gram",
+        "decision": "No item consumers found; original interface unchanged."
+      },
+      {
+        "id": "overparameterized-training-and-interpolation",
+        "decision": "Read compact empty-body page; placements unchanged and compatible."
+      },
+      {
+        "id": "overparameterized-training-and-interpolation-examples",
+        "decision": "Read compact empty-body page; example placement and page prerequisites unchanged."
+      }
+    ],
+    "propagation": "No original Statement/Example/Definition changes; no defining-clause propagation or further consumer edits needed. Reviewed actual two direct lemma consumers as requested; no broad NTK re-audit claimed."
+  },
+  "proposed_metadata_interface": {
+    "add_dep_to_local_lemma": [
+      "thm-cauchy-schwarz-and-the-euclidean-norm"
+    ],
+    "other_deps_changes": [],
+    "new_helpers": [],
+    "statements_byte_equal": true,
+    "root_owned": "Inventory/contract dependency mirrors, current levels/hashes, integration and native review/check handling."
+  },
+  "format_check": {
+    "command": "node tools/proof-layout.mjs research/machine-learning-all-101-2026-10-19-owner-ntk45-escalation/your-proposal/candidates/lem-du-local-pl-descent-and-path-length.md research/machine-learning-all-101-2026-10-19-owner-ntk45-escalation/your-proposal/candidates/ex-du-duplicate-inputs-force-singular-gram.md",
+    "exit_code": 0,
+    "output": "proof-layout: 2 items, 8 steps, 0 defects",
+    "scope": "Candidate renderer formatting only. No audit, precheck stamp, native verdict or coverage credit."
+  },
+  "gaps": []
+}

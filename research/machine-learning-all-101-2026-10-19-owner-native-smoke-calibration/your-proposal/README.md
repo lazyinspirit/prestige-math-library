@@ -1,0 +1,17 @@
+This proposal repairs only the 38 finite-smoke obligations in batches 8 and 72: 24 and 14 rows respectively, across 23 items. It changes no source statements or proofs. `field-cas.json` supplies the exact original and replacement arrays and the current raw source hashes; `before/` preserves the complete original contracts and all 23 source bodies. The native failure inventory is preserved as a scoped copy and bound to the original native evidence by SHA-256.
+
+`finite-smoke-calibration-ml.mjs` exports `calibrationMLChecks`, with 18 `ml101-*` callback families. Each callback takes the complete smoke row, requires its matching `check` and an exact supported `parameters: {fixture: ...}` selector, and returns `{ok, summary}`. Unsupported selectors fail. Every positive result comes from the explicit bounded computations; none certifies a general theorem. The callbacks intentionally reject `{}`, so the unrelated whole-registry `--self-test` interface is not an acceptance path for these selector-dependent fixtures.
+
+The models directly enumerate finite label/forecast events, direct expected score losses, fixed root-power chords and numerical derivatives, exact scale/tie countermodels, finite validation softmax/NLL calculations, and calibration/test feature products. The calibration tests enumerate every subset of the finite support of each observable, rather than sampling a few event sets. Floating comparisons use an explicit relative tolerance of 1e-11 (2e-6 for finite-difference curvature). Extended log endpoints omit zero-mass terms explicitly. JavaScript indices are zero based; source labels are numbered from one, with the same smallest-index tie rule.
+
+There is one substantive correction to finite-smoke prose, without any source change: the old posterior Brier row asserted scalar regret `(q-p)^2`, while the actual source defines the sum over both label coordinates. The replacement checks full-vector regret `||Q-P||² = 2(q-p)^2` on 25 binary models. The old result is retained as `historical_result`, and the complete original row remains in the archive. No other existing case or result obligation is removed or rewritten.
+
+Focused validation is reproducible from the repository root:
+
+```sh
+node research/machine-learning-all-101-2026-10-19-owner-native-smoke-calibration/your-proposal/focused-check.mjs
+```
+
+The recorded result is 38 positive rows, 270 rejected malformed/unsupported selectors, and 23 matching source/field guards. This is a staged callback test, not a production registry test, gate, or readiness claim. The first local execution exposed a floating-point near-zero in the temperature example; the final version uses the stated tolerance and the complete focused check passes.
+
+For root integration, first bind the proposal/module hashes and validate every exact old array, source hash, and assertion excerpt before writing. Copy the self-contained module to `tools/finite-smoke-calibration-ml.mjs`; add `import { calibrationMLChecks } from './finite-smoke-calibration-ml.mjs';` to `tools/finite-smoke.mjs` and merge `...calibrationMLChecks` into `makeChecks()`, checking for key collisions. Apply only the listed `finite_smoke` field replacements under each named contract key, preserving all unrelated keys, fields, rows, and native history. Recheck guards immediately before the root-owned write. Root owns the ordinary native battery and current-input metadata work. Do not rerun `prepare.py` to refresh stale guards: a mismatch must be reviewed against the archived originals.

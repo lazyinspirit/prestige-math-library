@@ -1,0 +1,238 @@
+{
+  "group": "y",
+  "batches": ["74"],
+  "pages_read": [
+    "hedge-and-online-gradient-descent",
+    "hedge-and-online-gradient-descent-examples"
+  ],
+  "items_read": [
+    "alg-hedge",
+    "alg-online-gradient-descent",
+    "thm-hedge-static-regret",
+    "thm-online-gradient-descent-regret",
+    "ex-hedge-two-experts",
+    "ex-projected-gradient-on-an-interval",
+    "cex-ogd-infeasible-comparator"
+  ],
+  "conventions": [
+    {
+      "convention": "Rounds start at 1. Hedge initializes every expert weight to 1, samples before observing the current loss vector, and updates using the entire revealed vector.",
+      "fixed_by": "alg-hedge",
+      "matters_for": ["thm-hedge-static-regret", "ex-hedge-two-experts"]
+    },
+    {
+      "convention": "Hedge assumes a probability space carrying measurable categorical draws with the stated conditional distribution; it does not construct that probability space.",
+      "fixed_by": "alg-hedge",
+      "matters_for": ["thm-hedge-static-regret", "ex-hedge-two-experts"]
+    },
+    {
+      "convention": "The Hedge expected static-regret guarantee uses a loss sequence fixed before learner randomization. The second-order inequality permits arbitrary finite nonnegative losses; the tuned bound requires losses in [0,1]. The logarithm is natural, and N=1 is handled separately.",
+      "fixed_by": "thm-hedge-static-regret",
+      "matters_for": ["thm-hedge-static-regret", "ex-hedge-two-experts"]
+    },
+    {
+      "convention": "OGD uses Euclidean projection onto a nonempty closed convex K, a supplied initial point in K, diameter bound D and supplied-vector norm bound G. For D,G>0 its step size is D/(G√t); if either bound is zero it leaves the iterate unchanged.",
+      "fixed_by": "alg-online-gradient-descent",
+      "matters_for": [
+        "thm-online-gradient-descent-regret",
+        "ex-projected-gradient-on-an-interval",
+        "cex-ogd-infeasible-comparator"
+      ]
+    },
+    {
+      "convention": "The smooth OGD branch requires a differentiable convex loss on an open convex neighborhood of K. The nonsmooth branch supplies a subgradient satisfying the supporting inequality throughout its convex domain containing K. Countable Choice is assumed only in the nondegenerate projection branch.",
+      "fixed_by": "alg-online-gradient-descent",
+      "matters_for": [
+        "thm-online-gradient-descent-regret",
+        "ex-projected-gradient-on-an-interval",
+        "cex-ogd-infeasible-comparator"
+      ]
+    },
+    {
+      "convention": "The OGD comparator inequality is pathwise and applies to u∈K. Its static-regret consequence uses a finite attained minimum; it does not extend to infeasible comparators.",
+      "fixed_by": "thm-online-gradient-descent-regret",
+      "matters_for": ["cex-ogd-infeasible-comparator"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-hedge",
+      "statement": "For integers N,T≥1, ε>0 and finite nonnegative loss vectors, initialize W₁(i)=1. At round t normalize xₜ(i)=Wₜ(i)/ΣⱼWₜ(j), draw a measurable expert with conditional probabilities xₜ given the previous history, and after observing the entire loss vector update Wₜ₊₁(i)=Wₜ(i)exp(−εℓₜ(i)). The probability space carrying these draws is assumed.",
+      "used_by": ["thm-hedge-static-regret", "ex-hedge-two-experts", "alg-exp3"]
+    },
+    {
+      "id": "alg-online-gradient-descent",
+      "statement": "For a positive finite horizon in dimension d≥1, use nonempty closed convex K⊆ℝᵈ, finite diameter and vector bounds D,G≥0, and supplied x₁∈K. Receive a gradient from a differentiable convex loss on an open convex neighborhood of K, or a supplied subgradient on a convex domain containing K. If D=0 or G=0 leave the iterate unchanged; otherwise assume Countable Choice and update xₜ₊₁=P_K(xₜ−Dgₜ/(G√t)). Random inputs must have the specified Borel measurability.",
+      "used_by": [
+        "thm-online-gradient-descent-regret",
+        "ex-projected-gradient-on-an-interval",
+        "cex-ogd-infeasible-comparator"
+      ]
+    },
+    {
+      "id": "thm-online-gradient-descent-regret",
+      "statement": "Under the stated nonempty closed convex decision-set, finite diameter/vector bounds, initial-point, smooth-or-subgradient and branch-specific Countable Choice hypotheses, every realization and every u∈K satisfy Σₜ(fₜ(xₜ)−fₜ(u))≤(3/2)DG√T. If D=0 or G=0 the sum is nonpositive. The same upper bound holds for static regret whenever the finite-horizon loss sum attains a finite minimum on K.",
+      "used_by": ["cex-ogd-infeasible-comparator"]
+    },
+    {
+      "id": "thm-hedge-static-regret",
+      "statement": "For N,T≥1, ε>0, finite nonnegative losses fixed before learner randomization, and the stated Hedge initialization, sampling and updates, every fixed expert i★ satisfies ΣₜΣᵢxₜ(i)ℓₜ(i)≤Σₜℓₜ(i★)+εΣₜΣᵢxₜ(i)ℓₜ(i)²+log(N)/ε. For losses in [0,1] and N≥2, ε=√(log(N)/T) gives expected static regret at most 2√(T log(N)); for N=1 it is zero.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability of sampled experts and randomized Euclidean inputs.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The real exponential in Hedge updates.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Meaning and finiteness of expected sampled losses and regret.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-of-an-indicator-is-probability",
+      "used_for": "Expanding categorical sampled-loss expectations.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Finite linearity of expectation in the Hedge theorem and example.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithm and inverse-exponential identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Positivity of log(N) for N≥2 and log(1)=0.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Both exponential inequalities in the Hedge potential argument.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive weights, reciprocal exponentials and the two-expert calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Products of update factors and telescoping potential bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Comparing exponents in the Hedge potential bound.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly assumed axiom in nondegenerate projection branches.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean norms, squared-distance expansions and scalar examples.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Closed decision sets and open convex loss neighborhoods.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Convex decision sets and verification of [0,1].",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Loss convexity and the affine counterexample losses.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Meaning of the supplied smooth-branch gradient.",
+      "opened": true
+    },
+    {
+      "id": "def-subgradient-and-subdifferential",
+      "used_for": "Supporting inequalities in OGD and its interval example.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Hilbert-space hypotheses of projection suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness of ℝᵈ for d≥1 when applying projection existence.",
+      "opened": true
+    },
+    {
+      "id": "thm-projection-onto-a-nonempty-closed-convex-set",
+      "used_for": "Existence and uniqueness of metric projection under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+      "used_for": "Projection distance inequality and verification of interval projections.",
+      "opened": true
+    },
+    {
+      "id": "lem-metric-projection-onto-a-nonempty-closed-convex-set-is-nonexpansive",
+      "used_for": "Continuity of projection and measurability of randomized OGD updates.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+      "used_for": "Converting smooth convex losses to the comparator supporting inequality.",
+      "opened": true
+    },
+    {
+      "id": "def-interval",
+      "used_for": "The decision interval [0,1] in the example and counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hedge-and-online-gradient-descent",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "The actual protocol, adversary/feedback and regret definitions agree with the batch's choice-before-feedback timing, fixed-loss Hedge expectation and attained-minimum qualification for OGD static regret."
+    },
+    {
+      "from": "mirror-descent-and-adaptive-regularization",
+      "to": "hedge-and-online-gradient-descent",
+      "faithful": true,
+      "note": "The prerequisite is contextual: the mirror-descent page's items do not cite either batch-74 algorithm or theorem. Its regret theorem supplies its own Bregman-potential proof and constants, without attributing them to the OGD theorem."
+    },
+    {
+      "from": "adversarial-bandits-and-importance-weighted-feedback",
+      "to": "hedge-and-online-gradient-descent",
+      "faithful": true,
+      "note": "Exp3 cites Hedge for equal initial weights and exponential-weight normalization. Its reward weights reduce to normalized exponentials of cumulative nonnegative estimated losses by cancellation of a common factor. Its regret theorem proves its own bandit bound rather than importing Hedge's oblivious expected-regret conclusion into the adaptive setting."
+    },
+    {
+      "from": "imitation-learning-and-dagger",
+      "to": "hedge-and-online-gradient-descent",
+      "faithful": true,
+      "note": "The prerequisite supplies online-learning context. The page's items do not cite either batch-74 algorithm or theorem; DAgger uses its separately stated and proved strongly convex FTL regret bound, rather than claiming the Hedge or OGD bound applies to its policy-dependent losses."
+    }
+  ]
+}

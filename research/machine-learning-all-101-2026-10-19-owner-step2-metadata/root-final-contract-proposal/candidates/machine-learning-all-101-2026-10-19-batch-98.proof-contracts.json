@@ -1,0 +1,1008 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-nested-decision-family-and-bounded-risk",
+    "alg-finite-grid-conformal-risk-control",
+    "thm-finite-grid-conformal-risk-control",
+    "ex-zero-loss-finite-grid-risk-control",
+    "ex-finite-grid-risk-control-fallback",
+    "cex-nonmonotone-finite-grid-risk-control",
+    "thm-finite-grid-monotone-envelope-risk-control",
+    "ex-multilabel-false-negative-risk-control",
+    "rem-marginal-risk-control-and-adaptive-reuse"
+  ],
+  "contracts": {
+    "def-finite-nested-decision-family-and-bounded-risk": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires n>=1 and M>=1 and a deterministic nonempty finite grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The lower endpoint alpha=0 is permitted; since losses are nonnegative, endpoint safety then forces each terminal loss to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: M=1 is allowed; monotonicity along the grid is vacuous and the sole endpoint condition is explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Equal row losses and repeated loss values are permitted; nonincrease is weak and no strict decrease is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The target interval is exactly alpha in [0,B), with B>0; the maximum-grid loss may equal alpha."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The decision grid is finite and deterministic; no arbitrary choice or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition has no biconditional."
+        }
+      ]
+    },
+    "alg-finite-grid-conformal-risk-control": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Inputs require n>=1, M>=1, and one calibration loss for every supplied grid index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: With all calibration losses zero, every test value equals B/(n+1); it passes at the first index exactly when alpha>=B/(n+1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For M=1 the algorithm returns the sole grid point, with status pass or fallback according to its one threshold test."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Equal thresholds are allowed; the comparison uses <= and the first qualifying index is deterministic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The full target interval alpha in [0,B) is admitted, including alpha=0; the procedure is defined whether or not any index passes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The procedure scans the finite ordered list and has an explicit fallback; it uses no nondeterministic selection or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Algorithm has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Algorithm has no biconditional."
+        }
+      ]
+    },
+    "thm-finite-grid-conformal-risk-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-nested-decision-family-and-bounded-risk",
+          "source_section": "Definition",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. Fix a deterministic strictly ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}\\subset\\mathbb R$ and a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. For $i=1,\\ldots,n+1$, let $W_i$ be a random element of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$. The rows $W_1,\\ldots,W_{n+1}$ are **exchangeable** when their joint law is invariant under every permutation of the $n+1$ row indices. The coordinates $L_i(\\lambda_j)$ are the losses of the finite decision family at observation $i$; in a prediction problem they may be obtained by applying each fixed prediction rule to that observation and evaluating a specified loss.\n\nThe family is **loss-nested** when, with probability one, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$. It is **endpoint-safe at level $\\alpha$** when, with probability one, $L_i(\\lambda_M)\\le\\alpha$ for every $i$. For any measurable selector $\\hat\\lambda$ taking values in $\\Lambda$ and determined by the calibration rows $W_1,\\ldots,W_n$, its **marginal expected test risk** is $\\mathbb E[L_{n+1}(\\hat\\lambda)]$, with expectation over all $n+1$ rows. This expectation is finite because every loss lies in $[0,B]$. Here “nested” means nonincreasing loss on the specified grid; literal inclusion of prediction sets is not required.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-grid-conformal-risk-control",
+          "source_section": "Definition",
+          "quote": "Input a deterministic ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$ with $M\\ge1$, a calibration size $n\\ge1$, a bound $B>0$, a target $\\alpha\\in[0,B)$, and calibration losses $L_i(\\lambda_j)\\in[0,B]$ for $1\\le i\\le n$ and $1\\le j\\le M$. Also supply the prediction rule $d_{\\lambda_j}$ associated with each grid point. For $j=1,\\ldots,M$ in order, compute\n$$T_j=\\frac{\\sum_{i=1}^n L_i(\\lambda_j)+B}{n+1}.$$\nReturn $(\\lambda_j,d_{\\lambda_j},\\text{pass})$ at the first index for which $T_j\\le\\alpha$. If no index passes, return $(\\lambda_M,d_{\\lambda_M},\\text{fallback})$. The rule performs at most $M$ tests and is defined for every supplied calibration array; monotonicity and the endpoint-safety assumption from the finite nested decision family are hypotheses for the risk theorem, not checks of the unobserved test loss.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n“Probability kernel” has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Write $C_j=(\\sum_{i=1}^nL_i(\\lambda_j)+B)/(n+1)$ and $S_j=(\\sum_{i=1}^{n+1}L_i(\\lambda_j))/(n+1)$. These are Borel functions of the finite row matrix. Each calibration pass event and the fallback event is a finite Boolean combination of Borel threshold sets, so the selected index is Borel-measurable. Define $j_*=\\min\\{j:S_j\\le\\alpha\\}$; this set is nonempty since $S_M\\le\\alpha$ by endpoint safety. Each event $\\{j_*=j\\}=\\{S_j\\le\\alpha\\}\\cap\\bigcap_{k<j}\\{S_k>\\alpha\\}$ is Borel, so $j_*$ and $g(W)=L_{n+1}(\\hat\\lambda(W))$ are Borel-measurable as well.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If the calibration scan passes first at $q$, then $S_q=C_q+(L_{n+1}(\\lambda_q)-B)/(n+1)\\le C_q\\le\\alpha$, so $j_*\\le q=\\hat j$. If the scan has no pass, then $\\hat j=M$ and $j_*\\le M$. In either case $j_*\\le\\hat j$, and row monotonicity gives $L_{n+1}(\\lambda_{\\hat j})\\le L_{n+1}(\\lambda_{j_*})$ almost surely.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "Set $V_i=L_i(\\lambda_{j_*})$. The full-row averages $S_j$ are invariant under row permutations, so $j_*$ is a symmetric measurable function of all rows. Consequently the vector $(V_1,\\ldots,V_{n+1})$ is exchangeable. Its entries have the same law by [F7]; since they are bounded, [F8] gives finite expectations and [F6] gives their equality. By [F6], the expectation of their average is $\\mathbb E[S_{j_*}]$, which is at most $\\alpha$ because $S_{j_*}\\le\\alpha$ almost surely. Thus $\\mathbb E[L_{n+1}(\\lambda_{j_*})]\\le\\alpha$.",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "By step 2.1 and monotonicity of expectation in [F6], $\\mathbb E[L_{n+1}(\\hat\\lambda)]\\le\\mathbb E[L_{n+1}(\\lambda_{j_*})]$. Step 2.2 bounds the right side by $\\alpha$, proving the marginal guarantee.",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "For almost every training outcome $\\omega$, apply the argument established in steps 1.1 and 2.1–2.2 under the conditional row law $Q_\\omega$ to obtain $\\int g\\,dQ_\\omega\\le\\alpha$, where $g(W)=L_{n+1}(\\hat\\lambda(W))$. The function is Borel-measurable by step 1.1 and bounded by $B$ by [F1]. Its dyadic lower approximations $g_m=2^{-m}\\lfloor2^m g\\rfloor$ are finite-valued Borel simple functions increasing to $g$. For each conditioning event $H\\in\\mathcal T$, decompose $g_m$ into its finitely many level-set indicators. The event identities in [F3] and linearity in [F6] then give $\\int_H\\int g_m\\,dQ_\\omega\\,d\\mathbb P(\\omega)=\\int_H g_m(W)\\,d\\mathbb P$. Applying [F5] to both sides gives the same identity for $g$. Each kernel integral of $g_m$ is $\\mathcal T$-measurable by [F3], so their pointwise limit $\\int g\\,dQ_\\omega$ is measurable. By [F4], this bounded function is a version of $\\mathbb E[g\\mid\\mathcal T]$. The sectionwise bound therefore gives the claimed conditional inequality almost surely.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require n>=1 and a nonempty grid of size M>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1: At alpha=0, nonnegative losses and endpoint safety force terminal losses to zero; the fallback branch remains covered by the proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1: For M=1, j_*=1 by endpoint safety; the algorithm either passes at the sole point or falls back to it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1: Equal loss values and threshold ties are permitted; the selector uses <= and a deterministic first index."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: If every terminal loss equals alpha, the full-sample average at M is still at most alpha, so j_* exists."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1: Both selectors are minima over a finite ordered set with explicit fallback; the argument uses no arbitrary choice or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Theorem has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Theorem has no biconditional."
+        }
+      ]
+    },
+    "thm-finite-grid-monotone-envelope-risk-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-nested-decision-family-and-bounded-risk",
+          "source_section": "Definition",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. Fix a deterministic strictly ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}\\subset\\mathbb R$ and a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. For $i=1,\\ldots,n+1$, let $W_i$ be a random element of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$. The rows $W_1,\\ldots,W_{n+1}$ are **exchangeable** when their joint law is invariant under every permutation of the $n+1$ row indices. The coordinates $L_i(\\lambda_j)$ are the losses of the finite decision family at observation $i$; in a prediction problem they may be obtained by applying each fixed prediction rule to that observation and evaluating a specified loss.\n\nThe family is **loss-nested** when, with probability one, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$. It is **endpoint-safe at level $\\alpha$** when, with probability one, $L_i(\\lambda_M)\\le\\alpha$ for every $i$. For any measurable selector $\\hat\\lambda$ taking values in $\\Lambda$ and determined by the calibration rows $W_1,\\ldots,W_n$, its **marginal expected test risk** is $\\mathbb E[L_{n+1}(\\hat\\lambda)]$, with expectation over all $n+1$ rows. This expectation is finite because every loss lies in $[0,B]$. Here “nested” means nonincreasing loss on the specified grid; literal inclusion of prediction sets is not required.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-grid-conformal-risk-control",
+          "source_section": "Statement",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. On a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $W_1,\\ldots,W_{n+1}$ be exchangeable random elements of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$ on a deterministic grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$. Assume that, almost surely, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$ and $L_i(\\lambda_M)\\le\\alpha$ for every $i$. Apply the finite-grid risk-control rule to the first $n$ rows and let $\\hat\\lambda$ be its selected parameter. Then\n$$\\mathbb E[L_{n+1}(\\hat\\lambda)]\\le\\alpha,$$\nwhere the expectation is over all $n+1$ rows.\n\nFor a sub-sigma-algebra $\\mathcal T\\subseteq\\mathcal F$, suppose the full matrix $W=(W_1,\\ldots,W_{n+1})$, viewed in $([0,B]^M)^{n+1}$ with its product Borel sigma-algebra, has an actual regular conditional distribution $Q_\\omega$ given $\\mathcal T$. Suppose that, for almost every training outcome $\\omega$, the section $Q_\\omega$ is row-exchangeable and the same bounds, monotonicity, and endpoint hypotheses hold $Q_\\omega$-almost surely. Then the same argument gives $\\mathbb E[L_{n+1}(\\hat\\lambda)\\mid\\mathcal T]\\le\\alpha$ almost surely.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n“Probability kernel” has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For each $i$, $\\widetilde L_i(\\lambda_j)$ is a maximum of finitely many measurable coordinates, so it is measurable and lies in $[0,B]$. The set of indices in the maximum shrinks as $j$ increases, hence $\\widetilde L_i(\\lambda_{j+1})\\le\\widetilde L_i(\\lambda_j)$. At the endpoint, $\\widetilde L_i(\\lambda_M)=L_i(\\lambda_M)\\le\\alpha$. The same deterministic row map is applied to every $W_i$, and it commutes with row permutations; therefore the transformed rows remain exchangeable. Each calibration threshold is a finite sum of transformed coordinates, and each first-pass or fallback event is a finite Boolean combination of Borel threshold sets. Thus the selected parameter $\\widetilde\\lambda(W)$ and the losses $g(W)=L_{n+1}(\\widetilde\\lambda(W))$ and $h(W)=\\widetilde L_{n+1}(\\widetilde\\lambda(W))$ are Borel functions of the full matrix.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "By [F2], applying the calibration rule to the transformed rows gives $\\mathbb E[\\widetilde L_{n+1}(\\widetilde\\lambda)]\\le\\alpha$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For every grid index $j$, the maximum defining $\\widetilde L_{n+1}(\\lambda_j)$ includes $L_{n+1}(\\lambda_j)$, so $L_{n+1}(\\widetilde\\lambda)\\le\\widetilde L_{n+1}(\\widetilde\\lambda)$ almost surely. Both variables are bounded and integrable; [F3] and step 1.2 give $\\mathbb E[L_{n+1}(\\widetilde\\lambda)]\\le\\alpha$.",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the conditional clause, let $Q_\\omega$ be the stated regular conditional distribution of the full matrix $W=(W_1,\\ldots,W_{n+1})$ given $\\mathcal T$. For almost every $\\omega$, its row law is exchangeable, its coordinates lie in $[0,B]$, and its endpoint losses are at most $\\alpha$ almost surely. Applying the same Borel tail-maximum map to each row preserves exchangeability under $Q_\\omega$, gives nonincreasing bounded rows, and leaves the endpoint unchanged. The marginal assertion of [F2], applied under each such probability measure $Q_\\omega$ to the transformed rows, gives $\\int h\\,dQ_\\omega\\le\\alpha$. Since $0\\le g\\le h\\le B$ pointwise, [F3] under $Q_\\omega$ yields $\\int g\\,dQ_\\omega\\le\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For each $m\\ge1$, put $g_m=2^{-m}\\lfloor2^m g\\rfloor$. These are finite-valued Borel simple functions increasing pointwise to $g$. Write $g_m=\\sum_r c_{m,r}\\mathbf 1_{A_{m,r}}$ for Borel level sets $A_{m,r}$ in the full matrix space. By the kernel identity [F4], for every $H\\in\\mathcal T$,\n$$\\int_H\\int g_m\\,dQ_\\omega\\,d\\mathbb P(\\omega)=\\int_H g_m(W)\\,d\\mathbb P.$$\nThe kernel integrals of $g_m$ are $\\mathcal T$-measurable finite sums of kernel evaluations. By [F6], they increase to $k(\\omega)=\\int g\\,dQ_\\omega$, and the right-hand integrals increase to $\\int_H g(W)\\,d\\mathbb P$. Applying [F6] on both sides gives the same identity with $g$ in place of $g_m$. Thus $k$ is $\\mathcal T$-measurable, bounded, and has the defining integral identities of a conditional-expectation version by [F5]. Step 3.1 gives $k\\le\\alpha$ almost surely, proving the conditional bound.",
+          "step": "3.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires n>=1 and M>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1: For an all-zero array, every finite tail maximum is zero and the base theorem applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof step 1.1: When M=1 the tail maximum is exactly the original loss."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1: Tied values and constant loss rows are preserved by the finite maximum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1: At lambda_M the tail maximum equals the original endpoint loss, so endpoint safety is unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1: Each tail maximum is over a finite nonempty index set; no arbitrary-index supremum or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Theorem has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Theorem has no biconditional."
+        }
+      ]
+    },
+    "ex-zero-loss-finite-grid-risk-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-nested-decision-family-and-bounded-risk",
+          "source_section": "Definition",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. Fix a deterministic strictly ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}\\subset\\mathbb R$ and a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. For $i=1,\\ldots,n+1$, let $W_i$ be a random element of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$. The rows $W_1,\\ldots,W_{n+1}$ are **exchangeable** when their joint law is invariant under every permutation of the $n+1$ row indices. The coordinates $L_i(\\lambda_j)$ are the losses of the finite decision family at observation $i$; in a prediction problem they may be obtained by applying each fixed prediction rule to that observation and evaluating a specified loss.\n\nThe family is **loss-nested** when, with probability one, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$. It is **endpoint-safe at level $\\alpha$** when, with probability one, $L_i(\\lambda_M)\\le\\alpha$ for every $i$. For any measurable selector $\\hat\\lambda$ taking values in $\\Lambda$ and determined by the calibration rows $W_1,\\ldots,W_n$, its **marginal expected test risk** is $\\mathbb E[L_{n+1}(\\hat\\lambda)]$, with expectation over all $n+1$ rows. This expectation is finite because every loss lies in $[0,B]$. Here “nested” means nonincreasing loss on the specified grid; literal inclusion of prediction sets is not required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-grid-conformal-risk-control",
+          "source_section": "Definition",
+          "quote": "Input a deterministic ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$ with $M\\ge1$, a calibration size $n\\ge1$, a bound $B>0$, a target $\\alpha\\in[0,B)$, and calibration losses $L_i(\\lambda_j)\\in[0,B]$ for $1\\le i\\le n$ and $1\\le j\\le M$. Also supply the prediction rule $d_{\\lambda_j}$ associated with each grid point. For $j=1,\\ldots,M$ in order, compute\n$$T_j=\\frac{\\sum_{i=1}^n L_i(\\lambda_j)+B}{n+1}.$$\nReturn $(\\lambda_j,d_{\\lambda_j},\\text{pass})$ at the first index for which $T_j\\le\\alpha$. If no index passes, return $(\\lambda_M,d_{\\lambda_M},\\text{fallback})$. The rule performs at most $M$ tests and is defined for every supplied calibration array; monotonicity and the endpoint-safety assumption from the finite nested decision family are hypotheses for the risk theorem, not checks of the unobserved test loss.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "At every grid point, the calibration threshold is $(0+B)/(n+1)=B/(n+1)$. Hence, if $\\alpha\\ge B/(n+1)$ the first point passes, while if $\\alpha<B/(n+1)$ every point fails and the algorithm returns the fallback.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The test loss is zero at every grid point, including the first point and the fallback. Its expectation is therefore $0$, which is at most $\\alpha$ because $\\alpha\\ge0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires n>=1 and M>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1: All calibration and test losses are identically zero, including the terminal loss."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.1: With M=1, the only grid point is selected whether it passes or is the fallback."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1: All thresholds are equal; the rule deterministically chooses the first point when it passes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The boundary alpha=B/(n+1) passes by the <= test; alpha=0 falls back when B>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The finite scan and fallback are deterministic and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        }
+      ]
+    },
+    "ex-finite-grid-risk-control-fallback": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-nested-decision-family-and-bounded-risk",
+          "source_section": "Definition",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. Fix a deterministic strictly ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}\\subset\\mathbb R$ and a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. For $i=1,\\ldots,n+1$, let $W_i$ be a random element of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$. The rows $W_1,\\ldots,W_{n+1}$ are **exchangeable** when their joint law is invariant under every permutation of the $n+1$ row indices. The coordinates $L_i(\\lambda_j)$ are the losses of the finite decision family at observation $i$; in a prediction problem they may be obtained by applying each fixed prediction rule to that observation and evaluating a specified loss.\n\nThe family is **loss-nested** when, with probability one, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$. It is **endpoint-safe at level $\\alpha$** when, with probability one, $L_i(\\lambda_M)\\le\\alpha$ for every $i$. For any measurable selector $\\hat\\lambda$ taking values in $\\Lambda$ and determined by the calibration rows $W_1,\\ldots,W_n$, its **marginal expected test risk** is $\\mathbb E[L_{n+1}(\\hat\\lambda)]$, with expectation over all $n+1$ rows. This expectation is finite because every loss lies in $[0,B]$. Here “nested” means nonincreasing loss on the specified grid; literal inclusion of prediction sets is not required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-grid-conformal-risk-control",
+          "source_section": "Definition",
+          "quote": "Input a deterministic ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$ with $M\\ge1$, a calibration size $n\\ge1$, a bound $B>0$, a target $\\alpha\\in[0,B)$, and calibration losses $L_i(\\lambda_j)\\in[0,B]$ for $1\\le i\\le n$ and $1\\le j\\le M$. Also supply the prediction rule $d_{\\lambda_j}$ associated with each grid point. For $j=1,\\ldots,M$ in order, compute\n$$T_j=\\frac{\\sum_{i=1}^n L_i(\\lambda_j)+B}{n+1}.$$\nReturn $(\\lambda_j,d_{\\lambda_j},\\text{pass})$ at the first index for which $T_j\\le\\alpha$. If no index passes, return $(\\lambda_M,d_{\\lambda_M},\\text{fallback})$. The rule performs at most $M$ tests and is defined for every supplied calibration array; monotonicity and the endpoint-safety assumption from the finite nested decision family are hypotheses for the risk theorem, not checks of the unobserved test loss.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Since every calibration loss is nonnegative, for each $j$ the algorithm's threshold satisfies $(\\sum_{i=1}^nL_i(\\lambda_j)+B)/(n+1)\\ge B/(n+1)>\\alpha$. No point passes, so the rule returns $\\lambda_M$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The endpoint condition gives $0\\le L_{n+1}(\\lambda_M)\\le\\alpha$ almost surely. The loss is bounded and integrable, so [F3] implies $\\mathbb E[L_{n+1}(\\lambda_M)]\\le\\alpha$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires n>=1 and M>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1: At alpha=0, the strict calibration correction prevents a pass and endpoint safety forces the nonnegative terminal test loss to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.1: For M=1 the rule falls back to the sole endpoint, which is safe."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The argument permits equal calibration losses; only nonnegativity and the strict target inequality are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The condition alpha<B/(n+1) is strict; at equality the threshold can pass and this example's no-pass conclusion does not apply."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The fallback index is fixed as M; no choice axiom or random tie-breaking is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        }
+      ]
+    },
+    "cex-nonmonotone-finite-grid-risk-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-exchangeable-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $Z_1,\\ldots,Z_n$ be random elements, $n\\ge1$, of one measurable space\n$(\\mathcal Z,\\mathscr Z)$. Their tuple $Z=(Z_1,\\ldots,Z_n)$ is a random element\nof $(\\mathcal Z^n,\\mathscr Z^{\\otimes n})$ by\n[[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]],\nand its law is the pushforward probability measure from\n[[def-law-or-distribution-of-a-random-element]]. For a permutation $\\pi$ of\n$\\{1,\\ldots,n\\}$, let $\\tau_\\pi(z)_i=z_{\\pi(i)}$. The tuple is\n**exchangeable** if\n$$\\mathbb P_Z\\circ\\tau_\\pi^{-1}=\\mathbb P_Z\\qquad\\text{for every permutation }\\pi.$$\n\nThis is invariance of the joint law, not an assertion of independence or identical marginal construction by independent sampling. The coordinate maps $\\tau_\\pi$ are measurable by the cited finite-product lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-grid-conformal-risk-control",
+          "source_section": "Definition",
+          "quote": "Input a deterministic ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$ with $M\\ge1$, a calibration size $n\\ge1$, a bound $B>0$, a target $\\alpha\\in[0,B)$, and calibration losses $L_i(\\lambda_j)\\in[0,B]$ for $1\\le i\\le n$ and $1\\le j\\le M$. Also supply the prediction rule $d_{\\lambda_j}$ associated with each grid point. For $j=1,\\ldots,M$ in order, compute\n$$T_j=\\frac{\\sum_{i=1}^n L_i(\\lambda_j)+B}{n+1}.$$\nReturn $(\\lambda_j,d_{\\lambda_j},\\text{pass})$ at the first index for which $T_j\\le\\alpha$. If no index passes, return $(\\lambda_M,d_{\\lambda_M},\\text{fallback})$. The rule performs at most $M$ tests and is defined for every supplied calibration array; monotonicity and the endpoint-safety assumption from the finite nested decision family are hypotheses for the risk theorem, not checks of the unobserved test loss.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [A1] and [F1], the two loss rows are exchangeable. By [A2], their values are bounded by $B=1$, the endpoint is safe, and the family violates the required nonincreasing-loss condition on an event of probability $1/10$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "If the calibration row is type $a$, the first threshold is $(0+1)/2=1/2\\le3/4$, so the algorithm selects $\\lambda_1$. If it is type $b$, the first threshold is $(1+1)/2=1>3/4$ and the second is $(3/4+1)/2=7/8>3/4$, so the algorithm falls back to $\\lambda_2$.",
+          "inputs": [
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Conditional on a type-$a$ calibration row, independence makes the expected test loss at $\\lambda_1$ equal to $(1/10)0+(9/10)1=9/10$. Conditional on a type-$b$ calibration row, the selected endpoint loss is $3/4$ for either test type.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Averaging over the calibration row gives $\\mathbb E[L_2(\\hat\\lambda)]=(1/10)(9/10)+(9/10)(3/4)=153/200=3/4+3/200>3/4=\\alpha$. Thus the asserted guarantee fails despite exchangeability, boundedness, and a safe endpoint.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness fixes n=1 and a two-point grid."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness uses losses 1 and 3/4 and is not an all-zero boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample requires two grid points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1: The endpoint losses are tied at 3/4 while the first-grid losses create a strict nonmonotone row and deterministic branch selection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1: Both row types have terminal loss exactly alpha=3/4, so endpoint safety holds at equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1: The model has two explicit outcomes, two grid points, and deterministic first-pass/fallback behavior; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement refuted has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement refuted has no biconditional."
+        }
+      ]
+    },
+    "ex-multilabel-false-negative-risk-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-nested-decision-family-and-bounded-risk",
+          "source_section": "Definition",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. Fix a deterministic strictly ordered grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}\\subset\\mathbb R$ and a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. For $i=1,\\ldots,n+1$, let $W_i$ be a random element of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$. The rows $W_1,\\ldots,W_{n+1}$ are **exchangeable** when their joint law is invariant under every permutation of the $n+1$ row indices. The coordinates $L_i(\\lambda_j)$ are the losses of the finite decision family at observation $i$; in a prediction problem they may be obtained by applying each fixed prediction rule to that observation and evaluating a specified loss.\n\nThe family is **loss-nested** when, with probability one, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$. It is **endpoint-safe at level $\\alpha$** when, with probability one, $L_i(\\lambda_M)\\le\\alpha$ for every $i$. For any measurable selector $\\hat\\lambda$ taking values in $\\Lambda$ and determined by the calibration rows $W_1,\\ldots,W_n$, its **marginal expected test risk** is $\\mathbb E[L_{n+1}(\\hat\\lambda)]$, with expectation over all $n+1$ rows. This expectation is finite because every loss lies in $[0,B]$. Here “nested” means nonincreasing loss on the specified grid; literal inclusion of prediction sets is not required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-grid-conformal-risk-control",
+          "source_section": "Statement",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. On a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $W_1,\\ldots,W_{n+1}$ be exchangeable random elements of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$ on a deterministic grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$. Assume that, almost surely, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$ and $L_i(\\lambda_M)\\le\\alpha$ for every $i$. Apply the finite-grid risk-control rule to the first $n$ rows and let $\\hat\\lambda$ be its selected parameter. Then\n$$\\mathbb E[L_{n+1}(\\hat\\lambda)]\\le\\alpha,$$\nwhere the expectation is over all $n+1$ rows.\n\nFor a sub-sigma-algebra $\\mathcal T\\subseteq\\mathcal F$, suppose the full matrix $W=(W_1,\\ldots,W_{n+1})$, viewed in $([0,B]^M)^{n+1}$ with its product Borel sigma-algebra, has an actual regular conditional distribution $Q_\\omega$ given $\\mathcal T$. Suppose that, for almost every training outcome $\\omega$, the section $Q_\\omega$ is row-exchangeable and the same bounds, monotonicity, and endpoint hypotheses hold $Q_\\omega$-almost surely. Then the same argument gives $\\mathbb E[L_{n+1}(\\hat\\lambda)\\mid\\mathcal T]\\le\\alpha$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For each $k$ and grid point $\\lambda_j$, the event $f_k(X_i)\\ge1-\\lambda_j$ is measurable; finite intersections, unions, and sums in the displayed loss formula are therefore measurable. The same map is applied to every exchangeable example row, so the resulting loss vectors are exchangeable.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "If $\\lambda\\le\\lambda'$, then $1-\\lambda'\\le1-\\lambda$, so $C_\\lambda(x)\\subseteq C_{\\lambda'}(x)$. For nonempty $Y_i$, the number of included true labels can only increase, making $L_i(\\lambda')\\le L_i(\\lambda)$; for empty $Y_i$ the loss is constantly zero. The losses lie in $[0,1]$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "At $\\lambda_M=1$, the threshold is zero and every score lies in $[0,1]$, so $C_1(x)=[K]$. Hence every nonempty-label loss is zero, and the stated empty-label convention also gives zero. Thus $L_i(\\lambda_M)=0\\le\\alpha$.",
+          "inputs": [
+            "given",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The finite loss rows are exchangeable, bounded by $B=1$, nonincreasing, and endpoint-safe by steps 1.1–2.1. Applying [F3] gives $\\mathbb E[L_{n+1}(\\hat\\lambda)]\\le\\alpha$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example explicitly defines empty-truth-set loss as zero, so the denominator is never evaluated at zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.2: At the maximum grid point every class is included and the false-negative loss is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.2: K=1 and M=1 are allowed; the maximum point still includes the sole class and has zero loss."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.2: Tied scores may make the prediction set unchanged at adjacent grid points; only weak monotonicity is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.2: The target alpha=0 is permitted; the maximum-grid endpoint has zero loss."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2: The label set, score vector, and threshold grid are finite; no arbitrary selection or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        }
+      ]
+    },
+    "rem-marginal-risk-control-and-adaptive-reuse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-grid-conformal-risk-control",
+          "source_section": "Statement",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. On a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $W_1,\\ldots,W_{n+1}$ be exchangeable random elements of $[0,B]^M$ with its Borel sigma-algebra, and write $L_i(\\lambda_j)=(W_i)_j$ on a deterministic grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$. Assume that, almost surely, $L_i(\\lambda_1)\\ge\\cdots\\ge L_i(\\lambda_M)$ for every $i$ and $L_i(\\lambda_M)\\le\\alpha$ for every $i$. Apply the finite-grid risk-control rule to the first $n$ rows and let $\\hat\\lambda$ be its selected parameter. Then\n$$\\mathbb E[L_{n+1}(\\hat\\lambda)]\\le\\alpha,$$\nwhere the expectation is over all $n+1$ rows.\n\nFor a sub-sigma-algebra $\\mathcal T\\subseteq\\mathcal F$, suppose the full matrix $W=(W_1,\\ldots,W_{n+1})$, viewed in $([0,B]^M)^{n+1}$ with its product Borel sigma-algebra, has an actual regular conditional distribution $Q_\\omega$ given $\\mathcal T$. Suppose that, for almost every training outcome $\\omega$, the section $Q_\\omega$ is row-exchangeable and the same bounds, monotonicity, and endpoint hypotheses hold $Q_\\omega$-almost surely. Then the same argument gives $\\mathbb E[L_{n+1}(\\hat\\lambda)\\mid\\mathcal T]\\le\\alpha$ almost surely.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-split-conformal-marginal-coverage",
+          "source_section": "Statement",
+          "quote": "Let $Z_i=(X_i,Y_i)$, $1\\le i\\le m+1$, be random elements of one measurable\nexample space $(\\mathcal Z,\\mathscr Z)$, and let $\\mathcal T$ be the training\nsigma-field. Suppose the tuple $Z=(Z_1,\\ldots,Z_{m+1})$ has a regular\nconditional distribution $Q_\\omega$ given $\\mathcal T$ in the sense of\n[[def-regular-conditional-distribution]], whose sections have joint laws\ninvariant under every coordinate permutation, as in\n[[def-exchangeable-random-elements]], for almost every $\\omega$. Let $H$ be a $\\mathcal T$-measurable\ntraining statistic, and let $s:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be a\njointly measurable split score rule. Use the split set in\n[[alg-split-conformal-prediction-set]] at $0<\\alpha<1$. Then\n$$\\mathbb P\\{Y_{m+1}\\in C(X_{m+1})\\mid\\mathcal T\\}\\ge1-\\alpha\\quad\\text{almost surely}.$$\nIf the tie-randomized set $C_U$ is used with one $U$ of Lebesgue probability\nlaw on $[0,1]$ independent of $\\mathcal T\\vee\\sigma(Z)$, then\n$$\\mathbb P\\{Y_{m+1}\\in C_U(X_{m+1})\\mid\\mathcal T\\}=1-\\alpha\\quad\\text{almost surely}.$$\nIn either case, integration over the training sigma-field gives the same\nmarginal lower bound or exact marginal coverage.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-grid-monotone-envelope-risk-control",
+          "source_section": "Statement",
+          "quote": "Let $n,M\\ge1$, $B>0$, and $\\alpha\\in[0,B)$. On a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $W_1,\\ldots,W_{n+1}$ be exchangeable random elements of $[0,B]^M$ with its Borel sigma-algebra, and write their coordinates as $L_i(\\lambda_j)$ on a deterministic grid $\\Lambda=\\{\\lambda_1<\\cdots<\\lambda_M\\}$; do not assume the original rows are nonincreasing. Assume $L_i(\\lambda_M)\\le\\alpha$ almost surely for every $i$. Define the finite tail-maximum losses\n$$\\widetilde L_i(\\lambda_j)=\\max_{j\\le k\\le M}L_i(\\lambda_k).$$\nApply the finite-grid risk-control rule to the transformed calibration rows and let $\\widetilde\\lambda$ be its selected parameter. Then\n$$\\mathbb E[L_{n+1}(\\widetilde\\lambda)]\\le\\alpha.$$\nThe expectation is over all calibration and test rows. If the rows have an actual regular conditional exchangeable law given a training sigma-algebra and the same bounds and endpoint condition hold almost surely in that law, the corresponding conditional expected-risk bound also holds almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n“Probability kernel” has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The variable $X$ is $\\mathcal T$-measurable and integrable, so it is itself a version of $\\mathbb E[X\\mid\\mathcal T]$ by [F5]. Therefore $R=X$, $\\mathbb E R=(1/2)0+(1/2)(1/2)=1/4$, and $\\mathbb P(R>1/4)=1/2$. In particular, the chance constraint $\\mathbb P(R\\le1/4)\\ge1-\\delta$ fails for every $\\delta<1/2$.",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "[F1] gives a general marginal bound and a conditional bound only when its actual regular conditional law is sectionwise exchangeable and boundedness, loss nesting, and endpoint safety hold almost surely under those sections. Thus neither [F1] nor [F2] gives a general guarantee conditional on an arbitrary subgroup or feature value; [F2] concerns a particular coverage event under its own conditional-exchangeability hypotheses. An adaptive reuse or distribution shift that violates the applicable exchangeability hypotheses falls outside [F1] and [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The conditional extension in [F1] requires the actual regular conditional law described by [F4]. The envelope in [F3] only dominates the original loss pointwise, so it may increase the selected decision's risk and make the resulting bound more conservative.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Remark comments on the scope of previously specified results and introduces no additional model domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The finite illustration distinguishes a zero conditional-risk state from a one-half state; its expectation and threshold probability are computed explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Remark has no one-element grid boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification step 1.1: The two-state calibration-risk illustration gives mean 1/4 while exceeding target 1/4 with probability 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Remark adds no endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Remark adds no selector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark has no biconditional."
+        }
+      ]
+    }
+  }
+}

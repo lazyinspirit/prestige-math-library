@@ -1,0 +1,285 @@
+{
+  "group": "e",
+  "batches": [
+    "16"
+  ],
+  "pages_read": [
+    "ml02-gaussian-process-regression",
+    "ml02-gaussian-process-regression-examples"
+  ],
+  "items_read": [
+    "def-gaussian-process-regression-observation-model",
+    "lem-finite-span-orthogonal-projection-in-inner-product-space",
+    "lem-gp-regression-observed-covariance-invertibility",
+    "thm-gp-regression-log-marginal-likelihood",
+    "cor-gp-regression-posterior-predictive-law",
+    "rem-gp-regression-computation-and-scope-caveats",
+    "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+    "ex-gp-regression-noisy-finite-interpolation",
+    "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+  ],
+  "conventions": [
+    {
+      "convention": "K_AB has entries k(a_i,b_j), with rows indexed by A and columns by B. Training and test lists have positive finite lengths and may contain repetitions.",
+      "fixed_by": "def-gaussian-process-regression-observation-model",
+      "matters_for": [
+        "lem-gp-regression-observed-covariance-invertibility",
+        "thm-gp-regression-log-marginal-likelihood",
+        "cor-gp-regression-posterior-predictive-law",
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "convention": "Observation noise is centered Gaussian and independent of the process; optional test noise is centered Gaussian and independent of the pair consisting of the process and observation noise.",
+      "fixed_by": "def-gaussian-process-regression-observation-model",
+      "matters_for": [
+        "thm-gp-regression-log-marginal-likelihood",
+        "cor-gp-regression-posterior-predictive-law",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "convention": "Ordinary inverse formulas require positive definiteness of the observed covariance K_XX+R. Prior and predictive covariance matrices may be singular; no pseudoinverse extension is asserted.",
+      "fixed_by": "lem-gp-regression-observed-covariance-invertibility",
+      "matters_for": [
+        "thm-gp-regression-log-marginal-likelihood",
+        "cor-gp-regression-posterior-predictive-law",
+        "rem-gp-regression-computation-and-scope-caveats",
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "convention": "The conditional formula selects a kernel defined at every observation y; regular conditional versions are determined only almost surely under the observation law. AC is assumed for the Gaussian-process and conditioning interfaces.",
+      "fixed_by": "cor-gp-regression-posterior-predictive-law",
+      "matters_for": [
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "convention": "The ridge objective uses an unnormalized sum of squared residuals and penalty σ² times the squared norm of g−m, with σ>0. A real Hilbert space with reproducing kernel sections and m∈H is assumed.",
+      "fixed_by": "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+      "matters_for": [
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "convention": "Projection is onto a finite-dimensional subspace of a real inner-product space; completeness of the ambient space is unnecessary, and the zero-dimensional subspace is allowed.",
+      "fixed_by": "lem-finite-span-orthogonal-projection-in-inner-product-space",
+      "matters_for": [
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "lem-projected-bellman-error-is-well-defined"
+      ]
+    },
+    {
+      "convention": "Arithmetic counts treat each addition, subtraction, multiplication, division, or square root as one operation; the variance cost is measured after dense factorization.",
+      "fixed_by": "rem-gp-regression-computation-and-scope-caveats",
+      "matters_for": [
+        "rem-gp-regression-computation-and-scope-caveats"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-gaussian-process-regression-observation-model",
+      "statement": "For a Gaussian process f and independent centered Gaussian observation noise ε with PSD covariance R, define Y=f_X+ε and A_X=K_XX+R. Optional centered Gaussian test noise is independent of the pair (f,ε).",
+      "used_by": [
+        "lem-gp-regression-observed-covariance-invertibility",
+        "thm-gp-regression-log-marginal-likelihood",
+        "cor-gp-regression-posterior-predictive-law",
+        "rem-gp-regression-computation-and-scope-caveats",
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "id": "cor-gp-regression-posterior-predictive-law",
+      "statement": "Assume AC and the stated finite GP model with A_X=K_XX+R positive definite. The conditional mean is m_*+K_*X A_X⁻¹(y−m_X), and the conditional covariance is K_**−K_*X A_X⁻¹K_X*, which is PSD and may be singular. Independent Gaussian test noise adds R_* to this covariance. The selected kernel is defined for every y.",
+      "used_by": [
+        "rem-gp-regression-computation-and-scope-caveats",
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "id": "lem-gp-regression-observed-covariance-invertibility",
+      "statement": "For PSD Gram and noise matrices K and R, A=K+R is symmetric PSD. Its ordinary inverse exists if and only if A is positive definite, equivalently if and only if all singular values of A are positive.",
+      "used_by": [
+        "cor-gp-regression-posterior-predictive-law",
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "ex-gp-regression-noisy-finite-interpolation",
+        "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction"
+      ]
+    },
+    {
+      "id": "lem-finite-span-orthogonal-projection-in-inner-product-space",
+      "statement": "Let H be a real inner-product space and V⊆H a finite-dimensional subspace. Each f∈H has a unique p∈V with f−p orthogonal to V, and for every v∈V, ‖f−v‖²=‖f−p‖²+‖p−v‖².",
+      "used_by": [
+        "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+        "lem-projected-bellman-error-is-well-defined"
+      ]
+    },
+    {
+      "id": "thm-gp-regression-kernel-ridge-posterior-mean-equivalence",
+      "statement": "Under AC and the stated real reproducing-Hilbert-space hypotheses with m∈H and σ>0, J(g)=Σ_i(y_i−g(x_i))²+σ²‖g−m‖² has the unique minimizer g_*=m+Σ_i α_i k_xi, where α=(K+σ²I)⁻¹(y−m_X). Its training evaluation vector equals the latent GP conditional-mean vector under independent N_n(0,σ²I) observation noise.",
+      "used_by": [
+        "rem-statistical-and-numerical-kernel-errors"
+      ]
+    },
+    {
+      "id": "thm-gp-regression-log-marginal-likelihood",
+      "statement": "Assume AC and the stated finite GP observation model with A_X positive definite. Then Y has law N_n(m_X,A_X), and log p(y|X,m,k,R)=−(y−m_X)ᵀA_X⁻¹(y−m_X)/2−log det(A_X)/2−n log(2π)/2.",
+      "used_by": [
+        "rem-gp-regression-computation-and-scope-caveats"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions in Gaussian-law construction, canonical GP existence, and conditional-law applications.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Interpretation of process/noise independence and independence from the joint pair.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Scalar-projection characterization, Gaussian affine images, and allowance for singular covariance.",
+      "opened": true
+    },
+    {
+      "id": "def-gaussian-process",
+      "used_for": "Joint Gaussian finite evaluations, including repeated inputs and degenerate coordinates.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Construction of finite-span orthogonal projection, including the empty basis.",
+      "opened": true
+    },
+    {
+      "id": "def-singular-values-of-an-endomorphism",
+      "used_for": "Identification of singular values through the nonnegative square root of A* A.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Orthonormal diagonalization of PSD observed covariance matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Singular-value identification and the finite-dimensional ridge least-squares reduction.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Equivalence between positivity of all singular values and invertibility.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "used_for": "Joint Gaussian stacking of latent evaluations and independent observation noise.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Positive-definite Gaussian density underlying the log marginal likelihood.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+      "used_for": "Exact finite posterior kernel, PSD Schur complement, all-y version, and independent test-noise addition.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariate-normal-conditional-law",
+      "used_for": "Checking the posterior supplier's probability-kernel argument with singular latent or conditional covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel",
+      "used_for": "Canonical cylinder-space priors for arbitrary PSD kernels, without sample-path continuity conclusions.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Identification of independent standard-normal finite coordinates in the discontinuity witness.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Limit of decreasing finite-coordinate events in the proof that the equality-kernel GP has no continuous modification.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "used_for": "Dense real Cholesky factorization and triangular-solve operation counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Finite-dimensional normal-equation characterization in the ridge minimization proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-gp-regression-rank-one-prior-positive-noise-singular-prediction",
+      "concern": "The Example specifies only “R=I_2” before asserting posterior moments; it does not explicitly introduce Y=f_X+ε with ε∼N_2(0,I_2) independent of f. Verification invokes “The finite model in the Example” and F1, so the intended Gaussian independent-noise assumptions are recoverable from the referenced observation model, but should be stated in the complete Example description.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice interrupts its Definition with “([[def-choice-function]])” inside the axiom formulation. This hyperlink remains inside the complete Definition rather than an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "def-independent-random-elements includes “[[def-independent-sigma-algebras-and-events]]” and “[[def-sigma-algebra-generated-by-a-function]]” within its Definition. These supplier links have not been moved after the complete Definition into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-gaussian-process",
+      "finding": "def-gaussian-process begins its Definition with “Assume the Axiom of Choice [[def-axiom-of-choice]]” and embeds links to def-stochastic-process-and-finite-dimensional-distributions and def-multivariate-normal-law in the same section. The complete Definition is interrupted by hyperlinks and lacks the required following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-singular-values-of-an-endomorphism",
+      "finding": "def-singular-values-of-an-endomorphism embeds “[[prop-adjoint-algebra]]” and “[[thm-non-negative-square-root-exists-and-is-unique]]” inside its Definition, before completing the definition of singular values. The links belong after the complete section in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-finite-gaussian-process-posterior-and-predictive-laws",
+      "finding": "thm-finite-gaussian-process-posterior-and-predictive-laws interrupts its Statement's opening paragraph with “[[thm-gaussian-process-exists-from-mean-and-positive-semidefinite-covariance-kernel]]”, before the observation and prediction hypotheses and conclusions. The link has not been moved to a following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "rl-function-approximation-and-off-policy-limits",
+      "to": "ml02-gaussian-process-regression",
+      "faithful": true,
+      "note": "The actual item edge is lem-projected-bellman-error-is-well-defined → lem-finite-span-orthogonal-projection-in-inner-product-space. The consumer proves that its weighted quotient is a real inner-product space and its feature span is finite-dimensional before applying projection. Zero weights and dependent features are handled without strengthening the supplier."
+    },
+    {
+      "from": "sketched-kernel-learning-and-certified-solves",
+      "to": "ml02-gaussian-process-regression",
+      "faithful": true,
+      "note": "rem-statistical-and-numerical-kernel-errors uses the observation model and GP/KRR theorem with AC, a given real RKHS, m=0, independent Gaussian noise covariance τI, and σ=√τ>0. Its training conditional-mean identity matches the supplier. The separate mean-square objective uses τ=nλ, preserving the normalization distinction."
+    }
+  ]
+}

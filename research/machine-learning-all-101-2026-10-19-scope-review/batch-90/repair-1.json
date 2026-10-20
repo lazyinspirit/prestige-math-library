@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "90",
+  "round": 1,
+  "reviewed_items": [
+    "lem-finite-action-average-tv-controlled-by-kl",
+    "def-constrained-markov-decision-process",
+    "def-normalized-discounted-state-occupancy",
+    "def-discounted-cost-constraint",
+    "lem-normalized-discounted-state-occupancy-is-probability",
+    "def-discounted-value-and-advantage-functions",
+    "lem-discounted-occupancy-change-bounded-by-average-tv",
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+    "thm-policy-performance-bound-by-average-divergence",
+    "alg-constrained-policy-optimization",
+    "rem-cpo-implementation-is-approximate",
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "ex-empirical-cost-satisfaction-can-miss-population-violation",
+    "ex-exact-trust-region-and-sampled-line-search-disagree",
+    "cex-arbitrary-baseline-bound-without-old-policy-residual"
+  ],
+  "reviewed_pages": [
+    "constrained-mdps-and-policy-safety",
+    "constrained-mdps-and-policy-safety-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The local counterexample repair and its consumer check are complete. Owner reconciliation is still needed for the algorithm’s missing separate property result and the A-page ML-72 prerequisite mismatch.",
+  "findings": [
+    {
+      "id": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+      "type": "local",
+      "reason": "Rewrote the refuted formula using the CMDP joint law, δ_f(s,a,ρ,s′), and J_r^π(μ); also aligned the proof’s return notation. The one-state witness still gives D⁻=D⁺=1 while the return difference is 0. The [official supplement, Appendix 10.1](https://proceedings.mlr.press/v70/achiam17a/achiam17a-supp.pdf) confirms the arbitrary-baseline identity includes the old-policy residual."
+    },
+    {
+      "id": "alg-constrained-policy-optimization",
+      "type": "scope",
+      "reason": "The procedure has no separate proved result establishing its well-defined output and termination; the inline maximizer explanation is not a phase proof. A scoped result would need to cover the QP maximizer, single-cost recovery branch, and finite search. Adding a result requires owner scope reconciliation. The remark and exact-versus-sampled example were checked and make no general correctness or convergence claim."
+    },
+    {
+      "id": "constrained-mdps-and-policy-safety",
+      "type": "scope",
+      "reason": "The ML-82 prose Requires clause names ML-72, Finite MDPs and Bellman operators, but the structured plan and A-page omit it. The assigned graph uses ML-72 suppliers directly in def-constrained-markov-decision-process, def-discounted-cost-constraint, and lem-normalized-discounted-state-occupancy-is-probability, with downstream uses across the occupancy, value, performance-bound, algorithm, remark, and example items. Their mathematical supplier uses check out; the A-page prerequisite set needs owner reconciliation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "constrained-mdps-and-policy-safety-examples",
+      "decision": "accept",
+      "reason": "This is the only item/page consumer found for the counterexample; its inventory remains valid with the joint reward notation."
+    },
+    {
+      "id": "rem-cpo-implementation-is-approximate",
+      "decision": "accept",
+      "reason": "It describes the procedure and approximation limits without asserting general safety, correctness, or convergence."
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "decision": "accept",
+      "reason": "It checks a specific exact-versus-sampled cost comparison and does not assert general algorithm properties."
+    },
+    {
+      "id": "constrained-mdps-and-policy-safety",
+      "decision": "escalate",
+      "reason": "Reconcile the missing ML-72 page prerequisite with the ML-82 prose scope and actual supplier edges."
+    },
+    {
+      "id": "research/plan-machine-learning-track.md#ML-82",
+      "decision": "accept",
+      "reason": "Its direction to preserve the malformed arbitrary-baseline claim remains satisfied by the false inequality restated in the native CMDP interface."
+    }
+  ]
+}

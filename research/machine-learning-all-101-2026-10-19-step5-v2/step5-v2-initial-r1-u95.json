@@ -1,0 +1,45 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "95",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-low-rank-adaptation-of-a-linear-layer",
+      "model": "gpt-6-luna",
+      "context_sha256": "92753a5043753b764a53334b3a71725a827e9f9ff0f0dc9b200685d4388a677d",
+      "outcome": "false_positive",
+      "reason": "The definition introduces rank-r adapter as a factor-width parameterization, not an assertion rank(cBA)=r. Its shapes give im(cBA) contained in im(B), hence rank(cBA)<=r; A=0 is an allowed zero update, not a contradiction. Hu et al., v2, section 4.1 explicitly use these factor shapes and initialize B=0. The current contract expressly admits zero factors, and the local rank-capacity theorem states the at-most-r bound. Requiring exact rank would incorrectly exclude the intended initialization.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/2106.09685v2#S4.SS1"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-low-rank-adaptation-of-a-linear-layer",
+      "disposition": "unaffected",
+      "post_sha256": "3e345753cac685af8483f16c0f27f7ba41f89249fbfca7867d8a5a336c45a2da",
+      "review_context_sha256": "d03d093a02e174efdcee414d5baf3d9d55f5e09ab9003cc57188bd148c328ff7",
+      "reason": "Checked the complete definition, its feedforward-network prerequisite, owning contract, and both page inventories. Matrix shapes make cBA and both forward-pass expressions well-defined and equal by associativity; a single identity-activation, zero-bias layer realizes W0x. Freezing W0 and training arbitrary factors consistently includes zero factors. No exact-rank equality is claimed. The Definition has no hyperlinks; all references follow it. Pages are frontmatter-only with compact-v1 preserved. There is no proof or diagram in the assigned item and no confirmed defect requiring an edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/2106.09685v2#S4.SS1"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Reviewed items/def-low-rank-adaptation-of-a-linear-layer.md; prerequisite: items/def-feedforward-neural-network.md. The convention is column-vector input x in R^k, B of shape d by r, A of shape r by k, nonzero real c, frozen W0, and no exact-rank constraint. No choice assumption or missing prerequisite arises.",
+    "Consulted the complete Hu et al. v2 section 4.1 at https://arxiv.org/html/2106.09685v2, lines 132-143. Checked current research/machine-learning-all-101-2026-10-19-batch-95.proof-contracts.json entry, especially zero and degenerate boundaries, against the definition. Read items/thm-low-rank-adapter-factorization-ambiguity.md and items/alg-finite-budget-low-rank-adaptation.md as contextual evidence of the at-most-r and zero-initialization conventions; this report does not supply independent whole-item reviews of those consumers.",
+    "review-contexts ran immediately after the mathematical review and returned the recorded guard and context hashes. The guard equals initial-1.json before[id]. No item, contract, page, statement, or definition was changed, so no interface propagation or maintenance is triggered. No defect-ledger or published-ledger change is proposed; the digest outside-scope alerts were not independently adjudicated here.",
+    "Focused check: node tools/rendercheck.mjs items/def-low-rank-adaptation-of-a-linear-layer.md --json exited 0; checked 1, errors [], warnings []. Focused check: node tools/tsx-run.mjs tools/precheck.mts items/def-low-rank-adaptation-of-a-linear-layer.md --json exited 0; files 1, checked proofs 0, failures 0, status not-applicable. No changed item paths require proof-layout. No unresolved mathematical obligation remains in this assignment; collection and any later certification remain engine-owned."
+  ]
+}

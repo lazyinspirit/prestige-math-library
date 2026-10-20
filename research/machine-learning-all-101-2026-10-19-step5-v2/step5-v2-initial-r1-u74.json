@@ -1,0 +1,176 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "74",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-online-gradient-descent",
+      "model": "gpt-6-luna",
+      "context_sha256": "070197cbbbc1ea60d76430e4851f74d6589b2afdfb613fe42ff423c9d8ec04a0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The smooth branch computes g_t from losses without requiring that vector to be measurable. On Omega={a,b} with trivial sigma-algebra and its probability measure, let A={a}, K=[0,1], d=1, T=2, D=G=1, x_1=1, f_1(omega,x)=1_A(omega)x on R and f_2=0. Every realized loss is differentiable convex and every gradient has norm at most 1, but x_2=1-1_A is not measurable: its inverse image of {0} is A. Continuity of projection cannot supply missing input measurability. The repair explicitly requires measurable computed gradients as well as supplied vectors.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-online-gradient-descent",
+      "disposition": "repaired",
+      "post_sha256": "d87f54629c61ba031a64fda384bb06a3422b76d1905698478882846d9e9962f1",
+      "review_context_sha256": "199182d5b7b96c1086090d511a1e8f55dbb2d5d64c6678d8cb0c5e8867ffd9af",
+      "reason": "Reviewed both branches, supplied initial point, bounded gradients, fixed closed convex K, and actual projection and gradient-inequality suppliers. The repair extends measurability to every g_t, including the smooth gradient. Induction now applies the continuous map (x,g) -> P_K(x-eta_t g) to measurable finite-dimensional inputs; the no-op branch preserves measurable x_1. Projection existence and nonexpansiveness consume precisely the stated Countable Choice in D,G>0. No update, loss-domain or regret interface is otherwise changed. No diagrams or phase proof occur in this algorithm, and no own proof contract exists. This is repairer verification, not independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-online-gradient-descent-regret",
+    "ex-projected-gradient-on-an-interval",
+    "cex-ogd-infeasible-comparator",
+    "ex-euclidean-mirror-descent-is-projected-ogd"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-online-gradient-descent",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "reason": "The smooth branch computes g_t from losses without requiring that vector to be measurable. On Omega={a,b} with trivial sigma-algebra and its probability measure, let A={a}, K=[0,1], d=1, T=2, D=G=1, x_1=1, f_1(omega,x)=1_A(omega)x on R and f_2=0. Every realized loss is differentiable convex and every gradient has norm at most 1, but x_2=1-1_A is not measurable: its inverse image of {0} is A. Continuity of projection cannot supply missing input measurability. The repair explicitly requires measurable computed gradients as well as supplied vectors.",
+      "repair": "Require measurability of every g_t, whether directly supplied or computed as the smooth gradient.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_section": "Definition: each supplied g_t replaced by each g_t, whether supplied directly or computed as the smooth gradient.",
+    "dependencies": "All 15 declared supplier interfaces examined; relevant full local projection, nonexpansiveness and differentiable-convex gradient arguments read. No external source reading claimed.",
+    "pending": [],
+    "consumer_examinations": [
+      {
+        "id": "thm-online-gradient-descent-regret",
+        "path": "items/thm-online-gradient-descent-regret.md",
+        "affected_use": "[F11] says x_1 and each supplied g_t are measurable; proof step 1.2 uses this fact to conclude that all iterates are measurable in both branches.",
+        "disposition": "frontier_owner_followup",
+        "invalidated_claim": "The pathwise regret inequality and its entire telescoping argument remain valid. F11 still describes only supplied vectors, so the explanation of smooth-branch measurability in step 1.2 should explicitly use the repaired algorithm hypothesis on computed gradients.",
+        "minimality": "In F11 replace each supplied g_t by each g_t, whether supplied directly or computed as the smooth gradient. Keep the Statement and regret proof algebra unchanged; do not propagate another hop.",
+        "route": "ordinary frontier owner work; no consumer item edited"
+      },
+      {
+        "id": "ex-projected-gradient-on-an-interval",
+        "path": "items/ex-projected-gradient-on-an-interval.md",
+        "affected_use": "[F6] and Verification step 2.1 invoke eta_1=D/(G sqrt(1))=1/2 and P_[0,1](1/4-(1/2)2)=0 for a supplied deterministic subgradient.",
+        "disposition": "unchanged_sound",
+        "invalidated_claim": "None. The supplied vector 2 and initial value 1/4 are constant measurable maps on any probability space, and the arithmetic and projection are unchanged.",
+        "minimality": "No item edit; only its local contract quote mirror becomes stale. The number-line diagram correctly marks -3/4 left of K=[0,1] and the nearest endpoint 0."
+      },
+      {
+        "id": "cex-ogd-infeasible-comparator",
+        "path": "items/cex-ogd-infeasible-comparator.md",
+        "affected_use": "[F1] and Counterexample step 2.1 use the two projected updates for deterministic f_t(x)=-x, g_t=-1, D=G=1, x_1=0, giving x_2=x_3=1.",
+        "disposition": "unchanged_sound",
+        "invalidated_claim": "None. The gradients and iterates are constants, so they satisfy the repaired measurability condition. The computed regret 3 still exceeds 3 sqrt(2)/2 for infeasible u=2.",
+        "minimality": "No item edit; only its local contract quote mirror becomes stale."
+      },
+      {
+        "id": "ex-euclidean-mirror-descent-is-projected-ogd",
+        "path": "items/ex-euclidean-mirror-descent-is-projected-ogd.md",
+        "affected_use": "Example references, [F3] and Verification step 3.1 identify the one-step map P_K(x_t-eta g_t) after expanding the quadratic Bregman divergence as one-half the squared Euclidean distance.",
+        "disposition": "unchanged_sound_metadata_to_owner",
+        "invalidated_claim": "None from this supplier change: the asserted equality is a deterministic equality of one-step maps with matching step size and does not assert measurability of a random loss gradient.",
+        "minimality": "No item edit. Batch-75 contract citation F3 stores the old full algorithm Definition; its owner must refresh that quotation. This is metadata followup, not a new Statement change.",
+        "route": "batch-75 frontier owner; outside this unit but inside frozen frontier"
+      }
+    ],
+    "page_examination": "Both owning pages are frontmatter-only with page_layout: compact-v1 and unchanged item inventories. No narrative page use needs repair.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-online-gradient-descent.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 checked phase proofs, 0 failures; not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-online-gradient-descent.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "Scoped inspectStatement(id, algorithm, body) using tools/statement-first.mjs",
+        "exit_code": 0,
+        "result": "1 item, no uninterrupted-statement or reference-layout defects."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-online-gradient-descent.md",
+        "exit_code": 0,
+        "result": "1 item, 0 numbered steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-74.proof-contracts.json --strict --items thm-online-gradient-descent-regret,ex-projected-gradient-on-an-interval,cex-ogd-infeasible-comparator --json",
+        "exit_code": 1,
+        "result": "26 citation-quote-mismatch errors: 3 algorithm quotations introduced by this Definition repair await refresh; 23 other supplier quotations are outside this repair. One shotgun-bracket warning in theorem step 1.2. No mathematical invalidity follows from a quotation-mirror mismatch alone."
+      },
+      {
+        "command": "Locked reread/edit/check of batch-74 proof contracts using sharedWriteLock and sourceSectionText",
+        "exit_code": 0,
+        "result": "All 3 algorithm Definition quotations exactly equal the current Definition; lock released."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-74.proof-contracts.json --strict --items thm-online-gradient-descent-regret,ex-projected-gradient-on-an-interval,cex-ogd-infeasible-comparator --json",
+        "exit_code": 1,
+        "result": "After repair, the 3 algorithm-source mismatches are resolved. The 23 other-source quote mismatches and one existing shotgun-bracket warning remain routed to the controller; no claim of a passing whole-contract check."
+      }
+    ],
+    "published_ledger": "No published assigned item or published direct consumer was found; no published-consumer ledger update is proposed.",
+    "other_metadata_to_controller": {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-74.proof-contracts.json",
+      "reason": "The scoped contract checker also finds non-algorithm source quotation mismatches. Do not treat this report as a passing whole-contract gate.",
+      "affected_rows": {
+        "thm-online-gradient-descent-regret": [
+          "A1/def-countable-choice",
+          "F1/def-euclidean-inner-product",
+          "F1/def-hilbert-space",
+          "F5/thm-differentiable-convex-functions-and-gradient-inequality",
+          "F6/def-subgradient-and-subdifferential",
+          "F7/def-static-dynamic-and-strongly-adaptive-regret",
+          "F8/def-metric-topology",
+          "F9/def-convex-subset-of-euclidean-space",
+          "F9/def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "F10/def-jacobian-matrix-and-gradient"
+        ],
+        "ex-projected-gradient-on-an-interval": [
+          "A1/def-countable-choice",
+          "F1/def-interval",
+          "F2/def-metric-topology",
+          "F3/def-convex-subset-of-euclidean-space",
+          "F5/def-subgradient-and-subdifferential",
+          "F7/def-euclidean-inner-product"
+        ],
+        "cex-ogd-infeasible-comparator": [
+          "A1/def-countable-choice",
+          "F2/def-euclidean-inner-product",
+          "F3/def-interval",
+          "F3/def-convex-subset-of-euclidean-space",
+          "F4/def-metric-topology",
+          "F5/def-jacobian-matrix-and-gradient",
+          "F7/def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ]
+      }
+    },
+    "metadata_repair": "Under shared lock, reread batch-74 contracts and replaced exactly the three stored alg-online-gradient-descent Definition quotations (theorem F11, interval example F6, counterexample F1), preserving all other contract bytes. Each revised quotation checked equal to current sourceSectionText. No own algorithm proof contract exists; page and manifest fields did not require changes."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-74.proof-contracts.json": "bbe6a048088535116749eae08cb9239aa9d4cf54593bb1f1adb62297daae39d4"
+  }
+}

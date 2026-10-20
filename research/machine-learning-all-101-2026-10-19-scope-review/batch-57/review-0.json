@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "57",
+  "round": 0,
+  "reviewed_items": [
+    "def-reconstruction-autoencoder",
+    "alg-masked-autoencoder-pretraining",
+    "ex-reconstruction-objective-shortcut"
+  ],
+  "reviewed_pages": [
+    "reconstruction-and-masked-autoencoders",
+    "reconstruction-and-masked-autoencoders-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch preserves the approved ML-52 scope; both pages are body-free compact-v1. The supplier definitions support the stated risk and masking conventions, and the shortcut verification checks out. The reported 84.9% result and listed setup match He et al.’s Table 1 and 50-epoch fine-tuning description ([paper](https://arxiv.org/abs/2111.06377)); the denoising clean-target formulation matches the cited treatments ([Goodfellow et al.](https://www.deeplearningbook.org/contents/autoencoders.html), [Vincent et al.](https://www.cs.toronto.edu/~larocheh/publications/icml-2008-denoising-autoencoders.pdf)). One local algorithm repair is needed.",
+  "findings": [
+    {
+      "id": "alg-masked-autoencoder-pretraining",
+      "type": "local",
+      "reason": "The update schedule must map every displayed input into Theta, but plain SGD can leave a proper subset Theta for some gradient. Qualify this special case with Theta = R^p, or specify an update map whose codomain condition holds for every displayed input."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-reconstruction-objective-shortcut",
+      "decision": "accept",
+      "reason": "Its use of the algorithm (F2) concerns mask sampling and data flow, not the SGD special case; the example remains valid after that qualification."
+    },
+    {
+      "id": "reconstruction-and-masked-autoencoders",
+      "decision": "accept",
+      "reason": "The page lists the algorithm in its inventory; the proposed qualification does not change the page scope or placement."
+    },
+    {
+      "id": "reconstruction-and-masked-autoencoders-examples",
+      "decision": "accept",
+      "reason": "The page lists the example, whose argument does not rely on the SGD special case."
+    }
+  ]
+}

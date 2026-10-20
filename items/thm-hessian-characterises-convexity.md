@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-hessian-characterises-convexity.json
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -29,7 +30,13 @@ pipeline_run: null
 
 ## Statement
 
-A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].
+A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of The Hessian matrix and critical points of a scalar field, The Hessian of a $C^2$ scalar field is symmetric.
+
+## Statement references
+
+[[def-hessian-and-euclidean-critical-point]]
+
+[[cor-hessian-is-symmetric]]
 
 ## Facts & Assumptions
 

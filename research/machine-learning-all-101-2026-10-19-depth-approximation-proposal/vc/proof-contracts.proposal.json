@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "32",
+  "pair": "relu-approximation-rates-and-depth-expressivity",
+  "scope": [
+    "thm-warren-polynomial-sign-pattern-bound",
+    "lem-relu-network-vc-dimension-bound"
+  ],
+  "contracts": {
+    "thm-warren-polynomial-sign-pattern-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "\nLet $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "\nLet $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fermat-for-euclidean-local-extrema",
+          "source_section": "Statement",
+          "quote": "\nIf $f:U\\subseteq\\mathbb R^m\\to\\mathbb R$ is differentiable at an interior local maximum or minimum $a$, then $\\nabla f(a)=0$.\n",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "First establish an elementary zero-counting fact. If $D\\ge1$ and $r_i(x)=x_i^D+s_i(x)$ with $\\deg s_i<D$ for $1\\le i\\le k$, then these $k$ polynomials have at most $D^k$ distinct common real zeros. In the quotient vector space $V=\\mathbb R[x_1,\\ldots,x_k]/(r_1,\\ldots,r_k)$, every monomial is a linear combination of the $D^k$ monomials $x_1^{a_1}\\cdots x_k^{a_k}$ with $0\\le a_i<D$. Indeed, if some exponent is at least $D$, replace its factor $x_i^D$ by $-s_i$ modulo the ideal. Every resulting monomial has strictly smaller total degree, so induction on total degree terminates and proves the spanning assertion. Thus $\\dim V\\le D^k$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "For any finite list of distinct common zeros $z_1,\\ldots,z_t$, evaluation defines a surjective linear map $V\\to\\mathbb R^t$. To see surjectivity, for every ordered pair $j\\ne h$ choose a coordinate $i(j,h)$ in which $z_j$ and $z_h$ differ, and set $h_j(x)=\\prod_{h\\ne j}(x_{i(j,h)}-(z_h)_{i(j,h)})/((z_j)_{i(j,h)}-(z_h)_{i(j,h)})$. Then $h_j(z_h)$ is $1$ for $h=j$ and $0$ otherwise. Evaluation vanishes on the ideal because all its generators vanish at these zeros, so it is well defined on $V$ and the classes of $h_j$ map onto the standard coordinate vectors. Consequently $t\\le\\dim V\\le D^k$. If there were more than $D^k$ zeros, choosing a finite list of $D^k+1$ of them would contradict this inequality. This proves the zero-counting fact without a genericity or multiplicity assumption.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If no strict sign vector occurs, its bound is immediate. Otherwise choose one representative $a_\\sigma$ for each attained strict vector $\\sigma$. Only finitely many choices are involved, since there are at most $2^m$ vectors. Set $P=\\prod_{i=1}^m p_i$ and $D=2md+1$. Then $P(a_\\sigma)\\ne0$. Choose a single $\\delta>0$ so small that $H(a_\\sigma)>0$ for every representative, where $H(x)=P(x)^2-\\delta\\sum_{i=1}^k x_i^{D+1}$. Such a choice exists: there are finitely many positive numbers $P(a_\\sigma)^2$, and the other term has a fixed finite value at each representative. Since $D+1$ is even and greater than $2\\deg P$, $H(x)\\to-\\infty$ as $\\|x\\|\\to\\infty$. Explicitly, $|P(x)|^2\\le C(1+\\|x\\|^{2md})$ and $\\sum_i x_i^{D+1}\\ge k^{-(D+1)/2}\\|x\\|^{D+1}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "For an attained strict vector $\\sigma$, put $S_\\sigma=\\{x:\\operatorname{sgn}p_i(x)=\\sigma_i\\text{ for all }i\\}$. This is open. Its closure has a maximum of $H$: choose a closed ball containing $a_\\sigma$ outside which $H<0$, and apply [F2] to its nonempty closed bounded intersection with $\\overline{S_\\sigma}$. The resulting maximum is positive, because $H(a_\\sigma)>0$, and it is also the maximum over the full closure. Any point in $\\overline{S_\\sigma}\\setminus S_\\sigma$ has $p_i=0$ for some $i$ by continuity, so there $H=-\\delta\\sum_i x_i^{D+1}\\le0$. Therefore the positive maximum is attained at a point $b_\\sigma\\in S_\\sigma$, which is an interior local maximum of $H$. Distinct strict vectors give distinct such points.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "step": "2.3",
+          "claim": "By [F3] every $b_\\sigma$ is a common zero of the $k$ polynomials $\\partial_i H=2P\\partial_iP-\\delta(D+1)x_i^D$. After division by the nonzero coefficient $-\\delta(D+1)$, each has the form $x_i^D+s_i(x)$ with $\\deg s_i\\le2md-1<D$. The zero-counting fact therefore bounds their distinct common zeros, and hence the number of strict sign vectors, by $D^k=(2md+1)^k$.",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For binary vectors with $>0$, choose one representative per attained vector. Choose $\\varepsilon>0$ smaller than every nonzero $|p_i|$ occurring at these finitely many representatives; if there are no such values, choose any positive $\\varepsilon$. The strict signs of $p_i-\\varepsilon$ at the representatives now encode their original binary vectors: positive values remain positive, and nonpositive values become negative. Applying the strict bound to the $m$ shifted polynomials gives the binary bound. For $\\ge0$, use $p_i+\\varepsilon$: nonnegative values become positive, and negative values remain negative. For ternary vectors choose representatives and $\\varepsilon$ in the same way, and use the $2m$ polynomials $p_i-\\varepsilon,p_i+\\varepsilon$. Their strict sign pairs are $(-,-)$, $(-,+)$, and $(+,+)$ for the original negative, zero, and positive values, respectively, so distinct ternary vectors give distinct strict vectors. The strict bound with $2m$ polynomials gives $(4md+1)^k$. Restriction of the domain only removes vectors.",
+          "inputs": [
+            "step 2.3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: No strict sign patterns: step 2.1; an empty restricted domain realizes no vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Zero polynomials and zero evaluations: no strict vectors when a factor is identically zero; finite shifts in step 3.1 prove both binary conventions and the ternary bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: k=m=d=1 yields D=3; quotient argument works for every positive D including 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Repeated polynomials, constant polynomials, singular or nonisolated initial zero sets require no genericity. The modified gradient system has a finite-dimensional quotient by steps 1.1\u20131.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Step 2.2 treats sign-region boundaries: P=0 there and H<=0, whereas the attained maximum is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Only representatives from finitely many sign vectors and finite coordinate choices are selected; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "warren-vc-supplier-author",
+        "notes": "Author-side proof proposal only; no independent review, native execution, certification, or gate coverage is asserted."
+      }
+    },
+    "lem-relu-network-vc-dimension-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "\nFix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-warren-polynomial-sign-pattern-bound",
+          "source_section": "Statement",
+          "quote": "\nLet $k,m,d\\ge1$ be integers and let $p_1,\\ldots,p_m$ be real polynomials in $k$ variables, each of total degree at most $d$ (including the zero polynomial). The number of strict sign vectors $(\\operatorname{sgn}p_1(x),\\ldots,\\operatorname{sgn}p_m(x))\\in\\{-1,1\\}^m$ attained at points where all polynomials are nonzero is at most $(2md+1)^k$. The number of binary vectors $(\\mathbf1_{p_i(x)>0})_{i=1}^m$ is also at most $(2md+1)^k$, and the same bound holds with $\\ge0$ in place of $>0$. The number of ternary sign vectors in $\\{-1,0,1\\}^m$ is at most $(4md+1)^k$. Each assertion remains valid when $x$ is restricted to any subset of $\\mathbb R^k$.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-vc-class-of-sets-and-index",
+          "source_section": "Definition",
+          "quote": "\nLet $\\mathcal C\\subseteq\\mathcal P(X)$ be a family of subsets of an arbitrary set $X$. For a finite $T\\subseteq X$, its trace is\n\n$$\\mathcal C|_T:=\\{C\\cap T:C\\in\\mathcal C\\}.$$\n\nThe family $\\mathcal C$ **shatters** $T$ when $\\mathcal C|_T=\\mathcal P(T)$. This extends the finite-ground-set trace convention of [[def-shattering-and-vc-dimension]]: any finite $T$ can be relabeled by $[|T|]$, and relabeling preserves all traces and their cardinalities.\n\nFor a nonempty class, its **VC dimension** $d(\\mathcal C)$ is the greatest size of a finite shattered set if those sizes are bounded, is $0$ if no singleton is shattered, and is $+\\infty$ if finite shattered sets have unbounded size. When the dimension is finite, its **VC index** is\n\n$$V(\\mathcal C):=d(\\mathcal C)+1,$$\n\nequivalently the least positive integer $V$ such that no $V$-point subset is shattered. The empty class is assigned $V=0$ by convention and is treated separately in the entropy theorem.\n",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Remove all hidden units that have no path to the output. Also remove all hidden units having no input ancestor: for each fixed parameter assignment their values are constants in $x$, and their contributions to a remaining unit or the output can be added to its existing bias. Allowing these new biases to vary independently produces a fixed reduced architecture whose realization class contains the original class. No new coefficient slots are needed, because every surviving computation unit already has a bias; edges and removed units only disappear. If the output has no input ancestor, the original class consists of constant functions and has VC dimension at most $1$, which satisfies the conclusions. Otherwise the reduced graph has $w\\le W$ counted slots, $U$ hidden units, and $U+1\\le w$ because the output and every hidden unit have counted biases. Every remaining unit lies on an input-to-output path. Rank each hidden unit by the maximum number of computation units on an input-to-that-unit path, and give the output its analogous rank $K$. Then each edge increases rank, and $K\\le L-1$ and $K\\le U+1\\le w$. Empty ranks can be omitted. It suffices to bound the reduced class.",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Fix arbitrary sample points $x_1,\\ldots,x_m$. For any prescribed binary mask $b\\in\\{0,1\\}^U$, replace the ReLU at hidden unit $v$ by multiplication of its preactivation by $b_v$. Its preactivation and the final output are now polynomials in the $w$ parameters. By induction along the graph, a unit of rank $j$ has polynomial degree at most $j$: input values have degree zero, multiplication by an edge coefficient raises degree by one, addition of a bias has degree one, and multiplication by a fixed mask entry changes no degree. Thus every such polynomial has degree at most $K\\le w$. On any actual parameter vector the convention $b_v=\\mathbf1_{z_v>0}$ gives a unique mask, even when a preactivation is zero, and the masked polynomials then reproduce every actual unit value.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For each sample point and each of the $2^U$ masks, form the $U$ preactivation polynomials and the output polynomial minus $a$. There are $M=m(U+1)2^U$ polynomials, all of degree at most $w$. Their strict-positivity vector determines the actual output classification at every sample point: evaluate units in topological order, determining their actual mask by the relevant preactivation entry, then read the output entry for that mask. Hence the number of label vectors is at most $(2Mw+1)^w\\le(3mw^2 2^w)^w$ by [F2]. If the classifier uses $\\ge a$, take the hidden-unit mask $\\mathbf1_{z_v\\ge0}$ and use nonnegativity vectors throughout; at zero, multiplying by either mask value still gives the ReLU value, so the same count holds.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "Put $m_0=64w^2$. At this sample size the base-two logarithm of the last bound is $w(\\log_2 3+\\log_2m_0+2\\log_2w+w)=w(w+\\log_2 3+6+4\\log_2w)\\le13w^2<m_0$, using $\\log_2w\\le w$ for integers $w\\ge1$. Thus no $m_0$-point set can be shattered, and [F3] rules out all larger shattered sets. Consequently $\\operatorname{VC}(\\mathcal H_a)<64w^2\\le64W^2$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For a second count, start with the single parameter-space cell $\\mathbb R^w$. At stage $j$, refine every existing cell by the activation bits of all units of rank $j$ at all $m$ sample points; at the final stage refine by the output threshold bits. Within a cell, all earlier mask bits are fixed, so the relevant $mN_j$ preactivation polynomials, or output-minus-threshold polynomials, have degree at most $j\\le K$ by step 1.2, where $N_j$ is the number of units at that rank, with $N_K=1$ for the output. By [F2] there are at most $(2mN_jK+1)^w\\le(3mwK)^w$ refinements of each cell. This estimate holds on an arbitrary cell; no connectedness or openness is needed. After $K$ stages, the number of cells, hence the number of output label vectors, is at most $(3mwK)^{wK}$. The construction using $\\ge0$ activation bits and nonnegativity output bits proves the identical bound for the other threshold convention.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "Write $A=wK$ and $B=\\log_2(2w)\\ge1$, and take the integer $m_1=\\lceil64AB\\rceil\\le65AB$. Since $K\\le w$, one has $\\log_2 A\\le2\\log_2w$ and $\\log_2B\\le B$. The base-two logarithm of the label-count bound at $m=m_1$ is at most $A\\log_2(195A^2B)\\le A(8+4\\log_2w+\\log_2B)\\le A(4+5B)\\le9AB< m_1$. No set of $m_1$ points is shattered. Therefore $\\operatorname{VC}(\\mathcal H_a)<m_1\\le65wK\\log_2(2w)\\le65WL\\log_2(2W)$. Conversion between logarithm bases changes only an absolute constant. For $W\\ge2$, $\\log(2W)\\le2\\log W$ and $L\\ge1$, so this implies the requested $CL^2W\\log W$ estimate. Together with step 2.2 and the constant-output case, this proves every assertion.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof: With no hidden units, K=1, U=0 and the output threshold count remains valid. The domain is nonempty by d>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: At zero preactivations either mask gives ReLU value zero. Steps 1.2 and 2.1 explicitly fix consistent strict/nonnegative conventions; zero coefficients still occupy parameter slots."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: For W=1 the universal formula uses log(2W); the log W consequence is asserted only when W>=2. Constant-output architectures have VC<=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Step 1.1 removes dead units and absorbs input-independent contributions into existing biases, bounding by a superfamily with at most the same number of slots. Skip edges are covered by ranks."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The count applies to any sample points in the cube including its boundary; it makes no interior assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Graphs, samples, masks and refinements are finite. No choice axiom or measurable selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is stated."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "warren-vc-supplier-author",
+        "notes": "Author-side proof proposal only; no independent review, native execution, certification, or gate coverage is asserted."
+      }
+    }
+  }
+}

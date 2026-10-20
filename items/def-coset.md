@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-coset.json
   precheck: n/a
   audited: 2026-08-01
 sources:
@@ -26,14 +27,20 @@ pipeline_run: null
 
 ## Definition
 
-Let $G$ be a group and let $H\le G$ be a subgroup ([[def-group]],
-[[def-subgroup]]). For $g\in G$, the **left coset** and **right coset** of $H$
+Let $G$ be a group and let $H\le G$ be a subgroup (Group and abelian group,
+Subgroup). For $g\in G$, the **left coset** and **right coset** of $H$
 represented by $g$ are
 
 $$gH:=\{gh:h\in H\},\qquad Hg:=\{hg:h\in H\}.$$
 
 The element $g$ is a **representative** of these cosets. The notation denotes
 subsets of $G$; it does not assert that either subset is a subgroup.
+
+## Definition references
+
+[[def-group]]
+
+[[def-subgroup]]
 
 ## Remarks
 

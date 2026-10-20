@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-extended-real-valued-measurable-function]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-nonnegative-simple-measurable-function.json
   audited: 2026-08-27
   precheck: n/a
   judge:
@@ -28,7 +29,7 @@ sources:
 
 Let $(X,\mathcal A,\mu)$ be a measure space. A measurable function
 $s:X\to[0,+\infty)\subseteq\overline{\mathbb R}$
-([[def-extended-real-valued-measurable-function]]) is a
+(Extended-real-valued measurable functions) is a
 **nonnegative simple measurable function** when it has finite range.
 
 Equivalently, there are pairwise disjoint measurable sets
@@ -36,3 +37,8 @@ $E_1,\dots,E_m\in\mathcal A$ and coefficients $c_1,\dots,c_m\in[0,+\infty)$
 such that
 $$s=\sum_{j=1}^m c_j\chi_{E_j}.$$
 Any such display is a **simple representation** of $s$.
+
+## Definition references
+
+[[def-extended-real-valued-measurable-function]]
+

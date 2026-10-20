@@ -1,0 +1,163 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "36",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "def-hahn-hard-soft-attention-sequence-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "c3ad241a25544f68f6b00ffc152bb07d8ae817042b20fb583c37a8ab0036f76d",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Bounded embeddings do not bound an arbitrary input map. In dimension two choose p_i=(1/i,0), token vectors encoding bits, and f_in(v,p)=(1/p_1,v_1) on these inputs. Linear query/key/value projections select position, bit, and bit respectively. With EOS bit zero, a single nonfinal one has EOS attention weight exp(n)/(exp(n)+n-1), tending to one; the all-zero word gives zero. A Lipschitz update can return this weighted bit. Added a uniform bound on the actual combined initial states for the soft-influence regime; this excludes the counterexample without restricting the general hard model.",
+      "uncertain": false,
+      "source_urls": [
+        "https://aclanthology.org/2020.tacl-1.11.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0a4712c20084f0ce2ba0050319d6cac68022a68c215a5576fa882dba0a58402a",
+      "outcome": "false_positive",
+      "reason": "The rejection treats F3 as an arbitrary existential lookup, but proof 3.3 uses its explicit construction. In lem-yun-transformer-grid-lookup, proof 1.2 takes key and value projection u, proof 2.1 preserves the delta lattice and uses half-grid thresholds, and proofs 6.1 and 7.1 place detector and pulse boundaries delta/3 from valid lattice codes. Every maximizing tie has the same scalar value u^T Z. The final query is nonzero except on the all-zero grid state: positive nonconstant codes are shifted above zero, negative sentinel codes stay negative, and an unshifted constant zero code means every column is zero. At that state all values vanish, so its softmax output is stable under perturbation as well. Fixed continuous ramps and finite composition therefore justify the simulation. No repair is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1912.10077"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-hahn-hard-soft-attention-sequence-model",
+      "disposition": "repaired",
+      "post_sha256": "bfd51adb9bc8b9aa4f63256c68d4f3986edd8b5157b93fc2bf4eda13ff976165",
+      "review_context_sha256": "ba4ef89af06a4e599dc653307a18c96b27202b4d0a53f3aff9da16d3690c42d4",
+      "reason": "Checked the score/value/update domains, nonempty key set at n=1, fixed maps, earliest hard tie convention, and EOS readout. The added initial-state bound yields bounded hidden states by convexity of head averages and the fixed Lipschitz updates, hence bounded dot-product scores. Additive and concatenated bounded embeddings meet it; hard-attention conditions are unchanged. No diagrams or inline Definition links occur. This is repair-author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://aclanthology.org/2020.tacl-1.11.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "disposition": "unaffected",
+      "post_sha256": "732ffec3349664eddae43cc6195d88286a4d3dd87d329684111895f70680de35",
+      "review_context_sha256": "222cea7bd6100e75593524ce3f7aee67d4a45d93c341f988020899eb96ef4cbd",
+      "reason": "Checked the full current proof, block definition, explicit grid-lookup proof and all cited measure/topology supplier statements. The construction supplies tied-value equality and strict boundary clearance, so softmax approximation survives the finite composition. Duplicate cells have volume O(delta^d), cell excess outside compact support tends to zero by finite-measure continuity from above, and finite representative choices add no choice beyond the stated Countable Choice. The entropy filter makes every shifted coordinate negative when any exact sentinel occurs; its inverse shift restores valid states and fixes zero. Proofs 4.1 and 5.1 establish exact zero outside a fixed box and a uniform bound independent of quantizer ramp width and attention scale. Fixing the finite lookup and then shrinking quantizer strips makes their integrated error vanish. The position-tagged Q sweep distinguishes contexts without equivariance. Statement and proof contain no assigned diagrams or uninterrupted-statement violations. The item guard equals the frozen before guard; no item or metadata edit was made.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1912.10077"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-hard-attention-depth-reduction",
+    "lem-soft-attention-one-symbol-influence",
+    "thm-hard-attention-languages",
+    "thm-soft-attention-parity-chance-limit",
+    "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+    "thm-transformer-formal-language-limits"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-hahn-hard-soft-attention-sequence-model",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Bounded embeddings do not bound an arbitrary input map. In dimension two choose p_i=(1/i,0), token vectors encoding bits, and f_in(v,p)=(1/p_1,v_1) on these inputs. Linear query/key/value projections select position, bit, and bit respectively. With EOS bit zero, a single nonfinal one has EOS attention weight exp(n)/(exp(n)+n-1), tending to one; the all-zero word gives zero. A Lipschitz update can return this weighted bit. Added a uniform bound on the actual combined initial states for the soft-influence regime; this excludes the counterexample without restricting the general hard model."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "outcome": "false_positive",
+      "reason": "The rejection treats F3 as an arbitrary existential lookup, but proof 3.3 uses its explicit construction. In lem-yun-transformer-grid-lookup, proof 1.2 takes key and value projection u, proof 2.1 preserves the delta lattice and uses half-grid thresholds, and proofs 6.1 and 7.1 place detector and pulse boundaries delta/3 from valid lattice codes. Every maximizing tie has the same scalar value u^T Z. The final query is nonzero except on the all-zero grid state: positive nonconstant codes are shifted above zero, negative sentinel codes stay negative, and an unshifted constant zero code means every column is zero. At that state all values vanish, so its softmax output is stable under perturbation as well. Fixed continuous ramps and finite composition therefore justify the simulation. No repair is needed."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "checkpoint": "Both assigned mathematical reviews complete; focused checks passed. No unresolved mathematical obligation.",
+    "source_reading": [
+      "Hahn, Section 3 and Section 6 Lemma 5 proof; the source needs a bounded-activation hypothesis, and its displayed head-difference calculation omits changing weights. The local influence lemma separately supplies that term.",
+      "Yun et al., Appendix B.2 Lemma 9, B.5 contextual mapping including categories 1\u20133 and Lemma 10, B.6 value mapping, and C.1\u2013C.3 positional construction. The general scaling assertion in B.2 alone is insufficient for arbitrary compositions; the current local proof uses the stronger properties of its explicit lookup construction."
+    ],
+    "consumer_examination": [
+      {
+        "id": "lem-hard-attention-depth-reduction",
+        "path": "items/lem-hard-attention-depth-reduction.md",
+        "affected_use": "Facts F1 uses earliest maximizing key and shared positionwise updates; the hard model and its arbitrary input map remain unchanged.",
+        "disposition": "sound_unchanged"
+      },
+      {
+        "id": "lem-soft-attention-one-symbol-influence",
+        "path": "items/lem-soft-attention-one-symbol-influence.md",
+        "affected_use": "Statement assumes y_j^(0)=v_xj+p_j with bounded token and position vectors; proof 1.1 establishes exactly the added initial-state bound.",
+        "disposition": "sound_unchanged"
+      },
+      {
+        "id": "thm-hard-attention-languages",
+        "path": "items/thm-hard-attention-languages.md",
+        "affected_use": "Facts F2 and proof 1.1 use fixed hard-model maps and an appended EOS; neither depends on the newly qualified soft-influence regime.",
+        "disposition": "sound_unchanged"
+      },
+      {
+        "id": "thm-soft-attention-parity-chance-limit",
+        "path": "items/thm-soft-attention-parity-chance-limit.md",
+        "affected_use": "Facts F2 uses EOS only; F1 invokes the additive bounded-input influence lemma. The constant predictor in proof 4.1 has bounded initial state e_1.",
+        "disposition": "sound_unchanged"
+      },
+      {
+        "id": "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+        "path": "items/lem-soft-2dyck-crossentropy-gap-paired-prefixes.md",
+        "affected_use": "Statement invokes the one-symbol influence hypotheses and proof F1 uses the additive bounded-input influence lemma, so the added initial-state bound is satisfied.",
+        "disposition": "sound_unchanged"
+      },
+      {
+        "id": "thm-transformer-formal-language-limits",
+        "path": "items/thm-transformer-formal-language-limits.md",
+        "affected_use": "The soft Statement explicitly combines bounded embeddings by addition; hard conclusions use unchanged hard-model conventions. All inherited initial-state bounds hold.",
+        "disposition": "sound_unchanged"
+      }
+    ],
+    "page_examination": "The owning A and B pages have empty bodies, compact-v1 layout and unchanged inventories. No page repair is required.",
+    "unresolved_obligations": [],
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "uniform_bound_concern": "Step-4 concern about a changing network bound is already resolved in current proof 5.1: a ramp output is between adjacent fixed affine-piece values on each bounded interval, attention is a convex combination independently of score temperature, and induction through finitely many fixed value/output maps gives a common bound. Its choice order fixes mesh/table before shrinking quantizer strips. No further edit is warranted.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-hahn-hard-soft-attention-sequence-model.md items/thm-fixed-width-transformer-lp-universality.md --json",
+        "exit_code": 0,
+        "result": "2 files; definition not-applicable; theorem pass; 1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-hahn-hard-soft-attention-sequence-model.md items/thm-fixed-width-transformer-lp-universality.md --json",
+        "exit_code": 0,
+        "result": "2 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-36.proof-contracts.json --items def-hahn-hard-soft-attention-sequence-model,thm-fixed-width-transformer-lp-universality --strict --json",
+        "exit_code": 0,
+        "result": "Both scoped contracts checked; ok true; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-hahn-hard-soft-attention-sequence-model.md",
+        "exit_code": 0,
+        "result": "1 changed item; 0 proof steps; 0 defects."
+      }
+    ],
+    "interface_comparison": "Only the original Definition of def-hahn-hard-soft-attention-sequence-model changed: added a uniform bound on f_in(v_a,p_i) within the soft-influence conditions, plus an explanatory sentence. The original Statement of the universality theorem is byte-for-byte unchanged. All six direct dependency/reference consumers were examined; their own Statements/Definitions are unchanged, so no second hop is triggered.",
+    "published_consumer_ledger": "No published direct consumers of the changed definition were found; all six are draft frozen-frontier items. No published-ledger update or outside maintenance repair is proposed.",
+    "next_action": "Controller collection, ordinary frontier consumer routing, independent rejudgment and certification remain controller duties; no judges, stamps, gates or cycle were launched by this worker."
+  }
+}

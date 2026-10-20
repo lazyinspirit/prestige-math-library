@@ -10,6 +10,7 @@ provenance:
 deps: [def-sesquilinear-and-hermitian-forms-over-a-field-with-involution, def-triangular-and-diagonal-matrices-over-a-commutative-ring]
 aliases: []
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-cholesky-factorisation-with-positive-diagonal.json
   audited: 2026-08-30
   precheck: n/a
   judge:
@@ -38,6 +39,13 @@ where $L$ is lower triangular and every diagonal entry of $L$ is a positive real
 number.
 
 The Hermitian terminology matches
-[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the
+Sesquilinear and Hermitian forms over a field with an involution, using the convention linear in the first variable, and the
 triangular terminology matches
-[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].
+Upper triangular, lower triangular and diagonal square matrices over a commutative ring.
+
+## Definition references
+
+[[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]
+
+[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]
+

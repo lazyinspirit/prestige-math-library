@@ -10,6 +10,7 @@ provenance:
 deps: [lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-continuous-preimages-of-borel-sets-are-borel, def-countable-choice]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets.json
   audited: 2026-08-29
   precheck: pass
 sources:
@@ -20,10 +21,14 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
+Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Let
 $U,V \subseteq \mathbb R^n$ be open and let $T : U \to V$ be a
 $C^1$ diffeomorphism. If $E \subseteq U$ is Lebesgue measurable, then $T(E)$ is
 Lebesgue measurable.
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,177 @@
+{
+  "group": "f",
+  "batches": [
+    "19"
+  ],
+  "pages_read": [
+    "ml02-boosting",
+    "ml02-boosting-examples"
+  ],
+  "items_read": [
+    "alg-adaboost-m1",
+    "def-negative-gradient-pseudo-residual",
+    "lem-pseudo-residuals-are-negative-score-gradient",
+    "thm-adaboost-exponential-training-error-bound",
+    "alg-gradient-boosting",
+    "thm-gradient-boosting-empirical-loss-nonincreasing",
+    "ex-adaboost-perfect-round-stops",
+    "ex-adaboost-two-rounds-and-margin-bound",
+    "ex-gradient-boosting-zero-tree-direction"
+  ],
+  "conventions": [
+    {
+      "convention": "AdaBoost starts with uniform weights and zero score, uses half-log coefficients, returns the perfect base classifier when weighted error is zero, and reports weak-learning failure when weighted error is at least 1/2. Score ties predict +1.",
+      "fixed_by": "alg-adaboost-m1",
+      "matters_for": [
+        "thm-adaboost-exponential-training-error-bound",
+        "ex-adaboost-perfect-round-stops",
+        "ex-adaboost-two-rounds-and-margin-bound"
+      ]
+    },
+    {
+      "convention": "The empirical score loss is a sum, without a 1/N factor; pseudo-residuals are negative derivatives with respect to individual scores.",
+      "fixed_by": "def-negative-gradient-pseudo-residual",
+      "matters_for": [
+        "lem-pseudo-residuals-are-negative-score-gradient",
+        "alg-gradient-boosting",
+        "ex-gradient-boosting-zero-tree-direction"
+      ]
+    },
+    {
+      "convention": "Gradient boosting uses full-sample finite-depth CART to determine regions, then updates with exact leafwise loss-minimizing offsets rather than fitted residual means. Initial and leafwise minima must be attained.",
+      "fixed_by": "alg-gradient-boosting",
+      "matters_for": [
+        "thm-gradient-boosting-empirical-loss-nonincreasing",
+        "ex-gradient-boosting-zero-tree-direction"
+      ]
+    },
+    {
+      "convention": "The AdaBoost bound concerns completed rounds with 0 < e_m < 1/2, includes nonpositive margins, and assigns the empty product value 1 at M = 0.",
+      "fixed_by": "thm-adaboost-exponential-training-error-bound",
+      "matters_for": [
+        "ex-adaboost-two-rounds-and-margin-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-gradient-boosting",
+      "statement": "On an admitted finite run, initialize with an attained constant loss minimizer, fit finite-depth CART to negative score derivatives, choose an attained real loss-minimizing offset separately in each terminal leaf, and add those offsets to the current score.",
+      "used_by": [
+        "thm-gradient-boosting-empirical-loss-nonincreasing",
+        "ex-gradient-boosting-zero-tree-direction"
+      ]
+    },
+    {
+      "id": "alg-adaboost-m1",
+      "statement": "Initialize w_i = 1/N and F_0 = 0. For 0 < e_m < 1/2 use a_m = (1/2) log((1-e_m)/e_m), Z_m = 2√(e_m(1-e_m)), normalized exponential weight updates, and additive score updates; handle zero error and weak-learning failure separately.",
+      "used_by": [
+        "thm-adaboost-exponential-training-error-bound",
+        "ex-adaboost-perfect-round-stops",
+        "ex-adaboost-two-rounds-and-margin-bound"
+      ]
+    },
+    {
+      "id": "lem-pseudo-residuals-are-negative-score-gradient",
+      "statement": "For scalar losses differentiable at the sample scores in an open scalar domain U, the finite sum Φ on U^N is totally differentiable, DΦ(z)v = Σ_i ∂₂ℓ(y_i,z_i)v_i, and the pseudo-residual vector equals −∇Φ(z).",
+      "used_by": [
+        "alg-gradient-boosting",
+        "ex-gradient-boosting-zero-tree-direction"
+      ]
+    },
+    {
+      "id": "thm-adaboost-exponential-training-error-bound",
+      "statement": "For any finite sequence of completed AdaBoost rounds with 0 < e_m < 1/2, Σ_i exp(−y_iF_M(x_i)) = N∏_m Z_m, and the nonpositive-margin fraction, hence empirical classification error under the +1 tie rule, is at most ∏_m Z_m.",
+      "used_by": [
+        "ex-adaboost-two-rounds-and-margin-bound"
+      ]
+    },
+    {
+      "id": "def-negative-gradient-pseudo-residual",
+      "statement": "For a finite sample and scalar losses differentiable at the current scores, r_i(f) = −dℓ(y_i,t)/dt evaluated at t = f(x_i), with empirical score loss Φ(z) = Σ_i ℓ(y_i,z_i).",
+      "used_by": [
+        "lem-pseudo-residuals-are-negative-score-gradient",
+        "alg-gradient-boosting",
+        "ex-gradient-boosting-zero-tree-direction"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Total differentiability and the linear remainder criterion in the pseudo-residual lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating each scalar loss composed with its coordinate projection.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-total-derivatives",
+      "used_for": "Adding the finitely many coordinate-loss derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-directional-and-partial-derivatives",
+      "used_for": "Coordinate partial derivatives in the pseudo-residual lemma and the line derivative in the zero-tree example.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Identifying coordinate partial derivatives from the total derivative.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Identifying the Euclidean gradient with the vector of coordinate partial derivatives.",
+      "opened": true
+    },
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Checking the CART leaf-mean supplier's standard real inner-product spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Checking the explicit adjoint of the constant-vector map in the CART leaf-mean supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Checking the CART leaf-mean supplier's characterization of the unique least-squares constant.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The Definition contains inline supplier links, including “([[def-euclidean-linear-map]])” and “by [[def-norm-and-normed-space]]”. These interrupt the complete defining section and violate the required uninterrupted-definition presentation; there is no immediately following Definition references section collecting them.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-directional-and-partial-derivatives",
+      "finding": "The Definition contains inline links including “([[lem-standard-basis-of-f-n]])” and “in the sense of [[def-vector-valued-derivative-and-integral]]”, with further links in its zero-space clause. These violate the uninterrupted-definition requirement and are not moved to a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-jacobian-matrix-and-gradient",
+      "finding": "The Definition ends with “with coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].” These inline hyperlinks violate the uninterrupted-definition requirement; a following Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "finding": "The Definition begins “Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]).” Both supplier hyperlinks occur inside the complete defining section instead of a following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-boosting",
+      "to": "ml02-cart",
+      "faithful": true,
+      "note": "Checked the CART page and actual empirical-tree definition, leaf-mean theorem, growth algorithm, and termination theorem against the boosting consumers. CART supplies a finite-depth regression fit with nonempty terminal sample sets partitioning the sample, including a single root leaf at depth zero. Boosting uses its residual means for fitting regions and separately computes exact loss-minimizing update offsets. The loss theorem uses only the finite partition and attained leafwise minima; no global tree optimality or strict-descent guarantee is imported."
+    }
+  ]
+}

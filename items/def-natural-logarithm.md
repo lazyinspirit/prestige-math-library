@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-natural-logarithm.json
   precheck: n/a
   audited: 2026-08-02
 sources:
@@ -27,9 +28,13 @@ pipeline_run: null
 
 ## Definition
 
-For $x>0$, define $\log x$ to be the unique real $y$ such that $\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\exp:\mathbb R\to(0,\infty)$ is a bijection.
+For $x>0$, define $\log x$ to be the unique real $y$ such that $\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\mathbb{R}$ onto $(0,\infty)$ states that $\exp:\mathbb R\to(0,\infty)$ is a bijection.
 
 Thus $\log:(0,\infty)\to\mathbb R$ is the inverse function of $\exp$. In particular, $\log(\exp y)=y$ for every $y\in\mathbb R$ and $\exp(\log x)=x$ for every $x>0$.
+
+## Definition references
+
+[[cor-exponential-is-a-bijection-onto-positive-reals]]
 
 ## Remarks
 

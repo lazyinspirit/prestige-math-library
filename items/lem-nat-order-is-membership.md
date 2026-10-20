@@ -17,6 +17,7 @@ landmark: false
 short: "$m<n\\iff m\\in n$"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-nat-order-is-membership.json
   precheck: pass
   verified:
     model: claude-opus-5
@@ -45,9 +46,9 @@ pipeline_run: null
 ## Statement
 
 Let $\mathbb{N} = \omega$ be the von Neumann naturals, with $0 = \varnothing$ and
-$\sigma(n) = n \cup \{n\}$ ([[def-natural-numbers]]), and let $\le$ and $<$ be
+$\sigma(n) = n \cup \{n\}$ (The natural numbers $\mathbb{N}$ (von Neumann)), and let $\le$ and $<$ be
 the order defined additively by $m \le n \iff \exists k \in \mathbb{N}\ (m + k = n)$
-and $m < n \iff (m \le n$ and $m \ne n)$ ([[def-nat-order]]). Then $\mathbb{N}$ is
+and $m < n \iff (m \le n$ and $m \ne n)$ (Order on the natural numbers). Then $\mathbb{N}$ is
 a **transitive set**: every element of a natural number is itself a natural
 number. Moreover, for all $m, n \in \mathbb{N}$:
 
@@ -59,11 +60,17 @@ number. Moreover, for all $m, n \in \mathbb{N}$:
 Consequently $n = \{\, m \in \mathbb{N} : m < n \,\}$ for every $n$: a natural
 number is exactly the set of the naturals below it.
 
-**Why this is proved here.** [[def-nat-order]] defines the order additively and
+**Why this is proved here.** Order on the natural numbers defines the order additively and
 records the identification with membership only as an orienting remark, without
 proof. The countability arguments on this page use that identification as a
 working fact, so it is established here, from the additive order and induction
 alone. Nothing below uses ordinals or any later material.
+
+## Statement references
+
+[[def-natural-numbers]]
+
+[[def-nat-order]]
 
 ## Facts & Assumptions
 

@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-continuous-ode-adjoint-gradient-formula.json
 id: thm-continuous-ode-adjoint-gradient-formula
 kind: theorem
 title: The continuous ODE adjoint gives the parameter gradient with endpoint terms
@@ -28,13 +30,17 @@ sources:
 
 ## Statement
 
-Assume $T>0$. Let $u_\theta$ solve the parameter-dependent ODE of [[lem-parameter-ode-flow-tangent-on-common-tube]] on $[0,T]$. Let
+Assume $T>0$. Let $u_\theta$ solve the parameter-dependent ODE of Parameter-dependent ODE flows have the variational tangent on a common tube on $[0,T]$. Let
 $$J(\theta)=\phi(u_\theta(T),\theta)+\int_0^T\ell(t,u_\theta(t),\theta)\,dt,$$
 where $\phi$ and $\ell$ are $C^1$ on a neighborhood of the trajectory tube and their first derivatives are bounded and uniformly continuous there. Let $S=D_\theta u_\theta$ be the tangent from that lemma. Let $p$ solve the terminal adjoint problem
 $$-p'(t)=D_u f(t,u_\theta(t),\theta)^Tp(t)+D_u\ell(t,u_\theta(t),\theta)^T,\qquad p(T)=D_u\phi(u_\theta(T),\theta)^T.$$
 Then
 $$\nabla_\theta J=D_\theta\phi(u_\theta(T),\theta)^T+D_\theta u_0(\theta)^Tp(0)+\int_0^T\bigl(D_\theta\ell(t,u_\theta,\theta)^T+D_\theta f(t,u_\theta,\theta)^Tp(t)\bigr)\,dt.$$
 This formula separates initial, terminal, running-cost and vector-field parameter terms. It applies only while the common-tube and differentiability hypotheses hold.
+
+## Statement references
+
+[[lem-parameter-ode-flow-tangent-on-common-tube]]
 
 ## Facts & Assumptions
 

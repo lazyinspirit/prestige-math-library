@@ -1,0 +1,111 @@
+---
+id: thm-noiseless-rkhs-interpolation-fill-distance-bound
+kind: theorem
+title: Noiseless Gaussian RKHS interpolation error under uniform sampling
+status: draft
+origin: pipeline
+pipeline_run: machine-learning-all-101-2026-10-19
+dependency_level: 3
+deps:
+  - def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces
+  - ex-gaussian-radial-kernel
+  - def-countable-choice
+  - thm-canonical-rkhs-construction-and-reproducing-property
+  - lem-finite-dimensional-projection-in-a-real-inner-product-space
+  - lem-iid-uniform-fill-distance-rate
+  - lem-gaussian-rbf-power-function-fill-distance-bound
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Belkin, Hsu, Ma, and Mandal, Reconciling modern machine learning practice and the bias-variance trade-off"
+      url: "https://arxiv.org/pdf/1812.11118"
+      locator: "Appendix A, Theorem 1 and proof sketch."
+    - title: "Rieger and Zwicknagl, Sampling inequalities for infinitely smooth functions, with applications to interpolation and machine learning"
+      url: "https://link.springer.com/content/pdf/10.1007/s10444-008-9089-0.pdf"
+      locator: "Theorem 6.1 and its proof, Gaussian kernel case."
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice. Let $d\ge1$, let $\Omega\subset\mathbb{R}^d$
+be a fixed closed cube with positive side length, let $\sigma>0$, and let
+$k_\sigma(x,z)=\exp(-\|x-z\|_2^2/(2\sigma^2))$ with real RKHS
+$\mathcal H_\sigma$. Fix $h^*\in\mathcal H_\sigma$, and let
+$x_1,x_2,\ldots$ be an iid sequence uniform on $\Omega$. For every
+$n\ge3$, set $y_i=h^*(x_i)$ for $1\le i\le n$. There exist constants
+$A,B>0$ and $n_0$, depending only on $d,\Omega,\sigma$, such that for every
+$n\ge n_0$, with probability at least $1-1/n$, every $h\in\mathcal H_\sigma$
+that interpolates the same data, $h(x_i)=y_i$ for $1\le i\le n$, satisfies
+$$\sup_{x\in\Omega}|h(x)-h^*(x)|\le A\exp\!\left(-B\left(\frac{n}{\log n}\right)^{1/d}\right) (\|h^*\|_{\mathcal H_\sigma}+\|h\|_{\mathcal H_\sigma}).$$
+
+## Statement references
+
+[[def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces]]
+
+[[thm-canonical-rkhs-construction-and-reproducing-property]]
+
+[[lem-iid-uniform-fill-distance-rate]]
+
+[[lem-gaussian-rbf-power-function-fill-distance-bound]]
+
+[Belkin, Hsu, Ma, and Mandal, Appendix A, Theorem 1](https://arxiv.org/pdf/1812.11118)
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, the Gaussian RKHS $\mathcal H_\sigma$, target
+$h^*$, and iid uniform sample from the Statement.
+
+[A1] The Axiom of Countable Choice says every countable sequence of nonempty
+sets has a choice function ([[def-countable-choice]]).
+
+[F1] The Gaussian radial function is a real positive semidefinite kernel
+([[ex-gaussian-radial-kernel]]).
+
+[F2] Under Countable Choice, a real positive semidefinite kernel has a
+canonical RKHS with the stated reproducing property
+([[thm-canonical-rkhs-construction-and-reproducing-property]]).
+
+[F3] A real RKHS has sections $k_x=k(\cdot,x)$ and satisfies
+$\langle f,k_x\rangle=f(x)$ for every function $f$ in that space
+([[def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces]]).
+
+[F4] The Gaussian power function has the stated bound
+([[lem-gaussian-rbf-power-function-fill-distance-bound]]).
+
+[F5] An iid uniform sample on a fixed cube has Euclidean fill distance at most
+$C_dL(\log n/n)^{1/d}$ with probability at least $1-1/n$
+([[lem-iid-uniform-fill-distance-rate]]).
+
+[F6] Every finite-dimensional subspace of a real inner-product space admits an
+orthogonal projection ([[lem-finite-dimensional-projection-in-a-real-inner-product-space]]).
+
+## Proof
+
+1.1 By [A1], [F1], and [F2], the Gaussian kernel has the real RKHS used in the
+Statement, with evaluation property [F3]. Let $X_n=\{x_1,\ldots,x_n\}$ and
+$V_n=\operatorname{span}\{k_\sigma(\cdot,x_i):1\le i\le n\}$. For any
+interpolant $h$, put $g=h-h^*$. Then $g(x_i)=0$, so [F3] gives
+$\langle g,k_\sigma(\cdot,x_i)\rangle=0$ for each $i$ and hence
+$g\perp V_n$. By [F6] the projection $\Pi_{V_n}$ exists; therefore
+$$g(x)=\langle g,k_\sigma(\cdot,x)\rangle =\langle g,k_\sigma(\cdot,x)-\Pi_{V_n}k_\sigma(\cdot,x)\rangle.$$
+The inner-product Cauchy--Schwarz inequality follows by expanding
+$\|u-tv\|^2\ge0$ and minimizing over real $t$ (with the zero-vector case
+immediate). Thus
+$|g(x)|\le\|g\|_{\mathcal H_\sigma}P_{X_n}(x)$. [given, A1, F1, F2, F3, F4, F6, algebra]
+
+1.2 The triangle inequality gives
+$\|g\|_{\mathcal H_\sigma}\le\|h\|_{\mathcal H_\sigma}+\|h^*\|_{\mathcal H_\sigma}$.
+Taking the supremum in step 1.1 yields
+$$\sup_{x\in\Omega}|h(x)-h^*(x)|\le (\|h\|_{\mathcal H_\sigma}+\|h^*\|_{\mathcal H_\sigma}) \sup_{x\in\Omega}P_{X_n}(x).$$
+[given, step 1.1, algebra]
+
+2.1 By [F5], on an event of probability at least $1-1/n$, the fill distance
+$h_{X_n}$ is at most $\bar h_n=C_dL(\log n/n)^{1/d}$. For all sufficiently
+large $n$, $\bar h_n<\min(h_0,e^{-1})$; the function
+$u\mapsto|\log u|/u$ is decreasing on $(0,e^{-1}]$, so [F4] applies and gives
+$$\sup_xP_{X_n}(x)\le C\exp\!\left(-c\frac{|\log h_{X_n}|}{h_{X_n}}\right) \le C\exp\!\left(-\frac{c}{\bar h_n}\right) =C\exp\!\left(-\frac{c}{C_dL}\left(\frac{n}{\log n}\right)^{1/d}\right).$$
+Using this bound in step 1.2 proves the displayed estimate with
+$A=C$ and $B=c/(C_dL)$, uniformly for every interpolant on that event. [given, F4, F5, step 1.2, algebra] ∎

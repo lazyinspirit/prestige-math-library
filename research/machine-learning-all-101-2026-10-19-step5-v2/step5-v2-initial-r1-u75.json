@@ -1,0 +1,183 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "75",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-mirror-map-and-bregman-divergence",
+      "model": "gpt-6-luna",
+      "context_sha256": "3d236e216c5649e81f2b05d0a66f96d4c8c2941f3d9f72d0a4a92414e2ebb765",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The linked supplier defines ordinary and strict convexity only. The strong-convexity inequality is already complete and correct in this item, so the misleading Definition references attribution is nonfatal. Repaired the reference to distinguish the supplier from the local quantitative definition; the Definition is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-adagrad",
+      "model": "gpt-6-luna",
+      "context_sha256": "866a6e7ea1579c58058133c772dc28055adea9f4cb0943f880eddc7aaeebdda8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The feedback supplier promises the full loss function, not gradient information; that reference restatement was inaccurate. However, the Definition already explicitly requires receipt of its prescribed gradient vector g_t in R^d as an additional input. The finite update is therefore supported without deriving gradients from arbitrary losses. Repaired only the reference attribution and retained the existing input requirement; no regret guarantee or differentiability inference is asserted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-negative-entropy-mirror-descent-on-simplex",
+      "model": "gpt-6-luna",
+      "context_sha256": "90f4a8d5b6806355f258c735bf4647d3ba2f002432c1a1484d7924501003e9be",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Original step 1.2 substituted the post-projection p_{t+1} into the dual equation for y_{t+1} before proving equality, so that invocation was unsupported. Repaired the proof to name the prospective dual probability vector r_{t+1}, construct its unique positive normalized solution, and only then use the Bregman quadratic lower bound to identify the projection and p_{t+1}. Interior preservation and Hedge agreement follow by induction. The Example and supplier interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.stat.berkeley.edu/~bartlett/courses/2014fall-cs294stat260/lectures/mirror-descent-notes.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-mirror-map-and-bregman-divergence",
+      "disposition": "repaired",
+      "post_sha256": "d3da94935102ccb37a64b9d26dcf75d385005cecf11d2e19f41f67bfa15c4dbd",
+      "review_context_sha256": "9e43ec5ebbd427706dc4ffdb6e3653567d8dd3a2768c35cb7b5ebd41423da6e1",
+      "reason": "Checked domains, strong-convexity inequality, Bregman argument order, positive-definite Hessian norms, and the actual ordinary/strict-convexity supplier. Only the inaccurate reference description changed; the full Definition and all hypotheses remain byte-identical. No choice axiom, proof contract or diagram is needed for this definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-adagrad",
+      "disposition": "repaired",
+      "post_sha256": "e972c3607efdb06afc8a8556cfb0fd51c4847e8e7336bb5099b264a791a09cf7",
+      "review_context_sha256": "c28a6b4b04f51271ce0e16bc355de84adfb96078d192f7f2d66433f743b99071",
+      "reason": "Checked the explicit received-vector input, play-before-feedback timing, finite Gram accumulation, full/diagonal PSD scales, singular pseudoinverse and compact projection suppliers. The Definition already receives g_t and asserts only an update, so no gradient is inferred from an arbitrary revealed function. Corrected the feedback reference only; the Definition is byte-identical. No contract or diagram is required for this procedure.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-negative-entropy-mirror-descent-on-simplex",
+      "disposition": "repaired",
+      "post_sha256": "6ca1073dba360913f537a93e8aac17d5d99b27ebeefd95b7c582244c6b35959f",
+      "review_context_sha256": "49df5b395b96d485deed6fb45646ae867d8913330fa6ecd2d65d031cf8cb6c8f",
+      "reason": "Checked the complete entropy, nonnegativity and projection supplier proofs and actual OMD/Hedge and scalar-calculus interfaces. The repaired proof solves the dual equation for r_{t+1} before identifying p_{t+1}; positivity gives an interior point and B_R(q||y)>=||q-y||^2/2 gives its unique identity projection, including boundary comparators. Induction from the uniform minimizer proves admissibility for every round and exact normalized-Hedge agreement. This is a repair-author review, not independent acceptance. Final focused rereview corrected F7 to state every logarithm law used and cited it at the derivative-to-ratio step; captured new hashes immediately afterward.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.stat.berkeley.edu/~bartlett/courses/2014fall-cs294stat260/lectures/mirror-descent-notes.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-mirror-map-and-bregman-divergence",
+      "severity": "nonfatal",
+      "locus": "statement-references",
+      "status": "fixed",
+      "adjudication_ref": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u75.json#/decisions/0",
+      "reason": "The linked supplier defines ordinary and strict convexity only. The strong-convexity inequality is already complete and correct in this item, so the misleading Definition references attribution is nonfatal. Repaired the reference to distinguish the supplier from the local quantitative definition; the Definition is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-adagrad",
+      "severity": "nonfatal",
+      "locus": "statement-references",
+      "status": "fixed",
+      "adjudication_ref": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u75.json#/decisions/1",
+      "reason": "The feedback supplier promises the full loss function, not gradient information; that reference restatement was inaccurate. However, the Definition already explicitly requires receipt of its prescribed gradient vector g_t in R^d as an additional input. The finite update is therefore supported without deriving gradients from arbitrary losses. Repaired only the reference attribution and retained the existing input requirement; no regret guarantee or differentiability inference is asserted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-negative-entropy-mirror-descent-on-simplex",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "proof-step",
+      "status": "fixed",
+      "adjudication_ref": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u75.json#/decisions/2",
+      "reason": "Original step 1.2 substituted the post-projection p_{t+1} into the dual equation for y_{t+1} before proving equality, so that invocation was unsupported. Repaired the proof to name the prospective dual probability vector r_{t+1}, construct its unique positive normalized solution, and only then use the Bregman quadratic lower bound to identify the projection and p_{t+1}. Interior preservation and Hedge agreement follow by induction. The Example and supplier interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.stat.berkeley.edu/~bartlett/courses/2014fall-cs294stat260/lectures/mirror-descent-notes.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update-required",
+      "reason": "All three assigned carriers are draft, and neither assigned Definition nor the Example was changed. These reference/proof-only repairs create no supplier-interface event and no affected outside published consumer to route.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-mirror-map-and-bregman-divergence",
+      "repair": "Corrected only Definition references after checking the actual ordinary/strict-convexity supplier. Strong convexity remains defined locally by the unchanged quantitative inequality. Reviewed Bregman domains/argument order and positive-definite Hessian norms. Immediate review hashes preserved."
+    },
+    {
+      "id": "alg-adagrad",
+      "repair": "Corrected only Definition references: the feedback model supplies the function; prescribed gradient vectors are already explicit additional procedure inputs. Checked finite Gram accumulation, PSD square roots, singular pseudoinverse and compact projection suppliers. Duchi–Hazan–Singer §1.1, printed p.2122, explicitly assumes received (sub)gradients. No regret claim or new differentiability inference. Immediate review hashes preserved."
+    },
+    {
+      "id": "ex-negative-entropy-mirror-descent-on-simplex",
+      "repair": "Replaced premature p_{t+1} by a prospective dual vector r_{t+1}; constructed its unique normalized positive solution, proved identity projection using the independent-coordinate Bregman lower bound, and then identified p_{t+1}. Checked uniform initialization, finite losses, boundary comparators and induction matching Hedge distributions while distinguishing sampled experts. Corrected F4 coordinate notation and F7 logarithm-law support. Adopted precheck phase numbering 1.1–5.1. After the final citation edit, actually rereviewed it and immediately captured the final review hashes. Updated only this example contract under acquire/reread/edit/check/release; prior independent review history remains historical.",
+      "source_evidence": "Read the complete current entropy-geometry, Bregman-nonnegativity and projection proofs and actual OMD/Hedge, logarithm and scalar-calculus interfaces. Bartlett slides 26–27 use ambient entropy coordinates and an unnormalized dual candidate; here independent coordinates give a normalized dual point, whose projection is proved to be the identity."
+    },
+    {
+      "scope": "focused validation",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-mirror-map-and-bregman-divergence.md items/alg-adagrad.md items/ex-negative-entropy-mirror-descent-on-simplex.md --json",
+          "exit_code": 0,
+          "result": "3 files; 1 proof checked; 0 failures. Definition and algorithm not-applicable."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/def-mirror-map-and-bregman-divergence.md items/alg-adagrad.md items/ex-negative-entropy-mirror-descent-on-simplex.md --json",
+          "exit_code": 0,
+          "result": "3 checked; 0 errors; 0 warnings."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-75.proof-contracts.json --strict --items ex-negative-entropy-mirror-descent-on-simplex --json",
+          "exit_code": 0,
+          "result": "1 scoped contract; 0 errors; 0 warnings. Earlier failed check identified the now-repaired stale quotes and step mappings."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/def-mirror-map-and-bregman-divergence.md items/alg-adagrad.md items/ex-negative-entropy-mirror-descent-on-simplex.md",
+          "exit_code": 0,
+          "result": "After final item edits: 3 items, 5 steps, 0 defects."
+        }
+      ],
+      "finite_sanity": "Three fixed dual-update witnesses passed, including eta=log 2 giving (2/3,1/3); maximum logarithmic-ratio residual 2.220446049250313e-16. This checks only those finite witnesses.",
+      "interface_comparison": "Current extracted defining-section hashes equal frozen before_statements for all three items. The two Definitions and Example are unchanged. No new interfaces or downstream propagation, no new items, no AC use and no diagrams needed. Pages, compact-v1 flags, deps and draft statuses are preserved.",
+      "closure": "No unresolved mathematical or metadata repair obligation in this unit. Shared ledgers were not edited; proposals are below. Engine collection, independent rejudgment and certification remain owed."
+    }
+  ],
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-75.proof-contracts.json": "06fffe5c4973147ae926f95a0f4c80163c0b118a7685b4d648da9058af994d8b"
+  }
+}

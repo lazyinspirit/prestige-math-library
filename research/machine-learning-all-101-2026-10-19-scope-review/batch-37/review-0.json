@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "37",
+  "round": 0,
+  "reviewed_items": [
+    "def-discretization-invariant-operator-family",
+    "def-physics-informed-neural-network-loss",
+    "def-shin-elliptic-divergence-form-operator",
+    "def-shin-parabolic-operator-and-boundary",
+    "lem-pinn-random-samples-are-space-filling",
+    "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+    "lem-shin-radial-smooth-cutoff",
+    "lem-neural-operator-compact-union-under-uniform-convergence",
+    "thm-neural-operator-input-output-spaces-have-ap",
+    "alg-empirical-pinn-objective",
+    "def-neural-operator",
+    "def-neural-operator-activation-classes",
+    "lem-shin-elliptic-energy-estimate",
+    "lem-shin-elliptic-residual-stability",
+    "lem-shin-bounded-open-set-hilbert-evolution-triple",
+    "lem-shin-parabolic-energy-estimate",
+    "lem-shin-parabolic-residual-stability",
+    "alg-neural-operator-mesh-discretization",
+    "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+    "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+    "fs-shin-global-holder-dirichlet-claim",
+    "def-fourier-neural-operator-layer",
+    "lem-neural-operator-ba-class-is-empty-as-defined",
+    "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+    "lem-pinn-residual-loss-from-fill-distance",
+    "lem-shin-interior-parabolic-schauder-estimate",
+    "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+    "lem-shin-zero-data-parabolic-classical-energy-identification",
+    "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+    "thm-neural-operator-discretization-invariance",
+    "lem-pinn-cell-occupancy-controls-uniform-residual",
+    "thm-pinn-regularized-loss-consistency",
+    "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+    "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+    "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+    "thm-pinn-linear-elliptic-consistency",
+    "thm-pinn-linear-parabolic-consistency",
+    "thm-neural-operator-compact-uniform-universality",
+    "lem-ap-finite-dimensional-factorization-of-continuous-maps",
+    "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+    "lem-smooth-integral-functionals-approximate-on-compact-function-sets",
+    "ex-non-global-training-stationary-point",
+    "ex-sparse-pinn-collocation-aliases-residual",
+    "ex-fourier-neural-operator-layer-and-claim-boundary",
+    "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+    "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+    "ex-pinn-small-scale-cube-sampling-has-instances"
+  ],
+  "reviewed_pages": [
+    "neural-operators-and-physics-informed-learning",
+    "neural-operators-and-physics-informed-learning-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch review found page-local definition and scope defects that can be repaired in one pass. The substantive supplier uses checked for the neural-operator and PDE claims are otherwise supported; no unresolved significant prerequisite gap requires escalation.",
+  "findings": [
+    {
+      "id": "def-physics-informed-neural-network-loss:admissibility",
+      "type": "local",
+      "reason": "The population loss integrates residuals and the empirical loss evaluates them at samples, but the Definition does not require the data and residuals to be measurable or pointwise defined. State the admissible trial/data conditions and whether infinite integrals or seminorms are allowed."
+    },
+    {
+      "id": "def-physics-informed-neural-network-loss:dimension-one-boundary",
+      "type": "local",
+      "reason": "For d=1 the text says every boundary point is available and no random boundary sample is used, but the empirical formula still uses an unspecified finite list and average over m_b points. Specify the exact deterministic full-boundary contribution and weights."
+    },
+    {
+      "id": "alg-empirical-pinn-objective:interface",
+      "type": "local",
+      "reason": "The procedure gives sample counts but does not specify the realized sample points and data as inputs or identify the returned objective value. State its admissible h, inputs and scalar output, including the d=1 boundary convention."
+    },
+    {
+      "id": "def-discretization-invariant-operator-family:sample-map",
+      "type": "local",
+      "reason": "The Definition says G_n accepts sample vectors but then writes G_n(a) for a function a in A. Define the sampling map and the queryable U-valued output reconstruction used in the compact-uniform convergence formula."
+    },
+    {
+      "id": "lem-pinn-residual-loss-from-fill-distance:dimension-one-scope",
+      "type": "scope",
+      "reason": "The approved design includes the Theorem 3.1 expected-loss bound for d=1 with full boundary data, but this assigned deterministic fill-distance lemma is restricted to d≥2 and no other assigned item supplies that branch. Add the d=1 statement and proof with the exact boundary-data convention."
+    },
+    {
+      "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network:domain",
+      "type": "local",
+      "reason": "The example sets D=[0,1], while its neural-operator supplier defines D as an open domain. State D=(0,1) and use C([0,1]) for the input/output representatives."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-empirical-pinn-objective",
+      "decision": "repair",
+      "reason": "Its procedure must use the admissibility and full-boundary input conventions added to the PINN loss definition."
+    },
+    {
+      "id": "lem-pinn-residual-loss-from-fill-distance",
+      "decision": "repair",
+      "reason": "Its current d≥2 proof is sound; extend its statement and proof to the approved d=1 full-boundary case."
+    },
+    {
+      "id": "thm-pinn-regularized-loss-consistency",
+      "decision": "accept",
+      "reason": "The theorem explicitly assumes D≥2 and its residuals are Hölder, hence measurable and pointwise defined."
+    },
+    {
+      "id": "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+      "decision": "accept",
+      "reason": "Its threshold ratio argument uses the stated d≥2 formulas and remains valid."
+    },
+    {
+      "id": "ex-non-global-training-stationary-point",
+      "decision": "accept",
+      "reason": "The scalar stationary-point example is unaffected by the admissibility and d=1 boundary clarifications."
+    },
+    {
+      "id": "ex-sparse-pinn-collocation-aliases-residual",
+      "decision": "accept",
+      "reason": "Its smooth trial functions and explicit endpoint evaluations satisfy the required measurability and pointwise conditions."
+    },
+    {
+      "id": "thm-pinn-linear-elliptic-consistency",
+      "decision": "accept",
+      "reason": "Its stated d≥2 Hölder trial classes satisfy the loss admissibility conditions; the d=1 expected-loss addition does not alter this branch."
+    },
+    {
+      "id": "thm-pinn-linear-parabolic-consistency",
+      "decision": "accept",
+      "reason": "Its ambient sampling dimension is D=d+1≥2 and its stated trial/residual conditions remain sufficient."
+    },
+    {
+      "id": "alg-neural-operator-mesh-discretization",
+      "decision": "accept",
+      "reason": "It explicitly defines tagged samples, volume weights, layer values and arbitrary output queries needed by the repaired sampling-map notation."
+    },
+    {
+      "id": "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+      "decision": "accept",
+      "reason": "It uses typed quadrature functionals on continuous inputs and already states the output supremum norm."
+    },
+    {
+      "id": "thm-neural-operator-discretization-invariance",
+      "decision": "accept",
+      "reason": "Its compatible quadrature construction produces queryable functions and its output norm hypotheses are explicit."
+    },
+    {
+      "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+      "decision": "repair",
+      "reason": "Its quadrature argument is sound; change the domain label to the open interval with its closed function-space representative."
+    },
+    {
+      "id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+      "decision": "accept",
+      "reason": "Its tagged quadrature maps and output C1 norm are explicitly typed and remain valid."
+    }
+  ]
+}

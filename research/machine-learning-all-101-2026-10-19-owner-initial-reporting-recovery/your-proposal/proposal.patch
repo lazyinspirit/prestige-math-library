@@ -1,0 +1,243 @@
+--- a/tools/step5-reporting-owner-recovery.mjs
++++ b/tools/step5-reporting-owner-recovery.mjs
+@@ -9,7 +9,7 @@
+ const need=(v,m)=>{if(!v)throw Error('Step 5 reporting owner: '+m);},date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x)),drained=s=>Object.values(s.dispatches??{}).every(d=>!d.startedAt||Boolean(d.endedAt)),validated=new WeakSet();
+ const directory=(root,run)=>join(root,'research',`${run}-step5-v2`),label=(phase,round,unit)=>`step5-v2-${phase}-r${round}-u${unit}`;
+ const pp=(root,run,phase,round)=>join(directory(root,run),`${phase}-${round}.json`),rp=(root,run,phase,round,unit)=>join(directory(root,run),label(phase,round,unit)+'.json');
+-export const reportingOwnerHome=(root,run,phase,round,unit)=>{need(['impact-repeat','gate'].includes(phase)&&Number.isSafeInteger(round)&&round>0&&['1','2','3'].includes(unit),'invalid phase/round/session owner');return resolve(root,'.autopilot',run,'step5-reporting-owner-sessions',`${phase}-r${round}`,`u${unit}`);};
++export const reportingOwnerHome=(root,run,phase,round,unit)=>{need(['impact-initial','impact-repeat','gate'].includes(phase)&&Number.isSafeInteger(round)&&round>0&&['1','2','3'].includes(unit),'invalid phase/round/session owner');return resolve(root,'.autopilot',run,'step5-reporting-owner-sessions',`${phase}-r${round}`,`u${unit}`);};
+ export const reportingOwnerRecoveryPath=(root,run,phase,round)=>join(directory(root,run),`${phase}-${round}-owner-reporting-context-recovery.json`);
+ function execution(root,run,pack,unit,readBytes=p=>readFileSync(p,'utf8')){
+  const reportPath=rp(root,run,pack.phase,pack.round,unit),dispatch=join(root,'research',`${run}-dispatch`,`alpha-repair-${label(pack.phase,pack.round,unit)}.result.json`),report=JSON.parse(readBytes(reportPath)),bytes=readBytes(dispatch),native=JSON.parse(bytes),attempt=dispatch.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`),base=pack.basePhase??pack.phase,cover=pack.phase===base?unit:`${pack.phase}:${unit}`;
+@@ -28,16 +28,20 @@
+  need(native.run===run&&native.role==='alpha-repair'&&native.ok===true&&native.model==='gpt-6.1-sol'&&native.provider_effort===sol61Effort(root,native.run)&&typeof native.session_home==='string'&&resolve(root,native.session_home)===home&&typeof native.session_id==='string'&&native.session_id.length>0,'pending consumer lacks its actual phase-correct persistent reporting owner');
+  return {mode:'resume',result:dispatch,sha256:hash(readFileSync(dispatch,'utf8')),session_home:home,session_id:native.session_id};
+ }
++const recoveryScope=(phase,round,unit)=>phase==='impact-repeat'&&unit==='1'&&Number.isSafeInteger(round)&&round>0||phase==='impact-initial'&&round===1&&unit==='2';
++const recoveryStage=phase=>phase==='impact-initial'?'5.2-impact':'5.6-impact';
+ function validate(root,run,phase,round,row,{current=false,receiptBytes=null,archives=null}={}){
++ const stage=recoveryStage(phase);
+  const path=reportingOwnerRecoveryPath(root,run,phase,round),bytes=receiptBytes??readFileSync(path,'utf8'),{sha256,...payload}=row;
+- need(sha256===hash(payload)&&row.version===1&&row.kind==='owner-native-reporting-context-reestablishment'&&row.root===resolve(root)&&row.run===run&&row.phase===phase&&phase==='impact-repeat'&&row.round===round&&row.unit==='1'&&row.owner_identity==='/root'&&row.authorized_by==='owner'&&date(row.recorded_at)&&Date.parse(row.recorded_at)<=Date.now()&&row.resume_original_session===false&&row.review_credit_granted===false&&row.native_coverage_adopted===false&&typeof row.reason==='string'&&row.reason.trim().length>=80,'invalid explicit context-reestablishment envelope');
++ need(sha256===hash(payload)&&row.version===1&&row.kind==='owner-native-reporting-context-reestablishment'&&row.root===resolve(root)&&row.run===run&&row.phase===phase&&row.round===round&&recoveryScope(phase,round,row.unit)&&row.owner_identity==='/root'&&row.authorized_by==='owner'&&date(row.recorded_at)&&Date.parse(row.recorded_at)<=Date.now()&&row.resume_original_session===false&&row.review_credit_granted===false&&row.native_coverage_adopted===false&&typeof row.reason==='string'&&row.reason.trim().length>=80,'invalid explicit context-reestablishment envelope');
+  const evidence={[path]:hash(bytes)},boundText=f=>{const p=resolve(root,f);need(p.startsWith(resolve(root,'research')+'/')&&(archives?.has(p)||existsSync(p)&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()&&realpathSync(p).startsWith(realpathSync(join(root,'research'))+'/')),'invalid recovery archive');const b=archives?.get(p)??readFileSync(p,'utf8');need(row.bindings?.[relative(root,p)]===hash(b),'missing/stale immutable recovery binding '+f);evidence[p]=hash(b);return b;},bound=f=>JSON.parse(boundText(f));for(const p of Object.keys(row.bindings??{}))boundText(p);
+  const pack=bound(pp(root,run,phase,round)),collection=bound(join(directory(root,run),`${phase}-${round}-collected.json`)),state=bound(row.creation_state),request=bound(row.owner_gate_request);
+- need(pack.run===run&&pack.phase===phase&&pack.round===round&&pack.repair_scope==='frontier'&&same(pack.units,['1','2','3'])&&!pack.rejected&&collection.run===run&&collection.phase===phase&&collection.round===round&&same(collection.errors,[])&&state.run===run&&state.stage==='5.6-impact'&&state.paused===true&&drained(state)&&request.run===run&&request.version===1&&request.group==='5.6-impact'&&same(request.stages,['5.6-impact'])&&request.id===row.owner_gate_request_id&&date(request.at)&&Date.parse(request.at)<=Date.parse(row.recorded_at),'not actual paused/drained completed repeat-owner boundary');
+- const executions=new Map();for(const unit of pack.units){const v=execution(root,run,pack,unit,boundText),observed=state.dispatches?.[`5.6-impact:${v.native.label}`];need(observed?.stage==='5.6-impact'&&observed.role==='alpha-repair'&&observed.label===v.native.label&&same(observed.covers,[unit])&&observed.attempt===v.native.attempt&&observed.lastExitOk===true&&date(observed.startedAt)&&date(observed.endedAt)&&Date.parse(observed.startedAt)<=Date.parse(v.native.started_at)&&Date.parse(v.native.ended_at)<=Date.parse(observed.endedAt)&&Date.parse(observed.endedAt)<=Date.parse(request.at),'creation state does not bind actual completed repeat handoff');for(const p of [pp(root,run,phase,round),v.reportPath,v.dispatch])need(collection.evidence?.[p]===hash(boundText(p)),'original collection no longer authenticates original owner');executions.set(unit,v);}
+- const original=executions.get('1'),assigned=pack.assignments['1'],targets=[...new Set([...assigned,...original.report.downstream_pending])].sort();
++ need(pack.run===run&&pack.phase===phase&&pack.round===round&&pack.repair_scope==='frontier'&&same(pack.units,['1','2','3'])&&!pack.rejected&&collection.run===run&&collection.phase===phase&&collection.round===round&&same(collection.errors,[])&&state.run===run&&state.stage===stage&&state.paused===true&&drained(state)&&request.run===run&&request.version===1&&request.group===stage&&same(request.stages,[stage])&&request.id===row.owner_gate_request_id&&date(request.at)&&Date.parse(request.at)<=Date.parse(row.recorded_at),'not actual paused/drained completed phase-owner boundary');
++ const executions=new Map();for(const unit of pack.units){const v=execution(root,run,pack,unit,boundText),observed=state.dispatches?.[`${stage}:${v.native.label}`];need(observed?.stage===stage&&observed.role==='alpha-repair'&&observed.label===v.native.label&&same(observed.covers,[unit])&&observed.attempt===v.native.attempt&&observed.lastExitOk===true&&date(observed.startedAt)&&date(observed.endedAt)&&Date.parse(observed.startedAt)<=Date.parse(v.native.started_at)&&Date.parse(v.native.ended_at)<=Date.parse(observed.endedAt)&&Date.parse(observed.endedAt)<=Date.parse(request.at),'creation state does not bind actual completed phase handoff');for(const p of [pp(root,run,phase,round),v.reportPath,v.dispatch])need(collection.evidence?.[p]===hash(boundText(p)),'original collection no longer authenticates original owner');executions.set(unit,v);}
++ if(phase==='impact-initial')need(!Object.values(pack.reader_review_obligations??{}).flat().includes(row.unit)&&!Object.values(pack.reader_concern_owners??{}).includes(row.unit)&&!Object.values(pack.reader_review_owners??{}).includes(row.unit),'initial recovery cannot replace a genuine reader owner');
++ const original=executions.get(row.unit),assigned=pack.assignments[row.unit],targets=[...new Set([...assigned,...original.report.downstream_pending])].sort();
+  need(original.native.session_home===null&&typeof original.native.session_id==='string'&&original.native.session_id.length>0&&same(original.report.created_items,[])&&same(original.report.decisions,[])&&Array.isArray(original.report.downstream_pending)&&original.report.downstream_pending.length>0&&new Set(original.report.downstream_pending).size===original.report.downstream_pending.length&&original.report.downstream_pending.every(id=>original.report.downstream.includes(id)&&pack.frontier_ids.includes(id))&&same(original.report.reviews.map(r=>r.id).sort(),[...assigned].sort())&&same(row.targets,targets)&&same(row.original_affected_use_dispositions,original.report.downstream_uses??{})&&row.original_session_id===original.native.session_id&&row.original_final_sha256===original.final_sha256,'recovery cannot omit assigned/pending subjects or invent original dispositions');
+- const unavailable=bound(row.session_unavailable_evidence_file);need(unavailable.run===run&&unavailable.phase===phase&&unavailable.round===round&&unavailable.unit==='1'&&unavailable.session_id===original.native.session_id&&unavailable.session_home===null&&unavailable.original_context_unavailable===true&&unavailable.journal_payloads_read===false&&same(unavailable.matching_session_paths,[])&&unavailable.confirmed_by==='/root'&&date(unavailable.confirmed_at)&&Date.parse(unavailable.confirmed_at)<=Date.parse(row.recorded_at)&&typeof unavailable.reason==='string'&&unavailable.reason.trim().length>=80&&hash(boundText(unavailable.observation.path))===unavailable.observation.sha256,'missing genuine root-confirmed unavailable-context evidence');
++ const unavailable=bound(row.session_unavailable_evidence_file);need(unavailable.run===run&&unavailable.phase===phase&&unavailable.round===round&&unavailable.unit===row.unit&&unavailable.session_id===original.native.session_id&&unavailable.session_home===null&&unavailable.original_context_unavailable===true&&unavailable.journal_payloads_read===false&&same(unavailable.matching_session_paths,[])&&unavailable.confirmed_by==='/root'&&date(unavailable.confirmed_at)&&Date.parse(unavailable.confirmed_at)<=Date.parse(row.recorded_at)&&typeof unavailable.reason==='string'&&unavailable.reason.trim().length>=80&&hash(boundText(unavailable.observation.path))===unavailable.observation.sha256,'missing genuine root-confirmed unavailable-context evidence');
+  const prep=bound(row.preparation_file),inputs=bound(row.preparation_inputs_file),snapshot=bound(row.current_snapshot);need(prep.run===run&&prep.owner==='/root'&&prep.ok===true&&prep.metadata_checked===true&&prep.native_execution_coverage===false&&prep.mathematical_review_claimed===false&&prep.selected_count===inputs.selected_count&&inputs.run===run&&inputs.native_execution_coverage===false&&inputs.mathematical_review_claimed===false&&inputs.selected_count===inputs.items.length&&same(snapshot.sources,inputs.items.map(i=>({id:i.id,raw_sha256:i.raw_sha256,guard_sha256:i.guard_sha256})))&&new Set(snapshot.sources.map(s=>s.id)).size===snapshot.sources.length&&targets.every(id=>snapshot.sources.some(s=>s.id===id)&&snapshot.contexts[id]?.post_sha256===snapshot.sources.find(s=>s.id===id).guard_sha256&&/^[a-f0-9]{64}$/.test(snapshot.contexts[id]?.review_context_sha256??'')),'incomplete actual full current guard/context preparation');
+  const guards=new Map(inputs.guards.map(g=>[g.path,g.raw_sha256]));need(snapshot.manifests.length>0&&new Set(snapshot.manifests.map(m=>m.path)).size===snapshot.manifests.length&&snapshot.manifests.every(m=>guards.get(m.path)===m.sha256),'invalid actual manifest vector');
+  const firstPath=pp(root,run,`${phase}-pass-2`,round);if(existsSync(firstPath)){const first=read(firstPath);need(first.reporting_owner_recovery?.path===path&&Object.entries(evidence).every(([p,h])=>first.input_evidence?.[p]===h),'recovery is not bound to the genuine first fresh owner pack');}
+@@ -47,9 +51,10 @@
+ export function loadReportingOwnerRecovery(root,run,phase,round,{current=false}={}){const p=reportingOwnerRecoveryPath(root,run,phase,round);return existsSync(p)?validate(root,run,phase,round,read(p),{current}):null;}
+ export async function previewReportingOwnerRecovery(root,run,phase,round,unit,payload){return recordReportingOwnerRecovery(root,run,phase,round,unit,payload,{dryRun:true});}
+ export async function recordReportingOwnerRecovery(root,run,phase,round,unit,payload,{dryRun=false}={}){
+- need(phase==='impact-repeat'&&unit==='1'&&Number.isSafeInteger(round)&&round>0&&same(Object.keys(payload).sort(),['reason','preparation_file','preparation_inputs_file','session_unavailable_evidence_file'].sort()),'invalid typed recorder inputs');
+- const sp=join(root,'.autopilot',run,'state.json'),qp=join(root,'.autopilot',run,'owner-gate-request.json'),sb=readFileSync(sp,'utf8'),qb=readFileSync(qp,'utf8'),state=JSON.parse(sb),path=reportingOwnerRecoveryPath(root,run,phase,round);need(state.stage==='5.6-impact'&&state.paused===true&&drained(state)&&!existsSync(path)&&!existsSync(join(directory(root,run),`${phase}-${round}-progress.json`))&&!existsSync(pp(root,run,`${phase}-pass-2`,round)),'record requires fresh actual paused/drained repeat boundary');
+- const bindings={},archives=dryRun?new Map():null,base=join(directory(root,run),`reporting-owner-recovery-r${round}`),store=(name,bytes)=>{const p=join(base,name);if(existsSync(p))need(readFileSync(p,'utf8')===bytes,'immutable recovery archive conflict');if(dryRun)archives.set(p,bytes);else{mkdirSync(dirname(p),{recursive:true});if(!existsSync(p))writeFileSync(p,bytes,{flag:'wx'});}bindings[relative(root,p)]=hash(bytes);return relative(root,p);},bind=f=>{const p=resolve(root,f);bindings[relative(root,p)]=hash(readFileSync(p,'utf8'));};
++ need(recoveryScope(phase,round,unit)&&same(Object.keys(payload).sort(),['reason','preparation_file','preparation_inputs_file','session_unavailable_evidence_file'].sort()),'invalid typed recorder inputs');
++ const stage=recoveryStage(phase);
++ const sp=join(root,'.autopilot',run,'state.json'),qp=join(root,'.autopilot',run,'owner-gate-request.json'),sb=readFileSync(sp,'utf8'),qb=readFileSync(qp,'utf8'),state=JSON.parse(sb),path=reportingOwnerRecoveryPath(root,run,phase,round);need(state.stage===stage&&state.paused===true&&drained(state)&&!existsSync(path)&&!existsSync(join(directory(root,run),`${phase}-${round}-progress.json`))&&!existsSync(pp(root,run,`${phase}-pass-2`,round)),'record requires fresh actual paused/drained phase boundary');
++ const bindings={},archives=dryRun?new Map():null,base=join(directory(root,run),phase==='impact-initial'?`reporting-owner-recovery-initial-r${round}-u${unit}`:`reporting-owner-recovery-r${round}`),store=(name,bytes)=>{const p=join(base,name);if(existsSync(p))need(readFileSync(p,'utf8')===bytes,'immutable recovery archive conflict');if(dryRun)archives.set(p,bytes);else{mkdirSync(dirname(p),{recursive:true});if(!existsSync(p))writeFileSync(p,bytes,{flag:'wx'});}bindings[relative(root,p)]=hash(bytes);return relative(root,p);},bind=f=>{const p=resolve(root,f);bindings[relative(root,p)]=hash(readFileSync(p,'utf8'));};
+  const creation_state=store('creation-state.json',sb),owner_gate_request=store('owner-gate-request.json',qb),pack=read(pp(root,run,phase,round));bind(pp(root,run,phase,round));bind(join(directory(root,run),`${phase}-${round}-collected.json`));let original;
+  for(const lane of pack.units){const v=execution(root,run,pack,lane);for(const p of [v.reportPath,v.dispatch,v.attempt,v.logPath,v.promptPath])bind(p);if(lane===unit)original=v;}
+  for(const p of [payload.preparation_file,payload.preparation_inputs_file,payload.session_unavailable_evidence_file])bind(p);bind(read(resolve(root,payload.session_unavailable_evidence_file)).observation.path);
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -1915,7 +1915,7 @@
+   const packs=progress.passes.map(pass=>readPack(root,run,pass,round));
+   const withdrawal=phase==='impact-initial'&&round===1?loadOwnerReviewWithdrawal(root,run):null;
+   const ownership=readerReviewOwnership(root,run,packs,completed,items,current);
+-  const reportingRecovery=phase==='impact-repeat'?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(impactProgressPath(root,run,phase,round))}):null;
++  const reportingRecovery=['impact-initial','impact-repeat'].includes(phase)?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(impactProgressPath(root,run,phase,round))}):null;
+   const reportingDuties=reportingRecoveryDuties(reportingRecovery,packs,completed,items,current,contexts.matches,{allowed:scope.frontier});
+   const explicitPending=nativeDownstreamPending(root,run,packs,completed,items,current,reportingRecovery,reportingDuties);
+   const pending=[...new Set([...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id)))
+@@ -1934,13 +1934,13 @@
+     order.forEach((id,index)=>assignments[selectedOwners[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+     const identity=libraryIdentity(root,run);
+     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+-    if(ownership.obligations.size||phase==='impact-initial'&&explicitPending.pending.size){
++    if(ownership.obligations.size||phase==='impact-initial'&&[...explicitPending.pending].some(([id])=>!reportingDuties.obligations.has(id))){
+       pack.reader_concern_owners=ownership.originalOwners;
+       pack.reader_review_obligations=readerObligationInventory(ownership);
+       pack.reader_review_owners=selectedOwners;
+       pack.reader_owner_sessions={};pack.input_evidence={};
+       for(const unit of pack.units){
+-        if(!assignments[unit].some(id=>selectedOwners[id]===unit))continue;
++        if(!assignments[unit].some(id=>selectedOwners[id]===unit&&!reportingDuties.obligations.has(id)))continue;
+         const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
+         const result=read(origin);
+         pack.reader_owner_sessions[unit]={result:origin,sha256:digest(readFileSync(origin,'utf8')),session_id:result.session_id};
+@@ -1956,7 +1956,7 @@
+           `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
+       }
+     }
+-    if(['impact-repeat','gate'].includes(phase)&&(explicitPending.pending.size||reportingDuties.pending.size||reportingRecovery)){
++    if((['impact-repeat','gate'].includes(phase)||reportingRecovery)&&(explicitPending.pending.size||reportingDuties.pending.size||reportingRecovery)){
+       pack.reporting_owner_sessions={};pack.input_evidence??={};
+       for(const [unit,binding]of Object.entries({...explicitPending.sessions,...reportingDuties.sessions}))if(assignments[unit].some(id=>selectedOwners[id]===unit)||reportingRecovery&&unit===reportingRecovery.row.unit){
+         const other=explicitPending.sessions[unit];if(other&&binding.mode==='resume'&&other.mode==='resume')requireValue(other.session_id===binding.session_id&&other.session_home===binding.session_home,'conflicting reporting session continuations');
+@@ -2067,7 +2067,7 @@
+   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
+     `completed owner collection lacks current review: ${id}`);
+   const ownerPacks=progress.passes.map(pass=>readPack(root,run,pass,round));
+-  const reportingRecovery=phase==='impact-repeat'?loadReportingOwnerRecovery(root,run,phase,round):null;
++  const reportingRecovery=['impact-initial','impact-repeat'].includes(phase)?loadReportingOwnerRecovery(root,run,phase,round):null;
+   const reportingDuties=reportingRecoveryDuties(reportingRecovery,ownerPacks,passes,items,current,contexts.matches,{allowed:frontier});
+   requireValue(reportingDuties.pending.size===0,'completed owner collection lacks genuine fresh reporting-owner recovery reviews');
+   if(reportingRecovery){requireValue(digest(result.reporting_owner_review_obligations)===digest([...reportingDuties.obligations].sort())&&digest(result.reporting_owner_reviews)===digest(reportingDuties.coverage),'completed reporting recovery coverage changed');for(const [p,h]of Object.entries(reportingDuties.evidence))requireValue(result.evidence[p]===h,'completed reporting recovery provenance changed');}
+--- /dev/null
++++ b/tools/step5-initial-reporting-owner-recovery.test.mjs
+@@ -0,0 +1,60 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join,relative} from 'node:path';
++import {tmpdir} from 'node:os';
++import {initialize,prepareAdjudication,prepareImpact,collect,advanceImpact,verifyCompletedImpact,certify,workerLabel,digest,reviewContextHashes,readerConcernSession} from './step5-workflow.mjs';
++import {previewReportingOwnerRecovery,recordReportingOwnerRecovery,loadReportingOwnerRecovery,reportingOwnerRecoveryPath,reportingOwnerHome} from './step5-reporting-owner-recovery.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {recoverStep5Impact} from './step5-impact-recovery.mjs';
++import {MODELS} from './models.mjs';
++const run='reporting-recovery',trigger='lem-trigger',a='def-supplier-a',b='def-supplier-b',x='lem-consumer-a',y='lem-consumer-b',extra='ex-historical-use',ids=[trigger,a,b,x,y,extra],reason='The native reporting context was genuinely ephemeral and is unavailable; an explicitly new persistent native owner must fully review both assigned suppliers and all pending consumers before any current coverage.',ev={reason,uncertain:false,source_urls:[],familiar:true};
++function fixture(t,{persistent=false,abbreviated=false,interfaceConsumerOwner=false}={}){
++ const root=mkdtempSync(join(tmpdir(),'reporting-owner-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const d of ['items','research',`.autopilot/${run}`])mkdirSync(join(root,d),{recursive:true});
++ const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v));},get=p=>JSON.parse(readFileSync(join(root,p),'utf8')),text=id=>readFileSync(join(root,`items/${id}.md`),'utf8'),deps=id=>[a,b].includes(id)?[trigger]:id===x?[a]:id===y?[b]:[],kind=id=>id.startsWith('def-')?'definition':'lemma';
++ const source=id=>`---\nid: ${id}\nkind: ${kind(id)}\ntitle: ${id}\nstatus: draft\ndependency_level: ${[a,b].includes(id)?1:[x,y].includes(id)?2:0}\ndeps: ${JSON.stringify(deps(id))}\n---\n\n## ${kind(id)==='definition'?'Definition':'Statement'}\n\nOriginal interface of ${id}.\n\n${kind(id)==='definition'?'':'## Proof\n\n1.1 The original complete argument. [given] ∎\n'}`;
++ for(const id of ids)put(`items/${id}.md`,source(id));const manifest=`research/${run}-batch-1.pages.json`;put(manifest,[{id:'page',items:ids.map(id=>({id,kind:kind(id),title:id,deps:deps(id),dependency_level:[a,b].includes(id)?1:[x,y].includes(id)?2:0}))}]);put(`research/${run}-judge.jsonl`,ids.map(id=>JSON.stringify({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)})).join('\n')+'\n');initialize(root,run);put(`research/${run}-step5-v2/judge-1.json`,{verdicts:ids.map(id=>({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)}))});
++ const reports=(pack,{strict=true,pending=false,wrongSession=false,uncertain=false,newInterface=false}={})=>{for(const unit of pack.units){const assigned=pack.assignments[unit].map(v=>typeof v==='string'?v:v.id),role=pack.rejected?'alpha-adjudicate':'alpha-repair',label=workerLabel(pack.phase,pack.round,unit),rp=`research/${run}-step5-v2/${label}.json`,r={run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),decisions:pack.rejected?pack.assignments[unit].map(v=>({...v,outcome:'confirmed_nonfatal',...ev})):[],reviews:assigned.map(id=>({id,disposition:itemHashGuard(text(id))===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...ev,uncertain})),created_items:[],downstream:pending&&unit==='2'?[x,y,extra]:pack.rejected?[a,b]:[],ledger_updates:[],supporting_evidence:{}};
++  if(interfaceConsumerOwner&&pack.phase==='impact-initial'&&(unit==='1'||interfaceConsumerOwner==='conflict'&&unit==='2')){r.downstream=[x];r.downstream_uses={[x]:'The direct consumer invokes this precise repaired supplier interface in its Statement and first proof step; its owning contract quote needs the current convention.'};}
++  if(pending&&unit==='2'){r.downstream_pending=[x,y];r.downstream_uses={[x]:'The supplier interface has a real downstream use to review.',[y]:'The other supplier interface also has a real downstream use to review.',[extra]:'This is an actual original affected-use disposition, not an assigned full item review.'};}put(rp,r);const dp=`research/${run}-dispatch/${role}-${label}.result.json`;if(!strict){put(dp,{run,role,label,covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high'});continue;}
++  const base=pack.basePhase??pack.phase,options=pack.phase==='impact-initial'&&!persistent?{}:readerConcernSession(root,run,pack.phase,pack.round,unit),session=wrongSession?'wrong-owner':options.resumeSession??(pack.phase==='impact-initial'?'ephemeral-'+unit:'reestablished-'+unit),when=pack.phase==='impact-initial'?'2026-01-01T01:00:00.000Z':new Date().toISOString(),stem=dp.replace('.result.json','.attempt-1'),n={run,role,label,covers:pack.phase===base?[unit]:[`${pack.phase}:${unit}`],ok:true,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},started_at:when,ended_at:when,session_id:session,session_home:options.sessionHome??null,log:join(root,stem+'.log'),prompt:join(root,stem+'.prompt.md')};put(stem+'.prompt.md',`run: ${run}\nrole: ${role}\nlabel: ${label}\ninput_sha256: ${r.input_sha256}\noutput: ${rp}\n`);put(stem+'.log',`fixture actual output\ncodex\n${abbreviated&&pack.phase==='impact-initial'&&unit==='2'?JSON.stringify({...r,reviews:r.reviews.map(row=>({...row,reason:'A genuine shorter terminal summary.'})),repair_notes:['The terminal notes are genuinely abbreviated.']}):`Wrote [Report](${rp}): ${r.reviews.length} reviews.`}\ntokens used\n100\n`);put(stem+'.result.json',n);put(dp,n);
++ }};
++ const adjud=prepareAdjudication(root,run,'initial',1);put(`items/${trigger}.md`,text(trigger).replace('Original interface','Repaired triggering interface'));reports(adjud,{strict:false});const pack=prepareImpact(root,run,'impact-initial',1);pack.assignments=interfaceConsumerOwner?{'1':[a],'2':[b],'3':[]}:{'1':[],'2':[a,b],'3':[]};put(`research/${run}-step5-v2/impact-initial-1.json`,pack);for(const id of [a,b])put(`items/${id}.md`,text(id).replace('Original interface','Corrected supplier interface'));reports(pack,{pending:!interfaceConsumerOwner});const collection=collect(root,run,'impact-initial',1,{deferImpactClosure:true}),collectionBytes=readFileSync(join(root,`research/${run}-step5-v2/impact-initial-1-collected.json`),'utf8');
++ const dispatches={};for(const unit of pack.units){const label=workerLabel(pack.phase,1,unit);dispatches[`5.2-impact:${label}`]={stage:'5.2-impact',role:'alpha-repair',label,covers:[unit],attempt:1,lastExitOk:true,startedAt:'2026-01-01T00:59:00.000Z',endedAt:'2026-01-01T01:01:00.000Z'};}put(`.autopilot/${run}/state.json`,{run,stage:'5.2-impact',paused:true,stageRounds:{'5.2-impact':1},dispatches});put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,group:'5.2-impact',stages:['5.2-impact'],id:'real-paused-request',at:'2026-01-01T01:02:00.000Z'});
++ const observation='research/unavailable-observation.json',unavailable='research/root-unavailable.json',preparation='research/preparation.json',inputs='research/preparation-inputs.json';put(observation,{run,session_id:'ephemeral-2',matching_session_paths:[],journal_payloads_read:false});put(unavailable,{run,phase:'impact-initial',round:1,unit:'2',session_id:'ephemeral-2',session_home:null,original_context_unavailable:true,journal_payloads_read:false,matching_session_paths:[],confirmed_by:'/root',confirmed_at:'2026-01-01T01:03:00.000Z',reason,observation:{path:observation,sha256:digest(readFileSync(join(root,observation),'utf8'))}});put(preparation,{run,owner:'/root',ok:true,metadata_checked:true,native_execution_coverage:false,mathematical_review_claimed:false,selected_count:ids.length});put(inputs,{run,selected_count:ids.length,native_execution_coverage:false,mathematical_review_claimed:false,items:ids.map(id=>({id,raw_sha256:digest(text(id)),guard_sha256:itemHashGuard(text(id))})),guards:[{path:manifest,raw_sha256:digest(readFileSync(join(root,manifest),'utf8'))}]});const payload={reason,preparation_file:preparation,preparation_inputs_file:inputs,session_unavailable_evidence_file:unavailable},contexts=(root,targets)=>new Map(targets.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)}]));
++ return {root,put,get,text,pack,reports,payload,collection,collectionBytes,contexts,manifest};
++}
++
++test('initial ephemeral owner fails without opt-in, fresh full supplier+consumer review closes and later genuine session resumes',async t=>{
++ const f=fixture(t);assert.deepEqual(readerConcernSession(f.root,run,'impact-initial',1,'2'),{});
++ assert.throws(()=>advanceImpact(f.root,run,'impact-initial',1),/persistent reporting owner/);
++ const v=await previewReportingOwnerRecovery(f.root,run,'impact-initial',1,'2',f.payload);assert.equal(v.targets,4);
++ assert.equal(existsSync(reportingOwnerRecoveryPath(f.root,run,'impact-initial',1)),false);
++ await recordReportingOwnerRecovery(f.root,run,'impact-initial',1,'2',f.payload);
++ const next=advanceImpact(f.root,run,'impact-initial',1);assert.ok([a,b,x,y].every(id=>next.pack.assignments['2'].includes(id)));
++ assert.equal(next.pack.reader_owner_sessions?.['2'],undefined);
++ assert.ok(next.pack.assignments['2'].indexOf(a)<next.pack.assignments['2'].indexOf(x));
++ const options=readerConcernSession(f.root,run,next.pack.phase,1,'2');assert.deepEqual(options,{sessionHome:reportingOwnerHome(f.root,run,'impact-initial',1,'2')});
++ assert.equal(readFileSync(join(f.root,`research/${run}-step5-v2/impact-initial-1-collected.json`),'utf8'),f.collectionBytes);
++ assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:f.contexts}));
++ f.reports(next.pack);const rp=`research/${run}-step5-v2/${workerLabel(next.pack.phase,1,'2')}.json`,report=f.get(rp);report.downstream=[x];report.downstream_pending=[x];f.put(rp,report);
++ f.put(`items/${x}.md`,f.text(x).replace('original complete argument','later corrected full argument'));
++ const later=advanceImpact(f.root,run,'impact-initial',1);assert.equal(readerConcernSession(f.root,run,later.pack.phase,1,'2').resumeSession,'reestablished-2');
++ f.reports(later.pack);assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
++ const closed=verifyCompletedImpact(f.root,run,'impact-initial',1);assert.equal(closed.reporting_owner_reviews.length,4);assert.ok(closed.reporting_owner_reviews.every(r=>r.session_id==='reestablished-2'));
++});
++for(const mode of ['active','writer','phase','unit','source','manifest','origin-result','origin-report','missing-scope','available-session','old-session','new-home','reader-conflict','after-followup'])test(`initial recovery fails closed: ${mode}`,async t=>{
++ const f=fixture(t),phase='impact-initial',unit='2';
++ if(['active','writer','phase'].includes(mode)){const p=`.autopilot/${run}/state.json`,s=f.get(p);if(mode==='active')s.paused=false;if(mode==='writer')Object.values(s.dispatches)[0].endedAt=null;if(mode==='phase')s.stage='5.6-impact';f.put(p,s);}
++ if(mode==='source')f.put(`items/${a}.md`,f.text(a)+'\nChanged source.');
++ if(mode==='manifest')f.put(f.manifest,[]);
++ if(mode==='origin-result'){const p=`research/${run}-dispatch/alpha-repair-${workerLabel(phase,1,unit)}.attempt-1.result.json`,n=f.get(p);n.session_id='invented';f.put(p,n);}
++ if(mode==='origin-report'){const p=`research/${run}-step5-v2/${workerLabel(phase,1,unit)}.json`,r=f.get(p);r.downstream_pending=[];f.put(p,r);}
++ if(mode==='missing-scope'){const i=f.get(f.payload.preparation_inputs_file);i.items=i.items.filter(i=>i.id!==b);f.put(f.payload.preparation_inputs_file,i);}
++ if(mode==='available-session'){const n=f.get(f.payload.session_unavailable_evidence_file);n.matching_session_paths=['surviving-session'];f.put(f.payload.session_unavailable_evidence_file,n);}
++ if(mode==='after-followup')f.put(`research/${run}-step5-v2/impact-initial-pass-2-1.json`,{});
++ if(!['old-session','new-home','reader-conflict'].includes(mode)){await assert.rejects(()=>previewReportingOwnerRecovery(f.root,run,phase,1,mode==='unit'?'1':unit,f.payload));return;}
++ await recordReportingOwnerRecovery(f.root,run,phase,1,unit,f.payload);const next=advanceImpact(f.root,run,phase,1);
++ if(mode==='reader-conflict'){next.pack.reader_owner_sessions={'2':{result:join(f.root,`research/${run}-dispatch/alpha-repair-${workerLabel(phase,1,unit)}.result.json`),session_id:'ephemeral-2'}};f.put(`research/${run}-step5-v2/${next.pack.phase}-1.json`,next.pack);assert.throws(()=>readerConcernSession(f.root,run,next.pack.phase,1,unit),/conflicting typed/);return;}
++ f.reports(next.pack);const dp=`research/${run}-dispatch/alpha-repair-${workerLabel(next.pack.phase,1,unit)}.result.json`,n=f.get(dp);if(mode==='old-session')n.session_id='ephemeral-2';else n.session_home=join(f.root,'.autopilot',run,'step5-reader-owner-sessions','u2');f.put(dp,n);f.put(dp.replace('.result.json','.attempt-1.result.json'),n);assert.throws(()=>advanceImpact(f.root,run,phase,1));
++});
+--- /dev/null
++++ b/tools/step5-initial-reporting-owner-recovery.md
+@@ -0,0 +1,63 @@
++# Initial reporting owner context recovery
++
++`tools/step5-reporting-owner-recovery.mjs` optionally admits an unavailable initial
++reporting context at **impact-initial, round 1, lane 2**. Its ordinary repeat/lane1
++recovery remains unchanged. Default initial dispatch and reader ownership remain
++unchanged. This is a new native context, never a resume or adoption of the old
++session's reviews.
++
++Before installation, root pauses and drains the native controller at its actual
++5.2 boundary, waits for every writer, and obtains independent code review. Restart
++the controller after installing reviewed code; a running controller may retain
++cached modules. Do not change runtime counters, gates, old reports, packs,
++receipts, prompts or native attempts. Root owns current-source preparation and
++recertification. No mathematical source edits are part of this adapter.
++
++Admission requires the real paused/drained 5.2 state and owner-gate request,
++three completed successful immutable Sol6.1/high initial executions and their
++original collection, the exact reporting lane's assigned review inventory and
++nonempty native downstream_pending, null original session_home, and explicit
++root-confirmed unavailable-context evidence. Any genuine lane2 reader ownership
++conflicts rather than silently moving to a replacement context. A recovery must
++be recorded before the first followup pack/progress exists.
++
++Preparation is the existing root preparation/inputs pair: metadata_checked:true,
++ok:true, native_execution_coverage:false and mathematical_review_claimed:false,
++with the exact manifest-selected source vector, raw/guard hashes and manifest
++guards. Contexts are computed from current source by the recorder. Root's separate
++unavailable evidence contains run, phase, round, unit, actual session_id,
++session_home:null, original_context_unavailable:true, journal_payloads_read:false,
++matching_session_paths:[], confirmed_by:'/root', confirmed_at, a substantive reason,
++and observation:{path,sha256} referring to the actual read-only observation.
++Never read credentials or archive journal payloads to manufacture this evidence.
++
++At the actual hold, call `previewReportingOwnerRecovery(root,run,'impact-initial',1,
++'2',payload)` first. The payload has exactly reason, preparation_file,
++preparation_inputs_file and session_unavailable_evidence_file. Root checks the
++result against actual original assignments and all pending consumers, then calls
++`recordReportingOwnerRecovery` with the identical arguments and files. Preview
++writes nothing. The recorder archives actual state/request/current hashes and
++binds original native evidence; it grants zero coverage. It fails if current
++sources, manifests, originals, stage, pause, writer drain or first-followup state
++changed. The write-once receipt is
++`research/R-step5-v2/impact-initial-1-owner-reporting-context-recovery.json`.
++
++Ordinary native advance-impact then creates the next pack. All original lane2
++assignments (including unaffected suppliers) plus all its pending consumers must
++receive fresh full native review in supplier-first order by one new persistent
++lane2 reporter. The home is
++`.autopilot/R/step5-reporting-owner-sessions/impact-initial-r1/u2`.
++The first dispatch has no resumeSession. Later passes resume the actual collected
++new reporting session, including when that lane has an empty assignment. Old
++reviews remain historical. Full closure recomputes current contexts and verifies
++successful genuine fresh reports/attempts, session continuity and native coverage.
++Additional supplier interface changes expand consumer duties normally. Existing
++repair limits, no-progress holds, certification, judgment and final gates apply.
++
++Regression commands:
++
++```
++node --test tools/step5-initial-reporting-owner-recovery.test.mjs tools/step5-reporting-owner-recovery.test.mjs
++node --test tools/step5-impact-recovery.test.mjs tools/step5-owner-review-withdrawal.test.mjs tools/step5-certification-consumer.test.mjs
++node tools/tsx-run.mjs --test tools/autopilot/test/step5-reader-concerns.test.mts tools/autopilot/test/step5-groups.test.mts
++```
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -1094,3 +1094,15 @@
+ where needed. This includes commutative and string diagrams, Young tableaux,
+ braids, Temperley–Lieb diagrams and other types. Existing write scopes,
+ read-only roles and the requirement for proofs independent of diagrams remain.
++
++An explicitly unavailable initial native reporting context may use the bounded
++[initial reporting-owner context recovery](tools/step5-initial-reporting-owner-recovery.md)
++at the actual paused, drained 5.2 boundary, before any followup pack/progress.
++It currently admits only impact-initial round1 lane2. Immutable actual original
++native executions/collection, root-confirmed unavailable context, complete current
++manifest/source guards and the real hold/request are required. It grants no
++historical review credit: a new persistent native owner fully reviews every
++original assigned supplier and pending consumer, then later passes resume its
++genuine new reporting session. Genuine reader ownership conflicts fail closed.
++Original reports and ordinary initial dispatch defaults remain unchanged; all
++repair budgets, certification, judging and gates remain owed.

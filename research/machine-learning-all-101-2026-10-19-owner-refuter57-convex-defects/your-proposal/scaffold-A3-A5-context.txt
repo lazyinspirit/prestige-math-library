@@ -1,0 +1,76 @@
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+B. Technicalities
+We examine some additional deﬁnitions and introduce some technical lemmas.
+B.1. Additional deﬁnitions
+We make precise a few deﬁnitions and explain some of their implications.
+(A3) fi is µ-convex for µ ≥0 and satisﬁes:
+⟨∇fi(x), y −x⟩≤−
+
+fi(x) −fi(y) + µ
+2 ∥x −y∥2
+, for any i, x, y .
+Here, we allow that µ = 0 (we refer to this case as the general convex case as opposed to strongly convex). It is also
+possible to generalize all proofs here to the weaker notion of PL-strong convexity (Karimi et al., 2016).
+(A4) gi(x) := ∇fi(x; ζi) is unbiased stochastic gradient of fi with bounded variance
+Eζi[∥gi(x) −∇fi(x)∥2] ≤σ2 , for any i, x .
+Note that (A4) only bounds the variance within the same client, but not the variance across the clients.
+(A5) {fi} are β-smooth and satisfy:
+∥∇fi(x) −∇fi(y)∥≤β∥x −y∥, for any i, x, y .
+(7)
+The assumption (A5) also implies the following quadratic upper bound on fi
+fi(y) ≤fi(x) + ⟨∇f(x), y −x⟩+ β
+2 ∥y −x∥2 .
+(8)
+If additionally the function {fi} are convex and x⋆is an optimum of f, (A5) implies (via Nesterov (2018), Theorem 2.1.5)
+1
+2βN
+N
+X
+i=1
+∥∇fi(x) −∇fi(x⋆)∥2 ≤f(x) −f ⋆.
+(9)
+Further, if fi is twice-differentiable, (A5) implies that ∥∇2fi(x)∥≤β for any x.
+B.2. Some technical lemmas
+Now we cover some technical lemmas which are useful for computations later on. The two lemmas below are useful to
+unroll recursions and derive convergence rates. The ﬁrst one is a slightly improved (and simpliﬁed) version of (Stich, 2019,
+Theorem 2). It is straightforward to remove the additional logarithmic terms if we use a varying step-size (Kulunchakov &
+Mairal, 2019, Lemma 13).
+Lemma 1 (linear convergence rate). For every non-negative sequence {dr−1}r≥1 and any parameters µ > 0, ηmax ∈
+(0, 1/µ], c ≥0, R ≥
+1
+2ηmaxµ, there exists a constant step-size η ≤ηmax and weights wr := (1 −µη)1−r such that for
+WR := PR+1
+r=1 wr,
+ΨR :=
+1
+WR
+R+1
+X
+r=1
+wr
+η (1 −µη) dr−1 −wr
+η dr + cηwr
+
+= ˜O
+
+µd0 exp(−µηmaxR) +
+c
+µR
+
+.
+Proof. By substituting the value of wr, we observe that we end up with a telescoping sum and estimate
+ΨR =
+1
+ηWR
+R+1
+X
+r=1
+(wr−1dr−1 −wrdr) + cη
+WR
+R+1
+X
+r=1
+wr ≤
+d0
+ηWR
++ cη .

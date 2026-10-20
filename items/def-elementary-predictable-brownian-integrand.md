@@ -13,22 +13,23 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2.2"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-elementary-predictable-brownian-integrand.json
   audited: 2026-09-22
 ---
 
 ## Definition
 
-Assume the Axiom of Choice [[def-axiom-of-choice]], and fix a probability space
+Assume the Axiom of Choice The Axiom of Choice, and fix a probability space
 $(\Omega,\mathcal F,P)$ with a continuous-time filtration
 $(\mathcal F_t)_{t\ge0}$
-[[def-continuous-time-filtration-and-all-pairs-martingale]] and a standard
-Brownian motion $B$ [[def-brownian-motion]] on it. **Standing hypothesis
+Continuous-time filtrations and all-pairs martingales and a standard
+Brownian motion $B$ Brownian motion on it. **Standing hypothesis
 (H).** $B$ is adapted to $(\mathcal F_t)$ and for all $0\le s<t$ the increment
 $B_t-B_s$ is independent of $\mathcal F_s$ and has law $N(0,t-s)$. The raw
 natural filtration and the usual augmented natural filtration
-[[def-natural-and-usual-augmented-brownian-filtrations]] both satisfy (H) for a
+Natural and usual augmented Brownian filtrations both satisfy (H) for a
 standard Brownian motion, by
-[[thm-brownian-future-path-markov-property]]; for a general filtration, (H) is
+Future-path Markov property; for a general filtration, (H) is
 part of the data and is not automatic. Every statement in this development
 names (H) when it is used.
 
@@ -48,7 +49,7 @@ made precise below.
 The following properties are part of the definition and are used at once.
 
 1. **Predictability.** $H$ is predictable
-   [[def-progressively-measurable-and-predictable-process]]. Indeed, for a
+   Progressively measurable and predictable processes. Indeed, for a
    Borel set $\Gamma\subseteq\mathbb R$,
    $$\{H\in\Gamma\}=Z_\Gamma\cup\bigcup_{k=0}^{m-1}\bigl((t_k,t_{k+1}]\times\{\xi_k\in\Gamma\}\bigr), \qquad Z_\Gamma:=\begin{cases}\{0\}\times\Omega,&0\in\Gamma,\\\varnothing,&0\notin\Gamma,\end{cases}$$
    a finite union of generators of the predictable sigma-algebra because
@@ -82,3 +83,18 @@ conditional-expectation interface used in items 6, 7 and 13 assume it; the
 definition itself, including the predictability computation of clause 1, uses
 no choice. The countable-choice obligations inherited from that interface are declared
 as dependencies of this item.
+
+## Definition references
+
+[[def-axiom-of-choice]]
+
+[[def-continuous-time-filtration-and-all-pairs-martingale]]
+
+[[def-brownian-motion]]
+
+[[def-natural-and-usual-augmented-brownian-filtrations]]
+
+[[thm-brownian-future-path-markov-property]]
+
+[[def-progressively-measurable-and-predictable-process]]
+

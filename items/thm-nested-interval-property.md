@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-nested-interval-property.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -36,7 +37,7 @@ sources:
 ## Statement
 
 For each $k \in \mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval
-with $a_k \le b_k$ ([[def-interval]]), and suppose the family is **nested**:
+with $a_k \le b_k$ (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length), and suppose the family is **nested**:
 
 $$I_{k+1} \subseteq I_k \qquad (k \in \mathbb{N}).$$
 
@@ -47,11 +48,17 @@ Write $\ell_k = b_k - a_k \ge 0$ for the length of $I_k$. Then:
    $b = \inf\{b_k : k \in \mathbb{N}\}$, both of which exist, one has $a \le b$
    and $$\bigcap_{k \in \mathbb{N}} I_k = [a, b].$$
 2. $\displaystyle\bigcap_{k \in \mathbb{N}} I_k$ is a **single point** if and only
-   if $\ell_k \to 0$ ([[def-real-limit]]).
+   if $\ell_k \to 0$ (Limits and Cauchy sequences of reals).
 
 Every hypothesis is load bearing. Dropping closedness makes the intersection
 empty; dropping boundedness does the same; and dropping nonemptiness of the
 individual intervals is vacuously fatal.
+
+## Statement references
+
+[[def-interval]]
+
+[[def-real-limit]]
 
 ## Facts & Assumptions
 

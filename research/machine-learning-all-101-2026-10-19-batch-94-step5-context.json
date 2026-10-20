@@ -1,0 +1,169 @@
+{
+  "group": "ae",
+  "batches": [
+    "94"
+  ],
+  "pages_read": [
+    "exact-tiled-attention-and-memory-aware-differentiation",
+    "exact-tiled-attention-and-memory-aware-differentiation-examples"
+  ],
+  "items_read": [
+    "def-attention-block-summary",
+    "alg-exact-tiled-softmax-attention",
+    "thm-tiled-attention-exactness",
+    "thm-tiled-attention-workspace-and-work",
+    "rem-attention-io-model-and-roundoff",
+    "ex-tiled-attention-one-key",
+    "ex-tiled-attention-empty-first-masked-block",
+    "ex-tiled-attention-two-merge-orders",
+    "ex-tiled-attention-replay-dropout-mask"
+  ],
+  "conventions": [
+    {
+      "convention": "Dimensions n,d,v and block size b are positive integers; each fixed allowed-key set is nonempty. Empty intermediate blocks are skipped, but all-masked rows are outside the domain.",
+      "fixed_by": "alg-exact-tiled-softmax-attention",
+      "matters_for": [
+        "thm-tiled-attention-exactness",
+        "thm-tiled-attention-workspace-and-work",
+        "ex-tiled-attention-empty-first-masked-block"
+      ]
+    },
+    {
+      "convention": "An empty summary is the separate state ⊥, with no numeric maximum or normalizer; the merge formula applies to disjoint nonempty sets.",
+      "fixed_by": "def-attention-block-summary",
+      "matters_for": [
+        "alg-exact-tiled-softmax-attention",
+        "thm-tiled-attention-exactness",
+        "ex-tiled-attention-two-merge-orders"
+      ]
+    },
+    {
+      "convention": "Arithmetic is exact over the reals. Reverse differentiation holds c, the allowed-key sets, and G fixed, and uses retained normalization statistics without differentiating maximum operations.",
+      "fixed_by": "thm-tiled-attention-exactness",
+      "matters_for": [
+        "ex-tiled-attention-one-key",
+        "rem-attention-io-model-and-roundoff"
+      ]
+    },
+    {
+      "convention": "Scalar arithmetic, exponentials, comparisons, and mask membership queries have unit cost. Caller-owned mask storage is counted separately from additional workspace.",
+      "fixed_by": "thm-tiled-attention-workspace-and-work",
+      "matters_for": [
+        "rem-attention-io-model-and-roundoff"
+      ]
+    },
+    {
+      "convention": "The base algorithm has no dropout; a dropout extension must replay the same realized mask during reverse recomputation.",
+      "fixed_by": "alg-exact-tiled-softmax-attention",
+      "matters_for": [
+        "ex-tiled-attention-replay-dropout-mask",
+        "rem-attention-io-model-and-roundoff"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-tiled-attention-exactness",
+      "statement": "For positive n,d,v,b, finite real Q,K,V, real c, fixed nonempty allowed-key sets and fixed upstream G, the forward output equals the dense masked exponential weighted average, and the reverse procedure returns the Euclidean gradients of Φ(Q,K,V)=ΣᵢΣₐGᵢₐYᵢₐ with c, the allowed sets and G held fixed, including ties at row maxima.",
+      "used_by": [
+        "thm-tiled-attention-workspace-and-work",
+        "ex-tiled-attention-one-key",
+        "ex-tiled-attention-empty-first-masked-block",
+        "ex-tiled-attention-two-merge-orders"
+      ]
+    },
+    {
+      "id": "alg-exact-tiled-softmax-attention",
+      "statement": "For exact-real inputs with fixed nonempty allowed-key sets, process each query's key blocks using empty-state handling and summary merges, return Y and final row maxima and normalizers, and recompute probabilities blockwise to accumulate dQ,dK,dV for a supplied upstream G.",
+      "used_by": [
+        "thm-tiled-attention-exactness",
+        "thm-tiled-attention-workspace-and-work",
+        "rem-attention-io-model-and-roundoff",
+        "ex-tiled-attention-one-key",
+        "ex-tiled-attention-empty-first-masked-block",
+        "ex-tiled-attention-replay-dropout-mask"
+      ]
+    },
+    {
+      "id": "def-attention-block-summary",
+      "statement": "A nonempty allowed-key subset has summary (m,ℓ,z), consisting of its maximum score, shifted exponential normalizer and shifted weighted-value sum. Disjoint nonempty summaries merge by rescaling both to their common maximum; the empty set has the separate state ⊥.",
+      "used_by": [
+        "alg-exact-tiled-softmax-attention",
+        "thm-tiled-attention-exactness",
+        "thm-tiled-attention-workspace-and-work",
+        "ex-tiled-attention-two-merge-orders"
+      ]
+    },
+    {
+      "id": "thm-tiled-attention-workspace-and-work",
+      "statement": "In the stated unit-cost real-arithmetic model, each procedure uses O(n²(d+v)) operations, O(n(d+v)) stored input and output scalars and at most O(b+v) additional live scalars, without materializing an n×n score or probability array; caller-owned mask storage is counted separately.",
+      "used_by": [
+        "rem-attention-io-model-and-roundoff"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "used_for": "Exact real-arithmetic graphs, repeated parent slots, Euclidean cotangents, deterministic replay and strict-branch conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "used_for": "Exact reverse differentiation of the smooth dense attention scalarization.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Composition of score, softmax, weighted-value and scalarization derivatives.",
+      "opened": true
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "used_for": "Checking the reverse-mode supplier's initialization and accumulation over repeated parent slots.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "used_for": "Checking the reverse-mode supplier's smoothness and open-domain prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "Checking the C1 hypothesis used by the shared-parameter recurrence suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Checking the derivative convention underlying the chain rule and recurrence suppliers.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "alg-reverse-mode-automatic-differentiation",
+      "finding": "The Definition begins “Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$.” This hyperlink interrupts the complete defining procedure, contrary to the uninterrupted-definition requirement. There is no immediately following Definition references section carrying this link.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The Definition contains “([[def-euclidean-linear-map]])”, “by [[def-norm-and-normed-space]]”, and “by the displayed estimate” followed later by the linked norm supplier within the same complete definition. In particular, the first two quoted hyperlinks interrupt its mathematical formulation; the links have not been moved to an immediately following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "exact-tiled-attention-and-memory-aware-differentiation",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "Checked the page inventory and def-scaled-dot-product-attention. The consumer preserves row-softmax and nonempty masked-row semantics. Its arbitrary real scale c is explicitly defined locally; it does not attribute that generalization to the supplier's standard 1/√d scale."
+    },
+    {
+      "from": "exact-tiled-attention-and-memory-aware-differentiation",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "Checked the recurrence algorithm and shared-parameter gradient theorem. Exactness Proof 6.1 supplies an explicit finite smooth scalar-state recurrence on open Euclidean domains, with constant initial state and terminal projection, so the cited accumulation formula applies with its hypotheses preserved."
+    }
+  ]
+}

@@ -13,6 +13,7 @@ aliases: [def-abelian-group]
 landmark: true
 short: "group, abelian group"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-group.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -31,17 +32,17 @@ pipeline_run: null
 
 ## Definition
 
-A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every
-element is invertible ([[def-invertible-element]]). Written out, a group is a set
-$G$ with a binary operation $*$ ([[def-binary-operation]]) and an element
+A **group** is a monoid $(G,*,e)$ (Semigroup and monoid) in which every
+element is invertible (Left inverse, right inverse, and invertible element of a monoid). Written out, a group is a set
+$G$ with a binary operation $*$ (Binary operation on a set; associativity, commutativity, and a subset closed under the operation) and an element
 $e \in G$ such that
 
 - **(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \in G$;
 - **(G2)** $e * x = x = x * e$ for every $x \in G$;
 - **(G3)** for every $x \in G$ there is $y \in G$ with $y * x = e = x * y$.
 
-By [[lem-identity-unique]] the element $e$ of (G2) is unique, and by
-[[lem-inverse-unique]] the element $y$ of (G3) is unique for each $x$ and is
+By A left identity and a right identity for the same binary operation are equal; hence there is at most one two-sided identity the element $e$ of (G2) is unique, and by
+In a monoid, a left inverse and a right inverse of the same element are equal; hence an invertible element has exactly one inverse, and it is two-sided the element $y$ of (G3) is unique for each $x$ and is
 determined by either one of the two equations alone. So the notations $e$ for the
 identity and $x^{-1}$ for the inverse of $x$ are legitimate, and asserting
 $y * x = e$ alone already says $y = x^{-1}$.
@@ -54,6 +55,18 @@ $x * y$, with identity $e$ (or $1$) and inverse $x^{-1}$. For an abelian group i
 is often written additively, $x + y$, with identity $0$ and inverse $-x$; the two
 notations describe the same notion and nothing below depends on the choice. We
 write $G$ for the group when the operation is understood.
+
+## Definition references
+
+[[def-semigroup-and-monoid]]
+
+[[def-invertible-element]]
+
+[[def-binary-operation]]
+
+[[lem-identity-unique]]
+
+[[lem-inverse-unique]]
 
 ## Remarks
 

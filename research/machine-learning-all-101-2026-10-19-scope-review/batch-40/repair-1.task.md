@@ -1,0 +1,15 @@
+# Batch 40: repair 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 40
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: stochastic-gradient-descent-for-learning, stochastic-gradient-descent-for-learning-examples
+Items: lem-sgd-trajectory-integrability, lem-independent-finite-random-index-extension, alg-stochastic-gradient-descent, alg-minibatch-stochastic-gradient-descent, thm-stochastic-direction-expected-average-stationarity, thm-nonconvex-sgd-random-iterate-stationarity, ex-constant-step-sgd-noise-floor, ex-empirical-risk-sgd-oracle-is-unbiased, ex-sgd-biased-direction-violates-alignment
+Consolidated findings: [{"id":"alg-stochastic-gradient-descent","type":"local","reason":"Make the finite requested horizon an explicit input and specify the loop bounds and returned trajectory indices; “each requested iteration” leaves the request and finite output length implicit."},{"id":"alg-minibatch-stochastic-gradient-descent","type":"local","reason":"Make the finite requested horizon and loop/output indices explicit, and specify that batch size b is an integer at least 1."},{"id":"thm-nonconvex-sgd-random-iterate-stationarity","type":"local","reason":"The complete Statement contains an inline wikilink. Replace it there with plain wording and move the link to an immediately following “Statement references” section."}]
+Authorized source files: ["items/lem-sgd-trajectory-integrability.md","items/lem-independent-finite-random-index-extension.md","items/alg-stochastic-gradient-descent.md","items/alg-minibatch-stochastic-gradient-descent.md","items/thm-stochastic-direction-expected-average-stationarity.md","items/thm-nonconvex-sgd-random-iterate-stationarity.md","items/ex-constant-step-sgd-noise-floor.md","items/ex-empirical-risk-sgd-oracle-is-unbiased.md","items/ex-sgd-biased-direction-violates-alignment.md","library/machine-learning/stochastic-gradient-descent-for-learning.md","library/machine-learning/stochastic-gradient-descent-for-learning-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

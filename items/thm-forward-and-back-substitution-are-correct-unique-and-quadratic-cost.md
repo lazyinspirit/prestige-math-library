@@ -11,7 +11,7 @@ deps: [def-forward-and-back-substitution-for-triangular-systems]
 aliases: []
 proof_strategy: direct
 verification:
-  repair: research/numerical-optimization-dynamics-2026-10-16-ROOT-step3-published-reader50/thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost/application/repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost.json
 sources:
   scraped: []
   references:
@@ -27,7 +27,7 @@ Let $F$ be a field, let $n\ge 1$, and let $b\in F^n$.
 
 1. If $L\in M_n(F)$ is lower triangular with nonzero diagonal, the forward
    substitution recursion of
-   [[def-forward-and-back-substitution-for-triangular-systems]] produces the
+   Forward and backward substitution for triangular linear systems produces the
    unique solution of $Lx=b$.
 2. If $U\in M_n(F)$ is upper triangular with nonzero diagonal, the backward
    substitution recursion produces the unique solution of $Ux=b$.
@@ -35,6 +35,10 @@ Let $F$ be a field, let $n\ge 1$, and let $b\in F^n$.
 Each solve uses exactly $n$ divisions,
 $\frac{n(n-1)}{2}$ multiplications, and $\frac{n(n-1)}{2}$ additions or
 subtractions, hence $O(n^2)$ scalar operations.
+
+## Statement references
+
+[[def-forward-and-back-substitution-for-triangular-systems]]
 
 ## Facts & Assumptions
 

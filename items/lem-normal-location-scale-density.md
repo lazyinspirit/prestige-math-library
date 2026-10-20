@@ -20,6 +20,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-normal-location-scale-density.json
   judge:
     model: "gpt-6-luna"
     verdict: pass
@@ -37,8 +38,12 @@ sources:
 ## Statement
 
 Assume AC. For $m\in\mathbb R$ and $\sigma>0$, the normal law $N(m,\sigma^2)$
-of [[def-standard-normal-and-normal-laws]] has Lebesgue density
+of Standard normal and normal laws has Lebesgue density
 $$g_{m,\sigma}(y)=\frac1\sigma\frac{e^{-((y-m)/\sigma)^2/2}}{\sqrt{2\pi}}=\frac1{\sqrt{2\pi\sigma^2}}e^{-(y-m)^2/(2\sigma^2)}.$$
+
+## Statement references
+
+[[def-standard-normal-and-normal-laws]]
 
 ## Facts & Assumptions
 

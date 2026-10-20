@@ -1,0 +1,10 @@
+---
+page: predictive-calibration-and-uncertainty-under-shift-examples
+title: "Predictive calibration and uncertainty under shift — Examples"
+status: draft
+items: []
+examples:
+  - ex-calibration-degradation-under-shift
+requires:
+  - predictive-calibration-and-uncertainty-under-shift
+---

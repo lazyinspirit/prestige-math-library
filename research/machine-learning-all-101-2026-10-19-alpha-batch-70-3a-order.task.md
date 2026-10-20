@@ -1,0 +1,21 @@
+# Step 3a item order: adjudicator batch-70, run machine-learning-all-101-2026-10-19
+
+Assigned batches: 70. Read briefs/tasks/alpha-3a-adjudicate.md first.
+
+Adjudicate and complete each routed item from lowest dependency level to highest within the dispatched batches. Finish all obligations and the risk review for an item before moving to a higher level. The scope files plus authenticated foreign-refuter registry determine exact decisions; this list enumerates those obligations.
+
+Required foreign native refuter obligations (additional mandatory ordinary gate decisions; preserve original finding, independently review current proof and exact repair evidence; unbound historical source, no inherited acceptance):
+
+- none
+
+Items in order:
+
+- level 1: batch 70, def-symmetric-image-text-contrastive-loss — risk review
+
+- level 3: batch 70, ex-prompt-and-distribution-sensitive-transfer — touched, risk review
+
+Other routed obligations (pages and published dependencies; review them as required by the scope):
+
+- 70:def-real-exponential-function-and-e (reader:70:1)
+
+- 70:def-natural-logarithm (reader:70:2)

@@ -1,0 +1,613 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-backpropagation-through-shared-parameter-recurrence",
+    "thm-shared-parameter-backpropagation-gradient-formula",
+    "ex-checkpointed-reverse-sweep-recomputes-intermediate",
+    "ex-relu-kink-does-not-have-classical-ad-gradient",
+    "ex-shared-weight-neural-backpropagation"
+  ],
+  "contracts": {
+    "alg-backpropagation-through-shared-parameter-recurrence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition expressly admits a recurrence with no transitions. Its reverse loop is then empty, but terminal initialization still gives the direct loss derivative and the final update still adds the pullback through the initial-state map. Thus the returned gradient is for the loss composed with that initial state; the algorithm does not lose this term merely because there are no recurrent steps."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and contains no proof or verification steps."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and contains no proof or verification steps."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and contains no proof or verification steps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and contains no proof or verification steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite procedure invokes no choice principle and has no proof steps."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Reviewed complete Definition, diagram and all four direct suppliers. For p,q>=1, A_t is q by p, B_t is q by q and lambda_t is q by 1; each contribution to g is p by 1. The reverse loop uses each cotangent before propagating it. The final initial-state pullback and direct loss term remain when T=0. Open domains, exact derivatives, strict-branch failure and DOMAIN_ERROR conventions match the graph and reverse-mode suppliers. Forward diagram arrows correctly join theta to the initial state, displayed transitions and loss; the ellipsis is schematic. No AC or floating-point accuracy assertion. Reader/refuter have no findings. No defect or edit required."
+      }
+    },
+    "thm-shared-parameter-backpropagation-gradient-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Give input coordinate $i$ a label $\\mathrm{in}_i$ distinct from all operation indices, and set $z_{\\mathrm{in}_i}=x_i$ and $E_{\\mathrm{in}_i}=\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot is either an input label $\\mathrm{in}_i$ or an operation index $\\ell<j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-backpropagation-through-shared-parameter-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, let $T\\ge0$ be an integer, and fix $\\theta\\in\\Theta$. A map is continuously differentiable here when it is totally differentiable at every point of its open domain and its derivative matrix varies continuously there. A finite shared-parameter recurrence consists of an initial-state map $h_0:\\Theta\\to H$, transition maps $\\Phi_t:\\Theta\\times H\\to H$ for $t=1,\\ldots,T$, and a scalar loss $\\ell:\\Theta\\times H\\to\\mathbb R$, all continuously differentiable on open domains containing the evaluated inputs. Put $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. A fixed collection of external inputs, such as the observations at successive time steps, may be built into the maps $\\Phi_t$. The same parameter vector $\\theta$ is supplied to every transition.\n\nFor each map, its registered local derivative is the total derivative with respect to the indicated variable while the other displayed variables are held fixed. Transposes are Euclidean adjoints for the stated coordinate inner products. Evaluate and store $h_0,h_1,\\ldots,h_T$. If a map is undefined, return DOMAIN_ERROR. For piecewise-$C^1$ maps, use only the derivative on a unique strict active branch; if any evaluated input lies on a branch boundary or has ambiguous branch selection, return NONDIFFERENTIABLE and no gradient.\n\nInitialize $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and $g=(D_\\theta\\ell(\\theta,h_T))^T$. For $t=T,T-1,\\ldots,1$, set $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$, $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, then update\n\n$$g\\leftarrow g+A_t^T\\lambda_t,\\qquad \\lambda_{t-1}=B_t^T\\lambda_t.$$\n\nAfter the reverse sweep, set $g\\leftarrow g+(Dh_0(\\theta))^T\\lambda_0$ and return $(J(\\theta),g)$. For $T=0$, the reverse loop is empty and the same initialization and final update apply. All derivative calculations in this procedure are real-arithmetic operations on the specified maps; no floating-point accuracy guarantee is asserted.\n\nThe diagram shows the finite unrolling: arrows point from an input value to the operation that uses it. The single $\\theta$ node feeds each transition and the loss, so the reverse updates add all of those contributions into the same accumulator $g$; the $h_t$ cotangents flow from right to left. The diagram illustrates the algorithm, and no correctness proof relies on it.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.55cm]\n  \\node[draw,circle] (theta) {$\\theta$};\n  \\node[draw,rectangle,right of=theta,xshift=0.4cm] (h0) {$h_0(\\theta)$};\n  \\node[draw,rectangle,right of=h0,xshift=0.65cm] (phi1) {$\\Phi_1$};\n  \\node[draw,rectangle,right of=phi1,xshift=0.65cm] (h1) {$h_1$};\n  \\node[draw,rectangle,right of=h1,xshift=0.65cm] (phi2) {$\\Phi_2$};\n  \\node[right of=phi2,xshift=0.35cm] (dots) {$\\cdots$};\n  \\node[draw,rectangle,right of=dots,xshift=0.35cm] (phit) {$\\Phi_T$};\n  \\node[draw,rectangle,right of=phit,xshift=0.65cm] (ht) {$h_T$};\n  \\node[draw,rectangle,right of=ht,xshift=0.65cm] (loss) {$\\ell(\\theta,h_T)$};\n  \\draw[->] (theta) -- (h0);\n  \\draw[->] (h0) -- (phi1);\n  \\draw[->] (theta) to[bend left=30] (phi1);\n  \\draw[->] (phi1) -- (h1);\n  \\draw[->] (h1) -- (phi2);\n  \\draw[->] (theta) to[bend left=42] (phi2);\n  \\draw[->] (phi2) -- (dots);\n  \\draw[->] (dots) -- (phit);\n  \\draw[->] (theta) to[bend left=55] (phit);\n  \\draw[->] (phit) -- (ht);\n  \\draw[->] (ht) -- (loss);\n  \\draw[->] (theta) to[bend left=68] (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unroll",
+          "claim": "Since $T$ is finite, the initial map, $T$ transition evaluations, and scalar loss form a finite program whose one parameter input $\\theta$ is used at each transition and at the loss. Each map is $C^1$ on an open domain containing the trajectory, so repeated application of [F4] makes $J$ differentiable there; on a fixed strict branch the same conclusion holds branchwise.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "reverse-correctness",
+          "claim": "The algorithm's primal pass evaluates this unrolled program. Its reverse pass seeds the loss, visits transitions in descending order, and sends each transition's parameter pullback to the same $\\theta$ input while sending its state pullback to $h_{t-1}$; the initial-state pullback is then added at $\\theta$. This is the reverse sweep on the finite graph in [F1], so [F3] gives the exact gradient of $J$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "adjoint-recurrence",
+          "claim": "The terminal state's cotangent is $\\lambda_T=(D_h\\ell)^T$. At transition $t$, the chain rule gives the cotangent at $h_{t-1}$ as $B_t^T\\lambda_t$ and adds $A_t^T\\lambda_t$ to the derivative with respect to the shared parameter while $h_{t-1}$ is held fixed. Descending induction therefore gives the stated $\\lambda_{t-1}$ recurrence and sums one parameter contribution for each of the $T$ transition uses.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "formula-and-zero-horizon",
+          "claim": "The loss's direct dependence on $\\theta$ contributes $(D_\\theta\\ell)^T$, and the dependence of $h_0(\\theta)$ contributes $(Dh_0)^T\\lambda_0$. Adding these to the $T$ transition contributions from step 2.2 gives the displayed formula. If $T=0$, there are no transition terms and the same chain rule reduces $J(\\theta)=\\ell(\\theta,h_0(\\theta))$ to the two remaining terms. This is exactly the algorithm's return value and gradient.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 treats T=0; the transition sum is empty and the formula reduces to the chain rule for the loss composed with h0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows every theta in the open parameter set, including theta=0 when it belongs to Theta; the formula contains no division by theta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 give one transition contribution when T=1, with lambda0=B1^T lambda1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits constant maps and zero derivatives; the formula then has zero transition and initial-state pullbacks wherever those derivatives vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is pointwise on open domains and asserts nothing at domain or branch endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite unrolling and finite-dimensional chain rules only; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a gradient formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a gradient formula, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Reviewed Statement, all four proof steps, four cited suppliers and their relevant proofs. The finite unrolling may group the p scalar parameter coordinates into the theta vector; the graph permits vector operation outputs and slotwise accumulation. Each C^1 map is defined on an open neighborhood of the trajectory, so finite composition is differentiable locally; the same holds after restricting to the finitely many strict active branches. Reverse-mode path-sum proof 2.1-3.1 adds every shared use. Dimensions and transposes agree: state pullback B_t^T lambda_t, parameter pullback A_t^T lambda_t, direct loss and initial-map pullbacks. Descending induction supplies exactly the stated sum; T=0 reduces to the chain rule for ell(theta,h_0(theta)). No claim at a branch boundary or AC use. Reader/refuter have no findings. No defect or edit required."
+      }
+    },
+    "ex-checkpointed-reverse-sweep-recomputes-intermediate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-checkpointed-reverse-schedules",
+          "source_section": "Definition",
+          "quote": "The input is a finite sequence of deterministic $C^1$ transitions $F_j:U_j\\subseteq E_{j-1}\\to E_j$, $j=1,\\ldots,T$, between compatible finite-dimensional Euclidean spaces with open domains, a starting state $x_0\\in E_0$, and a terminal cotangent $\\bar x_T\\in E_T$. Every transition is evaluated on one fixed strict branch and has its exact local reverse rule. For $T\\ge1$, require the last transition's output space to be $E_T=\\mathbb R$; when that scalar output is the objective, take $\\bar x_T=1$. For $T=0$, the terminal value is $x_0$ and its matching cotangent $\\bar x_0$ is supplied. A transition tape stores the local values needed by its exact reverse rule. A deterministic replay applies the same transition maps, in the same order, to the identical checkpoint state and therefore reproduces the same values and local derivative inputs. The procedure returns the terminal value and cotangent at $x_0$; an invalid domain evaluation returns DOMAIN_ERROR, and a branch boundary returns NONDIFFERENTIABLE. A checkpoint schedule is permitted only when its saved states and all deterministic replays lie in these declared domains.\n\n**Uniform-block mode.** For $T=0$, return $x_0$ and the supplied cotangent without work. For $T\\ge1$, require an integer slot budget $m\\ge1$, set $q=\\lceil T/m\\rceil$, and during one forward pass save $x_{jq}$ for $j=0,\\ldots,\\lceil T/q\\rceil-1$ (all indices are below $T$). This uses at most $m$ saved states. Partition the steps into blocks $[a,b]$ with $a=jq$ and $b=\\min(a+q,T)$. Process the blocks from last to first. Within one block, for $\\ell=b,b-1,\\ldots,a+1$, restore $x_a$, replay $F_{a+1},\\ldots,F_{\\ell-1}$ without recording, evaluate $F_\\ell$ once while recording its local tape, apply its reverse rule to the current cotangent, and discard the one-step tape and replay workspace. Retain only the checkpoint states, the live state/cotangent, and the ordinary one-step reverse tape. Do not infer any optimality property of this schedule.\n\n**Binomial mode.** Define $C(d,0)=C(0,t)=1$, and $C(d,t)=C(d-1,t)+C(d,t-1)$ for integers $d,t\\ge1$. The top-level call takes nonnegative integer budgets $d,t$ satisfying $T\\le C(d,t)$. For $T=0$, return $(x_0,\\bar x_0)$. For $T\\ge1$, allocate one scalar output register $y$. The recursive procedure REVERSE$(a,N,d,t,x_a,\\bar x_{a+N})$ consumes its starting state as the live primal state and its terminal cotangent as the mutable cotangent buffer; it returns only the cotangent at $x_a$, retaining no terminal primal state. It requires integer indices $0\\le a\\le a+N\\le T$, nonnegative integer budgets $d,t$, and $N\\le C(d,t)$. If $N=0$, return the unchanged cotangent. If $N=1$, evaluate and record the unique transition, copy its scalar output to $y$ if $a+1=T$, apply its local reverse rule, discard the tape and primal state, and return the input cotangent. If $N\\ge2$, then $d,t\\ge1$. Put $L=\\min(N-1,C(d,t-1))$, $R=N-L$. Save $x_a$ in one checkpoint slot and replay the first $L$ transitions into the live state $x_{a+L}$ without recording. Call REVERSE$(a+L,R,d-1,t,x_{a+L},\\bar x_{a+N})$ on the right block, keeping the saved $x_a$ but no other primal state in the caller. Move the saved $x_a$ back into the live state, release its checkpoint slot, and tail-call REVERSE$(a,L,d,t-1,x_a,\\bar x_{a+L})$, using the cotangent returned by the right child. Return this left child's cotangent. No call frame retains a primal vector outside the explicit checkpoint slots. Invoke this procedure at $a=0,N=T$ and return $y$ with its returned initial cotangent. A recursive call with $N>1$ and $d=0$ or $t=0$ is a schedule failure; the capacity condition makes that branch unreachable.\n\nThe parameter $d$ bounds the number of simultaneously saved state snapshots. The parameter $t$ bounds, for each transition, the number of additional unrecorded forward evaluations beyond its one recorded evaluation. Both are finite integer inputs. This mode provides no numerical error estimate or optimality guarantee for arbitrary nonuniform primitive costs. For the storage count in the paired theorem, $R_s$ bounds scalar storage for one full primal state. The binomial recursion may reuse one mutable cotangent workspace: each call consumes its terminal cotangent and returns the cotangent at its start, reusing the same buffer through both children. Let $G$ bound the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, the scalar output register, and the scalar call-frame records; it excludes the $d$ saved primal states and one live primal state.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds",
+          "source_section": "Statement",
+          "quote": "For the finite-dimensional $C^1$ transition sequences on a fixed strict branch defined in [[alg-checkpointed-reverse-schedules]], provided every schedule replay remains in the declared domains, both schedules return the same terminal value and initial-state cotangent as an uncheckpointed reverse sweep. In uniform-block mode, if $T,m\\ge1$, $q=\\lceil T/m\\rceil$, and the block lengths are $r_1,\\ldots,r_s$, excluding the initial forward pass used to save checkpoints, the number of additional unrecorded forward evaluations is exactly $\\sum_{\\ell=1}^s r_\\ell(r_\\ell-1)/2$, at most $m q(q-1)/2$. At most $m$ checkpoint states are saved, with one live replay state and one local step tape. In binomial mode, $C(d,t)=\\binom{d+t}{d}$; any $T\\le C(d,t)$ steps can be reversed with at most $d$ saved snapshots, one recorded forward evaluation and one reverse evaluation per step, at most $t$ additional unrecorded forward evaluations per step, total work at most $\\widehat W+\\overline W+tW$, and storage $G+(d+1)R_s$. Here $W$ is the total cost of one unrecorded full forward pass, $\\widehat W$ the sum of recorded one-step forward costs, $\\overline W$ the sum of local reverse costs, $R_s$ bounds scalar storage for one primal state, and $G$ bounds the largest one-step tape and local reverse scratch, the constant number of live cotangent/work vectors, the scalar output register, and scalar recursion-frame records, excluding saved states and one live primal state.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fr\u00e9chet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fr\u00e9chet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fr\u00e9chet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fr\u00e9chet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fr\u00e9chet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fr\u00e9chet differentiable at $f(x)$, then\n   $g \\circ f$ is Fr\u00e9chet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a\\in U$, then some $C,\\delta>0$ satisfy $\\|f(a+h)-f(a)\\|_2\\le C\\|h\\|_2$ whenever $\\|h\\|_2<\\delta$ and $a+h\\in U$. In particular $f$ is continuous at $a$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "checkpoint-layout",
+          "claim": "Here $q=\\lceil T/m\\rceil=2$, so the uniform-block schedule stores only $x_0=x$ and has one block $[0,2]$. In the reverse pass it first restores $x_0$ and replays $F_1$, obtaining $x_1=x^2$ before recording the local tape for $F_2$; it then restores $x_0$ again to process $F_1$. Both transitions are defined on all of $\\mathbb R$, so every replay stays in its declared domain.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-pullbacks",
+          "claim": "Starting with output cotangent $\\bar x_2=1$, the local derivative of $F_2$ gives $\\bar x_1=\\cos(x^2)$ by [F5], and the local derivative of $F_1$ gives $\\bar x_0=2x\\cos(x^2)$ by [F4]. This includes $x=0$, where the derivative is $0$, and $x=1$, where it is $2\\cos(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "equal-gradient",
+          "claim": "The deterministic replay preserves the local inputs and reverse rules, so [F2] identifies the returned cotangent with the uncheckpointed derivative; [F3] gives $f'(x)=F_2'(F_1(x))F_1'(x)=\\cos(x^2)\\,2x$, the same value. The example shows a recomputation trade-off and asserts no schedule optimality.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-transition computation and does not include the T=0 schedule."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 substitutes x=0 and obtains the zero initial cotangent."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 substitutes x=1 and obtains 2 cos(1); the schedule itself still has the stated two transitions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 checks x=0, where F1'(0)=0 and the reverse cotangent is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both transitions are defined on all of the open domain R, so there are no domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses a fixed finite two-step schedule and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an explicit derivative and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies an explicit derivative and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Reviewed all three Verification steps and all seven direct suppliers. The uniform-block definition and preservation proof 1.1-1.2 give q=2 and sole checkpoint x_0 for T=2,m=1: restore x_0, replay F_1, record/reverse F_2, then restore x_0 and record/reverse F_1. All replays remain in R. The bounded-bilinear product rule yields 2x; the sine and cosine derivative theorem and differentiability-implies-continuity justify C^1 regularity. Cotangents cos(x^2) and 2x cos(x^2) match the total chain rule, including x=0 and x=1. No schedule optimality, AC, numerical-error or diagram claim. Reader/refuter have no findings. No defect or edit required."
+      }
+    },
+    "ex-relu-kink-does-not-have-classical-ad-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Give input coordinate $i$ a label $\\mathrm{in}_i$ distinct from all operation indices, and set $z_{\\mathrm{in}_i}=x_i$ and $E_{\\mathrm{in}_i}=\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot is either an input label $\\mathrm{in}_i$ or an operation index $\\ell<j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-backpropagation-through-shared-parameter-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, let $T\\ge0$ be an integer, and fix $\\theta\\in\\Theta$. A map is continuously differentiable here when it is totally differentiable at every point of its open domain and its derivative matrix varies continuously there. A finite shared-parameter recurrence consists of an initial-state map $h_0:\\Theta\\to H$, transition maps $\\Phi_t:\\Theta\\times H\\to H$ for $t=1,\\ldots,T$, and a scalar loss $\\ell:\\Theta\\times H\\to\\mathbb R$, all continuously differentiable on open domains containing the evaluated inputs. Put $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. A fixed collection of external inputs, such as the observations at successive time steps, may be built into the maps $\\Phi_t$. The same parameter vector $\\theta$ is supplied to every transition.\n\nFor each map, its registered local derivative is the total derivative with respect to the indicated variable while the other displayed variables are held fixed. Transposes are Euclidean adjoints for the stated coordinate inner products. Evaluate and store $h_0,h_1,\\ldots,h_T$. If a map is undefined, return DOMAIN_ERROR. For piecewise-$C^1$ maps, use only the derivative on a unique strict active branch; if any evaluated input lies on a branch boundary or has ambiguous branch selection, return NONDIFFERENTIABLE and no gradient.\n\nInitialize $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and $g=(D_\\theta\\ell(\\theta,h_T))^T$. For $t=T,T-1,\\ldots,1$, set $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$, $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, then update\n\n$$g\\leftarrow g+A_t^T\\lambda_t,\\qquad \\lambda_{t-1}=B_t^T\\lambda_t.$$\n\nAfter the reverse sweep, set $g\\leftarrow g+(Dh_0(\\theta))^T\\lambda_0$ and return $(J(\\theta),g)$. For $T=0$, the reverse loop is empty and the same initialization and final update apply. All derivative calculations in this procedure are real-arithmetic operations on the specified maps; no floating-point accuracy guarantee is asserted.\n\nThe diagram shows the finite unrolling: arrows point from an input value to the operation that uses it. The single $\\theta$ node feeds each transition and the loss, so the reverse updates add all of those contributions into the same accumulator $g$; the $h_t$ cotangents flow from right to left. The diagram illustrates the algorithm, and no correctness proof relies on it.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.55cm]\n  \\node[draw,circle] (theta) {$\\theta$};\n  \\node[draw,rectangle,right of=theta,xshift=0.4cm] (h0) {$h_0(\\theta)$};\n  \\node[draw,rectangle,right of=h0,xshift=0.65cm] (phi1) {$\\Phi_1$};\n  \\node[draw,rectangle,right of=phi1,xshift=0.65cm] (h1) {$h_1$};\n  \\node[draw,rectangle,right of=h1,xshift=0.65cm] (phi2) {$\\Phi_2$};\n  \\node[right of=phi2,xshift=0.35cm] (dots) {$\\cdots$};\n  \\node[draw,rectangle,right of=dots,xshift=0.35cm] (phit) {$\\Phi_T$};\n  \\node[draw,rectangle,right of=phit,xshift=0.65cm] (ht) {$h_T$};\n  \\node[draw,rectangle,right of=ht,xshift=0.65cm] (loss) {$\\ell(\\theta,h_T)$};\n  \\draw[->] (theta) -- (h0);\n  \\draw[->] (h0) -- (phi1);\n  \\draw[->] (theta) to[bend left=30] (phi1);\n  \\draw[->] (phi1) -- (h1);\n  \\draw[->] (h1) -- (phi2);\n  \\draw[->] (theta) to[bend left=42] (phi2);\n  \\draw[->] (phi2) -- (dots);\n  \\draw[->] (dots) -- (phit);\n  \\draw[->] (theta) to[bend left=55] (phit);\n  \\draw[->] (phit) -- (ht);\n  \\draw[->] (ht) -- (loss);\n  \\draw[->] (theta) to[bend left=68] (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-forward-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction $v\\in\\mathbb R^n$. Require every primitive to be $C^1$ on its declared open domain or supplied as a piecewise-$C^1$ primitive with the branch rules of the graph definition. Evaluate all primal node values in topological order and store the tape. Set each input tangent to $\\dot z_{\\mathrm{in}_i}=\\dot x_i=v_i$, using the distinct input labels of the graph. For each operation $j=1,\\ldots,T$, compute\n$$\\dot z_j=D\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})(\\dot z_{p_{j,1}},\\ldots,\\dot z_{p_{j,r_j}}).$$\nReturn the primal scalar output $f(x)$ and its tangent: return $(z_o,\\dot z_o)$ if $o$ is an operation node, and $(x_i,v_i)$ if $o$ is input coordinate $i$. If the input is outside the admissible domain, return DOMAIN_ERROR; if a piecewise primitive is at a branch boundary or has no unique strict active branch, return NONDIFFERENTIABLE and no tangent. All derivative evaluations in this definition are exact real-arithmetic operations on the specified primitive maps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reverse-mode-automatic-differentiation",
+          "source_section": "Definition",
+          "quote": "Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$. Require every primitive to be $C^1$ on its declared open domain or supplied as a piecewise-$C^1$ primitive with the branch rules of the graph definition. Evaluate and store all primal values in topological order. Initialize every operation cotangent and every input cotangent to zero. Seed the scalar output by setting its cotangent to $1$: if $o$ is an operation, set $\\bar z_o=1$; if $o$ is input coordinate $i$, set $\\bar x_i=1$. For $j=T,T-1,\\ldots,1$, and for every parent slot $k=1,\\ldots,r_j$, compute the contribution\n$$c_{j,k}=D_k\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})^T\\bar z_j$$\nand add it to the cotangent accumulator of that parent: use $\\bar x_i$ if the parent is input coordinate $i$, and $\\bar z_\\ell$ if it is operation node $\\ell$. If the same parent node occurs in multiple slots, add every slot contribution. Return the scalar output $f(x)$ and the input cotangents $(\\bar x_1,\\ldots,\\bar x_n)$ as the Euclidean gradient. A point outside the admissible domain returns DOMAIN_ERROR; a branch boundary or ambiguous active branch returns NONDIFFERENTIABLE and no gradient. The procedure differentiates the real-arithmetic graph; it makes no floating-point error claim.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "one-sided-quotients",
+          "claim": "Since $J(0)=0$, for every $h<0$ the difference quotient $(J(h)-J(0))/h$ equals $0$, while for every $h>0$ it equals $1$. The two one-sided limits differ, so $J$ is not differentiable at $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "branch-boundary",
+          "claim": "The executed ReLU primitive receives $h_0=0$, the boundary between its $u<0$ and $u>0$ branches. By [F1] this input has no selected strict branch.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "forward-and-recurrence-status",
+          "claim": "At that boundary, the recurrence procedure in [F2] and the forward procedure in [F3] both return NONDIFFERENTIABLE and no derivative value.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "reverse-status",
+          "claim": "The reverse procedure in [F4] also returns NONDIFFERENTIABLE and no gradient at this boundary.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "no-convention",
+          "claim": "This boundary status agrees with step 1.1: there is no classical derivative for these procedures to propagate, and their specified output does not invent one.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one scalar transition and does not assert an empty-graph result."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.2 are specifically evaluated at theta=0, the ReLU switch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is a one-transition graph with one scalar output; steps 1.2\u20132.2 check its boundary status."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.2 give the degenerate kink case where the two one-sided slopes differ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 identifies theta=0 as the endpoint between the two open branch regions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The one-node calculation is finite and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to differentiability, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a counterexample to differentiability, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Reviewed Example, all five Verification steps, and all four cited Definitions. For every h<0 the difference quotient at zero is 0 and for every h>0 it is 1, so the classical derivative does not exist. The primal value r(0)=0 is specified, making this an admissible primal boundary rather than an undefined-domain case. It belongs to neither strict open branch. Forward, reverse and recurrence procedures explicitly return NONDIFFERENTIABLE and no derivative at that boundary. This does not invoke the smooth correctness theorem at a nonsmooth point, nor select a subgradient. No AC, iff, or diagram obligation. Reader/refuter have no findings. No defect or edit required."
+      }
+    },
+    "ex-shared-weight-neural-backpropagation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-feedforward-neural-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A finite feedforward computation graph from $\\mathbb R^d$ to $\\mathbb R^r$ consists of a finite directed graph $(V,E)$ with no directed cycle; pairwise disjoint input, hidden, and output vertex sets $I,H,O$ whose union is $V$; exactly $d$ input vertices and $r$ output vertices; and a specified ordering of $V$ in which the tail of every directed edge precedes its head. The input vertices are labelled bijectively by the coordinates $1,\\ldots,d$, and input vertex $i$ has value $x_i$ for $x\\in\\mathbb R^d$. Each non-input vertex $v$ has a real bias $b_v$, a real weight $w_{uv}$ for every edge $u\\to v$, and a real activation function $\\rho_v$. In the specified order, its value is\n\n$$z_v=\\rho_v\\!\\left(b_v+\\sum_{u:\\,u\\to v}w_{uv}z_u\\right).$$\n\nThe network output is the vector of values at $O$. A layered multilayer perceptron is the specialization with layers $V_0,\\ldots,V_L$, where $V_0=I$, $V_L=O$, and every edge goes from $V_{\\ell-1}$ to $V_\\ell$ for some $\\ell$; the hidden vertices use a shared activation and the output vertices use the identity activation. A fully connected layered perceptron includes every edge between consecutive layers. The fixed ordering makes the recursive evaluation unambiguous and is part of the graph data.\n\nThe diagram shows the edge direction and evaluation convention for a fully connected scalar-output perceptron with one hidden layer. Each circle is one scalar-valued node; the hidden nodes apply $\\sigma$ and the output node is linear. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.5cm]\n  \\node[draw,circle] (x1) {$x_1$};\n  \\node[draw,circle,below of=x1] (x2) {$x_2$};\n  \\node[draw,circle,right of=x1,yshift=-0.35cm] (h1) {$\\sigma$};\n  \\node[draw,circle,below of=h1] (h2) {$\\sigma$};\n  \\node[draw,circle,right of=h1,yshift=-0.35cm] (y) {$y$};\n  \\draw[->] (x1) -- (h1);\n  \\draw[->] (x1) -- (h2);\n  \\draw[->] (x2) -- (h1);\n  \\draw[->] (x2) -- (h2);\n  \\draw[->] (h1) -- (y);\n  \\draw[->] (h2) -- (y);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-backpropagation-through-shared-parameter-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, let $T\\ge0$ be an integer, and fix $\\theta\\in\\Theta$. A map is continuously differentiable here when it is totally differentiable at every point of its open domain and its derivative matrix varies continuously there. A finite shared-parameter recurrence consists of an initial-state map $h_0:\\Theta\\to H$, transition maps $\\Phi_t:\\Theta\\times H\\to H$ for $t=1,\\ldots,T$, and a scalar loss $\\ell:\\Theta\\times H\\to\\mathbb R$, all continuously differentiable on open domains containing the evaluated inputs. Put $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. A fixed collection of external inputs, such as the observations at successive time steps, may be built into the maps $\\Phi_t$. The same parameter vector $\\theta$ is supplied to every transition.\n\nFor each map, its registered local derivative is the total derivative with respect to the indicated variable while the other displayed variables are held fixed. Transposes are Euclidean adjoints for the stated coordinate inner products. Evaluate and store $h_0,h_1,\\ldots,h_T$. If a map is undefined, return DOMAIN_ERROR. For piecewise-$C^1$ maps, use only the derivative on a unique strict active branch; if any evaluated input lies on a branch boundary or has ambiguous branch selection, return NONDIFFERENTIABLE and no gradient.\n\nInitialize $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and $g=(D_\\theta\\ell(\\theta,h_T))^T$. For $t=T,T-1,\\ldots,1$, set $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$, $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, then update\n\n$$g\\leftarrow g+A_t^T\\lambda_t,\\qquad \\lambda_{t-1}=B_t^T\\lambda_t.$$\n\nAfter the reverse sweep, set $g\\leftarrow g+(Dh_0(\\theta))^T\\lambda_0$ and return $(J(\\theta),g)$. For $T=0$, the reverse loop is empty and the same initialization and final update apply. All derivative calculations in this procedure are real-arithmetic operations on the specified maps; no floating-point accuracy guarantee is asserted.\n\nThe diagram shows the finite unrolling: arrows point from an input value to the operation that uses it. The single $\\theta$ node feeds each transition and the loss, so the reverse updates add all of those contributions into the same accumulator $g$; the $h_t$ cotangents flow from right to left. The diagram illustrates the algorithm, and no correctness proof relies on it.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.55cm]\n  \\node[draw,circle] (theta) {$\\theta$};\n  \\node[draw,rectangle,right of=theta,xshift=0.4cm] (h0) {$h_0(\\theta)$};\n  \\node[draw,rectangle,right of=h0,xshift=0.65cm] (phi1) {$\\Phi_1$};\n  \\node[draw,rectangle,right of=phi1,xshift=0.65cm] (h1) {$h_1$};\n  \\node[draw,rectangle,right of=h1,xshift=0.65cm] (phi2) {$\\Phi_2$};\n  \\node[right of=phi2,xshift=0.35cm] (dots) {$\\cdots$};\n  \\node[draw,rectangle,right of=dots,xshift=0.35cm] (phit) {$\\Phi_T$};\n  \\node[draw,rectangle,right of=phit,xshift=0.65cm] (ht) {$h_T$};\n  \\node[draw,rectangle,right of=ht,xshift=0.65cm] (loss) {$\\ell(\\theta,h_T)$};\n  \\draw[->] (theta) -- (h0);\n  \\draw[->] (h0) -- (phi1);\n  \\draw[->] (theta) to[bend left=30] (phi1);\n  \\draw[->] (phi1) -- (h1);\n  \\draw[->] (h1) -- (phi2);\n  \\draw[->] (theta) to[bend left=42] (phi2);\n  \\draw[->] (phi2) -- (dots);\n  \\draw[->] (dots) -- (phit);\n  \\draw[->] (theta) to[bend left=55] (phit);\n  \\draw[->] (phit) -- (ht);\n  \\draw[->] (ht) -- (loss);\n  \\draw[->] (theta) to[bend left=68] (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and\n\n$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$\n\nwhere the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fr\u00e9chet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fr\u00e9chet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fr\u00e9chet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fr\u00e9chet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fr\u00e9chet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fr\u00e9chet differentiable at $f(x)$, then\n   $g \\circ f$ is Fr\u00e9chet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "network-unroll",
+          "claim": "The network is the two-step recurrence $h_0=x$, $h_1=\\Phi_1(\\theta,h_0)=\\theta h_0$, $h_2=\\Phi_2(\\theta,h_1)=\\theta h_1$, with loss $J=\\frac12h_2^2$. Hence $h_1=\\theta x$, $h_2=\\theta^2x$, and $J=\\frac12\\theta^4x^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sum-of-uses",
+          "claim": "By [F4], the loss gives $\\lambda_2=h_2$ and its direct parameter contribution is zero; both transition pullbacks have $D_\\theta\\Phi_t=h_{t-1}$ and $D_h\\Phi_t=\\theta$. Thus the $t=2$ use adds $h_1h_2$, the $t=1$ use adds $h_0(\\theta h_2)$, and $h_0=x$ has zero parameter derivative. Their sum is $\\theta^3x^2+\\theta^3x^2=2\\theta^3x^2$, including $x=0$ or $\\theta=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "direct-check",
+          "claim": "Applying the product rule [F4] repeatedly to the scalar expression from step 1.1 gives $J'(\\theta)=2\\theta^3x^2$, equal to the reverse accumulation in step 2.1. For $x=1$ and $\\theta=1$, both calculations give $2$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-layer, two-transition network."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 checks x=0 or theta=0 and obtains gradient zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 checks x=1 and theta=1, where both computations give 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 checks the zero-input and zero-weight cases where both tied-use contributions vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter and input range over R, which has no domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The network has finitely many vertices and the calculation invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a gradient and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes a gradient and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Reviewed all three Verification steps and all four cited suppliers. The feedforward Definition permits the scalar acyclic two-layer graph with identity activations and tied weights; its illustrative supplier diagram has all input-to-hidden and hidden-to-output edges in the correct direction. The product-rule supplier applies to bounded scalar multiplication and coordinate projections, yielding continuous partials D_theta Phi=h and D_h Phi=theta, and loss derivative h_2. With fixed x, Dh_0=0 and the direct parameter loss term is zero. Both uses contribute theta^3 x^2, summing to 2 theta^3 x^2. Direct differentiation of (1/2)theta^4 x^2 agrees, including x=0, theta=0 and x=theta=1. No division, branch boundary, AC or approximation-theorem premise. Reader/refuter have no findings. No defect or edit required."
+      }
+    }
+  }
+}

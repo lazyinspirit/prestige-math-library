@@ -1,0 +1,273 @@
+[
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/lem-policy-score-has-zero-conditional-mean/finite_smoke",
+    "id": "lem-policy-score-has-zero-conditional-mean",
+    "before": [
+      {
+        "case": "finite normalized action support",
+        "status": "checked_by_exact_calculation",
+        "calculation": "At each fixed state, sum_a pi(a|s) grad log pi(a|s)=sum_a grad pi(a|s)=grad(1)=0."
+      }
+    ],
+    "after": [
+      {
+        "case": "finite normalized action support",
+        "status": "checked_by_exact_calculation",
+        "calculation": "At each fixed state, sum_a pi(a|s) grad log pi(a|s)=sum_a grad pi(a|s)=grad(1)=0.",
+        "check": "ml101-policy-score-finite-support",
+        "asserts": "$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+        "fixture": "normalized-action-support"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/thm-policy-gradient-theorem/finite_smoke",
+    "id": "thm-policy-gradient-theorem",
+    "before": [
+      {
+        "case": "one-decision Bernoulli reward",
+        "status": "checked_by_exact_calculation",
+        "calculation": "For pi_theta(1)=theta, reward 1 on action 1 and 0 on action 0, T=1 so gamma^0=1; E[G_0 grad log pi(A_0)]=theta(1/theta)=1=grad(theta)."
+      }
+    ],
+    "after": [
+      {
+        "case": "one-decision Bernoulli reward",
+        "status": "checked_by_exact_calculation",
+        "calculation": "For pi_theta(1)=theta, reward 1 on action 1 and 0 on action 0, T=1 so gamma^0=1; E[G_0 grad log pi(A_0)]=theta(1/theta)=1=grad(theta).",
+        "check": "ml101-policy-gradient-one-step",
+        "asserts": "$$\\nabla_\\theta J(\\theta_0)=\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\,\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\,G_t\\right].$$",
+        "fixture": "one-decision-bernoulli"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/lem-action-independent-baseline-does-not-bias-policy-gradient/finite_smoke",
+    "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+    "before": [
+      {
+        "case": "one-state Bernoulli baseline term",
+        "status": "checked_by_exact_calculation",
+        "calculation": "For b(s)=b, E[b score]=b(theta/theta+(1-theta)(-1/(1-theta)))=0."
+      }
+    ],
+    "after": [
+      {
+        "case": "one-state Bernoulli baseline term",
+        "status": "checked_by_exact_calculation",
+        "calculation": "For b(s)=b, E[b score]=b(theta/theta+(1-theta)(-1/(1-theta)))=0.",
+        "check": "ml101-policy-baseline-zero-mean",
+        "asserts": "$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\right]=\\nabla_\\theta J(\\theta_0).$$",
+        "fixture": "bernoulli-state-baseline"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/ex-actor-critic-bootstrap-can-bias-policy-update/finite_smoke",
+    "id": "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "before": [
+      {
+        "case": "theta=1/2 and critic Vhat(x0)=0,Vhat(x1)=1",
+        "status": "checked_by_exact_calculation",
+        "calculation": "Action 0 gives increment 0; action 1 gives delta=1/2, score 2, and alpha=1/4, hence increment 1/4. The equiprobable mean is 1/8 while J(theta)=0 has gradient 0; both proposed actor parameters remain in (0,1)."
+      }
+    ],
+    "after": [
+      {
+        "case": "theta=1/2 and critic Vhat(x0)=0,Vhat(x1)=1",
+        "status": "checked_by_exact_calculation",
+        "calculation": "Action 0 gives increment 0; action 1 gives delta=1/2, score 2, and alpha=1/4, hence increment 1/4. The equiprobable mean is 1/8 while J(theta)=0 has gradient 0; both proposed actor parameters remain in (0,1).",
+        "check": "ml101-actor-critic-bootstrap-bias",
+        "asserts": "the true start-state objective is $J(\\theta)=0$ for every $\\theta$, but the expected first actor increment is $1/8$.",
+        "fixture": "zero-reward-two-step-critic"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/ex-reinforce-one-step-bernoulli-mdp/finite_smoke",
+    "id": "ex-reinforce-one-step-bernoulli-mdp",
+    "before": [
+      {
+        "case": "theta in (0,1), one-decision Bernoulli reward",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The sample estimator is 1/theta on action 1 (probability theta) and 0 on action 0, so its expectation is 1=grad(theta)."
+      }
+    ],
+    "after": [
+      {
+        "case": "theta in (0,1), one-decision Bernoulli reward",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The sample estimator is 1/theta on action 1 (probability theta) and 0 on action 0, so its expectation is 1=grad(theta).",
+        "check": "ml101-reinforce-bernoulli",
+        "asserts": "For every $\\theta\\in(0,1)$, $\\mathbb E_\\theta[Z]=\\nabla_\\theta J(\\theta)=1$.",
+        "fixture": "one-decision-bernoulli"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/ex-action-independent-baseline-eliminates-variance/finite_smoke",
+    "id": "ex-action-independent-baseline-eliminates-variance",
+    "before": [
+      {
+        "case": "theta=1/2 and b(s)=1/2",
+        "status": "checked_by_exact_calculation",
+        "calculation": "Unadjusted Z has values 2 and 0 with equal probability, mean 1 and variance 1. Adjusted Z_b=1 on both actions, hence mean 1 and variance 0."
+      }
+    ],
+    "after": [
+      {
+        "case": "theta=1/2 and b(s)=1/2",
+        "status": "checked_by_exact_calculation",
+        "calculation": "Unadjusted Z has values 2 and 0 with equal probability, mean 1 and variance 1. Adjusted Z_b=1 on both actions, hence mean 1 and variance 0.",
+        "check": "ml101-baseline-eliminates-variance",
+        "asserts": "Then $Z$ has variance $1$, while $Z_b=(G_0-b(s))\\nabla_\\theta\\log\\pi_\\theta(A_0\\mid s)$ is identically $1$ and has variance $0$; both have expectation $1$.",
+        "fixture": "half-bernoulli-half-baseline"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+    "json_pointer": "/contracts/cex-policy-gradient-without-start-time-discount/finite_smoke",
+    "id": "cex-policy-gradient-without-start-time-discount",
+    "before": [
+      {
+        "case": "explicit finite witness",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula."
+      }
+    ],
+    "after": [
+      {
+        "case": "explicit finite witness",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula.",
+        "check": "ml101-policy-start-time-discount-witness",
+        "asserts": "Hence the claimed right-hand side is $\\theta(1/\\theta)+(1-\\theta)0=1\\ne1/2$. Including the missing factor $\\gamma^1$ changes this expectation to $1/2$, as required.",
+        "fixture": "two-step-half-discount"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+    "json_pointer": "/contracts/ex-expected-discounted-cost-does-not-imply-pathwise-safety/finite_smoke",
+    "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "before": [
+      {
+        "check": "discounted-expectation-and-seven-step-violation-probability",
+        "asserts": "For one state, two actions, $p_{risky}=1/10$, $\\gamma=1/10$, and seven independent draws, $J_c=1/9<1/8$ while $\\Pr(\\text{at least one risky action})=5{,}217{,}031/10{,}000{,}000>1/2$.",
+        "claim": "The displayed geometric series and exact complement probability verify the finite witness by rational arithmetic.",
+        "checked_in": "Example and steps 1.1\u20133.1",
+        "states": 1,
+        "actions": 2,
+        "horizon": 7
+      }
+    ],
+    "after": [
+      {
+        "check": "ml101-cpo-discounted-cost-pathwise",
+        "asserts": "Its expected discounted cost is $1/9<1/8$, so it is feasible, while the probability of at least one cost during those seven decisions is $5{,}217{,}031/10{,}000{,}000>1/2$.",
+        "claim": "The displayed geometric series and exact complement probability verify the finite witness by rational arithmetic.",
+        "checked_in": "Example and steps 1.1\u20133.1",
+        "states": 1,
+        "actions": 2,
+        "horizon": 7,
+        "fixture": "seven-independent-actions"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+    "json_pointer": "/contracts/ex-empirical-cost-satisfaction-can-miss-population-violation/finite_smoke",
+    "id": "ex-empirical-cost-satisfaction-can-miss-population-violation",
+    "before": [
+      {
+        "check": "ten-rollout-safe-sample-underestimates-cost",
+        "asserts": "For one state, two actions, $p_{risky}=1/10$, and $\\gamma=0$, $J_c=1/10>1/20$ while ten independent rollouts are all safe with probability $3{,}486{,}784{,}401/10{,}000{,}000{,}000$.",
+        "claim": "The population expectation and exact tenth power verify the finite-sample witness by rational arithmetic.",
+        "checked_in": "Example and steps 1.1\u20132.1",
+        "states": 1,
+        "actions": 2,
+        "rollouts": 10
+      }
+    ],
+    "after": [
+      {
+        "check": "ml101-cpo-safe-sample",
+        "asserts": "The true expected discounted cost is $1/10>b$. In ten independent one-step rollouts, the empirical mean cost is zero whenever every action is `safe`, an event of probability $(9/10)^{10}=3{,}486{,}784{,}401/10{,}000{,}000{,}000$.",
+        "claim": "The population expectation and exact tenth power verify the finite-sample witness by rational arithmetic.",
+        "checked_in": "Example and steps 1.1\u20132.1",
+        "states": 1,
+        "actions": 2,
+        "rollouts": 10,
+        "fixture": "ten-independent-rollouts"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+    "json_pointer": "/contracts/ex-exact-trust-region-and-sampled-line-search-disagree/finite_smoke",
+    "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+    "before": [
+      {
+        "check": "exact-cost-kl-and-sampled-line-search-witness",
+        "asserts": "For one state and two actions, $J_c^\\pi=1/100$, $J_c^{\\pi'}=1/5>1/20$, $D_{\\rm KL}(\\pi'\\|\\pi)<4$, and the one-row safe sample occurs with probability $99/100$.",
+        "claim": "The two action probabilities give the exact costs and KL expression; the displayed logarithm bound proves the strict radius inequality, and the safe sample gives the empirical zero-cost check.",
+        "checked_in": "Example and steps 1.1\u20133.1",
+        "states": 1,
+        "actions": 2,
+        "sample_rows": 1
+      }
+    ],
+    "after": [
+      {
+        "check": "ml101-cpo-exact-versus-sample",
+        "asserts": "If a one-row rollout sample from the old policy observes `safe` and supplies zero baseline-cost and advantage estimates, the empirical line-search cost is zero and passes the threshold; this sample occurs with probability $99/100$.",
+        "claim": "The two action probabilities give the exact costs and KL expression; the displayed logarithm bound proves the strict radius inequality, and the safe sample gives the empirical zero-cost check.",
+        "checked_in": "Example and steps 1.1\u20133.1",
+        "states": 1,
+        "actions": 2,
+        "sample_rows": 1,
+        "fixture": "one-row-safe-line-search"
+      }
+    ],
+    "expected_exact_array_count": 1
+  },
+  {
+    "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+    "json_pointer": "/contracts/cex-arbitrary-baseline-bound-without-old-policy-residual/finite_smoke",
+    "id": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+    "before": [
+      {
+        "case": "explicit finite witness",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula."
+      }
+    ],
+    "after": [
+      {
+        "case": "explicit finite witness",
+        "status": "checked_by_exact_calculation",
+        "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula.",
+        "check": "ml101-cpo-old-residual-witness",
+        "asserts": "The asserted lower inequality is $1\\le0$, which is false by step 1.1. Subtracting the old-policy residual expectation instead gives the corrected surrogate $1-1=0$.",
+        "fixture": "identical-policy-zero-discount"
+      }
+    ],
+    "expected_exact_array_count": 1
+  }
+]

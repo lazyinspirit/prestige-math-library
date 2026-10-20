@@ -1,0 +1,20 @@
+--- items/alg-rmsprop.md
++++ proposal/alg-rmsprop.md
+@@ -33,7 +33,7 @@
+ 
+ ## Definition
+ 
+-Fix a dimension $d\ge1$, an initial vector $x_1\in\mathbb R^d$, a finite or infinite sequence of finite gradient vectors $g_t\in\mathbb R^d$, positive step sizes $\eta_t>0$, a decay parameter $\rho\in[0,1)$, and a denominator constant $\epsilon>0$. Set $r_0=0$. At each integer round $t\ge1$, update the second-moment estimate coordinatewise by
++Fix a dimension $d\ge1$, an initial vector $x_1\in\mathbb R^d$, a finite or infinite sequence of finite gradient vectors $g_t\in\mathbb R^d$, positive step sizes $\eta_t>0$, a decay parameter $\rho\in[0,1)$, and a denominator constant $\epsilon>0$. Use one-based coordinate notation $z_i:=z(i-1)$ for every vector $z\in\mathbb R^d$ and $1\le i\le d$. Set $r_0=0$. At each integer round $t\ge1$, update the second-moment estimate coordinatewise by
+ 
+ $$r_{t,i}=\rho r_{t-1,i}+(1-\rho)g_{t,i}^2\qquad(1\le i\le d),$$
+ 
+@@ -41,7 +41,7 @@
+ 
+ $$x_{t+1,i}=x_{t,i}-\eta_t\frac{g_{t,i}}{\sqrt{r_{t,i}}+\epsilon}\qquad(1\le i\le d).$$
+ 
+-The root, addition, and division in the update are coordinatewise. The procedure makes no convergence or regret claim.
++For a finite gradient sequence of length $T\ge0$, perform rounds $1\le t\le T$ and return the trajectory $(x_1,\ldots,x_{T+1})$; when $T=0$, return $(x_1)$. For an infinite gradient sequence, perform every round $t\ge1$, thereby defining and returning the iterate sequence $(x_t)_{t\ge1}$. The root, addition, and division in the update are coordinatewise. The procedure makes no convergence or regret claim.
+ 
+ ## Definition references
+ 

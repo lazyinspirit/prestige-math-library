@@ -1,0 +1,243 @@
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -881,6 +881,13 @@
+ 
+ ## Pre-gate recertification
+ 
++Mathematics owner-supervised wrappers also check authorization through the
++executor's optional `beforeGates` hook at the drained group join, before any
++pending gate descriptor consumes permission. A last worker completing after
++`onProgress` therefore still reaches the owner hold. This hook respects pauses,
++local/adopted writers and pending native refreshes; it does not repeat native
++collection/advance hooks. Stages without it retain their normal gate behavior.
++
+ An owner-supervised run may select `tools/autopilot/stages/owner-supervised.mts`
+ through its run-local `config.json`. Compact runs select
+ `tools/autopilot/stages/owner-supervised-compact.mts`, retaining their compact
+--- a/tools/autopilot/src/executor.mts
++++ b/tools/autopilot/src/executor.mts
+@@ -1911,6 +1911,30 @@
+   async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
+     if (this.inflight.size || this.liveDispatchLabels().length
+       || statuses.some(({ s }) => this.pendingRefreshes(s, ctx).length)) return 'working';
++    // The final worker can finish after onProgress and before this join.
++    // Owner authorization belongs at the drained boundary, before descriptors
++    // consume permission; progress/collection hooks must not run twice.
++    if (this.state.paused) return 'working';
++    const boundaryStages = statuses.map(({ s }) => s).filter(s =>
++      !s.gatesWaived && s.gates && !this.state.data.stages[s.id]?.gatesPassedAt && s.beforeGates);
++    if (boundaryStages.length && statuses.some(({ s }) => !this.stageStatus(s, ctx).unitsDone)) return 'working';
++    for (const s of boundaryStages) {
++      try { await s.beforeGates({ ctx, executor: this, stage: s }); }
++      catch (error: any) {
++        const message = `${s.id}: pre-gate handoff failed: ${error.message}`;
++        if (this.state.addBlocker(s.id, message, 'before-gates'))
++          this.reporter.notify('blocked', message, { stage: s.id });
++        return 'blocked';
++      }
++      if (this.state.paused) {
++        this.reporter.report(this.snapshot(), { force: true });
++        return 'working';
++      }
++    }
++    // An async boundary hook may have started work or invalidated coverage.
++    if (boundaryStages.length && (this.inflight.size || this.liveDispatchLabels().length
++      || statuses.some(({ s }) => this.pendingRefreshes(s, ctx).length || !this.stageStatus(s, ctx).unitsDone)))
++      return 'working';
+     const list: Gate[] = [];
+     const owners: Stage[] = [];
+     const seen = new Set<string>();
+--- a/tools/autopilot/src/types.mts
++++ b/tools/autopilot/src/types.mts
+@@ -206,6 +206,9 @@
+   refreshPlan?: (ctx: Ctx, unit: Unit, request: Pick<NativeRefresh, 'id' | 'reason' | 'requestedAt'>) => Plan;
+   /** Dispatch ready item handoffs while the owning stage's workers wait. */
+   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
++  /** Opt-in boundary after group work drains, before pending gate descriptors.
++   * May pause for owner authorization; never replaces the onProgress handoff. */
++  beforeGates?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
+   gates?: (ctx: Ctx) => Gate[];
+   /** The single complete final validation barrier immediately before reporting. */
+   finalValidation?: true;
+--- a/tools/autopilot/stages/owner-supervised.mts
++++ b/tools/autopilot/stages/owner-supervised.mts
+@@ -22,6 +22,12 @@
+       await progress?.(args);
+       holdBeforeBattery(args);
+     };
++    stage.beforeGates = async (args: any) => {
++      holdBeforeBattery(args);
++      if (args.executor.state.paused) return;
++      await source.beforeGates?.(args);
++      holdBeforeBattery(args);
++    };
+     if (source.gates) stage.gates = (context: any) => {
+       if (!context.doctor) consumePermission(context);
+       return source.gates(context);
+--- a/tools/autopilot/stages/owner-supervised-compact.mts
++++ b/tools/autopilot/stages/owner-supervised-compact.mts
+@@ -53,6 +53,12 @@
+       await source.onProgress?.(args);
+       holdBeforeBattery(args);
+     };
++    stage.beforeGates = async (args: any) => {
++      holdBeforeBattery(args);
++      if (args.executor.state.paused) return;
++      await source.beforeGates?.(args);
++      holdBeforeBattery(args);
++    };
+     if (source.gates) stage.gates = (context: any) => {
+       if (!context.doctor) consumePermission(context);
+       return source.gates(context);
+--- /dev/null
++++ b/tools/autopilot/test/drained-gate-boundary.test.mts
+@@ -0,0 +1,149 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
++import { join } from 'node:path';
++import { tmpdir } from 'node:os';
++import { Executor } from '../src/executor.mts';
++import { State, statePath } from '../src/state.mts';
++import { Reporter } from '../src/reporter.mts';
++import { ownerSupervisedCompactStages } from '../stages/owner-supervised-compact.mts';
++import { recertify } from '../../owner-gate-supervision.mjs';
++
++function fixture(t: any, { owner = true, pipeline = false } = {}) {
++  const repo = mkdtempSync(join(tmpdir(), 'ap-drained-gates-'));
++  t.after(() => rmSync(repo, { recursive: true, force: true }));
++  const stateDir = join(repo, 'state'), dispatchDir = join(repo, 'dispatch');
++  for (const dir of ['research', 'state', 'dispatch']) mkdirSync(join(repo, dir));
++  const run = 'sample', pages: any[] = [{ id: 'a', kind: 'A', category: 'math', companion: 'b', items: [] }, { id: 'b', kind: 'B', category: 'math', companion: 'a', items: [] }];
++  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages }));
++  writeFileSync(join(repo, 'research', 'sample-batch-1.pages.json'), JSON.stringify(pages));
++  let progressed = 0, descriptors = 0, boundary = 0, sawInflight = false;
++  const log = join(repo, 'fake-gates.log');
++  const source: any = { id: '1-drift', label: 'drift', role: 'worker',
++    units: () => ['one'], pattern: /^worker-one\.result\.json$/, plan: () => [],
++    onProgress: ({ executor }: any) => { progressed++; sawInflight ||= executor.inflight.size > 0; },
++    beforeGates: () => { boundary++; },
++    gates: () => { descriptors++; return [{ id: 'fake-gate', argv: ['node', '-e',
++      `require('node:fs').appendFileSync(${JSON.stringify(log)}, 'gate\\n');console.log('1 checked')`] }]; } };
++  const sources = pipeline ? [{ ...source, pipeline: 'pair' }, { ...source, id: '1-drift-apply', pipeline: 'pair' }] : [source];
++  const stages = owner ? ownerSupervisedCompactStages(sources) : sources;
++  const state = new State(statePath(stateDir)).init(run);
++  const config: any = { run, repo, stateDir, dispatchDir, argv: ['true'], coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 };
++  const ex = new Executor({ config, stages, state, reporter: new Reporter({ dir: stateDir, intervalMs: 1e9, sink: () => {} }),
++    adapter: { name: 'unused', describe: () => 'unused', invoke: async () => { throw Error('Unexpected dispatch'); } } });
++  progressed = 0; descriptors = 0; boundary = 0;
++  const cover = () => writeFileSync(join(dispatchDir, 'worker-one.result.json'), JSON.stringify({ ok: true, covers: ['one'] }));
++  const read = (name: string) => JSON.parse(readFileSync(join(stateDir, name), 'utf8'));
++  const pending = () => stages.map(s => ({ s, st: ex.stageStatus(s) }));
++  return { ex, stages, sources, source, stateDir, cover, read, pending, log,
++    counts: () => ({ progressed, descriptors, boundary, sawInflight }) };
++}
++
++for (const pipeline of [false, true]) test(`same-tick last worker drains after progress: owner hold precedes all descriptors (pipeline=${pipeline})`, async t => {
++  const f = fixture(t, { pipeline });
++  // Model the exact gap: both owner progress checks see a live final worker;
++  // its receipt and process teardown arrive in the executor's sleep(0) turn.
++  const oldPermit = { run: 'sample', group: 'already-consumed-step3', request_id: 'old', consumed_at: 'yesterday' };
++  writeFileSync(join(f.stateDir, 'owner-gate-permission.json'), JSON.stringify(oldPermit));
++  writeFileSync(join(f.stateDir, 'owner-gate-request.json'), JSON.stringify({ run: 'sample', id: 'old', group: oldPermit.group, stages: ['3-old'] }));
++  f.ex.inflight.set('last', { meta: { stage: f.stages[0].id, label: 'one', role: 'worker', covers: ['one'] },
++    startedAt: Date.now(), promise: new Promise(() => {}) });
++  const original = f.stages[0].onProgress;
++  f.stages[0].onProgress = async (args: any) => {
++    await original(args);
++    setTimeout(() => { f.cover(); f.ex.inflight.delete('last'); }, 0);
++  };
++  assert.equal(await f.ex.tick(), 'working');
++  assert.equal(f.ex.state.paused, true);
++  assert.equal(f.ex.inflight.size, 0);
++  assert.deepEqual(f.counts(), { progressed: f.stages.length, descriptors: 0, boundary: 0, sawInflight: true });
++  assert.equal(existsSync(f.log), false);
++  const request = f.read('owner-gate-request.json');
++  assert.equal(request.group, f.stages.map(s => s.id).join('+'));
++  assert.deepEqual(f.read('owner-gate-permission.json'), oldPermit);
++  for (const s of f.stages) assert.equal(f.ex.state.data.stages[s.id]?.gatesPassedAt ?? null, null);
++  // Planning-only fixture grants a genuine exact-fingerprint permission.
++  recertify({ ...f.ex.ctx(), stateDir: f.stateDir }, { resolveEscalations: true });
++  f.ex.state.paused = false;
++  assert.equal(await f.ex.tick(), 'working');
++  assert.equal(await f.ex.tick(), 'done');
++  assert.equal(f.counts().descriptors, f.stages.length);
++  assert.equal(f.counts().boundary, f.stages.length);
++  assert.ok(f.read('owner-gate-permission.json').consumed_at);
++  assert.equal(f.read('owner-gate-request.json').id, request.id);
++  assert.equal(readFileSync(f.log, 'utf8'), 'gate\n'); // identical pipeline descriptor deduplicated
++  for (const s of f.stages) assert.ok(f.ex.state.data.stages[s.id].gatesPassedAt);
++});
++
++test('stages without the optional hook retain their default gate behavior', async t => {
++  const f = fixture(t, { owner: false });
++  delete f.stages[0].beforeGates; f.cover();
++  assert.equal(await f.ex.tick(), 'working');
++  assert.equal(await f.ex.tick(), 'done');
++  assert.equal(f.counts().progressed, 1); assert.equal(f.counts().descriptors, 1);
++  assert.equal(existsSync(join(f.stateDir, 'owner-gate-request.json')), false);
++});
++
++test('inflight, adopted, refresh and paused barriers prevent boundary hooks and descriptors', async t => {
++  for (const barrier of ['inflight', 'adopted', 'refresh', 'paused']) {
++    const f = fixture(t, { owner: false }); f.cover();
++    if (barrier === 'inflight') f.ex.inflight.set('live', { meta: { stage: f.stages[0].id, covers: ['one'] } } as any);
++    if (barrier === 'adopted') f.ex.liveDispatchLabels = () => [{ label: 'external', covers: ['one'] }];
++    if (barrier === 'refresh') f.ex.pendingRefreshes = () => [{ id: 'pending' }] as any;
++    if (barrier === 'paused') f.ex.state.paused = true;
++    assert.equal(await f.ex.runGroupGates(f.pending(), f.ex.ctx(), f.stages), 'working', barrier);
++    assert.equal(f.counts().boundary, 0, barrier); assert.equal(f.counts().descriptors, 0, barrier);
++  }
++});
++
++test('boundary pause or failure in later pipeline member prevents every descriptor', async t => {
++  for (const failure of [false, true]) {
++    const f = fixture(t, { owner: false, pipeline: true }); f.cover();
++    f.stages[1].beforeGates = ({ executor }: any) => { if (failure) throw Error('boundary defect'); executor.state.paused = true; };
++    assert.equal(await f.ex.tick(), failure ? 'blocked' : 'working');
++    assert.equal(f.counts().descriptors, 0); assert.equal(f.counts().progressed, 2);
++    if (failure) assert.match(f.ex.state.data.blockers[0].message, /pre-gate handoff failed: boundary defect/);
++  }
++});
++
++test('async boundary cannot admit newly active work or invalidated unit coverage', async t => {
++  for (const change of ['work', 'coverage']) {
++    const f = fixture(t, { owner: false }); f.cover();
++    f.stages[0].beforeGates = async () => {
++      await Promise.resolve();
++      if (change === 'work') f.ex.inflight.set('new', { meta: { stage: f.stages[0].id, covers: ['one'] } } as any);
++      else rmSync(join(f.ex.config.dispatchDir, 'worker-one.result.json'));
++    };
++    assert.equal(await f.ex.runGroupGates(f.pending(), f.ex.ctx(), f.stages), 'working');
++    assert.equal(f.counts().descriptors, 0);
++  }
++});
++
++test('completed and waived members do not repeat boundary hooks', async t => {
++  for (const waived of [false, true]) {
++    const f = fixture(t, { owner: false }); f.cover();
++    if (waived) f.stages[0].gatesWaived = 'Fixture coverage';
++    else f.ex.state.stage(f.stages[0].id).gatesPassedAt = new Date().toISOString();
++    assert.equal(await f.ex.runGroupGates(f.pending(), f.ex.ctx(), f.stages), 'ok');
++    assert.equal(f.counts().boundary, 0); assert.equal(f.counts().descriptors, 0);
++  }
++});
++
++test('owner boundary rechecks inherited source hook input changes before permission consumption', async t => {
++  const f = fixture(t); f.cover();
++  assert.equal(await f.ex.tick(), 'working');
++  recertify({ ...f.ex.ctx(), stateDir: f.stateDir }, { resolveEscalations: true });
++  const plan = join(f.ex.config.repo, 'research', 'plan-spec.json');
++  f.source.beforeGates = async () => { writeFileSync(plan, readFileSync(plan, 'utf8') + '\n'); };
++  f.ex.state.paused = false;
++  assert.equal(await f.ex.tick(), 'working');
++  assert.equal(f.ex.state.paused, true);
++  assert.equal(f.counts().descriptors, 0);
++  assert.equal(f.read('owner-gate-permission.json').consumed_at, null);
++});
++
++test('an opted-in boundary requires current complete units before calling its hook', async t => {
++  const f = fixture(t, { owner: false });
++  assert.equal(await f.ex.runGroupGates(f.pending(), f.ex.ctx(), f.stages), 'working');
++  assert.equal(f.counts().boundary, 0); assert.equal(f.counts().descriptors, 0);
++});

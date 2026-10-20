@@ -1,0 +1,213 @@
+{
+  "group": "b",
+  "batches": ["6"],
+  "pages_read": [
+    "algorithmic-stability-and-generalization",
+    "algorithmic-stability-and-generalization-examples"
+  ],
+  "items_read": [
+    "def-uniform-algorithmic-stability",
+    "thm-uniform-stability-expected-generalization",
+    "thm-uniform-stability-high-probability-generalization",
+    "thm-strongly-convex-regularized-erm-stability",
+    "ex-strongly-convex-regularized-loss-stability",
+    "ex-one-nearest-neighbor-has-unit-deletion-instability",
+    "ex-stability-versus-training-accuracy-and-rademacher-bound"
+  ],
+  "conventions": [
+    {
+      "convention": "Deletion retains the original sample size n and retained indices as inputs. Stability is uniform over every sample, deleted index and test observation; deletion coefficient β_n implies replacement coefficient 2β_n.",
+      "fixed_by": "def-uniform-algorithmic-stability",
+      "matters_for": [
+        "thm-uniform-stability-expected-generalization",
+        "thm-uniform-stability-high-probability-generalization",
+        "thm-strongly-convex-regularized-erm-stability",
+        "ex-strongly-convex-regularized-loss-stability",
+        "ex-one-nearest-neighbor-has-unit-deletion-instability",
+        "ex-stability-versus-training-accuracy-and-rademacher-bound"
+      ]
+    },
+    {
+      "convention": "RKHS deletion objectives retain denominator m and regularizer λ times the squared norm. Minima are assumed attained; λ>0, σ≥0 and κ≥0. Stability alone supplies no bounded-loss constant.",
+      "fixed_by": "thm-strongly-convex-regularized-erm-stability",
+      "matters_for": [
+        "ex-strongly-convex-regularized-loss-stability"
+      ]
+    },
+    {
+      "convention": "Expected generalization uses a finite IID product sample, jointly measurable full/deleted test losses, measurable risk maps and a common finite loss bound. Its conclusions are choice-free.",
+      "fixed_by": "thm-uniform-stability-expected-generalization",
+      "matters_for": [
+        "thm-uniform-stability-high-probability-generalization"
+      ]
+    },
+    {
+      "convention": "The empirical-risk and leave-one-out confidence bounds each have probability at least 1−δ separately; simultaneous validity is not asserted. AC is assumed through McDiarmid.",
+      "fixed_by": "thm-uniform-stability-high-probability-generalization",
+      "matters_for": []
+    },
+    {
+      "convention": "Rademacher complexity uses the one-sided sign supremum without absolute values and normalization 1/m.",
+      "fixed_by": "def-rademacher-complexity",
+      "matters_for": [
+        "ex-stability-versus-training-accuracy-and-rademacher-bound"
+      ]
+    },
+    {
+      "convention": "The nearest-neighbor rule votes among all observations at minimum distance, resolves tied votes by 0, and predicts 1 on the empty sample. The instability witness is asserted for m≥2.",
+      "fixed_by": "ex-one-nearest-neighbor-has-unit-deletion-instability",
+      "matters_for": []
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-uniform-algorithmic-stability",
+      "statement": "Uniform deletion stability requires |L(A_S,z)−L(A_{S\\setminus i},z)|≤β_n for every n≥1, S∈Z^n, i∈[n], and z∈Z, using the size-indexed deletion output.",
+      "used_by": [
+        "thm-uniform-stability-expected-generalization",
+        "thm-uniform-stability-high-probability-generalization",
+        "thm-strongly-convex-regularized-erm-stability",
+        "ex-strongly-convex-regularized-loss-stability",
+        "ex-one-nearest-neighbor-has-unit-deletion-instability",
+        "ex-stability-versus-training-accuracy-and-rademacher-bound"
+      ]
+    },
+    {
+      "id": "thm-uniform-stability-expected-generalization",
+      "statement": "Under its stated measurable supervised setting, IID product sample, deterministic permutation-invariant size-indexed rule, bounded full/deleted losses and finite nonincreasing deletion-stability sequence: E[R_P(A_S)−R̂_S(A_S)]≤2β_m, E[R_P(A_S)−R_loo(A,S)]≤β_m, and |R_P(A_S)−R_P(A_{S\\setminus i})|≤β_m for every sample and index. All three conclusions are choice-free.",
+      "used_by": [
+        "thm-uniform-stability-high-probability-generalization"
+      ]
+    },
+    {
+      "id": "thm-strongly-convex-regularized-erm-stability",
+      "statement": "For the stated real RKHS with K(x,x)≤κ², measurable nonnegative convex σ-Lipschitz loss, λ>0 and attained retained-set minima, regularized ERM with objective n⁻¹∑_{j∈J}c(f(x_j),y_j)+λ‖f‖² is permutation-invariant and has uniform deletion stability β_m=σ²κ²/(2λm). For fixed λ this envelope is nonincreasing; no uniform loss bound M is supplied.",
+      "used_by": [
+        "ex-strongly-convex-regularized-loss-stability"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Bounding RKHS evaluations by κ times the Hilbert norm.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common-law conventions in the expectation, concentration and comparison arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite product measurability and coordinate-rectangle arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Finite probability-product construction and invariance under coordinate permutations.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Identifying bounded joint loss integrals with iterated expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability of bounded measurable losses and their differences.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Risk differences and finite averages of expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-triangle-inequality",
+      "used_for": "Passing pointwise deletion stability to population-risk stability.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice assumption inherited through concentration suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Confidence-term notation and inversion of exponential tail bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Positivity of confidence logarithms and logarithm identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-mcdiarmid-bounded-differences",
+      "used_for": "Concentration of the empirical and leave-one-out generalization gaps with coordinate oscillation 4β_m+M/m.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Checking the product-law interface cited by the Rademacher suppliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Checking the expectation interface used in Rademacher symmetrization.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Checking finite union bounds in the two-sided Rademacher supplier.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-identically-distributed-and-iid-random-variables",
+      "finding": "The Definition contains inline links in “their laws in [[def-law-or-distribution-of-a-random-element]] agree” and “the whole family is independent in [[def-independent-random-elements]].” These interrupt the defining section and violate the required immediately following Definition references placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "The Definition contains “generated by the measurable rectangles of [[def-measurable-rectangle]].” This hyperlink interrupts the complete defining section, which continues with empty and finite products; no immediately following Definition references section carries it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "finding": "The Definition contains [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] before continuing with real and complex integrals, and contains ([[def-complex-conjugate-real-imaginary-part-and-modulus]]) within the complex-integrability description. These links violate the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "finding": "Statement clause 1 contains “the set function ... of [[def-product-measure-on-sigma-finite-spaces]]”. The hyperlink occurs before the remaining statement clauses and has not been moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition includes “Every family of nonempty sets has a choice function ([[def-choice-function]]).” The inline hyperlink interrupts the defining section before its written-out and equivalent formulations; it violates the required Definition references placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that ...”. The hyperlink appears before the remaining inverse identities and violates the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-mcdiarmid-bounded-differences",
+      "finding": "The Statement contains inline supplier links including “meaning measurable maps ([[def-random-element-and-real-random-variable]])”, “given by pushforward ([[def-law-or-distribution-of-a-random-element]])”, and “finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]])”. These precede the complete hypotheses and conclusions and violate the required Statement references placement.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "algorithmic-stability-and-generalization",
+      "to": "rademacher-complexity-and-generalization",
+      "faithful": true,
+      "note": "Checked the required page and its actual definition/uniform-generalization interfaces against ex-stability-versus-training-accuracy-and-rademacher-bound. The consumer preserves the one-sided 1/m normalization, obtains empirical and expected complexity 1/2 at m=1, and applies the supplier's two-sided expected-complexity bound with AC and measurable finite-class suprema. The supplier makes no converse claim equating class complexity with algorithmic stability."
+    }
+  ]
+}

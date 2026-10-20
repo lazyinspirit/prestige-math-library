@@ -1,0 +1,188 @@
+{
+  "group": "k",
+  "batches": [
+    "33"
+  ],
+  "pages_read": [
+    "convolution-and-group-equivariance",
+    "convolution-and-group-equivariance-examples"
+  ],
+  "items_read": [
+    "def-discrete-convolutional-layer",
+    "def-group-action-on-feature-maps",
+    "def-p4-p4m-lattice-symmetry-groups",
+    "def-equivariant-neural-layer",
+    "def-group-convolution",
+    "def-pointwise-nonlinearity-and-pooling-on-group-features",
+    "thm-group-convolution-equivariance",
+    "ex-translation-equivariance-and-zero-padding",
+    "ex-p4-and-p4m-orientation-indexed-features",
+    "ex-nonstrided-subgroup-and-coset-pooling"
+  ],
+  "conventions": [
+    {
+      "convention": "Feature-map transformations are left pullbacks: (L_u f)(x)=f(u⁻¹·x); on group-indexed maps, (L_u F)(g)=F(u⁻¹g). Feature values themselves are unchanged.",
+      "fixed_by": "def-group-action-on-feature-maps",
+      "matters_for": [
+        "def-equivariant-neural-layer",
+        "def-group-convolution",
+        "def-pointwise-nonlinearity-and-pooling-on-group-features",
+        "thm-group-convolution-equivariance",
+        "ex-translation-equivariance-and-zero-padding",
+        "ex-p4-and-p4m-orientation-indexed-features",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    },
+    {
+      "convention": "Channels are row vectors. The discrete layer uses positive stride, a finite offset set, and unreversed offsets; its unit-stride full-lattice formula is cross-correlation. Padding, cropping and subsampling need not preserve symmetry.",
+      "fixed_by": "def-discrete-convolutional-layer",
+      "matters_for": [
+        "def-group-convolution",
+        "thm-group-convolution-equivariance",
+        "ex-translation-equivariance-and-zero-padding",
+        "ex-p4-and-p4m-orientation-indexed-features"
+      ]
+    },
+    {
+      "convention": "Group correlation uses filter argument g⁻¹h; image-to-group correlation uses g⁻¹·x. Every displayed sum must have finite support or converge absolutely in each output coordinate.",
+      "fixed_by": "def-group-convolution",
+      "matters_for": [
+        "thm-group-convolution-equivariance",
+        "ex-translation-equivariance-and-zero-padding",
+        "ex-p4-and-p4m-orientation-indexed-features"
+      ]
+    },
+    {
+      "convention": "The quarter-turn sends e₁ to e₂, and the reflection sends (x,y) to (x,−y). Pair multiplication is (t,M)(s,N)=(t+Ms,MN). The point groups have four and eight elements; the full p4 and p4m groups are infinite.",
+      "fixed_by": "def-p4-p4m-lattice-symmetry-groups",
+      "matters_for": [
+        "thm-group-convolution-equivariance",
+        "ex-p4-and-p4m-orientation-indexed-features",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    },
+    {
+      "convention": "Neighborhood pooling uses right offsets gu with finite nonempty U. Coset pooling uses left cosets gH, a finite subgroup H, and the left action a·(gH)=(ag)H. Subgroup restriction preserves the subgroup action.",
+      "fixed_by": "def-pointwise-nonlinearity-and-pooling-on-group-features",
+      "matters_for": [
+        "thm-group-convolution-equivariance",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-group-convolution-equivariance",
+      "statement": "For a discrete group acting on the left on the square lattice, with every sum finitely supported or absolutely convergent in each output coordinate, group-to-group and image-to-group cross-correlation commute with the induced left actions. Full-lattice unit-stride discrete layers preserve translation equivariance, including fixed origin shifts and constant output bias. Pointwise nonlinearities and finite-neighborhood max pooling without subsampling commute with the left action; subgroup restriction preserves subgroup equivariance; finite-subgroup left-coset pooling is equivariant on G/H and is invariant when H=G is finite. Finite compositions of compatible equivariant layers remain equivariant.",
+      "used_by": [
+        "ex-translation-equivariance-and-zero-padding",
+        "ex-p4-and-p4m-orientation-indexed-features",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    },
+    {
+      "id": "def-group-action-on-feature-maps",
+      "statement": "For a group G acting on the left on S and f:S→V, (L_u f)(x)=f(u⁻¹·x) defines a left action on feature maps. For F:G→V, (L_u F)(g)=F(u⁻¹g).",
+      "used_by": [
+        "def-equivariant-neural-layer",
+        "def-group-convolution",
+        "def-pointwise-nonlinearity-and-pooling-on-group-features",
+        "thm-group-convolution-equivariance",
+        "ex-translation-equivariance-and-zero-padding",
+        "ex-p4-and-p4m-orientation-indexed-features"
+      ]
+    },
+    {
+      "id": "def-group-convolution",
+      "statement": "For finite-dimensional row-vector channels, (C_Ψ f)(g)=Σ_h f(h)Ψ(g⁻¹h) and (E_Ψ f)(g)=Σ_x f(x)Ψ(g⁻¹·x), with each sum finitely supported or absolutely convergent in every output coordinate.",
+      "used_by": [
+        "thm-group-convolution-equivariance",
+        "ex-p4-and-p4m-orientation-indexed-features"
+      ]
+    },
+    {
+      "id": "def-pointwise-nonlinearity-and-pooling-on-group-features",
+      "statement": "Pointwise nonlinearities act componentwise; (P_U F)(g)_c=max_{u∈U}F(gu)_c for finite nonempty U; subgroup sampling is restriction to H; for finite H≤G, (Q_H F)(gH)_c=max_{h∈H}F(gh)_c is well-defined on left cosets with action a·(gH)=(ag)H.",
+      "used_by": [
+        "thm-group-convolution-equivariance",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    },
+    {
+      "id": "def-p4-p4m-lattice-symmetry-groups",
+      "statement": "For A=C₄ or D₄, P_A consists of pairs (t,M) with multiplication (t,M)(s,N)=(t+Ms,MN), acting by x↦Mx+t. The point groups have four and eight elements, respectively, while both full lattice groups are infinite.",
+      "used_by": [
+        "thm-group-convolution-equivariance",
+        "ex-p4-and-p4m-orientation-indexed-features",
+        "ex-nonstrided-subgroup-and-coset-pooling"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-function",
+      "used_for": "Declared domains, codomains and feature maps as functions.",
+      "opened": true
+    },
+    {
+      "id": "def-group",
+      "used_for": "Associativity, identities and two-sided inverses in pullback actions, lattice groups and correlation reindexing.",
+      "opened": true
+    },
+    {
+      "id": "def-group-action",
+      "used_for": "Left-action laws and the bijectivity of site transformations.",
+      "opened": true
+    },
+    {
+      "id": "def-equivariant-map-of-group-actions",
+      "used_for": "The intertwining condition between input and output actions and its use in composition.",
+      "opened": true
+    },
+    {
+      "id": "def-subgroup",
+      "used_for": "Identity, multiplication and inverse closure for restriction, coset pooling and the p4 rotation subgroup.",
+      "opened": true
+    },
+    {
+      "id": "def-coset",
+      "used_for": "The convention gH={gh:h∈H} and representative-independent coset pooling.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-equivariant-neural-layer",
+      "concern": "The final Definition sentence says, “The layer is $G$-invariant when the output action $T'_g$ is the identity on $Y$ for every $g\\in G$.” It does not require the layer to satisfy the preceding equivariance equation. Taken as written, this is false: let C₂ swap X={0,1}, let Y={0,1} have trivial action, and let Φ(x)=x. The stated condition holds, but Φ(T_g0)=1≠0=Φ(0). Invariance needs the equation Φ(T_gx)=Φ(x), or an explicit restriction to equivariant layers with trivial output action. The cited Cohen–Welling §2 describes invariance as a special case of equivariance, retaining that requirement: https://arxiv.org/pdf/1602.07576.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-function",
+      "finding": "def-function interrupts its Definition with hyperlinks, including “\"relation\" is as in [[def-relation-domain-range-and-field]]” and “([[thm-the-characterising-property-of-ordered-pairs]])”. Additional links occur in the domain/codomain formulation. These violate the requested uninterrupted-definition policy; there is no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-group",
+      "finding": "def-group interrupts its Definition with hyperlinks, beginning “A **group** is a monoid $(G,*,e)$ ([[def-semigroup-and-monoid]]) in which every element is invertible ([[def-invertible-element]]).” Further links occur before the complete definition and notation end. The requested policy places all such links after the complete Definition in a Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-equivariant-map-of-group-actions",
+      "finding": "def-equivariant-map-of-group-actions interrupts its Definition with “Let $X$ and $Y$ be $G$-sets ([[def-group-action]])” and “An **isomorphism of $G$-sets** is an equivariant bijection ([[def-injection-surjection-bijection]]).” A def-function link also occurs inline. These links precede the complete formulation and lack the required following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-subgroup",
+      "finding": "def-subgroup interrupts its Definition with “Let $G$ be a group ([[def-group]]) with identity $e$” and links inside condition S2 and the subsequent explanation of inherited group structure. These violate the requested uninterrupted-definition policy and are not collected in a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-coset",
+      "finding": "def-coset begins its Definition “Let $G$ be a group and let $H\\le G$ be a subgroup ([[def-group]], [[def-subgroup]]).” The links interrupt the formulation before the coset formulas and representative convention; the requested Definition references section is absent.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": []
+}

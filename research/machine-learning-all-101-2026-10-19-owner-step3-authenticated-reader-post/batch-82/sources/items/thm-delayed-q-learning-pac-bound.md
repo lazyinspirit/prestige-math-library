@@ -1,0 +1,111 @@
+---
+id: thm-delayed-q-learning-pac-bound
+kind: theorem
+title: "PAC-MDP sample complexity of Delayed Q-learning"
+status: draft
+origin: pipeline
+pipeline_run: machine-learning-all-101-2026-10-19
+dependency_level: 6
+deps:
+  - alg-delayed-q-learning
+  - def-pac-mdp-sample-complexity
+  - def-admissible-mdp-heuristic
+  - def-pac-mdp-known-state-action-mdp
+  - lem-delayed-q-learning-optimism-and-update-counts
+  - thm-pac-mdp-escape-event-reduction
+  - thm-pac-mdp-value-functions
+  - thm-zero-tolerance-pac-mdp-boundary
+justified_by: []
+aliases:
+  - thm-delayed-q-pac-bound
+forward_refs: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis"
+      url: "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf"
+      locator: "§3.3.2, Theorem 16 and complete proof, PDF pp. 20–24 (printed pp. 2432–2436)."
+    - title: "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning"
+      url: "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf"
+      locator: "§5.2.1, Theorem 1 and proof, PDF pp. 6–8 (printed pp. 886–888)."
+    - title: "Csaba Szepesvári, Algorithms for Reinforcement Learning"
+      url: "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf"
+      locator: "§4.2.4, PDF pp. 53–54; PAC-MDP criterion and delayed-Q result context."
+---
+
+## Statement
+
+Let $M$ be a bounded-reward finite discounted MDP, write $S=|S|$ and $A=\max_s|A(s)|$, and fix $0\le\epsilon<(1-\gamma)^{-1}$, $0<\delta<1$, and an admissible heuristic with normalized cap $V_{\max}$. At $\epsilon=0$, if $V^*(s)=0$ at every state then $N_0=0$; no finite zero-tolerance extension holds uniformly over this class: already at $\gamma=0$, every fixed finite legal batch size $m$ and bonus $\epsilon_1$ admits an admissible one-state example for Delayed Q-learning with $N_0=\infty$ with positive probability. This does not assert failure for every fixed heuristic or model. The parameter formulas below are evaluated only when $\epsilon>0$. Assume now $\epsilon>0$. If $\epsilon\ge V_{\max}$, then $N_\epsilon=0$. Otherwise put
+$$\eta=\epsilon/4,\quad \epsilon_1=\frac{\eta(1-\gamma)}3,\quad \kappa=\left\lceil\frac{SA V_{\max}}{\epsilon_1}\right\rceil,\quad N=SA(1+\kappa),\quad C_1=1+\gamma V_{\max},$$
+and choose
+$$m=\left\lceil\frac{C_1^2}{2\epsilon_1^2}\ln\frac{16N}{\delta}\right\rceil.$$
+Run Delayed Q-learning with $m$ and $\epsilon_1$. Write $D(s,a)=[U(s,a)-V^*(s)]_+$, $G=\sum_{s,a}(1+D(s,a)/\epsilon_1)$, and $\zeta=\lceil(2m+1)G\rceil$. Define $q,H,M$ by
+$$q=\frac{\eta}{4V_{\max}},\qquad H=\begin{cases}1,&\gamma=0,\\ \max\{1,\lceil\ln(1/[\eta(1-\gamma)])/(-\ln\gamma)\rceil\},&0<\gamma<1,\end{cases}\qquad M=\left\lceil\frac{2(\zeta+1)+2\ln(2/\delta)}q\right\rceil.$$
+Then $\mathbb P(N_\epsilon\le HM)\ge1-\delta$. Equivalently, up to logarithmic factors, the bound is
+$$\widetilde O\!\left(\frac{V_{\max}(1+\gamma V_{\max})^2\left[\sum_{s,a}D(s,a)+SA\epsilon(1-\gamma)\right]}{\epsilon^4(1-\gamma)^4}\right),$$
+where $\widetilde O$ suppresses logarithmic factors. The additive term remains when all heuristic slacks vanish. For $V_{\max}=(1-\gamma)^{-1}$ this gives $\widetilde O(SA/[\epsilon^4(1-\gamma)^8])$.
+
+
+For every $\epsilon>0$, a bound uniform over all MDPs and admissible heuristics with these $S,A,\gamma$ is obtained by setting
+$$\bar V=\frac1{1-\gamma},\quad \bar\epsilon_1=\frac{\epsilon(1-\gamma)}{12},\quad \bar\kappa=\left\lceil\frac{SA\bar V}{\bar\epsilon_1}\right\rceil,\quad \bar N=SA(1+\bar\kappa),$$
+$$\bar m=\left\lceil\frac{\bar V^2}{2\bar\epsilon_1^2}\ln\frac{16\bar N}{\delta}\right\rceil,\quad \bar G=SA\left(1+\frac{\bar V}{\bar\epsilon_1}\right),\quad \bar\zeta=\left\lceil(2\bar m+1)\bar G\right\rceil,\quad \bar q=\frac{\epsilon(1-\gamma)}{16},$$
+and
+$$\bar H=\begin{cases}1,&\gamma=0,\\ \max\{1,\lceil\ln(1/[(\epsilon/4)(1-\gamma)])/(-\ln\gamma)\rceil\},&0<\gamma<1,\end{cases}\qquad \bar M=\left\lceil\frac{2(\bar\zeta+1)+2\ln(2/\delta)}{\bar q}\right\rceil.$$ 
+Then $\mathbb P(N_\epsilon\le\bar H\bar M)\ge1-\delta$. This bound depends only on $S,A,\epsilon,\delta,\gamma$.
+
+## Statement references
+
+[[thm-zero-tolerance-pac-mdp-boundary|The full zero-tolerance boundary, including admissible algorithm failures and the zero-value success case]].
+
+[[def-pac-mdp-sample-complexity|The bad-timestep count and the uniform PAC-MDP meaning of a bound]].
+
+[[def-admissible-mdp-heuristic|Admissibility, heuristic slack, and the normalized cap]].
+
+[[alg-delayed-q-learning|The delayed batch update and global learning flags]].
+
+[[lem-delayed-q-learning-optimism-and-update-counts|Optimism, residual escape updates, and corrected visit counts]].
+
+[[thm-pac-mdp-escape-event-reduction|The update/escape count reduction to bad steps]].
+
+[Strehl, Li, and Littman, *Reinforcement Learning in Finite MDPs: PAC Analysis*](https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf).
+
+[Strehl et al., *PAC Model-Free Reinforcement Learning*](https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf).
+
+[Szepesvári, *Algorithms for Reinforcement Learning*](https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf).
+
+## Facts & Assumptions
+
+**Given:** The MDP, admissible heuristic, Delayed Q-learning algorithm, and bad-step count in the Statement.
+
+[F1] [[lem-delayed-q-learning-optimism-and-update-counts]]: with the displayed $m$, all estimates are optimistic, update/escape events total at most $(2m+1)G$, and the lemma event has failure probability at most its confidence parameter.
+
+[F2] [[thm-pac-mdp-escape-event-reduction]]: taking $B=W=V_{\max}$ and $Q_c=V_{\max}$, optimism, policy accuracy at most $\eta$, and complexity at most $\zeta$ yield $N_{4\eta}\le HM$ with failure at most twice the confidence parameter.
+
+[F3] [[def-admissible-mdp-heuristic]]: $V^*(s)\le V_{\max}$, so $N_\epsilon=0$ when $\epsilon\ge V_{\max}$.
+
+[F4] [[def-pac-mdp-known-state-action-mdp]]: an action outside $K_t$ has known-model value exactly $Q_t(s,a)$, using its dedicated absorbing state.
+
+[F5] [[thm-pac-mdp-value-functions]]: the policy value in a finite MDP solves its Bellman equation.
+
+[F6] [[alg-delayed-q-learning]]: Q-values start at $U\in[0,V_{\max}]$ and each successful update replaces one value by a nonnegative quantity no larger than its old value.
+
+[F7] [[thm-zero-tolerance-pac-mdp-boundary]]: at zero tolerance the all-zero-optimal-value case has no bad steps; fixed finite legal Delayed Q-learning parameters admit an admissible one-state model with infinitely many zero-bad steps, with failure probability exceeding any prescribed confidence tolerance.
+
+## Proof
+
+1.1 If $\epsilon=0$, apply [F7] to obtain both stated endpoint branches. No finite sample-size or positive bonus is defined by substituting zero into the later formulas. For the remainder assume $\epsilon>0$. [given, F7, cases]
+
+1.2 If $\epsilon\ge V_{\max}$, then [F3] and nonnegativity of continuation values imply no bad step. Otherwise $\eta=\epsilon/4<V_{\max}/4$ and $\eta(1-\gamma)<1$. The displayed batch size is the lemma threshold [F1] with internal failure parameter $\delta/2$, so with probability at least $1-\delta/2$ all Q-values are optimistic and the update/escape count is at most $\zeta$. [given, F1, F3, algebra]
+
+1.3 At each original state $s$, let $a=\pi_t(s)$. If $(s,a)\notin K_t$, the known-model value of that action is exactly $Q_t(s,a)=V_t(s)$ by [F4]. If $(s,a)\in K_t$, its Bellman backup at $V_t$ differs from $Q_t(s,a)$ above by at most $3\epsilon_1$, by the definition of $K_t$. Thus $V_t(s)\le T^{\pi_t}_{M_t}V_t(s)+3\epsilon_1$. Subtract the fixed-point equation in [F5] for $V^{\pi_t}_{M_t}$ and take the maximum positive difference over states; the stochastic transition rows give $\|V_t-V^{\pi_t}_{M_t}\|_{\infty,+}\le\gamma\|V_t-V^{\pi_t}_{M_t}\|_{\infty,+}+3\epsilon_1$, hence $V_t-V^{\pi_t}_{M_t}\le3\epsilon_1/(1-\gamma)=\eta$. [given, F1, F4, F5, algebra]
+
+2.1 The residual sets $K_t$ are history-measurable and change only after a Q update; they satisfy the stability condition of [F2]. By [F6], the Q table remains in $[0,V_{\max}]$. Step 1.2 supplies optimism and the count bound; step 1.3 supplies policy accuracy. Apply [F2] with $\rho=\delta/2$. Since $4\eta=\epsilon$, it gives $\mathbb P(N_\epsilon\le HM)\ge1-\delta$. [given, F1, F2, F6, step 1.2, step 1.3]
+
+3.1 From the definitions, $G=[\sum_{s,a}D(s,a)+|D|\epsilon_1]/\epsilon_1\le[\sum_{s,a}D(s,a)+SA\epsilon_1]/\epsilon_1$, where $|D|=\sum_s|A(s)|\le SA$, $m=O((1+\gamma V_{\max})^2\epsilon_1^{-2}\ln(16N/\delta))$, and $M=O((V_{\max}/\eta)(mG+\ln(2/\delta)))$. Also $H=O((1-\gamma)^{-1}\ln(1/[\eta(1-\gamma)]))$: for $0<\gamma<1$, the function $x-1-\ln x$ has its minimum $0$ at $x=1$, so $-\ln\gamma\ge1-\gamma$. Substituting $\epsilon_1=\epsilon(1-\gamma)/12$ and $\eta=\epsilon/4$ into $H(V_{\max}/\eta)mG$ gives a constant multiple of $\frac{V_{\max}(1+\gamma V_{\max})^2[\sum_{s,a}D(s,a)+SA\epsilon(1-\gamma)]}{\epsilon^4(1-\gamma)^4}\ln\frac{16N}{\delta}\ln\frac{1}{\eta(1-\gamma)}$. The remaining $H(V_{\max}/\eta)\ln(2/\delta)$ term is bounded by the same expression up to logarithmic factors because $m\ge1$ and $G\ge|D|\ge1$. For the uninformative heuristic, $\sum D\le SA/(1-\gamma)$ and $1+\gamma V_{\max}=(1-\gamma)^{-1}$; substitution yields $\widetilde O(SA/[\epsilon^4(1-\gamma)^8])$. [given, F1, F2, step 2.1, algebra]
+
+4.1 Put $\bar V=(1-\gamma)^{-1}$ and $\bar\epsilon_1=\epsilon(1-\gamma)/12$. Admissibility gives $0\le D(s,a)\le V_{\max}\le\bar V$, and hence $C_1=1+\gamma V_{\max}\le\bar V$, $\kappa\le\bar\kappa$, $N\le\bar N$, $m\le\bar m$, $G\le\bar G$, $\zeta\le\bar\zeta$, $q\ge\bar q$, and $H=\bar H$. If $\epsilon\ge V_{\max}$, then $N_\epsilon=0$. Otherwise $M\le\bar M$, so step 2.1 proves the uniform bound. All barred quantities depend only on $S,A,\epsilon,\delta,\gamma$, as required by the Definition. [given, F1, F2, F3, step 2.1, algebra] ∎

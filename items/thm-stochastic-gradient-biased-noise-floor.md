@@ -19,6 +19,7 @@ deps:
   - thm-induction-principle
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-stochastic-gradient-biased-noise-floor.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -36,7 +37,7 @@ sources:
 
 ## Statement
 
-Assume AC. Let $f:\mathbb R^d\to\mathbb R$ have $L$-Lipschitz gradient for $L>0$ and satisfy $f(x)\ge f_{\inf}$ for a real lower bound $f_{\inf}$. Run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]] from square-integrable $x_0$ with deterministic steps $0<\alpha_k\le1/(4L)$. Suppose
+Assume AC. Let $f:\mathbb R^d\to\mathbb R$ have $L$-Lipschitz gradient for $L>0$ and satisfy $f(x)\ge f_{\inf}$ for a real lower bound $f_{\inf}$. Run the unconstrained update of Filtration-adapted stochastic-gradient oracles and Robbins–Monro updates from square-integrable $x_0$ with deterministic steps $0<\alpha_k\le1/(4L)$. Suppose
 $$\mathbb E[G_k\mid\mathcal F_k]=\nabla f(x_k)+b_k,\qquad \|b_k\|_2\le\beta_k,\qquad \operatorname{Var}(G_k\mid\mathcal F_k)\le\sigma_k^2$$
 almost surely, where $b_k$ is $\mathcal F_k$-measurable and $\beta_k,\sigma_k$ are deterministic nonnegative bounds. For $N\ge1$ and $\Delta=\mathbb E f(x_0)-f_{\inf}<\infty$,
 $$\frac{\sum_{k=0}^{N-1}\alpha_k\mathbb E\|\nabla f(x_k)\|_2^2}{\sum_{k=0}^{N-1}\alpha_k}\le \frac{2\Delta+2\sum_{k<N}\alpha_k\beta_k^2+2L\sum_{k<N}\alpha_k^2\beta_k^2+L\sum_{k<N}\alpha_k^2\sigma_k^2}{\sum_{k<N}\alpha_k}.$$
@@ -45,6 +46,10 @@ $$\frac{2\Delta}{\alpha N}+\frac52\beta^2+L\alpha\sigma^2,$$
 and therefore
 $$\limsup_{N\to\infty}\frac1N\sum_{k=0}^{N-1}\mathbb E\|\nabla f(x_k)\|_2^2\le\frac52\beta^2+L\alpha\sigma^2.$$
 Decreasing steps retain the displayed weighted bias and noise sums.
+
+## Statement references
+
+[[def-stochastic-gradient-oracle-and-unconstrained-update]]
 
 ## Facts & Assumptions
 

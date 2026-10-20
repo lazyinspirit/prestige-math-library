@@ -1,0 +1,36 @@
+--- research/machine-learning-all-101-2026-10-19-owner-step3-authenticated-preimages/preimage/items/lem-linear-ridge-pullback-of-null-sets-is-null.md
++++ items/lem-linear-ridge-pullback-of-null-sets-is-null.md
+@@ -13,8 +13,10 @@
+   - thm-linear-change-of-variables-for-lebesgue-measure
+   - thm-lebesgue-outer-regularity-for-arbitrary-subsets
+   - thm-lebesgue-measure-is-a-complete-measure
++  - thm-lebesgue-measure-of-a-box-of-every-kind
+   - thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
+   - thm-borel-sets-are-lebesgue-measurable
++  - thm-finite-and-countable-subadditivity-of-measures
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -57,15 +59,19 @@
+ 
+ [F7] Under Countable Choice every Borel subset of $\mathbb R^d$ is Lebesgue measurable ([[thm-borel-sets-are-lebesgue-measurable]]).
+ 
++[F8] Under Countable Choice, Lebesgue measure in every positive dimension is $\sigma$-finite: $\mathbb R^m=\bigcup_{r=1}^{\infty}[-r,r]^m$, and each box has finite measure $(2r)^m$ ([[thm-lebesgue-measure-of-a-box-of-every-kind]]).
++
++[F9] A countable union of measurable null sets is measurable and null, by the measure property in [F6] and countable subadditivity ([[thm-finite-and-countable-subadditivity-of-measures]]).
++
+ [A1] Countable Choice means every sequence of nonempty sets has a function choosing one element from each ([[def-countable-choice]]).
+ 
+ ## Proof
+ 
+ 1.1 Put $u=w/\lVert w\rVert_2$. For $d\ge2$, start with $u$ and inspect the standard basis vectors in their finite order; for each $e_i$, subtract its orthogonal projection onto the span of the vectors already retained, and append and normalize the residual exactly when it is nonzero. Since the standard basis spans $\mathbb R^d$, this finite Gram–Schmidt procedure produces an orthonormal basis whose first vector is $u$. Let $Q$ be the associated orthogonal coordinate map. If $d=1$, take $Qx=ux$. In either case the first coordinate of $Qx$ is $u\cdot x$, and [F4] says $Q$ preserves Lebesgue measure. [given, F4, construct]
+ 
+-2.1 Fix an integer $R\ge1$. Since $Q$ is a finite matrix, choose $C_R<\infty$ greater than $R$ times the largest sum of absolute entries in any row; then $Q([-R,R]^d)\subseteq[-C_R,C_R]^d$. Set $E_R=((E-b)/\lVert w\rVert_2)\cap[-C_R,C_R]$. By [F5], $E_R$ is null. By [F1], choose a Borel null set $B_R\supseteq E_R$. If $d=1$, the image under $Q$ of the set in the Statement intersected with $[-R,R]$ is contained in $B_R$. If $d\ge2$, that image is contained in $B_R\times[-C_R,C_R]^{d-1}$. [step 1.1, F1, F5, A1, choose]
++2.1 Fix an integer $R\ge1$. Since $Q$ is a finite matrix, choose $C_R<\infty$ greater than $R$ times the largest sum of absolute entries in any row; then $Q([-R,R]^d)\subseteq[-C_R,C_R]^d$. Since $E$ has outer measure zero, [F1] makes it Lebesgue measurable and null. Thus $E_R=((E-b)/\lVert w\rVert_2)\cap[-C_R,C_R]$ is a one-dimensional measurable null set by [F5]. By [F1], choose a Borel null set $B_R\supseteq E_R$. If $d=1$, the image under $Q$ of the set in the Statement intersected with $[-R,R]$ is contained in $B_R$. If $d\ge2$, that image is contained in $B_R\times[-C_R,C_R]^{d-1}$. [step 1.1, F1, F5, A1, choose]
+ 
+-3.1 If $d=1$, the bounded pullback image is contained in the Borel null set $B_R$, and the inverse orthogonal map preserves nullity by [F4]. If $d\ge2$, the Borel set $B_R\times[-C_R,C_R]^{d-1}$ is Lebesgue measurable by [F7]; Tonelli [F2] gives it product measure zero because its one-dimensional section factor $B_R$ has measure zero, and [F3] identifies that product measure with $\lambda_d$. Applying the inverse orthogonal map preserves nullity by [F4]. In either case the ridge pullback inside $[-R,R]^d$ is contained in a Borel null set. [step 2.1, F2, F3, F4, F7, A1]
++3.1 If $d=1$, the bounded pullback image is contained in the Borel null set $B_R$, and the inverse orthogonal map preserves nullity by [F4]. If $d\ge2$, the Borel set $B_R\times[-C_R,C_R]^{d-1}$ is Lebesgue measurable by [F7]; both Lebesgue factors are $\sigma$-finite by [F8], so Tonelli [F2] gives it product measure zero because its one-dimensional section factor $B_R$ has measure zero, and [F3] identifies that product measure with $\lambda_d$. Applying the inverse orthogonal map preserves nullity by [F4]. In either case the ridge pullback inside $[-R,R]^d$ is contained in a Borel null set. [step 2.1, F2, F3, F4, F7, F8, A1]
+ 
+-4.1 The full pullback is the countable union of its intersections with $[-R,R]^d$, $R\ge1$. Each intersection is a subset of the Borel null set from step 3.1, hence is measurable and null by [F6]; countable additivity makes the union measurable and null. If two functions differ only on $E$, their compositions differ only on this pullback, proving the consequence. [step 3.1, F6, A1] ∎
++4.1 The full pullback is the countable union of its intersections with $[-R,R]^d$, $R\ge1$. Each intersection is a subset of the Borel null set from step 3.1, hence is measurable and null by [F6]. The full pullback is measurable by [F6] and null by countable subadditivity [F9]. If two functions differ only on $E$, their compositions differ only on this pullback, proving the consequence. [step 3.1, F6, F9, A1] ∎
+ 

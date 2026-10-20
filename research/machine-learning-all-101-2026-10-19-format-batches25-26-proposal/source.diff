@@ -1,0 +1,197 @@
+--- items/def-restricted-boltzmann-machine.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/def-restricted-boltzmann-machine.md
+@@ -75,14 +75,14 @@
+ 
+ 1.1 The state space $\{0,1\}^m\times\{0,1\}^n$ has $2^{m+n}$ elements. Every term $\exp(-E(v,h))$ is finite and positive, so their finite sum $Z$ is finite and positive; therefore $p$ is a probability mass function. [given, construct, algebra]
+ 
+-1.2 For fixed $v$, put $c_j=b_j+(W^Tv)_j$. Then $\exp(-E(v,h))=\exp(a^Tv)\prod_j\exp(h_jc_j)$, and summing over binary $h$ gives $\exp(a^Tv)\prod_j(1+\exp(c_j))$. Thus $p(h\mid v)$ is the product of Bernoulli masses with success probabilities $\exp(c_j)/(1+\exp(c_j))=\sigma(c_j)$. [given, step 1.1, algebra]
++2.1 For fixed $v$, put $c_j=b_j+(W^Tv)_j$. Then $\exp(-E(v,h))=\exp(a^Tv)\prod_j\exp(h_jc_j)$, and summing over binary $h$ gives $\exp(a^Tv)\prod_j(1+\exp(c_j))$. Thus $p(h\mid v)$ is the product of Bernoulli masses with success probabilities $\exp(c_j)/(1+\exp(c_j))=\sigma(c_j)$. [given, step 1.1, algebra]
+ 
+-1.3 For fixed $h$, put $d_i=a_i+(Wh)_i$. Then $\exp(-E(v,h))=\exp(b^Th)\prod_i\exp(v_id_i)$, and summing over binary $v$ gives $\exp(b^Th)\prod_i(1+\exp(d_i))$. Hence $p(v\mid h)$ is the product of Bernoulli masses with success probabilities $\exp(d_i)/(1+\exp(d_i))=\sigma(d_i)$. [given, step 1.1, algebra]
++2.2 For fixed $h$, put $d_i=a_i+(Wh)_i$. Then $\exp(-E(v,h))=\exp(b^Th)\prod_i\exp(v_id_i)$, and summing over binary $v$ gives $\exp(b^Th)\prod_i(1+\exp(d_i))$. Hence $p(v\mid h)$ is the product of Bernoulli masses with success probabilities $\exp(d_i)/(1+\exp(d_i))=\sigma(d_i)$. [given, step 1.1, algebra]
+ 
+-1.4 The product conditional mass functions in steps 1.2–1.3 make the conditional expectations of any bounded measurable functions of disjoint coordinates factor into the product of their conditional expectations. By [F1]–[F2], each layer is therefore conditionally independent given the other in the stated sigma-algebra sense. This use of the conditional-expectation convention is the only proof point needing [A1]. [F1, F2, A1, step 1.2, step 1.3]
++2.3 For fixed observed $v$, $p(v)=Z^{-1}\exp(a^Tv)\sum_h\exp(b^Th+v^TWh)$. Differentiating these finite sums gives $\partial_{W_{ij}}\log p(v)=v_i\mathbb E_{p(h\mid v)}[h_j]-\partial_{W_{ij}}\log Z$; the same calculation gives $\partial_{a_i}\log p(v)=v_i-\partial_{a_i}\log Z$ and $\partial_{b_j}\log p(v)=\mathbb E_{p(h\mid v)}[h_j]-\partial_{b_j}\log Z$. [F3, step 1.1, algebra]
+ 
+-2.1 For fixed observed $v$, $p(v)=Z^{-1}\exp(a^Tv)\sum_h\exp(b^Th+v^TWh)$. Differentiating these finite sums gives $\partial_{W_{ij}}\log p(v)=v_i\mathbb E_{p(h\mid v)}[h_j]-\partial_{W_{ij}}\log Z$; the same calculation gives $\partial_{a_i}\log p(v)=v_i-\partial_{a_i}\log Z$ and $\partial_{b_j}\log p(v)=\mathbb E_{p(h\mid v)}[h_j]-\partial_{b_j}\log Z$. [F3, step 1.1, algebra]
++3.1 The product conditional mass functions in steps 2.1–2.2 make the conditional expectations of any bounded measurable functions of disjoint coordinates factor into the product of their conditional expectations. By [F1]–[F2], each layer is therefore conditionally independent given the other in the stated sigma-algebra sense. This use of the conditional-expectation convention is the only proof point needing [A1]. [F1, F2, A1, step 2.1, step 2.2]
+ 
+-2.2 Differentiating the finite partition sum yields $\partial_{W_{ij}}\log Z=\sum_{v',h'}v_i'h_j'p(v',h')=\mathbb E_p[V_iH_j]$, $\partial_{a_i}\log Z=\mathbb E_p[V_i]$, and $\partial_{b_j}\log Z=\mathbb E_p[H_j]$. Substitution in step 2.1 gives the exact gradients in the Definition. [F3, step 2.1, algebra]
++3.2 Differentiating the finite partition sum yields $\partial_{W_{ij}}\log Z=\sum_{v',h'}v_i'h_j'p(v',h')=\mathbb E_p[V_iH_j]$, $\partial_{a_i}\log Z=\mathbb E_p[V_i]$, and $\partial_{b_j}\log Z=\mathbb E_p[H_j]$. Substitution in step 2.3 gives the exact gradients in the Definition. [F3, step 2.3, algebra]
+ 
+-3.1 For each visible state $v$, $\sum_{v'}K(v,v')=\sum_h p(h\mid v)\sum_{v'}p(v'\mid h)=\sum_hp(h\mid v)=1$. Thus K is a stochastic matrix and each $q_k^v$ is a well-defined finite probability distribution. Replacing the exact negative-phase marginal $p(v')$ in the gradient formulas by $q_k^v(v')$ gives the finite contrastive-divergence statistic defined in the Statement. [step 1.2, step 1.3, step 2.2, algebra] ∎
++4.1 For each visible state $v$, $\sum_{v'}K(v,v')=\sum_h p(h\mid v)\sum_{v'}p(v'\mid h)=\sum_hp(h\mid v)=1$. Thus K is a stochastic matrix and each $q_k^v$ is a well-defined finite probability distribution. Replacing the exact negative-phase marginal $p(v')$ in the gradient formulas by $q_k^v(v')$ gives the finite contrastive-divergence statistic defined in the Statement. [step 2.1, step 2.2, step 3.2, algebra] ∎
+--- items/alg-graphical-lasso-coordinate-descent.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/alg-graphical-lasso-coordinate-descent.md
+@@ -49,8 +49,8 @@
+ 
+ 1.1 For any nonzero $x\in\mathbb R^p$, $x^TWx=x^TSx+\lambda\|x\|^2\ge\lambda\|x\|^2>0$, so the initialized $W$ is symmetric positive definite. [given, F1, algebra]
+ 
+-1.2 Suppose the current $W$ is positive definite. Its principal submatrix $V$ is positive definite, so $V_{\ell\ell}>0$ for each coordinate. With other coordinates fixed, the lasso objective $\tfrac12\beta^TV\beta-s^T\beta+\lambda\|\beta\|_1$ as a function of $\beta_\ell=t$ is $\tfrac12V_{\ell\ell}t^2-rt+\lambda|t|+\text{constant}$, where $r=s_\ell-\sum_{k\ne\ell}V_{\ell k}\beta_k$. Its unique minimizer is $(r-\lambda)/V_{\ell\ell}$ when $r>\lambda$, zero when $|r|\le\lambda$, and $(r+\lambda)/V_{\ell\ell}$ when $r<-\lambda$, exactly the displayed soft-threshold update. Hence every finite coordinate sweep is well-defined. [F1, step 1.1, algebra]
++2.1 Suppose the current $W$ is positive definite. Its principal submatrix $V$ is positive definite, so $V_{\ell\ell}>0$ for each coordinate. With other coordinates fixed, the lasso objective $\tfrac12\beta^TV\beta-s^T\beta+\lambda\|\beta\|_1$ as a function of $\beta_\ell=t$ is $\tfrac12V_{\ell\ell}t^2-rt+\lambda|t|+\text{constant}$, where $r=s_\ell-\sum_{k\ne\ell}V_{\ell k}\beta_k$. Its unique minimizer is $(r-\lambda)/V_{\ell\ell}$ when $r>\lambda$, zero when $|r|\le\lambda$, and $(r+\lambda)/V_{\ell\ell}$ when $r<-\lambda$, exactly the displayed soft-threshold update. Hence every finite coordinate sweep is well-defined. [F1, step 1.1, algebra]
+ 
+-2.1 Each block candidate is a finite symmetric matrix. By [F2] it has a symmetric eigendecomposition, and all its eigenvalues are positive exactly when it is positive definite. The procedure accepts only candidates passing this finite test, so positive definiteness is invariant until either an explicit failure is returned or all $Rp$ blocks finish. [F2, step 1.2, algebra]
++3.1 Each block candidate is a finite symmetric matrix. By [F2] it has a symmetric eigendecomposition, and all its eigenvalues are positive exactly when it is positive definite. The procedure accepts only candidates passing this finite test, so positive definiteness is invariant until either an explicit failure is returned or all $Rp$ blocks finish. [F2, step 2.1, algebra]
+ 
+-2.2 The fixed positive integers $R$ and $K$ bound all outer and inner loops, so the procedure terminates. On success the final $W$ is positive definite by step 2.1, hence $W^{-1}$ exists and is positive definite. The procedure makes no conclusion that this truncated output maximizes $F_{S,\lambda}$ or that increasing $R$ and $K$ converges. [given, step 2.1, algebra] ∎
++4.1 The fixed positive integers $R$ and $K$ bound all outer and inner loops, so the procedure terminates. On success the final $W$ is positive definite by step 3.1, hence $W^{-1}$ exists and is positive definite. The procedure makes no conclusion that this truncated output maximizes $F_{S,\lambda}$ or that increasing $R$ and $K$ converges. [given, step 3.1, algebra] ∎
+--- items/lem-graphical-lasso-profiled-gaussian-likelihood.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/lem-graphical-lasso-profiled-gaussian-likelihood.md
+@@ -57,14 +57,10 @@
+ 
+ ## Proof
+ 
+-1.1 Each independent observation with the common law in [F3] has the density in [F2]. On the one-point source $\{*\}$, the constant law $K_r(*,\cdot)=N_p(\mu,\Sigma)$ is a probability kernel: its sections are probability measures and each evaluation map is constant, hence measurable [F4]. The density $f_r(*,x)=f_{\mu,\Theta}(x)$ is continuous in $x$ and constant in $*$, hence jointly measurable; [F5] gives the joint product density $\prod_{r=1}^N f_{\mu,\Theta}(x_r)$. By independence this product is the joint observation law. Its log-likelihood for fixed $\mu$ and $\Theta$ is
+-$$L(\mu,\Theta)=-\frac{Np}{2}\log(2\pi)+\frac N2\log\det\Theta-\frac12\sum_{r=1}^N(x_r-\mu)^T\Theta(x_r-\mu).$$
+-[given, A1, F2, F3, F4, F5]
++1.1 Each independent observation with the common law in [F3] has the density in [F2]. On the one-point source $\{*\}$, the constant law $K_r(*,\cdot)=N_p(\mu,\Sigma)$ is a probability kernel: its sections are probability measures and each evaluation map is constant, hence measurable [F4]. The density $f_r(*,x)=f_{\mu,\Theta}(x)$ is continuous in $x$ and constant in $*$, hence jointly measurable; [F5] gives the joint product density $\prod_{r=1}^N f_{\mu,\Theta}(x_r)$. By independence this product is the joint observation law. Its log-likelihood for fixed $\mu$ and $\Theta$ is $$L(\mu,\Theta)=-\frac{Np}{2}\log(2\pi)+\frac N2\log\det\Theta-\frac12\sum_{r=1}^N(x_r-\mu)^T\Theta(x_r-\mu).$$ [given, A1, F2, F3, F4, F5]
+ 
+-1.2 Write $y_r=x_r-\bar x$, so $\sum_r y_r=0$ and $x_r-\mu=y_r+(\bar x-\mu)$. Expanding and summing removes the cross term:
+-$$\sum_{r=1}^N(x_r-\mu)^T\Theta(x_r-\mu)=\sum_{r=1}^Ny_r^T\Theta y_r+N(\mu-\bar x)^T\Theta(\mu-\bar x).$$
+-[given, F1, step 1.1, algebra]
++2.1 Write $y_r=x_r-\bar x$, so $\sum_r y_r=0$ and $x_r-\mu=y_r+(\bar x-\mu)$. Expanding and summing removes the cross term: $$\sum_{r=1}^N(x_r-\mu)^T\Theta(x_r-\mu)=\sum_{r=1}^Ny_r^T\Theta y_r+N(\mu-\bar x)^T\Theta(\mu-\bar x).$$ [given, F1, step 1.1, algebra]
+ 
+-2.1 Positive definiteness of $\Theta$ makes the last quadratic term nonnegative and equal to zero exactly at $\mu=\bar x$. Therefore $\bar x$ uniquely maximizes $L(\mu,\Theta)$ over $\mu$. [given, step 1.2, algebra]
++3.1 Positive definiteness of $\Theta$ makes the last quadratic term nonnegative and equal to zero exactly at $\mu=\bar x$. Therefore $\bar x$ uniquely maximizes $L(\mu,\Theta)$ over $\mu$. [given, step 2.1, algebra]
+ 
+-2.2 By [F1], $\sum_r y_ry_r^T=NS$. Cyclicity of the finite matrix trace gives $\sum_r y_r^T\Theta y_r=\sum_r\operatorname{tr}(\Theta y_ry_r^T)=N\operatorname{tr}(S\Theta)$. Substituting this identity and $\mu=\bar x$ into step 1.1 yields the displayed profile log-likelihood and its normalization. [F1, step 1.1, step 1.2, step 2.1, algebra] ∎
++4.1 By [F1], $\sum_r y_ry_r^T=NS$. Cyclicity of the finite matrix trace gives $\sum_r y_r^T\Theta y_r=\sum_r\operatorname{tr}(\Theta y_ry_r^T)=N\operatorname{tr}(S\Theta)$. Substituting this identity and $\mu=\bar x$ into step 1.1 yields the displayed profile log-likelihood and its normalization. [F1, step 1.1, step 2.1, step 3.1, algebra] ∎
+--- items/thm-gaussian-precision-zero-conditional-independence.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/thm-gaussian-precision-zero-conditional-independence.md
+@@ -75,6 +75,6 @@
+ 
+ 5.1 If $\Theta_{ij}=c=0$, then $A$ is diagonal and the conditional density in step 4.1 is a product of two univariate Gaussian densities for every $z$. Its conditional expectations therefore factor for all bounded measurable coordinate functions; [F4] gives $X_i\perp\!\!\!\perp X_j\mid\sigma(Z)$. [step 4.1, F4, algebra]
+ 
+-6.1 Conversely, suppose $X_i\perp\!\!\!\perp X_j\mid\sigma(Z)$. Apply [F4] to the four bounded pairs formed from $\cos(X_i),\sin(X_i)$ and $\cos(X_j),\sin(X_j)$ and combine the resulting identities. For almost every $z$, the conditional joint characteristic function at $(1,1)$ equals the product of its conditional marginal characteristic functions. By [F1], [F4] and [F5], the joint characteristic function from step 4.1 is $\exp(i(m_1(z)+m_2(z))-\tfrac12((A^{-1})_{11}+2(A^{-1})_{12}+(A^{-1})_{22}))$, whereas that product omits the middle covariance term. Equality implies $\exp(-(A^{-1})_{12})=1$, and since $(A^{-1})_{12}$ is real this forces $(A^{-1})_{12}=0$. [step 4.1, F1, F4, F5]
++5.2 Conversely, suppose $X_i\perp\!\!\!\perp X_j\mid\sigma(Z)$. Apply [F4] to the four bounded pairs formed from $\cos(X_i),\sin(X_i)$ and $\cos(X_j),\sin(X_j)$ and combine the resulting identities. For almost every $z$, the conditional joint characteristic function at $(1,1)$ equals the product of its conditional marginal characteristic functions. By [F1], [F4] and [F5], the joint characteristic function from step 4.1 is $\exp(i(m_1(z)+m_2(z))-\tfrac12((A^{-1})_{11}+2(A^{-1})_{12}+(A^{-1})_{22}))$, whereas that product omits the middle covariance term. Equality implies $\exp(-(A^{-1})_{12})=1$, and since $(A^{-1})_{12}$ is real this forces $(A^{-1})_{12}=0$. [step 4.1, F1, F4, F5]
+ 
+-7.1 The inverse of $A$ is $(ad-c^2)^{-1}\begin{pmatrix}d&-c\\-c&a\end{pmatrix}$. Since $\det A>0$, $(A^{-1})_{12}=0$ if and only if $c=0$, which is exactly $\Theta_{ij}=0$. Steps 5.1 and 6.1 prove the two implications; by [F8], these are exactly the nonedge and conditional-independence cases of the Gaussian pairwise Markov graph. [step 2.1, step 5.1, step 6.1, F8, algebra] ∎
++6.1 The inverse of $A$ is $(ad-c^2)^{-1}\begin{pmatrix}d&-c\\-c&a\end{pmatrix}$. Since $\det A>0$, $(A^{-1})_{12}=0$ if and only if $c=0$, which is exactly $\Theta_{ij}=0$. Steps 5.1 and 5.2 prove the two implications; by [F8], these are exactly the nonedge and conditional-independence cases of the Gaussian pairwise Markov graph. [step 2.1, step 5.1, step 5.2, F8, algebra] ∎
+--- items/thm-graphical-lasso-convexity-and-kkt.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/thm-graphical-lasso-convexity-and-kkt.md
+@@ -56,12 +56,12 @@
+ 
+ 1.1 By the all-entry objective definition [F1] and the nonnegative-operator factorization [F2], write $S=R^TR$. Thus $\operatorname{tr}(S\Theta)=\operatorname{tr}(R\Theta R^T)\ge0$ for $\Theta\succ0$. Also $\|\Theta\|_1=\sum_{i,j}|\Theta_{ij}|\ge\sum_i\Theta_{ii}=\operatorname{tr}\Theta$, since positive-definite matrices have positive diagonal entries. [given, F1, F2, algebra]
+ 
+-1.2 By [F3], the eigenvalues $t_1,\ldots,t_p$ of $\Theta\succ0$ are positive and $\log\det\Theta=\sum_k\log t_k$, $\operatorname{tr}\Theta=\sum_k t_k$. Hence $F_{S,\lambda}(\Theta)\le\sum_{k=1}^p h(t_k)$ for $h(t)=\log t-\lambda t$. The function $h$ is bounded above and tends to $-\infty$ as $t\downarrow0$ or $t\to\infty$. For any $c$, the upper level set $F_{S,\lambda}(\Theta)\ge c$ therefore forces each eigenvalue into a compact interval $[a_c,b_c]\subset(0,\infty)$: if $M=\sup_{t>0}h(t)$, then each $h(t_k)\ge c-(p-1)M$. These matrices form a closed bounded set of symmetric matrices contained in $\mathbb S_{++}^p$, hence a compact set. Taking $c=F_{S,\lambda}(I)$ gives a nonempty compact upper level set, and continuity of $F$ yields a maximizer. [step 1.1, F3, algebra]
++1.2 The cone $\mathbb S_{++}^p$ is open and convex: positive quadratic forms remain positive under sufficiently small symmetric perturbations, and convex combinations of positive quadratic forms remain positive. For symmetric $H$, determinant expansion gives $\left.\frac{d}{dt}\log\det(\Theta+tH)\right|_{t=0}=\operatorname{tr}(\Theta^{-1}H)$. Differentiating $(\Theta+tH)(\Theta+tH)^{-1}=I$ gives $\left.\frac{d}{dt}(\Theta+tH)^{-1}\right|_{t=0}=-\Theta^{-1}H\Theta^{-1}$, so the second directional derivative is $-\operatorname{tr}(\Theta^{-1}H\Theta^{-1}H)$. [given, F3, algebra]
+ 
+-2.1 The cone $\mathbb S_{++}^p$ is open and convex: positive quadratic forms remain positive under sufficiently small symmetric perturbations, and convex combinations of positive quadratic forms remain positive. For symmetric $H$, determinant expansion gives $\left.\frac{d}{dt}\log\det(\Theta+tH)\right|_{t=0}=\operatorname{tr}(\Theta^{-1}H)$. Differentiating $(\Theta+tH)(\Theta+tH)^{-1}=I$ gives $\left.\frac{d}{dt}(\Theta+tH)^{-1}\right|_{t=0}=-\Theta^{-1}H\Theta^{-1}$, so the second directional derivative is $-\operatorname{tr}(\Theta^{-1}H\Theta^{-1}H)$. [given, F3, algebra]
++2.1 By [F3], the eigenvalues $t_1,\ldots,t_p$ of $\Theta\succ0$ are positive and $\log\det\Theta=\sum_k\log t_k$, $\operatorname{tr}\Theta=\sum_k t_k$. Hence $F_{S,\lambda}(\Theta)\le\sum_{k=1}^p h(t_k)$ for $h(t)=\log t-\lambda t$. The function $h$ is bounded above and tends to $-\infty$ as $t\downarrow0$ or $t\to\infty$. For any $c$, the upper level set $F_{S,\lambda}(\Theta)\ge c$ therefore forces each eigenvalue into a compact interval $[a_c,b_c]\subset(0,\infty)$: if $M=\sup_{t>0}h(t)$, then each $h(t_k)\ge c-(p-1)M$. These matrices form a closed bounded set of symmetric matrices contained in $\mathbb S_{++}^p$, hence a compact set. Taking $c=F_{S,\lambda}(I)$ gives a nonempty compact upper level set, and continuity of $F$ yields a maximizer. [step 1.1, F3, algebra]
+ 
+-2.2 Let $B=\Theta^{-1/2}H\Theta^{-1/2}$, using the positive square root from the orthonormal eigenbasis [F3]. Then $B$ is symmetric and $\operatorname{tr}(\Theta^{-1}H\Theta^{-1}H)=\operatorname{tr}(B^2)=\|B\|_F^2$, strictly positive when $H\ne0$. Thus the second derivative of $\log\det$ along every nonconstant segment is strictly negative, giving its strict chord inequality. The Hessian of $-\log\det$ is positive semidefinite by step 2.1, so [F4] gives convexity in the chord sense of [F5]. The trace term is linear and the entrywise $\ell^1$ norm is convex by the triangle inequality, so its negative is concave; adding these terms preserves the strict chord inequality. Hence $F_{S,\lambda}$ is strictly concave on its open convex domain. [F3, F4, F5, step 2.1, algebra]
++2.2 Let $B=\Theta^{-1/2}H\Theta^{-1/2}$, using the positive square root from the orthonormal eigenbasis [F3]. Then $B$ is symmetric and $\operatorname{tr}(\Theta^{-1}H\Theta^{-1}H)=\operatorname{tr}(B^2)=\|B\|_F^2$, strictly positive when $H\ne0$. Thus the second derivative of $\log\det$ along every nonconstant segment is strictly negative, giving its strict chord inequality. The Hessian of $-\log\det$ is positive semidefinite by step 1.2, so [F4] gives convexity in the chord sense of [F5]. The trace term is linear and the entrywise $\ell^1$ norm is convex by the triangle inequality, so its negative is concave; adding these terms preserves the strict chord inequality. Hence $F_{S,\lambda}$ is strictly concave on its open convex domain. [F3, F4, F5, step 1.2, algebra]
+ 
+-3.1 Put $G=\Theta^{-1}-S$. At a maximizer every feasible one-coordinate directional derivative is at most zero, and when the objective is differentiable in both directions its derivative is zero. Since $\Theta_{ii}>0$, the diagonal penalty is locally differentiable with slope $1$, so the diagonal equation is $G_{ii}-\lambda=0$ and $\Gamma_{ii}=1$. For $i<j$, a symmetric perturbation by $t(E_{ij}+E_{ji})$ has smooth derivative $2G_{ij}t$ and changes the penalty by $2\lambda(|\Theta_{ij}+t|-|\Theta_{ij}|)$. If $\Theta_{ij}\ne0$, testing both signs of small $t$ gives $G_{ij}=\lambda\operatorname{sign}(\Theta_{ij})$. If $\Theta_{ij}=0$, taking $t>0$ gives $G_{ij}\le\lambda$ and taking $t<0$ gives $G_{ij}\ge-\lambda$. Defining $\Gamma_{ij}=\Gamma_{ji}=G_{ij}/\lambda$ at zero and the sign otherwise yields the stated KKT equation for the all-entry penalty [F1]. [given, F1, step 2.1, algebra]
++2.3 Put $G=\Theta^{-1}-S$. At a maximizer every feasible one-coordinate directional derivative is at most zero, and when the objective is differentiable in both directions its derivative is zero. Since $\Theta_{ii}>0$, the diagonal penalty is locally differentiable with slope $1$, so the diagonal equation is $G_{ii}-\lambda=0$ and $\Gamma_{ii}=1$. For $i<j$, a symmetric perturbation by $t(E_{ij}+E_{ji})$ has smooth derivative $2G_{ij}t$ and changes the penalty by $2\lambda(|\Theta_{ij}+t|-|\Theta_{ij}|)$. If $\Theta_{ij}\ne0$, testing both signs of small $t$ gives $G_{ij}=\lambda\operatorname{sign}(\Theta_{ij})$. If $\Theta_{ij}=0$, taking $t>0$ gives $G_{ij}\le\lambda$ and taking $t<0$ gives $G_{ij}\ge-\lambda$. Defining $\Gamma_{ij}=\Gamma_{ji}=G_{ij}/\lambda$ at zero and the sign otherwise yields the stated KKT equation for the all-entry penalty [F1]. [given, F1, step 1.2, algebra]
+ 
+-3.2 Conversely, suppose $\Theta\succ0$ and a symmetric $\Gamma$ satisfies the stated entrywise conditions and $\Theta^{-1}-S-\lambda\Gamma=0$. Put $T=\Theta^{-1/2}\Theta'\Theta^{-1/2}$ for any $\Theta'\succ0$; its eigenvalues $t_r$ are positive. Since $\log t\le t-1$ for $t>0$ (the function $t-1-\log t$ has its minimum $0$ at $t=1$), $\log\det\Theta'-\log\det\Theta=\sum_r\log t_r\le\operatorname{tr}(T)-p=\operatorname{tr}(\Theta^{-1}(\Theta'-\Theta))$. For each scalar $x$ and each allowed subgradient $\gamma$ of $|x|$, $|y|\ge|x|+\gamma(y-x)$: if $x\ne0$, this follows from $|y|\ge\operatorname{sign}(x)y$, while for $x=0$ it follows from $|\gamma|\le1$. Summing gives $\|\Theta'\|_1\ge\|\Theta\|_1+\sum_{i,j}\Gamma_{ij}(\Theta'_{ij}-\Theta_{ij})$ for the all-entry objective [F1]. Combining these bounds with the linear trace term and the KKT equation yields $F_{S,\lambda}(\Theta')-F_{S,\lambda}(\Theta)\le\operatorname{tr}((\Theta^{-1}-S-\lambda\Gamma)(\Theta'-\Theta))=0$. Thus every such KKT point is a maximizer. The maximizer exists by step 1.2 and is unique by strict concavity from step 2.2, so the KKT condition is both necessary and sufficient for that unique optimum. [given, F1, step 1.2, step 2.2, step 3.1, algebra] ∎
++3.1 Conversely, suppose $\Theta\succ0$ and a symmetric $\Gamma$ satisfies the stated entrywise conditions and $\Theta^{-1}-S-\lambda\Gamma=0$. Put $T=\Theta^{-1/2}\Theta'\Theta^{-1/2}$ for any $\Theta'\succ0$; its eigenvalues $t_r$ are positive. Since $\log t\le t-1$ for $t>0$ (the function $t-1-\log t$ has its minimum $0$ at $t=1$), $\log\det\Theta'-\log\det\Theta=\sum_r\log t_r\le\operatorname{tr}(T)-p=\operatorname{tr}(\Theta^{-1}(\Theta'-\Theta))$. For each scalar $x$ and each allowed subgradient $\gamma$ of $|x|$, $|y|\ge|x|+\gamma(y-x)$: if $x\ne0$, this follows from $|y|\ge\operatorname{sign}(x)y$, while for $x=0$ it follows from $|\gamma|\le1$. Summing gives $\|\Theta'\|_1\ge\|\Theta\|_1+\sum_{i,j}\Gamma_{ij}(\Theta'_{ij}-\Theta_{ij})$ for the all-entry objective [F1]. Combining these bounds with the linear trace term and the KKT equation yields $F_{S,\lambda}(\Theta')-F_{S,\lambda}(\Theta)\le\operatorname{tr}((\Theta^{-1}-S-\lambda\Gamma)(\Theta'-\Theta))=0$. Thus every such KKT point is a maximizer. The maximizer exists by step 2.1 and is unique by strict concavity from step 2.2, so the KKT condition is both necessary and sufficient for that unique optimum. [given, F1, step 2.1, step 2.2, step 2.3, algebra] ∎
+--- items/ex-pc-chain-versus-collider-separating-sets.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/ex-pc-chain-versus-collider-separating-sets.md
+@@ -41,7 +41,7 @@
+ $Y$ in the second: the chain's unique endpoint separator contains $Y$, whereas
+ the collider's endpoint separator is empty.
+ 
+-\[
++```tikz
+ \begin{tikzpicture}[>=stealth, node distance=19mm]
+   \node at (0,0) (x1) {$X$}; \node at (1.7,0) (y1) {$Y$}; \node at (3.4,0) (z1) {$Z$};
+   \draw[->] (x1) -- (y1); \draw[->] (y1) -- (z1);
+@@ -50,7 +50,7 @@
+   \draw[->] (x2) -- (y2); \draw[<-] (y2) -- (z2);
+   \node at (1.7,-2.05) {collider};
+ \end{tikzpicture}
+-\]
++```
+ 
+ The diagrams use vertices for variables and arrows for structural parenthood;
+ they illustrate the two DAGs but are not used in the verification.
+--- items/ex-pc-latent-confounding-limitations.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/ex-pc-latent-confounding-limitations.md
+@@ -42,7 +42,7 @@
+ from a direct causal edge, and the latent model violates the observed-only
+ causal-sufficiency requirement.
+ 
+-\[
++```tikz
+ \begin{tikzpicture}[>=stealth, node distance=16mm]
+   \node[draw,dashed,rounded corners,inner sep=2pt] at (0,0) (l) {$L$};
+   \node at (1.6,0) (x) {$X$}; \node at (1.6,-1.3) (y) {$Y$};
+@@ -52,7 +52,7 @@
+   \draw[->] (x2) -- (y2);
+   \node at (4.8,0.6) {observed direct-edge model};
+ \end{tikzpicture}
+-\]
++```
+ 
+ Arrows represent structural causes, the dashed box marks the unobserved vertex,
+ and the second graph is a different model with the same observed law. The
+--- items/ex-pc-markov-equivalent-dags.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/ex-pc-markov-equivalent-dags.md
+@@ -33,7 +33,7 @@
+ directions in the two DAGs, so their CPDAG is the fully undirected triangle;
+ perfect-oracle PC retains all three edges and returns that pattern.
+ 
+-\[
++```tikz
+ \begin{tikzpicture}[>=stealth, node distance=15mm]
+   \node at (0,0) (a1) {$A$}; \node at (1.5,0) (b1) {$B$}; \node at (0,-1.3) (c1) {$C$};
+   \draw[->] (a1) -- (b1); \draw[->] (a1) -- (c1); \draw[->] (b1) -- (c1);
+@@ -45,7 +45,7 @@
+   \node at (3.25,0.55) {second DAG};
+   \node at (0.75,-5) {CPDAG};
+ \end{tikzpicture}
+-\]
++```
+ 
+ Vertices denote graph variables, arrows denote directed edges, and plain
+ segments denote undirected edges. The pictures illustrate the edge orientations;
+--- items/lem-pc-fisher-transform-uniform-concentration.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/lem-pc-fisher-transform-uniform-concentration.md
+@@ -32,10 +32,7 @@
+ a nondegenerate Gaussian law, and let $i,j,S$ be as in the definitions of
+ population and sample partial correlation. Suppose
+ $|\rho_{ij\mid S}|\le M$ and $n-|S|-3>0$. Then, for $0<t\le1$,
+-$$
+-\mathbb P\!\left(\left|g(\widehat\rho_{ij\mid S})-g(\rho_{ij\mid S})\right|>t\right)
+-\le C_M\exp\!\left(-c_M(n-|S|-1)t^2\right),
+-$$
++$$ \mathbb P\!\left(\left|g(\widehat\rho_{ij\mid S})-g(\rho_{ij\mid S})\right|>t\right) \le C_M\exp\!\left(-c_M(n-|S|-1)t^2\right), $$
+ where $g(r)=\tfrac12\log((1+r)/(1-r))$. The constants do not depend on
+ $i,j,S,n$ or the Gaussian mean and covariance beyond the bound $M$.
+ 
+--- items/thm-gaussian-zero-partial-correlation-is-conditional-independence.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/thm-gaussian-zero-partial-correlation-is-conditional-independence.md
+@@ -34,10 +34,7 @@
+ $S\subseteq\{1,\ldots,p\}\setminus\{i,j\}$, the block
+ $K_{ij\mid S}$ in the definition of Gaussian partial correlation is positive
+ definite, and
+-$$
+-\rho_{ij\mid S}=0\quad\Longleftrightarrow\quad
+-\sigma(X_i)\perp\!\!\!\perp\sigma(X_j)\mid\sigma(X_S).
+-$$
++$$ \rho_{ij\mid S}=0\quad\Longleftrightarrow\quad \sigma(X_i)\perp\!\!\!\perp\sigma(X_j)\mid\sigma(X_S). $$
+ 
+ ## Statement references
+ 
+--- items/thm-pc-high-dimensional-consistency.md
++++ research/machine-learning-all-101-2026-10-19-format-batches25-26-proposal/sources/thm-pc-high-dimensional-consistency.md
+@@ -41,15 +41,12 @@
+ $X^{(1)},\ldots,X^{(n)}$ be independent observations from that law. Let
+ $q_n$ be an integer with $0\le q_n\le p_n-1$ that bounds the maximum degree of the skeleton of $G_n$.
+ Suppose, for constants $a\ge0$, $0<b\le1$, $0<d<b/2$, and $M<1$,
+-$$
+-p_n=O(n^a),\qquad q_n=O(n^{1-b}),\qquad c_n^{-1}=O(n^d),\qquad 0<c_n\le M,
+-$$
++$$ p_n=O(n^a),\qquad q_n=O(n^{1-b}),\qquad c_n^{-1}=O(n^d),\qquad 0<c_n\le M, $$
+ and every population partial correlation with $|S|\le q_n$ satisfies
+ $|\rho_{ij\mid S}|\le M$, while each nonzero such partial correlation has
+ $|\rho_{ij\mid S}|\ge c_n$. For every tested pair and conditioning set define
+ the two-sided Fisher statistic
+-$$T_{ij\mid S}=\sqrt{n-|S|-3}\,\left|g(\widehat\rho_{ij\mid S})\right|,
+-\qquad g(r)=\tfrac12\log\frac{1+r}{1-r}.$$
++$$T_{ij\mid S}=\sqrt{n-|S|-3}\,\left|g(\widehat\rho_{ij\mid S})\right|, \qquad g(r)=\tfrac12\log\frac{1+r}{1-r}.$$
+ Declare conditional independence exactly when
+ $$T_{ij\mid S}\le\frac{\sqrt n\,c_n}{2},$$
+ and run the PC skeleton and orientation steps in any fixed vertex order using

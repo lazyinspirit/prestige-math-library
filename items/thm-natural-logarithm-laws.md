@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-natural-logarithm-laws.json
   precheck: pass
   audited: 2026-08-02
 sources:
@@ -54,4 +55,4 @@ Also $\log 1=0$.
 
 2.1 Since $x/y=x(1/y)$ and $\exp(-\log y)=1/y$ by [L3], step 1.2 gives $\log(x/y)=\log x-\log y$ and $\log(1/x)=-\log x$. [step 1.2, L3]
 
-3.1 As $\exp(0)=1$, the inverse identity gives $\log 1=0$. [L1] ∎
+3.1 Taking $u=v=0$ in [L2] gives $\exp(0)=\exp(0)^2$. Since $\exp(0)>0$ by [L3], division by $\exp(0)$ gives $\exp(0)=1$. The inverse identity then gives $\log 1=0$. [L1, L2, L3, algebra] ∎

@@ -1,0 +1,467 @@
+PDF PAGE 65
+the stochastic gradient vector g(wk, ξk) by the corresponding diagonal term. Since the computation
+overhead of this operation is very small, it becomes important to make sure that the estimation of
+the diagonal terms of the curvature matrix is very eﬃcient.
+For instance, in the context of deep neural networks, [12] describes a back-propagation algorithm
+to eﬃciently compute the diagonal terms of the squared Jacobian matrix Jh(wk; ξk)T Jh(wk; ξk)
+that appears in the expression of the Gauss-Newton matrix (6.15). Each iteration of the proposed
+algorithm picks a training example, computes the stochastic gradient g(wk, ξk), updates a running
+estimate of the diagonal coeﬃcients of the Gauss-Newton matrix by
+
+Gk
+
+i = (1 −λ)
+
+Gk−1
+
+i + λ
+
+Jh(wk; ξk)T Jh(wk; ξk)
+
+ii for some 0 < λ < 1,
+then performs the scaled stochastic weight update
+
+wk+1
+
+i =
+
+wk
+
+i −
+ 
+α
+
+Gk
+
+i + µ
+!
+
+g(wk, ξk)
+
+i.
+The small regularization constant µ > 0 is introduced to handle situations where the Gauss-Newton
+matrix is singular or nearly singular. Since the computation of the diagonal of the squared Jacobian
+has a cost that is comparable to the cost of the computation of the stochastic gradient, each iteration
+of this algorithm is roughly twice as expensive as a ﬁrst-order stochastic gradient iteration. The
+experience described in [12] shows that improvement in per-iteration progress can be suﬃcient to
+modestly outperform a well-tuned SG algorithm.
+After describing this algorithm in later work [89, §9.1], the authors make two comments that
+illustrate well how this algorithm was used in practice.
+They ﬁrst observe that the curvature
+only changes very slowly in the particular type of neural network that was considered. Due to
+this observation, a natural idea is to further reduce the computational overhead of the method by
+estimating the ratios α/([Gk+1]i + µ) only once every few epochs, for instance using a small subset
+of examples as in (6.15). The authors also mention that, as a rule of thumb, this diagonal scheme
+typically improves the convergence speed by only a factor of three relative to SG. Therefore, it might
+be more enlightening to view such an algorithm as a scheme to periodically retune a ﬁrst-order SG
+approach rather than as a complete second-order method.
+Estimating Diagonal Curvature
+Instead of explicitly computing the diagonal terms of the
+curvature matrix, one can follow the template of §6.2 and directly estimate the diagonal [Hk]i
+of the inverse Hessian using displacement pairs {(sk, vk)} as deﬁned in (6.13). For instance, [18]
+proposes to compute the scaling terms [Hk]i with the running average
+
+Hk+1
+
+i = (1 −λ)
+
+Hk
+
+i + λProj
+ 
+sk
+
+i
+
+vk
+
+i
+!
+,
+where Proj(·) represents a projection onto a predeﬁned positive interval. It was later found that
+a direct application of (6.13) after a parameter update introduces a correlated noise that ruins
+the curvature estimate [19, §3]. Moreover, correcting this problem made the algorithm perform
+substantially worse because the chaotic behavior of the rescaling factors [Hk]i makes the choice of
+the stepsize α very diﬃcult.
+These problems can be addressed with a combination of two ideas [19, §5]. The ﬁrst idea consists
+of returning to estimating the diagonal of the Hessian instead of the diagonal of this inverse, which
+65
+
+PDF PAGE 66
+amounts to working with the ratio [vk]i/[sk]i instead of [sk]i/[vk]i. The second idea ensures that
+the eﬀective stepsizes are monotonically decreasing by replacing the running average by the sum
+
+Gk+1
+
+i =
+
+Gk
+
+i + Proj
+ 
+vk
+
+i
+
+sk
+
+i
+!
+.
+This eﬀectively constructs a separate diminishing stepsize sequence α/[Gk]i for each coeﬃcient of
+the parameter vector. Keeping the curvature estimates in a ﬁxed positive interval ensures that
+the eﬀective stepsizes decrease at the rate O(1/k) as prescribed by Theorem 4.7, while taking the
+local curvature into account. This combination was shown to perform very well when the input
+pattern coeﬃcients have very diﬀerent variances [19], something that often happens, e.g., in text
+classiﬁcation problems.
+Diagonal Rescaling without Curvature
+The algorithms described above often require some
+form of regularization to handle situations where the Hessian matrix is (nearly) singular.
+To
+illustrate why this is needed, consider, e.g., optimization of the convex objective function
+F(w1, w2) = 1
+2w2
+1 + log(ew2 + e−w2),
+for which ones ﬁnds
+∇F(w1, w2) =
+
+w1
+tanh(w2)
+
+and ∇2F(w1, w2) =
+ 1
+0
+0
+1/cosh2(w2)
+
+.
+Performing a ﬁrst-order gradient method update from a starting point of (3, 3) yields the negative
+gradient step −∇F ≈[−3, −1], which unfortunately does not point towards the optimum, namely
+the origin. Moreover, rescaling the step with the inverse Hessian actually gives a worse update
+direction −(∇2F)−1∇F ≈[−3, −101] whose large second component requires a small stepsize to
+keep the step well contained. Batch second-order optimization algorithms can avoid having to guess
+a good stepsize by using, e.g., line search techniques. Stochastic second-order algorithms, on the
+other hand, cannot rely on such procedures as easily.
+This problem is of great concern in situations where the objective function is nonconvex. For
+instance, optimization algorithms for deep neural networks must navigate around saddle points
+and handle near-singular curvature matrices. It is therefore tempting to consider diagonal rescaling
+techniques that simply ensure equal progress along each axis, rather than attempt to approximate
+curvature very accurately.
+For instance, RMSprop [152] estimates the average magnitude of each element of the stochastic
+gradient vector g(wk, ξk) by maintaining the running averages
+
+Rk
+
+i = (1 −λ)
+
+Rk−1
+
+i + λ
+
+g(wk, ξk)
+2
+i .
+The rescaling operation then consists in dividing each component of g(wk, ξk) by the square root of
+the corresponding running average, ensuring that the expected second moment of each coeﬃcient
+of the rescaled gradient is close to the unity:
+
+wk+1
+
+i =
+
+wk
+
+i −
+α
+q
+Rk
+
+i + µ
+
+g(wk, ξk)
+
+i.
+66
+
+PDF PAGE 67
+This surprisingly simple approach has shown to be very eﬀective for the optimization of deep neural
+networks. Various improvement have been proposed [162, 84] on an empirical basis. The theorerical
+explanation of this performance on nonconvex problems is still the object of active research [43].
+The popular Adagrad algorithm [54] can be viewed as a member of this family that replaces
+the running average by a sum:
+
+Rk
+
+i =
+
+Rk−1
+
+i +
+
+g(wk, ξk)
+2
+i .
+In this manner, the approach constructs a sequence of diminishing eﬀective stepsizes α/
+p
+[Rk]i + µ
+for each coeﬃcient of the parameter vector. This algorithm was initially proposed and analyzed
+for the optimization of (not necessarily strongly) convex functions for which SG theory suggests
+diminishing stepsizes that scale with O(1/
+√
+k). Adagrad is also known to perform well on deep
+learning networks, but one often ﬁnds that its stepsizes decrease too aggressively early in the
+optimization [162].
+Structural Methods
+The performance of deep neural network training can of course be im-
+proved by employing better optimization algorithms. However, it can also be improved by changing
+the structure of the network in a manner that facilitates the optimization [80, 74]. We now describe
+one of these techniques, batch normalization [80], and discuss its relation to diagonal second-order
+methods.
+Consider a particular fully connected layer in a deep neural network of the form discussed in
+§2.2. Using the notation of equation (2.4), the vector x(j)
+i
+represents the input values of layer j
+when the network is processing the i-th training example. Omitting the layer index for simplicity,
+let ˆxi = (x(j)
+i , 1) denote the input vector augmented with an additional unit coeﬃcient and let
+ˆwr = (Wr1, . . . , Wrdj−1, br) be the rth row of the matrix Wj augmented with the rth coeﬃcient of
+the bias vector bj. The layer outputs are then obtained by applying the activation function to the
+quantities sr = ˆwT
+r ˆxi for r ∈{1, . . . , dj}. Assuming for simplicity that all other parameters of the
+network are kept ﬁxed, we can write
+F( ˆw1, . . . , ˆwdj) = 1
+n
+n
+X
+i=1
+ℓ(h( ˆwT
+1 ˆxi, ˆwT
+2 ˆxi, . . . , ˆwT
+dj ˆxi), yi),
+where h(s1, . . . , sdj) encapsulates all subsequent layers in the network. The diagonal block of the
+Gauss-Newton matrix (6.16) corresponding to the parameters ˆwr then has the form
+G[r] = 1
+|S|
+X
+i∈S
+" dh
+dsr
+T  ∂2ℓ
+∂h2
+  dh
+dsr
+#
+ˆxiˆxT
+i ,
+(6.25)
+which can be viewed as a weighted second moment matrix of the augmented input vectors {ˆxi}i∈S.
+In particular, this matrix is perfectly conditioned if the weighted distribution of the layer inputs
+is white, i.e., they have zero mean and a unit covariance matrix. This could be achieved by ﬁrst
+preprocessing the inputs by an aﬃne transform that whitens their weighted distribution.
+Two simpliﬁcations can drastically reduce the computational cost of this operation. First, we
+can ignore the bracketed coeﬃcient in (6.25) and assume that we can use the same whitening
+transformation for all outputs r ∈{1, . . . , dj}. Second, we can ignore the input cross-correlations
+and simply ensure that each input variable has zero mean and unit variance by replacing the input
+67
+
+PDF PAGE 68
+vector coeﬃcients ˆxi[t] for each t ∈{1, . . . , dj−1} by the linearly transformed values αtˆxi[t] + βt.
+Despite these simpliﬁcations, this normalization operation is very likely to improve the second
+order properties of the objective function. An important detail here is the computation of the
+normalization constants αt and βt. Estimating the mean and the standard deviation of each input
+with a simple running average works well if one expects these quantities to change very slowly.
+This is unfortunately not true in recent neural networks.8
+Batch normalization [80] deﬁnes a special kind of neural network layer that performs this nor-
+malization using statistics collected with the current mini-batch of examples. The back-propagation
+algorithm that computes the gradients must of course be adjusted to account for the on-the-ﬂy com-
+putation of the normalization coeﬃcients. Assuming that one uses suﬃciently large mini-batches,
+computing the statistics in this manner ensures that the normalization constants are very fresh.
+This comes at the price of making the output of the neural network on a particular training pattern
+dependent on the other patterns in the mini-batch. Since these other examples are a priori random,
+this amounts to generating additional noise in the stochastic gradient optimization. Although the
+variance of this noise is poorly controlled, inserting batch normalization layers in various points of a
+deep neural network is extremely eﬀective and is now standard practice. Whether one can achieve
+the same improvement with more controlled techniques remains to be seen.
+7
+Other Popular Methods
+Some optimization methods for machine learning are not well characterized as being within the two-
+dimensional schematic introduced in §3.4 (see Figure 3.3 on page 20), yet represent fundamentally
+unique approaches that oﬀer theoretical and/or practical advantages. The purpose of this section
+is to discuss a few such ideas, namely, gradient methods with momentum, accelerated gradient
+methods, and coordinate descent methods. For ease of exposition, we introduce these techniques
+under the assumption that one is minimizing a continuously diﬀerentiable (not necessarily convex)
+function F : Rn →R and that full gradients can be computed in each iteration. Then, after each
+technique is introduced, we discuss how they may be applied in stochastic settings.
+7.1
+Gradient Methods with Momentum
+Gradient methods with momentum are procedures in which each step is chosen as a combination
+of the steepest descent direction and the most recent iterate displacement. Speciﬁcally, with an
+initial point w1, scalar sequences {αk} and {βk} that are either predetermined or set dynamically,
+and w0 := w1, these methods are characterized by the iteration
+wk+1 ←wk −αk∇F(wk) + βk(wk −wk−1).
+(7.1)
+Here, the latter is referred to as the momentum term, which, recursively, maintains the algorithm’s
+movement along previous search directions.
+The iteration (7.1) can be motivated in various ways; e.g., it is named after the fact that it
+represents a discretization of a certain second-order ordinary diﬀerential equation with friction. Of
+8This used to be true in the 1990s because neural networks were using bounded activation functions such as
+the sigmoid s(x) = 1/(1 + e−x). However, many recent results were achieved using the ReLU activation function
+s(x) = max{0, x} which is unbounded and homogeneous. The statistics of the intermediate variables in such network
+can change extremely quickly during the ﬁrst phases of the optimization process [86].
+68
+
+PDF PAGE 69
+course, when βk = 0 for all k ∈N, it reduces to the steepest descent method. When αk = α and
+βk = β for some constants α > 0 and β > 0 for all k ∈N, it is referred to as the heavy ball method
+[123], which is known to yield a superior rate of convergence as compared to steepest descent with
+a ﬁxed stepsize for certain functions of interest. For example, when F is a strictly convex quadratic
+with minimum and maximum eigenvalues given by c > 0 and L ≥c, respectively, steepest descent
+and the heavy ball method each yield a linear rate of convergence (in terms of the distance to the
+solution converging to zero) with contraction constants respectively given by
+κ −1
+κ + 1 and
+√κ −1
+√κ + 1 where κ := L
+c ≥1.
+(7.2)
+Choosing (α, β) to achieve these rates requires knowledge of (c, L), which might be unavailable.
+Still, even without this knowledge, the heavy ball method often outperforms steepest descent.
+Additional connections with (7.1) can be made when F is a strictly convex quadratic.
+In
+particular, if (αk, βk) is chosen optimally for all k ∈N, in the sense that the pair is chosen to solve
+min
+(α,β) F(wk −α∇F(wk) + β(wk −wk−1)),
+(7.3)
+then (7.1) is exactly the linear conjugate gradient (CG) algorithm. While the heavy ball method is
+a stationary iteration (in the sense that the pair (α, β) is ﬁxed), the CG algorithm is nonstationary
+and its convergence behavior is relatively more complex; in particular, the step-by-step behavior of
+CG depends on the eigenvalue distribution of the Hessian of F [69]. That said, in contrast to the
+heavy ball method, CG has a ﬁnite convergence guarantee. This, along with the fact that problems
+with favorable eigenvalue distributions are quite prevalent, has lead to the great popularity of CG
+in a variety of situations. More generally, nonlinear CG methods, which also follow the procedure
+in (7.1), can be viewed as techniques that approximate the optimal values deﬁned by (7.3) when F
+is not quadratic.
+An alternative view of the heavy ball method is obtained by expanding (7.1):
+wk+1 ←wk −α
+k
+X
+j=1
+βk−j∇F(wk);
+thus, each step can be viewed as an exponenetially decaying average of past gradients. By writing
+the iteration this way, one can see that the steps tend to accumulate contributions in directions of
+persistent descent, while directions that oscillate tend to get cancelled, or at least remain small.
+This latter interpretation provides some intuitive explanation as to why a stochastic heavy ball
+method, and stochastic gradient methods with momentum in general, might be successful in various
+settings. In particular, their practical performance have made them popular in the community
+working on training deep neural networks [150].
+Replacing the true gradient with a stochastic
+gradient in (7.1), one obtains an iteration that, over the long run, tends to continue moving in
+directions that the stochastic gradients suggest are ones of improvement, whereas movement is
+limited along directions along which contributions of many stochastic gradients cancel each other
+out. Theoretical guarantees about the inclusion of momentum in stochastic settings are elusive,
+and although practical gains have been reported [92, 150], more experimentation is needed.
+69
+
+PDF PAGE 70
+7.2
+Accelerated Gradient Methods
+A method with an iteration similar to (7.1), but with its own unique properties, is the accelerated
+gradient method proposed by Nesterov [107].
+Written as a two-step procedure, it involves the
+updates
+˜wk ←wk + βk(wk −wk−1)
+and wk+1 ←˜wk −αk∇F( ˜wk),
+(7.4)
+which leads to the condensed form
+wk+1 ←wk −αk∇F(wk + βk(wk −wk−1)) + βk(wk −wk−1).
+(7.5)
+In this manner, it is easy to compare the approach with (7.1). In particular, one can describe
+their diﬀerence as being a reversal in the order of computation. In (7.1), one can imagine taking
+the steepest descent step and then applying the momentum term, whereas (7.5) results when one
+follows the momentum term ﬁrst, then applies a steepest descent step (with the gradient evaluated
+at ˜wk, not at wk).
+While this diﬀerence may appear to be minor, it is well known that (7.5) with appropriately
+chosen αk = α > 0 for all k ∈N and {βk} ↗1 leads to an optimal iteration complexity when F
+is convex and continuously diﬀerentiable with a Lipschitz continuous gradient. Speciﬁcally, while
+in such cases a steepest descent method converges with a distance to the optimal value decaying
+with a rate O( 1
+k), the iteration (7.5) converges with a rate O( 1
+k2 ), which is provably the best rate
+that can be achieved by a gradient method. Unfortunately, no intuitive explanation as to how
+Nesterov’s method achieves this optimal rate has been widely accepted. Still, one cannot deny the
+analysis and the practical gains that the technique has oﬀered.
+Acceleration ideas have been applied in a variety of other contexts as well, including for the
+minimization of nonsmooth convex functions; see [96]. For now, we merely mention that when
+applied in stochastic settings—with stochastic gradients employed in place of full gradients—one
+can only hope that acceleration might improve the constants in the convergence rate oﬀered in
+Theorem 4.7; i.e., the rate itself cannot be improved [1].
+7.3
+Coordinate Descent Methods
+Coordinate descent (CD) methods are among the oldest in the optimization literature. As their
+name suggests, they operate by taking steps along coordinate directions: one attempts to minimize
+the objective with respect to a single variable while all others are kept ﬁxed, then other variables
+are updated similarly in an iterative manner. Such a simple idea is easy to implement, so it is
+not surprising that CD methods have a long history in many settings. Their limitations have been
+documented and well understood for many years (more on these below), but one can argue that
+their advantages were not fully recognized until recent work in machine learning and statistics
+demonstrated their ability to take advantage of certain structures commonly arising in practice.
+The CD method for minimizing F : Rd →R is given by the iteration
+wk+1 ←wk −αk∇ikF(wk)eik,
+where ∇ikF(wk) := ∂F
+∂wik (wk),
+(7.6)
+wik represents the ik-th element of the parameter vector, and eik represents the ik-th coordinate
+vector for some ik ∈{1, . . . , d}. In other words, the solution estimates wk+1 and wk diﬀer only in
+their ik-th element as a result of a move in the ik-th coordinate from wk.
+70
+
+PDF PAGE 71
+Speciﬁc versions of the CD method are deﬁned by the manner in which the sequences {αk}
+and {ik} are chosen. In some applications, it is possible to choose αk as the global minimizer
+of F from wk along the ik-th coordinate direction.
+An important example of this, which has
+contributed to the recent revival of CD methods, occurs when the objective function has the form
+F(w) = q(w) + ∥w∥1 when q is a convex quadratic.
+Here, the exact minimization along each
+coordinate is not only possible, but desirable as it promotes the generation of sparse iterates; see
+also §8. More often, an exact one-dimensional minimization of F is not practical, in which case one
+is typically satisﬁed with αk yielding a suﬃcient reduction in F from wk. For example, so-called
+second-order CD methods compute αk as the minimizer of a quadratic model of F along the ik-th
+coordinate direction.
+Concerning the choice of ik, one could select it in each iteration in at least three diﬀerent
+ways: by cycling through {1, . . . , d}; by cycling through a random reordering of these indices
+(with the indices reordered after each set of d steps); or simply by choosing an index randomly
+with replacement in each iteration. Randomized CD algorithms (represented by the latter two
+strategies) have superior theoretical properties than the cyclic method (represented by the ﬁrst
+strategy) as they are less likely to choose an unfortunate series of coordinates; more on this below.
+However, it remains an open question whether such randomized algorithms are more eﬀective in
+typical applications.
+We mention in passing that it is also natural to consider a block-coordinate descent method in
+which a handful of elements are chosen in each iteration. This is is particularly eﬀective when the
+objective function is (partially) block separable, which occurs in matrix factorization problems and
+least squares and logistic regression when each sample only depends on a few features. Clearly, in
+such settings, there are great advantages of a block-coordinate descent approach. However, since
+their basic properties are similar to the case of using a single index in each iteration, we focus on
+the iteration (7.6).
+Convergence Properties
+Contrary to what intuition might suggest, a CD method is not guar-
+anteed to converge when applied to minimize any given continuously diﬀerentiable function. Powell
+[127] gives an example of a nonconvex continuously diﬀerentiable function of three variables for
+which a cyclic CD method with αk chosen by exact one-dimensional minimization cycles without
+converging to a solution, i.e., at any limit point the gradient of F is nonzero. Although one can
+argue that failures of this type are unlikely to occur in practice, particularly for a randomized CD
+method, they show the weakness of the myopic strategy in a CD method that considers only one
+variable at a time. This is in contrast with the full gradient method, which guarantees convergence
+to stationarity even when the objective is nonconvex.
+On the other hand, if the objective F is strongly convex, the CD method will not fail and
+one can establish a linear rate of convergence. The analysis is very simple when using a constant
+stepsize and we present one such result to provide some insights into the tradeoﬀs that arise with
+a CD approach. Let us assume that ∇F is coordinate-wise Lipschitz continuous in the sense that,
+for all w ∈Rd, i ∈{1, . . . , d}, and ∆wi ∈R, there exists a constant Li > 0 such that
+|∇iF(w + ∆wiei) −∇iF(w)| ≤Li|∆wi|.
+(7.7)
+We then deﬁne the maximum coordinate-wise Lipschitz constant as
+bL :=
+max
+i∈{1,...,d} Li.
+71

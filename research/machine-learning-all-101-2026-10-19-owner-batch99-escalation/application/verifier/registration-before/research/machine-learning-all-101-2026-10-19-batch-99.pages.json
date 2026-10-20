@@ -1,0 +1,183 @@
+[
+  {
+    "order": 2992,
+    "id": "verifiable-generation-and-test-time-sampling",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Verifiable generation, group-relative updates, and test-time sampling",
+    "companion": "verifiable-generation-and-test-time-sampling-examples",
+    "requires": [
+      "dominated-experiments-likelihood-and-sufficiency",
+      "offline-reinforcement-learning-and-off-policy-evaluation",
+      "policy-gradients-reinforce-and-actor-critic"
+    ],
+    "items": [
+      {
+        "id": "def-verifier-and-generation-protocol",
+        "kind": "definition",
+        "title": "Finite truncated response spaces, correctness predicates, and verifiers",
+        "deps": [
+          "def-differentiable-stochastic-policy",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-budgeted-verifier-guided-generation",
+        "kind": "algorithm",
+        "title": "Budgeted verifier-guided generation and best-of-N sampling",
+        "deps": [
+          "def-verifier-and-generation-protocol"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-independent-generation-success-and-verifier-error",
+        "kind": "theorem",
+        "title": "Independent generation success and verifier false-acceptance bounds",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "def-probability-measure",
+          "def-finite-sum",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-finite-response-likelihood-ratio-change-of-measure",
+        "kind": "lemma",
+        "title": "Finite response likelihood ratios change measure by cancellation",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-finite-group-relative-policy-update",
+        "kind": "algorithm",
+        "title": "Finite-budget group-relative policy update",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-differentiable-stochastic-policy",
+          "lem-finite-response-likelihood-ratio-change-of-measure",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-finite-response-score-gradient-identities",
+        "kind": "lemma",
+        "title": "Finite-response score mean and reward-gradient identities",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-differentiable-stochastic-policy",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-finite-sum",
+          "thm-algebra-of-total-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-group-centered-score-estimator-factor",
+        "kind": "theorem",
+        "title": "The group-centered score estimator has factor one minus one over G",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "lem-finite-response-score-gradient-identities",
+          "def-probability-measure",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-finite-sum",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "rem-reasoning-training-evidence-and-evaluation-targets",
+        "kind": "remark",
+        "title": "Reasoning-training evidence and evaluation targets",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-offline-reinforcement-learning-dataset",
+          "alg-budgeted-verifier-guided-generation",
+          "thm-independent-generation-success-and-verifier-error",
+          "lem-finite-response-likelihood-ratio-change-of-measure",
+          "alg-finite-group-relative-policy-update",
+          "thm-group-centered-score-estimator-factor",
+          "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2993,
+    "id": "verifiable-generation-and-test-time-sampling-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Verifiable generation, group-relative updates, and test-time sampling — Examples",
+    "companion": "verifiable-generation-and-test-time-sampling",
+    "requires": [
+      "verifiable-generation-and-test-time-sampling"
+    ],
+    "items": [
+      {
+        "id": "ex-equal-group-rewards-zero-advantages",
+        "kind": "example",
+        "title": "Equal group rewards set every normalized advantage to zero",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-finite-group-relative-policy-update"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-perfect-and-false-positive-verifiers",
+        "kind": "example",
+        "title": "Perfect and false-positive verifiers have different rejection outcomes",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "thm-independent-generation-success-and-verifier-error"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-repeated-dependent-copies-no-sampling-gain",
+        "kind": "example",
+        "title": "Repeated dependent copies do not increase success probability",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "thm-independent-generation-success-and-verifier-error"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+        "kind": "example",
+        "title": "Pass-at-one, oracle pass-at-N, and verifier-selected accuracy differ",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "thm-independent-generation-success-and-verifier-error",
+          "def-finite-sum",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

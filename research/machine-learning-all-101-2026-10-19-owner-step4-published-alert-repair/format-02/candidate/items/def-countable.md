@@ -1,0 +1,116 @@
+---
+id: def-countable
+kind: definition
+title: "Finite, countably infinite, countable, uncountable"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-equinumerous, def-natural-numbers, def-nat-order, lem-nat-order-is-membership, lem-pigeonhole]
+justified_by: []
+aliases: [def-finite-set, def-countably-infinite, def-uncountable]
+landmark: true
+short: "finite, countable, uncountable"
+verification:
+  precheck: n/a
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-07-26
+    scope: page
+    delegated_by: owner
+  judge:
+    model: z-ai/glm-5.2
+    verdict: pass
+    date: 2026-07-25
+sources:
+  scraped: []
+  references:
+    - title: "J. K. Hunter, An Introduction to Real Analysis"
+      url: "https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf"
+    - title: "J. Lebl, Basic Analysis: Introduction to Real Analysis, basic set theory"
+      url: "https://www.jirka.org/ra/html/sec_basicset.html"
+    - title: "Countable set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Countable_set"
+    - title: "Finite set (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Finite_set"
+    - title: "T. Tao, Analysis I, 3rd ed., §3.6 and §8.1"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+pipeline_run: null
+---
+
+## Definition
+
+Recall that a natural number is a von Neumann natural
+(The natural numbers $\mathbb{N}$ (von Neumann)): $0 = \varnothing$ and $\sigma(n) = n \cup \{n\}$, so
+that
+
+$$n = \{\, m \in \mathbb{N} : m < n \,\} = \{0, 1, \dots, n-1\}$$
+
+is itself the set of its predecessors. Here $<$ is the order of
+Order on the natural numbers, which is defined additively, so the displayed identity is a
+theorem and not a convention: it is On $\mathbb{N}$ the order is membership: $m < n \iff m \in n$, proved
+immediately above. Let $A$ be a set, and let $\approx$ be equinumerosity
+(Equinumerous sets, $A \approx B$ and $A \preceq B$).
+
+- $A$ is **finite** if $A \approx n$ for some $n \in \mathbb{N}$.
+- $A$ is **countably infinite** if $A \approx \mathbb{N}$.
+- $A$ is **at most countable** if it is finite or countably infinite.
+- $A$ is **uncountable** if it is not at most countable.
+
+## Definition references
+
+[[def-natural-numbers]]
+
+[[def-nat-order]]
+
+[[lem-nat-order-is-membership]]
+
+[[def-equinumerous]]
+
+## Remarks
+
+- **Convention: in this library "countable" alone always means "at most
+  countable"**, so a finite set is countable. This is the convention of Halmos
+  and of Tao, and it is the one that makes the theorems on this page read
+  cleanly: subsets, products and unions of countable sets are countable, with no
+  finite/infinite case split in the statement. The competing convention, used by
+  Rudin among others, reserves "countable" for "countably infinite" and says
+  "at most countable" for the disjunction. Under that convention every statement
+  below still holds after replacing "countable" with "at most countable", but
+  several would become false as literally written. Where the distinction
+  matters, the long forms "countably infinite" and "at most countable" are used
+  in full, and "uncountable" always means "not at most countable", on which the
+  two conventions agree.
+
+- **The three classes are exhaustive by construction**: every set is finite,
+  countably infinite, or uncountable, since "uncountable" is defined as the
+  negation of the disjunction. That they are also mutually exclusive, that is,
+  that no set is both finite and countably infinite, is a genuine theorem
+  amounting to $\mathbb{N} \not\approx n$ for every $n \in \mathbb{N}$, and it is
+  proved immediately above as claim 4 of [[lem-pigeonhole]]. So a countably
+  infinite set is never finite, and "$A$ is infinite", meaning not finite, is
+  implied by $A \approx \mathbb{N}$. The same lemma pins down finiteness itself:
+  by its claim 3 a finite set is equinumerous with exactly one natural number, so
+  the number of elements of a finite set is well defined, and by its claim 5 no
+  finite set is equinumerous with a proper subset of itself.
+
+- **What the exclusivity is and is not used for below.** Nothing on this page
+  needs it in order to run: the infinitude of $\mathbb{Q}$, for instance, is
+  obtained by exhibiting a bijection $\mathbb{Q} \approx \mathbb{N}$ directly
+  ([[thm-rationals-countable]]) rather than by ruling out finiteness. It is used
+  when the continuum hypothesis is instantiated at $\mathbb{N}$
+  ([[rem-continuum-hypothesis]]), where $\mathbb{N}$ must be infinite as a fact
+  rather than as a convention.
+
+- **$0$ and the empty set.** $0 = \varnothing$, and $A \approx 0$ holds exactly
+  when $A = \varnothing$, so the empty set is finite. This matters in the proofs
+  below, where the empty case is always separated out: a surjection
+  $\mathbb{N} \to A$ cannot exist when $A = \varnothing$, which is why
+  [[lem-countable-iff-surjection-from-n]] assumes $A$ nonempty.
+
+- **Countability is a property of a set alone**, not of a set with structure. In
+  particular $\mathbb{Q}$ is countable while carrying a dense order, and
+  $\mathbb{R}$ is uncountable; neither statement says anything on its own about
+  the order or the arithmetic those sets carry.

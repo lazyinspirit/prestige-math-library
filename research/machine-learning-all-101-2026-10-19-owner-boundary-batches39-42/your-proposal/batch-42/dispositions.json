@@ -1,0 +1,510 @@
+[
+  {
+    "id": "alg-adam",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The uncorrected scalar procedure takes T>=1 and x_1 in [-1,1], so no empty round list or missing initial scalar is an input. Its return trajectory has T+1 entries.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-adam",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "In the Definition, all-zero gradients give m_t=v_t=0. They are admitted when epsilon>0 and produce y_{t+1}=x_t and unchanged clipping; when epsilon=0 that gradient sequence violates the explicit positive-radicand admissibility condition.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-adam",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "Each Adam round uses its fixed finite moment arithmetic and the uniquely specified scalar clipping max(-1,min(1,y)); it invokes no arbitrary minimizer or selector.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-adam",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "Adam is specified as an input-to-trajectory recurrence with an admissibility condition on v_t+epsilon. It does not characterize convergence or regret by an equivalence, so no forward implication of an iff is a claim.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-adam",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The inside-root denominator and subsequent clipping define the returned trajectory directly; no converse from a regret or convergence property to these inputs is stated.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-amsgrad",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "AMSGrad requires d>=1, T>=1 and a nonempty compact convex feasible set F with x_1 in F. The coordinate sum in its projection does not admit an empty dimension or empty feasible domain.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "alg-amsgrad",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The raw-moment running maximum and weighted minimization prescribe an AMSGrad update; the Definition does not assert that these updates are equivalent to a regret bound or convergence property.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-amsgrad",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "An allowed trajectory is returned after T prescribed raw-moment rounds. There is no claimed converse deriving that recurrence from a performance condition.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "The Definition explicitly permits a finite gradient sequence of length T=0: it performs no rounds and returns the singleton trajectory (x_1). Positive dimension d>=1 is still required.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "zero",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "For a zero gradient coordinate and zero initial r_0, the RMSProp recurrence keeps r_t=0; the denominator is epsilon>0 and the coordinate update is zero. Zero gradient never creates a zero divisor.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "A sequence with every gradient vector zero is admitted for every rho in [0,1): the Definition gives r_t=0 and x_{t+1}=x_t throughout. The specified epsilon>0 prevents denominator degeneracy even in this constant trajectory.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "RMSProp evaluates a coordinatewise affine moment recurrence, the unique nonnegative square root and division by sqrt(r_t)+epsilon. There is no selected optimizer or set-valued choice in this procedure.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The RMSProp Definition prescribes a second-moment update with epsilon outside the square root and asserts no convergence or regret equivalence.",
+    "detector_finding": null
+  },
+  {
+    "id": "alg-rmsprop",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "No performance conclusion is used as a hypothesis for reconstructing the RMSProp recurrence; the only output claim is the trajectory defined by its instructions.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "This example fixes the initial point x_1=1 on [-1,1] and an infinite three-round periodic loss stream. Its lower bound concerns positive finite horizons approaching infinity, not an empty-horizon average.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "case": "zero",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The example fixes epsilon>0. Therefore each slope is either 3*sqrt(epsilon) or -sqrt(epsilon), and step 1.1 gives v_t+epsilon>0. Setting epsilon=0 is excluded and belongs to the separate theorem construction.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The putative collapse to zero losses at epsilon=0 is outside this positive-regularizer example. Beta_1=0 is already its stated, admissible no-momentum parameter and step 1.1 verifies the resulting run.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The positive-epsilon example instantiates one periodic loss construction and concludes a lower bound on its limit-inferior average regret; it does not state a necessary-and-sufficient criterion for Adam failure.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "Step 2.1 applies the existing positive-epsilon construction to these exact parameters. No converse says that a positive average regret forces this period or parameter choice.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The correction-term lower bound is asserted for integer T>=2 in the Example. Its sum therefore contains at least two rounds; no empty sum or zero-horizon normalized regret is asserted.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "zero",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The scalar gradients are fixed at one, and step 1.1 gives v_t=1-2^(-t)>=1/2 at each positive round. The denominators 4*sqrt(2), 9*sqrt(2) and (3/4)^2 in step 2.1 are strictly positive constants, not vanishing parameters.",
+    "detector_finding": {
+      "case": "zero",
+      "why": "the proof divides by a symbolic denominator (4\\sqrt2, 9\\sqrt2) \u2014 the zero case is a real obligation unless a hypothesis excludes it",
+      "reason": "No distinct zero endpoint is asserted beyond the displayed hypotheses."
+    }
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "This correction-growth example fixes nonzero g_t=1, beta_1=1/4 and beta_2=1/2. A zero-gradient or zero-first-moment-weight schedule is not the data of the stated lower-bound calculation.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "On the supplied scalar interval [-1,1], step 1.1 yields historical weights at least sqrt(1/2). Each weighted projection is therefore the unique clipped scalar point; the correction-term calculation selects no arbitrary family of minimizers.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The example supplies a lower bound for one positive term in the theorem upper-bound expression. It asserts no equivalence between that expression and the algorithm actual regret.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-constant-beta-outside-decaying-schedule",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The conclusion explicitly gives no lower bound on actual regret. In particular, a converse recovering the constant beta schedule from poor actual regret is not claimed.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The Example fixes two linear-loss rounds with slopes 2 then 0 on the nonempty scalar interval [-1,1]. An empty gradient stream is outside this two-round calculation.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "one",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "Verification step 1.1 explicitly computes the first-round raw moment v_1=2 and historical maximum vhat_1=2 from the initial zero moments. Step 2.1 then retains that maximum while v_2 falls to one.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The initial first gradient is fixed at two, so both historical maxima in this example are positive. The all-zero-history branch of AMSGrad is not the input studied here; the second zero gradient is explicitly handled in step 2.1.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The two historical maxima equal two, so both scalar projection weights are positive. On [-1,1] the corresponding weighted squared-distance minimizer is unique; the example needs no arbitrary selection among zero-weight minimizers.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The verification computes the raw moment decrease and unchanged historical maximum for one gradient sequence, without a necessary-and-sufficient characterization of all sequences.",
+    "detector_finding": null
+  },
+  {
+    "id": "ex-amsgrad-historical-maximum",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "An unchanged historical maximum does not purport to characterize gradients 2 then 0; only that forward two-round computation is stated.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-adaptive-moment-updates-well-defined",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "The finite RMSProp run includes its permitted T=0 input. The initial zero moments are finite and nonnegative in proof step 1.1, and no quotient or projection is evaluated in that empty run. Adam and AMSGrad retain their positive-horizon input restrictions.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-adaptive-moment-updates-well-defined",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The lemma establishes finite moments, positive used denominators, a zero-coordinate convention and attainment of weighted minima for admitted runs; its top-level Statement is a collection of consequences, not an equivalence.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-adaptive-moment-updates-well-defined",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "No converse deduces the three procedures or their admissibility hypotheses from the moment and minimizer conclusions. The zero-coordinate implications inside the proof do not make the top-level claim biconditional.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-momentum-energy-bound",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The energy estimate runs AMSGrad for T>=1 in its positive dimension d>=1. Thus its sums over rounds and coordinates do not describe an empty index family.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "lem-amsgrad-momentum-energy-bound",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The proof expands fixed finite moment recurrences, applies finite-coordinate Cauchy\u2013Schwarz and reorders finite sums. Its energy inequality needs no selection of feasible iterates or arbitrary family of witnesses.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-momentum-energy-bound",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The Statement is a one-sided bound of accumulated momentum energy by a weighted absolute-gradient sum. Its zero-coordinate convention is part of that bound, not a forward direction of an iff claim.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-momentum-energy-bound",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "No converse infers an AMSGrad recurrence or a parameter restriction from satisfaction of the momentum-energy upper bound.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-one-step-regret-inequality",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The one-step inequality assumes a nonempty compact convex F and fixed x_t,x_{t+1},u in F at an actual AMSGrad round. The coordinate index is that of the underlying positive-dimensional procedure; no comparator over an empty set is asserted.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "lem-amsgrad-one-step-regret-inequality",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The comparator u and update minimizer x_{t+1} are already fixed by the hypotheses. Step 1.1 works for that arbitrary given minimizer and does not require a selection function over multiple rounds or feasible sets.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-one-step-regret-inequality",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "A subgradient loss difference is bounded above by four projection/momentum terms. The supporting inequality is not an equivalence between losses and the AMSGrad update.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-amsgrad-one-step-regret-inequality",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The lemma does not assert that satisfying this regret inequality implies weighted-projection minimality or the moment recurrence; only the update-to-bound implication is claimed.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-clipped-negative-prefix-positive-suffix",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The clipped sequence has n>=1 increments. Its split k may be zero or n, so one sign block may be empty, but the entire increment list is never empty. Proof steps 1.1 and 2.1 include those empty-prefix and empty-suffix bases.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "lem-clipped-negative-prefix-positive-suffix",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The clipping map is the uniquely prescribed max/min of two real numbers. The proof uses finite induction on a given increment list, with no arbitrary optimizer or witness family to select.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-clipped-negative-prefix-positive-suffix",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The sign-split assumptions imply a lower bound on the final clipped iterate. The Statement does not say that this lower bound characterizes the increment sign pattern.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-clipped-negative-prefix-positive-suffix",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "There is no converse deriving a nonpositive-prefix/nonnegative-suffix decomposition from the final endpoint lower bound.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The quantifiers concern a scalar q in [0,1), a specified exponent p in {1,2} and a positive tolerance. The eventual natural-index tail starts at N>=1 and is not an empty finite aggregate.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "one",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "Proof step 1.1 handles q=0 with the explicit threshold N=1. In step 2.1 the p=1 ratio estimate is equality, while the p=2 case uses 1/n^2<=1/n; both listed exponents are covered.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "At the admitted endpoint q=0, proof step 1.1 gives n^p*q^n=0 for every n>=1 and delta>0. The later ratio divisions are used only after restricting to q>0.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "nonempty-choice",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The proof needs only finitely many natural thresholds: N_0 from the Archimedean estimate and K from geometric decay, combined as N_0+K. These finite witness choices do not invoke AC or a countable family selector.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "For each q<1 and positive tolerance the lemma asserts existence of an eventual threshold for n^p*q^n. It does not state an equivalence characterizing all possible rates q.",
+    "detector_finding": null
+  },
+  {
+    "id": "lem-geometric-polynomial-decay",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "No converse from eventual polynomial-geometric decay to the displayed q range is asserted; the hypotheses already fix q in [0,1).",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-adam-online-regret-counterexample",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "Regret is compared for positive finite horizons T and then normalized along T tending to infinity. The zero-epsilon construction chooses an even period C>=2, and the positive-epsilon construction has three rounds per cycle; neither uses an empty period.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "thm-adam-online-regret-counterexample",
+    "case": "one",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "At T=1 the initial iterate is one and the best comparator is minus one. The high-gradient loss gives R_1=2C in the zero-epsilon branch, or R_1=6*sqrt(epsilon) in the positive-epsilon branch; the finite-prefix comparator arguments in proof steps 3.1 and 4.1 cover this first round.",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-adam-online-regret-counterexample",
+    "case": "degenerate",
+    "before_status": "not_applicable",
+    "after_status": "checked",
+    "concrete_outcome_or_exclusion": "The first construction explicitly admits epsilon=0 but its nonzero periodic gradients and beta_2>0 keep every v_t positive by proof step 1.1. The separate positive-epsilon branch fixes beta_1=0 and is handled independently in steps 1.5, 3.2 and 4.1.",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-adam-online-regret-counterexample",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The theorem constructs periodic convex-loss sequences with positive limit-inferior average regret for specified uncorrected Adam regimes; it does not characterize every failure sequence by an equivalence.",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-adam-online-regret-counterexample",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "Neither positive average regret nor its displayed lower bound is claimed to imply these exact periods or parameter choices. The two constructions are sufficient witnesses, not a converse classification.",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-amsgrad-online-convex-regret",
+    "case": "empty",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The theorem explicitly requires integers d,T>=1 and a nonempty compact convex F with x_1 in F. Finite coordinate and round sums therefore have nonempty index sets, and a comparator exists in the supplied F.",
+    "detector_finding": {
+      "case": "empty",
+      "why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)",
+      "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+    }
+  },
+  {
+    "id": "thm-amsgrad-online-convex-regret",
+    "case": "iff-forward",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "The theorem gives a regret upper inequality and sufficient geometric or reciprocal first-moment schedules for a square-root bound. It does not assert those schedules are necessary.",
+    "detector_finding": null
+  },
+  {
+    "id": "thm-amsgrad-online-convex-regret",
+    "case": "iff-reverse",
+    "before_status": "not_applicable",
+    "after_status": "not_applicable",
+    "concrete_outcome_or_exclusion": "There is no converse deducing either listed decaying first-moment schedule from an O(sqrt(T)) regret outcome; other schedules are not classified by the claim.",
+    "detector_finding": null
+  }
+]

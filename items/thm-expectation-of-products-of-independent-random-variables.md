@@ -13,7 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  repair: research/mathematical-statistics-foundations-37-owner-e28-thm-expectation-of-products-of-independent-random-variables-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-expectation-of-products-of-independent-random-variables.json
 sources:
   scraped: []
   references:
@@ -26,14 +26,20 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X_i)_{i\in I}$ be a finite mutually independent family of real random variables on a common probability space, with independence in the sense of [[def-independent-random-elements]].
+Let $(X_i)_{i\in I}$ be a finite mutually independent family of real random variables on a common probability space, with independence in the sense of Independent random elements.
 
 1. If every $X_i$ is integrable, then $\prod_{i\in I}X_i$ is integrable and
    $$\mathbb E\!\left[\prod_{i\in I}X_i\right]=\prod_{i\in I}\mathbb E[X_i]$$
    in $\mathbb R$.
 2. If every $X_i$ is nonnegative, the same identity holds in $[0,+\infty]$. A zero factor on the right makes the product zero even if another factor is $+\infty$; otherwise the usual extended nonnegative product is used.
 
-The original finite-probability-space case is included: for a finite family of finite-valued real random variables, mutual atom independence as in [[def-independence-of-finite-random-variables]] suffices, and all expectations are finite. For $I=\varnothing$, both sides equal $1$. The converse is not asserted.
+The original finite-probability-space case is included: for a finite family of finite-valued real random variables, mutual atom independence as in Pairwise and mutual independence of finite-valued random variables suffices, and all expectations are finite. For $I=\varnothing$, both sides equal $1$. The converse is not asserted.
+
+## Statement references
+
+[[def-independent-random-elements]]
+
+[[def-independence-of-finite-random-variables]]
 
 ## Facts & Assumptions
 

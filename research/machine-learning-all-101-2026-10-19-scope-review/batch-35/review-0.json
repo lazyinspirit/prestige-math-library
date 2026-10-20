@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "35",
+  "round": 0,
+  "reviewed_items": [
+    "def-recurrent-neural-network",
+    "def-linear-state-space-model",
+    "alg-radix-two-fft",
+    "lem-woodbury-dplr-bilinear-inverse",
+    "def-lstm-cell",
+    "def-s4-dplr-parameterization",
+    "lem-roots-of-unity-fft-complexity",
+    "alg-cauchy-matvec-at-roots-of-unity",
+    "thm-hippo-leg-matrices-have-low-rank-structure",
+    "alg-s4-state-space-recurrence-and-convolution",
+    "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+    "thm-dplr-discretized-step-linear-cost",
+    "lem-s4-convolution-root-of-unity-reduction",
+    "thm-cauchy-root-grid-matvec-numerical-cost",
+    "thm-s4-convolution-filter-complexity",
+    "ex-lstm-scalar-gates",
+    "ex-s4-scalar-recurrent-and-convolutional-views",
+    "ex-s4-filter-cost-excludes-training"
+  ],
+  "reviewed_pages": [
+    "recurrent-and-state-space-networks",
+    "recurrent-and-state-space-networks-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed both complete page inventories and all 18 assigned items, the approved ML-34 scope, and the actual supplier statements and proofs. The main page requirements match the approved design and both page bodies are empty. Three same-page repairs are needed; none requires owner escalation.",
+  "findings": [
+    {
+      "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+      "type": "local",
+      "reason": "Proof step 1.3 states G^T = -DET/θ, omitting the right factor E. For n=k=1 this gives +(2n+1)/θ, while the Statement defines the diagonal entry as −(2n+1)/θ. The following similarity calculation relies on that factorization. Correct the proof, e.g. to G^T = -DETE/θ; the stated S0 then yields the claimed transformed matrix without changing the Statement."
+    },
+    {
+      "id": "ex-s4-filter-cost-excludes-training",
+      "type": "prerequisite",
+      "reason": "The Example states an exact and numerical cost guarantee from fixed DPLR parameters and supplied output data, but omits the prerequisite theorem’s invertibility conditions and certified numerical bounds/separation and variable-precision hypotheses (including the epsilon range). Facts & Assumptions refers to hypotheses “in the Example” that are not stated there. State the conditions under which the guarantee applies."
+    },
+    {
+      "id": "ex-s4-scalar-recurrent-and-convolutional-views",
+      "type": "local",
+      "reason": "The Example allows any finite input sequence but claims agreement for every 0≤t<L. If the supplied sequence is shorter than L, some stated inputs and outputs are undefined. Specify a length-L input sequence or restrict the comparison to the supplied horizon."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-s4-convolution-filter-complexity",
+      "decision": "accept",
+      "reason": "Its use of the HiPPO result is limited to the stated rank-at-most-two DPLR consequence. The corrected proof supports that use; no consumer statement or proof change is required."
+    }
+  ]
+}

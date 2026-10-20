@@ -1,0 +1,436 @@
+{
+  "group": "a",
+  "batches": ["2"],
+  "pages_read": [
+    "prediction-problems-risks-and-empirical-minimization",
+    "prediction-problems-risks-and-empirical-minimization-examples"
+  ],
+  "items_read": [
+    "def-supervised-learning-problem",
+    "def-population-and-empirical-risk",
+    "def-empirical-risk-minimizer",
+    "lem-population-and-empirical-risk-are-measurable",
+    "thm-conditional-bayes-rule-minimizes-population-risk",
+    "lem-standard-borel-label-kernel-over-arbitrary-instance-space",
+    "def-bayes-predictor-and-excess-risk",
+    "alg-finite-list-empirical-risk-minimizer",
+    "alg-approximate-erm",
+    "lem-finite-list-empirical-risk-selector-is-measurable",
+    "ex-binary-zero-one-loss",
+    "ex-squared-loss-conditional-mean",
+    "ex-absolute-loss-conditional-median",
+    "ex-nonattained-risk-infimum"
+  ],
+  "conventions": [
+    {
+      "convention": "Instance, label and action spaces and the predictor class are nonempty; predictors are measurable and the loss is jointly product-measurable with values in [0,+∞]. No IID sampling assumption is implicit.",
+      "fixed_by": "def-supervised-learning-problem",
+      "matters_for": [
+        "def-population-and-empirical-risk",
+        "lem-population-and-empirical-risk-are-measurable",
+        "def-empirical-risk-minimizer",
+        "thm-conditional-bayes-rule-minimizes-population-risk"
+      ]
+    },
+    {
+      "convention": "Samples are ordered and have positive length. Population and empirical risks use extended nonnegative arithmetic and may equal +∞.",
+      "fixed_by": "def-population-and-empirical-risk",
+      "matters_for": [
+        "def-empirical-risk-minimizer",
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "lem-finite-list-empirical-risk-selector-is-measurable"
+      ]
+    },
+    {
+      "convention": "If the empirical infimum is +∞, every class member is an exact minimizer. Otherwise an approximate minimizer must have finite risk within a finite tolerance of the infimum. A measurable learning rule requires jointly measurable sample-instance evaluation.",
+      "fixed_by": "def-empirical-risk-minimizer",
+      "matters_for": [
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "lem-finite-list-empirical-risk-selector-is-measurable",
+        "ex-nonattained-risk-infimum"
+      ]
+    },
+    {
+      "convention": "Conditional minimization holds for every action on one measurable full-measure set. AC and standard-Borel instance and label spaces are explicit hypotheses of the conditional Bayes theorem; risks may be infinite.",
+      "fixed_by": "thm-conditional-bayes-rule-minimizes-population-risk",
+      "matters_for": ["def-bayes-predictor-and-excess-risk"]
+    },
+    {
+      "convention": "Under AC, standard-Borel labels suffice for an everywhere conditional probability kernel over an arbitrary nonempty measurable instance space. The proof conditions on the exact uncompleted coordinate sigma-algebra.",
+      "fixed_by": "lem-standard-borel-label-kernel-over-arbitrary-instance-space",
+      "matters_for": ["def-bayes-predictor-and-excess-risk"]
+    },
+    {
+      "convention": "Class and unrestricted Bayes risks are distinct infima; attainment is not asserted. Excess risk is defined only when both subtracted terms are finite.",
+      "fixed_by": "def-bayes-predictor-and-excess-risk",
+      "matters_for": ["ex-nonattained-risk-infimum"]
+    },
+    {
+      "convention": "Finite-list selection uses the least eligible index; when all risks are infinite it returns index 1. The tolerance is finite and nonnegative.",
+      "fixed_by": "alg-finite-list-empirical-risk-minimizer",
+      "matters_for": ["lem-finite-list-empirical-risk-selector-is-measurable"]
+    },
+    {
+      "convention": "Approximate ERM takes an admissible jointly measurable selector as supplied input and asserts no general selector-existence theorem.",
+      "fixed_by": "alg-approximate-erm",
+      "matters_for": ["ex-nonattained-risk-infimum"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-supervised-learning-problem",
+      "statement": "A supervised prediction problem consists of nonempty measurable instance, label and action spaces, a probability law on the instance-label product, a nonempty class of measurable predictors, and a product-measurable loss taking values in [0,+∞]; no sample independence or common-law assumption is imposed.",
+      "used_by": [
+        "def-population-and-empirical-risk",
+        "def-empirical-risk-minimizer",
+        "lem-population-and-empirical-risk-are-measurable",
+        "thm-conditional-bayes-rule-minimizes-population-risk",
+        "def-bayes-predictor-and-excess-risk",
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "ex-binary-zero-one-loss",
+        "ex-squared-loss-conditional-mean",
+        "ex-absolute-loss-conditional-median",
+        "ex-nonattained-risk-infimum"
+      ]
+    },
+    {
+      "id": "def-population-and-empirical-risk",
+      "statement": "Population risk is the extended nonnegative integral of the predictor's loss under P; empirical risk for an ordered sample of length m≥1 is the average of its m losses. Neither definition assumes finite risk.",
+      "used_by": [
+        "def-empirical-risk-minimizer",
+        "lem-population-and-empirical-risk-are-measurable",
+        "thm-conditional-bayes-rule-minimizes-population-risk",
+        "def-bayes-predictor-and-excess-risk",
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "ex-binary-zero-one-loss",
+        "ex-squared-loss-conditional-mean",
+        "ex-absolute-loss-conditional-median",
+        "ex-nonattained-risk-infimum"
+      ]
+    },
+    {
+      "id": "lem-population-and-empirical-risk-are-measurable",
+      "statement": "In a supervised prediction problem, for every measurable predictor f, the function (x,y)↦ℓ(f(x),y) is measurable, so its population risk is a defined extended nonnegative integral. For every sample size m≥1, the empirical risk S↦R̂_S(f) is an extended nonnegative measurable function on the finite product sample space.",
+      "used_by": [
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "lem-finite-list-empirical-risk-selector-is-measurable"
+      ]
+    },
+    {
+      "id": "def-empirical-risk-minimizer",
+      "statement": "Exact ERM attains the class empirical infimum. Finite-tolerance approximate ERM uses separate finite-infimum and all-infinite branches; a measurable prediction rule has jointly measurable sample-instance evaluation, with no arbitrary-class selector existence asserted.",
+      "used_by": [
+        "alg-finite-list-empirical-risk-minimizer",
+        "alg-approximate-erm",
+        "lem-finite-list-empirical-risk-selector-is-measurable",
+        "ex-nonattained-risk-infimum"
+      ]
+    },
+    {
+      "id": "lem-finite-list-empirical-risk-selector-is-measurable",
+      "statement": "For a sample of positive length, a finite ordered nonempty list of measurable predictors, and finite tolerance η≥0, the returned index is measurable into the finite discrete index set, its predictor evaluation is jointly measurable, and its output is an η-approximate ERM relative to the list; at η=0 it is exact.",
+      "used_by": [
+        "alg-finite-list-empirical-risk-minimizer",
+        "thm-finite-class-agnostic-erm-bound",
+        "thm-finite-class-realizable-pac-bound"
+      ]
+    },
+    {
+      "id": "lem-standard-borel-label-kernel-over-arbitrary-instance-space",
+      "statement": "Assume AC. For a joint probability on a nonempty measurable instance space times a nonempty standard-Borel label space, there exists an everywhere probability kernel K with P(C×A)=∫_C K(x,A)P_X(dx). No standard-Borel, countable-generation, or completeness hypothesis is imposed on the instance space.",
+      "used_by": ["def-bayes-predictor-and-excess-risk"]
+    },
+    {
+      "id": "thm-conditional-bayes-rule-minimizes-population-risk",
+      "statement": "Assume AC, standard-Borel instance and label spaces, a measurable action space and nonnegative product-measurable loss. A measurable predictor minimizing conditional risk over every action on one measurable full-measure set has population risk no larger than any measurable predictor; all risks may be +∞.",
+      "used_by": ["def-bayes-predictor-and-excess-risk"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measurable-space",
+      "used_for": "Specified measurable structures on instances, labels and actions.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Rectangle-preimage arguments, composition and selector measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Product domains, coordinate projections, swaps and measurable evaluation maps.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Joint probability laws and nonempty probability sample spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "The supervised-problem remark's parameter-indexed family of laws.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "The distinction between prediction and parameter identifiability.",
+      "opened": true
+    },
+    {
+      "id": "def-loss-function-and-risk",
+      "used_for": "Nonnegative loss and extended risk conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Population risk as an extended nonnegative expectation.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-real-valued-measurable-function",
+      "used_for": "Strict-superlevel tests and measurable finite-risk events.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Defined sums, nonnegative restriction, finite minima via countable infima, and finite-valued differences in the selector proof.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions in conditional-distribution existence and the Bayes theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "Exact target and conditioning-space hypotheses of conditional-distribution suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Everywhere probability sections and measurable evaluations.",
+      "opened": true
+    },
+    {
+      "id": "def-regular-conditional-distribution",
+      "used_for": "Conditional-event testing identities and pointwise kernel requirements.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+      "used_for": "An everywhere conditional label kernel given the exact coordinate sigma-algebra, under AC without completeness or countable-generation assumptions.",
+      "opened": true
+    },
+    {
+      "id": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+      "used_for": "Both coordinate conditional kernels and nonnegative iterated-integral identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Joint measurability of conditional risk by lifting a probability kernel to the instance-action product.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-rule-minimizes-prior-risk",
+      "used_for": "The conditional Bayes theorem's reduction with parameter y, data x, prior P_Y, model Q and posterior K.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Marginal substitution for bounded real kernel evaluations in the arbitrary-instance-space lemma.",
+      "opened": true
+    },
+    {
+      "id": "lem-q-and-irrationals-dense-r",
+      "used_for": "Rational separation proves that real functions measurable for the coordinate sigma-algebra are constant on coordinate fibers.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-event-conditional-expectation-formula",
+      "used_for": "Conditional moments and partition averaging in the squared-loss example.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-real-field",
+      "used_for": "Real-field arithmetic and completeness conventions in the nonattainment example.",
+      "opened": true
+    },
+    {
+      "id": "cor-archimedean-reciprocal",
+      "used_for": "Positive reciprocal risks approach zero.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Strict positivity of each reciprocal risk.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Positive embedded integer denominators.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-finite-list-empirical-risk-minimizer",
+      "concern": "The Definition includes the correctness assertion 'When η=0, the output is a first exact minimizer, including the all-infinite case' and the work assertion 'The algorithm evaluates only a finite number of empirical risks'. The task requires algorithmic correctness, termination and complexity properties in separate proved results. The existing selector lemma already proves the exact-minimizer assertion; the mathematical procedure itself appears sound.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-measurable-space",
+      "finding": "def-measurable-space interrupts its Definition with 'sigma-algebra A on X ([[def-sigma-algebra]])'. The hyperlink remains inside the complete defining section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "def-measurable-function-between-measurable-spaces places '([[def-measurable-space]])' after 'be measurable spaces' inside its Definition. This violates the uninterrupted-definition reference-placement rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "def-product-sigma-algebra-and-finite-product-sigma-algebras includes 'the measurable rectangles of [[def-measurable-rectangle]]' inside its Definition, before the subsequent empty and finite product clauses. The link must follow the complete Definition in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "def-probability-measure contains '([[def-measure]])' and '([[def-measure-space]])' within its Definition. These hyperlinks have not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-statistical-experiment",
+      "finding": "def-statistical-experiment contains '([[def-measurable-space]], [[def-probability-measure]])' and links to the law definition and law-probability lemma within its Definition, before the final qualifications about the parameter set. The complete defining section is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-parametric-statistical-model",
+      "finding": "def-parametric-statistical-model places '([[def-statistical-experiment]])' inside its Definition, before the noninjectivity and parameter-measurability qualifications. It needs an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-loss-function-and-risk",
+      "finding": "def-loss-function-and-risk includes 'be a statistical experiment ([[def-statistical-experiment]])' and further links to measurable spaces, randomized rules, kernel integration and expectation within its Definition. These links interrupt the complete definition and its qualifications.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "def-expectation-of-a-nonnegative-or-integrable-random-variable includes 'integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]' inside its Definition, before the expectation formula and positive-negative decomposition. The link belongs after the complete section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-extended-real-valued-measurable-function",
+      "finding": "def-extended-real-valued-measurable-function includes '([[def-measure-space]])', '([[def-extended-reals]])' and '([[def-borel-sigma-algebra]])' within its Definition, before the actual measurability criterion. The complete definition is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice places '([[def-choice-function]])' in the blockquoted axiom inside Definition, before its written-out and product formulations. The reference should follow the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "def-measure-kernel-and-probability-kernel includes '[[def-measure]] and [[def-measurable-function-between-measurable-spaces]]' inside Definition, before the probability, finite-kernel, exhaustion and empty-space clauses. These hyperlinks interrupt the complete defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-regular-conditional-distribution",
+      "finding": "def-regular-conditional-distribution includes '[[def-measure-kernel-and-probability-kernel]]' and '[[def-conditional-expectation-given-a-sigma-algebra]]' inside Definition, before its final pointwise and exceptional-set qualifications. References have not been moved after the complete section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-bayes-rule-minimizes-prior-risk",
+      "finding": "thm-bayes-rule-minimizes-prior-risk includes '([[def-standard-borel-space]])', '[[lem-prior-and-model-kernel-define-joint-law]]' and '[[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]]' inside Statement, before the minimizing premise and conclusion. The complete statement is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-q-and-irrationals-dense-r",
+      "finding": "lem-q-and-irrationals-dense-r includes '([[lem-rat-embeds-dense]])', '([[def-limit-point-r]])' and '([[def-countable]])' inside Statement. These links interrupt the statement's setup and numbered conclusions.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-archimedean-reciprocal",
+      "finding": "cor-archimedean-reciprocal contains '([[def-complete-ordered-field]])', '([[thm-of-archimedean]])', '([[def-field]])' and another Archimedean-theorem link inside Statement. They belong after the complete statement in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-inverse-positive",
+      "finding": "lem-of-inverse-positive places '([[def-ordered-field]])' in Statement before its two conclusions. This violates the uninterrupted-statement rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-naturals-positive",
+      "finding": "lem-of-naturals-positive includes 'with field structure as in [[def-field]]' inside Statement before the recursive definition and three conclusions. The hyperlink belongs in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-one-hidden-layer-particle-measure-model",
+      "finding": "def-one-hidden-layer-particle-measure-model says 'Let (X,A,ρ_X) be an input probability space' and then defines 'φ_θ(x)=σ(w·x+b)' with θ=(w,b)∈R^(p+1). It does not specify that instances x lie in R^p or supply a measurable feature map into R^p, so the dot product is untyped for the stated arbitrary input probability space. The cited def-single-hidden-layer-network explicitly restricts its input to R^d; def-feature-measure-energy supplies no missing instance embedding.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "finite-class-pac-learning-and-erm",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Binary zero-one risks specialize the supplied definitions; IID is added explicitly. Both PAC bounds use the finite-list selector with a finite nonempty class and finite nonnegative tolerance, and retain its measurable exact/approximate ERM guarantees."
+    },
+    {
+      "from": "compression-and-pac-bayes-generalization",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Compression permits reconstructed predictors outside the original class, consistent with risk being defined for every measurable predictor. Sample-dependent reconstruction risk measurability is separately justified by joint measurability and Tonelli. PAC-Bayes separately supplies product-measurable bounded loss and parameter-integral measurability."
+    },
+    {
+      "from": "calibration-proper-losses-and-surrogate-classification",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The consumers use nonnegative population-risk integrals without claiming arbitrary conditional-law or selector existence. A separate finite-label lemma supplies the conditional probability function under AC; the zero-score classification convention is explicitly stated."
+    },
+    {
+      "from": "minimax-learning-lower-bounds-and-optimal-rates",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Binary bounded risks and finite excess differences match the supplied conventions. The learner's random-risk measurability is expressly required separately, rather than inferred from fixed-predictor empirical-risk measurability."
+    },
+    {
+      "from": "stochastic-gradient-descent-for-learning",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The algorithm distinguishes empirical and population objectives and expressly requires separate justification for differentiation under expectation; no gradient-unbiasedness consequence is attributed to the risk definitions."
+    },
+    {
+      "from": "mean-field-training-and-feature-learning",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The risk citation is contextual: the particle definition supplies its own Hilbert-space functional R and Bochner-integrability conditions, without claiming that the risk definition proves flow regularity. A separate instance-domain typing omission is reported in alerts."
+    },
+    {
+      "from": "discrete-masked-diffusion-and-reverse-generation",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The reverse-KL theorem explicitly supplies finite discrete feature and label spaces, Borel simplex actions, a singleton measurable predictor class and extended nonnegative cross-entropy. Its proof checks loss measurability and preserves infinite-risk cases."
+    },
+    {
+      "from": "active-querying-version-spaces-and-abstention",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The pool model specializes to measurable binary predictors and explicitly strengthens distributional zero-risk realizability to a pointwise exact oracle. The remark's finite null-pool witness correctly uses population risk without inferring labels at null instances."
+    },
+    {
+      "from": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The indistinguishability theorem uses finite discrete joint laws and zero-one loss, so its displayed population risks are exactly the supplier's finite integrals. Common-rule randomization is an explicit finite probability vector."
+    }
+  ]
+}

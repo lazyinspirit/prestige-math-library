@@ -1,0 +1,5 @@
+The same-scope reversal route is not complete: the minimum deterministic parabolic Bellman/Monge–Ampère barrier existence and height estimate is still unproved locally. Its genuine source proof has not been obtained. No active supplier may replace that obligation by citation alone.
+
+`FINAL-IMPASSE-AND-SOURCE-INVENTORY.json` lists five exact guarded research source candidates. Both source packets are explicitly `apply_ready:false`. The main theorem draft retains its complete original Statement and proof3.1 onward byte-for-byte; the sampler has no source operation. The generic helper has a separately proposed, material qualification that keeps its valid Bayes/formal claims unconditional and needs root scope approval. The previous premise-strengthening main/sampler option remains unapproved and must not be combined with this route.
+
+The full same-scope downstream proof and analytic reductions are recorded. No full-hypothesis counterexample, repair completion, native acceptance, live write, hash, engine change, or gate credit is claimed. The old predictable reconstruction/localizer core remains closed.

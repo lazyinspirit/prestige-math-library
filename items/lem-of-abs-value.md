@@ -13,6 +13,7 @@ landmark: false
 short: "|x| properties"
 proof_strategy: cases
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-abs-value.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -33,12 +34,18 @@ pipeline_run: null
 
 ## Statement
 
-Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \in F$, with
-$|x|$ the absolute value ([[def-abs-value]]). Then
+Let $F$ be an ordered field (Ordered field) and let $x, y \in F$, with
+$|x|$ the absolute value (Absolute value in an ordered field). Then
 
 $$|x| \ge 0; \quad |x| = 0 \iff x = 0; \quad -|x| \le x \le |x|; \quad |-x| = |x|; \quad |xy| = |x|\,|y|;$$
 
 and, for every $c > 0$, one has $|x| < c \iff -c < x < c$.
+
+## Statement references
+
+[[def-ordered-field]]
+
+[[def-abs-value]]
 
 ## Facts & Assumptions
 

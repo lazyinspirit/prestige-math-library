@@ -1,0 +1,381 @@
+{
+  "group": "w",
+  "batches": [
+    "69"
+  ],
+  "pages_read": [
+    "conditional-flow-matching-and-transport-paths",
+    "conditional-flow-matching-and-transport-paths-examples"
+  ],
+  "items_read": [
+    "def-probability-path-and-velocity-field",
+    "lem-conditional-mixture-is-a-probability-path",
+    "lem-conditional-to-marginal-continuity-equation",
+    "lem-affine-conditional-path-velocity",
+    "lem-affine-dilation-is-quadratic-cost-optimal",
+    "thm-conditional-flow-matching-gradient-identity",
+    "thm-gaussian-conditional-optimal-transport-map",
+    "alg-flow-matching-training-and-sampling",
+    "lem-flow-matching-training-and-exact-sampling-properties",
+    "ex-gaussian-prior-to-data-conditional-interpolation",
+    "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+  ],
+  "conventions": [
+    {
+      "convention": "Dimension is at least one; the reference measure is a supplied sigma-finite Borel measure, and the endpoint law is a supplied Borel probability measure. Conditional densities are normalized at each time for almost every endpoint.",
+      "fixed_by": "def-probability-path-and-velocity-field",
+      "matters_for": [
+        "lem-conditional-mixture-is-a-probability-path",
+        "lem-conditional-to-marginal-continuity-equation",
+        "thm-conditional-flow-matching-gradient-identity",
+        "alg-flow-matching-training-and-sampling"
+      ]
+    },
+    {
+      "convention": "The continuity equation has sign ∂tρ + div(ρu) = 0. Marginal velocity is endpoint-averaged flux divided by marginal density; the definition assigns no value where that density vanishes.",
+      "fixed_by": "def-probability-path-and-velocity-field",
+      "matters_for": [
+        "lem-conditional-to-marginal-continuity-equation",
+        "thm-conditional-flow-matching-gradient-identity",
+        "thm-gaussian-conditional-optimal-transport-map",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "convention": "The Gaussian scale is σt = 1 − (1 − σmin)t with σmin > 0, including σmin > 1. The terminal conditional law is Gaussian smoothing of the endpoint, rather than a point mass. Gaussian interfaces assume AC.",
+      "fixed_by": "thm-gaussian-conditional-optimal-transport-map",
+      "matters_for": [
+        "ex-gaussian-prior-to-data-conditional-interpolation",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "convention": "Transport cost is squared Euclidean distance without a factor of one half; optimality is conditional endpoint-map optimality.",
+      "fixed_by": "lem-affine-dilation-is-quadratic-cost-optimal",
+      "matters_for": [
+        "thm-gaussian-conditional-optimal-transport-map",
+        "ex-gaussian-prior-to-data-conditional-interpolation"
+      ]
+    },
+    {
+      "convention": "Training time has uniform probability measure on [0,1]; B ≥ 1 and N ≥ 0. Each batch is fresh and independent of the pre-batch history, sampled gradients are integrable, and remaining in the parameter domain is assumed.",
+      "fixed_by": "alg-flow-matching-training-and-sampling",
+      "matters_for": [
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    },
+    {
+      "convention": "Sampling uses the exact ODE flow under the additional smooth extension and global Lipschitz bounds. No optimization convergence, target-law equality, numerical accuracy, or computational cost guarantee is asserted.",
+      "fixed_by": "alg-flow-matching-training-and-sampling",
+      "matters_for": [
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-probability-path-and-velocity-field",
+      "statement": "Defines a jointly product-measurable conditional density path normalized for almost every endpoint at every time, a C1 conditional density and flux satisfying the continuity equation, and marginal velocity as mixture flux divided by positive marginal density.",
+      "used_by": [
+        "lem-conditional-mixture-is-a-probability-path",
+        "lem-conditional-to-marginal-continuity-equation",
+        "thm-conditional-flow-matching-gradient-identity",
+        "thm-gaussian-conditional-optimal-transport-map",
+        "alg-flow-matching-training-and-sampling",
+        "lem-flow-matching-training-and-exact-sampling-properties",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "id": "thm-conditional-flow-matching-gradient-identity",
+      "statement": "Under the stated positive finite marginal density, finite flux, conditional regularity, local endpoint domination, finite losses and variance constant, and integrable parameter-derivative majorants, both objectives are C1 and LC(θ) = LM(θ) + C, so their parameter gradients agree; the marginal continuity equation also holds.",
+      "used_by": [
+        "alg-flow-matching-training-and-sampling",
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    },
+    {
+      "id": "lem-conditional-to-marginal-continuity-equation",
+      "statement": "Under the conditional continuity equation, local C1 regularity and the specified local integrable endpoint bounds, with positive mixture density, time and indicated spatial flux derivatives pass through the endpoint integral and the marginal continuity equation holds.",
+      "used_by": [
+        "thm-conditional-flow-matching-gradient-identity",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "id": "lem-affine-dilation-is-quadratic-cost-optimal",
+      "statement": "For a centered Borel probability law μ with finite second moment m2, a ∈ R^d and s > 0, every coupling of μ with the law of a + sX has squared-distance cost at least ‖a‖² + (1 − s)²m2; the affine coupling attains equality.",
+      "used_by": [
+        "thm-gaussian-conditional-optimal-transport-map"
+      ]
+    },
+    {
+      "id": "thm-gaussian-conditional-optimal-transport-map",
+      "statement": "Assuming AC, the mean-linear, positive-scale affine standard Gaussian interpolation has the displayed Gaussian density and conditional velocity satisfying the continuity equation; its endpoint affine map is quadratic-cost optimal with cost ‖x1‖² + d(1 − σmin)².",
+      "used_by": [
+        "ex-gaussian-prior-to-data-conditional-interpolation",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "id": "lem-conditional-mixture-is-a-probability-path",
+      "statement": "The endpoint mixture of a conditional probability-density path is nonnegative and measurable and has reference-measure integral one at every time.",
+      "used_by": [
+        "thm-conditional-flow-matching-gradient-identity",
+        "ex-mixture-of-straight-paths-has-nonlinear-marginal-velocity"
+      ]
+    },
+    {
+      "id": "alg-flow-matching-training-and-sampling",
+      "statement": "Defines finite fresh-batch conditional squared-loss gradient updates and terminal exact-flow sampling from an independent supplied initial law, with the stated integrability, parameter-domain and additional flow hypotheses.",
+      "used_by": [
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel domains and measurability of conditional paths.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Reference-measure convention.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Endpoint and coupling probability measures.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Squared-loss expansions, affine velocities and transport costs.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Affine pushforwards and terminal output laws.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Coupling expectations and moment computations.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited Gaussian-law assumptions.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Mixture normalization, training-law normalization and measurable section integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Integrable cross-term cancellation and fresh-batch conditional expectations.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Dominated difference quotients in endpoint and parameter differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Differentiation under integrals and continuity of derivative integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Componentwise flux, loss, moment and batch-expectation calculations.",
+      "opened": true
+    },
+    {
+      "id": "lem-law-of-a-random-element-is-a-probability-measure",
+      "used_for": "Affine images and graph couplings are probability measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Moment calculations and expectations against supplied training laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of affine coupling maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Pointwise inner-product bounds for transport and loss cross terms.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Integrated cross-term bounds and absolute integrability.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Scalar Gaussian affine-law convention.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian projections, means and covariances.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Positive-scale Gaussian density formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Explicit Gaussian density and flux derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Gaussian continuity-equation calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Gaussian exponential derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Event-integral characterization of conditional batch unbiasedness.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Fresh-batch joint-law factorization.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-triangle-inequality",
+      "used_for": "Integrability of conditional mean gradients.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Compact-local domination for the finite-endpoint Gaussian mixture.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential convention in the explicit hyperbolic-tangent calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Gaussian likelihood ratios and the double-angle calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Strict nonlinearity of the marginal mixture velocity.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive denominators, oddness and strict double-angle inequality.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-flow-matching-training-and-sampling",
+      "concern": "The Definition includes proved properties: “This last step is well-defined if” followed by the smooth-flow hypotheses, and “Conditional on F_N, the output law assigns mass” followed by the pushforward formula. The algorithm policy places correctness and well-definedness properties in separate proved results. These properties already appear with proof in lem-flow-matching-training-and-exact-sampling-properties; the Definition still duplicates them as assertions.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-borel-sigma-algebra",
+      "finding": "def-borel-sigma-algebra Definition contains “a topological space ([[def-topological-space]])” before the definition is complete, and a later inline existence citation. This violates uninterrupted-definition reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure",
+      "finding": "def-measure Definition contains “a sigma-algebra on X ([[def-sigma-algebra]])” before its defining axioms and later links [[def-nonnegative-extended-series]] inline. These links remain inside the complete Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "def-probability-measure Definition contains “([[def-measure]])” and “([[def-measure-space]])” inside its defining paragraph. The uninterrupted-definition policy requires the links after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "def-euclidean-inner-product Definition contains inline supplier links before the inner-product formula, including “is the function space of [[def-function-space]]”, and further links throughout its defining clauses. They interrupt the Definition and have no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "def-expectation-of-a-nonnegative-or-integrable-random-variable Definition embeds [[def-integrable-real-and-complex-functions-and-their-integrals]] inside the integrable-case clause before completing that clause. This violates uninterrupted-definition reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice Definition embeds “([[def-choice-function]])” in the initial block quotation before the written-out and equivalent formulations are complete. The reference belongs after the complete Definition under the required reference-placement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-mean-value-theorem",
+      "finding": "cor-mean-value-theorem Statement embeds “([[def-continuity-real]], [[def-interval]])” and “([[def-derivative]])” within its hypotheses before the conclusion. These links violate the uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "thm-cauchy-schwarz-and-the-euclidean-norm Statement says “as in [[def-euclidean-inner-product]]. Then:” before its four conclusions, and includes additional inline supplier links in those conclusions. These links interrupt the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-standard-normal-and-normal-laws",
+      "finding": "def-standard-normal-and-normal-laws Definition contains “By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]” before completing the normal-law definitions, with additional inline links later. The links violate uninterrupted-definition reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-algebra-of-derivatives",
+      "finding": "thm-algebra-of-derivatives Statement embeds “([[def-limit-point-r]])” and “([[def-derivative]])” in its hypotheses before listing the four derivative conclusions. These links violate uninterrupted-statement reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "def-conditional-expectation-given-a-sigma-algebra Definition includes “Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]” and an inline [[def-l-one-of-a-measure]] link. They remain in the Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-extreme-value-metric",
+      "finding": "thm-extreme-value-metric Statement embeds “([[def-metric-compactness]], [[def-metric-space]])” and other supplier links throughout the hypotheses and conclusions. They interrupt the complete Statement and lack the required following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "def-real-exponential-function-and-e Definition includes “provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]” and further inline links explaining factorials, powers and series. The links remain inside the Definition rather than its required following references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "conditional-flow-matching-and-transport-paths",
+      "to": "compact-metric-kantorovich-rubinstein-duality",
+      "faithful": true,
+      "note": "Checked the required page and the compact-metric KR theorem's Statement and Remarks against the consumer uses. This is a scheduled page prerequisite only: no assigned item invokes KR or W1. The local squared-cost affine-coupling proof imports neither compactness nor transport attainment from KR."
+    },
+    {
+      "from": "conditional-flow-matching-and-transport-paths",
+      "to": "neural-odes-and-continuous-normalizing-flows",
+      "faithful": true,
+      "note": "Read def-neural-ode and thm-neural-ode-global-smooth-flow, including the flow proof. The algorithm and properties lemma preserve the open time extension, joint smoothness, compact-parameter uniform state-Lipschitz and origin bounds, with T = 1. Their uses are limited to the exact IVP, global flow and jointly continuous terminal map; they claim no numerical accuracy or learned target-law equality."
+    }
+  ]
+}

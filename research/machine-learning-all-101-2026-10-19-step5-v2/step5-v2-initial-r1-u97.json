@@ -1,0 +1,347 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "97",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-finite-masking-diffusion-chain",
+      "model": "gpt-6-luna",
+      "context_sha256": "f5613e14a498980555510871b18aa95dac4a937ee3ad93788ea3b9de563f406b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The path-product definition is sound, but its concluding across-step independence wording conflates independent random innovations with resulting states. With L=1, N=3 and alpha=(1,2/3,1/3,0), P(Z1=m,Z2=m)=1/3 differs from P(Z1=m)P(Z2=m)=2/9. This is a nonfatal explanatory defect: the explicit kernel/path law and all coordinate-path independence properties are unchanged. Replaced it by independence of coordinate trajectories given X and next-coordinate states given the preceding state. The judge N=2 example alone is inconclusive because Z2=m is deterministic.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-masked-diffusion-finite-elbo-cross-entropy",
+      "model": "gpt-6-luna",
+      "context_sha256": "3bc3fdf848b9b3c9e71512b9c51682590c7034dbc16c9377ceabb15b206f2712",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The mathematical Statement and proof correctly identify E[-E(X)] with the weighted conditional cross-entropy, not E(x) itself. The title omits both negation and data averaging, a nonfatal presentation defect. Corrected the title and owning manifest title mirror without changing any Statement or proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-discrete-diffusion-factorization-and-endpoint-limits",
+      "model": "gpt-6-luna",
+      "context_sha256": "d060a956925fcc1d13bf42061f1bf52aaf1b35110093c5a781261d28ff68aa85",
+      "outcome": "false_positive",
+      "reason": "The cited item is a counterexample and its universal factorization sentence is expressly headed Statement refuted. Its complete argument puts probability 1/2 on each of 00 and 11 given the certain all-mask state, while the product of marginals puts 1/4 on 01. It therefore supports the remark rather than contradicting it. The remark correctly restricts the ELBO endpoint cancellation to exact endpoints and asserts no continuum or estimator-variance theorem. Sahoo sections 3.2.3, 3.3 and B.1.1-B.1.3 confirm the terminology attribution; no item edit is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/2406.07524v1"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-finite-masking-diffusion-chain",
+      "disposition": "repaired",
+      "post_sha256": "0b0b1786f70f2e84a6146cd3e9c76b3bae4f8c540c2ff7815dc7544fbf3908fb",
+      "review_context_sha256": "f80885f2d9134d80852429ad3fe6422f034b3000405ff83ff7f65a1cda164698",
+      "reason": "Checked finite nonempty state space, positive denominators alpha[j-1], row sums, conditional path factorization and absorbing-mask support. The repaired clause follows by regrouping the finite path product by coordinate. The TikZ arrows v->v, v->m and m->m carry r_j, 1-r_j and 1; terminal zero loop is explicitly qualified. No choice or new prerequisite is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-masked-diffusion-finite-elbo-cross-entropy",
+      "disposition": "repaired",
+      "post_sha256": "75aa6ef34b049e012e1e4eb8529cdd0d48f606e887a0127ce848d0d281ed157f",
+      "review_context_sha256": "da9650abe42f97e42becc63fbe4dd87cd614fa0dd01f942e9617464d20dd422b",
+      "reason": "Checked the actual finite model, normalization, full-support admissibility, backward path factorization, finite KL convention, and AC-qualified library ELBO proof. On positive forward paths both endpoint factors equal one; conditional expectations of the reverse log ratios give minus KL, and finite data averaging yields the stated weighted risks. Retained full support and AC. Only the title changed in the item. Updated its four stale supplier quotation mirrors A1/F4/F5/F8 to the current defining/statement sections; focused strict proof-contract check passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-discrete-diffusion-factorization-and-endpoint-limits",
+      "disposition": "unaffected",
+      "post_sha256": "1597e483bd357777eee1487052f63005aea60ef5bf48f8792aef8339757f361a",
+      "review_context_sha256": "23f582174940a65fd67f1d3cccb401dada5e4986264ca0b8ff0e55a2e28fe7b4",
+      "reason": "Checked all five logical supplier interfaces and the companion counterexample argument. Conditioning on X yields product coordinate paths; mixing the 00/11 law restores dependence. Learned product rows remain normalized without being exact reverse rows. Exact endpoint factors are one only under the stated hypotheses. Read complete Sahoo sections 3.2.3/3.3 and B.1.1-B.1.3 for the RB substitution attribution, without importing its variance or continuous-time claims. The defining remark has no hyperlinks and its references follow separately. No diagrams occur in this item.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/2406.07524v1"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-finite-masking-chain-is-well-defined",
+    "alg-finite-grid-masked-diffusion-sampler",
+    "thm-masking-chain-posterior",
+    "lem-finite-masking-path-reversal-factorization",
+    "def-finite-masked-diffusion-generative-model",
+    "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+    "lem-forward-path-is-admissible-for-finite-masked-model",
+    "cor-masked-diffusion-finite-elbo-cross-entropy",
+    "rem-discrete-diffusion-factorization-and-endpoint-limits",
+    "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+    "ex-masked-diffusion-single-token-posterior"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-finite-masking-diffusion-chain",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The path-product definition is sound, but its concluding across-step independence wording conflates independent random innovations with resulting states. With L=1, N=3 and alpha=(1,2/3,1/3,0), P(Z1=m,Z2=m)=1/3 differs from P(Z1=m)P(Z2=m)=2/9. This is a nonfatal explanatory defect: the explicit kernel/path law and all coordinate-path independence properties are unchanged. Replaced it by independence of coordinate trajectories given X and next-coordinate states given the preceding state. The judge N=2 example alone is inconclusive because Z2=m is deterministic.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "cor-masked-diffusion-finite-elbo-cross-entropy",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The mathematical Statement and proof correctly identify E[-E(X)] with the weighted conditional cross-entropy, not E(x) itself. The title omits both negation and data averaging, a nonfatal presentation defect. Corrected the title and owning manifest title mirror without changing any Statement or proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "rem-discrete-diffusion-factorization-and-endpoint-limits",
+      "reason": "The cited item is a counterexample and its universal factorization sentence is expressly headed Statement refuted. Its complete argument puts probability 1/2 on each of 00 and 11 given the certain all-mask state, while the product of marginals puts 1/4 on 01. It therefore supports the remark rather than contradicting it. The remark correctly restricts the ELBO endpoint cancellation to exact endpoints and asserts no continuum or estimator-variance theorem. Sahoo sections 3.2.3, 3.3 and B.1.1-B.1.3 confirm the terminology attribution; no item edit is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/html/2406.07524v1"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+      "route": "frontier-owner",
+      "severity": "nonfatal",
+      "status": "open",
+      "affected_use": "items/thm-masked-diffusion-kl-reduces-to-cross-entropy.md, Statement: the transition draws at distinct coordinates and steps are independent; F5: the finite feature/label/action spaces.",
+      "invalidated_claim": "For |V|>=2 the action simplex Delta(V) is infinite. Independent auxiliary Bernoulli survival variables across steps must be distinguished from resulting next states.",
+      "minimality": "Clarify that a clean coordinate survives using fresh independent Bernoulli innovations and that a masked coordinate remains masked. In F5 replace finite feature/label/action spaces with finite feature and label spaces and the Borel action simplex. The current proof already uses these sound conventions; no theorem conclusion needs weakening.",
+      "reason": "Confirmed the Step-4 F5 wording concern directly: Delta({0,1}) contains (t,1-t) for every t in [0,1]. Proof 1.1 correctly equips it with Borel sigma-algebra. Also route the supplier-related independent-transition wording for the same clarification made in the definition. Item is unassigned, remains unedited, and needs its frontier owner rather than outside maintenance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-ledger",
+      "action": "no-update-required",
+      "reason": "All eleven direct consumers of the changed definition are draft frozen-frontier items. No published consumer was found. Current published kernel/KL/variational/AC suppliers inspected here already move their defining hyperlinks to reference sections; the corresponding historical Step-4 alerts do not establish a present defect. No published repair, audit or acceptance is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changes": [
+      "items/def-finite-masking-diffusion-chain.md: replaced only the concluding independence explanation in Definition; explicit kernels/path law, hypotheses and diagram retained.",
+      "items/cor-masked-diffusion-finite-elbo-cross-entropy.md: title now specifies negative expected finite ELBO; Statement, Facts and Proof unchanged.",
+      "Owning batch-97.pages.json: matching corollary title mirror only. Owning proof-contracts.json: four corollary citation quotes A1/F4/F5/F8 synchronized with current published supplier sections under the shared write lock. No verification stamp or historical round evidence was changed."
+    ],
+    "review_order": [
+      "def-finite-masking-diffusion-chain",
+      "cor-masked-diffusion-finite-elbo-cross-entropy",
+      "rem-discrete-diffusion-factorization-and-endpoint-limits"
+    ],
+    "hash_capture": "Each review-contexts command ran immediately after its completed review and before any later supplier edit. These are repairer reviews, not independent reviews of the repairs.",
+    "interface_events": [
+      {
+        "id": "def-finite-masking-diffusion-chain",
+        "section": "Definition",
+        "affected_clause": "Thus, conditional on the clean sequence, corruption draws at distinct positions and steps are independent, and the mask is absorbing.",
+        "replacement": "Conditional coordinate trajectories are independent; next-coordinate states are independent given the preceding sequence state; successive states need not be independent.",
+        "direct_consumers": [
+          "lem-finite-masking-chain-is-well-defined",
+          "alg-finite-grid-masked-diffusion-sampler",
+          "thm-masking-chain-posterior",
+          "lem-finite-masking-path-reversal-factorization",
+          "def-finite-masked-diffusion-generative-model",
+          "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+          "lem-forward-path-is-admissible-for-finite-masked-model",
+          "cor-masked-diffusion-finite-elbo-cross-entropy",
+          "rem-discrete-diffusion-factorization-and-endpoint-limits",
+          "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+          "ex-masked-diffusion-single-token-posterior"
+        ],
+        "outside_consumers": [],
+        "propagation": "No examined consumer requires a changed mathematical conclusion; no further hop is pre-expanded. Corollary title-only change creates no Statement/Definition event."
+      }
+    ],
+    "consumer_dispositions": [
+      {
+        "id": "lem-finite-masking-chain-is-well-defined",
+        "path": "items/lem-finite-masking-chain-is-well-defined.md",
+        "affected_use": "Statement; F1; Proof 1.1-3.1: Q_j(z,z′)=product_i a_j(z_i,z′_i); iterated row sums normalize the path law.",
+        "disposition": "unchanged-use-sound",
+        "reason": "Only the unchanged row probabilities and finite path product are used. Neither row sums nor normalization assumes independent states across time.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "alg-finite-grid-masked-diffusion-sampler",
+        "path": "items/alg-finite-grid-masked-diffusion-sampler.md",
+        "affected_use": "Definition; Definition references: Uses S, the survival schedule and c_j=(alpha[j-1]-alpha[j])/(1-alpha[j]); reverse updates use independent auxiliary uniforms.",
+        "disposition": "unchanged-use-sound",
+        "reason": "The corrected forward description changes none of the sampler inputs or reverse instructions. Its own independent uniforms are valid innovations.",
+        "contract_quote_refresh_owed": false
+      },
+      {
+        "id": "thm-masking-chain-posterior",
+        "path": "items/thm-masking-chain-posterior.md",
+        "affected_use": "Statement references; F1; Proof 1.1-2.1: Survival products telescope to alpha_s and alpha_t; conditional on x the coordinate paths are independent.",
+        "disposition": "unchanged-use-sound",
+        "reason": "The proof uses coordinate-trajectory independence and the absorbing Markov law, exactly the properties now stated. It never treats successive states as independent.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "lem-finite-masking-path-reversal-factorization",
+        "path": "items/lem-finite-masking-path-reversal-factorization.md",
+        "affected_use": "Statement references; F1; Proof 1.1-2.1: The common future factor product_{k>j} a_k cancels in the finite suffix conditional ratio.",
+        "disposition": "unchanged-use-sound",
+        "reason": "This is the unchanged Markov factorization. Independence of different times is unnecessary; conditioning on the present is essential.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "def-finite-masked-diffusion-generative-model",
+        "path": "items/def-finite-masked-diffusion-generative-model.md",
+        "affected_use": "Definition; Definition references: Uses the finite masking state space, schedule and learned reverse kernels in the joint mass.",
+        "disposition": "unchanged-use-sound",
+        "reason": "The repaired forward explanation changes no finite state space or reverse product, so its normalized decoder and point prior remain sound.",
+        "contract_quote_refresh_owed": false
+      },
+      {
+        "id": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "path": "items/thm-masked-diffusion-kl-reduces-to-cross-entropy.md",
+        "affected_use": "Statement opening; F1; Proof 2.1-4.1: Given X, uses coordinate-product posterior and P(M[j,i]|X)=1-alpha_j; per-coordinate KL equals c_j[-log h_i,j(z)(X_i)].",
+        "disposition": "frontier-owner-wording-repair",
+        "reason": "The actual KL and conditioning calculation remains sound. Its own unqualified independent transition-draw wording warrants clarification as auxiliary Bernoulli innovations, and F5 incorrectly calls Delta(V) finite. Route both nonfatal wording findings to the frontier owner; do not edit this unassigned item.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "lem-forward-path-is-admissible-for-finite-masked-model",
+        "path": "items/lem-forward-path-is-admissible-for-finite-masked-model.md",
+        "affected_use": "Statement references; F1; Proof 1.1-3.1: Uses Z0=x, ZN=m^L and the three possible clean/copy, clean/mask, mask/mask transitions to prove positive model mass.",
+        "disposition": "unchanged-use-sound",
+        "reason": "These support facts depend on the unchanged absorbing path law. No temporal independence is used; the finite positivity and integrability proof remains sound.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "cor-masked-diffusion-finite-elbo-cross-entropy",
+        "path": "items/cor-masked-diffusion-finite-elbo-cross-entropy.md",
+        "affected_use": "Statement forward-law paragraph; deps; Proof 1.2: Uses the fixed-x forward path law, terminal survival product alpha_N=0, and backward posterior factorization.",
+        "disposition": "unchanged-use-sound",
+        "reason": "Its forward statement already specifies independence across coordinates. All path factors and endpoint cancellation remain correct after the definition edit; reviewed here and title repaired separately.",
+        "contract_quote_refresh_owed": false
+      },
+      {
+        "id": "rem-discrete-diffusion-factorization-and-endpoint-limits",
+        "path": "items/rem-discrete-diffusion-factorization-and-endpoint-limits.md",
+        "affected_use": "deps; Remark first two sentences: Forward masking is independent across positions only after conditioning on the clean sequence.",
+        "disposition": "unchanged-use-sound",
+        "reason": "This is precisely coordinate-trajectory independence, which the clarified definition retains. Marginalization of a dependent clean-string law may still create dependent reverse coordinates; reviewed here unchanged.",
+        "contract_quote_refresh_owed": false
+      },
+      {
+        "id": "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+        "path": "items/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md",
+        "affected_use": "Statement refuted; Given; F1; Counterexample 1.1-3.1: For N=1, alpha1=0 makes Z1=(m,m) certain; X is equally 00 or 11, so the true reverse law is not a product.",
+        "disposition": "unchanged-use-sound",
+        "reason": "The proof only uses the unchanged all-mask endpoint and the clean-string mixture. Its universal assertion is explicitly refuted, so no consumer defect follows.",
+        "contract_quote_refresh_owed": true
+      },
+      {
+        "id": "ex-masked-diffusion-single-token-posterior",
+        "path": "items/ex-masked-diffusion-single-token-posterior.md",
+        "affected_use": "Example; F1; Verification 1.1-2.1: For alpha=(1,1/2,0), c_1,2=1/2 and c_0,1=1; the latter event has probability 1/2.",
+        "disposition": "unchanged-use-sound",
+        "reason": "These finite posterior calculations use the unchanged survival schedule and absorbing law, not independence between successive states.",
+        "contract_quote_refresh_owed": true
+      }
+    ],
+    "consumer_contract_maintenance": {
+      "route": "ordinary frontier-owner impact work",
+      "path": "research/machine-learning-all-101-2026-10-19-batch-97.proof-contracts.json",
+      "ids": [
+        "lem-finite-masking-chain-is-well-defined",
+        "thm-masking-chain-posterior",
+        "lem-finite-masking-path-reversal-factorization",
+        "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "lem-forward-path-is-admissible-for-finite-masked-model",
+        "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+        "ex-masked-diffusion-single-token-posterior"
+      ],
+      "affected_use": "Each listed consumer F1 quote contains the full original supplier Definition, including the replaced independence sentence. Mathematical cited transition formulas remain unchanged.",
+      "minimality": "Refresh only those exact Definition quotation mirrors after owner review; no consumer item proof changes are needed for this metadata drift. Left unassigned consumer contracts unchanged."
+    },
+    "pages": "Both owning pages remain draft YAML-only compact-v1 with their inventories and prerequisite lists unchanged; A-page placement of the clarified definition is sound.",
+    "diagrams": "Checked the sole assigned TikZ diagram: v->v labeled r_j, v->m labeled 1-r_j, m->m labeled 1, no unmasking arrow; terminal zero loop is explicitly explained. No additional diagram is required for the finite identities.",
+    "sources_consulted": [
+      {
+        "url": "https://arxiv.org/html/2406.07524v1",
+        "locators": "Complete sections 3.2.1-3.3 and B.1.1-B.1.3, plus 3.5 factorization convention.",
+        "establishes": "Absorbing forward process, learned reverse rows and RB substitution terminology. Local finite proofs establish the exact-endpoint identities.",
+        "caveat": "B.1.2 explanatory text uses a mask inner product where the clean-token inner product is needed for log(1)=0. The local calculation uses the correct token formula. No estimator-variance or continuum conclusion is imported."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-97.proof-contracts.json --strict --items cor-masked-diffusion-finite-elbo-cross-entropy --json",
+        "exit_code": 0,
+        "result": "ok true; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-finite-masking-diffusion-chain.md items/cor-masked-diffusion-finite-elbo-cross-entropy.md items/rem-discrete-diffusion-factorization-and-endpoint-limits.md --json",
+        "exit_code": 0,
+        "result": "3 files; 1 proof checked and passed; 0 failures; definition and remark not applicable"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-finite-masking-diffusion-chain.md items/cor-masked-diffusion-finite-elbo-cross-entropy.md items/rem-discrete-diffusion-factorization-and-endpoint-limits.md library/machine-learning/discrete-masked-diffusion-and-reverse-generation.md library/machine-learning/discrete-masked-diffusion-and-reverse-generation-examples.md --json",
+        "exit_code": 0,
+        "result": "5 checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-finite-masking-diffusion-chain.md items/cor-masked-diffusion-finite-elbo-cross-entropy.md",
+        "exit_code": 0,
+        "result": "2 items, 4 steps, 0 defects; run once after final item edits"
+      },
+      {
+        "command": "Scoped inspectStatement API for all 3 assigned items",
+        "exit_code": 0,
+        "result": "No uninterrupted-statement/reference-layout defects"
+      }
+    ],
+    "unresolved_mathematics": [],
+    "remaining_owner_work": "Route the unassigned KL theorem wording findings and seven consumer quote mirrors through ordinary frontier ownership. The engine owns collection, independent current rejudgment and certification; none is claimed here."
+  },
+  "downstream_uses": {
+    "lem-finite-masking-chain-is-well-defined": "items/lem-finite-masking-chain-is-well-defined.md, Statement; F1; Proof 1.1-3.1: Q_j(z,z′)=product_i a_j(z_i,z′_i); iterated row sums normalize the path law. Only the unchanged row probabilities and finite path product are used. Neither row sums nor normalization assumes independent states across time.",
+    "alg-finite-grid-masked-diffusion-sampler": "items/alg-finite-grid-masked-diffusion-sampler.md, Definition; Definition references: Uses S, the survival schedule and c_j=(alpha[j-1]-alpha[j])/(1-alpha[j]); reverse updates use independent auxiliary uniforms. The corrected forward description changes none of the sampler inputs or reverse instructions. Its own independent uniforms are valid innovations.",
+    "thm-masking-chain-posterior": "items/thm-masking-chain-posterior.md, Statement references; F1; Proof 1.1-2.1: Survival products telescope to alpha_s and alpha_t; conditional on x the coordinate paths are independent. The proof uses coordinate-trajectory independence and the absorbing Markov law, exactly the properties now stated. It never treats successive states as independent.",
+    "lem-finite-masking-path-reversal-factorization": "items/lem-finite-masking-path-reversal-factorization.md, Statement references; F1; Proof 1.1-2.1: The common future factor product_{k>j} a_k cancels in the finite suffix conditional ratio. This is the unchanged Markov factorization. Independence of different times is unnecessary; conditioning on the present is essential.",
+    "def-finite-masked-diffusion-generative-model": "items/def-finite-masked-diffusion-generative-model.md, Definition; Definition references: Uses the finite masking state space, schedule and learned reverse kernels in the joint mass. The repaired forward explanation changes no finite state space or reverse product, so its normalized decoder and point prior remain sound.",
+    "thm-masked-diffusion-kl-reduces-to-cross-entropy": "items/thm-masked-diffusion-kl-reduces-to-cross-entropy.md, Statement opening; F1; Proof 2.1-4.1: Given X, uses coordinate-product posterior and P(M[j,i]|X)=1-alpha_j; per-coordinate KL equals c_j[-log h_i,j(z)(X_i)]. The actual KL and conditioning calculation remains sound. Its own unqualified independent transition-draw wording warrants clarification as auxiliary Bernoulli innovations, and F5 incorrectly calls Delta(V) finite. Route both nonfatal wording findings to the frontier owner; do not edit this unassigned item.",
+    "lem-forward-path-is-admissible-for-finite-masked-model": "items/lem-forward-path-is-admissible-for-finite-masked-model.md, Statement references; F1; Proof 1.1-3.1: Uses Z0=x, ZN=m^L and the three possible clean/copy, clean/mask, mask/mask transitions to prove positive model mass. These support facts depend on the unchanged absorbing path law. No temporal independence is used; the finite positivity and integrability proof remains sound.",
+    "cor-masked-diffusion-finite-elbo-cross-entropy": "items/cor-masked-diffusion-finite-elbo-cross-entropy.md, Statement forward-law paragraph; deps; Proof 1.2: Uses the fixed-x forward path law, terminal survival product alpha_N=0, and backward posterior factorization. Its forward statement already specifies independence across coordinates. All path factors and endpoint cancellation remain correct after the definition edit; reviewed here and title repaired separately.",
+    "rem-discrete-diffusion-factorization-and-endpoint-limits": "items/rem-discrete-diffusion-factorization-and-endpoint-limits.md, deps; Remark first two sentences: Forward masking is independent across positions only after conditioning on the clean sequence. This is precisely coordinate-trajectory independence, which the clarified definition retains. Marginalization of a dependent clean-string law may still create dependent reverse coordinates; reviewed here unchanged.",
+    "cex-factorized-reverse-kernel-fails-for-correlated-tokens": "items/cex-factorized-reverse-kernel-fails-for-correlated-tokens.md, Statement refuted; Given; F1; Counterexample 1.1-3.1: For N=1, alpha1=0 makes Z1=(m,m) certain; X is equally 00 or 11, so the true reverse law is not a product. The proof only uses the unchanged all-mask endpoint and the clean-string mixture. Its universal assertion is explicitly refuted, so no consumer defect follows.",
+    "ex-masked-diffusion-single-token-posterior": "items/ex-masked-diffusion-single-token-posterior.md, Example; F1; Verification 1.1-2.1: For alpha=(1,1/2,0), c_1,2=1/2 and c_0,1=1; the latter event has probability 1/2. These finite posterior calculations use the unchanged survival schedule and absorbing law, not independence between successive states."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-97.pages.json": "fe56fd31ace73343245eb11566591c0d19459039acefd9b7807ca7c7eeb639fd",
+    "research/machine-learning-all-101-2026-10-19-batch-97.proof-contracts.json": "ac394f7b44370d49a239d8a8884b631755e229a6f0c3be5a9217289231cdd7ca"
+  }
+}

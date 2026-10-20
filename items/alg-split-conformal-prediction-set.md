@@ -15,6 +15,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/alg-split-conformal-prediction-set.json
   precheck: n/a
 sources:
   references:
@@ -40,8 +41,15 @@ The optional tie-randomized version uses one independent $U$ with Lebesgue
 probability law on $[0,1]$, shared across the candidate scan, and returns
 $$C_U(x)=\{y\in\mathcal Y:p_U(y)>\alpha\},$$
 where $p_U$ is the score-rank formula in
-[[def-conformal-nonconformity-score-and-rank-pvalue]]. The candidate score is
+Conformal scores and rank p-values. The candidate score is
 included in its tie group. The score maps must be jointly measurable in the
 training, calibration, feature, and response variables; then membership in
 each returned set is a measurable event by
-[[lem-finite-order-statistic-and-rank-maps-are-measurable]].
+Finite order statistics and rank maps are measurable.
+
+## Definition references
+
+[[def-conformal-nonconformity-score-and-rank-pvalue]]
+
+[[lem-finite-order-statistic-and-rank-maps-are-measurable]]
+

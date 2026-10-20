@@ -1,0 +1,1805 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-finite-centering-matrix-is-orthogonal-projector",
+    "lem-ky-fan-trace-maximization",
+    "lem-equal-gram-configurations-are-isometric",
+    "thm-pca-frobenius-optimality",
+    "thm-centered-psd-kernel-gram-matrix-is-psd",
+    "thm-classical-mds-recovers-euclidean-distances",
+    "thm-minimum-norm-lle-weights-exist-uniquely",
+    "thm-lle-trace-minimizers",
+    "ex-rank-q-pca-exact-reconstruction",
+    "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+    "ex-disconnected-knn-graph-blocks-isomap-distances",
+    "ex-singular-local-lle-covariance",
+    "ex-connected-lle-graph-need-not-have-simple-zero",
+    "ex-square-loop-mds-isomap-lle-differ",
+    "ex-metric-stress-objective-nonconvex"
+  ],
+  "contracts": {
+    "thm-finite-centering-matrix-is-orthogonal-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-centering-matrix",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, let $\\mathbf1_n\\in\\mathbb R^n$ be the vector whose entries are all $1$, and let $I_n$ be the $n\\times n$ identity matrix. The **centering matrix** is\n\n$$H_n:=I_n-\\frac1n\\mathbf1_n\\mathbf1_n^T.$$\n\nFor $v\\in\\mathbb R^n$, write $\\bar v:=n^{-1}\\mathbf1_n^Tv$; then $H_nv=v-\\bar v\\mathbf1_n$. For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $p\\ge1$, its **centered data matrix** is $X_c:=H_nX$; each column of $X_c$ has sum zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-finite-centering-matrix-is-orthogonal-projector-1-1",
+          "claim": "The matrix $\\mathbf1_n\\mathbf1_n^T$ is symmetric, so the formula in [F1] gives $H_n^T=H_n$. Also $\\mathbf1_n^T\\mathbf1_n=n$, and hence $H_n\\mathbf1_n=\\mathbf1_n-n^{-1}\\mathbf1_n n=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-centering-matrix-is-orthogonal-projector-2-1",
+          "claim": "Writing $J=\\mathbf1_n\\mathbf1_n^T$, one has $J^2=\\mathbf1_n(\\mathbf1_n^T\\mathbf1_n)\\mathbf1_n^T=nJ$, so $H_n^2=(I_n-J/n)^2=I_n-2J/n+J^2/n^2=I_n-J/n=H_n$. The formula for $H_nv$ in [F1] shows that its image is zero-sum; if $\\mathbf1_n^Tv=0$, then $H_nv=v$. For any $v$, the residual $v-H_nv=(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$ is orthogonal to every zero-sum vector by [F2]. Hence $H_nv$ is the orthogonal projection of $v$ onto the zero-sum subspace.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-ky-fan-trace-maximization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ky-fan-trace-maximization-1-1",
+          "claim": "By [F1] and [F2], the matrix $A$ represents a self-adjoint map on $\\mathbb R^p$ with its standard inner product; [F3] gives an orthonormal eigenbasis $u_1,\\ldots,u_p$ ordered with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-2-1",
+          "claim": "For any feasible $Q$, put $P=QQ^T$. Since $Q^TQ=I_q$, $P^T=P$ and $P^2=P$, so $u_j=Pu_j+(I-P)u_j$ is an orthogonal decomposition and $a_j:=u_j^TPu_j=\\|Q^Tu_j\\|_2^2=\\|Pu_j\\|_2^2$ lies in $[0,1]$. This decomposition gives $a_j=0$ exactly when $Pu_j=0$, and $a_j=1$ exactly when $Pu_j=u_j$. Also $\\sum_{j=1}^p a_j=\\operatorname{tr}(P)=q$ by [F4]. The frame trace equals $\\operatorname{tr}(PA)$ by [F5]. If $U$ has columns $u_j$ and $\\Lambda=U^TAU=\\operatorname{diag}(\\lambda_j)$, [F5] and $UU^T=I$ give $\\operatorname{tr}(PA)=\\operatorname{tr}(U^TPAU)=\\operatorname{tr}((U^TPU)\\Lambda)=\\sum_{j=1}^p\\lambda_j a_j$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-3-1",
+          "claim": "Because $\\lambda_j\\ge\\lambda_q$ for $j\\le q$ and $\\lambda_j\\le\\lambda_q$ for $j>q$, $\\sum_{j=1}^p\\lambda_j a_j\\le\\sum_{j=1}^q(\\lambda_j a_j+\\lambda_q(1-a_j))\\le\\sum_{j=1}^q\\lambda_j$. The first inequality uses $\\sum_j a_j=q$; the second uses $0\\le a_j\\le1$ and $\\lambda_j\\ge\\lambda_q$ for $j\\le q$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-4-1",
+          "claim": "The first inequality in step 3.1 has nonnegative difference $\\sum_{j>q}(\\lambda_q-\\lambda_j)a_j$, so equality requires $a_j=0$ whenever $\\lambda_j<\\lambda_q$. The second has nonnegative difference $\\sum_{j\\le q}(\\lambda_j-\\lambda_q)(1-a_j)$, so equality requires $a_j=1$ whenever $\\lambda_j>\\lambda_q$. By step 2.1, these conditions say the chosen subspace contains all higher-eigenvalue eigenspaces, is orthogonal to all lower-eigenvalue eigenspaces, and takes its remaining dimension in the $\\lambda_q$ eigenspace. Conversely, each such subspace makes both differences zero. If $A=0$, all eigenvalues are zero and both differences vanish for every feasible $Q$, as does the stated equality condition.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-5-1",
+          "claim": "Taking the first $q$ vectors of the eigenbasis from step 1.1 as the columns of $Q$ gives a feasible frame and makes the trace equal $\\sum_{j=1}^q\\lambda_j$. Thus the upper bound is the attained maximum, with the stated equality cases.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 covers A=0: every feasible frame attains the same trace and satisfies the tie-space equality condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies when q=1 and identifies the top-eigenvalue eigenspace condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 also cover q=p, with the lower-index sum empty and the full eigenbasis attaining the bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-equal-gram-configurations-are-isometric": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-equal-gram-configurations-are-isometric-1-1",
+          "claim": "For any coefficients $c_1,\\ldots,c_n$, bilinearity and the equal Gram entries give $\\|\\sum_i c_i x_i\\|_2^2=\\sum_{i,j}c_ic_j\\langle x_i,x_j\\rangle=\\sum_{i,j}c_ic_j\\langle y_i,y_j\\rangle=\\|\\sum_i c_i y_i\\|_2^2$. If $\\sum_i c_i x_i=0$, the left side is zero, so [F1] implies $\\sum_i c_i y_i=0$. Applying this to the difference of two coefficient representations shows that the assignment in the statement is well defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-equal-gram-configurations-are-isometric-2-1",
+          "claim": "For coefficient lists $c,d$, the same bilinear expansion gives $\\left\\langle\\sum_i c_ix_i,\\sum_jd_jx_j\\right\\rangle=\\sum_{i,j}c_id_j\\langle x_i,x_j\\rangle=\\sum_{i,j}c_id_j\\langle y_i,y_j\\rangle=\\left\\langle\\sum_i c_iy_i,\\sum_jd_jy_j\\right\\rangle$. The coefficient formula is linear, and its range contains every $y_i$ because it maps $x_i$ to $y_i$; hence its range is exactly their span and it preserves inner products. If $n=0$, both spans are zero spaces and this is their unique zero map. Thus in every case the assignment is an onto linear isometry.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 states explicitly that n=0 gives the unique isometry between zero spans."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to a single generator and maps its span isometrically onto the matching single-generator span."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter; the empty-list boundary is handled separately in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-pca-frobenius-optimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-q-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n,p\\ge1$, set $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and $X_c=H_nX$. For an integer $q$ with $1\\le q\\le p$, a rank-$q$ PCA frame is a matrix $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$. Its reconstruction is $X_cQQ^T$, and its squared Frobenius reconstruction error is\n\n$$\\|X_c-X_cQQ^T\\|_F^2=\\sum_{i<n}\\sum_{j<p}(X_c-X_cQQ^T)_{ij}^2.$$\n\nA rank-$q$ PCA solution is any frame minimizing this error over all such $Q$; its score matrix is $X_cQ$. A minimizing frame need not be unique when the relevant eigenvalues are tied.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ky-fan-trace-maximization",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{p\\times p}$ be symmetric with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$, counted with multiplicity. For $1\\le q\\le p$ and every $Q\\in\\mathbb R^{p\\times q}$ satisfying $Q^TQ=I_q$,\n\n$$\\operatorname{tr}(Q^TAQ)\\le\\sum_{j=1}^q\\lambda_j.$$\n\nEquality is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $q$ largest eigenvalues. Equality holds exactly when the column space of $Q$ contains every eigenspace with eigenvalue greater than $\\lambda_q$, is orthogonal to every eigenspace with eigenvalue less than $\\lambda_q$, and uses a subspace of dimension $q-\\#\\{j:\\lambda_j>\\lambda_q\\}$ from the eigenspace with eigenvalue $\\lambda_q$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-pca-frobenius-optimality-1-1",
+          "claim": "Put $C=X_c$ and $P=QQ^T$. Since $Q^TQ=I_q$, $P^T=P$ and $P^2=P$, so $C-CQQ^T=C(I-P)$ and $(I-P)^2=I-P$. By [F2] and [F5], $\\|C(I-P)\\|_F^2=\\operatorname{tr}((I-P)C^TC(I-P))$. Applying [F6] to cycle the first factor gives $\\operatorname{tr}(C^TC(I-P)^2)=\\operatorname{tr}(C^TC(I-P))$; then linearity gives $\\operatorname{tr}(C^TC)-\\operatorname{tr}(C^TCP)$. Applying [F6] again gives $\\operatorname{tr}(C^TCP)=\\operatorname{tr}(Q^TC^TCQ)$. Thus minimizing the reconstruction error is equivalent to maximizing $\\operatorname{tr}(Q^TC^TCQ)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-pca-frobenius-optimality-2-1",
+          "claim": "By [F3], choose right singular vectors $v_1,\\ldots,v_p$ and corresponding left vectors $u_1,\\ldots,u_r$ such that $Cv_j=\\sigma_j u_j$ for $j\\le r$ and $Cv_j=0$ for $j>r$, where $r=\\operatorname{rank}C$. For $i,j\\le r$, [F4] gives $v_i^TC^TCv_j=(Cv_i)^T(Cv_j)=\\sigma_i\\sigma_j u_i^Tu_j$, which is $\\sigma_j^2$ when $i=j$ and zero otherwise; for $j>r$ it is zero. Thus $C^TC$ has eigenvalues $\\sigma_1^2\\ge\\cdots\\ge\\sigma_p^2\\ge0$ in the basis $v_j$. Applying [F8] to $A=C^TC$ shows that the maximum trace is $\\sum_{j=1}^q\\sigma_j^2$, attained exactly by the top-eigenspace subspaces described in the statement. Therefore the minimum error is $\\|C\\|_F^2-\\sum_{j=1}^q\\sigma_j^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "thm-pca-frobenius-optimality-3-1",
+          "claim": "Substituting [F7] into the last expression gives $\\sum_{j=q+1}^p\\sigma_j^2$. The SVD basis in [F3] supplies a feasible frame from the top $q$ right singular vectors, so the bound is attained. If $q=p$, the sum is empty and equals zero; if $\\operatorname{rank}C\\le q$, every term in the tail is zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-centered-psd-kernel-gram-matrix-is-psd": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-kernel-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Given $n\\ge1$ data points and a finite symmetric Gram matrix $K\\in\\mathbb R^{n\\times n}$ satisfying $a^TKa\\ge0$ for every $a\\in\\mathbb R^n$, define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered Gram matrix $K_c=H_nKH_n$. The positive-semidefinite condition is an input hypothesis; no theorem that an arbitrary kernel formula produces such a matrix is assumed. For $1\\le q\\le n$, kernel PCA retains the $q$ largest eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$ of $K_c$ and associated orthonormal eigenvectors $u_1,\\ldots,u_q$, returning the score matrix $U_q\\operatorname{diag}(\\sqrt{\\lambda_1},\\ldots,\\sqrt{\\lambda_q})$. Eigenvectors inside a tied eigenspace may be chosen arbitrarily.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-centering-matrix-is-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$. Then $H_n^T=H_n$, $H_n^2=H_n$, $H_n\\mathbf1_n=0$, and for each $v\\in\\mathbb R^n$, $H_nv=v-(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$. Thus $H_n$ is the orthogonal projection onto $\\{v\\in\\mathbb R^n:\\mathbf1_n^Tv=0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-1-1",
+          "claim": "Since $K^T=K$ and $H_n^T=H_n$ by [F1] and [F2], $K_c^T=(H_nKH_n)^T=H_nKH_n=K_c$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-1-2",
+          "claim": "For every $a\\in\\mathbb R^n$, $a^TK_ca=(H_na)^TK(H_na)\\ge0$ by the input hypothesis on $K$. Thus $K_c$ is positive semidefinite.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-2-1",
+          "claim": "The standard coordinate basis is orthonormal for [F3], so [F4] makes the symmetric matrix $K_c$ self-adjoint and [F5] gives an orthonormal eigenbasis. If $u$ is a unit eigenvector with eigenvalue $\\lambda$, then $\\lambda=u^TK_cu\\ge0$ by step 1.2. Hence every eigenvalue is nonnegative, which makes the stated kernel-PCA eigenprocedure well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2, 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is present in this statement, so no endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-classical-mds-recovers-euclidean-distances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-centering-matrix-is-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$. Then $H_n^T=H_n$, $H_n^2=H_n$, $H_n\\mathbf1_n=0$, and for each $v\\in\\mathbb R^n$, $H_nv=v-(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$. Thus $H_n$ is the orthogonal projection onto $\\{v\\in\\mathbb R^n:\\mathbf1_n^Tv=0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-equal-gram-configurations-are-isometric",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, $x_1,\\ldots,x_n\\in\\mathbb R^d$, and $y_1,\\ldots,y_n\\in\\mathbb R^m$ be finite lists with $\\langle x_i,x_j\\rangle=\\langle y_i,y_j\\rangle$ for every $1\\le i,j\\le n$, using the standard Euclidean inner products. The assignment $\\sum_{i=1}^n c_i x_i\\mapsto\\sum_{i=1}^n c_i y_i$ is a well-defined linear isometry from $\\operatorname{span}\\{x_i\\}$ onto $\\operatorname{span}\\{y_i\\}$; when $n=0$ both spans are zero spaces and the assignment is the unique zero map.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-1-1",
+          "claim": "For any permitted $D$, $D^{\\circ2}$ is symmetric and $H_n$ is symmetric by [F2], so $B^T=B$. The standard coordinate basis is orthonormal for [F3], so [F4] makes $B$ self-adjoint and [F5] gives a real orthonormal eigendecomposition; this justifies the spectral step even when some eigenvalues are negative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-1-2",
+          "claim": "Suppose $D_{ij}=\\|z_i-z_j\\|_2$ and let $Z$ be the matrix with rows $z_i^T$. Put $s_i=\\|z_i\\|_2^2$. Expanding each squared distance with the coordinate inner product [F3] gives $D^{\\circ2}=s\\mathbf1_n^T+\\mathbf1_ns^T-2ZZ^T$, hence $B=-\\frac12H_n(s\\mathbf1_n^T+\\mathbf1_ns^T-2ZZ^T)H_n=H_nZZ^TH_n=Z_cZ_c^T$ because $H_n\\mathbf1_n=0$ and $H_n^T=H_n$ by [F2]. For every $a$, $a^TBa=\\sum_r((Z_c^Ta)_r)^2\\ge0$ by the coordinate formula [F3], so $B$ is positive semidefinite; also $B\\mathbf1_n=Z_cZ_c^T\\mathbf1_n=0$. When $n=1$, $H_1=0$, so $Z_c=0$ and $B=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-2-1",
+          "claim": "In the Euclidean-distance case of step 1.2, $B$ is positive semidefinite. By [F5], choose an orthonormal eigenbasis; all eigenvalues are nonnegative, so the zero-eigenvalue terms vanish and $B=U_+\\Lambda_+U_+^T$, where $U_+$ contains exactly the positive-eigenvalue eigenvectors and $\\Lambda_+$ is diagonal with strictly positive entries. If there are no positive eigenvalues, this is the empty decomposition and $B=0$. The classical-MDS coordinates from all positive eigenvalues are $Y=U_+\\Lambda_+^{1/2}$, so $YY^T=B$. By step 1.2, $B\\mathbf1_n=0$, and each column $u$ of $U_+$ with eigenvalue $\\lambda>0$ satisfies $\\lambda u^T\\mathbf1_n=u^TB\\mathbf1_n=0$; hence the rows of $Y$ are centered.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-3-1",
+          "claim": "By [F2], row $i$ of $Z_c$ is $z_i-\\bar z$, where $\\bar z=n^{-1}\\sum_i z_i$. For each $i,j$, the coordinate Gram identity gives $\\|y_i-y_j\\|_2^2=B_{ii}+B_{jj}-2B_{ij}=\\|z_i-\\bar z-(z_j-\\bar z)\\|_2^2=\\|z_i-z_j\\|_2^2=D_{ij}^2$. Both distances are nonnegative, so $\\|y_i-y_j\\|_2=D_{ij}$. The procedure retaining up to the requested dimension $q$ has the same Gram matrix when $q$ is at least the number of positive eigenvalues, so these equalities then hold for its returned coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-4-1",
+          "claim": "The row configurations of $Z_c$ and $Y$ have the same Gram matrix $B$ by step 1.2 and step 2.1. Applying [F6] gives an isometry between their spans. The original rows of $Z$ differ from those of $Z_c$ by the common translation $\\bar z$, so the original and embedded configurations are congruent after this translation. For a non-Euclidean $D$, step 1.1 still gives a symmetric spectral problem, but step 1.2 is unavailable and no exact-distance conclusion follows.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F6",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats an empty positive spectrum and obtains B=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 cover n=1: H_1=0, so B=0 and the positive-eigenvalue coordinate list is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the degenerate Euclidean case B=0 through the empty positive-eigenvalue decomposition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 covers requested dimension q at least the number of positive eigenvalues, including equality at that endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-minimum-norm-lle-weights-exist-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-1-1",
+          "claim": "Let $w^0=(1,0,\\ldots,0)\\in\\mathbb R^k$, let $L=\\{z\\in\\mathbb R^k:\\sum_s z_s=0\\}$, and define $T:L\\to\\mathbb R^p$ by $Tz=\\sum_s z_sx_{j_s}$. Every feasible $w$ has a unique form $w=w^0+z$ with $z\\in L$, and its residual is $x_i-x_{j_1}-Tz$. Thus the constrained problem is an ordinary finite-dimensional least-squares problem for $T$ on the inner-product subspace $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-2-1",
+          "claim": "By [F2], choose a least-squares minimizer $z_0\\in L$ and all minimizers are $z_0+N$, where $N=\\ker T\\subseteq L$. Therefore all feasible minimizing weights form the nonempty affine set $w^0+z_0+N$. In the degenerate case $T=0$, $z_0=0$ is a minimizer and $N=L$, so this set contains every feasible weight.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-3-1",
+          "claim": "Put $w_*=w^0+z_0$. By [F4], decompose $w_*=u+v$ with $u\\in N$ and $v\\in N^\\perp$ in $\\mathbb R^k$. Since $-u\\in N$, $v=w_*-u$ remains in the affine minimizer set. For any other minimizer $v+h$ with $h\\in N$, orthogonality gives $\\|v+h\\|_2^2=\\|v\\|_2^2+\\|h\\|_2^2$, which is at least $\\|v\\|_2^2$ with equality only if $h=0$. Hence $v$ is the unique minimum-norm minimizer. When $k=1$, $L=N=\\{0\\}$ and this gives the unique feasible weight $w^0=(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-4-1",
+          "claim": "The proof applies the least-squares existence result once to this fixed finite-dimensional problem and uses a finite orthogonal decomposition; it selects no sequence of approximate minimizers and uses no Countable Choice.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover T=0, when all feasible weights minimize residual and orthogonal projection selects the unique least-norm one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers k=1 and gives the unique feasible weight (1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers T=0 explicitly, when every feasible weight minimizes the residual."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The constrained affine least-squares problem has no interval endpoint parameter; k=1 is checked in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-lle-trace-minimizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ky-fan-trace-maximization",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{p\\times p}$ be symmetric with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$, counted with multiplicity. For $1\\le q\\le p$ and every $Q\\in\\mathbb R^{p\\times q}$ satisfying $Q^TQ=I_q$,\n\n$$\\operatorname{tr}(Q^TAQ)\\le\\sum_{j=1}^q\\lambda_j.$$\n\nEquality is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $q$ largest eigenvalues. Equality holds exactly when the column space of $Q$ contains every eigenspace with eigenvalue greater than $\\lambda_q$, is orthogonal to every eigenspace with eigenvalue less than $\\lambda_q$, and uses a subspace of dimension $q-\\#\\{j:\\lambda_j>\\lambda_q\\}$ from the eigenspace with eigenvalue $\\lambda_q$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-lle-trace-minimizers-1-1",
+          "claim": "Put $A=I_n-W$. Then $A\\mathbf1_n=0$ by [F1], and $M=A^TA$ is symmetric with $M\\mathbf1_n=0$. For every $v$, $v^TMv=(Av)^T(Av)=\\sum_r(Av)_r^2\\ge0$ by [F2]. Also $Mv=0$ implies $0=v^TMv=\\sum_r(Av)_r^2$, hence $Av=0$; conversely $Av=0$ implies $Mv=0$. Therefore $\\ker M=\\ker A=\\operatorname{span}\\{\\mathbf1_n\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-2-1",
+          "claim": "By [F4], $\\mathbb R^n=\\operatorname{span}\\{\\mathbf1_n\\}\\oplus S$ for $S=\\mathbf1_n^\\perp$, and [F3] gives an orthonormal basis matrix $E\\in\\mathbb R^{n\\times(n-1)}$ for $S$. Symmetry and $M\\mathbf1_n=0$ imply $M(S)\\subseteq S$, because $\\mathbf1_n^TMv=(M\\mathbf1_n)^Tv=0$ for $v\\in S$. The restriction has matrix $R=E^TME$, which is symmetric and positive definite: if $c\\ne0$, then $Ec\\in S\\setminus\\{0\\}$, so $Ec\\notin\\ker M$ by step 1.1 and $c^TRc=(Ec)^TM(Ec)=\\sum_r(AEc)_r^2>0$. Its eigenvalues are therefore $0<\\mu_1\\le\\cdots\\le\\mu_{n-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-3-1",
+          "claim": "For every feasible $Y$, its columns lie in $S$, so $Y=EQ$ with $Q=E^TY$ and $Q^TQ=I_q$. Substitution gives $Y^TMY=Q^TRQ$, hence $\\operatorname{tr}(Y^TMY)=\\operatorname{tr}(Q^TRQ)$ by [F6]. Apply [F5] to $-R$, whose eigenvalues in descending order are $-\\mu_1\\ge\\cdots\\ge-\\mu_{n-1}$. It follows that $\\operatorname{tr}(Q^TRQ)\\ge\\sum_{j=1}^q\\mu_j$, with equality exactly for the q-dimensional bottom eigenspaces, including arbitrary choices inside a tie.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-4-1",
+          "claim": "Taking $Q$ to have orthonormal columns spanning q bottom eigendirections of $R$ and setting $Y=EQ$ satisfies both constraints and attains the bound in step 3.1. This proves the minimum and its equality cases.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves ker M=span{1}, identifying the single zero direction under the stated kernel hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-rank-q-pca-exact-reconstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-q-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n,p\\ge1$, set $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and $X_c=H_nX$. For an integer $q$ with $1\\le q\\le p$, a rank-$q$ PCA frame is a matrix $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$. Its reconstruction is $X_cQQ^T$, and its squared Frobenius reconstruction error is\n\n$$\\|X_c-X_cQQ^T\\|_F^2=\\sum_{i<n}\\sum_{j<p}(X_c-X_cQQ^T)_{ij}^2.$$\n\nA rank-$q$ PCA solution is any frame minimizing this error over all such $Q$; its score matrix is $X_cQ$. A minimizing frame need not be unique when the relevant eigenvalues are tied.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pca-frobenius-optimality",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$, $n,p\\ge1$, let $X_c=(I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T)X$, and let $1\\le q\\le p$. Write $\\sigma_1\\ge\\cdots\\ge\\sigma_p\\ge0$ for the singular values of $X_c$, padding by zeros after its rank. Among all $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$, the minimum of $\\|X_c-X_cQQ^T\\|_F^2$ is\n\n$$\\sum_{j=q+1}^{p}\\sigma_j^2.$$\n\nA frame is minimizing exactly when its column space contains every eigenspace of $X_c^TX_c$ with eigenvalue greater than $\\sigma_q^2$, is orthogonal to every eigenspace with eigenvalue less than $\\sigma_q^2$, and uses the remaining dimension inside the eigenspace with eigenvalue $\\sigma_q^2$. In particular a choice of $q$ right singular vectors for the $q$ largest singular values is minimizing; ties can give different minimizing subspaces.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-1-1",
+          "claim": "Each column of $X$ sums to zero, so $X_c=X$; multiplication gives $X^TX=\\begin{pmatrix}2&0\\\\0&0\\end{pmatrix}$, with singular values $\\sqrt2$ and $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-2-1",
+          "claim": "The vector $Q=(1,0)^T$ satisfies $Q^TQ=1$, and $X_cQQ^T=X$. Therefore its reconstruction error is zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-3-1",
+          "claim": "Every squared Frobenius error is nonnegative, so this zero error is the global minimum. Since $2>0$ separates the two eigenvalues of $X^TX$, [F2] also gives the unique minimizing one-dimensional subspace $\\operatorname{span}\\{(1,0)^T\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 verify zero reconstruction error and the zero singular-value tail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is present in this statement, so no endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classical-mds-recovers-euclidean-distances",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. For every symmetric nonnegative zero-diagonal dissimilarity matrix $D$, the matrix $B=-\\frac12H_nD^{\\circ2}H_n$ used by classical multidimensional scaling is symmetric and has a real orthonormal eigendecomposition, though it may have negative eigenvalues. If $D_{ij}=\\|z_i-z_j\\|_2$ for points $z_1,\\ldots,z_n\\in\\mathbb R^d$, where $\\|v\\|_2=(\\sum_{a=1}^d v_a^2)^{1/2}$, then $B=Z_cZ_c^T$ for the centered row-data matrix $Z_c=H_nZ$, so $B$ is positive semidefinite. The coordinates formed from all positive eigenvalues reproduce every pairwise distance exactly; if the requested embedding dimension is at least the number of positive eigenvalues, the truncated procedure is exact. The centered configurations obtained from $Z$ and these coordinates are related by a linear isometry between their spans, so the original configurations agree up to translation and Euclidean isometry of their affine spans.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-1-1",
+          "claim": "Put $u=(1,1,-2)^T$ and $v=(1,-1,0)^T$. Both are zero-sum, so $H_3u=u$ and $H_3v=v$. Here $D^{\\circ2}=\\begin{pmatrix}0&1&1\\\\1&0&9\\\\1&9&0\\end{pmatrix}$, so direct multiplication gives $u^TBu=-\\tfrac12u^TD^{\\circ2}u=19$, $v^TBv=1$, and $u^TBv=-\\tfrac12u^TD^{\\circ2}v=-8$. Thus $w=u+8v$ satisfies $w^TBw=19+16(-8)+64=-45<0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-2-1",
+          "claim": "By [F2], $B$ is symmetric and has an orthonormal eigenbasis. If every eigenvalue were nonnegative, expressing $w$ in that eigenbasis would give $w^TBw\\ge0$, contradicting step 1.1. Therefore $B$ has a negative eigenvalue.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-3-1",
+          "claim": "The stated triangle inequality fails, since $D_{13}+D_{12}=2<D_{23}=3$, so no Euclidean point configuration realizes $D$. This matches the negative eigenvalue and the Euclidean-only exactness hypothesis of [F2].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-input boundary in its stated hypotheses; a zero-valued input is outside the specific claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-dimensional case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is present in this statement, so no endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-disconnected-knn-graph-blocks-isomap-distances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-isomap",
+          "source_section": "Definition",
+          "quote": "Input: a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, an embedding dimension $q\\ge1$, and either a $k$-nearest-neighbor parameter $1\\le k<n$ with an explicit union or mutual symmetrization choice, or a radius $r>0$. Use $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$; for the $k$-nearest-neighbor option, each neighbor list orders candidates by increasing $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index. Construct the selected undirected graph and give each edge $\\{i,j\\}$ weight $\\|x_i-x_j\\|_2$. If the graph is disconnected, return the status “disconnected” and do not claim finite all-pairs graph distances. If it is connected, define $d_G(i,j)$ as the minimum total edge weight over all paths from $i$ to $j$; because the graph is finite with nonnegative edge weights, a minimum occurs among its finitely many simple paths. Form the symmetric dissimilarity matrix $D_G=(d_G(i,j))$ and apply classical multidimensional scaling to $D_G$ with requested dimension $q$. This finite procedure makes no guarantee that graph distances accurately approximate manifold geodesics or that the output recovers a manifold.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-disconnected-knn-graph-blocks-isomap-distances-1-1",
+          "claim": "The nearest neighbor of $x_1$ and $x_2$ is each other at distance $1/10$; the nearest neighbor of $x_3$ and $x_4$ is each other at distance $1/10$. Every distance between the two pairs is at least $99/10$, so no cross-pair edge is selected. By [F1], the union graph has exactly the two edges $\\{1,2\\}$ and $\\{3,4\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-disconnected-knn-graph-blocks-isomap-distances-2-1",
+          "claim": "The graph in step 1.1 has two connected components, so [F2] returns the disconnected status; a path between either cross-component pair does not exist, and the algorithm does not produce a finite all-pairs graph-distance matrix.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-input boundary in its stated hypotheses; a zero-valued input is outside the specific claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no singular, tied, or otherwise degenerate branch beyond the cases explicitly checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-singular-local-lle-covariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-minimum-norm-lle-weights-exist-uniquely",
+          "source_section": "Statement",
+          "quote": "Fix $x_i\\in\\mathbb R^p$ and a nonempty finite neighbor list $N_i=(j_1,\\ldots,j_k)$ of distinct indices. The constrained problem\n\n$$\\min_{w\\in\\mathbb R^k}\\left\\|x_i-\\sum_{s=1}^k w_sx_{j_s}\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{s=1}^k w_s=1$$\n\nhas a nonempty affine set of minimizers, and exactly one member of that set has smallest Euclidean norm. Thus the minimum-norm rule in finite LLE defines one weight vector even when the local covariance matrix is singular. This conclusion uses no choice axiom.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-singular-local-lle-covariance-1-1",
+          "claim": "The distances from $x_1=0$ to $x_4=0$, $x_2=1$, and $x_3=-1$ are $0,1,1$, so the deterministic list is $N_1=(4,2,3)$. The corresponding row matrix is $Z_1=(0,-1,1)$ and $C_1=Z_1^TZ_1=\\begin{pmatrix}0&0&0\\\\0&1&-1\\\\0&-1&1\\end{pmatrix}$, which is nonzero of rank one and hence singular.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-singular-local-lle-covariance-2-1",
+          "claim": "Write the weights in the order $(w_4,w_2,w_3)$. The constraint is $w_4+w_2+w_3=1$, and the reconstructed point is $w_2-w_3$. The minimum residual is zero exactly when $w_2=w_3=t$, giving $w_4=1-2t$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-singular-local-lle-covariance-3-1",
+          "claim": "Along this affine family, the squared norm is $(1-2t)^2+2t^2=6(t-1/3)^2+1/3$, uniquely minimized at $t=1/3$. Thus the minimum-norm weights are $(1/3,1/3,1/3)$ in the ordered list, and [F2] guarantees the selection is well-defined despite singularity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the exact zero-residual affine family."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has n=4 and k=3; it does not assert a one-sample or one-neighbor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1, 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-connected-lle-graph-need-not-have-simple-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-minimum-norm-lle-weights-exist-uniquely",
+          "source_section": "Statement",
+          "quote": "Fix $x_i\\in\\mathbb R^p$ and a nonempty finite neighbor list $N_i=(j_1,\\ldots,j_k)$ of distinct indices. The constrained problem\n\n$$\\min_{w\\in\\mathbb R^k}\\left\\|x_i-\\sum_{s=1}^k w_sx_{j_s}\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{s=1}^k w_s=1$$\n\nhas a nonempty affine set of minimizers, and exactly one member of that set has smallest Euclidean norm. Thus the minimum-norm rule in finite LLE defines one weight vector even when the local covariance matrix is singular. This conclusion uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-1-1",
+          "claim": "For $x_1=x_3=-1$, the two nearest indices to each are the duplicate at $-1$ and $x_5=0$, giving $N_1=(3,5)$ and $N_3=(1,5)$. For $x_2=x_4=1$, the lists are $N_2=(4,5)$ and $N_4=(2,5)$. From $x_5=0$ all four distances are $1$, so $N_5=(1,2)$ by the index tie rule.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-2-1",
+          "claim": "For rows 1 and 3, the exact reconstruction weights are 1 on the duplicate point and 0 on $x_5$; for rows 2 and 4, they are 1 on the duplicate point and 0 on $x_5$. For row 5, weights $(1/2,1/2)$ on points $x_1=-1,x_2=1$ reconstruct zero exactly. Each is the unique minimum-norm choice by [F2] and [F3], yielding the displayed $W$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-2-2",
+          "claim": "The union edges are $\\{1,3\\}$, $\\{1,5\\}$, $\\{3,5\\}$, $\\{2,4\\}$, $\\{2,5\\}$, $\\{4,5\\}$, and $\\{1,2\\}$, so every vertex lies in one connected graph.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-3-1",
+          "claim": "The equation $Wy=y$ gives $y_1=y_3$, $y_3=y_1$, $y_2=y_4$, $y_4=y_2$, and $y_5=(y_1+y_2)/2$. The parameters $y_1,y_2$ are free, so $\\dim\\ker(I_5-W)=2$, whereas the constant vectors form a one-dimensional subspace. The condition in [F4] fails despite connectivity, and LLE does not specify an embedding for this input.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes a two-dimensional fixed space, so the zero eigenspace is explicitly non-simple."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has n=5 and k=2; it does not assert a one-sample or one-neighbor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1, 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter is present in this statement, so no endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-square-loop-mds-isomap-lle-differ": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classical-mds-recovers-euclidean-distances",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. For every symmetric nonnegative zero-diagonal dissimilarity matrix $D$, the matrix $B=-\\frac12H_nD^{\\circ2}H_n$ used by classical multidimensional scaling is symmetric and has a real orthonormal eigendecomposition, though it may have negative eigenvalues. If $D_{ij}=\\|z_i-z_j\\|_2$ for points $z_1,\\ldots,z_n\\in\\mathbb R^d$, where $\\|v\\|_2=(\\sum_{a=1}^d v_a^2)^{1/2}$, then $B=Z_cZ_c^T$ for the centered row-data matrix $Z_c=H_nZ$, so $B$ is positive semidefinite. The coordinates formed from all positive eigenvalues reproduce every pairwise distance exactly; if the requested embedding dimension is at least the number of positive eigenvalues, the truncated procedure is exact. The centered configurations obtained from $Z$ and these coordinates are related by a linear isometry between their spans, so the original configurations agree up to translation and Euclidean isometry of their affine spans.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-isomap",
+          "source_section": "Definition",
+          "quote": "Input: a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, an embedding dimension $q\\ge1$, and either a $k$-nearest-neighbor parameter $1\\le k<n$ with an explicit union or mutual symmetrization choice, or a radius $r>0$. Use $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$; for the $k$-nearest-neighbor option, each neighbor list orders candidates by increasing $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index. Construct the selected undirected graph and give each edge $\\{i,j\\}$ weight $\\|x_i-x_j\\|_2$. If the graph is disconnected, return the status “disconnected” and do not claim finite all-pairs graph distances. If it is connected, define $d_G(i,j)$ as the minimum total edge weight over all paths from $i$ to $j$; because the graph is finite with nonnegative edge weights, a minimum occurs among its finitely many simple paths. Form the symmetric dissimilarity matrix $D_G=(d_G(i,j))$ and apply classical multidimensional scaling to $D_G$ with requested dimension $q$. This finite procedure makes no guarantee that graph distances accurately approximate manifold geodesics or that the output recovers a manifold.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lle-trace-minimizers",
+          "source_section": "Statement",
+          "quote": "Let $W\\in\\mathbb R^{n\\times n}$ satisfy $W\\mathbf1_n=\\mathbf1_n$, put $M=(I_n-W)^T(I_n-W)$, and assume $\\ker(I_n-W)=\\operatorname{span}\\{\\mathbf1_n\\}$. Let $0<\\mu_1\\le\\cdots\\le\\mu_{n-1}$ be the eigenvalues of $M$ restricted to the zero-sum subspace $\\mathbf1_n^\\perp$. For $1\\le q<n$, the minimum of $\\operatorname{tr}(Y^TMY)$ over $Y\\in\\mathbb R^{n\\times q}$ with $Y^T\\mathbf1_n=0$ and $Y^TY=I_q$ is $\\sum_{j=1}^q\\mu_j$. The minimum is attained by taking the columns of $Y$ to be orthonormal eigenvectors for the $q$ smallest positive eigenvalues; when eigenvalues tie, the minimizing subspace may vary inside the tied eigenspace. The trace is the sum of diagonal entries.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-1-1",
+          "claim": "The four points are already centered. The centered Gram matrix is $B=\\begin{pmatrix}1/2&0&-1/2&0\\\\0&1/2&0&-1/2\\\\-1/2&0&1/2&0\\\\0&-1/2&0&1/2\\end{pmatrix}$. The unit vector $u_x=(-1,1,1,-1)^T/2$ is an eigenvector with eigenvalue $1$, as is $u_y=(-1,-1,1,1)^T/2$; the other two eigenvalues are zero. Thus the x-coordinate choice $Y_M=u_x$ is a valid q=1 classical-MDS output, and it has repeated pairs $y_1=y_4$ and $y_2=y_3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-1-2",
+          "claim": "With one neighbor per row, each LLE weight is $1$. Thus $W_{12}=W_{21}=W_{32}=W_{41}=1$ and other entries are zero; the equations $Wy=y$ force $y_1=y_2=y_3=y_4$, so the kernel is exactly the constant vectors. The matrix is $M=(I-W)^T(I-W)=\\begin{pmatrix}3&-2&0&-1\\\\-2&3&-1&0\\\\0&-1&1&0\\\\-1&0&0&1\\end{pmatrix}$. Its symmetric subspace vectors $(c,c,d,d)$ have eigenvalues $0,2$. On antisymmetric vectors $(c,-c,-d,d)$ it acts by $(c,d)\\mapsto(5c-d,d-c)$, whose characteristic equation is $\\lambda^2-6\\lambda+4=0$, giving eigenvalues $3-\\sqrt5$ and $3+\\sqrt5$. Hence the lowest positive eigenvalue is $3-\\sqrt5$ with eigenvector $(a,-a,-1,1)^T$, where $a=\\sqrt5-2\\in(0,1)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-2-1",
+          "claim": "The distances from each square vertex to its two side-neighbors tie at $1$. By [F3], the neighbor lists are $N_1=(2)$, $N_2=(1)$, $N_3=(2)$, and $N_4=(1)$; the union graph has the stated edges and is the path $4-1-2-3$. Its graph distances are exactly the line distances of the centered vector $Y_I=(-1/2,1/2,3/2,-3/2)^T$. Since this graph-distance matrix is Euclidean in one dimension, [F2] shows that ISOMAP’s q=1 classical-MDS output is congruent to $Y_I$. In particular its distance between vertices 1 and 4 is $1$, unlike the zero MDS distance in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-3-1",
+          "claim": "The LLE coordinate has four distinct values, unlike $Y_M$, so it is not congruent to the classical-MDS output. Its sorted consecutive gaps are proportional to $1-a,2a,1-a$, and these are not all equal: $2a=1-a$ would imply $3\\sqrt5=7$, contradicting $45\\ne49$ after squaring. The ISOMAP line has equal consecutive gaps, so LLE is not congruent to ISOMAP either. The distinct distance $d_{14}=1$ in ISOMAP and $d_{14}=0$ in classical MDS already separates those two outputs.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-input boundary in its stated hypotheses; a zero-valued input is outside the specific claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1, 1.2 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1, 2.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-metric-stress-objective-nonconvex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-metric-stress-mds",
+          "source_section": "Definition",
+          "quote": "For a symmetric nonnegative zero-diagonal dissimilarity matrix $D\\in\\mathbb R^{n\\times n}$, $n\\ge2$, and a target dimension $q\\ge1$, use the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^q v_a^2)^{1/2}$. The **metric stress** of centered coordinates $Y=(y_1^T,\\ldots,y_n^T)^T\\in\\mathbb R^{n\\times q}$, with $\\mathbf1_n^TY=0$, is\n\n$$S_D(Y):=\\sum_{1\\le i<j\\le n}\\bigl(D_{ij}-\\|y_i-y_j\\|_2\\bigr)^2.$$\n\nMetric stress MDS is the separate optimization problem of minimizing $S_D(Y)$ over such centered $Y$. It is a distance-based, generally nonconvex objective and does not define the positive-eigenvalue solution used by classical multidimensional scaling; no solver convergence or global-optimizer guarantee is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-metric-stress-objective-nonconvex-1-1",
+          "claim": "For $Y(t)=(t,-t)$, the sole distance is $|t-(-t)|=2|t|$, so [F1] gives $f(t)=(1-2|t|)^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-metric-stress-objective-nonconvex-2-1",
+          "claim": "A convex function must satisfy the midpoint inequality $f(0)\\le\\tfrac12f(-a)+\\tfrac12f(a)$. At $a=1/4$, $f(0)=1$ and $f(-a)=f(a)=(1-1/2)^2=1/4$, so the midpoint inequality fails. Hence this valid stress objective is nonconvex.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a nonempty finite matrix, sample, or neighborhood; an empty input is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-input boundary in its stated hypotheses; a zero-valued input is outside the specific claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no singular, tied, or otherwise degenerate branch beyond the cases explicitly checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks this boundary in the stated proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are individual finite-dimensional witnesses supplied by the cited existence results; no choice function or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is not stated as an if-and-only-if assertion."
+        }
+      ]
+    }
+  }
+}

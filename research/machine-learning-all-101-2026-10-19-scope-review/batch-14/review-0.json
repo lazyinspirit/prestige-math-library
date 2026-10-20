@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "14",
+  "round": 0,
+  "reviewed_items": [
+    "def-linear-score-classifier",
+    "def-indicator-response-least-squares-classifier",
+    "lem-indicator-response-least-squares-minimum-norm-fit",
+    "def-generative-lda-and-qda-models",
+    "thm-lda-and-qda-log-posterior-scores",
+    "def-binary-logistic-and-multiclass-softmax-models",
+    "def-binary-logistic-log-likelihood-and-l1-penalty",
+    "thm-binary-logistic-derivatives-and-irls-update",
+    "thm-complete-separation-precludes-finite-logistic-mle",
+    "alg-cyclic-perceptron",
+    "thm-perceptron-margin-mistake-bound",
+    "ex-generative-lda-and-logistic-share-a-boundary",
+    "ex-separated-logistic-sample-has-unattained-supremum",
+    "ex-nonseparable-perceptron-cycles"
+  ],
+  "reviewed_pages": [
+    "ml02-linear-classification",
+    "ml02-linear-classification-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved ML-13 scope, and actual supplier claims and proofs were reviewed. Four defects can be resolved within assigned items; no significant prerequisite gap or outside consumer repair remains.",
+  "findings": [
+    {
+      "id": "def-binary-logistic-log-likelihood-and-l1-penalty",
+      "type": "scope",
+      "reason": "Approved scope includes an optional no-intercept model with an all-coordinate L1 penalty. The Definition requires every design row to include an intercept, then defines a no-intercept case. State the intercept and no-intercept cases consistently."
+    },
+    {
+      "id": "thm-lda-and-qda-log-posterior-scores",
+      "type": "local",
+      "reason": "Proof F3 and step 4.1 apply def-linear-score-classifier to QDA's generally quadratic scores, outside that supplier's affine-score definition. Justify the finite argmax tie rule locally for QDA, or restrict F3 to LDA."
+    },
+    {
+      "id": "alg-cyclic-perceptron",
+      "type": "local",
+      "reason": "The classifier assigns a zero score to -1, but the update test triggers at zero for a -1 example. That correctly classified tie is called a mistake; call it an update."
+    },
+    {
+      "id": "thm-perceptron-margin-mistake-bound",
+      "type": "local",
+      "reason": "The Statement and proof bound updates, while the title and approved scope call for a prediction-mistake bound. Explicitly show that every misclassified visit has signed margin at most zero and therefore triggers an update, so the update bound gives the claimed mistake bound."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-binary-logistic-derivatives-and-irls-update",
+      "decision": "accept",
+      "reason": "F2 and step 1.1 use the likelihood formula with an intercept column, a case retained by the clarified definition; the GLM, information, IRLS, and weighted least-squares supplier hypotheses are met."
+    },
+    {
+      "id": "thm-complete-separation-precludes-finite-logistic-mle",
+      "decision": "accept",
+      "reason": "F1 and step 1.1 use the unchanged unpenalized likelihood formula; the proof allows an intercept when present."
+    },
+    {
+      "id": "ex-separated-logistic-sample-has-unattained-supremum",
+      "decision": "accept",
+      "reason": "F1 and step 2.1 use the unchanged likelihood formula on an explicit intercept design."
+    },
+    {
+      "id": "ml02-linear-classification",
+      "decision": "accept",
+      "reason": "Its inventory includes the affected definition and perceptron results; the page has no body requiring changes."
+    },
+    {
+      "id": "ml02-linear-classification-examples",
+      "decision": "accept",
+      "reason": "Its example inventory remains valid; the separated-sample and cycle arguments use the update behavior, not the mistaken counter label."
+    },
+    {
+      "id": "ex-generative-lda-and-logistic-share-a-boundary",
+      "decision": "accept",
+      "reason": "F1 uses the LDA affine score formula; the QDA tie-rule proof repair does not change that claim."
+    },
+    {
+      "id": "thm-perceptron-margin-mistake-bound",
+      "decision": "repair",
+      "reason": "It is a direct algorithm consumer. Its update-bound argument is sound; add the explicit implication from prediction errors to updates to state the approved mistake bound."
+    },
+    {
+      "id": "ex-nonseparable-perceptron-cycles",
+      "decision": "accept",
+      "reason": "F1 and verification steps 1.1–2.1 rely on the update condition and cycle, not on calling updates mistakes."
+    }
+  ]
+}

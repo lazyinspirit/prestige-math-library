@@ -26,6 +26,7 @@ provenance:
   proof: not-applicable
 axiom_use: "The density and mean-field definitions are choice-free. Posterior-kernel context uses only the stated finite-positive-fiber and event-identity clauses; no conditional-expectation existence convention is invoked."
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-variational-family-and-elbo.json
   precheck: n/a
 sources:
   references:
@@ -48,14 +49,31 @@ Define the normalized target density $\pi:=\gamma/Z$. Then $\int\pi\,d\mu=1$. Fo
 
 The normalization follows from positive-scalar homogeneity of the nonnegative integral:
 $$\int\pi\,d\mu=Z^{-1}\int\gamma\,d\mu=1.$$
-The induced density set functions are measures by [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]. Their total masses are one: $Q(\Omega)=1$ by the probability-density hypothesis on $q$, and $\Pi(\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\in\mathcal A$ satisfy $\Pi(A)=0$. Then $\int_A\pi\,d\mu=0$, so the zero-integral criterion gives $\pi=0$ $\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]].
+The induced density set functions are measures by The indefinite integral of a nonnegative measurable function is a measure. Their total masses are one: $Q(\Omega)=1$ by the probability-density hypothesis on $q$, and $\Pi(\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\in\mathcal A$ satisfy $\Pi(A)=0$. Then $\int_A\pi\,d\mu=0$, so the zero-integral criterion gives $\pi=0$ $\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are Monotonicity and nonnegative homogeneity of the nonnegative integral and A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere.
 
 Call $q$ **admissible** when $q\ll_\mu\pi$ and
 $$\int_\Omega q\bigl(|\log\gamma|+|\log q|\bigr)\,d\mu<\infty.$$
-Use the extended logarithm $\log0=-\infty$, agreeing with [[def-natural-logarithm]] on positive inputs. Since $\int\gamma\,d\mu<\infty$ and $\int q\,d\mu=1$, both functions are finite $\mu$-almost everywhere: for either $f=\gamma$ or $f=q$, $\mu\{f=\infty\}\le n^{-1}\int f\,d\mu$ for every $n\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\log\gamma|$, $q|\log q|$, $q\log\gamma$, and $q\log q$ equal to zero on $\{q=0\}$. On the set where $q>0$, admissibility implies $\gamma>0$ $\mu$-almost everywhere. Define the finite real number
+Use the extended logarithm $\log0=-\infty$, agreeing with The natural logarithm as the inverse of the exponential function on positive inputs. Since $\int\gamma\,d\mu<\infty$ and $\int q\,d\mu=1$, both functions are finite $\mu$-almost everywhere: for either $f=\gamma$ or $f=q$, $\mu\{f=\infty\}\le n^{-1}\int f\,d\mu$ for every $n\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\log\gamma|$, $q|\log q|$, $q\log\gamma$, and $q\log q$ equal to zero on $\{q=0\}$. On the set where $q>0$, admissibility implies $\gamma>0$ $\mu$-almost everywhere. Define the finite real number
 $$\operatorname{ELBO}(q):=\int_\Omega q(\log\gamma-\log q)\,d\mu.$$
 A **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.
 
 For a finite integer $m\ge1$, let $\Omega=\prod_{j=1}^m\Omega_j$, let each $(\Omega_j,\mathcal A_j,\mu_j)$ be sigma-finite, and let $\mu=\bigotimes_{j=1}^m\mu_j$. A **mean-field density** is a product $q(z)=\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\int q\,d\mu=1$. The product form alone does not guarantee support or finite ELBO.
 
-In a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in [[thm-bayes-formula-for-dominated-kernels]] and [[thm-conditional-density-formula]]. In particular, [[def-likelihood-density]] supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.
+In a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in Bayes formula for dominated kernels and Conditional density formula. In particular, Likelihood densities supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.
+
+## Definition references
+
+[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]
+
+[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]
+
+[[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]
+
+[[def-natural-logarithm]]
+
+[[thm-bayes-formula-for-dominated-kernels]]
+
+[[thm-conditional-density-formula]]
+
+[[def-likelihood-density]]
+

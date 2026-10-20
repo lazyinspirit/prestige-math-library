@@ -14,6 +14,7 @@ landmark: false
 short: "compact implies a countable dense subset"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-compact-metric-space-has-a-countable-dense-subset.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -32,19 +33,33 @@ pipeline_run: null
 
 ## Statement
 
-**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let $(X,d)$
-be a compact metric space ([[def-metric-compactness]], [[def-metric-space]]).
-Then there is an at most countable set $D \subseteq X$ ([[def-countable]]) that
+**Assume the Axiom of Countable Choice** (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Let $(X,d)$
+be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space, Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric).
+Then there is an at most countable set $D \subseteq X$ (Finite, countably infinite, countable, uncountable) that
 is dense in $X$, that is $\overline{D} = X$
-([[def-metric-interior-closure-boundary]]).
+(Interior, closure, boundary, limit point, isolated point and dense subset of a metric space).
 
 **Where the axiom is spent.** Once at step 2.1, to fix a finite $1/(n+1)$-net for
 every $n \in \mathbb{N}$ at the same time; the family of sets chosen from is
 written down before any selection and does not depend on the earlier ones. The
-appeal to [[thm-countable-union-of-countable]] at step 4.1 carries the same
+appeal to Countable unions of at most countable sets, assuming $\mathrm{AC}_\omega$ at step 4.1 carries the same
 hypothesis $\mathrm{AC}_\omega$ and no more, so nothing further is spent there.
 As always on this page the claim is an upper bound on the cost of this proof, not
 an assertion that $\mathrm{AC}_\omega$ is necessary.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-metric-compactness]]
+
+[[def-metric-space]]
+
+[[def-countable]]
+
+[[def-metric-interior-closure-boundary]]
+
+[[thm-countable-union-of-countable]]
 
 ## Facts & Assumptions
 

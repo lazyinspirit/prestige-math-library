@@ -1,0 +1,89 @@
+[
+  {
+    "order": 2798,
+    "id": "compression-generalization-for-trained-networks",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Compression generalization for trained networks",
+    "companion": "compression-generalization-for-trained-networks-examples",
+    "requires": [
+      "feedforward-networks-and-universal-approximation",
+      "finite-class-pac-learning-and-erm"
+    ],
+    "items": [
+      {
+        "id": "def-margin-preserving-compression",
+        "kind": "definition",
+        "title": "Margin-preserving compression of score classifiers",
+        "deps": [
+          "def-supervised-learning-problem",
+          "def-measurable-space",
+          "def-population-and-empirical-risk",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-description-compression-bound",
+        "kind": "theorem",
+        "title": "Finite-description compression bound for trained classifiers",
+        "deps": [
+          "def-margin-preserving-compression",
+          "def-measurable-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-probability-measure-basic-identities",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "cor-exponential-reciprocal-and-positivity",
+          "lem-bounded-variable-hoeffding-mgf",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-markov-inequality-for-random-variables",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions",
+          "def-borel-sigma-algebra",
+          "def-law-or-distribution-of-a-random-element",
+          "thm-change-of-variables-for-expectation",
+          "def-real-exponential-function-and-e",
+          "cor-expectation-of-an-indicator-is-probability"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+      "statement": "The following corrected finite-description form of Arora, Ge, Neyshabur, and Zhang's compression bound applies to a measurable sample-dependent score classifier. Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let $\\mathcal Y=\\{1,\\ldots,K\\}$ have the discrete sigma-algebra with $K\\ge2$, put $\\Sigma_Z=\\Sigma_X\\otimes2^{\\mathcal Y}$ on $Z=\\mathcal X\\times\\mathcal Y$, and let $P$ be a probability law on $(Z,\\Sigma_Z)$. Let $m\\ge1$ and draw $S=((X_1,Y_1),\\ldots,(X_m,Y_m))$ independently and identically distributed (IID) with law $P$, with sample space $Z^m$ carrying $\\Sigma_Z^{\\otimes m}$. Fix integers $q\\ge0$, $r\\ge1$, a helper string $s$ independent of $S$, finite nonempty parameter sets $D_1,\\ldots,D_q$ with $|D_j|\\le r$, a nonempty code set $\\mathcal A\\subseteq\\prod_{j=1}^qD_j$ (with the empty product a singleton when $q=0$), a distortion tolerance $\\epsilon>0$, and a confidence level $0<\\delta<1$. For any score map $u$ with measurable coordinates, write $h_u(x)$ for the classifier that chooses the least index attaining the largest coordinate of $u(x)$. For each $a\\in\\mathcal A$, let $g_{s,a}:\\mathcal X\\to\\mathbb R^K$ have measurable coordinates and put $h_{s,a}:=h_{g_{s,a}}$. Equip $\\mathbb R^K$ with its Borel sigma-algebra. Let $F:Z^m\\times\\mathcal X\\to\\mathbb R^K$ be measurable for $\\Sigma_Z^{\\otimes m}\\otimes\\Sigma_X$, write $f_S(x)=F(S,x)$, and let $\\alpha:Z^m\\to\\mathcal A$ be measurable for the discrete sigma-algebra on $\\mathcal A$. Suppose that, for $P^m$-almost every $S$,\n$$\\max_{k\\in\\mathcal Y}|f_S(X_i)_k-g_{s,\\alpha(S)}(X_i)_k|\\le\\epsilon\\qquad(1\\le i\\le m)$$\nWith natural logarithms, define\n$$R_P(h):=P\\{(x,y):h(x)\\ne y\\},\\qquad \\widehat R_S(h):=\\frac1m\\sum_{i=1}^m\\mathbf1\\{h(X_i)\\ne Y_i\\},$$\n$$M_{f_S}(x,y):=f_S(x)_y-\\max_{j\\ne y}f_S(x)_j,\\qquad \\widehat L_\\gamma(f_S;S):=\\frac1m\\sum_{i=1}^m\\mathbf1\\{M_{f_S}(X_i,Y_i)\\le\\gamma\\},\\qquad \\gamma\\ge0.$$\nThen, with probability at least $1-\\delta$ over $S$,\n$$R_P\\bigl(h_{s,\\alpha(S)}\\bigr)\\le\\widehat L_{2\\epsilon}(f_S;S)+\\sqrt{\\frac{q\\log r+\\log(1/\\delta)}{2m}}.$$\nIn particular, the coordinatewise distortion $\\epsilon$ only guarantees preservation of an observed label when its original score margin is strictly greater than $2\\epsilon$. The conclusion bounds the selected compressed classifier $h_{s,\\alpha(S)}$; it does not bound the original classifier $h_{f_S}$ unless a separate all-domain loss-preservation argument is supplied. The theorem assumes a suitable fixed-helper compressor and makes no claim that a network compression construction exists or that layer-stability or cushion hypotheses hold."
+      }
+    ]
+  },
+  {
+    "order": 2799,
+    "id": "compression-generalization-for-trained-networks-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Compression generalization for trained networks — Examples",
+    "companion": "compression-generalization-for-trained-networks",
+    "requires": [
+      "compression-generalization-for-trained-networks"
+    ],
+    "items": [
+      {
+        "id": "ex-compressed-classifier-vs-original-predictor",
+        "kind": "example",
+        "title": "A compressed classifier can differ from its trained predictor off the sample",
+        "deps": [
+          "def-margin-preserving-compression",
+          "thm-finite-description-compression-bound",
+          "def-feedforward-neural-network"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

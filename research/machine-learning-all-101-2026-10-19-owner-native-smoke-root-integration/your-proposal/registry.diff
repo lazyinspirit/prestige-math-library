@@ -1,0 +1,46 @@
+--- tools/finite-smoke.mjs	2026-10-19 01:22:23.382269820 +1100
++++ research/machine-learning-all-101-2026-10-19-owner-native-smoke-root-integration/your-proposal/finite-smoke.registry-review.mjs	2026-10-19 20:40:52.410255600 +1100
+@@ -20,6 +20,7 @@
+ import { frontier81ClassicalChecks } from './finite-smoke-frontier81-classical.mjs';
+ import { frontier81QuantumChecks } from './finite-smoke-frontier81-quantum.mjs';
+ import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';
++import { ml101CheckGroups, ml101SelfTestFixtures, mergeCheckRegistries } from './finite-smoke-ml101.mjs';
+ 
+ const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+ const argv = process.argv.slice(2);
+@@ -28,7 +29,7 @@
+ const CHECKS = makeChecks();
+ 
+ if (argv.includes('--self-test')) {
+-  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name]({}) }));
++  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name](Object.hasOwn(ml101SelfTestFixtures, name) ? ml101SelfTestFixtures[name] : {}) }));
+   const failures = outcomes.filter((outcome) => !outcome.ok);
+   if (asJson) console.log(JSON.stringify({ ok: failures.length === 0, outcomes }, null, 2));
+   else {
+@@ -94,14 +95,18 @@
+   if (!outcome.ok) errors.push({ code: 'finite-countermodel', message: `${smoke.check}: ${outcome.summary}`, id });
+ }
+ 
+-function makeChecks() { return {
+-  ...quantumQCChecks,
+-  ...quantumQueryChecks,
+-  ...quantumEstimationChecks,
+-  ...numericalChecks,
+-  ...frontier81ClassicalChecks,
+-  ...frontier81QuantumChecks,
+-  ...frontier81TLCherednikChecks,
++function makeChecks() { return mergeCheckRegistries([
++  ['quantumQCChecks', quantumQCChecks],
++  ['quantumQueryChecks', quantumQueryChecks],
++  ['quantumEstimationChecks', quantumEstimationChecks],
++  ['numericalChecks', numericalChecks],
++  ['frontier81ClassicalChecks', frontier81ClassicalChecks],
++  ['frontier81QuantumChecks', frontier81QuantumChecks],
++  ['frontier81TLCherednikChecks', frontier81TLCherednikChecks],
++  ['inline-core', makeInlineCoreChecks()],
++  ...ml101CheckGroups,
++]); }
++function makeInlineCoreChecks() { return {
+   // Finite Gaussian fixtures: integrate the original prior/likelihood product
+   // independently of the proposed completed-square parameters.
+   'normal-normal-finite-n-posterior': () => {

@@ -1,0 +1,598 @@
+[
+  {
+    "order": 2847,
+    "id": "finite-mdps-and-bellman-operators",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Finite MDPs and Bellman operators",
+    "companion": "finite-mdps-and-bellman-operators-examples",
+    "requires": [
+      "completeness-and-uniform-continuity",
+      "conditional-distributions-and-regular-conditional-probability",
+      "markov-kernels-and-markov-chains"
+    ],
+    "items": [
+      {
+        "id": "def-finite-markov-decision-process",
+        "kind": "definition",
+        "title": "Finite Markov decision process with joint reward-transition law",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-countable",
+          "def-cartesian-product",
+          "def-sum-over-a-finite-index-set",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "lem-of-abs-value",
+          "lem-triangle-inequality-finite",
+          "lem-finite-sum-laws",
+          "thm-sum-rule",
+          "thm-the-characterising-property-of-ordered-pairs"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+        "strategy": "Specify the finite one-step joint reward-transition model and its policy conventions; define the expected reward and state-transition law by finite sums.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-bounded-discounted-return-converges",
+        "kind": "lemma",
+        "title": "Absolute convergence and tail bound for bounded discounted rewards",
+        "deps": [
+          "thm-geometric-series",
+          "thm-direct-comparison-test",
+          "def-series",
+          "lem-series-tail-invariance",
+          "lem-series-linearity",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "lem-finite-sum-laws",
+          "lem-of-abs-value",
+          "lem-limit-preserves-order",
+          "lem-geometric-sequence-null"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $M\\ge0$, $0\\le\\gamma<1$, and let $(\\rho_j)_{j\\ge1}$ be any real sequence with $|\\rho_j|\\le M$. Then the series\n\n$$ \\sum_{j=0}^{\\infty}\\gamma^j\\rho_{j+1} $$\n\nconverges absolutely. Every partial sum and the limit satisfy\n\n$$ \\left|\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M}{1-\\gamma}, \\qquad |G|\\le\\frac{M}{1-\\gamma}. $$\n\nFor every integer $N\\ge0$,\n\n$$ \\left|G-\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M\\gamma^N}{1-\\gamma}, $$\n\nwhere the partial sum at $N=0$ is empty and $\\gamma^0=1$, including when $\\gamma=0$.",
+        "strategy": "Compare the absolute reward terms with the geometric series, then pass the finite geometric tail bound to the limit.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-state-sup-norm-space-is-complete",
+        "kind": "lemma",
+        "title": "Completeness of the sup metric on finite-state value functions",
+        "deps": [
+          "def-countable",
+          "def-metric-space",
+          "def-cauchy-in-metric",
+          "def-metric-convergence",
+          "def-real-limit",
+          "def-complete-metric-space",
+          "lem-metrics-on-rn",
+          "lem-finite-sum-laws",
+          "lem-limit-unique",
+          "thm-cauchy-criterion-via-lub",
+          "thm-induction-principle",
+          "thm-nat-linear-order",
+          "thm-well-ordering-principle"
+        ],
+        "dependency_level": 0,
+        "statement": "For any finite set $S$, let $B(S)=\\mathbb R^S$, the set of real-valued functions on $S$. Define\n\n$$ d_\\infty(U,V)=\\begin{cases}0,&S=\\emptyset,\\\\ \\max_{s\\in S}|U(s)-V(s)|,&S\\ne\\emptyset.\\end{cases} $$\n\nThen $d_\\infty$ is a metric on $B(S)$ and $(B(S),d_\\infty)$ is complete.",
+        "strategy": "Identify a nonempty finite state set with n for n≥1, compare the max metric and Euclidean metric, and transfer completeness from R^n; treat the empty set separately.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Sergey Mozgovoy, Lecture Notes on Metric Spaces and Functional Analysis",
+              "url": "https://www.maths.tcd.ie/~mozgovoy/data/notes_MS_2014.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-finite-mdp-policy-induces-reward-state-chain",
+        "kind": "theorem",
+        "title": "A finite MDP and stationary policy generate a reward-state Markov chain",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-measure-kernel-and-probability-kernel",
+          "def-axiom-of-choice",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-sum-over-a-finite-index-set",
+          "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+          "thm-subset-of-a-finite-set",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-well-ordering-principle"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Put $E=S\\times(\\mathcal R\\cup\\{0\\})$ with its discrete sigma-algebra and define, for $x=(s,\\eta)\\in E$ and $B\\subseteq E$,\n\n$$ K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s) \\sum_{\\substack{s'\\in S\\\\\\rho\\in\\mathcal R}}1_B(s',\\rho)\\,p(s',\\rho\\mid s,a). $$\n\nThen $K_\\pi$ is a probability kernel on $E$. For each initial state $s\\in S$, there is a probability law on $E^{\\mathbb N}$ whose coordinate process starts at $(s,0)$ and is a time-homogeneous Markov chain with transition kernel $K_\\pi$ relative to its natural filtration.",
+        "strategy": "Check that the finite mixture defines a probability kernel, then apply the published Ionescu–Tulcea construction and the library chain definition.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-policy-bellman-operator",
+        "kind": "definition",
+        "title": "Policy Bellman operator",
+        "deps": [
+          "def-finite-markov-decision-process"
+        ],
+        "dependency_level": 1,
+        "statement": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+        "strategy": "Define the one-step policy evaluation map from the joint reward-transition law and the stationary policy.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-bellman-optimality-operator",
+        "kind": "definition",
+        "title": "Bellman optimality operator",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-max-min",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 1,
+        "statement": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+        "strategy": "Define the one-step optimality map using a maximum over each finite nonempty action set.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-discounted-return-and-value-functions",
+        "kind": "definition",
+        "title": "Discounted returns and policy values in a finite MDP",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "thm-finite-mdp-policy-induces-reward-state-chain",
+          "lem-bounded-discounted-return-converges",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-random-element-and-real-random-variable",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-dominated-convergence",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "dependency_level": 2,
+        "statement": "Let a finite MDP have $0\\le\\gamma<1$ and let $\\pi$ be a stationary Markov policy. If $S=\\emptyset$, define $V^\\pi$ to be the unique empty function; no path law or choice axiom is needed in this case. If $S\\ne\\emptyset$, assume the Axiom of Choice and, for each $s\\in S$, use the path law started at $X_0=(s,0)$ supplied by the policy-induced reward-state chain; write $X_t=(S_t,R_t)$. The **discounted return** is\n\n$$ G_t=\\sum_{j=0}^{\\infty}\\gamma^jR_{t+j+1}, $$\n\nand the **state value under $\\pi$** is $V^\\pi(s)=\\mathbb E_{\\pi,s}[G_0]$, where $\\mathbb E_{\\pi,s}$ is expectation under that start-state law. If $S=\\emptyset$, $V^\\pi$ is the unique empty function. The reward sequence bound gives $|G_t|\\le M/(1-\\gamma)$, so each return is measurable and integrable. This is the start-state meaning of $\\mathbb E_\\pi[G_t\\mid S_t=s]$ when that conditional expectation is defined. The definition concerns discounted infinite-horizon tasks; average-reward and undiscounted continuing models, and improper episodic tasks, are outside its scope.\n\nThe coordinate $0$ in $X_0=(s,0)$ is only a dummy initial reward; the chain's one-step kernel emits rewards in $\\mathcal R$. Finite partial sums of the return are measurable, their pointwise limit is measurable, and the constant bound $M/(1-\\gamma)$ is an integrable majorant on the probability space.",
+        "strategy": "Define the discounted return under the actual policy-induced path law; use the finite reward bound and geometric tail estimate for well-definedness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-bellman-contraction-and-unique-fixed-point",
+        "kind": "theorem",
+        "title": "Finite-MDP Bellman operators are gamma contractions with unique fixed points",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-bellman-optimality-operator",
+          "lem-finite-state-sup-norm-space-is-complete",
+          "thm-banach-fixed-point"
+        ],
+        "dependency_level": 2,
+        "statement": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+        "strategy": "Bound the finite probability-weighted averages and finite maxima in sup norm, then apply Banach with q=γ on the complete finite-state value space.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-value-iteration",
+        "kind": "algorithm",
+        "title": "Exact value iteration for the Bellman optimality operator",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-bellman-optimality-operator"
+        ],
+        "dependency_level": 2,
+        "statement": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial value function $V_0\\in\\mathbb R^S$, and an integer $m\\ge0$. Set $V_{j+1}=T^*V_j$ for $j=0,\\ldots,m-1$ and return $V_m$. This procedure returns the exact $m$th iterate and makes no finite-termination claim for convergence.",
+        "strategy": "Specify the exact finite number of Bellman optimality backups and the returned iterate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-policy-value-satisfies-bellman-equation",
+        "kind": "lemma",
+        "title": "Expected discounted policy value is a fixed point of its Bellman operator",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-discounted-return-and-value-functions",
+          "def-axiom-of-choice",
+          "thm-finite-mdp-policy-induces-reward-state-chain",
+          "def-policy-bellman-operator",
+          "def-probability-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "lem-bounded-discounted-return-converges",
+          "thm-dominated-convergence",
+          "thm-algebra-of-limits",
+          "lem-limit-of-tail"
+        ],
+        "dependency_level": 3,
+        "statement": "For a finite MDP, a discount $0\\le\\gamma<1$, and any stationary Markov policy $\\pi$, the expected discounted state value defined from each initial state satisfies\n\n$$ T^\\pi V^\\pi=V^\\pi. $$\n\nIf $S=\\emptyset$, this is the equality of the unique empty functions and no choice axiom is needed. If $S\\ne\\emptyset$, assume the Axiom of Choice for the path-law definition of $V^\\pi$.",
+        "strategy": "Derive the finite-horizon first-step recursion from the induced chain’s finite-prefix law, then pass to the bounded discounted-return limit.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            },
+            {
+              "title": "Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown University Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-value-iteration-convergence-error-bound",
+        "kind": "theorem",
+        "title": "Value iteration converges at the Bellman contraction rate",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "alg-value-iteration",
+          "thm-bellman-contraction-and-unique-fixed-point",
+          "def-integer-power",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $V^*$ be the unique fixed point of $T^*$ for a finite MDP with $0\\le\\gamma<1$. For every initial $V_0\\in\\mathbb R^S$ and every $m\\in\\mathbb N$, the exact value-iteration iterates $V_{m+1}=T^*V_m$ satisfy\n\n$$ \\|V_m-V^*\\|_\\infty\\le\\gamma^m\\|V_0-V^*\\|_\\infty, $$\n\nwith $\\gamma^0=1$.",
+        "strategy": "Apply the contraction inequality repeatedly, with equality at the initial index.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-policy-iteration",
+        "kind": "algorithm",
+        "title": "Exact finite policy iteration with retained greedy actions",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-bellman-optimality-operator",
+          "thm-bellman-contraction-and-unique-fixed-point"
+        ],
+        "dependency_level": 3,
+        "statement": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial deterministic policy $\\pi_0$, and, for each state $s$, an ordered list containing each member of $A(s)$ exactly once. For $k=0,1,\\ldots$:\n\n1. Compute the unique exact policy evaluation $V_k\\in\\mathbb R^S$ satisfying $T^{\\pi_k}V_k=V_k$.\n2. For each $s$, set\n\n$$ Q_k(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V_k(s'). $$\n\nIf $\\pi_k(s)$ attains $\\max_{a\\in A(s)}Q_k(s,a)$, set $\\pi_{k+1}(s)=\\pi_k(s)$. Otherwise set $\\pi_{k+1}(s)$ to the earliest maximizing action in the supplied list.\n3. If $\\pi_{k+1}=\\pi_k$, return $(\\pi_k,V_k)$. Otherwise continue with $\\pi_{k+1}$.\n\nThe operator fixed point used for exact policy evaluation exists and is unique by the finite-MDP contraction theorem.",
+        "strategy": "Define exact policy evaluation, deterministic greedy improvement using a supplied action list, tie retention, and the stop condition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-policy-improvement",
+        "kind": "theorem",
+        "title": "Greedy policy improvement and finite policy-iteration termination",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-countable",
+          "def-discounted-return-and-value-functions",
+          "def-axiom-of-choice",
+          "def-policy-bellman-operator",
+          "def-bellman-optimality-operator",
+          "lem-policy-value-satisfies-bellman-equation",
+          "thm-bellman-contraction-and-unique-fixed-point",
+          "alg-policy-iteration",
+          "lem-finite-set-has-max",
+          "lem-finite-state-sup-norm-space-is-complete",
+          "thm-banach-fixed-point",
+          "lem-limit-preserves-order",
+          "thm-induction-principle",
+          "thm-product-rule"
+        ],
+        "dependency_level": 4,
+        "statement": "Let a finite MDP and $0\\le\\gamma<1$ be fixed. If $S=\\emptyset$, the statewise claims below are vacuous and the policy iteration procedure returns the unique empty policy after one evaluation, without Choice. If $S\\ne\\emptyset$, assume the Axiom of Choice and, for a stationary policy $\\pi$, let $V^\\pi$ be its expected discounted state value. Put\n\n$$ Q_V(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s'). $$\n\nIf a deterministic policy $\\pi'$ chooses an action maximizing $Q_{V^\\pi}(s,a)$ at every state, then $V^{\\pi'}(s)\\ge V^\\pi(s)$ for every $s$. If $(T^{\\pi'}V^\\pi)(s)>V^\\pi(s)$ at any state, the value inequality is strict at some state.\n\nFor exact finite policy iteration, supply an initial deterministic policy and a finite ordered list of the actions at each state; evaluate each policy at its exact Bellman fixed point; retain the current action whenever it is already greedy; otherwise choose the earliest maximizing action in the supplied list. Every changed policy then strictly improves the value at some state and weakly improves it at every state. The procedure makes at most $N_{\\rm det}-1$ changes, where $N_{\\rm det}$ is the finite number of deterministic policies, and terminates at a deterministic policy whose value $V^*$ dominates the value of every stationary policy.",
+        "strategy": "Use the Bellman fixed-point identities, monotonicity of positive probability averages, contraction iteration, and finiteness of deterministic policies; retain the current action at every tie.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2848,
+    "id": "finite-mdps-and-bellman-operators-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Finite MDPs and Bellman operators — Examples",
+    "companion": "finite-mdps-and-bellman-operators",
+    "requires": [
+      "finite-mdps-and-bellman-operators"
+    ],
+    "items": [
+      {
+        "id": "ex-undiscounted-single-state-mdp-diverges",
+        "kind": "example",
+        "title": "A unit reward on a self-loop has no finite undiscounted return",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 1,
+        "statement": "Take the finite MDP with $S=\\{s\\}$, $A(s)=\\{a\\}$, reward alphabet $\\mathcal R=\\{1\\}$, and $p(s,1\\mid s,a)=1$. At $\\gamma=1$, the first $N$ terms of the return sum to $N$, so the undiscounted return diverges. The formal one-state backup $F(v)=1+v$ has no real fixed point and is not a contraction with any constant $q<1$.",
+        "strategy": "Compute the finite partial sums and solve the formal fixed-point equation directly.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-finite-mdp-common-reward-shift",
+        "kind": "example",
+        "title": "A common reward shift moves every one-state Bellman value equally",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-policy-bellman-operator",
+          "def-bellman-optimality-operator",
+          "thm-bellman-contraction-and-unique-fixed-point"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $S=\\{s\\}$, $A(s)=\\{a,b\\}$, and $\\gamma=1/2$. Both actions return deterministically to $s$, with reward $1$ under $a$ and reward $3$ under $b$. The deterministic policies choosing $a$ and $b$ have unique policy Bellman fixed points $2$ and $6$, respectively. More generally, for a stationary policy with $\\theta:=\\pi(b\\mid s)\\in[0,1]$, its fixed point is $2+4\\theta$. After adding $2$ to both rewards, the deterministic-policy fixed points are $6$ and $10$, and the fixed point for the same stochastic policy is $6+4\\theta$. Thus every policy value shifts by $2/(1-\\gamma)=4$, the difference between the two deterministic-policy values remains $4$, and $b$ remains greedy for the Bellman optimality operator.",
+        "strategy": "Evaluate the two geometric discounted returns before and after the common reward shift.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-value-iteration-attains-error-rate",
+        "kind": "example",
+        "title": "A one-state value-iteration model attains the Bellman error bound",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "alg-value-iteration",
+          "thm-value-iteration-convergence-error-bound",
+          "def-bellman-optimality-operator",
+          "thm-bellman-contraction-and-unique-fixed-point",
+          "def-integer-power",
+          "lem-power-laws",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $S=\\{s\\}$, $A(s)=\\{a\\}$, $\\gamma=1/2$, with a deterministic self-loop reward $1$, and initialize $V_0(s)=0$. Then $V^*(s)=2$ and $V_m(s)=2(1-2^{-m})$, so\n\n$$ \\|V_m-V^*\\|_\\infty=2^{1-m}=\\gamma^m\\|V_0-V^*\\|_\\infty $$\n\nfor every $m\\ge0$; the general value-iteration error bound is attained at every iteration.",
+        "strategy": "Solve the scalar Bellman fixed point and prove the iterate formula by induction.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-policy-iteration-tie-retention",
+        "kind": "example",
+        "title": "Changing a tied greedy action can cycle, while retention stops",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "alg-policy-iteration",
+          "def-policy-bellman-operator",
+          "def-bellman-optimality-operator",
+          "thm-bellman-contraction-and-unique-fixed-point"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $S=\\{s\\}$, $A(s)=\\{a,b\\}$, $\\gamma=1/2$, and let both actions give reward $0$ and return deterministically to $s$. Start exact policy iteration from the deterministic policy $\\pi_0(s)=a$. The policy value is $0$, and both actions are greedy. The tie-retaining procedure keeps $a$ and stops after its first evaluation; a rule that always switches to the other maximizing action alternates forever between $a$ and $b$.",
+        "strategy": "Compute the unique policy value, verify both actions tie, and compare the retained rule with the specified switching rule.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

@@ -13,6 +13,7 @@ aliases: [def-compact-metric-space]
 landmark: true
 short: "open cover, compact metric space"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-compactness.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -33,8 +34,8 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in
-[[def-metric-topology]] and balls as in [[def-metric-ball]].
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), with open sets as in
+The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement and balls as in Open ball, closed ball and sphere in a metric space.
 
 - An **open cover** of $(X,d)$ is a family $\mathcal{U}$ of open subsets of $X$
   with $X = \bigcup \mathcal{U}$, where
@@ -52,13 +53,13 @@ Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in
   $$X = U_0 \cup \dots \cup U_n .$$
 - A subset $A \subseteq X$ is a **compact subset** of $X$ when the metric
   subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of
-  $d$ to $A \times A$ ([[def-isometry-and-metric-embedding]]).
+  $d$ to $A \times A$ (Isometry, isometric embedding, and the subspace metric on a subset).
 
 **Compactness of a subset is defined intrinsically, and only intrinsically.**
 The last clause speaks about the subspace $(A,d_A)$ and its own open sets, not
 about families of open subsets of the ambient $X$. The two readings do agree,
 but that is a theorem and not a convention: it is
-[[lem-compactness-is-intrinsic]], and no item of this library may use the
+A subset of a metric space is open in the subspace metric exactly when it is the trace of an open set of the ambient space, and it is compact as a metric space in its own right exactly when every family of open subsets of the ambient space covering it, indexed or not, has finitely many members covering it, and no item of this library may use the
 ambient reading without citing it. Taking the intrinsic reading as the
 definition is what makes "compact" a property of the metric space $(A,d_A)$
 alone, so that a set compact in one ambient space is compact in every other one
@@ -72,22 +73,40 @@ finitely many members chosen in this way already cover.
 
 **The finiteness convention, and how it is used both ways.** "Finite" above is
 the listing form, matching the finite lists of
-[[def-finite-intersection-property]]. It agrees with the definition of
-finiteness by equinumerosity with a natural number ([[def-countable]]), and
+Finite intersection property. It agrees with the definition of
+finiteness by equinumerosity with a natural number (Finite, countably infinite, countable, uncountable), and
 both directions of the agreement are available and are used below:
 
-- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies
+- A nonempty finite set $F$ in the sense of Finite, countably infinite, countable, uncountable satisfies
   $F \approx m$ for some $m \ge 1$, and a bijection $m \to F$ is exactly a
   listing $F = \{a_0, \dots, a_{m-1}\}$.
 - Conversely a set listed as $A = \{a_0, \dots, a_n\}$, that is the image of a
   function $a$ with domain $\sigma(n)$, is finite in the sense of
-  [[def-countable]]: the map sending $x \in A$ to the least $i \le n$ with
+  Finite, countably infinite, countable, uncountable: the map sending $x \in A$ to the least $i \le n$ with
   $a_i = x$ is an injection of $A$ into $\sigma(n)$, so $A$ is equinumerous with
   a subset of $\mathbb{N}$ bounded above, and such a subset is finite
-  ([[lem-subset-of-countable]]).
+  (Every subset of an at most countable set is at most countable).
 
 Neither direction uses a choice principle: the second selects nothing, taking a
 least index instead.
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-metric-topology]]
+
+[[def-metric-ball]]
+
+[[def-isometry-and-metric-embedding]]
+
+[[lem-compactness-is-intrinsic]]
+
+[[def-finite-intersection-property]]
+
+[[def-countable]]
+
+[[lem-subset-of-countable]]
 
 ## Remarks
 

@@ -1,0 +1,928 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-projected-bellman-error-is-well-defined",
+    "def-projected-bellman-error",
+    "thm-bairds-counterexample-off-policy-td-diverges",
+    "thm-bellman-error-unlearnability-example",
+    "ex-on-policy-one-state-linear-td-is-stable",
+    "ex-bairds-seven-state-star-expected-update",
+    "ex-matched-observation-mrps-have-distinct-bellman-errors"
+  ],
+  "contracts": {
+    "lem-projected-bellman-error-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ (The cardinality $\\lvert A\\rvert$ of a finite set), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n(Equinumerous sets, $A \\approx B$ and $A \\preceq B$), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the\nvalues are real and of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$ when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ (Injection, surjection, bijection), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\nA finite sum is unchanged by a permutation of its index range: $\\sum_{k<n} a_{\\pi(k)} = \\sum_{k<n} a_k$ for every bijection $\\pi : n \\to n$ to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n(The cardinality $\\lvert A\\rvert$ of a finite set), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of Laws of finite sums and products in $\\mathbb{N}$, and $\\iota\\big(\\sum_{k<n} a_k\\big) = \\sum_{k<n} \\iota(a_k)$\nin $\\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-span-orthogonal-projection-in-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a real inner-product space and $V\\subseteq H$ a finite-dimensional\nsubspace. For each $f\\in H$ there is a unique $p\\in V$ such that $f-p$ is\northogonal to $V$, meaning $\\langle f-p,v\\rangle=0$ for every $v\\in V$.\nFor every $v\\in V$,\n$$\\|f-v\\|^2=\\|f-p\\|^2+\\|p-v\\|^2.$$\nIn particular, $\\|f\\|^2=\\|p\\|^2+\\|f-p\\|^2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-projected-bellman-error-is-well-defined-1-1",
+          "claim": "Put $S_+=\\{s\\in S:\\mu(s)>0\\}$. By [F1] and [F2], $f\\sim_\\mu g$ holds exactly when $f(s)=g(s)$ for every $s\\in S_+$. This is an equivalence relation, and equality on $S_+$ is preserved under pointwise addition and scalar multiplication, so the quotient inherits the real vector-space operations. If representatives change within their equivalence classes, every summand with positive weight stays unchanged and every summand with zero weight remains zero; therefore the displayed inner product is independent of representatives. It is symmetric and bilinear by finite-sum rules, and $\\langle[f]_\\mu,[f]_\\mu\\rangle_\\mu=0$ implies $f=0$ on $S_+$, so $[f]_\\mu=0$. The classes of the finitely many coordinate indicator functions span $H_\\mu$, hence this is a finite-dimensional real inner-product space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-projected-bellman-error-is-well-defined-2-1",
+          "claim": "The subspace $V_\\mu$ is spanned by the finite list of feature classes, so it is finite-dimensional. Apply [F3] to $h\\in H_\\mu$ and $V_\\mu$ to obtain a unique vector $\\Pi_\\mu h$ whose residual is orthogonal to $V_\\mu$. For each fixed $w$, the Bellman residual is a function on $S$, so it determines the class $\\delta_w$; its norm and the norm of its unique projection are finite real numbers. This conclusion does not identify parameters whose feature functions agree only on the support of $\\mu$, since the Bellman operator can depend on values outside that support.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes S is nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The Statement requires a nonempty state set and normalized probability weights. Zero-weight coordinates are handled by the quotient in proof step 1.1, and an empty feature span, if present, has the unique zero projection by the finite-span supplier; these are not an empty state-domain instance."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle zero-mass states through the quotient support and each fixed residual class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the projection lemma to a finite feature span, including a span generated by one feature."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow zero-mass states and linearly dependent or zero feature classes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes gamma=0 and excludes gamma=1; projection well-definedness uses no division by gamma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite sums and a cited finite-dimensional projection result, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Equality on positive weighting support gives a well-defined quotient inner product, and finite feature span supplies its unique orthogonal projection. The residual is computed from each fixed full parameterized value function before taking a class, so zero-weight states and dependent features do not create a false parameter invariance claim.",
+            "item_sha256": "5da4d496519fd9f988378ba1f9887a59808313a69250972d6eee67974d0456a7",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Equality on positive weighting support gives a well-defined quotient inner product, and finite feature span supplies its unique orthogonal projection. The residual is computed from each fixed full parameterized value function before taking a class, so zero-weight states and dependent features do not create a false parameter invariance claim.",
+            "item_sha256": "5da4d496519fd9f988378ba1f9887a59808313a69250972d6eee67974d0456a7",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Read both proof steps and actual finite-sum and finite-span projection interfaces. Equality on positive-weight support is an equivalence compatible with vector operations; the weighted form is independent of representatives and positive definite on the quotient. Coordinate indicators span it. Projection supplier handles the zero subspace and dependent/zero features. Each fixed parameter gives a full-state residual before taking its class; no Bellman operator on quotient classes is assumed. Nonempty S and normalized weights ensure nonempty support. No choice beyond finite basis selection or diagram needed."
+      }
+    },
+    "def-projected-bellman-error": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires a nonempty finite state set.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The Definition explicitly assumes a nonempty finite state set and a probability weighting whose masses sum to one. Its positive weighting support is consequently nonempty even though individual weights may vanish; there is no admitted empty state-space case."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero state weights are allowed; the quotient identifies functions that agree on the positive-weight support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the positive feature dimension may be one and the finite state set may be a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero-weight states and linearly dependent feature functions are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: gamma=0 is included and gamma=1 is excluded by 0<=gamma<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite sums and a fixed feature map; it assumes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Read complete Definition and reviewed preceding well-definedness lemma. Positive finite d, nonempty S, normalized nonnegative weights and discount in [0,1) are explicit; stationarity is not required. Projection is taken on the residual class for a fixed full-state parameter function, so zero weights and linearly dependent features cause no representative ambiguity. Zero residual and zero feature span give zero projected error. No additional choice, iff claim, algorithm or diagram."
+      }
+    },
+    "thm-bairds-counterexample-off-policy-td-diverges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projected-bellman-error",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set of a finite Markov decision process, let $0\\leq\\gamma<1$, let $\\pi$ be a stationary Markov policy, and let $\\mu:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu(s)=1$. The function $\\mu$ is a fixed state-weighting distribution; it need not be stationary for $\\pi$. Let $d$ be a positive integer, let $\\phi:S\\to\\mathbb R^d$ be a feature map, and for $w\\in\\mathbb R^d$ put $v_w(s)=\\phi(s)^\\mathsf T w$.\n\nFor real functions $f,g:S\\to\\mathbb R$, write $f\\sim_\\mu g$ when $\\sum_{s\\in S}\\mu(s)(f(s)-g(s))^2=0$. Let $[f]_\\mu$ denote the equivalence class of $f$ and define $\\langle[f]_{\\mu},[g]_{\\mu}\\rangle_\\mu=\\sum_{s\\in S}\\mu(s)f(s)g(s)$ and $\\|[f]_\\mu\\|_\\mu^2=\\langle[f]_{\\mu},[f]_{\\mu}\\rangle_\\mu$. Let $H_\\mu$ be the resulting finite-dimensional real inner-product space, and let $V_\\mu$ be the span in $H_\\mu$ of the equivalence classes of the $d$ coordinate feature functions.\n\nFor $h\\in H_\\mu$, let $\\Pi_\\mu h$ be the unique vector in $V_\\mu$ whose difference from $h$ is orthogonal to every vector in $V_\\mu$. The Bellman-error vector for $v_w$ is $\\delta_w=[T^\\pi v_w-v_w]_\\mu$. Define the mean square Bellman error and mean square projected Bellman error by $\\operatorname{BE}_\\mu(w)=\\|\\delta_w\\|_\\mu^2$ and $\\operatorname{PBE}_\\mu(w)=\\|\\Pi_\\mu\\delta_w\\|_\\mu^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ and let $T:V\\to V$ be linear. A scalar $\\lambda\\in F$ is an **eigenvalue** of $T$ when there is a nonzero vector $v\\in V$ such that\n\n$$T(v)=\\lambda v.$$\n\nSuch a vector is an **eigenvector belonging to $\\lambda$**. The **eigenspace** belonging to $\\lambda$ is\n\n$$E_\\lambda(T):=\\ker(T-\\lambda I_V)=\\{v\\in V:T(v)=\\lambda v\\}.$$\n\nThus $E_\\lambda(T)$ is a linear subspace and always contains $0_V$, while $\\lambda$ is an eigenvalue exactly when $E_\\lambda(T)\\ne\\{0_V\\}$. The **spectrum of $T$ over $F$** is\n\n$$\\sigma_F(T):=\\{\\lambda\\in F:\\lambda\\text{ is an eigenvalue of }T\\}.$$\n\nIn particular, the unique endomorphism of the zero space has empty spectrum.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   (Limits and Cauchy sequences of reals).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   (Divergence to $+\\infty$ and to $-\\infty$).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality (Bernoulli's inequality $(1+x)^n \\ge 1 + nx$) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through Every complete ordered field is Archimedean and For every $\\varepsilon > 0$ in a complete ordered field there is a natural $n \\ge 1$ with $1/n < \\varepsilon$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-1-1",
+          "claim": "Write $\\phi_i=2e_i+e_8$ for $1\\leq i\\leq6$ and $\\phi_7=e_7+2e_8$. The importance ratio is $7$ on solid and $0$ on dashed. Under behavior, every next-state probability is $1/7$: each upper state is reached with probability $(6/7)(1/6)$ and $s_7$ with probability $1/7$. Thus the expected TD update direction is $\\frac17\\sum_{i=1}^7\\phi_i(\\gamma\\phi_7^\\mathsf T w-\\phi_i^\\mathsf T w)$. The target Bellman value is $\\gamma\\phi_7^\\mathsf T w$ at every state, so this also gives the synchronous expected DP direction. Both recurrences are $w^+=(I+\\alpha M)w$, where $M=\\frac17\\sum_i\\phi_i(\\gamma\\phi_7-\\phi_i)^\\mathsf T$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-2-1",
+          "claim": "The update preserves equality of the first six coordinates. Write their common value as $a$, and put $b=w_7$, $c=w_8$. Set $q_u=\\gamma(b+2c)-(2a+c)=-2a+\\gamma b+(2\\gamma-1)c$ and $q_7=(\\gamma-1)(b+2c)$. By step 1.1, each upper feature contributes $2q_u$ to its own coordinate and $q_u$ to coordinate $8$, while $\\phi_7$ contributes $q_7$ to coordinate $7$ and $2q_7$ to coordinate $8$, all with factor $\\alpha/7$. Thus $a^+=a+2\\alpha q_u/7$, $b^+=b+\\alpha q_7/7$, and $c^+=c+\\alpha(6q_u+2q_7)/7$. Hence $y=(a,b,c)^\\mathsf T$ follows $y^+=(I+\\alpha B/7)y$, where $B=\\begin{pmatrix}-4&2\\gamma&4\\gamma-2\\\\0&\\gamma-1&2\\gamma-2\\\\-12&8\\gamma-2&16\\gamma-10\\end{pmatrix}$ and $y_0=(1,10,1)^\\mathsf T$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-3-1",
+          "claim": "At $\\gamma=99/100$, let $q(t)=t^2-(183/100)t+13/50$. Its distinct roots are $t_\\pm=(183\\pm\\sqrt{23089})/200$, both positive because $23089<183^2$ and their sum and product are positive. Put $t=t_+$, $u=-12/(t+4)$, $v=(2\\gamma u+8\\gamma-2)/(t+1-\\gamma)$, and $\\ell=(u,v,1)$. By the definitions of $u$ and $v$, the first two coordinates of $\\ell B=t\\ell$ hold.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-4-1",
+          "claim": "For the third coordinate, substitution gives $(4\\gamma-2)u+(2\\gamma-2)v+(16\\gamma-10)-t=\\frac{-5000tq(t)}{50(t+4)(100t+1)}=0$; the denominator is nonzero since $t>0$, and $q(t)=0$. Thus $\\ell B=t\\ell$, so $(B/7)^\\mathsf T\\ell^\\mathsf T=(t/7)\\ell^\\mathsf T$. Since $\\ell=(u,v,1)\\ne0$, [F3] makes $t/7>0$ an eigenvalue of the transpose map.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-4-2",
+          "claim": "The quadratic in step 3.1 has $q(8/5)=-27/250<0$ and $q(9/5)=103/500>0$. Since it has positive leading coefficient and two distinct roots, the first sign places $8/5$ between the roots, and the second places $9/5$ to the right of $t_+$; hence $8/5<t<9/5$. Therefore $u=-12/(t+4)>-15/7$. Using $\\gamma=99/100$ and $u>-15/7$ gives $2\\gamma u+8\\gamma-2>2(99/100)(-15/7)+8(99/100)-2=587/350$. Also $0<t+1-\\gamma<181/100$, so $v>(587/350)/(181/100)=58700/63350>9/10$. It follows that $\\ell y_0=u+10v+1>-15/7+10=55/7>0$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bairds-counterexample-off-policy-td-diverges-5-1",
+          "claim": "For every $\\alpha>0$, $r=1+\\alpha t/7>1$, so [F5] gives $r^n\\to+\\infty$. Induction using the recurrence in step 2.1 and the eigenrelation in step 4.1 yields $\\ell y_n=r^n\\ell y_0\\to+\\infty$, since step 4.2 proves $\\ell y_0>0$. As $\\ell\\neq0$, [F4] implies $\\|y_n\\|_2\\geq|\\ell y_n|/\\|\\ell\\|_2\\to\\infty$. The first six full weights equal $a_n$, so $\\|w_n\\|_2^2=6a_n^2+b_n^2+c_n^2\\geq\\|y_n\\|_2^2$. Step 1.1 showed that the expected TD and synchronous DP recurrences coincide, proving both divergences.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes exactly seven states and two actions at each state.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The Statement fixes seven states, two actions at each state and a uniform weighting. Its expected-update sum is over exactly those seven states; neither the finite norm formula nor the sum permits an empty underlying model."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the stipulated zero rewards and computes the homogeneous expected update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 derives the invariant reduced recurrence for each update, including its first iterate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 checks preservation of the six equal upper coordinates; Step 4.2 proves positive initial pairing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement fixes gamma=0.99 and quantifies over alpha>0; Step 5.1 proves growth for every such alpha."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 constructs an explicit eigenvector using finite arithmetic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Expected TD and synchronous dynamic-programming updates reduce to the same three-coordinate deterministic recurrence. An explicitly checked positive left eigenvalue has nonzero initial projection, so every positive step gives a growing geometric component; the theorem deliberately asserts no almost-sure stochastic divergence.",
+            "item_sha256": "d9d3fbb55b44902ed45fe79f52551e90be8a7888d3579d84a30a9ad69713ec75",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Expected TD and synchronous dynamic-programming updates reduce to the same three-coordinate deterministic recurrence. An explicitly checked positive left eigenvalue has nonzero initial projection, so every positive step gives a growing geometric component; the theorem deliberately asserts no almost-sure stochastic divergence.",
+            "item_sha256": "d9d3fbb55b44902ed45fe79f52551e90be8a7888d3579d84a30a9ad69713ec75",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Independently read all six steps, diagram and eigenvalue/geometric/Cauchy-Schwarz suppliers. Importance ratios 7 and 0 reduce both expected updates to the same uniform finite sum. Symmetric first six coordinates yield the displayed B; left eigenvector denominators are positive. Polynomial identity and q(8/5)<0<q(9/5) establish t in (8/5,9/5), positive initial pairing and growth 1+alpha*t/7>1 for every alpha>0. Cauchy-Schwarz transfers divergence to the full norm. No stochastic-trajectory claim is made. Solid arrows, lower loop and explicitly nonstate dashed uniform router match all seven transition laws; proof is diagram-independent."
+      }
+    },
+    "thm-bellman-error-unlearnability-example": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projected-bellman-error",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set of a finite Markov decision process, let $0\\leq\\gamma<1$, let $\\pi$ be a stationary Markov policy, and let $\\mu:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu(s)=1$. The function $\\mu$ is a fixed state-weighting distribution; it need not be stationary for $\\pi$. Let $d$ be a positive integer, let $\\phi:S\\to\\mathbb R^d$ be a feature map, and for $w\\in\\mathbb R^d$ put $v_w(s)=\\phi(s)^\\mathsf T w$.\n\nFor real functions $f,g:S\\to\\mathbb R$, write $f\\sim_\\mu g$ when $\\sum_{s\\in S}\\mu(s)(f(s)-g(s))^2=0$. Let $[f]_\\mu$ denote the equivalence class of $f$ and define $\\langle[f]_{\\mu},[g]_{\\mu}\\rangle_\\mu=\\sum_{s\\in S}\\mu(s)f(s)g(s)$ and $\\|[f]_\\mu\\|_\\mu^2=\\langle[f]_{\\mu},[f]_{\\mu}\\rangle_\\mu$. Let $H_\\mu$ be the resulting finite-dimensional real inner-product space, and let $V_\\mu$ be the span in $H_\\mu$ of the equivalence classes of the $d$ coordinate feature functions.\n\nFor $h\\in H_\\mu$, let $\\Pi_\\mu h$ be the unique vector in $V_\\mu$ whose difference from $h$ is orthogonal to every vector in $V_\\mu$. The Bellman-error vector for $v_w$ is $\\delta_w=[T^\\pi v_w-v_w]_\\mu$. Define the mean square Bellman error and mean square projected Bellman error by $\\operatorname{BE}_\\mu(w)=\\|\\delta_w\\|_\\mu^2$ and $\\operatorname{PBE}_\\mu(w)=\\|\\Pi_\\mu\\delta_w\\|_\\mu^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-mdp-policy-induces-reward-state-chain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Put $E=S\\times(\\mathcal R\\cup\\{0\\})$ with its discrete sigma-algebra and define, for $x=(s,\\eta)\\in E$ and $B\\subseteq E$,\n\n$$ K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s) \\sum_{\\substack{s'\\in S\\\\\\rho\\in\\mathcal R}}1_B(s',\\rho)\\,p(s',\\rho\\mid s,a). $$\n\nThen $K_\\pi$ is a probability kernel on $E$. For each initial state $s\\in S$, there is a probability law on $E^{\\mathbb N}$ whose coordinate process starts at $(s,0)$ and is a time-homogeneous Markov chain with transition kernel $K_\\pi$ relative to its natural filtration.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-bellman-error-unlearnability-example-1-1",
+          "claim": "The transition matrices, with states ordered as displayed in the Statement, are $P_1=\\begin{pmatrix}0&1\\\\1/2&1/2\\end{pmatrix}$ and $P_2=\\begin{pmatrix}0&1/2&1/2\\\\1&0&0\\\\0&1/2&1/2\\end{pmatrix}$. Every row sums to one. Direct multiplication gives $\\mu_1P_1=(1/3,2/3)=\\mu_1$ and $\\mu_2P_2=(1/3,1/3,1/3)=\\mu_2$. The observed feature has mass $1/3$ at $A$ and $2/3$ at feature $B$ in each process.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-error-unlearnability-example-1-2",
+          "claim": "Represent each MRP as a one-action finite MDP. Under Choice, [F3] supplies a state/reward path law for each fixed initial state; the finite mixture of these laws with weights $\\mu_1$ or $\\mu_2$ gives the stated random initial state. Let $Y_n=(\\psi(S_n),R_{n+1})$ and set $x_A=((1,0),0)$, $x_+=((0,1),1)$, and $x_-=((0,1),-1)$. In MRP 1, the initial state law and its outgoing rewards give probability $1/3$ to each of $x_A,x_+,x_-$; MRP 2 gives the same probabilities. In each process the transition kernel of $Y_n$ is $x_A\\mapsto\\frac12x_++\\frac12x_-$, $x_+\\mapsto x_A$, and $x_-\\mapsto\\frac12x_++\\frac12x_-$. Indeed, in MRP 1, $x_A$ comes from state $A$ and the next state is $B$, whose outgoing reward is equally likely $1$ or $-1$; $x_+$ records the transition $B\\to A$, so the next observation is $x_A$; and $x_-$ records $B\\to B$, after which the next outgoing reward is equally likely $1$ or $-1$. In MRP 2, $x_A$ comes from state $A$, whose next state is $B$ or $B'$ equally; $x_+$ identifies state $B$, whose next state is $A$; and $x_-$ identifies state $B'$, whose next state is $B$ or $B'$ equally. Thus both observed processes have the same initial law $\\nu$ and transition kernel $K$, and their finite-prefix laws factor as $\\nu(x_0)\\prod_{k=0}^{n-1}K(x_k,\\{x_{k+1}\\})$ by repeated conditioning. By [F4], the path law with these finite-prefix laws is unique, so their observable path laws agree.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "induction"
+          ]
+        },
+        {
+          "id": "thm-bellman-error-unlearnability-example-2-1",
+          "claim": "In MRP 1 the conditional expected Bellman residual at $A$ is $\\gamma b-a$, because $A$ moves to $B$ with reward zero. At $B$, expected reward is $(1-1)/2=0$ and the expected next value is $(a+b)/2$, so the residual is $\\gamma(a+b)/2-b$. Weighting their squares by $\\mu_1$ gives the stated $\\operatorname{BE}_1$. In MRP 2, the residuals at $A,B,B'$ are respectively $\\gamma b-a$, $1+\\gamma a-b$, and $-1+\\gamma b-b=-1+(\\gamma-1)b$, which gives the stated $\\operatorname{BE}_2$ under $\\mu_2$. At $(0,0)$ the first objective is zero and the second is $2/3$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-error-unlearnability-example-3-1",
+          "claim": "Since $\\operatorname{BE}_1$ is a sum of nonnegative squares and vanishes at $(0,0)$, that point is a minimizer. If it vanishes at $(a,b)$, its first residual gives $a=\\gamma b$ and its second gives $b=\\gamma(a+b)/2=\\gamma(\\gamma+1)b/2$. Since $\\gamma(\\gamma+1)/2<1$ for $0\\leq\\gamma<1$, $b=0$ and then $a=0$, proving uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-error-unlearnability-example-3-2",
+          "claim": "Let $r_A=\\gamma b-a$, $r_B=1+\\gamma a-b$, and $r_{B'}=-1+(\\gamma-1)b$. Then $3\\operatorname{BE}_2=r_A^2+r_B^2+r_{B'}^2$. Its residual matrix is $X=\\begin{pmatrix}-1&\\gamma\\\\\\gamma&-1\\\\0&\\gamma-1\\end{pmatrix}$, with residual vector $X(a,b)^\\mathsf T+(0,1,-1)^\\mathsf T$. At $(a,b)=(-\\gamma/D,\\gamma/(2D))$, direct substitution gives $r_B=(\\gamma+2)/(2D)$, $r_A=\\gamma r_B$, and $r_{B'}=-(\\gamma+1)r_B$. Hence $X^\\mathsf T(r_A,r_B,r_{B'})^\\mathsf T=0$. For any increment $h\\in\\mathbb R^2$, expanding the squared residual gives $3(\\operatorname{BE}_2(w+h)-\\operatorname{BE}_2(w))=\\|Xh\\|_2^2$ at this point. If $Xh=0$, its first two rows give $h_1=\\gamma h_2$ and $\\gamma h_1=h_2$, so $(1-\\gamma^2)h_2=0$; because $\\gamma<1$, $h=0$. Thus the objective is strictly larger at every nonzero perturbation and the stated point is the unique global minimizer. Its minimum value is $\\frac13\\big(\\gamma^2+1+(\\gamma+1)^2\\big)\\big(\\frac{\\gamma+2}{2D}\\big)^2=(\\gamma+2)^2/(6D)$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-error-unlearnability-example-4-1",
+          "claim": "The observable path laws agree by step 1.2, but the Bellman-error functions differ because their values at $(0,0)$ are $0$ and $2/3$. For $0<\\gamma<1$, their unique minimizers also differ because MRP 1 has minimizer $(0,0)$ whereas MRP 2 has first coordinate $-\\gamma/D<0$. Any quantity determined only by the observable law must be the same for two models with that law; it cannot equal these distinct objectives or, for positive discount, both minimizing parameters. This proves the non-identifiability claims.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes two nonempty finite state sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 cover gamma=0 and give the unique minimizers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies each one-step transition matrix and stationary weighting directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 treat the aliased feature and the gamma=0 case where minimizers coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 include gamma=0; gamma=1 is excluded and its singular objective is calculated in Remarks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and Step 1.2 state and use Choice only for path-law construction and uniqueness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The two explicitly specified reward processes have identical observable sequence laws but different Bellman-error objectives and, at positive discount, different minimizing parameters. This is a witness of nonidentification, not an iff claim about observability.",
+            "item_sha256": "c878ae883149378ce4f68a009758ade6dc6f4b7cb6b1fc9120c9f13a6ece4063",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite transition calculations identify a common observed Markov kernel for the two different hidden-state models. Choice-qualified path-law uniqueness extends that agreement to infinite observations, while direct quadratic residual calculations give unequal objectives and distinct interior-discount minimizers without a converse characterization.",
+              "item_sha256": "ab954f28d2321389781009ebf12744e2eb21ef1c47274ae7d252ced43d00111f",
+              "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The two explicitly specified reward processes have identical observable sequence laws but different Bellman-error objectives and, at positive discount, different minimizing parameters. This is a witness of nonidentification, not an iff claim about observability.",
+            "item_sha256": "c878ae883149378ce4f68a009758ade6dc6f4b7cb6b1fc9120c9f13a6ece4063",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite transition calculations identify a common observed Markov kernel for the two different hidden-state models. Choice-qualified path-law uniqueness extends that agreement to infinite observations, while direct quadratic residual calculations give unequal objectives and distinct interior-discount minimizers without a converse characterization.",
+              "item_sha256": "ab954f28d2321389781009ebf12744e2eb21ef1c47274ae7d252ced43d00111f",
+              "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Read all six proof steps, complete Statement, endpoint remark and two MRP diagrams, and actual finite-MDP/path-law/Bellman suppliers. Both normalized joint laws have stated stationary vectors. For Y=(current feature,outgoing reward), each observed symbol fixes the next hidden-state distribution independently of past; the common three-symbol initial law and kernel give equal cylinder laws and path laws under explicit AC. Conditional expected residuals, residual matrix, normal equations and injectivity of X for gamma<1 prove unique minima. At gamma=0 both minimizers are zero while objectives differ; title repair correctly limits minimizer distinction to positive discount. gamma=1 is excluded and remark correctly distinguishes limit from endpoint. Every diagram arrow/reward/probability matches its stated kernel. Published F2 nonemptiness citation defect is nonfatal and does not invalidate the path-law argument; owner maintenance is reported separately."
+      }
+    },
+    "ex-on-policy-one-state-linear-td-is-stable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projected-bellman-error",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set of a finite Markov decision process, let $0\\leq\\gamma<1$, let $\\pi$ be a stationary Markov policy, and let $\\mu:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu(s)=1$. The function $\\mu$ is a fixed state-weighting distribution; it need not be stationary for $\\pi$. Let $d$ be a positive integer, let $\\phi:S\\to\\mathbb R^d$ be a feature map, and for $w\\in\\mathbb R^d$ put $v_w(s)=\\phi(s)^\\mathsf T w$.\n\nFor real functions $f,g:S\\to\\mathbb R$, write $f\\sim_\\mu g$ when $\\sum_{s\\in S}\\mu(s)(f(s)-g(s))^2=0$. Let $[f]_\\mu$ denote the equivalence class of $f$ and define $\\langle[f]_{\\mu},[g]_{\\mu}\\rangle_\\mu=\\sum_{s\\in S}\\mu(s)f(s)g(s)$ and $\\|[f]_\\mu\\|_\\mu^2=\\langle[f]_{\\mu},[f]_{\\mu}\\rangle_\\mu$. Let $H_\\mu$ be the resulting finite-dimensional real inner-product space, and let $V_\\mu$ be the span in $H_\\mu$ of the equivalence classes of the $d$ coordinate feature functions.\n\nFor $h\\in H_\\mu$, let $\\Pi_\\mu h$ be the unique vector in $V_\\mu$ whose difference from $h$ is orthogonal to every vector in $V_\\mu$. The Bellman-error vector for $v_w$ is $\\delta_w=[T^\\pi v_w-v_w]_\\mu$. Define the mean square Bellman error and mean square projected Bellman error by $\\operatorname{BE}_\\mu(w)=\\|\\delta_w\\|_\\mu^2$ and $\\operatorname{PBE}_\\mu(w)=\\|\\Pi_\\mu\\delta_w\\|_\\mu^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   (Limits and Cauchy sequences of reals).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   (Divergence to $+\\infty$ and to $-\\infty$).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality (Bernoulli's inequality $(1+x)^n \\ge 1 + nx$) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through Every complete ordered field is Archimedean and For every $\\varepsilon > 0$ in a complete ordered field there is a natural $n \\ge 1$ with $1/n < \\varepsilon$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-on-policy-one-state-linear-td-is-stable-1-1",
+          "claim": "The behavior and target policies are the same unique action, so the importance ratio is $1$. The next state is always $s$, hence the TD error at weight $w_n$ is $0+\\gamma w_n-w_n=-(1-\\gamma)w_n$. Substitution in the update gives $w_{n+1}=q w_n$, where $q=1-\\alpha(1-\\gamma)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-on-policy-one-state-linear-td-is-stable-2-1",
+          "claim": "Because $0<\\alpha\\leq1$ and $0\\leq\\gamma<1$, one has $\\gamma\\leq q<1$, so $|q|<1$. Induction gives $w_n=q^n w_0$ for every $n$, and [F3] implies $w_n\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes one nonempty state and one available action."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show the zero initial weight remains zero and the recurrence converges."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example is the singleton-state, singleton-action case; Step 1.1 calculates its update."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the deterministic self-transition and zero reward directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes gamma=0 and alpha=1; gamma=1 and alpha=0 are excluded by the hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are deterministic scalar calculations and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The sole on-policy deterministic coordinate follows a scalar geometric recurrence with ratio between the discount and one exclusive. Positive step size including its upper endpoint ensures contraction from any initial weight, without invoking a diminishing-step stochastic theorem or an equivalence characterization.",
+            "item_sha256": "266c794b256f68348cd0a7c86c219918a010dd9e05349528074592b60c599611",
+            "row_sha256": "c785cfd9f99fbc162f904355cde8cf463948d6ac6a155d301e0b7a491b5d5dd5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The sole on-policy deterministic coordinate follows a scalar geometric recurrence with ratio between the discount and one exclusive. Positive step size including its upper endpoint ensures contraction from any initial weight, without invoking a diminishing-step stochastic theorem or an equivalence characterization.",
+            "item_sha256": "266c794b256f68348cd0a7c86c219918a010dd9e05349528074592b60c599611",
+            "row_sha256": "6bd1fce339602dc5c0e2b34e2f577eaef837c523cb269d66ff0500d58e744594"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Read both verification steps and the current MDP, feature-value and geometric convergence suppliers. The exact deterministic update is w_next=q*w, q=1-alpha*(1-gamma), with gamma<=q<1 under the stated alpha in (0,1] and gamma in [0,1). This includes gamma=0, alpha=1 giving q=0; n=0 uses q^0=1 and later weights vanish. Arbitrary real initial weight is allowed. The sole-state loop and reward-zero label correctly display the model; no probabilistic or diminishing-step theorem is invoked."
+      }
+    },
+    "ex-bairds-seven-state-star-expected-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-bairds-counterexample-off-policy-td-diverges",
+          "source_section": "Statement",
+          "quote": "Let the states be $S=\\{s_1,\\ldots,s_7\\}$ and the two actions available at each state be $\\mathrm{dashed}$ and $\\mathrm{solid}$. All rewards are zero and $\\gamma=0.99$. Under $\\mathrm{dashed}$, the next state is each of $s_1,\\ldots,s_6$ with probability $1/6$; under $\\mathrm{solid}$, the next state is $s_7$ with probability $1$. The behavior policy has $b(\\mathrm{dashed}\\mid s)=6/7$ and $b(\\mathrm{solid}\\mid s)=1/7$ at every state, and the target policy selects $\\mathrm{solid}$ with probability $1$. Use the uniform state weighting $\\mu(s)=1/7$. For standard basis vectors $e_1,\\ldots,e_8$ of $\\mathbb R^8$, set $\\phi(s_i)=2e_i+e_8$ for $1\\leq i\\leq6$ and $\\phi(s_7)=e_7+2e_8$, and define $v_w(s)=\\phi(s)^\\mathsf T w$. For a behavior transition $(S,A,S')$, draw $S$ from $\\mu$, draw $A$ from $b(\\cdot\\mid S)$, and draw $S'$ from the stated action transition law. Put $\\rho=\\pi(A\\mid S)/b(A\\mid S)$ and $\\delta=\\gamma v_w(S')-v_w(S)$, and define the expected semi-gradient TD(0) update by $\\bar w^+=w+\\alpha\\,\\mathbb E_{\\mu,b}[\\rho\\delta\\,\\phi(S)]$. Also define the synchronous expected dynamic-programming update by $w^+=w+\\frac{\\alpha}{7}\\sum_{s\\in S}\\big((T^\\pi v_w)(s)-v_w(s)\\big)\\phi(s)$. For every step size $\\alpha>0$, both deterministic update sequences starting at $w_0=(1,1,1,1,1,1,10,1)$ have Euclidean norm $\\|w\\|_2=(\\sum_{i=1}^8w_i^2)^{1/2}$ tending to infinity. This is a claim about the stated expected/deterministic updates; it asserts no probability-one divergence result for individual stochastic TD trajectories.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-bairds-seven-state-star-expected-update-1-1",
+          "claim": "At $w_0$, every upper-state value is $2(1)+1=3$ and the seventh-state value is $10+2(1)=12$. Thus $q_u=0.99(12)-3=222/25$ and $q_7=0.99(12)-12=-3/25$. The importance ratio is $7$ on solid and $0$ on dashed; because behavior selects solid with probability $1/7$, at each fixed state the behavior-action expectation is its solid-action TD error. Uniformly averaging the seven state contributions gives increments per unit step size $2q_u/7$, $q_7/7$, and $(6q_u+2q_7)/7$: each upper feature contributes $2q_u$ to its own coordinate and $q_u$ to the common eighth coordinate, while the seventh feature contributes $q_7$ and $2q_7$ to its last two coordinates. By [F1] these values are $444/175$, $-3/175$, and $1326/175$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-bairds-seven-state-star-expected-update-2-1",
+          "claim": "Multiplying these increments by $\\alpha=1/100$ gives $a_1=1+444/17500=4486/4375$, $b_1=10-3/17500=174997/17500$, and $c_1=1+1326/17500=9413/8750$, exactly as claimed; the displayed fractions give $a_1>1$ and $c_1>1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes a seven-state model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses zero rewards and computes the residuals from the initial weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is the single expected update requested by the Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the equal upper-state values and deterministic target solid action."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example fixes gamma=0.99 and alpha=1/100, both interior to the theorem hypotheses; Step 2.1 verifies the finite iterate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite sums and rational arithmetic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The solid-action importance ratio cancels its behavior probability, leaving a uniform finite average of exact TD errors. The explicit initial values and fixed positive step give rational successor coordinates; this finite computation illustrates expected updates and claims no biconditional or sample-path divergence.",
+            "item_sha256": "22873b3dbb502b106b3655918c7ac42f3547e4679d230367da59d941213d4e2b",
+            "row_sha256": "c785cfd9f99fbc162f904355cde8cf463948d6ac6a155d301e0b7a491b5d5dd5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The solid-action importance ratio cancels its behavior probability, leaving a uniform finite average of exact TD errors. The explicit initial values and fixed positive step give rational successor coordinates; this finite computation illustrates expected updates and claims no biconditional or sample-path divergence.",
+            "item_sha256": "22873b3dbb502b106b3655918c7ac42f3547e4679d230367da59d941213d4e2b",
+            "row_sha256": "6bd1fce339602dc5c0e2b34e2f577eaef837c523cb269d66ff0500d58e744594"
+          }
+        }
+      ]
+    },
+    "ex-matched-observation-mrps-have-distinct-bellman-errors": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-projected-bellman-error",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set of a finite Markov decision process, let $0\\leq\\gamma<1$, let $\\pi$ be a stationary Markov policy, and let $\\mu:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu(s)=1$. The function $\\mu$ is a fixed state-weighting distribution; it need not be stationary for $\\pi$. Let $d$ be a positive integer, let $\\phi:S\\to\\mathbb R^d$ be a feature map, and for $w\\in\\mathbb R^d$ put $v_w(s)=\\phi(s)^\\mathsf T w$.\n\nFor real functions $f,g:S\\to\\mathbb R$, write $f\\sim_\\mu g$ when $\\sum_{s\\in S}\\mu(s)(f(s)-g(s))^2=0$. Let $[f]_\\mu$ denote the equivalence class of $f$ and define $\\langle[f]_{\\mu},[g]_{\\mu}\\rangle_\\mu=\\sum_{s\\in S}\\mu(s)f(s)g(s)$ and $\\|[f]_\\mu\\|_\\mu^2=\\langle[f]_{\\mu},[f]_{\\mu}\\rangle_\\mu$. Let $H_\\mu$ be the resulting finite-dimensional real inner-product space, and let $V_\\mu$ be the span in $H_\\mu$ of the equivalence classes of the $d$ coordinate feature functions.\n\nFor $h\\in H_\\mu$, let $\\Pi_\\mu h$ be the unique vector in $V_\\mu$ whose difference from $h$ is orthogonal to every vector in $V_\\mu$. The Bellman-error vector for $v_w$ is $\\delta_w=[T^\\pi v_w-v_w]_\\mu$. Define the mean square Bellman error and mean square projected Bellman error by $\\operatorname{BE}_\\mu(w)=\\|\\delta_w\\|_\\mu^2$ and $\\operatorname{PBE}_\\mu(w)=\\|\\Pi_\\mu\\delta_w\\|_\\mu^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bellman-error-unlearnability-example",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice to form the infinite trajectory laws. Fix $0\\leq\\gamma<1$. An actionless finite Markov reward process (MRP) here means a nonempty finite state set with a joint probability law for next state and reward at each state. Consider the following two MRPs, each with its stated stationary state-weighting distribution, meaning that one transition leaves the distribution unchanged.\n\nIn MRP 1 the state set is $\\{A,B\\}$, with transitions $A\\to B$ receiving reward $0$ deterministically and $B\\to A$ receiving reward $1$ with probability $1/2$ or $B\\to B$ receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_1(A)=1/3$, $\\mu_1(B)=2/3$.\n\nIn MRP 2 the state set is $\\{A,B,B'\\}$, with transitions $A\\to B$ and $A\\to B'$ each receiving reward $0$ with probability $1/2$, $B\\to A$ receiving reward $1$ deterministically, and $B'\\to B$ or $B'\\to B'$ each receiving reward $-1$ with probability $1/2$. Its stationary weighting is $\\mu_2(A)=\\mu_2(B)=\\mu_2(B')=1/3$.\n\nIn both processes the observed feature is $\\psi(A)=(1,0)$ and $\\psi(B)=\\psi(B')=(0,1)$, so a parameter $w=(a,b)^\\mathsf T$ assigns values $v_w(A)=a$ and $v_w(B)=v_w(B')=b$. Starting from the stated stationary weighting, the two processes induce the same probability law on the observed feature/reward sequence $((\\psi(S_n),R_{n+1}))_{n\\geq0}$. Their mean square Bellman errors, defined as the stationary-weighted square of the conditional expected one-step TD error, are\n$$\n\\begin{aligned}\\operatorname{BE}_1(a,b)&=\\frac13(\\gamma b-a)^2+\\frac23\\left(\\frac{\\gamma}{2}(a+b)-b\\right)^2,\\\\ \\operatorname{BE}_2(a,b)&=\\frac13\\left((\\gamma b-a)^2+(1+\\gamma a-b)^2+(-1+(\\gamma-1)b)^2\\right).\\end{aligned}\n$$\nMRP 1 has the unique minimizer $(a,b)=(0,0)$ and minimum $0$. With $D=1+\\gamma+\\gamma^2$, MRP 2 has the unique minimizer $(a,b)=\\left(-\\frac{\\gamma}{D},\\frac{\\gamma}{2D}\\right)$ and minimum $\\frac{(\\gamma+2)^2}{6D}$; also $\\operatorname{BE}_2(0,0)=2/3$. For every $0<\\gamma<1$ the minimizing parameters differ. Thus the Bellman-error objective and, for positive discount, its minimizing parameter are not determined by the observable feature/reward sequence law. An MRP here has no action-dependent policy; it is not an unseen-action offline-MDP policy-impossibility claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-matched-observation-mrps-have-distinct-bellman-errors-1-1",
+          "claim": "At $\\gamma=1/2$, $D=1+\\gamma+\\gamma^2=7/4$. Substitution in [F2] gives MRP 2’s minimizing parameter $(-2/7,1/7)$ and minimum $(5/2)^2/(6\\cdot7/4)=25/42$. The same substitution gives MRP 1’s minimizing parameter $(0,0)$ and minimum $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-matched-observation-mrps-have-distinct-bellman-errors-2-1",
+          "claim": "At $w=(0,0)$ the MRP 2 residuals are $0,1,-1$, so [F1] gives $\\operatorname{BE}_2(0,0)=(0^2+1^2+(-1)^2)/3=2/3$. The MRP pair and common observation law are the $\\gamma=1/2$ instance of [F2], whose path-law claim uses [A1], completing the example.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two nonempty finite state sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes BE2 at the zero parameter; the general theorem permits gamma=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the one-step residuals for the fixed finite MRP pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the feature aliasing of B and B prime in the common-observation conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example fixes gamma=1/2; the parent theorem covers gamma=0 and excludes gamma=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is explicitly used in Step 2.1 through the parent theorem’s infinite path-law claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Specializing the proved matched-observation construction to half discount yields different exact quadratic minima despite the same stationary observed feature/reward law. Direct evaluation at the zero parameter distinguishes the objectives, under the explicit choice premise for their infinite observation laws.",
+            "item_sha256": "7f62f22bf590a56b094c4371fa5927bfe91be1a0b6ea3ab4ce8a57320409e5c6",
+            "row_sha256": "c785cfd9f99fbc162f904355cde8cf463948d6ac6a155d301e0b7a491b5d5dd5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Specializing the proved matched-observation construction to half discount yields different exact quadratic minima despite the same stationary observed feature/reward law. Direct evaluation at the zero parameter distinguishes the objectives, under the explicit choice premise for their infinite observation laws.",
+            "item_sha256": "7f62f22bf590a56b094c4371fa5927bfe91be1a0b6ea3ab4ce8a57320409e5c6",
+            "row_sha256": "6bd1fce339602dc5c0e2b34e2f577eaef837c523cb269d66ff0500d58e744594"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-85",
+        "notes": "Read the complete Example and both verification steps after independently completing the general theorem. All model data, stationary laws, feature identifications and AC hypothesis agree with that supplier. gamma=1/2 gives D=7/4, unique minima at (0,0) and (-2/7,1/7), minimum 25/42 and zero-parameter error 2/3. Substituting into each residual formula verifies the displayed objectives. Infinite observable-law equality uses only the explicit AC path-law hypothesis; no new diagram is necessary beyond the supplier pair."
+      }
+    }
+  }
+}

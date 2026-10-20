@@ -1,0 +1,114 @@
+{
+  "group": "w",
+  "batches": [
+    "70"
+  ],
+  "pages_read": [
+    "multimodal-contrastive-alignment-and-transfer",
+    "multimodal-contrastive-alignment-and-transfer-examples"
+  ],
+  "items_read": [
+    "def-symmetric-image-text-contrastive-loss",
+    "alg-zero-shot-prompt-classification",
+    "ex-prompt-and-distribution-sensitive-transfer"
+  ],
+  "conventions": [
+    {
+      "convention": "Batch indices start at 1; diagonal image/text pairs are designated matches. Image-to-text probabilities normalize rows and text-to-image probabilities normalize columns. The loss averages the two directional mean negative natural logarithms.",
+      "fixed_by": "def-symmetric-image-text-contrastive-loss",
+      "matters_for": [
+        "def-symmetric-image-text-contrastive-loss"
+      ]
+    },
+    {
+      "convention": "Encoder outputs being normalized must be nonzero; the shared score is a Euclidean inner product multiplied by s = exp(τ) > 0. The indexed batch is nonempty, including N = 1.",
+      "fixed_by": "def-symmetric-image-text-contrastive-loss",
+      "matters_for": [
+        "def-symmetric-image-text-contrastive-loss",
+        "alg-zero-shot-prompt-classification",
+        "ex-prompt-and-distribution-sensitive-transfer"
+      ]
+    },
+    {
+      "convention": "Normalize each prompt embedding, average those embeddings within each class, then normalize the average. Class and template lists are finite and nonempty, class descriptions are distinct, and each class average must be nonzero. Score ties return the least class index.",
+      "fixed_by": "alg-zero-shot-prompt-classification",
+      "matters_for": [
+        "alg-zero-shot-prompt-classification",
+        "ex-prompt-and-distribution-sensitive-transfer"
+      ]
+    },
+    {
+      "convention": "Individual-text retrieval ranks individual prompt embeddings, whereas classification ranks averaged class prototypes. Finite 0–1 error is the total probability mass of misclassified labelled inputs; source and target retain the same labels at each image.",
+      "fixed_by": "ex-prompt-and-distribution-sensitive-transfer",
+      "matters_for": [
+        "ex-prompt-and-distribution-sensitive-transfer"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-symmetric-image-text-contrastive-loss",
+      "statement": "For an indexed nonempty batch of designated image/text pairs with nonzero encoder outputs, normalize the embeddings, use logits ℓij = exp(τ)〈ui,vj〉, and define the symmetric loss as one half the sum of the row-normalized and column-normalized mean diagonal negative log probabilities.",
+      "used_by": [
+        "alg-zero-shot-prompt-classification"
+      ]
+    },
+    {
+      "id": "alg-zero-shot-prompt-classification",
+      "statement": "For admissible inputs, form normalized class prototypes by averaging normalized prompt embeddings and renormalizing; compute scaled inner-product scores and softmax probabilities; return the probability vector and the least-index class maximizing the score. The procedure makes no accuracy or distribution-generalization guarantee.",
+      "used_by": [
+        "ex-prompt-and-distribution-sensitive-transfer"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Defines the real exponential used for the positive logit scale and softmax terms.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-is-a-bijection-onto-positive-reals",
+      "used_for": "Supplies positivity and the positive-real range of the exponential, ensuring nonzero finite softmax denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Defines the natural logarithm on positive reals, the domain required by the directional loss terms.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-prompt-and-distribution-sensitive-transfer",
+      "concern": "The empirical description gives ViT-L/14@336px as the default model but omits the model exception for the §5 overlap accuracy measurements. Radford et al., §5, printed p. 17, procedure step 2 explicitly uses CLIP RN50x64 for All/Clean/Overlap accuracies. Add that qualifier to the overlap paragraph so the reported accuracy changes cannot be read as ViT-L/14@336px results. Source: https://arxiv.org/pdf/2103.00020.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The published item's Definition contains inline supplier links, including “provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]”, followed by additional inline links specifying factorials, natural-number images, powers, series, and power series. These interrupt the complete Definition and there is no immediately following Definition references section, contrary to the requested uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The published item's Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that” the exponential is a bijection. The supplier hyperlink occurs inside the Definition, and no Definition references section follows. This violates the requested uninterrupted-statement policy.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "multimodal-contrastive-alignment-and-transfer",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "Read the prerequisite page and def-source-target-distributions-and-shift. The example defines its finite laws and errors locally; its changed input masses and fixed labels agree with the supplier's source/target vocabulary. No domain-adaptation theorem or unsupported conditional-kernel existence claim is imported."
+    },
+    {
+      "from": "multimodal-contrastive-alignment-and-transfer",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "Read the prerequisite page and def-feedforward-neural-network. The loss cites finite feedforward networks only as one possible encoder realization on vectorized inputs, consistent with the supplier's finite acyclic graph definition. It imports no universality assertion and does not identify all CLIP architectures with layered MLPs."
+    }
+  ]
+}

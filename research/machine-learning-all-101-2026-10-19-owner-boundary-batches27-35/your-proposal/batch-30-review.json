@@ -1,0 +1,869 @@
+{
+  "alg-fedavg": {
+    "focus": "The Definition distinguishes count-weighted deployment from uniform-client analysis. All N,d,R,K,S and deployment counts n_i are positive, with1<=S<=N; client sampling is independent of fresh oracle randomness. It returns the specified finite trajectory and makes no privacy or arbitrary-rule convergence claim.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "For N=S=K=R=1, the Definition has one client, one local update and one server aggregation in either mode; positive n_1 gives weight1 in deployment mode."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Full participation S=N is permitted; zero local gradients give zero model differences and leave the server unchanged. Unequal counts still distinguish the two aggregation modes."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "The starting model and oracle vectors may be0; the explicit updates then remain defined. Counts and both stepsizes are strictly positive inputs."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The input range includes S=1 and S=N; the same subset-sampling and aggregation formulas apply at both finite sample-size endpoints."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N,d,R,K,S and every deployment n_i are positive. Thus neither the client sample nor local update sequence is empty, and n=sum_i n_i>0. The list of unselected clients is empty at S=N, which simply contributes no unchanged terms."
+      }
+    }
+  },
+  "alg-local-sgd": {
+    "focus": "The Definition requires positive n,d,K,T,b,m and a strict synchronization list ending at T. Initialization at0 is included in the maximum gap. Each step forms b fresh uniform component gradients and either retains proposals or averages all K workers; it returns the whole trajectory.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "The Definition explicitly identifies b=1 as a single stochastic gradient. K=1 has a one-worker synchronization average; T=1 requires the sole synchronization time1."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If K=1, synchronizing does not change that worker proposal. Identical worker proposals also equal their mean; neither configuration requires division by a deviation."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Common initialization at time0 is explicit and zero-valued models/gradients are valid; n,K,b and stepsizes remain positive."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Synchronization includes the final time T and starts gap measurements at t0=0; if t+1 is a listed time, the Definition uses the average branch including that equality."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "All n,d,K,T,b,m are positive and t_m=T. Hence no component family, worker population, batch or synchronization list is empty; initialization at0 is supplied even before the first synchronization."
+      }
+    }
+  },
+  "alg-scaffold": {
+    "focus": "The Definition has positive N,d,R,K,S and stepsizes, requires1<=S<=N, initializes c as the mean controls, and distinguishes OptionsI/II. Its final equations preserve the population-control mean and explicitly permit zero initial controls; convergence claims separately require gradient-consistent initialization.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "N=S=K=1 is allowed; OptionII divides by positive K eta_l and selected-client aggregation is a single term."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At full participation every client control updates; if initial controls are0 this is still an admitted procedure. The invariant c=N^-1 sum_i c_i follows from the displayed server update."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Zero initial controls are explicitly permitted by the Definition, and zero model differences are valid; K,eta_l,N,S stay positive in all inverses."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Definition includes S=1 and S=N and both control options. Unselected controls persist; at S=N the unselected set is empty."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N,d,R,K,S are positive and S<=N, so the selected client set is nonempty and the inverse K eta_l is well defined. Only the unselected-client set may be empty, at full participation."
+      }
+    }
+  },
+  "def-federated-objective-and-client-sampling": {
+    "focus": "The Definition assumes N,d>=1 and positive n_i, so total n>0, and carefully keeps F_i and f_i as separate objective families. It gives the uniform law on size-S subsets for1<=S<=N and independent round samples unless another theorem changes that law.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "N=S=1 gives the sole subset with probability1 and both averages have one client; n_1/n=1."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At S=N the unique sample is all clients. If counts are equal and F_i=f_i is explicitly stipulated, the weighted objective equals the equal-client objective."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Zero client objective values are allowed, but N,n and S cannot be0 under the Definition, so every averaging denominator is positive."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Sampling admits both S=1 and S=N; binomial(N,S) is a positive integer at both endpoints."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N>=1 and each n_i>=1 exclude empty clients and an empty total data count. The range1<=S<=N excludes an empty sample. The finite sums detected by the audit have those positive index bounds."
+      }
+    }
+  },
+  "def-scaffold-analysis-trajectory-and-errors": {
+    "focus": "The Definition extends each round to hypothetical paths for every client independently of the current client sample. E_r averages pre-update query points, anchors and stored draws persist on unselected clients, C_r keeps anchor randomness inside its norm, and Xi_0=0 is explicit.",
+    "overrides": {
+      "degenerate": {
+        "status": "checked",
+        "reason": "Initialization sets every anchor to x0 and every stored gradient to its full gradient, so Xi0=0. K=1 uses only each round-start query and its current drift is0."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The algorithm and its oracle procedures supply the finite actual and hypothetical paths; the Definition specifies how to store them and take their stated expectations, rather than choosing a family of conditional versions."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N,d,K,R>=1 and1<=S<=N are explicit, so the KN-averages defining E,C,Xi are not empty; the unselected-client set may be empty at full participation, when all stored entries refresh."
+      }
+    }
+  },
+  "ex-client-data-locality-does-not-imply-dp": {
+    "focus": "The Example releases a deterministic count from a device and compares the empty database with one record on event{1}. Verification gives probabilities0 and1, so the ordered DP inequality fails for every finite epsilon and delta<1. This is an explicit privacy counterexample, not equivalence of locality and privacy.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "The two databases differ by exactly one occurrence, and the output event is the singleton{1}."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "The empty-database count and event probability are0; the neighboring singleton event probability is1, yielding1<=delta as the failed DP requirement."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "The release is deterministic. Point-mass outputs at0 and1 have disjoint singleton witnesses, so device locality supplies no event-privacy guarantee."
+      },
+      "empty": {
+        "status": "checked",
+        "reason": "The empty database is one of the two specified neighboring inputs; it produces count0, while adding one record produces1."
+      }
+    }
+  },
+  "ex-local-versus-periodic-synchronization": {
+    "focus": "The Example fixes two quadratic components, two workers, two local steps and the coupled draw pattern f1,f1 versus f2,f2. Verification follows the actual updates to final means1/8 unsynchronized and1/16 with per-step synchronization; it makes no statement that two arbitrary schedules must differ.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "A per-step synchronization gap1 is one of the two explicitly compared schedules."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "The initial worker models coincide at1 but the supplied component draws differ, giving the distinct two-step means stated by the Verification."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The schedules share initialization and the two-step terminal time; the calculation compares their terminal means after the stated synchronization choices."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The example fixes two workers, two components and two local steps; neither schedule nor draw sequence is empty."
+      }
+    }
+  },
+  "ex-scaffold-control-correction": {
+    "focus": "The Example uses the two shifted quadratics at x=0 with exact gradients and controls c1=-1,c2=1,c=0. Its Verification substitutes into the corrected local direction, obtains0 for both clients, and inducts that every finite local trajectory stays0.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "At x=0 both corrected gradients are0 even though the individual uncorrected gradients are-1 and1; every local update remains0."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "The one-local-step case is the first substitution in the Verification; repeating it gives the asserted finite-step invariance."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "The corrected directions cancel exactly at the common minimizer despite heterogeneous client optima, so zero server movement is the intended outcome."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Example permits every finite positive local step count and positive step size; the invariant0 is established by repeated identical zero updates."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The fixed example has two clients with explicitly supplied controls; its asserted local execution has positive finite step count, not an empty client population."
+      }
+    }
+  },
+  "ex-two-client-shifted-optima": {
+    "focus": "The Example supplies two scalar least-squares records(1,1),(2,-2), common model0, local step1/4 and two steps. Verification differentiates the equal-client objective to obtain minimizer-3/5 and simulates local endpoints7/16,-1, whose mean is-9/32.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "The common initial server and local models are0; the explicitly computed gradients and two updates remain well defined."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "The scalar dimension is1, but two clients and two local steps are fixed; each client loss has the single supplied record."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "The local optima differ; their prescribed two-step average-9/32 differs from the equal-client optimum-3/5. This is the claimed drift witness rather than a universal failure assertion."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The calculation includes initialization and the post-second-step local endpoints; it asserts no limiting-step-size or asymptotic convergence endpoint."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "Exactly two client records and two local steps are supplied. The least-squares normal-equation denominator is1^2+2^2=5, so no empty data or zero design branch is involved."
+      }
+    }
+  },
+  "fs-scaffold-general-convex-uniform-output-round-headline": {
+    "focus": "The source is a false-statement with a full Refutation. It fixes N>=2,d=K=S=1 and exact identical quadratics, derives the actual random table dynamics in2.1, separates tR<16 from tR>=16 in6.1, and chooses a scale family in8.1 that contradicts the purported universal constant. It does not refute arbitrary weighted outputs.",
+    "overrides": {
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Refutation8.1 chooses one sufficiently large integer N for any proposed C, after explicit finite quadratic and sampling constructions in1.1–2.1; it does not select arbitrary families."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The refutation uses N>=2 with one sampled client and one local step per round, and tests every R>=1 allowed by the false headline. Its finite sample histories and uniform output set are nonempty."
+      }
+    }
+  },
+  "lem-convex-gradient-step-nonexpansive": {
+    "focus": "The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "At eta=0 the Statement is equality. The only symbolic inverse in1.1 and3.1 is beta^-1, justified by beta>0."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "In one real dimension the same inner-product expansion applies without coordinate summation."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If x=y or their gradients agree, the subtracted gradient difference in3.1 is0 and the inequality is equality."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Proof3.1 includes eta=0 and eta=2/beta, where2eta/beta-eta^2=0, so the same square comparison gives nonexpansiveness."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The two points x,y and one supplied function are fixed objects; no optional empty function family or population is averaged."
+      }
+    }
+  },
+  "lem-fedavg-local-drift": {
+    "focus": "Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B.",
+    "overrides": {
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N>=S>=1 and K>=1 exclude an empty client population, sample and query-point average. The finite sums in E have KN positive terms, including zero-displacement initial queries."
+      }
+    }
+  },
+  "lem-fedavg-one-round-progress": {
+    "focus": "For positive N,d,K,S and0<mu<=beta, Proof1.1 expands the conditional round progress,1.2 orders current oracle errors and bounds displacement moments, and2.1 absorbs terms under the inclusive effective-step restriction. The sample is fresh, and no independence between clients oracle laws is added.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "At K=1 every query is the round-start point and E=0; at N=S=1 the finite sample mean is the unique client vector."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 removes the noise contribution in1.2; G=0 removes the displayed heterogeneity term, without a division by either."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "For S=N the sampling term with1-S/N vanishes; for N=S=1 its fixed-size sample mean also has zero sampling variance."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The equality effective-step=1/[32(B^2+1)beta] is included:2.1 uses only non-strict coefficient bounds."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited algorithm requires positive finite population, dimension, step and sample counts; empty client/worker/query populations are excluded, and every displayed averaging denominator is therefore nonzero."
+      }
+    }
+  },
+  "lem-federated-recursion-averaging": {
+    "focus": "The Statement has R>=1, nonnegative distances/gaps and positive a,eta. Proof1.1 telescopes the uncontracted recurrence;1.2 telescopes positive geometric weights for0<rho eta<1;2.1 interprets their normalized positive weights as an output-index law.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "The error coefficients b,c and distance or gap terms may be0;1.1–1.2 merely drop the nonnegative terminal distance. The divisors a,eta,R,W_R are strictly positive."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "For R=1 the telescopes1.1–1.2 consist of one recurrence and the output index is deterministic."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If all gaps and errors vanish, the same nonnegative inequalities hold; geometric weights remain positive as long as the stated0<rho eta<1 condition holds."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The geometric condition is strict0<rho eta<1; rho eta=1 would make weights undefined and is excluded, while part1 supplies the uncontracted telescope."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Proof2.1 explicitly defines a finite probability law by weights w_r/W_R. No minimizer selection or choice axiom is used."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "R>=1 excludes an empty recurrence and empty output-index range; W_R is a sum of R positive weights."
+      }
+    }
+  },
+  "lem-finite-martingale-difference-sum-variance": {
+    "focus": "The lemma decomposes a positive finite adapted sequence into predictable conditional means and martingale differences. The proof cancels cross moments by conditioning on the later query and bounds the final mean/error sum with the relaxed square. Its finite Rademacher fixture is separate from this general conditional-expectation argument.",
+    "overrides": {
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The Statement assumes positive finite increment count; its sum is not over an empty sequence. Zero increments are permitted and satisfy both second-moment sides trivially."
+      }
+    }
+  },
+  "lem-local-sgd-client-drift": {
+    "focus": "Proof1.1 chooses the latest synchronization time including0 and compares worker variance with displacement from the common synchronized point;1.2 sums the intervening gradients and uses eta_s<=2eta_t. The Statement explicitly gives zero deviation at final synchronization T.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "At t=0 or a synchronization time, all workers coincide and their deviation is0; G=0 also makes every displacement moment0."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "With K=1 the sole worker equals the virtual mean; H=1 synchronizes every step and all deviations are0."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Identical worker iterates have zero left side in the mean-square identity1.1; at t=T synchronization makes this explicit."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The Statement covers0<=t<T and separately declares deviation0 at t=T. Equality eta_s=2eta_t is permitted in1.2."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The latest synchronization s(t) is the maximum of a supplied finite nonempty list containing0;1.1 defines it without an arbitrary-family choice."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "T,K,m>=1 and a synchronization list ending at T are required. If t=s(t), the intervening sum in1.2 is empty and equals0, giving the stated zero displacement."
+      }
+    }
+  },
+  "lem-local-sgd-sampling-variance": {
+    "focus": "Proof1.1 freezes the earlier finite index history and expands the bK independent centered gradient errors; all distinct-draw cross moments vanish. Proof2.1 bounds the remaining diagonal moments and averages over the earlier finite history.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "If sigma=0, every centered gradient error has second moment0, and the diagonal sum in2.1 gives variance0."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "For b=K=1 the expansion1.1 has one centered draw and2.1 gives its original sigma^2 bound."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If the component gradients agree at all worker query points, all centered errors in1.1 are0; no nondegenerate noise law is required."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The batch and worker count ranges include1; no limiting infinite batch is asserted and bK remains positive."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Both current and past component indices have the explicitly supplied finite uniform product laws; the proof computes finite conditional averages and invokes no choice axiom."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The local-SGD interface supplies positive n,K and the Statement assumes b>=1. The bK error family is nonempty and its averaging denominator is positive."
+      }
+    }
+  },
+  "lem-local-sgd-virtual-progress": {
+    "focus": "The finite local-SGD law has positive n,K and step sizes, with0<mu<=L. Proof1.1 derives the same virtual-mean update whether synchronization occurs or not;1.2 bounds gradients using L^-1;2.1 uses eta_t L<=1/4 and Jensen to conclude.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "For K=1 the virtual point is the single worker and the worker-deviation term in2.1 is0."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If worker points coincide, the deviation term vanishes, and1.1 still separates mean-gradient movement from centered noise."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Proof2.1 includes eta_t=1/(4L), where the function-gap coefficient is exactly at most-eta_t/2."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The expectations are finite weighted sums over supplied component-index histories;1.1 fixes a past tuple and averages fresh draws without selecting conditional-expectation representatives."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "Positive n,K and positive local step indices are inherited from local SGD; the n-component and K-worker averages are nonempty."
+      },
+      "zero": {
+        "status": "not_applicable",
+        "reason": "The Statement has0<mu<=L, so L^-1 and(2L)^-1 in1.2 are well defined. The inherited eta_t is positive; zero vectors/gradient differences do not introduce any additional denominator."
+      }
+    }
+  },
+  "lem-local-sgd-weighted-recursion": {
+    "focus": "The Statement fixes mu>0,a>=4,T>=1,A>0 and nonnegative B,C and sequences. Proof1.1 checks the weight coefficient including t=0,1.2 telescopes and sums noise terms, and2.1 divides by positive S_T and obtains S_T>=T^3/3.",
+    "overrides": {
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Weights and steps are the explicit scalars(a+t)^2 and4/[mu(a+t)]; no output selection, maximizer or choice axiom is used."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "T>=1 excludes an empty weight sum, and a>=4 gives every w_t>0, so S_T>0. The interior coefficient comparison in1.1 is vacuous for T=1 but its separately checked t=0 term remains."
+      }
+    }
+  },
+  "lem-perturbed-strong-convexity": {
+    "focus": "The Statement includes0<=mu<=beta. Proof1.1 adds smoothness and strong-convexity inequalities, uses the relaxed distance bound, and2.1 weakens(beta+mu)/2 to beta. It does not divide by mu or beta.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "The allowed mu=0 removes the distance term; beta=0, if both constants are0, is also harmless since1.1–2.1 perform no inverse operation."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "The Euclidean calculation applies in scalar dimension1 with the same two inequalities."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "For coincident comparison points the corresponding squared distances vanish, and the sum of the original inequalities in1.1 remains valid."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The function and three comparison points are supplied, and1.1 simply adds their two inequalities; no minimizer or representative is chosen."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The claim is about a supplied function and three supplied vectors; it does not quantify over an indexed population or an optionally empty sum."
+      }
+    }
+  },
+  "lem-relaxed-euclidean-squared-norm": {
+    "focus": "For a>0, Proof1.1 writes the relaxed difference as a nonnegative square, then repeats with-v. Proof1.2 proves the finite-sum inequality by the exact pairwise-square identity, explicitly including m=1 where the difference is0.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "Zero vectors are permitted and satisfy the nonnegative-square identities. The reciprocal a^-1 is used only under a>0."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "Proof1.2 explicitly includes m=1: the pairwise sum is empty and the finite-sum inequality is equality."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If all u_j coincide, every pairwise difference in1.2 is0 and the finite-sum inequality is equality;0 vectors are included."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The relaxation parameter domain is strictly a>0; a=0 is excluded because the two-vector formulas use a^-1. No limit at a=0 is asserted."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Proof1.1–1.2 uses only the supplied finite vector list and exact Euclidean algebra; no choice axiom is invoked."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The finite-sum clause explicitly assumes m>=1, excluding an empty u-list. For m=1 the auxiliary pairwise difference sum is empty and equals0 as1.2 states."
+      }
+    }
+  },
+  "lem-scaffold-control-tracking-identity": {
+    "focus": "Proof1.1 verifies initialization r=0 and telescopes OptionII to the realized mean of K stored draws;2.1 treats unselected-client retention using independent fresh sampling and inducts the residual moment;3.1 proves the pathwise population-control mean invariant.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "For K=1 the control becomes its one realized gradient draw. For N=S=1 the server control equals that single client control in3.1."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "At r=0 all stored gradients equal the full gradient and the residual error is0 by1.1. Sigma=0 removes all residual second moments in1.1–2.1."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Full participation makes retention probability1-S/N zero in2.1; no unselected-client term remains. Deterministic exact oracles have zero residual."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The assertions explicitly include r=0 in1.1 and all later finite r by2.1–3.1; selection probability p=1 is included."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited SCAFFOLD N,K,S are positive, so controls average a nonempty K-list and a nonempty N-population. At full participation only the unselected-client list is empty, with no retained contribution."
+      }
+    }
+  },
+  "lem-scaffold-convex-client-drift": {
+    "focus": "Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "Proof1.1 returns E_r=0 for K=1 before introducing1/(K-1)."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 removes oracle residual terms; if the function gap and stored control lag also vanish,1.2 gives E_r=0."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Coincident initialized anchors have zero Xi; if all corrected local directions vanish, each query remains at the round start and the drift is0. The K=1 collapse is explicit in1.1."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The effective-step upper bound is inclusive;2.1 uses beta effective-step<=1/81 to bound all three coefficients without a limiting argument."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "Inherited N,K and S are positive, so E_r and C_r average nonempty client/query collections. At K=1 the one query is the round-start point, not an empty query sequence."
+      }
+    }
+  },
+  "lem-scaffold-convex-control-lag": {
+    "focus": "The convex C_r is the second moment of full gradients at stored adaptive anchors. Proof1.1 uses participation probability p=S/N to retain or replace anchors and Jensen on the K-query mean;2.1 decomposes full-gradient differences at the current server model. The recursion contains no inverse smoothness constant.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "If beta=0, all client gradients are constant, so stored full-gradient differences from x-star vanish and C_r=0; the polynomial bound remains valid. Sigma does not appear in the final full-gradient-lag recurrence."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "For K=1,1.1 has one query-gradient difference; N=S=1 gives participation probability1."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At S=N,1.1 has no retained-anchor term. If the server and all stored anchors equal x-star, the two difference terms in2.1 vanish."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The selection probability p lies in(0,1], and p=1 is admitted in the retained/refreshed mixture of1.1."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The proof computes expectations of supplied stored anchors under the finite uniform participation law and full-gradient functions. It does not invoke a conditional-expectation existence theorem or a choice axiom."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited algorithm has N,K>=1 and1<=S<=N. Therefore p>0 and the NK-query average in1.1 is nonempty; the unselected-anchor contribution vanishes at S=N."
+      }
+    }
+  },
+  "lem-scaffold-convex-round-progress": {
+    "focus": "Proof1.1 expands the distance progress,2.1 adds14 effective-step^2/(S/N) times the control-lag recursion, and3.1 absorbs local drift under the step restrictions. The Statement expressly includes mu=0 as the general-convex case and imposes the inverse-mu step restriction only for mu>0.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "For mu=0 the inverse-mu restriction is omitted by the Statement;3.1 then has mu effective-step/(S/N)=0. Sigma=0 removes all variance terms."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "K=1 is supplied by the drift lemma before any inverse K-1; N=S=1 makes S/N=1 in the potential and its coefficient comparisons."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At mu=0 the contraction factor becomes1 and the same proof yields a general-convex potential descent inequality, exactly as the Statement says."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Both sufficient step bounds are inclusive. Proof3.1 uses beta effective-step<=1/81 and, if mu>0, mu effective-step/(S/N)<=1/15."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited N,K and S are positive. Thus p=S/N>0 in2.1 and the control potential denominator S is nonzero; an empty population or sample is outside the algorithm."
+      }
+    }
+  },
+  "lem-scaffold-convex-server-variance": {
+    "focus": "Proof1.1 decomposes the actual corrected direction into current-query, gradient and stored-control terms. Proof2.1 conditions on the pre-sample history and explicitly notes Q=0 for N=1 or S=N;2.2 chronologically orders adaptive centered errors, and3.1 combines three moment bounds.",
+    "overrides": {
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 removes the stored residual/noise contribution; if gap,lag and drift are also0,3.1 gives zero server displacement moment."
+      },
+      "one": {
+        "status": "checked",
+        "reason": "Proof2.1 explicitly includes N=1, necessarily S=1, where Q=0; K=1 has one current query in2.2."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "Proof2.1 explicitly gives Q=0 for full participation S=N, as selected and population control means coincide."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Full participation S=N is included by2.1; it uses the exact zero sampling deviation before weakening the moment bound."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited SCAFFOLD N,K,S are positive, so every KS query normalization and client average is over a nonempty set. The empty unselected set at S=N is covered by Q=0."
+      }
+    }
+  },
+  "lem-scaffold-nonconvex-client-drift": {
+    "focus": "Proof1.1 treats K=1 separately and bounds corrected control residuals by gradient and anchor error. Only for K>=2 does1.2 use1/(K-1), unroll the geometric displacement recurrence, and2.1 collect its72/96 coefficients. The effective step is strictly positive and within its inclusive bound.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "Proof1.1 explicitly gives E_r=0 for K=1 before using the inverse K-1 in1.2."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 removes the residual/noise terms in1.1–2.1; if the objective gradient and Xi are also0, the drift bound gives E_r=0."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If corrected directions vanish at identical initial query points, every local trajectory stays at the server model and E_r=0. The one-query collapse is separately handled in1.1."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The sufficient bound effective-step<=(S/N)^(2/3)/(24 beta) is inclusive. Proof1.2 uses it only in non-strict estimates eta_l beta<=1/(24K)."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The inherited positive N,K and1<=S<=N exclude empty client/query/sample collections; K=1 is a nonempty query list with zero drift."
+      }
+    }
+  },
+  "lem-scaffold-nonconvex-control-lag": {
+    "focus": "Here beta>0 and p=S/N>0 are explicit. Proof1.1 retains the actual selection dependence of the anchor cross terms;2.1 bounds them with coefficients1/p and states p=1 is allowed;3.1 substitutes the two server moments. No fictitious independent selected-anchor step is assumed.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "Proof2.1 explicitly includes p=1, which includes N=S=1; K=1 is a single stored query index."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "The initialized anchor error is Xi0=0; sigma=0 removes the variance term in3.1. The denominators p and KS are positive, so no zero-sample branch is used."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At full participation p=1 every anchor refreshes;2.1 explicitly preserves that endpoint while retaining the actual anchor/server correlations."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "Positive N,K and1<=S<=N imply p>0 and KN,KS>0. Thus all anchor and selected-query averages are nonempty, and every1/p coefficient in2.1 is well defined."
+      }
+    }
+  },
+  "lem-scaffold-nonconvex-round-progress": {
+    "focus": "The Statement has beta>0,0<p=S/N<=1 and positive t within p^(2/3)/(100 beta). Proof1.1 expands smooth descent,2.1 adds the tracking increment, and3.1 explicitly separates zero noise q=0 before normalizing a variance coefficient. The potential retains Xi and no gradient-dissimilarity assumption.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "N=S=1 gives p=1 in2.1 and all coefficient bounds; K=1 is allowed by the inherited drift supplier and algorithm."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Proof3.1 divides by q only when q>0; when q=0 all variance terms vanish. This covers sigma=0 without division by zero."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At initialization Xi0=0; zero objective gradient and zero noise/anchor error remove all movement error terms, and the nonnegative potential inequality remains valid."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The upper step bound is inclusive;2.1 uses h<=p^(2/3)/100 and0<p<=1 in its non-strict bounds."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "Inherited positive N,K and1<=S<=N give p>0 and KS>0. The potential factor24 beta^3t^2/p and variance normalization are therefore well defined."
+      }
+    }
+  },
+  "lem-scaffold-nonconvex-server-variance": {
+    "focus": "Proof1.1 cancels population control means and derives the conditional server mean;1.2 decomposes actual current-query and stored-anchor terms and uses uniform sampling on pre-sample vectors;2.1 combines three moment bounds. Conditional expectations are taken only under the explicit declared A2 interface.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "At N=S=1 the selected and population anchor/control means coincide, so Q=0 in1.2; K=1 has one current gradient query."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 removes the residual and current-noise moments in1.2. All displayed inverses are N,K,S counts, which are positive; no inverse beta is used."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "For full participation S=N the factor1-S/N in1.2 is0 and Q vanishes; identical-anchor/client configurations are also admitted."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The sample-size endpoint S=N is included in1.2 by its exact1-S/N factor, with no division by N-S."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The algorithm requires positive N,K and1<=S<=N, so every KS and KN normalization is nonzero. At S=N only the complement of the selected set is empty."
+      }
+    }
+  },
+  "lem-smooth-convex-gradient-difference": {
+    "focus": "The Statement has beta>0 and a supplied minimizer of the finite client average. Proof1.1 constructs each affine-adjusted phi_i,1.2 descends by beta^-1, and2.1 averages and proves the mean gradient vanishes using coordinate derivatives at the supplied minimizer.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "For N=1 the finite average in2.1 contains one client and the result is the corresponding single-function gradient-gap estimate."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "At x=x-star both sides are0. Beta is strictly positive before its inverse in1.2; zero gradients introduce no additional inverse."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "If every client gradient difference is0, the left side vanishes; no strict convexity or unique minimizer is required."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The convexity argument in1.1 takes t down to0 from0<t<=1 using differentiability; the resulting inequality holds at every supplied x and x-star."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The minimizer x-star is supplied by hypothesis;1.1 explicitly defines phi_i and2.1 uses a finite coordinate argument rather than selecting a minimizer or arbitrary representatives."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The average f=N^-1 sum_i h_i is over the nonempty finite indexed client list; N is positive as required for that real average. No empty-object average is claimed."
+      }
+    }
+  },
+  "lem-uniform-client-sampling-moments": {
+    "focus": "The Statement explicitly separates N>1 from N=1. The proof expands indicator means and pair covariances for a uniform size-S subset, gives the exact finite-population variance for N>1, and the singleton branch sets the sample mean equal to the population mean without using N-1.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "The Statement explicitly treats N=1, necessarily S=1, as the deterministic equality of sample and population means."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Zero client vectors or zero centered deviations give variance0. The N-1 denominator is confined to N>1; N=1 has a separate branch."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "At S=N the sample is the full population and its centered mean is0; if all vectors coincide the centered sum is also0."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "Both S=1 and S=N are included. The N=1 endpoint is separately stated, preventing use of the N-1 denominator there."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "The uniform law is explicitly the finite distribution on all S-subsets; expectation is their finite weighted sum, with no choice-dependent selection."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "The explicit bound1<=S<=N excludes an empty client population or sample. In particular, sample means divide only by positive S and N."
+      }
+    }
+  },
+  "thm-fedavg-under-gradient-dissimilarity": {
+    "focus": "The equal-client strongly convex theorem retains both standard and gap-form dissimilarity assumptions. Proof1.1 combines current one-round and drift recurrences,2.1 geometrically averages, and3.1 omits step restrictions with zero noise/heterogeneity denominators. It does not extend the rate to count-weighted deployment.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "N=S=K=R=1 is in the positive integer domain; the sample is deterministic and the geometric average has one positive weight."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "For full participation the1-S/N noise term vanishes. When b=0 or G=0,3.1 omits the corresponding inverse bound instead of dividing by0."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "The effective-step upper bound is inclusive; the geometric contraction has0<lambda<1 under mu<=beta and B>=1, making every output weight positive."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N,d,K,R>=1 and1<=S<=N exclude empty populations, rounds and output-index sets. W_R sums R positive geometric weights, so the output distribution is normalized."
+      }
+    }
+  },
+  "thm-local-sgd-convex-round-complexity": {
+    "focus": "The theorem uses positive n,d,K,T,b,0<mu<=L and strict a>max(16L/mu,H). Proof1.1 verifies both local-step and synchronization-ratio supplier conditions;2.1 applies the quadratic telescope;3.1 uses Jensen for exactly the stated worker/time-weighted output, not the last iterate.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "K=b=1 and T=1 are included; the quadratic-weighted output then reduces to its single time/worker iterate and all sums remain nonempty."
+      },
+      "zero": {
+        "status": "checked",
+        "reason": "Sigma=0 or G=0 simply removes its corresponding additive term in2.1. Mu,L and S_T are strictly positive and no inverse noise bound is used."
+      },
+      "degenerate": {
+        "status": "checked",
+        "reason": "K=1 has zero worker drift; synchronization at every step has H=1 and identical worker iterates after each averaging. The bound remains valid for those cases."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Sampling is the explicit finite independent uniform index law;3.1 forms an explicit weighted Euclidean average, with no conditional-expectation representative or choice axiom."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "All n,d,K,T,b are positive, and the inherited synchronization schedule includes final T. Thus S_T and every worker/time or batch average have positive denominators."
+      }
+    }
+  },
+  "thm-scaffold-convex-and-nonconvex-rates": {
+    "focus": "The theorem preserves three distinct branches and their exact server-iterate output laws:1.1 strongly convex geometric,1.2 general-convex uniform with initialization term, and1.3 nonconvex uniform gradient bound. Proof2.2 returns x0 for D=0 and3.1 returns x0 for F=0, and both explicitly omit zero-denominator variance/initialization restrictions.",
+    "overrides": {
+      "one": {
+        "status": "checked",
+        "reason": "Positive counts allow K=1,R=1 and N=S=1. The proof uses the suppliers singleton-query and singleton/full-sample branches, and both output-index ranges remain nonempty."
+      },
+      "endpoints": {
+        "status": "checked",
+        "reason": "All sufficient local-step upper bounds are inclusive;1.1–1.3 apply non-strict recurrence bounds, while beta>0 and positive counts keep their denominators valid."
+      },
+      "nonempty-choice": {
+        "status": "checked",
+        "reason": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction."
+      },
+      "empty": {
+        "status": "not_applicable",
+        "reason": "N,d,K,R>=1 and1<=S<=N exclude empty clients, local paths and output-index sets. The zero-error D=0/F=0 returns are separate supplied-initial-point branches, not empty-population executions."
+      }
+    }
+  }
+}

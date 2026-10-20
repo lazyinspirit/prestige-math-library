@@ -1,0 +1,255 @@
+{
+  "group": "c",
+  "batches": ["10"],
+  "pages_read": [
+    "distribution-shift-and-domain-adaptation",
+    "distribution-shift-and-domain-adaptation-examples"
+  ],
+  "items_read": [
+    "def-source-target-distributions-and-shift",
+    "def-h-delta-h-divergence",
+    "def-loss-discrepancy-between-domains",
+    "lem-covariate-shift-joint-law-density",
+    "thm-covariate-shift-importance-weighting",
+    "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+    "thm-discrepancy-domain-adaptation-bound",
+    "ex-support-mismatch-prevents-covariate-weighting",
+    "ex-unbounded-covariate-shift-weights",
+    "ex-label-shift-identical-input-laws-has-large-joint-error"
+  ],
+  "conventions": [
+    {
+      "convention": "Covariate shift requires supplied conditional label kernels agreeing as probability measures outside one measurable target-marginal-null set, together with absolute continuity of the target input marginal with respect to the source input marginal. Conditional kernels are not asserted to exist automatically.",
+      "fixed_by": "def-source-target-distributions-and-shift",
+      "matters_for": [
+        "lem-covariate-shift-joint-law-density",
+        "thm-covariate-shift-importance-weighting",
+        "ex-support-mismatch-prevents-covariate-weighting",
+        "ex-unbounded-covariate-shift-weights",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "convention": "Domain risks are extended nonnegative integrals of product-measurable losses composed with measurable predictors; finite risk is not implicit.",
+      "fixed_by": "def-source-target-distributions-and-shift",
+      "matters_for": [
+        "thm-covariate-shift-importance-weighting",
+        "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+        "thm-discrepancy-domain-adaptation-bound"
+      ]
+    },
+    {
+      "convention": "The H-delta-H divergence is twice the supremum of absolute disagreement-probability differences over a nonempty class of measurable binary classifiers, and lies in [0,2].",
+      "fixed_by": "def-h-delta-h-divergence",
+      "matters_for": [
+        "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "convention": "Every pairwise loss integral entering the discrepancy must be finite, but their supremum may be infinite and need not be attained.",
+      "fixed_by": "def-loss-discrepancy-between-domains",
+      "matters_for": [
+        "thm-discrepancy-domain-adaptation-bound"
+      ]
+    },
+    {
+      "convention": "The importance weight is the target-input density relative to the source-input law. The joint-density lemma and importance-weighting theorem explicitly assume AC; the latter concludes a finite identity under integrability of the weighted source loss.",
+      "fixed_by": "thm-covariate-shift-importance-weighting",
+      "matters_for": [
+        "ex-support-mismatch-prevents-covariate-weighting",
+        "ex-unbounded-covariate-shift-weights",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "convention": "The joint-labeling error is the infimum of the sum of source and target binary risks over H. No attained minimizer, covariate shift, or empirical-risk substitution is assumed.",
+      "fixed_by": "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+      "matters_for": [
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "convention": "In the discrepancy theorem P denotes the source input law and Q the target input law; the displayed bound controls L_P(h,f_P). The loss is symmetric and satisfies the triangle inequality, both stated minimizers exist, and labeling risks may be infinite.",
+      "fixed_by": "thm-discrepancy-domain-adaptation-bound",
+      "matters_for": [
+        "thm-discrepancy-domain-adaptation-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-source-target-distributions-and-shift",
+      "statement": "Source and target are joint probability laws on a common measurable input-label product. Covariate shift requires specified conditional label kernels agreeing outside a target-marginal-null measurable set and target-input absolute continuity with respect to the source-input law.",
+      "used_by": [
+        "def-h-delta-h-divergence",
+        "def-loss-discrepancy-between-domains",
+        "lem-covariate-shift-joint-law-density",
+        "thm-covariate-shift-importance-weighting",
+        "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+        "thm-discrepancy-domain-adaptation-bound",
+        "ex-support-mismatch-prevents-covariate-weighting",
+        "ex-unbounded-covariate-shift-weights",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "id": "lem-covariate-shift-joint-law-density",
+      "statement": "Assume AC. For source and target joint laws with specified conditional label kernels agreeing outside a target-input-null set and target-input absolute continuity, every nonnegative measurable representative w of the target-input/source-input Radon–Nikodym derivative satisfies P_T(E) = integral_E w(x) dP_S for every product-measurable E. Consequently P_T is absolutely continuous with respect to P_S, with joint density w composed with the input projection.",
+      "used_by": [
+        "thm-covariate-shift-importance-weighting"
+      ]
+    },
+    {
+      "id": "thm-covariate-shift-importance-weighting",
+      "statement": "Assume AC. Under covariate shift with the stated common conditional label kernel, for any measurable predictor and nonnegative product-measurable loss, integrability of the source loss weighted by a nonnegative representative of dμ_T/dμ_S implies that target risk equals that weighted source integral and is finite.",
+      "used_by": [
+        "ex-support-mismatch-prevents-covariate-weighting",
+        "ex-unbounded-covariate-shift-weights",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "id": "def-h-delta-h-divergence",
+      "statement": "For probability input laws and a nonempty measurable binary classifier class H, d_HΔH(μ_S,μ_T) = 2 sup_{h,h′ in H} |μ_S(A_{h,h′}) − μ_T(A_{h,h′})|.",
+      "used_by": [
+        "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "id": "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+      "statement": "For joint binary-label probability laws with input marginals μ_S,μ_T and nonempty measurable classifier class H, set λ = inf_{g in H}(ε_S(g)+ε_T(g)). Every h in H satisfies ε_T(h) ≤ ε_S(h) + ½d_HΔH(μ_S,μ_T) + λ.",
+      "used_by": [
+        "ex-label-shift-identical-input-laws-has-large-joint-error"
+      ]
+    },
+    {
+      "id": "def-loss-discrepancy-between-domains",
+      "statement": "For probability input laws P,Q, a nonempty measurable hypothesis class and a nonnegative product-measurable loss, assume all pairwise loss integrals under P and Q are finite. Define disc_L(P,Q) as the supremum over hypothesis pairs of their absolute integrated-loss difference, allowing an infinite supremum.",
+      "used_by": [
+        "thm-discrepancy-domain-adaptation-bound"
+      ]
+    },
+    {
+      "id": "thm-discrepancy-domain-adaptation-bound",
+      "statement": "For source and target input laws P,Q, measurable labeling functions, a nonempty measurable hypothesis class, a nonnegative measurable symmetric triangle-inequality loss, finite pairwise hypothesis risks and attained source and target minimizers h_P*,h_Q*, every h in H satisfies L_P(h,f_P) ≤ L_P(h_P*,f_P) + L_Q(h,h_Q*) + disc_L(P,Q) + min{L_Q(h_Q*,h_P*),L_P(h_Q*,h_P*)}, interpreted in the extended nonnegative reals.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+      "used_for": "The orientation and null-set meaning of target-input absolute continuity.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Predictor, projection, pairing-map and composed-loss measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability-kernel normalization and measurable event evaluations.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Rectangle-generated product sigma-algebras in measurable loss compositions and joint-law uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of nonnegative section integrals for the supplied probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicitly inherited choice assumption in the likelihood-density and change-of-measure suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-density",
+      "used_for": "A finite-valued nonnegative density representative in the two-law input experiment dominated by the source probability measure.",
+      "opened": true
+    },
+    {
+      "id": "def-likelihood-ratio-as-rn-derivative",
+      "used_for": "The likelihood-ratio class and its identification with the full target density only under absolute continuity.",
+      "opened": true
+    },
+    {
+      "id": "thm-likelihood-ratio-change-of-measure",
+      "used_for": "Nonnegative expectation transport under AC and absolute continuity, first on input laws and then on joint laws.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Constructing the joint measure having density w composed with the input projection.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-system",
+      "used_for": "Measurable rectangles constitute a nonempty intersection-closed generating family.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-measure-uniqueness-on-a-pi-system",
+      "used_for": "Extending equality on rectangles to equality of the joint probability measures, with total-mass equality checked separately.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurable restriction of a nonnegative density to a measurable set.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-over-a-null-set-vanishes",
+      "used_for": "Independence from density values on source-null sets and the support-mismatch contradiction.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Finite-scalar homogeneity in the density proof and monotonicity in both domain-adaptation inequalities.",
+      "opened": true
+    },
+    {
+      "id": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "used_for": "Integrating pointwise indicator and loss triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+      "used_for": "Identifying integrals of measurable indicators with event probabilities.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "distribution-shift-and-domain-adaptation",
+      "to": "rademacher-complexity-and-generalization",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. No assigned proof invokes a Rademacher theorem. The population-bound remarks correctly require separate bounded-loss and complexity assumptions for empirical substitutions; they assert no unsupported finite-sample bound."
+    },
+    {
+      "from": "multimodal-contrastive-alignment-and-transfer",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "The page prerequisite is contextual. Its contrastive-loss definition and zero-shot classification algorithm invoke no adaptation inequality; the algorithm explicitly makes no accuracy or distribution-generalization guarantee."
+    },
+    {
+      "from": "foundation-models-transfer-and-scaling-evidence",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "The foundation-model definition repeats the exact supplied-kernel, target-null-set and target/source absolute-continuity conditions without asserting kernel existence. Its companion interface example correctly identifies disjoint support as violating covariate shift and claims no transfer guarantee."
+    },
+    {
+      "from": "predictive-calibration-and-uncertainty-under-shift",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "The actual source-target citation in ex-calibration-degradation-under-shift uses only the joint-law definition. Its clean/corrupted construction keeps source and target laws distinct and explicitly identifies failure of calibration/test exchangeability; it does not invoke importance weighting or claim coverage under arbitrary shift."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Fresh native refuter57 coverage correction
+
+Run: `machine-learning-all-101-2026-10-19`. Covers: `57`. Read and follow `briefs/refuter.md` and `briefs/tasks/alpha-3a-refuter.md` completely. This is one fresh independent native read, not adoption of prior coverage.
+
+Read the current exact `research/machine-learning-all-101-2026-10-19-step3-scope-57.json` refuter_scope and all assigned carriers in dependency order with actual needed supplier context. Truthfully report all required carriers in opened/not_opened and every assigned-scope finding, using the ordinary schema and read-only role. Do not edit any source, metadata, native evidence or engine state.
+
+The prior successful native report opened all four assigned subjects plus an unrelated home30 convex gradient lemma, invalidating collection. Its byte-exact original remains `research/machine-learning-all-101-2026-10-19-owner-refuter57-original-evidence/machine-learning-all-101-2026-10-19-refute-57.json`, including its incorrect home55 prose. BOTH exact original findings remain mandatory independent native home30 gates `gate:ml101-b57-3a-convex-supporting-line` and `gate:ml101-b57-3a-convex-citation` under `research/machine-learning-all-101-2026-10-19-step3-owner-foreign-refuter-routes.json` and the supported home30 continuation. No57-to30 dependency edge is asserted. Never withdraw, reclassify, or relabel those historical findings here; never treat your new coverage as home30 acceptance.
+
+Perform a complete fresh assigned-scope refutation and correct only coverage attribution. Any extra supplier context must be genuinely reachable declared context. No unrelated target may appear as assigned coverage; unopened work must remain honestly incomplete. Root repair, prior native coverage and separate home30 adjudication substitute for none of your actual assigned review. All ordinary native coverage/math gates remain required.

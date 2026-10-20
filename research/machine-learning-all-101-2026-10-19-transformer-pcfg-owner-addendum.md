@@ -1,0 +1,17 @@
+# Focused owner escalation addendum — Transformer PCFG
+
+Run: machine-learning-all-101-2026-10-19; batch 36. Delegated reviewer: /root/transformer_pcfg_repair. Final proposal cycle 2 of 2, recorded 2026-10-18T22:10:50.346967+00:00.
+
+This separate addendum preserves the native batch notes and all original dispatch/readiness history. It records a focused delegated repair, not a replacement native report, independent audit, judge verdict, actual readiness recertification or completed gate.
+
+The missing local supplier is now fully proposed as lem-2dyck-pcfg-prefix-mass-positive. For the original grammar parameter p∈(0,1), its left-to-right output is a probability law on finite-or-infinite streams. A valid prefix x has cylinder weight (p/2)^o(1−p)^c. Prefix sampling conditions only on at least k emitted bracket tokens; next-token prediction imposes no future length condition. Appending two openings and the matching inner close to every surviving length-(k−3) prefix gives an event of conditional mass p²(1−p)s_(k−3)/s_k≥p²(1−p). Flipping the outer opening is a disjoint equal-mass involution with opposite matching closing targets. The already-authored paired-prefix gap lemma then yields the all-p gap p²(1−p)²log 2.
+
+The exact finite-word masses total q=min(1,(1−p)/p). Conditioning on eventual termination gives exactly parameter a=pq=min(p,1−p), and therefore the all-p finite-word gap a²(1−a)²log 2. The laws agree at p≤1/2, including the infinite-mean critical case, and differ at p>1/2. Exact-total-length conditioning yields a uniform typed-Dyck law and is explicitly a different next-token problem. No finite-mean premise or stationary-chain claim is used.
+
+The reviewer read full Hahn §§3–6 including Theorem 6 and footnote 4; a fresh fetched PDF equals the author's cached full PDF. Hahn states the PCFG application with implicit prefix conditioning and sketches a finite-mean Markov-chain route. The exact product-cylinder law, extension-pattern paired-mass proof, and complete all-p distinction above are this local repair's arguments; they are not attributed to Hahn.
+
+Root reported acceptance of the exact-law/pairing/extinction argument before this final packaging cycle. The final aggregate additionally states the actual influence model: fixed scaled dot-product query/key/value matrices, fixed heads/depth, bounded additive token/position embeddings, globally Lipschitz positionwise maps, and globally Lipschitz logit readout followed by softmax. Its new direct reference/dependency resolves to the unchanged actual one-symbol influence supplier. The paired-prefix supplier, hard limits, parity result, Yun results and architecture carriers are unchanged. All other 19 ready carriers retain their source bytes.
+
+Current actual consumer search finds no mathematical consumer of the aggregate, only its A-page placement. The full B companion and fixed-length/unbounded example were checked; they consume separate hard/parity suppliers and require no repair. The new lemma is self-contained on this A page and adds no prerequisite-page requires. Existing feedforward page requirements remain.
+
+The proposal includes current-guarded full batch manifest/page/contract/coverage replacements, a narrowly guarded canonical ML-35 stanza and description mirror, and this separate addendum. Root owns actual source integration, input hashing, strict actual-current validation, readiness recertification and subsequent engine transitions. Proposal-only mechanical preflight does not certify actual installed sources.

@@ -1,0 +1,15 @@
+# Batch 89: repair 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 89
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: imitation-learning-and-dagger, imitation-learning-and-dagger-examples
+Items: lem-dagger-strongly-convex-follow-the-leader-regret, lem-finite-horizon-mdp-policy-occupancy, def-imitation-learning-and-expert-surrogate-loss, alg-dagger, lem-dagger-mixture-occupancy, lem-dagger-task-cost-from-expert-surrogate, thm-dagger-no-regret-reduction, thm-dagger-finite-sample-generalization, ex-behavior-cloning-covariate-shift, ex-dagger-interactive-expert-labels, ex-surrogate-loss-fails-task-cost-control
+Consolidated findings: [{"id":"alg-dagger","type":"local","reason":"Initialize the aggregate dataset before round 1 (the first round's “previous dataset” is unspecified). For exact instructions, explicitly state that the non-expert branch samples an action from the learner policy’s action distribution."},{"id":"thm-dagger-finite-sample-generalization","type":"local","reason":"The proof constructs only mN increments and a finite filtration, then invokes martingale interfaces stated for infinite sequences. Extend the filtration constantly and the increments by zeros, or prove the finite-prefix result directly. Also justify the binomial estimate used in the geometric-block bound."}]
+Authorized source files: ["items/lem-dagger-strongly-convex-follow-the-leader-regret.md","items/lem-finite-horizon-mdp-policy-occupancy.md","items/def-imitation-learning-and-expert-surrogate-loss.md","items/alg-dagger.md","items/lem-dagger-mixture-occupancy.md","items/lem-dagger-task-cost-from-expert-surrogate.md","items/thm-dagger-no-regret-reduction.md","items/thm-dagger-finite-sample-generalization.md","items/ex-behavior-cloning-covariate-shift.md","items/ex-dagger-interactive-expert-labels.md","items/ex-surrogate-loss-fails-task-cost-control.md","library/machine-learning/imitation-learning-and-dagger.md","library/machine-learning/imitation-learning-and-dagger-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

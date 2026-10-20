@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "scope": [
+    "def-variational-autoencoder",
+    "cor-vae-elbo-kl-decomposition",
+    "thm-reparameterization-gradient-under-dominated-differentiation",
+    "alg-reparameterized-variational-training",
+    "ex-vae-inference-gap"
+  ],
+  "contracts": {
+    "def-variational-autoencoder": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"This is an interface definition conditional on supplied prior, decoder, encoder and measure spaces; it does not claim such data exist on an empty latent space."},
+        {"case":"zero","status":"checked","evidence":"Definition explicitly requires 0<Z_theta(x)<infinity before forming the posterior density."},
+        {"case":"one","status":"not_applicable","reason":"The definition imposes no observation-count or latent-dimension theorem; no one-dimensional boundary result is claimed."},
+        {"case":"degenerate","status":"checked","evidence":"Definition permits q_phi=pi_theta when admissible; direct substitution into the ELBO gives log evidence in this equality case."},
+        {"case":"endpoints","status":"checked","evidence":"Definition excludes the zero and infinite evidence endpoints from posterior normalization."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Definition supplies the prior, decoder, encoder and base law explicitly and invokes no choice axiom."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The Definition specifies model, posterior, encoder and objective data; it states no biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The Definition specifies model, posterior, encoder and objective data; it states no biconditional."}
+      ]
+    },
+    "cor-vae-elbo-kl-decomposition": {
+      "citations": [
+        {
+          "fact":"F1",
+          "source":"def-variational-autoencoder",
+          "source_section":"Definition",
+          "quote":"For an admissible triple $(\\theta,\\phi,x)$ require $$q_\\phi(z\\mid x)=0\\quad\\mu_Z\\text{-almost everywhere on }\\{z:\\pi_\\theta(z\\mid x)=0\\},\\qquad \\int_{\\mathcal Z}q_\\phi(z\\mid x)\\bigl(|\\log\\gamma_\\theta(z;x)|+|\\log q_\\phi(z\\mid x)|\\bigr)\\,d\\mu_Z(z)<\\infty.$$",
+          "uses":["1.1"]
+        },
+        {
+          "fact":"F2",
+          "source":"thm-elbo-kl-decomposition",
+          "source_section":"Statement",
+          "quote":"Under AC, the final integral is the library reverse divergence $D(Q\\|\\Pi)$ and is nonnegative.",
+          "uses":["2.1"]
+        },
+        {
+          "fact":"A1",
+          "source":"def-axiom-of-choice",
+          "source_section":"Definition",
+          "quote":"Every family of nonempty sets has a choice function",
+          "uses":["2.1"]
+        }
+      ],
+      "derivations":[
+        {"id":"vae-fibre-satisfies-generic-hypotheses","claim":"The VAE slice, evidence, posterior and encoder instantiate the generic admissibility hypotheses.","step":"1.1","inputs":["given","F1"]},
+        {"id":"vae-elbo-kl-identity","claim":"Apply the generic theorem and keep its choice-free identity separate from the AC-dependent reverse-KL branch.","step":"2.1","inputs":["A1","F2","step 1.1"]}
+      ],
+      "routine_steps":[],
+      "finite_smoke":[],
+      "boundaries":[
+        {"case":"empty","status":"not_applicable","reason":"The corollary is fibrewise for one fixed observation and one admissible density; it makes no assertion about an empty data set."},
+        {"case":"zero","status":"checked","evidence":"Statement and step 1.1 explicitly require a positive finite evidence normalizer."},
+        {"case":"one","status":"not_applicable","reason":"No observation-count, sample-count or latent-dimension conclusion is stated by this fibrewise identity."},
+        {"case":"degenerate","status":"checked","evidence":"Statement and step 2.1 include q_phi=pi_theta; the density ratio is one and the ELBO gap vanishes."},
+        {"case":"endpoints","status":"checked","evidence":"Statement and step 1.1 exclude evidence zero and infinity before normalizing the posterior."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Statement separates the choice-free density-ratio identity from the AC-dependent KL identification in step 2.1."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary states an identity and an inequality, with no biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary states an identity and an inequality, with no biconditional."}
+      ]
+    },
+    "thm-reparameterization-gradient-under-dominated-differentiation": {
+      "citations": [
+        {
+          "fact":"F1",
+          "source":"def-variational-autoencoder",
+          "source_section":"Definition",
+          "quote":"the law of $g_\\phi(\\epsilon,x)$ for $\\epsilon\\sim\\rho$ is the measure with density $q_\\phi(\\cdot\\mid x)$ relative to $\\mu_Z$.",
+          "uses":["1.1"]
+        },
+        {
+          "fact":"F2",
+          "source":"def-simulation-gradient-objective-and-payoff-oracle",
+          "source_section":"Definition",
+          "quote":"A simulation payoff is a jointly measurable map $H:\\Theta\\times\\Omega\\to\\mathbb R$ such that $H(\\theta,\\cdot)$ is integrable for each $\\theta\\in\\Theta$.",
+          "uses":["1.1"]
+        },
+        {
+          "fact":"F3",
+          "source":"def-pathwise-simulation-gradient-estimator",
+          "source_section":"Definition",
+          "quote":"The estimator differentiates the simulated outcome while holding the same random input fixed.",
+          "uses":["1.1"]
+        },
+        {
+          "fact":"F4",
+          "source":"thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+          "source_section":"Statement",
+          "quote":"Thus the pathwise estimator from [[def-pathwise-simulation-gradient-estimator]] is unbiased at $\\theta_0$ and has finite coordinate variances.",
+          "uses":["2.1"]
+        },
+        {
+          "fact":"F5",
+          "source":"thm-chain-rule-for-total-derivatives",
+          "source_section":"Statement",
+          "quote":"Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses":["1.1","2.1"]
+        },
+        {
+          "fact":"F6",
+          "source":"thm-dominated-convergence",
+          "source_section":"Statement",
+          "quote":"Then $f\\in L^1(\\mu)$, $$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$ and hence $$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses":["2.1"]
+        }
+      ],
+      "derivations":[
+        {"id":"fixed-law-payoff-identification","claim":"The pushforward law identifies the noise expectation with the ELBO and supplies an integrable simulation payoff.","step":"1.1","inputs":["given","F1","F2","F3","F5"]},
+        {"id":"local-dominated-pathwise-transfer","claim":"A compact neighborhood inside the open parameter set supplies the generic common-envelope hypotheses; the published proof uses chain rule and dominated convergence.","step":"2.1","inputs":["given","F4","F5","F6","step 1.1"]},
+        {"id":"uniform-finite-data-average","claim":"Finite linearity and uniform index sampling turn the per-example pathwise gradient into an unbiased finite-average gradient.","step":"3.1","inputs":["given","step 2.1"]}
+      ],
+      "routine_steps":[],
+      "finite_smoke":[],
+      "boundaries":[
+        {"case":"empty","status":"not_applicable","reason":"The Statement assumes N is a positive integer and defines a uniform index from a nonempty finite data set."},
+        {"case":"zero","status":"not_applicable","reason":"Every fibre is assumed admissible with positive finite evidence; the theorem makes no zero-evidence assertion."},
+        {"case":"one","status":"checked","evidence":"Statement and step 3.1 include N=1, when the uniform index is deterministic and the average is one ELBO."},
+        {"case":"degenerate","status":"checked","evidence":"Statement and step 2.1 remain valid for a payoff independent of epsilon; its gradient is a deterministic square-integrable special case."},
+        {"case":"endpoints","status":"not_applicable","reason":"The parameter domain is open and eta_0 is interior; no boundary derivative or endpoint limit is claimed."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Statement and step 2.1 use a supplied base law and a finite uniform index only; no choice axiom is invoked."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem gives a sufficient envelope condition and gradient identity, not an iff characterization."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem gives a sufficient envelope condition and gradient identity, not an iff characterization."}
+      ]
+    },
+    "alg-reparameterized-variational-training": {
+      "citations":[],
+      "derivations":[],
+      "routine_steps":[],
+      "finite_smoke":[],
+      "boundaries":[
+        {"case":"empty","status":"checked","evidence":"Definition requires a positive data-set size N>=1; an empty data set is outside the algorithm's input domain."},
+        {"case":"zero","status":"checked","evidence":"Definition requires T>=1 and positive learning rates alpha_t; zero iterations and zero step sizes are excluded."},
+        {"case":"one","status":"checked","evidence":"Definition permits N=1 and T=1; the uniform index has one value and the single update is defined."},
+        {"case":"degenerate","status":"checked","evidence":"Definition's update is well-defined when G_t=0; it returns the unchanged parameter for that step."},
+        {"case":"endpoints","status":"not_applicable","reason":"The procedure is finite and requires every candidate update to stay inside the open admissible parameter domain; it makes no endpoint claim."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Definition uses an explicitly supplied noise law and a finite uniform index; no arbitrary family of choices is selected."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The algorithm specifies a procedure and makes no biconditional mathematical claim."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The algorithm specifies a procedure and makes no biconditional mathematical claim."}
+      ]
+    },
+    "ex-vae-inference-gap": {
+      "citations":[
+        {
+          "fact":"A1",
+          "source":"def-axiom-of-choice",
+          "source_section":"Definition",
+          "quote":"Every family of nonempty sets has a choice function",
+          "uses":["1.1","1.2","2.1","3.1"]
+        },
+        {
+          "fact":"F1",
+          "source":"def-variational-autoencoder",
+          "source_section":"Definition",
+          "quote":"Use this posterior only when $0<Z_\\theta(x)<\\infty$.",
+          "uses":["1.2","3.1"]
+        },
+        {
+          "fact":"F2",
+          "source":"thm-normal-normal-conjugate-update",
+          "source_section":"Statement",
+          "quote":"The evidence is finite and positive, and the posterior is $N(\\mu_n,V_n)$.",
+          "uses":["1.1"]
+        },
+        {
+          "fact":"F3",
+          "source":"def-standard-normal-and-normal-laws",
+          "source_section":"Definition",
+          "quote":"Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$.",
+          "uses":["1.2","3.1"]
+        },
+        {
+          "fact":"F3",
+          "source":"lem-normal-location-scale-density",
+          "source_section":"Statement",
+          "quote":"For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$",
+          "uses":["1.2","3.1"]
+        },
+        {
+          "fact":"F4",
+          "source":"lem-normal-location-scale-mean-and-variance",
+          "source_section":"Statement",
+          "quote":"For $m\\in\\mathbb R$, $\\sigma\\ge0$, and a real random variable $X$ with law $N(m,\\sigma^2)$, $$E[X]=m,\\qquad \\operatorname{Var}(X)=\\sigma^2.$$",
+          "uses":["1.2","3.1"]
+        },
+        {
+          "fact":"F5",
+          "source":"def-kullback-leibler-divergence",
+          "source_section":"Definition",
+          "quote":"This convention is directional: the first argument must be absolutely continuous with respect to the second for the integral formula to apply.",
+          "uses":["1.2"]
+        },
+        {
+          "fact":"F6",
+          "source":"cor-vae-elbo-kl-decomposition",
+          "source_section":"Statement",
+          "quote":"Under the Axiom of Choice, the final integral is the library reverse-KL divergence $D_{\\rm KL}(q_\\phi\\mu_Z\\|\\pi_\\theta\\mu_Z)$ and is nonnegative;",
+          "uses":["2.1","3.1"]
+        }
+      ],
+      "derivations":[
+        {"id":"conjugate-posterior","claim":"Substitute the prior, noise variance, sample count and sample mean into the published Normal-Normal update.","step":"1.1","inputs":["given","A1","F2"]},
+        {"id":"admissible-positive-gap","claim":"Verify encoder support and log-integrability, then integrate the explicit equal-variance normal log ratio.","step":"1.2","inputs":["A1","F1","F3","F4","F5","step 1.1"]},
+        {"id":"elbo-gap-equals-divergence","claim":"Use the AC-dependent VAE identity to turn the computed divergence into the exact positive evidence gap.","step":"2.1","inputs":["A1","F6","step 1.2"]},
+        {"id":"collapsed-latent-state","claim":"For a decoder independent of z, the posterior equals the prior; choosing q equal to it gives zero divergence.","step":"3.1","inputs":["A1","F1","F3","F4","F6"]}
+      ],
+      "routine_steps":[],
+      "finite_smoke":[
+        {
+          "check":"normal-normal-finite-n-posterior",
+          "asserts":"the posterior is $N(8/3,4/9)"
+        }
+      ],
+      "boundaries":[
+        {"case":"empty","status":"checked","evidence":"Statement fixes two observed Gaussian values and a nonempty encoder family; step 1.1 uses n=2."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 invokes the conjugate theorem's finite positive evidence conclusion, and step 3.1 has positive normal evidence."},
+        {"case":"one","status":"not_applicable","reason":"The positive-gap example fixes two observations; it makes no one-observation update claim."},
+        {"case":"degenerate","status":"checked","evidence":"Statement and step 3.1 include q=posterior=prior, giving the exact zero-gap collapsed case."},
+        {"case":"endpoints","status":"not_applicable","reason":"The claimed positive gap uses the interior encoder mean m=0; no endpoint-mean optimizer claim is made."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Statement assumes AC and steps 1.1–2.1 use only the cited normal and ELBO suppliers under that axiom."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example gives two explicit Gaussian models and no biconditional claim."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example gives two explicit Gaussian models and no biconditional claim."}
+      ]
+    }
+  }
+}

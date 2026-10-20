@@ -15,6 +15,7 @@ landmark: true
 short: "algebra of continuous functions"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-algebra-of-continuous-functions.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -39,13 +40,13 @@ pipeline_run: null
 
 Let $A \subseteq \mathbb{R}$, let $f, g : A \to \mathbb{R}$, let
 $\alpha \in \mathbb{R}$ and let $c \in A$. Suppose $f$ and $g$ are continuous at
-$c$ ([[def-continuity-real]]). Then:
+$c$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then:
 
 1. $f + g$, $\alpha f$ and $fg$ are continuous at $c$;
 2. $|f|$, the function $x \mapsto |f(x)|$, is continuous at $c$;
 3. $\max\{f,g\}$ and $\min\{f,g\}$, defined pointwise by
    $x \mapsto \max\{f(x), g(x)\}$ and $x \mapsto \min\{f(x), g(x)\}$
-   ([[def-max-min]]), are continuous at $c$;
+   (Maximum and minimum of a set), are continuous at $c$;
 4. if $g(c) \ne 0$ then, writing $A_0 := \{\, x \in A : g(x) \ne 0 \,\}$, the
    point $c$ lies in $A_0$ and the quotient
    $(f/g)|_{A_0} : A_0 \to \mathbb{R}$, $x \mapsto f(x)/g(x)$, is continuous at
@@ -56,7 +57,7 @@ Moreover, with no hypothesis at all:
 5. every constant function $A \to \mathbb{R}$ and the identity
    $\mathrm{id} : A \to \mathbb{R}$, $x \mapsto x$, are continuous on $A$; hence
    so is $x \mapsto x^{n}$ for every $n \in \mathbb{N}$
-   ([[def-integer-power]]), and hence so is every **polynomial function**
+   (Integer powers $a^m$), and hence so is every **polynomial function**
    $x \mapsto a_0 + a_1 x + \dots + a_n x^{n}$ with real coefficients.
 
 Consequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,
@@ -69,9 +70,19 @@ $g(c) \ne 0$, not "$g$ nowhere zero"; what it buys is that $c$ itself lies in
 the smaller domain, which is what makes continuity there mean anything.
 
 **Nothing here is proved through a sequence.** Claims 1 and 4 are read off from
-[[thm-algebra-of-function-limits]], which is itself proved from $\varepsilon$
+Sums, scalar multiples, products and quotients of function limits, the quotient under the hypothesis that the denominator limit is nonzero, which is itself proved from $\varepsilon$
 and $\delta$, and claims 2, 3 and 5 are proved directly below. So no choice
 principle is used anywhere in this item.
+
+## Statement references
+
+[[def-continuity-real]]
+
+[[def-max-min]]
+
+[[def-integer-power]]
+
+[[thm-algebra-of-function-limits]]
 
 ## Facts & Assumptions
 

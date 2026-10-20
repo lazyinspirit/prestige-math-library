@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "66",
+  "source_coverage_file": "research/machine-learning-all-101-2026-10-19-batch-66.coverage.json",
+  "source_fetch_check": {
+    "command": "node tools/source-fetch-check.mjs --coverage research/machine-learning-all-101-2026-10-19-batch-66.coverage.json --stamp",
+    "result": "source-fetch-check: 2/2 source(s) fetch-verified (2 newly stamped); source-fetch-check: 2/2 source(s) resolved (0 documented drops; not fetch stamps)",
+    "exit_code": 0,
+    "recovery_retries_added": 0,
+    "prior_attempts_reused": false
+  },
+  "author_reading_scope": "Inspected the complete relevant mathematical passages in Ho, Jain, and Abbeel: §2 Eqs. (1)–(7), §3.2–§3.4 and Algorithm 1, Appendix A Eqs. (17)–(22), plus §4.1–§4.3 only to identify empirical claims as out of scope. Inspected the complete relevant passages of Prince, Chapter 18: the forward diffusion kernel, conditioned Gaussian posterior, ELBO derivation, and simplification. No empirical sample-quality result or finite-time terminal-prior equality is imported. Both full source bodies were inspected before fetch stamps were recorded. No retrieval failure occurred.",
+  "sources": [
+    {
+      "title": "Jonathan Ho, Ajay Jain, and Pieter Abbeel, Denoising Diffusion Probabilistic Models (2020), arXiv:2006.11239",
+      "url": "https://arxiv.org/pdf/2006.11239",
+      "page_scopes": [
+        "discrete-diffusion-and-variational-objectives",
+        "discrete-diffusion-and-variational-objectives-examples"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T19:26:57.140Z",
+        "bytes": 10267274,
+        "sha256_16": "aee5e07a802e8dfd",
+        "kind": "pdf",
+        "pages": 25
+      },
+      "author_read_locators": [
+        {
+          "locator": "§2 Background and Eqs. (1)–(7), PDF pp. 2–3; §3.2–§3.4 and Algorithm 1, PDF pp. 3–5; Appendix A Eqs. (17)–(22), PDF pp. 13–14.",
+          "supported_items": [
+            "def-forward-gaussian-diffusion-chain",
+            "thm-gaussian-forward-and-posterior-kernels",
+            "lem-isotropic-gaussian-kl-formula",
+            "thm-ddpm-elbo-decomposition",
+            "alg-epsilon-prediction-diffusion-training",
+            "ex-scalar-gaussian-diffusion-chain",
+            "ex-weighted-and-simple-diffusion-losses"
+          ],
+          "disposition": "The paper supplies the forward/reverse model conventions, closed marginal, conditioned posterior, endpoint and per-step ELBO terms, epsilon parameterization, weighted KL loss, simple unweighted objective, and telescoping derivation. The local theorem supplies the complete hypotheses and proof. The paper's discretized decoder for quantized image data is out of scope; the assigned model uses a positive-variance Gaussian likelihood on Euclidean data. Section 4 sample-quality, FID, likelihood-comparison, and progressive-coding claims are not imported."
+        }
+      ]
+    },
+    {
+      "title": "Simon J. D. Prince, Understanding Deep Learning, Chapter 18: Diffusion models (2026), pp. 363–387; full online chapter transcription",
+      "url": "https://csci4052u.science.ontariotechu.ca/generative_models/chapter_18_diffusion_models/notes.html",
+      "page_scopes": [
+        "discrete-diffusion-and-variational-objectives",
+        "discrete-diffusion-and-variational-objectives-examples"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T19:26:59.285Z",
+        "bytes": 238416,
+        "sha256_16": "cd1e36b4567a5e43",
+        "kind": "html",
+        "text_chars": 92130
+      },
+      "author_read_locators": [
+        {
+          "locator": "Chapter 18, “The diffusion kernel and the marginals,” “The reverse process and the tractable conditional,” “The diffusion ELBO,” and “Simplifying it”; full chapter pages 363–387, online text lines 204–221, 269–288, and 313–333.",
+          "supported_items": [
+            "def-forward-gaussian-diffusion-chain",
+            "thm-gaussian-forward-and-posterior-kernels",
+            "lem-isotropic-gaussian-kl-formula",
+            "thm-ddpm-elbo-decomposition",
+            "alg-epsilon-prediction-diffusion-training",
+            "ex-scalar-gaussian-diffusion-chain",
+            "ex-weighted-and-simple-diffusion-losses"
+          ],
+          "disposition": "The chapter independently derives the Gaussian marginal, distinguishes the generally non-Gaussian unconditional reverse law from the tractable posterior conditioned on x0, and reduces the denoising KL to squared mean/noise error. Its terminal-prior cancellation is explicitly approximate for large noise; this batch retains the exact finite-T prior KL. Its implementation and empirical sample-quality claims are not imported."
+        }
+      ]
+    }
+  ],
+  "additional_logical_suppliers": [
+    {
+      "id": "thm-multivariate-normal-conditional-law",
+      "path": "items/thm-multivariate-normal-conditional-law.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "AC; jointly Gaussian blocks with positive-semidefinite block covariance; the observed covariance B must be positive definite. The conditional mean is a+CB^{-1}(y-b) and covariance A-CB^{-1}C^T; the other covariance blocks may be singular.",
+      "use": "Derive q(x_{t-1}|x_t,x_0). The local proof checks B=(1-bar-alpha_t)I_d is positive definite."
+    },
+    {
+      "id": "def-variational-family-and-elbo",
+      "path": "items/def-variational-family-and-elbo.md",
+      "status": "published",
+      "read": "Complete Definition body and metadata.",
+      "interface": "Requires a measurable nonnegative gamma with Z in (0,infinity), normalized q, support q=0 almost everywhere on {pi=0}, and finite integral of q(|log gamma|+|log q|).",
+      "use": "Instantiate the path-space target gamma(x_{1:T})=p_theta(x_{0:T}) and forward path density."
+    },
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "path": "items/thm-elbo-kl-decomposition.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "The density-ratio identity is choice-free; identifying it with the library reverse KL and invoking KL nonnegativity require AC and the variational-family hypotheses.",
+      "use": "Obtain log p_theta(x_0)=ELBO+KL after verifying path-space propriety, support, and integrability."
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "path": "items/thm-nondegenerate-multivariate-normal-law-has-density.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "AC and positive-definite covariance are required for the Lebesgue Gaussian density; singular normal laws remain defined but are not covered by this density formula.",
+      "use": "Justify every forward and reverse Gaussian density, whose variances are strictly positive."
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "path": "items/def-multivariate-normal-law.md",
+      "status": "published",
+      "read": "Complete Definition, Facts & Assumptions, and Proof.",
+      "interface": "AC; finite-dimensional Gaussian laws are characterized by their scalar projections, admit positive-semidefinite covariance, and have the stated mean and covariance.",
+      "use": "Supply Gaussian law notation, moments, and projection characterization."
+    },
+    {
+      "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+      "path": "items/lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "A finite mutually independent family of Gaussian vectors is jointly multivariate normal, including singular covariance blocks; AC is used through the normal, uniqueness, and Cramer–Wold interfaces.",
+      "use": "Show the adjacent forward states are jointly Gaussian before applying the conditional-law theorem."
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "path": "items/def-kullback-leibler-divergence.md",
+      "status": "published",
+      "read": "Complete Definition body and metadata.",
+      "interface": "Directional divergence: the first measure must be absolutely continuous with respect to the second; under AC it is the integral of the log Radon–Nikodym density ratio.",
+      "use": "Fix the direction of every Gaussian and path-space reverse KL."
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "path": "items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md",
+      "status": "published",
+      "read": "Complete Definition body and metadata.",
+      "interface": "Expectation is the integral against the probability law, finite for integrable real or complex variables.",
+      "use": "Interpret q-expectations and establish finite Gaussian log-density terms."
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "path": "items/def-law-or-distribution-of-a-random-element.md",
+      "status": "published",
+      "read": "Complete Definition body and metadata.",
+      "interface": "The law of a random element is its pushforward probability measure.",
+      "use": "Interpret forward and reverse path laws defined by their densities."
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "path": "items/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.md",
+      "status": "published",
+      "read": "Complete Definition and Remarks.",
+      "interface": "lambda_d is the restriction of the Lebesgue outer set function to its Caratheodory-measurable sets; the definition itself does not claim sigma-algebra or completeness results.",
+      "use": "Specify the finite-dimensional base measure for Gaussian and path densities."
+    },
+    {
+      "id": "def-natural-logarithm",
+      "path": "items/def-natural-logarithm.md",
+      "status": "published",
+      "read": "Complete Definition and Remarks.",
+      "interface": "For x>0, log x is the unique y with exp(y)=x; its domain is positive reals.",
+      "use": "Interpret all Gaussian-density and ELBO logarithms, whose arguments are positive."
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "path": "items/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "Finite products of sigma-finite measures exist, are sigma-finite, and have the rectangle formula.",
+      "use": "Justify the finite Euclidean path-space product measure."
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "path": "items/thm-tonelli-theorem-for-sigma-finite-product-spaces.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "For nonnegative product-measurable functions on sigma-finite factors, both iterated integrals are measurable and equal the product integral.",
+      "use": "Normalize finite forward and reverse path densities by successive integration."
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "path": "items/thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets.md",
+      "status": "published",
+      "read": "Complete Statement, Facts & Assumptions, and Proof.",
+      "interface": "Countable Choice suffices to identify finite product Lebesgue measure with Euclidean Lebesgue measure on Borel sets; AC supplies Countable Choice.",
+      "use": "Identify lambda_d products with the Euclidean path-space Lebesgue measure."
+    }
+  ],
+  "unresolved_prerequisites": [],
+  "alpha_adjudication": {
+    "report": "research/machine-learning-all-101-2026-10-19-alpha-batch-66-3a.md",
+    "added_lemma": "lem-diffusion-objective-estimator-expectation",
+    "source": "https://arxiv.org/pdf/2006.11239",
+    "locators": [
+      "Eq. (5), PDF p. 3",
+      "Eqs. (12),(14) and Algorithm 1, PDF pp. 4–5",
+      "Appendix A Eqs. (17)–(22), PDF pp. 13–14"
+    ],
+    "derivation": "Finite independent uniform-index averaging of the already proved local exact DDPM decomposition; every mode-specific expectation is finite. No discretized decoder or empirical assertion imported."
+  }
+}

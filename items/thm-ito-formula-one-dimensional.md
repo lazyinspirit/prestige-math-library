@@ -16,15 +16,16 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.3"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-ito-formula-one-dimensional.json
   audited: 2026-09-22
 ---
 
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Let
+Elementary predictable Brownian integrands. Let
 $X_t=X_0+\int_0^tb_s\,ds+\int_0^t\sigma_s\,dB_s$ be a real continuous Brownian
-Ito process [[def-continuous-brownian-ito-process]], under its usual-filtration
+Ito process Continuous Brownian Ito processes, under its usual-filtration
 conditions, and let
 $f\in C^{1,2}([0,\infty)\times\mathbb R)$, meaning that $f$, its first time
 derivative $\partial_tf$ and its first two space derivatives
@@ -42,11 +43,19 @@ makes $X$ continuous everywhere and its coefficient path integrals locally
 finite everywhere. All integrands below refer to these representatives.
 The stochastic integral is the localized Ito integral of the predictable
 locally square-integrable process $\sigma_s\partial_xf(s,X_s)$
-[[thm-localized-ito-integral]] and the Lebesgue integral is the pathwise
+Localized Ito integral and the Lebesgue integral is the pathwise
 integral of the progressively measurable process
 $s\mapsto(\partial_tf+b\partial_xf+\tfrac12\sigma^2\partial^2_xf)(s,X_s)$,
 which is pathwise integrable and finite almost surely for every $t$. In differential notation,
 $df(t,X_t)=(\partial_tf+b\partial_xf+\tfrac12\sigma^2\partial^2_xf)(t,X_t)\,dt+\sigma_t\partial_xf(t,X_t)\,dB_t$.
+
+## Statement references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-continuous-brownian-ito-process]]
+
+[[thm-localized-ito-integral]]
 
 ## Facts & Assumptions
 

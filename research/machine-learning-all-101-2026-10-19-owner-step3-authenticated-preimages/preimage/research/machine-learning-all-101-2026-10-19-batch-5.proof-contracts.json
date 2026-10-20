@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "def-rademacher-complexity",
+    "thm-rademacher-contraction-inequality",
+    "thm-rademacher-symmetrization-bound",
+    "thm-rademacher-uniform-generalization",
+    "cor-erm-excess-risk-from-uniform-deviation",
+    "ex-finite-class-rademacher-complexity",
+    "ex-bounded-linear-predictor-rademacher-bound",
+    "ex-clipped-linear-class-shows-loose-radius-bound"
+  ],
+  "contracts": {
+    "def-rademacher-complexity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The function class is required nonempty and the sample size is at least one. Hence the fixed-member lower bound and the division by m in the empirical sign average are defined, and the sign cube has its finite positive number of elements.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The family detector identifies sign sums and the class supremum, but both index ranges are explicitly nonempty in the Definition; an empty loss class is not an admitted boundary."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for the singleton class containing the zero function, both complexities are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a singleton class is allowed and its one-sided sign average is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a singleton constant loss has empirical and expected complexity zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: m is a positive integer and every loss takes values in the closed interval [0,1], so the averages are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the class is supplied as nonempty and no member is selected from a family of classes; no choice axiom is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item fixes the nonabsolute sign-average convention and then its expectation over samples. Comparing another normalization in source notes introduces no equivalence theorem; the nonnegative range follows by averaging any fixed member of the supplied class.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "This item fixes the nonabsolute sign-average convention and then its expectation over samples. Comparing another normalization in source notes introduces no equivalence theorem; the nonnegative range follows by averaging any fixed member of the supplied class.",
+            "item_sha256": "86f28736c03a49936f6e8bf779e91085022161372c48cd45435dacbcc02dc8a5",
+            "row_sha256": "75101219e34723090d1f4051872c7bdf9d81a3994800cfd4e985c3ea258ae2a5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item fixes the nonabsolute sign-average convention and then its expectation over samples. Comparing another normalization in source notes introduces no equivalence theorem; the nonnegative range follows by averaging any fixed member of the supplied class.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "This item fixes the nonabsolute sign-average convention and then its expectation over samples. Comparing another normalization in source notes introduces no equivalence theorem; the nonnegative range follows by averaging any fixed member of the supplied class.",
+            "item_sha256": "86f28736c03a49936f6e8bf779e91085022161372c48cd45435dacbcc02dc8a5",
+            "row_sha256": "cc4768b43a298f0beeeeb6f7268862c87063e72b4ec09d27c697eae995503419"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-rademacher-contraction-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-one-sided-empirical-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $S=(z_1,\\ldots,z_m)$ be a fixed sample in a measurable space $\\mathcal X$, and let $\\mathcal F$ be a nonempty finite or countable class of measurable real functions such that the displayed supremum is finite and measurable on the finite sign space. Let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs. The **one-sided empirical Rademacher complexity** is\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal F):=\\frac1m\\,\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\sum_{i=1}^m\\sigma_i f(z_i).$$\n\nThere is no absolute value in this definition and $0$ need not belong to $\\mathcal F$. It differs from the absolute-value complexity $m^{-1}\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}|\\sum_i\\sigma_i f(z_i)|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-one-sided-coordinate-rademacher-contraction",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $z_1,\\ldots,z_m$ be fixed, and let $\\mathcal F$ be a nonempty finite class of real-valued functions on their domain. For each $i$, let $\\Phi_i:\\mathbb R\\to\\mathbb R$ satisfy $|\\Phi_i(x)-\\Phi_i(y)|\\le L|x-y|$ for all $x,y\\in\\mathbb R$, with a common $L\\ge0$. Then\n\n$$\\frac1m\\,\\mathbb E_\\sigma\\sup_{f\\in\\mathcal F}\\sum_{i=1}^m\\sigma_i\\Phi_i(f(z_i))\\le L\\,\\widehat{\\mathfrak R}_S(\\mathcal F).$$\n\nHere $S=(z_1,\\ldots,z_m)$ and $\\widehat{\\mathfrak R}_S(\\mathcal F):=m^{-1}2^{-m}\\sum_{\\sigma\\in\\{-1,1\\}^m}\\sup_{f\\in\\mathcal F}\\sum_i\\sigma_i f(z_i)$. Expectations over signs mean this uniform finite average; no measurability on the functions' domain is needed. For measurable classes on a measurable space this agrees with [[def-one-sided-empirical-rademacher-complexity]]. Equivalently, the unnormalized left expectation is at most $L$ times the unnormalized one-sided supremum on the right.\n\nThe same holds for a countable class when both suprema are finite for every sign vector. No condition $\\Phi_i(0)=0$ is required; additive constants cancel because the proof compares coordinate differences.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $\\mathcal H$ is finite or countable, [F1] identifies the right-hand side with the published supplier's one-sided normalization, and [F2] gives the inequality with exactly the stated common Lipschitz constant and no zero-at-zero assumption.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Otherwise, use the specified countable subclass $\\mathcal H_0$. For every sign vector, its transformed and untransformed suprema equal those over $\\mathcal H$ by hypothesis; averaging over the finite sign space therefore gives the same two quantities. Applying step 1.1 to $\\mathcal H_0$ proves the displayed inequality for $\\mathcal H$.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both the original function class and any supplied countable determining subclass are nonempty. The fixed sample has m>=1 points, so neither sign-supremum normalization nor the subclass reduction in step 2.1 uses an empty aggregate.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The detected family is the explicitly nonempty countable determining subclass, while the sign sum has a positive observation count; the hypothesis rules out the empty-class obstruction."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: when L=0, each coordinate map is constant and both expected sign suprema are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for a singleton class both sign averages are zero, including when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: classes with identical sample traces give the same finite sign suprema on either side."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m≥1 and L≥0, including m=1 and L=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: finite/countable classes or the explicitly specified countable subclass suffice; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lipschitz assumption supplies a one-way inequality between transformed and raw sign suprema. A specified countable subclass transfers that estimate in step 2.1; the theorem does not infer Lipschitz regularity from a complexity inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The Lipschitz assumption supplies a one-way inequality between transformed and raw sign suprema. A specified countable subclass transfers that estimate in step 2.1; the theorem does not infer Lipschitz regularity from a complexity inequality.",
+            "item_sha256": "86cb9f1c5586f42f18a166e6a75f4962ae685a1a4b57a7b4e0579ec9858a6b9e",
+            "row_sha256": "c513c5a444a721af53936768f1d5a7ee5e777421d63383911bf3ec21ef33eace"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lipschitz assumption supplies a one-way inequality between transformed and raw sign suprema. A specified countable subclass transfers that estimate in step 2.1; the theorem does not infer Lipschitz regularity from a complexity inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The Lipschitz assumption supplies a one-way inequality between transformed and raw sign suprema. A specified countable subclass transfers that estimate in step 2.1; the theorem does not infer Lipschitz regularity from a complexity inequality.",
+            "item_sha256": "86cb9f1c5586f42f18a166e6a75f4962ae685a1a4b57a7b4e0579ec9858a6b9e",
+            "row_sha256": "78295c72e94b4dc7f91bef0a26906d20d6d675e468dd177bfb165ac3ada50a91"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-rademacher-symmetrization-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For each fixed sample $S$ and each $g\\in\\mathcal G$, [F2]–[F3] give $\\mathbb E_{S'}P_m'g=Pg$, so $Pg-P_mg=\\mathbb E_{S'}(P_m'g-P_mg)$. For any bounded family $X_g$, $\\sup_g\\mathbb E X_g\\le\\mathbb E\\sup_gX_g$, since each $\\mathbb E X_g$ is at most $\\mathbb E\\sup_hX_h$. Applying this conditionally on $S$ and integrating, with [F5] to identify the iterated and joint product expectations, gives $\\mathbb E_S\\sup_g(Pg-P_mg)\\le\\mathbb E_{S,S'}\\sup_g(P_m'g-P_mg)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], the $2m$ coordinates of $(S,S')$ have product law $P^{2m}$. For each fixed sign vector, swap $Z_i$ and $Z_i'$ exactly when $\\sigma_i=-1$. This coordinate permutation preserves the product law by [F4] and sends each difference $g(Z_i')-g(Z_i)$ to $\\sigma_i(g(Z_i')-g(Z_i))$. Averaging over the finite sign space gives $\\mathbb E_{S,S'}\\sup_g(P_m'g-P_mg)=\\mathbb E_{S,S',\\sigma}\\sup_g m^{-1}\\sum_i\\sigma_i(g(Z_i')-g(Z_i))$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For every pair of samples and sign vector, subadditivity gives $\\sup_g m^{-1}\\sum_i\\sigma_i(g(Z_i')-g(Z_i))\\le\\sup_g m^{-1}\\sum_i\\sigma_i g(Z_i')+\\sup_g m^{-1}\\sum_i(-\\sigma_i)g(Z_i)$. The first term has expectation $\\mathfrak R_m(\\mathcal G)$ by [F1] and the law of $S'$; the second has the same expectation because $-\\sigma$ is uniform on the sign cube and $S$ has law $P^m$ by [F2]. Combining with steps 1.1–2.1 proves the result.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonempty class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: for the singleton zero-function class, the deviation and expected complexity are both zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the bound is defined for m=1 and a singleton class."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a singleton constant loss has zero one-sided expected deviation and complexity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m≥1 and every g takes values in [0,1], so all integrals and suprema are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1: only finite products and sign averages are used; no choice axiom is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Exchanging expectation and supremum gives an inequality, and splitting the signed sample difference gives another upper bound. The Statement expressly claims only a one-sided expectation estimate, without reverse symmetrization or an equivalent tail condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Exchanging expectation and supremum gives an inequality, and splitting the signed sample difference gives another upper bound. The Statement expressly claims only a one-sided expectation estimate, without reverse symmetrization or an equivalent tail condition.",
+            "item_sha256": "544b3039ab478f466433d0decd3e99de88e07a88addcada76f90471955e3db8c",
+            "row_sha256": "f466b786b472f0270322524e80a4cc2dec242bd3f61e21c82b5ce01568e03501"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Exchanging expectation and supremum gives an inequality, and splitting the signed sample difference gives another upper bound. The Statement expressly claims only a one-sided expectation estimate, without reverse symmetrization or an equivalent tail condition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Exchanging expectation and supremum gives an inequality, and splitting the signed sample difference gives another upper bound. The Statement expressly claims only a one-sided expectation estimate, without reverse symmetrization or an equivalent tail condition.",
+            "item_sha256": "544b3039ab478f466433d0decd3e99de88e07a88addcada76f90471955e3db8c",
+            "row_sha256": "e9c3dc335846df132dbefe0e62f36def4d3ac60894cc5d17368edc261b59e260"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-rademacher-uniform-generalization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rademacher-symmetrization-bound",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space, let $m\\ge1$, and let $\\mathcal G$ be a nonempty class of measurable functions $g:\\mathcal Z\\to[0,1]$. Let $S=(Z_1,\\ldots,Z_m)$ be IID with law $P$, let $S'=(Z_1',\\ldots,Z_m')$ be an independent IID copy on a finite product probability extension, and let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs independent of both samples. Write $P_mg=m^{-1}\\sum_i g(Z_i)$ and $P_m'g=m^{-1}\\sum_i g(Z_i')$. Assume the random suprema $\\sup_g(Pg-P_mg)$, $\\sup_g(P_m'g-P_mg)$, $\\sup_g\\sum_i\\sigma_i(g(Z_i')-g(Z_i))$, and $\\sup_g\\sum_i\\sigma_i g(Z_i)$ are measurable on their respective product sigma algebras. Then, with $\\mathfrak R_m(\\mathcal G)$ the expected one-sided Rademacher complexity,\n\n$$\\mathbb E_S\\sup_{g\\in\\mathcal G}(Pg-P_mg)\\le2\\mathfrak R_m(\\mathcal G).$$\n\nThis is a one-sided expectation inequality; it does not assert a tail bound or an absolute-value deviation bound. No choice axiom is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mcdiarmid-bounded-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, let $Z_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be independent random elements, meaning measurable maps ([[def-random-element-and-real-random-variable]]), with laws $\\mu_i$ given by pushforward ([[def-law-or-distribution-of-a-random-element]]). Put $\\mu=\\bigotimes_{i=1}^n\\mu_i$ on the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be product-measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic constants $c_i\\ge0$ satisfy\n$$|f(z_1,\\ldots,z_i,\\ldots,z_n)-f(z_1,\\ldots,z_i',\\ldots,z_n)|\\le c_i$$\nfor every fixed setting of the other coordinates and every $z_i,z_i'$. The independent product-law theorem identifies the law of $Z=(Z_1,\\ldots,Z_n)$ as $\\mu$. Applying change of variables for expectation first to $|f|$ and then to $f$ makes $f(Z)$ integrable and gives $\\mathbb E f(Z)=\\int f\\,d\\mu$. Put $V=\\sum_{i=1}^n c_i^2$. For $t>0$, if $V>0$ then\n$$\\mathbb P\\bigl(f(Z_1,\\ldots,Z_n)-\\mathbb E f(Z_1,\\ldots,Z_n)\\ge t\\bigr)\\le\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ this probability is $0$. The same bound holds for the lower tail, so the two-sided probability is at most $2e^{-2t^2/V}$ when $V>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $\\Psi(S):=\\sup_{g\\in\\mathcal G}(Pg-P_mg)$. Changing one coordinate changes each term in this supremum by at most $1/m$, hence $|\\Psi(S)-\\Psi(S')|\\le1/m$. By the Statement, $\\Psi$ is measurable, and it is bounded because $0\\le g\\le1$. Since $0<\\delta<1$, [F5] and $m\\ge1$ give $t:=\\sqrt{\\log(1/\\delta)/(2m)}>0$; [F4]–[F5] give $\\exp(-2mt^2)=\\delta$. McDiarmid [F3] with $c_i=1/m$ gives $\\Psi(S)\\le\\mathbb E\\Psi(S)+t$ with probability at least $1-\\delta$, and [F2] bounds its expectation by $2\\mathfrak R_m(\\mathcal G)$. This proves the first one-sided bound.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For each fixed sample, $\\widehat{\\mathfrak R}_S(\\overline{\\mathcal G})=\\mathbb E_\\sigma[m^{-1}\\sum_i\\sigma_i+\\sup_{g\\in\\mathcal G}m^{-1}\\sum_i(-\\sigma_i)g(Z_i)]$. The first term has mean zero and $-\\sigma$ has the same uniform law as $\\sigma$, so this equals $\\widehat{\\mathfrak R}_S(\\mathcal G)$; taking expectations gives $\\mathfrak R_m(\\overline{\\mathcal G})=\\mathfrak R_m(\\mathcal G)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each fixed sign vector, changing one observation changes every $m^{-1}\\sum_i\\sigma_i g(Z_i)$ by at most $1/m$, since $g$ takes values in $[0,1]$; the same bound holds for the supremum and then for its sign average $\\widehat{\\mathfrak R}_S(\\mathcal G)$. This statistic is bounded and measurable by the Statement. With $t=\\sqrt{\\log(1/\\delta)/(2m)}>0$ as in step 1.1, [F3] applied to its negative gives $\\mathfrak R_m(\\mathcal G)\\le\\widehat{\\mathfrak R}_S(\\mathcal G)+t$ with probability at least $1-\\delta$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "For $h=1-g$, $Ph-P_mh=P_mg-Pg$. Apply step 1.1 to $\\mathcal G$ and $\\overline{\\mathcal G}$ with failure probability $\\delta/2$ each. By [F7] and step 1.2, both deviations are at most $2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\log(2/\\delta)/(2m)}$ except on an event of probability at most $\\delta$. This proves the first two-sided bound.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Apply step 1.1 with failure probability $\\delta/2$ and step 2.1 with failure probability $\\delta/2$. By [F7], both events hold with probability at least $1-\\delta$. Since $2/\\delta>1$, [F5] gives $t:=\\sqrt{\\log(2/\\delta)/(2m)}>0$; combining the two bounds gives $\\Psi(S)\\le2\\mathfrak R_m(\\mathcal G)+t\\le2\\widehat{\\mathfrak R}_S(\\mathcal G)+3t$. This is the second one-sided guarantee.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Apply step 3.1 to $\\mathcal G$ and $\\overline{\\mathcal G}$ with failure probability $\\delta/2$ each. Their complexities agree by step 1.2, and their upper deviations are $\\sup_g(Pg-P_mg)$ and $\\sup_g(P_mg-Pg)$, respectively. By [F7] the two bounds hold together with probability at least $1-\\delta$, giving the last two-sided bound with $\\log(4/\\delta)$.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The nonempty bounded loss class gives a finite deviation supremum, and its complemented class remains nonempty in step 1.2. Positive m defines all empirical averages and makes the oscillation-square sum in step 1.1 equal to the positive value 1/m.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The family detector sees the complemented loss class and empirical sums, whose nonempty index sets follow directly from the Statement rather than an assumed empty-family convention."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: for the singleton class g=0, both complexities and all deviations vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a singleton loss class is allowed and has zero one-sided Rademacher complexity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a singleton constant loss has zero deviation; the concentration terms remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m≥1 and 0<delta<1 make all four confidence terms defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed only through McDiarmid; the expectation symmetrization supplier remains choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each of the four guarantees is a separate upper probability bound obtained from concentration and complementing losses. They are not equivalent events: the empirical-complexity and expected-complexity bounds are connected only by another high-probability inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Each of the four guarantees is a separate upper probability bound obtained from concentration and complementing losses. They are not equivalent events: the empirical-complexity and expected-complexity bounds are connected only by another high-probability inequality.",
+            "item_sha256": "0e20531c2c57e0a8a4c958e96d10adcd17f3b03a40a220c5f7ea88f9a4c718d9",
+            "row_sha256": "92809fa819b8bddef3358ffb4966a7f2e58a45cac74ccd8b7f672431df8cf4a6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Each of the four guarantees is a separate upper probability bound obtained from concentration and complementing losses. They are not equivalent events: the empirical-complexity and expected-complexity bounds are connected only by another high-probability inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Each of the four guarantees is a separate upper probability bound obtained from concentration and complementing losses. They are not equivalent events: the empirical-complexity and expected-complexity bounds are connected only by another high-probability inequality.",
+            "item_sha256": "0e20531c2c57e0a8a4c958e96d10adcd17f3b03a40a220c5f7ea88f9a4c718d9",
+            "row_sha256": "9cea5a460c7251cfa21a07a94a0bca31cc0f22bc0f17938b7a2d0c73090d6ebb"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "cor-erm-excess-risk-from-uniform-deviation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Fix a sample $S$ and a nonempty class $\\mathcal F$ of predictors. Its **empirical minimum** is $\\widehat R_S^*(\\mathcal F):=\\inf_{f\\in\\mathcal F}\\widehat R_S(f)\\in[0,+\\infty]$. An **exact empirical risk minimizer** is a predictor $f\\in\\mathcal F$ with $\\widehat R_S(f)=\\widehat R_S^*(\\mathcal F)$. If the infimum is finite but is not attained, no exact minimizer exists. If the infimum is $+\\infty$, nonemptiness implies that every member has infinite empirical risk and is an exact minimizer.\n\nFor finite $\\eta\\ge0$, a predictor $f\\in\\mathcal F$ is an **$\\eta$-approximate empirical risk minimizer** if either the empirical minimum is $+\\infty$ and $f$ is an exact minimizer, or the empirical minimum is finite and $f$ has finite empirical risk at most $\\widehat R_S^*(\\mathcal F)+\\eta$. The membership requirement $f\\in\\mathcal F$ applies in both branches. Thus the definition never forms $+\\infty+\\eta$. When $\\eta=0$ and the finite infimum is not attained, no such predictor exists.\n\nFor a fixed sample size $m$, a **measurable prediction rule** with class $\\mathcal F$ is a jointly measurable evaluation map from the sample space $((\\mathsf X\\times\\mathsf Y)^m, (\\Sigma_X\\otimes\\Sigma_Y)^{\\otimes m})$ and a new instance in $\\mathsf X$ to $\\mathsf A$, whose slice at each sample belongs to $\\mathcal F$. It is an exact or approximate ERM rule when every slice satisfies the corresponding samplewise definition above. This definition asserts no existence of a measurable selector for an arbitrary class.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "In a supervised prediction problem, for every measurable predictor $f$, the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable, so its population risk is a defined extended nonnegative integral. For every sample size $m\\ge1$, the empirical risk $S\\mapsto\\widehat R_S(f)$ is an extended nonnegative measurable function on the finite product sample space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rademacher-uniform-generalization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space, let $m\\ge1$, and let $\\mathcal G$ be a nonempty class of measurable functions $g:\\mathcal Z\\to[0,1]$. Take $S=(Z_1,\\ldots,Z_m)$ to be the coordinate sample with law $P^m$. Put $P_mg=m^{-1}\\sum_i g(Z_i)$ and $\\overline{\\mathcal G}:=\\{1-g:g\\in\\mathcal G\\}$. Assume the sample, independent-copy and sign suprema over $\\mathcal G$ and $\\overline{\\mathcal G}$ used in the displayed claims and the symmetrization argument are measurable. Let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs, and let\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(Z_i),\\qquad \\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G),$$\n\nwhere the $\\sigma_i$ are independent uniform signs, and let $\\delta\\in(0,1)$. Each of the following four guarantees holds with probability at least $1-\\delta$ over $S$:\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(1/\\delta)}{2m}},$$\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(4/\\delta)}{2m}}.$$\n\nThe four guarantees are separate probability statements. The choice axiom is used through the bounded-differences theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-rademacher-uniform-generalization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space, let $m\\ge1$, and let $\\mathcal G$ be a nonempty class of measurable functions $g:\\mathcal Z\\to[0,1]$. Take $S=(Z_1,\\ldots,Z_m)$ to be the coordinate sample with law $P^m$. Put $P_mg=m^{-1}\\sum_i g(Z_i)$ and $\\overline{\\mathcal G}:=\\{1-g:g\\in\\mathcal G\\}$. Assume the sample, independent-copy and sign suprema over $\\mathcal G$ and $\\overline{\\mathcal G}$ used in the displayed claims and the symmetrization argument are measurable. Let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs, and let\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(Z_i),\\qquad \\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G),$$\n\nwhere the $\\sigma_i$ are independent uniform signs, and let $\\delta\\in(0,1)$. Each of the following four guarantees holds with probability at least $1-\\delta$ over $S$:\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(1/\\delta)}{2m}},$$\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(4/\\delta)}{2m}}.$$\n\nThe four guarantees are separate probability statements. The choice axiom is used through the bounded-differences theorem.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For each $h\\in\\mathcal H$, the supervised loss function $g_h$ is measurable by [F1] and [F4]. By [F2], $R_P(h)=Pg_h$ and $\\widehat R_S(h)=P_mg_h$, so the uniform bounds in [F5]–[F6] control all predictors in $\\mathcal H$ under the IID hypothesis [F7].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "On the event in [F5], put $d:=2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\log(2/\\delta)/(2m)}$. Then every $h$ satisfies $R_P(h)\\le\\widehat R_S(h)+d$ and $\\widehat R_S(h)\\le R_P(h)+d$. By [F3], $\\widehat R_S(\\widehat h_\\eta)\\le\\inf_h\\widehat R_S(h)+\\eta$. Since $\\widehat h_\\eta(S)\\in\\mathcal H$ by [F3], applying the first inequality to $\\widehat h_\\eta$ and taking the infimum in the second gives $R_P(\\widehat h_\\eta)-\\inf_hR_P(h)\\le d+\\inf_h\\widehat R_S(h)+\\eta-\\inf_hR_P(h)\\le2d+\\eta$, where $\\inf_h\\widehat R_S(h)\\le\\inf_hR_P(h)+d$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "On the event in [F6], put $d:=2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\log(4/\\delta)/(2m)}$. The two inequalities $R_P(h)\\le\\widehat R_S(h)+d$ and $\\widehat R_S(h)\\le R_P(h)+d$ hold for every $h$. Since $\\widehat h_\\eta(S)\\in\\mathcal H$, [F3] permits applying the first inequality to the selected predictor and gives $R_P(\\widehat h_\\eta)-\\inf_hR_P(h)\\le d+\\inf_h\\widehat R_S(h)+\\eta-\\inf_hR_P(h)\\le2d+\\eta$, using $\\inf_h\\widehat R_S(h)\\le\\inf_hR_P(h)+d$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The events in [F5] and [F6] are the AC-dependent concentration branch [A1]. Each has probability at least $1-\\delta$; step 2.1 proves the first displayed excess bound on the [F5] event, and step 2.2 proves the second on the [F6] event. Substituting each value of $d$ from those steps gives respectively $4\\mathfrak R_m(\\mathcal G)+2\\sqrt{\\log(2/\\delta)/(2m)}+\\eta$ and $4\\widehat{\\mathfrak R}_S(\\mathcal G)+6\\sqrt{\\log(4/\\delta)/(2m)}+\\eta$. The guarantees are separate.",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonempty predictor class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: eta=0 is allowed and gives the exact-ERM excess bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for a singleton predictor class the excess over its own infimum is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: bounded losses include the identically zero loss, for which every risk and complexity term is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m≥1, 0<delta<1 and every finite eta≥0 are allowed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: an existing measurable eta-ERM is assumed, AC is explicit for concentration, and no general selector existence is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Corollary states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Corollary states no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-finite-class-rademacher-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $Z_1=a$, then for sign $\\sigma_1=1$ the supremum of $\\sigma_1g(Z_1)$ over $\\mathcal G$ is $1$, and for $\\sigma_1=-1$ it is $0$. Thus $\\widehat{\\mathfrak R}_S(\\mathcal G)=\\tfrac12(1+0)=\\tfrac12$. If $Z_1=b$, both functions vanish at the observation, so $\\widehat{\\mathfrak R}_S(\\mathcal G)=0$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The two sample outcomes have probabilities $p$ and $1-p$. Averaging the values from step 1.1 gives $\\mathfrak R_1(\\mathcal G)=p(\\tfrac12)+(1-p)0=p/2$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies a two-function nonempty class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: p=0 gives expected complexity 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The class has two distinct functions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: p=0 or p=1 is included and the formula remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: p∈[0,1] and m=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the finite class is explicitly listed; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Averaging the two possible one-sign maxima gives empirical values depending on the observed atom, and step 2.1 weights them by the specified law. This is an explicit expectation calculation with no converse statistical criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Averaging the two possible one-sign maxima gives empirical values depending on the observed atom, and step 2.1 weights them by the specified law. This is an explicit expectation calculation with no converse statistical criterion.",
+            "item_sha256": "2ee5baf5bf4efa76345690613265fa56ed9046f447109151278abcd62cacbc08",
+            "row_sha256": "5eca0765997f52d2845b1ef5102af5191ec1179b9ed70aea08f3396e6d2ffcd9"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Averaging the two possible one-sign maxima gives empirical values depending on the observed atom, and step 2.1 weights them by the specified law. This is an explicit expectation calculation with no converse statistical criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Averaging the two possible one-sign maxima gives empirical values depending on the observed atom, and step 2.1 weights them by the specified law. This is an explicit expectation calculation with no converse statistical criterion.",
+            "item_sha256": "2ee5baf5bf4efa76345690613265fa56ed9046f447109151278abcd62cacbc08",
+            "row_sha256": "d5522fff0451615a98231e3272de9e56a7c410a6b07d5db27172168a7bd1d6b6"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-bounded-linear-predictor-rademacher-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cauchy-schwarz-for-finite-random-variables",
+          "source_section": "Statement",
+          "quote": "For real random variables $X,Y$ on a finite probability space,\n$$\\mathbb E[XY]^2\\le\\mathbb E[X^2]\\mathbb E[Y^2].$$\nNo equality characterization is asserted on outcomes of probability zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For every $w$ in the radius-$B$ ball and every sample point, [F1] gives $|\\langle w,x_i\\rangle|\\le BR\\le1$. Thus $g_w(x_i)\\in[0,1]$, as required for the stated loss class.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Put $V_\\sigma:=\\sum_i\\sigma_i x_i$. By [F3], $\\widehat{\\mathfrak R}_S(\\mathcal G)=\\frac1{2m}\\mathbb E_\\sigma[\\sum_i\\sigma_i+\\sup_{\\|w\\|_2\\le B}\\langle w,V_\\sigma\\rangle]$. The sign sum has expectation zero. By [F1], $\\langle w,V_\\sigma\\rangle\\le B\\|V_\\sigma\\|_2$; equality is attained at $w=BV_\\sigma/\\|V_\\sigma\\|_2$ when $V_\\sigma\\ne0$, while both sides are zero when $V_\\sigma=0$. Therefore $\\widehat{\\mathfrak R}_S(\\mathcal G)=\\frac{B}{2m}\\mathbb E_\\sigma\\|V_\\sigma\\|_2$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Apply [F2] with $X=\\|V_\\sigma\\|_2$ and $Y=1$ to get $(\\mathbb E_\\sigma\\|V_\\sigma\\|_2)^2\\le\\mathbb E_\\sigma\\|V_\\sigma\\|_2^2$. Expanding the square and using $\\mathbb E_\\sigma[\\sigma_i\\sigma_j]=0$ for $i\\ne j$ and $1$ for $i=j$ gives $\\mathbb E_\\sigma\\|V_\\sigma\\|_2^2=\\sum_i\\|x_i\\|_2^2\\le mR^2$. Substitution in step 1.2 proves $\\widehat{\\mathfrak R}_S(\\mathcal G)\\le BR/(2\\sqrt m)$.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "m,d≥1 and the radius ball contains w=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1–3.1: B=0 or R=0 gives complexity 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: B=0 or R=0 collapses all sample traces to a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: when BR=0 every sample loss equals 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m,d≥1, B,R≥0, and BR≤1, including B=0 or R=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a maximizing vector explicitly when the sign-sum vector is nonzero; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Euclidean ball duality in step 1.2 identifies the exact signwise supremum, then its second moment gives a radius upper bound. This estimate is not asserted to characterize all samples attaining equality in that bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Euclidean ball duality in step 1.2 identifies the exact signwise supremum, then its second moment gives a radius upper bound. This estimate is not asserted to characterize all samples attaining equality in that bound.",
+            "item_sha256": "5bd2790488908398ae1050f9062ba3f8d925bc6362a31aeb683cadaa8af558ed",
+            "row_sha256": "97ef085767cbef762467614e9ec01e06470a6e0228525183515a8b3039ac8048"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Euclidean ball duality in step 1.2 identifies the exact signwise supremum, then its second moment gives a radius upper bound. This estimate is not asserted to characterize all samples attaining equality in that bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Euclidean ball duality in step 1.2 identifies the exact signwise supremum, then its second moment gives a radius upper bound. This estimate is not asserted to characterize all samples attaining equality in that bound.",
+            "item_sha256": "5bd2790488908398ae1050f9062ba3f8d925bc6362a31aeb683cadaa8af558ed",
+            "row_sha256": "88e51f3c2d3502330ce69e985a2f719bbe8e54e0de9c478477f0f24e24616cdf"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-clipped-linear-class-shows-loose-radius-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rademacher-contraction-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $z_1,\\ldots,z_m$ be fixed points in a set $\\mathcal Z$, and let $\\mathcal H$ be a nonempty class of functions $h:\\mathcal Z\\to\\mathbb R$. For each $i$, let $\\Phi_i:\\mathbb R\\to\\mathbb R$ be $L$-Lipschitz for one common $L\\ge0$. Suppose either that $\\mathcal H$ is finite or countable, or that it has a specified nonempty countable subclass $\\mathcal H_0$ for which, for every sign vector $\\sigma\\in\\{-1,+1\\}^m$, both displayed suprema equal the corresponding suprema over $\\mathcal H_0$. Assume the suprema are finite. With independent uniform signs $\\sigma_1,\\ldots,\\sigma_m$ and the one-sided normalization\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal H):=\\frac1m\\mathbb E_\\sigma\\sup_{h\\in\\mathcal H}\\sum_{i=1}^m\\sigma_i h(z_i),$$\n\none has\n\n$$\\frac1m\\mathbb E_\\sigma\\sup_{h\\in\\mathcal H}\\sum_{i=1}^m\\sigma_i\\Phi_i(h(z_i))\\le L\\,\\widehat{\\mathfrak R}_S(\\mathcal H).$$\n\nNo condition $\\Phi_i(0)=0$ is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cauchy-schwarz-for-finite-random-variables",
+          "source_section": "Statement",
+          "quote": "For real random variables $X,Y$ on a finite probability space,\n$$\\mathbb E[XY]^2\\le\\mathbb E[X^2]\\mathbb E[Y^2].$$\nNo equality characterization is asserted on outcomes of probability zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Since $B\\ge1$ and every sample input is $1$, the clipped values $\\operatorname{clip}(w)$ range over all of $[-1,1]$, so the class values on the sample range over $a\\in[0,1]$. For $T:=\\sum_i\\sigma_i$, the signwise supremum is $\\sup_{a\\in[0,1]}aT=T_+$. Hence $\\widehat{\\mathfrak R}_S(\\mathcal G_B)=m^{-1}\\mathbb E_\\sigma T_+$.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The distribution of $T$ is symmetric, so $\\mathbb E T_+=\\tfrac12\\mathbb E|T|$. Apply [F3] to $X=|T|$ and $Y=1$; independence and symmetry of the signs give $\\mathbb E T^2=m$. Thus $\\mathbb E T_+\\le\\sqrt m/2$ and step 1.1 gives $\\widehat{\\mathfrak R}_S(\\mathcal G_B)\\le1/(2\\sqrt m)$.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Put $\\mathcal H_B:=\\{h_w:x\\mapsto wx:|w|\\le B\\}$ and $\\mathcal H_0:=\\{h_{-B},h_B\\}\\subseteq\\mathcal H_B$. For every sign vector, with $T=\\sum_i\\sigma_i$, the raw supremum is $\\sup_{|w|\\le B}wT=B|T|$, attained at an endpoint. The clipped supremum is $\\sup_{|w|\\le B}\\operatorname{clip}(w)T=|T|$, also attained at an endpoint because $B\\ge1$. Thus $\\mathcal H_0$ gives both suprema required by [F2]. The map $\\operatorname{clip}$ is 1-Lipschitz: for $u\\le v$, its increase is $0$ if both are below $-1$ or both above $1$, is $v-u$ if both lie in $[-1,1]$, is $v+1\\le v-u$ if $u\\le-1\\le v\\le1$, is $1-u\\le v-u$ if $-1\\le u\\le1\\le v$, and is $2\\le v-u$ if $u\\le-1$ and $v\\ge1$. Thus [F2] applies. The constant offset $1/2$ has zero expected sign sum, and scaling by $1/2$ gives $\\widehat{\\mathfrak R}_S(\\mathcal G_B)=\\tfrac12\\widehat{\\mathfrak R}_S(\\operatorname{clip}\\circ\\mathcal H_B)$. By the general formula in [F2], $\\widehat{\\mathfrak R}_S(\\mathcal H_B)=m^{-1}\\mathbb E_\\sigma\\sup_{|w|\\le B}wT=B\\mathbb E|T|/m\\le B/\\sqrt m$, where [F3] is applied to $X=|T|$ and $Y=1$ and $\\mathbb E T^2=m$. Therefore the contraction route gives $\\widehat{\\mathfrak R}_S(\\mathcal G_B)\\le B/(2\\sqrt m)$, which can grow arbitrarily relative to the bound in step 2.1 as $B$ increases.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes m≥1 and B≥1, so the class is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "On this sample with B≥1, the class takes all constant values in [0,1] and its expected sign supremum is positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "On the sample, the class contains every constant value in [0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: sign vectors with sum zero contribute zero to the positive-part average."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m=1 and B=1 are allowed; both displayed bounds remain finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: the explicit two-element endpoint class gives both required sign suprema, so no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the all-ones sample, clipping makes the attainable scalar values the unit interval regardless of the larger radius. The direct and contraction calculations compare two upper estimates, not necessary-and-sufficient conditions on the radius.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "For the all-ones sample, clipping makes the attainable scalar values the unit interval regardless of the larger radius. The direct and contraction calculations compare two upper estimates, not necessary-and-sufficient conditions on the radius.",
+            "item_sha256": "6960fad9968c3d00299752b1043abfab753571aa748a6d8bf44001abaaffdd86",
+            "row_sha256": "74958e6a61caa4b2709cd26af3221064b8ea8a40b01533ad5112eeb469cd5651"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the all-ones sample, clipping makes the attainable scalar values the unit interval regardless of the larger radius. The direct and contraction calculations compare two upper estimates, not necessary-and-sufficient conditions on the radius.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "For the all-ones sample, clipping makes the attainable scalar values the unit interval regardless of the larger radius. The direct and contraction calculations compare two upper estimates, not necessary-and-sufficient conditions on the radius.",
+            "item_sha256": "6960fad9968c3d00299752b1043abfab753571aa748a6d8bf44001abaaffdd86",
+            "row_sha256": "a575a93789199e63ab7797d204366a47407a9ea4824c39145d6e55ead267eee0"
+          }
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

@@ -1,0 +1,38 @@
+--- items/thm-exp3-expected-regret.md
++++ proposal/thm-exp3-expected-regret.md
+@@ -47,7 +47,7 @@
+ $$
+ \eta=\sqrt{\frac{2\log k}{nk}}.
+ $$
+-Here $\log$ is the natural logarithm.
++Here $\log$ is the natural logarithm. For the well-definedness, finite-horizon completion, and two weight identities below, one may instead take any learning rate $\eta>0$ and any reward sequence admitted by the algorithm: rewards in $[0,1]^k$ fixed in advance or deterministic functions of the complete pre-action history. These procedure properties do not require the tuned learning rate.
+ Assume the run is on a probability space carrying the measurable, finite-valued actions with the conditional probabilities specified by Exp3; no probability-space construction is asserted. Every normalizing denominator is finite and positive, all estimates and cumulative estimates are finite, and the procedure completes its $n$ rounds. For every $t\in\{0,\ldots,n\}$ and $i\in[k]$,
+ $$
+ \widehat S_{t,i}=t-\sum_{s=1}^t\widehat Y_{s,i},
+@@ -56,7 +56,7 @@
+ $$
+ P_{t,i}=\frac{\exp(-\eta\sum_{s<t}\widehat Y_{s,i})}{\sum_{j=1}^k\exp(-\eta\sum_{s<t}\widehat Y_{s,j})},\qquad i\in[k].
+ $$
+-Write $X_t=x_{t,A_t}$ and define expected regret against the best fixed arm by
++For the following regret guarantees, use the tuned learning rate displayed above. Write $X_t=x_{t,A_t}$ and define expected regret against the best fixed arm by
+ $$
+ R_n=\max_{i\in[k]}\sum_{t=1}^n x_{t,i}-\mathbb E\left[\sum_{t=1}^n X_t\right].
+ $$
+@@ -85,7 +85,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A finite horizon $n\ge1$, $k>1$ arms, reward vectors in $[0,1]^k$, Exp3 as defined above, and its probability space of learner draws. In the optional past-adaptive case each reward vector is selected from the pre-action history.
++**Given:** A finite horizon $n\ge1$, $k>1$ arms, reward vectors in $[0,1]^k$, Exp3 with any $\eta>0$ for its procedure properties and with the displayed tuned rate for the regret guarantees, and its probability space of learner draws. In the optional past-adaptive case each reward vector is selected from the pre-action history.
+ 
+ [A1] [[def-adversary-and-feedback-model]]: an oblivious adversary fixes the entire reward sequence before learner randomization; a non-anticipating adversary selects the current vector from past history before the current action; a reactive adversary may select it after seeing that action.
+ 
+@@ -133,7 +133,7 @@
+ 
+ ## Proof
+ 
+-0.1 Since $k>1$, [F10] and [F20] give $\log k>\log1=0$, and [F9] makes $\log k$ a real number; hence the specified $\eta$ is a positive finite real, as required by the procedure. Initially $\widehat S_{0,i}=0$ is finite for every $i$ by [F18]. Suppose all $\widehat S_{t-1,i}$ are finite. Then each $\exp(\eta\widehat S_{t-1,i})$ is a positive finite real by [F7] and the real-valued exponential definition [F17]. Its finite sum over $[k]$ is positive and finite, so [F1] gives $P_{t,i}>0$ and $\sum_iP_{t,i}=1$. The assumed measurable action draw exists by [F21]; its observed reward is in $[0,1]$. Thus each $\widehat Y_{t,i}=\mathbf1\{A_t=i\}(1-X_t)/P_{t,i}$ and $\widehat X_{t,i}=1-\widehat Y_{t,i}$ is finite, and [F19] makes every $\widehat S_{t,i}$ finite. Induction proves these facts through round $n$. The prescribed loop has the finite index set $\{1,\ldots,n\}$ and each round consists of the finite operations just checked together with an assumed draw, so it completes exactly $n$ rounds. [given, F1, F7, F9, F10, F17, F18, F19, F20, F21, induction]
++0.1 First fix any positive finite real learning rate $\eta$ and any reward sequence admitted by the algorithm. Initially $\widehat S_{0,i}=0$ is finite for every $i$ by [F18]. Suppose all $\widehat S_{t-1,i}$ are finite. Then each $\exp(\eta\widehat S_{t-1,i})$ is a positive finite real by [F7] and the real-valued exponential definition [F17]. Its finite sum over $[k]$ is positive and finite, so [F1] gives $P_{t,i}>0$ and $\sum_iP_{t,i}=1$. The assumed measurable action draw exists by [F21]; its observed reward is in $[0,1]$. Thus each $\widehat Y_{t,i}=\mathbf1\{A_t=i\}(1-X_t)/P_{t,i}$ and $\widehat X_{t,i}=1-\widehat Y_{t,i}$ is finite, and [F19] makes every $\widehat S_{t,i}$ finite. Induction proves these facts through round $n$. The prescribed loop has the finite index set $\{1,\ldots,n\}$ and each round consists of the finite operations just checked together with an assumed draw, so it completes exactly $n$ rounds. This argument uses only $\eta>0$ and the algorithm's reward range, for either fixed or deterministic past-adaptive rewards. For the rate in the regret clauses, $k>1$, [F10] and [F20] give $\log k>\log1=0$, and [F9] makes $\log k$ real; hence that tuned $\eta$ is also a positive finite real and the same argument applies to it. [given, F1, F7, F9, F10, F17, F18, F19, F20, F21, induction]
+ 
+ 0.2 For $t=0$, the claimed identity $\widehat S_{t,i}=t-\sum_{s=1}^t\widehat Y_{s,i}$ holds by [F18] and the empty-sum convention. If it holds at $t-1$, then [F19] and $\widehat X_{t,i}=1-\widehat Y_{t,i}$ give
+ $$

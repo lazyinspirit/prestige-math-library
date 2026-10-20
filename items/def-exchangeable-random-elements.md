@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-exchangeable-random-elements.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -34,11 +35,18 @@ sources:
 Let $Z_1,\ldots,Z_n$ be random elements, $n\ge1$, of one measurable space
 $(\mathcal Z,\mathscr Z)$. Their tuple $Z=(Z_1,\ldots,Z_n)$ is a random element
 of $(\mathcal Z^n,\mathscr Z^{\otimes n})$ by
-[[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]],
+Coordinate maps and permutations are measurable on finite products,
 and its law is the pushforward probability measure from
-[[def-law-or-distribution-of-a-random-element]]. For a permutation $\pi$ of
+Law or distribution of a random element. For a permutation $\pi$ of
 $\{1,\ldots,n\}$, let $\tau_\pi(z)_i=z_{\pi(i)}$. The tuple is
 **exchangeable** if
 $$\mathbb P_Z\circ\tau_\pi^{-1}=\mathbb P_Z\qquad\text{for every permutation }\pi.$$
 
 This is invariance of the joint law, not an assertion of independence or identical marginal construction by independent sampling. The coordinate maps $\tau_\pi$ are measurable by the cited finite-product lemma.
+
+## Definition references
+
+[[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]]
+
+[[def-law-or-distribution-of-a-random-element]]
+

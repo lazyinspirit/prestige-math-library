@@ -1,0 +1,265 @@
+
+===== thm-finite-products-of-compact-spaces =====
+
+
+## Statement
+
+For every $n \in \mathbb{N}$ ([[def-natural-numbers]]) and every family
+$(X_k)_{k < n}$ of compact topological spaces ([[def-compact-space]],
+[[def-topological-space]]), the product
+
+$$\prod_{k < n} X_k$$
+
+with the product topology ([[def-product-topology]]) is compact. In particular a
+binary product $X \times Y$ of compact spaces is compact, and the empty product,
+a one-point space, is compact.
+
+**No choice principle is used beyond [[lem-finite-choice]]**, which is a theorem
+of ZF. That is what separates the finite case from the arbitrary one, where the
+Axiom of Choice is genuinely spent.
+
+## Facts & Assumptions
+
+**Given:** A natural number $n$, a family $(X_k)_{k < n}$ of compact topological spaces, and the product $P_n := \prod_{k<n} X_k$ with the product topology and projections $\pi_k$.
+
+[A1] An element of $\prod_{k<n} X_k$ is a function $x$ with domain $n$ and $x(k) \in X_k$ for every $k < n$; the von Neumann natural satisfies $\sigma(n) = n \cup \{n\}$ with $n \notin n$; and the empty product is a one-point space ([[def-product-topology]], [[def-natural-numbers]]).
+
+[L1] The projections of a product are continuous, and a map $h$ into a product is continuous exactly when every component $\pi_i \circ h$ is continuous ([[thm-product-universal-property]], claims 1 and 2).
+
+[L2] A composite of continuous maps is continuous ([[lem-continuity-is-local-and-pastes]], claim 1).
+
+[L3] The identity map of a space is continuous, and so is every constant map, the preimage of a set under a constant map being $\varnothing$ or the whole space ([[def-continuous-map-top]], [[thm-continuity-characterisations-top]], clause (b); [[def-topological-space]]).
+
+[L4] A continuous image of a compact space is a compact subset of the target ([[thm-compactness-under-continuous-maps]], claim 1); a continuous bijection with continuous inverse is a homeomorphism ([[def-homeomorphism-and-open-maps]], [[lem-homeomorphism-criteria]]).
+
+[L5] Tube lemma: if $K \subseteq X$ is compact, $N \subseteq X \times Z$ is open and $K \times \{z_0\} \subseteq N$, then $K \times W \subseteq N$ for some open $W \ni z_0$ ([[lem-tube-lemma-for-a-compact-factor]]).
+
+[L6] $A$ is a compact subset of a space $Z$ exactly when every family $\mathcal{U}$ of open subsets of $Z$ with $A \subseteq \bigcup \mathcal{U}$ has finitely many members whose union contains $A$, or else $A = \varnothing$ ([[lem-compactness-of-a-subspace-is-ambient]], claim 1).
+
+[L7] A function with domain a natural number all of whose values are nonempty sets has a choice function, and this is a theorem of ZF ([[lem-finite-choice]]).
+
+[L8] A space is compact exactly when every open cover of it has a finite subcover; a one-point space and the empty space are compact ([[def-compact-space]]).
+
+[L9] If $0 \in S \subseteq \mathbb{N}$ and $\sigma(m) \in S$ whenever $m \in S$, then $S = \mathbb{N}$ ([[thm-induction-principle]]).
+
+## Proof
+
+**Proof technique:** induction.
+
+1.1 At $n = 0$ the index set is empty, so $\prod_{k<0} X_k$ is a one-point space by [A1] and is compact by [L8]; this is the case $n = 0$ of the statement. [A1, L8, base]
+
+1.2 Let $m \in \mathbb{N}$ and assume, as the induction hypothesis, that $\prod_{k<m} Y_k$ is compact for every family $(Y_k)_{k<m}$ of compact spaces. [ih]
+
+1.3 For the binary case let $X$ and $Z$ be compact, let $\mathcal{U}$ be an open cover of $X \times Z$, and for $z \in Z$ let $j_z : X \to X \times Z$ be $j_z(x) := (x,z)$; its components are the identity of $X$ and the constant map with value $z$, so it is continuous by [L1] and [L3], and $X \times \{z\} = j_z[X]$ is therefore a compact subset of $X \times Z$ by [L4]. [L1, L3, L4, construct]
+
+1.4 Put $\mathcal{W} := \{\, W \subseteq Z : W \text{ is open and } X \times W \subseteq \bigcup \mathcal{V} \text{ for some finite } \mathcal{V} \subseteq \mathcal{U} \,\}$, a family cut out by a property of $W$ and not by any selection. [construct]
+
+1.5 For the splitting, let $p \in \mathbb{N}$, let $(X_k)_{k < \sigma(p)}$ be a family of spaces, and define $r : \prod_{k<\sigma(p)} X_k \to \big(\prod_{k<p} X_k\big) \times X_p$ by $r(x) := (x \restriction p,\ x(p))$ and $s$ in the opposite direction by $s(y,a) := y \cup \{(p,a)\}$; by [A1] these are mutually inverse bijections, since $\sigma(p) = p \cup \{p\}$ and $p \notin p$. [A1, construct]
+
+2.1 $Z \subseteq \bigcup \mathcal{W}$: given $z \in Z$, the set $X \times \{z\}$ is compact by step 1.3 and lies in $\bigcup \mathcal{U}$, so [L6] supplies a finite $\mathcal{V} \subseteq \mathcal{U}$ with $X \times \{z\} \subseteq N := \bigcup \mathcal{V}$, an open set, the case $X = \varnothing$ being covered by $\mathcal{V} = \varnothing$; since $X$ is compact, [L5] gives an open $W \ni z$ with $X \times W \subseteq N$, and that $W$ lies in $\mathcal{W}$. [L5, L6, step 1.3, step 1.4]
+
+2.2 $r$ is continuous: by [L1] it suffices that its two components are, and they are $x \mapsto x \restriction p$ and $\pi_p$; the second is a projection, and the first is continuous by [L1] applied again, its own components being $\pi_k$ for $k < p$. [L1, step 1.5]
+
+2.3 $s$ is continuous: by [L1] it suffices that $\pi_k \circ s$ is continuous for every $k < \sigma(p)$; for $k < p$ that map is the $k$-th projection of $\prod_{k<p} X_k$ composed with the first projection of the binary product, a composite of continuous maps, and for $k = p$ it is the second projection of the binary product. [L1, L2, step 1.5]
+
+3.1 If $Z = \varnothing$ then $X \times Z = \varnothing$ is compact by [L8]; otherwise $\mathcal{W}$ is an open cover of the compact $Z$ by step 2.1, so [L8] gives $q \in \mathbb{N}$ and $W_0, \dots, W_q \in \mathcal{W}$ with $Z = W_0 \cup \dots \cup W_q$. [L8, step 2.1]
+
+3.2 So $r$ is a continuous bijection with continuous inverse $s$, hence a homeomorphism, and $\prod_{k<\sigma(p)} X_k$ is homeomorphic to $\big(\prod_{k<p} X_k\big) \times X_p$. [L4, step 1.5, step 2.2, step 2.3]
+
+4.1 For each $j \le q$ the set $T_j$ of finite subfamilies $\mathcal{V} \subseteq \mathcal{U}$ with $X \times W_j \subseteq \bigcup \mathcal{V}$ is nonempty because $W_j \in \mathcal{W}$, and $j \mapsto T_j$ is a function with domain the natural number $\sigma(q)$, so [L7] supplies $\mathcal{V}_0, \dots, \mathcal{V}_q$; their union $\mathcal{V}$ is a finite subfamily of $\mathcal{U}$, a union of finitely many listable families being listed by concatenation, and $X \times Z = (X \times W_0) \cup \dots \cup (X \times W_q) \subseteq \bigcup \mathcal{V}$. So every open cover of $X \times Z$ has a finite subcover and $X \times Z$ is compact. [L7, L8, step 3.1]
+
+5.1 Now let $(X_k)_{k < \sigma(m)}$ be a family of compact spaces. By step 1.2 the product $\prod_{k<m} X_k$ is compact, and $X_m$ is compact, so step 4.1 makes $\big(\prod_{k<m} X_k\big) \times X_m$ compact; by step 3.2 with $p := m$ the product $\prod_{k<\sigma(m)} X_k$ is homeomorphic to it, and a continuous image of a compact space is compact by [L4], so $\prod_{k<\sigma(m)} X_k$ is compact. [L4, step 1.2, step 3.2, step 4.1]
+
+6.1 The set of $n \in \mathbb{N}$ for which the statement holds contains $0$ by step 1.1 and contains $\sigma(m)$ whenever it contains $m$ by step 5.1, so by [L9] it is all of $\mathbb{N}$; the binary case is $n = 2$ and the empty product is $n = 0$. [L9, step 1.1, discharge-induction: step 5.1] ∎
+
+## Remarks
+
+**Where the tube lemma does the work.** Compactness of $X$ alone thins a cover on one slice $X \times \{z\}$; what is needed is a cover of a whole band around that slice, and producing the band is exactly [[lem-tube-lemma-for-a-compact-factor]]. Compactness of $Z$ then thins the family of bands. Both factors are used, and in different ways.
+
+**Why the bands are collected rather than chosen.** The family $\mathcal{W}$ of step 1.4 consists of *every* open $W$ admitting some finite subfamily of $\mathcal{U}$ over $X \times W$; it is defined by a formula. Writing $W_z$ for each $z \in Z$ instead would select a band for every point of $Z$ at once, which for an arbitrary $Z$ is the Axiom of Choice. The only selection made is over the finite index set $\sigma(q)$ at step 4.1.
+
+**The hypothesis "finitely many" is not removable by this argument.** The induction runs on $\mathbb{N}$ and gives nothing about an infinite index set; [[thm-tychonoff]], later on this page, handles that case and pays the Axiom of Choice for it.
+
+===== thm-first-borel-cantelli =====
+
+
+## Statement
+
+Let $(E_k)_{k\in\mathbb N}$ be measurable sets in a measure space. If the nonnegative extended sum satisfies
+
+$$\sum_{k=0}^{\infty}\mu(E_k)<+\infty,$$
+
+then
+
+$$\mu\left(\limsup_{k\to\infty}E_k\right)=0.$$
+
+No independence hypothesis and no finiteness hypothesis on the whole space are required.
+
+## Facts & Assumptions
+
+**Given:** Measurable sets $(E_k)$ with $S:=\sum_k\mu(E_k)<+\infty$.
+
+[L1] Measures are monotone ([[prop-measure-monotonicity]]) and countably subadditive ([[thm-finite-and-countable-subadditivity-of-measures]]).
+
+[L2] The set limsup is $\bigcap_N\bigcup_{k\ge N}E_k$ ([[def-set-limsup-and-liminf]]).
+
+[L3] A nonnegative extended sum is the supremum of its partial sums ([[def-nonnegative-extended-series]]), while a convergent real series is the limit of its real partial sums ([[def-series]]).
+
+[L4] A convergent real series and each of its tails converge, with total sum equal to the initial partial sum plus the tail sum ([[lem-series-tail-invariance]]).
+
+[L5] Limits of real sequences respect addition and subtraction ([[thm-algebra-of-limits]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Since $S$ is finite, every $\mu(E_k)$ and every partial sum $s_n$ is real. The $s_n$ increase and have supremum $S$; given $\varepsilon>0$, the defining property of the supremum supplies $N$ with $S-\varepsilon<s_N\le S$, and then $S-\varepsilon<s_n\le S$ for every $n\ge N$. Thus the real series $\sum_k\mu(E_k)$ converges to $S$, and its tail sums $T_N:=\sum_{k\ge N}\mu(E_k)$ are real. [given, L3]
+
+1.2 For every $N$, [L2] gives $\limsup_kE_k\subseteq\bigcup_{k\ge N}E_k$, so monotonicity and subadditivity give $\mu(\limsup_kE_k)\le T_N$. [given, L1, L2]
+
+2.1 If $s_N=\sum_{k<N}\mu(E_k)$, then $T_N=S-s_N$ by tail invariance, and $s_N\to S$; hence $T_N\to0$ by the algebra of limits. [step 1.1, L4, L5]
+
+3.1 The nonnegative number $\mu(\limsup_kE_k)$ is at most every $T_N$ by step 1.2, while step 2.1 makes those tails arbitrarily small; therefore it is $0$. [step 1.2, step 2.1] ∎
+
+===== thm-gram-schmidt-orthonormalisation =====
+
+
+## Statement
+
+Let $(v_0,\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\ldots,e_{r-1})$ such that, for every $k\le r$,
+
+$$\operatorname{span}(e_0,\ldots,e_{k-1})=\operatorname{span}(v_0,\ldots,v_{k-1}).$$
+
+It is obtained recursively from
+
+$$u_k=v_k-\sum_{j<k}\langle v_k,e_j\rangle e_j,\qquad e_k=\frac{u_k}{\lVert u_k\rVert}.$$
+
+For $r=0$, both lists are empty.
+
+## Facts & Assumptions
+
+**Given:** A finite linearly independent list $(v_0,\ldots,v_{r-1})$.
+
+[L1] An orthonormal list is orthogonal and every listed vector has norm one ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]).
+
+[L2] A finite list $v$ is linearly independent when every list of scalars with $\sum_{i<n}\lambda_iv_i=0_V$ has $\lambda_i=0_F$ for all $i<n$ ([[def-linear-independence]]).
+
+[L3] For a nonzero vector $u$, positive definiteness gives $\lVert u\rVert>0$, so $u/\lVert u\rVert$ is defined and has norm one ([[def-inner-product-norm]]).
+
+[L4] Every finite orthogonal list of nonzero vectors is linearly independent ([[thm-orthogonal-nonzero-vectors-are-linearly-independent]]).
+
+## Proof
+
+**Proof technique:** induction.
+
+1.1 For $r=0$ there is nothing to construct, and the successive-span assertion at $k=0$ is equality of zero subspaces. [base]
+
+1.2 Suppose $e_0,\ldots,e_{k-1}$ have been constructed orthonormally with the required span equalities. Define $u_k$ by the displayed formula. For $i<k$, linearity and orthonormality give $\langle u_k,e_i\rangle=\langle v_k,e_i\rangle-\langle v_k,e_i\rangle=0$. [ih, L1, algebra]
+
+2.1 If $u_k=0$, then $v_k$ lies in $\operatorname{span}(e_0,\ldots,e_{k-1})=\operatorname{span}(v_0,\ldots,v_{k-1})$, say $v_k=\sum_{i<k}\mu_iv_i$; then the scalars $\lambda_i=\mu_i$ for $i<k$, $\lambda_k=-1_F$ and $\lambda_i=0_F$ for $i>k$ satisfy $\sum_i\lambda_iv_i=0_V$ with $\lambda_k\ne0_F$, contradicting the independence of $v$ through [L2]. Hence $u_k\ne0$, and [L3] makes $e_k=u_k/\lVert u_k\rVert$ a unit vector orthogonal to its predecessors. [step 1.2, ih, L2, L3]
+
+3.1 The formula for $u_k$ shows $e_k$ lies in $\operatorname{span}(v_0,\ldots,v_k)$, while its rearrangement shows $v_k$ lies in $\operatorname{span}(e_0,\ldots,e_k)$. Together with the induction hypothesis these give both inclusions in the span equality at $k+1$. [step 2.1, ih, algebra]
+
+4.1 Induction constructs the stated list and proves every successive-span equality. Its vectors are nonzero and orthogonal, so [L4] also confirms their independence; their unit norms make the list orthonormal. [step 1.1, step 1.2, step 2.1, step 3.1, L1, L4, discharge-induction] ∎
+
+===== thm-heine-borel-rn =====
+
+
+## Statement
+
+Let $n \in \mathbb{N}$ with $n \ge 1$, let $\mathbb{R}^n$ be the set of functions
+$n \to \mathbb{R}$ and let $d_2$ be the Euclidean metric on it
+([[lem-metrics-on-rn]]). Then:
+
+1. **Closed boxes are compact.** For reals $a_k \le b_k$ $(k < n)$ the box
+   $Q = \{\, x \in \mathbb{R}^n : a_k \le x_k \le b_k \text{ for every } k < n \,\}$
+   is a compact subset of $(\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).
+2. **Heine-Borel.** A subset $K \subseteq \mathbb{R}^n$ is a compact subset of
+   $(\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\mathbb{R}^n$
+   ([[def-metric-topology]]) and bounded
+   ([[def-metric-bounded-diameter]]).
+3. **The real line.** A subset $K \subseteq \mathbb{R}$ is a compact subset of
+   $(\mathbb{R}, d_{\mathbb{R}})$, the usual metric $d_{\mathbb{R}}(x,y) = |x-y|$
+   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in
+   $\mathbb{R}$ and bounded.
+
+**No choice principle is used.** The bisection below halves one coordinate at a
+time and takes the **left** half whenever the left half still fails to be finitely
+covered, the right half otherwise: a rule with two outcomes, decided by a
+property of the box, not a selection. That is the whole reason the theorem is
+available in ZF, while the general "complete and totally bounded implies compact"
+([[thm-complete-and-totally-bounded-implies-compact]]) is not.
+
+The hypothesis $n \ge 1$ is inherited from [[lem-metrics-on-rn]], which defines
+$\mathbb{R}^n$ and its metrics only there; the last remark below records what
+happens at $n = 0$.
+
+## Facts & Assumptions
+
+**Given:** A natural number $n \ge 1$, the metric space $(\mathbb{R}^n, d_2)$, and the notions of open, closed, bounded and compact subset in it.
+
+[L1] $\mathbb{R}^n$ is the set of functions $n \to \mathbb{R}$, and $d_2(x,y) = \sqrt{\sum_{k<n}(x_k-y_k)^2}$, $d_\infty(x,y) = \max\{|x_k - y_k| : k < n\}$ are metrics on it ([[lem-metrics-on-rn]], [[def-finite-sum]], [[def-metric-space]]).
+
+[L2] Finite sums of nonnegative terms dominate each term and are monotone, and $\sum_{k<n} c = \iota(n)c$ for a constant $c$, $\iota(n)$ being the canonical natural of $\mathbb{R}$ ([[lem-finite-sum-laws]], [[def-finite-sum]], [[def-canonical-natural]]).
+
+[L3] For $a,b \ge 0$: $a \le b$ exactly when $a^2 \le b^2$; every $a \ge 0$ has a unique nonnegative square root; and $\sqrt{c^2} = |c|$ for every real $c$ ([[lem-of-square-monotone]], [[thm-of-square-roots]], [[def-abs-value]]).
+
+[L4] A subset $A$ is compact exactly when every family $(U_i)_{i \in I}$ of open subsets of the ambient space with $A \subseteq \bigcup_{i \in I} U_i$ has finitely many members whose union contains $A$, or $A = \emptyset$; and the sets open in the subspace $A$ are exactly the traces on $A$ of the open subsets of the ambient space, so, taking complements inside $A$, the sets closed in $A$ are exactly the traces on $A$ of the closed subsets of the ambient space ([[lem-compactness-is-intrinsic]], [[def-metric-compactness]], [[def-metric-topology]], [[def-isometry-and-metric-embedding]]).
+
+[L5] A compact subset of a metric space is closed and bounded ([[thm-compact-subset-is-closed-and-bounded]]).
+
+[L6] A closed subset of a compact metric space is compact ([[lem-closed-subset-of-a-compact-space-is-compact]]).
+
+[L7] Nested closed bounded intervals $I_m = [\alpha_m,\beta_m]$ with $I_{m+1} \subseteq I_m$ have nonempty intersection, and the intersection is a single point exactly when the lengths tend to $0$ ([[thm-nested-interval-property]], [[def-interval]], [[def-real-limit]]).
+
+[L8] Recursion: for a set $A$, an element $a \in A$ and $f : A \to A$ there is a unique $g : \mathbb{N} \to A$ with $g(0) = a$ and $g(m+1) = f(g(m))$; a stage-dependent rule is handled on $A = \mathbb{N} \times Z$, the first coordinate of $g(m)$ then being $m$ ([[thm-recursion]], [[def-finite-sum]]).
+
+[L9] $(1/2)^m \to 0$, integer powers being those of [[def-integer-power]] ([[lem-geometric-sequence-null]], [[def-real-limit]]).
+
+[L10] A nonempty finite set of reals has a maximum, one of its members ([[lem-finite-set-has-max]], [[def-max-min]]).
+
+[L11] $U$ is open exactly when every point of $U$ has a ball inside $U$; a subset is bounded when it is empty or lies in some ball $B(x_0,\rho)$ with $\rho > 0$ ([[def-metric-topology]], [[def-metric-ball]], [[def-metric-bounded-diameter]]).
+
+[L12] For every real $\eta > 0$ there is a natural $N \ge 1$ with $1/N < \eta$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 For $x,y \in \mathbb{R}^n$ and $k < n$ the term $(x_k-y_k)^2$ is one of the nonnegative terms of $\sum_{j<n}(x_j-y_j)^2$, so $(x_k-y_k)^2 \le d_2(x,y)^2$, and taking nonnegative square roots gives $|x_k - y_k| \le d_2(x,y)$; hence $d_\infty(x,y) \le d_2(x,y)$. [L1, L2, L3]
+
+1.2 Conversely each $(x_j-y_j)^2 \le d_\infty(x,y)^2$, so $d_2(x,y)^2 \le \iota(n)\,d_\infty(x,y)^2 \le \big(\iota(n) d_\infty(x,y)\big)^2$, the last step because $\iota(n) \ge 1$; hence $d_2(x,y) \le \iota(n)\, d_\infty(x,y)$. [L1, L2, L3]
+
+2.1 For claim 1 fix reals $a_k \le b_k$ $(k<n)$ and the box $Q$ they determine, let $(U_i)_{i \in I}$ be open subsets of $\mathbb{R}^n$ with $Q \subseteq \bigcup_{i \in I} U_i$, call a set $S \subseteq \mathbb{R}^n$ **finitely covered** when finitely many of the $U_i$ have union containing $S$, and suppose for contradiction that $Q$ is not finitely covered. [L4, step 1.1, step 1.2, assume-contra]
+
+3.1 For a box $P = \{\, x : c_j \le x_j \le e_j \ (j<n) \,\}$ with $c_j \le e_j$ and for $k < n$, let $P^{k,0}$ and $P^{k,1}$ be the boxes obtained by replacing the $k$-th interval $[c_k,e_k]$ by $[c_k, (c_k+e_k)/2]$ and by $[(c_k+e_k)/2, e_k]$; then $P = P^{k,0} \cup P^{k,1}$ by trichotomy applied to $x_k$ against the midpoint, the $k$-th side length of each is $(e_k-c_k)/2$ and the others are unchanged, and if both halves were finitely covered so would $P$ be, the union of two finite subfamilies being finite. Define $H_k(P) := P^{k,0}$ if $P^{k,0}$ is not finitely covered, and $H_k(P) := P^{k,1}$ otherwise; this is a definition by a property, and $H_k(P)$ is not finitely covered whenever $P$ is. [L7, step 2.1]
+
+4.1 Recursion on $\mathbb{N} \times Z$, with $Z$ the set of functions from boxes to boxes, starting value $(0, \mathrm{id})$ and rule $(j, h) \mapsto (j+1,\ H_j \circ h)$ for $j < n$ and $(j,h) \mapsto (j+1,h)$ otherwise, produces $G_j$ for every $j$; put $G := G_n$. By induction on $j \le n$, $G_j(P) \subseteq P$ is a box whose $k$-th side is half that of $P$ for $k < j$ and equal to that of $P$ for $k \ge j$, and $G_j(P)$ is not finitely covered when $P$ is not. So $G(P) \subseteq P$ halves every side and preserves not being finitely covered. [L8, step 3.1]
+
+5.1 Recursion applied to the starting value $Q$ and the rule $G$ produces boxes $P_m$ with $P_0 = Q$ and $P_{m+1} = G(P_m)$; each $P_m$ fails to be finitely covered, $P_{m+1} \subseteq P_m$, and the $k$-th side length of $P_m$ is $\ell_k (1/2)^m$, where $\ell_k := b_k - a_k \ge 0$. [L8, step 4.1]
+
+6.1 For each $k < n$ the $k$-th intervals of the $P_m$ form a nested family of closed bounded intervals whose lengths $\ell_k(1/2)^m$ tend to $0$, so their intersection is a single point $p_k$; the function $p : n \to \mathbb{R}$, $k \mapsto p_k$, is a point of $\mathbb{R}^n$ lying in every $P_m$. [L7, L9, step 5.1]
+
+7.1 Since $p \in P_0 = Q \subseteq \bigcup_{i \in I} U_i$, there is $i^{\ast} \in I$ with $p \in U_{i^{\ast}}$, and openness gives a real $r > 0$ with $B(p,r) \subseteq U_{i^{\ast}}$. [L11, step 6.1]
+
+8.1 Put $L := \max\{\ell_k : k < n\} \ge 0$ and $C := \iota(n) L + 1 > 0$; for $x \in P_m$ each $|x_k - p_k|$ is at most the $k$-th side length of $P_m$, so $d_\infty(x,p) \le L (1/2)^m$ and $d_2(x,p) \le \iota(n) L (1/2)^m \le C (1/2)^m$ by step 1.2. Taking a natural $N \ge 1$ with $1/N < r/C$ and then $m$ with $(1/2)^m < 1/N$ gives $P_m \subseteq B(p,r) \subseteq U_{i^{\ast}}$, so $P_m$ is finitely covered by the single set $U_{i^{\ast}}$, contradicting step 5.1. [L9, L10, L12, step 1.2, step 5.1, step 6.1, step 7.1, discharge-contradiction]
+
+9.1 Therefore every such family has finitely many members covering $Q$, and $Q$ is a compact subset of $(\mathbb{R}^n,d_2)$: claim 1 is proved. [L4, step 2.1, step 8.1]
+
+10.1 For claim 2, a compact $K \subseteq \mathbb{R}^n$ is closed and bounded. [L5, step 9.1]
+
+11.1 Conversely let $K \subseteq \mathbb{R}^n$ be closed and bounded; if $K = \emptyset$ it is compact, and otherwise $K \subseteq B(x_0,\rho)$ for some $x_0$ and real $\rho > 0$, so every $x \in K$ and $k < n$ satisfy $|x_k| \le |(x_0)_k| + |x_k - (x_0)_k| \le |(x_0)_k| + d_2(x,x_0) < |(x_0)_k| + \rho$ by step 1.1; with $M := \max\{|(x_0)_k| : k < n\} + \rho$ the box $Q_M := \{\, x : -M \le x_k \le M \ (k<n) \,\}$ contains $K$. [L10, L11, step 1.1, step 10.1]
+
+12.1 $K$ is the trace on $Q_M$ of a closed subset of $\mathbb{R}^n$, namely of $K$ itself, so $K$ is closed in the metric subspace $Q_M$; that subspace is compact by step 9.1, so $K$ is compact, and claim 2 is proved. [L4, L6, step 9.1, step 11.1]
+
+13.1 For claim 3, let $\psi : \mathbb{R} \to \mathbb{R}^1$ send $t$ to the function $1 \to \mathbb{R}$ with value $t$; it is a bijection and $d_2(\psi(s),\psi(t)) = \sqrt{(s-t)^2} = |s-t| = d_{\mathbb{R}}(s,t)$, so $\psi$ carries each ball onto the corresponding ball, hence open sets onto open sets and open covers onto open covers with matching finite subfamilies, and likewise closed sets onto closed sets and bounded sets onto bounded sets. Applying claim 2 with $n = 1$ to $\psi[K]$ therefore gives claim 3. [L1, L3, L4, L11, step 12.1] ∎
+
+## Remarks
+
+**Why the bisection halves one coordinate at a time.** Halving all $n$ coordinates at once produces $2^n$ sub-boxes, and choosing one of them canonically means enumerating them, which needs a bijection between the functions $n \to \{0,1\}$ and a natural number. Halving a single coordinate produces two sub-boxes, and "the left one if it is still not finitely covered, the right one otherwise" is a definition by cases needing nothing at all. Composing $n$ such halvings, as step 4.1 does, recovers the full halving of every side and keeps the construction canonical, which is what a choice-free proof requires.
+
+**Where each hypothesis is used.** Closedness enters only at step 12.1, through [[lem-closed-subset-of-a-compact-space-is-compact]]; boundedness enters only at step 11.1, to fit $K$ inside a box. Dropping either leaves a non-compact set: the whole of $\mathbb{R}^n$ is closed and unbounded, and an open ball is bounded and not closed, and neither is compact by claim 2.
+
+**The converse direction is what fails in a general metric space.** Claim 2 says that in $\mathbb{R}^n$ closed and bounded is enough; that is special to $\mathbb{R}^n$, and [[fs-closed-and-bounded-implies-compact-in-every-metric-space]] records the false general statement together with a witness. What survives in every metric space is only the direction of step 10.1 ([[thm-compact-subset-is-closed-and-bounded]]).
+
+**The case $n = 0$.** $\mathbb{R}^0$ has exactly one element, the empty function, and [[lem-metrics-on-rn]] does not treat it, because $d_\infty$ would be a maximum over the empty index set. On a one-element set the only metric is the one taking the value $0$, and the resulting space is compact for trivial reasons: it is listed as $\{x_0\}$, and any family of open sets covering it has a member containing $x_0$ ([[def-metric-compactness]]). Nothing above is needed for that case and nothing above claims it.

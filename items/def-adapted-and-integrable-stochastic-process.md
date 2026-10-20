@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-adapted-and-integrable-stochastic-process.json
   audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
@@ -22,6 +23,15 @@ origin: "pipeline"
 
 ## Definition
 
-On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\in\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\in\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].
+On a filtered probability space Filtration and filtered probability space, a **real stochastic process** is a sequence $(X_n)_{n\in\mathbb N_0}$ of real random variables Random elements and real random variables on the same space. It is **adapted** when $X_n^{-1}(B)\in\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\infty$ for every $n$, using Expectation of a nonnegative or integrable random variable.
 
 An integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\sup_nE|X_n|<\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.
+
+## Definition references
+
+[[def-filtration-and-filtered-probability-space]]
+
+[[def-random-element-and-real-random-variable]]
+
+[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]
+

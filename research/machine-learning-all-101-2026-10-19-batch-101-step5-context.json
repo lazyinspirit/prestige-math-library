@@ -1,0 +1,173 @@
+{
+  "group": "ah",
+  "batches": [
+    "101"
+  ],
+  "pages_read": [
+    "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+    "semi-supervised-graph-propagation-and-pseudolabeling-limits-examples"
+  ],
+  "items_read": [
+    "alg-finite-round-confidence-pseudolabeling",
+    "lem-real-cholesky-recurrence-computes-factorization",
+    "def-graph-harmonic-label-extension",
+    "thm-unlabeled-law-alone-does-not-identify-labels",
+    "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+    "alg-graph-harmonic-label-propagation",
+    "rem-semisupervised-cluster-assumptions",
+    "ex-confident-pseudolabel-can-be-wrong",
+    "ex-unlabeled-law-two-point-lower-bound",
+    "ex-graph-harmonic-path-interpolation",
+    "ex-graph-harmonic-unanchored-component-status"
+  ],
+  "conventions": [
+    {
+      "convention": "Weights are symmetric, nonnegative and zero-diagonal; support edges have strictly positive weight. Isolated vertices are singleton components. The energy is E(f)=½ fᵀLf, and anchoring requires every component meeting U to meet the nonempty boundary B.",
+      "fixed_by": "def-graph-harmonic-label-extension",
+      "matters_for": [
+        "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+        "alg-graph-harmonic-label-propagation",
+        "ex-graph-harmonic-path-interpolation",
+        "ex-graph-harmonic-unanchored-component-status"
+      ]
+    },
+    {
+      "convention": "Pseudo-label predictions within a round use the same training list. Distance ties use stable record indices, vote ties use the smallest class index, threshold equality is accepted, and appended pseudo-labels are never revised.",
+      "fixed_by": "alg-finite-round-confidence-pseudolabeling",
+      "matters_for": [
+        "ex-confident-pseudolabel-can-be-wrong",
+        "rem-semisupervised-cluster-assumptions"
+      ]
+    },
+    {
+      "convention": "The randomized predictor distribution Q is identical under the two laws, which differ only at an unseen positive-mass atom. The risk is binary zero-one population risk.",
+      "fixed_by": "thm-unlabeled-law-alone-does-not-identify-labels",
+      "matters_for": [
+        "ex-unlabeled-law-two-point-lower-bound",
+        "rem-semisupervised-cluster-assumptions"
+      ]
+    },
+    {
+      "convention": "The graph procedure uses exact real arithmetic and increasing vertex order. Its cap is per label coordinate and includes right-hand-side formation, a freshly recomputed Cholesky factor, substitutions and residual calculation. Validation, graph construction, component scans, loop control and budget checks are excluded.",
+      "fixed_by": "alg-graph-harmonic-label-propagation",
+      "matters_for": [
+        "ex-graph-harmonic-unanchored-component-status",
+        "rem-semisupervised-cluster-assumptions"
+      ]
+    },
+    {
+      "convention": "The Cholesky recurrence uses indices 1 through n and returns a lower-triangular factor with positive diagonal, with M=RRᵀ.",
+      "fixed_by": "lem-real-cholesky-recurrence-computes-factorization",
+      "matters_for": [
+        "alg-graph-harmonic-label-propagation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+      "statement": "For a finite symmetric nonnegative zero-diagonal weighted graph with nonempty boundary B, assume every support component meeting U=V\\B also meets B. The energy E(f)=½ fᵀLf with prescribed boundary values has exactly one minimizer. If U is empty it is the boundary vector; otherwise L_UU is real symmetric positive definite and f_U=−L_UU⁻¹L_UB y_B. Every unlabeled value is a positive-degree weighted neighbor average and lies between the minimum and maximum boundary values. For C≥2, coordinatewise extensions of one-hot boundary values have every row in the probability simplex.",
+      "used_by": [
+        "alg-graph-harmonic-label-propagation",
+        "ex-graph-harmonic-path-interpolation"
+      ]
+    },
+    {
+      "id": "lem-real-cholesky-recurrence-computes-factorization",
+      "statement": "For n≥1 and real symmetric positive-definite M, the displayed columnwise Cholesky recurrence has every pivot positive and returns a lower-triangular matrix R with positive diagonal satisfying M=RRᵀ.",
+      "used_by": [
+        "alg-graph-harmonic-label-propagation"
+      ]
+    },
+    {
+      "id": "thm-unlabeled-law-alone-does-not-identify-labels",
+      "statement": "On a finite discrete feature set, let two binary deterministic label laws have the same feature marginal μ and differ only at an unobserved atom x★ of mass q>0, outside a nonempty observed-input set. For any common probability vector Q on all binary predictors, the maximum of the two expected zero-one population risks is at least q/2.",
+      "used_by": [
+        "ex-unlabeled-law-two-point-lower-bound",
+        "rem-semisupervised-cluster-assumptions"
+      ]
+    },
+    {
+      "id": "def-graph-harmonic-label-extension",
+      "statement": "For the specified finite weighted graph, nonempty boundary B and prescribed real boundary values, a graph-harmonic label extension is any minimizer of E(f)=½ fᵀLf over functions with those boundary values; the definition itself makes no uniqueness assertion.",
+      "used_by": [
+        "thm-graph-harmonic-extension-uniqueness-and-maximum-principle",
+        "alg-graph-harmonic-label-propagation",
+        "ex-graph-harmonic-path-interpolation",
+        "ex-graph-harmonic-unanchored-component-status"
+      ]
+    },
+    {
+      "id": "alg-finite-round-confidence-pseudolabeling",
+      "statement": "The specified finite weighted k-nearest-record procedure adds all threshold-qualified pseudo-labels simultaneously in each round, never revises an added label, and returns its final classifier, log, remaining unlabeled set and stopping status. It makes no population-risk or pseudo-label-correctness guarantee.",
+      "used_by": [
+        "ex-confident-pseudolabel-can-be-wrong",
+        "rem-semisupervised-cluster-assumptions"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-cholesky-factorisation-with-positive-diagonal",
+      "used_for": "Real positive definiteness and the lower-triangular positive-diagonal factorization convention in the recurrence lemma and harmonic-extension theorem.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Invertibility of finite square matrices with zero kernel in the recurrence lemma's Schur-complement argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Existence and uniqueness of the real Cholesky factor of the anchored principal Laplacian block.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "used_for": "Correctness and uniqueness of the two triangular solves in the harmonic-extension theorem and graph propagation procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+      "used_for": "Solving the positive-definite block system through its Cholesky factor in finitely many scalar operations.",
+      "opened": true
+    },
+    {
+      "id": "def-forward-and-back-substitution-for-triangular-systems",
+      "used_for": "The precise substitution recursions underlying the cited triangular-solve theorem.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-cholesky-factorisation-with-positive-diagonal",
+      "finding": "The published Definition ends with 'The Hermitian terminology matches [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]], and the triangular terminology matches [[def-triangular-and-diagonal-matrices-over-a-commutative-ring]].' These hyperlinks remain inside the Definition rather than an immediately following Definition references section, contrary to the assigned uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost",
+      "finding": "Statement clause 1 says 'the forward substitution recursion of [[def-forward-and-back-substitution-for-triangular-systems]] produces the unique solution'. This wikilink interrupts the Statement; the assigned policy requires moving it after the complete Statement into Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-forward-and-back-substitution-for-triangular-systems",
+      "finding": "The published Definition ends with 'The triangular vocabulary is from [[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix product convention from [[def-matrix-product-and-identity-matrix]] is the one used when later items rewrite these recursions as matrix equations.' Both wikilinks remain within the Definition instead of a following Definition references section, contrary to the assigned uninterrupted-statement policy.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+      "to": "ml02-spectral-clustering",
+      "faithful": true,
+      "note": "Checked the prerequisite page inventory and the actual weighted-Laplacian definition and quadratic-form/kernel lemma against their uses. Symmetry, nonnegative zero-diagonal weights, positive-weight support edges and isolated components agree. Anchoring is an additional explicit consumer hypothesis. All four example diagrams agree with their stated models."
+    },
+    {
+      "from": "semi-supervised-graph-propagation-and-pseudolabeling-limits",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Checked the prerequisite page inventory and the supervised-problem and population-risk definitions against the theorem and two-law example. Finite discrete spaces and binary zero-one loss satisfy the supplier interfaces, and the displayed risks are their finite integrals. The lower bound explicitly assumes a common randomized predictor distribution; it does not assert an unstated sampling guarantee."
+    }
+  ]
+}

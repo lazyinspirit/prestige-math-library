@@ -1,0 +1,31 @@
+---
+page: implicit-bias-of-gradient-training
+title: "Implicit bias of gradient-based learning"
+status: draft
+items:
+  - def-clarke-subdifferential-and-gradient-flow
+  - def-linear-separable-margin-and-hard-margin-svm
+  - def-tight-exponential-tail
+  - thm-zero-initialized-gd-selects-minimum-norm-least-squares
+  - lem-hard-margin-svm-has-unique-minimizer
+  - lem-logistic-and-exponential-losses-have-tight-exponential-tail
+  - def-homogeneous-classifier-margin-and-exponential-risk
+  - def-margin-kkt-and-mfcq
+  - lem-clarke-euler-identity-for-homogeneous-margins
+  - lem-clarke-sum-chain-rule-for-exponential-risk
+  - lem-recursive-hard-margin-comparison-trajectory
+  - thm-separable-logistic-gd-selects-hard-margin-direction
+  - lem-homogeneous-margin-constraints-satisfy-mfcq
+  - lem-homogeneous-clarke-flow-margin-monotonicity
+  - lem-approximate-margin-kkt-limit-under-mfcq
+  - lem-local-margin-minimum-satisfies-kkt-under-mfcq
+  - lem-homogeneous-clarke-flow-produces-approximate-margin-kkt-points
+  - thm-homogeneous-gradient-flow-limit-satisfies-margin-kkt
+examples: []
+requires:
+  - automatic-differentiation-and-backpropagation
+  - constant-rank-submersions-and-regular-level-sets
+  - convex-and-semicontinuous-functions-on-rn
+  - inner-product-spaces-and-orthogonality
+  - the-moore-penrose-pseudoinverse-and-regularised-least-squares
+---

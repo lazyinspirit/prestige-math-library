@@ -10,6 +10,7 @@ provenance:
 deps: [def-triangular-and-diagonal-matrices-over-a-commutative-ring, def-matrix-product-and-identity-matrix]
 aliases: []
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-forward-and-back-substitution-for-triangular-systems.json
   audited: 2026-08-30
   precheck: n/a
   judge:
@@ -36,6 +37,13 @@ construction
 $$x_i:=\frac{1}{\ell_{ii}}\left(b_i-\sum_{j<i}\ell_{ij}x_j\right)\qquad(0\le i<n).$$If $U=(u_{ij})\in M_n(F)$ is upper triangular with every diagonal entry $u_{ii}\ne 0$, the **backward substitution solve** of $Ux=b$ is the recursive construction$$x_i:=\frac{1}{u_{ii}}\left(b_i-\sum_{j>i}u_{ij}x_j\right)\qquad(n-1\ge i\ge 0).$$
 
 The triangular vocabulary is from
-[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]. The matrix
-product convention from [[def-matrix-product-and-identity-matrix]] is the one
+Upper triangular, lower triangular and diagonal square matrices over a commutative ring. The matrix
+product convention from Rectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes is the one
 used when later items rewrite these recursions as matrix equations.
+
+## Definition references
+
+[[def-triangular-and-diagonal-matrices-over-a-commutative-ring]]
+
+[[def-matrix-product-and-identity-matrix]]
+

@@ -1,0 +1,221 @@
+{
+  "group": "e",
+  "batches": ["15"],
+  "pages_read": ["ml02-rkhs-svm", "ml02-rkhs-svm-examples"],
+  "items_read": [
+    "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+    "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+    "thm-canonical-rkhs-construction-and-reproducing-property",
+    "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+    "thm-finite-sample-representer-theorem-in-an-rkhs",
+    "def-hard-and-soft-margin-support-vector-machines",
+    "lem-soft-margin-svm-primal-attainment",
+    "thm-soft-margin-svm-dual-and-kkt-conditions",
+    "ex-gaussian-radial-kernel",
+    "ex-linear-and-polynomial-kernels",
+    "ex-separable-hard-margin-svm",
+    "ex-overlapping-soft-margin-svm-score-and-kkt"
+  ],
+  "conventions": [
+    {
+      "convention": "Kernels and RKHSs are real. Positive semidefiniteness includes symmetry and nonnegativity for every finite Gram quadratic form, allowing repeated points and singular matrices.",
+      "fixed_by": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+      "matters_for": [
+        "thm-canonical-rkhs-construction-and-reproducing-property",
+        "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+        "ex-gaussian-radial-kernel",
+        "ex-linear-and-polynomial-kernels"
+      ]
+    },
+    {
+      "convention": "The canonical quotient-and-norm-completion RKHS construction assumes Countable Choice; the predicates for a given kernel or RKHS do not themselves assert its existence.",
+      "fixed_by": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+      "matters_for": ["thm-canonical-rkhs-construction-and-reproducing-property"]
+    },
+    {
+      "convention": "Finite-sample representer existence is conditional on a minimizer already existing; the loss is finite-valued, the norm penalty is nondecreasing, and n=0 is allowed.",
+      "fixed_by": "thm-finite-sample-representer-theorem-in-an-rkhs",
+      "matters_for": ["thm-finite-sample-representer-theorem-in-an-rkhs"]
+    },
+    {
+      "convention": "SVM samples have n≥1, labels in {−1,+1}, C>0, and an unpenalized bias. Scores at zero predict +1. Scores carry no probability-calibration interpretation.",
+      "fixed_by": "def-hard-and-soft-margin-support-vector-machines",
+      "matters_for": [
+        "lem-soft-margin-svm-primal-attainment",
+        "thm-soft-margin-svm-dual-and-kkt-conditions",
+        "ex-separable-hard-margin-svm",
+        "ex-overlapping-soft-margin-svm-score-and-kkt"
+      ]
+    },
+    {
+      "convention": "Margin-separable means that the hard-margin feasible set is nonempty.",
+      "fixed_by": "def-hard-and-soft-margin-support-vector-machines",
+      "matters_for": ["ex-separable-hard-margin-svm"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+      "statement": "A real RKHS with kernel k contains every section k_x=k(·,x) and satisfies ⟨f,k_x⟩=f(x) for every f in the space.",
+      "used_by": [
+        "thm-canonical-rkhs-construction-and-reproducing-property",
+        "thm-finite-sample-representer-theorem-in-an-rkhs",
+        "lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization",
+        "ex-gaussian-radial-kernel",
+        "ex-linear-and-polynomial-kernels"
+      ]
+    },
+    {
+      "id": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+      "statement": "Let E be a real inner-product space, M⊆E a finite-dimensional subspace, and f∈E. There is a unique p∈M such that f−p is orthogonal to M. It is the unique nearest point and satisfies ‖p‖≤‖f‖. Completeness of E is unnecessary.",
+      "used_by": [
+        "thm-finite-sample-representer-theorem-in-an-rkhs",
+        "lem-soft-margin-svm-primal-attainment",
+        "thm-soft-margin-svm-dual-and-kkt-conditions"
+      ]
+    },
+    {
+      "id": "lem-soft-margin-svm-primal-attainment",
+      "statement": "For n≥1, C>0, and a finite sample with labels in {−1,+1} in a real Hilbert feature space, the soft-margin primal has a finite attained minimum, with at least one minimizing weight in the sample feature span, including samples with only one label.",
+      "used_by": ["thm-soft-margin-svm-dual-and-kkt-conditions"]
+    },
+    {
+      "id": "thm-canonical-rkhs-construction-and-reproducing-property",
+      "statement": "Assume the Axiom of Countable Choice. For every set X and real positive semidefinite kernel k on X, the finitely supported coefficient quotient and norm completion define a real RKHS with reproducing kernel k.",
+      "used_by": [
+        "lem-gaussian-rbf-power-function-fill-distance-bound",
+        "thm-noiseless-rkhs-interpolation-fill-distance-bound"
+      ]
+    },
+    {
+      "id": "thm-soft-margin-svm-dual-and-kkt-conditions",
+      "statement": "For n≥1, C>0, real Hilbert features and binary labels, primal and dual optima are attained and equal. The dual has 0≤α_i≤C and Σα_i y_i=0; the stated stationarity and complementarity equations are necessary at every primal minimizer and sufficient for global optimality.",
+      "used_by": ["ex-overlapping-soft-margin-svm-score-and-kkt"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Real inner-product axioms and the library's linear-first convention.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Cauchy-sequence completeness and the distinction from stronger completeness conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-completion-of-a-normed-space",
+      "used_for": "Dense linear isometric embedding into a Banach completion.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The exact choice assumption in canonical RKHS completion.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-projection",
+      "used_for": "Projection in a finite-dimensional ambient inner-product space.",
+      "opened": true
+    },
+    {
+      "id": "thm-orthogonal-projection-is-the-unique-nearest-point",
+      "used_for": "Projection inside span(M∪{f}) in the arbitrary-ambient projection lemma.",
+      "opened": true
+    },
+    {
+      "id": "prop-pythagorean-parallelogram-and-polarisation-identities",
+      "used_for": "Norm contraction, uniqueness, and strict norm reduction after removing an orthogonal residual.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-completion",
+      "used_for": "The metric completion interface underlying canonical RKHS construction.",
+      "opened": true
+    },
+    {
+      "id": "thm-metric-completion-exists",
+      "used_for": "Cauchy-class completion and its Countable Choice hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "thm-metric-completion-carries-a-unique-banach-space-structure",
+      "used_for": "Compatible vector operations and norm on the metric completion.",
+      "opened": true
+    },
+    {
+      "id": "thm-completion-of-an-inner-product-space-is-hilbert",
+      "used_for": "Extending the quotient inner product to its Hilbert completion under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "Continuity of evaluation pairings and finite-sample score bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Euclidean feature factorization of a symmetric positive semidefinite Gram matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+      "used_for": "Attainment on the nonempty closed bounded finite-dimensional primal sublevel set.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Euclidean coordinates for the finite-dimensional primal, including zero-dimensional feature span.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-program-duality-and-slater-condition",
+      "used_for": "Finite-dimensional duality domains, constraint deletion convention, and relative-interior Slater condition.",
+      "opened": true
+    },
+    {
+      "id": "thm-slater-strong-duality-and-dual-attainment",
+      "used_for": "Dual attainment, equality of primal and dual values, and complementarity after finite-dimensional reduction.",
+      "opened": true
+    },
+    {
+      "id": "def-inequality-constrained-program-and-kkt-geometry",
+      "used_for": "The g_i≤0 convention with nonnegative inequality multipliers.",
+      "opened": true
+    },
+    {
+      "id": "thm-convex-kkt-sufficiency-and-normal-cone-certificate",
+      "used_for": "Global optimality of feasible finite-dimensional SVM KKT tuples.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-linear-and-polynomial-kernels",
+      "concern": "Verification step 1.2 defines ψ_α(x) using the literal coefficient '\\sqrt{d!/\\alpha_0!\\cdots\\alpha_p!}'. The denominator product is ungrouped, so ordinary multiplication/division notation gives (d!/α_0!) times the remaining factorials, rather than the multinomial coefficient. For p=1,d=2,x=z=1, the three squared features are 1,2,4, summing to 7, while (1+xz)^2=4. Thus the displayed feature identity and its use in step 2.1 are false with the coefficient as written. The explicit six-dimensional feature map in the Example is correct.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "minimum-norm-interpolation-and-double-descent",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "The Gaussian power-function and noiseless interpolation items use the reproducing identity and finite-dimensional projection with their stated domains. Both explicitly retain Countable Choice when invoking canonical RKHS existence; neither imports unconditional minimizer existence from the representer theorem."
+    },
+    {
+      "from": "neural-tangent-kernels-and-lazy-training",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "The kernel-flow item cites symmetric positive-semidefinite finite Gram matrices faithfully and separately assumes positive definiteness for convergence. The matrix-valued NTK definition uses its own Jacobian construction and does not misattribute that extension to the scalar RKHS definition."
+    },
+    {
+      "from": "sketched-kernel-learning-and-certified-solves",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "The regularized prediction definition and KRR minimization theorem assume a given real RKHS and use its reproducing sections faithfully. They allow singular Gram matrices and prove existence and uniqueness directly for λ>0, without strengthening the conditional representer theorem or invoking choice-free canonical RKHS existence."
+    }
+  ]
+}

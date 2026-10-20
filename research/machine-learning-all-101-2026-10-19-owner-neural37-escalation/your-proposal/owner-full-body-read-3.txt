@@ -1,0 +1,326 @@
+
+===== def-product-topology =====
+
+
+## Definition
+
+**The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$.
+The **product** is
+
+$$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$
+
+and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the
+product are equal exactly when they agree at every index, functions being equal
+when they have the same domain and the same values. For $j \in I$ the $j$-th
+**projection** is
+
+$$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$
+
+**Notation for a finite product.** For $I = n$ a natural number, which is the set
+$\{0, 1, \dots, n-1\}$ of its predecessors, an element of $\prod_{k<n} X_k$ is a
+function on $n$ and we write it $(x_0, \dots, x_{n-1})$. In particular $I = 2$
+gives the **binary product**, written $X \times Y$ for $\prod_{i<2} X_i$ with
+$X_0 = X$ and $X_1 = Y$, whose elements are written $(u,v)$ for the function
+$0 \mapsto u$, $1 \mapsto v$. This is the only meaning the symbol $X \times Y$
+carries on this page.
+
+**Two facts about when the product is nonempty, stated because they are used and
+because they cost something.** If some $X_{i_0}$ is empty then the product is
+empty, since no function can take a value in $X_{i_0}$. Conversely, suppose every
+$X_i$ is nonempty.
+
+- For $I = n$ a natural number, the product is nonempty, and this is a theorem of
+  ZF: [[lem-finite-choice]] applied to the function $i \mapsto X_i$ on $n$
+  supplies a choice function $g$ for the family of values, and
+  $x(i) := g(X_i)$ defines a member of $\prod_{k<n} X_k$.
+- For an arbitrary $I$ the assertion "$\prod_{i \in I} X_i \ne \varnothing$
+  whenever every $X_i$ is nonempty" **is** the Axiom of Choice: it is the
+  formulation recorded in [[def-axiom-of-choice]], and the choice function of
+  [[def-choice-function]] is exactly a point of the product of a family by
+  itself. Every use of it below is flagged at the step that spends it.
+
+**The box topology.** Now let each $X_i$ carry a topology $\mathcal{T}_i$
+([[def-topological-space]]). Put
+
+$$\mathcal{R} \;:=\; \Big\{\, \prod_{i \in I} U_i \;:\; U_i \in \mathcal{T}_i \text{ for every } i \in I \,\Big\},$$
+
+the family of **boxes**. $\mathcal{R}$ is a basis for a topology
+([[thm-basis-criterion]]): it contains $\prod_i X_i$, so it covers the product,
+and it is closed under binary intersections, since
+
+$$\Big(\prod_i U_i\Big) \cap \Big(\prod_i V_i\Big) = \prod_i (U_i \cap V_i)$$
+
+and each $U_i \cap V_i$ is open by (T3). The topology it generates is the **box
+topology** $\mathcal{T}^{\square}$, and $\mathcal{R}$ is a basis for it
+([[def-topology-basis-subbasis]]).
+
+**The product topology.** The **product topology** $\mathcal{T}^{\Pi}$ on
+$\prod_i X_i$ is the initial topology of the family of projections
+$(\pi_i)_{i \in I}$ ([[def-initial-and-final-topology]]): the topology generated
+by the subbasis
+
+$$\mathcal{G} \;:=\; \{\, \pi_i^{-1}[U] : i \in I,\ U \in \mathcal{T}_i \,\}, \qquad \pi_i^{-1}[U] = \prod_{j \in I} W_j \ \text{ with } W_i = U \text{ and } W_j = X_j \text{ for } j \ne i .$$
+
+By [[thm-basis-criterion]] the finite intersections of members of $\mathcal{G}$
+form a basis for $\mathcal{T}^{\Pi}$, and those finite intersections are exactly
+the boxes with all but finitely many factors unrestricted:
+
+$$\mathcal{R}^{\Pi} \;=\; \Big\{\, \prod_{i \in I} U_i \;:\; U_i \in \mathcal{T}_i \text{ for every } i, \text{ and } U_i = X_i \text{ for all but finitely many } i \,\Big\}.$$
+
+Indeed the intersection of $\pi_{i_1}^{-1}[U_1], \dots, \pi_{i_n}^{-1}[U_n]$ is
+the box whose factor at $i$ is the intersection of those $U_m$ with $i_m = i$ and
+is $X_i$ when no $i_m$ equals $i$; and the intersection of no members is the
+whole product, the box with every factor $X_i$. Conversely a box with
+$U_i = X_i$ off a finite set is such an intersection. Members of
+$\mathcal{R}^{\Pi}$ are called **basic product-open** sets, and members of
+$\mathcal{R}$ **boxes**. So $\mathcal{R}^{\Pi} \subseteq \mathcal{R}$, with
+equality when $I$ is a natural number.
+
+**The empty product.** For $I = \varnothing$ there is exactly one function with
+domain $\varnothing$, the empty function, so $\prod_{i \in \varnothing} X_i$ is a
+one-point set. A one-point set carries exactly one topology, namely
+$\{\varnothing, \{\varnothing\}\}$, since a topology must contain the empty set
+and the whole set and there is nothing else to contain
+([[def-topological-space]]); so the box topology and the product topology agree
+there, and both equal the discrete topology and the indiscrete topology
+([[def-standard-topologies]]), which coincide on a one-point set. There are no
+projections to speak of, and the initial topology of the empty family is indeed
+the indiscrete one ([[def-initial-and-final-topology]]).
+
+**Convention.** Unless the box topology is named explicitly, $\prod_i X_i$ always
+carries the product topology in this library. That is not a matter of taste: the
+product topology is the one with the characteristic property of the next item,
+and the box topology has no such property.
+
+## Remarks
+
+- **Where the two topologies actually differ.** The box topology is finer than
+  the product topology by construction, since $\mathcal{R}^{\Pi} \subseteq
+  \mathcal{R}$. They agree whenever $I$ is finite; and, assuming the Axiom of Choice, for a
+  family of **nonempty** spaces they differ for infinite $I$ as soon as infinitely
+  many factors have a nonempty proper open subset. Nonemptiness is not decoration: if one factor is
+  empty then the product is empty and carries exactly one topology, so the two
+  agree however the other factors are chosen. Both statements are proved two items
+  below, with that hypothesis, and the failure is recorded on this page as a false
+  statement.
+
+- **The product set is a set of functions, and that is not a technicality.** The
+  factors are indexed by an arbitrary set, so there is no "list" to write down;
+  writing $x = (x_i)_{i \in I}$ is notation for the function $x$. The finite case
+  recovers the familiar tuple, and the identification of $\prod_{k<n}\mathbb{R}$
+  with the $\mathbb{R}^n$ of [[lem-metrics-on-rn]] is literal, that item defining
+  $\mathbb{R}^n$ as the set of functions $n \to \mathbb{R}$.
+
+- **The projections carry no hypothesis.** They are defined for every product,
+  including the empty one and products with an empty factor; what does need a
+  hypothesis is their *surjectivity*, which is the point at which choice enters
+  and which is stated separately in the next item.
+
+===== def-totally-bounded =====
+
+
+## Definition
+
+Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\varepsilon$ be a
+real with $\varepsilon > 0$.
+
+- A **finite $\varepsilon$-net** for $(X,d)$ is a finite subset $F \subseteq X$
+  with
+  $$X = \bigcup_{y \in F} B(y, \varepsilon) ,$$
+  the balls being those of $(X,d)$ ([[def-metric-ball]]). *Finite* is the
+  listing form fixed in [[def-metric-compactness]]: $F = \emptyset$, or
+  $F = \{y_0, \dots, y_m\}$ for some $m \in \mathbb{N}$ and points
+  $y_0, \dots, y_m \in X$.
+- $(X,d)$ is **totally bounded** when it has a finite $\varepsilon$-net for every
+  real $\varepsilon > 0$.
+- A subset $A \subseteq X$ is **totally bounded** when the metric subspace
+  $(A,d_A)$ is ([[def-isometry-and-metric-embedding]]); its nets are then finite
+  subsets of $A$ and its balls are the balls $B_A(a,\varepsilon)$ of the
+  subspace.
+
+**The empty space is totally bounded**, the empty net serving for every
+$\varepsilon$, since a union over no indices is empty. Every space listed as
+$\{x_0, \dots, x_n\}$ is totally bounded too, itself being an $\varepsilon$-net
+for every $\varepsilon$.
+
+**The centres are required to lie in the space.** Writing the condition with
+centres in $X$ and balls of $X$ is what makes total boundedness a property of the
+metric space $(X,d)$ alone, matching the treatment of compactness in
+[[def-metric-compactness]]. For a subset $A$ this matters: the nets of $(A,d_A)$
+consist of points of $A$, not of nearby points of the ambient space.
+
+**Total boundedness is stronger than boundedness and is not the same thing.**
+A totally bounded space is bounded in the sense of
+[[def-metric-bounded-diameter]] — that is claim 1 of
+[[lem-totally-bounded-basic]] — and the converse fails, as
+[[fs-bounded-implies-totally-bounded]] records. Boundedness asks for one ball
+containing the space; total boundedness asks for finitely many balls of *every*
+prescribed radius, and it is the second condition that controls how spread out
+the space is at small scales.
+
+## Remarks
+
+**Why $\varepsilon$ ranges over the reals here.** Convergence and the Cauchy
+condition are tested against rational $\varepsilon$ in this library
+([[def-metric-convergence]], [[def-cauchy-in-metric]]), because that is how
+[[def-real-limit]] is written; total boundedness is not a limit condition and is
+stated for real $\varepsilon > 0$ directly. Nothing turns on the difference: a
+net for a rational $\varepsilon' \le \varepsilon$ is a net for $\varepsilon$,
+since $B(y,\varepsilon') \subseteq B(y,\varepsilon)$.
+
+**A net is not unique and is not part of the data.** Total boundedness asserts
+that nets exist; it names none. Producing one net for each $\varepsilon$
+simultaneously, as a function of $\varepsilon$, is a further act of selection,
+and where a proof needs that function it says so and pays for it — see
+[[thm-complete-and-totally-bounded-implies-compact]] and
+[[lem-compact-metric-space-has-a-countable-dense-subset]], each of which spends
+the Axiom of Countable Choice ([[def-countable-choice]]) exactly once and at
+exactly that point.
+
+===== lem-euclidean-bump-for-a-compact-set-inside-an-open-set =====
+
+
+## Statement
+
+If $K\subseteq U\subseteq\mathbb R^n$ with $K$ compact and $U$ open, then there exists a smooth function $\rho:\mathbb R^n\to [0,1]$ such that $\rho=1$ on $K$ and $\operatorname{supp}(\rho)\subseteq U$.
+
+## Facts & Assumptions
+
+**Given:** A compact set $K\subseteq\mathbb R^n$ and an open set $U\supseteq K$.
+
+[L1] Compactness gives a finite subcover from an indexed ambient open cover ([[lem-compactness-is-intrinsic]], claim 3).
+
+[L2] The explicit concentric-ball construction gives a smooth function into $[0,1]$, equal to $1$ on the inner closed ball and supported inside the outer open ball ([[lem-smooth-bump-between-concentric-euclidean-balls]]).
+
+[L3] The one-variable sum and product rules apply to coordinate derivatives ([[thm-algebra-of-derivatives]]). Smoothness requires all iterated coordinate derivatives to exist and be continuous ([[def-ck-and-multi-index-notation-in-several-variables]]).
+
+[F1] Support is the closure of the nonzero locus ([[def-support-and-compactly-supported-riemann-integral-in-rn]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 If $K=\varnothing$, the zero function has empty support and satisfies the claim. Suppose henceforth that $K\ne\varnothing$. Consider all triples $(p,r,R)$ with $p\in K$, $0<r<R$, and $B_R(p)\subseteq U$. Their inner balls $B_r(p)$ form an indexed open cover of $K$: openness gives a ball $B_R(p)\subseteq U$ at each $p$, and $r=R/2$ is admissible. This defines the whole family without making a simultaneous choice at every point. [given, F1, construct]
+
+2.1 By [L1], finitely many admissible triples $(p_i,r_i,R_i)$, $1\le i\le m$, have inner balls covering $K$. For each of these finitely many triples use the explicit formula in [L2], with $x$ replaced by $x-p_i$, to define $\rho_i$. Translation preserves the coordinate-derivative formulas, so each $\rho_i$ is smooth, lies in $[0,1]$, equals $1$ on $\overline B_{r_i}(p_i)$, and has support contained in $B_{R_i}(p_i)\subseteq U$. [L1, L2, step 1.1]
+
+3.1 Define $\rho=1-\prod_{i=1}^m(1-\rho_i)$. Repeated use of [L3] shows that each iterated coordinate derivative is a finite sum of products of continuous derivatives of the $\rho_i$, so $\rho$ is smooth. Since every factor lies in $[0,1]$, so does $\rho$. On each inner ball one factor is zero; hence $\rho=1$ on their union, an open neighbourhood of $K$. [L3, step 2.1, construct]
+
+4.1 Let $F=\bigcup_{i=1}^m\operatorname{supp}\rho_i$. Each support is closed by [F1], so the finite union $F$ is closed, and step 2.1 gives $F\subseteq U$. Off $F$, every $\rho_i$ vanishes, so the formula in step 3.1 gives $\rho=0$. Therefore the closure of the nonzero locus of $\rho$ lies in $F$: $\operatorname{supp}\rho\subseteq F\subseteq U$. [F1, step 2.1, step 3.1, construct]
+
+5.1 Steps 3.1 and 4.1 give all three required properties; step 1.1 handled the empty case. [step 1.1, step 3.1, step 4.1] ∎
+
+===== lem-finite-ambient-partitions-for-euclidean-boundary-integration =====
+
+
+## Statement
+
+Under the page measure convention, if a finite family of open sets $U_j\subset\mathbb R^n$ covers compact K, there are smooth nonnegative $\chi_j$ with compact support in $U_j$ such that $\sum_j\chi_j=1$ on a neighborhood of K. These are ambient smooth functions, also when K is only a $C^1$ hypersurface.
+
+## Facts & Assumptions
+
+**Given:** A compact Euclidean set K and a finite open cover of K, with the ambient smooth-step and bump conventions in the statement.
+
+[F1] Nested balls admit smooth bumps with a strict compact support margin. ([[lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound]]).
+
+[F2] Compact Euclidean sets admit finite subcovers. ([[thm-heine-borel-rn]]).
+
+[F3] The standard step has values zero for inputs at most zero and one for inputs at least one. ([[def-the-standard-smooth-step-function]]).
+
+## Proof
+
+1.1 If K is empty take all chi_j zero. Otherwise consider all pairs of concentric balls with positive rational radii r<R whose closed outer ball lies in some U_j and whose inner ball meets K. Their inner balls cover K, because every point has a positive neighborhood inside a member of the given open cover. Compactness (F2) retains finitely many such inner balls covering K. F1 gives corresponding bumps b_l, equal to one on those inner balls and compactly supported in their assigned U_j. [given, F1, F2]
+
+2.1 Put $s=\sum_l b_l$. Then s is smooth with compact support, and s at least one on K. Define $\theta=\sigma(4s-1)$. By F3 theta=1 wherever s at least one half, a neighborhood of K, and its support lies in the compact set where s at least one quarter. On s>0 put $f_l=\theta b_l/s$, and extend by zero on s=0. Because theta vanishes on s at most one quarter, this extension is smooth. Each f_l has compact support in the assigned U_j, is nonnegative, and their sum is theta. [step 1.1, F3, algebra]
+
+3.1 For each j sum f_l over the finitely many bumps assigned to U_j, using zero if no bump is assigned. These sums are the required chi_j: their supports are finite unions of compact subsets of U_j, and their total is theta=1 near K. Since all constructions took place in the ambient Euclidean space, no differentiability of K was required. [step 2.1, algebra] ∎
+
+## Source notes
+
+Hunter, §1.9.2 Theorem 1.31, printed pp. 12–13. A finite normalized-bump construction is supplied here.
+
+===== lem-schwartz-cutoffs-from-the-standard-smooth-step =====
+
+
+## Statement
+
+For $n\ge1$, there exists $\chi\in C_c^\infty(\mathbb R^n)$ with $0\le\chi\le1$, $\chi=1$ on $|x|\le1$, and $\chi=0$ on $|x|\ge2$. For $R>0$, $\chi_R(x)=\chi(x/R)$ satisfies $\partial^\beta\chi_R(x)=R^{-|\beta|}(\partial^\beta\chi)(x/R)$. The construction requires no choice.
+
+## Facts & Assumptions
+
+**Given:** An integer $n\ge1$ and multi-indices as in [[def-ck-and-multi-index-notation-in-several-variables]].
+
+[F1] Exponentials dominate fixed powers at positive infinity ([[thm-exponential-beats-every-polynomial]]).
+
+[F2] The total chain rule holds ([[thm-chain-rule-for-total-derivatives]]).
+
+[F3] Closed bounded subsets of Euclidean space are compact ([[thm-heine-borel-rn]]).
+
+[F4] The exponential is smooth with derivative equal to itself ([[thm-derivative-of-exponential]]), and $e^u>0$, $e^{-u}=1/e^u$ for every real $u$ ([[cor-exponential-reciprocal-and-positivity]]).
+
+[F5] The scalar sum, product and quotient rules hold; in particular $(1/g)'=-g'/g^2$ wherever $g\ne0$ ([[thm-algebra-of-derivatives]]).
+
+[F6] Sums and products of continuous scalar functions are continuous, as are quotients on the domain of a nonvanishing denominator ([[thm-algebra-of-continuous-functions]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Define $a(t)=e^{-1/t}$ for $t>0$ and $a(t)=0$ for $t\le0$. On $t>0$, put $s=1/t$. The quotient rule [F5] applied to $1/t$ gives $s'=-1/t^2=-s^2$, while [F2] and [F4] give $(e^{-s})'=-e^{-s}$ as a function of $s$. Thus the product and chain rules give $$\frac{d}{dt}\bigl(P_k(s)e^{-s}\bigr)=\bigl(P_k'(s)-P_k(s)\bigr)e^{-s}(-s^2)=s^2\bigl(P_k(s)-P_k'(s)\bigr)e^{-s}.$$ Starting at $P_0=1$, this proves $a^{(k)}(t)=P_k(s)e^{-s}$ with the polynomial recurrence $P_{k+1}(s)=s^2(P_k(s)-P_k'(s))$. By [F1], both $P_k(s)e^{-s}$ and $sP_k(s)e^{-s}$ tend to zero as $s\to\infty$. Extending each derivative by zero to $t\le0$ is therefore continuous; its difference quotient at zero also tends to zero. Induction proves $a\in C^\infty(\mathbb R)$ with every derivative zero at zero. [F1, F2, F4, F5, F6, algebra, induction]
+
+2.1 Set $\sigma(t)=a(t)/(a(t)+a(1-t))$. For $t\le0$, the second summand in the denominator is positive; for $t\ge1$, the first is positive; for $0<t<1$, both are positive. Write $g(t)=a(t)+a(1-t)$, which is smooth by step 1.1 and the sum and chain rules. Since $g>0$, [F6] makes $q=1/g$ continuous, and [F5] gives $q'=-g'q^2$. For every $k\ge0$, finite iteration of the product rule [F5] and continuity of products [F6] shows that products of $C^k$ functions are $C^k$. If $q\in C^k$, the displayed derivative is therefore $C^k$ because $g'$ is smooth; hence $q\in C^{k+1}$. Starting with $C^0$, induction proves $q\in C^\infty$ and then $\sigma=aq\in C^\infty$. Thus $0\le\sigma\le1$,  and $\sigma=0$ on $t\le0$, $\sigma=1$ on $t\ge1$. Define $\chi(x)=\sigma((4-|x|^2)/3)$. Repeated [F2] proves smoothness, and the two constant regions give the claimed unit and zero regions, including their boundaries. Its closed support lies in the closed radius-two ball and is compact by [F3]. [step 1.1, F2, F3, F4, F5, F6, induction]
+
+3.1 Differentiating $\chi(x/R)$ once in coordinate $j$ gives $R^{-1}(\partial_j\chi)(x/R)$. Iterating this identity in the prescribed multi-index order gives the asserted factor, including $\beta=0$. No selection was made in any construction. [step 2.1, F2, given] ∎ 
+===== lem-smooth-bump-between-concentric-euclidean-balls =====
+
+
+## Statement
+
+Let $0<r<R$ and $n\ge 1$. Then there exists a smooth function $\rho:\mathbb R^n\to [0,1]$ such that $\rho=1$ on $\overline B_r(0)$ and $\operatorname{supp}(\rho)\subseteq B_R(0)$.
+
+## Facts & Assumptions
+
+**Given:** Real numbers $0<r<R$.
+
+[F1] The standard smooth step function $\sigma$ is smooth, takes values in $[0,1]$, vanishes on $(-\infty,0]$, and equals $1$ on $[1,\infty)$ ([[def-the-standard-smooth-step-function]]).
+
+[L1] Coordinate differentiation uses the one-variable chain, sum and product rules ([[thm-chain-rule]], [[thm-algebra-of-derivatives]]). Smoothness means that every iterated coordinate derivative exists and is continuous ([[def-ck-and-multi-index-notation-in-several-variables]]).
+
+[F2] The support is the closure of the nonzero locus ([[def-support-and-compactly-supported-riemann-integral-in-rn]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Put $s=(r+R)/2$ and $d=s^2-r^2>0$, and define $u(x)=(s^2-\sum_{j=1}^n x_j^2)/d$ and $\rho(x)=\sigma(u(x))$. The coordinate derivatives of $u$ are $\partial_i u=-2x_i/d$, $\partial_j\partial_i u=-2\delta_{ij}/d$, and zero at every higher order, so $u$ is smooth. Here $\delta_{ij}$ is $1$ when $i=j$ and $0$ otherwise. [L1, given, construct]
+
+2.1 Every iterated coordinate derivative of $\rho$ is a finite sum of products of derivatives of $u$ and factors $\sigma^{(k)}(u)$: induction follows by applying the chain and product rules in [L1] to each factor. These factors are continuous by [F1] and step 1.1, so $\rho$ is smooth. [F1, L1, step 1.1]
+
+2.2 If $\|x\|\le r$, then $u(x)\ge1$, so $\rho(x)=1$; if $\|x\|\ge s$, then $u(x)\le0$, so $\rho(x)=0$. Also $0\le\rho\le1$ by [F1]. [F1, step 1.1]
+
+3.1 The nonzero locus lies in $B_s(0)$, whose closure is contained in the closed ball $\overline B_s(0)$. Thus [F2] gives $\operatorname{supp}\rho\subseteq\overline B_s(0)\subseteq B_R(0)$, since $s<R$. Together with steps 2.1 and 2.2 this proves the claim. [F2, step 1.1, step 2.1, step 2.2] ∎
+
+===== lem-test-function-cutoffs-and-euclidean-localization =====
+
+
+## Statement
+
+In ZF, for compact $K\subseteq\Omega\subseteq\mathbb R^n$ with $\Omega$ open, there is $\chi\in C_c^\infty(\Omega)$ with $0\le\chi\le1$ and $\chi=1$ on a neighborhood of $K$. Every open cover of $\Omega$ admits an at most countable locally finite smooth partition of unity with compact supports, each support contained in some cover member. Subordination here asserts existence of such a member for each support; it does not select cover labels.
+
+## Facts & Assumptions
+
+[F1] The explicit smooth cutoff $b$ equals one on the closed unit ball, vanishes outside the radius-two ball, and satisfies $0\le b\le1$; translated dilates have the stated derivative scaling ([[lem-schwartz-cutoffs-from-the-standard-smooth-step]]).
+
+[F2] Smoothness and multi-index notation are as in [[def-ck-and-multi-index-notation-in-several-variables]], applied componentwise.
+
+## Proof
+
+**Given:** the compact set and open set of the first assertion; an open cover $\mathcal U$ of $\Omega$ for the second.
+
+1.1 For each point of $K$, there is a rational center $q$ and positive rational $r$ such that the point belongs to $B(q,r)$ and $\overline B(q,2r)\subseteq\Omega$. These inner balls cover $K$, so a finite list suffices by compactness. Put $b_j(x)=b((x-q_j)/r_j)$ and $\chi=1-\prod_j(1-b_j)$. Then $\chi$ is smooth, lies in $[0,1]$, equals one on the union of the inner balls, and has support in the finite union of the compact outer balls inside $\Omega$. For $K=\varnothing$ take the empty product and $\chi=0$. [given, F1, F2]
+
+2.1 For nonempty $\Omega$, set $K_j=\{x:|x|\le j,\ \operatorname{dist}(x,\mathbb R^n\setminus\Omega)\ge1/j\}$ for $j\ge1$, interpreting distance to the empty set as infinity; set $K_0=K_{-1}=\varnothing$. These are compact subsets of $\Omega$, $K_j\subseteq\operatorname{int}K_{j+1}$, and their interiors cover $\Omega$. Closedness follows from continuity of distance (its absolute difference is at most the distance of the two points), and boundedness gives compactness. The shell $H_j=K_j\setminus\operatorname{int}K_{j-1}$ is compact and lies in the open set $G_j=\operatorname{int}K_{j+1}\setminus K_{j-2}$. [step 1.1, algebra]
+
+3.1 Fix an enumeration of rational center/radius pairs and a coding of finite lists by natural numbers. For each $j$, consider pairs with $\overline B(q,2r)\subseteq G_j$ and with this closed ball contained in some $U\in\mathcal U$. Their inner balls cover $H_j$: at any shell point openness of $G_j$ and of one cover member gives a sufficiently small ball, then a rational center and radius. Compactness gives a finite subcover. Select the least code of a finite list that covers $H_j$, taking the empty list for an empty shell. This is a specified function of $j$, not Countable Choice. [step 2.1, given]
+
+4.1 Form the corresponding translated dilates $b_{j,k}$ of F1. Their supports lie in $G_j$, and each support lies in some cover member. This family is locally finite: a point has a neighborhood inside some $K_N$, and supports with $j\ge N+2$ miss $K_N$, while only finitely many balls occur at each of the finitely many earlier stages. Every point belongs to some shell, so $s=\sum_{j,k}b_{j,k}$ is everywhere positive. The sum is locally finite and smooth; hence $\eta_{j,k}=b_{j,k}/s$ are smooth, nonnegative, have compact support in the same outer balls, and sum to one. The double index is countable. For empty $\Omega$ use the empty family. These constructions choose no cover labels and no arbitrary sequence of witnesses. $\square$ [step 3.1, F1, F2]

@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-subgradient-and-subdifferential.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -30,10 +31,17 @@ pipeline_run: null
 
 ## Definition
 
-Let $f:C\to\mathbb R$ be convex on a convex set $C\subseteq\mathbb R^n$ ([[def-convex-and-strictly-convex-functions-on-euclidean-sets]]), and let $a\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\ge f(a)+\langle v,y-a\rangle$ for every $y$ in the domain.
+Let $f:C\to\mathbb R$ be convex on a convex set $C\subseteq\mathbb R^n$ (Convex and strictly convex functions on Euclidean convex sets), and let $a\in C$. A vector $v$ is a subgradient of $f$ at $a$ when $f(y)\ge f(a)+\langle v,y-a\rangle$ for every $y$ in the domain.
 
 The **subdifferential** is the set
 
 $$\partial f(a):=\{v\in\mathbb R^n:f(y)\ge f(a)+\langle v,y-a\rangle\text{ for every }y\in C\},$$
 
-with the Euclidean inner product of [[def-euclidean-inner-product]]. The definition permits $\partial f(a)$ to be empty or to contain more than one vector.
+with the Euclidean inner product of The Euclidean inner product $\langle x,y\rangle = \sum_{k<n} x_k y_k$ on $\mathbb{R}^n$. The definition permits $\partial f(a)$ to be empty or to contain more than one vector.
+
+## Definition references
+
+[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]
+
+[[def-euclidean-inner-product]]
+

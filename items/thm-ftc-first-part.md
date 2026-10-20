@@ -15,6 +15,7 @@ landmark: true
 short: "first fundamental theorem"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-ftc-first-part.json
   judge:
     model: z-ai/glm-5.2
     verdict: pass
@@ -38,15 +39,15 @@ pipeline_run: null
 ## Statement
 
 Let $a < b$ be reals, let $f : [a,b] \to \mathbb{R}$ be integrable
-([[def-darboux-integral]]), let $F$ be its integral function
-([[def-the-integral-function]]), and let $c \in [a,b]$ be a point at which $f$ is
-continuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a
-function on $[a,b]$ ([[def-derivative]]) and
+(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$), let $F$ be its integral function
+(The integral function $F(x) := \int_a^x f$ of an integrable $f$), and let $c \in [a,b]$ be a point at which $f$ is
+continuous (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $F$ is differentiable at $c$ as a
+function on $[a,b]$ (The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set) and
 
 $$F'(c) \;=\; f(c) .$$
 
 At $c = a$ and $c = b$ this is the one-sided statement, which is what
-[[def-derivative]] means at those points: every point of a nondegenerate interval
+The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set means at those points: every point of a nondegenerate interval
 is a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \in [a,b]$,
 and the difference quotient is taken over $[a,b] \setminus \{c\}$.
 
@@ -58,6 +59,16 @@ $f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist an
 differ from $f(c)$; both are exhibited on the companion page, by
 an integrable function with no primitive and by a false
 statement about the integral function.
+
+## Statement references
+
+[[def-darboux-integral]]
+
+[[def-the-integral-function]]
+
+[[def-continuity-real]]
+
+[[def-derivative]]
 
 ## Facts & Assumptions
 

@@ -15,6 +15,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-statistic-and-estimator.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -31,14 +32,23 @@ sources:
 ## Definition
 
 Let $\mathsf E=((\mathcal X,\mathcal A),\Theta,(P_\theta)_{\theta\in\Theta})$
-be an experiment ([[def-statistical-experiment]]). A **statistic** with target
+be an experiment (Statistical experiments). A **statistic** with target
 measurable space $(\mathcal Y,\mathcal B)$ is a measurable map
 $T:(\mathcal X,\mathcal A)\to(\mathcal Y,\mathcal B)$, where measurability
 means that $T^{-1}(B)\in\mathcal A$ for every $B\in\mathcal B$
-([[def-measurable-function-between-measurable-spaces]]). If
-$\psi:\Theta\to\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])
+(A measurable function between measurable spaces). If
+$\psi:\Theta\to\mathcal Y$ is an estimand (Estimands on a statistical model)
 and its target set $\mathcal Y$ is equipped with $\mathcal B$, a statistic
 $\widehat\psi$ with this same target space is an **estimator of $\psi$**.
 The value $\widehat\psi(x)$ is the estimate at observed data $x$. Giving
 $\mathcal Y$ a measurable structure is an additional choice; this definition
 does not assert that $\psi$ is measurable as a function of the parameter.
+
+## Definition references
+
+[[def-statistical-experiment]]
+
+[[def-measurable-function-between-measurable-spaces]]
+
+[[def-estimand-on-a-statistical-model]]
+

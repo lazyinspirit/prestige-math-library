@@ -34,6 +34,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-mcdiarmid-bounded-differences.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -49,11 +50,19 @@ sources:
 
 ## Statement
 
-Assume AC. Let $n\ge1$, let $Z_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$ be independent random elements, meaning measurable maps ([[def-random-element-and-real-random-variable]]), with laws $\mu_i$ given by pushforward ([[def-law-or-distribution-of-a-random-element]]). Put $\mu=\bigotimes_{i=1}^n\mu_i$ on the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). Let $f:\prod_{i=1}^nS_i\to\mathbb R$ be product-measurable with $\int|f|\,d\mu<\infty$. Suppose finite deterministic constants $c_i\ge0$ satisfy
+Assume AC. Let $n\ge1$, let $Z_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$ be independent random elements, meaning measurable maps (Random elements and real random variables), with laws $\mu_i$ given by pushforward (Law or distribution of a random element). Put $\mu=\bigotimes_{i=1}^n\mu_i$ on the finite product sigma-algebra (The product sigma-algebra and its finite iterates). Let $f:\prod_{i=1}^nS_i\to\mathbb R$ be product-measurable with $\int|f|\,d\mu<\infty$. Suppose finite deterministic constants $c_i\ge0$ satisfy
 $$|f(z_1,\ldots,z_i,\ldots,z_n)-f(z_1,\ldots,z_i',\ldots,z_n)|\le c_i$$
 for every fixed setting of the other coordinates and every $z_i,z_i'$. The independent product-law theorem identifies the law of $Z=(Z_1,\ldots,Z_n)$ as $\mu$. Applying change of variables for expectation first to $|f|$ and then to $f$ makes $f(Z)$ integrable and gives $\mathbb E f(Z)=\int f\,d\mu$. Put $V=\sum_{i=1}^n c_i^2$. For $t>0$, if $V>0$ then
 $$\mathbb P\bigl(f(Z_1,\ldots,Z_n)-\mathbb E f(Z_1,\ldots,Z_n)\ge t\bigr)\le\exp\!\left(-\frac{2t^2}{V}\right),$$
 and if $V=0$ this probability is $0$. The same bound holds for the lower tail, so the two-sided probability is at most $2e^{-2t^2/V}$ when $V>0$.
+
+## Statement references
+
+[[def-random-element-and-real-random-variable]]
+
+[[def-law-or-distribution-of-a-random-element]]
+
+[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]
 
 ## Facts & Assumptions
 

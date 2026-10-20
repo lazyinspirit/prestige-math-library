@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "8",
+  "round": 0,
+  "reviewed_items": [
+    "def-proper-scoring-rule",
+    "lem-jensen-for-simplex-pairs",
+    "lem-negative-root-power-is-convex",
+    "def-probability-calibration",
+    "lem-finite-label-conditional-probability-function",
+    "thm-log-and-brier-strict-propriety",
+    "cor-any-feature-induces-calibrated-forecast",
+    "thm-posterior-forecast-minimizes-scoring-risk",
+    "def-classification-calibration-of-a-surrogate",
+    "thm-binned-calibration-estimator-limits",
+    "lem-binary-zero-one-risk-excess-with-zero-tie",
+    "fs-unadjusted-surrogate-regret-bound",
+    "thm-surrogate-regret-controls-classification-regret",
+    "ex-multiclass-calibration-notions-differ",
+    "ex-calibrated-constant-prior-forecast",
+    "ex-fixed-bin-ece-underestimates-calibration-error",
+    "ex-calibrated-coarsened-risk-score-is-low-information"
+  ],
+  "reviewed_pages": [
+    "calibration-proper-losses-and-surrogate-classification",
+    "calibration-proper-losses-and-surrogate-classification-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete substantive review found no scope issue or prerequisite gap requiring owner escalation. Request one local repair pass for the proof and precision issues below.",
+  "findings": [
+    {
+      "id": "lem-jensen-for-simplex-pairs",
+      "type": "local",
+      "reason": "Step 1.1 uses the finite weighted-sum formula for E[ψ(Z)], although ψ may be negative and F3 only states the formula for nonnegative simple functions. Explicitly handle the signed finite-range expectation, for example by splitting positive and negative parts."
+    },
+    {
+      "id": "thm-posterior-forecast-minimizes-scoring-risk",
+      "type": "prerequisite",
+      "reason": "Step 2.1 turns equality of finite risks into a zero integral for the risk gap, but does not justify that the posterior-risk terms are finite almost everywhere or cite the integral linearity and null-set invariance needed for the difference. Add the relevant suppliers, including cor-finite-nonnegative-integral-implies-finite-almost-everywhere, or give an equivalent local argument."
+    },
+    {
+      "id": "thm-binned-calibration-estimator-limits",
+      "type": "local",
+      "reason": "Step 1.2 uses norm bounds for vector conditional means without deriving or citing the norm-of-integral inequality; the existing simplex-pair Jensen lemma can establish them with ψ(u,v)=||u−v|| and fixed v. Define the statement’s mesh as the maximum Euclidean diameter of its partition cells, as used in the proof."
+    },
+    {
+      "id": "thm-surrogate-regret-controls-classification-regret",
+      "type": "prerequisite",
+      "reason": "Step 3.1 identifies E[D(X)] with LΦ(h)−LΦ* by subtracting finite integrals, but does not cite integral linearity. Add the linearity supplier to deps and Facts & Assumptions, or provide an equivalent local derivation."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-fixed-bin-ece-underestimates-calibration-error",
+      "decision": "accept",
+      "reason": "Its use is the fixed-bin convergence branch, unaffected by clarifying the Euclidean mesh condition."
+    },
+    {
+      "id": "calibration-proper-losses-and-surrogate-classification",
+      "decision": "accept",
+      "reason": "The A-page inventory remains accurate; it lists the binned-calibration theorem without restating its mesh condition."
+    }
+  ]
+}

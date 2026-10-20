@@ -1,0 +1,16 @@
+import fs from 'node:fs';import vm from 'node:vm';import {createHash} from 'node:crypto';
+const base='research/machine-learning-all-101-2026-10-19-owner-native-smoke-',configs=[
+ ['calibration','finite-smoke-calibration-ml.mjs','calibrationMLChecks','field-cas.json'],
+ ['privacy-federated','finite-smoke-privacy-federated-ml.mjs','privacyFederatedMLChecks','operations.json'],
+ ['sparse','checks/finite-smoke-ml101-sparse.mjs','sparseMLChecks','contract-cas.json'],
+ ['pacmdp','tools/finite-smoke-ml-pacmdp.mjs','pacMDPMLChecks','finite-smoke-array-ops.json']];
+const norm=s=>s.replace(/\s+/g,' ').trim(),results=[],bindings=[];
+const actualTool=fs.readFileSync('tools/finite-smoke.mjs','utf8'),start=actualTool.indexOf("  'scalar-soft-threshold': "),end=actualTool.indexOf("  'collinear-two-column-witness':",start),scalar=vm.runInNewContext('({'+actualTool.slice(start,end)+'})',{smokeResult:(ok,summary)=>({ok,summary})})['scalar-soft-threshold'];
+for(const[tag,file,exp,packet]of configs){const p=base+tag+'/your-proposal/',modulePath=p+file,reg=(await import('../../'+modulePath))[exp],d=JSON.parse(fs.readFileSync(p+packet)),ops=Array.isArray(d)?d:d.operations;
+ for(const op of ops){const pointer=op.pointer??op.json_pointer,id=op.id??op.contract_key??(Array.isArray(op.path)?op.path[1]:pointer.split('/')[2]);const src=fs.readFileSync('items/'+id+'.md','utf8');for(const row of op.after??op.replacement_value){const fn=reg[row.check]??(row.check==='scalar-soft-threshold'?scalar:null);if(!fn)throw Error('missing '+row.check);const valid=fn(row),present=norm(src).includes(norm(row.asserts));if(!valid.ok||!present)throw Error('positive/assertion '+row.check);let probes=[];
+ if(row.check==='scalar-soft-threshold'){probes=[['NaN-z',{...row,z:NaN}],['NaN-tau',{...row,tau:NaN}],['zero-tau',{...row,tau:0}]];}
+ else {probes=[['null',null],['array',[]],['unknown-top',{...row,unknown_parameter:NaN}],['wrong-check',{...row,check:'unregistered-wrong'}]];if(row.parameters)probes.push(['wrong-fixture',{...row,parameters:{fixture:'bad'}}],['unknown-parameter',{...row,parameters:{...row.parameters,unknown:1}}]);else probes.push(['wrong-fixture',{...row,fixture:'bad'}]);}
+ const outcomes=probes.map(([name,input])=>({name,rejected:fn(input).ok===false}));
+ results.push({group:tag,id,check:row.check,positive:valid,actual_assertion_excerpt_present:present,probes:outcomes});
+ }}bindings.push({path:modulePath,sha256:createHash('sha256').update(fs.readFileSync(modulePath)).digest('hex')});}
+const suffix=createHash('sha256').update(JSON.stringify(bindings)).digest('hex');fs.writeFileSync(new URL('./final-four-review-'+suffix+'.json',import.meta.url),JSON.stringify({native_gate:false,whole_registry_selftest:false,legacy_reuse:'One scalar-soft-threshold callback extracted verbatim from actual source without evaluating the registry/CLI; numeric guard probes only, no unrelated legacy audit.',bindings,results},null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({rows:results.length,counts:Object.fromEntries(configs.map(([tag])=>[tag,results.filter(r=>r.group===tag).length])),unrejected:results.flatMap(r=>r.probes.filter(x=>!x.rejected).map(x=>({group:r.group,check:r.check,probe:x.name}))),record:'final-four-review-'+suffix+'.json'}));

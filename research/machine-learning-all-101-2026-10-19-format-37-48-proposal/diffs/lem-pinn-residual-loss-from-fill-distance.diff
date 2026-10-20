@@ -1,0 +1,29 @@
+--- items/lem-pinn-residual-loss-from-fill-distance.md
++++ research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-pinn-residual-loss-from-fill-distance.md
+@@ -30,9 +30,7 @@
+ $$\operatorname{Loss}^{\mathrm{PINN}}(h;\lambda)=\lambda_r\int_U|L[h]-f|^2\,d\mu_r+\lambda_b\int_\Gamma|B[h]-g|^2\,d\mu_b,$$
+ $$\operatorname{Loss}^{\mathrm{PINN}}_m(h;\lambda)=\frac{\lambda_r}{m_r}\sum_{i=1}^{m_r}|L[h](x_i^r)-f(x_i^r)|^2+\frac{\lambda_b}{m_b}\sum_{j=1}^{m_b}|B[h](x_j^b)-g(x_j^b)|^2.$$
+ Define
+-$$C_m=3\max\{C_rm_r\varepsilon_r^d,\ C_bm_b\varepsilon_b^{d-1}\},\quad
+-\lambda^R_{r,m}=\frac{3\lambda_r\varepsilon_r^{2\alpha}}{C_m},\quad
+-\lambda^R_{b,m}=\frac{3\lambda_b\varepsilon_b^{2\alpha}}{C_m}.$$
++$$C_m=3\max\{C_rm_r\varepsilon_r^d,\ C_bm_b\varepsilon_b^{d-1}\},\quad \lambda^R_{r,m}=\frac{3\lambda_r\varepsilon_r^{2\alpha}}{C_m},\quad \lambda^R_{b,m}=\frac{3\lambda_b\varepsilon_b^{2\alpha}}{C_m}.$$
+ Then
+ $$\operatorname{Loss}^{\mathrm{PINN}}(h;\lambda)\le C_m\operatorname{Loss}^{\mathrm{PINN}}_m(h;\lambda)+C_m\left(\lambda^R_{r,m}[L[h]]_{\alpha;U}^2+\lambda^R_{b,m}[B[h]]_{\alpha;\Gamma}^2\right)+3\lambda_r\varepsilon_r^{2\alpha}[f]_{\alpha;U}^2+3\lambda_b\varepsilon_b^{2\alpha}[g]_{\alpha;\Gamma}^2.$$
+ 
+@@ -57,13 +55,11 @@
+ 
+ 1.1 Order each finite sample set and assign each point of $U$ to a nearest residual sample, breaking ties by the least index. This produces a measurable finite Voronoi partition $V_1,\ldots,V_{m_r}$; each cell lies in the radius-$\varepsilon_r$ ball about its assigned sample, so [F2] gives $\mu_r(V_i)\le C_r\varepsilon_r^d$. Use the same construction on $\Gamma$ to get cells $W_j$ with $\mu_b(W_j)\le C_b\varepsilon_b^{d-1}$. [given, F2, choose]
+ 
+-1.2 If $x\in V_i$, the three-term square inequality and [F3] give
+-$$|L[h](x)-f(x)|^2\le3|L[h](x_i^r)-f(x_i^r)|^2+3\varepsilon_r^{2\alpha}[L[h]]_{\alpha;U}^2+3\varepsilon_r^{2\alpha}[f]_{\alpha;U}^2.$$
+-If $y\in W_j$, the same argument gives the corresponding boundary bound with $B[h]$, $g$, and $\varepsilon_b$. [given, F3, algebra]
++1.2 If $x\in V_i$, the three-term square inequality and [F3] give $$|L[h](x)-f(x)|^2\le3|L[h](x_i^r)-f(x_i^r)|^2+3\varepsilon_r^{2\alpha}[L[h]]_{\alpha;U}^2+3\varepsilon_r^{2\alpha}[f]_{\alpha;U}^2.$$ If $y\in W_j$, the same argument gives the corresponding boundary bound with $B[h]$, $g$, and $\varepsilon_b$. [given, F3, algebra]
+ 
+ 2.1 Integrate the residual inequality over the cells. The collocation terms contribute at most $3C_rm_r\varepsilon_r^d\lambda_r m_r^{-1}\sum_i|L[h](x_i^r)-f(x_i^r)|^2$, and the seminorm and data terms contribute $3\lambda_r\varepsilon_r^{2\alpha}([L[h]]_{\alpha;U}^2+[f]_{\alpha;U}^2)$ because $\mu_r(U)=1$. [step 1.1, step 1.2, F1, algebra]
+ 
+ 2.2 Integrating the boundary inequality gives the same estimate with $3C_bm_b\varepsilon_b^{d-1}$ multiplying the empirical boundary term and $3\lambda_b\varepsilon_b^{2\alpha}([B[h]]_{\alpha;\Gamma}^2+[g]_{\alpha;\Gamma}^2)$ for the remaining terms. [step 1.1, step 1.2, F1, algebra]
+ 
+-2.3 By the definition of $C_m$, the empirical residual and boundary coefficients in steps 2.1–2.2 are at most $C_m$. The two residual seminorm coefficients equal $C_m\lambda^R_{r,m}$ and $C_m\lambda^R_{b,m}$ by definition, while the data terms already have their displayed coefficients. Adding the two estimates yields the result. [step 2.1, step 2.2, algebra] ∎
++3.1 By the definition of $C_m$, the empirical residual and boundary coefficients in steps 2.1–2.2 are at most $C_m$. The two residual seminorm coefficients equal $C_m\lambda^R_{r,m}$ and $C_m\lambda^R_{b,m}$ by definition, while the data terms already have their displayed coefficients. Adding the two estimates yields the result. [step 2.1, step 2.2, algebra] ∎
+ 

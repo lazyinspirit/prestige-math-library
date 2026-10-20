@@ -1,0 +1,90 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "91",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "ex-predictable-linear-forecast-empirical-bernstein",
+      "model": "gpt-6-luna",
+      "context_sha256": "4b354685edb32203365ebaf8af4bd918b58af48de6545f6a76eb8948fadb41fe",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A1 incorrectly attributed an AC assumption to the conditional-expectation version definition. That definition only requires a real measurable integrable representative and the event-integral identities. AC is already assumed in the Example and coverage theorem, so correcting its attribution preserves every hypothesis and the valid coverage argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-predictable-linear-forecast-empirical-bernstein",
+      "disposition": "repaired",
+      "post_sha256": "8edd4b86cdc975db9d3890a8f72180e675523f99d195686955559741687c9edd",
+      "review_context_sha256": "121b8998df72aaefaba07a2c469fa23f4e5bc50f7200e9c5aeb3bb0e862aa022",
+      "reason": "Corrected A1 to locate AC in this example and its coverage supplier. Independence verifies the constant conditional mean on every finite-history atom; uniqueness handles versions. The predictable forecast lies in [0,1]. Direct arithmetic gives residual sum 7/4, sample mean 1/2 and path probability 9/256; the coverage theorem applies with scale 1 and one-sided error delta/2. The Example and all public statements are unchanged. This is the repair author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-predictable-linear-forecast-empirical-bernstein",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subclass": "citation-misattributed",
+      "disposition": "fixed",
+      "reason": "A1 falsely attributes an AC assumption to the conditional-expectation version definition. Corrected attribution retains the explicit AC assumption needed by the coverage theorem, so no mathematical conclusion changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "complete",
+    "item_changes": "Only A1 changed: AC is explicitly assumed here and by the coverage theorem; the conditional-expectation version definition itself imposes no AC assumption. Reversing only this sentence recovers the exact frozen before itemHashGuard 0c758a184b654edd2b59e44d8bec3b476aa2a939ff0df11ca7f47c06fd6aab66.",
+    "mathematical_evidence": "Step 1.1: every finite Bernoulli history atom has positive probability; independence gives integral of X_t over A equal to P(A)/4, so constant 1/4 is a version; uniqueness identifies all other versions almost surely. Step 2.1: forecasts 1/4 or 3/4 are measurable before the observation; path residual squares (9,9,1,9)/16 total 7/4, sample mean 1/2, path probability 9/256. Step 3.1: the coverage supplier applies with a=0, b=1 and alpha=delta/2, giving simultaneous coverage for the running conditional-mean target (constant 1/4 almost surely).",
+    "source_evidence": [
+      "items/def-conditional-expectation-given-a-sigma-algebra.md#Definition: real measurable integrable versions and event-integral equalities; no AC assumption.",
+      "items/lem-conditional-expectation-is-unique-almost-surely.md#Statement and Proof: same input and conditioning sigma-algebra imply almost-sure equality.",
+      "items/def-axiom-of-choice.md#Definition: arbitrary nonempty families admit choice functions.",
+      "items/def-subexponential-uniform-boundary.md#Definition and items/alg-empirical-bernstein-confidence-sequence.md#Definition: boundary scale, error level and interval-update interface.",
+      "items/thm-empirical-bernstein-confidence-sequence.md#Statement and Proof: explicit AC, bounded adapted data, bounded predictable forecasts, Borel boundary and version-independent coverage.",
+      "items/def-time-varying-target-confidence-sequence.md#Definition: adapted finite interval endpoints and simultaneous target coverage."
+    ],
+    "contract_repair": "Refreshed only assigned F1 and A1 citation excerpts to exact current supplier text, under step5-shared-write-lock acquire/reread/edit/check/release. All other item contracts and original review records preserved. Contract changes only mirror already read supplier statements; re-examination confirms no mathematical effects, and review-contexts returned the same two hashes afterward.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-predictable-linear-forecast-empirical-bernstein.md --json",
+        "exit_code": 0,
+        "result": "1 checked; 0 failed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-predictable-linear-forecast-empirical-bernstein.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-predictable-linear-forecast-empirical-bernstein.md",
+        "exit_code": 0,
+        "result": "1 item; 3 steps; 0 defects; run once after final item edit"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-91.proof-contracts.json --strict --items ex-predictable-linear-forecast-empirical-bernstein --json",
+        "exit_code": 0,
+        "result": "Assigned contract passes with no errors or warnings after refreshing two stale excerpts; initial check had F1/A1 citation-quote-mismatch."
+      }
+    ],
+    "interface_and_scope": "Example uninterrupted and unchanged; no Statement or Definition changed, no new prerequisite, no downstream propagation. Owning A/B pages remain frontmatter only with compact-v1. No diagram is present or needed. No outside item was edited, no published defect newly confirmed, and no published-ledger update is proposed.",
+    "unresolved_obligations": []
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-91.proof-contracts.json": "1bef857b62b2347ed856895fa1e610692cb5f0d3e57c3a2fda5e838b62407eef"
+  }
+}

@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-parametric-statistical-model.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -35,6 +36,11 @@ $$
 \mathsf P:\Theta\to\mathcal P(\mathcal X,\mathcal A),\qquad \mathsf P(\theta)=P_\theta,
 $$
 regarded together with its parameter set and sample space
-([[def-statistical-experiment]]). The map need not be injective. Unless a
+(Statistical experiments). The map need not be injective. Unless a
 measurable structure on $\Theta$ is supplied separately, no measurability of
 $\mathsf P$ is asserted.
+
+## Definition references
+
+[[def-statistical-experiment]]
+

@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "65",
+  "round": 1,
+  "reviewed_items": [
+    "def-neural-ode",
+    "thm-neural-ode-global-smooth-flow",
+    "thm-instantaneous-change-of-variables-for-ode-flow",
+    "alg-adjoint-sensitivity-method",
+    "ex-numerical-adjoint-error"
+  ],
+  "reviewed_pages": [
+    "neural-odes-and-continuous-normalizing-flows",
+    "neural-odes-and-continuous-normalizing-flows-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 findings are resolved: the algorithm’s objective domains are explicit, and the example names the derivative and exponential suppliers, specifies integer N, and uses exp notation. I found an outside-batch defect in a published supplier proof that the assigned global-flow theorem uses; this second review must therefore escalate for owner reconciliation.",
+  "findings": [
+    {
+      "id": "thm-fundamental-theorem-for-nonautonomous-smooth-odes",
+      "type": "outside-batch",
+      "reason": "Proof 1.1 augments F:D→Rⁿ to (1,F) but places the system on R×Rⁿ, where F may be undefined. The smallest correction is to define the augmented field on the open domain D and apply the autonomous local-flow theorem there. This affects thm-neural-ode-global-smooth-flow, Proof steps 3.1 and 5.1, and its assigned downstream uses in thm-instantaneous-change-of-variables-for-ode-flow, alg-adjoint-sensitivity-method, and ex-numerical-adjoint-error."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-neural-ode-global-smooth-flow",
+      "decision": "escalate",
+      "reason": "It uses the published supplier at Proof steps 3.1 and 5.1; the supplier’s domain error is outside this batch’s repair scope."
+    },
+    {
+      "id": "thm-instantaneous-change-of-variables-for-ode-flow",
+      "decision": "escalate",
+      "reason": "Its Proof step 1.1 relies on the global-flow result whose smoothness proof uses the affected supplier."
+    },
+    {
+      "id": "alg-adjoint-sensitivity-method",
+      "decision": "escalate",
+      "reason": "Its exact state-flow procedure depends on the affected global-flow result."
+    },
+    {
+      "id": "ex-numerical-adjoint-error",
+      "decision": "escalate",
+      "reason": "Its Verification step 1.1 uses the global-flow result; the round-0 local findings are fixed, but this prerequisite still needs owner reconciliation."
+    },
+    {
+      "id": "neural-odes-and-continuous-normalizing-flows",
+      "decision": "accept",
+      "reason": "The frontmatter-only inventory and algorithm placement are intact."
+    },
+    {
+      "id": "neural-odes-and-continuous-normalizing-flows-examples",
+      "decision": "accept",
+      "reason": "The frontmatter-only inventory and example placement are intact."
+    }
+  ]
+}

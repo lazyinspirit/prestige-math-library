@@ -1,0 +1,1135 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ridgeless-minimum-norm-regression",
+    "lem-iid-uniform-fill-distance-rate",
+    "lem-ridgeless-risk-decomposition",
+    "lem-zero-signal-isotropic-risk-limit",
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+    "lem-isotropic-minimum-norm-risk-components",
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes",
+    "ex-double-descent-in-neural-and-tree-models"
+  ],
+  "contracts": {
+    "def-ridgeless-minimum-norm-regression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Then $A^+b$ is a least-squares solution of $Ax=b$, and among all least-squares solutions it is the unique one of minimum Euclidean norm.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The finite-dimensional existence-and-uniqueness theorem and the four defining equations make the displayed estimator well-defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The cited minimum-norm least-squares theorem proves the equivalent characterization.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes positive matrix dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=0 and y=0, X^+y=0, the unique minimum-norm least-squares vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the scalar matrix X=[a] with a nonzero, the definition gives the ordinary least-squares solution y/a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition permits rank-deficient X; uniqueness is supplied for every finite matrix by the cited theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no asymptotic parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional definition makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One-row underdetermined design",
+          "result": "For X=[1 1] and y=1, X^+y=(1/2,1/2), which has minimum Euclidean norm among all solutions u_1+u_2=1.",
+          "evidence": "Substitute the Moore--Penrose formula X^+=X^T/(XX^T)."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The definition is checked against the published pseudoinverse and least-squares interfaces. Independent native review and owner reconciliation remain open."
+      }
+    },
+    "lem-iid-uniform-fill-distance-rate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "source_section": "Statement",
+          "quote": "In particular $\\lambda_n^*(B) = \\operatorname{vol}(B)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "and **Lebesgue measure** is the restriction $$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Partition the cube into equal half-open cells; the volume formula and normalization give probability m_n^{-d} per cell.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Independence gives each cell's empty probability, and the finite union bound gives failure probability at most 1/n.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "An occupied cell supplies a sample within its diameter; the floor estimate yields the claimed fill-distance constant.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The estimate concerns n at least n_d, so an empty sample is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For finite n and positive-dimensional cube, h_n is positive; the bound is a positive upper bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The proof's m_n=floor(t_n) construction is stated for t_n at least 2 and includes every sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cube is required to have positive side length and d is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is a finite-n probability estimate and has no endpoint limit parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Countable Choice is stated and used only through the Lebesgue-volume supplier in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One-dimensional equal-cell partition",
+          "result": "For d=1 and m cells, if all cells contain a point then every x is within L/m of one of the n sample points.",
+          "evidence": "The one-dimensional cell diameter is L/m, as used in step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The finite-union and volume hypotheses are explicit. Independent native review remains open."
+      }
+    },
+    "lem-ridgeless-risk-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Then there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and $(f_1,\\dots,f_m)$ of $W$, together with singular values",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$ satisfying the four Penrose equations",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The SVD and four Penrose equations identify X^+, the kernel projector, the trace identity, and positive scalar scaling.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The isotropic test covariance reduces prediction risk to conditional squared Euclidean estimation error.",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Centering removes the cross term and covariance evaluates the noise contribution, giving the exact bias-plus-noise identity.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n,p at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For zero noise the variance term vanishes; for beta in ker X the bias term is ||beta||^2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=[a] with a nonzero, the identity reduces to risk sigma^2/a^2 when beta is identified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=0, X^+=0 and the identity gives bias ||beta||^2 and zero variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite-dimensional identity with no asymptotic parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite SVD construction makes no arbitrary choice beyond a basis already supplied by the theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Rank-one coordinate design",
+          "result": "For X=[1 0], beta=(a,b), and noise variance sigma^2, the risk is b^2+sigma^2, matching the kernel projection and trace terms.",
+          "evidence": "Compute X^+X=diag(1,0) and (X^T X)^+=diag(1,0)."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The conditional moment assumptions and scaling convention are explicit. Independent native review remains open."
+      }
+    },
+    "lem-zero-signal-isotropic-risk-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+          "source_section": "Statement",
+          "quote": "If $\\gamma<1$, then almost surely",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ridgeless-risk-decomposition",
+          "source_section": "Statement",
+          "quote": "\\sigma^2\\operatorname{tr}((X^{\\mathsf T}X)^+)",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Choose deterministic auxiliary signals with norms one and two and name their shared directional bias and noise terms.",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The exact decomposition gives two risk identities; the current positive-signal corollary applies to both auxiliary sequences on a common probability-one event.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The combination (4R_1-R_2)/3 cancels the shared bias and leaves the noise term, whose two aspect-ratio limits are computed explicitly.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For zero signal the exact decomposition identifies the full risk with the noise term.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes positive sample and feature dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The zero signal is the exact case proved by step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The auxiliary vectors e_1 and 2e_1 exist for every p_n at least one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When sigma=0, the variance term and asserted risk limits are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The claim excludes gamma=1 and states the two open branches separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice is explicit in the statement and applied in step 1.2 through the supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Signal rescaling cancellation",
+          "result": "For R_1=B+V and R_2=4B+V, (4R_1-R_2)/3=V exactly.",
+          "evidence": "Expand the right-hand side using the two identities in step 1.2."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The local scaling argument is complete. The transitive Marchenko–Pastur and positive-edge suppliers used inside the current corollary have stale owner-held Step 1 hashes, so this dependent lemma is escalated pending owner reconciliation."
+      }
+    },
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+          "source_section": "Statement",
+          "quote": "If $\\gamma<1$, then almost surely",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-zero-signal-isotropic-risk-limit",
+          "source_section": "Statement",
+          "quote": "\\displaystyle\\frac{\\sigma^2}{\\gamma-1}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ridgeless-minimum-norm-regression",
+          "source_section": "Definition",
+          "quote": "the **ridgeless minimum-norm least-squares estimator** is $$\\widehat\\beta:=X^+y.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For positive signal norm all hypotheses match the current finite-fourth-moment corollary, including nested-array and noise conventions.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For zero signal the separate local lemma supplies both limits under the same choice and iid conventions.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The cases r>0 and r=0 exhaust r>=0, and the estimator convention agrees with the definition.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The design has n and p_n at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The zero-signal branch is covered by step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The only square aspect-ratio endpoint gamma=1 is explicitly excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The formulas permit sigma=0; the variance terms then vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The two limits are asserted only for gamma<1 and gamma>1, with gamma=1 expressly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Axiom of Choice is stated and cited in both case applications."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Zero-noise underparameterized branch",
+          "result": "When sigma=0 and gamma<1 the theorem's limit is zero, consistent with exact noiseless least-squares recovery at eventual full column rank.",
+          "evidence": "Set sigma=0 in the displayed branch and use the positive-edge hypothesis in the supplier."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The r>0 supplier is current, but the zero-signal case depends transitively on the corollary's Marchenko–Pastur and positive-edge items, whose owner-held Step 1 hashes are stale. Escalated pending owner reconciliation."
+      }
+    },
+    "lem-isotropic-minimum-norm-risk-components": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ridgeless-risk-decomposition",
+          "source_section": "Statement",
+          "quote": "\\sigma^2\\operatorname{tr}((X^{\\mathsf T}X)^+)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-zero-signal-isotropic-risk-limit",
+          "source_section": "Statement",
+          "quote": "\\displaystyle\\frac{\\sigma^2}{\\gamma-1}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+          "source_section": "Statement",
+          "quote": "r^2\\left(1-\\frac1\\gamma\\right)",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The exact finite-n decomposition identifies total risk as B_n+V_n, while the zero-signal risk is the same V_n.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Subtract the zero-signal variance limit from the total risk limit to obtain each limiting bias component.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The underlying model assumes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: When r=0, the bias limit in both branches is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Aspect ratio gamma=1 is excluded by the supplier statements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When sigma=0, the variance limit is zero; the bias formula remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The two open aspect-ratio branches are treated separately in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This subtraction lemma adds no choice use beyond its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Bias plus variance",
+          "result": "For every n the exact identity R_n=B_n+V_n is preserved before taking limits.",
+          "evidence": "This is precisely the equality supplied by the risk decomposition in step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The subtraction proof is complete conditional on its inputs. Those inputs include the escalated zero-signal and total-risk items, so this lemma is escalated."
+      }
+    },
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-gaussian-radial-kernel",
+          "source_section": "Example",
+          "quote": "For $p\\ge1$ and $\\sigma>0$, the Gaussian radial kernel on $\\mathbb R^p$ is $k_\\sigma(x,z)=\\exp(-\\|x-z\\|_2^2/(2\\sigma^2))$. It is a real positive semidefinite kernel",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-canonical-rkhs-construction-and-reproducing-property",
+          "source_section": "Statement",
+          "quote": "For every set $X$ and every real positive semidefinite kernel $k$ on $X$, the canonical construction from finitely supported coefficients, quotient by zero seminorm, and norm completion defines a real reproducing kernel Hilbert space $\\mathcal H_k$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-rbf-power-function-fill-distance-bound",
+          "source_section": "Statement",
+          "quote": "such that every such $X$ with $0<h_X\\le h_0$ satisfies $$\\sup_{x\\in\\Omega}P_X(x)\\le C\\exp\\!\\left(-c\\frac{|\\log h_X|}{h_X}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-iid-uniform-fill-distance-rate",
+          "source_section": "Statement",
+          "quote": "There are constants $C_d=2\\sqrt d\\,2^{1/d}$ and $n_d$ such that,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The reproducing property makes the target difference orthogonal to all sampled kernel sections; projection and Cauchy–Schwarz give the pointwise power-function bound.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The RKHS triangle inequality converts the pointwise estimate into the norm-sum factor.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "On the fill-distance event the Gaussian power bound gives the stated n/log n exponential rate.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample size is n at least n_0, with n_0 chosen at least n_d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: At every interpolation site g(x_i)=0, so the pointwise bound in step 1.1 has both sides zero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For one interpolation site, step 1.1 still gives zero error at that site; the global rate uses sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: If h=h^*, the error is identically zero, consistent with the claimed inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof of the required Gaussian power estimate remains unresolved, so endpoint cases of that estimate are not accepted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Countable Choice is explicit and used in step 1.1 to invoke the canonical RKHS construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Interpolation-site error",
+          "result": "For every i, h(x_i)-h^*(x_i)=0 by the interpolation hypothesis.",
+          "evidence": "Apply the reproducing identity in step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+      "notes": "The Hilbert-space projection and random fill-distance reductions are written out. The Belkin route cites Wendland (2004), Theorem 11.22; the Rieger compact-cube route relies on Madych and Nelson (1992), Lemma 1, without reproducing its proof, while its separate general-domain route cites Wendland (2001). This Gaussian power-function supplier is escalated and is not ready."
+      }
+    },
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-isotropic-minimum-norm-risk-components",
+          "source_section": "Statement",
+          "quote": "Then almost surely, if $0<\\gamma<1$, $$B_n\\longrightarrow0,\\qquad V_n\\longrightarrow\\frac{\\sigma^2\\gamma}{1-\\gamma},$$ and if $\\gamma>1$, $$B_n\\longrightarrow r^2\\left(1-\\frac1\\gamma\\right),\\qquad V_n\\longrightarrow\\frac{\\sigma^2}{\\gamma-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Summing the limiting components gives the risk formulas, and differentiation gives the underparameterized monotonicity.",
+          "inputs": [
+            "given",
+            "F1",
+            "calculus"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The derivative sign separates the decreasing, increasing, and unique-interior-minimum signal-to-noise regimes.",
+          "inputs": [
+            "given",
+            "F1",
+            "calculus",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Direct endpoint limits establish the threshold divergence qualification and the global-infimum statements.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a positive aspect ratio."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The cases r=0 and sigma=0 are stated separately in the risk-curve description."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The formulas exclude gamma=1 and only give one-sided limits there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When r=sigma=0 the risk is zero on both branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The limits as gamma decreases to zero, approaches one, and tends to infinity are computed in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is scalar calculus applied to already established risk limits."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Interior risk minimum",
+          "result": "For r=2 and sigma=1, gamma_*=2 and R(2)=3; the derivative is negative for 1<gamma<2 and positive for gamma>2.",
+          "evidence": "Substitute r=2 and sigma=1 into step 2.1."
+        },
+        {
+          "check": "Noise-free boundary",
+          "result": "For sigma=0 and r=1, the underparameterized risk is 0 and the overparameterized risk is 1-1/gamma>0.",
+          "evidence": "Substitute sigma=0 and r=1 into the two displayed branches."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The derivative and endpoint arguments are complete conditional on the component lemma. That lemma is escalated because its upstream RMT proof suppliers have stale owner-held Step 1 hashes."
+      }
+    },
+    "ex-double-descent-in-neural-and-tree-models": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The cited Figure 2 experiment reports n=10^4, ten classes, and interpolation at N=n=10^4 for random Fourier features.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The cited Figures 4 and 5 report the stated neural-network dimensions and forest complexity parameters.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The source reports finite experiments, so the example explicitly limits its scope to those observations.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example reports nonempty finite datasets."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sized dataset or zero-risk theorem is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not assert a single-sample boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example reports the source's specified datasets and models."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No asymptotic endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The experimental report makes no choice-principle claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Experiment dimensions",
+          "result": "The example's sample counts, input dimension, class count, and capacity indices match Figures 2, 4, and 5 of the full paper.",
+          "evidence": "The figure captions and experiment descriptions are transcribed in the source-coverage record."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "This is a source-qualified empirical report, not a theorem. Independent source and statement review remain open."
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "item": "lem-gaussian-rbf-power-function-fill-distance-bound",
+      "status": "escalated",
+      "reason": "The Gaussian power-function estimate is stated as a planned local supplier, but no complete local proof or fully inspected source proof was obtained."
+    }
+  ]
+}

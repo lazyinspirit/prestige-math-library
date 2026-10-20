@@ -1,0 +1,144 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-18-1",
+  "inventory": {
+    "pages": [
+      "ml02-random-forests",
+      "ml02-random-forests-examples"
+    ],
+    "items": [
+      "alg-bagged-random-forest",
+      "thm-infinite-forest-vote-limit",
+      "thm-random-forest-strength-correlation-bound",
+      "thm-regression-forest-risk-under-unbiased-randomized-trees",
+      "ex-random-forest-out-of-bag-diagnostic",
+      "ex-random-forest-zero-margin-vote-limit",
+      "ex-random-forest-strength-correlation-tradeoff"
+    ],
+    "pairs": [
+      "ml02-random-forests"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-bagged-random-forest.md",
+    "items/thm-infinite-forest-vote-limit.md",
+    "items/thm-random-forest-strength-correlation-bound.md",
+    "items/thm-regression-forest-risk-under-unbiased-randomized-trees.md",
+    "items/ex-random-forest-out-of-bag-diagnostic.md",
+    "items/ex-random-forest-zero-margin-vote-limit.md",
+    "items/ex-random-forest-strength-correlation-tradeoff.md",
+    "library/machine-learning/ml02-random-forests.md",
+    "library/machine-learning/ml02-random-forests-examples.md"
+  ],
+  "write_batches": [
+    "18"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-random-forest-out-of-bag-diagnostic",
+      "path": [
+        "alg-bagged-random-forest",
+        "ex-random-forest-out-of-bag-diagnostic"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "ex-random-forest-out-of-bag-diagnostic"
+        ]
+      ]
+    },
+    {
+      "id": "ex-random-forest-strength-correlation-tradeoff",
+      "path": [
+        "alg-bagged-random-forest",
+        "ex-random-forest-strength-correlation-tradeoff"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "ex-random-forest-strength-correlation-tradeoff"
+        ],
+        [
+          "thm-random-forest-strength-correlation-bound",
+          "ex-random-forest-strength-correlation-tradeoff"
+        ]
+      ]
+    },
+    {
+      "id": "ex-random-forest-zero-margin-vote-limit",
+      "path": [
+        "alg-bagged-random-forest",
+        "ex-random-forest-zero-margin-vote-limit"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "ex-random-forest-zero-margin-vote-limit"
+        ],
+        [
+          "thm-infinite-forest-vote-limit",
+          "ex-random-forest-zero-margin-vote-limit"
+        ]
+      ]
+    },
+    {
+      "id": "thm-infinite-forest-vote-limit",
+      "path": [
+        "alg-bagged-random-forest",
+        "thm-infinite-forest-vote-limit"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "thm-infinite-forest-vote-limit"
+        ]
+      ]
+    },
+    {
+      "id": "thm-random-forest-strength-correlation-bound",
+      "path": [
+        "alg-bagged-random-forest",
+        "thm-random-forest-strength-correlation-bound"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "thm-random-forest-strength-correlation-bound"
+        ]
+      ]
+    },
+    {
+      "id": "thm-regression-forest-risk-under-unbiased-randomized-trees",
+      "path": [
+        "alg-bagged-random-forest",
+        "thm-regression-forest-risk-under-unbiased-randomized-trees"
+      ],
+      "paths": [
+        [
+          "alg-bagged-random-forest",
+          "thm-regression-forest-risk-under-unbiased-randomized-trees"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-bagged-random-forest": [
+      "## Definition\n\nFix training data $D=((x_i,y_i))_{i=1}^n$ with $n\\ge1$, features $x_i\\in\\mathbb R^p$ with $p\\ge1$, and one response mode: regression with $y_i\\in\\mathbb R$, or classification with labels in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$, $J\\ge1$. Choose a finite depth cap $d_{\\max}\\ge0$, a tree count $B\\ge1$, and a feature count $m\\in\\{1,\\ldots,p\\}$. Choosing $m=p$ disables feature randomization.\n\nFor every tree index $b\\in\\{1,\\ldots,B\\}$, draw $n$ independent uniform indices $I_{b1},\\ldots,I_{bn}$ from $\\{1,\\ldots,n\\}$ and put $N_{bi}=|\\{r:I_{br}=i\\}|$. For every possible binary node address $\\nu$ of depth less than $d_{\\max}$, draw a subset $M_{b,\\nu}$ uniformly from the $m$-element subsets of $\\{1,\\ldots,p\\}$. All bootstrap-index and feature-subset draws are mutually independent across trees, index positions, and node addresses. Write $\\Theta_b=(N_{b1},\\ldots,N_{bn},(M_{b,\\nu})_\\nu)$; thus the $\\Theta_b$ are independent with a common law conditional on the fixed data and chosen settings.\n\nAt a node with bootstrap position set $I$, define $\\bar y_I=|I|^{-1}\\sum_{r\\in I}y_{I_{br}}$ in regression. In classification define $q_{Ik}=|I|^{-1}|\\{r\\in I:y_{I_{br}}=c_k\\}|$ and choose one fixed impurity, either misclassification $1-\\max_kq_{Ik}$, Gini $1-\\sum_kq_{Ik}^2$, or entropy $-\\sum_kq_{Ik}\\log q_{Ik}$, with $0\\log0=0$.\n\nFor tree $b$, write the resampled rows as $D_b^*=((x_{I_{br}},y_{I_{br}}))_{r=1}^n$, so bootstrap positions remain distinct even when they contain the same original row. Build $T_b$ from $D_b^*$, starting at the root with position set $I=\\{1,\\ldots,n\\}$. At a node of depth $d<d_{\\max}$, form the candidate midpoint thresholds between consecutive distinct observed values using the coordinates in that node's set $M_{b,\\nu}$. A candidate at coordinate $j$ and threshold $t$ partitions the current bootstrap positions into $I_L=\\{r\\in I:x_{I_{br},j}\\le t\\}$ and $I_R=\\{r\\in I:x_{I_{br},j}>t\\}$; only candidates with both children nonempty are used. Score each candidate by $\\sum_{r\\in I_L}(y_{I_{br}}-\\bar y_{I_L})^2+\\sum_{r\\in I_R}(y_{I_{br}}-\\bar y_{I_R})^2$ in regression or by $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ in classification, where $Q$ is the chosen impurity. Select a candidate of least score, breaking ties by coordinate index and then cut index, and recurse on its two children. If $d=d_{\\max}$ or there is no candidate, make the node a leaf. When $m=p$, this is the greedy CART growth procedure on the bootstrap sample; when $m<p$, the same procedure restricts each node's candidate coordinates to its sampled subset. Each regression leaf predicts its sample mean; each classification leaf predicts its most frequent class, choosing the least class index in a tie. Define $h(x,\\Theta_b)$ by following the unique tree path for $x$.\n\nFor regression, the finite-forest prediction is $B^{-1}\\sum_{b=1}^B h(x,\\Theta_b)$. For classification, it is the class receiving the largest number of votes, with the least class index breaking ties. For a training observation $i$, let $O_i=\\{b:N_{bi}=0\\}$. Its out-of-bag prediction is formed using only trees indexed by $O_i$, with the same regression average or classification vote rule; if $O_i=\\varnothing$, no out-of-bag prediction is returned. An out-of-bag prediction is a diagnostic computed from this finite forest, not an exact identity for its full-forest prediction or risk.\n\nThe data flow is shown below. The arrows mean that the same fixed $D$ and the independent randomization vector determine each tree, and the stated aggregation combines the resulting predictions; the diagram records the procedure and is not a proof of a performance claim.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (data) at (0,0) {fixed data $D$};\n  \\node[draw,rounded corners] (random) at (0,-1.2) {IID $\\Theta_b$};\n  \\node[draw,rounded corners] (tree) at (3,-0.6) {$T_b(x)=h(x,\\Theta_b)$};\n  \\node[draw,rounded corners] (aggregate) at (6,-0.6) {vote or average over $b=1,\\ldots,B$};\n  \\draw[->] (data) -- (tree);\n  \\draw[->] (random) -- (tree);\n  \\draw[->] (tree) -- (aggregate);\n\\end{tikzpicture}\n```"
+    ],
+    "thm-infinite-forest-vote-limit": [
+      "## Statement\n\nFix a finite training dataset and a classifier $h(x,\\theta)$ taking values in an ordered finite class set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$ with $J\\ge2$. Let $\\Theta_1,\\Theta_2,\\ldots$ be IID random elements of a measurable space $(\\mathsf T,\\mathcal T)$ with common law $Q$. Regard the sequence as a random element of $(\\mathsf T^{\\mathbb N},\\mathcal T^{\\otimes\\mathbb N})$ and assume it is independent of a test pair $(X,Y)$ with law $P$ on $\\mathcal X\\times\\mathcal C$. Assume $h$ is jointly measurable in $(x,\\theta)$. For $j\\in\\{1,\\ldots,J\\}$ define $p_j(x)=Q\\{\\theta:h(x,\\theta)=c_j\\}$, and let\n\n$$\nm(x,y)=p_{k}(x)-\\max_{j\\ne k}p_j(x),\\qquad y=c_k.\n$$\n\nFor each $B\\ge1$, let $G_B(x)$ be the class with the largest number of votes among $h(x,\\Theta_1),\\ldots,h(x,\\Theta_B)$, choosing the least class index in a tie. Define the finite-forest conditional risk by\n\n$$\nPE_B(\\Theta_{1:B})=\\int_{\\mathcal X\\times\\mathcal C}\\mathbf1\\{G_B(x)\\ne y\\}\\,dP(x,y).\n$$\n\nIf $P\\{(x,y):m(x,y)=0\\}=0$, then, almost surely with respect to the IID tree-randomization sequence,\n\n$$\nPE_B(\\Theta_{1:B})\\longrightarrow P\\{(x,y):m(x,y)<0\\}.\n$$"
+    ],
+    "thm-random-forest-strength-correlation-bound": [
+      "## Statement\n\nFix a finite training dataset and a measurable classifier $h(x,\\theta)$ taking values in an ordered finite class set $\\mathcal C=\\{c_1<\\cdots<c_J\\}$ with $J\\ge2$. Let $Z=(X,Y)$ have test law $P$. Let $\\Theta,\\Theta'$ be independent randomizations with common law $Q$, and assume the pair $(\\Theta,\\Theta')$ is independent of $Z$. For $j\\in\\{1,\\ldots,J\\}$ define $p_j(x)=Q\\{\\theta:h(x,\\theta)=c_j\\}$. For $y=c_k$, let $\\hat j(x,y)$ be the least index attaining $\\max_{j\\ne k}p_j(x)$, and define the limiting margin\n\n$$\nm(x,y)=p_k(x)-p_{\\hat j(x,y)}(x),\\qquad s=\\mathbb E_P[m(Z)].\n$$\n\nAssume $s>0$. For a tree randomization $\\theta$, define the raw margin $r_\\theta(x,y)=\\mathbf1\\{h(x,\\theta)=y\\}-\\mathbf1\\{h(x,\\theta)=c_{\\hat j(x,y)}\\}$ and $sd(\\theta)=\\sqrt{\\operatorname{Var}_P(r_\\theta(Z))}$. Put $d=\\mathbb E_Q[sd(\\Theta)]$. If $d=0$, then $P\\{m(Z)<0\\}=0$. If $d>0$, define\n\n$$\n\\rho=\\frac{\\mathbb E_{Q\\times Q}[\\operatorname{Cov}_P(r_\\Theta(Z),r_{\\Theta'}(Z))]}{d^2}.\n$$\n\nThen $\\rho\\ge0$ and\n\n$$\nP\\{m(Z)<0\\}\\le \\rho\\frac{1-s^2}{s^2}.\n$$\n\nThe covariance formula for $\\rho$ is Breiman's weighted mean raw-margin correlation written without undefined zero-standard-deviation correlation terms."
+    ],
+    "thm-regression-forest-risk-under-unbiased-randomized-trees": [
+      "## Statement\n\nFix a finite training dataset and a jointly measurable real-valued tree predictor $h(x,\\theta)$. Let $Z=(X,Y)$ have test law $P$. Let $\\Theta,\\Theta'$ be independent randomizations with common law $Q$, assume the pair $(\\Theta,\\Theta')$ is independent of $Z$, and assume $\\mathbb E_PY^2<\\infty$ and $h(X,\\Theta)\\in L^2(P\\times Q)$. For every allowed tree randomization $\\theta$, assume $h(X,\\theta)\\in L^2(P)$ and $\\mathbb E_PY=\\mathbb E_Ph(X,\\theta)$. Put $e_\\theta(Z)=Y-h(X,\\theta)$ and $sd(\\theta)=\\sqrt{\\operatorname{Var}_P(e_\\theta(Z))}$. Define\n\n$$PE^*(\\mathrm{forest})=\\mathbb E_P\\left(Y-\\mathbb E_Qh(X,\\Theta)\\right)^2$$\n\n$$PE^*(\\mathrm{tree})=\\mathbb E_Q\\mathbb E_P e_\\Theta(Z)^2$$\n\n$$d=\\mathbb E_Q[sd(\\Theta)]$$\n\nIf $d=0$, then both risks are zero. If $d>0$, define\n\n$$\n\\rho=\\frac{\\mathbb E_{Q\\times Q}[\\operatorname{Cov}_P(e_\\Theta(Z),e_{\\Theta'}(Z))]}{d^2}.\n$$\n\nThen $\\rho\\ge0$ and\n\n$$\nPE^*(\\mathrm{forest})\\le\\rho\\,PE^*(\\mathrm{tree}).\n$$\n\nThe covariance formula for $\\rho$ is Breiman's weighted mean residual correlation written without undefined zero-standard-deviation correlation terms."
+    ],
+    "ex-random-forest-out-of-bag-diagnostic": [],
+    "ex-random-forest-zero-margin-vote-limit": [],
+    "ex-random-forest-strength-correlation-tradeoff": []
+  }
+}

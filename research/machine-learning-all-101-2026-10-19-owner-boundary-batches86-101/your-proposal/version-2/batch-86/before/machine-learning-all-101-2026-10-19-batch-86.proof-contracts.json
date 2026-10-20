@@ -1,0 +1,2020 @@
+{
+  "version": 1,
+  "scope": [
+    "def-learned-mdp-model",
+    "def-finite-stochastic-shortest-path-problem",
+    "def-finite-horizon-mdp-return",
+    "alg-real-time-dynamic-programming",
+    "lem-finite-policy-kernel-tv-propagation",
+    "thm-finite-stochastic-shortest-path-value-exists",
+    "rem-ensemble-disagreement-is-not-calibrated-uncertainty",
+    "alg-dyna-q",
+    "alg-model-predictive-control",
+    "thm-single-policy-finite-horizon-simulation-bound",
+    "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+    "cex-rtdp-optimal-relevant-state-convergence-fails",
+    "def-model-exploitation",
+    "ex-model-accurate-on-behavior-support",
+    "ex-short-versus-long-model-rollouts",
+    "ex-model-exploitation-off-support",
+    "thm-rtdp-recurrently-backed-state-convergence"
+  ],
+  "contracts": {
+    "def-learned-mdp-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-total-variation-half-l1-formula-on-a-countable-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be an at most countable set equipped with the power-set\n$\\sigma$-algebra $2^E$, and let $\\mu,\\nu$ be probability laws on $E$\n([[def-total-variation-distance-for-probability-laws]]). Then\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}=\\frac12\\sum_{x\\in E}\\bigl|\\mu(x)-\\nu(x)\\bigr| ,$$\n\nwhere $\\mu(x),\\nu(x)$ denote the singleton masses and the series on the right\nis a series of nonnegative numbers in $[0,+\\infty]$. The value is finite; it is\n$0$ exactly when $\\mu=\\nu$. The supremum defining the total variation distance\nis attained at the event $A_+=\\{x\\in E:\\mu(x)>\\nu(x)\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-learned-mdp-model-1-1",
+          "step": "1.1",
+          "claim": "For each pair $(s,a)$, $P(s'\\mid s,a)\\ge0$ and $\\sum_{s'}P(s'\\mid s,a)=\\sum_{s',\\rho}p(s',\\rho\\mid s,a)=1$ by [F1]. Thus every true transition row is a probability law. The proposed $\\hat P$ rows have this property by the Given condition. Since the spaces are finite and discrete, [F2] makes both transition tables probability kernels. The reward alphabet lies in $[0,1]$, so its probability-weighted finite sum $r(s,a)$ also lies in $[0,1]$, as does $\\hat r(s,a)$ by assumption.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-learned-mdp-model-2-1",
+          "step": "2.1",
+          "claim": "For each pair, $|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|\\le P(s'\\mid s,a)+\\hat P(s'\\mid s,a)$ by [F5] and [F6]. Summing over $s'$ gives at most $2$, so $0\\le e_P(s,a)\\le1$; also $0\\le e_r(s,a)\\le1$ because both rewards lie in $[0,1]$. By [F3], the displayed half-sum is exactly the library total-variation convention on $S$. The set $D$ and each $C\\subseteq D$ are finite; therefore [F4] gives attained maxima when $C$ is nonempty, and the empty-set convention defines the remaining case. All model errors in the Definition are consequently well-defined.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "two-point transition rows",
+          "result": "For P=(1,0) and P-hat=(1/2,1/2), the half-l1 error is 1/2; a reward pair in [0,1] has absolute error at most 1."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly sets both error maxima to zero on the empty pair subset; Verification step 2.1 checks the error convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement gives zero error for the empty subset; Verification step 2.1 covers rows with zero reward and transition error."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-step horizon or singleton time parameter is in this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits a one-point state set and point-mass transition rows; Verification step 1.1 checks row normalization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement restricts rewards to [0,1]; Verification step 2.1 establishes reward and TV errors are at most 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires nonempty finite state/action sets; Verification step 2.1 uses a finite maximum only for a nonempty pair subset."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "def-finite-stochastic-shortest-path-problem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-finite-stochastic-shortest-path-problem-1-1",
+          "step": "1.1",
+          "claim": "The expected costs $c(s,a)=-r(s,a)$ are finite because the reward alphabet is finite and the joint row is a probability mass by [F1]. The stated reward bound gives $c(s,a)\\ge c_{\\min}>0$ off $G$, and the dummy action at each goal has cost $0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-finite-stochastic-shortest-path-problem-2-1",
+          "step": "2.1",
+          "claim": "By [F1], every row $P(\\cdot\\mid s,a)$ is a probability distribution, and every policy row $\\pi(\\cdot\\mid s)$ is a probability distribution. Thus the recursion defining $q_{n+1}$ is a finite sum of nonnegative terms. If $0\\le q_n\\le1$, then $0\\le q_{n+1}(s)\\le\\sum_a\\pi(a\\mid s)\\sum_{s'}P(s'\\mid s,a)=1$ off $G$, while $q_{n+1}(g)=0$ on $G$. Since $q_0\\in[0,1]^S$, induction shows every $q_n$ is well-defined and lies in $[0,1]^S$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "single nonglobal state with a goal transition of probability 1/2",
+          "result": "The finite-prefix survival probability is (1/2)^n, so the properness definition gives convergence to zero."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement allows the nonglobal set S\\G to be empty; Verification steps 1.1 and 2.1 still define zero goal costs and the survival recursion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement assigns goal cost zero and Verification step 1.1 checks it explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-step horizon is asserted; properness concerns the whole survival sequence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The goal-only case is permitted because G need only be nonempty; Verification step 2.1 gives q_n=0 after the first step at goals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires a strict common cost lower bound c_min>0 away from goals; zero nonglobal cost is outside this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires each action set nonempty and supplies one dummy action at each goal."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "def-finite-horizon-mdp-return": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-finite-horizon-mdp-return-1-1",
+          "step": "1.1",
+          "claim": "The initial vector $d_0=\\mu$ is a probability distribution. If $d_t$ is a probability distribution, every term in the recursion is nonnegative and $\\sum_{s'\\in S}d_{t+1}(s')=\\sum_{s\\in S}d_t(s)\\sum_{a\\in A(s)}\\pi_t(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)=\\sum_{s\\in S}d_t(s)=1$, because each policy and transition row has total mass one by [F1]. Induction proves that every $d_t$ is a probability distribution.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-finite-horizon-mdp-return-2-1",
+          "step": "2.1",
+          "claim": "Each summand in $J_H$ is nonnegative, and at each time $t$ its sum is at most $\\sum_s d_t(s)=1$ because rewards lie in $[0,1]$ by [F1]. The $H$ finite time sums therefore define a real number in $[0,H]$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=1 and all rewards zero",
+          "result": "The occupancy is d0=mu and J1=0, within the verified [0,H] range."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "State set, every action set, and initial law are required nonempty; empty domains are outside the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero rewards are allowed; Verification step 2.1 shows the return remains in [0,H]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "H=1 is allowed by the Statement; Verification steps 1.1 and 2.1 reduce to the initial occupancy and one reward."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic transition and policy rows are included as probability distributions; Verification step 1.1 still normalizes occupancy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires H>=1 and rewards in [0,1]; Verification step 2.1 proves the closed return interval [0,H]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires nonempty finite action sets and policy probability rows on them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "alg-real-time-dynamic-programming": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "trial cap L=1",
+          "result": "At most one decision and one current-state backup occurs before reset; goals still terminate immediately."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input requires a nonempty start set and a finite SSP with nonempty action sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement fixes goal values to zero and holds them at zero throughout each trial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The positive integer trial cap L may equal 1; the procedure then makes at most one decision per trial. The Statement permits L=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A trial that reaches a goal stops immediately; the next start is supplied without resetting the value table. The Statement stops a trial at a goal and carries the value table across trials."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits every positive finite trial cap L and requires each start to recur infinitely often."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite nonempty action sets and the attained greedy maximum supply a nonempty set for the uniform tie draw. The Statement samples uniformly from the finite nonempty greedy-action set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "lem-finite-policy-kernel-tv-propagation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-total-variation-half-l1-formula-on-a-countable-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be an at most countable set equipped with the power-set\n$\\sigma$-algebra $2^E$, and let $\\mu,\\nu$ be probability laws on $E$\n([[def-total-variation-distance-for-probability-laws]]). Then\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}=\\frac12\\sum_{x\\in E}\\bigl|\\mu(x)-\\nu(x)\\bigr| ,$$\n\nwhere $\\mu(x),\\nu(x)$ denote the singleton masses and the series on the right\nis a series of nonnegative numbers in $[0,+\\infty]$. The value is finite; it is\n$0$ exactly when $\\mu=\\nu$. The supremum defining the total variation distance\nis attained at the event $A_+=\\{x\\in E:\\mu(x)>\\nu(x)\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-variation-coupling-and-kernel-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\nu$ be probability measures on $(\\mathsf X,\\mathcal X)$ and let\n$P$ be a probability kernel on that space. Then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{f:\\mathsf X\\to[0,1]\\ \\mathcal X\\text{-measurable}}\\left|\\int f\\,d\\mu-\\int f\\,d\\nu\\right|,$$\n$$\\lVert\\mu P-\\nu P\\rVert_{\\rm TV}\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}.$$\nIf $(U,V)$ is a coupling of $\\mu$ and $\\nu$ on a probability space and\n$E$ is a measurable event on which $U=V$, then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}\\le\\mathbb P(E^c).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-triangle-inequality-finite",
+          "source_section": "Statement",
+          "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals and $n \\in \\mathbb{N}$,\nwith finite sums as in [[def-finite-sum]] and the absolute value as in\n[[def-abs-value]]. Then\n\n$$\\Big|\\sum_{k<n} a_k\\Big| \\le \\sum_{k<n} |a_k|.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-policy-kernel-tv-propagation-1-1",
+          "step": "1.1",
+          "claim": "For each state $s$, the policy mixture $K^\\pi(s,\\cdot)$ is a probability distribution because it is a convex combination of the probability rows $P(\\cdot\\mid s,a)$; the same holds for $\\widehat K^\\pi$. The state set is finite discrete, so both row tables are probability kernels by [F2]. Applying [F4] to the common kernel $K^\\pi$ gives $\\operatorname{TV}(dK^\\pi,\\widehat dK^\\pi)\\le\\operatorname{TV}(d,\\widehat d)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-policy-kernel-tv-propagation-1-2",
+          "step": "1.2",
+          "claim": "Enumerate the finite set $D$ of admissible state-action pairs. For each $x\\in S$, the finite-sum triangle inequality [F6] and absolute-value product formula [F5] give $\\operatorname{TV}(\\widehat dK^\\pi,\\widehat d\\widehat K^\\pi)=\\frac12\\sum_{x\\in S}|\\sum_{(s,a)\\in D}\\widehat d(s)\\pi(a\\mid s)(P(x\\mid s,a)-\\widehat P(x\\mid s,a))|\\le\\frac12\\sum_{x\\in S}\\sum_{(s,a)\\in D}\\widehat d(s)\\pi(a\\mid s)|P(x\\mid s,a)-\\widehat P(x\\mid s,a)|$. The finite sums over $S$ and $D$ can be interchanged: enumerate both sets, expand by additivity [F7], and use the coordinate-swap bijection with enumeration invariance [F8]. This gives $\\sum_{s\\in S}\\widehat d(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)\\frac12\\sum_{x\\in S}|P(x\\mid s,a)-\\widehat P(x\\mid s,a)|\\le\\epsilon$. The last inequality uses the row bound on every positive-weight pair; zero-weight terms vanish, and the weights sum to $\\sum_s\\widehat d(s)\\sum_a\\pi(a\\mid s)=1$ because both rows are probability distributions.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-policy-kernel-tv-propagation-2-1",
+          "step": "2.1",
+          "claim": "For every $x\\in S$, write $dK^\\pi(x)-\\widehat d\\widehat K^\\pi(x)=[dK^\\pi(x)-\\widehat dK^\\pi(x)]+[\\widehat dK^\\pi(x)-\\widehat d\\widehat K^\\pi(x)]$. The scalar triangle inequality [F5], summed over finite $S$ using [F6], gives $\\operatorname{TV}(dK^\\pi,\\widehat d\\widehat K^\\pi)\\le\\operatorname{TV}(dK^\\pi,\\widehat dK^\\pi)+\\operatorname{TV}(\\widehat dK^\\pi,\\widehat d\\widehat K^\\pi)$. Steps 1.1 and 1.2 bound the right side by the claim.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "one state, one action; equal rows",
+          "result": "Both induced kernels coincide and the inequality reduces to TV(d,d-hat)≤TV(d,d-hat)."
+        },
+        {
+          "case": "one state, one action; row error epsilon",
+          "result": "The state law is necessarily the point mass, so next-state TV is zero and is at most current TV plus epsilon."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state set and each action set are assumed nonempty; the empty-domain case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows epsilon=0; when row errors vanish, step 2.1 gives zero perturbation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-state, one-action case is included; steps 1.1-3.1 remain valid for singleton finite sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic policy rows and point-mass kernels are included as probability distributions in the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes epsilon=0 and arbitrary finite probability rows; step 2.1 uses only the stated row bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires nonempty finite action sets and policy probability rows, so every policy mixture is defined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "thm-finite-stochastic-shortest-path-value-exists": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-stochastic-shortest-path-problem",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have nonempty finite state set $S$ and finite nonempty action sets $A(s)$. A **finite stochastic shortest-path problem** consists of that MDP, a nonempty goal set $G\\subseteq S$, and a constant $c_{\\min}>0$ with the following properties. Each $g\\in G$ has a single dummy action that returns to $g$ with reward $0$ with probability $1$. For every $s\\notin G$ and every $a\\in A(s)$, the expected reward satisfies $r(s,a)\\le -c_{\\min}$. Define the one-step expected cost by $c(s,a)=-r(s,a)$ off $G$ and $c(g,a)=0$ at goals. A stationary Markov policy $\\pi$ is **proper** if, from every initial state, the finite-step probabilities of not having reached $G$ tend to $0$: with $q_0(s)=1_{s\\notin G}$ and\n\n$$q_{n+1}(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)q_n(s')\\quad(s\\notin G),\\qquad q_{n+1}(g)=0\\quad(g\\in G),$$\n\nproperness means $q_n(s)\\to0$ for every $s\\in S$. The problem need not have a proper policy unless that is separately assumed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let\n$S = \\{x_k : k \\in \\mathbb{N}\\}$ be its range.\n\n1. If $(x_k)$ is nondecreasing ([[def-monotone-sequence]]) and $S$ is bounded\n   above ([[def-bounded-set]]), then $(x_k)$ converges ([[def-real-limit]]) and\n   $$\\lim_{k} x_k = \\sup S .$$\n2. If $(x_k)$ is nonincreasing and $S$ is bounded below, then $(x_k)$ converges\n   and $$\\lim_{k} x_k = \\inf S .$$\n\nBoth suprema and infima exist under the stated hypotheses: $S$ is nonempty, so\nthe least-upper-bound property ([[def-complete-ordered-field]]) supplies the\nfirst and [[thm-infimum-property]] the second, and each is unique\n([[lem-sup-unique]]).\n\nThis is the first place in this track where the least-upper-bound property\nproduces a **limit**. Everything on the sequences page held in any Archimedean\nordered field; the theorem below does not, and the sequence of decimal\ntruncations of $\\sqrt 2$ inside $\\mathbb{Q}$ is the standard witness of its\nfailure there.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-1-1",
+          "step": "1.1",
+          "claim": "If $S=G$, all costs and values are zero, and the theorem follows. Otherwise let $S\\setminus G\\ne\\emptyset$. For any history-dependent policy, finite state/action histories form finite discrete spaces at each time, so the conditional action and transition rules are probability kernels. By [A1] and [F2], the corresponding trajectory law exists with the specified finite-prefix probabilities; this justifies the expectations in the Statement.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-1-2",
+          "step": "1.2",
+          "claim": "Define the Bellman map $T$ by $(Tu)(g)=0$ on goals and $(Tu)(s)=\\min_{a\\in A(s)}[c(s,a)+\\sum_{s'}P(s'\\mid s,a)u(s')]$ off goals. Set $f_0(s)=0$ and $f_{n+1}=Tf_n$. The minimum is attained by [F3]. These are finite-horizon optimal costs: for $n=0$ the continuation cost is zero; if the claim holds at horizon $n$, conditioning on the first action and next state gives the displayed recursion at horizon $n+1$. Any randomized first action gives a convex combination of action costs, which is at least their minimum; a minimizing pure action attains that minimum, so the finite-horizon optimum is the displayed value.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-2-1",
+          "step": "2.1",
+          "claim": "The recursion is monotone in its value argument because all transition weights are nonnegative. Also $f_1\\ge f_0=0$. Induction therefore gives $0\\le f_n\\le f_{n+1}$. Let $\\bar\\pi$ be the proper stationary policy in the Given assumptions. For each state $s$, properness gives an integer $N_s\\ge1$ with survival probability $q_{N_s}^{\\bar\\pi}(s)<1$. Since $S$ is finite, take $N=\\max_sN_s$ and $\\rho=\\max_s q_N^{\\bar\\pi}(s)<1$. The Markov property implies $q_{kN}^{\\bar\\pi}(s)\\le\\rho^k$ for all $k\\ge0$: condition on the state after each block of $N$ steps and use the uniform bound $\\rho$. The finite maximum $c_{\\max}=\\max\\{c(s,a):s\\in S\\setminus G,\\ a\\in A(s)\\}$ exists by [F3]. Each block of $N$ stage costs has expectation at most $Nc_{\\max}\\rho^k$ after $k$ completed blocks, since survival probabilities decrease in time. For every $m$, distributing the finite sum and canceling adjacent powers gives $(1-\\rho)\\sum_{k<m}\\rho^k=1-\\rho^m\\le1$, so the full nonnegative cost series is bounded by $Nc_{\\max}/(1-\\rho)$. Since $f_n$ is the $n$-step optimum, $f_n(s)\\le J^{\\bar\\pi}(s)$; thus each increasing sequence $f_n(s)$ is bounded above, and [F4] gives a finite limit $f(s)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-3-1",
+          "step": "3.1",
+          "claim": "Passing to the limit in the finite sums and finite minima in step 1.2 is valid coordinatewise; the minimum of finitely many convergent real sequences converges to the minimum of their limits. Hence $f(g)=0$ on $G$ and $f(s)=\\min_a[c(s,a)+\\sum_{s'}P(s'\\mid s,a)f(s')]$ off $G$. Therefore $f$ is a finite nonnegative Bellman fixed point.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-4-1",
+          "step": "4.1",
+          "claim": "Enumerate the finite state set as $s_1,\\ldots,s_m$. For each nonglobal state, [F3] gives a nonempty finite set of actions minimizing the fixed-point expression in step 3.1. Inductively along this finite list, select one minimizer at each state; at each successor stage one nonempty finite set is added to the already chosen finite tuple, so this finite construction uses no arbitrary-index choice. The selected actions define a deterministic stationary policy $\\pi^*$. For $n=0$ the identity is $f(s)=f(s)$. If it holds at $n$, condition on the next state and apply the Bellman equality at the current state to obtain it at $n+1$; hence induction gives $f(s)=\\mathbb E_s^{\\pi^*}[\\sum_{t<n}c(S_t,A_t)1_{\\{S_t\\notin G\\}}+f(S_n)]$ for every $n$. If the survival probabilities for some initial state had a positive limit $q_\\infty>0$, the partial cost expectation would be at least $n c_{\\min}q_\\infty$, contradicting the finite left side and nonnegative terminal term. Thus $\\pi^*$ is proper. Since $f$ is bounded on finite $S$ and $f=0$ on $G$, properness gives $\\mathbb E_s^{\\pi^*}f(S_n)\\le\\max_xf(x)q_n^{\\pi^*}(s)\\to0$; letting $n\\to\\infty$ in the identity yields $J^{\\pi^*}(s)=f(s)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-5-1",
+          "step": "5.1",
+          "claim": "Fix an initial state $s$ and any policy $\\sigma$. The fixed-point equation gives $f(x)\\le c(x,a)+\\sum_{x'}P(x'\\mid x,a)f(x')$ for each nonglobal $x$ and every action $a$, with equality at goals. Averaging over each history-dependent action distribution gives the one-step inequality; conditioning successively on the finite-prefix laws and inducting on $n$ gives $f(s)\\le\\mathbb E_s^\\sigma[\\sum_{t<n}c(S_t,A_t)1_{\\{S_t\\notin G\\}}+f(S_n)]$. If the survival probabilities from this particular $s$ tend to zero, boundedness of the terminal term makes $f(s)\\le J^\\sigma(s)$. If they do not tend to zero, their nonincreasing sequence has a positive limit, and the positive cost lower bound makes $J^\\sigma(s)=+\\infty$ from this $s$; again $f(s)\\le J^\\sigma(s)$. Thus $f$ is a lower bound for every policy cost, while step 4.1 exhibits a policy attaining it. Consequently $f=f^*$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-stochastic-shortest-path-value-exists-6-1",
+          "step": "6.1",
+          "claim": "Let $g$ be any finite nonnegative solution of the same Bellman equations. Since $f_0=0\\le g$, the monotonicity of $T$ from step 2.1 gives $f_n=T^n0\\le T^ng=g$ for every $n$, hence $f^*\\le g$. The Bellman minimum for $g$ is no larger than any action value, so $g(x)\\le c(x,a)+\\sum_{x'}P(x'\\mid x,a)g(x')$ for every nonglobal $x$ and action $a$. Average this inequality along the proper policy $\\pi^*$ from step 4.1 and iterate over $n$ steps to obtain $g(s)\\le\\mathbb E_s^{\\pi^*}[\\sum_{t<n}c(S_t,A_t)1_{\\{S_t\\notin G\\}}+g(S_n)]$. The terminal term tends to zero because $g$ is bounded and $\\pi^*$ is proper, so $g(s)\\le J^{\\pi^*}(s)=f^*(s)$. Therefore $g=f^*$, proving uniqueness.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "single state with cost 1 and self-loop/goal probabilities 1/2 each",
+          "result": "The Bellman fixed point is f=1+f/2, hence f=2, matching the geometric expected total cost."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "Axiom of Choice",
+          "supplier": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "Used only to invoke Ionescu–Tulcea for the path law of a history-dependent policy; action minimizers are selected by finite induction."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The all-goal case S=G is handled explicitly in Proof step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Goal values/costs are zero; Proof step 1.1 treats the all-goal zero-cost case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single nonglobal state with one action is included; the finite Bellman and properness arguments apply. The Statement allows the singleton nonglobal-state case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 handles S=G before the non-goal argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The positive cost lower bound is strict; Proof step 4.1 uses c_min>0 to rule out a non-goal recurrent class."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 4.1 selects finite action minimizers by finite induction, with no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "rem-ensemble-disagreement-is-not-calibrated-uncertainty": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "m=2 identical fitted rows with an arbitrary true row",
+          "result": "The pairwise disagreement score is zero while the statistic still supplies no probability law for the true-row error."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ensemble size is required to satisfy m>=2, so an empty ensemble is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement defines the score as zero when all ensemble rows agree, while making no true-error probability claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The minimum ensemble size is m=2; the pairwise sum then has exactly one term. The Statement permits the smallest ensemble size m=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identical ensemble rows give u(s,a)=0; the Statement still leaves calibration unspecified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each row TV lies in [0,1], and the finite average score is therefore in [0,1]. The Statement defines each score as a finite average of total-variation distances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The score is a deterministic finite sum and requires no choice from a set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "alg-dyna-q": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "n=0 planning updates",
+          "result": "The real Q-learning update and model save occur; the planning loop executes zero times, as allowed."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The MDP has a nonempty finite state set; planning samples occur only after a real pair has been observed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planning count n may be zero, in which case the inner planning loop executes zero updates. The Statement permits n=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no horizon parameter; the procedure is continuing with gamma<1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The algorithm assumes deterministic one-step responses; after a pair is observed its stored response is exact for that pair. The Statement stores the last observed one-step response exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement allows gamma=0, excludes gamma=1, allows alpha=1, and permits n=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "After the first real transition S_seen is nonempty; every selected state has a nonempty A_seen(s). The Statement samples planning pairs only from the nonempty set of previously visited pairs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "alg-model-predictive-control": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=1",
+          "result": "V1(s)=max_a rhat(s,a), so the first listed maximizer is returned."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The learned MDP has nonempty finite state and action sets; an empty action listing is outside the input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The recursion initializes V_0=0; the zero continuation value is used at the horizon boundary. The Statement initializes the continuation value at the horizon boundary as zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "H=1 is allowed; the recursion returns an action maximizing the learned immediate reward. The Statement permits H=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A single admissible action yields that action at every horizon; the supplied listing resolves ties. The Statement includes a finite action listing with a single admissible action."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires H>=1 and a finite deterministic tie listing at each state."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite action listing contains every action, and the maximum is attained by the finite-set supplier. The Statement requires a complete finite action listing, and the finite maximum is attained."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "def-model-exploitation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-horizon-mdp-return",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set, let $A(s)$ be a nonempty finite action set for each $s\\in S$, let $r(s,a)\\in[0,1]$, and let $P(\\cdot\\mid s,a)$ be a probability distribution on $S$ for each admissible pair. A finite-horizon Markov policy of horizon $H\\in\\mathbb N$ with $H\\ge1$ is a family of probability distributions $\\pi_t(\\cdot\\mid s)$ on $A(s)$ for $0\\le t<H$. Given an initial state distribution $\\mu$, define $d_0=\\mu$ and, for $0\\le t<H-1$,\n\n$$d_{t+1}(s')=\\sum_{s\\in S}\\sum_{a\\in A(s)}d_t(s)\\pi_t(a\\mid s)P(s'\\mid s,a).$$\n\nThe finite-horizon expected return is\n\n$$J_H(M,\\mu,\\pi)=\\sum_{t=0}^{H-1}\\sum_{s\\in S}\\sum_{a\\in A(s)}d_t(s)\\pi_t(a\\mid s)r(s,a).$$\n\nThe same definition applies to a learned model by replacing $r,P$ with its estimated reward and transition tables. It is the expected sum of the $H$ one-step rewards; no discount factor or terminal continuation value is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-model-exploitation-1-1",
+          "step": "1.1",
+          "claim": "For each $\\pi\\in\\Pi$, [F1] supplies finite state/action tables and [F2] defines its occupancy recursion and return. Since rewards lie in $[0,1]$ and the horizon is finite, both $J_H(\\pi)$ and $\\widehat J_H(\\pi)$ are real numbers in $[0,H]$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "def-model-exploitation-2-1",
+          "step": "2.1",
+          "claim": "The sets of returns $\\{J_H(\\pi):\\pi\\in\\Pi\\}$ and $\\{\\widehat J_H(\\pi):\\pi\\in\\Pi\\}$ are finite and nonempty, so [F3] gives attained maxima. Pair membership in $B$ and positive occupancy are defined on finite sets, and the remaining exploitation conditions are comparisons of these finite real returns. Thus the model-optimal policy and off-support exploitation predicate in the Definition are well-defined.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "B=D",
+          "result": "D\\B is empty, so the off-support exploitation predicate is false for every policy."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The supported set B may be empty or equal D; both subsets are allowed by the Statement and Verification step 2.1 checks their finite predicates."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The exploitation predicate uses strict inequalities, so equality of predicted and true return does not qualify."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "H=1 is allowed; the one-step boundary is illustrated in the companion example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If B=D then D\\B is empty, so no policy can meet the off-support clause. The Definition allows B=D."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires H>=1 and reward means in [0,1]; Verification step 1.1 bounds all returns by H."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite nonempty policy class ensures both true and learned return maxima are attained; Verification step 2.1 checks this."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "thm-single-policy-finite-horizon-simulation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-horizon-mdp-return",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite state set, let $A(s)$ be a nonempty finite action set for each $s\\in S$, let $r(s,a)\\in[0,1]$, and let $P(\\cdot\\mid s,a)$ be a probability distribution on $S$ for each admissible pair. A finite-horizon Markov policy of horizon $H\\in\\mathbb N$ with $H\\ge1$ is a family of probability distributions $\\pi_t(\\cdot\\mid s)$ on $A(s)$ for $0\\le t<H$. Given an initial state distribution $\\mu$, define $d_0=\\mu$ and, for $0\\le t<H-1$,\n\n$$d_{t+1}(s')=\\sum_{s\\in S}\\sum_{a\\in A(s)}d_t(s)\\pi_t(a\\mid s)P(s'\\mid s,a).$$\n\nThe finite-horizon expected return is\n\n$$J_H(M,\\mu,\\pi)=\\sum_{t=0}^{H-1}\\sum_{s\\in S}\\sum_{a\\in A(s)}d_t(s)\\pi_t(a\\mid s)r(s,a).$$\n\nThe same definition applies to a learned model by replacing $r,P$ with its estimated reward and transition tables. It is the expected sum of the $H$ one-step rewards; no discount factor or terminal continuation value is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-policy-kernel-tv-propagation",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a finite nonempty set, let $A(s)$ be finite and nonempty for each $s\\in S$, and let $P(\\cdot\\mid s,a)$ and $\\widehat P(\\cdot\\mid s,a)$ be probability distributions on $S$ for each admissible pair. For distributions $u,v$ on $S$, write $\\operatorname{TV}(u,v)=\\frac12\\sum_{x\\in S}|u(x)-v(x)|$. Let $\\pi(\\cdot\\mid s)$ be a probability distribution on $A(s)$ for each state. Define the induced transition rows\n\n$$K^\\pi(s,x)=\\sum_{a\\in A(s)}\\pi(a\\mid s)P(x\\mid s,a),\\qquad \\widehat K^\\pi(s,x)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\widehat P(x\\mid s,a).$$\n\nIf $d$ and $\\widehat d$ are probability distributions on $S$ and, for some $\\epsilon\\ge0$,\n\n$$\\operatorname{TV}(P(\\cdot\\mid s,a),\\widehat P(\\cdot\\mid s,a))\\le\\epsilon$$\n\nwhenever $\\widehat d(s)>0$ and $\\pi(a\\mid s)>0$, then\n\n$$\\operatorname{TV}(dK^\\pi,\\widehat d\\widehat K^\\pi)\\le\\operatorname{TV}(d,\\widehat d)+\\epsilon.$$\n\nHere $dK^\\pi$ and $\\widehat d\\widehat K^\\pi$ are the next-state distributions obtained by applying the indicated transition rows.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-total-variation-half-l1-formula-on-a-countable-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be an at most countable set equipped with the power-set\n$\\sigma$-algebra $2^E$, and let $\\mu,\\nu$ be probability laws on $E$\n([[def-total-variation-distance-for-probability-laws]]). Then\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}=\\frac12\\sum_{x\\in E}\\bigl|\\mu(x)-\\nu(x)\\bigr| ,$$\n\nwhere $\\mu(x),\\nu(x)$ denote the singleton masses and the series on the right\nis a series of nonnegative numbers in $[0,+\\infty]$. The value is finite; it is\n$0$ exactly when $\\mu=\\nu$. The supremum defining the total variation distance\nis attained at the event $A_+=\\{x\\in E:\\mu(x)>\\nu(x)\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-triangle-inequality-finite",
+          "source_section": "Statement",
+          "quote": "Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals and $n \\in \\mathbb{N}$,\nwith finite sums as in [[def-finite-sum]] and the absolute value as in\n[[def-abs-value]]. Then\n\n$$\\Big|\\sum_{k<n} a_k\\Big| \\le \\sum_{k<n} |a_k|.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-single-policy-finite-horizon-simulation-bound-1-1",
+          "step": "1.1",
+          "claim": "At time $0$, $\\operatorname{TV}(d_0,\\widehat d_0)=0$. If $0\\le t<H-1$, every pair with $\\widehat d_t(s)\\pi_t(a\\mid s)>0$ belongs to $C_H^\\pi$, so its transition rows satisfy [F3]. Applying [F3] to the policy at time $t$ gives $\\operatorname{TV}(d_{t+1},\\widehat d_{t+1})\\le\\operatorname{TV}(d_t,\\widehat d_t)+\\epsilon_p$. Induction yields $\\operatorname{TV}(d_t,\\widehat d_t)\\le t\\epsilon_p$ for every $0\\le t<H$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-single-policy-finite-horizon-simulation-bound-2-1",
+          "step": "2.1",
+          "claim": "For a fixed time $t$, set $g_t(s)=\\sum_a\\pi_t(a\\mid s)r(s,a)$ and $\\widehat g_t(s)=\\sum_a\\pi_t(a\\mid s)\\widehat r(s,a)$. These functions lie in $[0,1]$ by [F1]. For $x_s=d_t(s)-\\widehat d_t(s)$, one has $\\sum_sx_s=0$; by [F4] the total positive mass and total negative mass of $(x_s)$ both equal $\\operatorname{TV}(d_t,\\widehat d_t)$. Since $0\\le g_t(s)\\le1$, it follows that $|\\sum_sx_sg_t(s)|\\le\\operatorname{TV}(d_t,\\widehat d_t)$. Also, every pair with $\\widehat d_t(s)\\pi_t(a\\mid s)>0$ lies in $C_H^\\pi$, so $|\\sum_{s,a}\\widehat d_t(s)\\pi_t(a\\mid s)(r(s,a)-\\widehat r(s,a))|\\le\\epsilon_r$. Decomposing the difference of the two time-$t$ expected rewards and applying [F5] gives an absolute difference at most $t\\epsilon_p+\\epsilon_r$ by step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-single-policy-finite-horizon-simulation-bound-3-1",
+          "step": "3.1",
+          "claim": "By [F2], the return difference is the sum of the $H$ timewise expected-reward differences. The finite-sum triangle inequality [F6] and step 2.1 therefore give $|J_H(M,\\mu,\\pi)-J_H(\\widehat M,\\mu,\\pi)|\\le\\sum_{t=0}^{H-1}(t\\epsilon_p+\\epsilon_r)=H\\epsilon_r+\\frac{H(H-1)}2\\epsilon_p=H\\epsilon_r+\\binom{H}{2}\\epsilon_p$. The arithmetic sum evaluates to $H(H-1)/2$.",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=1",
+          "result": "The transition term is zero and the bound is epsilon_r; only the initial reward can differ."
+        },
+        {
+          "case": "H=2",
+          "result": "The transition coefficient is binom(2,2)=1, giving 2 epsilon_r+epsilon_p."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The state/action domains and initial state law are nonempty; no empty model is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "epsilon_r=epsilon_p=0 is permitted; Proof steps 1.1-3.1 give equal returns."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "H=1 is allowed; the transition-error coefficient binom(H,2) is zero, as checked in the manual finite check. The Statement permits H=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the two models agree on every reachable pair, the Statement yields zero discrepancy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both epsilons are nonnegative; the bound remains valid at zero and at any finite error upper bound. The Statement permits zero errors and uses finite total-variation row errors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The fixed Markov policy has probability rows on nonempty finite action sets; no policy optimization or choice principle is used. The Statement assumes nonempty finite action sets and a fixed Markov policy with probability rows."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "lem-asynchronous-value-iteration-for-stochastic-shortest-path": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-stochastic-shortest-path-problem",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have nonempty finite state set $S$ and finite nonempty action sets $A(s)$. A **finite stochastic shortest-path problem** consists of that MDP, a nonempty goal set $G\\subseteq S$, and a constant $c_{\\min}>0$ with the following properties. Each $g\\in G$ has a single dummy action that returns to $g$ with reward $0$ with probability $1$. For every $s\\notin G$ and every $a\\in A(s)$, the expected reward satisfies $r(s,a)\\le -c_{\\min}$. Define the one-step expected cost by $c(s,a)=-r(s,a)$ off $G$ and $c(g,a)=0$ at goals. A stationary Markov policy $\\pi$ is **proper** if, from every initial state, the finite-step probabilities of not having reached $G$ tend to $0$: with $q_0(s)=1_{s\\notin G}$ and\n\n$$q_{n+1}(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)q_n(s')\\quad(s\\notin G),\\qquad q_{n+1}(g)=0\\quad(g\\in G),$$\n\nproperness means $q_n(s)\\to0$ for every $s\\in S$. The problem need not have a proper policy unless that is separately assumed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-stochastic-shortest-path-value-exists",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and let a finite positive-cost stochastic shortest-path problem have at least one proper stationary policy. For any policy $\\sigma$ whose action distribution may depend on the entire finite history, use its trajectory law from the initial state $s$ and define\n\n$$J^\\sigma(s)=\\sum_{t=0}^{\\infty}\\mathbb E_s^\\sigma\\!\\left[c(S_t,A_t)\\,1_{\\{S_t\\notin G\\}}\\right],$$\n\nwhere $c(s,a)=-r(s,a)>0$ off the absorbing goal set $G$ and $c(g,a)=0$ at goals. The optimal total cost $f^*(s)=\\inf_\\sigma J^\\sigma(s)$ is finite for every state. It is the unique finite nonnegative function satisfying\n\n$$f^*(g)=0\\quad(g\\in G),\\qquad f^*(s)=\\min_{a\\in A(s)}\\left[c(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)f^*(s')\\right]\\quad(s\\notin G).$$\n\nThe minimum is attained by a deterministic stationary policy that is proper and has total cost $f^*$ from every initial state.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let\n$S = \\{x_k : k \\in \\mathbb{N}\\}$ be its range.\n\n1. If $(x_k)$ is nondecreasing ([[def-monotone-sequence]]) and $S$ is bounded\n   above ([[def-bounded-set]]), then $(x_k)$ converges ([[def-real-limit]]) and\n   $$\\lim_{k} x_k = \\sup S .$$\n2. If $(x_k)$ is nonincreasing and $S$ is bounded below, then $(x_k)$ converges\n   and $$\\lim_{k} x_k = \\inf S .$$\n\nBoth suprema and infima exist under the stated hypotheses: $S$ is nonempty, so\nthe least-upper-bound property ([[def-complete-ordered-field]]) supplies the\nfirst and [[thm-infimum-property]] the second, and each is unique\n([[lem-sup-unique]]).\n\nThis is the first place in this track where the least-upper-bound property\nproduces a **limit**. Everything on the sequences page held in any Archimedean\nordered field; the theorem below does not, and the sequence of decimal\ntruncations of $\\sqrt 2$ inside $\\mathbb{Q}$ is the standard witness of its\nfailure there.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-asynchronous-value-iteration-for-stochastic-shortest-path-1-1",
+          "step": "1.1",
+          "claim": "Put $e_n(s)=f^*(s)-f_n(s)$ and $E_n=\\max_{s\\in S}e_n(s)$. Initially $e_0\\ge0$ by the Given hypothesis. If $f_n\\le f^*$, then each backup is no greater than the corresponding backup of $f^*$ because the transition weights are nonnegative; unupdated entries also remain below $f^*$. Goals remain equal to $f^*(g)=0$. Induction gives $e_n\\ge0$ for all $n$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-asynchronous-value-iteration-for-stochastic-shortest-path-2-1",
+          "step": "2.1",
+          "claim": "For a nonglobal state and action define the Bellman slack $\\delta(s,a)=c(s,a)+\\sum_{s'}P(s'\\mid s,a)f^*(s')-f^*(s)\\ge0$ by [F2]. When state $s$ is updated, its new error is $e_{n+1}(s)=\\max_{a\\in A(s)}[\\sum_{s'}P(s'\\mid s,a)e_n(s')-\\delta(s,a)]\\le E_n$, since each probability row sums to one and $\\delta\\ge0$. Unupdated errors are unchanged, and goal errors are zero. Thus $0\\le E_{n+1}\\le E_n$. By [F4], this nonincreasing sequence bounded below by zero has a limit $E_\\infty\\ge0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-asynchronous-value-iteration-for-stochastic-shortest-path-3-1",
+          "step": "3.1",
+          "claim": "Suppose $E_\\infty>0$ and let $I=\\{s\\in S:\\limsup_n e_n(s)=E_\\infty\\}$. Choose indices $n_j$ with $E_{n_j}\\to E_\\infty$ and, at each index, choose a state attaining $E_{n_j}$. Since $S$ is finite, one state occurs for infinitely many $j$; its limsup error is at least $E_\\infty$ and at most $\\lim_n E_n=E_\\infty$, so $I$ is nonempty. Goal states do not lie in $I$ because their errors are always zero. Fix $s\\in I$. It is updated infinitely often, and its error is constant between updates. Along a subsequence of times when $e_n(s)\\to E_\\infty$, the most recent post-update error has the same value; those update times tend to infinity, so a subsequence of post-update errors tends to $E_\\infty$. At those updates a maximizing action in step 2.1 is attained by [F3]; since $A(s)$ is finite, pass to a further subsequence on which the same action $a_s$ is selected. Along this subsequence $E_n\\to E_\\infty$ and $\\sum_{s'}P(s'\\mid s,a_s)e_n(s')-\\delta(s,a_s)\\to E_\\infty$. The weighted sum is at most $E_n$ and $\\delta(s,a_s)\\ge0$, so $\\delta(s,a_s)=0$ and the weighted sum tends to $E_\\infty$. If any successor $s'$ with $P(s'\\mid s,a_s)>0$ had $\\limsup_n e_n(s')<E_\\infty$, its error would stay at least a fixed positive amount below $E_n$ along this subsequence, contradicting convergence of the weighted sum to $E_\\infty$. Therefore every positive-probability successor of $a_s$ belongs to $I$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-asynchronous-value-iteration-for-stochastic-shortest-path-4-1",
+          "step": "4.1",
+          "claim": "For every $s\\in I$, step 3.1 gives at least one Bellman-optimal action $a_s$ whose transition row is supported in $I$. Enumerate finite $I$ and select one such action successively; adjoining one choice at each stage is a finite induction, so no arbitrary-index choice is used. These actions define a deterministic stationary policy on $I$. Starting from $s\\in I$, its finite transition laws stay in $I$ and avoid goals. The Bellman equalities imply by induction on $m$ that $f^*(s)=\\mathbb E_s[\\sum_{t<m}c(S_t,a_{S_t})+f^*(S_m)]\\ge m c_{\\min}$, because each visited state lies in $I\\subseteq S\\setminus G$ and $f^*\\ge0$. This contradicts finiteness of $f^*(s)$ from [F2] for sufficiently large $m$. Hence $E_\\infty=0$, and $0\\le e_n(s)\\le E_n\\to0$ uniformly over finite $S$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "one nonglobal state with cost 1 and self/goal probabilities 1/2 each",
+          "result": "The fixed point is f*=2 and asynchronous backups from zero give f_k=2(1-2^-k), which converges to 2."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If S=G there are no nonglobal updates and f_0=f^*=0, so the conclusion is immediate; otherwise Proof steps 2.1-4.1 handle nonglobal states."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the initial table equals f^*, every error is zero and the conclusion is immediate from step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-nonglobal-state case is included; the positive-cost error argument still applies. The Statement permits a singleton nonglobal state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The goal-only case is vacuous as recorded under empty; goal errors remain zero in steps 1.1-1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict c_min>0 assumption is used in Proof step 4.1; no zero nonglobal cost is covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite nonempty action maxima are attained by F3; Proof step 3.1 selects actions by finite induction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "cex-rtdp-optimal-relevant-state-convergence-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-stochastic-shortest-path-problem",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have nonempty finite state set $S$ and finite nonempty action sets $A(s)$. A **finite stochastic shortest-path problem** consists of that MDP, a nonempty goal set $G\\subseteq S$, and a constant $c_{\\min}>0$ with the following properties. Each $g\\in G$ has a single dummy action that returns to $g$ with reward $0$ with probability $1$. For every $s\\notin G$ and every $a\\in A(s)$, the expected reward satisfies $r(s,a)\\le -c_{\\min}$. Define the one-step expected cost by $c(s,a)=-r(s,a)$ off $G$ and $c(g,a)=0$ at goals. A stationary Markov policy $\\pi$ is **proper** if, from every initial state, the finite-step probabilities of not having reached $G$ tend to $0$: with $q_0(s)=1_{s\\notin G}$ and\n\n$$q_{n+1}(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)q_n(s')\\quad(s\\notin G),\\qquad q_{n+1}(g)=0\\quad(g\\in G),$$\n\nproperness means $q_n(s)\\to0$ for every $s\\in S$. The problem need not have a proper policy unless that is separately assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-real-time-dynamic-programming",
+          "source_section": "Definition",
+          "quote": "Input: a finite stochastic shortest-path model, a finite value table $V_0:S\\to\\mathbb R$ with $V_0(g)=0$ on goals, a nonempty finite start set $S_0\\subseteq S\\setminus G$, a positive integer trial cap $L$, and an infinite supplied start sequence in which each member of $S_0$ occurs infinitely often. For each trial, set the current state to the next supplied start. For at most $L$ decision steps, or until a goal is reached, do the following: at the current nonglobal state $s$, compute\n\n$$q_V(s,a)=r(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\qquad(a\\in A(s)),$$\n\nchoose uniformly from the nonempty set of actions attaining $\\max_{a\\in A(s)}q_V(s,a)$ using a fresh tie draw, execute the chosen action in the given MDP and observe the next state, then replace $V(s)$ by $\\max_{a\\in A(s)}q_V(s,a)$ using the value table from before that backup. Keep every other value unchanged. At a goal keep value $0$. After a trial ends, reset the state to the next supplied start without resetting the value table. The procedure returns the successive value tables and selected actions; it asserts no convergence guarantee by itself.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-rtdp-optimal-relevant-state-convergence-fails-1-1",
+          "step": "1.1",
+          "claim": "Every nonglobal cost is $1$, and the policy choosing $a$ at $s$ reaches $x$ and then reaches $g$ almost surely because each visit to $x$ has probability $1/2$ of moving to $g$. From $y$ and $z$ the goal is reached deterministically. Thus this is a finite positive-cost SSP with a proper stationary policy. At $x$ there is no action choice; its survival probability after $n$ steps is $2^{-n}$, so its expected total cost is $\\sum_{n=0}^\\infty2^{-n}=2$ by the finite geometric identity and its limit. The deterministic costs at $y,z$ and the sole initial choice at $s$ therefore give $f^*(z)=1$, $f^*(y)=1+f^*(z)=2$, and $f^*(s)=\\min\\{1+f^*(x),1+f^*(y)\\}=3$. The initial table is finite, zero at the goal, and no larger than these optimal costs.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-rtdp-optimal-relevant-state-convergence-fails-2-1",
+          "step": "2.1",
+          "claim": "Induct on the number $k$ of completed trials. At the first trial, $f_0(x)=0<2=f_0(y)$. If $y$ has not been visited in the first $k$ trials and $x$ has been backed up $k$ times, then $f_k(y)=2$ and the recurrence $f_{j+1}(x)=1+\\frac12f_j(x)$, obtained from the sole action at $x$ and $f_j(g)=0$, gives $f_k(x)=2(1-2^{-k})<2$. Thus action $a$ has cost $1+f_k(x)<3$, whereas action $b$ has cost $1+f_k(y)=3$. Since $V=-f$ and $r=-c$, the RTDP reward-greedy rule is cost-minimizing; it therefore uniquely chooses $a$ at $s$. The next trial moves to $x$ and does not visit $y$. The cap $L=2$ then provides exactly one backup at $x$, completing the induction. Tie-breaking is never invoked at $s$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-rtdp-optimal-relevant-state-convergence-fails-3-1",
+          "step": "3.1",
+          "claim": "Each trial first executes $a$ and moves to $x$. With cap $L=2$, RTDP then executes the sole action at $x$ and backs up $x$ once before the trial ends, whether that transition returns to $x$ or reaches $g$. Thus the recurrence in step 2.1 holds on every trial, and neither $y$ nor $z$ is ever visited or backed up. In particular, the estimate of $z$ remains $0$ forever although $f^*(z)=1$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-rtdp-optimal-relevant-state-convergence-fails-3-2",
+          "step": "3.2",
+          "claim": "For the goal-terminated variant, after any finite total number $m$ of backups at $x$, its cost is $2(1-2^{-m})<2$. Thus every later departure from $s$ still uniquely selects $a$. Each trial then consists of visits to $x$ until its transition to $g$; the probability of at least $n$ self-transitions is $2^{-n}$, which tends to zero, so the trial is finite almost surely. The union over the countably many trials of their zero-probability nontermination events has probability zero by countable subadditivity. On the complementary event every finite trial boundary has only finitely many backups at $x$, so the strict inequality persists. Neither $y$ nor $z$ is ever visited, and $f(z)=0$ forever.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cex-rtdp-optimal-relevant-state-convergence-fails-4-1",
+          "step": "4.1",
+          "claim": "The stationary policy that chooses $b$ at $s$ and then follows the sole actions at $y$ and $z$ has total cost $1+2=3=f^*(s)$, so it is optimal from the designated start $s$ and reaches $z$ with probability one. Hence $z$ is optimal-relevant by the stated definition, but its estimate fails to converge on every capped run by step 3.1 and almost surely on goal-terminated runs by step 3.2. This refutes the claimed almost-sure convergence on all optimal-relevant states, and therefore also refutes the conjunction with the source's claimed eventual optimality on every such state.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "the five-state model in the item",
+          "result": "f*(x)=2, f*(y)=2, f*(z)=1, f*(s)=3; after k trial backups f_k(x)=2(1-2^-k)<2, so z remains unvisited."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample specifies exactly five states, one goal, and nonempty actions at each state."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Goal cost and its initial value are zero; the initial cost table is explicitly listed. The counterexample Statement assigns zero cost and initial value to the goal."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a two-step trial cap and five states, not a singleton horizon or domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All transitions are deterministic except the one fair x-to-x/goal row; Proof step 1.1 verifies properness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every nonglobal cost is exactly 1 and the stochastic row uses probabilities 1/2 and 1/2. The Statement sets each nonglobal cost to 1 and the stochastic transition probabilities to 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The greedy choice at s is unique at each trial by Proof step 2.1; no tie-choice issue is hidden."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "ex-model-accurate-on-behavior-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-single-policy-finite-horizon-simulation-bound",
+          "source_section": "Statement",
+          "quote": "Let $M=(S,(A(s))_{s\\in S},r,P)$ and $\\widehat M=(S,(A(s))_{s\\in S},\\widehat r,\\widehat P)$ be finite models on a common nonempty finite state set and common nonempty finite action sets, with $r,\\widehat r\\in[0,1]$ and probability transition rows. Fix a horizon $H\\ge1$, a common initial state law $\\mu$, and one possibly time-dependent randomized Markov policy $\\pi=(\\pi_t)_{t=0}^{H-1}$. Let $d_t$ and $\\widehat d_t$ be the state occupancies under $M$ and $\\widehat M$, respectively, starting from $d_0=\\widehat d_0=\\mu$. Define\n\n$$C_H^\\pi=\\{(s,a): d_t(s)\\pi_t(a\\mid s)>0\\text{ or }\\widehat d_t(s)\\pi_t(a\\mid s)>0\\text{ for some }0\\le t<H\\}.$$\n\nSuppose $|r(s,a)-\\widehat r(s,a)|\\le\\epsilon_r$ and $\\operatorname{TV}(P(\\cdot\\mid s,a),\\widehat P(\\cdot\\mid s,a))\\le\\epsilon_p$ for every $(s,a)\\in C_H^\\pi$, where $\\operatorname{TV}(p,q)=\\frac12\\sum_{s'}|p(s')-q(s')|$. Then\n\n$$|J_H(M,\\mu,\\pi)-J_H(\\widehat M,\\mu,\\pi)|\\le H\\epsilon_r+\\binom{H}{2}\\epsilon_p.$$\n\nThe guarantee concerns this fixed policy and the stated reachable pairs; it does not bound the policy selected by optimizing the learned model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-model-accurate-on-behavior-support-1-1",
+          "step": "1.1",
+          "claim": "The true and learned occupancies under the policy place mass only on $(s,a)$ at time $0$ and on $(g,d)$ at each later time. These pairs are exactly the listed supported pairs, and the models agree on both, so the reachable reward and transition errors are zero. Theorem [F2] applies with $\\epsilon_r=\\epsilon_p=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-model-accurate-on-behavior-support-2-1",
+          "step": "2.1",
+          "claim": "Substitution into [F2] gives $|J_H-\\widehat J_H|\\le0$. Since an absolute value is nonnegative, $J_H=\\widehat J_H$. Directly, each return is $1$ from the reward at the first step and $0$ thereafter. Thus model errors outside the fixed policy's support do not affect this return.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=2 policy a then dummy d",
+          "result": "Both model returns equal 1 and all reached pairs have zero error."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two states, nonempty action sets, and a supported pair set containing the policy path."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Reachable reward and transition errors are zero; Verification steps 1.1-2.1 yield equal returns."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example restricts H>=2 so the terminal goal pair is also reached."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The chosen transition rows are deterministic point masses; the fixed policy remains well-defined. The Example uses deterministic point-mass transition rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "H is any integer at least 2 and the supported reachable pairs have exactly zero error. The Example permits every H>=2 and has zero error on the reachable pairs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-state policy chooses one admissible action at each visited state. The Example specifies one admissible action at each visited state."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "ex-model-exploitation-off-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-model-exploitation",
+          "source_section": "Definition",
+          "quote": "Let $M=(S,(A(s))_{s\\in S},r,P)$ be a finite MDP with nonempty finite state set $S$ and nonempty finite action sets $A(s)$. Its finite reward alphabet is contained in $[0,1]$, so $r(s,a)\\in[0,1]$, and $P(\\cdot\\mid s,a)$ is a probability distribution on $S$ for every admissible pair. Let $\\widehat M=(S,(A(s))_{s\\in S},\\widehat r,\\widehat P)$ be a finite learned model on the same domain, with $\\widehat r(s,a)\\in[0,1]$ and a probability distribution $\\widehat P(\\cdot\\mid s,a)$ on $S$ for every admissible pair. Set $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. Let $B\\subseteq D$ be the pairs observed at least once in a data set, fix a horizon $H\\ge1$ and initial state law $\\mu$, and let $\\Pi$ be any finite nonempty class of deterministic time-dependent Markov policies for that horizon. For a policy $\\pi\\in\\Pi$, compute its expected return under the true model and learned model using $d_0=\\mu$,\n\n$$d_{t+1}(s')=\\sum_s d_t(s)\\sum_{a\\in A(s)}\\pi_t(a\\mid s)P(s'\\mid s,a),\\qquad J_H(\\pi)=\\sum_{t=0}^{H-1}\\sum_s d_t(s)\\sum_{a\\in A(s)}\\pi_t(a\\mid s)r(s,a),$$\n\nand analogously $\\widehat J_H(\\pi)$ using $\\widehat P,\\widehat r$. The learned-model occupancy of a pair $(s,a)$ at time $t$ is $\\widehat d_t(s)\\pi_t(a\\mid s)$. A model-optimal policy is any $\\widehat\\pi\\in\\Pi$ attaining $\\max_{\\pi\\in\\Pi}\\widehat J_H(\\pi)$. Such a policy **exploits the model off support relative to $B$** if it has positive learned-model occupancy on at least one pair in $D\\setminus B$, overestimates its own true return $\\widehat J_H(\\widehat\\pi)>J_H(\\widehat\\pi)$, and is truly suboptimal within $\\Pi$: $J_H(\\widehat\\pi)<\\max_{\\pi\\in\\Pi}J_H(\\pi)$. This definition describes a failure mode; it is not a performance claim about every model optimizer.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-model-predictive-control",
+          "source_section": "Definition",
+          "quote": "Input: a finite learned MDP model, a current state $s_0$, a horizon $H\\in\\mathbb N$ with $H\\ge1$, and a finite action listing at each state for deterministic tie-breaking. Initialize $V_0(s)=0$ for every state. For $h=1,\\ldots,H$, compute for every admissible pair\n\n$$Q_h(s,a)=\\hat r(s,a)+\\sum_{s'\\in S}\\hat P(s'\\mid s,a)V_{h-1}(s'),\\qquad V_h(s)=\\max_{a\\in A(s)}Q_h(s,a).$$\n\nAt the current state $s_0$, return the first action in its supplied listing that attains $V_H(s_0)$. The controller executes only this first action in the true environment, observes the next state, and may invoke the procedure again with the new state and a newly supplied learned model. The procedure specifies no model-update rule and makes no guarantee about the true return of the model-selected action.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-model-exploitation-off-support-1-1",
+          "step": "1.1",
+          "claim": "The two horizon-one learned returns are $1/2$ and $1$, so $a_{\\mathrm{off}}$ is the unique learned optimizer and [F2] returns it. Its learned occupancy on $(s,a_{\\mathrm{off}})$ is $1$, although this pair is outside $B$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-model-exploitation-off-support-2-1",
+          "step": "2.1",
+          "claim": "The true returns of $a_{\\mathrm{safe}}$ and $a_{\\mathrm{off}}$ are $1/2$ and $0$. Thus the learned optimizer overpredicts its own return ($1>0$) and is truly suboptimal ($0<1/2$). All three clauses of [F1] hold, so this is off-support model exploitation as defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=1, one state",
+          "result": "Learned returns are (1/2,1), true returns are (1/2,0), so the unsupported action is the unique learned optimizer and true suboptimal."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite policy class has two deterministic policies and the state-action domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The true reward of the unsupported action is exactly zero; Verification step 2.1 checks its strict underperformance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses H=1 and Verification step 1.1 enumerates the two returns."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both actions self-transition at the sole state, so transition dynamics do not affect the one-step comparison. The Example has both actions self-transition at the sole state."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Rewards 0, 1/2 and 1 lie in the closed [0,1] range. The Example uses rewards in the closed interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The nonempty two-policy class has a unique learned optimizer, checked in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "ex-short-versus-long-model-rollouts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-learned-mdp-model",
+          "source_section": "Definition",
+          "quote": "Let the true environment be a finite Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, a finite reward alphabet contained in $[0,1]$, and joint next-state/reward probabilities $p(s',\\rho\\mid s,a)$. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$, and let $r(s,a)$ and $P(s'\\mid s,a)$ be the expected reward and next-state probabilities obtained by summing this joint law. A finite learned model on the same state and action sets consists of estimates $\\hat r:D\\to[0,1]$ and probability distributions $\\hat P(\\cdot\\mid s,a)$ on $S$ for every $(s,a)\\in D$. The estimated transition table is a probability kernel on the finite discrete spaces.\n\nFor each $(s,a)\\in D$, define the reward error $e_r(s,a)=|r(s,a)-\\hat r(s,a)|$ and transition error\n\n$$e_P(s,a)=\\frac12\\sum_{s'\\in S}|P(s'\\mid s,a)-\\hat P(s'\\mid s,a)|.$$\n\nFor any subset $C\\subseteq D$, define $\\epsilon_r(C)=\\max_{(s,a)\\in C}e_r(s,a)$ and $\\epsilon_P(C)=\\max_{(s,a)\\in C}e_P(s,a)$ when $C\\ne\\emptyset$, and set both quantities to $0$ when $C=\\emptyset$. These are uniform expected-reward and total-variation errors on $C$; the learned model definition makes no accuracy assertion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-single-policy-finite-horizon-simulation-bound",
+          "source_section": "Statement",
+          "quote": "Let $M=(S,(A(s))_{s\\in S},r,P)$ and $\\widehat M=(S,(A(s))_{s\\in S},\\widehat r,\\widehat P)$ be finite models on a common nonempty finite state set and common nonempty finite action sets, with $r,\\widehat r\\in[0,1]$ and probability transition rows. Fix a horizon $H\\ge1$, a common initial state law $\\mu$, and one possibly time-dependent randomized Markov policy $\\pi=(\\pi_t)_{t=0}^{H-1}$. Let $d_t$ and $\\widehat d_t$ be the state occupancies under $M$ and $\\widehat M$, respectively, starting from $d_0=\\widehat d_0=\\mu$. Define\n\n$$C_H^\\pi=\\{(s,a): d_t(s)\\pi_t(a\\mid s)>0\\text{ or }\\widehat d_t(s)\\pi_t(a\\mid s)>0\\text{ for some }0\\le t<H\\}.$$\n\nSuppose $|r(s,a)-\\widehat r(s,a)|\\le\\epsilon_r$ and $\\operatorname{TV}(P(\\cdot\\mid s,a),\\widehat P(\\cdot\\mid s,a))\\le\\epsilon_p$ for every $(s,a)\\in C_H^\\pi$, where $\\operatorname{TV}(p,q)=\\frac12\\sum_{s'}|p(s')-q(s')|$. Then\n\n$$|J_H(M,\\mu,\\pi)-J_H(\\widehat M,\\mu,\\pi)|\\le H\\epsilon_r+\\binom{H}{2}\\epsilon_p.$$\n\nThe guarantee concerns this fixed policy and the stated reachable pairs; it does not bound the policy selected by optimizing the learned model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-short-versus-long-model-rollouts-1-1",
+          "step": "1.1",
+          "claim": "Under the true model, the state remains $u$, so each of the $H$ rewards is $1$ and $J_H=H$. Under the learned model, the probability of occupying $u$ at time $t$ is $(1-\\epsilon)^t$, by induction from the transition row, and the only positive reward is received at $u$. Hence $\\widehat J_H=\\sum_{t=0}^{H-1}(1-\\epsilon)^t$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-short-versus-long-model-rollouts-2-1",
+          "step": "2.1",
+          "claim": "The reward error is zero. At $u$, the total variation between the true row $(1,0)$ and learned row $(1-\\epsilon,\\epsilon)$ is $\\frac12(\\epsilon+\\epsilon)=\\epsilon$; at $v$ the rows agree. Every reachable pair therefore satisfies the hypotheses of [F2], and $H-\\widehat J_H\\le\\binom{H}{2}\\epsilon$. The exact difference from step 1.1 is $\\sum_{t=0}^{H-1}[1-(1-\\epsilon)^t]$, which is nondecreasing in $H$ and is positive for $H\\ge2$. Thus even a fixed, small one-step transition error can produce a larger return discrepancy on longer rollouts, within the finite-horizon bound.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "case": "H=3",
+          "result": "The exact discrepancy is epsilon+(2 epsilon-epsilon^2)=3 epsilon-epsilon^2, at most 3 epsilon=binom(3,2) epsilon."
+        }
+      ],
+      "axioms": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two states and one admissible action at each."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The reward error is zero; the exact return discrepancy is zero at H=1 and is computed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "H=1 gives both models the same first reward; the exact formula in step 1.1 has zero difference."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The failure state is absorbing and receives reward zero; the safe state has reward one. The Example specifies an absorbing failure state with zero reward."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The transition parameter satisfies 0<epsilon<1; the limits zero and one are excluded from this strict illustrative range. The Example assumes 0<epsilon<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The policy is uniquely determined by the single action at each state. The Example has a single action at every state."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no forward implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so no reverse implication is claimed."
+        }
+      ]
+    },
+    "thm-rtdp-recurrently-backed-state-convergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-stochastic-shortest-path-problem",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have nonempty finite state set $S$ and finite nonempty action sets $A(s)$. A **finite stochastic shortest-path problem** consists of that MDP, a nonempty goal set $G\\subseteq S$, and a constant $c_{\\min}>0$ with the following properties. Each $g\\in G$ has a single dummy action that returns to $g$ with reward $0$ with probability $1$. For every $s\\notin G$ and every $a\\in A(s)$, the expected reward satisfies $r(s,a)\\le -c_{\\min}$. Define the one-step expected cost by $c(s,a)=-r(s,a)$ off $G$ and $c(g,a)=0$ at goals. A stationary Markov policy $\\pi$ is **proper** if, from every initial state, the finite-step probabilities of not having reached $G$ tend to $0$: with $q_0(s)=1_{s\\notin G}$ and\n\n$$q_{n+1}(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)q_n(s')\\quad(s\\notin G),\\qquad q_{n+1}(g)=0\\quad(g\\in G),$$\n\nproperness means $q_n(s)\\to0$ for every $s\\in S$. The problem need not have a proper policy unless that is separately assumed.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-stochastic-shortest-path-value-exists",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and let a finite positive-cost stochastic shortest-path problem have at least one proper stationary policy. For any policy $\\sigma$ whose action distribution may depend on the entire finite history, use its trajectory law from the initial state $s$ and define\n\n$$J^\\sigma(s)=\\sum_{t=0}^{\\infty}\\mathbb E_s^\\sigma\\!\\left[c(S_t,A_t)\\,1_{\\{S_t\\notin G\\}}\\right],$$\n\nwhere $c(s,a)=-r(s,a)>0$ off the absorbing goal set $G$ and $c(g,a)=0$ at goals. The optimal total cost $f^*(s)=\\inf_\\sigma J^\\sigma(s)$ is finite for every state. It is the unique finite nonnegative function satisfying\n\n$$f^*(g)=0\\quad(g\\in G),\\qquad f^*(s)=\\min_{a\\in A(s)}\\left[c(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)f^*(s')\\right]\\quad(s\\notin G).$$\n\nThe minimum is attained by a deterministic stationary policy that is proper and has total cost $f^*$ from every initial state.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-real-time-dynamic-programming",
+          "source_section": "Definition",
+          "quote": "Input: a finite stochastic shortest-path model, a finite value table $V_0:S\\to\\mathbb R$ with $V_0(g)=0$ on goals, a nonempty finite start set $S_0\\subseteq S\\setminus G$, a positive integer trial cap $L$, and an infinite supplied start sequence in which each member of $S_0$ occurs infinitely often. For each trial, set the current state to the next supplied start. For at most $L$ decision steps, or until a goal is reached, do the following: at the current nonglobal state $s$, compute\n\n$$q_V(s,a)=r(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\qquad(a\\in A(s)),$$\n\nchoose uniformly from the nonempty set of actions attaining $\\max_{a\\in A(s)}q_V(s,a)$ using a fresh tie draw, execute the chosen action in the given MDP and observe the next state, then replace $V(s)$ by $\\max_{a\\in A(s)}q_V(s,a)$ using the value table from before that backup. Keep every other value unchanged. At a goal keep value $0$. After a trial ends, reset the state to the next supplied start without resetting the value table. The procedure returns the successive value tables and selected actions; it asserts no convergence guarantee by itself.",
+          "uses": [
+            "1.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let\n$S = \\{x_k : k \\in \\mathbb{N}\\}$ be its range.\n\n1. If $(x_k)$ is nondecreasing ([[def-monotone-sequence]]) and $S$ is bounded\n   above ([[def-bounded-set]]), then $(x_k)$ converges ([[def-real-limit]]) and\n   $$\\lim_{k} x_k = \\sup S .$$\n2. If $(x_k)$ is nonincreasing and $S$ is bounded below, then $(x_k)$ converges\n   and $$\\lim_{k} x_k = \\inf S .$$\n\nBoth suprema and infima exist under the stated hypotheses: $S$ is nonempty, so\nthe least-upper-bound property ([[def-complete-ordered-field]]) supplies the\nfirst and [[thm-infimum-property]] the second, and each is unique\n([[lem-sup-unique]]).\n\nThis is the first place in this track where the least-upper-bound property\nproduces a **limit**. Everything on the sequences page held in any Archimedean\nordered field; the theorem below does not, and the sequence of decimal\ntruncations of $\\sqrt 2$ inside $\\mathbb{Q}$ is the standard witness of its\nfailure there.",
+          "uses": [
+            "3.1",
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-1-1",
+          "step": "1.1",
+          "claim": "Bellman monotonicity and [F2] imply $f_n\\le f^*$ after every backup: an updated value is no greater than the same backup of $f^*$, and other values do not change. Put $e_n=f^*-f_n\\ge0$ and $\\delta(s,a)=c(s,a)+\\sum_tP(t\\mid s,a)f^*(t)-f^*(s)\\ge0$. An update at $s$ gives $e_{n+1}(s)=\\max_a\\{\\sum_tP(t\\mid s,a)e_n(t)-\\delta(s,a)\\}$. Consequently $\\max_s e_n(s)$ is nonincreasing and all errors are bounded by their finite initial maximum.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-1-2",
+          "step": "1.2",
+          "claim": "We first justify the probability-one recurrence fact used below. At each of the successive opportunities when a fixed pair $(s,a)$ is currently greedy at a backed state $s$, the conditional probability of selecting $a$ is at least $1/|A(s)|$. For any finite number $m$ of such opportunities after a fixed index, iterated conditioning [F4] bounds the probability of avoiding $a$ through all of them by $(1-1/|A(s)|)^m$; for random opportunity times, first stop at a finite horizon and then increase the horizon, so the same inequality holds on the event those opportunities exist. Letting $m$ increase proves that infinitely many opportunities imply infinitely many selections almost surely. At successive selections of a fixed $(s,a)$, the same argument with probability $P(t\\mid s,a)>0$ shows that successor $t$ occurs infinitely often almost surely. Countably many tail indices and finitely many states/actions/successors allow one common probability-one event for all these implications.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-2-1",
+          "step": "2.1",
+          "claim": "Work on that event. Since there are finitely many states, after some finite index only states in $I$ are backed. An action greedy at infinitely many backups of a state in $I$ is selected infinitely often by step 1.2. Every nonglobal positive-probability successor is then an outcome infinitely often, hence belongs to $I$ by outcome-backup fairness. There are only finitely many remaining state-action pairs, so after another finite index every minimizing action at every backed state has transition support in $I\\cup G$. In particular, after this index the errors of any successors used by a minimizing action are errors inside $I$, or zero goal errors.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-3-1",
+          "step": "3.1",
+          "claim": "Let $E_n=\\max_{s\\in I}e_n(s)$ after the index in step 2.1. The set $I$ is nonempty because infinitely many backups occur on a finite state set. The maximum is attained on a finite set. Choose any minimizing action at the current backed state; the error identity in step 1.1, evaluated at that action, and step 2.1 give its post-backup error at most $E_n$. Unupdated errors stay fixed. Hence $E_n$ is nonincreasing, nonnegative, and has a finite limit $E$ by [F5].",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-4-1",
+          "step": "4.1",
+          "claim": "Suppose $E>0$ and put $J=\\{s\\in I:\\limsup_n e_n(s)=E\\}$. Finiteness and attainment of the maxima imply $J$ is nonempty. Each $s\\in J$ is backed infinitely often and its value is constant between backups, so some sequence of its post-backup errors tends to $E$. On a subsequence one fixed minimizing action $a_s$ realizes these backups, since the action set is finite. In the error identity from step 1.1 its successor errors are all at most $E_n\\to E$, by step 2.1; attaining limiting error $E$ forces $\\delta(s,a_s)=0$, excludes positive-probability goal successors, and forces every positive-probability successor to have limsup error $E$. Thus every successor lies in $J$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-5-1",
+          "step": "5.1",
+          "claim": "Select one such $a_s$ at each member of finite $J$ by finite enumeration. These actions are globally Bellman-optimal and keep every finite transition law in $J$. Iterating their Bellman equalities for $m$ steps gives $f^*(s)=\\mathbb E_s[\\sum_{k<m}c(S_k,a_{S_k})+f^*(S_m)]\\ge m c_{\\min}$ by [F1] and nonnegativity of $f^*$. This contradicts finiteness of $f^*(s)$ for large $m$. Therefore $E=0$, giving uniform convergence on $I$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-6-1",
+          "step": "6.1",
+          "claim": "Any action greedy at infinitely many backups has support in $I\\cup G$ by step 2.1. Along those backups all successor estimates tend to their optimal values by step 5.1, and the updated state estimate does also. Passing to the limit in its finite Bellman backup proves that its slack $\\delta$ is zero. There are finitely many state-action pairs, so after some finite index no action of positive slack is currently minimizing at a backed state. Every designated start belongs to $I$. A stationary policy choosing any eventual minimizing action on $I$ has zero Bellman slack and support in $I\\cup G$. Iterating its Bellman equalities gives expected cumulative cost bounded by $f^*(s)$; the lower cost bound yields survival probability at step $m$ at most $f^*(s)/(m c_{\\min})$. It is therefore proper on $I$, and the bounded terminal term tends to zero, so its total cost is $f^*(s)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-7-1",
+          "step": "7.1",
+          "claim": "In goal-terminated trials, every nonglobal executed successor is the next backed state before any reset, so outcome-backup fairness holds pathwise. Capped trials are covered precisely when they satisfy the stated fairness condition; no assumption about unvisited optimal branches follows from fresh ties. This proves the trial-schedule assertions.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "thm-rtdp-recurrently-backed-state-convergence-8-1",
+          "step": "8.1",
+          "claim": "Suppose additionally $f_0\\le Tf_0$. A current-state backup increases its coordinate. If $f_n\\le Tf_n$, monotonicity of $T$ gives $f_{n+1}\\le Tf_{n+1}$: at the updated coordinate $f_{n+1}(s)=Tf_n(s)\\le Tf_{n+1}(s)$, and at every unupdated coordinate $f_{n+1}(t)=f_n(t)\\le Tf_n(t)\\le Tf_{n+1}(t)$. Thus $f_n$ increases coordinatewise, remains bounded above by $f^*$ by step 1.1, and converges on finite $S$ to $\\bar f\\le f^*$ with $\\bar f\\le T\\bar f$, using continuity of finite minima and sums. Every designated start satisfies $\\bar f=f^*$ by step 5.1. If $\\bar f(s)=f^*(s)$ and $a$ is globally Bellman-optimal at $s$, then $f^*(s)=\\bar f(s)\\le T\\bar f(s)\\le c(s,a)+\\sum_tP(t\\mid s,a)\\bar f(t)=f^*(s)-\\sum_tP(t\\mid s,a)(f^*(t)-\\bar f(t))\\le f^*(s)$. Equality forces every positive-probability successor also to satisfy $\\bar f=f^*$. Finally, under any policy of optimal finite cost from a start, telescoping the nonnegative Bellman slacks yields $J-f^*(s_0)=\\sum_{k\\ge0}\\mathbb E\\delta(S_k,A_k)=0$: positive costs force goal survival to tend to zero and boundedness of $f^*$ removes the terminal term. Hence every action on a positive-probability optimal-policy prefix has zero slack. Induction along any finite positive-probability such prefix, starting from the designated start, propagates $\\bar f=f^*$ to every optimal-relevant state. Finiteness makes this convergence uniform on that set.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "axioms": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "use": "Statement explicitly assumes AC; Facts A1 identifies inherited path-law/conditional-expectation use."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires designated starts, so I is nonempty by Proof step 4.1; the counterexample Given specifies five states."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof uses zero goal error; Statement excludes zero nonglobal costs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite-state proof includes singleton recurrent sets; Proof step 6.1 rules out a positive-error closed singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The strict cost lower bound in Proof step 6.1 excludes zero-cost nonglobal cycles."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 7.1 states exact trial-endpoint fairness; arbitrary short truncations are not silently covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 5.1-6.1 use finite action selections, while AC is explicitly declared when used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement contains no biconditional."
+        }
+      ]
+    }
+  }
+}

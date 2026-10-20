@@ -13,6 +13,7 @@ aliases: [def-closure, def-interior, def-boundary, def-limit-point, def-dense]
 landmark: true
 short: "$\\operatorname{int} A$, $\\overline{A}$, $\\partial A$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-interior-closure-boundary.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -39,9 +40,9 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]), let $A \subseteq X$ and let
-$x \in X$. Balls are as in [[def-metric-ball]] and open sets as in
-[[def-metric-topology]]; recall that a real $r$ written as a radius is always
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), let $A \subseteq X$ and let
+$x \in X$. Balls are as in Open ball, closed ball and sphere in a metric space and open sets as in
+The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement; recall that a real $r$ written as a radius is always
 $> 0$.
 
 - $x$ is an **interior point** of $A$ if $B(x,r) \subseteq A$ for some $r$. The
@@ -58,7 +59,7 @@ $> 0$.
 
 **The interior is open, and it is the largest open subset of $A$.** If
 $x \in \operatorname{int}(A)$, fix $r$ with $B(x,r) \subseteq A$; the ball
-$B(x,r)$ is itself open ([[thm-metric-open-set-algebra]]), so every
+$B(x,r)$ is itself open (Arbitrary unions and finite intersections of open sets are open, open balls are open and closed balls are closed), so every
 $y \in B(x,r)$ has some $s$ with $B(y,s) \subseteq B(x,r) \subseteq A$, which
 puts $y$ in $\operatorname{int}(A)$. Hence $B(x,r) \subseteq \operatorname{int}(A)$
 and $\operatorname{int}(A)$ is open. It is contained in $A$, since
@@ -80,6 +81,16 @@ because a ball meeting $A \setminus \{x\}$ meets $A$; and
 $\operatorname{int}(A) \subseteq A \subseteq \overline{A}$. A point of $A$ is
 either isolated in $A$ or a limit point of $A$, and not both, according to
 whether some ball meets $A$ only in $x$.
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-metric-ball]]
+
+[[def-metric-topology]]
+
+[[thm-metric-open-set-algebra]]
 
 ## Remarks
 

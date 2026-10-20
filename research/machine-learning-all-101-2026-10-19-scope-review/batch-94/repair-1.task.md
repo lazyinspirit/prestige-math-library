@@ -1,0 +1,15 @@
+# Batch 94: repair 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 94
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: exact-tiled-attention-and-memory-aware-differentiation, exact-tiled-attention-and-memory-aware-differentiation-examples
+Items: def-attention-block-summary, alg-exact-tiled-softmax-attention, thm-tiled-attention-exactness, thm-tiled-attention-workspace-and-work, rem-attention-io-model-and-roundoff, ex-tiled-attention-one-key, ex-tiled-attention-empty-first-masked-block, ex-tiled-attention-two-merge-orders, ex-tiled-attention-replay-dropout-mask
+Consolidated findings: [{"id":"thm-tiled-attention-exactness","type":"local","reason":"Proof step 7.1 treats stored ℓᵢ as though it were recomputed as scores vary. The displayed shift identity only gives the same function when the denominator is recomputed, while the reverse procedure freezes mᵢ and ℓᵢ. At the forward point its pᵢⱼ equals dense softmax, and steps 4.1–6.1 derive the dense gradient directly; replace step 7.1 with that pointwise argument to retain the tie claim."},{"id":"ex-tiled-attention-replay-dropout-mask","type":"local","reason":"The example specifies G₁=1 but claims the full value gradient for a two-row input without specifying G₂. Specify G=(1,0)ᵀ, or identify the displayed gradients as row-1 contributions."}]
+Authorized source files: ["items/def-attention-block-summary.md","items/alg-exact-tiled-softmax-attention.md","items/thm-tiled-attention-exactness.md","items/thm-tiled-attention-workspace-and-work.md","items/rem-attention-io-model-and-roundoff.md","items/ex-tiled-attention-one-key.md","items/ex-tiled-attention-empty-first-masked-block.md","items/ex-tiled-attention-two-merge-orders.md","items/ex-tiled-attention-replay-dropout-mask.md","library/machine-learning/exact-tiled-attention-and-memory-aware-differentiation.md","library/machine-learning/exact-tiled-attention-and-memory-aware-differentiation-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

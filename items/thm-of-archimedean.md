@@ -13,6 +13,7 @@ landmark: true
 short: "complete ⇒ Archimedean"
 proof_strategy: contradiction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-of-archimedean.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -33,10 +34,16 @@ pipeline_run: null
 
 ## Statement
 
-Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:
+Every complete ordered field $F$ (Complete ordered field (least-upper-bound property)) is Archimedean:
 for every $x \in F$ there is a natural number $n \ge 1$ with $x < n \cdot 1_F$,
 where $n \cdot 1_F$ is the canonical natural of the ordered field $F$
-([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.
+(Ordered field). Equivalently, the canonical naturals are cofinal in $F$.
+
+## Statement references
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
 
 ## Facts & Assumptions
 

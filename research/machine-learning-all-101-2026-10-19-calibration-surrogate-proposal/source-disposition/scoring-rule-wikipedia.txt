@@ -1,0 +1,2538 @@
+Scoring rule - Wikipedia
+Jump to content
+Main menu
+Main menu
+move to sidebar
+hide
+Navigation
+Main page
+Contents
+Current events
+Random article
+About Wikipedia
+Contact us
+Contribute
+Help
+Learn to edit
+Community portal
+Recent changes
+Upload file
+Special pages
+Wikipedia
+The Free Encyclopedia
+Search
+Search
+Appearance
+Donate
+Create account
+Log in
+Personal tools
+Donate
+Create account
+Log in
+Contents
+move to sidebar
+hide
+(Top)
+1
+Definitions
+Toggle Definitions subsection
+1.1
+Probabilistic forecast
+1.2
+Point forecast
+1.3
+Scoring rule
+1.4
+Scoring function
+1.5
+Orientation / Sign convention
+1.6
+Expected score
+1.7
+Sample average score
+2
+Properties
+Toggle Properties subsection
+2.1
+Propriety and consistency
+2.1.1
+Proper scoring rules
+2.1.2
+Consistent scoring functions
+2.2
+Affine transformation
+2.3
+Locality
+2.4
+Decomposition
+3
+Examples of proper scoring rules
+Toggle Examples of proper scoring rules subsection
+3.1
+Categorical variables
+3.1.1
+Logarithmic score
+3.1.2
+Brier/Quadratic score
+3.1.3
+Spherical score
+3.1.4
+Ranked Probability Score
+3.1.5
+Comparison of categorical strictly proper scoring rules
+3.2
+Univariate continuous variables
+3.2.1
+Logarithmic score for continuous variables
+3.2.2
+Quadratic score for continuous variables
+3.2.3
+Continuous ranked probability score
+3.2.4
+Dawid-Sebastiani score
+3.3
+Multivariate continuous variables
+3.3.1
+Multivariate logarithmic score
+3.3.2
+Hyvärinen scoring rule
+3.3.3
+Energy score
+3.3.4
+Variogram score
+3.3.5
+Conditional continuous ranked probability score
+3.4
+Interpretation of proper scoring rules
+4
+Examples of consistent scoring functions
+Toggle Examples of consistent scoring functions subsection
+4.1
+Expectation
+4.1.1
+Squared error
+4.2
+Quantiles
+4.2.1
+Quantile loss / pinball loss
+4.3
+Intervals
+4.3.1
+Interval score
+5
+Applications
+Toggle Applications subsection
+5.1
+Meteorological weather forecasts
+6
+See also
+7
+Literature
+8
+References
+9
+External links
+Toggle the table of contents
+Scoring rule
+2 languages
+Deutsch
+Português
+Edit links
+Article
+Talk
+English
+Read
+Edit
+View history
+Tools
+Tools
+move to sidebar
+hide
+Actions
+Read
+Edit
+View history
+General
+What links here
+Related changes
+Upload file
+Permanent link
+Page information
+Cite this page
+Get shortened URL
+Switch to legacy parser
+Print/export
+Download as PDF
+Printable version
+In other projects
+Wikidata item
+Appearance
+move to sidebar
+hide
+From Wikipedia, the free encyclopedia
+Measure for evaluating probabilistic forecasts
+Not to be confused with Score voting.
+Visualization of the expected score under various predictions from some common scoring functions. Dashed black line: forecaster's true belief, red: linear, orange: spherical, purple: quadratic, green: log.
+In decision theory, both a scoring rule[1] as well as a scoring function[2]
+provide an ex post summary measure for the evaluation of the quality of a prediction or forecast. They assign a numeric score to a single prediction given the actual outcome. Depending on the sign convention, this score can be interpreted as a loss or a reward for the forecaster.
+Scoring rules assess probabilistic predictions or forecasts, i.e. predictions of the whole probability distribution
+F
+{\displaystyle F}
+{\displaystyle F} of the outcome. On the other hand, scoring functions assess point predictions, i.e. predictions of a property or functional
+T
+(
+F
+)
+{\displaystyle T(F)}
+{\displaystyle T(F)} of the probability distribution
+F
+{\displaystyle F}
+{\displaystyle F} of the outcome. Examples of such a property are the expectation and the median.
+The average logarithmic score of 10 points i.i.d. sampled from a standard normal distribution (blue histogram), evaluated on a variety of distributions (red line). Although not necessarily true for individual samples, on average, a proper scoring rule will give the lowest score if the predicted distribution matches the data distribution.A calibration curve allows to judge how well model predictions are calibrated, by comparing the predicted quantiles to the observed quantiles. Blue is the best calibrated model, see calibration (statistics).
+Scoring rules answer the question "how good is a predicted probability distribution given the observation of the actual outcome?" Scoring rules that are (strictly) proper are proven to have the lowest expected score if the predicted distribution equals the underlying distribution of the target variable. Although this might differ for individual observations, this should result in a minimization of the expected score if the "correct" distributions are predicted.
+In the same way, scoring functions answer the question "how good is a point prediction given the observation of the actual outcome?". Scoring functions that are (strictly) consistent (for the functional
+T
+{\displaystyle T}
+{\displaystyle T}) are proven to have the lowest expected score if the point prediction equals (or is among) the true functional of the underlying distribution of the target variable.
+Scoring rules and scoring functions are often used as "cost functions" or "loss functions" of forecasting models. If a sample of forecasts and observations of the outcome is collected, they can be evaluated as the empirical mean of the given sample, often also called the "score". Scores of predictions of different models or forecasters can then be compared to conclude which model or forecaster is best.
+For example, consider a probabilistic model that predicts (based on an input
+x
+{\displaystyle x}
+{\displaystyle x}) a gaussian distribution
+N
+(
+μ
+,
+σ
+2
+)
+{\displaystyle {\mathcal {N}}(\mu ,\sigma ^{2})}
+{\displaystyle {\mathcal {N}}(\mu ,\sigma ^{2})} with mean
+μ
+∈
+R
+{\displaystyle \mu \in \mathbb {R} }
+{\displaystyle \mu \in \mathbb {R} } and standard deviation
+σ
+∈
+R
++
+{\displaystyle \sigma \in \mathbb {R} _{+}}
+{\displaystyle \sigma \in \mathbb {R} _{+}}. A common interpretation of probabilistic models is that they aim to quantify their own predictive uncertainty. In this example, an observed target variable
+y
+∈
+R
+{\displaystyle y\in \mathbb {R} }
+{\displaystyle y\in \mathbb {R} } is then held compared to the predicted distribution
+N
+(
+μ
+,
+σ
+2
+)
+{\displaystyle {\mathcal {N}}(\mu ,\sigma ^{2})}
+{\displaystyle {\mathcal {N}}(\mu ,\sigma ^{2})} and assigned a score
+S
+(
+N
+(
+μ
+,
+σ
+2
+)
+,
+y
+)
+∈
+R
+{\displaystyle \mathbf {S} ({\mathcal {N}}(\mu ,\sigma ^{2}),y)\in \mathbb {R} }
+{\displaystyle \mathbf {S} ({\mathcal {N}}(\mu ,\sigma ^{2}),y)\in \mathbb {R} }. When a probabilistic model is trained on a scoring rule, it should "teach" the model to predict when its uncertainty is low, and when its uncertainty is high, and it should result in calibrated predictions, while minimizing the predictive uncertainty.
+Although the example given concerns the probabilistic forecasting of a real valued target variable, a variety of different scoring rules have been designed with different target variables in mind. Scoring rules exist for binary and categorical probabilistic classification, as well as for univariate and multivariate probabilistic regression.
+Definitions
+[edit]
+Consider a sample space or observation domain,
+Ω
+{\displaystyle \Omega }
+{\displaystyle \Omega }, which comprises the potential outcomes of a future observation; a σ-algebra
+A
+{\displaystyle {\mathcal {A}}}
+{\displaystyle {\mathcal {A}}} of subsets of
+Ω
+{\displaystyle \Omega }
+{\displaystyle \Omega } and a convex class
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}} of probability measures on
+(
+Ω
+,
+A
+)
+{\displaystyle (\Omega ,{\mathcal {A}})}
+{\displaystyle (\Omega ,{\mathcal {A}})}. A function defined on
+Ω
+{\displaystyle \Omega }
+{\displaystyle \Omega } and taking values in the extended real line,
+R
+¯
+=
+[
+−
+∞
+,
+∞
+]
+{\displaystyle {\overline {\mathbb {R} }}=[-\infty ,\infty ]}
+{\displaystyle {\overline {\mathbb {R} }}=[-\infty ,\infty ]}, is
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}}-quasi-integrable if it is measurable with
+respect to
+A
+{\displaystyle {\mathcal {A}}}
+{\displaystyle {\mathcal {A}}} and is quasi-integrable with respect to all
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}}.
+A (statistical) functional
+T
+{\displaystyle T}
+{\displaystyle T} is a potentially set-valued mapping from the class of probability distributions
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}} to a Euclidean space, i.e.
+T
+:
+F
+→
+R
+d
+{\displaystyle T\colon {\mathcal {F}}\rightarrow \mathbb {R} ^{d}}
+{\displaystyle T\colon {\mathcal {F}}\rightarrow \mathbb {R} ^{d}} with
+F
+→
+T
+(
+F
+)
+{\displaystyle F\rightarrow T(F)}
+{\displaystyle F\rightarrow T(F)}.
+Probabilistic forecast
+[edit]
+A probabilistic forecast is any probability measure
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}}, i.e. a distribution of potential future observations.
+Point forecast
+[edit]
+A point forecast for the functional
+T
+{\displaystyle T}
+{\displaystyle T} is any value
+x
+∈
+R
+d
+{\displaystyle x\in \mathbb {R} ^{d}}
+{\displaystyle x\in \mathbb {R} ^{d}}.
+Scoring rule
+[edit]
+A scoring rule is any extended real-valued function
+S
+:
+F
+×
+Ω
+→
+R
+{\displaystyle \mathbf {S} \colon {\mathcal {F}}\times \Omega \rightarrow \mathbb {R} }
+{\displaystyle \mathbf {S} \colon {\mathcal {F}}\times \Omega \rightarrow \mathbb {R} } such that
+S
+(
+F
+,
+⋅
+)
+{\displaystyle \mathbf {S} (F,\cdot )}
+{\displaystyle \mathbf {S} (F,\cdot )} is
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}}-quasi-integrable for all
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}}.
+S
+(
+F
+,
+y
+)
+{\displaystyle \mathbf {S} (F,y)}
+{\displaystyle \mathbf {S} (F,y)} represents the loss or penalty when the forecast
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}} is issued and the observation
+y
+∈
+Ω
+{\displaystyle y\in \Omega }
+{\displaystyle y\in \Omega } materializes.
+Scoring function
+[edit]
+A scoring function is any real-valued function
+S
+:
+R
+d
+×
+Ω
+→
+R
+{\displaystyle S\colon \mathbb {R} ^{d}\times \Omega \rightarrow \mathbb {R} }
+{\displaystyle S\colon \mathbb {R} ^{d}\times \Omega \rightarrow \mathbb {R} } where
+S
+(
+x
+,
+y
+)
+{\displaystyle S(x,y)}
+{\displaystyle S(x,y)} represents the loss or penalty when the point forecast
+x
+∈
+R
+d
+{\displaystyle x\in \mathbb {R} ^{d}}
+{\displaystyle x\in \mathbb {R} ^{d}} is issued and the observation
+y
+∈
+Ω
+{\displaystyle y\in \Omega }
+{\displaystyle y\in \Omega } materializes.
+Orientation / Sign convention
+[edit]
+Scoring rules
+S
+(
+F
+,
+y
+)
+{\displaystyle \mathbf {S} (F,y)}
+{\displaystyle \mathbf {S} (F,y)} and scoring functions
+S
+(
+x
+,
+y
+)
+{\displaystyle S(x,y)}
+{\displaystyle S(x,y)} are negatively (positively) oriented if smaller (larger) values mean better. Changing the convention can be accomplished by multiplying the score by
+−
+1
+{\displaystyle -1}
+{\displaystyle -1}. Here we adhere to the negative orientation, hence the association with "loss".
+Expected score
+[edit]
+We write for the expected score of a probabilistic prediction
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}} with respect to the underlying distribution
+Q
+∈
+F
+{\displaystyle Q\in {\mathcal {F}}}
+{\displaystyle Q\in {\mathcal {F}}}:
+E
+Y
+∼
+Q
+[
+S
+(
+F
+,
+Y
+)
+]
+=
+∫
+S
+(
+F
+,
+ω
+)
+d
+Q
+(
+ω
+)
+{\displaystyle \mathbb {E} _{Y\sim Q}[\mathbf {S} (F,Y)]=\int \mathbf {S} (F,\omega )\mathrm {d} Q(\omega )}
+{\displaystyle \mathbb {E} _{Y\sim Q}[\mathbf {S} (F,Y)]=\int \mathbf {S} (F,\omega )\mathrm {d} Q(\omega )}
+Similar, the expected score of a point prediction
+x
+∈
+R
+d
+{\displaystyle x\in \mathbb {R} ^{d}}
+{\displaystyle x\in \mathbb {R} ^{d}} with resprect to the underlying distribution
+Q
+∈
+F
+{\displaystyle Q\in {\mathcal {F}}}
+{\displaystyle Q\in {\mathcal {F}}}:
+E
+Y
+∼
+Q
+[
+S
+(
+x
+,
+Y
+)
+]
+=
+∫
+S
+(
+x
+,
+ω
+)
+d
+Q
+(
+ω
+)
+{\displaystyle \mathbb {E} _{Y\sim Q}[S(x,Y)]=\int S(x,\omega )\mathrm {d} Q(\omega )}
+{\displaystyle \mathbb {E} _{Y\sim Q}[S(x,Y)]=\int S(x,\omega )\mathrm {d} Q(\omega )}
+Sample average score
+[edit]
+A way to estimate the expected score is by means of the sample average score. Given a sample of prediction-observation pairs e.g.
+(
+F
+i
+,
+y
+i
+)
+{\displaystyle (F_{i},y_{i})}
+{\displaystyle (F_{i},y_{i})} for probabilistic predictions
+F
+i
+{\displaystyle F_{i}}
+{\displaystyle F_{i}} and observations
+y
+i
+∈
+Ω
+{\displaystyle y_{i}\in \Omega }
+{\displaystyle y_{i}\in \Omega },
+i
+=
+1
+…
+n
+{\displaystyle i=1\ldots n}
+{\displaystyle i=1\ldots n},
+(
+x
+i
+,
+y
+i
+)
+{\displaystyle (x_{i},y_{i})}
+{\displaystyle (x_{i},y_{i})} for point predictions
+x
+i
+{\displaystyle x_{i}}
+{\displaystyle x_{i}}, the average score is calculated as
+for scoring rules:
+E
+[
+S
+]
+^
+=
+1
+n
+∑
+i
+=
+1
+n
+S
+(
+F
+i
+,
+y
+i
+)
+{\displaystyle {\widehat {E[\mathbf {S} ]}}={\frac {1}{n}}\sum _{i=1}^{n}\mathbf {S} (F_{i},y_{i})}
+{\displaystyle {\widehat {E[\mathbf {S} ]}}={\frac {1}{n}}\sum _{i=1}^{n}\mathbf {S} (F_{i},y_{i})}
+for scoring functions:
+E
+[
+S
+]
+^
+=
+1
+n
+∑
+i
+=
+1
+n
+S
+(
+x
+i
+,
+y
+i
+)
+{\displaystyle {\widehat {E[S]}}={\frac {1}{n}}\sum _{i=1}^{n}S(x_{i},y_{i})}
+{\displaystyle {\widehat {E[S]}}={\frac {1}{n}}\sum _{i=1}^{n}S(x_{i},y_{i})}
+By invoking some law of large numbers argument, the sample average scores are consistent estimators of the expectation.
+Properties
+[edit]
+Propriety and consistency
+[edit]
+Strictly proper scoring rules and strictly consistent scoring functions encourage honest forecasts by maximization of the expected reward: If a forecaster is given a reward of
+−
+S
+(
+F
+,
+y
+)
+{\displaystyle -\mathbf {S} (F,y)}
+{\displaystyle -\mathbf {S} (F,y)} if
+y
+{\displaystyle y}
+{\displaystyle y} realizes (e.g.
+y
+=
+r
+a
+i
+n
+{\displaystyle y=rain}
+{\displaystyle y=rain}), then the highest expected reward (lowest score) is obtained by reporting the true probability distribution.[1]
+Proper scoring rules
+[edit]
+A scoring rule
+S
+{\displaystyle \mathbf {S} }
+{\displaystyle \mathbf {S} } is proper relative to
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}} if (assuming negative orientation) its expected score is minimized when the forecasted distribution matches the distribution of the observation.
+E
+Y
+∼
+Q
+[
+S
+(
+Q
+,
+Y
+)
+]
+≤
+E
+Y
+∼
+Q
+[
+S
+(
+F
+,
+Y
+)
+]
+{\displaystyle \mathbb {E} _{Y\sim Q}[\mathbf {S} (Q,Y)]\leq \mathbb {E} _{Y\sim Q}[\mathbf {S} (F,Y)]}
+{\displaystyle \mathbb {E} _{Y\sim Q}[\mathbf {S} (Q,Y)]\leq \mathbb {E} _{Y\sim Q}[\mathbf {S} (F,Y)]} for all
+F
+,
+Q
+∈
+F
+{\displaystyle F,Q\in {\mathcal {F}}}
+{\displaystyle F,Q\in {\mathcal {F}}}.
+It is strictly proper if the above equation holds with equality if and only if
+F
+=
+Q
+{\displaystyle F=Q}
+{\displaystyle F=Q}.
+Consistent scoring functions
+[edit]
+A scoring function
+S
+{\displaystyle S}
+{\displaystyle S} is consistent for the functional
+T
+{\displaystyle T}
+{\displaystyle T} relative to the class
+F
+{\displaystyle {\mathcal {F}}}
+{\displaystyle {\mathcal {F}}} if
+E
+Y
+∼
+F
+[
+S
+(
+t
+,
+Y
+)
+]
+≤
+E
+Y
+∼
+F
+[
+S
+(
+x
+,
+Y
+)
+]
+{\displaystyle \mathbb {E} _{Y\sim F}[S(t,Y)]\leq \mathbb {E} _{Y\sim F}[S(x,Y)]}
+{\displaystyle \mathbb {E} _{Y\sim F}[S(t,Y)]\leq \mathbb {E} _{Y\sim F}[S(x,Y)]} for all
+F
+∈
+F
+{\displaystyle F\in {\mathcal {F}}}
+{\displaystyle F\in {\mathcal {F}}}, all
+t
+∈
+T
+(
+F
+)
+{\displaystyle t\in T(F)}
+{\displaystyle t\in T(F)} and all
+x
+∈
+R
+d
+{\displaystyle x\in \mathbb {R} ^{d}}
+{\displaystyle x\in \mathbb {R} ^{d}}.
+It is strictly consistent if it is consistent and equality in the above equation implies that
+x
+∈
+T
+(
+F
+)
+{\displaystyle x\in T(F)}
+{\displaystyle x\in T(F)}.
+Affine transformation
+[edit]
+After an affine transformation a strictly proper scoring rule remains strictly proper, a strictly consistent scoring function (for some functional
+T
+{\displaystyle T}
+{\displaystyle T}) remains strictly consistent.[3] That is, if
+S
+(
+F
+,
+y
+)
+{\displaystyle \mathbf {S} (F,y)}
+{\displaystyle \mathbf {S} (F,y)} is a strictly proper scoring rule then
+a
++
+b
+S
+(
+F
+,
+y
+)
+{\displaystyle a+b\mathbf {S} (F,y)}
+{\displaystyle a+b\mathbf {S} (F,y)} with
+b
+≠
+0
+{\displaystyle b\neq 0}
+{\displaystyle b\neq 0} is also a strictly proper scoring rule, though if
+b
+<
+0
+{\displaystyle b<0}
+{\displaystyle b<0} then the optimization sense of the scoring rule switches between maximization and minimization. For scoring functions the same statement applies with the obvious changes.
+Locality
+[edit]
+A proper scoring rule is said to be local if its estimate for the probability of a specific event depends only on the probability of that event. This statement is vague in most descriptions but we can, in most cases, think of this as the optimal solution of the scoring problem "at a specific event" is invariant to all changes in the observation distribution that leave the probability of that event unchanged. All binary scores are local because the probability assigned to the event that did not occur is determined so there is no degree of flexibility to vary over.
+Affine functions of the logarithmic scoring rule are the only strictly proper local scoring rules on a finite set that is not binary.
+Decomposition
+[edit]
+The expectation value of a proper scoring rule
+S
+{\displaystyle S}
+{\displaystyle S} can be decomposed into the sum of three components, called uncertainty, reliability, and resolution,[4][5] which characterize different attributes of probabilistic forecasts:
+E
+(
+S
+)
+=
+U
+N
+C
++
+R
+E
+L
+−
+R
+E
+S
+.
+{\displaystyle E(S)=\mathrm {UNC} +\mathrm {REL} -\mathrm {RES} .}
+{\displaystyle E(S)=\mathrm {UNC} +\mathrm {REL} -\mathrm {RES} .}
+If a score is proper and negatively oriented (such as the Brier Score), all three terms are positive definite.
+The uncertainty component is equal to the expected score of the forecast which constantly predicts the average event frequency.
+The reliability component penalizes poorly calibrated forecasts, in which the predicted probabilities do not coincide with the event frequencies.
+The equations for the individual components depend on the particular scoring rule.
+For the Brier Score, they are given by
+U
+N
+C
+=
+x
+¯
+(
+1
+−
+x
+¯
+)
+{\displaystyle \mathrm {UNC} ={\bar {x}}(1-{\bar {x}})}
+{\displaystyle \mathrm {UNC} ={\bar {x}}(1-{\bar {x}})}
+R
+E
+L
+=
+E
+(
+p
+−
+π
+(
+p
+)
+)
+2
+{\displaystyle \mathrm {REL} =E(p-\pi (p))^{2}}
+{\displaystyle \mathrm {REL} =E(p-\pi (p))^{2}}
+R
+E
+S
+=
+E
+(
+π
+(
+p
+)
+−
+x
+¯
+)
+2
+{\displaystyle \mathrm {RES} =E(\pi (p)-{\bar {x}})^{2}}
+{\displaystyle \mathrm {RES} =E(\pi (p)-{\bar {x}})^{2}}
+where
+x
+¯
+{\displaystyle {\bar {x}}}
+{\displaystyle {\bar {x}}} is the average probability of occurrence of the binary event
+x
+{\displaystyle x}
+{\displaystyle x}, and
+π
+(
+p
+)
+{\displaystyle \pi (p)}
+{\displaystyle \pi (p)} is the conditional event probability, given
+p
+{\displaystyle p}
+{\displaystyle p}, i.e.
+π
+(
+p
+)
+=
+P
+(
+x
+=
+1
+∣
+p
+)
+{\displaystyle \pi (p)=P(x=1\mid p)}
+{\displaystyle \pi (p)=P(x=1\mid p)}
+Examples of proper scoring rules
+[edit]
+There are an infinite number of scoring rules, including entire parameterized families of strictly proper scoring rules. The ones shown below are simply popular examples.
+Categorical variables
+[edit]
+For a categorical response variable with
+m
+{\displaystyle m}
+{\displaystyle m} mutually exclusive events,
+Y
+∈
+Ω
+=
+{
+1
+,
+…
+,
+m
+}
+{\displaystyle Y\in \Omega =\{1,\ldots ,m\}}
+{\displaystyle Y\in \Omega =\{1,\ldots ,m\}}, a probabilistic forecaster or algorithm will return a probability vector
+p
+∈
+[
+0
+,
+1
+]
+m
+{\displaystyle \mathbf {p} \in [0,1]^{m}}
+{\displaystyle \mathbf {p} \in [0,1]^{m}} with probabilities for each of the
+m
+{\displaystyle m}
+{\displaystyle m} outcomes.
+If
+y
+=
+i
+{\displaystyle y=i}
+{\displaystyle y=i} materializes, one often abbreviates the score as
+S
+(
+p
+,
+i
+)
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)}
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)}.
+Logarithmic score
+[edit]
+See also: Deviance (statistics)
+Expected value of logarithmic rule. When Event 1 is expected to occur with probability of 0.8, the blue line is described by the function
+0.8
+log
+⁡
+(
+x
+)
++
+(
+1
+−
+0.8
+)
+log
+⁡
+(
+1
+−
+x
+)
+{\displaystyle 0.8\log(x)+(1-0.8)\log(1-x)}
+{\displaystyle 0.8\log(x)+(1-0.8)\log(1-x)}.
+The logarithmic scoring rule is a strictly proper and local scoring rule. This is also the negative of Shannon entropy, which is commonly used as a scoring criterion in Bayesian inference. This scoring rule has strong foundations in information theory.
+S
+(
+p
+,
+i
+)
+=
+ln
+⁡
+(
+p
+i
+)
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)=\ln(p_{i})}
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)=\ln(p_{i})}
+Here, the score is calculated as the logarithm of the probability estimate for the actual outcome. That is, a prediction of 80% that correctly proved true would receive a score of ln(0.8) = −0.22. This same prediction also assigns 20% likelihood to the opposite case, and so if the prediction proves false, it would receive a score based on the 20%: ln(0.2) = −1.6. The goal of a forecaster is to maximize the score and for the score to be as large as possible, and −0.22 is indeed larger than −1.6.
+If one treats the truth or falsity of the prediction as a variable x with value 1 or 0 respectively, and the expressed probability as p, then one can write the logarithmic scoring rule as x ln(p) + (1 − x) ln(1 − p). Note that any logarithmic base may be used, since strictly proper scoring rules remain strictly proper under linear transformation. That is:
+L
+(
+p
+,
+i
+)
+=
+log
+b
+⁡
+(
+p
+i
+)
+{\displaystyle L(\mathbf {p} ,i)=\log _{b}(p_{i})}
+{\displaystyle L(\mathbf {p} ,i)=\log _{b}(p_{i})}
+is strictly proper for all
+b
+>
+1
+{\displaystyle b>1}
+{\displaystyle b>1}.
+Brier/Quadratic score
+[edit]
+The quadratic scoring rule is a strictly proper scoring rule
+S
+Q
+(
+p
+,
+i
+)
+=
+2
+p
+i
+−
+p
+⋅
+p
+=
+2
+p
+i
+−
+∑
+j
+=
+1
+m
+p
+j
+2
+{\displaystyle \mathbf {S} _{Q}(\mathbf {p} ,i)=2p_{i}-\mathbf {p} \cdot \mathbf {p} =2p_{i}-\sum _{j=1}^{m}p_{j}^{2}}
+{\displaystyle \mathbf {S} _{Q}(\mathbf {p} ,i)=2p_{i}-\mathbf {p} \cdot \mathbf {p} =2p_{i}-\sum _{j=1}^{m}p_{j}^{2}}
+where
+p
+i
+{\displaystyle p_{i}}
+{\displaystyle p_{i}} is the probability assigned to the correct answer
+i
+{\displaystyle i}
+{\displaystyle i}.
+The Brier score, originally proposed by Glenn W. Brier in 1950,[6] can be obtained by an affine transform from the quadratic scoring rule.
+S
+B
+(
+p
+,
+i
+)
+=
+∑
+j
+=
+1
+m
+(
+y
+j
+−
+p
+j
+)
+2
+{\displaystyle \mathbf {S} _{B}(\mathbf {p} ,i)=\sum _{j=1}^{m}(y_{j}-p_{j})^{2}}
+{\displaystyle \mathbf {S} _{B}(\mathbf {p} ,i)=\sum _{j=1}^{m}(y_{j}-p_{j})^{2}}
+Where
+y
+j
+=
+1
+{\displaystyle y_{j}=1}
+{\displaystyle y_{j}=1} when the
+j
+{\displaystyle j}
+{\displaystyle j}th event is correct and
+y
+j
+=
+0
+{\displaystyle y_{j}=0}
+{\displaystyle y_{j}=0} otherwise. It can be thought of as a generalization of mean squared error to probabilistic forecasts.
+An important difference between these two rules is that a forecaster should strive to maximize the quadratic score
+S
+Q
+{\displaystyle \mathbf {S} _{Q}}
+{\displaystyle \mathbf {S} _{Q}} yet minimize the Brier score
+S
+B
+{\displaystyle \mathbf {S} _{B}}
+{\displaystyle \mathbf {S} _{B}}. This is due to a negative sign in the linear transformation between them.
+Spherical score
+[edit]
+The spherical scoring rule is also a strictly proper scoring rule
+S
+(
+p
+,
+i
+)
+=
+p
+i
+‖
+p
+‖
+=
+p
+i
+p
+1
+2
++
+⋯
++
+p
+m
+2
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)={\frac {p_{i}}{\lVert \mathbf {p} \rVert }}={\frac {p_{i}}{\sqrt {p_{1}^{2}+\cdots +p_{m}^{2}}}}}
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)={\frac {p_{i}}{\lVert \mathbf {p} \rVert }}={\frac {p_{i}}{\sqrt {p_{1}^{2}+\cdots +p_{m}^{2}}}}}
+Also its generalization with
+α
+>
+1
+{\displaystyle \alpha >1}
+{\displaystyle \alpha >1} is strictly proper
+S
+(
+p
+,
+i
+)
+=
+p
+i
+α
+−
+1
+(
+∑
+j
+=
+1
+m
+p
+j
+α
+)
+(
+α
+−
+1
+)
+/
+α
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)={\frac {p_{i}^{\alpha -1}}{\left(\sum _{j=1}^{m}p_{j}^{\alpha }\right)^{(\alpha -1)/\alpha }}}}
+{\displaystyle \mathbf {S} (\mathbf {p} ,i)={\frac {p_{i}^{\alpha -1}}{\left(\sum _{j=1}^{m}p_{j}^{\alpha }\right)^{(\alpha -1)/\alpha }}}}
+Ranked Probability Score
+[edit]
+The ranked probability score [7] (RPS) is a strictly proper scoring rule, that can be expressed as:
+R
+P
+S
+(
+p
+,
+i
+)
+=
+∑
+k
+=
+1
+m
+−
+1
+(
+∑
+j
+=
+1
+k
+p
+j
+−
+y
+j
+)
+2
+{\displaystyle RPS(\mathbf {p} ,i)=\sum _{k=1}^{m-1}\left(\sum _{j=1}^{k}p_{j}-y_{j}\right)^{2}}
+{\displaystyle RPS(\mathbf {p} ,i)=\sum _{k=1}^{m-1}\left(\sum _{j=1}^{k}p_{j}-y_{j}\right)^{2}}
+Where
+y
+j
+=
+1
+{\displaystyle y_{j}=1}
+{\displaystyle y_{j}=1} when the
+j
+{\displaystyle j}
+{\displaystyle j}th event is correct and
+y
+j
+=
+0
+{\displaystyle y_{j}=0}
+{\displaystyle y_{j}=0} otherwise, and
+m
+{\displaystyle m}
+{\displaystyle m} is the number of classes. Other than other scoring rules, the ranked probability score considers the distance between classes, i.e. classes 1 and 2 are considered closer than classes 1 and 3. The score assigns better scores to probabilistic forecasts with high probabilities assigned to classes close to the correct class. For example, when considering probabilistic forecasts
+p
+1
+=
+(
+0.5
+,
+0.5
+,
+0
+)
+{\displaystyle \mathbf {p} _{1}=(0.5,0.5,0)}
+{\displaystyle \mathbf {p} _{1}=(0.5,0.5,0)} and
+p
+2
+=
+(
+0.5
+,
+0
+,
+0.5
+)
+{\displaystyle \mathbf {p} _{2}=(0.5,0,0.5)}
+{\displaystyle \mathbf {p} _{2}=(0.5,0,0.5)}, we find that
+R
+P
+S
+(
+p
+1
+,
+1
+)
+=
+0.25
+{\displaystyle RPS(\mathbf {p} _{1},1)=0.25}
+{\displaystyle RPS(\mathbf {p} _{1},1)=0.25}, while
+R
+P
+S
+(
+p
+2
+,
+1
+)
+=
+0.5
+{\displaystyle RPS(\mathbf {p} _{2},1)=0.5}
+{\displaystyle RPS(\mathbf {p} _{2},1)=0.5}, despite both probabilistic forecasts assigning identical probability to the correct class.
+Comparison of categorical strictly proper scoring rules
+[edit]
+Shown below on the left is a graphical comparison of the Logarithmic, Quadratic, and Spherical scoring rules for a binary classification problem. The x-axis indicates the reported probability for the event that actually occurred.
+Each of the scores have different magnitudes and locations. The magnitude differences are not relevant however as scores remain proper under affine transformation. Therefore, to compare different scores it is necessary to move them to a common scale. A reasonable choice of normalization is shown in the picture where all scores intersect the points (0.5,0) and (1,1). This ensures that they yield 0 for a uniform distribution (two probabilities of 0.5 each), reflecting no cost or reward for reporting what is often the baseline distribution. All normalized scores below also yield 1 when the true class is assigned a probability of 1.
+Score of a binary classification for the true class showing logarithmic (blue), spherical (green), and quadratic (red)
+Normalized score of a binary classification for the true class showing logarithmic (blue), spherical (green), and quadratic (red)
+Univariate continuous variables
+[edit]
+The scoring rules listed below aim to evaluate probabilistic predictions when the predicted distributions are univariate continuous probability distributions, i.e. the predicted distributions
+F
+{\displaystyle F}
+{\displaystyle F} are defined over a univariate target variable
+Y
+∈
+R
+{\displaystyle Y\in \mathbb {R} }
+{\displaystyle Y\in \mathbb {R} } and have a probability density function
+f
+:
+R
+→
+R
++
+{\displaystyle f:\mathbb {R} \to \mathbb {R} _{+}}
+{\displaystyle f:\mathbb {R} \to \mathbb {R} _{+}}. They can be categorized into 3 groups:
+Scoring rules for predictions of the probability density
+f
+{\displaystyle f}
+{\displaystyle f}
+Scoring rules for prediction of the CDF
+F
+{\displaystyle F}
+{\displaystyle F}
+Scoring rules depending on first and second momentum only
+Logarithmic score for continuous variables
+[edit]
+The logarithmic score is a local, strictly proper scoring rule. It is defined as
+L
+(
+F
+,
+y
+)
+=
+−
+ln
+⁡
+(
+f
+(
+y
+)
+)
+{\displaystyle L(F,y)=-\ln(f(y))}
+{\displaystyle L(F,y)=-\ln(f(y))}.
+The logarithmic score for continuous variables has strong ties to Maximum likelihood estimation and to the Kullback–Leibler divergence.
+Quadratic score for continuous variables
+[edit]
+The quadratic scoring rule for continuous variables reads
+S
+(
+f
+,
+y
+)
+=
+2
+f
+(
+y
+)
+−
+‖
+f
+‖
+2
+2
+{\displaystyle S(f,y)=2f(y)-\|f\|_{2}^{2}}
+{\displaystyle S(f,y)=2f(y)-\|f\|_{2}^{2}}
+It is strictly proper for densities for which the norm
+‖
+f
+‖
+2
+=
+(
+∫
+f
+(
+y
+)
+2
+d
+y
+)
+1
+2
+{\displaystyle \|f\|_{2}=\left(\int f(y)^{2}dy\right)^{\frac {1}{2}}}
+{\displaystyle \|f\|_{2}=\left(\int f(y)^{2}dy\right)^{\frac {1}{2}}} exists.
+Continuous ranked probability score
+[edit]
+Illustration of the continuous ranked probability score (CRPS). Given a sample y and a predicted cumulative distribution F, the CRPS is given by computing the difference between the curves at each point x of the support, squaring it and integrating it over the whole support.
+The continuous ranked probability score (CRPS)[8] is a strictly proper scoring rule much used in meteorology. It is closely related to the one-dimensional energy distance, and is defined as
+C
+R
+P
+S
+(
+F
+,
+y
+)
+=
+∫
+R
+(
+F
+(
+x
+)
+−
+H
+(
+x
+−
+y
+)
+)
+2
+d
+x
+{\displaystyle CRPS(F,y)=\int _{\mathbb {R} }(F(x)-H(x-y))^{2}dx}
+{\displaystyle CRPS(F,y)=\int _{\mathbb {R} }(F(x)-H(x-y))^{2}dx}
+where
+H
+{\displaystyle H}
+{\displaystyle H} is the Heaviside step function and
+y
+∈
+R
+{\displaystyle y\in \mathbb {R} }
+{\displaystyle y\in \mathbb {R} } is the observation. For distributions with finite first moment, the continuous ranked probability score can be written as:[1]
+C
+R
+P
+S
+(
+F
+,
+y
+)
+=
+E
+X
+∼
+F
+|
+X
+−
+y
+|
+−
+1
+2
+E
+X
+,
+X
+′
+∼
+F
+|
+X
+−
+X
+′
+|
+{\displaystyle CRPS(F,y)=\mathbb {E} _{X\sim F}|X-y|-{\frac {1}{2}}\mathbb {E} _{X,X'\sim F}|X-X'|}
+{\displaystyle CRPS(F,y)=\mathbb {E} _{X\sim F}|X-y|-{\frac {1}{2}}\mathbb {E} _{X,X'\sim F}|X-X'|}
+where
+X
+{\displaystyle X}
+{\displaystyle X} and
+X
+′
+{\displaystyle X'}
+{\displaystyle X'} are independent random variables, both sampled from the distribution
+F
+{\displaystyle F}
+{\displaystyle F}. This is the energy form of CRPS and opens the door to estimating the CRPS via Monte Carlo sampling (through approximating the expectation value).
+Furthermore, when the cumulative probability function
+F
+{\displaystyle F}
+{\displaystyle F} is continuous, the continuous ranked probability score can also be written as[9]
+C
+R
+P
+S
+(
+F
+,
+y
+)
+=
+E
+X
+∼
+F
+|
+X
+−
+y
+|
++
+E
+X
+∼
+F
+[
+X
+]
+−
+2
+E
+X
+∼
+F
+[
+X
+⋅
+F
+(
+X
+)
+]
+{\displaystyle CRPS(F,y)=\mathbb {E} _{X\sim F}|X-y|+\mathbb {E} _{X\sim F}[X]-2\mathbb {E} _{X\sim F}[X\cdot F(X)]}
+{\displaystyle CRPS(F,y)=\mathbb {E} _{X\sim F}|X-y|+\mathbb {E} _{X\sim F}[X]-2\mathbb {E} _{X\sim F}[X\cdot F(X)]}
+The continuous ranked probability score can be seen as both a continuous extension of the ranked probability score, as well as quantile regression. The continuous ranked probability score over the empirical distribution
+F
+^
+q
+{\displaystyle {\hat {F}}_{q}}
+{\displaystyle {\hat {F}}_{q}} of an ordered set points
+q
+1
+≤
+…
+≤
+q
+n
+{\displaystyle q_{1}\leq \ldots \leq q_{n}}
+{\displaystyle q_{1}\leq \ldots \leq q_{n}} (i.e. every point has
+1
+/
+n
+{\displaystyle 1/n}
+{\displaystyle 1/n} probability of occurring), is equal to twice the mean quantile loss applied on those points with evenly spread quantiles
+(
+τ
+1
+,
+…
+,
+τ
+n
+)
+=
+(
+1
+/
+(
+2
+n
+)
+,
+…
+,
+(
+2
+n
+−
+1
+)
+/
+(
+2
+n
+)
+)
+{\displaystyle (\tau _{1},\ldots ,\tau _{n})=(1/(2n),\ldots ,(2n-1)/(2n))}
+{\displaystyle (\tau _{1},\ldots ,\tau _{n})=(1/(2n),\ldots ,(2n-1)/(2n))}:[10]
+C
+R
+P
+S
+(
+F
+^
+q
+,
+y
+)
+=
+2
+n
+∑
+i
+=
+1
+n
+τ
+i
+(
+y
+−
+q
+i
+)
++
++
+(
+1
+−
+τ
+i
+)
+(
+q
+i
+−
+y
+)
++
+{\displaystyle CRPS\left({\hat {F}}_{q},y\right)={\frac {2}{n}}\sum _{i=1}^{n}\tau _{i}(y-q_{i})_{+}+(1-\tau _{i})(q_{i}-y)_{+}}
+{\displaystyle CRPS\left({\hat {F}}_{q},y\right)={\frac {2}{n}}\sum _{i=1}^{n}\tau _{i}(y-q_{i})_{+}+(1-\tau _{i})(q_{i}-y)_{+}}
+For many popular families of distributions, closed-form expressions for the continuous ranked probability score have been derived. The continuous ranked probability score has been used as a loss function for artificial neural networks, in which weather forecasts are postprocessed to a Gaussian probability distribution.[11][12]
+CRPS was also adapted to survival analysis to cover censored events.[13]
+The CRPS can be thought of as the generalization of the mean absolute error  (MAE) to probabilistic forecasts, and for a single sample is equivalent to the MAE. Another way to think of it is the Brier/quadaratic score of the sampled cumulative distribution function
+F
+{\displaystyle F}
+{\displaystyle F} for the binary event
+{
+X
+≤
+y
+}
+{\displaystyle \{X\leq y\}}
+{\displaystyle \{X\leq y\}}.
+CRPS is a special case of the Cramér distance and can be seen as an improvement of Wasserstein distance often used in machine learning. Cramér distance performed better in ordinal regression than KL distance or the Wasserstein metric.[14]
+CRPS is widely used for evaluating probabilistic forecasts and compared against other scoring rules, see for example [15]. It also has some critical theoretical limitations: It has been shown that CRPS can produce systematically misleading evaluations by favoring probabilistic forecasts whose medians are close to the observed outcome, regardless of the actual probability assigned to that region, potentially resulting in higher scores for forecasts that allocate negligible (or even zero) probability mass to the true outcome. Furthermore, CRPS is not invariant under smooth transformations of the forecast variable, and its ranking of forecast systems may reverse under such transformations, raising concerns about its consistency for evaluation purposes.[16]
+Dawid-Sebastiani score
+[edit]
+The Dawid-Sebastiani score (DSS)[17] only depends on first and second momentum, or equivalently, mean
+μ
+F
+{\displaystyle \mu _{F}}
+{\displaystyle \mu _{F}} and  standard deviation
+σ
+F
+{\displaystyle \sigma _{F}}
+{\displaystyle \sigma _{F}} of the distribution
+F
+{\displaystyle F}
+{\displaystyle F}:
+S
+(
+F
+,
+y
+)
+=
+(
+y
+−
+μ
+F
+σ
+F
+)
+2
++
+log
+⁡
+σ
+F
+2
+{\displaystyle S(F,y)=\left({\frac {y-\mu _{F}}{\sigma _{F}}}\right)^{2}+\log \sigma _{F}^{2}}
+{\displaystyle S(F,y)=\left({\frac {y-\mu _{F}}{\sigma _{F}}}\right)^{2}+\log \sigma _{F}^{2}}
+Multivariate continuous variables
+[edit]
+The scoring rules listed below aim to evaluate probabilistic predictions when the predicted distributions are univariate  continuous probability distribution's,[further explanation needed] i.e. the predicted distributions are defined over a multivariate target variable
+X
+∈
+R
+n
+{\displaystyle X\in \mathbb {R} ^{n}}
+{\displaystyle X\in \mathbb {R} ^{n}} and have a probability density function
+f
+:
+R
+n
+→
+R
++
+{\displaystyle f:\mathbb {R} ^{n}\to \mathbb {R} _{+}}
+{\displaystyle f:\mathbb {R} ^{n}\to \mathbb {R} _{+}}.
+Multivariate logarithmic score
+[edit]
+The multivariate logarithmic score is similar to the univariate logarithmic score:
+L
+(
+D
+,
+y
+)
+=
+−
+ln
+⁡
+(
+f
+D
+(
+y
+)
+)
+{\displaystyle L(D,y)=-\ln(f_{D}(y))}
+{\displaystyle L(D,y)=-\ln(f_{D}(y))}
+where
+f
+D
+{\displaystyle f_{D}}
+{\displaystyle f_{D}} denotes the probability density function of the predicted multivariate distribution
+D
+{\displaystyle D}
+{\displaystyle D}. It is a local, strictly proper scoring rule.
+Hyvärinen scoring rule
+[edit]
+The Hyvärinen scoring function (of a density p) is defined by[18]
+s
+(
+p
+)
+=
+2
+Δ
+y
+log
+⁡
+p
+(
+y
+)
++
+‖
+∇
+y
+log
+⁡
+p
+(
+y
+)
+‖
+2
+2
+{\displaystyle s(p)=2\Delta _{y}\log p(y)+\|\nabla _{y}\log p(y)\|_{2}^{2}}
+{\displaystyle s(p)=2\Delta _{y}\log p(y)+\|\nabla _{y}\log p(y)\|_{2}^{2}}
+Where
+Δ
+{\displaystyle \Delta }
+{\displaystyle \Delta } denotes the Hessian trace and
+∇
+{\displaystyle \nabla }
+{\displaystyle \nabla } denotes the gradient. This scoring rule can be used to computationally simplify parameter inference and address Bayesian model comparison with arbitrarily-vague priors.[18][19] It was also used to introduce new information-theoretic quantities beyond the existing information theory.[20]
+The Hyvärinen scoring rule is local of order 2 (meaning it locally takes into account derivatives up to second order).
+Energy score
+[edit]
+See also: Energy distance § Goodness-of-fit
+The energy score is a multivariate extension of the continuous ranked probability score:[1]
+E
+S
+β
+(
+D
+,
+Y
+)
+=
+E
+X
+∼
+D
+[
+‖
+X
+−
+Y
+‖
+2
+β
+]
+−
+1
+2
+E
+X
+,
+X
+′
+∼
+D
+[
+‖
+X
+−
+X
+′
+‖
+2
+β
+]
+{\displaystyle ES_{\beta }(D,Y)=\mathbb {E} _{X\sim D}[\lVert X-Y\rVert _{2}^{\beta }]-{\frac {1}{2}}\mathbb {E} _{X,X'\sim D}[\lVert X-X'\rVert _{2}^{\beta }]}
+{\displaystyle ES_{\beta }(D,Y)=\mathbb {E} _{X\sim D}[\lVert X-Y\rVert _{2}^{\beta }]-{\frac {1}{2}}\mathbb {E} _{X,X'\sim D}[\lVert X-X'\rVert _{2}^{\beta }]}
+Here,
+β
+∈
+(
+0
+,
+2
+)
+{\displaystyle \beta \in (0,2)}
+{\displaystyle \beta \in (0,2)},
+‖
+‖
+2
+{\displaystyle \lVert \rVert _{2}}
+{\displaystyle \lVert \rVert _{2}} denotes the
+n
+{\displaystyle n}
+{\displaystyle n}-dimensional Euclidean distance and
+X
+,
+X
+′
+{\displaystyle X,X'}
+{\displaystyle X,X'} are independently sampled random variables from the probability distribution
+D
+{\displaystyle D}
+{\displaystyle D}. The energy score is strictly proper for distributions
+D
+{\displaystyle D}
+{\displaystyle D} for which
+E
+X
+∼
+D
+[
+‖
+X
+‖
+2
+]
+{\displaystyle \mathbb {E} _{X\sim D}[\lVert X\rVert _{2}]}
+{\displaystyle \mathbb {E} _{X\sim D}[\lVert X\rVert _{2}]} is finite. It has been suggested that the energy score is somewhat ineffective when evaluating the intervariable dependency structure of the forecasted multivariate distribution.[21] Apart from a term that depends only on the distribution of the observation, the energy score is equal to twice the energy distance between the predicted distribution and the empirical[further explanation needed] distribution of the observation.
+Variogram score
+[edit]
+The variogram score of order
+p
+{\displaystyle p}
+{\displaystyle p} is given by:[22]
+V
+S
+p
+(
+D
+,
+Y
+)
+=
+∑
+i
+,
+j
+=
+1
+n
+w
+i
+j
+(
+|
+Y
+i
+−
+Y
+j
+|
+p
+−
+E
+X
+∼
+D
+[
+|
+X
+i
+−
+X
+j
+|
+p
+]
+)
+2
+{\displaystyle VS_{p}(D,Y)=\sum _{i,j=1}^{n}w_{ij}(|Y_{i}-Y_{j}|^{p}-\mathbb {E} _{X\sim D}[|X_{i}-X_{j}|^{p}])^{2}}
+{\displaystyle VS_{p}(D,Y)=\sum _{i,j=1}^{n}w_{ij}(|Y_{i}-Y_{j}|^{p}-\mathbb {E} _{X\sim D}[|X_{i}-X_{j}|^{p}])^{2}}
+Here,
+w
+i
+j
+{\displaystyle w_{ij}}
+{\displaystyle w_{ij}} are weights, often set to 1, and
+p
+>
+0
+{\displaystyle p>0}
+{\displaystyle p>0} can be arbitrarily chosen, but
+p
+=
+0.5
+,
+1
+{\displaystyle p=0.5,1}
+{\displaystyle p=0.5,1} or
+2
+{\displaystyle 2}
+{\displaystyle 2} are often used.
+X
+i
+{\displaystyle X_{i}}
+{\displaystyle X_{i}} is here to denote the
+i
+{\displaystyle i}
+{\displaystyle i}'th marginal random variable of
+X
+{\displaystyle X}
+{\displaystyle X}. The variogram score is proper for distributions for which the
+(
+2
+p
+)
+{\displaystyle (2p)}
+{\displaystyle (2p)}'th moment is finite for all components, but is never strictly proper. Compared to the energy score, the variogram score is claimed to be more discriminative with respect to the predicted correlation structure.
+Conditional continuous ranked probability score
+[edit]
+The conditional continuous ranked probability score (Conditional CRPS or CCRPS) is a family of (strictly) proper scoring rules. Conditional CRPS evaluates a forecasted multivariate distribution
+D
+{\displaystyle D}
+{\displaystyle D} by evaluation of CRPS over a prescribed set of univariate conditional probability distributions of the predicted multivariate distribution:[23]
+C
+C
+R
+P
+S
+T
+(
+D
+,
+Y
+)
+=
+∑
+i
+=
+1
+k
+C
+R
+P
+S
+(
+P
+X
+∼
+D
+(
+X
+v
+i
+|
+X
+j
+=
+Y
+j
+for
+j
+∈
+C
+i
+)
+,
+Y
+v
+i
+)
+{\displaystyle CCRPS_{\mathcal {T}}(D,Y)=\sum _{i=1}^{k}CRPS(P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i}),Y_{v_{i}})}
+{\displaystyle CCRPS_{\mathcal {T}}(D,Y)=\sum _{i=1}^{k}CRPS(P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i}),Y_{v_{i}})}
+Here,
+X
+i
+{\displaystyle X_{i}}
+{\displaystyle X_{i}} is the
+i
+{\displaystyle i}
+{\displaystyle i}'th marginal variable of
+X
+∼
+D
+{\displaystyle X\sim D}
+{\displaystyle X\sim D},
+T
+=
+(
+v
+i
+,
+C
+i
+)
+i
+=
+1
+k
+{\displaystyle {\mathcal {T}}=(v_{i},{\mathcal {C}}_{i})_{i=1}^{k}}
+{\displaystyle {\mathcal {T}}=(v_{i},{\mathcal {C}}_{i})_{i=1}^{k}} is a set of tuples that defines a conditional specification (with
+v
+i
+∈
+{
+1
+,
+…
+,
+n
+}
+{\displaystyle v_{i}\in \{1,\ldots ,n\}}
+{\displaystyle v_{i}\in \{1,\ldots ,n\}} and
+C
+i
+⊆
+{
+1
+,
+…
+,
+n
+}
+∖
+{
+v
+i
+}
+{\displaystyle {\mathcal {C}}_{i}\subseteq \{1,\ldots ,n\}\setminus \{v_{i}\}}
+{\displaystyle {\mathcal {C}}_{i}\subseteq \{1,\ldots ,n\}\setminus \{v_{i}\}}), and
+P
+X
+∼
+D
+(
+X
+v
+i
+|
+X
+j
+=
+Y
+j
+for
+j
+∈
+C
+i
+)
+{\displaystyle P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i})}
+{\displaystyle P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i})} denotes the conditional probability distribution for
+X
+v
+i
+{\displaystyle X_{v_{i}}}
+{\displaystyle X_{v_{i}}} given that all variables
+X
+j
+{\displaystyle X_{j}}
+{\displaystyle X_{j}} for
+j
+∈
+C
+i
+{\displaystyle j\in {\mathcal {C}}_{i}}
+{\displaystyle j\in {\mathcal {C}}_{i}} are equal to their respective observations. In the case that
+P
+X
+∼
+D
+(
+X
+v
+i
+|
+X
+j
+=
+Y
+j
+for
+j
+∈
+C
+i
+)
+{\displaystyle P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i})}
+{\displaystyle P_{X\sim D}(X_{v_{i}}|X_{j}=Y_{j}{\text{ for }}j\in {\mathcal {C}}_{i})} is ill-defined (i.e. its conditional event has zero likelihood), CRPS scores over this distribution are defined as infinite. Conditional CRPS is strictly proper for distributions with finite first moment, if the chain rule is included in the conditional specification, meaning that there exists a permutation
+ϕ
+1
+,
+…
+,
+ϕ
+n
+{\displaystyle \phi _{1},\ldots ,\phi _{n}}
+{\displaystyle \phi _{1},\ldots ,\phi _{n}} of
+1
+,
+…
+,
+n
+{\displaystyle 1,\ldots ,n}
+{\displaystyle 1,\ldots ,n} such that for all
+1
+≤
+i
+≤
+n
+{\displaystyle 1\leq i\leq n}
+{\displaystyle 1\leq i\leq n}:
+(
+ϕ
+i
+,
+{
+ϕ
+1
+,
+…
+,
+ϕ
+i
+−
+1
+}
+)
+∈
+T
+{\displaystyle (\phi _{i},\{\phi _{1},\ldots ,\phi _{i-1}\})\in {\mathcal {T}}}
+{\displaystyle (\phi _{i},\{\phi _{1},\ldots ,\phi _{i-1}\})\in {\mathcal {T}}}.
+Interpretation of proper scoring rules
+[edit]
+All proper scoring rules are equal to weighted sums (integral with a non-negative weighting functional) of the losses in a set of simple two-alternative decision problems that use the probabilistic prediction, each such decision problem having a particular combination of associated cost parameters for false positive and false negative decisions.  A strictly proper scoring rule corresponds to having a nonzero weighting for all possible decision thresholds.  Any given proper scoring rule is equal to the expected losses with respect to a particular probability distribution over the decision thresholds; thus the choice of a scoring rule corresponds to an assumption about the probability distribution of decision problems for which the predicted probabilities will ultimately be employed, with for example the quadratic loss (or Brier) scoring rule corresponding to a uniform probability of the decision threshold being anywhere between zero and one. The classification accuracy score (percent classified correctly), a single-threshold scoring rule which is zero or one depending on whether the predicted probability is on the appropriate side of 0.5, is a proper scoring rule but not a strictly proper scoring rule because it is optimized (in expectation) not only by predicting the true probability but by predicting any probability on the same side of 0.5 as the true probability.[24][25][26][27][28][29]
+Examples of consistent scoring functions
+[edit]
+There are an infinite number of scoring functions including entire parameterized families of strictly consistent scoring functions for certain functionals
+T
+{\displaystyle T}
+{\displaystyle T}. The ones shown below are a selection of well known ones.
+Expectation
+[edit]
+The following scoring functions are strictly consistent for the expected value, i.e.
+T
+(
+F
+)
+=
+E
+Y
+∼
+F
+[
+Y
+]
+{\displaystyle T(F)=E_{Y\sim F}[Y]}
+{\displaystyle T(F)=E_{Y\sim F}[Y]}.
+Squared error
+[edit]
+S
+(
+x
+,
+y
+)
+=
+(
+x
+−
+y
+)
+2
+{\displaystyle S(x,y)=(x-y)^{2}}
+{\displaystyle S(x,y)=(x-y)^{2}}
+Quantiles
+[edit]
+The following scoring functions are strictly consistent for the
+α
+{\displaystyle \alpha }
+{\displaystyle \alpha }-quantile, i.e.
+T
+(
+F
+)
+=
+q
+α
+{\displaystyle T(F)=q_{\alpha }}
+{\displaystyle T(F)=q_{\alpha }} is the set of values
+q
+{\displaystyle q}
+{\displaystyle q} satisfying
+lim
+y
+↑
+q
+F
+(
+y
+)
+≤
+α
+≤
+F
+(
+q
+)
+{\displaystyle \lim _{y\uparrow q}F(y)\leq \alpha \leq F(q)}
+{\displaystyle \lim _{y\uparrow q}F(y)\leq \alpha \leq F(q)}.
+Quantile loss / pinball loss
+[edit]
+S
+(
+x
+,
+y
+)
+=
+(
+1
+{
+x
+≥
+y
+}
+−
+α
+)
+(
+x
+−
+y
+)
+{\displaystyle S(x,y)=(\mathbf {1} \{x\geq y\}-\alpha )(x-y)}
+{\displaystyle S(x,y)=(\mathbf {1} \{x\geq y\}-\alpha )(x-y)}
+Intervals
+[edit]
+The point prediction consists of a central
+(
+1
+−
+α
+)
+{\displaystyle (1-\alpha )}
+{\displaystyle (1-\alpha )} prediction interval,
+x
+=
+(
+l
+,
+u
+)
+{\displaystyle x=(l,u)}
+{\displaystyle x=(l,u)}, where the lower endpoint
+l
+{\displaystyle l}
+{\displaystyle l} predicts the
+α
+2
+{\displaystyle {\frac {\alpha }{2}}}
+{\displaystyle {\frac {\alpha }{2}}}quantile and the upper endpoint
+u
+{\displaystyle u}
+{\displaystyle u} predicts the
+1
+−
+α
+2
+{\displaystyle 1-{\frac {\alpha }{2}}}
+{\displaystyle 1-{\frac {\alpha }{2}}}quantile.
+Interval score
+[edit]
+The inverval score is a combination of the two pinball losses for the corresponding quantiles.
+S
+α
+(
+l
+,
+u
+;
+y
+)
+=
+(
+u
+−
+l
+)
++
+2
+α
+(
+l
+−
+y
+)
+1
+{
+y
+<
+l
+}
++
+2
+α
+(
+y
+−
+u
+)
+1
+{
+y
+>
+u
+}
+{\displaystyle S_{\alpha }(l,u;y)=(u-l)+{\frac {2}{\alpha }}(l-y)\,\mathbf {1} \{y<l\}+{\frac {2}{\alpha }}(y-u)\,\mathbf {1} \{y>u\}}
+{\displaystyle S_{\alpha }(l,u;y)=(u-l)+{\frac {2}{\alpha }}(l-y)\,\mathbf {1} \{y<l\}+{\frac {2}{\alpha }}(y-u)\,\mathbf {1} \{y>u\}}
+"The forecaster is rewarded for narrow prediction intervals, and he or she incurs a penalty, the size of which depends on α, if the observation misses the interval"[1]
+Applications
+[edit]
+The logarithmic rule
+Meteorological weather forecasts
+[edit]
+An example of probabilistic forecasting is in meteorology where a weather forecaster may give the probability of rain on the next day. One could note the number of times that a 25% probability was quoted, over a long period, and compare this with the actual proportion of times that rain fell. If the actual percentage was substantially different from the stated probability we say that the forecaster is poorly calibrated. A poorly calibrated forecaster might be encouraged to do better by a bonus system. A bonus system designed around a proper scoring rule will incentivize the forecaster to report probabilities equal to his personal beliefs.[3]
+In addition to the simple case of a binary decision, such as assigning probabilities to 'rain' or 'no rain', scoring rules may be used for multiple classes, such as 'rain', 'snow', or 'clear', or continuous responses like the amount of rain per day.
+The image shows an example of a scoring rule, the logarithmic scoring rule, as a function of the probability reported for the event that actually occurred. One way to use this rule would be as a cost based on the probability that a forecaster or algorithm assigns, then checking to see which event actually occurs.
+Scoring rules can be used beyond evaluation metrics to directly serve as loss function to construct estimators.[1]
+See also
+[edit]
+Coherence
+Decision rule
+Literature
+[edit]
+Strictly Proper Scoring Rules, Prediction, and Estimation. Tilmann Gneiting &Adrian E Raftery Pages 359-378, https://doi.org/10.1198/016214506000001437, pdf
+Scoring rules for continuous probability distributions, James E. Matheson, Robert L. Winkler, (1976) Scoring Rules for Continuous Probability Distributions. Management Science 22(10):1087-1096. http://dx.doi.org/10.1287/mnsc.22.10.1087
+References
+[edit]
+1 2 3 4 5 6
+Gneiting, Tilmann; Raftery, Adrian E. (2007). "Strictly Proper Scoring Rules, Prediction, and Estimation" (PDF). Journal of the American Statistical Association. 102 (447): 359–378. doi:10.1198/016214506000001437. S2CID 1878582.
+↑
+Gneiting, Tilmann (2011). "Making and Evaluating Point Forecasts". Journal of the American Statistical Association. 106 (494): 746–762. arXiv:0912.0902. doi:10.1198/jasa.2011.r10138. S2CID 88518170.
+1 2
+Bickel, E.J. (2007). "Some Comparisons among Quadratic, Spherical, and Logarithmic Scoring Rules" (PDF). Decision Analysis. 4 (2): 49–65. doi:10.1287/deca.1070.0089.
+↑
+Murphy, A.H. (1973). "A new vector partition of the probability score". Journal of Applied Meteorology. 12 (4): 595–600. Bibcode:1973JApMe..12..595M. doi:10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2.
+↑
+Bröcker, J. (2009). "Reliability, sufficiency, and the decomposition of proper scores" (PDF). Quarterly Journal of the Royal Meteorological Society. 135 (643): 1512–1519. arXiv:0806.0813. Bibcode:2009QJRMS.135.1512B. doi:10.1002/qj.456. S2CID 15880012.
+↑
+Brier, G.W. (1950). "Verification of forecasts expressed in terms of probability" (PDF). Monthly Weather Review. 78 (1): 1–3. Bibcode:1950MWRv...78....1B. doi:10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2.
+↑ Epstein, Edward S. (1969-12-01). "A Scoring System for Probability Forecasts of Ranked Categories". Journal of Applied Meteorology and Climatology. 8 (6). American Meteorological Society: 985–987. doi:10.1175/1520-0450(1969)008<0985:ASSFPF>2.0.CO;2. Retrieved 2024-05-02.
+↑ Matheson, James E.; Winkler, Robert L. (June 1976). "Scoring Rules for Continuous Probability Distributions". Management Science. 22 (10): 1087–1096. doi:10.1287/mnsc.22.10.1087.
+↑ Taillardat, Maxime; Mestre, Olivier; Zamo, Michaël; Naveau, Philippe (2016-06-01). "Calibrated Ensemble Forecasts Using Quantile Regression Forests and Ensemble Model Output Statistics" (PDF). Monthly Weather Review. 144 (6). American Meteorological Society: 2375–2393. doi:10.1175/mwr-d-15-0260.1. ISSN 0027-0644.
+↑ Bröcker, Jochen (2012). "Evaluating raw ensembles with the continuous ranked probability score". Quarterly Journal of the Royal Meteorological Society. 138 (667): 1611–1617. doi:10.1002/qj.1891. ISSN 0035-9009.
+↑ Rasp, Stephan; Lerch, Sebastian (2018-10-31). "Neural Networks for Postprocessing Ensemble Weather Forecasts". Monthly Weather Review. 146 (11). American Meteorological Society: 3885–3900. arXiv:1805.09091. doi:10.1175/mwr-d-18-0187.1. ISSN 0027-0644.
+↑ Grönquist, Peter; Yao, Chengyuan; Ben-Nun, Tal; Dryden, Nikoli; Dueben, Peter; Li, Shigang; Hoefler, Torsten (2021-04-05). "Deep learning for post-processing ensemble weather forecasts". Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences. 379 (2194) 20200092. arXiv:2005.08748. doi:10.1098/rsta.2020.0092. ISSN 1364-503X. PMID 33583263.
+↑ Countdown Regression: Sharp and Calibrated Survival Predictions, https://arxiv.org/abs/1806.08324
+↑ The Cramer Distance as a Solution to Biased Wasserstein Gradients https://arxiv.org/abs/1705.10743
+↑ Bjerregård, Mathias Blicher; Møller, Jan Kloppenborg; Madsen, Henrik (2021). "An introduction to multivariate probabilistic forecast evaluation". Energy and AI. 4 100058. Elsevier BV. doi:10.1016/j.egyai.2021.100058. ISSN 2666-5468.
+↑ Beyond Strictly Proper Scoring Rules: The Importance of Being Local https://doi.org/10.1175/WAF-D-19-0205.1
+↑ Dawid, A. Philip; Sebastiani, Paola (1 March 1999). "Coherent dispersion criteria for optimal experimental design". The Annals of Statistics. 27 (1). doi:10.1214/AOS/1018031101.
+1 2 Hyvärinen, Aapo (2005). "Estimation of Non-Normalized Statistical Models by Score Matching". Journal of Machine Learning Research. 6 (24): 695–709. ISSN 1533-7928.
+↑ Shao, Stephane; Jacob, Pierre E.; Ding, Jie; Tarokh, Vahid (2019-10-02). "Bayesian Model Comparison with the Hyvärinen Score: Computation and Consistency". Journal of the American Statistical Association. 114 (528): 1826–1837. arXiv:1711.00136. doi:10.1080/01621459.2018.1518237. ISSN 0162-1459. S2CID 52264864.
+↑ Ding, Jie; Calderbank, Robert; Tarokh, Vahid (2019). "Gradient Information for Representation and Modeling". Advances in Neural Information Processing Systems. 32: 2396–2405.
+↑ Pinson, Pierre; Tastu, Julija (2013). "Discrimination ability of the Energy score". Technical University of Denmark. Retrieved 2024-05-11.
+↑ Scheuerer, Michael; Hamill, Thomas M. (2015-03-31). "Variogram-Based Proper Scoring Rules for Probabilistic Forecasts of Multivariate Quantities*". Monthly Weather Review. 143 (4). American Meteorological Society: 1321–1334. doi:10.1175/mwr-d-14-00269.1. ISSN 0027-0644.
+↑ Roordink, Daan; Hess, Sibylle (2023). "Scoring Rule Nets: Beyond Mean Target Prediction in Multivariate Regression". Machine Learning and Knowledge Discovery in Databases: Research Track. Vol. 14170. Cham: Springer Nature Switzerland. p. 190–205. doi:10.1007/978-3-031-43415-0_12. ISBN 978-3-031-43414-3.
+↑ Leonard J. Savage. Elicitation of personal probabilities and expectations. J. of the American Stat.
+Assoc., 66(336):783–801, 1971.
+↑ Schervish, Mark J. (1989). "A General Method for Comparing Probability Assessors", Annals of Statistics 17(4) 1856–1879, https://projecteuclid.org/euclid.aos/1176347398
+↑ Rosen, David B. (1996). "How good were those probability predictions? The expected recommendation loss (ERL) scoring rule". In Heidbreder, G. (ed.). Maximum Entropy and Bayesian Methods (Proceedings of the Thirteenth International Workshop, August 1993). Kluwer, Dordrecht, The Netherlands.
+↑ Roulston, M. S., & Smith, L. A. (2002). Evaluating probabilistic forecasts using information theory. Monthly Weather Review, 130, 1653–1660. See APPENDIX "Skill Scores and Cost–Loss".
+↑ "Loss Functions for Binary Class Probability Estimation and Classification: Structure and Applications", Andreas Buja, Werner Stuetzle, Yi Shen (2005) http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.184.5203
+↑ Hernandez-Orallo, Jose; Flach, Peter; and Ferri, Cesar (2012). "A Unified View of Performance Metrics: Translating Threshold Choice into Expected Classification Loss." Journal of Machine Learning Research 13 2813–2869. http://www.jmlr.org/papers/volume13/hernandez-orallo12a/hernandez-orallo12a.pdf
+External links
+[edit]
+Video comparing spherical, quadratic and logarithmic scoring rules
+Local Proper Scoring Rules
+Scoring Rules and Decision Analysis Education
+Strictly Proper Scoring Rules
+Scoring Rules and uncertainty
+Damage Caused by Classification Accuracy and Other Discontinuous Improper Accuracy Scoring Rules
+Closed-form expressions of the continuous ranked probability score
+v
+t
+e
+Decision theoryCore concepts
+Ambiguity aversion
+Bounded rationality
+Choice architecture
+Expected utility
+Expected value
+Hyperbolic discounting
+Leximin
+Loss aversion
+Multi-attribute utility
+Path dependence
+Principle of indifference
+Prospect theory
+Rational choice theory
+Reference dependence
+Risk aversion
+Risk-seeking
+Satisficing
+Strategic dominance
+Subjective expected utility
+Sure-thing
+Utility theorem
+Decision models
+Anscombe-Aumann framework
+Causal decision
+Decision field theory
+Emotional choice
+Evidential decision
+Fuzzy-trace theory
+Intertemporal choice
+Naturalistic decision
+Normative model
+Quantum cognition
+Recognition-primed decision
+Rubicon model
+Savage's subjective expected utility model
+Decision analysis tools
+Analytic hierarchy process
+Analytic network process
+Cost–benefit analysis
+Cost-effectiveness analysis
+Cost–utility analysis
+Decision conferencing
+Decision curve analysis
+Decision rule
+Decision support system
+Decision table
+Decision tree
+Decision matrix
+Decisional balance sheet
+Gittins index
+Influence diagram
+Minimax
+MCDA
+Scoring rule
+Value of information
+perfect
+sample
+uncertainty
+Paradoxes and biases
+Allais paradox
+Certainty effect
+Cognitive bias
+Decoy effect
+Disposition effect
+Ellsberg paradox
+Endowment effect
+Framing effect
+Heuristics
+Newcomb's problem
+Pseudocertainty effect
+Rabin's paradox
+Regret
+St. Petersburg paradox
+Status quo bias
+Sunk cost
+Uncertainty and risk
+Deep uncertainty
+Exploration–exploitation
+Info-gap
+Pignistic probability
+Robust decision-making
+Related fields
+Behavioral economics
+Game theory
+Operations research
+Social choice theory
+Utility theory
+Key people
+David Blackwell
+Bruno de Finetti
+Morris H. DeGroot
+Peter C. Fishburn
+Gerd Gigerenzer
+Itzhak Gilboa
+Daniel Kahneman
+R. Duncan Luce
+Oskar Morgenstern
+Howard Raiffa
+Leonard J. Savage
+David Schmeidler
+Herbert Simon
+Amos Tversky
+John von Neumann
+Peter Wakker
+Category
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Scoring_rule&oldid=1375919887"
+Categories:
+Decision theory
+Probability assessment
+Hidden categories:
+Articles with short description
+Short description is different from Wikidata
+Wikipedia articles needing clarification from January 2026
+This page was last edited on 20 September 2026, at 21:46 (UTC).
+Page was rendered with Parsoid.
+Text is available under the Creative Commons Attribution-ShareAlike 4.0 License;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Legal & safety contacts
+Code of Conduct
+Developers
+Statistics
+Cookie statement
+Mobile view
+Wikimedia Foundation
+Powered by MediaWiki
+Search
+Search
+Toggle the table of contents
+Scoring rule
+2 languages
+Add topic

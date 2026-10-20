@@ -1,0 +1,2676 @@
+{
+  "version": 1,
+  "scope": [
+    "def-differential-privacy-and-adjacency",
+    "def-laplace-distribution",
+    "def-global-l1-sensitivity",
+    "thm-laplace-density-from-exponential-law",
+    "lem-laplace-product-density",
+    "alg-laplace-mechanism",
+    "thm-laplace-mechanism-privacy",
+    "def-exponential-mechanism-utility-sensitivity",
+    "alg-exponential-mechanism",
+    "thm-exponential-mechanism-privacy-and-utility",
+    "lem-dp-test-function-extension",
+    "thm-dp-postprocessing",
+    "lem-dp-pure-privacy-loss-kl-bound",
+    "lem-dp-approximate-kernel-purification",
+    "thm-basic-adaptive-composition",
+    "thm-advanced-adaptive-composition-standard-borel-outputs",
+    "rem-differential-privacy-scope-and-limitations",
+    "ex-add-remove-noisy-count",
+    "ex-finite-range-private-selection",
+    "ex-postprocessing-private-noisy-count",
+    "ex-record-level-versus-client-level-adjacency"
+  ],
+  "contracts": {
+    "def-differential-privacy-and-adjacency": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-laplace-distribution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definition has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate or deterministic case named in the item is treated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-global-l1-sensitivity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-laplace-density-from-exponential-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-laplace-distribution",
+          "source_section": "Definition",
+          "quote": "For every Borel set $A\\subseteq\\mathbb R$, define $$ \\operatorname{Lap}(b)(A)=\\frac12\\mu_b(A\\cap(0,+\\infty))+\\frac12\\mu_b(\\{x>0:-x\\in A\\}).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-and-weibull-survival-laws",
+          "source_section": "Statement",
+          "quote": "For $\\lambda>0$, the density $$f_\\lambda(t)=\\begin{cases}\\lambda e^{-\\lambda t},&t>0,\\\\0,&t\\le0\\end{cases}$$ defines a probability law on $\\mathbb R$ with survival $S(t)=e^{-\\lambda t}$ for $t\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "For every nonnegative Lebesgue measurable $f : V \\to [0,\\infty]$, $$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Then $R^{\\circ}$ is open and $\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue measurable with $$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$ In particular this covers the four one-dimensional face conventions in each",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $A_+=A\\cap(0,+\\infty)$ and $A_-=A\\cap(-\\infty,0)$. By [F1] and [F2], the positive mixture half contributes $\\frac12\\int_{A_+}b^{-1}e^{-x/b}\\,d\\lambda(x)$. Applying [F3] to reflection $T(x)=-x$ and $y\\mapsto\\mathbf1_{A_-}(y)b^{-1}e^{y/b}$ shows that the reflected half contributes $\\frac12\\int_{A_-}b^{-1}e^{y/b}\\,d\\lambda(y)$. On $A_+$, $e^{-x/b}=e^{-|x|/b}$; on $A_-$, $e^{y/b}=e^{-|y|/b}$. The singleton at zero has Lebesgue measure zero by [F4]. Hence $\\operatorname{Lap}(b)(A)=\\int_A(2b)^{-1}e^{-|z|/b}\\,d\\lambda(z)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The identity in step 1.1 holds for every Borel set $A$. Its integrand is nonnegative and measurable; thus every Lebesgue-null Borel set has zero $\\operatorname{Lap}(b)$ measure, and the displayed function is the claimed Radon–Nikodym density.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement has no zero-valued parameter or quantity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-laplace-product-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-laplace-density-from-exponential-law",
+          "source_section": "Statement",
+          "quote": "For every $b>0$, the probability measure $\\operatorname{Lap}(b)$ is absolutely continuous with respect to Lebesgue measure on $\\mathbb R$ and has density $$ z\\longmapsto \\frac{1}{2b}e^{-|z|/b}.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is $$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$ the sigma-algebra on $X \\times Y$ generated by the measurable rectangles of [[def-measurable-rectangle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Then: 1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of [[def-product-measure-on-sigma-finite-spaces]] is a measure on $\\mathcal A \\otimes \\mathcal B$; 2. for measurable rectangles, $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$ with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$; 3. the",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define $$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$ Then $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ generating $\\mathcal A$, and let $\\mu,\\nu$ be measures on $(X,\\mathcal A)$ that agree on $\\mathcal P$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "For each $i$, write $$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$ The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Define $f(z)=\\prod_{i=1}^d f_b(z_i)=(2b)^{-d}\\exp(-\\|z\\|_1/b)$. It is nonnegative and product-measurable. Repeated application of [F4] gives $\\int_{\\mathbb R^d} f(z)\\,d\\lambda^d(z)=\\prod_{i=1}^d\\int_{\\mathbb R}f_b(x)\\,d\\lambda(x)=1$, using [F1] for each one-dimensional integral. By [F5], $\\nu(A)=\\int_A f\\,d\\lambda^d$ is therefore a probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For a measurable rectangle $A=\\prod_{i=1}^d A_i$, repeated Tonelli integration [F4] gives $\\nu(A)=\\prod_{i=1}^d\\int_{A_i}f_b\\,d\\lambda=\\prod_{i=1}^d\\operatorname{Lap}(b)(A_i)$. The finite product law has this same rectangle value by [F3]. Rectangles form a generating pi-system by [F2]; both measures are finite, hence sigma-finite, so [F6] identifies $\\nu$ with $\\operatorname{Lap}(b)^{\\otimes d}$ on the entire product sigma-algebra. The rectangular product law also gives independence of the coordinate projections and their stated marginals by [F7].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Statement has no zero-valued parameter or quantity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "dimension one",
+          "calculation": "d=1 reduces (2b)^(-d) exp(-||z||_1/b) to (2b)^(-1) exp(-|z|/b).",
+          "result": "matches scalar density"
+        }
+      ]
+    },
+    "alg-laplace-mechanism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal D$ be the set of databases and equip it with the power-set sigma-algebra.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-global-l1-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair differences has an attained finite maximum, the global $L^1$ sensitivity of $f$ is $$ \\Delta_1 f=\\max_{D\\sim D'}\\|f(D)-f(D')\\|_1.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-laplace-distribution",
+          "source_section": "Definition",
+          "quote": "For $b>0$, let $\\mu_b$ be the probability measure on $\\mathbb R$ supported on $(0,+\\infty)$ with Lebesgue density $x\\mapsto b^{-1}e^{-x/b}$ there and zero elsewhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-products-of-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Let $(S,\\Sigma)$ and $(T_i,\\Tau_i)$ for $i<n$ be measurable spaces, with $n<\\infty$, and let $K_i:S\\to T_i$ be probability kernels with the same source.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets: $$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$ Its members are the **Borel subsets** of $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F2], $\\Delta_1 f$ is finite and nonnegative, so the zero and positive branches cover every allowed input; if $\\Delta_1 f>0$, the scale $b=\\Delta_1 f/\\varepsilon$ is positive. By [A1], [F3], and [F4], the noise vector has a probability law $\\nu=\\operatorname{Lap}(b)^{\\otimes d}$. For each database $D$, define the output law as the pushforward of $\\nu$ under $z\\mapsto f(D)+z$; the inverse translation is continuous, so [F7] makes the preimage of every Borel set Borel and this is a probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If $\\Delta_1 f=0$, assign the point mass at $f(D)$, which is a probability measure on the Borel output space. For either branch and each Borel event $A$, the evaluation $D\\mapsto K(D,A)$ is measurable because every subset of the database domain is measurable by [F1]. Thus the assignment is a probability kernel as required by [F6].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Algorithm has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Algorithm has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Algorithm assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Algorithm has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Algorithm asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Algorithm asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-laplace-mechanism-privacy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-global-l1-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair differences has an attained finite maximum, the global $L^1$ sensitivity of $f$ is $$ \\Delta_1 f=\\max_{D\\sim D'}\\|f(D)-f(D')\\|_1.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-laplace-mechanism",
+          "source_section": "Definition",
+          "quote": "If $\\Delta_1 f>0$, draw $Z$ from the finite product law $\\operatorname{Lap}(\\Delta_1 f/\\varepsilon)^{\\otimes d}$ and release $f(D)+Z$. If $\\Delta_1 f=0$, release $f(D)$ deterministically.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-laplace-product-density",
+          "source_section": "Statement",
+          "quote": "For $b>0$ and a finite integer $d\\ge1$, the finite product probability law $\\operatorname{Lap}(b)^{\\otimes d}$ on $\\mathbb R^d$ has Lebesgue density $$ z\\longmapsto (2b)^{-d}\\exp\\!\\left(-\\frac{\\|z\\|_1}{b}\\right), $$ where $\\|z\\|_1=\\sum_{i=1}^d|z_i|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "For every nonnegative Lebesgue measurable $f : V \\to [0,\\infty]$, $$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Suppose $\\Delta_1f>0$ and put $b=\\Delta_1f/\\varepsilon$. By [F2]–[F4], the output law at database $D$ has Lebesgue density $p_D(x)=(2b)^{-d}\\exp(-\\|x-f(D)\\|_1/b)$, since [F4] translates the product noise density from [F3] by $f(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every $x\\in\\mathbb R^d$, coordinatewise triangle inequalities give $\\|x-f(D')\\|_1-\\|x-f(D)\\|_1\\le\\|f(D)-f(D')\\|_1\\le\\Delta_1f$. Therefore $p_D(x)/p_{D'}(x)=\\exp((\\|x-f(D')\\|_1-\\|x-f(D)\\|_1)/b)\\le\\exp(\\Delta_1f/b)=e^\\varepsilon$. Interchanging $D,D'$ proves the reverse pointwise ratio bound; integrating both bounds over $A$ yields the two event inequalities.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "If $\\Delta_1f=0$, [F1] forces $\\|f(D)-f(D')\\|_1=0$ for every neighboring pair, hence $f(D)=f(D')$. The deterministic output laws are identical, so both event inequalities hold with $\\delta=0$ (and $\\varepsilon\\ge0$). Combining this case with step 2.1 and applying [F5] proves the result.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "one-dimensional unit sensitivity",
+          "calculation": "d=1 and Delta_1 f=1 give b=1/epsilon and a point-density ratio at most exp(1/b)=e^epsilon.",
+          "result": "event bound follows by integration"
+        }
+      ]
+    },
+    "def-exponential-mechanism-utility-sensitivity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-exponential-mechanism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-exponential-mechanism-utility-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair utility differences has an attained finite maximum, the global utility sensitivity of $u$ is $$ \\Delta_u=\\max_{D\\sim D',\\,r\\in R}|u(D,r)-u(D',r)|.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal D$ be the set of databases and equip it with the power-set sigma-algebra.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $\\Delta_u>0$ and each score $u(D,r)$ is real, [F2] makes every weight $w_D(r)$ finite and positive. The nonempty finite sum $Z_D$ is therefore finite and strictly positive. For $A\\subseteq R$, define $K(D,A)=\\sum_{r\\in A}w_D(r)/Z_D$. This is nonnegative, equals one on $R$, and is countably additive because a disjoint family of subsets of finite $R$ has only finitely many nonempty members. Thus each section is a probability measure by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every $A\\subseteq R$, $D\\mapsto K(D,A)$ is measurable because every subset of the database domain is measurable by [F4]. Hence the assignment satisfies both conditions in [F5] and is a probability kernel.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Algorithm has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Algorithm has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Algorithm assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Algorithm has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Algorithm asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Algorithm asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-exponential-mechanism-privacy-and-utility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exponential-mechanism",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal D$ be the finite-support count functions on a nonempty record universe, with add/remove-one-occurrence adjacency. Input a database $D\\in\\mathcal D$, a parameter $\\varepsilon>0$, a nonempty finite database-independent range $R$, and a real-valued utility $u:\\mathcal D\\times R\\to\\mathbb R$ with finite positive global utility sensitivity $\\Delta_u$. For each $r\\in R$, set\n$$ w_D(r)=\\exp\\!\\left(\\frac{\\varepsilon u(D,r)}{2\\Delta_u}\\right),\\qquad Z_D=\\sum_{s\\in R}w_D(s). $$\nOutput $r\\in R$ with probability $w_D(r)/Z_D$. Equip $R$ with its power-set sigma-algebra and define $K(D,B)=\\sum_{r\\in B}w_D(r)/Z_D$ for each $B\\subseteq R$; this is the probability kernel from databases to outputs.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exponential-mechanism-utility-sensitivity",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a nonempty finite set independent of the database, and let $u:\\mathcal D\\times R\\to\\mathbb R$ be a real-valued utility.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$ Also $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For every $r\\in R$, [F2] gives $w_D(r)\\le e^{\\varepsilon/2}w_{D'}(r)$, and summing over $R$ gives $Z_D\\le e^{\\varepsilon/2}Z_{D'}$. Hence $(w_D(r)/Z_D)/(w_{D'}(r)/Z_{D'})\\le e^\\varepsilon$. Interchanging $D,D'$ proves the reverse point-mass bound. Summing over any event $A\\subseteq R$ gives both $(\\varepsilon,0)$ event inequalities, so [F4] proves privacy.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F3], the maximizing set is nonempty and its elements each have weight $e^{\\varepsilon\\operatorname{OPT}_u(D)/(2\\Delta_u)}$. Let $B$ be the event in the Statement. For each $r\\in B$, its defining score inequality and [F5] imply $w_D(r)\\le e^{\\varepsilon\\operatorname{OPT}_u(D)/(2\\Delta_u)}(|R_{\\operatorname{OPT}}|/|R|)e^{-t}$. There are at most $|R|$ such elements, while the normalizer is at least the sum of the maximizing weights, namely $|R_{\\operatorname{OPT}}|e^{\\varepsilon\\operatorname{OPT}_u(D)/(2\\Delta_u)}$. Therefore the probability of $B$ is at most $e^{-t}$. If $B$ is empty its probability is zero and the same bound holds.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "two-output utility",
+          "calculation": "For R={a,b}, the two weights sum to the displayed normalizer.",
+          "result": "finite-range ratio and tail calculation apply"
+        }
+      ]
+    },
+    "lem-dp-test-function-extension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. - If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-rea",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a nonnegative simple measurable function ([[def-nonnegative-simple-measurable-function]]) on a measure space $(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and $c_j\\ge0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For each integer $m\\ge0$, put $n=2^m$ and define $g_m=\\frac1n\\sum_{j=1}^n\\mathbf1_{\\{g\\ge j/n\\}}$. Each $g_m$ is a measurable simple function and $0\\le g_m\\le g$. Every level $j/n$ counted at stage $m$ contributes the two levels $(2j-1)/(2n)$ and $2j/(2n)$ at stage $m+1$, so $g_{m+1}\\ge g_m$. The largest dyadic level not exceeding any fixed $g(x)$ differs from $g(x)$ by less than $2^{-m}$, so $g_m(x)\\uparrow g(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F1] to the $n$ level sets in step 1.1 and use [F3] on disjoint simple representations. Partition the range into $B_k=\\{k/n\\le g<(k+1)/n\\}$ for $0\\le k<n$ and $B_n=\\{g=1\\}$. Then $g_m=\\sum_{k=1}^{n-1}(k/n)\\mathbf1_{B_k}+\\mathbf1_{B_n}$, while each level set $\\{g\\ge j/n\\}$ is the disjoint union of $B_j,\\ldots,B_n$. Rearranging these finite sums gives $\\int g_m\\,dP=\\frac1n\\sum_{j=1}^nP(g\\ge j/n)\\le\\frac1n\\sum_{j=1}^n(e^\\varepsilon Q(g\\ge j/n)+\\delta)=e^\\varepsilon\\int g_m\\,dQ+\\delta$. This holds for every $m$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Let $m\\to\\infty$ in step 2.1. By [F4] and step 1.1, both nonnegative integrals converge to the corresponding integrals of $g$, so $\\int g\\,dP\\le e^\\varepsilon\\int g\\,dQ+\\delta$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-dp-postprocessing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dp-test-function-extension",
+          "source_section": "Statement",
+          "quote": "Let $P$ and $Q$ be probability measures on a measurable space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-composition-of-probability-kernels",
+          "source_section": "Definition",
+          "quote": "For probability kernels $K:(S,\\Sigma)\\to(T,\\Tau)$ and $L:(T,\\Tau)\\to(U,\\Upsilon)$, their **composition**, in the order K then L, is $$(KL)(s,A)=\\int_T L(t,A)\\,K(s,dt),\\qquad s\\in S,\\quad A\\in\\Upsilon.$$ The kernel convention is [[def-measure-kernel-and-probability-kernel]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-kernel-composition-is-well-defined-and-associative",
+          "source_section": "Statement",
+          "quote": "The composition KL of probability kernels $K:S\\to T$ and $L:T\\to U$ is a probability kernel $S\\to U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Fix ordered neighboring databases $D\\sim D'$ and an event $B$ in the output sigma-algebra of $Z$. The function $g(y)=L(y,B)$ is measurable and takes values in $[0,1]$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F3] to the event inequality for $K(D,\\cdot)$ and $K(D',\\cdot)$ with this $g$. Then [F4] identifies the two integrals with $(KL)(D,B)$ and $(KL)(D',B)$, giving $(KL)(D,B)\\le e^\\varepsilon(KL)(D',B)+\\delta$. The pair and event were arbitrary, and [F5] makes $KL$ a probability kernel, so [F1] proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-dp-pure-privacy-loss-kl-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "If $h$ is a representative of $d\\nu/d\\mu$, then $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$ More generally, if $$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$ is the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then $$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\m",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Put $$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$ The function $\\psi$ is continuous at zero: for $s\\ge1$, $$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$ Thus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by [[cor-integral-logarithm-agrees-with-natural-l",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "For probability measures $P,Q$ on one measurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$ if and only if $P=Q$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$ Also $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "In particular, if $f$ is measurable and $g$ is a Borel measurable function on its codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The standard-Borel hypotheses are explicit as required by [F1]. Since $P(A)\\le aQ(A)$ for every measurable $A$, $P\\ll Q$. Choose a Radon–Nikodym density $r=dP/dQ$ using [A1] and [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F6], $a=e^\\varepsilon\\ge1$ and $a^{-1}>0$. The inequality $P(A)\\le aQ(A)$ forces $r\\le a$ $Q$-almost everywhere: otherwise some set $E_n=\\{r\\ge a+1/n\\}$ has positive $Q$-measure and violates the inequality after integration. Similarly $Q(A)\\le aP(A)=a\\int_A r\\,dQ$ forces $r\\ge a^{-1}$ $Q$-almost everywhere, since any positive-measure set where $r\\le a^{-1}-1/n$ violates that inequality. Thus $a^{-1}\\le r\\le a$ almost everywhere.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Let $E=\\{r\\ge1\\}$, $p=P(E)$, $q=Q(E)$, and $t=p-q$. Since $P(A)-Q(A)=\\int_A(r-1)\\,dQ$, the set $E$ maximizes this difference and $E^c$ gives its negative. Hence $t=\\sup_A|P(A)-Q(A)|=\\frac12\\int|r-1|\\,dQ$. The event inequalities on $E$ and $E^c$ give $t\\le(a-1)q$ and $at\\le(a-1)(1-q)$, respectively. Adding yields $(a+1)t\\le a-1$, so $t\\le(a-1)/(a+1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "The lower bound in step 2.1 makes $P$ and $Q$ equivalent. Define $s=1/r$ on $\\{r>0\\}$ and $s=0$ on its null complement; [F7] makes it measurable. By [F3], $\\int_A s\\,dP=\\int_A sr\\,dQ=Q(A)$ for every measurable $A$, so $s=dQ/dP$. The logarithm reciprocal identity in [F6] gives $\\log s=-\\log r$ almost everywhere, and both log densities are bounded in absolute value by $\\varepsilon$; [F4] therefore gives finite divergences and $D(P\\|Q)+D(Q\\|P)=\\int(r-1)\\log r\\,dQ\\le\\varepsilon\\int|r-1|\\,dQ=2\\varepsilon t$. By [F5], $D(Q\\|P)\\ge0$, and step 3.1 gives $2\\varepsilon t\\le2\\varepsilon(a-1)/(a+1)\\le\\varepsilon(a-1)$. Therefore $D(P\\|Q)\\le\\varepsilon(a-1)=\\varepsilon(e^\\varepsilon-1)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "two-point symmetric likelihood ratio",
+          "calculation": "P=(0.6,0.4), Q=(0.4,0.6), epsilon=ln(1.5); D(P||Q)=0.2 ln(1.5) and the upper bound is 0.5 ln(1.5).",
+          "result": "inequality holds"
+        }
+      ]
+    },
+    "lem-dp-approximate-kernel-purification": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Then there is an $(\\mathcal E\\otimes\\mathcal F)$-measurable function $r:E\\times F\\to[0,\\infty]$ such that, for $\\lambda$-almost every $x$ and every $B\\in\\mathcal F$, $$M(x,B)=\\int_B r(x,y)\\,R(x,dy).$$ The exceptional set in $x$ is a single null set, independent of $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras",
+          "source_section": "Statement",
+          "quote": "Every standard-Borel space $(E,\\mathcal S)$ has a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures: if finite measures $\\mu,\\nu$ agree on $\\mathcal A$, then $\\mu=\\nu$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function $$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$ is $\\Sigma$-measurable, with infinity allowed.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define $$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$ Then $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Then $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every $x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable for every $y \\in Y$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "In particular, if $f$ is measurable and $g$ is a Borel measurable function on its codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Let $M(h,A)=(K(h,A)+L(h,A))/2$, which is a probability kernel by [F2]. For every $h$, $M(h,A)=0$ implies $K(h,A)=L(h,A)=0$, so both sections are absolutely continuous with respect to $M(h,\\cdot)$. Apply [F3] twice to obtain jointly measurable densities. Replace any value $+\\infty$ by $0$ in each density; this Borel operation preserves measurability by [F8] and changes no section measure on the common conull representation set, since each density has integral one. Call the resulting finite-valued functions $p(h,y)$ and $q(h,y)$. Let $\\mathcal C$ be the countable generating algebra in [F4], containing $Y$. Define $G$ to be the set of $h$ for which, for every $C\\in\\mathcal C$, both $K(h,C)=\\int_Cp(h,y)M(h,dy)$ and $L(h,C)=\\int_Cq(h,y)M(h,dy)$ hold, and both DP inequalities hold for $C$. By [F2], [F5], and countability of $\\mathcal C$, $G$ is measurable. It has full $\\lambda$-measure by the joint representation property and the hypothesis. For $h\\in G$, [F6] and [F7] make the density integrals finite measures; they agree with $K(h,\\cdot)$ and $L(h,\\cdot)$ on $\\mathcal C$, so [F4] gives the density representations on every measurable event.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For fixed $h\\in G$, put $\\rho=K(h,\\cdot)+L(h,\\cdot)$, a finite measure. Let $\\mathcal E_\\rho$ be the measurable sets approximable in $\\rho$-measure by members of $\\mathcal C$. Complements preserve symmetric-difference measure, and $(A\\cup B)\\mathbin\\triangle(C\\cup D)\\subseteq(A\\mathbin\\triangle C)\\cup(B\\mathbin\\triangle D)$ proves closure under finite unions. If $A_n\\in\\mathcal E_\\rho$ and $A=\\bigcup_nA_n$, put $U_N=\\bigcup_{n\\le N}A_n$ and $D_1=U_1$, $D_N=U_N\\setminus U_{N-1}$ for $N>1$. The $D_N$ are disjoint and $A=\\bigcup_ND_N$, so countable additivity and finiteness of $\\rho(A)$ give $\\rho(A\\setminus U_N)=\\sum_{j>N}\\rho(D_j)\\to0$. Approximate each of the first $N$ sets closely enough that their finite union has arbitrarily small symmetric-difference measure from $U_N$. Thus $\\mathcal E_\\rho$ is a sigma-algebra containing $\\mathcal C$, so it is the full target sigma-algebra. For any measurable $B$, choose $C_n\\in\\mathcal C$ with $\\rho(B\\mathbin\\triangle C_n)\\to0$. Then both $K(h,C_n)\\to K(h,B)$ and $L(h,C_n)\\to L(h,B)$, so the two inequalities on $\\mathcal C$ pass to every measurable $B$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Write $a=e^\\varepsilon\\ge1$ and $c=a^{-1}$. On $G$, set $p_0=\\min\\{\\max\\{p,cq\\},aq\\}$, $\\alpha=\\int(p-aq)_+\\,dM$, and $\\beta=\\int(cq-p)_+\\,dM$. These quantities are finite and measurable in $h$ by [F5] and [F8]. The sets $A_h=\\{y:p(h,y)>aq(h,y)\\}$ and $B_h=\\{y:p(h,y)<cq(h,y)\\}$ are measurable by [F7]. Step 2.1 and the density identities give $\\alpha=K(h,A_h)-aL(h,A_h)\\le\\delta$ and $a\\beta=L(h,B_h)-aK(h,B_h)\\le\\delta$. Also $p_0=p-(p-aq)_++(cq-p)_+$, so $m:=\\int p_0\\,dM=1-\\alpha+\\beta$. Hence $\\max\\{\\alpha,\\beta\\}\\le\\delta$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Define a corrected density on $G$ as follows. If $m<1$, let $t_+=(1-m)/(a-m)$ and $r=p_0+t_+(aq-p_0)$. Its denominator is positive and $0\\le t_+\\le1$ because $a\\ge1$, so $p_0\\le r\\le aq$ and $\\int r\\,dM=m+t_+(a-m)=1$. If $m>1$, let $t_-=(m-1)/(m-c)$ and $r=p_0-t_-(p_0-cq)$. Here $m-c>0$ and $0\\le t_-\\le1$ because $c\\le1$, so $cq\\le r\\le p_0$ and $\\int r\\,dM=m-t_-(m-c)=1$. If $m=1$, set $r=p_0$. These formulas are product-measurable by [F8], and in every case $cq\\le r\\le aq$ and $\\int r\\,dM=1$. Set $r=0$ off $G$ and define $K^*(h,A)=\\int_A r(h,y)M(h,dy)+\\mathbf1_{G^c}(h)L(h,A)$. By [F5], this is measurable in $h$ for each $A$; for each $h\\in G$ it is a probability measure by [F6] and the normalization, and for $h\\notin G$ it equals the probability measure $L(h,\\cdot)$. Thus $K^*$ is a probability kernel. For $h\\in G$, integrate $cq\\le r\\le aq$ and use the density representation of L to obtain the claimed two-sided pure-DP inequalities.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "For $h\\in G$, clipping changes $p$ by total integral $\\int|p-p_0|\\,dM=\\alpha+\\beta$, while correction moves $p_0$ in one direction and changes its integral by $|m-1|=|\\alpha-\\beta|$. Thus $\\int|p-r|\\,dM\\le\\alpha+\\beta+|\\alpha-\\beta|=2\\max\\{\\alpha,\\beta\\}\\le2\\delta$. For probability densities with equal integral, $\\sup_A|\\int_A(p-r)\\,dM|=\\tfrac12\\int|p-r|\\,dM$: every event integral is bounded by the positive-part integral and $\\{p\\ge r\\}$ attains it. Hence $\\operatorname{TV}(K(h,\\cdot),K^*(h,\\cdot))\\le\\delta$ on $G$. This TV function is measurable: applying the approximation argument of step 2.1 to $K+K^*$ shows its supremum may be taken over $\\mathcal C$, whose kernel evaluations are measurable. Since $G$ is conull, integration proves the asserted bound.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Statement has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "two-point epsilon-zero clipping",
+          "calculation": "P=(0.6,0.4), L=(0.4,0.6), epsilon=0, delta=0.2; clipping gives P*=L and TV(P,P*)=0.2.",
+          "result": "pure inequalities hold and TV meets delta"
+        }
+      ]
+    },
+    "thm-basic-adaptive-composition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is $$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$ the sigma-algebra on $X \\times Y$ generated by the measurable rectangles of [[def-measurable-rectangle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let $$f : X \\times Y \\to \\overline{\\mathbb R}$$ be $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function $$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$ is $\\Sigma$-measurable, with infinity allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-dp-test-function-extension",
+          "source_section": "Statement",
+          "quote": "Then every measurable function $g$ with $0\\le g\\le1$ satisfies $$ \\int g\\,dP\\le e^\\varepsilon\\int g\\,dQ+\\delta.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-composition-of-probability-kernels",
+          "source_section": "Definition",
+          "quote": "For probability kernels $K:(S,\\Sigma)\\to(T,\\Tau)$ and $L:(T,\\Tau)\\to(U,\\Upsilon)$, their **composition**, in the order K then L, is $$(KL)(s,A)=\\int_T L(t,A)\\,K(s,dt),\\qquad s\\in S,\\quad A\\in\\Upsilon.$$ The kernel convention is [[def-measure-kernel-and-probability-kernel]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-kernel-composition-is-well-defined-and-associative",
+          "source_section": "Statement",
+          "quote": "The composition KL of probability kernels $K:S\\to T$ and $L:T\\to U$ is a probability kernel $S\\to U$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Put $H_0=\\{*\\}$ and $H_i=\\mathcal Y_1\\times\\cdots\\times\\mathcal Y_i$. For fixed $D$ and $i$, define $T_i^D(h,B)=\\int_{\\mathcal Y_i}\\mathbf1_B(h,y)K_i(D,h,dy)$ for measurable $B\\subseteq H_i$. By [F4], $B_h$ is measurable; taking sections preserves the whole space, complements, and countable disjoint unions, so $B\\mapsto T_i^D(h,B)=K_i(D,h,B_h)$ is a probability measure by [F2]. By [F5], $h\\mapsto T_i^D(h,B)$ is measurable, so $T_i^D$ is a probability kernel. Starting with the point mass on $H_0$, compose these kernels using [F7]–[F8] to obtain transcript laws $\\mu_i^D$ with $\\mu_i^D(B)=\\int_{H_{i-1}}K_i(D,h,B_h)\\mu_{i-1}^D(dh)$. Every transcript-event evaluation is measurable in the database because its sigma-algebra is the power set by [F1]. No choice is used in these finite compositions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Write $E_i=\\sum_{j\\le i}\\varepsilon_j$ and $D_i=\\sum_{j\\le i}\\delta_j$, with $E_0=D_0=0$. We prove by induction that $\\mu_i^D(B)\\le e^{E_i}\\mu_i^{D'}(B)+D_i$ for every measurable $B\\subseteq H_i$; it is equality at the one-point prefix $i=0$. Suppose it holds at $i-1$, fix an event $B\\subseteq H_i$, and put $p(h)=K_i(D,h,B_h)$ and $q(h)=K_i(D',h,B_h)$. By [F2], [F4], and [F5], these are measurable and lie in $[0,1]$. The round-$i$ event inequality and $p\\le1$ imply $p(h)\\le\\min\\{1,e^{\\varepsilon_i}q(h)\\}+\\delta_i$, because $\\min\\{1,x+\\delta_i\\}\\le\\min\\{1,x\\}+\\delta_i$ for $x\\ge0$. Let $g(h)=\\min\\{1,e^{\\varepsilon_i}q(h)\\}$; it is measurable and $[0,1]$-valued. Integrating first against $\\mu_{i-1}^D$, applying [F6] to the induction hypothesis, then using $g\\le e^{\\varepsilon_i}q$, gives $\\mu_i^D(B)\\le e^{E_{i-1}}e^{\\varepsilon_i}\\int q\\,d\\mu_{i-1}^{D'}+D_{i-1}+\\delta_i=e^{E_i}\\mu_i^{D'}(B)+D_i$. The same argument with $D,D'$ interchanged proves the reverse ordered inequality. At $i=k$, [F1] gives the asserted differential-privacy guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "one round",
+          "calculation": "k=1 gives parameters (epsilon_1,delta_1), the assumed single-round guarantee.",
+          "result": "composition bound agrees"
+        }
+      ]
+    },
+    "thm-advanced-adaptive-composition-standard-borel-outputs": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$, $$ K(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "There is a unique probability measure $P$ on $$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-jointly-measurable-radon-nikodym-derivatives-for-probability-kernels",
+          "source_section": "Statement",
+          "quote": "Let $(E,\\mathcal E)$ and $(F,\\mathcal F)$ be standard Borel spaces, let $\\lambda$ be a probability measure on $E$, and let $M$ and $R$ be probability kernels from $E$ to $F$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-dp-pure-privacy-loss-kl-bound",
+          "source_section": "Statement",
+          "quote": "If $$ P(A)\\le e^\\varepsilon Q(A)\\quad\\text{and}\\quad Q(A)\\le e^\\varepsilon P(A) $$ for every measurable set $A$, then their Kullback–Leibler divergence satisfies $$ D(P\\|Q)\\le\\varepsilon(e^\\varepsilon-1).",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-dp-approximate-kernel-purification",
+          "source_section": "Statement",
+          "quote": "Then there is a probability kernel $K^*$ from $H$ to $Y$ such that for $\\lambda$-almost every $h$ and every measurable $A\\subseteq Y$, $$ e^{-\\varepsilon}L(h,A)\\le K^*(h,A)\\le e^\\varepsilon L(h,A), $$ and $$ \\int_H \\operatorname{TV}(K(h,\\cdot),K^*(h,\\cdot))\\,\\lambda(dh)\\le\\delta, $$ where $\\operatorname{TV}(P,Q)=\\sup_A",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-kl-for-probability-kernels",
+          "source_section": "Definition",
+          "quote": "Define their **conditional KL divergence with base $\\mu$** by $$D_\\mu(K\\|L):=\\int_Z D(K(z,\\cdot)\\|L(z,\\cdot))\\,\\mu(dz)\\in[0,+\\infty].$$ The integrand is measurable by [[thm-conditional-kl-is-measurable]], so this is a well-defined nonnegative extended integral.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-conditional-kl-is-measurable",
+          "source_section": "Statement",
+          "quote": "Consequently the integral used to define conditional KL is well-defined.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-azuma-hoeffding-inequality",
+          "source_section": "Statement",
+          "quote": "Then for every $t>0$, $$\\mathbb P(M_n-M_0\\ge t)\\le \\exp\\!\\left(-\\frac{2t^2}{\\sum_{k=1}^n c_k^2}\\right),$$ and the analogous lower-tail bound holds, with the zero-denominator expression interpreted as $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-dp-test-function-extension",
+          "source_section": "Statement",
+          "quote": "Suppose $\\varepsilon\\ge0$, $0\\le\\delta\\le1$, and $P(A)\\le e^\\varepsilon Q(A)+\\delta$ for every measurable set $A$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "For a real product-measurable f, the set $D=\\{s:I_{|f|}(s)<\\infty\\}$ is measurable, and its signed integral on D, extended by zero on $S\\setminus D$, is a measurable real function.",
+          "uses": [
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let $$f : X \\times Y \\to \\overline{\\mathbb R}$$ be $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.",
+          "uses": [
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. - If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-rea",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Fix neighboring databases $D,D'$. By [F2], every finite history space is standard Borel. To apply the infinite-sequence form of [F3], append after round $k$ a singleton output space and its unique probability kernel at every later round. The first $k$ coordinates of the resulting path law have exactly the desired finite transcript law; do this for $D$ and $D'$ to obtain $P$ and $Q$. Event evaluations of these laws are measurable in the database by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "We first prove the one-sided estimate from $P$ to $Q$. Set $P_0^*=Q_0$ equal to the point mass on the empty history. Recursively, after constructing the modified $D$-transcript prefix law $P_{i-1}^*$, apply [F6] to the round-$i$ pair $K_i(D,h,\\cdot),K_i(D',h,\\cdot)$ with base history law $\\lambda_i=P_{i-1}^*$. This gives a probability kernel $K_i^*$ that is pure $\\varepsilon$ relative to $K_i(D',h,\\cdot)$ in both event directions for $\\lambda_i$-almost every $h$, with $\\int\\operatorname{TV}(K_i(D,h,\\cdot),K_i^*(h,\\cdot))P_{i-1}^*(dh)\\le\\delta$. Composing the finite modified sequence by [F3] gives a law $P^*$ and its prefix laws $P_i^*$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The prefix laws $P_i^*$ and $Q_i$ are mutually absolutely continuous for each $i$. They agree at the empty history. If they are equivalent at $i-1$, then for a product-measurable event $B$ with $Q_i(B)=0$, the iterated integral formula [F3] gives $K_i(D',h,B_h)=0$ for $Q_{i-1}$-almost every $h$, hence for $P_{i-1}^*$-almost every $h$. The pure reverse inequality from step 1.2 gives $K_i^*(h,B_h)=0$, so $P_i^*(B)=0$. Reversing the two kernels proves the converse; induction gives prefix equivalence.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For each $i$, apply [F4] with base measure $P_{i-1}^*$ to obtain a jointly measurable density $r_i(h,y)$ of $K_i^*(h,\\cdot)$ with respect to $K_i(D',h,\\cdot)$ on one common conull history set. The pure event inequalities imply $e^{-\\varepsilon}\\le r_i\\le e^\\varepsilon$ almost surely there: if either bound failed on a positive-measure fiber set, some level set separated from that bound by $1/n$ would contradict one event inequality. Clip $r_i$ everywhere to $[e^{-\\varepsilon},e^\\varepsilon]$; Borel composition preserves measurability, the density is unchanged on the conull set, and $X_i(h,y)=\\ln r_i(h,y)$ is jointly measurable with $|X_i|\\le\\varepsilon$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F13",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "We prove the density formula by induction on prefix length. At the first round, [F4] gives $dP_1^*/dQ_1=r_1$. Suppose $R_{i-1}=\\prod_{j<i}r_j$ is the density on the first $i-1$ outputs. For a measurable event $A$ on the first $i$ outputs, [F3] gives $P_i^*(A)=\\int P_{i-1}^*(dh)\\int\\mathbf1_A(h,y)K_i^*(h,dy)$. For almost every $h$, [F4] replaces the inner integral by $\\int\\mathbf1_A(h,y)r_i(h,y)K_i(D',h,dy)$. Applying [F11] to the outer prefix integral with density $R_{i-1}$ yields $P_i^*(A)=\\int Q_{i-1}(dh)R_{i-1}(h)\\int\\mathbf1_A(h,y)r_i(h,y)K_i(D',h,dy)=\\int_A R_{i-1}(h)r_i(h,y)Q_i(dh,dy)$. This proves the induction and hence $dP^*/dQ=R=\\prod_{i=1}^k r_i(H_{i-1},Y_i)$. Since every factor is positive and bounded, $\\ln R=\\sum_{i=1}^kX_i(H_{i-1},Y_i)$ almost surely under both laws.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F11",
+            "F13",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "Put $m_i(h)=\\int X_i(h,y)K_i^*(h,dy)$. By the density formula and KL definition, $m_i(h)=D(K_i^*(h,\\cdot)\\|K_i(D',h,\\cdot))\\le b$ for $P_{i-1}^*$-almost every $h$, using [F5]. It is measurable by [F7] and [F12]. For every measurable prefix event $C$, the iterated-prefix identity [F3] gives $\\int_{\\{H_{i-1}\\in C\\}}X_i\\,dP^*=\\int_Cm_i(h)P_{i-1}^*(dh)$. Thus [F8] identifies $m_i(H_{i-1})$ as the conditional expectation of $X_i$ given the previous transcript. By [F14], the variables are integrable, so $M_j=\\sum_{i\\le j}(X_i-m_i(H_{i-1}))$ is a martingale. Each increment lies in the history-measurable interval $[-\\varepsilon-m_i,\\varepsilon-m_i]$, of length $2\\varepsilon$.",
+          "step": "4.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F12",
+            "F14",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "If $\\varepsilon=0$, every $X_i=0$, so $P^*=Q$ and the pure transcript has zero privacy loss. If $\\varepsilon>0$, apply [F9] to step 4.2 with $c_i=2\\varepsilon$ and $t=\\varepsilon\\sqrt{2k\\ln(1/\\delta')}$. It gives $P^*(M_k\\ge t)\\le\\delta'$. Since $\\sum_i m_i\\le kb$ almost surely, the privacy loss exceeds $\\varepsilon'=kb+t$ with probability at most $\\delta'$. For any event $A$, split it into $A\\cap\\{\\ln R\\le\\varepsilon'\\}$ and $A\\cap\\{\\ln R>\\varepsilon'\\}$; the density formula in step 4.1 bounds the first probability by $e^{\\varepsilon'}Q(A)$ and the second by $\\delta'$. Thus $P^*(A)\\le e^{\\varepsilon'}Q(A)+\\delta'$. Applying the same argument under $Q$ with the roles reversed gives $Q(A)\\le e^{\\varepsilon'}P^*(A)+\\delta'$, because the conditional kernels are pure in both directions and [F5] bounds both KL orientations.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F9",
+            "step 4.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "We compare $P$ and $P^*$ in total variation. For $i=0,\\ldots,k$, let $H_i$ be the transcript law that uses the modified $D$ kernels for rounds $1,\\ldots,i$ and the original $D$ kernels for rounds $i+1,\\ldots,k$. Consecutive laws share the modified prefix through round $i-1$, whose law is $P_{i-1}^*$, and differ only in the round-$i$ kernel; after that round they use the same continuation kernels. For any final event, integrating that common continuation gives a measurable conditional probability $g(h,y)$ in $[0,1]$ by [F12]. The two-sided test-function bound [F10] and the integrated TV bound in step 1.2 yield $\\operatorname{TV}(H_{i-1},H_i)\\le\\delta$. The triangle inequality gives $\\operatorname{TV}(P,P^*)\\le k\\delta$, hence $P(A)\\le P^*(A)+k\\delta$. Combining with step 5.1 proves $P(A)\\le e^{\\varepsilon'}Q(A)+k\\delta+\\delta'$.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F10",
+            "F12",
+            "step 1.2",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7.1",
+          "claim": "Repeat steps 1.2–6.1 with $D'$ as the modified side and $D$ as the reference side. This gives $Q(A)\\le e^{\\varepsilon'}P(A)+k\\delta+\\delta'$. The ordered pair and event were arbitrary, so [F1] proves the stated differential-privacy guarantee. The condition $k\\delta+\\delta'\\le1$ keeps the additive parameter in its declared nontrivial range; no step weakens the claimed epsilon.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 5.1",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "zero epsilon",
+          "calculation": "epsilon=0 makes each likelihood ratio 1 and epsilon-prime=0.",
+          "result": "separate zero-epsilon case applies"
+        }
+      ]
+    },
+    "rem-differential-privacy-scope-and-limitations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Remark has no empty-object parameter or empty-case assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Remark has no zero-valued parameter or quantity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Remark assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Remark has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Remark asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Remark asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-add-remove-noisy-count": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "A database is a function $D:U\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(D)=\\{u\\in U:D(u)\\ne0\\}$; $D(u)$ is the number of occurrences of record $u$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-global-l1-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair differences has an attained finite maximum, the global $L^1$ sensitivity of $f$ is $$ \\Delta_1 f=\\max_{D\\sim D'}\\|f(D)-f(D')\\|_1.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-laplace-mechanism",
+          "source_section": "Definition",
+          "quote": "If $\\Delta_1 f>0$, draw $Z$ from the finite product law $\\operatorname{Lap}(\\Delta_1 f/\\varepsilon)^{\\otimes d}$ and release $f(D)+Z$. If $\\Delta_1 f=0$, release $f(D)$ deterministically.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-laplace-mechanism-privacy",
+          "source_section": "Statement",
+          "quote": "For every finite-dimensional query $f:\\mathcal D\\to\\mathbb R^d$ with $d\\ge1$ and finite global $L^1$ sensitivity, and every $\\varepsilon>0$, the Laplace mechanism is $(\\varepsilon,0)$-differentially private under add/remove adjacency.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "If $D'$ is obtained from $D$ by adding one occurrence of $u$, then $f(D')-f(D)=P(u)\\in\\{0,1\\}$; removing one occurrence gives the negative of this change. Thus every adjacent difference has absolute value at most $1$. The empty database and the database containing only $u_0$ are neighbors and their counts differ by $1$, so the maximum is attained and $\\Delta_1f=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F3], the scalar release uses scale $\\Delta_1f/\\varepsilon=1/\\varepsilon$ and is exactly the stated noisy count. This query has finite dimension one and sensitivity one, so [F4] proves its $(\\varepsilon,0)$ guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "empty versus one satisfying record",
+          "calculation": "f(empty)=0 and f({u0})=1 for a satisfying record u0.",
+          "result": "sensitivity one is attained"
+        }
+      ]
+    },
+    "ex-finite-range-private-selection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "A database is a function $D:U\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(D)=\\{u\\in U:D(u)\\ne0\\}$; $D(u)$ is the number of occurrences of record $u$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exponential-mechanism-utility-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair utility differences has an attained finite maximum, the global utility sensitivity of $u$ is $$ \\Delta_u=\\max_{D\\sim D',\\,r\\in R}|u(D,r)-u(D',r)|.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-exponential-mechanism",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal D$ be the finite-support count functions on a nonempty record universe, with add/remove-one-occurrence adjacency. Input a database $D\\in\\mathcal D$, a parameter $\\varepsilon>0$, a nonempty finite database-independent range $R$, and a real-valued utility $u:\\mathcal D\\times R\\to\\mathbb R$ with finite positive global utility sensitivity $\\Delta_u$. For each $r\\in R$, set\n$$ w_D(r)=\\exp\\!\\left(\\frac{\\varepsilon u(D,r)}{2\\Delta_u}\\right),\\qquad Z_D=\\sum_{s\\in R}w_D(s). $$\nOutput $r\\in R$ with probability $w_D(r)/Z_D$. Equip $R$ with its power-set sigma-algebra and define $K(D,B)=\\sum_{r\\in B}w_D(r)/Z_D$ for each $B\\subseteq R$; this is the probability kernel from databases to outputs.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-mechanism-privacy-and-utility",
+          "source_section": "Statement",
+          "quote": "For $\\varepsilon>0$, use weights $w_D(r)=\\exp(\\varepsilon u(D,r)/(2\\Delta_u))$ and normalize them over $R$ as in the exponential mechanism.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For the first utility, every score is independent of $D$, so every adjacent-pair difference is zero and $\\Delta_u=0$ by [F2]. This fails the positive-sensitivity hypothesis in [F3], so the algorithm is not defined for that utility.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For the second utility, adding or removing a record other than $u_*$ leaves $s(D)$ unchanged; adding or removing $u_*$ changes it by at most one. The empty database and the database with one occurrence of $u_*$ are neighbors and change $s$ from zero to one. The score at $a$ is constant, and the score at $b$ changes by exactly the change in $s$, so the maximum adjacent score difference is attained and equals $\\Delta_u=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "With $\\Delta_u=1$, the weights are $w_D(a)=e^{\\varepsilon/2}$ and $w_D(b)=e^{\\varepsilon(1-s(D))/2}$. Normalizing their sum gives the displayed selection probability. Since the range is finite nonempty and the sensitivity is positive, [F4] proves the privacy claim.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example has no positive integer or one-unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate or deterministic case named in the item is treated in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "s=0 and s=1",
+          "calculation": "s=0 gives P(a)=1/2; s=1 gives P(a)=e^(epsilon/2)/(e^(epsilon/2)+1).",
+          "result": "matches normalized weights"
+        }
+      ]
+    },
+    "ex-postprocessing-private-noisy-count": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "For $u\\in U$, let $\\mathbf 1_{\\{u\\}}$ be the function that is one at $u$ and zero elsewhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-global-l1-sensitivity",
+          "source_section": "Definition",
+          "quote": "When the set of adjacent-pair differences has an attained finite maximum, the global $L^1$ sensitivity of $f$ is $$ \\Delta_1 f=\\max_{D\\sim D'}\\|f(D)-f(D')\\|_1.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-laplace-mechanism-privacy",
+          "source_section": "Statement",
+          "quote": "For every finite-dimensional query $f:\\mathcal D\\to\\mathbb R^d$ with $d\\ge1$ and finite global $L^1$ sensitivity, and every $\\varepsilon>0$, the Laplace mechanism is $(\\varepsilon,0)$-differentially private under add/remove adjacency.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets: $$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$ Its members are the **Borel subsets** of $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dp-postprocessing",
+          "source_section": "Statement",
+          "quote": "Let $K$ be an $(\\varepsilon,\\delta)$-differentially private probability kernel from databases to a measurable space $Y$, and let $L$ be a data-independent probability kernel from $Y$ to a measurable space $Z$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Adding or removing a record $u$ changes $f(D)$ by $P(u)\\in\\{0,1\\}$ in absolute value. Every neighboring difference is at most one, and the empty database versus the singleton database containing $u_0$ attains one. Thus $\\Delta_1f=1$ by [F1] and [F2], and [A1, F3] gives the corresponding Laplace law, so the noisy count has noise scale $1/\\varepsilon$ and is $(\\varepsilon,0)$-DP.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Define $\\phi(x)=\\mathbf1_{\\{x\\ge c\\}}$. Its preimages of $\\{1\\}$ and $\\{0\\}$ are $[c,+\\infty)$ and $(-\\infty,c)$, respectively, so [F4] makes $\\phi$ Borel measurable. The deterministic kernel $L(x,B)=\\mathbf1_B(\\phi(x))$ on $\\{0,1\\}$ is a probability kernel and is independent of the database. Applying [F5] to the noisy-count release proves that the threshold output retains the same $(\\varepsilon,0)$ guarantee.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the zero parameter or value case stated in the item is addressed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the degenerate or deterministic case named in the item is treated in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "threshold at c",
+          "calculation": "phi(c)=1 and phi(x)=0 for x<c; preimages are [c,infinity) and (-infinity,c).",
+          "result": "both preimages are Borel"
+        }
+      ]
+    },
+    "ex-record-level-versus-client-level-adjacency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Two databases $D,D'\\in\\mathcal D$ are neighbors, written $D\\sim D'$, when $D'=D+\\mathbf 1_{\\{u\\}}$ or $D=D'+\\mathbf 1_{\\{u\\}}$ for some $u\\in U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-differential-privacy-scope-and-limitations",
+          "source_section": "Remark",
+          "quote": "It does not by itself define client-level or local privacy, and keeping data on a device or applying secure aggregation does not establish the event inequalities in this definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "List the client’s 100 occurrences as $u_1,\\ldots,u_{100}$, with repetitions allowed. For $j=0,\\ldots,100$, let $D_j=D_0+\\sum_{\\ell=1}^{j}\\mathbf1_{\\{u_\\ell\\}}$. Then $D_{j-1}$ and $D_j$ differ by adding one occurrence, so [F1] makes each consecutive pair neighbors.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The count-function difference between $D_0$ and $D_{100}$ has total absolute count $\\\\sum_{u\\in U}|D_{100}(u)-D_0(u)|=100$, counting repeated contributions with multiplicity. A single add/remove neighbor pair has this total equal to $1$ by [F1]. Hence the full contribution is not a record-level neighboring step. Treating it as one step changes the adjacency relation, and [F2] says that any claimed client-level guarantee needs that relation and a proof under it.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the empty event or database case is covered."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example has no zero-valued parameter or quantity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-coordinate, one-round, one-occurrence, or two-point case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example assumes no degenerate limiting case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example has no interval parameter with endpoint cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the declared axiom branch is stated and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "case": "100 record occurrences",
+          "calculation": "The full contribution has count-function L1 difference 100 and a path of 100 single-occurrence changes.",
+          "result": "not one record neighbor step"
+        }
+      ]
+    }
+  },
+  "excluded_escalations": [
+    {
+      "item": "thm-basic-and-advanced-composition",
+      "reason": "The broad arbitrary-measurable-output advanced clause is unresolved and remains explicitly escalated; no proof contract is fabricated."
+    }
+  ]
+}

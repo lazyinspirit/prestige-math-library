@@ -1,0 +1,201 @@
+{
+  "group": "af",
+  "batches": [
+    "97"
+  ],
+  "pages_read": [
+    "discrete-masked-diffusion-and-reverse-generation",
+    "discrete-masked-diffusion-and-reverse-generation-examples"
+  ],
+  "items_read": [
+    "def-finite-masking-diffusion-chain",
+    "lem-finite-state-kernel-error-controls-mixtures",
+    "lem-finite-product-kl-additivity",
+    "thm-finite-chain-reverse-kernel-error-telescope",
+    "lem-finite-masking-chain-is-well-defined",
+    "alg-finite-grid-masked-diffusion-sampler",
+    "lem-finite-grid-masked-sampler-is-well-defined",
+    "thm-masking-chain-posterior",
+    "lem-finite-masking-path-reversal-factorization",
+    "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+    "def-finite-masked-diffusion-generative-model",
+    "lem-finite-masked-generative-joint-law-is-normalized",
+    "lem-forward-path-is-admissible-for-finite-masked-model",
+    "cor-masked-diffusion-finite-elbo-cross-entropy",
+    "rem-discrete-diffusion-factorization-and-endpoint-limits",
+    "ex-finite-chain-model-error-accumulates-with-zero-mesh-error",
+    "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+    "ex-masked-diffusion-single-token-posterior"
+  ],
+  "conventions": [
+    {
+      "convention": "V is finite and nonempty, m is outside V, L,N≥1, and the survival schedule strictly decreases from α₀=1 to αN=0. Forward masking is independent across coordinates conditional on the clean string.",
+      "fixed_by": "def-finite-masking-diffusion-chain",
+      "matters_for": [
+        "thm-masking-chain-posterior",
+        "lem-forward-path-is-admissible-for-finite-masked-model",
+        "cor-masked-diffusion-finite-elbo-cross-entropy",
+        "cex-factorized-reverse-kernel-fails-for-correlated-tokens"
+      ]
+    },
+    {
+      "convention": "Reverse step j maps level j to j−1; all coordinate updates use the same current state and are conditionally independent. The sampler starts at m^L and c₁=1 removes all remaining masks.",
+      "fixed_by": "alg-finite-grid-masked-diffusion-sampler",
+      "matters_for": [
+        "lem-finite-grid-masked-sampler-is-well-defined",
+        "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "def-finite-masked-diffusion-generative-model"
+      ]
+    },
+    {
+      "convention": "The reverse-KL identity uses risks conditional on the positive event that the particular coordinate is masked; zero predicted true-token probability gives infinite cross-entropy and KL.",
+      "fixed_by": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+      "matters_for": [
+        "cor-masked-diffusion-finite-elbo-cross-entropy",
+        "rem-discrete-diffusion-factorization-and-endpoint-limits"
+      ]
+    },
+    {
+      "convention": "The finite ELBO corollary assumes full-support token predictions at every masked state and AC for the cited library KL theorem; exact endpoint prior and decoder factors equal one on forward-positive paths.",
+      "fixed_by": "cor-masked-diffusion-finite-elbo-cross-entropy",
+      "matters_for": [
+        "rem-discrete-diffusion-factorization-and-endpoint-limits"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-masking-chain-posterior",
+      "statement": "For a fixed clean sequence x and 0≤s<t≤N, on every positive-probability current state conditional on x, the earlier-state posterior factors across coordinates, copies unmasked tokens, and at a masked coordinate assigns probability (αs−αt)/(1−αt) to xᵢ and (1−αs)/(1−αt) to m.",
+      "used_by": [
+        "lem-finite-masking-path-reversal-factorization",
+        "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+        "ex-masked-diffusion-single-token-posterior"
+      ]
+    },
+    {
+      "id": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+      "statement": "For the stated finite forward chain and learned product reverse kernels, the sum of expected conditional reverse KL contributions equals ΣⱼΣᵢ(αⱼ₋₁−αⱼ)Rⱼ,ᵢ as an equality of extended nonnegative quantities, where Rⱼ,ᵢ is conditional masked-token cross-entropy.",
+      "used_by": [
+        "cor-masked-diffusion-finite-elbo-cross-entropy",
+        "rem-discrete-diffusion-factorization-and-endpoint-limits"
+      ]
+    },
+    {
+      "id": "lem-forward-path-is-admissible-for-finite-masked-model",
+      "statement": "Under full-support clean-token predictions at every masked reverse state, for each clean x the finite model evidence satisfies 0<Zx≤1, the forward path law is supported where the model posterior is positive, and its required absolute weighted logarithm sum is finite.",
+      "used_by": [
+        "cor-masked-diffusion-finite-elbo-cross-entropy"
+      ]
+    },
+    {
+      "id": "lem-finite-grid-masked-sampler-is-well-defined",
+      "statement": "The stated reverse coordinate product rows are probability vectors; composing the N kernels from the point mass at m^L gives a normalized finite law whose final state lies in V^L because c₁=1.",
+      "used_by": [
+        "def-finite-masked-diffusion-generative-model",
+        "lem-finite-masked-generative-joint-law-is-normalized",
+        "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "lem-forward-path-is-admissible-for-finite-masked-model"
+      ]
+    },
+    {
+      "id": "lem-finite-product-kl-additivity",
+      "statement": "For r≥1 finite nonempty coordinate alphabets and probability vectors uₖ,vₖ, D(⊗ₖuₖ‖⊗ₖvₖ)=ΣₖD(uₖ‖vₖ), including infinite values.",
+      "used_by": [
+        "thm-masked-diffusion-kl-reduces-to-cross-entropy"
+      ]
+    },
+    {
+      "id": "thm-finite-chain-reverse-kernel-error-telescope",
+      "statement": "For N≥1 pairs of probability kernels on a finite nonempty state space, initial TV error at most εinit and uniform row errors at most εⱼ imply endpoint TV error at most min{1, εinit+Σⱼεⱼ}.",
+      "used_by": [
+        "ex-finite-chain-model-error-accumulates-with-zero-mesh-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise normalized probability-kernel rows and finite-state kernel interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum TV convention in the mixture bound, telescope, and accumulated-error example.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-kullback-leibler-divergence",
+      "used_for": "Directional finite KL, natural logarithms, zero-source terms, and singular-support infinity convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-total-variation-coupling-and-kernel-contraction",
+      "used_for": "Contraction under the common kernel in the reverse error telescope.",
+      "opened": true
+    },
+    {
+      "id": "def-variational-family-and-elbo",
+      "used_for": "Exact support-domination, finite positive evidence, and absolute-log-integrability requirements for admissibility.",
+      "opened": true
+    },
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "used_for": "Admissible ELBO decomposition and lower bound, retaining its AC qualification for library KL.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicitly retained AC assumption in the finite ELBO corollary.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+      "concern": "Fact F5 says “the finite feature/label/action spaces”. The action space is Δ(V), which is infinite whenever |V|≥2. Proof step 1.1 correctly equips it with its inherited Borel sigma-algebra and proves loss measurability, so this is a wording defect in F5 rather than a failure of the argument.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "The Definition contains “Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]”. These hyperlinks interrupt the complete defining section, contrary to the supplied uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-variation-distance-for-probability-laws",
+      "finding": "The Definition includes “([[def-probability-measure]])” and later “[[lem-total-variation-half-l1-formula-on-a-countable-space]]” inside the defining section. These violate the supplied requirement to move all defining-section hyperlinks to an immediately following references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-kullback-leibler-divergence",
+      "finding": "The Definition includes “[[def-finite-f-divergence]]” and “[[lem-finite-kl-generator-is-admissible]]” within its final defining paragraph. The supplied uninterrupted-statement instruction requires these links after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-variational-family-and-elbo",
+      "finding": "The Definition contains supplier links within its mathematical exposition, including “[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]” and “[[def-natural-logarithm]]”. They have not been moved into a following Definition references section as required by the supplied editorial instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-elbo-kl-decomposition",
+      "finding": "The Statement begins “Let $\\mu,\\gamma,Z,\\pi,q$ satisfy [[def-variational-family-and-elbo]]”. The inline supplier hyperlink interrupts the Statement, contrary to the supplied uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The Definition's displayed axiom includes “([[def-choice-function]])” before its written-out formulation. This hyperlink remains inside the complete Definition rather than a following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "discrete-masked-diffusion-and-reverse-generation",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Read the supplier page and the current supervised-problem definition, risk definition, and measurability lemma against the consuming theorem. Finite discrete feature and label spaces, Borel Δ(V), a measurable singleton predictor class, and measurable nonnegative extended cross-entropy satisfy the actual supplier hypotheses. Conditioning uses an event of probability 1−αⱼ>0. The F5 wording concern does not alter this faithful mathematical use."
+    }
+  ]
+}

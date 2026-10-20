@@ -1,0 +1,2086 @@
+{
+  "version": 1,
+  "scope": [
+    "def-proper-scoring-rule",
+    "lem-jensen-for-simplex-pairs",
+    "lem-negative-root-power-is-convex",
+    "def-probability-calibration",
+    "lem-finite-label-conditional-probability-function",
+    "thm-log-and-brier-strict-propriety",
+    "cor-any-feature-induces-calibrated-forecast",
+    "thm-posterior-forecast-minimizes-scoring-risk",
+    "def-classification-calibration-of-a-surrogate",
+    "thm-binned-calibration-estimator-limits",
+    "lem-binary-zero-one-risk-excess-with-zero-tie",
+    "thm-surrogate-regret-controls-classification-regret",
+    "ex-multiclass-calibration-notions-differ",
+    "ex-calibrated-constant-prior-forecast",
+    "ex-fixed-bin-ece-underestimates-calibration-error",
+    "ex-calibrated-coarsened-risk-score-is-low-information"
+  ],
+  "contracts": {
+    "def-proper-scoring-rule": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "binary simplex boundary",
+          "result": "For p=(1,0), q=(0,1), the log loss is +infinity while the truthful log loss is 0; the Brier expected-loss difference is 2."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 excludes an empty label set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement explicitly sets -log(0)=+infinity and defines zero-probability terms as zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K is an integer at least 2; forecasts and distributions may be simplex vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Point-mass label distributions are covered by the explicit p_j=0 convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The log-score endpoint q_j=0 and the whole simplex boundary are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-jensen-for-simplex-pairs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]). Then: 1. *",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let $(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be continuous ([[def-metric-con",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **prob",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. - If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\O",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a nonnegative simple measurable function ([[def-nonnegative-simple-measurable-function]]) on a measure space $(X,\\m",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost ",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $Z$ has finite range $z_1,\\ldots,z_m\\in C$ with probabilities $p_1,\\ldots,p_m$, then [F3] gives $\\mathbb E Z=\\sum_i p_i z_i$, a convex combination in $C$. Joint convexity proves $\\psi(\\mathbb E Z)\\le\\sum_i p_i\\psi(z_i)=\\mathbb E\\psi(Z)$ by induction on the number of positive weights: combine the first $m-1$ points into their normalized convex average, apply the induction hypothesis, then apply two-point convexity with weights $1-p_m$ and $p_m$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For $n\\ge1$ set $D_n=\\{(m_1/n,\\ldots,m_K/n):m_i\\in\\mathbb N_0,\\sum_i m_i=n\\}\\subseteq\\Delta_K$. This is a finite set with a canonical lexicographic order. For $p\\in\\Delta_K$, put $m_i=\\lfloor np_i\\rfloor$ for $i<K$ and $m_K=n-\\sum_{i<K}m_i$. Then $m_K\\ge0$, the coordinates sum to $n$, and the first $K-1$ coordinate errors are below $1/n$ while the last is below $(K-1)/n$. Thus some $q\\in D_n$ has $\\|p-q\\|_2<\\sqrt{K(K-1)}/n$. The product grid $D_n\\times D_n$ therefore approximates every point of $C$ within $2K/n$. List its finitely many points canonically as $c_{n,1},\\ldots,c_{n,m_n}$ and assign each point of $C$ to the first ball of radius $2K/n$ containing it. The cells are Borel by [F5]; replacing $Z$ on each cell by its center defines a measurable finite-range $Z_n\\in C$ with $\\|Z_n-Z\\|_2<2K/n$ everywhere. The grid, order and assignment are explicit, so no choice axiom is used.",
+          "inputs": [
+            "F1",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Step 1.1 gives $\\mathbb E Z_n\\in C$ for every $n$. Each coordinate of $Z_n$ and $Z$ is bounded by $1$, so dominated convergence [F4] gives $\\mathbb E Z_n\\to\\mathbb E Z$ coordinatewise; because the coordinate constraints defining $C$ are closed, $\\mathbb E Z\\in C$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "By [F2], $\\psi$ is uniformly continuous on $C$. Choose $\\delta>0$ so that points within distance $\\delta$ have $\\psi$-values within $1$, and then choose $n$ with $2K/n<\\delta$. The finite grid in step 1.2 is a $\\delta$-net, so $|\\psi(z)|\\le1+\\max_{c\\in D_n\\times D_n}|\\psi(c)|$ for every $z\\in C$. This is a common finite bound. Since $\\|Z_n-Z\\|_2\\to0$, continuity gives $\\psi(Z_n)\\to\\psi(Z)$ pointwise; [F4] then gives $\\mathbb E\\psi(Z_n)\\to\\mathbb E\\psi(Z)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Applying step 1.1 to each $Z_n$ gives $\\psi(\\mathbb E Z_n)\\le\\mathbb E\\psi(Z_n)$. By continuity of $\\psi$ and steps 2.1 and 2.2, taking limits proves $\\psi(\\mathbb E Z)\\le\\mathbb E\\psi(Z)$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "constant vector",
+          "result": "For Z=(u,v) almost surely, E Z=(u,v), so Jensen holds with equality."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 and the probability space has total mass one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero convex weights are omitted in the finite-range induction; simplex coordinates may be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K=2 is included and the product grid construction works for every K>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A point-mass Z gives equality; boundary simplex vectors are approximated by the explicit grid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The convex-combination proof includes lambda=0 and lambda=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-negative-root-power-is-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and $$(a^x)'=a^x\\log a.$$ For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and different",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define $$a^x:=\\exp(x\\log a).$$ For the supplementary zero-base convention, define $0^x:=0$ when $x>0$. The expressions $0^0$ and $0^x$ for $x<0$ are ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$, $$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotonicity-from-the-derivative",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]), let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ ",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\alpha=1/s$, so $0<\\alpha\\le1$. If $\\alpha=1$, then $\\varphi_s(t)=-t$ is affine and hence convex. If $0<\\alpha<1$, on $(0,\\infty)$ the derivative formula [F1] gives $\\varphi_s''(t)=\\alpha(1-\\alpha)t^{\\alpha-2}\\ge0$. Thus [F2] makes $\\varphi_s$ convex on $(0,\\infty)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the second case $t^\\alpha\\to0$ as $t\\downarrow0$. Indeed, for $\\varepsilon>0$ put $\\delta=\\varepsilon^{1/\\alpha}$. The derivative $\\alpha t^{\\alpha-1}$ is positive on $(0,\\infty)$, so [F5] makes $t\\mapsto t^\\alpha$ increasing there; if $0<t<\\delta$, then $t^\\alpha<\\delta^\\alpha=\\varepsilon$ by [F4]. Thus $\\varphi_s$ is continuous at zero with the stated value. For $a,b\\ge0$ and $0\\le\\lambda\\le1$, apply the convexity inequality on $(0,\\infty)$ to $a+\\varepsilon$ and $b+\\varepsilon$, then let $\\varepsilon\\downarrow0$; continuity at zero and on positive inputs gives the inequality on $[0,\\infty)$. In the affine case the same inequality holds directly.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "s=1",
+          "result": "phi_1(t)=-t is affine and convex."
+        },
+        {
+          "case": "s=2",
+          "result": "phi_2(t)=-sqrt(t) has second derivative 1/(4 t^(3/2))>0 for t>0 and continuous value 0 at t=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "s>=1 and the domain [0,infinity) is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The endpoint t=0 is proved by an epsilon-delta argument and convexity is extended to it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The endpoint exponent s=1 is handled as an affine case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The convexity calculation covers every t>0 and then the zero endpoint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Both s=1 and t=0 are handled explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "def-probability-calibration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "reliable forecast",
+          "result": "If Y has law p and G is constantly p, each event identity reduces to p_j 1_{p in B}=p_j 1_{p in B}."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 and a probability space are required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Forecast coordinates may be zero; indicators and event integrals remain defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 is required; all label events are quantified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Constant forecasts are permitted by the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The forecast simplex includes coordinates 0 and 1, and smallest-index ties are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-finite-label-conditional-probability-function": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **prob",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version ",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-conditional-expectation-exists-by-radon-nikodym",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every real integrable $X$ on $(\\Omega,\\mathcal F,P)$ and every sub-sigma-algebra $\\mathcal G$, a conditional-expectation version of $X$ given $\\mathcal G$ exists.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, pres",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent: 1. $f=g$ almost everywhere; 2. for every measurable $A$, $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$ For integrable real or complex",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. 1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined pointwise, then $f+g$ is measurable. 2. If $c\\in\\mathbb R$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each $j$, choose a version $Z_j$ of $\\mathbb E[\\mathbf1_{\\{Y=y_j\\}}\\mid\\mathcal G]$, which exists by [A1,F1]. Order preservation and preservation of constants give $0\\le Z_j\\le1$ almost surely by [F2]. Set $N_j=\\{Z_j<0\\}\\cup\\{Z_j>1\\}\\in\\mathcal G$ and $Z'_j=Z_j\\mathbf1_{N_j^c}$. Then $Z'_j$ is $\\mathcal G$-measurable, takes values in $[0,1]$ everywhere, and equals $Z_j$ almost surely. By [F3], it has the same event integrals, so it remains a conditional-expectation version. Linearity shows that $\\sum_jZ_j$ is a version of the conditional expectation of $\\sum_j\\mathbf1_{\\{Y=y_j\\}}=1$; the constant 1 is another version, so [F6] gives $\\sum_jZ_j=1$ almost surely. Hence $\\sum_jZ'_j=1$ almost surely.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each label $j$ and rational $q\\in\\mathbb Q\\cap[0,1]$, the event $\\{Z'_j<q\\}\\in\\mathcal G$ equals $X^{-1}(A_{j,q})$ for some $A_{j,q}\\in\\Sigma_X$ by [F5]. AC permits choosing these sets for the countable family of label-rational pairs. Define $\\tilde\\eta_j(x)=\\inf(\\{q\\in\\mathbb Q\\cap[0,1]:x\\in A_{j,q}\\}\\cup\\{1\\})$. For $0<t\\le1$, $\\{x:\\tilde\\eta_j(x)<t\\}=\\bigcup_{q<t}A_{j,q}$; for $t\\le0$ this sublevel set is empty and for $t>1$ it is all of $\\mathsf X$. Thus each $\\tilde\\eta_j$ is measurable and takes values in $[0,1]$ by [F4,F7].",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For every $j$ and $\\omega$, the rationals $q$ satisfying $X(\\omega)\\in A_{j,q}$ are exactly those with $Z'_j(\\omega)<q$. Their infimum is $Z'_j(\\omega)$ when this value is below $1$; at value $1$ the rational set is empty and the filler $1$ gives the same value. Thus $\\tilde\\eta_j(X)=Z'_j$ everywhere. The measurable set $D=\\{x:\\sum_j\\tilde\\eta_j(x)=1\\}$ is well-defined by [F7]. Define $\\eta(x)=(\\tilde\\eta_1(x),\\ldots,\\tilde\\eta_K(x))$ on $D$ and $\\eta(x)=(1,0,\\ldots,0)$ off $D$. Then $\\eta$ is measurable, takes values in $\\Delta_K$ everywhere, and $\\eta_j(X)=Z'_j$ almost surely because $\\sum_jZ'_j=1$ almost surely.",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For every $A\\in\\Sigma_X$ and label index $j$, the event $\\{X\\in A\\}$ belongs to $\\mathcal G$. The conditional-expectation identity [F1] and almost-sure equality [F3] therefore give $P(X\\in A,Y=y_j)=\\mathbb E[\\mathbf1_{\\{X\\in A\\}}Z_j]=\\mathbb E[\\mathbf1_{\\{X\\in A\\}}Z'_j]=\\mathbb E[\\mathbf1_{\\{X\\in A\\}}\\eta_j(X)].$ This is the claimed event identity for every class.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "two labels on a singleton feature",
+          "result": "If P(Y=y_1)=p, then eta=(p,1-p) satisfies the single feature-event identity for both labels."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 and total mass one ensure the label family and probability space are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Conditional probabilities equal to 0 or 1 are clipped to the closed interval and handled by the rational-cut filler."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K=2 and all finite K>=2 are covered by the coordinatewise construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A one-point instance space and null label events are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Values 0 and 1 are explicitly handled by rational cuts and the filler 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is stated and used for conditional-expectation existence and countable representative selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "thm-log-and-brier-strict-propriety": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\t",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\t",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $t>1$, then $1/u<1$ for $1<u\\le t$, so [F2] gives $\\log t<t-1$. If $0<t<1$, then $1/u>1$ for $t\\le u<1$, so $\\log t=-\\int_t^1du/u<-(1-t)=t-1$. At $t=1$ equality holds. Therefore $-\\log t\\ge1-t$ for every $t>0$, with equality exactly at $t=1$.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "If $p_j>0$ and $q_j=0$ for some $j$, then [F1] gives $\\bar S_{\\log}(p,q)=+\\infty$, while $\\bar S_{\\log}(p,p)=-\\sum_{j:p_j>0}p_j\\log p_j<\\infty$ because this is a finite sum of finite terms. Thus propriety is strict in this case.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Otherwise $q_j>0$ for every $j$ with $p_j>0$. The truthful risk is finite, and cancellation on the support of $p$ gives $\\bar S_{\\log}(p,q)-\\bar S_{\\log}(p,p)=\\sum_{j:p_j>0}p_j\\log\\frac{p_j}{q_j}.$ Applying step 1.1 to $t=q_j/p_j$ yields $\\sum_{j:p_j>0}p_j\\log\\frac{p_j}{q_j}\\ge 1-\\sum_{j:p_j>0}q_j\\ge0.$ If the displayed difference is zero, both nonnegative gaps in this chain are zero. Equality in step 1.1 then forces $q_j/p_j=1$ on the support of $p$, and the second gap forces $q$ to have no mass outside that support. Hence $q=p$. This proves strict propriety for the logarithmic loss.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Expanding the Brier loss and using $\\sum_jp_j=1$ gives $\\bar S_{\\mathrm B}(p,q)=\\sum_iq_i^2-2\\sum_ip_iq_i+1,$ whereas $\\bar S_{\\mathrm B}(p,p)=1-\\sum_ip_i^2$. Subtraction yields $\\bar S_{\\mathrm B}(p,q)-\\bar S_{\\mathrm B}(p,p)=\\sum_i(q_i-p_i)^2\\ge0$, with equality exactly when every $q_i=p_i$. Thus the Brier loss is strictly proper as well.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "p=(1,0), q=(0,1)",
+          "result": "The log risk at q is +infinity; the Brier risk difference is 2."
+        },
+        {
+          "case": "p=q",
+          "result": "Both expected-loss differences vanish."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The p_j=0 convention and q_j=0 infinite log loss are proved separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K=2 is included; distributions may be vertices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Point-mass distributions are explicitly covered by the zero-coordinate convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Every p,q on the closed simplex is included; log endpoint infinities are handled."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "cor-any-feature-induces-calibrated-forecast": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-label-conditional-probability-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the f",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix a label index $j$ and a Borel set $B\\subseteq\\Delta_K$. Since $\\eta$ is measurable by [F1], $A=\\eta^{-1}(B)\\in\\Sigma_X$ by [F3]. The event identity in [F1] applied to this $A$ gives $P(Y=y_j,G\\in B)=P(X\\in A,Y=y_j)=\\mathbb E[\\eta_j(X)\\mathbf1_{\\{X\\in A\\}}]=\\mathbb E[G_j\\mathbf1_{\\{G\\in B\\}}].$ This is precisely the reliability identity [F2].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $j$ and $B$ were arbitrary, all label and Borel-event identities hold, so $G$ is fully reliable.",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "constant feature",
+          "result": "If X is constant, eta(X) is the prior vector and the event identity reduces to the label marginal."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 and a probability law are stated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Simplex coordinates may be zero; the event identity is coordinatewise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 and finite labels are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Constant features are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Every Borel subset of the simplex is tested, including vertex events."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicit because the conditional-probability helper uses it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "thm-posterior-forecast-minimizes-scoring-risk": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space $P$ and a bijection $h:E\\to P$ such that $A\\in\\mathcal E$ exactly when $h[A]$ is Borel in $P$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\m",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebr",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\lambda$ be a probability on $(E\\times T,\\mathcal S\\otimes\\mathcal T)$, where E and T are standard-Borel spaces, and let $\\beta(B)=\\lambda(E\\times B)$ be its second",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "The loss is **proper** if",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-proper-scoring-rule",
+          "source_section": "Definition",
+          "quote": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\t",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-loss-function-and-risk",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a statistical experiment ([[def-statistical-experiment]]), let $(\\mathsf D,\\mathcal G)$ be a measur",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "with infinity allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then $$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-bayes-rule-minimizes-prior-risk",
+          "source_section": "Statement",
+          "quote": "minimizes prior-integrated risk among all randomized decision rules",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], choose a measurable posterior probability kernel $\\Pi_x$ on the finite label set; identify it with the measurable vector $G(x)=(\\Pi_x(1),\\ldots,\\Pi_x(K))\\in\\Delta_K$. For each $x$, the posterior expected score of reporting $q$ is $\\bar S(G(x),q)$, which is minimized at $q=G(x)$ by [F2]. The posterior risk of this rule is measurable by [F4], so the rule meets the measurable-minimizer hypothesis in [F6].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "To apply the Bayes-risk interface to the original joint law, let $\\pi_j=P(Y=j)$. For $\\pi_j>0$, define $K_j(A)=P(X\\in A,Y=j)/\\pi_j$ on feature events $A$; for $\\pi_j=0$, set $K_j=P_X$. Each $K_j$ is a probability measure, and the finite map $j\\mapsto K_j$ is a probability kernel. The joint prior-data law built from prior $(\\pi_j)$ and kernel $K_j$ agrees with the original joint law because for every $A$ and $j$ its $(A,j)$ mass is $P(X\\in A,Y=j)$, including zero-prior labels. Consequently the Bayes-risk theorem [F6] states that the posterior rule $G$ minimizes the original expected score risk over all measurable randomized forecasts, hence over deterministic forecasts.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Now suppose $S$ is strictly proper and another measurable forecast $q$ has the same risk as $G$, whose risk is finite by hypothesis. The posterior disintegration identity writes their risk difference as $\\mathbb E\\big[\\bar S(G(X),q(X))-\\bar S(G(X),G(X))\\big]=0.$ Each nonnegative posterior-risk term is finite almost surely because its expectation is finite. Thus the integrand is a well-defined measurable nonnegative difference by [F3,F4], and [F5] makes it zero almost surely. Strict propriety in [F2] then gives $q(X)=G(X)$ almost surely.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "binary Brier score",
+          "result": "For posterior p and forecast q, conditional excess is (q-p)^2, so equality forces q=p."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Feature and label spaces are nonempty standard-Borel spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero-prior labels use an arbitrary filler model measure and contribute zero; the posterior risk finiteness condition is explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2; finite class labels are covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Point-mass label distributions and zero-prior classes are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Posterior distributions may lie on simplex faces; the score hypotheses include their boundary conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicit and supplies standard-Borel disintegration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "def-classification-calibration-of-a-surrogate": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "binary logistic margin convention",
+          "result": "For eta=1 and Phi(t)=log(1+exp(t)), conditional risk is Phi(-u), minimized at the extended endpoint +infinity."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The instance space is nonempty by the supervised-problem definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The conditional risk defines 0 times +infinity as 0 at endpoints, and classification risk counts h=0 as an error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The binary label set is explicitly {-1,+1}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The definition permits eta=0 or eta=1 and extended minimizers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: One-sided endpoint limits, infinite endpoints, and 0*infinity are specified."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "thm-binned-calibration-estimator-limits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "fully reliable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-jensen-for-simplex-pairs",
+          "source_section": "Statement",
+          "quote": "jointly convex",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let $g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ b",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]). Then: 1. *",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let $(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be continuous ([[def-metric-con",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix a partition $\\mathcal P$. For every bin $B$ and each coordinate, the variables $\\mathbf1_{\\{G_i\\in B\\}}$, $\\mathbf1_{\\{G_i\\in B\\}}(V_i)_j$, and $\\mathbf1_{\\{G_i\\in B\\}}(G_i)_j$ are bounded iid real variables. By [F3], their sample averages converge almost surely to their expectations. On the event $P(G\\in B)>0$, division by $N_B/n\\to P(G\\in B)$ gives convergence of the bin means to $\\mathbb E[V\\mid G\\in B]$ and $\\mathbb E[G\\mid G\\in B]$. On a zero-probability bin every sample has count zero almost surely. Since the partition and label set are finite, these convergences hold together almost surely; continuity of $d$ then gives $\\widehat E_{n,\\mathcal P}\\to E_{\\mathcal P}$. By [F1], $\\mathbb E[V\\mid G\\in B]=\\mathbb E[r(G)\\mid G\\in B]$ coordinatewise.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $\\delta_m$ be the maximum diameter of a cell of $\\mathcal P_m$. If $P(G\\in B)>0$ and $G(\\omega)\\in B$, then the triangle inequality for the coordinatewise integral gives $\\|\\mathbb E[G\\mid G\\in B]-G(\\omega)\\|\\le\\delta_m$. If $r$ is $L$-Lipschitz, the same argument gives $\\|\\mathbb E[r(G)\\mid G\\in B]-r(G(\\omega))\\|\\le L\\delta_m$. Thus the Euclidean distance between the ordered pairs is at most $\\sqrt{1+L^2}\\,\\delta_m\\le(1+L)\\delta_m$. By [F4], $d$ is uniformly continuous on the compact product simplex, so the absolute difference between the bin value and $d(r(G(\\omega)),G(\\omega))$ is bounded by a modulus tending to zero with $\\delta_m$, uniformly over all bins and $\\omega$. Integrating over bins yields $E_{\\mathcal P_m}\\to\\mathbb E[d(r(G),G)]$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each positive-probability bin define the conditional probability measure $P_B(A)=P(A\\cap\\{G\\in B\\})/P(G\\in B)$. Under $P_B$, the pair $(r(G),G)$ takes values in $\\Delta_K\\times\\Delta_K$. Apply [F2] to $\\psi=d$ and multiply by $P(G\\in B)$ to obtain $P(G\\in B)d\\!\\left(\\mathbb E[r(G)\\mid G\\in B],\\mathbb E[G\\mid G\\in B]\\right)\\le\\mathbb E[\\mathbf1_{\\{G\\in B\\}}d(r(G),G)].$ Summing over the partition proves $E_{\\mathcal P}\\le\\mathbb E[d(r(G),G)]$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For each fixed $m$, step 1.1 gives the almost-sure limit in $n$. There are countably many $m$, so the intersection of these probability-one events still has probability one; step 1.2 then gives the iterated limit as stated. This order takes the sample-size limit before the partition refinement and makes no claim about a jointly chosen diagonal sequence.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-bin cancellation",
+          "result": "If mean label vector equals mean forecast, the one-bin discrepancy is zero even if within-bin calibration error is positive."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The partition is finite and the law is a probability measure."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero-mass bins have zero empirical weight and are eventually empty almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A one-bin partition is covered; finite labels K>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Constant forecasts and point-mass bins satisfy the inequalities, often with equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Empty-bin filler q0 is arbitrary in Delta_K and has zero weight."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "lem-binary-zero-one-risk-excess-with-zero-tie": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-label-conditional-probability-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the f",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-classification-calibration-of-a-surrogate",
+          "source_section": "Definition",
+          "quote": "Bayes classification risk",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $A_- = \\{x:h(x)\\le0\\}$ and $A_+ = \\{x:h(x)\\ge0\\}$, which are measurable by [F3]. The event $\\{Yh(X)\\le0\\}$ is the disjoint union of $\\{Y=+1,X\\in A_-\\}$ and $\\{Y=-1,X\\in A_+\\}$. Applying [F1] to $A_-$ and using $P(X\\in A_+,Y=-1)=P(X\\in A_+)-P(X\\in A_+,Y=+1)$ gives $R_{01}(h)=\\mathbb E[\\eta(X)\\mathbf1_{A_-}(X)+(1-\\eta(X))\\mathbf1_{A_+}(X)].$ Subtracting [F2]'s Bayes-risk integrand reduces the identity to a pointwise comparison for each $x$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $x$ and abbreviate $a=\\eta(x)$. If $a>1/2$, then on $h(x)>0$ the conditional risk is $1-a$ and the excess is zero; on $h(x)<0$ it is $a$, so the excess is $2a-1=2|a-1/2|$; on $h(x)=0$ it is $1$, so the excess is $a=(2a-1)+(1-a)$. If $a<1/2$, the same three cases $h(x)<0$, $h(x)>0$, and $h(x)=0$ give excesses $0$, $1-2a=2|a-1/2|$, and $1-a=(1-2a)+a$, respectively. If $a=1/2$, every nonzero score has excess zero and a zero score has excess $1/2$. In each case the excess equals $2|a-1/2|\\mathbf1_{\\{h(x)(a-1/2)\\le0\\}}+\\min(a,1-a)\\mathbf1_{\\{h(x)=0\\}}$.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Integrating the pointwise equality in step 2.1 and using step 1.1 proves the displayed risk identity.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The right side of the identity is nonnegative, so every measurable score has risk at least $R_{01}^*$. Define $h_B(x)=+1$ when $\\eta(x)\\ge1/2$ and $h_B(x)=-1$ otherwise. Its two level sets are measurable by [F3]; at each $x$, its conditional zero-one risk is $\\min\\{\\eta(x),1-\\eta(x)\\}$, including equality at $\\eta=1/2$. Thus $R_{01}(h_B)=R_{01}^*$, verifying that the stated Bayes risk is the attained infimum.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "eta=1/2 and h=0",
+          "result": "R_01(h)-R_01^*=1/2, exactly the tie correction."
+        },
+        {
+          "case": "eta=1 and h=0",
+          "result": "Excess is 1; the main term 1 plus tie term 0 equals 1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability law and binary labels are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The h=0 event is computed separately, including eta=1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The binary class labels and arbitrary measurable feature spaces are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: eta=0 and eta=1 are explicit cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Both eta endpoints and zero scores are checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "thm-surrogate-regret-controls-classification-regret": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-finite-label-conditional-probability-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the f",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-label-conditional-probability-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the f",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-classification-calibration-of-a-surrogate",
+          "source_section": "Definition",
+          "quote": "conditional margin risk",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of nonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$ for every $x\\in X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-convex-functions-on-open-convex-sets-are-continuous",
+          "source_section": "Statement",
+          "quote": "Every convex function $f:U\\to\\mathbb R$ on an open convex set is continuous on $U$. The assertion is vacuous when $U$ is empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-negative-root-power-is-convex",
+          "source_section": "Statement",
+          "quote": "For every real $s\\ge1$, the function $\\varphi_s:[0,\\infty)\\to\\mathbb R$ defined by $\\varphi_s(t)=-t^{1/s}$, with $0^{1/s}=0$, is convex.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an integrable real random variable, let $I\\subseteq\\mathbb R$ be an interval containing $X(\\omega)$ for almos",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-binary-zero-one-risk-excess-with-zero-tie",
+          "source_section": "Statement",
+          "quote": "For a binary supervised problem with the full power-set sigma-algebra on $Y\\in\\{-1,+1\\}$, conditional positive-label probability $\\eta$, and any measurable real-valued score $h$, u",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces ([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\tex",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under AC [A1], the event identities [F1] imply, first for indicators and finite nonnegative simple functions and then by [F3] for every nonnegative measurable $f:\\mathsf X\\to[0,\\infty]$, that $\\mathbb E[\\mathbf1_{\\{Y=+1\\}}f(X)]=\\mathbb E[\\eta(X)f(X)],\\qquad \\mathbb E[\\mathbf1_{\\{Y=-1\\}}f(X)]=\\mathbb E[(1-\\eta(X))f(X)].$ For simple $f$ this follows by finite additivity of the event identities; increasing simple approximation and monotone convergence give the general case.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The function $\\Phi$ is continuous by [F4], hence Borel; its endpoint extension by one-sided limits is Borel on the extended real line. Since $h$ is measurable, the measurable-map definition [F7] makes $\\Phi\\circ h$ and $\\Phi\\circ(-h)$ measurable and nonnegative. Applying step 1.1 to these functions gives $L_\\Phi(h)=\\mathbb E[L_\\Phi(X,h(X))].$ This identity also verifies measurability of the conditional-risk integrand used below.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Put $m(x)=L_\\Phi(x,h_\\Phi^*(x))$ and $g(x)=L_\\Phi(x,0)-m(x)$. Minimality gives $0\\le m(x)\\le L_\\Phi(x,0)=\\Phi(0)$ and $g(x)\\ge0$ for every $x$, so $L_\\Phi^*=\\mathbb E m(X)<\\infty$. For the score $h$, put $D(x)=L_\\Phi(x,h(x))-m(x)\\ge0$. By step 2.1, $\\mathbb E D(X)=L_\\Phi(h)-L_\\Phi^*$; this is finite by the hypothesis on $h$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Fix $x$, write $a=\\eta(x)$, and let $u$ be a real score satisfying $u(a-1/2)\\le0$. For all real $u$, convexity gives $\\Phi(-u)+\\Phi(u)-2\\Phi(0)\\ge0$. If $a>1/2$ then $u\\le0$, so monotonicity gives $\\Phi(-u)-\\Phi(u)\\ge0$; if $a<1/2$ then $u\\ge0$, so $\\Phi(-u)-\\Phi(u)\\le0$. The identity $L_\\Phi(x,u)-L_\\Phi(x,0)=\\tfrac12[\\Phi(-u)+\\Phi(u)-2\\Phi(0)]+(a-\\tfrac12)[\\Phi(-u)-\\Phi(u)]$ therefore shows $L_\\Phi(x,u)\\ge L_\\Phi(x,0)$ whenever $a\\ne1/2$ and $u(a-1/2)\\le0$. When $a=1/2$, the same identity has zero second term and proves $L_\\Phi(x,u)\\ge L_\\Phi(x,0)$ for every $u$, so the conditional minimum is at $0$ and $g(x)=0$. Consequently, on $\\{h(x)(a-1/2)\\le0\\}$ one has $D(x)\\ge g(x)\\ge0$.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "On the event $h(X)(\\eta(X)-1/2)\\le0$, the margin hypothesis and step 4.1 give $|\\eta(X)-1/2|^s\\le c g(X)\\le cD(X)$, hence $|\\eta(X)-1/2|\\le c^{1/s}D(X)^{1/s}$. Apply the exact excess identity [F6], bound its first integrand by this inequality, and use $\\mathbf1_{\\{h=0\\}}\\le1$ to obtain $R_{01}(h)-R_{01}^*\\le2c^{1/s}\\mathbb E[D(X)^{1/s}]+\\mathbb E[\\min\\{\\eta(X),1-\\eta(X)\\}\\mathbf1_{\\{h(X)=0\\}}].$",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Put $\\alpha=1/s\\in(0,1]$. For $0\\le t\\le1$, $t^\\alpha\\le1$, while for $t\\ge1$, $t^\\alpha\\le t$; hence $D^\\alpha\\le1+D$ and it is integrable. By [F5], Jensen applied to the integrable convex function $-t^\\alpha$ gives $\\mathbb E[D^{1/s}]\\le(\\mathbb ED)^{1/s}=[L_\\Phi(h)-L_\\Phi^*]^{1/s}$ by step 3.1. Substitution in step 5.1 proves the stated bound.",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "planned scale counterexample",
+          "result": "eta=1, s=2, c=1/2, Phi(t)=log(1+exp(t)), h=-0.1 satisfies the premise but the planned coefficient-2c RHS is below 1."
+        },
+        {
+          "case": "zero-score tie",
+          "result": "eta=1/2 and h=0 has surrogate excess zero and classification excess 1/2; the explicit tie correction equals 1/2."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supervised problem has nonempty measurable spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The tie correction is explicit at h=0; eta=0 and eta=1 are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: s=1 is included and the power convexity proof treats it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Degenerate label laws are included when the pointwise margin hypothesis holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Extended conditional minimizers and endpoint values use 0*infinity=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed for the finite-label conditional-probability helper."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "ex-multiclass-calibration-notions-differ": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, a",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Each forecast row and each conditional-label row in Models A, B, and C has nonnegative coordinates summing to one, so all entries define simplex forecasts and conditional label distributions. In each model the three forecast vectors are distinct. Therefore full reliability would require $p_i=g_i$ at every row by [F1], but Model A row 1, Model B row 1, and Model C row 1 each have $p_i\\ne g_i$. Full reliability fails in all three models.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "In Model A, for each label the groups with forecast coordinate $0.4$ have conditional frequency $0.4$, and the groups with coordinate $0.3$ have average conditional frequency $0.3$: for labels 1, 2, and 3 the latter averages are respectively $(0.2+0.4)/2$, $(0.4+0.2)/2$, and $(0.2+0.4)/2$. Thus Model A is classwise calibrated. Its top confidence is always $0.4$, its predicted labels are $1,2,3$ in the three rows, and each corresponding conditional correctness probability is $0.4$, so it is top-confidence calibrated.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "In Model B the top confidence is always $0.5$, the predicted labels are $1,2,3$, and the average conditional correctness is $(0.7+0.5+0.3)/3=0.5$, so top-confidence calibration holds. Classwise calibration fails because forecast coordinate $G_1=0.5$ occurs only in row 1, where $P(Y=1\\mid X=1)=0.7\\ne0.5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In Model C, for each label the forecast coordinate $0.5$ group has average conditional frequency $0.5$, and the coordinate $0$ group has frequency $0$: the three nonzero-group averages are $(0.8+0.2)/2$, $(0.2+0.8)/2$, and $(0.8+0.2)/2$. Thus classwise calibration holds. All top confidences equal $0.5$; the tie-broken predicted labels are $1,1,2$, with conditional correctness probabilities $0.8,0.2,0.8$. Their average is $0.6\\ne0.5$, so top-confidence calibration fails. Steps 1.1, 1.2, and 1.3 establish the other model claims; the Model C calculation completes the pairwise distinctions.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Model A",
+          "result": "Full reliability false; classwise and top-confidence calibration true."
+        },
+        {
+          "case": "Model B",
+          "result": "Top-confidence calibration true; classwise and full reliability false."
+        },
+        {
+          "case": "Model C",
+          "result": "Classwise calibration true; top-confidence and full reliability false; tie-break accuracy is 0.6."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Three nonempty finite models are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero forecast coordinates in Model C are explicitly checked."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K=3 as required by pairwise distinctions; row laws sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: All three laws have finite support and positive X atom masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Zero coordinates and tied maxima are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "ex-calibrated-constant-prior-forecast": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "fully reliable",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Independence gives $P(Y=j,X\\in A)=P(Y=j)P(X\\in A)=p_jP(X\\in A)$ for every feature event $A$ and class $j$. Thus the conditional label distribution given either $X=a$ or $X=b$ is $p=(0.7,0.2,0.1)$, and $G$ is exactly that conditional forecast.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For any Borel set $B\\subseteq\\Delta_3$, if $p\\in B$ then $P(Y=j,G\\in B)=p_j=\\mathbb E[\\mathbf1_{\\{G\\in B\\}}G_j]$; if $p\\notin B$, both sides are zero. By [F1], $G$ is fully reliable; its constancy means it has the same output at both feature values and so does not distinguish them.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "p=(0.7,0.2,0.1)",
+          "result": "For each j and B, both sides equal p_j if p is in B and zero otherwise."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The prior has positive coordinates here; the definition still permits zero coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Two feature atoms and three labels are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The forecast is constant while X is nonconstant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The forecast is in the interior of the simplex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "ex-fixed-bin-ece-underestimates-calibration-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-binned-calibration-estimator-limits",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a random variable into $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra, $K\\ge2$, and let $G\\in\\Delta_K$ be a random forecast with measurable calibration function ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The forecast values identify the two feature values, so the calibration function is $r(0.6,0.4)=(0.8,0.2)$ and $r(0.8,0.2)=(0.6,0.4)$. Therefore $\\mathbb E[d(r(G),G)]=\\tfrac12|0.8-0.6|+\\tfrac12|0.6-0.8|=0.2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the single bin $B=\\Delta_2$, the mean forecast first coordinate is $(0.6+0.8)/2=0.7$, and the mean label-indicator first coordinate is $(0.8+0.6)/2=0.7$. Hence the population binned discrepancy is $|0.7-0.7|=0$. By [F2] the empirical one-bin estimate converges almost surely to zero; equivalently, [F3] gives convergence of both sample averages to $0.7$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "two-atom forecast",
+          "result": "True L1 first-coordinate calibration error 0.2; one-bin population discrepancy 0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The feature and label spaces are nonempty finite sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The one-bin discrepancy is zero despite nonzero true error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The sample size n tends to infinity from n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The two forecast values are distinct and each has mass 1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Forecast coordinates lie strictly between 0 and 1; the entire simplex is the bin."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    },
+    "ex-calibrated-coarsened-risk-score-is-low-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-any-feature-induces-calibrated-forecast",
+          "source_section": "Statement",
+          "quote": "fully reliable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-calibration",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, a",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The probability of $T=u$ is $2/3$, and the conditional probability of $Y=1$ there is $(0.1+0.9)/2=0.5$; at $T=v$ it is $0.75$. Thus the forecast is exactly the conditional label distribution given $T$, and [F1] implies full reliability. Directly, each forecast value identifies $T$, so the conditional distribution of $Y$ given $G=(0.5,0.5)$ is $(0.5,0.5)$ and given $G=(0.75,0.25)$ is $(0.75,0.25)$, which is [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The original feature values $a$ and $b$ have different conditional label laws, with success probabilities $0.1$ and $0.9$, but both map to the same forecast. Hence observing the forecast does not determine which of those feature values occurred, so the forecast discards information about $X$ while remaining calibrated.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "merged atoms a,b",
+          "result": "The merged conditional success probability is (0.1+0.9)/2=0.5, while the original laws differ."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Feature and binary label spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A label probability is 0.1 at a; the forecast probabilities remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The finite feature space has three atoms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The two merged feature atoms have distinct conditional label laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Forecast probabilities 0.5 and 0.75 lie in the simplex interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ]
+    }
+  }
+}

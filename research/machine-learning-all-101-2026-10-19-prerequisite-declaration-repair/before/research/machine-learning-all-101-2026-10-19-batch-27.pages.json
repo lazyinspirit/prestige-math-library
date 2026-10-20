@@ -1,0 +1,271 @@
+[
+  {
+    "order": 2748,
+    "id": "ml02-causal-anm",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Additive-noise causal discovery and identifiability",
+    "companion": "ml02-causal-anm-examples",
+    "requires": [
+      "independence-borel-cantelli-and-zero-one-laws",
+      "measurable-functions-and-simple-approximation",
+      "probability-spaces-random-variables-and-expectation",
+      "structural-causal-models-dags-and-adjustment"
+    ],
+    "items": [
+      {
+        "id": "def-additive-noise-model",
+        "kind": "definition",
+        "title": "Continuous additive-noise models on finite DAGs",
+        "strategy": "definition",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-d-separation-in-a-dag",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measurable-function-between-measurable-spaces",
+          "def-independent-random-elements"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-probability-measure-has-no-nonzero-period",
+        "kind": "lemma",
+        "title": "A probability measure on the line has no nonzero translation period",
+        "strategy": "direct",
+        "deps": [
+          "def-probability-measure",
+          "def-translation-of-a-set-in-rn",
+          "def-complete-ordered-real-field",
+          "thm-of-archimedean"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-smooth-residual-independence-has-pointwise-density-factorization",
+        "kind": "lemma",
+        "title": "A smooth independent residual gives a pointwise density factorization",
+        "strategy": "direct",
+        "deps": [
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-resit",
+        "kind": "algorithm",
+        "title": "RESIT: regression with subsequent independence testing",
+        "strategy": "definition",
+        "deps": [
+          "def-additive-noise-model",
+          "def-recursive-structural-causal-model-and-dag"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-anm-joint-density",
+        "kind": "lemma",
+        "title": "Positive joint density of a finite additive-noise model",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-measure-with-density",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-anm-noise-independent-of-nondescendants",
+        "kind": "lemma",
+        "title": "An ANM noise is independent of every set of nondescendants",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-measurable-functions-preserve-independence"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-restricted-additive-noise-model",
+        "kind": "definition",
+        "title": "Condition 19 and restricted additive-noise models",
+        "strategy": "definition",
+        "deps": [
+          "def-additive-noise-model",
+          "lem-anm-joint-density"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-anm-density-factorization-implies-dsep-conditional-independence",
+        "kind": "lemma",
+        "title": "An ANM density factorization implies conditional independence under d-separation",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-d-separation-in-a-dag",
+          "def-ancestral-moral-graph-of-a-dag",
+          "lem-d-separation-ancestral-moral-separation",
+          "lem-anm-joint-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-anm-parent-dependence-persists-under-conditioning",
+        "kind": "lemma",
+        "title": "Parent dependence persists under nondescendant conditioning",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "lem-anm-joint-density",
+          "lem-anm-noise-independent-of-nondescendants"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-youngest-child-descendants-conditionally-independent",
+        "kind": "lemma",
+        "title": "Descendants of a youngest child are conditionally independent of its parent",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-d-separation-in-a-dag",
+          "lem-anm-joint-density",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-positive-minimal-dags-have-a-conditioned-reversal",
+        "kind": "lemma",
+        "title": "Distinct positive minimal ANM DAGs contain a conditionally reversible edge",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-d-separation-in-a-dag",
+          "lem-anm-joint-density",
+          "lem-anm-noise-independent-of-nondescendants",
+          "lem-anm-parent-dependence-persists-under-conditioning",
+          "lem-active-routes-in-a-finite-dag-have-active-paths",
+          "lem-anm-density-factorization-implies-dsep-conditional-independence",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-bivariate-additive-noise-identifiability",
+        "kind": "theorem",
+        "title": "Bivariate additive-noise direction identifiability under Condition 19",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "lem-anm-joint-density",
+          "def-restricted-additive-noise-model",
+          "lem-probability-measure-has-no-nonzero-period",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-restricted-anm-population-identification",
+        "kind": "theorem",
+        "title": "Population identifiability and RESIT correctness for restricted ANMs",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-restricted-additive-noise-model",
+          "lem-anm-joint-density",
+          "lem-anm-noise-independent-of-nondescendants",
+          "lem-anm-parent-dependence-persists-under-conditioning",
+          "lem-youngest-child-descendants-conditionally-independent",
+          "lem-positive-minimal-dags-have-a-conditioned-reversal",
+          "lem-probability-measure-has-no-nonzero-period",
+          "lem-smooth-residual-independence-has-pointwise-density-factorization",
+          "alg-resit",
+          "thm-bivariate-additive-noise-identifiability"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2749,
+    "id": "ml02-causal-anm-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Additive-noise causal discovery and identifiability — Examples",
+    "companion": "ml02-causal-anm",
+    "requires": [
+      "ml02-causal-anm"
+    ],
+    "items": [
+      {
+        "id": "ex-latent-confounding-mimics-anm-direction",
+        "kind": "example",
+        "title": "Latent confounding can mimic an observed ANM direction",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-recursive-structural-causal-model-and-dag",
+          "lem-anm-joint-density",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-gaussian-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-linear-gaussian-reversible-additive-noise-model",
+        "kind": "example",
+        "title": "A reversible linear-Gaussian additive-noise model",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-restricted-additive-noise-model",
+          "lem-anm-joint-density",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-identifiable-nonlinear-additive-noise-model",
+        "kind": "example",
+        "title": "An identifiable nonlinear ANM with a cubic cause-to-effect function",
+        "strategy": "direct",
+        "deps": [
+          "def-additive-noise-model",
+          "def-restricted-additive-noise-model",
+          "thm-bivariate-additive-noise-identifiability",
+          "lem-anm-joint-density",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

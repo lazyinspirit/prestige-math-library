@@ -1,0 +1,274 @@
+[
+  {
+    "order": 2867,
+    "id": "constrained-mdps-and-policy-safety",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Constrained MDPs and policy safety",
+    "companion": "constrained-mdps-and-policy-safety-examples",
+    "requires": [
+      "finite-mdps-and-bellman-operators",
+      "conditional-distributions-and-regular-conditional-probability",
+      "conditional-expectation",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "policy-gradients-reinforce-and-actor-critic"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-action-average-tv-controlled-by-kl",
+        "kind": "lemma",
+        "title": "Finite-action average total variation is bounded by average KL",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-pinsker"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-constrained-markov-decision-process",
+        "kind": "definition",
+        "title": "Finite discounted constrained Markov decision process",
+        "deps": [
+          "def-finite-markov-decision-process"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "def-normalized-discounted-state-occupancy",
+        "kind": "definition",
+        "title": "Normalized discounted state occupancy",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "thm-geometric-series"
+        ],
+        "justified_by": [
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "dependency_level": 2,
+        "forward_refs": []
+      },
+      {
+        "id": "def-discounted-cost-constraint",
+        "kind": "definition",
+        "title": "Expected discounted-cost feasibility constraint",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "lem-bounded-discounted-return-converges"
+        ],
+        "justified_by": [
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "dependency_level": 2,
+        "forward_refs": []
+      },
+      {
+        "id": "lem-normalized-discounted-state-occupancy-is-probability",
+        "kind": "lemma",
+        "title": "Normalized discounted occupancy is a probability distribution",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "def-finite-markov-decision-process",
+          "def-normalized-discounted-state-occupancy",
+          "lem-bounded-discounted-return-converges",
+          "thm-induction-principle",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-discounted-value-and-advantage-functions",
+        "kind": "definition",
+        "title": "Discounted value, action-value, and advantage functions",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-discounted-occupancy-change-bounded-by-average-tv",
+        "kind": "lemma",
+        "title": "Discounted occupancy change is bounded by average policy TV",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-normalized-discounted-state-occupancy",
+          "lem-geometric-sequence-null",
+          "lem-normalized-discounted-state-occupancy-is-probability",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": [],
+        "statement": "Let a finite discounted CMDP and two stationary policies $\\pi,\\pi'$ be given, with normalized discounted occupancies $d^\\pi,d^{\\pi'}$. Define\n\n$$\\operatorname{TV}_s(\\pi',\\pi):=\\frac12\\sum_{a\\in A(s)}|\\pi'(a\\mid s)-\\pi(a\\mid s)|$$\n\nand $\\|x\\|_1:=\\sum_{s\\in S}|x(s)|$ for a state vector. Then\n\n$$\\|d^{\\pi'}-d^\\pi\\|_1\\le\\frac{2\\gamma}{1-\\gamma}\\sum_{s\\in S}d^\\pi(s)\\operatorname{TV}_s(\\pi',\\pi).$$"
+      },
+      {
+        "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+        "kind": "lemma",
+        "title": "Performance-difference identity for an arbitrary bounded baseline",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "def-normalized-discounted-state-occupancy",
+          "lem-geometric-sequence-null",
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-policy-performance-bound-by-average-divergence",
+        "kind": "theorem",
+        "title": "Policy performance bound by average divergence",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "def-normalized-discounted-state-occupancy",
+          "lem-discounted-occupancy-change-bounded-by-average-tv",
+          "lem-finite-action-average-tv-controlled-by-kl",
+          "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+          "lem-normalized-discounted-state-occupancy-is-probability"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-constrained-policy-optimization",
+        "kind": "algorithm",
+        "title": "Sample-based constrained policy optimization update",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "def-discounted-value-and-advantage-functions",
+          "def-differentiable-stochastic-policy",
+          "def-hessian-and-euclidean-critical-point",
+          "def-kullback-leibler-divergence",
+          "def-normalized-discounted-state-occupancy",
+          "thm-policy-performance-bound-by-average-divergence"
+        ],
+        "dependency_level": 6,
+        "justified_by": [
+          "lem-cpo-sample-update-well-defined-and-finite-search"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-cpo-sample-update-well-defined-and-finite-search",
+        "kind": "lemma",
+        "title": "The sample CPO update has a well-defined proposal and finite backtracking search",
+        "deps": [
+          "alg-constrained-policy-optimization",
+          "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "thm-invertible-matrix-theorem",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 7,
+        "statement": "Under the inputs and assumptions of the sample-based constrained policy\noptimization update, with finite parameter dimension $d$ and nonnegative\ninteger backtracking budget $L$, the update has a unique mathematical output,\neither `no-step` or an accepted parameter. Its proposals satisfy these properties.\n\nIf its matrix $H$ is symmetric positive definite and its local quadratic\nprogram is feasible, the program has a nonempty compact global-maximizer set\nand a unique lexicographically least global maximizer. This is the proposal\nselected by the update and satisfies every linearized cost constraint and\nthe quadratic trust-region constraint.\n\nIf the program is infeasible with one cost and $u_1\\ne0$, the inverse used\nby the update exists, $a=u_1^TH^{-1}u_1>0$, and its recovery proposal is\n$$ x^*=-\\sqrt{2\\delta/a}\\,H^{-1}u_1. $$\nIt is the unique minimizer of $u_1^Tx$ on $\\{x:x^THx/2\\le\\delta\\}$,\nsatisfies $(x^*)^THx^*/2=\\delta$, and decreases the linearized cost by\n$\\sqrt{2\\delta a}$. It need not make the infeasible cost constraint feasible.\nThe non-positive-definite, zero-recovery-gradient and multiple-cost infeasible\nbranches return `no-step` as specified.\n\nOnce the specified exact subproblem decisions and operations have been\nperformed, backtracking terminates after at most $L+1$ candidate tests.\nIt returns the first passing candidate, which belongs to the parameter\ndomain and satisfies the empirical KL and all empirical cost tests, or\nreturns `no-step` if none passes. These are well-definedness and finite-search\nproperties of the exact mathematical update. They do not bound the cost of\nexact feasibility/optimization operations or certify the true expected costs,\nexact population KL, policy improvement, or convergence of sampled iterates.",
+        "justified_by": []
+      },
+      {
+        "id": "rem-cpo-implementation-is-approximate",
+        "kind": "remark",
+        "title": "Practical CPO updates do not inherit exact safety guarantees automatically",
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-constrained-policy-optimization",
+          "thm-policy-performance-bound-by-average-divergence"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2868,
+    "id": "constrained-mdps-and-policy-safety-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Constrained MDPs and policy safety — Examples",
+    "companion": "constrained-mdps-and-policy-safety",
+    "requires": [
+      "constrained-mdps-and-policy-safety"
+    ],
+    "items": [
+      {
+        "id": "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+        "kind": "example",
+        "title": "A small expected cost can coexist with frequent finite-horizon violations",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "thm-geometric-series"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-empirical-cost-satisfaction-can-miss-population-violation",
+        "kind": "example",
+        "title": "A finite sample can report cost satisfaction while the policy violates its expected-cost limit",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+        "kind": "example",
+        "title": "Exact CPO cost feasibility can disagree with a sampled line-search cost check",
+        "deps": [
+          "def-axiom-of-choice",
+          "alg-constrained-policy-optimization",
+          "def-constrained-markov-decision-process",
+          "def-discounted-cost-constraint",
+          "def-discounted-value-and-advantage-functions",
+          "def-kullback-leibler-divergence",
+          "thm-logarithm-derivative-and-integral",
+          "thm-policy-performance-bound-by-average-divergence"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+        "kind": "counterexample",
+        "title": "An arbitrary baseline requires the old-policy residual",
+        "deps": [
+          "def-constrained-markov-decision-process",
+          "def-normalized-discounted-state-occupancy",
+          "def-discounted-cost-constraint"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

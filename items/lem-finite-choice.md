@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-finite-choice.json
   precheck: pass
   verified:
     model: gpt-5.6-sol-codex-subscription
@@ -36,14 +37,14 @@ pipeline_run: null
 Let $n \in \mathbb{N}$ and let $F$ be a function with domain $n$ all of whose
 values are nonempty sets. Then the family of its values,
 $\mathcal{F} = F[n] = \{\, F(i) : i \in n \,\}$, has a choice function
-([[def-choice-function]]).
+(Choice function).
 
 This is a theorem of ZF: its proof uses no form of the Axiom of Choice
-([[def-axiom-of-choice]]).
+(The Axiom of Choice).
 
 What is proved below is exactly the displayed statement, by induction on $n$. The
 natural number $n$ serves as the index set in the von Neumann sense,
-$n = \{0, 1, \dots, n-1\}$ ([[def-natural-numbers]]), so "$F$ has domain $n$"
+$n = \{0, 1, \dots, n-1\}$ (The natural numbers $\mathbb{N}$ (von Neumann)), so "$F$ has domain $n$"
 says precisely that the members of $\mathcal{F}$ are listed as
 $F(0), \dots, F(n-1)$. The listing need not be injective, and $\mathcal{F}$ is the
 set of values, so repetitions are harmless and are not counted.
@@ -51,6 +52,14 @@ set of values, so repetitions are harmless and are not counted.
 The displayed statement and its proof use only a natural-number-indexed
 function. They do not identify an arbitrary finite family with a particular
 enumeration.
+
+## Statement references
+
+[[def-choice-function]]
+
+[[def-axiom-of-choice]]
+
+[[def-natural-numbers]]
 
 ## Facts & Assumptions
 

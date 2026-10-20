@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "90",
+  "round": 0,
+  "reviewed_items": [
+    "lem-finite-action-average-tv-controlled-by-kl",
+    "def-constrained-markov-decision-process",
+    "def-normalized-discounted-state-occupancy",
+    "def-discounted-cost-constraint",
+    "lem-normalized-discounted-state-occupancy-is-probability",
+    "def-discounted-value-and-advantage-functions",
+    "lem-discounted-occupancy-change-bounded-by-average-tv",
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+    "thm-policy-performance-bound-by-average-divergence",
+    "alg-constrained-policy-optimization",
+    "rem-cpo-implementation-is-approximate",
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "ex-empirical-cost-satisfaction-can-miss-population-violation",
+    "ex-exact-trust-region-and-sampled-line-search-disagree",
+    "cex-arbitrary-baseline-bound-without-old-policy-residual"
+  ],
+  "reviewed_pages": [
+    "constrained-mdps-and-policy-safety",
+    "constrained-mdps-and-policy-safety-examples"
+  ],
+  "decision": "repair",
+  "reason": "The occupancy, arbitrary-baseline identity, TV and KL performance-bound arguments are sound under their stated hypotheses and match the complete Achiam supplement argument ([source](https://proceedings.mlr.press/v70/achiam17a/achiam17a-supp.pdf)). Request one local repair to make the counterexample’s refuted formula use the batch’s joint reward-transition notation. The algorithm-property and page-requirement scope findings remain unresolved, so this is not acceptance.",
+  "findings": [
+    {
+      "id": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+      "type": "local",
+      "reason": "The refuted statement uses r(s,a,s'), P and bare J(π), which are not the batch’s joint reward-transition interface; the CMDP defines p(s',ρ|s,a) and J_g^π(μ). Rewrite the formula using δ_f(s,a,ρ,s')=ρ+γf(s')−f(s), joint transition-reward expectations, and J=J_r^π(μ). The one-state counterexample still refutes the claim."
+    },
+    {
+      "id": "alg-constrained-policy-optimization",
+      "type": "scope",
+      "reason": "The algorithm is specified as a Definition but has no separate proved correctness, termination or complexity result, as required for algorithms. The inline QP maximizer explanation is procedure text, not a property proof. Adding separate result items requires scope reconciliation; its checked consumers are the remark and exact-versus-sampled example."
+    },
+    {
+      "id": "constrained-mdps-and-policy-safety",
+      "type": "scope",
+      "reason": "The approved prose Requires clause names ML-72, Finite MDPs and Bellman operators, while the structured plan and A-page requires lists omit that page. The assigned item graph directly uses the finite-MDP interface and bounded-return supplier from that page. The supplier claims were reviewed; reconcile the page requirement set under owner authority."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "constrained-mdps-and-policy-safety-examples",
+      "decision": "accept",
+      "reason": "The B page only inventories the counterexample; that consumer remains valid with the corrected joint reward notation. No other item directly or indirectly consumes the counterexample."
+    },
+    {
+      "id": "rem-cpo-implementation-is-approximate",
+      "decision": "accept",
+      "reason": "It relies on the specified procedure and performance theorem, and explicitly makes no implementation correctness, true-cost or convergence guarantee."
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "decision": "accept",
+      "reason": "It checks a specific exact cost comparison and conditional sample-line-search outcome; it does not assert general algorithm correctness or termination."
+    }
+  ]
+}

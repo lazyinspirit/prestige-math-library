@@ -1,0 +1,178 @@
+[
+  {
+    "kind": "page",
+    "consumer": "hedge-and-online-gradient-descent",
+    "supplier": "online-decision-protocols",
+    "status": "verified",
+    "evidence": "The current Batch 73 page and its three protocol, feedback, and regret definition carriers are present. I read the actual definition bodies and matched the interface used here. This is author-level interface verification only; it is not Step 1 acceptance or independent proof approval.",
+    "required_hypotheses": "Positive finite horizon; the learner chooses from its previous history before seeing the current loss; full-information feedback reveals the whole finite expert-loss vector after the choice.",
+    "affected_claims": [
+      "alg-hedge: choose an expert from the current normalized weights and update after the full loss vector is revealed.",
+      "alg-online-gradient-descent: play x_t, then receive the current loss function or the stated gradient/subgradient feedback.",
+      "thm-hedge-static-regret: expected static regret is measured against a fixed expert after a loss sequence fixed before learner randomization."
+    ],
+    "local_route": "Use the protocol for the round order and the Batch 73 feedback and comparator definitions for the meanings of full information, oblivious losses, and expected static regret.",
+    "supplier_excerpts": [
+      {
+        "item": "def-online-decision-protocol",
+        "section": "Definition",
+        "excerpt": "It chooses $x_t\\in K$ using only $h_{t-1}$ and any learner-private randomization available by that time. In a randomized protocol, $X_t$ is a measurable random element of $K$"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-hedge",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-online-decision-protocol.md and verified the choice-before-feedback protocol used by the algorithm.",
+    "required_hypotheses": "The current choice is made from past history and learner-private randomization before current-round feedback.",
+    "affected_claims": [
+      "The sampled expert is chosen from x_t before the round-t loss vector is observed."
+    ],
+    "local_route": "Keep the algorithm's round order explicit and use full-information feedback only after I_t has been selected.",
+    "supplier_excerpts": [
+      {
+        "item": "def-online-decision-protocol",
+        "section": "Definition",
+        "excerpt": "The learner does not observe $f_t$ before choosing $x_t$."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-hedge",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-adversary-and-feedback-model.md. It defines full-information feedback and distinguishes an oblivious sequence from adaptive or reactive timing.",
+    "required_hypotheses": "For the expected Hedge guarantee, the full loss sequence is fixed before learner randomization. The algorithm receives the whole expert-loss vector after each selected action.",
+    "affected_claims": [
+      "The weight update uses every coordinate of the revealed loss vector.",
+      "The expected-regret theorem is stated for an oblivious loss sequence."
+    ],
+    "local_route": "State the full-information and oblivious timing assumptions directly; make no expected-regret claim for a reactive loss vector."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-online-gradient-descent",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-online-decision-protocol.md and verified the learner-choice and feedback order used by the projected update.",
+    "required_hypotheses": "The learner plays x_t before receiving the current loss or gradient feedback.",
+    "affected_claims": [
+      "The projected update uses g_t only after x_t is played."
+    ],
+    "local_route": "Define each OGD round as play, receive the current full loss function or the specified gradient/subgradient, then update x_{t+1}."
+  },
+  {
+    "kind": "item",
+    "consumer": "alg-online-gradient-descent",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-adversary-and-feedback-model.md. Its full-information clause permits the algorithm to use the current loss function after playing.",
+    "required_hypotheses": "The current loss function is revealed after the action; the regret proof is pathwise for each realized sequence satisfying the convexity and gradient/subgradient conditions.",
+    "affected_claims": [
+      "OGD's feedback route to g_t."
+    ],
+    "local_route": "Use the full-information protocol; the theorem makes no stochastic or adversary-class assumption beyond the realized per-round hypotheses."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hedge-static-regret",
+    "supplier": "def-static-dynamic-and-strongly-adaptive-regret",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-static-dynamic-and-strongly-adaptive-regret.md and checked the fixed-comparator and expected-regret conventions.",
+    "required_hypotheses": "The comparator is a fixed expert in [N]; expected regret is the expectation of the measurable integrable realized-regret variable.",
+    "affected_claims": [
+      "The [0,1]-loss consequence is an expected static-regret bound against the best fixed expert."
+    ],
+    "local_route": "Define the realized comparator term as the finite minimum over experts; for [0,1] losses and finite T the regret variable is bounded and integrable.",
+    "supplier_excerpts": [
+      {
+        "item": "def-static-dynamic-and-strongly-adaptive-regret",
+        "section": "Definition",
+        "excerpt": "The **static regret** is $$R_T^{\\rm stat}:=\\sum_{t=1}^T f_t(x_t)-\\min_{u\\in K}\\sum_{t=1}^T f_t(u).$$"
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-online-gradient-descent-regret",
+    "supplier": "def-static-dynamic-and-strongly-adaptive-regret",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-static-dynamic-and-strongly-adaptive-regret.md and checked its attained-minimum convention.",
+    "required_hypotheses": "When static regret is written using a minimum, that minimum is finite and attained; a pointwise comparator bound is stated independently for every u in K.",
+    "affected_claims": [
+      "The pointwise OGD comparator bound.",
+      "The consequence for static regret when the finite-horizon loss sum attains its minimum."
+    ],
+    "local_route": "Prove the inequality for every u in K, then apply it to a minimizer only when the static-regret definition's attainment condition holds.",
+    "supplier_excerpts": [
+      {
+        "item": "def-static-dynamic-and-strongly-adaptive-regret",
+        "section": "Definition",
+        "excerpt": "Whenever a minimum below is used, assume it is finite and attained."
+      }
+    ]
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-hedge-two-experts",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 Definition body and matched its choice-before-current-feedback protocol to the two-round Hedge calculation.",
+    "required_hypotheses": "The randomized expert choice is made from the prior history before the current loss vector is observed.",
+    "affected_claims": [
+      "The two-round sampled choices follow the stated Hedge distributions before each current loss vector is revealed."
+    ],
+    "local_route": "Use the protocol ordering together with the fixed full-information loss sequence and the Hedge update."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hedge-static-regret",
+    "supplier": "def-online-decision-protocol",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 Definition body and checked that the learner's measurable choice is made before current-round feedback.",
+    "required_hypotheses": "The learner chooses using previous history and measurable learner-private randomization before observing the current loss vector.",
+    "affected_claims": [
+      "The expected-loss identity conditions on the fixed loss sequence and the algorithm's current distribution."
+    ],
+    "local_route": "Use the protocol with the oblivious full-information model; the proof then expands the categorical expected loss by indicator expectation."
+  },
+  {
+    "kind": "item",
+    "consumer": "thm-hedge-static-regret",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current Batch 73 Definition body; its oblivious-adversary clause fixes the full loss sequence before learner randomization.",
+    "required_hypotheses": "The entire finite loss sequence is fixed before learner random choices, and the whole expert-loss vector is revealed after each choice.",
+    "affected_claims": [
+      "The Hedge distributions are deterministic for a fixed loss sequence, so the mixed-loss calculation equals expected sampled loss."
+    ],
+    "local_route": "State the oblivious timing assumption and use the full-information feedback interface in the weight update."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-hedge-two-experts",
+    "supplier": "def-adversary-and-feedback-model",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-adversary-and-feedback-model.md and verified that the two displayed loss vectors are fixed before the randomized choices.",
+    "required_hypotheses": "The two-round loss sequence is fixed in advance and both expert losses are revealed after each round.",
+    "affected_claims": [
+      "The example's expected loss and best-fixed-expert comparison."
+    ],
+    "local_route": "Use the explicitly fixed two-vector sequence and the stated categorical sampling law."
+  },
+  {
+    "kind": "item",
+    "consumer": "ex-hedge-two-experts",
+    "supplier": "def-static-dynamic-and-strongly-adaptive-regret",
+    "status": "verified",
+    "evidence": "Read the current draft Definition body in items/def-static-dynamic-and-strongly-adaptive-regret.md and checked the realized and expected static-regret definitions.",
+    "required_hypotheses": "A finite nonempty expert set and attained best fixed expert; both hold in the two-expert example.",
+    "affected_claims": [
+      "The value 1/6 for expected static regret."
+    ],
+    "local_route": "Compute each expert's two-round loss, then subtract the attained minimum from the expected sampled loss."
+  }
+]

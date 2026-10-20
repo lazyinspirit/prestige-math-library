@@ -17,6 +17,7 @@ sources:
     - title: "John K. Hunter, Measure Theory, Section 7.4"
       url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-l-p-space-as-a-quotient-by-null-functions.json
   precheck: n/a
   verified:
     model: gpt-6-sol
@@ -43,8 +44,14 @@ measurable representatives.
 
 When $1\le p\le\infty$, the displayed set quotient agrees with the usual
 quotient-vector-space construction of
-[[def-quotient-vector-space-and-canonical-projection]].
+The quotient vector space $V/W$ and its canonical projection.
 
 For $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item
-[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]
+The $L^p$ distance for $0 < p < 1$ is a complete translation-invariant metric
 supplies the metric structure rather than a normed-space structure.
+
+## Definition references
+
+[[def-quotient-vector-space-and-canonical-projection]]
+
+[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]

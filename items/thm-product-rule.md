@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-product-rule.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -38,13 +39,13 @@ pipeline_run: null
 
 1. If $A$ and $B$ are finite then $A \times B$ is finite and
    $\lvert A \times B\rvert = \lvert A\rvert \cdot \lvert B\rvert$
-   ([[def-finite-cardinality]]).
+   (The cardinality $\lvert A\rvert$ of a finite set).
 2. Let $m \in \mathbb{N}$ and let $A_0, \dots, A_{m-1}$ be finite sets. Write
    $$\prod_{i<m} A_i := \{\, f : f \text{ is a function with domain } m \text{ and } f(i) \in A_i \text{ for every } i < m \,\}.$$
    Then $\prod_{i<m} A_i$ is finite and
    $\big\lvert\prod_{i<m} A_i\big\rvert = \prod_{i<m}\lvert A_i\rvert$, the
    right-hand product being the $\mathbb{N}$-valued one of
-   [[def-nat-finite-sum-and-product]].
+   Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$.
 
 At $m = 0$ clause 2 reads $\big\lvert\prod_{i<0} A_i\big\rvert = 1$: there is
 exactly one function with domain $\varnothing$, the empty function, and the empty
@@ -70,6 +71,12 @@ product is $1$. Both sides are computed, not stipulated.
   \node at (1,-0.6) {$|A\times B|=3\cdot2=6$};
 \end{tikzpicture}
 ```
+
+## Statement references
+
+[[def-finite-cardinality]]
+
+[[def-nat-finite-sum-and-product]]
 
 ## Facts & Assumptions
 

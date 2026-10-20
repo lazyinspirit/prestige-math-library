@@ -1,0 +1,481 @@
+--- /dev/null
++++ b/tools/step5-successor-uncertainty-continuation.mjs
+@@ -0,0 +1,109 @@
++// One-shot scheduling after a genuine proof repair; never a passed collection.
++import {existsSync,readFileSync,writeFileSync,mkdirSync,lstatSync,realpathSync,readdirSync} from 'node:fs';
++import {resolve,join,relative,dirname} from 'node:path';
++import {createHash} from 'node:crypto';
++import {itemHashGuard} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {readLibraryItems,discoverDownstream} from './step5-rounds.mjs';
++import {execution,loadReportingOwnerRecovery,reportingOwnerHome} from './step5-reporting-owner-recovery.mjs';
++import {reviewContextHashes,buildSuccessorReportingObservation} from './step5-workflow.mjs';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),read=p=>JSON.parse(readFileSync(p,'utf8'));
++const need=(v,m)=>{if(!v)throw Error('Step 5 successor uncertainty: '+m);};
++const date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
++const drained=s=>Object.values(s.dispatches??{}).every(d=>!d.startedAt||Boolean(d.endedAt));
++const phase='impact-initial-pass-2',nextPhase='impact-initial-pass-3';
++const directory=(root,run)=>join(root,'research',`${run}-step5-v2`);
++export const successorUncertaintyPath=(root,run)=>join(directory(root,run),'impact-initial-pass-2-1-owner-uncertainty-continuation.json');
++const progressPath=(root,run)=>join(directory(root,run),'impact-initial-1-progress.json');
++const loaded=new WeakSet();
++export const isSuccessorUncertaintyContinuation=v=>loaded.has(v);
++const graph=items=>items.map(({id,deps,references,aliases,published})=>({id,deps,references,aliases,published}));
++function scope(items,supplier){
++ const result=new Set([supplier]),queue=[supplier];
++ while(queue.length)for(const row of discoverDownstream({items,repairedIds:[queue.shift()]}))if(!result.has(row.id)){result.add(row.id);queue.push(row.id);}
++ return [...result].sort();
++}
++function hold(root,run,state,request,executions){
++ need(state.run===run&&state.stage==='5.2-impact'&&state.paused===true&&(state.stageRounds?.['5.2-impact']??1)===1&&drained(state)
++  &&request.run===run&&request.version===1&&request.group==='5.2-impact'&&same(request.stages,['5.2-impact'])&&date(request.at),'not actual paused/drained 5.2 hold');
++ for(const v of executions){const n=v.native,o=state.dispatches?.[`5.2-impact:${n.label}`];
++  need(o?.stage==='5.2-impact'&&o.role==='alpha-repair'&&o.label===n.label&&same(o.covers,[`${phase}:${v.report.unit}`])&&o.attempt===n.attempt&&o.lastExitOk===true&&date(o.startedAt)&&date(o.endedAt)
++   &&Date.parse(o.startedAt)<=Date.parse(n.started_at)&&Date.parse(n.ended_at)<=Date.parse(o.endedAt)&&Date.parse(o.endedAt)<=Date.parse(request.at),'hold does not bind exact successful successor executions');
++ }
++}
++function validate(root,run,row,{current=false,bytes=null,archives=null}={}){
++ const path=successorUncertaintyPath(root,run),{sha256,...payload}=row;
++ need(sha256===hash(payload)&&row.version===1&&row.kind==='owner-successor-uncertainty-scheduling-continuation'&&row.root===resolve(root)&&row.run===run&&row.phase===phase&&row.round===1&&row.unit==='3'
++  &&same(row.units,['1','2','3'])&&row.authorized_by==='owner'&&row.owner_identity==='/root'&&date(row.recorded_at)&&Date.parse(row.recorded_at)<=Date.now()&&row.review_credit_granted===false&&row.native_acceptance===false&&row.resume_original_reporting_session===true
++  &&typeof row.reason==='string'&&row.reason.trim().length>=80,'invalid explicit successor envelope');
++ const evidence={[path]:hash(bytes??readFileSync(path,'utf8'))};
++ const boundText=f=>{const p=resolve(root,f);need(p.startsWith(resolve(root,'research')+'/')&&(archives?.has(p)||existsSync(p)&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()&&realpathSync(p).startsWith(realpathSync(join(root,'research'))+'/')),'invalid immutable archive');
++  const b=archives?.get(p)??readFileSync(p,'utf8');need(row.bindings?.[relative(root,p)]===hash(b),'stale/missing evidence '+f);evidence[p]=hash(b);return b;};
++ const bound=f=>JSON.parse(boundText(f));for(const p of Object.keys(row.bindings??{}))boundText(p);
++ const initial=loadReportingOwnerRecovery(root,run,'impact-initial',1);need(initial&&initial.row.version===2,'genuine initial all-owner recovery required');
++ for(const [p,h]of Object.entries(initial.evidence))need(evidence[p]===h,'initial recovery provenance omitted');
++ const pack=bound(join(directory(root,run),`${phase}-1.json`)),progress=bound(row.creation_progress),state=bound(row.creation_state),request=bound(row.owner_gate_request);
++ need(pack.run===run&&pack.phase===phase&&pack.basePhase==='impact-initial'&&pack.round===1&&pack.repair_scope==='frontier'&&same(pack.units,['1','2','3'])&&pack.reporting_owner_recovery?.path===initial.path
++  &&progress.run===run&&progress.phase==='impact-initial'&&progress.round===1&&progress.complete===false&&progress.activePhase===phase&&same(progress.passes,['impact-initial',phase])&&!progress.activeMaintenance
++  &&request.id===row.owner_gate_request_id&&Date.parse(request.at)<=Date.parse(row.recorded_at),'not exact first persistent successor boundary');
++ const executions=pack.units.map(unit=>execution(root,run,pack,unit,boundText));hold(root,run,state,request,executions);
++ const original=executions.find(v=>v.report.unit==='3'),uncertain=executions.flatMap(v=>v.report.reviews.filter(r=>r.uncertain===true).map(r=>({unit:String(v.report.unit),row:r})));
++ need(uncertain.length===1&&uncertain[0].unit==='3'&&same(row.original_uncertain_review,uncertain[0].row)&&row.supplier===uncertain[0].row.id&&row.original_session_id===original.native.session_id
++  &&resolve(root,original.native.session_home??'')===reportingOwnerHome(root,run,'impact-initial',1,'3')&&row.original_final_sha256===original.final_sha256,'wrong exact persistent reporting owner or native uncertainty');
++ for(const v of executions){const u=String(v.report.unit),n=v.native;need(typeof n.session_id==='string'&&n.session_id.length>0&&resolve(root,n.session_home??'')===reportingOwnerHome(root,run,'impact-initial',1,u)
++  &&n.session_id!==initial.values.find(l=>l.row.unit===u).row.original_session_id&&same(v.report.created_items,[])&&same(v.report.decisions,[]),'wrong genuine new initial reporting identities');}
++ const snapshot=bound(row.current_snapshot),repair=bound(row.repair_evidence_file),items=snapshot.inventory,targets=scope(items,row.supplier);
++ need(repair.original_report_sha256===hash(boundText(original.reportPath))&&repair.original_result_sha256===hash(boundText(original.dispatch))&&repair.original_pack_sha256===hash(boundText(join(directory(root,run),`${phase}-1.json`)))&&repair.original_uncertain_review_sha256===hash(row.original_uncertain_review),'completed root repair differs from exact captured original uncertainty evidence');
++ need(Array.isArray(items)&&new Set(items.map(i=>i.id)).size===items.length&&same(row.targets,targets)&&targets.every(id=>pack.frontier_ids.includes(id)),'affected supplier/consumer scope is incomplete or outside frontier');
++ need(repair.version===1&&repair.kind==='owner-completed-proof-repair'&&repair.run===run&&repair.phase===phase&&repair.round===1&&repair.unit==='3'&&repair.supplier===row.supplier
++  &&repair.completed===true&&repair.mathematical_review_completed===true&&repair.native_coverage_granted===false&&repair.statement_narrowed===false&&repair.owner_identity==='/root'&&typeof repair.repairer_identity==='string'&&repair.repairer_identity.startsWith('/root/')
++  &&date(repair.completed_at)&&Date.parse(repair.completed_at)>=Date.parse(original.native.ended_at)&&Date.parse(repair.completed_at)<=Date.parse(row.recorded_at)&&same(repair.rows?.map(r=>r.id).sort(),targets),'missing genuine completed same-owner proof repair and all consumer dispositions');
++ for(const r of repair.rows){const before=boundText(r.before_file),after=boundText(r.after_file),id=r.id,post=snapshot.sources.find(s=>s.id===id),nativeReview=executions.flatMap(v=>v.report.reviews).find(v=>v.id===id);
++  const fm=text=>text.match(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/)?.[0];
++  need(fm(before)&&fm(before)===fm(after)&&statementHash(before)===statementHash(after)&&r.before_raw_sha256===hash(before)&&r.after_raw_sha256===hash(after)&&r.before_guard_sha256===itemHashGuard(before)&&r.after_guard_sha256===itemHashGuard(after)
++   &&r.before_statement_sha256===statementHash(before)&&r.after_statement_sha256===statementHash(after)&&post?.raw_sha256===hash(after)&&post.guard_sha256===itemHashGuard(after)
++   &&r.reviewer_identity===repair.repairer_identity&&r.uncertain===false&&typeof r.reason==='string'&&r.reason.trim().length>=80&&r.review_context_sha256===snapshot.contexts[id]?.review_context_sha256&&['repaired','unaffected'].includes(r.disposition)
++   &&(r.disposition==='repaired')===(hash(before)!==hash(after)),'invalid proof-only same-owner repair/current consumer evidence '+id);
++  need(itemHashGuard(before)===(nativeReview?.post_sha256??pack.before[id]),'repair before bytes differ from actual native reviewed carrier '+id);
++  if(id===row.supplier)need(itemHashGuard(before)===row.original_uncertain_review.post_sha256&&itemHashGuard(before)!==itemHashGuard(after)&&r.disposition==='repaired','no actual repair of the native uncertain supplier');
++  const owner=pack.reporting_owner_review_owners?.[id]??initial.owners.get(id);need(!owner||owner==='3','affected consumer has a conflicting original review owner');
++ }
++ const prep=bound(row.preparation_file),inputs=bound(row.preparation_inputs_file);
++ need(prep.run===run&&prep.owner==='/root'&&prep.ok===true&&prep.metadata_checked===true&&prep.native_execution_coverage===false&&prep.mathematical_review_claimed===false&&prep.selected_count===inputs.selected_count
++  &&inputs.run===run&&inputs.native_execution_coverage===false&&inputs.mathematical_review_claimed===false&&inputs.selected_count===inputs.items.length&&same(snapshot.sources,inputs.items.map(i=>({id:i.id,raw_sha256:i.raw_sha256,guard_sha256:i.guard_sha256})))
++  &&new Set(snapshot.sources.map(s=>s.id)).size===snapshot.sources.length&&targets.every(id=>snapshot.contexts[id]?.post_sha256===snapshot.sources.find(s=>s.id===id)?.guard_sha256),'missing complete current mechanical preparation');
++ const observation=bound(row.historical_observation),allReviews=executions.flatMap(v=>v.report.reviews),eligible=allReviews.filter(r=>!targets.includes(r.id)&&r.uncertain===false&&r.post_sha256===snapshot.contexts[r.id]?.post_sha256&&r.review_context_sha256===snapshot.contexts[r.id]?.review_context_sha256);
++ need(observation.kind==='successor-uncertainty-historical-scheduling-observation'&&observation.run===run&&observation.phase===phase&&observation.round===1&&observation.native_acceptance===false&&observation.historical_only===true&&same(observation.reviews,[])
++  &&same(observation.historical_reviews,allReviews)&&same(observation.genuine_current_native_reviews,eligible)&&same(observation.errors,[`invalid review 3/${row.supplier}`])&&Object.entries(observation.evidence).every(([p,h])=>evidence[p]===h),'observation cannot grant uncertain/stale review credit or hide errors');
++ const next=join(directory(root,run),`${nextPhase}-1.json`);if(existsSync(next)){const p=read(next);need(p.successor_uncertainty_continuation?.path===path&&p.reporting_owner_sessions?.['3']?.mode==='resume'&&p.reporting_owner_sessions['3'].session_id===row.original_session_id
++  &&targets.every(id=>p.assignments['3'].includes(id))&&Object.entries(evidence).every(([f,h])=>p.input_evidence?.[f]===h),'genuine first continuation pack no longer binds admission/scope/session');}
++ if(current){const live=read(join(root,'.autopilot',run,'state.json')),qr=readFileSync(join(root,'.autopilot',run,'owner-gate-request.json'),'utf8');hold(root,run,live,JSON.parse(qr),executions);
++  need(qr===boundText(row.owner_gate_request)&&row.units?.every(u=>{const k=`5.2-impact:${executions.find(v=>String(v.report.unit)===u).native.label}`;return same(live.dispatches[k],state.dispatches[k]);})&&readFileSync(progressPath(root,run),'utf8')===boundText(row.creation_progress)&&!existsSync(next)
++   &&!existsSync(join(directory(root,run),`${phase}-1-collected.json`)),'live hold/progress/request changed or successor already frozen');
++  const actual=readLibraryItems(root,{run});need(same(snapshot.inventory,graph(actual.filter(i=>targets.includes(i.id))))&&same(targets,scope(actual,row.supplier))&&same(snapshot.contexts,reviewContextHashes(root,snapshot.sources.map(s=>s.id))),'actual current dependency inventory/context changed');
++  for(const s of snapshot.sources){const b=readFileSync(join(root,'items',s.id+'.md'),'utf8');need(hash(b)===s.raw_sha256&&itemHashGuard(b)===s.guard_sha256,'current source changed '+s.id);}
++  const manifests=readdirSync(join(root,'research')).filter(f=>new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(f)).map(f=>'research/'+f).sort(),guards=new Map(inputs.guards.map(g=>[g.path,g.raw_sha256]));
++  need(same(manifests,snapshot.manifests.map(m=>m.path).sort()),'missing manifest');const selected=new Set();for(const m of snapshot.manifests){need(hash(readFileSync(join(root,m.path),'utf8'))===m.sha256&&guards.get(m.path)===m.sha256,'current manifest changed');for(const p of read(join(root,m.path)))for(const i of p.items??[])selected.add(i.id);}need(same([...selected].sort(),snapshot.sources.map(s=>s.id).sort()),'source vector is not exact manifest scope');
++  const regenerated=buildSuccessorReportingObservation(root,run,pack,executions.map(v=>v.report),observation.evidence);need(same(observation,regenerated),'historical observation differs from actual native/current inputs');
++ }
++ const value={root,run,row,path,evidence,pack,original,targets:new Set(targets),snapshot,observation,observationPath:resolve(root,row.historical_observation)};loaded.add(value);return value;
++}
++export function loadSuccessorUncertaintyContinuation(root,run,{current=false}={}){const p=successorUncertaintyPath(root,run);return existsSync(p)?validate(root,run,read(p),{current}):null;}
++export async function previewSuccessorUncertaintyContinuation(root,run,payload){return recordSuccessorUncertaintyContinuation(root,run,payload,{dryRun:true});}
++export async function recordSuccessorUncertaintyContinuation(root,run,payload,{dryRun=false}={}){
++ need(same(Object.keys(payload).sort(),['reason','repair_evidence_file','preparation_file','preparation_inputs_file'].sort()),'invalid typed recorder payload');
++ const sp=join(root,'.autopilot',run,'state.json'),qp=join(root,'.autopilot',run,'owner-gate-request.json'),sb=readFileSync(sp,'utf8'),qb=readFileSync(qp,'utf8'),pb=readFileSync(progressPath(root,run),'utf8');need(!existsSync(successorUncertaintyPath(root,run)),'one-shot continuation already recorded');
++ const archives=new Map(),bindings={},store=(name,b)=>{const p=join(directory(root,run),'successor-uncertainty-continuation',name);need(!existsSync(p)||readFileSync(p,'utf8')===b,'immutable archive conflict');archives.set(p,b);bindings[relative(root,p)]=hash(b);return relative(root,p);},bind=f=>{const p=resolve(root,f);bindings[relative(root,p)]=hash(readFileSync(p,'utf8'));};
++ const creation_state=store('creation-state.json',sb),owner_gate_request=store('owner-gate-request.json',qb),creation_progress=store('creation-progress.json',pb),initial=loadReportingOwnerRecovery(root,run,'impact-initial',1);need(initial,'initial recovery required');for(const p of Object.keys(initial.evidence))bind(p);
++ const packPath=join(directory(root,run),`${phase}-1.json`),pack=read(packPath);bind(packPath);const executions=pack.units.map(unit=>execution(root,run,pack,unit));for(const v of executions)for(const f of [v.reportPath,v.dispatch,v.attempt,v.logPath,v.promptPath])bind(f);
++ for(const p of [payload.repair_evidence_file,payload.preparation_file,payload.preparation_inputs_file])bind(p);const repair=read(resolve(root,payload.repair_evidence_file));for(const r of repair.rows){bind(r.before_file);bind(r.after_file);}
++ const original=executions.find(v=>String(v.report.unit)==='3'),uncertain=original.report.reviews.filter(r=>r.uncertain===true);need(uncertain.length===1,'one exact uncertainty required');
++ const inputs=read(resolve(root,payload.preparation_inputs_file));const inventory=readLibraryItems(root,{run}),affected=scope(inventory,uncertain[0].id),snapshot={sources:inputs.items.map(i=>({id:i.id,raw_sha256:i.raw_sha256,guard_sha256:i.guard_sha256})),contexts:reviewContextHashes(root,inputs.items.map(i=>i.id)),inventory:graph(inventory.filter(i=>affected.includes(i.id))),manifests:inputs.guards.filter(g=>new RegExp(`^research/${run}-batch-\\d+\\.pages\\.json$`).test(g.path)).map(g=>({path:g.path,sha256:g.raw_sha256}))},current_snapshot=store('current-snapshot.json',JSON.stringify(snapshot,null,2)+'\n');
++ const observation=buildSuccessorReportingObservation(root,run,pack,executions.map(v=>v.report),Object.fromEntries(Object.entries(bindings).map(([p,h])=>[resolve(root,p),h]))),historical_observation=store('historical-scheduling-observation.json',JSON.stringify(observation,null,2)+'\n');
++ const row={...payload,version:1,kind:'owner-successor-uncertainty-scheduling-continuation',root:resolve(root),run,phase,round:1,unit:'3',units:['1','2','3'],authorized_by:'owner',owner_identity:'/root',recorded_at:new Date().toISOString(),review_credit_granted:false,native_acceptance:false,resume_original_reporting_session:true,supplier:uncertain[0].id,original_uncertain_review:uncertain[0],original_session_id:original.native.session_id,original_final_sha256:original.final_sha256,targets:scope(snapshot.inventory,uncertain[0].id),creation_state,owner_gate_request,owner_gate_request_id:JSON.parse(qb).id,creation_progress,current_snapshot,historical_observation,bindings},receipt={...row,sha256:hash(row)},bytes=JSON.stringify(receipt,null,2)+'\n',v=validate(root,run,receipt,{current:true,bytes,archives});
++ need(readFileSync(sp,'utf8')===sb&&readFileSync(qp,'utf8')===qb&&readFileSync(progressPath(root,run),'utf8')===pb,'actual hold/progress changed');if(!dryRun){for(const [p,b]of archives){mkdirSync(dirname(p),{recursive:true});if(!existsSync(p))writeFileSync(p,b,{flag:'wx'});}writeFileSync(v.path,bytes,{flag:'wx'});}return {path:v.path,dry_run:dryRun,targets:[...v.targets],session_id:row.original_session_id,resume_original_reporting_session:true,native_acceptance:false};
++}
++// An in-memory scheduling view of individually authenticated genuine native rows.
++// The immutable observation itself always has reviews:[] and is not a collection.
++export function successorSchedulingView(value){need(loaded.has(value),'unvalidated successor observation');return {...value.observation,reviews:value.observation.genuine_current_native_reviews};}
+--- a/tools/step5-reporting-owner-recovery.mjs
++++ b/tools/step5-reporting-owner-recovery.mjs
+@@ -1,3 +1,4 @@
++import {loadSuccessorUncertaintyContinuation} from './step5-successor-uncertainty-continuation.mjs';
+ // Admission and native session routing only. Historical reports grant no new coverage.
+ import {loadInitialReportingRecovery,recordInitialReportingRecovery,isInitialReportingRecovery} from './step5-initial-reporting-recovery.mjs';
+ import { sol61Effort } from './math-workflow-effort.mjs';
+@@ -68,13 +69,15 @@
+ }
+ function singleReportingRecoveryDuties(value,packs,receipts,items,current,matches,{allowed}={}){
+  const pending=new Map(),coverage=[],evidence={},obligations=new Set();if(!value)return {pending,coverage,evidence,obligations,sessions:{}};Object.assign(evidence,value.evidence);for(const id of value.targets)obligations.add(id);
+- const {root,run,row}=value,home=reportingOwnerHome(root,run,row.phase,row.round,row.unit),records=[];let identity=null;
++ const {root,run,row}=value,continuation=row.phase==='impact-initial'?loadSuccessorUncertaintyContinuation(root,run):null;
++ if(continuation){Object.assign(evidence,continuation.evidence);if(row.unit==='3')for(const id of continuation.targets)obligations.add(id);}
++ const home=reportingOwnerHome(root,run,row.phase,row.round,row.unit),records=[];let identity=null;
+  for(let index=1;index<packs.length;index++){const pack=packs[index],receipt=receipts[index];for(const id of (pack.reporting_owner_review_obligations??[]).filter(id=>!pack.reporting_owner_review_owners||pack.reporting_owner_review_owners[id]===row.unit)){need(typeof id==='string'&&(!allowed||allowed.has(id)),'invalid frozen reporting obligation');obligations.add(id);}const v=execution(root,run,pack,row.unit);need(receipt.run===run&&receipt.phase===pack.phase&&receipt.round===pack.round&&pack.reporting_owner_recovery?.path===value.path&&pack.input_evidence?.[value.path]===value.evidence[value.path]&&typeof v.native.session_home==='string'&&resolve(root,v.native.session_home)===home&&typeof v.native.session_id==='string'&&v.native.session_id.length>0&&v.native.session_id!==row.original_session_id&&Date.parse(v.native.started_at)>=Date.parse(row.recorded_at),'fresh recovery lacks genuine new persistent reporting owner');if(identity)need(identity.session_id===v.native.session_id,'reestablished reporting session changed');else identity={mode:'resume',result:v.dispatch,sha256:hash(readFileSync(v.dispatch,'utf8')),session_home:home,session_id:v.native.session_id};
+   for(const p of [pp(root,run,pack.phase,pack.round),v.reportPath,v.dispatch])need(receipt.evidence[p]===hash(readFileSync(p,'utf8')),'fresh recovery report is not genuinely collected');for(const p of [v.reportPath,v.dispatch,v.attempt,v.logPath,v.promptPath])evidence[p]=hash(readFileSync(p,'utf8'));
+   for(const event of receipt.statement_events??[])if(event.before_statement_sha256!==event.after_statement_sha256){const source=v.report.reviews.find(r=>r.id===event.id);if(!source)continue;need(pack.assignments[row.unit]?.includes(event.id)&&['repaired','authored'].includes(source.disposition)&&source.post_sha256===receipt.post[event.id],'new supplier interface lacks its actual repairing reporting owner');obligations.add(event.id);for(const impact of [...discoverDownstream({items,repairedIds:[event.id]}),...packs.flatMap(p=>p.impacts??[]).filter(i=>i.suppliers?.includes(event.id))])if(!allowed||allowed.has(impact.id))obligations.add(impact.id);}
+-  for(const review of v.report.reviews)if(pack.assignments[row.unit]?.includes(review.id)){need(receipt.reviews.some(r=>same(r,review)),'fresh full review absent from genuine collection');records.push({id:review.id,index,phase:pack.phase,unit:row.unit,review,receipt,report:v.reportPath,dispatch:v.dispatch,session_id:v.native.session_id});}
++  for(const review of v.report.reviews)if(pack.assignments[row.unit]?.includes(review.id)){if(receipt.kind==='successor-uncertainty-historical-scheduling-observation'&&!receipt.reviews.some(r=>same(r,review)))continue;need(receipt.reviews.some(r=>same(r,review)),'fresh full review absent from genuine collection');records.push({id:review.id,index,phase:pack.phase,unit:row.unit,review,receipt,report:v.reportPath,dispatch:v.dispatch,session_id:v.native.session_id});}
+  }
+- for(const id of [...obligations].sort()){const match=records.filter(r=>r.id===id&&matches(r.review,current,r.receipt.post)).at(-1);if(match&&match.review.uncertain===false)coverage.push({id,unit:row.unit,phase:match.phase,report:match.report,dispatch:match.dispatch,session_id:match.session_id,review_sha256:hash(match.review)});else pending.set(id,row.unit);}
++ for(const id of [...obligations].sort()){const match=records.filter(r=>r.id===id&&(!continuation?.targets.has(id)||r.index>packs.findIndex(p=>p.phase===continuation.row.phase))&&matches(r.review,current,r.receipt.post)).at(-1);if(match&&match.review.uncertain===false)coverage.push({id,unit:row.unit,phase:match.phase,report:match.report,dispatch:match.dispatch,session_id:match.session_id,review_sha256:hash(match.review)});else pending.set(id,row.unit);}
+  const session=identity??{mode:'new-context',session_home:home,recovery:value.path,recovery_sha256:value.evidence[value.path],original_session_id:row.original_session_id};return {pending,coverage,evidence,obligations,sessions:{[row.unit]:session}};
+ }
+ export function assertReportingSessionCompatibility(root,pack,unit){
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
+ // Round-based Step 5. Mathematical workers write evidence; only the controller
+ // collects it, judges a stable snapshot, and certifies a completed repair wave.
+ import { sol61Effort } from './math-workflow-effort.mjs';
+@@ -1799,7 +1800,7 @@
+     // A same-wave sibling or later genuine owner review may discharge the
+     // consumer. Initial adjudicator reviews and earlier passes cannot do so.
+     for(const record of records.filter(row=>row.index>=latest&&!withdrawnOwnerReport(withdrawal,row.pack,row.unit,row.receipt)))for(const review of record.report.reviews??[]){
+-      if(review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
++      if(review.uncertain!==false||review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
+         ||!contexts.matches(review,current,record.receipt.post))continue;
+       requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
+         'pending consumer review is absent from its original native collection');
+@@ -1849,11 +1850,29 @@
+ 
+ // This derivative is scheduling evidence only; ordinary collect never reads it.
+ function impactSchedulingReceiptPath(root,run,basePhase,round,pass){
++ if(basePhase==='impact-initial'&&round===1&&pass==='impact-initial-pass-2'){const continuation=loadSuccessorUncertaintyContinuation(root,run);if(continuation)return continuation.observationPath;}
+  if(basePhase==='impact-initial'&&pass==='impact-initial'){
+   const recovery=loadReportingOwnerRecovery(root,run,basePhase,round);
+   if(recovery?.observationPath)return recovery.observationPath;
+  }
+  return effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));
++}
++function readImpactSchedulingReceipt(root,run,basePhase,round,pass){
++ if(basePhase==='impact-initial'&&round===1&&pass==='impact-initial-pass-2'){const value=loadSuccessorUncertaintyContinuation(root,run);if(value)return successorSchedulingView(value);}
++ return read(impactSchedulingReceiptPath(root,run,basePhase,round,pass));
++}
++export function buildSuccessorReportingObservation(root,run,pack,reports,evidence){
++ requireValue(pack.phase==='impact-initial-pass-2'&&pack.round===1,'successor observation is exact first persistent pass only');
++ const current=hashes(root,run),reported={...pack.before};
++ for(const r of reports)for(const row of r.reviews??[])if(pack.assignments[String(r.unit)]?.includes(row.id))reported[row.id]=row.post_sha256;
++ const structural=validateReports(pack,reports.map(r=>({...r,reviews:r.reviews.map(v=>v.uncertain===true?{...v,uncertain:false}:v)})),reported,{root});
++ requireValue(structural.errors.length===0,'successor observation cannot hide another native defect behind uncertainty');
++ const result=validateReports(pack,reports,reported,{root}),uncertain=reports.flatMap(r=>r.reviews.filter(v=>v.uncertain===true).map(v=>({unit:String(r.unit),row:v})));
++ requireValue(uncertain.length===1&&uncertain[0].unit==='3'&&JSON.stringify(result.errors)===JSON.stringify([`invalid review 3/${uncertain[0].row.id}`]),'successor observation requires only the exact native owner3 uncertainty');
++ const contexts=reviewContextHashes(root,reports.flatMap(r=>r.reviews.map(v=>v.id))),after=statementHashes(root,run),restated=restatedIds(pack,result.changed,after);
++ const forced=new Set([uncertain[0].row.id]),queue=[uncertain[0].row.id],inventory=readLibraryItems(root,{run});while(queue.length)for(const item of discoverDownstream({items:inventory,repairedIds:[queue.shift()]}))if(!forced.has(item.id)){forced.add(item.id);queue.push(item.id);}
++ const genuine=reports.flatMap(r=>r.reviews).filter(v=>!forced.has(v.id)&&v.uncertain===false&&v.post_sha256===current[v.id]&&v.review_context_sha256===contexts[v.id]?.review_context_sha256);
++ return {...result,kind:'successor-uncertainty-historical-scheduling-observation',version:1,run,phase:pack.phase,round:1,historical_only:true,native_acceptance:false,reviews:[],historical_reviews:reports.flatMap(r=>r.reviews),genuine_current_native_reviews:genuine,evidence,post:current,downstream:[...new Set(reports.flatMap(r=>r.downstream))],ledger_updates:reports.flatMap(r=>r.ledger_updates??[]),restated,statement_events:restated.filter(id=>pack.before_statements?.[id]).map(id=>({id,before_statement_sha256:pack.before_statements[id],after_statement_sha256:after[id]}))};
+ }
+ export function buildInitialReportingObservation(root,run,pack,reports,evidence){
+  requireValue(pack.phase==='impact-initial'&&pack.round===1,'historical scheduling is initial only');
+@@ -1902,8 +1921,9 @@
+   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
+   const schedulingRecovery=phase==='impact-initial'?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(path)}):null;
+   if(active.phase==='impact-initial'&&schedulingRecovery?.observationPath)syncMaintenance(root,run,schedulingRecovery.observation.statement_events);
++  else if(phase==='impact-initial'&&round===1&&active.phase==='impact-initial-pass-2'&&loadSuccessorUncertaintyContinuation(root,run,{current:true})){const continuation=loadSuccessorUncertaintyContinuation(root,run);syncMaintenance(root,run,continuation.observation.statement_events);}
+   else collect(root,run,active.phase,round,{deferImpactClosure:true});
+-  const completed=progress.passes.map(pass=>read(impactSchedulingReceiptPath(root,run,phase,round,pass)));
++  const completed=progress.passes.map(pass=>readImpactSchedulingReceipt(root,run,phase,round,pass));
+   for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
+   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
+   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
+@@ -2007,6 +2027,8 @@
+       pack.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets]};
+       pack.input_evidence??={};for(const [p,h]of Object.entries(withdrawal.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'withdrawal evidence collision');pack.input_evidence[p]=h;}
+     }
++    const continuation=phase==='impact-initial'&&round===1?loadSuccessorUncertaintyContinuation(root,run,{current:active.phase==='impact-initial-pass-2'}):null;
++    if(continuation){pack.successor_uncertainty_continuation={path:continuation.path,targets:[...continuation.targets],resume_original_reporting_session:true};}
+     for(const unit of pack.units)assertReportingSessionCompatibility(root,pack,unit);
+     if(reportingRecovery?.observationPath&&!existsSync(path))loadReportingOwnerRecovery(root,run,phase,round,{current:true});
+     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+@@ -2054,7 +2076,7 @@
+     const path=impactSchedulingReceiptPath(root,run,phase,round,pass);
+     requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
+       `completed owner collection does not bind pass: ${pass}`);
+-    const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
++    const receipt=readImpactSchedulingReceipt(root,run,phase,round,pass);verifyEvidence(receipt.evidence,{root,run});return receipt;
+   });
+   const items=readLibraryItems(root,{run}),current=hashes(root,run);
+   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
+--- /dev/null
++++ b/tools/step5-successor-uncertainty-continuation.test.mjs
+@@ -0,0 +1,91 @@
++import {statementHash} from './step5-statement.mjs';
++import {previewSuccessorUncertaintyContinuation,recordSuccessorUncertaintyContinuation,loadSuccessorUncertaintyContinuation,successorUncertaintyPath} from './step5-successor-uncertainty-continuation.mjs';
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join,relative} from 'node:path';
++import {tmpdir} from 'node:os';
++import {initialize,prepareAdjudication,prepareImpact,collect,advanceImpact,verifyCompletedImpact,certify,workerLabel,digest,reviewContextHashes,readerConcernSession} from './step5-workflow.mjs';
++import {previewReportingOwnerRecovery,recordReportingOwnerRecovery,loadReportingOwnerRecovery,reportingOwnerRecoveryPath,reportingOwnerHome} from './step5-reporting-owner-recovery.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {recoverStep5Impact} from './step5-impact-recovery.mjs';
++import {MODELS} from './models.mjs';
++const consumer='lem-owner3-consumer';
++const run='reporting-recovery',trigger='lem-trigger',a='def-supplier-a',b='def-supplier-b',x='lem-consumer-a',y='lem-consumer-b',extra='ex-historical-use',ids=[trigger,a,b,x,y,extra,consumer],reason='The native reporting context was genuinely ephemeral and is unavailable; an explicitly new persistent native owner must fully review both assigned suppliers and all pending consumers before any current coverage.',ev={reason,uncertain:false,source_urls:[],familiar:true};
++function initialFixture(t,{persistent=false,abbreviated=false,interfaceConsumerOwner=false,scaled=false}={}){
++ const lane1=Array.from({length:71},(_,i)=>'lem-owner1-'+i),lane2=Array.from({length:69},(_,i)=>'lem-owner2-'+i),lane3=Array.from({length:69},(_,i)=>'lem-owner3-'+i),pending3=Array.from({length:10},(_,i)=>'lem-pending3-'+i),localIds=scaled?[...ids.filter(id=>id!==y),...lane1,...lane2,...lane3,...pending3]:ids;
++ const root=mkdtempSync(join(tmpdir(),'reporting-owner-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const d of ['items','research',`.autopilot/${run}`])mkdirSync(join(root,d),{recursive:true});
++ const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v));},get=p=>JSON.parse(readFileSync(join(root,p),'utf8')),text=id=>readFileSync(join(root,`items/${id}.md`),'utf8'),deps=id=>id===consumer?[extra]:[a,b].includes(id)?[trigger]:id===x?[a]:id===y?[b]:[],kind=id=>id.startsWith('def-')?'definition':'lemma';
++ const source=id=>`---\nid: ${id}\nkind: ${kind(id)}\ntitle: ${id}\nstatus: draft\ndependency_level: ${[a,b].includes(id)?1:[x,y].includes(id)?2:0}\ndeps: ${JSON.stringify(deps(id))}\n---\n\n## ${kind(id)==='definition'?'Definition':'Statement'}\n\nOriginal interface of ${id}.\n\n${kind(id)==='definition'?'':'## Proof\n\n1.1 The original complete argument. [given] ∎\n'}`;
++ for(const id of localIds)put(`items/${id}.md`,source(id));const manifest=`research/${run}-batch-1.pages.json`;put(manifest,[{id:'page',items:localIds.map(id=>({id,kind:kind(id),title:id,deps:deps(id),dependency_level:[a,b].includes(id)?1:[x,y].includes(id)?2:0}))}]);put(`research/${run}-judge.jsonl`,localIds.map(id=>JSON.stringify({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)})).join('\n')+'\n');initialize(root,run);put(`research/${run}-step5-v2/judge-1.json`,{verdicts:localIds.map(id=>({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)}))});
++ const reports=(pack,{strict=true,pending=false,wrongSession=false,uncertain=false,newInterface=false}={})=>{for(const unit of pack.units){const assigned=pack.assignments[unit].map(v=>typeof v==='string'?v:v.id),role=pack.rejected?'alpha-adjudicate':'alpha-repair',label=workerLabel(pack.phase,pack.round,unit),rp=`research/${run}-step5-v2/${label}.json`,r={run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),decisions:pack.rejected?pack.assignments[unit].map(v=>({...v,outcome:'confirmed_nonfatal',...ev})):[],reviews:assigned.map(id=>({id,disposition:itemHashGuard(text(id))===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...ev,uncertain:uncertain||pack.phase==='impact-initial'&&unit==='3'&&id===extra})),created_items:[],downstream:pending&&unit==='2'?[x,y,extra]:pack.rejected?[a,b]:[],ledger_updates:[],supporting_evidence:{}};
++  if(interfaceConsumerOwner&&pack.phase==='impact-initial'&&(unit==='1'||interfaceConsumerOwner==='conflict'&&unit==='2')){r.downstream=[x];r.downstream_uses={[x]:'The direct consumer invokes this precise repaired supplier interface in its Statement and first proof step; its owning contract quote needs the current convention.'};}
++  if(pending&&scaled){r.downstream=unit==='1'?lane1.slice(0,5):unit==='2'?[x]:pending3;r.downstream_pending=[...r.downstream];r.downstream_uses=Object.fromEntries(r.downstream.map(id=>[id,'The original supplier interface has a precise affected downstream use requiring current checking.']));}else if(pending&&unit==='2'){r.downstream_pending=[x,y];r.downstream_uses={[x]:'The supplier interface has a real downstream use to review.',[y]:'The other supplier interface also has a real downstream use to review.',[extra]:'This is an actual original affected-use disposition, not an assigned full item review.'};}put(rp,r);const dp=`research/${run}-dispatch/${role}-${label}.result.json`;if(!strict){put(dp,{run,role,label,covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high'});continue;}
++  const base=pack.basePhase??pack.phase,options=pack.phase==='impact-initial'&&!persistent?{}:readerConcernSession(root,run,pack.phase,pack.round,unit),session=wrongSession?'wrong-owner':options.resumeSession??(pack.phase==='impact-initial'?'ephemeral-'+unit:'reestablished-'+unit),when=pack.phase==='impact-initial'?'2026-01-01T01:00:00.000Z':new Date().toISOString(),stem=dp.replace('.result.json','.attempt-1'),n={run,role,label,covers:pack.phase===base?[unit]:[`${pack.phase}:${unit}`],ok:true,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},started_at:when,ended_at:when,session_id:session,session_home:options.sessionHome??null,log:join(root,stem+'.log'),prompt:join(root,stem+'.prompt.md')};put(stem+'.prompt.md',`run: ${run}\nrole: ${role}\nlabel: ${label}\ninput_sha256: ${r.input_sha256}\noutput: ${rp}\n`);put(stem+'.log',`fixture actual output\ncodex\n${abbreviated&&pack.phase==='impact-initial'&&unit==='2'?JSON.stringify({...r,reviews:r.reviews.map(row=>({...row,reason:'A genuine shorter terminal summary.'})),repair_notes:['The terminal notes are genuinely abbreviated.']}):`Wrote [Report](${rp}): ${r.reviews.length} reviews.`}\ntokens used\n100\n`);put(stem+'.result.json',n);put(dp,n);
++ }};
++ const adjud=prepareAdjudication(root,run,'initial',1);put(`items/${trigger}.md`,text(trigger).replace('Original interface','Repaired triggering interface'));reports(adjud,{strict:false});const pack=prepareImpact(root,run,'impact-initial',1);pack.assignments=scaled?{'1':lane1,'2':[a,b,...lane2],'3':[extra,...lane3]}:interfaceConsumerOwner?{'1':[a],'2':[b],'3':[]}:{'1':[],'2':[a,b],'3':[extra,consumer]};put(`research/${run}-step5-v2/impact-initial-1.json`,pack);for(const id of [a,b])put(`items/${id}.md`,text(id).replace('Original interface','Corrected supplier interface'));reports(pack,{pending:!interfaceConsumerOwner});const collection=null,collectionBytes=null;
++ const dispatches={};for(const unit of pack.units){const label=workerLabel(pack.phase,1,unit);dispatches[`5.2-impact:${label}`]={stage:'5.2-impact',role:'alpha-repair',label,covers:[unit],attempt:1,lastExitOk:true,startedAt:'2026-01-01T00:59:00.000Z',endedAt:'2026-01-01T01:01:00.000Z'};}put(`.autopilot/${run}/state.json`,{run,stage:'5.2-impact',paused:true,stageRounds:{'5.2-impact':1},dispatches});put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,group:'5.2-impact',stages:['5.2-impact'],id:'real-paused-request',at:'2026-01-01T01:02:00.000Z'});
++ const observation='research/unavailable-observation.json',unavailable='research/root-unavailable.json',preparation='research/preparation.json',inputs='research/preparation-inputs.json';for(const unit of ['1','2','3'])put(observation+unit,{run,session_id:'ephemeral-'+unit,matching_session_paths:[],journal_payloads_read:false});put(unavailable,{run,rows:['1','2','3'].map(unit=>({run,phase:'impact-initial',round:1,unit,session_id:'ephemeral-'+unit,session_home:null,original_report_sha256:digest(readFileSync(join(root,`research/${run}-step5-v2/${workerLabel('impact-initial',1,unit)}.json`),'utf8')),original_result_sha256:digest(readFileSync(join(root,`research/${run}-dispatch/alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`),'utf8')),original_context_unavailable:true,journal_payloads_read:false,matching_session_paths:[],confirmed_by:'/root',confirmed_at:'2026-01-01T01:03:00.000Z',reason,observation:{path:observation+unit,sha256:digest(readFileSync(join(root,observation+unit),'utf8'))}}))});put(preparation,{run,owner:'/root',ok:true,metadata_checked:true,native_execution_coverage:false,mathematical_review_claimed:false,selected_count:localIds.length});put(inputs,{run,selected_count:localIds.length,native_execution_coverage:false,mathematical_review_claimed:false,items:localIds.map(id=>({id,raw_sha256:digest(text(id)),guard_sha256:itemHashGuard(text(id))})),guards:[{path:manifest,raw_sha256:digest(readFileSync(join(root,manifest),'utf8'))}]});const payload={reason,preparation_file:preparation,preparation_inputs_file:inputs,session_unavailable_evidence_file:unavailable},contexts=(root,targets)=>new Map(targets.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)}]));
++ return {root,put,get,text,pack,reports,payload,collection,collectionBytes,contexts,manifest};
++}
++
++
++function fixture(t){
++ const f=initialFixture(t),phase='impact-initial';
++ return Promise.resolve(recordReportingOwnerRecovery(f.root,run,phase,1,'all',f.payload)).then(()=>{
++  const first=advanceImpact(f.root,run,phase,1);f.reports(first.pack);
++  const p=`research/${run}-step5-v2/${workerLabel(first.pack.phase,1,'3')}.json`,report=f.get(p);report.reviews.find(r=>r.id===extra).uncertain=true;f.put(p,report);
++  const dispatches={};for(const unit of first.pack.units){const label=workerLabel(first.pack.phase,1,unit),n=f.get(`research/${run}-dispatch/alpha-repair-${label}.result.json`);dispatches[`5.2-impact:${label}`]={stage:'5.2-impact',role:'alpha-repair',label,covers:[`${first.pack.phase}:${unit}`],attempt:1,lastExitOk:true,startedAt:n.started_at,endedAt:n.ended_at};}
++  f.put(`.autopilot/${run}/state.json`,{run,stage:'5.2-impact',paused:true,stageRounds:{'5.2-impact':1},dispatches});f.put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,group:'5.2-impact',stages:['5.2-impact'],id:'successor-real-hold',at:new Date().toISOString()});
++  const before=Object.fromEntries([extra,consumer].map(id=>[id,f.text(id)]));f.put(`items/${extra}.md`,before[extra].replace('original complete argument','current complete corrected proof with exact hypotheses'));
++  const contexts=reviewContextHashes(f.root,[extra,consumer]),rows=[extra,consumer].map(id=>{const after=f.text(id),bp=`research/repair-before-${id}.md`,ap=`research/repair-after-${id}.md`;f.put(bp,before[id]);f.put(ap,after);return {id,before_file:bp,after_file:ap,before_raw_sha256:digest(before[id]),after_raw_sha256:digest(after),before_guard_sha256:itemHashGuard(before[id]),after_guard_sha256:itemHashGuard(after),before_statement_sha256:statementHash(before[id]),after_statement_sha256:statementHash(after),reviewer_identity:'/root/fixture-proof-repair',uncertain:false,reason,review_context_sha256:contexts[id].review_context_sha256,disposition:before[id]===after?'unaffected':'repaired'};});
++  const repair='research/completed-proof-repair.json';f.put(repair,{version:1,kind:'owner-completed-proof-repair',run,phase:first.pack.phase,round:1,unit:'3',supplier:extra,original_report_sha256:digest(readFileSync(join(f.root,p),'utf8')),original_result_sha256:digest(readFileSync(join(f.root,`research/${run}-dispatch/alpha-repair-${workerLabel(first.pack.phase,1,'3')}.result.json`),'utf8')),original_pack_sha256:digest(readFileSync(join(f.root,`research/${run}-step5-v2/${first.pack.phase}-1.json`),'utf8')),original_uncertain_review_sha256:digest(report.reviews.find(r=>r.id===extra)),completed:true,mathematical_review_completed:true,native_coverage_granted:false,statement_narrowed:false,owner_identity:'/root',repairer_identity:'/root/fixture-proof-repair',completed_at:new Date().toISOString(),rows});
++  const inputs=f.get(f.payload.preparation_inputs_file);for(const i of inputs.items){i.raw_sha256=digest(f.text(i.id));i.guard_sha256=itemHashGuard(f.text(i.id));}f.put('research/successor-preparation-inputs.json',inputs);
++  const payload={reason,repair_evidence_file:repair,preparation_file:f.payload.preparation_file,preparation_inputs_file:'research/successor-preparation-inputs.json'};
++  return {...f,first,uncertainReportPath:p,continuationPayload:payload};
++ });
++}
++
++test('successor uncertainty stays rejected until genuine repaired supplier+consumer reviews resume the actual reporting session',async t=>{
++ const f=await fixture(t),phase='impact-initial';assert.throws(()=>collect(f.root,run,f.first.pack.phase,1,{deferImpactClosure:true}),/invalid review 3/);assert.throws(()=>advanceImpact(f.root,run,phase,1),/invalid review 3/);
++ const original=readFileSync(join(f.root,f.uncertainReportPath),'utf8'),preview=await previewSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);assert.deepEqual(preview.targets,[extra,consumer].sort());assert.equal(preview.session_id,'reestablished-3');assert.equal(existsSync(successorUncertaintyPath(f.root,run)),false);
++ await recordSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);assert.throws(()=>collect(f.root,run,f.first.pack.phase,1,{deferImpactClosure:true}),/invalid review 3/);
++ const v=loadSuccessorUncertaintyContinuation(f.root,run);assert.deepEqual(v.observation.reviews,[]);assert.equal(v.observation.errors.length,1);assert.equal(v.observation.genuine_current_native_reviews.some(r=>r.id===extra||r.id===consumer),false);
++ const next=advanceImpact(f.root,run,phase,1);assert.equal(next.pack.phase,'impact-initial-pass-3');assert.deepEqual(next.pack.assignments['3'],[extra,consumer]);assert.equal(next.pack.reporting_owner_sessions['3'].mode,'resume');assert.equal(readerConcernSession(f.root,run,next.pack.phase,1,'3').resumeSession,'reestablished-3');assert.equal(readFileSync(join(f.root,f.uncertainReportPath),'utf8'),original);assert.throws(()=>certify(f.root,run,phase,1,{contextHasher:f.contexts}));
++ f.reports(next.pack);assert.equal(advanceImpact(f.root,run,phase,1).complete,true);const closed=verifyCompletedImpact(f.root,run,phase,1);assert.ok(closed.reviews.every(r=>r.uncertain===false));assert.ok(closed.reporting_owner_reviews.filter(r=>[extra,consumer].includes(r.id)).every(r=>r.phase===next.pack.phase&&r.session_id==='reestablished-3'));assert.ok(certify(f.root,run,phase,1,{contextHasher:f.contexts}));
++});
++for(const mode of ['wrong-owner','wrong-session','origin-report','uncertainty-masks-reason','omitted-consumer','incomplete-repair','no-actual-repair','narrowed-statement','missing-current-input','wrong-phase'])test(`successor admission fails closed: ${mode}`,async t=>{
++ const f=await fixture(t),payload=f.continuationPayload;
++ if(mode==='wrong-owner'||mode==='omitted-consumer'||mode==='incomplete-repair'||mode==='no-actual-repair'||mode==='narrowed-statement'){
++  const r=f.get(payload.repair_evidence_file);if(mode==='wrong-owner')r.rows[0].reviewer_identity='/root/a-different-reviewer';if(mode==='omitted-consumer')r.rows=r.rows.filter(v=>v.id!==consumer);if(mode==='incomplete-repair')r.completed=false;
++  if(mode==='no-actual-repair'){const v=r.rows.find(v=>v.id===extra);v.before_file=v.after_file;v.before_raw_sha256=v.after_raw_sha256;v.before_guard_sha256=v.after_guard_sha256;v.before_statement_sha256=v.after_statement_sha256;v.disposition='unaffected';}
++  if(mode==='narrowed-statement'){const v=r.rows.find(v=>v.id===extra),after=f.text(extra).replace('Original interface','Restricted interface with a weaker conclusion');f.put(v.after_file,after);f.put(`items/${extra}.md`,after);v.after_raw_sha256=digest(after);v.after_guard_sha256=itemHashGuard(after);v.after_statement_sha256=statementHash(after);}
++  f.put(payload.repair_evidence_file,r);
++ }
++ if(mode==='wrong-session'){const p=`research/${run}-dispatch/alpha-repair-${workerLabel(f.first.pack.phase,1,'3')}.result.json`,n=f.get(p);n.session_id='another-successful-native-session';f.put(p,n);f.put(p.replace('.result.json','.attempt-1.result.json'),n);}
++ if(mode==='origin-report'||mode==='uncertainty-masks-reason'){const r=f.get(f.uncertainReportPath);r.reviews.find(v=>v.id===extra).reason=mode==='origin-report'?reason+' A silently changed native origin.':'bad';f.put(f.uncertainReportPath,r);if(mode==='uncertainty-masks-reason'){const repair=f.get(payload.repair_evidence_file);repair.original_report_sha256=digest(readFileSync(join(f.root,f.uncertainReportPath),'utf8'));repair.original_uncertain_review_sha256=digest(r.reviews.find(v=>v.id===extra));f.put(payload.repair_evidence_file,repair);}}
++ if(mode==='missing-current-input'){const i=f.get(payload.preparation_inputs_file);i.items=i.items.filter(v=>v.id!==consumer);f.put(payload.preparation_inputs_file,i);}
++ if(mode==='wrong-phase'){const p=`.autopilot/${run}/state.json`,s=f.get(p);s.stage='5.6-impact';f.put(p,s);}
++ await assert.rejects(()=>previewSuccessorUncertaintyContinuation(f.root,run,payload));assert.equal(existsSync(successorUncertaintyPath(f.root,run)),false);
++});
++for(const mode of ['unpaused','writer','request-changed','source-changed'])test(`successor first scheduling rechecks actual hold/current inputs: ${mode}`,async t=>{
++ const f=await fixture(t);await recordSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);
++ const p=`.autopilot/${run}/state.json`,s=f.get(p);if(mode==='unpaused')s.paused=false;if(mode==='writer')s.dispatches['foreign-writer']={startedAt:new Date().toISOString()};f.put(p,s);
++ if(mode==='request-changed'){const q=`.autopilot/${run}/owner-gate-request.json`,r=f.get(q);r.id+='-changed';f.put(q,r);}
++ if(mode==='source-changed')f.put(`items/${extra}.md`,f.text(extra)+'\nA subsequent unreviewed change.');
++ assert.throws(()=>advanceImpact(f.root,run,'impact-initial',1));assert.equal(existsSync(join(f.root,`research/${run}-step5-v2/impact-initial-pass-3-1.json`)),false);
++});
++for(const mode of ['uncertain','wrong-session','stale-context','missing-row','new-context'])test(`fresh successor coverage cannot accept ${mode}`,async t=>{
++ const f=await fixture(t);await recordSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);const next=advanceImpact(f.root,run,'impact-initial',1);
++ if(mode==='new-context'){next.pack.reporting_owner_sessions['3'].mode='new-context';f.put(`research/${run}-step5-v2/${next.pack.phase}-1.json`,next.pack);assert.throws(()=>readerConcernSession(f.root,run,next.pack.phase,1,'3'));return;}
++ f.reports(next.pack,{uncertain:mode==='uncertain'});
++ if(mode==='wrong-session'){const p=`research/${run}-dispatch/alpha-repair-${workerLabel(next.pack.phase,1,'3')}.result.json`,n=f.get(p);n.session_id='wrong-native-reporter';f.put(p,n);f.put(p.replace('.result.json','.attempt-1.result.json'),n);}
++ if(mode==='stale-context'||mode==='missing-row'){const p=`research/${run}-step5-v2/${workerLabel(next.pack.phase,1,'3')}.json`,r=f.get(p);if(mode==='missing-row')r.reviews.pop();else r.reviews[0].review_context_sha256='f'.repeat(64);f.put(p,r);}
++ if(mode==='stale-context'){const result=advanceImpact(f.root,run,'impact-initial',1);assert.equal(result.complete,false);}else assert.throws(()=>advanceImpact(f.root,run,'impact-initial',1));assert.throws(()=>verifyCompletedImpact(f.root,run,'impact-initial',1));assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:f.contexts}));
++});
++test('later pending claims cannot reuse earlier clean repaired supplier coverage',async t=>{
++ const f=await fixture(t);await recordSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);const next=advanceImpact(f.root,run,'impact-initial',1);f.reports(next.pack);
++ const pending=(pack,id)=>{const p=`research/${run}-step5-v2/${workerLabel(pack.phase,1,'3')}.json`,r=f.get(p);r.downstream=[id];r.downstream_pending=[id];f.put(p,r);};
++ pending(next.pack,trigger);const later=advanceImpact(f.root,run,'impact-initial',1);assert.ok(later.pack.assignments['3'].includes(trigger));f.reports(later.pack);pending(later.pack,extra);
++ const final=advanceImpact(f.root,run,'impact-initial',1);assert.equal(final.complete,false);assert.ok(final.pack.assignments['3'].includes(extra));assert.equal(readerConcernSession(f.root,run,final.pack.phase,1,'3').resumeSession,'reestablished-3');f.reports(final.pack);assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
++});
+--- /dev/null
++++ b/tools/step5-successor-uncertainty-regression.test.mjs
+@@ -0,0 +1,52 @@
++import {statementHash} from './step5-statement.mjs';
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join,relative} from 'node:path';
++import {tmpdir} from 'node:os';
++import {initialize,prepareAdjudication,prepareImpact,collect,advanceImpact,verifyCompletedImpact,certify,workerLabel,digest,reviewContextHashes,readerConcernSession} from './step5-workflow.mjs';
++import {previewReportingOwnerRecovery,recordReportingOwnerRecovery,loadReportingOwnerRecovery,reportingOwnerRecoveryPath,reportingOwnerHome} from './step5-reporting-owner-recovery.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {recoverStep5Impact} from './step5-impact-recovery.mjs';
++import {MODELS} from './models.mjs';
++const consumer='lem-owner3-consumer';
++const run='reporting-recovery',trigger='lem-trigger',a='def-supplier-a',b='def-supplier-b',x='lem-consumer-a',y='lem-consumer-b',extra='ex-historical-use',ids=[trigger,a,b,x,y,extra,consumer],reason='The native reporting context was genuinely ephemeral and is unavailable; an explicitly new persistent native owner must fully review both assigned suppliers and all pending consumers before any current coverage.',ev={reason,uncertain:false,source_urls:[],familiar:true};
++function initialFixture(t,{persistent=false,abbreviated=false,interfaceConsumerOwner=false,scaled=false}={}){
++ const lane1=Array.from({length:71},(_,i)=>'lem-owner1-'+i),lane2=Array.from({length:69},(_,i)=>'lem-owner2-'+i),lane3=Array.from({length:69},(_,i)=>'lem-owner3-'+i),pending3=Array.from({length:10},(_,i)=>'lem-pending3-'+i),localIds=scaled?[...ids.filter(id=>id!==y),...lane1,...lane2,...lane3,...pending3]:ids;
++ const root=mkdtempSync(join(tmpdir(),'reporting-owner-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const d of ['items','research',`.autopilot/${run}`])mkdirSync(join(root,d),{recursive:true});
++ const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v));},get=p=>JSON.parse(readFileSync(join(root,p),'utf8')),text=id=>readFileSync(join(root,`items/${id}.md`),'utf8'),deps=id=>id===consumer?[extra]:[a,b].includes(id)?[trigger]:id===x?[a]:id===y?[b]:[],kind=id=>id.startsWith('def-')?'definition':'lemma';
++ const source=id=>`---\nid: ${id}\nkind: ${kind(id)}\ntitle: ${id}\nstatus: draft\ndependency_level: ${[a,b].includes(id)?1:[x,y].includes(id)?2:0}\ndeps: ${JSON.stringify(deps(id))}\n---\n\n## ${kind(id)==='definition'?'Definition':'Statement'}\n\nOriginal interface of ${id}.\n\n${kind(id)==='definition'?'':'## Proof\n\n1.1 The original complete argument. [given] ∎\n'}`;
++ for(const id of localIds)put(`items/${id}.md`,source(id));const manifest=`research/${run}-batch-1.pages.json`;put(manifest,[{id:'page',items:localIds.map(id=>({id,kind:kind(id),title:id,deps:deps(id),dependency_level:[a,b].includes(id)?1:[x,y].includes(id)?2:0}))}]);put(`research/${run}-judge.jsonl`,localIds.map(id=>JSON.stringify({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)})).join('\n')+'\n');initialize(root,run);put(`research/${run}-step5-v2/judge-1.json`,{verdicts:localIds.map(id=>({id,model:MODELS.sol61.id,keep:id!==trigger,item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)}))});
++ const reports=(pack,{strict=true,pending=false,wrongSession=false,uncertain=false,newInterface=false}={})=>{for(const unit of pack.units){const assigned=pack.assignments[unit].map(v=>typeof v==='string'?v:v.id),role=pack.rejected?'alpha-adjudicate':'alpha-repair',label=workerLabel(pack.phase,pack.round,unit),rp=`research/${run}-step5-v2/${label}.json`,r={run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),decisions:pack.rejected?pack.assignments[unit].map(v=>({...v,outcome:'confirmed_nonfatal',...ev})):[],reviews:assigned.map(id=>({id,disposition:itemHashGuard(text(id))===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...ev,uncertain:uncertain||pack.phase==='impact-initial'&&unit==='3'&&id===extra})),created_items:[],downstream:pending&&unit==='2'?[x,y,extra]:pack.rejected?[a,b]:[],ledger_updates:[],supporting_evidence:{}};
++  if(interfaceConsumerOwner&&pack.phase==='impact-initial'&&(unit==='1'||interfaceConsumerOwner==='conflict'&&unit==='2')){r.downstream=[x];r.downstream_uses={[x]:'The direct consumer invokes this precise repaired supplier interface in its Statement and first proof step; its owning contract quote needs the current convention.'};}
++  if(pending&&scaled){r.downstream=unit==='1'?lane1.slice(0,5):unit==='2'?[x]:pending3;r.downstream_pending=[...r.downstream];r.downstream_uses=Object.fromEntries(r.downstream.map(id=>[id,'The original supplier interface has a precise affected downstream use requiring current checking.']));}else if(pending&&unit==='2'){r.downstream_pending=[x,y];r.downstream_uses={[x]:'The supplier interface has a real downstream use to review.',[y]:'The other supplier interface also has a real downstream use to review.',[extra]:'This is an actual original affected-use disposition, not an assigned full item review.'};}put(rp,r);const dp=`research/${run}-dispatch/${role}-${label}.result.json`;if(!strict){put(dp,{run,role,label,covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high'});continue;}
++  const base=pack.basePhase??pack.phase,options=pack.phase==='impact-initial'&&!persistent?{}:readerConcernSession(root,run,pack.phase,pack.round,unit),session=wrongSession?'wrong-owner':options.resumeSession??(pack.phase==='impact-initial'?'ephemeral-'+unit:'reestablished-'+unit),when=pack.phase==='impact-initial'?'2026-01-01T01:00:00.000Z':new Date().toISOString(),stem=dp.replace('.result.json','.attempt-1'),n={run,role,label,covers:pack.phase===base?[unit]:[`${pack.phase}:${unit}`],ok:true,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},started_at:when,ended_at:when,session_id:session,session_home:options.sessionHome??null,log:join(root,stem+'.log'),prompt:join(root,stem+'.prompt.md')};put(stem+'.prompt.md',`run: ${run}\nrole: ${role}\nlabel: ${label}\ninput_sha256: ${r.input_sha256}\noutput: ${rp}\n`);put(stem+'.log',`fixture actual output\ncodex\n${abbreviated&&pack.phase==='impact-initial'&&unit==='2'?JSON.stringify({...r,reviews:r.reviews.map(row=>({...row,reason:'A genuine shorter terminal summary.'})),repair_notes:['The terminal notes are genuinely abbreviated.']}):`Wrote [Report](${rp}): ${r.reviews.length} reviews.`}\ntokens used\n100\n`);put(stem+'.result.json',n);put(dp,n);
++ }};
++ const adjud=prepareAdjudication(root,run,'initial',1);put(`items/${trigger}.md`,text(trigger).replace('Original interface','Repaired triggering interface'));reports(adjud,{strict:false});const pack=prepareImpact(root,run,'impact-initial',1);pack.assignments=scaled?{'1':lane1,'2':[a,b,...lane2],'3':[extra,...lane3]}:interfaceConsumerOwner?{'1':[a],'2':[b],'3':[]}:{'1':[],'2':[a,b],'3':[extra,consumer]};put(`research/${run}-step5-v2/impact-initial-1.json`,pack);for(const id of [a,b])put(`items/${id}.md`,text(id).replace('Original interface','Corrected supplier interface'));reports(pack,{pending:!interfaceConsumerOwner});const collection=null,collectionBytes=null;
++ const dispatches={};for(const unit of pack.units){const label=workerLabel(pack.phase,1,unit);dispatches[`5.2-impact:${label}`]={stage:'5.2-impact',role:'alpha-repair',label,covers:[unit],attempt:1,lastExitOk:true,startedAt:'2026-01-01T00:59:00.000Z',endedAt:'2026-01-01T01:01:00.000Z'};}put(`.autopilot/${run}/state.json`,{run,stage:'5.2-impact',paused:true,stageRounds:{'5.2-impact':1},dispatches});put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,group:'5.2-impact',stages:['5.2-impact'],id:'real-paused-request',at:'2026-01-01T01:02:00.000Z'});
++ const observation='research/unavailable-observation.json',unavailable='research/root-unavailable.json',preparation='research/preparation.json',inputs='research/preparation-inputs.json';for(const unit of ['1','2','3'])put(observation+unit,{run,session_id:'ephemeral-'+unit,matching_session_paths:[],journal_payloads_read:false});put(unavailable,{run,rows:['1','2','3'].map(unit=>({run,phase:'impact-initial',round:1,unit,session_id:'ephemeral-'+unit,session_home:null,original_report_sha256:digest(readFileSync(join(root,`research/${run}-step5-v2/${workerLabel('impact-initial',1,unit)}.json`),'utf8')),original_result_sha256:digest(readFileSync(join(root,`research/${run}-dispatch/alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`),'utf8')),original_context_unavailable:true,journal_payloads_read:false,matching_session_paths:[],confirmed_by:'/root',confirmed_at:'2026-01-01T01:03:00.000Z',reason,observation:{path:observation+unit,sha256:digest(readFileSync(join(root,observation+unit),'utf8'))}}))});put(preparation,{run,owner:'/root',ok:true,metadata_checked:true,native_execution_coverage:false,mathematical_review_claimed:false,selected_count:localIds.length});put(inputs,{run,selected_count:localIds.length,native_execution_coverage:false,mathematical_review_claimed:false,items:localIds.map(id=>({id,raw_sha256:digest(text(id)),guard_sha256:itemHashGuard(text(id))})),guards:[{path:manifest,raw_sha256:digest(readFileSync(join(root,manifest),'utf8'))}]});const payload={reason,preparation_file:preparation,preparation_inputs_file:inputs,session_unavailable_evidence_file:unavailable},contexts=(root,targets)=>new Map(targets.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)}]));
++ return {root,put,get,text,pack,reports,payload,collection,collectionBytes,contexts,manifest};
++}
++
++
++function fixture(t){
++ const f=initialFixture(t),phase='impact-initial';
++ return Promise.resolve(recordReportingOwnerRecovery(f.root,run,phase,1,'all',f.payload)).then(()=>{
++  const first=advanceImpact(f.root,run,phase,1);f.reports(first.pack);
++  const p=`research/${run}-step5-v2/${workerLabel(first.pack.phase,1,'3')}.json`,report=f.get(p);report.reviews.find(r=>r.id===extra).uncertain=true;f.put(p,report);
++  const dispatches={};for(const unit of first.pack.units){const label=workerLabel(first.pack.phase,1,unit),n=f.get(`research/${run}-dispatch/alpha-repair-${label}.result.json`);dispatches[`5.2-impact:${label}`]={stage:'5.2-impact',role:'alpha-repair',label,covers:[`${first.pack.phase}:${unit}`],attempt:1,lastExitOk:true,startedAt:n.started_at,endedAt:n.ended_at};}
++  f.put(`.autopilot/${run}/state.json`,{run,stage:'5.2-impact',paused:true,stageRounds:{'5.2-impact':1},dispatches});f.put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,group:'5.2-impact',stages:['5.2-impact'],id:'successor-real-hold',at:new Date().toISOString()});
++  const before=Object.fromEntries([extra,consumer].map(id=>[id,f.text(id)]));f.put(`items/${extra}.md`,before[extra].replace('original complete argument','current complete corrected proof with exact hypotheses'));
++  const contexts=reviewContextHashes(f.root,[extra,consumer]),rows=[extra,consumer].map(id=>{const after=f.text(id),bp=`research/repair-before-${id}.md`,ap=`research/repair-after-${id}.md`;f.put(bp,before[id]);f.put(ap,after);return {id,before_file:bp,after_file:ap,before_raw_sha256:digest(before[id]),after_raw_sha256:digest(after),before_guard_sha256:itemHashGuard(before[id]),after_guard_sha256:itemHashGuard(after),before_statement_sha256:statementHash(before[id]),after_statement_sha256:statementHash(after),reviewer_identity:'/root/fixture-proof-repair',uncertain:false,reason,review_context_sha256:contexts[id].review_context_sha256,disposition:before[id]===after?'unaffected':'repaired'};});
++  const repair='research/completed-proof-repair.json';f.put(repair,{version:1,kind:'owner-completed-proof-repair',run,phase:first.pack.phase,round:1,unit:'3',supplier:extra,original_report_sha256:digest(readFileSync(join(f.root,p),'utf8')),original_result_sha256:digest(readFileSync(join(f.root,`research/${run}-dispatch/alpha-repair-${workerLabel(first.pack.phase,1,'3')}.result.json`),'utf8')),original_pack_sha256:digest(readFileSync(join(f.root,`research/${run}-step5-v2/${first.pack.phase}-1.json`),'utf8')),original_uncertain_review_sha256:digest(report.reviews.find(r=>r.id===extra)),completed:true,mathematical_review_completed:true,native_coverage_granted:false,statement_narrowed:false,owner_identity:'/root',repairer_identity:'/root/fixture-proof-repair',completed_at:new Date().toISOString(),rows});
++  const inputs=f.get(f.payload.preparation_inputs_file);for(const i of inputs.items){i.raw_sha256=digest(f.text(i.id));i.guard_sha256=itemHashGuard(f.text(i.id));}f.put('research/successor-preparation-inputs.json',inputs);
++  const payload={reason,repair_evidence_file:repair,preparation_file:f.payload.preparation_file,preparation_inputs_file:'research/successor-preparation-inputs.json'};
++  return {...f,first,uncertainReportPath:p,continuationPayload:payload};
++ });
++}
++
++test('completed proof repair has a guarded route to a new ordinary phase with actual persistent owner resume',async t=>{
++ const f=await fixture(t);const module=new URL('./step5-successor-uncertainty-continuation.mjs',import.meta.url);
++ if(existsSync(module)){const {recordSuccessorUncertaintyContinuation}=await import(module.href);await recordSuccessorUncertaintyContinuation(f.root,run,f.continuationPayload);}
++ const next=advanceImpact(f.root,run,'impact-initial',1);assert.equal(next.complete,false);assert.equal(next.pack.phase,'impact-initial-pass-3');assert.equal(readerConcernSession(f.root,run,next.pack.phase,1,'3').resumeSession,'reestablished-3');
++});
+--- /dev/null
++++ b/tools/step5-successor-uncertainty-continuation.md
+@@ -0,0 +1,96 @@
++# Successful successor with native uncertainty
++
++This optional one-shot bridge handles only `impact-initial-pass-2`, round1,
++lane3 after genuine initial all-owner reporting recovery. A successful dispatch
++with an honest uncertain review is still rejected by ordinary collection. Do
++not retry a successful immutable lane, change its report, reuse a new-context
++pack, reset counters or claim the uncertainty is resolved to unlock scheduling.
++
++Admission requires the actual paused/drained5.2 owner hold, exact current
++progress `[impact-initial, impact-initial-pass-2]`, all three successful immutable
++native successor executions and exactly one uncertain lane3 review. It binds
++actual attempt/result/prompt/final bytes and the existing persistent reporting
++home/session. Initial recovery provenance and all original duties remain owed.
++The sole native uncertainty may be deferred for scheduling; every other field
++is checked independently, including malformed fields in that uncertain row.
++
++A genuine completed root mathematical repair must exist before preview or
++record. Mechanical hashes do not establish mathematical truth. In particular,
++the machine-learning raw-filtration localization uncertainty must remain blocked
++until its original rich clause has actually been proved; a narrower statement
++is not an admission path. This adapter currently permits proof-only repair:
++Statement/Definition and frontmatter bytes must remain unchanged. The same
++repair owner supplies proof dispositions for the supplier and every current
++transitive dependency/reference consumer, even where consumer source/context
++hashes remain unchanged. Scope is derived from actual inventory. It must remain
++inside the frontier and cannot conflict with another genuine original reviewer.
++Any unsupported scope fails closed rather than dropping consumers.
++
++The root repair evidence file has:
++
++- version:1, kind:`owner-completed-proof-repair`, run,
++  phase:`impact-initial-pass-2`, round:1, unit:`3`, supplier;
++- owner_identity:`/root`, repairer_identity:the actual `/root/...` repair owner,
++  completed:true, mathematical_review_completed:true,
++  native_coverage_granted:false, statement_narrowed:false, completed_at;
++- original_report_sha256, original_result_sha256, original_pack_sha256 and
++  original_uncertain_review_sha256 from the genuine captured native origin;
++- rows for exactly the derived supplier/consumer scope. Each row contains id,
++  before_file/after_file (immutable full source archives), before/after raw,
++  guard and statement SHA256 fields, disposition:`repaired` or `unaffected`,
++  reviewer_identity matching repairer_identity, uncertain:false, substantive
++  reason and current review_context_sha256.
++
++The supplier must actually change guard from its genuine native uncertain
++review. Before archives match the original native carriers; after archives
++match current sources. Every consumer disposition belongs to the same repair
++owner. Native fresh review is still mandatory and is not supplied by root rows.
++Use new immutable mechanical preparation/inputs files for the exact manifest
++source scope with ok/metadata_checked:true and mathematical_review_claimed/
++native_execution_coverage:false. Never overwrite initial recovery preparation.
++
++At the real hold, after independent code review/install and controller reload,
++root may call `previewSuccessorUncertaintyContinuation(root,run,payload)` then
++`recordSuccessorUncertaintyContinuation(root,run,payload)` from
++`tools/step5-successor-uncertainty-continuation.mjs`. The payload has exactly
++reason, repair_evidence_file, preparation_file and preparation_inputs_file.
++Preview writes nothing. Both bind actual current guards, contexts, affected
++inventory, original reports and the actual hold/progress/request. The write-once
++receipt is `research/R-step5-v2/impact-initial-pass-2-1-owner-uncertainty-continuation.json`.
++
++The separate observation has reviews:[], native_acceptance:false and the exact
++historical rows/error. Separately named genuine_current_native_reviews retains
++only original nonuncertain native rows that still match current guard/context
++and are outside the mandatory affected floor. A validated in-memory scheduling
++view uses those actual native rows as existing evidence; no passing original
++collection or new review is invented. All affected rows are withheld until a
++later genuine owner3 review, even if an old clean consumer context still matches.
++
++WORKFLOW.md expressly permits the existing native helper at a drained owner
++hold before gate permission/resume:
++
++```
++node tools/step5-workflow.mjs advance-impact --run R --phase impact-initial --round 1
++```
++
++This prepares a new ordinary `impact-initial-pass-3` pack/tasks/progress. It
++rechecks the real paused/drained hold, unchanged request/progress, current source
++and context inputs immediately before freezing. Root does not edit progress or
++state. Lane3 must mode:resume its actual pass2 session and persistent home;
++there is no new-context migration. The same native owner fully reviews the
++supplier and consumers, suppliers first. Only missing/stale remaining original
++duties enter ordinary work. Normal controller resume retains the owner gate
++hold; no unresolved-math attestation or gate permit is manufactured.
++
++Fresh uncertainty, wrong sessions or stale reviews cannot close. Later pending
++claims still require same-wave or later genuine coverage. Original passed and
++uncertain reports/attempts remain immutable. Original223 recovery duties,
++no-progress checks, round/repair budgets, maintenance, certification, judgment
++and all gates remain intact. A later new uncertainty is not admitted by this
++one-shot branch and remains an ordinary blocker.
++
++Focused checks:
++
++```
++node --test tools/step5-successor-uncertainty-regression.test.mjs tools/step5-successor-uncertainty-continuation.test.mjs tools/step5-initial-reporting-owner-recovery.test.mjs tools/step5-reporting-owner-recovery.test.mjs
++```
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -1108,3 +1108,16 @@
+ reporting sessions. Overlapping floors or genuine reader-identity conflicts fail
+ closed. Default dispatch, immutable originals, repair budgets and every ordinary
+ certification, judgment and gate remain unchanged.
++
++An optional [successful successor uncertainty continuation](tools/step5-successor-uncertainty-continuation.md)
++handles exactly the first persistent initial owner3 pass after reporting recovery.
++It requires the actual paused/drained5.2 boundary, original successful immutable
++native execution and a genuine completed same-owner proof-only mathematical
++repair with all affected consumer dispositions and current guards. Exact original
++uncertainty remains a strict ordinary collection failure and a separate zero-credit
++historical observation. Only still-current nonuncertain original native evidence
++outside the forced affected floor can carry as existing evidence. The permitted
++native advance-impact helper prepares a new ordinary pass resuming the actual
++persistent reporting session; fresh supplier/consumer reviews remain mandatory.
++No gate permission, repair-budget reset, source narrowing, old-report rewrite or
++mathematical acceptance is supplied by this scheduling bridge.

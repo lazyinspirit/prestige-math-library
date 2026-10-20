@@ -17,8 +17,8 @@ landmark: true
 short: "$(\\mathbb{R}, |x-y|)$"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-real-line-is-a-metric-space.json
   precheck: pass
-  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-lem-real-line-is-a-metric-space-repair.json
 sources:
   scraped: []
   references:
@@ -36,21 +36,35 @@ pipeline_run: null
 ## Statement
 
 Define $d_{\mathbb{R}} : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ by
-$d_{\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:
+$d_{\mathbb{R}}(x,y) := |x - y|$ (Absolute value in an ordered field). Then:
 
-1. $d_{\mathbb{R}}$ is a metric on $\mathbb{R}$ ([[def-metric-space]]); it is
+1. $d_{\mathbb{R}}$ is a metric on $\mathbb{R}$ (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric); it is
    called the **usual metric** of $\mathbb{R}$.
 2. For $x \in \mathbb{R}$ and $r > 0$ the open ball is the bounded open interval
-   ([[def-interval]], [[def-metric-ball]])
+   (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length, Open ball, closed ball and sphere in a metric space)
    $$B(x,r) = (x-r,\ x+r),$$
    and the closed ball is $\bar B(x,r) = [x-r,\ x+r]$.
 3. Consequently $U \subseteq \mathbb{R}$ is open in the metric topology of
-   $d_{\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \in U$
+   $d_{\mathbb{R}}$ (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) exactly when for every $x \in U$
    there is $r > 0$ with $(x-r, x+r) \subseteq U$. This topology is called the
    **usual topology** of $\mathbb{R}$.
 4. $(\mathbb{R}, d_{\mathbb{R}})$ is not a bounded metric space
-   ([[def-metric-bounded-diameter]]): no ball contains $\mathbb{R}$, so
+   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space): no ball contains $\mathbb{R}$, so
    $\operatorname{diam}(\mathbb{R})$ is not defined.
+
+## Statement references
+
+[[def-abs-value]]
+
+[[def-metric-space]]
+
+[[def-interval]]
+
+[[def-metric-ball]]
+
+[[def-metric-topology]]
+
+[[def-metric-bounded-diameter]]
 
 ## Facts & Assumptions
 

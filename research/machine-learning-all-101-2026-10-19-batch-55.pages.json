@@ -1,0 +1,155 @@
+[
+  {
+    "order": 2800,
+    "id": "algorithmic-stability-of-stochastic-training",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Algorithmic stability of stochastic training",
+    "companion": "algorithmic-stability-of-stochastic-training-examples",
+    "requires": [
+      "stochastic-gradient-descent-for-learning",
+      "ml02-federated-optimization"
+    ],
+    "items": [
+      {
+        "id": "lem-iid-sample-plus-ghost-point-are-exchangeable",
+        "kind": "lemma",
+        "title": "An IID sample and ghost point are exchangeable",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-sigma-algebras-and-events",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "def-uniform-stability",
+        "kind": "definition",
+        "title": "Uniform stability for randomized learning rules",
+        "deps": [
+          "def-supervised-learning-problem"
+        ],
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "thm-uniform-stability-implies-expected-generalization",
+        "kind": "theorem",
+        "title": "Uniform stability implies expected generalization",
+        "deps": [
+          "def-uniform-stability",
+          "lem-iid-sample-plus-ghost-point-are-exchangeable",
+          "def-supervised-learning-problem",
+          "def-population-and-empirical-risk",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "thm-sgd-stability-convex-loss",
+        "kind": "theorem",
+        "title": "Expected generalization of convex stochastic gradient training",
+        "deps": [
+          "def-uniform-stability",
+          "thm-uniform-stability-implies-expected-generalization",
+          "lem-convex-gradient-step-nonexpansive",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-supervised-learning-problem",
+          "def-population-and-empirical-risk",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "thm-sgd-stability-nonconvex-loss",
+        "kind": "theorem",
+        "title": "Expected generalization of nonconvex stochastic gradient training",
+        "deps": [
+          "def-uniform-stability",
+          "thm-uniform-stability-implies-expected-generalization",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-supervised-learning-problem",
+          "def-population-and-empirical-risk",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-exponential-is-strictly-increasing",
+          "thm-exponential-addition-formula",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+      "statement": "Let $n\\ge2$, $T,d\\ge1$, and let $\\beta,c>0$ and $L\\ge0$. Let $(\\mathsf X,\\Sigma_X)$, $(\\mathsf Y,\\Sigma_Y)$, and $(\\mathsf A,\\Sigma_A)$ be measurable spaces, let $P$ be a probability measure on $\\mathsf X\\times\\mathsf Y$, let $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty)$ be a measurable loss, and let $f_w:\\mathsf X\\to\\mathsf A$ be a measurable predictor for every $w\\in\\mathbb R^d$. For $z=(x,y)$ set $g(w,z)=\\ell(f_w(x),y)$. Assume $(w,z)\\mapsto g(w,z)$ and $(w,z)\\mapsto\\nabla_wg(w,z)$ are jointly measurable. For every $z$, assume $g(\\cdot,z)$ is totally differentiable, takes values in $[0,1]$, is $L$-Lipschitz in values, and has a $\\beta$-Lipschitz Euclidean gradient; these mean, respectively,\n\n$$|g(w,z)-g(v,z)|\\le L\\|w-v\\|_2,\\qquad \\|\\nabla_wg(w,z)-\\nabla_wg(v,z)\\|_2\\le\\beta\\|w-v\\|_2$$\n\nfor all $v,w\\in\\mathbb R^d$. No convexity is assumed. Let $S=(Z_1,\\ldots,Z_n)$ be IID with law $P$, and abbreviate $R_P(f_w)=\\int g(w,z)\\,P(dz)$ and $\\widehat R_S(f_w)=n^{-1}\\sum_{i=1}^ng(w,Z_i)$. Let $I_1,\\ldots,I_T$ be random indices in $\\{1,\\ldots,n\\}$, independent of $S$ and satisfying $\\mathbb P(I_t=i)=1/n$ for every $1\\le t\\le T$ and $1\\le i\\le n$; dependence between indices at different times is allowed. From a fixed $w_0\\in\\mathbb R^d$, define\n\n$$w_t=w_{t-1}-\\alpha_t\\nabla_wg(w_{t-1},Z_{I_t}),\\qquad 1\\le t\\le T,$$\n\nwhere $0\\le\\alpha_T\\le\\cdots\\le\\alpha_1$ and $\\alpha_t\\le c/t$. Assume the resulting random variables $R_P(f_{w_T})$ and $\\widehat R_S(f_{w_T})$ are measurable; they are integrable because $0\\le g\\le1$. Then the randomized procedure has uniform replacement stability and absolute expected population-minus-empirical risk gap at most\n\n$$\\left(1+\\frac1{\\beta c}\\right)\\frac{(2cL^2)^{1/(\\beta c+1)}}{n-1}\\,T^{\\beta c/(\\beta c+1)}.$$\n\nIf $L=0$, the right side is interpreted as $0$. The conclusion concerns only this expected gap for the stated random sample-selection procedure; it does not assert generalization for every stochastic-gradient oracle."
+      }
+    ]
+  },
+  {
+    "order": 2801,
+    "id": "algorithmic-stability-of-stochastic-training-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Algorithmic stability of stochastic training — Examples",
+    "companion": "algorithmic-stability-of-stochastic-training",
+    "requires": [
+      "algorithmic-stability-of-stochastic-training"
+    ],
+    "items": [
+      {
+        "id": "ex-sgd-convex-stability-linear-in-steps",
+        "kind": "example",
+        "title": "The convex constant-step stability bound is linear in the step count",
+        "deps": [
+          "thm-sgd-stability-convex-loss"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-sgd-stability-convex-vs-nonconvex-schedules",
+        "kind": "example",
+        "title": "Constant and inverse-time schedules give different stability bounds",
+        "deps": [
+          "thm-sgd-stability-convex-loss",
+          "thm-sgd-stability-nonconvex-loss"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-sgd-nonlipschitz-loss-no-uniform-stability",
+        "kind": "example",
+        "title": "A smooth quadratic loss without global Lipschitzness has unbounded stability",
+        "deps": [
+          "def-uniform-stability",
+          "thm-sgd-stability-convex-loss",
+          "def-supervised-learning-problem"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

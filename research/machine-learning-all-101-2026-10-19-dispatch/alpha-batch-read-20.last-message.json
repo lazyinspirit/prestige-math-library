@@ -1,0 +1,478 @@
+{
+  "group": "g",
+  "batches": ["20"],
+  "pages_read": [
+    "ml02-clustering-mixtures",
+    "ml02-clustering-mixtures-examples"
+  ],
+  "items_read": [
+    "def-k-means-objective",
+    "def-finite-gaussian-mixture",
+    "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+    "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+    "alg-lloyd-k-means",
+    "thm-finite-gaussian-component-density-normalized",
+    "thm-lloyd-objective-monotonicity-and-termination",
+    "alg-gaussian-mixture-em",
+    "thm-gaussian-mixture-exact-m-step-maximizes-q",
+    "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+    "ex-lloyd-tie-sensitive-local-minima",
+    "ex-fractional-gaussian-mixture-responsibilities",
+    "ex-gaussian-mixture-likelihood-unbounded"
+  ],
+  "conventions": [
+    {
+      "convention": "K-means uses positive n and p, 1 ≤ K ≤ n, squared Euclidean distances, and unrestricted labelings; empty clusters contribute zero.",
+      "fixed_by": "def-k-means-objective",
+      "matters_for": [
+        "alg-lloyd-k-means",
+        "thm-lloyd-objective-monotonicity-and-termination",
+        "ex-lloyd-tie-sensitive-local-minima"
+      ]
+    },
+    {
+      "convention": "Initialization resolves nearest-center ties by smallest index. Later assignments retain the current label whenever it is nearest, otherwise choose the smallest nearest index. Empty centers remain unchanged; stopping requires both labels and centers unchanged.",
+      "fixed_by": "alg-lloyd-k-means",
+      "matters_for": [
+        "thm-lloyd-objective-monotonicity-and-termination",
+        "ex-lloyd-tie-sensitive-local-minima"
+      ]
+    },
+    {
+      "convention": "Gaussian mixtures assume AC, strictly positive weights summing to one, and symmetric positive-definite component covariances. Responsibilities divide weighted component densities by their sum.",
+      "fixed_by": "def-finite-gaussian-mixture",
+      "matters_for": [
+        "thm-finite-gaussian-component-density-normalized",
+        "thm-gaussian-mixture-exact-m-step-maximizes-q",
+        "alg-gaussian-mixture-em",
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+        "ex-fractional-gaussian-mixture-responsibilities",
+        "ex-gaussian-mixture-likelihood-unbounded"
+      ]
+    },
+    {
+      "convention": "The low-variance limit fixes finite data, centers, and positive weights as σ decreases to zero. Tied nearest centers receive limiting weights proportional to their mixture weights. The claim concerns neither optimized parameters nor EM iterates.",
+      "fixed_by": "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+      "matters_for": [
+        "ex-fractional-gaussian-mixture-responsibilities"
+      ]
+    },
+    {
+      "convention": "The unrestricted Gaussian M-step requires the observations to have full affine span. Covariance updates use the newly updated weighted means and divisor N_k.",
+      "fixed_by": "thm-gaussian-mixture-exact-m-step-maximizes-q",
+      "matters_for": [
+        "alg-gaussian-mixture-em",
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing"
+      ]
+    },
+    {
+      "convention": "Gaussian EM returns θ_0 through θ_T for a supplied positive integer T. Likelihood ascent is nonstrict and asserts neither parameter convergence nor global optimality.",
+      "fixed_by": "alg-gaussian-mixture-em",
+      "matters_for": [
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-finite-gaussian-mixture",
+      "statement": "Assume AC. A finite K-component Gaussian mixture has positive weights summing to one, means in R^p, and symmetric positive-definite covariances; its density is the weighted sum of the displayed Gaussian component functions, and responsibilities are weighted component densities divided by their sum.",
+      "used_by": [
+        "thm-finite-gaussian-component-density-normalized",
+        "thm-gaussian-mixture-exact-m-step-maximizes-q",
+        "alg-gaussian-mixture-em",
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+        "ex-fractional-gaussian-mixture-responsibilities",
+        "ex-gaussian-mixture-likelihood-unbounded"
+      ]
+    },
+    {
+      "id": "thm-gaussian-mixture-exact-m-step-maximizes-q",
+      "statement": "Assume AC, positive n,p,K, full affine span of the observations, and a current Gaussian mixture with positive weights and SPD covariances. Every N_k is positive, their sum is n, every weighted scatter S_k is positive definite, and the unique global maximizer of Q over the stated mixture domain is ρ_k=N_k/n, m_k=the weighted mean, V_k=S_k.",
+      "used_by": [
+        "alg-gaussian-mixture-em",
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing"
+      ]
+    },
+    {
+      "id": "thm-finite-gaussian-component-density-normalized",
+      "statement": "Assume AC. For p ≥ 1, μ in R^p and symmetric positive-definite Σ, if Z has independent standard-normal coordinates and X=μ+Σ^(1/2)Z, then X has the displayed Gaussian Lebesgue density φ_p. In particular φ_p is nonnegative and its integral is one.",
+      "used_by": [
+        "def-finite-gaussian-mixture",
+        "thm-gaussian-mixture-exact-m-step-maximizes-q",
+        "alg-gaussian-mixture-em",
+        "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+        "ex-fractional-gaussian-mixture-responsibilities",
+        "ex-gaussian-mixture-likelihood-unbounded"
+      ]
+    },
+    {
+      "id": "alg-lloyd-k-means",
+      "statement": "Initialize labels by nearest centers with smallest-index ties. Repeatedly assign to nearest centers with current-label retention on ties, replace nonempty centers by their sample means, retain empty centers, and stop when both labels and centers are unchanged.",
+      "used_by": [
+        "thm-lloyd-objective-monotonicity-and-termination",
+        "ex-lloyd-tie-sensitive-local-minima",
+        "alg-weighted-spectral-clustering"
+      ]
+    },
+    {
+      "id": "thm-lloyd-objective-monotonicity-and-termination",
+      "statement": "For positive n,p, 1 ≤ K ≤ n, finite data and any initial centers, the specified tie-sensitive Lloyd algorithm terminates. Assignment does not increase the objective and strictly decreases it if a label changes. Center updates do not increase it and strictly decrease it if a nonempty center changes. Terminal labels are nearest-center labels and nonempty centers are their sample means.",
+      "used_by": [
+        "alg-weighted-spectral-clustering"
+      ]
+    },
+    {
+      "id": "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+      "statement": "For p ≥ 1, distinct symmetric positive-definite A_0,A_1 and 0<t<1, log det((1−t)A_0+tA_1)>(1−t)log det A_0+t log det A_1. If A_0=A_1, equality holds.",
+      "used_by": [
+        "thm-gaussian-mixture-exact-m-step-maximizes-q"
+      ]
+    },
+    {
+      "id": "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+      "statement": "For fixed positive n,p,K, data, centers, and positive mixture weights summing to one, the displayed soft assignments converge to weights renormalized over nearest-center ties, and Ψ_σ converges to the sum of minimum squared distances, equivalently the minimum over labelings. No convergence of EM iterates is asserted.",
+      "used_by": [
+        "ex-fractional-gaussian-mixture-responsibilities"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Positive eigenvalues, square roots, inverses, determinant positivity, and openness of the SPD cone.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions in Gaussian-law constructions and the published KL/EM interface.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice hypotheses of the Euclidean Lebesgue product and change-of-variables suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-determinant-of-a-square-matrix",
+      "used_for": "Determinant conventions, polynomial continuity, and the identity determinant.",
+      "opened": true
+    },
+    {
+      "id": "def-invertible-matrix-and-general-linear-group",
+      "used_for": "The two-sided matrix inverse used in Gaussian component formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Mean and covariance terminology in the Gaussian-mixture definition.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Identification of the affine independent-normal construction with N_p(μ,Σ).",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "The normalized scalar standard-normal density and affine normal laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Determinants of orthogonal diagonalizations, square roots, and inverse matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-transpose",
+      "used_for": "Determinant identities for orthogonal diagonalizations.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Products of eigenvalues in determinant and density-normalization calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Finite trace expansions and cyclic rearrangements in log-determinant and covariance optimization.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Derivatives of log determinant along affine matrix paths.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-differential-and-jacobis-formula",
+      "used_for": "Log-determinant derivatives and continuity of determinant in the EM measurability argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-matrix-inversion",
+      "used_for": "The second log-determinant derivative and continuity of inverse in Gaussian joint measurability.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The derivative of logarithm in log-determinant optimization.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict decrease of the derivative and strict concavity along positive-definite matrix segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-limits-and-range",
+      "used_for": "Vanishing of nonnearest-center exponential terms in the small-variance limit.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Discharging countable-choice hypotheses under the stated AC assumption.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Affine transformation of the independent standard-normal density.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "The product joint law of independent scalar standard normals.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identifying finite product Lebesgue measures with Euclidean Lebesgue measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "used_for": "The determinant volume factor for the Gaussian affine transformation.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Identifying the product standard-normal law from its rectangle values.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Normalization of product Gaussian densities and the sample complete-data model.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Uniqueness of the sample mean as the nonempty-cluster squared-distance minimizer.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Logarithm as inverse exponential in Q expansions and the unbounded-likelihood example.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Product, reciprocal, monotonicity, and inverse identities for finite likelihood calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Finite probability measures in the weight optimization and posterior construction.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional finite-space KL formulas in weight optimization and EM admissibility.",
+      "opened": true
+    },
+    {
+      "id": "thm-kullback-leibler-is-nonnegative",
+      "used_for": "Optimal mixture weights, their uniqueness, and nonnegative KL in likelihood ascent.",
+      "opened": true
+    },
+    {
+      "id": "alg-expectation-maximization",
+      "used_for": "Exact-mode candidate-set and admissibility requirements.",
+      "opened": true
+    },
+    {
+      "id": "thm-em-observed-log-likelihood-is-nondecreasing",
+      "used_for": "The likelihood-difference identity and ascent after checking all support and integrability hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-latent-variable-joint-and-observed-data-factorization",
+      "used_for": "The normalized jointly measurable complete-data density required by the generic EM theorem.",
+      "opened": true
+    },
+    {
+      "id": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "used_for": "Normalization of finite weighted sums of Gaussian component densities.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-functions-are-borel-measurable",
+      "used_for": "Borel measurability of Gaussian formulas on the relative parameter domain.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sigma-finite-and-semifinite-measures",
+      "used_for": "Sigma-finiteness of observation and finite-label reference measures.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Posterior probability measures relative to finite counting measure.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Finite-product measurable structures for parameters, observations, and labels.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+      "used_for": "Joint measurability from continuity on the finite-dimensional parameter/data domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-observed-density-is-latent-marginal-under-tonelli",
+      "used_for": "Observed marginal normalization and valid-fibre posterior probability densities.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Existence, rectangle formulas, and sigma-finiteness of the complete-data reference measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-finite",
+      "used_for": "The perturbation bound establishing openness of the SPD parameter domain.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice, Definition, contains the inline link '([[def-choice-function]])' inside its axiom formulation. This violates the requested uninterrupted-definition presentation; the link has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable-choice",
+      "finding": "def-countable-choice, Definition, contains 'Equivalently, in the vocabulary of [[def-choice-function]]' and '([[def-countable]])' within the defining section. These links interrupt the definition rather than following it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-invertible-matrix-and-general-linear-group",
+      "finding": "def-invertible-matrix-and-general-linear-group, Definition, contains 'The fact that it is a group under matrix multiplication is [[cor-general-linear-group-is-a-group]].' The hyperlink remains before the complete defining section ends, contrary to the uninterrupted-definition instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-standard-normal-and-normal-laws",
+      "finding": "def-standard-normal-and-normal-laws, Definition, contains 'By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]' and further supplier links within the definition. These have not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-mean-value-theorem",
+      "finding": "cor-mean-value-theorem, Statement, interrupts its continuity and differentiability hypotheses with '([[def-continuity-real]], [[def-interval]])' and '([[def-derivative]])'. These links remain inside the complete statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "finding": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, Statement, contains 'Assume the Axiom of Countable Choice ([[def-countable-choice]]).' The inline hyperlink interrupts the statement and has not been moved to Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "finding": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, Statement, contains 'Assume the Axiom of Countable Choice ([[def-countable-choice]]).' The hyperlink remains inside the statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "finding": "thm-linear-change-of-variables-for-lebesgue-measure, Statement, contains '([[def-countable-choice]])', '[[def-linear-map]]', '[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]', and '[[def-extended-reals]]' inside its hypotheses and singular-case caveat. These interrupt the complete statement under the requested presentation rule.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "def-natural-logarithm, Definition, contains 'This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that' before the defining section ends. The supplier link has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "def-probability-measure, Definition, contains '([[def-measure]])' and '([[def-measure-space]])' within the defining prose. The links interrupt the definition rather than following it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-kullback-leibler-divergence",
+      "finding": "def-kullback-leibler-divergence, Definition, contains '([[def-probability-measure]])', 'of [[def-absolutely-continuous-with-respect-to-a-positive-measure]]', and numerous further supplier hyperlinks throughout the complete definition and well-definedness discussion. These remain inside Definition rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-kullback-leibler-is-nonnegative",
+      "finding": "thm-kullback-leibler-is-nonnegative, Statement, contains 'use the directional convention of [[def-kullback-leibler-divergence]]' and inline measure-space and sigma-finiteness links in its normalized-density clause. These interrupt the complete statement rather than appearing in Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-expectation-maximization",
+      "finding": "alg-expectation-maximization, Definition, contains 'as in [[def-latent-variable-joint-and-observed-data-factorization]]', '([[def-likelihood-density]])', and further marginalization, AC, and KL links inside its input and admissibility instructions. These have not been moved after the complete procedure into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-em-observed-log-likelihood-is-nondecreasing",
+      "finding": "thm-em-observed-log-likelihood-is-nondecreasing, Statement, contains 'as in [[def-latent-variable-joint-and-observed-data-factorization]]' inside its complete-data hypothesis. The hyperlink interrupts the statement and has not been moved to Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-latent-variable-joint-and-observed-data-factorization",
+      "finding": "def-latent-variable-joint-and-observed-data-factorization, Definition, contains 'sigma-algebras; [[def-measurable-space]]', inline sigma-finiteness and product-measure links, and '[[def-likelihood-density]] supplies neither' within its complete defining section. These have not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-continuous-functions-are-borel-measurable",
+      "finding": "cor-continuous-functions-are-borel-measurable, Statement, ends its conclusion with 'in the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]]'. This hyperlink remains inside the statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-sigma-finite-and-semifinite-measures",
+      "finding": "def-finite-sigma-finite-and-semifinite-measures, Definition, begins with a measure-space hypothesis followed by '([[def-measure-space]])'. The hyperlink interrupts the definition and has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-with-density",
+      "finding": "def-measure-with-density, Definition, contains 'whose measure property is supplied by [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]'. The hyperlink remains within the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "def-product-sigma-algebra-and-finite-product-sigma-algebras, Definition, contains 'generated by the measurable rectangles of [[def-measurable-rectangle]]' before its empty and finite product clauses. This interrupts the complete definition rather than following it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-observed-density-is-latent-marginal-under-tonelli",
+      "finding": "thm-observed-density-is-latent-marginal-under-tonelli, Statement, begins 'Assume the hypotheses of [[def-latent-variable-joint-and-observed-data-factorization]].' The hyperlink remains within the statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "finding": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, Statement, clause 1 contains 'of [[def-product-measure-on-sigma-finite-spaces]]'. The hyperlink interrupts the multi-clause statement and has not been moved to Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-finite",
+      "finding": "thm-cauchy-schwarz-finite, Statement, contains 'with finite sums as in [[def-finite-sum]]', '([[thm-of-square-roots]])', and further square-monotonicity and square-root links before the complete statement ends. These interrupt the statement rather than appearing in Statement references.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-spectral-clustering",
+      "to": "ml02-clustering-mixtures",
+      "faithful": true,
+      "note": "Checked the requiring page and alg-weighted-spectral-clustering against alg-lloyd-k-means and its termination theorem. Step 5 applies Lloyd to finitely many rows in R^k, with 1 ≤ k ≤ the active row count, smallest-index initialization ties, later label retention, unchanged empty centers, and stopping only when labels and centers stabilize. The supplied initialization is permitted by Lloyd's arbitrary-initial-centers hypothesis. Neither side claims global optimality or exactly k nonempty output clusters; there is no reverse dependency."
+    }
+  ]
+}

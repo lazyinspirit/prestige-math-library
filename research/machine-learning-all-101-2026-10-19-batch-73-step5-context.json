@@ -1,0 +1,164 @@
+{
+  "group": "x",
+  "batches": [
+    "73"
+  ],
+  "pages_read": [
+    "online-decision-protocols",
+    "online-decision-protocols-examples"
+  ],
+  "items_read": [
+    "def-online-decision-protocol",
+    "def-adversary-and-feedback-model",
+    "def-static-dynamic-and-strongly-adaptive-regret",
+    "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+    "ex-full-information-finite-experts",
+    "ex-changing-comparator-path-length",
+    "ex-stochastic-two-arm-pseudo-regret"
+  ],
+  "conventions": [
+    {
+      "convention": "Rounds run from 1 through a positive finite horizon T. Choices use earlier revealed history and learner-private randomness; current loss is not observed before choosing. Random choices are measurable in their declared target measurable spaces.",
+      "fixed_by": "def-online-decision-protocol",
+      "matters_for": [
+        "def-adversary-and-feedback-model",
+        "def-static-dynamic-and-strongly-adaptive-regret",
+        "ex-full-information-finite-experts",
+        "ex-changing-comparator-path-length"
+      ]
+    },
+    {
+      "convention": "Full information reveals the entire loss function after choosing; bandit feedback reveals only the played loss. Oblivious, non-anticipating adaptive, and current-choice-reactive adversaries have distinct timing.",
+      "fixed_by": "def-adversary-and-feedback-model",
+      "matters_for": [
+        "ex-full-information-finite-experts",
+        "def-static-dynamic-and-strongly-adaptive-regret"
+      ]
+    },
+    {
+      "convention": "Stochastic arms have fixed Borel reward laws with finite first absolute moments. The fixed-law and conditional-mean identities hold on every measurable pre-reward history-and-arm event contained in the selected-arm event.",
+      "fixed_by": "def-adversary-and-feedback-model",
+      "matters_for": [
+        "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+        "ex-stochastic-two-arm-pseudo-regret"
+      ]
+    },
+    {
+      "convention": "Every minimum used in regret is assumed finite and attained. Expected regret requires a measurable, integrable regret random variable. Pseudo-regret uses mean gaps; realized reward regret uses μ* minus the observed reward.",
+      "fixed_by": "def-static-dynamic-and-strongly-adaptive-regret",
+      "matters_for": [
+        "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+        "ex-full-information-finite-experts",
+        "ex-changing-comparator-path-length",
+        "ex-stochastic-two-arm-pseudo-regret"
+      ]
+    },
+    {
+      "convention": "Comparator path length is 1 plus the sum of successive norm distances. Intervals are nonempty contiguous integer intervals; adaptive regret is their maximum interval regret. Strong adaptivity is relative to a specified model and base static-regret bound.",
+      "fixed_by": "def-static-dynamic-and-strongly-adaptive-regret",
+      "matters_for": [
+        "ex-changing-comparator-path-length"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-online-decision-protocol",
+      "statement": "The learner chooses from a nonempty action set using earlier revealed history and available private randomness, before observing the current loss, and receives feedback after incurring that loss; randomized choices are measurable.",
+      "used_by": [
+        "def-adversary-and-feedback-model",
+        "def-static-dynamic-and-strongly-adaptive-regret",
+        "ex-full-information-finite-experts",
+        "ex-changing-comparator-path-length",
+        "alg-hedge",
+        "alg-online-gradient-descent",
+        "def-stochastic-bandit-and-pseudo-regret",
+        "def-linear-contextual-bandit-model"
+      ]
+    },
+    {
+      "id": "def-adversary-and-feedback-model",
+      "statement": "The stochastic finite-arm reward model specifies fixed integrable arm laws and explicitly assumes the eventwise conditional-mean identity E[1_B Y_t] = μ_i P(B) for pre-reward history-and-arm events B contained in {A_t=i}; adversarial timing and feedback classes are distinguished.",
+      "used_by": [
+        "def-static-dynamic-and-strongly-adaptive-regret",
+        "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+        "ex-full-information-finite-experts",
+        "ex-stochastic-two-arm-pseudo-regret",
+        "def-stochastic-bandit-and-pseudo-regret",
+        "lem-bandit-reward-table-has-fixed-conditional-laws"
+      ]
+    },
+    {
+      "id": "def-static-dynamic-and-strongly-adaptive-regret",
+      "statement": "Static regret subtracts the finite attained minimum cumulative loss of one fixed comparator; dynamic regret subtracts a supplied comparator sequence's cumulative loss; interval regret uses one fixed comparator on that interval. Stochastic pseudo-regret sums mean gaps, while realized reward regret sums μ* minus observed rewards.",
+      "used_by": [
+        "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+        "ex-full-information-finite-experts",
+        "ex-changing-comparator-path-length",
+        "ex-stochastic-two-arm-pseudo-regret",
+        "thm-hedge-static-regret",
+        "thm-online-gradient-descent-regret",
+        "def-stochastic-bandit-and-pseudo-regret"
+      ]
+    },
+    {
+      "id": "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+      "statement": "For integers T,N≥1, measurable finite-arm choices A_t, integrable rewards Y_t, and finite means satisfying E[Y_t 1_{A_t=i}] = μ_i P(A_t=i), set μ*=max_i μ_i and N_i(T)=sum_t 1_{A_t=i}. Then E[R_T^rew] = E[bar R_T] = sum_i (μ*−μ_i) E[N_i(T)].",
+      "used_by": [
+        "ex-stochastic-two-arm-pseudo-regret",
+        "thm-explore-then-commit-expected-regret",
+        "thm-ucb-gap-dependent-regret",
+        "thm-ucb-gap-free-regret"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability spaces, measurable events, and arm laws of total mass one.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable action choices and Borel-measurable real rewards.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expected regret and arm means as Lebesgue integrals, with integrability qualifications.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Finite linearity of expectation in the regret decomposition and stochastic example.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-of-an-indicator-is-probability",
+      "used_for": "Converting expected arm indicators to selection probabilities and expected pull counts.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "hedge-and-online-gradient-descent",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "Checked the page requirement and algorithm/theorem interfaces against the supplier definitions. Hedge preserves full-information timing and its fixed loss-sequence assumption for expected static regret. OGD states comparator-wise bounds and invokes static regret only when the minimum is finite and attained."
+    },
+    {
+      "from": "stochastic-finite-armed-bandits",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "The reward-stack definition preserves non-anticipating choices, finite first moments, and both regret conventions. Its conditional-law lemma supplies the eventwise mean identity before explore-then-commit and UCB invoke the gap-weighted expected-count decomposition."
+    },
+    {
+      "from": "linear-contextual-bandits-and-linucb",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "The page requirement resolves to the generic timing definition. The contextual model explicitly adds current context and available features as pre-action side information, requires measurable selected features, and observes reward noise afterward; it identifies this extension explicitly rather than attributing current-context availability to the generic supplier."
+    }
+  ]
+}

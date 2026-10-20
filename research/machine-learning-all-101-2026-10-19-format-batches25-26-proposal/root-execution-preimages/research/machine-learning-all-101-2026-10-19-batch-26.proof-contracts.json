@@ -1,0 +1,2309 @@
+{
+  "version": 1,
+  "scope": [
+    "def-causal-discovery-oracle-regime",
+    "def-cpdag-markov-equivalence-class",
+    "lem-pc-skeleton-separation",
+    "lem-covered-edge-reversal-preserves-d-separation",
+    "lem-chordal-components-admit-both-orientations",
+    "def-gaussian-partial-correlation",
+    "lem-pc-separating-set-collider",
+    "thm-dag-markov-equivalence-skeleton-vstructures",
+    "alg-pc-causal-discovery",
+    "def-sample-partial-correlation",
+    "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+    "lem-pc-fisher-transform-uniform-concentration",
+    "lem-meek-rules-complete-for-cpdag",
+    "thm-pc-oracle-correctness",
+    "thm-pc-high-dimensional-consistency",
+    "ex-pc-chain-versus-collider-separating-sets",
+    "ex-pc-latent-confounding-limitations",
+    "ex-pc-markov-equivalent-dags"
+  ],
+  "contracts": {
+    "def-causal-discovery-oracle-regime": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "def-cpdag-markov-equivalence-class": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition applies to a finite vertex set; on the empty set the skeleton and completed pattern are empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "lem-pc-skeleton-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-d-separation-in-a-dag",
+          "source_section": "Definition",
+          "quote": "For pairwise disjoint vertex sets $X,Y,C\\subseteq V$, a path joining $X$ to\n$Y$ is **active given $C$** when every internal noncollider is outside $C$ and\nevery internal collider has at least one member of $\\operatorname{De}^+(v)$ in\n$C$. The set $C$ **d-separates** $X$ and $Y$ in $G$ when no path joining $X$ to\n$Y$ is active given $C$; write $X\\perp_d Y\\mid C$ in $G$. The empty set of\nvertices is allowed for any of $X,Y,C$; in particular d-separation is vacuous\nif either endpoint set is empty.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $i$ and $j$ are adjacent, the one-edge path between them has no internal vertices, so it is active given every $S\\subseteq V\\setminus\\{i,j\\}$ by [F1]. Hence no such $S$ d-separates them.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose $i$ and $j$ are nonadjacent. Acyclicity implies that at least one of $i,j$ is not a descendant of the other; after interchanging labels, assume $j$ is not a descendant of $i$. Since $i,j$ are nonadjacent, $j$ is a non-descendant non-parent of $i$. Put $S=\\operatorname{pa}_G(i)$. Then $S$ excludes both endpoints. Consider any path $i=v_0,v_1,\\ldots,v_r=j$. If its first arrow points into $i$, then $v_1\\in S$ and the occurrence of $v_1$ is a noncollider, because the arrow $v_1\\to i$ has its tail at $v_1$; the path is blocked. If the first arrow points out of $i$, follow arrows that point forward along the path until the first arrow that points backward. Such a reversal must occur because $j$ is not a descendant of $i$. At the reversal vertex $v_t$, both incident arrows point into $v_t$, so it is a collider and the initial segment is a directed path $i\\to\\cdots\\to v_t$. If $v_t$ had a descendant $p\\in S$, then $i\\to\\cdots\\to v_t\\to\\cdots\\to p\\to i$ would be a directed cycle. Thus this collider has no descendant in $S$, and the path is blocked by [F1]. Every path is blocked, so $S$ d-separates $i$ and $j$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The adjacent and nonadjacent cases prove both implications.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 permits an empty parent set as the separating set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a single adjacent edge by its length-one active path."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 keep the conditioning set disjoint from both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "lem-pc-separating-set-collider": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-d-separation-in-a-dag",
+          "source_section": "Definition",
+          "quote": "For pairwise disjoint vertex sets $X,Y,C\\subseteq V$, a path joining $X$ to\n$Y$ is **active given $C$** when every internal noncollider is outside $C$ and\nevery internal collider has at least one member of $\\operatorname{De}^+(v)$ in\n$C$. The set $C$ **d-separates** $X$ and $Y$ in $G$ when no path joining $X$ to\n$Y$ is active given $C$; write $X\\perp_d Y\\mid C$ in $G$. The empty set of\nvertices is allowed for any of $X,Y,C$; in particular d-separation is vacuous\nif either endpoint set is empty.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cpdag-markov-equivalence-class",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex set $V$. For a DAG $G$ on $V$, its **skeleton** is the\nundirected graph with edge $\\{i,j\\}$ exactly when $G$ contains $i\\to j$ or\n$j\\to i$. An **unshielded triple** is a triple of distinct vertices $i,k,j$\nwith edges $i-k$ and $k-j$ in the skeleton and no edge between $i$ and $j$.\nIt is an **unshielded collider** (also called a v-structure) when its arrows are\n$i\\to k\\leftarrow j$. Two DAGs on $V$ are **Markov equivalent** when they\ninduce the same d-separation relations: for every pairwise disjoint\n$A,B,S\\subseteq V$, $A$ and $B$ are d-separated by $S$ in one DAG exactly\nwhen they are d-separated by $S$ in the other. The equivalence class of $G$ is\ndenoted $[G]$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $i\\to k\\leftarrow j$, then $k$ is a collider on the length-two path from $i$ to $j$. If $k\\in S$, it is its own conditioned descendant, so this path is active by [F1], contradicting that $S$ separates the endpoints. Therefore $k\\notin S$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "If the unshielded triple is not a v-structure, then $k$ is a noncollider on its length-two path. If $k\\notin S$, that path has no conditioned internal noncollider and no collider, so it is active by [F1], again contradicting separation. Hence a noncollider requires $k\\in S$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The two implications prove the equivalence.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes an empty separator for a collider."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 analyze the length-two path between its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "lem-covered-edge-reversal-preserves-d-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-d-separation-ancestral-moral-separation",
+          "source_section": "Statement",
+          "quote": "For disjoint $X,Y,C\\subseteq V$, $C$ d-separates $X$ and $Y$ in $G$ if and\nonly if deleting $C$ from $\\operatorname{mor}_G(X\\cup Y\\cup C)$ leaves no\nundirected path from $X$ to $Y$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ancestral-moral-graph-of-a-dag",
+          "source_section": "Definition",
+          "quote": "For $S\\subseteq V$, its **ancestral set** is\n$$\\operatorname{An}_G(S):=\\{v\\in V:\\text{there is a directed path from }v\\text{ to some }s\\in S\\},$$\nwhere paths of length zero are allowed, so $S\\subseteq\\operatorname{An}_G(S)$.\nThe induced directed subgraph on this set keeps exactly the arrows of $G$\nwhose two endpoints lie in $\\operatorname{An}_G(S)$. Its **moral graph** is\nthe undirected simple graph obtained by replacing every arrow by an\nundirected edge and joining every distinct pair of parents of a common child\nby an undirected edge; loops and duplicate edges are discarded. This\nundirected graph is the **ancestral moral graph** on $S$ and is denoted\n$\\operatorname{mor}_G(S)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $P=\\operatorname{pa}_G(x)$, so $\\operatorname{pa}_G(y)=P\\cup\\{x\\}$. If reversing the arrow created a directed cycle, that cycle would use the new arrow $y\\to x$, and the remaining part would be a directed path $x\\to\\cdots\\to z\\to y$ in $G$ with $z\\ne x$. Then $z\\in P$, so $z\\to x$ is also in $G$, making the directed cycle $x\\to\\cdots\\to z\\to x$ in $G$, a contradiction. Thus $G'$ is acyclic.",
+          "inputs": [
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The full moral graphs of $G$ and $G'$ coincide. Their skeletons coincide. The only changed parent sets are $\\operatorname{pa}_G(x)=P$, $\\operatorname{pa}_G(y)=P\\cup\\{x\\}$ and $\\operatorname{pa}_{G'}(x)=P\\cup\\{y\\}$, $\\operatorname{pa}_{G'}(y)=P$. Any pair newly married at $y$ in $G$ or at $x$ in $G'$ already belongs to the clique on $P\\cup\\{x,y\\}$: pairs involving $x$ or $y$ are skeleton edges, and pairs in $P$ are married at both $x$ and $y$. All other parent sets are unchanged, so the moral edge sets are identical.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Fix pairwise disjoint query sets $A,B,S$ and put $T=A\\cup B\\cup S$. The ancestor sets of $T$ in $G$ and $G'$ differ, if at all, only by $x$ or $y$. Indeed, a directed path whose existence changes must use the reversed edge. A path in $G$ that uses $x\\to y$ and starts at $v\\ne x$ enters $x$ from some $p\\in P$; in $G'$ replace $p\\to x\\to y$ by the unchanged arrow $p\\to y$. Therefore only $x$ can cease to be an ancestor. Symmetrically, a path in $G'$ using $y\\to x$ and starting at $v\\ne y$ enters $y$ from $p\\in P=\\operatorname{pa}_{G'}(y)$; in $G$ replace $p\\to y\\to x$ by $p\\to x$. Therefore only $y$ can become an ancestor. If $x$ is lost, $y$ belongs to both ancestor sets; if $y$ is gained, $x$ belongs to both.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If the ancestor sets are equal, step 1.2 shows the induced ancestral moral graphs are equal. Suppose instead that $x$ is an ancestor only in $G$. Then $x\\notin T$ and $y$ is a common ancestor of $T$. In the moral graph induced on $\\operatorname{An}_G(T)$, every neighbor of $x$ is in $P\\cup\\{y\\}$: its parents lie in $P$; among its children only $y$ can be ancestral, since any other child has an unchanged arrow from $x$ and would make $x$ an ancestor in $G'$; and a marriage through a child other than $y$ would have the same consequence, while a marriage through $y$ uses another parent in $P$. The vertices in $P\\cup\\{y\\}$ form a clique because they are parents of $y$ in $G$. Hence $x$ is simplicial in the ancestral moral graph. The case that $y$ is gained only in $G'$ is symmetric, with its neighbors contained in the clique $P\\cup\\{x\\}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Removing an unconditioned simplicial vertex does not change separation between $A$ and $B$ after deleting $S$: the vertex is not in $T$, and any path through it can be shortened by replacing its two incident edges with the edge joining its neighbors, which exists because the neighborhood is a clique. Conversely, every path in the smaller graph remains in the larger graph. Thus the two ancestral moral graphs separate $A$ and $B$ by $S$ in exactly the same cases. By [F1], $G$ and $G'$ have the same d-separation relations.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 defines T=A union B union S; T may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 fix the query endpoints and compare separation after removing an unconditioned simplicial vertex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "lem-chordal-components-admit-both-orientations": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "We first show by induction on the number of vertices that a connected noncomplete chordal graph has two nonadjacent simplicial vertices. Choose nonadjacent vertices $a,b$ and an inclusion-minimal separator $S$ whose removal disconnects them. Let $C_a,C_b$ be the components of $H-S$ containing $a,b$. For every $s\\in S$, minimality gives a path from $a$ to $b$ after restoring only $s$, so $s$ has a neighbor in each of $C_a,C_b$. If $x,y\\in S$ were nonadjacent, shortest paths from $x$ to $y$ with internal vertices in $C_a$ and in $C_b$ would form an induced cycle of length at least four: each path is chordless by shortestness, there are no edges between the two components, and $x,y$ are nonadjacent. This contradicts chordality, so $S$ is a clique. The induced graphs on $C_a\\cup S$ and $C_b\\cup S$ are smaller connected chordal graphs. By induction, each is either complete, in which case any vertex in its nonempty component $C_a$ or $C_b$ is simplicial, or noncomplete, in which case it has two nonadjacent simplicial vertices and at least one lies outside the clique $S$. Such a vertex has no neighbors outside its component together with $S$, so it is simplicial in $H$. The chosen vertices from $C_a$ and $C_b$ are nonadjacent. Complete connected graphs have every vertex simplicial, and disconnected graphs have a simplicial vertex in each component. Therefore every nonempty finite chordal graph has a simplicial vertex.",
+          "inputs": [
+            "given",
+            "A1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Repeatedly remove a simplicial vertex. Each induced subgraph remains chordal, so step 1.1 supplies a simplicial vertex until the graph is empty. The removal order $v_1,\\ldots,v_n$ is a perfect elimination order because the neighbors of $v_t$ that remain at its removal are pairwise adjacent.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For each $t$, let $K_t=\\{v_t\\}\\cup N_t^+$, where $N_t^+$ is the set of neighbors of $v_t$ later in the elimination order. Each $K_t$ is a clique by step 2.1. If $N_t^+$ is nonempty, let $p(t)$ be its earliest vertex and join the clique node $K_t$ to $K_{p(t)}$. The index strictly increases along parent edges, so these edges form a forest. Since $N_t^+$ is a clique, every vertex of $N_t^+$ other than $p(t)$ is a later neighbor of $p(t)$; hence $K_t\\cap K_{p(t)}=N_t^+$. If a vertex $x$ belongs to $K_t$ with $t<x$, then $x\\in N_t^+$ and this membership propagates to the parent node, eventually to $K_x$. Thus the clique nodes containing any fixed vertex form a connected subtree. Every graph edge lies in some $K_t$ by taking its earlier endpoint. This is a clique forest with the running-intersection property.",
+          "inputs": [
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Root one tree of this forest. Each vertex $x$ belongs to a connected subtree of clique nodes, so there is a unique root-nearest node $C_x$ containing it. Order the clique nodes in postorder, and list the vertices owned by each node $C_x$ in any order. For any neighbor $y$ of $x$, a clique node $D$ contains both. The nodes $C_x,C_y,D$ lie in the connected subtrees of cliques containing $x$ and $y$, so $C_x,C_y$ are comparable along the root-to-$D$ path. If $C_y$ is an ancestor of $C_x$, the running-intersection property gives $y\\in C_x$; if it is a strict descendant of $C_x$, its block is earlier in postorder; and if it is $C_x$, both vertices are in the same clique block. Thus any neighbor $y$ later than $x$ belongs to the clique $C_x$. All later neighbors of $x$ therefore lie in the clique $C_x$, so this order is a perfect elimination order.",
+          "inputs": [
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Direct every edge from its later endpoint in this order to its earlier endpoint. The orientation is acyclic because every arrow decreases the order. The parents of any vertex are among its later neighbors, which form a clique by step 4.1; hence there is no unshielded collider.",
+          "inputs": [
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "Since $\\{u,v\\}$ is an edge, some clique node $C$ contains both. Root its clique tree at $C$. Then $C$ is the root-nearest node containing each of $u,v$, so both are owned by its vertex block. List $v$ before $u$ in that block; step 5.1 directs $u\\to v$. Reversing their order directs $v\\to u$. The remaining vertices in the block may retain any order, and other trees may be rooted and ordered independently. Both resulting orientations are acyclic and collider-free by steps 4.1–5.1.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "construct",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is vacuous for a chordal graph with no edges."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 roots the clique tree at a clique containing the single specified edge and obtains both orientations."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "def-gaussian-partial-correlation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly sets K_{ij|emptyset} to the unconditional covariance block."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition assumes positive-definite population covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "thm-dag-markov-equivalence-skeleton-vstructures": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cpdag-markov-equivalence-class",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex set $V$. For a DAG $G$ on $V$, its **skeleton** is the\nundirected graph with edge $\\{i,j\\}$ exactly when $G$ contains $i\\to j$ or\n$j\\to i$. An **unshielded triple** is a triple of distinct vertices $i,k,j$\nwith edges $i-k$ and $k-j$ in the skeleton and no edge between $i$ and $j$.\nIt is an **unshielded collider** (also called a v-structure) when its arrows are\n$i\\to k\\leftarrow j$. Two DAGs on $V$ are **Markov equivalent** when they\ninduce the same d-separation relations: for every pairwise disjoint\n$A,B,S\\subseteq V$, $A$ and $B$ are d-separated by $S$ in one DAG exactly\nwhen they are d-separated by $S$ in the other. The equivalence class of $G$ is\ndenoted $[G]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pc-skeleton-separation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG on $V$. For distinct vertices $i,j\\in V$, the pair\n$\\{i,j\\}$ is an edge of the skeleton of $G$ if and only if there is no\n$S\\subseteq V\\setminus\\{i,j\\}$ that d-separates $i$ and $j$ in $G$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-covered-edge-reversal-preserves-d-separation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG and let $x\\to y$ be a covered arrow, meaning\n$\\operatorname{pa}_G(y)=\\operatorname{pa}_G(x)\\cup\\{x\\}$. Replacing $x\\to y$\nby $y\\to x$ gives a DAG $G'$ with exactly the same d-separation relations as\n$G$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "First assume that $G_1,G_2$ have the same skeleton and the same unshielded colliders. A finite DAG has a topological order: if every remaining vertex had an incoming arrow, following incoming arrows in the finite graph would repeat a vertex and create a directed cycle; remove a source and repeat. Fix such an order $\\prec$ for $G_1$. If the DAGs differ, choose the $\\prec$-earliest vertex $\\beta$ with $\\operatorname{pa}_{G_1}(\\beta)\\setminus\\operatorname{pa}_{G_2}(\\beta)\\ne\\varnothing$, and choose the $\\prec$-latest $\\alpha$ in that difference. Then $\\alpha\\to\\beta$ occurs in $G_1$ and $\\beta\\to\\alpha$ in $G_2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Conversely, assume $G_1,G_2$ are Markov equivalent. If their skeletons differed, [F2] would give a pair separated in one graph but not the other. Thus their skeletons agree. If an unshielded collider $i\\to k\\leftarrow j$ occurred in $G_1$ but not in $G_2$, then $i,j$ are nonadjacent in both. By [F2] choose $S$ that d-separates $i,j$ in $G_1$. The path $i\\to k\\leftarrow j$ shows that no descendant of $k$, including $k$, can lie in $S$, because otherwise that path would be active. In $G_2$, the same unshielded triple has a noncollider at $k$; since $k\\notin S$, the two-edge path is active, so $S$ does not d-separate $i,j$ there. This contradicts Markov equivalence. Interchanging $G_1,G_2$ rules out a collider present only in $G_2$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Let $\\gamma\\ne\\alpha$ be another parent of $\\beta$ in $G_1$. If $\\gamma$ were not a parent of $\\alpha$, then either $\\gamma$ and $\\alpha$ would be nonadjacent, making $\\alpha\\to\\beta\\leftarrow\\gamma$ an unshielded collider absent from $G_2$, or they would be adjacent with $\\alpha\\to\\gamma$ in $G_1$. The first case contradicts equality of colliders; in the second case, $G_2$ cannot retain both $\\alpha\\to\\gamma$ and $\\gamma\\to\\beta$, because together with $\\beta\\to\\alpha$ they form a directed cycle. If $\\alpha\\to\\gamma$ is reversed in $G_2$, then $\\gamma\\prec\\beta$ is an earlier vertex with a differing parent; if $\\gamma\\to\\beta$ is reversed, then $\\gamma$ is a later member than $\\alpha$ of $\\operatorname{pa}_{G_1}(\\beta)\\setminus\\operatorname{pa}_{G_2}(\\beta)$. Both contradict the choices in step 1.1. Hence every parent of $\\beta$ other than $\\alpha$ is a parent of $\\alpha$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "To prove $\\operatorname{pa}_{G_1}(\\alpha)\\subseteq\\operatorname{pa}_{G_1}(\\beta)$, suppose instead that $\\gamma\\to\\alpha$ in $G_1$ but $\\gamma\\notin\\operatorname{pa}_{G_1}(\\beta)$. Minimality of $\\beta$ implies $\\gamma\\to\\alpha$ is also present in $G_2$; otherwise the earlier vertex $\\alpha$ would already have a differing parent. If $\\gamma$ were not adjacent to $\\beta$, then $G_2$ would contain the unshielded collider $\\beta\\to\\alpha\\leftarrow\\gamma$, while $G_1$ has the noncollider chain $\\gamma\\to\\alpha\\to\\beta$, contradicting equality of colliders. Thus $\\gamma$ is adjacent to $\\beta$. In $G_1$ it must be oriented $\\gamma\\to\\beta$, since $\\beta\\to\\gamma$ would make a directed cycle with $\\gamma\\to\\alpha\\to\\beta$. This contradicts the assumption that $\\gamma$ is not a parent of $\\beta$. Therefore the inclusion holds. Together with step 2.1, $\\operatorname{pa}_{G_1}(\\beta)=\\operatorname{pa}_{G_1}(\\alpha)\\cup\\{\\alpha\\}$, so $\\alpha\\to\\beta$ is covered.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Reverse this covered arrow in $G_1$. By [F3] the result remains a DAG and is Markov equivalent to $G_1$. It has the same skeleton, and it has the same unshielded colliders: an edge in an unshielded collider cannot be covered, because the other parent of the collider would then also be a parent of the edge's tail and hence adjacent to it. Exactly one edge now agrees with $G_2$, so the finite number of edge-orientation disagreements decreases by one. If any disagreement remains, choose the earliest differing parent set again; the argument in steps 1.1–3.1 applies because the skeleton and collider set are unchanged. Thus finitely many covered reversals transform $G_1$ into $G_2$, and each reversal preserves d-separation.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "The two directions prove the equivalence.",
+          "inputs": [
+            "step 4.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement covers finite DAGs; for an empty vertex set, the skeletons and collider sets are empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 composes the finite covered-reversal argument to prove the forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves Markov equivalence forces matching skeletons and unshielded colliders."
+        }
+      ]
+    },
+    "alg-pc-causal-discovery": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition steps 1–5 on the empty vertex set have no pairs or edges and terminate with the empty pattern."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition step 1 starts at level ell=0 and tests the empty set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with a singleton vertex set there are no unordered pairs, so the initialized graph is already the output."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "def-sample-partial-correlation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows S empty, leaving projection onto the intercept."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires a positive-definite sample covariance block and n-|S|-3>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires i,j outside S."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "thm-gaussian-zero-partial-correlation-is-conditional-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Partition $X=(Y,Z)$ with $Y=(X_i,X_j)$ and $Z=X_S$; if $S=\\varnothing$, omit the $Z$ block. For nonempty $S$, $\\Sigma_{S,S}$ is positive definite because every nonzero vector supported on $S$ has positive $\\Sigma$-quadratic form, so it is invertible. Put $A=\\Sigma_{Y,S}\\Sigma_{S,S}^{-1}$ and $U=Y-\\mu_Y-A(Z-\\mu_Z)$. Then $\\operatorname{Cov}(U,Z)=0$ and $\\operatorname{Cov}(U)=K_{ij\\mid S}$. For every nonzero $u\\in\\mathbb R^2$, the quadratic form of $\\Sigma$ at $(u,-\\Sigma_{S,S}^{-1}\\Sigma_{S,Y}u)$ equals $u^TK_{ij\\mid S}u>0$. Thus $K_{ij\\mid S}$ is positive definite; for empty $S$ this follows directly from the principal $2\\times2$ covariance block.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The vector $(U,Z)$ is a linear image of $X$, hence is jointly Gaussian by [F1]. Its covariance is block diagonal with blocks $K_{ij\\mid S}$ and $\\Sigma_{S,S}$. By [F2], the joint density factors as the product of the two Gaussian densities, since the inverse and determinant of a block-diagonal covariance split by blocks. Integrating over measurable rectangles shows $U$ and $Z$ are independent by [F5]. It follows that, conditionally on $Z$, $Y$ is the translate $\\mu_Y+A(Z-\\mu_Z)+U$ and has conditional covariance $K_{ij\\mid S}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If $(K_{ij\\mid S})_{12}=0$, the positive-definite bivariate Gaussian density of $U$ factors into its one-coordinate densities. Thus the coordinates of $U$ are independent. Since $U$ is independent of $Z$, the conditional law of $X_i,X_j$ given $Z$ is the product of its conditional marginals. Integrating bounded measurable functions against this product conditional law gives the identity in [F3], hence conditional independence.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "Conversely assume the conditional independence in the Statement. Apply [F3] to the sine and cosine functions of each coordinate and combine the four real identities to obtain factorization of the conditional characteristic function at $(1,1)$. By step 2.1, the joint conditional characteristic function is the product of the marginal factors times $\\exp(-(K_{ij\\mid S})_{12})$. All other factors are nonzero; therefore $\\exp(-(K_{ij\\mid S})_{12})=1$. The covariance entry is real, so $(K_{ij\\mid S})_{12}=0$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The diagonal entries of $K_{ij\\mid S}$ are positive by step 1.1. Its off-diagonal entry is zero exactly when the normalized entry $\\rho_{ij\\mid S}$ is zero, proving both implications.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles S empty using the principal two-coordinate covariance block."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes positive-definite covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 prove zero partial correlation implies conditional independence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 prove conditional independence implies zero partial correlation."
+        }
+      ]
+    },
+    "lem-pc-fisher-transform-uniform-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gaussian-partial-correlation",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $X=(X_1,\\ldots,X_p)$ have a nondegenerate multivariate-normal\nlaw with mean $\\mu$ and positive-definite covariance matrix $\\Sigma$. For\ndistinct indices $i,j$ and $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, define\nthe conditional covariance block\n$$\nK_{ij\\mid S}=\\Sigma_{\\{i,j\\},\\{i,j\\}}-\\Sigma_{\\{i,j\\},S}\\Sigma_{S,S}^{-1}\\Sigma_{S,\\{i,j\\}},\n$$\nwith $K_{ij\\mid\\varnothing}=\\Sigma_{\\{i,j\\},\\{i,j\\}}$. Whenever the diagonal\nentries of this block are positive, the **partial correlation** is\n$$\n\\rho_{ij\\mid S}=\\frac{(K_{ij\\mid S})_{12}}{\\sqrt{(K_{ij\\mid S})_{11}(K_{ij\\mid S})_{22}}}.\n$$\nThe nondegenerate Gaussian case makes the conditioning covariance block\ninvertible; the following theorem proves that $K_{ij\\mid S}$ is positive\ndefinite, so this definition applies to every such $i,j,S$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sample-partial-correlation",
+          "source_section": "Definition",
+          "quote": "Let $x^{(1)},\\ldots,x^{(n)}\\in\\mathbb R^p$ be a sample, let $i\\ne j$, and\nlet $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$. Let $\\mathbf x_k\\in\\mathbb\nR^n$ be the sample column for coordinate $k$, and let $\\Pi_S$ be the orthogonal\nprojection onto the span of the all-ones vector and $\\{\\mathbf x_s:s\\in S\\}$.\nWhen the sample covariance matrix of coordinates $\\{i,j\\}\\cup S$ is positive\ndefinite, define the residual columns\n$$R_{i\\mid S}=(I-\\Pi_S)\\mathbf x_i,\\qquad R_{j\\mid S}=(I-\\Pi_S)\\mathbf x_j.$$\nThe **sample partial correlation** is\n$$\\widehat\\rho_{ij\\mid S}=\\frac{R_{i\\mid S}^{T}R_{j\\mid S}}{\\|R_{i\\mid S}\\|_2\\,\\|R_{j\\mid S}\\|_2}.$$\nFor $-1<r<1$, the **Fisher transform** is\n$g(r)=\\frac12\\log\\frac{1+r}{1-r}$, and the sample Fisher statistic is\n$Z_{ij\\mid S}=g(\\widehat\\rho_{ij\\mid S})$. For a test using multiplier\n$\\sqrt{n-|S|-3}$, require $n-|S|-3>0$ so that this factor is positive. Under independent samples\nfrom a nondegenerate Gaussian law, the stated covariance block is positive\ndefinite almost surely whenever $n-|S|-3>0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\sim N_p(\\mu,\\Sigma)$ be a nondegenerate multivariate-normal\nvector, so $\\Sigma$ is positive definite. For distinct $i,j$ and\n$S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, the block\n$K_{ij\\mid S}$ in the definition of Gaussian partial correlation is positive\ndefinite, and\n$$\n\\rho_{ij\\mid S}=0\\quad\\Longleftrightarrow\\quad\n\\sigma(X_i)\\perp\\!\\!\\!\\perp\\sigma(X_j)\\mid\\sigma(X_S).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-gaussian-partial-correlation",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $X=(X_1,\\ldots,X_p)$ have a nondegenerate multivariate-normal\nlaw with mean $\\mu$ and positive-definite covariance matrix $\\Sigma$. For\ndistinct indices $i,j$ and $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, define\nthe conditional covariance block\n$$\nK_{ij\\mid S}=\\Sigma_{\\{i,j\\},\\{i,j\\}}-\\Sigma_{\\{i,j\\},S}\\Sigma_{S,S}^{-1}\\Sigma_{S,\\{i,j\\}},\n$$\nwith $K_{ij\\mid\\varnothing}=\\Sigma_{\\{i,j\\},\\{i,j\\}}$. Whenever the diagonal\nentries of this block are positive, the **partial correlation** is\n$$\n\\rho_{ij\\mid S}=\\frac{(K_{ij\\mid S})_{12}}{\\sqrt{(K_{ij\\mid S})_{11}(K_{ij\\mid S})_{22}}}.\n$$\nThe nondegenerate Gaussian case makes the conditioning covariance block\ninvertible; the following theorem proves that $K_{ij\\mid S}$ is positive\ndefinite, so this definition applies to every such $i,j,S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F3], each observation's pair $(X_i,X_j)$ is a linear function of $X_S$ plus a Gaussian residual independent of $X_S$ with covariance $K_{ij\\mid S}$. Across observations these residual pairs are independent. The $S$ coordinates have a nondegenerate Gaussian density because their covariance is a positive-definite principal submatrix. If $|S|=0$, the intercept design has rank one. If $s=|S|>0$, successive independent sample points in $\\mathbb R^s$ are affinely independent until there are $s+1$: after $r\\le s$ affinely independent points, their affine span has dimension $r-1<s$, and the next point has a density, so lies in that span with probability zero by [F4]. Thus the intercept and $S$ design has rank $s+1$ almost surely. Conditional on that design, an orthonormal basis of its orthogonal complement has dimension $m=n-|S|-1$. In that basis the projected residual pairs are $m$ independent copies of this Gaussian residual; standardizing the two coordinates does not change their sample correlation. Thus the sample partial correlation has the same distribution as $R_m=\\frac{\\sum_{r=1}^m U_rV_r}{(\\sum_{r=1}^mU_r^2)^{1/2}(\\sum_{r=1}^mV_r^2)^{1/2}},\\qquad m=n-|S|-1,$ for $m$ independent copies $(U_r,V_r)$ of the standardized pair, whose correlation is $\\rho=\\rho_{ij\\mid S}$ by [F1]. The hypothesis gives $m\\ge3$. Their covariance block is positive definite by [F3], so the first residual sample column is nonzero almost surely, and conditional on that column the second has a density in $\\mathbb R^m$. Its probability of lying in the first column's one-dimensional span is zero by [F4], since $m\\ge2$. Therefore $R_m\\in(-1,1)$ almost surely and the Fisher transform is defined.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Represent $U_r=X_r$ and $V_r=\\rho X_r+\\sqrt{1-\\rho^2}E_r$ with independent standard normal vectors $X,E\\in\\mathbb R^m$. Put $A=\\|X\\|$, $Z=\\langle E,X/A\\rangle$, and $W=\\|E-ZX/A\\|$. Rotational invariance of the standard Gaussian density implies that $A^2\\sim\\chi_m^2$, $Z\\sim N(0,1)$, and $W^2\\sim\\chi^2_{m-1}$ are independent. Direct substitution gives $R_m=\\frac{q}{\\sqrt{q^2+W^2}},\\qquad q=\\frac{\\rho A}{\\sqrt{1-\\rho^2}}+Z,$ and hence $g(R_m)=\\operatorname{arsinh}(q/W)$. Rotational invariance follows directly from the standard Gaussian density, and it makes $A,Z,W$ independent. Also $\\operatorname{arsinh}(\\rho/\\sqrt{1-\\rho^2})=g(\\rho)$.",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Let $B=M/\\sqrt{1-M^2}$ and $L=4B+2$. On the event $|A/\\sqrt m-1|\\le\\delta,\\quad |W/\\sqrt m-1|\\le\\delta,\\quad |Z|/\\sqrt m\\le\\delta,$ where $0<\\delta\\le1/2$, one has $\\left|\\frac qW-\\frac{\\rho}{\\sqrt{1-\\rho^2}}\\right| \\le \\frac{(2B+1)\\delta}{1-\\delta}\\le L\\delta.$ Since $|\\operatorname{arsinh}'(x)|=1/\\sqrt{1+x^2}\\le1$, step 2.1 yields $|g(R_m)-g(\\rho)|\\le L\\delta$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For $Q\\sim\\chi_k^2$, its moment generating function, obtained by multiplying the $k$ one-dimensional Gaussian integrals, is $\\mathbb E e^{sQ}=(1-2s)^{-k/2}$ for $s<1/2$. For $\\delta>0$, Markov's inequality optimized at $s=\\delta/[2(1+\\delta)]$ gives $\\mathbb P(Q/k\\ge1+\\delta)\\le e^{-k(\\delta-\\log(1+\\delta))/2}$. For $0<\\delta<1$, the negative choice $s=-\\delta/[2(1-\\delta)]$ gives $\\mathbb P(Q/k\\le1-\\delta)\\le e^{-k(-\\delta-\\log(1-\\delta))/2}$. Put $\\delta_+=2u+u^2\\le3$ and $\\delta_-=2u-u^2\\ge u$. The inequalities $\\delta-\\log(1+\\delta)=\\int_0^\\delta x/(1+x)\\,dx\\ge\\delta^2/8$ for $0\\le\\delta\\le3$ and $-\\delta-\\log(1-\\delta)\\ge\\delta^2/2$ imply $\\mathbb P\\bigl(|\\sqrt{Q/k}-1|>u\\bigr)\\le2e^{-ku^2/8}\\qquad(0<u<1).$ Applying this to $A^2$ and $W^2$, and using $|\\sqrt{(m-1)/m}-1|\\le1/m\\le\\delta/2$, shows that $|W/\\sqrt m-1|>\\delta$ implies $|W/\\sqrt{m-1}-1|>\\delta/2$. Thus for $2/m\\le\\delta\\le1/2$, $\\mathbb P\\bigl(|A/\\sqrt m-1|>\\delta\\text{ or }|W/\\sqrt m-1|>\\delta\\bigr) \\le4e^{-m\\delta^2/64}.$ The standard normal moment generating function $\\mathbb Ee^{sZ}=e^{s^2/2}$, with Markov's inequality optimized at $s=\\delta\\sqrt m$, gives $\\mathbb P(|Z|/\\sqrt m>\\delta)\\le2e^{-m\\delta^2/2}$. For $0<\\delta<2/m$, the trivial bound $1\\le6e^{-m\\delta^2/64}$ applies. Thus the complement of the event in step 3.1 has probability at most $6e^{-m\\delta^2/64}$ for every $0<\\delta\\le1/2$.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Set $\\delta=t/L$. Since $L\\ge2$ and $0<t\\le1$, step 3.1 applies and its complement contains the event in the Statement. Step 4.1 therefore bounds that event by $6\\exp(-mt^2/(64L^2))$. Taking $C_M=6$ and $c_M=(64L^2)^{-1}$ proves the claim.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats S empty as projection off the intercept."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes singular Gaussian laws and assumes |rho|<=M<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires i,j outside the conditioning set S."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "lem-meek-rules-complete-for-cpdag": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cpdag-markov-equivalence-class",
+          "source_section": "Definition",
+          "quote": "A **partially directed acyclic graph** (PDAG) on $V$ is a simple mixed graph\nwhose directed edges contain no directed cycle. A **consistent DAG extension**\nof a PDAG preserves every directed edge, orients every undirected edge, is\nacyclic, and creates no unshielded collider absent from the PDAG. For an\nequivalence class with a common skeleton, its **completed pattern** directs an\nedge exactly when that orientation occurs in every DAG of the class and leaves\nthe edge undirected when both orientations occur. A **completed partially\ndirected acyclic graph** (CPDAG) for $[G]$ is this unique completed pattern\nwhen its consistent DAG extensions are exactly $[G]$. Thus its directed edges\nare compelled, while each undirected edge occurs in both directions among its\nconsistent extensions.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "5. Repeatedly orient edges to closure under the following background-free rules,\nusing fixed lexicographic order on rule instances:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dag-markov-equivalence-skeleton-vstructures",
+          "source_section": "Statement",
+          "quote": "Two finite DAGs on the same vertex set are Markov equivalent, meaning that they\ninduce the same d-separation relations, if and only if they have the same\nskeleton and the same unshielded colliders.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-chordal-components-admit-both-orientations",
+          "source_section": "Statement",
+          "quote": "An undirected graph is **chordal** when it has no induced cycle of length at\nleast four. A vertex is **simplicial** when all of its neighbors are pairwise\nadjacent. A **perfect elimination order** is a total order in which the later\nneighbors of each vertex form a clique. For every finite chordal undirected\ngraph $H$ and every edge $\\{u,v\\}$ of $H$, there are acyclic orientations of\nall edges of $H$ with no unshielded collider $a\\to w\\leftarrow b$ with\n$a,b$ nonadjacent, one having $u\\to v$ and another having $v\\to u$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Every consistent extension of a current pattern must respect each R1–R3 conclusion. For R1, the opposite orientation would create the new unshielded collider $i\\to j\\leftarrow k$ with $i,k$ nonadjacent. For R2, the opposite orientation would close the directed path $i\\to k\\to j$ into a directed cycle. For R3, if $j\\to i$, acyclicity forces $k\\to i$ and $\\ell\\to i$ (the alternatives $i\\to k$ or $i\\to\\ell$ each close a directed cycle through $j$); these arrows create the new unshielded collider $k\\to i\\leftarrow\\ell$, since $k,\\ell$ are nonadjacent. Each contradiction is forbidden for a consistent extension. Thus all rule orientations are compelled, and the original DAG $G$ remains a consistent extension at every stage.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Write $P$ for the final closed pattern. We claim that whenever $a\\to b$ and $b-c$ is undirected in $P$, the edge $a-c$ is directed $a\\to c$. If $a,c$ were nonadjacent, R1 would orient $b-c$ as $b\\to c$, contradicting closure. If $c\\to a$, then $c\\to a\\to b$ and R2 would orient $c-b$ as $c\\to b$, also contradicting closure. It remains to rule out $a-c$ undirected.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Suppose such an undirected $a-c$ exists, and choose a counterexample for which the arrow $a\\to b$ was first oriented as early as possible in the finite sequence of rule applications. If $a\\to b$ was initially oriented as part of a collider $a\\to b\\leftarrow d$, then $a,d$ are nonadjacent. Since $d\\to b-c$ cannot satisfy R1, $d$ is adjacent to $c$. If $c\\to d$, R2 on $c-b$ applies along $c\\to d\\to b$. If $d\\to c$, R1 on $d\\to c-a$ gives $c\\to a$, and R2 on $c-b$ then applies along $c\\to a\\to b$. If $d-c$ is undirected, R3 on $c-b$ applies with its other two vertices $a,d$. Each case contradicts that $P$ is closed.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "Iterating the claim in step 2.1 along an undirected path shows that a directed edge cannot have both endpoints in the same connected component of undirected edges: such a path would propagate $a\\to b$ to a nonexistent loop $a\\to a$. If an undirected component had an induced cycle of length at least four, take its latest vertex in a topological order of the consistent extension $G$ from step 1.1. Both cycle edges point into that vertex; their other endpoints are nonadjacent, since the cycle has no undirected chord and no directed edge can join vertices in the same component. This is an unshielded collider absent from $P$, contrary to consistency of $G$. Hence every undirected component is chordal.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "If $a\\to b$ was added by R1 from $d\\to a$ with $d,b$ nonadjacent, then either R1 on $d\\to a-c$ directly gives $a\\to c$, or $d$ is adjacent to $c$. If $c\\to d$, R2 on $c-a$ along $c\\to d\\to a$ gives $c\\to a$, and R2 on $c-b$ along $c\\to a\\to b$ then applies. If $d\\to c$, R1 on $d\\to c-b$ gives $c\\to b$. If $d-c$ is undirected, the earlier arrow $d\\to a$ together with $a-c$ is a counterexample of smaller orientation time, contrary to the choice in step 3.1. Thus this rule case is impossible.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.2",
+          "step": "4.2",
+          "claim": "If $a\\to b$ was added by R2 from $a\\to d\\to b$, then $d$ must be adjacent to $c$, since otherwise R1 on $d\\to b-c$ orients $b-c$. If $d\\to c$, R2 on $a-c$ along $a\\to d\\to c$ gives $a\\to c$. If $c\\to d$, R2 on $c-b$ along $c\\to d\\to b$ gives $c\\to b$. If $d-c$ is undirected, the earlier arrow $a\\to d$ and $d-c$ form a counterexample of smaller orientation time. All alternatives contradict closure or minimality.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.3",
+          "step": "4.3",
+          "claim": "If $a\\to b$ was added by R3, there are nonadjacent $d,e$ with $d\\to b$, $e\\to b$, and undirected $a-d$, $a-e$. Each of $d,e$ is adjacent to $c$, since otherwise R1 on $d\\to b-c$ or $e\\to b-c$ applies. If $c\\to d$ or $c\\to e$, R2 on $c-b$ applies along that arrow followed by $d\\to b$ or $e\\to b$. Otherwise each of $d-c,e-c$ is either undirected or points into $c$. If both point into $c$, R3 on $a-c$ gives $a\\to c$. If exactly one points into $c$, say $d\\to c$ while $e-c$ is undirected, R1 on $d\\to c-e$ gives $c\\to e$, and R2 on $c-b$ follows from $c\\to e\\to b$. If both are undirected, R3 on $c-b$ gives $c\\to b$. Every case contradicts the alleged counterexample or closure, proving the claim.",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "cases",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-4.4",
+          "step": "4.4",
+          "claim": "Contract each undirected component to one vertex and retain the directed edges between components. There are no loops by step 3.2. For a supposed simple cycle of components $C_1\\to C_2\\to\\cdots\\to C_r\\to C_1$, with $r\\ge2$, choose an arrow $x_t\\to y_{t+1}$ for each quotient edge, with cyclic indices. In component $C_t$, the vertices $y_t$ and $x_t$ are joined by an undirected path. The claim in step 2.1 propagates the incoming arrow $x_{t-1}\\to y_t$ along that path to $x_{t-1}\\to x_t$. These arrows give $x_1\\to x_2\\to\\cdots\\to x_r\\to x_1$, contradicting that $G$ consistently extends $P$. Therefore the quotient is a finite DAG.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.2",
+            "contradiction",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Fix any undirected edge $u-v$ and choose in its component one of the two orientations supplied by [F4] with the desired direction; orient every other nontrivial undirected component by any such acyclic collider-free orientation. Keep all directed edges of $P$. The combined graph is acyclic: a directed cycle contained in one component is excluded by its chosen orientation, while a cycle passing between components would project to a directed cycle in the quotient of step 4.4.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.2",
+            "step 4.4",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "The combined DAG creates no unshielded collider absent from $P$. Two internal parents of a vertex cannot form one by the collider-free component orientation. If $x\\to v$ is an external directed parent and $w\\to v$ is an internal parent, then $v-w$ was undirected in $P$; step 2.1 forces $x\\to w$ in $P$, so $x,w$ are adjacent and the collider is shielded. Two external directed parents already give a collider present in $P$ whenever they are nonadjacent. Thus the construction is a consistent extension, and the chosen edge $u-v$ has the requested orientation.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 5.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "derivation-7.1",
+          "step": "7.1",
+          "claim": "By step 1.1 every consistent extension preserves every arrow of $P$, and by steps 5.1–6.1 each undirected edge occurs in consistent extensions with either orientation. The initial pattern has exactly the unshielded colliders of $G$, and $G$ remains its consistent extension, so every directed unshielded collider in $P$ is also one in $G$; thus $P$ and $G$ have the same skeleton and unshielded colliders. By [F3], every consistent extension is Markov equivalent to $G$. Conversely, any DAG Markov equivalent to $G$ has the same skeleton and colliders by [F3], hence extends the initial pattern; applying the soundness argument in step 1.1 successively shows that it preserves every arrow added by R1–R3 and therefore extends $P$. Thus the consistent extensions of $P$ are exactly $[G]$, and $P$ is its CPDAG.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 5.1",
+            "step 6.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement includes the empty DAG; it has no initial arrows or rule instances and is its own CPDAG."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.2, and 5.1–7.1 use finite graph constructions; metadata declares the proof choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "R1–R3 rule cases",
+          "result": "The proof checks soundness for all three rules and closure cases for initial colliders and each rule that can add an arrow.",
+          "evidence": "Steps 1.1, 2.1, 3.1, and 4.1–4.3."
+        }
+      ]
+    },
+    "thm-pc-oracle-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-causal-discovery-oracle-regime",
+          "source_section": "Definition",
+          "quote": "A **perfect conditional-independence oracle** for this regime accepts any\npairwise disjoint $A,B,S\\subseteq V$ and returns “independent” exactly when\n$\\sigma(X_A)$ and $\\sigma(X_B)$ are conditionally independent given\n$\\sigma(X_S)$. The **causally sufficient perfect-oracle regime** consists of\nthe finite observed DAG, its Markovian recursive model and full-joint law, the\nfaithfulness condition, and this exact oracle. No latent vertex is omitted\nfrom the graph supplied to the oracle.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_v)_{v\\in V}$ be random elements in measurable spaces\nwhose joint law is generated, in a topological order of the finite DAG $G$,\nby probability kernels $K_v(x_{\\operatorname{pa}(v)},dx_v)$. For pairwise\ndisjoint $A,B,C\\subseteq V$, if $C$ d-separates $A$ and $B$ in $G$, then\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C).$$\nThis is the global Markov implication. Its converse is the separate\nfaithfulness condition in [[def-faithfulness-of-a-dag-model]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-faithfulness-of-a-dag-model",
+          "source_section": "Definition",
+          "quote": "Assume AC, and let a joint law $P$ on the measurable vertex variables of a\nfinite DAG $G$ be given. The law is **faithful to $G$** if, for every triple\nof pairwise disjoint vertex sets $A,B,C$, the conditional independence\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C)$$\nimplies that $C$ d-separates $A$ and $B$ in $G$. This is the converse of the\nglobal Markov implication; faithfulness is a separate assumption on the\nspecified law, not a consequence of DAG factorization. No claim about Markov\nequivalence, skeletons, or unshielded colliders is included. Here $X_A$ is\nthe finite random vector $(X_v)_{v\\in A}$ with the finite-product\nsigma-algebra; for $A=\\varnothing$ it is the unique random element of the\nempty-product singleton.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pc-skeleton-separation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG on $V$. For distinct vertices $i,j\\in V$, the pair\n$\\{i,j\\}$ is an edge of the skeleton of $G$ if and only if there is no\n$S\\subseteq V\\setminus\\{i,j\\}$ that d-separates $i$ and $j$ in $G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-pc-separating-set-collider",
+          "source_section": "Statement",
+          "quote": "Let $i-k-j$ be an unshielded triple in a finite DAG and let\n$S\\subseteq V\\setminus\\{i,j\\}$ d-separate $i$ and $j$. Then the triple is a\nv-structure $i\\to k\\leftarrow j$ if and only if $k\\notin S$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "2. In the fixed lexicographic order of unordered vertex pairs, process each\npair $i-j$ that is still an edge of $C$. First test every $\\ell$-element\nsubset of $\\operatorname{Adj}_C(i)\\setminus\\{j\\}$ in lexicographic order;\nthen test every $\\ell$-element subset of\n$\\operatorname{Adj}_C(j)\\setminus\\{i\\}$ in lexicographic order. On the first\noracle result of conditional independence given a tested set $S$, delete\n$i-j$, record $\\operatorname{Sep}(i,j)=\\operatorname{Sep}(j,i)=S$, and do\nnot test that pair again. If no set separates the pair, leave it adjacent.\nAdjacency sets are read from the current graph, including deletions already\nmade at level $\\ell$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-meek-rules-complete-for-cpdag",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG. Start with its skeleton, orient exactly the edges in\nits unshielded colliders, and leave all other edges undirected. Repeatedly apply\nthe background-free rules R1–R3 from the PC algorithm until no rule applies.\nThe resulting partially directed graph is the CPDAG for the Markov-equivalence\nclass of $G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F2], every d-separation in $G$ is a conditional independence in its law. By [F3], every conditional independence is a d-separation. Since the oracle is exact by [F1], it answers “independent” exactly for d-separated pairs and sets.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Every true skeleton edge $i-j$ remains in the search graph: its one-edge path is active given every allowed conditioning set, so by [F1] and [F2] no oracle test deletes it. For a nonedge $i-j$, [F4] gives a separating set $S=\\operatorname{pa}(i)$ or $\\operatorname{pa}(j)$ that excludes the endpoints. Every vertex in that parent set remains adjacent to the chosen endpoint because all true edges remain. At any level $\\ell<|S|$ while $i-j$ remains, that endpoint has at least $|S|\\ge\\ell+1$ other neighbors. The stopping condition therefore cannot stop before level $|S|$, and at that level the algorithm tests $S$ and deletes $i-j$. Thus the returned skeleton is exactly the skeleton of $G$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Every set recorded when an edge is deleted was accepted by the exact oracle. By step 1.1 it d-separates the deleted endpoints. Since the skeleton from step 2.1 is exact, each unshielded triple is an unshielded triple of $G$; [F5] shows the algorithm orients its middle vertex as a collider exactly when it is a collider in $G$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The algorithm then applies R1–R3 to closure. Its pattern has the exact skeleton and exactly the unshielded colliders of $G$ by steps 2.1–3.1. Applying [F7] gives the CPDAG of $G$. The finite search terminates as specified by [F6], so this is the algorithm's output.",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 identifies the output; on an empty observed vertex set the finite graph and its CPDAG are empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows a nonedge whose separating parent set is empty."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item makes no endpoint or boundary-value claim beyond its declared inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ]
+    },
+    "thm-pc-high-dimensional-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sample-partial-correlation",
+          "source_section": "Definition",
+          "quote": "Let $x^{(1)},\\ldots,x^{(n)}\\in\\mathbb R^p$ be a sample, let $i\\ne j$, and\nlet $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$. Let $\\mathbf x_k\\in\\mathbb\nR^n$ be the sample column for coordinate $k$, and let $\\Pi_S$ be the orthogonal\nprojection onto the span of the all-ones vector and $\\{\\mathbf x_s:s\\in S\\}$.\nWhen the sample covariance matrix of coordinates $\\{i,j\\}\\cup S$ is positive\ndefinite, define the residual columns\n$$R_{i\\mid S}=(I-\\Pi_S)\\mathbf x_i,\\qquad R_{j\\mid S}=(I-\\Pi_S)\\mathbf x_j.$$\nThe **sample partial correlation** is\n$$\\widehat\\rho_{ij\\mid S}=\\frac{R_{i\\mid S}^{T}R_{j\\mid S}}{\\|R_{i\\mid S}\\|_2\\,\\|R_{j\\mid S}\\|_2}.$$\nFor $-1<r<1$, the **Fisher transform** is\n$g(r)=\\frac12\\log\\frac{1+r}{1-r}$, and the sample Fisher statistic is\n$Z_{ij\\mid S}=g(\\widehat\\rho_{ij\\mid S})$. For a test using multiplier\n$\\sqrt{n-|S|-3}$, require $n-|S|-3>0$ so that this factor is positive. Under independent samples\nfrom a nondegenerate Gaussian law, the stated covariance block is positive\ndefinite almost surely whenever $n-|S|-3>0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gaussian-partial-correlation",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $X=(X_1,\\ldots,X_p)$ have a nondegenerate multivariate-normal\nlaw with mean $\\mu$ and positive-definite covariance matrix $\\Sigma$. For\ndistinct indices $i,j$ and $S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, define\nthe conditional covariance block\n$$\nK_{ij\\mid S}=\\Sigma_{\\{i,j\\},\\{i,j\\}}-\\Sigma_{\\{i,j\\},S}\\Sigma_{S,S}^{-1}\\Sigma_{S,\\{i,j\\}},\n$$\nwith $K_{ij\\mid\\varnothing}=\\Sigma_{\\{i,j\\},\\{i,j\\}}$. Whenever the diagonal\nentries of this block are positive, the **partial correlation** is\n$$\n\\rho_{ij\\mid S}=\\frac{(K_{ij\\mid S})_{12}}{\\sqrt{(K_{ij\\mid S})_{11}(K_{ij\\mid S})_{22}}}.\n$$\nThe nondegenerate Gaussian case makes the conditioning covariance block\ninvertible; the following theorem proves that $K_{ij\\mid S}$ is positive\ndefinite, so this definition applies to every such $i,j,S$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\sim N_p(\\mu,\\Sigma)$ be a nondegenerate multivariate-normal\nvector, so $\\Sigma$ is positive definite. For distinct $i,j$ and\n$S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, the block\n$K_{ij\\mid S}$ in the definition of Gaussian partial correlation is positive\ndefinite, and\n$$\n\\rho_{ij\\mid S}=0\\quad\\Longleftrightarrow\\quad\n\\sigma(X_i)\\perp\\!\\!\\!\\perp\\sigma(X_j)\\mid\\sigma(X_S).\n$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pc-fisher-transform-uniform-concentration",
+          "source_section": "Statement",
+          "quote": "Fix $0\\le M<1$. There are constants $c_M>0$ and $C_M<\\infty$ such that the\nfollowing holds. Let $X^{(1)},\\ldots,X^{(n)}$ be independent observations from\na nondegenerate Gaussian law, and let $i,j,S$ be as in the definitions of\npopulation and sample partial correlation. Suppose\n$|\\rho_{ij\\mid S}|\\le M$ and $n-|S|-3>0$. Then, for $0<t\\le1$,\n$$\n\\mathbb P\\!\\left(\\left|g(\\widehat\\rho_{ij\\mid S})-g(\\rho_{ij\\mid S})\\right|>t\\right)\n\\le C_M\\exp\\!\\left(-c_M(n-|S|-1)t^2\\right),\n$$\nwhere $g(r)=\\tfrac12\\log((1+r)/(1-r))$. The constants do not depend on\n$i,j,S,n$ or the Gaussian mean and covariance beyond the bound $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pc-oracle-correctness",
+          "source_section": "Statement",
+          "quote": "Assume AC and the causally sufficient perfect-oracle discovery regime for a\nfinite observed DAG $G$ and its full-joint law. Running the population PC\nalgorithm with any fixed vertex order returns exactly the skeleton of $G$,\nrecords a d-separating set for every deleted pair, orients exactly the\nunshielded colliders of $G$, and returns the CPDAG for the Markov-equivalence\nclass of $G$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite vertex set $V$, a perfect conditional-independence oracle\nfor a law in the causally sufficient discovery regime, and a fixed total order\nof $V$. For every adjacent pair and conditioning set $S$ tested below, the\noracle returns whether $X_i$ and $X_j$ are conditionally independent given\n$X_S$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_v)_{v\\in V}$ be random elements in measurable spaces\nwhose joint law is generated, in a topological order of the finite DAG $G$,\nby probability kernels $K_v(x_{\\operatorname{pa}(v)},dx_v)$. For pairwise\ndisjoint $A,B,C\\subseteq V$, if $C$ d-separates $A$ and $B$ in $G$, then\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C).$$\nThis is the global Markov implication. Its converse is the separate\nfaithfulness condition in [[def-faithfulness-of-a-dag-model]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-faithfulness-of-a-dag-model",
+          "source_section": "Definition",
+          "quote": "Assume AC, and let a joint law $P$ on the measurable vertex variables of a\nfinite DAG $G$ be given. The law is **faithful to $G$** if, for every triple\nof pairwise disjoint vertex sets $A,B,C$, the conditional independence\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C)$$\nimplies that $C$ d-separates $A$ and $B$ in $G$. This is the converse of the\nglobal Markov implication; faithfulness is a separate assumption on the\nspecified law, not a consequence of DAG factorization. No claim about Markov\nequivalence, skeletons, or unshielded colliders is included. Here $X_A$ is\nthe finite random vector $(X_v)_{v\\in A}$ with the finite-product\nsigma-algebra; for $A=\\varnothing$ it is the unique random element of the\nempty-product singleton.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-pc-skeleton-separation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG on $V$. For distinct vertices $i,j\\in V$, the pair\n$\\{i,j\\}$ is an edge of the skeleton of $G$ if and only if there is no\n$S\\subseteq V\\setminus\\{i,j\\}$ that d-separates $i$ and $j$ in $G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-causal-discovery-oracle-regime",
+          "source_section": "Definition",
+          "quote": "A **perfect conditional-independence oracle** for this regime accepts any\npairwise disjoint $A,B,S\\subseteq V$ and returns “independent” exactly when\n$\\sigma(X_A)$ and $\\sigma(X_B)$ are conditionally independent given\n$\\sigma(X_S)$. The **causally sufficient perfect-oracle regime** consists of\nthe finite observed DAG, its Markovian recursive model and full-joint law, the\nfaithfulness condition, and this exact oracle. No latent vertex is omitted\nfrom the graph supplied to the oracle.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Since $q_n=O(n^{1-b})$ with $b>0$, eventually $n-q_n-3>0$, so [F1] makes every sample statistic in the search defined almost surely. Since $c_n\\le M<1$, take $t=c_n/4\\le1$ in [F4]. For every tested triple $(i,j,S)$, the probability that $|g(\\widehat\\rho_{ij\\mid S})-g(\\rho_{ij\\mid S})|>c_n/4$ is at most $C_M\\exp(-c_M(n-|S|-1)c_n^2/16)$. For large $n$, $q_n/n\\to0$ and $n-q_n-1\\ge n/2$, so each such probability is at most $C_M\\exp(-c'_M n c_n^2)$ for a constant $c'_M>0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "There are at most $N_n=\\binom{p_n}{2}\\sum_{\\ell=0}^{q_n}\\binom{p_n-2}{\\ell} \\le p_n^2(q_n+1)p_n^{q_n}\\le p_n^{q_n+3}$ distinct pair-and-set tests, since $q_n\\le p_n-1$ and $q_n+1\\le p_n$. A union bound, which requires no independence between tests, shows that the event $E_n$ on which every test of size at most $q_n$ has Fisher-transform error at most $c_n/4$ has failure probability at most $C_M\\exp\\!\\left((q_n+3)\\log p_n-c'_M n c_n^2\\right).$ The assumptions imply $n c_n^2\\ge C_0 n^{1-2d}$ eventually and $(q_n+3)\\log p_n=O(n^{1-b}\\log n)=o(n^{1-2d})$, because $2d<b$. Thus, after reducing the positive constant in the exponent, $\\mathbb P(E_n^c)\\le\\exp(-C n^{1-2d})$ for all sufficiently large $n$.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "On $E_n$, if $\\rho_{ij\\mid S}=0$, then [F1] gives $|g(\\widehat\\rho_{ij\\mid S})|\\le c_n/4$. By [F3], this is the population conditional-independence case. Hence $T_{ij\\mid S}\\le\\sqrt n c_n/4<\\sqrt n c_n/2$, so the test declares independence. If $\\rho_{ij\\mid S}\\ne0$, then [F2] and the lower-bound hypothesis give $|\\rho_{ij\\mid S}|\\ge c_n$, and $|g(\\rho_{ij\\mid S})|\\ge|\\rho_{ij\\mid S}|$ because $|\\operatorname{atanh}(r)|\\ge|r|$ for $|r|<1$. Therefore $|g(\\widehat\\rho_{ij\\mid S})|\\ge3c_n/4$. Since $(n-|S|-3)/n\\ge(n-q_n-3)/n\\to1$, for all sufficiently large $n$ we have $\\sqrt{(n-|S|-3)/n}>2/3$, so $T_{ij\\mid S}>\\sqrt n c_n/2$ and the test declares dependence. By [F3] these are exactly the dependent cases.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "On $E_n$ the capped sample PC search makes the same decisions as the perfect-oracle algorithm at every level through $q_n$. True edges are never removed, because their one-edge paths prevent d-separation and [F7] makes every such test dependent. For each nonedge, [F8] supplies a separating parent set of size at most the true maximum degree $q_n$; its parent edges remain, so the algorithm tests and removes that nonedge no later than level $q_n$. Thus the sample search has the exact skeleton and separating sets on $E_n$, and its collider and R1–R3 orientations equal those of population PC. By [F5] its output is the CPDAG of $G_n$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 3.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "The only failure event is contained in $E_n^c$, whose probability has the bound from step 2.1. Step 4.1 identifies the output on $E_n$ as the CPDAG. This proves the stated consistency bound. The threshold uses $c_n$, so the theorem does not provide a data-driven choice of that parameter.",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 classify zero partial correlations and allow empty conditioning sets."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes nondegenerate Gaussian laws and M<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines tests for pairs i,j outside S."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite test-count bound",
+          "result": "The union bound covers at most p_n^(q_n+3) pair-and-conditioning-set tests.",
+          "evidence": "Step 2.1."
+        }
+      ]
+    },
+    "ex-pc-chain-versus-collider-separating-sets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-zero-partial-correlation-is-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\sim N_p(\\mu,\\Sigma)$ be a nondegenerate multivariate-normal\nvector, so $\\Sigma$ is positive definite. For distinct $i,j$ and\n$S\\subseteq\\{1,\\ldots,p\\}\\setminus\\{i,j\\}$, the block\n$K_{ij\\mid S}$ in the definition of Gaussian partial correlation is positive\ndefinite, and\n$$\n\\rho_{ij\\mid S}=0\\quad\\Longleftrightarrow\\quad\n\\sigma(X_i)\\perp\\!\\!\\!\\perp\\sigma(X_j)\\mid\\sigma(X_S).\n$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "2. In the fixed lexicographic order of unordered vertex pairs, process each\npair $i-j$ that is still an edge of $C$. First test every $\\ell$-element\nsubset of $\\operatorname{Adj}_C(i)\\setminus\\{j\\}$ in lexicographic order;\nthen test every $\\ell$-element subset of\n$\\operatorname{Adj}_C(j)\\setminus\\{i\\}$ in lexicographic order. On the first\noracle result of conditional independence given a tested set $S$, delete\n$i-j$, record $\\operatorname{Sep}(i,j)=\\operatorname{Sep}(j,i)=S$, and do\nnot test that pair again. If no set separates the pair, leave it adjacent.\nAdjacency sets are read from the current graph, including deletions already\nmade at level $\\ell$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pc-separating-set-collider",
+          "source_section": "Statement",
+          "quote": "Let $i-k-j$ be an unshielded triple in a finite DAG and let\n$S\\subseteq V\\setminus\\{i,j\\}$ d-separate $i$ and $j$. Then the triple is a\nv-structure $i\\to k\\leftarrow j$ if and only if $k\\notin S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-causal-discovery-oracle-regime",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite set of observed vertices, let $G$ be a directed acyclic graph\non $V$, and let $(X_v)_{v\\in V}$ be the endogenous variables of a finite\nrecursive structural causal model whose observed set is all of $V$ and whose\nlatent set is empty. The model is Markovian: its exogenous random elements are\nmutually independent. Require that the full-joint law $P$ of $(X_v)_{v\\in V}$\nhas a topological probability-kernel factorization: for a topological order\n$v_1,\\ldots,v_p$, its joint law is formed by composing probability kernels\n$K_{v_r}(x_{\\operatorname{pa}(v_r)},dx_{v_r})$ that depend only on the parents\nof $v_r$. Also require that $P$ is faithful to $G$, meaning its conditional\nindependences among vertex subvectors are exactly the d-separations in $G$.\nAssume AC for these probability interfaces.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-recursive-structural-causal-model-and-dag",
+          "source_section": "Definition",
+          "quote": "Fix a finite DAG $G=(V,E)$ and a specified topological ordering\n$v_1,\\ldots,v_n$ (every arrow points from an earlier to a later vertex).\nPartition $V=O\\sqcup H$ into **observed** vertices $O$ and **latent** vertices\n$H$. For each $v\\in V$, specify a measurable state space $(S_v,\\mathcal\nS_v)$, a measurable exogenous space $(E_v,\\mathcal E_v)$, a jointly\nmeasurable structural function\n$$f_v:\\prod_{u\\in\\operatorname{pa}(v)}S_u\\times E_v\\to S_v,$$\nand an exogenous random element $U_v$ with values in $E_v$. Here\n$\\operatorname{pa}(v)=\\{u:(u,v)\\in E\\}$; the empty product is a singleton.\nThe model is **Markovian** when the finite family $(U_v)_{v\\in V}$ is mutually\nindependent. No parametric form or distributional truth is asserted. Correlated\ndisturbances may be represented by adding their common causes as latent\nvertices, after which the exogenous family in the expanded model is required\nto be mutually independent.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-d-separation-in-a-dag",
+          "source_section": "Definition",
+          "quote": "For pairwise disjoint vertex sets $X,Y,C\\subseteq V$, a path joining $X$ to\n$Y$ is **active given $C$** when every internal noncollider is outside $C$ and\nevery internal collider has at least one member of $\\operatorname{De}^+(v)$ in\n$C$. The set $C$ **d-separates** $X$ and $Y$ in $G$ when no path joining $X$ to\n$Y$ is active given $C$; write $X\\perp_d Y\\mid C$ in $G$. The empty set of\nvertices is allowed for any of $X,Y,C$; in particular d-separation is vacuous\nif either endpoint set is empty.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The chain model's density is $\\phi(x)\\phi(y-x)\\phi(z-y)$, where $\\phi$ is the standard-normal density, so the displayed recursive equations factor along $X\\to Y\\to Z$; all three vertices are observed and [F6] gives the Markovian SCM condition. Its moments are $\\operatorname{Var}(X)=1$, $\\operatorname{Var}(Y)=2$, $\\operatorname{Var}(Z)=3$, and distinct covariances $\\operatorname{Cov}(X,Y)=1$, $\\operatorname{Cov}(Y,Z)=2$, $\\operatorname{Cov}(X,Z)=1$. The vector is multivariate normal by [F1], and its covariance matrix is positive definite because $(X,Y,Z)$ is an invertible triangular linear transform of $(U_X,U_Y,U_Z)$. The conditional covariance formula gives $\\operatorname{Cov}(X,Z\\mid Y)=1-\\frac{1\\cdot2}{2}=0,\\quad \\operatorname{Cov}(X,Y\\mid Z)=1-\\frac{1\\cdot2}{3}=\\frac13,\\quad \\operatorname{Cov}(Y,Z\\mid X)=2-\\frac{1\\cdot1}{1}=1.$ Together with the nonzero marginal covariances, [F2] shows that the only conditional independence between distinct variables is $X\\perp Z\\mid Y$. By [F7], the only d-separated vertex pair is also $X,Z$ given $Y$: the adjacent pairs have an active one-edge path, and the $X$–$Z$ path is blocked only by conditioning on $Y$. Any conditional independence between vertex sets would imply the corresponding coordinate independences, so the set-level independence and d-separation models also agree. This verifies faithfulness in [F5].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The collider model's density is $\\phi(x)\\phi(z)\\phi(y-x-z)$, so the equations factor along $X\\to Y\\leftarrow Z$; all vertices are observed and [F6] gives the Markovian SCM condition. Its variances are $\\operatorname{Var}(X)=\\operatorname{Var}(Z)=1$, $\\operatorname{Var}(Y)=3$, its covariances are $\\operatorname{Cov}(X,Y)=\\operatorname{Cov}(Z,Y)=1$, and $\\operatorname{Cov}(X,Z)=0$. The vector is multivariate normal by [F1], and this covariance matrix is positive definite by the invertible triangular map from the exogenous variables. The conditional covariances are $\\operatorname{Cov}(X,Z\\mid Y)=0-\\frac{1\\cdot1}{3}=-\\frac13,\\quad \\operatorname{Cov}(X,Y\\mid Z)=1,\\quad \\operatorname{Cov}(Y,Z\\mid X)=1.$ Therefore [F2] shows that $X\\perp Z$ marginally, but there is no conditional independence after conditioning on the third variable and no independence for an adjacent pair. By [F7], this is exactly the collider DAG's d-separation list: the collider path is blocked unconditioned and opened by conditioning on $Y$, while each adjacent pair has an active one-edge path. Any set conditional independence would imply coordinate independences, so [F5] holds at the set level as well.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Thus PC does not delete any pair at level $0$. At level $1$, $X-Z$ is deleted and its separator is recorded as $\\{Y\\}$; the other two pairs cannot be deleted because their marginal covariances are nonzero. The sole unshielded triple has its middle vertex in the separator, so [F3] or [F4] leaves both edges undirected. No Meek rule applies without a directed edge, and the output is the undirected chain CPDAG.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "PC deletes $X-Z$ at level $0$ and records the empty separator. It retains $X-Y$ and $Y-Z$ by their nonzero covariances. Since $Y$ is absent from the separator, [F3] orients $X\\to Y\\leftarrow Z$; the output is the collider CPDAG. These calculations verify both claimed outputs without relying on the diagrams.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the collider has an empty endpoint separator."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 identify X and Z as the endpoint pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "explicit finite example cases",
+          "result": "All named vertices, edge orientations, covariance entries, and conditional-covariance cases are enumerated in the verification.",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1."
+        }
+      ]
+    },
+    "ex-pc-markov-equivalent-dags": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-d-separation-in-a-dag",
+          "source_section": "Definition",
+          "quote": "For pairwise disjoint vertex sets $X,Y,C\\subseteq V$, a path joining $X$ to\n$Y$ is **active given $C$** when every internal noncollider is outside $C$ and\nevery internal collider has at least one member of $\\operatorname{De}^+(v)$ in\n$C$. The set $C$ **d-separates** $X$ and $Y$ in $G$ when no path joining $X$ to\n$Y$ is active given $C$; write $X\\perp_d Y\\mid C$ in $G$. The empty set of\nvertices is allowed for any of $X,Y,C$; in particular d-separation is vacuous\nif either endpoint set is empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-dag-markov-equivalence-skeleton-vstructures",
+          "source_section": "Statement",
+          "quote": "Two finite DAGs on the same vertex set are Markov equivalent, meaning that they\ninduce the same d-separation relations, if and only if they have the same\nskeleton and the same unshielded colliders.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cpdag-markov-equivalence-class",
+          "source_section": "Definition",
+          "quote": "A **partially directed acyclic graph** (PDAG) on $V$ is a simple mixed graph\nwhose directed edges contain no directed cycle. A **consistent DAG extension**\nof a PDAG preserves every directed edge, orients every undirected edge, is\nacyclic, and creates no unshielded collider absent from the PDAG. For an\nequivalence class with a common skeleton, its **completed pattern** directs an\nedge exactly when that orientation occurs in every DAG of the class and leaves\nthe edge undirected when both orientations occur. A **completed partially\ndirected acyclic graph** (CPDAG) for $[G]$ is this unique completed pattern\nwhen its consistent DAG extensions are exactly $[G]$. Thus its directed edges\nare compelled, while each undirected edge occurs in both directions among its\nconsistent extensions.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite vertex set $V$, a perfect conditional-independence oracle\nfor a law in the causally sufficient discovery regime, and a fixed total order\nof $V$. For every adjacent pair and conditioning set $S$ tested below, the\noracle returns whether $X_i$ and $X_j$ are conditionally independent given\n$X_S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-meek-rules-complete-for-cpdag",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite DAG. Start with its skeleton, orient exactly the edges in\nits unshielded colliders, and leave all other edges undirected. Repeatedly apply\nthe background-free rules R1–R3 from the PC algorithm until no rule applies.\nThe resulting partially directed graph is the CPDAG for the Markov-equivalence\nclass of $G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-causal-discovery-oracle-regime",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite set of observed vertices, let $G$ be a directed acyclic graph\non $V$, and let $(X_v)_{v\\in V}$ be the endogenous variables of a finite\nrecursive structural causal model whose observed set is all of $V$ and whose\nlatent set is empty. The model is Markovian: its exogenous random elements are\nmutually independent. Require that the full-joint law $P$ of $(X_v)_{v\\in V}$\nhas a topological probability-kernel factorization: for a topological order\n$v_1,\\ldots,v_p$, its joint law is formed by composing probability kernels\n$K_{v_r}(x_{\\operatorname{pa}(v_r)},dx_{v_r})$ that depend only on the parents\nof $v_r$. Also require that $P$ is faithful to $G$, meaning its conditional\nindependences among vertex subvectors are exactly the d-separations in $G$.\nAssume AC for these probability interfaces.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Each graph has all three possible edges, so there is no triple with nonadjacent endpoints and in particular no unshielded collider. Their skeletons and unshielded colliders agree; [F2] proves Markov equivalence. Every distinct pair has a direct active path under every allowed conditioning set by [F1], so neither DAG has a d-separation between distinct vertices. Faithfulness in [F6] makes the oracle dependent on every pair and set.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "In the two DAGs, the orientations of $A-B$, $A-C$, and $B-C$ are respectively $A\\to B$ versus $B\\to A$, $A\\to C$ versus $C\\to A$, and $B\\to C$ versus $C\\to B$. Thus each edge is oriented both ways in the equivalence class, and [F3] makes every edge undirected in the CPDAG.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The perfect oracle never reports independence for any pair by step 1.1, so the algorithm deletes no edge. There is no unshielded triple to orient, and none of R1–R3 can fire because each requires at least one directed edge. PC returns the undirected triangle, which [F5] identifies with the CPDAG found in step 1.2. The diagram is only a rendering of these verified adjacencies and orientations.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-step branch distinct from its general statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item has no degeneracy parameter beyond the hypotheses in its carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 check every direct pair in the complete triangle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "explicit finite example cases",
+          "result": "All named vertices, edge orientations, covariance entries, and conditional-covariance cases are enumerated in the verification.",
+          "evidence": "Steps 1.1, 1.2, 2.1."
+        }
+      ]
+    },
+    "ex-pc-latent-confounding-limitations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-recursive-structural-causal-model-and-dag",
+          "source_section": "Definition",
+          "quote": "Fix a finite DAG $G=(V,E)$ and a specified topological ordering\n$v_1,\\ldots,v_n$ (every arrow points from an earlier to a later vertex).\nPartition $V=O\\sqcup H$ into **observed** vertices $O$ and **latent** vertices\n$H$. For each $v\\in V$, specify a measurable state space $(S_v,\\mathcal\nS_v)$, a measurable exogenous space $(E_v,\\mathcal E_v)$, a jointly\nmeasurable structural function\n$$f_v:\\prod_{u\\in\\operatorname{pa}(v)}S_u\\times E_v\\to S_v,$$\nand an exogenous random element $U_v$ with values in $E_v$. Here\n$\\operatorname{pa}(v)=\\{u:(u,v)\\in E\\}$; the empty product is a singleton.\nThe model is **Markovian** when the finite family $(U_v)_{v\\in V}$ is mutually\nindependent. No parametric form or distributional truth is asserted. Correlated\ndisturbances may be represented by adding their common causes as latent\nvertices, after which the exogenous family in the expanded model is required\nto be mutually independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-causal-discovery-oracle-regime",
+          "source_section": "Definition",
+          "quote": "A **perfect conditional-independence oracle** for this regime accepts any\npairwise disjoint $A,B,S\\subseteq V$ and returns “independent” exactly when\n$\\sigma(X_A)$ and $\\sigma(X_B)$ are conditionally independent given\n$\\sigma(X_S)$. The **causally sufficient perfect-oracle regime** consists of\nthe finite observed DAG, its Markovian recursive model and full-joint law, the\nfaithfulness condition, and this exact oracle. No latent vertex is omitted\nfrom the graph supplied to the oracle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dag-markov-equivalence-skeleton-vstructures",
+          "source_section": "Statement",
+          "quote": "Two finite DAGs on the same vertex set are Markov equivalent, meaning that they\ninduce the same d-separation relations, if and only if they have the same\nskeleton and the same unshielded colliders.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cpdag-markov-equivalence-class",
+          "source_section": "Definition",
+          "quote": "A **partially directed acyclic graph** (PDAG) on $V$ is a simple mixed graph\nwhose directed edges contain no directed cycle. A **consistent DAG extension**\nof a PDAG preserves every directed edge, orients every undirected edge, is\nacyclic, and creates no unshielded collider absent from the PDAG. For an\nequivalence class with a common skeleton, its **completed pattern** directs an\nedge exactly when that orientation occurs in every DAG of the class and leaves\nthe edge undirected when both orientations occur. A **completed partially\ndirected acyclic graph** (CPDAG) for $[G]$ is this unique completed pattern\nwhen its consistent DAG extensions are exactly $[G]$. Thus its directed edges\nare compelled, while each undirected edge occurs in both directions among its\nconsistent extensions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-pc-causal-discovery",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite vertex set $V$, a perfect conditional-independence oracle\nfor a law in the causally sufficient discovery regime, and a fixed total order\nof $V$. For every adjacent pair and conditioning set $S$ tested below, the\noracle returns whether $X_i$ and $X_j$ are conditionally independent given\n$X_S$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "In the latent model, $\\mathbb E(X,Y)=(0,0)$, $\\operatorname{Var}(X)=\\operatorname{Var}(Y)=2$, and $\\operatorname{Cov}(X,Y)=1$, by independence of $L,U_X,U_Y$. In the direct-edge model, $\\mathbb E(X,Y)=(0,0)$, $\\operatorname{Var}(X)=2$, $\\operatorname{Cov}(X,Y)=\\tfrac12\\operatorname{Var}(X)=1$, and $\\operatorname{Var}(Y)=\\tfrac14(2)+\\tfrac32=2$. Both vectors are Gaussian by [F3]. For each $t\\in\\mathbb R^2$, $t\\cdot(X,Y)$ is a scalar normal with the same mean and variance in both models; hence their vector characteristic functions agree at every $t$, and uniqueness in [F3] gives equality of the full observed laws.",
+          "inputs": [
+            "given",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The latent model is a finite recursive Markovian SCM with observed set $\\{X,Y\\}$ and omitted latent vertex $L$, so it does not satisfy [F2]. The direct-edge model is an observed-only Markovian DAG model. Their identical observed laws mean that no procedure using only the observed joint distribution can tell these two causal explanations apart.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The common observed law has $\\operatorname{Cov}(X,Y)=1\\ne0$, so $X,Y$ are dependent and the perfect oracle does not delete their only edge. With only two vertices there is no unshielded triple and none of R1–R3 applies; PC returns $X-Y$. Reversing the single edge in the direct-edge DAG keeps the same skeleton and no unshielded collider, so [F4] proves the reverse DAG is equivalent; [F5] therefore gives the same undirected CPDAG. The PC output reports adjacency but cannot recover the latent-versus-direct causal distinction.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no separate empty-domain assertion; its stated inputs are not an empty graph or set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter or empty conditioning-set branch requiring a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 analyze the smallest nontrivial observed pair X,Y."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives determinant 3 for the shared covariance matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use X,Y as the only observed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no arbitrary-family selection; any required probability axiom is declared in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition, algorithm, one-direction result, or example and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "explicit finite example cases",
+          "result": "All named vertices, edge orientations, covariance entries, and conditional-covariance cases are enumerated in the verification.",
+          "evidence": "Steps 1.1, 2.1, 3.1."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "20",
+  "round": 0,
+  "reviewed_items": [
+    "def-k-means-objective",
+    "def-finite-gaussian-mixture",
+    "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+    "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+    "alg-lloyd-k-means",
+    "thm-finite-gaussian-component-density-normalized",
+    "thm-lloyd-objective-monotonicity-and-termination",
+    "alg-gaussian-mixture-em",
+    "thm-gaussian-mixture-exact-m-step-maximizes-q",
+    "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+    "ex-lloyd-tie-sensitive-local-minima",
+    "ex-fractional-gaussian-mixture-responsibilities",
+    "ex-gaussian-mixture-likelihood-unbounded"
+  ],
+  "reviewed_pages": [
+    "ml02-clustering-mixtures",
+    "ml02-clustering-mixtures-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete first-round review of both compact-v1 pages and all 13 assigned items. The approved mathematical claims are retained; request one local repair for the listed prerequisite disclosures and proof gaps.",
+  "findings": [
+    {
+      "id": "ml02-clustering-mixtures",
+      "type": "prerequisite",
+      "reason": "The page requires the EM page but not numerical-optimization-for-statistical-computation, which houses actual suppliers used by assigned items: thm-gaussian-mixture-exact-m-step-maximizes-q depends on thm-kullback-leibler-is-nonnegative, and thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing depends on def-latent-variable-joint-and-observed-data-factorization and thm-observed-density-is-latent-marginal-under-tonelli. Add the missing page prerequisite; the B page inherits it through its A-page requirement."
+    },
+    {
+      "id": "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+      "type": "prerequisite",
+      "reason": "Proof steps 4.1 and 5.1 invoke the mean value theorem to establish that g' decreases and to compare secant slopes, but the supplier is absent from deps and Facts & Assumptions. Add cor-mean-value-theorem; its continuity-on-the-closed-interval and differentiability-on-the-interior hypotheses are met."
+    },
+    {
+      "id": "thm-gaussian-mixture-exact-m-step-maximizes-q",
+      "type": "prerequisite",
+      "reason": "The theorem depends on alg-gaussian-mixture-em and uses it in F1, while that algorithm lists this theorem in justified_by. Break the algorithm-definition cycle by stating and proving the result directly for the displayed update formulas and removing the algorithm dependency, preserving the full maximization and well-definedness claims."
+    },
+    {
+      "id": "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+      "type": "local",
+      "reason": "Step 1.1 asserts that the SPD cone remains positive under sufficiently small symmetric perturbations, needed to show the parameter domain is Borel and the joint density measurable, but does not supply the bound. Add the short argument using the positive minimum eigenvalue and an operator-norm perturbation bound, or an equivalent proof."
+    },
+    {
+      "id": "ex-fractional-gaussian-mixture-responsibilities",
+      "type": "prerequisite",
+      "reason": "The Example and Facts use def-finite-gaussian-mixture and thm-finite-gaussian-component-density-normalized, whose stated scope assumes AC, but the Example description and Given omit it. State AC explicitly or replace those uses with a choice-free formula argument without narrowing the formula-level claim."
+    },
+    {
+      "id": "ex-gaussian-mixture-likelihood-unbounded",
+      "type": "prerequisite",
+      "reason": "The Example and Facts use def-finite-gaussian-mixture and thm-finite-gaussian-component-density-normalized, whose stated scope assumes AC, but the Example description and Given omit it. State AC explicitly or replace those uses with a choice-free formula argument without narrowing the formula-level claim."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "alg-gaussian-mixture-em",
+      "decision": "accept",
+      "reason": "Its justified_by use remains supported if the repaired theorem states the same well-definedness and maximizing claims for the displayed formulas."
+    },
+    {
+      "id": "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+      "decision": "accept",
+      "reason": "F7 and step 5.1 use the formula-level global-maximizer result, which the requested repair preserves."
+    },
+    {
+      "id": "ml02-clustering-mixtures-examples",
+      "decision": "accept",
+      "reason": "It already requires the A page and inherits the added numerical-optimization prerequisite; no separate B-page change is needed."
+    },
+    {
+      "id": "ml02-spectral-clustering",
+      "decision": "accept",
+      "reason": "It requires the A page, so it inherits the added prerequisite through that existing edge; no source repair is needed on this outside page."
+    }
+  ]
+}

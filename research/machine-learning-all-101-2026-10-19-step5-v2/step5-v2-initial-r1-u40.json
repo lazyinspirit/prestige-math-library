@@ -1,0 +1,331 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "40",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-stochastic-gradient-descent",
+      "model": "gpt-6-luna",
+      "context_sha256": "36064c1a22c8d8908b6ffb10d2103a321bbce85fab692c851ff32a7f1ccb9fd0",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited filtered-space definition explicitly starts at zero, whereas the algorithm supplied only times t>=1. This is a nonfatal indexing-interface omission: every increasing positive-time filtration extends by F_0={empty,Omega}, with no change to any update or oracle law. Changed only the filtration index to t>=0; the procedure still starts at x_1, has finite positive steps, and returns x_1 through x_{N+1} without moment assumptions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-constant-step-sgd-noise-floor",
+      "model": "gpt-6-luna",
+      "context_sha256": "ce1c269ee75c443081018f380d1ab7c4c426fd2ecda5c1f5f70581e4e6325e76",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F9 and F10 omitted essential smoothness and initialization/lower-bound hypotheses from their standalone summaries. This is nonfatal for this example: f(x)=x^2/2 is C1 with exactly 1-Lipschitz gradient and global lower bound zero, x_0 is deterministic, and all directions and iterates have finite moments on the sign cube. Restored both complete cited interfaces and explicitly checked them in 2.2; also made the y_s=x_{s-1} algorithm reindexing explicit in 1.1. Direct prefix averaging verifies zero sign means, variance sigma^2, the mean recurrence and variance geometric sum. Their sum gives the exact displayed second moment and limit, including b=0, sigma=0 and N=1. The two theorem bounds use Delta=x_0^2/2 and the correct step thresholds. Example and claim strength are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sgd-biased-direction-violates-alignment",
+      "model": "gpt-6-luna",
+      "context_sha256": "4e811b6f17664d62c421ded062064671296822f3e6adb8fe5bfadbbdb3404627",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The algorithm names its first iterate x_1, while this example starts at x_0; the original F1 invocation omitted that relabeling. This is nonfatal because the update law is invariant under shifting time and the singleton filtration satisfies both index conventions. Verification 1.1 now applies the actual finite-horizon procedure to y_s=x_{s-1}, H_s=G_{s-1}=-y_s and the constant filtration, recovering every claimed zero-based update without changing the Example. Induction gives x_t=(1+alpha)^t x_0 !=0; f(x_1)=(1+alpha)^2 f(x_0)>f(x_0), and the conditional direction-gradient product is -x_t^2<0, excluding every positive alignment constant. The deterministic mean and zero variance are immediate on the singleton; AC is retained only for comparison with the theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-stochastic-gradient-descent",
+      "disposition": "repaired",
+      "post_sha256": "161a9c5d5cd920d79fa222e448b60b69911d31a5afb4323dec4d589723129bb6",
+      "review_context_sha256": "d91cd1d9f93cd9972a81c52c07fac58b42ee1c1ce7c89bc86c7e455d88c9f08b",
+      "reason": "The cited filtered-space definition explicitly starts at zero, whereas the algorithm supplied only times t>=1. This is a nonfatal indexing-interface omission: every increasing positive-time filtration extends by F_0={empty,Omega}, with no change to any update or oracle law. Changed only the filtration index to t>=0; the procedure still starts at x_1, has finite positive steps, and returns x_1 through x_{N+1} without moment assumptions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-constant-step-sgd-noise-floor",
+      "disposition": "repaired",
+      "post_sha256": "7f84905cb4af07e0d961a2398b170d67096db0c5f241898074df81477e129b3e",
+      "review_context_sha256": "ea6c051dde501f718ada61a6e2ec33125fb9bd5f3d81cd833c4ce83d8a34bdc4",
+      "reason": "F9 and F10 omitted essential smoothness and initialization/lower-bound hypotheses from their standalone summaries. This is nonfatal for this example: f(x)=x^2/2 is C1 with exactly 1-Lipschitz gradient and global lower bound zero, x_0 is deterministic, and all directions and iterates have finite moments on the sign cube. Restored both complete cited interfaces and explicitly checked them in 2.2; also made the y_s=x_{s-1} algorithm reindexing explicit in 1.1. Direct prefix averaging verifies zero sign means, variance sigma^2, the mean recurrence and variance geometric sum. Their sum gives the exact displayed second moment and limit, including b=0, sigma=0 and N=1. The two theorem bounds use Delta=x_0^2/2 and the correct step thresholds. Example and claim strength are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-sgd-biased-direction-violates-alignment",
+      "disposition": "repaired",
+      "post_sha256": "145be4dfdac9e7861e9959789c5b967cd89c8ffef8ec698b9097361f6bb3c175",
+      "review_context_sha256": "3da887d17d3720b803f24886844b39d3539c47ec6787d5923a30103e7b3a2c26",
+      "reason": "The algorithm names its first iterate x_1, while this example starts at x_0; the original F1 invocation omitted that relabeling. This is nonfatal because the update law is invariant under shifting time and the singleton filtration satisfies both index conventions. Verification 1.1 now applies the actual finite-horizon procedure to y_s=x_{s-1}, H_s=G_{s-1}=-y_s and the constant filtration, recovering every claimed zero-based update without changing the Example. Induction gives x_t=(1+alpha)^t x_0 !=0; f(x_1)=(1+alpha)^2 f(x_0)>f(x_0), and the conditional direction-gradient product is -x_t^2<0, excluding every positive alignment constant. The deterministic mean and zero variance are immediate on the singleton; AC is retained only for comparison with the theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-minibatch-stochastic-gradient-descent",
+    "thm-stochastic-direction-expected-average-stationarity",
+    "thm-nonconvex-sgd-random-iterate-stationarity",
+    "ex-constant-step-sgd-noise-floor",
+    "ex-sgd-biased-direction-violates-alignment"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-stochastic-gradient-descent",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The cited filtered-space definition explicitly starts at zero, whereas the algorithm supplied only times t>=1. This is a nonfatal indexing-interface omission: every increasing positive-time filtration extends by F_0={empty,Omega}, with no change to any update or oracle law. Changed only the filtration index to t>=0; the procedure still starts at x_1, has finite positive steps, and returns x_1 through x_{N+1} without moment assumptions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "route": "frontier-owner",
+      "severity": "nonfatal",
+      "status": "open",
+      "supplier": "alg-stochastic-gradient-descent",
+      "id": "alg-minibatch-stochastic-gradient-descent",
+      "path": "items/alg-minibatch-stochastic-gradient-descent.md",
+      "affected_use": "Definition: form the finite average of F_{t+1}-measurable G_{t,j} and set x_{t+1}=x_t-alpha_t average(G_{t,j}).",
+      "disposition": "frontier-owner-minimal-repair-required",
+      "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+      "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+      "source_excerpt": "(\\mathcal F_t)_{t\\ge1}",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "reason": "Direct consumer inspection found the same time-zero interface omission; extend by the trivial sigma-algebra to preserve every mathematical conclusion."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "route": "frontier-owner",
+      "severity": "nonfatal",
+      "status": "open",
+      "supplier": "alg-stochastic-gradient-descent",
+      "id": "thm-stochastic-direction-expected-average-stationarity",
+      "path": "items/thm-stochastic-direction-expected-average-stationarity.md",
+      "affected_use": "F1 and Proof 2.1: substitute x_{t+1}=x_t-alpha_t G_t in the smoothness inequality, condition on F_t and telescope from t=1.",
+      "disposition": "frontier-owner-minimal-repair-required",
+      "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+      "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+      "source_excerpt": "(\\mathcal F_t)_{t\\ge1}",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "reason": "Direct consumer inspection found the same time-zero interface omission; extend by the trivial sigma-algebra to preserve every mathematical conclusion."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "route": "frontier-owner",
+      "severity": "nonfatal",
+      "status": "open",
+      "supplier": "alg-stochastic-gradient-descent",
+      "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+      "path": "items/thm-nonconvex-sgd-random-iterate-stationarity.md",
+      "affected_use": "F1 and Proof 2.1: use x_{k+1}=x_k-gamma_k G_k for k=1,...,N before conditional descent and weighted sampling.",
+      "disposition": "frontier-owner-minimal-repair-required",
+      "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+      "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+      "source_excerpt": "(\\mathcal F_k)_{k\\ge1}",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "reason": "Direct consumer inspection found the same time-zero interface omission; extend by the trivial sigma-algebra to preserve every mathematical conclusion."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-constant-step-sgd-noise-floor",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F9 and F10 omitted essential smoothness and initialization/lower-bound hypotheses from their standalone summaries. This is nonfatal for this example: f(x)=x^2/2 is C1 with exactly 1-Lipschitz gradient and global lower bound zero, x_0 is deterministic, and all directions and iterates have finite moments on the sign cube. Restored both complete cited interfaces and explicitly checked them in 2.2; also made the y_s=x_{s-1} algorithm reindexing explicit in 1.1. Direct prefix averaging verifies zero sign means, variance sigma^2, the mean recurrence and variance geometric sum. Their sum gives the exact displayed second moment and limit, including b=0, sigma=0 and N=1. The two theorem bounds use Delta=x_0^2/2 and the correct step thresholds. Example and claim strength are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-sgd-biased-direction-violates-alignment",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "The algorithm names its first iterate x_1, while this example starts at x_0; the original F1 invocation omitted that relabeling. This is nonfatal because the update law is invariant under shifting time and the singleton filtration satisfies both index conventions. Verification 1.1 now applies the actual finite-horizon procedure to y_s=x_{s-1}, H_s=G_{s-1}=-y_s and the constant filtration, recovering every claimed zero-based update without changing the Example. Induction gives x_t=(1+alpha)^t x_0 !=0; f(x_1)=(1+alpha)^2 f(x_0)>f(x_0), and the conditional direction-gradient product is -x_t^2<0, excluding every positive alignment constant. The deterministic mean and zero variance are immediate on the singleton; AC is retained only for comparison with the theorem.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      "alg-stochastic-gradient-descent",
+      "ex-constant-step-sgd-noise-floor",
+      "ex-sgd-biased-direction-violates-alignment"
+    ],
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-constant-step-sgd-noise-floor.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked, 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json --items ex-constant-step-sgd-noise-floor --strict --json",
+        "initial_exit_code": 1,
+        "initial_result": "13 stale citation quotations, including the changed algorithm and previously normalized published suppliers.",
+        "exit_code": 0,
+        "result": "After refreshing only this assigned entry under the lock: ok=true, no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-stochastic-gradient-descent.md items/ex-constant-step-sgd-noise-floor.md items/ex-sgd-biased-direction-violates-alignment.md --json",
+        "exit_code": 0,
+        "result": "2 proofs passed, 0 failures; algorithm not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-stochastic-gradient-descent.md items/ex-constant-step-sgd-noise-floor.md items/ex-sgd-biased-direction-violates-alignment.md library/machine-learning/stochastic-gradient-descent-for-learning.md library/machine-learning/stochastic-gradient-descent-for-learning-examples.md --json",
+        "exit_code": 0,
+        "result": "5 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json --items ex-constant-step-sgd-noise-floor,ex-sgd-biased-direction-violates-alignment --json",
+        "exit_code": 0,
+        "result": "Both registered checks passed. Sign paths give moments 1/16 and 25/256 and invariant second moment 1/7; reversed-gradient fixture has negative alignment and objective increase. Finite checks do not establish the infinite-time argument."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-stochastic-gradient-descent.md items/ex-constant-step-sgd-noise-floor.md items/ex-sgd-biased-direction-violates-alignment.md",
+        "exit_code": 0,
+        "result": "3 items, 9 steps, 0 defects; run after all final item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-40.proof-contracts.json --items ex-constant-step-sgd-noise-floor,ex-sgd-biased-direction-violates-alignment --strict --json",
+        "exit_code": 0,
+        "result": "Both assigned proof contracts checked; ok=true, no errors or warnings."
+      }
+    ],
+    "sources_consulted": [
+      "items/def-filtration-and-filtered-probability-space.md:Definition",
+      "items/def-stochastic-gradient-oracle-and-unconstrained-update.md:Definition",
+      "items/def-adapted-and-integrable-stochastic-process.md:Definition",
+      "items/thm-stochastic-gradient-nonconvex-randomized-iterate-bound.md:complete Statement and Proof",
+      "items/thm-stochastic-gradient-biased-noise-floor.md:complete Statement and Proof",
+      "items/lem-independent-finite-random-index-extension.md:Statement",
+      "items/lem-geometric-sequence-null.md:Statement"
+    ],
+    "next_action": "Controller to collect the report and route the three unassigned frontier filtration-notation findings before certification. No workers, judgments, gates, or workflow transitions were launched.",
+    "unresolved_obligations": [],
+    "consumer_examinations": [
+      {
+        "supplier": "alg-stochastic-gradient-descent",
+        "id": "alg-minibatch-stochastic-gradient-descent",
+        "path": "items/alg-minibatch-stochastic-gradient-descent.md",
+        "affected_use": "Definition: form the finite average of F_{t+1}-measurable G_{t,j} and set x_{t+1}=x_t-alpha_t average(G_{t,j}).",
+        "disposition": "frontier-owner-minimal-repair-required",
+        "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+        "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+        "source_excerpt": "(\\mathcal F_t)_{t\\ge1}",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "alg-stochastic-gradient-descent",
+        "id": "thm-stochastic-direction-expected-average-stationarity",
+        "path": "items/thm-stochastic-direction-expected-average-stationarity.md",
+        "affected_use": "F1 and Proof 2.1: substitute x_{t+1}=x_t-alpha_t G_t in the smoothness inequality, condition on F_t and telescope from t=1.",
+        "disposition": "frontier-owner-minimal-repair-required",
+        "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+        "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+        "source_excerpt": "(\\mathcal F_t)_{t\\ge1}",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "alg-stochastic-gradient-descent",
+        "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+        "path": "items/thm-nonconvex-sgd-random-iterate-stationarity.md",
+        "affected_use": "F1 and Proof 2.1: use x_{k+1}=x_k-gamma_k G_k for k=1,...,N before conditional descent and weighted sampling.",
+        "disposition": "frontier-owner-minimal-repair-required",
+        "invalidated_claim": "The mathematical update and conclusions remain sound; the consumer itself still calls a sequence indexed only by t>=1 or k>=1 a discrete filtered probability space, whose local definition requires time zero.",
+        "minimality": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing.",
+        "source_excerpt": "(\\mathcal F_k)_{k\\ge1}",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "alg-stochastic-gradient-descent",
+        "id": "ex-constant-step-sgd-noise-floor",
+        "path": "items/ex-constant-step-sgd-noise-floor.md",
+        "affected_use": "F1 and Verification 1.1 now explicitly shift y_s=x_{s-1}, H_s=G_{s-1} and Hcal_s=F_{s-1}, with Hcal_0=F_0. The finite prefix filtration is extended constantly after N, giving a valid full filtration.",
+        "disposition": "assigned-proof-repair-complete",
+        "minimality": "State y_s=x_{s-1}, H_s=G_{s-1}, and shifted filtration Hcal_s=F_{s-1} for s>=1 with trivial Hcal_0; then apply the unchanged positive-time algorithm.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "supplier": "alg-stochastic-gradient-descent",
+        "id": "ex-sgd-biased-direction-violates-alignment",
+        "path": "items/ex-sgd-biased-direction-violates-alignment.md",
+        "affected_use": "Verification 1.1 now applies F1 to y_s=x_{s-1}, H_s=G_{s-1}=-y_s and the constant singleton filtration over any finite horizon, so its first permitted update yields x_1 from x_0.",
+        "disposition": "assigned-proof-repair-complete",
+        "minimality": "State y_s=x_{s-1}, H_s=G_{s-1}, and shifted filtration Hcal_s=F_{s-1} for s>=1 with trivial Hcal_0; then apply the unchanged positive-time algorithm.",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    ],
+    "interface_changes": [
+      {
+        "id": "alg-stochastic-gradient-descent",
+        "section": "Definition",
+        "before": "(\\mathcal F_t)_{t\\ge1}",
+        "after": "(\\mathcal F_t)_{t\\ge0}",
+        "evidence": "Compared the complete original and edited Definition: this index lower bound is the only changed text; all iteration indices remain 1,...,N. Both examples retain their complete original Example sections and have no Statement or Definition changes."
+      }
+    ],
+    "diagram_review": "No TikZ/tikzcd diagrams occur in the three assigned items, and these scalar recurrences and oracle procedures require no diagram.",
+    "page_review": "Both owning pages are frontmatter-only, remain draft, preserve page_layout: compact-v1 and the full inventory, and contain no mathematical prose requiring a change.",
+    "mathematical_uncertainty": false,
+    "published_consumer_route": "No direct published or outside-frontier consumer of the changed algorithm was found among dependency/reference and page uses. The three unassigned consumers needing notation repair are draft frozen-frontier items; proposed canonical-ledger entries route them to frontier-owner. Existing published supplier alerts remain unchanged.",
+    "repair_complete": true,
+    "metadata_repairs": "Under acquire/reread/edit/check/release locking, refreshed current supplier quotations and changed proof-step mirrors only for the two assigned example contract entries. The algorithm is definition-like and has no proof contract. No item status, page inventory, manifest dependency, judge record, or shared ledger was edited.",
+    "owner_followup": [
+      {
+        "id": "alg-minibatch-stochastic-gradient-descent",
+        "route": "frontier-owner",
+        "reason": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing."
+      },
+      {
+        "id": "thm-stochastic-direction-expected-average-stationarity",
+        "route": "frontier-owner",
+        "reason": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing."
+      },
+      {
+        "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+        "route": "frontier-owner",
+        "reason": "Change only the consumer filtration index lower bound from 1 to 0; every existing positive-time filtration has the trivial time-zero extension. No update, moment bound, or theorem inequality needs changing."
+      }
+    ],
+    "active_run_evidence": {
+      "state_path": ".autopilot/machine-learning-all-101-2026-10-19/state.json",
+      "observed_stage": "5.1-adjudicate",
+      "observed_paused": false,
+      "head_observed": "2e2d487b53"
+    }
+  }
+}

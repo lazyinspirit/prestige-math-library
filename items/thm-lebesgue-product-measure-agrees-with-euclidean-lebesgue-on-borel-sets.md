@@ -10,6 +10,7 @@ provenance:
 deps: [thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-lebesgue-measure-of-a-box-of-every-kind, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-pi-system, def-countable-choice]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets.json
   verified:
     model: "gpt-6-sol"
     verdict: "locally-reviewed"
@@ -24,11 +25,15 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let
+Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Let
 $m,n \ge 1$. Under the identification
 $$\mathbb R^{m+n}=\mathbb R^m \times \mathbb R^n,$$
 the product measure $\lambda_m \times \lambda_n$ and the Euclidean Lebesgue
 measure $\lambda_{m+n}$ agree on every Borel subset of $\mathbb R^{m+n}$.
+
+## Statement references
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

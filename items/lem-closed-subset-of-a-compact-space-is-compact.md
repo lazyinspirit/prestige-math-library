@@ -14,6 +14,7 @@ landmark: false
 short: "closed in compact is compact"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-closed-subset-of-a-compact-space-is-compact.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -32,13 +33,23 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],
-[[def-metric-space]]) and let $F \subseteq X$ be closed in $X$
-([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric
+Let $(X,d)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,
+Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $F \subseteq X$ be closed in $X$
+(The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement). Then $F$ is a compact subset of $X$: the metric
 subspace $(F, d_F)$ is a compact metric space
-([[def-isometry-and-metric-embedding]]).
+(Isometry, isometric embedding, and the subspace metric on a subset).
 
 No choice principle is used.
+
+## Statement references
+
+[[def-metric-compactness]]
+
+[[def-metric-space]]
+
+[[def-metric-topology]]
+
+[[def-isometry-and-metric-embedding]]
 
 ## Facts & Assumptions
 

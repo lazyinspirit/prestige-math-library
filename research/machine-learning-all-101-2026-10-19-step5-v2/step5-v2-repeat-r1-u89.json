@@ -1,0 +1,212 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "89",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "cd517bf64f5dff33491324ad57fad06648d92ecfe658d2a2b8bd3d1340828261",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original universal claim fails for S={s}, two self-looping actions, and a deterministic expert: one demonstration (s,pi*(s)) labels every state reachable by any learner. This is a logic defect in the Definition, not a dependency-citation error. Replaced only the final sentence with the coverage caveat; fixed demonstrations may omit learner-visited states, but covered labels can be reused without new expert interaction.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "disposition": "repaired",
+      "post_sha256": "31d38ab1436b2ad290351997a9f1182ca0b92859e17b11155cf1087de39b9719",
+      "review_context_sha256": "d53adf26fc2538b86e4a9168f5bc6845c72ebd12dcdf861981f79cd49747574d",
+      "reason": "Reviewed the complete Definition, its three prerequisite interfaces, owning boundary contract and both page inventories. Nonempty finite S, T>=1, normalized occupancy, deterministic expert, bounded disagreement-dominating surrogate, attained minimum and online timing are coherent. Corrected only the false label-necessity sentence; all formulas and hypotheses are preserved. This is the repair author’s review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-dagger",
+    "lem-dagger-mixture-occupancy",
+    "lem-dagger-task-cost-from-expert-surrogate",
+    "ex-behavior-cloning-covariate-shift",
+    "ex-dagger-interactive-expert-labels",
+    "ex-surrogate-loss-fails-task-cost-control",
+    "thm-dagger-no-regret-reduction",
+    "thm-dagger-finite-sample-generalization"
+  ],
+  "downstream_uses": {
+    "alg-dagger": "Definition steps 1–4 use the unchanged mixed policy, expert label and round-loss interfaces. Querying every visited state is an explicit instruction of this particular procedure, so requiring an interactive expert here is sound even if some queries could be replaced by cached labels.",
+    "lem-dagger-mixture-occupancy": "Statement and F1/steps 1.1–3.1 use only the unchanged occupancy recursion and per-decision mixture. The residual-mass argument never assumes missing labels or compulsory new expert interaction.",
+    "lem-dagger-task-cost-from-expert-surrogate": "Statement and F1/steps 1.1–4.1 use unchanged J, Q*, V*, occupancy and disagreement domination. The hybrid-policy telescoping bound depends on those numerical quantities, independently of how expert labels were obtained.",
+    "ex-behavior-cloning-covariate-shift": "Example and F1/steps 1.1–3.1 compare unchanged expert and learner occupancies and disagreement loss. This specific model has an uncovered bad state b, so the distribution-shift witness remains valid. Its four diagram arrows and action/cost labels agree with the specified transitions.",
+    "ex-dagger-interactive-expert-labels": "Example and F1/F2/steps 1.1–3.1 use unchanged expert labels and the specified DAgger queries. Every expert-only rollout from g stays at g, whereas the first bad-learner rollout reaches b, so this example really does lack demonstration coverage at b. Both training labels yield the claimed unique minimizer. Diagram transitions, start arrow and action/cost labels agree with the text.",
+    "ex-surrogate-loss-fails-task-cost-control": "Example and F1/steps 1.1–2.1 use only unchanged disagreement and task cost. Both policies have point-mass occupancy at s; the zero candidate score fails domination because learner disagreement is one. Its two diagram loops carry the correct distinct costs. This is also a concrete one-state setting where one expert label covers all visited states.",
+    "thm-dagger-no-regret-reduction": "Statement explicitly runs the population-loss DAgger procedure; its interaction sentence specifies that protocol, rather than asserting that every possible imitation-learning instance lacks demonstration coverage. F1/F2 and proof steps 1.1, 2.1–4.1 use unchanged loss, occupancy, mixture and task-cost formulas. Allowing cached labels in covered instances invalidates none of those inequalities; no necessary consumer repair follows.",
+    "thm-dagger-finite-sample-generalization": "Statement runs finite-trajectory DAgger and explicitly assumes the conditional rollout-mean identity. F1/F2 and proof steps 1.1–4.1 use unchanged true/empirical losses and occupancies. Label coverage does not alter those assumptions or the centered trajectory-loss increments, so the supplier correction leaves this argument sound."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "locus": "statement",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The original universal claim fails for S={s}, two self-looping actions, and a deterministic expert: one demonstration (s,pi*(s)) labels every state reachable by any learner. This is a logic defect in the Definition, not a dependency-citation error. Replaced only the final sentence with the coverage caveat; fixed demonstrations may omit learner-visited states, but covered labels can be reused without new expert interaction.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "record-no-published-consumer-impact",
+      "id": "def-imitation-learning-and-expert-surrogate-loss",
+      "reason": "All eight current direct item consumers are draft frontier items. Their exact affected uses were examined and remain sound; no published or outside-frontier item consumer was found, and no maintenance repair is proposed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "original_clause": "Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+    "replacement_clause": "Fixed demonstrations do not in general provide expert labels for every learner-visited state; if they cover those states, their labels can be reused without new expert interaction.",
+    "statement_definition_changed": true,
+    "source_reading": "Consulted Ross, Gordon and Bagnell, sections 2, 2.1 and 3 through Algorithm 3.1 and its explanatory paragraphs (printed pp. 628–630). These specify own-policy occupancy loss, behavior-cloning training on expert occupancy, and DAgger collecting expert labels on rollout states; they do not establish universal necessity of new queries in already covered instances. The one-state counterexample and coverage qualification were checked directly.",
+    "dependency_ids": [
+      "def-finite-markov-decision-process",
+      "def-online-decision-protocol",
+      "lem-finite-horizon-mdp-policy-occupancy"
+    ],
+    "contract": "research/machine-learning-all-101-2026-10-19-batch-89.proof-contracts.json: assigned definition has no proof derivations/citations; its nonempty, zero, T=1, one-state, mixing-endpoint and choice boundaries remain correct without modification.",
+    "page_interface": "library/machine-learning/imitation-learning-and-dagger.md lists the item once before its consumers and retains compact-v1; the companion examples page is frontmatter-only and requires the main page. Neither page asserts universal necessity of additional expert interaction.",
+    "consumer_examinations": [
+      {
+        "id": "alg-dagger",
+        "path": "items/alg-dagger.md",
+        "source_excerpt": "The procedure requires an interactive expert capable of labeling learner-visited states.",
+        "affected_use": "Definition steps 1–4 use the unchanged mixed policy, expert label and round-loss interfaces. Querying every visited state is an explicit instruction of this particular procedure, so requiring an interactive expert here is sound even if some queries could be replaced by cached labels.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "lem-dagger-mixture-occupancy",
+        "path": "items/lem-dagger-mixture-occupancy.md",
+        "source_excerpt": "Here $d_\\pi=T^{-1}\\sum_{t=0}^{T-1}\\mu_t^\\pi$",
+        "affected_use": "Statement and F1/steps 1.1–3.1 use only the unchanged occupancy recursion and per-decision mixture. The residual-mass argument never assumes missing labels or compulsory new expert interaction.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "lem-dagger-task-cost-from-expert-surrogate",
+        "path": "items/lem-dagger-task-cost-from-expert-surrogate.md",
+        "source_excerpt": "The one-step cost-to-go bound is required at all states and times, including states not reached by the expert.",
+        "affected_use": "Statement and F1/steps 1.1–4.1 use unchanged J, Q*, V*, occupancy and disagreement domination. The hybrid-policy telescoping bound depends on those numerical quantities, independently of how expert labels were obtained.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "ex-behavior-cloning-covariate-shift",
+        "path": "items/ex-behavior-cloning-covariate-shift.md",
+        "source_excerpt": "The expert occupancy is concentrated at $g$",
+        "affected_use": "Example and F1/steps 1.1–3.1 compare unchanged expert and learner occupancies and disagreement loss. This specific model has an uncovered bad state b, so the distribution-shift witness remains valid. Its four diagram arrows and action/cost labels agree with the specified transitions.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "ex-dagger-interactive-expert-labels",
+        "path": "items/ex-dagger-interactive-expert-labels.md",
+        "source_excerpt": "The label $(b,r)$ could not be obtained from expert-only demonstrations because the expert stays at $g$.",
+        "affected_use": "Example and F1/F2/steps 1.1–3.1 use unchanged expert labels and the specified DAgger queries. Every expert-only rollout from g stays at g, whereas the first bad-learner rollout reaches b, so this example really does lack demonstration coverage at b. Both training labels yield the claimed unique minimizer. Diagram transitions, start arrow and action/cost labels agree with the text.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "ex-surrogate-loss-fails-task-cost-control",
+        "path": "items/ex-surrogate-loss-fails-task-cost-control.md",
+        "source_excerpt": "Let $S=\\{s\\}$, $A(s)=\\{a^*,b\\}$",
+        "affected_use": "Example and F1/steps 1.1–2.1 use only unchanged disagreement and task cost. Both policies have point-mass occupancy at s; the zero candidate score fails domination because learner disagreement is one. Its two diagram loops carry the correct distinct costs. This is also a concrete one-state setting where one expert label covers all visited states.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "thm-dagger-no-regret-reduction",
+        "path": "items/thm-dagger-no-regret-reduction.md",
+        "source_excerpt": "This is an infinite-sample statement: expert labels must be obtained by interaction on states visited under $\\pi_i$.",
+        "affected_use": "Statement explicitly runs the population-loss DAgger procedure; its interaction sentence specifies that protocol, rather than asserting that every possible imitation-learning instance lacks demonstration coverage. F1/F2 and proof steps 1.1, 2.1–4.1 use unchanged loss, occupancy, mixture and task-cost formulas. Allowing cached labels in covered instances invalidates none of those inequalities; no necessary consumer repair follows.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "thm-dagger-finite-sample-generalization",
+        "path": "items/thm-dagger-finite-sample-generalization.md",
+        "source_excerpt": "This is a surrogate-loss guarantee with interactive expert labels",
+        "affected_use": "Statement runs finite-trajectory DAgger and explicitly assumes the conditional rollout-mean identity. F1/F2 and proof steps 1.1–4.1 use unchanged true/empirical losses and occupancies. Label coverage does not alter those assumptions or the centered trajectory-loss increments, so the supplier correction leaves this argument sound.",
+        "disposition": "unaffected",
+        "invalidated_claim": "None: the corrected coverage sentence is not a premise of this consumer’s mathematical argument.",
+        "minimality": "No consumer edit is needed; its formulas, hypotheses and explicit protocol remain unchanged.",
+        "route": "frontier-owner"
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-imitation-learning-and-expert-surrogate-loss.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-imitation-learning-and-expert-surrogate-loss.md --json",
+        "exit_code": 0,
+        "result": "1 file; no phase proof; not-applicable; 0 checked proofs and 0 failures."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-imitation-learning-and-expert-surrogate-loss.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items def-imitation-learning-and-expert-surrogate-loss",
+        "exit_code": 0,
+        "result": "Review hashes recorded immediately after the repair; no later item edit."
+      },
+      {
+        "command": "node --input-type=module (read-only stdin validation of the report and current carriers)",
+        "exit_code": 0,
+        "result": "PASS: canonical input digest, exact rejected tuple, current guard, reconstructed before guard proving a single-sentence edit, all eight direct consumers, and exact quoted consumer snippets."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and routes the eight direct frontier consumers through its ordinary owner workflow; certification and required independent rejudgment remain engine-owned."
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "group": "ac",
+  "batches": [
+    "88"
+  ],
+  "pages_read": [
+    "pomdps-and-belief-state-planning",
+    "pomdps-and-belief-state-planning-examples"
+  ],
+  "items_read": [
+    "lem-cardinality-of-finite-natural-initial-segment",
+    "def-finite-pomdp",
+    "def-belief-state-and-bayes-filter",
+    "alg-pomdp-witness-backup",
+    "lem-finite-pomdp-belief-update-is-probability-kernel",
+    "thm-belief-mdp-sufficient-statistic",
+    "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+    "ex-pomdp-two-state-bayes-update",
+    "ex-pomdp-observation-aliasing-preserves-belief",
+    "ex-pomdp-zero-likelihood-observation-is-not-updated",
+    "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+  ],
+  "conventions": [
+    {
+      "convention": "States, actions and observations are finite and nonempty; every action is available in every state. The next-state/reward law is joint, and observations depend only on the next state.",
+      "fixed_by": "def-finite-pomdp",
+      "matters_for": [
+        "def-belief-state-and-bayes-filter",
+        "alg-pomdp-witness-backup",
+        "lem-finite-pomdp-belief-update-is-probability-kernel",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value"
+      ]
+    },
+    {
+      "convention": "Policies observe past actions and observations but do not observe realized rewards. Their randomization depends only on that history and is conditionally independent of the hidden state.",
+      "fixed_by": "def-finite-pomdp",
+      "matters_for": [
+        "def-belief-state-and-bayes-filter",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "convention": "Beliefs use the Borel sigma-algebra of the Euclidean simplex. The Bayes filter is defined only when the observation normalizer is positive; zero-normalizer branches are omitted from K without assigning a posterior.",
+      "fixed_by": "def-belief-state-and-bayes-filter",
+      "matters_for": [
+        "lem-finite-pomdp-belief-update-is-probability-kernel",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-zero-likelihood-observation-is-not-updated"
+      ]
+    },
+    {
+      "convention": "Horizons are natural numbers including zero, and the discount lies in [0,1], including both endpoints.",
+      "fixed_by": "def-finite-pomdp",
+      "matters_for": [
+        "alg-pomdp-witness-backup",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value"
+      ]
+    },
+    {
+      "convention": "The backup stores sets of vectors, removing duplicates, while policy trees retain their distinct root-action and observation-continuation descriptions.",
+      "fixed_by": "alg-pomdp-witness-backup",
+      "matters_for": [
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "convention": "A witness permits ties and may be any belief in the simplex; it need not be reachable from the specified initial belief.",
+      "fixed_by": "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+      "matters_for": [
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "convention": "Natural numbers are von Neumann naturals, include zero, and their strict additive order agrees with membership; I_n equals n and has cardinality n.",
+      "fixed_by": "lem-cardinality-of-finite-natural-initial-segment",
+      "matters_for": [
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-finite-pomdp",
+      "statement": "A finite known-model POMDP specifies finite nonempty S, A and Ω, a joint next-state/reward probability mass p, next-state observation laws O, and an initial belief. Policies use only past actions and observations; realized rewards are excluded from history.",
+      "used_by": [
+        "def-belief-state-and-bayes-filter",
+        "alg-pomdp-witness-backup",
+        "lem-finite-pomdp-belief-update-is-probability-kernel",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-two-state-bayes-update",
+        "ex-pomdp-observation-aliasing-preserves-belief",
+        "ex-pomdp-zero-likelihood-observation-is-not-updated",
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "id": "def-belief-state-and-bayes-filter",
+      "statement": "The belief is the conditional state distribution on a positive-probability observed-history atom. Prediction uses T; q is the observation marginal; τ is the prior-weighted observation likelihood divided by q when q>0 and is undefined when q=0. K sums the positive-mass posterior point masses.",
+      "used_by": [
+        "lem-finite-pomdp-belief-update-is-probability-kernel",
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-two-state-bayes-update",
+        "ex-pomdp-observation-aliasing-preserves-belief",
+        "ex-pomdp-zero-likelihood-observation-is-not-updated",
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "id": "lem-finite-pomdp-belief-update-is-probability-kernel",
+      "statement": "The joint next-state/reward/observation mass is normalized; the predicted state and observation laws are probability distributions; every defined posterior is the conditional next-state distribution; and K is a probability kernel from Δ(S)×A to Δ(S). No Axiom of Choice is used.",
+      "used_by": [
+        "thm-belief-mdp-sufficient-statistic",
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-two-state-bayes-update",
+        "ex-pomdp-observation-aliasing-preserves-belief",
+        "ex-pomdp-zero-likelihood-observation-is-not-updated"
+      ]
+    },
+    {
+      "id": "thm-belief-mdp-sufficient-statistic",
+      "statement": "At every positive-probability history and positively selected action, the next-state/observation law and conditional expected reward depend only on the current belief and action. For every remaining finite horizon, V_0=0 and V_{n+1}(b)=max_a[bar r(b,a)+γ sum_{o:q>0}q(o|b,a)V_n(τ(b,a,o))]. Each maximum is attained, randomization cannot improve it, and no Axiom of Choice is used.",
+      "used_by": [
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value"
+      ]
+    },
+    {
+      "id": "alg-pomdp-witness-backup",
+      "statement": "Starting with Γ_0={0}, form Γ_{h+1} from every action and every observation-indexed tuple of Γ_h vectors by α(s)=r(s,a)+γ sum_{s'}T(s'|s,a) sum_o O(o|s')α_o(s'); store equal vectors once and return Γ_0 through Γ_H.",
+      "used_by": [
+        "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "id": "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+      "statement": "For 0≤h≤H and every belief b, V_h(b)=max_{α∈Γ_h} sum_s b(s)α(s). The value is piecewise linear and convex; deleting all vectors without witness beliefs preserves it. Policy-tree counts satisfy N_0=1 and N_{h+1}=|A|N_h^{|Ω|}, bounding the candidate and witness-vector counts.",
+      "used_by": [
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    },
+    {
+      "id": "lem-cardinality-of-finite-natural-initial-segment",
+      "statement": "For each n∈N, let I_n={t∈N:t<n}. Then I_n=n, so I_n is finite and |I_n|=n.",
+      "used_by": [
+        "ex-pomdp-policy-tree-enumeration-grows-exponentially"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Von Neumann naturals, zero and successor conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-order",
+      "used_for": "The additive natural-number order defining clock initial segments.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-order-is-membership",
+      "used_for": "Identification of strict natural order with membership and the presence of zero in positive naturals.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Finite cardinalities, cardinality of a natural, and transport along bijections.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Pointwise probability sections and measurable event evaluations.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Choice-free posterior formula at positive finite marginal density, specialized to finite counting measure; its null-fibre filler is distinguished from the local partial filter.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of observation probabilities obtained by integration against the predicted-state probability kernel.",
+      "opened": true
+    },
+    {
+      "id": "def-sum-over-a-finite-index-set",
+      "used_for": "Enumeration-independent finite sums and bijective reindexing.",
+      "opened": true
+    },
+    {
+      "id": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+      "used_for": "Interchange of finite sums in normalization and marginal calculations.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Linearity, scaling and monotonicity of finite sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-set-has-max",
+      "used_for": "Attained maxima of nonempty finite real value sets.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-power",
+      "used_for": "Natural-valued exponentiation in policy-tree and function-set counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-product-rule",
+      "used_for": "Finiteness and cardinalities of finite Cartesian products.",
+      "opened": true
+    },
+    {
+      "id": "thm-cardinality-of-a-set-of-functions",
+      "used_for": "Finiteness and cardinality of observation-indexed continuations and hidden binary strings.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Induction for backup representations, tree counts and clock progression.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Initial-segment reward sums and empty-sum conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-addition",
+      "used_for": "Natural successor and arithmetic conventions in the clock example.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-transitive-irreflexive",
+      "used_for": "Transitivity of the natural clock set in the clock-progression induction.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-natural-numbers",
+      "finding": "def-natural-numbers, Definition, interrupts its formulation with “([[def-inductive-set]])” and “by [[lem-omega-smallest-inductive]]”, among other inline links. These violate the required uninterrupted-definition presentation and lack an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nat-order",
+      "finding": "def-nat-order, Definition, ends its strict-order definition with “addition ([[def-nat-addition]])”. The hyperlink remains inside the defining section instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-nat-order-is-membership",
+      "finding": "lem-nat-order-is-membership, Statement, includes “([[def-natural-numbers]])” before completing its hypotheses and “([[def-nat-order]])” before its conclusions. These inline links interrupt the complete statement and are not moved into Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-cardinality",
+      "finding": "def-finite-cardinality, Definition, includes “([[def-natural-numbers]])” and “membership in [[lem-nat-order-is-membership]]” within the defining exposition, with additional supplier links throughout that section. It lacks the required uninterrupted Definition followed by Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure-kernel-and-probability-kernel",
+      "finding": "def-measure-kernel-and-probability-kernel, Definition, says “Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]” before continuing with probability, finite and uniformly sigma-finite kernels. These hyperlinks interrupt the complete definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-sum-over-a-finite-index-set",
+      "finding": "def-sum-over-a-finite-index-set, Definition, includes “n := |S| ([[def-finite-cardinality]])” and a link to def-equinumerous before its defining formula, with further inline links throughout. The required Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+      "finding": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged, Statement, describes its sums as those of “[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]]” and includes other supplier links before the section ends. This violates uninterrupted-statement presentation.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "lem-finite-sum-laws, Statement, introduces its hypotheses with “finite sums and finite products as in [[def-finite-sum]]” and embeds links to lem-of-q-embeds and lem-of-naturals-positive in clause 2. These links precede completion of all six conclusions.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-set-has-max",
+      "finding": "lem-finite-set-has-max, Statement, includes “([[def-max-min]])” in the opening claim and a link to lem-finite-subsets-listable in its subsequent statement exposition. The section is not hyperlink-free and lacks Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nat-power",
+      "finding": "def-nat-power, Definition, begins “By the recursion theorem ([[thm-recursion]])” and links def-nat-multiplication before the defining recurrence; further links occur throughout its clauses. These interrupt the complete definition instead of appearing afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-product-rule",
+      "finding": "thm-product-rule, Statement, includes “([[def-finite-cardinality]])” in clause 1 and “[[def-nat-finite-sum-and-product]]” in clause 2. The complete statement must precede these hyperlinks in a separate Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cardinality-of-a-set-of-functions",
+      "finding": "thm-cardinality-of-a-set-of-functions, Statement, says “the power being the ... exponentiation of [[def-nat-power]]” before its degenerate-case qualifications. The hyperlink interrupts the statement and has no following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-sum",
+      "finding": "def-finite-sum, Definition, opens with links including “([[def-complete-ordered-field]])” and “([[def-natural-numbers]])”, then contains further inline supplier links before completing its recurrence and endpoint conventions. These violate the uninterrupted-definition rule.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "pomdps-and-belief-state-planning",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "Checked the supplier page inventory and def-finite-markov-decision-process against def-finite-pomdp. The consumer faithfully specializes the supplier's possibly empty finite state set and state-dependent nonempty action sets to nonempty S and a common nonempty A. It preserves the joint next-state/reward law and its expected-reward and transition marginals, renaming P to T and adding next-state observations. It does not import a finite-state Bellman theorem for the continuous belief simplex; that recursion is proved locally."
+    }
+  ]
+}

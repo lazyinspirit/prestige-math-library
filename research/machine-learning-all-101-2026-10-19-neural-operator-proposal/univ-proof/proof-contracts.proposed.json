@@ -1,0 +1,550 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "lem-ap-finite-dimensional-factorization-of-continuous-maps",
+    "lem-smooth-integral-functionals-approximate-on-compact-function-sets",
+    "thm-neural-operator-compact-uniform-universality"
+  ],
+  "contracts": {
+    "lem-ap-finite-dimensional-factorization-of-continuous-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-approximation-property-and-bounded-approximation-property",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a Banach space. It has the **approximation property** (AP) if for\nevery norm-compact set $C\\subseteq X$ and every $\\varepsilon>0$ there is a\nbounded finite-rank operator $T:X\\to X$ such that\n\n$$\\sup_{x\\in C}\\|Tx-x\\|<\\varepsilon.$$\n\nHere finite rank means that $T(X)$ is finite-dimensional.\n\nFor $\\lambda\\ge0$, $X$ has the **$\\lambda$-bounded approximation property**\n($\\lambda$-BAP) if the same assertion holds with the additional operator-norm\nbound $\\|T\\|\\le\\lambda$, where the norm is that of [[def-operator-norm]]. It\nhas the **bounded approximation property** (BAP) if it has $\\lambda$-BAP for\nsome finite $\\lambda$.\n\nNo sequence of approximating operators is required; this matters in\nnonseparable spaces. Plainly $\\lambda$-BAP implies AP.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K \\in \\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case by [[def-norm-and-normed-space]] and the complex case by [[def-complex-norm-and-complex-normed-space]]. Let\n$e:n\\to X$ be an ordered basis ([[def-linear-basis]]), and write $e_j:=e(j)$.\nGive $\\mathbb K^n$ its coordinate $\\ell^1$ norm\n\n$$\\|(a_0,\\dots,a_{n-1})\\|_1:=\\sum_{j<n}|a_j|.$$\n\nDefine\n\n$$T:\\mathbb K^n\\to X,\\qquad T(a_0,\\dots,a_{n-1})=\\sum_{j<n} a_j e_j.$$\n\nThen $T$ is a topological isomorphism of normed spaces in the sense of\n[[def-topological-isomorphism-of-normed-spaces]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "If $K$ is empty use zero maps. Otherwise consider all pairs $(x,\\rho)$ with $x\\in K$ and $\\rho>0$ such that $\\|T(z)-T(x)\\|_Y<\\varepsilon/4$ whenever $\\|z-x\\|_X<3\\rho$. Continuity ensures that the balls $B(x,\\rho)$ from this family cover $K$; take a finite subcover $B(x_i,\\rho_i)$. Put $\\delta=\\min_i\\rho_i>0$. For $x\\in K$ and $z\\in X$ with $\\|z-x\\|_X<\\delta$, select $i$ with $\\|x-x_i\\|_X<\\rho_i$; then both $x,z$ lie within $3\\rho_i$ of $x_i$, so $\\|T(z)-T(x)\\|_Y<\\varepsilon/2$. No compact neighborhood of $K$ is asserted or needed.",
+          "inputs": [
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Apply AP in $X$ to choose bounded finite-rank $P$ with $\\sup_K\\|Px-x\\|_X<\\delta$. By step 1.1, $\\sup_K\\|T(Px)-T(x)\\|_Y<\\varepsilon/2$. The set $T(P(K))$ is compact; apply AP in $Y$ to obtain bounded finite-rank $Q$ with $\\sup_{x\\in K}\\|QT(Px)-T(Px)\\|_Y<\\varepsilon/2$. Thus $QT P$ approximates $T$ on $K$ within $\\varepsilon$. This makes only two AP selections and does not require a sequence, an infinite union of compact sets, or a choice principle for sequences.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Choose a finite basis $\\alpha_1,\\ldots,\\alpha_J$ of $P(X)$. Its coordinate functionals are bounded by [F2]; hence $Px=\\sum_j\\ell_j(x)\\alpha_j$ with $\\ell_j$ bounded on $X$, by composing those functionals with $P$. Write $Rz=\\sum_jz_j\\alpha_j$, $E(x)=(\\ell_j(x))_j$. Choose a finite basis $\\beta_1,\\ldots,\\beta_s$ of $Q(Y)$, with bounded coordinate functionals $c_i$, and put $h_i(z)=c_i(QT(Rz))$ and $Bv=\\sum_i v_i\\beta_i$. Each $h_i$ is continuous on all $\\mathbb R^J$, and $BhE=QTP$. For a zero-dimensional range use one zero basis vector and the zero coefficient map instead of an actual basis. These formulas prove the stated factorization and complete the proof.",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step1.1 handles empty K by zero maps."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step2.1 uses dummy zero coordinates if P or Q has zero rank."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton K and one-dimensional finite-rank ranges satisfy the same formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero ranks are explicitly separated from actual basis construction in step2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This abstract Banach-space assertion has no exponent or regularity endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Two AP approximants and finitely many cover elements and bases are selected; the cover uses all admissible (x,rho) pairs, without simultaneous uncountable selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/neural_operator_repair/univ_proof",
+        "notes": "Author-side proof proposal only. Parent owns independent review and current supplier/quote binding; no gate or acceptance evidence supplied."
+      }
+    },
+    "lem-smooth-integral-functionals-approximate-on-compact-function-sets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "source_section": "Proof",
+          "quote": "1.1 If $D=\\varnothing$, $X$ is the zero space and $F=0$ has all the required properties; if $K=\\varnothing$, $F=0$ suffices as well. Henceforth both sets are nonempty. In particular $0<|D|<\\infty$, because $D$ contains a ball and is bounded. Fix one boundary chart $Q$, with Lipschitz graph function $\\varphi$ of constant $L$, and an ambient neighborhood $U$ of its boundary point with $\\bar U\\subset Q$ compact. In chart coordinates set $v=(L+2)e_d$. For $x\\in\\bar D\\cap\\bar U$, $|z|\\le1$, and sufficiently small $t>0$, uniformly in $x,z$, the point $y=x+tv-tz$ stays in $Q$ because $t(|v|+1)<\\operatorname{dist}(\\bar U,Q^c)$. Moreover $y_d-\\varphi(y')\\ge x_d-\\varphi(x')+t(L+2)-t|z_d|-Lt|z'|\\ge t>0$. Thus $\\overline B(x+tv,t)\\Subset D$. Rotate $v$ back to the original coordinates. [given, F7, F8, construct, algebra]\n\n1.2 The compact boundary admits finitely many such $U_j$, $1\\le j\\le J$, covering it. The compact remainder $\\bar D\\setminus\\bigcup_{j=1}^JU_j$ lies in $D$; cover it by finitely many balls with closures in $D$, and let $U_0$ be their union, omitting it if the remainder is empty. Then $\\bar U_0\\Subset D$, so $v_0=0$ has the same ball property for sufficiently small $t$. Apply [F2] to this finite open cover of $\\bar D$, obtaining $\\psi_j\\in C_c^\\infty(U_j)$ with $\\sum_j\\psi_j=1$ near $\\bar D$. The minimum of the finitely many positive bounds on $t$ gives $t_0>0$ such that $\\overline B(x+tv_j,t)\\Subset D$ for every $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$ and $0<t<t_0$. Taking the family of all admissible chart neighborhoods before extracting a finite subcover avoids selecting a chart independently at every boundary point. [F2, F7, step 1.1, construct]\n\n2.1 By [F9] choose a nonnegative smooth bump compactly supported in $B_1(0)$ and positive on $\\overline B_{1/2}(0)$, and divide it by its positive integral to obtain $\\rho\\in C_c^\\infty(B_1(0))$ with $\\int\\rho=1$. Put $\\rho_t(w)=t^{-d}\\rho(w/t)$. Every $u\\in X$ belongs continuously to $L^1(D)$: use [F8] for Sobolev spaces, and $\\|u\\|_1\\le |D|\\|u\\|_{C^m}$ for $C^m$. For its zero extension $E_0u$ define $H_{j,t}u(x)=(\\rho_t*E_0u)(x+tv_j)$ and $S_tu=\\sum_j\\psi_jH_{j,t}u$. By [F4] these are well-defined linear constructions independent of representatives and $S_tu\\in C_c^\\infty(\\mathbb R^d)$. [F4, F8, F9, step 1.2, construct]\n\n2.2 First take $X=W^{m,p}(D)$. For every $|\\gamma|\\le m$ and $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$, [F3] and step 1.2 give\n$$D^\\gamma H_{j,t}u(x)=\\int\\rho(z)(E_0D^\\gamma u)(x+t(v_j-z))\\,dz.$$\nThe translated center has distance greater than $t$ from $D^c$: the entire closed ball of radius $t$ is a compact subset of $D$. The identity consequently holds on a neighborhood of each indicated $x$. Equivalently the defining weak-derivative identity can be tested against $y\\mapsto\\rho_t(x+tv_j-y)$, whose support is compact in $D$; its two derivative signs cancel. Only interior values are used, with no assertion that derivatives commute with zero extension across $\\partial D$. [F1, F3, step 1.2, step 2.1]\n\n2.3 For $f\\in L^p(\\mathbb R^d)$ define $T_{j,t}f(x)=\\int\\rho(z)f(x+t(v_j-z))\\,dz$ and $\\omega_f(r)=\\sup_{|h|\\le r}\\|f(\\cdot+h)-f\\|_p$. Translation invariance and [F5] give $\\|T_{j,t}f\\|_p\\le\\|f\\|_p$ and\n$$\\|T_{j,t}f-f\\|_p\\le\\omega_f((|v_j|+1)t).$$\nBy [F4], $\\omega_f(r)\\to0$ as $r\\downarrow0$. The integral estimates also apply when $p=1$, where [F5] follows directly from Tonelli. [F4, F5, step 2.1, construct]\n\n2.4 Set $f_\\gamma=E_0D^\\gamma u$. The finite Leibniz rule [F6], step 2.2 and $\\sum_j\\psi_j=1$ near $\\bar D$ give, for $|\\alpha|\\le m$, the a.e. identity on $D$\n$$D^\\alpha(S_tu-u)=\\sum_j\\sum_{\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}(D^\\beta\\psi_j)\\bigl(T_{j,t}f_{\\alpha-\\beta}-D^{\\alpha-\\beta}u\\bigr).$$\nEvery derivative $D^\\beta\\psi_j$ vanishes off $\\operatorname{supp}\\psi_j$, so step 2.2 supplies exactly the identities used in this formula. All these fixed multiplier derivatives are bounded. Step 2.3 and the finite norm sum [F1] therefore imply $\\|S_tu-u\\|_{W^{m,p}}\\to0$. The same Leibniz formula without subtracting $u$, and $\\|T_{j,t}f_\\gamma\\|_p\\le\\|f_\\gamma\\|_p\\le\\|u\\|_{W^{m,p}}$, give $\\sup_{0<t<t_0}\\|S_t\\|_{X\\to X}\\le M_X<\\infty$. For example take the $\\ell^p$ norm over $\\alpha$ of $\\sum_{j,\\beta\\le\\alpha}\\binom{\\alpha}{\\beta}\\|D^\\beta\\psi_j\\|_\\infty$. This argument includes $m=0$ and $p=1$. [F1, F6, step 1.2, step 2.2, step 2.3, algebra]\n\n3.1 Now take $X=C^m(\\bar D)$. By [F6] each bounded classical derivative is its weak derivative, so $u\\in W^{m,1}(D)$ and step 2.2 applies. Each $D^\\gamma u$ is uniformly continuous on $\\bar D$ by [F7]. For $x\\in\\bar D\\cap\\operatorname{supp}\\psi_j$, every sampled $y=x+t(v_j-z)$ lies in $D$ and $|y-x|\\le(|v_j|+1)t$. Positivity and mass one of $\\rho$ thus give\n$$\\sup_{x\\in\\bar D\\cap\\operatorname{supp}\\psi_j}|D^\\gamma H_{j,t}u(x)-D^\\gamma u(x)|\\le\\sup_{\\substack{x,y\\in\\bar D\\\\|x-y|\\le(|v_j|+1)t}}|D^\\gamma u(y)-D^\\gamma u(x)|\\longrightarrow0.$$\nThe formula of step 2.4, first on $D$ and then by continuity on $\\bar D$, gives $\\|S_tu-u\\|_{C^m}\\to0$. Bounding each averaged derivative by $\\|D^\\gamma u\\|_\\infty$ and summing the same fixed multiplier constants gives $\\sup_{0<t<t_0}\\|S_t\\|_{X\\to X}\\le M_X<\\infty$ also in this case. [F6, F7, step 1.2, step 2.2, step 2.4, algebra]\n\n4.1 Fix $0<t<t_0$. Write $k_t(x,y)=\\sum_j\\psi_j(x)\\rho_t(x+tv_j-y)$, so $S_tu(x)=\\int_D k_t(x,y)u(y)\\,dy$. Fix a closed box $Q$ containing $\\bar D$. The finitely many $D_x^\\alpha k_t$, $|\\alpha|\\le m$, are smooth and uniformly continuous on the compact set $\\bar D\\times Q$ by [F7]. For any $\\eta>0$, partition $Q$ into finitely many measurable cells $Q_\\ell$ of small enough diameter, assigning shared and outer faces consistently, and choose $y_\\ell\\in Q_\\ell$. Their diameters can be chosen so that $|D_x^\\alpha k_t(x,y)-D_x^\\alpha k_t(x,y_\\ell)|<\\eta$ for $x\\in\\bar D$, $y\\in Q_\\ell$ and $|\\alpha|\\le m$. The point $y_\\ell$ need not lie in $D$. [F7, step 2.1, construct]\n\n4.2 Define\n$$F_{t,\\eta}u(x)=\\sum_\\ell k_t(x,y_\\ell)\\int_{D\\cap Q_\\ell}u(y)\\,dy.$$\nEach coefficient is a bounded linear functional by step 2.1, and there are finitely many coefficients. Each range function $k_t(\\cdot,y_\\ell)$ belongs to $C_c^\\infty(\\mathbb R^d)$, so the operator has finite rank with the required smooth range. Comparison with the integral for $S_t$ gives\n$$\\max_{|\\alpha|\\le m}\\sup_{\\bar D}|D^\\alpha(F_{t,\\eta}-S_t)u|\\le\\eta\\|u\\|_{L^1(D)}.$$\nFor $X=C^m(\\bar D)$, this yields $\\|F_{t,\\eta}-S_t\\|_{X\\to X}\\le |D|\\eta$. For $X=W^{m,p}(D)$ let $A_m$ be the finite number of multi-indices of order at most $m$. Taking the derivative $L^p$ norms and then applying [F8] gives $\\|F_{t,\\eta}-S_t\\|_{X\\to X}\\le A_m^{1/p}|D|^{1/p}\\eta |D|^{1-1/p}=A_m^{1/p}|D|\\eta$. This includes $p=1$, and it shows each $F_{t,\\eta}$ is bounded because $S_t$ is bounded. [F1, F8, step 2.1, step 2.4, step 3.1, step 4.1, construct, algebra]\n\n5.1 By steps 2.4 and 3.1 the operators $S_t:X\\to X$ converge pointwise to the identity and satisfy $\\|S_t\\|\\le M_X$. Choose $\\delta<\\varepsilon/[4(M_X+1)]$. Compactness gives a finite $\\delta$-net $u_1,\\ldots,u_N$ in $K$. Pointwise convergence permits one $t\\in(0,t_0)$ such that $\\max_i\\|S_tu_i-u_i\\|<\\varepsilon/4$. For any $u\\in K$, choose one net point within $\\delta$; then $\\|S_tu-u\\|\\le(M_X+1)\\delta+\\max_i\\|S_tu_i-u_i\\|<\\varepsilon/2$. Compactness also makes $R=\\sup_{u\\in K}\\|u\\|$ finite: a finite cover by unit balls bounds all these norms by one plus the largest center norm. [step 2.4, step 3.1, given, choose, algebra]\n\n5.2 Choose $\\eta>0$ small enough that the relevant bound in step 4.2 is below $\\varepsilon/[2(R+1)]$. For $F=F_{t,\\eta}$,\n$$\\sup_{u\\in K}\\|Fu-u\\|\\le\\|F-S_t\\|R+\\sup_{u\\in K}\\|S_tu-u\\|<\\varepsilon.$$\nIts range is a finite span of ambient compactly supported smooth functions by step 4.2. Applying this conclusion to the singleton compact set $K=\\{u\\}$ proves smooth-restriction density for every $u\\in X$. All net, partition and representative-point choices here are finite; Countable Choice enters only the analytical interfaces stated above. [step 4.2, step 5.1, choose, algebra] \u220e",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "source_section": "Statement",
+          "quote": "Under the page measure convention, if a finite family of open sets $U_j\\subset\\mathbb R^n$ covers compact K, there are smooth nonnegative $\\chi_j$ with compact support in $U_j$ such that $\\sum_j\\chi_j=1$ on a neighborhood of K. These are ambient smooth functions, also when K is only a $C^1$ hypersurface.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Empty $K$ or $L=0$ is handled by $\\kappa=0$. Otherwise [F1] permits choosing $t>0$ with $\\sup_K\\|S_ta-a\\|_X<\\varepsilon/(2\\|L\\|)$. For fixed $t$, the map $y\\mapsto k_t(\\cdot,y)|_D$ is ambient $C^\\infty$ with values in $X$: every mixed $x$ and $y$ derivative is uniformly continuous on compact products, so the ordinary finite-dimensional Taylor remainders in $y$, uniformly for $x$ derivatives through order $m$, tend to zero in the $C^m$ norm and hence in the $X$ norm. Thus $\\kappa_t(y)=L(k_t(\\cdot,y)|_D)$ is ambient smooth, with $D_y^\\alpha\\kappa_t=L(D_y^\\alpha k_t(\\cdot,y)|_D)$. It is bounded on $\\bar D$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For each $a\\in X$, one has $L(S_ta)=\\int_D\\kappa_t(y)a(y)\\,dy$. To justify the identity without assuming a vector-integration theorem, partition a box containing $D$ into cells of diameter tending to zero and replace $k_t(\\cdot,y)$ on each cell by $k_t(\\cdot,y_l)$. Uniform continuity of every $x$ derivative through order $m$ makes the error in $X$ at most $c_X\\eta\\|a\\|_1$, where $\\eta\\to0$ is the uniform kernel derivative error and $c_X$ converts a $C^m$ bound to an $X$ bound. Applying bounded $L$ to the finite sums is legitimate by linearity. Their scalar integral errors are at most $\\|L\\|c_X\\eta\\|a\\|_1$ as well, so passing to the limit proves the identity. Consequently $\\sup_K|L(a)-\\int_D\\kappa_ta|<\\varepsilon/2$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Compactness of $K$ in $X$ implies its compactness in $L^1(D)$ by [F2]. Given $\\theta>0$, take a finite $\\theta/2$ net $a_1,\\ldots,a_s$ in that $L^1$ image. By integrability and an exhaustion of $D$ by compact subsets, there is one compact $F\\subset D$ with $\\int_{D\\setminus F}|a_i|<\\theta/2$ for all $i$. Therefore $\\sup_{a\\in K}\\int_{D\\setminus F}|a|<\\theta$. Choose a smooth cutoff $0\\le\\zeta\\le1$, compactly supported in $D$, equal to one on $F$; use [F3] for the one-set open cover $\\{D\\}$ of $F$. Then $\\sup_K\\int_D(1-\\zeta)|a|<\\theta$. This uses a finite net and finitely many integrable tails, including at $p=1$; it requires no $L^\\infty$ approximation of a dual coefficient.",
+          "inputs": [
+            "F2",
+            "F3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "If $\\|\\kappa_t\\|_{L^\\infty(D)}=0$, choose $\\kappa=0$. Otherwise use step 2.1 with $\\theta=\\varepsilon/(2\\|\\kappa_t\\|_\\infty)$ and set $\\kappa=\\zeta\\kappa_t\\in C_c^\\infty(D)$. The cutoff error satisfies $\\sup_K|\\int_D(\\kappa_t-\\kappa)a|\\le\\|\\kappa_t\\|_\\infty\\sup_K\\int_D(1-\\zeta)|a|<\\varepsilon/2$. Combining with step 1.2 proves the claim.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step1.1 handles empty K by the zero kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps1.1 and2.2 handle L=0 and the zero scalar smooth kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Finite L1 nets and kernel-cell approximation include singleton K and d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero kernel branch avoids division by its sup norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All finite p include p=1 through the L1 estimate; m=0 is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly inherited by distribution separation, smoothing and ReLU UAT; all new selections are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "reason": "Explicit Countable Choice inherited from actual local analytical suppliers; new covers, nets and basis selections are finite."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/neural_operator_repair/univ_proof",
+        "notes": "Author-side proof proposal only. Parent owns independent review and current supplier/quote binding; no gate or acceptance evidence supplied."
+      }
+    },
+    "thm-neural-operator-compact-uniform-universality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-neural-operator-activation-classes",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $q\\ge1$ and an integer $m\\ge0$. Let $\\mathcal A_m^{(q)}$ be the class of continuous scalar activations $\\sigma:\\mathbb R\\to\\mathbb R$ for which there is one depth $n\\in\\mathbb N$ such that, for every compact $K\\subset\\mathbb R^q$, the scalar-output depth-$n$ multilayer perceptrons with activation $\\sigma$ are dense in $C^m(K)$ in the $C^m$ norm. For vector outputs, stack scalar-output networks of that same depth. The source notation $\\mathcal A_m$ suppresses the input dimension fixed by the finite-dimensional network under consideration. Let $\\mathcal A_m^{L,(q)}$ be the subclass whose members are Borel measurable and have at most linear growth, meaning\n$$\\sup_{s\\in\\mathbb R}\\frac{|\\sigma(s)|}{1+|s|}<\\infty.$$\nFor an integer $q\\ge1$, define $\\mathrm{BA}_q$ to consist of those $\\sigma\\in\\mathcal A_0^{(q)}$ for which, for every compact $K\\subset\\mathbb R^q$, every $\\varepsilon>0$, and every $C\\ge\\operatorname{diam}_2(K)$, there is a finite multilayer perceptron $f:\\mathbb R^q\\to\\mathbb R^q$ with\n$$|f(x)-x|_2\\le\\varepsilon\\quad(x\\in K),\\qquad |f(x)|_2\\le C\\quad(x\\in\\mathbb R^q).$$\nHere $\\operatorname{diam}_2(K)=\\sup_{x,y\\in K}|x-y|_2$. The diameter-based global bound is part of this definition and is retained verbatim; its nonemptiness is checked separately.",
+          "uses": [
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-neural-operator",
+          "source_section": "Definition",
+          "quote": "Let $D\\subset\\mathbb R^d$ and $D'\\subset\\mathbb R^{d'}$ be bounded domains. Let $A$ and $U$ be real Banach spaces of scalar functions whose elements have continuous representatives on $\\bar D$ and $\\bar D'$, respectively, and suppose the inclusions into $C(\\bar D)$ and $C(\\bar D')$ are continuous. In the continuous-function setting, a **neural operator** is a composition of a pointwise lifting map, finitely many integral-kernel layers, and a pointwise projection map. A layer with channel dimensions $q_t,q_{t+1}\\ge1$ has the form\n$$v_{t+1}(x)=\\sigma_t\\!\\left(W_tv_t(x)+\\int_D\\kappa_t(x,y)v_t(y)\\,dy+b_t(x)\\right),\\qquad x\\in\\bar D,$$\nwhere $v_t:\\bar D\\to\\mathbb R^{q_t}$ is continuous, $W_t\\in\\mathbb R^{q_{t+1}\\times q_t}$, $\\kappa_t:\\bar D\\times\\bar D\\to\\mathbb R^{q_{t+1}\\times q_t}$ and $b_t:\\bar D\\to\\mathbb R^{q_{t+1}}$ are continuous, and the scalar activation $\\sigma_t$ is applied coordinatewise. The lifting and projection maps are finite feedforward networks applied pointwise, with their input and output channel dimensions chosen to make the composition well-defined. All integrals are Lebesgue integrals, which exist because the integrands are continuous on a compact set. For distinct input and output domains the final integral layer has kernel on $\\bar D'\\times\\bar D$, integrates over $D$, and has zero local matrix term; subsequent projection acts on $\\bar D'$. For any stronger specified output space, the selected composition is required actually to map into that space.\n\nThe **integral universality subclass** is defined separately on $L^1(D;\\mathbb R^{q_0})$, including almost-everywhere equivalence classes. Fix continuous activations $\\sigma_1,\\sigma_2,\\sigma_3$ with $\\sigma_1$ of at most linear growth, $N\\ge2$, and channel dimensions $q_1,\\ldots,q_N\\ge1$. For $0\\le t\\le N-1$ let\n$$S_t(v)(x)=\\int_D\\kappa_t(x,y)v(y)\\,dy+b_t(x),\\qquad x\\in\\bar D,$$\nwhere $\\kappa_t:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^{q_{t+1}\\times q_t}$ and $b_t:\\mathbb R^d\\to\\mathbb R^{q_{t+1}}$ are finite MLPs with hidden activation $\\sigma_2$ and affine output. Set $v_1=S_0(a)$, $v_2=S_1(v_1)$, and $v_{t+1}=S_t(\\sigma_1(v_t))$ for $2\\le t\\le N-1$. An element of $\\mathrm{NO}_N$ is\n$$G(a)(x)=\\int_D\\kappa_N(x,y)v_N(y)\\,dy,\\qquad x\\in\\bar D',$$\nwhere $\\kappa_N:\\mathbb R^{d'}\\times\\mathbb R^d\\to\\mathbb R^{q_{\\mathrm{out}}\\times q_N}$ is a finite MLP with activation $\\sigma_3$ and affine output. There are exactly $N-2$ intermediate $\\sigma_1$ activations. Scalar input and output mean $q_0=q_{\\mathrm{out}}=1$. The final integral is over $D$, with output variable in $D'$. This class has identity lifting and projection and zero local matrix terms. It specializes the architectural scheme with its first layer extended to $L^1$ classes; it does not require continuous input representatives.\n\nThe first integral is invariant under null changes and obeys $\\|S_0(a)\\|_\\infty\\le\\|\\kappa_0\\|_\\infty\\|a\\|_1+\\|b_0\\|_\\infty$. Uniform continuity of its kernel on the compact product implies continuity of its output by the same $L^1$ estimate. All later fields are continuous and bounded, so their integrals and activations are defined; the output is continuous on $\\bar D'$. Viewing it in a stronger Banach space $U$ requires the selected kernels actually to produce outputs in $U$. The universality theorem constructs such kernels; arbitrary continuous kernels alone do not guarantee this condition.\n\nFor equal input and output domains, the diagram records the composition order: a pointwise lift, integral-kernel layers on $D$, and a pointwise output projection. Each $\\mathcal K_t$ box denotes the integral layer defined above; arrows denote function composition and do not assert a theorem.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,node distance=2.7cm]\n  \\node[draw,rounded corners,minimum width=2cm,align=center] (a) {$a\\in A$};\n  \\node[draw,rounded corners,minimum width=2cm,align=center,right of=a] (p) {$P$ pointwise lift};\n  \\node[draw,rounded corners,minimum width=2cm,align=center,right of=p] (k) {$\\sigma_t,\\mathcal K_t$\\ integral layers};\n  \\node[draw,rounded corners,minimum width=2cm,align=center,right of=k] (q) {$Q$ pointwise projection};\n  \\node[draw,rounded corners,minimum width=2cm,align=center,right of=q] (g) {$G(a)\\in U$};\n  \\draw[->] (a) -- (p);\n  \\draw[->] (p) -- (k);\n  \\draw[->] (k) -- (q);\n  \\draw[->] (q) -- (g);\n\\end{tikzpicture}\n```\n\nThis schematic is only a depiction of the composition defined above; it is not used in the discretization or universality proofs.",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $D\\subseteq\\mathbb R^d$ be bounded and Lipschitz, with $d\\ge1$, and let $m\\in\\mathbb N_0$. Let $X$ be either $W^{m,p}(D;\\mathbb R)$ for $1\\le p<\\infty$, including $W^{0,p}(D)=L^p(D)$, or $C^m(\\bar D;\\mathbb R)$. In the latter space derivatives in $D$ extend continuously to $\\bar D$, and the norm is $\\max_{|\\alpha|\\le m}\\sup_{\\bar D}|D^\\alpha u|$. For every norm-compact $K\\subseteq X$ and every $\\varepsilon>0$, there is a bounded finite-rank linear map $F:X\\to X$ such that $\\sup_{u\\in K}\\|Fu-u\\|_X<\\varepsilon$ and whose range is contained in the restrictions to $D$ of functions in $C_c^\\infty(\\mathbb R^d)$, with their continuous boundary values in the $C^m$ case. In particular, such smooth restrictions are norm-dense in $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-locally-integrable-functions-embed-in-distributions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. The map $f\\mapsto u_f$, $u_f(\\varphi)=\\int_\\Omega f\\varphi$, is a complex-linear injection from $L^1_{\\mathrm{loc}}(\\Omega)$ modulo almost-everywhere equality into $\\mathcal D'(\\Omega)$. It is continuous from the local $L^1$ topology, generated by $f\\mapsto\\int_K|f|$ for compact $K\\subseteq\\Omega$, to the strong distribution topology. In particular local $L^1$ convergence implies strong distribution convergence. The continuity estimate itself is choice-free; Countable Choice is used in the cited $L^1$ approximate-identity theorem proving injectivity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-single-hidden-layer-universal-approximation",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix $d\\ge1$ and use the finite scalar single-hidden-layer family\n\n$$\\mathcal N_\\sigma^{(d)}=\\left\\{x\\mapsto c+\\sum_{j=1}^m a_j\\sigma(w_j\\cdot x+b_j):m\\in\\mathbb N_0,\\ c,a_j,b_j\\in\\mathbb R,\\ w_j\\in\\mathbb R^d\\right\\}.$$\n\nFor every compact $K\\subseteq\\mathbb R^d$, if $\\sigma\\in\\mathcal M_{\\mathrm{pt}}$ is not equal almost everywhere to a polynomial, then $\\mathcal N_\\sigma^{(d)}$ is uniformly dense in $C(K,\\mathbb R)$. More generally, if $\\sigma\\in\\mathcal M$ is not polynomial almost everywhere, this family is dense for the essential-supremum seminorm on each such $K$ with respect to $d$-dimensional Lebesgue measure. If instead $\\sigma$ agrees almost everywhere with a polynomial of degree at most $q$ for some $q\\in\\mathbb N_0$ (including the zero polynomial), the family is not uniformly dense on the segment $\\{te_1:0\\le t\\le1\\}$, and is not dense in the Lebesgue essential-supremum seminorm on $[0,1]^d$. Thus pointwise compact-uniform density for $\\mathcal M_{\\mathrm{pt}}$, and essential-supremum density for $\\mathcal M$, each hold on every compact set if and only if $\\sigma$ is not polynomial almost everywhere.\n\nLet $1<p<\\infty$, and let $\\mu$ be a finite regular Borel measure concentrated on a compact $K\\subseteq\\mathbb R^d$ and absolutely continuous with respect to Lebesgue measure. Form the real $L^p(\\mu)$ space using the Borel $\\sigma$-algebra. For $\\sigma\\in\\mathcal M$, a network is interpreted in this space through any Borel representative agreeing with it outside a Lebesgue-null set; these representatives exist, are integrable on $K$, and give a unique $L^p(\\mu)$ class. This convention does not alter the actual pointwise network used in the uniform clause. For $\\sigma\\in\\mathcal M$ and $\\mu(\\mathbb R^d)>0$, $\\mathcal N_\\sigma^{(d)}$ is dense in $L^p(\\mu;\\mathbb R)$ if and only if $\\sigma$ is not polynomial almost everywhere. If $\\mu=0$, then $L^p(\\mu;\\mathbb R)=\\{0\\}$ and the network family is dense for every $\\sigma\\in\\mathcal M$, including polynomial activations.\n\nThese are existence statements without a quantitative width bound. They imply neither trainability nor statistical generalization, and compact-uniform approximation does not mean uniform approximation on all of $\\mathbb R^d$.",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-neural-operator-ba-class-is-empty-as-defined",
+          "source_section": "Statement",
+          "quote": "For each $q\\ge1$, the class $\\mathrm{BA}_q$ in the displayed activation-class definition is empty.",
+          "uses": [
+            "4.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "If $K$ is empty choose the zero operator. Otherwise put $T=G^\\dagger|_K$ and choose $0<\\tau<\\varepsilon/5$. Every listed input space injects continuously into $L^1(D)$: for finite $p$, $\\|a\\|_1\\le |D|^{1-1/p}\\|a\\|_p\\le |D|^{1-1/p}\\|a\\|_{W^{m,p}}$ when applicable, and for $C(\\bar D)$ use $\\|a\\|_1\\le|D|\\|a\\|_\\infty$. Thus each smooth moment $a\\mapsto\\int_D\\varphi a$ is continuous on $A$ and such moments separate distinct members of $K$, using [F4]; distinct continuous functions also differ on an interior set of positive measure.",
+          "inputs": [
+            "given",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "The set $Q=\\{(a,b)\\in K^2:\\|T(a)-T(b)\\|_U\\ge\\tau\\}$ is compact. For each pair in $Q$ a separating moment from step 1.1 remains nonzero on a neighborhood of that pair. A finite subcover supplies moments $\\varphi_1,\\ldots,\\varphi_J$ such that $E(a)=(\\int_D\\varphi_ja)_{j=1}^J$ has $E(a)\\ne E(b)$ for all $(a,b)\\in Q$. If $Q$ is nonempty, the positive continuous function $|E(a)-E(b)|_2$ on $Q$ has a positive minimum $r$; if $Q$ is empty set $J=1$, $\\varphi_1=0$, and $r=1$. In both cases $|E(a)-E(b)|_2<r$ implies $\\|T(a)-T(b)\\|_U<\\tau$. This is the complete finite-moment reduction and does not presume a dual representation theorem.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "step": "1.3",
+          "claim": "Cover the compact $E(K)$ by finitely many open balls of radius $r/4$ with centers $z_i=E(a_i)$, $a_i\\in K$, $1\\le i\\le s$. Put $h_i(z)=\\max(0,r/2-|z-z_i|_2)$, $h_0(z)=\\operatorname{dist}(z,E(K))$, and $w_i(z)=h_i(z)/(h_0(z)+\\sum_{k=1}^s h_k(z))$. The denominator is positive everywhere: off $E(K)$ its first term is positive, and on $E(K)$ some $h_i>r/4$. Consequently $w=(w_1,\\ldots,w_s)$ is continuous on all $\\mathbb R^J$, nonnegative, and $\\sum_iw_i\\le1$, with equality on $E(K)$. For $a\\in K$, $w_i(E(a))>0$ implies $|E(a)-E(a_i)|_2<r/2$ and hence $\\|T(a)-T(a_i)\\|_U<\\tau$. The convex combination $\\sum_iw_i(E(a))T(a_i)$ therefore differs from $T(a)$ by less than $\\tau$.",
+          "inputs": [
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For Lebesgue and Sobolev outputs choose smooth neighborhood restrictions $\\phi_i$ with $\\|\\phi_i-T(a_i)\\|_U<\\tau$, using [F3]. For continuous outputs set $\\phi_i=T(a_i)$, which is already $C^{m_2}(\\bar D')$. Define $Bv=\\sum_i v_i\\phi_i$ and $L=\\max(1,\\|B\\|_{\\ell^1\\to U})$. Since the weights in step 1.3 sum to one on $E(K)$, $\\sup_K\\|T(a)-Bw(E(a))\\|_U<2\\tau$. This is the output finite-dimensional factorization.",
+          "inputs": [
+            "step 1.3",
+            "F3",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "Let $Z=\\{z:\\operatorname{dist}(z,E(K))\\le1\\}$, a compact subset of $\\mathbb R^J$. Uniform continuity of $w$ on $Z$ gives $0<\\delta<1$ such that $z,z'\\in Z$ and $|z-z'|_2<\\delta$ imply $|w(z)-w(z')|_1<\\tau/L$. Set $R=\\max(1,\\sup_{a\\in K}\\|a\\|_1)$. By the $\\sigma_2$ premise [F1] choose common-depth scalar networks $p_j$ with $\\sup_{\\bar D}|p_j-\\varphi_j|<\\delta/(2R\\sqrt J)$. Then $\\widetilde E(a)=(\\int_Dp_j(y)a(y)\\,dy)_j$ satisfies $\\sup_K|\\widetilde E-E|_2<\\delta/2$, so $\\widetilde E(K)\\subset Z$ and $\\sup_K\\|Bw(E(a))-Bw(\\widetilde E(a))\\|_U<\\tau$. The input layer kernel $(x,y)\\mapsto(p_j(y))_j$ ignores $x$ and has exactly constant spatial output. The estimate uses only $L^1$ bounds and covers $p_1=1$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "step": "2.3",
+          "claim": "Apply the $\\sigma_1\\in\\mathcal A_0$ premise to the continuous map $w$ on compact $\\widetilde E(K)$, obtaining a finite MLP $f:\\mathbb R^J\\to\\mathbb R^s$ such that $\\sup_{z\\in\\widetilde E(K)}|f(z)-w(z)|_1<\\tau/L$. Then $\\sup_K\\|Bw(\\widetilde E(a))-Bf(\\widetilde E(a))\\|_U<\\tau$. Only $C^0$ approximation of this middle map is used; no differentiability of $\\sigma_1$ is needed.",
+          "inputs": [
+            "step 2.2",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.4",
+          "step": "2.4",
+          "claim": "Put $V=\\max(1,\\sup_{a\\in K}|f(\\widetilde E(a))|_1)$, finite by continuity and compactness. Define $c_U=1$ for $U=C^{m_2}(\\bar D')$ with the maximum derivative norm, and $c_U=(J_{m_2}|D'|)^{1/p_2}$ for $U=W^{m_2,p_2}(D')$ with the usual sum-of-$p_2$-powers norm, where $J_m$ counts multi-indices of order at most $m$; this also treats $L^{p_2}$ with $J_0=1$. For $C^{m_2}$ functions $u$, directly integrating each derivative gives $\\|u\\|_U\\le c_U\\|u\\|_{C^{m_2}}$. By $\\sigma_3\\in\\mathcal A_{m_2}$ choose common-depth networks $q_i$ such that $\\|q_i-\\phi_i\\|_{C^{m_2}(\\bar D')}<\\tau/(c_UV)$. These approximants are chosen from the $C^{m_2}$ network subfamily supplied by that density premise, so their derivatives exist. With $\\widetilde Bv=\\sum_i v_iq_i$, the estimate $\\|(\\widetilde B-B)v\\|_U\\le c_U|v|_1\\max_i\\|q_i-\\phi_i\\|_{C^{m_2}}$ yields $\\sup_K\\|\\widetilde Bf(\\widetilde E(a))-Bf(\\widetilde E(a))\\|_U<\\tau$. Equivalent choices of standard Banach norms merely change $c_U$.",
+          "inputs": [
+            "step 2.1",
+            "step 2.3",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Write the middle MLP as $f(z)=A_{n+1}\\sigma_1(A_n\\sigma_1(\\cdots\\sigma_1(A_1z+b_1)\\cdots)+b_n)+b_{n+1}$ with $n$ hidden layers. On a spatially constant field $v(y)=z$, the affine map $z\\mapsto Az+b$ is represented exactly by the integral kernel $A/|D|$ and constant bias $b$. Such constants are exact $\\sigma_2$ networks through their output biases. Use these layers after the input layer of step 2.2, placing precisely the $n$ coordinatewise $\\sigma_1$ activations of $f$ between them. The final kernel $\\kappa(x,y)=|D|^{-1}(q_1(x),\\ldots,q_s(x))$ is a $\\sigma_3$ network ignoring $y$, so its integral over $D$ sends a constant $v$ to $\\widetilde Bv$. This proves that $G(a)=\\widetilde Bf(\\widetilde E(a))$ belongs to $\\mathrm{NO}_{n+2}$ under the indexing convention in [F2]. All intermediate fields are constant and the final output belongs to $U$ for every $a\\in A$.",
+          "inputs": [
+            "step 2.2",
+            "step 2.3",
+            "step 2.4",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "step": "3.2",
+          "claim": "Adding the four errors in steps 2.1\u20132.4 gives $\\sup_K\\|T(a)-G(a)\\|_U<5\\tau<\\varepsilon$. This proves the core theorem. The proof in fact only needs continuity of $T$ on $K$ and the continuous injective $L^1$ realization of $A$; it retains all the listed source spaces.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 2.4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "For the corrected additional branch assume $U$ Hilbert, $M>0$, and $\\sup_A\\|G^\\dagger(a)\\|_U\\le M$. Apply the core construction with an error $0<\\gamma<\\min(M,\\varepsilon/2)$, calling the resulting operator $G_0$. It has the exact form $G_0(a)=\\sum_i f_i(\\widetilde E(a))q_i$. Choose an orthonormal basis $e_1,\\ldots,e_t$ for the finite-dimensional span of the $q_i$, discarding linear dependences, and express $G_0(a)=\\sum_jg_j(\\widetilde E(a))e_j$. Each $g_j$ is a linear combination of the $f_i$ and hence the same-depth $\\sigma_1$ MLP; each $e_j$ is a linear combination of the $q_i$ and hence a same-depth $\\sigma_3$ network. If the span is zero the zero operator already suffices. Otherwise $|g(\\widetilde E(a))|_2=\\|G_0(a)\\|_U<M+\\gamma<2M$ on $K$.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "step": "4.2",
+          "claim": "The set $S=g(\\widetilde E(K))$ is compact with radius at most $2M$. Apply the explicitly corrected property in the Statement with $C=2M$ and tolerance $0<\\eta<\\varepsilon-\\gamma$, obtaining $b$. Compose its $\\sigma_1$ MLP with $g$ and use final kernel $|D|^{-1}(e_j(x))_j$. By step 3.1 this is an operator $G_1$ of the required architecture. Orthonormality gives $\\sup_K\\|G_1-G_0\\|_U<\\eta$ and $\\|G_1(a)\\|_U=|b(g(\\widetilde E(a)))|_2\\le2M\\le4M$ for every $a\\in A$. Thus its approximation error is below $\\gamma+\\eta<\\varepsilon$. The argument handles arbitrary positive $M$ without the source's unjustified normalization $M\\ge1$.",
+          "inputs": [
+            "step 4.1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.3",
+          "step": "4.3",
+          "claim": "The corrected property has concrete instances. For ReLU and a compact $S\\subset\\mathbb R^q$, suppose $C\\ge\\sup_S|z|_2$. If $S$ is empty choose zero. If $C=0$, then $S\\subset\\{0\\}$ and again choose zero. If $C>0$, the coordinate clamp $c_j(z)=-C+\\operatorname{ReLU}(z_j+C)-\\operatorname{ReLU}(z_j-C)$ is an exact ReLU network onto $[-C,C]^q$ and fixes $S$. The radial projection $P$ onto the Euclidean ball of radius $C$ is continuous and fixes $S$. By [F6] approximate $P$ on the cube by a ReLU MLP $p$ with Euclidean error $<\\xi$, where $0<2\\xi<\\eta$. Then $b(z)=Cp(c(z))/(C+\\xi)$ is a finite ReLU MLP, globally bounded by $C$, and for $z\\in S$ its error is less than $\\xi+\\xi C/(C+\\xi)<2\\xi<\\eta$. Composition of layered MLPs is a layered MLP because consecutive affine maps merge. ReLU also has linear growth and belongs to every relevant $\\mathcal A_0$ by [F6]. Thus this corrected branch is nonvacuous.",
+          "inputs": [
+            "F1",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.4",
+          "step": "4.4",
+          "claim": "For the exact printed additional implication the premise $\\sigma_1\\in\\mathrm{BA}$ is impossible by [F5], so that implication is true but has no instances. Steps 4.1\u20134.2 establish the explicitly different nonvacuous branch; neither step alters the diameter-based class. This completes all asserted implications.",
+          "inputs": [
+            "step 3.2",
+            "step 4.2",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty K uses zero maps; empty S has radius zero and is realized by the zero network."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero functionals, zero finite-dimensional ranges and zero coefficient spans have explicit zero branches; corrected C=0 forces S subset {0}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All formulas include q=1 and singleton compact sets without dividing by their diameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Empty badpair set in the primary theorem uses E=0,r=1; zero ranks use dummy coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-p argument includes p=1; the output derivative estimate includes m=0; no p=infinity claim is added."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly inherited by distribution separation, smoothing and ReLU UAT; all new selections are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion is not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.3"
+          ],
+          "reason": "Explicit Countable Choice inherited from actual local analytical suppliers; new covers, nets and basis selections are finite."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/neural_operator_repair/univ_proof",
+        "notes": "Author-side proof proposal only. Parent owns independent review and current supplier/quote binding; no gate or acceptance evidence supplied."
+      }
+    }
+  }
+}

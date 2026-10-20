@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "92",
+  "round": 1,
+  "reviewed_items": [
+    "def-regularized-kernel-prediction-system",
+    "lem-regularized-gram-matrix-inverse-bound",
+    "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+    "thm-kernel-ridge-gram-perturbation-bound",
+    "thm-kernel-ridge-residual-prediction-certificate",
+    "alg-nystrom-kernel-ridge-fit",
+    "rem-statistical-and-numerical-kernel-errors",
+    "ex-kernel-ridge-singular-and-zero-gram-matrices",
+    "ex-kernel-ridge-nystrom-exact-range",
+    "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+    "ex-training-gram-does-not-control-test-prediction"
+  ],
+  "reviewed_pages": [
+    "sketched-kernel-learning-and-certified-solves",
+    "sketched-kernel-learning-and-certified-solves-examples"
+  ],
+  "decision": "accept",
+  "reason": "The local findings are repaired, and the relevant supplier uses and consumers were checked. No original Statement or Definition interface changed, and no outside-scope repair remains. Prepared for the final whole-batch review.",
+  "findings": [
+    {
+      "id": "lem-regularized-gram-matrix-inverse-bound",
+      "type": "prerequisite",
+      "reason": "Removed the circular dependency and citation to the prediction-system definition. The proof derives positive definiteness directly from the stated PSD matrices and τ>0; the definition now gives a direct quadratic-form well-definedness argument."
+    },
+    {
+      "id": "rem-statistical-and-numerical-kernel-errors",
+      "type": "prerequisite",
+      "reason": "The Gaussian range-finder scope now states k,p∈ℕ with k,p≥2 and ℓ=k+p≤min(m,n)."
+    },
+    {
+      "id": "rem-statistical-and-numerical-kernel-errors",
+      "type": "local",
+      "reason": "The GP comparison now uses the random-vector identity E[f_X|Y]=K(K+τI_n)^{-1}Y=u_K(Y) almost surely and explicitly matches the supplier’s noise parameter with σ=√τ."
+    },
+    {
+      "id": "ex-training-gram-does-not-control-test-prediction",
+      "type": "prerequisite",
+      "reason": "Added explicit finite-dimensional real RKHS constructions for both kernels and stated λ=τ when n=1, satisfying the minimization theorem’s hypotheses."
+    },
+    {
+      "id": "ex-training-gram-does-not-control-test-prediction",
+      "type": "scope",
+      "reason": "Preserved the identical-training-Gram example and added a rank-one Nyström computation: training Gram error 1/101, training fitted-value error 1/402, and test-prediction error 10/201."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-regularized-kernel-prediction-system",
+      "decision": "accept",
+      "reason": "Its shifted-system inverses are now justified directly by the quadratic-form argument; the circular justified_by relation is removed."
+    },
+    {
+      "id": "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+      "decision": "accept",
+      "reason": "The use of the inverse bound has K PSD and τ=nλ>0, matching the repaired lemma."
+    },
+    {
+      "id": "thm-kernel-ridge-gram-perturbation-bound",
+      "decision": "accept",
+      "reason": "Both shifted matrices are PSD shifts with τ>0, so the general inverse and resolvent bounds apply."
+    },
+    {
+      "id": "thm-kernel-ridge-residual-prediction-certificate",
+      "decision": "accept",
+      "reason": "Its shifted Gram matrix and positive shift meet the repaired inverse-bound hypotheses."
+    },
+    {
+      "id": "alg-nystrom-kernel-ridge-fit",
+      "decision": "accept",
+      "reason": "The Nyström matrix is PSD under the cited supplier theorem and τ>0; the residual certificate’s use remains valid."
+    },
+    {
+      "id": "rem-statistical-and-numerical-kernel-errors",
+      "decision": "accept",
+      "reason": "The GP theorem’s RKHS, zero-mean, AC, and noise-variance hypotheses are explicit; the Gaussian range-finder integer and width conditions are explicit."
+    },
+    {
+      "id": "ex-kernel-ridge-singular-and-zero-gram-matrices",
+      "decision": "accept",
+      "reason": "The inverse-bound use has PSD matrices and τ>0; the minimization-theorem comment remains conditional on its RKHS hypotheses."
+    },
+    {
+      "id": "ex-kernel-ridge-nystrom-exact-range",
+      "decision": "accept",
+      "reason": "The Nyström exact-range premise and the perturbation theorem’s PSD and positive-shift conditions match."
+    },
+    {
+      "id": "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+      "decision": "accept",
+      "reason": "Both scalar matrices are PSD and τ>0, satisfying the perturbation theorem’s hypotheses."
+    },
+    {
+      "id": "ex-training-gram-does-not-control-test-prediction",
+      "decision": "accept",
+      "reason": "The minimization theorem now applies to explicitly constructed real RKHSs with n=1 and λ=τ; the added Nyström calculation follows its defining formula."
+    }
+  ]
+}

@@ -10,6 +10,7 @@ provenance:
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-norm-and-normed-space, prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class, thm-minkowski-inequality-for-integrals, prop-essential-supremum-is-attained-as-the-least-essential-bound, prop-quotient-vector-space-operations-and-projection]
 proof_strategy: "Use the previous proposition to identify the null functions as the kernel of the seminorm. Hence the seminorm is constant on cosets and separates points on the quotient, while Minkowski and homogeneity descend from representatives."
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space.json
   audited: 2026-08-31
   precheck: pass
 sources:
@@ -32,9 +33,15 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
    $$\|[f]\|_\infty:=\|f\|_\infty\qquad([f]\in L^\infty(\mu))$$
    is well defined.
 3. In either case, with the quotient vector-space operations of
-   [[prop-quotient-vector-space-operations-and-projection]], the resulting pair
+   Coset equality, well-defined quotient operations, and the canonical projection with kernel $W$, the resulting pair
    $(L^p(\mu),\|\cdot\|_p)$ is a normed space in the sense of
-   [[def-norm-and-normed-space]].
+   A norm on a real vector space, the induced metric, and the dictionary with the metric axioms.
+
+## Statement references
+
+[[prop-quotient-vector-space-operations-and-projection]]
+
+[[def-norm-and-normed-space]]
 
 ## Facts & Assumptions
 
@@ -56,7 +63,7 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 **Proof technique:** Use the previous proposition to identify the null functions as the kernel of the seminorm. Hence the seminorm is constant on cosets and separates points on the quotient, while Minkowski and homogeneity descend from representatives.
 
-1.1 Suppose first $1\le p<\infty$ and $f-g\in\mathcal N_p(\mu)$. Then $\|f-g\|_p=0$. Applying Minkowski twice yields [L2, L3] $$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$ so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined.
+1.1 Suppose first $1\le p<\infty$ and $f-g\in\mathcal N_p(\mu)$. Then $\|f-g\|_p=0$. Applying Minkowski twice yields $$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$ so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined. [L2, L3]
 
 1.2 For $p=\infty$, if $f-g\in\mathcal N_\infty(\mu)$ then $f=g$ almost everywhere. Any essential bound for $f$ is therefore an essential bound for $g$ and conversely, so $\|f\|_\infty=\|g\|_\infty$. Thus $\|[f]\|_\infty:=\|f\|_\infty$ is well defined. [L2, L4]
 

@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 short: "$\\iota(n) = n \\cdot 1_F$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-canonical-natural.json
   precheck: n/a
   audited: 2026-07-27
 sources:
@@ -30,10 +31,10 @@ pipeline_run: null
 
 ## Definition
 
-Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and
+Let $F$ be a field (Field) with additive identity $0_F$ and
 multiplicative identity $1_F$. Define
 $\iota : \mathbb{N} \to F$ by recursion on $\mathbb{N}$
-([[def-natural-numbers]], [[thm-recursion]]):
+(The natural numbers $\mathbb{N}$ (von Neumann), The recursion theorem):
 
 $$\iota(0) \;:=\; 0_F, \qquad \iota(n+1) \;:=\; \iota(n) + 1_F .$$
 
@@ -41,12 +42,20 @@ $\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written
 $n \cdot 1_F$, and for $n \ge 1$ it is $1_F$ added to itself $n$ times.
 
 **Why the notation is needed at all.** A natural number in this library is a von
-Neumann natural, that is a set ([[def-natural-numbers]]), and a set is not an
+Neumann natural, that is a set (The natural numbers $\mathbb{N}$ (von Neumann)), and a set is not an
 element of $F$. So $1/n$, $n^{\alpha}$ and $x/n$ are not expressions of $F$ when
 $n$ is a natural: what they mean is $1/\iota(n)$, $\iota(n)^{\alpha}$ and
 $x/\iota(n)$. The map $\iota$ is what carries a counting number into the field,
 and writing it is the whole reason a reader meets $1/\iota(k+1)$ where an
 informal text would write $1/(k+1)$.
+
+## Definition references
+
+[[def-field]]
+
+[[def-natural-numbers]]
+
+[[thm-recursion]]
 
 ## Remarks
 

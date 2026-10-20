@@ -11,6 +11,7 @@ provenance:
 deps: [thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-minkowski-inequality-for-integrals, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-complete-metric-space, def-convergence-almost-everywhere-relative-to-a-measure, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-finite-and-countable-subadditivity-of-measures, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-axiom-of-choice]
 proof_strategy: "For 1 <= p < infinity, choose a rapidly Cauchy subsequence by least indices, sum the successive differences with monotone convergence and Minkowski, and recover the limit by dominated convergence. For p = infinity, union the exceptional null sets and take the pointwise limit outside them."
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-riesz-fischer-completeness-of-l-p.json
   audited: 2026-08-31
   precheck: pass
 sources:
@@ -28,13 +29,21 @@ sources:
 
 Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\mathcal A,\mu)$ be a measure space and let $1\le p\le\infty$. Then
 $L^p(\mu)$, with the norm of
-[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is
+The $L^p$ norm descends to the quotient and makes $L^p$ a normed space for $1 \le p \le \infty$, is
 complete. Equivalently, the metric induced by that norm is a complete metric in
-the sense of [[def-complete-metric-space]].
+the sense of Complete metric space: every Cauchy sequence converges in the space.
 
 Moreover, if a sequence in $L^p(\mu)$ converges in norm, then some subsequence
 admits measurable representatives converging almost everywhere in the sense of
-[[def-convergence-almost-everywhere-relative-to-a-measure]].
+Convergence almost everywhere relative to a measure.
+
+## Statement references
+
+[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
+
+[[def-complete-metric-space]]
+
+[[def-convergence-almost-everywhere-relative-to-a-measure]]
 
 ## Facts & Assumptions
 

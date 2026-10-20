@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "31",
+  "round": 0,
+  "reviewed_items": [
+    "def-feedforward-neural-network",
+    "def-activation-class-locally-essentially-bounded-ae-continuous",
+    "lem-polynomial-ridge-functions-dense-on-compact-sets",
+    "lem-linear-ridge-pullback-of-null-sets-is-null",
+    "lem-fixed-support-test-function-space-is-separable",
+    "lem-distribution-with-vanishing-highest-derivative-is-polynomial",
+    "lem-continuous-functions-dense-in-lp-for-compactly-supported-finite-borel-measures",
+    "lem-nonzero-real-polynomial-zero-set-is-lebesgue-null",
+    "def-single-hidden-layer-network",
+    "lem-all-polynomial-convolutions-have-uniformly-bounded-degree",
+    "lem-polynomial-activation-bounded-degree-obstruction",
+    "lem-smooth-nonpolynomial-activation-dense-on-compact-intervals",
+    "lem-network-approximates-smooth-activation-convolutions",
+    "lem-polynomial-convolutions-force-activation-polynomial-ae",
+    "lem-rough-nonpolynomial-activation-universal-on-compact-sets",
+    "thm-single-hidden-layer-universal-approximation",
+    "cex-offset-free-sine-ridge-functions-are-not-dense",
+    "cex-pointwise-uniformity-fails-for-an-essentially-bounded-activation",
+    "cex-zero-measure-does-not-force-a-nonpolynomial-activation",
+    "ex-polynomial-activation-bounded-degree-obstruction",
+    "ex-relu-and-sigmoid-activations-meet-the-universality-conditions"
+  ],
+  "reviewed_pages": [
+    "feedforward-networks-and-universal-approximation",
+    "feedforward-networks-and-universal-approximation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The approved ML-30 scope is otherwise preserved, and both frontmatter-only pages match the assigned inventories. Several local proof/interface repairs remain; no prerequisite gap requires owner escalation.",
+  "findings": [
+    {
+      "id": "lem-linear-ridge-pullback-of-null-sets-is-null",
+      "type": "local",
+      "reason": "Step 3.1 applies Tonelli and product-measure agreement to B_R × [-C_R,C_R]^(d−1) for d=1, but those suppliers require positive factor dimensions and no R^0 measure is supplied. Handle d=1 separately from Step 2.1, then take the countable union. This case is used in lem-polynomial-activation-bounded-degree-obstruction Step 1.1 and thm-single-hidden-layer-universal-approximation Steps 1.3, 2.1, 3.1 and 4.1."
+    },
+    {
+      "id": "lem-network-approximates-smooth-activation-convolutions",
+      "type": "local",
+      "reason": "The test-function space is complex-valued, while the claimed translate sums are real-valued. For σ≡1 and φ=iρ with real unit-mass ρ, g≡i cannot be their uniform limit. Preserve the complex-test scope by claiming separate approximation of Re(g) and Im(g), or state a real-valued test restriction; apply the Riemann argument to real components."
+    },
+    {
+      "id": "lem-continuous-functions-dense-in-lp-for-compactly-supported-finite-borel-measures",
+      "type": "local",
+      "reason": "Step 1.1 does not ensure the quantized simple function vanishes outside K, but Step 2.1 writes it using Borel sets E_j⊂K. Replace the representative or simple function by its product with 1_K; concentration of μ on K preserves the Lp class and approximation."
+    },
+    {
+      "id": "lem-continuous-functions-dense-in-lp-for-compactly-supported-finite-borel-measures",
+      "type": "prerequisite",
+      "reason": "The proof uses the Lp triangle inequality on quotient classes, but its dependencies define the p-functional and quotient without supplying the norm. Add thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, or state the precise Minkowski and quotient facts."
+    },
+    {
+      "id": "thm-single-hidden-layer-universal-approximation",
+      "type": "prerequisite",
+      "reason": "Steps 2.2 and 4.1 use the Lp norm, Cauchy sequences and triangle inequality to prove P_q closed and combine approximation errors. Its dependencies define Lp classes but do not supply their normed-space structure. Add thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space as a prerequisite."
+    },
+    {
+      "id": "lem-distribution-with-vanishing-highest-derivative-is-polynomial",
+      "type": "local",
+      "reason": "The library defines distributions as complex-linear functionals, but this statement does not define “real distribution”; its constant supplier returns c∈C while the conclusion requires a real polynomial. Define realness on real tests and show derivatives preserve it and the constant is real, for example by evaluating on a real unit-integral test."
+    },
+    {
+      "id": "lem-smooth-nonpolynomial-activation-dense-on-compact-intervals",
+      "type": "local",
+      "reason": "Step 1.1 needs the fact that an identically zero kth derivative forces a smooth function to be a polynomial, and invokes the repeated-integral finite-difference identity without derivation or a cited supplier. Add the elementary induction and the finite-difference derivation or explicit suppliers."
+    },
+    {
+      "id": "lem-rough-nonpolynomial-activation-universal-on-compact-sets",
+      "type": "local",
+      "reason": "Step 1.1 may obtain a complex test function, so its convolution may be complex; the smooth-activation density and network-approximation results are real-valued. Write φ=φ_R+iφ_I and select a nonpolynomial real component σ*φ_R or σ*φ_I before applying those results."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-polynomial-activation-bounded-degree-obstruction",
+      "decision": "accept",
+      "reason": "Its Step 1.1 uses the affine null-pullback statement with the required nonzero slope; the consumer proof needs no change once the supplier’s d=1 proof is repaired."
+    },
+    {
+      "id": "lem-polynomial-convolutions-force-activation-polynomial-ae",
+      "decision": "accept",
+      "reason": "For real σ, its regular distribution is real on real tests; its use of the vanishing-derivative conclusion matches the clarified real-distribution convention."
+    },
+    {
+      "id": "lem-rough-nonpolynomial-activation-universal-on-compact-sets",
+      "decision": "repair",
+      "reason": "It must select a real nonpolynomial convolution component and consume the corrected real/componentwise convolution-approximation result."
+    },
+    {
+      "id": "thm-single-hidden-layer-universal-approximation",
+      "decision": "repair",
+      "reason": "Its Lp closure and triangle-inequality arguments need the missing Lp norm prerequisite; its other uses of the corrected supplier claims are valid."
+    },
+    {
+      "id": "ex-polynomial-activation-bounded-degree-obstruction",
+      "decision": "accept",
+      "reason": "Its exact polynomial activation use of the bounded-degree obstruction is valid."
+    },
+    {
+      "id": "ex-relu-and-sigmoid-activations-meet-the-universality-conditions",
+      "decision": "accept",
+      "reason": "It uses the unchanged pointwise M_pt branch, and its activation checks are valid."
+    },
+    {
+      "id": "feedforward-networks-and-universal-approximation",
+      "decision": "accept",
+      "reason": "The page only inventories the affected items; its body is empty and no claim is copied into the page."
+    },
+    {
+      "id": "feedforward-networks-and-universal-approximation-examples",
+      "decision": "accept",
+      "reason": "The page requires the A page and contains no copied mathematical claim."
+    }
+  ]
+}

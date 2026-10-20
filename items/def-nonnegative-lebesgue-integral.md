@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-extended-real-valued-measurable-function, def-nonnegative-simple-measurable-function, def-integral-of-a-nonnegative-simple-function]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-nonnegative-lebesgue-integral.json
   audited: 2026-08-27
   precheck: n/a
 sources:
@@ -23,11 +24,20 @@ sources:
 ## Definition
 
 Let $f:X\to[0,+\infty]$ be measurable
-([[def-extended-real-valued-measurable-function]]). Its
+(Extended-real-valued measurable functions). Its
 **nonnegative Lebesgue integral** is
 $$\int f\,d\mu:=\sup\left\{\int s\,d\mu:\ s \text{ is nonnegative simple and } 0\le s\le f\right\},$$
 where the simple integral on the right is the one from
-[[def-integral-of-a-nonnegative-simple-function]].
+The integral of a nonnegative simple function.
 
 The set of admissible simple minorants is nonempty because it contains the zero
-function, which is simple ([[def-nonnegative-simple-measurable-function]]).
+function, which is simple (Nonnegative simple measurable functions).
+
+## Definition references
+
+[[def-extended-real-valued-measurable-function]]
+
+[[def-integral-of-a-nonnegative-simple-function]]
+
+[[def-nonnegative-simple-measurable-function]]
+

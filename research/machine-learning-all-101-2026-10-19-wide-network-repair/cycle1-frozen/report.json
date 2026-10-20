@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "45",
+  "reviewer": "/root/wide_network_repair",
+  "round": 1,
+  "recorded_at": "2026-10-19T04:04:04.572432+00:00",
+  "status": "complete-proof-packet-staged-for-root-review",
+  "native_coverage_adopted": false,
+  "shared_sources_modified": false,
+  "ready_stamps_written": false,
+  "gates_attempted": false,
+  "root_review_required_before_acceptance": true,
+  "summary": "Full approved FC and residual convergence proofs staged with simultaneous initialization and uniform parameter-ball Gram/Hessian/Taylor control, closing confidence through PL path length. Residual kernel and consumers repaired. No theorem replaced by a conditional contraction claim.",
+  "confirmed_defects": [
+    {
+      "id": "missing-local-finite-width-proof",
+      "subjects": [
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ],
+      "smallest_missing_prerequisites": "Simultaneous initialization event; uniform last-layer Gram and output/loss Hessian control; all-iterate confinement.",
+      "repair": "Three fully proved local helpers and complete theorem proofs."
+    },
+    {
+      "id": "wrong-residual-population-kernel",
+      "subjects": [
+        "def-du-overparameterized-network-architectures-and-gram-kernels"
+      ],
+      "repair": "Separate residual feature means/second moments and c_res^2/H^2 terminal kernel; residual PSD and duplicate-input consumers repaired."
+    },
+    {
+      "id": "source-fraction-mismatch",
+      "subjects": [
+        "thm-residual-network-polynomial-width-training-convergence",
+        "ML-44"
+      ],
+      "repair": "Approved n^4H^6/lambda^4 restriction retained and proved; official n^4/(lambda^4H^6) fraction recorded explicitly. No claim that the new argument proves sharper source regime."
+    }
+  ],
+  "proof_helpers": [
+    "lem-du-simultaneous-initialization-event",
+    "lem-du-neighborhood-gram-and-hessian-control",
+    "lem-du-local-pl-descent-and-path-length"
+  ],
+  "proof_novelty_and_source_limits": "The local proof is independently authored. It uses explicit Gaussian density identity for covariance Lipschitz control, preserves initial confidence logarithms, proves backward coordinate/Hessian bounds, and uses truncated first-exit PL descent. It does not import unproved B/C lemmas. The local residual bound is the approved stronger restriction, not a new proof of the sharper official fraction.",
+  "source_reading_evidence": "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/research/machine-learning-all-101-2026-10-19-batch-45.source-repair-evidence.json",
+  "source_auxiliary_observations": [
+    {
+      "source": "C.5 output update line",
+      "observation": "Output gradient is sum_i r_i x_i^(H), without 1/H; the proof line that bounds it by Qprime with Qprime proportional1/H cannot follow uniformly in H. The first-layer gradient likewise has first-layer normalization, not residual1/H.",
+      "disposition": "New proof bounds both blocks without1/H and obtains the displayed step restriction through explicit loss-Hessian control. This is not a counterexample to either convergence theorem."
+    },
+    {
+      "source": "B.5/B.6/C.5/C.6 confidence dependence",
+      "observation": "Crude source displacement/Taylor lines leave initial residual O(sqrt n) confidence dependence implicit.",
+      "disposition": "New proof retains r0 squared\u2264C n(1+log1/delta), improves total path to O(r0/sqrtlambda), and proves exact width absorption."
+    }
+  ],
+  "consumers": [
+    {
+      "id": "ex-du-duplicate-inputs-force-singular-gram",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Proof repaired to propagate equal residual means as well as equal covariance rows, preserving full duplicate-input conclusion.",
+      "edit_staged": true
+    },
+    {
+      "id": "ex-du-initial-output-common-mode-variance",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete proof rechecked: depth-one fully connected softplus example only; untouched FC architecture and covariance calculation remain valid.",
+      "edit_staged": false
+    },
+    {
+      "id": "ex-du-interpolation-does-not-imply-test-fit",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete verification rechecked: empirical loss unchanged; two-predictor interpolation/test-prediction distinction remains valid.",
+      "edit_staged": false
+    },
+    {
+      "id": "ex-du-relu-outside-analytic-activation-class",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete verification rechecked: activation hypotheses unchanged; differing one-sided derivatives still exclude ReLU.",
+      "edit_staged": false
+    },
+    {
+      "id": "ex-du-residual-skip-at-every-layer",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete verification rechecked: residual architecture unchanged, so both depth-three skip substitutions remain valid.",
+      "edit_staged": false
+    },
+    {
+      "id": "lem-du-initial-output-gaussian-concentration",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete proof rechecked: fixed-feature conditional Gaussian argument independent of kernel recursion; unchanged sound statement and proof.",
+      "edit_staged": false
+    },
+    {
+      "id": "lem-du-output-gradient-gram-update-identity",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Actual complete proof rechecked: architecture remains finite differentiable recurrence; all trainable entries and exact unbounded Taylor identity remain valid without change. New helper separately supplies explicit remainder bounds.",
+      "edit_staged": false
+    },
+    {
+      "id": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Statement corrected to distinguish FC unit diagonals from residual second moments; full residual mean/covariance and terminal-feature proof added.",
+      "edit_staged": true
+    },
+    {
+      "id": "thm-residual-network-polynomial-width-training-convergence",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Architecture-specific kernel now explicit; complete local theorem proof staged using the three new helpers; original training, probability and rate scope retained. Residual stronger approved width distinguished from official fraction.",
+      "edit_staged": true
+    },
+    {
+      "id": "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+      "same_reviewer": "/root/wide_network_repair",
+      "disposition": "Architecture-specific kernel now explicit; complete local theorem proof staged using the three new helpers; original training, probability and rate scope retained. Residual stronger approved width distinguished from official fraction.",
+      "edit_staged": true
+    }
+  ],
+  "outside_consumers_found": [],
+  "consumer_inventory": "research/machine-learning-all-101-2026-10-19-wide-network-repair/consumer-inventory.json",
+  "integration_guards": "research/machine-learning-all-101-2026-10-19-wide-network-repair/integration-guards.json",
+  "plan_stanza_proposal": "research/machine-learning-all-101-2026-10-19-wide-network-repair/plan-row-proposal.json",
+  "proof_contracts": "15 proof-bearing contracts in staged batch45 projection, including seven changed/new rows; exact source quotations from current staged suppliers.",
+  "manifest": "16 items total; A page11/Bpage5. New helper levels0,2,3; theorem levels4. Native original metadata and source-fetch history preserved.",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "tools/tsx-run.mjs",
+        "tools/precheck.mts",
+        "--json",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/def-du-overparameterized-network-architectures-and-gram-kernels.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/ex-du-duplicate-inputs-force-singular-gram.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-local-pl-descent-and-path-length.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-neighborhood-gram-and-hessian-control.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-population-gram-kernels-are-finite-symmetric-psd.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-simultaneous-initialization-event.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-residual-network-polynomial-width-training-convergence.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-wide-network-gradient-descent-reaches-zero-training-loss.md"
+      ],
+      "exit_code": 0,
+      "scope": "Explicit staged changed carriers; not native gate coverage."
+    },
+    {
+      "command": [
+        "node",
+        "tools/proof-layout.mjs",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/def-du-overparameterized-network-architectures-and-gram-kernels.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/ex-du-duplicate-inputs-force-singular-gram.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-local-pl-descent-and-path-length.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-neighborhood-gram-and-hessian-control.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-population-gram-kernels-are-finite-symmetric-psd.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-simultaneous-initialization-event.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-residual-network-polynomial-width-training-convergence.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-wide-network-gradient-descent-reaches-zero-training-loss.md"
+      ],
+      "exit_code": 0,
+      "scope": "Explicit staged changed carriers; not native gate coverage."
+    },
+    {
+      "command": [
+        "node",
+        "tools/rendercheck.mjs",
+        "--json",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/def-du-overparameterized-network-architectures-and-gram-kernels.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/ex-du-duplicate-inputs-force-singular-gram.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-local-pl-descent-and-path-length.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-neighborhood-gram-and-hessian-control.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-population-gram-kernels-are-finite-symmetric-psd.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/lem-du-simultaneous-initialization-event.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-residual-network-polynomial-width-training-convergence.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/items/thm-wide-network-gradient-descent-reaches-zero-training-loss.md",
+        "research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/library/machine-learning/overparameterized-training-and-interpolation.md"
+      ],
+      "exit_code": 0,
+      "scope": "Explicit staged changed carriers; not native gate coverage."
+    },
+    {
+      "command": [
+        "node",
+        "/tmp/du-proof-shadow/tools/proof-contract.mjs",
+        "/home/lazyinspirit/Projects/prestige-math-library/research/machine-learning-all-101-2026-10-19-wide-network-repair/proposed/research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json",
+        "--strict",
+        "--json"
+      ],
+      "exit_code": 0,
+      "scope": "Isolated source overlay; copies of exact current repository validator and helpers, current prerequisite item symlinks, staged owned sources. Not a native gate."
+    }
+  ],
+  "check_output_file": "research/machine-learning-all-101-2026-10-19-wide-network-repair/checks.json",
+  "native_decisions_left_unchanged": true,
+  "followup": "Root full review of final proposed sources/metadata. Apply only per-row/current source CAS, preserving foreign stanzas; root owns rehashing/recertification/readiness and subsequent actual native checks.",
+  "live_verification": {
+    "at": "2026-10-19T04:03:21.872Z",
+    "source": "Actual autopilot status recomputation and git log",
+    "stage": "1-scaffold",
+    "native_dispatches_covered": "101/101",
+    "in_flight": 0,
+    "blocker": "Owner repair and recertification required; batch45 remains among artifact-missing subjects until owner integrates/recertifies.",
+    "git_head": "50139bdcb6",
+    "state_mutations": false
+  }
+}

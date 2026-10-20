@@ -15,6 +15,7 @@ landmark: true
 short: "integration by parts"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-integration-by-parts.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -39,8 +40,8 @@ pipeline_run: null
 ## Statement
 
 Let $a < b$ be reals and let $u, v : [a,b] \to \mathbb{R}$ be differentiable at
-every point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose
-$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$
+every point of $[a,b]$ as functions on $[a,b]$ (The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set). Suppose
+$u'$ and $v'$ are integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$). Then $uv'$
 and $u'v$ are integrable and
 
 $$\int_a^b u\,v' \;=\; u(b)v(b) - u(a)v(a) \;-\; \int_a^b u'\,v .$$
@@ -51,7 +52,15 @@ then not false but ill-formed; that is
 the false statement that deletes it on the companion
 page. The hypothesis is automatic when $u$ and $v$ are continuously
 differentiable, since a continuous function on $[a,b]$ is integrable
-([[thm-continuous-implies-integrable]]).
+(A continuous function on $[a,b]$ is Riemann integrable, by Heine-Cantor and Riemann's criterion).
+
+## Statement references
+
+[[def-derivative]]
+
+[[def-darboux-integral]]
+
+[[thm-continuous-implies-integrable]]
 
 ## Facts & Assumptions
 

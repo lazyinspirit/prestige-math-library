@@ -1,0 +1,100 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "43",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "ex-finite-width-iid-relu-stack-has-zero-atom",
+      "model": "gpt-6-luna",
+      "context_sha256": "6b739a8c43778895245600cfe2dc272b75f93acde5c4f94c2feac0c0a80bde0c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example incorrectly attributes an atomlessness hypothesis to the general conditional recurrence, which permits p_2>0 with coefficient (1-p_2)d_2 sigma_2^2 G_2/2. Its finite sign calculation and proof of failed W_2/h_2 independence are correct, so this is a nonfatal explanatory misstatement. Replaced the caveat to distinguish the general recurrence from its p_2=0 half-factor special case.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-finite-width-iid-relu-stack-has-zero-atom",
+      "disposition": "repaired",
+      "post_sha256": "11e5e1dd218fb8dc80efe8e6fc02e755576e0b267e1167987913960a56f4dd68",
+      "review_context_sha256": "582d4b098e91bd1bd5fa1ada0ce3f5e1715cbc9edaa80cd9b11a077221a474b8",
+      "reason": "Checked the full Example, Verification, both local suppliers, owning proof contract and A/B page inventories. Symmetry and independence give the simultaneous-zero event probability 1/4. The scalar stack has Z_2 masses 1/4,1/2,1/4 at -2,0,2; g_1=sqrt(2)R on the both-positive event and zero otherwise, hence variance 1/2. P(h_2 != 0 | W_2<0)=0 differs from P(h_2 != 0)=1/4, disproving weight/gated-signal independence. The corrected caveat preserves these conclusions and the zero-at-kink convention; the contract proof quotations and derivations remain unchanged. This is the adjudicator repair review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-finite-width-iid-relu-stack-has-zero-atom",
+      "severity": "nonfatal",
+      "locus": "Example final caveat",
+      "finding": "The general conditional backward recurrence was described as requiring atomlessness, although its Statement permits a common zero probability p_l and only specializes to a half factor at p_l=0.",
+      "resolution": "Replaced only the Example caveat: zero atoms are allowed in the general recurrence, W_2/gated-signal independence fails in this witness, and the half-factor special case additionally requires p_2=0.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim_and_conventions": "The general two-input model forces T=0 on an event of probability 1/4 for arbitrary real weights. In the separate two-layer width-one witness, independent signed weights have variance 2, g_2=R, and the gate is 1_(Z_2>0). Zero atoms are compatible with the general conditional theorem; failed weight/gated-signal independence prevents its invocation, even though its atom-aware coefficient happens to equal the actual variance 1/2 in this witness.",
+    "sources_examined": [
+      "items/ex-finite-width-iid-relu-stack-has-zero-atom.md: Example, Facts & Assumptions, Verification",
+      "items/lem-iid-relu-layer-forces-zero-atom-next.md: complete Statement and Proof",
+      "items/thm-relu-backward-variance-recurrence.md: complete Statement and Proof",
+      "research/machine-learning-all-101-2026-10-19-batch-43.proof-contracts.json: assigned item contract",
+      "library/machine-learning/initialization-and-signal-propagation.md: frontmatter inventory",
+      "library/machine-learning/initialization-and-signal-propagation-examples.md: frontmatter inventory"
+    ],
+    "dependencies": [
+      "lem-iid-relu-layer-forces-zero-atom-next",
+      "thm-relu-backward-variance-recurrence"
+    ],
+    "source_consultation": "Elementary finite probability and conditional moment reasoning are familiar; no external source reading is claimed.",
+    "interface_comparison": "Only prose in ## Example changed. Neither ## Statement nor ## Definition exists in this item; no dependency or new prerequisite changed. Under the task explicit section-comparison rule there is no downstream propagation.",
+    "published_ledger": "No published repair or newly discovered affected published consumer; no published-ledger update proposed.",
+    "diagrams": "No TikZ/tikzcd diagrams in the assigned item; no diagram is needed for the finite probability argument.",
+    "validation_status": "All focused checks passed with exit code 0. No formatter or further item edit followed the final proof-layout check.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and any required independent rejudgment; this dispatch launches neither.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-finite-width-iid-relu-stack-has-zero-atom.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-finite-width-iid-relu-stack-has-zero-atom.md --json",
+        "exit_code": 0,
+        "result": "1 item checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-43.proof-contracts.json --strict --items ex-finite-width-iid-relu-stack-has-zero-atom --json",
+        "exit_code": 0,
+        "result": "ok: true; 1 assigned item checked, 0 errors, 0 warnings"
+      },
+      {
+        "command": "Item-scoped inspectStatement(id, example, body) and statementHash comparison with frozen assignment via Node module imports",
+        "exit_code": 0,
+        "result": "No presentation errors; Statement/Definition hash unchanged: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-finite-width-iid-relu-stack-has-zero-atom.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects"
+      }
+    ]
+  }
+}

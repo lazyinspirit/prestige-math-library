@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "kind": "root-confirmed-current-native-rejudgment-finding",
+  "run": "machine-learning-all-101-2026-10-19",
+  "at": "2026-10-20T13:58:45.936710+00:00",
+  "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+  "source_raw_sha256": "01e9750e3e5dc74248e8a3291545366e79ce5923ca0446308780907bc6d956cc",
+  "native_verdict": {
+    "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+    "model": "gpt-6.1-sol",
+    "keep": false,
+    "reason": "Step 1.1 assumes p_t is X_t's marginal density, which the Statement never requires. Take X_t=X_0+W_t, X_0\u223cN(0,1), and p_t the N(1,1+t) density. All stated hypotheses hold, but the claimed reverse kernels and drift are wrong.",
+    "context_sha256": "703bad1105e14fb7a01e3002a2a32f3eddd1c559742c4550025d4f79975f1768",
+    "item_sha256": "01e9750e3e5dc74248e8a3291545366e79ce5923ca0446308780907bc6d956cc",
+    "at": "2026-10-20T13:55:43.719Z"
+  },
+  "confirmed_defect": "Statement assumes p_t forms a positive classical density family consistent with q, but never requires it to be the actual marginal law of X_t. Proof1.1 and Bayes conclusions require that missing binding.",
+  "counterexample": {
+    "dimension": 1,
+    "T": "any positive finite horizon",
+    "actual_X": "X_t=X_0+W_t, X_0~N(0,1) independent of W",
+    "coefficients": "b=0, sigma=a=1",
+    "actual_transition_q": "N(x,t-s) density",
+    "admitted_but_wrong_p_t": "N(1,1+t) density; satisfies the stated semigroup identity and classical heat equation",
+    "all_other_assumptions": "Usual complete Brownian product space; finite drift/diffusion energy, uniform inverse bound1, smooth positive Gaussian q/p and legitimate compact-test differentiation/integration by parts. The proposed reverse operator has globally Lipschitz linear drift (1-x)/(1+T-u), hence a unique nonexplosive solution for each initial law.",
+    "kernel_difference": "For forward0<=s<r<=T, actual conditional mean at s given X_r=y is (1+s)y/(1+r); claimed p-weighted kernel mean is 1+(1+s)(y-1)/(1+r), differing by (r-s)/(1+r)>0.",
+    "drift_difference": "Actualreverse drift is -x/(1+T-u); claimed drift is (1-x)/(1+T-u)."
+  },
+  "smallest_missing_prerequisite": "Bind p_0 to Law(X_0); stated semigroup identities then give actual marginals p_t at alltimes. Equivalently say explicitly p_t are the marginal densities of X_t. This corrects the demonstrated missing premise, retaining the full intended positive-density reversal scope.",
+  "affected_item_consumers": [
+    "alg-predictor-corrector-score-sampling",
+    "ex-singular-data-score-truncation",
+    "ex-vp-finite-terminal-prior-mismatch"
+  ],
+  "ownership": "Normal native5.5adjudication originalbatch67 owner must review/repair supplier then all actual affected uses as needed. Native5.6impact owner must preserve genuine supplier/consumer ownership and current evidence. Do not preempt ongoing377tuple rejudgment or overwrite its source/certificate/verdicts.",
+  "native_adjudication_completed": false,
+  "source_repair_applied": false,
+  "original_raw_filtration_escalation_reopened": false,
+  "no_native_coverage_or_acceptance_claimed": true
+}

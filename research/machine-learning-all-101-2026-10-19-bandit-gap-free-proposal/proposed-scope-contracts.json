@@ -1,0 +1,776 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ucb-prefix-envelope-sum-bound",
+    "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+    "thm-ucb-gap-free-regret"
+  ],
+  "contracts": {
+    "lem-ucb-prefix-envelope-sum-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-principal-inverse-tangent-calculus",
+          "source_section": "Statement",
+          "quote": "For every $x\\in\\mathbb R$,\n\n$$\\frac{d}{dx}\\arctan x=\\frac1{1+x^2},\\qquad \\arctan x=\\int_0^x\\frac{dt}{1+t^2}.$$\n\nFor $|x|<1$,\n\n$$\\arctan x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n x^{2n+1}}{2n+1}.$$\n\nAt the endpoint, the ordinarily convergent alternating series satisfies\n\n$$\\frac\\pi4=1-\\frac13+\\frac15-\\frac17+\\cdots.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-improper-integral-splitting-and-tail-invariance",
+          "source_section": "Statement",
+          "quote": "Changing a finite lower endpoint of $\\int_a^\\infty f$, a finite upper endpoint of $\\int_{-\\infty}^b f$, or a compact truncation beside a finite singular endpoint neither creates nor destroys improper convergence. The values change by the corresponding oriented proper integral.\n\nConsequently, convergence and value in the definitions of an interior-singularity integral and a whole-line integral are independent of the chosen finite split point.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-improper-integrals",
+          "source_section": "Statement",
+          "quote": "If the improper integrals of $f$ and $g$ converge over the same one-ended interval and $r,s\\in\\mathbb R$, then\n$$\\int(rf+sg)=r\\int f+s\\int g.$$\nThe same formula holds for mixed improper integrals when every singular-end piece of both integrals converges separately.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-monotonicity-from-the-derivative",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]), let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]). The words\n*nondecreasing*, *increasing*, *nonincreasing* and *decreasing* are those of\n[[def-monotone-function]], in which *increasing* is the strict notion.\n\n1. If $f'(x) \\ge 0$ at every interior point $x$ of $I$, then $f$ is\n   nondecreasing on $I$.\n2. If $f'(x) > 0$ at every interior point $x$ of $I$, then $f$ is increasing on\n   $I$.\n3. If $f'(x) \\le 0$ at every interior point $x$ of $I$, then $f$ is\n   nonincreasing on $I$.\n4. If $f'(x) < 0$ at every interior point $x$ of $I$, then $f$ is decreasing on\n   $I$.\n\nConversely, with no continuity hypothesis and no hypothesis at any other point:\n\n5. If $f : I \\to \\mathbb{R}$ is nondecreasing on $I$ and differentiable at a\n   point $c \\in I$ that is a limit point of $I$, then $f'(c) \\ge 0$; if $f$ is\n   nonincreasing and differentiable at such a $c$, then $f'(c) \\le 0$.\n\n**No strict converse is claimed here, and none is true.** Claim 5 gives the\nweak inequality only, and it cannot be improved: an increasing function may have\na vanishing derivative at a point. That failure is recorded separately, as a\nfalse statement later on this page, with its witness worked out on the companion\npage. Reading claim 2 backwards is the single most common misuse of this\ntheorem, and this statement does not license it.\n\n**Claims 1 to 4 need the interval; claim 5 does not.** The forward direction\nruns through the mean value theorem on a segment joining two points of $I$, so\norder-convexity is essential. Claim 5 is a statement about one point and uses\nonly that the difference quotients have a constant sign.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The function $f$ is continuous, takes values in $[0,1]$, and is nonincreasing: $a\\sqrt{x}-2\\sqrt L$ and its positive part are nondecreasing. Therefore $f(s)\\le\\int_{s-1}^s f(x)\\,dx$ for every integer $s\\ge1$, by [F6], and $S:=\\sum_{s=1}^{n-1}f(s)\\le\\int_0^\\infty f(x)\\,dx,\\qquad S\\le n-1,$ once the improper integral is shown finite.",
+          "inputs": [
+            "given",
+            "F6",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Write $b=2\\sqrt L>0$. Evenness in [F1] and the scaling $y=\\sqrt2 x$ give $\\int_0^\\infty e^{-y^2/2}\\,dy=\\sqrt{\\pi/2}$ by [F2]. The primitive $-e^{-y^2/2}$ gives $\\int_0^\\infty y e^{-y^2/2}\\,dy=1$ by [F6] and [F7]. The substitutions are increasing smooth surjections on the half-lines, with continuous derivatives and continuous integrands on every compact truncation, so all hypotheses of [F2] hold.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F12",
+            "F13",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Polynomial division gives $\\frac{x^4(1-x)^4}{1+x^2}=x^6-4x^5+5x^4-4x^2+4-\\frac4{1+x^2}.$ Integrating on $[0,1]$ using [F5] and [F6] yields $\\int_0^1\\frac{x^4(1-x)^4}{1+x^2}\\,dx=\\frac17-\\frac23+1-\\frac43+4-\\pi=\\frac{22}7-\\pi>0.$ The strict positivity follows because the integrand is nonnegative and on $[1/4,3/4]$ is at least $1/(2\\cdot4^8)>0$. Thus $\\pi<22/7$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On $[0,b^2/a^2]$, $f=1$. On the remaining half-line use $x=(y+b)^2/a^2$, whose derivative $2(y+b)/a^2$ is positive and continuous and whose image is exactly $[b^2/a^2,\\infty)$. Proper substitution applies on compact truncations by [F3], so [F2], [F8], and step 1.2 give $\\int_0^\\infty f(x)\\,dx=\\frac{b^2}{a^2}+\\frac2{a^2}\\int_0^\\infty(y+b)e^{-y^2/2}\\,dy=\\frac{4L+2+\\sqrt{8\\pi L}}{a^2}.$ This proves finiteness and justifies step 1.1.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Put $z=(u-1)/(u+1)$ for $u>1$. The increasing substitution $t\\mapsto(1+t)/(1-t)$ on $[0,z]$ has continuous derivative and takes that interval onto $[1,u]$. Hence [F3] and [F4] give $\\log u=2\\int_0^z dt/(1-t^2)$. For every integer $q\\ge0$, the finite geometric identity gives $1/(1-t^2)\\ge\\sum_{j=0}^q t^{2j}$ on this interval. Integrating this polynomial by [F6] proves $\\log u\\ge2\\sum_{j=0}^q\\frac{z^{2j+1}}{2j+1}.$ At $u=2,q=1$, $u=3,q=2$, and $u=5,q=2$, respectively, this yields $\\log2\\ge\\frac{56}{81},\\qquad\\log3\\ge\\frac{263}{240},\\qquad\\log5\\ge\\frac{1924}{1215}>\\frac{11}7>\\frac\\pi2.$",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F12",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F4] and step 2.2, $\\log12=2\\log2+\\log3\\ge\\frac{16061}{6480}>\\frac{99}{40},\\qquad\\log11>\\log10=\\log2+\\log5\\ge\\frac{2764}{1215}>\\frac94.$ All comparisons follow by multiplying positive integer denominators; no decimal approximation is used.",
+          "inputs": [
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Define $D(L)=2+\\sqrt{8\\pi L}-4L$. If $n\\ge12$, step 3.1 gives $L>99/40$. At $L_0=99/40$, $(4L_0-2)^2=\\frac{6241}{100}>8\\frac{22}7\\frac{99}{40}>8\\pi L_0,$ so $D(L_0)<0$. For $L_2>L_1\\ge L_0>1$, the difference of $4L-2-\\sqrt{8\\pi L}$ at these two values equals $(\\sqrt{L_2}-\\sqrt{L_1})(4(\\sqrt{L_2}+\\sqrt{L_1})-\\sqrt{8\\pi})>0$, since $\\pi<22/7<8$. Thus $D(L)\\le0$ here. Steps 1.1 and 2.1 give $S\\le8L/a^2$, the asserted stronger bound.",
+          "inputs": [
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "step 1.3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "Suppose $5\\le n\\le11$. Step 2.2 gives $L>\\pi/2$, whence $\\sqrt{8\\pi L}\\le4L$ and $D(L)\\le2$. The derivative of $4\\log x-x+2$ is $4/x-1<0$ on $[5,11]$, and its value at $11$ is positive by step 3.1. Therefore $n-2\\le4L$.",
+          "inputs": [
+            "F4",
+            "F6",
+            "F9",
+            "F10",
+            "F12",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "If $D(L)\\le0$, steps 1.1 and 2.1 already give $S\\le8L/a^2$. If $D(L)>0$ and $a^2\\ge D(L)$, those steps give $S\\le(8L+D(L))/a^2\\le8L/a^2+1$. If $0<a^2<D(L)\\le2$, step 4.2 gives $(n-2)a^2\\le(n-2)D(L)\\le2(n-2)\\le8L$, so $S\\le n-1\\le1+8L/a^2$. These cases exhaust $5\\le n\\le11$ and prove the Statement together with step 4.1.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a positive horizon; the deterministic sum has n>=5 and the expected-pull lemma has n>=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a>0 or a suboptimal arm Delta>0, so no division by zero is permitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement requires n>=5; no horizon-one sum is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 5.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 5.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-prefix-envelope-sum-bound Statement is a one-direction inequality; nonempty-choice is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-prefix-envelope-sum-bound Statement is a one-direction inequality; iff-forward is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-prefix-envelope-sum-bound Statement is a one-direction inequality; iff-reverse is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        }
+      ]
+    },
+    "lem-ucb-sharp-suboptimal-arm-expected-pulls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stochastic-bandit-and-pseudo-regret",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $n$ and $k$, write $[k]=\\{1,\\ldots,k\\}$, and let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. A finite-horizon $k$-armed stochastic bandit in **reward-stack form** consists of probability measures $P_i$ on $(\\mathbb R,\\mathcal B(\\mathbb R))$ with finite first absolute moments, and an independent table of integrable real random variables $(X_{s,i})_{1\\le s\\le n,\\ i\\in[k]}$ such that the table entries are mutually independent and each $X_{s,i}$ has law $P_i$. Its mean for arm $i$ is $\\mu_i=\\int_{\\mathbb R}x\\,P_i(dx)=\\mathbb E[X_{s,i}]$, which does not depend on $s$. The learner may also use a random element $U$ for private randomization, provided $\\sigma(U)$ is independent of the sigma-algebra generated by the entire table; a deterministic learner uses a constant $U$.\n\nA non-anticipating policy chooses a measurable arm $A_t\\in[k]$ at each round $t\\in[n]$ using only $U$ and the previously observed history $(A_1,Y_1,\\ldots,A_{t-1},Y_{t-1})$. Write $\\mathcal H_{t-1}=\\sigma(U,A_1,Y_1,\\ldots,A_{t-1},Y_{t-1})$ for that history sigma-algebra. Define the pull count $T_i(0)=0$ and\n$$\nT_i(t)=\\sum_{r=1}^{t}\\mathbf 1_{\\{A_r=i\\}},\\qquad Y_t=X_{T_{A_t}(t),A_t}.\n$$\nThus each time arm $i$ is selected the learner receives the next unused entry in arm $i$'s reward stack. Set\n$$\n\\mu^*=\\max_{i\\in[k]}\\mu_i,\\qquad \\Delta_i=\\mu^*-\\mu_i\\ge0,\n$$\ndefine the pseudo-regret $\\bar R_n=\\sum_{t=1}^n(\\mu^*-\\mu_{A_t})$, and define the realized reward regret $R_n^{\\rm rew}=n\\mu^*-\\sum_{t=1}^nY_t$ and expected reward regret $R_n=\\mathbb E[R_n^{\\rm rew}]$.\n\nEach $Y_t$ is integrable because it selects one entry of the finite table, so $|Y_t|\\le\\sum_{s=1}^n\\sum_{i=1}^k|X_{s,i}|$ and the right-hand side is integrable. Hence $R_n^{\\rm rew}$ is integrable as well.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-centered-subgaussian-reward",
+          "source_section": "Definition",
+          "quote": "Let $X$ be an integrable real random variable on a probability space, and write $\\mu=\\mathbb E[X]$. The reward $X$ is **1-sub-Gaussian** if for every $\\lambda\\in\\mathbb R$,\n$$\n\\mathbb E\\!\\left[\\exp\\!\\left(\\lambda(X-\\mu)\\right)\\right]\\le \\exp\\!\\left(\\frac{\\lambda^2}{2}\\right).\n$$\nThe expectation in this condition is the nonnegative Lebesgue integral of the displayed exponential; the inequality requires it to be finite for every real $\\lambda$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-upper-confidence-bound-bandit",
+          "source_section": "Definition",
+          "quote": "Input integers $k,n$ with $1\\le k\\le n$, a confidence parameter $\\delta\\in(0,1)$, and access to an $n$-round $k$-armed stochastic bandit. Output the selected arms $A_1,\\ldots,A_n$.\n\n1. Initialize by choosing each arm once: set $A_t=t$ for $t=1,\\ldots,k$, and observe each reward.\n2. For each round $t=k+1,\\ldots,n$, let $T_i(t-1)=\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}$. If $T_i(t-1)>0$, set $U_i(t-1)=\\widehat\\mu_i(t-1)+\\sqrt{2\\log(1/\\delta)/T_i(t-1)}$ and $\\widehat\\mu_i(t-1)=\\bigl(\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}Y_s\\bigr)/T_i(t-1)$.\n   Set $U_i(t-1)=+\\infty$ if $T_i(t-1)=0$.\n3. Choose the least index $i$ attaining $\\max_{j\\in[k]}U_j(t-1)$ as $A_t$, then observe $Y_t$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-independent-subgaussian-prefix-tail",
+          "source_section": "Statement",
+          "quote": "Let $q\\ge1$ be an integer. Let $Z_1,\\ldots,Z_q$ be mutually independent integrable real random variables on a common probability space, with means $m_j=\\mathbb E[Z_j]$, and suppose each is 1-sub-Gaussian, meaning that $\\mathbb E[\\exp(\\lambda(Z_j-m_j))]\\le\\exp(\\lambda^2/2)$ for every $\\lambda\\in\\mathbb R$. Then for every $t\\ge0$,\n$$\n\\mathbb P\\!\\left(\\sum_{j=1}^q(Z_j-m_j)\\ge t\\right)\\le \\exp\\!\\left(-\\frac{t^2}{2q}\\right),\\qquad\n\\mathbb P\\!\\left(\\sum_{j=1}^q(Z_j-m_j)\\le -t\\right)\\le \\exp\\!\\left(-\\frac{t^2}{2q}\\right).\n$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ucb-prefix-envelope-sum-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge5$ be an integer, let $a>0$, and put $L=\\log n$. For $x\\ge0$ define $x_+=\\max\\{x,0\\}$ and\n$$f(x)=\\exp\\left(-\\frac{(a\\sqrt{x}-2\\sqrt L)_+^2}{2}\\right).$$\nThen\n$$\\sum_{s=1}^{n-1} f(s)\\le1+\\frac{8L}{a^2}.$$\nFor $n\\ge12$ the stronger bound $\\sum_{s=1}^{n-1}f(s)\\le8L/a^2$ holds. All integrals in the proof are proper Riemann integrals or their separately convergent improper limits.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $L=\\log n>0$ and let $i^*$ be the least-index optimal arm. For a fixed prefix $s\\in[n]$, put $r_s=\\sqrt{4L/s}$. By [F8], this is the index bonus at $\\delta=n^{-2}$. Let $G=\\bigcap_{s=1}^n\\{\\widehat\\mu_{i^*,s}+r_s\\ge\\mu^*\\}.$ Every event in its complement is a fixed-prefix lower-tail event of probability at most $e^{-sr_s^2/2}=n^{-2}$ by [F2] and [F4]. Hence $\\mathbb P(G^c)\\le1/n$ by [F5].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix the suboptimal arm $i$. It is played once during initialization. On $G$, any later play when its current count is $s$ requires $\\widehat\\mu_{i,s}+r_s\\ge\\mu^*$: its selected index is at least the current index of $i^*$, which is at least $\\mu^*$. Each such count $s\\in\\{1,\\ldots,n-1\\}$ can be charged at most once, since a play increases the count by one. Always $T_i(n)\\le n$. Thus pointwise $T_i(n)\\le1+\\sum_{s=1}^{n-1}\\mathbf1_{\\{\\widehat\\mu_{i,s}+r_s\\ge\\mu^*\\}}+n\\mathbf1_{G^c}.$",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a fixed $s$, the event inside the sum in step 2.1 is $\\widehat\\mu_{i,s}-\\mu_i\\ge\\Delta_i-r_s$. If this threshold is positive, [F4] bounds its probability by $\\exp(-s(\\Delta_i-r_s)^2/2)$. If it is nonpositive, use the bound $1$ in [F5]. Consequently, in both cases its probability is at most $\\exp\\left(-\\frac{(\\Delta_i\\sqrt{s}-2\\sqrt L)_+^2}{2}\\right).$ These are tails at deterministic prefix counts, never a tail theorem evaluated at a random count.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Take expectations in step 2.1, using [F6]. The count and indicators are bounded and therefore integrable. Step 1.1 makes the last term at most $1$, while step 3.1 bounds the finite sum. If $n\\ge5$, [F7] with $a=\\Delta_i>0$ therefore gives $\\mathbb E[T_i(n)]\\le2+\\sum_{s=1}^{n-1}\\exp\\left(-\\frac{(\\Delta_i\\sqrt{s}-2\\sqrt L)_+^2}{2}\\right)\\le3+\\frac{8L}{\\Delta_i^2}.$",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "If $2\\le n\\le4$, the existence of a suboptimal arm implies $k\\ge2$. Initialization plays every other arm at least once, so $T_i(n)\\le n-k+1\\le3$ pointwise. This proves the desired bound in the remaining horizons. If $k=1$ there is no suboptimal arm, so the assertion is vacuous. Together with step 4.1 this proves the Statement.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 4.1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a positive horizon; the deterministic sum has n>=5 and the expected-pull lemma has n>=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a>0 or a suboptimal arm Delta>0, so no division by zero is permitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For k=1 there is no suboptimal arm; the final regret is zero as explained in Proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 5.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 5.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-sharp-suboptimal-arm-expected-pulls Statement is a one-direction inequality; nonempty-choice is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-sharp-suboptimal-arm-expected-pulls Statement is a one-direction inequality; iff-forward is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lem-ucb-sharp-suboptimal-arm-expected-pulls Statement is a one-direction inequality; iff-reverse is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        }
+      ]
+    },
+    "thm-ucb-gap-free-regret": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stochastic-bandit-and-pseudo-regret",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $n$ and $k$, write $[k]=\\{1,\\ldots,k\\}$, and let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. A finite-horizon $k$-armed stochastic bandit in **reward-stack form** consists of probability measures $P_i$ on $(\\mathbb R,\\mathcal B(\\mathbb R))$ with finite first absolute moments, and an independent table of integrable real random variables $(X_{s,i})_{1\\le s\\le n,\\ i\\in[k]}$ such that the table entries are mutually independent and each $X_{s,i}$ has law $P_i$. Its mean for arm $i$ is $\\mu_i=\\int_{\\mathbb R}x\\,P_i(dx)=\\mathbb E[X_{s,i}]$, which does not depend on $s$. The learner may also use a random element $U$ for private randomization, provided $\\sigma(U)$ is independent of the sigma-algebra generated by the entire table; a deterministic learner uses a constant $U$.\n\nA non-anticipating policy chooses a measurable arm $A_t\\in[k]$ at each round $t\\in[n]$ using only $U$ and the previously observed history $(A_1,Y_1,\\ldots,A_{t-1},Y_{t-1})$. Write $\\mathcal H_{t-1}=\\sigma(U,A_1,Y_1,\\ldots,A_{t-1},Y_{t-1})$ for that history sigma-algebra. Define the pull count $T_i(0)=0$ and\n$$\nT_i(t)=\\sum_{r=1}^{t}\\mathbf 1_{\\{A_r=i\\}},\\qquad Y_t=X_{T_{A_t}(t),A_t}.\n$$\nThus each time arm $i$ is selected the learner receives the next unused entry in arm $i$'s reward stack. Set\n$$\n\\mu^*=\\max_{i\\in[k]}\\mu_i,\\qquad \\Delta_i=\\mu^*-\\mu_i\\ge0,\n$$\ndefine the pseudo-regret $\\bar R_n=\\sum_{t=1}^n(\\mu^*-\\mu_{A_t})$, and define the realized reward regret $R_n^{\\rm rew}=n\\mu^*-\\sum_{t=1}^nY_t$ and expected reward regret $R_n=\\mathbb E[R_n^{\\rm rew}]$.\n\nEach $Y_t$ is integrable because it selects one entry of the finite table, so $|Y_t|\\le\\sum_{s=1}^n\\sum_{i=1}^k|X_{s,i}|$ and the right-hand side is integrable. Hence $R_n^{\\rm rew}$ is integrable as well.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-centered-subgaussian-reward",
+          "source_section": "Definition",
+          "quote": "Let $X$ be an integrable real random variable on a probability space, and write $\\mu=\\mathbb E[X]$. The reward $X$ is **1-sub-Gaussian** if for every $\\lambda\\in\\mathbb R$,\n$$\n\\mathbb E\\!\\left[\\exp\\!\\left(\\lambda(X-\\mu)\\right)\\right]\\le \\exp\\!\\left(\\frac{\\lambda^2}{2}\\right).\n$$\nThe expectation in this condition is the nonnegative Lebesgue integral of the displayed exponential; the inequality requires it to be finite for every real $\\lambda$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-upper-confidence-bound-bandit",
+          "source_section": "Definition",
+          "quote": "Input integers $k,n$ with $1\\le k\\le n$, a confidence parameter $\\delta\\in(0,1)$, and access to an $n$-round $k$-armed stochastic bandit. Output the selected arms $A_1,\\ldots,A_n$.\n\n1. Initialize by choosing each arm once: set $A_t=t$ for $t=1,\\ldots,k$, and observe each reward.\n2. For each round $t=k+1,\\ldots,n$, let $T_i(t-1)=\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}$. If $T_i(t-1)>0$, set $U_i(t-1)=\\widehat\\mu_i(t-1)+\\sqrt{2\\log(1/\\delta)/T_i(t-1)}$ and $\\widehat\\mu_i(t-1)=\\bigl(\\sum_{s=1}^{t-1}\\mathbf 1_{\\{A_s=i\\}}Y_s\\bigr)/T_i(t-1)$.\n   Set $U_i(t-1)=+\\infty$ if $T_i(t-1)=0$.\n3. Choose the least index $i$ attaining $\\max_{j\\in[k]}U_j(t-1)$ as $A_t$, then observe $Y_t$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bandit-reward-table-has-fixed-conditional-laws",
+          "source_section": "Statement",
+          "quote": "In the finite reward-stack model, fix a round $t\\in[n]$, an arm $i\\in[k]$, an event $B\\in\\mathcal H_{t-1}$ with $B\\subseteq\\{A_t=i\\}$, and a Borel set $C\\subseteq\\mathbb R$. Then\n$$\n\\mathbb P(B\\cap\\{Y_t\\in C\\})=\\mathbb P(B)P_i(C),\\qquad \\mathbb E[Y_t\\mathbf 1_B]=\\mu_i\\mathbb P(B).\n$$\nIn particular, the reward stack satisfies the fixed conditional reward-law and conditional-mean interface for finite-arm stochastic environments.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+          "source_section": "Statement",
+          "quote": "Let $T,N\\ge1$ be integers, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, and let $A_t:\\Omega\\to[N]$ be measurable arm choices and $Y_t:\\Omega\\to\\mathbb R$ integrable rewards for $t=1,\\ldots,T$. Let $\\mu_1,\\ldots,\\mu_N\\in\\mathbb R$ be finite arm means and assume the conditional-mean identity\n$$\n\\mathbb E\\!\\left[Y_t\\mathbf1_{\\{A_t=i\\}}\\right]=\\mu_i\\mathbb P(A_t=i)\\qquad(t=1,\\ldots,T,\\ i\\in[N]).\n$$\nSet $\\mu^*:=\\max_{i\\in[N]}\\mu_i$, define the pseudo-regret $\\bar R_T:=\\sum_{t=1}^T(\\mu^*-\\mu_{A_t})$, the realized reward regret $R_T^{\\rm rew}:=\\sum_{t=1}^T(\\mu^*-Y_t)$, and the number of pulls of arm $i$ by $N_i(T):=\\sum_{t=1}^T\\mathbf1_{\\{A_t=i\\}}$. Then\n$$\n\\mathbb E[R_T^{\\rm rew}]=\\mathbb E[\\bar R_T]=\\sum_{i=1}^N(\\mu^*-\\mu_i)\\,\\mathbb E[N_i(T)].\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge\\max\\{k,2\\}$ be integers. In the finite reward-stack bandit model, assume all entries are centered 1-sub-Gaussian and run the stated UCB algorithm with $\\delta=n^{-2}$. Every arm $i$ with gap $\\Delta_i>0$ satisfies\n$$\\mathbb E[T_i(n)]\\le3+\\frac{8\\log n}{\\Delta_i^2}.$$\nThis is a local sharpening of the coefficient-16 expected-pull bound; the algorithm and confidence radius are unchanged.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F3], the actual reward table meets the conditional-mean premise of [F4], hence $R_n=\\sum_i\\Delta_i\\mathbb E[T_i(n)]$. All counts are bounded, and [F1] gives $\\sum_i\\mathbb E[T_i(n)]=n$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $I=\\{i:\\Delta_i>0\\}$ and, for $i\\in I$, put $q_i=(\\mathbb E[T_i(n)]-3)_+$. By [F5], $\\Delta_i^2q_i\\le8L$. Also $q_i\\le\\mathbb E[T_i(n)]$, so $\\sum_{i\\in I}q_i\\le n$ by step 1.1. Therefore $R_n\\le3\\sum_i\\Delta_i+\\sum_{i\\in I}\\Delta_iq_i.$ Zero-gap arms contribute zero, and no reciprocal of a zero gap occurs.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply [F6] to the finite nonnegative lists $a_i=\\Delta_i\\sqrt{q_i}$ and $b_i=\\sqrt{q_i}$ for $i\\in I$. Step 2.1 yields $\\sum_{i\\in I}\\Delta_iq_i\\le\\sqrt{\\left(\\sum_{i\\in I}\\Delta_i^2q_i\\right)\\left(\\sum_{i\\in I}q_i\\right)}\\le\\sqrt{8|I|Ln}\\le\\sqrt{8nk\\log n}.$ If $I$ is empty both sums and the regret are zero; otherwise the same finite inequality applies. Substitution in step 2.1 proves the unchanged Statement.",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 2.1",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty positive-gap set is handled explicitly in Proof step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Proof step 2.1 excludes zero gaps from reciprocals; step 3.1 handles all-optimal arms."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For k=1 there is no suboptimal arm; the final regret is zero as explained in Proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 3.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 3.1 establish the explicit domain and exhaust the finite horizon and degenerate branches described in this item Statement and Proof."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The thm-ucb-gap-free-regret Statement is a one-direction inequality; nonempty-choice is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The thm-ucb-gap-free-regret Statement is a one-direction inequality; iff-forward is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The thm-ucb-gap-free-regret Statement is a one-direction inequality; iff-reverse is excluded by its explicit domain or requires no separate choice/equivalence branch."
+        }
+      ]
+    }
+  }
+}

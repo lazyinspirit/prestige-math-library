@@ -1,0 +1,236 @@
+
+===== lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains =====
+
+
+## Statement
+
+Assume Countable Choice. Let $D\subseteq\mathbb R^d$ be a bounded Lipschitz open set, with $d\ge1$, and let $m\in\mathbb N_0$. Let $X$ be either $W^{m,p}(D;\mathbb R)$ for $1\le p<\infty$, including $W^{0,p}(D)=L^p(D)$, or $C^m(\bar D;\mathbb R)$. In the latter space derivatives in $D$ extend continuously to $\bar D$, and the norm is $\max_{|\alpha|\le m}\sup_{\bar D}|D^\alpha u|$. For every norm-compact $K\subseteq X$ and every $\varepsilon>0$, there is a bounded finite-rank linear map $F:X\to X$ such that $\sup_{u\in K}\|Fu-u\|_X<\varepsilon$ and whose range is contained in the restrictions to $D$ of functions in $C_c^\infty(\mathbb R^d)$, with their continuous boundary values in the $C^m$ case. In particular, such smooth restrictions are norm-dense in $X$.
+
+Moreover, there are finitely many ambient smooth cutoffs $\psi_j$, vectors $v_j$, a unit-mass $\rho\in C_c^\infty(\mathbb R^d)$, and $t_0>0$ such that for $0<t<t_0$ the kernel $k_t(x,y)=\sum_j\psi_j(x)\rho_t(x+tv_j-y)$, with $\rho_t(z)=t^{-d}\rho(z/t)$, defines bounded linear smoothing maps $S_tu(x)=\int_Dk_t(x,y)u(y)\,dy$. They satisfy $\sup_{0<t<t_0}\|S_t\|_{X\to X}<\infty$ and $\sup_{u\in K}\|S_tu-u\|_X\to0$ for every norm-compact $K\subset X$. Each kernel is ambient smooth with fixed compact support in its first variable.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-sobolev-space-wkp-and-its-norm]]
+
+[Kovachki et al., Lemma 26](https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf)
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $D,d,m,X,K,\varepsilon$ as in the statement. Lipschitz means that every boundary point has a rigid graph chart in which $D$ is the strict epigraph of a Lipschitz function.
+
+[F1] The Sobolev norm is the finite $\ell^p$ sum of the $L^p$ norms of the weak derivatives through order $m$, and $W^{0,p}=L^p$; this is a well-defined norm under Countable Choice ([[def-sobolev-space-wkp-and-its-norm]], [[lem-sobolev-norm-is-well-defined-and-definite]]).
+
+[F2] A finite open cover of a compact Euclidean set admits nonnegative ambient smooth functions compactly supported in the respective cover members and summing to one on a neighborhood of that set ([[lem-finite-ambient-partitions-for-euclidean-boundary-integration]]).
+
+[F3] Interior mollification commutes with every weak derivative through order $m$ wherever the closed mollifier-support ball is compactly contained in the domain ([[lem-mollification-commutes-with-weak-derivatives-in-the-interior]]).
+
+[F4] Under Countable Choice, translations are isometries in $L^p(\mathbb R^d)$ and are norm-continuous for $p<\infty$; convolution with a compact smooth kernel is smooth and differentiates by differentiating the kernel ([[lem-complex-translation-and-approximate-identity-interfaces]]).
+
+[F5] Minkowski's integral inequality holds for all $1\le p<\infty$; its $p=1$ case is Tonelli's identity ([[thm-minkowski-integral-inequality]]).
+
+[F6] Classical derivatives of a $C^m$ function are weak derivatives, and the weak Leibniz rule holds for a smooth multiplier with bounded derivatives ([[lem-classical-derivatives-are-weak-derivatives]], [[lem-weak-leibniz-rule-with-a-smooth-factor]]).
+
+[F7] Closed bounded Euclidean sets are compact, and continuous maps on compact metric spaces are uniformly continuous ([[thm-heine-borel-rn]], [[thm-heine-cantor-metric]]).
+
+[F8] Bounded measurable Euclidean sets have finite measure, and Hölder, including $p=1$, gives $\|u\|_{L^1(D)}\le |D|^{1-1/p}\|u\|_{L^p(D)}$ for nonempty open $D$ ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], [[thm-holder-inequality-for-integrals]]).
+
+[F9] Nested balls admit a nonnegative compactly supported smooth bump equal to one on the inner ball ([[lem-smooth-bump-between-concentric-euclidean-balls]]).
+
+**Choice use:** Countable Choice is used in the Sobolev, Lebesgue-measure, translation, convolution and weak-derivative interfaces [F1], [F3]–[F6], [F8]. The geometric cover and all later nets and cell selections are finite selections. No stronger choice axiom is used.
+
+## Proof
+
+1.1 If $D=\varnothing$, $X$ is the zero space; take $F=0$, the empty cutoff family, $k_t=0$, $S_t=0$ and $t_0=1$. If $K=\varnothing$ the compact approximation clause is vacuous and $F=0$ suffices; the smoothing construction below depends only on $D$ and $X$, and can be obtained by carrying it out with $K=\{0\}$. Henceforth both sets are nonempty. In particular $0<|D|<\infty$, because $D$ contains a ball and is bounded. Fix one boundary chart $Q$, with Lipschitz graph function $\varphi$ of constant $L$, and an ambient neighborhood $U$ of its boundary point with $\bar U\subset Q$ compact. In chart coordinates set $v=(L+2)e_d$. For $x\in\bar D\cap\bar U$, $|z|\le1$, and sufficiently small $t>0$, uniformly in $x,z$, the point $y=x+tv-tz$ stays in $Q$ because $t(|v|+1)<\operatorname{dist}(\bar U,Q^c)$. Moreover $y_d-\varphi(y')\ge x_d-\varphi(x')+t(L+2)-t|z_d|-Lt|z'|\ge t>0$. Thus $\overline B(x+tv,t)\Subset D$. Rotate $v$ back to the original coordinates. [given, F7, F8, construct, algebra]
+
+2.1 The compact boundary admits finitely many such $U_j$, $1\le j\le J$, covering it. The compact remainder $\bar D\setminus\bigcup_{j=1}^JU_j$ lies in $D$; cover it by finitely many balls with closures in $D$, and let $U_0$ be their union, omitting it if the remainder is empty. Then $\bar U_0\Subset D$, so $v_0=0$ has the same ball property for sufficiently small $t$. Apply [F2] to this finite open cover of $\bar D$, obtaining $\psi_j\in C_c^\infty(U_j)$ with $\sum_j\psi_j=1$ near $\bar D$. The minimum of the finitely many positive bounds on $t$ gives $t_0>0$ such that $\overline B(x+tv_j,t)\Subset D$ for every $x\in\bar D\cap\operatorname{supp}\psi_j$ and $0<t<t_0$. Taking the family of all admissible chart neighborhoods before extracting a finite subcover avoids selecting a chart independently at every boundary point. [F2, F7, step 1.1, construct]
+
+3.1 By [F9] choose a nonnegative smooth bump compactly supported in $B_1(0)$ and positive on $\overline B_{1/2}(0)$, and divide it by its positive integral to obtain $\rho\in C_c^\infty(B_1(0))$ with $\int\rho=1$. Put $\rho_t(w)=t^{-d}\rho(w/t)$. Every $u\in X$ belongs continuously to $L^1(D)$: use [F8] for Sobolev spaces, and $\|u\|_1\le |D|\|u\|_{C^m}$ for $C^m$. For its zero extension $E_0u$ define $H_{j,t}u(x)=(\rho_t*E_0u)(x+tv_j)$ and $S_tu=\sum_j\psi_jH_{j,t}u$. By [F4] these are well-defined linear constructions independent of representatives and $S_tu\in C_c^\infty(\mathbb R^d)$. [F4, F8, F9, step 2.1, construct]
+
+4.1 First take $X=W^{m,p}(D)$. For every $|\gamma|\le m$ and $x\in\bar D\cap\operatorname{supp}\psi_j$, [F3] and step 2.1 give $$D^\gamma H_{j,t}u(x)=\int\rho(z)(E_0D^\gamma u)(x+t(v_j-z))\,dz.$$ The translated center has distance greater than $t$ from $D^c$: the entire closed ball of radius $t$ is a compact subset of $D$. The identity consequently holds on a neighborhood of each indicated $x$. Equivalently the defining weak-derivative identity can be tested against $y\mapsto\rho_t(x+tv_j-y)$, whose support is compact in $D$; its two derivative signs cancel. Only interior values are used, with no assertion that derivatives commute with zero extension across $\partial D$. [F1, F3, step 2.1, step 3.1]
+
+4.2 For $f\in L^p(\mathbb R^d)$ define $T_{j,t}f(x)=\int\rho(z)f(x+t(v_j-z))\,dz$ and $\omega_f(r)=\sup_{|h|\le r}\|f(\cdot+h)-f\|_p$. Translation invariance and [F5] give $\|T_{j,t}f\|_p\le\|f\|_p$ and $$\|T_{j,t}f-f\|_p\le\omega_f((|v_j|+1)t).$$ By [F4], $\omega_f(r)\to0$ as $r\downarrow0$. The integral estimates also apply when $p=1$, where [F5] follows directly from Tonelli. [F4, F5, step 3.1, construct]
+
+4.3 Fix $0<t<t_0$. Write $k_t(x,y)=\sum_j\psi_j(x)\rho_t(x+tv_j-y)$, so $S_tu(x)=\int_D k_t(x,y)u(y)\,dy$. Fix a closed box $Q$ containing $\bar D$. The finitely many $D_x^\alpha k_t$, $|\alpha|\le m$, are smooth and uniformly continuous on the compact set $\bar D\times Q$ by [F7]. For any $\eta>0$, partition $Q$ into finitely many measurable cells $Q_\ell$ of small enough diameter, assigning shared and outer faces consistently, and choose $y_\ell\in Q_\ell$. Their diameters can be chosen so that $|D_x^\alpha k_t(x,y)-D_x^\alpha k_t(x,y_\ell)|<\eta$ for $x\in\bar D$, $y\in Q_\ell$ and $|\alpha|\le m$. The point $y_\ell$ need not lie in $D$. [F7, step 3.1, construct]
+
+5.1 Set $f_\gamma=E_0D^\gamma u$. The finite Leibniz rule [F6], step 4.1 and $\sum_j\psi_j=1$ near $\bar D$ give, for $|\alpha|\le m$, the a.e. identity on $D$ $$D^\alpha(S_tu-u)=\sum_j\sum_{\beta\le\alpha}\binom{\alpha}{\beta}(D^\beta\psi_j)\bigl(T_{j,t}f_{\alpha-\beta}-D^{\alpha-\beta}u\bigr).$$ Every derivative $D^\beta\psi_j$ vanishes off $\operatorname{supp}\psi_j$, so step 4.1 supplies exactly the identities used in this formula. All these fixed multiplier derivatives are bounded. Step 4.2 and the finite norm sum [F1] therefore imply $\|S_tu-u\|_{W^{m,p}}\to0$. The same Leibniz formula without subtracting $u$, and $\|T_{j,t}f_\gamma\|_p\le\|f_\gamma\|_p\le\|u\|_{W^{m,p}}$, give $\sup_{0<t<t_0}\|S_t\|_{X\to X}\le M_X<\infty$. For example take the $\ell^p$ norm over $\alpha$ of $\sum_{j,\beta\le\alpha}\binom{\alpha}{\beta}\|D^\beta\psi_j\|_\infty$. This argument includes $m=0$ and $p=1$. [F1, F6, step 2.1, step 4.1, step 4.2, algebra]
+
+6.1 Now take $X=C^m(\bar D)$. By [F6] each bounded classical derivative is its weak derivative, so $u\in W^{m,1}(D)$ and step 4.1 applies. Each $D^\gamma u$ is uniformly continuous on $\bar D$ by [F7]. For $x\in\bar D\cap\operatorname{supp}\psi_j$, every sampled $y=x+t(v_j-z)$ lies in $D$ and $|y-x|\le(|v_j|+1)t$. Positivity and mass one of $\rho$ thus give $$\sup_{x\in\bar D\cap\operatorname{supp}\psi_j}|D^\gamma H_{j,t}u(x)-D^\gamma u(x)|\le\sup_{\substack{x,y\in\bar D\\|x-y|\le(|v_j|+1)t}}|D^\gamma u(y)-D^\gamma u(x)|\longrightarrow0.$$ The formula of step 5.1, first on $D$ and then by continuity on $\bar D$, gives $\|S_tu-u\|_{C^m}\to0$. Bounding each averaged derivative by $\|D^\gamma u\|_\infty$ and summing the same fixed multiplier constants gives $\sup_{0<t<t_0}\|S_t\|_{X\to X}\le M_X<\infty$ also in this case. [F6, F7, step 2.1, step 4.1, step 5.1, algebra]
+
+7.1 Define $$F_{t,\eta}u(x)=\sum_\ell k_t(x,y_\ell)\int_{D\cap Q_\ell}u(y)\,dy.$$ Each coefficient is a bounded linear functional by step 3.1, and there are finitely many coefficients. Each range function $k_t(\cdot,y_\ell)$ belongs to $C_c^\infty(\mathbb R^d)$, so the operator has finite rank with the required smooth range. Comparison with the integral for $S_t$ gives $$\max_{|\alpha|\le m}\sup_{\bar D}|D^\alpha(F_{t,\eta}-S_t)u|\le\eta\|u\|_{L^1(D)}.$$ For $X=C^m(\bar D)$, this yields $\|F_{t,\eta}-S_t\|_{X\to X}\le |D|\eta$. For $X=W^{m,p}(D)$ let $A_m$ be the finite number of multi-indices of order at most $m$. Taking the derivative $L^p$ norms and then applying [F8] gives $\|F_{t,\eta}-S_t\|_{X\to X}\le A_m^{1/p}|D|^{1/p}\eta |D|^{1-1/p}=A_m^{1/p}|D|\eta$. This includes $p=1$, and it shows each $F_{t,\eta}$ is bounded because $S_t$ is bounded. [F1, F8, step 3.1, step 5.1, step 6.1, step 4.3, construct, algebra]
+
+7.2 By steps 5.1 and 6.1 the operators $S_t:X\to X$ converge pointwise to the identity and satisfy $\|S_t\|\le M_X$. Choose $\delta<\varepsilon/[4(M_X+1)]$. Compactness gives a finite $\delta$-net $u_1,\ldots,u_N$ in $K$. Pointwise convergence permits one $t\in(0,t_0)$ such that $\max_i\|S_tu_i-u_i\|<\varepsilon/4$. For any $u\in K$, choose one net point within $\delta$; then $\|S_tu-u\|\le(M_X+1)\delta+\max_i\|S_tu_i-u_i\|<\varepsilon/2$. Compactness also makes $R=\sup_{u\in K}\|u\|$ finite: a finite cover by unit balls bounds all these norms by one plus the largest center norm. [step 5.1, step 6.1, given, choose, algebra]
+
+8.1 Choose $\eta>0$ small enough that the relevant bound in step 7.1 is below $\varepsilon/[2(R+1)]$. For $F=F_{t,\eta}$, $$\sup_{u\in K}\|Fu-u\|\le\|F-S_t\|R+\sup_{u\in K}\|S_tu-u\|<\varepsilon.$$ Its range is a finite span of ambient compactly supported smooth functions by step 7.1. Applying this conclusion to the singleton compact set $K=\{u\}$ proves smooth-restriction density for every $u\in X$. All net, partition and representative-point choices here are finite; Countable Choice enters only the analytical interfaces stated above. [step 7.1, step 7.2, choose, algebra] ∎ 
+===== lem-neural-operator-ba-class-is-empty-as-defined =====
+
+
+## Statement
+
+For each $q\ge1$, the class $\mathrm{BA}_q$ in the displayed activation-class definition is empty.
+
+## Statement references
+[Kovachki et al., Definition 7: global bound indexed by $C\ge\operatorname{diam}_2(K)$](https://arxiv.org/pdf/2108.08481)
+
+## Facts & Assumptions
+
+**Given:** An integer $q\ge1$ and the definition of $\mathrm{BA}_q$.
+
+[F1] Membership in $\mathrm{BA}_q$ requires, for every compact $K\subset\mathbb R^q$, every $\varepsilon>0$, and every $C\ge\operatorname{diam}_2(K)$, a network satisfying both the identity-approximation and global-bound inequalities ([[def-neural-operator-activation-classes]]).
+
+## Proof
+
+**Proof strategy:** direct.
+
+1.1 Suppose $\sigma\in\mathrm{BA}_q$. Choose $x_0\in\mathbb R^q$ with $x_0\ne0$, set $K=\{x_0\}$, choose $C=0$, and choose $0<\varepsilon<|x_0|_2$. Since a singleton has diameter zero, these choices satisfy the quantifiers in [F1]. [given, F1, choose]
+
+2.1 The required network would satisfy $|f(x)|_2\le0$ for every $x\in\mathbb R^q$, hence $f(x_0)=0$. It would also satisfy $|f(x_0)-x_0|_2\le\varepsilon$, which becomes $|x_0|_2\le\varepsilon$, contrary to the choice of $\varepsilon$. Therefore no $\sigma$ belongs to $\mathrm{BA}_q$. [given, step 1.1, F1, contradiction] ∎
+
+## Remark
+
+The source's immediately adjacent assertion that ReLU belongs to this class cannot follow from the printed definition: the contradiction above applies to every activation. The global-output-bound branch of the source's Theorem 11 is therefore vacuous as printed. A change from diameter to a bound involving the location of $K$ would be a different definition and requires owner reconciliation.
+
+===== lem-neural-operator-compact-union-under-uniform-convergence =====
+
+
+## Statement
+
+Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, let $K\subseteq X$ be compact, and let $f,f_n:X\to Y$ be continuous for every integer $n\ge1$. Suppose that for every $\varepsilon>0$ there is $N\ge1$ such that $d_Y(f_n(x),f(x))<\varepsilon$ for all $n\ge N$ and all $x\in K$.
+Then
+$$W=f[K]\cup\bigcup_{n=1}^{\infty}f_n[K]$$
+is compact in $Y$. The empty-set case is included, and the proof uses no choice principle.
+
+## Facts & Assumptions
+
+**Given:** Metric spaces, a compact subset $K$, continuous maps, and uniform convergence on $K$ as stated.
+
+[F1] Compactness means that every open cover has a finite subcover; this convention applies to compact subsets of metric spaces ([[def-metric-compactness]]).
+
+[F2] A continuous map sends a compact subset of a metric space to a compact subset ([[thm-continuous-image-of-a-compact-space-is-compact]]).
+
+[F3] In a metric space, open sets contain an open ball about each of their points, and open balls are open ([[def-metric-space]], [[def-metric-topology]]).
+
+## Proof
+
+**Proof technique:** open-cover argument with a uniform neighborhood of the limit image.
+
+1.1 If $K=\emptyset$, then $W=\emptyset$ and it is compact. Otherwise let $\mathcal V$ be any open cover of $W$. By [F2], $f[K]$ is compact, so [F1] gives finitely many $V_1,\ldots,V_q\in\mathcal V$ covering $f[K]$. Set $O=\bigcup_{i=1}^qV_i$, an open set containing $f[K]$. [given, F1, F2, cases]
+
+2.1 Form the family of all balls $B_Y(y,r)$ with $y\in f[K]$, $r>0$, and $B_Y(y,2r)\subseteq O$. This family covers $f[K]$ by openness and [F3], so [F1] gives a finite subcover with centers $y_1,\ldots,y_s$ and radii $r_1,\ldots,r_s$. Since $f[K]\ne\emptyset$, $s\ge1$; let $\delta=\min_i r_i>0$. If $z\in Y$ and $d_Y(z,y)<\delta$ for some $y\in f[K]$, choose $i$ with $d_Y(y,y_i)<r_i$; then $d_Y(z,y_i)<\delta+r_i\le2r_i$, so $z\in B_Y(y_i,2r_i)\subseteq O$. Thus every point within distance $\delta$ of some point of $f[K]$ lies in $O$. [step 1.1, F1, F3, algebra]
+
+3.1 Uniform convergence supplies $N\ge1$ such that $d_Y(f_n(x),f(x))<\delta$ for every $x\in K$ and every $n\ge N$. Since $f(x)\in f[K]$, step 2.1 implies $f_n[K]\subseteq O$ for every $n\ge N$. [given, step 2.1, algebra]
+
+4.1 For each of the finitely many indices $1\le n<N$, [F2] makes $f_n[K]$ compact, so [F1] supplies a finite subfamily of $\mathcal V$ covering it. Together with $V_1,\ldots,V_q$ from step 1.1, these finitely many members cover $f[K]$, all $f_n[K]$ with $n\ge N$, and each remaining $f_n[K]$. Hence every open cover of $W$ has a finite subcover, so $W$ is compact by [F1]. The proof uses only finite subcovers and a finite minimum, not a choice axiom. [step 1.1, step 3.1, F1, F2, algebra] ∎ 
+===== lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs =====
+
+
+## Statement
+
+Let $d,d'\in\mathbb N$ with $d,d'\ge1$, let $D\subset\mathbb R^d$ be nonempty, bounded, and Jordan measurable, let $D'\subset\mathbb R^{d'}$ be nonempty and bounded, let $\kappa\in C(\bar D'\times\bar D)$ be scalar-valued, and let $K\subset C(\bar D)$ be nonempty and compact in the supremum norm. Give products of metric spaces the max metric. Let $Q_n:C(\bar D)\to\mathbb R$ be bounded linear quadrature functionals with $\sup_n\|Q_n\|<\infty$ and $Q_n f\to\int_D f(y)\,dy$ for every $f\in C(\bar D)$. Then
+$$\sup_{a\in K}\sup_{x\in\bar D'}\left|Q_n\bigl(\kappa(x,\cdot)a(\cdot)\bigr)-\int_D\kappa(x,y)a(y)\,dy\right|\longrightarrow0.$$
+This conclusion is in the supremum norm on the output variable. It does not by itself establish convergence in an arbitrary Banach output norm $U$.
+
+## Statement references
+[Kovachki et al., Appendix E: compact-uniform approximation of the integral layers](https://arxiv.org/pdf/2108.08481)
+
+[Kovachki et al., Appendix E: Riemann sums on compact families of integrands](https://arxiv.org/pdf/2108.08481)
+
+## Facts & Assumptions
+
+**Given:** The compact set $K$, the continuous kernel $\kappa$, and the quadrature functionals in the Statement.
+
+[F1] A compact metric space is totally bounded, so for every $\delta>0$ it has a finite $\delta$-net ([[thm-compact-implies-complete-and-totally-bounded]], [[def-totally-bounded]]).
+
+[F2] The hypotheses give pointwise convergence $Q_n f\to\int_D f$ on $C(\bar D)$ and a uniform bound on the operator norms of $Q_n$.
+
+[F3] Heine–Borel makes $\bar D$ and $\bar D'$ compact. Finite products are compact in the product topology, which agrees with the topology of the max product metric because its balls are products of factor balls and such rectangles form a basis. The kernel is bounded and uniformly continuous on the compact metric product $\bar D'\times\bar D$, and each $a\in C(\bar D)$ is bounded on $\bar D$ ([[thm-heine-borel-rn]], [[thm-finite-products-of-compact-spaces]], [[def-product-topology]], [[cor-compact-domain-maps-are-uniformly-continuous]], [[thm-extreme-value-metric]], [[def-continuous-real-functions-on-a-compact-metric-space]]).
+
+[F4] The continuous image of a compact metric space is compact ([[thm-continuous-image-of-a-compact-space-is-compact]]).
+
+## Proof
+
+**Proof strategy:** direct finite-net argument.
+
+1.1 Define $\Phi(x,a)=\kappa(x,\cdot)a(\cdot)$ on $\bar D'\times K$. For $(x,a),(x',a')$ in this product, $$\|\Phi(x',a')-\Phi(x,a)\|_\infty\le\|\kappa\|_\infty\|a'-a\|_\infty+\|a\|_\infty\sup_{y\in\bar D}|\kappa(x',y)-\kappa(x,y)|.$$ The constants are finite by [F3]. Given $\eta>0$, uniform continuity of $\kappa$ on $\bar D'\times\bar D$ gives a positive $\delta_1$ making the second term less than $\eta/2$ when $|x'-x|<\delta_1$; choosing $\delta_2>0$ with $\|\kappa\|_\infty\delta_2<\eta/2$ bounds the first term whenever $\|a'-a\|_\infty<\delta_2$ (if $\|\kappa\|_\infty=0$, that term is zero). Thus $\Phi$ is continuous for the max product metric. The domain is compact by [F3], so [F4] makes its image $S$ compact. [given, F3, F4, algebra]
+
+1.2 Put $M=1+\sup_n\|Q_n\|+|D|>0$. For any $f,g\in C(\bar D)$, $$\left|Q_n(f)-\int_Df-Q_n(g)+\int_Dg\right|\le M\|f-g\|_\infty,$$ since $|\int_D(f-g)|\le |D|\|f-g\|_\infty$. [given, F2, algebra]
+
+2.1 Fix $\varepsilon>0$. Put $M=1+\sup_n\|Q_n\|+|D|>0$. By [F1] and step 1.1, choose a finite $\varepsilon/(3M)$-net $f_1,\dots,f_J$ for $S$. For each $j$, [F2] gives an index $n_j$ such that $|Q_n(f_j)-\int_Df_j|<\varepsilon/3$ whenever $n\ge n_j$. [step 1.1, F1, F2, choose]
+
+3.1 Let $n\ge\max_j n_j$ and $f\in S$. Choose $j$ with $\|f-f_j\|_\infty<\varepsilon/(3M)$. By [step 1.2] and the bound from [step 2.1], $$|Q_n(f)-\int_Df|\le M\|f-f_j\|_\infty+|Q_n(f_j)-\int_Df_j|+M\|f_j-f\|_\infty<\varepsilon.$$ Every $f\in S$ has this bound, so taking the supremum over $a\in K$ and $x\in\bar D'$ proves the assertion. [step 1.2, step 2.1, algebra] ∎
+
+
+===== lem-pinn-cell-occupancy-controls-uniform-residual =====
+
+
+## Statement
+
+Let $X\subset\mathbb R^D$ carry a probability measure $\mu$, let $s,c>0$, and fix an integer $m\ge1$. Put $\ell=(c\sqrt m)^{-1/s}$. Suppose a specified finite measurable partition $X_1,\ldots,X_K$ of $X$ has each cell contained in a cube of side $\ell$ and of mass at least $c\ell^s$. Let $Y_1,\ldots,Y_m$ be independent points of law $\mu$, and put $\delta=\sqrt D\ell$. With probability at least $\max\{0,1-\sqrt m\exp(-\sqrt m/8)\}$ every cell contains at least $\sqrt m/2$ samples, counted with multiplicity. On this event, simultaneously for all real functions $v,g$ with finite $\alpha$-Hölder seminorms on $X$,
+$$\|v-g\|_{\infty;X}^2\le6\sqrt m\left(\frac1m\sum_{i=1}^m|v(Y_i)-g(Y_i)|^2\right)+3\delta^{2\alpha}([v]_{\alpha;X}^2+[g]_{\alpha;X}^2).$$
+No independence between the functions and the samples is required.
+
+## Statement references
+
+[[def-independent-random-elements]]
+
+[Shin et al., Appendix B: the underlying cell construction](https://arxiv.org/pdf/2004.01806)
+
+## Facts & Assumptions
+
+**Given:** The specified partition, iid samples, and functions in the Statement.
+
+[F1] A probability measure assigns total mass one; independence gives product probabilities for finite sample tuples ([[def-probability-measure]], [[def-independent-random-elements]]).
+
+[F2] The probability of a finite union of events is bounded by the sum of their probabilities ([[thm-finite-and-countable-subadditivity-of-measures]]).
+
+## Proof
+
+1.1 Write $p_j=\mu(X_j)$ and $N_j=\sum_{i=1}^m\mathbf1_{\{Y_i\in X_j\}}$. Since $p_j\ge c\ell^s=m^{-1/2}$ and $\sum_jp_j=1$, we have $K\le\sqrt m$. Independence gives $\mathbb E e^{-N_j/2}=(1-p_j+p_je^{-1/2})^m\le\exp(-mp_j(1-e^{-1/2}))$. For a nonnegative random variable $Z$, $a\mathbb P(Z>a)\le\mathbb E Z$, by integrating $Z\ge a\mathbf1_{Z>a}$. Apply this with $Z=e^{-N_j/2}$ and $a=e^{-mp_j/4}$ to get $\mathbb P(N_j<mp_j/2)\le\exp(mp_j/4-mp_j(1-e^{-1/2}))\le e^{-mp_j/8}$. Here $e^{1/2}\ge1+1/2+1/8=13/8>8/5$ implies $e^{-1/2}<5/8$, and $1-x\le e^{-x}$ follows by differentiating $e^{-x}-1+x$. [given, F1, algebra]
+
+2.1 The event $N_j<\sqrt m/2$ is contained in $N_j<mp_j/2$. By step 1.1 and [F2], its union over cells has probability at most $K e^{-\sqrt m/8}\le\sqrt m e^{-\sqrt m/8}$. This proves the probability assertion, with the trivial lower bound zero when necessary. [step 1.1, F2, algebra]
+
+3.1 On the complementary event fix $x\in X_j$. Every sample $Y_i\in X_j$ is within $\delta$ of $x$. The three-term square inequality gives $|v(x)-g(x)|^2\le3|v(Y_i)-g(Y_i)|^2+3\delta^{2\alpha}([v]_{\alpha;X}^2+[g]_{\alpha;X}^2)$. Average over the $N_j\ge\sqrt m/2$ samples in this cell. Its first term is at most $(3/N_j)\sum_{i=1}^m|v(Y_i)-g(Y_i)|^2\le6\sqrt m\,m^{-1}\sum_i|v(Y_i)-g(Y_i)|^2$. Taking the supremum over $x$ proves the inequality. This is a deterministic inequality on the occupancy event, so it holds for sample-dependent trial functions as well. [step 2.1, algebra] ∎
+
+
+===== lem-pinn-random-samples-are-space-filling =====
+
+
+## Statement
+
+Let $d\ge1$, $s>0$, and let $X\subset\mathbb R^d$ carry a probability measure $\mu$. Fix an integer $m\ge1$ and $c>0$, and put $\varepsilon=(c\sqrt m)^{-1/s}$. Suppose there is a finite measurable partition $X_1,\ldots,X_K$ of $X$ at this particular scale such that each cell lies in a cube of side $\varepsilon$ and $\mu(X_j)\ge c\varepsilon^s$. Let $Y_1,\ldots,Y_m$ be independent random points each with law $\mu$. Then with probability at least
+$$1-\sqrt m\left(1-\frac1{\sqrt m}\right)^m$$
+every point of $X$ lies within Euclidean distance $\sqrt d\,c^{-1/s}m^{-1/(2s)}$ of at least one sample point. For an interior space of dimension $d$, use $s=d$; for a boundary space of Hausdorff dimension $d-1>0$, use $s=d-1$ and its own cell-mass constant. If $d=1$ and every boundary point is available deterministically, the boundary fill distance is zero and no random boundary sample is needed.
+
+## Statement references
+[[def-probability-measure|probability measure]]
+
+[[def-independent-random-elements|independent random elements]]
+
+[Shin et al., Appendix B, Lemma B.2: probabilistic space-filling estimate](https://arxiv.org/pdf/2004.01806)
+
+[Shin et al., Appendix B, proof of Lemma B.2](https://arxiv.org/pdf/2004.01806)
+
+## Facts & Assumptions
+
+**Given:** The finite partition at the selected scale, its cell-mass lower bound, and $m$ independent samples with common law $\mu$.
+
+[F1] A probability measure is finitely subadditive, so the probability of a finite union of missed-cell events is at most the sum of their probabilities ([[def-measure]], [[thm-finite-and-countable-subadditivity-of-measures]]).
+
+[F2] Independent random elements with common law $\mu$ have product law on each finite tuple; hence the probability that all $m$ samples miss a cell of measure $p_j$ is $(1-p_j)^m$ ([[def-independent-random-elements]]).
+
+[F3] Countable additivity, applied to the finite disjoint partition followed by empty sets, makes the cell measures sum to the measure of the whole space ([[def-measure]]).
+
+## Proof
+
+**Proof strategy:** coupon-collector union bound.
+
+1.1 The cell measures sum to one by [F3], and each is at least $c\varepsilon^s=1/\sqrt m$. Therefore the number of cells is at most $\sqrt m$. [given, F3, algebra]
+
+1.2 A fixed cell of mass $p_j\ge c\varepsilon^s=1/\sqrt m$ is missed by all $m$ independent samples with probability $(1-p_j)^m\le(1-1/\sqrt m)^m$ by [F2]. By [F1], the probability that at least one cell is missed is at most $\sqrt m(1-1/\sqrt m)^m$. [given, F1, F2, algebra]
+
+2.1 On the complementary event, every cell contains a sample. Since each cell lies in a cube of side $\varepsilon$, any point of the cell is within the cube's Euclidean diameter $\sqrt d\varepsilon$ of a sample in that same cell. Substituting $\varepsilon=(c\sqrt m)^{-1/s}$ gives the stated fill radius and probability. [step 1.1, step 1.2, algebra] ∎
+
+## Remarks
+
+It suffices to assume the partitions exist for $0<\varepsilon\le\varepsilon_0$ and then restrict to $m\ge\max\{1,c^{-2}\varepsilon_0^{-2s}\}$. Indeed, this is exactly the condition $(c\sqrt m)^{-1/s}\le\varepsilon_0$. For upper ball-mass bounds used at the fill radius, also require $\sqrt D(c\sqrt m)^{-1/s}\le\rho_0$ if their range is $0<\rho\le\rho_0$. The normalized Appendix B mass is $c\varepsilon^s=1/\sqrt m$, so its failure probability is $\sqrt m(1-1/\sqrt m)^m$, independently of $c$. If one deliberately chooses $0<c\le1$, this is no larger than $\sqrt m(1-c/\sqrt m)^m$, recovering the weaker later printed probability with those same chosen constants. Replacing a lower-mass constant by a smaller one is valid, but all radii, $C_m$, and regularization thresholds must then use the new constant. No such replacement is made implicitly.

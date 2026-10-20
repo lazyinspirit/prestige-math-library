@@ -11,6 +11,7 @@ provenance:
 deps: [def-product-measure-on-sigma-finite-spaces, thm-iterated-section-measures-agree-on-product-measurable-sets, def-measure, def-pi-system, thm-measure-uniqueness-on-a-sigma-finite-pi-system, def-finite-sigma-finite-and-semifinite-measures, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, def-integral-of-a-nonnegative-simple-function, def-product-sigma-algebra-and-finite-product-sigma-algebras]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.json
   precheck: pass
   verified:
     model: gpt-6-sol
@@ -32,7 +33,7 @@ Let $(X,\mathcal A,\mu)$ and $(Y,\mathcal B,\nu)$ be sigma-finite measure
 spaces. Then:
 
 1. the set function $E \mapsto (\mu \times \nu)(E)$ of
-   [[def-product-measure-on-sigma-finite-spaces]] is a measure on
+   The product measure of two sigma-finite measure spaces is a measure on
    $\mathcal A \otimes \mathcal B$;
 2. for measurable rectangles,
    $$(\mu \times \nu)(A \times B)=\mu(A)\nu(B),$$
@@ -40,6 +41,10 @@ spaces. Then:
 3. the measure $\mu \times \nu$ is sigma-finite; and
 4. it is the unique measure on $\mathcal A \otimes \mathcal B$ with the
    rectangle formula.
+
+## Statement references
+
+[[def-product-measure-on-sigma-finite-spaces]]
 
 ## Facts & Assumptions
 

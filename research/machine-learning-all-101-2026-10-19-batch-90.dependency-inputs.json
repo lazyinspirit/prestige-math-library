@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "90",
+  "pair": "constrained-mdps-and-policy-safety",
+  "batch_dependency_level": 3,
+  "batch_requires": [
+    "84"
+  ],
+  "dispatch_scheduling_input_sha256": "74d4573d68351da6ae4ed6705dbe9a797c784dc438dbdbbf50f6aae6c7409b8d",
+  "observed_dependency_levels_artifact_input_sha256": "53bf69605352dd598c8eac43b9c78ca4ac25aedae1face6e1d00fcc4fb203bc4",
+  "scheduling_hash_conflict": true,
+  "item_dependency_levels": {
+    "lem-finite-action-average-tv-controlled-by-kl": 0,
+    "def-constrained-markov-decision-process": 1,
+    "def-normalized-discounted-state-occupancy": 2,
+    "def-discounted-cost-constraint": 2,
+    "lem-normalized-discounted-state-occupancy-is-probability": 3,
+    "def-discounted-value-and-advantage-functions": 4,
+    "lem-discounted-occupancy-change-bounded-by-average-tv": 4,
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline": 4,
+    "thm-policy-performance-bound-by-average-divergence": 5,
+    "alg-constrained-policy-optimization": 6,
+    "rem-cpo-implementation-is-approximate": 7,
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety": 3,
+    "ex-exact-trust-region-and-sampled-line-search-disagree": 7,
+    "ex-empirical-cost-satisfaction-can-miss-population-violation": 3
+  },
+  "required_external_pages": [
+    {
+      "page": "conditional-distributions-and-regular-conditional-probability",
+      "path": "library/probability/conditional-distributions-and-regular-conditional-probability.md",
+      "status": "published"
+    },
+    {
+      "page": "conditional-expectation",
+      "path": "library/probability/conditional-expectation.md",
+      "status": "published"
+    },
+    {
+      "page": "minimax-lower-bounds-and-information-theoretic-methods",
+      "path": "library/mathematical-statistics/minimax-lower-bounds-and-information-theoretic-methods.md",
+      "status": "published"
+    }
+  ],
+  "in_run_pair_suppliers": [
+    {
+      "batch": "80",
+      "page": "finite-mdps-and-bellman-operators",
+      "path": "library/machine-learning/finite-mdps-and-bellman-operators.md",
+      "status": "draft-ready-records-present; full-run snapshot pending",
+      "required_by": "constrained-mdps-and-policy-safety",
+      "item_level_dependencies": [
+        {
+          "consumer": "def-constrained-markov-decision-process",
+          "supplier": "def-finite-markov-decision-process"
+        },
+        {
+          "consumer": "def-discounted-cost-constraint",
+          "supplier": "lem-bounded-discounted-return-converges"
+        },
+        {
+          "consumer": "lem-normalized-discounted-state-occupancy-is-probability",
+          "supplier": "def-finite-markov-decision-process"
+        }
+      ],
+      "affected_claims": [
+        "def-constrained-markov-decision-process",
+        "def-normalized-discounted-state-occupancy",
+        "def-discounted-cost-constraint",
+        "lem-normalized-discounted-state-occupancy-is-probability",
+        "lem-discounted-occupancy-change-bounded-by-average-tv",
+        "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+        "thm-policy-performance-bound-by-average-divergence"
+      ],
+      "reason": "Inspected the actual finite-MDP definition and the bounded-return lemma statement/proof, and verified their current Step-1 ready records are present. The new direct batch-80 item edge is an ancestor of batch 84 in the current batch graph, so batch 90 remains at level 3. Current scheduling lists only batch 84; the direct batch-80 item edge and task/artifact hash mismatch require owner reconciliation. No full-run readiness is inferred."
+    },
+    {
+      "batch": "84",
+      "page": "policy-gradients-reinforce-and-actor-critic",
+      "path": "library/machine-learning/policy-gradients-reinforce-and-actor-critic.md",
+      "status": "draft-ready-record-present; full-run snapshot pending",
+      "required_by": "constrained-mdps-and-policy-safety",
+      "item_level_dependencies": [
+        {
+          "consumer": "alg-constrained-policy-optimization",
+          "supplier": "def-differentiable-stochastic-policy"
+        }
+      ],
+      "affected_claims": [
+        "alg-constrained-policy-optimization",
+        "rem-cpo-implementation-is-approximate",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ],
+      "reason": "Inspected the actual fixed-common-support differentiable-policy definition and its current Step-1 ready record. Also inspected the episodic policy-gradient theorem and explicitly do not use it for an infinite-horizon score-estimator claim; empirical advantage and gradient estimates are algorithm inputs. Full-run readiness reconciliation remains pending."
+    }
+  ]
+}

@@ -1,0 +1,1564 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ridgeless-minimum-norm-regression",
+    "lem-iid-uniform-fill-distance-rate",
+    "lem-ridgeless-risk-decomposition",
+    "lem-zero-signal-isotropic-risk-limit",
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+    "lem-isotropic-minimum-norm-risk-components",
+    "lem-dense-cube-polynomial-norming-and-reproduction",
+    "lem-gaussian-rbf-power-function-fill-distance-bound",
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes",
+    "ex-double-descent-in-neural-and-tree-models"
+  ],
+  "contracts": {
+    "def-ridgeless-minimum-norm-regression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, and let $b\\in\\mathbb F^m$. Then $A^+b$ is\na least-squares solution of $Ax=b$, and among all least-squares solutions it\nis the unique one of minimum Euclidean norm.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The existence-and-uniqueness theorem [F2] makes $X^+$ well-defined for this finite matrix; [F1] fixes the four equations that define it.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], this vector is exactly the unique minimum-norm least-squares solution, which verifies the equivalent characterization.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes positive matrix dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=0 and y=0, X^+y=0, the unique minimum-norm least-squares vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For the scalar matrix X=[a] with a nonzero, the definition gives the ordinary least-squares solution y/a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition permits rank-deficient X; uniqueness is supplied for every finite matrix by the cited theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no asymptotic parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional definition makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One-row underdetermined design",
+          "result": "For X=[1 1] and y=1, X^+y=(1/2,1/2), which has minimum Euclidean norm among all solutions u_1+u_2=1.",
+          "evidence": "Substitute the Moore--Penrose formula X^+=X^T/(XX^T)."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The definition is checked against the published pseudoinverse and least-squares interfaces. Independent native review and owner reconciliation remain open."
+      }
+    },
+    "lem-iid-uniform-fill-distance-rate": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$. **Assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then Lebesgue outer measure $\\lambda_n^*$\n([[def-lebesgue-outer-measure]]) is an outer measure on $\\mathbb{R}^n$\n([[def-outer-measure]]): it vanishes at $\\varnothing$, is monotone, and is\ncountably subadditive.\n\n**The agreement clause is a theorem of ZF and needs no choice principle:**\n$\\lambda_n^*(A) = \\mu_0(A)$ for every elementary set $A$\n([[def-elementary-set-in-rn]]), where $\\mu_0$ is elementary volume. In\nparticular $\\lambda_n^*(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\nand $\\lambda_n^*(\\varnothing) = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarathéodory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $n$ large enough that $t_n:=(n/(2\\log n))^{1/d}\\ge2$, put $m_n=\\lfloor t_n\\rfloor$ and partition each coordinate interval of $\\Omega$ into $m_n$ equal half-open intervals, closing the last interval at its right endpoint. This gives $m_n^d$ disjoint cells covering $\\Omega$. Each cell differs from a half-open box with the same coordinate bounds only on its boundary faces, which lie in finitely many coordinate hyperplanes. By [F4] those hyperplanes and every subset of their union are measurable and null, so each cell is measurable and has the same measure as that half-open box, namely $(L/m_n)^d$ by [F1]. The same argument for the boundary of $\\Omega$ gives $\\lambda_d(\\Omega)=L^d$. Hence normalized Lebesgue measure assigns each cell probability $(L/m_n)^d/L^d=m_n^{-d}$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For a fixed cell, independence [F3] gives probability $(1-m_n^{-d})^n\\le e^{-n/m_n^d}$ that it is empty. By [F2], the probability that some cell is empty is at most $m_n^d e^{-n/m_n^d}\\le n e^{-2\\log n}=1/n$, because $m_n^d\\le n/(2\\log n)$ and hence $n/m_n^d\\ge2\\log n$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "On the complementary event every cell contains a sample point. Every $x\\in\\Omega$ belongs to one cell, whose Euclidean diameter is $L\\sqrt d/m_n$; therefore $h_n\\le L\\sqrt d/m_n$. Since $t_n\\ge2$ implies $m_n=\\lfloor t_n\\rfloor\\ge t_n/2$, we obtain $$h_n\\le2L\\sqrt d\\left(\\frac{2\\log n}{n}\\right)^{1/d} =C_dL\\left(\\frac{\\log n}{n}\\right)^{1/d}.$$ The event has probability at least $1-1/n$ by step 2.1.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The estimate concerns n at least n_d, so an empty sample is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For finite n and positive-dimensional cube, h_n is positive; the bound is a positive upper bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The proof's m_n=floor(t_n) construction is stated for t_n at least 2 and includes every sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The cube is required to have positive side length and d is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result is a finite-n probability estimate and has no endpoint limit parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Countable Choice is stated and used only through the Lebesgue-volume supplier in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "One-dimensional equal-cell partition",
+          "result": "For d=1 and m cells, if all cells contain a point then every x is within L/m of one of the n sample points.",
+          "evidence": "The one-dimensional cell diameter is L/m, as used in step 3.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The finite-union and volume hypotheses are explicit. Independent native review remains open."
+      }
+    },
+    "lem-ridgeless-risk-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, and let\n$A\\in M_{m\\times n}(\\mathbb F)$. A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a\n**Moore--Penrose pseudoinverse** of $A$ when\n\n$$ABA=A,\\qquad BAB=B,$$\n\nand the two square products are self-adjoint:\n\n$$ (AB)^*=AB,\\qquad (BA)^*=BA. $$\n\nWhen such a matrix exists and is unique, it is denoted by $A^+$.\n\nThe four displayed relations are the **Penrose equations**. They are written in\nthe matrix product and adjoint conventions of\n[[def-matrix-product-and-identity-matrix]] and\n[[thm-matrix-of-the-adjoint-is-the-conjugate-transpose]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "For every matrix $A\\in M_{m\\times n}(\\mathbb F)$ over $\\mathbb F=\\mathbb R$ or\n$\\mathbb C$, there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$\nsatisfying the four Penrose equations of\n[[def-moore-penrose-pseudoinverse]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Write a rank-$q$ singular value decomposition $X=U_qD_qV_q^{\\mathsf T}$ with positive diagonal $D_q$. The four Penrose equations and uniqueness [F2] give $X^+=V_qD_q^{-1}U_q^{\\mathsf T}$, $I_p-X^+X=I_p-V_qV_q^{\\mathsf T}$, and $X^+(X^+)^{\\mathsf T}=V_qD_q^{-2}V_q^{\\mathsf T}=(X^{\\mathsf T}X)^+$; the last equality follows by checking the four equations for $X^{\\mathsf T}X=V_qD_q^2V_q^{\\mathsf T}$. The same decomposition gives $S^+=n(X^{\\mathsf T}X)^+$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For any fixed $v\\in\\mathbb R^p$, [A2] gives $\\mathbb E[(z_0^{\\mathsf T}v)^2\\mid X,\\varepsilon] =v^{\\mathsf T}I_pv=\\|v\\|_2^2$. Taking $v=\\widehat\\beta-\\beta$ and then expectation over $\\varepsilon$ reduces $\\mathcal R(X)$ to $\\mathbb E_\\varepsilon[\\|\\widehat\\beta-\\beta\\|_2^2\\mid X]$.",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Put $Q=I_p-X^+X$. From the definition of $\\widehat\\beta$, $\\widehat\\beta-\\beta=-Q\\beta+X^+\\varepsilon$. Expanding the squared norm, the cross term has conditional expectation zero by [A1], and the noise term is $$\\mathbb E_\\varepsilon[\\|X^+\\varepsilon\\|_2^2\\mid X] =\\sigma^2\\operatorname{tr}(X^+(X^+)^{\\mathsf T}) =\\sigma^2\\operatorname{tr}((X^{\\mathsf T}X)^+),$$ using step 1.1. Combining with step 1.2 and the scaling identity in step 1.1 proves the two displayed risk formulas.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n,p at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: For zero noise the variance term vanishes; for beta in ker X the bias term is ||beta||^2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=[a] with a nonzero, the identity reduces to risk sigma^2/a^2 when beta is identified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: For X=0, X^+=0 and the identity gives bias ||beta||^2 and zero variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a finite-dimensional identity with no asymptotic parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite SVD construction makes no arbitrary choice beyond a basis already supplied by the theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Rank-one coordinate design",
+          "result": "For X=[1 0], beta=(a,b), and noise variance sigma^2, the risk is b^2+sigma^2, matching the kernel projection and trace terms.",
+          "evidence": "Compute X^+X=diag(1,0) and (X^T X)^+=diag(1,0)."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The conditional moment assumptions and scaling convention are explicit. Independent native review remains open."
+      }
+    },
+    "lem-zero-signal-isotropic-risk-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of real random variables with mean zero, variance one and finite fourth moment. For each $n$, let $p_n$ be a positive integer with $p_n/n\\to\\gamma\\in(0,\\infty)\\setminus\\{1\\}$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le p_n}$ be the upper-left block. Let $\\beta_n\\in\\mathbb R^{p_n}$ be deterministic with $\\|\\beta_n\\|_2=r>0$. Let $\\varepsilon_n\\in\\mathbb R^n$ have independent centered components of variance $\\sigma^2$, independent of $X_n$ (so its covariance is $\\sigma^2I_n$), and let $z_{0,n}\\in\\mathbb R^{p_n}$ be independent of $(X_n,\\varepsilon_n)$ with mean zero and covariance  $I_{p_n}$. Set $y_n=X_n\\beta_n+\\varepsilon_n$, $\\widehat\\beta_n=X_n^+y_n$, and $S_n=X_n^{\\mathsf T}X_n/n$. Define the design-conditional prediction risk by $\\mathcal R_n=\\mathbb E_{\\varepsilon_n,z_{0,n}}[(z_{0,n}^{\\mathsf T}\\widehat\\beta_n-z_{0,n}^{\\mathsf T}\\beta_n)^2\\mid X_n]$. If $\\gamma<1$, then almost surely $\\mathcal R_n\\to\\sigma^2\\gamma/(1-\\gamma)$. If $\\gamma>1$, then almost surely $\\mathcal R_n\\to r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ridgeless-risk-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ and $\\beta\\in\\mathbb R^p$\nbe deterministic, and let $\\varepsilon\\in\\mathbb R^n$ and\n$z_0\\in\\mathbb R^p$ be independent of one another and of $X$, with\n$\\mathbb E\\varepsilon=0$, $\\operatorname{Cov}(\\varepsilon)=\\sigma^2I_n$,\n$\\mathbb Ez_0=0$, and $\\operatorname{Cov}(z_0)=I_p$. Set\n$y=X\\beta+\\varepsilon$, $\\widehat\\beta=X^+y$,\n$S=X^{\\mathsf T}X/n$, and\n$$\\mathcal R(X):=\\mathbb E_{\\varepsilon,z_0} \\left[(z_0^{\\mathsf T}(\\widehat\\beta-\\beta))^2\\mid X\\right].$$\nThen\n$$\\mathcal R(X)=\\|(I_p-X^+X)\\beta\\|_2^2+ \\sigma^2\\operatorname{tr}((X^{\\mathsf T}X)^+) =\\|(I_p-X^+X)\\beta\\|_2^2+ \\frac{\\sigma^2}{n}\\operatorname{tr}(S^+).$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For each $n$, let $e_{1,n}$ be the first standard basis vector in $\\mathbb R^{p_n}$. For $a\\in\\{1,2\\}$, let $\\mathcal R_n^{(a)}$ denote the conditional risk with signal $\\beta_n^{(a)}=a e_{1,n}$, and put $B_n=e_{1,n}^{\\mathsf T}(I-X_n^+X_n)e_{1,n}$ and $V_n=(\\sigma^2/n)\\operatorname{tr}(S_n^+)$.",
+          "inputs": [
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Applying [F2] to each auxiliary signal gives $\\mathcal R_n^{(1)}=B_n+V_n$ and $\\mathcal R_n^{(2)}=4B_n+V_n$. Applying [F1] with norms $1$ and $2$ gives almost-sure limits for both risks; the intersection of these two probability-one events still has probability one. The iid law is common in both applications by [F3].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The exact identities in step 2.1 give $V_n=(4\\mathcal R_n^{(1)}-\\mathcal R_n^{(2)})/3$. If $\\gamma<1$, both risk limits in [F1] equal $\\sigma^2\\gamma/(1-\\gamma)$, so $V_n$ tends to that quantity. If $\\gamma>1$, their limits are respectively $1-1/\\gamma+\\sigma^2/(\\gamma-1)$ and $4(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$; their indicated combination is $\\sigma^2/(\\gamma-1)$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For the zero signal in the Statement, [F2] identifies $\\mathcal R_n$ with the same $V_n$. Step 3.1 therefore gives both asserted limits.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes positive sample and feature dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The zero signal is the exact case proved by step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The auxiliary vectors e_1 and 2e_1 exist for every p_n at least one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When sigma=0, the variance term and asserted risk limits are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The claim excludes gamma=1 and states the two open branches separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Axiom of Choice is explicit in the statement and applied in step 2.1 through the supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Signal rescaling cancellation",
+          "result": "For R_1=B+V and R_2=4B+V, (4R_1-R_2)/3=V exactly.",
+          "evidence": "Expand the right-hand side using the two identities in step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The local scaling argument is complete. The transitive Marchenko–Pastur and positive-edge suppliers used inside the current corollary have stale owner-held Step 1 hashes, so this dependent lemma is escalated pending owner reconciliation."
+      }
+    },
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-isotropic-minimum-norm-risk-closure-under-edge-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid array of real random variables with mean zero, variance one and finite fourth moment. For each $n$, let $p_n$ be a positive integer with $p_n/n\\to\\gamma\\in(0,\\infty)\\setminus\\{1\\}$ and let $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le p_n}$ be the upper-left block. Let $\\beta_n\\in\\mathbb R^{p_n}$ be deterministic with $\\|\\beta_n\\|_2=r>0$. Let $\\varepsilon_n\\in\\mathbb R^n$ have independent centered components of variance $\\sigma^2$, independent of $X_n$ (so its covariance is $\\sigma^2I_n$), and let $z_{0,n}\\in\\mathbb R^{p_n}$ be independent of $(X_n,\\varepsilon_n)$ with mean zero and covariance  $I_{p_n}$. Set $y_n=X_n\\beta_n+\\varepsilon_n$, $\\widehat\\beta_n=X_n^+y_n$, and $S_n=X_n^{\\mathsf T}X_n/n$. Define the design-conditional prediction risk by $\\mathcal R_n=\\mathbb E_{\\varepsilon_n,z_{0,n}}[(z_{0,n}^{\\mathsf T}\\widehat\\beta_n-z_{0,n}^{\\mathsf T}\\beta_n)^2\\mid X_n]$. If $\\gamma<1$, then almost surely $\\mathcal R_n\\to\\sigma^2\\gamma/(1-\\gamma)$. If $\\gamma>1$, then almost surely $\\mathcal R_n\\to r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-zero-signal-isotropic-risk-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid\narray of real random variables with mean zero, variance one, and finite fourth\nmoment. Let $p_n\\ge1$ with $p_n/n\\to\\gamma\\in(0,\\infty)\\setminus\\{1\\}$, and\nlet $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le p_n}$ be its upper-left block.\nLet $\\varepsilon_n$ have independent centered components of variance\n$\\sigma^2$, independent of $X_n$, and let $z_{0,n}$ be independent of\n$(X_n,\\varepsilon_n)$, centered, and have covariance $I_{p_n}$. Set\n$S_n=X_n^{\\mathsf T}X_n/n$, $y_n=\\varepsilon_n$,\n$\\widehat\\beta_n=X_n^+y_n$, and\n$$\\mathcal R_n:=\\mathbb E_{\\varepsilon_n,z_{0,n}} \\left[(z_{0,n}^{\\mathsf T}\\widehat\\beta_n)^2\\mid X_n\\right].$$\nThen almost surely\n$$\\mathcal R_n\\longrightarrow \\begin{cases} \\displaystyle\\frac{\\sigma^2\\gamma}{1-\\gamma},&0<\\gamma<1,\\\\[5pt] \\displaystyle\\frac{\\sigma^2}{\\gamma-1},&\\gamma>1. \\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ridgeless-minimum-norm-regression",
+          "source_section": "Definition",
+          "quote": "For positive integers $n,p$, a real design matrix $X\\in\\mathbb R^{n\\times p}$,\nand a response vector $y\\in\\mathbb R^n$, the **ridgeless minimum-norm\nleast-squares estimator** is\n\n$$\\widehat\\beta:=X^+y.$$\n\nEquivalently, it is the unique vector of smallest Euclidean norm among all\nminimisers of $u\\mapsto\\|Xu-y\\|_2^2$. The word *ridgeless* means that this\nleast-squares objective has no added positive quadratic penalty\n$\\lambda\\|u\\|_2^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $r>0$, the design, signal, noise, and test-feature hypotheses in the Statement are exactly those of [F1]; [F4] fixes the iid convention and [A1] supplies its choice assumption, so the two limits apply.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "If $r=0$, then $\\beta_n=0$ for every $n$, and [F2] gives the limits in the Statement under [A1] and the iid convention [F4].",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Since $r\\ge0$, the cases in steps 1.1 and 1.2 exhaust the signal norms. The estimator and conditional risk are those defined in [F3], so the resulting limits are precisely the displayed formula.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The design has n and p_n at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The zero-signal branch is covered by step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The only square aspect-ratio endpoint gamma=1 is explicitly excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The formulas permit sigma=0; the variance terms then vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The two limits are asserted only for gamma<1 and gamma>1, with gamma=1 expressly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Axiom of Choice is stated and cited in both case applications."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Zero-noise underparameterized branch",
+          "result": "When sigma=0 and gamma<1 the theorem's limit is zero, consistent with exact noiseless least-squares recovery at eventual full column rank.",
+          "evidence": "Set sigma=0 in the displayed branch and use the positive-edge hypothesis in the supplier."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The r>0 supplier is current, but the zero-signal case depends transitively on the corollary's Marchenko–Pastur and positive-edge items, whose owner-held Step 1 hashes are stale. Escalated pending owner reconciliation."
+      }
+    },
+    "lem-isotropic-minimum-norm-risk-components": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ridgeless-risk-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ and $\\beta\\in\\mathbb R^p$\nbe deterministic, and let $\\varepsilon\\in\\mathbb R^n$ and\n$z_0\\in\\mathbb R^p$ be independent of one another and of $X$, with\n$\\mathbb E\\varepsilon=0$, $\\operatorname{Cov}(\\varepsilon)=\\sigma^2I_n$,\n$\\mathbb Ez_0=0$, and $\\operatorname{Cov}(z_0)=I_p$. Set\n$y=X\\beta+\\varepsilon$, $\\widehat\\beta=X^+y$,\n$S=X^{\\mathsf T}X/n$, and\n$$\\mathcal R(X):=\\mathbb E_{\\varepsilon,z_0} \\left[(z_0^{\\mathsf T}(\\widehat\\beta-\\beta))^2\\mid X\\right].$$\nThen\n$$\\mathcal R(X)=\\|(I_p-X^+X)\\beta\\|_2^2+ \\sigma^2\\operatorname{tr}((X^{\\mathsf T}X)^+) =\\|(I_p-X^+X)\\beta\\|_2^2+ \\frac{\\sigma^2}{n}\\operatorname{tr}(S^+).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-zero-signal-isotropic-risk-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid\narray of real random variables with mean zero, variance one, and finite fourth\nmoment. Let $p_n\\ge1$ with $p_n/n\\to\\gamma\\in(0,\\infty)\\setminus\\{1\\}$, and\nlet $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le p_n}$ be its upper-left block.\nLet $\\varepsilon_n$ have independent centered components of variance\n$\\sigma^2$, independent of $X_n$, and let $z_{0,n}$ be independent of\n$(X_n,\\varepsilon_n)$, centered, and have covariance $I_{p_n}$. Set\n$S_n=X_n^{\\mathsf T}X_n/n$, $y_n=\\varepsilon_n$,\n$\\widehat\\beta_n=X_n^+y_n$, and\n$$\\mathcal R_n:=\\mathbb E_{\\varepsilon_n,z_{0,n}} \\left[(z_{0,n}^{\\mathsf T}\\widehat\\beta_n)^2\\mid X_n\\right].$$\nThen almost surely\n$$\\mathcal R_n\\longrightarrow \\begin{cases} \\displaystyle\\frac{\\sigma^2\\gamma}{1-\\gamma},&0<\\gamma<1,\\\\[5pt] \\displaystyle\\frac{\\sigma^2}{\\gamma-1},&\\gamma>1. \\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(\\xi_{ij})_{i,j\\ge1}$ be one infinite iid\narray of real random variables with mean zero, variance one, and finite fourth\nmoment. Let $p_n\\ge1$ with $p_n/n\\to\\gamma\\in(0,\\infty)\\setminus\\{1\\}$, and\nlet $X_n=(\\xi_{ij})_{1\\le i\\le n,\\,1\\le j\\le p_n}$ be its upper-left block.\nLet $\\beta_n\\in\\mathbb R^{p_n}$ be deterministic with\n$\\|\\beta_n\\|_2=r$ for a fixed $r\\ge0$. Let $\\varepsilon_n$ have independent\ncentered components of variance $\\sigma^2$, independent of $X_n$, and let\n$z_{0,n}$ be independent of $(X_n,\\varepsilon_n)$, centered, and have\ncovariance $I_{p_n}$. Set $y_n=X_n\\beta_n+\\varepsilon_n$,\n$\\widehat\\beta_n=X_n^+y_n$, and define the design-conditional prediction risk\n$$\\mathcal R_n:=\\mathbb E_{\\varepsilon_n,z_{0,n}} \\left[(z_{0,n}^{\\mathsf T}(\\widehat\\beta_n-\\beta_n))^2\\mid X_n\\right].$$\nThen almost surely\n$$\\mathcal R_n\\longrightarrow \\begin{cases} \\displaystyle\\frac{\\sigma^2\\gamma}{1-\\gamma},&0<\\gamma<1,\\\\[5pt] \\displaystyle r^2\\left(1-\\frac1\\gamma\\right)+\\frac{\\sigma^2}{\\gamma-1},&\\gamma>1. \\end{cases}$$\nThis result gives no limit assertion for sequences with $p_n/n\\to1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1], for every $n$ the risk decomposes exactly as $\\mathcal R_n=B_n+V_n$. For the zero signal the bias term is zero, so the zero-signal risk is exactly this same design-dependent $V_n$; [F2] therefore gives the almost-sure limits of $V_n$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If $\\gamma<1$, [F3] and [F2] give the same limit for $\\mathcal R_n$ and $V_n$, so their difference $B_n$ tends to zero. If $\\gamma>1$, subtracting $\\sigma^2/(\\gamma-1)$, the limit of $V_n$ in [F2], from the total-risk limit in [F3] leaves $r^2(1-1/\\gamma)$ for $B_n$. The probability-one events in [F2] and [F3] may be intersected.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The underlying model assumes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: When r=0, the bias limit in both branches is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Aspect ratio gamma=1 is excluded by the supplier statements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When sigma=0, the variance limit is zero; the bias formula remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The two open aspect-ratio branches are treated separately in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This subtraction lemma adds no choice use beyond its suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Bias plus variance",
+          "result": "For every n the exact identity R_n=B_n+V_n is preserved before taking limits.",
+          "evidence": "This is precisely the equality supplied by the risk decomposition in step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The subtraction proof is complete conditional on its inputs. Those inputs include the escalated zero-signal and total-risk items, so this lemma is escalated."
+      }
+    },
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-gaussian-radial-kernel",
+          "source_section": "Example",
+          "quote": "For $p\\ge1$ and $\\sigma>0$, the Gaussian radial kernel on $\\mathbb R^p$ is $k_\\sigma(x,z)=\\exp(-\\|x-z\\|_2^2/(2\\sigma^2))$. It is a real positive semidefinite kernel, including on finite samples with repeated points or a singular Gram matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-canonical-rkhs-construction-and-reproducing-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every set $X$ and every real positive semidefinite kernel $k$ on $X$, the canonical construction from finitely supported coefficients, quotient by zero seminorm, and norm completion defines a real reproducing kernel Hilbert space $\\mathcal H_k$. For every $x\\in X$, its kernel section $k_x=k(\\cdot,x)$ belongs to $\\mathcal H_k$ and satisfies $\\langle h,k_x\\rangle_{\\mathcal H_k}=h(x)$ for all $h\\in\\mathcal H_k$. The choice assumption here is countable choice; this statement does not assert the same construction in ZF without that assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. The canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-rbf-power-function-fill-distance-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, let $\\Omega\\subset\\mathbb R^d$ be a fixed closed cube with\npositive side length, let $\\sigma>0$, and set\n$k_\\sigma(x,z)=\\exp(-\\|x-z\\|_2^2/(2\\sigma^2))$ on $\\Omega$. Let\n$\\mathcal H_\\sigma$ be its real reproducing-kernel Hilbert space. For a finite\nnonempty set $X=\\{x_1,\\ldots,x_m\\}\\subset\\Omega$, define its Euclidean fill\ndistance and Gaussian power function by\n$$h_X:=\\sup_{x\\in\\Omega}\\min_{1\\le j\\le m}\\|x-x_j\\|_2,\\qquad P_X(x):=\\inf_{v\\in\\operatorname{span}\\{k_\\sigma(\\cdot,x_j):1\\le j\\le m\\}} \\|k_\\sigma(\\cdot,x)-v\\|_{\\mathcal H_\\sigma}.$$\nThere are constants $C,c,h_0>0$, depending only on $d,\\Omega,\\sigma$, such\nthat every such $X$ with $0<h_X\\le h_0$ satisfies\n$$\\sup_{x\\in\\Omega}P_X(x)\\le C\\exp\\!\\left(-c\\frac{|\\log h_X|}{h_X}\\right).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-iid-uniform-fill-distance-rate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, let\n$\\Omega=\\prod_{j=1}^d[a_j,a_j+L]$ be a closed cube with\n$L>0$, and let $U_1,U_2,\\ldots$ be independent random vectors, each distributed\naccording to normalized Lebesgue measure on $\\Omega$. For $n\\ge1$, define the\nEuclidean fill distance\n\n$$h_n:=\\sup_{x\\in\\Omega}\\min_{1\\le i\\le n}\\|x-U_i\\|_2.$$\n\nThere are constants $C_d=2\\sqrt d\\,2^{1/d}$ and $n_d$ such that, for every\n$n\\ge n_d$,\n\n$$\\mathbb P\\!\\left\\{h_n\\le C_dL\\left(\\frac{\\log n}{n}\\right)^{1/d}\\right\\} \\ge1-\\frac1n.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a real inner-product space, let $M\\subseteq E$ be a finite-dimensional subspace, and let $f\\in E$. There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$, and it satisfies $\\|p\\|\\le\\|f\\|$. The conclusion does not require $E$ to be complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [A1], [F1], and [F2], the Gaussian kernel has the real RKHS used in the Statement, with evaluation property [F3]. Let $X_n=\\{x_1,\\ldots,x_n\\}$ and $V_n=\\operatorname{span}\\{k_\\sigma(\\cdot,x_i):1\\le i\\le n\\}$. For any interpolant $h$, put $g=h-h^*$. Then $g(x_i)=0$, so [F3] gives $\\langle g,k_\\sigma(\\cdot,x_i)\\rangle=0$ for each $i$ and hence $g\\perp V_n$. By [F6] the projection $\\Pi_{V_n}$ exists; therefore $$g(x)=\\langle g,k_\\sigma(\\cdot,x)\\rangle =\\langle g,k_\\sigma(\\cdot,x)-\\Pi_{V_n}k_\\sigma(\\cdot,x)\\rangle.$$ The inner-product Cauchy--Schwarz inequality follows by expanding $\\|u-tv\\|^2\\ge0$ and minimizing over real $t$ (with the zero-vector case immediate). Thus $|g(x)|\\le\\|g\\|_{\\mathcal H_\\sigma}P_{X_n}(x)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The triangle inequality gives $\\|g\\|_{\\mathcal H_\\sigma}\\le\\|h\\|_{\\mathcal H_\\sigma}+\\|h^*\\|_{\\mathcal H_\\sigma}$. Taking the supremum in step 1.1 yields $$\\sup_{x\\in\\Omega}|h(x)-h^*(x)|\\le (\\|h\\|_{\\mathcal H_\\sigma}+\\|h^*\\|_{\\mathcal H_\\sigma}) \\sup_{x\\in\\Omega}P_{X_n}(x).$$",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Write $\\Omega=v+Q[0,L]^d$ using its side length $L>0$ and an orthogonal matrix $Q$, and put $u_i=Q^{\\mathsf T}(x_i-v)$. The affine map $F(u)=v+Qu$ bijects the product cube $C_0=[0,L]^d$ onto $\\Omega$. For every Borel $E\\subseteq C_0$, [F7] gives $\\mathbb P(u_i\\in E)=\\lambda_d(F(E))/\\lambda_d(\\Omega)=|\\det Q|\\lambda_d(E)/(|\\det Q|\\lambda_d(C_0))=\\lambda_d(E)/\\lambda_d(C_0)$. The transformed samples remain independent: for finitely many Borel sets $E_i\\subseteq C_0$, their joint event is $\\bigcap_i\\{x_i\\in F(E_i)\\}$, and independence of the $x_i$ makes its probability the product of the individual probabilities. These events are measurable since $F$ is a homeomorphism. Also $\\|F(u)-F(w)\\|_2=\\|u-w\\|_2$, so the fill distance of $\\{u_1,\\ldots,u_n\\}$ in $C_0$ equals $h_{X_n}$ in $\\Omega$. By [F5], on an event of probability at least $1-1/n$, the fill distance $h_{X_n}$ is at most $\\bar h_n=C_dL(\\log n/n)^{1/d}$. For all sufficiently large $n$, $\\bar h_n<\\min(h_0,e^{-1})$; the function $u\\mapsto|\\log u|/u$ is decreasing on $(0,e^{-1}]$, so [F4] applies and gives $$\\sup_xP_{X_n}(x)\\le C\\exp\\!\\left(-c\\frac{|\\log h_{X_n}|}{h_{X_n}}\\right) \\le C\\exp\\!\\left(-\\frac{c}{\\bar h_n}\\right) =C\\exp\\!\\left(-\\frac{c}{C_dL}\\left(\\frac{n}{\\log n}\\right)^{1/d}\\right).$$ Using this bound in step 2.1 proves the displayed estimate with $A=C$ and $B=c/(C_dL)$, uniformly for every interpolant on that event.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample size is n at least n_0, with n_0 chosen at least n_d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: At every interpolation site g(x_i)=0, so the pointwise bound in step 1.1 has both sides zero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: For one interpolation site, step 1.1 still gives zero error at that site; the global rate uses sufficiently large n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: If h=h^*, the error is identically zero, consistent with the claimed inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof of the required Gaussian power estimate remains unresolved, so endpoint cases of that estimate are not accepted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: Countable Choice is explicit and used in step 1.1 to invoke the canonical RKHS construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Interpolation-site error",
+          "result": "For every i, h(x_i)-h^*(x_i)=0 by the interpolation hypothesis.",
+          "evidence": "Apply the reproducing identity in step 1.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The Hilbert-space projection and random fill-distance reductions are written out. The Belkin route cites Wendland (2004), Theorem 11.22; the Rieger compact-cube route relies on Madych and Nelson (1992), Lemma 1, without reproducing its proof, while its separate general-domain route cites Wendland (2001). This Gaussian power-function supplier is escalated and is not ready."
+      }
+    },
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-isotropic-minimum-norm-risk-components",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation of the isotropic ridgeless risk theorem, put\n$S_n=X_n^{\\mathsf T}X_n/n$,\n$$B_n:=\\|(I_{p_n}-X_n^+X_n)\\beta_n\\|_2^2,\\qquad V_n:=\\frac{\\sigma^2}{n}\\operatorname{tr}(S_n^+).$$\nThen almost surely, if $0<\\gamma<1$,\n$$B_n\\longrightarrow0,\\qquad V_n\\longrightarrow\\frac{\\sigma^2\\gamma}{1-\\gamma},$$\nand if $\\gamma>1$,\n$$B_n\\longrightarrow r^2\\left(1-\\frac1\\gamma\\right),\\qquad V_n\\longrightarrow\\frac{\\sigma^2}{\\gamma-1}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Summing the two components in [F1] gives the total risk $R(\\gamma)=\\sigma^2\\gamma/(1-\\gamma)$ for $0<\\gamma<1$ and $R(\\gamma)=r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$ for $\\gamma>1$. Differentiating the first expression gives $R'(\\gamma)=\\sigma^2/(1-\\gamma)^2$, so it is strictly increasing for $\\sigma>0$ and is identically zero for $\\sigma=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For $\\gamma>1$, $$R'(\\gamma)=\\frac{r^2}{\\gamma^2}-\\frac{\\sigma^2}{(\\gamma-1)^2}.$$ If $\\sigma>0$ and $r\\le\\sigma$, then $r/\\gamma\\le\\sigma/\\gamma<\\sigma/(\\gamma-1)$, so $R'<0$. If $r>\\sigma>0$, the derivative vanishes exactly when $r(\\gamma-1)=\\sigma\\gamma$, namely at $\\gamma_*=r/(r-\\sigma)>1$; it is negative before this point and positive after it, giving the unique minimum. If $\\sigma=0$, the derivative is $r^2/\\gamma^2$, which is positive for $r>0$ and zero for $r=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The limits at $\\gamma\\downarrow0$, $\\gamma\\uparrow1$, and $\\gamma\\to\\infty$ follow directly from the formulas in [F1]. In particular, the singular terms at $\\gamma=1$ vanish when $\\sigma=0$ and diverge when $\\sigma>0$. For $\\sigma>0$ every finite-domain risk value is positive while the underparameterized branch tends to zero as $\\gamma\\downarrow0$, proving that its global infimum is $0$ and is not attained. When $\\sigma=0$, the underparameterized branch equals $0$ identically.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes a positive aspect ratio."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The cases r=0 and sigma=0 are stated separately in the risk-curve description."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The formulas exclude gamma=1 and only give one-sided limits there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: When r=sigma=0 the risk is zero on both branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement boundary: The limits as gamma decreases to zero, approaches one, and tends to infinity are computed in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example is scalar calculus applied to already established risk limits."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Interior risk minimum",
+          "result": "For r=2 and sigma=1, gamma_*=2 and R(2)=3; the derivative is negative for 1<gamma<2 and positive for gamma>2.",
+          "evidence": "Substitute r=2 and sigma=1 into step 1.2."
+        },
+        {
+          "check": "Noise-free boundary",
+          "result": "For sigma=0 and r=1, the underparameterized risk is 0 and the overparameterized risk is 1-1/gamma>0.",
+          "evidence": "Substitute sigma=0 and r=1 into the two displayed branches."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "The derivative and endpoint arguments are complete conditional on the component lemma. That lemma is escalated because its upstream RMT proof suppliers have stale owner-held Step 1 hashes."
+      }
+    },
+    "ex-double-descent-in-neural-and-tree-models": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The Figure 2 description gives $n=10^4$, ten classes, and the threshold $N=n=10^4$; these are the random-feature quantities stated in the Example.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The Figure 4 description gives $n=4\\cdot10^3$, input dimension $784$, ten outputs, and threshold observed at $nK$ parameters. The Figure 5 description gives $n=10^4$ and indexes forest complexity by maximum leaves and tree count.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The source reports experiments for those specified datasets and model families, so the Example is an empirical report with those qualifications; it does not claim a theorem for models beyond the experiments.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example reports nonempty finite datasets."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-sized dataset or zero-risk theorem is claimed."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not assert a single-sample boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example reports the source's specified datasets and models."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No asymptotic endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The experimental report makes no choice-principle claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Experiment dimensions",
+          "result": "The example's sample counts, input dimension, class count, and capacity indices match Figures 2, 4, and 5 of the full paper.",
+          "evidence": "The figure captions and experiment descriptions are transcribed in the source-coverage record."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "open",
+        "notes": "This is a source-qualified empirical report, not a theorem. Independent source and statement review remain open."
+      }
+    },
+    "lem-dense-cube-polynomial-norming-and-reproduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "We first prove that for every real univariate polynomial $r$ of degree at most $N\\ge1$, $$|r'(u)|\\le\\frac{100N}{\\sqrt{1-u^2}}\\sup_{-1\\le v\\le1}|r(v)|\\qquad(-1<u<1).$$ For $m\\ge1$ define the finite trigonometric polynomial $$F_m(t)=\\sum_{|k|<m}(1-|k|/m)e^{ikt}=\\frac1m\\left|\\sum_{j=0}^{m-1}e^{ijt}\\right|^2=\\frac{\\sin^2(mt/2)}{m\\sin^2(t/2)}.$$ Here $i^2=-1$; the square identity follows by expanding the finite sum and counting pairs of indices with a prescribed difference, and the last identity follows from the finite geometric series, with continuous values at multiples of $2\\pi$. For $|t|\\le1/m$, differentiate the finite Fourier sum to obtain $|F'_m(t)|\\le\\sum_{|k|<m}|k|(1-|k|/m)\\le m^2$. For $1/m\\le|t|\\le\\pi$, differentiating the sine quotient gives $$|F'_m(t)|\\le\\frac{\\pi^2}{t^2}+\\frac{\\pi^3}{m|t|^3},$$ because $|\\sin(t/2)|\\ge|t|/\\pi$. This sine bound follows on $[0,\\pi/2]$ by concavity of sine, whose second derivative is $-\\sin\\le0$, applied to the chord joining $(0,0)$ and $(\\pi/2,1)$; symmetry gives the negative arguments.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Put $Q=[-1,1]^d$ and $Q_c=[-1/2,1/2]^d$. For a univariate polynomial of degree at most $n$, interpolate at $t_j=-1/2+j/n$ for $0\\le j\\le n$. The interpolation identity holds because its difference from the polynomial has degree at most $n$ and $n+1$ distinct roots; the root bound follows by successively factoring each distinct root. For $|t|\\le1$ the absolute value of the $j$th Lagrange polynomial is at most $(3/2)^n n^n/(j!(n-j)!)$: numerator factors are at most $3/2$ and its denominator has absolute value $n^{-n}j!(n-j)!$. Summing these bounds gives $(3n)^n/n!\\le(3e)^n$, where $$\\log(n!)=\\sum_{j=1}^n\\log j\\ge\\int_1^n\\log t\\,dt=n\\log n-n+1$$ proves $n!\\ge(n/e)^n$. Applying this univariate estimate in each coordinate in turn, and taking suprema after each application, shows for every polynomial $p$ of total degree at most $n$ that $$\\|p\\|_Q\\le R^n\\|p\\|_{Q_c},\\qquad R=(3e)^d,$$ since its degree in each separate coordinate is at most $n$. Here and below $\\|p\\|_E=\\sup_{z\\in E}|p(z)|$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Integrating the bounds of step 1.1 over $[-\\pi,\\pi]$, with the near-zero interval contributing at most $2m$ and the other terms bounded by extending their elementary integrals to infinity, gives $$\\frac1{2\\pi}\\int_{-\\pi}^{\\pi}|F'_m(t)|\\,dt\\le\\frac{2+2\\pi^2+\\pi^3}{2\\pi}m\\le20m.$$ For $m=1$ this also holds because $F_1=1$. Define $V_N=2F_{2N}-F_N$. Its Fourier coefficients for every $|k|\\le N$ equal $1$: for $|k|<N$ they are $2(1-|k|/(2N))-(1-|k|/N)$, and for $|k|=N$ they are $2(1/2)$. For any trigonometric polynomial $T$ of degree at most $N$, integration of finite sums, using $\\int_{-\\pi}^{\\pi}e^{ikt}\\,dt=0$ for nonzero integer $k$ and $2\\pi$ for $k=0$, therefore gives $$T(t)=\\frac1{2\\pi}\\int_{-\\pi}^{\\pi}T(s)V_N(t-s)\\,ds.$$ Differentiating this finite-sum identity and using periodicity and the integral bound yields $\\|T'\\|_\\infty\\le100N\\|T\\|_\\infty$. Taking $T(t)=r(\\cos t)$, a trigonometric polynomial of degree at most $N$ by expansion of powers of cosine, and using $T'(t)=-\\sin(t)r'(\\cos t)$ proves the inequality announced in step 1.1. All integrals here integrate continuous finite trigonometric sums or the displayed elementary bounds.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "Define constants depending only on $d$ by $$a=(3/4)^d,\\quad\\delta=\\min\\{1/4,a/(8R)\\},\\quad G=600\\sqrt d/\\sqrt\\delta,\\quad\\kappa=\\min\\{\\delta/2,1/(2G)\\},\\quad A=2R/a.$$ Let $Y\\subset Q$ be finite and nonempty with Euclidean fill distance $\\eta$ and $n\\eta\\le\\kappa$. The zero polynomial satisfies the desired inequality, so fix nonzero $p$ of degree at most $n$ and set $$q(u)=p(u)\\prod_{i=1}^d(1-u_i^2)^n,\\qquad S=\\|q\\|_Q,\\qquad M=\\max_{y\\in Y}|p(y)|.$$ The coordinate degrees of $q$ are at most $3n$. On $Q_c$ its product weight is at least $a^n$, so $S\\ge a^n\\|p\\|_{Q_c}>0$. The last inequality holds because a polynomial vanishing on a box with nonempty interior vanishes identically: fix all but one coordinate in the interior and apply the univariate root bound, then repeat in each coordinate. If some $|u_i|\\ge1-\\delta$, then $1-u_i^2\\le2\\delta$ while all other weight factors are at most $1$, and step 1.2 implies $$|q(u)|\\le(2\\delta)^n\\|p\\|_Q\\le(2\\delta R)^n\\|p\\|_{Q_c}\\le(1/4)^nS<S.$$ The maximum of $|q|$ is attained on $Q$ by compactness and the extreme value theorem, so a maximizer $u_*$ lies in $[-1+\\delta,1-\\delta]^d$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Take $y\\in Y$ with $\\|y-u_*\\|_2\\le\\eta$; such a point exists because the minimum over the finite set is attained and is at most its supremum $\\eta$. Since $\\eta\\le\\kappa\\le\\delta/2$, the segment from $u_*$ to $y$ lies where every coordinate has absolute value at most $1-\\delta/2$. Apply step 2.1 to each univariate coordinate slice of $q$, of degree at most $3n$ and norm at most $S$ on $[-1,1]$. At each point of this segment it gives $$|\\partial_iq|\\le\\frac{300nS}{\\sqrt{\\delta-\\delta^2/4}}\\le\\frac{600nS}{\\sqrt\\delta},\\qquad\\|\\nabla q\\|_2\\le GnS.$$ Apply the fundamental theorem of calculus to the univariate polynomial $t\\mapsto q(u_*+t(y-u_*))$: it follows directly here by integrating each power in this finite polynomial. With the Euclidean Cauchy–Schwarz inequality, obtained by expanding $\\sum_i(v_i-sw_i)^2\\ge0$ and minimizing the quadratic in $s$, this gives $$S\\le|q(y)|+Gn\\eta S\\le M+S/2.$$ Thus $S\\le2M$, and steps 1.2 and 2.2 yield $$\\|p\\|_Q\\le R^n\\|p\\|_{Q_c}\\le(R/a)^nS\\le2(R/a)^nM\\le A^nM.$$ This also includes the zero polynomial.",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Fix $x\\in Q$, enumerate $Y=\\{y_1,\\ldots,y_m\\}$, and let $v(u)\\in\\mathbb R^D$ be the vector of all monomials in $u$ of total degree at most $n$, in any fixed order, where $D$ is their finite number. Let $K$ be the convex hull of $\\{v(y_j),-v(y_j):1\\le j\\le m\\}$. More explicitly it is the image of the closed bounded simplex of $2m$ nonnegative real coordinates summing to $1$, under the continuous map taking these coordinates to the corresponding weighted sum of these $2m$ vectors. Thus $K$ is nonempty and compact, and is convex because convex combinations of two sets of simplex weights remain simplex weights. Suppose $v(x)\\notin A^nK$. The continuous squared distance from $v(x)$ attains a minimum at some $z\\in A^nK$; put $b=v(x)-z\\ne0$. For each $w\\in A^nK$ the segment $z+t(w-z)$, $0\\le t\\le1$, lies in $A^nK$. Its squared distance to $v(x)$ equals $$\\|b\\|_2^2-2t\\,b\\mathbin\\cdot(w-z)+t^2\\|w-z\\|_2^2.$$ Minimality at $t=0$ forces $b\\mathbin\\cdot(w-z)\\le0$, since a strictly positive value would make this displayed expression smaller for sufficiently small positive $t$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "Therefore $b\\mathbin\\cdot z$ is the maximum of the linear functional $b\\mathbin\\cdot w$ on $A^nK$. A linear functional on this convex hull has maximum equal to the largest of its values on its finite generators: every convex weighted average is at most that largest value and that value is attained at a generator. Consequently $$b\\mathbin\\cdot v(x)=b\\mathbin\\cdot z+\\|b\\|_2^2>A^n\\max_{1\\le j\\le m}|b\\mathbin\\cdot v(y_j)|.$$ This contradicts step 3.1 applied to the polynomial $u\\mapsto b\\mathbin\\cdot v(u)$, because $x\\in Q$. Thus $v(x)\\in A^nK$. Write it as $A^n$ times a convex combination of the vectors $\\pm v(y_j)$, with nonnegative weights $t_j^+,t_j^-$ summing to $1$. For $\\lambda_j=A^n(t_j^+-t_j^-)$ one has $$v(x)=\\sum_j\\lambda_jv(y_j),\\qquad\\sum_j|\\lambda_j|\\le A^n\\sum_j(t_j^++t_j^-)=A^n.$$ Taking the scalar product with the coefficient vector of any polynomial of degree at most $n$ proves simultaneous reproduction. This argument uses finite-dimensional compactness and a single minimum, without an infinite choice principle.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "step": "6.1",
+          "claim": "Finally choose orthonormal coordinates along the edges of $\\Omega$, with its center as origin, and multiply these coordinates by $2/L$. This affine map carries $\\Omega$ to $Q$ and scales Euclidean distances by $2/L$, so it carries $X$ to a set $Y$ of fill distance $\\eta=2h_X/L$. Composition in either direction preserves total polynomial degree because each coordinate is affine linear. The condition in the Statement is exactly $n\\eta\\le\\kappa$. Transporting the norming inequality from step 3.1 and the coefficients from step 5.1 proves both assertions on $\\Omega$, including rotated cubes. All selections made in the proof are finite or individual existential choices, so no choice axiom is used.",
+          "inputs": [
+            "step 3.1",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a positive-sided cube, a nonempty finite set X and n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the zero polynomial directly; step 3.1 also proves that a polynomial whose sample values vanish must have zero uniform norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows d=1 and n=1; step 2.1 explicitly handles the Fejer boundary m=1 by F1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 minimizes distance on a compact finite convex hull without any interior or linear-independence assumption; step 5.1 obtains coefficients without assuming sample separation or invertible interpolation matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 moves the damped-polynomial maximizer into a fixed interior collar, and step 3.1 applies the derivative estimate only there. Step 5.1 reproduces at every point of the closed cube, including its boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 use finite-dimensional compactness and an individual nearest point. Step 6.1 uses only one finite orthonormal coordinate system; no family of choices indexed by evaluation points is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/neural_operator_repair",
+        "notes": "Cycle1 repair author reviewed the full proposed arguments and independently reviewed both proof-only child derivations. Special Bernstein, extrapolation, damping, finite convex coefficient and Gaussian factorial estimates are supplied locally. No native acceptance or readiness is asserted."
+      }
+    },
+    "lem-gaussian-rbf-power-function-fill-distance-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-gaussian-radial-kernel",
+          "source_section": "Example",
+          "quote": "For $p\\ge1$ and $\\sigma>0$, the Gaussian radial kernel on $\\mathbb R^p$ is $k_\\sigma(x,z)=\\exp(-\\|x-z\\|_2^2/(2\\sigma^2))$. It is a real positive semidefinite kernel, including on finite samples with repeated points or a singular Gram matrix.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-canonical-rkhs-construction-and-reproducing-property",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For every set $X$ and every real positive semidefinite kernel $k$ on $X$, the canonical construction from finitely supported coefficients, quotient by zero seminorm, and norm completion defines a real reproducing kernel Hilbert space $\\mathcal H_k$. For every $x\\in X$, its kernel section $k_x=k(\\cdot,x)$ belongs to $\\mathcal H_k$ and satisfies $\\langle h,k_x\\rangle_{\\mathcal H_k}=h(x)$ for all $h\\in\\mathcal H_k$. The choice assumption here is countable choice; this statement does not assert the same construction in ZF without that assumption.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-dimensional-projection-in-a-real-inner-product-space",
+          "source_section": "Statement",
+          "quote": "Let $E$ be a real inner-product space, let $M\\subseteq E$ be a finite-dimensional subspace, and let $f\\in E$. There is a unique $p\\in M$ such that $f-p$ is orthogonal to every vector of $M$. This vector is the unique nearest point in $M$ to $f$, and it satisfies $\\|p\\|\\le\\|f\\|$. The conclusion does not require $E$ to be complete.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-dense-cube-polynomial-norming-and-reproduction",
+          "source_section": "Statement",
+          "quote": "For each integer $d\\ge1$ there are constants $A>1$ and $\\kappa>0$ with the following property. Let $\\Omega\\subset\\mathbb R^d$ be any closed cube of positive side length $L$, including a rotated cube, and let $X=\\{x_1,\\ldots,x_m\\}\\subset\\Omega$ be finite and nonempty. Define its Euclidean fill distance by\n$$h_X=\\sup_{z\\in\\Omega}\\min_{1\\le j\\le m}\\|z-x_j\\|_2.$$\nFor every integer $n\\ge1$ with $2nh_X/L\\le\\kappa$, every real polynomial $p$ of total degree at most $n$ satisfies\n$$\\sup_{z\\in\\Omega}|p(z)|\\le A^n\\max_{1\\le j\\le m}|p(x_j)|.$$\nMoreover, for each $x\\in\\Omega$ there exist real coefficients $\\lambda_1,\\ldots,\\lambda_m$, independent of $p$, such that simultaneously for all such polynomials\n$$p(x)=\\sum_{j=1}^m\\lambda_jp(x_j),\\qquad \\sum_{j=1}^m|\\lambda_j|\\le A^n.$$\nNo separation or Cartesian arrangement of the points is assumed. No choice principle is required.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Let $z_c$ be the center of $\\Omega$, let $L>0$ be its side length, and use orthonormal coordinates along its edges, writing $u(z)$ for the coordinates of $z-z_c$. These coordinates preserve distances and give $\\|u(z)\\|_2\\le B=L\\sqrt d/2$ for every $z\\in\\Omega$. Put $t=B^2/\\sigma^2>0$. For a multi-index $\\alpha=(\\alpha_1,\\ldots,\\alpha_d)\\in\\mathbb N_0^d$, write $|\\alpha|=\\sum_i\\alpha_i$, $\\alpha!=\\prod_i\\alpha_i!$, and $u^\\alpha=\\prod_i u_i^{\\alpha_i}$, and define $$\\Phi_\\alpha(z)=\\exp(-\\|u(z)\\|_2^2/(2\\sigma^2))\\frac{u(z)^\\alpha}{\\sigma^{|\\alpha|}\\sqrt{\\alpha!}}.$$ Multiplying the convergent exponential power series in the $d$ coordinates yields $$\\sum_\\alpha\\Phi_\\alpha(z)\\Phi_\\alpha(w)=e^{-(\\|u(z)\\|_2^2+\\|u(w)\\|_2^2)/(2\\sigma^2)}e^{u(z)\\cdot u(w)/\\sigma^2}=k_\\sigma(z,w).$$ The series is absolutely convergent, since replacing each coordinate product by its absolute value gives the finite value $e^{-(\\|u(z)\\|_2^2+\\|u(w)\\|_2^2)/(2\\sigma^2)}\\exp(\\sum_i|u_i(z)u_i(w)|/\\sigma^2)$. In particular the vector $\\Phi(z)=(\\Phi_\\alpha(z))_\\alpha$ is square summable with squared norm $k_\\sigma(z,z)=1$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For any finite set of points $z_1,\\ldots,z_q\\in\\Omega$ and real coefficients $a_1,\\ldots,a_q$, the reproducing property gives $$\\left\\|\\sum_{j=1}^qa_jk_\\sigma(\\cdot,z_j)\\right\\|_{\\mathcal H_\\sigma}^2=\\sum_{j,l=1}^qa_ja_lk_\\sigma(z_j,z_l)=\\left\\|\\sum_{j=1}^qa_j\\Phi(z_j)\\right\\|_{\\ell^2}^2.$$ The second equality follows from step 1.1 by interchanging a finite sum with an absolutely convergent series. Thus this norm identity concerns finite kernel combinations and requires no description of the whole Gaussian RKHS or extension of its functions to $\\mathbb R^d$. The RKHS used here is available under the stated Countable Choice hypothesis.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "Fix $X$ as in the Statement, set $h=h_X$, and for now choose an integer $n\\ge1$ such that $2nh/L\\le\\kappa$. Fix any $x\\in\\Omega$ and take coefficients $\\lambda_j$ from [F4]. Define real coefficients $$b_j=\\lambda_j\\exp\\left(\\frac{\\|u(x_j)\\|_2^2-\\|u(x)\\|_2^2}{2\\sigma^2}\\right).$$ Then $\\sum_j|b_j|\\le e^{t/2}A^n$. For every $|\\alpha|\\le n$, the polynomial $z\\mapsto u(z)^\\alpha$ has total degree at most $n$, so reproduction implies $$\\sum_jb_j\\Phi_\\alpha(x_j)=\\frac{e^{-\\|u(x)\\|_2^2/(2\\sigma^2)}}{\\sigma^{|\\alpha|}\\sqrt{\\alpha!}}\\sum_j\\lambda_ju(x_j)^\\alpha=\\Phi_\\alpha(x).$$ Consequently all coordinates of $\\Phi(x)-\\sum_jb_j\\Phi(x_j)$ with $|\\alpha|\\le n$ vanish.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.3",
+          "step": "2.3",
+          "claim": "Write $\\Phi_{>n}(z)$ for the coordinates with $|\\alpha|>n$. Expanding $(\\sum_i u_i(z)^2/\\sigma^2)^r$ by multiplication shows that its monomial coefficient at multi-index $\\alpha$ of size $r$ is $r!/\\alpha!$: it counts the ordered $r$ choices of coordinates with the prescribed multiplicities. Hence $$\\|\\Phi_{>n}(z)\\|_{\\ell^2}^2=e^{-\\|u(z)\\|_2^2/\\sigma^2}\\sum_{r=n+1}^{\\infty}\\frac{(\\|u(z)\\|_2^2/\\sigma^2)^r}{r!}\\le\\sum_{r=n+1}^{\\infty}\\frac{t^r}{r!}.$$ If $n+2\\ge2t$, the ratio of any successive terms in the last tail is at most $1/2$, so summing the geometric majorant gives $$\\sum_{r=n+1}^{\\infty}\\frac{t^r}{r!}\\le\\frac{2t^{n+1}}{(n+1)!}\\le2\\left(\\frac{et}{n+1}\\right)^{n+1}.$$ For the final inequality, $\\log(q!)=\\sum_{j=1}^q\\log j\\ge\\int_1^q\\log s\\,ds=q\\log q-q+1$ for every integer $q\\ge1$, and exponentiation yields $q!\\ge(q/e)^q$. Thus the bound holds uniformly for every $z\\in\\Omega$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "By [F3], the infimum defining $P_X(x)$ is attained by orthogonal projection onto the finite section span. The vector $\\sum_j b_jk_\\sigma(\\cdot,x_j)$ is in that span, so its error norm is an upper bound for $P_X(x)$. Steps 2.1 and 2.2 show that its error norm is $\\|\\Phi_{>n}(x)-\\sum_jb_j\\Phi_{>n}(x_j)\\|_{\\ell^2}$. Apply the triangle inequality to these finitely many square-summable vectors and use steps 2.2 and 2.3 to obtain $$P_X(x)\\le\\sqrt2(1+e^{t/2}A^n)\\left(\\frac{et}{n+1}\\right)^{(n+1)/2}.$$ The $\\ell^2$ triangle inequality here can be obtained from the finite Euclidean triangle inequality on every initial finite collection of multi-indices and then passing to the supremum of their squared partial sums; thus no additional choice principle is involved. The bound is independent of $x$, and holds whenever $n\\ge1$, $2nh/L\\le\\kappa$, and $n+2\\ge2t$.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Put $D=\\kappa L/2>0$ and $n=\\lfloor D/h\\rfloor$. For all sufficiently small $h>0$ this integer satisfies $n\\ge1$, $n+2\\ge2t$, and $D/(2h)\\le n\\le D/h$; the lower bound follows from $\\lfloor s\\rfloor\\ge s/2$ for $s\\ge2$. Also $2nh/L\\le\\kappa$. Since $1+e^{t/2}A^n\\le2e^{t/2}A^n$, the logarithm of the positive bound in step 3.1 is at most $$-\\frac12(n+1)\\log(n+1)+K(n+1),$$ where one may take $K=1+\\frac32\\log2+t/2+\\log A+\\frac12|\\log(et)|>0$. Decrease $h_0>0$ until for all $0<h\\le h_0$ the preceding integer conditions hold, $h<1$, $\\log(n+1)\\ge4K$, and $\\log(n+1)\\ge\\frac12|\\log h|$. Such an $h_0$ exists because $n\\ge D/(2h)$ implies $\\log(n+1)\\ge|\\log h|+\\log(D/2)$, which tends to infinity and eventually exceeds $|\\log h|/2$.",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "For $0<h\\le h_0$ the exponent in step 4.1 is at most $-(n+1)\\log(n+1)/4$, and hence at most $-D|\\log h|/(16h)$, by the two lower bounds for $n$ and $\\log(n+1)$. Therefore step 3.1 gives, uniformly in $x\\in\\Omega$, $$P_X(x)\\le\\exp\\left(-\\frac D{16}\\frac{|\\log h|}{h}\\right).$$ Taking the supremum over $x$ proves the Statement with $c=D/16$ and $C=1$, and also with any larger positive $C$. All constants depend only on $d$, $\\Omega$, and $\\sigma$. Countable Choice was used only through the canonical RKHS supplier in step 2.1; the reproduction and feature estimates add no further choice assumption.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a positive-sided cube and a finite nonempty sample set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement excludes h=0 and sigma=0. Step 2.1 uses only the finite Gram norm identity, and step 3.1 uses an admissible finite section combination, without dividing by a Gram eigenvalue or requiring full rank."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes d=1 and all finite nonempty X satisfying its fill-distance threshold; step 1.1 covers the scalar coordinate case and step 2.2 permits the integer degree n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 remain valid for dependent section generators because they use finite Gram identities and an infimum, rather than an inverse Gram matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 chooses h0 so that all threshold inequalities, including n+2>=2t, hold for every 0<h<=h0, and step 5.1 includes the endpoint h=h0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the stated Countable Choice hypothesis through the canonical RKHS construction. Step 2.2 fixes an arbitrary evaluation point and applies the finite coefficient existence result, without choosing coefficient functions simultaneously over the cube."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "Canonical RKHS construction only; the local polynomial and finite coefficient proof is choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/neural_operator_repair",
+        "notes": "Cycle1 repair author reviewed the full proposed arguments and independently reviewed both proof-only child derivations. Special Bernstein, extrapolation, damping, finite convex coefficient and Gaussian factorial estimates are supplied locally. No native acceptance or readiness is asserted."
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "item": "lem-gaussian-rbf-power-function-fill-distance-bound",
+      "status": "escalated",
+      "reason": "The Gaussian power-function estimate is stated as a planned local supplier, but no complete local proof or fully inspected source proof was obtained."
+    }
+  ]
+}

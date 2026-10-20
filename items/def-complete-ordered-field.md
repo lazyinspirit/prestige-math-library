@@ -12,6 +12,7 @@ aliases: [def-dedekind-complete-field]
 landmark: true
 short: "complete ordered field"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-complete-ordered-field.json
   precheck: n/a
   audited: 2026-07-25
 sources:
@@ -28,7 +29,7 @@ pipeline_run: null
 
 ## Definition
 
-Let $F$ be an ordered field ([[def-ordered-field]]) and $S \subseteq F$.
+Let $F$ be an ordered field (Ordered field) and $S \subseteq F$.
 
 - $u \in F$ is an **upper bound** of $S$ if $s \le u$ for all $s \in S$; $S$ is
   **bounded above** if it has an upper bound.
@@ -38,6 +39,10 @@ Let $F$ be an ordered field ([[def-ordered-field]]) and $S \subseteq F$.
 $F$ is a **complete ordered field** (equivalently, $F$ has the
 **least-upper-bound property**, or is **Dedekind complete**) if every nonempty
 $S \subseteq F$ that is bounded above has a least upper bound in $F$.
+
+## Definition references
+
+[[def-ordered-field]]
 
 ## Remarks
 

@@ -11,8 +11,8 @@ deps: [thm-finite-dimensional-orthogonal-decomposition]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-orthogonal-projection.json
   precheck: n/a
-  repair: research/mathematical-statistics-foundations-37-owner-s3-polish-def-orthogonal-projection-repair.json
 sources:
   scraped: []
   references:
@@ -25,7 +25,7 @@ pipeline_run: null
 
 ## Definition
 
-Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives
+Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem (For a subspace $W$ of a finite-dimensional inner product space, $V=W\oplus W^\perp$) gives
 
 $$V=W\oplus W^\perp$$
 
@@ -34,3 +34,8 @@ and associates to every $v\in V$ unique vectors $w\in W$ and $z\in W^\perp$ with
 $$P_W:V\longrightarrow W,\qquad P_Wv=w.$$
 
 Equivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\in W^\perp$.
+
+## Definition references
+
+[[thm-finite-dimensional-orthogonal-decomposition]]
+

@@ -1,0 +1,450 @@
+[
+  {
+    "order": 2722,
+    "id": "ml02-linear-classification",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Linear classifiers, discriminants, and logistic models",
+    "companion": "ml02-linear-classification-examples",
+    "requires": [
+      "convex-and-semicontinuous-functions-on-rn",
+      "inner-product-spaces-and-orthogonality",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "generalized-linear-models-and-fisher-scoring",
+      "mixed-effects-and-longitudinal-models"
+    ],
+    "items": [
+      {
+        "id": "def-linear-score-classifier",
+        "kind": "definition",
+        "title": "Finite linear-score classifiers with a deterministic tie rule",
+        "deps": [],
+        "statement": "Let $d\\ge1$ and $K\\ge2$ be finite integers, with ordered labels $1<2<\\cdots<K$. A finite linear-score classifier on $\\mathbb R^d$ is specified by vectors $a_k\\in\\mathbb R^d$ and constants $b_k\\in\\mathbb R$, one pair for each label, and assigns score $s_k(x)=a_k^Tx+b_k$ to $x\\in\\mathbb R^d$. Its predicted label is the smallest index attaining $\\max_{1\\le j\\le K}s_j(x)$. This rule is single-valued, including when two or more scores tie.",
+        "strategy": "Define affine scores on an ordered finite class set and the smallest-index argmax tie rule.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "def-indicator-response-least-squares-classifier",
+        "kind": "definition",
+        "title": "Indicator-response least-squares classification",
+        "deps": [
+          "def-linear-score-classifier"
+        ],
+        "statement": "Let $n,q\\ge1$ and $K\\ge2$ be finite integers. For a fixed design matrix $X\\in\\mathbb R^{n\\times q}$ and labels $y_i\\in\\{1,\\ldots,K\\}$, form the indicator response matrix $Y\\in\\mathbb R^{n\\times K}$ by $Y_{ik}=1$ when $y_i=k$ and $Y_{ik}=0$ otherwise. For a coefficient matrix $B\\in\\mathbb R^{q\\times K}$, set $L(B)=(2n)^{-1}\\|Y-XB\\|_F^2$, where $\\|A\\|_F^2$ is the sum of squares of all entries of $A$. Let $B_*$ be the least-squares minimizer with smallest Frobenius norm. For a new row vector $x^T\\in\\mathbb R^{1\\times q}$, the indicator-response classifier assigns scores $(x^TB_*)_k$ and predicts the smallest class index attaining their maximum. An intercept, if used, is one of the columns of $X$; no rank assumption is imposed on $X$.",
+        "strategy": "Define the one-hot response matrix, squared-error objective, and deterministic minimum-Frobenius-norm fit; its existence is discharged by the local lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-indicator-response-least-squares-minimum-norm-fit"
+        ]
+      },
+      {
+        "id": "lem-indicator-response-least-squares-minimum-norm-fit",
+        "kind": "lemma",
+        "title": "The minimum-norm indicator-response least-squares fit exists uniquely",
+        "deps": [
+          "def-indicator-response-least-squares-classifier",
+          "thm-least-squares-solutions-and-normal-equation",
+          "thm-singular-value-decomposition"
+        ],
+        "statement": "Let $n,q\\ge1$ and $K\\ge2$ be finite, let $X\\in\\mathbb R^{n\\times q}$, and let $Y\\in\\mathbb R^{n\\times K}$ be an indicator response matrix. Among all minimizers of $\\|Y-XB\\|_F^2$ over $B\\in\\mathbb R^{q\\times K}$ there is a unique one of smallest Frobenius norm. If $X=U_rD_rV_r^T$ is a thin singular-value decomposition with rank $r>0$, orthonormal columns in $U_r,V_r$, and positive diagonal entries in $D_r$, then this minimizer is $B_*=V_rD_r^{-1}U_r^TY$. If $r=0$, then $X=0$ and $B_*=0$. In either case the full minimizer set is $\\{B_*+N:XN=0\\}$.",
+        "strategy": "Use SVD to construct the projection fit, then the least-squares normal equation and row-space/kernel orthogonality to prove the unique minimum-norm property.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "def-generative-lda-and-qda-models",
+        "kind": "definition",
+        "title": "Gaussian LDA and QDA model contracts",
+        "deps": [
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$ and $K\\ge2$ be finite integers, let the class label be $Y\\in\\{1,\\ldots,K\\}$, and let $X\\in\\mathbb R^d$. Choose class priors $\\pi_k>0$ with $\\sum_{k=1}^K\\pi_k=1$, means $\\mu_k\\in\\mathbb R^d$, and real symmetric positive-definite covariance matrices $\\Sigma_k\\in\\mathbb R^{d\\times d}$. The Gaussian generative model has $\\Pr(Y=k)=\\pi_k$ and conditional laws $X\\mid Y=k\\sim N_d(\\mu_k,\\Sigma_k)$. The LDA subfamily imposes one common covariance matrix, $\\Sigma_k=\\Sigma$ for every $k$; the QDA subfamily permits the covariance matrices to differ by class.",
+        "strategy": "Specify finite Gaussian classes, positive priors, the shared versus class-specific positive-definite covariance conventions, and the AC premise.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "thm-lda-and-qda-log-posterior-scores",
+        "kind": "theorem",
+        "title": "Common-covariance LDA scores are affine and QDA scores are quadratic",
+        "deps": [
+          "def-linear-score-classifier",
+          "def-generative-lda-and-qda-models",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $d\\ge1$ and $K\\ge2$ be finite, let $\\pi_k>0$ with $\\sum_{k=1}^K\\pi_k=1$, let $\\mu_k\\in\\mathbb R^d$, and let each real symmetric matrix $\\Sigma_k\\in\\mathbb R^{d\\times d}$ be positive definite, meaning $v^T\\Sigma_kv>0$ for every nonzero $v$. Define\n$$\nf_k(x)=(2\\pi)^{-d/2}\\det(\\Sigma_k)^{-1/2}\\exp\\!\\left(-\\tfrac12(x-\\mu_k)^T\\Sigma_k^{-1}(x-\\mu_k)\\right),\\qquad p_k(x)=\\frac{\\pi_k f_k(x)}{\\sum_{j=1}^K\\pi_jf_j(x)}.\n$$\nFor LDA, assume $\\Sigma_k=\\Sigma$ for all $k$; then $\\log p_k(x)$ differs by a term independent of $k$ from the affine score\n$$\n\\delta_k^{\\mathrm L}(x)=x^T\\Sigma^{-1}\\mu_k-\\tfrac12\\mu_k^T\\Sigma^{-1}\\mu_k+\\log\\pi_k.\n$$\nFor QDA, allow the $\\Sigma_k$ to vary with $k$; then $\\log p_k(x)$ differs by a term independent of $k$ from the quadratic score\n$$\n\\delta_k^{\\mathrm Q}(x)=-\\tfrac12\\log\\det(\\Sigma_k)-\\tfrac12(x-\\mu_k)^T\\Sigma_k^{-1}(x-\\mu_k)+\\log\\pi_k.\n$$\nThus maximizing the posterior probabilities uses affine scores in LDA and scores of degree at most two in QDA; ties are resolved by the smallest class index.",
+        "strategy": "Apply the positive-definite Gaussian density theorem, form the density Bayes ratio, expand its quadratic, and cancel only class-independent terms.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-binary-logistic-and-multiclass-softmax-models",
+        "kind": "definition",
+        "title": "Binary logistic and multiclass softmax conditional models",
+        "deps": [
+          "def-linear-score-classifier"
+        ],
+        "statement": "For $d\\ge1$, define the sigmoid $\\sigma(t)=(1+e^{-t})^{-1}$. A binary logistic conditional model on $x\\in\\mathbb R^d$ has finite coefficients $\\beta_0\\in\\mathbb R$, $\\beta\\in\\mathbb R^d$ and specifies $\\Pr(Y=1\\mid x)=\\sigma(\\beta_0+x^T\\beta)$ and $\\Pr(Y=0\\mid x)=1-\\sigma(\\beta_0+x^T\\beta)$ for $Y\\in\\{0,1\\}$. Its classifier predicts $1$ when $\\beta_0+x^T\\beta>0$ and predicts $0$ when $\\beta_0+x^T\\beta\\le0$. A multiclass softmax conditional model has finite ordered labels $1,\\ldots,K$ with $K\\ge2$, affine logits $\\eta_k(x)=a_k+x^Tw_k$ for $a_k\\in\\mathbb R$ and $w_k\\in\\mathbb R^d$, and probabilities $\\Pr(Y=k\\mid x)=e^{\\eta_k(x)}/\\sum_{j=1}^K e^{\\eta_j(x)}$; its classifier chooses the smallest index attaining the largest logit. These models specify conditional label probabilities and impose no distributional assumption on the feature vector $X$, in particular no Gaussian feature law.",
+        "strategy": "Define conditional Bernoulli logistic and multiclass softmax probabilities, tie rules, and the absence of a marginal feature-law assumption.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "def-binary-logistic-log-likelihood-and-l1-penalty",
+        "kind": "definition",
+        "title": "Binary logistic log-likelihood and L1-penalized objective",
+        "deps": [
+          "def-binary-logistic-and-multiclass-softmax-models"
+        ],
+        "statement": "Fix a finite design with rows $x_i^T\\in\\mathbb R^q$, $1\\le i\\le n$, where $n\\ge1$ and $q\\ge1$. Use either an intercept design, in which the first coordinate of every row is $1$ and $\\beta=(\\beta_0,\\theta)\\in\\mathbb R\\times\\mathbb R^{q-1}$, or a no-intercept design, in which no coordinate is reserved as an intercept, the intercept coefficient is fixed at zero, and $\\beta\\in\\mathbb R^q$. Let $y_i\\in\\{0,1\\}$ and assume the responses are conditionally independent given the design, with binary logistic probabilities $p_i=\\sigma(x_i^T\\beta)$ for finite coefficients. In either design convention, the log-likelihood is\n$$\n\\ell(\\beta)=\\sum_{i=1}^n\\left[y_i x_i^T\\beta-\\log\\!\\left(1+e^{x_i^T\\beta}\\right)\\right].\n$$\nFor $\\lambda>0$, the L1 objective to minimize in the intercept design is $-\\ell(\\beta)+\\lambda\\|\\theta\\|_1$, so the intercept is unpenalized; in the no-intercept design it is $-\\ell(\\beta)+\\lambda\\|\\beta\\|_1$, so every coefficient is penalized. Here $\\|\\theta\\|_1=\\sum_{j=1}^{q-1}|\\theta_j|$ and $\\|\\beta\\|_1=\\sum_{j=1}^{q}|\\beta_j|$, with an empty sum equal to zero. These are objective definitions and assert no optimizer existence.",
+        "strategy": "Write the independent fixed-design Bernoulli log-likelihood and distinguish an unpenalized intercept from the all-coordinate L1 convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "thm-binary-logistic-derivatives-and-irls-update",
+        "kind": "theorem",
+        "title": "Binary logistic derivatives and the exact Newton/IRLS update",
+        "deps": [
+          "def-binary-logistic-and-multiclass-softmax-models",
+          "def-binary-logistic-log-likelihood-and-l1-penalty",
+          "thm-hessian-characterises-convexity",
+          "thm-least-squares-solutions-and-normal-equation",
+          "alg-fisher-scoring-irls",
+          "thm-irls-is-fisher-scoring-step",
+          "thm-glm-general-link-score-and-information",
+          "def-generalized-linear-model",
+          "def-glm-observation-family"
+        ],
+        "statement": "Let $n,q\\ge1$ be finite, let $X\\in\\mathbb R^{n\\times q}$ be a fixed design matrix whose first column is the intercept column of ones, and let $y\\in\\{0,1\\}^n$. For finite $\\beta\\in\\mathbb R^q$, put $\\eta=X\\beta$, $p_i=\\sigma(\\eta_i)$, $W=\\operatorname{diag}(p_i(1-p_i))$, and $\\ell(\\beta)=\\sum_i[y_i\\eta_i-\\log(1+e^{\\eta_i})]$. Then\n$$\n\\nabla\\ell(\\beta)=X^T(y-p),\\qquad \\nabla^2\\ell(\\beta)=-X^TWX.\n$$\nThe diagonal entries of $W$ are positive, so $-\\ell$ is convex; if $X$ has full column rank, $X^TWX$ is positive definite. In that full-rank case, the exact Newton step for maximizing the unpenalized log-likelihood is\n$$\n\\beta_{\\mathrm{new}}=\\beta+(X^TWX)^{-1}X^T(y-p)=(X^TWX)^{-1}X^TWz,\\qquad z=X\\beta+W^{-1}(y-p).\n$$\nThis is the Bernoulli-logit IRLS step with the weighted least-squares convention using weights $p_i(1-p_i)$. The identities describe one update and do not assert convergence of repeated updates.",
+        "strategy": "Differentiate the scalar likelihood, establish W positivity and rank conditions, verify the Bernoulli GLM hypotheses, and identify the weighted least-squares IRLS output with the Newton solve.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "thm-complete-separation-precludes-finite-logistic-mle",
+        "kind": "theorem",
+        "title": "Complete separation gives an unattained logistic likelihood supremum",
+        "deps": [
+          "def-binary-logistic-and-multiclass-softmax-models",
+          "def-binary-logistic-log-likelihood-and-l1-penalty"
+        ],
+        "statement": "Let $n,q\\ge1$ be finite, let $x_i\\in\\mathbb R^q$ be a fixed design row with an intercept coordinate when one is used, and let $y_i\\in\\{0,1\\}$. Suppose the unpenalized binary logistic log-likelihood is $\\ell(\\beta)=\\sum_i[y_i x_i^T\\beta-\\log(1+e^{x_i^T\\beta})]$. If there is a vector $v\\in\\mathbb R^q$ such that $(2y_i-1)x_i^Tv>0$ for every $i$, then $\\sup_{\\beta\\in\\mathbb R^q}\\ell(\\beta)=0$, and no finite coefficient vector attains this supremum.",
+        "strategy": "Scale a strict separating vector to make each likelihood term approach zero, then show every finite coefficient has strictly negative likelihood.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "justified_by": []
+      },
+      {
+        "id": "alg-cyclic-perceptron",
+        "kind": "algorithm",
+        "title": "The cyclic perceptron update procedure",
+        "deps": [],
+        "statement": "Input a finite ordered sample $((x_i,y_i))_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^d$, and $y_i\\in\\{-1,+1\\}$. Put $\\widetilde x_i=(x_i,1)\\in\\mathbb R^{d+1}$ and initialize $w=0$. In each pass, visit $i=1,\\ldots,n$ in the fixed order. Whenever $y_iw^T\\widetilde x_i\\le0$, replace $w$ by $w+y_i\\widetilde x_i$ and count one update. After a full pass with no updates, stop and return $w$. The associated classifier returns $+1$ when $w^T(x,1)>0$ and $-1$ when $w^T(x,1)\\le0$, so a score tie is assigned to $-1$. The procedure has no iteration limit; if its stop condition never holds, it continues with further passes.",
+        "strategy": "Specify the finite ordered sample, augmented bias coordinate, zero initialization, exact non-strict update and full-pass stop rule without a convergence claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "thm-perceptron-margin-mistake-bound",
+        "kind": "theorem",
+        "title": "The perceptron makes at most R squared over gamma squared mistakes",
+        "deps": [
+          "alg-cyclic-perceptron",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "statement": "Let $((x_i,y_i))_{i=1}^n$ be a finite ordered sample with $n\\ge1$, $x_i\\in\\mathbb R^d$, and $y_i\\in\\{-1,+1\\}$. Put $\\widetilde x_i=(x_i,1)\\in\\mathbb R^{d+1}$, with Euclidean inner product $\\langle u,v\\rangle=u^Tv$ and norm $\\|u\\|_2=(u^Tu)^{1/2}$. Suppose $\\|\\widetilde x_i\\|_2\\le R$ for every $i$ and there is a unit vector $u\\in\\mathbb R^{d+1}$ and $\\gamma>0$ such that $y_i\\langle u,\\widetilde x_i\\rangle\\ge\\gamma$ for every $i$. The zero-initialized cyclic procedure that visits the sample in the stated order and updates $w\\leftarrow w+y_i\\widetilde x_i$ whenever $y_i\\langle w,\\widetilde x_i\\rangle\\le0$ makes at most $R^2/\\gamma^2$ updates and stops after a finite pass with no updates. At each visit, before its update, the procedure predicts $+1$ if $\\langle w,\\widetilde x_i\\rangle>0$ and $-1$ otherwise; a prediction mistake is a visit on which this prediction differs from $y_i$. The total number of such mistakes before termination is at most $R^2/\\gamma^2$. The returned weight vector has strictly positive signed margin on every sample point.",
+        "strategy": "Accumulate separator progress and bound squared norm at each update, combine the inequalities by Cauchy–Schwarz, and deduce finite termination.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Cornell CS4780 Spring 2018, Lecture 3: The Perceptron",
+              "url": "https://www.cs.cornell.edu/courses/cs4780/2018sp/lectures/lecturenote03.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2723,
+    "id": "ml02-linear-classification-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Linear classifiers, discriminants, and logistic models — Examples",
+    "companion": "ml02-linear-classification",
+    "requires": [
+      "ml02-linear-classification"
+    ],
+    "items": [
+      {
+        "id": "ex-generative-lda-and-logistic-share-a-boundary",
+        "kind": "example",
+        "title": "A Gaussian LDA model and a conditional logistic model can share a decision boundary",
+        "deps": [
+          "thm-lda-and-qda-log-posterior-scores",
+          "def-binary-logistic-and-multiclass-softmax-models",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. In one dimension, take LDA classes $1$ and $2$ with equal priors and conditional laws $X\\mid Y=1\\sim N_1(-1,1)$ and $X\\mid Y=2\\sim N_1(1,1)$. Recode class $1$ as binary label $0$ and class $2$ as binary label $1$ in a conditional logistic model with $\\Pr(Y=1\\mid x)=\\sigma(2x)$. Both classifiers have tie boundary $x=0$ and agree on both sides of that boundary; ties select class $1$ (binary label $0$). This equality of boundaries for these parameters does not identify the two estimation procedures or equate their coefficients in general.\n\nThe number line marks the two Gaussian means and their posterior tie boundary; the score calculation below establishes the boundary.\n\n```tikz\n\\begin{tikzpicture}[x=1.25cm,y=1cm]\n  \\draw[->] (-2.1,0) -- (2.1,0) node[right] {$x$};\n  \\fill (-1,0) circle (2pt);\n  \\fill (1,0) circle (2pt);\n  \\draw[dashed] (0,-0.32) -- (0,0.42);\n  \\node[below] at (-1,0) {$\\mu_1=-1$};\n  \\node[below] at (1,0) {$\\mu_2=1$};\n  \\node[above] at (0,0.42) {$x=0$};\n\\end{tikzpicture}\n```",
+        "strategy": "Substitute the one-dimensional Gaussian means and equal priors into the LDA score difference, then compare it with the chosen logistic threshold.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "generation": {
+            "role": "example"
+          }
+        },
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-separated-logistic-sample-has-unattained-supremum",
+        "kind": "example",
+        "title": "A strictly separated two-point sample has an unattained logistic likelihood supremum",
+        "deps": [
+          "thm-complete-separation-precludes-finite-logistic-mle",
+          "def-binary-logistic-log-likelihood-and-l1-penalty"
+        ],
+        "statement": "Take two one-dimensional observations $(x_1,y_1)=(-1,0)$ and $(x_2,y_2)=(1,1)$ with an intercept in the design. The augmented rows are $(1,-1)$ and $(1,1)$, and the vector $(0,1)$ strictly separates them. Along coefficients $\\beta(t)=(0,t)$ with $t>0$, the log-likelihood is $-2\\log(1+e^{-t})$, which tends to zero while remaining negative for every finite $t$. The sample therefore has an unattained supremum at zero.",
+        "strategy": "Verify a strict separator and compute the diverging-slope log-likelihood explicitly.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "generation": {
+            "role": "example"
+          }
+        },
+        "dependency_level": 4,
+        "justified_by": []
+      },
+      {
+        "id": "ex-nonseparable-perceptron-cycles",
+        "kind": "example",
+        "title": "Two contradictory labels make the cyclic perceptron repeat a two-update cycle",
+        "deps": [
+          "alg-cyclic-perceptron"
+        ],
+        "statement": "Use the ordered one-dimensional sample $(x_1,y_1)=(0,+1)$, $(x_2,y_2)=(0,-1)$. It is not separable by an affine score because both observations have the same augmented input $(0,1)$ and require opposite strict signs. For the zero-initialized cyclic perceptron, every pass updates on both observations and returns the weight vector to zero, so no no-update pass occurs.",
+        "strategy": "Apply both updates in order and show that every pass returns to the zero weight vector.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Stanford CS229 Spring 2022 lecture notes",
+              "url": "https://cs229.stanford.edu/lectures-spring2022/main_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated",
+          "generation": {
+            "role": "example"
+          }
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      }
+    ]
+  }
+]

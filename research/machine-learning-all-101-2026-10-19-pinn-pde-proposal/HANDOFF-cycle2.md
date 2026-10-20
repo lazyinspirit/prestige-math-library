@@ -1,0 +1,30 @@
+# Final cycle 2 PINN/PDE packet
+
+The sole final repair cycle is complete. Root's full cycle 1 review accepted the local PDE constructions, the populated-cell convergence route, the explicit source norm caveat, printed D2 weight one, and weak-compatible energy premise. All five returned findings are addressed. The complete machine-readable report is `../machine-learning-all-101-2026-10-19-pinn-pde-repair.json`; the concrete mutation specification is `integration-map.json`. Cycle 1 is preserved under `cycle1-final/`. Exact complete source diffs are under `cycle2-diffs/`.
+
+No actual item, page, manifest, proof-contract, coverage or canonical-plan files were changed by this agent. The 22 draft carriers comprise 13 replacements and nine additions. All static evidence concerns staged sources or read-only projections; it confers no native readiness, gate or recertification credit. Two allowed review/repair cycles have been spent.
+
+## Full proof deltas
+
+1. In `def-shin-parabolic-operator-and-boundary`, the generic drift is now beta_i = sum_j D_j a_ji + b_i + c_i. The symmetric intended source specialization remains explicit. Its actual consumers stipulate symmetry, so the intended PDE remains unchanged.
+2. `lem-shin-elliptic-energy-estimate` now states that A is a bounded measurable real symmetric matrix field, as required for every pairing in its proof. The main elliptic and PINN consumer coefficient assumptions already supply this bound.
+3. In `lem-shin-zero-data-parabolic-classical-energy-identification`, the new actual supplier `thm-l-one-approximate-identities-converge-in-l-p` is declared and its exact finite-Lp interface is quoted in F5. Step 5.1 proves strong local L2 convergence of bounded b,c,d by compact cutoff extension and the actual anisotropic, positive-past-lag approximate identities. The c_n phi tests converge strongly and pair with weakly convergent gradients; b_n e_n and d_n e_n converge strongly using local uniform solution convergence. Only a, expanded beta/q and r retain the local uniform convergence assertion. Step 6.1 separately proves the initial-time passage, with gradient terms O(sqrt(delta)) and remaining terms O(delta). Step 7.1 identifies the initial trace and weak uniqueness; the mistyped reference is now steps 2.1–3.1. Steps 8.1–9.1 give the original energy estimate and convergence. No C1 premise was added.
+4. The regularized PINN proof now explicitly uses its actual source-discrepancy F6 where the original all-scale premise and false weight-comparability inference are discussed. The rich convergence statement, exact thresholds and occupancy proof are unchanged. The other source differences are precise dependency-level frontmatter corrections.
+
+## Contracts and integration
+
+All 22 proposed contracts use native schema with item-specific, exact Statement/Definition/Example or numbered-step anchors. Actual full proof input tokens, exact supplier excerpts and per-item axiom uses are recorded. `contract-delta.json` binds only each own current contract row. The strict unmodified native checker, with `checks/staged-item-overlay.cjs` redirecting only item reads to staged carriers, reports 22 checked and zero errors. Its one shotgun-bracket advisory is retained: parabolic energy step 1.1 introduces the supplier interfaces together and subsequent steps are algebra.
+
+`manifest-delta.json` and `integration-map.json` provide exact source kinds, titles, deps, dependency levels, statuses, provenance, references and page placements. Levels were computed with the official dependency-level function against actual run manifests plus only these proposed rows. Unrelated unfinished-scaffold projection diagnostics are preserved in `cycle2-level-calculation.json`; they are not a passing actual-run check.
+
+`coverage-delta.json` binds the current source content rows and preserves all foreign neural additions and original fetch/history records. All nine new items are harvested in the native A source context, including the B cube example; there is no fabricated B-only source reading. The native read-only coverage projection reports one source page, 63 harvested items, zero errors and warnings. Its basis is actual coverage SHA256 `b1e50233ba17287a976236c8e994a19506cfa4f2f8bb6de7c4556a5c5ba6fb6e`, including root's neural harvest placement reconciliation.
+
+`plan-edits.json` changes only exact unique PINN ML36 track and selected-description substrings. Preserve the integrated neural stanzas. Canonical SHA256 `1834e61855a9361fb3c16e3f5118f3b4efe090f4375ebca1369b7e2bc50bfea0` is an observation, never a whole-file replacement or mutation guard. Apply only the map's per-source, per-row and exact-substring operations.
+
+## Verification and consumer ownership
+
+Final staged precheck passes for 19 proofs, with three definitions/algorithm not applicable. Proof-layout checks all 22 items and 118 steps with zero defects. Render checks all 22 with zero errors or warnings. Exact quotation checking covers 142 supplier citations with zero mismatches. Evidence is in `static-checks.json`, `quote-check.json`, `checks/native-contract-overlay.json` and `checks/coverage-projection-check.json`.
+
+The same supplier/consumer owner rechecked the corrected generic expansion against all intended symmetric parabolic consumers, the explicit A bound against elliptic energy consumers, and the strong-L2 passage against main parabolic/PINN energy consumers. Original/current direct and indirect branch consumers, native counterexamples, the two original PINN B examples and residual/energy interfaces remain covered by the report and `consumer-inventory.json`. Published analytic suppliers remain read-only context. No neural-operator interface overlap was found, and no consumer review was delegated.
+
+Root's remaining work is to read the final deltas, integrate accepted guarded operations, and perform actual hashing, level recomputation, recertification, preparation and gates. The proposal does not assert those operations have occurred.

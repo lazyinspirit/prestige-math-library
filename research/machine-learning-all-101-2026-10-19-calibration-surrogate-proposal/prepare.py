@@ -1,0 +1,32 @@
+from pathlib import Path
+import json
+base=Path('research/machine-learning-all-101-2026-10-19-calibration-surrogate-proposal')
+manifest=json.loads(Path('research/machine-learning-all-101-2026-10-19-batch-8.pages.json').read_text())
+for page in manifest:
+ for item in page['items']:
+  name=item['id']+'.md'; raw=(Path('items')/name).read_text()
+  (base/'before/items'/name).write_text(raw); (base/'proposed/items'/name).write_text(raw)
+def edit(id,old,new):
+ p=base/'proposed/items'/(id+'.md');t=p.read_text();assert old in t,(id,old);p.write_text(t.replace(old,new))
+edit('lem-finite-label-conditional-probability-function','P(X\\in A,\\ Y=j)=','P(X\\in A,\\ Y=y_j)=')
+edit('cor-any-feature-induces-calibrated-forecast','There is a measurable forecast $G=\\eta(X):\\mathsf X\\to\\Delta_K$ whose conditional probability function satisfies the event identities for each label; as a random forecast, $G$ is fully reliable.','For every measurable feature $T:\\mathsf X\\to(\\mathsf Z,\\Sigma_Z)$, there is a measurable $\\eta_T:\\mathsf Z\\to\\Delta_K$ such that $G=\\eta_T(T(X))$ is a conditional class-probability forecast given $T(X)$ and is fully reliable. This includes the identity feature and a constant feature.')
+edit('cor-any-feature-induces-calibrated-forecast','**Given:** AC and a finite-label supervised prediction problem with coordinate random variables $X,Y$.','**Given:** AC, a finite-label supervised prediction problem with coordinate random variables $X,Y$, and a measurable feature $T:\\mathsf X\\to(\\mathsf Z,\\Sigma_Z)$.')
+edit('cor-any-feature-induces-calibrated-forecast','1.1 Fix a label index $j$ and a Borel set $B\\subseteq\\Delta_K$. Since $\\eta$ is measurable by [F1], $A=\\eta^{-1}(B)\\in\\Sigma_X$ by [F3]. The event identity in [F1] applied to this $A$ gives $P(Y=y_j,G\\in B)=P(X\\in A,Y=y_j)=\\mathbb E[\\eta_j(X)\\mathbf1_{\\{X\\in A\\}}]=\\mathbb E[G_j\\mathbf1_{\\{G\\in B\\}}].$ This is precisely the reliability identity [F2].','1.1 Apply [F1] to the joint law of $(T(X),Y)$ on $\\mathsf Z\\times\\mathcal Y$, which is a supervised prediction problem because $T$ is measurable. It supplies a measurable $\\eta_T:\\mathsf Z\\to\\Delta_K$ with $P(T(X)\\in A,Y=y_j)=\\mathbb E[\\eta_{T,j}(T(X))\\mathbf1_{\\{T(X)\\in A\\}}]$ for every $A\\in\\Sigma_Z$. Set $G=\\eta_T(T(X))$. For a Borel set $B\\subseteq\\Delta_K$, [F3] makes $A=\\eta_T^{-1}(B)$ measurable; the event identity then gives $P(Y=y_j,G\\in B)=\\mathbb E[G_j\\mathbf1_{\\{G\\in B\\}}]$. This is precisely the reliability identity [F2].')
+edit('thm-binned-calibration-estimator-limits','be continuous, jointly convex, and satisfy','be continuous and satisfy')
+edit('thm-binned-calibration-estimator-limits','almost surely, and $E_{\\mathcal P}\\le\\mathbb E[d(r(G),G)]$. If','almost surely. If $d$ is additionally jointly convex, then $E_{\\mathcal P}\\le\\mathbb E[d(r(G),G)]$. Without requiring convexity, if')
+edit('thm-binned-calibration-estimator-limits','a continuous jointly convex discrepancy $d$,','a continuous discrepancy $d$ (additionally jointly convex for the underestimation conclusion),')
+edit('thm-binned-calibration-estimator-limits','2.1 For each positive-probability bin','2.1 For the underestimation conclusion assume additionally that $d$ is jointly convex. For each positive-probability bin')
+# Standard numerical class labels preserve the exact same finite probability model.
+edit('ex-calibrated-coarsened-risk-score-is-low-information',r'Y\\in\\{0,1\\}',r'Y\\in\\{1,2\\}') if False else None
+p=base/'proposed/items/ex-calibrated-coarsened-risk-score-is-low-information.md'; t=p.read_text().replace('$Y\\in\\{0,1\\}$','$Y\\in\\{1,2\\}$').replace('P(Y=0\\mid T)','P(Y=2\\mid T)');p.write_text(t)
+edit('thm-posterior-forecast-minimizes-scoring-risk','Thus the integrand is a well-defined measurable nonnegative difference by [F3,F4],','Define the difference to be zero on the measurable null set where either posterior-risk term is infinite. It is then a well-defined measurable nonnegative function by [F3,F4],')
+# Preserve the broad existing bound and add both clean decision-convention specializations.
+id='thm-surrogate-regret-controls-classification-regret'
+edit(id,'## Statement references',r'''In particular, if $P(h(X)=0)=0$, the correction vanishes. Define instead the label classifier $f_h(x)=+1$ for $h(x)\ge0$ and $f_h(x)=-1$ for $h(x)<0$, and write $R_+(h)=P(f_h(X)\ne Y)$. For all scores covered above, including scores with zeros,
+$$R_+(h)-R_{01}^*\le 2c^{1/s}[L_\Phi(h)-L_\Phi^*]^{1/s}.$$
+Equivalently, parameterizing the same margin premise by $|\eta(x)-1/2|^s\le a^s[L_\Phi(x,0)-L_\Phi(x,h_\Phi^*(x))]$ gives coefficient $2a$ in both inequalities, with the same zero-score correction when using $R_{01}$.
+
+## Statement references''')
+edit(id,'Substitution in step 5.1 proves the stated bound. [F5, step 3.1, step 5.1, algebra] ∎','Substitution in step 5.1 proves the zero-score-is-error bound. [F5, step 3.1, step 5.1, algebra]\n\n6.2 Under $P(h(X)=0)=0$ the correction has expectation zero. For the label classifier $f_h$, at each $x$ its conditional excess over $\\min(\\eta(x),1-\\eta(x))$ is $2|\\eta(x)-1/2|$ on $\\{h(x)<0,\\eta(x)>1/2\\}\\cup\\{h(x)\\ge0,\\eta(x)<1/2\\}$ and zero elsewhere. This follows by comparing the conditional error $\\eta(x)$ for prediction $-1$ and $1-\\eta(x)$ for prediction $+1$. This adverse-sign set is contained in the event of step 5.1, so steps 5.1 and 6.1 bound its expectation by $2c^{1/s}[L_\\Phi(h)-L_\\Phi^*]^{1/s}$ without a tie correction. Finally, replacing $c$ by $a^s$ makes $c^{1/s}=a$ and proves the equivalent source parameterization. [F1, F2, step 5.1, step 6.1, algebra] ∎')
+edit(id,'The planned formula is escalated for owner reconciliation.','The original planned zero-remainder formula with coefficient $2c$ is false: a deterministic positive label with natural-log logistic loss, $s=2$, $c=1/2$, and score $h=-0.1$ satisfies its premise but has excess classification error $1>\\sqrt{\\ln(1+e^{0.1})}$. Independently, at $\\eta=1/2$ the zero score has surrogate excess zero and zero-score-is-error excess $1/2$, so changing only the coefficient cannot repair that convention. The corrected general bound and both clean specializations above retain the complete planned surrogate scope. Mohri Lemma 4.5 overcounts at zero under its own $+1$ tie rule; only its valid upper bound is used here, proved directly in step 6.2.')
+print('prepared',len(list((base/'proposed/items').glob('*.md'))),'staged items')

@@ -1,0 +1,1390 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-metric-coupling",
+    "lem-finitely-generated-cone-is-closed",
+    "def-finite-metric-wasserstein-one",
+    "lem-finite-metric-transport-optima-attained",
+    "thm-finite-metric-transport-duality",
+    "ex-two-point-finite-metric-transport-duality",
+    "ex-finite-chain-transport-duality",
+    "ex-attaining-finite-metric-primal-dual-pair"
+  ],
+  "contracts": {
+    "def-finite-metric-coupling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires a fixed finite nonempty alphabet with m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Coupling entries may be zero; the Definition requires only nonnegativity and the two marginals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For m=1, the only probability vectors are p=q=(1) and the unique coupling is the 1-by-1 matrix (1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Zero coordinates in either marginal are allowed and force the corresponding row or column to be zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Probability vectors concentrated at one alphabet point satisfy the same row and column equations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The finite alphabet and all coordinates are supplied; no family of choices is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies what a coupling is and states no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies what a coupling is and states no biconditional claim."
+        }
+      ]
+    },
+    "lem-finitely-generated-cone-is-closed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-independence",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). As in\n[[def-linear-combination-and-span]], a **finite list** of vectors is a function\n$v : n \\to V$ on a von Neumann natural $n = \\{0, \\dots, n-1\\}$\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), written\n$v_i := v(i)$, and\n\n$$\\sum_{i<n} \\lambda_i v_i$$\n\nis the finite sum of [[def-monoid-finite-product]] read additively in the abelian\ngroup $(V,+,0_V)$, applied to the list $i \\mapsto \\lambda_i v_i$. No second notion\nof finite sum is introduced here.\n\n### Independence of a list\n\nA finite list $v : n \\to V$ is **linearly independent** when, for every list of\nscalars $\\lambda : n \\to F$,\n\n$$\\sum_{i<n} \\lambda_i v_i = 0_V \\quad \\Longrightarrow \\quad \\lambda_i = 0_F \\text{ for every } i < n,$$\n\nand **linearly dependent** otherwise, that is, when some $\\lambda : n \\to F$ has\n$\\sum_{i<n}\\lambda_i v_i = 0_V$ while $\\lambda_j \\ne 0_F$ for at least one\n$j < n$. Such a $\\lambda$ is called a **witness** to the dependence of $v$.\n\n### Independence of a subset\n\nA subset $S \\subseteq V$ is **linearly independent** when **every injective**\nfinite list $v : n \\to S$ ([[def-injection-surjection-bijection]]) is linearly\nindependent, and **linearly dependent** otherwise, that is, when some injective\nfinite list into $S$ is linearly dependent.\n\n**The injectivity clause is not decoration.** A linear combination in\n[[def-linear-combination-and-span]] is indexed by an arbitrary list $v : n \\to S$,\nwhich is **not** required to be injective. If the definition above quantified\nover all such lists, then for any $w \\in S$ the list $v : 2 \\to S$ with\n$v_0 = v_1 = w$ and the scalars $\\lambda_0 = 1_F$, $\\lambda_1 = -1_F$ would give\n\n$$\\sum_{i<2}\\lambda_i v_i = (0_V + 1_F w) + (-1_F)w = w + (-w) = 0_V$$\n\nwith $\\lambda_0 = 1_F \\ne 0_F$ ([[def-field]],\n[[lem-vector-space-elementary-consequences]]), so **every** nonempty subset of\n$V$ would be dependent and the notion would be empty. Quantifying over injective\nlists is what makes the subset notion the intended one. It costs nothing for\nlists: [[lem-independent-list-is-injective]] shows that the vanishing condition\nabove already forces a list to be injective, so no injectivity hypothesis has to\nbe carried alongside independence of a list.\n\n### The boundary cases are genuine cases\n\n$\\mathbb{N}$ contains $0$ ([[def-natural-numbers]]), so both of the following are\ninstances of the definitions and neither is a convention.\n\n- **The empty list is independent.** For $n = 0$ the only list of scalars is the\n  empty one, and the condition \"$\\lambda_i = 0_F$ for every $i < 0$\" holds\n  vacuously.\n- **$\\varnothing \\subseteq V$ is independent.** The only function $v : n \\to\n  \\varnothing$ is the empty one, with $n = 0$, and it is independent by the\n  previous point.\n- **$\\{0_V\\}$ is dependent.** The list $v : 1 \\to \\{0_V\\}$ with $v_0 = 0_V$ is\n  injective, and taking $\\lambda_0 = 1_F$ gives\n  $\\sum_{i<1}\\lambda_i v_i = 0_V + 1_F 0_V = 0_V$ by the recursion of\n  [[def-monoid-finite-product]] and $\\lambda 0_V = 0_V$\n  ([[lem-vector-space-elementary-consequences]]), while $1_F \\ne 0_F$ in a field\n  ([[def-field]]). So $\\{0_V\\}$, and hence every subset of $V$ containing $0_V$,\n  is linearly dependent.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-invertible-matrix-theorem",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_n(F)$, the following are equivalent:\n\n1. $A$ is invertible;\n2. $x\\mapsto Ax$ is a linear isomorphism;\n3. $N(A)=\\{0\\}$;\n4. $\\operatorname{rank}(A)=n$;\n5. $A$ has a pivot in every row and every column;\n6. the RREF of $A$ is $I_n$;\n7. for every $b\\in F^n$, the equation $Ax=b$ has exactly one solution.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-sign-rules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c \\in F$.\n\n1. If $a > 0$ and $b > 0$ then $ab > 0$.\n2. If $a > 0$ and $b < 0$ then $ab < 0$.\n3. If $a < 0$ and $b < 0$ then $ab > 0$.\n4. If $c > 0$ then $a < b \\iff ac < bc$.\n5. If $c < 0$ then $a < b \\iff bc < ac$ (multiplication by a negative reverses order).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\n[[def-metric-space]]. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n([[def-metric-space]]) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take a representation $x=\\sum_{i=1}^N\\lambda_i g_i$ with every $\\lambda_i\\ge0$ and let $S=\\{i:\\lambda_i>0\\}$. If the sublist indexed by $S$ is dependent, [F2] gives coefficients $c_i$, not all zero, with $\\sum_{i\\in S}c_i g_i=0$. Reverse all signs if needed so $J=\\{i\\in S:c_i>0\\}$ is nonempty, and set $t=\\min_{i\\in J}\\lambda_i/c_i>0$ using [F4]. Define $\\lambda'_i=\\lambda_i-tc_i$ for $i\\in S$ and $\\lambda'_i=0$ for $i\\notin S$. For $i\\in S$ with $c_i>0$, the minimum choice makes $\\lambda'_i\\ge0$ and makes at least one such coefficient zero; when $c_i\\le0$, $\\lambda'_i\\ge\\lambda_i>0$. Thus every $\\lambda'_i\\ge0$, the positive support strictly shrinks, and $\\sum_{i=1}^N\\lambda'_i g_i=x$. Repeating this finite support reduction at most $N$ times gives a representation of $x$ whose positive support is linearly independent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a nonempty independent sublist indexed by $S=\\{i_1,\\ldots,i_s\\}$, let $A:\\mathbb R^s\\to\\mathbb R^r$ have these columns, and let $G=A^{\\mathsf T}A$. If $Gz=0$, then $0=z^{\\mathsf T}Gz=\\|Az\\|_2^2$, so [F1] gives $Az=0$ and [F2] gives $z=0$. Thus $G$ is invertible by [F3]. Put $B=G^{-1}A^{\\mathsf T}$ and $P=AB$, so $BA=I$. The cone $C_S$ generated by this sublist is exactly $\\{x\\in\\mathbb R^r:Px=x,\\ (Bx)_k\\ge0\\text{ for }k<s\\}$: if $x=Az$ with $z\\ge0$, then $Bx=z$ and $Px=x$; conversely those displayed conditions give $x=P x=A(Bx)$ with nonnegative coefficients. Each coordinate of $Bx$ and $Px-x$ is a finite linear form $\\ell(x)=\\sum_{j<r}c_jx_j$. For $u\\in\\mathbb R^r$ and $k<r$, [F7] gives $u_k^2\\le\\sum_{j<r}u_j^2$; by [F5] and [F8], $|u_k|^2=u_k^2\\le\\|u\\|_2^2$, and both $|u_k|$ and $\\|u\\|_2$ are nonnegative, so [F8] gives $|u_k|\\le\\|u\\|_2$. For any finite list $a_0,\\ldots,a_{n-1}$, induction using the two-term triangle inequality in [F8] gives $|\\sum_{j<n}a_j|\\le\\sum_{j<n}|a_j|$: the empty case is equality and the successor step is the two-term triangle inequality. Applying this, the absolute-value product law, multiplication by nonnegative coefficients, and finite-sum monotonicity in [F7,F8] gives $|\\ell(x)-\\ell(y)|\\le\\sum_{j<r}|c_j|\\,|x_j-y_j|\\le(\\sum_{j<r}|c_j|)\\|x-y\\|_2$. If an equation $\\ell(x)=0$ fails at $x_0$, then $C_\\ell:=\\sum_{j<r}|c_j|>0$: otherwise [F7,F8] force every $c_j=0$, so $\\ell$ is identically zero. For $\\|x-x_0\\|_2<|\\ell(x_0)|/(2C_\\ell)$, the estimate gives $|\\ell(x)-\\ell(x_0)|<|\\ell(x_0)|/2$, hence $\\ell(x)\\ne0$. The same positivity of $C_\\ell$ holds when an inequality $\\ell(x)\\ge0$ fails; throughout the ball of radius $-\\ell(x_0)/(2C_\\ell)$, the estimate gives $\\ell(x)<\\ell(x_0)/2<0$. Thus every point outside $C_S$ has a ball in its complement; by [F5,F6] that complement is open and $C_S$ is closed. For the empty sublist, $C_\\emptyset=\\{0\\}$: if $x\\ne0$, then $d_2(x,0)>0$ by [F5,F9], and every $y$ with $d_2(x,y)<d_2(x,0)/2$ is nonzero, since otherwise the triangle inequality would give $d_2(x,0)<d_2(x,0)/2$. Thus the complement of $\\{0\\}$ is open by [F6], so $C_\\emptyset$ is closed.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1, every $x\\in C$ belongs to $C_S$ for some independent subset $S$ of the $N$ generators; conversely every such $C_S$ is contained in $C$. There are only finitely many subsets $S$, and the empty subset is included. For any $x\\notin C$, each closed $C_S$ has an open complement containing $x$; choosing one positive ball radius for each of the finitely many such complements and taking their positive minimum gives a ball about $x$ disjoint from their union. Thus $C$ has open complement and is closed. For $x,y\\in C$, choose coefficients $\\lambda_i,\\mu_i\\ge0$ with $x=\\sum_{i=1}^N\\lambda_i g_i$ and $y=\\sum_{i=1}^N\\mu_i g_i$. Then $\\alpha x+\\beta y=\\sum_{i=1}^N(\\alpha\\lambda_i+\\beta\\mu_i)g_i\\in C$ for all $\\alpha,\\beta\\ge0$, proving the stated closure under nonnegative linear combinations.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "F4",
+            "F6",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes r>=1 and N>=1; an empty ambient dimension or empty generator list is outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Taking every coefficient zero puts 0 in the cone; an empty support gives the explicitly handled cone {0}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1, the cone is a closed ray or {0}; the proof's empty/nonempty support cases apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Dependent and zero generators are handled by the finite support-reduction step before the Gram-matrix argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no scalar endpoint parameter or limiting case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The support is finite, each reduction removes a positive coefficient, and only a finite union is used; no choice axiom or sequential compactness is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states closedness and closure under nonnegative combinations, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states closedness and closure under nonnegative combinations, not an equivalence."
+        }
+      ]
+    },
+    "def-finite-metric-wasserstein-one": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires a finite nonempty metric space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition allows zero distances on the diagonal and zero coupling entries."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For a singleton, the unique probability vectors and coupling have cost zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Probability vectors may have zero coordinates; the coupling constraints retain those coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Point-mass probability vectors are admissible on the finite alphabet."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: All finite coordinates are indexed by the supplied alphabet; well-definedness of the minimum is discharged by the declared justified_by lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The phrase d(x,y)=0 if and only if x=y is an input metric axiom, not a new equivalence about W1. The actual item defines a minimum cost over couplings; attainment is delegated by justified_by, not claimed as an iff.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The phrase d(x,y)=0 if and only if x=y is an input metric axiom, not a new equivalence about W1. The actual item defines a minimum cost over couplings; attainment is delegated by justified_by, not claimed as an iff."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The phrase d(x,y)=0 if and only if x=y is an input metric axiom, not a new equivalence about W1. The actual item defines a minimum cost over couplings; attainment is delegated by justified_by, not claimed as an iff.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The phrase d(x,y)=0 if and only if x=y is an input metric axiom, not a new equivalence about W1. The actual item defines a minimum cost over couplings; attainment is delegated by justified_by, not claimed as an iff."
+          }
+        }
+      ]
+    },
+    "lem-finite-metric-transport-optima-attained": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-metric-coupling",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a finite nonempty set with this fixed ordering, and let $p=(p_i)_{i=1}^m$ and $q=(q_j)_{j=1}^m$ be probability vectors on $X$: their coordinates are nonnegative real numbers and $\\sum_{i=1}^m p_i=\\sum_{j=1}^m q_j=1$. A **coupling** of $p$ and $q$ is a real matrix $\\pi=(\\pi_{ij})_{i,j=1}^m$ satisfying\n$$\n\\pi_{ij}\\ge 0,\\qquad \\sum_{j=1}^m\\pi_{ij}=p_i\\quad(1\\le i\\le m),\\qquad \\sum_{i=1}^m\\pi_{ij}=q_j\\quad(1\\le j\\le m).\n$$\nWrite $\\Gamma(p,q)$ for the set of all such matrices. The first index records the source point and the second index records the destination point.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\n[[def-metric-space]]. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n([[def-metric-space]]) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-euclidean-semicontinuous-extreme-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $K\\subseteq\\mathbb R^n$ be nonempty and compact. Every lower semicontinuous function $f:K\\to\\mathbb R$ is bounded below and attains a minimum. Dually, every upper semicontinuous function $f:K\\to\\mathbb R$ is bounded above and attains a maximum.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-continuity",
+          "source_section": "Definition",
+          "quote": "Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces ([[def-metric-space]]), let\n$f : X \\to Y$ be a function and let $a \\in X$.\n\n$f$ is **continuous at $a$** if for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that\n\n$$d_X(x,a) < \\delta \\;\\Longrightarrow\\; d_Y\\big(f(x), f(a)\\big) < \\varepsilon \\qquad \\text{for all } x \\in X .$$\n\n$f$ is **continuous** (globally, or on $X$) if it is continuous at every point of\n$X$.\n\n**The same condition in balls.** Since $d_X(x,a) < \\delta$ says $x \\in B_X(a,\\delta)$\nand $d_Y(f(x),f(a)) < \\varepsilon$ says $f(x) \\in B_Y(f(a),\\varepsilon)$\n([[def-metric-ball]]), continuity at $a$ reads: for every $\\varepsilon > 0$ there\nis $\\delta > 0$ with\n\n$$f\\big[B_X(a,\\delta)\\big] \\subseteq B_Y\\big(f(a), \\varepsilon\\big).$$\n\nBoth forms are used below and are the same statement written twice.\n\n**Both metrics matter, and both are named.** Continuity is a property of the\ntriple $(d_X, d_Y, f)$, not of $f$ alone. When several metrics on the same\nunderlying sets are in play, as in [[def-equivalent-metrics]], the metrics are\nalways written out.\n\n**Quantifier order.** The $\\delta$ is allowed to depend on $\\varepsilon$ **and on\nthe point $a$**. Requiring one $\\delta$ to work at every point simultaneously is\na strictly stronger condition, uniform continuity; it is defined on a later page\nof this library, and at this point in the reading order it is written out in full\nwhere needed ([[def-equivalent-metrics]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-semicontinuity-on-euclidean-subsets",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $A\\subseteq\\mathbb R^n$, let $f:A\\to\\mathbb R$, and let $a\\in A$. Using the Euclidean metric and its balls ([[lem-metrics-on-rn]], [[def-metric-ball]]), $f$ is upper semicontinuous at $a$ when for every $\\varepsilon>0$ there is $\\delta>0$ such that $f(x)<f(a)+\\varepsilon$ for every $x\\in A\\cap B_2(a,\\delta)$.\n\nThe function is **lower semicontinuous at $a$** when for every $\\varepsilon>0$ there is $\\delta>0$ such that\n\n$$f(a)-\\varepsilon<f(x)\\qquad(x\\in A\\cap B_2(a,\\delta)).$$\n\nIt is upper or lower semicontinuous on $A$ when the corresponding condition holds at every point of $A$. These are relative notions on $A$; when $A$ is empty, each on-set condition is vacuous. A continuous function ([[def-metric-continuity]]) satisfies both conditions.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by\n$$\nW_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-square-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For\nevery $a \\in F$ with $a \\neq 0$ we have $a^2 > 0$, where $a^2 = a \\cdot a$. In\nparticular, every nonzero square is positive.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-zero-mult",
+          "source_section": "Statement",
+          "quote": "In any field $F$ ([[def-field]]), for every $a \\in F$ we have $0 \\cdot a = 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-of-sign-rules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c \\in F$.\n\n1. If $a > 0$ and $b > 0$ then $ab > 0$.\n2. If $a > 0$ and $b < 0$ then $ab < 0$.\n3. If $a < 0$ and $b < 0$ then $ab > 0$.\n4. If $c > 0$ then $a < b \\iff ac < bc$.\n5. If $c < 0$ then $a < b \\iff bc < ac$ (multiplication by a negative reverses order).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\pi_{ij}=p_iq_j$. These entries are nonnegative by [F1], and their row sums are $p_i\\sum_jq_j=p_i$ while their column sums are $q_j\\sum_ip_i=q_j$. Thus $\\pi\\in\\Gamma(p,q)$ and the coupling set is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Flatten a matrix into $\\mathbb R^{m^2}$ in row-major order, assigning entry $\\pi_{ij}$ to library coordinate $k=(i-1)m+(j-1)<m^2$; likewise potential coordinate $f_i$ corresponds to library coordinate $i-1<m$. In any dimension $n\\ge1$, for $u\\in\\mathbb R^n$ and $k<n$, [F11] gives $u_k^2\\le\\sum_{j<n}u_j^2$; by [F5,F11], $|u_k|^2=u_k^2\\le d_2(u,0)^2$, and both $|u_k|$ and $d_2(u,0)$ are nonnegative, so [F11] gives $|u_k|\\le d_2(u,0)$. By induction on $n$, every finite list satisfies $|\\sum_{k<n}a_k|\\le\\sum_{k<n}|a_k|$: the empty case is equality and the successor step follows from $|a+b|\\le|a|+|b|$ in [F11]. Thus for every finite linear form $L(z)=\\sum_{k<n}c_kz_k$, this bound, $|ab|=|a||b|$, the coordinate estimate, multiplication by nonnegative coefficients, finite-sum monotonicity and scaling in [F11] give $|L(z)-L(w)|\\le(\\sum_{k<n}|c_k|)d_2(z,w)$. The same estimate holds for every affine form $H(z)=L(z)+b$, since the constant cancels in $H(z)-H(w)$. The set $\\Gamma(p,q)$ is defined by finitely many affine equalities and weak inequalities. Each row or column equality, after moving its marginal to one side, has $m$ coefficients equal to $1$; each entrywise nonnegativity constraint has one coefficient equal to $1$, so the coefficient sum $C=\\sum|c_k|$ is positive for every constraint. If an affine equality $H(z)=0$ fails at $z_0$, then for $d_2(z,z_0)<|H(z_0)|/(2C)$ the estimate gives $|H(z)-H(z_0)|<|H(z_0)|/2$, so $H(z)\\ne0$. If an affine inequality $H(z)\\ge0$ fails at $z_0$, then for $d_2(z,z_0)<-H(z_0)/(2C)$ the estimate gives $H(z)<H(z_0)/2<0$. Thus every point outside $\\Gamma(p,q)$ has a ball in its complement, so [F5,F6] make $\\Gamma(p,q)$ closed. Also $0\\le\\pi_{ij}\\le p_i\\le1$ by [F1,F2], so the set is bounded. Since $m^2\\ge1$, [F6] makes $\\Gamma(p,q)$ compact.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a matrix difference $z-w$, the objective changes by at most $C d_2(z,w)$, where $C=\\sum_{i,j}d(x_i,x_j)\\ge0$ is finite; the coordinate bound is the same as in step 1.2. For any $\\varepsilon>0$, taking $\\delta=\\varepsilon/(C+1)$ shows that inputs within $\\delta$ have output difference less than $\\varepsilon$, so the objective is continuous by [F8] and lower semicontinuous by [F9]. It is real-valued because all distances are finite reals; by [F4] and [F1] its values are nonnegative. The nonempty compact set from steps 1.1–1.2 and [F7] therefore give a finite attained minimum, which is $W_1(p,q)$ by [F10].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The set $\\mathcal L_1(X,d)$ contains the zero vector. It is closed because its constraints are finitely many linear equalities and weak inequalities: $f_1=0$ has one nonzero coefficient, and writing each $|f_i-f_j|\\le d(x_i,x_j)$ as $d(x_i,x_j)-(f_i-f_j)\\ge0$ and $d(x_i,x_j)+(f_i-f_j)\\ge0$ gives two nonzero coefficients in each inequality when $i\\ne j$; when $i=j$ the constraint is the identity $0\\le0$. Thus every violated constraint has positive coefficient sum and the strict-violation ball argument in step 1.2 applies using [F5,F6,F11]. Since $f_1=0$ and $|f_i-f_1|\\le d(x_i,x_1)$, every $f\\in\\mathcal L_1(X,d)$ satisfies $|f_i|\\le d(x_i,x_1)\\le 1+\\sum_{k=1}^m d(x_k,x_1)$ by [F3,F4]; thus the set is bounded. Since $m\\ge1$, [F6] makes it compact.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F11",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The objective $f\\mapsto\\sum_i(p_i-q_i)f_i$ changes by at most $C'd_2(f,g)$, where $C'=\\sum_i|p_i-q_i|\\ge0$; taking $\\delta=\\varepsilon/(C'+1)$ for each $\\varepsilon>0$ proves continuity by [F8] and upper semicontinuity by [F9]. The nonempty compact set from step 2.2 and [F7] give an attained maximum.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes m>=1; this supplies a nonempty alphabet, the product coupling, and a first point for normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: When p=q, the diagonal coupling is feasible with zero cost and the zero potential is feasible; both finite extrema exist."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For m=1, the coupling set is the singleton (1) and the normalized potential set is {0}, both compact and nonempty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Zero marginal coordinates are allowed; the product coupling and the closed bounded constraint description remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Point masses are included among probability vectors; the explicit product coupling remains feasible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The product coupling is explicit, Heine-Borel and the compact extreme-value supplier are choice-free, and no arbitrary family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves nonemptiness, compactness and attainment, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves nonemptiness, compactness and attainment, not a biconditional."
+        }
+      ]
+    },
+    "thm-finite-metric-transport-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\n[[def-metric-space]]. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n([[def-metric-space]]) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-metric-coupling",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a finite nonempty set with this fixed ordering, and let $p=(p_i)_{i=1}^m$ and $q=(q_j)_{j=1}^m$ be probability vectors on $X$: their coordinates are nonnegative real numbers and $\\sum_{i=1}^m p_i=\\sum_{j=1}^m q_j=1$. A **coupling** of $p$ and $q$ is a real matrix $\\pi=(\\pi_{ij})_{i,j=1}^m$ satisfying\n$$\n\\pi_{ij}\\ge 0,\\qquad \\sum_{j=1}^m\\pi_{ij}=p_i\\quad(1\\le i\\le m),\\qquad \\sum_{i=1}^m\\pi_{ij}=q_j\\quad(1\\le j\\le m).\n$$\nWrite $\\Gamma(p,q)$ for the set of all such matrices. The first index records the source point and the second index records the destination point.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by\n$$\nW_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.\n$$",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-metric-transport-optima-attained",
+          "source_section": "Statement",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite metric space, and let $p,q$ be probability vectors on $X$. The coupling set $\\Gamma(p,q)$ is nonempty and compact in $\\mathbb R^{m^2}$, so the finite-metric transport cost $W_1(p,q)$ attains its minimum. The normalized 1-Lipschitz potential set\n$$\n\\mathcal L_1(X,d)=\\{f\\in\\mathbb R^m:f_1=0,\\ |f_i-f_j|\\le d(x_i,x_j)\\text{ for all }i,j\\}\n$$\nis also nonempty and compact, so the linear functional $f\\mapsto\\sum_{i=1}^m(p_i-q_i)f_i$ attains a maximum on it.",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finitely-generated-cone-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $r,N\\ge1$ be integers and let $g_1,\\ldots,g_N\\in\\mathbb R^r$. Define\n$$\nC=\\left\\{\\sum_{i=1}^N\\lambda_i g_i:\\lambda_i\\ge0\\text{ for every }i\\right\\}.\n$$\nThen $C$ is closed in the Euclidean topology, and for all $x,y\\in C$ and all real $\\alpha,\\beta\\ge0$, one has $\\alpha x+\\beta y\\in C$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $C\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $x\\notin C$. Then there are $a\\ne0$ and $b\\in\\mathbb R$ such that $\\langle a,z\\rangle\\le b<\\langle a,x\\rangle$ for every $z\\in C$. Thus a hyperplane strictly separates $x$ from $C$ ([[def-supporting-hyperplane-to-a-convex-set]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $\\pi\\in\\Gamma(p,q)$ and any $f\\in\\mathbb R^m$ with $f_1=0$ and $|f_i-f_j|\\le d(x_i,x_j)$, the marginal equations give $\\sum_i(p_i-q_i)f_i=\\sum_{i,j}\\pi_{ij}(f_i-f_j)\\le\\sum_{i,j}\\pi_{ij}d(x_i,x_j)$. The inequality uses $\\pi_{ij}\\ge0$ and $f_i-f_j\\le|f_i-f_j|\\le d(x_i,x_j)$. Thus every feasible dual value is at most every feasible primal cost.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Write $d_{ij}=d(x_i,x_j)$, and for $i=1,\\ldots,m$ let $e_i\\in\\mathbb R^m$ have value $1$ at library coordinate $k=i-1$ and $0$ at every other coordinate. For alphabet-indexed tuples $u=(u_i)_{i=1}^m$ and $v=(v_j)_{j=1}^m$, identify $(u,v,t)$ with the vector in $\\mathbb R^{2m+1}$ whose coordinate $k<m$ is $u_{k+1}$, whose coordinate $m+k$ is $v_{k+1}$, and whose coordinate $2m$ is $t$. Let $K$ be the nonnegative span of $(e_i,e_j,d_{ij})$ for all $i,j$, together with $(0,0,1)$. By [F7], $K$ is closed and closed under nonnegative linear combinations. For $x,y\\in K$ and $s\\in[0,1]$, [F7] gives $sx+(1-s)y\\in K$, so [F11] makes $K$ convex; the zero representation gives $0\\in K$. Put $c_*=W_1(p,q)$, which is finite and attained by [F6]. For every $\\varepsilon>0$, the vector $y_\\varepsilon=(p,q,c_*-\\varepsilon)$ under this identification is outside $K$: if it had a representation with coefficients $\\lambda_{ij}\\ge0$ and $t\\ge0$, its first two coordinate blocks would make $\\lambda\\in\\Gamma(p,q)$ and its last coordinate would give $c_*-\\varepsilon=\\sum_{i,j}d_{ij}\\lambda_{ij}+t\\ge c_*$, contradicting minimality.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F8] to $K$ and $y_\\varepsilon$. It gives a vector $h$ and threshold $\\beta$ with $\\langle h,z\\rangle\\le\\beta<\\langle h,y_\\varepsilon\\rangle$ for all $z\\in K$. Since $0\\in K$, $\\beta\\ge0$. By [F7], $s z\\in K$ for every $z\\in K$ and $s\\ge0$. If $\\langle h,z\\rangle>0$ for some $z\\in K$, then $s\\langle h,z\\rangle\\le\\beta$ would fail for large $s$. Hence $\\langle h,z\\rangle\\le0$ for every $z\\in K$, while $\\langle h,y_\\varepsilon\\rangle>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F10",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Decompose $h=(a,b,g)$ with $a,b\\in\\mathbb R^m$ and $g\\in\\mathbb R$. By [F10], pairing with $(0,0,1)\\in K$ gives $g\\le0$. If $g=0$, pairing with every $(e_i,e_j,d_{ij})$ gives $a_i+b_j\\le0$. Multiplying by $p_iq_j\\ge0$ and summing yields $\\sum_i p_i a_i+\\sum_jq_jb_j=\\sum_{i,j}p_iq_j(a_i+b_j)\\le0$. When $g=0$ this left-hand side is $\\langle h,y_\\varepsilon\\rangle$, contrary to step 2.1. Therefore $g<0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define $u_i=a_i/(-g)$ and $v_j=b_j/(-g)$. The generator inequalities and $g<0$ give $u_i+v_j\\le d_{ij}$ for all $i,j$. Dividing the strict point inequality by $-g>0$ gives $\\sum_i p_i u_i+\\sum_jq_jv_j>c_*-\\varepsilon$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Set $f_i=\\min_{1\\le j\\le m}(d_{ij}-v_j)$, whose minimum is attained by [F9]. From $u_i+v_j\\le d_{ij}$ we have $u_i\\le f_i$. For any $i,k,j$, the triangle inequality gives $d_{ij}-v_j\\le d_{ik}+d_{kj}-v_j$; taking finite minima yields $f_i\\le d_{ik}+f_k$, and symmetry gives $|f_i-f_k|\\le d_{ik}$. Also $f_j\\le d_{jj}-v_j=-v_j$, so $-f_j\\ge v_j$. Since $p,q$ are nonnegative, $\\sum_i(p_i-q_i)f_i\\ge\\sum_i p_i u_i+\\sum_jq_jv_j>c_*-\\varepsilon$. Replacing $f_i$ by $f_i-f_1$ preserves all Lipschitz inequalities and the objective because $\\sum_i p_i=\\sum_iq_i=1$; the resulting vector is normalized with first coordinate zero.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F3",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $D$ be the attained maximum in [F6]. Step 5.1 shows $D>c_*-\\varepsilon$ for every $\\varepsilon>0$, so $D\\ge c_*$; otherwise $\\varepsilon=(c_*-D)/2$ contradicts that inequality. Step 1.1 gives $D\\le c_*$. Hence $D=c_*=W_1(p,q)$, and both extrema are attained by [F6].",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Let $\\pi$ be any minimizing coupling and $f$ any maximizing normalized potential. By the marginal equations and optimal-value equality, $0=c_*-\\sum_i(p_i-q_i)f_i=\\sum_{i,j}\\pi_{ij}\\bigl(d_{ij}-(f_i-f_j)\\bigr)$. Each summand is nonnegative by feasibility. If $\\pi_{ij}>0$, its factor $d_{ij}-(f_i-f_j)$ must therefore be zero, proving $f_i-f_j=d_{ij}$.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.1",
+            "step 6.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The theorem assumes m>=1; for an empty alphabet the probability-vector normalization and first-potential normalization are not defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If p=q, the diagonal plan has zero cost and the zero potential has value zero; the general proof includes this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a singleton space, p=q=(1), W1=0 and the normalized potential set is the singleton zero vector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Zero coordinates are allowed; no division by p_i or q_j occurs, and the explicit product coupling still handles them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Point-mass probability vectors are included and the product coupling/separation arguments remain valid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses finite minima and sums, the explicit product coupling, a choice-free cone-closure proof and the stated Euclidean separator; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the metric separation iff and concludes equality of primal and dual extrema plus one-way complementary slackness. Proof 1.1 and 6.1 establish opposite numerical inequalities, rather than a pair of logical implications characterizing metric separation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The Statement assumes the metric separation iff and concludes equality of primal and dual extrema plus one-way complementary slackness. Proof 1.1 and 6.1 establish opposite numerical inequalities, rather than a pair of logical implications characterizing metric separation."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the metric separation iff and concludes equality of primal and dual extrema plus one-way complementary slackness. Proof 1.1 and 6.1 establish opposite numerical inequalities, rather than a pair of logical implications characterizing metric separation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The Statement assumes the metric separation iff and concludes equality of primal and dual extrema plus one-way complementary slackness. Proof 1.1 and 6.1 establish opposite numerical inequalities, rather than a pair of logical implications characterizing metric separation."
+          }
+        }
+      ]
+    },
+    "ex-two-point-finite-metric-transport-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-metric-coupling",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a finite nonempty set with this fixed ordering, and let $p=(p_i)_{i=1}^m$ and $q=(q_j)_{j=1}^m$ be probability vectors on $X$: their coordinates are nonnegative real numbers and $\\sum_{i=1}^m p_i=\\sum_{j=1}^m q_j=1$. A **coupling** of $p$ and $q$ is a real matrix $\\pi=(\\pi_{ij})_{i,j=1}^m$ satisfying\n$$\n\\pi_{ij}\\ge 0,\\qquad \\sum_{j=1}^m\\pi_{ij}=p_i\\quad(1\\le i\\le m),\\qquad \\sum_{i=1}^m\\pi_{ij}=q_j\\quad(1\\le j\\le m).\n$$\nWrite $\\Gamma(p,q)$ for the set of all such matrices. The first index records the source point and the second index records the destination point.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by\n$$\nW_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.\n$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-metric-transport-duality",
+          "source_section": "Statement",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set, let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$, and let $p=(p_i)_{i=1}^m$, $q=(q_i)_{i=1}^m$ have nonnegative coordinates with each vector summing to $1$. Let $\\Gamma(p,q)$ consist of matrices $\\pi_{ij}\\ge0$ with row sums $p_i$ and column sums $q_j$, and let\n$$\nW_1(p,q)=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d(x_i,x_j)\\pi_{ij}.\n$$\nThen\n$$\nW_1(p,q)=\\max_{\\substack{f\\in\\mathbb R^m,\\ f_1=0\\\\ |f_i-f_j|\\le d(x_i,x_j)\\ \\text{for all }i,j}}\\sum_{i=1}^m(p_i-q_i)f_i.\n$$\nBoth extrema are attained. Moreover, for every minimizing coupling $\\pi$ and every maximizing vector $f$, $\\pi_{ij}>0$ implies $f_i-f_j=d(x_i,x_j)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $a\\ge b$, all entries of the displayed matrix are nonnegative, its row sums are $b+(a-b)=a$ and $1-a$, and its column sums are $b$ and $(a-b)+(1-a)=1-b$. Its cost is $\\delta(a-b)$. If $b>a$, the second displayed matrix has nonnegative entries, row sums $a$ and $(b-a)+(1-b)=1-a$, column sums $a+(b-a)=b$ and $1-b$, and cost $\\delta(b-a)$. Thus in either case it is a feasible coupling of cost $\\delta|a-b|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $a\\ge b$, the vector $(0,-\\delta)$ is normalized and satisfies the Lipschitz constraint with equality; its objective is $(b-a)(-\\delta)=\\delta(a-b)$. If $b>a$, the vector $(0,\\delta)$ is normalized and feasible, and its objective is $(b-a)\\delta=\\delta(b-a)$. Thus the displayed potential has value $\\delta|a-b|$ in either case.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the optimal primal and dual values coincide. The feasible plan in step 1.1 gives an optimal primal value at most $\\delta|a-b|$, while the feasible potential in step 1.2 gives an optimal dual value at least that number. Equality of the optima forces both displayed values to be optimal and gives $W_1(p,q)=\\delta|a-b|$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes two points and a positive separation delta."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: When a=b, the diagonal plan and the displayed potential have value zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns a two-point alphabet and makes no one-sample or one-iteration claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The casewise matrices remain feasible when a=b and have zero off-diagonal mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The full range a,b in [0,1] includes point masses at either endpoint; all matrix entries remain nonnegative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Both casewise matrices and potentials are explicit finite objects; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a formula and explicit optimizers, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a formula and explicit optimizers, with no biconditional."
+        }
+      ]
+    },
+    "ex-finite-chain-transport-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-metric-transport-duality",
+          "source_section": "Statement",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set, let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$, and let $p=(p_i)_{i=1}^m$, $q=(q_i)_{i=1}^m$ have nonnegative coordinates with each vector summing to $1$. Let $\\Gamma(p,q)$ consist of matrices $\\pi_{ij}\\ge0$ with row sums $p_i$ and column sums $q_j$, and let\n$$\nW_1(p,q)=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d(x_i,x_j)\\pi_{ij}.\n$$\nThen\n$$\nW_1(p,q)=\\max_{\\substack{f\\in\\mathbb R^m,\\ f_1=0\\\\ |f_i-f_j|\\le d(x_i,x_j)\\ \\text{for all }i,j}}\\sum_{i=1}^m(p_i-q_i)f_i.\n$$\nBoth extrema are attained. Moreover, for every minimizing coupling $\\pi$ and every maximizing vector $f$, $\\pi_{ij}>0$ implies $f_i-f_j=d(x_i,x_j)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $r_i=p_i-q_i$ for $0\\le i\\le n$, set $R_{-1}=0$ and $R_n=0$, and use $\\sum_i r_i=0$ from [F3]. Then $r_i=R_i-R_{i-1}$ for every $i$, and expanding the finite sums gives $\\sum_{i=0}^n r_i f_i=\\sum_{k=0}^{n-1}R_k(f_k-f_{k+1})$. For any feasible 1-Lipschitz vector, $|f_k-f_{k+1}|\\le1$, so each term is at most $|R_k|$ and the dual objective is at most $\\sum_{k=0}^{n-1}|R_k|$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The recursively defined potential has $|f_{k+1}-f_k|=|\\operatorname{sgn}(R_k)|\\le1$ on each adjacent pair. For $i<j$, the triangle inequality on real absolute values gives $|f_i-f_j|\\le\\sum_{k=i}^{j-1}|f_{k+1}-f_k|\\le j-i=d(x_i,x_j)$; also $f_0=0$. Thus it is feasible. Its objective, by step 1.1, is $\\sum_{k=0}^{n-1}R_k\\operatorname{sgn}(R_k)=\\sum_{k=0}^{n-1}|R_k|$, so it attains the dual maximum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The dual maximum is therefore $\\sum_{k=0}^{n-1}|R_k|$ by steps 1.1–2.1. Applying [F2] identifies this value with $W_1(p,q)$ and proves the formula and the asserted attaining potential.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example assumes n>=1, so the chain has at least two points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: When p=q, every R_k is zero, the sign increments vanish, and the formula gives W1=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: For n=1 there is one cut; the formula is |p_0-q_0| and the single potential increment attains it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Zero coordinates and zero cumulative imbalances are allowed; sgn(0)=0 keeps the construction defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Point masses at chain endpoints satisfy the probability hypotheses and the finite-sum argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The potential is generated by a finite recursive rule on the given n steps; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives an explicit formula, not an equivalence."
+        }
+      ]
+    },
+    "ex-attaining-finite-metric-primal-dual-pair": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-metric-transport-duality",
+          "source_section": "Statement",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set, let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$, and let $p=(p_i)_{i=1}^m$, $q=(q_i)_{i=1}^m$ have nonnegative coordinates with each vector summing to $1$. Let $\\Gamma(p,q)$ consist of matrices $\\pi_{ij}\\ge0$ with row sums $p_i$ and column sums $q_j$, and let\n$$\nW_1(p,q)=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d(x_i,x_j)\\pi_{ij}.\n$$\nThen\n$$\nW_1(p,q)=\\max_{\\substack{f\\in\\mathbb R^m,\\ f_1=0\\\\ |f_i-f_j|\\le d(x_i,x_j)\\ \\text{for all }i,j}}\\sum_{i=1}^m(p_i-q_i)f_i.\n$$\nBoth extrema are attained. Moreover, for every minimizing coupling $\\pi$ and every maximizing vector $f$, $\\pi_{ij}>0$ implies $f_i-f_j=d(x_i,x_j)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-metric-coupling",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a finite nonempty set with this fixed ordering, and let $p=(p_i)_{i=1}^m$ and $q=(q_j)_{j=1}^m$ be probability vectors on $X$: their coordinates are nonnegative real numbers and $\\sum_{i=1}^m p_i=\\sum_{j=1}^m q_j=1$. A **coupling** of $p$ and $q$ is a real matrix $\\pi=(\\pi_{ij})_{i,j=1}^m$ satisfying\n$$\n\\pi_{ij}\\ge 0,\\qquad \\sum_{j=1}^m\\pi_{ij}=p_i\\quad(1\\le i\\le m),\\qquad \\sum_{i=1}^m\\pi_{ij}=q_j\\quad(1\\le j\\le m).\n$$\nWrite $\\Gamma(p,q)$ for the set of all such matrices. The first index records the source point and the second index records the destination point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by\n$$\nW_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The specified distances are symmetric, vanish exactly on equal points, and are positive for distinct points. For the three distinct points, the triangle inequalities are $2\\le1+1$, $1\\le2+1$, and $1\\le1+2$; when a point repeats, each inequality is $0\\le d+d$ or $d\\le d+0$. Thus this is a metric. The displayed matrix is nonnegative, has row sums $(1/2,0,1/2)$ and column sums $(0,1,0)$, and has cost $(1/2)\\cdot1+(1/2)\\cdot1=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The vector $f=(0,-1,0)$ has $f_1=0$. Its pairwise differences have magnitudes $1,1,0$, bounded respectively by distances $1,1,2$. Its objective is $(1/2)\\cdot0-1\\cdot(-1)+(1/2)\\cdot0=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The feasible plan and potential in steps 1.1 and 1.2 have the same value. By [F1], the primal optimum is at most the plan cost, the dual optimum is at least the potential value, and the two optima are equal; hence both are attained with value $1$. The positive entries are $\\pi_{12}=\\pi_{32}=1/2$, and they satisfy $f_1-f_2=d(x_1,x_2)=1$ and $f_3-f_2=d(x_3,x_2)=1$, as complementary slackness requires.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes a three-point metric space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example is a positive-cost witness with W1=1 and makes no zero-distance claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes three points and makes no singleton-space claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The source vector p has a zero middle coordinate and the target vector is concentrated at one point; both are valid probability vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The explicit p and q include zero coordinates and unit mass at the target point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The coupling and potential are explicitly displayed finite arrays; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives one attaining pair and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives one attaining pair and states no biconditional."
+        }
+      ]
+    }
+  }
+}

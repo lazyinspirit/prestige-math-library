@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "scope": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "contracts": {
+    "def-foundation-model-as-broad-pretraining-and-adaptation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The qualitative Definition makes no empty-model or empty-data existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero threshold for data, parameters, or performance is part of the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one modality is allowed; multimodality is not required."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate architecture or parameter limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no limiting parameter or training endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all models and distributions are supplied; no selection or existence axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        }
+      ]
+    },
+    "ex-empirical-language-model-scaling-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "In the usage of the 2021 Bommasani et al. report, a **foundation model** is a model trained on broad data, generally using self-supervision at scale, that can be adapted to a wide range of downstream tasks. Here a downstream task is a use of the trained model for a task after pretraining; adaptation is a procedure that supplies task information by conditioning the model on new input or by changing some or all of its parameters. A self-supervised objective obtains its training target from the input data or its structure rather than from a separate human label for every training example. “Broad” data, “at scale,” and a “wide range” of tasks are qualitative descriptors in this definition; it imposes no numerical data-size or parameter-count threshold and guarantees no task performance.\n\nThe report’s term is not restricted to language models or to a particular architecture. It includes models for language, vision, robotics, and multimodal inputs; a multimodal model uses more than one data modality, such as text and images. A prompt is task instructions or demonstrations added to a model’s input. In-context learning conditions on such a prompt and a test input while keeping the pretrained parameters fixed. Parameter-based adaptation instead optimizes some or all parameters using task information. These are distinct adaptation routes.\n\nThe report frames foundation models as one component in a larger ecosystem that runs from human data creation and data curation through training and adaptation to deployment and monitoring. Shared models can create a single point of failure: defects, vulnerabilities, or sensitive information learned during pretraining may affect multiple adapted applications. These are risks to assess in a particular system, not inevitable outcomes.\n\nFor labeled source and target environments, let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable input and label spaces, and let $P_S$ and $P_T$ be joint probability laws on $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$. Their input marginals are $\\mu_D(A)=P_D(A\\times\\mathsf Y)$ for $D\\in\\{S,T\\}$. A supplied conditional label kernel $K_D$ is a probability kernel from the input space to the label space such that, for every nonnegative product-measurable $g$, $\\int g(x,y)P_D(d(x,y))=\\int_{\\mathsf X}\\int_{\\mathsf Y}g(x,y)K_D(x,dy)\\mu_D(dx)$. Supplying $K_D$ is part of the description; no existence is asserted. Covariate shift is the stronger condition that $K_S(x,\\cdot)=K_T(x,\\cdot)$ outside a set of $\\mu_T$-measure zero and $\\mu_T\\ll\\mu_S$. Foundation-model status imposes no relation of this kind between pretraining and downstream task distributions.\n\nThe report’s 2021 theory discussion asks under what conditions a small population pretraining loss implies a small minimal adaptation loss. It identifies this pretraining-adaptation interface as a theory gap involving the pretraining and task distributions, objectives, training methods, and model architecture. The definition makes no general transfer, capability-emergence, or reliability claim from a pretraining loss.\n\nThe diagram separates the pretraining stage from two adaptation routes. Its arrows denote data flow only: the prompting route holds the pretrained parameters fixed, while the optimization route changes an allowed parameter set. Neither route in the diagram asserts a performance guarantee.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.72,transform shape,every node/.style={draw,rounded corners,align=center,text width=2.5cm,font=\\scriptsize,minimum height=0.8cm}]\n  \\node (data) at (0,0) {Broad data and curation};\n  \\node (pre) at (3,0) {Pretraining objective};\n  \\node (fm) at (6,0) {Pretrained model $\\theta_{\\rm FM}$};\n  \\node (prompt) at (9,-1.2) {Prompt conditioning; $\\theta_{\\rm FM}$ fixed};\n  \\node (opt) at (9,1.2) {Task-loss optimization over $\\gamma\\in\\Gamma$};\n  \\node (out) at (12,0) {Downstream model or system};\n  \\draw[->] (data) -- (pre);\n  \\draw[->] (pre) -- (fm);\n  \\draw[->] (fm) -- (prompt);\n  \\draw[->] (fm) -- (opt);\n  \\draw[->] (prompt) -- (out);\n  \\draw[->] (opt) -- (out);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-transformer-encoder-decoder-layer",
+          "source_section": "Definition",
+          "quote": "Fix a model width $d\\ge1$ and a feedforward hidden width $d_{\\rm ff}\\ge1$. A row-token matrix $X\\in\\mathbb R^{n\\times d}$ has one token in each row. Define $\\operatorname{ReLU}(t)=\\max(0,t)$ and apply it coordinatewise to vectors and matrices. A positionwise feedforward network with parameters $W_1\\in\\mathbb R^{d\\times d_{\\rm ff}}$, $b_1\\in\\mathbb R^{d_{\\rm ff}}$, $W_2\\in\\mathbb R^{d_{\\rm ff}\\times d}$, and $b_2\\in\\mathbb R^d$ maps each row $x$ to $\\operatorname{ReLU}(xW_1+b_1)W_2+b_2$, using the same parameters at every position. For $z\\in\\mathbb R^d$, let $\\bar z=d^{-1}\\sum_{r=1}^d z_r$ and $s^2(z)=d^{-1}\\sum_{r=1}^d(z_r-\\bar z)^2$. Layer normalization with parameters $\\gamma,\\beta\\in\\mathbb R^d$ and $\\epsilon>0$ is\n\n$$\n\\operatorname{LN}_{\\gamma,\\beta,\\epsilon}(z)=\\gamma\\odot\\frac{z-\\bar z\\mathbf 1}{\\sqrt{s^2(z)+\\epsilon}}+\\beta,\n$$\n\napplied rowwise; $\\odot$ is coordinatewise multiplication. The positive $\\epsilon$ makes the denominator nonzero.\n\nA post-normalized encoder layer is the composition\n\n$$S=\\operatorname{LN}_{\\gamma_1,\\beta_1,\\epsilon_1}\\!\\bigl(X+\\operatorname{MHA}(X,X,X)\\bigr),\\qquad Y=\\operatorname{LN}_{\\gamma_2,\\beta_2,\\epsilon_2}\\!\\bigl(S+\\operatorname{FFN}(S)\\bigr).$$\n\nA post-normalized decoder layer takes decoder states $U\\in\\mathbb R^{m\\times d}$ and encoder states $E\\in\\mathbb R^{n\\times d}$. It first applies masked self-attention to $U$ using the causal mask, then cross-attention with queries from the resulting decoder states and keys and values from $E$, and then a positionwise feedforward network; each sublayer output is added to its own input and followed by layer normalization. The decoder's causal mask admits keys at positions $j\\le i$ for query position $i$. Encoder and decoder stacks are finite compositions of their respective layers, with positional encodings added to token embeddings before the stacks.\n\nThe diagram records the dataflow and residual branches of one encoder layer and one decoder layer. Each arrow is a tensor passed to the indicated sublayer; each “Add & LN” node adds its sublayer input to its output and applies the stated rowwise layer normalization. The encoder output $E$ supplies the key and value rows for decoder cross-attention. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.72,transform shape]\n  \\tikzstyle{blk}=[draw,rounded corners,align=center,font=\\small,minimum width=1.35cm,minimum height=0.65cm]\n  \\node[blk] (ex) at (0,0) {$X$};\n  \\node[blk] (em) at (2.0,0) {MHA\\\\self-attn};\n  \\node[blk] (ea) at (4.0,0) {Add \\& LN};\n  \\node[blk] (ef) at (6.0,0) {Positionwise\\\\FFN};\n  \\node[blk] (eo) at (8.0,0) {Add \\& LN};\n  \\node[blk] (ey) at (10.0,0) {Encoder\\\\output $E$};\n  \\draw[->] (ex) -- (em);\n  \\draw[->] (em) -- (ea);\n  \\draw[->] (ex.south) to[bend right=28] (ea.south);\n  \\draw[->] (ea) -- (ef);\n  \\draw[->] (ef) -- (eo);\n  \\draw[->] (ea.south) to[bend right=28] (eo.south);\n  \\draw[->] (eo) -- (ey);\n\n  \\node[blk] (dx) at (0,-2.3) {$U$};\n  \\node[blk] (dm) at (2.0,-2.3) {Causal\\\\self-attn};\n  \\node[blk] (da) at (4.0,-2.3) {Add \\& LN};\n  \\node[blk] (dc) at (6.0,-2.3) {Cross-attn\\\\to $E$};\n  \\node[blk] (db) at (8.0,-2.3) {Add \\& LN};\n  \\node[blk] (df) at (10.0,-2.3) {Positionwise\\\\FFN};\n  \\node[blk] (do) at (12.0,-2.3) {Add \\& LN};\n  \\draw[->] (dx) -- (dm);\n  \\draw[->] (dm) -- (da);\n  \\draw[->] (dx.south) to[bend right=25] (da.south);\n  \\draw[->] (da) -- (dc);\n  \\draw[->] (dc) -- (db);\n  \\draw[->] (da.south) to[bend right=25] (db.south);\n  \\draw[->] (db) -- (df);\n  \\draw[->] (df) -- (do);\n  \\draw[->] (db.south) to[bend right=25] (do.south);\n  \\draw[->] (ey.south) -- (dc.north);\n\\end{tikzpicture}\n```\n\nThe fixed-width expressivity result uses a different, explicitly defined block without layer normalization. In the column-token convention $X\\in\\mathbb R^{d\\times n}$, one Yun attention sublayer with two heads of size one is\n\n$$\n\\operatorname{Attn}_{Y}(X)=X+\\sum_{i=1}^{2}W_O^iW_V^iX\\,\\operatorname{softmax}_{\\rm col}\\!\\bigl((W_K^iX)^{\\mathsf T}(W_Q^iX+b_Q^i\\mathbf 1_n^{\\mathsf T})\\bigr),\n$$\n\nwhere $W_Q^i,W_K^i,W_V^i\\in\\mathbb R^{1\\times d}$, $W_O^i\\in\\mathbb R^{d\\times1}$, and $b_Q^i\\in\\mathbb R$ is a shared scalar query bias; $\\operatorname{softmax}_{\\rm col}$ normalizes each column over its key positions. Its tokenwise feedforward sublayer is\n\n$$\n\\operatorname{FF}_{Y}(Z)=Z+W_2\\operatorname{ReLU}(W_1Z+b_1\\mathbf 1_n^{\\mathsf T})+b_2\\mathbf 1_n^{\\mathsf T},\n$$\n\nwith $W_1\\in\\mathbb R^{4\\times d}$ and $W_2\\in\\mathbb R^{d\\times4}$. A Yun block is $\\operatorname{FF}_{Y}\\circ\\operatorname{Attn}_{Y}$, and $\\mathcal T^{2,1,4}$ is the set of all finite compositions of such blocks. Its positional class consists of maps $X\\mapsto g(X+E)$ with $g\\in\\mathcal T^{2,1,4}$ and a trainable $E\\in\\mathbb R^{d\\times n}$. This expressivity block has no layer normalization; its widths and head sizes are exactly as displayed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "power-curve-ratio",
+          "claim": "For $x,x_c,\\lambda>0$ and a fitted power curve $\\widehat L(x)=(x_c/x)^\\alpha$, exponent laws give $\\widehat L(\\lambda x)/\\widehat L(x)=((x_c/(\\lambda x))/(x_c/x))^\\alpha=\\lambda^{-\\alpha}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reported-fit-specializations",
+          "claim": "Set $\\lambda=2$ and use in turn $(x,\\alpha)=(N,0.076)$, $(D,0.095)$, and $(C_{\\min},0.050)$ in their respective regimes; the fitted ratios are $2^{-0.076}$, $2^{-0.095}$, and $2^{-0.050}$. The allocation fits similarly multiply $N_{\\mathrm{opt}}$, $B_{\\mathrm{crit}}$, and $S_{\\min}$ by $2^{0.73}$, $2^{0.24}$, and $2^{0.03}$ when $C_{\\min}$ doubles. These substitutions unpack the empirical fits only; [F1] and [F2] do not turn them into transfer or architecture theorems.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fits require positive parameter, dataset, and compute scales; no empty model or dataset is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Each power curve divides by its positive scale variable; zero scale is outside the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the ratio is 1 when the multiplicative scale factor lambda is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-width, zero-layer, or degenerate model claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the numeric model and dataset ranges are bounded, and ratios are claimed only when both values remain in the measured range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Verification use positive scalar arithmetic only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example reports one-way empirical fits and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example reports one-way empirical fits and no biconditional."
+        }
+      ]
+    },
+    "ex-pretraining-adaptation-interface-limitations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "In the usage of the 2021 Bommasani et al. report, a **foundation model** is a model trained on broad data, generally using self-supervision at scale, that can be adapted to a wide range of downstream tasks. Here a downstream task is a use of the trained model for a task after pretraining; adaptation is a procedure that supplies task information by conditioning the model on new input or by changing some or all of its parameters. A self-supervised objective obtains its training target from the input data or its structure rather than from a separate human label for every training example. “Broad” data, “at scale,” and a “wide range” of tasks are qualitative descriptors in this definition; it imposes no numerical data-size or parameter-count threshold and guarantees no task performance.\n\nThe report’s term is not restricted to language models or to a particular architecture. It includes models for language, vision, robotics, and multimodal inputs; a multimodal model uses more than one data modality, such as text and images. A prompt is task instructions or demonstrations added to a model’s input. In-context learning conditions on such a prompt and a test input while keeping the pretrained parameters fixed. Parameter-based adaptation instead optimizes some or all parameters using task information. These are distinct adaptation routes.\n\nThe report frames foundation models as one component in a larger ecosystem that runs from human data creation and data curation through training and adaptation to deployment and monitoring. Shared models can create a single point of failure: defects, vulnerabilities, or sensitive information learned during pretraining may affect multiple adapted applications. These are risks to assess in a particular system, not inevitable outcomes.\n\nFor labeled source and target environments, let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable input and label spaces, and let $P_S$ and $P_T$ be joint probability laws on $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$. Their input marginals are $\\mu_D(A)=P_D(A\\times\\mathsf Y)$ for $D\\in\\{S,T\\}$. A supplied conditional label kernel $K_D$ is a probability kernel from the input space to the label space such that, for every nonnegative product-measurable $g$, $\\int g(x,y)P_D(d(x,y))=\\int_{\\mathsf X}\\int_{\\mathsf Y}g(x,y)K_D(x,dy)\\mu_D(dx)$. Supplying $K_D$ is part of the description; no existence is asserted. Covariate shift is the stronger condition that $K_S(x,\\cdot)=K_T(x,\\cdot)$ outside a set of $\\mu_T$-measure zero and $\\mu_T\\ll\\mu_S$. Foundation-model status imposes no relation of this kind between pretraining and downstream task distributions.\n\nThe report’s 2021 theory discussion asks under what conditions a small population pretraining loss implies a small minimal adaptation loss. It identifies this pretraining-adaptation interface as a theory gap involving the pretraining and task distributions, objectives, training methods, and model architecture. The definition makes no general transfer, capability-emergence, or reliability claim from a pretraining loss.\n\nThe diagram separates the pretraining stage from two adaptation routes. Its arrows denote data flow only: the prompting route holds the pretrained parameters fixed, while the optimization route changes an allowed parameter set. Neither route in the diagram asserts a performance guarantee.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.72,transform shape,every node/.style={draw,rounded corners,align=center,text width=2.5cm,font=\\scriptsize,minimum height=0.8cm}]\n  \\node (data) at (0,0) {Broad data and curation};\n  \\node (pre) at (3,0) {Pretraining objective};\n  \\node (fm) at (6,0) {Pretrained model $\\theta_{\\rm FM}$};\n  \\node (prompt) at (9,-1.2) {Prompt conditioning; $\\theta_{\\rm FM}$ fixed};\n  \\node (opt) at (9,1.2) {Task-loss optimization over $\\gamma\\in\\Gamma$};\n  \\node (out) at (12,0) {Downstream model or system};\n  \\draw[->] (data) -- (pre);\n  \\draw[->] (pre) -- (fm);\n  \\draw[->] (fm) -- (prompt);\n  \\draw[->] (fm) -- (opt);\n  \\draw[->] (prompt) -- (out);\n  \\draw[->] (opt) -- (out);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-source-target-distributions-and-shift",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\Sigma_X)$, $(\\mathsf Y,\\Sigma_Y)$, and $(\\mathsf A,\\Sigma_A)$ be nonempty measurable spaces. A **source/target pair of joint laws** consists of probability measures $P_S$ and $P_T$ on $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$. For $D\\in\\{S,T\\}$, its input marginal is the probability measure $\\mu_D$ on $(\\mathsf X,\\Sigma_X)$ defined by $\\mu_D(A)=P_D(A\\times\\mathsf Y)$. If $h:\\mathsf X\\to\\mathsf A$ is measurable and $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ is product-measurable, then $(x,y)\\mapsto(h(x),y)$ is measurable: the preimage of a measurable rectangle $U\\times V$ is $h^{-1}(U)\\times V$, and such rectangles generate the product sigma-algebra. Taking preimages once more shows that $(x,y)\\mapsto\\ell(h(x),y)$ is measurable. The domain risk is the extended nonnegative integral\n$$R_D(h):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(h(x),y)\\,P_D(d(x,y)).$$\n\nA **conditional label kernel** for $P_D$ is a specified probability kernel $K_D$ from $(\\mathsf X,\\Sigma_X)$ to $(\\mathsf Y,\\Sigma_Y)$ such that, for every nonnegative product-measurable $g:\\mathsf X\\times\\mathsf Y\\to[0,+\\infty]$,\n$$\\int g(x,y)\\,P_D(d(x,y))=\\int_{\\mathsf X}\\left(\\int_{\\mathsf Y}g(x,y)\\,K_D(x,dy)\\right)\\mu_D(dx).$$\nThe pair is under **covariate shift** when conditional label kernels $K_S,K_T$ are supplied, there is a measurable set $N$ with $\\mu_T(N)=0$ such that $K_S(x,\\cdot)=K_T(x,\\cdot)$ as probability measures for every $x\\notin N$, and $\\mu_T\\ll\\mu_S$. No existence of conditional kernels is asserted by this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "In the usage of the 2021 Bommasani et al. report, a **foundation model** is a model trained on broad data, generally using self-supervision at scale, that can be adapted to a wide range of downstream tasks. Here a downstream task is a use of the trained model for a task after pretraining; adaptation is a procedure that supplies task information by conditioning the model on new input or by changing some or all of its parameters. A self-supervised objective obtains its training target from the input data or its structure rather than from a separate human label for every training example. “Broad” data, “at scale,” and a “wide range” of tasks are qualitative descriptors in this definition; it imposes no numerical data-size or parameter-count threshold and guarantees no task performance.\n\nThe report’s term is not restricted to language models or to a particular architecture. It includes models for language, vision, robotics, and multimodal inputs; a multimodal model uses more than one data modality, such as text and images. A prompt is task instructions or demonstrations added to a model’s input. In-context learning conditions on such a prompt and a test input while keeping the pretrained parameters fixed. Parameter-based adaptation instead optimizes some or all parameters using task information. These are distinct adaptation routes.\n\nThe report frames foundation models as one component in a larger ecosystem that runs from human data creation and data curation through training and adaptation to deployment and monitoring. Shared models can create a single point of failure: defects, vulnerabilities, or sensitive information learned during pretraining may affect multiple adapted applications. These are risks to assess in a particular system, not inevitable outcomes.\n\nFor labeled source and target environments, let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable input and label spaces, and let $P_S$ and $P_T$ be joint probability laws on $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$. Their input marginals are $\\mu_D(A)=P_D(A\\times\\mathsf Y)$ for $D\\in\\{S,T\\}$. A supplied conditional label kernel $K_D$ is a probability kernel from the input space to the label space such that, for every nonnegative product-measurable $g$, $\\int g(x,y)P_D(d(x,y))=\\int_{\\mathsf X}\\int_{\\mathsf Y}g(x,y)K_D(x,dy)\\mu_D(dx)$. Supplying $K_D$ is part of the description; no existence is asserted. Covariate shift is the stronger condition that $K_S(x,\\cdot)=K_T(x,\\cdot)$ outside a set of $\\mu_T$-measure zero and $\\mu_T\\ll\\mu_S$. Foundation-model status imposes no relation of this kind between pretraining and downstream task distributions.\n\nThe report’s 2021 theory discussion asks under what conditions a small population pretraining loss implies a small minimal adaptation loss. It identifies this pretraining-adaptation interface as a theory gap involving the pretraining and task distributions, objectives, training methods, and model architecture. The definition makes no general transfer, capability-emergence, or reliability claim from a pretraining loss.\n\nThe diagram separates the pretraining stage from two adaptation routes. Its arrows denote data flow only: the prompting route holds the pretrained parameters fixed, while the optimization route changes an allowed parameter set. Neither route in the diagram asserts a performance guarantee.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.72,transform shape,every node/.style={draw,rounded corners,align=center,text width=2.5cm,font=\\scriptsize,minimum height=0.8cm}]\n  \\node (data) at (0,0) {Broad data and curation};\n  \\node (pre) at (3,0) {Pretraining objective};\n  \\node (fm) at (6,0) {Pretrained model $\\theta_{\\rm FM}$};\n  \\node (prompt) at (9,-1.2) {Prompt conditioning; $\\theta_{\\rm FM}$ fixed};\n  \\node (opt) at (9,1.2) {Task-loss optimization over $\\gamma\\in\\Gamma$};\n  \\node (out) at (12,0) {Downstream model or system};\n  \\draw[->] (data) -- (pre);\n  \\draw[->] (pre) -- (fm);\n  \\draw[->] (fm) -- (prompt);\n  \\draw[->] (fm) -- (opt);\n  \\draw[->] (prompt) -- (out);\n  \\draw[->] (opt) -- (out);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-kernel-identities",
+          "claim": "For every nonnegative $g:\\mathsf X\\times\\mathsf Y\\to[0,+\\infty]$, $\\int g\\,dP_S=g(a,0)=\\int_{\\mathsf X}\\int_{\\mathsf Y}g(x,y)K_S(x,dy)\\mu_S(dx)$, and likewise $\\int g\\,dP_T=g(b,1)=\\int_{\\mathsf X}\\int_{\\mathsf Y}g(x,y)K_T(x,dy)\\mu_T(dx)$. Thus the supplied kernels and stated marginals give the two joint laws under the source/target convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "non-domination-witness",
+          "claim": "For $B=\\{b\\}$, $\\mu_S(B)=0$ while $\\mu_T(B)=1$, so $\\mu_T\\not\\ll\\mu_S$. This violates a required covariate-shift hypothesis in [F2], regardless of whether the two kernels agree.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "adaptation-route-distinction",
+          "claim": "By [F3], the in-context route keeps the pretrained parameters fixed and changes the prompt input, whereas a parameter-ERM formulation varies $\\gamma\\in\\Gamma$ to minimize the stated sample loss. By [F1], the 2021 report does not supply a general implication from low pretraining loss to low adaptation loss. The finite shift example therefore carries no task-performance guarantee.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite spaces are nonempty and the sample size is assumed n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the source marginal assigns zero mass to {b}, which is the non-domination witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: each joint law and supplied conditional kernel is a unit point mass of total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: both joint laws are point masses; Step 1.1 verifies their conditional-kernel identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting model parameter, training endpoint, or asymptotic law is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Verification: the finite spaces, laws, and kernels are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Verification contrasts prompt conditioning with parameter optimization after explicitly factoring the two point-mass joint laws. The singleton target-support witness defeats domination; no converse relation between adaptation success and pretraining fit is asserted.",
+            "item_sha256": "6cbd0e66258013ba5e1b7ecb3863287775fb21369ee38d9c96fc3c98fbcaef09",
+            "row_sha256": "669e6646c72ffa3ee12ea5a61d74493a12ad7eacf10059443fb5ab1cf7d346f7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Verification contrasts prompt conditioning with parameter optimization after explicitly factoring the two point-mass joint laws. The singleton target-support witness defeats domination; no converse relation between adaptation success and pretraining fit is asserted.",
+            "item_sha256": "6cbd0e66258013ba5e1b7ecb3863287775fb21369ee38d9c96fc3c98fbcaef09",
+            "row_sha256": "5954e29746bd36f2147ac660de461c43a668001da4872533250f4824717c953a"
+          }
+        }
+      ]
+    }
+  }
+}

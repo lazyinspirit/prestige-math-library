@@ -1,0 +1,92 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "57",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "ex-reconstruction-objective-shortcut",
+      "model": "gpt-6-luna",
+      "context_sha256": "6c504bf299d0a75db0242b59da665e9c20bc3ffa8ec46759f386b34498e5d598",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Given asserts one mask-independent E(x,V)=z_* although def-reconstruction-autoencoder requires a family in Z^V. Families indexed by {1} and {2} have different domains, so that asserted encoder is not a map of the required type. Repair returns (z_*) indexed by V and compares the two labels at each fixed V; the zero-loss calculation is preserved.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.06377"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-reconstruction-objective-shortcut",
+      "disposition": "repaired",
+      "post_sha256": "1485f7d9ee38de55b9ee2bd4bd78313807176e44ad9f860e2a5c086209bd956e",
+      "review_context_sha256": "13652757e8d94ae255c75dbb4a41f3d3031e22194394bb6a14ab9266d928ecc6",
+      "reason": "Repaired the ill-typed encoder as E(V,(x_j))=(0) indexed by V in R^V. Both patch standard deviations are 1/4 and their normalized targets equal (-1,1), so all four image-mask outcomes have zero loss. At each fixed mask both images produce the same family; independent masking gives no label information. Identity output activations with zero weights and fixed biases realize the maps. He et al. section 3, section 4/Table 1 and Appendix A.1/Tables 8-9 confirm the retained target convention and separately qualified empirical protocol.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.06377"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-reconstruction-objective-shortcut",
+      "class": "accuracy",
+      "subclass": "ill-typed-construction",
+      "severity": "fatal",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "source_rejection": {
+        "id": "ex-reconstruction-objective-shortcut",
+        "model": "gpt-6-luna",
+        "context_sha256": "6c504bf299d0a75db0242b59da665e9c20bc3ffa8ec46759f386b34498e5d598"
+      },
+      "reason": "The Given asserts one mask-independent E(x,V)=z_* although def-reconstruction-autoencoder requires a family in Z^V. Families indexed by {1} and {2} have different domains, so that asserted encoder is not a map of the required type. Repair returns (z_*) indexed by V and compares the two labels at each fixed V; the zero-loss calculation is preserved.",
+      "repair": "Example and Given now return a constant token at each visible index; Verification 2.1 compares representations for each fixed mask. Updated only the assigned contract derivation claim for step 2.1.",
+      "post_sha256": "1485f7d9ee38de55b9ee2bd4bd78313807176e44ad9f860e2a5c086209bd956e",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/2111.06377"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "reason": "The repaired carrier is draft; no Statement or Definition section changed, no new interface was added, and the current item/reference search found no consuming item. No published consumer repair or acceptance is proposed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      "Read assigned item, both MAE supplier definitions/algorithm, F3 finite expectation, F4 feedforward definition, owning page carriers and manifest.",
+      "Corrected the Example, Given and step 2.1 to use the indexed family with token 0 in R. Means 1/4,3/4 and standard deviations 1/4 give normalized targets (-1,1) on all four outcomes. For each mask the two images have identical representations, and independent masking conveys no label information.",
+      "Read He et al. section 3, section 4/Table 1 and Appendix A.1/Tables 8-9 in the linked PDF; empirical protocol matches the retained text.",
+      "Focused precheck: 1 checked, 0 failed; rendercheck: 1 checked, no errors or warnings; proof-layout: 3 steps, 0 defects.",
+      "Bound current review immediately using step5-workflow review-contexts; source guard differs from assignment before guard 4a0007be126d06fdefceeb0fc56bfa69d95793b9fa67c269be27f8c81440bf39.",
+      "Acquired shared-write lock, reread the contract, replaced only the assigned step 2.1 derivation claim, ran its strict focused proof-contract check successfully with zero errors/warnings, then released the lock. Historical independent risk-review and boundary reviews were preserved."
+    ],
+    "pending": [],
+    "outside_lane_alerts": [],
+    "repair_complete": true,
+    "interface_check": "Compared original and corrected sections: only Example, Facts & Assumptions, and Verification changed. No Statement or Definition exists in this carrier; no new supplier was added. Exact-ID search of current items/library found only the assigned item and its examples-page inventory; that frontmatter-only compact-v1 page needs no edit. downstream is empty.",
+    "diagram_check": "The assigned example contains no TikZ/tikzcd diagram and needs none for its explicit two-image calculation. Supplier algorithm data-flow arrows and feedforward-network arrows agree with their respective instructions and evaluation convention.",
+    "scope": "No other item, page, manifest, baseline, shared ledger, judge stamp, certificate or round state was edited. The unchanged Step-4 digest already records six outside published presentation alerts; they are not new adjudications by this unit."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-57.proof-contracts.json": "a90bbf910ad91f83a37255204ee46e57b75eb1b7e6dae13e4680b6b01102b6ce"
+  }
+}

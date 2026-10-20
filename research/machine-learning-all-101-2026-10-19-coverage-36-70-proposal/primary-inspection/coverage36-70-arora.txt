@@ -1,0 +1,333 @@
+PDF PAGE 2
+Stronger Generalization Bounds for Deep Nets via a Compression Approach
+Contributions of this paper.
+1. A simple compression framework (Section 2) for prov-
+ing generalization bounds, perhaps a more explicit and
+intuitive form of the PAC-Bayes work. It also yields
+elementary short proofs of recent generalization re-
+sults (Section 2.2).
+2. Identifying new form of noise-stability for deep nets:
+the stability of each layer’s computation to noise in-
+jected at lower layers. (Earlier papers worked only
+with stability of the output layer.) Figure 1 visualizes
+the stability of network w.r.t. Gaussian injected noise.
+Formal statements require a string of other properties
+(Section 3). All are empirically studied, including their
+correlation with generalization (Section 6).
+3. Using the above properties to derive efﬁcient and prov-
+ably correct algorithms that reduce the effective num-
+ber of parameters in the nets, yielding generalization
+bounds that: (a) are better than naive parameter count-
+ing (Section 6) (b) depend on simple, intuitive and
+measurable properties of the network (Section 4) (c)
+apply also to convolutional nets (Section 5) (d) empiri-
+cally correlate with generalization (Section 6).
+The main idea is to show that noise stability allows individ-
+ual layers to be compressed via a linear-algebraic procedure
+Algorithm 1. This results in new error in the output of the
+layer. This added error is “Gaussian-like” and tends to get
+attenuated as it propagates to higher layers.
+Figure 1. Attenuation of injected noise on a VGG-19 net trained
+on CIFAR-10. The x-axis is the index of layers and y-axis denote
+the relative error due to the noise (∥ˆxi −xi∥/∥xi∥). A curve starts
+at the layer where a scaled Gaussian noise is injected to its input,
+whose ℓ2 norm is set to 10% of the norm of its original input. As
+it propagates up, the injected noise has rapidly decreasing effect
+on higher layers. This property is shown to imply compressibility.
+Other related works. Dziugaite and Roy (2017) use non-
+convex optimization to optimize the PAC-Bayes bound and
+get a non-vacuous sample bound on MNIST. While very
+creative, this provides little insight into favorable properties
+of networks. Liang et al. (2017) have suggested Fisher-
+Rao metric, a regularization based on the Fisher matrix and
+showed that this metric correlate with generalization. Un-
+fortunately, they could only apply their method to linear
+networks. Recently Kawaguchi et al. (2017) connects Path-
+Norm (Neyshabur et al., 2015a) to generalization. However,
+the proved generalization bound depends on the distribution
+and measuring it requires vector operations on exponentially
+high dimensional vectors. Other works have designed exper-
+iments to empirically evaluate potential properties of the net-
+work that helps generalization(Arpit et al., 2017; Neyshabur
+et al., 2017b; Dinh et al., 2017). The idea of compressing
+trained deep nets is very popular for low-power applications;
+for a survey see Cheng et al. (2018).
+Finally, note that the terms compression and stability are
+traditionally used in a different sense in generalization the-
+ory (Littlestone and Warmuth, 1986; Kearns and Ron, 1999;
+Shalev-Shwartz et al., 2010). Our framework is compared
+to other notions in the remarks after Theorem 2.1.
+Notation: We use standard formalization of multiclass clas-
+siﬁcation, where data consists of sample x and its label y
+(an integer from 1 to k). A multiclass classiﬁer f maps input
+x to f(x) ∈Rk and the maximum coordinate of f(x) is
+the predicted label. The classiﬁcation loss for any distribu-
+tion D is deﬁned as P(x,y)∼D [f(x)[y] < maxi̸=y f(x)[j]]
+where f(x)[y] is the y-th coordinate of f(x). If γ > 0 is
+some desired margin, then the expected margin loss is
+Lγ(f) = P(x,y)∼D
+
+f(x)[y] ≤γ + max
+i̸=y f(x)[j]
+
+(Notice, the classiﬁcation loss corresponds to γ = 0.) Let
+ˆLγ denote empirical estimate of the margin loss. General-
+ization error is the difference between the two.
+For most of the paper we assume that deep nets have fully
+connected layers, and use ReLU activations. We treat con-
+volutional nets in Section 5. If the net has d layers, we
+label the vector before activation at these layers by x0, x1,
+xd for the d layers where x0 is the input to the net, also
+denoted simply x. So xi = Aiφ(xi−1) where Ai is the
+weight matrix of the ith layer. (Here φ(x) if x is a vector
+applies the ReLU component-wise. The ReLU is allowed a
+trainable bias parameter, which is omitted from the notation
+because it has no effect on any calculations below.) We
+denote the number of hidden units in layer i by hi and set
+h = maxd
+i=1 hi. Let fA(x) be the function calculated by
+the above network.
+Stable rank of a matrix B is ∥B∥2
+F /∥B∥2
+2, where ∥· ∥F
+denotes Frobenius norm and ∥· ∥2 denotes spectral norm.
+Note that stable rank is at most (linear algebraic) rank.
+For any two layer i ≤j, denote by M i,j the operator for
+composition of these layers and Ji,j
+x
+be the Jacobian of
+this operator at input x (a matrix whose p, q is the partial
+derivative of the pth output coordinate with respect to the
+q’th input input). Therefore, we have xj = M i,j(xi). Fur-
+thermore, since the activation functions are ReLU, we have
+
+PDF PAGE 3
+Stronger Generalization Bounds for Deep Nets via a Compression Approach
+M i,j(xi) = Ji,j
+xi xi.
+2. Compression and Generalization
+Our compression framework rests on the following obvious
+fact. Suppose the training data contains m samples, and f
+is a classiﬁer from a complicated class (e.g., deep nets with
+much more than m parameters) that incurs very low empir-
+ical loss. We are trying to understand if it will generalize.
+Now suppose we can compute a classiﬁer g with discrete
+trainable parameters much less than m and which incurs
+similar loss on the training data as f. Then g must incur
+low classiﬁcation error on the full distribution. This frame-
+work has the advantage of staying with intuitive parameter
+counting and to avoid explicitly dealing with the hypothesis
+class that includes f (see note after Theorem 2.1). Notice,
+the mapping from f to g merely needs to exist, not to be
+efﬁciently computable. But in all our examples the map-
+ping will be explicit and fairly efﬁcient. Now we formalize
+the notions. The proofs are elementary via concentration
+bounds and appear in the appendix.
+Deﬁnition 1 ((γ,S)-compressible). For any set A of param-
+eter values, let f be a classiﬁer and GA = {gA|A ∈A} be
+a class of classiﬁers. We say f is (γ, S)-compressible via
+GA if there exists A ∈A such that for any x ∈S, we have
+for all y
+|f(x)[y] −gA(x)[y]| ≤γ.
+We also consider a different setting where the compression
+algorithm is allowed a“helper string” s, which is arbitrary
+but ﬁxed before looking at the training samples. Often s
+will contain random numbers. A simple example is to let s
+be the random initialization used for training the deep net
+and then compress the difference between the ﬁnal weights
+and s. This can give better generalization bounds, similar
+to (Dziugaite and Roy, 2017). Other nontrivial examples
+appear later.
+Deﬁnition 2 ((γ,S)-compressible using helper string s).
+Suppose GA,s = {gA,s|A ∈A} is a class of classiﬁers
+indexed by trainable parameters A and ﬁxed strings s. A
+classiﬁer f is (γ, S)-compressible with respect to GA,s us-
+ing helper string s if there exists A ∈A such that for any
+x ∈S, we have for all y
+|f(x)[y] −gA,s(x)[y]| ≤γ.
+Theorem 2.1. Suppose GA,s = {gA,s|A ∈A} where A is
+a set of q parameters each of which can have at most r dis-
+crete values and s is a helper string. Let S be a training set
+with m samples. For any margin γ > 0, if the trained clas-
+siﬁer f is (γ, S)-compressible via GA,s with helper string
+s, then there exists A ∈A such that with high probability
+over the training set,
+L0(gA) ≤ˆLγ(f) + O
+ r
+q log r
+m
+!
+.
+Remarks: (1) The framework proves the generalization not
+of f but of its compression gA. (An exception is if the two
+are shown to have similar loss at every point in the domain,
+not just the training set. This is the case in Theorem 2.2.)
+(2) The previous item highlights how our framework steps
+away from uniform convergence framework, e.g., covering
+number arguments (Dudley, 2010; Anthony and Bartlett,
+2009). There, one needs to ﬁx a hypothesis class indepen-
+dent of the training set. By contrast we have no hypothesis
+class, only a single neural net that has some speciﬁc prop-
+erties (described in Section 3) on a single ﬁnite training
+set. But if we can compress this speciﬁc neural net to a
+simpler neural nets with fewer parameters then we can use
+covering number argument on this simpler class to get the
+generalization of the compressed net.
+(3) Issue (1) exists also in standard PAC-Bayes framework
+for deep nets (see tongue-in-cheek title of Langford and
+Caruana (2001)). They yield generalization bounds not for
+f but for a noised version of f (i.e., net given by W + η,
+where W is parameter vector of f and η is a noise vector).
+(4) As we will see later, our compression which is achieved
+via a randomized algorithm seems “non-destructive” and
+should not overﬁt to the training set more than the original
+network. Moreover, for us issue (1) could be ﬁxed by show-
+ing that if f satisﬁes the properties of Section 3 on training
+data then it satisﬁes them on the entire domain. This is left
+for future work.
+2.1. Example 1: Linear classiﬁers with margin
+To illustrate the above compression method and its connec-
+tion to noise stability, we use linear classiﬁers with high
+margins. Let c ∈Rh(∥c∥= 1) be a classiﬁer for binary
+classiﬁcation whose output on input x is sgn(c · x). Let
+D be a distribution on inputs (x, y) where ∥x∥= 1 and
+y ∈{±1}. Say c has margin γ if for all (x, y) in the train-
+ing set we have y(c⊤x) ≥γ.
+If we add Gaussian noise vector η with coordinate-wise
+variance σ2 to c, then E[x · (c + η)] is c · x and the variance
+is σ2. (A similar analysis applies to noising of x instead of
+c.) Thus the margin is large if and only if the classiﬁer’s
+output is somewhat noise-stable.
+A classiﬁer with margin γ can be compressed to one that has
+only O(1/γ2) non-zero entries. For each coordinate i, toss a
+coin with Pr[heads] = 8c2
+i /γ2 and if it comes up heads set
+the coordinate to equal to γ2/8ci (see Algorithm 2 in supple-
+mentary material). This yields a vector ˆc with only O(1/γ2)
+nonzero entries such that for any vector u, with reasonable
+
+PDF PAGE 4
+Stronger Generalization Bounds for Deep Nets via a Compression Approach
+probability |ˆc⊤u−c⊤u| ≤γ, so ˆc and c will make the same
+prediction. We can then apply Theorem 2.1 on a discretized
+version of ˆc to show that the sparsiﬁed classiﬁer has good
+generalization with O(log d/γ2) samples.
+This compressed classiﬁer works correctly for a ﬁxed input
+x with good probability but not high probability. To ﬁx
+this, one can recourse to the “compression with ﬁxed string”
+model. The ﬁxed string is a random linear transformation.
+When applied to unit vector x, it tends to equalize all coor-
+dinates and the guarantee |ˆc⊤u −c⊤u| ≤γ can hold with
+high probability. This random linear transformation can be
+ﬁxed before seeing the training data. See Section A.2 in
+supplementary material for details.
+2.2. Example 2: Existing generalization bounds
+Our compression framework gives easy and short proof of
+the generalization bounds of a recent paper; see appendix
+for slightly stronger result of Bartlett et al. (2017).
+Theorem 2.2. ((Neyshabur et al., 2017a)) For any deep
+net with layers A1, A2, . . . Ad and output margin γ on a
+training set S, the generalization error can be bounded by
+˜O
+
+
+
+v
+u
+u
+thd2 maxx∈S ∥x∥Qd
+i=1 ∥Ai∥2
+2
+Pd
+i=1
+∥Ai∥2
+F
+∥Ai∥2
+2
+γ2m
+
+
+.
+The second part of this expression (Pd
+i=1
+∥Ai∥2
+F
+∥Ai∥2
+2 ) is sum of
+stable ranks of the layers, a natural measure of their true
+parameter count. The ﬁrst part (Qd
+i=1 ∥Ai∥2
+2) is related to
+the Lipschitz constant of the network, namely, the maximum
+norm of the vector it can produce if the input is a unit vector.
+The Lipschitz constant of a matrix operator B is just its
+spectral norm ∥B∥2. Since the network applies a sequence
+of matrix operations interspersed with ReLU, and ReLU is
+1-Lipschitz we conclude that the Lipschitz constant of the
+full network is at most Qd
+i=1 ∥Ai∥2.
+To prove Theorem 2.2 we use the following lemma to com-
+press the matrix at each layer to a matrix of smaller rank.
+Since a matrix of rank r can be expressed as the product of
+two matrices of inner dimension r, it has 2hr parameters
+(instead of the trivial h2). (Furthermore, the parameters can
+be discretized via trivial rounding to get a compression with
+discrete parameters as needed by Deﬁnition 1.)
+Lemma 1. For any matrix A ∈Rm×n, let ˆA be the trun-
+cated version of A where singular values that are smaller
+than δ∥A∥2 are removed. Then ∥ˆA −A∥2 ≤δ∥A∥2 and ˆA
+has rank at most ∥A∥2
+F /(δ2∥A∥2
+2).
+Proof. Let r be the rank of ˆA. By construction, the max-
+imum singular value of ˆA −A is at most δ∥A∥2. Since
+the remaining singular values are at least δ∥A∥2, we have
+∥A∥F ≥∥ˆA∥F ≥√rδ∥A∥2.
+For each i replace layer i by its compression using the above
+lemma, with δ = γ(3∥x∥d Qd
+i=1 ∥Ai∥2)−1. How much
+error does this introduce at each layer and how much does
+it affect the output after passing through the intermediate
+layers (and getting magniﬁed by their Lipschitz constants)?
+Since A −ˆAi has spectral norm (i.e., Lipschitz constant)
+at most δ, the error at the output due to changing layer i in
+isolation is at most δ∥xi∥Qd
+j=1 ∥Aj∥2 ≤γ/3d.
+A simple induction (see (Neyshabur et al., 2017a) if needed)
+can now show the total error incurred in all layers is bounded
+by γ. The generalization bound follows immediately from
+Theorem 2.1.
+3. Noise Stability Properties of Deep Nets
+This section introduces noise stability properties of deep
+nets that imply better compression (and hence generaliza-
+tion). They help overcome the pessimistic error analysis of
+our proof of Theorem 2.2: when a layer was compressed,
+the resulting error was assumed to blow up in a worst-case
+manner according to the Lipschitz constant (namely, prod-
+uct of spectral norms of layers). This hurt the amount of
+compression achievable. The new noise stability properties
+roughly amount to saying that noise injected at a layer has
+very little effect on the higher layers. Our formalization
+starts with noise sensitivity, which captures how an operator
+transmits noise vs signal.
+Deﬁnition 3. If M is a mapping from real-valued vectors to
+real-valued vectors, and N is some noise distribution then
+noise sensitivity of M at x with respect to N, is
+ψN (M, x) = Eη∈N
+∥M(x + η∥x∥) −M(x)∥2
+∥M(x)∥2
+
+,
+The noise sensitivity of M with respect to N on a set of
+inputs S, denoted ψN,S(M), is the maximum of ψN (M, x)
+over all inputs x in S.
+To illustrate, we examine noise sensitivity of a matrix (i.e.,
+linear mapping) with respect to Gaussian distribution. Low
+sensitivity turns out to imply that the matrix has some large
+singular values (i.e., low stable rank), which give directions
+that can preferentially carry the “signal”x whereas noise η
+attenuates because it distributes uniformly across directions.
+Proposition 3.1. The noise sensitivity of a matrix M at any
+vector x ̸= 0 with respect to Gaussian distribution N(0, I)
+is exactly ∥M∥2
+F ∥x∥2/∥Mx∥2, and at least its stable rank.

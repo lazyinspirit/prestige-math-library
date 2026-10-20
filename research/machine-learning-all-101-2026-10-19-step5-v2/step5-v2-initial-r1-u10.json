@@ -1,0 +1,94 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+      "model": "gpt-6-luna",
+      "context_sha256": "873c3400c32b6c0895064783fc06b6957548b49336e604dbd3a5318e13dcf678",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.1 incorrectly says the indicator inequality from 1.1 gives the source-disagreement bound. The omitted inequality follows immediately: if h(x) differs from g(x), they cannot both equal y, so 1_A(x) <= 1_{h(x) != y} + 1_{g(x) != y}. This is a nonfatal elementary proof-step omission, not a false theorem or missing hypothesis. Replaced the incorrect attribution with that pointwise argument and integrated it using the existing suppliers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+      "disposition": "repaired",
+      "post_sha256": "4b0d433e49c14d6ba09ce9f782d16f03e26729ffd2548a7eb095cc6d836c01ff",
+      "review_context_sha256": "28df3b360159b02061d07f9b05ab36c66e9a01465b942c43eecb80fbe5b0d012",
+      "reason": "Checked the complete statement, four proof steps, six direct suppliers, owning contract and page. Disagreement and error events are measurable; both indicator inequalities integrate under the joint laws with the stated input marginals. The divergence definition supplies exactly one-half its value. Nonempty H gives lambda in [0,2], and a fixed-tolerance approximate minimizer proves the bound without attainment or AC. The repaired step 2.1 now explicitly proves its inequality. Statement unchanged, page body empty, no diagrams needed, and no downstream interface event. This is repairer verification, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+      "class": "accuracy",
+      "subclass": "unsupported-inference",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "step": "2.1",
+      "disposition": "fixed",
+      "reason": "Step 2.1 incorrectly says the indicator inequality from 1.1 gives the source-disagreement bound. The omitted inequality follows immediately: if h(x) differs from g(x), they cannot both equal y, so 1_A(x) <= 1_{h(x) != y} + 1_{g(x) != y}. This is a nonfatal elementary proof-step omission, not a false theorem or missing hypothesis. Replaced the incorrect attribution with that pointwise argument and integrated it using the existing suppliers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-10.proof-contracts.json": "74ee3f0ee71ff1109ea296fca4475b6cf6b78fa26ace8c47022aad90acbb132b"
+  },
+  "repair_notes": {
+    "scope": "Only the assigned draft item and its derivation-2.1 contract mirror changed. Existing review evidence retained; shared contract edited under acquire/reread/edit/check/release lock.",
+    "claim_and_conventions": "For arbitrary joint binary-label laws and nonempty measurable H, epsilon_T(h) <= epsilon_S(h) + (1/2)d_HDeltaH(mu_S,mu_T) + inf_g(epsilon_S(g)+epsilon_T(g)). Random labels and unattained joint-error infima allowed; no covariate-shift or choice assumption.",
+    "read_local_sources": [
+      "items/def-h-delta-h-divergence.md",
+      "items/def-source-target-distributions-and-shift.md",
+      "items/def-supervised-learning-problem.md",
+      "items/cor-additivity-of-the-nonnegative-lebesgue-integral.md",
+      "items/prop-order-and-scalar-rules-for-the-nonnegative-integral.md",
+      "items/prop-the-nonnegative-integral-agrees-with-the-simple-integral.md"
+    ],
+    "source_evidence": "Familiar elementary event inclusion, integral monotonicity/additivity and infimum argument; no external source consultation claimed. The Step-4 digest has no concerns or alerts for this batch.",
+    "interface_check": "Direct comparison with the pre-edit carrier confirms the entire Statement section is byte-identical. No new interfaces or prerequisites; downstream remains empty.",
+    "published_ledger": "No published carrier repaired and no potentially defective published consumer discovered; no published-consumer ledger update proposed.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-target-risk-bound-by-source-risk-divergence-and-joint-error.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-target-risk-bound-by-source-risk-divergence-and-joint-error.md library/machine-learning/distribution-shift-and-domain-adaptation.md --json",
+        "exit_code": 0,
+        "result": "2 files checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-target-risk-bound-by-source-risk-divergence-and-joint-error.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects; executed after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-10.proof-contracts.json --items thm-target-risk-bound-by-source-risk-divergence-and-joint-error --strict --json",
+        "exit_code": 0,
+        "result": "ok:true, no errors; advisory shotgun-bracket warning for unchanged step 1.1 citing all six facts while later steps 3.1 and 4.1 rely on earlier steps. Their inferential inputs are correctly recorded."
+      }
+    ],
+    "review_hash_command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items thm-target-risk-bound-by-source-risk-divergence-and-joint-error",
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and applies its ordinary certification and current-judgment requirements; no judges, stamps or round transitions were launched."
+  }
+}

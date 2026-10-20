@@ -1,0 +1,177 @@
+[
+  {
+    "order": 2986,
+    "id": "preference-learning-and-direct-preference-optimization",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Preference learning and direct preference optimization",
+    "companion": "preference-learning-and-direct-preference-optimization-examples",
+    "requires": [
+      "automatic-differentiation-and-backpropagation",
+      "calibration-proper-losses-and-surrogate-classification",
+      "ml02-linear-classification",
+      "variational-inference-and-evidence-lower-bound",
+      "f-divergences-renyi-and-hypothesis-testing"
+    ],
+    "items": [
+      {
+        "id": "def-kl-regularized-policy-improvement",
+        "deps": [
+          "def-finite-kullback-leibler-divergence",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Finite KL-regularized policy improvement",
+        "justified_by": []
+      },
+      {
+        "id": "def-bradley-terry-preference-model",
+        "deps": [
+          "def-binary-logistic-and-multiclass-softmax-models"
+        ],
+        "dependency_level": 2,
+        "kind": "definition",
+        "title": "Finite Bradley–Terry preference model",
+        "justified_by": []
+      },
+      {
+        "id": "thm-finite-action-gibbs-policy-optimum",
+        "deps": [
+          "def-kl-regularized-policy-improvement",
+          "def-proper-scoring-rule",
+          "thm-log-and-brier-strict-propriety"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "The finite-action Gibbs policy uniquely maximizes reward minus KL",
+        "justified_by": []
+      },
+      {
+        "id": "thm-dpo-reward-policy-reparameterization",
+        "deps": [
+          "def-bradley-terry-preference-model",
+          "def-kl-regularized-policy-improvement",
+          "thm-finite-action-gibbs-policy-optimum",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-logarithm-derivative-and-integral",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_level": 3,
+        "kind": "theorem",
+        "title": "Bradley–Terry reward-policy reparameterization and finite DPO gradient",
+        "justified_by": []
+      },
+      {
+        "id": "rem-preference-coverage-and-model-misspecification",
+        "deps": [
+          "def-bradley-terry-preference-model",
+          "def-kl-regularized-policy-improvement",
+          "thm-finite-action-gibbs-policy-optimum",
+          "thm-dpo-reward-policy-reparameterization"
+        ],
+        "dependency_level": 4,
+        "kind": "remark",
+        "title": "Preference coverage and Bradley–Terry model limits",
+        "justified_by": []
+      },
+      {
+        "id": "alg-direct-preference-optimization-finite-budget",
+        "deps": [
+          "def-bradley-terry-preference-model",
+          "thm-dpo-reward-policy-reparameterization",
+          "def-finite-straight-line-computational-program",
+          "def-c-one-map-and-local-inverse",
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-reverse-mode-computes-gradient"
+        ],
+        "dependency_level": 4,
+        "kind": "algorithm",
+        "title": "Finite-budget direct preference optimization by mini-batch gradient descent",
+        "justified_by": [
+          "lem-finite-budget-dpo-properties-and-work"
+        ]
+      },
+      {
+        "id": "lem-finite-budget-dpo-properties-and-work",
+        "kind": "lemma",
+        "title": "Finite-budget DPO preserves its valid pair and terminates with finite oracle work",
+        "deps": [
+          "alg-direct-preference-optimization-finite-budget",
+          "thm-dpo-reward-policy-reparameterization",
+          "def-finite-straight-line-computational-program",
+          "alg-reverse-mode-automatic-differentiation",
+          "thm-reverse-mode-computes-gradient",
+          "def-natural-logarithm",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-addition-formula"
+        ],
+        "dependency_level": 5,
+        "statement": "For every input of the finite-budget DPO procedure, under its supplied exact evaluator and membership-oracle model, all prescribed loss evaluations are finite and every successful reverse sweep gives the exact stated mini-batch gradient. Throughout the run, the stored pair is $(\\theta,L_D(\\theta))$ for the most recently accepted parameter $\\theta\\in\\Theta$; initially this is $(\\theta_0,L_D(\\theta_0))$. In particular, rejected candidates are not used for policy evaluation. The procedure terminates after at most $T$ attempted updates and returns this valid pair with the prescribed diagnostic status on early exit, or $(\\theta_T,L_D(\\theta_T))$ with status `COMPLETED` when all $T$ updates are accepted. When $T=0$, it returns the initial pair with status `COMPLETED`.\n\nPut $M=\\sum_{t=0}^{T-1}m_t$, with $M=0$ for $T=0$. There is a finite constant $C\\ge d+1$, determined by the finitely many supplied log-probability graphs, their fixed node dimensions and the unit-cost primitive model, such that the work excluding parameter-domain membership is\n$$\nO\\!\\left(C\\bigl[n(T+1)+M+T+1\\bigr]\\right).\n$$\nThe implicit constant is independent of the numerical parameters and step sizes. There are at most $T$ calls to $M_\\Theta$. For the actual queried candidates $z_1,\\ldots,z_Q$, the membership cost is $\\sum_{j=1}^Q c_\\Theta(z_j)<\\infty$, with $Q\\le T$, and is added to the displayed work. If a uniform finite membership bound $C_\\Theta$ is supplied, this contribution is at most $TC_\\Theta$. These are bounds in the declared exact primitive/oracle model, not a universal algorithm for membership in arbitrary open sets. No convergence, descent, or statistical-optimality conclusion is asserted.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2987,
+    "id": "preference-learning-and-direct-preference-optimization-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Preference learning and direct preference optimization — Examples",
+    "companion": "preference-learning-and-direct-preference-optimization",
+    "requires": [
+      "preference-learning-and-direct-preference-optimization"
+    ],
+    "items": [
+      {
+        "id": "ex-two-response-kl-regularized-gibbs-policy",
+        "deps": [
+          "def-kl-regularized-policy-improvement",
+          "thm-finite-action-gibbs-policy-optimum",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A two-response Gibbs policy with exact probabilities",
+        "justified_by": []
+      },
+      {
+        "id": "cex-disconnected-comparison-support-does-not-identify-policy",
+        "deps": [
+          "def-bradley-terry-preference-model",
+          "def-kl-regularized-policy-improvement",
+          "thm-finite-action-gibbs-policy-optimum",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 3,
+        "kind": "counterexample",
+        "title": "Disconnected comparison support does not identify Gibbs policy mass",
+        "justified_by": []
+      },
+      {
+        "id": "ex-prompt-reward-offset-leaves-policy-unchanged",
+        "deps": [
+          "def-bradley-terry-preference-model",
+          "def-kl-regularized-policy-improvement",
+          "thm-finite-action-gibbs-policy-optimum"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A prompt-only reward offset leaves Bradley–Terry comparisons and policy unchanged",
+        "justified_by": []
+      },
+      {
+        "id": "cex-zero-reference-support-breaks-dpo-log-ratio",
+        "deps": [
+          "def-kl-regularized-policy-improvement",
+          "thm-dpo-reward-policy-reparameterization",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 4,
+        "kind": "counterexample",
+        "title": "Zero reference support makes the DPO reward ratio undefined",
+        "justified_by": []
+      }
+    ]
+  }
+]

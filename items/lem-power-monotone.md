@@ -13,8 +13,8 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-power-monotone.json
   precheck: pass
-  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/receipts/lem-power-monotone.json
 sources:
   scraped: []
   references:
@@ -33,14 +33,20 @@ pipeline_run: null
 
 ## Statement
 
-Let $\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let
+Let $\mathbb{R}$ be an ordered field (Ordered field), let
 $a, b \in \mathbb{R}$ and let $n \in \mathbb{N}$, with powers as in
-[[def-integer-power]].
+Integer powers $a^m$.
 
 1. **Signs.** If $a \ge 0$ then $a^n \ge 0$, and if $a > 0$ then $a^n > 0$.
 2. **Strict monotonicity in the base.** If $0 \le a < b$ and $n \ge 1$ then $a^n < b^n$. Consequently, for $a, b \ge 0$ and $n \ge 1$: $a < b \iff a^n < b^n$ and $a \le b \iff a^n \le b^n$, and $x \mapsto x^n$ is injective on $\{x \in \mathbb{R} : x \ge 0\}$.
 3. **Comparison with the base.** If $a \ge 1$ and $n \ge 1$ then $a^n \ge a \ge 1$; if $a > 1$ and $n \ge 1$ then $a^n \ge a > 1$; and if $0 \le a \le 1$ then $a^n \le 1$.
 4. **Monotonicity in the exponent.** If $a > 1$ then $a^m < a^n$ whenever $m < n$ in $\mathbb{N}$; if $a = 1$ then $a^n = 1$ for all $n$; and if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.
+
+## Statement references
+
+[[def-ordered-field]]
+
+[[def-integer-power]]
 
 ## Facts & Assumptions
 

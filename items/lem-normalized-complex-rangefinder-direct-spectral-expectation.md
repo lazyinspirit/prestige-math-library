@@ -38,6 +38,7 @@ sources:
     - title: "Martinsson and Tropp, Randomized Numerical Linear Algebra: Foundations & Algorithms, §§11.4.1–11.4.2; the present normalized-complex proof is derived locally"
       url: "https://arxiv.org/pdf/2002.01387"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-normalized-complex-rangefinder-direct-spectral-expectation.json
   precheck: pass
 ---
 
@@ -49,11 +50,15 @@ with $\ell=k+p\le\min(m,n)$, and draw $\Omega\in\mathbb C^{n\times\ell}$
 with iid normalized complex Gaussian entries satisfying $\mathbb E|g|^2=1$.
 Let $Q$ be the exact finite-scan range-finder basis of
 $\operatorname{Ran}(A\Omega)$ returned by
-[[alg-gaussian-randomized-range-finder]], and put $P=QQ^*$. Then
+Exact Gaussian randomized range finder, and put $P=QQ^*$. Then
 $$\mathbb E\|(I-P)A\|_2\le\sqrt{\frac{\ell}{p}}\,\sigma_{k+1} +\frac{e\sqrt\ell}{p}\left(\sum_{j>k}\sigma_j^2\right)^{1/2}.$$
 In particular, the original approved bound with leading coefficient
 $1+\sqrt{k/(p-1)}$ follows. The algorithm and sketch width $\ell$ are
 unchanged; only the analysis may use a larger SVD partition rank.
+
+## Statement references
+
+[[alg-gaussian-randomized-range-finder]]
 
 ## Facts & Assumptions
 

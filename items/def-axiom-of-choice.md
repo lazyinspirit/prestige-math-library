@@ -15,6 +15,7 @@ aliases: [def-ac]
 landmark: true
 short: "axiom of choice"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-axiom-of-choice.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -39,7 +40,7 @@ pipeline_run: null
 The **Axiom of Choice** (AC) is the following statement.
 
 > Every family of nonempty sets has a choice function
-> ([[def-choice-function]]).
+> (Choice function).
 
 Written out: for every set $\mathcal{F}$ all of whose members are nonempty,
 there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for
@@ -50,6 +51,10 @@ $X_i \ne \emptyset$ for every $i \in I$, then $\prod_{i \in I} X_i \ne \emptyset
 Here $\prod_{i \in I} X_i$ is the set of functions $f$ with domain $I$ such that
 $f(i) \in X_i$ for every $i \in I$; when a family of nonempty sets is indexed by
 itself, such an $f$ is precisely a choice function for it.
+
+## Definition references
+
+[[def-choice-function]]
 
 ## Remarks
 

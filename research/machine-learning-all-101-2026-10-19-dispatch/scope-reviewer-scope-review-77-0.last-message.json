@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "77",
+  "round": 0,
+  "reviewed_items": [
+    "lem-exp-negative-argument-second-order-upper-bound",
+    "def-bandit-importance-weighted-estimator",
+    "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+    "alg-exp3",
+    "thm-exp3-expected-regret",
+    "ex-rare-arm-importance-weighted-estimator",
+    "ex-deterministic-rewards-importance-weighted-feedback",
+    "ex-exp3-and-full-information-hedge-differ"
+  ],
+  "reviewed_pages": [
+    "adversarial-bandits-and-importance-weighted-feedback",
+    "adversarial-bandits-and-importance-weighted-feedback-examples"
+  ],
+  "decision": "repair",
+  "reason": "The proofs, examples, inventories, and body-free pages otherwise check out. One algorithm-contract repair is needed within the assigned scope.",
+  "findings": [
+    {
+      "id": "alg-exp3",
+      "type": "prerequisite",
+      "reason": "The Definition embeds an induction claiming well-definedness, but algorithmic properties must be established in a separate proved result; `justified_by` is empty. Extend the assigned `thm-exp3-expected-regret` result to state and prove finite-horizon well-definedness and termination, then bind it through `alg-exp3.justified_by`. The affected consumers are `thm-exp3-expected-regret` and `ex-exp3-and-full-information-hedge-differ`."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-exp3-expected-regret",
+      "decision": "repair",
+      "reason": "Its regret argument checks, and it can establish the missing finite-horizon result with an explicit induction before the potential proof."
+    },
+    {
+      "id": "ex-exp3-and-full-information-hedge-differ",
+      "decision": "accept",
+      "reason": "The one-round Exp3 and Hedge distributions follow from their definitions; no example repair is needed."
+    },
+    {
+      "id": "adversarial-bandits-and-importance-weighted-feedback",
+      "decision": "accept",
+      "reason": "The A-page inventory remains accurate after the proposed result is added to the assigned theorem."
+    },
+    {
+      "id": "adversarial-bandits-and-importance-weighted-feedback-examples",
+      "decision": "accept",
+      "reason": "The examples page requires the A page and has no theorem-specific claim affected by this repair."
+    }
+  ]
+}

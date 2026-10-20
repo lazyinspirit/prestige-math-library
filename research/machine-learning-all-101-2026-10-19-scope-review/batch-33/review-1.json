@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "33",
+  "round": 1,
+  "reviewed_items": [
+    "def-discrete-convolutional-layer",
+    "def-group-action-on-feature-maps",
+    "def-p4-p4m-lattice-symmetry-groups",
+    "def-equivariant-neural-layer",
+    "def-group-convolution",
+    "def-pointwise-nonlinearity-and-pooling-on-group-features",
+    "thm-group-convolution-equivariance",
+    "ex-translation-equivariance-and-zero-padding",
+    "ex-p4-and-p4m-orientation-indexed-features",
+    "ex-nonstrided-subgroup-and-coset-pooling"
+  ],
+  "reviewed_pages": [
+    "convolution-and-group-equivariance",
+    "convolution-and-group-equivariance-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Both prior findings are resolved: gH is consistently identified as a left coset, and the theorem’s F6 now includes the pooling formula and action. The full batch and affected consumers were rechecked. A proof gap remains in theorem step 1.3; round 1 is unsatisfied, so this goes to the owner without another repair request.",
+  "findings": [
+    {
+      "id": "thm-group-convolution-equivariance",
+      "type": "local",
+      "reason": "Step 1.3 first quantifies a∈H for subgroup restriction, then uses a in the coset-pooling calculation without introducing a new quantifier. As written, it establishes that calculation only for a∈H, while the Statement claims G-equivariance and requires a∈G. The smallest fix is to state the calculation for arbitrary a∈G. The affected consumer is ex-nonstrided-subgroup-and-coset-pooling, Verification 2.1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-group-convolution-equivariance",
+      "decision": "escalate",
+      "reason": "Proof step 1.3 does not explicitly establish the stated G-equivariance of left-coset pooling for arbitrary a∈G."
+    },
+    {
+      "id": "ex-nonstrided-subgroup-and-coset-pooling",
+      "decision": "escalate",
+      "reason": "Example claim and Verification 2.1 use the theorem’s G-equivariant coset-pooling conclusion."
+    },
+    {
+      "id": "ex-translation-equivariance-and-zero-padding",
+      "decision": "accept",
+      "reason": "Its use of the theorem’s full-lattice translation claim is unaffected; that proof remains sound."
+    },
+    {
+      "id": "ex-p4-and-p4m-orientation-indexed-features",
+      "decision": "accept",
+      "reason": "Its use of the theorem’s group-correlation claim is unaffected; that proof remains sound."
+    }
+  ]
+}

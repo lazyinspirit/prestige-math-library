@@ -1,0 +1,1139 @@
+{
+  "version": 1,
+  "scope": [
+    "def-differentiable-stochastic-policy",
+    "lem-policy-score-has-zero-conditional-mean",
+    "thm-policy-gradient-theorem",
+    "alg-one-step-actor-critic",
+    "alg-reinforce",
+    "lem-action-independent-baseline-does-not-bias-policy-gradient",
+    "alg-reinforce-with-baseline",
+    "ex-actor-critic-bootstrap-can-bias-policy-update",
+    "ex-reinforce-one-step-bernoulli-mdp",
+    "ex-action-independent-baseline-eliminates-variance"
+  ],
+  "contracts": {
+    "def-differentiable-stochastic-policy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "zero-probability action",
+          "status": "not_applicable",
+          "evidence": "Unsupported actions are excluded from B(s), so their log score is never defined."
+        },
+        {
+          "case": "singleton support",
+          "status": "checked",
+          "evidence": "A one-action support is normalized with probability one and has zero score."
+        },
+        {
+          "case": "parameter-domain boundary",
+          "status": "outside_scope",
+          "evidence": "U is open; differentiability and common support are required throughout U."
+        }
+      ]
+    },
+    "lem-policy-score-has-zero-conditional-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-policy-score-has-zero-conditional-mean-1-1",
+          "step": "1.1",
+          "claim": "Fix $t$ and a positive-probability atom $h$ of $\\mathcal H_t$ ending at a nonterminal state $s$. By [F3], adjoining action $a$ and next outcome $(s',r)$ multiplies the mass of $h$ by $\\pi_\\theta(a\\mid s)p(s',r\\mid s,a)$. Summing over the finite next-state and reward sets and using [F1] gives $\\Pr(A_t=a\\mid h)=\\pi_\\theta(a\\mid s)$. At zero-probability atoms no conditional value is prescribed, and terminal atoms have $\\psi_t=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-policy-score-has-zero-conditional-mean-2-1",
+          "step": "2.1",
+          "claim": "Enumerate the finite support as $B(s)=\\{a_0,\\ldots,a_{m-1}\\}$. By induction on the number of terms, [F5] gives the derivative of this finite sum as the sum of the derivatives: the empty sum has derivative zero, and adjoining one term uses the binary sum rule. For each positive-probability nonterminal history $h$ ending at $s$, the conditional score mean is $\\sum_{a\\in B(s)}\\pi_\\theta(a\\mid s)\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)=\\sum_{a\\in B(s)}\\nabla_\\theta\\pi_\\theta(a\\mid s)=\\nabla_\\theta 1=0$. The first equality uses positivity on the support and the derivative of the logarithm; the second uses [F5], [F6], and the normalization in [F2]. There are finitely many state-action pairs, so the score coordinates are bounded at fixed $\\theta$ and the conditional expectations exist by [F4]. The conditional expectation is therefore zero on every positive-probability history, hence almost surely.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "finite normalized action support",
+          "status": "checked_by_exact_calculation",
+          "calculation": "At each fixed state, sum_a pi(a|s) grad log pi(a|s)=sum_a grad pi(a|s)=grad(1)=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "zero-probability history",
+          "status": "checked",
+          "evidence": "Conditional values on zero-probability atoms do not affect the almost-sure assertion."
+        },
+        {
+          "case": "terminal history",
+          "status": "checked",
+          "evidence": "The score is defined as zero at and after termination."
+        },
+        {
+          "case": "singleton action support",
+          "status": "checked",
+          "evidence": "The normalized probability is constant one, so its score is zero."
+        }
+      ]
+    },
+    "thm-policy-gradient-theorem": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-number-coding-of-finite-sequences",
+          "source_section": "Definition",
+          "quote": "Write $\\operatorname{bin}(n)$ for the canonical binary numeral of $n$, with\n$\\operatorname{bin}(0)=0$. For a binary word $w$, let\n$$ c(w):=1^{|w|}0w. $$\n\nFor a finite sequence of natural numbers\n$$ a=(a_0,\\dots,a_{k-1}), $$\ndefine its **sequence word**\n$$ W(a):=1\\,1^k0\\,c(\\operatorname{bin}(a_0))\\cdots c(\\operatorname{bin}(a_{k-1})). $$\nThe leading $1$ keeps the whole word a canonical positive binary numeral even\nwhen $k=0$.\n\nThe **natural-number code** of $a$ is the unique natural number\n$$ \\ulcorner a\\urcorner_{\\mathrm{seq}} $$\nwhose binary numeral is $W(a)$. In particular, the empty sequence has code\n$\\ulcorner()\\urcorner_{\\mathrm{seq}}=2$, because $W(())=10$.\n\nBy [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of\nbinary numerals inside $W(a)$ is effectively and uniquely decodable, so this\nconstruction gives an injective coding of finite sequences of natural numbers\nby natural numbers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U \\subseteq X$ be open in a real Banach space $X$, and let $Y$, $Z$, $W$ be\nreal Banach spaces. Then:\n\n1. **Sum rule.** If $f_1, f_2 : U \\to Y$ are Fréchet differentiable at $x \\in U$\n   and $a, b \\in \\mathbb R$, then $af_1+bf_2$ is Fréchet differentiable at $x$\n   with $D(af_1+bf_2)(x) = a\\,Df_1(x) + b\\,Df_2(x)$.\n2. **Bounded-bilinear product rule.** If $f : U \\to Y$ and $g : U \\to Z$ are\n   Fréchet differentiable at $x$, and $B : Y \\times Z \\to W$ is bounded\n   bilinear, then $U \\ni u \\mapsto B(f(u),g(u))$ is Fréchet differentiable at\n   $x$ and\n\n$$D\\bigl(B(f,g)\\bigr)(x)h = B\\bigl(Df(x)h,\\ g(x)\\bigr) + B\\bigl(f(x),\\ Dg(x)h\\bigr) \\qquad (h \\in X).$$\n\n3. **Chain rule.** If $f : U \\to Y$ is Fréchet differentiable at $x$, if\n   $W_0 \\subseteq Y$ is an open set with $f[U] \\subseteq W_0$, and if\n   $g : W_0 \\to Z$ is Fréchet differentiable at $f(x)$, then\n   $g \\circ f$ is Fréchet differentiable at $x$ and\n   $$D(g \\circ f)(x) = Dg\\bigl(f(x)\\bigr)\\,Df(x).$$\n\nNo continuity of any derivative map is assumed; these are pointwise statements\nabout one $x$ at a time.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-policy-score-has-zero-conditional-mean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a nonempty finite state set, let each $A(s)$ be a finite nonempty action set, and let $p(s',r\\mid s,a)$ be a fixed normalized joint law for the next state and reward. Fix an initial state and a terminal set $S_\\dagger\\subseteq S$. Under a differentiable stationary policy family with a support that is fixed and strictly positive on that support throughout its open parameter domain, assume the induced episode terminates almost surely. For $t\\ge0$, let $\\mathcal H_t=\\sigma(S_0,A_0,R_1,\\ldots,A_{t-1},R_t,S_t)$ be the information available just before the time-$t$ action, and let $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ when $t<T$, where $T$ is the first terminal time. Define $\\psi_t=0$ when $t\\ge T$. Then, coordinate by coordinate,\n\n$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-policy-gradient-theorem-1-1",
+          "step": "1.1",
+          "claim": "If $s_0\\in S_\\dagger$, then $T=0$, the return and gradient are zero, and the sum in the conclusion is empty. Otherwise, the transition-record alphabet is finite by [F1] and [F4]. Fix an enumeration of that alphabet; every finite terminal path becomes a finite sequence of natural-number indices, so [F5] injects $\\mathcal T$ into $\\mathbb N$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-1-2",
+          "step": "1.2",
+          "claim": "Fix $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)\\in\\mathcal T$. By [F4], its probability is the displayed product. Repeatedly applying the bounded-bilinear product rule [F6] to its finitely many policy factors, and using [F2], [F7], and [F8], gives $Dp_{\\theta_0}(\\tau)=p_{\\theta_0}(\\tau)\\sum_{t=0}^{m-1}\\psi_{\\theta_0}(s_t,a_t)$. Paths with a zero transition mass or an unsupported action have probability zero throughout $U_0$ and are omitted from $\\mathcal T$. The empty trajectory has empty product $1$ and empty score sum $0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-2-1",
+          "step": "2.1",
+          "claim": "The episode termination assumption makes the masses of $\\mathcal T$ sum to one, and [F3] identifies $J(\\theta)=\\sum_{\\tau\\in\\mathcal T}p_\\theta(\\tau)R_\\gamma(\\tau)$. By [A2] and [F11], the derivative of this series at $\\theta_0$ is the absolutely convergent sum $\\sum_\\tau R_\\gamma(\\tau)Dp_{\\theta_0}(\\tau)$. Substituting step 1.2 shows that, for every direction $h\\in\\mathbb R^d$, $DJ(\\theta_0)h=\\mathbb E_{\\theta_0}[R_\\gamma(\\tau)\\langle\\sum_{t<T}\\psi_{\\theta_0}(S_t,A_t),h\\rangle]$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F11",
+            "F12",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-3-1",
+          "step": "3.1",
+          "claim": "Expand $R_\\gamma=\\sum_{k<T}\\gamma^kR_{k+1}$. For each $k<t$, the event $t<T$ and the past reward $R_{k+1}$ are $\\mathcal H_t$-measurable. By [F9] and [F10], each coordinate of $\\mathbb E[\\mathbf1_{\\{t<T\\}}R_{k+1}\\psi_t]$ is zero. The bound [A3] dominates every finite rectangular truncation of the double sum by an integrable random variable, so [F11] permits passing to the full sum. All terms with $k<t$ therefore vanish in step 2.1.",
+          "inputs": [
+            "A3",
+            "F9",
+            "F10",
+            "F11",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "thm-policy-gradient-theorem-4-1",
+          "step": "4.1",
+          "claim": "The remaining terms have $k\\ge t$, and the return definition [F3] gives $\\sum_{k=t}^{T-1}\\gamma^kR_{k+1}=\\gamma^tG_t$. Hence step 2.1 becomes $DJ(\\theta_0)h=\\langle\\mathbb E_{\\theta_0}[\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_{\\theta_0}(S_t,A_t)],h\\rangle$. Since this holds for every $h$, the vector inside the inner product is the Euclidean gradient of $J$ at $\\theta_0$, proving the assertion.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-decision Bernoulli reward",
+          "status": "checked_by_exact_calculation",
+          "calculation": "For pi_theta(1)=theta, reward 1 on action 1 and 0 on action 0, T=1 so gamma^0=1; E[G_0 grad log pi(A_0)]=theta(1/theta)=1=grad(theta)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "start already terminal",
+          "status": "checked",
+          "evidence": "T=0 gives an empty update sum and J is locally constant at zero return."
+        },
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "The factor gamma^t leaves only t=0; later rewards have zero weight in J."
+        },
+        {
+          "case": "zero transition mass or unsupported action",
+          "status": "not_applicable",
+          "evidence": "Such paths are omitted from the positive-likelihood trajectory set."
+        },
+        {
+          "case": "failure of dominated differentiation or integrability",
+          "status": "outside_scope",
+          "evidence": "The theorem explicitly assumes both; no interchange is asserted without them."
+        },
+        {
+          "case": "continuing average reward",
+          "status": "outside_scope",
+          "evidence": "The theorem is episodic; its Remarks specify the separate stationary-distribution premise."
+        }
+      ]
+    },
+    "alg-one-step-actor-critic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "step": "1",
+          "claim": "Sample an action from the current policy and a joint next-state/reward outcome from the MDP law.",
+          "inputs": [
+            "current theta",
+            "current state",
+            "MDP transition-reward law"
+          ]
+        },
+        {
+          "step": "2",
+          "claim": "Set terminal continuation value to zero and compute the one-step TD error using pre-update critic parameters.",
+          "inputs": [
+            "current w",
+            "sampled reward",
+            "next state",
+            "discount gamma"
+          ]
+        },
+        {
+          "step": "3",
+          "claim": "Compute actor and critic increments simultaneously from the pre-update parameters.",
+          "inputs": [
+            "TD error",
+            "actor trace I",
+            "policy score",
+            "critic gradient"
+          ]
+        },
+        {
+          "step": "4",
+          "claim": "Install both updates, discount the actor trace, and continue at the sampled next state.",
+          "inputs": [
+            "actor update",
+            "critic update",
+            "discount gamma",
+            "next state"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "The actor trace becomes zero after the first transition; the procedure remains defined."
+        },
+        {
+          "case": "proposed parameter leaves U or W",
+          "status": "outside_scope",
+          "evidence": "The statement assumes every proposed update remains inside both open parameter domains."
+        },
+        {
+          "case": "inaccurate critic",
+          "status": "checked",
+          "evidence": "The example verifies that bootstrapping may change the expected actor direction."
+        }
+      ]
+    },
+    "alg-reinforce": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "step": "1",
+          "claim": "Freeze the policy parameter while sampling one complete episode.",
+          "inputs": [
+            "initial state",
+            "current theta",
+            "policy path law"
+          ]
+        },
+        {
+          "step": "2",
+          "claim": "Compute each discounted return and the score under the same frozen parameter.",
+          "inputs": [
+            "episode rewards",
+            "discount gamma",
+            "policy score"
+          ]
+        },
+        {
+          "step": "3",
+          "claim": "Apply one aggregate update after the episode using the gamma-to-time-weighted score-return sum.",
+          "inputs": [
+            "step size alpha",
+            "discounted returns",
+            "policy scores"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "Only the first decision contributes to the start-state objective update."
+        },
+        {
+          "case": "proposed theta leaves U",
+          "status": "outside_scope",
+          "evidence": "The statement assumes every proposed update remains in the policy parameter domain."
+        },
+        {
+          "case": "within-episode parameter updates",
+          "status": "not_applicable",
+          "evidence": "The procedure freezes theta until the complete episode has been collected."
+        }
+      ]
+    },
+    "lem-action-independent-baseline-does-not-bias-policy-gradient": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-policy-gradient-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite Markov decision process have nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward set $\\mathcal R$, and fixed joint transition-reward masses $p(s',r\\mid s,a)$. Fix an initial state $s_0\\in S$, a terminal set $S_\\dagger\\subseteq S$, and $0\\le\\gamma<1$. Let $U\\subseteq\\mathbb R^d$ be open, let $\\theta_0\\in U$, and let $\\pi_\\theta$ be a differentiable stationary policy family with fixed common support on an open neighborhood $U_0$ of $\\theta_0$. Suppose every episode from $s_0$ under $\\pi_\\theta$, for $\\theta\\in U_0$, reaches $S_\\dagger$ in finite time almost surely. Let $T$ be the first terminal time, let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}\\quad(t<T),\\qquad G_T=0,$$\n\nand set $J(\\theta)=V^{\\pi_\\theta}(s_0)=\\mathbb E_\\theta[\\sum_{k=0}^{T-1}\\gamma^kR_{k+1}]$. Let $\\mathcal T$ be the set of finite trajectories that use only actions in the common policy support, have positive transition masses, and stop at their first terminal state. For $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)\\in\\mathcal T$, define\n\n$$p_\\theta(\\tau)=\\prod_{t=0}^{m-1}\\pi_\\theta(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t),\\qquad R_\\gamma(\\tau)=\\sum_{k=0}^{m-1}\\gamma^kr_{k+1}.$$\n\nAssume the trajectory masses $p_\\theta(\\tau)$ are totally differentiable at $\\theta_0$, the linear map $h\\mapsto\\sum_{\\tau\\in\\mathcal T}R_\\gamma(\\tau)Dp_{\\theta_0}(\\tau)h$ is defined by an absolutely convergent sum, and there is a summable $H:\\mathcal T\\to[0,\\infty)$ that dominates the return-weighted normalized remainders below and for which those remainders tend to zero pathwise:\n\n$$\\frac{|R_\\gamma(\\tau)|\\,|p_{\\theta_0+h}(\\tau)-p_{\\theta_0}(\\tau)-Dp_{\\theta_0}(\\tau)h|}{\\|h\\|_2}\\le H(\\tau),\\qquad \\frac{|R_\\gamma(\\tau)|\\,|p_{\\theta_0+h}(\\tau)-p_{\\theta_0}(\\tau)-Dp_{\\theta_0}(\\tau)h|}{\\|h\\|_2}\\longrightarrow0$$\n\nfor every $\\tau\\in\\mathcal T$ as $h\\to0$, with $\\sum_{\\tau\\in\\mathcal T}H(\\tau)<\\infty$.\n\nAlso assume\n\n$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t<T}\\sum_{k<T}\\gamma^k\\|\\psi_{\\theta_0}(S_t,A_t)\\|_2\\,|R_{k+1}|\\right]<\\infty,$$\n\nwhere $\\psi_\\theta(s,a)=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s)$ on the common support. Then $J$ is totally differentiable at $\\theta_0$ and\n\n$$\\nabla_\\theta J(\\theta_0)=\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\,\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\,G_t\\right].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-policy-score-has-zero-conditional-mean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $S$ be a nonempty finite state set, let each $A(s)$ be a finite nonempty action set, and let $p(s',r\\mid s,a)$ be a fixed normalized joint law for the next state and reward. Fix an initial state and a terminal set $S_\\dagger\\subseteq S$. Under a differentiable stationary policy family with a support that is fixed and strictly positive on that support throughout its open parameter domain, assume the induced episode terminates almost surely. For $t\\ge0$, let $\\mathcal H_t=\\sigma(S_0,A_0,R_1,\\ldots,A_{t-1},R_t,S_t)$ be the information available just before the time-$t$ action, and let $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$ when $t<T$, where $T$ is the first terminal time. Define $\\psi_t=0$ when $t\\ge T$. Then, coordinate by coordinate,\n\n$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-1-1",
+          "step": "1.1",
+          "claim": "Because $S$ is finite, $b$ is bounded; because the state-action support is finite, [F3] gives $C_\\psi:=\\max_{s,a\\in B(s)}\\|\\psi_{\\theta_0}(s,a)\\|_2<\\infty$. For every episode, [F6] bounds the baseline-score sum by $\\sum_{t<T}\\gamma^t|b(S_t)|\\|\\psi_t\\|_2\\le \\|b\\|_\\infty C_\\psi/(1-\\gamma)$. For each fixed $t$, $\\mathbf1_{\\{t<T\\}}b(S_t)$ is $\\mathcal H_t$-measurable, so [F2] and [F5] give $\\mathbb E[\\gamma^t\\mathbf1_{\\{t<T\\}}b(S_t)\\psi_t]=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-2-1",
+          "step": "2.1",
+          "claim": "The partial baseline-score sums converge almost surely to the full sum because $T<\\infty$ almost surely, and the bound in step 1.1 is an integrable constant majorant. By [F7], the expectation of the full baseline-score sum is the limit of its finite partial-sum expectations, each zero by step 1.1; hence $\\mathbb E[\\sum_{t<T}\\gamma^tb(S_t)\\psi_t]=0$.",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "lem-action-independent-baseline-does-not-bias-policy-gradient-3-1",
+          "step": "3.1",
+          "claim": "Subtracting the zero vector in step 2.1 from the policy-gradient expectation in [F1] gives the displayed identity.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one-state Bernoulli baseline term",
+          "status": "checked_by_exact_calculation",
+          "calculation": "For b(s)=b, E[b score]=b(theta/theta+(1-theta)(-1/(1-theta)))=0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "The geometric bound and baseline-score identity remain valid."
+        },
+        {
+          "case": "gamma equals one",
+          "status": "outside_scope",
+          "evidence": "The stated geometric-series bound requires gamma<1."
+        },
+        {
+          "case": "action-dependent baseline",
+          "status": "outside_scope",
+          "evidence": "The zero conditional score argument requires the baseline to be measurable before the action."
+        }
+      ]
+    },
+    "alg-reinforce-with-baseline": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "step": "1",
+          "claim": "Choose and hold a finite-valued state baseline fixed before the episode.",
+          "inputs": [
+            "state set",
+            "baseline b"
+          ]
+        },
+        {
+          "step": "2",
+          "claim": "Freeze the policy during the episode and compute returns, scores, and baseline-adjusted returns.",
+          "inputs": [
+            "episode",
+            "discount gamma",
+            "policy score",
+            "baseline b"
+          ]
+        },
+        {
+          "step": "3",
+          "claim": "Apply one aggregate update after termination using gamma-to-time weights.",
+          "inputs": [
+            "step size alpha",
+            "adjusted returns",
+            "policy scores"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "The baseline term at later times is multiplied by zero."
+        },
+        {
+          "case": "baseline updated from the same episode before actor update",
+          "status": "not_applicable",
+          "evidence": "The baseline is fixed before the episode and held fixed through its update."
+        },
+        {
+          "case": "proposed theta leaves U",
+          "status": "outside_scope",
+          "evidence": "The statement assumes every proposed update remains in U."
+        }
+      ]
+    },
+    "ex-actor-critic-bootstrap-can-bias-policy-update": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": []
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-one-step-actor-critic",
+          "source_section": "Definition",
+          "quote": "For a finite episodic Markov decision process with discount $0\\le\\gamma<1$, terminal set $S_\\dagger$, initial state $s_0$, differentiable policy family $\\pi_\\theta$ on an open set $U\\subseteq\\mathbb R^d$, and a differentiable value approximation $\\widehat V_w:S\\to\\mathbb R$ on an open set $W\\subseteq\\mathbb R^m$, choose step sizes $\\alpha,\\beta\\ge0$. Assume every proposed actor and critic update remains in $U$ and $W$, respectively. Initialize $S=s_0$ and $I=1$. While $S\\notin S_\\dagger$, using the current pre-update parameters $(\\theta,w)$:\n\n1. Sample $A\\sim\\pi_\\theta(\\cdot\\mid S)$ and then sample $(S',R)$ with joint law $p(S',R\\mid S,A)$.\n2. Set $\\widehat V_w(S')=0$ when $S'\\in S_\\dagger$, and compute the temporal-difference error $\\delta=R+\\gamma\\widehat V_w(S')-\\widehat V_w(S)$.\n3. Compute both updates from these pre-update parameters: $\\theta'=\\theta+\\alpha I\\delta\\nabla_\\theta\\log\\pi_\\theta(A\\mid S)$ and $w'=w+\\beta\\delta\\nabla_w\\widehat V_w(S)$. Replace $(\\theta,w)$ by $(\\theta',w')$.\n4. Set $I\\leftarrow\\gamma I$ and $S\\leftarrow S'$.\n\nThe critic uses a one-step bootstrapped target; the actor uses the current TD error and the accumulated start-state discount $I=\\gamma^t$. The procedure itself asserts no convergence result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-1-1",
+          "step": "1.1",
+          "claim": "Every reward in this MDP is zero and the episode reaches $d$ in two decisions, so its total return is zero for every sampled action sequence. Hence $J(\\theta)=0$ for every $\\theta\\in(0,1)$ and $\\nabla_\\theta J(1/2)=0$ by [F6].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-1-2",
+          "step": "1.2",
+          "claim": "At $\\theta=1/2$, the score at $s$ is $\\nabla_\\theta\\log\\theta=2$ for action $1$ and $\\nabla_\\theta\\log(1-\\theta)=-2$ for action $0$, by [F2] and [F5].",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-2-1",
+          "step": "2.1",
+          "claim": "If $A_0=0$, then $S_1=x_0$ and $\\delta_0=0+(1/2)\\cdot0-0=0$, so the first actor increment is zero. If $A_0=1$, then $S_1=x_1$ and $\\delta_0=0+(1/2)\\cdot1-0=1/2$, so the first increment is $(1/4)\\cdot1\\cdot(1/2)\\cdot2=1/4$ by [F4] and step 1.2. Both proposed values, $1/2$ and $3/4$, are in the policy domain $(0,1)$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-actor-critic-bootstrap-can-bias-policy-update-3-1",
+          "step": "3.1",
+          "claim": "The two actions each have probability $1/2$, so the expected first actor increment is $(1/2)\\cdot0+(1/2)\\cdot(1/4)=1/8$. This differs from the true gradient $0$ in step 1.1, proving the stated bias.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta=1/2 and critic Vhat(x0)=0,Vhat(x1)=1",
+          "status": "checked_by_exact_calculation",
+          "calculation": "Action 0 gives increment 0; action 1 gives delta=1/2, score 2, and alpha=1/4, hence increment 1/4. The equiprobable mean is 1/8 while J(theta)=0 has gradient 0; both proposed actor parameters remain in (0,1)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "theta at 0 or 1",
+          "status": "outside_scope",
+          "evidence": "The example uses theta in (0,1) so both policy actions have positive probability and finite scores."
+        },
+        {
+          "case": "zero rewards",
+          "status": "checked",
+          "evidence": "The true return and objective gradient are exactly zero, while the critic bootstrap creates the nonzero sample update."
+        }
+      ]
+    },
+    "ex-reinforce-one-step-bernoulli-mdp": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": []
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce",
+          "source_section": "Definition",
+          "quote": "For a finite episodic Markov decision process with discount $0\\le\\gamma<1$, terminal set $S_\\dagger$, initial state $s_0$, and a differentiable stationary policy family $\\pi_\\theta$ on an open set $U\\subseteq\\mathbb R^d$, choose a step size $\\alpha\\ge0$ and assume every proposed update remains in $U$. In each training round, hold $\\theta$ fixed while sampling an episode $(S_0,A_0,R_1,\\ldots,S_T)$ from $s_0$ until its first terminal state. For each $t<T$, compute the return $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$ and score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$. After the episode is complete, update once by\n\n$$\\theta\\leftarrow\\theta+\\alpha\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_t.$$\n\nAll returns, scores, and the full sum use the same parameter value that generated the episode; no policy update occurs while that episode is being sampled.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-1-1",
+          "step": "1.1",
+          "claim": "Action $1$ occurs with probability $\\theta$ and gives reward $1$, while action $0$ occurs with probability $1-\\theta$ and gives reward $0$. By [F3], this one-decision episode has $G_0=R_1$, so its expected return is $J(\\theta)=\\theta$ and $\\nabla_\\theta J(\\theta)=1$ by [F1] and [F6].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-1-2",
+          "step": "1.2",
+          "claim": "By [F2] and [F5], the score is $1/\\theta$ when $A_0=1$ and $-1/(1-\\theta)$ when $A_0=0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-reinforce-one-step-bernoulli-mdp-2-1",
+          "step": "2.1",
+          "claim": "When $A_0=1$, $Z=1/\\theta$; when $A_0=0$, $Z=0$. Hence $\\mathbb E_\\theta[Z]=\\theta(1/\\theta)+(1-\\theta)0=1$, which equals the gradient from step 1.1.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta in (0,1), one-decision Bernoulli reward",
+          "status": "checked_by_exact_calculation",
+          "calculation": "The sample estimator is 1/theta on action 1 (probability theta) and 0 on action 0, so its expectation is 1=grad(theta)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "theta at 0 or 1",
+          "status": "outside_scope",
+          "evidence": "The log score is defined only on the fixed positive support, so the example restricts theta to (0,1)."
+        },
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "T=1 and gamma^0=1, so the calculation is unchanged."
+        }
+      ]
+    },
+    "ex-action-independent-baseline-eliminates-variance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": []
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "Let a finite Markov decision process have nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state. Let $U\\subseteq\\mathbb R^d$ be open, with $d\\ge1$. A **differentiable stationary policy family** on $U$ is a family of probabilities $\\pi_\\theta(a\\mid s)$, indexed by $\\theta\\in U$, $s\\in S$, and $a\\in A(s)$, such that $\\sum_{a\\in A(s)}\\pi_\\theta(a\\mid s)=1$, each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable, and for each $s$ there is a fixed nonempty support $B(s)\\subseteq A(s)$ with $\\pi_\\theta(a\\mid s)>0$ for every $a\\in B(s)$ and $\\theta\\in U$, while $\\pi_\\theta(a\\mid s)=0$ for every $a\\notin B(s)$ and $\\theta\\in U$. The **score vector** at a supported state-action pair is\n\n$$\\psi_\\theta(s,a):=\\nabla_\\theta\\log\\pi_\\theta(a\\mid s),\\qquad a\\in B(s),$$\n\nwhere the gradient is the Euclidean vector of partial derivatives. The fixed-support condition makes this logarithm defined throughout $U$ on every action that can be sampled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-episodic-returns-td-errors-and-policy-support",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $S_\\dagger\\subseteq S$ be a set of terminal states. Form an absorbing extension with reward alphabet $\\mathcal R^\\dagger=\\mathcal R\\cup\\{0\\}$: from each nonterminal state retain the original joint reward-transition law, and from each terminal state use the deterministic transition back to that state with reward zero. Assume AC for the path laws defining policy values. For a stationary policy $\\sigma$, an episode starting from $s$ ends at its first hitting time $T=\\inf\\{n\\ge0:S_n\\in S_\\dagger\\}$; require $T<\\infty$ almost surely under every policy used. The return from time $t<T$ is\n\n$$\nG_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1},\n$$\n\nand $G_T=0$. This equals the infinite discounted return of the absorbing extension, whose state value is $V^\\sigma(s)=\\mathbb E_{\\sigma,s}[G_0]$.\n\nFor a state-value estimate $V_n$, the state temporal-difference error on a transition is $\\delta_n^V=R_{n+1}+\\gamma V_n(S_{n+1})-V_n(S_n)$. For an action-value estimate $Q_n$, the sampled-action Sarsa error is $\\delta_n^{\\mathrm{Sarsa}}=R_{n+1}+\\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n)$, and the greedy Q-learning error is $\\delta_n^{Q}=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n)$. In each error, the continuation term is defined as zero when $S_{n+1}$ is terminal.\n\nIn off-policy prediction, $\\mu$ denotes the behavior policy generating episodes and $\\pi$ the target policy whose value is estimated. Target support means $\\pi(a\\mid s)>0$ implies $\\mu(a\\mid s)>0$ for every state-action pair that can be visited. For a behavior-generated episode, the state-return likelihood ratio from time $t$ is\n\n$$\n\\Lambda_{t:T-1}=\\prod_{k=t}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)}.\n$$\n\nEach denominator is positive on the observed behavior path. When estimating a value conditional on an already fixed action $A_t$, the first factor begins at time $t+1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce",
+          "source_section": "Definition",
+          "quote": "For a finite episodic Markov decision process with discount $0\\le\\gamma<1$, terminal set $S_\\dagger$, initial state $s_0$, and a differentiable stationary policy family $\\pi_\\theta$ on an open set $U\\subseteq\\mathbb R^d$, choose a step size $\\alpha\\ge0$ and assume every proposed update remains in $U$. In each training round, hold $\\theta$ fixed while sampling an episode $(S_0,A_0,R_1,\\ldots,S_T)$ from $s_0$ until its first terminal state. For each $t<T$, compute the return $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$ and score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$. After the episode is complete, update once by\n\n$$\\theta\\leftarrow\\theta+\\alpha\\sum_{t=0}^{T-1}\\gamma^tG_t\\psi_t.$$\n\nAll returns, scores, and the full sum use the same parameter value that generated the episode; no policy update occurs while that episode is being sampled.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-reinforce-with-baseline",
+          "source_section": "Definition",
+          "quote": "For a finite episodic Markov decision process with discount $0\\le\\gamma<1$, terminal set $S_\\dagger$, initial state $s_0$, differentiable policy family $\\pi_\\theta$ on an open set $U\\subseteq\\mathbb R^d$, a fixed finite-valued state function $b:S\\to\\mathbb R$, and step size $\\alpha\\ge0$, assume every proposed update remains in $U$. Run episodic REINFORCE as follows, with the additional rule that $b$ is selected before the episode and held fixed throughout it. Hold $\\theta$ fixed while sampling a complete episode. For each $t<T$, compute $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$, the score $\\psi_t=\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)$, and the baseline-adjusted return $G_t-b(S_t)$. After termination, update once by\n\n$$\\theta\\leftarrow\\theta+\\alpha\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\psi_t.$$\n\nThe fixed baseline depends on the state and is independent of each episode action conditional on the state and past; it is not updated using that episode before this actor update is applied.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+          "source_section": "Statement",
+          "quote": "Assume the hypotheses of the discounted episodic policy-gradient theorem at a fixed parameter $\\theta_0$, including the Axiom of Choice, common support, almost-sure finite termination, dominated trajectory differentiation, and the stated integrability of discounted return-score products. Let $b:S\\to\\mathbb R$ be any fixed finite-valued function of the state, chosen independently of the actions in the episode. Then\n\n$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\right]=\\nabla_\\theta J(\\theta_0).$$\n\nThe baseline is action-independent conditional on the state and past. This identity says that subtracting it preserves the expected update; it does not say that every baseline reduces variance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-1-1",
+          "step": "1.1",
+          "claim": "At $\\theta=1/2$, the two actions have probability $1/2$ and scores $2$ and $-2$ by [F2] and [F6]. The specified deterministic reward-transition law [F1] and return convention [F3] give $G_0=A_0$ and $J(\\theta)=\\theta$, so the true gradient is $1$ by [F7].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-2-1",
+          "step": "2.1",
+          "claim": "Without a baseline, $Z=2$ when $A_0=1$ and $Z=0$ when $A_0=0$. Therefore $\\mathbb E[Z]=1$ and $\\operatorname{Var}(Z)=\\tfrac12(2-1)^2+\\tfrac12(0-1)^2=1$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-2-2",
+          "step": "2.2",
+          "claim": "With $b(s)=1/2$, the baseline-adjusted value is $(1-1/2)2=1$ when $A_0=1$ and $(0-1/2)(-2)=1$ when $A_0=0$. Thus $Z_b=1$ surely, so $\\mathbb E[Z_b]=1$ and $\\operatorname{Var}(Z_b)=0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-action-independent-baseline-eliminates-variance-3-1",
+          "step": "3.1",
+          "claim": "The two estimators have the same expectation, equal to the true gradient in step 1.1, while their variances are $1$ and $0$ by steps 2.1 and 2.2. This verifies variance reduction for this baseline and this MDP only.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "theta=1/2 and b(s)=1/2",
+          "status": "checked_by_exact_calculation",
+          "calculation": "Unadjusted Z has values 2 and 0 with equal probability, mean 1 and variance 1. Adjusted Z_b=1 on both actions, hence mean 1 and variance 0."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "theta at 0 or 1",
+          "status": "outside_scope",
+          "evidence": "The example restricts theta to (0,1) to keep both action probabilities positive."
+        },
+        {
+          "case": "gamma equals zero",
+          "status": "checked",
+          "evidence": "The one-step return is multiplied by gamma^0=1."
+        },
+        {
+          "case": "other baselines",
+          "status": "outside_scope",
+          "evidence": "Only b(s)=1/2 is shown to eliminate variance; no universal variance claim is made."
+        }
+      ]
+    }
+  }
+}

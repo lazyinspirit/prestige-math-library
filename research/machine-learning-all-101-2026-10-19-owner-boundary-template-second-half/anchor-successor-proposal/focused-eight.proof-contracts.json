@@ -1,0 +1,2246 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-state-sup-norm-space-is-complete",
+    "lem-pac-mdp-value-simulation",
+    "lem-r-max-empirical-model-accuracy",
+    "lem-ucrl2-uniform-confidence-bounds",
+    "thm-bellman-contraction-and-unique-fixed-point",
+    "thm-communicating-mdp-common-optimal-average-reward",
+    "thm-delayed-q-learning-pac-bound",
+    "thm-r-max-pac-bound"
+  ],
+  "contracts": {
+    "lem-finite-state-sup-norm-space-is-complete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-criterion-via-lub",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of reals converges to a real ([[def-real-limit]]).\n\nMore carefully, this is a statement about the *axioms*: in a complete ordered\nfield, that is in an ordered field with the least-upper-bound property\n([[def-complete-ordered-field]]), every Cauchy sequence converges. The proof\nbelow uses nothing about $\\mathbb{R}$ except that property, through\n[[thm-bolzano-weierstrass]].\n\n**This library already knows the conclusion by a different route.**\nIt is proved on the Cauchy-construction page, where\n$\\mathbb{R}$ is built out of Cauchy sequences of rationals and completeness is\nread off the construction. That proof is about a particular construction; this\none is about the axioms, and it is what tells us the statement holds in *any*\ncomplete ordered field, however it was obtained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $(x_k)$ be a\nsequence in $X$, that is a function $\\mathbb{N} \\to X$ written $x_k := x(k)$\n([[def-metric-convergence]], [[def-sequence]]). As everywhere in this library\n$\\mathbb{N}$ contains $0$, so a sequence is indexed from $0$.\n\n$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$\n\n**Rational and real $\\varepsilon$ agree here.** The test is written with a\nrational $\\varepsilon$ to match [[def-real-limit]] and [[def-metric-convergence]],\nand nothing is lost by using a real one: below any real $\\eta > 0$ lies a\npositive rational ([[lem-rat-embeds-dense]]), and the index belonging to that\nrational serves for $\\eta$. So a proof may establish Cauchyness by producing an\nindex for every real $\\varepsilon > 0$, and may use a Cauchy hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**The condition is exactly $d(x_m,x_n) \\to 0$ as $m$ and $n$ grow\nindependently.** The distances $d(x_m,x_n)$ are nonnegative reals\n([[lem-metric-nonnegativity]]), and the displayed condition asks them to be\nuniformly small on a tail of the doubly indexed family. It is not the same as\n$d(x_{k+1}, x_k) \\to 0$, which is a strictly weaker condition and is a standing\nsource of error. The partial sums $H_n$ of the harmonic series separate the two:\nconsecutive ones differ by $1/(n+1)$, which tends to $0$, while the sequence is\nunbounded, and an unbounded sequence of reals is not Cauchy\n([[lem-metric-cauchy-bounded]]).\n\n**Consistency with the real line.** For $X = \\mathbb{R}$ with the usual metric\n$d(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]) the condition above reads\n$|x_m - x_n| < \\varepsilon$ for $m,n \\ge K$, which is verbatim the definition of a\nCauchy sequence of reals ([[def-real-limit]]). So the notion introduced here\nrestricts on $\\mathbb{R}$ to the one already in use, and no ambiguity is created.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-convergence",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA **sequence in $X$** is a function $x : \\mathbb{N} \\to X$, written $(x_k)$ with\n$x_k := x(k)$. As everywhere in this library, $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]) and a sequence is indexed from $0$\n([[def-sequence]]); an index range copied from a text that starts at $1$ must be\nshifted before it is used here.\n\nLet $(x_k)$ be a sequence in $X$ and $p \\in X$. The function\n$k \\mapsto d(x_k, p)$ is a sequence of reals ([[def-sequence]]), and it is\nnonnegative ([[lem-metric-nonnegativity]]), so $|d(x_k,p)| = d(x_k,p)$\n([[def-abs-value]]). Define\n\n$$x_k \\longrightarrow p \\text{ in } (X,d) \\quad :\\Longleftrightarrow \\quad d(x_k,p) \\longrightarrow 0 \\text{ in } \\mathbb{R},$$\n\nthe convergence on the right being that of [[def-real-limit]]. Unwound, this\nsays: for every **rational** $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ with\n$d(x_k, p) < \\varepsilon$ for every $k \\ge K$. We then call $p$ a **limit** of\n$(x_k)$, and say $(x_k)$ **converges** in $(X,d)$ if it has a limit.\n\n**Rational and real $\\varepsilon$ agree here, as they do on the real line.**\n[[def-real-limit]] tests convergence against rational $\\varepsilon$ only, and its\nown remark, restated for sequences in [[def-sequence]], records that nothing is\nlost: below any real $\\eta > 0$ lies a positive rational\n([[lem-rat-embeds-dense]]), and the index belonging to that rational serves for\n$\\eta$. So a proof may establish convergence by producing an index for every\nreal $\\varepsilon > 0$, and may use a convergence hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**Subsequences and subsequential limits.** A **subsequence** of $(x_k)$ is the\ncomposite $x \\circ n$ for a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$,\nwritten $(x_{n_j})$, exactly as for sequences of reals ([[def-sequence]]); and\n$p$ is a **subsequential limit** of $(x_k)$ in $(X,d)$ when some subsequence\nconverges to $p$, which is the metric-space form of [[def-subsequential-limit]].",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x_l| < \\hat\\varepsilon$ for all $k, l \\ge K$.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-limit-unique",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let $x, y \\in\n\\mathbb{R}$. If $(x_k)$ converges to $x$ and $(x_k)$ converges to $y$\n([[def-real-limit]]), then $x = y$. A sequence therefore has at most one limit,\nand when a limit exists it may be denoted $\\lim_{k} x_k$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-1-1",
+          "claim": "If $S=\\emptyset$, then $B(S)$ has exactly one element, the empty function. Its only distance is $0$; nonnegativity, symmetry, separation, and the triangle inequality all hold on this singleton, and every sequence in it is constant and convergent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-1-2",
+          "claim": "Suppose $S\\ne\\emptyset$. By [F1], fix $n\\ge1$ and a bijection $e:n\\to S$. Pulling functions back along $e$ identifies $B(S)$ with $\\mathbb R^n$ and carries $d_\\infty$ exactly to the max metric of [F2]; hence it is a metric.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-2-1",
+          "claim": "Let $(U_m)$ be Cauchy in $d_\\infty$ on $B(S)$. For each $j<n$, define the real sequence $x^{(j)}_m:=U_m(e(j))$. Given rational $\\varepsilon>0$, the metric Cauchy condition supplies $K$ such that $d_\\infty(U_m,U_\\ell)<\\varepsilon$ for all $m,\\ell\\ge K$. Since the pulled-back $d_\\infty$ is the maximum of the coordinate differences, $|x^{(j)}_m-x^{(j)}_\\ell|<\\varepsilon$ for every $j<n$ and $m,\\ell\\ge K$. Thus each coordinate sequence is Cauchy in $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F3], each coordinate sequence converges. Denote its unique limit by $y_j\\in\\mathbb R$, using [F6].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Define $U:S\\to\\mathbb R$ by $U(e(j)):=y_j$ for $j<n$. This is well defined because $e$ is a bijection, and it uses no choice because every $y_j$ is uniquely determined.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix rational $\\varepsilon>0$. For each $j<n$, convergence to $y_j$ gives a nonempty set of natural thresholds $K$ such that $|x^{(j)}_m-y_j|<\\varepsilon$ for all $m\\ge K$. Let $K_j$ be its least member, using [F7].",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The finite nonempty list $K_0,\\ldots,K_{n-1}$ has a maximum $K$: start with $K_0$ and, at each successor, retain the larger of the current maximum and the next threshold, which exists by the total order on $\\mathbb N$; induction proves the resulting value dominates every entry. Thus $K\\ge K_j$ for all $j<n$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.2",
+            "step 4.2",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every $m\\ge K$, step 5.1 implies $|U_m(e(j))-U(e(j))|<\\varepsilon$ for every $j<n$. Their finite maximum is one of these coordinate differences, so $d_\\infty(U_m,U)<\\varepsilon$. Since this holds for every rational $\\varepsilon>0$, $(U_m)$ converges to $U$ in $d_\\infty$. Every Cauchy sequence therefore converges in $B(S)$, and together with the metric property from steps 1.1–1.2 this proves completeness.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The explicit empty-state metric branch has distance zero. Proof step 1.1 identifies the function space with its single empty function, checks the metric axioms on that singleton, and notes that every sequence is constant and convergent; it does not take a maximum of an empty set.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The explicit empty-state metric branch has distance zero. Proof step 1.1 identifies the function space with its single empty function, checks the metric axioms on that singleton, and notes that every sequence is constant and convergent; it does not take a maximum of an empty set.",
+            "item_sha256": "fa05f043be8c44c7861fa25412bbf53a02cc6fc9c0166fa4d4fc455cc24bc78d",
+            "row_sha256": "ee93819775e6f4389f1b6ed7248676d1902da568c948aff734043a42bccb331e"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+              "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+              "row_sha256": "41f2b00dee0b90f20855f8382b2e130d3662545ac7a1bf5217a8dc1db9646b2f"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "The explicit empty-state metric branch has distance zero. Proof1.1 identifies the function space with its single empty function, checks the metric axioms on that singleton, and notes that every sequence is constant and convergent; it does not take a maximum of an empty set.",
+              "item_sha256": "fa05f043be8c44c7861fa25412bbf53a02cc6fc9c0166fa4d4fc455cc24bc78d",
+              "row_sha256": "ced6f86696f1dab8a8ff1cc754aa4a7a62c1e8632e2d0008e66c687d6099a525"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof step 1.1 gives zero distance on the singleton empty-function space; steps 1.2 and 6.1 transport the usual coordinate max metric for nonempty states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+            "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+            "row_sha256": "4e800000e4d7de339257b855a01b637ea8d589269130a444f96a54cbd6b6072b"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.2–6.1 include n=1 in the finite-coordinate metric and convergence argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 separately proves metric axioms and completeness when there are no coordinates.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+            "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+            "row_sha256": "8457e83f035cb1fe14548e9b7c3cfdeb84114fc5edd16577c89180a881198a41"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter.",
+          "evidence": "",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+            "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+            "row_sha256": "da669b8192521bb87977339e5921fa89a57b7539c0b96c237e2dac6dca67ace1"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 3.1 and 4.1 assemble uniquely determined coordinate limits, step 4.2 takes least thresholds, and step 5.1 constructs their finite maximum.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+            "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+            "row_sha256": "0bc7ec8cd00c31829f713d94d1133c8cedd2122ada14a50b2b13915fc5844d05"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": "",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The claim constructs a metric on the finite-coordinate real function space and proves completeness, including the singleton empty-function branch. It does not characterize completeness by a reverse implication.",
+            "item_sha256": "fa05f043be8c44c7861fa25412bbf53a02cc6fc9c0166fa4d4fc455cc24bc78d",
+            "row_sha256": "877966b7557d0a6b66d956dc5d9a272a75d505ef74ae89a704fd558a9caf2aef"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+              "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+              "row_sha256": "877966b7557d0a6b66d956dc5d9a272a75d505ef74ae89a704fd558a9caf2aef"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": "",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The claim constructs a metric on the finite-coordinate real function space and proves completeness, including the singleton empty-function branch. It does not characterize completeness by a reverse implication.",
+            "item_sha256": "fa05f043be8c44c7861fa25412bbf53a02cc6fc9c0166fa4d4fc455cc24bc78d",
+            "row_sha256": "73be5f1d99d5f84f1adbbde6d33fd763a3f60f0f9c3049d0cc9919c592435a25"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The empty state function space is a singleton, and a finite enumeration identifies every other state space with coordinate Euclidean space. Unique real limits and least natural thresholds assemble the limit and a finite common threshold without countable choice.",
+              "item_sha256": "4e91c20a851fbd1f015d6eb8f3d4f4d8ec7fd2e899d30370f3282003fefe3053",
+              "row_sha256": "73be5f1d99d5f84f1adbbde6d33fd763a3f60f0f9c3049d0cc9919c592435a25"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-80",
+        "notes": "Read all eight steps and the exact finite-dimensional metric, real Cauchy completeness, unique-limit, least-natural-threshold, induction and total-order suppliers. Empty S is a singleton. For nonempty S, each coordinate has a unique real limit and least threshold; the finite maximum works at rational ε. No choice is used. Confirmed refuter:80:1: the claim about other ACω completeness proofs on this page is false; removed only that sentence after checking the Cauchy criterion and the least-index Bolzano–Weierstrass path. Statement/proof/deps remain unchanged."
+      }
+    },
+    "lem-pac-mdp-value-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pac-mdp-value-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. In every bounded-reward finite discounted Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, and $0\\le\\gamma<1$, the trajectory law of every history-dependent behavior from every starting state exists. Its discounted return is measurable, integrable, and between $0$ and $1/(1-\\gamma)$. For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation. The optimality operator\n\n$$T^*V(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]$$\n\nis a $\\gamma$ contraction in the supremum norm, meaning $\\|T^*V-T^*W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty$ for all $V,W:S\\to\\mathbb R$, where $\\|V\\|_\\infty=\\max_{s\\in S}|V(s)|$, and has a unique fixed point $V^*$. This fixed point is the supremum of the values of all history-dependent behaviors and is attained by a deterministic stationary greedy policy. The optimal action value is\n\n$$Q^*(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V^*(s'),$$\n\nand $V^*(s)=\\max_{a\\in A(s)}Q^*(s,a)$ with $Q^*(s,a)\\ge0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-pac-mdp-bounded-reward-model",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a nonempty finite set, let $A(s)$ be a nonempty finite set for each $s\\in S$, and let $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. Here **finite** means bijective with a natural number. Put $S_0=|S|$ and $A_0=\\max_{s\\in S}|A(s)|$. Fix a discount $0\\le\\gamma<1$. Give $S$ and $D$ their discrete sigma-algebras and give $[0,1]$ its Borel sigma-algebra. A **bounded-reward finite discounted Markov decision process** is a probability kernel $K$ from $D$ to $S\\times[0,1]$. At pair $(s,a)$, $K(\\cdot\\mid s,a)$ is the joint law of the next state and the reward; these two coordinates need not be independent. Define the state-transition probabilities and expected rewards by\n\n$$P(s'\\mid s,a)=K(\\{s'\\}\\times[0,1]\\mid s,a),\\qquad r(s,a)=\\int_{S\\times[0,1]}\\rho\\,K(ds',d\\rho\\mid s,a).$$\n\nA **history-dependent behavior** is a sequence of probability kernels from observed-history spaces $H_t$ to the finite action alphabet $\\mathcal A=\\bigcup_{s\\in S}A(s)$, assigning probability zero to actions outside $A(s_t)$ at every history ending in state $s_t$. Here $H_t$ consists of histories $(s_0,a_0,R_1,s_1,\\ldots,a_{t-1},R_t,s_t)$, with discrete sigma-algebras on finite state/action coordinates and the Borel sigma-algebra on each reward coordinate; it has the resulting finite-product sigma-algebra. A **stationary Markov policy** assigns one distribution on $A(s)$ to each state, independently of earlier history. During interaction, after choosing $a_t$ in state $s_t$, the next pair $(s_{t+1},R_{t+1})$ is drawn from $K(\\cdot\\mid s_t,a_t)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a stationary policy $\\pi$ and put $d=\\|V_1^\\pi-V_2^\\pi\\|_\\infty$. Subtract its two Bellman equations. For each state, split the transition term as $P_1(V_1^\\pi-V_2^\\pi)+(P_1-P_2)V_2^\\pi$. The first part has absolute value at most $d$ because $P_1$ is a probability vector; the second is at most $V\\|P_1-P_2\\|_1\\le V\\beta$ because $0\\le V_2^\\pi\\le V$. Averaging over the common policy's action distribution and using the reward error gives $|V_1^\\pi(s)-V_2^\\pi(s)|\\le\\alpha+\\gamma d+\\gamma V\\beta$. Taking the maximum over states and rearranging yields the first bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $d=\\|V_1^*-V_2^*\\|_\\infty$. For any state and action, the two optimal Bellman backup entries differ by at most $\\alpha+\\gamma d+\\gamma V\\beta$, by the same transition splitting and the cap on $V_2^*$. For finite lists $(x_a),(y_a)$, $|\\max_a x_a-\\max_a y_a|\\le\\max_a|x_a-y_a|$: each $x_a\\le y_a+m$ and $y_a\\le x_a+m$ for $m=\\max_a|x_a-y_a|$. Thus the optimal Bellman equations in [F1] imply $d\\le\\alpha+\\gamma d+\\gamma V\\beta$. Rearranging proves the second bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the additional trap-model hypotheses, fix $\\pi$ and put $d=\\|V_1^\\pi-V_2^\\pi\\|_\\infty$. Bellman subtraction as in step 1.1 gives $d\\le\\alpha+\\gamma d+\\gamma\\beta\\|V_2^\\pi\\|_\\infty$. By [A1] and the triangle inequality, $\\|V_2^\\pi\\|_\\infty\\le\\|V_1^\\pi\\|_\\infty+d\\le2W+d$. Hence $(1-\\gamma-\\gamma\\beta)d\\le\\alpha+2\\gamma W\\beta$. Since $\\gamma\\beta\\le(1-\\gamma)/2$, the left coefficient is at least $(1-\\gamma)/2$, yielding $d\\le2(\\alpha+2\\gamma W\\beta)/(1-\\gamma)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For optimal values, use the finite-maximum inequality from step 1.2 in the Bellman subtraction. It gives $d=\\|V_1^*-V_2^*\\|_\\infty\\le\\alpha+\\gamma d+\\gamma\\beta\\|V_2^*\\|_\\infty$. Again [A1] and the triangle inequality give $\\|V_2^*\\|_\\infty\\le2W+d$. The same rearrangement as step 2.1 proves the optimal-value bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "name": "one-state gamma-zero perturbation",
+          "inputs": "one state/action; gamma=0; r1=1/2; r2=1/2+alpha, 0<=alpha<=1/2",
+          "calculation": "V1=1/2, V2=1/2+alpha, and transition L1 error=0.",
+          "expected": "Value difference alpha equals the stated upper bound.",
+          "check": "ml101-pacmdp-value-simulation",
+          "fixture": "one-state-gamma-zero-perturbation",
+          "asserts": "$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both supplied models use the nonempty finite state/action convention of the bounded-reward discounted model. Thus the state supremum norm is a maximum on a nonempty finite set, and each Bellman action maximum in proof1.2 is over a nonempty action set; an empty model is outside the stated domain.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Subtracting common-policy Bellman equations separates value error from transition error, and the finite maximum comparison gives the same optimal-value estimate. The trap branch bounds the second model by the first plus its difference and uses the stated small transition error to retain a positive rearrangement coefficient."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Both supplied models use the nonempty finite state/action convention of the bounded-reward discounted model. Thus the state supremum norm is a maximum on a nonempty finite set, and each Bellman action maximum in proof1.2 is over a nonempty action set; an empty model is outside the stated domain.",
+            "item_sha256": "7fc3f11d3dd55f436bc879b9c3f30f0443e09fc7269760e2f976f16e0f4700b8",
+            "row_sha256": "b846ace90656bdfd0b8125e1af39fa42e32704e40226ee0dbd092ecc6b741604"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Subtracting common-policy Bellman equations separates value error from transition error, and the finite maximum comparison gives the same optimal-value estimate. The trap branch bounds the second model by the first plus its difference and uses the stated small transition error to retain a positive rearrangement coefficient.",
+              "item_sha256": "9f8eb12c06e359df1856463f8a0e264d9e26c548d0878282bf28deef71af79ab",
+              "row_sha256": "cee44ea4f43ff062fb2e74e666a13aa3c6edcbc0fb4f17ce81d6a0acd3efeb1a"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: With alpha=beta=0 both models coincide on all Bellman data, so both displayed error bounds are zero (steps 1.1 and 1.2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: A singleton action set makes the optimal Bellman maximum equal the sole action backup (step 1.2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Deterministic transitions are probability vectors covered by the same L1 perturbation estimates (steps 1.1–3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Gamma=0 is allowed and gamma=1 is excluded because the contraction denominator would vanish (Statement and steps 1.1–3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For the two given models the common action sets are finite nonempty sets. Proof step 1.2 uses the attained finite-maximum inequality to compare optimal Bellman backups; it never selects an element of an arbitrary infinite family of maximizers. The stationary-policy bound step 1.1 uses a supplied common policy. This review concerns those finite selections, not a new choice-free path-law construction.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For the two given models the common action sets are finite nonempty sets. Proof step 1.2 uses the attained finite-maximum inequality to compare optimal Bellman backups; it never selects an element of an arbitrary infinite family of maximizers. The stationary-policy bound step 1.1 uses a supplied common policy. This review concerns those finite selections, not a new choice-free path-law construction.",
+            "item_sha256": "7fc3f11d3dd55f436bc879b9c3f30f0443e09fc7269760e2f976f16e0f4700b8",
+            "row_sha256": "5fd51cfd64a322e8dbe537ef16b6b71efc48c4ef18630d18a62a7abc061646a7"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Subtracting common-policy Bellman equations separates value error from transition error, and the finite maximum comparison gives the same optimal-value estimate. The trap branch bounds the second model by the first plus its difference and uses the stated small transition error to retain a positive rearrangement coefficient.",
+              "item_sha256": "9f8eb12c06e359df1856463f8a0e264d9e26c548d0878282bf28deef71af79ab",
+              "row_sha256": "812261db7cfb4152e74a45bef433b68eff7de032b0dbbb9013193a98b6fa9926"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "For the two given models the common action sets are finite nonempty sets. Proof1.2 uses the attained finite-maximum inequality to compare optimal Bellman backups; it never selects an element of an arbitrary infinite family of maximizers. The stationary-policy bound1.1 uses a supplied common policy. This review concerns those finite selections, not a new choice-free path-law construction.",
+              "item_sha256": "7fc3f11d3dd55f436bc879b9c3f30f0443e09fc7269760e2f976f16e0f4700b8",
+              "row_sha256": "9ac8528afabcb9fdebfe294da1f9240465cf6570aa85768c6885e0f0b780f680"
+            }
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Uniform reward/transition perturbation bounds imply policy and optimal-value error bounds, with a separate trap-model sufficient-condition branch. The result does not infer model-parameter accuracy from a value error.",
+            "item_sha256": "7fc3f11d3dd55f436bc879b9c3f30f0443e09fc7269760e2f976f16e0f4700b8",
+            "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Subtracting common-policy Bellman equations separates value error from transition error, and the finite maximum comparison gives the same optimal-value estimate. The trap branch bounds the second model by the first plus its difference and uses the stated small transition error to retain a positive rearrangement coefficient.",
+              "item_sha256": "9f8eb12c06e359df1856463f8a0e264d9e26c548d0878282bf28deef71af79ab",
+              "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Uniform reward/transition perturbation bounds imply policy and optimal-value error bounds, with a separate trap-model sufficient-condition branch. The result does not infer model-parameter accuracy from a value error.",
+            "item_sha256": "7fc3f11d3dd55f436bc879b9c3f30f0443e09fc7269760e2f976f16e0f4700b8",
+            "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Subtracting common-policy Bellman equations separates value error from transition error, and the finite maximum comparison gives the same optimal-value estimate. The trap branch bounds the second model by the first plus its difference and uses the stated small transition error to retain a positive rearrangement coefficient.",
+              "item_sha256": "9f8eb12c06e359df1856463f8a0e264d9e26c548d0878282bf28deef71af79ab",
+              "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+            }
+          ]
+        }
+      ],
+      "kind": "lemma",
+      "risk": "high",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-82",
+        "notes": "Bellman subtraction gives (1-gamma)d <= alpha+gamma V beta, for common stationary policies and via finite maxima for optimum. Trap form uses ||V2|| <=2W+d and gamma beta <=(1-gamma)/2 to absorb the extra term. All values finite, no reward/next-state independence used; gamma=0 and zero model error checked. Reader source locator accepted."
+      }
+    },
+    "lem-r-max-empirical-model-accuracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pac-mdp-adaptive-sample-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC and fix a bounded-reward finite discounted MDP with state set $S$. For each admissible pair $(s,a)$, let $(S'_i,R_i)_{i\\ge1}$ be an independent potential stream with common joint law $K(\\cdot\\mid s,a)$; an interaction reveals the next unused sample from that pair's stream only when the pair is visited. This construction has the same finite-trajectory law as interaction with the MDP under any history-dependent behavior. For a fixed pair and $m\\ge1$, its reward samples satisfy\n$$\\mathbb P\\!\\left(\\left|\\frac1m\\sum_{i=1}^m R_i-r(s,a)\\right|>x\\right)\\le 2e^{-2mx^2}\\qquad(x>0).$$\nIf $\\widehat P_m$ is the empirical distribution of $S'_1,\\ldots,S'_m$ and $P(\\cdot\\mid s,a)$ is the true next-state marginal, then\n$$\\mathbb E\\|\\widehat P_m-P(\\cdot\\mid s,a)\\|_1\\le\\sqrt{\\frac{|S|}{m}},\\qquad \\mathbb P\\!\\left(\\|\\widehat P_m-P(\\cdot\\mid s,a)\\|_1>\\sqrt{\\frac{|S|}{m}}+\\sqrt{\\frac{2\\ln(1/\\delta)}{m}}\\right)\\le\\delta\\quad(0<\\delta<1),$$\nwhere $\\|q\\|_1=\\sum_{s'\\in S}|q(s')|$ and $\\ln$ is the natural logarithm.\nMore generally, for a filtration $(\\mathcal F_i)_{i=0}^m$, if $Y_i$ is $\\mathcal F_i$-measurable, $0\\le Y_i\\le B$, and $\\mu_i=\\mathbb E[Y_i\\mid\\mathcal F_{i-1}]$, then\n$$\\mathbb P\\!\\left(\\left|\\sum_{i=1}^m(Y_i-\\mu_i)\\right|\\ge mx\\right)\\le2e^{-2mx^2/B^2}\\qquad(B>0,\\ x>0).$$\nNo independence between reward and next state within a single transition is assumed. The confidence bounds are for a fixed deterministic sample size or a fixed-size batch; this item makes no uniform confidence claim at a data-dependent sample count. At a finite history-dependent visit count, the next fixed number of unused potential outcomes still has its conditional iid law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pac-mdp-value-simulation",
+          "source_section": "Statement",
+          "quote": "Let $M_1$ and $M_2$ be bounded-reward finite discounted MDPs on the same finite state set $S$ and the same admissible action sets, with common discount $0\\le\\gamma<1$. Write $r_i,P_i,V_i^\\pi,V_i^*$ for their mean rewards, transition laws, stationary-policy values, and optimal values. Suppose $0\\le V_i^\\pi(s),V_i^*(s)\\le V$ for every state, model index $i$, and stationary policy $\\pi$, and that for every admissible pair\n$$|r_1(s,a)-r_2(s,a)|\\le\\alpha,\\qquad \\|P_1(\\cdot\\mid s,a)-P_2(\\cdot\\mid s,a)\\|_1\\le\\beta.$$\nFor finite vectors, $\\|v\\|_\\infty=\\max_{s\\in S}|v(s)|$ and $\\|p\\|_1=\\sum_{s\\in S}|p(s)|$.\nThen every common stationary policy and the optimal values satisfy\n$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$\nThere is also a trap-model form that does not assume a tight cap for the second model: for $W>0$, suppose all stationary-policy and optimal values in $M_1$ are at most $2W$, all rewards in $M_2$ lie in $[0,1]$, and $\\gamma\\beta\\le(1-\\gamma)/2$. Then every common stationary policy and the optimal values satisfy\n$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{2(\\alpha+2\\gamma W\\beta)}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{2(\\alpha+2\\gamma W\\beta)}{1-\\gamma}.$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pac-mdp-value-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. In every bounded-reward finite discounted Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, and $0\\le\\gamma<1$, the trajectory law of every history-dependent behavior from every starting state exists. Its discounted return is measurable, integrable, and between $0$ and $1/(1-\\gamma)$. For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation. The optimality operator\n\n$$T^*V(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]$$\n\nis a $\\gamma$ contraction in the supremum norm, meaning $\\|T^*V-T^*W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty$ for all $V,W:S\\to\\mathbb R$, where $\\|V\\|_\\infty=\\max_{s\\in S}|V(s)|$, and has a unique fixed point $V^*$. This fixed point is the supremum of the values of all history-dependent behaviors and is attained by a deterministic stationary greedy policy. The optimal action value is\n\n$$Q^*(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V^*(s'),$$\n\nand $V^*(s)=\\max_{a\\in A(s)}Q^*(s,a)$ with $Q^*(s,a)\\ge0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-admissible-mdp-heuristic",
+          "source_section": "Definition",
+          "quote": "For a bounded-reward finite discounted MDP, an **admissible upper heuristic** is a function $U:D\\to[0,V_0]$ such that $Q^*(s,a)\\le U(s,a)$ for every admissible pair and a supplied scalar satisfies $0\\le V_0\\le(1-\\gamma)^{-1}$. Define the effective reward-scale cap $V_{\\max}=\\max\\{1,V_0\\}$. Then $U(s,a)\\le V_{\\max}\\le(1-\\gamma)^{-1}$. The floor at $1$ is part of this convention because an observed reward can lie anywhere in $[0,1]$, even when the heuristic values are all smaller than $1$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pac-mdp-known-state-action-mdp",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a bounded-reward finite discounted MDP with discount $\\gamma$, let $K\\subseteq D$ be a set of known state-action pairs, and let $q:D\\to[0,V_{\\max}]$ with $V_{\\max}\\le(1-\\gamma)^{-1}$. The **known-state/action MDP** $M_K(q)$ agrees with $M$ on every pair in $K$. For each pair $(s,a)\\notin K$, add a distinct absorbing state $\\bot_{s,a}$ with one admissible action. The unknown pair transitions deterministically to $\\bot_{s,a}$ and gives deterministic reward $(1-\\gamma)q(s,a)$; the sink action self-loops with the same deterministic reward $(1-\\gamma)q(s,a)$. These rewards lie in $[0,1]$. The sink state's value is $q(s,a)$, so the unknown pair's Bellman backup is exactly $(1-\\gamma)q(s,a)+\\gamma q(s,a)=q(s,a)$, independent of the value function on the original states.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-r-max",
+          "source_section": "Definition",
+          "quote": "**Input:** A bounded-reward finite discounted MDP interaction, its discount $0\\le\\gamma<1$, an admissible upper heuristic $U$ with cap $V_{\\max}$, an integer sample threshold $m\\ge1$, a value-iteration error tolerance $0<\\beta<(1-\\gamma)^{-1}$, and a fixed total order on each finite action set. Write $\\ln$ for the natural logarithm.\n\n**Output:** At each interaction time $t$, the selected action $a_t$. The action-value table $Q$, known set, sample lists, and empirical model are internal state; the procedure does not return $Q$ as an output.\n\nInitialize each pair as unknown, set $Q(s,a)=U(s,a)$, and give each pair an empty list of observed rewards and next states. For interaction times $t=1,2,\\ldots$, in the current state choose a maximizing action using the fixed tie order, output and take that action $a_t$, and observe reward $R_{t+1}$ and next state $S_{t+1}$. If the pair is unknown, append this observation until its list has length $m$. When it reaches $m$, mark the pair known, set its empirical reward to the sample mean and its empirical transition law to the sample frequencies. Rebuild all action values by setting the working table $Q^{(0)}(s,a)=0$, then for $j=0,\\ldots,L-1$ setting $Q^{(j+1)}=H_KQ^{(j)}$, and finally replacing $Q$ by $Q^{(L)}$, for the operator\n$$H_KQ(s,a)=\\begin{cases}\\widehat r(s,a)+\\gamma\\sum_{s'}\\widehat P(s'\\mid s,a)\\max_{b\\in A(s')}Q(s',b),&(s,a)\\in K,\\\\ U(s,a),&(s,a)\\notin K,\\end{cases}$$\nwhere $K$ is the current known set and\n$$L=\\max\\!\\left\\{1,\\left\\lceil\\frac{\\ln(1/[\\beta(1-\\gamma)])}{1-\\gamma}\\right\\rceil\\right\\}.$$\nPairs and their samples are never removed from $K$ or discarded. After processing the observation and any rebuild, use the observed $S_{t+1}$ as the current state in the next iteration. The algorithm specifies no computational-time bound.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$,\n$$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$\nFor $n=0$ both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to each pair with reward and transition tolerance $b$. For $\\delta_0=\\delta/(4SA)$, the transition threshold is $\\sqrt{S/m}+\\sqrt{2\\ln(1/\\delta_0)/m}\\le b$: its squared numerator is at most $2S+4\\ln(1/\\delta_0)\\le4(S+L_0)$, while $m\\ge8(S+L_0)/b^2$. The reward failure is at most $2e^{-2mb^2}\\le\\delta_0$ because $2mb^2\\ge16(S+L_0)\\ge\\ln(2/\\delta_0)$. By [F6], the finite union over reward and transition events for at most $SA$ pairs has failure probability at most $2SA\\delta_0=\\delta/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Bellman operator of $\\widehat M_K$ is exactly the operator in [F5], with unknown backup $U$. Its fixed point and zero-initialized sweeps lie in $[0,(1-\\gamma)^{-1}]$. The contraction estimate in [F3] gives error at most $\\gamma^L/(1-\\gamma)$. For $0<\\gamma<1$, $\\ln\\gamma\\le-(1-\\gamma)$, so the stated $L$ makes this error at most $\\beta$; when $\\gamma=0$, one sweep is exact. The initial table $U$ is the exact fixed point for the empty known set. Thus the action-value approximation bound holds after every rebuild.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed known set $K$, the true trap model has every stationary-policy and optimal value at most $2V_{\\max}$. Indeed, until the first outside-$K$ pair its path is a true-MDP path, whose expected nonnegative prefix is at most $V^*(s)\\le V_{\\max}$; after that pair its absorbing continuation is at most $U(s,a)\\le V_{\\max}$. The empirical trap model has all rewards in $[0,1]$. Also $\\gamma b\\le(1-\\gamma)/2$, since $\\gamma b/(1-\\gamma)=\\gamma\\eta/(64V_{\\max})<1/256$. Apply the trap-model form of [F2] with $W=V_{\\max}$ and $\\alpha=\\beta=b$. The value error for each policy and the optimum is at most $2b(1+2\\gamma V_{\\max})/(1-\\gamma)=\\eta(1+2\\gamma V_{\\max})/(32V_{\\max})\\le3\\eta/32<\\eta/8$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $V^*_{M_K}$ and $V^*_{\\widehat M_K}$ denote the trap-model optima. For every state, the true Bellman backup at $V^*$ on a known pair is $Q^*(s,a)$, and on an unknown pair the trap backup is $U(s,a)\\ge Q^*(s,a)$. Hence $T_{M_K}^*V^*\\ge V^*$. The operator preserves coordinatewise order because its transition weights are nonnegative; its iterates from $V^*$ therefore increase. Contraction makes these iterates converge to the unique fixed point, so $V^*_{M_K}\\ge V^*$. Step 2.1 gives $V^*_{\\widehat M_K}\\ge V^*_{M_K}-\\eta/8$. Since $\\|Q_t-Q^*_{\\widehat M_K}\\|_\\infty\\le\\beta$, $V_t\\ge V^*_{\\widehat M_K}-\\beta\\ge V^*-(\\eta/8+\\beta)\\ge V^*-\\eta$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For each state $s$, the action chosen by $\\pi_t$ satisfies $Q^*_{\\widehat M_K}(s,\\pi_t(s))\\ge V^*_{\\widehat M_K}(s)-2\\beta$: its optimal action value is at least its estimated value minus $\\beta$, while the estimated maximum is at least the optimal maximum minus $\\beta$. Thus $T^{\\pi_t}_{\\widehat M_K}V^*_{\\widehat M_K}\\ge V^*_{\\widehat M_K}-2\\beta$. Subtracting the policy Bellman equation and taking the maximum positive difference yields $V^*_{\\widehat M_K}-V^{\\pi_t}_{\\widehat M_K}\\le2\\beta/(1-\\gamma)$. Comparing the same policy in $M_K$ by step 2.1 and using $V_t\\le V^*_{\\widehat M_K}+\\beta$ gives $V_t-V^{\\pi_t}_{M_K}\\le\\beta+2\\beta/(1-\\gamma)+\\eta/8\\le5\\eta/16<\\eta$, because $\\beta=\\eta(1-\\gamma)/16$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the event just proved, an outside-$K_t$ pair with $U(s,a)<V^*(s)-\\eta$ cannot be selected: its current value is still $Q_t(s,a)=U(s,a)$, whereas $V_t(s)\\ge V^*(s)-\\eta$. Thus every escape pair lies in $E_\\eta$. By [F5], each such pair is selected outside the known set at most $m$ times and causes one rebuild. Summing over $E_\\eta$ proves the complexity bound.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "name": "deterministic one-state R-MAX",
+          "inputs": "S=A=1, gamma=0, reward r, admissible U>=r, m>=1",
+          "calculation": "Every sample is (s,r); one sweep returns r after the pair is known.",
+          "expected": "Empirical and true trap models agree exactly.",
+          "check": "ml101-pacmdp-rmax-accuracy",
+          "fixture": "deterministic-one-state-rmax",
+          "asserts": "every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inherited discounted model has a nonempty finite state set and nonempty statewise action sets, so S and A in the logarithm and sample threshold are positive. Proof1.1 unions over at most SA admissible pairs and proof1.2 allows the known set to be empty, but an empty known set is distinct from an excluded empty MDP.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The inherited discounted model has a nonempty finite state set and nonempty statewise action sets, so S and A in the logarithm and sample threshold are positive. Proof1.1 unions over at most SA admissible pairs and proof1.2 allows the known set to be empty, but an empty known set is distinct from an excluded empty MDP.",
+            "item_sha256": "d1f676e3922c7d08a9bb4f7f1378714e515b3af44943787025b2f7431ecb7789",
+            "row_sha256": "9589de2321a8fe7e2c51748c2ae2b8c1f9300b4540c5b23a7abffd6ab2a8e2b1"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The first fixed potential batch for each pair controls every later known-set model, since samples are retained. Dedicated sinks preserve unknown heuristic values, the trap-model error comparison gives simultaneous policy accuracy, and only near-optimal heuristic pairs can incur selections or rebuilds.",
+              "item_sha256": "d5a291899e54800f58b79ac5cbe34eaee749a0da5fbc6df3dce3f32109925945",
+              "row_sha256": "cee44ea4f43ff062fb2e74e666a13aa3c6edcbc0fb4f17ce81d6a0acd3efeb1a"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: The lemma assumes eta>0; deterministic reward/transition samples have zero empirical error (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: For S=A=1 the confidence union and eligible-pair count reduce to one pair (steps 1.1 and 4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: For deterministic rewards and transitions the empirical model is exact after m observations (steps 1.1–2.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Gamma=0 is covered by one exact sweep and reward endpoints 0,1 lie in the sampling range (steps 1.1–2.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The empirical-model lemma uses the fixed R-MAX procedure on finite nonempty action sets. In proof step 3.2 the current greedy action is the supplied procedure choice and finite action maxima exist; proof step 1.2 compares finite Bellman sweeps. No extra arbitrary-family selection is hidden in the update-count conclusion step 4.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The empirical-model lemma uses the fixed R-MAX procedure on finite nonempty action sets. In proof step 3.2 the current greedy action is the supplied procedure choice and finite action maxima exist; proof step 1.2 compares finite Bellman sweeps. No extra arbitrary-family selection is hidden in the update-count conclusion step 4.1.",
+            "item_sha256": "d1f676e3922c7d08a9bb4f7f1378714e515b3af44943787025b2f7431ecb7789",
+            "row_sha256": "3aaf4be378c3cb6d1411816fb3d91711e63332ffb2d9732fcbf73f211c9ed702"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The first fixed potential batch for each pair controls every later known-set model, since samples are retained. Dedicated sinks preserve unknown heuristic values, the trap-model error comparison gives simultaneous policy accuracy, and only near-optimal heuristic pairs can incur selections or rebuilds.",
+              "item_sha256": "d5a291899e54800f58b79ac5cbe34eaee749a0da5fbc6df3dce3f32109925945",
+              "row_sha256": "812261db7cfb4152e74a45bef433b68eff7de032b0dbbb9013193a98b6fa9926"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "The empirical-model lemma uses the fixed R-MAX procedure on finite nonempty action sets. In proof3.2 the current greedy action is the supplied procedure choice and finite action maxima exist; proof1.2 compares finite Bellman sweeps. No extra arbitrary-family selection is hidden in the update-count conclusion4.1.",
+              "item_sha256": "d1f676e3922c7d08a9bb4f7f1378714e515b3af44943787025b2f7431ecb7789",
+              "row_sha256": "3c18a44013615f28d2eecef9c540543442290c12c32cca8a5e749821e3f34aab"
+            }
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The selected sample threshold and value-iteration tolerance give simultaneous empirical-model, optimism, greedy-policy and update-count bounds. These sufficient algorithm guarantees have no asserted reverse implication from success to accurate models.",
+            "item_sha256": "d1f676e3922c7d08a9bb4f7f1378714e515b3af44943787025b2f7431ecb7789",
+            "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The first fixed potential batch for each pair controls every later known-set model, since samples are retained. Dedicated sinks preserve unknown heuristic values, the trap-model error comparison gives simultaneous policy accuracy, and only near-optimal heuristic pairs can incur selections or rebuilds.",
+              "item_sha256": "d5a291899e54800f58b79ac5cbe34eaee749a0da5fbc6df3dce3f32109925945",
+              "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The selected sample threshold and value-iteration tolerance give simultaneous empirical-model, optimism, greedy-policy and update-count bounds. These sufficient algorithm guarantees have no asserted reverse implication from success to accurate models.",
+            "item_sha256": "d1f676e3922c7d08a9bb4f7f1378714e515b3af44943787025b2f7431ecb7789",
+            "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The first fixed potential batch for each pair controls every later known-set model, since samples are retained. Dedicated sinks preserve unknown heuristic values, the trap-model error comparison gives simultaneous policy accuracy, and only near-optimal heuristic pairs can incur selections or rebuilds.",
+              "item_sha256": "d5a291899e54800f58b79ac5cbe34eaee749a0da5fbc6df3dce3f32109925945",
+              "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+            }
+          ]
+        }
+      ],
+      "kind": "lemma",
+      "risk": "high",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-82",
+        "notes": "All six steps checked: first-m potential estimates hold uniformly over all known subsets without a union over policies; b and m imply both tails. Zero-start capped Q iteration has error gamma^L/(1-gamma), exact at gamma=0. True trap values are <=2Vmax using a nonnegative true-MDP prefix plus bounded sink continuation. Trap simulation error <eta/8; approximate greedy loss is <=2beta/(1-gamma), total <=5eta/16. Only E_eta pairs can escape, at most m visits and one rebuild each. Empty K, all known, gamma=0 and arbitrary joint reward/state law checked."
+      }
+    },
+    "lem-ucrl2-uniform-confidence-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-reward-finite-mdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty state set and let $A(s)$ be a finite nonempty action set for each $s\\in S$, as in the finite-MDP convention. Put $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$ with its discrete sigma-algebra. Equip $S$ with its power-set sigma-algebra, $[0,1]$ with its Borel sigma-algebra, and $S\\times[0,1]$ with the product sigma-algebra. A finite MDP with bounded real rewards specifies a probability kernel $Q$ from $D$ to $S\\times[0,1]$; equivalently, each admissible $(s,a)$ has a probability measure $Q(\\cdot\\mid s,a)$ on that product measurable space. The reward-coordinate projection $(s',\\rho)\\mapsto\\rho$ is measurable because the preimage of each Borel set $B\\subseteq[0,1]$ is the product rectangle $S\\times B$. Define the next-state law by $P(s'\\mid s,a)=Q(\\{s'\\}\\times[0,1]\\mid s,a)$ and the mean reward by $r(s,a)=\\int_{S\\times[0,1]}\\rho\\,Q(ds',d\\rho\\mid s,a)\\in[0,1]$. At each time, conditional on the observed history and the selected action, the next-state/reward pair has this law. Assume the Axiom of Choice for the path-space construction under policies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ucrl2-adaptive-sample-tape-representation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice for the path-space construction. Fix a finite-horizon interaction of length $T$ in a finite MDP with bounded rewards and any nonanticipating policy: each action distribution is a measurable function of the revealed history, and policy randomization is independent of unexposed MDP samples. On an enlarged probability space with the same law for the observed interaction, for each admissible pair $(s,a)$ there is a sequence $Z_{s,a,1},\\ldots,Z_{s,a,T}$ of independent samples with common law $Q(\\cdot\\mid s,a)$ such that the $j$th observed next-state/reward pair at $(s,a)$ is $Z_{s,a,j}$ whenever that visit occurs.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-azuma-hoeffding-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(M_k,\\mathcal F_k)_{k=0}^n$ be a martingale. Suppose finite $\\mathcal F_{k-1}$-measurable $A_k,B_k$ and deterministic $c_k\\ge0$ satisfy\n$$A_k\\le M_k-M_{k-1}\\le B_k,\\qquad B_k-A_k\\le c_k$$\nalmost surely. Then for every $t>0$,\n$$\\mathbb P(M_n-M_0\\ge t)\\le \\exp\\!\\left(-\\frac{2t^2}{\\sum_{k=1}^n c_k^2}\\right),$$\nand the analogous lower-tail bound holds, with the zero-denominator expression interpreted as $0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-martingale-difference-sequence",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] for conditional-expectation existence. A **martingale difference sequence** relative to $(\\mathcal F_n)_{n\\ge0}$ is a sequence $(D_n)_{n\\ge1}$ of real integrable variables such that $D_n$ is $\\mathcal F_n$-measurable and\n$$E[D_n\\mid\\mathcal F_{n-1}]=0\\quad\\text{a.s. for every }n\\ge1.$$\nIntegrability and adaptedness have the timewise meanings of [[def-adapted-and-integrable-stochastic-process]]. Conditional expectations have the class convention of [[def-conditional-expectation-as-an-ae-class]], which is the exact inherited use of AC here. No representative is selected by this definition. There is no $D_0$, and $\\mathcal F_0$ need not be trivial or generated by the differences.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-martingales-and-martingale-differences-correspond",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $M$ is a martingale, then $D_n=M_n-M_{n-1}$, $n\\ge1$, is a martingale difference sequence. Conversely, given a martingale difference sequence $D$ and any integrable $\\mathcal F_0$-measurable real $M_0$, the process $M_n=M_0+\\sum_{k=1}^nD_k$ is a martingale. For fixed $M_0$ these constructions are inverse.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ucrl2-uniform-confidence-bounds-1-1",
+          "step": "1.1",
+          "claim": "By [F2], each pair's observed samples are prefixes of a fixed i.i.d. tape with law $Q(\\cdot\\mid s,a)$. By [F1], its reward coordinate has mean $r(s,a)$ and its next-state coordinate has law $P(\\cdot\\mid s,a)$. Rewards and indicators of next-state subsets lie in $[0,1]$. The finite tape construction uses AC exactly as stated in [A1].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "lem-ucrl2-uniform-confidence-bounds-2-1",
+          "step": "2.1",
+          "claim": "By [F4] and [F5], the centered reward tape prefix has martingale partial sums with width-one increments; applying [F3] to that sum and to its negative gives the two-sided prefix tail $2e^{-2n\\varepsilon^2}$. For a fixed pair and $n$, set $\\varepsilon_r=\\sqrt{7\\log(4SAT/\\delta)/(2n)}$. Step 1.1 bounds the failure probability by $2(\\delta/(4SAT))^7$. Union over at most $SA$ pairs and $T$ possible prefix lengths gives at most $2SAT(\\delta/(4SAT))^7\\le\\delta/2$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ucrl2-uniform-confidence-bounds-2-2",
+          "step": "2.2",
+          "claim": "For transition observations, fix a subset $B\\subseteq S$. By step 1.1, the indicators $\\mathbf1_{\\{S'\\in B\\}}$ have mean $P(B\\mid s,a)$ and range $[0,1]$. Their centered tape coordinates satisfy [F4]; by [F5] their partial sums are martingales, so [F3] gives $2e^{-2n u^2}$ for a deviation larger than $u$. For two probability vectors $p,q$ on a finite set, $\\|p-q\\|_1=2\\max_{B\\subseteq S}|p(B)-q(B)|$: the positive coordinates of $p-q$ sum to half its $\\ell^1$ norm, and choosing exactly those coordinates attains the maximum. Therefore an $\\ell^1$ deviation larger than $\\varepsilon$ implies that some subset indicator deviates by more than $\\varepsilon/2$. A union bound over the $2^S$ subsets gives $2^{S+1}e^{-n\\varepsilon^2/2}$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ucrl2-uniform-confidence-bounds-3-1",
+          "step": "3.1",
+          "claim": "Set $L=\\log(4AT/\\delta)$ and $\\varepsilon_p=\\sqrt{14S L/n}$. Step 2.2 gives per-pair, per-prefix failure probability at most $2^{S+1}e^{-7SL}$. Union over at most $SAT$ pairs and prefixes is at most $SAT2^{S+1}e^{-7SL}\\le\\delta/2$: after dividing by $\\delta/2$, its logarithm is $\\log S+L+S\\log2-7SL\\le(2S)L-7SL\\le0$, using $S\\le2^{S-1}$ and $L\\ge\\log2$. Combining the reward failure bound from step 2.1 with the transition bound just obtained proves the simultaneous claim.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires at least one state, at least one available action per state through the model, and a positive integer horizon. Its empirical bounds are stated only for observed prefixes with1<=n<=T, so no empty-state probability vector or zero-length empirical average is evaluated.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The Statement requires at least one state, at least one available action per state through the model, and a positive integer horizon. Its empirical bounds are stated only for observed prefixes with1<=n<=T, so no empty-state probability vector or zero-length empirical average is evaluated.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "b78899350cf6c199c60190c49bd595e86ba3bddd4373f8dab10c7385d6961e6f"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "f7384e29301566e66d1d0e401bd0f7740aa5bebaaf353f583f54eb4c6f5539e8"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero rewards and zero transition masses are allowed: proof1.1 places rewards and subset indicators in the closed unit interval, and proofs2.1–2.2 center these variables without dividing by their means. Zero visits are excluded by1<=n<=T rather than substituted into the square-root denominator; this corrects the old generic step1.1 credit.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Zero rewards and zero transition masses are allowed: proof1.1 places rewards and subset indicators in the closed unit interval, and proofs2.1–2.2 center these variables without dividing by their means. Zero visits are excluded by1<=n<=T rather than substituted into the square-root denominator; this corrects the old generic step1.1 credit.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "28c94751b53d0367286f227a4ca5a73da0ba3e4982caada537c72cfa8bcb1857"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "acf63b159e7d00c6b2f250847020f9e11b380252ec4e42e3e0cb7c7c85fa5c91"
+            }
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With one state the next-state empirical and true probability vectors are both the single mass1, so their L1 error vanishes. One action or one horizon step still leaves a nonempty finite pair/prefix union in proof step 2.1 and step 3.1, and n=1 has a positive denominator. The actual proof uses no lower count beyond the printed positive-integer assumptions.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "With one state the next-state empirical and true probability vectors are both the single mass1, so their L1 error vanishes. One action or one horizon step still leaves a nonempty finite pair/prefix union in proof step 2.1 and step 3.1, and n=1 has a positive denominator. The actual proof uses no lower count beyond the printed positive-integer assumptions.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "2b75cb541eb6847c7a4c5a40dcaaa90e7d79e557d1a2df6ff5a50285d010378a"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "1dca7aa31868739cf59de8714df85a0639dd2705147cd1269a7beb8fb7e298ed"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "With one state the next-state empirical and true probability vectors are both the single mass1, so their L1 error vanishes. One action or one horizon step still leaves a nonempty finite pair/prefix union in proofs2.1 and3.1, and n=1 has a positive denominator. The actual proof uses no lower count beyond the printed positive-integer assumptions.",
+              "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+              "row_sha256": "60b67bfd46cb36bad1629816c97ba7001d8d8f0df1b0ce9ef9a83cd57bdb7fdc"
+            }
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic rewards or deterministic next states produce constant tape coordinates, hence zero corresponding centered fluctuations. The width-one upper bounds and finite subset union in proofs2.1–3.1 remain valid without requiring nonzero variance or tie-free policy choices; the policy may be any admitted nonanticipating measurable rule.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Deterministic rewards or deterministic next states produce constant tape coordinates, hence zero corresponding centered fluctuations. The width-one upper bounds and finite subset union in proofs2.1–3.1 remain valid without requiring nonzero variance or tie-free policy choices; the policy may be any admitted nonanticipating measurable rule.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "43cd2c66af75facb34c54cd9321a7239ea96e7834f7db5da5f663e84bf8fe768"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "b4e5e56a89d0a60255e121b5ca1abd32d231926d0270273f1f459a6413d1f5e7"
+            }
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Reward endpoints0 and1 are included in the range used by proof step 1.1. Their centered width-one tape increments obey exactly the same two-sided Hoeffding estimate step 2.1; transition indicators also take these endpoint values in step 2.2. Confidence delta stays strictly between0 and1, so its excluded endpoints are not inserted into logarithms.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Reward endpoints0 and1 are included in the range used by proof step 1.1. Their centered width-one tape increments obey exactly the same two-sided Hoeffding estimate step 2.1; transition indicators also take these endpoint values in step 2.2. Confidence delta stays strictly between0 and1, so its excluded endpoints are not inserted into logarithms.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "76d27c83983abdc156b6977b9e688e795269f4f01ae7ed7a6009ff91701cfe7a"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "78716bba1e388b73643afd6a6dbc4a07bb1727bc76de7833dfc81e4b5a2ba38e"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "Reward endpoints0 and1 are included in the range used by proof1.1. Their centered width-one tape increments obey exactly the same two-sided Hoeffding estimate2.1; transition indicators also take these endpoint values in2.2. Confidence delta stays strictly between0 and1, so its excluded endpoints are not inserted into logarithms.",
+              "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+              "row_sha256": "1d34a46df52bea52e900a69d06e0e9fcb0efc3b7ef26b211f9e5379925b5e8c2"
+            }
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof step 1.1 identifies AC in the fixed-tape construction; Facts A1 also retains it for conditional-expectation and martingale suppliers.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+            "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+            "row_sha256": "f2beee12c9196f736c617fc23c3b2d26433d53fbe039c471c8bdab4e84d5bf7b"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The adaptive sample-tape model implies simultaneous empirical reward and transition confidence bounds over positive visit counts. This is a probability guarantee, not an equivalence relating confidence events to the sampling assumptions.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "80c4f626f164aad6e0866196a57afff58b61903ca66802db1d2de0834e7948c9"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "80c4f626f164aad6e0866196a57afff58b61903ca66802db1d2de0834e7948c9"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The adaptive sample-tape model implies simultaneous empirical reward and transition confidence bounds over positive visit counts. This is a probability guarantee, not an equivalence relating confidence events to the sampling assumptions.",
+            "item_sha256": "753a8f0d957e413cc55fa7d18908a8d2e20464a049151a4559b97a1030186be7",
+            "row_sha256": "1332a80168a0f49f65e6d46000221047a2000ddae51b7dc45e905a8a4522405c"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Adaptive observations are first represented as deterministic tape prefixes, then bounded reward and next-state-subset indicators receive martingale tails. A finite subset identity converts total variation and finite pair/prefix union bounds give the simultaneous event, without applying a fixed-sample theorem at a random count.",
+              "item_sha256": "1ff471da8ac0fbfc6e3c3d8dd420d1471b0f135d8a42b4112fb9b08be3ee34d0",
+              "row_sha256": "1332a80168a0f49f65e6d46000221047a2000ddae51b7dc45e905a8a4522405c"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-83",
+        "notes": "Read all four proof steps and exact tape, martingale-difference, martingale-correspondence and width-version Azuma suppliers. Each fixed tape prefix has width-one centered rewards/subset indicators. The finite identity L1=2 max_B discrepancy yields 2^(S+1) exp(-n epsilon^2/2); both displayed radii union over at most SAT prefixes. Checked log S+L+S log2-7SL <=0, S=1, T=1, deterministic laws, absent visits, endpoint delta and correlated reward/state. AC inherited explicitly. The reader change only corrects source locators."
+      }
+    },
+    "thm-bellman-contraction-and-unique-fixed-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-state-sup-norm-space-is-complete",
+          "source_section": "Statement",
+          "quote": "For any finite set $S$, let $B(S)=\\mathbb R^S$, the set of real-valued functions on $S$. Define\n\n$$ d_\\infty(U,V)=\\begin{cases}0,&S=\\emptyset,\\\\ \\max_{s\\in S}|U(s)-V(s)|,&S\\ne\\emptyset.\\end{cases} $$\n\nThen $d_\\infty$ is a metric on $B(S)$ and $(B(S),d_\\infty)$ is complete.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite sums in [F2] and [F3] are real, so both formulas define self-maps of $\\mathbb R^S$; when $S=\\emptyset$ they are the unique empty self-maps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each state $s$, probability weights and the triangle inequality give $$ |(T^\\pi V)(s)-(T^\\pi W)(s)| \\le\\sum_a\\pi(a\\mid s)\\gamma\\sum_{s'}P(s'\\mid s,a)|V(s')-W(s')| \\le\\gamma\\|V-W\\|_\\infty. $$ Taking the maximum over $s$ proves the policy-operator contraction inequality; when $S=\\emptyset$, both sides are $0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $Q_V(s,a)=r(s,a)+\\gamma\\sum_{s'}P(s'\\mid s,a)V(s')$. For every action, [F1] gives $|Q_V(s,a)-Q_W(s,a)|\\le\\gamma\\|V-W\\|_\\infty$. For two finite lists $(u_a)$ and $(v_a)$, each $u_a\\le v_a+\\max_b|u_b-v_b|$, so $\\max_a u_a\\le\\max_a v_a+\\max_b|u_b-v_b|$; exchanging the lists gives $|\\max_a u_a-\\max_a v_a|\\le\\max_a|u_a-v_a|$. Applying this at each $s$ proves the same contraction inequality for $T^*$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The zero function belongs to $\\mathbb R^S$, so the common domain is nonempty; [F4] makes its metric complete. By definition, $d_\\infty(V,W)=\\|V-W\\|_\\infty$. Steps 1.2 and 1.3 show that each operator is a self-map with contraction constant $q=\\gamma$, and the hypothesis $0\\le\\gamma<1$ is exactly [F5]'s required range. Applying [F5] separately to $T^\\pi$ and $T^*$ gives one fixed point for each and uniqueness for each.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 identifies the two Bellman formulas on empty states with the unique empty self-map. Proof step 1.2 explicitly gives both sides of the contraction inequality as zero there, and proof step 2.1 applies fixed-point completeness to the nonempty singleton space of empty functions; no state maximum is taken.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Proof step 1.1 identifies the two Bellman formulas on empty states with the unique empty self-map. Proof step 1.2 explicitly gives both sides of the contraction inequality as zero there, and proof step 2.1 applies fixed-point completeness to the nonempty singleton space of empty functions; no state maximum is taken.",
+            "item_sha256": "9451096d898ccbd967b6526ed9b3e56b8648add9e1d40f9f674c55b05e00ade2",
+            "row_sha256": "3a1faf15c0f4ba2e93456b2e992db0ce797c5061b844a0b8bb884e368ebc4e38"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+              "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+              "row_sha256": "41f2b00dee0b90f20855f8382b2e130d3662545ac7a1bf5217a8dc1db9646b2f"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "Proof1.1 identifies the two Bellman formulas on empty states with the unique empty self-map. Proof1.2 explicitly gives both sides of the contraction inequality as zero there, and proof2.1 applies fixed-point completeness to the nonempty singleton space of empty functions; no state maximum is taken.",
+              "item_sha256": "9451096d898ccbd967b6526ed9b3e56b8648add9e1d40f9f674c55b05e00ade2",
+              "row_sha256": "23750b3352528a8df78e3c957becd49aa4ef0d4f9ebc8bde44c5bb7e5d5f6db7"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and 1.3 give contraction constant zero when the discount is zero; step 2.1 allows that nonnegative constant.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+            "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+            "row_sha256": "e2bcb183336aaa39b768ad53ddca294a28a7d58146a8011452b23c9ee78b0a25"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and 1.3 use probability averages and finite maxima, valid also for singleton state and action sets.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+            "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+            "row_sha256": "7d0b476eaa03807efc4377eee6b2cc7e3f95e17330dc878ae71d324248639731"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 1.2 cover the unique empty self-map; tied action maxima preserve the comparison in step 1.3.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+            "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+            "row_sha256": "38cab11cf152c66a6e5d6129763cb832abb0ea56b330a349f4d5047db284a749"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 checks exactly the supplier range from zero inclusive to one exclusive for the contraction constant.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+            "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+            "row_sha256": "0faf84325ff41863e19f31cb8342bde8d7e50db645cac03d5d6bfd186e3eb943"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+            "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+            "row_sha256": "353cd3c610afed3ff197a1e0526fdf0b76bba3c578f2b861d6172d714e2e5c8b"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": "",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Each supplied finite-MDP Bellman operator is a gamma contraction and therefore has one fixed point, with the empty function space explicitly included. No converse characterization of Bellman operators or discounts is asserted.",
+            "item_sha256": "9451096d898ccbd967b6526ed9b3e56b8648add9e1d40f9f674c55b05e00ade2",
+            "row_sha256": "877966b7557d0a6b66d956dc5d9a272a75d505ef74ae89a704fd558a9caf2aef"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+              "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+              "row_sha256": "877966b7557d0a6b66d956dc5d9a272a75d505ef74ae89a704fd558a9caf2aef"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": "",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Each supplied finite-MDP Bellman operator is a gamma contraction and therefore has one fixed point, with the empty function space explicitly included. No converse characterization of Bellman operators or discounts is asserted.",
+            "item_sha256": "9451096d898ccbd967b6526ed9b3e56b8648add9e1d40f9f674c55b05e00ade2",
+            "row_sha256": "73be5f1d99d5f84f1adbbde6d33fd763a3f60f0f9c3049d0cc9919c592435a25"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Probability averages and the finite maximum comparison both contract by the discount itself, including zero. Empty states give a singleton complete function space, and the contraction theorem supplies unique fixed points without importing the choice-based expected-return interpretation.",
+              "item_sha256": "8f69d5d9e238ed0b1d90fd1780759a8d2bac8523d8f9a98f5ed8d5c56f3fd2a2",
+              "row_sha256": "73be5f1d99d5f84f1adbbde6d33fd763a3f60f0f9c3049d0cc9919c592435a25"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-80",
+        "notes": "Accepted the explicit norm and repaired completeness citation. Finite stochastic weights bound every policy-coordinate difference by γ times the sup norm; the two finite-max inequalities prove the optimality bound in both directions. Zero function gives nonemptiness, cited finite-state lemma gives completeness, and Banach applies at q=γ including γ=0. Empty S is the singleton case, so neither an empty maximum nor an empty Banach domain is used."
+      }
+    },
+    "thm-communicating-mdp-common-optimal-average-reward": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-reward-finite-mdp",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite nonempty state set and let $A(s)$ be a finite nonempty action set for each $s\\in S$, as in the finite-MDP convention. Put $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$ with its discrete sigma-algebra. Equip $S$ with its power-set sigma-algebra, $[0,1]$ with its Borel sigma-algebra, and $S\\times[0,1]$ with the product sigma-algebra. A finite MDP with bounded real rewards specifies a probability kernel $Q$ from $D$ to $S\\times[0,1]$; equivalently, each admissible $(s,a)$ has a probability measure $Q(\\cdot\\mid s,a)$ on that product measurable space. The reward-coordinate projection $(s',\\rho)\\mapsto\\rho$ is measurable because the preimage of each Borel set $B\\subseteq[0,1]$ is the product rectangle $S\\times B$. Define the next-state law by $P(s'\\mid s,a)=Q(\\{s'\\}\\times[0,1]\\mid s,a)$ and the mean reward by $r(s,a)=\\int_{S\\times[0,1]}\\rho\\,Q(ds',d\\rho\\mid s,a)\\in[0,1]$. At each time, conditional on the observed history and the selected action, the next-state/reward pair has this law. Assume the Axiom of Choice for the path-space construction under policies.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-communicating-mdp-and-diameter",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy path laws used in the expectations below. For a finite MDP with bounded rewards, a policy assigns a probability distribution on $A(s)$ to each finite observed history ending in state $s$, with each action probability a measurable function of the history; deterministic policies are included. For states $x,y$, start at $S_0=x$ and define $\\tau_y=\\inf\\{t\\ge0:S_t=y\\}$, with $\\tau_y=+\\infty$ if $y$ is never hit. This is an extended nonnegative measurable random variable because $\\{\\tau_y\\le n\\}=\\bigcup_{t=0}^n\\{S_t=y\\}$. Take the expectation and the infimum over policies in $[0,+\\infty]$. The MDP is communicating if $\\inf_\\pi\\mathbb E_x^\\pi[\\tau_y]<\\infty$ for every ordered pair $(x,y)$. Its raw diameter is $D_0=\\sup_{x,y}\\inf_\\pi\\mathbb E_x^\\pi[\\tau_y]$ in $[0,+\\infty]$, and its normalized diameter is $D=\\max\\{1,D_0\\}$ in the extended order. Since $S$ is finite, $D_0$ is finite for every communicating MDP. Thus a one-state MDP has $D_0=0$ and $D=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-almost-additive-sequence-has-limit",
+          "source_section": "Statement",
+          "quote": "Let $(a_n)_{n\\ge1}$ be a real sequence for which there is a finite constant $K$ with $|a_n|\\le Kn$ for every $n\\ge1$. Suppose there is a finite constant $C\\ge0$ such that $|a_{m+n}-a_m-a_n|\\le C$ for all positive integers $m,n$. Then $a_n/n$ has a finite limit as $n\\to\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $V_0(s)=0$ for every state. Backward induction over the finite horizon gives the Bellman recurrence $$V_{n+1}(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_n(s')\\right].$$ For the induction step, suppose that from every state the $n$-step supremum is attained by a deterministic Markov policy and equals $V_n$. Any history-dependent $(n+1)$-step policy may randomize its first action and may condition later actions on the first reward as well as the next state. Conditional on a first action $a$ and one-step outcome $(s',\\rho)$, its continuation has expected reward at most $V_n(s')$ by the induction hypothesis, which is independent of the earlier history and reward. Thus its total expected reward is at most $r(s,a)+\\sum_{s'}P(s'\\mid s,a)V_n(s')$, averaged over its first-action distribution, and this average is at most the displayed maximum. A maximizing action exists because $A(s)$ is finite; choosing it and then using an attaining $n$-step policy from each possible next state attains equality. The base case $V_0=0$ is attained by the empty policy. This proves both the recurrence and that history dependence cannot improve $V_n$; the joint reward/next-state law is handled by its mean reward and next-state marginal. For any $0\\le j\\le n$, splitting an $n$-step policy into its first $n-j$ and last $j$ rewards gives $V_n(y)\\le V_{n-j}(y)+j$: the first part is at most the optimal $(n-j)$-step value and the last part is at most $j$ because rewards lie in $[0,1]$. For any $x,y$ and $\\varepsilon>0$, [F2] gives a policy from $x$ whose hitting time $\\tau_y$ has expectation at most $D_0+\\varepsilon$. Follow it until $y$ is hit, then use an optimal policy for the remaining $n-\\tau_y$ steps if $\\tau_y\\le n$. On $\\{\\tau_y=j\\}$ for each $0\\le j\\le n$, the conditional expected total reward given the history through time $j$ is at least $V_{n-j}(y)\\ge V_n(y)-j$, since pre-hit rewards are nonnegative. On $\\tau_y>n$, the total reward is nonnegative and $V_n(y)\\le n<\\tau_y$. Summing over the hitting-time events and taking expectations using [F5]–[F8] gives $V_n(x)\\ge V_n(y)-\\mathbb E[\\tau_y]\\ge V_n(y)-D_0-\\varepsilon$. Letting $\\varepsilon\\downarrow0$ and interchanging $x,y$ proves $\\max_s V_n(s)-\\min_s V_n(s)\\le D_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $a_n=\\max_s V_n(s)$; the maximum exists because $S$ is finite, and $0\\le a_n\\le n$ by [F1,F8]. For any $(m+n)$-step policy from $s$, the expected first $m$ rewards are at most $V_m(s)$, while conditional on the complete history through state $S_m$ the remaining $n$-step rule is an admissible policy from $S_m$ and its conditional expected reward is at most $V_n(S_m)\\le a_n$. By [F4,F5,F6,F7], the unconditional expected total is therefore at most $V_m(s)+a_n\\le a_m+a_n$, so $a_{m+n}\\le a_m+a_n$. Conversely, choose $s_*$ attaining $a_m$ and use an optimal $m$-step policy from it; after observing $S_m=z$, continue with an optimal $n$-step policy from $z$. By step 1.1, $V_n(z)\\ge a_n-D_0$ for every $z$, so [F4,F6,F7] give total expected reward at least $a_m+a_n-D_0$. Hence $a_{m+n}\\ge a_m+a_n-D_0$, and $|a_{m+n}-a_m-a_n|\\le D_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to $(a_n)$ with $C=D_0$ to obtain $a_n/n\\to\\rho^*$ for some finite $\\rho^*$. Step 1.1 gives $a_n-D_0\\le V_n(s)\\le a_n$ for every $s$, so division by $n$ proves $V_n(s)/n\\to\\rho^*$ for every state. The bounds $0\\le V_n(s)\\le n$ imply $\\rho^*\\in[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.1 explicitly starts with horizon zero and the empty policy, giving value zero before finite-horizon backward induction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+            "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+            "row_sha256": "5b88949caab186e0757635f6b7be273bc9fe42eba5dc06dfd25eaaa3c8e60dec"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The all-zero reward model has V_n(s)=0 by the finite Bellman recurrence in proof step 1.1, so the limiting average is zero. More generally zero rewards and zero transition masses enter only nonnegative finite averages; proof step 3.1 divides by positive n in the limit, never by a reward or the raw diameter.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The all-zero reward model has V_n(s)=0 by the finite Bellman recurrence in proof step 1.1, so the limiting average is zero. More generally zero rewards and zero transition masses enter only nonnegative finite averages; proof step 3.1 divides by positive n in the limit, never by a reward or the raw diameter.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "58aad171c96f5c1455ac487ce6a72689e6e6f7da974bdd2b20e67916a486c2c0"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "acf63b159e7d00c6b2f250847020f9e11b380252ec4e42e3e0cb7c7c85fa5c91"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "The all-zero reward model has V_n(s)=0 by the finite Bellman recurrence in proof1.1, so the limiting average is zero. More generally zero rewards and zero transition masses enter only nonnegative finite averages; proof3.1 divides by positive n in the limit, never by a reward or the raw diameter.",
+              "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+              "row_sha256": "b1e7868a0896cbe5a00126fd53ef68ce5a464e4c0ea4991ab4c7c6cf912f16bb"
+            }
+          ]
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single state, the raw diameter is zero and proof1.1 gives zero span of each finite-horizon value vector. The maximum expected reward action exists on the finite nonempty action set; its repeated use yields the common scalar limiting gain. Proofs2.1–3.1 allow additive-defect bound D0=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "For a single state, the raw diameter is zero and proof1.1 gives zero span of each finite-horizon value vector. The maximum expected reward action exists on the finite nonempty action set; its repeated use yields the common scalar limiting gain. Proofs2.1–3.1 allow additive-defect bound D0=0.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "f20a24538a49f919b8dc6460315e1dffead530fe522e221182f763de632bb36e"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "1dca7aa31868739cf59de8714df85a0639dd2705147cd1269a7beb8fb7e298ed"
+            }
+          ]
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic transition or reward kernels and tied maximizing actions do not break the recurrence in proof step 1.1: each finite action maximum is attained, and any attaining action supports the finite-horizon argument. The hitting-time comparison and almost-additive limit use only communication and bounded rewards, not positive variances or unique optimizers.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Deterministic transition or reward kernels and tied maximizing actions do not break the recurrence in proof step 1.1: each finite action maximum is attained, and any attaining action supports the finite-horizon argument. The hitting-time comparison and almost-additive limit use only communication and bounded rewards, not positive variances or unique optimizers.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "fa8e149ec51215f96e15ff252da8b2129718d52ee43a32a739ef4587211cb43f"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "b4e5e56a89d0a60255e121b5ca1abd32d231926d0270273f1f459a6413d1f5e7"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "Deterministic transition or reward kernels and tied maximizing actions do not break the recurrence in proof1.1: each finite action maximum is attained, and any attaining action supports the finite-horizon argument. The hitting-time comparison and almost-additive limit use only communication and bounded rewards, not positive variances or unique optimizers.",
+              "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+              "row_sha256": "235cb852be7d72a2f085360b71e7fdf089bc9ed8fae74d3899e1739e0cf48d2a"
+            }
+          ]
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both reward endpoints0 and1 are admitted. Proof step 1.1 uses nonnegativity for the pre-hit reward comparison and the upper bound1 to cap a lost suffix by its number of steps. Proof step 2.1 and step 3.1 give0<=V_n(s)<=n, hence the closed limiting interval including gains0 and1; no strict reward bounds are used.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Both reward endpoints0 and1 are admitted. Proof step 1.1 uses nonnegativity for the pre-hit reward comparison and the upper bound1 to cap a lost suffix by its number of steps. Proof step 2.1 and step 3.1 give0<=V_n(s)<=n, hence the closed limiting interval including gains0 and1; no strict reward bounds are used.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "ea8d901807f309e7fb6f0311200f2ced2e8b687b5aeebfaa0586a75c5716ed3b"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "78716bba1e388b73643afd6a6dbc4a07bb1727bc76de7833dfc81e4b5a2ba38e"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "Both reward endpoints0 and1 are admitted. Proof1.1 uses nonnegativity for the pre-hit reward comparison and the upper bound1 to cap a lost suffix by its number of steps. Proofs2.1 and3.1 give0<=V_n(s)<=n, hence the closed limiting interval including gains0 and1; no strict reward bounds are used.",
+              "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+              "row_sha256": "23f13bf789e66e9f94e5fc2d5fce74b541662cd85099822a5c0826219acd8f81"
+            }
+          ]
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC for path laws and conditional expectations; proof steps 1.1 and 2.1 use those expectations while finite action maxima are attained directly.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+            "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+            "row_sha256": "1afaa6730f5f63c04001c3093fa4914716ca76054a0a53f8675ab4bfbe9a821e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Communicating finite bounded-reward dynamics imply a state-independent normalized finite-horizon value limit in the unit interval. The theorem does not claim the converse that a common limiting reward makes an MDP communicating.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "80c4f626f164aad6e0866196a57afff58b61903ca66802db1d2de0834e7948c9"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "80c4f626f164aad6e0866196a57afff58b61903ca66802db1d2de0834e7948c9"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Communicating finite bounded-reward dynamics imply a state-independent normalized finite-horizon value limit in the unit interval. The theorem does not claim the converse that a common limiting reward makes an MDP communicating.",
+            "item_sha256": "e02c5fe9fafe0af0b5fd57f92137fdc025f2b9d2b328fc99386abe04b781bac8",
+            "row_sha256": "1332a80168a0f49f65e6d46000221047a2000ddae51b7dc45e905a8a4522405c"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Finite-horizon backward induction handles reward-dependent history policies, then finite expected hitting times bound the span of optimal horizon values. Their maximum is almost additive, so the normalized limit exists and the uniform span bound makes it common to every initial state.",
+              "item_sha256": "614fe69abd02093fb3908c3b1c2be27a28881081579ccd8a7804bb25bceca7eb",
+              "row_sha256": "1332a80168a0f49f65e6d46000221047a2000ddae51b7dc45e905a8a4522405c"
+            }
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-83",
+        "notes": "All three proof steps, complete almost-additive helper and expectation/tower interfaces checked independently. Finite-horizon Bellman attainment handles first reward/state dependence and measurable history policies. Repaired the nonfatal pathwise wording in step 1.1 by conditioning on history on each event tau=j, then summing; the bounded hitting expectation and nonnegative rewards cover tau>n. Both span directions and near-infimum policies give defect at most D0. The helper uses b=a+C, c=a-C and fixed-block remainders; division squeezes every initial state to a common [0,1] limit. Singleton D0=0 is included. No statement changed and no stationary-policy existence theorem is asserted."
+      }
+    },
+    "thm-delayed-q-learning-pac-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-delayed-q-learning-optimism-and-update-counts",
+          "source_section": "Statement",
+          "quote": "Fix a bounded-reward finite discounted MDP, an admissible heuristic with cap $V_{\\max}$, and $0<\\epsilon_1<1$. Put $D(s,a)=[U(s,a)-V^*(s)]_+$, $\\kappa=\\lceil SA V_{\\max}/\\epsilon_1\\rceil$, $N=SA(1+\\kappa)$, and $C_1=1+\\gamma V_{\\max}$. Run Delayed Q-learning with a positive integer $m$ satisfying\n$$m\\ge\\left\\lceil\\frac{C_1^2}{2\\epsilon_1^2}\\ln\\frac{8N}{\\delta}\\right\\rceil\\qquad(0<\\delta<1).$$\nFor $V_t(s)=\\max_aQ_t(s,a)$, define\n$$K_t=\\left\\{(s,a):Q_t(s,a)-\\left(r(s,a)+\\gamma\\sum_{s'}P(s'\\mid s,a)V_t(s')\\right)\\le3\\epsilon_1\\right\\}.$$\nWith probability at least $1-\\delta$, all estimates remain optimistic, $Q_t(s,a)\\ge Q^*(s,a)$ for every $t,s,a$; every attempted update whose first sample is taken with its pair outside $K_t$ succeeds; the number of successful updates is at most\n$$G=\\sum_{s,a}\\left(1+\\frac{D(s,a)}{\\epsilon_1}\\right);$$\nand the number of visits selecting a pair outside $K_t$ is at most $2mG$. The additive $1$ in each pair's update allowance is necessary, including when $U(s,a)=V^*(s)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pac-mdp-escape-event-reduction",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a learning algorithm interact with a bounded-reward finite discounted MDP. Suppose constants $B,W,Q_c$ satisfy $0<B$, $0<W\\le(1-\\gamma)^{-1}$, $0<Q_c\\le(1-\\gamma)^{-1}$, and $V^*(s)\\le B$. The learner maintains $0\\le Q_t(s,a)\\le Q_c$ and, whenever $(s,a)\\notin K_t$, $Q_t(s,a)\\le W$. Put $V_t(s)=\\max_{a\\in A(s)}Q_t(s,a)$, and let $\\pi_t$ be the deterministic greedy policy under a fixed tie order. Require the learner to select $a_t=\\pi_t(s_t)$ at every time. Before acting at time $t$, let $K_t$ be a history-measurable set of known pairs; assume it stays fixed until a Q-value update or a selection of a pair outside $K_t$. Write $M_t=M_{K_t}(Q_t)$ for the known-state/action MDP and $C=B+W$. For parameters $0<\\eta\\le C$ with $\\eta(1-\\gamma)<1$ and $0<\\rho<1/2$, suppose that with probability at least $1-\\rho$, simultaneously for every $t,s$,\n$$V_t(s)\\ge V^*(s)-\\eta,\\qquad V_t(s)-V^{\\pi_t}_{M_t}(s)\\le\\eta,$$\nand the total number of Q-update times plus outside-$K_t$ selection times is at most a finite real $\\zeta\\ge0$. Define $q=\\eta/(2C)$, set\n$$H=\\begin{cases}1,&\\gamma=0,\\\\ \\max\\{1,\\lceil \\ln(1/[\\eta(1-\\gamma)])/(-\\ln\\gamma)\\rceil\\},&0<\\gamma<1,\\end{cases}\\qquad M=\\left\\lceil\\frac{2(\\zeta+1)+2\\ln(1/\\rho)}{q}\\right\\rceil.$$\nThen, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$. Here $\\ln$ is the natural logarithm.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-admissible-mdp-heuristic",
+          "source_section": "Definition",
+          "quote": "For a bounded-reward finite discounted MDP, an **admissible upper heuristic** is a function $U:D\\to[0,V_0]$ such that $Q^*(s,a)\\le U(s,a)$ for every admissible pair and a supplied scalar satisfies $0\\le V_0\\le(1-\\gamma)^{-1}$. Define the effective reward-scale cap $V_{\\max}=\\max\\{1,V_0\\}$. Then $U(s,a)\\le V_{\\max}\\le(1-\\gamma)^{-1}$. The floor at $1$ is part of this convention because an observed reward can lie anywhere in $[0,1]$, even when the heuristic values are all smaller than $1$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pac-mdp-known-state-action-mdp",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a bounded-reward finite discounted MDP with discount $\\gamma$, let $K\\subseteq D$ be a set of known state-action pairs, and let $q:D\\to[0,V_{\\max}]$ with $V_{\\max}\\le(1-\\gamma)^{-1}$. The **known-state/action MDP** $M_K(q)$ agrees with $M$ on every pair in $K$. For each pair $(s,a)\\notin K$, add a distinct absorbing state $\\bot_{s,a}$ with one admissible action. The unknown pair transitions deterministically to $\\bot_{s,a}$ and gives deterministic reward $(1-\\gamma)q(s,a)$; the sink action self-loops with the same deterministic reward $(1-\\gamma)q(s,a)$. These rewards lie in $[0,1]$. The sink state's value is $q(s,a)$, so the unknown pair's Bellman backup is exactly $(1-\\gamma)q(s,a)+\\gamma q(s,a)=q(s,a)$, independent of the value function on the original states.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pac-mdp-value-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. In every bounded-reward finite discounted Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, and $0\\le\\gamma<1$, the trajectory law of every history-dependent behavior from every starting state exists. Its discounted return is measurable, integrable, and between $0$ and $1/(1-\\gamma)$. For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation. The optimality operator\n\n$$T^*V(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]$$\n\nis a $\\gamma$ contraction in the supremum norm, meaning $\\|T^*V-T^*W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty$ for all $V,W:S\\to\\mathbb R$, where $\\|V\\|_\\infty=\\max_{s\\in S}|V(s)|$, and has a unique fixed point $V^*$. This fixed point is the supremum of the values of all history-dependent behaviors and is attained by a deterministic stationary greedy policy. The optimal action value is\n\n$$Q^*(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V^*(s'),$$\n\nand $V^*(s)=\\max_{a\\in A(s)}Q^*(s,a)$ with $Q^*(s,a)\\ge0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-delayed-q-learning",
+          "source_section": "Definition",
+          "quote": "**Input:** A bounded-reward finite discounted MDP interaction, its discount $0\\le\\gamma<1$, an admissible upper heuristic $U$ with cap $V_{\\max}$, an integer batch size $m\\ge1$, a bonus $0<\\epsilon_1<1$, and a fixed total order on each action set.\n\n**Output:** At each interaction time $t$, the selected action $a_t$. The table $Q$, batch sums, sample counts, batch-start times, learning flags, and global last-update time are internal state; the procedure does not return them as outputs.\n\nInitialize $Q(s,a)=U(s,a)$, batch sum $B(s,a)=0$, sample count $\\ell(s,a)=0$, batch start $b(s,a)=0$, learning flag $L(s,a)=\\mathrm{true}$, and global last-update time $t^*=0$. For interaction times $t=1,2,\\ldots$, in current state $s$, choose an action maximizing $Q(s,\\cdot)$ under the fixed tie order, output and take that action $a_t$, then observe reward $r$ and next state $s'$. If $b(s,a)\\le t^*$, set $L(s,a)=\\mathrm{true}$. If $L(s,a)$ is true, set $b(s,a)=t$ when $\\ell(s,a)=0$, increment $\\ell(s,a)$ by one, and add $r+\\gamma\\max_{c\\in A(s')}Q(s',c)$ to $B(s,a)$. When $\\ell(s,a)=m$, set $\\bar B=B(s,a)/m$. If $Q(s,a)-\\bar B\\ge2\\epsilon_1$, replace $Q(s,a)$ by $\\bar B+\\epsilon_1$ and set $t^*=t$. Otherwise set $L(s,a)=\\mathrm{false}$ exactly when $b(s,a)>t^*$. In either outcome reset $B(s,a)=0$ and $\\ell(s,a)=0$ after a completed batch; if $L(s,a)$ remains false, make no sample or Q update on this visit. Leave all other entries unchanged. Use $s'$ as the current state in the next iteration.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-zero-tolerance-pac-mdp-boundary",
+          "source_section": "Statement",
+          "quote": "Assume AC, and use the history-conditioned bad-step count $N_\\epsilon$ for bounded-reward finite discounted MDPs. The endpoint $\\epsilon=0$ has the following properties.\n\n1. Fix any single learning rule whose action kernels depend only on its observed history and common supplied inputs, not on the unknown MDP reward means. For every finite real $B\\ge0$ and $0<\\delta<1/2$, some one-state, two-action MDP with $\\gamma=0$, Bernoulli rewards and the common admissible heuristic $U(a)=U(b)=V_{\\max}=1$ satisfies $\\mathbb P(N_0>B)>\\delta$. Thus no finite bound depending only on state/action sizes, confidence and discount can hold uniformly at zero tolerance, even allowing randomized history-dependent learners.\n2. For R-MAX, fix any integer $m\\ge1$, $0<\\beta<1$, and a tie order selecting $a$ first. For each $0<p<1$, take one state, $\\gamma=0$, $U(a)=U(b)=V_{\\max}=1$, reward $a\\sim\\operatorname{Bernoulli}(p)$ and deterministic reward $b=p/2$. Then $\\mathbb P(N_0=\\infty)\\ge(1-p)^m$. For every $0<\\delta<1$, some $p$ makes this probability exceed $\\delta$; no fixed finite legal sample threshold gives a uniform finite zero-tolerance bound.\n3. For Delayed Q-learning, fix any integer $m\\ge1$, $0<\\epsilon_1<1$, and a tie order selecting $b$ first. In the one-state model with $\\gamma=0$, $U(a)=U(b)=V_{\\max}=1$ and deterministic rewards $a=1$, $b=1-\\epsilon_1$, the algorithm chooses $b$ forever and $N_0=\\infty$ with probability one.\n4. If $V^*(s)=0$ at every state of any bounded-reward finite discounted MDP, then every behavior has $N_0=0$. The impossibility is a uniform assertion over unknown models, not a claim that zero-tolerance behavior must always fail.\n\nAll models in clauses1–3 have nonempty finite state/action sets, rewards in $[0,1]$, and an admissible normalized cap. No parameter formula that divides by $\\epsilon$ is evaluated at zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\epsilon=0$, apply [F7] to obtain both stated endpoint branches. No finite sample-size or positive bonus is defined by substituting zero into the later formulas. For the remainder assume $\\epsilon>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F7",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\epsilon\\ge V_{\\max}$, then [F3] and nonnegativity of continuation values imply no bad step. Otherwise $\\eta=\\epsilon/4<V_{\\max}/4$ and $\\eta(1-\\gamma)<1$. The displayed batch size is the lemma threshold [F1] with internal failure parameter $\\delta/2$, so with probability at least $1-\\delta/2$ all Q-values are optimistic and the update/escape count is at most $\\zeta$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "At each original state $s$, let $a=\\pi_t(s)$. If $(s,a)\\notin K_t$, the known-model value of that action is exactly $Q_t(s,a)=V_t(s)$ by [F4]. If $(s,a)\\in K_t$, its Bellman backup at $V_t$ differs from $Q_t(s,a)$ above by at most $3\\epsilon_1$, by the definition of $K_t$. Thus $V_t(s)\\le T^{\\pi_t}_{M_t}V_t(s)+3\\epsilon_1$. Subtract the fixed-point equation in [F5] for $V^{\\pi_t}_{M_t}$ and take the maximum positive difference over states; the stochastic transition rows give $\\|V_t-V^{\\pi_t}_{M_t}\\|_{\\infty,+}\\le\\gamma\\|V_t-V^{\\pi_t}_{M_t}\\|_{\\infty,+}+3\\epsilon_1$, hence $V_t-V^{\\pi_t}_{M_t}\\le3\\epsilon_1/(1-\\gamma)=\\eta$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The residual sets $K_t$ are history-measurable and change only after a Q update; they satisfy the stability condition of [F2]. By [F6], the Q table remains in $[0,V_{\\max}]$. Step 1.2 supplies optimism and the count bound; step 1.3 supplies policy accuracy. Apply [F2] with $\\rho=\\delta/2$. Since $4\\eta=\\epsilon$, it gives $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "From the definitions, $G=[\\sum_{s,a}D(s,a)+|D|\\epsilon_1]/\\epsilon_1\\le[\\sum_{s,a}D(s,a)+SA\\epsilon_1]/\\epsilon_1$, where $|D|=\\sum_s|A(s)|\\le SA$, $m=O((1+\\gamma V_{\\max})^2\\epsilon_1^{-2}\\ln(16N/\\delta))$, and $M=O((V_{\\max}/\\eta)(mG+\\ln(2/\\delta)))$. Also $H=O((1-\\gamma)^{-1}\\ln(1/[\\eta(1-\\gamma)]))$: for $0<\\gamma<1$, the function $x-1-\\ln x$ has its minimum $0$ at $x=1$, so $-\\ln\\gamma\\ge1-\\gamma$. Substituting $\\epsilon_1=\\epsilon(1-\\gamma)/12$ and $\\eta=\\epsilon/4$ into $H(V_{\\max}/\\eta)mG$ gives a constant multiple of $\\frac{V_{\\max}(1+\\gamma V_{\\max})^2[\\sum_{s,a}D(s,a)+SA\\epsilon(1-\\gamma)]}{\\epsilon^4(1-\\gamma)^4}\\ln\\frac{16N}{\\delta}\\ln\\frac{1}{\\eta(1-\\gamma)}$. The remaining $H(V_{\\max}/\\eta)\\ln(2/\\delta)$ term is bounded by the same expression up to logarithmic factors because $m\\ge1$ and $G\\ge|D|\\ge1$. For the uninformative heuristic, $\\sum D\\le SA/(1-\\gamma)$ and $1+\\gamma V_{\\max}=(1-\\gamma)^{-1}$; substitution yields $\\widetilde O(SA/[\\epsilon^4(1-\\gamma)^8])$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $\\bar V=(1-\\gamma)^{-1}$ and $\\bar\\epsilon_1=\\epsilon(1-\\gamma)/12$. Admissibility gives $0\\le D(s,a)\\le V_{\\max}\\le\\bar V$, and hence $C_1=1+\\gamma V_{\\max}\\le\\bar V$, $\\kappa\\le\\bar\\kappa$, $N\\le\\bar N$, $m\\le\\bar m$, $G\\le\\bar G$, $\\zeta\\le\\bar\\zeta$, $q\\ge\\bar q$, and $H=\\bar H$. If $\\epsilon\\ge V_{\\max}$, then $N_\\epsilon=0$. Otherwise $M\\le\\bar M$, so step 2.1 proves the uniform bound. All barred quantities depend only on $S,A,\\epsilon,\\delta,\\gamma$, as required by the Definition.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "name": "one-state zero-slack PAC branch",
+          "inputs": "gamma=0, S=1, A=2, Vmax=1, epsilon=1/2, delta=1/2, U=(1,1)",
+          "calculation": "eta=1/8, epsilon1=1/24, both gaps are 0, and G=2.",
+          "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive.",
+          "check": "ml101-pacmdp-delayed-pac",
+          "fixture": "one-state-zero-slack-pac",
+          "asserts": "The additive term remains when all heuristic slacks vanish."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The bounded-reward discounted-model convention excludes empty states and empty statewise action sets. Consequently SA>=1 and the finite update counts and logarithms in the positive-tolerance formulas have their stated domains. Zero bad-step count is permitted and separately handled; it is not an empty-model case.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Zero tolerance is dispatched to its separate established boundary supplier before any parameter formula, and large positive tolerance gives no bad steps. In the remaining branch optimism plus the corrected update count feed the escape reduction, retaining the additive slack-free cost and the full discount dependence."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The bounded-reward discounted-model convention excludes empty states and empty statewise action sets. Consequently SA>=1 and the finite update counts and logarithms in the positive-tolerance formulas have their stated domains. Zero bad-step count is permitted and separately handled; it is not an empty-model case.",
+            "item_sha256": "0d23f04463a8bc643e3a882d0b09b814651156973ab98bc14eef9b3376a27995",
+            "row_sha256": "ece81f2203a4d16f6595479cbbbd22585966915afaa385c4f94795c8bf752792"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Zero tolerance is dispatched to its separate established boundary supplier before any parameter formula, and large positive tolerance gives no bad steps. In the remaining branch optimism plus the corrected update count feed the escape reduction, retaining the additive slack-free cost and the full discount dependence.",
+              "item_sha256": "ec5974b454fa34be4a70387f7411974583e26b3456bbd071eadf9b9bc2802a78",
+              "row_sha256": "cee44ea4f43ff062fb2e74e666a13aa3c6edcbc0fb4f17ce81d6a0acd3efeb1a"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Epsilon=0 is excluded; the epsilon>=Vmax branch is proved in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For S=1,A=1, G includes its initial per-pair allowance and is positive (Statement and step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Deterministic kernels are included in the bounded-target event (steps 1.1–3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Gamma=0 and epsilon>=Vmax are explicit; gamma=1, epsilon=0, delta=0,1 are excluded (Statement and steps 1.1–3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The specified Delayed Q-learning procedure has a fixed action tie rule on each finite nonempty legal-action set. Proof step 1.3 uses its greedy policy and finite Bellman maxima, and proof step 2.1 passes it to the escape-event reduction. This row records finite policy selection, not a claim that the inherited path-law and conditional-expectation suppliers are choice-free.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The specified Delayed Q-learning procedure has a fixed action tie rule on each finite nonempty legal-action set. Proof step 1.3 uses its greedy policy and finite Bellman maxima, and proof step 2.1 passes it to the escape-event reduction. This row records finite policy selection, not a claim that the inherited path-law and conditional-expectation suppliers are choice-free.",
+            "item_sha256": "0d23f04463a8bc643e3a882d0b09b814651156973ab98bc14eef9b3376a27995",
+            "row_sha256": "38d47e7d65911aab8e48bb3c275228ca1165eb017ee6719ae2f026ce1297a4e0"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Zero tolerance is dispatched to its separate established boundary supplier before any parameter formula, and large positive tolerance gives no bad steps. In the remaining branch optimism plus the corrected update count feed the escape reduction, retaining the additive slack-free cost and the full discount dependence.",
+              "item_sha256": "ec5974b454fa34be4a70387f7411974583e26b3456bbd071eadf9b9bc2802a78",
+              "row_sha256": "812261db7cfb4152e74a45bef433b68eff7de032b0dbbb9013193a98b6fa9926"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "The specified Delayed Q-learning procedure has a fixed action tie rule on each finite nonempty legal-action set. Proof1.3 uses its greedy policy and finite Bellman maxima, and proof2.1 passes it to the escape-event reduction. This row records finite policy selection, not a claim that the inherited path-law and conditional-expectation suppliers are choice-free.",
+              "item_sha256": "0d23f04463a8bc643e3a882d0b09b814651156973ab98bc14eef9b3376a27995",
+              "row_sha256": "96d63f81616978fefb2bc8176e3610d5c4d8c423f1ce8229bc2978c555cdfb53"
+            }
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Legal positive-tolerance parameter choices imply a high-probability bad-step count, with separately stated zero-tolerance and uniform-parameter branches. The word Equivalently introduces an asymptotic reexpression up to logarithms, not a biconditional between model predicates.",
+            "item_sha256": "0d23f04463a8bc643e3a882d0b09b814651156973ab98bc14eef9b3376a27995",
+            "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Zero tolerance is dispatched to its separate established boundary supplier before any parameter formula, and large positive tolerance gives no bad steps. In the remaining branch optimism plus the corrected update count feed the escape reduction, retaining the additive slack-free cost and the full discount dependence.",
+              "item_sha256": "ec5974b454fa34be4a70387f7411974583e26b3456bbd071eadf9b9bc2802a78",
+              "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "Legal positive-tolerance parameter choices imply a high-probability bad-step count, with separately stated zero-tolerance and uniform-parameter branches. The word Equivalently introduces an asymptotic reexpression up to logarithms, not a biconditional between model predicates.",
+            "item_sha256": "0d23f04463a8bc643e3a882d0b09b814651156973ab98bc14eef9b3376a27995",
+            "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "Zero tolerance is dispatched to its separate established boundary supplier before any parameter formula, and large positive tolerance gives no bad steps. In the remaining branch optimism plus the corrected update count feed the escape reduction, retaining the additive slack-free cost and the full discount dependence.",
+              "item_sha256": "ec5974b454fa34be4a70387f7411974583e26b3456bbd071eadf9b9bc2802a78",
+              "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+            }
+          ]
+        }
+      ],
+      "kind": "theorem",
+      "risk": "high",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-82",
+        "notes": "Every step reviewed with its actual suppliers, including the corrected escape hypothesis. Algorithm selects the fixed-order greedy action, so new hypothesis holds without consumer surgery. Delta/2 supplies the batch event; epsilon1=epsilon(1-gamma)/12 yields residual loss 3epsilon1/(1-gamma)=eta. Outside backups equal current Q, with zero sink discrepancy; restricted original-state policy contraction gives the residual bound. G includes the final possible update per pair. Substituting m,G,H,q gives the fourth-power accuracy and eighth-power worst-case discount bound; the extra logarithmic count term is absorbed since mG>=1. Barred C1<=barV, D<=barV, m<=bar m, G<=bar G and q>=bar q yield a uniform parameter-only envelope for the original instance-parametrized algorithm. Gamma=0, epsilon=0, epsilon>=Vmax and zero slacks checked. Refuter:82:2 confirmed locator error; theorem at ICML PDF4, full proof PDF6–7, now corrected."
+      }
+    },
+    "thm-r-max-pac-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-r-max-empirical-model-accuracy",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a bounded-reward finite discounted MDP, let $0<\\eta<V_{\\max}/4$ and $0<\\delta<1$, and let $U,V_{\\max}$ be an admissible heuristic with $V_{\\max}=\\max\\{1,V_0\\}$. Put\n$$b=\\frac{\\eta(1-\\gamma)}{64V_{\\max}},\\quad L_0=\\ln\\frac{8SA}{\\delta},\\quad m=\\left\\lceil\\frac{8(S+L_0)}{b^2}\\right\\rceil,\\quad \\beta=\\frac{\\eta(1-\\gamma)}{16},$$\nwhere $S=|S|$ and $A=\\max_s|A(s)|$. Run R-MAX with this sample threshold and approximation tolerance. For $K_t$ the current known set, let $\\widehat M_{K_t}$ use its empirical laws on $K_t$ and the heuristic absorbing states elsewhere, and let $M_{K_t}=M_{K_t}(U)$ use the true laws on $K_t$. Define $E_\\eta=\\{(s,a):U(s,a)\\ge V^*(s)-\\eta\\}$. With probability at least $1-\\delta$, simultaneously at all times: every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$; the current action values satisfy $\\|Q_t-Q^*_{\\widehat M_{K_t}}\\|_\\infty\\le\\beta$ and $0\\le Q_t(s,a)\\le(1-\\gamma)^{-1}$; the greedy value obeys $V_t(s)\\ge V^*(s)-\\eta$; and $V_t(s)-V^{\\pi_t}_{M_{K_t}}(s)\\le\\eta$ for every state. On this event, the total number of value-table rebuilds plus selections of pairs outside $K_t$ is at most $(m+1)|E_\\eta|$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pac-mdp-escape-event-reduction",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a learning algorithm interact with a bounded-reward finite discounted MDP. Suppose constants $B,W,Q_c$ satisfy $0<B$, $0<W\\le(1-\\gamma)^{-1}$, $0<Q_c\\le(1-\\gamma)^{-1}$, and $V^*(s)\\le B$. The learner maintains $0\\le Q_t(s,a)\\le Q_c$ and, whenever $(s,a)\\notin K_t$, $Q_t(s,a)\\le W$. Put $V_t(s)=\\max_{a\\in A(s)}Q_t(s,a)$, and let $\\pi_t$ be the deterministic greedy policy under a fixed tie order. Require the learner to select $a_t=\\pi_t(s_t)$ at every time. Before acting at time $t$, let $K_t$ be a history-measurable set of known pairs; assume it stays fixed until a Q-value update or a selection of a pair outside $K_t$. Write $M_t=M_{K_t}(Q_t)$ for the known-state/action MDP and $C=B+W$. For parameters $0<\\eta\\le C$ with $\\eta(1-\\gamma)<1$ and $0<\\rho<1/2$, suppose that with probability at least $1-\\rho$, simultaneously for every $t,s$,\n$$V_t(s)\\ge V^*(s)-\\eta,\\qquad V_t(s)-V^{\\pi_t}_{M_t}(s)\\le\\eta,$$\nand the total number of Q-update times plus outside-$K_t$ selection times is at most a finite real $\\zeta\\ge0$. Define $q=\\eta/(2C)$, set\n$$H=\\begin{cases}1,&\\gamma=0,\\\\ \\max\\{1,\\lceil \\ln(1/[\\eta(1-\\gamma)])/(-\\ln\\gamma)\\rceil\\},&0<\\gamma<1,\\end{cases}\\qquad M=\\left\\lceil\\frac{2(\\zeta+1)+2\\ln(1/\\rho)}{q}\\right\\rceil.$$\nThen, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$. Here $\\ln$ is the natural logarithm.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-admissible-mdp-heuristic",
+          "source_section": "Definition",
+          "quote": "For a bounded-reward finite discounted MDP, an **admissible upper heuristic** is a function $U:D\\to[0,V_0]$ such that $Q^*(s,a)\\le U(s,a)$ for every admissible pair and a supplied scalar satisfies $0\\le V_0\\le(1-\\gamma)^{-1}$. Define the effective reward-scale cap $V_{\\max}=\\max\\{1,V_0\\}$. Then $U(s,a)\\le V_{\\max}\\le(1-\\gamma)^{-1}$. The floor at $1$ is part of this convention because an observed reward can lie anywhere in $[0,1]$, even when the heuristic values are all smaller than $1$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-zero-tolerance-pac-mdp-boundary",
+          "source_section": "Statement",
+          "quote": "Assume AC, and use the history-conditioned bad-step count $N_\\epsilon$ for bounded-reward finite discounted MDPs. The endpoint $\\epsilon=0$ has the following properties.\n\n1. Fix any single learning rule whose action kernels depend only on its observed history and common supplied inputs, not on the unknown MDP reward means. For every finite real $B\\ge0$ and $0<\\delta<1/2$, some one-state, two-action MDP with $\\gamma=0$, Bernoulli rewards and the common admissible heuristic $U(a)=U(b)=V_{\\max}=1$ satisfies $\\mathbb P(N_0>B)>\\delta$. Thus no finite bound depending only on state/action sizes, confidence and discount can hold uniformly at zero tolerance, even allowing randomized history-dependent learners.\n2. For R-MAX, fix any integer $m\\ge1$, $0<\\beta<1$, and a tie order selecting $a$ first. For each $0<p<1$, take one state, $\\gamma=0$, $U(a)=U(b)=V_{\\max}=1$, reward $a\\sim\\operatorname{Bernoulli}(p)$ and deterministic reward $b=p/2$. Then $\\mathbb P(N_0=\\infty)\\ge(1-p)^m$. For every $0<\\delta<1$, some $p$ makes this probability exceed $\\delta$; no fixed finite legal sample threshold gives a uniform finite zero-tolerance bound.\n3. For Delayed Q-learning, fix any integer $m\\ge1$, $0<\\epsilon_1<1$, and a tie order selecting $b$ first. In the one-state model with $\\gamma=0$, $U(a)=U(b)=V_{\\max}=1$ and deterministic rewards $a=1$, $b=1-\\epsilon_1$, the algorithm chooses $b$ forever and $N_0=\\infty$ with probability one.\n4. If $V^*(s)=0$ at every state of any bounded-reward finite discounted MDP, then every behavior has $N_0=0$. The impossibility is a uniform assertion over unknown models, not a claim that zero-tolerance behavior must always fail.\n\nAll models in clauses1–3 have nonempty finite state/action sets, rewards in $[0,1]$, and an admissible normalized cap. No parameter formula that divides by $\\epsilon$ is evaluated at zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\epsilon=0$, apply [F4] to obtain both stated endpoint branches. No finite sample-size or positive bonus is defined by substituting zero into the later formulas. For the remainder assume $\\epsilon>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $\\epsilon\\ge V_{\\max}$, then $V^*(s)-\\epsilon\\le0$ for every state and every continuation value is nonnegative, so no time is counted. Assume now $\\epsilon<V_{\\max}$. The stated $\\eta$ satisfies $0<\\eta<V_{\\max}/4$ and $\\eta(1-\\gamma)<1$. Apply [F1] with confidence parameter $\\delta/2$; its sample threshold is exactly the displayed $m$. On its event, R-MAX has the hypotheses of [F2] with $\\zeta=(m+1)|E_\\eta|$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the uninformative heuristic, $|E_\\eta|\\le SA$ and $V_{\\max}=(1-\\gamma)^{-1}$. The displayed $b$ gives $m=O((S+\\ln(SA/\\delta))V_{\\max}^2/[\\eta^2(1-\\gamma)^2])$. Also $H=O((1-\\gamma)^{-1}\\ln(1/[\\eta(1-\\gamma)]))$, since $-\\ln\\gamma\\ge1-\\gamma$ for $0<\\gamma<1$, and $M=O((V_{\\max}/\\eta)(\\zeta+\\ln(2/\\delta)))$. Using $\\zeta\\le(m+1)SA$ and $\\eta=\\epsilon/4$ yields $\\widetilde O(S^2A/[\\epsilon^3(1-\\gamma)^6])$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take $\\rho=\\delta/2$ in [F2]. Since $4\\eta=\\epsilon$, the theorem gives $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $\\bar V=(1-\\gamma)^{-1}$. Since $V_{\\max}\\le\\bar V$ and $|E_\\eta|\\le SA$, the instance parameters satisfy $b\\ge\\bar b$, $m\\le\\bar m$, $\\zeta\\le\\bar\\zeta$, and $q\\ge\\bar q$, while the truncation horizon is $H=\\bar H$. If $\\epsilon<V_{\\max}$, then $M\\le\\bar M$ and step 2.1 yields the uniform bound. If $\\epsilon\\ge V_{\\max}$, then $N_\\epsilon=0$. Thus the displayed $\\bar H\\bar M$ is a finite PAC-MDP bound in the sense of the Definition.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "name": "one-state deterministic R-MAX PAC branch",
+          "inputs": "gamma=0, S=A=1, U=Vmax=V*=1, epsilon=1/2, delta=1/2",
+          "calculation": "eta=1/8, E_eta contains the single pair, H=1, and m,M are finite.",
+          "expected": "The finite-instance count bound is defined.",
+          "check": "ml101-pacmdp-rmax-pac",
+          "fixture": "one-state-deterministic-pac",
+          "asserts": "Then $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inherited bounded-reward discounted model has positive state count and nonempty legal-action sets, hence A and SA in the thresholds are positive. Proof1.1 treats zero tolerance as a separate parameter branch, not an empty-domain convention; the empty set of bad times is allowed in proof1.2 when tolerance dominates the value cap.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The inherited bounded-reward discounted model has positive state count and nonempty legal-action sets, hence A and SA in the thresholds are positive. Proof1.1 treats zero tolerance as a separate parameter branch, not an empty-domain convention; the empty set of bad times is allowed in proof1.2 when tolerance dominates the value cap.",
+            "item_sha256": "03903aba9891bf0e527d68bd3df5295293687af894aabbb902e2a2858dfe2b38",
+            "row_sha256": "8f0c7f474b2a6387364b1b6de453beaa5770f22f442070d7f52eca94a2d6af08"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The zero-tolerance success and uniform failure branches are inherited before positive parameters are evaluated. Positive small tolerance uses simultaneous empirical-model accuracy and the escape-event theorem with half confidence budgets, while large tolerance has no bad steps and the uninformative cap yields the stated discount order.",
+              "item_sha256": "59b773f3a24ddd4409a8b14117ccdfe421e5d82deb7cf087a58b090a16e58600",
+              "row_sha256": "cee44ea4f43ff062fb2e74e666a13aa3c6edcbc0fb4f17ce81d6a0acd3efeb1a"
+            }
+          ]
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Epsilon=0 is excluded; the epsilon>=Vmax branch is proved in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For S=A=1, |E_eta| is either zero or one and the displayed m,H,M expressions remain defined (Statement and step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition/Statement covers this case: Deterministic kernels are included in the uniform sample-error event (steps 1.1–3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Gamma=0 and epsilon>=Vmax are explicit; gamma=1 and epsilon=0 are outside the theorem (Statement and steps 1.1–3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "R-MAX supplies a fixed tie rule on finite nonempty legal-action sets; the current policy comes from that finite maximization. Proof step 1.2 and step 2.1 apply the empirical-model and escape-event suppliers to this procedure. This review validates the finite choice interface and does not relabel those stochastic suppliers as a choice-free construction.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "R-MAX supplies a fixed tie rule on finite nonempty legal-action sets; the current policy comes from that finite maximization. Proof step 1.2 and step 2.1 apply the empirical-model and escape-event suppliers to this procedure. This review validates the finite choice interface and does not relabel those stochastic suppliers as a choice-free construction.",
+            "item_sha256": "03903aba9891bf0e527d68bd3df5295293687af894aabbb902e2a2858dfe2b38",
+            "row_sha256": "16cd54aae8946c8f3baa42d304e78e0625a584aa21cf58836d07403dedb164bf"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The zero-tolerance success and uniform failure branches are inherited before positive parameters are evaluated. Positive small tolerance uses simultaneous empirical-model accuracy and the escape-event theorem with half confidence budgets, while large tolerance has no bad steps and the uninformative cap yields the stated discount order.",
+              "item_sha256": "59b773f3a24ddd4409a8b14117ccdfe421e5d82deb7cf087a58b090a16e58600",
+              "row_sha256": "812261db7cfb4152e74a45bef433b68eff7de032b0dbbb9013193a98b6fa9926"
+            },
+            {
+              "upheld": true,
+              "by": "owner-delegated:/root/calibration_surrogate_repair",
+              "reason": "R-MAX supplies a fixed tie rule on finite nonempty legal-action sets; the current policy comes from that finite maximization. Proofs1.2 and2.1 apply the empirical-model and escape-event suppliers to this procedure. This review validates the finite choice interface and does not relabel those stochastic suppliers as a choice-free construction.",
+              "item_sha256": "03903aba9891bf0e527d68bd3df5295293687af894aabbb902e2a2858dfe2b38",
+              "row_sha256": "eb85ce860a6366942aa17c458cd7b8c77f5e54589b94daea632ae7eb437e0747"
+            }
+          ]
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no forward implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The prescribed sampling and approximation parameters imply the R-MAX bad-step bound, with explicit zero-tolerance caveats and a uniform positive-tolerance form. The theorem does not characterize PAC performance by these parameter choices.",
+            "item_sha256": "03903aba9891bf0e527d68bd3df5295293687af894aabbb902e2a2858dfe2b38",
+            "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The zero-tolerance success and uniform failure branches are inherited before positive parameters are evaluated. Positive small tolerance uses simultaneous empirical-model accuracy and the escape-event theorem with half confidence budgets, while large tolerance has no bad steps and the uninformative cap yields the stated discount order.",
+              "item_sha256": "59b773f3a24ddd4409a8b14117ccdfe421e5d82deb7cf087a58b090a16e58600",
+              "row_sha256": "b6826f654af0c9bcbdb63ace9533afc9d03872cc994dbaa951570fc7511d770b"
+            }
+          ]
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional, so there is no reverse implication boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "owner-delegated:/root/calibration_surrogate_repair",
+            "reason": "The prescribed sampling and approximation parameters imply the R-MAX bad-step bound, with explicit zero-tolerance caveats and a uniform positive-tolerance form. The theorem does not characterize PAC performance by these parameter choices.",
+            "item_sha256": "03903aba9891bf0e527d68bd3df5295293687af894aabbb902e2a2858dfe2b38",
+            "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+          },
+          "template_review_history": [
+            {
+              "upheld": true,
+              "by": "/root/ucrl2_repair",
+              "reason": "The zero-tolerance success and uniform failure branches are inherited before positive parameters are evaluated. Positive small tolerance uses simultaneous empirical-model accuracy and the escape-event theorem with half confidence budgets, while large tolerance has no bad steps and the uninformative cap yields the stated discount order.",
+              "item_sha256": "59b773f3a24ddd4409a8b14117ccdfe421e5d82deb7cf087a58b090a16e58600",
+              "row_sha256": "439bf719886d9587dc857903c30c349bfedefb2f5bf6f624e99ac9e581ef4a79"
+            }
+          ]
+        }
+      ],
+      "kind": "theorem",
+      "risk": "high",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-82",
+        "notes": "All five steps reviewed with current accuracy and corrected escape suppliers. Actual R-MAX fixed-order greedy actions satisfy the added hypothesis; no consumer edit needed. Threshold matches the accuracy lemma at delta/2, beta legal, unknown Q=U<=Vmax and all Q<=(1-gamma)^(-1). With B=W=Vmax and rho=delta/2, q,H,M give the stated count. E_eta<=SA and Vmax<=barV imply b>=bar b, m<=bar m, zeta<=bar zeta and q>=bar q, so the uniform bound applies without changing algorithm thresholds. Worst-case substitutions give epsilon^-3 and (1-gamma)^-6. Zero tolerance uses the proved boundary rather than singular formulas; epsilon>=Vmax has no bad times."
+      }
+    }
+  }
+}

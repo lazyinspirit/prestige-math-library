@@ -1,0 +1,14 @@
+# Batch 65: review 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 65
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: neural-odes-and-continuous-normalizing-flows, neural-odes-and-continuous-normalizing-flows-examples
+Items: def-neural-ode, thm-neural-ode-global-smooth-flow, thm-instantaneous-change-of-variables-for-ode-flow, alg-adjoint-sensitivity-method, ex-numerical-adjoint-error
+Consolidated findings: [{"id":"alg-adjoint-sensitivity-method","type":"local","reason":"The Definition evaluates φ on (u,θ), but states that both φ and ℓ are C1 near the (t,u,θ) trajectory tube. Specify φ’s open state-parameter domain around the terminal slice and ℓ’s open time-state-parameter domain around the full tube, preserving the derivative bounds and continuity assumptions."},{"id":"ex-numerical-adjoint-error","type":"prerequisite","reason":"Verification 1.1, 1.2, and 2.1 use chain, product, and power differentiation for exp(θt), the Euler polynomial, and p(t) without naming a supplier. Add lem-derivative-algebra-and-chain-rules to deps and Facts and cite it. Verification 2.1 also uses the exponential addition formula; add thm-exponential-addition-formula to deps and Facts and cite it."},{"id":"ex-numerical-adjoint-error","type":"local","reason":"State explicitly that N is a positive integer, as required by the equal-step finite graph and degree-N polynomial. Also state e^x=exp(x) or use exp(x) notation to match the cited definition."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [{"id":"ex-numerical-adjoint-error","path":["alg-adjoint-sensitivity-method","ex-numerical-adjoint-error"],"paths":[["alg-adjoint-sensitivity-method","ex-numerical-adjoint-error"]]}].

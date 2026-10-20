@@ -18,6 +18,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-conformal-nonconformity-score-and-rank-pvalue.json
   precheck: n/a
 sources:
   references:
@@ -36,7 +37,7 @@ space, let $m\ge0$, and put $n=m+1$. A **split score rule** is a jointly
 measurable map $s:\mathcal H\times\mathcal Z\to\mathbb R$, where $H$ is a
 training statistic with values in the specified measurable rule space
 $(\mathcal H,\mathscr H)$. The measurable-statistic convention is that of
-[[def-statistic-and-estimator]]. Once $H=h$ is fixed, calibration and test
+Statistics and estimators. Once $H=h$ is fixed, calibration and test
 scores are $R_i=s(h,Z_i)$; the rule does not change when it scores the
 calibration or test example.
 
@@ -57,7 +58,7 @@ $$p_U(y)=\frac{\#\{i\le m:R_i(y)>r\}+U\bigl(1+\#\{i\le m:R_i(y)=r\}\bigr)}{m+1}.
 The added $1$ counts the candidate itself in its tie group. A single such $U$
 is shared across a candidate scan. This is an explicit randomization; the
 general Markov-kernel definition of a randomized procedure
-[[def-randomized-procedure-as-a-markov-kernel]] does not assert that arbitrary
+Randomized procedures as probability kernels does not assert that arbitrary
 kernels have a random-seed representation.
 
 Here “uniform on $[0,1]$” means $\mathbb P(U\le u)=u$ for $0\le u\le1$.
@@ -70,3 +71,10 @@ For a split candidate scan at a fixed feature value $x$, the notation in
 these formulas is $R_i(y)=s(h,Z_i)$ for $1\le i\le m$ and
 $R_n(y)=s(h,(x,y))$, with $r=R_n(y)$. Thus the calibration scores do not
 depend on $y$, and the candidate is scored by the same fixed rule.
+
+## Definition references
+
+[[def-statistic-and-estimator]]
+
+[[def-randomized-procedure-as-a-markov-kernel]]
+

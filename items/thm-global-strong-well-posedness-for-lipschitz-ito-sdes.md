@@ -22,6 +22,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-global-strong-well-posedness-for-lipschitz-ito-sdes.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -38,13 +39,17 @@ sources:
 ## Statement
 
 Assume the data and hypotheses of
-[[def-ito-sde-and-strong-solution]] on $[0,T]$, with $T\ge0$, finite
+Itô SDE data and strong solution on $[0,T]$, with $T\ge0$, finite
 dimensions $d,m\ge1$, Lipschitz constant $L$, and linear-growth constant
 $K$. There is a strong solution $X$ on the given filtered probability space.
 It is unique up to indistinguishability among strong solutions with the same
 initial value and Brownian driver, and it satisfies
 $$E\sup_{0\le t\le T}|X_t|^2\le(1+3E|X_0|^2)e^{C_TT},\qquad C_T:=6K^2T+24mK^2.$$
 The bound is independent of any later numerical mesh.
+
+## Statement references
+
+[[def-ito-sde-and-strong-solution]]
 
 ## Facts & Assumptions
 

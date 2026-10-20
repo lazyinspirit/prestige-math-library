@@ -1,0 +1,908 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-convex-gradient-step-nonexpansive",
+    "lem-fedavg-local-drift",
+    "lem-scaffold-convex-client-drift",
+    "thm-sgd-stability-convex-loss"
+  ],
+  "contracts": {
+    "lem-convex-gradient-step-nonexpansive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $u,v\\in\\mathbb R^d$. For every $z\\in\\mathbb R^d$ and $0<t\\le1$, [F1] gives [given]\n$$ \\frac{h(u+t(z-u))-h(u)}{t}\\le h(z)-h(u). $$\nAs $t\\downarrow0$, differentiability makes the left side tend to\n$\\langle\\nabla h(u),z-u\\rangle$. Hence\n$h(z)\\ge h(u)+\\langle\\nabla h(u),z-u\\rangle$. Define\n$\\phi(z)=h(z)-\\langle\\nabla h(u),z-u\\rangle$; this inequality shows\nthat $u$ minimizes $\\phi$. Its gradient is $\\beta$-Lipschitz, hence continuous. Apply [F2] at $v$ to\n$v-\\beta^{-1}\\nabla\\phi(v)$ and use $\\phi(u)\\le\\phi(z)$ to obtain\n$$ \\|\\nabla h(v)-\\nabla h(u)\\|_2^2 \\le2\\beta\\bigl(h(v)-h(u)-\\langle\\nabla h(u),v-u\\rangle\\bigr). $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Repeat step 1.1 with $u$ and $v$ exchanged and add the two inequalities. [given]\nThe right-hand Bregman terms sum to\n$\\langle\\nabla h(v)-\\nabla h(u),v-u\\rangle$, so\n$$ \\|\\nabla h(v)-\\nabla h(u)\\|_2^2 \\le\\beta\\langle\\nabla h(v)-\\nabla h(u),v-u\\rangle. $$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expand the square in the Statement and apply step 2.1: [given]\n$$ \\begin{aligned} \\|x-y-\\eta(\\nabla h(x)-\\nabla h(y))\\|_2^2 &\\le\\|x-y\\|_2^2 -\\left(\\frac{2\\eta}{\\beta}-\\eta^2\\right) \\|\\nabla h(x)-\\nabla h(y)\\|_2^2\\\\ &\\le\\|x-y\\|_2^2, \\end{aligned} $$\nbecause $0\\le\\eta\\le2/\\beta$. Taking nonnegative square roots proves the\nclaim.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two points x,y and one supplied function are fixed objects; no optional empty function family or population is averaged.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused empty disposition: The two points x,y and one supplied function are fixed objects; no optional empty function family or population is averaged. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "7c835b542baa4fff024dcbe6a5d00b997f2aeeef74bc73742619f83d1b86fb5f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At eta=0 the Statement is equality. The only symbolic inverse in1.1 and3.1 is beta^-1, justified by beta>0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused zero disposition: At eta=0 the Statement is equality. The only symbolic inverse in1.1 and3.1 is beta^-1, justified by beta>0. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "3cbf344e658ad7b32f85609c43c737e6e28dfcad226770efaa1b8d3e47b28bb2"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In one real dimension the same inner-product expansion applies without coordinate summation. Anchor: Proof/Verification, steps 1.1, 2.1 and 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused one disposition: In one real dimension the same inner-product expansion applies without coordinate summation. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "4f8303e28b08cb0f5cdd7e3966958329fe4f06bd34e846949f7468c2e848eeff"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If x=y or their gradients agree, the subtracted gradient difference in3.1 is0 and the inequality is equality. Anchor: Proof/Verification, step 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused degenerate disposition: If x=y or their gradients agree, the subtracted gradient difference in3.1 is0 and the inequality is equality. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "4103cb8903abd49483bc177f66750772e0cdf159fead04b15b333572a1cfcb46"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof3.1 includes eta=0 and eta=2/beta, where2eta/beta-eta^2=0, so the same square comparison gives nonexpansiveness. Anchor: Proof/Verification, step 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused endpoints disposition: Proof3.1 includes eta=0 and eta=2/beta, where2eta/beta-eta^2=0, so the same square comparison gives nonexpansiveness. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "fff059afff62d5bdc2c02188c09bf3e7015deb47867b25ca01a63ed964fd2ee8"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item states and uses no choice-dependent existence claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused nonempty-choice disposition: The item states and uses no choice-dependent existence claim. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "ed4bc9f7449dbfd486a6eddc0a35799f963c97fd46ce017698d4e191f5542746"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The item states no biconditional or equivalence. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "48a22a2464bf9490550821bd3690e5717e8b940b93393de82544c640aa30ea04"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The item states no biconditional or equivalence. Actual item evidence: The Statement assumes beta>0 and0<=eta<=2/beta. Proof1.1 derives the one-sided gradient-gap bound,2.1 obtains cocoercivity, and3.1 expands the square with coefficient2eta/beta-eta^2>=0. It is a one-way norm inequality.",
+            "item_sha256": "86e1e60da795e6b114ae6f0ab8a7fce6c8360f284c872ebaf8475bb85105afb7",
+            "row_sha256": "c5186e05c3275ccae7698d6bfed92e74b0ab36ef170b888c32f4036bfce85823"
+          }
+        }
+      ]
+    },
+    "lem-fedavg-local-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-fedavg",
+          "source_section": "Definition",
+          "quote": "The inputs are positive integers $N,d,R,K,S$ with $1\\le S\\le N$, an initial\nserver model $x_0\\in\\mathbb R^d$, client objectives for the chosen mode and\ntheir local oracle procedures $g_i$, positive step sizes $\\eta_l,\\eta_g$,\nand one aggregation mode from the two modes below. In count-weighted\ndeployment mode the objectives are $F_i$ and the inputs also include positive\ninteger record counts $n_1,\\ldots,n_N$, with\n$n=\\sum_i n_i$. A call to $g_i$ returns a gradient vector according to its\nsupplied deterministic or stochastic local-oracle rule; the client-sample\nrandomness in a round is independent of that round's fresh oracle randomness.\nIn uniform-client analysis mode the objectives are $f_i$.\n\nFor each round $r=1,\\ldots,R$, independently draw a uniform fixed-size subset\n$\\mathcal S_r$ of $S$ clients from $\\{1,\\ldots,N\\}$. For every selected client $i$, initialize\n$y_{i,0}=x_{r-1}$ and for $k=1,\\ldots,K$ call $g_i$ at $y_{i,k-1}$ and update\n$$ y_{i,k}=y_{i,k-1}-\\eta_l g_i(y_{i,k-1}),\\qquad 1\\le k\\le K, $$\nThe client sends its model difference $y_{i,K}-x_{r-1}$ to the server. Use one\nof the following aggregation branches in every round:\n\n1. **Count-weighted deployment mode.** With positive client record counts\n   $n_i$ and $n=\\sum_i n_i$, set\n$$ x_r=x_{r-1}+\\eta_g\\sum_{i\\in\\mathcal S_r}\\frac{n_i}{n} (y_{i,K}-x_{r-1}). $$\n   Equivalently, each unselected client contributes its unchanged model\n   $x_{r-1}$ to the full count-weighted average.\n\n2. **Uniform-client analysis mode.** Set\n$$ x_r=x_{r-1}+\\frac{\\eta_g}{S} \\sum_{i\\in\\mathcal S_r}(y_{i,K}-x_{r-1}). $$\n   The equal-client convergence result on this page uses this mode and the\n   objective $f=N^{-1}\\sum_i f_i$.\n\nAfter the selected clients finish the round, apply the chosen branch to obtain\n$x_r$. Repeat through round $R$. Return the finite server trajectory\n$x_0,\\ldots,x_R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-convex-gradient-step-nonexpansive",
+          "source_section": "Statement",
+          "quote": "Let $h:\\mathbb R^d\\to\\mathbb R$ be convex and differentiable with\n$\\beta$-Lipschitz gradient, where $\\beta>0$. For every\n$0\\le\\eta\\le2/\\beta$ and $x,y\\in\\mathbb R^d$,\n$$ \\|x-y-\\eta(\\nabla h(x)-\\nabla h(y))\\|_2\\le\\|x-y\\|_2. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-relaxed-euclidean-squared-norm",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v\\in\\mathbb R^d$ and $a>0$,\n$$ \\|u+v\\|_2^2\\le(1+a)\\|u\\|_2^2+(1+a^{-1})\\|v\\|_2^2, \\qquad 2|\\langle u,v\\rangle|\\le a\\|u\\|_2^2+a^{-1}\\|v\\|_2^2. $$\nFor $m\\ge1$ vectors $u_1,\\ldots,u_m\\in\\mathbb R^d$,\n$$ \\left\\|\\sum_{j=1}^m u_j\\right\\|_2^2\\le m\\sum_{j=1}^m\\|u_j\\|_2^2. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-standard-client-dissimilarity-implies-gap-form",
+          "source_section": "Statement",
+          "quote": "Let $N,d\\ge1$ be positive integers, let $\\beta>0$, and let\n$f_i:\\mathbb R^d\\to\\mathbb R$ be differentiable with $\\beta$-Lipschitz\ngradients. Put $f=N^{-1}\\sum_i f_i$, and suppose $f(x)\\ge f^\\star$ for\nall $x$, where $f^\\star\\in\\mathbb R$ is finite. Then\n$$ \\|\\nabla f(x)\\|_2^2\\le2\\beta(f(x)-f^\\star) \\qquad(x\\in\\mathbb R^d). $$\nConsequently, if the clients satisfy standard $(G,B)$-bounded gradient\ndissimilarity, with $G\\ge0$ and $B\\ge1$, they satisfy the gap-form condition\nwith exactly the same $G,B,\\beta,f^\\star$:\n$$ \\frac1N\\sum_i\\|\\nabla f_i(x)\\|_2^2\\le G^2+2\\beta B^2(f(x)-f^\\star) \\qquad(x\\in\\mathbb R^d). $$\nNo convexity or attainment of the lower bound is required for this implication.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the standard-condition branch, [F6] supplies the displayed gap-form assumption with unchanged $G,B$; in the original gap-form branch it is already assumed. If $K=1$, every query point is $x$ and $E=0$. Suppose $K\\ge2$. For a [given]\nfixed client, put $d_k=y_{i,k}-x$, $g=\\nabla f_i(x)$, and\n$\\xi_k=g_i(y_{i,k-1})-\\nabla f_i(y_{i,k-1})$. Define\n$T_i(y)=y-\\eta_l(\\nabla f_i(y)-\\nabla f_i(x))$. The local update is\n$d_k=T_i(y_{i,k-1})-x-\\eta_l g-\\eta_l\\xi_k$. By [F2] and the stepsize\ncondition, $\\|T_i(y_{i,k-1})-x\\|_2\\le\\|d_{k-1}\\|_2$. Conditional\ncentering of $\\xi_k$ therefore gives\n$$ q_k:=\\mathbb E\\|d_k\\|_2^2 \\le(\\sqrt{q_{k-1}}+\\eta_l\\|g\\|_2)^2+\\eta_l^2\\sigma^2. $$\nInduction from $q_0=0$ yields\n$q_k\\le(k\\eta_l\\|g\\|_2+\\sqrt{k}\\eta_l\\sigma)^2\n\\le2k^2\\eta_l^2\\|g\\|_2^2+2k\\eta_l^2\\sigma^2$: substituting the bound at\n$k-1$ into the recurrence gives\n$(k\\eta_l\\|g\\|_2+\\sqrt{k-1}\\eta_l\\sigma)^2+\\eta_l^2\\sigma^2$, which is\nat most the claimed square.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "A2",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Average the step 1.1 bound for $d_{k-1}$ over $k=1,\\ldots,K$ and [given]\nclients. Since $K^{-1}\\sum_{k=1}^K 2(k-1)^2\\le2K^2/3$ and\n$K^{-1}\\sum_{k=1}^K2(k-1)=K-1\\le K$, this gives\n$$ E\\le\\frac23K^2\\eta_l^2\\frac1N\\sum_i\\|\\nabla f_i(x)\\|_2^2 +K\\eta_l^2\\sigma^2 \\le\\frac23K^2\\eta_l^2\\bigl(G^2+2\\beta B^2(f(x)-f^\\star)\\bigr) +K\\eta_l^2\\sigma^2. $$\nUniform sampling makes the expected average over selected clients the\npopulation average, and the hypothetical local paths have the same per-client\nlaw.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiply step 2.1 by $3\\beta\\widetilde\\eta$ and use $\\eta_l=\\widetilde\\eta/(K\\eta_g)$. The three resulting coefficients are $2\\beta\\widetilde\\eta^3/\\eta_g^2$ for $G^2$, $4\\beta^2B^2\\widetilde\\eta^3/\\eta_g^2$ for the function gap, and $3\\beta\\widetilde\\eta^3/(K\\eta_g^2)$ for the variance. Since $\\eta_g\\ge1$ and $\\beta\\widetilde\\eta\\le1/[8(B^2+1)]$, these are at most $18\\beta\\widetilde\\eta^3$, $2\\widetilde\\eta/3$, and $\\widetilde\\eta^2/(2K\\eta_g^2)$, respectively. This proves the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=S>=1 and K>=1 exclude an empty client population, sample and query-point average. The finite sums in E have KN positive terms, including zero-displacement initial queries.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused empty disposition: N>=S>=1 and K>=1 exclude an empty client population, sample and query-point average. The finite sums in E have KN positive terms, including zero-displacement initial queries. Actual item evidence: Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused empty disposition: N>=S>=1 and K>=1 exclude an empty client population, sample and query-point average. The finite sums in E have KN positive terms, including zero-displacement initial queries. Actual item evidence: Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B.",
+            "item_sha256": "b59872273b0c4f7443a9df0a8677e740b157fdb2affbe68eb5db4b95888c3619",
+            "row_sha256": "37a60e6ec7f480e30a272fa7ac51d77017733377dddee76f11e337e5ea7d3a1f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles sigma=0 directly in the one-query case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles K=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes full participation S=N and G=0 without a separate limiting argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the inclusive stepsize bound in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction. Anchor: Proof, step 1.1, with the explicitly declared Facts[A2] conditional-expectation assumption.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused nonempty-choice disposition: Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction. Actual item evidence: Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B.",
+            "item_sha256": "b59872273b0c4f7443a9df0a8677e740b157fdb2affbe68eb5db4b95888c3619",
+            "row_sha256": "2aed67ce3472c71c618222213c45f4387e7a673245c8214d8a51246ad37408f0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The item states no biconditional or equivalence. Actual item evidence: Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B.",
+            "item_sha256": "b59872273b0c4f7443a9df0a8677e740b157fdb2affbe68eb5db4b95888c3619",
+            "row_sha256": "48a22a2464bf9490550821bd3690e5717e8b940b93393de82544c640aa30ea04"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The item states no biconditional or equivalence. Actual item evidence: Proof1.1 separately returns E=0 for K=1 before using the K>=2 path estimate;2.1 averages query displacements over positive K,N;3.1 absorbs coefficients using the inclusive positive effective-step bound. Either gap-form or standard dissimilarity assumptions are retained with the same G,B.",
+            "item_sha256": "b59872273b0c4f7443a9df0a8677e740b157fdb2affbe68eb5db4b95888c3619",
+            "row_sha256": "c5186e05c3275ccae7698d6bfed92e74b0ab36ef170b888c32f4036bfce85823"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Reviewed all three steps with FedAvg, gradient-step nonexpansiveness, standard-to-gap conversion, relaxed squares and conditional-expectation suppliers. eta_l<=2/beta follows from eta_tilde=K eta_l eta_g, eta_g>=1 and its cap. The conditional q_k recurrence and its square-root induction give 2k^2 eta_l^2 ||grad f_i(x)||^2+2k eta_l^2 sigma^2. Summing query indices 0..K-1 yields the displayed drift estimate. Multiplication by 3 beta eta_tilde gives coefficients 2 beta eta_tilde^3/eta_g^2, 4 beta^2 B^2 eta_tilde^3/eta_g^2 and 3 beta eta_tilde^3/(K eta_g^2); all are bounded by the claimed constants under the cap. K=1 has E=0; sigma=G=0 and both dissimilarity branches valid. AC explicitly declared in A2 for conditional expectations. No defect or diagram; reports have no findings."
+      }
+    },
+    "lem-scaffold-convex-client-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-scaffold",
+          "source_section": "Definition",
+          "quote": "The inputs are positive integers $N,d,R,K,S$ with $1\\le S\\le N$, objective\nfunctions $f_i:\\mathbb R^d\\to\\mathbb R$, an initial\nserver model $x_0\\in\\mathbb R^d$, client controls $c_i^0\\in\\mathbb R^d$,\npositive step sizes $\\eta_l,\\eta_g$, a local stochastic-gradient oracle\n$g_i$, and a control-update option from $\\{\\mathrm I,\\mathrm{II}\\}$. Set\n$c^0=N^{-1}\\sum_i c_i^0$. The random client sample in each round is\nindependent of that round's fresh local-oracle randomness; no independence\namong distinct clients' oracle draws is required here.\n\nFor each round $r=1,\\ldots,R$, independently sample a uniform fixed-size\nsubset $\\mathcal S_r$ of $S$ clients. At the start of this round, write\n$x=x_{r-1}$, $c=c^{r-1}$, and $c_i=c_i^{r-1}$. For every selected client\n$i$, initialize $y_{i,0}=x$ and, for $k=1,\\ldots,K$, call $g_i$ at\n$y_{i,k-1}$ and update\n$$ y_{i,k}=y_{i,k-1}-\\eta_l\\bigl(g_i(y_{i,k-1})-c_i+c\\bigr). $$\nAfter its $K$ local steps, a selected client updates its control using either\n\n- **Option I:** call $g_i$ at the round-start model $x_{r-1}$ and set\n  $c_i^+=g_i(x)$; or\n- **Option II:** set\n  $c_i^+=c_i-c+(K\\eta_l)^{-1}(x-y_{i,K})$.\n\nThe client sends $\\Delta x_i=y_{i,K}-x$ and\n$\\Delta c_i=c_i^+-c_i$. Unselected clients retain their controls. The server\nforms\n$$ \\Delta x=\\frac1S\\sum_{i\\in\\mathcal S_r}\\Delta x_i,\\qquad \\Delta c=\\frac1S\\sum_{i\\in\\mathcal S_r}\\Delta c_i $$\nand updates\n$$x_r=x+\\eta_g\\Delta x,\\qquad c^r=c^{r-1}+\\frac SN\\Delta c.$$\nThe selected clients set $c_i^r=c_i^+$ and unselected clients set\n$c_i^r=c_i^{r-1}$. Thus $c^r=N^{-1}\\sum_i c_i^r$ whenever\n$c^{r-1}=N^{-1}\\sum_i c_i^{r-1}$ held before the round. The general\nprocedure permits zero initial controls; the convergence rates stated below\nuse the explicitly stated gradient-consistent initialization\n$c_i^0=\\nabla f_i(x_0)$. Repeat through round $R$ and return the model and\ncontrol trajectories $((x_r,c^r,(c_i^r)_{i=1}^N))_{r=0}^R$.\n\nThe following schematic records only the communication flow. Its vertices are\nthe server and the selected clients; the arrow labels are exactly the\nquantities sent in each direction. The local updates and server equations above,\nnot the schematic, define the procedure.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n\\node[draw,rounded corners] (server) at (0,0) {Server: $(x,c)$};\n\\node[draw,rounded corners] (clients) at (5,0) {Selected clients $i\\in\\mathcal S$};\n\\draw[->] (server) to[bend left=18] node[above] {$(x,c)$} (clients);\n\\draw[->] (clients) to[bend left=18] node[below] {$(\\Delta x_i,\\Delta c_i)$} (server);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scaffold-analysis-trajectory-and-errors",
+          "source_section": "Definition",
+          "quote": "Let $N,d,K,R\\ge1$ be positive integers and let $1\\le S\\le N$. Let\n$f_i:\\mathbb R^d\\to\\mathbb R$ be differentiable client objectives and\n$f=N^{-1}\\sum_{i=1}^Nf_i$. Run SCAFFOLD for $R$ rounds with local step count\n$K$, client sample size $S$, server iterates $x_0,\\ldots,x_R$, and client\ncontrols $c_i^r$ after round $r$. In each round, extend the local trajectory\n$y_{i,0}^r=x_{r-1},y_{i,1}^r,\\ldots,y_{i,K}^r$ to every client using the\nsame local update rule, including hypothetical paths for clients not selected\nin that round. Generate these counterfactual paths using fresh local oracle randomness independently of the fresh client sample, so a selected path agrees with its actual local execution. Local paths use only the round-start model and controls and their own successive oracle draws. Oracle moment conditions in the results below are conditional on the full prequery history, including any earlier revealed draws in the current round. All expectations below are over client samples and local\nstochastic-gradient draws.\n\nThe **round-$r$ client drift at gradient-query points** is\n$$ E_r=\\frac1{KN}\\sum_{i=1}^N\\sum_{k=1}^K \\mathbb E\\|y_{i,k-1}^r-x_{r-1}\\|_2^2. $$\nFor every client and local-step index, initialize a stored anchor\n$\\alpha_{i,k}^0=x_0$ and stored gradient $\\gamma_{i,k}^0=\\nabla f_i(x_0)$.\nAfter round $r$, if client $i$ was selected, set\n$\\alpha_{i,k}^r=y_{i,k-1}^r$ and let $\\gamma_{i,k}^r$ be the actual\nstochastic gradient draw used at that local query. If client $i$ was not\nselected, retain both previous stored values. Thus the anchors and stored\ngradients record the most recent query and its realized oracle output for\neach local-step index.\n\nWhen $f$ is convex with minimizer $x^\\star$, the **round-$r$ convex control\nlag** is the average second moment of the mean full-gradient error at the\nstored anchors:\n$$ C_r=\\frac1N\\sum_{i=1}^N\\mathbb E\\left\\| \\frac1K\\sum_{k=1}^K\\nabla f_i(\\alpha_{i,k}^r) -\\nabla f_i(x^\\star)\\right\\|_2^2. $$\nFor the nonconvex analysis, the **round-$r$ control-tracking error** is\n$$ \\Xi_r=\\frac1{KN}\\sum_{i=1}^N\\sum_{k=1}^K \\mathbb E\\|\\alpha_{i,k}^r-x_r\\|_2^2. $$\nThus $\\Xi_0=0$ and each stored anchor records the point at which that client's\ncorresponding control-gradient sample was evaluated.\n\nThe query-point indexing in $E_r$ is deliberate: the gradient-difference\nterms in the variance and drift recurrences are evaluated at $y_{i,k-1}^r$.\nIt is not interchangeable with an average over the post-update endpoints\n$y_{i,k}^r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-convex-gradient-step-nonexpansive",
+          "source_section": "Statement",
+          "quote": "Let $h:\\mathbb R^d\\to\\mathbb R$ be convex and differentiable with\n$\\beta$-Lipschitz gradient, where $\\beta>0$. For every\n$0\\le\\eta\\le2/\\beta$ and $x,y\\in\\mathbb R^d$,\n$$ \\|x-y-\\eta(\\nabla h(x)-\\nabla h(y))\\|_2\\le\\|x-y\\|_2. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-relaxed-euclidean-squared-norm",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v\\in\\mathbb R^d$ and $a>0$,\n$$ \\|u+v\\|_2^2\\le(1+a)\\|u\\|_2^2+(1+a^{-1})\\|v\\|_2^2, \\qquad 2|\\langle u,v\\rangle|\\le a\\|u\\|_2^2+a^{-1}\\|v\\|_2^2. $$\nFor $m\\ge1$ vectors $u_1,\\ldots,u_m\\in\\mathbb R^d$,\n$$ \\left\\|\\sum_{j=1}^m u_j\\right\\|_2^2\\le m\\sum_{j=1}^m\\|u_j\\|_2^2. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-smooth-convex-gradient-difference",
+          "source_section": "Statement",
+          "quote": "Let $h_1,\\ldots,h_N:\\mathbb R^d\\to\\mathbb R$ be convex and continuously\ndifferentiable, with $\\beta$-Lipschitz gradients for $\\beta>0$. Put\n$f=N^{-1}\\sum_{i=1}^Nh_i$, and let $x^\\star$ minimize $f$. Then\n$$ \\frac1N\\sum_{i=1}^N \\|\\nabla h_i(x)-\\nabla h_i(x^\\star)\\|_2^2 \\le2\\beta\\bigl(f(x)-f(x^\\star)\\bigr) \\qquad(x\\in\\mathbb R^d). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and\n\n$$\n\\nabla F(x)=\\frac1n\\sum_{i=1}^n\\nabla f_i(x).\n$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-scaffold-control-tracking-identity",
+          "source_section": "Statement",
+          "quote": "Run SCAFFOLD with Option II for the client-control update and initialize\n$c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$. Let\n$\\alpha_{i,k}^r$ and $\\gamma_{i,k}^r$ be the stored local query anchors and\nrealized gradient draws from the SCAFFOLD trajectory-and-error definition.\nAssume each round uses a fresh uniform client sample independent of the preceding history. If each local stochastic gradient is conditionally unbiased at its query\npoint and has conditional variance at most $\\sigma^2$, then for every client\n$i$ and round $r\\ge0$,\n$$ c_i^r=\\frac1K\\sum_{k=1}^K\\gamma_{i,k}^r, \\qquad \\mathbb E[c_i^r]=\\frac1K\\sum_{k=1}^K\\mathbb E[\\nabla f_i(\\alpha_{i,k}^r)], \\qquad \\mathbb E\\left\\|c_i^r-\\frac1K\\sum_{k=1}^K\\nabla f_i(\\alpha_{i,k}^r)\\right\\|_2^2 \\le\\frac{\\sigma^2}{K}. $$\nAlso $c^r=N^{-1}\\sum_i c_i^r$ for every realization.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $K=1$, every query is the round-start point, so $E_r=0$ and the claim [given]\nfollows. Suppose $K\\ge2$. Put\n$m_i=K^{-1}\\sum_k\\nabla f_i(\\alpha_{i,k}^{r-1})$,\n$e_i=c_i^{r-1}-m_i$, $a_i=m_i-\\nabla f_i(x^\\star)$,\n$\\bar a=N^{-1}\\sum_i a_i$, and $\\bar e=N^{-1}\\sum_i e_i$. Since\n$c=N^{-1}\\sum_i c_i$ and $N^{-1}\\sum_i\\nabla f_i(x^\\star)=0$, the residual\nvector in client $i$'s update is\n$$ v_i=c-c_i+\\nabla f_i(x_{r-1}) =\\bar a-a_i+\\bar e-e_i+ (\\nabla f_i(x_{r-1})-\\nabla f_i(x^\\star)). $$\nFor each realization,\n$N^{-1}\\sum_i\\|\\bar a-a_i\\|_2^2\\le N^{-1}\\sum_i\\|a_i\\|_2^2$;\nthe same identity applies to $e_i$. Thus [F2], [F5], and [F7], followed by\nthe three-term squared-norm bound, give\n$$ \\frac1N\\sum_i\\mathbb E\\|v_i\\|_2^2 \\le3C_{r-1}+3\\frac{\\sigma^2}{K} +6\\beta\\mathbb E[f(x_{r-1})-f^\\star] \\le6\\left(C_{r-1}+\\beta\\mathbb E[f(x_{r-1})-f^\\star] +\\frac{\\sigma^2}{K}\\right). $$\nFor $d_{i,k}=y_{i,k}^r-x_{r-1}$, write the update as\n$d_{i,k}=T_i(y_{i,k-1}^r)-x_{r-1}-\\eta_l v_i-\\eta_l\\xi_{i,k}$,\nwhere $T_i(y)=y-\\eta_l(\\nabla f_i(y)-\\nabla f_i(x_{r-1}))$ and\n$\\xi_{i,k}=g_i(y_{i,k-1}^r)-\\nabla f_i(y_{i,k-1}^r)$. The vector before\n$\\xi_{i,k}$ is measurable before that draw, so conditional centering removes\nthe cross term and adds at most $\\eta_l^2\\sigma^2$. Apply [F3] and [F4]\nwith $a=1/(K-1)$; since $\\eta_l\\le1/(81\\beta K\\eta_g)\\le2/\\beta$,\n$$ \\mathbb E\\|d_{i,k}\\|_2^2 \\le\\left(1+\\frac1{K-1}\\right)\\mathbb E\\|d_{i,k-1}\\|_2^2 +K\\eta_l^2\\mathbb E\\|v_i\\|_2^2+\\eta_l^2\\sigma^2. $$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "A1",
+            "A2",
+            "given",
+            "algebra",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $d_{i,0}=0$ and [given]\n$\\sum_{j=0}^{k-1}(1+1/(K-1))^j\\le3K$ for $1\\le k\\le K$, the recurrence\nin step 1.1 bounds each query-point second moment by\n$3K(K\\eta_l^2\\mathbb E\\|v_i\\|_2^2+\\eta_l^2\\sigma^2)$. Average over\nclients and query indices and use the bound on $v_i$ from step 1.1. The\nresult is\n$$ E_r\\le18K^2\\eta_l^2\\left(C_{r-1}+\\beta\\mathbb E[f(x_{r-1})-f^\\star]\\right) +21K\\eta_l^2\\sigma^2. $$",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply step 1.2 by $3\\beta\\widetilde\\eta$ and substitute $\\eta_l=\\widetilde\\eta/(K\\eta_g)$. The coefficients of $C_{r-1}$, the function gap, and $\\sigma^2$ are respectively $54\\beta\\widetilde\\eta^3/\\eta_g^2$, $54\\beta^2\\widetilde\\eta^3/\\eta_g^2$, and $63\\beta\\widetilde\\eta^3/(K\\eta_g^2)$. Since $\\eta_g\\ge1$ and $\\beta\\widetilde\\eta\\le1/81$, these are at most $2\\widetilde\\eta^2/3$, $\\widetilde\\eta/(25\\eta_g^2)$, and $\\widetilde\\eta^2/(K\\eta_g^2)$, respectively. This proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Inherited N,K and S are positive, so E_r and C_r average nonempty client/query collections. At K=1 the one query is the round-start point, not an empty query sequence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused empty disposition: Inherited N,K and S are positive, so E_r and C_r average nonempty client/query collections. At K=1 the one query is the round-start point, not an empty query sequence. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "b714ab47b03a1eca45cbddf67598076bcc8be7318abb615513ecdbfd711278e0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Sigma=0 removes oracle residual terms; if the function gap and stored control lag also vanish,1.2 gives E_r=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused zero disposition: Sigma=0 removes oracle residual terms; if the function gap and stored control lag also vanish,1.2 gives E_r=0. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "6ef796bfab91d50595b03762e999a9be7d432c81b2e33d02f258c7492f6050c7"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof1.1 returns E_r=0 for K=1 before introducing1/(K-1). Anchor: Proof/Verification, step 1.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused one disposition: Proof1.1 returns E_r=0 for K=1 before introducing1/(K-1). Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "db8660888d6c23cd7e7fc3dde635e91e0a711a1897d7c81da1992d3af511c806"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Coincident initialized anchors have zero Xi; if all corrected local directions vanish, each query remains at the round start and the drift is0. The K=1 collapse is explicit in1.1. Anchor: Proof/Verification, step 1.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused degenerate disposition: Coincident initialized anchors have zero Xi; if all corrected local directions vanish, each query remains at the round start and the drift is0. The K=1 collapse is explicit in1.1. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "cf3e23f691dd5005d3d0a59a33a92feecacde2a5638a20578859b432c54ac96f"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The effective-step upper bound is inclusive;2.1 uses beta effective-step<=1/81 to bound all three coefficients without a limiting argument.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused endpoints disposition: The effective-step upper bound is inclusive;2.1 uses beta effective-step<=1/81 to bound all three coefficients without a limiting argument. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "2737da8c40b6a0430e0088bcdb2be1b52ca08133970a9ba32eea1527175fe389"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction. Anchor: Proof, step 1.1, with the explicitly declared Facts[A2] conditional-expectation assumption.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused nonempty-choice disposition: Facts[A2] explicitly assumes AC solely for the cited conditional-expectation-as-an-a.e.-class interface; the proof invokes that declared interface, without claiming a choice-free conditional-expectation construction. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "2aed67ce3472c71c618222213c45f4387e7a673245c8214d8a51246ad37408f0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The item states no biconditional or equivalence. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "48a22a2464bf9490550821bd3690e5717e8b940b93393de82544c640aa30ea04"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional or equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The item states no biconditional or equivalence. Actual item evidence: Proof1.1 separates K=1, then writes the stored-gradient and noise residual decomposition and uses a=1/(K-1) only for K>=2. Proof1.2 bounds query-point drift and2.1 absorbs coefficients with beta effective-step<=1/81; initialization and AC are explicitly recorded.",
+            "item_sha256": "103eaa3f711654be19292d9411cb99815a1e73f0f12a4d446eeb11bc954e40a1",
+            "row_sha256": "c5186e05c3275ccae7698d6bfed92e74b0ab36ef170b888c32f4036bfce85823"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Reviewed three steps and exact nonexpansive-gradient, tracking-identity, stored-anchor C, smooth-convex gradient, relaxed-square and conditional suppliers. Decomposing v_i into centered full-gradient-anchor error, centered residual and current gradient difference gives population second moment <=6(C+beta gap+sigma^2/K). K=1 has E=0. For K>=2 the nonexpansive deterministic step, relaxed square a=1/(K-1) and conditional error centering give the recurrence; its geometric sum <=3K yields E<=18K^2 eta_l^2(C+beta gap)+21K eta_l^2sigma^2. Multiplication by 3beta eta_tilde produces 54,54,63 coefficients. At beta eta_tilde<=1/81 these are bounded by 2/3,1/25,1 as claimed (54/81^2<1/25). eta_g>=1 and inherited AC are explicit. All full sample/noise-free cases valid; no diagram or defect."
+      }
+    },
+    "thm-sgd-stability-convex-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "source_section": "Statement",
+          "quote": "If a scalar-valued $f:U\\to\\mathbb R$ is totally differentiable at $a$, then $D_vf(a)=\\langle\\nabla f(a),v\\rangle$ for every $v$. Among unit vectors $v$, this is at most $\\|\\nabla f(a)\\|_2$; if the gradient is nonzero, equality holds exactly in the direction $\\nabla f(a)/\\|\\nabla f(a)\\|_2$. If the gradient is zero, every unit direction has directional derivative zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-convex-gradient-step-nonexpansive",
+          "source_section": "Statement",
+          "quote": "Let $h:\\mathbb R^d\\to\\mathbb R$ be convex and differentiable with\n$\\beta$-Lipschitz gradient, where $\\beta>0$. For every\n$0\\le\\eta\\le2/\\beta$ and $x,y\\in\\mathbb R^d$,\n$$ \\|x-y-\\eta(\\nabla h(x)-\\nabla h(y))\\|_2\\le\\|x-y\\|_2. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-uniform-stability",
+          "source_section": "Definition",
+          "quote": "Fix a supervised prediction problem with observation space $\\mathsf Z=\\mathsf X\\times\\mathsf Y$, measurable predictor class $\\mathcal F$, and nonnegative measurable loss $\\ell$. Write $L_f(x,y)=\\ell(f(x),y)$ for $f\\in\\mathcal F$. Fix a sample size $n\\ge1$. A randomized learning rule at this sample size consists of internal randomness $U_n$ with law $Q_n$, independent of the sample, and an output $A_n(S,U_n)\\in\\mathcal F$ for every ordered sample $S\\in\\mathsf Z^n$. Assume the expected test losses below are finite. For $\\varepsilon\\ge0$, the rule has **uniform replacement stability at level $\\varepsilon$** if, for every pair $S,S'\\in\\mathsf Z^n$ differing in at most one coordinate, and every test observation $z\\in\\mathsf Z$,\n\n$$\\left|\\mathbb E_{U_n}L_{A_n(S,U_n)}(z)-\\mathbb E_{U_n}L_{A_n(S',U_n)}(z)\\right|\\le\\varepsilon.$$\n\nThe absolute value is outside expectation over the internal randomness. No permutation-invariance condition is imposed on the learning rule.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-uniform-stability-implies-expected-generalization",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and consider a supervised prediction problem with measurable observation space $\\mathsf Z=\\mathsf X\\times\\mathsf Y$, probability law $P$, measurable predictor class $\\mathcal F$, and nonnegative measurable loss $\\ell$. For $f\\in\\mathcal F$ and $z=(x,y)$, write $L_f(z)=\\ell(f(x),y)$, $R_P(f)=\\int L_f(z)\\,P(dz)$, and, for $S=(Z_1,\\ldots,Z_n)$, $\\widehat R_S(f)=n^{-1}\\sum_{i=1}^nL_f(Z_i)$. Let $Z_1,\\ldots,Z_n$ be IID with law $P$, and let $U_n$ be internal randomness independent of the sample. Suppose the randomized learning rule $A_n(S,U_n)$ takes values in $\\mathcal F$, the joint loss map $(S,U_n,z)\\mapsto L_{A_n(S,U_n)}(z)$ is measurable, and all displayed risks are integrable. If $A_n$ has uniform replacement stability at level $\\varepsilon$, then\n\n$$\\left|\\mathbb E_{S,U_n}\\left[R_P(A_n(S,U_n))-\\widehat R_S(A_n(S,U_n))\\right]\\right|\\le\\varepsilon.$$\n\nThe expectation is over both the IID sample and the algorithm's internal randomness. No permutation-invariance assumption on $A_n$ is required.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivations-1.1",
+          "step": "1.1",
+          "claim": "Fix $w,z$ and suppose $\\nabla_wg(w,z)\\ne0$. Put $v=\\nabla_wg(w,z)/\\|\\nabla_wg(w,z)\\|_2$, which is a unit vector by [F3] and [F5]. The directional derivative of $t\\mapsto g(w+tv,z)$ at $0$ is $\\langle\\nabla_wg(w,z),v\\rangle=\\|\\nabla_wg(w,z)\\|_2$ by [F2] and [F4]. The $L$-Lipschitz inequality in the Statement bounds every difference quotient by $L$, so passage to the derivative gives $\\|\\nabla_wg(w,z)\\|_2\\le L$; the same bound is immediate when the gradient is zero.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivations-2.1",
+          "step": "2.1",
+          "claim": "Fix neighboring samples $S,S'$ differing at coordinate $j$ and couple their runs using the same index vector. Put $\\delta_t=\\|w_t(S)-w_t(S')\\|_2$, so $\\delta_0=0$. If $I_t\\ne j$, both runs apply the same convex-loss gradient step and [F6] gives $\\delta_t\\le\\delta_{t-1}$. If $I_t=j$, the triangle inequality from [F5] and step 1.1 give $\\delta_t\\le\\delta_{t-1}+2\\alpha_tL$. Thus, pathwise, $\\delta_t\\le\\delta_{t-1}+2\\alpha_tL\\mathbf1_{\\{I_t=j\\}}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivations-3.1",
+          "step": "3.1",
+          "claim": "Taking expectation in the pathwise inequality and using only $\\mathbb P(I_t=j)=1/n$ yields $\\mathbb E\\delta_t\\le\\mathbb E\\delta_{t-1}+2\\alpha_tL/n$. Summing from $t=1$ to $T$ gives $\\mathbb E\\delta_T\\le(2L/n)\\sum_{t=1}^T\\alpha_t$.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivations-4.1",
+          "step": "4.1",
+          "claim": "For every test observation $z$, the value-Lipschitz hypothesis gives $\\mathbb E_I|g(w_T(S),z)-g(w_T(S'),z)|\\le L\\mathbb E\\delta_T\\le(2L^2/n)\\sum_t\\alpha_t$. Hence the absolute difference of the two expected losses is at most this value, proving the stated uniform stability.",
+          "inputs": [
+            "F7",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivations-5.1",
+          "step": "5.1",
+          "claim": "The sample is IID by [F10], the index vector is independent of it by [A1], and the risk maps $R_P(f_{w_T})$ and $\\widehat R_S(f_{w_T})$ are measurable and integrable by [A2]; they use the loss and risk conventions of [F9]. Apply [F8] with the stability level from step 4.1 to obtain the expected generalization bound.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F8",
+            "F9",
+            "F10",
+            "step 4.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes n,T,d≥1, excluding zero sample size, horizon, and dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits L=0 and zero step sizes; step 1.1 then gives zero gradients and the bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 and T=1; steps 2.1–3.1 use the same one-coordinate marginal calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When L=0, step 1.1 makes every gradient zero and steps 2.1–5.1 yield zero stability and gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The step-size interval includes αt=0 and αt=2/β, as used by supplier [F6] in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof couples two fixed runs with the same finite index vector and invokes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an upper-bound implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an upper-bound implication, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-55",
+        "notes": "Checked all five steps, loss domains, differentiability, joint measurability and all cited supplier statements. Normalizing a nonzero gradient and taking its directional derivative gives norm<=L; zero gradient is treated separately. Same-index coupling gives pathwise delta_t<=delta_(t-1)+2 alpha_t L 1_(I_t=j); only uniform marginals are used in expectation, so no conditional or cross-time independence is smuggled in. Fixed initialization, finite T and n>=1, L=0, zero steps and alpha=2/beta all work. Finite index-vector support makes expected test losses finite for each fixed sample/test point. The IID/integrability assumptions permit the previously reviewed generalization theorem. Batch-30 supplier is mathematically sound after the immediate supporting-line derivation recorded in this report, but its unexpanded inference and inaccurate SCAFFOLD citation remain explicitly routed owner debts; this review does not mark those repairs complete. HRS section 3.3 Theorem 3.8 and Matni section 4 pp.5-6 checked. No AC or diagrams."
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "46",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "def-sample-covariance-empirical-spectral-distribution",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "3025bc97e0f430bf5ddbb319e25fd1f0975af633267b36687f50b30052287c45",
+      "outcome": "false_positive",
+      "reason": "The Definition explicitly quantifies over positive integers n,p and the family (X_n)_{n>=1}; n=0 is outside its declared domain, so S_0 and p_0 are neither required nor evaluated. The zero-based real-sequence definition in items/def-sequence.md does not make this explicitly indexed matrix family inconsistent: set Y_k=X_{k+1} and q_k=p_{k+1} for k in N to obtain S(Y_k)=X_{k+1}^T X_{k+1}/(k+1), with no zero denominator. Reindexing preserves every tail and convergence assertion. Replacing n rows by n+1 rows in the existing notation is unnecessary; no logical or domain defect is present.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-sample-covariance-empirical-spectral-distribution",
+      "disposition": "unaffected",
+      "post_sha256": "a4961850a2db64c7b4f355747e306e859cd3aafb540867b402699211f6db0a59",
+      "review_context_sha256": "5b687bac4741437f9ece46addb22b8e173d789e8ae52d30394ce884c56eab372",
+      "reason": "Reviewed the complete Definition, its owning contract and manifest, both home pages, the actual spectral/Dirac/probability interfaces, and the complete well-definedness lemma. For n,p>=1, v^T S(X)v=||Xv||^2/n>=0; the real spectral theorem supplies p real eigenvalues with multiplicity, and their equally weighted Dirac sum has total mass one. Maxima exist on the nonempty finite list, and the smallest positive eigenvalue has an explicit nonemptiness guard. The n>=1 family is explicitly indexed and can be reindexed by k=n-1 without changing its matrices or normalization. The complete Definition is hyperlink-free; references follow it. There are no diagrams or phase proofs. Item, contract, manifest and pages are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_review_complete",
+    "changed_files": [],
+    "interface_changes": false,
+    "propagation": "No Statement or Definition changed; no downstream event or maintenance repair is triggered.",
+    "ledger_disposition": "No confirmed defect or published-consumer finding in this assignment; no canonical defect-ledger or published-ledger update is proposed.",
+    "source_use": "Elementary finite-dimensional Gram-matrix, spectral-measure and reindexing arguments are familiar. No external source was consulted or claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-sample-covariance-empirical-spectral-distribution.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-sample-covariance-empirical-spectral-distribution.md --json",
+        "exit_code": 0,
+        "result": "not-applicable; 0 proofs checked, 0 failures."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-sample-covariance-empirical-spectral-distribution.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items def-sample-covariance-empirical-spectral-distribution",
+        "exit_code": 0,
+        "result": "Current item guard matches the frozen assignment before guard; both returned hashes are copied into the review."
+      }
+    ],
+    "unresolved_obligations": []
+  }
+}

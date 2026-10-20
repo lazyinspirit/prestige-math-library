@@ -1,0 +1,12 @@
+
+for(const[name,mutate]of Object.entries({
+ 'short owner reason':f=>f.entry.reason='weak',
+ 'changed current source digest even rebound':f=>{f.current.item_sha256='f'.repeat(64);f.entry.current_carrier_sha256=hash(f.current)},
+ 'different risk reviewer even rebound':f=>{f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>{d.contracts[f.decision.id].risk_review.reviewer='/root';f.current.contract_sha256=hash(d.contracts[f.decision.id]);f.entry.current_carrier_sha256=hash(f.current)})},
+ 'extra risk field even rebound':f=>{f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>{d.contracts[f.decision.id].risk_review.coverage_adopted=true;f.current.contract_sha256=hash(d.contracts[f.decision.id]);f.entry.current_carrier_sha256=hash(f.current)})},
+ 'nonreview field added even rebound':f=>{f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>{d.contracts[f.decision.id].new_waiver=true;f.current.contract_sha256=hash(d.contracts[f.decision.id]);f.entry.current_carrier_sha256=hash(f.current)})},
+ 'duplicate manifest home':f=>f.json(`research/${f.run}-batch-45.pages.json`,d=>{const p=d.find(p=>p.items.some(x=>x.id===f.decision.id));p.items.push(p.items.find(x=>x.id===f.decision.id))}),
+ 'different manifest page':f=>f.json(`research/${f.run}-batch-45.pages.json`,d=>{d.find(p=>p.items.some(x=>x.id===f.decision.id)).id+='-moved'}),
+ 'same bytes at an unpinned evidence path':f=>{const old=f.entry.native_report.path,path=`research/${f.run}-other-report.md`;writeFileSync(join(f.root,path),readFileSync(join(f.root,old)));f.entry.native_report.path=path}
+}))test('independent reject '+name,actual,t=>{const f=fixture(t);mutate(f);assert.equal(f.check(),false)});
+test('independent existing recursive freezer pins own-run artifacts without transcript',actual,async t=>{const f=fixture(t),{pathToFileURL}=await import('node:url'),{ownerRepairEvidenceClosure}=await import(pathToFileURL(resolve('tools/step3-owner-stabilized-source-identical-continuity.mjs')).href);writeFileSync(join(f.root,`research/${f.run}-step3-owner-repair-evidence.json`),JSON.stringify({version:1,run:f.run,source_identical_reversions:[f.entry]}));const out=ownerRepairEvidenceClosure(f.root,f.run,{required:true});assert.equal(out[f.entry.native_result.path],f.entry.native_result.sha256);assert.equal(out[f.entry.pre_contract.path],f.entry.pre_contract.sha256);assert.ok(Object.keys(out).every(p=>!p.endsWith('.log')))});

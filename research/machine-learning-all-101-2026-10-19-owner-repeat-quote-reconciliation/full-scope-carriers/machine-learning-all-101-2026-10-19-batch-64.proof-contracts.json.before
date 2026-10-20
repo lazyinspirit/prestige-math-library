@@ -1,0 +1,798 @@
+{
+  "version": 1,
+  "scope": [
+    "def-normalizing-flow",
+    "thm-change-of-variables-density-for-diffeomorphic-flow",
+    "thm-triangular-flow-universal-density-representation",
+    "ex-affine-coupling-triangular-jacobian",
+    "ex-singular-data-support-limitation"
+  ],
+  "contracts": {
+    "def-normalizing-flow": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires d>=1 and a nonempty open domain U supporting a probability density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The base density may vanish at points; the definition requires only nonnegativity, measurability, and total integral one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits d=1 and a one-stage flow."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Each stage is required to be a bijection with a C1 inverse, so degenerate noninvertible maps are outside the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Domains are open sets and the definition makes no assertion about boundary values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed for the model-measure clause, and its Borel preimages are Lebesgue measurable by the listed suppliers. See the Definition, model-measure paragraph."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a flow and its model measure; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a flow and its model measure; it states no biconditional."
+        }
+      ]
+    },
+    "thm-change-of-variables-density-for-diffeomorphic-flow": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets (Finite, countably infinite, countable, uncountable) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-normalizing-flow",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that both $T$ and $T^{-1}$ are continuously differentiable. Here $C^1$ means totally differentiable at every point with continuous derivative matrix. Such a map is a **global $C^1$ diffeomorphism**. A finite composition $T=T_K\\circ\\cdots\\circ T_1$ of global $C^1$ diffeomorphisms between open subsets of $\\mathbb R^d$ is a **normalizing flow**.\n\nA **base density** on $U$ is a Lebesgue-measurable function $p_U:U\\to[0,\\infty]$ with $\\int_U p_U\\,d\\lambda_d=1$. It defines the probability measure $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$.\n\nFor the model-measure construction, assume the Axiom of Countable Choice. The model measure on $V$ is $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. This value is defined because the inverse $C^1$ diffeomorphism maps Borel sets to Lebesgue-measurable sets under Countable Choice. When this measure has a Lebesgue density, that density is the model density.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\nThe indefinite integral of a nonnegative measurable function is a measure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n(The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ (The Borel sigma-algebra of a topological space) is Lebesgue\nmeasurable (Lebesgue measurable sets, the family $\\mathcal{L}(\\mathbb{R}^n)$, and the restricted set function $\\lambda_n$). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice (The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$)). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $E \\subseteq U$ is Lebesgue measurable, then $T(E)$ is\nLebesgue measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$). The partial derivatives are those of Directional derivatives and partial derivatives of a map $U\\subseteq\\mathbb{R}^m\\to\\mathbb{R}^n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g=(g_1,\\ldots,g_n):U\\to\\mathbb R^n$ be $C^1$. Its **Jacobian matrix** at $x\\in U$ is\n$$Dg(x)=\\left(\\frac{\\partial g_i}{\\partial x_j}(x)\\right)_{1\\le i,j\\le n},$$\nthe matrix of the total derivative in the standard bases. Its **Jacobian determinant** is\n$$\\det Dg(x).$$\nThe change-of-variables scale factor is $|\\det Dg(x)|$. Thus an orientation-reversing derivative and an orientation-preserving derivative with the same volume scale have the same change-of-variables factor.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "source_section": "Statement",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from A total pointwise product for extended-real-valued functions, and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\nThe positive and negative parts of a function. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "density-version-is-measurable",
+          "claim": "For every $a\\in\\mathbb R$, the superlevel set $E_a=\\{u\\in U:p_U(u)>a\\}$ is Lebesgue measurable, and $\\{x\\in V:p_U(T^{-1}(x))>a\\}=T(E_a)$ is Lebesgue measurable by [F4]. Thus $p_U\\circ T^{-1}$ is measurable. The entries of $D(T^{-1})$ are continuous by the $C^1$ hypothesis, and [F8] makes its determinant continuous. Thus [F9] shows that $q$ is nonnegative measurable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "composition-chain-rule",
+          "claim": "For $z_0=u$ and $z_j=T_j(z_{j-1})$, repeated use of [F5] gives $DT(u)=DT_K(z_{K-1})\\cdots DT_1(z_0)$. For $x=z_K$, applying the chain rule to $T^{-1}=T_1^{-1}\\circ\\cdots\\circ T_K^{-1}$ gives $D(T^{-1})(x)=DT_1^{-1}(z_1)\\cdots DT_K^{-1}(z_K)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "pushforward-density-identity",
+          "claim": "Fix a Borel set $B\\subseteq V$ and put $E=T^{-1}(B)$. By [F4], $E$ is Lebesgue measurable. The function $h(u)=p_U(u)\\mathbf1_E(u)$ is nonnegative measurable by [F9]. Apply [F3] to $S=T^{-1}:V\\to U$ and $h$ to obtain $$\\mu_X(B)=\\int_Ep_U(u)\\,d\\lambda_d(u)=\\int_Vp_U(T^{-1}(x))\\mathbf1_B(x)|\\det D(T^{-1})(x)|\\,d\\lambda_d(x)=\\int_Bq(x)\\,d\\lambda_d(x).$$ Therefore $q$ is a density version of $\\mu_X$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "log-jacobian-addition",
+          "claim": "By [F6], determinants of each derivative composition are the products of the stage determinants. Each factor is nonzero: differentiating $T_j^{-1}\\circ T_j=\\operatorname{id}$ by [F5] gives a product equal to the identity matrix, whose determinant is $1$ by [F8]. Taking absolute values and then real logarithms yields both displayed additive formulas.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The source and target U,V are nonempty open probability domains, and the stage composition has K>=1. Its log-Jacobian sum therefore has at least one factor; the theorem does not claim the zero-stage identity-flow case. Empty measurable B is harmless, giving zero on both sides of proof 2.1.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The indexed family triggering the detector is the positive-length flow composition, whose K>=1 hypothesis excludes an empty stage list."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The base density may vanish; the formula remains nonnegative and gives zero at transformed zero-density points. See the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formula includes d=1 and reduces to the scalar inverse-derivative density formula. See the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A global C1 diffeomorphism has an invertible derivative at each point, as shown by differentiating the inverse identities. See step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is stated on open domains and makes no boundary extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly assumed and used by the measurable change-of-variables supplier; no full Axiom of Choice is used. See steps 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient density transformation formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient density transformation formula, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-64",
+        "notes": "Reviewed all four proof steps and all 13 direct suppliers. With Countable Choice, inverse images of target Borel sets and images of base Lebesgue threshold sets are measurable; the determinant is continuous and finite, and its absolute value is positive by the inverse chain identity. The measurable product permits infinite density values, including the indicator convention 0 times infinity = 0. Applying nonnegative change of variables to T inverse and h=p_U 1_E proves equality on every Borel set, including empty B; B=V proves normalization. Chain rule order and evaluation points agree for both forward and inverse compositions; determinant multiplicativity and nonzero factors justify real logs. d=1, zero density, disconnected open domains and K=1 cause no exception; K=0 and d=0 are excluded. Papamakarios v1 section 2.1 eqs (2)-(6) and Sheldon slides 9-18 agree. No diagram is present or required. No unresolved defect. Corrected the bibliography page range for section 2.2 to PDF pp. 4-5, preserving all mathematics."
+      }
+    },
+    "thm-triangular-flow-universal-density-representation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-normalizing-flow",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that both $T$ and $T^{-1}$ are continuously differentiable. Here $C^1$ means totally differentiable at every point with continuous derivative matrix. Such a map is a **global $C^1$ diffeomorphism**. A finite composition $T=T_K\\circ\\cdots\\circ T_1$ of global $C^1$ diffeomorphisms between open subsets of $\\mathbb R^d$ is a **normalizing flow**.\n\nA **base density** on $U$ is a Lebesgue-measurable function $p_U:U\\to[0,\\infty]$ with $\\int_U p_U\\,d\\lambda_d=1$. It defines the probability measure $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$.\n\nFor the model-measure construction, assume the Axiom of Countable Choice. The model measure on $V$ is $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. This value is defined because the inverse $C^1$ diffeomorphism maps Borel sets to Lebesgue-measurable sets under Countable Choice. When this measure has a Lebesgue density, that density is the model density.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-change-of-variables-density-for-diffeomorphic-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that $T$ and $T^{-1}$ are both $C^1$. Let $p_U:U\\to[0,\\infty]$ be Lebesgue measurable with $\\int_U p_U\\,d\\lambda_d=1$, and define $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$ and $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. Then\n\n$$q(x)=p_U(T^{-1}(x))\\,|\\det D(T^{-1})(x)|$$\n\nis Lebesgue measurable and satisfies $\\mu_X(B)=\\int_Bq\\,d\\lambda_d$ for every Borel $B\\subseteq V$. Thus $q$ is a version of the density of the transformed measure.\n\nLet $K\\ge1$, let $U_0,\\ldots,U_K$ be nonempty open subsets of $\\mathbb R^d$, and let $T_j:U_{j-1}\\to U_j$ be a $C^1$ diffeomorphism for $j=1,\\ldots,K$. For $T=T_K\\circ\\cdots\\circ T_1$, $u\\in U_0$, and $z_0=u$, $z_j=T_j(z_{j-1})$, the log-Jacobian terms add:\n\n$$\\log|\\det DT(u)|=\\sum_{j=1}^K\\log|\\det DT_j(z_{j-1})|.$$\n\nEquivalently, for $z_K=x\\in U_K$ and $z_{j-1}=T_j^{-1}(z_j)$,\n\n$$\\log|\\det DT^{-1}(x)|=\\sum_{j=1}^K\\log|\\det DT_j^{-1}(z_j)|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g=(g_1,\\ldots,g_n):U\\to\\mathbb R^n$ be $C^1$. Its **Jacobian matrix** at $x\\in U$ is\n$$Dg(x)=\\left(\\frac{\\partial g_i}{\\partial x_j}(x)\\right)_{1\\le i,j\\le n},$$\nthe matrix of the total derivative in the standard bases. Its **Jacobian determinant** is\n$$\\det Dg(x).$$\nThe change-of-variables scale factor is $|\\det Dg(x)|$. Thus an orientation-reversing derivative and an orientation-preserving derivative with the same volume scale have the same change-of-variables factor.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conditional-cdf-jacobian",
+          "claim": "Define $S:\\mathbb R^d\\to(0,1)^d$ by $S_i(x)=F_i(x_i\\mid x_{<i})$. Joint $C^1$ regularity makes $S$ $C^1$. Each $S_i$ depends only on $x_1,\\ldots,x_i$, so $DS(x)$ is lower triangular; its $i$th diagonal entry is $\\partial_{x_i}F_i(x_i\\mid x_{<i})=q_i(x_i\\mid x_{<i})>0$. By [F3] and the factorization hypothesis, $\\det DS(x)=\\prod_{i=1}^d q_i(x_i\\mid x_{<i})=p(x)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "recursive-global-bijection",
+          "claim": "For any $u\\in(0,1)^d$, choose $x_1=F_1^{-1}(u_1)$, then recursively choose the unique $x_i=F_i^{-1}(u_i\\mid x_{<i})$. The slice bijections make every coordinate exist and be unique, and construction gives $S(x)=u$. Conversely, any $x$ with $S(x)=u$ must have these same coordinates by induction. Hence $S$ is bijective, and the recursive formula shows that $T=S^{-1}$ is triangular.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "global-inverse-is-c1",
+          "claim": "By step 1.1, $DS(x)$ is invertible at every $x$. Applying [F4] at each point gives a $C^1$ local inverse; because $S$ is globally bijective, each local inverse agrees with the same set-theoretic map $S^{-1}$. Therefore $S^{-1}$ is globally $C^1$, so $T$ is a global $C^1$ diffeomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "uniform-base-pushes-to-target",
+          "claim": "By [F7], density $1$ on $(0,1)^d$ is a probability density. Apply [F5] to $T=S^{-1}$: the output density at $x$ is $1\\cdot|\\det DS(x)|=p(x)$ by step 1.1. Thus the uniform base pushes forward to the target density $p$, as claimed. Countable Choice is used here through [F5] and [F7]; the recursive inverse construction uses only uniqueness of each conditional quantile.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At i=1, x_<1 is explicitly the unique vector of R^0, so the first conditional CDF has no preceding-coordinate inputs. Proof 1.2 starts with x1=F1^{-1}(u1), then recurses only for i>=2. For d=1 that remaining recursion is empty and the same scalar diffeomorphism gives the conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The target density and every conditional density factor are strictly positive; zero-density targets are outside the stated representation theorem. See the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1 the construction is the single conditional CDF and its inverse. See step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Every diagonal Jacobian entry is positive, so the constructed map has no singular derivative. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each conditional CDF maps R onto the open interval (0,1); cube-boundary points are excluded from the flow domain. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The density formula and cube-volume fact require Countable Choice; each recursive conditional inverse is unique, so the construction selects no arbitrary representatives. See step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient representational result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient representational result, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-64",
+        "notes": "Independently reviewed all four steps and nine direct suppliers. Joint C1 regularity gives lower-triangular DS with positive diagonal q_i; the exact pointwise factorization gives det DS=p>0. Each stipulated slice is a bijection R to (0,1), so finite recursion defines the unique preimage of every cube point and proves both injectivity and surjectivity. No arbitrary choices occur. The local inverse theorem is used only after global bijectivity; all local inverses coincide with the unique global inverse and hence establish its C1 regularity. Unit open-cube volume is one under Countable Choice; inverse-Jacobian transport gives exactly p. d=1 and the empty preceding vector in R^0 are covered, endpoints u=0,1 are excluded, and zero densities are outside the hypotheses. This is conditional exact representation, not a network approximation or training claim. Papamakarios section 2.2 eqs (7)-(11) is on PDF pp. 4-5; corrected the locator. The source shortcut from nonzero determinant to global invertibility is not used. No diagram or new prerequisite is needed; no unresolved defect."
+      }
+    },
+    "ex-affine-coupling-triangular-jacobian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-normalizing-flow",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that both $T$ and $T^{-1}$ are continuously differentiable. Here $C^1$ means totally differentiable at every point with continuous derivative matrix. Such a map is a **global $C^1$ diffeomorphism**. A finite composition $T=T_K\\circ\\cdots\\circ T_1$ of global $C^1$ diffeomorphisms between open subsets of $\\mathbb R^d$ is a **normalizing flow**.\n\nA **base density** on $U$ is a Lebesgue-measurable function $p_U:U\\to[0,\\infty]$ with $\\int_U p_U\\,d\\lambda_d=1$. It defines the probability measure $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$.\n\nFor the model-measure construction, assume the Axiom of Countable Choice. The model measure on $V$ is $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. This value is defined because the inverse $C^1$ diffeomorphism maps Borel sets to Lebesgue-measurable sets under Countable Choice. When this measure has a Lebesgue density, that density is the model density.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-density-for-diffeomorphic-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that $T$ and $T^{-1}$ are both $C^1$. Let $p_U:U\\to[0,\\infty]$ be Lebesgue measurable with $\\int_U p_U\\,d\\lambda_d=1$, and define $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$ and $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. Then\n\n$$q(x)=p_U(T^{-1}(x))\\,|\\det D(T^{-1})(x)|$$\n\nis Lebesgue measurable and satisfies $\\mu_X(B)=\\int_Bq\\,d\\lambda_d$ for every Borel $B\\subseteq V$. Thus $q$ is a version of the density of the transformed measure.\n\nLet $K\\ge1$, let $U_0,\\ldots,U_K$ be nonempty open subsets of $\\mathbb R^d$, and let $T_j:U_{j-1}\\to U_j$ be a $C^1$ diffeomorphism for $j=1,\\ldots,K$. For $T=T_K\\circ\\cdots\\circ T_1$, $u\\in U_0$, and $z_0=u$, $z_j=T_j(z_{j-1})$, the log-Jacobian terms add:\n\n$$\\log|\\det DT(u)|=\\sum_{j=1}^K\\log|\\det DT_j(z_{j-1})|.$$\n\nEquivalently, for $z_K=x\\in U_K$ and $z_{j-1}=T_j^{-1}(z_j)$,\n\n$$\\log|\\det DT^{-1}(x)|=\\sum_{j=1}^K\\log|\\det DT_j^{-1}(z_j)|.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $g=(g_1,\\ldots,g_n):U\\to\\mathbb R^n$ be $C^1$. Its **Jacobian matrix** at $x\\in U$ is\n$$Dg(x)=\\left(\\frac{\\partial g_i}{\\partial x_j}(x)\\right)_{1\\le i,j\\le n},$$\nthe matrix of the total derivative in the standard bases. Its **Jacobian determinant** is\n$$\\det Dg(x).$$\nThe change-of-variables scale factor is $|\\det Dg(x)|$. Thus an orientation-reversing derivative and an orientation-preserving derivative with the same volume scale have the same change-of-variables factor.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "affine-coupling-is-global-diffeomorphism",
+          "claim": "Define $\\widehat T(x,y)=(x,y-x)$. Direct substitution gives $\\widehat T(T(u,v))=(u,v)$ and $T(\\widehat T(x,y))=(x,y)$. Both maps are linear, so their first-order remainders vanish and their derivative matrices are constant; by [F1] they are $C^1$. Thus they are inverse bijections and $T$ is a global $C^1$ diffeomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "triangular-jacobian-determinant",
+          "claim": "The linear map $T(u,v)=(u,u+v)$ has matrix $\\begin{pmatrix}1&0\\\\1&1\\end{pmatrix}$, which is its Jacobian matrix by [F3]. It is lower triangular, so [F4] gives determinant $1\\cdot1=1$. Its inverse has Jacobian matrix $\\begin{pmatrix}1&0\\\\-1&1\\end{pmatrix}$, also lower triangular with determinant $1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "affine-coupling-density",
+          "claim": "Apply [F2] to the base density $p_U$ and the inverse from step 1.1. Step 1.2 gives $|\\det D(T^{-1})(x,y)|=1$, so the transformed density version is $p_X(x,y)=p_U(x,y-x)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty domain R^2 and the single unit-scale map T(u,v)=(u,u+v)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The base density may vanish; the exact transformed density formula still applies. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one unchanged coordinate and one transformed coordinate in ambient dimension two. See the Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example fixes unit scale; its Jacobian determinant is exactly 1 and the map is never degenerate. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The map is defined on all of R^2 and no boundary claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is explicitly carried only for the density transformation theorem; no arbitrary choice is used in the map construction. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one affine coupling and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one affine coupling and states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-64",
+        "notes": "Reviewed all three verification steps and seven direct suppliers. Direct composition of T(u,v)=(u,u+v) with (x,y-x) gives both identity maps on all R2. Both maps are linear, with constant lower-triangular derivative matrices having diagonals (1,1); both determinants equal one. The density theorem under the explicit Countable Choice hypothesis therefore gives p_U(x,y-x) as a density version, also for vanishing or infinite density values. Domain has no endpoints and the fixed unit scale cannot degenerate. Checked Papamakarios section 3.1.1 eqs (32)-(33), PDF pp. 12-13, and Sheldon slides 22-24, PDF p. 6. Corrected the Papamakarios locator from pp. 13-14; no mathematical interface changed. No diagram is present or needed and no unresolved defect remains."
+      }
+    },
+    "ex-singular-data-support-limitation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-density-for-diffeomorphic-flow",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that $T$ and $T^{-1}$ are both $C^1$. Let $p_U:U\\to[0,\\infty]$ be Lebesgue measurable with $\\int_U p_U\\,d\\lambda_d=1$, and define $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$ and $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. Then\n\n$$q(x)=p_U(T^{-1}(x))\\,|\\det D(T^{-1})(x)|$$\n\nis Lebesgue measurable and satisfies $\\mu_X(B)=\\int_Bq\\,d\\lambda_d$ for every Borel $B\\subseteq V$. Thus $q$ is a version of the density of the transformed measure.\n\nLet $K\\ge1$, let $U_0,\\ldots,U_K$ be nonempty open subsets of $\\mathbb R^d$, and let $T_j:U_{j-1}\\to U_j$ be a $C^1$ diffeomorphism for $j=1,\\ldots,K$. For $T=T_K\\circ\\cdots\\circ T_1$, $u\\in U_0$, and $z_0=u$, $z_j=T_j(z_{j-1})$, the log-Jacobian terms add:\n\n$$\\log|\\det DT(u)|=\\sum_{j=1}^K\\log|\\det DT_j(z_{j-1})|.$$\n\nEquivalently, for $z_K=x\\in U_K$ and $z_{j-1}=T_j^{-1}(z_j)$,\n\n$$\\log|\\det DT^{-1}(x)|=\\sum_{j=1}^K\\log|\\det DT_j^{-1}(z_j)|.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-normalizing-flow",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$, let $U,V\\subseteq\\mathbb R^d$ be nonempty open sets, and let $T:U\\to V$ be a bijection such that both $T$ and $T^{-1}$ are continuously differentiable. Here $C^1$ means totally differentiable at every point with continuous derivative matrix. Such a map is a **global $C^1$ diffeomorphism**. A finite composition $T=T_K\\circ\\cdots\\circ T_1$ of global $C^1$ diffeomorphisms between open subsets of $\\mathbb R^d$ is a **normalizing flow**.\n\nA **base density** on $U$ is a Lebesgue-measurable function $p_U:U\\to[0,\\infty]$ with $\\int_U p_U\\,d\\lambda_d=1$. It defines the probability measure $\\mu_U(A)=\\int_Ap_U\\,d\\lambda_d$ for Lebesgue-measurable $A\\subseteq U$.\n\nFor the model-measure construction, assume the Axiom of Countable Choice. The model measure on $V$ is $\\mu_X(B)=\\mu_U(T^{-1}(B))$ for Borel $B\\subseteq V$. This value is defined because the inverse $C^1$ diffeomorphism maps Borel sets to Lebesgue-measurable sets under Countable Choice. When this measure has a Lebesgue density, that density is the model density.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "line-supported-target-is-probability",
+          "claim": "The function $i$ is continuous, so [F3] makes $i^{-1}(B)$ Borel for every Borel $B\\subseteq\\mathbb R^2$. For pairwise disjoint Borel sets $B_n$, their preimages are pairwise disjoint and $i^{-1}(\\bigcup_nB_n)=\\bigcup_ni^{-1}(B_n)$; countable additivity of $\\nu$ therefore makes $\\mu$ a measure. By [F1] and [F4], $\\nu([0,1])=\\int_{[0,1]}1\\,d\\lambda_1=\\lambda_1([0,1])=1$, whence $\\mu(\\mathbb R^2)=1$ and $\\mu(M)=\\nu([0,1])=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "line-segment-is-ambient-null",
+          "claim": "The set $M=[0,1]\\times\\{0\\}=[0,1]\\times[0,0]$ is a closed box, hence Borel by [F4]. Its second side is degenerate, so [F5] gives $\\lambda_2(M)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "flow-output-gives-null-line-zero-mass",
+          "claim": "By [F7] and [F2], the flow output has a nonnegative Lebesgue density $q$ on $\\mathbb R^2$. Applying [F1] and [F6] to the null set $M$ gives $\\mu_X(M)=\\int_Mq\\,d\\lambda_2=0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "mass-contradiction",
+          "claim": "The target measure satisfies $\\mu(M)=1$ by step 1.1, whereas every such flow output satisfies $\\mu_X(M)=0$ by step 1.3. Therefore $\\mu_X\\ne\\mu$, so no full-dimensional flow in the stated class represents this target law exactly.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonempty segment [0,1]x{0} and a probability measure of mass one on it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The line-supported target gives the segment mass one, while every full-dimensional flow density gives that null segment mass zero. See steps 1.1 and 1.3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns an ambient two-dimensional flow and a one-dimensional target segment; it asserts no one-dimensional flow limitation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The support segment is a closed box with a degenerate second side, so the published null-set result applies exactly. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The contradiction uses total mass on the closed segment; it makes no endpoint-atom claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Countable Choice assumptions of the box-volume, null-set, and density suppliers are declared; no full Axiom of Choice is used. See steps 1.2 and 1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes one nonrepresentability witness, not a characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes one nonrepresentability witness, not a characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-64",
+        "notes": "Reviewed all four verification steps and eight direct suppliers. The continuous embedding from [0,1] makes Borel preimages measurable in the interval. Preimages preserve disjoint unions, so the integrated unit interval law pushes to a probability; the entire segment has mass one. The closed segment is the degenerate box [0,1]x[0,0], Borel with two-dimensional Lebesgue measure zero. Every allowed full-dimensional diffeomorphic flow from a Lebesgue base density has a nonnegative Lebesgue output density by the reviewed density theorem; even infinite density on the segment integrates to zero there. Comparing masses 1 and 0 proves inequality of Borel laws. Interval endpoints do not change total mass or nullity; the result concerns exact representation on R2, not approximation or manifold-reference densities. Countable Choice is explicit at every supplier requiring it. Read Papamakarios sections 5.4-5.5, PDF pp. 35-38; corrected the old pp. 34-36 range that omitted section 5.5. Sheldon slides 9-15 gives background, not the null-set argument. No diagram or missing lemma is needed; no unresolved defect."
+      }
+    }
+  }
+}

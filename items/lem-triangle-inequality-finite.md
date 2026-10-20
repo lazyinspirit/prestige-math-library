@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-triangle-inequality-finite.json
   precheck: pass
   verified:
     model: claude-opus-5
@@ -43,10 +44,16 @@ pipeline_run: null
 ## Statement
 
 Let $a : \mathbb{N} \to \mathbb{R}$ be a sequence of reals and $n \in \mathbb{N}$,
-with finite sums as in [[def-finite-sum]] and the absolute value as in
-[[def-abs-value]]. Then
+with finite sums as in Finite sums and finite products, by recursion and the absolute value as in
+Absolute value in an ordered field. Then
 
 $$\Big|\sum_{k<n} a_k\Big| \le \sum_{k<n} |a_k|.$$
+
+## Statement references
+
+[[def-finite-sum]]
+
+[[def-abs-value]]
 
 ## Facts & Assumptions
 

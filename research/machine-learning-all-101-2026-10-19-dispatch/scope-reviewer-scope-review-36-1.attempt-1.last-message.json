@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "36",
+  "round": 1,
+  "reviewed_items": [
+    "lem-2dyck-pcfg-prefix-mass-positive",
+    "def-scaled-dot-product-attention",
+    "def-positional-encoding-and-causal-mask",
+    "lem-paired-crossentropy-mixture-bound",
+    "def-multihead-self-attention",
+    "def-hahn-hard-soft-attention-sequence-model",
+    "def-transformer-encoder-decoder-layer",
+    "lem-hard-attention-depth-reduction",
+    "thm-hard-attention-languages",
+    "lem-soft-attention-one-symbol-influence",
+    "thm-soft-attention-parity-chance-limit",
+    "alg-transformer-forward-pass",
+    "thm-transformer-permutation-equivariance-without-position",
+    "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+    "thm-transformer-formal-language-limits",
+    "lem-yun-transformer-grid-lookup",
+    "lem-dense-attention-cost-and-path-length",
+    "thm-fixed-width-transformer-lp-universality",
+    "ex-position-free-vs-position-encoded-token-order",
+    "ex-two-token-causal-next-token-mask",
+    "ex-fixed-length-vs-unbounded-sequence-limits"
+  ],
+  "reviewed_pages": [
+    "attention-and-transformer-expressivity",
+    "attention-and-transformer-expressivity-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The five prior findings are resolved, and the changed influence premise and its consumers were rechecked. Two local issues remain after the final review and require owner reconciliation.",
+  "findings": [
+    {
+      "id": "lem-yun-transformer-grid-lookup",
+      "type": "local",
+      "reason": "Step 1.2 claims the selective-shift difference is zero when a column code equals either threshold. At equality, the query scores are all zero and hardmax averages the codes, so the difference is generally nonzero. Later sweeps use half-grid thresholds and avoid equality, but the generic proof assertion remains false."
+    },
+    {
+      "id": "ex-fixed-length-vs-unbounded-sequence-limits",
+      "type": "local",
+      "reason": "The example says the parity result gives a limiting expected cross-entropy, while the theorem proves only a liminf lower bound. Its permitted bounded positional embeddings may vary with position and produce oscillating losses, so convergence is not guaranteed. State the liminf bound explicitly."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+      "decision": "accept",
+      "reason": "Its influence use is under the lemma's additive input convention; the paired prefixes differ at a nonfinal token and satisfy the stated target-law hypotheses."
+    },
+    {
+      "id": "thm-soft-attention-parity-chance-limit",
+      "decision": "accept",
+      "reason": "The additive convention is explicit, the paired-prefix use is valid, and the constant predictor is realized with a constant hidden state and linear readout."
+    },
+    {
+      "id": "thm-transformer-formal-language-limits",
+      "decision": "accept",
+      "reason": "The statement explicitly uses additive embeddings and the proof now establishes infinite expected length at p=1/2 through finite-generation truncations."
+    },
+    {
+      "id": "ex-fixed-length-vs-unbounded-sequence-limits",
+      "decision": "escalate",
+      "reason": "The influence consumer path is valid, but its parity fact overstates the theorem by implying convergence where only a liminf lower bound is proved."
+    },
+    {
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "decision": "accept",
+      "reason": "Its selective-shift applications use half-grid thresholds, so they avoid the equality case identified in the separate generic assertion."
+    }
+  ]
+}

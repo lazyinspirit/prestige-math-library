@@ -11,6 +11,7 @@ deps: [thm-non-negative-square-root-exists-and-is-unique, prop-adjoint-algebra]
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-singular-values-of-an-endomorphism.json
   audited: 2026-08-28
   precheck: pass
 sources:
@@ -27,14 +28,20 @@ product spaces. Because
 
 $$\langle T^*Tv,v\rangle=\langle Tv,Tv\rangle\ge0$$
 
-for every $v\in V$, and because $(T^*T)^*=T^*T$ by [[prop-adjoint-algebra]],
+for every $v\in V$, and because $(T^*T)^*=T^*T$ by Adjoints satisfy $(S+T)^*=S^*+T^*$, $(\lambda T)^*=\overline\lambda T^*$, $(ST)^*=T^*S^*$, and $T^{**}=T$,
 the operator $T^*T$ is non-negative. Let
 
 $$|T|:=\sqrt{T^*T},$$
 
 the unique non-negative square root from
-[[thm-non-negative-square-root-exists-and-is-unique]]. The **singular values**
+A non-negative operator has a unique non-negative square root. The **singular values**
 of $T$ are the eigenvalues of $|T|$, listed with multiplicity in weakly
 decreasing order.
 
 In particular, this definition applies to endomorphisms by taking $W=V$.
+
+## Definition references
+
+[[prop-adjoint-algebra]]
+
+[[thm-non-negative-square-root-exists-and-is-unique]]

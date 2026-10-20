@@ -1,0 +1,60 @@
+--- research/machine-learning-all-101-2026-10-19-batch-50.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-owner-native-smoke-deep-wasserstein/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-50.proof-contracts.json
+@@ -1606,7 +1606,10 @@
+           "case": "d=1 witness at n=2",
+           "inputs": "μ2=(3/4)δ0+(1/4)δ2",
+           "calculation": "Every coupling with second marginal δ0 is supported on R×{0}; the cost is ∫x²dμ2=1.",
+-          "result": "W2(μ2,δ0)=1 for this member of the stated tight narrowly convergent sequence."
++          "result": "W2(μ2,δ0)=1 for this member of the stated tight narrowly convergent sequence.",
++          "check": "ml101-w2-tight-tail-dirac-witness",
++          "asserts": "Assume the Axiom of Choice. For $d\\ge1$ and $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$, $W_2(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n$ converges narrowly to $\\mu$ and\n$$\\lim_{R\\to\\infty}\\sup_{n\\ge1}\\int_{\\{|x|>R\\}}|x|^2d\\mu_n(x)=0.$$\nTightness by itself is insufficient: for $e_1=(1,0,\\ldots,0)$ and $\\mu_n=(1-n^{-2})\\delta_0+n^{-2}\\delta_{ne_1}$, the sequence is tight and converges narrowly to $\\delta_0$, but $W_2(\\mu_n,\\delta_0)=1$ for every $n$.",
++          "fixture": "n-two-dirac-cost"
+         }
+       ],
+       "boundaries": [
+@@ -2464,13 +2467,19 @@
+           "case": "d=1",
+           "inputs": "ρ1=Φ/∫Φ with Φ(t)=φ(t+1)φ(1−t)",
+           "calculation": "The denominator is strictly positive and finite by step 2.1; scaling gives unit mass.",
+-          "result": "ρ1 is positive on (−1,1) and supported on [−1,1]."
++          "result": "ρ1 is positive on (−1,1) and supported on [−1,1].",
++          "check": "ml101-bump-one-dimensional-mass",
++          "asserts": "For $d=1$, $\\int\\rho_1=1$ by step 2.1. By step 3.1, $\\rho_d$ is a nonnegative Borel function supported in the compact cube. For $d\\ge2$, split $\\mathbb R^d=\\mathbb R^{d-1}\\times\\mathbb R$. By",
++          "fixture": "one-dimensional-bump"
+         },
+         {
+           "case": "d=2",
+           "inputs": "ρ2(x1,x2)=ψ(x1)ψ(x2)",
+           "calculation": "Tonelli gives ∫ρ2=(∫ψ)(∫ψ)=1.",
+-          "result": "ρ2 is supported on [−1,1]^2 and positive on its interior."
++          "result": "ρ2 is supported on [−1,1]^2 and positive on its interior.",
++          "check": "ml101-bump-two-dimensional-mass",
++          "asserts": "Define $\\rho_d(x_1,\\ldots,x_d)=\\prod_{j=1}^d\\psi(x_j)$. Repeated coordinatewise chain and product rules give every partial derivative as $\\prod_{j=1}^d\\psi^{(\\alpha_j)}(x_j)$ for its multi-index $\\alpha$, so all partial derivatives are continuous. The function is nonnegative, vanishes outside $[-1,1]^d$, and is positive at every point of $(-1,1)^d$; therefore its support is exactly that closed cube.",
++          "fixture": "two-dimensional-bump"
+         }
+       ],
+       "boundaries": [
+@@ -4038,7 +4047,10 @@
+           "case": "d=1, T=2, a=2, b=3",
+           "inputs": "μt=δ(2+3t)",
+           "calculation": "W2(μs,μt)=3|t−s| and the constant-field action is 2·3².",
+-          "result": "Metric speed 3 and action 18."
++          "result": "Metric speed 3 and action 18.",
++          "check": "ml101-w2-translated-dirac-action",
++          "asserts": "Assume AC. Let $T>0$ and $a,b\\in\\mathbb R^d$. The curve $\\mu_t=\\delta_{a+tb}$ belongs to $AC^2([0,T];\\mathcal P_2(\\mathbb R^d))$, has constant metric speed $|b|$, and the Borel field $v_t(x)=b$ solves the continuity equation. Its action is $T|b|^2$, equal to the minimum action among fields solving that equation for this curve.",
++          "fixture": "a-two-b-three-T-two"
+         }
+       ],
+       "boundaries": [
+@@ -4279,7 +4291,10 @@
+           "case": "d=1, m0=0, m1=2, σ0=1, σ1=3",
+           "inputs": "μt=Law(2t+(1+2t)ξ)",
+           "calculation": "W2(μ0,μ1)²=4+(3−1)²=8; midpoint mean and scale are 1 and 2.",
+-          "result": "Endpoint distance 2√2 and constant-speed subsegments."
++          "result": "Endpoint distance 2√2 and constant-speed subsegments.",
++          "check": "ml101-w2-isotropic-gaussian-geodesic",
++          "asserts": "Assume AC. Let $d\\ge1$, $m_0,m_1\\in\\mathbb R^d$, and $\\sigma_0,\\sigma_1>0$. Let $\\xi$ have density $(2\\pi)^{-d/2}e^{-|z|^2/2}$ on $\\mathbb R^d$, put $m_t=(1-t)m_0+tm_1$ and $\\sigma_t=(1-t)\\sigma_0+t\\sigma_1$, and set $\\mu_t=\\operatorname{Law}(m_t+\\sigma_t\\xi)$ for $0\\le t\\le1$. Then $\\mu_t$ is a constant-speed $W_2$ geodesic, meaning $W_2(\\mu_s,\\mu_t)=|t-s|W_2(\\mu_0,\\mu_1)$ for all $s,t\\in[0,1]$, from the laws of $m_0+\\sigma_0\\xi$ to the law of $m_1+\\sigma_1\\xi$, with\n$$W_2(\\mu_0,\\mu_1)^2=|m_1-m_0|^2+d(\\sigma_1-\\sigma_0)^2.$$\nThe Borel field\n$$v_t(x)=m_1-m_0+\\frac{\\sigma_1-\\sigma_0}{\\sigma_t}(x-m_t)$$\nsolves the continuity equation and has action equal to this squared distance, hence is minimum-action. The strict positivity of $\\sigma_0$ and $\\sigma_1$ ensures $\\sigma_t>0$ throughout; degenerate covariances are excluded.",
++          "fixture": "one-dimensional-gaussian-endpoints"
+         }
+       ],
+       "boundaries": [

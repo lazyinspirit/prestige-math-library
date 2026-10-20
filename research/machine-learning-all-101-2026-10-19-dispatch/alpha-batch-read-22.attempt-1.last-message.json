@@ -1,0 +1,252 @@
+{
+  "group": "g",
+  "batches": ["22"],
+  "pages_read": [
+    "ml02-dimension-reduction",
+    "ml02-dimension-reduction-examples"
+  ],
+  "items_read": [
+    "def-finite-centering-matrix",
+    "lem-ky-fan-trace-maximization",
+    "lem-equal-gram-configurations-are-isometric",
+    "alg-deterministic-neighbor-selection",
+    "thm-finite-centering-matrix-is-orthogonal-projector",
+    "def-rank-q-principal-component-analysis",
+    "alg-kernel-principal-component-analysis",
+    "alg-classical-multidimensional-scaling",
+    "def-lle-local-reconstruction-weights",
+    "thm-pca-frobenius-optimality",
+    "thm-centered-psd-kernel-gram-matrix-is-psd",
+    "thm-classical-mds-recovers-euclidean-distances",
+    "thm-minimum-norm-lle-weights-exist-uniquely",
+    "alg-isomap",
+    "def-metric-stress-mds",
+    "alg-locally-linear-embedding",
+    "thm-lle-trace-minimizers",
+    "ex-rank-q-pca-exact-reconstruction",
+    "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+    "ex-disconnected-knn-graph-blocks-isomap-distances",
+    "ex-singular-local-lle-covariance",
+    "ex-connected-lle-graph-need-not-have-simple-zero",
+    "ex-square-loop-mds-isomap-lle-differ",
+    "ex-metric-stress-objective-nonconvex"
+  ],
+  "conventions": [
+    {
+      "convention": "Data points are rows; centering is left multiplication by H_n = I_n − 1_n 1_nᵀ/n, with n ≥ 1.",
+      "fixed_by": "def-finite-centering-matrix",
+      "matters_for": [
+        "thm-finite-centering-matrix-is-orthogonal-projector",
+        "def-rank-q-principal-component-analysis",
+        "alg-kernel-principal-component-analysis",
+        "alg-classical-multidimensional-scaling",
+        "thm-classical-mds-recovers-euclidean-distances"
+      ]
+    },
+    {
+      "convention": "PCA minimizes centered Frobenius reconstruction error over p-by-q frames satisfying QᵀQ = I_q, with 1 ≤ q ≤ p; the reconstruction can have rank below q.",
+      "fixed_by": "def-rank-q-principal-component-analysis",
+      "matters_for": [
+        "thm-pca-frobenius-optimality",
+        "ex-rank-q-pca-exact-reconstruction"
+      ]
+    },
+    {
+      "convention": "Nearest-neighbor lists exclude the subject index and sort by increasing (Euclidean distance, sample index). Union symmetrization uses either directed selection; mutual symmetrization requires both.",
+      "fixed_by": "alg-deterministic-neighbor-selection",
+      "matters_for": [
+        "def-lle-local-reconstruction-weights",
+        "alg-isomap",
+        "alg-locally-linear-embedding",
+        "ex-disconnected-knn-graph-blocks-isomap-distances",
+        "ex-connected-lle-graph-need-not-have-simple-zero",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "convention": "Kernel PCA assumes a symmetric positive-semidefinite input Gram matrix and returns eigenvectors scaled by square roots of centered eigenvalues, including zero coordinates when selected.",
+      "fixed_by": "alg-kernel-principal-component-analysis",
+      "matters_for": [
+        "thm-centered-psd-kernel-gram-matrix-is-psd"
+      ]
+    },
+    {
+      "convention": "Classical MDS squares dissimilarities entrywise and retains at most q strictly positive eigenvalues; it returns fewer than q columns when necessary.",
+      "fixed_by": "alg-classical-multidimensional-scaling",
+      "matters_for": [
+        "thm-classical-mds-recovers-euclidean-distances",
+        "alg-isomap",
+        "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "convention": "Local LLE weights may be signed, must sum to one, and are selected by minimum Euclidean norm among all affine reconstruction-error minimizers.",
+      "fixed_by": "def-lle-local-reconstruction-weights",
+      "matters_for": [
+        "thm-minimum-norm-lle-weights-exist-uniquely",
+        "alg-locally-linear-embedding",
+        "ex-singular-local-lle-covariance",
+        "ex-connected-lle-graph-need-not-have-simple-zero"
+      ]
+    },
+    {
+      "convention": "LLE returns no embedding unless ker(I−W) is exactly the constant subspace. Successful outputs satisfy Yᵀ1_n = 0 and YᵀY = I_q, with 1 ≤ q < n.",
+      "fixed_by": "alg-locally-linear-embedding",
+      "matters_for": [
+        "thm-lle-trace-minimizers",
+        "ex-connected-lle-graph-need-not-have-simple-zero",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "convention": "Metric stress sums squared distance residuals over unordered pairs i < j and is optimized over centered coordinates; it is distinct from classical MDS.",
+      "fixed_by": "def-metric-stress-mds",
+      "matters_for": [
+        "ex-metric-stress-objective-nonconvex"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ky-fan-trace-maximization",
+      "statement": "For symmetric A with eigenvalues λ₁ ≥ ⋯ ≥ λ_p and 1 ≤ q ≤ p, tr(QᵀAQ) ≤ Σ_{j=1}^q λ_j whenever QᵀQ = I_q. Equality holds exactly for subspaces containing all eigenspaces above λ_q, orthogonal to those below λ_q, and using their remaining dimension in the λ_q eigenspace.",
+      "used_by": [
+        "thm-pca-frobenius-optimality",
+        "thm-lle-trace-minimizers"
+      ]
+    },
+    {
+      "id": "thm-finite-centering-matrix-is-orthogonal-projector",
+      "statement": "For n ≥ 1, H_n is symmetric and idempotent, annihilates 1_n, and is the orthogonal projection onto the zero-sum subspace.",
+      "used_by": [
+        "thm-centered-psd-kernel-gram-matrix-is-psd",
+        "thm-classical-mds-recovers-euclidean-distances"
+      ]
+    },
+    {
+      "id": "thm-minimum-norm-lle-weights-exist-uniquely",
+      "statement": "For a fixed point and a nonempty finite neighbor list of distinct indices, affine least-squares reconstruction has a nonempty affine set of minimizers and exactly one minimum-Euclidean-norm minimizer, including singular covariance cases, without a choice axiom.",
+      "used_by": [
+        "alg-locally-linear-embedding",
+        "ex-singular-local-lle-covariance",
+        "ex-connected-lle-graph-need-not-have-simple-zero"
+      ]
+    },
+    {
+      "id": "thm-classical-mds-recovers-euclidean-distances",
+      "statement": "For every symmetric nonnegative zero-diagonal D, B = −H_n D^{∘2} H_n/2 is symmetric and has a real orthonormal eigendecomposition. If D is Euclidean, B = Z_c Z_cᵀ, and coordinates from all positive eigenvalues recover every distance and are isometric to the centered configuration on their spans.",
+      "used_by": [
+        "alg-classical-multidimensional-scaling",
+        "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "id": "alg-deterministic-neighbor-selection",
+      "statement": "For n ≥ 2 and 1 ≤ k < n, select the first k other indices ordered lexicographically by (Euclidean distance, index), with the specified union, mutual, or radius graph construction.",
+      "used_by": [
+        "def-lle-local-reconstruction-weights",
+        "alg-isomap",
+        "alg-locally-linear-embedding",
+        "ex-disconnected-knn-graph-blocks-isomap-distances",
+        "ex-connected-lle-graph-need-not-have-simple-zero",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "id": "thm-pca-frobenius-optimality",
+      "statement": "For centered n-by-p data with n,p ≥ 1 and 1 ≤ q ≤ p, the minimum squared Frobenius reconstruction error over orthonormal q-frames is Σ_{j=q+1}^p σ_j², with precisely the stated top-eigenspace equality cases.",
+      "used_by": [
+        "def-rank-q-principal-component-analysis",
+        "ex-rank-q-pca-exact-reconstruction"
+      ]
+    },
+    {
+      "id": "thm-lle-trace-minimizers",
+      "statement": "If W1_n = 1_n and ker(I−W) is the constant subspace, then for 1 ≤ q < n the minimum of tr(YᵀMY), subject to Yᵀ1_n = 0 and YᵀY = I_q, is the sum of the q smallest positive eigenvalues of M = (I−W)ᵀ(I−W), attained by corresponding orthonormal eigenvectors.",
+      "used_by": [
+        "alg-locally-linear-embedding",
+        "ex-square-loop-mds-isomap-lle-differ"
+      ]
+    },
+    {
+      "id": "lem-equal-gram-configurations-are-isometric",
+      "statement": "Finite Euclidean configurations with equal Gram matrices admit the well-defined onto linear isometry Σ c_i x_i ↦ Σ c_i y_i between their spans, including empty configurations.",
+      "used_by": [
+        "thm-classical-mds-recovers-euclidean-distances"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "Euclidean positivity, bilinear Gram expansions, orthogonality, and squared-norm identities throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+      "used_for": "Identifying real symmetric matrices with self-adjoint endomorphisms before applying the spectral theorem.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthonormal eigendecompositions in Ky Fan maximization, centered kernel PCA, MDS, and LLE.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "Diagonal-sum trace identities and the PCA/LLE objectives.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Rectangular trace cycling in the Ky Fan and PCA proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "The entrywise squared-error objective and its real trace expansion.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Right singular bases and the eigenvalues of X_cᵀX_c in PCA optimality.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "The Frobenius squared norm equals the sum of squared singular values, used to evaluate the PCA error tail.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence and affine-kernel structure of local LLE reconstruction minimizers after parametrizing the affine constraint.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Selecting the unique least-norm member of an affine minimizer set and decomposing the LLE constant and zero-sum subspaces.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "An orthonormal coordinate matrix for the zero-sum subspace in the LLE trace proof.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-frobenius-matrix-norm",
+      "finding": "The published item's Definition contains inline hyperlinks, including “([[def-abs-value]])”, “([[def-complex-conjugate-real-imaginary-part-and-modulus]])”, and “the standard coordinate inner product of [[prop-standard-coordinate-inner-products]]”. Further supplier links occur before the Definition ends. This violates the required uninterrupted Definition and immediately following Definition references section. The mathematical interface used by this batch is sound.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "finding": "The published item's Statement, clause 1, says “where $\\lVert\\cdot\\rVert_2$ is the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].” This hyperlink interrupts the Statement and has not been moved to an immediately following Statement references section, as required. The Frobenius singular-value formula cited by the owned PCA proof is sound.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": []
+}

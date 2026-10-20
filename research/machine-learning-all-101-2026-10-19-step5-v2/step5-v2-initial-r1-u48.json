@@ -1,0 +1,101 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "48",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-ridgeless-minimum-norm-regression",
+      "model": "gpt-6-luna",
+      "context_sha256": "48909d18707a1bb056b7864845cd0164b34d112a31ca96b838713d082defca33",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Confirmed a nonfatal citation mismatch: F1 cites only a conditional definition, and Verification 1.1 incorrectly calls F2 the pseudoinverse existence-and-uniqueness theorem. This is not a missing mathematical prerequisite: F2 depends on the projection theorem, which explicitly depends on thm-moore-penrose-pseudoinverse-exists-and-is-unique. Its SVD construction and block uniqueness argument apply to every finite real X, including rank zero. The repair cites that theorem directly in F1 and deps, checks the p-by-n shape in 1.1, and retains F2 solely for the minimum-norm characterization.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ridgeless-minimum-norm-regression",
+      "disposition": "repaired",
+      "post_sha256": "5ac2b9f9aba0c64727e1edf889edb41996a6cd34a899b9a467e15ef023f2ecdc",
+      "review_context_sha256": "f256875aa0fbd1eebe69782067fa98b39e64ff3cd851df9213c3cad796c3a39a",
+      "reason": "Checked the Penrose definition, the complete local existence/uniqueness proof, the SVD supplier, and the minimum-norm proof with its projection and image/kernel suppliers. For X=U Sigma V*, reciprocating positive singular values and keeping zeros gives the unique p-by-n pseudoinverse; the zero-rank block equations force its value to zero. The least-squares supplier proves that X+y is orthogonal to ker X and that every minimizer is X+y+z with z in ker X, so Pythagoras proves both directions of the unique minimum-norm characterization. Positive n,p require no full-rank or interpolation assumption and no AC. The Definition and page interface are unchanged. This is repair-author verification, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ridgeless-minimum-norm-regression",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "reason": "Confirmed a nonfatal citation mismatch: F1 cites only a conditional definition, and Verification 1.1 incorrectly calls F2 the pseudoinverse existence-and-uniqueness theorem. This is not a missing mathematical prerequisite: F2 depends on the projection theorem, which explicitly depends on thm-moore-penrose-pseudoinverse-exists-and-is-unique. Its SVD construction and block uniqueness argument apply to every finite real X, including rank zero. The repair cites that theorem directly in F1 and deps, checks the p-by-n shape in 1.1, and retains F2 solely for the minimum-norm characterization.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "claim": "For every positive n,p and real design X with response y, ridgeless regression is X+y, equivalently the unique least-squares minimizer of minimum Euclidean norm; no exact fit or full rank is assumed.",
+    "suppliers_consulted": [
+      "items/def-moore-penrose-pseudoinverse.md#Definition",
+      "items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md#Proof (steps 1.1–6.1)",
+      "items/thm-singular-value-decomposition.md#Proof",
+      "items/thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution.md#Proof (steps 1.1–4.1)",
+      "items/thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces.md",
+      "items/cor-moore-penrose-image-and-kernel-identities.md"
+    ],
+    "source_reading": "Familiar finite-dimensional linear algebra; local suppliers read as listed. No external source reading claimed.",
+    "statement_definition_changed": false,
+    "propagation": "No Statement/Definition change and no new interface: the newly explicit existence citation already belongs to the transitive prerequisite closure. No downstream work is triggered.",
+    "diagrams": "No TikZ/tikzcd diagrams occur in the assigned item; none is needed for this definition.",
+    "published_ledger": "No published carrier was edited and no defective published use was found; no published-consumer-ledger update proposed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ridgeless-minimum-norm-regression.md --json",
+        "exit_code": 0,
+        "result": "1 checked proof; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-ridgeless-minimum-norm-regression.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; 0 errors and 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-ridgeless-minimum-norm-regression.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-48.proof-contracts.json --strict --items def-ridgeless-minimum-norm-regression --json",
+        "exit_code": 0,
+        "result": "ok:true; selected assigned item; no errors or warnings."
+      },
+      {
+        "command": "Local exact statementHash and itemHashGuard comparison, and item/manifest dependency comparison",
+        "exit_code": 0,
+        "result": "Definition hash equals frozen before_statements; current guard equals recorded post_sha256; dependency mirrors agree."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary independent current judgment/certification; no workers or judges launched by this adjudicator.",
+    "repair_complete": true,
+    "statement_sha256": "fa268016937305ab54b7a9eeaaa62e0453ece01016cfd4a67e62d7f4f19087fa",
+    "integration": "Under step5-shared-write-lock, reread and updated only this item contract citation/derivation rows and its batch manifest dependency mirror. Historical template-review records were preserved. The selected strict contract check passed before releasing the lock."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-48.pages.json": "7d523ff04d060e04218bae25ebd1d58b7bd5f3da0138a3c5a350ee30ce6ad56a",
+    "research/machine-learning-all-101-2026-10-19-batch-48.proof-contracts.json": "5c3f10dadca5d10d8d623664e6d6a29caf63398c1ad4aaa53a8938a40d5cf073"
+  }
+}

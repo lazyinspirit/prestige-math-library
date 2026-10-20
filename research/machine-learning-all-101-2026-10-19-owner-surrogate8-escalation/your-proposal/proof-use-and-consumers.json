@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "issue": "batch-8 final scope review integral-rule prerequisite",
+  "cycle": 1,
+  "native_finding": "research/machine-learning-all-101-2026-10-19-scope-review/batch-8/review-1.json",
+  "confirmed_defect": "Current step 5.1 integrates an almost-sure upper bound and extracts a positive scalar; step 6.1 concludes integrability from a pointwise nonnegative bound. The published order/scalar proposition supplies exactly these rules and was absent from deps/Facts.",
+  "read_in_full": [
+    "items/prop-order-and-scalar-rules-for-the-nonnegative-integral.md",
+    "items/cor-additivity-of-the-nonnegative-lebesgue-integral.md",
+    "items/cor-integral-over-a-null-set-vanishes.md"
+  ],
+  "supplier_review": {
+    "order": "For arbitrary measure space and nonnegative measurable f<=g pointwise, integral f<=integral g. Proof uses simple-minorant inclusion.",
+    "scalar": "For positive finite real c, integral cf=c integral f, including infinite integrals. Proof bijects simple minorants by multiplication/division by c. Zero clause avoids undefined products.",
+    "applicability": "Here all integrands are nonnegative measurable and the extracted factor 2c^(1/s) is positive finite. The pointwise restriction to measurable N^c is essential because the bound is only almost sure after replacing D0 by finite D. Additivity and null-set vanishing, already declared as F8/F10, remove the N contribution.",
+    "supplier_defects": []
+  },
+  "proof_uses": [
+    {
+      "step": "5.1",
+      "new_tags": [
+        "F8",
+        "F10",
+        "F11"
+      ],
+      "argument": "Split each nonnegative integrand into N and N^c contributions. F8 gives the sum, F10 makes the N contribution zero, and F11 applies pointwise monotonicity on N^c, followed by positive-scalar homogeneity. Existing F6 gives the same full tie-corrected risk bound."
+    },
+    {
+      "step": "6.1",
+      "new_tags": [
+        "F8",
+        "F11"
+      ],
+      "argument": "D^alpha<=1+D pointwise; F11 gives expectation monotonicity, F8 gives E(1+D)=1+ED, finite by step 3.1. Thus the unchanged Jensen step is legitimately integrable."
+    }
+  ],
+  "consumer_search": {
+    "command": "rg -n thm-surrogate-regret-controls-classification-regret items library",
+    "exit_code": 0,
+    "output": "library/machine-learning/calibration-proper-losses-and-surrogate-classification.md:18:  - thm-surrogate-regret-controls-classification-regret\nitems/thm-surrogate-regret-controls-classification-regret.md:2:id: thm-surrogate-regret-controls-classification-regret\n",
+    "aliases": "No aliases declared in current theorem frontmatter.",
+    "dispositions": [
+      {
+        "target": "current item consumers",
+        "decision": "none found",
+        "reason": "Only own id field and A-page placement matched."
+      },
+      {
+        "target": "library/machine-learning/calibration-proper-losses-and-surrogate-classification.md",
+        "decision": "unchanged interface compatible",
+        "reason": "Statement bytes and placement unchanged; proof prerequisite declaration only."
+      }
+    ],
+    "propagation": "No original Statement/Definition change; no downstream defining-clause repair needed."
+  },
+  "preservation": {
+    "statement_byte_equal": true,
+    "proof": "All seven proof steps retained, with only focused prerequisite explanations/tags in 5.1 and 6.1. Margin premise, tie correction, label-classifier variant, scale normalization, source notes and prior accepted branches untouched.",
+    "published_suppliers": "read-only; no changes proposed",
+    "new_lemmas": []
+  },
+  "format_check": {
+    "command": "node tools/proof-layout.mjs research/machine-learning-all-101-2026-10-19-owner-surrogate8-escalation/your-proposal/candidates/thm-surrogate-regret-controls-classification-regret.md",
+    "exit_code": 0,
+    "output": "proof-layout: 1 items, 7 steps, 0 defects",
+    "coverage": "Candidate renderer formatting only, no native audit/review/precheck/gate acceptance."
+  },
+  "root_owned_remaining": [
+    "CAS integration against before raw hash and unique spans",
+    "Mirror new dependency and current proof citations into native inventory/contracts and derive levels",
+    "Current hashes/checks, native review handling and gates at authorized drained boundary"
+  ],
+  "gaps": []
+}

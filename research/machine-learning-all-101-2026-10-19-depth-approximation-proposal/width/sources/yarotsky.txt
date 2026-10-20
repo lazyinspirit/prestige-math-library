@@ -1,0 +1,1952 @@
+
+PDF PAGE 1
+Error bounds for approximations with deep ReLU
+networks
+Dmitry Yarotsky∗†
+d.yarotsky@skoltech.ru
+May 2, 2017
+Abstract
+We study expressive power of shallow and deep neural networks with piece-wise
+linear activation functions. We establish new rigorous upper and lower bounds for the
+network complexity in the setting of approximations in Sobolev spaces. In particu-
+lar, we prove that deep ReLU networks more eﬃciently approximate smooth functions
+than shallow networks. In the case of approximations of 1D Lipschitz functions we de-
+scribe adaptive depth-6 network architectures more eﬃcient than the standard shallow
+architecture.
+1
+Introduction
+Recently, multiple successful applications of deep neural networks to pattern recognition
+problems (Schmidhuber [2015], LeCun et al. [2015]) have revived active interest in theoretical
+properties of such networks, in particular their expressive power. It has been argued that
+deep networks may be more expressive than shallow ones of comparable size (see, e.g.,
+Delalleau and Bengio [2011], Raghu et al. [2016], Montufar et al. [2014], Bianchini and
+Scarselli [2014], Telgarsky [2015]).
+In contrast to a shallow network, a deep one can be
+viewed as a long sequence of non-commutative transformations, which is a natural setting
+for high expressiveness (cf. the well-known Solovay-Kitaev theorem on fast approximation
+of arbitrary quantum operations by sequences of non-commutative gates, see Kitaev et al.
+[2002], Dawson and Nielsen [2006]).
+There are various ways to characterize expressive power of networks.
+Delalleau and
+Bengio 2011 consider sum-product networks and prove for certain classes of polynomials that
+they are much more easily represented by deep networks than by shallow networks. Montufar
+∗Skolkovo Institute of Science and Technology, Skolkovo Innovation Center, Building 3, Moscow 143026
+Russia
+†Institute for Information Transmission Problems, Bolshoy Karetny per. 19, build.1, Moscow 127051,
+Russia
+1
+arXiv:1610.01145v3  [cs.LG]  1 May 2017
+
+
+PDF PAGE 2
+et al. 2014 estimate the number of linear regions in the network’s landscape. Bianchini and
+Scarselli 2014 give bounds for Betti numbers characterizing topological properties of functions
+represented by networks. Telgarsky 2015, 2016 provides speciﬁc examples of classiﬁcation
+problems where deep networks are provably more eﬃcient than shallow ones.
+In the context of classiﬁcation problems, a general and standard approach to characteriz-
+ing expressiveness is based on the notion of the Vapnik-Chervonenkis dimension (Vapnik and
+Chervonenkis [2015]). There exist several bounds for VC-dimension of deep networks with
+piece-wise polynomial activation functions that go back to geometric techniques of Goldberg
+and Jerrum 1995 and earlier results of Warren 1968; see Bartlett et al. [1998], Sakurai [1999]
+and the book Anthony and Bartlett [2009]. There is a related concept, the fat-shattering
+dimension, for real-valued approximation problems (Kearns and Schapire [1990], Anthony
+and Bartlett [2009]).
+A very general approach to expressiveness in the context of approximation is the method
+of nonlinear widths by DeVore et al.
+1989 that concerns approximation of a family of
+functions under assumption of a continuous dependence of the model on the approximated
+function.
+In this paper we examine the problem of shallow-vs-deep expressiveness from the per-
+spective of approximation theory and general spaces of functions having derivatives up to
+certain order (Sobolev-type spaces). In this framework, the problem of expressiveness is very
+well studied in the case of shallow networks with a single hidden layer, where it is known,
+in particular, that to approximate a Cn-function on a d-dimensional set with inﬁnitesimal
+error ϵ one needs a network of size about ϵ−d/n, assuming a smooth activation function (see,
+e.g., Mhaskar [1996], Pinkus [1999] for a number of related rigorous upper and lower bounds
+and further qualiﬁcations of this result). Much less seems to be known about deep networks
+in this setting, though Mhaskar et al. 2016, 2016 have recently introduced functional spaces
+constructed using deep dependency graphs and obtained expressiveness bounds for related
+deep networks.
+We will focus our attention on networks with the ReLU activation function σ(x) =
+max(0, x), which, despite its utter simplicity, seems to be the most popular choice in practi-
+cal applications LeCun et al. [2015]. We will consider L∞-error of approximation of functions
+belonging to the Sobolev spaces Wn,∞([0, 1]d) (without any assumptions of hierarchical struc-
+ture). We will often consider families of approximations, as the approximated function runs
+over the unit ball Fd,n in Wn,∞([0, 1]d). In such cases we will distinguish scenarios of ﬁxed
+and adaptive network architectures. Our goal is to obtain lower and upper bounds on the
+expressiveness of deep and shallow networks in diﬀerent scenarios. We measure complexity
+of networks in a conventional way, by counting the number of their weights and computation
+units (cf. Anthony and Bartlett [2009]).
+The main body of the paper consists of Sections 2, 3 and 4.
+In Section 2 we describe our ReLU network model and show that the ReLU function
+is replaceable by any other continuous piece-wise linear activation function, up to constant
+factors in complexity asymptotics (Proposition 1).
+In Section 3 we establish several upper bounds on the complexity of approximating by
+2
+
+
+PDF PAGE 3
+ReLU networks, in particular showing that deep networks are quite eﬃcient for approximat-
+ing smooth functions. Speciﬁcally:
+• In Subsection 3.1 we show that the function f(x) = x2 can be ϵ-approximated by
+a network of depth and complexity O(ln(1/ϵ)) (Proposition 2).
+This also leads to
+similar upper bounds on the depth and complexity that are suﬃcient to implement an
+approximate multiplication in a ReLU network (Proposition 3).
+• In Subsection 3.2 we describe a ReLU network architecture of depth O(ln(1/ϵ)) and
+complexity O(ϵ−d/n ln(1/ϵ)) that is capable of approximating with error ϵ any function
+from Fd,n (Theorem 1).
+• In Subsection 3.3 we show that, even with ﬁxed-depth networks, one can further de-
+crease the approximation complexity if the network architecture is allowed to depend on
+the approximated function. Speciﬁcally, we prove that one can ϵ-approximate a given
+Lipschitz function on the segment [0, 1] by a depth-6 ReLU network with O(
+1
+ϵ ln(1/ϵ))
+connections and activation units (Theorem 2). This upper bound is of interest since it
+lies below the lower bound provided by the method of nonlinear widths under assump-
+tion of continuous model selection (see Subsection 4.1).
+In Section 4 we obtain several lower bounds on the complexity of approximation by deep
+and shallow ReLU networks, using diﬀerent approaches and assumptions.
+• In Subsection 4.1 we recall the general lower bound provided by the method of continu-
+ous nonlinear widths. This method assumes that parameters of the approximation con-
+tinuously depend on the approximated function, but does not assume anything about
+how the approximation depends on its parameters. In this setup, at least ∼ϵ−d/n
+connections and weights are required for an ϵ-approximation on Fd,n (Theorem 3). As
+already mentioned, for d = n = 1 this lower bound is above the upper bound provided
+by Theorem 2.
+• In Subsection 4.2 we consider the setup where the same network architecture is used
+to approximate all functions in Fd,n, but the weights are not assumed to continuously
+depend on the function. In this case, application of existing results on VC-dimension of
+deep piece-wise polynomial networks yields a ∼ϵd/(2n) lower bound in general and a ∼
+ϵ−d/n ln−2p−1(1/ϵ) lower bound if the network depth grows as O(lnp(1/ϵ)) (Theorem 4).
+• In Subsection 4.3 we consider an individual approximation, without any assumptions
+regarding it as an element of a family as in Subsections 4.1 and 4.2. We prove that for
+any d, n there exists a function in Wn,∞([0, 1]d) such that its approximation complexity
+is not o(ϵ−d/(9n)) as ϵ →0 (Theorem 5).
+• In Subsection 4.4 we prove that ϵ-approximation of any nonlinear C2-function by a
+network of ﬁxed depth L requires at least ∼ϵ−1/(2(L−2)) computation units (Theorem
+6). By comparison with Theorem 1, this shows that for suﬃciently smooth functions
+3
+
+
+PDF PAGE 4
+in
+out
+Figure 1: A feedforward neural network having 3 input units (diamonds), 1 output unit
+(square), and 7 computation units with nonlinear activation (circles). The network has 4
+layers and 16 + 8 = 24 weights.
+approximation by ﬁxed-depth ReLU networks is less eﬃcient than by unbounded-depth
+networks.
+In Section 5 we discuss the obtained bounds and summarize their implications, in particular
+comparing deep vs. shallow networks and ﬁxed vs. adaptive architectures.
+The arXiv preprint of the ﬁrst version of the present work appeared almost simultaneously
+with the work of Liang and Srikant Liang and Srikant [2016] containing results partly over-
+lapping with our results in Subsections 3.1,3.2 and 4.4. Liang and Srikant consider networks
+equipped with both ReLU and threshold activation functions. They prove a logarithmic up-
+per bound for the complexity of approximating the function f(x) = x2, which is analogous
+to our Proposition 2. Then, they extend this upper bound to polynomials and smooth func-
+tions. In contrast to our treatment of generic smooth functions based on standard Sobolev
+spaces, they impose more complex assumptions on the function (including, in particular,
+how many derivatives it has) that depend on the required approximation accuracy ϵ. As
+a consequence, they obtain strong O(lnc(1/ϵ)) complexity bounds rather diﬀerent from our
+bound in Theorem 1 (in fact, our lower bound proved in Theorem 5 rules out, in general,
+such strong upper bounds for functions having only ﬁnitely many derivatives). Also, Liang
+and Srikant prove a lower bound for the complexity of approximating convex functions by
+shallow networks. Our version of this result, given in Subsection 4.4, is diﬀerent in that we
+assume smoothness and nonlinearity instead of global convexity.
+2
+The ReLU network model
+Throughout the paper, we consider feedforward neural networks with the ReLU (Rectiﬁed
+Linear Unit) activation function
+σ(x) = max(0, x).
+4
+
+
+PDF PAGE 5
+The network consists of several input units, one output unit, and a number of “hidden”
+computation units. Each hidden unit performs an operation of the form
+y = σ
+
+N
+X
+k=1
+wkxk + b
+
+(1)
+with some weights (adjustable parameters) (wk)N
+k=1 and b depending on the unit.
+The
+output unit is also a computation unit, but without the nonlinearity, i.e., it computes
+y = PN
+k=1 wkxk + b. The units are grouped in layers, and the inputs (xk)N
+k=1 of a com-
+putation unit in a certain layer are outputs of some units belonging to any of the preceding
+layers (see Fig. 1). Note that we allow connections between units in non-neighboring layers.
+Occasionally, when this cannot cause confusion, we may denote the network and the function
+it implements by the same symbol.
+The depth of the network, the number of units and the total number of weights are
+standard measures of network complexity (Anthony and Bartlett [2009]). We will use these
+measures throughout the paper. The number of weights is, clearly, the sum of the total
+number of connections and the number of computation units. We identify the depth with
+the number of layers (in particular, the most common type of neural networks – shallow
+networks having a single hidden layer – are depth-3 networks according to this convention).
+We ﬁnish this subsection with a proposition showing that, given our complexity measures,
+using the ReLU activation function is not much diﬀerent from using any other piece-wise
+linear activation function with ﬁnitely many breakpoints: one can replace one network by
+an equivalent one but having another activation function while only increasing the number
+of units and weights by constant factors. This justiﬁes our restricted attention to the ReLU
+networks (which could otherwise have been perceived as an excessively particular example
+of networks).
+Proposition 1. Let ρ : R →R be any continuous piece-wise linear function with M break-
+points, where 1 ≤M < ∞.
+a) Let ξ be a network with the activation function ρ, having depth L, W weights and U
+computation units. Then there exists a ReLU network η that has depth L, not more
+than (M + 1)2W weights and not more than (M + 1)U units, and that computes the
+same function as ξ.
+b) Conversely, let η be a ReLU network of depth L with W weights and U computation
+units. Let D be a bounded subset of Rn, where n is the input dimension of η. Then
+there exists a network with the activation function ρ that has depth L, 4W weights and
+2U units, and that computes the same function as η on the set D.
+Proof. a) Let a1 < . . . < aM be the breakpoints of ρ, i.e., the points where its derivative
+is discontinuous: ρ′(ak+) ̸= ρ′(ak−). We can then express ρ via the ReLU function σ, as a
+linear combination
+ρ(x) = c0σ(a1 −x) +
+M
+X
+m=1
+cmσ(x −am) + h
+5
+
+
+PDF PAGE 6
+with appropriately chosen coeﬃcients (cm)M
+m=0 and h. It follows that computation performed
+by a single ρ-unit,
+x1, . . . , xN 7→ρ
+
+N
+X
+k=1
+wkxk + b
+
+,
+can be equivalently represented by a linear combination of a constant function and compu-
+tations of M + 1 σ-units,
+x1, . . . , xN 7→
+
+
+
+σ
+ PN
+k=1 wkxk + b −am
+
+,
+m = 1, . . . , M,
+σ
+
+a1 −b −PN
+k=1 wkxk),
+m = 0
+(here m is the index of a ρ-unit). We can then replace one-by-one all the ρ-units in the
+network ξ by σ-units, without changing the output of the network. Obviously, these replace-
+ments do not change the network depth. Since each hidden unit gets replaced by M + 1
+new units, the number of units in the new network is not greater than M + 1 times their
+number in the original network. Note also that the number of connections in the network
+is multiplied, at most, by (M + 1)2. Indeed, each unit replacement entails replacing each
+of the incoming and outgoing connections of this unit by M + 1 new connections, and each
+connection is replaced twice: as an incoming and as an outgoing one. These considerations
+imply the claimed complexity bounds for the resulting σ-network η.
+b) Let a be any breakpoint of ρ, so that ρ′(a+) ̸= ρ′(a−). Let r0 be the distance separating
+a from the nearest other breakpoint, so that ρ is linear on [a, a + r0] and on [a −r0, a] (if
+ρ has only one node, any r0 > 0 will do). Then, for any r > 0, we can express the ReLU
+function σ via ρ in the r-neighborhood of 0:
+σ(x) = ρ
+ a + r0
+2rx
+
+−ρ
+ a −r0
+2 + r0
+2rx
+
+−ρ(a) + ρ
+ a −r0
+2
+
+ ρ′(a+) −ρ′(a−)
+ r0
+2r
+,
+x ∈[−r, r].
+It follows that a computation performed by a single σ-unit,
+x1, . . . , xN 7→σ
+
+N
+X
+k=1
+wkxk + b
+
+,
+can be equivalently represented by a linear combination of a constant function and two
+ρ-units,
+x1, . . . , xN 7→
+
+
+
+ρ
+
+a + r0
+2rb + r0
+2r
+PN
+k=1 wkxk
+
+,
+ρ
+
+a −r0
+2 + r0
+2rb + r0
+2r
+PN
+k=1 wkxk
+
+,
+provided the condition
+N
+X
+k=1
+wkxk + b ∈[−r, r]
+(2)
+holds. Since D is a bounded set, we can choose r at each unit of the initial network η
+suﬃciently large so as to satisfy condition (2) for all network inputs from D. Then, like in
+a), we replace each σ-unit with two ρ-units, which produces the desired ρ-network.
+6
+
+
+PDF PAGE 7
+3
+Upper bounds
+Throughout the paper, we will be interested in approximating functions f : [0, 1]d →R
+by ReLU networks.
+Given a function f : [0, 1]d →R and its approximation ef, by the
+approximation error we will always mean the uniform maximum error
+∥f −ef∥∞= max
+x∈[0,1]d |f(x) −ef(x)|.
+3.1
+Fast deep approximation of squaring and multiplication
+Our ﬁrst key result shows that ReLU networks with unconstrained depth can very eﬃciently
+approximate the function f(x) = x2 (more eﬃciently than any ﬁxed-depth network, as we
+will see in Section 4.4). Our construction uses the “sawtooth” function that has previously
+appeared in the paper Telgarsky [2015].
+Proposition 2. The function f(x) = x2 on the segment [0, 1] can be approximated with any
+error ϵ > 0 by a ReLU network having the depth and the number of weights and computation
+units O(ln(1/ϵ)).
+Proof. Consider the “tooth” (or “mirror”) function g : [0, 1] →[0, 1],
+g(x) =
+(
+2x,
+x < 1
+2,
+2(1 −x),
+x ≥1
+2,
+and the iterated functions
+gs(x) = g ◦g ◦· · · ◦g
+|
+{z
+}
+s
+(x).
+Telgarsky has shown (see Lemma 2.4 in Telgarsky [2015]) that gs is a “sawtooth” function
+with 2s−1 uniformly distributed “teeth” (each application of g doubles the number of teeth):
+gs(x) =
+(
+2s x −2k
+2s
+
+,
+x ∈
+2k
+2s , 2k+1
+2s ], k = 0, 1, . . . , 2s−1 −1,
+2s  2k
+2s −x
+
+,
+x ∈
+2k−1
+2s , 2k
+2s ], k = 1, 2, . . . , 2s−1,
+(see Fig. 2a). Our key observation now is that the function f(x) = x2 can be approxi-
+mated by linear combinations of the functions gs. Namely, let fm be the piece-wise linear
+interpolation of f with 2m + 1 uniformly distributed breakpoints
+k
+2m, k = 0, . . . , 2m:
+fm
+ k
+2m
+
+=
+ k
+2m
+2
+,
+k = 0, . . . , 2m
+(see Fig. 2b). The function fm approximates f with the error ϵm = 2−2m−2. Now note that
+reﬁning the interpolation from fm−1 to fm amounts to adjusting it by a function proportional
+to a sawtooth function:
+fm−1(x) −fm(x) = gm(x)
+22m .
+7
+
+
+PDF PAGE 8
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+g
+g2
+g3
+(a)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+f0
+f1
+f2
+f
+(b)
+f4
+(c)
+Figure 2: Fast approximation of the function f(x) = x2 from Proposition 2: (a) the “tooth”
+function g and the iterated “sawtooth” functions g2, g3; (b) the approximating functions fm;
+(c) the network architecture for f4.
+Hence
+fm(x) = x −
+m
+X
+s=1
+gs(x)
+22s .
+Since g can be implemented by a ﬁnite ReLU network (as g(x) = 2σ(x)−4σ
+ x−1
+2
+
++2σ(x−1))
+and since construction of fm only involves O(m) linear operations and compositions of g,
+we can implement fm by a ReLU network having depth and the number of weights and
+computation units all being O(m) (see Fig. 2c). This implies the claim of the proposition.
+Since
+xy = 1
+2((x + y)2 −x2 −y2),
+(3)
+we can use Proposition 2 to eﬃciently implement accurate multiplication in a ReLU net-
+work. The implementation will depend on the required accuracy and the magnitude of the
+multiplied quantities.
+Proposition 3. Given M > 0 and ϵ ∈(0, 1), there is a ReLU network η with two input
+units that implements a function e× : R2 →R so that
+a) for any inputs x, y, if |x| ≤M and |y| ≤M, then |e×(x, y) −xy| ≤ϵ;
+b) if x = 0 or y = 0, then e×(x, y) = 0;
+c) the depth and the number of weights and computation units in η is not greater than
+c1 ln(1/ϵ) + c2 with an absolute constant c1 and a constant c2 = c2(M).
+8
+
+
+PDF PAGE 9
+Proof. Let efsq,δ be the approximate squaring function from Proposition 2 such that efsq,δ(0) =
+0 and | efsq,δ(x) −x2| < δ for x ∈[0, 1]. Assume without loss of generality that M ≥1 and
+set
+e×(x, y) = M 2
+8
+
+efsq,δ
+|x + y|
+2M
+
+−efsq,δ
+ |x|
+2M
+
+−efsq,δ
+ |y|
+2M
+
+,
+(4)
+where δ =
+8ϵ
+3M2. Then property b) is immediate and a) follows easily using expansion (3).
+To conclude c), observe that computation (4) consists of three instances of efsq,δ and ﬁnitely
+many linear and ReLU operations, so, using Proposition 2, we can implement e× by a ReLU
+network such that its depth and the number of computation units and weights are O(ln(1/δ)),
+i.e. are O(ln(1/ϵ) + ln M).
+3.2
+Fast deep approximation of general smooth functions
+In order to formulate our general result, Theorem 1, we consider the Sobolev spaces
+Wn,∞([0, 1]d) with n = 1, 2, . . . Recall that Wn,∞([0, 1]d) is deﬁned as the space of func-
+tions on [0, 1]d lying in L∞along with their weak derivatives up to order n. The norm in
+Wn,∞([0, 1]d) can be deﬁned by
+∥f∥Wn,∞([0,1]d) = max
+n:|n|≤n ess sup
+x∈[0,1]d |Dnf(x)|,
+where n = (n1, . . . , nd) ∈{0, 1, . . .}d, |n| = n1 + . . . + nd, and Dnf is the respective weak
+derivative. Here and in the sequel we denote vectors by boldface characters. The space
+Wn,∞([0, 1]d) can be equivalently described as consisting of the functions from Cn−1([0, 1]d)
+such that all their derivatives of order n −1 are Lipschitz continuous.
+Throughout the paper, we denote by Fn,d the unit ball in Wn,∞([0, 1]d):
+Fn,d = {f ∈Wn,∞([0, 1]d) : ∥f∥Wn,∞([0,1]d) ≤1}.
+Also, it will now be convenient to make a distinction between networks and network
+architectures: we deﬁne the latter as the former with unspeciﬁed weights. We say that a
+network architecture is capable of expressing any function from Fd,n with error ϵ meaning
+that this can be achieved by some weight assignment.
+Theorem 1. For any d, n and ϵ ∈(0, 1), there is a ReLU network architecture that
+1. is capable of expressing any function from Fd,n with error ϵ;
+2. has the depth at most c(ln(1/ϵ) + 1) and at most cϵ−d/n(ln(1/ϵ) + 1) weights and com-
+putation units, with some constant c = c(d, n).
+Proof. The proof will consist of two steps. We start with approximating f by a sum-product
+combination f1 of local Taylor polynomials and one-dimensional piecewise-linear functions.
+After that, we will use results of the previous section to approximate f1 by a neural network.
+9
+
+
+PDF PAGE 10
+0.0 0.2 0.4 0.6 0.8 1.0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Figure 3: Functions (φm)5
+m=0 forming a partition of unity for d = 1, N = 5 in the proof of
+Theorem 1.
+Let N be a positive integer. Consider a partition of unity formed by a grid of (N + 1)d
+functions φm on the domain [0, 1]d:
+X
+m
+φm(x) ≡1,
+x ∈[0, 1]d.
+Here m = (m1, . . . , md) ∈{0, 1, . . . , N}d, and the function φm is deﬁned as the product
+φm(x) =
+d
+Y
+k=1
+ψ
+
+3N
+ xk −mk
+N
+
+,
+(5)
+where
+ψ(x) =
+
+
+
+
+
+1,
+|x| < 1,
+0,
+2 < |x|,
+2 −|x|,
+1 ≤|x| ≤2
+(see Fig. 3). Note that
+∥ψ∥∞= 1 and ∥φm∥∞= 1 ∀m
+(6)
+and
+supp φm ⊂
+n
+x :
+xk −mk
+N
+ < 1
+N ∀k
+o
+.
+(7)
+For any m ∈{0, . . . , N}d, consider the degree-(n −1) Taylor polynomial for the function f
+at x = m
+N :
+Pm(x) =
+X
+n:|n|<n
+Dnf
+n!
+
+x= m
+N
+
+x −m
+N
+n
+,
+(8)
+with the usual conventions n! = Qd
+k=1 nk! and (x −m
+N )n = Qd
+k=1(xk −mk
+N )nk. Now deﬁne an
+approximation to f by
+f1 =
+X
+m∈{0,...,N}d
+φmPm.
+(9)
+10
+
+
+PDF PAGE 11
+We bound the approximation error using the Taylor expansion of f:
+|f(x) −f1(x)| =
+
+X
+m
+φm(x)(f(x) −Pm(x))
+
+≤
+X
+m:|xk−mk
+N |< 1
+N ∀k
+|f(x) −Pm(x)|
+≤2d
+max
+m:|xk−mk
+N |< 1
+N ∀k |f(x) −Pm(x)|
+≤2ddn
+n!
+ 1
+N
+n
+max
+n:|n|=n ess sup
+x∈[0,1]d |Dnf(x)|
+≤2ddn
+n!
+ 1
+N
+n
+.
+Here in the second step we used the support property (7) and the bound (6), in the third
+the observation that any x ∈[0, 1]d belongs to the support of at most 2d functions φm,
+in the fourth a standard bound for the Taylor remainder, and in the ﬁfth the property
+∥f∥Wn,∞([0,1]d) ≤1.
+It follows that if we choose
+N =
+l  n!
+2ddn
+ϵ
+2
+−1/nm
+(10)
+(where ⌈·⌉is the ceiling function), then
+∥f −f1∥∞≤ϵ
+2.
+(11)
+Note that, by (8) the coeﬃcients of the polynomials Pm are uniformly bounded for all
+f ∈Fd,n:
+Pm(x) =
+X
+n:|n|<n
+am,n
+
+x −m
+N
+n
+,
+|am,n| ≤1.
+(12)
+We have therefore reduced our task to the following: construct a network architecture
+capable of approximating with uniform error ϵ
+2 any function of the form (9), assuming that
+N is given by (10) and the polynomials Pm are of the form (12).
+Expand f1 as
+f1(x) =
+X
+m∈{0,...,N}d
+X
+n:|n|<n
+am,nφm(x)
+ x −m
+N
+n.
+(13)
+The expansion is a linear combination of not more than dn(N + 1)d terms φm(x)(x −m
+N )n.
+Each of these terms is a product of at most d + n −1 piece-wise linear univariate factors: d
+functions ψ(3Nxk −3mk) (see (5)) and at most n −1 linear expressions xk −mk
+N . We can
+implement an approximation of this product by a neural network with the help of Proposition
+3. Speciﬁcally, let e× be the approximate multiplication from Proposition 3 for M = d + n
+11
+
+
+PDF PAGE 12
+and some accuracy δ to be chosen later, and consider the approximation of the product
+φm(x)(x −m
+N )n obtained by the chained application of e×:
+efm,n(x) = e×
+ ψ(3Nx1 −3m1), e×
+ ψ(3Nx2 −3m2), . . . , e×
+ xk −mk
+N , . . .
+
+. . .
+
+.
+(14)
+that Using statement c) of Proposition 3, we see efm,n can be implemented by a ReLU
+network with the depth and the number of weights and computation units not larger than
+(d + n)c1 ln(1/δ), for some constant c1 = c1(d, n).
+Now we estimate the error of this approximation. Note that we have |ψ(3Nxk−3mk)| ≤1
+and |xk −mk
+N | ≤1 for all k and all x ∈[0, 1]d.
+By statement a) of Proposition 3, if
+|a| ≤1 and |b| ≤M, then |e×(a, b)| ≤|b| + δ. Repeatedly applying this observation to all
+approximate multiplications in (14) while assuming δ < 1, we see that the arguments of
+all these multiplications are bounded by our M (equal to d + n) and the statement a) of
+Proposition 3 holds for each of them. We then have
+ efm,n(x)−φm(x)
+ x −m
+N
+n
+=
+e×
+ ψ(3Nx1 −3m1), e×
+ ψ(3Nx2 −3m2), e×
+ ψ(3Nx3 −3m3), . . .
+
+−ψ(3Nx1 −3m1)ψ(3Nx2 −3m2)ψ(3Nx3 −3m3) . . .
+
+≤
+e×
+ ψ(3Nx1 −3m1), e×
+ ψ(3Nx2 −3m2), e×
+ ψ(3Nx3 −3m3), . . .
+
+−ψ(3Nx1 −3m1) · e×
+ ψ(3Nx2 −3m2), e×
+ ψ(3Nx3 −3m3), . . .
+
++ |ψ(3Nx1 −3m1)| ·
+e×
+ ψ(3Nx2 −3m2), e×
+ ψ(3Nx3 −3m3), . . .
+
+−ψ(3Nx2 −3m2) · e×
+ ψ(3Nx3 −3m3), . . .
+
++ . . .
+≤(d + n)δ.
+(15)
+Moreover, by statement b) of Proposition 3,
+efm,n(x) = φm(x)
+ x −m
+N
+n,
+x /∈supp φm.
+(16)
+Now we deﬁne the full approximation by
+ef =
+X
+m∈{0,...,N}d
+X
+n:|n|<n
+am,n efm,n.
+(17)
+We estimate the approximation error of ef:
+| ef(x) −f1(x)| =
+
+X
+m∈{0,...,N}d
+X
+n:|n|<n
+am,n
+
+efm,n(x) −φm(x)
+ x −m
+N
+n
+=
+
+X
+m:x∈supp φm
+X
+n:|n|<n
+am,n
+
+efm,n(x) −φm(x)
+ x −m
+N
+n
+≤2d
+max
+m:x∈supp φm
+X
+n:|n|<n
+ efm,n(x) −φm(x)
+ x −m
+N
+n
+≤2ddn(d + n)δ,
+12
+
+
+PDF PAGE 13
+where in the ﬁrst step we use expansion (13), in the second the identity (16), in the third
+the bound |am,n| ≤1 and the fact that x ∈supp φm for at most 2d functions φm, and in the
+fourth the bound (15). It follows that if we choose
+δ =
+ϵ
+2d+1dn(d + n),
+(18)
+then ∥ef −f1∥∞≤ϵ
+2 and hence, by (11),
+∥ef −f∥∞≤∥ef −f1∥∞+ ∥f1 −f∥∞≤ϵ
+2 + ϵ
+2 ≤ϵ.
+On the other hand, note that by (17), ef can be implemented by a network consisting of
+parallel subnetworks that compute each of efm,n; the ﬁnal output is obtained by weighting the
+outputs of the subnetworks with the weights am,n. The architecture of the full network does
+not depend on f; only the weights am,n do. As already shown, each of these subnetworks
+has not more than c1 ln(1/δ) layers, weights and computation units, with some constant
+c1 = c1(d, n). There are not more than dn(N + 1)d such subnetworks. Therefore, the full
+network for ef has not more than c1 ln(1/δ) + 1 layers and dn(N + 1)d(c1 ln(1/δ) + 1) weights
+and computation units. With δ given by (18) and N given by (10), we obtain the claimed
+complexity bounds.
+3.3
+Faster approximations using adaptive network architectures
+Theorem 1 provides an upper bound for the approximation complexity in the case when the
+same network architecture is used to approximate all functions in Fd,n. We can consider
+an alternative, “adaptive architecture” scenario where not only the weights, but also the
+architecture is adjusted to the approximated function. We expect, of course, that this would
+decrease the complexity of the resulting architectures, in general (at the price of needing to
+ﬁnd the appropriate architecture). In this section we show that we can indeed obtain better
+upper bounds in this scenario.
+For simplicity, we will only consider the case d = n = 1. Then, Wn,∞([0, 1]d) is the
+space of Lipschitz functions on the segment [0, 1]. The set F1,1 consists of functions f having
+both ∥f∥∞and the Lipschitz constant bounded by 1. Theorem 1 provides an upper bound
+O(ln(1/ϵ)
+ϵ
+) for the number of weights and computation units, but in this special case there is
+in fact a better bound O(1
+ϵ) obtained simply by piece-wise interpolation.
+Namely, given f ∈F1,1 and ϵ > 0, set T = ⌈1
+ϵ⌉and let ef be the piece-wise interpolation
+of f with T + 1 uniformly spaced breakpoints ( t
+T )T
+t=0 (i.e., ef( t
+T ) = f( t
+T ), t = 0, . . . , T). The
+function ef is also Lipschitz with constant 1 and hence ∥f −ef∥∞≤
+1
+T ≤ϵ (since for any
+x ∈[0, 1] we can ﬁnd t such that |x −t
+T | ≤
+1
+2T and then |f(x) −ef(x)| ≤|f(x) −f( t
+T )| +
+| ef( t
+T ) −ef(x)| ≤2 ·
+1
+2T = 1
+T ). At the same time, the function ef can be expressed in terms of
+the ReLU function σ by
+ef(x) = b +
+T−1
+X
+t=0
+wtσ
+
+x −t
+T
+
+13
+
+
+PDF PAGE 14
+with some coeﬃcients b and (wt)T−1
+t=0 . This expression can be viewed as a special case of the
+depth-3 ReLU network with O(1
+ϵ) weights and computation units.
+We show now how the bound O(1
+ϵ) can be improved by using adaptive architectures.
+Theorem 2. For any f ∈F1,1 and ϵ ∈(0, 1
+2), there exists a depth-6 ReLU network η (with
+architecture depending on f) that provides an ϵ-approximation of f while having not more
+than
+c
+ϵ ln(1/ϵ) weights, connections and computation units. Here c is an absolute constant.
+Proof. We ﬁrst explain the idea of the proof. We start with interpolating f by a piece-wise
+linear function, but not on the length scale ϵ – instead, we do it on a coarser length scale
+mϵ, with some m = m(ϵ) > 1. We then create a “cache” of auxiliary subnetworks that we
+use to ﬁll in the details and go down to the scale ϵ, in each of the mϵ-subintervals. This
+allows us to reduce the amount of computations for small ϵ because the complexity of the
+cache only depends on m. The assignment of cached subnetworks to the subintervals is
+encoded in the network architecture and depends on the function f. We optimize m by
+balancing the complexity of the cache with that of the initial coarse approximation. This
+leads to m ∼ln(1/ϵ) and hence to the reduction of the total complexity of the network by
+a factor ∼ln(1/ϵ) compared to the simple piece-wise linear approximation on the scale ϵ.
+This construction is inspired by a similar argument used to prove the O(2n/n) upper bound
+for the complexity of Boolean circuits implementing n-ary functions Shannon [1949].
+The proof becomes simpler if, in addition to the ReLU function σ, we are allowed to use
+the activation function
+ρ(x) =
+(
+x,
+x ∈[0, 1),
+0,
+x /∈[0, 1)
+(19)
+in our neural network. Since ρ is discontinuous, we cannot just use Proposition 1 to replace
+ρ-units by σ-units. We will ﬁrst prove the analog of the claimed result for the model including
+ρ-units, and then we will show how to construct a purely ReLU nework.
+Lemma 1. For any f ∈F1,1 and ϵ ∈(0, 1
+2), there exists a depth-5 network including σ-
+units and ρ-units, that provides an ϵ-approximation of f while having not more than
+c
+ϵ ln(1/ϵ)
+weights, where c is an absolute constant.
+Proof. Given f ∈F1,1, we will construct an approximation ef to f in the form
+ef = ef1 + ef2.
+Here, ef1 is the piece-wise linear interpolation of f with the breakpoints { t
+T }T
+t=0, for some
+positive integer T to be chosen later. Since f is Lipschitz with constant 1, ef1 is also Lipschitz
+with constant 1. We will denote by It the intervals between the breakpoints:
+It =
+h t
+T , t + 1
+T
+
+,
+t = 0, . . . , T −1.
+We will now construct ef2 as an approximation to the diﬀerence
+f2 = f −ef1.
+(20)
+14
+
+
+PDF PAGE 15
+Note that f2 vanishes at the endpoints of the intervals It:
+f2
+ t
+T
+
+= 0, t = 0, . . . , T,
+(21)
+and f2 is Lipschitz with constant 2:
+|f2(x1) −f2(x2)| ≤2|x1 −x2|,
+(22)
+since f and ef1 are Lipschitz with constant 1.
+To deﬁne ef2, we ﬁrst construct a set Γ of cached functions. Let m be a positive integer
+to be chosen later. Let Γ be the set of piecewise linear functions γ : [0, 1] →R with the
+breakpoints { r
+m}m
+r=0 and the properties
+γ(0) = γ(1) = 0
+and
+γ
+ r
+m
+
+−γ
+r −1
+m
+
+∈
+n
+−2
+m, 0, 2
+m
+o
+,
+r = 1, . . . , m.
+Note that the size |Γ| of Γ is not larger than 3m.
+If g : [0, 1] →R is any Lipschitz function with constant 2 and g(0) = g(1) = 0, then g
+can be approximated by some γ ∈Γ with error not larger than
+2
+m: namely, take γ( r
+m) =
+2
+m⌊g( r
+m)/ 2
+m⌋.
+Moreover, if f2 is deﬁned by (20), then, using (21), (22), on each interval It the function
+f2 can be approximated with error not larger than
+2
+Tm by a properly rescaled function γ ∈Γ.
+Namely, for each t = 0, . . . , T −1 we can deﬁne the function g by g(y) = Tf2(t+y
+T ). Then it
+is Lipschitz with constant 2 and g(0) = g(1) = 0, so we can ﬁnd γt ∈Γ such that
+sup
+y∈[0,1)
+Tf2
+t + y
+T
+
+−γt(y)
+ ≤2
+m.
+This can be equivalently written as
+sup
+x∈It
+f2(x) −1
+T γt(Tx −t)
+ ≤
+2
+Tm.
+Note that the obtained assignment t 7→γt is not injective, in general (T will be much larger
+than |Γ|).
+We can then deﬁne ef2 on the whole [0, 1) by
+ef2(x) = 1
+T γt(Tx −t),
+x ∈It,
+t = 0, . . . , T −1.
+(23)
+This ef2 approximates f2 with error
+2
+Tm on [0, 1):
+sup
+x∈[0,1)
+|f2(x) −ef2(x)| ≤
+2
+Tm,
+(24)
+15
+
+
+PDF PAGE 16
+and hence, by (20), for the full approximation ef = ef1 + ef2 we will also have
+sup
+x∈[0,1)
+|f(x) −ef(x)| ≤
+2
+Tm.
+(25)
+Note that the approximation ef2 has properties analogous to (21), (22):
+ef2
+ t
+T
+
+= 0,
+t = 0, . . . , T,
+(26)
+| ef2(x1) −ef2(x2)| ≤2|x1 −x2|,
+(27)
+in particular, ef2 is continuous on [0, 1).
+We will now rewrite ef2 in a diﬀerent form interpretable as a computation by a neural
+network. Speciﬁcally, using our additional activation function ρ given by (19), we can express
+ef2 as
+ef2(x) = 1
+T
+X
+γ∈Γ
+γ
+ X
+t:γt=γ
+ρ(Tx −t)
+
+.
+(28)
+Indeed, given x ∈[0, 1), observe that all the terms in the inner sum vanish except for the
+one corresponding to the t determined by the condition x ∈It. For this particular t we have
+ρ(Tx −t) = Tx −t. Since γ(0) = 0, we conclude that (28) agrees with (23).
+Let us also expand γ ∈Γ over the basis of shifted ReLU functions:
+γ(x) =
+m−1
+X
+r=0
+cγ,rσ
+
+x −r
+m
+
+,
+x ∈[0, 1].
+Substituting this expansion in (28), we ﬁnally obtain
+ef2(x) = 1
+T
+X
+γ∈Γ
+m−1
+X
+r=0
+cγ,rσ
+ X
+t:γt=γ
+ρ(Tx −t) −r
+m
+
+.
+(29)
+Now consider the implementation of ef by a neural nework. The term ef1 can clearly be
+implemented by a depth-3 ReLU network using O(T) connections and computation units.
+The term ef2 can be implemented by a depth-5 network with ρ- and σ-units as follows
+(we denote a computation unit by Q with a superscript indexing the layer and a subscript
+indexing the unit within the layer).
+1. The ﬁrst layer contains the single input unit Q(1).
+2. The second layer contains T units (Q(2)
+t )T
+t=1 computing Q(2)
+t
+= ρ(TQ(1) −t).
+3. The third layer contains |Γ| units (Q(3)
+γ )γ∈Γ computing Q(3)
+γ
+= σ(P
+t:γt=γ Q(2)
+t ). This is
+equivalent to Q(3)
+γ
+= P
+t:γt=γ Q(2)
+t , because Q(2)
+t
+≥0.
+16
+
+
+PDF PAGE 17
+Q(1)
+Q(2)
+t
+= ρ(TQ(1) −t)
+Q(3)
+γ
+= σ(P
+t:γt=γ Q(2)
+t )
+Q(4)
+γ,r = σ(Q(3)
+γ −r
+m)
+b + PT−1
+t=0 wtR(2)
+t
++ P
+γ∈Γ
+Pm−1
+r=0
+cγ,r
+T Q(4)
+γ,r
+R(2)
+t
+= σ(Q(1) −t
+T )
+ef1
+ef2
+Figure 4: Architecture of the network implementing the function ef = ef1 + ef2 from Lemma 1.
+4. The fourth layer contains m|Γ| units (Q(4)
+γ,r)
+γ∈Γ
+r=0,...,m−1 computing Q(4)
+γ,r = σ(Q(3)
+γ
+−r
+m).
+5. The ﬁnal layer consists of a single output unit Q(5) = P
+γ∈Γ
+Pm−1
+r=0
+cγ,r
+T Q(4)
+γ,r.
+Examining this network, we see that the total number of connections and units in it is
+O(T + m|Γ|) and hence is O(T + m3m). This also holds for the full network implementing
+ef = ef1 + ef2, since the term ef1 requires even fewer layers, connections and units. The output
+units of the subnetworks for ef1 and ef2 can be merged into the output unit for ef1 + ef2, so
+the depth of the full network is the maximum of the depths of the networks implementing
+ef1 and ef2, i.e., is 5 (see Fig. 4).
+Now, given ϵ ∈(0, 1
+2), take m = ⌈1
+2 log3(1/ϵ)⌉and T = ⌈2
+mϵ⌉. Then, by (25), the approxi-
+mation error maxx∈[0,1] |f(x) −ef(x)| ≤
+2
+Tm ≤ϵ, while T + m3m = O(
+1
+ϵ ln(1/ϵ)), which implies
+the claimed complexity bound.
+We show now how to modify the constructed network so as to remove ρ-units. We only
+need to modify the ef2 part of the network. We will show that for any δ > 0 we can replace
+ef2 with a function ef3,δ (deﬁned below) that
+a) obeys the following analog of approximation bound (24):
+sup
+x∈[0,1]
+|f2(x) −ef3,δ(x)| ≤8δ
+T +
+2
+Tm,
+(30)
+b) and is implementable by a depth-6 ReLU network having complexity c(T +m3m) with
+an absolute constant c independent of δ.
+Since δ can be taken arbitrarily small, the Theorem then follows by arguing as in Lemma 1,
+only with ef2 replaced by ef3,δ.
+17
+
+
+PDF PAGE 18
+As a ﬁrst step, we approximate ρ by a continuous piece-wise linear function ρδ, with a
+small δ > 0:
+ρ(y) =
+
+
+
+
+
+y,
+y ∈[0, 1 −δ),
+1−δ
+δ (1 −y),
+y ∈[1 −δ, 1),
+0,
+y /∈[0, 1).
+Let ef2,δ be deﬁned as ef2 in (29), but with ρ replaced by ρδ:
+ef2,δ(x) = 1
+T
+X
+γ∈Γ
+m−1
+X
+r=0
+cγ,rσ
+ X
+t:γt=γ
+ρδ(Tx −t) −r
+m
+
+.
+Since ρδ is a continuous piece-wise linear function with three breakpoints, we can express it
+via the ReLU function, and hence implement ef2,δ by a purely ReLU network, as in Proposition
+1, and the complexity of the implementation does not depend on δ. However, replacing ρ with
+ρδ aﬀects the function ef2 on the intervals (t−δ
+T , t
+T ], t = 1, . . . , T, introducing there a large error
+(of magnitude O( 1
+T )). But recall that both f2 and ef2 vanish at the points t
+T , t = 0, . . . , T, by
+(21), (26). We can then largely remove this newly introduced error by simply suppressing
+ef2,δ near the points
+t
+T .
+Precisely, consider the continuous piece-wise linear function
+φδ(y) =
+
+
+
+
+
+
+
+
+
+0,
+y /∈[0, 1 −δ),
+y
+δ,
+y ∈[0, δ),
+1,
+y ∈[δ, 1 −2δ),
+1−δ−y
+δ
+,
+y ∈[1 −2δ, 1 −δ)
+and the full comb-like ﬁltering function
+Φδ(x) =
+T−1
+X
+t=0
+φδ(Tx −t).
+Note that Φδ is continuous piece-wise linear with 4T breakpoints, and 0 ≤Φδ(x) ≤1. We
+then deﬁne our ﬁnal modiﬁcation of ef2 as
+ef3,δ(x) = σ
+
+ef2,δ(x) + 2Φδ(x) −1
+
+−σ
+
+2Φδ(x) −1
+
+.
+(31)
+Lemma 2. The function ef3,δ obeys the bound (30).
+Proof. Given x ∈[0, 1), let t ∈{0, . . . , T −1} and y ∈[0, 1) be determined from the
+representation x =
+t+y
+T
+(i.e., y is the relative position of x in the respective interval It).
+Consider several possibilities for y:
+18
+
+
+PDF PAGE 19
+1. y ∈[1 −δ, 1]. In this case Φδ(x) = 0. Note that
+sup
+x∈[0,1]
+| ef2,δ(x)| ≤1,
+(32)
+because, by construction, supx∈[0,1] | ef2,δ(x)| ≤supx∈[0,1] | ef2(x)|, and supx∈[0,1] | ef2(x)| ≤1
+by (26), (27). It follows that both terms in (31) vanish, i.e., ef3,δ(x) = 0. But, since f2 is
+Lipschitz with constant 2 by (22) and f2(t+1
+T ) = 0, we have |f2(x)| ≤|f2(x)−f2(t+1
+T )| ≤
+2|y−1|
+T
+≤2δ
+T . This implies |f2(x) −ef3,δ(x)| ≤2δ
+T .
+2. y ∈[δ, 1 −2δ]. In this case Φδ(x) = 1 and ef2,δ(x) = ef2(x). Using (32), we ﬁnd that
+ef3,δ(x) = ef2,δ(x) = ef2(x). It follows that |f2(x) −ef3,δ(x)| = |f2(x) −ef2(x)| ≤
+2
+Tm.
+3. y ∈[0, δ]∪[1−2δ, 1−δ]. In this case ef2,δ(x) = ef2(x). Since σ is Lipschitz with constant
+1, | ef3,δ(x)| ≤| ef2,δ(x)| = | ef2(x)|. Both f2 and ef2 are Lipschitz with constant 2 (by (22),
+(27)) and vanish at
+t
+T and t+1
+T
+(by (21), (26)). It follows that
+|f2(x) −ef3,δ(x)| ≤|f2(x)| + | ef2(x)| ≤2
+(
+2|x −t
+T |,
+y ∈[0, δ]
+2|x −t+1
+T |,
+y ∈[1 −2δ, 1 −δ] ≤8δ
+T .
+It remains to verify the complexity property b) of the function ef3,δ. As already mentioned,
+ef2,δ can be implemented by a depth-5 purely ReLU network with not more than c(T +m3m)
+weights, connections and computation units, where c is an absolute constant independent
+of δ. The function Φδ can be implemented by a shallow, depth-3 network with O(T) units
+and connection. Then, computation of ef3,δ can be implemented by a network including two
+subnetworks for computing ef2,δ and Ψδ, and an additional layer containing two σ-units as
+written in (31). We thus obtain 6 layers in the resulting full network and, choosing T and m
+in the same way as in Lemma 1, obtain the bound
+c
+ϵ ln(1/ϵ) for the number of its connections,
+weights, and computation units.
+4
+Lower bounds
+4.1
+Continuous nonlinear widths
+The method of continuous nonlinear widths (DeVore et al. [1989]) is a very general approach
+to the analysis of parameterized nonlinear approximations, based on the assumption of con-
+tinuous selection of their parameters. We are interested in the following lower bound for the
+complexity of approximations in Wn,∞([0, 1]d).
+19
+
+
+PDF PAGE 20
+Theorem 3 (DeVore et al. [1989], Theorem 4.2). Fix d, n. Let W be a positive integer and
+η : RW →C([0, 1]d) be any mapping between the space RW and the space C([0, 1]d). Suppose
+that there is a continuous map M : Fd,n →RW such that ∥f −η(M(f))∥∞≤ϵ for all
+f ∈Fd,n. Then W ≥cϵ−d/n, with some constant c depending only on n.
+We apply this theorem by taking η to be some ReLU network architecture, and RW the
+corresponding weight space. It follows that if a ReLU network architecture is capable of
+expressing any function from Fd,n with error ϵ, then, under the hypothesis of continuous
+weight selection, the network must have at least cϵ−d/n weights. The number of connections
+is then lower bounded by c
+2ϵ−d/n (since the number of weights is not larger than the sum of
+the number of computation units and the number of connections, and there are at least as
+many connections as units).
+The hypothesis of continuous weight selection is crucial in Theorem 3. By examining
+our proof of the counterpart upper bound O(ϵ−d/n ln(1/ϵ)) in Theorem 1, the weights are
+selected there in a continuous manner, so this upper bound asymptotically lies above cϵ−d/n
+in agreement with Theorem 3. We remark, however, that the optimal choice of the network
+weights (minimizing the error) is known to be discontinuous in general, even for shallow
+networks (Kainen et al. [1999]).
+We also compare the bounds of Theorems 3 and 2. In the case d = n = 1, Theorem 3
+provides a lower bound c
+ϵ for the number of weights and connections. On the other hand,
+in the adaptive architecture scenario, Theorem 2 provides the upper bound
+c
+ϵ ln(1/ϵ) for the
+number of weights, connections and computation units. The fact that this latter bound is
+asymptotically below the bound of Theorem 3 reﬂects the extra expressiveness associated
+with variable network architecture.
+4.2
+Bounds based on VC-dimension
+In this section we consider the setup where the same network architecture is used to ap-
+proximate all functions f ∈Fd,n, but the dependence of the weights on f is not assumed
+to be necessarily continuous. In this setup, some lower bounds on the network complexity
+can be obtained as a consequence of existing upper bounds on VC-dimension of networks
+with piece-wise polynomial activation functions and Boolean outputs (Anthony and Bartlett
+[2009]). In the next theorem, part a) is a more general but weaker bound, while part b) is a
+stronger bound assuming a constrained growth of the network depth.
+Theorem 4. Fix d, n.
+a) For any ϵ ∈(0, 1), a ReLU network architecture capable of approximating any function
+f ∈Fd,n with error ϵ must have at least cϵ−d/(2n) weights, with some constant c =
+c(d, n) > 0.
+b) Let p ≥0, c1 > 0 be some constants. For any ϵ ∈(0, 1
+2), if a ReLU network architecture
+of depth L ≤c1 lnp(1/ϵ) is capable of approximating any function f ∈Fd,n with error
+20
+
+
+PDF PAGE 21
+ϵ, then the network must have at least c2ϵ−d/n ln−2p−1(1/ϵ) weights, with some constant
+c2 = c2(d, n, p, c1) > 0.1
+Proof. Recall that given a class H of Boolean functions on [0, 1]d, the VC-dimension of H is
+deﬁned as the size of the largest shattered subset S ⊂[0, 1]d, i.e. the largest subset on which
+H can compute any dichotomy (see, e.g., Anthony and Bartlett [2009], Section 3.3). We
+are interested in the case when H is the family of functions obtained by applying thresholds
+1(x > a) to a ReLU network with ﬁxed architecture but variable weights.
+In this case
+Theorem 8.7 of Anthony and Bartlett [2009] implies that
+VCdim(H) ≤c3W 2,
+(33)
+and Theorem 8.8 implies that
+VCdim(H) ≤c3L2W ln W,
+(34)
+where W is the number of weights, L is the network depth, and c3 is an absolute constant.
+Given a positive integer N to be chosen later, choose S as a set of N d points x1, . . . , xNd
+in the cube [0, 1]d such that the distance between any two of them is not less than
+1
+N . Given
+any assignment of values y1, . . . , yNd ∈R, we can construct a smooth function f satisfying
+f(xm) = ym for all m by setting
+f(x) =
+Nd
+X
+m=1
+ymφ(N(x −xm)),
+(35)
+with some C∞function φ : Rd →R such that φ(0) = 1 and φ(x) = 0 if |x| > 1
+2.
+Let us obtain a condition ensuring that such f ∈Fd,n. For any multi-index n,
+max
+x
+|Dnf(x)| = N |n| max
+m |ym| max
+x
+|Dnφ(x)|,
+so if
+max
+m |ym| ≤c4N −n,
+(36)
+with the constant c4 = (maxn:|n|≤n maxx |Dnφ(x)|)−1, then f ∈Fd,n.
+Now set
+ϵ = c4
+3 N −n.
+(37)
+Suppose that there is a ReLU network architecture η that can approximate, by adjusting its
+weights, any f ∈Fd,n with error less than ϵ. Denote by η(x, w) the output of the network
+for the input vector x and the vector of weights w.
+Consider any assignment z of Boolean values z1, . . . , zNd ∈{0, 1}. Set
+ym = zmc4N −n,
+m = 1, . . . , N d,
+and let f be given by (35) (see Fig. 5); then (36) holds and hence f ∈Fd,n. By assumption,
+1The author thanks Matus Telgarsky for suggesting this part of the theorem.
+21
+
+
+PDF PAGE 22
+Figure 5: A function f considered in the proof of Theorem 2 (for d = 2).
+there is then a vector of weights, w = wz, such that for all m we have |η(xm, wz) −ym| ≤ϵ,
+and in particular
+η(xm, wz)
+≥c4N −n −ϵ > c4N −n/2,
+if zm = 1,
+≤
+ϵ
+< c4N −n/2,
+if zm = 0,
+so the thresholded network η1 = 1(η > c4N −n/2) has outputs
+η1(xm, wz) = zm,
+m = 1, . . . , N d.
+Since the Boolean values zm were arbitrary, we conclude that the subset S is shattered and
+hence
+VCdim(η1) ≥N d.
+Expressing N through ϵ with (37), we obtain
+VCdim(η1) ≥
+3ϵ
+c4
+−d/n
+.
+(38)
+To establish part a) of the Theorem, we apply bound (33) to the network η1:
+VCdim(η1) ≤c3W 2,
+(39)
+where W is the number of weights in η1, which is the same as in η if we do not count
+the threshold parameter. Combining (38) with (39), we obtain the desired lower bound
+W ≥cϵ−d/(2n) with c = (c4/3)d/(2n)c−1/2
+3
+.
+To establish part b) of the Theorem, we use bound (34) and the hypothesis L ≤
+c1 lnp(1/ϵ):
+VCdim(η1) ≤c3c2
+1 ln2p(1/ϵ)W ln W.
+(40)
+Combining (38) with (40), we obtain
+W ln W ≥
+1
+c3c2
+1
+3ϵ
+c4
+−d/n
+ln−2p(1/ϵ).
+(41)
+22
+
+
+PDF PAGE 23
+Trying a W of the form Wc2 = c2ϵ−d/n ln−2p−1(1/ϵ) with a constant c2, we get
+Wc2 ln Wc2 = c2ϵ−d/n ln−2p−1(1/ϵ)
+d
+n ln(1/ϵ) + ln c2 −(2p + 1) ln ln(1/ϵ)
+
+=
+
+c2
+d
+n + o(1)
+
+ϵ−d/n ln−2p(1/ϵ).
+Comparing this with (41), we see that if we choose c2 < (c4/3)d/nn/(dc3c2
+1), then for suf-
+ﬁciently small ϵ we have W ln W ≥Wc2 ln Wc2 and hence W ≥Wc2, as claimed. We can
+ensure that W ≥Wc2 for all ϵ ∈(0, 1
+2) by further decreasing c2.
+We remark that the constrained depth hypothesis of part b) is satisﬁed, with p = 1, by
+the architecture used for the upper bound in Theorem 1. The bound stated in part b) of
+Theorem 4 matches the upper bound of Theorem 1 and the lower bound of Theorem 3 up
+to a power of ln(1/ϵ).
+4.3
+Adaptive network architectures
+Our goal in this section is to obtain a lower bound for the approximation complexity in the
+scenario where the network architecture may depend on the approximated function. This
+lower bound is thus a counterpart to the upper bound of Section 3.3.
+To state this result we deﬁne the complexity N(f, ϵ) of approximating the function f
+with error ϵ as the minimal number of hidden computation units in a ReLU network that
+provides such an approximation.
+Theorem 5. For any d, n, there exists f ∈Wn,∞([0, 1]d) such that N(f, ϵ) is not o(ϵ−d/(9n))
+as ϵ →0.
+The proof relies on the following lemma.
+Lemma 3. Fix d, n.
+For any suﬃciently small ϵ > 0 there exists fϵ ∈Fd,n such that
+N(fϵ, ϵ) ≥c1ϵ−d/(8n), with some constant c1 = c1(d, n) > 0.
+Proof. Observe that all the networks with not more than m hidden computation units can
+be embedded in the single “enveloping” network that has m hidden layers, each consisting
+of m units, and that includes all the connections between units not in the same layer (see
+Fig. 6a). The number of weights in this enveloping network is O(m4). On the other hand,
+Theorem 4a) states that at least cϵ−d/(2n) weights are needed for an architecture capable of
+ϵ-approximating any function in Fd,n. It follows that there is a function fϵ ∈Fd,n that cannot
+be ϵ-approximated by networks with fewer than c1ϵ−d/(8n) computation units.
+Before proceeding to the proof of Theorem 5, note that N(f, ϵ) is a monotone decreasing
+function of ϵ with a few obvious properties:
+N(af, |a|ϵ) = N(f, ϵ), for any a ∈R \ {0}
+(42)
+23
+
+
+PDF PAGE 24
+(a)
+(b)
+Figure 6: (a) Embedding a network with m = 4 hidden units into an “enveloping” network
+(see Lemma 3). (b) Putting sub-networks in parallel to form an approximation for the sum
+or diﬀerence of two functions, see Eq. (44).
+(follows by multiplying the weights of the output unit of the approximating network by a
+constant);
+N(f ± g, ϵ + ∥g∥∞) ≤N(f, ϵ)
+(43)
+(follows by approximating f ± g by an approximation of f);
+N(f1 ± f2, ϵ1 + ϵ2) ≤N(f1, ϵ1) + N(f2, ϵ2)
+(44)
+(follows by combining approximating networks for f1 and f2 as in Fig. 6b).
+Proof of Theorem 5. The claim of Theorem 5 is similar to the claim of Lemma 3, but is
+about a single function f satisfying a slightly weaker complexity bound at multiple values
+of ϵ →0. We will assume that Theorem 5 is false, i.e.,
+N(f, ϵ) = o(ϵ−d/(9n))
+(45)
+for all f ∈Wn,∞([0, 1]d), and we will reach contradiction by presenting f violating this
+assumption. Speciﬁcally, we construct this f as
+f =
+∞
+X
+k=1
+akfk,
+(46)
+with some ak ∈R, fk ∈Fd,n, and we will make sure that
+N(f, ϵk) ≥ϵ−d/(9n)
+k
+(47)
+for a sequence of ϵk →0.
+We determine ak, fk, ϵk sequentially. Suppose we have already found {as, fs, ϵs}k−1
+s=1; let
+us describe how we deﬁne ak, fk, ϵk.
+24
+
+
+PDF PAGE 25
+First, we set
+ak =
+min
+s=1,...,k−1
+ϵs
+2k−s.
+(48)
+In particular, this ensures that
+ak ≤ϵ121−k,
+so that the function f deﬁned by the series (46) will be in Wn,∞([0, 1]d), because
+∥fk∥Wn,∞([0,1]d) ≤1.
+Next, using Lemma 3 and Eq. (42), observe that if ϵk is suﬃciently small, then we can
+ﬁnd fk ∈Fd,n such that
+N
+ akfk, 3ϵk
+
+= N
+
+fk, 3ϵk
+ak
+
+≥c1
+3ϵk
+ak
+−d/(8n)
+≥2ϵ−d/(9n)
+k
+.
+(49)
+In addition, by assumption (45), if ϵk is small enough then
+N
+ k−1
+X
+s=1
+asfs, ϵk
+
+≤ϵ−d/(9n)
+k
+.
+(50)
+Let us choose ϵk and fk so that both (49) and (50) hold. Obviously, we can also make sure
+that ϵk →0 as k →∞.
+Let us check that the above choice of {ak, fk, ϵk}∞
+k=1 ensures that inequality (47) holds
+for all k:
+N
+
+∞
+X
+s=1
+asfs, ϵk
+
+≥N
+
+k
+X
+s=1
+asfs, ϵk +
+
+∞
+X
+s=k+1
+asfs
+
+∞
+
+≥N
+
+k
+X
+s=1
+asfs, ϵk +
+∞
+X
+s=k+1
+as
+
+≥N
+
+k
+X
+s=1
+asfs, 2ϵk
+
+≥N(akfk, 3ϵk) −N
+ k−1
+X
+s=1
+asfs, ϵk
+
+≥ϵ−d/(9n).
+Here in the ﬁrst step we use inequality (43), in the second the monotonicity of N(f, ϵ), in
+the third the monotonicity of N(f, ϵ) and the setting (48), in the fourth the inequality (44),
+and in the ﬁfth the conditions (49) and (50).
+4.4
+Slow approximation of smooth functions by shallow networks
+In this section we show that, in contrast to deep ReLU networks, shallow ReLU networks
+relatively ineﬃciently approximate suﬃciently smooth (C2) nonlinear functions. We remark
+25
+
+
+PDF PAGE 26
+that Liang and Srikant 2016 prove a similar result assuming global convexity instead of
+smoothness and nonlinearity.
+Theorem 6. Let f ∈C2([0, 1]d) be a nonlinear function (i.e., not of the form f(x1, . . . , xd) ≡
+a0 + Pd
+k=1 akxk on the whole [0, 1]d).
+Then, for any ﬁxed L, a depth-L ReLU network
+approximating f with error ϵ ∈(0, 1) must have at least cϵ−1/(2(L−2)) weights and computation
+units, with some constant c = c(f, L) > 0.
+Proof. Since f ∈C2([0, 1]d and f is nonlinear, we can ﬁnd x0 ∈[0, 1]d and v ∈Rd such that
+x0 + xv ∈[0, 1]d for all x ∈[−1, 1] and the function f1 : x 7→f(x0 + xv) is strictly convex
+or concave on [−1, 1]. Suppose without loss of generality that it is strictly convex:
+min
+x∈[−1,1] f ′′
+1 (x) = c1 > 0.
+(51)
+Suppose that ef is an ϵ-approximation of function f, and let ef be implemented by a ReLU
+network η of depth L. Let ef1 : x 7→ef(x0 +xv). Then ef1 also approximates f1 with error not
+larger than ϵ. Moreover, since ef1 is obtained from ef by a linear substitution x = x0 + xv,
+ef1 can be implemented by a ReLU network η1 of the same depth L and with the number
+of units and weights not larger than in η (we can obtain η1 from η by replacing the input
+layer in η with a single unit, accordingly modifying the input connections, and adjusting
+the weights associated with these connections). It is thus suﬃcient to establish the claimed
+bounds for η1.
+By construction, ef1 is a continuous piece-wise linear function of x. Denote by M the
+number of linear pieces in ef1. We will use the following counting lemma.
+Lemma 4. M ≤(2U)L−2, where U is the number of computation units in η1.
+Proof. This bound, up to minor details, is proved in Lemma 2.1 of Telgarsky [2015]. Precisely,
+Telgarsky’s lemma states that if a network has a single input, connections only between
+neighboring layers, at most m units in a layer, and a piece-wise linear activation function
+with t pieces, then the number of linear pieces in the output of the network is not greater
+than (tm)L.
+By examining the proof of the lemma we see that it will remain valid for
+networks with connections not necessarily between neighboring layers, if we replace m by
+U in the expression (tm)L. Moreover, we can slightly strengthen the bound by noting that
+in the present paper the input and output units are counted as separate layers, only units
+of layers 3 to L have multiple incoming connections, and the activation function is applied
+only in layers 2 to L −1. By following Telgarsky’s arguments, this gives the slightly more
+accurate bound (tU)L−2 (i.e., with the power L −2 instead of L). It remains to note that
+the ReLU activation function corresponds to t = 2.
+Lemma 4 implies that there is an interval [a, b] ⊂[−1, 1] of length not less than
+2(2U)−(L−2) on which the function ef1 is linear. Let g = f1 −ef1. Then, by the approxi-
+mation accuracy assumption, supx∈[a,b] |g(x)| ≤ϵ, while by (51) and by the linearity of ef1
+26
+
+
+PDF PAGE 27
+on [a, b], maxx∈[a,b] g′′(x) ≥c1 > 0. It follows that max(g(a), g(b)) ≥g(a+b
+2 ) + c1
+2 (b−a
+2 )2 and
+hence
+ϵ ≥1
+2
+ max(g(a), g(b)) −g(a+b
+2 )
+
+≥c1
+4
+b −a
+2
+2
+≥c1
+4 (2U)−2(L−2),
+which implies the claimed bound U ≥
+1
+2( 4ϵ
+c1)−1/(2(L−2)). Since there are at least as many
+weights as computation units in a network, a similar bound holds for the number of weights.
+5
+Discussion
+We discuss some implications of the obtained bounds.
+Deep vs. shallow ReLU approximations of smooth functions.
+Our results clearly
+show that deep ReLU networks more eﬃciently express smooth functions than shallow
+ReLU networks.
+By Theorem 1, functions from the Sobolev space Wn,∞([0, 1]d) can be
+ϵ-approximated by ReLU networks with depth O(ln(1/ϵ)) and the number of computation
+units O(ϵ−d/n ln(1/ϵ)). In contrast, by Theorem 6, a nonlinear function from C2([0, 1]d) can-
+not be ϵ-approximated by a ReLU network of ﬁxed depth L with the number of units less than
+cϵ−1/(2(L−2)). In particular, it follows that in terms of the required number of computation
+units, unbounded-depth approximations of functions from Wn,∞([0, 1]d) are asymptotically
+strictly more eﬃcient than approximations with a ﬁxed depth L at least when
+d
+n <
+1
+2(L −2)
+(assuming also n > 2, so that Wn,∞([0, 1]d) ⊂C2([0, 1]d)). The eﬃciency of depth is even
+more pronounced for very smooth functions such as polynomials, which can be implemented
+by deep networks using only O(ln(1/ϵ)) units (cf. Propositions 2 and 3 and the proof of
+Theorem 1). Liang and Srikant describe in Liang and Srikant [2016] some conditions on the
+approximated function (resembling conditions of local analyticity) under which complexity
+of deep ϵ-approximation is O(lnc(1/ϵ)) with a constant power c.
+Continuous model selection vs.
+function-dependent network architectures.
+When approximating a function by a neural network, one can either view the network archi-
+tecture as ﬁxed and only tune the weights, or optimize the architecture as well. Moreover,
+when tuning the weights, one can either require them to continuously depend on the ap-
+proximated function or not. We naturally expect that more freedom in the choice of the
+approximation should lead to higher expressiveness.
+Our bounds conﬁrm this expectation to a certain extent. Speciﬁcally, the complexity of
+ϵ-approximation of functions from the unit ball F1,1 in W1,∞([0, 1]) is lower bounded by c
+ϵ in
+the scenario with a ﬁxed architecture and continuously selected weights (see Theorem 3). On
+the other hand, we show in Theorem 2 that this complexity is upper bounded by O(
+1
+ϵ ln(1/ϵ))
+27
+
+
+PDF PAGE 28
+if we are allowed to adjust the network architecture. This bound is achieved by ﬁnite-depth
+(depth-6) ReLU networks using the idea of reused subnetworks familiar from the theory of
+Boolean circuits Shannon [1949].
+In the case of ﬁxed architecture, we have not established any evidence of complexity
+improvement for unconstrained weight selection compared to continuous weight selection.
+We remark however that, already for approximations with depth-3 networks, the optimal
+weights are known to discontinuously depend, in general, on the approximated function
+(Kainen et al. [1999]). On the other hand, part b) of Theorem 4 shows that if the network
+depth scales as O(lnp(1/ϵ)), discontinuous weight selection cannot improve the continuous-
+case complexity more than by a factor being some power of ln(1/ϵ).
+Upper vs. lower complexity bounds.
+We indicate the gaps between respective upper
+and lower bounds in the three scenarios mentioned above: ﬁxed architectures with continuous
+selection of weights, ﬁxed architectures with unconstrained selection of weights, or adaptive
+architectures.
+For ﬁxed architectures with continuous selection the lower bound cϵ−d/n is provided by
+Proposition 3, and the upper bound O(ϵ−d/n ln(1/ϵ)) by Theorem 1, so these bounds are
+tight up to a factor O(ln(1/ϵ)).
+In the case of ﬁxed architecture but unconstrained selection, part b) of Theorem 4
+gives a lower bound cϵ−d/n ln−2p−1(1/ϵ) under assumption that the depth is constrained
+by O(lnp(1/ϵ)). This is only diﬀerent by a factor of O(ln2p+2(1/ϵ)) from the upper bound
+of Theorem 1. Without this depth constraint we only have the signiﬁcantly weaker bound
+cϵ−d/(2n) (part a) of Theorem 4).
+In the case of adaptive architectures, there is a big gap between our upper and lower
+bounds. The upper bound O(
+1
+ϵ ln(1/ϵ)) is given by Theorem 2 for d = n = 1. The lower
+bound, proved for general d, n in Theorem 5, only states that there are f ∈Wn,∞([0, 1]d) for
+which the complexity is not o(ϵ−d/(9n)).
+ReLU vs.
+smooth activation functions.
+A popular general-purpose method of ap-
+proximation is shallow (depth-3) networks with smooth activation functions (e.g., logistic
+sigmoid). Upper and lower approximation complexity bounds for these networks (Mhaskar
+[1996], Maiorov and Meir [2000]) show that complexity scales as ∼ϵ−d/n up to some ln(1/ϵ)
+factors. Comparing this with our bounds in Theorems 1,2,4, it appears that deep ReLU
+networks are roughly (up to ln(1/ϵ) factors) as expressive as shallow networks with smooth
+activation functions.
+Conclusion.
+We have established several upper and lower bounds for the expressive power
+of deep ReLU networks in the context of approximation in Sobolev spaces. We should note,
+however, that this setting may not quite reﬂect typical real world applications, which usually
+possess symmetries and hierarchical and other structural properties substantially narrowing
+the actually interesting classes of approximated functions (LeCun et al. [2015]). Some recent
+publications introduce and study expressive power of deep networks in frameworks bridging
+28
+
+
+PDF PAGE 29
+this gap, in particular, graph-based hierarchical approximations are studied in Mhaskar et al.
+[2016], Mhaskar and Poggio [2016] and convolutional arithmetic circuits in Cohen et al. [2015].
+Theoretical analysis of expressiveness of deep networks taking into account such properties
+of real data seems to be an important and promising direction of future research.
+Acknowledgments
+The author thanks Matus Telgarsky and the anonymous referees for multiple helpful com-
+ments on the preliminary versions of the paper.
+The research was funded by Skolkovo
+Institute of Science and Technology.
+References
+Martin Anthony and Peter L Bartlett. Neural network learning: Theoretical foundations.
+Cambridge university press, 2009.
+Peter L Bartlett, Vitaly Maiorov, and Ron Meir. Almost linear VC-dimension bounds for
+piecewise polynomial networks. Neural computation, 10(8):2159–2173, 1998.
+Monica Bianchini and Franco Scarselli. On the complexity of neural network classiﬁers: A
+comparison between shallow and deep architectures. IEEE transactions on neural networks
+and learning systems, 25(8):1553–1565, 2014.
+Nadav Cohen, Or Sharir, and Amnon Shashua. Why deep neural networks? arXiv preprint
+arXiv:1509.05009, 2015.
+CM Dawson and MA Nielsen. The Solovay-Kitaev algorithm. Quantum Information and
+Computation, 6(1):81–95, 2006.
+Olivier Delalleau and Yoshua Bengio. Shallow vs. deep sum-product networks. In Advances
+in Neural Information Processing Systems, pages 666–674, 2011.
+Ronald A DeVore, Ralph Howard, and Charles Micchelli. Optimal nonlinear approximation.
+Manuscripta mathematica, 63(4):469–478, 1989.
+Paul W Goldberg and Mark R Jerrum. Bounding the Vapnik-Chervonenkis dimension of
+concept classes parameterized by real numbers. Machine Learning, 18(2-3):131–148, 1995.
+Paul C Kainen, Vˇera K˚urkov´a, and Andrew Vogt. Approximation by neural networks is not
+continuous. Neurocomputing, 29(1):47–56, 1999.
+Michael J Kearns and Robert E Schapire. Eﬃcient distribution-free learning of probabilistic
+concepts. In Foundations of Computer Science, 1990. Proceedings., 31st Annual Sympo-
+sium on, pages 382–391. IEEE, 1990.
+29
+
+
+PDF PAGE 30
+A. Yu. Kitaev, A. H. Shen, and M. N. Vyalyi. Classical and Quantum Computation. American
+Mathematical Society, Boston, MA, USA, 2002. ISBN 0821832298.
+Yann LeCun, Yoshua Bengio, and Geoﬀrey Hinton.
+Deep learning.
+Nature, 521(7553):
+436–444, 2015.
+Shiyu Liang and R. Srikant. Why deep neural networks? arXiv preprint arXiv:1610.04161,
+2016.
+VE Maiorov and Ron Meir.
+On the near optimality of the stochastic approximation of
+smooth functions by neural networks. Advances in Computational Mathematics, 13(1):
+79–103, 2000.
+HN Mhaskar. Neural networks for optimal approximation of smooth and analytic functions.
+Neural Computation, 8(1):164–177, 1996.
+Hrushikesh Mhaskar and Tomaso Poggio. Deep vs. shallow networks: An approximation
+theory perspective. arXiv preprint arXiv:1608.03287, 2016.
+Hrushikesh Mhaskar, Qianli Liao, and Tomaso Poggio. Learning real and boolean functions:
+When is deep better than shallow. arXiv preprint arXiv:1603.00988, 2016.
+Guido F Montufar, Razvan Pascanu, Kyunghyun Cho, and Yoshua Bengio. On the number
+of linear regions of deep neural networks. In Advances in neural information processing
+systems, pages 2924–2932, 2014.
+Allan Pinkus. Approximation theory of the MLP model in neural networks. Acta Numerica,
+8:143–195, 1999.
+Maithra Raghu, Ben Poole, Jon Kleinberg, Surya Ganguli, and Jascha Sohl-Dickstein. On
+the expressive power of deep neural networks. arXiv preprint arXiv:1606.05336, 2016.
+Akito Sakurai. Tight Bounds for the VC-Dimension of Piecewise Polynomial Networks. In
+Advances in Neural Information Processing Systems, pages 323–329, 1999.
+J¨urgen Schmidhuber. Deep learning in neural networks: An overview. Neural Networks, 61:
+85–117, 2015.
+Claude Shannon.
+The synthesis of two-terminal switching circuits.
+Bell Labs Technical
+Journal, 28(1):59–98, 1949.
+Matus Telgarsky.
+Representation beneﬁts of deep feedforward networks.
+arXiv preprint
+arXiv:1509.08101, 2015.
+Matus Telgarsky. Beneﬁts of depth in neural networks. arXiv preprint arXiv:1602.04485,
+2016.
+30
+
+
+PDF PAGE 31
+Vladimir N Vapnik and A Ya Chervonenkis. On the uniform convergence of relative frequen-
+cies of events to their probabilities. In Measures of Complexity, pages 11–30. Springer,
+2015.
+Hugh E Warren. Lower bounds for approximation by nonlinear manifolds. Transactions of
+the American Mathematical Society, 133(1):167–178, 1968.
+31

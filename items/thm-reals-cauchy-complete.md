@@ -13,8 +13,8 @@ landmark: true
 short: "ℝ complete"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-reals-cauchy-complete.json
   precheck: pass
-  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/cauchy/published-repair-receipt.json
 sources:
   scraped: []
   references:
@@ -31,10 +31,16 @@ pipeline_run: null
 
 ## Statement
 
-Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real
-number. Together with [[thm-reals-ordered-field]], this completes the
+Every Cauchy sequence of real numbers (Limits and Cauchy sequences of reals) converges to a real
+number. Together with The reals form a totally ordered field, this completes the
 construction: $\mathbb{R}$ is a complete totally ordered field.
 The proof uses no form of the axiom of choice.
+
+## Statement references
+
+[[def-real-limit]]
+
+[[thm-reals-ordered-field]]
 
 ## Facts & Assumptions
 

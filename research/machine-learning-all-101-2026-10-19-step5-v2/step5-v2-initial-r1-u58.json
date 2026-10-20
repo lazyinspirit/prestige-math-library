@@ -1,0 +1,178 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "58",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "cor-vae-elbo-kl-decomposition",
+      "model": "gpt-6-luna",
+      "context_sha256": "e48a2d66a288aac54f29162a2ee820bb88c39f0d4ccd2b4252e7c73f5682bf0c",
+      "outcome": "false_positive",
+      "reason": "The named generic Definition requires a measure space, measurable nonnegative gamma, 0<Z=integral gamma<infinity, pi=gamma/Z, a probability density q with q=0 almost everywhere on {pi=0}, and absolute integrability of q(|log gamma|+|log q|). The VAE Definition supplies every one of these conditions, and corollary step 1.1 explicitly matches them and the identical ELBO integral. Sigma-finiteness is an available stronger hypothesis, not an unsupported premise. The theorem's density-ratio identity and AC-dependent reverse-KL branch therefore apply exactly as step 2.1 states.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-reparameterized-variational-training",
+      "model": "gpt-6-luna",
+      "context_sha256": "a243f0187cf1775950af4584a410cff4bd8749efac65eee95a52a87d02ec434f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Original Step 1 only makes epsilon_t independent of I_t and earlier draws; I_t may depend on the history, contradicting the conditional-unbiasedness assertion. For a singleton latent space and Bernoulli decoder with success probability s(theta)=1/(1+exp(-theta)), take data (1,0). The two payoffs are log s(theta) and log(1-s(theta)), with gradients 1-s(theta) and -s(theta). Setting I_1=I_0 preserves uniform marginals and all fresh-noise requirements, but conditional on the first draw the second gradient differs from the finite-average gradient 1/2-s(theta_1) by +1/2 or -1/2. All smoothness, envelope and second-moment conditions hold. Step 1 now explicitly makes both components independent and their pair independent of all earlier draws.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cor-vae-elbo-kl-decomposition",
+      "disposition": "unaffected",
+      "post_sha256": "563926296b23278f17f29c6c8fe8bf67e367ea1307218f0b5c5609b0422ecc53",
+      "review_context_sha256": "eea4455070b27a4ce1d25c03db3ff0f8a5d6e615be980e6f37512167e4159961",
+      "reason": "Reviewed the complete current corollary, VAE Definition, generic variational Definition and ELBO theorem proof, owning proof contract and page interface. Step 1.1 supplies all generic admissibility conditions; the integrable identity log(q/pi)=log q-log gamma+log Z yields the stated gap, and AC is retained only for the supplier's library-KL identification and nonnegativity. The encoder-to-posterior direction and zero-density convention agree. Statement references follow the uninterrupted Statement; there are no diagrams. Item content remains unchanged. Corrected only owning-contract F2 and A1 quotation mirrors to the current supplier Statement/Definition after their links moved to reference sections; this metadata repair does not change the item carrier or its mathematical decision.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "alg-reparameterized-variational-training",
+      "disposition": "repaired",
+      "post_sha256": "95eab0c05c7f3f46710bbcec51ce7a67197dad1b41cfe9e6b3bf6a16195d1c6d",
+      "review_context_sha256": "3befc5bed77f0a6c17928bb24594651db5658ecc53ca290adfa4afb9e56df098",
+      "reason": "Reviewed the complete algorithm, VAE Definition, dominated pathwise-gradient theorem Statement and proof, corollary, owning contract and frontmatter-only page. Repaired only Definition Step 1: the index and noise are independent, and their pair is independent of all earlier random draws. Conditional on a preceding history the current parameter is fixed and the new input law is uniform times rho, so the cited theorem gives that fixed-history distribution its stated mean and finite coordinate variances. Common null-set branches define finite records, ascent and admissible-domain requirements are retained, and no trajectory variance or convergence guarantee is added. The direct termination consumer remains valid pointwise. No diagrams require repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-reparameterized-variational-training-finite-run-terminates"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "cor-vae-elbo-kl-decomposition",
+      "model": "gpt-6-luna",
+      "context_sha256": "e48a2d66a288aac54f29162a2ee820bb88c39f0d4ccd2b4252e7c73f5682bf0c",
+      "outcome": "false_positive",
+      "status": "false-positive",
+      "reason": "The named generic Definition requires a measure space, measurable nonnegative gamma, 0<Z=integral gamma<infinity, pi=gamma/Z, a probability density q with q=0 almost everywhere on {pi=0}, and absolute integrability of q(|log gamma|+|log q|). The VAE Definition supplies every one of these conditions, and corollary step 1.1 explicitly matches them and the identical ELBO integral. Sigma-finiteness is an available stronger hypothesis, not an unsupported premise. The theorem's density-ratio identity and AC-dependent reverse-KL branch therefore apply exactly as step 2.1 states.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-reparameterized-variational-training",
+      "model": "gpt-6-luna",
+      "context_sha256": "a243f0187cf1775950af4584a410cff4bd8749efac65eee95a52a87d02ec434f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "Original Step 1 only makes epsilon_t independent of I_t and earlier draws; I_t may depend on the history, contradicting the conditional-unbiasedness assertion. For a singleton latent space and Bernoulli decoder with success probability s(theta)=1/(1+exp(-theta)), take data (1,0). The two payoffs are log s(theta) and log(1-s(theta)), with gradients 1-s(theta) and -s(theta). Setting I_1=I_0 preserves uniform marginals and all fresh-noise requirements, but conditional on the first draw the second gradient differs from the finite-average gradient 1/2-s(theta_1) by +1/2 or -1/2. All smoothness, envelope and second-moment conditions hold. Step 1 now explicitly makes both components independent and their pair independent of all earlier draws.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-metadata-repair",
+      "id": "cor-vae-elbo-kl-decomposition",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "research/machine-learning-all-101-2026-10-19-batch-58.proof-contracts.json#/contracts/cor-vae-elbo-kl-decomposition/citations",
+      "reason": "The F2 and A1 quotation mirrors retained inline links removed from their current suppliers. Refreshed only those two quote fields from the complete current Statement and Definition; the strict focused proof-contract check now has zero errors and warnings. The rejected mathematical tuple remains a false positive and the corollary item guard is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "cor-vae-elbo-kl-decomposition",
+      "alg-reparameterized-variational-training"
+    ],
+    "local_evidence": [
+      "items/def-variational-autoencoder.md#Definition",
+      "items/def-variational-family-and-elbo.md#Definition",
+      "items/thm-elbo-kl-decomposition.md#Statement",
+      "items/thm-elbo-kl-decomposition.md#Proof",
+      "research/machine-learning-all-101-2026-10-19-batch-58.proof-contracts.json",
+      "library/machine-learning/variational-autoencoders-and-the-elbo.md"
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, normal frontier consumer routing, and required independent rejudgment; no judgments or certificates were written by this adjudicator.",
+    "definition_change": {
+      "id": "alg-reparameterized-variational-training",
+      "section": "Definition",
+      "before": "Draw $I_t$ uniformly from $\\{1,\\ldots,N\\}$ and draw $\\epsilon_t$ from $\\rho$, independently of $I_t$ and of earlier random draws.",
+      "after": "Draw $I_t$ uniformly from $\\{1,\\ldots,N\\}$ and draw $\\epsilon_t$ from $\\rho$, with $I_t$ and $\\epsilon_t$ independent and the pair $(I_t,\\epsilon_t)$ independent of all earlier random draws."
+    },
+    "consumer_examinations": [
+      {
+        "supplier": "alg-reparameterized-variational-training",
+        "id": "lem-reparameterized-variational-training-finite-run-terminates",
+        "path": "items/lem-reparameterized-variational-training-finite-run-terminates.md",
+        "scope": "frozen-frontier",
+        "affected_use": "Statement assumes the full input and admissible-domain hypotheses of reparameterized variational training and quantifies over every prescribed draw sequence; F1-F3 and proof steps 1.1-3.1 use only finite indices, null-set-safe evaluations, finite updates, and the fixed horizon.",
+        "invalidated_claim": "None. The stronger sampling independence condition does not change the allowed index/noise values or the pointwise induction proving finiteness and termination.",
+        "minimality": "No consumer edit is needed: the induction never uses cross-round dependence and applies to every sequence admitted by the repaired procedure. The consumer Statement and Definition are unchanged, so propagation stops.",
+        "disposition": "unchanged_sound"
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/machine-learning/variational-autoencoders-and-the-elbo.md",
+        "affected_use": "The page lists the algorithm and termination lemma in its unchanged inventory. It has no Markdown body or additional sampling assertion.",
+        "disposition": "unchanged_sound"
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/cor-vae-elbo-kl-decomposition.md items/alg-reparameterized-variational-training.md --json",
+        "exit_code": 0,
+        "result": "Two files; one proof checked, zero failures; algorithm not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cor-vae-elbo-kl-decomposition.md items/alg-reparameterized-variational-training.md library/machine-learning/variational-autoencoders-and-the-elbo.md library/machine-learning/variational-autoencoders-and-the-elbo-examples.md --json",
+        "exit_code": 0,
+        "result": "Four carriers checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-58.proof-contracts.json --strict --items cor-vae-elbo-kl-decomposition,alg-reparameterized-variational-training --json",
+        "exit_code": 1,
+        "result": "Initial strict check found two stale corollary quotation mirrors, F2 and A1, retaining links now moved into supplier reference sections. Both were subsequently corrected in the owning contract; the final strict result passes."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-reparameterized-variational-training.md",
+        "exit_code": 0,
+        "result": "1 item, 0 proof steps, 0 defects; run after the final algorithm edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-58.proof-contracts.json --strict --items cor-vae-elbo-kl-decomposition,alg-reparameterized-variational-training --json",
+        "exit_code": 0,
+        "result": "Both assigned items checked; zero errors and warnings after the two quote-only metadata corrections."
+      }
+    ],
+    "direct_consumer_discovery": "Alias-aware current deps/reference scan found exactly one direct item consumer of the changed algorithm: lem-reparameterized-variational-training-finite-run-terminates, which is in the frozen frontier. Text search of current items and library pages found only that item and the owning page inventory. No outside or published consumer was found.",
+    "published_consumer_updates_required": false,
+    "repair_complete": true,
+    "metadata_integration": "The owning batch-58 contract is exclusively assigned to this unit. Shared-lock acquisitions were declined; no foreign lock was changed. The two assigned quotation fields were corrected directly in the owned contract, with no shared ledger, index, manifest or page writes.",
+    "source_consultation": "These ELBO algebra and independence arguments are familiar. No external source was consulted or claimed read during this review; the source-reading claims already present in historical contract metadata were preserved.",
+    "frozen_supplier_checks": "The current itemHashGuards of the VAE Definition, generic variational Definition, generic ELBO theorem and dominated pathwise-gradient theorem all equal initial-1.json before guards.",
+    "final_currency_validation": "PASS: both reported post guards and preserved review contexts match the current library; the corollary guard equals its frozen before guard; reversing only the recorded algorithm sampling instruction recovers its exact frozen before guard. Only the algorithm Definition hash changed."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-58.proof-contracts.json": "9847da297165934d7b67d83cec803f371da786bdb7ab8f6947127c3d23cb1e9a"
+  }
+}

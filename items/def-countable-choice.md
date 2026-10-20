@@ -26,7 +26,7 @@ sources:
       url: "https://en.wikipedia.org/wiki/Axiom_of_choice"
 pipeline_run: null
 verification:
-  repair: research/recorded-retirement-2026-10-06/receipts/def-countable-choice.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-countable-choice.json
 ---
 
 ## Definition
@@ -38,8 +38,14 @@ statement.
 > $\mathbb{N}$ there is a function $f$ with domain $\mathbb{N}$ such that
 > $f(n) \in X_n$ for every $n \in \mathbb{N}$.
 
-Equivalently, in the vocabulary of [[def-choice-function]]: every at most
-countable family of nonempty sets ([[def-countable]]) has a choice function.
+Equivalently, in the vocabulary of Choice function: every at most
+countable family of nonempty sets (Finite, countably infinite, countable, uncountable) has a choice function.
+
+## Definition references
+
+[[def-choice-function]]
+
+[[def-countable]]
 
 ## Remarks
 

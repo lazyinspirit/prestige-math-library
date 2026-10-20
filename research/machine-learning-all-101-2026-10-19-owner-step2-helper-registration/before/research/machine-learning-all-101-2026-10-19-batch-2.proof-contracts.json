@@ -1,0 +1,902 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-population-and-empirical-risk-are-measurable",
+    "thm-conditional-bayes-rule-minimizes-population-risk",
+    "lem-finite-list-empirical-risk-selector-is-measurable",
+    "ex-binary-zero-one-loss",
+    "ex-squared-loss-conditional-mean",
+    "ex-absolute-loss-conditional-median",
+    "ex-nonattained-risk-infimum"
+  ],
+  "contracts": {
+    "lem-population-and-empirical-risk-are-measurable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined pointwise, then $f+g$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "loss-composition",
+          "claim": "The predictor-loss composition is measurable, so population risk is a defined nonnegative integral.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "sample-risk-measurability",
+          "claim": "Each coordinate loss and its finite empirical average are measurable on the product sample space.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The problem has a probability law and the lemma assumes a positive sample size; it makes no empty-space or empty-sample assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 only uses nonnegativity and measurability, so the zero loss is measurable and its integral is defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats m=1 as a one-term measurable sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no nondegeneracy of P, so point-mass laws satisfy the same measurability argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter in the measurability statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes one predictor and makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is an implication and states no equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conditional-bayes-rule-minimizes-population-risk": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-borel-space",
+          "source_section": "Definition",
+          "quote": "A measurable space $(E,\\mathcal E)$ is **standard Borel** if there are a Polish space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "There is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy)\\quad(A\\in\\mathcal S,\\ B\\in\\mathcal T).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "source_section": "Statement",
+          "quote": "For every nonnegative product-measurable $f:E\\times T\\to[0,\\infty]$, $$\\int f(x,y)\\,\\lambda(d(x,y))=\\int_T\\left(\\int_E f(x,y)K(y,dx)\\right)\\beta(dy).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bayes-rule-minimizes-prior-risk",
+          "source_section": "Statement",
+          "quote": "Then $d^*$ minimizes prior-integrated risk among all randomized decision rules",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "For every nonnegative $\\Sigma\\otimes\\Tau$-measurable function $f:S\\times T\\to[0,\\infty]$, the function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "disintegration-and-posterior-risk",
+          "claim": "The two coordinate disintegrations supply the likelihood and posterior kernels required by the Bayesian decision theorem, with measurable conditional risk.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "bayes-risk-application",
+          "claim": "The posterior minimizer theorem gives the joint population-risk inequality for every measurable competitor.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "axiom_uses": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "proof_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "use": "AC supplies both standard-Borel disintegrations and is an explicit hypothesis of the published posterior-risk minimizer theorem."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability law on the product and its standard-Borel coordinate spaces are assumed; the theorem makes no empty-space claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to extended nonnegative risks, including zero loss and zero risk."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and the common full-measure hypothesis allow a singleton instance or label space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the disintegration theorem for arbitrary joint laws, including point-mass laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or numeric endpoint parameter occurs in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared and used in steps 1.1 and 2.1; no choice-free conclusion is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way risk comparison, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way risk comparison, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-list-empirical-risk-selector-is-measurable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-list-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "If every $r_j=+\\infty$, return index $1$. Otherwise set $r_*:=\\min_{1\\le j\\le n}r_j$ and return the least index $j$ for which $r_j<+\\infty$ and $r_j\\le r_*+\\eta$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "For every sample size $m\\ge1$, the empirical risk $S\\mapsto\\widehat R_S(f)$ is an extended nonnegative measurable function on the finite product sample space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "An **exact empirical risk minimizer** is a predictor $f\\in\\mathcal F$ with $\\widehat R_S(f)=\\widehat R_S^*(\\mathcal F)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$, $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$ off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$, then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then $f$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-extended-real-valued-measurable-function",
+          "source_section": "Definition",
+          "quote": "A function $f:X\\to\\overline{\\mathbb R}$ is **measurable** when",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-branches-measurable",
+          "claim": "The finite minimum and all-infinite branch are measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "tolerance-candidate-sets",
+          "claim": "The finite-valued truncations yield measurable admissible candidate sets, and a minimum lies in one of them.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "selector-index-measurable",
+          "claim": "First-index tie breaking yields measurable selector fibers and jointly measurable evaluation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "finite-selector-correct",
+          "claim": "The all-infinite branch is exact and the finite branch meets the eta tolerance, with eta zero giving an exact minimizer.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires a finite nonempty list and a positive sample size; no empty list or zero-length sample is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 handles eta=0 and verifies that the returned finite-risk candidate is an exact minimizer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 gives one measurable index fiber when the list has one member; step 4.1 verifies its risk condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 handle the branch in which every list risk is +infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 treats eta=0; the statement permits every finite eta>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 selects the least index from a finite ordered list and uses no arbitrary choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves measurability and risk tolerance, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves measurability and risk tolerance, not an iff characterization."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-binary-zero-one-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-of-f10",
+          "claim": "The table defines a probability law and the first predictor incurs error on two atoms of total mass one quarter.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "comparison-predictors",
+          "claim": "The opposite predictor has risk three quarters and both constant predictors have risk one half, proving uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite spaces have explicitly listed nonempty underlying sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero-one loss value zero on correctly predicted atoms and counts only errors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the four atom weights sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes four strictly positive joint atoms and has no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates both constant predictors at the two label endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All four predictors are explicitly enumerated; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a unique minimizer, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a unique minimizer, not an iff characterization."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The four-atom model is fully enumerated in Verification; no registered finite-smoke selector applies."
+    },
+    "ex-squared-loss-conditional-mean": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-event-conditional-expectation-formula",
+          "source_section": "Statement",
+          "quote": "For any event $B\\subseteq\\Omega$ with $\\mathbb P(B)>0$, define $$\\mathbb E[X\\mid B]:=\\frac{1}{\\mathbb P(B)}\\sum_{\\omega\\in B}X(\\omega)w(\\omega).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-event-conditional-expectation-formula",
+          "source_section": "Statement",
+          "quote": "More generally, if $A_1,\\ldots,A_r$ is a finite partition of $\\Omega$ into events of positive probability, then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "conditional-moments",
+          "claim": "The conditional means are two and four, and the conditional second moments are six and twenty.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "square-risk-decomposition",
+          "claim": "The finite partition and algebra give risk at least three, with equality only at the conditional means.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite probability space has five listed atoms with total mass one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows equality only when each squared deviation term is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies both conditioning events have probability one half and the weights sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonconstant finite conditional law and has no degeneracy parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The action space is the real line and the example has no interval endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses a fixed two-cell finite partition and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows predictors taking values two and four attain the lower bound three."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows equality forces both square terms to vanish, so the predictor is uniquely the conditional-mean predictor."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "All five joint atoms and the quadratic risk are evaluated exactly in Verification; no registered finite-smoke selector applies."
+    },
+    "ex-absolute-loss-conditional-median": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "absolute-risk-formula",
+          "claim": "The single-instance population risk is the equal-weight sum of absolute deviations from zero and four.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "median-minimizer-interval",
+          "claim": "The piecewise risk is minimized exactly on the interval from zero to four, which is also the median set.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The instance and label sets are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the minimum value two and shows the risk is larger outside the minimizing interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the one-instance marginal of total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the conditional law is the stated two-point law; the covariate itself is a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes t=0 and t=4 in the constant-risk middle interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The minimizer interval is computed directly; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every t in [0,4] has risk two."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves t<0 or t>4 gives risk greater than two."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The two-point label law and piecewise risk are evaluated exactly in Verification; no registered finite-smoke selector applies."
+    },
+    "ex-nonattained-risk-infimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk**",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "An **exact empirical risk minimizer** is a predictor $f\\in\\mathcal F$ with $\\widehat R_S(f)=\\widehat R_S^*(\\mathcal F)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-approximate-erm",
+          "source_section": "Definition",
+          "quote": "The input includes a supplied jointly measurable evaluation map $A_\\eta",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with identity $1>0$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Then there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "If $a > 0$ then $a^{-1} > 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-sequence",
+          "claim": "Each empirical and population risk is the positive reciprocal square, so no member attains zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "infimum-zero",
+          "claim": "The reciprocal Archimedean property puts a risk below every positive epsilon, proving infimum zero without attainment.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "explicit-approximate-selector",
+          "claim": "The constant selector f2 is jointly measurable and is a 1/4-approximate ERM, while eta zero has no exact output.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The predictor class is explicitly indexed by all positive integers and the sample size is positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 show zero is the infimum and is not attained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the same empirical and population risk for every positive sample size, including m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the point-mass data law directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.1 treat eta approaching zero and the explicit eta=1/4 selector."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the reciprocal Archimedean theorem to choose an integer for each epsilon; this does not use AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives an infimum and selector, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives an infimum and selector, not an iff characterization."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The deterministic sample and reciprocal risk sequence are verified exactly in the proof; no registered finite-smoke selector applies."
+    }
+  }
+}

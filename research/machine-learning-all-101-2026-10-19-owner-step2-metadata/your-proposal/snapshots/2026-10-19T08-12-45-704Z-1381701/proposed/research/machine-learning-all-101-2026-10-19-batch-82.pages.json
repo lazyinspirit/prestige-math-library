@@ -1,0 +1,691 @@
+[
+  {
+    "order": 2851,
+    "id": "pac-mdp-exploration",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Optimistic exploration and PAC-MDP sample complexity",
+    "companion": "pac-mdp-exploration-examples",
+    "requires": [
+      "martingale-inequalities-and-convergence",
+      "tabular-prediction-and-control"
+    ],
+    "items": [
+      {
+        "id": "def-pac-mdp-bounded-reward-model",
+        "kind": "definition",
+        "title": "Finite discounted MDP with bounded real rewards",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-measure-kernel-and-probability-kernel",
+          "def-borel-sigma-algebra",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-cartesian-product",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $S$ be a nonempty finite set, let $A(s)$ be a nonempty finite set for each $s\\in S$, and let $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. Here **finite** means bijective with a natural number. Put $S_0=|S|$ and $A_0=\\max_{s\\in S}|A(s)|$. Fix a discount $0\\le\\gamma<1$. Give $S$ and $D$ their discrete sigma-algebras and give $[0,1]$ its Borel sigma-algebra. A **bounded-reward finite discounted Markov decision process** is a probability kernel $K$ from $D$ to $S\\times[0,1]$. At pair $(s,a)$, $K(\\cdot\\mid s,a)$ is the joint law of the next state and the reward; these two coordinates need not be independent. Define the state-transition probabilities and expected rewards by\n\n$$P(s'\\mid s,a)=K(\\{s'\\}\\times[0,1]\\mid s,a),\\qquad r(s,a)=\\int_{S\\times[0,1]}\\rho\\,K(ds',d\\rho\\mid s,a).$$\n\nA **history-dependent behavior** is a sequence of probability kernels from observed-history spaces $H_t$ to the finite action alphabet $\\mathcal A=\\bigcup_{s\\in S}A(s)$, assigning probability zero to actions outside $A(s_t)$ at every history ending in state $s_t$. Here $H_t$ consists of histories $(s_0,a_0,R_1,s_1,\\ldots,a_{t-1},R_t,s_t)$, with discrete sigma-algebras on finite state/action coordinates and the Borel sigma-algebra on each reward coordinate; it has the resulting finite-product sigma-algebra. A **stationary Markov policy** assigns one distribution on $A(s)$ to each state, independently of earlier history. During interaction, after choosing $a_t$ in state $s_t$, the next pair $(s_{t+1},R_{t+1})$ is drawn from $K(\\cdot\\mid s_t,a_t)$.",
+        "strategy": "Extend the existing finite-state/action MDP interface to general bounded Borel reward laws while retaining its joint next-state/reward convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.2, PDF pp. 4–5 (printed pp. 2416–2417)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§2.2, PDF pp. 8–12; joint next-state/reward kernel and bounded rewards."
+            },
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf",
+              "locator": "Chapter 8, §8.1, printed pp. 195–197; distribution models and simulation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-pac-mdp-value-functions",
+        "kind": "theorem",
+        "title": "Well-defined discounted values and optimal Bellman fixed points",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-axiom-of-choice",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-change-of-variables-for-expectation",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-geometric-series",
+          "thm-reals-cauchy-complete",
+          "def-countable",
+          "lem-finite-set-has-max",
+          "lem-finite-sum-laws",
+          "lem-triangle-inequality-finite",
+          "lem-finite-choice"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Choice. In every bounded-reward finite discounted Markov decision process with nonempty finite state set $S$, nonempty finite action sets $A(s)$, and $0\\le\\gamma<1$, the trajectory law of every history-dependent behavior from every starting state exists. Its discounted return is measurable, integrable, and between $0$ and $1/(1-\\gamma)$. For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation. The optimality operator\n\n$$T^*V(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]$$\n\nis a $\\gamma$ contraction in the supremum norm, meaning $\\|T^*V-T^*W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty$ for all $V,W:S\\to\\mathbb R$, where $\\|V\\|_\\infty=\\max_{s\\in S}|V(s)|$, and has a unique fixed point $V^*$. This fixed point is the supremum of the values of all history-dependent behaviors and is attained by a deterministic stationary greedy policy. The optimal action value is\n\n$$Q^*(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V^*(s'),$$\n\nand $V^*(s)=\\max_{a\\in A(s)}Q^*(s,a)$ with $Q^*(s,a)\\ge0$.",
+        "strategy": "Construct the history-dependent path law, use the geometric tail bound for discounted returns, and prove Bellman optimality by finite-horizon induction and contraction.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.2, PDF pp. 4–5; definitions of V^pi, Q^pi, and optimal values."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§§2.2–2.4 and Appendix A.1–A.2, PDF pp. 8–16 and 74–83."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-pac-mdp-adaptive-sample-concentration",
+        "kind": "lemma",
+        "title": "Concentration for adaptively sampled MDP observations",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-axiom-of-choice",
+          "def-countable",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-filtration-and-filtered-probability-space",
+          "def-martingale-difference-sequence",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "cor-markov-inequality-for-random-variables",
+          "thm-azuma-hoeffding-inequality",
+          "cor-cauchy-schwarz-for-random-variables",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-finite-union-bound"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume AC and fix a bounded-reward finite discounted MDP with state set $S$. For each admissible pair $(s,a)$, let $(S'_i,R_i)_{i\\ge1}$ be an independent potential stream with common joint law $K(\\cdot\\mid s,a)$; an interaction reveals the next unused sample from that pair's stream only when the pair is visited. This construction has the same finite-trajectory law as interaction with the MDP under any history-dependent behavior. For a fixed pair and $m\\ge1$, its reward samples satisfy\n$$\\mathbb P\\!\\left(\\left|\\frac1m\\sum_{i=1}^m R_i-r(s,a)\\right|>x\\right)\\le 2e^{-2mx^2}\\qquad(x>0).$$\nIf $\\widehat P_m$ is the empirical distribution of $S'_1,\\ldots,S'_m$ and $P(\\cdot\\mid s,a)$ is the true next-state marginal, then\n$$\\mathbb E\\|\\widehat P_m-P(\\cdot\\mid s,a)\\|_1\\le\\sqrt{\\frac{|S|}{m}},\\qquad \\mathbb P\\!\\left(\\|\\widehat P_m-P(\\cdot\\mid s,a)\\|_1>\\sqrt{\\frac{|S|}{m}}+\\sqrt{\\frac{2\\ln(1/\\delta)}{m}}\\right)\\le\\delta\\quad(0<\\delta<1),$$\nwhere $\\|q\\|_1=\\sum_{s'\\in S}|q(s')|$ and $\\ln$ is the natural logarithm.\nMore generally, for a filtration $(\\mathcal F_i)_{i=0}^m$, if $Y_i$ is $\\mathcal F_i$-measurable, $0\\le Y_i\\le B$, and $\\mu_i=\\mathbb E[Y_i\\mid\\mathcal F_{i-1}]$, then\n$$\\mathbb P\\!\\left(\\left|\\sum_{i=1}^m(Y_i-\\mu_i)\\right|\\ge mx\\right)\\le2e^{-2mx^2/B^2}\\qquad(B>0,\\ x>0).$$\nNo independence between reward and next state within a single transition is assumed. The confidence bounds are for a fixed deterministic sample size or a fixed-size batch; this item makes no uniform confidence claim at a data-dependent sample count. At a finite history-dependent visit count, the next fixed number of unused potential outcomes still has its conditional iid law.",
+        "strategy": "Couple adaptive visits to independent potential streams, prove the empirical L1 expectation bound coordinatewise, and apply the conditional Hoeffding and Azuma suppliers.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.2.2, Lemmas 13–15 and footnote 12, PDF pp. 21–23 (printed pp. 2430–2432)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§§2.2 and 4.2.4, PDF pp. 8–12 and 51–54; bounded online observations and PAC-MDP context."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-pac-mdp-sample-complexity",
+        "kind": "definition",
+        "title": "PAC-MDP sample complexity of exploration",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "thm-pac-mdp-value-functions",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume AC, fix a bounded-reward finite discounted MDP, an initial state, and a learning algorithm whose behavior is a history-dependent policy. At time $t\\ge1$, let $h_t$ be the observed history ending at state $s_t$. The continuation behavior $A_t$ is the tail of the algorithm's action kernels after $h_t$, and $V^{A_t}(h_t)$ is the expected discounted return of the continuation process generated from that fixed history by those tail kernels. Set $S=|S|$ and $A=\\max_{s\\in S}|A(s)|$.\nFor $\\epsilon\\ge0$, the $\\epsilon$-bad-step count is\n$$N_\\epsilon=\\#\\{t\\ge1:V^{A_t}(h_t)<V^*(s_t)-\\epsilon\\},$$\nwhere the count may be infinite. For $\\epsilon>0$ and $0<\\delta<1$, a PAC-MDP bound is a specified finite function $B(S,A,\\epsilon,\\delta,\\gamma)$ such that, for every MDP with these finite state/action sizes and every initial state, $\\mathbb P(N_\\epsilon\\le B(S,A,\\epsilon,\\delta,\\gamma))\\ge1-\\delta$. This definition does not require the bad steps to precede a permanent stopping time.",
+        "strategy": "Define the bad-step count from the algorithm's full continuation behavior and the optimal discounted value.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.5, Definitions 1–2, PDF pp. 6–7 (printed pp. 2417–2418)."
+            },
+            {
+              "title": "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning",
+              "url": "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf",
+              "locator": "§3, PDF pp. 2–3 (printed pp. 882–883)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§4.2.4, PDF pp. 53–54; online PAC-MDP criterion."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-admissible-mdp-heuristic",
+        "kind": "definition",
+        "title": "Admissible upper heuristic for a discounted MDP",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "thm-pac-mdp-value-functions"
+        ],
+        "dependency_level": 3,
+        "statement": "For a bounded-reward finite discounted MDP, an **admissible upper heuristic** is a function $U:D\\to[0,V_0]$ such that $Q^*(s,a)\\le U(s,a)$ for every admissible pair and a supplied scalar satisfies $0\\le V_0\\le(1-\\gamma)^{-1}$. Define the effective reward-scale cap $V_{\\max}=\\max\\{1,V_0\\}$. Then $U(s,a)\\le V_{\\max}\\le(1-\\gamma)^{-1}$. The floor at $1$ is part of this convention because an observed reward can lie anywhere in $[0,1]$, even when the heuristic values are all smaller than $1$.",
+        "strategy": "State the action-value upper-bound hypothesis and normalize the scalar bound for the reward scale.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.3, PDF p. 5 (printed p. 2416)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§4.2.3, PDF pp. 50–51; R-max and optimistic initialization."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-pac-mdp-value-simulation",
+        "kind": "lemma",
+        "title": "Value stability under empirical model error",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "thm-pac-mdp-value-functions",
+          "lem-finite-set-has-max",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $M_1$ and $M_2$ be bounded-reward finite discounted MDPs on the same finite state set $S$ and the same admissible action sets, with common discount $0\\le\\gamma<1$. Write $r_i,P_i,V_i^\\pi,V_i^*$ for their mean rewards, transition laws, stationary-policy values, and optimal values. Suppose $0\\le V_i^\\pi(s),V_i^*(s)\\le V$ for every state, model index $i$, and stationary policy $\\pi$, and that for every admissible pair\n$$|r_1(s,a)-r_2(s,a)|\\le\\alpha,\\qquad \\|P_1(\\cdot\\mid s,a)-P_2(\\cdot\\mid s,a)\\|_1\\le\\beta.$$\nFor finite vectors, $\\|v\\|_\\infty=\\max_{s\\in S}|v(s)|$ and $\\|p\\|_1=\\sum_{s\\in S}|p(s)|$.\nThen every common stationary policy and the optimal values satisfy\n$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$\nThere is also a trap-model form that does not assume a tight cap for the second model: for $W>0$, suppose all stationary-policy and optimal values in $M_1$ are at most $2W$, all rewards in $M_2$ lie in $[0,1]$, and $\\gamma\\beta\\le(1-\\gamma)/2$. Then every common stationary policy and the optimal values satisfy\n$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{2(\\alpha+2\\gamma W\\beta)}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{2(\\alpha+2\\gamma W\\beta)}{1-\\gamma}.$$",
+        "strategy": "Subtract the Bellman fixed-point equations, bound the transition perturbation by V times its L1 error, and absorb the contraction term.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.2.2, Lemma 12, PDF p. 22 (printed p. 2429)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§2.3, PDF pp. 12–16; value functions and Bellman contractions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-pac-mdp-known-state-action-mdp",
+        "kind": "definition",
+        "title": "Known-state/action MDP with optimistic self-loops",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-admissible-mdp-heuristic",
+          "thm-pac-mdp-value-functions"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $M$ be a bounded-reward finite discounted MDP with discount $\\gamma$, let $K\\subseteq D$ be a set of known state-action pairs, and let $q:D\\to[0,V_{\\max}]$ with $V_{\\max}\\le(1-\\gamma)^{-1}$. The **known-state/action MDP** $M_K(q)$ agrees with $M$ on every pair in $K$. For each pair $(s,a)\\notin K$, add a distinct absorbing state $\\bot_{s,a}$ with one admissible action. The unknown pair transitions deterministically to $\\bot_{s,a}$ and gives deterministic reward $(1-\\gamma)q(s,a)$; the sink action self-loops with the same deterministic reward $(1-\\gamma)q(s,a)$. These rewards lie in $[0,1]$. The sink state's value is $q(s,a)$, so the unknown pair's Bellman backup is exactly $(1-\\gamma)q(s,a)+\\gamma q(s,a)=q(s,a)$, independent of the value function on the original states.",
+        "strategy": "Replace each unknown pair by a self-loop whose reward encodes its current action value.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "Definition 6 and Lemma 9, PDF pp. 16–17 (printed pp. 2425–2426); known state-action models and the optimistic self-loop construction."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-r-max",
+        "kind": "algorithm",
+        "title": "R-MAX with an admissible heuristic",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-admissible-mdp-heuristic"
+        ],
+        "dependency_level": 4,
+        "statement": "**Input:** A bounded-reward finite discounted MDP interaction, its discount $0\\le\\gamma<1$, an admissible upper heuristic $U$ with cap $V_{\\max}$, an integer sample threshold $m\\ge1$, a value-iteration error tolerance $0<\\beta<(1-\\gamma)^{-1}$, and a fixed total order on each finite action set. Write $\\ln$ for the natural logarithm.\n\n**Output:** At each interaction time $t$, the selected action $a_t$. The action-value table $Q$, known set, sample lists, and empirical model are internal state; the procedure does not return $Q$ as an output.\n\nInitialize each pair as unknown, set $Q(s,a)=U(s,a)$, and give each pair an empty list of observed rewards and next states. For interaction times $t=1,2,\\ldots$, in the current state choose a maximizing action using the fixed tie order, output and take that action $a_t$, and observe reward $R_{t+1}$ and next state $S_{t+1}$. If the pair is unknown, append this observation until its list has length $m$. When it reaches $m$, mark the pair known, set its empirical reward to the sample mean and its empirical transition law to the sample frequencies. Rebuild all action values by setting the working table $Q^{(0)}(s,a)=0$, then for $j=0,\\ldots,L-1$ setting $Q^{(j+1)}=H_KQ^{(j)}$, and finally replacing $Q$ by $Q^{(L)}$, for the operator\n$$H_KQ(s,a)=\\begin{cases}\\widehat r(s,a)+\\gamma\\sum_{s'}\\widehat P(s'\\mid s,a)\\max_{b\\in A(s')}Q(s',b),&(s,a)\\in K,\\\\ U(s,a),&(s,a)\\notin K,\\end{cases}$$\nwhere $K$ is the current known set and\n$$L=\\max\\!\\left\\{1,\\left\\lceil\\frac{\\ln(1/[\\beta(1-\\gamma)])}{1-\\gamma}\\right\\rceil\\right\\}.$$\nPairs and their samples are never removed from $K$ or discarded. After processing the observation and any rebuild, use the observed $S_{t+1}$ as the current state in the next iteration. The algorithm specifies no computational-time bound.",
+        "strategy": "Define the empirical known-pair model, optimistic unknown-pair values, fixed tie-breaking, and the finite value-iteration approximation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§2.1 and Algorithm 1, PDF pp. 7–9 (printed pp. 2419–2421)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§4.2.3, PDF pp. 50–51; R-max as an optimistic model-based method."
+            },
+            {
+              "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, 2nd ed.",
+              "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf",
+              "locator": "Chapter 8, §§8.1–8.3, printed pp. 195–206; distribution models and optimism under model error."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-delayed-q-learning",
+        "kind": "algorithm",
+        "title": "Delayed Q-learning with an admissible heuristic",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-admissible-mdp-heuristic",
+          "alg-q-learning"
+        ],
+        "dependency_level": 4,
+        "statement": "**Input:** A bounded-reward finite discounted MDP interaction, its discount $0\\le\\gamma<1$, an admissible upper heuristic $U$ with cap $V_{\\max}$, an integer batch size $m\\ge1$, a bonus $0<\\epsilon_1<1$, and a fixed total order on each action set.\n\n**Output:** At each interaction time $t$, the selected action $a_t$. The table $Q$, batch sums, sample counts, batch-start times, learning flags, and global last-update time are internal state; the procedure does not return them as outputs.\n\nInitialize $Q(s,a)=U(s,a)$, batch sum $B(s,a)=0$, sample count $\\ell(s,a)=0$, batch start $b(s,a)=0$, learning flag $L(s,a)=\\mathrm{true}$, and global last-update time $t^*=0$. For interaction times $t=1,2,\\ldots$, in current state $s$, choose an action maximizing $Q(s,\\cdot)$ under the fixed tie order, output and take that action $a_t$, then observe reward $r$ and next state $s'$. If $b(s,a)\\le t^*$, set $L(s,a)=\\mathrm{true}$. If $L(s,a)$ is true, set $b(s,a)=t$ when $\\ell(s,a)=0$, increment $\\ell(s,a)$ by one, and add $r+\\gamma\\max_{c\\in A(s')}Q(s',c)$ to $B(s,a)$. When $\\ell(s,a)=m$, set $\\bar B=B(s,a)/m$. If $Q(s,a)-\\bar B\\ge2\\epsilon_1$, replace $Q(s,a)$ by $\\bar B+\\epsilon_1$ and set $t^*=t$. Otherwise set $L(s,a)=\\mathrm{false}$ exactly when $b(s,a)>t^*$. In either outcome reset $B(s,a)=0$ and $\\ell(s,a)=0$ after a completed batch; if $L(s,a)$ remains false, make no sample or Q update on this visit. Leave all other entries unchanged. Use $s'$ as the current state in the next iteration.",
+        "strategy": "Specify the delayed Q-learning batch update, optimism bonus, and learn-flag reset rule using the standard tabular Q-learning target.",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§2.2, Algorithm 2, PDF pp. 9–12 (printed pp. 2422–2425)."
+            },
+            {
+              "title": "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning",
+              "url": "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf",
+              "locator": "§§4.1–4.4 and Algorithm 1, PDF pp. 4–6 (printed pp. 884–886)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§§4.2.4 and 4.3.1, PDF pp. 53–57; delayed-Q mention and Q-learning target."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-pac-mdp-escape-event-reduction",
+        "kind": "theorem",
+        "title": "Escape-event reduction for optimistic greedy learning",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-pac-mdp-sample-complexity",
+          "def-pac-mdp-known-state-action-mdp",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "cor-markov-inequality-for-random-variables",
+          "thm-pac-mdp-value-functions"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume AC. Let a learning algorithm interact with a bounded-reward finite discounted MDP. Suppose constants $B,W,Q_c$ satisfy $0<B$, $0<W\\le(1-\\gamma)^{-1}$, $0<Q_c\\le(1-\\gamma)^{-1}$, and $V^*(s)\\le B$. The learner maintains $0\\le Q_t(s,a)\\le Q_c$ and, whenever $(s,a)\\notin K_t$, $Q_t(s,a)\\le W$. Put $V_t(s)=\\max_{a\\in A(s)}Q_t(s,a)$, and let $\\pi_t$ be the deterministic greedy policy under a fixed tie order. Before acting at time $t$, let $K_t$ be a history-measurable set of known pairs; assume it stays fixed until a Q-value update or a selection of a pair outside $K_t$. Write $M_t=M_{K_t}(Q_t)$ for the known-state/action MDP and $C=B+W$. For parameters $0<\\eta\\le C$ with $\\eta(1-\\gamma)<1$ and $0<\\rho<1/2$, suppose that with probability at least $1-\\rho$, simultaneously for every $t,s$,\n$$V_t(s)\\ge V^*(s)-\\eta,\\qquad V_t(s)-V^{\\pi_t}_{M_t}(s)\\le\\eta,$$\nand the total number of Q-update times plus outside-$K_t$ selection times is at most an integer $\\zeta\\ge0$. Define $q=\\eta/(2C)$, set\n$$H=\\begin{cases}1,&\\gamma=0,\\\\ \\max\\{1,\\lceil \\ln(1/[\\eta(1-\\gamma)])/(-\\ln\\gamma)\\rceil\\},&0<\\gamma<1,\\end{cases}\\qquad M=\\left\\lceil\\frac{2(\\zeta+1)+2\\ln(1/\\rho)}{q}\\right\\rceil.$$\nThen, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$. Here $\\ln$ is the natural logarithm.",
+        "strategy": "Compare the learned controller with the current greedy policy on the trap MDP over a logarithmic effective horizon, then count disjoint high-risk windows by conditional Bernoulli concentration.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.1, Definitions 6–7, Lemma 9, Theorem 10 and proof, PDF pp. 16–18 (printed pp. 2425–2428)."
+            },
+            {
+              "title": "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning",
+              "url": "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf",
+              "locator": "§5.2.1, proof of Theorem 1, PDF pp. 7–8 (printed pp. 887–888)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-r-max-empirical-model-accuracy",
+        "kind": "lemma",
+        "title": "Adaptive empirical-model accuracy for R-MAX",
+        "deps": [
+          "alg-r-max",
+          "def-admissible-mdp-heuristic",
+          "def-pac-mdp-known-state-action-mdp",
+          "lem-pac-mdp-adaptive-sample-concentration",
+          "lem-pac-mdp-value-simulation",
+          "thm-pac-mdp-value-functions",
+          "thm-finite-union-bound"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $M$ be a bounded-reward finite discounted MDP, let $0<\\eta<V_{\\max}/4$ and $0<\\delta<1$, and let $U,V_{\\max}$ be an admissible heuristic with $V_{\\max}=\\max\\{1,V_0\\}$. Put\n$$b=\\frac{\\eta(1-\\gamma)}{64V_{\\max}},\\quad L_0=\\ln\\frac{8SA}{\\delta},\\quad m=\\left\\lceil\\frac{8(S+L_0)}{b^2}\\right\\rceil,\\quad \\beta=\\frac{\\eta(1-\\gamma)}{16},$$\nwhere $S=|S|$ and $A=\\max_s|A(s)|$. Run R-MAX with this sample threshold and approximation tolerance. For $K_t$ the current known set, let $\\widehat M_{K_t}$ use its empirical laws on $K_t$ and the heuristic absorbing states elsewhere, and let $M_{K_t}=M_{K_t}(U)$ use the true laws on $K_t$. Define $E_\\eta=\\{(s,a):U(s,a)\\ge V^*(s)-\\eta\\}$. With probability at least $1-\\delta$, simultaneously at all times: every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$; the current action values satisfy $\\|Q_t-Q^*_{\\widehat M_{K_t}}\\|_\\infty\\le\\beta$ and $0\\le Q_t(s,a)\\le(1-\\gamma)^{-1}$; the greedy value obeys $V_t(s)\\ge V^*(s)-\\eta$; and $V_t(s)-V^{\\pi_t}_{M_{K_t}}(s)\\le\\eta$ for every state. On this event, the total number of value-table rebuilds plus selections of pairs outside $K_t$ is at most $(m+1)|E_\\eta|$.",
+        "strategy": "Use adaptive reward and transition concentration, the simulation lemma, admissible optimism, and value-iteration error to verify the escape theorem's hypotheses.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.2.2, Lemmas 12–15 and Theorem 11 proof, PDF pp. 20–23 (printed pp. 2429–2432)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-delayed-q-learning-optimism-and-update-counts",
+        "kind": "lemma",
+        "title": "Delayed Q-learning optimism and update-count bounds",
+        "deps": [
+          "alg-delayed-q-learning",
+          "def-admissible-mdp-heuristic",
+          "def-pac-mdp-known-state-action-mdp",
+          "lem-pac-mdp-adaptive-sample-concentration",
+          "thm-pac-mdp-value-functions",
+          "thm-finite-union-bound"
+        ],
+        "dependency_level": 5,
+        "statement": "Fix a bounded-reward finite discounted MDP, an admissible heuristic with cap $V_{\\max}$, and $0<\\epsilon_1<1$. Put $D(s,a)=[U(s,a)-V^*(s)]_+$, $\\kappa=\\lceil SA V_{\\max}/\\epsilon_1\\rceil$, $N=SA(1+\\kappa)$, and $C_1=1+\\gamma V_{\\max}$. Run Delayed Q-learning with a positive integer $m$ satisfying\n$$m\\ge\\left\\lceil\\frac{C_1^2}{2\\epsilon_1^2}\\ln\\frac{8N}{\\delta}\\right\\rceil\\qquad(0<\\delta<1).$$\nFor $V_t(s)=\\max_aQ_t(s,a)$, define\n$$K_t=\\left\\{(s,a):Q_t(s,a)-\\left(r(s,a)+\\gamma\\sum_{s'}P(s'\\mid s,a)V_t(s')\\right)\\le3\\epsilon_1\\right\\}.$$\nWith probability at least $1-\\delta$, all estimates remain optimistic, $Q_t(s,a)\\ge Q^*(s,a)$ for every $t,s,a$; every attempted update whose first sample is taken with its pair outside $K_t$ succeeds; the number of successful updates is at most\n$$G=\\sum_{s,a}\\left(1+\\frac{D(s,a)}{\\epsilon_1}\\right);$$\nand the number of visits selecting a pair outside $K_t$ is at most $2mG$. The additive $1$ in each pair's update allowance is necessary, including when $U(s,a)=V^*(s)$.",
+        "strategy": "Bound update attempts, apply conditional Hoeffding to each batch-start stream, prove optimism inductively, and charge escapes to successful updates.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.3.2, Lemmas 18–25, PDF pp. 24–26 (printed pp. 2432–2435)."
+            },
+            {
+              "title": "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning",
+              "url": "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf",
+              "locator": "§5.2 and Lemmas 1–4, PDF pp. 6–8 (printed pp. 886–888)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-r-max-pac-bound",
+        "kind": "theorem",
+        "title": "PAC-MDP sample complexity of R-MAX",
+        "deps": [
+          "alg-r-max",
+          "def-pac-mdp-sample-complexity",
+          "def-admissible-mdp-heuristic",
+          "lem-r-max-empirical-model-accuracy",
+          "thm-pac-mdp-escape-event-reduction"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $M$ be a bounded-reward finite discounted MDP, write $S=|S|$ and $A=\\max_s|A(s)|$, and fix $0<\\epsilon<(1-\\gamma)^{-1}$, $0<\\delta<1$, and an admissible heuristic with normalized cap $V_{\\max}$. If $\\epsilon\\ge V_{\\max}$, then $N_\\epsilon=0$. Otherwise put\n$$\\eta=\\epsilon/4,\\quad b=\\frac{\\eta(1-\\gamma)}{64V_{\\max}},\\quad m=\\left\\lceil\\frac{8(S+\\ln(16SA/\\delta))}{b^2}\\right\\rceil,\\quad \\beta=\\frac{\\eta(1-\\gamma)}{16},$$\nand run R-MAX with sample threshold $m$ and value-iteration tolerance $\\beta$. Let $E_\\eta=\\{(s,a):U(s,a)\\ge V^*(s)-\\eta\\}$ and $\\zeta=(m+1)|E_\\eta|$. Define $q=\\eta/(4V_{\\max})$, and define $H$ and $M$ by\n$$H=\\begin{cases}1,&\\gamma=0,\\\\ \\max\\{1,\\lceil\\ln(1/[\\eta(1-\\gamma)])/(-\\ln\\gamma)\\rceil\\},&0<\\gamma<1,\\end{cases}\\qquad M=\\left\\lceil\\frac{2(\\zeta+1)+2\\ln(2/\\delta)}q\\right\\rceil.$$\nThen $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$. For the uninformative heuristic $U(s,a)=V_{\\max}=(1-\\gamma)^{-1}$, the bound is $\\widetilde O(S^2A/[\\epsilon^3(1-\\gamma)^6])$, where $\\widetilde O$ suppresses logarithmic factors.",
+        "strategy": "Verify optimism, empirical-model accuracy, greedy-policy accuracy, and the bounded number of unknown-pair visits, then apply the escape-event reduction.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.2.2, Theorem 11 and proof, PDF pp. 20–23 (printed pp. 2429–2432)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§4.2.3, PDF pp. 50–51; R-max PAC context."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-delayed-q-learning-pac-bound",
+        "kind": "theorem",
+        "title": "PAC-MDP sample complexity of Delayed Q-learning",
+        "deps": [
+          "alg-delayed-q-learning",
+          "def-pac-mdp-sample-complexity",
+          "def-admissible-mdp-heuristic",
+          "def-pac-mdp-known-state-action-mdp",
+          "lem-delayed-q-learning-optimism-and-update-counts",
+          "thm-pac-mdp-escape-event-reduction",
+          "thm-pac-mdp-value-functions"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $M$ be a bounded-reward finite discounted MDP, write $S=|S|$ and $A=\\max_s|A(s)|$, and fix $0<\\epsilon<(1-\\gamma)^{-1}$, $0<\\delta<1$, and an admissible heuristic with normalized cap $V_{\\max}$. If $\\epsilon\\ge V_{\\max}$, then $N_\\epsilon=0$. Otherwise put\n$$\\eta=\\epsilon/4,\\quad \\epsilon_1=\\frac{\\eta(1-\\gamma)}3,\\quad \\kappa=\\left\\lceil\\frac{SA V_{\\max}}{\\epsilon_1}\\right\\rceil,\\quad N=SA(1+\\kappa),\\quad C_1=1+\\gamma V_{\\max},$$\nand choose\n$$m=\\left\\lceil\\frac{C_1^2}{2\\epsilon_1^2}\\ln\\frac{16N}{\\delta}\\right\\rceil.$$\nRun Delayed Q-learning with $m$ and $\\epsilon_1$. Write $D(s,a)=[U(s,a)-V^*(s)]_+$, $G=\\sum_{s,a}(1+D(s,a)/\\epsilon_1)$, and $\\zeta=\\lceil(2m+1)G\\rceil$. Define $q,H,M$ by\n$$q=\\frac{\\eta}{4V_{\\max}},\\qquad H=\\begin{cases}1,&\\gamma=0,\\\\ \\max\\{1,\\lceil\\ln(1/[\\eta(1-\\gamma)])/(-\\ln\\gamma)\\rceil\\},&0<\\gamma<1,\\end{cases}\\qquad M=\\left\\lceil\\frac{2(\\zeta+1)+2\\ln(2/\\delta)}q\\right\\rceil.$$\nThen $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$. Equivalently, up to logarithmic factors, the bound is\n$$\\widetilde O\\!\\left(\\frac{V_{\\max}(1+\\gamma V_{\\max})^2\\left[\\sum_{s,a}D(s,a)+SA\\epsilon(1-\\gamma)\\right]}{\\epsilon^4(1-\\gamma)^4}\\right),$$\nwhere $\\widetilde O$ suppresses logarithmic factors. The additive term remains when all heuristic slacks vanish. For $V_{\\max}=(1-\\gamma)^{-1}$ this gives $\\widetilde O(SA/[\\epsilon^4(1-\\gamma)^8])$.",
+        "strategy": "Use the corrected per-pair update count, the high-probability optimism and residual events, and the escape-event reduction.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.3.2, Theorem 16 and proof, PDF pp. 23–27 (printed pp. 2432–2436)."
+            },
+            {
+              "title": "Alexander L. Strehl, Lihong Li, Eric Wiewiora, John Langford, and Michael L. Littman, PAC Model-Free Reinforcement Learning",
+              "url": "https://hunch.net/~jl/projects/RL/Delayed_Q/icml06.pdf",
+              "locator": "§5.2.1, Theorem 1 and proof, PDF pp. 6–8 (printed pp. 886–888)."
+            },
+            {
+              "title": "Csaba Szepesvári, Algorithms for Reinforcement Learning",
+              "url": "https://old.sztaki.hu/~szcsaba/papers/RLAlgsInMDPs-lecture.pdf",
+              "locator": "§4.2.4, PDF pp. 53–54; PAC-MDP definition and delayed-Q result summary."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2852,
+    "id": "pac-mdp-exploration-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Optimistic exploration and PAC-MDP sample complexity — Examples",
+    "companion": "pac-mdp-exploration",
+    "requires": [
+      "pac-mdp-exploration"
+    ],
+    "items": [
+      {
+        "id": "ex-pac-mdp-nonpermanent-bad-steps",
+        "kind": "example",
+        "title": "A finite bad-step count need not be a permanent stopping time",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-pac-mdp-sample-complexity",
+          "thm-pac-mdp-value-functions"
+        ],
+        "dependency_level": 4,
+        "statement": "Consider a one-state MDP with $\\gamma=0$ and two actions $a,b$ whose deterministic rewards are $1,0$, respectively. For an integer $n\\ge1$, let a deterministic history-dependent controller choose $b$ at times $1,\\ldots,n$ and $n+2$, and choose $a$ at every other time. For $\\epsilon=1/2$, it has exactly $n+1$ bad steps, including one after a good step.",
+        "strategy": "Evaluate each continuation behavior using gamma=0, then enumerate the bad time indices.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.5, discussion after Definitions 1–2, PDF pp. 6–7 (printed p. 2418)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pac-mdp-inadmissible-heuristic-fails",
+        "kind": "example",
+        "title": "An inadmissible heuristic can suppress exploration forever",
+        "deps": [
+          "def-pac-mdp-bounded-reward-model",
+          "def-pac-mdp-sample-complexity",
+          "alg-r-max"
+        ],
+        "dependency_level": 5,
+        "statement": "Consider a one-state MDP with $\\gamma=0$ and actions $a,b$ having deterministic rewards $1,0$. Run the R-MAX procedure outside its admissibility guarantee with the inadmissible heuristic $U(a)=U(b)=0$, supplied scalar $V_0=0$ (so $V_{\\max}=1$), tolerance $\\beta=1/2$, any integer threshold $m\\ge1$, and a tie order that selects $b$ first. It observes only $b$, chooses $b$ forever, and is $1/2$-bad at every time.",
+        "strategy": "Track the empirical value of b and the unchanged optimistic value assigned to the unvisited action a.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.3 and §2.1, PDF pp. 5 and 7–9 (printed pp. 2416 and 2419–2421)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pac-mdp-discount-factor-dependence",
+        "kind": "example",
+        "title": "The uninformative heuristic exposes the discount-factor powers",
+        "deps": [
+          "def-admissible-mdp-heuristic",
+          "thm-r-max-pac-bound",
+          "thm-delayed-q-learning-pac-bound"
+        ],
+        "dependency_level": 7,
+        "statement": "Set $U(s,a)=V_{\\max}=(1-\\gamma)^{-1}$ for every pair, and let $0<\\epsilon<(1-\\gamma)^{-1}$. Then every pair belongs to $E_{\\epsilon/4}$, and\n$$\\sum_{s,a}[U(s,a)-V^*(s)]_+\\le\\frac{SA}{1-\\gamma}.$$\nSubstitution into the proved theorems gives the leading orders $\\widetilde O(S^2A/[\\epsilon^3(1-\\gamma)^6])$ for R-MAX and $\\widetilde O(SA/[\\epsilon^4(1-\\gamma)^8])$ for Delayed Q-learning.",
+        "strategy": "Substitute the uninformative heuristic and its maximum gap into the two proved bounds and simplify powers.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§1.1 equations (1)–(2), Theorems 11 and 16, PDF pp. 2 and 20–27 (printed pp. 2414 and 2429–2436)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pac-mdp-delayed-q-zero-slack",
+        "kind": "example",
+        "title": "Zero heuristic slack can still require one Delayed Q-learning update",
+        "deps": [
+          "def-admissible-mdp-heuristic",
+          "alg-delayed-q-learning",
+          "thm-delayed-q-learning-pac-bound"
+        ],
+        "dependency_level": 7,
+        "statement": "Consider a one-state MDP with $\\gamma=0$ and actions $a,b$ of deterministic rewards $1,0$. Set $U(a)=U(b)=V^*(s)=V_{\\max}=1$, use a tie order selecting $b$ first, and take any integer $m\\ge1$ and $0<\\epsilon_1<1/2$. Delayed Q-learning selects $b$ for its first $m$ samples and then lowers $Q(s,b)$, even though $\\sum_{s,a}[U(s,a)-V^*(s)]_+=0$. In the PAC bound the resulting finite cost is covered by the additive $SA\\epsilon(1-\\gamma)$ term.",
+        "strategy": "Compute the initial tie, the first batch target, the update condition, and the heuristic-gap sum exactly.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Alexander L. Strehl, Lihong Li, and Michael L. Littman, Reinforcement Learning in Finite MDPs: PAC Analysis",
+              "url": "https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+              "locator": "§3.3.2, Lemma 25 and Theorem 16, PDF pp. 25–27 (printed pp. 2435–2436)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,1084 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-adam",
+    "alg-amsgrad",
+    "alg-rmsprop",
+    "def-latent-class-contrastive-learning",
+    "def-pointwise-nonlinearity-and-pooling-on-group-features",
+    "def-scaffold-analysis-trajectory-and-errors",
+    "lem-contrastive-class-collision-deviation",
+    "lem-contrastive-hinge-and-logistic-loss-properties",
+    "thm-scaffold-convex-and-nonconvex-rates"
+  ],
+  "contracts": {
+    "alg-adam": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "T=1, beta1=0, beta2=1/2, epsilon=1, alpha=1, x1=0, g1=1",
+          "result": "m1=1, v1=1/2, denominator sqrt(3/2), and clipped x2=-sqrt(2/3) lies in [-1,1]."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits epsilon=0 only for admissible inputs with vt+epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition initializes at t=1 with m0=v0=0 and defines the first update."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate limiting object is part of the claimed conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition includes beta1=0 and epsilon=0 when admissible, while beta2 remains in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        }
+      ]
+    },
+    "alg-amsgrad": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one coordinate, beta2=1/2, gradients 2 then 0",
+          "result": "v1=2, v2=1, and the historical maximum is 2 at both rounds."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly specifies the zero-historical-maximum coordinate branch and its zero-ratio convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition allows T=1 and the initial zero moments."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows zero-weight coordinates and nonunique weighted minimizers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition includes beta1,t=0 and keeps beta2 strictly inside (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition permits any minimizer; the well-definedness item proves existence on compact F."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        }
+      ]
+    },
+    "alg-rmsprop": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "rho=0, epsilon=1, eta=1, x1=0, g1=2",
+          "result": "r1=4 and x2=-2/3, since sqrt(r1)+epsilon=3."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement or Definition requires a positive finite horizon, positive dimension, or nonempty domain and asserts no empty-object case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No distinct zero endpoint is asserted beyond the displayed hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition applies at t=1 with r0=0; no later-round condition is required."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate limiting object is part of the claimed conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition includes rho=0, excludes rho=1, and requires epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The item makes no separate choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement and Definition assert no biconditional."
+        }
+      ]
+    },
+    "def-latent-class-contrastive-learning": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement specifies a nonempty class, function, sample, or finite example domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-parameter branch requiring a separate conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes the one-sample or one-dimensional endpoint in its stated positive-integer range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition specifies deterministic or zero-variance cases directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement states the open confidence and positive-scale ranges, and the proof uses those ranges at the displayed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition supplies its required nonempty objects and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way definition, bound, or example and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement claims no converse or reverse implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-56-author",
+        "notes": "This author-side contract records the supplied argument and boundary checks; independent review and native workflow acceptance remain open."
+      },
+      "proof_status": "definition-authored-no-proof-required",
+      "proof_status_evidence": "The item is a definition and has no proof section or numbered proof steps.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "def-pointwise-nonlinearity-and-pooling-on-group-features": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is a **subgroup** of $G$, written $H \\le G$, when - **(S1)** $e \\in H$; - **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$ ([[def-binary-operation]]); - **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-coset",
+          "source_section": "Definition",
+          "quote": "For $g\\in G$, the **left coset** and **right coset** of $H$ represented by $g$ are $$gH:=\\{gh:h\\in H\\},\\qquad Hg:=\\{hg:h\\in H\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coset-action",
+          "claim": "The left G-action on right cosets is independent of representatives and obeys the action laws.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "coset-pool",
+          "claim": "The finite right-coset maximum is independent of the coset representative.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "operations-defined",
+          "claim": "Finite maxima exist and the pointwise and restriction formulas define maps on their stated domains.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires U nonempty and H a subgroup, so empty pooling index sets are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a zero feature map every finite maximum is zero; see steps 1.2 and 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With U={e} or H={e}, the pool is the single indexed value; see steps 1.2 and 1.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cases H={e} and finite H=G are included in the representative and maximum arguments; see steps 1.1–1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The indexing sets are groups and cosets, not ordered intervals with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The formula is independent of coset representatives and takes maxima over finite sets; no representative is chosen in steps 1.1–1.3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition verification is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition verification is not an iff claim."
+        }
+      ]
+    },
+    "def-scaffold-analysis-trajectory-and-errors": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires positive finite client, worker and local-step counts; no empty population execution is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition allows zero query-point drift and zero anchor error; initialization gives Xi_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes K=1, in which every query point is the round-start point, and N=S=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Definition permit coincident anchors or zero drift; all error terms are nonnegative and the proofs do not divide by these errors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes full participation S=N and distinguishes query-point drift from endpoint drift."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition and finite arithmetic argument make no arbitrary-family selection or choice-dependent existence claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not a biconditional."
+        }
+      ]
+    },
+    "lem-contrastive-class-collision-deviation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-latent-class-contrastive-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\mathcal C_0,\\rho)$ and $(\\mathcal X,\\mathcal A)$ be measurable probability spaces. For each class $c\\in\\mathcal C$, let $D_c$ be a probability measure on $(\\mathcal X,\\mathcal A)$ and assume $c\\mapsto D_c(A)$ is measurable for every $A\\in\\mathcal A$. Assume the displayed mixtures define probability measures. The positive-pair law $D_{\\rm sim}$ and negative marginal $D_{\\rm neg}$ are specified by\n\n$$D_{\\rm sim}(A\\times B):=\\int_{\\mathcal C}D_c(A)D_c(B)\\,\\rho(dc),\\qquad D_{\\rm neg}(A):=\\int_{\\mathcal C}D_c(A)\\,\\rho(dc)$$\n\nfor measurable $A,B\\in\\mathcal A$. Equivalently, draw $C\\sim\\rho$ and then draw $X,X^+$ independently with law $D_C$ for a positive pair; draw a fresh independent class $C'\\sim\\rho$ and $X^-\\sim D_{C'}$ for one negative. The class labels are latent: the learner observes the pair and negative data, not their classes.\n\nLet $d\\ge1$, $R>0$, and let $\\mathcal F$ be a nonempty class of measurable maps $f:\\mathcal X\\to\\mathbb R^d$ satisfying $\\sup_{x\\in\\mathcal X}\\lVert f(x)\\rVert_2\\le R$. Use either one-negative loss $\\ell_{\\rm h}(t)=(1+t)_+$ or $\\ell_{\\rm log}(t)=\\log_2(1+e^t)$ from the immediately preceding loss-properties lemma. The contrastive score and population loss are\n\n$$q_f(x,x^+,x^-):=f(x)^\\top\\bigl(f(x^-)-f(x^+)\\bigr),\\qquad L_{\\rm un}(f):=\\mathbb E_{(X,X^+)\\sim D_{\\rm sim},\\,X^-\\sim D_{\\rm neg}}\\bigl[\\ell(q_f(X,X^+,X^-))\\bigr].$$\n\nFor $M\\ge1$, an observed sample is $S=((x_j,x_j^+,x_j^-))_{j=1}^M$ of $M$ independent triplets with common law $D_{\\rm sim}\\otimes D_{\\rm neg}$, and its empirical loss is $\\widehat L_{\\rm un}(f):=M^{-1}\\sum_{j=1}^M\\ell(q_f(x_j,x_j^+,x_j^-))$. For this sample define the unnormalized vector Rademacher complexity\n\n$$\\mathcal R_S(\\mathcal F):=\\mathbb E_\\varepsilon\\sup_{f\\in\\mathcal F}\\sum_{j=1}^M\\sum_{t=1}^d\\bigl(\\varepsilon_{jt0}f_t(x_j)+\\varepsilon_{jt+}f_t(x_j^+)+\\varepsilon_{jt-}f_t(x_j^-)\\bigr),$$\n\nwhere every $\\varepsilon_{jt0},\\varepsilon_{jt+},\\varepsilon_{jt-}$ is an independent uniform sign. This is the one-sided convention with no absolute value and no $1/M$ factor.\n\nLet $C_+,C_-\\sim\\rho$ be independent class draws and set $\\tau:=\\Pr(C_+=C_-)<1$. Assume the diagonal $\\Delta:=\\{(c,c):c\\in\\mathcal C\\}$ and each $\\Delta_A:=\\{(c,c):c\\in A\\}$, $A\\in\\mathcal C_0$, are measurable. The average binary task draws $(C_+,C_-)$ conditional on $C_+\\ne C_-$, then samples a label $Y$ uniformly from $\\{+1,-1\\}$ and an input $X$ from $D_{C_+}$ if $Y=+1$ or $D_{C_-}$ if $Y=-1$. For a vector representation $f$, a binary linear classifier uses a weight vector $w\\in\\mathbb R^d$ and loss $\\ell(-Yw^\\top f(X))$. Define $L_{\\rm sup}(f)$ as the average over tasks of the infimum of this risk over $w\\in\\mathbb R^d$. Write $\\mu_c:=\\mathbb E_{X\\sim D_c}f(X)$ and define the class-mean classifier by $w_\\mu=\\mu_{C_+}-\\mu_{C_-}$; its average risk is $L^\\mu_{\\rm sup}(f)$. For $\\gamma>0$, write $L^\\mu_{\\gamma,\\rm sup}(f)$ for the same mean-classifier risk with margin loss $\\ell_\\gamma(t):=(1+t/\\gamma)_+$ in place of $\\ell$.\n\nFor $\\tau>0$, let $L^=_{\\rm un}(f)$ and $L^\\ne_{\\rm un}(f)$ be the conditional contrastive risks given $C_+=C_-$ and $C_+\\ne C_-$, respectively. Let $\\nu$ be the class law conditioned on the collision event, namely $\\nu(A):=(\\rho\\otimes\\rho)(\\Delta_A)/\\tau$ for $A\\in\\mathcal C_0$; for an atomic class law this gives $\\nu(\\{c\\})=\\rho(\\{c\\})^2/\\tau$. Define $\\Sigma_f(c):=\\mathbb E_{X\\sim D_c}[(f(X)-\\mu_c)(f(X)-\\mu_c)^\\top]$ and\n\n$$s(f):=\\mathbb E_{C\\sim\\nu}\\left[\\sqrt{\\lVert\\Sigma_f(C)\\rVert_{\\rm op}}\\,\\mathbb E_{X\\sim D_C}\\lVert f(X)\\rVert_2\\right],\\qquad \\lVert\\Sigma\\rVert_{\\rm op}:=\\max_{\\lVert u\\rVert_2=1}\\lVert\\Sigma u\\rVert_2.$$\n\nThe assumed measurability of $\\Delta$ and every $\\Delta_A$ makes the displayed collision event and conditional class law well-defined; disjoint class sets give disjoint $\\Delta_A$, so the formula for $\\nu$ is countably additive and has total mass one. Assume also that $c\\mapsto\\mu_c$ and $c\\mapsto\\Sigma_f(c)$ are measurable for each $f$, and that the displayed class-conditional risks and random suprema used below are measurable.\n\nIf $\\tau=0$, there is no collision term; set $s(f):=0$ and use $L_{\\rm un}(f)=L^\\ne_{\\rm un}(f)$. Any empirical minimizer or approximate minimizer used below is separately assumed to be a measurable selector; no selector-existence claim is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-contrastive-hinge-and-logistic-loss-properties",
+          "source_section": "Statement",
+          "quote": "Write $\\ln$ for the natural logarithm and $\\log_2 u:=\\ln(u)/\\ln(2)$ for $u>0$. Define the one-negative hinge and logistic losses by $\\ell_{\\rm h}(t):=(1+t)_+$ and $\\ell_{\\rm log}(t):=\\log_2(1+e^t)$ for $t\\in\\mathbb R$, where $r_+:=\\max\\{r,0\\}$. Put $L_0:=1+1/\\ln(2)$. Each loss is convex, nondecreasing, $L_0$-Lipschitz, and has value $1$ at $0$. For $R>0$ and either loss $\\ell$, define $B_{\\ell,R}:=\\ell(2R^2)-\\ell(-2R^2)$. Then $0<B_{\\ell,R}\\le4L_0R^2$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Partition the independent class-pair law into the collision event, of probability $\\tau$, and its complement, of probability $1-\\tau$. The conditional loss on these two events is respectively $L^=_{\\rm un}(f)$ and $L^\\ne_{\\rm un}(f)$, giving the displayed decomposition when $\\tau>0$. If $\\tau=0$, the collision event is null and $L_{\\rm un}(f)=L^\\ne_{\\rm un}(f)$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Suppose $\\tau>0$. Fix a collision class $c$ and anchor $x$. Conditional on $x,c$, let $Y_+=f(X^+)$ and $Y_-=f(X^-)$ be independent copies with mean $\\mu_c$. Then $\\mathbb E[f(x)^\\top(Y_--Y_+)]=0$ by [F4] and [F6]. Jensen's inequality [F2], [F8] gives $\\mathbb E[\\ell(f(x)^\\top(Y_--Y_+))]\\ge\\ell(0)=1$. Averaging over $x\\sim D_c$ and $c\\sim\\nu$ proves $L^=_{\\rm un}(f)\\ge1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "With $Z_+:=f(X^+) -\\mu_c$ and $Z_-:=f(X^-) -\\mu_c$, the conditional vectors are independent, centered, and have covariance $\\Sigma_f(c)$. For each matrix entry, Fubini and product-law independence factor the cross expectation as $\\mathbb E[(Z_-)_{r}(Z_+)_{s}]=\\mathbb E[(Z_-)_{r}]\\mathbb E[(Z_+)_{s}]=0$, and likewise with $+$ and $-$ exchanged. Linearity therefore gives $\\mathbb E[(Z_--Z_+)(Z_--Z_+)^\\top]=2\\Sigma_f(c)$. By [F3], $\\Sigma_f(c)$ is positive semidefinite; by [F7] and the operator-norm definition, $f(x)^\\top\\Sigma_f(c)f(x)\\le\\lVert f(x)\\rVert_2\\lVert\\Sigma_f(c)f(x)\\rVert_2\\le\\lVert\\Sigma_f(c)\\rVert_{\\rm op}\\lVert f(x)\\rVert_2^2$. Thus $$\\mathbb E\\bigl[(f(x)^\\top(Y_--Y_+))^2\\bigr]=2f(x)^\\top\\Sigma_f(c)f(x)\\le2\\lVert\\Sigma_f(c)\\rVert_{\\rm op}\\lVert f(x)\\rVert_2^2.$$",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Apply [F8] to the bounded score in step 1.3 to get $\\mathbb E|f(x)^\\top(Y_--Y_+)|\\le\\sqrt2\\sqrt{\\lVert\\Sigma_f(c)\\rVert_{\\rm op}}\\lVert f(x)\\rVert_2$. By [F2], $\\mathbb E[\\ell(f(x)^\\top(Y_--Y_+))]-1\\le L_0\\mathbb E|f(x)^\\top(Y_--Y_+)|$. Average over $x\\sim D_c$ and $c\\sim\\nu$ to obtain $L^=_{\\rm un}(f)-1\\le\\sqrt2L_0s(f)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Steps 1.2 and 2.1 establish both bounds on $L^=_{\\rm un}(f)$, while step 1.1 gives the unconditional decomposition and the zero-collision case.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement specifies a nonempty class, function, sample, or finite example domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly states the tau=0 branch and sets s(f)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no separate one-object endpoint beyond its stated finite setup."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no distinct degenerate branch beyond its explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement states the open confidence and positive-scale ranges, and the proof uses those ranges at the displayed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use their stated objects and cited suppliers; no arbitrary family of choices is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way definition, bound, or example and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement claims no converse or reverse implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-56-author",
+        "notes": "This author-side contract records the supplied argument and boundary checks; independent review and native workflow acceptance remain open."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "All numbered local proof steps and their declared inputs are mapped above; scoped validation and independent review remain separate.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "lem-contrastive-hinge-and-logistic-loss-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-derivative-algebra-and-chain-rules",
+          "source_section": "Statement",
+          "quote": "Every function differentiable at $c$ is continuous at $c$.\nIf $f,g$ are real functions differentiable at $c$, then $f+g$ and $fg$ are\ndifferentiable there and\n$$\n(f+g)'(c)=f'(c)+g'(c),\\qquad (fg)'(c)=f'(c)g(c)+f(c)g'(c).\n$$\nIf $g(c)\\ne0$, then $f/g$ is differentiable at $c$ and\n$$\n(f/g)'(c)=\\frac{f'(c)g(c)-f(c)g'(c)}{g(c)^2}.\n$$\nIf $f$ is differentiable at $c$, $g$ is differentiable at $f(c)$, and the\ncomposition is defined near $c$, then $g\\circ f$ is differentiable at $c$ and\n$(g\\circ f)'(c)=g'(f(c))f'(c)$. For every integer $m\\ge1$,\n$(x^m)'=mx^{m-1}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The positive-part function is nondecreasing and $1$-Lipschitz: if two inputs have the same sign, the positive-part difference is either their difference or zero; if they have opposite signs, the positive part of the nonnegative input is at most the distance between them. It is convex as the maximum of the affine functions $0$ and $1+t$. Therefore $\\ell_{\\rm h}$ is nondecreasing, convex, and $1$-Lipschitz, and $\\ell_{\\rm h}(0)=1$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F2]–[F3] and the chain rule, $$\\ell_{\\rm log}'(t)=\\frac{e^t}{(1+e^t)\\ln2},\\qquad \\ell_{\\rm log}''(t)=\\frac{e^t}{(1+e^t)^2\\ln2}.$$",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F1], $\\ln2>0$, and [F2] gives $e^t>0$. Step 1.2 therefore shows that $0<\\ell_{\\rm log}'(t)\\le1/\\ln2$ for every real $t$. The derivative is positive, so the logistic loss is strictly increasing; applying [F5] on each closed interval gives the global $1/\\ln2$ Lipschitz bound.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "The second derivative in step 1.2 is nonnegative because its numerator and denominator are positive. The convexity criterion [F4] gives convexity of $\\ell_{\\rm log}$. Also $\\ell_{\\rm log}(0)=\\log_2(2)=1$ from the definition of $\\log_2$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $L_0$ exceeds both Lipschitz constants, steps 1.1 and 2.1 give the common $L_0$-Lipschitz bound and strict increase for both losses. Hence $B_{\\ell,R}=\\ell(2R^2)-\\ell(-2R^2)>0$. The interval has length $4R^2$, so its Lipschitz bound gives $B_{\\ell,R}\\le4L_0R^2$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement specifies a nonempty class, function, sample, or finite example domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement has no zero-parameter branch requiring a separate conclusion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no separate one-object endpoint beyond its stated finite setup."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no distinct degenerate branch beyond its explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement states the open confidence and positive-scale ranges, and the proof uses those ranges at the displayed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use their stated objects and cited suppliers; no arbitrary family of choices is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way definition, bound, or example and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement claims no converse or reverse implication."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "batch-56-author",
+        "notes": "This author-side contract records the supplied argument and boundary checks; independent review and native workflow acceptance remain open."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "All numbered local proof steps and their declared inputs are mapped above; scoped validation and independent review remain separate.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": []
+    },
+    "thm-scaffold-convex-and-nonconvex-rates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-scaffold-convex-round-progress",
+          "source_section": "Statement",
+          "quote": "Let $f_i:\\mathbb R^d\\to\\mathbb R$ be differentiable, $\\mu$-strongly\nconvex and $\\beta$-smooth, with $0\\le\\mu\\le\\beta$, and let\n$f=N^{-1}\\sum_i f_i$ attain $f^\\star=f(x^\\star)$. Run Option II SCAFFOLD\nwith $1\\le S\\le N$ clients sampled uniformly without replacement, $K\\ge1$\nlocal steps, local step $\\eta_l$, server scale $\\eta_g\\ge1$, and fresh\nconditionally unbiased local stochastic gradients with variance at most\n$\\sigma^2$. Assume $c=N^{-1}\\sum_i c_i$, initialize\n$c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$, and define\n$\\widetilde\\eta=K\\eta_l\\eta_g$. If\n$$ \\widetilde\\eta\\le\\frac1{81\\beta}, \\qquad \\text{and, when }\\mu>0,\\quad \\widetilde\\eta\\le\\frac{S}{15\\mu N}, $$\nthen, with $E_r,C_r$ as in the SCAFFOLD analysis-trajectory definition and\n$\\rho=(2+34\\beta\\widetilde\\eta)/3$,\n$$ \\begin{aligned} \\mathbb E\\|x_r-x^\\star\\|_2^2 +\\frac{14N\\widetilde\\eta^2}{S}C_r &\\le\\left(1-\\frac{\\mu\\widetilde\\eta}{2}\\right) \\left(\\mathbb E\\|x_{r-1}-x^\\star\\|_2^2 +\\frac{14N\\widetilde\\eta^2}{S}C_{r-1}\\right)\\\\ &\\quad-\\widetilde\\eta\\mathbb E[f(x_{r-1})-f^\\star] +\\left(\\frac{18}{KS}+\\frac{\\rho}{K\\eta_g^2}\\right) \\widetilde\\eta^2\\sigma^2. \\end{aligned} $$\nFor $\\mu=0$ this is a general-convex descent inequality; for $\\mu>0$ it\nalso contracts the distance-and-control potential.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-scaffold-nonconvex-round-progress",
+          "source_section": "Statement",
+          "quote": "Let $f_i:\\mathbb R^d\\to\\mathbb R$ have $\\beta$-Lipschitz gradients with $\\beta>0$, and let $f=N^{-1}\\sum_i f_i$ be bounded below by $f^\\star$. Run Option II SCAFFOLD with $1\\le S\\le N$ uniformly sampled clients, $K\\ge1$ local steps, server scale $\\eta_g\\ge1$, and fresh conditionally unbiased local stochastic gradients of within-client variance at most $\\sigma^2$. Initialize $c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$. Client samples are fresh and independent of prior history and counterfactual oracle draws. Let $p=S/N$, $t=\\widetilde\\eta=K\\eta_l\\eta_g$, and let $\\Xi_r$ be the control-anchor tracking error. If\n$$ 0<t\\le\\frac{p^{2/3}}{100\\beta}, $$\nthen the potential\n$$ P_r=\\mathbb E[f(x_r)-f^\\star]+\\frac{24\\beta^3t^2}{p}\\Xi_r $$\nsatisfies\n$$ P_r\\le P_{r-1}-\\frac t3\\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2+\\frac{10\\beta t^2\\sigma^2}{KS}\\left(1+\\frac S{\\eta_g^2}\\right). $$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-federated-recursion-averaging",
+          "source_section": "Statement",
+          "quote": "Let $R\\ge1$ and let $d_0,\\ldots,d_R\\ge0$, $q_0,\\ldots,q_{R-1}\\ge0$.\n\n1. If $a,\\eta>0$, $b,c\\ge0$, and\n$$ d_r+a\\eta q_{r-1}\\le d_{r-1}+b\\eta^2+c\\eta^3 \\quad(1\\le r\\le R), $$\nthen\n$$ \\frac1R\\sum_{r=1}^R q_{r-1} \\le\\frac{d_0}{a\\eta R}+\\frac{b\\eta+c\\eta^2}{a}. $$\n\n2. If $0<\\rho\\eta<1$, $a>0$, $b,c\\ge0$, and\n$$ d_r\\le(1-\\rho\\eta)d_{r-1}-a\\eta q_{r-1} +b\\eta^2+c\\eta^3, $$\nthen for $w_r=(1-\\rho\\eta)^{-r}$ and $W_R=\\sum_{r=1}^Rw_r$,\n$$ \\frac1{W_R}\\sum_{r=1}^Rw_rq_{r-1} \\le\\frac{d_0}{a\\eta W_R}+\\frac{b\\eta+c\\eta^2}{a}. $$\nThe left side in part 2 is the expectation of $q_{r-1}$ when an index\n$r\\in\\{1,\\ldots,R\\}$ is selected with probability $w_r/W_R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-smooth-convex-gradient-difference",
+          "source_section": "Statement",
+          "quote": "Let $h_1,\\ldots,h_N:\\mathbb R^d\\to\\mathbb R$ be convex and continuously\ndifferentiable, with $\\beta$-Lipschitz gradients for $\\beta>0$. Put\n$f=N^{-1}\\sum_{i=1}^Nh_i$, and let $x^\\star$ minimize $f$. Then\n$$ \\frac1N\\sum_{i=1}^N \\|\\nabla h_i(x)-\\nabla h_i(x^\\star)\\|_2^2 \\le2\\beta\\bigl(f(x)-f(x^\\star)\\bigr) \\qquad(x\\in\\mathbb R^d). $$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-gradient-is-average",
+          "source_section": "Statement",
+          "quote": "Let U be open in R^d, let x in U, let n>=1, and let f_1,...,f_n:U->R be totally differentiable at x. Put F=n^{-1}sum_{i=1}^n f_i. Then F is totally differentiable at x and\n\n$$\n\\nabla F(x)=\\frac1n\\sum_{i=1}^n\\nabla f_i(x).\n$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-federated-objective-and-client-sampling",
+          "source_section": "Definition",
+          "quote": "Let $N,d\\ge1$, let each client $i\\in\\{1,\\ldots,N\\}$ have a positive integer\nsample count $n_i$, and put $n=\\sum_{i=1}^N n_i$. For differentiable client\nobjectives $F_i:\\mathbb R^d\\to\\mathbb R$, the sample-count-weighted deployment\nobjective is\n$$ f_{\\rm wt}(w)=\\sum_{i=1}^N\\frac{n_i}{n}F_i(w). $$\nFor differentiable client objectives $f_i:\\mathbb R^d\\to\\mathbb R$, the\nequal-client objective is\n$$ f(w)=\\frac1N\\sum_{i=1}^N f_i(w). $$\nThe symbols $F_i$ and $f_i$ denote separate families; they are not identified\nunless an application states $F_i=f_i$. In general, $f_{\\rm wt}$ and $f$ are\ndifferent objectives.\n\nFor integers $1\\le S\\le N$, a uniform fixed-size client sample is a random\nsubset $\\mathcal S\\subseteq\\{1,\\ldots,N\\}$ of cardinality $S$ for which every\n$S$-element subset has probability $\\binom NS^{-1}$. This is sampling without\nreplacement. When several communication rounds are used, the sampled subsets\nare independent across rounds unless a theorem states a different sampling\nlaw.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-scaffold",
+          "source_section": "Definition",
+          "quote": "For equal-client objectives $f_1,\\ldots,f_N:\\mathbb R^d\\to\\mathbb R$, the\nserver stores a model $x$ and control vector $c$, and client $i$ stores a\ncontrol vector $c_i$. The initial controls satisfy\n$c=N^{-1}\\sum_{i=1}^N c_i$. In each round, sample a uniform fixed-size subset\n$\\mathcal S$ of $S$ clients. Each selected client initializes $y_{i,0}=x$ and\nfor $k=1,\\ldots,K$ computes a local stochastic gradient $g_i(y_{i,k-1})$ and\nupdates\n$$ y_{i,k}=y_{i,k-1}-\\eta_l\\bigl(g_i(y_{i,k-1})-c_i+c\\bigr). $$\nAfter its $K$ local steps, a selected client updates its control using either\n\n- **Option I:** $c_i^+=g_i(x)$, evaluated at the server model from the start\n  of the round; or\n- **Option II:** $c_i^+=c_i-c+(K\\eta_l)^{-1}(x-y_{i,K})$.\n\nThe client sends $\\Delta x_i=y_{i,K}-x$ and\n$\\Delta c_i=c_i^+-c_i$. Unselected clients retain their controls. The server\nforms\n$$ \\Delta x=\\frac1S\\sum_{i\\in\\mathcal S}\\Delta x_i,\\qquad \\Delta c=\\frac1S\\sum_{i\\in\\mathcal S}\\Delta c_i $$\nand updates\n$$ x^+=x+\\eta_g\\Delta x,\\qquad c^+=c+\\frac SN\\Delta c. $$\nThe selected clients set $c_i\\leftarrow c_i^+$. Thus\n$c^+=N^{-1}\\sum_i c_i^+$ whenever $c=N^{-1}\\sum_i c_i$ held before the\nround. The general procedure permits zero initial controls; the convergence\nrates stated below use the explicitly stated gradient-consistent initialization\n$c_i^0=\\nabla f_i(x_0)$ and $c^0=N^{-1}\\sum_i c_i^0$.\n\nThe following schematic records only the communication flow. Its vertices are\nthe server and the selected clients; the arrow labels are exactly the\nquantities sent in each direction. The local updates and server equations above,\nnot the schematic, define the procedure.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n\\node[draw,rounded corners] (server) at (0,0) {Server: $(x,c)$};\n\\node[draw,rounded corners] (clients) at (5,0) {Selected clients $i\\in\\mathcal S$};\n\\draw[->] (server) to[bend left=18] node[above] {$(x,c)$} (clients);\n\\draw[->] (clients) to[bend left=18] node[below] {$(\\Delta x_i,\\Delta c_i)$} (server);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-scaffold-analysis-trajectory-and-errors",
+          "source_section": "Definition",
+          "quote": "Let $f_i:\\mathbb R^d\\to\\mathbb R$ be client objectives and\n$f=N^{-1}\\sum_{i=1}^Nf_i$. Run SCAFFOLD for $R$ rounds with local step count\n$K$, client sample size $S$, server iterates $x_0,\\ldots,x_R$, and client\ncontrols $c_i^r$ after round $r$. In each round, extend the local trajectory\n$y_{i,0}^r=x_{r-1},y_{i,1}^r,\\ldots,y_{i,K}^r$ to every client using the\nsame local update rule, including hypothetical paths for clients not selected\nin that round. Generate these counterfactual paths using fresh local oracle randomness independently of the fresh client sample, so a selected path agrees with its actual local execution. Local paths use only the round-start model and controls and their own successive oracle draws. Oracle moment conditions in the results below are conditional on the full prequery history, including any earlier revealed draws in the current round. All expectations below are over client samples and local\nstochastic-gradient draws.\n\nThe **round-$r$ client drift at gradient-query points** is\n$$ E_r=\\frac1{KN}\\sum_{i=1}^N\\sum_{k=1}^K \\mathbb E\\|y_{i,k-1}^r-x_{r-1}\\|_2^2. $$\nFor every client and local-step index, initialize a stored anchor\n$\\alpha_{i,k}^0=x_0$ and stored gradient $\\gamma_{i,k}^0=\\nabla f_i(x_0)$.\nAfter round $r$, if client $i$ was selected, set\n$\\alpha_{i,k}^r=y_{i,k-1}^r$ and let $\\gamma_{i,k}^r$ be the actual\nstochastic gradient draw used at that local query. If client $i$ was not\nselected, retain both previous stored values. Thus the anchors and stored\ngradients record the most recent query and its realized oracle output for\neach local-step index.\n\nWhen $f$ is convex with minimizer $x^\\star$, the **round-$r$ convex control\nlag** is the average second moment of the mean full-gradient error at the\nstored anchors:\n$$ C_r=\\frac1N\\sum_{i=1}^N\\mathbb E\\left\\| \\frac1K\\sum_{k=1}^K\\nabla f_i(\\alpha_{i,k}^r) -\\nabla f_i(x^\\star)\\right\\|_2^2. $$\nFor the nonconvex analysis, the **round-$r$ control-tracking error** is\n$$ \\Xi_r=\\frac1{KN}\\sum_{i=1}^N\\sum_{k=1}^K \\mathbb E\\|\\alpha_{i,k}^r-x_r\\|_2^2. $$\nThus $\\Xi_0=0$ and each stored anchor records the point at which that client's\ncorresponding control-gradient sample was evaluated.\n\nThe query-point indexing in $E_r$ is deliberate: the gradient-difference\nterms in the variance and drift recurrences are evaluated at $y_{i,k-1}^r$.\nIt is not interchangeable with an average over the post-update endpoints\n$y_{i,k}^r$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the strongly convex case, put $\\widetilde\\eta=K\\eta_l\\sqrt S$ and [given] apply [F1]. Since $\\eta_g^2=S$, the variance term in [F1] is at most $19\\widetilde\\eta^2\\sigma^2/(KS)$. The geometric recurrence lemma [F3] with gap coefficient one and weights $w_r=(1-\\mu\\widetilde\\eta/2)^{-r}$ gives $$ \\mathbb E[f(\\bar x_R)-f^\\star] \\le\\frac{V_0}{\\widetilde\\eta W_R} +\\frac{19\\widetilde\\eta\\sigma^2}{KS}, \\qquad V_0=\\mathbb E\\|x_0-x^\\star\\|_2^2 +\\frac{14N\\widetilde\\eta^2}{S}C_0. $$ This is the strongly convex bound in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the general convex case, apply [F1] with $\\mu=0$ and [given] $\\eta_g=\\sqrt S$. It gives $V_r\\le V_{r-1}-\\widetilde\\eta\\mathbb E[f(x_{r-1})-f^\\star] +19\\widetilde\\eta^2\\sigma^2/(KS)$. Sum over $r=1,\\ldots,R$ and drop the nonnegative terminal potential. For independent uniform $J$ this yields $$ \\frac1R\\sum_{r=0}^{R-1}\\mathbb E[f(x_r)-f^\\star] \\le\\frac{V_0}{\\widetilde\\eta R} +\\frac{19\\widetilde\\eta\\sigma^2}{KS}, \\qquad V_0=D^2+\\frac{14N\\widetilde\\eta^2}{S}C_0. $$ Substitution of $C_0\\le2\\beta F$ proves the exact bound in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the nonconvex case use [F2] with $\\eta_g^2=S$. The initialization in [F6] gives $\\Xi_0=0$, so $P_0=F$. Its variance term is at most $20\\beta\\widetilde\\eta^2\\sigma^2/(KS)$. Sum over rounds and drop $P_R\\ge0$ to obtain $$ \\frac{\\widetilde\\eta}{3}\\sum_{r=1}^R\\mathbb E\\|\\nabla f(x_{r-1})\\|_2^2\\le F+\\frac{20R\\beta\\widetilde\\eta^2\\sigma^2}{KS}. $$ Dividing by $R\\widetilde\\eta/3$ and choosing the uniform independent output index gives precisely the nonconvex finite-round bound.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the strongly convex case, by convex smoothness, [F4] gives $C_0\\le2\\beta F$, hence [given] $V_0\\le D^2+28\\beta N\\widetilde\\eta^2F/S$. Also $$ W_R=\\frac{(1-\\mu\\widetilde\\eta/2)^{-R}-1} {\\mu\\widetilde\\eta/2}. $$ Thus $V_0/(\\widetilde\\eta W_R)\\le\\epsilon/2$ whenever $$ R\\ge\\frac{2}{\\mu\\widetilde\\eta} \\log\\left(1+\\frac{\\mu V_0}{\\epsilon}\\right), $$ and the variance term is at most $\\epsilon/2$ if $\\widetilde\\eta\\le\\epsilon KS/(38\\sigma^2)$. Choose the largest step satisfying these restrictions. Its reciprocal is bounded by a constant times $\\beta+\\mu N/S+\\sigma^2/(KS\\epsilon)$; dividing by $\\mu$ gives the stated communication rate, up to the displayed logarithmic factor.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $D>0$ and set $A=28\\beta NF/S$. With the displayed choice of $\\widetilde\\eta$, one has $A\\widetilde\\eta\\le D^2/\\widetilde\\eta$ and $19\\widetilde\\eta\\sigma^2/(KS)\\le\\epsilon/3$. Thus step 1.2 is at most $2D^2/(\\widetilde\\eta R)+\\epsilon/3\\le2\\epsilon/3$ for the stated integer $R$. The reciprocal step equals the maximum of $81\\beta$, $\\sqrt A/D$, and $57\\sigma^2/(\\epsilon KS)$, omitting zero-denominator restrictions. Bound this maximum by the sum to obtain the stated communication rate. If $D=0$, the initial point is minimizing and requires no round.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $F>0$, choose $\\widetilde\\eta=\\min\\{(S/N)^{2/3}/(100\\beta),\\epsilon KS/(120\\beta\\sigma^2)\\}$, omitting the variance restriction if $\\sigma=0$, and take $R\\ge\\max\\{1,6F/(\\widetilde\\eta\\epsilon)\\}$. Each term in the bound of step 1.3 is at most $\\epsilon/2$. Bounding the reciprocal minimum by the sum proves the nonconvex round rate. If $F=0$, the finite lower bound is attained at $x_0$, so differentiability implies $\\nabla f(x_0)=0$ and returning it suffices. Together with the two convex branches, this proves all branches.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition requires positive finite client, worker and local-step counts; no empty population execution is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement explicitly handles sigma=0 by omitting its restriction and handles D=0/F=0 by returning the minimizing initial point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits K=1 and full participation S=N, including N=S=1; current query-point and sample-mean suppliers include those cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement separates convexity with mu=0 from strong convexity with mu>0 and explicitly returns x_0 at the zero-error boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement retains inclusive sufficient stepsize bounds; the absorption/telescope proof uses non-strict inequalities there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is interpreted with the explicit A2 assumption in Facts & Assumptions: Choice is used only for the cited conditional-expectation-as-an-a.e.-class interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not a biconditional."
+        }
+      ]
+    }
+  }
+}

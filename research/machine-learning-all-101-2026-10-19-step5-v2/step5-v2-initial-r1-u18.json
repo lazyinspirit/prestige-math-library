@@ -1,0 +1,79 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "thm-random-forest-strength-correlation-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "43d447ab8cf79801bced32008cee6c7a2f1cebb6645cc74eb86b493d23ce4172",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Statement restricts h to C but places no corresponding restriction on Y. The index hat j(x,y) is defined only for y=c_k; consequently a test law assigning positive mass outside C leaves m(Z), s and the raw margins undefined on that mass. The forest algorithm restricts training labels, not an arbitrary test law. Explicitly taking the test response in C supplies the missing domain hypothesis without changing the bound or proof argument.",
+      "uncertain": false,
+      "source_urls": ["https://mfm.uchicago.edu/wp-content/uploads/2020/06/Breiman-Random-Forests.pdf"],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-random-forest-strength-correlation-bound",
+      "disposition": "repaired",
+      "post_sha256": "9a0135dd7775fae0a070da8e36ee5c9f76928a64f60572cece9ee95d418ca02e",
+      "review_context_sha256": "1f22a7425cecd7ce80365a4c9222bc3374cf8302bffe6e4b411b4d941743a48d",
+      "reason": "Reviewed the complete Statement, Facts, Proof 1.1–5.1, seven direct supplier interfaces, contract and home page. Added Y in C to the test-pair hypothesis and mirrored it in Given. Finite least-index maximization is measurable; bounded raw margins justify all Fubini exchanges. Independent-pair covariance integrates to Var_P(m), so rho is nonnegative. Cauchy–Schwarz yields d^2 <= E_Q sd^2 <= 1-s^2, and Chebyshev at s>0 proves the bound. For d=0, nonnegative zero integrals and Fubini make m=s>0 almost surely. The claim concerns strict negative margins, so no zero-margin-null assumption is required. No AC or intermediate lemma is needed. Refreshed only this contract's F2 quotation to the current expectation Definition; its mathematical content is unchanged. This is the repairer's review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": ["https://mfm.uchicago.edu/wp-content/uploads/2020/06/Breiman-Random-Forests.pdf"],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": ["ex-random-forest-strength-correlation-tradeoff"],
+  "downstream_uses": {
+    "ex-random-forest-strength-correlation-tradeoff": "items/ex-random-forest-strength-correlation-tradeoff.md, Example, Example references, F2 and Verification 1.1–3.1: uses the supplier's definitions of strength, raw margins, covariance-normalized rho and the final error bound. The Example states Y=X with P(X=0,Y=0)=3/4 and P(X=1,Y=1)=1/4, and tree classes are 0 and 1. Thus Y belongs to C={0,1}; d^2=3/4>0 and s=1/4>0. The added test-label hypothesis is satisfied, all calculations and the comparison 1/4 <= 15/4 remain valid, and no consumer edit or further propagation is necessary. Disposition: examined, unaffected frontier consumer; ordinary owner routing remains owed by the engine."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-random-forest-strength-correlation-bound",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "The missing test-label domain made the competitor index and expectations undefined for test mass outside C. The Statement now explicitly takes Y in C, and Given carries that hypothesis. The only direct consumer already has binary class-valued Y and needs no repair. This proposal records the mathematical correction; it supplies no independent acceptance, certification or judge stamp.",
+      "uncertain": false,
+      "source_urls": ["https://mfm.uchicago.edu/wp-content/uploads/2020/06/Breiman-Random-Forests.pdf"],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "source_reading": "Consulted Breiman, Random Forests, section 2.2 in full through Theorem 2.3, printed pp. 8–9, PDF pages 4–5 (zero-based). Definitions 2.1–2.2 and equations (4)–(8) establish the intended raw-margin covariance argument. Strict positive strength and the separate zero-denominator treatment were checked directly in the local proof. No claim is made to have consulted the separately cited ESL book.",
+    "dependencies_checked": [
+      "alg-bagged-random-forest",
+      "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "def-moments-variance-and-covariance",
+      "thm-independent-random-elements-have-product-joint-law",
+      "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "cor-cauchy-schwarz-for-random-variables",
+      "cor-chebyshev-inequality-for-random-variables"
+    ],
+    "interface_change": "Original: Let $Z=(X,Y)$ have test law $P$. Repaired: Let $Z=(X,Y)$ be a test pair with $Y\\in\\mathcal C$ and test law $P$. No conclusion, formula, dependency or proof step was changed.",
+    "consumer_inventory": "Exact-ID searches of items and library, together with searches for raw-margin and strength-correlation uses, identified the single direct item consumer listed in downstream. The owning library/machine-learning/ml02-random-forests.md is frontmatter-only with page_layout: compact-v1 and its placement remains valid. No outside or published consumer was found; no published-ledger update is proposed. No assigned theorem diagram exists or is required by its argument.",
+    "contract_repair": "research/machine-learning-all-101-2026-10-19-batch-18.proof-contracts.json: F2's old quoted Definition still contained the supplier's formerly inline link. Reread the current supplier section, replaced only that quotation under acquire/reread/edit/check/release using owner step5-v2-initial-r1-u18, and passed the focused strict contract check. The refreshed quote preserves the integral definition and the new following references section is outside the quotation. No historical risk_review or template_review was rewritten.",
+    "checks": [
+      {"command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-random-forest-strength-correlation-bound.md", "exit_code": 0, "result": "1 checked, 0 failing"},
+      {"command": "node tools/rendercheck.mjs items/thm-random-forest-strength-correlation-bound.md library/machine-learning/ml02-random-forests.md", "exit_code": 0, "result": "2 files, YAML and all math spans parse"},
+      {"command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-18.proof-contracts.json --strict --items thm-random-forest-strength-correlation-bound", "exit_code": 0, "result": "After repairing the initially detected F2 citation-quote-mismatch: 0 errors, 0 warnings, 1/1 item checked"},
+      {"command": "node tools/proof-layout.mjs items/thm-random-forest-strength-correlation-bound.md", "exit_code": 0, "result": "1 item, 5 steps, 0 defects; run after the final item edit"},
+      {"command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items thm-random-forest-strength-correlation-bound", "exit_code": 0, "result": "Captured immediately after review; after examining and refreshing the unchanged-content F2 quote, captured again with the same post and context hashes"}
+    ],
+    "unresolved_mathematics": [],
+    "next_action": "Controller collects this proposal, routes the frontier consumer examination, and obtains required independent rejudgment and certification. No judges, workers, gates, stamps or round transitions were launched by this repairer."
+  }
+}

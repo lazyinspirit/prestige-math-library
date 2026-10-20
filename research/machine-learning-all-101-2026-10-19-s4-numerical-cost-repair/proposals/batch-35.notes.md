@@ -1,0 +1,13 @@
+# Batch 35 notes after owner S4 numerical repair
+
+The original terminal native author notes are preserved in `research/machine-learning-all-101-2026-10-19-s4-numerical-cost-repair/before/research/machine-learning-all-101-2026-10-19-batch-35.notes.md`. Their source readings and historical validations remain historical and grant no acceptance of the changed carriers.
+
+The repaired A inventory has 15 items and the B inventory three examples. New level-zero supplier `thm-cauchy-root-grid-matvec-numerical-cost` proves the complete numerical root-grid treecode; the S4 theorem remains level four and its example level five. Existing algorithm and exact suppliers are unchanged. The new supplier uses no logical library dependency and is source-backed `ai-altered`, not an unsupported generated theorem.
+
+The exact S4 bound is retained. Numerical absolute error epsilon now has a proved O((N+L)log(2+N+L)log(kappa/epsilon)) scalar-operation bound and O(N+L) scalar words, with explicit kappa=64*r*w²*(b+1)²*s. Uniform source log(1/epsilon) follows for bounded kappa. Variable precision, supplied certified root/parameter approximations, finite-circuit magnitude/divisor certificates, separation and correction bounds are explicit. Word lengths and bit cost are not bounded. The negative root and exceptional diagonal λ=−2/Δ retain their direct finite formulas. Supplied transformed-vector formation, gradients, optimizer updates and long-context accuracy remain outside this filter count.
+
+Sources were independently fetched on initial attempt and read as recorded in the separate repair evidence; no original source stamp was invented or refreshed here. Both source PDFs and exact terminal native preimages are retained under that repair directory. The source-reported numerical asymptotic remains quoted in theorem Remarks, with its necessary conditioning qualification stated explicitly.
+
+Actual item dependency and textual consumer closure has only the S4 theorem and `ex-s4-filter-cost-excludes-training`; both were repaired by the same owner. The A placement adds the numerical supplier; the B placement remains the same. There is no algorithm/definition change and no further logical consumer.
+
+Focused repair-only validation: normative phase precheck passes all three changed carriers after adopting its proposed phase ordering; proof-layout passes 3 items and 18 steps with no defects; scoped strict contract proposal passes 3/3; renderer passes 3/3. These do not replace current native reviews, owner recertification or any gates. Root alone merges these metadata proposals, binds hashes, updates readiness and performs native integration.

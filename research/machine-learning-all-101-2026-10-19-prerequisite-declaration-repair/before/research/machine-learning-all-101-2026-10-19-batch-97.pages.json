@@ -1,0 +1,266 @@
+[
+  {
+    "order": 2988,
+    "id": "discrete-masked-diffusion-and-reverse-generation",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Discrete masked diffusion and finite-state reverse generation",
+    "companion": "discrete-masked-diffusion-and-reverse-generation-examples",
+    "requires": [
+      "markov-kernels-and-markov-chains",
+      "prediction-problems-risks-and-empirical-minimization",
+      "variational-inference-and-evidence-lower-bound"
+    ],
+    "items": [
+      {
+        "id": "def-finite-masking-diffusion-chain",
+        "kind": "definition",
+        "title": "Finite masking diffusion chain",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [
+          "lem-finite-masking-chain-is-well-defined"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-state-kernel-error-controls-mixtures",
+        "kind": "lemma",
+        "title": "Uniform row error bounds mixture-kernel error",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-product-kl-additivity",
+        "kind": "lemma",
+        "title": "Finite product KL is the sum of coordinate KLs",
+        "deps": [
+          "def-finite-kullback-leibler-divergence"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-finite-chain-reverse-kernel-error-telescope",
+        "kind": "theorem",
+        "title": "Finite-chain reverse-kernel error telescope",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-finite-state-kernel-error-controls-mixtures",
+          "lem-total-variation-coupling-and-kernel-contraction"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-masking-chain-is-well-defined",
+        "kind": "lemma",
+        "title": "Finite masking-chain transitions define a probability law",
+        "deps": [
+          "def-finite-masking-diffusion-chain",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-finite-grid-masked-diffusion-sampler",
+        "kind": "algorithm",
+        "title": "Finite-grid masked reverse sampler",
+        "deps": [
+          "def-finite-masking-diffusion-chain"
+        ],
+        "justified_by": [
+          "lem-finite-grid-masked-sampler-is-well-defined"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-grid-masked-sampler-is-well-defined",
+        "kind": "lemma",
+        "title": "Finite-grid masked sampler defines a normalized law",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-masking-chain-posterior",
+        "kind": "theorem",
+        "title": "Posterior of a finite masking chain",
+        "deps": [
+          "def-finite-masking-diffusion-chain",
+          "lem-finite-masking-chain-is-well-defined"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-masking-path-reversal-factorization",
+        "kind": "lemma",
+        "title": "Finite masking path law factors backward by its posterior rows",
+        "deps": [
+          "def-finite-masking-diffusion-chain",
+          "lem-finite-masking-chain-is-well-defined",
+          "thm-masking-chain-posterior"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+        "kind": "theorem",
+        "title": "Masked-diffusion KL reduces to weighted cross-entropy",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-masking-diffusion-chain",
+          "def-population-and-empirical-risk",
+          "def-supervised-learning-problem",
+          "lem-finite-grid-masked-sampler-is-well-defined",
+          "lem-finite-masking-chain-is-well-defined",
+          "lem-finite-product-kl-additivity",
+          "lem-population-and-empirical-risk-are-measurable",
+          "thm-masking-chain-posterior"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-finite-masked-diffusion-generative-model",
+        "kind": "definition",
+        "title": "Finite masked-diffusion generative model",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-finite-masking-diffusion-chain",
+          "lem-finite-grid-masked-sampler-is-well-defined"
+        ],
+        "justified_by": [
+          "lem-finite-masked-generative-joint-law-is-normalized"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-masked-generative-joint-law-is-normalized",
+        "kind": "lemma",
+        "title": "Finite masked-diffusion joint model is normalized",
+        "deps": [
+          "def-finite-masked-diffusion-generative-model",
+          "lem-finite-grid-masked-sampler-is-well-defined"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-forward-path-is-admissible-for-finite-masked-model",
+        "kind": "lemma",
+        "title": "Forward path law is admissible for the finite masked model",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-finite-masked-diffusion-generative-model",
+          "def-finite-masking-diffusion-chain",
+          "def-variational-family-and-elbo",
+          "lem-finite-grid-masked-sampler-is-well-defined",
+          "lem-finite-masked-generative-joint-law-is-normalized",
+          "lem-finite-masking-chain-is-well-defined"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-masked-diffusion-finite-elbo-cross-entropy",
+        "kind": "corollary",
+        "title": "Finite masked-diffusion ELBO is weighted cross-entropy",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-axiom-of-choice",
+          "def-finite-masked-diffusion-generative-model",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-masking-diffusion-chain",
+          "def-variational-family-and-elbo",
+          "lem-finite-grid-masked-sampler-is-well-defined",
+          "lem-finite-masked-generative-joint-law-is-normalized",
+          "lem-forward-path-is-admissible-for-finite-masked-model",
+          "lem-finite-masking-chain-is-well-defined",
+          "lem-finite-masking-path-reversal-factorization",
+          "thm-elbo-kl-decomposition",
+          "thm-masked-diffusion-kl-reduces-to-cross-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "rem-discrete-diffusion-factorization-and-endpoint-limits",
+        "kind": "remark",
+        "title": "Factorization and finite-endpoint warnings",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "cor-masked-diffusion-finite-elbo-cross-entropy",
+          "def-finite-masking-diffusion-chain",
+          "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+          "thm-masking-chain-posterior"
+        ],
+        "forward_refs": [
+          "cex-factorized-reverse-kernel-fails-for-correlated-tokens"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2989,
+    "id": "discrete-masked-diffusion-and-reverse-generation-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Discrete masked diffusion and finite-state reverse generation — Examples",
+    "companion": "discrete-masked-diffusion-and-reverse-generation",
+    "requires": [
+      "discrete-masked-diffusion-and-reverse-generation"
+    ],
+    "items": [
+      {
+        "id": "ex-finite-chain-model-error-accumulates-with-zero-mesh-error",
+        "kind": "example",
+        "title": "Finite model error accumulates without mesh error",
+        "deps": [
+          "def-total-variation-distance-for-probability-laws",
+          "thm-finite-chain-reverse-kernel-error-telescope"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+        "kind": "counterexample",
+        "title": "A factorized reverse kernel fails for correlated tokens",
+        "deps": [
+          "alg-finite-grid-masked-diffusion-sampler",
+          "def-finite-masking-diffusion-chain",
+          "thm-masking-chain-posterior"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-masked-diffusion-single-token-posterior",
+        "kind": "example",
+        "title": "One-token posterior on a finite mask schedule",
+        "deps": [
+          "def-finite-masking-diffusion-chain",
+          "thm-masking-chain-posterior"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

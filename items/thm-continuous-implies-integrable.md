@@ -14,7 +14,7 @@ landmark: true
 short: "continuous $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
-  repair: research/statistical-models-experiments-62-published-bibliography-thm-continuous-implies-integrable-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-continuous-implies-integrable.json
   precheck: pass
 sources:
   scraped: []
@@ -34,8 +34,8 @@ pipeline_run: null
 ## Statement
 
 Let $a < b$ be reals and let $f : [a,b] \to \mathbb{R}$ be continuous on $[a,b]$
-([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann
-integrable on $[a,b]$ ([[def-darboux-integral]]).
+(Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point). Then $f$ is bounded (Lower bound, bounded below, bounded set) and Riemann
+integrable on $[a,b]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$).
 
 **The proof gives more than integrability: it gives a partition that works.** For
 every real $\varepsilon > 0$ the uniform partition into $N$ parts already
@@ -44,6 +44,14 @@ $(b-a)/\iota(N)$ is below the $\delta$ that uniform continuity supplies for
 $\varepsilon/\bigl(2(b-a)\bigr)$. Uniform continuity is exactly what makes one
 $\delta$ serve all $N$ subintervals at once, and it is the only place where the
 compactness of $[a,b]$ is used.
+
+## Statement references
+
+[[def-continuity-real]]
+
+[[def-bounded-set]]
+
+[[def-darboux-integral]]
 
 ## Facts & Assumptions
 
@@ -71,7 +79,7 @@ compactness of $[a,b]$ is used.
 
 **Proof technique:** direct.
 
-1.1 $[a,b]$ is compact by [L1], so $f$ is bounded on $[a,b]$ by [L2] and its Darboux sums and integrals are defined. [given, L1, L2]
+1.1 $[a,b]$ is compact by [L1], so [L3] supplies uniform continuity. Apply it with tolerance $1$ and fix $\delta_0>0$ such that $|f(x)-f(y)|<1$ whenever $x,y\in[a,b]$ and $|x-y|<\delta_0$. By [L7], choose $N_0\ge1$ with $(b-a)/\iota(N_0)<\delta_0$, and take the uniform partition with nodes $t_0=a,\ldots,t_{N_0}=b$. Adjacent nodes have distance less than $\delta_0$, so $|f(t_{j+1})-f(t_j)|<1$. Telescoping the inequalities $-1<f(t_{j+1})-f(t_j)<1$ and using the absolute-value bounds give $|f(t_i)|\le |f(a)|+\iota(i)$ for every $i\le N_0$. Every $x\in[a,b]$ lies in some $[t_i,t_{i+1}]$, with $i<N_0$, and has $|x-t_i|<\delta_0$; hence $f(t_i)-1<f(x)<f(t_i)+1$ and therefore $|f(x)|<|f(a)|+\iota(N_0)+1$. Thus $f$ is bounded and its Darboux sums and integrals are defined. Compactness has been used only to obtain uniform continuity. [given, L1, L3, L4, L7, L8, L9, choose]
 
 1.2 Let a real $\varepsilon > 0$ be given and put $\eta := \varepsilon \cdot \bigl(2(b-a)\bigr)^{-1}$, a positive real by [L9] since $b - a > 0$. [given, L9]
 
@@ -89,6 +97,6 @@ compactness of $[a,b]$ is used.
 
 - **Continuity is sufficient and very far from necessary.** A monotone function may have infinitely many discontinuities and is still integrable ([[thm-monotone-implies-integrable]]); Thomae's function is discontinuous at every rational and integrable ([[cor-countably-many-discontinuities-integrable]]); and the indicator of the Cantor set is discontinuous at uncountably many points and integrable. The exact frontier is [[thm-lebesgue-criterion]].
 
-- **Where compactness enters, and what it buys.** Only through [L1], and then twice: [[cor-boundedness-theorem-r]] to know that the Darboux sums exist at all, and [[thm-heine-cantor-r]] to get one $\delta$ for the whole interval. On a non-compact interval both can fail: $x \mapsto 1/x$ is continuous on $(0,1)$ and unbounded there, so it has no Darboux sums at all.
+- **Where compactness enters, and what it buys.** Only through [L1] to apply [[thm-heine-cantor-r]] and get uniform continuity on the whole interval. Step 1.1 derives boundedness from this uniform continuity by a finite uniform mesh, so no separate compactness argument is needed for boundedness. On a non-compact interval both uniform continuity and boundedness can fail: $x \mapsto 1/x$ is continuous on $(0,1)$ and unbounded there, so it has no Darboux sums at all.
 
 - **Choice.** The proof selects nothing from an infinite family. The current proof of [[thm-heine-cantor-r]] also uses only a finite subcover, so this integrability argument is choice-free. See [[rem-riemann-integral-choice-ledger]].

@@ -14,6 +14,7 @@ landmark: true
 short: "sign of $f'$ and monotonicity"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-monotonicity-from-the-derivative.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -39,12 +40,12 @@ pipeline_run: null
 
 ## Statement
 
-Let $I \subseteq \mathbb{R}$ be order-convex ([[def-interval]]), let
-$f : I \to \mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and
+Let $I \subseteq \mathbb{R}$ be order-convex (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length), let
+$f : I \to \mathbb{R}$ be continuous on $I$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point) and
 differentiable at every point of $I$ interior to $I$
-([[def-interior-closure-boundary-r]], [[def-derivative]]). The words
+(Interior, closure, boundary and exterior of a subset of $\mathbb{R}$, The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set). The words
 *nondecreasing*, *increasing*, *nonincreasing* and *decreasing* are those of
-[[def-monotone-function]], in which *increasing* is the strict notion.
+Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\mathbb{R}$, with the dictionary to monotone sequences, in which *increasing* is the strict notion.
 
 1. If $f'(x) \ge 0$ at every interior point $x$ of $I$, then $f$ is
    nondecreasing on $I$.
@@ -72,6 +73,18 @@ theorem, and this statement does not license it.
 runs through the mean value theorem on a segment joining two points of $I$, so
 order-convexity is essential. Claim 5 is a statement about one point and uses
 only that the difference quotients have a constant sign.
+
+## Statement references
+
+[[def-interval]]
+
+[[def-continuity-real]]
+
+[[def-interior-closure-boundary-r]]
+
+[[def-derivative]]
+
+[[def-monotone-function]]
 
 ## Facts & Assumptions
 

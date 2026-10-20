@@ -1,0 +1,1765 @@
+{
+  "version": 1,
+  "scope": [
+    "def-sample-covering-number",
+    "def-spectral-network-complexity",
+    "lem-empirical-rademacher-covering-integral",
+    "def-multiclass-margin-ramp-loss",
+    "lem-spectral-network-matrix-cover",
+    "lem-multiclass-margin-rademacher-generalization",
+    "lem-spectral-network-output-covering-entropy",
+    "lem-bounded-spectral-class-margin-generalization",
+    "thm-spectral-margin-bound-for-multiclass-networks",
+    "ex-norm-margin-network-two-class-computation",
+    "ex-reference-network-changes-complexity-not-predictions",
+    "ex-small-margin-sample-does-not-fix-population-error"
+  ],
+  "contracts": {
+    "def-sample-covering-number": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a nonempty set U, so an empty covered set is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for U={0}, the singleton center {0} is a proper epsilon-cover for every epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: if U itself is a singleton, its one point covers it at every positive radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: when no finite proper cover exists the covering number is explicitly +infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: cover error uses the non-strict inequality ||X-Y||_F <= epsilon, including equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: centers are required to lie in U; existence of a finite cover is part of the definition, not an arbitrary center construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "def-spectral-network-complexity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: L>=1 and every layer width is positive; an empty network is outside the stated architecture."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: if a layer matrix is zero, zero-origin activations force the later score map to be constant zero and the displayed complexity is not used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the recurrence and complexity apply for L=1 without an omitted middle layer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the K>=2 output and zero-layer convention are stated separately, so the zero matrix case does not divide by a zero spectral norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: each activation inequality is stated for every pair u,v, including equality cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all architecture, matrix, and activation data are fixed; no choice of representatives is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "lem-empirical-rademacher-covering-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sample-covering-number",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, let $U$ be a nonempty subset of the real matrix space $\\mathbb R^{n\\times m}$, and let $\\epsilon>0$. A **proper $\\epsilon$-cover** of $U$ in Frobenius norm is a finite subset $V\\subseteq U$ such that every $X\\in U$ has some $Y\\in V$ with $\\lVert X-Y\\rVert_F\\le\\epsilon$. The **proper Frobenius covering number** $N_F(U,\\epsilon)$ is the least cardinality of such a cover when one exists, and is $+\\infty$ otherwise. The cover is proper because its centers belong to $U$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$\n$$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$\nMoreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto;\n$\\cosh:\\mathbb R\\to[1,\\infty)$ is even and positive, and its restriction\nto $[0,\\infty)$ is strictly increasing and onto $[1,\\infty)$; and\n$\\tanh:\\mathbb R\\to(-1,1)$ is strictly increasing and onto. On their declared domains,\n$$(\\tanh x)'=\\operatorname{sech}^2x,\\quad(\\coth x)'=-\\operatorname{csch}^2x,\\quad(\\operatorname{sech}x)'=-\\operatorname{sech}x\\tanh x,\\quad(\\operatorname{csch}x)'=-\\operatorname{csch}x\\coth x.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jensen-inequality-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $X$ be an\nintegrable real random variable, let $I\\subseteq\\mathbb R$ be an interval\ncontaining $X(\\omega)$ for almost every $\\omega$, and let $\\varphi:I\\to\\mathbb R$\nbe convex.\n\nAssume additionally that $\\varphi(X)$ is either integrable or nonnegative, so\nits expectation is defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Then\n$$\\varphi(\\mathbb E[X])\\le\\mathbb E[\\varphi(X)].$$\nIn the nonnegative case the right-hand side may be $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $x>0$, put $r(x)=x-\\tanh x$. By [F3], $r(0)=0$ and $r'(x)=1-\\operatorname{sech}^2x=\\tanh^2x\\ge0$. The mean value theorem [F6] therefore gives $r(x)\\ge0$; at $x=0$ this is equality. Put $q(x)=e^{-x^2/2}\\cosh x$. The derivative rules in [F3] and [F7] give $q'(x)=e^{-x^2/2}\\cosh x\\,(\\tanh x-x)\\le0$. Applying [F6] on $[0,x]$ for $x>0$ yields $q(x)\\le q(0)=1$, and equality holds at $x=0$. Since $q$ is even, $\\cosh x\\le e^{x^2/2}$ for every real $x$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose $g_0\\in\\mathcal G$ and subtract its sample vector $v_0$ from every vector in $\\mathcal G|S$. The empirical Rademacher average is unchanged because $\\mathbb E_\\varepsilon\\sum_i\\varepsilon_i g_0(z_i)=0$, and translation preserves all Frobenius covering numbers. Write $U:=(\\mathcal G|S)-v_0$; it contains $0$, and each vector has norm at most $\\sqrt n$. For any $\\epsilon>0$, partition $[-1,1]^n$ into finitely many boxes of side at most $\\epsilon/\\sqrt n$; from each box meeting $U$ take one member of that intersection. The resulting finite set is a proper $\\epsilon$-cover, since two points in one box differ in Euclidean norm by at most $\\epsilon$. Set $\\epsilon_j=\\sqrt n\\,2^{-(j-1)}$. The singleton $V_1=\\{0\\}$ is a proper $\\epsilon_1$-cover of $U$, so $|V_1|=N_F(U,\\epsilon_1)=1$. For each finite truncation $N\\ge2$ and each $2\\le j\\le N$, choose a proper $\\epsilon_j$-cover $V_j$ of $U$ with the least possible cardinality, so $|V_j|=N_F(U,\\epsilon_j)$; such a least cardinality exists because a finite cover exists and cover cardinalities are positive integers. Enumerate each finite cover and map every sample vector to the first center within $\\epsilon_j$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $V$ be a nonempty finite set of vectors in $\\mathbb R^n$ and let $R=\\max_{v\\in V}\\lVert v\\rVert_2$. For $T_v=\\sum_i\\varepsilon_i v_i$, independence of the signs and step 1.1 give $\\mathbb E e^{\\lambda T_v}=\\prod_i\\cosh(\\lambda v_i)\\le e^{\\lambda^2R^2/2}$. If $R=0$ or $|V|=1$, $\\mathbb E\\max_{v\\in V}T_v=0$. Otherwise, for $\\lambda>0$, [F4] and $e^{\\lambda\\max_v T_v}\\le\\sum_{v\\in V}e^{\\lambda T_v}$ imply $\\mathbb E\\max_vT_v\\le\\log|V|/\\lambda+\\lambda R^2/2$. Choosing $\\lambda=\\sqrt{2\\log|V|}/R$ gives $\\mathbb E\\max_vT_v\\le R\\sqrt{2\\log|V|}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any translated sample vector $v\\in U$, telescope $v=(v-v_N[v])+\\sum_{j=1}^{N-1}(v_{j+1}[v]-v_j[v])$, since $v_1[v]=0$. The absolute residual sign sum is at most $\\lVert(\\varepsilon_i)_i\\rVert_2\\lVert v-v_N[v]\\rVert_2\\le\\sqrt n\\epsilon_N$ by [F8]. For each $j<N$, use only the paired-center difference set $D_j:=\\{v_{j+1}[v]-v_j[v]:v\\in U\\}$. It is a nonempty subset of $V_{j+1}-V_j$, so its cardinality is at most $|V_{j+1}||V_j|\\le N_F(\\mathcal G|S,\\epsilon_{j+1})^2$, because covering numbers are nonincreasing with radius. Each paired difference has norm at most $\\lVert v_{j+1}[v]-v\\rVert_2+\\lVert v-v_j[v]\\rVert_2\\le\\epsilon_{j+1}+\\epsilon_j=3\\epsilon_{j+1}$. Step 2.1 applied to $D_j$ therefore bounds its expected maximum sign sum by $6\\epsilon_{j+1}\\sqrt{\\log N_F(\\mathcal G|S,\\epsilon_{j+1})}$. Taking the supremum in the telescoping identity, summing these bounds, and dividing by $n$ gives $\\widehat{\\mathfrak R}_S(\\mathcal G)\\le\\epsilon_N/\\sqrt n+(6/n)\\sum_{j=1}^{N-1}\\epsilon_{j+1}\\sqrt{\\log N_F(\\mathcal G|S,\\epsilon_{j+1})}$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The function $f(\\epsilon)=\\sqrt{\\log N_F(\\mathcal G|S,\\epsilon)}$ is nonincreasing in $\\epsilon$. Since $\\epsilon_{j+2}=\\epsilon_{j+1}/2$, each summand obeys $\\epsilon_{j+1}f(\\epsilon_{j+1})\\le2\\int_{\\epsilon_{j+2}}^{\\epsilon_{j+1}}f(\\epsilon)\\,d\\epsilon$. Therefore step 3.1 gives $\\widehat{\\mathfrak R}_S(\\mathcal G)\\le\\epsilon_N/\\sqrt n+(12/n)\\int_{\\epsilon_{N+1}}^{\\sqrt n}f(\\epsilon)\\,d\\epsilon$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $\\sqrt n/4\\le\\alpha\\le\\sqrt n$, each signed average is at most $1$, so $\\widehat{\\mathfrak R}_S(\\mathcal G)\\le1\\le4\\alpha/\\sqrt n$. If $0<\\alpha<\\sqrt n/4$, choose the largest $N\\ge1$ with $\\epsilon_{N+1}>\\alpha$; such an $N$ exists because $\\epsilon_2=\\sqrt n/2>\\alpha$ and $\\epsilon_j\\to0$. Maximality gives $\\epsilon_{N+2}\\le\\alpha$, hence $\\epsilon_N=4\\epsilon_{N+2}\\le4\\alpha$, and $\\int_{\\epsilon_{N+1}}^{\\sqrt n}f\\le\\int_\\alpha^{\\sqrt n}f$. Substitution into step 4.1 proves the stated inequality for every $0<\\alpha<\\sqrt n/4$. Together, the two cases prove it for every $0<\\alpha\\le\\sqrt n$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n>=1 and a nonempty function class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats a finite maximum with R=0, and step 1.2 translates the sample-vector set to contain zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 treats alpha=sqrt(n); for n=1 this is the only allowed alpha and the same endpoint argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separately handles |V|=1 and R=0; the cover construction remains valid for a singleton class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1\u20135.1 handle the integral endpoints alpha and sqrt(n), including alpha=sqrt(n)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 selects one point from each of finitely many boxes and orders finite covers; no global choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "def-multiclass-margin-ramp-loss": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: n>=1, K>=2, and D is a probability measure; an empty sample or empty label space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: at margin zero the ramp is exactly one, and the smallest-index tie rule makes prediction defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the empirical averages are defined for n=1 as well as all n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant score maps still have finite margins, measurable classification events, and bounded risks."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the ramp values at -gamma and 0 are explicitly fixed by the piecewise formula; the empirical threshold includes equality m<=gamma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the argmax is over finitely many labels and the smallest maximizing index is specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "lem-spectral-network-matrix-cover": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sample-covering-number",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, let $U$ be a nonempty subset of the real matrix space $\\mathbb R^{n\\times m}$, and let $\\epsilon>0$. A **proper $\\epsilon$-cover** of $U$ in Frobenius norm is a finite subset $V\\subseteq U$ such that every $X\\in U$ has some $Y\\in V$ with $\\lVert X-Y\\rVert_F\\le\\epsilon$. The **proper Frobenius covering number** $N_F(U,\\epsilon)$ is the least cardinality of such a cover when one exists, and is $+\\infty$ otherwise. The cover is proper because its centers belong to $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $B\\in\\mathbb R^{d\\times m}$, write its columns as $b_j$ and the columns of $X$ as $x_r$. By [F2], $\\lVert Xb_j\\rVert_2^2=\\sum_i|\\sum_rX_{ir}(b_j)_r|^2\\le\\lVert X\\rVert_F^2\\lVert b_j\\rVert_2^2$. Summing over $j$ gives $\\lVert XB\\rVert_F\\le\\lVert X\\rVert_F(\\sum_j\\lVert b_j\\rVert_2^2)^{1/2}\\le\\lVert X\\rVert_F\\sum_j\\lVert b_j\\rVert_2=\\lVert X\\rVert_F\\lVert B\\rVert_{2,1}$; the middle inequality follows by squaring, since all column norms are nonnegative. Thus $\\lVert A-A'\\rVert_{2,1}\\le2a$ for $A,A'\\in C$, and the diameter of $U$ is at most $2a\\lVert X\\rVert_F$. If $a\\lVert X\\rVert_F=0$, $U$ is a singleton; if $\\epsilon\\ge2a\\lVert X\\rVert_F$, any one point of nonempty $U$ covers it.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Assume $a\\lVert X\\rVert_F>0$ and $0<\\epsilon<2a\\lVert X\\rVert_F$. For each nonzero column $x_r$, each output coordinate $j$, and each sign $\\eta\\in\\{-1,+1\\}$, form the rank-one atom $V_{rj\\eta}=\\eta(x_r/\\lVert x_r\\rVert_2)e_j^\\top$, where $e_j$ is the $j$th standard basis vector in $\\mathbb R^m$. There are at most $2dm$ atoms and each has Frobenius norm $1$. For $B=A-M$, the expansion $XB=\\sum_{r,j}(B)_{rj}x_re_j^\\top$ has coefficient mass $\\beta:=\\sum_{r,j}|B_{rj}|\\lVert x_r\\rVert_2\\le\\lVert B\\rVert_{2,1}\\lVert X\\rVert_F\\le a\\lVert X\\rVert_F=:c$, by [F2] column by column. Hence $XB/c$ lies in the convex hull of these signed atoms: if $\\beta<c$, fill the remaining weight with $0$, which is the midpoint of an atom and its negative. If $\\beta=0$, the product is $0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an integer $k\\ge1$, sample $k$ atoms independently from the finite convex representation of $XB/c$ constructed in step 1.2. If $V_1,\\ldots,V_k$ are these atoms and $\\mathbb E V_1=XB/c$, expansion of the squared Frobenius norm and independence give $\\mathbb E\\lVert c k^{-1}\\sum_{t=1}^kV_t-XB\\rVert_F^2=(c^2/k)(\\mathbb E\\lVert V_1\\rVert_F^2-\\lVert\\mathbb EV_1\\rVert_F^2)\\le c^2/k$. Therefore some ordered $k$-tuple gives a center within $c/\\sqrt k$, and all such centers number at most $(2dm)^k$. Taking $k=\\lceil c^2/\\epsilon^2\\rceil$ yields an external $\\epsilon$-cover of the translated relaxed product set $XM+\\{XB:\\lVert B\\rVert_{2,1}\\le a\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The mixed-norm constraint set is convex: for $A,A'\\in C$ and $0\\le t\\le1$, the column triangle inequality [F3] gives $\\lVert t(A-M)+(1-t)(A'-M)\\rVert_{2,1}\\le ta+(1-t)a=a$. The operator-norm constraint is convex because for each unit vector $v$, $\\lVert(tA+(1-t)A')v\\rVert_2\\le t\\lVert Av\\rVert_2+(1-t)\\lVert A'v\\rVert_2\\le s$, and taking the supremum over $v$ preserves the bound. The mixed norm is continuous as a finite sum of continuous column norms. From [F7] and the Euclidean triangle inequality, $|\\lVert A\\rVert_\\sigma-\\lVert A'\\rVert_\\sigma|\\le\\lVert A-A'\\rVert_\\sigma\\le\\lVert A-A'\\rVert_F$, where the last inequality follows from the rowwise Cauchy estimate in step 1.1; hence the operator norm is continuous and $C$ is closed. Also $\\lVert A-M\\rVert_F\\le\\lVert A-M\\rVert_{2,1}\\le a$, so $C$ is bounded. By [F5], $C$ is compact; its linear image $U$ is compact and convex. Project each external center $z$ from step 2.1 to a nearest point $p$ of $U$, which exists by compactness. For any $u\\in U$, convexity gives $p+t(u-p)\\in U$ for $0\\le t\\le1$. Put $\\langle P,Q\\rangle_F:=\\sum_{i,j}P_{ij}Q_{ij}$. Minimality implies $0\\le\\lVert z-p-t(u-p)\\rVert_F^2-\\lVert z-p\\rVert_F^2=-2t\\langle z-p,u-p\\rangle_F+t^2\\lVert u-p\\rVert_F^2$ for $t>0$; division by $t$ and passage to $t\\downarrow0$ give $\\langle z-p,u-p\\rangle_F\\le0$. Expanding $\\lVert z-u\\rVert_F^2$ then gives $\\lVert p-u\\rVert_F^2\\le\\lVert z-u\\rVert_F^2$. Thus projection does not increase distance to any point of $U$, and the cover becomes proper without increasing its size.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $q=a^2\\lVert X\\rVert_F^2/\\epsilon^2>1/4$. Then $k=\\lceil q\\rceil\\le q+1\\le5q$, so step 2.1 and [F6] imply $\\log N_F(U,\\epsilon)\\le k\\log(2dm)\\le5q\\log(2dm)$. Together with step 1.1 this proves both cases of the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the feasible set C is nonempty, hence U is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves U is a singleton when a||X||_F=0 and N_F(U,epsilon)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves a one-center cover when epsilon>=2a||X||_F; the set need not itself be a singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 cover zero radius/product and the complementary positive-radius branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes equality epsilon=2a||X||_F in the one-cover case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite atom distribution; step 3.1 obtains a nearest point for each of finitely many centers by compactness, without global choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "lem-multiclass-margin-rademacher-generalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-mcdiarmid-bounded-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, let $Z_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be independent random elements, meaning measurable maps ([[def-random-element-and-real-random-variable]]), with laws $\\mu_i$ given by pushforward ([[def-law-or-distribution-of-a-random-element]]). Put $\\mu=\\bigotimes_{i=1}^n\\mu_i$ on the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be product-measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic constants $c_i\\ge0$ satisfy\n$$|f(z_1,\\ldots,z_i,\\ldots,z_n)-f(z_1,\\ldots,z_i',\\ldots,z_n)|\\le c_i$$\nfor every fixed setting of the other coordinates and every $z_i,z_i'$. The independent product-law theorem identifies the law of $Z=(Z_1,\\ldots,Z_n)$ as $\\mu$. Applying change of variables for expectation first to $|f|$ and then to $f$ makes $f(Z)$ integrable and gives $\\mathbb E f(Z)=\\int f\\,d\\mu$. Put $V=\\sum_{i=1}^n c_i^2$. For $t>0$, if $V>0$ then\n$$\\mathbb P\\bigl(f(Z_1,\\ldots,Z_n)-\\mathbb E f(Z_1,\\ldots,Z_n)\\ge t\\bigr)\\le\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ this probability is $0$. The same bound holds for the lower tail, so the two-sided probability is at most $2e^{-2t^2/V}$ when $V>0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "Write $\\mathbb{Q}_{\\mathbb{R}}$ for the image of $\\mathbb{Q}$ in $\\mathbb{R}$\nunder the canonical embedding $q \\mapsto \\hat q$ ([[lem-rat-embeds-dense]]), the\nset usually written $\\mathbb{Q}$ once the identification is made, and put\n$X := \\mathbb{R} \\setminus \\mathbb{Q}_{\\mathbb{R}}$ for the irrationals. Then:\n\n1. $\\mathbb{Q}_{\\mathbb{R}}$ is dense in $\\mathbb{R}$, that is,\n   $\\overline{\\mathbb{Q}_{\\mathbb{R}}} = \\mathbb{R}$ ([[def-limit-point-r]]);\n2. $X$ is dense in $\\mathbb{R}$;\n3. every nonempty open subset of $\\mathbb{R}$ is uncountable\n   ([[def-countable]]).\n\nClaim 2 is not a symmetry of claim 1: the rationals are dense because they are\n*constructed* to approximate, whereas the irrationals are dense because there are\ntoo many points in any interval for a countable set to exhaust it, which is why\nclaim 3 is proved alongside and used for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\Theta$ be the set of all feasible tuples $(A_1,\\ldots,A_L)$. The mixed-norm constraints are closed because each is a finite sum of continuous Euclidean column norms. For each layer, $\\lVert A_i\\rVert_\\sigma\\le s_i$ is the intersection, over all unit vectors $v$, of the closed conditions $\\lVert A_iv\\rVert_2\\le s_i$, by the induced-operator-norm definition. Each column $A_ie_j$ then has norm at most $s_i$, so all matrix entries are bounded. Hence $\\Theta$ is closed and bounded in finite-dimensional Euclidean space and is compact by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $x$, induction over the layers shows that the score vector depends continuously on the matrix tuple: matrix multiplication is jointly continuous and each Lipschitz activation is continuous. Finite maxima, coordinate differences, and the ramp preserve continuity, so for fixed $(x,y)$ the loss $A\\mapsto\\ell_\\gamma(-m_{F_A}(x,y))$ is continuous. If $A^{(r)}\\to A$, these losses converge pointwise in $(x,y)$ and are bounded by one, so [F3] shows that $A\\mapsto R_\\gamma(F_A)$ is continuous. Each empirical loss and each finite signed sum of losses is also continuous in $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Identify the parameter tuples with $\\mathbb R^p$, where $p:=\\sum_{i=1}^L d_i d_{i-1}$. The balls $B(q,r)$ with $q\\in\\mathbb Q^p$ and $r\\in\\mathbb Q_{>0}$ form a countable family: each rational is a quotient of an integer by a positive integer, the integers have the enumeration $0,1,-1,2,-2,\\ldots$, and finite tuples of natural numbers are enumerated by iterating the diagonal pairing $\\pi(a,b):=(a+b)(a+b+1)/2+b$. They form a base because for any open $O\\subseteq\\mathbb R^p$ and $x\\in O$, choose $\\eta>0$ with $B(x,\\eta)\\subseteq O$, then use [F9] in each coordinate interval $(x_j-\\eta/(4\\sqrt p),x_j+\\eta/(4\\sqrt p))$ to choose $q\\in\\mathbb Q^p$ with $\\lVert q-x\\rVert_2<\\eta/4$. Use [F9] again to choose a rational $r$ with $\\lVert q-x\\rVert_2<r<\\eta-\\lVert q-x\\rVert_2$ (a nonempty interval with positive upper endpoint); then $x\\in B(q,r)\\subseteq B(x,\\eta)\\subseteq O$. Intersecting these balls with $\\Theta$ gives a countable base for its subspace topology. Using [F5], choose one point of $\\Theta$ from each nonempty basic intersection; the selected countable subset is dense in $\\Theta$. By step 2.1, each supremum over $\\Theta$ defining the uniform deviation or a signed empirical supremum equals the supremum over this countable dense subset. The losses are Borel in $(x,y)$ because the scores are continuous in $x$, the margin is a finite maximum of continuous coordinates, and the label set is finite. These countable suprema are therefore measurable.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Write $Z(S):=\\sup_{F\\in\\mathcal F}(R_\\gamma(F)-\\widehat R_{\\gamma,S}(F))$. Let $S'$ be an independent ghost sample from $D$. By the integral identities in [F4] and the inequality $\\sup_F\\mathbb E_{S'}U_F\\le\\mathbb E_{S'}\\sup_F U_F$, $\\mathbb E Z(S)\\le\\mathbb E_{S,S'}\\sup_{F\\in\\mathcal F}\\frac1n\\sum_{i=1}^n\\bigl(\\ell_F(x_i',y_i')-\\ell_F(x_i,y_i)\\bigr),$ where $\\ell_F(x,y)=\\ell_\\gamma(-m_F(x,y))$. Swapping each iid pair $(z_i,z_i')$ leaves its law unchanged; introducing independent uniform signs $\\varepsilon_i$ therefore leaves this expectation unchanged when each difference is multiplied by $\\varepsilon_i$. The supremum of a sum is at most the sum of the suprema, and symmetry of the signs gives $\\mathbb E Z(S)\\le2\\mathbb E_S\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Replacing one sample coordinate changes $Z(S)$ by at most $1/n$, since every loss lies in $[0,1]$; it also changes $\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)$ by at most $1/n$, by [F7] and the same range bound. Apply the upper-tail bound [F6] to $Z$ and to $-\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)$, each with failure probability $\\delta/2$ and $t=\\sqrt{\\log(2/\\delta)/(2n)}$. Outside a set of probability at most $\\delta$, both $Z(S)\\le\\mathbb EZ(S)+t$ and $\\mathbb E\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)\\le\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)+t$. Combining with step 4.1 gives $Z(S)\\le\\mathbb EZ(S)+t\\le2\\mathbb E\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)+t\\le2\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)+3t$.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If the predicted label differs from $y$, some competing score is at least the true-label score, so $m_F(x,y)\\le0$ and $\\ell_\\gamma(-m_F(x,y))=1$. Hence the zero-one loss is pointwise at most the ramp loss. Also $\\ell_\\gamma(-m)\\le\\mathbf1\\{m\\le\\gamma\\}$ for every real $m$, so empirical ramp risk is at most empirical margin loss. Apply the definition of $Z(S)$ and step 5.1 to conclude the stated bound for every $F\\in\\mathcal F$ simultaneously.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonempty feasible network class, n>=1, and a probability law D."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 4.1\u20135.1 apply the same bounded-difference argument to singleton and zero-valued loss classes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 applies McDiarmid with n=1 and the displayed confidence expression remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 still gives a compact parameter set when all feasible networks induce one fixed loss."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 checks the ramp at margin zero and the threshold comparison at m=gamma, including equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the stated axiom of choice to select a point from every nonempty rational ball meeting the compact parameter set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "lem-spectral-network-output-covering-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-spectral-network-matrix-cover",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times d}$, $M\\in\\mathbb R^{d\\times m}$ with $n,d,m\\ge1$, and let $a,s\\ge0$. Suppose\n$$C:=\\{A\\in\\mathbb R^{d\\times m}:\\lVert A-M\\rVert_{2,1}\\le a,\\ \\lVert A\\rVert_\\sigma\\le s\\}$$\nis nonempty. Put $U:=\\{XA:A\\in C\\}$. For every $\\epsilon>0$,\n$$\\log N_F(U,\\epsilon)\\le5\\,\\frac{a^2\\lVert X\\rVert_F^2}{\\epsilon^2}\\log(2dm).$$\nIf $a\\lVert X\\rVert_F=0$ or $\\epsilon\\ge2a\\lVert X\\rVert_F$, then $N_F(U,\\epsilon)=1$. Here $\\lVert A-M\\rVert_{2,1}$ is the column-sum norm of the transpose-difference, as fixed in the spectral-network-complexity definition, and $N_F$ is the proper Frobenius covering number.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sample-covering-number",
+          "source_section": "Definition",
+          "quote": "Let $n,m\\ge1$, let $U$ be a nonempty subset of the real matrix space $\\mathbb R^{n\\times m}$, and let $\\epsilon>0$. A **proper $\\epsilon$-cover** of $U$ in Frobenius norm is a finite subset $V\\subseteq U$ such that every $X\\in U$ has some $Y\\in V$ with $\\lVert X-Y\\rVert_F\\le\\epsilon$. The **proper Frobenius covering number** $N_F(U,\\epsilon)$ is the least cardinality of such a cover when one exists, and is $+\\infty$ otherwise. The cover is proper because its centers belong to $U$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-operator-norm-is-the-largest-singular-value",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces.\n\nIf $V=0$, then\n\n$$\\lVert T\\rVert=0.$$\n\nIf $V\\ne0$ and $s_1$ is the largest singular value of $T$, then\n\n$$\\lVert T\\rVert=s_1.$$\n\nIn the nonzero case, the maximum in\n[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at\na right-singular vector for $s_1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $Z_i(A)$ for the matrix of rowwise layer-$i$ activations, with $Z_0(A)=X$. Induction gives $\\lVert Z_{i-1}(A)\\rVert_F\\le\\lVert X\\rVert_F\\prod_{j<i}\\rho_js_j$: rowwise zero-origin Lipschitzness gives $\\lVert Z_i\\rVert_F\\le\\rho_i\\lVert Z_{i-1}A_i^\\top\\rVert_F$, and [F6] identifies $\\lVert A_i^\\top\\rVert_\\sigma=\\lVert A_i\\rVert_\\sigma\\le s_i$, so the induced norm gives $\\lVert Z_{i-1}A_i^\\top\\rVert_F\\le s_i\\lVert Z_{i-1}\\rVert_F$, row by row.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If every $b_i=0$, each feasible layer set is the singleton $\\{M_i\\}$, so $\\mathcal H_X$ is a singleton and the right side is zero. Otherwise set $r_i=b_i/s_i$, $T:=\\sum_{i:r_i>0}r_i^{2/3}$, and $\\alpha_i:=r_i^{2/3}/T$ for positive $r_i$, with $\\alpha_i=0$ when $r_i=0$. These weights are nonnegative and sum to one over the varying layers.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Build finite proper covers of the attainable layer outputs successively. At layer $i$, suppose the previous attainable activation matrices have a proper $\\eta$-cover with centers $V$ that are themselves attainable prefix outputs. For each such $V$, [F6] gives $\\lVert A_i^\\top\\rVert_\\sigma=\\lVert A_i\\rVert_\\sigma$, so apply [F2] to $\\{VA_i^\\top:A_i\\in C_i\\}$ with input $V$, reference $M_i^\\top$, radius $e_i/\\rho_i$, and $e_i:=\\alpha_i\\epsilon/\\prod_{j>i}\\rho_js_j$ when $b_i>0$. Map each product-cover center through the rowwise activation $\\sigma_i$. Every resulting center is attainable by joining the prefix that realizes $V$ to its feasible layer matrix. For any actual prefix $Z$ within $\\eta$ of $V$ and any $A_i\\in C_i$, the activation output differs from $\\sigma_i(VA_i^\\top)$ by at most $\\rho_i s_i\\eta$; the layer cover adds at most $e_i$. Thus the next-stage cover radius is at most $\\rho_i s_i\\eta+e_i$. When $b_i=0$, use the single matrix $M_i$ and set $e_i=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Starting with the exact cover $\\{X\\}$, the recurrence in step 2.1 gives final radius at most $\\sum_i e_i\\prod_{j>i}\\rho_js_j=\\epsilon\\sum_{i:r_i>0}\\alpha_i=\\epsilon$. The cover is proper by construction. At each varying layer, [F2] and the bound from step 1.1 show that its cover-number logarithm is at most $5\\frac{\\lVert X\\rVert_F^2\\prod_{j<i}(\\rho_js_j)^2}{(e_i/\\rho_i)^2}\\log(2d_{i-1}d_i).$ For each prior cover center $V$, the next cover has at most this uniform cardinality bound, so taking the union over the prior centers multiplies cardinalities by at most that factor. Since $d_{i-1},d_i\\le W$, the logarithm of the final product cover is at most the sum of the displayed layer bounds.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substitute $e_i=\\alpha_i\\epsilon/\\prod_{j>i}\\rho_js_j$ into step 3.1. Each varying-layer term becomes $5\\frac{\\lVert X\\rVert_F^2}{\\epsilon^2}\\log(2W^2)\\left(\\prod_{j=1}^L(\\rho_js_j)^2\\right)\\frac{r_i^2}{\\alpha_i^2}.$ By the choice in step 1.2, $\\sum_{i:r_i>0}r_i^2/\\alpha_i^2=T^3=(\\sum_i(b_i/s_i)^{2/3})^3$. The all-zero case was handled in step 1.2, so the displayed bound follows in every case.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes every feasible layer set C_i is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero activations from X=0; step 1.2 handles the all-b_i=0 singleton case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For L=1 the induction has one layer and the empty future product is defined as 1 in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats all reference distances zero as a singleton; zero sample matrices are also covered by steps 1.1\u20132.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires epsilon>0 and each constructed cover uses closed error bounds at its stated radius."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20133.1 use finite proper layer covers and centers attainable from finite prefixes; no global choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "lem-bounded-spectral-class-margin-generalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-spectral-network-output-covering-entropy",
+          "source_section": "Statement",
+          "quote": "Fix an architecture and activations as in the spectral-network-complexity definition, with widths $d_0,\\ldots,d_L$ and $W:=\\max_i d_i$. Let $X\\in\\mathbb R^{n\\times d_0}$ be any sample matrix, let $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, and fix $s_i>0$ and $b_i\\ge0$. Suppose each feasible layer set\n$$C_i:=\\{A_i:\\lVert A_i\\rVert_\\sigma\\le s_i,\\ \\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\le b_i\\}$$\nis nonempty. Let $\\mathcal H_X$ be the set of $n\\times d_L$ score matrices whose $r$th row is $F_A(x_r)^\\top$, for $A_i\\in C_i$ and the $r$th row $x_r^\\top$ of $X$. Then for every $\\epsilon>0$,\n$$\\log N_F(\\mathcal H_X,\\epsilon)\\le5\\,\\frac{\\lVert X\\rVert_F^2}{\\epsilon^2}\\log(2W^2)\\left(\\prod_{i=1}^L(\\rho_i s_i)^2\\right)\\left(\\sum_{i=1}^L(b_i/s_i)^{2/3}\\right)^3.$$\nThe logarithm is natural, an empty product equals $1$, and $N_F$ uses proper centers in the covered score-matrix set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-empirical-rademacher-covering-integral",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $S=(z_1,\\ldots,z_n)$ be a fixed sample, and let $\\mathcal G$ be a nonempty class of measurable functions into $[0,1]$. Write $\\mathcal G|S$ for the set of column vectors $(g(z_1),\\ldots,g(z_n))^\\top$ as $g$ ranges over $\\mathcal G$. For $0<\\alpha\\le\\sqrt n$,\n$$\\widehat{\\mathfrak R}_S(\\mathcal G)\\le\\frac{4\\alpha}{\\sqrt n}+\\frac{12}{n}\\int_\\alpha^{\\sqrt n}\\sqrt{\\log N_F(\\mathcal G|S,\\epsilon)}\\,d\\epsilon,$$\nwhere $\\widehat{\\mathfrak R}_S$ is the one-sided empirical Rademacher complexity with $1/n$ normalization and $N_F$ is the proper Frobenius covering number of the sample-vector set, identified with $n\\times1$ matrices. The set $\\mathcal G|S$ is totally bounded because it lies in $[0,1]^n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-multiclass-margin-rademacher-generalization",
+          "source_section": "Statement",
+          "quote": "Assume the axiom of choice.\n\nFix a finite network architecture with $L\\ge1$, widths $d_0,\\ldots,d_L\\ge1$, output size $K=d_L\\ge2$, and activations as in the spectral-network-complexity definition. Let $s_i>0$, $b_i\\ge0$, and reference matrices $M_i$ be such that the class\n$$\\mathcal F:=\\{F_A:\\lVert A_i\\rVert_\\sigma\\le s_i,\\ \\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\le b_i\\text{ for every }i\\}$$\nis nonempty. Let $D$ be any Borel probability measure on $\\mathbb R^{d_0}\\times\\{1,\\ldots,K\\}$, let $S=((x_1,y_1),\\ldots,(x_n,y_n))$ be an independent identically distributed sample from $D$ with $n\\ge1$, and fix $\\gamma>0$ and $0<\\delta<1$. Define the ramp-loss class\n$$\\mathcal L_\\gamma:=\\{(x,y)\\mapsto\\ell_\\gamma(-m_F(x,y)):F\\in\\mathcal F\\}.$$\nWith probability at least $1-\\delta$ over $S$, every $F\\in\\mathcal F$ satisfies\n$$L_0(F)\\le\\widehat L_{\\gamma,S}(F)+2\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)+3\\sqrt{\\frac{\\log(2/\\delta)}{2n}},$$\nwhere $\\widehat{\\mathfrak R}_S$ is the one-sided empirical Rademacher complexity with $1/n$ normalization.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a realized sample and let $\\mathcal U_X$ be its set of score matrices. For score matrices $P,Q$ and example $(x_i,y_i)$, the true-label coordinate changes by at most $\\lVert P_{i\\cdot}-Q_{i\\cdot}\\rVert_2$, and the maximum competing coordinate changes by at most the same amount, so [F2] gives margin change at most twice this row norm. On each linear piece of the ramp the absolute slope is either $0$ or $1/\\gamma$; the pieces meet continuously at $-\\gamma$ and $0$, so summing the changes over the at most three pieces between any two inputs proves $|\\ell_\\gamma(a)-\\ell_\\gamma(b)|\\le|a-b|/\\gamma$. Thus the corresponding loss-vector distance is at most $(2/\\gamma)\\lVert P-Q\\rVert_F$. Mapping the centers of a proper $\\gamma\\epsilon/2$-cover of $\\mathcal U_X$ to their loss vectors therefore gives a proper $\\epsilon$-cover of the empirical loss-vector class.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F1] at radius $\\gamma\\epsilon/2$ and use step 1.1. For every $\\epsilon>0$, $\\log N_F(\\mathcal L_\\gamma|S,\\epsilon)\\le\\frac{20\\lVert X\\rVert_F^2\\log(2W^2)}{\\gamma^2\\epsilon^2}\\left(\\prod_i(\\rho_i s_i)^2\\right)\\left(\\sum_i(b_i/s_i)^{2/3}\\right)^3=:\\frac{K_\\gamma}{\\epsilon^2}.$ Here $\\mathcal L_\\gamma|S$ is the set of vectors of ramp-loss values on the fixed sample.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use the truncated-integral bound [F3] with $\\alpha=1/n$, which satisfies $0<1/n\\le\\sqrt n$. From step 2.1, $\\sqrt{\\log N_F(\\mathcal L_\\gamma|S,\\epsilon)}\\le\\sqrt{K_\\gamma}/\\epsilon$. Since $\\int_{1/n}^{\\sqrt n}d\\epsilon/\\epsilon=\\log(n\\sqrt n)=\\tfrac32\\log n$, it follows that $\\widehat{\\mathfrak R}_S(\\mathcal L_\\gamma)\\le\\frac4{n\\sqrt n}+\\frac{18\\sqrt{K_\\gamma}\\log n}{n}.$ When $n=1$ the integral is zero and the same expression holds.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F4] and substitute step 3.1. The term twice $4/(n\\sqrt n)$ is at most $8/n$ because $n\\ge1$. Also $\\sqrt{K_\\gamma}=\\sqrt{20}\\,\\lVert X\\rVert_F\\sqrt{\\log(2W^2)}\\,\\gamma^{-1}(\\prod_i\\rho_i s_i)(\\sum_i(b_i/s_i)^{2/3})^{3/2}$. This yields exactly the stated inequality.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes the constrained network class is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all b_i=0, the output class is a singleton and K_gamma=0 in steps 2.1\u20134.1; the additive 8/n remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 apply at n=1, where log(n)=0 and the truncated integral has equal endpoints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 sets K_gamma=0 when X=0; the 8/n and confidence terms in the Statement remain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 permits alpha=1/n=sqrt(n) at n=1 and evaluates the zero-length integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The stated axiom of choice is inherited from the compact-class uniform-deviation supplier used in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "thm-spectral-margin-bound-for-multiclass-networks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bounded-spectral-class-margin-generalization",
+          "source_section": "Statement",
+          "quote": "Assume the axiom of choice.\n\nFix a finite network architecture with $L\\ge1$, widths $d_0,\\ldots,d_L\\ge1$, output size $K=d_L\\ge2$, activations, and reference matrices as in the spectral-network-complexity definition. Let $s_i>0$, $b_i\\ge0$, and let $\\mathcal F$ be the nonempty class with layer constraints $\\lVert A_i\\rVert_\\sigma\\le s_i$ and $\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\le b_i$. Let $S=((x_1,y_1),\\ldots,(x_n,y_n))$ be an iid sample from any Borel probability measure on $\\mathbb R^{d_0}\\times\\{1,\\ldots,K\\}$, let $X$ be its input matrix with rows $x_i^\\top$, and fix $n\\ge1$, $\\gamma>0$, and $0<\\delta<1$. Set $W:=\\max_{0\\le i\\le L}d_i$. With probability at least $1-\\delta$, every $F_A\\in\\mathcal F$ satisfies\n$$L_0(F_A)\\le\\widehat L_{\\gamma,S}(F_A)+\\frac8n+\\frac{36\\sqrt{20}\\,\\lVert X\\rVert_F\\sqrt{\\log(2W^2)}\\log n}{\\gamma n}\\left(\\prod_{i=1}^L\\rho_i s_i\\right)\\left(\\sum_{i=1}^L(b_i/s_i)^{2/3}\\right)^{3/2}+3\\sqrt{\\frac{\\log(2/\\delta)}{2n}}.$$\nAll logarithms are natural. The matrix norm on $X$ is the Frobenius norm, and the empirical margin loss uses the threshold convention $m_{F_A}(x_i,y_i)\\le\\gamma$.",
+          "uses": [
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n([[def-abs-value]]) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of [[prop-standard-coordinate-inner-products]]\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n([[lem-complex-conjugation-and-modulus-laws]]). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of [[def-inner-product-norm]] evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\n[[def-abs-value]].\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\n[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable ([[def-countable]]) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each integer $j\\in\\mathbb Z$, put $\\gamma_j:=2^j/n$ and $v_j:=2^{-|j|}/3$. Then $\\sum_{j\\in\\mathbb Z}v_j=(1+2\\sum_{m\\ge1}2^{-m})/3=1$, since $\\sum_{m=1}^N2^{-m}=1-2^{-N}\\to1$. Every $\\gamma>0$ belongs to exactly one interval $[\\gamma_j,2\\gamma_j)$. For each positive integer $m$, put $w_m:=1/(m(m+1))=1/m-1/(m+1)$; the finite partial sum is $\\sum_{m=1}^Nw_m=1-1/(N+1)$, so $\\sum_{m\\ge1}w_m=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The integers are countable by the enumeration $0,1,-1,2,-2,\\ldots$; the other factors are positive integers, so repeated use of [F4] shows that the tuples indexed by $j\\in\\mathbb Z$, a positive integer $q$, and positive integers $k_i,l_i$ for $1\\le i\\le L$ form a countable set. For such a tuple set $\\eta_{j,q,k,l}:=\\delta v_j w_q\\prod_iw_{k_i}w_{l_i}$. Let $J_N=\\{-N,\\ldots,N\\}$ and $M_N=\\{1,\\ldots,N\\}$. Finite distributivity gives the sum over $J_N\\times M_N^{1+2L}$ as $\\delta(\\sum_{j\\in J_N}v_j)(\\sum_{q\\in M_N}w_q)\\prod_i(\\sum_{k_i\\in M_N}w_{k_i})(\\sum_{l_i\\in M_N}w_{l_i})$, which tends to $\\delta$ by step 1.1. These finite boxes increase to the countable index set and contain every finite subset for large enough $N$; since all terms are nonnegative, their partial sums establish $\\sum_{j,q,k,l}\\eta_{j,q,k,l}=\\delta$. For each tuple consider the layer class with caps $s_i=l_i/L$ and $b_i=k_i/L$; if it is empty its event is vacuous. Otherwise [F1] gives a fixed-margin result at $\\gamma_j$ and confidence $\\eta_{j,q,k,l}$, with its displayed sample-norm term evaluated at the realized $X$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply countable subadditivity [F4] to the failure events from step 2.1. Their union has probability at most $\\sum_{j,q,k,l}\\eta_{j,q,k,l}=\\delta$. Thus outside that union, all fixed-margin inequalities for every tuple hold simultaneously.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix any realized sample, any network with nonzero layer matrices, and any $\\gamma>0$. Choose its unique $j$ from step 1.1 with $\\gamma_j\\le\\gamma<2\\gamma_j$, and set $q=\\lfloor\\lVert X\\rVert_F\\rfloor+1,\\qquad k_i=\\lfloor L\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\rfloor+1,\\qquad l_i=\\lfloor L\\lVert A_i\\rVert_\\sigma\\rfloor+1.$ These positive integers satisfy $\\lVert X\\rVert_F<q$, $\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}<k_i/L$, and $0<\\lVert A_i\\rVert_\\sigma<l_i/L$. The network belongs to the corresponding constrained class. Also $\\widehat L_{\\gamma_j,S}(F_A)\\le\\widehat L_{\\gamma,S}(F_A)$ by [F3], and $1/(\\gamma_j n)<2/(\\gamma n)$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "In the leading term of [F1], the cap expression satisfies $\\left(\\prod_i s_i\\right)\\left(\\sum_i(b_i/s_i)^{2/3}\\right)^{3/2}=\\left(\\sum_i\\left(b_i\\prod_{r\\ne i}s_r\\right)^{2/3}\\right)^{3/2}.$ For the tuple selected in step 4.1, $q\\le1+\\lVert X\\rVert_F$, $k_i/L\\le\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}+1/L$, and $l_i/L\\le\\lVert A_i\\rVert_\\sigma+1/L$. Monotonicity of the sums and products therefore bounds [F1]'s leading term by the leading term in the Statement, using $1/(\\gamma_jn)<2/(\\gamma n)$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "The confidence logarithm for this tuple equals $\\log(2/\\eta_{j,q,k,l})=\\log(6/\\delta)+|j|\\log2+\\log(q(q+1))+\\sum_i\\bigl(\\log(k_i(k_i+1))+\\log(l_i(l_i+1))\\bigr).$ Put $t=n\\gamma$. If $j\\ge0$, then $2^j\\le t$ and $|j|\\log2\\le\\log(2+t)$. If $j<0$, then $t<2^{j+1}\\le1$, so $\\log(2+t)\\ge\\log2$ and $\\log(2+1/t)\\ge\\log(1/t)$; their sum is at least $\\log(2/t)>|j|\\log2$. For each positive integer bin chosen as $m=\\lfloor u\\rfloor+1$, one has $m\\le u+1$ and $m+1\\le u+2$, hence $\\log(m(m+1))\\le2\\log(u+2)$. Apply this with $u=\\lVert X\\rVert_F$ and $u=L\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}$ or $L\\lVert A_i\\rVert_\\sigma$. By [F5], the result is $\\log(2/\\eta_{j,q,k,l})\\le Q(A,X,\\gamma,n,\\delta)$.",
+          "step": "5.2",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "On the probability-$1-\\delta$ event from step 3.1, apply the selected fixed-margin inequality. Steps 4.1\u20135.2 replace its empirical margin loss, leading term, and confidence term by the respective terms displayed in the Statement. The choices in step 4.1 were arbitrary, so this holds simultaneously for every network with nonzero layer matrices and every $\\gamma>0$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes L>=1, positive layer widths, K>=2, n>=1, and nonzero layer matrices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for nonzero layer matrices; the spectral complexity convention treats a zero layer separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, log(n)=0 and the explicit 8/n and confidence terms in the Statement remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 gives q=1 when X=0; positive norm and distance bins still exist for every network in the stated class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses half-open dyadic intervals [gamma_j,2 gamma_j), so each endpoint belongs to exactly one bin."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated; steps 2.1\u20133.1 use a countable index set and countable subadditivity, while the fixed-margin supplier declares its AC use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "ex-norm-margin-network-two-class-computation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-margin-bound-for-multiclass-networks",
+          "source_section": "Statement",
+          "quote": "Assume the axiom of choice. Fix a network architecture with $L\\ge1$, widths $d_0,\\ldots,d_L\\ge1$, $K=d_L\\ge2$, zero-bias recurrence and zero-origin $\\rho_i$-Lipschitz activations as in the spectral-network-complexity definition. Fix reference matrices $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$. Let $S=((x_1,y_1),\\ldots,(x_n,y_n))$ be an iid sample of size $n\\ge1$ from any Borel probability measure on $\\mathbb R^{d_0}\\times\\{1,\\ldots,K\\}$, and let $X$ be the matrix with rows $x_r^\\top$. Fix $0<\\delta<1$ and set $W:=\\max_{0\\le i\\le L}d_i$. With probability at least $1-\\delta$, simultaneously for every network with nonzero layer matrices and every margin $\\gamma>0$,\n$$L_0(F_A)\\le\\widehat L_{\\gamma,S}(F_A)+\\frac8n+\\frac{72\\sqrt{20}\\,(1+\\lVert X\\rVert_F)\\sqrt{\\log(2W^2)}\\log n}{\\gamma n}\\left(\\prod_{i=1}^L\\rho_i\\right)\\left(\\sum_{i=1}^L\\left[\\left(\\frac1L+\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)\\prod_{r\\ne i}\\left(\\frac1L+\\lVert A_r\\rVert_\\sigma\\right)\\right]^{2/3}\\right)^{3/2}+3\\sqrt{\\frac{Q(A,X,\\gamma,n,\\delta)}{2n}},$$\nwhere all logarithms are natural, an empty product equals $1$, and\n$$\\begin{aligned}Q(A,X,\\gamma,n,\\delta):={}&\\log(6/\\delta)+\\log(2+n\\gamma)+\\log(2+n/\\gamma)+2\\log(2+\\lVert X\\rVert_F)\\\\&+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i\\rVert_\\sigma\\right). \\end{aligned}$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only column of $A_1$ has Euclidean norm $\\sqrt2$, so its induced operator norm is $\\sqrt2$. The transpose $A_1^\\top=(1,-1)$ has two scalar columns of absolute values $1$ and $1$, so $\\lVert A_1^\\top-M_1^\\top\\rVert_{2,1}=2$. Also $\\lVert X\\rVert_F=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the network map to $x=1$ gives scores $(1,-1)$; [F2] therefore gives margin $1-(-1)=2$, empirical margin loss $\\mathbf1\\{2\\le1\\}=0$, and zero population error under the point-mass law.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitution into the spectral-complexity definition yields $R_A=\\sqrt2\\left((2/\\sqrt2)^{2/3}\\right)^{3/2}=2.$ For $n=1$ the leading term in [F3] vanishes because $\\log1=0$, and $8/n=8$. Substituting $\\delta=1/10$, $\\gamma=1$, $\\lVert X\\rVert_F=1$, $L=1$, $\\lVert A_1^\\top-M_1^\\top\\rVert_{2,1}=2$, and $\\lVert A_1\\rVert_\\sigma=\\sqrt2$ into the theorem's $Q$ gives the displayed expression. The inequality is $0\\le8+3\\sqrt{Q/2}\\approx15.86$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the distribution is a point mass and the sample size is one."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Example: the layer matrix is nonzero and its complexity is positive; no zero-layer case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 compute the one-layer, one-sample case directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: the point-mass law makes both population error and empirical margin loss exactly zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares margin 2 with threshold 1; the threshold convention m<=gamma is explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the one-point distribution and one sample require no representative choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "ex-reference-network-changes-complexity-not-predictions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-margin-bound-for-multiclass-networks",
+          "source_section": "Statement",
+          "quote": "Assume the axiom of choice. Fix a network architecture with $L\\ge1$, widths $d_0,\\ldots,d_L\\ge1$, $K=d_L\\ge2$, zero-bias recurrence and zero-origin $\\rho_i$-Lipschitz activations as in the spectral-network-complexity definition. Fix reference matrices $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$. Let $S=((x_1,y_1),\\ldots,(x_n,y_n))$ be an iid sample of size $n\\ge1$ from any Borel probability measure on $\\mathbb R^{d_0}\\times\\{1,\\ldots,K\\}$, and let $X$ be the matrix with rows $x_r^\\top$. Fix $0<\\delta<1$ and set $W:=\\max_{0\\le i\\le L}d_i$. With probability at least $1-\\delta$, simultaneously for every network with nonzero layer matrices and every margin $\\gamma>0$,\n$$L_0(F_A)\\le\\widehat L_{\\gamma,S}(F_A)+\\frac8n+\\frac{72\\sqrt{20}\\,(1+\\lVert X\\rVert_F)\\sqrt{\\log(2W^2)}\\log n}{\\gamma n}\\left(\\prod_{i=1}^L\\rho_i\\right)\\left(\\sum_{i=1}^L\\left[\\left(\\frac1L+\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)\\prod_{r\\ne i}\\left(\\frac1L+\\lVert A_r\\rVert_\\sigma\\right)\\right]^{2/3}\\right)^{3/2}+3\\sqrt{\\frac{Q(A,X,\\gamma,n,\\delta)}{2n}},$$\nwhere all logarithms are natural, an empty product equals $1$, and\n$$\\begin{aligned}Q(A,X,\\gamma,n,\\delta):={}&\\log(6/\\delta)+\\log(2+n\\gamma)+\\log(2+n/\\gamma)+2\\log(2+\\lVert X\\rVert_F)\\\\&+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i\\rVert_\\sigma\\right). \\end{aligned}$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the matrix and activation are identical in both cases, the network computes $A_1x=(1,-1)$ for either reference. Its operator norm is $\\sqrt2$, so the predicted class is class $1$ and the margin for label $1$ is $2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $M_1=A_1$, the transpose-difference norm is zero and the defining formula gives $R_A=0$. If $M_1=0$, that norm is $2$ by summing the two scalar column norms of $(1,-1)$; hence $R_A=\\sqrt2(2/\\sqrt2)=2$. The calculations change the complexity input only; [F3] does not assert that the floored explicit theorem term vanishes when $R_A=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: a fixed one-layer network and input are specified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero transpose-difference when M_1=A_1 and obtains R_A=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example and step 1.1 use a single layer and compute its score exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the reference-equals-network case, where the complexity degenerates to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: no ramp threshold or endpoint inequality is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: all matrices and input are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    },
+    "ex-small-margin-sample-does-not-fix-population-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-spectral-network-complexity",
+          "source_section": "Definition",
+          "quote": "Let $L\\ge1$ and let $d_0,\\ldots,d_L\\ge1$ be layer widths, with $K:=d_L\\ge2$ output classes. For each $i\\in\\{1,\\ldots,L\\}$, fix a matrix $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$ and a vector activation $\\sigma_i:\\mathbb R^{d_i}\\to\\mathbb R^{d_i}$ satisfying $\\sigma_i(0)=0$ and\n$$\\lVert\\sigma_i(u)-\\sigma_i(v)\\rVert_2\\le\\rho_i\\lVert u-v\\rVert_2\\qquad(u,v\\in\\mathbb R^{d_i})$$\nfor a fixed $\\rho_i>0$. A network has matrices $A_i\\in\\mathbb R^{d_i\\times d_{i-1}}$, no biases, and is evaluated by $h_0(x)=x$ and $h_i(x)=\\sigma_i(A_i h_{i-1}(x))$, with score vector $F_A(x)=h_L(x)$. For a real matrix $B$, define $\\lVert B\\rVert_{2,1}:=\\sum_j\\lVert B_{\\cdot j}\\rVert_2$, the sum of the Euclidean norms of its columns. Write $\\lVert A\\rVert_\\sigma$ for the induced Euclidean operator norm $\\max_{\\lVert u\\rVert_2=1}\\lVert Au\\rVert_2$ and put $W:=\\max_{0\\le i\\le L}d_i$.\n\nFor a network whose layer matrices all have nonzero operator norm, its **spectral network complexity relative to $(M_i)$** is\n$$R_A:=\\left(\\prod_{i=1}^L\\rho_i\\lVert A_i\\rVert_\\sigma\\right)\\left(\\sum_{i=1}^L\\left(\\frac{\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}}{\\lVert A_i\\rVert_\\sigma}\\right)^{2/3}\\right)^{3/2}.$$\nIf some $A_i=0$, the network is instead handled as the constant-zero score map: the recurrence gives $h_i=0$ and all later hidden vectors are zero. The displayed complexity is not defined in that zero-layer case.\n\nThe block diagram is schematic for $L\\ge3$ and depicts the stated recurrence. Each node is the entire vector at one layer; the arrow labelled $A_i$ is the zero-bias linear map, followed by the vector activation shown in the next node. The omitted middle layers are represented by the ellipsis, and the widths are those in the definition. For $L=1$ or $L=2$, omit the ellipsis and use the corresponding initial segment of the recurrence. The diagram is illustrative and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners] (h0) at (0,0) {$h_0=x\\in\\mathbb R^{d_0}$};\n  \\node[draw,rounded corners] (h1) at (3.1,0) {$h_1=\\sigma_1(A_1h_0)$};\n  \\node (dots) at (4.9,0) {$\\cdots$};\n  \\node[draw,rounded corners] (hL) at (6.8,0) {$h_L=\\sigma_L(A_Lh_{L-1})=F_A(x)$};\n  \\draw[->] (h0) -- node[above] {$A_1$} (h1);\n  \\draw[->] (h1) -- (dots);\n  \\draw[->] (dots) -- node[above] {$A_L$} (hL);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multiclass-margin-ramp-loss",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let $D$ be a Borel probability measure on $\\mathbb R^d\\times\\{1,\\ldots,K\\}$, and let $F:\\mathbb R^d\\to\\mathbb R^K$ be a continuous score map. At $(x,y)$ its **multiclass margin** is\n$$m_F(x,y):=F(x)_y-\\max_{j\\ne y}F(x)_j.$$\nThe predicted label is the smallest index maximizing $F(x)_j$. Its population zero-one error is\n$$L_0(F):=D\\bigl(\\{(x,y):\\operatorname*{argmax}_{1\\le j\\le K}F(x)_j\\ne y\\}\\bigr).$$\nFor $\\gamma>0$, the **ramp loss** is\n$$\\ell_\\gamma(r):=\\begin{cases}0,&r< -\\gamma,\\\\1+r/\\gamma,&-\\gamma\\le r\\le0,\\\\1,&r>0.\\end{cases}$$\nThe population ramp risk is $R_\\gamma(F):=\\int\\ell_\\gamma(-m_F(x,y))\\,D(d(x,y))$. For a sample $S=((x_1,y_1),\\ldots,(x_n,y_n))$ of length $n\\ge1$, the empirical ramp risk and empirical margin loss are\n$$\\widehat R_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\ell_\\gamma(-m_F(x_i,y_i)),\\qquad\\widehat L_{\\gamma,S}(F):=\\frac1n\\sum_{i=1}^n\\mathbf1\\{m_F(x_i,y_i)\\le\\gamma\\}.$$\nThe score coordinates are continuous, and finite maxima, comparisons, and the piecewise-linear ramp preserve Borel measurability. Thus the classification event and ramp loss in the displayed integrals are Borel sets or functions, so the risks are well-defined for $D$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-spectral-margin-bound-for-multiclass-networks",
+          "source_section": "Statement",
+          "quote": "Assume the axiom of choice. Fix a network architecture with $L\\ge1$, widths $d_0,\\ldots,d_L\\ge1$, $K=d_L\\ge2$, zero-bias recurrence and zero-origin $\\rho_i$-Lipschitz activations as in the spectral-network-complexity definition. Fix reference matrices $M_i\\in\\mathbb R^{d_i\\times d_{i-1}}$. Let $S=((x_1,y_1),\\ldots,(x_n,y_n))$ be an iid sample of size $n\\ge1$ from any Borel probability measure on $\\mathbb R^{d_0}\\times\\{1,\\ldots,K\\}$, and let $X$ be the matrix with rows $x_r^\\top$. Fix $0<\\delta<1$ and set $W:=\\max_{0\\le i\\le L}d_i$. With probability at least $1-\\delta$, simultaneously for every network with nonzero layer matrices and every margin $\\gamma>0$,\n$$L_0(F_A)\\le\\widehat L_{\\gamma,S}(F_A)+\\frac8n+\\frac{72\\sqrt{20}\\,(1+\\lVert X\\rVert_F)\\sqrt{\\log(2W^2)}\\log n}{\\gamma n}\\left(\\prod_{i=1}^L\\rho_i\\right)\\left(\\sum_{i=1}^L\\left[\\left(\\frac1L+\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)\\prod_{r\\ne i}\\left(\\frac1L+\\lVert A_r\\rVert_\\sigma\\right)\\right]^{2/3}\\right)^{3/2}+3\\sqrt{\\frac{Q(A,X,\\gamma,n,\\delta)}{2n}},$$\nwhere all logarithms are natural, an empty product equals $1$, and\n$$\\begin{aligned}Q(A,X,\\gamma,n,\\delta):={}&\\log(6/\\delta)+\\log(2+n\\gamma)+\\log(2+n/\\gamma)+2\\log(2+\\lVert X\\rVert_F)\\\\&+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i^\\top-M_i^\\top\\rVert_{2,1}\\right)+2\\sum_{i=1}^L\\log\\!\\left(2+L\\lVert A_i\\rVert_\\sigma\\right). \\end{aligned}$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scores at $x=1$ are $(1,0)$. For label $1$ the margin is $1-0=1$; for label $2$ it is $0-1=-1$. Thus the network predicts class $1$ on both possible labeled outcomes.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the label probabilities in the Example and [F2], the population zero-one error is $0.4$. If the sample label is class $1$, which occurs with probability $0.6$, its only margin is $1>1/2$, so its empirical margin loss is $0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $n=1$, [F3] contributes $8/n=8$ to the theorem's right-hand side, already exceeding the population error $0.4$; all other displayed terms are nonnegative. Therefore the stated sample event is consistent with the theorem and demonstrates why empirical margin loss alone is not a population-error guarantee.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the input is deterministic and the label law has two positive masses; the sample size is one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies zero empirical margin loss on the class-1 sample event."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example and steps 1.1\u20133.1 explicitly analyze n=1 and its 8/n correction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example uses a deterministic input but a nondegenerate two-label distribution with population error 0.4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares margin 1 with threshold 1/2, away from equality; the definition\u2019s <= convention is retained."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example gives the two label probabilities explicitly and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it is not an equivalence criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a definition, one-way estimate, or example; it has no converse hypothesis-recovery direction."
+        }
+      ]
+    }
+  }
+}

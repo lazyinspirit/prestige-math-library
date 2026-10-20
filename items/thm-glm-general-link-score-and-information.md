@@ -18,6 +18,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-glm-general-link-score-and-information.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -33,7 +34,7 @@ sources:
 
 ## Statement
 
-Consider [[def-generalized-linear-model]] at an admissible finite $\beta$ with common scale $a(\phi)>0$. Assume each $\eta_i\mapsto\theta_i$ is differentiable, each $\eta_i\mapsto\mu_i$ is differentiable with $\dot\mu_i:=d\mu_i/d\eta_i\ne0$, $V_i:=b''(\theta_i)>0$, the component scores have finite second moments, and the common-support, differentiability, and local integrable derivative-envelope conditions from [[def-glm-observation-family]] hold. Put
+Consider Generalized linear model with explicit conditioning at an admissible finite $\beta$ with common scale $a(\phi)>0$. Assume each $\eta_i\mapsto\theta_i$ is differentiable, each $\eta_i\mapsto\mu_i$ is differentiable with $\dot\mu_i:=d\mu_i/d\eta_i\ne0$, $V_i:=b''(\theta_i)>0$, the component scores have finite second moments, and the common-support, differentiability, and local integrable derivative-envelope conditions from Explicit exponential-family response contracts hold. Put
 
 $$w_i=\frac{\dot\mu_i^2}{a(\phi)V_i},\qquad z_i=\eta_i+\frac{y_i-\mu_i}{\dot\mu_i}.$$
 
@@ -42,6 +43,12 @@ For every observed $y$ with $f_i(y_i;\theta_i,\phi)>0$ for each $i$, the score a
 $$U(\beta;y,\phi)=X^\mathsf T\left(\frac{\dot\mu_i(y_i-\mu_i)}{a(\phi)V_i}\right)_{i=1}^n,\qquad I(\beta,\phi)=X^\mathsf T\operatorname{diag}(w_i)X.$$
 
 In particular, if $X$ has full column rank, then $I$ is positive definite.
+
+## Statement references
+
+[[def-generalized-linear-model]]
+
+[[def-glm-observation-family]]
 
 ## Facts & Assumptions
 

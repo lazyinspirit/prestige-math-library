@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "issue": "Native batch36 final bounded defects",
+  "cycle": 1,
+  "confirmed_findings": [
+    {
+      "id": "lem-yun-transformer-grid-lookup",
+      "defect": "At a threshold the query multiplier is zero, so every key has zero score and uniform hardmax gives mean code, not an extreme value. The generic strict interval / zero elsewhere assertion is false at the endpoints.",
+      "minimal_repair": "Keep full Statement. State all four regions plus both endpoint formulas; explicitly prove sweep lattice avoids both endpoints.",
+      "boundary_formulas": "For b<bprime, difference is max-min on b<ell<bprime, mean-min at ell=b, max-mean at ell=bprime, zero outside [b,bprime]. Equal maxima or minima cause no problem, since every maximizing/minimizing key has the same scalar value.",
+      "sweep_use": "All grid coordinates, including -delta^(-nd) and tagged offsets, lie in delta*Z; u has integer entries and u^T e1=1. At each sweep, no lattice code equals a half-lattice threshold; the increment q(max-min) is a lattice multiple because q=m^d integer. Induction covers sentinel, duplicate, valid and tagged inputs.",
+      "preserved": "Both full grid lookup variants, arbitrary equivariant table on distinct columns, zero on invalid grids, arbitrary tagged table, width/head/block parameters and all later proof steps."
+    },
+    {
+      "id": "ex-fixed-length-vs-unbounded-sequence-limits",
+      "defect": "Actual parity supplier Statement asserts liminf expected CE>=H(u) for each fixed influenced-bounded model, not convergence of expected CE.",
+      "minimal_repair": "Replace limiting loss wording by explicit liminf inequality and retain sharp constant-predictor attainment at every length. Verification refers to liminf.",
+      "preserved": "All fixed-n/fixed-tolerance approximation quantifiers and Countable Choice, hard fixed-depth PARITY/2DYCK branch, soft fixed-model source/influence hypotheses, width/head claims and position-tagged variant.",
+      "interface": "Example changes only the false implication that every model loss converges. All its remaining claims/parameters remain intact."
+    }
+  ],
+  "sources_read": {
+    "current_full_claims_and_proofs": [
+      "items/lem-yun-transformer-grid-lookup.md",
+      "items/thm-fixed-width-transformer-lp-universality.md",
+      "items/ex-fixed-length-vs-unbounded-sequence-limits.md",
+      "items/thm-soft-attention-parity-chance-limit.md",
+      "items/thm-hard-attention-languages.md",
+      "items/ex-position-free-vs-position-encoded-token-order.md"
+    ],
+    "current_full_definitions": [
+      "items/def-transformer-encoder-decoder-layer.md",
+      "items/def-hahn-hard-soft-attention-sequence-model.md"
+    ],
+    "approved_scope_evidence": [
+      "research/machine-learning-all-101-2026-10-19-step1-lem-yun-transformer-grid-lookup.json",
+      "research/machine-learning-all-101-2026-10-19-step1-ex-fixed-length-vs-unbounded-sequence-limits.json",
+      "research/machine-learning-all-101-2026-10-19-format-36-53-proposal/root-execution-record/items/lem-yun-transformer-grid-lookup.md (historical Statement inspected)",
+      "research/machine-learning-all-101-2026-10-19-owner-transformer-example-interface-preimages/items/ex-fixed-length-vs-unbounded-sequence-limits.md (historical interface inspected)"
+    ],
+    "source_reading_limit": "No new external full-text consultation claimed; correction follows the actual local hardmax definition and actual proved parity supplier."
+  },
+  "consumer_search": {
+    "command": "rg -n thm-fixed-width-transformer-lp-universality|ex-fixed-length-vs-unbounded-sequence-limits|lem-yun-transformer-grid-lookup items library",
+    "exit_code": 0,
+    "output": "library/machine-learning/attention-and-transformer-expressivity-examples.md:9:  - ex-fixed-length-vs-unbounded-sequence-limits\nlibrary/machine-learning/attention-and-transformer-expressivity.md:21:  - lem-yun-transformer-grid-lookup\nlibrary/machine-learning/attention-and-transformer-expressivity.md:23:  - thm-fixed-width-transformer-lp-universality\nitems/thm-fixed-width-transformer-lp-universality.md:2:id: thm-fixed-width-transformer-lp-universality\nitems/thm-fixed-width-transformer-lp-universality.md:11:  - lem-yun-transformer-grid-lookup\nitems/thm-fixed-width-transformer-lp-universality.md:61:[F3] A two-head, head-size-one modified network with piecewise-affine scalar gates performs exact finite lookup on the distinct-column grid and on position-tagged grids; the first version returns zero on duplicate-column and sentinel grid points ([[lem-yun-transformer-grid-lookup]]).\nitems/ex-position-free-vs-position-encoded-token-order.md:13:  - thm-fixed-width-transformer-lp-universality\nitems/ex-position-free-vs-position-encoded-token-order.md:47:[F2] Assuming Countable Choice, for fixed $n\\ge2$, $d\\ge1$, and $1\\le p<\\infty$, a two-head, head-size-one Transformer with width-four ReLU feedforward layers, no layer normalization, and a trainable positional matrix approximates every continuous map on a compact domain in integrated $L_p$ error, for $1\\le p<\\infty$ ([[thm-fixed-width-transformer-lp-universality]]).\nitems/ex-fixed-length-vs-unbounded-sequence-limits.md:2:id: ex-fixed-length-vs-unbounded-sequence-limits\nitems/ex-fixed-length-vs-unbounded-sequence-limits.md:11:  - thm-fixed-width-transformer-lp-universality\nitems/ex-fixed-length-vs-unbounded-sequence-limits.md:47:[F1] Under Countable Choice, at each fixed $n\\ge2$, $d\\ge1$, and $1\\le p<\\infty$, continuous compactly supported permutation-equivariant maps admit integrated $L_p$ approximants with two heads of size one, width-four ReLU feedforward layers, and no layer normalization; trainable positions give the compact-domain non-equivariant version ([[thm-fixed-width-transformer-lp-universality]]).\nitems/lem-yun-transformer-grid-lookup.md:2:id: lem-yun-transformer-grid-lookup\n",
+    "aliases": "No aliases on either repaired original carrier.",
+    "dispositions": [
+      {
+        "id": "thm-fixed-width-transformer-lp-universality",
+        "use": "F3, proof1.2/2.1 and 4.1",
+        "decision": "Equality repair preserves lookup uses; corrected integer quantizer loop now realizes its claimed bins. Same-owner focused consumer repair completed in proposal; full UAT Statement and all remaining bytes unchanged.",
+        "preserved_variants": "Continuous compactly supported equivariant full-domain integrated Lp approximation and arbitrary continuous compact-domain position-tagged approximation; ordinary softmax/ReLU replacement and exact sentinel-zero route remain untouched."
+      },
+      {
+        "id": "ex-fixed-length-vs-unbounded-sequence-limits",
+        "decision": "Same owner focused liminf repair proposed; no item consumers found."
+      },
+      {
+        "id": "ex-position-free-vs-position-encoded-token-order",
+        "use": "F2 and proof2.1 use only UAT position-tagged branch at n=2,d=1",
+        "decision": "Position-tagged n=2,d=1 application remains valid and unchanged. Quantizer integer-index repair concerns the unpositioned branch only."
+      },
+      {
+        "id": "attention-and-transformer-expressivity",
+        "decision": "Inventory unchanged; no page-body claim to edit."
+      },
+      {
+        "id": "attention-and-transformer-expressivity-examples",
+        "decision": "Inventory unchanged and corrected example remains compatible; no page-body claim to edit."
+      }
+    ]
+  },
+  "additional_consumer_observation": {
+    "status": "Root confirmed actual discrepancy and explicitly authorized this smallest one-span same-owner consumer-proof repair, distinct issue cycle1. Candidate now included.",
+    "id": "thm-fixed-width-transformer-lp-universality",
+    "location": "Proof2.1",
+    "text": "Loop is k=0,delta,...,1-delta, but gate uses t-kdelta and claims interval [kdelta,(k+1)delta). Those formulas require integer k=0,...,m-1. At delta=1/2 the written loop thresholds are 0,1/4 instead of 0,1/2.",
+    "smallest_potential_repair": "Change only loop index set to k=0,1,...,m-1. Statement unaffected.",
+    "witness": "At delta=1/2,m=2,d=1, the original k values 0,1/2 give thresholds 0,1/4. With valid raw input t=3/5, k=0 does not clamp; k=1/2 evaluates eta_(1/2)(3/5-1/4)=eta_(1/2)(7/20)=-7/20 and leaves t=1/4, outside grid {0,1/2}. Correct integer k values 0,1 give thresholds 0,1/2 and clamp t=3/5 to 1/2.",
+    "corrected_bins": "For each integer k=0,...,m-1, eta_delta(t-kdelta)=-(t-kdelta) exactly when kdelta<=t<(k+1)delta, so residual update maps that bin to kdelta. Previously clamped smaller grid values lie below the next bin and remain unchanged. Bins partition [0,1); the preceding sentinel gate already sends t<0 or t>=1 to -M, which is outside every clamp bin. Thus the corrected loop maps each feature exactly to {0,delta,...,1-delta} or sentinel, as required by full F3."
+  },
+  "metadata_interface": {
+    "deps_changes": [],
+    "grid_statement_changed": false,
+    "example_statement_changed": true,
+    "same_owner_consumer_obligation": "Actual changed example has no item consumers, only B-page placement; reviewed unchanged page compatibility. The grid interface is byte-identical and direct/transitive UAT uses are documented above.",
+    "new_helpers": [],
+    "uat_statement_changed": false
+  },
+  "format_check": {
+    "command": "node tools/proof-layout.mjs research/machine-learning-all-101-2026-10-19-owner-transformer36-escalation/your-proposal/candidates/lem-yun-transformer-grid-lookup.md research/machine-learning-all-101-2026-10-19-owner-transformer36-escalation/your-proposal/candidates/thm-fixed-width-transformer-lp-universality.md research/machine-learning-all-101-2026-10-19-owner-transformer36-escalation/your-proposal/candidates/ex-fixed-length-vs-unbounded-sequence-limits.md",
+    "exit_code": 0,
+    "output": "proof-layout: 3 items, 19 steps, 0 defects",
+    "scope": "Candidate renderer formatting only, no native review/gate/audit credit. Existing pending verification fields preserved, no stamps added."
+  },
+  "integration": "Root CAS integration against exact before snapshots and unique spans; root owns dependency contracts, current hashes/checks and native final review disposition. No live files, global plan, engine, manifests or gates changed."
+}

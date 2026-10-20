@@ -14,6 +14,7 @@ aliases: [def-metric, def-pseudometric, def-ultrametric]
 landmark: true
 short: "metric space $(X,d)$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-space.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -41,8 +42,8 @@ pipeline_run: null
 ## Definition
 
 Throughout, $\mathbb{R}$ is the complete ordered field
-([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this
-library ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).
+(Complete ordered field (least-upper-bound property), Ordered field) constructed in this
+library (The real numbers) and carrying its order (Order on the reals).
 
 Let $X$ be a set. A **metric** on $X$ is a function
 $d : X \times X \to \mathbb{R}$ such that for all $x, y, z \in X$:
@@ -59,12 +60,12 @@ several are, the metric is always named.
 **The values of a metric are real numbers.** The codomain is $\mathbb{R}$, so
 $d(x,y)$ is an honest element of the complete ordered field and every
 inequality above is an inequality there. No infinite value is permitted;
-[[rem-metric-axiom-conventions]] records why extended metrics are not treated in
+Which metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in
 this library.
 
 **Nonnegativity is deliberately absent from the axiom list.** Many texts add a
 fourth axiom $d(x,y) \ge 0$. It is redundant: (M1), (M2) and (M3) already force
-it, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that
+it, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that
 lemma is available.
 
 **Pseudometric.** A **pseudometric** on $X$ is a function
@@ -83,8 +84,26 @@ satisfies
 
 for all $x, y, z \in X$, where the maximum is that of a two-element subset of
 $\mathbb{R}$, which exists and is one of the two elements
-([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair
+(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair
 $(X,d)$ with $d$ an ultrametric.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
+
+[[def-real-numbers]]
+
+[[def-real-order]]
+
+[[rem-metric-axiom-conventions]]
+
+[[lem-metric-nonnegativity]]
+
+[[def-max-min]]
+
+[[lem-finite-set-has-max]]
 
 ## Remarks
 

@@ -1,0 +1,64 @@
+--- actual/tools/step3-owner-home-alpha-continuations.mjs
++++ proposed/tools/step3-owner-home-alpha-continuations.mjs
+@@ -1,3 +1,4 @@
++import { ownerEscalationHomeContinuations, ownerEscalationHomeClosureEvidence, ownerEscalationHomeCurrentOutputs } from './step3-owner-escalation-home-alpha-continuations.mjs';
+ // One owner-registered fresh native home adjudication; never inherited acceptance.
+ import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
+ import { resolve, relative, isAbsolute } from 'node:path';
+@@ -20,7 +21,7 @@
+ const ids=d=>pages(d).flatMap(p=>(p.items??[]).map(x=>typeof x==='string'?x:x.id));
+ const exact=(a,b)=>a.length===b.length&&new Set(a).size===a.length&&a.every(x=>b.includes(x));
+ export const homeAlphaLabel=unit=>`3a-batch-${unit}-foreign-refuter-continuation-1`;
+-export function homeAlphaContinuations(root,run,{beforeDispatch=false,units=null,selected=null}={}){
++function foreignHomeAlphaContinuations(root,run,{beforeDispatch=false,units=null,selected=null}={}){
+  need(/^[a-zA-Z0-9_-]+$/.test(run),'invalid run');const path=fileFor(run);
+  if(!existsSync(resolve(root,path)))return [];
+  const registry=bytes(root,path),doc=parse(registry);
+@@ -87,6 +88,10 @@
+   return {entry:e,binding:{path,entry_sha256:foreignRefuterHash(e)},old_decisions:decisions,old_scope:scope};
+  });
+ }
++export function homeAlphaContinuations(root,run,options={}){
++ const rows=[...foreignHomeAlphaContinuations(root,run,options),...ownerEscalationHomeContinuations(root,run,options)];
++ need(new Set(rows.map(x=>x.entry.unit)).size===rows.length,'conflicting continuation authorities');return rows;
++}
+ export function homeAlphaReviewIdentity(root,run,unit){
+  const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===String(unit));
+  const label=route?route.entry.label:`3a-batch-${unit}`;
+@@ -95,7 +100,7 @@
+ }
+ export function registeredHomeAlphaResult(root,run,row){
+  if(!root||!run||row?.run!==run||row.role!=='alpha')return false;
+- const m=/^3a-batch-([1-9]\d*)-foreign-refuter-continuation-1$/.exec(row.label??'');if(!m)return false;
++ const m=/^3a-batch-([1-9]\d*)-(?:foreign-refuter|owner-escalation)-continuation-1$/.exec(row.label??'');if(!m)return false;
+  const route=homeAlphaContinuations(root,run).find(x=>x.entry.unit===m[1]);
+  if(!(route&&row.attempt===1&&row.label===route.entry.label&&row.covers?.length===1&&String(row.covers[0])===m[1]))return false;
+  try {freshHomeAlphaEvidence(root,run,route.entry);return foreignRefuterHash(row)===foreignRefuterHash(parse(bytes(root,`research/${run}-dispatch/alpha-${route.entry.label}.result.json`)));}
+@@ -127,12 +132,15 @@
+  const deliveredRegisteredTask=text.includes(ref(root,run,e.task).toString())
+   &&text.includes(decisionsPath);
+  need(text.split('# This dispatch\n').length===2&&(text.startsWith(header)||text.includes('\n'+header))
+-  &&(ordinary||deliveredRegisteredTask),'fresh native prompt lacks authentic canonical assignment');
+- return {[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
++  &&((e.label.endsWith('-owner-escalation-continuation-1')?deliveredRegisteredTask:(ordinary||deliveredRegisteredTask))),'fresh native prompt lacks authentic canonical assignment');
++ const outputs=e.label.endsWith('-owner-escalation-continuation-1')?ownerEscalationHomeCurrentOutputs(root,run,e):{};
++ return {...outputs,[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
+ }
+ export function homeAlphaClosureEvidence(root,run){
+- const path=fileFor(run);if(!existsSync(resolve(root,path)))return {};
+- const doc=parse(bytes(root,path)),out={[path]:sha(bytes(root,path))};
++ const extra=ownerEscalationHomeClosureEvidence(root,run);
++ for(const {entry:e} of ownerEscalationHomeContinuations(root,run))Object.assign(extra,freshHomeAlphaEvidence(root,run,e));
++ const path=fileFor(run);if(!existsSync(resolve(root,path)))return extra;
++ const doc=parse(bytes(root,path)),out={...extra,[path]:sha(bytes(root,path))};
+  // Historical inputs remain exact after genuine native source amendments.
+  for(const e of doc.continuations??[]){
+   for(const key of ['previous_result','previous_attempt','previous_prompt','previous_report','previous_decisions','previous_scope','registration_manifest','owner_capture','task']){ref(root,run,e[key]);out[e[key].path]=e[key].sha256;}
+@@ -150,6 +158,7 @@
+  for(const id of s.pages_touched??[])add({obligation:`page:${unit}:${id}`,id,route:'page',order_anchor:s.page_order_anchors?.[id]??[]});
+  for(const finding of s.reader_findings??[])add({...finding,route:'reader'});
+  for(const finding of s.refuter_findings??[])add({...finding,route:'flagged'});
++ for(const t of route.additional_obligations??[])add(t);
+  for(const d of doc.decisions)if(!targets.has(d.obligation)){
+   need(d.route==='gate'&&d.obligation===`gate:${d.defect_ids?.[0]}`&&d.defect_ids?.length===1
+     &&(s.manifest_post??[]).concat(s.page_manifest_post??[]).includes(d.id),'original decision is not a supported owed scope/gate obligation');

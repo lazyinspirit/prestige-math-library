@@ -1,0 +1,232 @@
+
+===== thm-heine-cantor-metric =====
+
+
+## Statement
+
+Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let
+$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \to Y$ be
+continuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous
+([[def-metric-uniform-continuity]]).
+
+No choice principle is used: the cover built below is cut out by a property, and
+the Lebesgue number lemma it is fed to is itself choice free
+([[thm-lebesgue-number-lemma]]).
+
+## Facts & Assumptions
+
+**Given:** A compact metric space $(X,d_X)$, a metric space $(Y,d_Y)$ and a continuous $f : X \to Y$.
+
+[L1] $f$ is continuous at $a$: for every real $\varepsilon > 0$ there is a real $\delta > 0$ with $f[B_X(a,\delta)] \subseteq B_Y(f(a),\varepsilon)$ ([[def-metric-continuity]], [[def-metric-ball]]).
+
+[L2] $f$ is uniformly continuous when for every real $\varepsilon > 0$ there is a real $\delta > 0$ such that $d_X(x,x') < \delta$ implies $d_Y(f(x),f(x')) < \varepsilon$, for all $x,x' \in X$ ([[def-metric-uniform-continuity]]).
+
+[L3] Every open cover of a compact metric space has a Lebesgue number: a real $\delta > 0$ such that every nonempty subset of diameter less than $\delta$ lies in a single member of the cover ([[thm-lebesgue-number-lemma]], [[def-metric-compactness]]).
+
+[L4] Open balls are open ([[thm-metric-open-set-algebra]], [[def-metric-topology]]).
+
+[L5] For nonempty bounded $A$, $\operatorname{diam}(A) = \sup\{d_X(u,v) : u,v \in A\}$; in particular $\operatorname{diam}(\{x,x'\}) = d_X(x,x')$, the set of distances being $\{0, d_X(x,x')\}$ and a metric being nonnegative ([[def-metric-bounded-diameter]], [[lem-metric-nonnegativity]]).
+
+[L6] A metric is symmetric and satisfies the triangle inequality ([[def-metric-space]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 If $X = \emptyset$ the condition of uniform continuity holds vacuously, so assume $X \ne \emptyset$, and let $\varepsilon > 0$ be real. [L2]
+
+2.1 Put $\mathcal{U} := \{\, U \subseteq X : U \text{ is open in } X \text{ and } f[U] \subseteq B_Y(z, \varepsilon/2) \text{ for some } z \in Y \,\}$, a family cut out by a property and not by a selection. [L1, step 1.1]
+
+3.1 $\mathcal{U}$ is an open cover of $X$: given $x \in X$, continuity at $x$ supplies a real $\delta_x > 0$ with $f[B_X(x,\delta_x)] \subseteq B_Y(f(x), \varepsilon/2)$, and $B_X(x,\delta_x)$ is open and contains $x$, so it belongs to $\mathcal{U}$. [L1, L4, step 2.1]
+
+4.1 By the Lebesgue number lemma there is a real $\delta > 0$ such that every nonempty subset of $X$ of diameter less than $\delta$ is contained in a single member of $\mathcal{U}$. [L3, step 3.1]
+
+5.1 Let $x, x' \in X$ with $d_X(x,x') < \delta$; the set $\{x,x'\}$ is nonempty with diameter $d_X(x,x') < \delta$, so $\{x,x'\} \subseteq U$ for some $U \in \mathcal{U}$, and there is $z \in Y$ with $f[U] \subseteq B_Y(z,\varepsilon/2)$. [L5, step 2.1, step 4.1]
+
+6.1 Then $d_Y(f(x),z) < \varepsilon/2$ and $d_Y(z,f(x')) < \varepsilon/2$, so $d_Y(f(x),f(x')) \le d_Y(f(x),z) + d_Y(z,f(x')) < \varepsilon$; as $\varepsilon > 0$ was arbitrary, $f$ is uniformly continuous. [L2, L6, step 5.1] ∎
+
+## Remarks
+
+**The centre $z$ is not chosen, and that is why the proof is choice free.** The family $\mathcal{U}$ is defined by the *existence* of a suitable $z$, and the argument instantiates that existential once, at step 5.1, for the single member $U$ that the Lebesgue number produced. No function assigning a centre to every member of $\mathcal{U}$ is ever needed.
+
+**Compactness is not removable.** The map $x \mapsto 1/x$ is continuous on the interval $(0,1)$ and is not uniformly continuous there ([[cex-heine-cantor-fails-without-compactness]]); $(0,1)$ is not compact.
+
+**The codomain is arbitrary.** Nothing is assumed about $(Y,d_Y)$ — not completeness, not boundedness, not compactness. All the work is done on the domain side, which is where the finite subcover lives.
+
+===== thm-morse-sard-for-euclidean-maps =====
+
+
+## Statement
+
+Let $m\ge0$, $n\ge1$, and $r\ge1$ be integers, let $U\subseteq\mathbb R^m$
+be open, and let $f:U\to\mathbb R^n$ be a $C^r$ map with
+
+$$ r>\max\{m-n,0\}. $$
+
+Then the critical value set of $f$ is a null subset of $\mathbb R^n$.
+
+## Facts & Assumptions
+
+**Given:** An integer $n\ge 1$ and a $C^r$ map $f:U\to\mathbb R^n$ with $r>\max\{m-n,0\}$.
+
+[F1] For every $C^1$ Euclidean map, the critical locus consists of points where the total derivative is not onto, and the critical-value set is its image, including for zero-dimensional source ([[def-c1-critical-locus-and-critical-value-set-in-euclidean-spaces]]). We write these sets as $\operatorname{Crit}(f)$ and $\operatorname{CV}(f)$.
+
+[F2] Nullity is expressed by countable cube covers of arbitrarily small total volume ([[def-null-and-content-zero-in-rn]]).
+
+[L1] Compact null sections reassemble into a null set, and the nonflat and flat critical strata have null images under the hypotheses of the preceding lemmas ([[lem-sard-slicing-for-compact-null-sections]], [[lem-sard-on-the-nonflat-critical-strata]], [[lem-sard-on-the-infinitely-flat-critical-stratum]]).
+
+[L2] A $C^1$ Euclidean map with invertible derivative has a local $C^1$ inverse $g$, with $Dg=(Df\circ g)^{-1}$ ([[thm-euclidean-inverse-function-theorem]]). For a $C^r$ map this inverse is $C^r$: inductively, if $g$ is $C^k$ and $k<r$, then $Df\circ g$ is $C^k$, and matrix inversion is $C^k$ on invertible matrices by the adjugate-over-determinant formula; the displayed identity makes $Dg$ $C^k$, hence $g$ $C^{k+1}$.
+
+## Proof
+**Proof technique:** direct.
+
+1.1 Prove the assertion by induction on the source dimension $m$, keeping the differentiability order $r$ fixed. If $m=0$, then $U$ is at most a point, so $\operatorname{Crit}(f)$ and its image are finite, hence null in $\mathbb R^n$. Assume $m\ge1$ and the theorem proved for all smaller source dimensions and every positive target dimension satisfying the same differentiability inequality. Exhaust $U$ by the canonically enumerated rational closed cubes with closures inside $U$. We use the following choice-free countable-union observation throughout: every compact null subset of $\mathbb R^n$ has, for each positive rational budget, a **finite** rational-cube cover below that budget. Indeed, start with a countable cube cover of total volume below half the budget from [F2], enlarge its cubes slightly to rational open cubes while retaining the budget, and take a finite subcover by compactness. Enumerate all finite rational-cube families and use the first qualifying family for each compact set and budget. For a countable sequence of compact null sets, use budgets $\varepsilon2^{-i-1}$ and combine these canonical finite covers; [F2] makes their union null without making countably many arbitrary choices. Thus it suffices to prove $f(\operatorname{Crit}(f)\cap Q_\nu)$ null for each cube: these images are compact and their countable union is the critical value set of [F1]. [F1, F2, given, construct, cases]
+
+2.1 Fix one cube $Q_\nu$ and put $$ C_0:=\operatorname{Crit}(f)\cap Q_\nu,\qquad C_j:=\{x\in Q_\nu:D^\alpha f(x)=0\text{ for every }1\le|\alpha|\le j\} \quad(j\ge 1). $$ These are the intersections of $Q_\nu$ with the corresponding closed strata in $U$. Then $$ C_0=(C_0\setminus C_1)\cup\bigcup_{j=1}^{r-1}(C_j\setminus C_{j+1})\cup C_r. $$ For each $1\le j<r$ and each $\ell\ge 1$, the set $$ K_{j,\ell}:=\{x\in C_j:\operatorname{dist}(x,C_{j+1})\ge 1/\ell\} $$ is compact and contained in $C_j\setminus C_{j+1}$ (take distance to the empty set as infinite). Because $$ C_j\setminus C_{j+1}=\bigcup_{\ell\ge 1}K_{j,\ell}, $$ the nonflat lemma in [L1] applies: its lower-dimensional Sard premise holds by the induction hypothesis at the unchanged order $r$, since $r>\max\{m-n,0\}$ implies $r>\max\{(m-1)-n,0\}$. Each $f(K_{j,\ell})$ is compact null, so the canonical-cover observation in step 1.1 makes $f(C_j\setminus C_{j+1})$ null. Also, $C_r$ is compact, and $r>\max\{m-n,0\}$ implies $rn\ge m$; the flat lemma in [L1] makes $f(C_r)$ null. [L1, step 1.1, algebra]
+
+2.2 It remains to show that $f(C_0\setminus C_1)$ is null. If $n=1$, then a linear map $\mathbb R^m\to\mathbb R$ is surjective exactly when it is nonzero, so $C_0=C_1$ and there is nothing to prove. Assume $n>1$, and fix $x\in C_0\setminus C_1$. Some first partial derivative of some component of $f$ is nonzero at $x$; after reordering coordinates and components, assume $$ \frac{\partial f^1}{\partial x^1}(x)\neq 0. $$ By [L2], after shrinking choose a neighbourhood $W_x$ of $x$ and a $C^r$ diffeomorphism $$ \Phi_x(y):=\bigl(f^1(y),y^2,\ldots,y^m\bigr) $$ from $W_x$ onto an open set $I_x\times\Omega_x\subseteq\mathbb R\times \mathbb R^{m-1}$. Write $$ f\circ\Phi_x^{-1}(t,u)=\bigl(t,\widetilde f_x(t,u)\bigr). $$ Each slice map $u\mapsto \widetilde f_x(t,u)$ is $C^r$, and because $$ r>\max\{m-n,0\}=\max\{(m-1)-(n-1),0\}, $$ the induction hypothesis applies to those maps. If $q=\Phi_x^{-1}(t,u)\in C_0\cap W_x$, then in these coordinates the differential of $f$ has block form $$ Df_q=\begin{bmatrix}1&0\\ *&D(\widetilde f_x)_t(u)\end{bmatrix}, $$ so $q$ is critical for $f$ exactly when $u$ is a critical point of the slice $u\mapsto\widetilde f_x(t,u)$. For every rational open cube $B$ whose closure lies in $W_x$, the compact set $f(C_0\cap\overline B)$ has sections contained in the slice critical value sets, hence null in $\mathbb R^{n-1}$ by induction. The slicing lemma in [L1] makes this compact image null in $\mathbb R^n$. Consider **all** rational cubes $B$ for which such an $x$ and chart exist; they form a countable family covering $C_0\setminus C_1$. Each has the compact-null conclusion just proved, independently of which witnessing chart exists. The canonical-cover observation in step 1.1 makes their image union $f(C_0\setminus C_1)$ null without selecting charts or covers countably. [L1, L2, step 1.1, algebra]
+
+3.1 Step 2.1 shows that $f(C_j\setminus C_{j+1})$ is null for every $1\le j<r$ and that $f(C_r)$ is null, while step 2.2 handles $f(C_0\setminus C_1)$. Hence $$ f(C_0)=f(\operatorname{Crit}(f)\cap Q_\nu) $$ is null. Applying step 1.1 shows that the whole critical value set of $f$ is null. [F1, step 2.1, step 2.2, step 1.1] ∎ 
+===== thm-polar-coordinates-formula-for-lebesgue-measure =====
+
+
+## Statement
+
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \ge 1$,
+let $S^{n-1} \subseteq \mathbb R^n$ be the unit sphere, and let $\sigma$ be the
+set function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\sigma$
+is a finite Borel measure on $S^{n-1}$, and for every Borel measurable
+$f : \mathbb R^n \to [0,\infty]$,
+$$\int_{\mathbb R^n} f(x)\,d\lambda_n(x) = \int_0^\infty \int_{S^{n-1}} f(r\omega) r^{n-1}\,d\sigma(\omega)\,dr.$$
+Moreover, $\sigma$ is the unique Borel measure on $S^{n-1}$ with this
+property.
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Countable Choice, a positive integer $n$, and a Borel measurable function $f : \mathbb R^n \to [0,\infty]$.
+
+[L1] The set function $\sigma$ is defined by $$\sigma(E)=n\,\lambda_n(\{r\omega : \omega \in E,\ 0<r\le 1\})$$ for Borel $E \subseteq S^{n-1}$. ([[def-polar-surface-measure-on-the-unit-sphere]])
+
+[L2] Linear dilations scale Lebesgue measure by the determinant. ([[thm-linear-change-of-variables-for-lebesgue-measure]])
+
+[L3] Two measures that agree on a sigma-finite generating pi-system agree on the generated sigma-algebra. ([[thm-measure-uniqueness-on-a-sigma-finite-pi-system]])
+
+[L4] Tonelli's theorem turns equality of measures on sets into the corresponding equality of nonnegative integrals. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]])
+
+[L5] Assuming countable choice, bounded subsets of Euclidean space have finite outer measure. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
+
+[A1] Let $\Phi : \mathbb R^n \setminus \{0\} \to (0,\infty)\times S^{n-1}$ be $\Phi(x)=(|x|,x/|x|)$. This map is continuous, so $m^*(B):=\lambda_n(\Phi^{-1}(B))$ defines a measure on the Borel subsets of $(0,\infty)\times S^{n-1}$.
+
+[A2] Sets of the form $(a,b]\times E$ with $0<a<b$ and Borel $E \subseteq S^{n-1}$ form a sigma-finite generating pi-system for the Borel sigma-algebra of $(0,\infty)\times S^{n-1}$.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 For Borel $E\subseteq S^{n-1}$ put $E_r:=\{s\omega:\omega\in E,\ 0<s\le r\}$. By [A1], each $E_r$ is Borel. If $(E_j)$ is pairwise disjoint, then the sets $(E_j)_1$ are pairwise disjoint and $(\bigcup_jE_j)_1=\bigcup_j(E_j)_1$, so countable additivity of $\lambda_n$ makes $\sigma$ a Borel measure. It is finite because $\sigma(S^{n-1})=n\lambda_n(\{x:0<|x|\le1\})<\infty$ by [L5]. [L1, L5, A1]
+
+2.1 For Borel $E \subseteq S^{n-1}$ and $0<a<b$, [L1] gives $\lambda_n(E_1)=\sigma(E)/n$. The dilation $x \mapsto rx$ has determinant $r^n$, so [L2] gives $$\lambda_n(E_r)=r^n\lambda_n(E_1)=\frac{r^n}{n}\sigma(E).$$ Therefore $$m^*((a,b]\times E)=\lambda_n(E_b\setminus E_a)=\frac{b^n-a^n}{n}\sigma(E)=\sigma(E)\int_a^b r^{n-1}\,dr.$$ [L1, L2, A1, step 1.1]
+
+3.1 Step 2.1 shows that $m^*$ and the product measure $r^{n-1}dr \times \sigma$ agree on the generating pi-system of [A2]. The rectangles $P_k=(1/k,k]\times S^{n-1}$ for $k\ge2$ increase to the whole product and have the same finite measure under both measures, namely $\sigma(S^{n-1})(k^n-k^{-n})/n$; hence [L3] applies and the measures agree on every Borel subset of $(0,\infty)\times S^{n-1}$. Applying [L4] to this identity gives the integral formula on $\mathbb R^n\setminus\{0\}$. The omitted origin has Lebesgue measure zero: it lies in a half-open box of volume $\varepsilon^n$ for every $\varepsilon>0$. Thus the same formula holds for every nonnegative Borel measurable $f$ on all of $\mathbb R^n$, even when $f(0)=+\infty$. If $\widetilde{\sigma}$ is another Borel measure on $S^{n-1}$ with the same integral formula, apply that formula to $\mathbf 1_{E_1}$, where $E_1=\{r\omega:\omega\in E,\ 0<r\le1\}$. Then $$\lambda_n(E_1)=\int_0^\infty\int_{S^{n-1}}\mathbf 1_{E_1}(r\omega)r^{n-1}\,d\widetilde{\sigma}(\omega)\,dr=\widetilde{\sigma}(E)\int_0^1r^{n-1}\,dr=\frac{\widetilde{\sigma}(E)}{n},$$ so $\widetilde{\sigma}(E)=n\lambda_n(E_1)=\sigma(E)$ by [L1]. Thus $\widetilde{\sigma}=\sigma$, proving uniqueness. [A2, L3, L4, step 1.1, step 2.1] ∎
+
+===== thm-riesz-representation-for-hilbert-space =====
+
+
+## Statement
+
+Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space and let $f$ be a bounded linear functional on $H$ ([[def-dual-space-of-a-normed-space]]). Then there is a unique $y\in H$ with
+
+$$f(x)=\langle x,y\rangle\qquad\text{for every }x\in H,$$
+
+and $\|f\|=\|y\|$, where $\|f\|$ is the dual norm ([[def-operator-norm]]). Under the first-variable-linear convention the representing vector depends conjugate-linearly and isometrically on $f$: if $f_i$ is represented by $y_i$ and $a,b$ are scalars, then $af_1+bf_2$ is represented by $\overline a\,y_1+\overline b\,y_2$.
+
+## Facts & Assumptions
+
+[A1] If $f$ is a bounded linear functional then $\|f\|=\sup_{\|x\|\le1}|f(x)|$ and $|f(x)|\le\|f\|\,\|x\|$, and $f=0$ exactly when $\|f\|=0$ ([[def-operator-norm]], [[def-bounded-linear-operator]]).
+
+[A2] Cauchy–Schwarz gives $|\langle u,v\rangle|\le\|u\|\,\|v\|$, and the pairing is linear in the first argument and conjugate-linear in the second with $\langle v,v\rangle=\|v\|^2$ ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-real-and-complex-inner-product-space]]).
+
+[A3] The kernel of a bounded linear functional is either all of $H$ or a proper linear subspace, and the orthogonal complement of a subspace is closed under the decomposition $H=N\oplus N^\perp$ for closed $N$ ([[def-linear-subspace]], [[thm-orthogonal-decomposition-by-a-closed-subspace]]).
+
+[A4] For a subset $S$, $S^\perp=\{v:\langle v,s\rangle=0\ \forall s\in S\}$ ([[def-orthogonality-and-orthogonal-complement]]).
+
+[A5] Countable Choice is the hypothesis under which the orthogonal decomposition, and hence this representation, is obtained ([[def-countable-choice]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** Countable Choice, a real or complex Hilbert space $H$ and a bounded linear functional $f$ on $H$.
+
+1.1 If $f=0$, then $y=0$ represents $f$ because $\langle x,0\rangle=0$ for every $x$, and $\|f\|=0=\|y\|$; the same $f$ has no other representing vector, since a vector $y'$ representing $f$ satisfies $\langle y',y'\rangle=0$ and hence $y'=0$. [A1, A2]
+
+1.2 If $f\ne0$, its kernel is a proper linear subspace of $H$: it is linear because $f(au+bv)=af(u)+bf(v)$, it is proper because $f$ takes a nonzero value, and it is closed because $x_n\to x$ and $f(x_n)=0$ give $|f(x)|\le|f(x)-f(x_n)|\le\|f\|\,\|x-x_n\|\to0$. [A1, A3]
+
+2.1 Choose $z$ with $f(z)\ne0$ and put $u=z/f(z)$, so $f(u)=1$; decompose $u=m+n$ with $m\in\ker f$ and $n\in(\ker f)^\perp$, then $1=f(u)=f(m)+f(n)=f(n)$ shows $n\ne0$ and $f(n)=1$. [step 1.2, A3, A5]
+
+3.1 For arbitrary $x$, the vector $v=x-f(x)u$ satisfies $f(v)=f(x)-f(x)\cdot1=0$, hence $\langle v,n\rangle=0$ and $\langle x,n\rangle=f(x)\langle u,n\rangle$; moreover $\langle u,n\rangle=\langle m+n,n\rangle=\langle m,n\rangle+\langle n,n\rangle=0+\|n\|^2$, so $f(x)=\langle x,n\rangle/\|n\|^2=\langle x,n/\|n\|^2\rangle$ with $y:=n/\|n\|^2$. [step 2.1, A2, A4, algebra]
+
+4.1 Norm and uniqueness: Cauchy–Schwarz gives $|f(x)|=|\langle x,y\rangle|\le\|x\|\,\|y\|$, so $\|f\|\le\|y\|$, while $f(y)=\|y\|^2$ gives $\|f\|\ge\|y\|$; hence $\|f\|=\|y\|$, and this contains the case $f=0$. If also $f(x)=\langle x,y'\rangle$ for all $x$, then $\langle x,y-y'\rangle=0$ for all $x$, and the choice $x=y-y'$ gives $\|y-y'\|^2=0$, so $y=y'$. [step 3.1, A1, A2, algebra]
+
+5.1 Conjugate linearity: if $f_i(x)=\langle x,y_i\rangle$ for $i=1,2$, then for all $x$ and scalars $a,b$ one has $(af_1+bf_2)(x)=a\langle x,y_1\rangle+b\langle x,y_2\rangle=\langle x,\overline a y_1+\overline b y_2\rangle$ by conjugate-linearity in the second argument; uniqueness of the representing vector therefore gives the representing vector $\overline a y_1+\overline b y_2$, so the map $f\mapsto y$ is conjugate-linear, and by step 4.1 it is isometric. [step 4.1, A2, algebra]
+
+6.1 Steps 1.1, 3.1 and 4.1 produce the unique representing vector together with the norm identity for every bounded $f$, and step 5.1 records its conjugate-linear isometric dependence; Countable Choice is used exactly through the orthogonal decomposition of step 2.1. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, A5] ∎
+
+===== thm-weak-maximum-principle-for-the-laplacian =====
+
+
+## Statement
+
+Let $n\ge2$ and let $\Omega\subseteq\mathbb R^n$ be bounded, nonempty and open. If $u\in C^2(\Omega)\cap C(\overline\Omega)$ and $\Delta u\ge0$, then
+$$\max_{\overline\Omega}u=\max_{\partial\Omega}u.$$
+No connectedness or boundary smoothness is required.
+
+## Facts & Assumptions
+
+**Given:** The objects and hypotheses in the statement.
+
+[F1] Adding $\varepsilon|x|^2$ to a subharmonic function, with $\varepsilon>0$, excludes interior local maxima. ([[lem-strict-subharmonic-perturbation]]).
+
+[F2] A Euclidean subset is compact if and only if it is closed and bounded. ([[thm-heine-borel-rn]]).
+
+[F3] A continuous real function on a nonempty compact metric space attains its maximum and minimum. ([[thm-extreme-value-metric]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Choose $R>0$ with $\overline\Omega\subseteq\overline B_R(0)$. The closure is nonempty compact. For each $\varepsilon>0$, continuity makes $u_\varepsilon=u+\varepsilon|x|^2$ attain its maximum on that closure. [F2, F3, given]
+
+2.1 The maximizer cannot lie in $\Omega$, so it lies in $\partial\Omega$. In particular the boundary is nonempty; it is closed and bounded, hence compact, and $m=\max_{\partial\Omega}u$ exists. [F1, F2, F3, step 1.1]
+
+3.1 For every $x\in\overline\Omega$, $u(x)\le u_\varepsilon(x)\le m+\varepsilon R^2$. Letting $\varepsilon\downarrow0$ yields $u(x)\le m$. Since a boundary maximizer belongs to the closure, equality of the maxima follows. [step 2.1, algebra] ∎
+
+===== thm-young-inequality-real-exponents =====
+
+
+## Statement
+
+Let $p,q>1$ satisfy $1/p+1/q=1$. For $u,v\ge0$,
+$$uv\le\frac{u^p}{p}+\frac{v^q}{q}.$$
+
+## Facts & Assumptions
+
+**Given:** Conjugate real exponents $p,q>1$ and nonnegative reals $u,v$.
+
+[L1] Weighted AM-GM applies to positive entries with nonnegative weights summing to one ([[thm-weighted-am-gm-real]]).
+
+[L2] Positive-base real-power laws hold, and the zero-base convention is $0^r=0$ for $r>0$; positive-base real powers are positive ([[def-real-power]], [[thm-real-power-laws]], [[cor-exponential-reciprocal-and-positivity]]).
+
+
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 If $u=0$ or $v=0$, the inequality is immediate from nonnegativity of the two terms on the right. [L2]
+
+1.2 For $u,v>0$, apply [L1] to $u^p,v^q$ with weights $1/p,1/q$. [L1, given]
+
+2.1 Its geometric side is $(u^p)^{1/p}(v^q)^{1/q}=uv$, and its arithmetic side is $u^p/p+v^q/q$. [step 1.2, L2]
+
+3.1 Steps 1.1 and 2.1 cover all nonnegative $u,v$. [step 1.1, step 2.1] ∎

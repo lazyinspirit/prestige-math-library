@@ -1,0 +1,147 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "37",
+  "input_sha256": "a875f636bd639bdabc154b855fa40be12778815d9b9106af6b4f6dc133465150",
+  "decisions": [
+    {
+      "id": "alg-neural-operator-mesh-discretization",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6ca6c088c49588a533c9b0d2d68937c2ecfd360cb67b50efcf26208b3c6f97e0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The transfer claim omitted reconstruction convergence: on D=(0,1), retain the cell (0,1/2] with tag 1/4 and subdivide (1/2,1), with all remaining tags greater than 1/2. For identity lifting, projection, activation and local matrix, and zero kernel and bias, every raw map is the identity and converges exactly. Yet a(x)=max(1-8x,0) has zero samples on every such mesh, so its normalized-weight reconstruction is zero and the reconstructed output has supremum error 1. This is a false implication (logic). Added maximal cell diameters h_n tending to zero to the transfer clause, exactly the missing hypothesis of the existing bridge; arbitrary finite raw evaluations and the stronger-norm and integral-first branches are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-neural-operator-mesh-discretization",
+      "disposition": "repaired",
+      "post_sha256": "90438700a20f9ebbc82ac14ff0b84f5716d8e1f9410dbcc88bdd896d2db74bdb",
+      "review_context_sha256": "90e04621989576015a56282618ffe127242706654587f5966ebef900c70d9306",
+      "reason": "Reviewed the raw layer instructions, input/output types, partition weights, finite-sample reconstruction, actual bridge proof and owning contract/page. For shrinking h_n the bridge gives error bounded by the input modulus at 2h_n; finite nets make this vanish uniformly on compact continuous-input families, and the proved compact-union composition argument transfers raw convergence. Stronger input norms still require their own reconstructions; the integral-first branch factors directly through samples. The only edit adds the missing shrinking-mesh premise. This is the repairer's mathematical check, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-neural-operator-discretization-invariance",
+    "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+    "cex-neural-operator-sup-norm-discretization-does-not-control-c1"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-repaired-finding",
+      "id": "alg-neural-operator-mesh-discretization",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, finite-sampling supremum-norm transfer sentence",
+      "status": "fixed",
+      "reason": "The transfer claim omitted reconstruction convergence: on D=(0,1), retain the cell (0,1/2] with tag 1/4 and subdivide (1/2,1), with all remaining tags greater than 1/2. For identity lifting, projection, activation and local matrix, and zero kernel and bias, every raw map is the identity and converges exactly. Yet a(x)=max(1-8x,0) has zero samples on every such mesh, so its normalized-weight reconstruction is zero and the reconstructed output has supremum error 1. This is a false implication (logic). Added maximal cell diameters h_n tending to zero to the transfer clause, exactly the missing hypothesis of the existing bridge; arbitrary finite raw evaluations and the stronger-norm and integral-first branches are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "record-scope-disposition",
+      "id": "alg-neural-operator-mesh-discretization",
+      "status": "no-published-consumer-effects",
+      "reason": "The changed supplier and all three direct item consumers are draft members of the frozen frontier. Dependency/reference searches found no outside or published direct consumers; the owning draft page is frontmatter only. No published repair or maintenance proposal is necessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/alg-neural-operator-mesh-discretization.md"
+    ],
+    "before_guard_sha256": "93590c3fa11058f9dddda9fa20bb75965d43e968ec41e1975880f8562c3f4ce0",
+    "before_statement_sha256": "95d91cd916378ecb7ea0a721bb5b6bd4a987ac3b57b2dd3246c94011fd9982e6",
+    "after_statement_sha256": "850a30d0064554346c5134a5a36804ea19b55f9096d02cdcc1b0c88c6a5578ed",
+    "exact_change": "Added: Along partition sequences whose maximal cell diameters h_n=max_j diam(E_{n,j}) tend to zero, to the existing conditional supremum-norm transfer sentence. Reversing this literal edit reproduces both assigned before hashes.",
+    "dependencies": [
+      "def-discretization-invariant-operator-family",
+      "def-neural-operator",
+      "lem-finite-sampling-reconstruction-bridge-for-neural-operator-quadratures"
+    ],
+    "mathematical_evidence": "The bridge Statement explicitly assumes h_n→0; Proof 1.2 bounds reconstruction error by omega_a(2h_n), Proof 3.1 makes this compact-uniform using finite nets, and Proofs 1.1–2.1 transfer the raw limit using compact union and continuity. These arguments cover the restored algorithm premise without a new lemma or added choice assumption.",
+    "contract_page_review": "The assigned algorithm contract has no phase proof, citations or finite-smoke obligations. Its boundary and risk descriptions remain accurate. The owning page remains YAML-only with page_layout compact-v1 and unchanged inventory. The assigned item contains no TikZ/tikzcd diagram and requires none for these formulas.",
+    "consumer_reviews": [
+      {
+        "id": "thm-neural-operator-discretization-invariance",
+        "path": "items/thm-neural-operator-discretization-invariance.md",
+        "locus": "Statement, Facts F1 and Proof 5.1",
+        "affected_use": "The Statement requires partitions with maximal diameter tending to zero; F1 imports the raw quadrature conventions and step 5.1 applies the same normalized-tag reconstruction bridge to obtain finite-sampling supremum convergence.",
+        "disposition": "unchanged_sound",
+        "reason": "Its explicit shrinking-mesh hypothesis supplies the added premise. The Banach reconstruction and integral-first alternatives are unchanged.",
+        "necessary_repair": false
+      },
+      {
+        "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+        "path": "items/ex-neural-operator-grid-refinement-vs-fixed-grid-network.md",
+        "locus": "Example and Verification 1.1–2.1",
+        "affected_use": "The constant-output integral is realized by n midpoint cells of length 1/n, and the cellwise modulus estimate proves convergence of this raw finite sample sum.",
+        "disposition": "unchanged_sound",
+        "reason": "These meshes have maximal diameter 1/n tending to zero; moreover the integral-only rule already factors through samples and its proof does not use the defective transfer implication.",
+        "necessary_repair": false
+      },
+      {
+        "id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+        "path": "items/cex-neural-operator-sup-norm-discretization-does-not-control-c1.md",
+        "locus": "Facts F2 and Counterexample 3.1–4.1",
+        "affected_use": "F2 imports the volume-weighted raw quadrature formula; step 3.1 uses dyadic cells of diameter 2^{-n}, and step 4.1 contrasts supremum convergence with divergent C1 derivative errors.",
+        "disposition": "unchanged_sound",
+        "reason": "The raw quadrature formula and stronger-norm caveat are unchanged. Its meshes already shrink and the constant input is reconstructed exactly.",
+        "necessary_repair": false
+      }
+    ],
+    "page_uses": [
+      {
+        "path": "library/machine-learning/neural-operators-and-physics-informed-learning.md",
+        "affected_use": "Frontmatter inventory lists the assigned algorithm; the page has no Markdown body or independent convergence assertion.",
+        "disposition": "unchanged_sound"
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-neural-operator-mesh-discretization.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 checked proofs; 0 failures; algorithm not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-neural-operator-mesh-discretization.md --json",
+        "exit_code": 0,
+        "result": "1 file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-neural-operator-mesh-discretization.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-37.proof-contracts.json --items alg-neural-operator-mesh-discretization --strict --json",
+        "exit_code": 0,
+        "result": "Assigned contract checked; ok true; no errors or warnings."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items alg-neural-operator-mesh-discretization",
+        "exit_code": 0,
+        "result": "Executed immediately after completing the repair review; copied both returned hashes into reviews."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this report and schedules ordinary frontier impact review, certification and renewed independent judgment; this fatal finding still counts in round 2."
+  }
+}

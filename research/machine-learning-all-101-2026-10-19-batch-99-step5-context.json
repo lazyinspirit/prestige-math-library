@@ -1,0 +1,359 @@
+{
+  "group": "ag",
+  "batches": [
+    "99"
+  ],
+  "pages_read": [
+    "verifiable-generation-and-test-time-sampling",
+    "verifiable-generation-and-test-time-sampling-examples"
+  ],
+  "items_read": [
+    "def-verifier-and-generation-protocol",
+    "alg-budgeted-verifier-guided-generation",
+    "lem-budgeted-verifier-generation-termination-and-calls",
+    "thm-independent-generation-success-and-verifier-error",
+    "lem-finite-response-likelihood-ratio-change-of-measure",
+    "alg-finite-group-relative-policy-update",
+    "lem-finite-group-relative-update-termination-and-calls",
+    "lem-finite-response-score-gradient-identities",
+    "thm-group-centered-score-estimator-factor",
+    "rem-reasoning-training-evidence-and-evaluation-targets",
+    "ex-equal-group-rewards-zero-advantages",
+    "ex-perfect-and-false-positive-verifiers",
+    "ex-repeated-dependent-copies-no-sampling-gain",
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy"
+  ],
+  "conventions": [
+    {
+      "convention": "Response sets are finite and nonempty. EOS ends the sampled prefix; exhausting the positive token budget appends an unsampled truncation marker.",
+      "fixed_by": "def-verifier-and-generation-protocol",
+      "matters_for": [
+        "alg-budgeted-verifier-guided-generation",
+        "alg-finite-group-relative-policy-update",
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    },
+    {
+      "convention": "Policy masses are totally differentiable on an open parameter domain, positive on a fixed nonempty support and zero outside it. Scores are defined only on the support.",
+      "fixed_by": "def-verifier-and-generation-protocol",
+      "matters_for": [
+        "lem-finite-response-score-gradient-identities",
+        "thm-group-centered-score-estimator-factor",
+        "alg-finite-group-relative-policy-update"
+      ]
+    },
+    {
+      "convention": "Correctness C and verifier acceptance A are distinct supplied binary predicates. Rejection returns the first accepted sample; best-of-N maximizes the supplied score and resolves ties by the least response in a supplied strict total order.",
+      "fixed_by": "alg-budgeted-verifier-guided-generation",
+      "matters_for": [
+        "lem-budgeted-verifier-generation-termination-and-calls",
+        "thm-independent-generation-success-and-verifier-error",
+        "ex-perfect-and-false-positive-verifiers",
+        "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy"
+      ]
+    },
+    {
+      "convention": "Group standard deviation uses divisor G. A zero standard deviation sets all advantages to zero. Samples, rewards and advantages remain frozen during inner updates; the ratio is sequence-level and the penalty is exact forward KL.",
+      "fixed_by": "alg-finite-group-relative-policy-update",
+      "matters_for": [
+        "lem-finite-group-relative-update-termination-and-calls",
+        "ex-equal-group-rewards-zero-advantages",
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    },
+    {
+      "convention": "Sampling and exact evaluations are supplied terminating operations. The update additionally receives total exact gradient-decision and domain-membership oracles; their internal costs have no asserted uniform bound.",
+      "fixed_by": "alg-finite-group-relative-policy-update",
+      "matters_for": [
+        "lem-finite-group-relative-update-termination-and-calls"
+      ]
+    },
+    {
+      "convention": "The group-centering identities concern unnormalized rewards and independent draws from the same policy, with G ≥ 2. They do not assert unbiasedness after random standardization, clipping or old-policy sample reuse.",
+      "fixed_by": "thm-group-centered-score-estimator-factor",
+      "matters_for": [
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-verifier-and-generation-protocol",
+      "statement": "For each prompt, a finite response law has totally differentiable normalized masses on a fixed nonempty support, with separate supplied correctness and verifier predicates, finite rewards and selection scores, and a deterministic strict total tie order.",
+      "used_by": [
+        "alg-budgeted-verifier-guided-generation",
+        "thm-independent-generation-success-and-verifier-error",
+        "lem-finite-response-likelihood-ratio-change-of-measure",
+        "alg-finite-group-relative-policy-update",
+        "lem-finite-response-score-gradient-identities",
+        "thm-group-centered-score-estimator-factor"
+      ]
+    },
+    {
+      "id": "lem-finite-response-score-gradient-identities",
+      "statement": "For every parameter in the open domain of the finite fixed-support policy and every fixed finite reward r, the expected score is zero and the expected reward-weighted score equals the gradient of J, where J is the finite expected reward.",
+      "used_by": [
+        "thm-group-centered-score-estimator-factor"
+      ]
+    },
+    {
+      "id": "thm-independent-generation-success-and-verifier-error",
+      "statement": "With a perfect verifier and N independent draws of correctness probability p, rejection succeeds with probability 1−(1−p)^N. If every candidate has false-acceptance probability at most ε, any verifier-accepted output selected from the N candidates is incorrect with probability at most Nε, without independence. Adaptive conditional correctness probability at least p on every positive-probability no-success history bounds total failure by (1−p)^N.",
+      "used_by": [
+        "ex-perfect-and-false-positive-verifiers",
+        "ex-repeated-dependent-copies-no-sampling-gain",
+        "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    },
+    {
+      "id": "alg-finite-group-relative-policy-update",
+      "statement": "The finite procedure freezes old-policy groups and normalized advantages, uses a clipped sequence-ratio objective with exact forward KL, and applies supplied gradient-oracle updates only when the domain oracle accepts; it returns complete, undefined-gradient or invalid-update.",
+      "used_by": [
+        "lem-finite-group-relative-update-termination-and-calls",
+        "ex-equal-group-rewards-zero-advantages",
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    },
+    {
+      "id": "thm-group-centered-score-estimator-factor",
+      "statement": "For G ≥ 2 independent same-policy responses, E[G⁻¹ Σᵢ(Rᵢ−R̄)Sᵢ | q] = (1−1/G)∇J. Replacing R̄ by the leave-one-out mean makes the expectation ∇J.",
+      "used_by": [
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    },
+    {
+      "id": "lem-finite-response-likelihood-ratio-change-of-measure",
+      "statement": "For probability masses p,q on an enumerated finite nonempty set, with p(y)>0 implying q(y)>0, define ρ=p/q where q>0 and ρ=0 otherwise. For every real-valued f, Σqρf=Σpf; in particular Σqρ=1.",
+      "used_by": [
+        "alg-finite-group-relative-policy-update",
+        "rem-reasoning-training-evidence-and-evaluation-targets"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalized finite laws, finite additivity and probability bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Recursive finite sums and products, group averages and finite expectation expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable additivity, from which the success theorem derives finite additivity and subadditivity.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of response draws and generated sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Product probabilities for failure events and distinct response pairs.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Scalar weighted-sum expectations, extended coordinatewise for score vectors.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Linearity for bounded random variables on finite group and replica spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Total differentiability of policy masses and objective-gradient interpretation.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Coordinate interpretation of scalar-function gradients and vector score identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-total-derivatives",
+      "used_for": "Termwise differentiation of finite sums and fixed reward multiples.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of log policy masses.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The derivative of log at a positive policy mass is its reciprocal.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Existence and uniqueness of the nonnegative population standard deviation.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Finite real logarithms of positive policy/reference ratios.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Nonnegativity of squared deviations and positivity calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Closure of positive elements under addition and multiplication, and finite weighted inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-naturals-positive",
+      "used_for": "Positivity of the real embedding of G ≥ 2.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Positivity of 1/G.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-zero-mult",
+      "used_for": "Zero cases in squared deviations and finite arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-field",
+      "used_for": "Distributive finite-sum factorizations and arithmetic.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit choice assumption preserved when discussing the external trajectory-ratio lemma.",
+      "opened": true
+    },
+    {
+      "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+      "used_for": "The direction of full-horizon target-versus-behavior coverage.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "The target-integrability qualification retained in the evaluation remark.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-perfect-and-false-positive-verifiers",
+      "concern": "Facts & Assumptions says “Pr(C(c)=1)=3/4” and “Pr(C(w)=1)=0”. Here C is a supplied deterministic predicate and c is explicitly correct, so C(c)=1 is certain. The intended assumption is Pr(Y=c)=3/4 and Pr(Y=w)=1/4, with C(c)=1 and C(w)=0. The Example and its numerical verification use that intended law correctly.",
+      "severity": "presentation"
+    },
+    {
+      "id": "rem-reasoning-training-evidence-and-evaluation-targets",
+      "concern": "The opening paragraph defines verifier-selected accuracy as “the fraction correct among returned responses the verifier accepts” without addressing an empty accepted set. The protocol permits an always-rejecting verifier, so this denominator can be zero. State that the statistic is undefined when no response is accepted, or supply an explicit convention. The numerical example has positive acceptance probability and is unaffected.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-probability-measure",
+      "finding": "The Definition contains “with P(X)=1 ([[def-measure]])” and “probability space ([[def-measure-space]])”. Both hyperlinks interrupt the complete definition and have no following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-sum",
+      "finding": "The Definition contains inline supplier links throughout, beginning “R is the complete ordered field ([[def-complete-ordered-field]])”. These interrupt the defining section; no Definition references section follows it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure",
+      "finding": "The Definition includes “a sigma-algebra on X ([[def-sigma-algebra]])” and “the nonnegative extended sum of [[def-nonnegative-extended-series]]”. The links remain inside the defining section rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "The Definition says the generated sigma-algebras are independent “in the sense of [[def-independent-sigma-algebras-and-events]]” and later links [[def-sigma-algebra-generated-by-a-function]]. These hyperlinks remain inside the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-sigma-algebras-and-events",
+      "finding": "The Definition includes “in the sense of [[def-independent-families-of-event-classes]]”. This hyperlink interrupts the defining section and has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "The Definition inserts “([[def-euclidean-linear-map]])” after the candidate linear map and later says its norm and metric exist “by [[def-norm-and-normed-space]]”. These links remain inside the complete defining section rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-jacobian-matrix-and-gradient",
+      "finding": "The Definition includes “standard basis ([[lem-standard-basis-of-f-n]])” and “those of [[def-directional-and-partial-derivatives]]”. Both links remain inside the defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-square-roots",
+      "finding": "The Statement begins “Let F be a complete ordered field ([[def-complete-ordered-field]])”. This inline supplier link interrupts the theorem statement; no Statement references section follows.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that” the exponential is a bijection. The hyperlink remains inside the complete definition rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-sign-rules",
+      "finding": "The Statement begins “Let F be an ordered field ([[def-ordered-field]])”. This hyperlink remains inside the theorem statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-ordered-field",
+      "finding": "The Definition begins “An ordered field is a field F ([[def-field]])”. This hyperlink interrupts the defining section and has no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-naturals-positive",
+      "finding": "The Statement says “with field structure as in [[def-field]]” before giving its recursive convention and conclusions. The hyperlink remains inside the complete statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-inverse-positive",
+      "finding": "The Statement begins “Let F be an ordered field ([[def-ordered-field]])”. This inline supplier link remains inside the statement rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-zero-mult",
+      "finding": "The Statement reads “In any field F ([[def-field]]), for every a” multiplication by zero is zero. The hyperlink interrupts the complete statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The defining blockquote reads “Every family of nonempty sets has a choice function ([[def-choice-function]])”. The hyperlink remains inside the Definition rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "finding": "The Definition says the positive and negative parts “are measurable by [[prop-closure-properties-of-measurable-functions-used-by-the-integral]]” and includes “([[def-complex-conjugate-real-imaginary-part-and-modulus]])” in the complex-function clause. Both links remain inside the complete defining section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "verifiable-generation-and-test-time-sampling",
+      "to": "offline-reinforcement-learning-and-off-policy-evaluation",
+      "faithful": true,
+      "note": "Opened the supplier page, dataset definition and complete trajectory-ratio lemma. The owned remark preserves AC, stationary policies, a common fixed start and transition/reward law, full-horizon absolute continuity and target integrability. The finite response cancellation lemma expressly avoids claiming an arbitrary trajectory-space result. Checking supplier-to-consumer and consumer-to-supplier reveals no strengthened cited conclusion."
+    },
+    {
+      "from": "verifiable-generation-and-test-time-sampling",
+      "to": "policy-gradients-reinforce-and-actor-critic",
+      "faithful": true,
+      "note": "Opened the supplier page and differentiable-policy definition. The actual imports are normalization, total differentiability, positive fixed support and logarithmic scores. The owned finite score lemma proves its identities locally; it does not import an episodic policy-gradient theorem. The group theorem retains independent same-policy sampling and excludes random normalization, clipping and frozen-policy reuse from its unbiasedness conclusions."
+    }
+  ]
+}

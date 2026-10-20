@@ -40,6 +40,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-kullback-leibler-is-nonnegative.json
   judge:
     model: "gpt-6-luna"
     verdict: pass
@@ -54,14 +55,14 @@ sources:
 ## Statement
 
 Assume AC and use the directional convention of
-[[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one
+Kullback–Leibler divergence. For probability measures $P,Q$ on one
 measurable space, $D(P\|Q)\ge0$, and $D(P\|Q)=0$ if and only if $P=Q$.
 
 There is also the following normalized-density identity. Let
 $(\mathsf X,\mathcal A,\mu)$ be a sigma-finite measure space: it is a set
-with a sigma-algebra and measure ([[def-measure-space]]), and there is a
+with a sigma-algebra and measure (Measure spaces), and there is a
 countable measurable cover by sets of finite $\mu$-measure
-([[def-finite-sigma-finite-and-semifinite-measures]]). Let
+(Finite, sigma-finite, and semifinite measures). Let
 $\gamma:\mathsf X\to[0,\infty)$ be a finite-valued measurable function with
 $Z:=\int\gamma\,d\mu\in(0,\infty)$, and put $\pi=\gamma/Z$. Let
 $q:\mathsf X\to[0,\infty)$ be a finite-valued measurable probability density,
@@ -73,6 +74,14 @@ $$\log Z =\int q(\log\gamma-\log q)\,d\mu +D(q\,\mu\|\pi\,\mu).$$
 In particular, the first integral is at most $\log Z$. This identity concerns
 normalized densities only; it does not assert posterior existence for an
 unspecified statistical model.
+
+## Statement references
+
+[[def-kullback-leibler-divergence]]
+
+[[def-measure-space]]
+
+[[def-finite-sigma-finite-and-semifinite-measures]]
 
 ## Facts & Assumptions
 

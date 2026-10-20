@@ -1,0 +1,43 @@
+{
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "command": "node tools/proof-layout.mjs items/thm-exp3-expected-regret.md",
+        "result": {
+          "chunk_id": "a37e59",
+          "wall_time_seconds": 1.354195886,
+          "exit_code": 0,
+          "original_token_count": 11,
+          "output": "proof-layout: 1 items, 10 steps, 0 defects\n"
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-exp3-expected-regret.md",
+        "result": {
+          "chunk_id": "10ad3e",
+          "wall_time_seconds": 0.4291486,
+          "exit_code": 1,
+          "original_token_count": 2107,
+          "output": "Warning: truncated output (original token count: 2107)\nTotal output lines: 74\n\nREPAIR items/thm-exp3-expected-regret.md: passes only after auto-repair — adopt the canonical form:\n  | **Given:** A finite horizon $n\\ge1$, $k>1$ arms, reward vectors in $[0,1]^k$, Exp3 with any $\\eta>0$ for its procedure properties and with the displayed tuned rate for the regret guarantees, and its probability space of learner draws. In the optional past-adaptive case each reward vector is selected from the pre-action history.\n  | \n  | [A1] [[def-adversary-and-feedback-model]]: an oblivious adversary fixes the entire reward sequence before learner randomization; a non-anticipating adversary selects the current vector from past history before the current action; a reactive adversary may select it after seeing that action.\n  | \n  | [F1] [[alg-exp3]]: $P_{t,i}=\\exp(\\eta\\widehat S_{t-1,i})/\\sum_j\\exp(\\eta\\widehat S_{t-1,j})$.\n  | \n  | [F2] [[def-bandit-importance-weighted-estimator]]: $Y_t=1-X_t$, $y_{t,i}=1-x_{t,i}$, $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}Y_t/P_{t,i}$, and $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$.\n  | \n  | [F3] [[lem-bandit-importance-weighted-estimator-has-conditional-moments]]: $\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i}$ and $\\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=y_{t,i}^2/P_{t,i}$.\n  | \n  | [F4] [[lem-exp-negative-argument-second-order-upper-bound]]: $\\exp(z)\\le1+z+z^2/2$ for every real $z\\le0$.\n  | \n  | [F5] [[lem-exponential-dominates-one-plus-x]]: $1+u\\le\\exp(u)$ for every real $u$.\n  | \n  | [F6] [[thm-exponential-addition-formula]]: $\\exp(u+v)=\\exp(u)\\exp(v)$ for all real $u,v$.\n  | \n  | [F7] [[cor-exponential-reciprocal-and-positivity]]: $\\exp(u)>0$ and $\\exp(-u)=1/\\exp(u)$ for all real $u$.\n  | \n  | [F8] [[thm-exponential-is-strictly-increasing]]: the real exponential is strictly increasing.\n  | \n  | [F9] [[def-natural-logarithm]]: for $q>0$, $\\exp(\\log q)=q$.\n  | \n  | [F10] [[thm-natural-logarithm-laws]]: $\\log$ is strictly increasing.\n  | \n  | [F11] [[def-online-decision-protocol]]: the learner chooses from prior history before current-round feedback.\n  | \n  | [F12] [[def-filtration-and-filtered-probability-space]]: $\\mathcal F_{t-1}$ records the information available before the round-$t$ action.\n  | \n  | [F13] [[def-conditional-expectation-given-a-sigma-algebra]]: conditional expectation versions have the same integrals as the original variable over every event in the conditioning sigma-algebra.\n  | \n  | [F14] [[cor-expectation-linearity-monotonicity-and-modulus-bound]]: expectation is linear on integrable random variables and preserves almost-sure order.\n  | \n  | [F15] [[def-expectation-of-a-nonnegativ…807 tokens truncated…h such history, [F3] and $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ give the conditional mean $\\mathbb E[\\widehat X_{t,i}\\mid\\mathcal F_{t-1}]=x_{t,i}$ by the finite conditional sum. Averaging these sums over histories and using [F14] and [F19] gives $\\mathbb E[\\widehat S_{n,i}]=\\mathbb E[\\sum_tx_{t,i}]$. [A1, F2, F3, F11, F12, F13, F14, F19]\n  | \n  | 1.5 On every round and every action outcome, $\\sum_jP_{t,j}\\widehat X_{t,j}=1-\\sum_jP_{t,j}\\widehat Y_{t,j}=1-Y_t=X_t$, because only the sampled arm contributes to the middle sum. [F2, algebra]\n  | \n  | 2.1 For each $t$, set $W_t=\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t,j})$ and $V_t=\\sum_{j=1}^kP_{t,j}\\widehat Y_{t,j}^{2}$. By [F1], [F7], and step 1.1, $W_t$ is positive and finite, and $P_t$ is a probability vector. [F1, F7, step 1.1]\n  | \n  | 3.1 By [F1]–[F2], $W_t/W_{t-1}=\\sum_{j=1}^kP_{t,j}\\exp(\\eta\\widehat X_{t,j})=\\exp(\\eta)\\sum_{j=1}^kP_{t,j}\\exp(-\\eta\\widehat Y_{t,j})$. Each $\\widehat Y_{t,j}\\ge0$, so [F4] with $z=-\\eta\\widehat Y_{t,j}$ gives $W_t/W_{t-1}\\le\\exp(\\eta)(1-\\eta\\sum_jP_{t,j}\\widehat Y_{t,j}+\\eta^2V_t/2)$. Put $u_t=-\\eta\\sum_jP_{t,j}\\widehat Y_{t,j}+\\eta^2V_t/2$. By [F5] and $\\sum_jP_{t,j}\\widehat X_{t,j}=1-\\sum_jP_{t,j}\\widehat Y_{t,j}$, this is at most $\\exp(\\eta+u_t)=\\exp(\\eta\\sum_jP_{t,j}\\widehat X_{t,j}+\\eta^2V_t/2)$. [F1, F2, F4, F5, step 2.1, algebra]\n  | \n  | 4.1 Multiplying step 3.1 over $t=1,\\ldots,n$ and using [F6] gives $W_n/W_0\\le\\exp(\\eta\\sum_{t=1}^n\\sum_jP_{t,j}\\widehat X_{t,j}+\\eta^2\\sum_{t=1}^nV_t/2)$. Here $W_0=k$ by [F17]–[F18], and $W_n\\ge\\exp(\\eta\\widehat S_{n,i})$ for every $i$ by [F19]. Since $k=\\exp(\\log k)$ by [F9], strict increase [F8] and $\\eta>0$ yield $\\widehat S_{n,i}-\\sum_{t=1}^n\\sum_jP_{t,j}\\widehat X_{t,j}\\le\\log k/\\eta+(\\eta/2)\\sum_{t=1}^nV_t$ for every arm $i$. [F6, F8, F9, F17, F18, F19, step 3.1, algebra]\n  | \n  | 5.1 For the oblivious case set $R_{n,i}=\\sum_tx_{t,i}-\\mathbb E[\\sum_tX_t]$; for the past-adaptive case set $R_{n,i}=\\mathbb E[\\sum_t(x_{t,i}-X_t)]$. By steps 1.4–2.1, both equal $\\mathbb E[\\widehat S_{n,i}-\\sum_t\\sum_jP_{t,j}\\widehat X_{t,j}]$. Taking expectations in step 4.1, using [F14]–[F16], and applying step 1.3 gives $R_{n,i}\\le\\log k/\\eta+\\eta nk/2$ for every $i$. [F14, F15, F16, step 4.1, step 1.3, step 1.4, step 1.5, algebra]\n  | \n  | 6.1 Using $\\eta>0$ from step 1.1, substitution gives $\\log k/\\eta=\\eta nk/2=\\sqrt{nk\\log k/2}$. The per-arm bound in step 5.1 therefore equals $\\sqrt{2nk\\log k}$; taking the finite maximum over $i$ proves both regret bounds in the Statement. [given, step 1.1, step 5.1, algebra] ∎\n\n1 checked, 1 failing\n"
+        }
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "command": "node tools/rendercheck.mjs items/thm-exp3-expected-regret.md",
+        "result": {
+          "chunk_id": "23f5da",
+          "wall_time_seconds": 0.309420998,
+          "exit_code": 0,
+          "original_token_count": 56,
+          "output": "\nOK — 1 file(s): no wikilink inside math, no nested or unbalanced\ndelimiters, no multiline display block, every math span parses under the real\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.\n"
+        }
+      }
+    }
+  ]
+}

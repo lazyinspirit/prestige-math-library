@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-a-double-sum-over-finite-index-sets-may-be-interchanged.json
   precheck: pass
   verified:
     model: claude-fable-5
@@ -48,15 +49,25 @@ is finite and
 $$\sum_{i \in S}\Big(\sum_{j \in T} a_{ij}\Big) \;=\; \sum_{p \in S \times T} a_p \;=\; \sum_{j \in T}\Big(\sum_{i \in S} a_{ij}\Big),$$
 
 all three sums being the sums over a finite index set of
-[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]] when the
-values are real and by [[def-nat-finite-sum-and-product]] when they are natural.
+The sum $\sum_{i \in S} a_i$ over a finite index set, and its product form, carried by Finite sums and finite products, by recursion when the
+values are real and by Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$ when they are natural.
 
-**This is not a clause of [[thm-sum-rule]].** That theorem splits one sum along a
+**This is not a clause of The sum rule: a finite disjoint union is finite with $\lvert A \cup B\rvert = \lvert A\rvert + \lvert B\rvert$ and $\lvert\bigcup_{i \in I} A_i\rvert = \sum_{i \in I}\lvert A_i\rvert$, and a sum over a finite index set splits along a partition.** That theorem splits one sum along a
 partition of *its own* index set; the identity above exchanges the roles of two
 *different* index sets, and it is what an argument that counts a set of pairs in
 two ways needs. Both outer index sets may be empty, in which case all three
 quantities are $0$ (respectively $1$ for the product form of the underlying
 recursion), since a sum over the empty index set is the empty sum.
+
+## Statement references
+
+[[def-sum-over-a-finite-index-set]]
+
+[[def-finite-sum]]
+
+[[def-nat-finite-sum-and-product]]
+
+[[thm-sum-rule]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,176 @@
+--- /dev/null
++++ b/tools/step3-owner-source-identical-reversion.mjs
+@@ -0,0 +1,87 @@
++// Explicit source-identical reversion continuity; no new verdict or review credit.
++import {readFileSync,lstatSync} from 'node:fs';
++import {resolve,relative,sep} from 'node:path';
++import {createHash} from 'node:crypto';
++const sha=x=>createHash('sha256').update(x).digest('hex');
++const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
++const hash=x=>sha(JSON.stringify(canonical(x))??'undefined');
++const RUN='machine-learning-all-101-2026-10-19',ID='lem-du-neighborhood-gram-and-hessian-control';
++export const SOURCE_IDENTICAL_REVERSION_POLICY='step3-source-identical-reversion-risk-only-v1';
++const PINS={
++  "native_result": {
++    "path": "research/machine-learning-all-101-2026-10-19-dispatch/alpha-3a-batch-45.attempt-1.result.json",
++    "sha256": "c6102a0710049d0229e407a5b875f5ea811f750e25412846dbfff3ce9ae71e91"
++  },
++  "native_prompt": {
++    "path": "research/machine-learning-all-101-2026-10-19-dispatch/alpha-3a-batch-45.attempt-1.prompt.md",
++    "sha256": "fe7117500f4c94eef804ec8194aa849bf5932fda737b7b2d0946b6c38b9223cb"
++  },
++  "native_report": {
++    "path": "research/machine-learning-all-101-2026-10-19-alpha-batch-45-3a.md",
++    "sha256": "631b564bdb7a9bc7fa44a3966460a9bb5de7ef321c972748913b81dc08f4ab24"
++  },
++  "native_assignment": {
++    "path": "research/machine-learning-all-101-2026-10-19-alpha-batch-45-3a-order.task.md",
++    "sha256": "fe426ce94708d517f1f11672adba6826484fc43ff30a476af7c4aabba8320c6e"
++  },
++  "native_decisions": {
++    "path": "research/machine-learning-all-101-2026-10-19-owner-step3-acceptance-continuity/your-proposal/du-reversion-evidence/native-decision-observation.json",
++    "sha256": "17893c5dc9f646f0422ec32c33490fb23ec88639aea26cb302296a3a9afb6b43"
++  },
++  "pre_snapshot": {
++    "path": "research/machine-learning-all-101-2026-10-19-step3-hash-45-pre.json",
++    "sha256": "9bdbc6cf2efb60cb7296061d39aec2928e13c18d763e7176022da100c18e146d"
++  },
++  "pre_source": {
++    "path": "research/machine-learning-all-101-2026-10-19-owner-step3-authenticated-preimages/preimage/items/lem-du-neighborhood-gram-and-hessian-control.md",
++    "sha256": "226fbab7c7225ee0dec857494c557b2797d632b60d60d234740e25f23d815076"
++  },
++  "pre_manifest": {
++    "path": "research/machine-learning-all-101-2026-10-19-owner-step3-authenticated-preimages/preimage/research/machine-learning-all-101-2026-10-19-batch-45.pages.json",
++    "sha256": "937d05598cdaea4754324365678222306f6605d8169a68e332b0e24d69d90880"
++  },
++  "pre_contract": {
++    "path": "research/machine-learning-all-101-2026-10-19-owner-step3-authenticated-preimages/preimage/research/machine-learning-all-101-2026-10-19-batch-45.proof-contracts.json",
++    "sha256": "810933e82173e4b93767964aa192562df786d666cddb6401f27e8ac747337710"
++  }
++};
++const REVIEW='ff2cd071474090bcb25de8838b3725de4ad6bb9f3a703ed9e1f98d20c05b5b16';
++const read=(root,path)=>{
++ if(typeof path!=='string'||path.startsWith('/')||path.split('/').some(x=>!x||x==='.'||x==='..'))throw Error('unsafe path');
++ let current=resolve(root);for(const part of path.split('/')){current=resolve(current,part);const s=lstatSync(current);if(s.isSymbolicLink())throw Error('symlink');}
++ if(!lstatSync(current).isFile()||relative(resolve(root),current).startsWith('..'+sep))throw Error('not regular');
++ return readFileSync(current,'utf8');
++};
++const manifestRow=(doc,id)=>{
++ const pages=Array.isArray(doc)?doc:doc?.pages;if(!Array.isArray(pages))throw Error('manifest');
++ const rows=pages.flatMap(p=>(p.items??[]).filter(x=>x?.id===id).map(x=>({...x,__step4_page_id:p.id})));
++ if(rows.length!==1)throw Error('unique home');return rows[0];
++};
++const semanticDecision=d=>{const {subject_sha256,...rest}=d;return rest;};
++export function sourceIdenticalReversionContinuity(root,run,decision,target,before,current,entry){
++ if(!entry||entry.policy!==SOURCE_IDENTICAL_REVERSION_POLICY||entry.id!==decision?.id||entry.obligation!==decision?.obligation)return false;
++ try{
++  const allowed=['version','policy','run','id','obligation','owner_identity','reason','target_sha256','pre_carrier_sha256','current_carrier_sha256','risk_review_sha256','independent_execution_coverage_adopted',...Object.keys(PINS)];
++  if(Object.keys(entry).some(k=>!allowed.includes(k))||entry.version!==1||entry.run!==run||run!==RUN||decision.id!==ID||entry.owner_identity!=='/root'||typeof entry.reason!=='string'||entry.reason.trim().length<80||entry.independent_execution_coverage_adopted!==false)return false;
++  if(decision.obligation!==`touched:45:${ID}`||decision.route!=='touched'||decision.verdict!=='reverted_change'||target.id!==ID||String(target.batch)!=='45'||target.route!=='touched'||target.stabilized||target.added||entry.target_sha256!==hash(target)||entry.pre_carrier_sha256!==hash(before)||entry.current_carrier_sha256!==hash(current))return false;
++  const data={};for(const[k,pin]of Object.entries(PINS)){
++   const ref=entry[k];if(!ref||Object.keys(ref).sort().join(',')!=='path,sha256'||ref.path!==pin.path||ref.sha256!==pin.sha256)return false;
++   const text=read(root,ref.path);if(sha(text)!==pin.sha256)return false;data[k]=text;
++  }
++  const result=JSON.parse(data.native_result),snapshot=JSON.parse(data.pre_snapshot),native=JSON.parse(data.native_decisions);
++  if(result.run!==run||result.role!=='alpha'||result.label!=='3a-batch-45'||result.attempt!==1||result.ok!==true||result.exit_code!==0||result.timed_out===true||result.covers?.length!==1||String(result.covers[0])!=='45'||result.terminal_summary?.task_completed!==true||result.terminal_summary?.task_aborted===true)return false;
++  if(snapshot.version!==2||snapshot.run!==run||String(snapshot.batch)!=='45'||snapshot.label!=='pre'||!Array.isArray(snapshot.manifest)||!snapshot.manifest.includes(ID)||hash(snapshot.hashes?.[ID])!==hash(before))return false;
++  if(native.run!==run||native.group!=='batch-45'||!Array.isArray(native.decisions))return false;
++  const originals=native.decisions.filter(d=>d.obligation===decision.obligation);if(originals.length!==1||hash(semanticDecision(originals[0]))!==hash(semanticDecision(decision)))return false;
++  if(!data.native_assignment.includes(`batch 45, ${ID} — touched, risk review`)||!data.native_report.includes(ID)||!data.native_report.includes('reverted_change')||!data.native_prompt.includes('3a-batch-45'))return false;
++  const source=read(root,`items/${ID}.md`),manifest=JSON.parse(read(root,`research/${run}-batch-45.pages.json`)),contracts=JSON.parse(read(root,`research/${run}-batch-45.proof-contracts.json`));
++  if(source!==data.pre_source||sha(source)!==before.item_sha256||current.item_sha256!==before.item_sha256)return false;
++  const preRow=manifestRow(JSON.parse(data.pre_manifest),ID),row=manifestRow(manifest,ID);
++  if(hash(row)!==hash(preRow)||hash(row)!==before.manifest_sha256||current.manifest_sha256!==before.manifest_sha256)return false;
++  const old=JSON.parse(data.pre_contract)?.contracts?.[ID],now=contracts?.contracts?.[ID];
++  if(!old||!now||Object.hasOwn(old,'risk_review')||!Object.hasOwn(now,'risk_review')||hash(old)!==before.contract_sha256||hash(now)!==current.contract_sha256)return false;
++  const {risk_review,...rest}=now;
++  if(hash(rest)!==hash(old)||risk_review?.status!=='complete'||risk_review.reviewer!=='alpha-batch-45'||typeof risk_review.notes!=='string'||!risk_review.notes.trim()||hash(risk_review)!==REVIEW||entry.risk_review_sha256!==REVIEW)return false;
++  return true;
++ }catch{return false;}
++}
+--- /dev/null
++++ b/tools/step3-owner-source-identical-reversion.test.mjs
+@@ -0,0 +1,44 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,cpSync,readFileSync,writeFileSync,rmSync,existsSync,symlinkSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {resolve,join} from 'node:path';
++import {createHash} from 'node:crypto';
++import {sourceIdenticalReversionContinuity as check} from './step3-owner-source-identical-reversion.mjs';
++const base=resolve('research/machine-learning-all-101-2026-10-19-owner-step3-du-reversion/your-proposal');
++const available=existsSync(join(base,'fixture-inputs.json')),actual={skip:!available};
++const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
++const hash=x=>createHash('sha256').update(JSON.stringify(canonical(x))).digest('hex');
++function fixture(t){const root=mkdtempSync(join(tmpdir(),'du-reversion-'));t.after(()=>rmSync(root,{recursive:true,force:true}));cpSync(join(base,'fixture'),root,{recursive:true});const x=JSON.parse(readFileSync(join(base,'fixture-inputs.json')));return {...x,root,check(){return check(root,this.run,this.decision,this.target,this.before,this.current,this.entry);},json(path,fn){const p=join(root,path),d=JSON.parse(readFileSync(p));fn(d);writeFileSync(p,JSON.stringify(d));}};}
++test('no registration preserves strict default without any file access',()=>assert.equal(check('/nonexistent','r',{id:'i',obligation:'touched:1:i'}, {},{}, {},undefined),false));
++test('actual native reversion admits only exact added complete native risk review',actual,t=>{const f=fixture(t);assert.equal(f.check(),true);assert.equal(f.decision.verdict,'reverted_change');});
++const changes={
++ 'wrong policy':f=>f.entry.policy+='other',
++ 'wrong version':f=>f.entry.version=2,
++ 'unknown field':f=>f.entry.waiver=true,
++ 'wrong run':f=>f.run='other',
++ 'wrong owner':f=>f.entry.owner_identity='/root/other',
++ 'execution coverage adopted':f=>f.entry.independent_execution_coverage_adopted=true,
++ 'wrong native verdict':f=>f.decision.verdict='accepted_repair',
++ 'wrong route':f=>f.decision.route='flagged',
++ 'wrong target':f=>f.target.id='lem-other',
++ 'stabilized target':f=>f.target.stabilized=true,
++ 'new item':f=>f.target.added=true,
++ 'changed native evidence':f=>f.decision.evidence+=' new',
++ 'changed native ledger':f=>f.decision.defect_ids=['unrelated'],
++ 'pre carrier altered':f=>f.before.item_sha256='0'.repeat(64),
++ 'current carrier altered':f=>f.current.contract_sha256='0'.repeat(64),
++ 'target binding altered':f=>f.entry.target_sha256='0'.repeat(64),
++ 'changed source':f=>writeFileSync(join(f.root,'items/'+f.decision.id+'.md'),readFileSync(join(f.root,'items/'+f.decision.id+'.md'),'utf8')+'\n'),
++ 'changed manifest':f=>f.json(`research/${f.run}-batch-45.pages.json`,d=>d.find(p=>p.items.some(x=>x.id===f.decision.id)).items.find(x=>x.id===f.decision.id).title+=' changed'),
++ 'contract field changed besides review':f=>f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>d.contracts[f.decision.id].derivations[0].claim+=' changed'),
++ 'review missing':f=>f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>delete d.contracts[f.decision.id].risk_review),
++ 'review incomplete':f=>f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>d.contracts[f.decision.id].risk_review.status='pending'),
++ 'review different notes even rebound carrier':f=>{f.json(`research/${f.run}-batch-45.proof-contracts.json`,d=>{d.contracts[f.decision.id].risk_review.notes+=' changed';f.current.contract_sha256=hash(d.contracts[f.decision.id]);f.entry.current_carrier_sha256=hash(f.current);});},
++ 'missing original snapshot':f=>rmSync(join(f.root,f.entry.pre_snapshot.path)),
++ 'forged snapshot with updated supplied hash':f=>{f.json(f.entry.pre_snapshot.path,d=>d.manifest=[]);f.entry.pre_snapshot.sha256=createHash('sha256').update(readFileSync(join(f.root,f.entry.pre_snapshot.path))).digest('hex');},
++ 'symlink source':f=>{const p=join(f.root,'items/'+f.decision.id+'.md');rmSync(p);symlinkSync(join(f.root,f.entry.pre_source.path),p);},
++};
++for(const[name,mutate]of Object.entries(changes))test('reject '+name,actual,t=>{const f=fixture(t);mutate(f);assert.equal(f.check(),false);});
++for(const key of ['native_result','native_prompt','native_report','native_assignment','native_decisions','pre_snapshot','pre_source','pre_manifest','pre_contract'])test('reject altered authenticated '+key,actual,t=>{const f=fixture(t);writeFileSync(join(f.root,f.entry[key].path),readFileSync(join(f.root,f.entry[key].path),'utf8')+'\n');assert.equal(f.check(),false);});
++test('normal root restamping changes only subject hash, never inherited native semantics',actual,t=>{const f=fixture(t);f.decision.subject_sha256=hash(f.current);assert.equal(f.check(),true);});
+--- /dev/null
++++ b/tools/step3-owner-source-identical-reversion.md
+@@ -0,0 +1,15 @@
++# Source-identical native reversion with an added risk review
++
++The ordinary `reverted_change` rule remains strict equality to the pre-reader carrier. `source_identical_reversions` in the version-1 run owner repair evidence is an explicit opt-in for the authenticated batch45 DU reversion. Policy `step3-source-identical-reversion-risk-only-v1` supplies continuity evidence, never a new verdict, proof review, ledger disposition or native coverage claim.
++
++This first policy deliberately supports only `machine-learning-all-101-2026-10-19`, batch45, `lem-du-neighborhood-gram-and-hessian-control`. It pins the actual immutable successful Alpha result and prompt, completed report, generated assignment, original complete decision archive and PRE snapshot/full source/full manifest/full contract. Each evidence reference must match the known native case bytes; regular files and nonsymlink paths are required. No operational log or transcript reference is added to the registry or closure.
++
++The original and current decision must have identical semantics, including verdict, evidence and defect IDs. Only `subject_sha256` may differ through ordinary root restamping. The target must remain the original nonadded, nonstabilized touched obligation. The current carrier and target are independently bound by the evidence entry.
++
++Current source bytes must equal the full authenticated PRE source. The unique current manifest item with its page identity must equal the PRE projection. The selected PRE contract must match the original snapshot. PRE must have no `risk_review`; removing that one added key from the current contract must reproduce the complete PRE contract. The added review must be the exact complete native Alpha45 review, with its original reviewer and notes. Any other contract change fails. Whole archive files remain authenticated, while equality concerns the assigned item's selected projections rather than unrelated batch rows.
++
++The helper only answers this carrier-comparison question. Ordinary decision stamping, native success/authentication, ledger ownership/disposition, risk checks, scope routing, source validation and all gates remain required. Invalid or absent opt-in evidence cannot authorize a reversion exception. The original findings, native decisions and append-only history remain unchanged.
++
++Root integrates the two exact substring operations in `integration-operations.json`, installs the new module/docs/tests, then independently approves and merges `evidence-entry.json` as one entry in `source_identical_reversions`, preserving other registry keys. No full-file scope or registry replacement is proposed.
++
++Run the focused test with `node --test tools/step3-owner-source-identical-reversion.test.mjs`. Its actual-native cases use the separately archived operational fixture under `research/machine-learning-all-101-2026-10-19-owner-step3-du-reversion/your-proposal/`; they explicitly skip when that optional fixture is unavailable. The absent-registration fail-closed test always runs. Recorded operational results are fixture checks, not native gates or mathematical acceptance.
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -38,6 +38,7 @@
+ import { loadRequiredPageRoutes, requiredPageCarrier, requiredPageVerdictAllowed } from './step3-owner-required-page-routes.mjs';
+ import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
+ import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
++import { sourceIdenticalReversionContinuity } from './step3-owner-source-identical-reversion.mjs';
+ import { unchangedPageCausalRepair } from './step3-owner-unchanged-page-repairs.mjs';
+ import { stabilizedSourceIdenticalAcceptanceContinuity } from './step3-owner-stabilized-source-identical-continuity.mjs';
+ 
+@@ -1915,7 +1916,9 @@
+                   stabilizedSourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
+                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
+               }
+-              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
++              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)
++                && !(ownerEvidence?.source_identical_reversions ?? []).some(entry =>
++                  sourceIdenticalReversionContinuity(ROOT, run, decision, target, preValue, currentValue, entry))) {
+                 error('decision-not-applied', `[${target.id}] reverted_change was not restored to the pre-reader state`);
+               }
+               if (decision.verdict === 'amended_repair') {

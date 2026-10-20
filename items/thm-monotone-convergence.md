@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-monotone-convergence.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -34,25 +35,41 @@ sources:
 
 ## Statement
 
-Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let
+Let $(x_k)$ be a sequence of reals (Sequences of reals: bounded, eventually, frequently, tails, subsequences) and let
 $S = \{x_k : k \in \mathbb{N}\}$ be its range.
 
-1. If $(x_k)$ is nondecreasing ([[def-monotone-sequence]]) and $S$ is bounded
-   above ([[def-bounded-set]]), then $(x_k)$ converges ([[def-real-limit]]) and
+1. If $(x_k)$ is nondecreasing (Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences) and $S$ is bounded
+   above (Lower bound, bounded below, bounded set), then $(x_k)$ converges (Limits and Cauchy sequences of reals) and
    $$\lim_{k} x_k = \sup S .$$
 2. If $(x_k)$ is nonincreasing and $S$ is bounded below, then $(x_k)$ converges
    and $$\lim_{k} x_k = \inf S .$$
 
 Both suprema and infima exist under the stated hypotheses: $S$ is nonempty, so
-the least-upper-bound property ([[def-complete-ordered-field]]) supplies the
-first and [[thm-infimum-property]] the second, and each is unique
-([[lem-sup-unique]]).
+the least-upper-bound property (Complete ordered field (least-upper-bound property)) supplies the
+first and Every nonempty set bounded below has an infimum the second, and each is unique
+(Suprema and infima are unique).
 
 This is the first place in this track where the least-upper-bound property
 produces a **limit**. Everything on the sequences page held in any Archimedean
 ordered field; the theorem below does not, and the sequence of decimal
 truncations of $\sqrt 2$ inside $\mathbb{Q}$ is the standard witness of its
 failure there.
+
+## Statement references
+
+[[def-sequence]]
+
+[[def-monotone-sequence]]
+
+[[def-bounded-set]]
+
+[[def-real-limit]]
+
+[[def-complete-ordered-field]]
+
+[[thm-infimum-property]]
+
+[[lem-sup-unique]]
 
 ## Facts & Assumptions
 

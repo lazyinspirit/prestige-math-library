@@ -1,0 +1,1199 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-gaussian-precision-zero-conditional-independence",
+    "lem-graphical-lasso-profiled-gaussian-likelihood",
+    "def-restricted-boltzmann-machine",
+    "thm-graphical-lasso-convexity-and-kkt",
+    "ex-three-node-gaussian-chain",
+    "ex-graphical-lasso-penalty-sparsity-threshold",
+    "ex-rbm-visible-units-conditionally-independent-given-hidden",
+    "lem-graphical-lasso-finite-budget-properties"
+  ],
+  "contracts": {
+    "thm-gaussian-precision-zero-conditional-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-conditional-density-formula",
+          "source_section": "Statement",
+          "quote": "Let $(E,\\mathcal S,\\mu)$ and $(T,\\mathcal T,\\nu)$ be sigma-finite measure spaces. Let a joint probability $\\lambda$ on $E\\times T$ have nonnegative product-measurable density $p:E\\times T\\to[0,\\infty]$ relative to $\\mu\\times\\nu$. A fixed probability $\\rho$ on $(E,\\mathcal S)$ is supplied. Put\n$$m(y)=\\int_E p(x,y)\\,\\mu(dx),\\qquad D=\\{y:0<m(y)<\\infty\\},$$\n$$K(y,A)=\\begin{cases}\\displaystyle\\frac{\\int_Ap(x,y)\\,\\mu(dx)}{m(y)},&y\\in D,\\\\ \\rho(A),&y\\notin D.\\end{cases}$$\n\nThen K is an everywhere probability kernel from T to E. If $\\beta$ is the second marginal of $\\lambda$, then $\\beta(D)=1$ and\n$$\\lambda(A\\times B)=\\int_B K(y,A)\\,\\beta(dy).$$\n\nFor any random elements X,Y with joint law $\\lambda$, $K(Y,\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$. These event identities require no AC. If interpreted with the library's conditional-expectation class existence convention, assume AC. Neither zero nor infinite marginal-density fibres are normalized by the displayed quotient.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "5.1",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-undirected-graphical-model-and-markov-properties",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $G=(V,E)$ be a finite simple undirected graph, with $E$ a set of unordered two-element subsets of $V$. A clique is a nonempty subset $C\\subseteq V$ whose distinct vertices are adjacent. Let $(X_i)_{i\\in V}$ be random elements on a common probability space, and for $U\\subseteq V$ put $\\mathcal F_U=\\sigma(X_i:i\\in U)$, with $\\mathcal F_\\emptyset=\\{\\emptyset,\\Omega\\}$. A path is a finite sequence of distinct vertices with adjacent consecutive vertices; $C$ separates $A$ from $B$ if every path from $A$ to $B$ meets $C$. The pairwise Markov property is $\\mathcal F_{\\{i\\}}\\perp\\!\\!\\!\\perp\\mathcal F_{\\{j\\}}\\mid\\mathcal F_{V\\setminus\\{i,j\\}}$ whenever $i\\ne j$ and $\\{i,j\\}\\notin E$. The global Markov property is $\\mathcal F_A\\perp\\!\\!\\!\\perp\\mathcal F_B\\mid\\mathcal F_C$ whenever $A,B,C\\subseteq V$ are pairwise disjoint and $C$ separates $A$ from $B$. If each $X_i$ takes values in a finite nonempty state space $\\mathcal X_i$, a finite-state clique-factorized mass function on $G$ is $p(x)=Z^{-1}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$, where $\\mathcal C$ is a finite collection of nonempty cliques, $\\psi_C:\\prod_{i\\in C}\\mathcal X_i\\to(0,\\infty)$, and $Z=\\sum_{x\\in\\prod_{i\\in V}\\mathcal X_i}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$. The product state space and sum are finite, and every potential is positive and finite, so $0<Z<\\infty$ and $p$ is a probability mass function. No equivalence between the clique-factorized class and either Markov property is asserted here.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix distinct $i,j$. By [A1], [F1] and [F2], the joint density of $X$ is the stated nondegenerate Gaussian density; here positive definiteness is an additional hypothesis beyond the singular-covariance multivariate-normal definition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Reorder coordinates so $Y=(X_i,X_j)$ and $Z=(X_k)_{k\\notin\\{i,j\\}}$. In the correspondingly permuted precision matrix write $\\Theta=\\begin{pmatrix}A&B\\\\B^T&C\\end{pmatrix}$, where $A=\\begin{pmatrix}a&c\\\\c&d\\end{pmatrix}$. For every nonzero $u\\in\\mathbb R^2$, $u^TAu=(u,0)^T\\Theta(u,0)>0$, so $A$ is positive definite and $\\det A=ad-c^2>0$. If $p=2$, the $Z$ coordinate is a singleton and the following conditional-density calculation is the unconditional bivariate density.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For $p>2$, [F7] supplies the countable-choice hypothesis of [F6], so the joint Euclidean density in [F2] is also a density relative to $\\lambda_2\\otimes\\lambda_{p-2}$. Put $u=y-\\mu_Y$, $w=z-\\mu_Z$, and $D=C-B^TA^{-1}B$. For nonzero $w$, $(-A^{-1}Bw,w)^T\\Theta(-A^{-1}Bw,w)=w^TDw>0$, hence $D$ is positive definite. Completing the square gives $u^TAu+2u^TBw+w^TCw=(u+A^{-1}Bw)^TA(u+A^{-1}Bw)+w^TDw$. The section integral over $y$ is therefore positive and finite for every $z$: its $y$ factor is the normalized two-dimensional Gaussian density with precision $A$, multiplied by a finite positive constant.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "For $p>2$, use the explicit filler probability concentrated at $(0,0)$ on $\\mathbb R^2$ in [F3]; the positive finite marginal sections from step 3.1 show that the conditional law at every $z$ has density $\\frac{\\sqrt{\\det A}}{2\\pi}\\exp(-\\tfrac12(u+A^{-1}Bw)^TA(u+A^{-1}Bw))$. It is the bivariate normal law with mean $\\mu_Y-A^{-1}B(z-\\mu_Z)$ and covariance $A^{-1}$. For $p=2$, this is the unconditional law with covariance $\\Theta^{-1}=A^{-1}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "If $\\Theta_{ij}=c=0$, then $A$ is diagonal and the conditional density in step 4.1 is a product of two univariate Gaussian densities for every $z$. Its conditional expectations therefore factor for all bounded measurable coordinate functions; [F4] gives $X_i\\perp\\!\\!\\!\\perp X_j\\mid\\sigma(Z)$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "Conversely, suppose $X_i\\perp\\!\\!\\!\\perp X_j\\mid\\sigma(Z)$. Apply [F4] to the four bounded pairs formed from $\\cos(X_i),\\sin(X_i)$ and $\\cos(X_j),\\sin(X_j)$ and combine the resulting identities. For almost every $z$, the conditional joint characteristic function at $(1,1)$ equals the product of its conditional marginal characteristic functions. By [F1], [F4] and [F5], the joint characteristic function from step 4.1 is $\\exp(i(m_1(z)+m_2(z))-\\tfrac12((A^{-1})_{11}+2(A^{-1})_{12}+(A^{-1})_{22}))$, whereas that product omits the middle covariance term. Equality implies $\\exp(-(A^{-1})_{12})=1$, and since $(A^{-1})_{12}$ is real this forces $(A^{-1})_{12}=0$.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-7-1",
+          "claim": "The inverse of $A$ is $(ad-c^2)^{-1}\\begin{pmatrix}d&-c\\\\-c&a\\end{pmatrix}$. Since $\\det A>0$, $(A^{-1})_{12}=0$ if and only if $c=0$, which is exactly $\\Theta_{ij}=0$. Steps 5.1 and 5.2 prove the two implications; by [F8], these are exactly the nonedge and conditional-independence cases of the Gaussian pairwise Markov graph.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 5.1",
+            "step 5.2",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 treat p=2 as the empty conditioning vector and identify the unconditional bivariate law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 6.1 prove the zero precision-entry case and the reverse matrix equivalence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement requires p≥2 and a pair of distinct coordinates, so p=1 is outside its domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Σ is required to be positive definite; singular covariance matrices are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves det A>0, so the inverse formula in step 6.1 has a nonzero denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated and used in step 1.1; its countable-choice consequence is applied in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 proves Θij=0 implies conditional independence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 5.2 and 6.1 prove conditional independence implies Θij=0."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-graphical-lasso-profiled-gaussian-likelihood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graphical-lasso-objective",
+          "source_section": "Definition",
+          "quote": "For $N,p\\ge1$ and data $x_1,\\ldots,x_N\\in\\mathbb R^p$, put $\\bar x=N^{-1}\\sum_{r=1}^N x_r$ and $S=N^{-1}\\sum_{r=1}^N(x_r-\\bar x)(x_r-\\bar x)^T$. For any symmetric positive-semidefinite $S$ and any $\\Theta\\in\\mathbb S_{++}^p$, set $\\ell_S(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)$, where $\\mathbb S_{++}^p$ is the cone of symmetric positive-definite $p\\times p$ matrices. Define $\\|\\Theta\\|_1=\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$, including diagonal entries, and for $\\lambda>0$ define $F_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\|\\Theta\\|_1$. The off-diagonal-only convention $F^{\\mathrm{off}}_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\sum_{i\\ne j}|\\Theta_{ij}|$ is a separate objective.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-products-of-dominated-kernels-have-product-density",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $(S,\\Sigma)$ be a measurable space. For each $j<n$, let\n$K_j$ be a probability kernel from $(S,\\Sigma)$ to $(T_j,\\Tau_j)$, let\n$\\nu_j$ be sigma-finite on $(T_j,\\Tau_j)$, and let\n$f_j:S\\times T_j\\to[0,\\infty]$ be a specified\njointly measurable function such that\n$$K_j(s,B)=\\int_B f_j(s,t_j)\\,\\nu_j(dt_j)\\qquad(B\\in\\Tau_j).$$\nOn the finite product spaces, let $K=\\bigotimes_{j<n}K_j$ be the product\nprobability kernel, let $\\nu=\\bigotimes_{j<n}\\nu_j$, and put\n$$f(s,t)=\\prod_{j<n}f_j(s,t_j),$$\nusing the extended-product convention $0\\cdot\\infty=0$. Then $f$ is jointly\nmeasurable and, for every $s\\in S$, it is a density of $K(s,\\cdot)$\nwith respect to $\\nu$ on the entire product sigma-algebra.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Each independent observation with the common law in [F3] has the density in [F2]. On the one-point source $\\{*\\}$, the constant law $K_r(*,\\cdot)=N_p(\\mu,\\Sigma)$ is a probability kernel: its sections are probability measures and each evaluation map is constant, hence measurable [F4]. The density $f_r(*,x)=f_{\\mu,\\Theta}(x)$ is continuous in $x$ and constant in $*$, hence jointly measurable; [F5] gives the product law density $\\prod_{r=1}^N f_{\\mu,\\Theta}(x_r)$. By [F6], independence identifies this product law with the joint observation law. Its log-likelihood for fixed $\\mu$ and $\\Theta$ is $$L(\\mu,\\Theta)=-\\frac{Np}{2}\\log(2\\pi)+\\frac N2\\log\\det\\Theta-\\frac12\\sum_{r=1}^N(x_r-\\mu)^T\\Theta(x_r-\\mu).$$",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Write $y_r=x_r-\\bar x$, so $\\sum_r y_r=0$ and $x_r-\\mu=y_r+(\\bar x-\\mu)$. Expanding and summing removes the cross term: $$\\sum_{r=1}^N(x_r-\\mu)^T\\Theta(x_r-\\mu)=\\sum_{r=1}^Ny_r^T\\Theta y_r+N(\\mu-\\bar x)^T\\Theta(\\mu-\\bar x).$$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Positive definiteness of $\\Theta$ makes the last quadratic term nonnegative and equal to zero exactly at $\\mu=\\bar x$. Therefore $\\bar x$ uniquely maximizes $L(\\mu,\\Theta)$ over $\\mu$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "By [F1], $\\sum_r y_ry_r^T=NS$. Cyclicity of the finite matrix trace gives $\\sum_r y_r^T\\Theta y_r=\\sum_r\\operatorname{tr}(\\Theta y_ry_r^T)=N\\operatorname{tr}(S\\Theta)$. Substituting this identity and $\\mu=\\bar x$ into step 1.1 yields the displayed profile log-likelihood and its normalization.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits N=1; in step 2.1 the centered residual is then zero and the expansion remains valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 allow S=0 when all observations coincide; no inverse of S is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits N=p=1; the finite sums and one-dimensional trace identity remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires Σ≻0 but permits singular sample covariance S; the proof never inverts S."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 shows the unique profile point μ=x̄; the proof forms no quotient at an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the density supplier under its explicit AC hypothesis; the finite product has N≥1 factors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives a profile-likelihood identity and makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives a profile-likelihood identity and makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-restricted-boltzmann-machine": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.3",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The state space $\\{0,1\\}^m\\times\\{0,1\\}^n$ has $2^{m+n}$ elements. Every term $\\exp(-E(v,h))$ is finite and positive, so their finite sum $Z$ is finite and positive; therefore $p$ is a probability mass function.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For fixed $v$, put $c_j=b_j+(W^Tv)_j$. Then $\\exp(-E(v,h))=\\exp(a^Tv)\\prod_j\\exp(h_jc_j)$, and summing over binary $h$ gives $\\exp(a^Tv)\\prod_j(1+\\exp(c_j))$. Thus $p(h\\mid v)$ is the product of Bernoulli masses with success probabilities $\\exp(c_j)/(1+\\exp(c_j))=\\sigma(c_j)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "For fixed $h$, put $d_i=a_i+(Wh)_i$. Then $\\exp(-E(v,h))=\\exp(b^Th)\\prod_i\\exp(v_id_i)$, and summing over binary $v$ gives $\\exp(b^Th)\\prod_i(1+\\exp(d_i))$. Hence $p(v\\mid h)$ is the product of Bernoulli masses with success probabilities $\\exp(d_i)/(1+\\exp(d_i))=\\sigma(d_i)$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For fixed observed $v$, $p(v)=Z^{-1}\\exp(a^Tv)\\sum_h\\exp(b^Th+v^TWh)$. Differentiating these finite sums gives $\\partial_{W_{ij}}\\log p(v)=v_i\\mathbb E_{p(h\\mid v)}[h_j]-\\partial_{W_{ij}}\\log Z$; the same calculation gives $\\partial_{a_i}\\log p(v)=v_i-\\partial_{a_i}\\log Z$ and $\\partial_{b_j}\\log p(v)=\\mathbb E_{p(h\\mid v)}[h_j]-\\partial_{b_j}\\log Z$.",
+          "step": "2.3",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-4",
+          "claim": "The product conditional mass functions in steps 2.1–2.2 make the conditional expectations of any bounded measurable functions of disjoint coordinates factor into the product of their conditional expectations. By [F1]–[F2], each layer is therefore conditionally independent given the other in the stated sigma-algebra sense. This use of the conditional-expectation convention is the only proof point needing [A1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Differentiating the finite partition sum yields $\\partial_{W_{ij}}\\log Z=\\sum_{v',h'}v_i'h_j'p(v',h')=\\mathbb E_p[V_iH_j]$, $\\partial_{a_i}\\log Z=\\mathbb E_p[V_i]$, and $\\partial_{b_j}\\log Z=\\mathbb E_p[H_j]$. Substitution in step 2.3 gives the exact gradients in the Definition.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For each visible state $v$, $\\sum_{v'}K(v,v')=\\sum_h p(h\\mid v)\\sum_{v'}p(v'\\mid h)=\\sum_hp(h\\mid v)=1$. Thus K is a stochastic matrix and each $q_k^v$ is a well-defined finite probability distribution. Replacing the exact negative-phase marginal $p(v')$ in the gradient formulas by $q_k^v(v')$ gives the finite contrastive-divergence statistic defined in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires m,n≥1 and step 1.1 verifies a finite positive partition sum on the nonempty binary state space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero logits give Bernoulli success probability 1/2 in steps 2.1–2.2; zero biases and weights are permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits m=n=1; every state sum, conditional mass and gradient remains finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite real parameters make every Gibbs weight positive and each sigmoid strictly between 0 and 1; steps 1.1–2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes q0=δv and finite k≥1; step 4.1 proves K is stochastic and qk is a probability mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used for conditional independence in step 3.1; the other derivations use finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition gives conditional factorization and finite formulas but no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition gives conditional factorization and finite formulas but no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-graphical-lasso-convexity-and-kkt": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graphical-lasso-objective",
+          "source_section": "Definition",
+          "quote": "For $N,p\\ge1$ and data $x_1,\\ldots,x_N\\in\\mathbb R^p$, put $\\bar x=N^{-1}\\sum_{r=1}^N x_r$ and $S=N^{-1}\\sum_{r=1}^N(x_r-\\bar x)(x_r-\\bar x)^T$. For any symmetric positive-semidefinite $S$ and any $\\Theta\\in\\mathbb S_{++}^p$, set $\\ell_S(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)$, where $\\mathbb S_{++}^p$ is the cone of symmetric positive-definite $p\\times p$ matrices. Define $\\|\\Theta\\|_1=\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$, including diagonal entries, and for $\\lambda>0$ define $F_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\|\\Theta\\|_1$. The off-diagonal-only convention $F^{\\mathrm{off}}_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\sum_{i\\ne j}|\\Theta_{ij}|$ is a separate objective.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-hessian-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "A $C^2$ function on an open convex set is convex if and only if its Hessian is positive semidefinite at every point. Hessians and their quadratic forms have the conventions of [[def-hessian-and-euclidean-critical-point]], [[cor-hessian-is-symmetric]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By the all-entry objective definition [F1] and the nonnegative-operator factorization [F2], write $S=R^TR$. Thus $\\operatorname{tr}(S\\Theta)=\\operatorname{tr}(R\\Theta R^T)\\ge0$ for $\\Theta\\succ0$. Also $\\|\\Theta\\|_1=\\sum_{i,j}|\\Theta_{ij}|\\ge\\sum_i\\Theta_{ii}=\\operatorname{tr}\\Theta$, since positive-definite matrices have positive diagonal entries.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The cone $\\mathbb S_{++}^p$ is open and convex: positive quadratic forms remain positive under sufficiently small symmetric perturbations, and convex combinations of positive quadratic forms remain positive. For symmetric $H$, determinant expansion gives $\\left.\\frac{d}{dt}\\log\\det(\\Theta+tH)\\right|_{t=0}=\\operatorname{tr}(\\Theta^{-1}H)$. Differentiating $(\\Theta+tH)(\\Theta+tH)^{-1}=I$ gives $\\left.\\frac{d}{dt}(\\Theta+tH)^{-1}\\right|_{t=0}=-\\Theta^{-1}H\\Theta^{-1}$, so the second directional derivative is $-\\operatorname{tr}(\\Theta^{-1}H\\Theta^{-1}H)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "By [F3], the eigenvalues $t_1,\\ldots,t_p$ of $\\Theta\\succ0$ are positive and $\\log\\det\\Theta=\\sum_k\\log t_k$, $\\operatorname{tr}\\Theta=\\sum_k t_k$. Hence $F_{S,\\lambda}(\\Theta)\\le\\sum_{k=1}^p h(t_k)$ for $h(t)=\\log t-\\lambda t$. The function $h$ is bounded above and tends to $-\\infty$ as $t\\downarrow0$ or $t\\to\\infty$. For any $c$, the upper level set $F_{S,\\lambda}(\\Theta)\\ge c$ therefore forces each eigenvalue into a compact interval $[a_c,b_c]\\subset(0,\\infty)$: if $M=\\sup_{t>0}h(t)$, then each $h(t_k)\\ge c-(p-1)M$. These matrices form a closed bounded set of symmetric matrices contained in $\\mathbb S_{++}^p$, hence a compact set. Taking $c=F_{S,\\lambda}(I)$ gives a nonempty compact upper level set, and continuity of $F$ yields a maximizer.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Let $B=\\Theta^{-1/2}H\\Theta^{-1/2}$, using the positive square root from the orthonormal eigenbasis [F3]. Then $B$ is symmetric and $\\operatorname{tr}(\\Theta^{-1}H\\Theta^{-1}H)=\\operatorname{tr}(B^2)=\\|B\\|_F^2$, strictly positive when $H\\ne0$. Thus the second derivative of $\\log\\det$ along every nonconstant segment is strictly negative, giving its strict chord inequality. The Hessian of $-\\log\\det$ is positive semidefinite by step 1.2, so [F4] gives convexity in the chord sense of [F5]. The trace term is linear and the entrywise $\\ell^1$ norm is convex by the triangle inequality, so its negative is concave; adding these terms preserves the strict chord inequality. Hence $F_{S,\\lambda}$ is strictly concave on its open convex domain.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Put $G=\\Theta^{-1}-S$. At a maximizer every feasible one-coordinate directional derivative is at most zero, and when the objective is differentiable in both directions its derivative is zero. Since $\\Theta_{ii}>0$, the diagonal penalty is locally differentiable with slope $1$, so the diagonal equation is $G_{ii}-\\lambda=0$ and $\\Gamma_{ii}=1$. For $i<j$, a symmetric perturbation by $t(E_{ij}+E_{ji})$ has smooth derivative $2G_{ij}t$ and changes the penalty by $2\\lambda(|\\Theta_{ij}+t|-|\\Theta_{ij}|)$. If $\\Theta_{ij}\\ne0$, testing both signs of small $t$ gives $G_{ij}=\\lambda\\operatorname{sign}(\\Theta_{ij})$. If $\\Theta_{ij}=0$, taking $t>0$ gives $G_{ij}\\le\\lambda$ and taking $t<0$ gives $G_{ij}\\ge-\\lambda$. Defining $\\Gamma_{ij}=\\Gamma_{ji}=G_{ij}/\\lambda$ at zero and the sign otherwise yields the stated KKT equation for the all-entry penalty [F1].",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "claim": "Conversely, suppose $\\Theta\\succ0$ and a symmetric $\\Gamma$ satisfies the stated entrywise conditions and $\\Theta^{-1}-S-\\lambda\\Gamma=0$. Put $T=\\Theta^{-1/2}\\Theta'\\Theta^{-1/2}$ for any $\\Theta'\\succ0$; its eigenvalues $t_r$ are positive. Since $\\log t\\le t-1$ for $t>0$ (the function $t-1-\\log t$ has its minimum $0$ at $t=1$), $\\log\\det\\Theta'-\\log\\det\\Theta=\\sum_r\\log t_r\\le\\operatorname{tr}(T)-p=\\operatorname{tr}(\\Theta^{-1}(\\Theta'-\\Theta))$. For each scalar $x$ and each allowed subgradient $\\gamma$ of $|x|$, $|y|\\ge|x|+\\gamma(y-x)$: if $x\\ne0$, this follows from $|y|\\ge\\operatorname{sign}(x)y$, while for $x=0$ it follows from $|\\gamma|\\le1$. Summing gives $\\|\\Theta'\\|_1\\ge\\|\\Theta\\|_1+\\sum_{i,j}\\Gamma_{ij}(\\Theta'_{ij}-\\Theta_{ij})$ for the all-entry objective [F1]. Combining these bounds with the linear trace term and the KKT equation yields $F_{S,\\lambda}(\\Theta')-F_{S,\\lambda}(\\Theta)\\le\\operatorname{tr}((\\Theta^{-1}-S-\\lambda\\Gamma)(\\Theta'-\\Theta))=0$. Thus every such KKT point is a maximizer. The maximizer exists by step 2.1 and is unique by strict concavity from step 2.2, so the KKT condition is both necessary and sufficient for that unique optimum.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement permits p=1; the diagonal argument in step 2.3 applies and there are no off-diagonal coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "S=0 is included in S⪰0; step 1.1 and the coercive λ tr Θ bound remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=1, the eigenvalue and diagonal KKT arguments in steps 2.1 and 2.3 reduce to a scalar problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows singular S, including S=0; the proof never inverts S."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At zero off-diagonal entries the full interval Γij∈[−1,1] is handled in steps 2.3–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite-dimensional matrix analysis and scalar calculus only; it assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.3 derives the KKT condition at the attained maximizer."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every feasible KKT point is globally optimal; uniqueness identifies it with Θ*."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-three-node-gaussian-chain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-precision-zero-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p\\ge2$ and let $X=(X_1,\\ldots,X_p)$ have multivariate normal law $N_p(\\mu,\\Sigma)$ with real symmetric positive-definite covariance $\\Sigma$; put $\\Theta=\\Sigma^{-1}$. For every pair of distinct indices $i,j$, $X_i$ and $X_j$ are conditionally independent given $\\sigma(X_k:k\\notin\\{i,j\\})$ if and only if $\\Theta_{ij}=0$. Thus the graph whose edges are exactly the nonzero off-diagonal entries of $\\Theta$ is the Gaussian pairwise conditional-dependence graph.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-undirected-graphical-model-and-markov-properties",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $G=(V,E)$ be a finite simple undirected graph, with $E$ a set of unordered two-element subsets of $V$. A clique is a nonempty subset $C\\subseteq V$ whose distinct vertices are adjacent. Let $(X_i)_{i\\in V}$ be random elements on a common probability space, and for $U\\subseteq V$ put $\\mathcal F_U=\\sigma(X_i:i\\in U)$, with $\\mathcal F_\\emptyset=\\{\\emptyset,\\Omega\\}$. A path is a finite sequence of distinct vertices with adjacent consecutive vertices; $C$ separates $A$ from $B$ if every path from $A$ to $B$ meets $C$. The pairwise Markov property is $\\mathcal F_{\\{i\\}}\\perp\\!\\!\\!\\perp\\mathcal F_{\\{j\\}}\\mid\\mathcal F_{V\\setminus\\{i,j\\}}$ whenever $i\\ne j$ and $\\{i,j\\}\\notin E$. The global Markov property is $\\mathcal F_A\\perp\\!\\!\\!\\perp\\mathcal F_B\\mid\\mathcal F_C$ whenever $A,B,C\\subseteq V$ are pairwise disjoint and $C$ separates $A$ from $B$. If each $X_i$ takes values in a finite nonempty state space $\\mathcal X_i$, a finite-state clique-factorized mass function on $G$ is $p(x)=Z^{-1}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$, where $\\mathcal C$ is a finite collection of nonempty cliques, $\\psi_C:\\prod_{i\\in C}\\mathcal X_i\\to(0,\\infty)$, and $Z=\\sum_{x\\in\\prod_{i\\in V}\\mathcal X_i}\\prod_{C\\in\\mathcal C}\\psi_C(x_C)$. The product state space and sum are finite, and every potential is positive and finite, so $0<Z<\\infty$ and $p$ is a probability mass function. No equivalence between the clique-factorized class and either Markov property is asserted here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-gaussian-precision-zero-conditional-independence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p\\ge2$ and let $X=(X_1,\\ldots,X_p)$ have multivariate normal law $N_p(\\mu,\\Sigma)$ with real symmetric positive-definite covariance $\\Sigma$; put $\\Theta=\\Sigma^{-1}$. For every pair of distinct indices $i,j$, $X_i$ and $X_j$ are conditionally independent given $\\sigma(X_k:k\\notin\\{i,j\\})$ if and only if $\\Theta_{ij}=0$. Thus the graph whose edges are exactly the nonzero off-diagonal entries of $\\Theta$ is the Gaussian pairwise conditional-dependence graph.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $x=(x_1,x_2,x_3)^T$, $x^T\\Theta x=x_1^2+x_3^2+(x_1-x_2)^2+(x_2-x_3)^2$. This is positive for every nonzero $x$: if the sum vanished, each square would vanish and successively $x_1=x_3=0$, $x_2=x_1=x_3=0$. Hence $\\Theta$ is positive definite and $\\Sigma=\\Theta^{-1}$ is a valid positive-definite covariance.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "The only nonzero off-diagonal entries are $\\Theta_{12}=\\Theta_{21}=-1$ and $\\Theta_{23}=\\Theta_{32}=-1$, while $\\Theta_{13}=\\Theta_{31}=0$. By [F2], the graph is exactly the path $1-2-3$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Theorem [F1] applies with $p=3$, covariance $\\Sigma\\succ0$ from step 1.1 and precision $\\Theta=\\Sigma^{-1}$. Since $\\Theta_{13}=0$, it gives $X_1\\perp\\!\\!\\!\\perp X_3\\mid\\sigma(X_2)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes three vertices and conditions on the nonempty singleton {X2}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies Θ13=0; step 2.1 applies this exact zero to obtain conditional independence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example is a fixed three-variable instance and has no one-dimensional parameter case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the displayed precision matrix is positive definite, so the covariance is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The missing edge is exactly Θ13=0 in step 1.2, while both path edges are nonzero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Example and is invoked when applying the Gaussian theorem in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts one implication for its fixed matrix and does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts one implication for its fixed matrix and does not state an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-graphical-lasso-penalty-sparsity-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graphical-lasso-objective",
+          "source_section": "Definition",
+          "quote": "For $N,p\\ge1$ and data $x_1,\\ldots,x_N\\in\\mathbb R^p$, put $\\bar x=N^{-1}\\sum_{r=1}^N x_r$ and $S=N^{-1}\\sum_{r=1}^N(x_r-\\bar x)(x_r-\\bar x)^T$. For any symmetric positive-semidefinite $S$ and any $\\Theta\\in\\mathbb S_{++}^p$, set $\\ell_S(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)$, where $\\mathbb S_{++}^p$ is the cone of symmetric positive-definite $p\\times p$ matrices. Define $\\|\\Theta\\|_1=\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$, including diagonal entries, and for $\\lambda>0$ define $F_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\|\\Theta\\|_1$. The off-diagonal-only convention $F^{\\mathrm{off}}_{S,\\lambda}(\\Theta)=\\ell_S(\\Theta)-\\lambda\\sum_{i\\ne j}|\\Theta_{ij}|$ is a separate objective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-graphical-lasso-convexity-and-kkt",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb S_+^p$ be the real symmetric positive-semidefinite $p\\times p$ matrices and $\\mathbb S_{++}^p$ the real symmetric positive-definite ones. For $p\\ge1$, $S\\in\\mathbb S_+^p$ and $\\lambda>0$, maximize\n$$F_{S,\\lambda}(\\Theta)=\\log\\det\\Theta-\\operatorname{tr}(S\\Theta)-\\lambda\\sum_{i=1}^p\\sum_{j=1}^p|\\Theta_{ij}|$$\nover $\\Theta\\in\\mathbb S_{++}^p$. The objective is strictly concave and attains a unique maximizer $\\Theta^*$. A feasible $\\Theta$ is this unique maximizer if and only if there is a symmetric matrix $\\Gamma$ such that $\\Theta^{-1}-S-\\lambda\\Gamma=0$, with $\\Gamma_{ii}=1$, $\\Gamma_{ij}=\\operatorname{sign}(\\Theta_{ij})$ when $\\Theta_{ij}\\ne0$, and $\\Gamma_{ij}\\in[-1,1]$ when $\\Theta_{ij}=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The sample mean is zero, and $S=\\tfrac12(x_1x_1^T+x_2x_2^T)=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$. This matrix is positive semidefinite because $u^TSu=(u_1+u_2)^2\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Let $\\lambda\\ge1$, $a=(1+\\lambda)^{-1}$, $\\Theta=aI_2$, and let $\\Gamma$ have diagonal entries $1$ and off-diagonal entries $-1/\\lambda$. Then $\\Theta\\succ0$, $\\Gamma_{12}\\in[-1,1]$, and $\\Theta^{-1}-S-\\lambda\\Gamma=0$: the diagonal entries are $(1+\\lambda)-1-\\lambda=0$ and the off-diagonal entries are $0-1-\\lambda(-1/\\lambda)=0$. By [F2], this is the unique maximizer, with zero off-diagonal edge.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Let $0<\\lambda<1$. If an optimizer had $\\Theta_{12}=0$, its off-diagonal KKT equation from [F2] would require $-1-\\lambda\\Gamma_{12}=0$ for some $\\Gamma_{12}\\in[-1,1]$, hence $\\Gamma_{12}=-1/\\lambda<-1$, a contradiction. Existence in [F2] therefore forces every optimizer to have $\\Theta_{12}\\ne0$. Taking $\\lambda=2$ and $\\lambda=\\tfrac12$ gives the stated two cases.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example has two observations and two variables; step 1.1 evaluates their nonempty finite sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For λ≥1 the candidate has Θ12=0 and step 2.1 verifies its KKT certificate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes two observations and p=2; it has no p=1 instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the sample covariance as rank one, and the KKT theorem applies to PSD S."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes boundary λ=1 in the zero-edge regime; step 3.1 treats 0<λ<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite covariance calculation and KKT certificate use no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example gives parameter regimes for one optimizer and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example gives parameter regimes for one optimizer and no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-rbm-visible-units-conditionally-independent-given-hidden": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-restricted-boltzmann-machine",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $m,n\\ge1$, visible states $v\\in\\{0,1\\}^m$, hidden states $h\\in\\{0,1\\}^n$, biases $a\\in\\mathbb R^m$ and $b\\in\\mathbb R^n$, and weights $W\\in\\mathbb R^{m\\times n}$; a finite bipartite graph is specified by requiring $W_{ij}=0$ at every absent visible-hidden edge. Define $E(v,h)=-a^Tv-b^Th-v^TWh$, $Z=\\sum_{v,h}\\exp(-E(v,h))$, and $p(v,h)=Z^{-1}\\exp(-E(v,h))$; $Z$ is finite and positive. Set $p(v)=\\sum_h p(v,h)$, and let $V,H$ be the coordinate variables under $p$. For a finite mass function $q$, write $\\mathbb E_q[g]=\\sum_xq(x)g(x)$. With $\\sigma(t)=(1+\\exp(-t))^{-1}$, and $\\operatorname{Bernoulli}(u;r)$ the mass on $\\{0,1\\}$ with probability $r$ at $1$, the layer conditionals factorize as\n$$p(h\\mid v)=\\prod_{j=1}^n\\operatorname{Bernoulli}\\!\\left(h_j;\\sigma\\!\\left(b_j+(W^Tv)_j\\right)\\right),\\qquad p(v\\mid h)=\\prod_{i=1}^m\\operatorname{Bernoulli}\\!\\left(v_i;\\sigma\\!\\left(a_i+(Wh)_i\\right)\\right),$$\nso each layer is conditionally independent given the other. For one observed $v$, the exact gradients are\n$$\\frac{\\partial\\log p(v)}{\\partial W_{ij}}=v_i\\mathbb E_{p(h\\mid v)}[h_j]-\\mathbb E_p[V_iH_j],\\qquad \\frac{\\partial\\log p(v)}{\\partial a_i}=v_i-\\mathbb E_p[V_i],\\qquad \\frac{\\partial\\log p(v)}{\\partial b_j}=\\mathbb E_{p(h\\mid v)}[h_j]-\\mathbb E_p[H_j].$$\nThese are ambient derivatives in all parameters, evaluated at the specified $W$; when a graph fixes absent-edge weights to zero, retain only allowed-edge derivatives as free parameters. Define $K(v,v')=\\sum_h p(h\\mid v)p(v'\\mid h)$, a row-stochastic transition matrix. Starting from $q_0^v=\\delta_v$, let $q_k^v=q_0^vK^k$ for a finite integer $k\\ge1$. For one observed $v$, define the finite contrastive-divergence components by\n$$\\widehat g^{(k)}_{W_{ij}}(v)=v_i\\mathbb E_{p(h\\mid v)}[h_j]-\\sum_{v'}q_k^v(v')v'_i\\mathbb E_{p(h\\mid v')}[h_j],\\quad \\widehat g^{(k)}_{a_i}(v)=v_i-\\sum_{v'}q_k^v(v')v'_i,\\quad \\widehat g^{(k)}_{b_j}(v)=\\mathbb E_{p(h\\mid v)}[h_j]-\\sum_{v'}q_k^v(v')\\mathbb E_{p(h\\mid v')}[h_j].$$\nThey replace the exact negative-phase expectations under $p(v')$ by expectations under the finite $k$-step law $q_k^v$ and conditional hidden law $p(h\\mid v')$. This finite-chain statistic is an approximation; no equality to the exact likelihood gradient or chain-convergence claim is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "With $a_i=0$, $b=0$ and $W_{i1}=\\log3$, [F1] gives $P(V_i=1\\mid H=h)=\\sigma(h\\log3)$, which is $1/2$ at $h=0$ and $3/4$ at $h=1$. The conditional visible mass factors as the product of these two Bernoulli masses, so [A1] and [F2] give conditional independence.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Summing the unnormalized joint mass over the two visible bits gives weight $(1+1)^2=4$ to $h=0$ and $(1+3)^2=16$ to $h=1$. Thus $Z=20$ and $P(H=0)=1/5$, $P(H=1)=4/5$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Averaging the conditional success probabilities from step 1.1 yields $P(V_i=1)=\\tfrac15\\cdot\\tfrac12+\\tfrac45\\cdot\\tfrac34=\\tfrac7{10}$ for each i. Likewise, conditional independence gives $P(V_1=1,V_2=1)=\\tfrac15\\cdot\\tfrac14+\\tfrac45\\cdot\\tfrac9{16}=\\tfrac12$, whereas the product of the marginals is $\\tfrac{49}{100}$. Since these differ, the visible variables are marginally dependent.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two visible units and one hidden unit; neither layer is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The biases are zero; step 1.1 computes the resulting 1/2 conditional success probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single hidden unit has H∈{0,1}; steps 1.1–2.1 sum both hidden states explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All logits are finite and conditional probabilities are 1/2 or 3/4, strictly between 0 and 1; see step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 gives exact marginals 7/10 and joint probability 1/2, making the difference from 49/100 strict."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Example and is used for conditional independence in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves conditional independence and marginal dependence, with no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example proves conditional independence and marginal dependence, with no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-graphical-lasso-finite-budget-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-graphical-lasso-coordinate-descent",
+          "source_section": "Definition",
+          "quote": "Input an integer $p\\ge2$, a real symmetric positive-semidefinite matrix $S\\in\\mathbb S_+^p$, a real $\\lambda>0$, and positive integers $R,K$. The output is either `failure` or a matrix $\\Theta\\in\\mathbb S_{++}^p$. Let $I_p$ be the $p\\times p$ identity, $t_+=\\max(t,0)$, $\\operatorname{sign}(t)=1$ for $t>0$, $0$ for $t=0$, and $-1$ for $t<0$, and $\\mathsf{Soft}(t,\\lambda)=\\operatorname{sign}(t)(|t|-\\lambda)_+$. Initialize $W=S+\\lambda I_p$.\n\nFor each outer sweep $r=1,\\ldots,R$, and within it for each original-coordinate index $j=1,\\ldots,p$, use the temporary coordinate order $\\pi_j=(1,\\ldots,j-1,j+1,\\ldots,p,j)$. Form the same reindexing of both matrices, $S^{(j)}_{ab}=S_{\\pi_j(a),\\pi_j(b)}$ and $W^{(j)}_{ab}=W_{\\pi_j(a),\\pi_j(b)}$, for $1\\le a,b\\le p$. Set $V=(W^{(j)}_{ab})_{a,b<p}$, $s=(S^{(j)}_{a,p})_{a<p}$, and $d=W^{(j)}_{pp}$. Initialize $\\beta=0\\in\\mathbb R^{p-1}$. For each of $K$ inner sweeps, update coordinates $\\ell=1,\\ldots,p-1$ in increasing order: if $V_{\\ell\\ell}\\le0$, return `failure`; otherwise set\n$$\\beta_\\ell\\leftarrow\\frac{\\mathsf{Soft}\\!\\left(s_\\ell-\\sum_{\\substack{1\\le k<p\\\\k\\ne\\ell}}V_{\\ell k}\\beta_k,\\lambda\\right)}{V_{\\ell\\ell}}.$$\n\nAfter the inner sweeps, form $\\widetilde W^{(j)}=\\begin{pmatrix}V&V\\beta\\\\(V\\beta)^T&d\\end{pmatrix}$. Restore original indexing by forming the candidate matrix $W^{\\mathrm{cand}}$ with $W^{\\mathrm{cand}}_{\\pi_j(a),\\pi_j(b)}=\\widetilde W^{(j)}_{ab}$ for all $1\\le a,b\\le p$. Compute a symmetric eigendecomposition of $W^{\\mathrm{cand}}$; if any eigenvalue is nonpositive, return `failure`. Otherwise set $W=W^{\\mathrm{cand}}$ before proceeding to the next original-coordinate index $j$. After all $R$ sweeps, return $\\Theta=W^{-1}$. This bounded truncation of the coupled block and lasso updates makes no convergence or optimizer claim.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Initially $W$ is symmetric, and for every nonzero $x\\in\\mathbb R^p$, $x^TWx=x^TSx+\\lambda\\|x\\|^2\\ge\\lambda\\|x\\|^2>0$. Thus initialization is positive definite. If the current $W$ is positive definite, reindexing both its rows and columns only reindexes this quadratic form. For a nonzero $z\\in\\mathbb R^{p-1}$, extending $z$ by a last zero in the temporary ordering gives $z^TVz>0$. Hence $V$ is positive definite and $V_{\\ell\\ell}=e_\\ell^TVe_\\ell>0$ at each coordinate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hold all coordinates except $\\beta_\\ell=t$ fixed, and write $v=V_{\\ell\\ell}>0$ and $r=s_\\ell-\\sum_{k\\ne\\ell}V_{\\ell k}\\beta_k$. Expanding the symmetric quadratic gives $Q_{V,s}(\\beta)=q(t)+C$, where $q(t)=\\tfrac12vt^2-rt+\\lambda|t|$ and $C$ is independent of $t$. Put $a=(r-\\lambda)/v$ if $r>\\lambda$, $a=0$ if $|r|\\le\\lambda$, and $a=(r+\\lambda)/v$ if $r<-\\lambda$. In these three cases respectively put $u=1$, $u=r/\\lambda$, and $u=-1$. Then $va-r+\\lambda u=0$, $|u|\\le1$, and $ua=|a|$, so $|t|-|a|-u(t-a)=|t|-ut\\ge0$. Consequently $q(t)-q(a)=\\tfrac12v(t-a)^2+\\lambda(|t|-|a|-u(t-a))\\ge\\tfrac12v(t-a)^2$, and the lower bound is strictly positive whenever $t\\ne a$. Thus $a=\\mathsf{Soft}(r,\\lambda)/v$ is the unique coordinate minimizer. All quantities are real and division is by a positive number, so finitely many such updates produce a finite real vector $\\beta$; the nonpositive-diagonal guard cannot fire while the current $W$ is positive definite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For such a block, $V\\beta$ and $d$ are finite and the block candidate $\\begin{pmatrix}V&V\\beta\\\\(V\\beta)^T&d\\end{pmatrix}$ is symmetric. Restoring original indexing preserves symmetry. By [F2] any symmetric candidate $A$ has a representation $A=UDU^T$ with $U$ orthogonal and $D$ real diagonal. The identity $x^TAx=\\sum_iD_{ii}(U^Tx)_i^2$ shows that $A$ is positive definite if all $D_{ii}>0$; conversely applying positive definiteness to $x=Ue_i$ shows that every $D_{ii}>0$. Thus the candidate guard accepts exactly the positive-definite candidates. Initialization, the within-block reasoning and this acceptance rule give induction over all reached blocks: every accepted $W$ is symmetric positive definite, and each later block again has the properties proved above until a candidate guard returns `failure`.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "There are at most $Rp$ blocks, each with $K(p-1)$ coordinate updates and one finite-dimensional eigenvalue test; early failure only decreases these counts. Every reached operation is well-defined by the preceding steps and the stipulated exact matrix operations, so execution terminates with failure or completes all blocks. In the latter case the final $W=UDU^T$ has positive diagonal eigenvalues by step 3.1. Hence $W^{-1}=UD^{-1}U^T$ exists, is symmetric and has $x^TW^{-1}x=\\sum_iD_{ii}^{-1}(U^Tx)_i^2>0$ for every nonzero $x$. This proves every asserted property without a convergence or global-optimizer inference.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires p>=2 and positive R,K, so no empty block or zero iteration budget."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows S=0; lambda>0 makes the initialized matrix positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits R=K=1; step 4.1 counts the same finite updates and tests."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 allow singular S and reject nonpositive candidate eigenvalues; equality |r|=lambda gives unique zero minimizer in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes both soft-threshold endpoints and step 3.1 rejects a zero eigenvalue."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use explicit finite loops and unique coordinate minimizers; no arbitrary selector is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 derives positive definiteness from positive eigenvalues."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 tests eigenvectors to derive positive eigenvalues from positive definiteness."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,250 @@
+[
+  {
+    "order": 2992,
+    "id": "verifiable-generation-and-test-time-sampling",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Verifiable generation, group-relative updates, and test-time sampling",
+    "companion": "verifiable-generation-and-test-time-sampling-examples",
+    "requires": [
+      "dominated-experiments-likelihood-and-sufficiency",
+      "offline-reinforcement-learning-and-off-policy-evaluation",
+      "policy-gradients-reinforce-and-actor-critic"
+    ],
+    "items": [
+      {
+        "id": "def-verifier-and-generation-protocol",
+        "kind": "definition",
+        "title": "Finite truncated response spaces, correctness predicates, and verifiers",
+        "deps": [
+          "def-differentiable-stochastic-policy",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-budgeted-verifier-guided-generation",
+        "kind": "algorithm",
+        "title": "Budgeted verifier-guided generation and best-of-N sampling",
+        "deps": [
+          "def-verifier-and-generation-protocol"
+        ],
+        "dependency_level": 3,
+        "justified_by": [
+          "lem-budgeted-verifier-generation-termination-and-calls"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-budgeted-verifier-generation-termination-and-calls",
+        "kind": "lemma",
+        "title": "Budgeted verifier generation terminates with bounded response and selection calls",
+        "deps": [
+          "alg-budgeted-verifier-guided-generation",
+          "def-verifier-and-generation-protocol"
+        ],
+        "dependency_level": 4,
+        "statement": "For every input of budgeted verifier-guided generation, with integer $N\\ge1$ and its supplied terminating exact operations, rejection search terminates with the first verifier-accepted response and status `accepted`, or with `failure` and no response exactly when all $N$ responses are rejected. It uses at most $N$ response draws and at most $N$ verifier evaluations. For a complete presampled tuple $(y_1,\\ldots,y_N)$, it succeeds exactly when at least one $A_q(y_i)=1$.\n\nBest-of-$N$ terminates after exactly $N$ response draws and can return the stipulated least maximizer using $N$ score evaluations, at most $N-1$ score comparisons and at most $N-1$ tie-order comparisons. It returns status `selected` and makes no correctness or verifier-acceptance assertion. Both modes therefore use finitely many supplied calls and have finite total cost equal to their finite bookkeeping cost plus the sum of actual finite per-call costs. The draw-count and output conclusions hold for every realized response tuple; independence is needed only for probabilistic calculations that separately assume it.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-independent-generation-success-and-verifier-error",
+        "kind": "theorem",
+        "title": "Independent generation success and verifier false-acceptance bounds",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "lem-budgeted-verifier-generation-termination-and-calls",
+          "def-probability-measure",
+          "def-finite-sum",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events",
+          "def-ordered-field",
+          "def-measure"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-response-likelihood-ratio-change-of-measure",
+        "kind": "lemma",
+        "title": "Finite response likelihood ratios change measure by cancellation",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-finite-group-relative-policy-update",
+        "kind": "algorithm",
+        "title": "Finite-budget group-relative policy update",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-differentiable-stochastic-policy",
+          "lem-finite-response-likelihood-ratio-change-of-measure",
+          "def-probability-measure",
+          "def-finite-sum"
+        ],
+        "dependency_level": 4,
+        "justified_by": [
+          "lem-finite-group-relative-update-termination-and-calls"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-group-relative-update-termination-and-calls",
+        "kind": "lemma",
+        "title": "Finite group-relative updates preserve admissibility and have bounded oracle calls",
+        "deps": [
+          "alg-finite-group-relative-policy-update",
+          "def-verifier-and-generation-protocol",
+          "thm-of-square-roots",
+          "def-natural-logarithm",
+          "lem-of-sign-rules",
+          "def-finite-sum",
+          "def-ordered-field",
+          "lem-of-naturals-positive",
+          "lem-of-inverse-positive",
+          "lem-of-zero-mult"
+        ],
+        "dependency_level": 5,
+        "statement": "For every input of the finite group-relative policy-update procedure, under its supplied exact terminating operation and oracle model, every formed advantage, sequence ratio and objective value at a parameter in $U$ is a finite real number. Zero group standard deviation uses the stated zero-advantage branch, without division by zero. The last valid parameter always lies in $U$ and retains the stipulated fixed positive support.\n\nThe procedure terminates with one of its specified statuses after at most $TMG$ response draws, $TMG$ reward evaluations, $TK$ objective-gradient attempts and $TK$ domain-oracle calls. An undefined gradient returns the previous valid parameter with status undefined-gradient; a rejected candidate returns it with status invalid-update; if all iterations succeed it returns $\\theta_T\\in U$ with status complete. All these bounds hold pathwise and allow early exit. The work consists of finite arithmetic over the prescribed finite lists and the sum of the finite costs of the actual supplied calls. In particular it is finite, but no uniform bound on the internal cost of arbitrary objective-gradient or open-set membership oracles is claimed. No unbiasedness, monotone-improvement or convergence conclusion is asserted.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-response-score-gradient-identities",
+        "kind": "lemma",
+        "title": "Finite-response score mean and reward-gradient identities",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "def-differentiable-stochastic-policy",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-finite-sum",
+          "thm-algebra-of-total-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-group-centered-score-estimator-factor",
+        "kind": "theorem",
+        "title": "The group-centered score estimator has factor one minus one over G",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "lem-finite-response-score-gradient-identities",
+          "def-probability-measure",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-finite-sum",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events",
+          "def-field"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "rem-reasoning-training-evidence-and-evaluation-targets",
+        "kind": "remark",
+        "title": "Reasoning-training evidence and evaluation targets",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-offline-reinforcement-learning-dataset",
+          "alg-budgeted-verifier-guided-generation",
+          "thm-independent-generation-success-and-verifier-error",
+          "lem-finite-response-likelihood-ratio-change-of-measure",
+          "alg-finite-group-relative-policy-update",
+          "thm-group-centered-score-estimator-factor",
+          "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2993,
+    "id": "verifiable-generation-and-test-time-sampling-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Verifiable generation, group-relative updates, and test-time sampling — Examples",
+    "companion": "verifiable-generation-and-test-time-sampling",
+    "requires": [
+      "verifiable-generation-and-test-time-sampling"
+    ],
+    "items": [
+      {
+        "id": "ex-equal-group-rewards-zero-advantages",
+        "kind": "example",
+        "title": "Equal group rewards set every normalized advantage to zero",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-finite-group-relative-policy-update"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-perfect-and-false-positive-verifiers",
+        "kind": "example",
+        "title": "Perfect and false-positive verifiers have different rejection outcomes",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "lem-budgeted-verifier-generation-termination-and-calls",
+          "thm-independent-generation-success-and-verifier-error"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-repeated-dependent-copies-no-sampling-gain",
+        "kind": "example",
+        "title": "Repeated dependent copies do not increase success probability",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "thm-independent-generation-success-and-verifier-error"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+        "kind": "example",
+        "title": "Pass-at-one, oracle pass-at-N, and verifier-selected accuracy differ",
+        "deps": [
+          "def-verifier-and-generation-protocol",
+          "alg-budgeted-verifier-guided-generation",
+          "lem-budgeted-verifier-generation-termination-and-calls",
+          "thm-independent-generation-success-and-verifier-error",
+          "def-finite-sum",
+          "def-expectation-on-a-finite-probability-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-field"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

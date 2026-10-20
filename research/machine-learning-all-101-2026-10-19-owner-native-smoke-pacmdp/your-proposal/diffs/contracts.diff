@@ -1,0 +1,134 @@
+--- research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json	2026-10-19 19:29:15.742767633 +1100
++++ research/machine-learning-all-101-2026-10-19-owner-native-smoke-pacmdp/your-proposal/research/machine-learning-all-101-2026-10-19-batch-82.proof-contracts.json	2026-10-19 20:27:35.519467102 +1100
+@@ -384,7 +384,10 @@
+           "name": "one-state gamma-zero deterministic MDP",
+           "inputs": "S={s}, A(s)={a}, gamma=0, reward r(s,a)=1/2, self-transition",
+           "calculation": "T*V(s)=1/2 for all V; the unique fixed point and optimal return are V*(s)=Q*(s,a)=1/2.",
+-          "expected": "Bellman formula, contraction, and greedy attainment agree."
++          "expected": "Bellman formula, contraction, and greedy attainment agree.",
++          "check": "ml101-pacmdp-value-functions",
++          "fixture": "one-state-gamma-zero",
++          "asserts": "For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation."
+         }
+       ],
+       "boundaries": [
+@@ -702,7 +705,10 @@
+           "name": "deterministic one-state sample",
+           "inputs": "S={s}, reward=1/2, self-transition, m=1",
+           "calculation": "The empirical reward equals r and the empirical transition law is (1), so both errors are 0.",
+-          "expected": "The fixed-m concentration inequalities hold for every positive tolerance."
++          "expected": "The fixed-m concentration inequalities hold for every positive tolerance.",
++          "check": "ml101-pacmdp-concentration",
++          "fixture": "deterministic-one-state-sample",
++          "asserts": "$$\\mathbb P\\!\\left(\\left|\\frac1m\\sum_{i=1}^m R_i-r(s,a)\\right|>x\\right)\\le 2e^{-2mx^2}\\qquad(x>0).$$"
+         }
+       ],
+       "boundaries": [
+@@ -1006,7 +1012,10 @@
+           "name": "one-state gamma-zero perturbation",
+           "inputs": "one state/action; gamma=0; r1=1/2; r2=1/2+alpha, 0<=alpha<=1/2",
+           "calculation": "V1=1/2, V2=1/2+alpha, and transition L1 error=0.",
+-          "expected": "Value difference alpha equals the stated upper bound."
++          "expected": "Value difference alpha equals the stated upper bound.",
++          "check": "ml101-pacmdp-value-simulation",
++          "fixture": "one-state-gamma-zero-perturbation",
++          "asserts": "$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$"
+         }
+       ],
+       "boundaries": [
+@@ -1297,7 +1306,10 @@
+           "name": "no-escape one-state optimal controller",
+           "inputs": "gamma=0, one action reward 1, Q=1, K contains the pair, eta=1/8, zeta=0",
+           "calculation": "V=V*=1; model policy value is 1; there are no updates or escapes.",
+-          "expected": "N_{1/2}=0 and is below HM."
++          "expected": "N_{1/2}=0 and is below HM.",
++          "check": "ml101-pacmdp-escape",
++          "fixture": "no-escape-optimal-controller",
++          "asserts": "Then, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$."
+         }
+       ],
+       "boundaries": [
+@@ -1501,7 +1513,10 @@
+           "name": "deterministic one-state R-MAX",
+           "inputs": "S=A=1, gamma=0, reward r, admissible U>=r, m>=1",
+           "calculation": "Every sample is (s,r); one sweep returns r after the pair is known.",
+-          "expected": "Empirical and true trap models agree exactly."
++          "expected": "Empirical and true trap models agree exactly.",
++          "check": "ml101-pacmdp-rmax-accuracy",
++          "fixture": "deterministic-one-state-rmax",
++          "asserts": "every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$"
+         }
+       ],
+       "boundaries": [
+@@ -1699,7 +1714,10 @@
+           "name": "zero-slack one-state update",
+           "inputs": "gamma=0; U(a)=U(b)=V*=1; rewards (1,0); epsilon1=1/4",
+           "calculation": "The first b batch has mean 0 and satisfies 1-0>=2epsilon1, then Q(b)=epsilon1.",
+-          "expected": "An update occurs with D(b)=0, covered by the +1 allowance."
++          "expected": "An update occurs with D(b)=0, covered by the +1 allowance.",
++          "check": "ml101-pacmdp-delayed-update-count",
++          "fixture": "zero-slack-one-state-update",
++          "asserts": "The additive $1$ in each pair's update allowance is necessary, including when $U(s,a)=V^*(s)$."
+         }
+       ],
+       "boundaries": [
+@@ -1840,7 +1858,10 @@
+           "name": "one-state deterministic R-MAX PAC branch",
+           "inputs": "gamma=0, S=A=1, U=Vmax=V*=1, epsilon=1/2, delta=1/2",
+           "calculation": "eta=1/8, E_eta contains the single pair, H=1, and m,M are finite.",
+-          "expected": "The finite-instance count bound is defined."
++          "expected": "The finite-instance count bound is defined.",
++          "check": "ml101-pacmdp-rmax-pac",
++          "fixture": "one-state-deterministic-pac",
++          "asserts": "Then $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$."
+         }
+       ],
+       "boundaries": [
+@@ -2024,7 +2045,10 @@
+           "name": "one-state zero-slack PAC branch",
+           "inputs": "gamma=0, S=1, A=2, Vmax=1, epsilon=1/2, delta=1/2, U=(1,1)",
+           "calculation": "eta=1/8, epsilon1=1/24, both gaps are 0, and G=2.",
+-          "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive."
++          "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive.",
++          "check": "ml101-pacmdp-delayed-pac",
++          "fixture": "one-state-zero-slack-pac",
++          "asserts": "The additive term remains when all heuristic slacks vanish."
+         }
+       ],
+       "boundaries": [
+@@ -2124,7 +2148,10 @@
+           "name": "n=1 schedule",
+           "inputs": "gamma=0; rewards (a,b)=(1,0); choose b at t=1,3 and a at t=2",
+           "calculation": "V*=1 and continuation values are 0,1,0.",
+-          "expected": "For epsilon=1/2, exactly times 1 and 3 are bad."
++          "expected": "For epsilon=1/2, exactly times 1 and 3 are bad.",
++          "check": "ml101-pacmdp-nonpermanent",
++          "fixture": "n-one-schedule",
++          "asserts": "For $\\epsilon=1/2$, it has exactly $n+1$ bad steps, including one after a good step."
+         }
+       ],
+       "boundaries": [
+@@ -2236,7 +2263,10 @@
+           "name": "m=1 R-MAX failure",
+           "inputs": "gamma=0; rewards (a,b)=(1,0); U=(0,0); tie order b before a; m=1",
+           "calculation": "After b is known Q(b)=0; unvisited Q(a)=0; tie order still selects b.",
+-          "expected": "The behavior stays bad and U(a)<Q*(s,a)."
++          "expected": "The behavior stays bad and U(a)<Q*(s,a).",
++          "check": "ml101-pacmdp-inadmissible",
++          "fixture": "m-one-rmax-failure",
++          "asserts": "It observes only $b$, chooses $b$ forever, and is $1/2$-bad at every time."
+         }
+       ],
+       "boundaries": [
+@@ -2447,7 +2477,10 @@
+           "name": "m=1 zero-slack Delayed Q update",
+           "inputs": "gamma=0; rewards (a,b)=(1,0); U=(1,1); tie order b first; m=1; epsilon1=1/4",
+           "calculation": "The first b target is 0; 1>=2epsilon1; Q(b) becomes epsilon1.",
+-          "expected": "One zero-slack update occurs before the next action a."
++          "expected": "One zero-slack update occurs before the next action a.",
++          "check": "ml101-pacmdp-delayed-zero-slack",
++          "fixture": "m-one-zero-slack-update",
++          "asserts": "Delayed Q-learning selects $b$ for its first $m$ samples and then lowers $Q(s,b)$, even though $\\sum_{s,a}[U(s,a)-V^*(s)]_+=0$."
+         }
+       ],
+       "boundaries": [

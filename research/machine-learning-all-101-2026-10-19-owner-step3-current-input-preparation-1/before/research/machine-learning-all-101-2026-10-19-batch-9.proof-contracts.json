@@ -1,0 +1,1071 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+    "lem-bounded-variable-lower-tail-from-mean",
+    "def-minimax-excess-risk",
+    "thm-realizable-vc-minimax-lower-bound",
+    "thm-agnostic-vc-minimax-lower-bound",
+    "cor-vc-minimax-rate-match",
+    "ex-bernoulli-two-point-testing",
+    "ex-finite-shattered-set",
+    "ex-fixed-confidence-vc-lower-bounds"
+  ],
+  "contracts": {
+    "lem-bernoulli-two-point-testing-for-vc-lower-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For any randomized test, its average error is at least $\\bigl(1-\\operatorname{TV}(P_-^k,P_+^k)\\bigr)/2$: writing the two error expectations over the common finite sample space gives $e_k(\\psi)=\\frac12\\left(1-\\sum_\\omega\\psi(\\omega)(P_+^k(\\omega)-P_-^k(\\omega))\\right)$. Each $\\psi(\\omega)\\in[0,1]$ makes the signed sum at most the sum of the positive differences; these differences sum to $\\frac12\\sum_\\omega|P_+^k(\\omega)-P_-^k(\\omega)|$ because their total signed sum is zero. This is $\\operatorname{TV}(P_-^k,P_+^k)$ by the definition in the statement.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any finite laws $Q,R$, write $|Q(\\omega)-R(\\omega)|=|\\sqrt Q-\\sqrt R|(\\sqrt Q+\\sqrt R)$. The finite Cauchy\u2013Schwarz inequality follows by expanding $\\sum_i(a_i-\\lambda b_i)^2\\ge0$ with $\\lambda=(\\sum_i a_i b_i)/(\\sum_i b_i^2)$ when the denominator is positive, and is immediate when it is zero. Apply it to $a_\\omega=|\\sqrt{Q(\\omega)}-\\sqrt{R(\\omega)}|$ and $b_\\omega=\\sqrt{Q(\\omega)}+\\sqrt{R(\\omega)}$ to obtain $\\operatorname{TV}(Q,R)^2\\le\\frac14\\left(\\sum_\\omega(\\sqrt Q-\\sqrt R)^2\\right)\\left(\\sum_\\omega(\\sqrt Q+\\sqrt R)^2\\right)=1-\\operatorname{aff}(Q,R)^2$. Thus $e_k(\\psi)\\ge\\frac12(1-\\sqrt{1-\\operatorname{aff}(P_-^k,P_+^k)^2})$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "The single-observation affinity is $2\\sqrt{(1-u^2)/4}=\\sqrt{1-u^2}$. Finite product distributivity makes the $k$-observation affinity its $k$th power, $(1-u^2)^{k/2}$; substituting gives the first displayed lower bound.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "For $0\\le x<1$, $g(x)=\\log(1-x)+x/(1-x)$ satisfies $g(0)=0$ and $g'(x)=x/(1-x)^2\\ge0$, so $(1-u^2)^k\\ge\\exp(-ku^2/(1-u^2))$. Since $2\\lceil k/2\\rceil\\ge k$, the exponential with exponent $-ku^2/(1-u^2)$ is at least the one with exponent $-2\\lceil k/2\\rceil u^2/(1-u^2)$. The map $s\\mapsto1-\\sqrt{1-s}$ is increasing on $[0,1]$, so the first lower bound is at least $2\\Phi(2\\lceil k/2\\rceil,u)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "With no observations the test's decision distribution is the same under both signs, so its equal-prior error is $\\frac12(q+(1-q))=\\frac12$ for its probability $q$ of deciding $+$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "evidence": "Step 5.1 treats k=0 explicitly.",
+          "case": "empty"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The parameter domain is the open interval 0<u<1, so u=0 is excluded.",
+          "case": "zero"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The parameter domain excludes u=1, where the displayed denominator would vanish.",
+          "case": "one"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Both Bernoulli laws are nondegenerate throughout 0<u<1.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "The no-observation boundary k=0 is handled in step 5.1; u endpoints are outside the stated domain.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The test is supplied as a function; no choice from a nonempty family is required.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Total variation bounds testing error below, affinity bounds total variation above, and the product-law computation supplies the explicit rate. This chain is a lower inequality for every test, without a claim that the bound characterizes optimal error exactly.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Total variation bounds testing error below, affinity bounds total variation above, and the product-law computation supplies the explicit rate. This chain is a lower inequality for every test, without a claim that the bound characterizes optimal error exactly.",
+            "item_sha256": "529d0bc788564bcdd2104efa25c378a01355a95b621b1eb69a13503af90bca95",
+            "row_sha256": "c05d9d50cbf223760ae4cfa3e70e6560b483bf5f4d100f24d4b081d818272d25"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Total variation bounds testing error below, affinity bounds total variation above, and the product-law computation supplies the explicit rate. This chain is a lower inequality for every test, without a claim that the bound characterizes optimal error exactly.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Total variation bounds testing error below, affinity bounds total variation above, and the product-law computation supplies the explicit rate. This chain is a lower inequality for every test, without a claim that the bound characterizes optimal error exactly.",
+            "item_sha256": "529d0bc788564bcdd2104efa25c378a01355a95b621b1eb69a13503af90bca95",
+            "row_sha256": "03c6fc5bb7eb407543e654c2f23a977b05680a1e64838afa33b73e01f5d0531a"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-bounded-variable-lower-tail-from-mean": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Splitting the expectation on $\\{Z\\le t\\}$ and $\\{Z>t\\}$ and using $Z\\le t$ on the first event and $Z\\le1$ on the second gives $\\mathbb E Z\\le t\\Pr\\{Z\\le t\\}+\\Pr\\{Z>t\\}=t+(1-t)\\Pr\\{Z>t\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Since $1-t>0$, rearranging the inequality in step 1.1 gives $\\Pr\\{Z>t\\}\\ge(\\mathbb E Z-t)/(1-t)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid when the event Z>t is empty.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "For Z=0 almost surely, the right side is nonpositive and the probability is zero, as covered by step 2.1.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "For Z=1 almost surely and t<1, both sides equal one, as covered by step 2.1.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Constant Z=z in [0,1] is covered by the same event split in step 1.1.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "The statement includes t=0 and excludes t=1; step 2.1 uses exactly 1-t>0.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "No arbitrary selection is made.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Splitting the expectation at the supplied threshold gives a lower bound on its exceedance probability. Equality or a converse recovery of the mean from that lower estimate is not part of this claim.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Splitting the expectation at the supplied threshold gives a lower bound on its exceedance probability. Equality or a converse recovery of the mean from that lower estimate is not part of this claim.",
+            "item_sha256": "1d3650416662f1162a8285f6d47995508bf2a0ae7780646525f25953dba7f744",
+            "row_sha256": "4ac8aadaa9e4aea7f132df1a5d6c909550f833d53138b78d9e6fe00710e3b519"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Splitting the expectation at the supplied threshold gives a lower bound on its exceedance probability. Equality or a converse recovery of the mean from that lower estimate is not part of this claim.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Splitting the expectation at the supplied threshold gives a lower bound on its exceedance probability. Equality or a converse recovery of the mean from that lower estimate is not part of this claim.",
+            "item_sha256": "1d3650416662f1162a8285f6d47995508bf2a0ae7780646525f25953dba7f744",
+            "row_sha256": "83bfcdd59987961ddf341627d7806286357c488959cb477cdf66d488e8099f3a"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-minimax-excess-risk": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "evidence": "The definition explicitly requires a nonempty class H; an empty class is outside its domain.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "VC dimension zero is included by the supremum over n>=0 in the Definition.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "The risk range [0,1], tolerance eta>=0, and positive sample-size domain are explicit in the Definition.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Deterministic and nonattained class-risk benchmarks are allowed by the Definition.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "The Definition includes risk endpoints zero and one and does not assert attainment of the infimum.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "A constant learner exists for each fixed nonempty H; the Definition assumes no choice principle.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The minimax quantities are infima over admissible learners of worst-law expected risks or tails. These definitions fix realizable and agnostic benchmarks separately, without asserting that minimax small risk is equivalent to any VC-dimension property.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The minimax quantities are infima over admissible learners of worst-law expected risks or tails. These definitions fix realizable and agnostic benchmarks separately, without asserting that minimax small risk is equivalent to any VC-dimension property.",
+            "item_sha256": "0aa79903c83fe8e7c09b1347780f8b1f5212d3de3bb1812164f10fad4749ab1d",
+            "row_sha256": "ae56a88b8445b71fb55c7218ec78f8cc182d460d1039bb28dd47bdd1888a19ff"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The minimax quantities are infima over admissible learners of worst-law expected risks or tails. These definitions fix realizable and agnostic benchmarks separately, without asserting that minimax small risk is equivalent to any VC-dimension property.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The minimax quantities are infima over admissible learners of worst-law expected risks or tails. These definitions fix realizable and agnostic benchmarks separately, without asserting that minimax small risk is equivalent to any VC-dimension property.",
+            "item_sha256": "0aa79903c83fe8e7c09b1347780f8b1f5212d3de3bb1812164f10fad4749ab1d",
+            "row_sha256": "6ea50f91c039c5de53fedb95fc756d979f6fdeb07d38ac1c420cc2eae5a1f475"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Independently read the full Definition and all four actual supplier carriers. The instance-space convention is the nonempty supervised instance space of def-supervised-learning-problem; H is explicitly nonempty. A fixed h gives an admissible constant learner, and a point x with label h(x) gives a realizable point-mass law, so the minimax index sets are nonempty in that context. Indexed traces are invariant under finite permutations and include the empty trace; dimension zero and infinity are allowed. Binary disagreement events are measurable rectangles; class-risk infima need not be attained. Fixed-predictor measurability follows from the current composition/projection proof, while randomized evaluation and risk measurability are separately imposed. The seed law is fixed independently of D and the probability law is D^m times the seed law. Proper outputs give excess in [0,1]; eta=0, eta>=1, and zero/one risks cause no undefined subtraction. A realizable target has zero class benchmark. No selector or arbitrary-index choice is used. Reader and refuter contain no findings. No diagram is present or needed."
+      }
+    },
+    "thm-realizable-vc-minimax-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-shattering-and-vc-dimension",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{F}\\subseteq\\mathcal{P}([n])$ and let $T\\subseteq[n]$.\n\nThe **trace** of $\\mathcal{F}$ on $T$ is\n\n$$\\mathcal{F}\\vert_T:=\\{\\,F\\cap T:F\\in\\mathcal{F}\\,\\}.$$\n\nThe family $\\mathcal{F}$ **shatters** $T$ when\n\n$$\\mathcal{F}\\vert_T=\\mathcal{P}(T).$$\n\nThe **VC dimension** of $\\mathcal{F}$ is the greatest integer $d\\ge0$ such that\nsome subset $T\\subseteq[n]$ with $\\lvert T\\rvert=d$ is shattered. For the empty\nfamily we set $\\operatorname{VC}(\\varnothing):=0$ by convention.\n\nThis maximum is well defined: every shattered set is a subset of the finite set\n$[n]$, so its size lies in $\\{0,\\dots,n\\}$, and for any nonempty family the empty\nset is shattered because every trace on $\\varnothing$ is $\\varnothing$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-variable-lower-tail-from-mean",
+          "source_section": "Statement",
+          "quote": "On any probability space, if a random variable $Z$ satisfies $0\\le Z\\le1$ almost surely and $0\\le t<1$, then\n$$\\Pr\\{Z>t\\}\\ge\\frac{\\mathbb E Z-t}{1-t}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Since $d$ is the finite VC dimension, choose distinct $x_0,x_1,\\ldots,x_{d-1}$ shattered by $\\mathcal H$. For each of the finitely many label vectors $\\theta\\in\\{0,1\\}^d$, shattering supplies a target $f_\\theta\\in\\mathcal H$ with those labels on these points; finite choice suffices for this finite family. Put $\\epsilon=(d-1)/(32m)$ and define the finite mixture $\\mu=(1-8\\epsilon)\\delta_{x_0}+\\sum_{i=1}^{d-1}\\frac{8\\epsilon}{d-1}\\delta_{x_i}$. The range on $m$ gives $8\\epsilon=(d-1)/(4m)\\le1$, so all mixture weights are nonnegative and sum to one. For each $\\theta$, let $D_\\theta$ be the law of $(X,f_\\theta(X))$ for $X\\sim\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Let $M$ count sample positions drawn from the rare atoms $x_1,\\ldots,x_{d-1}$. Then $M\\sim\\operatorname{Bin}(m,8\\epsilon)$ and $\\mu_0:=\\mathbb EM=(d-1)/4\\ge1/4$. Since $e^p=\\sum_{j=0}^\\infty p^j/j!\\ge1+p$ for $p\\ge0$, $\\mathbb E2^M=(1+8\\epsilon)^m\\le e^{\\mu_0}$. For any nonnegative random variable $X$ and $b>0$, $\\mathbb EX\\ge b\\Pr\\{X\\ge b\\}$ because $X\\ge b\\mathbf1_{\\{X\\ge b\\}}$; apply this to $X=2^M$ and $b=2^{2\\mu_0}$. On $\\{M\\ge2\\mu_0\\}$, $2^M\\ge2^{2\\mu_0}$, hence $\\Pr\\{M\\ge2\\mu_0\\}\\le e^{\\mu_0-2\\mu_0\\log2}\\le e^{-\\mu_0/3}$, where $\\log2\\ge2/3$ because $g(x)=\\log x-2(x-1)/(x+1)$ has $g(1)=0$ and $g'(x)=(x-1)^2/(x(x+1)^2)\\ge0$ for $x\\ge1$. Since $2\\mu_0=(d-1)/2$, $\\Pr\\{M\\le(d-1)/2\\}\\ge1-e^{-\\mu_0/3}\\ge1-e^{-1/12}\\ge1/13$; the last inequality follows from $e^{1/12}\\ge1+1/12=13/12$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Fix any vector of sample atom indices and observed labels for which $M\\le(d-1)/2$. At least $(d-1)/2$ rare atoms were not observed. Under the uniform prior on $\\theta$, each unseen label $\\theta_i$ is still an independent fair bit, independent of the learner's output at $x_i$, because the learner depends only on the observed sample and independent internal randomness. Therefore, if $W$ is the learner's risk contribution from $x_1,\\ldots,x_{d-1}$, then $\\mathbb E_{\\theta,A}[W\\mid\\text{observed data}]\\ge\\frac12\\frac{d-1}{2}\\frac{8\\epsilon}{d-1}=2\\epsilon$, while $0\\le W\\le8\\epsilon$. Applying [F2] to $W/(8\\epsilon)$ at $t=1/8$ yields $\\Pr_{\\theta,A}\\{W>\\epsilon\\mid\\text{observed data}\\}\\ge1/7$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Each $D_\\theta$ is realizable by $f_\\theta$, so [F4] gives $R_{D_\\theta}^*(\\mathcal H)=0$. By [F3] and the event $Y=f_\\theta(X)$ of probability one, the zero-one risk and target risk of the learner's output agree. The full target risk is at least $W$. Averaging step 1.3 over sample locations and labels, then using step 1.2, gives $\\Pr_{\\theta,S\\sim D_\\theta^m,A}\\{R_{D_\\theta}(A(S),f_\\theta)>\\epsilon\\}\\ge\\frac1{7}\\cdot\\frac1{13}=\\frac1{91}>\\frac1{100}$. This is an average over the finite set $\\{0,1\\}^d$, so at least one $\\theta$ has conditional failure probability at least $1/91$. Its $D_\\theta$ and $f_\\theta$ satisfy the statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The hypotheses require d>=2 and m>=ceil((d-1)/4)>=1.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 has epsilon=(d-1)/(32m)>0 for every stated d and m.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 permits the rare mass 8 epsilon to equal one; step 1.2 remains valid when the binomial parameter is one.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 permits the x0 point mass to be zero at the range boundary.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 cover equality at m=ceil((d-1)/4), and step 2.1 yields the stated strict-risk event.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 chooses only the finite family of 2^d target labelings, so finite choice suffices.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "An unseen-label construction and a finite averaging argument produce a realizable hard target for each learner. This is an existential failure lower bound with its stated sample range, not a necessary-and-sufficient characterization of successful learning.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "An unseen-label construction and a finite averaging argument produce a realizable hard target for each learner. This is an existential failure lower bound with its stated sample range, not a necessary-and-sufficient characterization of successful learning.",
+            "item_sha256": "5d128fbaca7b9e7ff9c93f2d8caf0ac9ac97bac6a6f905332772f32297e61398",
+            "row_sha256": "324abc997da2b77f10f1b362a0af949ae8eb7eb0b6183b30fb3b95c970b15c39"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "An unseen-label construction and a finite averaging argument produce a realizable hard target for each learner. This is an existential failure lower bound with its stated sample range, not a necessary-and-sufficient characterization of successful learning.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "An unseen-label construction and a finite averaging argument produce a realizable hard target for each learner. This is an existential failure lower bound with its stated sample range, not a necessary-and-sufficient characterization of successful learning.",
+            "item_sha256": "5d128fbaca7b9e7ff9c93f2d8caf0ac9ac97bac6a6f905332772f32297e61398",
+            "row_sha256": "af96663985cac9b2ab6bb9bfa580aed7b982830102450d93829cad1ed3de6612"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-agnostic-vc-minimax-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-shattering-and-vc-dimension",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{F}\\subseteq\\mathcal{P}([n])$ and let $T\\subseteq[n]$.\n\nThe **trace** of $\\mathcal{F}$ on $T$ is\n\n$$\\mathcal{F}\\vert_T:=\\{\\,F\\cap T:F\\in\\mathcal{F}\\,\\}.$$\n\nThe family $\\mathcal{F}$ **shatters** $T$ when\n\n$$\\mathcal{F}\\vert_T=\\mathcal{P}(T).$$\n\nThe **VC dimension** of $\\mathcal{F}$ is the greatest integer $d\\ge0$ such that\nsome subset $T\\subseteq[n]$ with $\\lvert T\\rvert=d$ is shattered. For the empty\nfamily we set $\\operatorname{VC}(\\varnothing):=0$ by convention.\n\nThis maximum is well defined: every shattered set is a subset of the finite set\n$[n]$, so its size lies in $\\{0,\\dots,n\\}$, and for any nonempty family the empty\nset is shattered because every trace on $\\varnothing$ is $\\varnothing$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+          "source_section": "Statement",
+          "quote": "For $0<u<1$, let $P_-$ and $P_+$ be the Bernoulli laws on $\\{0,1\\}$ with success probabilities $(1-u)/2$ and $(1+u)/2$. For an integer $k\\ge1$, a randomized test is a function $\\psi:\\{0,1\\}^k\\to[0,1]$, interpreted as the probability of deciding $+$. Its equal-prior average error is\n$$e_k(\\psi):=\\frac12\\left(E_{P_-^k}\\psi+E_{P_+^k}(1-\\psi)\\right).$$\nFor finite probability laws $Q,R$ on a common finite set, define $\\operatorname{aff}(Q,R):=\\sum_\\omega\\sqrt{Q(\\omega)R(\\omega)}$ and $\\operatorname{TV}(Q,R):=\\frac12\\sum_\\omega|Q(\\omega)-R(\\omega)|$. Set\n$$\\Phi(t,u):=\\frac14\\left(1-\\sqrt{1-\\exp\\left(-\\frac{tu^2}{1-u^2}\\right)}\\right)\\qquad(t\\ge0).$$\nThen every such test satisfies\n$$e_k(\\psi)\\ge\\frac12\\left(1-\\sqrt{1-(1-u^2)^k}\\right)\\ge2\\Phi(2\\lceil k/2\\rceil,u).$$\nWith no observations ($k=0$), every equal-prior test has average error exactly $1/2$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-variable-lower-tail-from-mean",
+          "source_section": "Statement",
+          "quote": "On any probability space, if a random variable $Z$ satisfies $0\\le Z\\le1$ almost surely and $0\\le t<1$, then\n$$\\Pr\\{Z>t\\}\\ge\\frac{\\mathbb E Z-t}{1-t}.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Put $r=\\sqrt{d/(320m)}$ and $a=64r/7$. The sample range gives $r\\le1/64$ and $0<a\\le1/7$. Choose distinct $x_1,\\ldots,x_d$ shattered by $\\mathcal H$. For each $\\sigma\\in\\{-1,+1\\}^d$, define $D_\\sigma:=\\frac1d\\sum_{i=1}^d\\left[\\left(\\frac12+\\frac{\\sigma_i a}{2}\\right)\\delta_{(x_i,1)}+\\left(\\frac12-\\frac{\\sigma_i a}{2}\\right)\\delta_{(x_i,0)}\\right]$. The weights are nonnegative and sum to one, so [A1] makes this a probability law. The Bayes label $b_i=\\mathbf1_{\\{\\sigma_i=+1\\}}$ is realized on these points by some $h\\in\\mathcal H$ by [F1]. At atom $x_i$, predicting $b_i$ has error $(1-a)/2$, while predicting $1-b_i$ has error $(1+a)/2$, by the two point masses in $D_\\sigma$. Since each atom has marginal weight $1/d$, the class benchmark is $(1-a)/2$ and every binary predictor $g$ has excess risk $R_{D_\\sigma}(g)-\\inf_{h\\in\\mathcal H}R_{D_\\sigma}(h)=\\frac{a}{d}\\sum_{i=1}^d\\mathbf1_{\\{g(x_i)\\ne b_i\\}}$. This identity holds for every binary output $g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For $c=a^2/(1-a^2)>0$ and $q=e^{-ct}$, direct differentiation of $\\Phi(t,a)=\\frac14(1-\\sqrt{1-q})$ gives $\\Phi'(t,a)=-\\frac{cq}{8\\sqrt{1-q}}<0$ and $\\Phi''(t,a)=\\frac{c^2q(2-q)}{16(1-q)^{3/2}}>0$ for $t>0$. Also $\\Phi(0,a)=1/4$ and $\\Phi$ is continuous there. Approximating any zero endpoint in the monotonicity and convexity inequalities by positive arguments and taking limits extends both properties to $[0,\\infty)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Fix coordinate $i$ and condition on all other signs and all sample data outside $x_i$. Given $N_i=k\\ge1$ observations at $x_i$, the learner's prediction there is a randomized test of $\\sigma_i$ based on $k$ iid labels with the two laws in [F2]. Its conditional average mistake probability is at least $2\\Phi(2\\lceil k/2\\rceil,a)$. Since $2\\lceil k/2\\rceil\\le k+1$ and $\\Phi$ is decreasing by step 1.2, this is at least $2\\Phi(k+1,a)>\\Phi(k+1,a)$. For $k=0$ the prediction is independent of $\\sigma_i$, so its average mistake probability is $1/2>\\Phi(1,a)$ because $0<\\Phi(1,a)<1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "Put $s=d/m\\le5/64$. Since $a^2=64s/245$ and $m/d=1/s$, $c(m/d+1)=\\frac{64}{245}\\frac{1+s}{1-(64/245)s}\\le\\frac{23}{80}$. The derivative of $h(s)=\\frac{64}{245}\\frac{1+s}{1-(64/245)s}$ is $\\frac{(64/245)(1+64/245)}{(1-(64/245)s)^2}>0$, and direct substitution gives $h(5/64)=23/80$. Moreover, $\\ln(4/3)=\\int_0^{1/3}\\frac{dx}{1+x}>\\frac13-\\frac1{18}+\\frac1{81}-\\frac1{324}+\\frac1{1215}-\\frac1{4374}=\\frac{12581}{43740}>\\frac{23}{80}$. The strict lower bound follows from $1/(1+x)=1-x+x^2-x^3+x^4-x^5+x^6/(1+x)$, whose remainder is positive on $(0,1/3]$; the final rational comparison follows from $80\\cdot12581=1006480>1006020=23\\cdot43740$. Hence $c(m/d+1)<\\ln(4/3)$, so $e^{-c(m/d+1)}>3/4$ and therefore $\\Phi(m/d+1,a)>1/8$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Let $N_i$ count occurrences of $x_i$; $N_i\\sim\\operatorname{Bin}(m,1/d)$, so $\\mathbb E(N_i+1)=m/d+1=:t_0>0$. With $Z$ equal to the excess risk in step 1.1 divided by $a$, we have $Z\\in[0,1]$. Averaging the strict coordinate bounds of step 2.1 over the finitely many coordinates, sample counts, signs, and learner randomization gives $\\mathbb EZ>\\mathbb E\\Phi(N_i+1,a)$. By step 1.2, $\\Phi'$ is increasing on $(0,\\infty)$. For each possible value $x=N_i+1>0$, if $x>t_0$ the mean value theorem gives $\\Phi(x,a)-\\Phi(t_0,a)=\\Phi'(\\xi,a)(x-t_0)\\ge\\Phi'(t_0,a)(x-t_0)$ for some $\\xi\\in(t_0,x)$; if $x<t_0$, it gives the same inequality because $\\Phi'(\\xi,a)\\le\\Phi'(t_0,a)$ for some $\\xi\\in(x,t_0)$ and $x-t_0<0$; equality holds when $x=t_0$. Summing this finite inequality over the distribution of $N_i$ cancels the linear term because $\\mathbb E(N_i+1)=t_0$, so $\\mathbb E\\Phi(N_i+1,a)\\ge\\Phi(t_0,a)=:v$. Therefore $\\mathbb EZ>v$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "The prior on $\\sigma$ is finite. Since the joint average in step 3.1 is greater than $v>1/8$, some $\\sigma$ has $\\mathbb E_{S\\sim D_\\sigma^m,A}Z>1/8$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "For this $\\sigma$, $r/a=7/64$. Apply [F3] to $Z$ at $t=7/64$: $\\Pr\\{Z>7/64\\}\\ge\\frac{\\mathbb EZ-7/64}{57/64}>\\frac{1/8-7/64}{57/64}=\\frac1{57}>\\frac1{64}$. Since $a(7/64)=r$, the event is exactly that the class excess risk exceeds $r$.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The hypotheses require d>=2 and m>=ceil(64d/5)>=1.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 gives r>0 and a>0 for all stated finite d,m.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 gives a<=1/7, so both Bernoulli weights are strictly positive.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero-observation coordinate case explicitly.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.2 includes s=d/m=5/64 at the minimum sample size and keeps the logarithmic comparison strict.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 use only finite shattered labelings and the finite sign set.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "For each learner a finite sign-prior construction supplies one hard label law with a positive failure probability. The argument proves a minimax obstruction, without conversely asserting learnability when that obstruction disappears.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "For each learner a finite sign-prior construction supplies one hard label law with a positive failure probability. The argument proves a minimax obstruction, without conversely asserting learnability when that obstruction disappears.",
+            "item_sha256": "5e350f4515e82b6f8b4055f56d09006b0599661fc542b03871caad97ee951cfc",
+            "row_sha256": "78aa145ce63a4cdb10b260ca19379579036e8f2bba8ae0e512c4aa24c51a6e5f"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "For each learner a finite sign-prior construction supplies one hard label law with a positive failure probability. The argument proves a minimax obstruction, without conversely asserting learnability when that obstruction disappears.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "For each learner a finite sign-prior construction supplies one hard label law with a positive failure probability. The argument proves a minimax obstruction, without conversely asserting learnability when that obstruction disappears.",
+            "item_sha256": "5e350f4515e82b6f8b4055f56d09006b0599661fc542b03871caad97ee951cfc",
+            "row_sha256": "16afe845ba7fca3b69d422518db72330df8bc71563b0dd0dd15de3b7eb71d088"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Independently checked current seven proof steps, all four cited facts and exact supplier proofs. With m>=ceil(64d/5), r<=1/64 and a=64r/7 lies in (0,1/7], so all 2d weights are positive. Shattering realizes each Bayes labeling and the excess is a times the mistake fraction. Under the finite uniform sign prior, conditioning on the sample atom positions, other signs and labels leaves the kth coordinate labels iid Bernoulli and the independent seed merely randomizes the test; N_i=0 has error 1/2. The local testing lemma proves the affinity/TV bound, including k=0, and supplies the stronger factor 2; no exercise is assumed. Checked Phi derivatives, finite tangent averaging at E(N_i+1)=m/d+1, h(5/64)=23/80, and the exact alternating-integral rational 12581/43740>23/80. Hence some finite sign has normalized mean>1/8; the bounded-tail lemma at 7/64 gives probability>1/57>1/64 at the required strict risk threshold. Only finite choice is needed. Consulted Mohri 2e section 3.4, Lemmas 3.21-3.22 and full Theorem 3.23 proof (printed pp.45-48; downloaded copy PDF pp.62-65), plus Shalev-Shwartz/Ben-David 28.2.1-28.2.2 (printed pp.394-398). The sources are comparisons: the locally stated sample restriction and independently proved constants govern. Reader/refuter have no findings; no diagram is present or required."
+      }
+    },
+    "cor-vc-minimax-rate-match": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-realizable-vc-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonempty measurable class of binary classifiers with finite VC dimension $d\\ge2$, and let $m\\ge\\lceil(d-1)/4\\rceil$ be an integer. For every possibly randomized learner $A$, there are $d$ distinct points $x_0,\\ldots,x_{d-1}$ shattered by $\\mathcal H$, weights $w_0,\\ldots,w_{d-1}\\ge0$ with $\\sum_iw_i=1$, a law $\\mu=\\sum_iw_i\\delta_{x_i}$, and a target $f\\in\\mathcal H$ such that, for the labeled law $D_f$ of $(X,f(X))$ with $X\\sim\\mu$. Here $\\delta_x(E)=\\mathbf1_{\\{x\\in E\\}}$ for each measurable $E\\subseteq\\mathcal X$,\n$$\\Pr_{S\\sim D_f^m,A}\\left\\{R_{D_f}(A(S),f)>\\frac{d-1}{32m}\\right\\}\\ge\\frac1{100}.$$\nThe probability includes both the iid sample and the learner's internal randomness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-agnostic-vc-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonempty measurable binary class with finite VC dimension $d\\ge2$, and let $m\\ge\\lceil64d/5\\rceil$ be an integer. Set $r=\\sqrt{d/(320m)}$. For every possibly randomized learner $A$, there is a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$ such that\n$$\\Pr_{S\\sim D^m,A}\\left\\{R_D(A(S))- \\inf_{h\\in\\mathcal H}R_D(h)>r\\right\\}\\ge\\frac1{64}.$$\nThe probability includes both the iid sample and the learner's internal randomness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For a nonnegative random variable $X$ and $t\\ge0$, $X\\ge t\\mathbf1_{\\{X>t\\}}$ pointwise, so $\\mathbb EX\\ge t\\Pr\\{X>t\\}$. For each learner, [F1] supplies a realizable law with target risk exceeding $(d-1)/(32m)$ with probability at least $1/100$; since the supremum over realizable laws is at least this expectation, [F3] gives $\\mathfrak M_{\\rm real}\\ge\\frac1{100}\\frac{d-1}{32m}=\\frac{d-1}{3200m}\\ge\\frac{d}{6400m}$ because $d-1\\ge d/2$. Likewise [F2], nonnegativity in [F5], and the supremum over all laws in [F4] give $\\mathfrak M_{\\rm agn}\\ge\\frac1{64}\\sqrt{d/(320m)}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "If $m<(d-1)/(32\\eta)$ then $(d-1)/(32m)>\\eta$, so the event in [F1] is contained in the event of error exceeding $\\eta$. Its probability is at least $1/100>\\delta$. If $m<d/(320\\eta^2)$ then $\\sqrt{d/(320m)}>\\eta$, so [F2] similarly gives failure probability at least $1/64>\\delta$. Thus any successful sample size in the respective theorem range must be at least $(d-1)/(32\\eta)$ or $d/(320\\eta^2)$, respectively. Since $d-1\\ge d/2$ for $d\\ge2$, the first is at least $d/(64\\eta)$; the second is already a constant multiple of $d/\\eta^2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The corollary assumes d>=2 and the positive sample ranges in its antecedent theorems.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 gives positive expected minimax bounds for d>=2 and finite positive m.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses the [0,1] excess-risk range to invoke the nonnegative expectation-tail inequality.",
+          "case": "one"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "No new distributional model is imposed beyond the two antecedent theorems.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 uses the strict confidence conditions delta<1/100 and delta<1/64.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The corollary makes no new selections; the antecedent theorem constructions supply the hard laws.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "High-probability hard-law events give expectation lower bounds by multiplying threshold and probability. The sample-rate consequences are necessary conditions in specified ranges, not a converse guarantee that those sample sizes suffice.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "High-probability hard-law events give expectation lower bounds by multiplying threshold and probability. The sample-rate consequences are necessary conditions in specified ranges, not a converse guarantee that those sample sizes suffice.",
+            "item_sha256": "1443c10efb71a89e26c34c919a8e5e1d675604d8784a9886fe2dbf5dc704c358",
+            "row_sha256": "710efc446545811e502041b830e0e46451f7163c6db0b9944aa26ea7ebd3a547"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "High-probability hard-law events give expectation lower bounds by multiplying threshold and probability. The sample-rate consequences are necessary conditions in specified ranges, not a converse guarantee that those sample sizes suffice.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "High-probability hard-law events give expectation lower bounds by multiplying threshold and probability. The sample-rate consequences are necessary conditions in specified ranges, not a converse guarantee that those sample sizes suffice.",
+            "item_sha256": "1443c10efb71a89e26c34c919a8e5e1d675604d8784a9886fe2dbf5dc704c358",
+            "row_sha256": "08f2e064573db539bf82a71049acafc11126047c635c0119afeddda41ab82e2b"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-9",
+        "notes": "Independently checked both current corollary proof steps and all five fact interfaces against the current minimax definition and both full theorem proofs. Realizable risk equals target risk and has zero class benchmark; proper outputs make agnostic excess nonnegative. The elementary pointwise inequality X>=t*1_{X>t} gives expectation bounds for each learner hard law; taking supremum over laws and then infimum over learners preserves each uniform constant. Multiplication gives (d-1)/(3200m) and sqrt(d/(320m))/64, with d-1>=d/2 for d>=2. Strict sample inequalities force the theorem threshold above eta, so hard-law failure probabilities exceed the stipulated delta; equality of sample thresholds or delta is not asserted. Checked realizable supplier weights at the smallest allowed m (including d=2), binomial exponential-moment bound >=1/13, unseen-label conditional strict tail >=1/7 and finite target averaging >=1/91>1/100. Agnostic supplier reviewed at level 4. All rate claims remain restricted to their stated sample regimes; no matching upper rate or computational claim is made by this item. Mohri 2e section 3.4 and UBC section 7.3 Theorem 7.13 were compared with the actual local proofs; UBC assumes d>=3 and m>d/2, which is not silently extended here. Reader and refuter contain no findings. No choice beyond finite selection, missing diagram or repair."
+      }
+    },
+    "ex-bernoulli-two-point-testing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+          "source_section": "Statement",
+          "quote": "For $0<u<1$, let $P_-$ and $P_+$ be the Bernoulli laws on $\\{0,1\\}$ with success probabilities $(1-u)/2$ and $(1+u)/2$. For an integer $k\\ge1$, a randomized test is a function $\\psi:\\{0,1\\}^k\\to[0,1]$, interpreted as the probability of deciding $+$. Its equal-prior average error is\n$$e_k(\\psi):=\\frac12\\left(E_{P_-^k}\\psi+E_{P_+^k}(1-\\psi)\\right).$$\nFor finite probability laws $Q,R$ on a common finite set, define $\\operatorname{aff}(Q,R):=\\sum_\\omega\\sqrt{Q(\\omega)R(\\omega)}$ and $\\operatorname{TV}(Q,R):=\\frac12\\sum_\\omega|Q(\\omega)-R(\\omega)|$. Set\n$$\\Phi(t,u):=\\frac14\\left(1-\\sqrt{1-\\exp\\left(-\\frac{tu^2}{1-u^2}\\right)}\\right)\\qquad(t\\ge0).$$\nThen every such test satisfies\n$$e_k(\\psi)\\ge\\frac12\\left(1-\\sqrt{1-(1-u^2)^k}\\right)\\ge2\\Phi(2\\lceil k/2\\rceil,u).$$\nWith no observations ($k=0$), every equal-prior test has average error exactly $1/2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Here $P_-(0)=3/4$, $P_-(1)=1/4$, $P_+(0)=1/4$, and $P_+(1)=3/4$. The test $\\psi(y)=y$ has error $\\frac12(P_-(1)+P_+(0))=\\frac14$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For any randomized test $\\psi$, direct expansion gives $e_1(\\psi)=\\frac12+\\frac14(\\psi(0)-\\psi(1))\\ge\\frac14$, since $\\psi(0)\\ge0$ and $\\psi(1)\\le1$. The deterministic test attains this lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example fixes exactly one observation.",
+          "case": "empty"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The example fixes u=1/2 rather than a zero separation.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 computes all four probabilities and step 2.1 checks the test range endpoints.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "The deterministic test psi(y)=y is explicitly evaluated in step 1.1.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "The example fixes k=1 and computes its exact error in steps 1.1 and 2.1.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The test is fixed explicitly and no selection is involved.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The test that returns the observed bit attains the quarter-error lower bound by direct finite arithmetic. This proves its optimality in the displayed experiment, without a characterization of all tests in arbitrary experiments.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The test that returns the observed bit attains the quarter-error lower bound by direct finite arithmetic. This proves its optimality in the displayed experiment, without a characterization of all tests in arbitrary experiments.",
+            "item_sha256": "327ec42833dc402c2cb033f24929e0b655a4b2f24bb6c52b118383ac1be07101",
+            "row_sha256": "78d44461a3ab514a669038b61198d6a39400570dab83c025bacb04c6f1dd00a7"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The test that returns the observed bit attains the quarter-error lower bound by direct finite arithmetic. This proves its optimality in the displayed experiment, without a characterization of all tests in arbitrary experiments.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The test that returns the observed bit attains the quarter-error lower bound by direct finite arithmetic. This proves its optimality in the displayed experiment, without a characterization of all tests in arbitrary experiments.",
+            "item_sha256": "327ec42833dc402c2cb033f24929e0b655a4b2f24bb6c52b118383ac1be07101",
+            "row_sha256": "0d639ad44d7030dc61670b82f70e3690ef3b3bd3a9fe9a7ac2e9652345fe435b"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-finite-shattered-set": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-shattering-and-vc-dimension",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal{F}\\subseteq\\mathcal{P}([n])$ and let $T\\subseteq[n]$.\n\nThe **trace** of $\\mathcal{F}$ on $T$ is\n\n$$\\mathcal{F}\\vert_T:=\\{\\,F\\cap T:F\\in\\mathcal{F}\\,\\}.$$\n\nThe family $\\mathcal{F}$ **shatters** $T$ when\n\n$$\\mathcal{F}\\vert_T=\\mathcal{P}(T).$$\n\nThe **VC dimension** of $\\mathcal{F}$ is the greatest integer $d\\ge0$ such that\nsome subset $T\\subseteq[n]$ with $\\lvert T\\rvert=d$ is shattered. For the empty\nfamily we set $\\operatorname{VC}(\\varnothing):=0$ by convention.\n\nThis maximum is well defined: every shattered set is a subset of the finite set\n$[n]$, so its size lies in $\\{0,\\dots,n\\}$, and for any nonempty family the empty\nset is shattered because every trace on $\\varnothing$ is $\\varnothing$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $A\\subseteq[3]$, the function $h_A$ defined by $h_A(x_i)=1$ exactly when $i\\in A$ belongs to $\\mathcal H$; hence the indexed trace family on $\\{x_1,x_2,x_3\\}$ is $\\mathcal P([3])$, so this set is shattered by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The whole domain has only three points, so no subset of four distinct domain points exists. Thus no four-point set can be shattered, and the VC dimension is exactly three.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty three-point domain and a nonempty eight-function class.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a shattered three-point set, so the example is not dimension zero.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "All eight binary labelings are included in the stated class and constructed in step 1.1.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the maximal-size boundary set on the finite domain.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "The only possible point-set sizes range from zero through three; steps 1.1 and 2.1 locate the maximum.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "The finite family is explicitly the set of eight functions; step 1.1 constructs each labeling.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Every subset of the three-point domain is realized by its explicit indicator, and no four distinct points exist. These two cardinality facts determine the dimension, rather than asserting an equivalence between an arbitrary class and this lookup-table class.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Every subset of the three-point domain is realized by its explicit indicator, and no four distinct points exist. These two cardinality facts determine the dimension, rather than asserting an equivalence between an arbitrary class and this lookup-table class.",
+            "item_sha256": "f214487089f30a0dfd38f3376d5af70c4e8546dcd3e9bce2c9874d80989bbec6",
+            "row_sha256": "60d35905096c791f263ecdb54eb30708ce5b8843a3c73bc63a251f076346a540"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Every subset of the three-point domain is realized by its explicit indicator, and no four distinct points exist. These two cardinality facts determine the dimension, rather than asserting an equivalence between an arbitrary class and this lookup-table class.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Every subset of the three-point domain is realized by its explicit indicator, and no four distinct points exist. These two cardinality facts determine the dimension, rather than asserting an equivalence between an arbitrary class and this lookup-table class.",
+            "item_sha256": "f214487089f30a0dfd38f3376d5af70c4e8546dcd3e9bce2c9874d80989bbec6",
+            "row_sha256": "6890db22054fe57ae1891720be9681faa9a2ffd11c364d906642f75470ef4ce5"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-fixed-confidence-vc-lower-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-realizable-vc-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonempty measurable class of binary classifiers with finite VC dimension $d\\ge2$, and let $m\\ge\\lceil(d-1)/4\\rceil$ be an integer. For every possibly randomized learner $A$, there are $d$ distinct points $x_0,\\ldots,x_{d-1}$ shattered by $\\mathcal H$, weights $w_0,\\ldots,w_{d-1}\\ge0$ with $\\sum_iw_i=1$, a law $\\mu=\\sum_iw_i\\delta_{x_i}$, and a target $f\\in\\mathcal H$ such that, for the labeled law $D_f$ of $(X,f(X))$ with $X\\sim\\mu$. Here $\\delta_x(E)=\\mathbf1_{\\{x\\in E\\}}$ for each measurable $E\\subseteq\\mathcal X$,\n$$\\Pr_{S\\sim D_f^m,A}\\left\\{R_{D_f}(A(S),f)>\\frac{d-1}{32m}\\right\\}\\ge\\frac1{100}.$$\nThe probability includes both the iid sample and the learner's internal randomness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-agnostic-vc-minimax-lower-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonempty measurable binary class with finite VC dimension $d\\ge2$, and let $m\\ge\\lceil64d/5\\rceil$ be an integer. Set $r=\\sqrt{d/(320m)}$. For every possibly randomized learner $A$, there is a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$ such that\n$$\\Pr_{S\\sim D^m,A}\\left\\{R_D(A(S))- \\inf_{h\\in\\mathcal H}R_D(h)>r\\right\\}\\ge\\frac1{64}.$$\nThe probability includes both the iid sample and the learner's internal randomness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-minimax-excess-risk",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a measurable instance space and let $\\mathcal H$ be a nonempty class of measurable functions $h:\\mathcal X\\to\\{0,1\\}$. Give $\\{0,1\\}$ its full power-set sigma-algebra; all joint and sample spaces below carry the corresponding product sigma-algebras. For a finite set of distinct points $T=\\{x_1,\\ldots,x_n\\}$, its indexed trace family is\n$$\\mathcal F_{\\mathcal H,T}:=\\left\\{\\{j\\in[n]:h(x_j)=1\\}:h\\in\\mathcal H\\right\\}\\subseteq\\mathcal P([n]).$$\nThe set $T$ is shattered by $\\mathcal H$ when $\\mathcal F_{\\mathcal H,T}=\\mathcal P([n])$, and $\\operatorname{VCdim}(\\mathcal H)$ is the supremum of the integers $n\\ge0$ for which some $n$ distinct points are shattered; the value is $+\\infty$ if these integers are unbounded. This definition is independent of the chosen ordering of $T$, since a reordering bijects the index sets and all their subsets.\n\nFor a probability law $D$ on $\\mathcal X\\times\\{0,1\\}$, the zero-one risk of a measurable binary predictor $g$ is $R_D(g):=D\\{(x,y):g(x)\\ne y\\}\\in[0,1]$, and the class benchmark is $R_D^*(\\mathcal H):=\\inf_{h\\in\\mathcal H}R_D(h)\\in[0,1]$. The class excess risk of $g\\in\\mathcal H$ is $\\Delta_D(g):=R_D(g)-R_D^*(\\mathcal H)\\in[0,1]$; no attainment of the infimum is asserted. A law $D$ is realizable by $\\mathcal H$ when there is an $f\\in\\mathcal H$ with $D\\{(x,y):y=f(x)\\}=1$. For such a pair $(D,f)$, define its target risk by $R_D(g,f):=D_X\\{x:g(x)\\ne f(x)\\}$, where $D_X:=D\\circ\\pi_X^{-1}$ is the instance marginal under the projection $\\pi_X(x,y)=x$. On the probability-one event $Y=f(X)$, the indicators of $g(X)\\ne Y$ and $g(X)\\ne f(X)$ agree; hence $R_D(g)=R_D(g,f)$ for every measurable binary $g$, and $R_D^*(\\mathcal H)=0$.\n\nLet $\\mathcal D$ be the class of all probability laws on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal D_{\\rm real}(\\mathcal H):=\\{D\\in\\mathcal D:\\text{there is }f\\in\\mathcal H\\text{ with }D\\{(x,y):y=f(x)\\}=1\\}$. For integer $m\\ge1$, an admissible possibly randomized learner $A$ is a rule that depends on $\\mathcal H$ and $m$, not on $D$. Its seed space and law are fixed as part of $A$, independently of $D$: a probability space $(\\Omega_A,\\mathscr F_A,\\nu_A)$ and a seed $U\\sim\\nu_A$ independent of the sample. Given an ordered sample $S\\in(\\mathcal X\\times\\{0,1\\})^m$, $A(S,U)$ outputs a measurable member of $\\mathcal H$. For every fixed $x\\in\\mathcal X$, the evaluation $(S,U)\\mapsto A(S,U)(x)$ must be measurable on $\\big((\\mathcal X\\times\\{0,1\\})^m\\times\\Omega_A,(\\Sigma\\otimes2^{\\{0,1\\}})^{\\otimes m}\\otimes\\mathscr F_A\\big)$, and for every $D\\in\\mathcal D$ the risk $R_D(A(S,U))$ must be measurable as a function of the sample and seed. The sample law $D^m$ is the $m$-fold product law, so its coordinates are independent and each has law $D$. Probabilities and expectations involving $A$ use the product law $D^m\\otimes\\nu_A$. Let $\\mathcal A_m(\\mathcal H)$ denote this class of learners, and write $A(S)$ for $A(S,U)$ when the random seed is suppressed. These measurability conditions make each displayed expectation and probability well defined. Define the expected minimax excess risks by\n$$\\mathfrak M_{\\rm real}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\mathbb E_{S\\sim D^m,A}R_D(A(S)),$$\n$$\\mathfrak M_{\\rm agn}(m,\\mathcal H):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\mathbb E_{S\\sim D^m,A}\\left[R_D(A(S))-R_D^*(\\mathcal H)\\right].$$\nFor a tolerance $\\eta\\ge0$, their high-probability tail versions are\n$$\\mathfrak T_{\\rm real}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D_{\\rm real}(\\mathcal H)}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))>\\eta\\},$$\n$$\\mathfrak T_{\\rm agn}(m,\\mathcal H,\\eta):=\\inf_{A\\in\\mathcal A_m(\\mathcal H)}\\sup_{D\\in\\mathcal D}\\Pr_{S\\sim D^m,A}\\{R_D(A(S))-R_D^*(\\mathcal H)>\\eta\\}.$$\nThe lower bounds below are high-probability statements; their expectation consequences follow by integrating the nonnegative excess risk.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By [F3] the given class has $d=4$. Hence $\\lceil(4-1)/4\\rceil=1\\le64$ and $(4-1)/(32\\cdot64)=3/2048$, so [F1] gives the realizable assertion.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Also $\\lceil64\\cdot4/5\\rceil=52\\le64$ and $\\sqrt{4/(320\\cdot64)}=1/\\sqrt{5120}$, so [F2] gives the agnostic assertion. The theorems allow different hard laws, as stated.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example fixes d=4 and m=64, both positive.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the positive realizable threshold; step 2.1 verifies the positive agnostic threshold.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the exact fixed confidence constants in F1 and F2.",
+          "case": "one"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The example applies the two lower-bound theorems without adding a degenerate model restriction.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check both theorem sample-range endpoints against m=64.",
+          "case": "endpoints"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The example uses the theorem conclusions for an arbitrary given learner without a new selection.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Substituting dimension four and sample count sixty-four into two separate hard-law suppliers gives the displayed thresholds. Their realizable and agnostic laws may differ, so the two lower-bound assertions are not logical converses.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Substituting dimension four and sample count sixty-four into two separate hard-law suppliers gives the displayed thresholds. Their realizable and agnostic laws may differ, so the two lower-bound assertions are not logical converses.",
+            "item_sha256": "16bcf9b6e47ce89e874c40617b38d48b33994bf2638534258b2c8ea13536e553",
+            "row_sha256": "af14ba476446f1bae9a557741199d6b4afea89690acbca1ff0a44d195dacebc6"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Substituting dimension four and sample count sixty-four into two separate hard-law suppliers gives the displayed thresholds. Their realizable and agnostic laws may differ, so the two lower-bound assertions are not logical converses.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Substituting dimension four and sample count sixty-four into two separate hard-law suppliers gives the displayed thresholds. Their realizable and agnostic laws may differ, so the two lower-bound assertions are not logical converses.",
+            "item_sha256": "16bcf9b6e47ce89e874c40617b38d48b33994bf2638534258b2c8ea13536e553",
+            "row_sha256": "9a4e7f3fc82641ea0b832be218937e9ad4f1c0018717287f372b369904591447"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

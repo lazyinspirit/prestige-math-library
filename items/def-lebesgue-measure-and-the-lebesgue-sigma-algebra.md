@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "Lebesgue measure"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.json
   audited: 2026-08-26
   precheck: n/a
   judge:
@@ -32,15 +33,15 @@ pipeline_run: null
 ## Definition
 
 Fix $n \ge 1$ and let $\lambda_n^*$ be the Lebesgue outer set function on $\mathbb{R}^n$
-([[def-lebesgue-outer-measure]]). A set $E \subseteq \mathbb{R}^n$ is
+(Lebesgue outer measure on $\mathbb{R}^n$). A set $E \subseteq \mathbb{R}^n$ is
 **Lebesgue measurable** when
 
 $$\lambda_n^*(A) \;=\; \lambda_n^*(A \cap E) \;+\; \lambda_n^*(A \setminus E) \qquad \text{for every } A \subseteq \mathbb{R}^n .$$
 
 This formula makes sense before any outer-measure theorem is invoked. Under
-countable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]
+countable choice, Assuming countable choice, Lebesgue outer measure is an outer measure that restricts to elementary volume
 makes $\lambda_n^*$ an outer measure, and the displayed condition is then exactly
-Carathéodory measurability in the sense of [[def-caratheodory-measurable-set]].
+Carathéodory measurability in the sense of Carathéodory measurable sets.
 
 The family of Lebesgue measurable sets is written $\mathcal{L}(\mathbb{R}^n)$,
 and **Lebesgue measure** is the restriction
@@ -53,10 +54,20 @@ The quantifier over every test set $A$ is part of the condition, and no
 hypothesis on $E$ is imposed before it is tested. That
 $\mathcal{L}(\mathbb{R}^n)$ is a sigma-algebra and that $\lambda_n$ is a complete
 measure on it are not part of this definition: they are proved, under the Axiom
-of Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is
+of Countable Choice, in Assuming countable choice, $\mathcal{L}(\mathbb{R}^n)$ is a sigma-algebra containing every elementary set and $\lambda_n$ is a complete measure extending elementary volume, which is
 recorded in this item's `justified_by` because it is a statement about the
 objects introduced here. Until that theorem the symbols $\mathcal{L}(\mathbb{R}^n)$
 and $\lambda_n$ name a family of sets and a restricted set function, nothing more.
+
+## Definition references
+
+[[def-lebesgue-outer-measure]]
+
+[[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]
+
+[[def-caratheodory-measurable-set]]
+
+[[thm-lebesgue-measure-is-a-complete-measure]]
 
 ## Remarks
 

@@ -1,0 +1,109 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-41-1",
+  "inventory": {
+    "pages": [
+      "momentum-and-accelerated-training",
+      "momentum-and-accelerated-training-examples"
+    ],
+    "items": [
+      "alg-heavy-ball-momentum",
+      "alg-nesterov-accelerated-gradient",
+      "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+      "ex-unstable-heavy-ball-parameters",
+      "ex-stochastic-momentum-experiment",
+      "ex-heavy-ball-optimized-quadratic-spectrum"
+    ],
+    "pairs": [
+      "momentum-and-accelerated-training"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-heavy-ball-momentum.md",
+    "items/alg-nesterov-accelerated-gradient.md",
+    "items/thm-heavy-ball-rate-on-strongly-convex-quadratics.md",
+    "items/ex-unstable-heavy-ball-parameters.md",
+    "items/ex-stochastic-momentum-experiment.md",
+    "items/ex-heavy-ball-optimized-quadratic-spectrum.md",
+    "library/machine-learning/momentum-and-accelerated-training.md",
+    "library/machine-learning/momentum-and-accelerated-training-examples.md"
+  ],
+  "write_batches": [
+    "41"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-heavy-ball-optimized-quadratic-spectrum",
+      "path": [
+        "alg-heavy-ball-momentum",
+        "ex-heavy-ball-optimized-quadratic-spectrum"
+      ],
+      "paths": [
+        [
+          "alg-heavy-ball-momentum",
+          "ex-heavy-ball-optimized-quadratic-spectrum"
+        ],
+        [
+          "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+          "ex-heavy-ball-optimized-quadratic-spectrum"
+        ]
+      ]
+    },
+    {
+      "id": "ex-stochastic-momentum-experiment",
+      "path": [
+        "alg-nesterov-accelerated-gradient",
+        "ex-stochastic-momentum-experiment"
+      ],
+      "paths": [
+        [
+          "alg-nesterov-accelerated-gradient",
+          "ex-stochastic-momentum-experiment"
+        ]
+      ]
+    },
+    {
+      "id": "ex-unstable-heavy-ball-parameters",
+      "path": [
+        "alg-heavy-ball-momentum",
+        "ex-unstable-heavy-ball-parameters"
+      ],
+      "paths": [
+        [
+          "alg-heavy-ball-momentum",
+          "ex-unstable-heavy-ball-parameters"
+        ]
+      ]
+    },
+    {
+      "id": "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+      "path": [
+        "alg-heavy-ball-momentum",
+        "thm-heavy-ball-rate-on-strongly-convex-quadratics"
+      ],
+      "paths": [
+        [
+          "alg-heavy-ball-momentum",
+          "thm-heavy-ball-rate-on-strongly-convex-quadratics"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-heavy-ball-momentum": [
+      "## Definition\n\nLet $d\\ge1$ be an integer and let $F:\\mathbb R^d\\to\\mathbb R$ be continuously Fréchet differentiable: at every $w$, $DF(w)$ is a linear first-order approximation with normwise remainder tending to zero, and $w\\mapsto DF(w)$ is continuous. Write its coordinate gradient as $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$. Given an initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, a constant step size $\\alpha>0$, a constant momentum parameter $\\beta\\ge0$, and an integer horizon $T\\ge1$, initialize $w_0=w_1=w_{\\mathrm{init}}$. For each integer $t=1,\\ldots,T-1$, set\n\n$$w_{t+1}:=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}).$$\n\nOutput $(w_0,w_1,\\ldots,w_T)$. The gradient is evaluated at the current iterate $w_t$.\nWhen $\\beta=0$, every update is the fixed-step gradient-descent update with step size $\\alpha$."
+    ],
+    "alg-nesterov-accelerated-gradient": [
+      "## Definition\n\nLet $d\\ge1$ be an integer and let $F:\\mathbb R^d\\to\\mathbb R$ be continuously Fréchet differentiable: at every $w$, $DF(w)$ is a linear first-order approximation with normwise remainder tending to zero, and $w\\mapsto DF(w)$ is continuous. Write its coordinate gradient as $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$. Given an initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, an integer horizon $T\\ge1$, and prescribed real parameter sequences $(\\alpha_t)_{1\\le t<T}$ with $\\alpha_t>0$ and $(\\beta_t)_{1\\le t<T}$, initialize $w_0=w_1=w_{\\mathrm{init}}$. For each integer $t=1,\\ldots,T-1$, first set the look-ahead point\n\n$$\\tilde w_t:=w_t+\\beta_t(w_t-w_{t-1}),$$\n\nthen set\n\n$$w_{t+1}:=\\tilde w_t-\\alpha_t\\nabla F(\\tilde w_t).$$\n\nOutput $(w_0,w_1,\\ldots,w_T)$. The gradient is evaluated after the look-ahead displacement.\nWhen $\\beta_t=0$, that update is the fixed-step gradient-descent update at $w_t$ with step size $\\alpha_t$."
+    ],
+    "thm-heavy-ball-rate-on-strongly-convex-quadratics": [
+      "## Statement\n\nLet $d\\ge1$, let $0<c\\le L$, and let $A\\in\\mathbb R^{d\\times d}$ satisfy $A^{\\mathsf T}=A$ and $x^{\\mathsf T}Ax>0$ for every nonzero $x\\in\\mathbb R^d$. An eigenvalue of $A$ is a real number $\\lambda$ such that $Av=\\lambda v$ for some nonzero $v$; assume every eigenvalue lies in $[c,L]$. For a fixed center $w^\\star\\in\\mathbb R^d$, define $F(w)=\\tfrac12(w-w^\\star)^{\\mathsf T}A(w-w^\\star)$. Then $w^\\star$ is the unique minimizer of $F$. Put $\\kappa=L/c$ and define\n\n$$q:=\\frac{\\sqrt L-\\sqrt c}{\\sqrt L+\\sqrt c}=\\frac{\\sqrt\\kappa-1}{\\sqrt\\kappa+1}.$$\n\nHere $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$ is the vector of coordinate partial derivatives.\n\nFor any constant parameters $\\alpha>0$ and $\\beta\\ge0$, finite horizon $T\\ge1$, and initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, define the heavy-ball sequence by $w_0=w_1=w_{\\mathrm{init}}$ and\n\n$$w_{t+1}=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}),\\qquad 1\\le t<T.$$\n\nFor each scalar $\\lambda\\in[c,L]$, the associated scalar recurrence is $x_{t+1}=(1+\\beta-\\alpha\\lambda)x_t-\\beta x_{t-1}$. Define its characteristic polynomial and root factor by\n\n$$p_\\lambda(r;\\alpha,\\beta):=r^2-(1+\\beta-\\alpha\\lambda)r+\\beta,\\qquad \\rho_\\lambda(\\alpha,\\beta):=\\max\\{|r|:p_\\lambda(r;\\alpha,\\beta)=0\\}.$$\n\nThis factor is the largest modulus of the two characteristic roots in $\\mathbb C$ of the scalar recurrence for eigenvalue $\\lambda$, not a one-step Euclidean norm contraction. The tuned parameters are\n\n$$\\alpha=\\frac{4}{(\\sqrt L+\\sqrt c)^2},\\qquad \\beta=q^2.$$\n\nFor this choice, $\\rho_\\lambda(\\alpha,\\beta)=q$ for every $\\lambda\\in[c,L]$. If $c<L$, then $p_c(r;\\alpha,\\beta)=(r-q)^2$ and $p_L(r;\\alpha,\\beta)=(r+q)^2$; if $c=L$, the only modal polynomial is $r^2$ and its root factor is $0$.\n\nFor gradient descent with step $\\gamma=2/(L+c)$, the modal multipliers are $1-\\gamma\\lambda$ and their largest absolute value over $[c,L]$ is\n\n$$\\rho_{\\mathrm{GD}}=\\frac{L-c}{L+c}=\\frac{\\kappa-1}{\\kappa+1}.$$\n\nThus $\\rho_{\\mathrm{GD}}>q$ when $c<L$, and both factors are $0$ when $c=L$. Moreover, among all constant heavy-ball parameters $\\alpha'>0$ and $\\beta'\\ge0$, the supremum of their modal root factors over $\\lambda\\in[c,L]$ is at least $q$. The tuned parameters therefore minimize that interval worst-case root factor. When $c<L$, the repeated endpoint roots permit a linear polynomial prefactor multiplying $q^t$ or $(-q)^t$; the root factor does not assert a one-step norm contraction by $q$."
+    ],
+    "ex-unstable-heavy-ball-parameters": [],
+    "ex-stochastic-momentum-experiment": [],
+    "ex-heavy-ball-optimized-quadratic-spectrum": []
+  }
+}

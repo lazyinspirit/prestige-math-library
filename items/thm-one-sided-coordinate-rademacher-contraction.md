@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-one-sided-coordinate-rademacher-contraction.json
   precheck: pass
 sources:
   references:
@@ -27,9 +28,13 @@ Let $m\ge1$, let $z_1,\ldots,z_m$ be fixed, and let $\mathcal F$ be a nonempty f
 
 $$\frac1m\,\mathbb E_\sigma\sup_{f\in\mathcal F}\sum_{i=1}^m\sigma_i\Phi_i(f(z_i))\le L\,\widehat{\mathfrak R}_S(\mathcal F).$$
 
-Here $S=(z_1,\ldots,z_m)$ and $\widehat{\mathfrak R}_S(\mathcal F):=m^{-1}2^{-m}\sum_{\sigma\in\{-1,1\}^m}\sup_{f\in\mathcal F}\sum_i\sigma_i f(z_i)$. Expectations over signs mean this uniform finite average; no measurability on the functions' domain is needed. For measurable classes on a measurable space this agrees with [[def-one-sided-empirical-rademacher-complexity]]. Equivalently, the unnormalized left expectation is at most $L$ times the unnormalized one-sided supremum on the right.
+Here $S=(z_1,\ldots,z_m)$ and $\widehat{\mathfrak R}_S(\mathcal F):=m^{-1}2^{-m}\sum_{\sigma\in\{-1,1\}^m}\sup_{f\in\mathcal F}\sum_i\sigma_i f(z_i)$. Expectations over signs mean this uniform finite average; no measurability on the functions' domain is needed. For measurable classes on a measurable space this agrees with One-sided empirical Rademacher complexity. Equivalently, the unnormalized left expectation is at most $L$ times the unnormalized one-sided supremum on the right.
 
 The same holds for a countable class when both suprema are finite for every sign vector. No condition $\Phi_i(0)=0$ is required; additive constants cancel because the proof compares coordinate differences.
+
+## Statement references
+
+[[def-one-sided-empirical-rademacher-complexity]]
 
 ## Facts & Assumptions
 

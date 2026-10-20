@@ -1,0 +1,57 @@
+{
+  "operations": [
+    {
+      "path": "tools/step3-scope.mjs",
+      "before_raw_sha256": "0cf892eb224655d2e6b3df8c505458282c6e321fd2fbc21c7204ebed01dd6ce2",
+      "proposed_raw_sha256": "4c3bc3f35423f8c9574e2d30715e656d3f7755bedad931188ea64537fa78bfe8",
+      "exact_unique_operations": [
+        {
+          "before": "import { homeAlphaRequiredObligations }",
+          "after": "import { loadForeignReaderRoutes, foreignReaderRoute, bindForeignReaderFinding, validateForeignReaderFinding } from './step3-owner-foreign-reader-routes.mjs';\nimport { homeAlphaRequiredObligations }"
+        },
+        {
+          "before": "  if (target?.subject_type === 'in-run-dependency') {\n    return producerCarrier(target.id, target.producer_batch);",
+          "after": "  if (target?.owner_foreign_reader_route) {\n    const origin = String(target.obligation).split(':')[1];\n    const route = foreignReaderRoute(ROOT, run, origin, target);\n    const carrier = producerCarrier(target.id, route.e.producer_batch);\n    validateForeignReaderFinding(ROOT, run, origin, target, carrier);\n    return { ...carrier, owner_foreign_reader_route: route.binding };\n  }\n  if (target?.subject_type === 'in-run-dependency') {\n    return producerCarrier(target.id, target.producer_batch);"
+        },
+        {
+          "before": "  return dependencies;\n}\n\n// Extra reads are context only",
+          "after": "  // Explicit extra reads retain the original foreign consumer attribution.\n  // Empty consumers maps deliberately assert no reachability from assigned roots.\n  for (const route of loadForeignReaderRoutes(ROOT, run).values()) if (route.e.origin_batch === String(batch)) {\n    const old = dependencies.get(route.e.id);\n    if (old && old.producer_batch !== route.e.producer_batch) throw Error('foreign reader producer conflicts with ordinary graph');\n    if (!old) dependencies.set(route.e.id, { producer_batch: route.e.producer_batch, consumers: new Map() });\n  }\n  return dependencies;\n}\n\n// Extra reads are context only"
+        },
+        {
+          "before": "function bindInRunFinding(finding, batch, dependencies, reportError) {\n",
+          "after": "function bindInRunFinding(finding, batch, dependencies, reportError) {\n  const foreign = foreignReaderRoute(ROOT, run, batch, finding);\n  if (foreign && bindForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;\n"
+        },
+        {
+          "before": "function validateInRunFinding(finding, batch, dependencies, reportError) {\n",
+          "after": "function validateInRunFinding(finding, batch, dependencies, reportError) {\n  const foreign = foreignReaderRoute(ROOT, run, batch, finding);\n  if (foreign && validateForeignReaderFinding(ROOT, run, batch, finding, producerCarrier(finding.id, foreign.e.producer_batch))) return;\n"
+        },
+        {
+          "before": "    owner_downstream_consumer_route: _downstreamRoute,",
+          "after": "    owner_foreign_reader_route: _foreignReaderRoute,\n    owner_foreign_reader_obligation: _foreignReaderObligation,\n    owner_downstream_consumer_route: _downstreamRoute,"
+        },
+        {
+          "before": "        finding.subject_type = 'in-run-dependency';\n        finding.consumer_id = source.consumer_id;",
+          "after": "        finding.subject_type = 'in-run-dependency';\n        if (source.owner_foreign_reader_route) finding.owner_foreign_reader_obligation = source.obligation;\n        finding.consumer_id = source.consumer_id;"
+        }
+      ]
+    },
+    {
+      "path": "tools/step3-close.mjs",
+      "before_raw_sha256": "dff6e50878b07d488844a566d42d6abdf7289891fd38fc19fb8cedb3dffc841f",
+      "proposed_raw_sha256": "534ac97ca27d5e0017ddbce3fae133b3ab8660c7045b88bbb5fe5735fba07c52",
+      "exact_unique_operations": [
+        {
+          "before": "import { homeAlphaClosureEvidence }",
+          "after": "import { foreignReaderClosureEvidence } from './step3-owner-foreign-reader-routes.mjs';\nimport { homeAlphaClosureEvidence }"
+        },
+        {
+          "before": "  ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),",
+          "after": "  ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),\n  ...(version === 3 ? foreignReaderClosureEvidence(root, run) : {}),"
+        }
+      ]
+    }
+  ],
+  "new_tool": "tools/step3-owner-foreign-reader-routes.mjs",
+  "apply": false,
+  "integration": "Root unique-op CAS merge against current files, preserving concurrent foreign edits; no home continuation files touched."
+}

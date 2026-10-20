@@ -1,0 +1,279 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "13",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-linear-regression-objectives",
+      "model": "gpt-6-luna",
+      "context_sha256": "434bf94bda99c8cde0f7502dd802d46df16919b661de8a33d6c1803a80433206",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original intercept clause made D beta independent of beta_0 but left lambda||beta||_2^2 and the l1 penalties unchanged. For n=p=1, X=(1), y=1 and lambda=1, the displayed ridge objective minimizes at beta_0=1/2, whereas an unpenalized intercept minimizes at 1. Replaced each penalty explicitly by its slope-only counterpart and retained the unaveraged ridge loss.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-gaussian-max-comparison",
+      "model": "gpt-6-luna",
+      "context_sha256": "f001ad5a6bcacdec491a354a25342be1d265971fc91f503ba94b087eb7dc5984",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "A1 identified an arbitrary given Gaussian law with C^{1/2}Z using only def-multivariate-normal-law, whose proof constructs a law and explicitly defers uniqueness. Added the existing lem-characteristic-function-of-a-multivariate-normal-law: its proof obtains the vector transform from scalar projections and applies scalar uniqueness and Cramer-Wold, including singular covariance. Step 2.1 now explicitly replaces the vectors by copies with the same laws.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-linear-regression-objectives",
+      "disposition": "repaired",
+      "post_sha256": "c64d1e4a5fe785e2851045928c1233e79b407b89fec268c4402f2aebdb01a75a",
+      "review_context_sha256": "d3c69c9033127d4d1fc8273a19f3de2fc4c18b7c497e96c9d81c9a29ab0b5325",
+      "reason": "Checked all five objective definitions, positive scaling of the Lasso normalization against def-lasso-estimator, feature scaling, rank-deficient designs, and the p=1 intercept-only case. Ridge now penalizes lambda||gamma||_2^2, Lasso lambda||gamma||_1, group Lasso slope groups, and fused Lasso lambda_1||gamma||_1+lambda_2||D_0 gamma||_1. No minimizer guarantees were added and no AC is needed. Both page carriers retain compact frontmatter-only inventories. This is the repairer review, not an independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-finite-gaussian-max-comparison",
+      "disposition": "repaired",
+      "post_sha256": "c14073a1db5600b1437d4586f9f6553d20f574ff72b3254f6c706010e663da60",
+      "review_context_sha256": "9a5ace653ad64debca96f7cea9836a98a5dc24a1acf61a12d1a377f73781f24d",
+      "reason": "Checked the Gaussian definition and the complete existing multivariate characteristic-function uniqueness proof, together with its scalar uniqueness and Cramer-Wold interfaces. The soft-max Hessian has zero row sums and gives a/4 times the increment-variance difference, so the derivative has the claimed sign. Gaussian coordinate first moments dominate difference quotients on compact t intervals; Fubini now explicitly licenses coordinate integration by parts, with bounded derivatives and vanishing Gaussian boundary terms. The uniform integrable bound on Phi_a(Z_t) gives endpoint continuity, and log(m)/a controls the final maximum limit. No inverse covariance is used, so singular and zero covariance remain allowed. AC covers the suppliers\u2019 inherited choices. The Statement is byte-unchanged; no consumer propagation follows this proof/dependency repair. This is the repairer review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-ols-and-ridge-solutions",
+    "lem-orthonormal-lasso-soft-thresholding",
+    "lem-lasso-active-set-stationarity",
+    "ex-correlated-predictors-and-shrinkage",
+    "fs-wainwright-lower-signed-support-threshold",
+    "fs-wainwright-signed-support-threshold-claim",
+    "ex-two-client-shifted-optima"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-linear-regression-objectives",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "finding": "Intercept exclusion was false for unchanged ridge and l1 penalties; explicit slope penalties now implement the promised convention.",
+      "repair": "All four penalties explicitly exclude beta_0; all seven direct consumers examined and unaffected.",
+      "action": "record-fixed-finding",
+      "reason": "The original intercept clause made D beta independent of beta_0 but left lambda||beta||_2^2 and the l1 penalties unchanged. For n=p=1, X=(1), y=1 and lambda=1, the displayed ridge objective minimizes at beta_0=1/2, whereas an unpenalized intercept minimizes at 1. Replaced each penalty explicitly by its slope-only counterpart and retained the unaveraged ridge loss.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-finite-gaussian-max-comparison",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block",
+      "finding": "A1 imported Gaussian-law uniqueness from an existence-only definition.",
+      "repair": "Cited the proved multivariate characteristic-function uniqueness lemma and clarified use of same-law copies; explicitly cited Fubini and endpoint domination.",
+      "reason": "The missing uniqueness supplier is now an explicit dependency and exact contract citation; no claim or hypotheses were weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update-required",
+      "reason": "Both assigned items and all seven direct consumers of the changed Definition are draft frozen-frontier items. No published item was edited, no published consumer uses the changed intercept clause, and no published mathematical defect was found in the consulted Gaussian suppliers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-linear-regression-objectives",
+      "status": "complete",
+      "statement_definition_changed": true,
+      "contract": "research/machine-learning-all-101-2026-10-19-batch-13.proof-contracts.json",
+      "contract_disposition": "unchanged; existing boundary entries remain accurate",
+      "consumer_dispositions": [
+        {
+          "id": "thm-ols-and-ridge-solutions",
+          "path": "items/thm-ols-and-ridge-solutions.md",
+          "affected_use": "Statement and F3-F5, proof steps 1.1 and 3.1 use OLS and the explicitly fully penalized ridge objective ||y-X beta||^2+lambda||beta||^2. No separate unpenalized intercept is designated; those formulas and their proof remain unchanged and sound.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F5] The empirical squared-loss convention for OLS and the ridge objective is fixed in [[def-linear-regression-objectives]]."
+        },
+        {
+          "id": "lem-orthonormal-lasso-soft-thresholding",
+          "path": "items/lem-orthonormal-lasso-soft-thresholding.md",
+          "affected_use": "Statement, F1 and proof step 1.1 use the explicitly displayed full-coordinate Lasso penalty lambda||beta||_1 with X^T X=I. No separate intercept is designated. The separable scalar proof and threshold n lambda are unaffected.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F1] The fixed-design empirical squared loss is $\\|y-X\\beta\\|_2^2/(2n)$ and the Lasso penalty is $\\lambda\\|\\beta\\|_1$ ([[def-linear-regression-objectives]])."
+        },
+        {
+          "id": "lem-lasso-active-set-stationarity",
+          "path": "items/lem-lasso-active-set-stationarity.md",
+          "affected_use": "Statement, F1 and proof step 1.1 differentiate the explicitly full-coordinate Lasso objective on a fixed active sign region. No separate intercept is designated; the active stationarity equation remains sound.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F1] The objective uses loss $\\|y-X\\beta\\|_2^2/(2n)$ and penalty $\\lambda\\|\\beta\\|_1$ ([[def-linear-regression-objectives]])."
+        },
+        {
+          "id": "ex-correlated-predictors-and-shrinkage",
+          "path": "items/ex-correlated-predictors-and-shrinkage.md",
+          "affected_use": "Example and F2, verification steps 2.1-3.1 use two ordinary penalized coefficients for X=(1 1), with no designated separate intercept. The ridge point (1/3,1/3) and Lasso segment beta_1+beta_2=3/4 remain sound. Its illustrative TikZ segments and ridge point agree with those sets.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F2] The Lasso objective is $\\|y-X\\beta\\|_2^2/(2n)+\\lambda\\|\\beta\\|_1$ ([[def-linear-regression-objectives]])."
+        },
+        {
+          "id": "fs-wainwright-lower-signed-support-threshold",
+          "path": "items/fs-wainwright-lower-signed-support-threshold.md",
+          "affected_use": "Statement explicitly says there is no separate intercept; F6 and step 7.1 use the unchanged full-coordinate Lasso objective with lambda_n=1. The intercept correction does not affect the candidate objective expansion.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F6] The Lasso objective is $F(\\beta)=\\|y-X\\beta\\|_2^2/(2n)+\\lambda\\|\\beta\\|_1$ ([[def-linear-regression-objectives]])."
+        },
+        {
+          "id": "fs-wainwright-signed-support-threshold-claim",
+          "path": "items/fs-wainwright-signed-support-threshold-claim.md",
+          "affected_use": "Statement explicitly excludes a separate intercept and uses the unchanged full-coordinate Lasso objective. The active-stationarity application in refutation step 8.1 is unaffected by the corrected optional intercept convention.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "Let $X$ have rows $x_i^{\\mathsf T}$, $w=(w_i)$, and $y=(y_i)$. For $\\lambda_n>0$, let success mean that there exists an optimizer with $\\operatorname{sgn}(\\widehat\\beta)=\\operatorname{sgn}(\\beta^*)$ for the objective $\\|y-X\\beta\\|_2^2/(2n)+\\lambda_n\\|\\beta\\|_1$."
+        },
+        {
+          "id": "ex-two-client-shifted-optima",
+          "path": "items/ex-two-client-shifted-optima.md",
+          "affected_use": "F1 and verification step 1.1 use the n=1 scalar unpenalized OLS loss (y-aw)^2/2. No ridge, Lasso, group or fused penalty or separate intercept is used; both derivatives and the FedAvg example remain unchanged.",
+          "disposition": "unaffected",
+          "route": "frontier-owner",
+          "source_excerpt": "[F1] [[def-linear-regression-objectives]]: a one-observation scalar least-squares loss is $\\tfrac12(y-aw)^2$."
+        }
+      ],
+      "page_uses": [
+        {
+          "path": "library/machine-learning/ml02-linear-sparse-models.md",
+          "affected_use": "Inventory placement only; no page prose or optimization assertion. The compact metadata-only page is unchanged."
+        }
+      ],
+      "checks": [
+        {
+          "command": "node tools/rendercheck.mjs items/def-linear-regression-objectives.md --json",
+          "exit_code": 0,
+          "result": "1 checked; no errors or warnings"
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-13.proof-contracts.json --items def-linear-regression-objectives --strict --json",
+          "exit_code": 0,
+          "result": "ok true; no errors or warnings"
+        }
+      ],
+      "direct_consumer_search": "Searched current items and library for the canonical ID; aliases are empty. All seven item consumers are frozen-frontier drafts; the page reference is its inventory placement. No outside or published consumer needs maintenance."
+    },
+    {
+      "id": "lem-finite-gaussian-max-comparison",
+      "status": "complete",
+      "statement_definition_changed": false,
+      "new_prerequisite_items": [],
+      "existing_prerequisites_added": [
+        "lem-characteristic-function-of-a-multivariate-normal-law",
+        "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+      ],
+      "contract": "research/machine-learning-all-101-2026-10-19-batch-13.proof-contracts.json",
+      "manifest": "research/machine-learning-all-101-2026-10-19-batch-13.pages.json",
+      "metadata_changes": "Updated only this item\u2019s citation rows, proof-step mirrors and manifest dependency list. Refreshed its stale original quotations of AC, scalar normal definition and product-measure statement to the actual current source sections; no other item contract entry changed.",
+      "sources_consulted": [
+        "items/def-multivariate-normal-law.md: Definition and complete proof",
+        "items/lem-characteristic-function-of-a-multivariate-normal-law.md: Statement and complete proof",
+        "items/thm-cramer-wold-device.md: Statement and complete proof",
+        "items/thm-uniqueness-of-a-law-from-its-characteristic-function.md: Statement and complete proof",
+        "items/thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces.md: Statement and complete proof",
+        "items/thm-dominated-convergence.md: Statement and complete proof",
+        "items/def-standard-normal-and-normal-laws.md: Definition",
+        "items/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.md: Statement and complete proof"
+      ],
+      "checks": [
+        {
+          "command": "node tools/manifest-deps.mjs research/machine-learning-all-101-2026-10-19-batch-13.pages.json",
+          "exit_code": 0,
+          "result": "14 items, 0 normalized, 0 errors; checked under the acquired lock"
+        }
+      ],
+      "remaining_obligations": [],
+      "locking_record": {
+        "initial_attempt": "Acquired, reread contract and manifest, then edit script failed before any writes because it used the wrong numberedProofSteps property; lock released.",
+        "protocol_error": "A subsequent acquire returned busy (owner step5-v2-initial-r1-u24), but the script incorrectly continued and updated the two assigned metadata carriers. Release correctly refused the foreign lock. No foreign lock was removed.",
+        "recovery": "Later successfully acquired step5-v2-initial-r1-u13; reread the actual current contract and manifest, asserted the exact source dependency list, citation quotations, derivation claims and inputs, reintegrated identical checked bytes, ran focused strict contract and manifest checks, and released the lock. This does not erase the earlier protocol error."
+      },
+      "axiom_repair": "Corrected axiom_use to acknowledge DC/countable-choice uses inherited under AC rather than falsely claiming those supplier uses do not occur.",
+      "nonfatal_repairs": [
+        "Explicit Fubini dependency for iterated coordinate Gaussian integration by parts.",
+        "Explicit uniform integrable endpoint majorant replaces an ambiguous reference to the interior derivative bound.",
+        "Corrected inherited choice accounting in axiom_use.",
+        "Current exact quotation mirrors for AC, scalar normal and product measure suppliers."
+      ]
+    },
+    {
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-linear-regression-objectives.md items/lem-finite-gaussian-max-comparison.md --json",
+          "exit_code": 0,
+          "result": "2 files; definition not applicable, one proof pass, zero failures"
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/def-linear-regression-objectives.md items/lem-finite-gaussian-max-comparison.md --json",
+          "exit_code": 0,
+          "result": "2 checked; no errors or warnings"
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/def-linear-regression-objectives.md items/lem-finite-gaussian-max-comparison.md",
+          "exit_code": 0,
+          "result": "2 items, 4 steps, 0 defects"
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-13.proof-contracts.json --items def-linear-regression-objectives,lem-finite-gaussian-max-comparison --strict --json",
+          "exit_code": 0,
+          "result": "ok true; zero errors; shotgun-bracket warning on 2.1 cites five facts, each actually used in that interpolation step"
+        }
+      ]
+    },
+    {
+      "status": "assigned_repair_complete",
+      "repair_complete": true,
+      "unresolved_mathematics": [],
+      "created_items": "None; existing proved suppliers suffice.",
+      "independent_review": "No independent review or acceptance of these repairs claimed. The engine retains certification and rejudgment duties.",
+      "diagram_review": "Neither assigned item contains TikZ/tikzcd or requires a diagram. The directly inspected duplicate-predictor consumer diagram correctly depicts the first-quadrant OLS portion, full Lasso segment and ridge point.",
+      "report_validation": "Passed a read-only assertion check of the exact frozen-pack identity and input hash, both rejected tuples, current item guards and unchanged captured review contexts, Definition-changed/Statement-unchanged section hashes, supporting file hashes, and all seven downstream IDs\u2019 frozen-frontier membership."
+    }
+  ],
+  "downstream_uses": {
+    "thm-ols-and-ridge-solutions": "Statement and F3-F5, proof steps 1.1 and 3.1 use OLS and the explicitly fully penalized ridge objective ||y-X beta||^2+lambda||beta||^2. No separate unpenalized intercept is designated; those formulas and their proof remain unchanged and sound.",
+    "lem-orthonormal-lasso-soft-thresholding": "Statement, F1 and proof step 1.1 use the explicitly displayed full-coordinate Lasso penalty lambda||beta||_1 with X^T X=I. No separate intercept is designated. The separable scalar proof and threshold n lambda are unaffected.",
+    "lem-lasso-active-set-stationarity": "Statement, F1 and proof step 1.1 differentiate the explicitly full-coordinate Lasso objective on a fixed active sign region. No separate intercept is designated; the active stationarity equation remains sound.",
+    "ex-correlated-predictors-and-shrinkage": "Example and F2, verification steps 2.1-3.1 use two ordinary penalized coefficients for X=(1 1), with no designated separate intercept. The ridge point (1/3,1/3) and Lasso segment beta_1+beta_2=3/4 remain sound. Its illustrative TikZ segments and ridge point agree with those sets.",
+    "fs-wainwright-lower-signed-support-threshold": "Statement explicitly says there is no separate intercept; F6 and step 7.1 use the unchanged full-coordinate Lasso objective with lambda_n=1. The intercept correction does not affect the candidate objective expansion.",
+    "fs-wainwright-signed-support-threshold-claim": "Statement explicitly excludes a separate intercept and uses the unchanged full-coordinate Lasso objective. The active-stationarity application in refutation step 8.1 is unaffected by the corrected optional intercept convention.",
+    "ex-two-client-shifted-optima": "F1 and verification step 1.1 use the n=1 scalar unpenalized OLS loss (y-aw)^2/2. No ridge, Lasso, group or fused penalty or separate intercept is used; both derivatives and the FedAvg example remain unchanged."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-13.proof-contracts.json": "c68ec1e49b8abea6a051c732edda933d6230f522b34464cacb9e0f262ee4a567",
+    "research/machine-learning-all-101-2026-10-19-batch-13.pages.json": "5a018b7026fcbde1ca5972317f7b3d784734886b564f18a62b8063d4a0609842"
+  }
+}

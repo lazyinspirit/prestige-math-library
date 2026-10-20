@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "scope": [
+    "def-integral-probability-metric",
+    "ex-weight-clipping-is-not-exact-lipschitz-enforcement",
+    "thm-wgan-ideal-critic-generator-gradient",
+    "cor-wgan-loss-differentiable-almost-everywhere-under-choice"
+  ],
+  "contracts": {
+    "def-integral-probability-metric": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires a nonempty function class; the empty-class supremum is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If P=Q, every integral difference is zero, so the IPM is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A class with one integrable test function is allowed and gives that test's absolute integral difference."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The class containing only the zero function gives IPM zero for every pair; the Definition explicitly makes no separation claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval or parameter endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ]
+    },
+    "thm-wgan-ideal-critic-generator-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-integral-probability-metric",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\Sigma)$ be a measurable space, let $P$ and $Q$ be probability measures on it, and let $\\mathcal F$ be a nonempty class of real-valued $\\Sigma$-measurable functions that are integrable under both $P$ and $Q$. The **integral probability metric** induced by $\\mathcal F$ is $$d_{\\mathcal F}(P,Q):=\\sup_{f\\in\\mathcal F}\\left|\\int_S f\\,dP-\\int_S f\\,dQ\\right|\\in[0,+\\infty].$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space. Let $\\mu,\\nu$ be countably additive Borel probability measures on $X$, and fix $x_0\\in X$. Let $\\Pi_X(\\mu,\\nu)$ be the Borel probability measures $\\gamma$ on the product-topology space $X\\times X$ satisfying $\\gamma(A\\times X)=\\mu(A)$ and $\\gamma(X\\times A)=\\nu(A)$ for every Borel set $A\\subseteq X$, and define $W_1^X(\\mu,\\nu)=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)$. Then $\\Pi_X(\\mu,\\nu)$ is nonempty and $$W_1^X(\\mu,\\nu)=\\sup\\left\\{\\int_X f\\,d\\mu-\\int_X f\\,d\\nu:\\ f:X\\to\\mathbb R,\\ f(x_0)=0,\\ |f(x)-f(y)|\\le d(x,y)\\text{ for all }x,y\\in X\\right\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+          "source_section": "Proof step 1.1",
+          "quote": "For any $x,y\\in X$, choose net points within $1$ of $x$ and $y$; [F8] gives $d(x,y)<M$. Hence an anchored feasible $f$ satisfies $|f(x)|\\le d(x,x_0)<M$. For every $x$ and $r>0$, $d(x,y)<r$ implies $|f(x)-f(y)|<r$, so the metric-topology definition makes $f$ continuous; [F13] then makes it Borel.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu,\\nu$ on $X$, let $\\Pi_X(\\mu,\\nu)$ be the set of Borel probability measures $\\gamma$ on $X\\times X$, with its product topology and Borel sigma-algebra, such that for every $A\\in\\mathcal B(X)$, $$\\gamma(A\\times X)=\\mu(A),\\qquad \\gamma(X\\times A)=\\nu(A).$$ Define $$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map $$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$ in the sense of [[def-measurable-function-between-measurable-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Its **law** or **distribution** is the set function $$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then $\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-simple-measurable-function",
+          "source_section": "Definition",
+          "quote": "A measurable function $s:X\\to[0,+\\infty)\\subseteq\\overline{\\mathbb R}$ is a **nonnegative simple measurable function** when it has finite range.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a nonnegative simple measurable function on a measure space $(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and $c_j\\ge0$. Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative Lebesgue integral equals its simple integral: $$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of nonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$ for every $x\\in X.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then $f\\in L^1(\\mu)$, $$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$ and hence $$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The **Lebesgue integral of a real measurable function** is defined whenever at most one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case $$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Each generator map is a random element, its law is a probability measure, and law and latent integrals agree on bounded Borel tests. The equality is first checked for nonnegative simple functions from the event-preimage law formula; increasing simple approximations to the positive and negative parts, dominated convergence under both probability measures, and the positive-negative definition of the signed integral extend it to bounded signed tests.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The normalized 1-Lipschitz test class is symmetric under negation. The compact KR theorem identifies its signed supremum with W1, and the IPM definition uses the absolute supremum; symmetry makes the two suprema equal. Thus V=W1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "The local envelope bounds the pointwise derivative of the fixed critic composite by K. Its Fréchet remainder divided by ||h|| converges almost everywhere to zero and is bounded by 2K. Dominated convergence proves differentiability of the integrated fixed-critic objective and gives its derivative as the coordinatewise integral of the pointwise derivative.",
+          "inputs": [
+            "given",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each 1-Lipschitz test, the change in its law integral is bounded by the latent integral of d(G_theta_n,G_theta). Measurability is assumed, pointwise continuity gives convergence to zero almost everywhere, and the finite diameter D dominates the integrand. Dominated convergence makes this uniform test-function bound vanish; taking absolute values and suprema proves continuity of V.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "Under the common-neighborhood envelope, the change in every test-function objective is bounded by ||theta-theta'|| times integral K. The same bound holds for absolute objective values and therefore for their suprema, proving local Lipschitzness.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The fixed optimal critic objective is everywhere below V and agrees with V at theta_0. Their difference has a differentiable local minimum zero, so its derivative is zero and the desired WGAN gradient formula follows.",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assumes a nonempty compact data space and a nonempty normalized test class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If mu=P_theta, compact KR gives V=0; the gradient formula remains conditional on the stated differentiability and attainment hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "On a singleton compact space every law is identical and V=0; all formula branches remain valid when their local hypotheses hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant generator or identical laws can give V=0; no optimizer uniqueness or derivative is inferred beyond the explicit hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Theta is open and no parameter-boundary claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The dual identification, continuity, local-envelope estimate, and conditional gradient proof are choice-free; the separate a.e. result is in the AC-dependent corollary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        }
+      ]
+    },
+    "cor-wgan-loss-differentiable-almost-everywhere-under-choice": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. Every family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-wgan-ideal-critic-generator-gradient",
+          "source_section": "Statement",
+          "quote": "Then $V$ is locally Lipschitz, with $|V(\\theta)-V(\\theta')|\\le\\|\\theta-\\theta'\\|\\int K_{\\theta_0}\\,d\\rho$ for $\\theta,\\theta'\\in U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-na-rademacher-euclidean",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every open $U\\subseteq\\mathbb R^n$ and locally Lipschitz map $u:U\\to\\mathbb R^m$ (each point has a neighborhood on which $|u(y)-u(z)|\\le L|y-z|$ for some finite $L$), $u$ is Frechet differentiable outside a null subset of $U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The WGAN theorem's common-neighborhood envelope branch makes V locally Lipschitz on Theta.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Under the explicitly stated full Axiom of Choice, the Euclidean Rademacher theorem applies to the scalar locally Lipschitz function V on the open finite-dimensional parameter set. Hence V is Fréchet differentiable outside a Lebesgue-null set.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If Theta is empty the conclusion is vacuous; otherwise Rademacher applies on the stated open domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A constant zero value function is differentiable everywhere and satisfies the conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem applies when p=1 as a special case of finite-dimensional Euclidean Rademacher."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy assumption on the value function is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Theta is open; parameter boundary points are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Full AC is explicitly assumed and is used only through the Rademacher supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary states no biconditional."
+        }
+      ]
+    },
+    "ex-weight-clipping-is-not-exact-lipschitz-enforcement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "The **Dirac set function at $x_0$** is $$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-dirac-integral-evaluation",
+          "source_section": "Statement",
+          "quote": "For every nonnegative $\\mathcal A$-measurable $f:X\\to[0,+\\infty]$, $$\\int_X f\\,d\\delta_{x_0}=f(x_0).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Let $X=\\{x_1,\\ldots,x_m\\}$ be a nonempty finite set and let $d:X\\times X\\to\\mathbb R$ satisfy $d(x,y)=0$ if and only if $x=y$, $d(x,y)=d(y,x)$, and $d(x,z)\\le d(x,y)+d(y,z)$. Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors, so their coordinates are nonnegative and each vector sums to $1$. A coupling is an $m\\times m$ matrix $\\pi$ with $\\pi_{ij}\\ge0$, row sums $\\sum_j\\pi_{ij}=p_i$, and column sums $\\sum_i\\pi_{ij}=q_j$; write $\\Gamma(p,q)$ for the set of all such matrices. Writing $d_{ij}=d(x_i,x_j)$, define the finite-metric 1-Wasserstein transport cost by $$W_1(p,q):=\\min_{\\pi\\in\\Gamma(p,q)}\\sum_{i=1}^m\\sum_{j=1}^m d_{ij}\\pi_{ij}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-compact-metric-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Define $$W_1^X(\\mu,\\nu):=\\inf_{\\gamma\\in\\Pi_X(\\mu,\\nu)}\\int_{X\\times X}d(x,y)\\,d\\gamma(x,y)\\in[0,+\\infty],$$ where the infimum is taken in the extended real line and $\\inf\\varnothing=+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-probability-metric",
+          "source_section": "Definition",
+          "quote": "The **integral probability metric** induced by $\\mathcal F$ is $$d_{\\mathcal F}(P,Q):=\\sup_{f\\in\\mathcal F}\\left|\\int_S f\\,dP-\\int_S f\\,dQ\\right|\\in[0,+\\infty].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "A **measure** on $(X,\\mathcal A)$ is a function $$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$ such that $\\mu(\\varnothing)=0$ and for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$, $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$ where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For t>0, the finite coupling matrix with row sums (1,0) and column sums (0,1) has only pi_12=1 and all other entries zero, so its cost is t. At t=0 the singleton probability vector has the unique coupling (1), of cost zero.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The compact coupling marginals force any coupling of delta_0 and delta_t to give full mass to both coordinate fibers, hence full mass to their singleton intersection. Finite subadditivity from countable additivity proves concentration at (0,t), and the Dirac coupling exists. Dirac integral evaluation gives the unique compact coupling cost t, including t=0.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Every unit-Lipschitz test changes by at most t between 0 and t, while f(x)=x attains t; thus the IPM equals t.",
+          "inputs": [
+            "given",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.4",
+          "step": "1.4",
+          "claim": "For t>0 the mixture assigns mass one half to each distinct support point, so both finite KL terms equal log 2. At t=0 the laws coincide and both KL terms vanish.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The clipped two-layer family has slope magnitude at most c squared. For c>1 it includes a function with slope greater than one; for c<1 it cannot represent x; for c=1 it consists of linear functions and misses the nonlinear unit-Lipschitz x squared over two. These cases exhaust c>0.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes the nonempty compact interval [0,1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 the two Dirac laws coincide and W1, IPM, and JS are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At t=1, the finite-space and compact-space W1 values and the IPM equal one, while JS equals log 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At t=0 the coupling is the diagonal Dirac measure; at t>0 the marginals force the unique off-diagonal Dirac coupling."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints t=0 and t=1 are evaluated in the Example and Verification."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All calculations are finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional."
+        }
+      ]
+    }
+  }
+}

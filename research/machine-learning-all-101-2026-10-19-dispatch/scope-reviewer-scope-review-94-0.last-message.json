@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "94",
+  "round": 0,
+  "reviewed_items": [
+    "def-attention-block-summary",
+    "alg-exact-tiled-softmax-attention",
+    "thm-tiled-attention-exactness",
+    "thm-tiled-attention-workspace-and-work",
+    "rem-attention-io-model-and-roundoff",
+    "ex-tiled-attention-one-key",
+    "ex-tiled-attention-empty-first-masked-block",
+    "ex-tiled-attention-two-merge-orders",
+    "ex-tiled-attention-replay-dropout-mask"
+  ],
+  "reviewed_pages": [
+    "exact-tiled-attention-and-memory-aware-differentiation",
+    "exact-tiled-attention-and-memory-aware-differentiation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved scope, page prerequisites, and actual supplier claims and proofs were reviewed. Two page-local repairs are needed; no unresolved prerequisite gap or outside-scope repair was found.",
+  "findings": [
+    {
+      "id": "thm-tiled-attention-exactness",
+      "type": "local",
+      "reason": "Proof step 7.1 treats stored ℓᵢ as though it were recomputed as scores vary. The displayed shift identity only gives the same function when the denominator is recomputed, while the reverse procedure freezes mᵢ and ℓᵢ. At the forward point its pᵢⱼ equals dense softmax, and steps 4.1–6.1 derive the dense gradient directly; replace step 7.1 with that pointwise argument to retain the tie claim."
+    },
+    {
+      "id": "ex-tiled-attention-replay-dropout-mask",
+      "type": "local",
+      "reason": "The example specifies G₁=1 but claims the full value gradient for a two-row input without specifying G₂. Specify G=(1,0)ᵀ, or identify the displayed gradients as row-1 contributions."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-tiled-attention-workspace-and-work",
+      "decision": "accept",
+      "reason": "Its operation and storage count is proved independently; the exactness statement it uses remains sound after the proof-local correction."
+    },
+    {
+      "id": "ex-tiled-attention-one-key",
+      "decision": "accept",
+      "reason": "The output and gradient calculations are correct and remain supported by the unchanged exactness statement."
+    },
+    {
+      "id": "ex-tiled-attention-empty-first-masked-block",
+      "decision": "accept",
+      "reason": "The empty-block handling and both row outputs are correct; the exactness statement remains unchanged."
+    },
+    {
+      "id": "ex-tiled-attention-two-merge-orders",
+      "decision": "accept",
+      "reason": "Both merge calculations and the resulting output are correct; no change to the summary definition or exactness statement is needed."
+    },
+    {
+      "id": "rem-attention-io-model-and-roundoff",
+      "decision": "accept",
+      "reason": "Its distinction between scalar workspace and hardware I/O claims is sound; the cited paper states its SRAM range and frames the lower bound uniformly over that range ([FlashAttention](https://arxiv.org/html/2205.14135))."
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+--- research/machine-learning-all-101-2026-10-19-batch-51.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-owner-native-smoke-deep-wasserstein/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-51.proof-contracts.json
+@@ -2856,11 +2856,14 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "radial-intermediate-value-and-origin-avoidance",
+-          "asserts": "The radial endpoint norms are 1/2 and 2; the exhibited segment from (1/2,0) to (2,0) has norm at least 1/2 throughout.",
++          "check": "ml101-meanfield-radial-separation",
++          "asserts": "Assume AC. In $\\Omega=\\mathbb R^2$, let $\\sigma$ be normalized arc-length probability on the unit circle $S^1=\\{x:|x|=1\\}$ and let $\\delta_0$ be the point mass at the origin. For radii $r_a=1/2$ and $r_b=2$, the support of $\\sigma$ is contained in the ball $B(0,r_b)$ and separates the two spheres $r_aS^1$ and $r_bS^1$: every continuous path from one sphere to the other meets $S^1$. In contrast, the support of $\\delta_0$ is contained in $B(0,r_b)$ but does not separate those spheres. These are only checks of the topological initialization condition; neither example asserts that any flow converges or that its limit is globally minimizing.",
+           "claim": "This finite geometric check confirms the crossing and noncrossing examples only.",
+           "checked_in": "Statement and steps 1.2-2.1",
+-          "path_segments": 1
++          "path_segments": 1,
++          "original_check": "radial-intermediate-value-and-origin-avoidance",
++          "original_asserts": "The radial endpoint norms are 1/2 and 2; the exhibited segment from (1/2,0) to (2,0) has norm at least 1/2 throughout.",
++          "fixture": "one-segment-radial"
+         }
+       ],
+       "boundaries": [
+@@ -2951,11 +2954,14 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "sine-feature-dirac-geodesic",
+-          "asserts": "F(δ_0)=0, F(δ_π)=0, and F(δ_{π/2})=1.",
++          "check": "ml101-meanfield-sine-dirac-geodesic",
++          "asserts": "Assume AC. Let $\\Omega=\\mathbb R$, $\\mathcal H=\\mathbb R$, $R(z)=z^2$, $\\Phi(x)=\\sin x$, and $V(x)=0$, so $F(\\mu)=(\\int\\sin x\\,d\\mu(x))^2$ for every finite nonnegative Borel measure. For each $r>0$, take $Q_r=[-r,r]$ and $C_1=C_2=1$; the cutoff, boundedness, Lipschitz, and linear-growth assumptions hold. This energy is convex under linear mixtures of measures, but it is not displacement convex along $W_2$ geodesics: along the geodesic from $\\delta_0$ to $\\delta_\\pi$, its endpoint values are zero and its midpoint value is one.",
+           "claim": "The exact midpoint value violates displacement convexity with λ=0.",
+           "checked_in": "Statement and step 3.1",
+-          "max_support_points": 2
++          "max_support_points": 2,
++          "original_check": "sine-feature-dirac-geodesic",
++          "original_asserts": "F(δ_0)=0, F(δ_π)=0, and F(δ_{π/2})=1.",
++          "fixture": "sine-dirac-endpoints"
+         }
+       ],
+       "boundaries": [
+@@ -3076,12 +3082,15 @@
+       "routine_steps": [],
+       "finite_smoke": [
+         {
+-          "check": "one-dimensional-single-particle-normalization",
+-          "asserts": "For d=1, m=1, and x(0)=1, the coordinate flow is x(t)=e^{-t} and the empirical law is δ_{e^{-t}}.",
++          "check": "ml101-meanfield-quadratic-particle-flow",
++          "asserts": "Assume AC. In dimension $d\\ge1$, take $\\mathcal H=\\{0\\}$, $R=0$, $\\Phi=0$, $\\Omega=\\mathbb R^d$, $V(x)=|x|^2/2$, and $Q_r=\\overline B(0,r)$ for every $r>0$. This cutoff family has the required relative-neighborhood property, and $\\sup_{Q_r}\\|\\partial V\\|=r\\le1+r$, so $C_1=C_2=1$ works. Thus $F(\\mu)=\\frac12\\int|x|^2d\\mu(x)$. For any $\\mu_0\\in\\mathcal P_2(\\mathbb R^d)$, the unique Wasserstein gradient flow is $\\mu_t=(e^{-t}\\operatorname{id})_\\#\\mu_0$. The corresponding $m$-particle gradient flow satisfies $x_i(t)=e^{-t}x_i(0)$ under the inner product $m^{-1}\\sum_i x_i\\cdot y_i$. For every empirical probability $\\mu_{m,0}$ and every $t\\ge0$,\n$$W_2(\\mu_{m,t},\\mu_t)=e^{-t}W_2(\\mu_{m,0},\\mu_0),$$\nso any initial convergence in $W_2$ persists uniformly on every compact time interval.",
+           "claim": "This checks particle metric normalization and the exact pushforward formula in the one-particle case.",
+           "checked_in": "Statement and steps 1.1-3.1",
+           "dimension": 1,
+-          "particles": 1
++          "particles": 1,
++          "original_check": "one-dimensional-single-particle-normalization",
++          "original_asserts": "For d=1, m=1, and x(0)=1, the coordinate flow is x(t)=e^{-t} and the empirical law is δ_{e^{-t}}.",
++          "fixture": "one-dimensional-one-particle"
+         }
+       ],
+       "boundaries": [

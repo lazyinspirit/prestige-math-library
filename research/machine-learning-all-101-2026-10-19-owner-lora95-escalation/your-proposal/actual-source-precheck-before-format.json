@@ -1,0 +1,61 @@
+{
+  "summary": {
+    "files": 9,
+    "checked": 6,
+    "failed": 1
+  },
+  "results": [
+    {
+      "file": "items/alg-finite-budget-low-rank-adaptation.md",
+      "item_id": "alg-finite-budget-low-rank-adaptation",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/def-low-rank-adaptation-of-a-linear-layer.md",
+      "item_id": "def-low-rank-adaptation-of-a-linear-layer",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/ex-low-rank-adapter-change-of-basis.md",
+      "item_id": "ex-low-rank-adapter-change-of-basis",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/ex-merged-and-unmerged-adapter-forward-pass-agree.md",
+      "item_id": "ex-merged-and-unmerged-adapter-forward-pass-agree",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/ex-rank-one-adapter-cannot-realize-full-rank-update.md",
+      "item_id": "ex-rank-one-adapter-cannot-realize-full-rank-update",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/ex-zero-zero-initialization-stalls-adaptation.md",
+      "item_id": "ex-zero-zero-initialization-stalls-adaptation",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/rem-adaptation-rank-and-empirical-transfer.md",
+      "item_id": "rem-adaptation-rank-and-empirical-transfer",
+      "status": "not-applicable"
+    },
+    {
+      "file": "items/thm-low-rank-adapter-factorization-ambiguity.md",
+      "item_id": "thm-low-rank-adapter-factorization-ambiguity",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "items/thm-low-rank-adapter-merging-and-gradients.md",
+      "item_id": "thm-low-rank-adapter-merging-and-gradients",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The fixed dimensions and matrices; a strict-branch evaluation point for the gradient formulas; and, for the procedure claims, the finite-budget algorithm input, its runtime value/branch checks, and its horizon.\n\n[F1] [[def-low-rank-adaptation-of-a-linear-layer]]: the updated matrix is $W_0+cBA$, with $A\\in\\mathbb R^{r\\times k}$, $B\\in\\mathbb R^{d\\times r}$, and fixed $c\\ne0$.\n\n[F2] [[alg-finite-budget-low-rank-adaptation]]: each minibatch program is checked at the current factors; reverse mode runs only when all calls are defined and piecewise calls lie on strict branches; failure statuses return before updating; otherwise the returned gradients update every entry of $A$ and $B$.\n\n[F3] [[thm-shared-parameter-backpropagation-gradient-formula]]: for a finite $C^1$ recurrence with one shared parameter input, reverse accumulation includes every transition's parameter pullback.\n\n[F4] [[thm-chain-rule-for-total-derivatives]]: the total derivative of a composition is the ordered composition of the total derivatives of its maps.\n\n[F5] [[thm-reverse-mode-computes-gradient]]: on a finite $C^1$ scalar-output program at a fixed strict-branch evaluation point, reverse mode returns the exact derivative with respect to its inputs.\n\n\n\n1.1 Fix perturbations $H\\in\\mathbb R^{d\\times r}$ and $K\\in\\mathbb R^{r\\times k}$ of $B$ and $A$. Expanding the product gives $W_0+c(B+\\varepsilon H)(A+\\varepsilon K)=W+\\varepsilon c(HA+BK)+\\varepsilon^2cHK$, so the derivative of $(A,B)\\mapsto W_0+cBA$ in direction $(K,H)$ is $c(HA+BK)$. [F1, given, algebra]\n\n1.2 At a successful algorithm step, list its minibatch entries, counting repeated indices separately, as $(x_j,\\ell_j)_{j=1}^m$. Set $\\theta$ to the ordered vector of all entries of $A$ and $B$, put $h_0=0$, and define $h_j=h_{j-1}+m^{-1}\\ell_j((W_0+cBA)x_j)$ for $1\\le j\\le m$. On the strict branches selected at this step, this is a finite $C^1$ recurrence on open domains with one shared parameter input and terminal scalar $h_m=\\mathcal L(W_0+cBA)$ for that minibatch. Thus the recurrence gradient formula in [F3] applies, including repeated parameter uses. [F1, F3, given, construct]\n\n1.3 Associativity of matrix multiplication gives $W_0x+cB(Ax)=(W_0+cBA)x$. Counting entries of the two trainable factors gives $rk+dr=r(d+k)$; the base matrix is frozen. [F1, given, algebra]\n\n2.1 By the chain rule, the derivative of $(A,B)\\mapsto\\mathcal L(W_0+cBA)$ in direction $(K,H)$ is $\\langle G,c(HA+BK)\\rangle_F$. [F4, step 1.1, given, algebra]\n\n3.1 The trace identity $\\operatorname{tr}(G^{\\mathsf T}HA)=\\operatorname{tr}((GA^{\\mathsf T})^{\\mathsf T}H)$ gives $\\langle G,HA\\rangle_F=\\langle GA^{\\mathsf T},H\\rangle_F$. The trace identity $\\operatorname{tr}(G^{\\mathsf T}BK)=\\operatorname{tr}((B^{\\mathsf T}G)^{\\mathsf T}K)$ gives $\\langle G,BK\\rangle_F=\\langle B^{\\mathsf T}G,K\\rangle_F$. [step 2.1, algebra]\n\n4.1 The Frobenius inner product determines a matrix uniquely from its pairing with every perturbation. Since $H$ and $K$ are arbitrary, step 3.1 therefore identifies the gradients as $\\nabla_B\\mathcal L=cGA^{\\mathsf T}$ and $\\nabla_A\\mathcal L=cB^{\\mathsf T}G$. [step 3.1, algebra]\n\n5.1 At a successful step the algorithm evaluates this same finite scalar program, and [F5] states that its reverse-mode call returns the exact input derivative on the strict branches selected at that step. Therefore its returned factor gradients equal the derivatives identified in step 4.1. [F2, F5, step 4.1, step 1.2, algebra]\n\n5.2 If $B=0$, the formula for $\\nabla_A\\mathcal L$ in step 4.1 is zero; if also $A=0$, the formula for $\\nabla_B\\mathcal L$ is zero. [step 4.1, algebra]\n\n6.1 Under the termination hypothesis, each loop iteration makes finitely many primitive calls in its stated evaluation order. It either encounters the first undefined or boundary/ambiguous primitive, in which case the algorithm returns the corresponding status before updating, or completes the primal evaluation on strict branches. In the latter case the reverse sweep traverses finitely many nodes and parent slots, and every local derivative evaluation returns its specified derivative by assumption; the algorithm then performs one finite update and increments $t$. Induction on $t$ shows there can be at most $T$ successful updates. If no failure occurs, the loop reaches $t=T$ and returns `SUCCESS`; if $T=0$, its explicit zero-step case returns immediately. [F2, given, algebra] ∎"
+    }
+  ]
+}

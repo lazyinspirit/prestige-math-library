@@ -1,0 +1,753 @@
+{
+  "native_input": "research/machine-learning-all-101-2026-10-19-scope-review/batch-37/repair-1.input.json",
+  "native_exact_changed_interfaces": [
+    {
+      "id": "def-discretization-invariant-operator-family",
+      "native_exact_before": "## Definition\n\nLet $A$ and $U$ be spaces of functions on bounded domains $D$ and $D'$. A family of finite-dimensional maps $(G_n)_{n\\ge1}$ is a **discretization-invariant approximation** of an operator $G:A\\to U$ if each $G_n$ accepts input samples from a discretization of $D$, returns values that can be queried at arbitrary points of $D'$, and approximates $G$ as the input discretization is refined. In the compact-uniform version, for every compact $K\\subset A$,\n$$\\sup_{a\\in K}\\|G_n(a)-G(a)\\|_U\\longrightarrow0.$$\nThe statement is about a single continuum operator and its compatible discrete realizations. It does not declare unrelated grid-specific maps to be one operator family.",
+      "actual_current_interface": "## Definition\n\nLet $A$ and $U$ be real Banach spaces of functions on bounded domains $D$ and $D'$, with the input point evaluations used below defined. For every $n\\ge1$, choose finite-dimensional normed spaces $E_n,F_n$, an exactly defined sampling map $S_n:A\\to E_n$ (for example, $S_n(a)=(a(\\xi_{n,1}),\\ldots,a(\\xi_{n,N_n}))$ at specified input points), a finite-dimensional map $\\widetilde G_n:E_n\\to F_n$, and an output reconstruction map $R_n:F_n\\to U$. The reconstruction supplies a function with a defined value at every point of $D'$. The corresponding continuum-valued discrete map is\n$$G_n(a):=R_n\\bigl(\\widetilde G_n(S_n(a))\\bigr)\\in U.$$\nA family $(G_n)_{n\\ge1}$ is a **discretization-invariant approximation** of an operator $G:A\\to U$ if its sampling maps and output reconstructions are part of the family and it approximates this single continuum operator as the input discretization is refined. In the compact-uniform version, for every compact $K\\subset A$,\n$$\\sup_{a\\in K}\\|G_n(a)-G(a)\\|_U\\longrightarrow0.$$\nWhen $A$ consists of almost-everywhere equivalence classes, the sampling map must be explicitly defined on those classes or use a specified representative convention; point evaluation is not inferred from the equivalence class alone. This definition does not identify unrelated grid-specific maps as one operator family.",
+      "actual_current_sha256": "50271715579386dd2e92cac66eee5d94e9d1371f9eb571edbb45bb4932c58f05"
+    },
+    {
+      "id": "def-physics-informed-neural-network-loss",
+      "native_exact_before": "## Definition\n\nLet $U\\subset\\mathbb R^d$ be a bounded Lipschitz domain, let $\\Gamma\\subseteq\\partial U$ be closed, let $L$ be a differential operator on $U$, and let $B$ be a boundary operator on $\\Gamma$. Let $f:U\\to\\mathbb R$ and $g:\\Gamma\\to\\mathbb R$ be target data. For a trial function $h$, define its residuals by $r_h(x)=L[h](x)-f(x)$ and $q_h(x)=B[h](x)-g(x)$. For $0<\\alpha\\le1$ and a function $v$ on a set $E$, define its H\u00f6lder seminorm by\n$$[v]_{\\alpha;E}=\\sup_{x\\ne y\\in E}\\frac{|v(x)-v(y)|}{|x-y|^\\alpha}.$$\nFor positive fixed weights $\\lambda_r,\\lambda_b$, and probability measures $\\mu_r$ on $U$, $\\mu_b$ on $\\Gamma$, the population loss is\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)=\\lambda_r\\int_U|r_h|^2\\,d\\mu_r+\\lambda_b\\int_\\Gamma|q_h|^2\\,d\\mu_b.$$\nFor residual collocation points $x_r^1,\\ldots,x_r^{m_r}$ and boundary collocation points $x_b^1,\\ldots,x_b^{m_b}$, the empirical loss is\n$$\\operatorname{Loss}^{\\mathrm{PINN}}_{m}(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|r_h(x_r^i)|^2+\\frac{\\lambda_b}{m_b}\\sum_{j=1}^{m_b}|q_h(x_b^j)|^2.$$\nFor $d\\ge2$, its H\u00f6lder-regularized version is\n$$\\operatorname{Loss}_{m}(h;\\lambda,\\lambda_m^R)=\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^{2}+\\lambda^R_{b,m}[B[h]]_{\\alpha;\\Gamma}^{2}.$$\nWhen $d=1$, all boundary points are available deterministically, no random boundary sample is used, and the source regularizes only the residual term. These are population and empirical functionals; they do not specify an optimization algorithm or assert that training reaches a global minimizer.",
+      "actual_current_interface": "## Definition\n\nLet $U\\subset\\mathbb R^d$ be a bounded Lipschitz domain, let $\\Gamma\\subseteq\\partial U$ be closed, let $L$ be a differential operator on $U$, and let $B$ be a boundary operator on $\\Gamma$. Let $f:U\\to\\mathbb R$ and $g:\\Gamma\\to\\mathbb R$ be target data. For a trial function $h$, define its residuals by $r_h(x)=L[h](x)-f(x)$ and $q_h(x)=B[h](x)-g(x)$. For $0<\\alpha\\le1$ and a function $v$ on a set $E$, define its H\u00f6lder seminorm by\n$$[v]_{\\alpha;E}=\\sup_{x\\ne y\\in E}\\frac{|v(x)-v(y)|}{|x-y|^\\alpha}.$$\nOnly trial functions for which $L[h]$ on $U$ and $B[h]$ on $\\Gamma$ are pointwise defined and finite are admitted. For the population loss, require $f,r_h$ to be measurable with respect to $(U,\\mu_r)$ and $g,q_h$ to be measurable with respect to $(\\Gamma,\\mu_b)$. For positive fixed weights $\\lambda_r,\\lambda_b$ and probability measures $\\mu_r$ on $U$, $\\mu_b$ on $\\Gamma$, the population loss is\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)=\\lambda_r\\int_U|r_h|^2\\,d\\mu_r+\\lambda_b\\int_\\Gamma|q_h|^2\\,d\\mu_b.$$\nThese nonnegative population integrals take values in $[0,+\\infty]$, so they may be infinite. The H\u00f6lder seminorms below may likewise be infinite.\n\nFor $d\\ge2$, given positive integer counts $m_r,m_b$, residual collocation points $x_r^1,\\ldots,x_r^{m_r}$, and boundary collocation points $x_b^1,\\ldots,x_b^{m_b}$, the empirical loss is\n$$\\operatorname{Loss}^{\\mathrm{PINN}}_{m}(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|r_h(x_r^i)|^2+\\frac{\\lambda_b}{m_b}\\sum_{j=1}^{m_b}|q_h(x_b^j)|^2.$$\nFor $d=1$, a bounded Lipschitz domain has finite boundary, so $\\Gamma$ is finite. When every point of $\\Gamma$ is available deterministically, define its exact full-boundary contribution by\n$$\\operatorname{Loss}^{\\mathrm{PINN},b}(h;\\lambda_b)=\\lambda_b\\sum_{y\\in\\Gamma}\\mu_b(\\{y\\})|q_h(y)|^2=\\lambda_b\\int_\\Gamma|q_h|^2\\,d\\mu_b,$$\nand, for a positive integer count $m_r$ and residual collocation points $x_r^1,\\ldots,x_r^{m_r}$, set\n$$\\operatorname{Loss}^{\\mathrm{PINN}}_{m}(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|r_h(x_r^i)|^2+\\operatorname{Loss}^{\\mathrm{PINN},b}(h;\\lambda_b).$$\nFor $d\\ge2$, its H\u00f6lder-regularized version is\n$$\\operatorname{Loss}_{m}(h;\\lambda,\\lambda_m^R)=\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^{2}+\\lambda^R_{b,m}[B[h]]_{\\alpha;\\Gamma}^{2}.$$\nFor $d=1$, the H\u00f6lder-regularized version is\n$$\\operatorname{Loss}_{m}(h;\\lambda,\\lambda_m^R)=\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^{2};$$\nit uses the exact full-boundary contribution above, has no random boundary sample, and has no boundary seminorm penalty. Require the regularization coefficients appearing in either version to be nonnegative; a zero coefficient contributes zero even when its seminorm is infinite. For finite realized sample lists the empirical sums are finite; the regularized objective is allowed to take the value $+\\infty$. These are population and empirical functionals; they do not specify an optimization algorithm or assert that training reaches a global minimizer.",
+      "actual_current_sha256": "7734fc9381e43ffff63aabb6b1ac65f81cac1fc4410fd4487575f71cb03e63d3"
+    },
+    {
+      "id": "thm-neural-operator-input-output-spaces-have-ap",
+      "native_exact_before": "## Statement\n\nAssume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded Lipschitz domain. Each of the real spaces $L^p(D)$ for $1\\le p<\\infty$, $W^{m,p}(D)$ for $m\\in\\mathbb N$ and $1\\le p<\\infty$, and $C^m(\\bar D)$ for $m\\in\\mathbb N_0$ has the approximation property: on every norm-compact subset, the identity can be approximated uniformly by bounded finite-rank linear maps. Here the $C^m$ norm is the maximum of the uniform norms of the derivatives through order $m$, extended continuously to $\\bar D$. The same conclusion holds for the output-space list with its dimension and regularity parameters.",
+      "actual_current_interface": "## Statement\n\nAssume Countable Choice. Let $D\\subset\\mathbb R^d$ be a bounded Lipschitz domain. Each of the real spaces $L^p(D)$ for $1\\le p<\\infty$, $W^{m,p}(D)$ for $m\\in\\mathbb N$ and $1\\le p<\\infty$, and $C^m(\\bar D)$ for $m\\in\\mathbb N_0$ has the approximation property: on every norm-compact subset, the identity can be approximated uniformly by bounded finite-rank linear maps. Here the $C^m$ norm is the maximum of the uniform norms of the derivatives through order $m$, extended continuously to $\\bar D$. For any bounded Lipschitz domain $D'\\subset\\mathbb R^{d'}$, the corresponding real output spaces $L^{p_2}(D')$ for $1\\le p_2<\\infty$, $W^{m_2,p_2}(D')$ for $m_2\\in\\mathbb N$ and $1\\le p_2<\\infty$, and $C^{m_2}(\\overline{D'})$ for $m_2\\in\\mathbb N_0$ also have the approximation property.",
+      "actual_current_sha256": "edf38a338a17fe6c26858c6e3a745091e226193e192e3f2776232fe47ac6b6b2"
+    },
+    {
+      "id": "alg-empirical-pinn-objective",
+      "native_exact_before": "## Definition\n\nChoose $0<\\alpha\\le1$ and positive residual and boundary weights $\\lambda_r,\\lambda_b$. For $d\\ge2$, let $\\mu_r$ and $\\mu_b$ be the residual and boundary sampling measures. The constants $c_r,c_b>0$ satisfy $\\mu_r(U_j^\\varepsilon)\\ge c_r\\varepsilon^d$ and $\\mu_b(\\Gamma_j^\\varepsilon)\\ge c_b\\varepsilon^{d-1}$ for the cells in the sample partitions at the selected small scales $0<\\varepsilon\\le\\varepsilon_{0,r},\\varepsilon_{0,b}$; $C_r,C_b>0$ satisfy $\\mu_r(B_\\varepsilon(x)\\cap U)\\le C_r\\varepsilon^d$ and $\\mu_b(B_\\varepsilon(y)\\cap\\Gamma)\\le C_b\\varepsilon^{d-1}$. Require the upper ball-mass bounds at the selected fill radii, and take sample counts sufficiently large for both these radii and the partition scales to be in their specified ranges. Given sample counts $m_r,m_b$, put\n$$\\kappa_r=C_r/c_r,\\qquad \\kappa_b=C_b/c_b,$$\n$$C_m=3\\max\\!\\left\\{\\kappa_r(\\sqrt d)^d m_r^{1/2},\\ \\kappa_b(\\sqrt d)^{d-1}m_b^{1/2}\\right\\},$$\n$$\\widehat\\lambda^R_{r,m}=\\frac{3\\lambda_r(\\sqrt d)^{2\\alpha}c_r^{-2\\alpha/d}m_r^{-\\alpha/d}}{C_m},\\qquad \\widehat\\lambda^R_{b,m}=\\frac{3\\lambda_b(\\sqrt d)^{2\\alpha}c_b^{-2\\alpha/(d-1)}m_b^{-\\alpha/(d-1)}}{C_m}.$$\nChoose regularization weights componentwise at least these thresholds and satisfying $\\|\\lambda_m^R\\|_\\infty=O(\\|\\widehat\\lambda_m^R\\|_\\infty)$ as sample counts grow. Evaluate the H\u00f6lder-regularized objective from the preceding definition on a trial class. For $d=1$, set\n$$C_m=3\\kappa_r m_r^{1/2},\\qquad \\widehat\\lambda^R_{r,m}=\\frac{\\lambda_r c_r^{-2\\alpha}}{\\kappa_r}m_r^{-\\alpha-1/2},\\qquad \\widehat\\lambda^R_{b,m}=0,$$\nand use only the residual seminorm penalty. The thresholds are part of the source theorem and cannot be replaced by a generic positive penalty.",
+      "actual_current_interface": "## Definition\n\nInputs are a dimension $d\\ge1$, the data and operators specified in the physics-informed residual loss definition, $0<\\alpha\\le1$, positive weights $\\lambda_r,\\lambda_b$, and an admissible trial function $h$. The procedure returns the scalar empirical objective value $J_m(h)$. It uses the realized sample points and target values as inputs; it does not generate random samples.\n\nFor $d\\ge2$, also supply positive integer counts $m_r,m_b$, residual samples $x_r^1,\\ldots,x_r^{m_r}\\in U$ with their observed values $f(x_r^i)$, boundary samples $x_b^1,\\ldots,x_b^{m_b}\\in\\Gamma$ with their observed values $g(x_b^j)$, constants $c_r,c_b,C_r,C_b>0$, and small-scale cutoffs $\\ell_{0,i},\\rho_{0,i}>0$. At the selected partition scales $0<\\ell_i\\le\\ell_{0,i}$, require cells $U_j^{\\ell_r}$ and $\\Gamma_j^{\\ell_b}$ with masses at least $c_r\\ell_r^d$ and $c_b\\ell_b^{d-1}$, each contained in a cube of side $\\ell_i$. Require upper ball-mass bounds $\\mu_r(\\overline B_\\rho(x)\\cap U)\\le C_r\\rho^d$ and $\\mu_b(\\overline B_\\rho(y)\\cap\\Gamma)\\le C_b\\rho^{d-1}$ for every center and for all $0<\\rho\\le\\rho_{0,i}$. The admissible counts satisfy, for $i\\in\\{r,b\\}$,\n$$m_i\\ge\\max\\{1,c_i^{-2}\\ell_{0,i}^{-2s_i},c_i^{-2}d^{s_i}\\rho_{0,i}^{-2s_i}\\},$$\nso the computed partition scales and fill radii lie in the specified ranges.\n\nFor $d=1$, supply a positive integer $m_r$, residual samples $x_r^1,\\ldots,x_r^{m_r}\\in U$ with observed values $f(x_r^i)$, constants $c_r,C_r>0$, and cutoffs $\\ell_{0,r},\\rho_{0,r}>0$. At the residual scale $\\ell_r$ below, require a finite measurable partition with each cell contained in an interval of length $\\ell_r$ and mass at least $c_r\\ell_r$, and require upper ball-mass bounds $\\mu_r(\\overline B_\\rho(x)\\cap U)\\le C_r\\rho$ for every center $x\\in U$ and all $0<\\rho\\le\\rho_{0,r}$. The admissible count satisfies\n$$m_r\\ge\\max\\{1,c_r^{-2}\\ell_{0,r}^{-2},c_r^{-2}\\rho_{0,r}^{-2}\\},$$\nso $\\ell_r=\\delta_r$ is in the specified ranges. Supply the observed boundary values at every point of the finite set $\\Gamma$ with their masses $\\mu_b(\\{y\\})$. No random boundary sample or boundary sample count is used.\n\nFor $d\\ge2$, set $s_r=d$, $s_b=d-1$, and, for $i\\in\\{r,b\\}$, compute\n$$\\ell_i=(c_i\\sqrt{m_i})^{-1/s_i},\\qquad \\delta_i=\\sqrt d\\,\\ell_i,\\qquad \\kappa_i=C_i/c_i,$$\n$$C_m=3\\max_{i\\in\\{r,b\\}}\\{\\kappa_i d^{s_i/2}m_i^{1/2}\\},\\qquad\n\\widehat\\lambda^R_{i,m}=\\frac{3\\lambda_i\\delta_i^{2\\alpha}}{C_m}.$$\nFor $d=1$, compute\n$$\\ell_r=\\delta_r=(c_r\\sqrt{m_r})^{-1},\\qquad \\kappa_r=C_r/c_r,\\qquad C_m=3\\kappa_r m_r^{1/2},$$\n$$\\widehat\\lambda^R_{r,m}=\\frac{3\\lambda_r\\delta_r^{2\\alpha}}{C_m}\n=\\frac{\\lambda_r c_r^{-2\\alpha}}{\\kappa_r}m_r^{-\\alpha-1/2},\\qquad \\widehat\\lambda^R_{b,m}=0.$$\nFor $d\\ge2$, use supplied regularization weights $\\lambda^R_{i,m}$ satisfying $\\lambda^R_{i,m}\\ge\\widehat\\lambda^R_{i,m}$ componentwise; for a sequence of sample counts also require $\\|\\lambda_m^R\\|_\\infty=O(\\|\\widehat\\lambda_m^R\\|_\\infty)$. For $d=1$, set $\\lambda^R_{b,m}=0$ and choose $\\lambda^R_{r,m}\\ge\\widehat\\lambda^R_{r,m}$, with the corresponding one-coordinate max-norm order condition across a sequence of counts. If no residual weights are supplied, set them equal to their thresholds.\n\nFinally evaluate and return $J_m(h)=\\operatorname{Loss}_m(h;\\lambda,\\lambda_m^R)$ using the realized residual values, the realized boundary values when $d\\ge2$, the exact weighted full-boundary contribution when $d=1$, and the residual seminorm penalty when $d=1$ or both seminorm penalties when $d\\ge2$. The regularization thresholds are the source's exact thresholds and cannot be replaced by a generic positive penalty.",
+      "actual_current_sha256": "06525feb709abef01d00b9d2fd5c6295b106efc6449e454ab782cf558d772923"
+    },
+    {
+      "id": "lem-pinn-residual-loss-from-fill-distance",
+      "native_exact_before": "## Statement\n\nLet $d\\ge2$, let $U\\subset\\mathbb R^d$ and $\\Gamma\\subset\\mathbb R^d$ be measurable, and let $\\mu_r$ and $\\mu_b$ be probability measures on them. For positive integers $m_r,m_b$, let the residual samples $x_1^r,\\ldots,x_{m_r}^r$ and boundary samples $x_1^b,\\ldots,x_{m_b}^b$ form $\\varepsilon_r$- and $\\varepsilon_b$-nets of $U$ and $\\Gamma$ in Euclidean distance. Assume that for every center $x\\in U$ and $y\\in\\Gamma$,\n$$\\mu_r(\\overline B_{\\varepsilon_r}(x)\\cap U)\\le C_r\\varepsilon_r^d,\\qquad \\mu_b(\\overline B_{\\varepsilon_b}(y)\\cap\\Gamma)\\le C_b\\varepsilon_b^{d-1}.$$\nSuppose $[L[h]]_{\\alpha;U}$, $[B[h]]_{\\alpha;\\Gamma}$, $[f]_{\\alpha;U}$, and $[g]_{\\alpha;\\Gamma}$ are finite, where $[v]_{\\alpha;E}=\\sup_{x\\ne y\\in E}|v(x)-v(y)|/|x-y|^\\alpha$. Let $\\lambda_r,\\lambda_b>0$, and use the population and empirical weighted-square PINN losses\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)=\\lambda_r\\int_U|L[h]-f|^2\\,d\\mu_r+\\lambda_b\\int_\\Gamma|B[h]-g|^2\\,d\\mu_b,$$\n$$\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|L[h](x_i^r)-f(x_i^r)|^2+\\frac{\\lambda_b}{m_b}\\sum_{j=1}^{m_b}|B[h](x_j^b)-g(x_j^b)|^2.$$\nDefine\n$$C_m=3\\max\\{C_rm_r\\varepsilon_r^d,\\ C_bm_b\\varepsilon_b^{d-1}\\},\\quad \\lambda^R_{r,m}=\\frac{3\\lambda_r\\varepsilon_r^{2\\alpha}}{C_m},\\quad \\lambda^R_{b,m}=\\frac{3\\lambda_b\\varepsilon_b^{2\\alpha}}{C_m}.$$\nThen\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)\\le C_m\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+C_m\\left(\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^2+\\lambda^R_{b,m}[B[h]]_{\\alpha;\\Gamma}^2\\right)+3\\lambda_r\\varepsilon_r^{2\\alpha}[f]_{\\alpha;U}^2+3\\lambda_b\\varepsilon_b^{2\\alpha}[g]_{\\alpha;\\Gamma}^2.$$",
+      "actual_current_interface": "## Statement\n\nFor $d\\ge2$, let $U\\subset\\mathbb R^d$ and $\\Gamma\\subset\\mathbb R^d$ be measurable, and let $\\mu_r$ and $\\mu_b$ be probability measures on them. For positive integers $m_r,m_b$, let the residual samples $x_1^r,\\ldots,x_{m_r}^r$ and boundary samples $x_1^b,\\ldots,x_{m_b}^b$ form $\\varepsilon_r$- and $\\varepsilon_b$-nets of $U$ and $\\Gamma$ in Euclidean distance. Assume that for every center $x\\in U$ and $y\\in\\Gamma$,\n$$\\mu_r(\\overline B_{\\varepsilon_r}(x)\\cap U)\\le C_r\\varepsilon_r^d,\\qquad \\mu_b(\\overline B_{\\varepsilon_b}(y)\\cap\\Gamma)\\le C_b\\varepsilon_b^{d-1}.$$\nSuppose $[L[h]]_{\\alpha;U}$, $[B[h]]_{\\alpha;\\Gamma}$, $[f]_{\\alpha;U}$, and $[g]_{\\alpha;\\Gamma}$ are finite, where $[v]_{\\alpha;E}=\\sup_{x\\ne y\\in E}|v(x)-v(y)|/|x-y|^\\alpha$. Let $\\lambda_r,\\lambda_b>0$, and use the population and empirical weighted-square PINN losses\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)=\\lambda_r\\int_U|L[h]-f|^2\\,d\\mu_r+\\lambda_b\\int_\\Gamma|B[h]-g|^2\\,d\\mu_b,$$\n$$\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|L[h](x_i^r)-f(x_i^r)|^2+\\frac{\\lambda_b}{m_b}\\sum_{j=1}^{m_b}|B[h](x_j^b)-g(x_j^b)|^2.$$\nDefine\n$$C_m=3\\max\\{C_rm_r\\varepsilon_r^d,\\ C_bm_b\\varepsilon_b^{d-1}\\},\\quad \\lambda^R_{r,m}=\\frac{3\\lambda_r\\varepsilon_r^{2\\alpha}}{C_m},\\quad \\lambda^R_{b,m}=\\frac{3\\lambda_b\\varepsilon_b^{2\\alpha}}{C_m}.$$\nThen\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)\\le C_m\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+C_m\\left(\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^2+\\lambda^R_{b,m}[B[h]]_{\\alpha;\\Gamma}^2\\right)+3\\lambda_r\\varepsilon_r^{2\\alpha}[f]_{\\alpha;U}^2+3\\lambda_b\\varepsilon_b^{2\\alpha}[g]_{\\alpha;\\Gamma}^2.$$\n\nFor $d=1$, assume $\\mu_r$ is a probability measure on measurable $U\\subset\\mathbb R$, and $\\Gamma$ is a nonempty finite measurable set with probability measure $\\mu_b$. Every point of $\\Gamma$ is available deterministically. For a positive integer $m_r$, let $x_1^r,\\ldots,x_{m_r}^r$ form an $\\varepsilon_r$-net of $U$, and assume $\\mu_r(\\overline B_{\\varepsilon_r}(x)\\cap U)\\le C_r\\varepsilon_r$ for every center $x\\in U$. Suppose the same four H\u00f6lder seminorms are finite. Use the exact weighted boundary loss\n$$\\operatorname{Loss}^{\\mathrm{PINN},b}(h;\\lambda_b)=\\lambda_b\\int_\\Gamma|B[h]-g|^2\\,d\\mu_b=\\lambda_b\\sum_{y\\in\\Gamma}\\mu_b(\\{y\\})|B[h](y)-g(y)|^2$$\nand the empirical loss $\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)=\\frac{\\lambda_r}{m_r}\\sum_{i=1}^{m_r}|L[h](x_i^r)-f(x_i^r)|^2+\\operatorname{Loss}^{\\mathrm{PINN},b}(h;\\lambda_b)$. Set\n$$C_m=3C_rm_r\\varepsilon_r,\\qquad \\lambda^R_{r,m}=\\frac{3\\lambda_r\\varepsilon_r^{2\\alpha}}{C_m},\\qquad \\lambda^R_{b,m}=0.$$\nThen\n$$\\operatorname{Loss}^{\\mathrm{PINN}}(h;\\lambda)\\le C_m\\operatorname{Loss}^{\\mathrm{PINN}}_m(h;\\lambda)+C_m\\lambda^R_{r,m}[L[h]]_{\\alpha;U}^2+3\\lambda_r\\varepsilon_r^{2\\alpha}[f]_{\\alpha;U}^2.$$\nThere is no random boundary term or boundary-data error term in this branch because the full boundary contribution is evaluated exactly.",
+      "actual_current_sha256": "20d660bd092ffff02c066ef70d11ef897b7c1a6e214928b56a73307a7a777d91"
+    }
+  ],
+  "example_domain_evidence": {
+    "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+    "native_before_capture": "Empty for examples/counterexamples; cannot claim an exact Example before section from native before_interfaces.",
+    "native_review0_finding": "Domain D=[0,1] conflicts with open-domain supplier; use D=(0,1) and C([0,1]) representatives.",
+    "independent_historical_carrier": "research/machine-learning-all-101-2026-10-19-neural-operator-proposal/before/items/ex-neural-operator-grid-refinement-vs-fixed-grid-network.md",
+    "historical_raw_sha256": "19dde63de4415f2e2316851644ad362ad81c59f6b927a93e6222f3cc28ff17c1",
+    "historical_example": "## Example\n\nOn $D=[0,1]$, define $G(a)(x)=\\int_0^1a(y)\\,dy$ for every $x\\in[0,1]$. Its midpoint-mesh realization with $n$ cells is the constant output $G_n(a)(x)=\\frac1n\\sum_{j=1}^n a((j-\\frac12)/n)$. For a fixed continuous input $a$, these outputs converge uniformly in $x$ to $G(a)$. By contrast, the identity map $F_n:\\mathbb R^n\\to\\mathbb R^n$ on a length-$n$ vector is defined on a different input and output space at each $n$; without an additional reconstruction rule it is not a single function-space operator that accepts arbitrary meshes and can be queried at arbitrary output points.\n\n",
+    "current_example": "## Example\n\nOn the open domain $D=(0,1)$, use the continuous representatives $a\\in C([0,1])$ and $G(a)\\in C([0,1])$, and define $G(a)(x)=\\int_0^1a(y)\\,dy$ for every $x\\in[0,1]$. Its midpoint-mesh realization with $n$ cells is the constant output $G_n(a)(x)=\\frac1n\\sum_{j=1}^n a((j-\\frac12)/n)$. For a fixed continuous input $a$, these outputs converge uniformly in $x$ to $G(a)$. By contrast, the identity map $F_n:\\mathbb R^n\\to\\mathbb R^n$ on a length-$n$ vector is defined on a different input and output space at each $n$; without an additional reconstruction rule it is not a single function-space operator that accepts arbitrary meshes and can be queried at arbitrary output points.\n\n",
+    "verdict": "Current open interval and continuous closure representatives satisfy both supplier and its midpoint proof; integral-only finite mean factorization unchanged."
+  },
+  "native_original_all_30_consumers": [
+    {
+      "id": "alg-empirical-pinn-objective",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "alg-empirical-pinn-objective"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective"
+        ]
+      ]
+    },
+    {
+      "id": "alg-neural-operator-mesh-discretization",
+      "path": [
+        "def-discretization-invariant-operator-family",
+        "alg-neural-operator-mesh-discretization"
+      ],
+      "paths": [
+        [
+          "def-discretization-invariant-operator-family",
+          "alg-neural-operator-mesh-discretization"
+        ],
+        [
+          "def-neural-operator",
+          "alg-neural-operator-mesh-discretization"
+        ]
+      ]
+    },
+    {
+      "id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+      "path": [
+        "def-discretization-invariant-operator-family",
+        "alg-neural-operator-mesh-discretization",
+        "cex-neural-operator-sup-norm-discretization-does-not-control-c1"
+      ],
+      "paths": [
+        [
+          "def-discretization-invariant-operator-family",
+          "alg-neural-operator-mesh-discretization",
+          "cex-neural-operator-sup-norm-discretization-does-not-control-c1"
+        ],
+        [
+          "def-neural-operator",
+          "cex-neural-operator-sup-norm-discretization-does-not-control-c1"
+        ],
+        [
+          "alg-neural-operator-mesh-discretization",
+          "cex-neural-operator-sup-norm-discretization-does-not-control-c1"
+        ]
+      ]
+    },
+    {
+      "id": "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "alg-empirical-pinn-objective",
+        "cex-pinn-regularization-thresholds-need-balanced-sample-counts"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts"
+        ]
+      ]
+    },
+    {
+      "id": "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain"
+        ],
+        [
+          "lem-shin-radial-smooth-cutoff",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain"
+        ],
+        [
+          "lem-shin-elliptic-residual-stability",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain"
+        ]
+      ]
+    },
+    {
+      "id": "def-fourier-neural-operator-layer",
+      "path": [
+        "def-neural-operator",
+        "def-fourier-neural-operator-layer"
+      ],
+      "paths": [
+        [
+          "def-neural-operator",
+          "def-fourier-neural-operator-layer"
+        ]
+      ]
+    },
+    {
+      "id": "ex-fourier-neural-operator-layer-and-claim-boundary",
+      "path": [
+        "def-neural-operator",
+        "def-fourier-neural-operator-layer",
+        "ex-fourier-neural-operator-layer-and-claim-boundary"
+      ],
+      "paths": [
+        [
+          "def-neural-operator",
+          "def-fourier-neural-operator-layer",
+          "ex-fourier-neural-operator-layer-and-claim-boundary"
+        ],
+        [
+          "def-fourier-neural-operator-layer",
+          "ex-fourier-neural-operator-layer-and-claim-boundary"
+        ]
+      ]
+    },
+    {
+      "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+      "path": [
+        "def-discretization-invariant-operator-family",
+        "alg-neural-operator-mesh-discretization",
+        "ex-neural-operator-grid-refinement-vs-fixed-grid-network"
+      ],
+      "paths": [
+        [
+          "def-discretization-invariant-operator-family",
+          "alg-neural-operator-mesh-discretization",
+          "ex-neural-operator-grid-refinement-vs-fixed-grid-network"
+        ],
+        [
+          "def-neural-operator",
+          "ex-neural-operator-grid-refinement-vs-fixed-grid-network"
+        ],
+        [
+          "alg-neural-operator-mesh-discretization",
+          "ex-neural-operator-grid-refinement-vs-fixed-grid-network"
+        ]
+      ]
+    },
+    {
+      "id": "ex-non-global-training-stationary-point",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "ex-non-global-training-stationary-point"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "ex-non-global-training-stationary-point"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "ex-non-global-training-stationary-point"
+        ]
+      ]
+    },
+    {
+      "id": "ex-sparse-pinn-collocation-aliases-residual",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "ex-sparse-pinn-collocation-aliases-residual"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "ex-sparse-pinn-collocation-aliases-residual"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "ex-sparse-pinn-collocation-aliases-residual"
+        ]
+      ]
+    },
+    {
+      "id": "fs-shin-global-holder-dirichlet-claim",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "fs-shin-global-holder-dirichlet-claim"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "fs-shin-global-holder-dirichlet-claim"
+        ],
+        [
+          "lem-shin-radial-smooth-cutoff",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+          "fs-shin-global-holder-dirichlet-claim"
+        ],
+        [
+          "lem-shin-elliptic-residual-stability",
+          "fs-shin-global-holder-dirichlet-claim"
+        ],
+        [
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+          "fs-shin-global-holder-dirichlet-claim"
+        ]
+      ]
+    },
+    {
+      "id": "lem-neural-operator-ba-class-is-empty-as-defined",
+      "path": [
+        "def-neural-operator-activation-classes",
+        "lem-neural-operator-ba-class-is-empty-as-defined"
+      ],
+      "paths": [
+        [
+          "def-neural-operator-activation-classes",
+          "lem-neural-operator-ba-class-is-empty-as-defined"
+        ]
+      ]
+    },
+    {
+      "id": "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+      "path": [
+        "def-discretization-invariant-operator-family",
+        "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs"
+      ],
+      "paths": [
+        [
+          "def-discretization-invariant-operator-family",
+          "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs"
+        ],
+        [
+          "def-neural-operator",
+          "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs"
+        ]
+      ]
+    },
+    {
+      "id": "lem-pinn-residual-loss-from-fill-distance",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "lem-pinn-residual-loss-from-fill-distance"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "lem-pinn-residual-loss-from-fill-distance"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "lem-pinn-residual-loss-from-fill-distance"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-elliptic-energy-estimate",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "lem-shin-elliptic-energy-estimate"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-elliptic-energy-estimate"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-elliptic-residual-stability",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "lem-shin-elliptic-residual-stability"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-elliptic-residual-stability"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+      "path": [
+        "lem-shin-bounded-open-set-hilbert-evolution-triple",
+        "lem-shin-parabolic-classical-approximation-and-boundary-attainment"
+      ],
+      "paths": [
+        [
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment"
+        ],
+        [
+          "lem-shin-interior-parabolic-schauder-estimate",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-parabolic-energy-estimate",
+      "path": [
+        "def-shin-parabolic-operator-and-boundary",
+        "lem-shin-parabolic-energy-estimate"
+      ],
+      "paths": [
+        [
+          "def-shin-parabolic-operator-and-boundary",
+          "lem-shin-parabolic-energy-estimate"
+        ],
+        [
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-parabolic-energy-estimate"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-parabolic-residual-stability",
+      "path": [
+        "def-shin-parabolic-operator-and-boundary",
+        "lem-shin-parabolic-residual-stability"
+      ],
+      "paths": [
+        [
+          "def-shin-parabolic-operator-and-boundary",
+          "lem-shin-parabolic-residual-stability"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "lem-shin-elliptic-residual-stability",
+        "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-elliptic-residual-stability",
+          "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap"
+        ],
+        [
+          "lem-shin-elliptic-residual-stability",
+          "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap"
+        ]
+      ]
+    },
+    {
+      "id": "lem-shin-zero-data-parabolic-classical-energy-identification",
+      "path": [
+        "lem-shin-bounded-open-set-hilbert-evolution-triple",
+        "lem-shin-zero-data-parabolic-classical-energy-identification"
+      ],
+      "paths": [
+        [
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-zero-data-parabolic-classical-energy-identification"
+        ],
+        [
+          "lem-shin-interior-parabolic-schauder-estimate",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-shin-zero-data-parabolic-classical-energy-identification"
+        ],
+        [
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-shin-zero-data-parabolic-classical-energy-identification"
+        ]
+      ]
+    },
+    {
+      "id": "lem-smooth-integral-functionals-approximate-on-compact-function-sets",
+      "path": [
+        "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+        "lem-smooth-integral-functionals-approximate-on-compact-function-sets"
+      ],
+      "paths": [
+        [
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "lem-smooth-integral-functionals-approximate-on-compact-function-sets"
+        ]
+      ]
+    },
+    {
+      "id": "thm-neural-operator-compact-uniform-universality",
+      "path": [
+        "def-neural-operator",
+        "thm-neural-operator-compact-uniform-universality"
+      ],
+      "paths": [
+        [
+          "def-neural-operator",
+          "thm-neural-operator-compact-uniform-universality"
+        ],
+        [
+          "def-neural-operator-activation-classes",
+          "thm-neural-operator-compact-uniform-universality"
+        ],
+        [
+          "lem-neural-operator-ba-class-is-empty-as-defined",
+          "thm-neural-operator-compact-uniform-universality"
+        ],
+        [
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "thm-neural-operator-compact-uniform-universality"
+        ]
+      ]
+    },
+    {
+      "id": "thm-neural-operator-discretization-invariance",
+      "path": [
+        "def-discretization-invariant-operator-family",
+        "thm-neural-operator-discretization-invariance"
+      ],
+      "paths": [
+        [
+          "def-discretization-invariant-operator-family",
+          "thm-neural-operator-discretization-invariance"
+        ],
+        [
+          "def-neural-operator",
+          "thm-neural-operator-discretization-invariance"
+        ],
+        [
+          "alg-neural-operator-mesh-discretization",
+          "thm-neural-operator-discretization-invariance"
+        ],
+        [
+          "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+          "thm-neural-operator-discretization-invariance"
+        ]
+      ]
+    },
+    {
+      "id": "thm-neural-operator-input-output-spaces-have-ap",
+      "path": [
+        "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+        "thm-neural-operator-input-output-spaces-have-ap"
+      ],
+      "paths": [
+        [
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "thm-neural-operator-input-output-spaces-have-ap"
+        ]
+      ]
+    },
+    {
+      "id": "thm-pinn-linear-elliptic-consistency",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "thm-pinn-regularized-loss-consistency",
+        "thm-pinn-linear-elliptic-consistency"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-pinn-random-samples-are-space-filling",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-radial-smooth-cutoff",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-elliptic-energy-estimate",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-elliptic-residual-stability",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-pinn-residual-loss-from-fill-distance",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-pinn-cell-occupancy-controls-uniform-residual",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+          "thm-pinn-linear-elliptic-consistency"
+        ],
+        [
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+          "thm-pinn-linear-elliptic-consistency"
+        ]
+      ]
+    },
+    {
+      "id": "thm-pinn-linear-parabolic-consistency",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "thm-pinn-regularized-loss-consistency",
+        "thm-pinn-linear-parabolic-consistency"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "def-shin-parabolic-operator-and-boundary",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-pinn-random-samples-are-space-filling",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-parabolic-energy-estimate",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-parabolic-energy-estimate",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-parabolic-residual-stability",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-pinn-residual-loss-from-fill-distance",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-interior-parabolic-schauder-estimate",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-shin-zero-data-parabolic-classical-energy-identification",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-shin-zero-data-parabolic-classical-energy-identification",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-shin-zero-data-parabolic-classical-energy-identification",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "lem-pinn-cell-occupancy-controls-uniform-residual",
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ],
+        [
+          "thm-pinn-regularized-loss-consistency",
+          "thm-pinn-linear-parabolic-consistency"
+        ]
+      ]
+    },
+    {
+      "id": "thm-pinn-regularized-loss-consistency",
+      "path": [
+        "def-physics-informed-neural-network-loss",
+        "thm-pinn-regularized-loss-consistency"
+      ],
+      "paths": [
+        [
+          "def-physics-informed-neural-network-loss",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "lem-pinn-random-samples-are-space-filling",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "alg-empirical-pinn-objective",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "lem-pinn-residual-loss-from-fill-distance",
+          "thm-pinn-regularized-loss-consistency"
+        ],
+        [
+          "lem-pinn-cell-occupancy-controls-uniform-residual",
+          "thm-pinn-regularized-loss-consistency"
+        ]
+      ]
+    },
+    {
+      "id": "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+      "path": [
+        "def-shin-elliptic-divergence-form-operator",
+        "thm-shin-elliptic-dirichlet-existence-and-residual-stability"
+      ],
+      "paths": [
+        [
+          "def-shin-elliptic-divergence-form-operator",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-elliptic-residual-stability",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability"
+        ]
+      ]
+    },
+    {
+      "id": "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+      "path": [
+        "def-shin-parabolic-operator-and-boundary",
+        "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+      ],
+      "paths": [
+        [
+          "def-shin-parabolic-operator-and-boundary",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-interior-parabolic-schauder-estimate",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+        ],
+        [
+          "lem-shin-zero-data-parabolic-classical-energy-identification",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability"
+        ]
+      ]
+    }
+  ],
+  "checked_all30_in_all47_report": true
+}

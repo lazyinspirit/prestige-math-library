@@ -1,0 +1,135 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-29-1",
+  "inventory": {
+    "pages": [
+      "ml02-private-learning",
+      "ml02-private-learning-examples"
+    ],
+    "items": [
+      "alg-private-randomized-weighted-majority",
+      "alg-private-finite-class-erm",
+      "thm-private-online-learning-regret-under-composition",
+      "thm-private-erm-excess-risk",
+      "ex-online-one-round-replacement",
+      "ex-private-threshold-class-erm",
+      "ex-private-erm-large-finite-class"
+    ],
+    "pairs": [
+      "ml02-private-learning"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-private-randomized-weighted-majority.md",
+    "items/alg-private-finite-class-erm.md",
+    "items/thm-private-online-learning-regret-under-composition.md",
+    "items/thm-private-erm-excess-risk.md",
+    "items/ex-online-one-round-replacement.md",
+    "items/ex-private-threshold-class-erm.md",
+    "items/ex-private-erm-large-finite-class.md",
+    "library/machine-learning/ml02-private-learning.md",
+    "library/machine-learning/ml02-private-learning-examples.md"
+  ],
+  "write_batches": [
+    "29"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-online-one-round-replacement",
+      "path": [
+        "alg-private-randomized-weighted-majority",
+        "ex-online-one-round-replacement"
+      ],
+      "paths": [
+        [
+          "alg-private-randomized-weighted-majority",
+          "ex-online-one-round-replacement"
+        ],
+        [
+          "thm-private-online-learning-regret-under-composition",
+          "ex-online-one-round-replacement"
+        ]
+      ]
+    },
+    {
+      "id": "ex-private-erm-large-finite-class",
+      "path": [
+        "alg-private-finite-class-erm",
+        "ex-private-erm-large-finite-class"
+      ],
+      "paths": [
+        [
+          "alg-private-finite-class-erm",
+          "ex-private-erm-large-finite-class"
+        ],
+        [
+          "thm-private-erm-excess-risk",
+          "ex-private-erm-large-finite-class"
+        ]
+      ]
+    },
+    {
+      "id": "ex-private-threshold-class-erm",
+      "path": [
+        "alg-private-finite-class-erm",
+        "ex-private-threshold-class-erm"
+      ],
+      "paths": [
+        [
+          "alg-private-finite-class-erm",
+          "ex-private-threshold-class-erm"
+        ],
+        [
+          "thm-private-erm-excess-risk",
+          "ex-private-threshold-class-erm"
+        ]
+      ]
+    },
+    {
+      "id": "thm-private-erm-excess-risk",
+      "path": [
+        "alg-private-finite-class-erm",
+        "thm-private-erm-excess-risk"
+      ],
+      "paths": [
+        [
+          "alg-private-finite-class-erm",
+          "thm-private-erm-excess-risk"
+        ]
+      ]
+    },
+    {
+      "id": "thm-private-online-learning-regret-under-composition",
+      "path": [
+        "alg-private-randomized-weighted-majority",
+        "thm-private-online-learning-regret-under-composition"
+      ],
+      "paths": [
+        [
+          "alg-private-randomized-weighted-majority",
+          "thm-private-online-learning-regret-under-composition"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-private-randomized-weighted-majority": [
+      "## Definition\n\nLet $k,T$ be positive integers, let $\\eta>0$, and let $[k]=\\{1,\\ldots,k\\}$. A loss vector at round $t$ is $\\ell_t=(\\ell_t(1),\\ldots,\\ell_t(k))\\in[0,1]^k$. Initialize $w_{1,j}=1$ for each $j\\in[k]$. At round $t=1,\\ldots,T$, choose action $a_t=j$ with probability\n$$p_{t,j}=\\frac{w_{t,j}}{\\sum_{r=1}^k w_{t,r}}, \\qquad w_{t,j}=\\exp\\!\\left(-\\eta\\sum_{s<t}\\ell_s(j)\\right).$$\nThe empty sum at $t=1$ is zero. After drawing $a_t$, observe the entire vector $\\ell_t$ and update $w_{t+1,j}=w_{t,j}\\exp(-\\eta\\ell_t(j))$. Return the full transcript $(a_1,\\ldots,a_T)$. Each action draw is fresh conditional on the loss history and previous actions. The finite history spaces carry their power-set sigma-algebras."
+    ],
+    "alg-private-finite-class-erm": [
+      "## Definition\n\nLet $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let the binary label set $\\{0,1\\}$ carry its power-set sigma-algebra, and let $\\mathcal C$ be a finite nonempty class of measurable maps $h:\\mathcal X\\to\\{0,1\\}$. Fix an integer $n\\ge1$ and a parameter $\\varepsilon>0$. On an ordered labeled sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ with $m\\ge n$, or on its underlying finite multiset, define\n$$\\widehat L_S(h)=\\frac1m\\sum_{i=1}^m\\mathbf 1\\{h(x_i)\\ne y_i\\},\\qquad w_S(h)=\\exp\\!\\left(-\\frac{\\varepsilon n}{2}\\widehat L_S(h)\\right).$$\nOutput $h\\in\\mathcal C$ with probability $w_S(h)/\\sum_{g\\in\\mathcal C}w_S(g)$. This formula is invariant under permutations of the sample. For the statistical input, the ordered sample space has its finite product sigma-algebra. For the private-database input, the same formula is defined on finite-support record-count functions of size at least $n$, with the power-set sigma-algebra; privacy is proved separately."
+    ],
+    "thm-private-online-learning-regret-under-composition": [
+      "## Statement\n\nLet $k,T\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, let $\\eta>0$, and let each loss vector lie in $[0,1]^k$. Before round $t$ define $w_{t,j}=\\exp(-\\eta\\sum_{s<t}\\ell_s(j))$, $W_t=\\sum_{i=1}^k w_{t,i}$, and $p_{t,j}=w_{t,j}/W_t$. Draw $a_t=j$ with probability $p_{t,j}$, then observe the full vector $\\ell_t$ and update $w_{t+1,j}=w_{t,j}\\exp(-\\eta\\ell_t(j))$; release the transcript $(a_1,\\ldots,a_T)$. For the regret claims, assume a filtered probability model $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t=0}^T,\\mathbb P)$ in which $\\ell_t$ and $p_t$ are $\\mathcal F_{t-1}$-measurable and $\\mathbb P(a_t=j\\mid\\mathcal F_{t-1})=p_{t,j}$ for every $j\\in[k]$; thus the loss vector may depend on the previous transcript but not on the current draw. Set\n$$R_T=\\frac1T\\sum_{t=1}^T\\ell_t(a_t)-\\min_{j\\in[k]}\\frac1T\\sum_{t=1}^T\\ell_t(j).$$\nThen\n$$\\mathbb E R_T\\le \\eta+\\frac{\\ln k}{\\eta T},$$\nfor every such process. Assuming the Axiom of Choice, for every $0<\\beta<1$,\n$$\\Pr\\!\\left(R_T\\le \\eta+\\frac{\\ln k}{\\eta T}+\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}\\right)\\ge1-\\beta.$$\nThe expected-regret proof uses no choice axiom. At $k=1$, $R_T=0$ identically. For $k\\ge2$, substituting $\\eta=\\sqrt{\\ln k/T}$ into the expected-regret bound gives $2\\sqrt{\\ln k/T}$.\n\nFor privacy, regard a fixed sequence $(\\ell_1,\\ldots,\\ell_T)$ as the input, with two sequences adjacent when one complete time-step vector is replaced by an arbitrary vector in $[0,1]^k$, and release the full action transcript. For every common prior action history, the round-$t$ action kernels satisfy the ordered event inequalities for $(2\\eta,0)$-differential privacy. Assuming the Axiom of Choice, for every $\\varepsilon>0$ and $0<\\delta<1$, put $L=\\ln(1/\\delta)$ and choose\n$$\\eta=\\min\\left\\{\\frac{\\varepsilon}{\\sqrt{32TL}},\\frac12,\\sqrt{\\frac{\\varepsilon}{16T}}\\right\\}.$$\nThe full transcript is then $(\\varepsilon,\\delta)$-differentially private. With this choice the high-probability bound above is exactly\n$$R_T\\le \\eta+\\frac{\\ln k}{T} \\max\\left\\{\\frac{\\sqrt{32TL}}{\\varepsilon},\\,2,\\,4\\sqrt{\\frac{T}{\\varepsilon}}\\right\\} +\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}$$\nwith probability at least $1-\\beta$. If $\\eta_0=\\varepsilon/\\sqrt{32TL}$ satisfies $\\varepsilon\\le\\sqrt{8TL}$ and $\\varepsilon\\le2L$, then $\\eta=\\eta_0$ and this bound specializes to\n$$R_T\\le \\eta_0+\\frac{\\sqrt{32L}\\,\\ln k}{\\varepsilon\\sqrt T} +\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}.$$\nThe fixed-sequence privacy claim and the nonanticipating adaptive-loss regret claim have distinct input quantifiers. The privacy conclusion also applies to an interactive loss-generating strategy pair when, at every common transcript, the next-action kernels obey the ordered $(2\\eta,0)$ event inequalities for every adjacent strategy pair."
+    ],
+    "thm-private-erm-excess-risk": [
+      "## Statement\n\nLet $(\\mathcal X,\\Sigma_X)$ be a measurable space, let $\\mathcal C$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$, let $n\\ge1$ be an integer, and let $\\varepsilon>0$. On the domain of finite labeled databases of size at least $n$, use add/remove adjacency, with both neighboring databases required to remain in the domain. For a database $D$ of size $m\\ge n$, write\n$$\\widehat L_D(h)=\\frac1m\\sum_{(x,y)\\in D}\\mathbf1\\{h(x)\\ne y\\},$$\nwhere records are counted with multiplicity. The finite-class exponential selector that outputs $h\\in\\mathcal C$ with probability proportional to $\\exp(-\\varepsilon n\\widehat L_D(h)/2)$ is pure $\\varepsilon$-differentially private on this domain.\n\nFor the statistical guarantee, let $P$ be any probability law on $\\mathcal X\\times\\{0,1\\}$, let $Z_1,\\ldots,Z_n$ be IID with law $P$, and apply the same selector to their labeled sample. Define the population risk $L_P(h)=P\\{h(X)\\ne Y\\}$. For every $0<\\beta<1$, with probability at least $1-\\beta$ over both the sample and the selector's random draw, its output $H$ satisfies\n$$L_P(H)-\\inf_{h\\in\\mathcal C}L_P(h) \\le 2\\sqrt{\\frac{\\ln|\\mathcal C|+\\ln(4/\\beta)}{2n}} +\\frac{2}{\\varepsilon n}\\left(\\ln|\\mathcal C|+\\ln(2/\\beta)\\right).$$\nIf $|\\mathcal C|\\ge2$ and $0<\\alpha,\\beta<1$, then\n$$n\\ge24\\max\\left\\{ \\frac{\\ln|\\mathcal C|+\\ln(1/\\beta)}{\\varepsilon\\alpha}, \\frac{\\ln|\\mathcal C|+\\ln(1/\\beta)}{\\alpha^2} \\right\\}$$\nsuffices to make this excess risk at most $\\alpha$ with probability at least $1-\\beta$. If $|\\mathcal C|=1$, the excess risk is identically zero."
+    ],
+    "ex-online-one-round-replacement": [],
+    "ex-private-threshold-class-erm": [],
+    "ex-private-erm-large-finite-class": []
+  }
+}

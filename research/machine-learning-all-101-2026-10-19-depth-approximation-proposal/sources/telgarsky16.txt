@@ -1,0 +1,1402 @@
+PAGE 1
+JMLR: Workshop and Conference Proceedings vol 49:1–23, 2016
+Beneﬁts of depth in neural networks
+Matus Telgarsky
+MTELGARS@CS.UCSD.EDU
+University of Michigan, Ann Arbor
+Abstract
+For any positive integer k, there exist neural networks with Θ(k3) layers, Θ(1) nodes per layer, and
+Θ(1) distinct parameters which can not be approximated by networks with O(k) layers unless they
+are exponentially large — they must possess Ω(2k) nodes. This result is proved here for a class
+of nodes termed semi-algebraic gates which includes the common choices of ReLU, maximum,
+indicator, and piecewise polynomial functions, therefore establishing beneﬁts of depth against not
+just standard networks with ReLU gates, but also convolutional networks with ReLU and maxi-
+mization gates, sum-product networks, and boosted decision trees (in this last case with a stronger
+separation: Ω(2k3) total tree nodes are required).
+Keywords: Neural networks, representation, approximation, depth hierarchy.
+1. Setting and main results
+A neural network is a model of real-valued computation deﬁned by a connected directed graph
+as follows. Nodes await real numbers on their incoming edges, thereafter computing a function
+of these reals and transmitting it along their outgoing edges. Root nodes apply their computation
+to a vector provided as input to the network, whereas internal nodes apply their computation to the
+output of other nodes. Different nodes may compute different functions, two common choices being
+the maximization gate v 7→maxi vi (where v is the vector of values on incoming edges), and the
+standard ReLU gate v 7→σR(⟨a, v⟩+ b) where σR(z) := max{0, z} is called the ReLU (rectiﬁed
+linear unit), and the parameters a and b may vary from node to node. Graphs in the present work
+are acyclic, and there is exactly one node with no outgoing edges whose computation is the output
+of the network.
+Neural networks distinguish themselves from many other function classes used in machine
+learning by possessing multiple layers, meaning the output is the result of composing together
+an arbitrary number of (potentially complicated) nonlinear operations; by contrast, the functions
+computed by boosted decision stumps and SVMs can be written as neural networks with a constant
+number of layers.
+The purpose of the present work is to show that standard types of networks always gain in
+representation power with the addition of layers. Concretely: it is shown that for every positive
+integer k, there exist neural networks with Θ(k3) layers, Θ(1) nodes per layer, and Θ(1) distinct
+parameters which can not be approximated by networks with O(k) layers and o(2k) nodes.
+1.1. Main result
+Before stating the main result, a few choices and pieces of notation deserve explanation. First, the
+target many-layered function uses standard ReLU gates; this is by no means necessary, and a more
+general statement can be found in Theorem 3.12. Secondly, the notion of approximation is the L1
+c⃝2016 M. Telgarsky.
+
+PAGE 2
+TELGARSKY
+distance: given two functions f and g, their pointwise disagreement |f(x) −g(x)| is averaged over
+the cube [0, 1]d. Here as well, the same proofs allow ﬂexibility (cf. Theorem 3.12). Lastly, the
+shallower networks used for approximation use semi-algebraic gates, which generalize the earlier
+maximization and standard ReLU gates, and allow for analysis of not just standard networks with
+ReLU gates, but convolutional networks with ReLU and maximization gates (Krizhevsky et al.,
+2012), sum-product networks (where nodes compute polynomials) (Poon and Domingos, 2011),
+and boosted decision trees; the full deﬁnition of semi-algebraic gates appears in Section 2.
+Theorem 1.1 Let any integer k ≥1 and any dimension d ≥1 be given. There exists f : Rd →R
+computed by a neural network with standard ReLU gates in 2k3 + 8 layers, 3k3 + 12 total nodes,
+and 4 + d distinct parameters so that
+inf
+g∈C
+Z
+[0,1]d |f(x) −g(x)|dx ≥1
+64,
+where C is the union of the following two sets of functions.
+• Functions computed by networks of (t, α, β)-semi-algebraic gates in ≤k layers and ≤
+2k/(tαβ) nodes. (E.g., as with standard ReLU networks or with convolutional neural net-
+works with standard ReLU and maximization gates; cf. Section 2.)
+• Functions computed by linear combinations of ≤t decision trees each with ≤2k3/t nodes.
+(E.g., the function class used by boosted decision trees; cf. Section 2.)
+Analogs to Theorem 1.1 for boolean circuits — which have boolean inputs routed through
+{and, or, not} gates — have been studied extensively by the circuit complexity community, where
+they are called depth hierarchy theorems. The seminal result, due to H˚astad (1986), establishes
+the inapproximability of the parity function by shallow circuits (unless their size is exponential).
+Standard neural networks appear to have received less study; closest to the present work is an in-
+vestigation by Eldan and Shamir (2015) analyzing the case k = 2 when the dimension d is large,
+showing an exponential separation between 2- and 3-layer networks, a regime not handled by The-
+orem 1.1. Further bibliographic notes and open problems may be found in Section 5.
+The proof of Theorem 1.1 (and of the more general Theorem 3.12) occupies Section 3. The
+key idea is that just a few function compositions (layers) sufﬁce to construct a highly oscillatory
+function, whereas function addition (adding nodes but keeping depth ﬁxed) gives a function with
+few oscillations. Thereafter, an elementary counting argument sufﬁces to show that low-oscillation
+functions can not approximate high-oscillation functions.
+1.2. Companion results
+Theorem 1.1 only provides the existence of one network (for each k) which can not be approximated
+by a network with many fewer layers. It is natural to wonder if there are many such special functions.
+The following bound indicates their population is in fact quite modest.
+Speciﬁcally, the construction behind Theorem 1.1, as elaborated in Theorem 3.12, can be seen
+as exhibiting O(2k3) points, and a ﬁxed labeling of these points, upon which a shallow network
+hardly improves upon random guessing. The forthcoming Theorem 1.2 similarly shows that even
+on the more simpler task of ﬁtting O(k9) points, the earlier class of networks is useless on most
+random labellings.
+2
+
+PAGE 3
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+In order to state the result, a few more deﬁnitions are in order. Firstly, for this result, the notion
+of neural network is more restrictive. Let a neural net graph G denote not only the graph structure
+(nodes and edges), but also an assignment of gate functions to nodes, of edges to the inputs of gates,
+and an assignment of free parameters w ∈Rp to the parameters of the gates. Let N(G) denote the
+class of functions obtained by varying the free parameters; this deﬁnition is fairly standard, and is
+discussed in more detail in Section 2. As a ﬁnal piece of notation, given a function f : Rd →R, let
+˜f : Rd →{0, 1} denote the corresponding classiﬁer ˜f(x) := 1[f(x) ≥1/2].
+Theorem 1.2
+Let any neural net graph G be given with ≤p parameters in ≤l layers and ≤m
+total (t, α, β)-semi-algebraic nodes. Then for any δ > 0 and any n ≥8pl2 ln(8emtαβp(l + 1)) +
+4 ln(1/δ) points (xi)n
+i=1, with probability ≥1 −δ over uniform random labels (yi)n
+i=1,
+inf
+f∈N(G)
+1
+n
+n
+X
+i=1
+1[ ˜f(xi) ̸= yi] ≥1
+4.
+This proof is a direct corollary of the VC dimension of semi-algebraic networks, which in turn
+can be proved by a small modiﬁcation of the VC dimension proof for piecewise polynomial net-
+works (Anthony and Bartlett, 1999, Theorem 8.8). Moreover, the core methodology for VC dimen-
+sion bounds of neural networks is due to Warren, whose goal was an analog of Theorem 1.2 for
+polynomials (Warren, 1968, Theorem 7).
+Lemma 1.3 (Simpliﬁcation of Lemma 4.2)
+Let any neural net graph G be given with ≤p pa-
+rameters in ≤l layers and ≤m total nodes, each of which is (t, α, β)-semi-algebraic. Then
+VC(N(G)) ≤6p(l + 1)
+ ln(2p(l + 1)) + ln(8emtα) + l ln(β)
+
+.
+The proof of Theorem 1.2 and Lemma 1.3 may be found in Section 4. The argument for the
+VC dimension is very close to the argument for Theorem 1.1 that a network with few layers has few
+oscillations; see Section 4 for further discussion of this relationship.
+2. Semi-algebraic gates and assorted network notation
+The deﬁnition of a semi-algebraic gate is unfortunately complicated; it is designed to capture a
+few standard nodes in a single abstraction without degrading the bounds. Note that the name semi-
+algebraic set is standard (Bochnak et al., 1998, Deﬁnition 2.1.4), and refers to a set deﬁned by
+unions and intersections of polynomial inequalities (and thus the name is somewhat abused here).
+Deﬁnition 2.1 A function f : Rk →R is (t, α, β)-sa ((t, α, β)-semi-algebraic) if there exist t
+polynomials (qi)t
+i=1 of degree ≤α, and m triples (Uj, Lj, pj)m
+j=1 where Uj and Lj are subsets of
+[t] (where [t] := {1, . . . , t}) and pj is a polynomial of degree ≤β, such that
+f(v) =
+m
+X
+j=1
+pj(v)
+
+Y
+i∈Lj
+1[qi(v) < 0]
+
+
+
+Y
+i∈Uj
+1[qi(v) ≥0]
+
+.
+3
+
+PAGE 4
+TELGARSKY
+A notable trait of the deﬁnition is that the number of terms m does not need to enter the name
+as it does not affect any of the complexity estimates herein (e.g., Theorem 1.1 or Theorem 1.2).
+Distinguished special cases of semi-algebraic gates are as follows in Lemma 2.3. The standard
+piecewise polynomial gates generalize the ReLU and have received a fair bit of attention in the
+theoretical community (Anthony and Bartlett, 1999, Chapter 8); here a function σ : R →R is
+(t, α)-poly if R can be partitioned into ≤t intervals so that σ is a polynomial of degree ≤α
+within each piece. The maximization and minimization gates have become popular due to their use
+in convolutional networks (Krizhevsky et al., 2012), which will be discussed more in Section 2.1.
+Lastly, decision trees and boosted decision trees are practically successful classes usually viewed
+as competitors to neural networks (Caruana and Niculescu-Mizil, 2006), and have the following
+structure.
+Deﬁnition 2.2 A k-dt (decision tree with k nodes) is deﬁned recursively as follows. If k = 1, it is
+a constant function. If k > 1, it ﬁrst evaluates x 7→1[⟨a, x⟩−b ≥0], and thereafter conditionally
+evaluates either a left l-dt or a right r-dt where l + r < k. A (t, k)-bdt (boosted decision tree)
+evaluates x 7→Pt
+i=1 cigi(x) where each ci ∈R and each gi is a k-dt.
+Lemma 2.3 (Example semi-algebraic gates)
+1. If σ : R →R is (t, β)-poly and q : Rd →R is a polynomial of degree α, then the standard
+piecewise polynomial gate σ ◦q is (t, α, αβ)-sa. In particular, the standard ReLU gate v 7→
+σR(⟨a, v⟩+ b) is (1, 1, 1)-sa.
+2. Given polynomials (pi)r
+i=1 of degree ≤α, the standard (r, α)-min and -max gates φmin(v) :=
+mini∈[r] pi(v) and φmax(v) := maxi∈[r] qi(v) are (r(r −1), α, α)-sa.
+3. Every k-dt is (k, 1, 0)-sa, and every (t, k)-bdt is (tk, 1, 0).
+The proof of Lemma 2.3 is mostly a matter of unwrapping deﬁnitions, and is deferred to Ap-
+pendix A. Perhaps the only interesting encoding is for the maximization gate (and similarly the
+minimization gate), which uses maxi vi = P
+i vi(Q
+j<i 1[vi > vj])(Q
+j>i 1[vi ≥vj]).
+2.1. Notation for neural networks
+A semi-algebraic gate is simply a function from some domain to R, but its role in a neural network
+is more complicated as the domain of the function must be partitioned into arguments of three types:
+the input x ∈Rd to the network, the parameter vector w ∈Rp, and a vector of real numbers coming
+from parent nodes.
+As a convention, the input x ∈Rd is only accessed by the root nodes (otherwise “layer” has
+no meaning). For convenience, let layer 0 denote the input itself: d nodes where node i is the
+map x 7→xi. The parameter vector w ∈Rp will be made available to all nodes in layers above
+0, though they might only use a subset of it. Speciﬁcally, an internal node computes a function
+f : Rp × Rd →R using parents (f1, . . . , fk) and a semi-algebraic gate φ : Rp × Rk →R,
+meaning f(w, x) := φ(w1, . . . , wp, f1(w, x), . . . , fk(w, x)). Another common practice is to have
+nodes apply a univariate activation function to an afﬁne mapping of their parents (as with piecewise
+polynomial gates in Lemma 2.3), where the weights in the afﬁne combination are the parameters
+to the network, and additionally correspond to edges in the graph. It is permitted for the same
+4
+
+PAGE 5
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+parameter to appear multiple times in a network, which explains how the number of parameters in
+Theorem 1.1 can be less than the number of edges and nodes. The entire network computes some
+function FG : Rp × Rd →R, which is equivalent to the function computed by the single node with
+no outgoing edges.
+As stated previously, G will denote not just the graph (nodes and edges) underlying a network,
+but also an assignment of gates to nodes, and how parameters and parent outputs are plugged into the
+gates (i.e., in the preceding paragraph, how to write f via φ). N(G) is the set of functions obtained
+by varying w ∈Rp, and thus N(G) := {FG(w, ·) : w ∈Rp} where FG is the function deﬁned
+as above, corresponding to computation performed by G. The results related to VC dimension,
+meaning Theorem 1.2 and Lemma 1.3, will use the class N(G).
+Some of the results, for instance Theorem 1.1 and its generalization Theorem 3.12, will let not
+only the parameters but also network graph G vary. Let Nd((mi, ti, αi, βi)l
+i=1) denote a network
+where layer i has ≤mi nodes where each is (ti, αi, βi)-sa and the input has dimension d. As a
+simpliﬁcation, let Nd(m, l, t, α, β) denote networks of (t, α, β)-sa gates in ≤l layers (not including
+layer 0) each with ≤m nodes. There are various empirical prescriptions on how to vary the number
+of nodes per layer; for instance, convolutional networks typically have an increase between layer
+0 and layer 1, followed by exponential decrease for a few layers, and ﬁnally a few layers with the
+same number of nodes (Fukushima, 1980; LeCun et al., 1998; Krizhevsky et al., 2012).
+3. Beneﬁts of depth
+The purpose of this section is to prove Theorem 1.1 and its generalization Theorem 3.12 in the
+following three steps.
+1. Functions with few oscillations poorly approximate functions with many oscillations.
+2. Functions computed by networks with few layers must have few oscillations.
+3. Functions computed by networks with many layers can have many oscillations.
+3.1. Approximation via oscillation counting
+f
+g
+Figure 1: f crosses more than g.
+The idea behind this ﬁrst step is depicted at right. Given
+functions f : R →R and g : R →R (the multivariate
+case will come soon), let If and Ig denote partitions of
+R into intervals so that the classiﬁers ˜f(x) = 1[f(x) ≥
+1/2] and ˜g are constant within each interval. To formally
+count oscillations, deﬁne the crossing number Cr(f) of f
+as Cr(f) = |If| (thus Cr(σR) = 2). If Cr(f) is much
+larger than Cr(g), then most piecewise constant regions of ˜g will exhibit many oscillations of f, and
+thus g poorly approximates f.
+Lemma 3.1
+Let f : R →R and g : R →R be given, and take If to denote the partition of R
+given by the pieces of ˜f (meaning |If| = Cr(f)). Then
+1
+Cr(f)
+X
+U∈If
+1[∀x ∈U  ˜f(x) ̸= ˜g(x)] ≥1
+2
+
+1 −2
+ Cr(g)
+Cr(f)
+
+.
+5
+
+PAGE 6
+TELGARSKY
+The arguably strange form of the left hand side of the bound in Lemma 3.1 is to accommodate
+different notions of distance. For the L1 distance with the Lebesgue measure as in Theorem 1.1,
+it does not sufﬁce for f to cross 1/2: it must be regular, meaning it must cross by an appreciable
+distance, and the crossings must be evenly spaced. (It is worth highlighting that the ReLU easily
+gives rise to a regular f.) However, to merely show that f and g give very different classiﬁers ˜f and
+˜g over an arbitrary measure (as in part of Theorem 3.12), no additional regularity is needed.
+Proof (of Lemma 3.1) Let If and Ig respectively denote the sets of intervals corresponding to ˜f
+and ˜g, and set sf := Cr(f) = |If| and sg := Cr(g) = |Ig|.
+For every J ∈Ig, set XJ := {U ∈If : U ⊆J}. Fixing any J ∈Ig, since ˜g is constant on J
+whereas ˜f alternates, the number of elements in XJ where ˜g disagrees everywhere with ˜f is |XJ|/2
+when |XJ| is even and at least (|XJ|−1)/2 when |XJ| is odd, thus at least (|XJ|−1)/2 in general.
+As such,
+1
+sf
+X
+U∈If
+1[∀x ∈U  ˜f(x) ̸= ˜g(x)] ≥1
+sf
+X
+J∈Ig
+X
+U∈XJ
+1[∀x ∈U  ˜f(x) ̸= ˜g(x)] ≥1
+sf
+X
+J∈Ig
+|XJ| −1
+2
+.
+(3.1)
+To control this expression, note that every XJ is disjoint, however X := ∪J∈IjXj can be smaller
+than If: in particular, it misses intervals U ∈If whose interior intersects with the boundary of an
+interval in Ig. Since there are at most sg −1 such boundaries,
+sf = |If| ≤sg −1 + |X| ≤sg +
+X
+J∈Ig
+|XJ|,
+which rearranges to gives P
+J∈Ig |XJ| ≥sf −sg. Combining this with eq. (3.1),
+1
+sf
+X
+U∈If
+1[∀x ∈U  ˜f(x) ̸= ˜g(x)] ≥
+1
+2sf
+(sf −sg −sg) = 1
+2
+
+1 −2sg
+sf
+
+.
+3.2. Few layers, few oscillations
+As in the preceding section, oscillations of a function f will be counted via the crossing number
+Cr(f). Since Cr(·) only handles univariate functions, the multivariate case is handled by ﬁrst choos-
+ing an afﬁne map h : R →Rd (meaning h(z) = az + b) and considering Cr(f ◦h).
+Before giving the central upper bounds and sketching their proofs, notice by analogy to poly-
+nomials how compositions and additions vary in their impact upon oscillations. By adding together
+two polynomials, the resulting polynomial has at most twice as many terms and does not exceed the
+maximum degree of either polynomial. On the other hand, composing polynomials, the result has
+the product of the degrees and can have more than the product of the terms. As both of these can
+impact the number of roots or crossings (e.g., by the Bezout Theorem or Descartes’ Rule of Signs),
+composition wins the race to higher oscillations.
+Lemma 3.2 Let h : R →Rd be afﬁne.
+6
+
+PAGE 7
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+1. Suppose f ∈Nd((mi, ti, αi, βi)l
+i=1) with mini min{αi, βi} ≥1. Setting α := maxi αi, β :=
+maxi βi, t := maxi ti, m := P
+i mi, then Cr(f ◦h) ≤2(2tmα/l)lβl2.
+2. Let k-dt f : Rd →R and (t, k)-bdt g : Rd →R be given. Then Cr(f ◦h) ≤k and
+Cr(g ◦h) ≤2tk.
+Lemma 3.2 shows the key tradeoff: the number of layers is in the exponent, while the number
+of nodes is in the base.
+Rather than directly controlling Cr(f ◦h), the proofs will ﬁrst show f ◦h is (t, α)-poly, which
+immediately bounds Cr(f ◦h) as follows.
+Lemma 3.3 If f : R →R is (t, α)-poly, then Cr(f) ≤t(1 + α).
+Proof The polynomial in each piece has at most α roots, which thus divides each piece into ≤1+α
+further pieces within which ˜f is constant.
+A second technical lemma is needed to reason about combinations of partitions deﬁned by
+(t, α, β)-sa and (t, α)-poly functions.
+Lemma 3.4 Let k partitions (Ai)k
+i=1 of R each into at most t intervals be given, and set A := ∪iAi.
+Then there exists a partition B of R of size at most kt so that every interval expressible as a union
+of intersections of elements of A is a union of elements of B.
+Figure 2: Three partitions.
+The proof is somewhat painful owing to the fact that there is no
+convention on the structure of the intervals in the partitions, namely
+which ends are closed and which are open, and is thus deferred to
+Appendix A. The principle of the proof is elementary, and is de-
+picted at right: given a collection of partitions, an intersection of
+constituent intervals must share endpoints with intervals in in the
+intersection, thus the total number of intervals bounds the total num-
+ber of possible intersections. Arguably, this failure to increase com-
+plexity in the face of arbitrary intersections is why semi-algebraic
+gates do not care about the number of terms in their deﬁnition.
+Recall that (t, α, β)-sa means there is a set of t polynomials of degree at most α which form the
+regions deﬁning the function by intersecting simpler regions x 7→1[q(x) ≥0] and x 7→1[q(x) <
+0]. As such, in order to analyze semi-algebraic gates composed with piecewise polynomial gates,
+consider ﬁrst the behavior of these predicate polynomials.
+Lemma 3.5 Suppose f : Rk →R is polynomial with degree ≤α and (gi)k
+i=1 are each (t, γ)-poly.
+Then h(x) := f(g1(x), . . . , gk(x)) is (tk, αγ)-poly, and the partition deﬁning h is a reﬁnement of
+the partitions for each gi (in particular, each gi is a ﬁxed polynomial (of degree ≤γ) within the
+≤tk pieces deﬁning h).
+Proof By Lemma 3.4, there exists a partition of R into ≤tk intervals which reﬁnes the partitions
+deﬁning each gi. Since f is a polynomial with degree ≤α, then within each of these intervals, its
+composition with (g1, . . . , gk) gives a polynomial of degree ≤αγ.
+This gives the following complexity bound for composing (s, α, β)-sa and (t, γ)-poly gates.
+7
+
+PAGE 8
+TELGARSKY
+Lemma 3.6 Suppose f : Rk →R is (s, α, β)-sa and (g1, . . . , gk) are (t, γ)-poly. Then h(x) :=
+f(g1(x), . . . , gk(x)) is (stk(1 + αγ), βγ)-poly.
+Proof By deﬁnition, f is polynomial in regions deﬁned by intersections of the predicates Ui(x) =
+1[qi(x) ≥0] and Li(x) = 1[qi(x) < 0]. By Lemma 3.5, qi(g1, . . . , gk) is (tk, αγ)-poly, thus Ui
+and Li together deﬁne a partition of R which has Cr(x 7→qi(g1(x), . . . , gk(x))) pieces, which by
+Lemma 3.3 has cardinality at most tk(1+αγ) and reﬁnes the partitions for each gi. By Lemma 3.4,
+these partitions across all predicate polynomials (qi)s
+i=1 can be reﬁned into a single partition of size
+≤stk(1 + αγ), and which thus also reﬁnes the partitions deﬁned by (g1, . . . , gk). Thanks to these
+reﬁnements, h over any element U of this ﬁnal partition is a ﬁxed polynomial pU(g1, . . . , gk) of
+degree ≤βγ, meaning h is (stk(1 + αγ), βγ)-poly.
+The proof of Lemma 3.2 now follows by Lemma 3.6. In particular, for semi-algebraic networks,
+the proof is an induction over layers, establishing node j is (tj, αj)-poly (for appropriate (tj, αj)).
+3.3. Many layers, many oscillations
+The idea behind this construction is as follows. Consider any continuous function f : [0, 1] →[0, 1]
+which is a generalization of a triangle wave with a single peak: f(0) = f(1) = 0, and there is some
+a ∈(0, 1) with f(a) = 1, and additionally f strictly increases along [0, a] and strictly decreases
+along [a, 1].
+Now consider the effect of the composition f ◦f = f2. Along [0, a], this is a stretched copy
+of f, since f(f(a)) = f(1) = 0 = f(0) = f(f(0)) and moreover f is a bijection between [0, a]
+and [0, 1] (when restricted to [0, a]). The same reasoning applies to f2 along [a, 1], meaning f2 is
+a function with two peaks. Iterating this argument implies fk is a function with 2k−1 peaks; the
+following deﬁnition and lemmas formalize this reasoning.
+Deﬁnition 3.7 f is (t, [a, b])-triangle when it is continuous along [a, b], and [a, b] may be divided
+into 2t intervals [ai, ai+1] with a1 = a and a2t+1 = b, f(ai) = f(ai+2) whenever 1 ≤i ≤2t −1,
+f(a1) = 0, f(a2) = 1, f is strictly increasing along odd-numbered intervals (those starting from
+ai with i odd), and strictly decreasing along even-numbered intervals.
+Lemma 3.8 If f is (s, [0, 1])-triangle and g is (t, [0, 1])-triangle, then f ◦g is (2st, [0, 1])-triangle.
+Proof Since g([0, 1]) = [0, 1] and f and g are continuous along [0, 1], then f ◦g is continuous
+along [0, 1]. In the remaining analysis, let (a1, . . . , a2s+1) and (c1, . . . , c2t+1) respectively denote
+the interval boundaries for f and g.
+Now consider any interval [cj, cj+1] where j is odd, meaning the restriction gj : [cj, cj+1] →
+[0, 1] of g to [cj, cj+1] is strictly increasing. It will be shown that f ◦gj is (s, [cj, cj+1])-triangle,
+and an analogous proof holds for the strictly decreasing restriction gj+1 : [cj+1, cj+2] →[0, 1],
+whereby it follows that f ◦g is (2st, [0, 1]) by considering all choices of j.
+To this end, note for any i ∈{1, . . . , 2s + 1} that g−1
+j (ai) exists and is unique, thus set
+a′
+i := g−1
+j (ai). By this choice, for odd i it holds that f(gj(a′
+i)) = f(gj(g−1
+j (ai))) = f(ai) =
+f(a1) = 0 and f ◦gj is strictly increasing along [a′
+i, a′
+i+1] (since gj is strictly increasing every-
+where and f is strictly increasing along [gj(a′
+i), gj(a′
+i+1)] = [ai, ai+1]), and similarly even i has
+f(gj(a′
+i)) = f(a2) = 1 and f ◦gj is strictly decreasing along [a′
+i, a′
+i+1].
+8
+
+PAGE 9
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+Corollary 3.9 If f ∈N1(m, l, t, α, β) is (t, [0, 1])-triangle with p distinct parameters, then fk ∈
+N1(m, kl, t, α, β) is (2k−1tk, [0, 1])-triangle with p distinct parameters and Cr(fk) = (2t)k + 1.
+Proof It sufﬁces to perform k −1 applications of Lemma 3.8.
+Next, note the following examples of triangle functions.
+Lemma 3.10 The following functions are (1, [0, 1])-triangle.
+1. f(z) := σR(2σR(z) −4σR(z −1/2)) ∈N1(2, 1, 1, 1, 1).
+2. g(z) := min{σR(2z), σR(2 −2z)} ∈N1(2, 1, 2, 1, 1).
+3. h(z) := 4z(1 −z) ∈N1(1, 1, 0, 2, 0). Cf. Schmitt (2000).
+Lastly, consider the ﬁrst example f(z) = σR(2σR(z)−4(σR(z −1/2))) = min{σR(2z), σR(2−
+2z)}, whose graph linearly interpolates (in R2) between (0, 0), (1/2, 1), and (1, 0). Consequently,
+f ◦f along [0, 1/2] linear interpolates between (0, 0), (1/4, 1), and (1/2, 1), and f ◦f is analogous
+on [1/2, 1], meaning it has produced two copies of f and then shrunken them horizontally by a
+factor of 2. This process repeats, meaning fk has 2k−1 copies of f, and grants the regularity needed
+to use the Lebesgue measure in Theorem 1.1.
+Lemma 3.11
+Set f(z) := σR(2σR(z) −4σR(z −1/2)) ∈N1(2, 1, 1, 1, 1) (cf. Lemma 3.10).
+Let real z ∈[0, 1] and positive integer k be given, and choose the unique nonnegative integer
+ik ∈{0, . . . , 2k−1} and real zk ∈[0, 1) so that z = (ik + zk)21−k. Then
+fk(z) =
+(
+2zk
+when 0 ≤zk ≤1/2,
+2(1 −zk)
+when 1/2 < zk < 1.
+3.4. Proof of Theorem 1.1
+The proof of Theorem 1.1 now follows: Lemma 3.11 shows that a many-layered ReLU network can
+give rise to a highly oscillatory and regular function fk, Lemma 3.2 shows that few-layered networks
+and (boosted) decision trees give rise to functions with few oscillations, and lastly Lemma 3.1 shows
+how to combine these into an inapproximability result.
+In this last piece, the proof averages over the possible offsets y ∈Rd−1 and considers univariate
+problems after composing networks with the afﬁne map hy(z) := (z, y). In this way, the result
+carries some resemblance to the random projection technique used in depth hierarchy theorems for
+boolean functions (H˚astad, 1986; Rossman et al., 2015), as well as earlier techniques on complexi-
+ties of multivariate sets (Vitushkin, 1955, 1959), albeit in an extremely primitive form (considering
+variations along only one dimension).
+Proof (of Theorem 1.1) Set h(z) := σR(2σR(z) −4σR(z −1/2)) (cf. Lemma 3.10), and deﬁne
+f0(z) := hk3+4(z) and f : Rd →R as f(x) = f0(x1). Let If denote the pieces of ˜f0, meaning
+|If| = Cr(f0), and Corollary 3.9 grants Cr(f0) = 2k3+4 + 1. Moreover, by Lemma 3.11, for any
+U ∈If, f0 −1/2 is a triangle with height 1/2 and base either 2−k−1 (when 0 ∈U or 1 ∈U) or
+9
+
+PAGE 10
+TELGARSKY
+2−k, whereby
+R
+U |f0(x) −1/2|dx ≥2−k−1/4 ≥|If|/16 (which has thus made use of the special
+regularity of h).
+Now for any y ∈Rd−1 deﬁne the map py : R →Rd as py(z) := (z, y). If g is a semi-algebraic
+network with ≤k layers and m ≤2k/(tαβ) total nodes, then Lemma 3.2 grants Cr(g ◦py) ≤
+2(2tmα/k)kβk2 ≤4(tmαβ)k2 ≤2k3+2. Otherwise, g is (t, 2k3/t)-bdt, whereby Lemma 3.2 gives
+Cr(g ◦py) ≤2t2k3/t ≤2k3+2 once again.
+By Lemma 3.1, for any y ∈Rd−1, Cr(f ◦py) = Cr(f0), and
+Z
+[0,1]
+|f(py(z)) −g(py(z))|dz =
+X
+U∈If
+Z
+U
+|(f ◦py)(z) −(g ◦py)(z)|dz
+≥
+X
+U∈If
+Z
+U
+|(f ◦py)(z) −1/2|1[∀z ∈U  ^
+(f ◦py)(z) ̸= ^
+(g ◦py)(z)]dz
+≥
+1
+16|If|
+X
+U∈If
+1[∀z ∈U  ^
+(f ◦py)(z) ̸= ^
+(g ◦py)(z)]dz
+≥1
+32
+
+1 −2Cr(g ◦py)
+Cr(f ◦py)
+
+≥1
+32
+ 
+1 −2(2k3+2)
+2k3+4
+!
+≥1
+64.
+To ﬁnish,
+Z
+[0,1]d |f(x) −g(x)|dx =
+Z
+[0,1]d−1
+Z
+[0,1]
+|(f ◦py)(z) −(g ◦py)(z)|dzdy ≥1
+64.
+Using nearly the same proof, but giving up on continuous uniform measure, it is possible to
+handle other distances and more ﬂexible target functions.
+Theorem 3.12 Let integer k ≥1 and function f : R →R be given where f is (1, [0, 1])-triangle,
+and deﬁne h : Rd →R as h(x) := fk(x1). For every y ∈Rd−1, deﬁne the afﬁne function
+py(z) := (z, y). Then there exist Borel probability measures µ and ν over [0, 1]d where ν is discrete
+uniform on 2k+1 points and µ is continuous and positive on exactly [0, 1]d so that every g : Rd →R
+with Cr(g ◦py) ≤2k−2 for every y ∈Rd−1 satisﬁes
+Z
+|h −g|dµ ≥1
+32,
+Z
+|˜h −˜g|dµ ≥1
+8,
+Z
+|h −g|dν ≥1
+8,
+Z
+|˜h −˜g|dν ≥1
+4.
+4. Limitations of depth
+Theorem 3.12 can be taken to say: there exists a labeling of Θ(2k3) points which is realizable by a
+network of depth and size Θ(k3), but can not be approximated by networks with depth k and size
+o(2k). On the other hand, this section will sketch the proof of Theorem 1.2, which implies that these
+Θ(k3) depth networks realize relatively few different labellings. The proof is a quick consequence
+of the VC dimension of semi-algebraic networks (cf. Lemma 1.3) and the following fact, where
+Sh(·) is used to denote the growth function (Anthony and Bartlett, 1999, Chapter 3).
+10
+
+PAGE 11
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+Lemma 4.1 Let any function class F and any distinct points (xi)n
+i=1 be given. Then with proba-
+bility at least 1 −δ over a uniform random draw of labels (yi)n
+i=1 (with yi ∈{−1, +1}),
+inf
+f∈F
+1
+n
+n
+X
+i=1
+1[ ˜f(xi) ̸= yi] ≥1
+2
+ 
+1 −
+r
+ln(Sh(F; n)) + ln(1/δ)
+2n
+!
+.
+The proof of the preceding result is similar to proofs of the Gilbert-Varshamov packing bound
+via Hoeffding’s inequality (Duchi, 2016, Lemma 13.5). Note that a similar result was used by War-
+ren to prove rates of approximation of continuous functions by polynomials, but without invoking
+Hoeffding’s inequality (Warren, 1968, Theorem 7).
+The remaining task is to control the VC dimension of semi-algebraic networks. To this end, note
+the following generalization of Lemma 1.3, which further provides that semi-algebraic networks
+compute functions which are polynomial when restricted to certain polynomial regions.
+Lemma 4.2 Let neural network graph G be given with ≤p parameters, ≤l layers, and ≤m total
+nodes, and suppose every gate is (t, α, β)-sa. Then
+VC(N(G)) ≤6p(l + 1)
+ ln(2p(l + 1)) + ln(8emtα) + l ln(β)
+
+.
+Additionally, given any n ≥p data points, there exists a partition S of Rp where each S ∈S
+is an intersection of predicates 1[q ⋄0] with ⋄∈{<, ≥} and q has degree ≤αβl−1, such that
+FG(xi, ·) restricted to each S ∈S is a ﬁxed polynomial of degree ≤βl for every example xi, with
+|S| ≤
+ 8enmtαβlpl and Sh(N(G); n) ≤
+ 8enmtαβlp(l+1)
+The proof follows the same basic structure of the VC bound for networks with piecewise poly-
+nomial activation functions (Anthony and Bartlett, 1999, Theorem 8.8). The slightly modiﬁed proof
+here is also very similar to the proof of Lemma 3.2, performing an induction up through the layers of
+the network, arguing that each node computes a polynomial after restricting attention to some range
+of parameters. The proof of Lemma 4.2 manages to be multivariate (unlike Lemma 3.2), though
+this requires arguments due to Warren (1968) which are signiﬁcantly more complicated than those
+of Lemma 3.2 (without leading to a strengthening of Theorem 1.1).
+One minor departure from the VC dimension proof of piecewise polynomial networks (cf. (An-
+thony and Bartlett, 1999, Theorem 8.8)) is the following lemma, which is used to track the number
+of regions with the more complicated semi-algebraic networks. Despite this generalization, the VC
+dimension bound is basically the same as for piecewise polynomial networks.
+Lemma 4.3 Let a set of polynomials Q be given where each Q ∋q : Rp →R has degree ≤α.
+Deﬁne an initial family S0 of subsets of Rp as S0 :=
+
+{a ∈Rp : q(a) ⋄0} : q ∈Q, ⋄∈{<, ≥}
+	
+.
+Then the collection S of all nonempty intersections of elements of S0 satisﬁes |S| ≤2
+
+4e|Q|α
+p
+p
+.
+5. Bibliographic notes and open problems
+Arguably the ﬁrst approximation theorem of a big class by a smaller one is the Weierstrass Approx-
+imation Theorem, which states that polynomials uniformly approximate continuous functions over
+compact sets (Weierstrass, 1885). Reﬁning this, Kolmogorov (1936) gave a bound on how well
+subspaces of functions can approximate continuous functions, and Vitushkin (1955, 1959) showed
+11
+
+PAGE 12
+TELGARSKY
+a similar bound for approximation by polynomials in terms of the polynomial degrees, dimension,
+and modulus of continuity of the target function. Warren (1968) then gave an alternate proof and
+generalization of this result, in the process effectively proving the VC dimension of polynomials
+(developing tools still used to prove the VC dimension of neural networks (Anthony and Bartlett,
+1999, Chapters 7-8)), and producing an analog to Theorem 1.2 for polynomials.
+The preceding results, however, focused on separating large classes (e.g., continuous functions
+of bounded modulus) from small classes (polynomials of bounded degree). Aiming to reﬁne this,
+depth hierarchy theorems in circuit complexity separated circuits of a certain depth from circuits
+of a slightly smaller depth. As mentioned in Section 1, the seminal result here is due to H˚astad
+(1986). For architectures closer to neural networks, sum-product networks (summation and product
+nodes) have been analyzed by Bengio and Delalleau (2011) and more recently Martens and Meda-
+balimi (2015), and networks of linear threshold functions in 2 and 3 layers by Kane and Williams
+(2015); note that both polynomial gates (as in sum-product networks) and linear threshold gates are
+semi-algebraic gates. Most closely to the present work (excluding (Telgarsky, 2015), which is a
+vastly simpliﬁed account), Eldan and Shamir (2015) analyze 2- and 3-layer networks with general
+activation functions composed with afﬁne mappings, showing separations which are exponential in
+the input dimension. Due to this result and also recent advances in circuit complexity (Rossman
+et al., 2015), it is natural to suppose Theorem 1.1 can be strengthened to separating k and k + 1
+layer networks when dimension d is large; however, none of the earlier works give a tight sense of
+the behavior as d ↓1.
+The triangle wave target functions considered here (e.g., cf. Lemma 3.10) have appeared in
+various forms throughout the literature. General properties of piecewise afﬁne highly oscillating
+functions were investigated by Szymanski and McCane (2014) and Mont´ufar et al. (2014). Also,
+Schmitt (2000) investigated the map z 7→4z(1 −z) (as in Lemma 3.10) to show that sigmoidal
+networks can not approximate high degree polynomials via an analysis similar to the one here,
+however looseness in the VC bounds for sigmoidal networks prevented exponential separations and
+depth hierarchies.
+A tantalizing direction for future work is to characterize not just one difﬁcult function (e.g., tri-
+angle functions as in Lemma 3.10), but many, or even all functions which are not well-approximated
+by smaller depths. Arguably, this direction could have value in machine learning, as discovery of
+such underlying structure could lead to algorithms to recover it. As a trivial example of the sort
+of structure which could arise, considering the following proposition, stating that any symmetric
+signal may be repeated by pre-composing it with the ReLU triangle function.
+Proposition 5.1 Set f(z) := σR(2σR(z)−4σR(z−1/2)) (cf. Lemma 3.10), and let any g : [0, 1] →
+[0, 1] be given with g(z) = g(1 −z). Then h := g ◦fk satisﬁes h(x) = h(x + i2k) = g(x2k) for
+every real x ∈[0, 2−k] and integer i ∈{0, . . . , 2−k −1}; in other words, h is 2k repetitions of g
+with graph scaled horizontally and uniformly to ﬁt within [0, 1]2.
+Acknowledgments
+The author is indebted to Joshua Zahl for help navigating semi-algebraic geometry and for a sim-
+pliﬁcation of the multivariate case in Theorem 1.1, and to Rastislav Telg´arsky for an introduction
+to this general topic via Kolmogorov’s Superposition Theorem (Kolmogorov, 1957). The author
+further thanks Jacob Abernethy, Peter Bartlett, S´ebastien Bubeck, and Alex Kulesza for valuable
+discussions.
+12
+
+PAGE 13
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+References
+Martin Anthony and Peter L. Bartlett. Neural Network Learning: Theoretical Foundations. Cam-
+bridge University Press, 1999.
+Yoshua Bengio and Olivier Delalleau. Shallow vs. deep sum-product networks. In NIPS, 2011.
+Jacek Bochnak, Michal Coste, and Marie-Franc¸oise Roy. Real Algebraic Geometry. Springer, 1998.
+Rich Caruana and Alexandru Niculescu-Mizil. An empirical comparison of supervised learning
+algorithms. pages 161–168, 2006.
+John Duchi. Statistics 311/electrical engineering 377: Information theory and statistics. Stanford
+University, 2016.
+Ronen Eldan and Ohad Shamir.
+The power of depth for feedforward neural networks.
+2015.
+arXiv:1512.03965 [cs.LG].
+Kunihiko Fukushima. Neocognitron: A self-organizing neural network model for a mechanism of
+pattern recognition unaffected by shift in position. Biological Cybernetics, 36:193–202, 1980.
+Johan H˚astad. Computational Limitations of Small Depth Circuits. PhD thesis, Massachusetts
+Institute of Technology, 1986.
+Daniel Kane and Ryan Williams.
+Super-linear gate and super-quadratic wire lower bounds for
+depth-two and depth-three threshold circuits. 2015. arXiv:1511.07860v1 [cs.CC].
+Andrei Kolmogorov. ¨Uber die beste ann¨aherung von funktionen einer gegebenen funktionenklasse.
+Annals of Mathematics, 37(1):107–110, 1936.
+Andrey Nikolaevich Kolmogorov. On the representation of continuous functions of several variables
+by superpositions of continuous functions of one variable and addition. 114:953–956, 1957.
+Alex Krizhevsky, Ilya Sutskever, and Geoffery Hinton. Imagenet classiﬁcation with deep convolu-
+tional neural networks. In NIPS, 2012.
+Yann LeCun, L´eon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied
+to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.
+James Martens and Venkatesh Medabalimi. On the expressive efﬁciency of sum product networks.
+2015. arXiv:1411.7717v3 [cs.LG].
+Guido Mont´ufar, Razvan Pascanu, Kyunghyun Cho, and Yoshua Bengio. On the number of linear
+regions of deep neural networks. In NIPS, 2014.
+Hoifung Poon and Pedro M. Domingos. Sum-product networks: A new deep architecture. In UAI
+2011, pages 337–346, 2011.
+Benjamin Rossman, Rocco A. Servedio, and Li-Yang Tan. An average-case depth hierarchy theorem
+for boolean circuits. In FOCS, 2015.
+13
+
+PAGE 14
+TELGARSKY
+Michael Schmitt. Lower bounds on the complexity of approximating continuous functions by sig-
+moidal neural networks. In NIPS, 2000.
+Lech Szymanski and Brendan McCane. Deep networks are effective encoders of periodicity. IEEE
+Transactions on Neural Networks and Learning Systems, 25(10):1816–1827, 2014.
+Matus
+Telgarsky.
+Representation
+beneﬁts
+of
+deep
+feedforward
+networks.
+2015.
+arXiv:1509.08101v2 [cs.LG].
+Anatoli Vitushkin. On multidimensional variations. GITTL, 1955. In Russian.
+Anatoli Vitushkin. Estimation of the complexity of the tabulation problem. Fizmatgiz., 1959. In
+Russian.
+Hugh E. Warren. Lower bounds for approximation by nonlinear manifolds. Transactions of the
+American Mathematical Society, 133(1):167–178, 1968.
+Karl Weierstrass.
+¨Uber die analytische darstellbarkeit sogenannter willk¨urlicher functionen einer
+reellen ver¨anderlichen. Sitzungsberichte der Akademie zu Berlin, pages 633–639, 789–805, 1885.
+Appendix A. Deferred proofs
+This appendix collects various proofs omitted from the main text.
+A.1. Deferred proofs from Section 2
+The following mechanical proof shows that standard piecewise polynomial gates, maximization/minimization
+gates, and decision trees are all semi-algebraic gates.
+Proof (of Lemma 2.3)
+1. To start, since σ : R →R is piecewise polynomial, σ ◦q can be written
+σ(q(z)) := p1(q(z))1[q(z) ⋄1 b1] +
+t−1
+X
+i=2
+pi(q(z))1[−q(z) ∗i−1 −bi−1]1[q(z) ⋄i bi]
++ pt(q(z))1[−q(z) ∗t −bt]
+where for each i ∈[t], pi has degree ≤β, ⋄i ∈{<, ≤}, ∗i = “ < ” when ⋄i = “ ≤” and
+otherwise ∗i = “ ≤”, and bi ∈R. As such, setting qi(z) := q(z) −b1 whenever ⋄i = “ < ”
+and qi(z) := bi −q(z) otherwise, it follows that σ ◦q is (t, α, αβ)-sa.
+2. Since mini∈[r] xi = −maxi∈[r] −xi, it sufﬁces to handle the maximum case, which has the
+form
+φmax(v) =
+d
+X
+i=1
+pi(v)
+
+Y
+j<i
+1[pi(v) > pj(v)]
+
+
+
+Y
+j>i
+1[pi(v) ≥pj(v)]
+
+.
+Constructing polynomials qi,j = pj −pi when j < i and qi,j = pi −pj when j > i, it follows
+that φmax is (r(r −1), α, α)-sa.
+14
+
+PAGE 15
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+3. First consider a k-dt f, wherein the proof follows by induction on tree size. In the base case
+k = 1, f is constant. Otherwise, there exist functions fl and fr which are respectively l- and
+r-dt with l + r < k, and additionally an afﬁne function qf so that
+f(x) = fl(x)1[qf(x) < 0] + fr(x)1[qf(x) ≥0]
+=
+ml
+X
+j=1
+p(l)
+j (v)1[qf(x) < 0]
+
+
+
+Y
+i∈L(l)
+j
+1[q(l)
+i (v) < 0]
+
+
+
+
+
+
+Y
+i∈U(l)
+j
+1[q(l)
+i (v) ≥0]
+
+
+
++
+mr
+X
+j=1
+p(r)
+j (v)1[qf(x) ≥0]
+
+
+
+Y
+i∈L(r)
+j
+1[q(r)
+i (v) < 0]
+
+
+
+
+
+
+Y
+i∈U(r)
+j
+1[q(r)
+i (v) ≥0]
+
+
+.
+where the last step expanded the semi-algebraic forms of fl and fr. As such, by combining
+the sets of predicate polynomials for fl and fr together with {qf} (where the former two have
+cardinalities ≤l and ≤r by the inductive hypothesis), and unioning together the triples for fl
+and fr but extending the triples to include 1[qf < 0] for triples in fl and 1[qf ≥0] for triples
+in fr, it follows by construction that f is (k, 1, 0)-semi-algebraic.
+Now consider a (t, k)-bdt g. By the preceding expansion, each individual tree fi is (k, 1, 0)-
+sa, thus their sum is (tk, 1, 0) by unioning together the sets of polynomials, triples, and adding
+together the expansions.
+A.2. Deferred proofs from Section 3
+The ﬁrst proof shows that a collection of partitions may be reﬁned into a single partition whose
+size is at most the total number of intervals across all partitions. As discussed in the text, while
+the proof has a simple idea (one need only consider boundaries of intervals across all partitions),
+it is somewhat painful since there is not consistent rule for whether speciﬁc endpoints endpoints of
+intervals are open or closed.
+Proof (of Lemma 3.4) If k = 1, then the result follows with B = A = A1 (since all intersections
+are empty), thus suppose k ≥2. Let {a1, . . . , aq} denote the set of distinct boundaries of intervals of
+A, and iteratively construct the partition B as follows, where the construction will maintain that Bj
+is a partition whose boundary points are {a1, . . . aj}. For the base case, set B0 := {R}. Thereafter,
+for every i ∈[q], consider boundary point ai; since the boundary points are distinct, there must exist
+a single interval U ∈Bi−1 with ai ∈U. Bi will be formed from Bi−1 by reﬁning U in one of the
+following two ways.
+• Consider the case that each partition Al which contains the boundary point ai has exactly two
+intervals meeting at ai and moreover the closedness properties are the same, meaning either
+ai is contained in the interval which ends at ai, or it is contained in the interval which starts
+at ai. In this case, partition U into two intervals so that the treatment of the boundary is the
+same as those Al’s with a boundary at ai.
+15
+
+PAGE 16
+TELGARSKY
+• Otherwise, it is either the case that some Al have ai contained in the interval ending at ai
+whereas others have it contained in the interval starting at ai, or simply some Al have three
+intervals meeting at ai: namely, the singleton interval [al, al] as well as two intervals not
+containing al. In this case, partition U into three intervals: one ending at ai (but not containing
+it), the singleton interval [ai, ai], and an interval starting at ai (but not containing it).
+(These cases may also be described in a uniﬁed way: consider all intervals of A which have ai as
+an endpoint, extend such intervals of positive length to have inﬁnite length while keeping endpoint
+ai and the side it falls on, and then reﬁne U by intersecting it with all of these intervals, which as
+above results in either 2 or 3 intervals.)
+Note that the construction never introduces more intervals at a boundary point than exist in A,
+thus |B| ≤|A| = kt.
+It remains to be shown that a union of intersections of elements of A is a union of elements of
+B. Note that it sufﬁces to show that intersections of elements of A are unions of elements of B,
+since thereafter these encodings can be used to express unions of intersections of A as unions of B.
+As such, consider any intersection U of elements of A; there is nothing to show if U is empty, thus
+suppose it is nonempty. In this case, it must also be an interval (e.g., since intersections of convex
+sets are convex), and its endpoints must coincide with endpoints of A. Moreover, if the left endpoint
+of U is open, then U must be formed from an intersection which includes an interval with the same
+open left endpoint, thus there exists such an interval in A, and by the above construction of B, there
+also exists an interval with such an open left endpoint in B; the same argument similarly handles the
+case of closed left endpoints, as well as open and closed right endpoints, namely giving elements
+in B which match these traits. Let ar and as denote these endpoints. By the above construction of
+B, intervals with endpoints {aj, aj+1} for j ∈{r, . . . , s −1} will be included in B, and since B is
+a partition, the union of these elements will be exactly U. Since U was an arbitrary intersection of
+elements of A, the proof is complete.
+Next, the tools of Section 3.2 (culminating in the composition rule for semi-algebraic gates
+(Lemma 3.6)) are used to show crossing number bounds on semi-algebraic networks and boosted
+decision trees.
+Proof (of Lemma 3.2)
+1. This proof ﬁrst shows f ◦h is (2itiαi
+Q
+j≤i−1 tjαjβi−j+1
+j
+kj, Q
+j≤i βj)-poly, and then relaxes
+this expression and applies Lemma 3.3 to obtain the desired bound.
+First consider the case d = 1 and h is the identity map, thus f ◦h = f. For convenience, set
+Ai :=
+Y
+j≤i
+αj,
+Bi :=
+Y
+j≤i
+βj,
+Ci :=
+Y
+j≤i
+βi−j+1
+j
+=
+Y
+j≤i
+Bj,
+Mi :=
+Y
+j≤i
+mj,
+Ti :=
+Y
+j≤i
+tj.
+The proof proceeds by induction on the layers of f, showing that each node in layer i is
+(2iTiAiCi−1Mi−1, Bi)-poly.
+For convenience, ﬁrst consider layer i = 0 of the inputs themselves: here, node i outputs the
+ith coordinate of the input, and is thus afﬁne and (1, 1)-poly. Next consider layer i > 0, where
+the inductive hypothesis grants that each node in layer i−1 is (2i−1Ti−1Ai−1Ci−2Mi−2, Bi−1)-
+poly. Consequently, since any node in layer i is (ti, αi, βi)-sa, Lemma 3.6 grants it is also
+16
+
+PAGE 17
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+(2i−1tiTi−1Ai−1Ci−2Mi−2mi−1(1+αiBi−1), βiBi−1)-poly as desired (since 1+αiBi−1 ≤
+2αiBi−1).
+Next, consider the general case d ≥1 and h : R →Rd is an afﬁne map. Since every
+coordinate of h is afﬁne (and thus (1, 1)-poly), composing h with every polynomial in the
+semi-algebraic gates of layer 1 gives a function g ∈N1((mi, ti, αi, βi)l
+i=1) which is equal to
+f ◦h everywhere and whose gates are of the same semi-algebraic complexity. As such, the
+result follows by applying the preceding analysis to g.
+Lastly, the simpliﬁed terms give f ◦h is ((2tα)lβl(l−1)/2 Q
+j≤l−1 mj, βl(l+1)/2)-poly. Since
+ln(·) is strictly increasing and concave and ml = 1,
+ln
+
+Y
+j≤l−1
+mj
+
+= ln
+
+Y
+j≤l
+mj
+
+=
+X
+j≤l
+ln(mj) ≤l ln(m/l) = ln((m/l)l).
+It follows that f ◦h is ((2tmα/l)lβl(l−1)/2, βl(l+1)/2)-poly, whereby the crossing number
+bound follows by Lemma 3.3.
+2. Given any k-dt f, the afﬁne function evaluated at each predicate may be composed with h
+to yield another afﬁne function, thus f ◦h : R →R is still a k-dt, and thus (k, 1, 0)-sa by
+Lemma 2.3. As such, by Lemma 3.6 (with g1(z) = z as the identity map), f ◦h is (k, 0)-
+poly. (Invoking Lemma 3.6 without massaging in h introduces a factor d.) Similarly, for a
+(t, k)-bdt g, g ◦h : R →R is another (t, k)-bdt after pushing h into the predicates of the
+constituent trees, thus Lemma 2.3 grants g ◦h is (tk, 1, 0)-sa, and Lemma 3.6 grants it is
+(tk(1 + 1), 0)-poly. The desired crossing number bounds follow by applying Lemma 3.3.
+Next, elementary computations verify that the three functions listed in Lemma 3.10 are indeed
+(1, [0, 1])-triangle.
+Proof (of Lemma 3.10)
+1-2. By inspection, f(0) = f(1) = 0 and f(1/2) = 1. Moreover, for x ∈[0, 1/2], f(x) = 2x
+meaning f is increasing, and x ∈[1/2, 1] means f(x) = 2(1 −x), meaning f is decreasing.
+Lastly, the properties of g follow since f = g.
+3. By inspection, h(0) = h(1) = 0 and h(1/2) = 1. Moreover h is a quadratic, thus can cross
+0 at most twice, and moreover 1/2 is the unique critical point (since g′ has degree 1), thus g
+is increasing on [0, 1/2] and decreasing on [1/2, 1].
+In the case of the ReLU (1, [0, 1])-triangle function f given in Lemma 3.10, the exact form of
+fk may be established as follows. (Recall that this reﬁned form allows for the use of Lebesgue
+measure in Theorem 1.1, and also the repetition statement in Proposition 5.1.)
+17
+
+PAGE 18
+TELGARSKY
+Proof (of Lemma 3.11) The proof proceeds by induction on the number of compositions l. For the
+base case l = 1,
+f1(z) = f(z) =
+
+
+
+
+
+2z
+when z ∈[0, 1/2],
+2(1 −z)
+when z ∈(1/2, 1],
+0
+otherwise.
+For the inductive step, ﬁrst note for any z ∈[0, 1/2], by symmetry of fl around 1/2 (i.e., fl(z) =
+fl(1 −z) by the inductive hypothesis), and by the above explicit form of f1,
+fl+1(z) = fl(f(z)) = fl(2z) = fl(1−2z) = fl(f(1/2−z)) = fl(f(z +1/2)) = fl+1(z +1/2),
+meaning the case z ∈(1/2, 1] is implied by the case z ∈[0, 1/2]. Since the unique nonnegative
+integer il+1 and real zl+1 ∈[0, 1) satisfy 2z = 2(il+1 + zl+1)2−l−1 = (il+1 + zl+1)2−l, the
+inductive hypothesis grants
+(fl ◦f)(z) = fl(2z) =
+(
+2zl+1
+when 0 ≤zl+1 ≤1/2,
+2(1 −zl+1)
+when 1/2 < zl+1 < 1,
+which completes the proof.
+The proof of the slightly more general form of Theorem 1.1 is as follows; it does not quite imply
+Theorem 1.1, since the constructed measure is not the Lebesgue measure even for the ReLU-based
+(1, [0, 1])-triangle function from Lemma 3.10.
+Proof (of Theorem 3.12) First note some general properties of fk. By Corollary 3.9, fk is (2k−1, [0, 1])-
+triangle, which means there exist s := 2k + 1 points (zi)s
+i=1 so that fk(zi) = 1[i is odd], and
+moreover fk is continuous and equal to 1/2 at exactly 2k points (by the strict increasing/decreasing
+part of the triangle wave deﬁnition), which is a ﬁnite set of points and thus has Lebesgue measure
+zero. Taking py : R →Rd to be the map py(z) = (z, y) where y ∈Rd−1, then (h ◦py)(z) =
+h((z, y)) = fk(z), thus letting I denote the 2k pieces within which f
+fk is constant, it follows that
+^
+h ◦py is constant within the same set of pieces and thus Cr(h ◦py) = s.
+Now consider the discrete case, where ν denotes the uniform measure over the s points (xi)s
+i=1
+deﬁned as xi := p0(zi) ∈Rd. Further consider the two types of distance.
+• Since zi < zi+1 and f
+fk(zi) ̸= f
+fk(zi+1), then taking (Ui)s
+i=1 to denote the intervals of I
+sorted by their left endpoint, zi ∈Ui for i ∈[s]. By Lemma 3.1,
+Z
+|˜h −˜g|dν = 1
+s
+s
+X
+i=1
+|˜h(xi) −˜g(xi)| = 1
+s
+s
+X
+i=1
+|f
+fk(zi) −^
+g ◦p0(zi)|
+≥1
+s
+s
+X
+i=1
+1[∀z ∈Ui  f
+fk(z) ̸= ^
+g ◦p0(z)]
+≥1
+2
+
+1 −2
+2k−2
+s
+
+≥1
+4.
+• Since fk(zi) ∈{0, 1}, then f
+fk(zi) ̸= eg(xi) implies |fk(zi) −g(xi)| ≥1/2, thus
+R
+[0,1]d |h −
+g|dν ≥
+R
+[0,1]d |˜h −˜g|dν/2 ≥1/8.
+18
+
+PAGE 19
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+Construct the continuous measure µ as follows, starting with the construction of a univariate
+measure µ0. Since fk is continuous, there exists a δ ∈(0, mini∈[s−1] |zi −zi+1|/2) so that |fk(z)−
+fk(zi)| ≤1/4 for any i ∈[s] and z with |z−zi| ≤δ. As such, let µ0 denote the probability measure
+which places half of its mass uniformly on these s balls of radius δ (which must be disjoint since fk
+alternates between 0 and 1 along (zi)s
+i=1), and half of its mass uniformly on the remaining subset of
+[0, 1]. Finally, extend this to a probability measure µ on [0, 1]d uniformly, meaning µ is the product
+of µ0 and the measure µ1 which is uniform over [0, 1]d−1. Now consider the two types of distances.
+• By Lemma 3.1,
+Z
+|˜h −˜g|dµ(x) =
+ZZ
+|f
+fk(py(z)) −˜g(py(z))|dµ0(z)dµ1(y)
+=
+Z X
+U∈I
+Z
+1[z ∈U ∧f
+fk(z)) ̸= ˜g(py(z))]dµ0(z)dµ1(y)
+≥
+Z
+1
+2s
+X
+U∈I
+1[∀z ∈U  f
+fk(z)) ̸= ^
+g ◦py(z)]dµ1(y)
+≥1
+4
+
+1 −2
+2k−2
+s
+
+≥1
+8.
+• For any y ∈Rd−1 and Ui ∈I (with corresponding zi ∈Ui), if f
+fk(z) ̸= ^
+g ◦py(z) for every
+z ∈Ui, then
+Z
+Ui
+|fk(z)−g(py(z))|dµ0(z) ≥
+Z
+|z−zi|≤δ
+|fk(z)−1/2|dµ0(z) ≥1
+4µ0({z ∈Ui : |z−zi| ≤δ}) ≥1
+8s.
+By Lemma 3.1,
+Z
+|h −g|dµ(x) =
+ZZ
+|h(py(z)) −g(py(z))|dµ0(z)dµ1(y)
+≥
+Z X
+U∈I
+1[∀z ∈U  f
+fk(z) ̸= ˜g(py(z))]
+Z
+U
+|fk(z) −g(py(z))|dµ0(z)dµ1(y)
+≥
+Z
+1
+8s
+X
+U∈I
+1[∀z ∈U  f
+fk(z) ̸= ^
+g ◦py(z)]dµ1(y)
+≥1
+16
+
+1 −2
+2k−2
+s
+
+≥1
+32.
+As a closing curiosity, Theorem 3.12 implies the following statement regarding polynomials.
+Corollary A.1
+For any integer k ≥1, there exists a polynomial h : Rd →R with degree 2k
+and a corresponding continuous measure µ which is positive everywhere over [0, 1]d so that every
+polynomial g : Rd →R of degree ≤2k−3 satisﬁes
+R
+|h −g|dµ ≥1/32.
+19
+
+PAGE 20
+TELGARSKY
+Proof Set f(z) = 4z(1 −z), which by Lemma 3.10 is (1, [0, 1])-triangle, thus fk is (2k−1, [0, 1])-
+triangle with Cr(fk) = 2k + 1 by Corollary 3.9, and fk has degree 2k directly; thus set h(x) =
+fk(x1). Next, for any polynomial g : Rd →R of degree ≤2k−3, g ◦py : R →R is still a poly-
+nomial of degree ≤2k−3 for every y ∈Rd−1 (where py(z) = (z, y) as in Theorem 3.12), and so
+Lemma 3.3 grants Cr(g ◦py) ≤1 + 2k−3 ≤2k−2. The result follows by Theorem 3.12.
+A.3. Deferred proofs from Section 4
+First, the proof of a certain VC lower bound which mimics the Gilbert-Varshamov bound; the proof
+is little more than a consequence of Hoeffding’s inequality.
+Proof (of Lemma 4.1) For convenience, set m := Sh(F; n), and let (a1, . . . , am) denote these
+dichotomies (meaning aj ∈{0, 1}n), and with foresight set ϵ :=
+p
+ln(m/δ)/(2n). Let (Yi)n
+i=1
+denote fair Bernoulli random labellings for each point, and note by symmetry of the fair coin that
+for any ﬁxed dichotomy aj,
+Pr
+"
+1
+n
+n
+X
+i=1
+|(aj)i −Yi| < 1/2 −ϵ
+#
+= Pr
+"
+1
+n
+n
+X
+i=1
+Yi < 1/2 −ϵ
+#
+.
+Consequently, by a union bound over all dichotomies and lastly by Hoeffding’s inequality,
+Pr
+"
+∃f ∈F  1
+n
+n
+X
+i=1
+| ˜f(xi) −Yi| < 1/2 −ϵ
+#
+≤
+m
+X
+j=1
+Pr
+"
+1
+n
+n
+X
+i=1
+|(vj)i −Yi| < 1/2 −ϵ
+#
+= mPr
+"
+1
+n
+n
+X
+i=1
+Yi < 1/2 −ϵ
+#
+≤m exp(−2nϵ2) ≤δ,
+where the last step used the choice of ϵ.
+The remaining deferred proofs do not exactly follow the order of Section 4, but instead the order
+of dependencies in the proofs. In particular, to control the VC dimension, ﬁrst it is useful to prove
+Lemma 4.3, which is used to control the growth of numbers of regions as semi-algebraic gates are
+combined.
+Proof (of Lemma 4.3) Fix some ordering (q1, q2, . . . , q|Q|) of the elements of Q, and for each
+i ∈[|Q|] deﬁne two functions li(a) := 1[qi(a) < 0] and ui(a) := 1[qi(a) ≥0], as well as two sets
+Li := {a ∈Rp : li(a) = 1} and Ui := {a ∈Rp : ui(a) = 1}. Note that
+S :=
+n
+(∩i∈ALi) ∩(∩i∈B) : A ⊆[|Q|], B ⊆[|Q|]
+o
+\ {∅}.
+Additionally consider the set of sign patterns
+V :=
+ l1(a), ui(a), . . . , l|Q|(a), u|Q|(a)
+
+: a ∈Rp	
+.
+Distinct elements of S correspond to distinct sign patterns in V : namely, for any C ∈S, using the
+ordering of Q to encode A and B as binary vectors of length |Q|, the corresponding interleaved
+20
+
+PAGE 21
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+binary vector of length 2|Q| is distinct for distinct choices of (A, B). (For each i that appears in
+neither A nor B, there two possible encodings in V : having both coordinates corresponding to i set
+to 1, and having them set to 0. On the other hand, a more succinct encoding based just on (li)|Q|
+i=1
+fails to capture those sets arising from intersections of proper subsets of Q.) As such, making use
+of growth function bounds for sets of polynomials (Anthony and Bartlett, 1999, Theorem 8.3),
+|S| ≤|V | ≤2
+4eα|Q|
+p
+p
+.
+Thanks to Lemma 4.3, the proof of the VC dimension bound Lemma 4.2 follows by induction
+over layers, effectively keeping track of a piecewise (regionwise?) polynomial function as with the
+proof of Lemma 3.2 (but now in the multivariate case).
+Proof (of Lemma 4.2) First note that this proof follows the scheme of a VC dimension proof for net-
+works with piecewise polynomial activation functions (Anthony and Bartlett, 1999, Theorem 8.8),
+but with Lemma 4.3 allowing for the more complicated semi-algebraic gates, and some additional
+bookkeeping for the (semi-algebraic) shapes of the regions of the partition S.
+Let examples (xj)n
+j=1 be given with n ≥p, let mi denote the number of nodes in layer i
+(whereby m1 + · · · + ml = m), and let f := FG : Rp × Rd →R denote the function evaluating
+the neural network (as in Section 2.1), where the two arguments are the parameters w ∈Rp and the
+input example x ∈Rd. The goal is to upper bound the number of dichotomies
+K := Sh(N(G); n) = |{(sgn(f(w, x1)), . . . , sgn(f(w, xn))) : w ∈Rp}| .
+The proof will proceed by producing a sequence of partitions (Si)l
+0=1 of Rp and two corresponding
+sequences of sets of polynomials (Pi)l
+i=0 and (Qi)l
+i=0 so that for each i, Pi has polynomials of
+degree at most βi, Qi has polynomials of degree at most αβi−1, and over any parameters S ∈Si,
+there is an assignment of elements of Pi to nodes of layer i so that for each example xj, every
+node in layer i evaluates the corresponding ﬁxed polynomial in Pi; lastly, the elements of Si are
+intersections of sets of the form {w ∈Rp : q(w) ⋄0} where q ∈Qi and ⋄∈{<, ≥}, and the
+partition Si+1 reﬁnes Si for each i (meaning for each U ∈Si+1 there exists S ⊇U with S ∈Si).
+Setting the ﬁnal partition S := Sl, this in turn will give an upper bound on K, since the ﬁnal output
+within each element of S is a ﬁxed polynomial of degree at most βl, whereby the VC dimension of
+polynomials (Anthony and Bartlett, 1999, Theorem 8.3) grants
+K ≤
+X
+S∈S
+|{(sgn(f(w, x1)), . . . , sgn(f(w, xn))) : w ∈S}| ≤2|S|
+2enβl
+p
+p
+.
+(A.1)
+To start, consider layer 0 of the input coordinates themselves, a collection of d afﬁne maps.
+Consequently, it sufﬁces to set S0 := {Rp}, Q0 := ∅, and P0 to be the nd possible coordinate maps
+corresponding to all d coordinates of all n examples.
+For the inductive step, consider some layer i + 1. Restricted to any S ∈Si, the nodes of the
+previous layer i compute ﬁxed polynomials of degree βi. Each node in layer i + 1 is (t, α, β)-sa,
+meaning there are t predicates, deﬁned by polynomials of degree ≤α, which deﬁne regions wherein
+this node is a ﬁxed polynomial. Let QS denote this set of predicates, where |QS| ≤tnmi+1 by
+21
+
+PAGE 22
+TELGARSKY
+considering the n possible input examples and the t possible predicates encountered in each of the
+mi+1 nodes in layer i + 1, and set Qi+1 := Qi
+S (∪S∈SiQS) . By the deﬁnition of semi-algebraic
+gate, each node in layer i + 1 computes a ﬁxed polynomial when restricted to a region deﬁned
+by an intersection of predicates which moreover are deﬁned by Qi+1. As such, deﬁning Si+1 as
+the reﬁnement of Si+1 which partitions each S ∈Si according to the intersections of predicates
+encountered in each node, then Lemma 4.3 on each QS grants
+|Si+1| ≤
+X
+S∈Si
+|{all nonempty intersections of QS}| ≤2|Si|
+4enmi+1tαβi
+p
+p
+,
+(A.2)
+which completes the inductive construction.
+The upper bound on K may now be estimated. First, |S| may be upper bounded by applying
+eq. (A.2) recursively:
+|S| ≤|S0|
+lY
+i=1
+8enmitαβi−1
+p
+p
+≤
+
+8enmtαβl−1pl
+.
+Continuing from Equation (A.1),
+K ≤2|S|
+2emβl
+p
+p
+≤
+
+8enmtαβlp(l+1)
+.
+To compute VC(N(G)), it sufﬁces to ﬁnd N such that Sh(N(G); N) < 2N, which in turn is
+implied by p(l + 1) ln(N) + p(l + 1) ln(8emtαβl) < N ln(2). Since ln(N) = ln(N/(2p(l + 1)) +
+ln(2p(l + 1)) ≤N/(2p(l + 1)) −1 + ln(2p(l + 1)) and ln(2) −1/2 > 1/6, it sufﬁces to show
+6p(l + 1)
+
+ln(2p(l + 1)) + ln(8emtαβl)
+
+≤N.
+As such, the left hand side of this expression is an upper bound on VC(N(G)).
+The proofs of Lemma 1.3 and Theorem 1.2 from Section 1 are now direct from Lemma 4.2 and
+Lemma 4.1.
+Proof (of Lemma 1.3) This statement is the same as Lemma 4.2 with some details removed.
+Proof (of Theorem 1.2) By the bound on Sh(N(G); n) from Lemma 4.2,
+n = n
+2 + n
+2 ≥2 ln(1/δ) + 4pl2 ln(8emtαβp(l + 1)) + n
+2
+≥2 ln(1/δ) + 2p(l + 1) ln(8emtαβl) + 2p(l + 1)
+
+ln(p(l + 1))) +
+n
+2p(l + 1) −1
+
+≥2 ln(1/δ) + 2p(l + 1) ln(8emtαβl) + 2p(l + 1) ln(n)
+≥2 ln(1/δ) + 2 ln(Sh(N(G); n)).
+The result follows by plugging this into Lemma 4.1.
+22
+
+PAGE 23
+BENEFITS OF DEPTH IN NEURAL NETWORKS
+A.4. Deferred proofs from Section 5
+Proof (of Proposition 5.1) Immediate from Lemma 3.11.
+23

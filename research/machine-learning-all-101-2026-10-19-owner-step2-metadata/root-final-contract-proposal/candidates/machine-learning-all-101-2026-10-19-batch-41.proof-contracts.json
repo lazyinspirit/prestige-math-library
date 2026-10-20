@@ -1,0 +1,543 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+    "ex-unstable-heavy-ball-parameters",
+    "ex-heavy-ball-optimized-quadratic-spectrum"
+  ],
+  "contracts": {
+    "thm-heavy-ball-rate-on-strongly-convex-quadratics": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-heavy-ball-momentum",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer and let $F:\\mathbb R^d\\to\\mathbb R$ be continuously Fréchet differentiable: at every $w$, $DF(w)$ is a linear first-order approximation with normwise remainder tending to zero, and $w\\mapsto DF(w)$ is continuous. Write its coordinate gradient as $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$. Given an initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, a constant step size $\\alpha>0$, a constant momentum parameter $\\beta\\ge0$, and an integer horizon $T\\ge1$, initialize $w_0=w_1=w_{\\mathrm{init}}$. For each integer $t=1,\\ldots,T-1$, set\n\n$$w_{t+1}:=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}).$$\n\nOutput $(w_0,w_1,\\ldots,w_T)$. The gradient is evaluated at the current iterate $w_t$.\nWhen $\\beta=0$, every update is the fixed-step gradient-descent update with step size $\\alpha$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-gradient-of-a-quadratic-matrix-form",
+          "source_section": "Statement",
+          "quote": "Fix a matrix $C$ and consider the real-valued quadratic form\n\n$$q(x):=\\frac12\\|Cx\\|_2^2=\\frac12 x^\\ast C^\\ast Cx.$$\n\nThen\n\n$$Dq(x)[h]=\\operatorname{Re}\\langle C^\\ast Cx,h\\rangle,$$\n\nso the gradient is $C^\\ast Cx$, and the Hessian is the constant Hermitian map\n$h\\mapsto C^\\ast Ch$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "orthonormal-spectral-decomposition",
+          "claim": "For $0\\le i<d$, let $e_i$ be the standard coordinate vectors. By [F3], $\\langle e_i,e_j\\rangle=1$ when $i=j$ and $0$ otherwise, so they form an orthonormal basis. Since $A^{\\mathsf T}=A$, [F4] makes $x\\mapsto Ax$ self-adjoint; [F5] gives an orthonormal eigenbasis $u_1,\\ldots,u_d$ with eigenvalues $\\lambda_i\\in[c,L]$. For the matrix $U$ with columns $u_i$, $U^{\\mathsf T}U=I$ and $A=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)U^{\\mathsf T}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "tuned-endpoint-coefficients",
+          "claim": "By [F7], write $u=\\sqrt L$, $v=\\sqrt c$, and $q=(u-v)/(u+v)$. Set $\\alpha=4/(u+v)^2$, $\\beta=q^2$, and $s_\\lambda=1+q^2-\\alpha\\lambda$. Common denominators give $s_c=((u+v)^2+(u-v)^2-4v^2)/(u+v)^2=2q$ and $s_L=((u+v)^2+(u-v)^2-4u^2)/(u+v)^2=-2q$; since $s_\\lambda$ is affine decreasing, $-2q\\le s_\\lambda\\le2q$ on $[c,L]$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interval-recurrence-definition",
+          "claim": "For any fixed $\\alpha'>0$ and $\\beta'\\ge0$, the statement defines $p_\\lambda(r;\\alpha',\\beta')=r^2-(1+\\beta'-\\alpha'\\lambda)r+\\beta'$ and $\\rho_\\lambda$ for each $\\lambda\\in[c,L]$, whether or not $\\lambda$ is an eigenvalue of $A$. This interval supremum is finite: with $M=1+\\beta'+\\alpha'L$, every root $z$ satisfies $|z|^2\\le M|z|+\\beta'$, hence $|z|\\le\\max\\{1,M+\\beta'\\}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-square-root-factorization",
+          "claim": "By [F7], each $\\lambda_i\\ge c>0$ has a positive square root. Set $C=\\operatorname{diag}(\\sqrt{\\lambda_1},\\ldots,\\sqrt{\\lambda_d})U^{\\mathsf T}$. Its factors are invertible, so $C$ is invertible; [F6] gives $C^\\ast=C^{\\mathsf T}$, and multiplication gives $C^\\ast C=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)U^{\\mathsf T}=A$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "tuned-modal-root-factor",
+          "claim": "For $c<L$, we have $q>0$ and step 1.2 gives $|s_\\lambda|<2q$ for $c<\\lambda<L$. The roots of $p_\\lambda$ are $(s_\\lambda\\pm i\\sqrt{4q^2-s_\\lambda^2})/2$, whose squared modulus is $q^2$; at $c$ and $L$ the polynomials are $(r-q)^2$ and $(r+q)^2$. If $c=L$, then $q=0$, $\\alpha=1/c$, $\\beta=0$, and the only polynomial is $p_c(r)=r^2$. Thus every tuned modal root factor is $q$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.2",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "endpoint-polynomial-signs",
+          "claim": "Assume $c<L$ and fix arbitrary $\\alpha'>0$, $\\beta'\\ge0$. Let $R=\\sup_{\\lambda\\in[c,L]}\\rho_\\lambda(\\alpha',\\beta')$, finite by step 1.3. If $R\\ge1$, then $R>q$ by step 1.2; if $R=0$, the endpoint polynomials force $\\beta'=0$ and $\\alpha'c=\\alpha'L=1$, impossible since $c<L$, so in the remaining case $0<R<1$. The endpoint root products give $0\\le\\beta'\\le R^2$. For real endpoint roots in $[-R,R]$, $p_c(R)=(R-r_1)(R-r_2)\\ge0$ and $p_L(-R)=(-R-r_1)(-R-r_2)\\ge0$; for conjugate roots these values are squared moduli.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 1.3",
+            "assume-case",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-gradient-and-minimizer",
+          "claim": "The objective is $F(w)=\\phi(w-w^\\star)$ for $\\phi(x)=\\tfrac12\\|Cx\\|_2^2$. Applying [F8] to each increment $h$ gives $D F(w)[h]=\\operatorname{Re}\\langle C^\\ast C(w-w^\\star),h\\rangle$, so [F9] yields $\\nabla F(w)=C^\\ast C(w-w^\\star)=A(w-w^\\star)$. Since $C$ is invertible, $F(w)=\\tfrac12\\|C(w-w^\\star)\\|_2^2\\ge0$ with equality exactly at $w=w^\\star$, proving unique minimization.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-repeated-root-solutions",
+          "claim": "For $c<L$, at either endpoint the scalar recurrence has polynomial $(z-r)^2$ with $r=q$ or $r=-q$, so $r\\ne0$. For arbitrary real $a,b$, substitution shows $x_t=(a+bt)r^t$ satisfies $x_{t+1}-2rx_t+r^2x_{t-1}=r^{t+1}((a+b(t+1))-2(a+bt)+(a+b(t-1)))=0$; choosing $a=x_0$ and $b=x_1/r-x_0$ matches any initial pair. Thus a repeated endpoint mode can contain $t r^t$, which explains why the root factor alone is not a one-step norm contraction.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimax-root-radius-lower-bound",
+          "claim": "In the case $0<R<1$ of [2.3], expanding its endpoint inequalities gives $\\alpha'c\\ge(1-R)(R-\\beta')/R$ and $\\alpha'L\\le(1+R)(R+\\beta')/R$. Since $\\beta'\\le R^2<R$, the first right-hand side is positive, so division yields $\\kappa=L/c\\le(1+R)(R+\\beta')/((1-R)(R-\\beta'))$. Also $(1+R)(R-\\beta')-(1-R)(R+\\beta')=2(R^2-\\beta')\\ge0$, hence $(R+\\beta')/(R-\\beta')\\le(1+R)/(1-R)$ and $\\kappa\\le((1+R)/(1-R))^2$. By [F7], taking positive square roots and rearranging gives $R\\ge(\\sqrt\\kappa-1)/(\\sqrt\\kappa+1)=q$; together with the $R\\ge1$ case, every admissible pair has $R\\ge q$.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "F7",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "heavy-ball-modal-recurrence",
+          "claim": "Let $e_t=w_t-w^\\star$ and $x_{i,t}=u_i^{\\mathsf T}e_t$. By [F1] and step 3.1, $e_{t+1}=(1+\\beta)e_t-\\alpha A e_t-\\beta e_{t-1}$ for $1\\le t<T$. Since $Au_i=\\lambda_i u_i$ and $A^{\\mathsf T}=A$, projection onto $u_i$ gives $x_{i,t+1}=(1+\\beta-\\alpha\\lambda_i)x_{i,t}-\\beta x_{i,t-1}$, whose characteristic polynomial is $p_{\\lambda_i}(r;\\alpha,\\beta)$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "gradient-descent-modal-factor",
+          "claim": "For gradient descent with $\\gamma=2/(L+c)$, [F2] and step 3.1 give the scalar update $x_{i,t+1}=(1-\\gamma\\lambda_i)x_{i,t}$. The affine multiplier decreases from $(L-c)/(L+c)$ at $c$ to $-(L-c)/(L+c)$ at $L$, so its largest absolute value on $[c,L]$ is $\\rho_{\\mathrm{GD}}=(L-c)/(L+c)$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strict-acceleration-comparison",
+          "claim": "Put $s=\\sqrt\\kappa$. By step 4.2, $\\rho_{\\mathrm{GD}}=(\\kappa-1)/(\\kappa+1)=(s^2-1)/(s^2+1)$, while $q=(s-1)/(s+1)$ by its definition. If $s>1$, subtraction gives $\\rho_{\\mathrm{GD}}-q=2s(s-1)/((s^2+1)(s+1))>0$; if $s=1$, both factors are zero. This proves the claimed gradient-descent comparison.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 2.2",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimax-attainment",
+          "claim": "If $c=L$, step 2.2 gives tuned root factor $q=0$, which is minimal since root factors are nonnegative. If $c<L$, step 2.2 gives tuned interval factor $q$ and step 3.3 gives the lower bound $R\\ge q$ for every constant admissible pair, so the tuned parameters are minimax; step 5.1 gives the strict comparison with gradient descent, while step 3.2 records the repeated-root qualification.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "step 3.2",
+            "step 3.3",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d>=1 and a nonempty spectral interval c<=L."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The gradient formula in step 3.1 and recurrence in step 4.1 preserve zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1, step 1.1 supplies one eigenmode and step 2.2 computes its tuned factor."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated eigenvalues are covered by step 1.1; repeated endpoint roots and their solutions are handled in steps 2.2–3.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint polynomials are factored in step 2.2 and their signs are evaluated in step 2.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The eigenbasis is finite-dimensional and no arbitrary-index choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional claim."
+        }
+      ]
+    },
+    "ex-unstable-heavy-ball-parameters": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-heavy-ball-momentum",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer and let $F:\\mathbb R^d\\to\\mathbb R$ be continuously Fréchet differentiable: at every $w$, $DF(w)$ is a linear first-order approximation with normwise remainder tending to zero, and $w\\mapsto DF(w)$ is continuous. Write its coordinate gradient as $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$. Given an initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, a constant step size $\\alpha>0$, a constant momentum parameter $\\beta\\ge0$, and an integer horizon $T\\ge1$, initialize $w_0=w_1=w_{\\mathrm{init}}$. For each integer $t=1,\\ldots,T-1$, set\n\n$$w_{t+1}:=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}).$$\n\nOutput $(w_0,w_1,\\ldots,w_T)$. The gradient is evaluated at the current iterate $w_t$.\nWhen $\\beta=0$, every update is the fixed-step gradient-descent update with step size $\\alpha$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-gradient-of-a-quadratic-matrix-form",
+          "source_section": "Statement",
+          "quote": "Fix a matrix $C$ and consider the real-valued quadratic form\n\n$$q(x):=\\frac12\\|Cx\\|_2^2=\\frac12 x^\\ast C^\\ast Cx.$$\n\nThen\n\n$$Dq(x)[h]=\\operatorname{Re}\\langle C^\\ast Cx,h\\rangle,$$\n\nso the gradient is $C^\\ast Cx$, and the Hessian is the constant Hermitian map\n$h\\mapsto C^\\ast Ch$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber. Together with [[thm-reals-ordered-field]], this completes the\nconstruction: $\\mathbb{R}$ is a complete totally ordered field.\nThe proof uses no form of the axiom of choice.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unstable-heavy-ball-recurrence",
+          "claim": "Taking $C=[1]$ in [F2] gives $\\nabla F(x)=x$. Substituting the parameters and this gradient into [F1] yields $w_{t+1}=-\\tfrac{17}{8}w_t-\\tfrac14w_{t-1}$ for every $t\\ge1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "explicit-unstable-iterates",
+          "claim": "The characteristic polynomial is $r^2+\\tfrac{17}{8}r+\\tfrac14=(r+2)(r+\\tfrac18)$. Each geometric sequence $(-2)^t$ and $(-\\tfrac18)^t$ therefore satisfies the recurrence in step 1.1. The stated linear combination has $w_0=1$ and $w_1=\\tfrac65-\\tfrac15=1$, so the recurrence and these initial values prove the displayed formula for all $t$ by induction.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "unbounded-unstable-tails",
+          "claim": "For $t\\ge1$, factor the expression as $w_t=(-2)^t\\bigl(-\\tfrac35+\\tfrac85\\,16^{-t}\\bigr)$. Since $16^{-t}\\le1/16$, the term in parentheses is at most $-\\tfrac12$, hence $|w_t|\\ge2^{t-1}$. Induction gives $2^{t-1}\\ge t$ for $t\\ge1$. For any starting index $N\\ge1$ and any real $R>0$, put $B=\\max\\{N,R\\}$; since $\\mathbb R$ is a complete ordered field by [F3], [F4] supplies a natural number $t>B$, which we use under the usual embedding as an integer iteration index. Thus $t\\ge N$ and $|w_t|\\ge t>R$. Every tail is therefore unbounded. If the sequence converged to a real $\\ell$, some tail would satisfy $|w_t-\\ell|<1$ and hence $|w_t|<|\\ell|+1$, a contradiction.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is explicitly one-dimensional and has a nonempty sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial scalar is 1, not zero, and the unbounded-tail conclusion is verified in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar one-dimensional recurrence and both characteristic roots are computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two characteristic roots -2 and -1/8 are distinct in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The scalar objective has the single eigenvalue 1 and its complete recurrence is factored in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The recurrence and closed form are explicit and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional claim."
+        }
+      ]
+    },
+    "ex-heavy-ball-optimized-quadratic-spectrum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $0<c\\le L$, and let $A\\in\\mathbb R^{d\\times d}$ satisfy $A^{\\mathsf T}=A$ and $x^{\\mathsf T}Ax>0$ for every nonzero $x\\in\\mathbb R^d$. An eigenvalue of $A$ is a real number $\\lambda$ such that $Av=\\lambda v$ for some nonzero $v$; assume every eigenvalue lies in $[c,L]$. For a fixed center $w^\\star\\in\\mathbb R^d$, define $F(w)=\\tfrac12(w-w^\\star)^{\\mathsf T}A(w-w^\\star)$. Then $w^\\star$ is the unique minimizer of $F$. Put $\\kappa=L/c$ and define\n\n$$q:=\\frac{\\sqrt L-\\sqrt c}{\\sqrt L+\\sqrt c}=\\frac{\\sqrt\\kappa-1}{\\sqrt\\kappa+1}.$$\n\nHere $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$ is the vector of coordinate partial derivatives.\n\nFor any constant parameters $\\alpha>0$ and $\\beta\\ge0$, finite horizon $T\\ge1$, and initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, define the heavy-ball sequence by $w_0=w_1=w_{\\mathrm{init}}$ and\n\n$$w_{t+1}=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}),\\qquad 1\\le t<T.$$\n\nFor each scalar $\\lambda\\in[c,L]$, the associated scalar recurrence is $x_{t+1}=(1+\\beta-\\alpha\\lambda)x_t-\\beta x_{t-1}$. Define its characteristic polynomial and root factor by\n\n$$p_\\lambda(r;\\alpha,\\beta):=r^2-(1+\\beta-\\alpha\\lambda)r+\\beta,\\qquad \\rho_\\lambda(\\alpha,\\beta):=\\max\\{|r|:p_\\lambda(r;\\alpha,\\beta)=0\\}.$$\n\nThis factor is the largest modulus of the two characteristic roots in $\\mathbb C$ of the scalar recurrence for eigenvalue $\\lambda$, not a one-step Euclidean norm contraction. The tuned parameters are\n\n$$\\alpha=\\frac{4}{(\\sqrt L+\\sqrt c)^2},\\qquad \\beta=q^2.$$\n\nFor this choice, $\\rho_\\lambda(\\alpha,\\beta)=q$ for every $\\lambda\\in[c,L]$. If $c<L$, then $p_c(r;\\alpha,\\beta)=(r-q)^2$ and $p_L(r;\\alpha,\\beta)=(r+q)^2$; if $c=L$, the only modal polynomial is $r^2$ and its root factor is $0$.\n\nFor gradient descent with step $\\gamma=2/(L+c)$, the modal multipliers are $1-\\gamma\\lambda$ and their largest absolute value over $[c,L]$ is\n\n$$\\rho_{\\mathrm{GD}}=\\frac{L-c}{L+c}=\\frac{\\kappa-1}{\\kappa+1}.$$\n\nThus $\\rho_{\\mathrm{GD}}>q$ when $c<L$, and both factors are $0$ when $c=L$. Moreover, among all constant heavy-ball parameters $\\alpha'>0$ and $\\beta'\\ge0$, the supremum of their modal root factors over $\\lambda\\in[c,L]$ is at least $q$. The tuned parameters therefore minimize that interval worst-case root factor. When $c<L$, the repeated endpoint roots permit a linear polynomial prefactor multiplying $q^t$ or $(-q)^t$; the root factor does not assert a one-step norm contraction by $q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-heavy-ball-momentum",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge1$ be an integer and let $F:\\mathbb R^d\\to\\mathbb R$ be continuously Fréchet differentiable: at every $w$, $DF(w)$ is a linear first-order approximation with normwise remainder tending to zero, and $w\\mapsto DF(w)$ is continuous. Write its coordinate gradient as $\\nabla F(w)=(\\partial_jF(w))_{0\\le j<d}$. Given an initial vector $w_{\\mathrm{init}}\\in\\mathbb R^d$, a constant step size $\\alpha>0$, a constant momentum parameter $\\beta\\ge0$, and an integer horizon $T\\ge1$, initialize $w_0=w_1=w_{\\mathrm{init}}$. For each integer $t=1,\\ldots,T-1$, set\n\n$$w_{t+1}:=w_t-\\alpha\\nabla F(w_t)+\\beta(w_t-w_{t-1}).$$\n\nOutput $(w_0,w_1,\\ldots,w_T)$. The gradient is evaluated at the current iterate $w_t$.\nWhen $\\beta=0$, every update is the fixed-step gradient-descent update with step size $\\alpha$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFréchet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].\n\n**Inputs:** an initial point $x_0\\in U$; either a positive fixed-step\nsequence $(t_k)_{k\\ge0}$ or backtracking parameters $\\alpha\\in(0,1)$ and\n$\\beta\\in(0,1)$; and an optional caller stopping predicate\n$S(k,x,g)\\in\\{\\mathrm{false},\\mathrm{true}\\}$, with\n$S:\\{0,1,2,\\ldots\\}\\times U\\times\\mathbb R^d\\to\\{\\mathrm{false},\\mathrm{true}\\}$.\nIf no predicate is supplied, use $S\\equiv\\mathrm{false}$. **Output:** when the\nprocedure stops, return the last valid iterate $x_k$ and the status\n`stationary`, `caller-stop`, or `domain-failure`.\nIf no stopping status occurs, the sequence continues and there is no finite\nreturn.\nFor example, an outer procedure's at-most-$M$-updates limit, for finite real\n$M\\ge0$, is implemented by $S(k,x,g):=(k+1>M)$.\n\nAt iteration $k$, where $k$ is the number of accepted updates so far and the\ncurrent iterate is $x_k$:\n\n1. Compute $g_k:=\\nabla f(x_k)$ and set $p_k:=-g_k$. If $g_k=0$, return\n   $(x_k,\\texttt{stationary})$.\n2. If $S(k,x_k,g_k)$ is true, return $(x_k,\\texttt{caller-stop})$. Check this\n   predicate at the current iterate after its gradient is computed and before\n   any step is selected.\n3. In fixed-step mode, set $t=t_k$. If $x_k+tp_k\\notin U$, return\n   $(x_k,\\texttt{domain-failure})$ without accepting that candidate.\n4. In backtracking mode, start with $t=1$ and repeatedly replace $t$ by\n   $\\beta t$ until $x_k+tp_k\\in U$ and\n   $f(x_k+tp_k)\\le f(x_k)+\\alpha t\\,\\langle g_k,p_k\\rangle$.\n5. Set $x_{k+1}:=x_k+t p_k$ and continue at iteration $k+1$.\n\nThe fixed-step update map is $x\\mapsto x-t_k\\nabla f(x)$; at a stationary\npoint its value is $x$, which is the returned iterate. A backtracking search\nthat is reached at a nonstationary iterate is well-defined by\n[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The\nprocedure asserts no convergence or global-minimization property for an\narbitrary objective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-gradient-of-a-quadratic-matrix-form",
+          "source_section": "Statement",
+          "quote": "Fix a matrix $C$ and consider the real-valued quadratic form\n\n$$q(x):=\\frac12\\|Cx\\|_2^2=\\frac12 x^\\ast C^\\ast Cx.$$\n\nThen\n\n$$Dq(x)[h]=\\operatorname{Re}\\langle C^\\ast Cx,h\\rangle,$$\n\nso the gradient is $C^\\ast Cx$, and the Hessian is the constant Hermitian map\n$h\\mapsto C^\\ast Ch$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "instantiate-tuned-parameters",
+          "claim": "The eigenvalues of $A$ are $1,4,9$, so $c=1$, $L=9$, $\\kappa=9$, and $q=(3-1)/(3+1)=1/2$. Substitution into [F1] gives $\\alpha=4/(3+1)^2=1/4$ and $\\beta=q^2=1/4$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "three-heavy-ball-modes",
+          "claim": "Taking $C=\\operatorname{diag}(1,2,3)$ gives $C^{\\mathsf T}C=A$, so [F4] yields $\\nabla F(w)=Aw$. Projecting [F2]'s update onto each standard coordinate gives polynomial $p_\\lambda(r)=r^2-(1+\\beta-\\alpha\\lambda)r+\\beta$. For $\\lambda=1$ it is $r^2-r+1/4=(r-1/2)^2$; for $\\lambda=4$ it is $r^2-r/4+1/4$, whose roots are $1/8\\pm i\\sqrt{15}/8$ and have modulus $1/2$; for $\\lambda=9$ it is $r^2+r+1/4=(r+1/2)^2$. Thus each root factor is $1/2$, and the endpoint roots are repeated.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "three-gradient-descent-modes",
+          "claim": "By [F3], gradient descent with $\\gamma=1/5$ has multiplier $1-\\lambda/5$ on an eigenvector of eigenvalue $\\lambda$. The multipliers at $1,4,9$ are $4/5,1/5,-4/5$, whose largest absolute value is $4/5$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a three-dimensional nonempty diagonal matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The three eigenvalues and nonzero initial coordinates are explicit in the statement and step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single intermediate mode lambda=4 is evaluated explicitly in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The repeated endpoint characteristic roots are factored explicitly in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The modes lambda=1 and lambda=9 are both computed in step 1.2 and attain the endpoint factors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrix and all three eigenmodes are explicit; no choice principle is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional claim."
+        }
+      ]
+    }
+  }
+}

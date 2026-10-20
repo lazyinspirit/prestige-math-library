@@ -12,6 +12,7 @@ justified_by: [thm-nonnegative-weighted-sums-of-measures]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-nonnegative-weighted-sum-of-measures.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -38,4 +39,10 @@ For measures $(\mu_k)_{k\in\mathbb N}$ on the same measurable space and weights 
 
 $$\left(\sum_{k=0}^{\infty}c_k\mu_k\right)(E):=\sum_{k=0}^{\infty}(c_k\mu_k)(E),$$
 
-using [[def-nonnegative-extended-series]]. Finite weighted sums are defined by the corresponding finite partial sum, with the empty weighted sum the zero set function. The fact that all these set functions are measures is [[thm-nonnegative-weighted-sums-of-measures]].
+using Series in the nonnegative extended real line. Finite weighted sums are defined by the corresponding finite partial sum, with the empty weighted sum the zero set function. The fact that all these set functions are measures is Nonnegative scalar multiples and countable weighted sums of measures are measures.
+
+## Definition references
+
+[[def-nonnegative-extended-series]]
+
+[[thm-nonnegative-weighted-sums-of-measures]]

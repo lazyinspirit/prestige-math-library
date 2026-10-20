@@ -1,0 +1,20 @@
+import fs from'node:fs';import{optimizationMLChecks}from'./finite-smoke-optimization-ml.mjs';
+const B='research/machine-learning-all-101-2026-10-19-owner-native-smoke-optimization/your-proposal',packet=JSON.parse(fs.readFileSync(`${B}/packet.json`)),fixtures=JSON.parse(fs.readFileSync(`${B}/fixtures.json`)),outcomes=[],errors=[];
+const normalize=t=>t.replace(/\s+/g,' ').trim();
+for(const op of packet.contract_array_operations){const row=op.after[0],fn=optimizationMLChecks[row.check],actual=JSON.parse(fs.readFileSync(op.target));let current=actual;for(const k of op.path)current=current[k];if(JSON.stringify(current)!==JSON.stringify(op.before))errors.push(`Contract CAS drift: ${row.check}`);if(!fs.readFileSync(op.source_guard.target).equals(fs.readFileSync(op.source_guard.before_path)))errors.push(`Source drift: ${row.check}`);if(!normalize(fs.readFileSync(op.source_guard.target,'utf8')).includes(normalize(row.asserts)))errors.push(`Exact assertion mismatch: ${row.check}`);if(!fn){errors.push(`Missing callback ${row.check}`);continue;}const r=fn(row);if(!r.ok)errors.push(`${row.check}: ${r.summary}`);outcomes.push({check:row.check,...r});
+const invalid=[{}, {...row,selectors:null},{...row,selectors:{...row.selectors,fixture:'unknown'}},{...row,selectors:{...row.selectors,unpromised:1}},{...row,parameters:{horizon:1000}},{...row,horizon:NaN},{...row,selectors:[]},{...row,selectors:{...row.selectors,fixture:1}},{...row,check:'ml101-wrong-callback'},{...row,unknown_own_field:1},{...row,parameters:null},Object.defineProperty({...row},'hidden_unknown',{value:1}),{...row,[Symbol('unknown')]:1}];for(const bad of invalid)if(fn(bad).ok)errors.push(`Accepted invalid selector: ${row.check}`);
+}
+const source=fs.readFileSync(`${B}/finite-smoke-optimization-ml.mjs`,'utf8');const mutations=[
+ ['trajectory-step-sign','ml101-sgd-scalar-two-step-integrability','x-=step*g','x+=step*g'],
+ ['random-index-product-mass','ml101-sgd-two-point-weighted-expectation','const p=base[w]*index[k]','const p=base[w]+index[k]'],
+ ['smoothness-second-order-constant','ml101-sgd-one-step-smoothness-equality','alpha*alpha*direction*direction/2','alpha*alpha*direction*direction/4'],
+ ['weighted-normalization','ml101-sgd-single-iterate-weighted-equality','D2=2*(quadratic(x)-quadratic(next))/L','D2=(quadratic(x)-quadratic(next))/L'],
+ ['noise-sign-update','ml101-sgd-two-step-sign-cube-moment','x-=alpha*(x+signs[t])','x+=alpha*(x+signs[t])'],
+ ['minibatch-average','ml101-sgd-two-observation-minibatch','((theta-a)+(theta-b))/2','((theta-a)+(theta-b))'],
+ ['rmsprop-epsilon-placement','ml101-rmsprop-outside-root-epsilon','denominator=Math.sqrt(r)+1','denominator=Math.sqrt(r+1)'],
+ ['adam-epsilon-placement','ml101-adam-inside-root-epsilon','denominator=Math.sqrt(v+1)','denominator=Math.sqrt(v)+1'],
+ ['amsgrad-forgot-historical-max','ml101-amsgrad-raw-moment-maximum','maximum=Math.max(maximum,v)','maximum=v'],
+ ['correction-beta-coefficient','ml101-amsgrad-constant-beta-correction','beta1=1/4,diameter=2','beta1=0,diameter=2']
+],mutationResults=[];
+for(const [name,check,before,after]of mutations){if(source.split(before).length!==2){errors.push(`Nonunique mutation ${name}`);continue;}const changed=source.replace(before,()=>after),m=await import(`data:text/javascript;base64,${Buffer.from(changed).toString('base64')}`),row=packet.contract_array_operations.find(op=>op.after[0].check===check).after[0],r=m.optimizationMLChecks[check](row);mutationResults.push({name,check,rejected:!r.ok,summary:r.summary});if(r.ok)errors.push(`Missed calculation mutation ${name}`);}
+const report={errors,focused_callbacks:outcomes,selector_rejections_tested:15*13,calculation_mutations:mutationResults,source_assertions_and_CAS:'15 exact current sources and arrays checked',global_self_test:false,native_gate:false,native_credit:false};fs.writeFileSync(`${B}/focused-checks.json`,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({errors,callbacks:outcomes.length,selector_rejections:report.selector_rejections_tested,calculation_mutations:mutationResults.length}));if(errors.length)process.exitCode=1;

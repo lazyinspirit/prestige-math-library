@@ -11,19 +11,14 @@ deps: [def-complete-metric-space, thm-cauchy-criterion-via-lub, def-cauchy-in-me
        def-metric-space, def-metric-convergence, def-finite-sum, thm-of-square-roots,
        lem-metrics-on-rn, lem-real-line-is-a-metric-space, lem-finite-set-has-max,
        def-max-min, lem-finite-sum-laws, def-real-limit, lem-of-square-monotone,
-       lem-of-abs-value, lem-of-inverse-positive, thm-well-ordering-principle, lem-limit-unique]
+       lem-of-abs-value, lem-of-inverse-positive, thm-well-ordering-principle, lem-limit-unique, lem-rat-embeds-dense]
 justified_by: []
 aliases: []
 landmark: true
 short: "$\\mathbb{R}$ and $\\mathbb{R}^n$ are complete"
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  repair: research/machine-learning-all-101-2026-10-19-owner-euclidean80-escalation/application/repair.json
 sources:
   scraped: []
   references:
@@ -70,6 +65,8 @@ hypothesis, and this one does too.
 
 [L8] Limits of real sequences are unique, which is what licenses writing $\lim_k x_k$ for a sequence already known to converge ([[lem-limit-unique]]).
 
+[L9] Between any two distinct reals lies an embedded rational, in particular below any positive real lies a positive rational ([[lem-rat-embeds-dense]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -86,7 +83,7 @@ hypothesis, and this one does too.
 
 3.1 The assignment $j \mapsto y_j$ is a function $n \to \mathbb{R}$, hence an element $y \in \mathbb{R}^n$; no choice is used, because $y_j$ is the unique limit of the $j$-th coordinate sequence. [step 2.2, L3, construct]
 
-3.2 For each $j < n$ let $K_j$ be the least natural such that $|x^{(k)}_j - y_j| < \varepsilon/(2n)$ for all $k \ge K_j$, which exists because the coordinate sequence converges to $y_j$ and every nonempty set of naturals has a least element; and put $K := \max\{K_j : j < n\}$, a maximum of a nonempty finite set of naturals since $n \ge 1$. [step 2.2, L6, L7, choose]
+3.2 By [L7] and rational density [L9], fix a rational $q>0$ with $\hat q<\varepsilon/(2n)$. For each $j<n$, convergence of its coordinate sequence in step 2.2, as defined in [A1], gives a natural threshold beyond which $|x^{(k)}_j-y_j|<\hat q<\varepsilon/(2n)$. Thus the set of naturals $M$ such that $|x^{(k)}_j-y_j|<\varepsilon/(2n)$ for all $k\ge M$ is nonempty. Let $K_j$ be its least member by [L6], and put $K:=\max\{K_j:j<n\}$, a maximum of a nonempty finite set of naturals since $n\ge1$. [step 2.2, A1, L6, L7, L9, choose]
 
 4.1 For every $k \ge K$ and every $j < n$ we have $k \ge K_j$, hence $|x^{(k)}_j - y_j| < \varepsilon/(2n)$, and therefore $d_2(x^{(k)}, y) < \varepsilon$ by step 1.3. [step 1.3, step 3.1, step 3.2]
 

@@ -14,6 +14,7 @@ aliases: [def-differentiable, def-differentiability]
 landmark: true
 short: "the derivative at a point"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-derivative.json
   audited: 2026-07-28
   precheck: n/a
   judge:
@@ -41,8 +42,8 @@ pipeline_run: null
 ## Definition
 
 Throughout, $\mathbb{R}$ is the complete ordered field
-([[def-complete-ordered-field]]), neighbourhoods are those of
-[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].
+(Complete ordered field (least-upper-bound property)), neighbourhoods are those of
+The $\varepsilon$-neighbourhood and the punctured $\varepsilon$-neighbourhood of a point of $\mathbb{R}$ and limit points those of Limit point, isolated point, adherent point, derived set, and dense subset of $\mathbb{R}$.
 
 Let $A \subseteq \mathbb{R}$, let $f : A \to \mathbb{R}$ and let $c \in A$ be a
 **limit point of $A$**. The **difference quotient of $f$ at $c$** is the function
@@ -60,7 +61,7 @@ $$N^{*}_{\varepsilon}(c) \cap A \;=\; N^{*}_{\varepsilon}(c) \cap (A \setminus \
 
 and the left-hand side is nonempty because $c$ is a limit point of $A$. So
 $q_{f,c}$ is a function on a set having $c$ as a limit point, and
-$\lim_{x \to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.
+$\lim_{x \to c} q_{f,c}(x)$ is a notion that The $\varepsilon$-$\delta$ limit $\lim_{x \to c} f(x) = L$ of $f : A \to \mathbb{R}$ at a limit point $c$ of $A$ defines.
 
 $f$ is **differentiable at $c$** when that limit exists, and then the
 **derivative of $f$ at $c$** is
@@ -72,14 +73,14 @@ $$f'(c) \;:=\; \lim_{x \to c} q_{f,c}(x) \;=\; \lim_{x \to c} \frac{f(x) - f(c)}
 1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a
    single real number. That is legitimate: $c$ is a limit point of the domain
    $A \setminus \{c\}$ of $q_{f,c}$, so at most one real can satisfy the
-   $\varepsilon$-$\delta$ condition, by [[lem-function-limit-unique]] applied to
+   $\varepsilon$-$\delta$ condition, by At a limit point of the domain a function has at most one limit applied to
    $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the
    symbol denotes.
 2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not
    decoration. At an **isolated** point of $A$ the punctured condition
    $0 < |x - c| < \delta$ is met by no point of the domain at all, so the
    $\varepsilon$-$\delta$ formula is satisfied vacuously by *every* real at
-   once; this is why [[def-function-limit]] leaves the limit undefined there,
+   once; this is why The $\varepsilon$-$\delta$ limit $\lim_{x \to c} f(x) = L$ of $f : A \to \mathbb{R}$ at a limit point $c$ of $A$ leaves the limit undefined there,
    and it is why this library defines $f'(c)$ only at a limit point of $A$. At
    an isolated point of its domain a function is neither differentiable nor
    non-differentiable here: the question is not posed.
@@ -91,7 +92,7 @@ Then $\lim_{x \to c} Q(x) = L$ if and only if $\lim_{x \to c} q_{f,c}(x) = L$.
 Both conditions read: for every real $\varepsilon > 0$ there is a real
 $\delta > 0$ such that every point $x$ of the relevant domain with
 $0 < |x - c| < \delta$ satisfies $|{\cdot} - L| < \varepsilon$
-([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both
+(The $\varepsilon$-$\delta$ limit $\lim_{x \to c} f(x) = L$ of $f : A \to \mathbb{R}$ at a limit point $c$ of $A$). The clause $0 < |x - c|$ removes $x = c$ from both
 quantifiers, so in both cases the points quantified over are exactly the
 $x \in A \setminus \{c\}$ with $0 < |x - c| < \delta$, at which $Q$ and
 $q_{f,c}$ take the same value. The two conditions are the same condition.
@@ -111,10 +112,10 @@ Indeed $B \setminus \{c\} \subseteq A \setminus \{c\}$; the displayed identity
 of punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit
 point of $B \setminus \{c\}$; the difference quotient $q_{f|_B, c}$ is the
 restriction of $q_{f,c}$ to $B \setminus \{c\}$, since $f|_B(c) = f(c)$; and
-claim 2 of [[lem-limit-is-local]] carries the limit to that restriction.
+claim 2 of The limit at $c$ depends only on the restriction of $f$ to a punctured neighbourhood of $c$, and passes to any subset of the domain having $c$ as a limit point carries the limit to that restriction.
 
 **Every point of a nondegenerate interval is a limit point of it.** Let
-$J \subseteq \mathbb{R}$ be order-convex ([[def-interval]]) with at least two
+$J \subseteq \mathbb{R}$ be order-convex (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with at least two
 elements and let $p \in J$. Choose $q \in J$ with $q \ne p$, and let a real
 $\varepsilon > 0$ be given. If $p < q$, put $y := p + \tfrac{1}{2}\min\{\varepsilon,\ q - p\}$;
 then $p < y$, and $y - p \le \tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and
@@ -122,13 +123,29 @@ order-convexity gives $y \in J$, while $0 < |y - p| < \varepsilon$. If $q < p$,
 the point $y := p - \tfrac{1}{2}\min\{\varepsilon,\ p - q\}$ serves in the same
 way. So $N^{*}_{\varepsilon}(p) \cap J \ne \varnothing$ for every real
 $\varepsilon > 0$, that is, $p$ is a limit point of $J$
-([[def-limit-point-r]]).
+(Limit point, isolated point, adherent point, derived set, and dense subset of $\mathbb{R}$).
 
 Consequently, for $f$ defined on a nondegenerate interval $I$, the symbol
 $f'(c)$ is meaningful at **every** $c \in I$, endpoints included. At an endpoint
 the difference quotient is taken over the points of $I$ lying on the one side
 that is available, so what other texts call a one-sided derivative is, here,
 simply the derivative of $f$ on $I$.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-neighbourhood-r]]
+
+[[def-limit-point-r]]
+
+[[def-function-limit]]
+
+[[lem-function-limit-unique]]
+
+[[lem-limit-is-local]]
+
+[[def-interval]]
 
 ## Remarks
 

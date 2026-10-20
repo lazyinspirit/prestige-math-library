@@ -1,0 +1,366 @@
+{
+  "group": "m",
+  "batches": [
+    "40"
+  ],
+  "pages_read": [
+    "stochastic-gradient-descent-for-learning",
+    "stochastic-gradient-descent-for-learning-examples"
+  ],
+  "items_read": [
+    "lem-sgd-trajectory-integrability",
+    "lem-independent-finite-random-index-extension",
+    "alg-stochastic-gradient-descent",
+    "alg-minibatch-stochastic-gradient-descent",
+    "thm-stochastic-direction-expected-average-stationarity",
+    "thm-nonconvex-sgd-random-iterate-stationarity",
+    "ex-constant-step-sgd-noise-floor",
+    "ex-empirical-risk-sgd-oracle-is-unbiased",
+    "ex-sgd-biased-direction-violates-alignment"
+  ],
+  "conventions": [
+    {
+      "convention": "SGD uses deterministic positive finite stepsizes, x_t measurable with respect to F_t, and G_t measurable with respect to F_{t+1}. The procedure itself imposes no unbiasedness, variance bound, or independence across iterations.",
+      "fixed_by": "alg-stochastic-gradient-descent",
+      "matters_for": [
+        "alg-minibatch-stochastic-gradient-descent",
+        "thm-stochastic-direction-expected-average-stationarity",
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "ex-sgd-biased-direction-violates-alignment"
+      ]
+    },
+    {
+      "convention": "All minibatch vectors are evaluated at the same current iterate; averaging alone asserts neither independence nor variance reduction.",
+      "fixed_by": "alg-minibatch-stochastic-gradient-descent",
+      "matters_for": [
+        "ex-empirical-risk-sgd-oracle-is-unbiased"
+      ]
+    },
+    {
+      "convention": "Conditional expectations are coordinatewise almost-sure classes under AC; vector conditional variance is the sum of coordinate conditional variances.",
+      "fixed_by": "thm-stochastic-direction-expected-average-stationarity",
+      "matters_for": [
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "ex-empirical-risk-sgd-oracle-is-unbiased",
+        "ex-constant-step-sgd-noise-floor"
+      ]
+    },
+    {
+      "convention": "The random output index is independent of the original trajectory on an explicitly constructed finite probability-space extension.",
+      "fixed_by": "lem-independent-finite-random-index-extension",
+      "matters_for": [
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "ex-constant-step-sgd-noise-floor"
+      ]
+    },
+    {
+      "convention": "The weighted output samples indices 1 through N with weights proportional to 2γ_k−Lγ_k², requiring 0<γ_k<2/L. The global infimum is finite but need not be attained.",
+      "fixed_by": "thm-nonconvex-sgd-random-iterate-stationarity",
+      "matters_for": [
+        "thm-nonconvex-sgd-random-iterate-stationarity"
+      ]
+    },
+    {
+      "convention": "Empirical-risk sampling is over a fixed ordered sample, independently with replacement within each batch; the example asserts no population-gradient identity.",
+      "fixed_by": "ex-empirical-risk-sgd-oracle-is-unbiased",
+      "matters_for": [
+        "ex-empirical-risk-sgd-oracle-is-unbiased"
+      ]
+    },
+    {
+      "convention": "The noise-floor example uses a separate finite sign space for each horizon, with horizon-consistent moments; its infinite-time limit is a limit of those moments.",
+      "fixed_by": "ex-constant-step-sgd-noise-floor",
+      "matters_for": [
+        "ex-constant-step-sgd-noise-floor"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-sgd-trajectory-integrability",
+      "statement": "For a continuously differentiable function with finite Lipschitz-gradient constant, a finite SGD recursion with finite real stepsizes, square-integrable initial point and square-integrable directions has square-integrable iterates and gradients, and integrable objective values at every time through the horizon.",
+      "used_by": [
+        "thm-stochastic-direction-expected-average-stationarity",
+        "thm-nonconvex-sgd-random-iterate-stationarity"
+      ]
+    },
+    {
+      "id": "alg-stochastic-gradient-descent",
+      "statement": "For each iteration t=1,…,N, query the oracle at x_t and set x_{t+1}=x_t−α_tG_t. Return the trajectory through x_{N+1}; no conditional mean, variance, or independence-across-iterations property is part of the definition.",
+      "used_by": [
+        "alg-minibatch-stochastic-gradient-descent",
+        "thm-stochastic-direction-expected-average-stationarity",
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "ex-constant-step-sgd-noise-floor",
+        "ex-sgd-biased-direction-violates-alignment"
+      ]
+    },
+    {
+      "id": "lem-independent-finite-random-index-extension",
+      "statement": "For any probability space and finite probability vector (p_1,…,p_N), there is an extension carrying an independent index R with P(R=k)=p_k; for integrable real H_1,…,H_N, H_R is integrable and E[H_R]=Σ_k p_k E[H_k].",
+      "used_by": [
+        "thm-nonconvex-sgd-random-iterate-stationarity",
+        "ex-constant-step-sgd-noise-floor"
+      ]
+    },
+    {
+      "id": "thm-stochastic-direction-expected-average-stationarity",
+      "statement": "Under AC, the stated smoothness, square-integrability, positive alignment, conditional-mean norm, conditional-variance and trajectory lower-bound hypotheses give E[T⁻¹Σ_{t=1}^T‖∇f(x_t)‖²] ≤ αLM/μ + 2(f(x_1)−F_inf)/(Tμα) for 0<α≤μ/(LM_G). Positive deterministic steps with divergent sum and square-summable squares give expected stepsize-weighted average stationarity tending to zero.",
+      "used_by": [
+        "ex-empirical-risk-sgd-oracle-is-unbiased",
+        "ex-sgd-biased-direction-violates-alignment"
+      ]
+    },
+    {
+      "id": "thm-nonconvex-sgd-random-iterate-stationarity",
+      "statement": "Under AC, the stated smoothness, finite global infimum, deterministic initialization, square-integrable conditionally unbiased oracle and variance bound σ², steps 0<γ_k<2/L and independent output weights a_k/S_N give L⁻¹E‖∇f(x_R)‖² ≤ (D_f²+σ²Σ_kγ_k²)/Σ_k(2γ_k−Lγ_k²), with the stated constant-step bounds and separate zero cases.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "lem-l-smoothness-descent-inequality",
+      "used_for": "Objective-growth estimates and the conditional one-step descent inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Coordinate inner products, squared norms and finite-dimensional vector conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Triangle inequality, inner-product bounds and integrability estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Finite trajectory integrability and deterministic recurrence calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Extended nonnegative expectations and integrable real expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Finite extension and finite sample-space probability constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Countable additivity of the constructed finite-slice probability measure.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability of iterates, directions, selectors and finite coordinate variables.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite weighted expectation formula on the extension.",
+      "opened": true
+    },
+    {
+      "id": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+      "used_for": "Extension of the finite-selector formula from simple functions to nonnegative measurable functions.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing increasing simple approximations through the selector expectation formula.",
+      "opened": true
+    },
+    {
+      "id": "def-stochastic-gradient-oracle-and-unconstrained-update",
+      "used_for": "Oracle timing, coordinate conditional moments, square-integrability convention and SGD update.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Increasing information sigma-algebras and their probability-space restrictions.",
+      "opened": true
+    },
+    {
+      "id": "def-adapted-and-integrable-stochastic-process",
+      "used_for": "Timewise measurability and integrability conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited AC assumption for conditional-expectation existence.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure class interpretation of conditional means.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-variance",
+      "used_for": "Conditional variance of scalar coordinates.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+      "used_for": "Conditional second moment equals squared conditional mean plus conditional variance.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Taking measurable gradient coordinates outside conditional expectations after verifying product integrability.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, order and preservation of ordinary expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-tower-property-of-conditional-expectation",
+      "used_for": "Passing from conditional descent to ordinary expected descent.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-difference-sequence",
+      "used_for": "Identification of centered oracle coordinates as martingale differences after shifting the filtration.",
+      "opened": true
+    },
+    {
+      "id": "thm-stochastic-gradient-nonconvex-randomized-iterate-bound",
+      "used_for": "Constant-step uniform-index comparison and the unbiased noise-floor example's finite-horizon bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-stochastic-gradient-biased-noise-floor",
+      "used_for": "The noise-floor example's bounded-bias average estimate with coefficient 5/2.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Decay of q^t in the exact quadratic noise-floor calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Direct difference-quotient verification of the empirical quadratic gradient.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "The Definition contains inline links, including “n = {0, 1, …, n−1} ([[def-natural-numbers]], [[lem-nat-order-is-membership]])”. These interrupt the defining section and are not collected in an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "The Statement says “with the Euclidean inner product and the Euclidean norm as in [[def-euclidean-inner-product]]” and contains further inline supplier links. The complete Statement is interrupted by hyperlinks and lacks the required immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition says “integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. This inline hyperlink interrupts the definition rather than appearing in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The Definition includes “with P(X)=1 ([[def-measure]])” and “a probability space ([[def-measure-space]])”. These supplier hyperlinks remain within the complete defining section instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measure",
+      "finding": "The Definition includes “a sigma-algebra on X ([[def-sigma-algebra]])” and identifies its series using “[[def-nonnegative-extended-series]]”. These hyperlinks interrupt the definition and lack the prescribed following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-random-element-and-real-random-variable",
+      "finding": "The Definition contains “in the sense of [[def-measurable-function-between-measurable-spaces]]” and “from [[def-borel-sigma-algebra]]”. These hyperlinks remain in the defining section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-stochastic-gradient-oracle-and-unconstrained-update",
+      "finding": "The Definition begins with a filtered probability space “as in [[def-filtration-and-filtered-probability-space]]” and later embeds conditional-variance and conditional-expectation supplier links. Its complete definition is interrupted by hyperlinks, with no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "The Definition includes “a probability space [[def-probability-measure]]” and “a sigma-algebra on Ω [[def-sigma-algebra]]”. These inline links violate the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-adapted-and-integrable-stochastic-process",
+      "finding": "The Definition starts “On a filtered probability space [[def-filtration-and-filtered-probability-space]]” and includes random-variable and expectation hyperlinks within its defining prose. There is no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "The defining axiom is stated as “Every family of nonempty sets has a choice function ([[def-choice-function]])”. The hyperlink is inside the complete Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-as-an-ae-class",
+      "finding": "The Definition includes “Existence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]]” and further inline links. The defining section is not hyperlink-free and has no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-variance",
+      "finding": "The Definition includes “The conditional class is [[def-conditional-expectation-as-an-ae-class]]” and embeds AC, contraction and taking-out links. These remain in the complete defining section rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-difference-sequence",
+      "finding": "The Definition begins “Assume AC [[def-axiom-of-choice]] for conditional-expectation existence” and later links adaptedness and conditional-expectation conventions inline. These hyperlinks interrupt the definition and lack the prescribed following reference section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-stochastic-gradient-nonconvex-randomized-iterate-bound",
+      "finding": "The Statement says “run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]]”. This hyperlink interrupts the full theorem statement and is not moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-stochastic-gradient-biased-noise-floor",
+      "finding": "The Statement says “Run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]]”. The inline supplier link violates the uninterrupted-statement instruction and there is no immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-geometric-sequence-null",
+      "finding": "The Statement includes “the integer power ([[def-integer-power]])”, links defining null convergence and divergence, and “Bernoulli's inequality ([[lem-bernoulli-inequality]])”. These hyperlinks remain within the complete Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-derivative",
+      "finding": "The Definition begins “Throughout, R is the complete ordered field ([[def-complete-ordered-field]])” and contains numerous further inline supplier links throughout the defining section. It lacks the immediately following Definition references section required by the uninterrupted-definition instruction.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "stochastic-gradient-descent-for-learning",
+      "to": "nonconvex-gradient-descent-and-stationarity",
+      "faithful": true,
+      "note": "Read the prerequisite page and its deterministic stationarity theorem. This is a conceptual prerequisite rather than a direct theorem citation: the SGD proofs use the published smoothness inequality directly. They preserve the distinction between stationarity and iterate or minimizer convergence, and explicitly distinguish trajectory lower bounds from a finite global infimum."
+    },
+    {
+      "from": "stochastic-gradient-descent-for-learning",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "The cited supervised-problem and risk definitions permit arbitrary fixed ordered samples and extended nonnegative risk. The owned empirical quadratic example supplies finite smooth losses and computes the fixed-sample gradient directly. Algorithm remarks correctly require separate justification for a population differentiation-under-expectation identity."
+    },
+    {
+      "from": "adaptive-gradient-optimizers",
+      "to": "stochastic-gradient-descent-for-learning",
+      "faithful": true,
+      "note": "The prerequisite is contextual: the inspected RMSProp, Adam and AMSGrad definitions do not cite an owned SGD theorem or inherit its stationarity guarantee. Their coordinate scaling, momentum, clipping or projection are explicitly specified as distinct procedures."
+    },
+    {
+      "from": "algorithmic-stability-of-stochastic-training",
+      "to": "stochastic-gradient-descent-for-learning",
+      "faithful": true,
+      "note": "The convex and nonconvex stability theorems state their own sample-selection recurrences and assumptions. They do not invoke conditional unbiasedness or an owned stationarity theorem; uniform marginal sampling may have cross-time dependence. Both explicitly restrict their generalization claims to the specified sample-selection procedure, consistently with the general SGD interface."
+    }
+  ]
+}

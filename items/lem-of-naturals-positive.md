@@ -13,6 +13,7 @@ landmark: false
 short: "n·1 > 0"
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-naturals-positive.json
   precheck: pass
   verified:
     model: gpt-6-sol
@@ -34,7 +35,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $F$ be an ordered field, with field structure as in [[def-field]], and for
+Let $F$ be an ordered field, with field structure as in Field, and for
 $n \ge 1$ let $n \cdot 1_F$ denote the canonical natural number
 $\underbrace{1_F + \cdots + 1_F}_{n}$, defined recursively by $1 \cdot 1_F = 1_F$
 and $(n+1) \cdot 1_F = n \cdot 1_F + 1_F$. Then for every $n \ge 1$:
@@ -42,6 +43,10 @@ and $(n+1) \cdot 1_F = n \cdot 1_F + 1_F$. Then for every $n \ge 1$:
 - $n \cdot 1_F > 0$ and $(n+1) \cdot 1_F > n \cdot 1_F$;
 - the map $n \mapsto n \cdot 1_F$ is strictly increasing, hence injective, on $\{1, 2, 3, \dots\}$;
 - $(m+n) \cdot 1_F = m \cdot 1_F + n \cdot 1_F$ and $(mn) \cdot 1_F = (m \cdot 1_F)(n \cdot 1_F)$ for all $m, n \ge 1$.
+
+## Statement references
+
+[[def-field]]
 
 ## Facts & Assumptions
 

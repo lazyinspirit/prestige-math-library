@@ -1,0 +1,973 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "def-realizable-and-agnostic-pac",
+    "thm-finite-class-agnostic-erm-bound",
+    "thm-finite-class-realizable-pac-bound",
+    "thm-finite-class-sample-complexity",
+    "ex-finite-lookup-table-pac-sample-complexities",
+    "ex-duplicate-predictors-and-distinct-class-size",
+    "ex-zero-training-error-can-have-positive-population-risk"
+  ],
+  "contracts": {
+    "def-realizable-and-agnostic-pac": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The classifier class is explicitly finite nonempty, and the empirical average uses m>=1 observations. A joint probability law also excludes an empty measurable sample space, so neither the displayed infimum nor the empirical mean has an empty index set.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The aggregate detector sees the empirical sum, whose positive sample size is explicit; the same Definition separately excludes an empty classifier class."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Realizability is defined by existence of a member with population risk zero; all risks lie in [0,1]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A singleton nonempty class is allowed, and its agnostic benchmark is its sole risk."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The joint law may be deterministic or noisy; no realizability premise enters the agnostic definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Sample size is m≥1 and accuracy and confidence satisfy 0<epsilon,delta<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The definition quantifies over a supplied finite class and a measurable learner; it selects no member from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Realizable and agnostic PAC are separately named probability criteria; the latter compares output risk with a finite-class infimum. Neither definition identifies those two criteria as equivalent or supplies a characterization requiring directional proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Realizable and agnostic PAC are separately named probability criteria; the latter compares output risk with a finite-class infimum. Neither definition identifies those two criteria as equivalent or supplies a characterization requiring directional proof.",
+            "item_sha256": "37264601f657baca963165d23e4da2b86bdcf4dfb30b431e0d61d37bd5e10762",
+            "row_sha256": "048960bd5225cab2a1cf0abf43c8724646559ea94d98ef4735d8e5cd0ec6b368"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Realizable and agnostic PAC are separately named probability criteria; the latter compares output risk with a finite-class infimum. Neither definition identifies those two criteria as equivalent or supplies a characterization requiring directional proof.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Realizable and agnostic PAC are separately named probability criteria; the latter compares output risk with a finite-class infimum. Neither definition identifies those two criteria as equivalent or supplies a characterization requiring directional proof.",
+            "item_sha256": "37264601f657baca963165d23e4da2b86bdcf4dfb30b431e0d61d37bd5e10762",
+            "row_sha256": "08e8f9c4d2b04f605e3b859db0581f20a090679092ccc9d4016be659f80b2d8b"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-finite-class-agnostic-erm-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-class-uniform-deviation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $Z_1,\\ldots,Z_n$ be IID observations with law $P$, and let $\\mathcal F$ be a finite nonempty class of measurable functions $f:\\mathcal X\\to[0,1]$. For every $\\epsilon>0$,\n\n$$P\\left(\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\ge\\epsilon\\right)\\le2|\\mathcal F|e^{-2n\\epsilon^2}.$$\n\nHere $P_nf=n^{-1}\\sum_i f(Z_i)$ and $Pf=\\int f\\,dP$. The proof uses only scalar exponential moments and finite independence; it does not assume the Axiom of Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Fix a sample $S$ and a nonempty class $\\mathcal F$ of predictors. Its **empirical minimum** is $\\widehat R_S^*(\\mathcal F):=\\inf_{f\\in\\mathcal F}\\widehat R_S(f)\\in[0,+\\infty]$. An **exact empirical risk minimizer** is a predictor $f\\in\\mathcal F$ with $\\widehat R_S(f)=\\widehat R_S^*(\\mathcal F)$. If the infimum is finite but is not attained, no exact minimizer exists. If the infimum is $+\\infty$, nonemptiness implies that every member has infinite empirical risk and is an exact minimizer.\n\nFor finite $\\eta\\ge0$, a predictor $f\\in\\mathcal F$ is an **$\\eta$-approximate empirical risk minimizer** if either the empirical minimum is $+\\infty$ and $f$ is an exact minimizer, or the empirical minimum is finite and $f$ has finite empirical risk at most $\\widehat R_S^*(\\mathcal F)+\\eta$. The membership requirement $f\\in\\mathcal F$ applies in both branches. Thus the definition never forms $+\\infty+\\eta$. When $\\eta=0$ and the finite infimum is not attained, no such predictor exists.\n\nFor a fixed sample size $m$, a **measurable prediction rule** with class $\\mathcal F$ is a jointly measurable evaluation map from the sample space $((\\mathsf X\\times\\mathsf Y)^m, (\\Sigma_X\\otimes\\Sigma_Y)^{\\otimes m})$ and a new instance in $\\mathsf X$ to $\\mathsf A$, whose slice at each sample belongs to $\\mathcal F$. It is an exact or approximate ERM rule when every slice satisfies the corresponding samplewise definition above. This definition asserts no existence of a measurable selector for an arbitrary class.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-finite-list-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Given a sample $S$ of length $m\\ge1$, an ordered finite nonempty list of measurable predictors $(f_1,\\ldots,f_n)$, and a finite tolerance $\\eta\\ge0$, compute $r_j:=\\widehat R_S(f_j)$ for each $j\\in\\{1,\\ldots,n\\}$. If every $r_j=+\\infty$, return index $1$. Otherwise set $r_*:=\\min_{1\\le j\\le n}r_j$ and return the least index $j$ for which $r_j<+\\infty$ and $r_j\\le r_*+\\eta$. The output index denotes the selected predictor from the supplied list. When $\\eta=0$, the output is a first exact minimizer, including the all-infinite case. The algorithm evaluates only a finite number of empirical risks and makes no population-risk guarantee.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-list-empirical-risk-selector-is-measurable",
+          "source_section": "Statement",
+          "quote": "For a sample of positive length, a finite ordered nonempty list of measurable predictors, and finite tolerance $\\eta\\ge0$, let $J(S)$ be the index returned by the finite-list empirical-risk algorithm. Then $J$ is measurable into the finite index set with its discrete sigma-algebra, the evaluation map $(S,x)\\mapsto f_{J(S)}(x)$ is jointly measurable, and the returned predictor is an $\\eta$-approximate empirical risk minimizer as defined in the algorithm's input conditions. When $\\eta=0$, it is an exact minimizer.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For each $h\\in\\mathcal H$, define $g_h(x,y)=\\mathbf1\\{h(x)\\ne y\\}$. Its unit-level set is $(h^{-1}\\{0\\}\\times\\{1\\})\\cup(h^{-1}\\{1\\}\\times\\{0\\})$, a measurable union of rectangles because $h$ is measurable and $\\{0,1\\}$ is discrete. Thus $g_h$ is measurable and $[0,1]$-valued; $G:=\\{g_h:h\\in\\mathcal H\\}$ is finite and nonempty with $|G|\\le|\\mathcal H|$. By [F3], $Pg_h=R_P(h)$ and $P_mg_h=\\widehat R_S(h)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F7], the observations meet the IID hypothesis of [F1]. Put $a=a_{m,\\mathcal H,\\delta}$. Since $|\\mathcal H|\\ge1$ and $2/\\delta>1$, [F8] makes the numerator positive, so $a>0$. Apply [F1] to $G$ at $t=a$. By [F8], $\\log|\\mathcal H|+\\log(2/\\delta)=\\log(2|\\mathcal H|/\\delta)$ and $e^{-\\log(2|\\mathcal H|/\\delta)}=\\delta/(2|\\mathcal H|)$. Hence $2|G|e^{-2ma^2}\\le2|\\mathcal H|e^{-2ma^2}=\\delta$. With probability at least $1-\\delta$ every $h\\in\\mathcal H$ satisfies $|R_P(h)-\\widehat R_S(h)|<a$, hence also the asserted non-strict bound.",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "On that event, [F6] gives $\\widehat R_S(\\widehat h_\\eta)\\le\\inf_{h\\in\\mathcal H}\\widehat R_S(h)+\\eta$. The deviation bound gives $R_P(\\widehat h_\\eta)\\le\\widehat R_S(\\widehat h_\\eta)+a$ and $\\widehat R_S(h)\\le R_P(h)+a$ for every $h$. Hence $\\inf_{g\\in\\mathcal H}\\widehat R_S(g)\\le R_P(h)+a$ for every $h\\in\\mathcal H$, and taking the infimum over $h$ gives $\\inf_{g\\in\\mathcal H}\\widehat R_S(g)\\le\\inf_{h\\in\\mathcal H}R_P(h)+a$. Combining these inequalities gives $R_P(\\widehat h_\\eta)-\\inf_{h\\in\\mathcal H}R_P(h)\\le2a+\\eta$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The event from step 2.1 has probability at least $1-\\delta$, and step 3.1 establishes both stated inequalities on that event. This proves the claim for arbitrary $P$, whether or not the class is realizable.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite nonempty classifier class makes G nonempty in step 1.1; m>=1 keeps its empirical average defined. Thus the supremum event in step 2.1 and infima in step 3.1 have nonempty finite index sets.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The detector recognizes an empirical sum over the explicitly positive observation count. Nonemptiness of the loss-function class is also established before invoking uniform deviation."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Eta=0 is exact ERM and the bound reduces to excess at most 2a."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For |H|=1, log|H|=0 and a=sqrt(log(2/delta)/(2m)); the formula remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Constant or duplicate loss functions are allowed; G remains finite nonempty and |G|≤|H|."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m≥1, 0<delta<1, and every finite eta≥0 is allowed; all zero-one empirical risks are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The list is a given finite enumeration; tie-breaking is deterministic and no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniform deviation controls the selected classifier through the empirical infimum in step 3.1, yielding an upper bound on excess risk. This one-way probabilistic estimate does not characterize when that excess bound holds.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Uniform deviation controls the selected classifier through the empirical infimum in step 3.1, yielding an upper bound on excess risk. This one-way probabilistic estimate does not characterize when that excess bound holds.",
+            "item_sha256": "fce194d4f207f75772a8a761237abd06a110b9d2e954c606575b27ad068cf2e5",
+            "row_sha256": "39a86569debe60fb7e7942d298112177a104f36e7a73f4b7421b352557a6779e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Uniform deviation controls the selected classifier through the empirical infimum in step 3.1, yielding an upper bound on excess risk. This one-way probabilistic estimate does not characterize when that excess bound holds.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Uniform deviation controls the selected classifier through the empirical infimum in step 3.1, yielding an upper bound on excess risk. This one-way probabilistic estimate does not characterize when that excess bound holds.",
+            "item_sha256": "fce194d4f207f75772a8a761237abd06a110b9d2e954c606575b27ad068cf2e5",
+            "row_sha256": "ca264bed51e1eae4b7ad91dbef8019e49fb8c64e6d6349c854d5d50c44c5d4e8"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Independently checked all four proof steps and F1–F8 against current carriers. The binary error set is a finite union of measurable rectangles, so the loss class is finite nonempty and [0,1]-valued with cardinality at most |H|. IID and m>=1 meet the uniform-deviation hypotheses. For 0<delta<1 the radius is strictly positive, and 2|G| exp(-2ma^2)<=delta; complementing the >= tail gives a strict bound that implies the stated <= bound. On this one event the selected member has empirical risk at most the finite minimum plus fixed finite eta, and the two deviation inequalities give excess <=2a+eta. Checked singleton H, eta=0, arbitrary large finite eta, deterministic/noisy laws, and excluded empty H/m=0/confidence endpoints. The finite supplied order gives a measurable discrete index and hence an H-valued learner without AC; no quotient construction occurs. Read the current uniform-deviation and Hoeffding-MGF proofs and selector measurability proof. Independently checked Shalev-Shwartz–Ben-David §4.2, Corollary 4.6 (PDF pp.55–56), and Rigollet–Hutter §2.4 Lemma 1.8/Theorem 1.9; Mohri Dropbox failed to fetch and is not claimed read. Reader/refuter findings are empty. No defect or repair; no diagrams or required missing diagram."
+      }
+    },
+    "thm-finite-class-realizable-pac-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-finite-list-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Given a sample $S$ of length $m\\ge1$, an ordered finite nonempty list of measurable predictors $(f_1,\\ldots,f_n)$, and a finite tolerance $\\eta\\ge0$, compute $r_j:=\\widehat R_S(f_j)$ for each $j\\in\\{1,\\ldots,n\\}$. If every $r_j=+\\infty$, return index $1$. Otherwise set $r_*:=\\min_{1\\le j\\le n}r_j$ and return the least index $j$ for which $r_j<+\\infty$ and $r_j\\le r_*+\\eta$. The output index denotes the selected predictor from the supplied list. When $\\eta=0$, the output is a first exact minimizer, including the all-infinite case. The algorithm evaluates only a finite number of empirical risks and makes no population-risk guarantee.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-list-empirical-risk-selector-is-measurable",
+          "source_section": "Statement",
+          "quote": "For a sample of positive length, a finite ordered nonempty list of measurable predictors, and finite tolerance $\\eta\\ge0$, let $J(S)$ be the index returned by the finite-list empirical-risk algorithm. Then $J$ is measurable into the finite index set with its discrete sigma-algebra, the evaluation map $(S,x)\\mapsto f_{J(S)}(x)$ is jointly measurable, and the returned predictor is an $\\eta$-approximate empirical risk minimizer as defined in the algorithm's input conditions. When $\\eta=0$, it is an exact minimizer.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix $h\\in\\mathcal H$ with $R_P(h)>\\epsilon$ and put $I_i=\\mathbf1\\{h(X_i)\\ne Y_i\\}$. The error indicator is a measurable function of $Z_i$, so [F1]–[F2] make $I_1,\\ldots,I_m$ independent with $\\mathbb P(I_i=1)=R_P(h)$. Therefore the probability that $h$ is consistent on the full sample is $\\mathbb P(I_1=\\cdots=I_m=0)=(1-R_P(h))^m\\le(1-\\epsilon)^m\\le e^{-m\\epsilon}$ by [F4].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "A1"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The bad-consistent event is the union over $h\\in\\mathcal H$ with $R_P(h)>\\epsilon$ of the event that $h$ is consistent. By [F3] and step 1.1 its probability is at most $|\\mathcal H|e^{-m\\epsilon}$.",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $R_P(h^*)=0$, each observation disagrees with $h^*$ on a null event; the finite union of these null events has probability zero. Thus $h^*$ is sample-consistent almost surely, the empirical minimum is zero, and [F5]–[F6] make $\\widehat h_0$ a measurable consistent classifier almost surely. If its risk exceeded $\\epsilon$, it would be a bad consistent classifier, so the failure event is contained in the event bounded in step 2.1.",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The assumed sample-size inequality gives $m\\epsilon\\ge\\log|\\mathcal H|+\\log(1/\\delta)=\\log(|\\mathcal H|/\\delta)$ by [F8]. The argument $|\\mathcal H|e^{-m\\epsilon}$ is positive by [F9], and [F8] yields $\\log(|\\mathcal H|e^{-m\\epsilon})=\\log|\\mathcal H|-m\\epsilon\\le-\\log(1/\\delta)=\\log\\delta$. Since $\\log$ is increasing, $|\\mathcal H|e^{-m\\epsilon}\\le\\delta$. Steps 2.1–3.1 therefore bound the failure probability by $\\delta$, proving the claim.",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite nonempty class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: A zero-risk target is sample-consistent almost surely and exact ERM has empirical minimum zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For |H|=1 the logarithm term is zero and the positive confidence term remains."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No lower bound on individual risk or probability mass is assumed; classifiers with risk exactly epsilon are not in the strict bad set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: m is a positive integer and epsilon,delta lie in (0,1); the exponential inequality also holds at p=0 or p=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The selector uses a given finite ordered list, and the proof uses only finite unions; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The sample-size inequality bounds the bad-consistent union probability in step 4.1. A realizable zero-risk member supplies consistency, but the result gives no converse lower bound on sample size or necessity of its sufficient inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The sample-size inequality bounds the bad-consistent union probability in step 4.1. A realizable zero-risk member supplies consistency, but the result gives no converse lower bound on sample size or necessity of its sufficient inequality.",
+            "item_sha256": "d861e36e25eaa0030632f45add3d96d2f3fab94c92a107e2f6238f673a19d563",
+            "row_sha256": "34a21b4e7091d976b7143fb2d52ac14c07026fd2de59e2d670154a1c27bce9a9"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sample-size inequality bounds the bad-consistent union probability in step 4.1. A realizable zero-risk member supplies consistency, but the result gives no converse lower bound on sample size or necessity of its sufficient inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The sample-size inequality bounds the bad-consistent union probability in step 4.1. A realizable zero-risk member supplies consistency, but the result gives no converse lower bound on sample size or necessity of its sufficient inequality.",
+            "item_sha256": "d861e36e25eaa0030632f45add3d96d2f3fab94c92a107e2f6238f673a19d563",
+            "row_sha256": "0da1830ca57ce4f7d3e183ead8bd866b3425c5b0bd099eafcb64e8b23ea6c3fa"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Checked all four steps and F1–F9 against all thirteen current declared suppliers. Measurable error indicators preserve mutual independence and have common error probability p; consistency probability is (1-p)^m<=exp(-m epsilon) for p>epsilon. The finite bad subset may be empty, in which case its union is empty and the bound remains valid. The zero-risk witness is consistent outside the explicitly identified finite null union, and exact ERM then has empirical risk zero. Step 3.1’s ensuing event containment is understood on that stated full-measure set: adding the already specified null exception gives the same probability bound, an immediate elementary closure requiring no repair. The positive logarithm arguments and increasing log give |H|exp(-m epsilon)<=delta. Checked singleton H, risks 0, epsilon and 1, deterministic laws, positive integer m and excluded epsilon/delta endpoints. No arbitrary choice: supplied finite enumeration and deterministic first index suffice. Independently read Understanding Machine Learning §2.3.1, Corollary 2.3, PDF pp.36–40, including its probability-one consistency qualification; joint-law version follows by the same indicator calculation. Reader/refuter have no findings; no diagrams or required additions; no defect, repair, or unmet prerequisite."
+      }
+    },
+    "thm-finite-class-sample-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-class-realizable-pac-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$ on a measurable instance space, and let $P$ be a law on $\\mathcal X\\times\\{0,1\\}$ for which some $h^*\\in\\mathcal H$ has zero population zero-one risk. Let $Z_i=(X_i,Y_i)$, $1\\le i\\le m$, be IID with law $P$, and let $\\widehat h_0(S)$ be the measurable exact ERM returned by the finite-list selector on an ordered enumeration of $\\mathcal H$. For $0<\\epsilon,\\delta<1$ and integer $m\\ge1$, if\n\n$$m\\ge\\frac{\\log|\\mathcal H|+\\log(1/\\delta)}{\\epsilon},$$\n\nthen $\\mathbb P_S\\{R_P(\\widehat h_0(S))\\le\\epsilon\\}\\ge1-\\delta$. This is a realizable guarantee; it makes no claim for distributions without a zero-risk member of $\\mathcal H$. The proof is choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-class-agnostic-erm-bound",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a measurable space, let $P$ be a probability law on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. Let $Z_i=(X_i,Y_i)$, $1\\le i\\le m$, be IID with law $P$, where $m\\ge1$, and define $R_P(h)=P\\{h(X)\\ne Y\\}$ and $\\widehat R_S(h)=m^{-1}\\sum_{i=1}^m\\mathbf 1\\{h(X_i)\\ne Y_i\\}$. With natural logarithms, for $0<\\delta<1$ put\n\n$$a_{m,\\mathcal H,\\delta}:=\\sqrt{\\frac{\\log|\\mathcal H|+\\log(2/\\delta)}{2m}}.$$\n\nThen, with probability at least $1-\\delta$, both $|R_P(h)-\\widehat R_S(h)|\\le a_{m,\\mathcal H,\\delta}$ for every $h\\in\\mathcal H$ and\n\n$$R_P(\\widehat h_\\eta(S))-\\inf_{h\\in\\mathcal H}R_P(h)\\le 2a_{m,\\mathcal H,\\delta}+\\eta,$$\n\nfor each fixed finite tolerance $\\eta\\ge0$, where $\\widehat h_\\eta$ is the measurable finite-list empirical-risk selector applied with tolerance $\\eta$ to an ordered list containing every member of $\\mathcal H$ exactly once. In particular, exact ERM ($\\eta=0$) has excess risk at most $2a_{m,\\mathcal H,\\delta}$. The conclusion is agnostic: it assumes no zero-risk classifier. No form of the Axiom of Choice is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-realizable-and-agnostic-pac",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a measurable instance space, let the binary label space $\\{0,1\\}$ have its discrete sigma-algebra, and let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. For a probability law $P$ on $\\mathcal X\\times\\{0,1\\}$, write $R_P(h)=P\\{(x,y):h(x)\\ne y\\}$ for the population zero-one risk. A sample of size $m\\ge1$ consists of $m$ independent observations with common law $P$; write $\\widehat R_S(h)=m^{-1}\\sum_{i=1}^m\\mathbf 1\\{h(X_i)\\ne Y_i\\}$ for its empirical zero-one risk. The law $P$ is realizable by $\\mathcal H$ if some $h^*\\in\\mathcal H$ satisfies $R_P(h^*)=0$.\n\nPut $\\mathcal Z=\\mathcal X\\times\\{0,1\\}$ with its product sigma-algebra. For fixed $m\\ge1$, a deterministic learner is a measurable map $A:\\mathcal Z^m\\to\\mathcal H$, where the finite set $\\mathcal H$ has its discrete sigma-algebra. For a law $P$ on $\\mathcal Z$, let $S=(Z_1,\\ldots,Z_m)$ be an IID sample with common law $P$, and write $\\mathbb P_S$ for probability under its joint law. For $0<\\epsilon,\\delta<1$, the learner is $(\\epsilon,\\delta)$-PAC realizable if, for every law $P$ realizable by $\\mathcal H$, $\\mathbb P_S\\{R_P(A(S))\\le\\epsilon\\}\\ge1-\\delta$. It is agnostic $(\\epsilon,\\delta)$-PAC if, for every law $P$ on $\\mathcal Z$, $\\mathbb P_S\\{R_P(A(S))-\\inf_{h\\in\\mathcal H}R_P(h)\\le\\epsilon\\}\\ge1-\\delta$. A randomized learner uses a measurable probability space $(\\mathcal U,\\Sigma_U,Q)$ and a measurable output map $A:\\mathcal Z^m\\times\\mathcal U\\to\\mathcal H$, with a seed $U\\sim Q$ independent of $S$; in both criteria replace $A(S)$ by $A(S,U)$ and $\\mathbb P_S$ by the joint probability $\\mathbb P_{S,U}$. All risks and the infimum are finite because the zero-one loss is bounded by one. These definitions impose no computational-efficiency claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Under the stated realizability assumption, the first sample-size condition is exactly the hypothesis of [F1], so the exact finite-list ERM meets the realizable PAC criterion in [F3].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Put $a=\\sqrt{(\\log N+\\log(2/\\delta))/(2m)}$. Since $N\\ge1$ and $0<\\delta<1$, [F4] makes the numerator positive; also $\\epsilon-\\eta>0$. The sample-size condition gives $a^2\\le(\\epsilon-\\eta)^2/4$, so $a\\le(\\epsilon-\\eta)/2$ by nonnegativity.",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], with probability at least $1-\\delta$ the agnostic excess is at most $2a+\\eta\\le\\epsilon$. This is the agnostic PAC criterion in [F3], and setting $\\eta=0$ gives the exact-ERM formula.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The class is finite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Eta=0 is explicitly included and recovers exact ERM."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 gives log N=0, with positive confidence terms in both bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The formulas require no uniqueness, positive risk, or margin condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: epsilon,delta lie in (0,1), eta is in [0,epsilon), and m is a positive integer."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The only ERM selector is finite-list and deterministic; no axiom is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The realizable branch invokes its PAC supplier and the agnostic branch reduces the deviation term below the excess-risk target. Both clauses are sufficient upper bounds, expressly without optimality; reversing either implication is outside the claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The realizable branch invokes its PAC supplier and the agnostic branch reduces the deviation term below the excess-risk target. Both clauses are sufficient upper bounds, expressly without optimality; reversing either implication is outside the claim.",
+            "item_sha256": "ad3da578d96af29054e32a443039506e657f2880f594cb4516c8978c77291edf",
+            "row_sha256": "2eb19481c2814420442ef530a435c48d499bf38147db499c72b45c6dd25f1351"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The realizable branch invokes its PAC supplier and the agnostic branch reduces the deviation term below the excess-risk target. Both clauses are sufficient upper bounds, expressly without optimality; reversing either implication is outside the claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The realizable branch invokes its PAC supplier and the agnostic branch reduces the deviation term below the excess-risk target. Both clauses are sufficient upper bounds, expressly without optimality; reversing either implication is outside the claim.",
+            "item_sha256": "ad3da578d96af29054e32a443039506e657f2880f594cb4516c8978c77291edf",
+            "row_sha256": "0bca2626c66ea99e6eb814a23da0c78387c40b4a12129752f3c3d64bfcf8b02f"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Independently checked steps 1.1, 1.2 and 2.1 and all five current declared suppliers, already reviewed at lower levels. Realizable branch preserves the zero-risk witness and exact-ERM hypotheses. In the agnostic branch B=log N+log(2/delta)>0 and epsilon-eta>0, so m>=2B/(epsilon-eta)^2 implies a^2=B/(2m)<=(epsilon-eta)^2/4 and hence 2a+eta<=epsilon. The supplier applies for each arbitrary joint law and uses a measurable finite-list learner; its constants are law-independent, satisfying the universal PAC quantifier. Eta=0, singleton N=1, equality at the sufficient threshold, and eta approaching epsilon from below are sound; eta=epsilon and m=0 are excluded. There is no converse, lower-bound, optimality, or efficiency assertion. No AC is added. Compared exact citation/derivation rows with the current statements and proof; externally checked Understanding Machine Learning Corollaries 2.3 and 4.6, PDF pp.40 and 56, and derived the eta extension locally. Reader/refuter findings empty. Statement is uninterrupted, no diagrams required, no defect or repair."
+      }
+    },
+    "ex-finite-lookup-table-pac-sample-complexities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-class-sample-complexity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite nonempty class of measurable binary classifiers, put $N=|\\mathcal H|$, and let $0<\\epsilon,\\delta<1$. For IID samples, the finite-list exact ERM is realizable $(\\epsilon,\\delta)$-PAC whenever the law is realizable by $\\mathcal H$ and\n\n$$m\\ge\\frac{\\log N+\\log(1/\\delta)}{\\epsilon}.$$\n\nFor arbitrary laws, a finite-list $\\eta$-approximate ERM with fixed $0\\le\\eta<\\epsilon$ is agnostic $(\\epsilon,\\delta)$-PAC whenever\n\n$$m\\ge\\frac{2\\bigl(\\log N+\\log(2/\\delta)\\bigr)}{(\\epsilon-\\eta)^2}.$$\n\nHere $m$ is a positive integer and logarithms are natural. In particular, exact agnostic ERM ($\\eta=0$) has the sufficient sample size $m\\ge2(\\log N+\\log(2/\\delta))/\\epsilon^2$. These are sufficient upper bounds; they do not assert optimality or computational efficiency.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "A table assigns one of two labels independently at each of the $d$ inputs, so there are exactly $2^d$ tables. Every table is measurable on the finite discrete space, and the class is nonempty.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "[F2] gives the IID sample convention required by [F1]. Substitute $N=2^d$ into [F1] and use $\\log(2^d)=d\\log2$. The resulting sufficient sample-size conditions are exactly those in the Example.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes d≥1 so the domain supports a probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The class includes all-zero and all-one tables; the realizable clause applies whenever a zero-risk table exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At d=1 the class has exactly two lookup tables and the formulas use N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No restriction is placed on the joint law beyond the stated realizability condition for the first bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: d≥1 and 0<epsilon,delta<1; m is any integer satisfying the displayed threshold."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The class is explicitly finite and can be enumerated by its d-bit output table."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Counting binary assignments gives the lookup-table cardinality, then step 2.1 substitutes its logarithm into two supplier upper bounds. The Example explicitly calls these sufficient sample sizes; it never infers failure below them.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Counting binary assignments gives the lookup-table cardinality, then step 2.1 substitutes its logarithm into two supplier upper bounds. The Example explicitly calls these sufficient sample sizes; it never infers failure below them.",
+            "item_sha256": "d93ca2996b00371be977598d4f79063b23e217892d158b4a5675eafef75eb875",
+            "row_sha256": "44ce2b885d51fea4569b9cd41a629504c1c086dbffe8542a387ca98fd7764329"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Counting binary assignments gives the lookup-table cardinality, then step 2.1 substitutes its logarithm into two supplier upper bounds. The Example explicitly calls these sufficient sample sizes; it never infers failure below them.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Counting binary assignments gives the lookup-table cardinality, then step 2.1 substitutes its logarithm into two supplier upper bounds. The Example explicitly calls these sufficient sample sizes; it never infers failure below them.",
+            "item_sha256": "d93ca2996b00371be977598d4f79063b23e217892d158b4a5675eafef75eb875",
+            "row_sha256": "a1e0d05ee3e8c00a82c902e3df02e7ad487640b139ff0305834bced7ba28eb59"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-duplicate-predictors-and-distinct-class-size": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-list-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Given a sample $S$ of length $m\\ge1$, an ordered finite nonempty list of measurable predictors $(f_1,\\ldots,f_n)$, and a finite tolerance $\\eta\\ge0$, compute $r_j:=\\widehat R_S(f_j)$ for each $j\\in\\{1,\\ldots,n\\}$. If every $r_j=+\\infty$, return index $1$. Otherwise set $r_*:=\\min_{1\\le j\\le n}r_j$ and return the least index $j$ for which $r_j<+\\infty$ and $r_j\\le r_*+\\eta$. The output index denotes the selected predictor from the supplied list. When $\\eta=0$, the output is a first exact minimizer, including the all-infinite case. The algorithm evaluates only a finite number of empirical risks and makes no population-risk guarantee.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-class-sample-complexity",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite nonempty class of measurable binary classifiers, put $N=|\\mathcal H|$, and let $0<\\epsilon,\\delta<1$. For IID samples, the finite-list exact ERM is realizable $(\\epsilon,\\delta)$-PAC whenever the law is realizable by $\\mathcal H$ and\n\n$$m\\ge\\frac{\\log N+\\log(1/\\delta)}{\\epsilon}.$$\n\nFor arbitrary laws, a finite-list $\\eta$-approximate ERM with fixed $0\\le\\eta<\\epsilon$ is agnostic $(\\epsilon,\\delta)$-PAC whenever\n\n$$m\\ge\\frac{2\\bigl(\\log N+\\log(2/\\delta)\\bigr)}{(\\epsilon-\\eta)^2}.$$\n\nHere $m$ is a positive integer and logarithms are natural. In particular, exact agnostic ERM ($\\eta=0$) has the sufficient sample size $m\\ge2(\\log N+\\log(2/\\delta))/\\epsilon^2$. These are sufficient upper bounds; they do not assert optimality or computational efficiency.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The list and its deduplicated sublist have the same set of empirical-risk values, so their minima agree. Whether a list entry satisfies the tolerance test in [F1] depends only on its classifier; among repeated copies, the first copy is encountered first. Therefore both runs select the same classifier.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F3], the sample is IID, which is the sampling hypothesis of [F2]. The list with first occurrences retained enumerates $\\mathcal H$ exactly once. Apply [F2] to this finite class with $|\\mathcal H|=q$; its sample bound contains $q$ and no term involving $K$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The original list is nonempty, so q≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Eta=0 is allowed and ties are resolved by the supplied order."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: If q=1, all K entries are duplicates, log q=0, and deduplication leaves one classifier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The all-duplicates case is included; the risk values and first selected function remain unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The sample-size formula assumes 0≤eta<epsilon<1 and 0<delta<1; any finite eta≥0 is permitted in the selection identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Deduplication keeps first occurrences in a supplied finite list and makes no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Removing repeated copies preserves the set of empirical-risk values and its first qualifying classifier in step 1.1. The resulting q-dependent PAC formula is a sufficient bound in step 2.1, not a necessary-and-sufficient condition for generalization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Removing repeated copies preserves the set of empirical-risk values and its first qualifying classifier in step 1.1. The resulting q-dependent PAC formula is a sufficient bound in step 2.1, not a necessary-and-sufficient condition for generalization.",
+            "item_sha256": "30abedf2d05e2e6de12fa640043b4539ecb8def4cf516158ba448067880e0bf9",
+            "row_sha256": "f72ca994209a92825dad4571e5e1aaa93c9685ef90c9ea95e194a409a88cc8a1"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Removing repeated copies preserves the set of empirical-risk values and its first qualifying classifier in step 1.1. The resulting q-dependent PAC formula is a sufficient bound in step 2.1, not a necessary-and-sufficient condition for generalization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "Removing repeated copies preserves the set of empirical-risk values and its first qualifying classifier in step 1.1. The resulting q-dependent PAC formula is a sufficient bound in step 2.1, not a necessary-and-sufficient condition for generalization.",
+            "item_sha256": "30abedf2d05e2e6de12fa640043b4539ecb8def4cf516158ba448067880e0bf9",
+            "row_sha256": "ec109f07ab091b6671032ca461fcdc207b6ba0d7869bed00ebba2995059411ce"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Checked the full Example, both verification steps, F1–F3, the four current declared suppliers and contract rows. Duplicate means equality as functions, so all duplicate entries have identical empirical risk on every labeled sample and population risk for every law. Retaining first occurrences preserves the minimum, qualification for the fixed finite eta test, and relative order of distinct first occurrences; thus the selected classifier and prediction rule agree, although numerical list indices need not agree and the claim does not assert that they do. All empirical risks lie in [0,1], so the finite-risk branch of the algorithm applies. The retained list enumerates the q-member class exactly once and meets the sample-complexity supplier hypotheses; equality of selected functions transfers the probability guarantee to the original list. Checked q=1/all duplicates, q=K/no duplicates, distinct functions tied on the observed sample, eta=0, arbitrary large finite eta for the selection identity, and eta<epsilon for the PAC clause. IID, measurable classifiers, m>=1 and confidence/accuracy domains are preserved; no arbitrary choice or computability of functional equality is asserted. No external citation is supplied by this generated example; the PAC result was independently reviewed with its source above. Reader/refuter findings empty. No links interrupt the Example; no diagram required. No defect, repair or missing prerequisite."
+      }
+    },
+    "ex-zero-training-error-can-have-positive-population-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-list-empirical-risk-minimizer",
+          "source_section": "Definition",
+          "quote": "Given a sample $S$ of length $m\\ge1$, an ordered finite nonempty list of measurable predictors $(f_1,\\ldots,f_n)$, and a finite tolerance $\\eta\\ge0$, compute $r_j:=\\widehat R_S(f_j)$ for each $j\\in\\{1,\\ldots,n\\}$. If every $r_j=+\\infty$, return index $1$. Otherwise set $r_*:=\\min_{1\\le j\\le n}r_j$ and return the least index $j$ for which $r_j<+\\infty$ and $r_j\\le r_*+\\eta$. The output index denotes the selected predictor from the supplied list. When $\\eta=0$, the output is a first exact minimizer, including the all-infinite case. The algorithm evaluates only a finite number of empirical risks and makes no population-risk guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-realizable-and-agnostic-pac",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a measurable instance space, let the binary label space $\\{0,1\\}$ have its discrete sigma-algebra, and let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. For a probability law $P$ on $\\mathcal X\\times\\{0,1\\}$, write $R_P(h)=P\\{(x,y):h(x)\\ne y\\}$ for the population zero-one risk. A sample of size $m\\ge1$ consists of $m$ independent observations with common law $P$; write $\\widehat R_S(h)=m^{-1}\\sum_{i=1}^m\\mathbf 1\\{h(X_i)\\ne Y_i\\}$ for its empirical zero-one risk. The law $P$ is realizable by $\\mathcal H$ if some $h^*\\in\\mathcal H$ satisfies $R_P(h^*)=0$.\n\nPut $\\mathcal Z=\\mathcal X\\times\\{0,1\\}$ with its product sigma-algebra. For fixed $m\\ge1$, a deterministic learner is a measurable map $A:\\mathcal Z^m\\to\\mathcal H$, where the finite set $\\mathcal H$ has its discrete sigma-algebra. For a law $P$ on $\\mathcal Z$, let $S=(Z_1,\\ldots,Z_m)$ be an IID sample with common law $P$, and write $\\mathbb P_S$ for probability under its joint law. For $0<\\epsilon,\\delta<1$, the learner is $(\\epsilon,\\delta)$-PAC realizable if, for every law $P$ realizable by $\\mathcal H$, $\\mathbb P_S\\{R_P(A(S))\\le\\epsilon\\}\\ge1-\\delta$. It is agnostic $(\\epsilon,\\delta)$-PAC if, for every law $P$ on $\\mathcal Z$, $\\mathbb P_S\\{R_P(A(S))-\\inf_{h\\in\\mathcal H}R_P(h)\\le\\epsilon\\}\\ge1-\\delta$. A randomized learner uses a measurable probability space $(\\mathcal U,\\Sigma_U,Q)$ and a measurable output map $A:\\mathcal Z^m\\times\\mathcal U\\to\\mathcal H$, with a seed $U\\sim Q$ independent of $S$; in both criteria replace $A(S)$ by $A(S,U)$ and $\\mathbb P_S$ by the joint probability $\\mathbb P_{S,U}$. All risks and the infimum are finite because the zero-one loss is bounded by one. These definitions impose no computational-efficiency claim.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The classifier $h_1$ errs exactly when $X=b$, so $R_P(h_1)=1/2$, while $h_0$ has zero risk. On the specified all-$a$ sample, each observed pair is $(a,0)$ and both classifiers have empirical risk zero.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], the probability that all $m$ independent inputs equal $a$ is $(1/2)^m=2^{-m}>0$. On that event, [F1] selects $h_1$ first, so the learner returns zero empirical risk with population risk $1/2$. This is a positive-probability sample event and does not contradict the probabilistic form of [F3].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample size is m≥1 and the class has two classifiers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The example explicitly has zero empirical error on the all-a sample and positive population risk 1/2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The class has exactly two distinct classifiers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The finite law, classifiers, and sample event are fully specified; the target h0 gives realizability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: For every integer m≥1, the event probability 2^-m is strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The order (h1,h0) is supplied explicitly and the algorithm's tie-break is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The all-a event supplies a positive-probability witness with zero empirical loss and positive true loss. Its verification establishes coexistence and refutes a pointwise implication; it asserts no equivalence between empirical and population risk.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The all-a event supplies a positive-probability witness with zero empirical loss and positive true loss. Its verification establishes coexistence and refutes a pointwise implication; it asserts no equivalence between empirical and population risk.",
+            "item_sha256": "b3bc6180dc6a4d7df13d8e903a484734336ee6427c2c1522d6e0fce2cf533b80",
+            "row_sha256": "fca4872aba65646952c41caf127a7f308d494b8069dfb07d5abf750f579b07c1"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The all-a event supplies a positive-probability witness with zero empirical loss and positive true loss. Its verification establishes coexistence and refutes a pointwise implication; it asserts no equivalence between empirical and population risk.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair",
+            "reason": "The all-a event supplies a positive-probability witness with zero empirical loss and positive true loss. Its verification establishes coexistence and refutes a pointwise implication; it asserts no equivalence between empirical and population risk.",
+            "item_sha256": "b3bc6180dc6a4d7df13d8e903a484734336ee6427c2c1522d6e0fce2cf533b80",
+            "row_sha256": "513a88b3e251de8b325da26043b1b80ead9909a91c366524c71d62488d2aff8a"
+          }
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

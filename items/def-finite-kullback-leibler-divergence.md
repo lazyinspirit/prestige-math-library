@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-kullback-leibler-divergence.json
   precheck: n/a
 sources:
   references:
@@ -37,7 +38,14 @@ $q_x=0$; equivalently, $0\log(0/q_x)=0$. When $P\ll Q$, all ratios in the
 sum are positive and finite.
 
 The generator $f(t)=t\log t$ is admissible for
-[[def-finite-f-divergence]] by
-[[lem-finite-kl-generator-is-admissible]]. Its boundary values
+Finite f-divergence with support conventions by
+The finite KL generator has the required convex boundary extension. Its boundary values
 $f(0)=0$ and $f_\infty=+\infty$ make that f-divergence exactly the displayed
 KL formula, including the singular-support case.
+
+## Definition references
+
+[[def-finite-f-divergence]]
+
+[[lem-finite-kl-generator-is-admissible]]
+

@@ -15,7 +15,7 @@ landmark: true
 short: "the mean value theorem"
 proof_strategy: direct
 verification:
-  repair: research/statistical-models-experiments-62-published-bibliography-cor-mean-value-theorem-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-mean-value-theorem.json
   precheck: pass
 sources:
   scraped: []
@@ -35,9 +35,9 @@ pipeline_run: null
 ## Statement
 
 Let $a, b \in \mathbb{R}$ with $a < b$ and let $f : [a,b] \to \mathbb{R}$ be
-continuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and
+continuous on $[a,b]$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and
 differentiable at every point of $(a,b)$ as a function on $[a,b]$
-([[def-derivative]]). Then there is $c \in (a,b)$ with
+(The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \in (a,b)$ with
 
 $$f(b) - f(a) \;=\; f'(c)\,(b - a) .$$
 
@@ -50,6 +50,14 @@ every point of $(a,b)$ alone does not suffice: a function on $[0,1]$,
 differentiable at every point of $(0,1)$ with derivative constantly $1$, for
 which no $c$ works, is exhibited later on this page as a false statement, and
 the companion page works the same witness out in full.
+
+## Statement references
+
+[[def-continuity-real]]
+
+[[def-interval]]
+
+[[def-derivative]]
 
 ## Facts & Assumptions
 

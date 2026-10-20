@@ -1,0 +1,1181 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-adaboost-m1",
+    "def-negative-gradient-pseudo-residual",
+    "lem-pseudo-residuals-are-negative-score-gradient",
+    "thm-adaboost-exponential-training-error-bound",
+    "alg-gradient-boosting",
+    "thm-gradient-boosting-empirical-loss-nonincreasing",
+    "ex-adaboost-perfect-round-stops",
+    "ex-adaboost-two-rounds-and-margin-bound",
+    "ex-gradient-boosting-zero-tree-direction"
+  ],
+  "contracts": {
+    "alg-adaboost-m1": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "N>=1 excludes an empty observation sample, while M=0 is explicitly admitted: F_0=0 and the sign-plus tie rule return the constant positive classifier with no completed weak rounds.",
+          "evidence": "Definition: N>=1 excludes an empty observation sample, while M=0 is explicitly admitted: F_0=0 and the sign-plus tie rule return the constant positive classifier with no completed weak rounds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The e_m=0 branch returns the current perfect classifier and forms no coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For N=1, a deterministic binary classifier has weighted error 0 or 1; it stops perfectly or reports failure without using the logarithm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: If all labels agree, the error computation and perfect/failure branches remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: At e_m=0 the perfect branch stops; at e_m=1/2 the weak-learning condition fails; only 0<e_m<1/2 uses the coefficient formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The round limit is finite and each classifier is supplied by the weak-learning routine; no axiom of choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "AdaBoost defines finite score updates for 0<e_m<1/2 and separate halting outputs at perfect or failed weak rounds; this is an operational construction, not an equivalence characterizing loss bounds.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "AdaBoost defines finite score updates for 0<e_m<1/2 and separate halting outputs at perfect or failed weak rounds; this is an operational construction, not an equivalence characterizing loss bounds.",
+            "item_sha256": "d2d6cd06cab324b25aa17a58f9c05bb8192af737edcad86016b32e7eab68aa66",
+            "row_sha256": "41f56d29951b6574dac6cd1a1ca218a50b7682efcbdfda195ec700a5de9287ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "AdaBoost defines finite score updates for 0<e_m<1/2 and separate halting outputs at perfect or failed weak rounds; this is an operational construction, not an equivalence characterizing loss bounds.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "AdaBoost defines finite score updates for 0<e_m<1/2 and separate halting outputs at perfect or failed weak rounds; this is an operational construction, not an equivalence characterizing loss bounds.",
+            "item_sha256": "d2d6cd06cab324b25aa17a58f9c05bb8192af737edcad86016b32e7eab68aa66",
+            "row_sha256": "ee49a33f74ff8aeca694746503afc3a41f195e65aaf17fff32a062ef1f6bc1d0"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-negative-gradient-pseudo-residual": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N>=1 is an explicit premise for the observation-indexed empirical loss and pseudo-residual vector; no empty sample is admitted by this definition, despite the syntactic finite sum.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "N>=1 is an explicit premise for the observation-indexed empirical loss and pseudo-residual vector; no empty sample is admitted by this definition, despite the syntactic finite sum."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: At a zero score the same scalar-derivative formula applies; it divides by no score value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For N=1 the pseudo-residual is the negative scalar derivative of that observation's loss."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Repeated sample points still receive their own coordinate derivative in the score vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no constrained score interval; differentiability at each used score is the stated hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition makes no selections from any nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This names the negative scalar loss derivative at each sample score and distinguishes score-space from model-parameter derivatives; it defines quantities rather than asserting equivalent propositions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "This names the negative scalar loss derivative at each sample score and distinguishes score-space from model-parameter derivatives; it defines quantities rather than asserting equivalent propositions.",
+            "item_sha256": "bd1183b1129fd983a4413171681b0861b4feb054f90a0fbf59468175f20eecea",
+            "row_sha256": "8e5904d070940e8a5191263b7cc5f0792fa10f21990d3dfc4e614c6134dc73b9"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This names the negative scalar loss derivative at each sample score and distinguishes score-space from model-parameter derivatives; it defines quantities rather than asserting equivalent propositions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "This names the negative scalar loss derivative at each sample score and distinguishes score-space from model-parameter derivatives; it defines quantities rather than asserting equivalent propositions.",
+            "item_sha256": "bd1183b1129fd983a4413171681b0861b4feb054f90a0fbf59468175f20eecea",
+            "row_sha256": "a3d236073c2eebe1df4ea36981092066c3bc0198363b5b3cc0e922b87b0b388c"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-pseudo-residuals-are-negative-score-gradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-gradient-pseudo-residual",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, let $(x_i,y_i)_{i=1}^N$ be a finite sample with $x_i\\in\\mathcal X$ and $y_i\\in\\mathcal Y$, let $f:\\mathcal X\\to\\mathbb R$ be a score function, and let $\\ell:\\mathcal Y\\times\\mathbb R\\to\\mathbb R$ be finite-valued. Assume that for each $i$, the one-variable function $t\\mapsto\\ell(y_i,t)$ is differentiable at $z_i=f(x_i)$. For a score vector $z=(z_1,\\ldots,z_N)$, define the empirical score loss $\\Phi(z)=\\sum_{i=1}^N\\ell(y_i,z_i)$. The pseudo-residual at observation $i$ for $f$ is\n\n$$r_i(f)=-\\left.\\frac{d}{dt}\\ell(y_i,t)\\right|_{t=f(x_i)}.$$\n\nThe sample-score gradient, when its coordinate partial derivatives exist, is the vector $\\nabla\\Phi(z)=(\\partial_{z_1}\\Phi(z),\\ldots,\\partial_{z_N}\\Phi(z))$. The sample pseudo-residual vector is $(r_1(f),\\ldots,r_N(f))$; the word “pseudo” distinguishes these score derivatives from derivatives with respect to parameters of a restricted model.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open in the metric induced by its Euclidean norm, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that for every $\\varepsilon>0$ there is $\\delta>0$ for which\n\n$$\\|f(a+h)-f(a)-Lh\\|_2\\le\\varepsilon\\|h\\|_2\\qquad\\text{whenever }a+h\\in U\\text{ and }\\|h\\|_2<\\delta.$$\n\nThe map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with the displayed remainder estimate for every $\\varepsilon>0$. At $h=0$ the remainder is zero because $L0=0$.\n\nFor $m\\ge1$, openness of $U$ provides admissible nonzero increments arbitrarily near zero, and dividing the estimate by $\\|h\\|_2>0$ gives the usual notation\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. Conversely this punctured normwise limit gives the estimate above (using a smaller positive tolerance if necessary). Thus the positive-dimensional definition is unchanged. This is the multivariate normwise remainder condition; no limit at an isolated point is asserted.\n\nWhen $m=0$, the Euclidean zero space consists only of $0$, so $a=0$ and $U=\\{0\\}$; its Euclidean norm and induced metric exist by [[def-norm-and-normed-space]]. The unique linear map $L:\\mathbb R^0\\to\\mathbb R^n$ sends $0$ to $0$, and its remainder is identically zero. It is therefore the total derivative by the displayed estimate, with any $\\delta>0$. When $n=0$, the unique map $f$ and the unique linear map into $\\mathbb R^0$ likewise have zero remainder, in every source dimension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric ([[lem-standard-basis-of-f-n]] clause 5, [[def-euclidean-inner-product]], [[def-norm-and-normed-space]]). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-and-loss-derivatives",
+          "claim": "For each $i$, let $\\pi_i(z)=z_i$ and $g_i(t)=\\ell(y_i,t)$. The coordinate projection has derivative $D\\pi_i(z)v=v_i$ because its linear approximation has zero remainder. Differentiability of $g_i$ at $z_i$ gives $g_i(z_i+u)=g_i(z_i)+\\partial_2\\ell(y_i,z_i)u+o(|u|)$, so $Dg_i(z_i)u=\\partial_2\\ell(y_i,z_i)u$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "coordinate-loss-composition",
+          "claim": "By the chain rule, $\\psi_i=g_i\\circ\\pi_i$ is totally differentiable and $D\\psi_i(z)v=\\partial_2\\ell(y_i,z_i)v_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "empirical-loss-derivative",
+          "claim": "Since $\\Phi=\\sum_{i=1}^N\\psi_i$, the finite-sum rule gives $D\\Phi(z)v=\\sum_{i=1}^N\\partial_2\\ell(y_i,z_i)v_i$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "gradient-pseudo-residual-identity",
+          "claim": "Evaluating step 3.1 on the coordinate direction that changes only $z_i$ gives the $i$-th partial derivative $\\partial_{z_i}\\Phi(z)=\\partial_2\\ell(y_i,z_i)$ by [F5] and [F6]. The gradient convention [F7] and pseudo-residual definition [F1] now give $\\nabla\\Phi(z)=(\\partial_2\\ell(y_i,z_i))_{i=1}^N$ and $(r_i)_{i=1}^N=-\\nabla\\Phi(z)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The explicit N>=1 hypothesis makes the score vector and its coordinate-loss sum nonempty; Proof 3.1 differentiates that finite sum and does not assert an N=0 extension.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The explicit N>=1 hypothesis makes the score vector and its coordinate-loss sum nonempty; Proof 3.1 differentiates that finite sum and does not assert an N=0 extension."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The explicit N>=1 hypothesis makes the score vector and its coordinate-loss sum nonempty; Proof 3.1 differentiates that finite sum and does not assert an N=0 extension.",
+            "item_sha256": "355d0157e44f873648827ac939ffcd3d4645007981fc136ae549ec29035e183d",
+            "row_sha256": "f24133fc3807448aceb22637b015ecadf3ffe8fbc346aae1b19e6d10d423256e"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If a scalar derivative at a coordinate is zero, the corresponding gradient and pseudo-residual coordinates are both zero; the formula has no denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 the finite sum is a single scalar loss and its gradient is its scalar derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated scores or sample points do not change the coordinatewise chain-rule and finite-sum argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The score vector lies in the open set U, so no boundary derivative is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All operations are finite sums and explicit coordinate projections; no axiom of choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proof differentiates each coordinate loss by the chain rule, sums those derivatives, and identifies the pseudo-residual vector as the negative gradient; it asserts an identity, not two implications.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The proof differentiates each coordinate loss by the chain rule, sums those derivatives, and identifies the pseudo-residual vector as the negative gradient; it asserts an identity, not two implications.",
+            "item_sha256": "355d0157e44f873648827ac939ffcd3d4645007981fc136ae549ec29035e183d",
+            "row_sha256": "18c6670c28c4a63b0f3240db096288f2c875e6ecb49d0cbd7bf5f7d60b293d1f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proof differentiates each coordinate loss by the chain rule, sums those derivatives, and identifies the pseudo-residual vector as the negative gradient; it asserts an identity, not two implications.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The proof differentiates each coordinate loss by the chain rule, sums those derivatives, and identifies the pseudo-residual vector as the negative gradient; it asserts an identity, not two implications.",
+            "item_sha256": "355d0157e44f873648827ac939ffcd3d4645007981fc136ae549ec29035e183d",
+            "row_sha256": "98640d4ccbe36986a59dc141c982d6608f9d624287e56352e336a3fd398ed6ee"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-adaboost-exponential-training-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "round-normalizer-minimum",
+          "claim": "The initial weights sum to $1$ by [F1]. Inductively assume the weights at round $m$ sum to $1$; by [F2], the total weights on correct and incorrect examples are $1-e_m$ and $e_m$. For a temporary coefficient $a\\ge0$, the exponential reweighting sum is $q_m(a)=(1-e_m)e^{-a}+e_me^a$. Its second derivative is positive, and $q_m'(a)=e_me^a-(1-e_m)e^{-a}$ vanishes uniquely at $a=\\frac12\\log((1-e_m)/e_m)>0$, which equals the algorithm's coefficient by [F3]. Substitution gives $q_m(a_m)=2\\sqrt{e_m(1-e_m)}=Z_m$. By [F4], the next weights divide the reweighted terms by this exact sum, so they also sum to $1$. Induction proves normalization at every round and the stated minimization formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "exponential-loss-product",
+          "claim": "Put $S_m=\\sum_i e^{-y_iF_m(x_i)}$. By [F1], $S_0=N$ and $w_i^{(1)}=e^{-y_iF_0(x_i)}/S_0$. If $w_i^{(m)}=e^{-y_iF_{m-1}(x_i)}/S_{m-1}$, then [F4] gives $w_i^{(m+1)}=e^{-y_iF_m(x_i)}/(S_{m-1}Z_m)$. Step 1.1 establishes that the weights normalize, so the update denominator is the sum of the reweighted terms and $S_m=S_{m-1}Z_m$. Induction yields $S_M=N\\prod_{m=1}^M Z_m$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonpositive-margin-bound",
+          "claim": "If $y_iF_M(x_i)\\le0$, then $e^{-y_iF_M(x_i)}\\ge1$; if the margin is positive, its indicator is zero. Hence each nonpositive-margin indicator is at most its exponential term, and summing and applying step 2.1 proves the stated bound. By [F5], a misclassified positive-label example has negative margin and a misclassified negative-label example has nonpositive margin, so training error is no larger than the bounded nonpositive-margin fraction.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The observation count remains N>=1, but the completed-round sequence may be empty: M=0 gives F_0=0, exponential sum N, product 1, and nonpositive-margin fraction 1. Proof 2.1 initializes precisely S_0=N.",
+          "evidence": "Statement and proof: The observation count remains N>=1, but the completed-round sequence may be empty: M=0 gives F_0=0, exponential sum N, product 1, and nonpositive-margin fraction 1. Proof 2.1 initializes precisely S_0=N."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For M=0 the empty product is 1, F_0=0, and the exponential identity and margin bound hold with equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For N=1 no deterministic completed weak round has error strictly between 0 and 1/2; the theorem is vacuous for M>0 and its M=0 case is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A zero-error round is excluded from the completed sequence and is handled by the algorithm's perfect-stop branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem assumes 0<e_m<1/2; e_m=0 stops and e_m>=1/2 fails the weak-learning condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The induction and finite product use no arbitrary choices or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Normalization and telescoping produce an exponential-loss identity, from which the margin and classification upper bounds follow; no converse to those sufficient bounds is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Normalization and telescoping produce an exponential-loss identity, from which the margin and classification upper bounds follow; no converse to those sufficient bounds is claimed.",
+            "item_sha256": "2b7ef49cac91453be699177e1bfb49535c6c3faeb81c191994220ab45c6cf337",
+            "row_sha256": "457eff39bbd847b2f9661ec3cc2af84a8da840851c36e2a0dd0b87269e9d3afc"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Normalization and telescoping produce an exponential-loss identity, from which the margin and classification upper bounds follow; no converse to those sufficient bounds is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Normalization and telescoping produce an exponential-loss identity, from which the margin and classification upper bounds follow; no converse to those sufficient bounds is claimed.",
+            "item_sha256": "2b7ef49cac91453be699177e1bfb49535c6c3faeb81c191994220ab45c6cf337",
+            "row_sha256": "215988cd210a5639bec5658511e3e7c4fa244a0e08d3efe4257ef5a2eaf09d9d"
+          }
+        }
+      ]
+    },
+    "alg-gradient-boosting": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The training sample and terminal leaf sample sets are nonempty, but M=0 is allowed: after the attained initial constant is chosen the loop is empty and its output is f_0.",
+          "evidence": "Definition: The training sample and terminal leaf sample sets are nonempty, but M=0 is allowed: after the attained initial constant is chosen the loop is empty and its output is f_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zero pseudo-residual targets give zero regression-leaf means; the separate attained loss minimizers are still required."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A one-observation tree has one nonempty leaf; the attained constant and leaf minimizations remain the required conditions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: If CART has no candidate split, it leaves the current nonempty node as a leaf and line minimization still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Leaf offsets range over all of R; no constrained endpoints are used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The run has finitely many rounds and leaves, so choosing one attained minimizer at each stage uses finite choice only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure builds CART regions and chooses attained leaf loss minimizers before updating scores; no converse criterion for empirical descent or generalization is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The procedure builds CART regions and chooses attained leaf loss minimizers before updating scores; no converse criterion for empirical descent or generalization is asserted.",
+            "item_sha256": "d50ad67c7aac29c943020407e7dd8b80e133ea4049c4e2453031b5035d949518",
+            "row_sha256": "a07dc1d3f3327e1a58dd8376c97d4567c6719ace7170f324c900e52cab98af1b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure builds CART regions and chooses attained leaf loss minimizers before updating scores; no converse criterion for empirical descent or generalization is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The procedure builds CART regions and chooses attained leaf loss minimizers before updating scores; no converse criterion for empirical descent or generalization is asserted.",
+            "item_sha256": "d50ad67c7aac29c943020407e7dd8b80e133ea4049c4e2453031b5035d949518",
+            "row_sha256": "47dfb8d73f066e96a647bf95a3ff4013149cb624560b074acd291a37cefc7a4e"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-gradient-boosting-empirical-loss-nonincreasing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-boosting",
+          "source_section": "Definition",
+          "quote": "Fix a finite regression sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathbb R^p$ for a finite $p\\ge1$, and $y_i\\in\\mathcal Y$. Let $\\ell:\\mathcal Y\\times\\mathbb R\\to\\mathbb R$ be a finite-valued per-observation loss, differentiable in its second argument at every score used. Choose a finite round count $M\\ge0$ and finite integer tree-depth cap $d_{\\max}\\ge0$. The algorithm is admissible only when the following required minima are attained: an initial constant minimizer and, at every round, a line minimizer in each terminal leaf. For any admitted run, choose any one such minimizer at each finite stage.\n\nInitialize $f_0(x)=c_0$ with\n$$c_0\\in\\arg\\min_{c\\in\\mathbb R}\\sum_{i=1}^N\\ell(y_i,c).$$\nFor each round $m=1,\\ldots,M$, perform the following steps.\n\n1. For each observation compute the negative score derivative\n$$r_{im}=-\\partial_2\\ell\\bigl(y_i,f_{m-1}(x_i)\\bigr).$$\n\n2. Run finite-depth CART regression-tree growth, using squared error and depth cap $d_{\\max}$, on the responses $r_{im}$ at features $x_i$. Let its nonempty terminal feature regions be $R_{1m},\\ldots,R_{J_m m}$; their training-index sets partition $\\{1,\\ldots,N\\}$. This tree fit approximates the unrestricted negative score gradient. Its fitted leaf means are used to determine the regression-tree fit and regions, but are not the boosting update offsets.\n\n3. For each leaf region choose an attained exact line minimizer\n$$\\gamma_{jm}\\in\\arg\\min_{\\gamma\\in\\mathbb R}\\sum_{i:x_i\\in R_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)+\\gamma\\bigr).$$\nIn particular, zero is an admissible comparison offset.\n\n4. Update\n$$f_m(x)=f_{m-1}(x)+\\sum_{j=1}^{J_m}\\gamma_{jm}\\mathbf 1\\{x\\in R_{jm}\\}.$$\n\nThe output is $f_M$. Because the run has finitely many rounds and finitely many leaves, choosing one attained minimizer at each stage requires no axiom of choice. The defined variant uses the full training sample and exact leafwise line minimization; shrinkage and subsampling are separate variants. This definition asserts no convergence or generalization result.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+          "source_section": "Statement",
+          "quote": "Fix a finite labeled sample, response mode, classification impurity criterion when needed, and finite maximum depth as in greedy CART growth. At any node where the procedure splits, its selected coordinate and midpoint threshold minimize the declared child-weighted empirical loss among all nonempty coordinate-threshold partitions of that node's sample, with the specified lexicographic tie rule. The procedure produces a finite tree of depth at most the maximum depth, with nonempty children at every split. This is a nodewise candidate-optimality result only; it gives no global tree-optimality claim.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-leaf-partition",
+          "claim": "Fix a completed round $m$. By [F2] and [F3], its leaf index sets $I_{jm}=\\{i:x_i\\in R_{jm}\\}$ are finitely many nonempty sets whose disjoint union is $\\{1,\\ldots,N\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "leafwise-zero-comparison",
+          "claim": "For every leaf $j$, its attained minimizer $\\gamma_{jm}$ has loss no greater than the admissible offset $0$, so $\\sum_{i\\in I_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)+\\gamma_{jm}\\bigr)\\le\\sum_{i\\in I_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)\\bigr)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "round-loss-monotonicity",
+          "claim": "By the update rule, each training score $f_m(x_i)$ uses the offset for its unique leaf. Summing the inequalities in step 2.1 over the partition in step 1.1 gives $L_m=\\sum_j\\sum_{i\\in I_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)+\\gamma_{jm}\\bigr)\\le\\sum_j\\sum_{i\\in I_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)\\bigr)=L_{m-1}$. Applying this to each of the finitely many rounds yields $L_M\\le L_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "Nonempty observations are partitioned into nonempty leaves for each completed round, as Proof 1.1 states. With no completed rounds the final inequality is L_0<=L_0 and there are no roundwise inequalities to check.",
+          "evidence": "Statement and proof: Nonempty observations are partitioned into nonempty leaves for each completed round, as Proof 1.1 states. With no completed rounds the final inequality is L_0<=L_0 and there are no roundwise inequalities to check."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If every selected offset is zero, each leaf comparison is equality and empirical loss is unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: With one observation there is one nonempty leaf, and its attained offset has loss no greater than the zero offset."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A single terminal leaf is still a nonempty partition, so the same zero-offset comparison applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Leaf offsets range over all of R and there are no constrained line-search endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Any attained minimizer in each of finitely many leaves gives the inequality; no axiom of choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Each attained leaf offset is compared with the admissible offset zero, and summing over disjoint leaves yields a one-way empirical-loss inequality; no necessity or converse descent criterion is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Each attained leaf offset is compared with the admissible offset zero, and summing over disjoint leaves yields a one-way empirical-loss inequality; no necessity or converse descent criterion is claimed.",
+            "item_sha256": "c21f8580c9456463f5e011f71a91d0efce593e23975dfb9df0737b0b8c72aba4",
+            "row_sha256": "a903300913c8e1da30b3f193acfac11db61309d492334c3e40fa0630bce7ac91"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Each attained leaf offset is compared with the admissible offset zero, and summing over disjoint leaves yields a one-way empirical-loss inequality; no necessity or converse descent criterion is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Each attained leaf offset is compared with the admissible offset zero, and summing over disjoint leaves yields a one-way empirical-loss inequality; no necessity or converse descent criterion is claimed.",
+            "item_sha256": "c21f8580c9456463f5e011f71a91d0efce593e23975dfb9df0737b0b8c72aba4",
+            "row_sha256": "a11497872d238682e5d29c7d8ea2f9c4ec1f5d998e4aff4380813830c8f6c4fa"
+          }
+        }
+      ]
+    },
+    "ex-adaboost-perfect-round-stops": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "perfect-error",
+          "claim": "Both predictions equal their labels, so the number of training mistakes is $0$ and $e_1=0$ for the initial uniform weights.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "perfect-stop",
+          "claim": "By [F1], the algorithm stops at this round and returns $h_1$; since both predictions match, its training error is $0$ and no logarithmic coefficient is evaluated.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example prescribes the positive-labeled observation at 0 and the negative-labeled observation at 1, both matched by h_1; removing all observations would not be this fixed execution.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The example prescribes the positive-labeled observation at 0 and the negative-labeled observation at 1, both matched by h_1; removing all observations would not be this fixed execution.",
+            "item_sha256": "c273bf25e11be13411f3643ce660624124e047fb0ee26e2c118303819313bb8d",
+            "row_sha256": "335c2ea28cffc59c20b136e2dc36e7bbf18767e17a8a6b989d58dfdeb0658658"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example is exactly the e_1=0 stop branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: One round suffices to exhibit the boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The two labels are opposite and the selected classifier matches both."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The zero-error endpoint is handled directly; no logarithm is evaluated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sample and classifier are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification computes e_1=0 for the two prescribed correct predictions and applies the perfect-round stop rule without evaluating a logarithmic coefficient; this specific execution has no converse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Verification computes e_1=0 for the two prescribed correct predictions and applies the perfect-round stop rule without evaluating a logarithmic coefficient; this specific execution has no converse implication.",
+            "item_sha256": "c273bf25e11be13411f3643ce660624124e047fb0ee26e2c118303819313bb8d",
+            "row_sha256": "69338f8a826f4dced47e4301a9a026fb7b4226101297fa4f0efc88f2c157a247"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification computes e_1=0 for the two prescribed correct predictions and applies the perfect-round stop rule without evaluating a logarithmic coefficient; this specific execution has no converse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Verification computes e_1=0 for the two prescribed correct predictions and applies the perfect-round stop rule without evaluating a logarithmic coefficient; this specific execution has no converse implication.",
+            "item_sha256": "c273bf25e11be13411f3643ce660624124e047fb0ee26e2c118303819313bb8d",
+            "row_sha256": "29c1e7c0a154050bfa61d833085ec20ab222e014e3f69c50dd73c0c9038f11f6"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-observation perfect round",
+          "method": "exact finite calculation",
+          "input": {
+            "labels": [
+              1,
+              -1
+            ],
+            "predictions": [
+              1,
+              -1
+            ],
+            "initial_weights": [
+              "1/2",
+              "1/2"
+            ]
+          },
+          "calculation": "Both observations are correctly classified, so e_1=0. The algorithm returns h_1 before evaluating a logarithmic coefficient.",
+          "expected": {
+            "weighted_error": 0,
+            "returned_classifier": "h_1",
+            "training_mistakes": 0,
+            "coefficient_formed": false
+          }
+        }
+      ]
+    },
+    "ex-adaboost-two-rounds-and-margin-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-adaboost-m1",
+          "source_section": "Definition",
+          "quote": "Fix a finite training sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathcal X$, and $y_i\\in\\{-1,+1\\}$, a finite round limit $M\\ge0$, and a weak-learning routine which at each requested round returns a classifier $h_m:\\mathcal X\\to\\{-1,+1\\}$ for the current observation weights. Initialize $w_i^{(1)}=1/N$ and $F_0(x)=0$. At round $m$, compute the weighted error $e_m=\\sum_{i=1}^N w_i^{(m)}\\mathbf 1\\{h_m(x_i)\\ne y_i\\}$. If $e_m=0$, halt and return $h_m$ itself as a perfect classifier with zero training error; do not form an infinite coefficient. If $e_m\\ge1/2$, halt and report that the weak-learning condition failed. For $0<e_m<1/2$, set\n\n$$a_m=\\frac12\\log\\frac{1-e_m}{e_m},\\qquad Z_m=2\\sqrt{e_m(1-e_m)},$$\n\nupdate $w_i^{(m+1)}=w_i^{(m)}\\exp(-a_my_ih_m(x_i))/Z_m$, and set $F_m(x)=F_{m-1}(x)+a_mh_m(x)$. After $M$ completed weak rounds, return the classifier $\\widehat y_M(x)=\\operatorname{sign}_+(F_M(x))$, where $\\operatorname{sign}_+(u)=+1$ for $u\\ge0$ and $-1$ for $u<0$. Thus ties are assigned to $+1$. The coefficient convention is the half-log convention; multiplying every coefficient by the same positive factor does not change the sign classifier. The definition makes no claim about test error or generalization.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-adaboost-exponential-training-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $M\\ge0$ be a finite sequence of completed rounds of finite-sample AdaBoost.M1, with weighted errors $0<e_m<1/2$, scores $F_M(x)=\\sum_{m=1}^M a_mh_m(x)$, and $Z_m=2\\sqrt{e_m(1-e_m)}$. Then\n\n$$\\sum_{i=1}^N e^{-y_iF_M(x_i)}=N\\prod_{m=1}^M Z_m$$\n\nand\n\n$$\\frac1N\\sum_{i=1}^N\\mathbf 1\\{y_iF_M(x_i)\\le0\\}\\le\\prod_{m=1}^M Z_m.$$\n\nThe empty product for $M=0$ is $1$. Under the algorithm's $+1$ tie rule, the empirical classification error is also at most this product. This is a finite training-margin bound only and makes no test-generalization claim.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-round-error-and-normalizer",
+          "claim": "Initially each weight is $1/4$. The first classifier misclassifies only observation $3$, so $e_1=1/4$, $a_1=\\frac12\\log 3$, and $Z_1=\\sqrt3/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "first-normalized-update",
+          "claim": "The first update gives weight $(1/4)e^{a_1}/Z_1=1/2$ to observation $3$ and weight $(1/4)e^{-a_1}/Z_1=1/6$ to each other observation, hence $w^{(2)}=(1/6,1/6,1/2,1/6)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-round-error-and-normalizer",
+          "claim": "Under $w^{(2)}$, the second classifier misclassifies only observation $1$, so $e_2=1/6$, $a_2=\\frac12\\log 5$, and $Z_2=\\sqrt5/3$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-normalized-update",
+          "claim": "The second update gives weight $1/2$ to observation $1$, $1/10$ to observations $2$ and $4$, and $3/10$ to observation $3$, so $w^{(3)}=(1/2,1/10,3/10,1/10)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "margins-and-product-check",
+          "claim": "The margins $y_iF_2(x_i)$ are respectively $a_1-a_2=\\frac12\\log(3/5)<0$, $a_1+a_2=\\frac12\\log15>0$, $a_2-a_1=\\frac12\\log(5/3)>0$, and $a_1+a_2>0$. Thus the nonpositive-margin fraction is $1/4$, while $Z_1Z_2=\\sqrt{15}/6$ and $1/4\\le\\sqrt{15}/6$. By [F2] this is within the theorem's empirical bound.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observations."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both weighted errors are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The two errors are e_1=1/4 and e_2=1/6, both in the required interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The two rounds misclassify different observations and all resulting weights are computed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: Neither weighted error equals 0 or 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sample labels and classifier predictions are fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The four fixed labels and two classifier vectors yield weighted errors 1/4 and 1/6, one nonpositive final margin, and normalizer product sqrt(15)/6; the item verifies these numbers rather than an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The four fixed labels and two classifier vectors yield weighted errors 1/4 and 1/6, one nonpositive final margin, and normalizer product sqrt(15)/6; the item verifies these numbers rather than an iff criterion.",
+            "item_sha256": "6f33c9740137fd529becad1622161bbabb25cbd2fccec215b63924c822c2b683",
+            "row_sha256": "336f146fe6a551b9caee957160bb4f9f9a4a522720af83e15b6f61a805488add"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The four fixed labels and two classifier vectors yield weighted errors 1/4 and 1/6, one nonpositive final margin, and normalizer product sqrt(15)/6; the item verifies these numbers rather than an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The four fixed labels and two classifier vectors yield weighted errors 1/4 and 1/6, one nonpositive final margin, and normalizer product sqrt(15)/6; the item verifies these numbers rather than an iff criterion.",
+            "item_sha256": "6f33c9740137fd529becad1622161bbabb25cbd2fccec215b63924c822c2b683",
+            "row_sha256": "c7fd59b5c13b616b9764226d1ffe959485ce63d67cc8579353159794c3045818"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "four-observation AdaBoost.M1 two-round arithmetic",
+          "method": "exact finite calculation",
+          "input": {
+            "labels": [
+              1,
+              1,
+              -1,
+              -1
+            ],
+            "round_1_predictions": [
+              1,
+              1,
+              1,
+              -1
+            ],
+            "round_2_predictions": [
+              -1,
+              1,
+              -1,
+              -1
+            ]
+          },
+          "calculation": "With uniform first weights, e_1=1/4, a_1=(1/2)log 3, Z_1=√3/2 and w^(2)=(1/6,1/6,1/2,1/6). Then e_2=1/6, a_2=(1/2)log 5, Z_2=√5/3 and w^(3)=(1/2,1/10,3/10,1/10). The margins are ((1/2)log(3/5),(1/2)log 15,(1/2)log(5/3),(1/2)log 15); exactly one is nonpositive. The product is Z_1 Z_2=√15/6, and 1/4≤√15/6 because 9/4≤15 after multiplying by 6 and squaring positive sides.",
+          "expected": {
+            "errors": [
+              "1/4",
+              "1/6"
+            ],
+            "weights_after_round_1": [
+              "1/6",
+              "1/6",
+              "1/2",
+              "1/6"
+            ],
+            "weights_after_round_2": [
+              "1/2",
+              "1/10",
+              "3/10",
+              "1/10"
+            ],
+            "nonpositive_margin_fraction": "1/4",
+            "normalizer_product": "√15/6",
+            "bound_holds": true
+          }
+        }
+      ]
+    },
+    "ex-gradient-boosting-zero-tree-direction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negative-gradient-pseudo-residual",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, let $(x_i,y_i)_{i=1}^N$ be a finite sample with $x_i\\in\\mathcal X$ and $y_i\\in\\mathcal Y$, let $f:\\mathcal X\\to\\mathbb R$ be a score function, and let $\\ell:\\mathcal Y\\times\\mathbb R\\to\\mathbb R$ be finite-valued. Assume that for each $i$, the one-variable function $t\\mapsto\\ell(y_i,t)$ is differentiable at $z_i=f(x_i)$. For a score vector $z=(z_1,\\ldots,z_N)$, define the empirical score loss $\\Phi(z)=\\sum_{i=1}^N\\ell(y_i,z_i)$. The pseudo-residual at observation $i$ for $f$ is\n\n$$r_i(f)=-\\left.\\frac{d}{dt}\\ell(y_i,t)\\right|_{t=f(x_i)}.$$\n\nThe sample-score gradient, when its coordinate partial derivatives exist, is the vector $\\nabla\\Phi(z)=(\\partial_{z_1}\\Phi(z),\\ldots,\\partial_{z_N}\\Phi(z))$. The sample pseudo-residual vector is $(r_1(f),\\ldots,r_N(f))$; the word “pseudo” distinguishes these score derivatives from derivatives with respect to parameters of a restricted model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pseudo-residuals-are-negative-score-gradient",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, let $(x_i,y_i)_{i=1}^N$ be a finite sample, let $f:\\mathcal X\\to\\mathbb R$, and let $U\\subseteq\\mathbb R$ be open with $z_i=f(x_i)\\in U$ for every $i$. Suppose each scalar loss $t\\mapsto\\ell(y_i,t)$ is defined on $U$ and differentiable at $z_i$. Write $\\partial_2\\ell(y_i,z_i)=\\left.\\frac{d}{dt}\\ell(y_i,t)\\right|_{t=z_i}$ and define $\\Phi:U^N\\to\\mathbb R$ by $\\Phi(w)=\\sum_{i=1}^N\\ell(y_i,w_i)$. Then $\\Phi$ is totally differentiable at $z$, its derivative in a score increment $v=(v_1,\\ldots,v_N)$ is\n\n$$D\\Phi(z)v=\\sum_{i=1}^N\\partial_2\\ell(y_i,z_i)v_i,$$\n\nand its Euclidean gradient is $\\nabla\\Phi(z)=(\\partial_2\\ell(y_i,z_i))_{i=1}^N$. Therefore the pseudo-residual vector associated with $f$ on this sample is exactly $-\\nabla\\Phi(z)$ in sample-score space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-decision-tree",
+          "source_section": "Definition",
+          "quote": "Fix a finite labeled sample $(x_i,y_i)_{i=1}^n$ with $n\\ge1$, $x_i\\in\\mathbb R^p$ and $p\\ge1$. In regression, $y_i\\in\\mathbb R$. In classification, the labels lie in a fixed ordered finite set $\\mathcal C=\\{c_1<\\cdots<c_K\\}$ with $K\\ge1$. A finite empirical axis-aligned binary decision tree has root sample-index set $I_{\\mathrm{root}}=\\{1,\\ldots,n\\}$. Each internal node $v$ stores a coordinate $j\\in\\{1,\\ldots,p\\}$ and threshold $t\\in\\mathbb R$; its left and right child sample sets are $I_v^L=\\{i\\in I_v:x_{ij}\\le t\\}$ and $I_v^R=\\{i\\in I_v:x_{ij}>t\\}$, and both are required to be nonempty. A leaf is a terminal node. The leaf sample sets partition $\\{1,\\ldots,n\\}$, and each node's feature region is the intersection of its path inequalities. Every input feature vector follows the unique path determined by the stored comparisons.\n\nFor a regression leaf with sample set $I$, put $N_I=|I|$, $\\bar y_I=N_I^{-1}\\sum_{i\\in I}y_i$, and $Q_I=N_I^{-1}\\sum_{i\\in I}(y_i-\\bar y_I)^2$; its prediction is $\\bar y_I$ and its total squared-error loss is $N_IQ_I$. For a classification leaf, put $p_{Ik}=N_I^{-1}|\\{i\\in I:y_i=c_k\\}|$ and predict the class $c_k$ with largest $p_{Ik}$, choosing the least index in a tie. Its optional impurities are misclassification $Q_I^{\\mathrm{mis}}=1-\\max_k p_{Ik}$, Gini $Q_I^{\\mathrm{Gini}}=1-\\sum_{k=1}^Kp_{Ik}^2$, and entropy $Q_I^{\\mathrm{ent}}=-\\sum_{k=1}^Kp_{Ik}\\log p_{Ik}$, where $\\log$ is the natural logarithm and $0\\log0=0$. A chosen classification criterion determines $Q_I$ and the corresponding total leaf impurity is $N_IQ_I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-cart-greedy-split",
+          "source_section": "Definition",
+          "quote": "The inputs are observations $(x_i,y_i)_{i=1}^n$ with $n\\ge1$ and $x_i\\in\\mathbb R^p$ for an integer $p\\ge1$, a response mode (regression with $y_i\\in\\mathbb R$ or classification with labels in a fixed finite ordered class set), a fixed classification impurity criterion when in classification mode, and a finite integer maximum depth $d_{\\max}\\ge0$. The root has sample set $\\{1,\\ldots,n\\}$ and depth $0$. At a current leaf with nonempty sample set $I$ and depth $d<d_{\\max}$, perform the following procedure.\n\n1. For each coordinate $j\\in\\{1,\\ldots,p\\}$, sort the distinct observed values in that coordinate as $u_1<\\cdots<u_r$. For each $k=1,\\ldots,r-1$, form the candidate threshold $t=(u_k+u_{k+1})/2$ and its child sets $I_L=\\{i\\in I:x_{ij}\\le t\\}$ and $I_R=\\{i\\in I:x_{ij}>t\\}$. These are the finite candidates at the node; if no coordinate has at least two distinct values, the candidate set is empty.\n\n2. For each candidate, compute its child score. In regression the score is $\\sum_{i\\in I_L}(y_i-\\bar y_{I_L})^2+\\sum_{i\\in I_R}(y_i-\\bar y_{I_R})^2$. In classification it is $|I_L|Q_{I_L}+|I_R|Q_{I_R}$ for the fixed chosen impurity criterion. Select the candidate with the smallest score; when scores tie, select the least pair $(j,k)$ by comparing coordinate first and cut index second.\n\n3. Store the selected coordinate and threshold at the current node, create its left and right children, and apply this procedure to the left child and then the right child at depth $d+1$. If $d=d_{\\max}$ or the candidate set is empty, leave the current node as a leaf.\n\nThe output is the finite tree whose leaves use the regression means or classification majority labels from the empirical decision-tree definition. No strictly positive loss reduction is required for a split below the depth cap, and the returned tree is not asserted to be globally optimal among all trees.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-gradient-boosting",
+          "source_section": "Definition",
+          "quote": "Fix a finite regression sample $(x_i,y_i)_{i=1}^N$ with $N\\ge1$, $x_i\\in\\mathbb R^p$ for a finite $p\\ge1$, and $y_i\\in\\mathcal Y$. Let $\\ell:\\mathcal Y\\times\\mathbb R\\to\\mathbb R$ be a finite-valued per-observation loss, differentiable in its second argument at every score used. Choose a finite round count $M\\ge0$ and finite integer tree-depth cap $d_{\\max}\\ge0$. The algorithm is admissible only when the following required minima are attained: an initial constant minimizer and, at every round, a line minimizer in each terminal leaf. For any admitted run, choose any one such minimizer at each finite stage.\n\nInitialize $f_0(x)=c_0$ with\n$$c_0\\in\\arg\\min_{c\\in\\mathbb R}\\sum_{i=1}^N\\ell(y_i,c).$$\nFor each round $m=1,\\ldots,M$, perform the following steps.\n\n1. For each observation compute the negative score derivative\n$$r_{im}=-\\partial_2\\ell\\bigl(y_i,f_{m-1}(x_i)\\bigr).$$\n\n2. Run finite-depth CART regression-tree growth, using squared error and depth cap $d_{\\max}$, on the responses $r_{im}$ at features $x_i$. Let its nonempty terminal feature regions be $R_{1m},\\ldots,R_{J_m m}$; their training-index sets partition $\\{1,\\ldots,N\\}$. This tree fit approximates the unrestricted negative score gradient. Its fitted leaf means are used to determine the regression-tree fit and regions, but are not the boosting update offsets.\n\n3. For each leaf region choose an attained exact line minimizer\n$$\\gamma_{jm}\\in\\arg\\min_{\\gamma\\in\\mathbb R}\\sum_{i:x_i\\in R_{jm}}\\ell\\bigl(y_i,f_{m-1}(x_i)+\\gamma\\bigr).$$\nIn particular, zero is an admissible comparison offset.\n\n4. Update\n$$f_m(x)=f_{m-1}(x)+\\sum_{j=1}^{J_m}\\gamma_{jm}\\mathbf 1\\{x\\in R_{jm}\\}.$$\n\nThe output is $f_M$. Because the run has finitely many rounds and finitely many leaves, choosing one attained minimizer at each stage requires no axiom of choice. The defined variant uses the full training sample and exact leafwise line minimization; shrinkage and subsampling are separate variants. This definition asserts no convergence or generalization result.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. For $n\\ge1$, these are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].\n\nFor $n=0$, use the zero-space case directly, without invoking that supplier's positive-codomain standing hypothesis. The space $\\mathbb R^0$ has only its zero vector and carries the zero Euclidean norm and its induced metric ([[lem-standard-basis-of-f-n]] clause 5, [[def-euclidean-inner-product]], [[def-norm-and-normed-space]]). Whenever the line map is defined near $0$, every difference quotient for real $t\\ne0$ is this zero vector; define $D_vf(a)=0$. This is the unique possible derivative value, and its normwise difference-quotient error is exactly zero for all such $t$, so the real parameter still approaches an actual limit point. Every existing coordinate direction therefore has $\\partial_jf(a)=0$; these zero-valued partial maps are continuous in the induced norm metrics. If the source dimension is zero, there are no partial indices and the sole direction is $v=0$; its constant line map is defined near $0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "initial-minimizer-and-residuals",
+          "claim": "For any constant $c$, the initial empirical loss is $\\frac12(c-1)^2+\\frac12(c+1)^2=c^2+1$, so $c_0=0$ is an attained minimizer. At these scores, [F1] gives residuals $r_1=1$ and $r_2=-1$, and [F2] gives $\\nabla\\Phi(0)=(-1,+1)\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "depth-zero-fit",
+          "claim": "With depth cap $0$, [F4] leaves the root as a single terminal leaf; by [F3] it contains both observations. Its regression prediction is their residual mean $(1+(-1))/2=0$, so the fitted direction on the sample is $u=(0,0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-direction-derivative",
+          "claim": "Since $tu=(0,0)$ for every real $t$, the line map in [F6] is constant and its derivative is $0$. Thus $u$ is not a strict descent direction, even though the unrestricted gradient in step 1.1 is nonzero.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "exact-leaf-loss",
+          "claim": "The sole leaf's loss at offset $\\gamma$ is $\\frac12(\\gamma-1)^2+\\frac12(\\gamma+1)^2=\\gamma^2+1$, whose attained minimum is $1$ at $\\gamma=0$. By [F5], the algorithm updates neither training score, so the loss remains $1$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both training points are retained in the unique depth-zero leaf, producing the residual cancellation (1+(-1))/2=0 in Verification 2.1; there is no empty observation set or empty leaf in this example.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Both training points are retained in the unique depth-zero leaf, producing the residual cancellation (1+(-1))/2=0 in Verification 2.1; there is no empty observation set or empty leaf in this example.",
+            "item_sha256": "da5d62dfab31ddd08f0aed1be83e955a6405689674d84476290a27ecd3d262b8",
+            "row_sha256": "acf0829e53477ee7adb1ca749da999127462304a63dda6f3094aad2aae30783c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The fitted tree direction and exact leaf offset are zero, so loss is unchanged."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Two observations are used so their residuals cancel in one leaf."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The depth cap zero deliberately gives one terminal region containing both observations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The leaf offset ranges over R and its quadratic loss attains its minimum at zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The squared-loss leaf minimizer is unique and all other data are fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The depth-zero leaf averages residuals (1,-1) to the zero vector although the score gradient is nonzero; its constant line loss gamma squared plus one proves stagnation in this example, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The depth-zero leaf averages residuals (1,-1) to the zero vector although the score gradient is nonzero; its constant line loss gamma squared plus one proves stagnation in this example, not a biconditional.",
+            "item_sha256": "da5d62dfab31ddd08f0aed1be83e955a6405689674d84476290a27ecd3d262b8",
+            "row_sha256": "65c703624e79f69d1175aa5d1a2879e4f5f917465f1512803bd211ef2b212888"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The depth-zero leaf averages residuals (1,-1) to the zero vector although the score gradient is nonzero; its constant line loss gamma squared plus one proves stagnation in this example, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The depth-zero leaf averages residuals (1,-1) to the zero vector although the score gradient is nonzero; its constant line loss gamma squared plus one proves stagnation in this example, not a biconditional.",
+            "item_sha256": "da5d62dfab31ddd08f0aed1be83e955a6405689674d84476290a27ecd3d262b8",
+            "row_sha256": "ac42204df8da23f9719c43d58414585c85e242220089ed440eb0374a83df24a6"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-point squared-loss zero tree direction",
+          "method": "exact finite calculation",
+          "input": {
+            "features": [
+              0,
+              1
+            ],
+            "labels": [
+              1,
+              -1
+            ],
+            "initial_scores": [
+              0,
+              0
+            ],
+            "depth_cap": 0,
+            "loss": "(z-y)^2/2"
+          },
+          "calculation": "The constant loss is c^2+1, minimized at c=0. The negative derivatives are (1,-1), the one-leaf CART mean is 0, and the unrestricted score gradient is (-1,1). Hence the fitted vector has directional derivative 0. Its leaf offset loss is γ^2+1, minimized at γ=0, so the empirical loss remains 1.",
+          "expected": {
+            "initial_constant": 0,
+            "pseudo_residuals": [
+              1,
+              -1
+            ],
+            "fitted_direction": [
+              0,
+              0
+            ],
+            "score_gradient": [
+              -1,
+              1
+            ],
+            "directional_derivative": 0,
+            "leaf_offset": 0,
+            "empirical_loss": 1
+          }
+        }
+      ]
+    }
+  }
+}

@@ -17,6 +17,7 @@ forward_refs: [lem-factorial-beats-geometric, def-monoid-finite-product]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-factorial-and-falling-factorial.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -38,10 +39,10 @@ pipeline_run: null
 
 ## Definition
 
-**The factorial.** By the recursion theorem ([[thm-recursion]]) applied to the
+**The factorial.** By the recursion theorem (The recursion theorem) applied to the
 set $\mathbb{N}\times\mathbb{N}$, the starting element $(0,1)$ and the function
 $f(k, v) = (\sigma(k),\, v \cdot \sigma(k))$, and by the same induction on the
-first coordinate as in [[def-nat-finite-sum-and-product]], there is a unique
+first coordinate as in Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$, there is a unique
 $F : \mathbb{N} \to \mathbb{N}$ with
 
 $$F(0) = 1, \qquad F(\sigma(n)) = F(n)\cdot\sigma(n) \quad (n \in \mathbb{N}).$$
@@ -54,7 +55,7 @@ elsewhere. Nothing about empty products is presupposed; the agreement with the
 empty product is proved below, in clause (a), rather than assumed.
 
 **Truncated difference.** Throughout, $n - k$ is the operation fixed in
-[[def-nat-finite-sum-and-product]]: the unique $j$ with $k + j = n$ when
+Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$: the unique $j$ with $k + j = n$ when
 $k \le n$, and $0$ when $n < k$.
 
 **The falling factorial.** For $n \in \mathbb{N}$ define $n^{\underline{k}}$ by
@@ -72,18 +73,18 @@ factors.
 
 **(a) The factorial is the product of the first $n$ positive naturals.**
 $n! = \prod_{j<n}\sigma(j) = \prod_{j<n}(j+1)$, the $\mathbb{N}$-valued product of
-[[def-nat-finite-sum-and-product]]. Induction ([[thm-induction-principle]]): at
+Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$. Induction (The principle of mathematical induction): at
 $n = 0$ both sides are $1$, the empty product and the base clause agreeing; and
 $\prod_{j<\sigma(n)}\sigma(j) = \big(\prod_{j<n}\sigma(j)\big)\cdot\sigma(n) = n!\cdot\sigma(n) = \sigma(n)!$.
 **So the empty-product reading and the base-clause reading are the same reading**,
 and neither was assumed.
 
 **(b) $n! \ne 0$, and $\iota(n!) = \prod^{\mathbb{R}}_{j<n}\iota(j+1)$.** For the
-first, $0! = 1 \ne 0$ ([[thm-omega-is-peano-system]]) and
+first, $0! = 1 \ne 0$ (The von Neumann naturals form a Peano system) and
 $\sigma(n)! = n!\cdot\sigma(n)$ is a product of two nonzero naturals, which is
 nonzero: if $xy = 0$ with $y \ne 0$ then $xy = 0\cdot y$
-([[lem-nat-mult-identity]]) and cancellation gives $x = 0$
-([[lem-nat-mult-cancellative]]). So $n! \ne 0$ for every $n$ by induction. For the second, apply the bridge clause
+(Zero and one under multiplication) and cancellation gives $x = 0$
+(Cancellation for multiplication by a nonzero factor). So $n! \ne 0$ for every $n$ by induction. For the second, apply the bridge clause
 6 of that lemma to clause (a) above. This is what makes the factorial of this
 page and the real-valued product $\prod_{j<n}(j+1)$ used elsewhere in the library
 **one object seen twice**, rather than two unrelated notions.
@@ -92,11 +93,11 @@ page and the real-valued product $\prod_{j<n}(j+1)$ used elsewhere in the librar
 all $n$ at once. At $k = 0$ this reads $1 \cdot n! = n!$. Assume it at $k$ and
 let $\sigma(k) \le n$; then $k \le n$, and writing $d := n - k$ we have
 $k + d = n$ and $d \ne 0$, since $k + 0 = k \ne n$; so $d = \sigma(e)$ for a
-unique $e$ ([[lem-nat-nonzero-is-successor]]), and $\sigma(k) + e = n$, that is
-$e = n - \sigma(k)$ ([[lem-nat-add-cancellative]]). Therefore
+unique $e$ (Every nonzero natural number is a successor), and $\sigma(k) + e = n$, that is
+$e = n - \sigma(k)$ (Addition is cancellative). Therefore
 $n^{\underline{\sigma(k)}}\cdot\big(n-\sigma(k)\big)! = n^{\underline{k}}\cdot(n-k)\cdot e! = n^{\underline{k}}\cdot\big(e!\cdot\sigma(e)\big) = n^{\underline{k}}\cdot\sigma(e)! = n^{\underline{k}}\cdot(n-k)! = n!$,
 using commutativity and associativity of multiplication
-([[lem-nat-mult-associative]], [[lem-nat-mult-commutative]]) and the recursion
+(Multiplication is associative, Multiplication is commutative) and the recursion
 clause for the factorial.
 
 **(d) Boundary values.** $n^{\underline{0}} = 1$ for every $n$, by the base
@@ -104,10 +105,34 @@ clause; $n^{\underline{n}} = n!$, since clause (c) at $k = n$ gives
 $n^{\underline{n}}\cdot 0! = n!$ and $0! = 1$; and
 $n^{\underline{k}} = 0$ whenever $k > n$. For the last, $n - n = 0$ gives
 $n^{\underline{\sigma(n)}} = n^{\underline{n}}\cdot 0 = 0$, the clause
-$x \cdot 0 = 0$ being definitional ([[def-nat-multiplication]]), and if
+$x \cdot 0 = 0$ being definitional (Multiplication of natural numbers), and if
 $n^{\underline{k}} = 0$ then
 $n^{\underline{\sigma(k)}} = 0$ as well, so $n^{\underline{k}} = 0$ for every
 $k \ge \sigma(n)$ by induction.
+
+## Definition references
+
+[[thm-recursion]]
+
+[[def-nat-finite-sum-and-product]]
+
+[[thm-induction-principle]]
+
+[[thm-omega-is-peano-system]]
+
+[[lem-nat-mult-identity]]
+
+[[lem-nat-mult-cancellative]]
+
+[[lem-nat-nonzero-is-successor]]
+
+[[lem-nat-add-cancellative]]
+
+[[lem-nat-mult-associative]]
+
+[[lem-nat-mult-commutative]]
+
+[[def-nat-multiplication]]
 
 ## Remarks
 

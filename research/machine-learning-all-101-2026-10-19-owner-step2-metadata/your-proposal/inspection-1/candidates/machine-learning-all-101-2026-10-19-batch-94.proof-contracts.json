@@ -1,0 +1,851 @@
+{
+  "version": 1,
+  "scope": [
+    "def-attention-block-summary",
+    "alg-exact-tiled-softmax-attention",
+    "thm-tiled-attention-exactness",
+    "thm-tiled-attention-workspace-and-work",
+    "rem-attention-io-model-and-roundoff",
+    "ex-tiled-attention-one-key",
+    "ex-tiled-attention-empty-first-masked-block",
+    "ex-tiled-attention-two-merge-orders",
+    "ex-tiled-attention-replay-dropout-mask"
+  ],
+  "contracts": {
+    "def-attention-block-summary": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition supplies a separate empty symbol and no proof or verification section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This is a definition of finite summaries and contains no zero-parameter claim or proof."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is a definition and states no theorem about a one-key input."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This is a definition and contains no degenerate-case proof obligation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or boundary regularity claim occurs in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses only finite subsets and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ]
+    },
+    "alg-exact-tiled-softmax-attention": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition steps 1–2 initialize with the separate symbol bot and skip an empty allowed block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition accepts c=0 and zero-valued Q,K,V; its finite loops and division rule are unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition steps 1–3 process the unique nonempty block when n=b=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition permits sparse allowed sets and b greater than n; the finite block partition still terminates and the reverse loop still accumulates only allowed pairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only positive integer dimensions and block size are admissible; no continuous endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All loops are over explicit finite index sets and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        }
+      ]
+    },
+    "thm-tiled-attention-exactness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-scaled-dot-product-attention",
+          "source_section": "Definition",
+          "quote": "Let $n_q,n_k,d_k,d_v$ be positive integers, let $Q\\in\\mathbb R^{n_q\\times d_k}$ and $K\\in\\mathbb R^{n_k\\times d_k}$ be query and key matrices, and let $V\\in\\mathbb R^{n_k\\times d_v}$ be a value matrix. For a real matrix $S$ with $n_q$ rows and $n_k$ columns, define its row softmax by $\\operatorname{softmax}_{\\rm row}(S)_{ij}=\\exp(S_{ij})/\\sum_{\\ell=1}^{n_k}\\exp(S_{i\\ell})$. The scaled dot-product attention output is\n\n$$\n\\operatorname{Attn}(Q,K,V)=\\operatorname{softmax}_{\\rm row}\\!\\left(\\frac{QK^{\\mathsf T}}{\\sqrt{d_k}}\\right)V\\in\\mathbb R^{n_q\\times d_v}.\n$$\n\nEach output row is the weighted average of the value rows, with weights given by the softmax of that query's scaled dot products with all keys. A mask is an array $M\\in(\\mathbb R\\cup\\{-\\infty\\})^{n_q\\times n_k}$ whose entries are $0$ for allowed query-key pairs and $-\\infty$ for disallowed pairs; masked attention replaces the score matrix by $QK^{\\mathsf T}/\\sqrt{d_k}+M$ before row softmax and is defined only when every row has at least one allowed key. Here $\\exp(-\\infty)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-attention-block-summary",
+          "source_section": "Definition",
+          "quote": "Let $n,d,v$ be positive integers, let $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, let $c\\in\\mathbb R$, and for each query row $i\\in\\{1,\\ldots,n\\}$ let $A_i\\subseteq\\{1,\\ldots,n\\}$ be a nonempty set of allowed keys. Write $q_i$ for row $i$ of $Q$, $k_j$ for row $j$ of $K$, $v_j$ for row $j$ of $V$, and $s_{ij}=c\\sum_{r=1}^{d}Q_{ir}K_{jr}$ for $j\\in A_i$. For a nonempty finite set $S\\subseteq A_i$, its attention summary is\n\n$$\n\\Sigma_i(S)=(m_i(S),\\ell_i(S),z_i(S)),\\qquad m_i(S)=\\max_{j\\in S}s_{ij},\\quad \\ell_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)},\\quad z_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)}v_j.\n$$\n\nThe empty set has the separate state $\\bot$ and has no maximum or numeric summary coordinates. For disjoint nonempty $S,T\\subseteq A_i$, define their merge by\n\n$$\nm'=\\max(m_i(S),m_i(T)),\\qquad \\ell'=e^{m_i(S)-m'}\\ell_i(S)+e^{m_i(T)-m'}\\ell_i(T),\\qquad z'=e^{m_i(S)-m'}z_i(S)+e^{m_i(T)-m'}z_i(T).\n$$\n\nand set $\\Sigma_i(S)\\star\\Sigma_i(T)=(m',\\ell',z')$. This summary stores the maximum score, a positive shifted normalizer, and the correspondingly shifted weighted value sum; dividing its third coordinate by its second gives the attention output on $S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-straight-line-computational-program",
+          "source_section": "Definition",
+          "quote": "Fix an input dimension $n\\ge0$, finitely many operation nodes $1,\\ldots,T$, and a designated output node $o$, either an input coordinate or an operation, whose value space is $\\mathbb R$. Give input coordinate $i$ a label $\\mathrm{in}_i$ distinct from all operation indices, and set $z_{\\mathrm{in}_i}=x_i$ and $E_{\\mathrm{in}_i}=\\mathbb R$ with its standard Euclidean inner product. Operation node $j$ has an ordered list of parent slots $p_{j,1},\\ldots,p_{j,r_j}$; each slot is either an input label $\\mathrm{in}_i$ or an operation index $\\ell<j$. Repeated parent slots are allowed and count separately. The graph is a finite straight-line program because every operation reads only earlier values and there are no data-dependent loops.\n\nFor each operation $j$, choose a dimension $d_j\\ge0$, set $E_j=\\mathbb R^{d_j}$ with its standard Euclidean inner product, take an open set $U_j\\subseteq E_{p_{j,1}}\\times\\cdots\\times E_{p_{j,r_j}}$ with the product inner product, and choose a primitive map $\\phi_j:U_j\\to E_j$. A smooth primitive is $C^1$: it is totally differentiable and its derivative matrix is continuous. For Hessian-vector products require the primitive to be $C^2$, meaning $C^1$ with a continuously differentiable derivative map. Derivatives are represented in these coordinates, and every transpose is the Euclidean transpose for the stated inner products; the gradient of a scalar output is the Euclidean gradient. The real-arithmetic primal recursion is $z_j=\\phi_j(z_{p_{j,1}},\\ldots,z_{p_{j,r_j}})$ whenever the parent tuple lies in $U_j$. Its admissible input domain is the set of $x\\in\\mathbb R^n$ for which every operation in this recursion is defined. The graph's scalar output function $f$ is the value at $o$: it is $x_i$ when $o$ is input coordinate $i$, and $z_j$ when $o$ is operation node $j$.\n\nThe **primal tape** is the finite ordered record of input and node values, parent-slot indices, primitive identities, and (when applicable) selected branch labels. A deterministic replay starts from the identical checkpoint state and applies the identical primitive maps in the identical order, so it reproduces the same real-arithmetic values and local derivative inputs. Opaque solver calls are not primitive operations unless their complete deterministic map and derivative rule are explicitly supplied.\n\nA piecewise-$C^1$ primitive is specified by finitely many open branch regions and a $C^1$ formula on each region; its primal boundary value, if any, is specified separately. If the current parent tuple lies strictly inside exactly one declared branch, the program uses that branch and its derivative. At a branch boundary or ambiguous branch selection, forward or reverse AD returns NONDIFFERENTIABLE; it does not silently choose a subgradient or generalized derivative. If no primal value is specified at a boundary, that input is outside the program's domain. All correctness theorems below apply on a fixed strict branch. The same convention applies to piecewise-$C^2$ primitives for Hessian-vector products.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-backpropagation-through-shared-parameter-recurrence",
+          "source_section": "Definition",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, let $T\\ge0$ be an integer, and fix $\\theta\\in\\Theta$. A map is continuously differentiable here when it is totally differentiable at every point of its open domain and its derivative matrix varies continuously there. A finite shared-parameter recurrence consists of an initial-state map $h_0:\\Theta\\to H$, transition maps $\\Phi_t:\\Theta\\times H\\to H$ for $t=1,\\ldots,T$, and a scalar loss $\\ell:\\Theta\\times H\\to\\mathbb R$, all continuously differentiable on open domains containing the evaluated inputs. Put $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. A fixed collection of external inputs, such as the observations at successive time steps, may be built into the maps $\\Phi_t$. The same parameter vector $\\theta$ is supplied to every transition.\n\nFor each map, its registered local derivative is the total derivative with respect to the indicated variable while the other displayed variables are held fixed. Transposes are Euclidean adjoints for the stated coordinate inner products. Evaluate and store $h_0,h_1,\\ldots,h_T$. If a map is undefined, return DOMAIN_ERROR. For piecewise-$C^1$ maps, use only the derivative on a unique strict active branch; if any evaluated input lies on a branch boundary or has ambiguous branch selection, return NONDIFFERENTIABLE and no gradient.\n\nInitialize $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and $g=(D_\\theta\\ell(\\theta,h_T))^T$. For $t=T,T-1,\\ldots,1$, set $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$, $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, then update\n\n$$g\\leftarrow g+A_t^T\\lambda_t,\\qquad \\lambda_{t-1}=B_t^T\\lambda_t.$$\n\nAfter the reverse sweep, set $g\\leftarrow g+(Dh_0(\\theta))^T\\lambda_0$ and return $(J(\\theta),g)$. For $T=0$, the reverse loop is empty and the same initialization and final update apply. All derivative calculations in this procedure are real-arithmetic operations on the specified maps; no floating-point accuracy guarantee is asserted.\n\nThe diagram shows the finite unrolling: arrows point from an input value to the operation that uses it. The single $\\theta$ node feeds each transition and the loss, so the reverse updates add all of those contributions into the same accumulator $g$; the $h_t$ cotangents flow from right to left. The diagram illustrates the algorithm, and no correctness proof relies on it.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.55cm]\n  \\node[draw,circle] (theta) {$\\theta$};\n  \\node[draw,rectangle,right of=theta,xshift=0.4cm] (h0) {$h_0(\\theta)$};\n  \\node[draw,rectangle,right of=h0,xshift=0.65cm] (phi1) {$\\Phi_1$};\n  \\node[draw,rectangle,right of=phi1,xshift=0.65cm] (h1) {$h_1$};\n  \\node[draw,rectangle,right of=h1,xshift=0.65cm] (phi2) {$\\Phi_2$};\n  \\node[right of=phi2,xshift=0.35cm] (dots) {$\\cdots$};\n  \\node[draw,rectangle,right of=dots,xshift=0.35cm] (phit) {$\\Phi_T$};\n  \\node[draw,rectangle,right of=phit,xshift=0.65cm] (ht) {$h_T$};\n  \\node[draw,rectangle,right of=ht,xshift=0.65cm] (loss) {$\\ell(\\theta,h_T)$};\n  \\draw[->] (theta) -- (h0);\n  \\draw[->] (h0) -- (phi1);\n  \\draw[->] (theta) to[bend left=30] (phi1);\n  \\draw[->] (phi1) -- (h1);\n  \\draw[->] (h1) -- (phi2);\n  \\draw[->] (theta) to[bend left=42] (phi2);\n  \\draw[->] (phi2) -- (dots);\n  \\draw[->] (dots) -- (phit);\n  \\draw[->] (theta) to[bend left=55] (phit);\n  \\draw[->] (phit) -- (ht);\n  \\draw[->] (ht) -- (loss);\n  \\draw[->] (theta) to[bend left=68] (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and\n\n$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$\n\nwhere the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "summary-invariant",
+          "claim": "Fix a query row $i$ and let $S$ be the union of the allowed keys in the blocks processed so far. Initially $S=\\varnothing$ and the algorithm's state is $\\bot$. An empty allowed block leaves both $S$ and the state unchanged. If $S=\\varnothing$ and the next allowed block $I$ is nonempty, copying $\\Sigma_i(I)$ gives the defining summary of $S\\cup I$. If $S$ and $I$ are both nonempty, the merged maximum is $\\max(m_i(S),m_i(I))=m_i(S\\cup I)$, and $e^{m_i(S)-m_i(S\\cup I)}\\ell_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S\\cup I)}$ while $e^{m_i(I)-m_i(S\\cup I)}\\ell_i(I)=\\sum_{j\\in I}e^{s_{ij}-m_i(S\\cup I)}$. The same two identities with $V_j$ inside each sum give the merged $z$ coordinate. Disjoint blocks therefore preserve the summary invariant.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "dense-output",
+          "claim": "The key blocks partition $\\{1,\\ldots,n\\}$, so after the last block $S=A_i\\ne\\varnothing$. The maximum $m_i$ is finite and at least one term in $\\ell_i=\\sum_{j\\in A_i}e^{s_{ij}-m_i}$ equals $1$, hence $\\ell_i>0$. Dividing $z_i$ by $\\ell_i$ and multiplying numerator and denominator by $e^{m_i}$ gives the displayed dense masked attention row. This also proves every retained $m_i,\\ell_i$ is defined.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "smooth-dense-graph",
+          "claim": "With the allowed sets fixed, every score is a polynomial in the entries of $Q,K$; finite exponentials, sums, and division by the strictly positive dense denominator make the dense row map smooth on all of $\\mathbb R^{n(2d+v)}$. Its scalarization $\\Phi$ is therefore a finite $C^1$ real-arithmetic graph. The reverse-mode theorem and chain rule apply to this dense graph; the maximum used only to scale the tiled forward computation is not a primitive of this graph.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "softmax-pullback",
+          "claim": "For $j,k\\in A_i$, write $p_{ij}=e^{s_{ij}}/\\sum_{\\ell\\in A_i}e^{s_{i\\ell}}$, as justified by step 2.1. Direct quotient differentiation gives $\\frac{\\partial p_{ik}}{\\partial s_{ij}}=p_{ik}\\bigl(\\mathbf 1_{\\{k=j\\}}-p_{ij}\\bigr)$. Thus for $\\Phi_i=\\sum_aG_{ia}Y_{ia}$ the score derivative is $\\frac{\\partial\\Phi_i}{\\partial s_{ij}}=\\sum_{k\\in A_i}(\\sum_aG_{ia}V_{ka})\\frac{\\partial p_{ik}}{\\partial s_{ij}}=p_{ij}(\\sum_aG_{ia}V_{ja}-\\sum_aG_{ia}Y_{ia})=\\gamma_{ij}$. The direct value derivative is $\\nabla_{V_j}\\Phi_i=p_{ij}G_i$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "score-pullback",
+          "claim": "Since $s_{ij}=c\\sum_rQ_{ir}K_{jr}$, its coordinate derivatives are $\\partial s_{ij}/\\partial Q_{ir}=cK_{jr}$ and $\\partial s_{ij}/\\partial K_{jr}=cQ_{ir}$. The chain rule therefore gives the row-$i$ contributions $c\\sum_{j\\in A_i}\\gamma_{ij}K_j$ to $Q_i$, $c\\gamma_{ij}Q_i$ to $K_j$, and $p_{ij}G_i$ to $V_j$. Entries of other query rows receive no contribution from this row.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "shared-gradient-accumulation",
+          "claim": "Set $\\Theta=\\mathbb R^{2nd+nv}$, $H=\\mathbb R$, $h_0(\\theta)=0$, $F_i(\\theta,h)=h+\\sum_aG_{ia}Y_{ia}(\\theta)$ for $i=1,\\ldots,n$, and terminal loss $\\lambda(\\theta,h)=h$. Step 3.1 makes every $F_i$ continuously differentiable on the open domain $\\Theta\\times H$. By induction on $i$, the recurrence state after $i$ transitions is $h_i=\\sum_{r=1}^{i}\\sum_aG_{ra}Y_{ra}(\\theta)$: the formula holds at $i=0$ because $h_0=0$, and adding the $i$th transition term proves it at $i$ from its value at $i-1$. Thus its scalar output is $h_n=\\Phi(\\theta)$. The same parameter $\\theta=(Q,K,V)$ is supplied at every transition, and the shared-parameter gradient formula sums each transition's parameter pullback. It therefore adds each row's pullback at the common $K,V$ inputs, while the row-specific $Q_i$ pullbacks occupy their corresponding rows. There is no direct loss or initial-state parameter term because $\\lambda$ is $h$ and $h_0$ is constant. Thus the algorithm's reverse updates give $\\nabla_Q\\Phi,\\nabla_K\\Phi,\\nabla_V\\Phi$.",
+          "step": "6.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "frozen-shift-ties",
+          "claim": "At the forward values, the summary invariant in steps 1.1–2.1 gives $\\ell_i=\\sum_{j\\in A_i}e^{s_{ij}-m_i}$. Therefore, for each $j\\in A_i$,\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i}=\\frac{e^{s_{ij}}}{\\sum_{\\ell\\in A_i}e^{s_{i\\ell}}}.\n$$\n\nThis is the dense softmax probability evaluated at the current scores. Steps 4.1–6.1 differentiate the smooth dense attention map and show that substituting these probabilities into the reverse updates gives its exact gradient at these inputs. The stored $m_i$ and $\\ell_i$ are used as normalization shifts in those updates; no derivative of either statistic is needed. The argument applies whether or not the maximum score is tied.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 leaves an empty allowed block at bot; step 2.1 uses the required nonempty final set and makes no all-masked-row assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits c=0; steps 2.1, 4.1, and 5.1 remain defined and give uniform probabilities with zero score-gradient scale."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the nonempty row has one key, ell=1, p=1, and steps 2.1 and 4.1 give the value row and zero score derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all value rows are equal, step 2.1 gives the same output row and step 4.1 makes every score derivative zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Continuous inputs range over the full Euclidean spaces; positive dimensions and block size and nonempty masks are fixed discrete conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite sums, finite partitions, and ordinary real arithmetic only; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves an output and gradient identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves an output and gradient identity, not an equivalence."
+        }
+      ]
+    },
+    "thm-tiled-attention-workspace-and-work": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-attention-block-summary",
+          "source_section": "Definition",
+          "quote": "Let $n,d,v$ be positive integers, let $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, let $c\\in\\mathbb R$, and for each query row $i\\in\\{1,\\ldots,n\\}$ let $A_i\\subseteq\\{1,\\ldots,n\\}$ be a nonempty set of allowed keys. Write $q_i$ for row $i$ of $Q$, $k_j$ for row $j$ of $K$, $v_j$ for row $j$ of $V$, and $s_{ij}=c\\sum_{r=1}^{d}Q_{ir}K_{jr}$ for $j\\in A_i$. For a nonempty finite set $S\\subseteq A_i$, its attention summary is\n\n$$\n\\Sigma_i(S)=(m_i(S),\\ell_i(S),z_i(S)),\\qquad m_i(S)=\\max_{j\\in S}s_{ij},\\quad \\ell_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)},\\quad z_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)}v_j.\n$$\n\nThe empty set has the separate state $\\bot$ and has no maximum or numeric summary coordinates. For disjoint nonempty $S,T\\subseteq A_i$, define their merge by\n\n$$\nm'=\\max(m_i(S),m_i(T)),\\qquad \\ell'=e^{m_i(S)-m'}\\ell_i(S)+e^{m_i(T)-m'}\\ell_i(T),\\qquad z'=e^{m_i(S)-m'}z_i(S)+e^{m_i(T)-m'}z_i(T).\n$$\n\nand set $\\Sigma_i(S)\\star\\Sigma_i(T)=(m',\\ell',z')$. This summary stores the maximum score, a positive shifted normalizer, and the correspondingly shifted weighted value sum; dividing its third coordinate by its second gives the attention output on $S$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tiled-attention-exactness",
+          "source_section": "Statement",
+          "quote": "Let $n,d,v$ be positive integers, $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$ be finite real matrices, $c\\in\\mathbb R$, $b$ a positive integer, and $A_i\\subseteq\\{1,\\ldots,n\\}$ a fixed nonempty set of allowed keys for every query row $i$. Write $Q_i$ for row $i$ of $Q$, and $K_j,V_j$ for row $j$ of $K,V$. Let $Y,m_i,\\ell_i$ be the forward outputs and row statistics of the exact tiled softmax attention algorithm, and fix an upstream matrix $G\\in\\mathbb R^{n\\times v}$. Then each row of $Y$ equals the dense masked attention row\n\n$$\nY_i=\\frac{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}V_j}{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}},\n$$\n\nand the algorithm's recomputed reverse procedure returns the Euclidean gradients of the scalar function $\\Phi(Q,K,V)=\\sum_{i=1}^{n}\\sum_{a=1}^{v}G_{ia}Y_{ia}$ with respect to $Q,K,V$, while holding $c$, the sets $A_i$, and $G$ fixed. Its reverse rule treats the stored maxima as fixed normalization shifts, so the conclusion also holds when scores tie at a row maximum. Every row is defined because $A_i$ is nonempty; no convention for an all-masked row is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "forward-storage",
+          "claim": "The forward procedure retains $Q,K,V,Y$ and $(m_i,\\ell_i)_{i=1}^n$. Their scalar counts are $nd+nd+nv+nv+2n=O(n(d+v))$ because $d,v\\ge1$. At any query and key block it stores at most $b$ scores and the current and block weighted-value vectors of length $v$, plus a constant number of scalars. This is $O(b+v)$ extra live storage, and it discards the block workspace before moving to the next block.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forward-work",
+          "claim": "The forward loops examine at most $n^2$ query-key pairs. For each pair, the score dot product uses $O(d)$ operations; its normalized exponential and weighted-value contribution use $O(1+v)$ operations. Block maxima, merges, and loop overhead add at most $O(n^2)$ operations since $b\\ge1$. Thus forward arithmetic is $O(n^2(d+v))$. Only one block's scores and weighted-value summaries are live, so no $n\\times n$ score or probability array is allocated.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reverse-storage",
+          "claim": "The reverse procedure's retained arrays are $Q,K,V,Y,G,dQ,dK,dV$ and the $2n$ row statistics. Their scalar counts are all $O(n(d+v))$. For one row and one key it recomputes one score and one probability, forms scalar inner products, and updates entries in the already allocated gradient arrays; it needs only a constant number of additional scalars, which is within $O(b+v)$. It does not store the recomputed probabilities across pairs.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "A1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reverse-work",
+          "claim": "Each query-key pair in the reverse pass costs $O(d+v)$ operations: one score, one inner product with $V_j$, and vector updates with lengths $d$ and $v$. There are at most $n^2$ pairs, and the finite loop overhead is at most $O(n^2)$, so reverse arithmetic is $O(n^2(d+v))$. Since scores and probabilities are recomputed one at a time, this pass also creates no $n\\times n$ array. The separate exactness claim is supplied by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 counts bot as an empty block state; the theorem requires every final allowed row to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 depend on dimensions and loop counts, so zero-valued arrays or c=0 do not change the storage or arithmetic bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=d=v=b=1, steps 1.1, 1.2, 1.3, and 2.1 give constant storage and one pair operation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If b is at least n or allowed sets are sparse, steps 1.1–2.1 retain the same upper bounds and still allocate no n by n score or probability matrix."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "n,d,v,b are restricted to positive integers; the work theorem makes no assertion at nonpositive dimensions or block sizes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All counted loops are finite and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives upper bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives upper bounds, not an equivalence."
+        }
+      ]
+    },
+    "rem-attention-io-model-and-roundoff": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark states model limitations and contains no empty-row proof."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark contains no zero-parameter theorem or verification."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark contains no one-key calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark contains no degenerate-input proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint regularity claim occurs in this remark."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states no equivalence."
+        }
+      ]
+    },
+    "ex-tiled-attention-one-key": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tiled-attention-exactness",
+          "source_section": "Statement",
+          "quote": "Let $n,d,v$ be positive integers, $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$ be finite real matrices, $c\\in\\mathbb R$, $b$ a positive integer, and $A_i\\subseteq\\{1,\\ldots,n\\}$ a fixed nonempty set of allowed keys for every query row $i$. Write $Q_i$ for row $i$ of $Q$, and $K_j,V_j$ for row $j$ of $K,V$. Let $Y,m_i,\\ell_i$ be the forward outputs and row statistics of the exact tiled softmax attention algorithm, and fix an upstream matrix $G\\in\\mathbb R^{n\\times v}$. Then each row of $Y$ equals the dense masked attention row\n\n$$\nY_i=\\frac{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}V_j}{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}},\n$$\n\nand the algorithm's recomputed reverse procedure returns the Euclidean gradients of the scalar function $\\Phi(Q,K,V)=\\sum_{i=1}^{n}\\sum_{a=1}^{v}G_{ia}Y_{ia}$ with respect to $Q,K,V$, while holding $c$, the sets $A_i$, and $G$ fixed. Its reverse rule treats the stored maxima as fixed normalization shifts, so the conclusion also holds when scores tie at a row maximum. Every row is defined because $A_i$ is nonempty; no convention for an all-masked row is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "one-key-forward",
+          "claim": "The only score is $s_{11}=2\\cdot3=6$. Its summary is $(m,\\ell,z)=(6,1,7)$, so the output is $z/\\ell=7$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "one-key-vjp",
+          "claim": "The probability is $p_{11}=1$, the scalar $\\delta_1=G_1Y_1=28$, and $\\gamma_{11}=1(4\\cdot7-28)=0$. The reverse updates therefore give $dQ=0$, $dK=0$, and $dV=p_{11}G_1=4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the one-key allowed set A1={1}, so no block or row is empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes nonzero Q,K,V,c and upstream G and makes no zero-input claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the one-key summary, output, and VJP explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the score derivative vanishes because p=1 and the one value equals the output."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All real inputs and the upstream value are fixed numbers; no domain endpoint is under review."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example has one explicit key and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes one output and VJP, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes one output and VJP, not an equivalence."
+        }
+      ]
+    },
+    "ex-tiled-attention-empty-first-masked-block": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tiled-attention-exactness",
+          "source_section": "Statement",
+          "quote": "Let $n,d,v$ be positive integers, $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$ be finite real matrices, $c\\in\\mathbb R$, $b$ a positive integer, and $A_i\\subseteq\\{1,\\ldots,n\\}$ a fixed nonempty set of allowed keys for every query row $i$. Write $Q_i$ for row $i$ of $Q$, and $K_j,V_j$ for row $j$ of $K,V$. Let $Y,m_i,\\ell_i$ be the forward outputs and row statistics of the exact tiled softmax attention algorithm, and fix an upstream matrix $G\\in\\mathbb R^{n\\times v}$. Then each row of $Y$ equals the dense masked attention row\n\n$$\nY_i=\\frac{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}V_j}{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}},\n$$\n\nand the algorithm's recomputed reverse procedure returns the Euclidean gradients of the scalar function $\\Phi(Q,K,V)=\\sum_{i=1}^{n}\\sum_{a=1}^{v}G_{ia}Y_{ia}$ with respect to $Q,K,V$, while holding $c$, the sets $A_i$, and $G$ fixed. Its reverse rule treats the stored maxima as fixed normalization shifts, so the conclusion also holds when scores tie at a row maximum. Every row is defined because $A_i$ is nonempty; no convention for an all-masked row is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "skip-empty-first-block",
+          "claim": "For query row $1$, the first block has $J_1\\cap A_1=\\varnothing$, so the state remains $\\bot$. The second block contains key $2$, whose score is $0$ and value is $5$, giving summary $(0,1,5)$ and output $5$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "second-row-merge",
+          "claim": "For query row $2$, both blocks are allowed and have score $0$. The first summary is $(0,1,3)$ and merging the second gives $(0,2,8)$, so the output is $8/2=4$. Both allowed-key sets are nonempty, so these are defined rows of the claimed attention map.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly skips the empty first allowed block and starts the summary with bot."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use zero scores and show the finite outputs 5 and 4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 has one allowed key in the first row and obtains normalizer one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses distinct value rows 3 and 5 and asserts no degenerate-value property."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite dimensions, block size, and allowed sets are fixed; no endpoint assertion is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two finite allowed sets are explicit and nonempty; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies outputs, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies outputs, not an equivalence."
+        }
+      ]
+    },
+    "ex-tiled-attention-two-merge-orders": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-attention-block-summary",
+          "source_section": "Definition",
+          "quote": "Let $n,d,v$ be positive integers, let $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, let $c\\in\\mathbb R$, and for each query row $i\\in\\{1,\\ldots,n\\}$ let $A_i\\subseteq\\{1,\\ldots,n\\}$ be a nonempty set of allowed keys. Write $q_i$ for row $i$ of $Q$, $k_j$ for row $j$ of $K$, $v_j$ for row $j$ of $V$, and $s_{ij}=c\\sum_{r=1}^{d}Q_{ir}K_{jr}$ for $j\\in A_i$. For a nonempty finite set $S\\subseteq A_i$, its attention summary is\n\n$$\n\\Sigma_i(S)=(m_i(S),\\ell_i(S),z_i(S)),\\qquad m_i(S)=\\max_{j\\in S}s_{ij},\\quad \\ell_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)},\\quad z_i(S)=\\sum_{j\\in S}e^{s_{ij}-m_i(S)}v_j.\n$$\n\nThe empty set has the separate state $\\bot$ and has no maximum or numeric summary coordinates. For disjoint nonempty $S,T\\subseteq A_i$, define their merge by\n\n$$\nm'=\\max(m_i(S),m_i(T)),\\qquad \\ell'=e^{m_i(S)-m'}\\ell_i(S)+e^{m_i(T)-m'}\\ell_i(T),\\qquad z'=e^{m_i(S)-m'}z_i(S)+e^{m_i(T)-m'}z_i(T).\n$$\n\nand set $\\Sigma_i(S)\\star\\Sigma_i(T)=(m',\\ell',z')$. This summary stores the maximum score, a positive shifted normalizer, and the correspondingly shifted weighted value sum; dividing its third coordinate by its second gives the attention output on $S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tiled-attention-exactness",
+          "source_section": "Statement",
+          "quote": "Let $n,d,v$ be positive integers, $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$ be finite real matrices, $c\\in\\mathbb R$, $b$ a positive integer, and $A_i\\subseteq\\{1,\\ldots,n\\}$ a fixed nonempty set of allowed keys for every query row $i$. Write $Q_i$ for row $i$ of $Q$, and $K_j,V_j$ for row $j$ of $K,V$. Let $Y,m_i,\\ell_i$ be the forward outputs and row statistics of the exact tiled softmax attention algorithm, and fix an upstream matrix $G\\in\\mathbb R^{n\\times v}$. Then each row of $Y$ equals the dense masked attention row\n\n$$\nY_i=\\frac{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}V_j}{\\sum_{j\\in A_i}e^{cQ_iK_j^{\\mathsf T}}},\n$$\n\nand the algorithm's recomputed reverse procedure returns the Euclidean gradients of the scalar function $\\Phi(Q,K,V)=\\sum_{i=1}^{n}\\sum_{a=1}^{v}G_{ia}Y_{ia}$ with respect to $Q,K,V$, while holding $c$, the sets $A_i$, and $G$ fixed. Its reverse rule treats the stored maxima as fixed normalization shifts, so the conclusion also holds when scores tie at a row maximum. Every row is defined because $A_i$ is nonempty; no convention for an all-masked row is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "singleton-summaries",
+          "claim": "The two scores are $s_1=0$ and $s_2=\\ln2$. Thus $\\Sigma(\\{1\\})=(0,1,0)$ and $\\Sigma(\\{2\\})=(\\ln2,1,3)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-merge-orders",
+          "claim": "Merging in either order gives maximum $\\ln2$, normalizer $e^{-\\ln2}+1=3/2$, and weighted sum $3$. The output is $3/(3/2)=2$ in either order.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both allowed keys form nonempty singleton blocks; no empty block is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero value V1=0 in a singleton summary and step 2.1 merges it correctly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes each one-key block summary, and step 2.1 merges the two blocks."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The scores are distinct and the values are distinct; no degenerate-input claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes all real inputs and finite index sets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two key sets are explicit finite sets and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a merge calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a merge calculation, not an equivalence."
+        }
+      ]
+    },
+    "ex-tiled-attention-replay-dropout-mask": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exact-tiled-softmax-attention",
+          "source_section": "Definition",
+          "quote": "**Inputs:** Positive integers $n,d,v$, finite real matrices $Q,K\\in\\mathbb R^{n\\times d}$ and $V\\in\\mathbb R^{n\\times v}$, a real scale $c$, a positive integer key-block size $b$, and fixed nonempty allowed-key sets $A_1,\\ldots,A_n\\subseteq\\{1,\\ldots,n\\}$. The algorithm reads membership in each $A_i$ on demand; any caller-owned representation of the mask is input storage. All operations below are in exact real arithmetic. Set $J_t=\\{(t-1)b+1,\\ldots,\\min(tb,n)\\}$ for $t=1,\\ldots,\\lceil n/b\\rceil$.\n\n**Forward procedure:**\n\n1. For each query row $i$, set the current summary to $\\bot$.\n2. For $t=1,\\ldots,\\lceil n/b\\rceil$, form $I=J_t\\cap A_i$. If $I=\\varnothing$, skip this block and leave the summary unchanged. Otherwise compute $\\Sigma_i(I)$. If the current summary is $\\bot$, copy $\\Sigma_i(I)$; otherwise merge the current summary with $\\Sigma_i(I)$ using $\\star$.\n3. After the final block, write $Y_i=z_i/\\ell_i$ and retain the final $m_i$ and $\\ell_i$ for a later reverse pass.\n4. Return $Y\\in\\mathbb R^{n\\times v}$ and the retained row statistics.\n\n**Reverse procedure:** Given a forward run with the same $Q,K,V,c,A_1,\\ldots,A_n$ and an upstream matrix $G\\in\\mathbb R^{n\\times v}$, initialize $dQ,dK,dV$ to zero. For each query row $i$, compute $\\delta_i=\\sum_{a=1}^{v}G_{ia}Y_{ia}$. For every block $J_t$ and each $j\\in J_t\\cap A_i$, recompute $s_{ij}$ from $Q,K$ and set\n\n$$\np_{ij}=\\frac{e^{s_{ij}-m_i}}{\\ell_i},\\qquad \\gamma_{ij}=p_{ij}\\left(\\sum_{a=1}^{v}G_{ia}V_{ja}-\\delta_i\\right).\n$$\n\nThen, for $r=1,\\ldots,d$, add to the query and key gradient arrays, and for $a=1,\\ldots,v$, add to the value gradient array:\n\n$$\n(dQ)_{ir}\\mathrel{+}=c\\gamma_{ij}K_{jr},\\qquad (dK)_{jr}\\mathrel{+}=c\\gamma_{ij}Q_{ir},\\qquad (dV)_{ja}\\mathrel{+}=p_{ij}G_{ia}.\n$$\n\nReturn $dQ,dK,dV$. Do not store a full score or probability matrix: the reverse procedure recomputes one block's scores from the same inputs and fixed allowed-key sets. The prescribed reverse procedure treats the forward maxima and normalizers as frozen scaling statistics; it does not differentiate a maximum operation. The base algorithm has no dropout. Any dropout extension must replay the same realized dropout mask in its reverse pass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "forward-mask",
+          "claim": "All scores are zero, so the undropped probabilities are $(1/2,1/2)$. Under $\\xi=(1,0)$ and $\\rho=1/2$, the dropped weights are $(1,0)$, hence query row $1$ has output $2$ and derivative with respect to $(V_1,V_2)$ equal to $(1,0)$. Since $G_2=0$, query row $2$ contributes zero to the full value gradient, which is therefore $(1,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-mask",
+          "claim": "Under $\\xi'=(0,1)$ the dropped weights are $(0,1)$, so the recomputed value derivative is $(0,1)$. This differs from the derivative of the fixed forward realization in step 1.1, confirming that this extension must replay $\\xi$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The attention allowed sets contain both keys for both rows; no all-masked row occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero value V2=0 and computes its derivative under the fixed mask."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show each dropout realization retaining exactly one of the two equal-probability keys."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses tied zero scores and step 2.1 shows the changed realization still changes the value gradient."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The dropout rate is the interior value one half and the example makes no endpoint-rate claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All masks and values are finite and explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a fixed finite calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a fixed finite calculation, not an equivalence."
+        }
+      ]
+    }
+  }
+}

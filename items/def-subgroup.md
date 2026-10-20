@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "$H \\le G$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-subgroup.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -29,23 +30,33 @@ pipeline_run: null
 
 ## Definition
 
-Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \subseteq G$ is
+Let $G$ be a group (Group and abelian group) with identity $e$. A subset $H \subseteq G$ is
 a **subgroup** of $G$, written $H \le G$, when
 
 - **(S1)** $e \in H$;
 - **(S2)** $H$ is closed under the operation: $x, y \in H$ implies $xy \in H$
-  ([[def-binary-operation]]);
+  (Binary operation on a set; associativity, commutativity, and a subset closed under the operation);
 - **(S3)** $H$ is closed under inverses: $x \in H$ implies $x^{-1} \in H$.
 
 By (S2) the operation of $G$ restricts to a binary operation on $H$; it is
 associative there because it is associative on $G$, the element $e$ of (S1) is a
-two-sided identity for it ([[def-identity-element]]), and (S3) supplies for each
-$x \in H$ a two-sided inverse lying in $H$ ([[def-invertible-element]]). So a
+two-sided identity for it (Left identity, right identity, and two-sided identity for a binary operation), and (S3) supplies for each
+$x \in H$ a two-sided inverse lying in $H$ (Left inverse, right inverse, and invertible element of a monoid). So a
 subgroup, with the restricted operation, is itself a group, and its identity and
 its inverses are those of $G$.
 
 Every group $G$ has the two **trivial subgroups** $\{e\}$ and $G$ itself; a
 subgroup $H$ with $H \ne G$ is called **proper**.
+
+## Definition references
+
+[[def-group]]
+
+[[def-binary-operation]]
+
+[[def-identity-element]]
+
+[[def-invertible-element]]
 
 ## Remarks
 

@@ -1,0 +1,245 @@
+{
+  "group": "ae",
+  "batches": ["93"],
+  "pages_read": [
+    "bilevel-learning-hypergradients-and-implicit-layers",
+    "bilevel-learning-hypergradients-and-implicit-layers-examples"
+  ],
+  "items_read": [
+    "def-smooth-bilevel-learning-problem",
+    "alg-adjoint-hypergradient-with-residual",
+    "thm-smooth-bilevel-hypergradient-formula",
+    "thm-adjoint-hypergradient-linear-solve-error",
+    "rem-truncated-training-and-exact-hypergradients",
+    "ex-ridge-hyperparameter-hypergradient",
+    "ex-singular-hessian-nonisolated-inner-minimum",
+    "ex-exact-state-wrong-truncated-hypergradient"
+  ],
+  "conventions": [
+    {
+      "convention": "Parameter and state dimensions are positive; domains are open. C1 means total differentiability with continuous derivative, and C2 means that the derivative map is C1.",
+      "fixed_by": "def-smooth-bilevel-learning-problem",
+      "matters_for": [
+        "alg-adjoint-hypergradient-with-residual",
+        "thm-smooth-bilevel-hypergradient-formula",
+        "thm-adjoint-hypergradient-linear-solve-error"
+      ]
+    },
+    {
+      "convention": "Gradients are columns, vector norms are Euclidean, and matrix norms are induced Euclidean operator norms. F is the state gradient, H its state Jacobian, and B its parameter Jacobian, of size d by p.",
+      "fixed_by": "def-smooth-bilevel-learning-problem",
+      "matters_for": [
+        "alg-adjoint-hypergradient-with-residual",
+        "thm-smooth-bilevel-hypergradient-formula",
+        "thm-adjoint-hypergradient-linear-solve-error",
+        "ex-ridge-hyperparameter-hypergradient"
+      ]
+    },
+    {
+      "convention": "A local stationary branch need not minimize the inner objective globally. Global strong convexity is a separate assumption on all of the state space.",
+      "fixed_by": "def-smooth-bilevel-learning-problem",
+      "matters_for": [
+        "thm-smooth-bilevel-hypergradient-formula",
+        "ex-singular-hessian-nonisolated-inner-minimum"
+      ]
+    },
+    {
+      "convention": "The adjoint procedure uses exact real arithmetic and unique strict graph branches. Its linear residual is rho = d − Hᵀ ṽ, independently recomputed after the supplied finite-budget solver returns.",
+      "fixed_by": "alg-adjoint-hypergradient-with-residual",
+      "matters_for": [
+        "thm-adjoint-hypergradient-linear-solve-error",
+        "rem-truncated-training-and-exact-hypergradients"
+      ]
+    },
+    {
+      "convention": "Approximate-state residual control requires the specified local inverse chart, inclusion of the residual segment, and state-neighborhood inverse and Lipschitz bounds; it does not control a stopped iteration's derivative.",
+      "fixed_by": "thm-adjoint-hypergradient-linear-solve-error",
+      "matters_for": [
+        "rem-truncated-training-and-exact-hypergradients",
+        "ex-exact-state-wrong-truncated-hypergradient"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-smooth-bilevel-hypergradient-formula",
+      "statement": "For positive parameter and state dimensions, open domains, C2 inner objective f and C1 outer objective g, a stationary point with invertible state Hessian admits a unique local C1 stationary branch. Along that branch, Dw* = −H⁻¹B and ∇θJ = ∂θg − BᵀH⁻ᵀ∇wg. The branch need not be a global optimizer; under the separately stated global strong-convexity inequality, each stationary point is the unique global minimizer.",
+      "used_by": [
+        "thm-adjoint-hypergradient-linear-solve-error",
+        "rem-truncated-training-and-exact-hypergradients",
+        "ex-ridge-hyperparameter-hypergradient",
+        "ex-singular-hessian-nonisolated-inner-minimum",
+        "ex-exact-state-wrong-truncated-hypergradient"
+      ]
+    },
+    {
+      "id": "def-smooth-bilevel-learning-problem",
+      "statement": "Defines F(θ,w) = ∇wf(θ,w), H = DwF, B = DθF, a C1 local stationary branch satisfying F(θ,w*(θ)) = 0, and its outer objective J(θ) = g(w*(θ),θ), whose column gradient is the branch hypergradient.",
+      "used_by": [
+        "alg-adjoint-hypergradient-with-residual",
+        "thm-smooth-bilevel-hypergradient-formula",
+        "thm-adjoint-hypergradient-linear-solve-error",
+        "rem-truncated-training-and-exact-hypergradients",
+        "ex-ridge-hyperparameter-hypergradient",
+        "ex-singular-hessian-nonisolated-inner-minimum",
+        "ex-exact-state-wrong-truncated-hypergradient"
+      ]
+    },
+    {
+      "id": "alg-adjoint-hypergradient-with-residual",
+      "statement": "Given the specified smooth real-arithmetic graphs, strict branches, positive-definite Hessian certificate and terminating finite-budget solver, computes the inner residual, direct outer derivatives and Hessian-vector operators; for a returned adjoint vector computes rho = d − Hᵀṽ and ĥ = c − Bᵀṽ. CONVERGED requires both solver-reported success and measured residual norm at most the tolerance.",
+      "used_by": [
+        "thm-adjoint-hypergradient-linear-solve-error",
+        "rem-truncated-training-and-exact-hypergradients"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-c-one-map-and-local-inverse",
+      "used_for": "Continuously differentiable maps on open domains and local inverse terminology.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-straight-line-computational-program",
+      "used_for": "Finite graphs, exact arithmetic, derivative-map C2 convention and strict-branch failure rules.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-and-multi-index-notation-in-several-variables",
+      "used_for": "Coordinate C2 convention used to justify Hessian symmetry.",
+      "opened": true
+    },
+    {
+      "id": "cor-hessian-is-symmetric",
+      "used_for": "Identifying state Hessian products with transposed products and the parameter block with Bᵀ.",
+      "opened": true
+    },
+    {
+      "id": "thm-total-derivative-computes-directional-and-partial-derivatives",
+      "used_for": "Connecting derivative-map C2 regularity to continuous second coordinate partials.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Outer hypergradient chain rule and residual-chart path differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-implicit-function-theorem",
+      "used_for": "Local stationary branch existence, uniqueness and derivative formula.",
+      "opened": true
+    },
+    {
+      "id": "alg-reverse-mode-automatic-differentiation",
+      "used_for": "Computing exact inner and outer gradients.",
+      "opened": true
+    },
+    {
+      "id": "thm-reverse-mode-computes-gradient",
+      "used_for": "Correctness of the reverse-mode calls on strict branches.",
+      "opened": true
+    },
+    {
+      "id": "alg-forward-over-reverse-hessian-vector-product",
+      "used_for": "Hessian-vector operator used by the adjoint procedure.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-over-reverse-computes-hessian-vector-product",
+      "used_for": "Exactness of the Hessian-vector products.",
+      "opened": true
+    },
+    {
+      "id": "lem-implicit-sensitivity-error-controlled-by-residual",
+      "used_for": "Approximate-state sensitivity perturbation bound with inverse-chart and Lipschitz hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Inverse-norm bound from coercivity, transpose operator estimates and triangle inequality.",
+      "opened": true
+    },
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Bounding state error along the residual-chart path.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+      "used_for": "Finite sensitivity bound, zero-dimensional and q = 0 conventions, and zero-residual derivative counterexample.",
+      "opened": true
+    },
+    {
+      "id": "alg-forward-mode-automatic-differentiation",
+      "used_for": "Supporting forward-over-reverse and finite-iteration differentiation procedures.",
+      "opened": true
+    },
+    {
+      "id": "thm-forward-mode-computes-directional-derivative",
+      "used_for": "Supporting exact tangent propagation.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c1-map",
+      "used_for": "Open admissible strict-branch domains and differentiability of finite graphs.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-straight-line-program-defines-c2-map",
+      "used_for": "C2 regularity of the inner graph output.",
+      "opened": true
+    },
+    {
+      "id": "alg-differentiate-finite-fixed-point-iteration",
+      "used_for": "The finite computation differentiated by the sensitivity supplier, including empty Jacobian dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+      "used_for": "Statement of the chain and bounded-bilinear product rules supporting differentiated reverse accumulation.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-ck-and-multi-index-notation-in-several-variables",
+      "finding": "Its Definition contains inline supplier links, including “Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].” Other links occur earlier in the same defining section. These interrupt the complete definition and have no immediately following Definition references section, contrary to the assigned uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-reverse-mode-automatic-differentiation",
+      "finding": "Its Definition begins “Input a graph from [[def-finite-straight-line-computational-program]] and an admissible point $x$.” The supplier link remains inside the procedure rather than after its complete Definition in Definition references, contrary to the assigned uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-forward-over-reverse-hessian-vector-product",
+      "finding": "Its Definition says “Run [[alg-forward-mode-automatic-differentiation]] and retain its primal tape and all input and operation tangents.” The inline supplier link interrupts the defining procedure and is not moved to a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "Its Statement includes “inner product and the Euclidean norm as in [[def-euclidean-inner-product]]” and further inline links in clause 2 and the paragraph beginning “Clause 1 is a citation, not a new proof.” All remain within Statement rather than a following Statement references section, contrary to the assigned uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-forward-mode-automatic-differentiation",
+      "finding": "Its Definition begins “Input a graph from [[def-finite-straight-line-computational-program]], an admissible point $x$, and a direction”. The inline supplier link remains in the complete defining procedure without a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-differentiate-finite-fixed-point-iteration",
+      "finding": "Its Definition instructs “call [[alg-forward-mode-automatic-differentiation]] on this graph”. This supplier link remains inside the defining procedure rather than in an immediately following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "bilevel-learning-hypergradients-and-implicit-layers",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "Opened the supplier page, recurrence algorithm and shared-parameter gradient theorem. The owned remark reproduces the theorem with the direct loss term, every transition contribution, initial-state pullback, empty T = 0 sum and strict-branch qualification. The supplier differentiates the finite recurrence; the consumer faithfully distinguishes that target from stationary-branch sensitivity. The owned adjoint diagram also has consistent dimensions, transpose directions and residual sign."
+    }
+  ]
+}

@@ -15,6 +15,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/alg-gradient-descent.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -32,8 +33,8 @@ sources:
 Let $U\subseteq\mathbb R^d$ be open and let $f:U\to\mathbb R$ be continuously
 Fréchet differentiable. The gradient $\nabla f(x)$ is the vector of partial
 derivatives in the Euclidean coordinates, with the convention of
-[[def-jacobian-matrix-and-gradient]]; differentiability is the Fréchet
-condition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].
+The Jacobian matrix of partial derivatives and the gradient in the scalar-valued case; differentiability is the Fréchet
+condition of The real Frechet derivative on real and complex matrix spaces with the Frobenius norm.
 
 **Inputs:** an initial point $x_0\in U$; either a positive fixed-step
 sequence $(t_k)_{k\ge0}$ or backtracking parameters $\alpha\in(0,1)$ and
@@ -66,6 +67,15 @@ current iterate is $x_k$:
 The fixed-step update map is $x\mapsto x-t_k\nabla f(x)$; at a stationary
 point its value is $x$, which is the returned iterate. A backtracking search
 that is reached at a nonstationary iterate is well-defined by
-[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]. The
+Armijo backtracking terminates for strict descent directions. The
 procedure asserts no convergence or global-minimization property for an
 arbitrary objective.
+
+## Definition references
+
+[[def-jacobian-matrix-and-gradient]]
+
+[[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]
+
+[[lem-armijo-backtracking-terminates-for-strict-descent-directions]]
+

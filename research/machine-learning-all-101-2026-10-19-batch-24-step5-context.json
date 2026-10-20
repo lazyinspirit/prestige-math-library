@@ -1,0 +1,285 @@
+{
+  "group": "h",
+  "batches": [
+    "24"
+  ],
+  "pages_read": [
+    "ml02-metric-learning",
+    "ml02-metric-learning-examples"
+  ],
+  "items_read": [
+    "def-mahalanobis-pseudometric",
+    "lem-symmetric-matrix-frobenius-isometry",
+    "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping",
+    "lem-positive-semidefinite-cone-is-frobenius-closed",
+    "alg-knn-classifier-with-fixed-tie-breaking",
+    "def-lmnn-fixed-target-objective",
+    "thm-mahalanobis-distance-is-pseudometric",
+    "lem-svec-transports-frobenius-subgradients",
+    "thm-lmnn-fixed-target-objective-is-convex",
+    "lem-lmnn-explicit-subgradient-and-data-bound",
+    "alg-lmnn-finite-budget-projected-subgradient",
+    "thm-lmnn-projected-subgradient-best-average-bound",
+    "ex-singular-mahalanobis-metric-identifies-distinct-points",
+    "ex-fixed-target-lmnn-triplet-conflict",
+    "ex-one-lmnn-projected-step-is-not-convergence"
+  ],
+  "conventions": [
+    {
+      "convention": "Dimensions are positive. Positive semidefinite matrices are real symmetric matrices with nonnegative quadratic forms. d_M is the square root of q_M; only d_M is asserted to be a pseudometric.",
+      "fixed_by": "def-mahalanobis-pseudometric",
+      "matters_for": [
+        "alg-knn-classifier-with-fixed-tie-breaking",
+        "def-lmnn-fixed-target-objective",
+        "thm-mahalanobis-distance-is-pseudometric",
+        "ex-singular-mahalanobis-metric-identifies-distinct-points"
+      ]
+    },
+    {
+      "convention": "svec lists diagonal entries first, then sqrt(2)-scaled upper-triangle entries in lexicographic order; its target dimension is d(d+1)/2.",
+      "fixed_by": "lem-symmetric-matrix-frobenius-isometry",
+      "matters_for": [
+        "lem-svec-transports-frobenius-subgradients",
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    },
+    {
+      "convention": "Nearest-neighbor distance ties use increasing sample index; class-vote ties use the smallest class label. The sample and class sets are nonempty and 1 ≤ k ≤ n.",
+      "fixed_by": "alg-knn-classifier-with-fixed-tie-breaking",
+      "matters_for": [
+        "alg-knn-classifier-with-fixed-tie-breaking"
+      ]
+    },
+    {
+      "convention": "Target sets are fixed independently of M, exclude the anchor, and contain only same-label indices. Empty target sets are permitted; impostors have different labels; μ lies in [0,1].",
+      "fixed_by": "def-lmnn-fixed-target-objective",
+      "matters_for": [
+        "thm-lmnn-fixed-target-objective-is-convex",
+        "lem-lmnn-explicit-subgradient-and-data-bound",
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound",
+        "ex-fixed-target-lmnn-triplet-conflict",
+        "ex-one-lmnn-projected-step-is-not-convergence"
+      ]
+    },
+    {
+      "convention": "The selected hinge coefficient is 1 for strictly positive margin argument and 0 otherwise, including at an exact kink. Subgradients use the Frobenius pairing and the PSD domain.",
+      "fixed_by": "lem-lmnn-explicit-subgradient-and-data-bound",
+      "matters_for": [
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound",
+        "ex-one-lmnn-projected-step-is-not-convergence"
+      ]
+    },
+    {
+      "convention": "The conditional estimate assumes Countable Choice and an attained global minimizer. Positive weights average iterates indexed 0 through T−1; best observed uses that same range with least-index tie-breaking. Neither output is the final iterate M_T.",
+      "fixed_by": "thm-lmnn-projected-subgradient-best-average-bound",
+      "matters_for": [
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-lmnn-fixed-target-objective",
+      "statement": "For fixed same-label target sets and μ ∈ [0,1], F_μ(M)=(1−μ)ε_pull(M)+με_push(M) on the PSD cone, with pull terms q_M(x_i,x_j) and push terms [1+q_M(x_i,x_j)−q_M(x_i,x_l)]_+ over differently labeled impostors.",
+      "used_by": [
+        "thm-lmnn-fixed-target-objective-is-convex",
+        "lem-lmnn-explicit-subgradient-and-data-bound",
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound",
+        "ex-fixed-target-lmnn-triplet-conflict",
+        "ex-one-lmnn-projected-step-is-not-convergence"
+      ]
+    },
+    {
+      "id": "thm-frobenius-projection-onto-psd-cone-is-spectral-clipping",
+      "statement": "For real symmetric A and any orthogonal eigendecomposition, replacing its eigenvalues by their positive parts gives the unique minimizer of the Frobenius distance from A over the real PSD cone, independently of the decomposition.",
+      "used_by": [
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    },
+    {
+      "id": "lem-lmnn-explicit-subgradient-and-data-bound",
+      "statement": "The displayed weighted sum of pull matrices and active hinge differences G(M), with coefficient zero at a kink, is a Frobenius subgradient at every PSD M and satisfies the stated uniform finite bound ||G(M)||_F ≤ B_data.",
+      "used_by": [
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound",
+        "ex-one-lmnn-projected-step-is-not-convergence"
+      ]
+    },
+    {
+      "id": "lem-symmetric-matrix-frobenius-isometry",
+      "statement": "The specified svec map from real symmetric d×d matrices to R^(d(d+1)/2) is a linear bijection preserving inner products and norms.",
+      "used_by": [
+        "lem-svec-transports-frobenius-subgradients",
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    },
+    {
+      "id": "lem-svec-transports-frobenius-subgradients",
+      "statement": "Symmetric vectorization transports a closed convex matrix domain to a closed convex Euclidean domain, preserves convexity of the transported function, and carries Frobenius subgradients to Euclidean subgradients.",
+      "used_by": [
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    },
+    {
+      "id": "thm-lmnn-fixed-target-objective-is-convex",
+      "statement": "With fixed target sets and μ ∈ [0,1], the displayed F_μ is convex on all real symmetric matrices; the PSD feasible set is convex.",
+      "used_by": [
+        "lem-lmnn-explicit-subgradient-and-data-bound",
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    },
+    {
+      "id": "lem-positive-semidefinite-cone-is-frobenius-closed",
+      "statement": "For d ≥ 1, the real PSD cone is closed in the real symmetric matrices equipped with the Frobenius norm.",
+      "used_by": [
+        "alg-lmnn-finite-budget-projected-subgradient",
+        "thm-lmnn-projected-subgradient-best-average-bound"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Existence and uniqueness of nonnegative square roots in distances, norms, and svec.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Entry-sum norm, matrix-coordinate interpretation, and projection and subgradient calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Coordinate pairings and induced Euclidean norms.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthogonal diagonalization of real symmetric matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Nonnegative eigenvalues and factorization M=L^TL.",
+      "opened": true
+    },
+    {
+      "id": "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+      "used_for": "Identification of PSD quadratic forms with nonnegative self-adjoint operators.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+      "used_for": "Orthogonal invariance of Frobenius distance in the clipping proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean Cauchy–Schwarz and triangle inequalities.",
+      "opened": true
+    },
+    {
+      "id": "cor-triangle-inequality-for-inner-product-norm",
+      "used_for": "Frobenius norm axioms and the uniform subgradient bound.",
+      "opened": true
+    },
+    {
+      "id": "def-norm-and-normed-space",
+      "used_for": "The metric induced by a norm in the cone-closedness argument.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-topology",
+      "used_for": "Closedness through open complements.",
+      "opened": true
+    },
+    {
+      "id": "def-metric-ball",
+      "used_for": "Positive-radius neighborhoods in the closedness and svec arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-sum",
+      "used_for": "Finite objective sums, vote counts, and empty-sum conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-square-matrix",
+      "used_for": "The entrywise trace representation of the linear distance terms.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Convex-combination tests for feasible domains.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Convexity inequalities for the objective and its coordinate transport.",
+      "opened": true
+    },
+    {
+      "id": "def-subgradient-and-subdifferential",
+      "used_for": "Supporting inequalities and Euclidean subgradient transport.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicitly assumed axiom in the abstract Hilbert projection branch.",
+      "opened": true
+    },
+    {
+      "id": "alg-projected-subgradient-method",
+      "used_for": "Finite-budget updates, observed-iterate indexing, and returned outputs.",
+      "opened": true
+    },
+    {
+      "id": "thm-projection-onto-a-nonempty-closed-convex-set",
+      "used_for": "Unique abstract projection under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-projected-subgradient-best-and-average-bound",
+      "used_for": "The conditional finite-horizon best-observed and weighted-average objective bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-euclidean-space-complete",
+      "used_for": "Completeness in positive coordinate dimension m=d(d+1)/2.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Identification of complete Euclidean inner-product space as a real Hilbert space.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-norm",
+      "used_for": "Checking the norm-axiom support cited by the published Frobenius definition.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-lmnn-finite-budget-projected-subgradient",
+      "concern": "The Definition asserts: “All T oracle calls succeed; the generic method reports budget-exhausted after T updates.” This is a success/termination property, whereas the algorithm instructions require such properties in separate proved result items. The assertion is mathematically supported by the explicit subgradient and projection suppliers, but its placement remains inconsistent with the required algorithm structure.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-frobenius-matrix-norm",
+      "finding": "The Definition asserts that “the three norm axioms hold ... because they hold for every inner-product norm,” but its deps omit cor-triangle-inequality-for-inner-product-norm. The cited def-inner-product-norm explicitly locates the norm-axiom result in that corollary and does not itself declare it in deps or justified_by. The mathematical fact is sound, but the declared supplier chain does not reach its norm-axiom proof.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": []
+}

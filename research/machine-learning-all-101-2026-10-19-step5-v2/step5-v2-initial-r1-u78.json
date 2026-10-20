@@ -1,0 +1,191 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "78",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "lem-exp4-potential-inequality",
+      "model": "gpt-6-luna",
+      "context_sha256": "5b9a42918559ee1128acbf06d3ef563031967768e6b6e41e9d0a0dc5fd411d74",
+      "outcome": "false_positive",
+      "reason": "The Exp4 Definition explicitly takes an instance of def-contextual-bandit-protocol, whose Definition requires x_t in [0,1]^k. Its justified_by lemma proves positive simplex weights and finite nonnegative estimated losses, including zero-probability arms. Thus -eta times estimated loss is nonpositive and F2 applies. The proposed R>1 counterexample violates the input scope. The log-majorant and fixed-expert telescoping steps are valid for every finite eta>0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exp4-unbiased-expert-reward-estimates",
+      "model": "gpt-6-luna",
+      "context_sha256": "1cef7a2448f96d4e902aad4946781c97e91dee6f58ab6e46318151848d0bd42c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Original F4/step 2.1 applies the conditional-moment lemma in the estimator Definition, which requires P_{t,j}>0 for every arm j; an Exp4 history may have P=(1,0). Positivity of only the selected coordinate does not meet that inherited interface. Repaired by deriving its mean directly as P_i times (1-x_i)/P_i and then summing expert advice; unsupported coefficients vanish because Q_m>0. The statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exp4-weighted-estimated-loss-second-moment",
+      "model": "gpt-6-luna",
+      "context_sha256": "1aa98386f9e6ffe52e17fc77d956ae86dbdebba284a3a3b3077aab336fdb1c9f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Original F4/step 2.1 invokes the conditional-moment supplier under the full-support estimator Definition, but Exp4 allows histories with zero sampling probabilities. The supported coordinate alone does not satisfy that interface. Repaired by computing its conditional square directly as P_i times (1-x_i)^2/P_i^2. Cross terms vanish since only the sampled action estimate can be nonzero; summing Q_m cancels supported P_i denominators and leaves at most k. The statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-exp4-potential-inequality",
+      "disposition": "unaffected",
+      "post_sha256": "748730bedc7a55a7cda8e759db4158f60a099451e394074e29ec5f8fe1aaf6e0",
+      "review_context_sha256": "e4d378bd00617ad37054c010ef2ffa9a11d3f55fec2b16ea5da5ff297007200d",
+      "reason": "Checked the complete potential proof and actual algorithm input/justification: bounded protocol rewards give finite nonnegative losses, positive exponential weights give positive normalizers, the completed square makes S_t positive, log s<=s-1 holds on both sides of one, and summing log weight ratios yields the stated log M/eta comparator bound. No statement links or diagrams require repair. The item carrier is unchanged. Strict validation exposed a stale F4 quotation after the separately owned published def-natural-logarithm hyperlink relocation; refreshed only that quotation in the owning proof contract to the current Definition, with no mathematical change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "metadata_repair_only": true
+    },
+    {
+      "id": "lem-exp4-unbiased-expert-reward-estimates",
+      "disposition": "repaired",
+      "post_sha256": "1020a2c8fc218ed21563672d2e84653578157c42ae6dc7ac79c2d547837f4b50",
+      "review_context_sha256": "163169bba149ee418f2c8f94a293c22f991c3922f218d5e9daf38ec334ab4407",
+      "reason": "The repaired proof uses Exp4 itself for the estimator and conditional action law, proves the supported-arm mean by its two indicator values, discards unsupported advice coefficients, and uses the row sum to obtain the exact expert reward. Finite action histories give measurable finite-range integrable variables and verify conditional-expectation integrals on all history events. Both reward endpoints and a single supported arm are covered. The original Statement is untouched.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-exp4-weighted-estimated-loss-second-moment",
+      "disposition": "repaired",
+      "post_sha256": "534971f3e5ab1a12a35511336c53da335e16369215e410ba6fa5e2f19004ddee",
+      "review_context_sha256": "99d9b20bef0756bb98d6159feb0899e5f527b997638d39222947466f88b2ac9b",
+      "reason": "Checked the repaired supported-arm square by its two action outcomes, finite-history integrability and conditional-expectation characterization, disappearance of unsupported advice, and the absence of cross terms. The bound uses [E_mi(1-x_i)]^2<=E_mi(1-x_i), then sum_m Q_m E_mi=P_i, giving sum over supported (1-x_i)<=k. Zero losses, reward endpoints and singleton support remain valid. The original Statement is untouched.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-exp4-potential-inequality",
+      "model": "gpt-6-luna",
+      "context_sha256": "5b9a42918559ee1128acbf06d3ef563031967768e6b6e41e9d0a0dc5fd411d74",
+      "outcome": "false_positive",
+      "status": "rejected",
+      "reason": "The Exp4 Definition explicitly takes an instance of def-contextual-bandit-protocol, whose Definition requires x_t in [0,1]^k. Its justified_by lemma proves positive simplex weights and finite nonnegative estimated losses, including zero-probability arms. Thus -eta times estimated loss is nonpositive and F2 applies. The proposed R>1 counterexample violates the input scope. The log-majorant and fixed-expert telescoping steps are valid for every finite eta>0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-exp4-unbiased-expert-reward-estimates",
+      "model": "gpt-6-luna",
+      "context_sha256": "1cef7a2448f96d4e902aad4946781c97e91dee6f58ab6e46318151848d0bd42c",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "defect_type": "dependency_citation",
+      "reason": "Original F4/step 2.1 applies the conditional-moment lemma in the estimator Definition, which requires P_{t,j}>0 for every arm j; an Exp4 history may have P=(1,0). Positivity of only the selected coordinate does not meet that inherited interface. Repaired by deriving its mean directly as P_i times (1-x_i)/P_i and then summing expert advice; unsupported coefficients vanish because Q_m>0. The statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-exp4-weighted-estimated-loss-second-moment",
+      "model": "gpt-6-luna",
+      "context_sha256": "1aa98386f9e6ffe52e17fc77d956ae86dbdebba284a3a3b3077aab336fdb1c9f",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "defect_type": "dependency_citation",
+      "reason": "Original F4/step 2.1 invokes the conditional-moment supplier under the full-support estimator Definition, but Exp4 allows histories with zero sampling probabilities. The supported coordinate alone does not satisfy that interface. Repaired by computing its conditional square directly as P_i times (1-x_i)^2/P_i^2. Cross terms vanish since only the sampled action estimate can be nonzero; summing Q_m cancels supported P_i denominators and leaves at most k. The statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "completed_items": [
+      "lem-exp4-potential-inequality",
+      "lem-exp4-unbiased-expert-reward-estimates",
+      "lem-exp4-weighted-estimated-loss-second-moment"
+    ],
+    "mathematical_scope": "Finite oblivious contextual bandit instances; n>=1, k>1, M>1, finite eta>0, rewards in [0,1], stochastic expert advice, exact real updates and supplied measurable action draws. Conditional identities hold almost surely; no componentwise unbiasedness is claimed on unsupported arms.",
+    "source_evidence": [
+      "items/alg-exp4.md: complete Definition, especially input protocol and operations 3-5; justified_by lem-exp4-updates-are-well-defined",
+      "items/def-contextual-bandit-protocol.md: complete Definition; reward range and finite history filtration",
+      "items/lem-exp4-updates-are-well-defined.md: Statement and proof steps 1.1-4.1",
+      "items/def-bandit-importance-weighted-estimator.md: Definition, global full-support hypothesis",
+      "items/lem-bandit-importance-weighted-estimator-has-conditional-moments.md: Statement and full proof; the coordinate computation extends directly, but its stated interface still inherits full support",
+      "items/def-conditional-expectation-given-a-sigma-algebra.md: Definition, integral characterization",
+      "items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md: Definition",
+      "items/lem-exp-negative-argument-second-order-upper-bound.md: Statement and complete argument",
+      "items/def-natural-logarithm.md, items/thm-natural-logarithm-laws.md, items/thm-logarithm-derivative-and-integral.md, items/lem-mean-value-theorem-on-closed-interval.md, items/thm-exponential-addition-formula.md, items/cor-exponential-reciprocal-and-positivity.md: actual defining/claim sections"
+    ],
+    "dependencies": "For each moment lemma, removed def-bandit-importance-weighted-estimator and lem-bandit-importance-weighted-estimator-has-conditional-moments from source and manifest deps. F3 now cites the actual Exp4 estimator; conditional moments are proved locally. All other dependencies and dependency levels are preserved.",
+    "metadata_repairs": "Under acquire/reread/edit/check/release using tools/step5-shared-write-lock.mjs, synchronized only the two repaired item manifest rows and citation/derivation contract entries. Refreshed the potential lemma F4 quote after strict validation found the separate published logarithm hyperlink relocation. Preserved original independent risk_review records and all page metadata.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-exp4-unbiased-expert-reward-estimates.md --json",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-exp4-potential-inequality.md items/lem-exp4-weighted-estimated-loss-second-moment.md --json",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-exp4-unbiased-expert-reward-estimates.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-exp4-potential-inequality.md items/lem-exp4-weighted-estimated-loss-second-moment.md --json",
+        "exit_code": 0,
+        "result": "2 checked, no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-78.proof-contracts.json --strict --items lem-exp4-potential-inequality,lem-exp4-unbiased-expert-reward-estimates,lem-exp4-weighted-estimated-loss-second-moment --json",
+        "exit_code": 0,
+        "result": "3 checked, no errors or warnings after correcting the stale F4 quote; the earlier potential-only check failed with citation-quote-mismatch"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-exp4-unbiased-expert-reward-estimates.md items/lem-exp4-weighted-estimated-loss-second-moment.md",
+        "exit_code": 0,
+        "result": "2 items, 5 steps, 0 defects"
+      },
+      {
+        "command": "Read-only comparison of statementHash to frozen before_statements, current itemHashGuard to recorded review guards, and actual source/manifest dependency arrays for all three assigned items",
+        "exit_code": 0,
+        "result": "All original Statement sections unchanged, all recorded review guards match, all manifest dependency arrays match"
+      }
+    ],
+    "consumer_propagation": "No original Statement or Definition changed, no prerequisite was created, and no consumer examination inventory is triggered by these proof/citation/dependency/metadata-only repairs.",
+    "published_ledger_updates": [],
+    "published_ledger_reason": "No assigned item is published and no new potentially defective published use was found. Existing Step-4 published presentation alerts remain outside this lane; current relevant supplier definitions already carry their separately owned repair receipts.",
+    "diagrams": "No TikZ/tikzcd diagrams occur in the assigned items; these finite-sum proofs require none.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, independent rejudgment and ordinary native convergence/certification remain engine duties.",
+    "independent_review_claimed": false
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-78.pages.json": "1a6bd6e8483e00d54523ef327575d11578313fedefb71ade4f82f76d98f43176",
+    "research/machine-learning-all-101-2026-10-19-batch-78.proof-contracts.json": "a019173b39070e25afafbf9a48264a33f1ea9c6fa35d1803e932a947c7bb52e2"
+  }
+}

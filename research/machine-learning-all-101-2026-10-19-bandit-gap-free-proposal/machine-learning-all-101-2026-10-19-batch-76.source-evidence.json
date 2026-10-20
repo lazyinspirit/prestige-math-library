@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "76",
+  "source_coverage_file": "research/machine-learning-all-101-2026-10-19-batch-76.coverage.json",
+  "source_fetch_check": {
+    "command": "node tools/source-fetch-check.mjs --coverage research/machine-learning-all-101-2026-10-19-batch-76.coverage.json --stamp",
+    "result": "source-fetch-check: 4/4 source(s) fetch-verified (2 newly stamped); source-fetch-check: 4/4 source(s) resolved (0 documented drops; not fetch stamps)",
+    "exit_code": 0,
+    "recovery_retries_added": 0,
+    "prior_attempts_reused": true
+  },
+  "author_reading_scope": "Inspected the complete relevant Lattimore\u2013Szepesv\u00e1ri sections on the finite stochastic model and regret (PDF pp. 65\u201382), centered sub-Gaussian MGF tails (pp. 83\u201397), ETC (pp. 100\u2013110), and UCB including both expected-regret theorems (pp. 111\u2013125). The sub-Gaussian independent-sum lemma and ETC fixed-prefix difference step are exercises 5.7 and 6.1; neither is claimed as source-proved, and both are supplied locally. Read Bubeck\u2013Cesa-Bianchi Chapter 2 \u00a7\u00a72.1\u20132.2 (PDF pp. 11\u201315), including Equation (2.2), Theorem 2.1 and its complete general-MGF UCB proof; the alternative confidence schedule and constants are not imported. A separate IITM course-note candidate was fetched and PDF pp. 1\u20137 inspected, then dropped because its cover explicitly says \u2018Rough draft. Do not distribute.\u2019 No retrieval failed and no recovery retry was needed. Read Stephen Semmes, Elements of Analysis, Chapter 3 \u00a73.9, Theorem 3.9.1 and its complete proof plus \u00a73.9.3 p-series application (PDF pp. 65\u201366 / printed pp. 54\u201355). Read John K. Hunter, Measure Theory Notes, Chapter 4 \u00a74.2, Theorem 4.6 and its complete proof (PDF pp. 2\u20133 / printed pp. 41\u201342). The first supports the local zeta-normalizer lemma; the second supports its local simple-truncation expectation lemma.",
+  "sources": [
+    {
+      "title": "Tor Lattimore and Csaba Szepesv\u00e1ri, Bandit Algorithms",
+      "url": "https://tor-lattimore.com/downloads/book/book.pdf",
+      "page_scopes": [
+        "stochastic-finite-armed-bandits"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T21:14:11.074Z",
+        "bytes": 5400750,
+        "sha256_16": "b71acb03034d73ca",
+        "kind": "pdf",
+        "pages": 597
+      },
+      "author_read_locators": [
+        {
+          "locator": "\u00a74.1 and \u00a7\u00a74.4\u20134.6, PDF pp. 65\u201374 / printed pp. 56\u201365; \u00a74.6's reward-stack construction and Exercise 4.4.",
+          "supported_items": [
+            "def-stochastic-bandit-and-pseudo-regret",
+            "lem-bandit-reward-table-has-fixed-conditional-laws"
+          ],
+          "disposition": "Used the finite arm-law, finite-mean, regret, and reward-stack interfaces. The table-to-sequential conditional-law argument is proved locally; Exercise 4.4 is not imported."
+        },
+        {
+          "locator": "\u00a75.3 Definition 5.2, Theorem 5.3, Lemma 5.4 and Corollary 5.5, PDF pp. 86\u201387 / printed pp. 77\u201378.",
+          "supported_items": [
+            "def-centered-subgaussian-reward",
+            "lem-independent-subgaussian-prefix-tail"
+          ],
+          "disposition": "Used the exact centered MGF convention and the fixed-sample Chernoff tail calculation. The independent-sum property in Lemma 5.4 is Exercise 5.7; its proof is supplied locally by finite product law and Tonelli."
+        },
+        {
+          "locator": "Chapter 6 \u00a76.1, Algorithm 1, Theorem 6.1 and proof, PDF pp. 100\u2013103 / printed pp. 91\u201394; Exercise 6.1, PDF p. 105 / printed p. 96.",
+          "supported_items": [
+            "alg-explore-then-commit",
+            "thm-explore-then-commit-expected-regret"
+          ],
+          "disposition": "Used the round-robin exploration rule, expected-regret statement, action-count decomposition, and empirical-mean comparison. The proof's difference-tail assertion is Exercise 6.1 and is re-proved locally."
+        },
+        {
+          "locator": "Chapter 7 \u00a77.1, Algorithm 3, Theorems 7.1\u20137.2 and complete proofs, PDF pp. 111\u2013118 / printed pp. 102\u2013109.",
+          "supported_items": [
+            "alg-upper-confidence-bound-bandit",
+            "lem-ucb-suboptimal-arm-expected-pulls",
+            "thm-ucb-gap-dependent-regret",
+            "thm-ucb-gap-free-regret"
+          ],
+          "disposition": "The source Algorithm 3, Theorem 7.1 and complete proofs support the prescribed confidence index, deterministic-prefix good event, expected pull bound and gap-dependent estimate. Source Theorem 7.2 and its threshold-split proof yield 8*sqrt(n*k*log n)+3sum gaps. The approved smaller sqrt(8*n*k*log n)+3sum gaps is established by a separate local owner repair using once-per-prefix charging, integrated tail bounds, exact small-horizon arithmetic and Cauchy\u2013Schwarz. Original native source reading remains historical; the stronger proof is actual post-native repair work, not an imported source theorem."
+        },
+        {
+          "locator": "Chapter 7 \u00a77.4 Exercise 7.1, PDF pp. 120\u2013121 / printed pp. 111\u2013112.",
+          "supported_items": [
+            "lem-ucb-suboptimal-arm-expected-pulls"
+          ],
+          "disposition": "Read as an explicit warning that a fixed-sample tail cannot be applied directly at a random pull count. The local proof instead unions over every deterministic prefix."
+        }
+      ]
+    },
+    {
+      "title": "S\u00e9bastien Bubeck and Nicol\u00f2 Cesa-Bianchi, Regret Analysis of Stochastic and Nonstochastic Multi-armed Bandit Problems, Foundations and Trends in Machine Learning 5 (2012)",
+      "url": "https://arxiv.org/pdf/1204.5721",
+      "page_scopes": [
+        "stochastic-finite-armed-bandits"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T21:14:14.286Z",
+        "bytes": 891341,
+        "sha256_16": "52e871fa30c9aaa2",
+        "kind": "pdf",
+        "pages": 130
+      },
+      "author_read_locators": [
+        {
+          "locator": "Chapter 2 \u00a7\u00a72.1\u20132.2, PDF pp. 11\u201315 / printed pp. 8\u201312; Equation (2.2), Theorem 2.1 and complete proof.",
+          "supported_items": [
+            "def-stochastic-bandit-and-pseudo-regret",
+            "def-centered-subgaussian-reward",
+            "alg-upper-confidence-bound-bandit",
+            "lem-ucb-suboptimal-arm-expected-pulls",
+            "thm-ucb-gap-dependent-regret"
+          ],
+          "disposition": "Used as an independent treatment of stochastic-arm means/gaps, two-sided centered MGF control, and the UCB good-event/prefix-union proof route. Its alpha-psi schedule and regret constants differ from the assigned fixed-confidence algorithm; no differing constant or schedule is imported."
+        }
+      ]
+    },
+    {
+      "title": "Stephen Semmes, Elements of Analysis",
+      "url": "https://math.rice.edu/~semmes/math331.pdf",
+      "page_scopes": [
+        "stochastic-finite-armed-bandits"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T22:04:49.361Z",
+        "bytes": 464319,
+        "sha256_16": "18f75171d1435d33",
+        "kind": "pdf",
+        "pages": 161
+      },
+      "author_read_locators": [
+        {
+          "locator": "Chapter 3 \u00a73.9, Theorem 3.9.1 and complete proof, PDF pp. 65\u201366 / printed pp. 54\u201355; \u00a73.9.3 applies condensation to p-series.",
+          "supported_items": [
+            "lem-zeta-two-and-three-converge"
+          ],
+          "disposition": "Read the complete condensation theorem proof in both directions and its p-series application. The local lemma specializes it to p=2 and p=3."
+        }
+      ]
+    },
+    {
+      "title": "John K. Hunter, Measure Theory Notes",
+      "url": "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes_ch4.pdf",
+      "page_scopes": [
+        "stochastic-finite-armed-bandits"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T22:04:50.960Z",
+        "bytes": 251626,
+        "sha256_16": "c27138615c562be2",
+        "kind": "pdf",
+        "pages": 15
+      },
+      "author_read_locators": [
+        {
+          "locator": "Chapter 4 \u00a74.2, Theorem 4.6 (Monotone Convergence Theorem) and complete proof, PDF pp. 2\u20133 / printed pp. 41\u201342.",
+          "supported_items": [
+            "lem-countably-valued-expectation-is-weighted-series"
+          ],
+          "disposition": "Read the complete monotone convergence theorem proof. The local countable-expectation identity is proved from finite simple truncations and this theorem."
+        }
+      ]
+    }
+  ],
+  "retrieved_not_used": [
+    {
+      "title": "Prashanth L. A., CS6046: Multi-armed Bandits, course notes (2018)",
+      "url": "https://cse.iitm.ac.in/~prashla/cs6046/cs6046-notes.pdf",
+      "fetch_verified": {
+        "at": "2026-10-18T21:14:14.195Z",
+        "bytes": 360199,
+        "sha256_16": "33aaeb6ce90d9dae",
+        "kind": "pdf",
+        "pages": 34
+      },
+      "read_extent": "PDF pp. 1\u20137 inspected; the cover explicitly says \u2018Rough draft. Do not distribute.\u2019 No later sections were read.",
+      "disposition": "dropped",
+      "reason": "The author's cover notice makes this draft unsuitable as an attributed source. The relevant claims are independently proved locally and checked against the two complete public treatments above."
+    }
+  ],
+  "limitations": "Only the cited mathematical sections of the four full-text sources, not the complete books/notes, were read. No exercise proof was treated as supplied. The two bandit sources supply independent treatments of the assigned bandit claims; Semmes and Hunter support only the two local prerequisites. The CS6046 candidate remains separately recorded as retrieved_not_used. No retrieval failures, fabricated fetch evidence, high-probability claims, or choice-axiom uses are recorded.",
+  "local_results": [
+    {
+      "item": "lem-zeta-two-and-three-converge",
+      "disposition": "proved_locally",
+      "dependencies": [
+        "thm-cauchy-condensation",
+        "thm-geometric-series",
+        "def-integer-power",
+        "def-canonical-natural",
+        "lem-of-naturals-positive"
+      ],
+      "argument": "Cauchy condensation reduces the positive p=2 and p=3 series to geometric series with ratios 1/2 and 1/4."
+    },
+    {
+      "item": "lem-countably-valued-expectation-is-weighted-series",
+      "disposition": "proved_locally",
+      "dependencies": [
+        "def-probability-measure",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-integrable-real-and-complex-functions-and-their-integrals",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "cor-expectation-of-an-indicator-is-probability",
+        "thm-monotone-convergence-for-the-integral",
+        "def-nonnegative-extended-series"
+      ],
+      "argument": "Finite simple truncations increase to the countably valued variable; indicator expectation, finite linearity, and monotone convergence give the weighted extended series and its integrability consequence."
+    }
+  ],
+  "owner_repair_attribution": {
+    "basis": "Staged owner-delegated cycle2 proposal only; actual installation/readiness is not claimed.",
+    "evidence": "research/machine-learning-all-101-2026-10-19-bandit-gap-free-proposal/INTEGRATION.json",
+    "source_constant": "Source Theorem7.2 gives 8 outside radical.",
+    "local_statement": "Approved sqrt(8*n*k*log n) preserved with genuine new local helpers.",
+    "native_reading": "Original author read locators/fetch stamps are historical evidence, not proof of this post-native sharpening."
+  }
+}

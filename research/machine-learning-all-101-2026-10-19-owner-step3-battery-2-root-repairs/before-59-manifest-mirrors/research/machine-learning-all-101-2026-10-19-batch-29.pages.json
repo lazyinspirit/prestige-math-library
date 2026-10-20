@@ -1,0 +1,295 @@
+[
+  {
+    "order": 2752,
+    "id": "ml02-private-learning",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Private ERM and private online learning",
+    "companion": "ml02-private-learning-examples",
+    "requires": [
+      "finite-class-pac-learning-and-erm",
+      "ml02-differential-privacy",
+      "quantum-optimization-sdp-and-variational-algorithms"
+    ],
+    "items": [
+      {
+        "id": "alg-private-randomized-weighted-majority",
+        "kind": "algorithm",
+        "title": "Randomized weighted majority with full information",
+        "page": "ml02-private-learning",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-measurable-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 11 §11.2",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For k,T≥1, η>0, and loss vectors ℓ_t∈[0,1]^k, initialize w_{1,j}=1. At each round draw a_t=j with probability w_{t,j}/∑_r w_{t,r}, observe the full vector ℓ_t, and update w_{t+1,j}=w_{t,j}exp(−ηℓ_t(j)). Return the action transcript.",
+        "proof_obligations": [
+          "Show finite positive normalizers and measurability of the finite action probability kernels."
+        ],
+        "axiom_use": "No choice axiom is used to define the finite-round procedure."
+      },
+      {
+        "id": "alg-private-finite-class-erm",
+        "kind": "algorithm",
+        "title": "Finite-class empirical-risk selection with exponential weights",
+        "page": "ml02-private-learning",
+        "deps": [
+          "cor-exponential-reciprocal-and-positivity",
+          "def-measurable-rectangle",
+          "def-measurable-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-real-exponential-function-and-e",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-exponential-is-strictly-increasing",
+          "thm-threshold-characterisations-of-real-and-extended-real-measurability"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 3 §3.4 and Chapter 11 §11.1",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript, §4.2",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For n≥1, ε>0, a nonempty finite class C of measurable binary classifiers, and a finite labeled sample or multiset D of size m≥n, define L̂_D(h)=m⁻¹∑_{(x,y)∈D}1{h(x)≠y}. Output h∈C with probability proportional to exp(−εnL̂_D(h)/2), using 1/n as a sensitivity upper-bound scale.",
+        "proof_obligations": [
+          "Verify the mismatch losses and sample-dependent probabilities are measurable, all weights are finite and positive, and the normalization defines a probability kernel."
+        ],
+        "axiom_use": "No choice axiom is used for finite normalization or measurability."
+      },
+      {
+        "id": "thm-private-online-learning-regret-under-composition",
+        "kind": "theorem",
+        "title": "Private online learning regret under composition",
+        "page": "ml02-private-learning",
+        "deps": [
+          "alg-private-randomized-weighted-majority",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-axiom-of-choice",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-filtration-and-filtered-probability-space",
+          "def-martingale-difference-sequence",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "lem-qa-30-exp-quadratic-bound",
+          "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+          "thm-azuma-hoeffding-inequality",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "axiom_use": "The expected potential bound and per-round likelihood-ratio proof use no choice principle. AC is assumed for the Azuma–Hoeffding high-probability regret bound and for arbitrary-measurable-output advanced composition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 11 §11.2",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Salil Vadhan, The Complexity of Differential Privacy, 2017 manuscript, §2.2",
+              "url": "https://salil.seas.harvard.edu/sites/g/files/omnuum4266/files/salil/files/manuscript_2017.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For k,T≥1 and full-information losses ℓ_t∈[0,1]^k fixed before each fresh action draw but allowed to depend on the previous transcript, define average regret R_T=T⁻¹∑_tℓ_t(a_t)−min_jT⁻¹∑_tℓ_t(j). For every η>0, E R_T≤η+ln(k)/(ηT); under AC, with probability at least 1−β, R_T≤η+ln(k)/(ηT)+√(ln(1/β)/(2T)). For k=1 regret is zero; for k≥2, η=√(ln(k)/T) gives expected bound 2√(ln(k)/T). For fixed loss sequences adjacent by arbitrary replacement of one full time-step vector, each prior-history action kernel is (2η,0)-DP. Under AC and ε>0, 0<δ<1, L=ln(1/δ), choosing η=min{ε/√(32TL),1/2,√(ε/(16T))} makes the full transcript (ε,δ)-DP. With this η the exact high-probability regret cap is η+(ln(k)/T)max{√(32TL)/ε,2,4√(T/ε)}+√(ln(1/β)/(2T)); η₀=ε/√(32TL) is retained when ε≤√(8TL) and ε≤2L, giving η₀+√(32L)ln(k)/(ε√T)+√(ln(1/β)/(2T)). The same privacy conclusion holds for interactive adjacent strategies when every common-history next-action kernel satisfies the ordered (2η,0) event inequalities.",
+        "proof_obligations": [
+          "Prove the finite log-partition potential bound for η≤1, handle η>1 directly, and derive expected and high-probability regret for nonanticipating adaptive losses using the predictable-interval martingale tail.",
+          "Prove each prior-history action-kernel event inequality under whole-vector replacement and check all three advanced-composition caps, the exact inverse-η regret expression, the source-choice region, and the interactive-kernel extension."
+        ]
+      },
+      {
+        "id": "thm-private-erm-excess-risk",
+        "kind": "theorem",
+        "title": "Private finite-class ERM excess-risk bound",
+        "page": "ml02-private-learning",
+        "deps": [
+          "alg-private-finite-class-erm",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-differential-privacy-and-adjacency",
+          "def-natural-logarithm",
+          "lem-probability-measure-basic-identities",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-finite-class-agnostic-erm-bound",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "axiom_use": "No form of the Axiom of Choice is used in the local privacy, utility, and sample-complexity arguments. The finite-class deviation supplier states its argument is choice-free; this item remains escalated until the supplier readiness record is reconciled.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 3 §3.4 and Chapter 11 §11.1",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Shai Shalev-Shwartz and Shai Ben-David, Understanding Machine Learning: From Theory to Algorithms, Chapter 4 §4.2",
+              "url": "https://www.inf.u-szeged.hu/~turan/ML-Konyv.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For a nonempty measurable instance space X, for finite labeled databases of size at least n, with add/remove neighbors required to remain in the domain, the empirical zero-one risk has sensitivity at most 1/n and the finite-class selector with weights exp(−εn L̂_D(h)/2) is pure ε-DP. For n IID examples from any distribution and a finite nonempty measurable binary class C, with probability at least 1−β the selector has population excess risk at most 2√((ln|C|+ln(4/β))/(2n))+(2/(εn))(ln|C|+ln(2/β)). For |C|≥2, n≥24 max{(ln|C|+ln(1/β))/(εα),(ln|C|+ln(1/β))/α²} suffices for excess at most α; for |C|=1, the excess is zero. The privacy proof uses 1/n as an upper-bound scale, and the statistical bound is choice-free.",
+        "proof_obligations": [
+          "Prove the pairwise add/remove sensitivity bound on the size-restricted domain, the normalized-weight ordered DP ratios, and the finite-range selector utility tail using the conservative 1/n scale.",
+          "Combine the utility event with the choice-free two-sided finite-class deviation event, derive the stated constants by a union bound, and handle the singleton class and all 0<alpha,beta<1 boundary regimes."
+        ]
+      }
+    ]
+  },
+  {
+    "order": 2753,
+    "id": "ml02-private-learning-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Private ERM and private online learning — Examples",
+    "companion": "ml02-private-learning",
+    "requires": [
+      "ml02-private-learning"
+    ],
+    "items": [
+      {
+        "id": "ex-online-one-round-replacement",
+        "kind": "example",
+        "title": "Replacing one full loss vector changes a later action kernel",
+        "page": "ml02-private-learning-examples",
+        "deps": [
+          "alg-private-randomized-weighted-majority",
+          "thm-private-online-learning-regret-under-composition"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 11 §11.2",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For k=2 and T=3, compare the all-zero loss sequence with the sequence whose second loss vector is (1,0) and whose other vectors are zero. These inputs differ by replacement of one full time-step vector; the first two action kernels agree and the third has weights (e^(−η),1) instead of (1,1).",
+        "proof_obligations": [
+          "Verify the whole-vector adjacency and compute the two third-round distributions from the online algorithm."
+        ],
+        "axiom_use": "The finite calculation uses no choice axiom; any transcript privacy conclusion is the theorem's AC-dependent result."
+      },
+      {
+        "id": "ex-private-threshold-class-erm",
+        "kind": "example",
+        "title": "Private ERM on a four-threshold class",
+        "page": "ml02-private-learning-examples",
+        "deps": [
+          "alg-private-finite-class-erm",
+          "thm-private-erm-excess-risk"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 11 §11.1",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Shai Shalev-Shwartz and Shai Ben-David, Understanding Machine Learning: From Theory to Algorithms, Chapter 4 §4.2",
+              "url": "https://www.inf.u-szeged.hu/~turan/ML-Konyv.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "On X={0,1,2}, let h_r(x)=1{x≥r} for r∈{0,1,2,3}, and take D={(0,0),(1,1),(2,0)} with n=3. The empirical risks in order r=0,1,2,3 are 2/3,1/3,2/3,1/3, so the private selector assigns weights e^(−ε),e^(−ε/2),e^(−ε),e^(−ε/2).",
+        "proof_obligations": [
+          "Compute each threshold's predictions and empirical risk, then normalize the four private-selection weights."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "ex-private-erm-large-finite-class",
+        "kind": "example",
+        "title": "A finite class can make private ERM impractical",
+        "page": "ml02-private-learning-examples",
+        "deps": [
+          "alg-private-finite-class-erm",
+          "thm-private-erm-excess-risk"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Cynthia Dwork and Aaron Roth, The Algorithmic Foundations of Differential Privacy, Chapter 11 §11.1",
+              "url": "https://privacytools.seas.harvard.edu/resource/thealgorithmicfoundationsofdifferentialprivacypdf"
+            },
+            {
+              "title": "Shai Shalev-Shwartz and Shai Ben-David, Understanding Machine Learning: From Theory to Algorithms, Chapter 4 §4.2",
+              "url": "https://www.inf.u-szeged.hu/~turan/ML-Konyv.pdf"
+            }
+          ]
+        },
+        "statement_or_definition": "For X={0,1}^d, let C contain every binary function on X, so |C|=2^(2^d). A direct implementation of the finite-class private selector evaluates each classifier on each of n sample points and normalizes one weight per classifier, requiring order n·2^(2^d) score evaluations; this is a cost of the direct enumeration, not a lower bound for every possible algorithm.",
+        "proof_obligations": [
+          "Count the functions from a 2^d-point set to {0,1} and count the empirical-score evaluations in the specified direct implementation."
+        ],
+        "axiom_use": "No choice axiom is used."
+      }
+    ]
+  }
+]

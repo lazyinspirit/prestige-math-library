@@ -1,0 +1,267 @@
+{
+  "group": "ac",
+  "batches": [
+    "87"
+  ],
+  "pages_read": [
+    "offline-reinforcement-learning-and-off-policy-evaluation",
+    "offline-reinforcement-learning-and-off-policy-evaluation-examples"
+  ],
+  "items_read": [
+    "thm-offline-coverage-impossibility-example",
+    "def-offline-reinforcement-learning-dataset",
+    "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+    "alg-trajectory-importance-sampling-ope",
+    "alg-doubly-robust-ope",
+    "thm-trajectory-importance-sampling-is-unbiased",
+    "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+    "rem-offline-rl-distribution-shift-and-pessimism",
+    "ex-offline-ope-full-support-and-missing-support",
+    "ex-offline-ope-exploding-trajectory-weights",
+    "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+    "ex-offline-ope-doubly-robust-correctness-branches"
+  ],
+  "conventions": [
+    {
+      "convention": "Finite nonempty state, action, and reward sets; stationary Markov policies; integer horizon H ≥ 1; discount 0 ≤ γ ≤ 1; fixed initial state s₀; common joint next-state/reward mass under target and behavior policies. AC is assumed for policy-induced path laws.",
+      "fixed_by": "def-offline-reinforcement-learning-dataset",
+      "matters_for": [
+        "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+        "alg-trajectory-importance-sampling-ope",
+        "alg-doubly-robust-ope",
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component"
+      ]
+    },
+    {
+      "convention": "Logged data contain n ≥ 1 independent trajectories with behavior law and known true behavior propensities. Full horizon coverage is target-law absolute continuity with respect to behavior law.",
+      "fixed_by": "def-offline-reinforcement-learning-dataset",
+      "matters_for": [
+        "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+        "rem-offline-rl-distribution-shift-and-pessimism"
+      ]
+    },
+    {
+      "convention": "W₀:ₜ includes actions 0 through t, and its prefix includes reward Rₜ₊₁ and state Sₜ₊₁. Weights are set to zero on behavior-null prefixes.",
+      "fixed_by": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+      "matters_for": [
+        "alg-trajectory-importance-sampling-ope",
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component"
+      ]
+    },
+    {
+      "convention": "WIS returns zero when its total weight is zero. An observed zero behavior propensity with positive target propensity returns unsupported; a zero-over-zero ratio is set to zero.",
+      "fixed_by": "alg-trajectory-importance-sampling-ope",
+      "matters_for": [
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased"
+      ]
+    },
+    {
+      "convention": "DR Q functions and finite nonnegative multipliers are fixed during evaluation expectation, possibly conditional on independent training data. V̂ₜ averages Q̂ₜ under the target policy, and V̂_H is identically zero.",
+      "fixed_by": "alg-doubly-robust-ope",
+      "matters_for": [
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+        "ex-offline-ope-doubly-robust-correctness-branches"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-offline-reinforcement-learning-dataset",
+      "statement": "A fixed logged dataset of size n ≥ 1 consists of independent trajectories, each with law Pᵘ_H for a behavior policy μ; the true behavior propensities are known. Full horizon coverage means Pᵖ_H ≪ Pᵘ_H. Policy laws have the stated products of action probabilities and common transition/reward masses.",
+      "used_by": [
+        "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+        "alg-trajectory-importance-sampling-ope",
+        "alg-doubly-robust-ope",
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+        "rem-offline-rl-distribution-shift-and-pessimism",
+        "ex-offline-ope-full-support-and-missing-support",
+        "ex-offline-ope-exploding-trajectory-weights",
+        "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+        "ex-offline-ope-doubly-robust-correctness-branches"
+      ]
+    },
+    {
+      "id": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+      "statement": "Under AC, the finite-horizon dataset conditions, and full horizon coverage, each prefix policy-ratio product is a version of the target-prefix Radon–Nikodym derivative with respect to the behavior-prefix law. For every target-integrable real prefix function g, Eμ[W₀:ₜg] = Eπ[g] and Eμ[W₀:ₜ|g|] < ∞; this includes full-horizon functions.",
+      "used_by": [
+        "alg-trajectory-importance-sampling-ope",
+        "alg-doubly-robust-ope",
+        "thm-trajectory-importance-sampling-is-unbiased",
+        "thm-doubly-robust-ope-is-unbiased-under-either-correct-component"
+      ]
+    },
+    {
+      "id": "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+      "statement": "Under AC and the stated finite-horizon dataset conditions, with fixed finite Q functions and multipliers, the DR sample average has expectation J_H(π;s₀) either when full coverage holds and multipliers are exact ratios on behavior-positive reachable pairs, or when the entire finite-horizon Q model is exact with zero terminal value. The exact-model branch requires neither coverage nor correct multipliers.",
+      "used_by": [
+        "ex-offline-ope-doubly-robust-correctness-branches"
+      ]
+    },
+    {
+      "id": "thm-trajectory-importance-sampling-is-unbiased",
+      "statement": "Under AC, full trajectory coverage, known true behavior propensities, and the finite-horizon dataset conditions, numerical outputs of the importance-sampling algorithm are finite, unsupported occurs only on a null event, and OIS and PDIS each have expectation J_H(π;s₀) after any fixed finite extension there. No finite-sample WIS unbiasedness is asserted.",
+      "used_by": [
+        "rem-offline-rl-distribution-shift-and-pessimism"
+      ]
+    },
+    {
+      "id": "thm-offline-coverage-impossibility-example",
+      "statement": "The two specified finite one-step MDPs have identical behavior-data laws at every sample size but target values 1 and −1 and different unique optimal initial actions. No real-valued data estimator can be unbiased in both, and no data-based action selector can identify the unique optimum with certainty in both.",
+      "used_by": [
+        "rem-offline-rl-distribution-shift-and-pessimism",
+        "ex-offline-ope-full-support-and-missing-support"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+      "used_for": "Direction of coverage: behavior-null events must be target-null.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited AC hypothesis for path-law, RN, and conditional-expectation suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Target values and expectations under identical logged-data laws.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independent trajectory sampling convention.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Absolute integrability and subtraction of finite positive and negative integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Trajectory probability measures have total mass one.",
+      "opened": true
+    },
+    {
+      "id": "def-radon-nikodym-derivative",
+      "used_for": "Density is an almost-everywhere equivalence class rather than a distinguished pointwise function.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-radon-nikodym-derivatives",
+      "used_for": "Factoring prefix densities through finite counting measure, with a common finite exhaustion.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Nonnegative substitution applied separately to positive and negative parts.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite reward sums, estimator averages, and DR telescoping.",
+      "opened": true
+    },
+    {
+      "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+      "used_for": "RN existence and uniqueness for finite prefix measures under AC.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Almost-sure interpretation of DR conditional residual identities.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Event-integral characterization of conditional expectations on finite history sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Linearity and preservation of total expectation in the exact-model DR branch.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-expectation-exists-by-radon-nikodym",
+      "used_for": "Existence under AC without a completeness assumption.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Pulling the bounded history-measurable cumulative multiplier out of conditional expectation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-offline-ope-doubly-robust-correctness-branches",
+      "concern": "Verification 1.1 writes V̂₀(s₀) = ½Q̂₀(s₀,a) + ½Q̂₀(s₀,b). The Example specifies a target policy choosing b deterministically, and alg-doubly-robust-ope defines V̂ using target probabilities, so the defining average is 0·Q̂₀(s₀,a) + 1·Q̂₀(s₀,b). Both fitted Q values are zero here, so the displayed equality and resulting score remain numerically true, but the coefficients incorrectly use the behavior policy.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "Definition contains 'Every family of nonempty sets has a choice function ([[def-choice-function]]).' The inline hyperlink interrupts the complete Definition and has no following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "Definition says 'integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]' before completing the expectation definition. The link remains inside Definition rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "Definition says the generated sigma-algebras are independent 'in the sense of [[def-independent-sigma-algebras-and-events]]' and subsequently links [[def-sigma-algebra-generated-by-a-function]]. Both links remain inside Definition, with no Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "finding": "Definition contains 'they are measurable by [[prop-closure-properties-of-measurable-functions-used-by-the-integral]]' and '([[def-complex-conjugate-real-imaginary-part-and-modulus]])' before the complete definition ends. These hyperlinks have not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "Definition contains '([[def-measure]])' and '([[def-measure-space]])' inline in its probability-measure and probability-space definitions. There is no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-radon-nikodym-derivative",
+      "finding": "Definition directly links [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[def-axiom-of-choice]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]], and [[def-measure-null-set-and-almost-everywhere]] within its numbered clauses and concluding qualification. These links interrupt Definition instead of appearing afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-as-an-ae-class",
+      "finding": "Definition includes the paragraph beginning 'Existence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]]', followed by further supplier links. It remains within Definition and is followed by Source notes rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "Definition includes 'Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]'. These hyperlinks remain in Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "offline-reinforcement-learning-and-off-policy-evaluation",
+      "to": "tabular-prediction-and-control",
+      "faithful": true,
+      "note": "Opened lem-finite-mdp-policy-action-state-reward-path-law. Its AC, finite joint transition/reward law, stationary-policy, fixed-start, and finite-prefix product hypotheses are preserved by the dataset definition and ratio lemma. The DR proof's conditional next-state/reward claim follows by dividing positive successive prefix masses."
+    },
+    {
+      "from": "verifiable-generation-and-test-time-sampling",
+      "to": "offline-reinforcement-learning-and-off-policy-evaluation",
+      "faithful": true,
+      "note": "Opened rem-reasoning-training-evidence-and-evaluation-targets. Its actual citation explicitly retains AC, stationary policies, common fixed start and transition/reward law, full-horizon absolute continuity, and target integrability. It correctly says clipping and self-normalization are not justified by the exact density identity."
+    }
+  ]
+}

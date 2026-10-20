@@ -13,6 +13,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-convex-subset-of-euclidean-space.json
   precheck: n/a
   audited: 2026-08-02
 sources:
@@ -25,4 +26,9 @@ pipeline_run: null
 
 ## Definition
 
-A subset $U\subseteq\mathbb R^m$ is **convex** when, for all $x,y\in U$ and $t\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.
+A subset $U\subseteq\mathbb R^m$ is **convex** when, for all $x,y\in U$ and $t\in[0,1]$ (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.
+
+## Definition references
+
+[[def-interval]]
+

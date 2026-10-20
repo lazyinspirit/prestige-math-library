@@ -1,0 +1,220 @@
+{
+  "group": "n",
+  "batches": [
+    "43"
+  ],
+  "pages_read": [
+    "initialization-and-signal-propagation",
+    "initialization-and-signal-propagation-examples"
+  ],
+  "items_read": [
+    "lem-centered-independent-weighted-sum-variance",
+    "lem-symmetric-rectifier-moments",
+    "lem-iid-relu-layer-forces-zero-atom-next",
+    "alg-rectifier-variance-preserving-initialization",
+    "thm-relu-forward-variance-recurrence",
+    "thm-relu-backward-variance-recurrence",
+    "cor-prelu-variance-preserving-scale",
+    "ex-zero-mean-or-bias-breaks-relu-half-moment",
+    "ex-finite-width-iid-relu-stack-has-zero-atom",
+    "ex-fan-in-versus-fan-out-initialization",
+    "ex-prelu-variance-scale"
+  ],
+  "conventions": [
+    {
+      "convention": "Weight matrices have shape d_l by d_(l-1); fan-in is d_(l-1), fan-out is d_l, and backward multiplication uses the transpose.",
+      "fixed_by": "alg-rectifier-variance-preserving-initialization",
+      "matters_for": [
+        "thm-relu-forward-variance-recurrence",
+        "thm-relu-backward-variance-recurrence",
+        "cor-prelu-variance-preserving-scale",
+        "ex-fan-in-versus-fan-out-initialization",
+        "ex-prelu-variance-scale"
+      ]
+    },
+    {
+      "convention": "Symmetry means equality in distribution of Z and -Z. Zero atoms are allowed; positive and negative sign probabilities are each (1-p_0)/2.",
+      "fixed_by": "lem-symmetric-rectifier-moments",
+      "matters_for": [
+        "lem-iid-relu-layer-forces-zero-atom-next",
+        "thm-relu-forward-variance-recurrence",
+        "thm-relu-backward-variance-recurrence",
+        "cor-prelu-variance-preserving-scale",
+        "ex-zero-mean-or-bias-breaks-relu-half-moment",
+        "ex-finite-width-iid-relu-stack-has-zero-atom"
+      ]
+    },
+    {
+      "convention": "PReLU is t for t>0 and at for t≤0. Its specified gate at zero is c; this is an ordinary derivative at zero only when a=c=1.",
+      "fixed_by": "lem-symmetric-rectifier-moments",
+      "matters_for": [
+        "alg-rectifier-variance-preserving-initialization",
+        "cor-prelu-variance-preserving-scale",
+        "ex-prelu-variance-scale"
+      ]
+    },
+    {
+      "convention": "ReLU backward signals use the zero-at-kink gate 1_(Z>0). At zero preactivations they are specified backpropagation signals, without an assertion of ordinary differentiability.",
+      "fixed_by": "thm-relu-backward-variance-recurrence",
+      "matters_for": [
+        "cor-prelu-variance-preserving-scale",
+        "ex-finite-width-iid-relu-stack-has-zero-atom",
+        "ex-fan-in-versus-fan-out-initialization"
+      ]
+    },
+    {
+      "convention": "Forward preservation concerns centered preactivation variance, using activation second moments. The raw-input first layer has no preceding rectifier factor; repeated half factors start at layer 2.",
+      "fixed_by": "thm-relu-forward-variance-recurrence",
+      "matters_for": [
+        "cor-prelu-variance-preserving-scale",
+        "ex-fan-in-versus-fan-out-initialization"
+      ]
+    },
+    {
+      "convention": "G_l denotes a common downstream second moment, including an uncentered terminal signal. Backward preservation formulas require gate/signal independence and independence of the whole weight matrix from the gated signal.",
+      "fixed_by": "thm-relu-backward-variance-recurrence",
+      "matters_for": [
+        "cor-prelu-variance-preserving-scale",
+        "ex-fan-in-versus-fan-out-initialization",
+        "ex-finite-width-iid-relu-stack-has-zero-atom",
+        "ex-prelu-variance-scale"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-centered-independent-weighted-sum-variance",
+      "statement": "For mutually independent centered square-integrable real weights W_i of variances σ_i² and a real random vector X with square-integrable coordinates independent of the whole weight vector, S=Σ_i W_iX_i is square-integrable, E[S]=0, and Var(S)=Σ_i σ_i²E[X_i²]. The coordinates of X need not be mutually independent.",
+      "used_by": [
+        "thm-relu-forward-variance-recurrence",
+        "thm-relu-backward-variance-recurrence",
+        "cor-prelu-variance-preserving-scale"
+      ]
+    },
+    {
+      "id": "lem-symmetric-rectifier-moments",
+      "statement": "For symmetric real Z with p_0=P(Z=0), each strict sign has probability (1-p_0)/2. If E[Z²]<∞, E[ReLU(Z)]=E[|Z|]/2, E[ReLU(Z)²]=E[Z²]/2, E[φ_a(Z)]=(1-a)E[|Z|]/2, and E[φ_a(Z)²]=(1+a²)E[Z²]/2. Var(ReLU(Z))=E[Z²]/2−E[|Z|]²/4. Without a moment hypothesis, E[η_(a,c)(Z)²]=(1+a²)(1-p_0)/2+c²p_0.",
+      "used_by": [
+        "lem-iid-relu-layer-forces-zero-atom-next",
+        "thm-relu-forward-variance-recurrence",
+        "thm-relu-backward-variance-recurrence",
+        "cor-prelu-variance-preserving-scale",
+        "ex-zero-mean-or-bias-breaks-relu-half-moment"
+      ]
+    },
+    {
+      "id": "thm-relu-backward-variance-recurrence",
+      "statement": "For the specified zero-at-kink backward signals, square-integrable summands T_ji=W_(l,ji)γ_(l,j)g_(l,j) give the exact mean sum and variance/covariance sum without independence. Additionally, independent symmetric centered weight entries of common variance σ_l², symmetric preactivations of common zero probability p_l, common downstream second moment G_l, gate-vector/downstream-signal independence, and weight-matrix/gated-signal independence give centered upstream coordinates with G_(l-1)=(1-p_l)d_lσ_l²G_l/2, and the corresponding finite product when these hypotheses hold at every layer. For l≥2 with ReLU inputs and σ_l²>0, weight-matrix/gated-signal independence forces h_l=0 almost surely; gate independence and p_l<1 then force G_l=0.",
+      "used_by": [
+        "cor-prelu-variance-preserving-scale",
+        "ex-finite-width-iid-relu-stack-has-zero-atom",
+        "ex-fan-in-versus-fan-out-initialization"
+      ]
+    },
+    {
+      "id": "thm-relu-forward-variance-recurrence",
+      "statement": "For the stated finite zero-bias ReLU stack with independent symmetric centered IID layer weights independent of their layer inputs, common finite input-coordinate second moments, and symmetric preactivations, Var(Z_(l,j))=n_lσ_l²Var(Z_(l-1,1))/2 for 2≤l≤L. The raw-input relation is Var(Z_(1,j))=n_1σ_1²E[X_(0,1)²], and V_L=V_1∏_(l=2)^L(n_lσ_l²/2). Input coordinates may be dependent and zero atoms are allowed.",
+      "used_by": [
+        "cor-prelu-variance-preserving-scale",
+        "ex-fan-in-versus-fan-out-initialization"
+      ]
+    },
+    {
+      "id": "lem-iid-relu-layer-forces-zero-atom-next",
+      "statement": "For n≥1 IID symmetric real Z_i with no atom at zero, X_i=ReLU(Z_i), and arbitrary real random weights on the same probability space, T=Σ_i W_iX_i satisfies P(T=0)≥2^(-n)>0. The same conclusion holds if only the X_i are mutually independent and each Z_i is symmetric with no atom at zero.",
+      "used_by": [
+        "ex-finite-width-iid-relu-stack-has-zero-atom"
+      ]
+    },
+    {
+      "id": "cor-prelu-variance-preserving-scale",
+      "statement": "Under the stated PReLU forward assumptions, the hidden-layer forward coefficient is (1+a²)n_lσ_l²/2. Under the additional backward gate/signal and weight/gated-signal independence assumptions, the backward coefficient is d_lσ_l²κ_l, where κ_l=(1+a²)(1-p_l)/2+c_l²p_l. The forward scale is 2/((1+a²)n_l); the atomless conditional backward scale is 2/((1+a²)d_l). With atoms the conditional backward-preserving scale is 1/(d_lκ_l) when κ_l>0; κ_l=0 gives zero upstream variance for every finite weight variance.",
+      "used_by": [
+        "ex-prelu-variance-scale"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectation as a probability-space integral and direct discrete or density-based moment calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered variance and covariance definitions, including the unconditional backward covariance expansion.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Whole-vector independence, coordinate independence, and inheritance through generated sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of finite sums, products, squares, and coordinate-product maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Finite independent-family product laws and probabilities of simultaneous sign or zero events.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of measurable functions of separate independent random vectors.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Factoring integrable products and nonnegative squared products under the explicitly stated independence assumptions.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Finite-sum expectation expansions, variance expansions, and almost-sure order.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "L²-to-L¹ integrability and integrability of pairwise products.",
+      "opened": true
+    },
+    {
+      "id": "thm-change-of-variables-for-expectation",
+      "used_for": "Transferring symmetry of laws to activation moments and sign probabilities.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Ordinary backward gradients at differentiable realizations, separately from specified kink conventions.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition of def-expectation-of-a-nonnegative-or-integrable-random-variable contains the inline link in “integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”, before the definition is complete. This violates the required uninterrupted-definition policy; the link has not been placed in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "The Definition of def-independent-random-elements contains “independent in the sense of [[def-independent-sigma-algebras-and-events]]” and subsequently “from [[def-sigma-algebra-generated-by-a-function]]”. These hyperlinks remain inside the defining section rather than an immediately following Definition references section, contrary to the uninterrupted-definition policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "finding": "The Statement of thm-arithmetic-and-lattice-operations-preserve-measurability contains inline links in “from [[def-measurable-pointwise-extended-real-product]]” and “as in [[def-positive-and-negative-parts-of-a-function]]” before its four conclusions. These interrupt the complete statement and have not been moved to an immediately following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "initialization-and-signal-propagation",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "Checked the prerequisite page inventory and def-feedforward-neural-network against the initializer and both recurrence theorems. The supplier provides finite layered weighted sums, edge direction, and matrix dimensions; the consumers explicitly specify their rectified stacks and probabilistic hypotheses. They import no universal-approximation conclusion. The supplier's graph diagram and the assigned fan-in/fan-out forward/backward diagram have consistent directions and dimensions."
+    }
+  ]
+}

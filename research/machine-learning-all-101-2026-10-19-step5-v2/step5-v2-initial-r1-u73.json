@@ -1,0 +1,237 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "73",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-static-dynamic-and-strongly-adaptive-regret",
+      "model": "gpt-6-luna",
+      "context_sha256": "6aa00e9ac094fbbc4fb1222cecd54b285bcf3e90c1a86ff239dbb26118062b40",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original only-if clause did not supply a sufficient defining condition. Replaced it with a precise uniform criterion and separated pathwise, expected, almost-sure and stated-confidence modes; the base bound uses the matching mode. Static, dynamic, interval and stochastic regret formulas, finite attainment and integrability requirements remain unchanged. Hazan \u00a710.2.1 and Daniely et al. \u00a71.1 were read; the latter explicitly uses expectation for randomized protocols. No algorithm-existence assertion or choice principle is used.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1909.05207",
+        "https://proceedings.mlr.press/v37/daniely15.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-changing-comparator-path-length",
+      "model": "gpt-6-luna",
+      "context_sha256": "fec23526992f675a06150bed181268c4a5f3e3f3a1c232691cf3d8480f9b85cf",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 incorrectly attributed fixed round losses and choices to the general protocol, whose Definition expressly allows losses chosen after the action. Corrected F1 to distinguish fixed horizon/action set from choice-before-observation timing and environment-dependent loss timing. This is nonfatal: the example itself fixes all losses and choices explicitly. Direct calculation gives static regret 3/2-1=1/2, dynamic regret 3/2, path length 1+1+1=3, and interval regrets (1/2,1/2,1/2,0,0,1/2). All minima are finite and attained; no choice axiom or strong-adaptivity guarantee is used. Example description and all proof steps remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-stochastic-two-arm-pseudo-regret",
+      "model": "gpt-6-luna",
+      "context_sha256": "f41543e706920b914d87b87c80be43ba2cb0d4b996a1608430d79733494fe269",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 wrongly credited the regret definition with defining arm counts, whereas the finite-arm lemma explicitly defines N_i(T) as the sum of selected-arm indicators. Added that lemma as the exact supplier of the count clause and added its F2 citation contract; existing deps already include it. The error is nonfatal because the count definition is locally available and all arithmetic is sound. On the equiprobable two-point space Y_1 has P_2 law, mean 1/2, and both required event identities hold for the trivial pre-reward history. Means 3/4 and 1/2 give pseudo-regret 1/4, counts (0,1), realized reward regret values 3/4 and -1/4, expectation 1/4 and weighted expected-count sum 1/4. No unplayed reward or extra independence is assumed. Example description and proof steps remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-static-dynamic-and-strongly-adaptive-regret",
+      "disposition": "repaired",
+      "post_sha256": "ac3362135cc344ee7553d98d92c4979532f6c2c916d3d4c0e23ecb2e3622a465",
+      "review_context_sha256": "31b283775ca71481c7aa6e6c521ce1b70b1978fd86dcc13a2fe1ced8bdee0dbb",
+      "reason": "The repaired Definition now gives a sufficient and necessary uniform interval criterion, fixes horizon-independent constants, and distinguishes pathwise and expected guarantees, with simultaneous probability events for qualified variants. Checked actual protocol, model and expectation prerequisites, source definitions, owning page and all twelve direct consumers; their used regret formulas are unchanged. No AC or existence assertion is added.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1909.05207",
+        "https://proceedings.mlr.press/v37/daniely15.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-changing-comparator-path-length",
+      "disposition": "repaired",
+      "post_sha256": "4f5f4d047d92566ff28f3928ddc553bd95b7549d95476188401c454c506e2d8a",
+      "review_context_sha256": "acf2822098ec7c329cf7a67823197d55ef666ed958f80e982a6669e7367f768d",
+      "reason": "The repaired F1 faithfully permits model-dependent loss timing while retaining choice-before-observation. Recomputed static regret 1/2, dynamic regret 3/2, path length 3, and all six interval regrets with attained minima. The Example and Verification steps are unchanged; the owning contract quote, precheck and rendering pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-stochastic-two-arm-pseudo-regret",
+      "disposition": "repaired",
+      "post_sha256": "fe51f695bcdce3e55ecdc27fc18a21c776af6b61552d43be89778a9b326784a8",
+      "review_context_sha256": "0fd78e6f010652a668606a8b3a943fbc3fcd7e67cf35f56ec22a4f31d53eb958",
+      "reason": "The repaired F2 attributes indicator-sum arm counts to the finite-arm lemma and regret formulas to the regret definition. Checked both fixed-law and conditional-mean identities on the trivial history, counts (0,1), means (3/4,1/2), and pseudo-regret, expected reward regret and weighted-count sum all equal to 1/4. The Example and proof steps are unchanged; contract and focused checks pass.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-contextual-bandit-protocol",
+    "def-stochastic-bandit-and-pseudo-regret",
+    "ex-changing-comparator-path-length",
+    "ex-full-information-finite-experts",
+    "ex-hedge-two-experts",
+    "ex-stochastic-two-arm-pseudo-regret",
+    "lem-finite-arm-regret-decomposes-into-expected-action-counts",
+    "thm-exp3-expected-regret",
+    "thm-exp4-expected-regret",
+    "thm-hedge-static-regret",
+    "thm-mirror-descent-regret",
+    "thm-online-gradient-descent-regret"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-static-dynamic-and-strongly-adaptive-regret",
+      "severity": "fatal",
+      "locus": "definition",
+      "status": "fixed",
+      "reason": "The one-way strong-adaptivity clause failed to define the property. Its completed uniform criterion and explicit probability modes repair the fatal definitional logic defect.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1909.05207",
+        "https://proceedings.mlr.press/v37/daniely15.pdf"
+      ],
+      "familiar": false,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-changing-comparator-path-length",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F1 overstated the protocol as fixing losses and choices. Corrected its timing restatement; the explicit finite instance and all regret calculations were already valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-stochastic-two-arm-pseudo-regret",
+      "severity": "nonfatal",
+      "locus": "facts-block",
+      "status": "fixed",
+      "reason": "F2 cited the regret definition for arm counts that only the finite-arm lemma defines. Added the precise existing supplier and citation contract; all numerical conclusions remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "def-static-dynamic-and-strongly-adaptive-regret",
+      "ex-changing-comparator-path-length",
+      "ex-stochastic-two-arm-pseudo-regret"
+    ],
+    "remaining": [],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-73.proof-contracts.json --items def-static-dynamic-and-strongly-adaptive-regret --strict --json",
+        "exit_code": 0,
+        "result": "Passed; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-static-dynamic-and-strongly-adaptive-regret.md items/ex-changing-comparator-path-length.md --json",
+        "exit_code": 0,
+        "result": "Two files; definition not-applicable, example proof pass; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-static-dynamic-and-strongly-adaptive-regret.md items/ex-changing-comparator-path-length.md --json",
+        "exit_code": 0,
+        "result": "Two files; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-73.proof-contracts.json --items ex-changing-comparator-path-length --strict --json",
+        "exit_code": 0,
+        "result": "Passed; no errors or warnings; current supplier quote."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-73.proof-contracts.json --items ex-stochastic-two-arm-pseudo-regret --strict --json",
+        "exit_code": 0,
+        "result": "Passed; no errors or warnings; count clause now has exact supplier."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-stochastic-two-arm-pseudo-regret.md --json",
+        "exit_code": 0,
+        "result": "One proof checked; pass, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-stochastic-two-arm-pseudo-regret.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-static-dynamic-and-strongly-adaptive-regret.md items/ex-changing-comparator-path-length.md items/ex-stochastic-two-arm-pseudo-regret.md",
+        "exit_code": 0,
+        "result": "3 items, 8 steps, 0 defects; run after all final item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-73.proof-contracts.json --items def-static-dynamic-and-strongly-adaptive-regret,ex-changing-comparator-path-length,ex-stochastic-two-arm-pseudo-regret --strict --json",
+        "exit_code": 0,
+        "result": "All three assigned contracts pass; no errors or warnings."
+      }
+    ],
+    "interface_change": "Only the strong-adaptivity defining clause changed; the regret formulas consumed elsewhere are byte-for-byte unchanged. Direct consumer uses were inspected; owning pages are frontmatter-only compact-v1 and need no edit. No assigned diagram is present or needed.",
+    "source_reading": [
+      "Hazan \u00a7\u00a710.1\u201310.2.1, PDF pp.192\u2013195 (one-based), especially \u00a710.2.1 definition on p.195.",
+      "Daniely, Gonen and Shalev-Shwartz \u00a71.1, PDF p.2, complete problem-setting and strongly-adaptive-regret definition; randomized expectation convention explicit."
+    ],
+    "dependencies": [
+      "def-online-decision-protocol",
+      "def-adversary-and-feedback-model",
+      "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+    ],
+    "unresolved_mathematics": [],
+    "consumer_examination": {
+      "supplier": "def-static-dynamic-and-strongly-adaptive-regret",
+      "all_direct_consumers_in_frontier": true,
+      "published_consumers": [],
+      "outside_consumers": [],
+      "disposition": "All twelve direct consumers remain sound under the changed defining clause; none uses strong adaptivity. No consumer Statement/Definition changes are needed. Unassigned owning contracts that quote the entire old Definition need current quote mirrors through their owner lane; no unassigned contract rows were edited.",
+      "page_use": "library/machine-learning/online-decision-protocols.md lists the supplier in its items inventory; compact-v1 frontmatter and empty body remain correct. The companion examples page requires this page and retains its inventory.",
+      "graph_check": "Searched current items and library for the exact supplier ID; the supplier has no aliases. All twelve item occurrences are direct deps or references. Searched strong-adaptivity and interval-regret wording for missing unlinked uses; no additional consumer found."
+    },
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "published_ledger_proposals": "No published-ledger changes: all three assigned items and all twelve direct consumers are draft frontier items. No potentially defective published consumer was found.",
+    "metadata_repairs": "Only the three assigned contract entries were edited: defining-criterion boundary reasons, current Definition quote mirrors for both examples, and the stochastic example F2-to-count-lemma citation. Historical nested independent reviews were preserved; these repairs supply no independent acceptance.",
+    "unresolved_obligations": [
+      "The engine still owes current independent rejudgment and certification; one confirmed-fatal subject requires another adjudication round even though repaired.",
+      "Unassigned consumers with full-Definition contract quotations require quote-mirror reconciliation by their ordinary owner lanes; no mathematical consumer claim change is necessary."
+    ],
+    "next_action": "Controller collects this report, routes the twelve direct frontier consumers and metadata quote mirrors, and performs ordinary independent rejudgment and certification."
+  },
+  "downstream_uses": {
+    "ex-full-information-finite-experts": "items/ex-full-information-finite-experts.md: F3 and Verification 1.2/3.1 use static regret as learner loss minus an attained fixed-comparator minimum. That formula is unchanged; 7/6 minus 1 remains 1/6. No mathematical repair.",
+    "lem-finite-arm-regret-decomposes-into-expected-action-counts": "items/lem-finite-arm-regret-decomposes-into-expected-action-counts.md: Statement and Proof 1.2/2.1 identify pseudo-regret and realized reward regret; their finite-sum formulas are unchanged. Finite measurable counts and the conditional-mean hypothesis still justify the expectation identity. No mathematical repair.",
+    "ex-changing-comparator-path-length": "items/ex-changing-comparator-path-length.md: F2 and Verification 1.1\u20132.1 use static/dynamic regret, leading-unit path length and interval regret. These formulas are unchanged; all six intervals and comparator minima check directly. Its separate F1 attribution repair is assigned here.",
+    "ex-stochastic-two-arm-pseudo-regret": "items/ex-stochastic-two-arm-pseudo-regret.md: F2 and Verification 2.2/2.3 use pseudo-regret and realized reward regret, whose formulas are unchanged. Its separate arm-count citation repair is assigned here.",
+    "def-stochastic-bandit-and-pseudo-regret": "items/def-stochastic-bandit-and-pseudo-regret.md: Definition and Definition references use mean-gap pseudo-regret, n*mu-star minus observed rewards, and their integrable expectations in the finite reward-stack model. These supplier clauses are unchanged. No mathematical repair.",
+    "def-contextual-bandit-protocol": "items/def-contextual-bandit-protocol.md: Definition references cites the expected-regret convention; Definition integrates bounded best-fixed-expert reward minus learner reward. The convention and integrability condition are unchanged. No mathematical repair.",
+    "ex-hedge-two-experts": "items/ex-hedge-two-experts.md: F3 and Verification 3.1 subtract deterministic best-expert loss 1 from expected sampled loss 7/6. The expected-static-regret clause is unchanged. No mathematical repair.",
+    "thm-hedge-static-regret": "items/thm-hedge-static-regret.md: F10 and Proof 6.1 convert deterministic mixed-loss regret into expected sampled static regret against an oblivious fixed loss sequence. Static regret, attainment and expectation clauses are unchanged. No mathematical repair.",
+    "thm-online-gradient-descent-regret": "items/thm-online-gradient-descent-regret.md: F7 and Proof 6.1 substitute an explicitly assumed finite attained minimizer into a realization-wise comparator bound. The static-regret formula and attainment caveat are unchanged. No mathematical repair.",
+    "thm-mirror-descent-regret": "items/thm-mirror-descent-regret.md: F9 and Proof 4.1/5.1 identify R_T(u) with the finite sum of loss differences for one supplied comparator. That fixed-comparator definition is unchanged. No mathematical repair.",
+    "thm-exp3-expected-regret": "items/thm-exp3-expected-regret.md: F16 and Proof 5.1 take expectations of the per-fixed-arm potential bound; Statement distinguishes fixed-sequence best-arm regret from the past-adaptive maximum of expected comparator gaps. The supplier expectation convention is unchanged. No mathematical repair.",
+    "thm-exp4-expected-regret": "items/thm-exp4-expected-regret.md: F6 and Proof 1.1 express expected best-fixed-expert regret as expected estimated-reward difference for a deterministic maximizing expert. Bounded-regret integrability and the expectation convention are unchanged. No mathematical repair."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-73.proof-contracts.json": "418793f6470fc374e6fb62f54a624b6902a11ca079fe6d85eec924246addc317"
+  }
+}

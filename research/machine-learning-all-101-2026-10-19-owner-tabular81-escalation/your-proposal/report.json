@@ -1,0 +1,727 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "81",
+  "cycle": 1,
+  "kind": "owner-current-native-scope-escalation-proposal",
+  "actual_shared_writes": false,
+  "native_execution_or_acceptance_credit": false,
+  "source_proposals": [
+    {
+      "target": "items/alg-monte-carlo-policy-evaluation.md",
+      "before_sha256": "0cb8760aa8ecc6d9daa96a43f2e8c29d58823f386177ddda6078c4f0ed5f5a34",
+      "after_sha256": "ad30bddad568e71546a49b0e0cbf7038db4770cf3efee05cffb8ea6e21365d7f",
+      "proposal": "research/machine-learning-all-101-2026-10-19-owner-tabular81-escalation/your-proposal/proposed/items/alg-monte-carlo-policy-evaluation.md",
+      "frontmatter_unchanged": true
+    },
+    {
+      "target": "items/alg-sarsa-on-policy-control.md",
+      "before_sha256": "b8282e1e2abce736acba53a01ec91a67b1715e3aaedcdb99dfc02dcc365e064c",
+      "after_sha256": "feb2220b41131f38c65a4eafa7ad1d12d41f687debef14656ac95e740c1442eb",
+      "proposal": "research/machine-learning-all-101-2026-10-19-owner-tabular81-escalation/your-proposal/proposed/items/alg-sarsa-on-policy-control.md",
+      "frontmatter_unchanged": false
+    },
+    {
+      "target": "items/alg-td-zero-prediction.md",
+      "before_sha256": "1a378428637160d104b78a0fcfc46518a55dcf2fc2790234c593516e0ce89d1c",
+      "after_sha256": "a85c40150c53d8dcc422d001fb9527038337d999ee6a5b57b3a26e6e9631c8aa",
+      "proposal": "research/machine-learning-all-101-2026-10-19-owner-tabular81-escalation/your-proposal/proposed/items/alg-td-zero-prediction.md",
+      "frontmatter_unchanged": false
+    }
+  ],
+  "metadata_proposals": [
+    {
+      "target": "research/machine-learning-all-101-2026-10-19-batch-81.proof-contracts.json",
+      "proposal": "research/machine-learning-all-101-2026-10-19-owner-tabular81-escalation/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-81.proof-contracts.json",
+      "proposal_sha256": "8597b93513ce75cbf13b26b132e4f52c636602981e900412fd49acf3a772c66d",
+      "operations": [
+        {
+          "consumer": "thm-tabular-q-learning-convergence-under-robbins-monro-conditions",
+          "citation_index": 5,
+          "fact": "F5",
+          "supplier": "alg-q-learning",
+          "section": "Definition",
+          "before_quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
+          "after_quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here."
+        },
+        {
+          "consumer": "ex-tabular-insufficient-exploration-leaves-q-values-unknown",
+          "citation_index": 1,
+          "fact": "F2",
+          "supplier": "alg-q-learning",
+          "section": "Definition",
+          "before_quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
+          "after_quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here."
+        },
+        {
+          "consumer": "ex-q-learning-constant-stepsize-can-fail-to-converge",
+          "citation_index": 3,
+          "fact": "F3",
+          "supplier": "alg-q-learning",
+          "section": "Definition",
+          "before_quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
+          "after_quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here."
+        },
+        {
+          "consumer": "ex-importance-sampling-needs-target-support",
+          "citation_index": 2,
+          "fact": "F3",
+          "supplier": "alg-monte-carlo-policy-evaluation",
+          "section": "Definition",
+          "before_quote": "Let a finite discounted MDP have $0\\le\\gamma<1$ and terminal set $S_\\dagger$. Require episodes to reach $S_\\dagger$ in finite time almost surely from every state under each policy used. For on-policy prediction, generate independent episodes under a stationary target policy $\\pi$. In episode $i$, let $I_i(s)=1$ if $s$ is visited before termination and $I_i(s)=0$ otherwise. When $I_i(s)=1$, let $t_i(s)$ be the first visit time and let $G_{t_i(s)}$ be the discounted return from that time to termination. Maintain the visit count $C(s)$ and estimate $V^\\pi(s)$ by the sample mean of these first-visit returns: after the $m$th observed first visit to $s$, update\n\n$$\nC(s)\\leftarrow m,\\qquad V(s)\\leftarrow V(s)+\\frac{G_{t_i(s)}-V(s)}{m}.\n$$\n\nFor off-policy prediction, let episodes instead be generated under a stationary behavior policy $\\mu$, while $\\pi$ remains the target policy. Require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$. For each first visit to $s$, set\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. After $n$ episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)}\n$$\n\nwhen the denominator is positive. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)W_i(s)}\n$$\n\nwhen its denominator is positive; if that denominator is zero, no weighted estimate is produced. The finite-episode likelihood-ratio identity gives the ordinary weighted return conditional mean $V^\\pi(s)$ for each positive-probability first-visit history. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures specify estimators only and make no convergence claim or Monte Carlo control claim.",
+          "after_quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\\le\\gamma<1$, terminal set $S_\\dagger\\subseteq S$, an initial-state rule, and an episode budget $N\\in\\mathbb N\\cup\\{\\infty\\}$. Assume the Axiom of Choice for the policy path laws defining $V^\\pi$ and the episode distributions, and that episodes reach $S_\\dagger$ in finite time almost surely from every state under each stationary policy used: the target $\\pi$, and also the behavior $\\mu$ in off-policy mode. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\\mu$ and stationary target policy $\\pi$. In off-policy mode require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$.\n\n**Output:** After every finite number $n$ of completed episodes, for every nonterminal state its visit count and each available estimate; report no estimate when its required denominator is zero. A finite budget $N$ returns these outputs after episode $N$; budget $\\infty$ emits successive finite-prefix outputs without a final output or convergence assertion. Set the value estimate of every terminal state to $0$.\n\nInitialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate successive independent episodes using the selected mode and initial-state rule; stop after $N$ episodes when $N$ is finite. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\\sum_{k=t_i(s)}^{T_i-1}\\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.\n\nIn on-policy mode, update only on this first visit: set $m=C(s)+1$; if $m=1$, set $\\widehat V(s)=G_{t_i(s)}$, and otherwise set\n\n$$\n\\widehat V(s)\\leftarrow\\widehat V(s)+\\frac{G_{t_i(s)}-\\widehat V(s)}{m}.\n$$\n\nThen set $C(s)=m$. In off-policy mode, for each first visit compute\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\\Sigma(s)$, and increment $C(s)$. After any $n$ completed episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{B(s)}{C(s)}\n$$\n\nwhen $C(s)>0$; otherwise no ordinary estimate is produced. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{B(s)}{W_\\Sigma(s)}\n$$\n\nwhen $W_\\Sigma(s)>0$; otherwise no weighted estimate is produced. Under target support, for each positive-probability behavior history ending immediately upon a first visit to a nonterminal state $s$, before its action is sampled, the ordinary weighted return has conditional mean $V^\\pi(s)$ by the finite-episode likelihood-ratio identity. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures make no convergence claim or Monte Carlo control claim."
+        },
+        {
+          "consumer": "ex-ordinary-importance-sampling-infinite-variance",
+          "citation_index": 4,
+          "fact": "F4",
+          "supplier": "lem-finite-episode-policy-importance-ratio-is-unbiased",
+          "section": "Statement",
+          "before_quote": "Assume the Axiom of Choice. Let a finite MDP with terminal set $S_\\dagger$ have $0\\le\\gamma<1$, and let $\\pi$ and $\\mu$ be stationary target and behavior policies. Suppose $\\pi(a\\mid x)>0$ implies $\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$, and episodes reach $S_\\dagger$ in finite time almost surely from every state under both policies. For any starting state $s$, a behavior-generated episode has first terminal time $T$ and ratio\n\n$$\n\\Lambda_{0:T-1}=\\prod_{k=0}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere the empty product for $T=0$ is $1$. For every bounded measurable real function $G$ of the finite episode,\n\n$$\nE_{\\mu,s}[\\Lambda_{0:T-1}G]=E_{\\pi,s}[G].\n$$\n\nThe identity therefore applies to every episode suffix starting at a state $s$ that can be reached by a finite behavior history. If $H$ is one positive-probability finite behavior history that first visits $s$ at time $t$, let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$$\n\nbe the suffix return. Then\n\n$$\n\\frac{E_{\\mu,s_0}[\\mathbf1_H\\Lambda_{t:T-1}G_t]}{P_{\\mu,s_0}(H)}=V^\\pi(s).\n$$\n\nThus the ordinary first-visit importance-sampling return has mean $V^\\pi(s)$ conditional on each first-visit history.",
+          "after_quote": "Assume the Axiom of Choice. Let a finite MDP with terminal set $S_\\dagger$ have $0\\le\\gamma<1$, and let $\\pi$ and $\\mu$ be stationary target and behavior policies. Suppose $\\pi(a\\mid x)>0$ implies $\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$, and episodes reach $S_\\dagger$ in finite time almost surely from every state under both policies. For any starting state $s$, a behavior-generated episode has first terminal time $T$ and ratio\n\n$$\n\\Lambda_{0:T-1}=\\prod_{k=0}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere the empty product for $T=0$ is $1$. For every bounded measurable real function $G$ of the finite episode,\n\n$$\nE_{\\mu,s}[\\Lambda_{0:T-1}G]=E_{\\pi,s}[G].\n$$\n\nThe identity therefore applies to every episode suffix starting at a state $s$ that can be reached by a finite behavior history. Fix an initial state $s_0$. If $H$ is a positive-probability finite behavior history from $s_0$ that first visits $s$ at time $t$ and ends immediately upon observing $S_t=s$, before the action $A_t$ is sampled (when $s$ is terminal, no action is sampled and the suffix is empty), let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$$\n\nbe the suffix return. Then\n\n$$\n\\frac{E_{\\mu,s_0}[\\mathbf1_H\\Lambda_{t:T-1}G_t]}{P_{\\mu,s_0}(H)}=V^\\pi(s).\n$$\n\nThus the ordinary first-visit importance-sampling return has mean $V^\\pi(s)$ conditional on each pre-action first-visit history."
+        },
+        {
+          "consumer": "ex-weighted-importance-sampling-finite-sample-bias",
+          "citation_index": 2,
+          "fact": "F3",
+          "supplier": "alg-monte-carlo-policy-evaluation",
+          "section": "Definition",
+          "before_quote": "Let a finite discounted MDP have $0\\le\\gamma<1$ and terminal set $S_\\dagger$. Require episodes to reach $S_\\dagger$ in finite time almost surely from every state under each policy used. For on-policy prediction, generate independent episodes under a stationary target policy $\\pi$. In episode $i$, let $I_i(s)=1$ if $s$ is visited before termination and $I_i(s)=0$ otherwise. When $I_i(s)=1$, let $t_i(s)$ be the first visit time and let $G_{t_i(s)}$ be the discounted return from that time to termination. Maintain the visit count $C(s)$ and estimate $V^\\pi(s)$ by the sample mean of these first-visit returns: after the $m$th observed first visit to $s$, update\n\n$$\nC(s)\\leftarrow m,\\qquad V(s)\\leftarrow V(s)+\\frac{G_{t_i(s)}-V(s)}{m}.\n$$\n\nFor off-policy prediction, let episodes instead be generated under a stationary behavior policy $\\mu$, while $\\pi$ remains the target policy. Require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$. For each first visit to $s$, set\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. After $n$ episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)}\n$$\n\nwhen the denominator is positive. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)W_i(s)}\n$$\n\nwhen its denominator is positive; if that denominator is zero, no weighted estimate is produced. The finite-episode likelihood-ratio identity gives the ordinary weighted return conditional mean $V^\\pi(s)$ for each positive-probability first-visit history. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures specify estimators only and make no convergence claim or Monte Carlo control claim.",
+          "after_quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\\le\\gamma<1$, terminal set $S_\\dagger\\subseteq S$, an initial-state rule, and an episode budget $N\\in\\mathbb N\\cup\\{\\infty\\}$. Assume the Axiom of Choice for the policy path laws defining $V^\\pi$ and the episode distributions, and that episodes reach $S_\\dagger$ in finite time almost surely from every state under each stationary policy used: the target $\\pi$, and also the behavior $\\mu$ in off-policy mode. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\\mu$ and stationary target policy $\\pi$. In off-policy mode require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$.\n\n**Output:** After every finite number $n$ of completed episodes, for every nonterminal state its visit count and each available estimate; report no estimate when its required denominator is zero. A finite budget $N$ returns these outputs after episode $N$; budget $\\infty$ emits successive finite-prefix outputs without a final output or convergence assertion. Set the value estimate of every terminal state to $0$.\n\nInitialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate successive independent episodes using the selected mode and initial-state rule; stop after $N$ episodes when $N$ is finite. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\\sum_{k=t_i(s)}^{T_i-1}\\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.\n\nIn on-policy mode, update only on this first visit: set $m=C(s)+1$; if $m=1$, set $\\widehat V(s)=G_{t_i(s)}$, and otherwise set\n\n$$\n\\widehat V(s)\\leftarrow\\widehat V(s)+\\frac{G_{t_i(s)}-\\widehat V(s)}{m}.\n$$\n\nThen set $C(s)=m$. In off-policy mode, for each first visit compute\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\\Sigma(s)$, and increment $C(s)$. After any $n$ completed episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{B(s)}{C(s)}\n$$\n\nwhen $C(s)>0$; otherwise no ordinary estimate is produced. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{B(s)}{W_\\Sigma(s)}\n$$\n\nwhen $W_\\Sigma(s)>0$; otherwise no weighted estimate is produced. Under target support, for each positive-probability behavior history ending immediately upon a first visit to a nonterminal state $s$, before its action is sampled, the ordinary weighted return has conditional mean $V^\\pi(s)$ by the finite-episode likelihood-ratio identity. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures make no convergence claim or Monte Carlo control claim."
+        }
+      ]
+    }
+  ],
+  "context_guards": {
+    "items/alg-monte-carlo-policy-evaluation.md": "0cb8760aa8ecc6d9daa96a43f2e8c29d58823f386177ddda6078c4f0ed5f5a34",
+    "items/ex-reinforce-one-step-bernoulli-mdp.md": "89004a3661ba31d3e9f86fef30f9cd98a7891a16dafec58a89c0f7f26049e9b8",
+    "items/ex-importance-sampling-needs-target-support.md": "61ff04f6d079846a66f6d658fe522bddf2e8e61203e0dee89a8ab49fe6beccec",
+    "items/ex-pac-mdp-delayed-q-zero-slack.md": "a607b1071e465ee14500293cce27c100038e9137423b0dc23869c161ac45b44e",
+    "items/def-offline-reinforcement-learning-dataset.md": "9cd2e8fa80af5268ec400170ea3a5def5562eeea8bbcd9f0c6193f0af84a7c35",
+    "items/alg-sarsa-on-policy-control.md": "b8282e1e2abce736acba53a01ec91a67b1715e3aaedcdb99dfc02dcc365e064c",
+    "items/alg-td-zero-prediction.md": "1a378428637160d104b78a0fcfc46518a55dcf2fc2790234c593516e0ce89d1c",
+    "items/ex-tabular-insufficient-exploration-leaves-q-values-unknown.md": "b934784cefdc5b413eda46a8d46820a506f1dd84969e1183a4ebc8c771f6e02e",
+    "items/ex-offline-ope-doubly-robust-correctness-branches.md": "a31e4da51d1933a69ef71c5dc0be83262ddbe5752c87fe99bed542bb2762e92f",
+    "items/lem-action-independent-baseline-does-not-bias-policy-gradient.md": "60fc009be20bfdf2688148e66a7457390ee2f724b96f20a78e9dd161944d778f",
+    "items/ex-q-learning-constant-stepsize-can-fail-to-converge.md": "259fbd676ae7522dfa3ebdcdd0251577cb7e79b2f1b7fcf3509adde5a75f441a",
+    "items/alg-doubly-robust-ope.md": "70467838db19ee5e6e30b760dbba1e229b43d9e926bd1dc96588f9b7fcbca781",
+    "items/lem-finite-mdp-policy-action-state-reward-path-law.md": "1b3762df90a96916ce49835a143e8741835941de4e5eadc6487e9381587eb55d",
+    "items/ex-offline-ope-full-support-and-missing-support.md": "31e68f4326a41e02a9e45ed5f0a97b6aefc7d5c73b924015e7ab86d3ff14f8a7",
+    "items/lem-bounded-square-summable-martingale-difference-series-converges.md": "0822e464574742dbf5bae6849d41e9eb3220d97bac1ba952fd4ea7d749d2fb08",
+    "items/thm-policy-gradient-theorem.md": "dd929ce9622519ec74f66720889ad96615573c138a29ae48ba602a73e47da9f1",
+    "items/lem-delayed-q-learning-optimism-and-update-counts.md": "098b7c7371fc2c2585cb7e8ec76b7de54159fb3e20c63feacc495e46c4cc37f9",
+    "items/alg-reinforce-with-baseline.md": "5858fd9696911196f506ace4633ba50c1421e7e098e146a6fd0eea8a7fa650c5",
+    "items/thm-doubly-robust-ope-is-unbiased-under-either-correct-component.md": "777d786d896ccd711433bb24e6fa8d908691c2f6b98ba284f563ae59ce0f2087",
+    "items/thm-delayed-q-learning-pac-bound.md": "0b17382b4b890e53fc38644fa17a7ff63b668b72e3edd878941615714b862d93",
+    "items/def-episodic-returns-td-errors-and-policy-support.md": "f6b7a3f6de378ae5cc7aa8eadb7881614e58b41aa1541ddb6ef983dd5eddc9b4",
+    "items/thm-trajectory-importance-sampling-is-unbiased.md": "cfbc5f44f5c85bec03e6a978c05b6c4b25450457894cb82c97c8ca8158a41a2f",
+    "items/alg-q-learning.md": "1a9fe5a6eaa0538d91f09dd4de24e715b0293a6c5fd67b5cbf2798b37a867920",
+    "items/ex-ordinary-importance-sampling-infinite-variance.md": "75837c0f1952723f107b6a970d56e7162c97cbca6b107f872edbfe0aff122f88",
+    "items/alg-one-step-actor-critic.md": "18940c23c778a52821dc6b853dce353efd62fb6d6c43f93daece82e137e45baa",
+    "items/alg-trajectory-importance-sampling-ope.md": "b827a21cbfdd5e08a39d783b795bed3d7f88a90803aaadfb00a327780cc93931",
+    "items/ex-weighted-importance-sampling-finite-sample-bias.md": "d1ba8a3d488067cea08b418edd2fdae76a9846c3ceeb971cd85bd8f4a04c7e77",
+    "items/ex-offline-ope-exploding-trajectory-weights.md": "5a828ab927ede780753ce32df6c838723a140739a48b1cc496916caebc469fd8",
+    "items/thm-tabular-q-learning-convergence-under-robbins-monro-conditions.md": "46d70b655fc596135915a4ec05e0a3636f6e0e9e6cc9e3d0a3a7e59132e33a13",
+    "items/ex-offline-ope-weighted-and-clipped-estimators-can-be-biased.md": "e9cab2cf2b659ffb7b78101024415eea3050a884a250c06795ee15f2856b0f2c",
+    "items/ex-action-independent-baseline-eliminates-variance.md": "c01f661152051139ef1ad884cb7dae2ce2fcf13a1ce709486ceed5afd6955e47",
+    "items/rem-reasoning-training-evidence-and-evaluation-targets.md": "11b329b6da5115333a009b69d7e00766962fe63d1d7206e4c44195c9033070a5",
+    "items/def-optimal-action-value-bellman-operator.md": "c42e52941a83c05841c0b6dc7a17cff3759db8bb78a9ec8d8db5524378ae7084",
+    "items/lem-asynchronous-finite-dimensional-contraction-stochastic-approximation.md": "bdf4b2150f108d1e7ff587e7060541127eba0abb9339a403fe3e111963d6c8c4",
+    "items/alg-dyna-q.md": "c7956030758bb4ce9689b46132194c2eaf12012c4924def81299018a1cd814f5",
+    "items/ex-actor-critic-bootstrap-can-bias-policy-update.md": "b5685acd457ec7d8e5b75f6de4d86fd71e27f9684205e8967e85a731493d2b54",
+    "items/lem-policy-score-has-zero-conditional-mean.md": "9836ba9c80e7412ce1d64589dbabbf11f847181dec67f5fe1b3708fbe0269cb1",
+    "items/lem-finite-episode-policy-importance-ratio-is-unbiased.md": "886644ad4aacfccfe610e5951386ab2a5e14119d7df47f9de7f52ff8cd7c34b4",
+    "items/ex-pac-mdp-discount-factor-dependence.md": "c77719946afeae3ad3af43714f0e06c57750b5758c1d74e31ddbef93a7bb7725",
+    "items/lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative.md": "241c61ad44ef1238d5511b93c1bd545490165052874f37e3a497738a74b6230b",
+    "items/rem-offline-rl-distribution-shift-and-pessimism.md": "02e0efa2f8c9b2eb8bbc2deb3aa5908ae9377f3438fe910301698a16bee34438",
+    "items/alg-delayed-q-learning.md": "b082099b07c944363aebc1c7906fd8bb65ffaaffd4871561ce889465f01edea1",
+    "items/lem-optimal-action-value-is-attained-by-greedy-policy.md": "8c9c18625fb75c8861dbcd2d49cc2cbc79c9622181e3530a9c91194f1aa80eba",
+    "items/alg-reinforce.md": "8316f92fa58d252f1bfa9e3cdd5d9f8bc57d1f34c874a14dcc9142cd97439df1",
+    "items/def-finite-markov-decision-process.md": "2eb97ac503adb0a836380e11b52c3917ded92e82315a0c5c6a03d9af6a1ce7fc",
+    "items/def-discounted-return-and-value-functions.md": "38bc24d19c111c0636b85c0919956b09197a8b7541f24a46111866efcc944076",
+    "items/thm-bellman-contraction-and-unique-fixed-point.md": "c5a07e1f3aa0b8a968eb56daeb2cf0c60cc6443430119721eacc25782f1a8328",
+    "items/thm-basic-algebra-and-order-properties-of-conditional-expectation.md": "48370409944eeeb6e612b396a2dd2cbe9b93b455593124efff5219a195d7b31b",
+    "items/thm-taking-out-what-is-known.md": "3fd6ecb360179202a6ea1462d410fb4e1a88ea3b22b64b845fc26222eafbc245",
+    "items/thm-ionescu-tulcea-construction-of-a-markov-chain.md": "6c6dcfd0a416bd59a415b68a4f0c1273864a4a99156ab7da55bbffe2c1a3663f",
+    "research/machine-learning-all-101-2026-10-19-scope-review/batch-81/state.json": "f7bc323af8deb48d2fc988f04ab732c3020a7aae294aca7cdf3b2f4d2b5fbbae",
+    "research/machine-learning-all-101-2026-10-19-scope-review/batch-81/repair-1.json": "7f5870d83548a50afd4065d7378917fe0182c9af9e72c85d0db22703a0f7f4e2",
+    "research/machine-learning-all-101-2026-10-19-scope-review/batch-81/repair-1.input.json": "388c451a6305b80f2f870a2929a662dda026da41b0178a91849e4527407c5632",
+    "research/machine-learning-all-101-2026-10-19-scope-review/batch-81/review-0.json": "26ef4bcfc4d2a933f50d39e3e82ae62385d646ce2ab9a8afc09a88315dcb3342",
+    "library/machine-learning/policy-gradients-reinforce-and-actor-critic-examples.md": "7fd954be8645d0e2978a719cae802443cb300f999c3ab2003915f983f6040f56",
+    "library/machine-learning/offline-reinforcement-learning-and-off-policy-evaluation-examples.md": "a6ebf611f7c0bdb63f81ab980d361e062a69845692a3b1389899350c0e579188",
+    "library/machine-learning/pac-mdp-exploration-examples.md": "7a44c914cdfe993e4643d38d057ad0a692728c7c00693e1a9f603f63201cc9dc",
+    "library/machine-learning/tabular-prediction-and-control-examples.md": "6d7e930a1014a7a016f80bf2525a4c8dcb563d05be3489d6b0537855a570dc7e",
+    "library/machine-learning/offline-reinforcement-learning-and-off-policy-evaluation.md": "5dd2be18b12f9655757b3ae8d21626c81c59fa8990c8fbe221202d4f4e7aa2ca",
+    "library/machine-learning/policy-gradients-reinforce-and-actor-critic.md": "a113bd00462b8e9011da6f3ac1f33f5cf0ccb582e1c59f28f304b0d8ab3cfcbd",
+    "library/machine-learning/tabular-prediction-and-control.md": "6a70e8a2792e0f207445c923f27ab1b7149dca63bde8008826c1eb134f089aa5",
+    "library/machine-learning/pac-mdp-exploration.md": "c47af50af97b5c87eaf62aa3222361f248ab1954d2be9fe1dafa71ac13216950",
+    "library/machine-learning/model-based-planning-dyna-and-model-exploitation.md": "0bbbf451ac2ff76b2386f3a9389f710ed6e67619b79381924e939ef9418c9991",
+    "library/machine-learning/verifiable-generation-and-test-time-sampling.md": "f2adb7a7ecfe5139343614e1ef96d5b268747fbf03af425a0d6a0c251e5ec5ab",
+    "library/bayesian-computational-statistics/importance-sampling-and-weight-diagnostics-examples.md": "4186b1b12980d40c3602e1434b3d23a3da6455f4bb3cbada12aabb0543ce5296"
+  },
+  "consumer_dispositions": [
+    {
+      "id": "alg-delayed-q-learning",
+      "source_sha256": "b082099b07c944363aebc1c7906fd8bb65ffaaffd4871561ce889465f01edea1",
+      "decision": "interface-use-sound",
+      "reason": "Direct Q use is only the reward-plus-discounted-greedy continuation quantity; delayed batches, bonus, learning flags, admissible heuristic and output actions are separately specified. No ordinary-Q convergence premise is imported; current delayed procedure left untouched."
+    },
+    {
+      "id": "alg-doubly-robust-ope",
+      "source_sha256": "70467838db19ee5e6e30b760dbba1e229b43d9e926bd1dc96588f9b7fcbca781",
+      "decision": "interface-use-sound",
+      "reason": "Finite-horizon fixed fitted functions and finite nonnegative multipliers, with independent training permitted and V_H=0, remain. It uses unchanged offline law/RN context and asserts no component-correctness theorem in Definition."
+    },
+    {
+      "id": "alg-dyna-q",
+      "source_sha256": "c7956030758bb4ce9689b46132194c2eaf12012c4924def81299018a1cd814f5",
+      "decision": "interface-use-sound",
+      "reason": "Direct Q supplier use is its one-coordinate arithmetic target, not an invocation of a stochastic-environment Q convergence theorem. Real environment and stored model are deterministic/exact at observed pairs; planning visits and alpha in(0,1] therefore use the same update. Infinite real interactions, finite planning loops and no-convergence claim preserved."
+    },
+    {
+      "id": "alg-monte-carlo-policy-evaluation",
+      "source_sha256": "0cb8760aa8ecc6d9daa96a43f2e8c29d58823f386177ddda6078c4f0ed5f5a34",
+      "decision": "proposed-repair",
+      "reason": "Both original stationary-policy branches and independent episode sampling preserved. Proposed finite-prefix outputs work for finite or infinite episode budgets. Explicit termination under target and behavior from every state matches the imported ratio lemma; native pre-action first-visit boundary, target support, count initialization, terminal zero values and unavailable-zero-denominator outputs preserved. No convergence/control claim added."
+    },
+    {
+      "id": "alg-one-step-actor-critic",
+      "source_sha256": "18940c23c778a52821dc6b853dce353efd62fb6d6c43f93daece82e137e45baa",
+      "decision": "interface-use-sound",
+      "reason": "Current Definition expressly assumes AC and cites general Ionescu–Tulcea history kernels for within-episode actor/critic changes, with actual adaptive episode termination/domain preservation; uses TD error arithmetic/terminal zero, not stationary-policy path probabilities for its changing actor. General no-convergence output retained; unaffected by modified TD/Sarsa definitions."
+    },
+    {
+      "id": "alg-q-learning",
+      "source_sha256": "1a9fe5a6eaa0538d91f09dd4de24e715b0293a6c5fd67b5cbf2798b37a867920",
+      "decision": "interface-use-sound",
+      "reason": "Current continuous interaction stream supports history-dependent randomized legal actions and pre-outcome step sizes. Q0 and next-state initialization are explicit; Robbins–Monro deterministic schedules and alpha=1 examples remain valid. The theorem uses the same S_{n+1} chain variable, so the early suspected chain mismatch is withdrawn. No source change."
+    },
+    {
+      "id": "alg-reinforce",
+      "source_sha256": "8316f92fa58d252f1bfa9e3cdd5d9f8bc57d1f34c874a14dcc9142cd97439df1",
+      "decision": "interface-use-sound",
+      "reason": "Current algorithm freezes theta during its one episode, matching the policy-gradient theorem. Its Remarks condition the mean update on the theorem’s differentiation/integrability and AC premises. Native81 episode/ration boundary changes do not alter it; no source edit."
+    },
+    {
+      "id": "alg-reinforce-with-baseline",
+      "source_sha256": "5858fd9696911196f506ace4633ba50c1421e7e098e146a6fd0eea8a7fa650c5",
+      "decision": "interface-use-sound",
+      "reason": "Current frozen-policy/fixed independent state baseline, one-episode finite output and theorem-qualified mean statement match baseline lemma. Not a consumer of the repaired online Sarsa rule; no scope conflation."
+    },
+    {
+      "id": "alg-sarsa-on-policy-control",
+      "source_sha256": "b8282e1e2abce736acba53a01ec91a67b1715e3aaedcdb99dfc02dcc365e064c",
+      "decision": "proposed-repair",
+      "reason": "Native episode-frozen policy and deterministic-only steps narrowed the original pi_n interface and the primary online Sarsa algorithm. Proposed rule recomputes the successor-action distribution using the pre-update table/history, retains that very sampled action for the next behavior step, permits adaptive randomized policy improvement and predictable step rules, and preserves frozen episode policies as a special case. Finite/infinite episode outputs separated; AC and actual adaptive-episode properness retained."
+    },
+    {
+      "id": "alg-td-zero-prediction",
+      "source_sha256": "1a378428637160d104b78a0fcfc46518a55dcf2fc2790234c593516e0ce89d1c",
+      "decision": "proposed-repair",
+      "reason": "Native finite-only episode budget and deterministic-only step schedule narrowed the original open update rule. Proposed Definition restores finite or countably infinite episode streams, general pre-outcome history-adapted steps and start-state rules, initializes V=V0, and retains the fixed stationary target policy, zero terminal continuation and AC. No theorem of convergence is added."
+    },
+    {
+      "id": "alg-trajectory-importance-sampling-ope",
+      "source_sha256": "b827a21cbfdd5e08a39d783b795bed3d7f88a90803aaadfb00a327780cc93931",
+      "decision": "interface-use-sound",
+      "reason": "Own finite-horizon input and status/zero-denominator branches remain unchanged; depends on unchanged finite-horizon RN lemma, not the first-visit episode algorithm. All three estimator formulas and no-WIS-unbiasedness qualification retained."
+    },
+    {
+      "id": "def-episodic-returns-td-errors-and-policy-support",
+      "source_sha256": "f6b7a3f6de378ae5cc7aa8eadb7881614e58b41aa1541ddb6ef983dd5eddc9b4",
+      "decision": "interface-use-sound",
+      "reason": "Original/current Definition identical modulo whitespace. Absorbing zero-reward extension, discounted finite episodic returns, AC, all-policy properness, terminal continuation zero, and the action-conditional ratio starting at t+1 remain. All actual consumer uses checked against these exact clauses."
+    },
+    {
+      "id": "def-offline-reinforcement-learning-dataset",
+      "source_sha256": "9cd2e8fa80af5268ec400170ea3a5def5562eeea8bbcd9f0c6193f0af84a7c35",
+      "decision": "interface-use-sound",
+      "reason": "Unchanged finite H>=1, gamma<=1, fixed initial state, stationary laws, independent data, known behavior propensities, AC and full horizon coverage. Uses the unchanged path-law prefix formula; no infinite-episode MC or modified TD/Sarsa property imported."
+    },
+    {
+      "id": "def-optimal-action-value-bellman-operator",
+      "source_sha256": "c42e52941a83c05841c0b6dc7a17cff3759db8bb78a9ec8d8db5524378ae7084",
+      "decision": "interface-use-sound",
+      "reason": "Original/current Definition identical modulo whitespace. Finite nonempty action maxima and finite reward-transition expectation are unchanged; the convergence theorem and Q examples use precisely this map."
+    },
+    {
+      "id": "ex-action-independent-baseline-eliminates-variance",
+      "source_sha256": "c01f661152051139ef1ad884cb7dae2ce2fcf13a1ce709486ceed5afd6955e47",
+      "decision": "interface-use-sound",
+      "reason": "One-decision finite calculation yields scores +/-2, unscaled estimator0/2 and baseline-adjusted constant1. Finite probability model and actual baseline qualification support the use; no generic variance claim. Existing REINFORCE algorithm quotes drift recorded."
+    },
+    {
+      "id": "ex-actor-critic-bootstrap-can-bias-policy-update",
+      "source_sha256": "b5685acd457ec7d8e5b75f6de4d86fd71e27f9684205e8967e85a731493d2b54",
+      "decision": "interface-use-sound",
+      "reason": "Two-decision example checks all actor/critic domains and actual adaptive termination. Initial action1 gives increment1/4 with probability1/2; other gives0, so mean1/8 differs from true0. Critic beta0 and next unique action score0 preserve legality; existing actor-critic quote drift recorded."
+    },
+    {
+      "id": "ex-importance-sampling-needs-target-support",
+      "source_sha256": "61ff04f6d079846a66f6d658fe522bddf2e8e61203e0dee89a8ab49fe6beccec",
+      "decision": "interface-use-sound",
+      "reason": "Native Example now explicitly carries AC and gamma<1, and says formal estimator use lies outside target-support admissibility. Behavior always yields ratio0/1 and return0; target gives1. Both terminate immediately. Proposed MC edits preserve the formal formula and support requirement; only stale supplier quotation mirrored."
+    },
+    {
+      "id": "ex-offline-ope-doubly-robust-correctness-branches",
+      "source_sha256": "a31e4da51d1933a69ef71c5dc0be83262ddbe5752c87fe99bed542bb2762e92f",
+      "decision": "interface-use-sound",
+      "reason": "Horizon1 exact computations show scores0/2 under correct ratios and score1 under correct model despite missing support. Diagram matches two deterministic actions and reward labels; proof independent of diagram. Uses unchanged DR source; no MC-interface issue."
+    },
+    {
+      "id": "ex-offline-ope-exploding-trajectory-weights",
+      "source_sha256": "5a828ab927ede780753ce32df6c838723a140739a48b1cc496916caebc469fd8",
+      "decision": "interface-use-sound",
+      "reason": "HorizonH, gamma1 and behavior probability epsilon yield score H epsilon^-H with probability epsilon^H and zero otherwise. Coverage, finite scores, meanH and variance H²(epsilon^-H-1) intact. No finite-episode properness/convergence premise imported; existing algorithm-quote drift recorded."
+    },
+    {
+      "id": "ex-offline-ope-full-support-and-missing-support",
+      "source_sha256": "31e68f4326a41e02a9e45ed5f0a97b6aefc7d5c73b924015e7ab86d3ff14f8a7",
+      "decision": "interface-use-sound",
+      "reason": "Horizon1 support case gives exact OIS/PDIS scores0/2; missing-support case compares behavior-indistinguishable reward choices and explicitly violates coverage. Algorithm formal score use is not an admissibility claim in unsupported case. Existing algorithm-quote drift recorded."
+    },
+    {
+      "id": "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+      "source_sha256": "e9cab2cf2b659ffb7b78101024415eea3050a884a250c06795ee15f2856b0f2c",
+      "decision": "interface-use-sound",
+      "reason": "Zero-denominator convention here is the separate horizon algorithm returning0, distinct from first-visit MC unavailable status. Binomial zero-count event gives WIS mean1-2^-n, clipping gives1/2, ordinary gives1; no conflation with repaired MC outputs. Existing algorithm-quote drift recorded."
+    },
+    {
+      "id": "ex-ordinary-importance-sampling-infinite-variance",
+      "source_sha256": "75837c0f1952723f107b6a970d56e7162c97cbca6b107f872edbfe0aff122f88",
+      "decision": "interface-use-sound",
+      "reason": "Both policies have full support and geometric termination from all states; first visit is at time0 before action, so the clarified ratio theorem applies. The exact sums give mean10/11 and second moment (5/18)sum(81/40)^n=infinity. All discounts/support/AC assumptions and variance claim retained. Only stale ratio-Statement quotation mirrored."
+    },
+    {
+      "id": "ex-pac-mdp-delayed-q-zero-slack",
+      "source_sha256": "a607b1071e465ee14500293cce27c100038e9137423b0dc23869c161ac45b44e",
+      "decision": "interface-use-sound",
+      "reason": "Gamma0 targets for initial tied b are0, hence first complete batch lowers Qb to epsilon1 despite zero initial slack. This uses unchanged delayed threshold and additive per-pair allowance, not ordinary-Q convergence. Existing delayed supplier quote drift recorded."
+    },
+    {
+      "id": "ex-pac-mdp-discount-factor-dependence",
+      "source_sha256": "c77719946afeae3ad3af43714f0e06c57750b5758c1d74e31ddbef93a7bb7725",
+      "decision": "interface-use-sound",
+      "reason": "Current heuristic and proved PAC theorem substitutions retain SA slack bound and exact discount powers. It is an indirect Q consumer only through delayed-Q PAC theorem; no new assumptions/claims."
+    },
+    {
+      "id": "ex-q-learning-constant-stepsize-can-fail-to-converge",
+      "source_sha256": "259fbd676ae7522dfa3ebdcdd0251577cb7e79b2f1b7fcf3509adde5a75f441a",
+      "decision": "interface-use-sound",
+      "reason": "Alpha1 belongs to algorithm admissible range but not theorem square-summability. Conditional independent signs make Q_{n+1}=R_{n+1}; finite-prefix products and null eventually-constant events prove nonconvergence. Actual path law is assumed in Given under AC. Only stale algorithm quotation mirrored."
+    },
+    {
+      "id": "ex-reinforce-one-step-bernoulli-mdp",
+      "source_sha256": "89004a3661ba31d3e9f86fef30f9cd98a7891a16dafec58a89c0f7f26049e9b8",
+      "decision": "interface-use-sound",
+      "reason": "Current frozen theta one-decision policy has score1/theta on rewarded action, zero return otherwise, so expected direction1 equals dJ/dtheta. No adaptive/Sarsa or convergence claim imported. Existing REINFORCE quote drift recorded."
+    },
+    {
+      "id": "ex-tabular-insufficient-exploration-leaves-q-values-unknown",
+      "source_sha256": "b934784cefdc5b413eda46a8d46820a506f1dd84969e1183a4ebc8c771f6e02e",
+      "decision": "interface-use-sound",
+      "reason": "Continuing gamma0 deterministic one-state process is admissible for current Q algorithm. Never-updated b stays at -1 while its Bellman fixed value is0; no visitation assumption is smuggled into the algorithm. Only stale supplier quotation mirrored."
+    },
+    {
+      "id": "ex-weighted-importance-sampling-finite-sample-bias",
+      "source_sha256": "d1ba8a3d488067cea08b418edd2fdae76a9846c3ceeb971cd85bd8f4a04c7e77",
+      "decision": "interface-use-sound",
+      "reason": "Native AC premise retained. Both stationary policies terminate in one step and satisfy support. Each strictly positive sample weight cancels, giving behavior expected reward1/4 versus target3/4; bias remains -1/2. Proposed MC formula preserves this finite prefix exactly. Only stale supplier quotation mirrored."
+    },
+    {
+      "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "source_sha256": "60fc009be20bfdf2688148e66a7457390ee2f724b96f20a78e9dd161944d778f",
+      "decision": "interface-use-sound",
+      "reason": "Inherits full AC/trajectory-differentiation/integrability hypotheses, finite bounded scores/baseline and gamma<1. Conditional zero mean removes baseline; bounded geometric sum justifies expectation limit. Preserves both identity and caveat that not every baseline reduces variance."
+    },
+    {
+      "id": "lem-asynchronous-finite-dimensional-contraction-stochastic-approximation",
+      "source_sha256": "bdf4b2150f108d1e7ff587e7060541127eba0abb9339a403fe3e111963d6c8c4",
+      "decision": "interface-use-sound",
+      "reason": "Statement unchanged. Per-coordinate deterministic Robbins–Monro schedules give a deterministic square-sum bound despite adapted visitation. The noise-tail shift, vanishing convex-combination coefficient and finite-coordinate limsup maximum imply E<=qE. Q-learning supplies bounded iterates and bounded MDS explicitly. Full theorem retained."
+    },
+    {
+      "id": "lem-bounded-square-summable-martingale-difference-series-converges",
+      "source_sha256": "0822e464574742dbf5bae6849d41e9eb3220d97bac1ba952fd4ea7d749d2fb08",
+      "decision": "interface-use-sound",
+      "reason": "Statement unchanged. Predictable bounded weights have deterministic square-sum bound, orthogonal martingale increments, a finite stopped-square maximal inequality and least-index Cauchy construction. The asynchronous consumer supplies exactly its predictable visit-count weights; no rate or convergence hypothesis was removed."
+    },
+    {
+      "id": "lem-delayed-q-learning-optimism-and-update-counts",
+      "source_sha256": "098b7c7371fc2c2585cb7e8ec76b7de54159fb3e20c63feacc495e46c4cc37f9",
+      "decision": "interface-use-sound",
+      "reason": "Indirect Q use goes through the unchanged delayed target. Read full adaptive concentration, optimism induction, successful-update and outside-K visit count arguments, including the additive1 per pair. Ordinary algorithm budget/step edits do not affect them. Existing delayed-algorithm citation drift recorded for root metadata pass, no source edit."
+    },
+    {
+      "id": "lem-finite-episode-policy-importance-ratio-is-unbiased",
+      "source_sha256": "886644ad4aacfccfe610e5951386ab2a5e14119d7df47f9de7f52ff8cd7c34b4",
+      "decision": "interface-use-sound",
+      "reason": "Original/current Statement comparison shows only explicit initial s0 and pre-action first-visit history boundary. The proof factors a pre-action prefix times the full suffix, including time-t action; target support plus termination under both stationary policies validates absolute integrability and the change-of-law identity. Terminal empty suffix remains valid. No additional source repair."
+    },
+    {
+      "id": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+      "source_sha256": "241c61ad44ef1238d5511b93c1bd545490165052874f37e3a497738a74b6230b",
+      "decision": "interface-use-sound",
+      "reason": "Uses unchanged path-law atom products under AC, fixed shared start/dynamics and full horizon absolute continuity. Prefix marginal coverage and counting-measure RN density give all real integrable change-of-measure identities. Finite horizon gamma1 branch is independent of discounted episodic MC properness."
+    },
+    {
+      "id": "lem-finite-mdp-policy-action-state-reward-path-law",
+      "source_sha256": "1b3762df90a96916ce49835a143e8741835941de4e5eadc6487e9381587eb55d",
+      "decision": "interface-use-sound",
+      "reason": "Original/current Statement identical modulo whitespace. Full proof constructs the finite action-state-reward kernel, applies AC Ionescu–Tulcea and sums actions for the marginal. Stationary prefix probabilities apply to each fixed-policy episode; adaptive algorithms specify their actual conditional sampling rule rather than asserting stationary prefix products for a changing policy."
+    },
+    {
+      "id": "lem-optimal-action-value-is-attained-by-greedy-policy",
+      "source_sha256": "8c9c18625fb75c8861dbcd2d49cc2cbc79c9622181e3530a9c91194f1aa80eba",
+      "decision": "interface-use-sound",
+      "reason": "Statement unchanged and proof fully read. For every adapted legal continuation, conditional Bellman inequality telescopes under bounded discounted rewards; a greedy stationary continuation is constructed under AC and attains the bound. Native outside Bellman reference alert is already corrected in current source: step2.1 cites steps1.2/1.3, not nonexistent3.1. No repair needed."
+    },
+    {
+      "id": "lem-policy-score-has-zero-conditional-mean",
+      "source_sha256": "9836ba9c80e7412ce1d64589dbabbf11f847181dec67f5fe1b3708fbe0269cb1",
+      "decision": "interface-use-sound",
+      "reason": "Current proof uses pre-action history and stationary prefix products, sums normalized finite support to obtain zero, then constructs the conditional-expectation version by finite atoms. Repaired first-visit boundary is consistent but not imported as a new hypothesis. Current native proof formatting/phase issue and metadata currency handled by root pass; math use unchanged."
+    },
+    {
+      "id": "rem-offline-rl-distribution-shift-and-pessimism",
+      "source_sha256": "02e0efa2f8c9b2eb8bbc2deb3aa5908ae9377f3438fe910301698a16bee34438",
+      "decision": "interface-use-sound",
+      "reason": "Nonlogical explanatory consumer. It conditions OIS/PDIS unbiasedness on finite-horizon coverage/true propensities/integrability and explicitly denies variance/confidence/safety implications. Independent of modified first-visit procedure and no new premise."
+    },
+    {
+      "id": "rem-reasoning-training-evidence-and-evaluation-targets",
+      "source_sha256": "11b329b6da5115333a009b69d7e00766962fe63d1d7206e4c44195c9033070a5",
+      "decision": "interface-use-sound",
+      "reason": "Outside batch99 nonlogical use expressly repeats AC, fixed start/shared dynamics, stationary target/behavior, full-horizon absolute continuity and integrability for the trajectory-ratio lemma. Clipping/self-normalization caveat and empirical evaluation distinctions preserved; no tabular algorithm convergence inference."
+    },
+    {
+      "id": "thm-delayed-q-learning-pac-bound",
+      "source_sha256": "0b17382b4b890e53fc38644fa17a7ff63b668b72e3edd878941615714b862d93",
+      "decision": "interface-use-sound",
+      "reason": "Full epsilon/delta/gamma domain, optimistic known-model residual comparison, update/escape reduction, logarithms and (1-gamma)^-8 specialization retained. Uses delayed procedure only through its own current interface; no ordinary-Q or episodic convergence claim substituted. Its stale delayed-algorithm quote is outside native81 drift for root pass."
+    },
+    {
+      "id": "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+      "source_sha256": "777d786d896ccd711433bb24e6fa8d908691c2f6b98ba284f563ae59ce0f2087",
+      "decision": "interface-use-sound",
+      "reason": "Full two-branch proof read: exact covered ratios telescope arbitrary fixed Q residuals; correct model yields zero conditional residual for any fixed finite adapted multipliers, with no coverage needed. Backward value recursion identifies V0=J, V_H=0 retained. AC, finite-horizon and independent evaluation qualifiers present; source unchanged."
+    },
+    {
+      "id": "thm-policy-gradient-theorem",
+      "source_sha256": "dd929ce9622519ec74f66720889ad96615573c138a29ae48ba602a73e47da9f1",
+      "decision": "interface-use-sound",
+      "reason": "Complete likelihood differentiation, return-weighted summable remainders, integrable score-reward double sum and pre-action score conditioning are stated. Uses stationary frozen episode and original AC path law, not adaptive Sarsa as a stationary process. No differentiability/integrability weakening or nonlinear convergence assertion."
+    },
+    {
+      "id": "thm-tabular-q-learning-convergence-under-robbins-monro-conditions",
+      "source_sha256": "46d70b655fc596135915a4ec05e0a3636f6e0e9e6cc9e3d0a3a7e59132e33a13",
+      "decision": "interface-use-sound",
+      "reason": "Statement unchanged. Native F8 now expressly gives conditional order preservation. The proof establishes gamma contraction, bounded Q through convex updates, conditional target identity and bounded noise 2C, then applies the full asynchronous lemma under the original full-visitation/per-pair Robbins–Monro hypotheses. General adaptive behavior and constant-step exclusion remain. Only its stale alg-q-learning quotation is mirrored."
+    },
+    {
+      "id": "thm-trajectory-importance-sampling-is-unbiased",
+      "source_sha256": "cfbc5f44f5c85bec03e6a978c05b6c4b25450457894cb82c97c8ca8158a41a2f",
+      "decision": "interface-use-sound",
+      "reason": "Full proof and current finite-value/null-unsupported additions read. Finite horizon ensures finite ratios/sums; behavior-zero observed actions are null; unchanged prefix density and linearity give OIS/PDIS expectations. It does not claim WIS unbiasedness. Outside current quote/use/derivation metadata drift and canonical numbering repair recorded for root pass; source untouched."
+    }
+  ],
+  "native_record_basis": "Native repair1 is held for omitted affected consumers; authentic native interfaces show five Statement/Definition changes (four algorithms and importance history boundary). Seven other nonempty interfaces unchanged modulo whitespace. Native before_interfaces does not archive Example sections; their native premise corrections are read from authentic repair findings and current carriers, without fabricating old Example text.",
+  "closure_basis": "All current38,658 item carriers indexed for logical deps/justified_by, aliases and body references.17 unrelated malformed historical frontmatter documents were still indexed using exact edge/alias field fragments and raw body text; none skipped. Changed-interface reverse closure17 plus native broad41 consumer set plus full native17 inventory yields44 distinct fully read items. Full raw-ID mention scan adds no outside item; eleven actual page placement carriers separately bound. No aliases attach to reviewed items.",
+  "primary_comparison": {
+    "path": "/tmp/SuttonBartoIPRLBook2ndEd.pdf",
+    "sha256": "db8fcf0fbb245d8c6779c02a2004e484c45b0f1c371ad04455a14ab0924c5166",
+    "read_scope": "PDF127–129 (episodic MC/prediction),142–143 (ordinary/weighted/support ratios),159 (TD0 loop),169 (online Sarsa successor action),172 (Q-learning loop). Actual local supplier proofs personally read; source result not imported as opaque proof."
+  },
+  "smallest_remaining_repairs": "Only three current algorithm Definitions need corrections after native repair: restore original open update scope and adaptive timing, add explicit table initialization, and make both-policy properness explicit for MC imported identity. Explicit existing Ionescu–Tulcea dependencies and own manifest mirrors support TD/Sarsa history-kernel sampling under AC. Q-learning current Definition retained. Six batch81 source-quote fields mirrored; only two own manifest dependency lists additionally change, with levels unchanged.",
+  "native_repairs_preserved": [
+    "AC and policy-law premises",
+    "pre-action first-visit history with time-t action included in suffix ratio",
+    "terminal empty-suffix branch",
+    "conditional-expectation order property in Q-learning F8",
+    "formal outside-support status of the support counterexample",
+    "weighted-example AC",
+    "all existing stochastic-approximation/convergence/PAC bounds and constant-step exclusions"
+  ],
+  "focused_proposed_checks": {
+    "batch81-precheck": {
+      "files": 17,
+      "checked": 12,
+      "failed": 0
+    },
+    "batch81-render": {
+      "checked": 17,
+      "errors": 0,
+      "warnings": 0
+    },
+    "contracts-81": {
+      "checked": 17,
+      "errors": 0,
+      "warnings": 0
+    },
+    "context44-render": {
+      "checked": 44,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "batch81_layout": "proof-layout: 17 items, 43 steps, 0 defects",
+  "outside_drift_owner": "Root explicitly instructed to finish only own six contract mirrors and preserve outside source owners; outside drift is evidence for comprehensive root post-drain pass.",
+  "outside_contract_drift": [
+    {
+      "batch": "82",
+      "code": "citation-quote-mismatch",
+      "message": "F2 quote does not occur in alg-delayed-q-learning's Definition",
+      "id": "lem-delayed-q-learning-optimism-and-update-counts"
+    },
+    {
+      "batch": "82",
+      "code": "citation-quote-mismatch",
+      "message": "F6 quote does not occur in alg-delayed-q-learning's Definition",
+      "id": "thm-delayed-q-learning-pac-bound"
+    },
+    {
+      "batch": "82",
+      "code": "citation-quote-mismatch",
+      "message": "F1 quote does not occur in alg-delayed-q-learning's Definition",
+      "id": "ex-pac-mdp-delayed-q-zero-slack"
+    },
+    {
+      "batch": "84",
+      "code": "citation-quote-mismatch",
+      "message": "F4 quote does not occur in alg-one-step-actor-critic's Definition",
+      "id": "ex-actor-critic-bootstrap-can-bias-policy-update"
+    },
+    {
+      "batch": "84",
+      "code": "citation-quote-mismatch",
+      "message": "F4 quote does not occur in alg-reinforce's Definition",
+      "id": "ex-reinforce-one-step-bernoulli-mdp"
+    },
+    {
+      "batch": "84",
+      "code": "citation-quote-mismatch",
+      "message": "F4 quote does not occur in alg-reinforce's Definition",
+      "id": "ex-action-independent-baseline-eliminates-variance"
+    },
+    {
+      "batch": "84",
+      "code": "citation-quote-mismatch",
+      "message": "F4 quote does not occur in alg-reinforce-with-baseline's Definition",
+      "id": "ex-action-independent-baseline-eliminates-variance"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-not-supported",
+      "message": "A1 is not cited by declared use 1.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "A1 is cited by 2.1 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F1 is cited by 2.1 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F1 is cited by 2.2 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-quote-mismatch",
+      "message": "F2 quote does not occur in alg-trajectory-importance-sampling-ope's Definition",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F2 is cited by 2.2 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F2 is cited by 3.1 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-not-supported",
+      "message": "F3 is not cited by declared use 1.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-not-supported",
+      "message": "F3 is not cited by declared use 1.2",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F3 is cited by 2.1 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F3 is cited by 2.2 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-not-supported",
+      "message": "F4 is not cited by declared use 1.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-not-supported",
+      "message": "F4 is not cited by declared use 1.2",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F4 is cited by 2.2 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-use-unmapped",
+      "message": "F4 is cited by 3.1 but the contract omits it",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-entry-input-omitted",
+      "message": "derivation-1.2 omits 1.1, cited by 1.2",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-entry-input-omitted",
+      "message": "derivation-2.1 omits F1, cited by 2.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-entry-input-omitted",
+      "message": "derivation-2.1 omits F3, cited by 2.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-entry-input-omitted",
+      "message": "derivation-2.1 omits A1, cited by 2.1",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-unmapped",
+      "message": "2.2 has no derivation or routine-step contract",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "step-unmapped",
+      "message": "3.1 has no derivation or routine-step contract",
+      "id": "thm-trajectory-importance-sampling-is-unbiased"
+    },
+    {
+      "batch": "87",
+      "code": "citation-quote-mismatch",
+      "message": "F2 quote does not occur in alg-trajectory-importance-sampling-ope's Definition",
+      "id": "ex-offline-ope-full-support-and-missing-support"
+    },
+    {
+      "batch": "87",
+      "code": "citation-quote-mismatch",
+      "message": "F2 quote does not occur in alg-trajectory-importance-sampling-ope's Definition",
+      "id": "ex-offline-ope-exploding-trajectory-weights"
+    },
+    {
+      "batch": "87",
+      "code": "citation-quote-mismatch",
+      "message": "F2 quote does not occur in alg-trajectory-importance-sampling-ope's Definition",
+      "id": "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased"
+    }
+  ],
+  "outside_phase_repairs": [
+    {
+      "id": "lem-policy-score-has-zero-conditional-mean",
+      "status": "repair"
+    },
+    {
+      "id": "thm-trajectory-importance-sampling-is-unbiased",
+      "status": "repair"
+    }
+  ],
+  "outside_layout_evidence": "context44-layout.txt (three defects in current outside policy-score paragraph layout)",
+  "canonical_or_level_changes": false,
+  "explicit_direct_dependency_additions": {
+    "alg-td-zero-prediction": [
+      "thm-ionescu-tulcea-construction-of-a-markov-chain"
+    ],
+    "alg-sarsa-on-policy-control": [
+      "thm-ionescu-tulcea-construction-of-a-markov-chain"
+    ]
+  },
+  "manifest_dependency_proposal": {
+    "target": "research/machine-learning-all-101-2026-10-19-batch-81.pages.json",
+    "proposal": "research/machine-learning-all-101-2026-10-19-owner-tabular81-escalation/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-81.pages.json",
+    "operations": [
+      {
+        "page": "tabular-prediction-and-control",
+        "item": "alg-td-zero-prediction",
+        "field": "deps",
+        "before": [
+          "def-finite-markov-decision-process",
+          "def-discounted-return-and-value-functions",
+          "def-policy-bellman-operator",
+          "lem-policy-value-satisfies-bellman-equation",
+          "def-episodic-returns-td-errors-and-policy-support"
+        ],
+        "after": [
+          "def-finite-markov-decision-process",
+          "def-discounted-return-and-value-functions",
+          "def-policy-bellman-operator",
+          "lem-policy-value-satisfies-bellman-equation",
+          "def-episodic-returns-td-errors-and-policy-support",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ]
+      },
+      {
+        "page": "tabular-prediction-and-control",
+        "item": "alg-sarsa-on-policy-control",
+        "field": "deps",
+        "before": [
+          "def-finite-markov-decision-process",
+          "def-discounted-return-and-value-functions",
+          "def-episodic-returns-td-errors-and-policy-support"
+        ],
+        "after": [
+          "def-finite-markov-decision-process",
+          "def-discounted-return-and-value-functions",
+          "def-episodic-returns-td-errors-and-policy-support",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ]
+      }
+    ],
+    "proposal_sha256": "e1717a95c279b45cc6a427bbfbeef0822f0433d3ebf0529c21037a2bcaaeb5d1"
+  },
+  "live_engine_or_registration_or_readiness_writes": false,
+  "root_integration_executed": false,
+  "current_context_update": {
+    "id": "alg-one-step-actor-critic",
+    "reason": "Another owner corrected its adaptive-kernel dependency and AC premise during this task. Full current source and published Ionescu–Tulcea Statement/proof personally read; preserved and current hash rebound. Old native broad scope is retained, and no extra mathematical consumer defect arises.",
+    "source_sha256": "18940c23c778a52821dc6b853dce353efd62fb6d6c43f93daece82e137e45baa"
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "group": "ad",
+  "batches": ["91"],
+  "pages_read": [
+    "anytime-valid-scalar-confidence-sequences",
+    "anytime-valid-scalar-confidence-sequences-examples"
+  ],
+  "items_read": [
+    "def-subexponential-uniform-boundary",
+    "def-time-varying-target-confidence-sequence",
+    "alg-empirical-bernstein-confidence-sequence",
+    "thm-empirical-bernstein-confidence-sequence",
+    "ex-repeated-fixed-level-tests-not-anytime-valid",
+    "ex-predictable-linear-forecast-empirical-bernstein",
+    "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"
+  ],
+  "conventions": [
+    {
+      "convention": "Time starts at zero; boundary crossing is tested at positive integer times using S_t ≥ u(V_t). Scale c is strictly positive in the boundary definition.",
+      "fixed_by": "def-subexponential-uniform-boundary",
+      "matters_for": [
+        "alg-empirical-bernstein-confidence-sequence",
+        "thm-empirical-bernstein-confidence-sequence"
+      ]
+    },
+    {
+      "convention": "For each λ separately, exponential domination is by a nonnegative integrable adapted supermartingale with initial expectation at most one. Joint measurability in λ is not required by the pair definition.",
+      "fixed_by": "def-subexponential-uniform-boundary",
+      "matters_for": ["thm-empirical-bernstein-confidence-sequence"]
+    },
+    {
+      "convention": "Confidence intervals are closed, have finite measurable endpoints, and simultaneously cover an adapted, possibly random and time-varying target under the specified law.",
+      "fixed_by": "def-time-varying-target-confidence-sequence",
+      "matters_for": [
+        "thm-empirical-bernstein-confidence-sequence",
+        "ex-predictable-linear-forecast-empirical-bernstein"
+      ]
+    },
+    {
+      "convention": "Forecasts are measurable before their corresponding observations. V_t is the observed sum of squared forecast errors, not a predictable conditional-variance process.",
+      "fixed_by": "alg-empirical-bernstein-confidence-sequence",
+      "matters_for": [
+        "thm-empirical-bernstein-confidence-sequence",
+        "ex-predictable-linear-forecast-empirical-bernstein"
+      ]
+    },
+    {
+      "convention": "The zero-range branch a=b returns [a,a]; otherwise the two-sided error δ is allocated as α=δ/2 to each one-sided crossing event.",
+      "fixed_by": "alg-empirical-bernstein-confidence-sequence",
+      "matters_for": [
+        "thm-empirical-bernstein-confidence-sequence",
+        "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"
+      ]
+    },
+    {
+      "convention": "AC is assumed. Conditional means may use any real measurable versions; the target is their running average, and coverage is invariant under these choices.",
+      "fixed_by": "thm-empirical-bernstein-confidence-sequence",
+      "matters_for": [
+        "ex-predictable-linear-forecast-empirical-bernstein",
+        "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"
+      ]
+    },
+    {
+      "convention": "A diagonal-only matrix rule has auxiliary randomness whose law is independent of r, and its radii are almost surely finite.",
+      "fixed_by": "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix",
+      "matters_for": ["ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-empirical-bernstein-confidence-sequence",
+      "statement": "Under AC, bounded adapted observations X_t ∈ [a,b], predictable forecasts in [a,b], and a Borel scale-(b−a) one-sided boundary at error δ/2, the algorithm's intervals simultaneously cover the running average conditional means with probability at least 1−δ. The zero-range case returns [a,a]; coverage is independent of conditional-expectation versions. Positive finite mixtures with 0<λ_j<1/c and weights summing to one supply boundaries through the stated unique nonnegative root equation.",
+      "used_by": [
+        "ex-predictable-linear-forecast-empirical-bernstein",
+        "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"
+      ]
+    },
+    {
+      "id": "def-subexponential-uniform-boundary",
+      "statement": "For α ∈ (0,1), a Borel function u:[0,∞)→[0,∞) is a scale-c one-sided sub-exponential uniform boundary if every scale-c pair satisfying the stated exponential supermartingale-domination condition obeys P(∃t≥1:S_t≥u(V_t))≤α.",
+      "used_by": [
+        "alg-empirical-bernstein-confidence-sequence",
+        "thm-empirical-bernstein-confidence-sequence",
+        "ex-predictable-linear-forecast-empirical-bernstein"
+      ]
+    },
+    {
+      "id": "alg-empirical-bernstein-confidence-sequence",
+      "statement": "If c=0, return C_t=[a,a]. If c>0, update the sample mean and V_t=V_{t−1}+(X_t−forecast_t)², then return the closed interval centered at the sample mean with radius u_{δ/2,c}(V_t)/t.",
+      "used_by": [
+        "thm-empirical-bernstein-confidence-sequence",
+        "ex-predictable-linear-forecast-empirical-bernstein",
+        "ex-diagonal-scalar-bounds-miss-offdiagonal-matrix"
+      ]
+    },
+    {
+      "id": "def-time-varying-target-confidence-sequence",
+      "statement": "A sequence of random closed intervals with finite adapted endpoints is a (1−α) confidence sequence for an adapted real target process θ_t if P(θ_t∈C_t for every t≥1)≥1−α.",
+      "used_by": [
+        "alg-empirical-bernstein-confidence-sequence",
+        "thm-empirical-bernstein-confidence-sequence"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Increasing discrete filtration, time-zero convention, and absence of a completeness requirement.",
+      "opened": true
+    },
+    {
+      "id": "def-adapted-and-integrable-stochastic-process",
+      "used_for": "Fixed-time adaptedness and integrability conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumption inherited by conditional-expectation and supermartingale interfaces.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-test-supermartingale",
+      "used_for": "Nonnegative test-supermartingale conditions and initial expectation normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-predictable-discrete-time-process",
+      "used_for": "Forecast measurability with respect to the preceding sigma-algebra.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Real measurable versions characterized by event integrals; Bernoulli example's conditional mean.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-as-an-ae-class",
+      "used_for": "Existence convention and almost-sure interpretation of conditional-expectation expressions.",
+      "opened": true
+    },
+    {
+      "id": "def-martingale-submartingale-and-supermartingale",
+      "used_for": "Direction of the one-step supermartingale inequality.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity, order preservation, constants, and bounded conditional means.",
+      "opened": true
+    },
+    {
+      "id": "thm-taking-out-what-is-known",
+      "used_for": "Predictable exponential factors and the previous exponential-process value in conditional expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-tower-property-of-conditional-expectation",
+      "used_for": "Conditional centering of the observation increments.",
+      "opened": true
+    },
+    {
+      "id": "thm-mixture-of-null-supermartingales",
+      "used_for": "Finite positively weighted mixtures of dominating test supermartingales.",
+      "opened": true
+    },
+    {
+      "id": "thm-villes-inequality",
+      "used_for": "All-times crossing control at threshold 1/α.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Continuity and strict monotonicity of the finite-mixture root function.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-limits-and-range",
+      "used_for": "Mixture limits at positive and negative infinity.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positivity of exponential terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Existence of the finite-mixture boundary root on a finite bracket.",
+      "opened": true
+    },
+    {
+      "id": "lem-rat-embeds-dense",
+      "used_for": "Rational witnesses between the boundary root and a strict upper threshold.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The logarithmic self-normalization inequality and nonnegativity of ψ.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Differentiating the logarithmic auxiliary function and obtaining continuity.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Nonnegativity of −log(1−x)−x on 0<x<1.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of affine exponents and finite sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-of-continuous-functions",
+      "used_for": "Continuity of exponential terms as functions of the root variable and variance argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+      "used_for": "Borel measurability of the boundary from inverse images of open right rays.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditional-expectation-is-unique-almost-surely",
+      "used_for": "Identifying the Bernoulli example's constant conditional-expectation version.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Vanishing common-law tail probabilities in the randomized matrix impossibility argument.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "def-filtration-and-filtered-probability-space, Definition, contains the inline links '[[def-probability-measure]]' and '[[def-sigma-algebra]]' inside the defining sentence. This violates the uninterrupted-definition instruction; there is no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-adapted-and-integrable-stochastic-process",
+      "finding": "def-adapted-and-integrable-stochastic-process, Definition, contains '[[def-filtration-and-filtered-probability-space]]', '[[def-random-element-and-real-random-variable]]', and '[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]' within its defining paragraph. These links interrupt the complete definition and are not moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-nonnegative-test-supermartingale",
+      "finding": "def-nonnegative-test-supermartingale, Definition, begins 'Assume the Axiom of Choice (AC) [[def-axiom-of-choice]].' Further defining prose contains filtration and martingale wikilinks. The complete definition therefore contains hyperlinks rather than placing them in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice, Definition, places '([[def-choice-function]]).' inside the blockquoted axiom. The defining section is interrupted by this hyperlink and has no immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-predictable-discrete-time-process",
+      "finding": "def-predictable-discrete-time-process, Definition, contains '[[def-filtration-and-filtered-probability-space]]' in its opening sentence and '[[def-random-element-and-real-random-variable]]' in the finite-valued convention. These hyperlinks remain inside the complete definition rather than Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-martingale-submartingale-and-supermartingale",
+      "finding": "def-martingale-submartingale-and-supermartingale, Definition, starts 'Assume AC [[def-axiom-of-choice]].' It also embeds adapted-process and conditional-expectation wikilinks in the defining section, contrary to the uninterrupted-definition instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-villes-inequality",
+      "finding": "thm-villes-inequality, Statement, contains '[[def-nonnegative-test-supermartingale]]' between its hypotheses and probability conclusion. This interrupts the statement; the link is not in an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-intermediate-value",
+      "finding": "thm-intermediate-value, Statement, contains '([[def-interval]], [[def-continuity-real]])' within its hypotheses and additional wikilinks later in the same section. The complete Statement contains hyperlinks and is followed by Facts & Assumptions rather than Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-rat-embeds-dense",
+      "finding": "lem-rat-embeds-dense, Statement, contains '([[def-real-numbers]])' inside the sentence asserting the ordered-field embedding. This interrupts the statement and is not moved to Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "cor-mean-value-theorem",
+      "finding": "cor-mean-value-theorem, Statement, embeds '([[def-continuity-real]], [[def-interval]])' and '([[def-derivative]])' within its hypotheses. These hyperlinks interrupt the complete statement and have no immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-algebra-of-continuous-functions",
+      "finding": "thm-algebra-of-continuous-functions, Statement, contains '([[def-continuity-real]])', '([[def-max-min]])', and '([[def-integer-power]])' within its hypotheses and enumerated conclusions, plus further wikilinks in that section. This violates the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-composition-of-continuous-functions",
+      "finding": "thm-composition-of-continuous-functions, Statement, contains '([[def-continuity-real]])' in its first conclusion and further links including '[[thm-composition-of-function-limits]]' in the same section. The complete Statement retains hyperlinks rather than placing them in Statement references.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": []
+}

@@ -1,0 +1,462 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "thm-cauchy-root-grid-matvec-numerical-cost",
+    "thm-s4-convolution-filter-complexity",
+    "ex-s4-filter-cost-excludes-training"
+  ],
+  "contracts": {
+    "thm-cauchy-root-grid-matvec-numerical-cost": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $n=0$, return zero; if $M=1$, sum the $n$ nonzero-denominator fractions directly, using $O(n+1)$ operations and space, and use the rounding argument below. Otherwise construct a binary tree on consecutive root indices. Its root covers all roots, with center $0$ and radius $1$. At depth $\\ell\\ge1$, a node contains $m=M/2^\\ell$ consecutive roots starting at index $b$; its center is $c=\\exp(2\\pi i(b+(m-1)/2)/M)$ and its covering radius is $R=2\\sin(\\pi(m-1)/(2M))\\le\\pi 2^{-\\ell}$. These disks contain their roots because the largest angular distance from the arc midpoint is $\\pi(m-1)/M$. Singleton leaves have radius zero. For each pole start at the root: at a nonleaf stop at a far node if $|c-\\mu_j|\\ge3R/2$, or descend into both children if $|c-\\mu_j|\\le2R$. In the overlap either choice is valid. A singleton is evaluated directly if reached. Certified interval tests terminate: for $R>0$, the two thresholds have a positive gap $R/2$, so enclosures of width less than $R/4$ distinguish at least one admissible choice, even when one threshold is an equality. Squared-distance comparisons implement the same test with a positive gap and finitely accurate supplied coordinates.",
+          "inputs": [
+            "given",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At a fixed depth put $J=2^\\ell$. The $J$ arc centers are equally spaced on the unit circle and have mutual distance at least $2\\sin(\\pi/J)\\ge4/J$ for $J\\ge2$, by concavity of sine on $[0,\\pi/2]$. Every near center lies within $2\\pi/J$ of its pole. Disks of radius $2/J$ about these centers have disjoint interiors and lie in the disk of radius $(2\\pi+2)/J$ about that pole. Comparing their areas bounds the number of near centers by $(\\pi+1)^2<18$. Thus there are fewer than $36$ candidate children per pole at the next depth, including all far stops. The root contributes one candidate. The $q+1$ depths therefore contain $O(n\\log(2+M))$ pole/node pairs. Each root follows exactly one stopped or singleton node for each pole, so these pairs partition all pole/root interactions without duplication. Repeated poles obey the same argument separately.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For a stopped pair put $t=-(z-c)/(c-\\mu_j)$. Its targets satisfy $|t|\\le2/3$. The finite geometric identity gives $1/(z-\\mu_j)=\\sum_{h=0}^{p-1}(-(z-c))^h/(c-\\mu_j)^{h+1}+t^p/(z-\\mu_j)$. Therefore the error in this pair is at most $(2/3)^p|a_j|/|z-\\mu_j|$. Summing the partition from step 2.1 gives error at each root at most $(2/3)^p\\sum_j|a_j|/|z-\\mu_j|\\le(2/3)^p A/d$. Choose $p\\ge1$ with $(2/3)^p\\le\\eta/2$; then $p=O(\\log(1/\\eta))$ and the truncation error is at most $\\eta s/2$. Direct singleton interactions have zero truncation error.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Process depths successively, keeping the bounded near list per pole for the next depth and the bounded far list for the current depth. At a fixed depth, store $v_{j,I}=1/(c_I-\\mu_j)$ and initially $w_{j,I}=a_jv_{j,I}$ for each far pair. Initialize one target power $t_k=1$ per root. For degrees $h=0,\\ldots,p-1$, clear one coefficient $g_I$ per current-depth node, add every current $w_{j,I}$ to its node's $g_I$, and add $g_{I(k)}t_k$ to each target accumulator, where $I(k)$ is its unique ancestor at this depth. Update $w_{j,I}\\leftarrow w_{j,I}v_{j,I}$ and $t_k\\leftarrow-(z_k-c_{I(k)})t_k$. A node without stopped pairs has coefficient zero. Discard the depth's arrays before advancing; at leaves add all direct pairs. The sums are exactly the polynomials in step 3.1. Each depth/degree uses $O(n+M)$ operations and words by step 2.1; the near/far lists, current coefficients, powers and output arrays occupy $O(n+M)$ words. No array of $p$ moments and no list across all depths is stored. The binary root tree has fewer than $2M$ nodes, so its supplied constants and routing data also occupy $O(M)$ words. Routing costs $O(n\\log(2+M)+M)$ operations; fixed-width certified interval arithmetic for each overlapping test has constant scalar cost at its supplied sufficient precision. Total cost is $O((n+M)\\log(2+M)p)$, with $O(n+M)$ words independently of $p$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Fix the certified routing and the exact truncated rational circuit just constructed. Nonleaf far denominators are nonzero by their distance test; leaf denominators are nonzero by [A1]. Its finite exact intermediates and denominators admit the stated $V,D$. Suppose all already formed operands have error at most $e\\le\\min(1,D/2)$. Addition or subtraction increases error by at most $2e+u$. Multiplication increases it by at most $(2V+1)e+u$. For division, writing exact operands as $x,y$, approximate operands as $x',y'$, and $|y|\\ge D$, gives $|y'|\\ge D/2$ and $|x'/y'-x/y|\\le2e/D+2Ve/D^2$; the final rounding adds $u$. Conjugation and changing signs do not increase error. All these bounds are at most $Ke+u$ for the stated $K\\ge2$. Input constant error is at most $u$. Induction over the $T$ gates bounds every operand error by $2uK^{T+1}$: more precisely after $t$ gates the maximum error is at most $u(1+K+\\cdots+K^t)\\le2uK^t$. The stated choice of $u$ keeps this within $\\min(1,D/2,\\tau)$, so every division remains defined and the output rounding error is at most $\\tau$. Root and pole approximation errors are included as input errors in this recurrence. The certified routing uses exact admissible inequalities, so rounding cannot route a pair outside its valid geometric estimate; the positive overlapping gap in step 1.1 permits finite enclosures, whose sufficient precision can be selected together with this $u$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "Combine the truncation and rounding errors to obtain $\\max_k|\\widehat y_k-y_k|\\le\\eta s$. For absolute error $\\delta$ apply the construction with $\\eta=\\delta/s\\le1/2$, obtaining $p=O(\\log(s/\\delta))$. These substitutions do not change the memory argument. The elementary example $y=1/(z-\\mu)$ changes by $h/((z-\\mu)(z-\\mu-h))$ when $\\mu$ changes to $\\mu+h$, showing why separation-dependent precision cannot be omitted from an absolute-error statement. The count in step 4.1 measures scalar words and operations at the required precision and supplies no bound on their bit lengths or bit cost.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 returns zero for n=0; the Statement requires M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero weights give y=0; s=max(1,A/d) keeps the accuracy scale defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats M=1 directly and the rounding proof applies to the finite sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles repeated poles separately; the Statement excludes pole/root collisions by d>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: eta=1/2 is included, eta=0 and d=0 are excluded; step 1.1 uses overlapping tests even at threshold equalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 use finite deterministic indexing and supplied certified constants, without arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional."
+        }
+      ]
+    },
+    "thm-s4-convolution-filter-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-s4-convolution-root-of-unity-reduction",
+          "source_section": "Statement",
+          "quote": "Thus the four families of scalar products $\\widetilde C_M^*RB$, $\\widetilde C_M^*RP$, $Q^*RB$, and $Q^*RP$ reduce to $1+2r+r^2=(r+1)^2$ roots-of-unity Cauchy products; when $r=1$ there are four.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+          "source_section": "Statement",
+          "quote": "using $O((n+M)\\log^2(2+n+M))$ complex arithmetic operations and $O(n+M)$ space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-roots-of-unity-fft-complexity",
+          "source_section": "Statement",
+          "quote": "The radix-two procedure defined on this page computes either transform exactly in $O(M\\log(2+M))$ complex arithmetic operations and $O(M)$ space.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hippo-leg-matrices-have-low-rank-structure",
+          "source_section": "Statement",
+          "quote": "Each transformed matrix is a difference $H-UV^*$ with $H$ normal and $\\operatorname{rank}(UV^*)\\le1$ for LegS and LagT and $\\operatorname{rank}(UV^*)\\le2$ for LegT.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-root-grid-matvec-numerical-cost",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, $M=2^q\\ge1$, $z_k=\\exp(2\\pi i k/M)$, and let $a_j,\\mu_j\\in\\mathbb C$ satisfy $|z_k-\\mu_j|\\ge d>0$ for every $j,k$. Repeated poles are allowed. Let $A\\ge\\sum_j|a_j|$ and $s=\\max(1,A/d)$. For $0<\\eta\\le1/2$, the products $y_k=\\sum_j a_j/(z_k-\\mu_j)$ have numerical approximations satisfying\n$$ \\max_k|\\widehat y_k-y_k|\\le\\eta s $$\nusing $O((n+M)\\log(2+M)\\log(1/\\eta))$ scalar operations and $O(n+M)$ scalar words. Consequently absolute error $\\delta$, for $0<\\delta\\le1/2$, costs $O((n+M)\\log(2+M)\\log(s/\\delta))$ operations with the same word space.\n\nThe model is variable-precision arithmetic with unrestricted exponent range, supplied certified approximations to the inputs, roots and arc-center constants, and certified bounds for the finite computation specified in the proof. Each real comparison, word access and scalar arithmetic operation has unit cost; the latter has absolute rounding error at most $u$. A word stores one scalar at the selected precision. Input approximation, working precision and word lengths may depend on $n,M,d,A,\\eta$ and intermediate magnitudes. This is neither a bit-complexity bound nor a bound at fixed word length. All preprocessing, geometric routing and numerical summation operations are included; computing the supplied constants or certificates from other representations is excluded.\n\nHere is a sufficient explicit precision certificate. For the selected finite rational summation circuit, include its input constants among its exact intermediates, let $T$ bound its arithmetic gates, let $V\\ge1$ bound their moduli, and let $0<D\\le1$ bound below the modulus of every divisor. Set $K=64(V+1)^2/D^2$. With $\\tau=\\eta s/2$, it suffices to take\n$$ u\\le\\frac{\\min(1,D/2,\\tau)}{2K^{T+1}}. $$\nThe geometric decisions additionally use certified interval enclosures narrow enough to choose between the overlapping near and far tests described below. Such enclosures require only finite precision, including at threshold equalities. These certificate assumptions hold for each particular noncollision input, but have no uniform bound as pole/root separation tends to zero.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The fixed-rank DPLR input is valid for the equivalent HiPPO state-space coordinates by [F5]; the operation argument also applies to any supplied DPLR matrices of the same dimensions. By [F2], each required root value has the stated Cauchy-product expression, including the direct value at $-1$. Under the noncollision and correction-invertibility assumptions, the filter procedure in [F1] therefore computes all $M$ generating values exactly.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For $z\\ne-1$, $R=\\beta D$. Substitution in [F2] gives $H_M(z)=x-\\beta u(I_r+\\beta T)^{-1}v$ and $W=I_r+\\beta T$. Also $|\\beta|\\le1$. The pole mapping in [F2] expresses each entry of $D$ as $-2/(a+\\lambda_j)(z-\\mu_j)^{-1}$ for $\\lambda_j\\ne-a$, and as the constant $\\Delta/2$ otherwise. Thus the weights in [F6] are exactly $-2\\overline{f_j}g_j/(a+\\lambda_j)$ for the applicable vector pair $f,g$. Their preparation and the exceptional constant sums cost $O(N)$ for fixed $r$. At $-1$, retain the direct value $(\\Delta/2)\\widetilde C_M^*B$ from [F2], without a resolvent division.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Each scalar product has at most $N$ poles and is evaluated on $M$ roots. If it has at least one pole, [F3] bounds its cost by $O((N+M)\\log^2(2+N+M))$ operations and $O(N+M)$ space; if it has no poles, its constant value is formed by a single finite sum in $O(N+M)$ operations and space. There are at most $(r+1)^2$ such products by [F2], a constant number because $r$ is fixed. The per-root correction matrix products and inversions cost $O(M(r+1)^3)$ operations by finite-dimensional elimination, which is $O(M)$ for fixed $r$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "The generating values are the DFT of the $M$ coefficients $C^*\\bar A^j\\bar B$ for $0\\le j<M$. By [F4], the inverse radix-two transform recovers these coefficients exactly; [F1] then returns their first $L$ entries, which are precisely the length-$L$ filter.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.3",
+          "step": "2.3",
+          "claim": "Let $\\delta=\\varepsilon/[32r w^2(b+1)^2]$ and first consider exact arithmetic on truncated Cauchy sums having scalar entry errors at most $\\delta$, with finite constant sums exact. Denote the resulting blocks by $\\widehat x,\\widehat u,\\widehat v,\\widehat T$. Each of their infinity-norm errors is at most $e=r\\delta$, since each row has at most $r$ entries and $r\\ge1$. Hence $\\|\\widehat W-W\\|_\\infty\\le e$, $we<1/2$ and $e\\le1$. Writing $E=W^{-1}(\\widehat W-W)$, the geometric series $\\sum_{j\\ge0}(-E)^j$ converges in infinity norm because $\\|E\\|_\\infty\\le we<1/2$, is the inverse of $I+E$ by finite geometric identities and passage to the norm limit, and has norm at most $2$. Therefore $\\|\\widehat W^{-1}\\|_\\infty\\le2w$. The identity $\\widehat W^{-1}-W^{-1}=-W^{-1}(\\widehat W-W)\\widehat W^{-1}$ gives $\\|\\widehat W^{-1}-W^{-1}\\|_\\infty\\le2w^2e$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $M$ is the least power of two at least $L$, $M<2L$ for every integer $L\\ge1$. Combining the Cauchy products, per-root corrections, and inverse transform gives $O((N+L)\\log^2(2+N+L))$ exact complex arithmetic operations. Processing the Cauchy products sequentially uses $O(N)$ product-tree workspace; their $(r+1)^2$ root-value arrays, the correction matrices, and the inverse transform use $O(M(r+1)^2)$ additional space. Fixed $r$ and $M<2L$ give total $O(N+L)$ working space. The proof counts the supplied $\\widetilde C_M$ as input and does not count its formation from $C$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "Expanding the difference of the two triple products as $(\\widehat u-u)\\widehat W^{-1}\\widehat v+u(\\widehat W^{-1}-W^{-1})\\widehat v+uW^{-1}(\\widehat v-v)$ and using step 2.3 bounds its modulus by $2we(b+1)+2bw^2e(b+1)+bwe$. Adding the error in $x$ and using $|\\beta|\\le1$ bounds each generating-value error by $e[1+2w(b+1)+2bw^2(b+1)+bw]\\le9w^2(b+1)^2e\\le9\\varepsilon/32$. The direct $-1$ value has no truncation error. The exact inverse DFT averages $M$ unit-modulus multiples in each output coordinate, so its infinity operator norm is at most one; consequently the exact inverse transform of these approximations has coefficient error at most $9\\varepsilon/32$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Apply [F6] with tolerance $\\delta$ to each scalar sum; its exact truncated circuit has error at most $\\delta$, as required above. It uses $p=O(\\log(s/\\delta))=O(\\log(\\kappa/\\varepsilon))$ terms. There are at most $(r+1)^2$ sums, processed sequentially; their arrays and the fixed-size blocks use $O(N+M)$ words. The per-root inverses can be computed by the adjugate/determinant formula, which is constant work for fixed $r$ and has nonzero determinants by step 2.3. Add the radix-two inverse transform and finite sums: the scalar count is $O((N+M)\\log(2+N+M)\\log(\\kappa/\\varepsilon))$. The replacement $M<2L$ gives the stated count and space.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "step 3.1",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "To include every rounding error, regard the entire selected computation, from supplied DPLR parameters, transformed vector and root/arc constants through weight formation, Cauchy sums, finite constants, adjugate inverses and inverse FFT, as one finite rational circuit. Include conjugations as exact sign changes. Require certified $T_0,V_0,D_0$ with $T_0$ an upper bound on its gates, $V_0\\ge1$ an upper bound on exact intermediate moduli, and $0<D_0\\le1$ a lower bound on every exact divisor modulus. Such bounds exist for each input because step 2.3 proves all truncated correction inverses exist and all other divisions are nonzero by the hypotheses. Put $K_0=64(V_0+1)^2/D_0^2$ and select input and gate accuracy $u\\le\\min(1,D_0/2,\\varepsilon/2)/(2K_0^{T_0+1})$, also sufficient for the certified overlapping routing tests of [F6]. The gate recurrence proved in [F6] then gives final additional error at most $\\varepsilon/2$, including errors in supplied parameters, roots, weights, $\\beta$, correction inverses and twiddle factors. Together with step 3.2 this is less than $\\varepsilon$. No precision selection changes the scalar count or scalar-word count, although their bit cost can grow. Bounded $\\kappa$ gives $\\log(\\kappa/\\varepsilon)=O(\\log(1/\\varepsilon))$; arbitrary conditioning retains the explicit $\\kappa$ term.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.3",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N,r,L≥1, so empty state, rank and filter lengths are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero B or C̃_M gives the zero exact filter under the stated invertibility hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: L=1 gives M=1 and inverse transformation returns the first coefficient K_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: P=0 or Q=0 is allowed; the low-rank correction becomes identity and the Cauchy families remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: numerical epsilon lies in (0,1/2]; certified d>0 and correction bounds are required; bit cost and fixed word length are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use fixed finite arrays and deterministic FFT/product-tree routines; no choice is used. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Theorem: no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Theorem: no biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=r=L=M=1, Λ=−1, P=Q=0, Δ=1, B=C=1",
+          "calculation": "Ā=1/3, B̄=2/3, C̃_1=2/3, z=1, R=1 and W=1; the exact root value is 2/3.",
+          "result": "The length-one inverse transform returns K_0=2/3 with no resonance."
+        }
+      ]
+    },
+    "ex-s4-filter-cost-excludes-training": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-s4-convolution-filter-complexity",
+          "source_section": "Statement",
+          "quote": "The procedure returns the first $L$ coefficients of this filter using at most $(r+1)^2$ roots-of-unity Cauchy products, $O((N+L)\\log^2(2+N+L))$ operations, and $O(N+L)$ working space. The operation count is for filter evaluation from $\\widetilde C_M$; it does not include forming that vector from $C$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The procedure in [F2] receives parameters and returns a kernel. By [F1], the proved exact operation and space bounds count that filter-evaluation procedure with $\\widetilde C_M$ supplied.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The procedure's input/output specification in [F2] contains no parameter-gradient computation or optimizer update. Therefore its operation count does not count a larger computation that additionally performs either operation, including a complete training step.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The exact bound counts arithmetic operations and working space only. The separate numerical guarantee in [F1] specifies its absolute error, conditioning factor and variable-precision scalar model; it requires its own certified hypotheses. Its scalar-operation and word-space counts do not bound bit cost or guarantee a fixed word length, and neither cost theorem asserts empirical long-context accuracy. These additional conclusions therefore do not follow from the filter bounds.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the dependent theorem assumes L≥1 and has no empty-filter complexity claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: zero parameters or input may make the filter zero but do not add gradient or optimizer work to the counted procedure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: L=1 still counts one filter-evaluation call, not a training step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: conditioning and resonance are explicit hypotheses/statuses of the dependent procedure; no degenerate case is treated as numerically accurate by cost alone."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: numerical epsilon lies in (0,1/2]; certified d>0 and correction bounds are required; bit cost and fixed word length are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof the proof reason from deterministic routine inputs/outputs and no choices. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example: no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example: no biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scope check",
+          "calculation": "The exact theorem’s output is one kernel vector; its algorithm has no parameter-gradient or optimizer-update output.",
+          "result": "The count cannot be identified with a complete training-step count."
+        }
+      ]
+    }
+  }
+}

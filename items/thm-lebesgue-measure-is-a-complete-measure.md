@@ -14,6 +14,7 @@ landmark: true
 short: "$\\lambda_n$ is a complete measure"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-lebesgue-measure-is-a-complete-measure.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -33,17 +34,25 @@ pipeline_run: null
 ## Statement
 
 Let $n \ge 1$ and **assume the Axiom of Countable Choice**
-([[def-countable-choice]]). Then:
+(The Axiom of Countable Choice ($\mathrm{AC}_\omega$)). Then:
 
 1. $\mathcal{L}(\mathbb{R}^n)$ is a sigma-algebra on $\mathbb{R}^n$ and
-   $\lambda_n$ is a measure on it ([[def-measure]]);
+   $\lambda_n$ is a measure on it (Measures on sigma-algebras);
 2. the measure space $(\mathbb{R}^n, \mathcal{L}(\mathbb{R}^n), \lambda_n)$ is
-   complete ([[def-complete-measure-space]]), and every $S \subseteq \mathbb{R}^n$
+   complete (Complete measure spaces), and every $S \subseteq \mathbb{R}^n$
    with $\lambda_n^*(S) = 0$ is Lebesgue measurable with $\lambda_n(S) = 0$;
 3. every elementary set is Lebesgue measurable and
    $\lambda_n(A) = \mu_0(A)$ for every $A \in \mathcal{E}_n$; in particular
    $\lambda_n(B) = \operatorname{vol}(B)$ for every half-open box $B$,
    $\lambda_n(\varnothing) = 0$ and $\lambda_n(\mathbb{R}^n) = +\infty$.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-measure]]
+
+[[def-complete-measure-space]]
 
 ## Facts & Assumptions
 

@@ -16,19 +16,20 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Proposition 3.2.4"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-ito-integral-process-has-a-continuous-martingale-version.json
   audited: 2026-09-22
 ---
 
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Let $H$ be a predictable
+Elementary predictable Brownian integrands. Let $H$ be a predictable
 process with $E\int_0^TH_s^2ds<\infty$ for every finite $T$. Then there is an
 adapted process $M=(M_t)_{t\ge0}$ with continuous paths such that
 $M_t=\int_0^tH_s\,dB_s$ almost surely for every $t\ge0$
-[[def-ito-integral-for-square-integrable-predictable-processes]], and $M$ is a
+Ito integral for square-integrable predictable processes, and $M$ is a
 square-integrable martingale relative to $(\mathcal F_t)$
-[[def-continuous-time-adapted-process-and-martingale]]: $EM_t^2=E\int_0^tH_s^2ds<\infty$
+Continuous-time adapted processes and martingales: $EM_t^2=E\int_0^tH_s^2ds<\infty$
 for every $t$. Any two such continuous versions agree at every time on one
 measurable event of probability one; in particular the continuous version is
 unique in this common-full-measure-event sense, and it is the only continuous
@@ -37,11 +38,21 @@ integral class.
 
 This conclusion is deliberately distinguished from the exact definition of
 indistinguishability in
-[[def-law-modification-and-indistinguishability-of-processes]]. On a
+Process law, modification, and indistinguishability. On a
 noncomplete probability space the full equality set, although it contains the
 measurable probability-one event constructed below, need not itself be
 measurable. On a complete probability space the two notions coincide, because
 the complement of the equality set is then a measurable subset of a null set.
+
+## Statement references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-ito-integral-for-square-integrable-predictable-processes]]
+
+[[def-continuous-time-adapted-process-and-martingale]]
+
+[[def-law-modification-and-indistinguishability-of-processes]]
 
 ## Facts & Assumptions
 

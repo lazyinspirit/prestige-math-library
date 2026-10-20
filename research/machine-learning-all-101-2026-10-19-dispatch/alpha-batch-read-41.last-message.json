@@ -1,0 +1,191 @@
+{
+  "group": "n",
+  "batches": ["41"],
+  "pages_read": [
+    "momentum-and-accelerated-training",
+    "momentum-and-accelerated-training-examples"
+  ],
+  "items_read": [
+    "alg-heavy-ball-momentum",
+    "alg-nesterov-accelerated-gradient",
+    "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+    "ex-unstable-heavy-ball-parameters",
+    "ex-stochastic-momentum-experiment",
+    "ex-heavy-ball-optimized-quadratic-spectrum"
+  ],
+  "conventions": [
+    {
+      "convention": "Both momentum procedures initialize w₀ = w₁ = w_init and perform updates for t = 1,…,T−1; T = 1 performs no updates.",
+      "fixed_by": "alg-heavy-ball-momentum",
+      "matters_for": [
+        "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+        "ex-unstable-heavy-ball-parameters",
+        "ex-heavy-ball-optimized-quadratic-spectrum"
+      ]
+    },
+    {
+      "convention": "Heavy-ball evaluates the gradient at the current iterate, with constant α > 0 and β ≥ 0.",
+      "fixed_by": "alg-heavy-ball-momentum",
+      "matters_for": [
+        "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+        "ex-unstable-heavy-ball-parameters",
+        "ex-heavy-ball-optimized-quadratic-spectrum"
+      ]
+    },
+    {
+      "convention": "Nesterov evaluates the gradient at w_t + β_t(w_t − w_{t−1}); α_t > 0 and β_t are prescribed real sequences.",
+      "fixed_by": "alg-nesterov-accelerated-gradient",
+      "matters_for": ["ex-stochastic-momentum-experiment"]
+    },
+    {
+      "convention": "The heavy-ball factor is the maximum modulus of characteristic roots, minimized over the entire interval [c,L], rather than a one-step Euclidean contraction or a worst case restricted to the actual spectrum.",
+      "fixed_by": "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+      "matters_for": ["ex-heavy-ball-optimized-quadratic-spectrum"]
+    },
+    {
+      "convention": "For c < L, repeated endpoint roots permit linear polynomial prefactors; for c = L, the tuned polynomial is r² and its root factor is zero.",
+      "fixed_by": "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+      "matters_for": ["ex-heavy-ball-optimized-quadratic-spectrum"]
+    },
+    {
+      "convention": "The reported stochastic comparison concerns training errors under a specific experimental setup and asserts no general convergence rate or test-risk guarantee.",
+      "fixed_by": "ex-stochastic-momentum-experiment",
+      "matters_for": ["ex-stochastic-momentum-experiment"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-heavy-ball-momentum",
+      "statement": "For a continuously Fréchet differentiable F: ℝᵈ → ℝ, initialize w₀ = w₁ = w_init and set w_{t+1} = w_t − α∇F(w_t) + β(w_t − w_{t−1}) for t = 1,…,T−1, with α > 0 and β ≥ 0.",
+      "used_by": [
+        "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+        "ex-unstable-heavy-ball-parameters",
+        "ex-heavy-ball-optimized-quadratic-spectrum"
+      ]
+    },
+    {
+      "id": "thm-heavy-ball-rate-on-strongly-convex-quadratics",
+      "statement": "For a real symmetric positive-definite quadratic whose eigenvalues lie in [c,L], 0 < c ≤ L, the parameters α = 4/(√L + √c)² and β = q², where q = (√L − √c)/(√L + √c), give modal root factor q throughout [c,L] and minimize the interval worst-case root factor among constant α′ > 0, β′ ≥ 0. Gradient descent with step 2/(L+c) has interval factor (L−c)/(L+c), strictly larger when c < L.",
+      "used_by": ["ex-heavy-ball-optimized-quadratic-spectrum"]
+    },
+    {
+      "id": "alg-nesterov-accelerated-gradient",
+      "statement": "Initialize w₀ = w₁ = w_init. For t = 1,…,T−1, set the look-ahead point ŵ_t = w_t + β_t(w_t − w_{t−1}), then w_{t+1} = ŵ_t − α_t∇F(ŵ_t), with prescribed α_t > 0 and real β_t.",
+      "used_by": ["ex-stochastic-momentum-experiment"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "alg-gradient-descent",
+      "used_for": "Fixed-step update convention and the gradient-descent modal comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Coordinate-gradient convention in both algorithms and the quadratic theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Fréchet differentiability assumptions in the algorithms and stationarity seam.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Standard orthonormal coordinates and quadratic norm identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+      "used_for": "Identification of C* with Cᵀ in the real quadratic factorization.",
+      "opened": true
+    },
+    {
+      "id": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+      "used_for": "Conversion of matrix symmetry into self-adjointness.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Orthonormal eigenbasis and diagonalization of the positive-definite matrix.",
+      "opened": true
+    },
+    {
+      "id": "prop-gradient-of-a-quadratic-matrix-form",
+      "used_for": "Gradient A(w−w*) after constructing C with CᵀC = A; scalar and diagonal example gradients.",
+      "opened": true
+    },
+    {
+      "id": "thm-reals-cauchy-complete",
+      "used_for": "Completeness of ℝ for square roots, bounded suprema, and the Archimedean argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Positive eigenvalue square roots and tuned parameter algebra.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-archimedean",
+      "used_for": "Unboundedness of the unstable example and the stationarity seam's finite-index contradiction.",
+      "opened": true
+    },
+    {
+      "id": "lem-l-smoothness-descent-inequality",
+      "used_for": "Checking the descent inequality used by the external stationarity theorem at the named seam.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-stochastic-momentum-experiment",
+      "concern": "The setup description says they used a slowly increasing momentum schedule capped by μ_max, but omits the final reduction to 0.9 for the last 1,000 updates (except the zero-momentum baseline). The primary source, https://proceedings.mlr.press/v28/sutskever13.pdf, PDF p. 5, §3 following Table 2, explicitly describes this finishing phase; Table 2 distinguishes the resulting Curves error 0.074 from the pre-finetuning value 0.096. The reported Table 1 numbers are correct, but the experimental procedure needs this qualification.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "alg-gradient-descent",
+      "finding": "Its Definition contains inline links, including “with the convention of [[def-jacobian-matrix-and-gradient]]” and “condition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]”. These interrupt the complete defining section and have no immediately following Definition references section, contrary to the supplied uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-jacobian-matrix-and-gradient",
+      "finding": "Its Definition contains “with coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]])” and “those of [[def-directional-and-partial-derivatives]]”. These inline links violate the supplied uninterrupted-definition policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-derivative-in-euclidean-space",
+      "finding": "Its Definition contains “linear map L: ℝᵐ → ℝⁿ ([[def-euclidean-linear-map]])” and later [[def-norm-and-normed-space]]. These links remain inside the defining section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "Its Definition contains numerous inline supplier links, beginning with “([[def-natural-numbers]], [[lem-nat-order-is-membership]])” and continuing through the norm and inner-product laws. These interrupt the complete defining section under the supplied policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-reals-cauchy-complete",
+      "finding": "Its Statement reads “Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real number. Together with [[thm-reals-ordered-field]] ...”. Both hyperlinks remain within the Statement rather than a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-square-roots",
+      "finding": "Its Statement begins “Let F be a complete ordered field ([[def-complete-ordered-field]])”. This inline hyperlink interrupts the Statement and is not moved to a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-archimedean",
+      "finding": "Its Statement contains “Every complete ordered field F ([[def-complete-ordered-field]])” and later “([[def-ordered-field]])”. These inline hyperlinks violate the supplied uninterrupted-statement policy.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "momentum-and-accelerated-training",
+      "to": "nonconvex-gradient-descent-and-stationarity",
+      "faithful": true,
+      "note": "Read both pages and the complete thm-smooth-bounded-below-gd-stationarity argument. The prerequisite gives vanishing gradients under a global Lipschitz-gradient bound, a suitable fixed step, and an objective lower bound along the iterates. Batch 41 does not cite that theorem as a premise or transfer its stationarity guarantee to momentum; its fixed-step convention comes from alg-gradient-descent. No reciprocal momentum citation or stronger restatement occurs in the supplier."
+    }
+  ]
+}

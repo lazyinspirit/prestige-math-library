@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-cauchy-condensation.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -33,7 +34,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $(a_k)_{k \ge 1}$ be a family from $1$ ([[def-series]]) with
+Let $(a_k)_{k \ge 1}$ be a family from $1$ (Series, partial sums, convergence and the sum, divergence, and the tail series) with
 
 $$a_k \ge 0 \ \ (k \ge 1) \qquad \text{and} \qquad a_j \ge a_k \ \ \text{whenever } 1 \le j \le k .$$
 
@@ -42,14 +43,22 @@ Then
 $$\sum_{k \ge 1} a_k \ \text{converges} \qquad \Longleftrightarrow \qquad \sum_{j \ge 0} 2^{j} a_{2^{j}} \ \text{converges} .$$
 
 Every term of the condensed series is defined, because $2^{j} \ge 1$ for every
-$j \in \mathbb{N}$ ([[lem-power-monotone]]), and the condensed series starts at
+$j \in \mathbb{N}$ (Monotonicity of $x \mapsto x^n$ and of $n \mapsto a^n$), and the condensed series starts at
 $j = 0$, its first term being $2^0 a_{2^0} = a_1$.
 
 The monotonicity hypothesis is equivalent to the consecutive form
 $a_{k+1} \le a_k$ for every $k \ge 1$, since it says that the sequence
-$b_i := a_{i+1}$, $i \in \mathbb{N}$, is nonincreasing ([[def-monotone-sequence]]).
+$b_i := a_{i+1}$, $i \in \mathbb{N}$, is nonincreasing (Nondecreasing, increasing, nonincreasing, decreasing, monotone, and eventually monotone sequences).
 It cannot be dropped: the companion page exhibits a nonnegative non-monotone
 family for which the two series behave differently.
+
+## Statement references
+
+[[def-series]]
+
+[[lem-power-monotone]]
+
+[[def-monotone-sequence]]
 
 ## Facts & Assumptions
 

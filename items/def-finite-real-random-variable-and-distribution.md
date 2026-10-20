@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-real-random-variable-and-distribution.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -32,4 +33,9 @@ pipeline_run: null
 
 A **real random variable** on a finite probability space $(\Omega,w)$ is a function $X:\Omega\to\mathbb R$. Its range $X(\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\Omega)$ with
 $$\mathbb P_X(x):=\mathbb P(\{\omega\in\Omega:X(\omega)=x\}).$$
-The weights $\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\Omega$ ([[thm-finite-additivity-of-probability]]).
+The weights $\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\Omega$ (Probability is additive on every finite pairwise-disjoint family of events).
+
+## Definition references
+
+[[thm-finite-additivity-of-probability]]
+

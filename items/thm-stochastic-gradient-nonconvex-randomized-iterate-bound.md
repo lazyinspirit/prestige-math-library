@@ -19,6 +19,7 @@ deps:
   - thm-induction-principle
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-stochastic-gradient-nonconvex-randomized-iterate-bound.json
   precheck: pass
   judge:
     model: "gpt-6-luna"
@@ -39,11 +40,15 @@ sources:
 
 ## Statement
 
-Assume AC. Let $f:\mathbb R^d\to\mathbb R$ be continuously differentiable with $L$-Lipschitz gradient for $L>0$, and suppose $f(x)\ge f_{\inf}$ for every $x$, where $f_{\inf}\in\mathbb R$ is a lower bound. Let $x_0$ be deterministic, $\Delta=f(x_0)-f_{\inf}$, and run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]] with constant $0<\alpha\le1/L$. Suppose
+Assume AC. Let $f:\mathbb R^d\to\mathbb R$ be continuously differentiable with $L$-Lipschitz gradient for $L>0$, and suppose $f(x)\ge f_{\inf}$ for every $x$, where $f_{\inf}\in\mathbb R$ is a lower bound. Let $x_0$ be deterministic, $\Delta=f(x_0)-f_{\inf}$, and run the unconstrained update of Filtration-adapted stochastic-gradient oracles and Robbins–Monro updates with constant $0<\alpha\le1/L$. Suppose
 $$\mathbb E[G_k\mid\mathcal F_k]=\nabla f(x_k),\qquad \operatorname{Var}(G_k\mid\mathcal F_k)\le\sigma^2$$
 almost surely for every $k$. After generating $x_0,\ldots,x_{N-1}$, independently choose $R$ uniformly from $\{0,\ldots,N-1\}$ on the finite product extension of the trajectory space; equivalently, $\mathbb E\|\nabla f(x_R)\|_2^2=N^{-1}\sum_{k<N}\mathbb E\|\nabla f(x_k)\|_2^2$. Then
 $$\mathbb E\|\nabla f(x_R)\|_2^2\le\frac{2\Delta}{\alpha N}+L\alpha\sigma^2.$$
 For fixed $\Delta,\sigma$, the stepsize $\alpha=\min\{1/L,\sqrt{2\Delta/(L\sigma^2N)}\}$ gives an $O(N^{-1/2})$ bound when $\Delta,\sigma>0$; zero cases have the stronger bounds specified in the proof. This is an optimization guarantee, not an inferential or central-limit theorem.
+
+## Statement references
+
+[[def-stochastic-gradient-oracle-and-unconstrained-update]]
 
 ## Facts & Assumptions
 

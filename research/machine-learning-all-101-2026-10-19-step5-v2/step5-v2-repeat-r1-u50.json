@@ -1,0 +1,153 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "50",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "lem-carath-ode-flow-with-integrable-local-bounds",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "f39e8b564aeac477a28a30efd04319bc2731d95330763f9e086c579328762875",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For b(t,x)=x^2, T=2 and X(0)=1, local uniqueness forces X(t)=1/(1-t) on [0,1). With t_n=1-1/n and u_n=1-1/(n+1), u_n-t_n tends to zero but X(u_n)-X(t_n)=1, contradicting uniform continuity required by absolute continuity. Every shorter absolutely continuous solution extends, so the original maximal-solution existence claim is false. The repaired statement requires local absolute continuity, and the compatible-union proof establishes it on every compact subinterval.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www2.stat.duke.edu/~sayan/ambrosio.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-carath-ode-flow-with-integrable-local-bounds",
+      "disposition": "repaired",
+      "post_sha256": "8c4a65c756e42674780a36132d3615c2df5cb5e9ce5f2fd37528120ff1a97143",
+      "review_context_sha256": "cabfbf9f9b7de7b0f2d2becab94f8fe8373e15e9b15d7048daef218b70df601f",
+      "reason": "Checked the complete current lemma, actual supplier statements, owning proof contract and frontmatter-only page. Short-interval contractions construct absolutely continuous segments; uniqueness patches their union into a locally absolutely continuous maximal solution. The compact-return estimate and its time reversal prove escape at both interior endpoints. Spatial difference quotients obey an integrably dominated matrix equation, backward uniqueness supplies the C1 inverse, and compact finite-net approximation of the countable-family Lebesgue-point estimates gives the simultaneous starting-time derivative. Corrected the interval in the iterated Lipschitz estimate and mirrored changed proof steps in the contract. Countable Choice and all original hypotheses and flow conclusions are preserved. This is verification of my repair, not an independent review of it.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www2.stat.duke.edu/~sayan/ambrosio.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-regularized-continuity-equation-has-characteristic-flow"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-defect",
+      "id": "lem-carath-ode-flow-with-integrable-local-bounds",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "statement",
+      "status": "fixed",
+      "reason": "For b(t,x)=x^2, T=2 and X(0)=1, local uniqueness forces X(t)=1/(1-t) on [0,1). With t_n=1-1/n and u_n=1-1/(n+1), u_n-t_n tends to zero but X(u_n)-X(t_n)=1, contradicting uniform continuity required by absolute continuity. Every shorter absolutely continuous solution extends, so the original maximal-solution existence claim is false. The repaired statement requires local absolute continuity, and the compatible-union proof establishes it on every compact subinterval.",
+      "correction": "Replace maximal absolute continuity by maximal local absolute continuity, explicitly defined on every compact subinterval of the maximal interval; prove the compatible union has that regularity.",
+      "post_sha256": "8c4a65c756e42674780a36132d3615c2df5cb5e9ce5f2fd37528120ff1a97143",
+      "uncertain": false,
+      "source_urls": [
+        "https://www2.stat.duke.edu/~sayan/ambrosio.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "claim_and_conventions": "Solutions are locally absolutely continuous on an interval I contained in [0,T] and containing the prescribed start time; absolute continuity is required on every compact subinterval of I. Maximality is among extensions in that same solution class. All local bounds, Countable Choice, escape, C1 flow and starting-time derivative clauses remain.",
+    "statement_comparison": {
+      "before_clause": "unique maximal absolutely continuous solution",
+      "after_clause": "unique maximal locally absolutely continuous solution, with the local meaning and extension class explicitly stated",
+      "changed": true
+    },
+    "proof_repairs": [
+      {
+        "step": "2.1",
+        "finding": "A compatible union of compact absolutely continuous segments need not be globally absolutely continuous up to explosion.",
+        "repair": "State local absolute continuity of the union using a finite covering of every compact subinterval; explicitly supply the left-endpoint escape conclusion by time reversal."
+      },
+      {
+        "step": "5.1",
+        "severity": "nonfatal",
+        "finding": "The displayed inequality integrated over the entire fixed J does not itself imply the exponential bound by iteration.",
+        "repair": "Use the interval between s and r so iteration is over ordered integration variables and gives the exponential bound."
+      }
+    ],
+    "source_consulted": {
+      "url": "https://www2.stat.duke.edu/~sayan/ambrosio.pdf",
+      "locator": "Lemma 8.1.4, printed p.172 / PDF p.180, equations (8.1.7)-(8.1.10).",
+      "scope": "Read the complete ODE lemma statement and adjacent characteristic discussion. The source gives no proof of that ODE lemma; the local proof and its regularity clauses were checked directly rather than attributed to an unread source argument."
+    },
+    "dependencies": [
+      "def-countable-choice",
+      "thm-banach-fixed-point",
+      "lem-vector-valued-continuous-curve-space-is-complete",
+      "thm-first-fundamental-theorem-of-calculus-for-l-one",
+      "thm-ftc-second-part",
+      "thm-dominated-convergence",
+      "thm-chain-rule-for-total-derivatives",
+      "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n"
+    ],
+    "downstream_examination": [
+      {
+        "id": "lem-regularized-continuity-equation-has-characteristic-flow",
+        "path": "items/lem-regularized-continuity-equation-has-characteristic-flow.md",
+        "in_frontier": true,
+        "status": "draft",
+        "affected_use": "F2 supplies local flow existence, open domains, inverse maps and compact escape. Proof 1.1 uses the starting-time derivative on compact backward tubes, 2.1 uses the restricted time map, 3.1 integrates squared speed up to the maximal endpoint and excludes explosion by finite length, and 4.1 pushes forward along the full-measure global domain.",
+        "exact_snippets": [
+          "[F2] A Borel field with integrable local magnitude and Lipschitz bounds has a unique maximal local flow",
+          "The start-time derivative from [F2] and the flow identity",
+          "Thus for $\\mu_0^\\varepsilon$-almost every x the path has finite squared speed integral up to its maximal endpoint. Holder then makes its total path length finite."
+        ],
+        "disposition": "unchanged_sound",
+        "invalidated_claim": null,
+        "minimality": "Each pre-explosion use is on a compact time segment, where local absolute continuity is absolute continuity. The consumer supplies its own finite speed-integral estimate before extending to a finite endpoint, so it does not require global absolute continuity of an exploding maximal path. Its Statement is unchanged; no next-hop examination is triggered."
+      }
+    ],
+    "page_interface": {
+      "path": "library/machine-learning/wasserstein-metric-and-continuity-equation.md",
+      "disposition": "unchanged_sound",
+      "reason": "The page contains YAML frontmatter only and lists both supplier and consumer. No body or mathematical clause restates the defective global regularity."
+    },
+    "consumer_inventory": "Exact-ID search of all active items and library pages found only the supplier itself, the listed direct consumer and its owning page; the supplier has no aliases. The direct consumer is in the frozen frontier. There are no identified outside-frontier or published consumers to route to maintenance.",
+    "published_ledger": "No proposed update: the assigned supplier and sole direct consumer are draft; no published consumer finding arose from this interface change.",
+    "diagrams": "The assigned item has no TikZ/tikzcd diagram, and the analytic local-flow argument needs none.",
+    "contract_integration": "Acquired step5-shared-write-lock as step5-v2-repeat-r1-u50, reread the current contract, updated only the assigned derivation claims for steps 2.1 and 5.1, ran the scoped strict proof-contract check, and released the lock. Existing independent review metadata was preserved.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-50.proof-contracts.json --strict --items lem-carath-ode-flow-with-integrable-local-bounds",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-carath-ode-flow-with-integrable-local-bounds.md",
+        "exit_code": 0,
+        "result": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-carath-ode-flow-with-integrable-local-bounds.md",
+        "exit_code": 0,
+        "result": "OK; actual KaTeX and renderer YAML parse passed for 1 file"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-carath-ode-flow-with-integrable-local-bounds.md",
+        "exit_code": 0,
+        "result": "1 item, 5 steps, 0 defects; run after all item edits"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items lem-carath-ode-flow-with-integrable-local-bounds",
+        "exit_code": 0,
+        "result": "Captured post_sha256 and review_context_sha256 immediately after the completed mathematical review and contract integration, before editing any other supplier."
+      }
+    ],
+    "unresolved_obligations": [],
+    "workflow_obligations": "The controller still owes the ordinary frontier consumer routing, certification and renewed independent judgment; no worker, judge, certification or round transition was launched."
+  }
+}

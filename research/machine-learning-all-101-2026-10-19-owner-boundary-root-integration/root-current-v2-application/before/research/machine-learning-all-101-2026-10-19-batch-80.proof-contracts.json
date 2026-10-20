@@ -1,0 +1,2409 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-markov-decision-process",
+    "lem-bounded-discounted-return-converges",
+    "lem-finite-state-sup-norm-space-is-complete",
+    "thm-finite-mdp-policy-induces-reward-state-chain",
+    "def-policy-bellman-operator",
+    "def-bellman-optimality-operator",
+    "def-discounted-return-and-value-functions",
+    "thm-bellman-contraction-and-unique-fixed-point",
+    "alg-value-iteration",
+    "lem-policy-value-satisfies-bellman-equation",
+    "thm-value-iteration-convergence-error-bound",
+    "alg-policy-iteration",
+    "thm-policy-improvement",
+    "ex-undiscounted-single-state-mdp-diverges",
+    "ex-finite-mdp-common-reward-shift",
+    "ex-value-iteration-attains-error-rate",
+    "ex-policy-iteration-tie-retention"
+  ],
+  "contracts": {
+    "def-finite-markov-decision-process": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is\n   finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. **A finite partition.** If $I$ is a finite set and $(A_i)_{i \\in I}$ is a\n   family of finite sets that are pairwise disjoint, then $\\bigcup_{i \\in I} A_i$\n   is finite and\n   $\\big\\lvert\\bigcup_{i \\in I} A_i\\big\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$,\n   the sum being that of [[def-sum-over-a-finite-index-set]].\n3. **Splitting a sum along a partition of its index set.** Let $S$ be finite, let\n   $J$ be finite, and let $(S_j)_{j \\in J}$ be pairwise disjoint subsets of $S$\n   with $\\bigcup_{j \\in J} S_j = S$. Then for $a : S \\to \\mathbb{R}$ or\n   $a : S \\to \\mathbb{N}$,\n   $$\\sum_{i \\in S} a_i = \\sum_{j \\in J}\\Big(\\sum_{i \\in S_j} a_i\\Big), \\qquad \\prod_{i \\in S} a_i = \\prod_{j \\in J}\\Big(\\prod_{i \\in S_j} a_i\\Big).$$\n   In particular $\\sum_{i \\in S \\cup T} a_i = \\sum_{i \\in S} a_i + \\sum_{i \\in T} a_i$\n   for disjoint finite $S$ and $T$.\n\n**Disjointness is a hypothesis and not a formality.** It is spent at exactly one\nstep, the injectivity of the splice map, and dropping it makes clause 1 false;\nthe companion page carries that false statement with its smallest witness.\n\n```tikz\n\\begin{tikzpicture}[x=1.05cm,y=1cm]\n  \\node at (1,2.45) {$A$};\n  \\node at (5.2,2.45) {$B$};\n  \\node at (3.1,2.45) {$p,q>0$};\n  \\node (f0) at (0,1.55) {$f(0)$};\n  \\node (fd) at (1,1.55) {$\\cdots$};\n  \\node (fp) at (2,1.55) {$f(p-1)$};\n  \\node (g0) at (4.2,1.55) {$g(0)$};\n  \\node (gd) at (5.2,1.55) {$\\cdots$};\n  \\node (gq) at (6.2,1.55) {$g(q-1)$};\n  \\node (d0) at (0,0) {$0$};\n  \\node (dd1) at (1,0) {$\\cdots$};\n  \\node (dp) at (2,0) {$p-1$};\n  \\node (dpp) at (4.2,0) {$p$};\n  \\node (dd2) at (5.2,0) {$\\cdots$};\n  \\node (dpq) at (6.2,0) {$p+q-1$};\n  \\draw[->] (d0) -- (f0);\n  \\draw[->] (dp) -- (fp);\n  \\draw[->] (dpp) -- (g0);\n  \\draw[->] (dpq) -- (gq);\n  \\draw[dashed] (3.1,-0.45) -- (3.1,2.15);\n  \\node at (1,-0.65) {$h(k)=f(k)$};\n  \\node at (5.2,-0.65) {$h(p+j)=g(j)$};\n  \\node at (3.1,-1.2) {$h:p+q\\longrightarrow A\\cup B$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-characterising-property-of-ordered-pairs",
+          "source_section": "Statement",
+          "quote": "For all sets $a$, $b$, $c$, $d$: $(a,b) = (c,d)$ if and only if $a = c$ and\n$b = d$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-finite-markov-decision-process-1-1",
+          "step": "1.1",
+          "claim": "For each $s\\in S$, let $D_s=\\{(s,a):a\\in A(s)\\}$. The map $a\\mapsto(s,a)$ is a bijection from $A(s)$ onto $D_s$, with inverse the second-coordinate projection, so $D_s$ is finite by [F1]. If $s\\ne t$, no ordered pair can have both first coordinate $s$ and first coordinate $t$; hence the family $(D_s)_{s\\in S}$ is pairwise disjoint.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "def-finite-markov-decision-process-2-1",
+          "step": "2.1",
+          "claim": "By the definition of $D$, $D=\\bigcup_{s\\in S}D_s$. Since $S$ is finite and the blocks in step 1.1 are finite and pairwise disjoint, [F2] implies that $D$ is finite.",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "lem-bounded-discounted-return-converges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-direct-comparison-test",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ and $(b_k)$ be sequences of reals and suppose there is\n$K \\in \\mathbb{N}$ with\n\n$$0 \\;\\le\\; a_k \\;\\le\\; b_k \\qquad \\text{for all } k \\ge K .$$\n\nThen:\n\n1. if $\\sum b_k$ converges then $\\sum a_k$ converges ([[def-series]]);\n2. if $\\sum a_k$ diverges then $\\sum b_k$ diverges.\n\nThe same statement holds verbatim for series with a general starting index $m$,\napplied to the shifted sequences of [[def-series]].\n\nThe hypothesis is on the terms from some index on, not on all of them: finitely\nmany terms of either sequence may violate it, or be negative, without affecting\nthe conclusion. What may not be dropped is nonnegativity of $(a_k)$ from that\nindex on.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-series-linearity",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ and $(b_k)$ be sequences of reals whose series converge\n([[def-series]]), and let $c \\in \\mathbb{R}$. Then:\n\n1. $\\sum (a_k + b_k)$ converges, with\n   $\\displaystyle\\sum_{k=0}^{\\infty}(a_k + b_k) = \\sum_{k=0}^{\\infty} a_k + \\sum_{k=0}^{\\infty} b_k$;\n2. $\\sum c\\,a_k$ converges, with\n   $\\displaystyle\\sum_{k=0}^{\\infty} c\\,a_k = c \\sum_{k=0}^{\\infty} a_k$.\n\nMoreover, for $c \\ne 0$ and an arbitrary sequence $(a_k)$, whose series is not\nassumed to converge:\n\n3. $\\sum c\\,a_k$ converges **if and only if** $\\sum a_k$ converges. Equivalently,\n   $\\sum a_k$ diverges if and only if $\\sum c\\,a_k$ diverges.\n\nClaim 3 is the form used whenever a comparison is made against a constant\nmultiple of a known series.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-series-tail-invariance",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with partial sums $s_n = \\sum_{k<n} a_k$, let\n$N \\in \\mathbb{N}$, and let $t_j := \\sum_{i<j} a_{N+i}$ be the partial sums of the\n$N$-th tail series $\\sum_{k \\ge N} a_k$ ([[def-series]]). Then:\n\n1. $t_j = s_{j+N} - s_N$ for every $j \\in \\mathbb{N}$;\n2. $\\sum a_k$ converges **if and only if** its $N$-th tail series converges, and\n   in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; s_N \\;+\\; \\sum_{k=N}^{\\infty} a_k ;$$\n3. hence the following are equivalent: $\\sum a_k$ converges; every tail series of\n   $\\sum a_k$ converges; some tail series of $\\sum a_k$ converges.\n\nIn words: convergence of a series is a property of its terms from any index on,\nand changing finitely many terms changes the sum but not the fact of convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-limit-preserves-order",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]). If $x_k \\le y_k$ eventually, that\nis for all $k$ from some index on, then\n\n$$\\lim_{k} x_k \\;\\le\\; \\lim_{k} y_k .$$\n\nIn particular, if $x_k \\ge 0$ eventually then $\\lim_k x_k \\ge 0$, and if\n$a \\le x_k \\le b$ eventually then $a \\le \\lim_k x_k \\le b$.\n\nThe conclusion is **not** strict, and cannot be made strict; see the remarks\nbelow and the false statement at the end of this page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ be a sequence of reals with $a_k \\ge 0$ for every $k \\in \\mathbb{N}$,\nlet $s_n = \\sum_{k<n} a_k$ be its partial sums and let\n$S = \\{\\, s_n : n \\in \\mathbb{N} \\,\\}$ be the range of $(s_n)$ ([[def-series]]).\nThen:\n\n1. $(s_n)$ is nondecreasing ([[def-monotone-sequence]]) and $s_n \\ge 0$ for every\n   $n$;\n2. $\\sum a_k$ converges **if and only if** $S$ is bounded above\n   ([[def-bounded-set]]), and in that case\n   $$\\sum_{k=0}^{\\infty} a_k \\;=\\; \\sup S ,$$\n   so in particular $s_n \\le \\sum_{k=0}^{\\infty} a_k$ for every $n$;\n3. if $S$ is not bounded above then $s_n \\to +\\infty$\n   ([[def-divergence-to-infinity]]) and $\\sum a_k$ diverges.\n\nThis is the theorem that makes the nonnegative theory work: for terms of one\nsign, convergence is a boundedness question and no candidate limit is ever\nneeded. Every comparison test on this page is an application of it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-bounded-discounted-return-converges-1-1",
+          "claim": "For every $j\\ge0$, $0\\le\\gamma^j|\\rho_{j+1}|\\le M\\gamma^j$. By [F1] and the scaling part of [F3], the majorant series $\\sum_{j\\ge0}M\\gamma^j$ converges (and when $M=0$ it is the zero series); [F2] gives convergence of $\\sum_{j\\ge0}\\gamma^j|\\rho_{j+1}|$. Thus the stated series converges absolutely by definition of absolute convergence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-bounded-discounted-return-converges-1-2",
+          "claim": "Every finite partial sum satisfies $\\left|\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le M\\sum_{j=0}^{N-1}\\gamma^j\\le M\\sum_{j=0}^{\\infty}\\gamma^j=M/(1-\\gamma)$. The second inequality is [F7] applied to the nonnegative geometric series in [F1]. At $N=0$ the sum is empty and the inequality holds as well.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-bounded-discounted-return-converges-2-1",
+          "claim": "For $K\\ge N$, [F4] gives $\\left|\\sum_{j=N}^{K-1}\\gamma^j\\rho_{j+1}\\right|\\le M\\sum_{j=N}^{K-1}\\gamma^j\\le M\\sum_{j=N}^{\\infty}\\gamma^j=M\\gamma^N/(1-\\gamma)$, where [F7] applies to the shifted geometric series and [F3] evaluates its sum. The finite tail sums converge to $G-\\sum_{j<N}\\gamma^j\\rho_{j+1}$ by step 1.1, and each lies between the negatives and positives of the displayed bound; [F6] passes both inequalities to the limit. Therefore the required tail estimate holds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "lem-bounded-discounted-return-converges-3-1",
+          "claim": "Taking $N=0$ in step 2.1 gives $|G|\\le M/(1-\\gamma)$. The right side of the tail bound tends to zero by [F5], so the partial sums converge to $G$ with the stated uniform remainder control.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement states the relevant boundary value and the verification/proof handles it exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "lem-finite-state-sup-norm-space-is-complete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-criterion-via-lub",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of reals converges to a real ([[def-real-limit]]).\n\nMore carefully, this is a statement about the *axioms*: in a complete ordered\nfield, that is in an ordered field with the least-upper-bound property\n([[def-complete-ordered-field]]), every Cauchy sequence converges. The proof\nbelow uses nothing about $\\mathbb{R}$ except that property, through\n[[thm-bolzano-weierstrass]].\n\n**This library already knows the conclusion by a different route.**\nIt is proved on the Cauchy-construction page, where\n$\\mathbb{R}$ is built out of Cauchy sequences of rationals and completeness is\nread off the construction. That proof is about a particular construction; this\none is about the axioms, and it is what tells us the statement holds in *any*\ncomplete ordered field, however it was obtained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) constructed in this\nlibrary ([[def-real-numbers]]) and carrying its order ([[def-real-order]]).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\n[[rem-metric-axiom-conventions]] records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as [[lem-metric-nonnegativity]] proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n([[def-max-min]], [[lem-finite-set-has-max]]). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $(x_k)$ be a\nsequence in $X$, that is a function $\\mathbb{N} \\to X$ written $x_k := x(k)$\n([[def-metric-convergence]], [[def-sequence]]). As everywhere in this library\n$\\mathbb{N}$ contains $0$, so a sequence is indexed from $0$.\n\n$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$\n\n**Rational and real $\\varepsilon$ agree here.** The test is written with a\nrational $\\varepsilon$ to match [[def-real-limit]] and [[def-metric-convergence]],\nand nothing is lost by using a real one: below any real $\\eta > 0$ lies a\npositive rational ([[lem-rat-embeds-dense]]), and the index belonging to that\nrational serves for $\\eta$. So a proof may establish Cauchyness by producing an\nindex for every real $\\varepsilon > 0$, and may use a Cauchy hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**The condition is exactly $d(x_m,x_n) \\to 0$ as $m$ and $n$ grow\nindependently.** The distances $d(x_m,x_n)$ are nonnegative reals\n([[lem-metric-nonnegativity]]), and the displayed condition asks them to be\nuniformly small on a tail of the doubly indexed family. It is not the same as\n$d(x_{k+1}, x_k) \\to 0$, which is a strictly weaker condition and is a standing\nsource of error. The partial sums $H_n$ of the harmonic series separate the two:\nconsecutive ones differ by $1/(n+1)$, which tends to $0$, while the sequence is\nunbounded, and an unbounded sequence of reals is not Cauchy\n([[lem-metric-cauchy-bounded]]).\n\n**Consistency with the real line.** For $X = \\mathbb{R}$ with the usual metric\n$d(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]) the condition above reads\n$|x_m - x_n| < \\varepsilon$ for $m,n \\ge K$, which is verbatim the definition of a\nCauchy sequence of reals ([[def-real-limit]]). So the notion introduced here\nrestricts on $\\mathbb{R}$ to the one already in use, and no ambiguity is created.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-convergence",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA **sequence in $X$** is a function $x : \\mathbb{N} \\to X$, written $(x_k)$ with\n$x_k := x(k)$. As everywhere in this library, $\\mathbb{N}$ contains $0$\n([[def-natural-numbers]]) and a sequence is indexed from $0$\n([[def-sequence]]); an index range copied from a text that starts at $1$ must be\nshifted before it is used here.\n\nLet $(x_k)$ be a sequence in $X$ and $p \\in X$. The function\n$k \\mapsto d(x_k, p)$ is a sequence of reals ([[def-sequence]]), and it is\nnonnegative ([[lem-metric-nonnegativity]]), so $|d(x_k,p)| = d(x_k,p)$\n([[def-abs-value]]). Define\n\n$$x_k \\longrightarrow p \\text{ in } (X,d) \\quad :\\Longleftrightarrow \\quad d(x_k,p) \\longrightarrow 0 \\text{ in } \\mathbb{R},$$\n\nthe convergence on the right being that of [[def-real-limit]]. Unwound, this\nsays: for every **rational** $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ with\n$d(x_k, p) < \\varepsilon$ for every $k \\ge K$. We then call $p$ a **limit** of\n$(x_k)$, and say $(x_k)$ **converges** in $(X,d)$ if it has a limit.\n\n**Rational and real $\\varepsilon$ agree here, as they do on the real line.**\n[[def-real-limit]] tests convergence against rational $\\varepsilon$ only, and its\nown remark, restated for sequences in [[def-sequence]], records that nothing is\nlost: below any real $\\eta > 0$ lies a positive rational\n([[lem-rat-embeds-dense]]), and the index belonging to that rational serves for\n$\\eta$. So a proof may establish convergence by producing an index for every\nreal $\\varepsilon > 0$, and may use a convergence hypothesis at a real\n$\\varepsilon$ by first passing to a rational below it. Both moves are used on\nthis page and are always cited.\n\n**Subsequences and subsequential limits.** A **subsequence** of $(x_k)$ is the\ncomposite $x \\circ n$ for a strictly increasing $n : \\mathbb{N} \\to \\mathbb{N}$,\nwritten $(x_{n_j})$, exactly as for sequences of reals ([[def-sequence]]); and\n$p$ is a **subsequential limit** of $(x_k)$ in $(X,d)$ when some subsequence\nconverges to $p$, which is the metric-space form of [[def-subsequential-limit]].",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x_l| < \\hat\\varepsilon$ for all $k, l \\ge K$.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-limit-unique",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]) and let $x, y \\in\n\\mathbb{R}$. If $(x_k)$ converges to $x$ and $(x_k)$ converges to $y$\n([[def-real-limit]]), then $x = y$. A sequence therefore has at most one limit,\nand when a limit exists it may be denoted $\\lim_{k} x_k$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-1-1",
+          "claim": "If $S=\\emptyset$, then $B(S)$ has exactly one element, the empty function. Its only distance is $0$; nonnegativity, symmetry, separation, and the triangle inequality all hold on this singleton, and every sequence in it is constant and convergent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4"
+          ]
+        },
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-1-2",
+          "claim": "Suppose $S\\ne\\emptyset$. By [F1], fix $n\\ge1$ and a bijection $e:n\\to S$. Pulling functions back along $e$ identifies $B(S)$ with $\\mathbb R^n$ and carries $d_\\infty$ exactly to the max metric of [F2]; hence it is a metric.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "lem-finite-state-sup-norm-space-is-complete-2-1",
+          "claim": "Let $(U_m)$ be Cauchy in $d_\\infty$ on $B(S)$. For each $j<n$, define the real sequence $x^{(j)}_m:=U_m(e(j))$. Given rational $\\varepsilon>0$, the metric Cauchy condition supplies $K$ such that $d_\\infty(U_m,U_\\ell)<\\varepsilon$ for all $m,\\ell\\ge K$. Since the pulled-back $d_\\infty$ is the maximum of the coordinate differences, $|x^{(j)}_m-x^{(j)}_\\ell|<\\varepsilon$ for every $j<n$ and $m,\\ell\\ge K$. Thus each coordinate sequence is Cauchy in $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F3], each coordinate sequence converges. Denote its unique limit by $y_j\\in\\mathbb R$, using [F6].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Define $U:S\\to\\mathbb R$ by $U(e(j)):=y_j$ for $j<n$. This is well defined because $e$ is a bijection, and it uses no choice because every $y_j$ is uniquely determined.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "F1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix rational $\\varepsilon>0$. For each $j<n$, convergence to $y_j$ gives a nonempty set of natural thresholds $K$ such that $|x^{(j)}_m-y_j|<\\varepsilon$ for all $m\\ge K$. Let $K_j$ be its least member, using [F7].",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The finite nonempty list $K_0,\\ldots,K_{n-1}$ has a maximum $K$: start with $K_0$ and, at each successor, retain the larger of the current maximum and the next threshold, which exists by the total order on $\\mathbb N$; induction proves the resulting value dominates every entry. Thus $K\\ge K_j$ for all $j<n$.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.2",
+            "step 4.2",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For every $m\\ge K$, step 5.1 implies $|U_m(e(j))-U(e(j))|<\\varepsilon$ for every $j<n$. Their finite maximum is one of these coordinate differences, so $d_\\infty(U_m,U)<\\varepsilon$. Since this holds for every rational $\\varepsilon>0$, $(U_m)$ converges to $U$ in $d_\\infty$. Every Cauchy sequence therefore converges in $B(S)$, and together with the metric property from steps 1.1–1.2 this proves completeness.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats the empty-state case or the associated unique empty value/policy; Proof step 1.1 handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.2–6.1 include n=1 in the finite-coordinate metric and convergence argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "thm-finite-mdp-policy-induces-reward-state-chain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice. Let $K$ be a probability kernel on $(E,\\mathcal E)$,\nlet $(\\Omega,\\mathcal F,\\mathbb P,(\\mathcal F_n)_{n\\ge0})$ be a filtered\nprobability space, and let $X=(X_n)_{n\\ge0}$ be an adapted $E$-valued process.\nWe call $X$ a **time-homogeneous Markov chain with transition kernel $K$ relative\nto $(\\mathcal F_n)$** if, for every $n\\ge0$ and $A\\in\\mathcal E$,\n$$ \\mathbb P(X_{n+1}\\in A\\mid\\mathcal F_n)=K(X_n,A)\\qquad\\text{a.s.} $$\nHere the left side is an almost-everywhere class of conditional-probability\nversions. The right side is $\\mathcal F_n$-measurable because\n$x\\mapsto K(x,A)$ is $\\mathcal E$-measurable and $X_n$ is\n$\\mathcal F_n/\\mathcal E$-measurable.\n\nIf $\\mathcal F_n=\\sigma(X_0,\\ldots,X_n)$, we say simply that $X$ is a Markov\nchain relative to its **natural filtration**. A chain relative to a larger\nfiltration is therefore a stronger assertion, not merely a change of notation.\n\nChoice is used only through the library construction that supplies conditional\nexpectations, hence conditional probabilities, simultaneously as\nalmost-everywhere classes; this definition asserts no pointwise regular\nconditional distribution.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is\n   finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. **A finite partition.** If $I$ is a finite set and $(A_i)_{i \\in I}$ is a\n   family of finite sets that are pairwise disjoint, then $\\bigcup_{i \\in I} A_i$\n   is finite and\n   $\\big\\lvert\\bigcup_{i \\in I} A_i\\big\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$,\n   the sum being that of [[def-sum-over-a-finite-index-set]].\n3. **Splitting a sum along a partition of its index set.** Let $S$ be finite, let\n   $J$ be finite, and let $(S_j)_{j \\in J}$ be pairwise disjoint subsets of $S$\n   with $\\bigcup_{j \\in J} S_j = S$. Then for $a : S \\to \\mathbb{R}$ or\n   $a : S \\to \\mathbb{N}$,\n   $$\\sum_{i \\in S} a_i = \\sum_{j \\in J}\\Big(\\sum_{i \\in S_j} a_i\\Big), \\qquad \\prod_{i \\in S} a_i = \\prod_{j \\in J}\\Big(\\prod_{i \\in S_j} a_i\\Big).$$\n   In particular $\\sum_{i \\in S \\cup T} a_i = \\sum_{i \\in S} a_i + \\sum_{i \\in T} a_i$\n   for disjoint finite $S$ and $T$.\n\n**Disjointness is a hypothesis and not a formality.** It is spent at exactly one\nstep, the injectivity of the splice map, and dropping it makes clause 1 false;\nthe companion page carries that false statement with its smallest witness.\n\n```tikz\n\\begin{tikzpicture}[x=1.05cm,y=1cm]\n  \\node at (1,2.45) {$A$};\n  \\node at (5.2,2.45) {$B$};\n  \\node at (3.1,2.45) {$p,q>0$};\n  \\node (f0) at (0,1.55) {$f(0)$};\n  \\node (fd) at (1,1.55) {$\\cdots$};\n  \\node (fp) at (2,1.55) {$f(p-1)$};\n  \\node (g0) at (4.2,1.55) {$g(0)$};\n  \\node (gd) at (5.2,1.55) {$\\cdots$};\n  \\node (gq) at (6.2,1.55) {$g(q-1)$};\n  \\node (d0) at (0,0) {$0$};\n  \\node (dd1) at (1,0) {$\\cdots$};\n  \\node (dp) at (2,0) {$p-1$};\n  \\node (dpp) at (4.2,0) {$p$};\n  \\node (dd2) at (5.2,0) {$\\cdots$};\n  \\node (dpq) at (6.2,0) {$p+q-1$};\n  \\draw[->] (d0) -- (f0);\n  \\draw[->] (dp) -- (fp);\n  \\draw[->] (dpp) -- (g0);\n  \\draw[->] (dpq) -- (gq);\n  \\draw[dashed] (3.1,-0.45) -- (3.1,2.15);\n  \\node at (1,-0.65) {$h(k)=f(k)$};\n  \\node at (5.2,-0.65) {$h(p+j)=g(j)$};\n  \\node at (3.1,-1.2) {$h:p+q\\longrightarrow A\\cup B$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+          "source_section": "Statement",
+          "quote": "Let $S$ and $T$ be finite sets and let $a : S \\times T \\to \\mathbb{R}$, or\n$a : S \\times T \\to \\mathbb{N}$, written $a_{ij}$ for $a(i,j)$. Then $S \\times T$\nis finite and\n\n$$\\sum_{i \\in S}\\Big(\\sum_{j \\in T} a_{ij}\\Big) \\;=\\; \\sum_{p \\in S \\times T} a_p \\;=\\; \\sum_{j \\in T}\\Big(\\sum_{i \\in S} a_{ij}\\Big),$$\n\nall three sums being the sums over a finite index set of\n[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]] when the\nvalues are real and by [[def-nat-finite-sum-and-product]] when they are natural.\n\n**This is not a clause of [[thm-sum-rule]].** That theorem splits one sum along a\npartition of *its own* index set; the identity above exchanges the roles of two\n*different* index sets, and it is what an argument that counts a set of pairs in\ntwo ways needs. Both outer index sets may be empty, in which case all three\nquantities are $0$ (respectively $1$ for the product form of the underlying\nrecursion), since a sum over the empty index set is the empty sum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-finite-mdp-policy-induces-reward-state-chain-1-1",
+          "claim": "Fix $x=(s,\\eta)\\in E$. By [F5], $E=S\\times(\\mathcal R\\cup\\{0\\})$ is finite: $\\{0\\}\\setminus\\mathcal R$ is a subset of a finite singleton, $\\mathcal R\\cup\\{0\\}=\\mathcal R\\cup(\\{0\\}\\setminus\\mathcal R)$ is a finite union, and then take its product with $S$. For each $a\\in A(s)$, the point masses $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R\\subseteq E$ (and zero on the added dummy-reward points) define a probability measure $\\mu_a$ on $E$: they are nonnegative and total $1$ by [F1]. To check countable additivity, fix a bijection $e:n\\to E$. For any disjoint sequence $(B_j)$, each nonempty $B_j$ has a least index $i_j<n$ with $e(i_j)\\in B_j$, by [F8]; disjointness makes these indices distinct, so only finitely many $B_j$ are nonempty. Additivity then follows from finite-sum additivity over the partition of the finite support, as in [F5]. The displayed kernel is the finite mixture $K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\mu_a(B)$. Its values are nonnegative and $K_\\pi(x,E)=\\sum_a\\pi(a\\mid s)=1$ by [F1]. For a disjoint countable family $(B_j)$, only finitely many $B_j$ are nonempty by the same argument; additivity of each $\\mu_a$ and finite-sum interchange [F6] give $K_\\pi(x,\\bigcup_jB_j)=\\sum_jK_\\pi(x,B_j)$. Thus $B\\mapsto K_\\pi(x,B)$ is a probability measure. Every subset of $E$ is measurable and every function on the discrete source $E$ is measurable, so [F2] makes $K_\\pi$ a probability kernel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-mdp-policy-induces-reward-state-chain-2-1",
+          "claim": "For fixed $s\\in S$, the point mass $\\mu_0=\\delta_{(s,0)}$ is a probability measure on $E$. At every $n\\ge0$, use the history-dependent kernel $K_n(x_0,\\ldots,x_n,B)=K_\\pi(x_n,B)$. Its final-coordinate projection is measurable because the preimage of each measurable set is a product-measurable coordinate cylinder by [F7]; composition with the measurable section $x\\mapsto K_\\pi(x,B)$ is measurable. Each section is a probability measure by step 1.1, so $K_n$ is a probability kernel.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-finite-mdp-policy-induces-reward-state-chain-3-1",
+          "claim": "Apply [F3] to $(E,\\mathcal P(E))$, $\\mu_0$, and the sequence $(K_n)$. Its homogeneous specialization gives a probability law on $E^{\\mathbb N}$ with initial state $(s,0)$ and the iterated finite-prefix laws of $K_\\pi$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "thm-finite-mdp-policy-induces-reward-state-chain-4-1",
+          "claim": "The coordinate process under that law is a homogeneous chain relative to its natural filtration by [F3], and its conditional transition identity is exactly the convention in [F4]. This proves the claimed chain construction for every initial $s\\in S$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement states the Axiom of Choice in the nonempty-state path-law branch; the proof identifies the chain-construction use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "def-policy-bellman-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Definition uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "def-bellman-optimality-operator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Definition uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "def-discounted-return-and-value-functions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Definition uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition states the Axiom of Choice in the nonempty-state path-law branch; the proof identifies the chain-construction use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "thm-bellman-contraction-and-unique-fixed-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-state-sup-norm-space-is-complete",
+          "source_section": "Statement",
+          "quote": "For any finite set $S$, let $B(S)=\\mathbb R^S$, the set of real-valued functions on $S$. Define\n\n$$ d_\\infty(U,V)=\\begin{cases}0,&S=\\emptyset,\\\\ \\max_{s\\in S}|U(s)-V(s)|,&S\\ne\\emptyset.\\end{cases} $$\n\nThen $d_\\infty$ is a metric on $B(S)$ and $(B(S),d_\\infty)$ is complete.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-bellman-contraction-and-unique-fixed-point-1-1",
+          "claim": "The finite sums in [F2] and [F3] are real, so both formulas define self-maps of $\\mathbb R^S$; when $S=\\emptyset$ they are the unique empty self-maps.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "thm-bellman-contraction-and-unique-fixed-point-1-2",
+          "claim": "For each state $s$, probability weights and the triangle inequality give $$ |(T^\\pi V)(s)-(T^\\pi W)(s)| \\le\\sum_a\\pi(a\\mid s)\\gamma\\sum_{s'}P(s'\\mid s,a)|V(s')-W(s')| \\le\\gamma\\|V-W\\|_\\infty. $$ Taking the maximum over $s$ proves the policy-operator contraction inequality; when $S=\\emptyset$, both sides are $0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-contraction-and-unique-fixed-point-1-3",
+          "claim": "Put $Q_V(s,a)=r(s,a)+\\gamma\\sum_{s'}P(s'\\mid s,a)V(s')$. For every action, [F1] gives $|Q_V(s,a)-Q_W(s,a)|\\le\\gamma\\|V-W\\|_\\infty$. For two finite lists $(u_a)$ and $(v_a)$, each $u_a\\le v_a+\\max_b|u_b-v_b|$, so $\\max_a u_a\\le\\max_a v_a+\\max_b|u_b-v_b|$; exchanging the lists gives $|\\max_a u_a-\\max_a v_a|\\le\\max_a|u_a-v_a|$. Applying this at each $s$ proves the same contraction inequality for $T^*$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-bellman-contraction-and-unique-fixed-point-2-1",
+          "claim": "By [F4], the common domain is nonempty and complete. Steps 1.2 and 1.3 show that each operator is a self-map with contraction constant $q=\\gamma$, and the hypothesis $0\\le\\gamma<1$ is exactly [F5]'s required range. Applying [F5] separately to $T^\\pi$ and $T^*$ gives one fixed point for each and uniqueness for each.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats the empty-state case or the associated unique empty value/policy; Proof step 1.1 handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Proof step 1.1 uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "alg-value-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Definition uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "lem-policy-value-satisfies-bellman-equation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-discounted-return-and-value-functions",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $\\pi$ be a stationary Markov policy. If $S=\\emptyset$, define $V^\\pi$ to be the unique empty function; no path law or choice axiom is needed in this case. If $S\\ne\\emptyset$, assume the Axiom of Choice and, for each $s\\in S$, use the path law started at $X_0=(s,0)$ supplied by the policy-induced reward-state chain; write $X_t=(S_t,R_t)$. The **discounted return** is\n\n$$ G_t=\\sum_{j=0}^{\\infty}\\gamma^jR_{t+j+1}, $$\n\nand the **state value under $\\pi$** is $V^\\pi(s)=\\mathbb E_{\\pi,s}[G_0]$, where $\\mathbb E_{\\pi,s}$ is expectation under that start-state law. If $S=\\emptyset$, $V^\\pi$ is the unique empty function. The reward sequence bound gives $|G_t|\\le M/(1-\\gamma)$, so each return is measurable and integrable. This is the start-state meaning of $\\mathbb E_\\pi[G_t\\mid S_t=s]$ when that conditional expectation is defined. The definition concerns discounted infinite-horizon tasks; average-reward and undiscounted continuing models, and improper episodic tasks, are outside its scope.\n\nThe coordinate $0$ in $X_0=(s,0)$ is only a dummy initial reward; the chain's one-step kernel emits rewards in $\\mathcal R$. Finite partial sums of the return are measurable, their pointwise limit is measurable, and the constant bound $M/(1-\\gamma)$ is an integrable majorant on the probability space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-mdp-policy-induces-reward-state-chain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Put $E=S\\times(\\mathcal R\\cup\\{0\\})$ with its discrete sigma-algebra and define, for $x=(s,\\eta)\\in E$ and $B\\subseteq E$,\n\n$$ K_\\pi(x,B)=\\sum_{a\\in A(s)}\\pi(a\\mid s) \\sum_{\\substack{s'\\in S\\\\\\rho\\in\\mathcal R}}1_B(s',\\rho)\\,p(s',\\rho\\mid s,a). $$\n\nThen $K_\\pi$ is a probability kernel on $E$. For each initial state $s\\in S$, there is a probability law on $E^{\\mathbb N}$ whose coordinate process starts at $(s,0)$ and is a time-homogeneous Markov chain with transition kernel $K_\\pi$ relative to its natural filtration.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bounded-discounted-return-converges",
+          "source_section": "Statement",
+          "quote": "Let $M\\ge0$, $0\\le\\gamma<1$, and let $(\\rho_j)_{j\\ge1}$ be any real sequence with $|\\rho_j|\\le M$. Then the series\n\n$$ \\sum_{j=0}^{\\infty}\\gamma^j\\rho_{j+1} $$\n\nconverges absolutely. Every partial sum and the limit satisfy\n\n$$ \\left|\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M}{1-\\gamma}, \\qquad |G|\\le\\frac{M}{1-\\gamma}. $$\n\nFor every integer $N\\ge0$,\n\n$$ \\left|G-\\sum_{j=0}^{N-1}\\gamma^j\\rho_{j+1}\\right|\\le\\frac{M\\gamma^N}{1-\\gamma}, $$\n\nwhere the partial sum at $N=0$ is empty and $\\gamma^0=1$, including when $\\gamma=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-algebra-of-limits",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]), and let $c \\in \\mathbb{R}$. Then\n\n$$x_k + y_k \\to x + y, \\qquad c\\,x_k \\to c\\,x, \\qquad x_k - y_k \\to x - y, \\qquad x_k y_k \\to x y,$$\n\nand if in addition $y \\ne 0$ and $y_k \\ne 0$ for every $k \\in \\mathbb{N}$, then\n\n$$\\frac{1}{y_k} \\to \\frac{1}{y} \\qquad \\text{and} \\qquad \\frac{x_k}{y_k} \\to \\frac{x}{y}.$$\n\nThe quotient case rests on an eventual lower bound for $|y_k|$, proved below\nrather than assumed: $|y_k| > |y|/2$ for all sufficiently large $k$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-limit-of-tail",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ be a sequence of reals ([[def-sequence]]), let $x \\in \\mathbb{R}$,\nand for $K \\in \\mathbb{N}$ let $x^{(K)}$ denote the $K$-th tail, $x^{(K)}_j =\nx_{j+K}$. The following are equivalent ([[def-real-limit]]):\n\n1. $(x_k)$ converges to $x$;\n2. every tail $x^{(K)}$ converges to $x$;\n3. some tail $x^{(K)}$ converges to $x$.\n\nThe same three statements with \"converges to $x$\" replaced by \"is Cauchy\" are\nlikewise equivalent. Consequently, if two sequences agree from some index on,\nthen either both converge to $x$ or neither does, and either both are Cauchy or\nneither is.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-policy-value-satisfies-bellman-equation-1-1",
+          "claim": "If $S=\\emptyset$, the claimed equality is between the unique empty functions. Otherwise assume $S\\ne\\emptyset$ and fix $s\\in S$. For $N\\ge0$, let $$ G_N=\\sum_{j=0}^{N-1}\\gamma^jR_{j+1}, \\qquad V_N^\\pi(s)=\\mathbb E_{\\pi,s}[G_N], \\qquad V_0^\\pi(s)=0. $$ These are finite sums of measurable reward coordinates under the chain law; the case $S=\\emptyset$ was handled in the statement.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-policy-value-satisfies-bellman-equation-1-2",
+          "claim": "The chain's finite-prefix law [F2] gives $$ V_{N+1}^\\pi(s)= \\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S,\\,\\rho\\in\\mathcal R} p(s',\\rho\\mid s,a)\\,[\\rho+\\gamma V_N^\\pi(s')]. $$ Indeed the first transition from $(s,0)$ has mass $\\sum_a\\pi(a\\mid s)p(s',\\rho\\mid s,a)$; after that transition the remaining $N$-step law depends on $s'$ but not on the reward coordinate, since $K_\\pi((s',\\rho),\\cdot)=K_\\pi((s',0),\\cdot)$. Expanding the finite sums and using $r(s,a)=\\sum_{s',\\rho}\\rho p(s',\\rho\\mid s,a)$ and $P(s'\\mid s,a)=\\sum_\\rho p(s',\\rho\\mid s,a)$ shows the right side is $(T^\\pi V_N^\\pi)(s)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-policy-value-satisfies-bellman-equation-2-1",
+          "claim": "For each path, $G_N\\to G_0$ and $|G_N|\\le M/(1-\\gamma)$ by [F4]. The constant majorant is integrable by [F5] on the probability law from [F2]. Dominated convergence [F6] therefore gives $V_N^\\pi(s)\\to V^\\pi(s)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "lem-policy-value-satisfies-bellman-equation-3-1",
+          "claim": "In step 1.2, the left side $V_{N+1}^\\pi(s)$ has the same limit $V^\\pi(s)$ as $V_N^\\pi(s)$ by [F8]. The right side is a finite sum, so by [F7] it converges to $$ \\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s',\\rho}p(s',\\rho\\mid s,a)\\,[\\rho+\\gamma V^\\pi(s')] =(T^\\pi V^\\pi)(s) $$ by [F3]. Uniqueness of real limits gives $V^\\pi(s)=(T^\\pi V^\\pi)(s)$. Since $s$ was arbitrary, $T^\\pi V^\\pi=V^\\pi$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats the empty-state case or the associated unique empty value/policy; Proof step 1.1 handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no interval or endpoint parameter.",
+          "evidence": ""
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement states the Axiom of Choice in the nonempty-state path-law branch; the proof identifies the chain-construction use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "thm-value-iteration-convergence-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-value-iteration",
+          "source_section": "Definition",
+          "quote": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial value function $V_0\\in\\mathbb R^S$, and an integer $m\\ge0$. Set $V_{j+1}=T^*V_j$ for $j=0,\\ldots,m-1$ and return $V_m$. This procedure returns the exact $m$th iterate and makes no finite-termination claim for convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bellman-contraction-and-unique-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-value-iteration-convergence-error-bound-1-1",
+          "claim": "At $m=0$, $V_m=V_0$ and $\\gamma^0=1$ by [L1], so the asserted inequality is equality.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "algebra",
+            "base"
+          ]
+        },
+        {
+          "id": "thm-value-iteration-convergence-error-bound-1-2",
+          "claim": "Induction hypothesis: assume $\\|V_m-V^*\\|_\\infty\\le\\gamma^m\\|V_0-V^*\\|_\\infty$ for an arbitrary $m\\in\\mathbb N$.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        },
+        {
+          "id": "thm-value-iteration-convergence-error-bound-2-1",
+          "claim": "By [F1], [F2], and $T^*V^*=V^*$, $$ \\|V_{m+1}-V^*\\|_\\infty =\\|T^*V_m-T^*V^*\\|_\\infty \\le\\gamma\\|V_m-V^*\\|_\\infty \\le\\gamma^{m+1}\\|V_0-V^*\\|_\\infty, $$ where the last equality of factors uses [L1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-value-iteration-convergence-error-bound-3-1",
+          "claim": "Step 1.1 is the base case and step 2.1 is the induction step, so [L2] gives the inequality for every $m\\in\\mathbb N$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "induction",
+            "discharge-induction: step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats the empty-state case or the associated unique empty value/policy; Proof step 1.1 handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Proof step 1.1 uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "alg-policy-iteration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly treats the empty-state case or the associated unique empty value/policy; Definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero case (zero reward, zero discount, or zero vector as applicable); Definition has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits singleton finite state/action sets; Definition uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Definition handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Definition uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "thm-policy-improvement": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discounted-return-and-value-functions",
+          "source_section": "Definition",
+          "quote": "Let a finite MDP have $0\\le\\gamma<1$ and let $\\pi$ be a stationary Markov policy. If $S=\\emptyset$, define $V^\\pi$ to be the unique empty function; no path law or choice axiom is needed in this case. If $S\\ne\\emptyset$, assume the Axiom of Choice and, for each $s\\in S$, use the path law started at $X_0=(s,0)$ supplied by the policy-induced reward-state chain; write $X_t=(S_t,R_t)$. The **discounted return** is\n\n$$ G_t=\\sum_{j=0}^{\\infty}\\gamma^jR_{t+j+1}, $$\n\nand the **state value under $\\pi$** is $V^\\pi(s)=\\mathbb E_{\\pi,s}[G_0]$, where $\\mathbb E_{\\pi,s}$ is expectation under that start-state law. If $S=\\emptyset$, $V^\\pi$ is the unique empty function. The reward sequence bound gives $|G_t|\\le M/(1-\\gamma)$, so each return is measurable and integrable. This is the start-state meaning of $\\mathbb E_\\pi[G_t\\mid S_t=s]$ when that conditional expectation is defined. The definition concerns discounted infinite-horizon tasks; average-reward and undiscounted continuing models, and improper episodic tasks, are outside its scope.\n\nThe coordinate $0$ in $X_0=(s,0)$ is only a dummy initial reward; the chain's one-step kernel emits rewards in $\\mathcal R$. Finite partial sums of the return are measurable, their pointwise limit is measurable, and the constant bound $M/(1-\\gamma)$ is an integrable majorant on the probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-policy-value-satisfies-bellman-equation",
+          "source_section": "Statement",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and any stationary Markov policy $\\pi$, the expected discounted state value defined from each initial state satisfies\n\n$$ T^\\pi V^\\pi=V^\\pi. $$\n\nIf $S=\\emptyset$, this is the equality of the unique empty functions and no choice axiom is needed. If $S\\ne\\emptyset$, assume the Axiom of Choice for the path-law definition of $V^\\pi$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bellman-contraction-and-unique-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+          "uses": [
+            "4.1",
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-state-sup-norm-space-is-complete",
+          "source_section": "Statement",
+          "quote": "For any finite set $S$, let $B(S)=\\mathbb R^S$, the set of real-valued functions on $S$. Define\n\n$$ d_\\infty(U,V)=\\begin{cases}0,&S=\\emptyset,\\\\ \\max_{s\\in S}|U(s)-V(s)|,&S\\ne\\emptyset.\\end{cases} $$\n\nThen $d_\\infty$ is a metric on $B(S)$ and $(B(S),d_\\infty)$ is complete.",
+          "uses": [
+            "4.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.\n2. For every $x_0 \\in X$ the sequence of **iterates**, defined by recursion\n   ([[thm-recursion]]) by $x_{n+1} := f(x_n)$, converges to $x^{*}$ in $(X,d)$\n   ([[def-metric-convergence]]). In particular the limit does not depend on\n   $x_0$.\n3. For all $m, n \\in \\mathbb{N}$ with $m \\ge n$,\n   $$d(x_m, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q},$$\n   with the integer power of [[def-integer-power]].\n\nClaim 3 is the quantitative form of the argument that proves claims 1 and 2, and\nit is recorded in the statement because the error estimates\n([[cor-banach-error-estimates]]) are read off from it.",
+          "uses": [
+            "4.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "alg-policy-iteration",
+          "source_section": "Definition",
+          "quote": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial deterministic policy $\\pi_0$, and, for each state $s$, an ordered list containing each member of $A(s)$ exactly once. For $k=0,1,\\ldots$:\n\n1. Compute the unique exact policy evaluation $V_k\\in\\mathbb R^S$ satisfying $T^{\\pi_k}V_k=V_k$.\n2. For each $s$, set\n\n$$ Q_k(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V_k(s'). $$\n\nIf $\\pi_k(s)$ attains $\\max_{a\\in A(s)}Q_k(s,a)$, set $\\pi_{k+1}(s)=\\pi_k(s)$. Otherwise set $\\pi_{k+1}(s)$ to the earliest maximizing action in the supplied list.\n3. If $\\pi_{k+1}=\\pi_k$, return $(\\pi_k,V_k)$. Otherwise continue with $\\pi_{k+1}$.\n\nThe operator fixed point used for exact policy evaluation exists and is unique by the finite-MDP contraction theorem.",
+          "uses": [
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-limit-preserves-order",
+          "source_section": "Statement",
+          "quote": "Let $(x_k)$ and $(y_k)$ be sequences of reals ([[def-sequence]]) converging to\n$x$ and $y$ respectively ([[def-real-limit]]). If $x_k \\le y_k$ eventually, that\nis for all $k$ from some index on, then\n\n$$\\lim_{k} x_k \\;\\le\\; \\lim_{k} y_k .$$\n\nIn particular, if $x_k \\ge 0$ eventually then $\\lim_k x_k \\ge 0$, and if\n$a \\le x_k \\le b$ eventually then $a \\le \\lim_k x_k \\le b$.\n\nThe conclusion is **not** strict, and cannot be made strict; see the remarks\nbelow and the false statement at the end of this page.",
+          "uses": [
+            "4.1",
+            "4.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "1. If $A$ and $B$ are finite then $A \\times B$ is finite and\n   $\\lvert A \\times B\\rvert = \\lvert A\\rvert \\cdot \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. Let $m \\in \\mathbb{N}$ and let $A_0, \\dots, A_{m-1}$ be finite sets. Write\n   $$\\prod_{i<m} A_i := \\{\\, f : f \\text{ is a function with domain } m \\text{ and } f(i) \\in A_i \\text{ for every } i < m \\,\\}.$$\n   Then $\\prod_{i<m} A_i$ is finite and\n   $\\big\\lvert\\prod_{i<m} A_i\\big\\rvert = \\prod_{i<m}\\lvert A_i\\rvert$, the\n   right-hand product being the $\\mathbb{N}$-valued one of\n   [[def-nat-finite-sum-and-product]].\n\nAt $m = 0$ clause 2 reads $\\big\\lvert\\prod_{i<0} A_i\\big\\rvert = 1$: there is\nexactly one function with domain $\\varnothing$, the empty function, and the empty\nproduct is $1$. Both sides are computed, not stipulated.\n\n```tikz\n\\begin{tikzpicture}[x=1.45cm,y=0.9cm]\n  \\node at (0,2.45) {$a_0$};\n  \\node at (1,2.45) {$a_1$};\n  \\node at (2,2.45) {$a_2$};\n  \\node at (-1.1,1.5) {$b_0$};\n  \\node at (-1.1,0.5) {$b_1$};\n  \\draw (-0.5,0) rectangle (2.5,2);\n  \\draw (0.5,0) -- (0.5,2);\n  \\draw (1.5,0) -- (1.5,2);\n  \\draw (-0.5,1) -- (2.5,1);\n  \\node at (0,1.5) {$(a_0,b_0)$};\n  \\node at (1,1.5) {$(a_1,b_0)$};\n  \\node at (2,1.5) {$(a_2,b_0)$};\n  \\node at (0,0.5) {$(a_0,b_1)$};\n  \\node at (1,0.5) {$(a_1,b_1)$};\n  \\node at (2,0.5) {$(a_2,b_1)$};\n  \\node at (1,-0.6) {$|A\\times B|=3\\cdot2=6$};\n\\end{tikzpicture}\n```",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-policy-improvement-1-1",
+          "claim": "If $S=\\emptyset$, all statewise inequalities are vacuous and the unique empty policy has no update; assume for the remaining steps that $S\\ne\\emptyset$. [A1] supplies the choice assumption for the path-law value in [F2], and [F3] gives its Bellman fixed-point identity. For each state $s$, [F3] and [F4] give $$ V^\\pi(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)Q_{V^\\pi}(s,a) \\le \\max_{a\\in A(s)}Q_{V^\\pi}(s,a)=(T^*V^\\pi)(s). $$ The inequality holds because a probability-weighted average of finitely many real numbers is at most their attained maximum [F1, F9].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-1-2",
+          "claim": "For every stationary policy $\\nu$, the operator $T^\\nu$ is monotone: if $U(s)\\le W(s)$ for every $s$, then each coefficient $\\nu(a\\mid s)P(s'\\mid s,a)$ is nonnegative and $\\gamma\\ge0$, so $(T^\\nu U)(s)\\le(T^\\nu W)(s)$ for every $s$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-2-1",
+          "claim": "If $\\pi'$ is greedy, its action attains that maximum at every state, so $(T^{\\pi'}V^\\pi)(s)=(T^*V^\\pi)(s)\\ge V^\\pi(s)$ for all $s$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-3-1",
+          "claim": "Define $U_0=V^\\pi$ and $U_{n+1}=T^{\\pi'}U_n$. Step 2.1 gives $U_0\\le U_1$ pointwise; if $U_n\\le U_{n+1}$ then step 1.2 gives $U_{n+1}=T^{\\pi'}U_n\\le T^{\\pi'}U_{n+1}=U_{n+2}$. By [F11], $(U_n)$ is pointwise nondecreasing.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "F11",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-4-1",
+          "claim": "By [F5] and [F6], Banach iteration [F7] makes $U_n$ converge in $d_\\infty$ to the unique fixed point of $T^{\\pi'}$. By [F3] and uniqueness in [F5], that fixed point is $V^{\\pi'}$. Since every $U_n\\ge U_0=V^\\pi$, [F10] yields $V^{\\pi'}\\ge V^\\pi$ pointwise. This proves the first value comparison.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-4-2",
+          "claim": "If $(T^{\\pi'}V^\\pi)(s_0)>V^\\pi(s_0)$, then $U_1(s_0)>U_0(s_0)$. Step 3.1 makes $U_n(s_0)\\ge U_1(s_0)$ for every $n\\ge1$; passing to the limit with [F10] gives $V^{\\pi'}(s_0)\\ge U_1(s_0)>V^\\pi(s_0)$.",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-5-1",
+          "claim": "Consider one update in the stated policy-iteration procedure. Exact evaluation returns $V^{\\pi_k}$ because it is the unique fixed point of $T^{\\pi_k}$ by [F3] and [F5]. At each state the updated action maximizes $Q_{V^{\\pi_k}}$; if the old action is already a maximizer it is retained, and otherwise its value is strictly below the attained maximum. Therefore $T^{\\pi_{k+1}}V^{\\pi_k}\\ge V^{\\pi_k}$ at all states, with strict inequality wherever the policy changed. Steps 4.1–4.2 show that every changed policy weakly improves all state values and strictly improves at least one.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F8",
+            "F9",
+            "step 4.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-6-1",
+          "claim": "List the finite states as $s_1,\\ldots,s_n$ and each action set as $A(s_i)=\\{a_{i,1},\\ldots,a_{i,m_i}\\}$. A deterministic policy is one tuple of indices $(j_1,\\ldots,j_n)$ with $1\\le j_i\\le m_i$, so the set of such policies is a finite Cartesian product by [F12]; for $S=\\emptyset$ it is the singleton empty product. By step 5.1, each changed iteration strictly increases some coordinate and never decreases any, so no policy can recur, since a repeated policy has the same unique exact value vector. Hence at most $N_{\\rm det}-1$ changes occur and the procedure terminates.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F8",
+            "F12",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-7-1",
+          "claim": "At termination, the update leaves every action unchanged, which by [F8] means the terminal deterministic policy is greedy with respect to its exact value $V^\\pi$. Thus $T^\\pi V^\\pi=T^*V^\\pi$; with [F3], this says $T^*V^\\pi=V^\\pi$, so uniqueness in [F5] gives $V^\\pi=V^*$.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "F3",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "thm-policy-improvement-8-1",
+          "claim": "For any stationary policy $\\mu$, $T^\\mu V^*\\le T^*V^*=V^*$ because the former is a probability-weighted average of the same action values. Iterating $W_0=V^*$, $W_{n+1}=T^\\mu W_n$, monotonicity as in step 1.2 makes $W_n$ nonincreasing. By [F5]–[F7] these iterates converge to the unique fixed point of $T^\\mu$, which equals $V^\\mu$ by [F3]; [F10] gives $V^\\mu\\le V^*$. Therefore the terminal policy's value dominates every stationary policy.",
+          "step": "8.1",
+          "inputs": [
+            "step 7.1",
+            "step 1.2",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly treats the empty-state case or the associated unique empty value/policy; Proof step 1.1 handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits the zero case (zero reward, zero discount, or zero vector as applicable); Proof step 1.1 has no division by the zero parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits singleton finite state/action sets; Proof step 1.1 uses only finite sums/maxima, which include singletons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement covers the empty/singleton/zero-mass or tied-action degenerate case relevant to this item; Proof step 1.1 handles it explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition requires 0≤γ<1, includes γ=0, and excludes γ=1; Proof step 1.1 uses the nonnegative contraction constant γ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement states the Axiom of Choice in the nonempty-state path-law branch; the proof identifies the chain-construction use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-undiscounted-single-state-mdp-diverges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-undiscounted-single-state-mdp-diverges-1-1",
+          "claim": "Every reward is $1$, so the first $N$ summands are $1$ and their partial sum is $N$. Since these partial sums are unbounded, the undiscounted return does not have a finite real sum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-undiscounted-single-state-mdp-diverges-1-2",
+          "claim": "The formal backup equation $F(v)=v$ would give $1+v=v$, hence $1=0$, which is impossible in $\\mathbb R$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-undiscounted-single-state-mdp-diverges-2-1",
+          "claim": "For any distinct $v,w$, $|F(v)-F(w)|=|v-w|$. If $F$ were a contraction with some $q<1$, this would imply $|v-w|\\le q|v-w|$, a contradiction. Also, [F2] with $r=1$ confirms divergence of the corresponding geometric series.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes reward 1 and discount 1; its zero-reward case is not part of the displayed witness.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example statement explicitly uses the one-state model; Proof step 1.1 computes the resulting scalar transition/operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example statement and verification address the displayed singleton, zero-reward, endpoint, or tied-action degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example statement explicitly sets γ=1 to witness failure at the excluded endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-finite-mdp-common-reward-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bellman-contraction-and-unique-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-finite-mdp-common-reward-shift-1-1",
+          "claim": "Under action $a$, [F1] and [F2] give $T^a(v)=1+\\tfrac12v$, whose fixed point solves $v=1+\\tfrac12v$, hence is $v=2$. Under action $b$, the equation is $v=3+\\tfrac12v$, hence its unique fixed point is $v=6$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a stationary policy with $\\pi(b\\mid s)=\\theta$, the expected one-step reward is $(1-\\theta)\\cdot1+\\theta\\cdot3=1+2\\theta$, so $T^\\pi(v)=1+2\\theta+\\tfrac12v$ and its unique fixed point is $v=2+4\\theta$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-finite-mdp-common-reward-shift-2-1",
+          "claim": "Adding $2$ to each reward changes the deterministic maps to $T^{a,+}(v)=3+\\tfrac12v$ and $T^{b,+}(v)=5+\\tfrac12v$, whose fixed points are $6$ and $10$. For the stochastic policy, the expected one-step reward becomes $3+2\\theta$, so $T^{\\pi,+}(v)=3+2\\theta+\\tfrac12v$ and the unique fixed point is $6+4\\theta$. All these policy values increase by $4$, and the difference between the deterministic values remains $4$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-finite-mdp-common-reward-shift-3-1",
+          "claim": "At the original optimal fixed point $v=6$, the two action values are $1+\\tfrac12\\cdot6=4$ and $3+\\tfrac12\\cdot6=6$, so $b$ is greedy. At the shifted optimal fixed point $v=10$, they are $3+\\tfrac12\\cdot10=8$ and $5+\\tfrac12\\cdot10=10$, so $b$ remains greedy.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both displayed rewards are positive and the example concerns a common positive shift.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example statement explicitly uses the one-state model; Proof step 1.1 computes the resulting scalar transition/operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example statement and verification address the displayed singleton, zero-reward, endpoint, or tied-action degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example statement states the relevant boundary value and the verification/proof handles it exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-value-iteration-attains-error-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-value-iteration",
+          "source_section": "Definition",
+          "quote": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial value function $V_0\\in\\mathbb R^S$, and an integer $m\\ge0$. Set $V_{j+1}=T^*V_j$ for $j=0,\\ldots,m-1$ and return $V_m$. This procedure returns the exact $m$th iterate and makes no finite-termination claim for convergence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bellman-contraction-and-unique-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "Let $a \\in \\mathbb{R}$, where $\\mathbb{R}$ is the ambient ordered field\n([[def-ordered-field]], [[def-field]]).\n\n**Natural exponents.** By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{R}$, the starting element $1$ and the function\n$f(x) = x \\cdot a$, there is a unique function $\\mathbb{N} \\to \\mathbb{R}$,\nwritten $n \\mapsto a^n$, with\n\n$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$\n\n**Why that is legitimate.** The right-hand side presupposes that $a^n$ is\ninvertible, that is, that $a^n \\ne 0$. This is a proof obligation and not an\nobservation, and it is discharged by claim 2 of [[lem-power-laws]]: for $a \\ne 0$\nin a field, $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, proved there by induction on\n$n$ from the fact that a field has no zero divisors ([[lem-of-no-zero-divisors]]).\nThat lemma is a statement *about* the operation introduced here, so it depends on\nthis definition and is recorded in this item's `justified_by` rather than in its\n`deps` (SCHEMA §3). Given $a^n \\ne 0$, the value $(a^n)^{-1}$ is a single\nwell-determined element, because multiplicative inverses in a field are unique\n([[lem-of-inverse-unique]]).\n\n**Integer exponents.** Every integer $m$ ([[def-integers]]) is either\n$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the\nembedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ ([[lem-nat-embeds-int]],\n[[def-int-operations]]). This too is a citation and not a slogan: the order on\n$\\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \\ge 0$ or $m < 0$; the\nimage of $\\iota$ is exactly the set of nonnegative integers, and each of them is\n$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then\n$-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),\nso $-m = n$ and $m = -n$, with $n$ unique because $\\iota$ is\ninjective. The two clauses above therefore define $a^m$ for every\n$m \\in \\mathbb{Z}$ whenever $a \\ne 0$, and for every $m \\in \\mathbb{N}$ for\narbitrary $a$. The two exponent domains are disjoint: the natural clause\nhandles $m \\ge 0$, including $m = 0$, while the negative clause requires\n$n \\ge 1$ and therefore handles only $m < 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b$ be elements of a field ([[def-field]]) and let integer powers be as in\n[[def-integer-power]].\n\n1. For all $m, n \\in \\mathbb{N}$: $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$.\n2. If $a \\ne 0$ then $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, and $a^{-m} = (a^m)^{-1}$ for every $m \\in \\mathbb{Z}$ ([[def-int-operations]]).\n3. If $a \\ne 0$ and $b \\ne 0$ then all three identities of claim 1 hold for all $m, n \\in \\mathbb{Z}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-value-iteration-convergence-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $V^*$ be the unique fixed point of $T^*$ for a finite MDP with $0\\le\\gamma<1$. For every initial $V_0\\in\\mathbb R^S$ and every $m\\in\\mathbb N$, the exact value-iteration iterates $V_{m+1}=T^*V_m$ satisfy\n\n$$ \\|V_m-V^*\\|_\\infty\\le\\gamma^m\\|V_0-V^*\\|_\\infty, $$\n\nwith $\\gamma^0=1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-value-iteration-attains-error-rate-1-1",
+          "claim": "The one-state optimality map is $(T^*v)(s)=1+\\tfrac12v(s)$ by [F1] and [F2]. Its fixed-point equation gives $v(s)=2$, and [F3] identifies this as $V^*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-value-iteration-attains-error-rate-1-2",
+          "step": "1.2",
+          "claim": "At $m=0$, $V_0(s)=0=2(1-2^{-0})$. Thus the claimed iterate formula holds at the base index.",
+          "inputs": [
+            "given",
+            "L1",
+            "base"
+          ]
+        },
+        {
+          "id": "ex-value-iteration-attains-error-rate-2-1",
+          "step": "2.1",
+          "claim": "Fix $m\\in\\mathbb N$ and assume $V_m(s)=2(1-2^{-m})$. The exact backup in [F2] gives $V_{m+1}(s)=1+\\tfrac12V_m(s)=1+(1-2^{-m})=2-2^{-m}=2(1-2^{-(m+1)})$ by [L1].",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F2",
+            "F4",
+            "L1",
+            "ih",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-value-iteration-attains-error-rate-3-1",
+          "claim": "By [F5], the base case in step 1.2 and successor step 2.1 establish $V_m(s)=2(1-2^{-m})$ for every $m\\ge0$. Using $V^*(s)=2$ from step 1.1 gives $\\|V_m-V^*\\|_\\infty=2^{1-m}$; also $\\gamma^m\\|V_0-V^*\\|_\\infty=2^{-m}\\cdot2=2^{1-m}$. This equals the general error bound in [F6], so it is attained at every iteration.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F5",
+            "F6",
+            "induction",
+            "discharge-induction: step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness fixes reward 1 and initial value 0; zero reward would not attain the stated nonzero error.",
+          "evidence": ""
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example statement explicitly uses the one-state model; Proof step 1.1 computes the resulting scalar transition/operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example statement and verification address the displayed singleton, zero-reward, endpoint, or tied-action degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example statement states the relevant boundary value and the verification/proof handles it exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-policy-iteration-tie-retention": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-policy-bellman-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP, a discount $0\\le\\gamma<1$, and a stationary Markov policy $\\pi$, define the **policy Bellman operator** $T^\\pi:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^\\pi V)(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nIf $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-policy-iteration",
+          "source_section": "Definition",
+          "quote": "Input a finite MDP, a discount $0\\le\\gamma<1$, an initial deterministic policy $\\pi_0$, and, for each state $s$, an ordered list containing each member of $A(s)$ exactly once. For $k=0,1,\\ldots$:\n\n1. Compute the unique exact policy evaluation $V_k\\in\\mathbb R^S$ satisfying $T^{\\pi_k}V_k=V_k$.\n2. For each $s$, set\n\n$$ Q_k(s,a)=r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V_k(s'). $$\n\nIf $\\pi_k(s)$ attains $\\max_{a\\in A(s)}Q_k(s,a)$, set $\\pi_{k+1}(s)=\\pi_k(s)$. Otherwise set $\\pi_{k+1}(s)$ to the earliest maximizing action in the supplied list.\n3. If $\\pi_{k+1}=\\pi_k$, return $(\\pi_k,V_k)$. Otherwise continue with $\\pi_{k+1}$.\n\nThe operator fixed point used for exact policy evaluation exists and is unique by the finite-MDP contraction theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bellman-optimality-operator",
+          "source_section": "Definition",
+          "quote": "For a finite MDP and a discount $0\\le\\gamma<1$, define the **Bellman optimality operator** $T^*:\\mathbb R^S\\to\\mathbb R^S$ by\n\n$$ (T^*V)(s)=\\max_{a\\in A(s)}\\left[r(s,a)+\\gamma\\sum_{s'\\in S}P(s'\\mid s,a)V(s')\\right]\\qquad(s\\in S). $$\n\nThe maximum exists because each $A(s)$ is finite and nonempty. If $S=\\emptyset$, this is the unique map from $\\mathbb R^S$ to itself.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bellman-contraction-and-unique-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let a finite MDP and a discount $0\\le\\gamma<1$ be fixed. For every stationary policy $\\pi$ and all $V,W\\in\\mathbb R^S$,\n\n$$ \\|T^\\pi V-T^\\pi W\\|_\\infty\\le\\gamma\\|V-W\\|_\\infty. $$\n\nThe Bellman optimality operator satisfies the same inequality. Each of $T^\\pi$ and $T^*$ has exactly one fixed point in $\\mathbb R^S$. The contraction constant is the nonnegative number $\\gamma$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-policy-iteration-tie-retention-1-1",
+          "claim": "Under either action the policy Bellman equation is $v(s)=\\tfrac12v(s)$ by [F1] and [F2], so the unique evaluated value is $v(s)=0$, consistently with [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-policy-iteration-tie-retention-2-1",
+          "claim": "At this value, [F4] gives $Q(s,a)=0=Q(s,b)$; both actions maximize. The procedure [F3] retains the current action $a$, so the policy is unchanged and the stop condition is met.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "ex-policy-iteration-tie-retention-2-2",
+          "claim": "In the variant that always switches to a different maximizing action, both $a$ and $b$ remain maximizing after every evaluation because the model and value $0$ are unchanged. Thus each update sends $a$ to $b$ and $b$ to $a$, so the procedure never reaches a stable policy.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-policy-iteration-tie-retention-3-1",
+          "claim": "The displayed MDP therefore distinguishes the tie-retaining rule from the explicitly defined switching rule, without asserting that every arbitrary tie rule cycles.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires the displayed nonempty state set, so an empty state space is outside this example.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example statement has zero rewards and its verification computes the fixed point and both tied action values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example statement explicitly uses the one-state model; Proof step 1.1 computes the resulting scalar transition/operator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example statement and verification address the displayed singleton, zero-reward, endpoint, or tied-action degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example statement states the relevant boundary value and the verification/proof handles it exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example statement uses only finite enumerations, finite maxima, or the choice-free Banach/finite-sum argument; it adds no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional, so it has no forward/reverse direction to check.",
+          "evidence": ""
+        }
+      ]
+    }
+  }
+}

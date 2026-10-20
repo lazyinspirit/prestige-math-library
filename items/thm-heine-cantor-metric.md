@@ -15,6 +15,7 @@ landmark: true
 short: "Heine-Cantor (metric)"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-heine-cantor-metric.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -33,14 +34,26 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let
-$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \to Y$ be
-continuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous
-([[def-metric-uniform-continuity]]).
+Let $(X,d_X)$ be a compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space), let
+$(Y,d_Y)$ be any metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \to Y$ be
+continuous (Continuity of a map between metric spaces, at a point and globally, in the $\varepsilon$-$\delta$ form). Then $f$ is uniformly continuous
+(Uniform continuity of a map of metric spaces: one $\delta$ serving every point).
 
 No choice principle is used: the cover built below is cut out by a property, and
 the Lebesgue number lemma it is fed to is itself choice free
-([[thm-lebesgue-number-lemma]]).
+(Every open cover of a compact metric space has a Lebesgue number: a $\delta > 0$ such that every nonempty subset of diameter less than $\delta$ lies inside a single member of the cover).
+
+## Statement references
+
+[[def-metric-compactness]]
+
+[[def-metric-space]]
+
+[[def-metric-continuity]]
+
+[[def-metric-uniform-continuity]]
+
+[[thm-lebesgue-number-lemma]]
 
 ## Facts & Assumptions
 

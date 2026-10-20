@@ -1,0 +1,248 @@
+--- a/tools/step3-owner-required-page-routes.mjs
++++ b/tools/step3-owner-required-page-routes.mjs
+@@ -16,6 +16,11 @@
+ const id = x => /^[a-z][a-z0-9-]*$/.test(String(x ?? ''));
+ const policy = 'owner-step3-required-published-page-route-v1';
+ const nativePageRoutingBasis = 'native-page-null-consumer-owner-bound-consumer-v1';
++export const unchangedRequiredPageContextBasis = 'owner-unchanged-required-page-context-v1';
++// An unchanged context carrier cannot attest a repair or acceptance. Escalation
++// remains an ordinary blocker; a false positive still requires Alpha and ledger.
++export const requiredPageVerdictAllowed = (carrier, verdict) => carrier?.unchanged_context !== true
++  || ['false_positive', 'confirmed_nonfatal', 'escalated'].includes(verdict);
+ function file(root,p) {
+   assert(typeof p === 'string' && !isAbsolute(p) && !p.includes('\\'), 'invalid relative path');
+   const full=resolve(root,p),rel=relative(resolve(root),full);
+@@ -80,6 +85,9 @@
+     const r=e[`${label}_snapshot`];assert(r.path===`research/${run}-step3-hash-${e.batch}-${label}.json`,'wrong snapshot path');
+     const s=JSON.parse(ref(root,r));assert(s.version===2 && s.run===run && String(s.batch)===e.batch && s.label===label
+       && !s.page_manifest?.includes(e.page),'invalid foreign page snapshot');
++    if(e.routing_basis===unchangedRequiredPageContextBasis)
++      assert(Array.isArray(s.page_manifest) && Array.isArray(s.manifest)
++        && s.manifest.includes(e.consumer_id),'unchanged context needs explicit native page inventory and assigned consumer');
+   }
+   assert(e.manifest.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest');
+   currentManifestRoute(root,run,e,JSON.parse(ref(root,e.manifest)));
+@@ -88,18 +96,30 @@
+   const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
+     && existsSync(resolve(root,'library',d.name,e.page+'.md')));
+   assert(homes.length===1 && e.current_path===`library/${homes[0].name}/${e.page}.md`,'ambiguous physical page home');
++  const unchanged=e.routing_basis===unchangedRequiredPageContextBasis;
++  assert(!unchanged || (e.scope_policy==='claude9-external-formatting-only-v1'
++    && finding.subject_type==='published-dependency' && finding.defect==='ill-formed'),'invalid unchanged-context scope policy');
+   const before=ref(root,e.before),after=ref(root,e.after),beforeFm=front(before),afterFm=front(after);
+   assert(beforeFm.page===e.page && beforeFm.status==='published' && requiredPageHash(beforeFm)===requiredPageHash(afterFm),'changed page metadata');
+-  assert(Array.isArray(e.edits) && e.edits.length && e.edits.length<=2,'exact small prose edits required');
+-  let reconstructed=before.toString(); const bodyStart=reconstructed.indexOf('\n---',4)+4;
+-  for(const edit of e.edits) {assert(typeof edit.before==='string' && edit.before && typeof edit.after==='string' && edit.after
+-    && edit.before!==edit.after && reconstructed.split(edit.before).length===2
+-    && reconstructed.indexOf(edit.before)>bodyStart,'ambiguous or nonprose edit');reconstructed=reconstructed.replace(edit.before,edit.after);}
+-  assert(sha(reconstructed)===sha(after) && sha(before)!==sha(after),'unaccounted source change');
++  if(unchanged) {
++    assert(Array.isArray(e.edits) && e.edits.length===0 && before.equals(after),'unchanged context requires byte-identical archives and no edits');
++  } else {
++    assert(Array.isArray(e.edits) && e.edits.length && e.edits.length<=2,'exact small prose edits required');
++    let reconstructed=before.toString(); const bodyStart=reconstructed.indexOf('\n---',4)+4;
++    for(const edit of e.edits) {assert(typeof edit.before==='string' && edit.before && typeof edit.after==='string' && edit.after
++      && edit.before!==edit.after && reconstructed.split(edit.before).length===2
++      && reconstructed.indexOf(edit.before)>bodyStart,'ambiguous or nonprose edit');reconstructed=reconstructed.replace(edit.before,edit.after);}
++    assert(sha(reconstructed)===sha(after) && sha(before)!==sha(after),'unaccounted source change');
++  }
+   assert(bytes(root,e.current_path).equals(after),'current page changed');
+   const pageItems=[...(afterFm.items ?? []),...(afterFm.examples ?? [])];assert(pageItems.length && new Set(pageItems).size===pageItems.length,'invalid page inventory');
+   for(const item of pageItems) {assert(id(item),'invalid page item');const meta=front(bytes(root,`items/${item}.md`));
+     assert(meta.id===item && meta.status==='published','page contains unpublished or misidentified item');}
++  if(unchanged) {
++    assert(Array.isArray(e.page_item_guards) && e.page_item_guards.length===pageItems.length
++      && e.page_item_guards.every((node,i)=>node.id===pageItems[i]
++        && itemHashGuard(bytes(root,`items/${node.id}.md`).toString())===node.guard_sha256),'changed published page context');
++  }
+   const path=e.dependency_path;assert(Array.isArray(path) && path.length>=2 && path[0]?.id===e.consumer_id
+     && pageItems.includes(path.at(-1)?.id) && new Set(path.map(x=>x.id)).size===path.length,'invalid dependency path');
+   for(let i=0;i<path.length;i++) {const node=path[i];assert(id(node.id),'invalid path item');const source=bytes(root,`items/${node.id}.md`).toString();
+@@ -108,6 +128,8 @@
+     else assert(front(source).status==='published','terminal page item not published');}
+   const review=ref(root,e.review).toString();assert(review.includes(run) && review.includes(e.page) && review.includes(e.consumer_id)
+     && review.includes(e.before.sha256) && review.includes(e.after.sha256),'owner review lacks exact guards');
++  if(unchanged) assert(review.includes('CLAUDE.md#9') && review.includes('formatting')
++    && review.includes('unchanged') && review.includes('no mathematical acceptance'),'missing scope-only unchanged context review');
+   return {entry:e, binding:receipt, original:finding, obligation:`reader:${e.batch}:${e.index}`};
+ }
+ export function loadRequiredPageRoutes(root,run,batch) {
+@@ -123,7 +145,8 @@
+   assert(route && finding.id===route.entry.page && finding.consumer_id===route.original.consumer_id
+     && finding.subject_type===route.original.subject_type && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
+     && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact foreign-page route');
+-  return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding};
++  return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding,
++    ...(route.entry.routing_basis===unchangedRequiredPageContextBasis ? {unchanged_context:true} : {})};
+ }
+ 
+ // Freeze only this route's authenticated historical inputs. Current mathematical
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -31,7 +31,7 @@
+ import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
+ import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
+ import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
+-import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
++import { loadRequiredPageRoutes, requiredPageCarrier, requiredPageVerdictAllowed } from './step3-owner-required-page-routes.mjs';
+ import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
+ import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
+ import { unchangedPageCausalRepair } from './step3-owner-unchanged-page-repairs.mjs';
+@@ -1489,6 +1489,17 @@
+         if (supplemental) {
+           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
+           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
++        }
++        let unchangedRequiredPageContext = false;
++        if (target?.owner_required_page_route) {
++          try {
++            const carrier = currentDecisionCarrier(decision, target, null);
++            unchangedRequiredPageContext = carrier.unchanged_context === true;
++            if (!requiredPageVerdictAllowed(carrier, decision.verdict)) {
++              error('unchanged-required-page-verdict', `${decision.obligation} is unchanged external formatting context; only independent false_positive, confirmed_nonfatal or escalation is permitted`);
++              continue;
++            }
++          } catch (cause) { error('required-page-authority-invalid', cause.message); continue; }
+         }
+         if (decision.verdict === 'context_accepted') {
+           const context = externalContextReceipt(ROOT, run, decision, target, group.label);
+@@ -1794,6 +1805,9 @@
+           const row = mine.find((candidate) => candidate.defect_id === defectId);
+           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
+           decisionRows.push(row);
++          if (unchangedRequiredPageContext && decision.verdict === 'confirmed_nonfatal'
++            && row.disposition !== 'nonfatal-recorded')
++            error('unchanged-required-page-ledger', `${defectId} must record nonfatal maintenance without claiming a repair`);
+           const causalAddition = target?.added && decision.causal_subject === row.subject
+             && groupSubjects.has(row.subject);
+           if ((row.subject !== decision.id && !causalAddition)
+--- a/tools/step3-owner-required-page-routes.md
++++ b/tools/step3-owner-required-page-routes.md
+@@ -104,3 +104,42 @@
+ owner resolution, and current corrected page carrier binding. Closure retains
+ the registry and its exact historical references without adopting new review
+ coverage. The extension changes none of those guards.
++
++
++## Unchanged external formatting context (explicit opt-in)
++
++An original `published-dependency` / `ill-formed` finding may concern only an
++unrelated formatting retrofit of a published required page. CLAUDE.md rule 9
++retains dependency context without requiring that external formatting repair.
++This case uses a separate explicit authority:
++
++```json
++{
++  "routing_basis": "owner-unchanged-required-page-context-v1",
++  "scope_policy": "claude9-external-formatting-only-v1",
++  "edits": [],
++  "page_item_guards": [{"id": "PUBLISHED-ITEM", "guard_sha256": "CURRENT-ITEM-GUARD"}]
++}
++```
++
++All ordinary native finding/result/prompt/report, snapshot, regular-file,
++manifest exclusion, unique published page home, actual required origin and
++consumer dependency-path guards still apply. Both native snapshots must explicitly carry page-inventory arrays excluding
++the external page and item-inventory arrays including the assigned consumer. Both before and after archives must be byte-identical to
++the current page. Every inventoried published item
++requires its current `itemHashGuard`, in page inventory order. The exact owner
++review must name `CLAUDE.md#9`, `formatting`, `unchanged`, and
++`no mathematical acceptance`, in addition to the ordinary run, consumer, page
++and archive hashes. This authority does not assert what the historical reader
++saw: the original finding and null/unbound observation remain unchanged.
++
++The context-only carrier allows independent Alpha `false_positive`, `confirmed_nonfatal`, or
++`escalated` only. Escalation remains a blocking owner decision. Repair,
++acceptance, `context_accepted`, and `confirmed_fatal` verdicts are prohibited;
++a confirmed-nonfatal disposition still owes its ordinary `nonfatal-recorded`
++ledger record and evidence. False-positive adjudication retains the ordinary
++independent decision, evidence, current carrier, owner resolution, and any
++ledger disposition required by the existing native conditions.
++Routing does not suppress any finding, alter the defect ledger or grant review
++coverage. Existing edited-page routes still require one or two real prose
++edits and retain all previous behavior.
+--- /dev/null
++++ b/tools/step3-owner-unchanged-required-page-routes.test.mjs
+@@ -0,0 +1,81 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,copyFileSync} from 'node:fs';
++import {tmpdir} from 'node:os';import {join,resolve} from 'node:path';import {createHash} from 'node:crypto';import {pathToFileURL,fileURLToPath} from 'node:url';import {spawnSync} from 'node:child_process';
++const repo=process.cwd(),codeDir=fileURLToPath(new URL('.',import.meta.url));
++const toolRoot=mkdtempSync(join(tmpdir(),'unchanged-page-code-'));
++const tracked=spawnSync('git',['ls-files','-z','tools'],{cwd:repo,encoding:'utf8'});assert.equal(tracked.status,0);
++for(const path of tracked.stdout.split('\0').filter(p=>/\.(?:mjs|mts|json)$/.test(p))){mkdirSync(join(toolRoot,path,'..'),{recursive:true});copyFileSync(join(repo,path),join(toolRoot,path));}
++for(const name of ['step3-owner-required-page-routes.mjs','step3-scope.mjs'])copyFileSync(join(codeDir,name),join(toolRoot,'tools',name));
++process.env.PRESTIGE_MATH_REPO=repo;
++const {loadRequiredPageRoutes,requiredPageCarrier,requiredPageHash,requiredPageVerdictAllowed}=await import(pathToFileURL(join(toolRoot,'tools/step3-owner-required-page-routes.mjs')));
++const {itemHashGuard}=await import(pathToFileURL(join(toolRoot,'tools/item-hash.mjs')));
++const sha=x=>createHash('sha256').update(x).digest('hex');
++function fixture() {
++ const root=mkdtempSync(join(tmpdir(),'required-page-fixture-'));const put=(p,v)=>{mkdirSync(join(root,p,'..'),{recursive:true});writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');};
++ const link=p=>({path:p,sha256:sha(readFileSync(join(root,p)))});
++ const before='---\npage: outside\nstatus: published\nitems: [lem-supplier]\nexamples: []\n---\n\nDraft status claim.\n';const after=before.replace('Draft status claim.','Published status claim.');
++ put('library/test/outside.md',after);put('research/before.md',before);put('research/after.md',after);
++ const consumer='---\nid: thm-consumer\nstatus: draft\ndeps: [lem-supplier]\n---\n\n## Statement\nConsumer.\n';const supplier='---\nid: lem-supplier\nstatus: published\ndeps: []\n---\n\n## Statement\nSupplier.\n';
++ put('items/thm-consumer.md',consumer);put('items/lem-supplier.md',supplier);
++ put('research/r-batch-1.pages.json',[{id:'owned',category:'test',requires:['outside'],items:[{id:'thm-consumer'}]}]);
++ const finding={id:'outside',subject_type:'published-dependency',consumer_id:'thm-consumer',observed_source:null,location:'Page prose',defect:'false-claim',severity:'fatal',evidence:'The page incorrectly says draft.'};const doc={batch:'1',findings:[finding],coverage_note:'Fixture native reader opened actual assigned files.'};
++ put('research/r-reader-findings-1.json',doc);put('research/r-reader-1.md','Fixture reader r outside thm-consumer observes stale page prose.');
++ put('research/r-dispatch/reader-reader-1.attempt-1.prompt.md','Fixture reader assignment, outside required by owned page.');
++ put('research/r-dispatch/reader-reader-1.attempt-1.result.json',{run:'r',role:'reader',label:'reader-1',covers:['1'],ok:true,exit_code:0,process_exit_code:0,ended_at:'2020-01-01T00:00:00Z',prompt:join(root,'research/r-dispatch/reader-reader-1.attempt-1.prompt.md'),tail:JSON.stringify(doc)});
++ for(const label of ['pre','post'])put(`research/r-step3-hash-1-${label}.json`,{version:2,run:'r',batch:'1',label,page_manifest:['owned']});
++ put('research/review.md',`Fixture focused owner review r outside thm-consumer ${sha(before)} ${sha(after)}; status-only correction; no mathematics changes; original full-byte observation unknown.`);
++ const entry={version:1,policy:'owner-step3-required-published-page-route-v1',run:'r',owner_identity:'/root',mathematical_acceptance:false,historical_page_observation_bound:false,observation_basis:'unbound-native-reader; owner-current-before capture only',batch:'1',index:1,page:'outside',origin_page:'owned',consumer_id:'thm-consumer',reviewed:true,reason:'Fixture owner checked exact status prose against the actual published page inventory and current direct supplier dependency; no historical reader page bytes exist.',at:'2020-01-02T00:00:00Z',findings:link('research/r-reader-findings-1.json'),report:link('research/r-reader-1.md'),native_result:link('research/r-dispatch/reader-reader-1.attempt-1.result.json'),prompt:link('research/r-dispatch/reader-reader-1.attempt-1.prompt.md'),pre_snapshot:link('research/r-step3-hash-1-pre.json'),post_snapshot:link('research/r-step3-hash-1-post.json'),manifest:link('research/r-batch-1.pages.json'),finding_sha256:requiredPageHash(finding),current_path:'library/test/outside.md',before:link('research/before.md'),after:link('research/after.md'),edits:[{before:'Draft status claim.',after:'Published status claim.'}],dependency_path:[{id:'thm-consumer',guard_sha256:itemHashGuard(consumer)},{id:'lem-supplier',guard_sha256:itemHashGuard(supplier)}],review:link('research/review.md')};
++ const save=()=>put('research/r-step3-owner-required-page-routes.json',{version:1,run:'r',policy:entry.policy,routes:[entry]});save();
++ const normalized=()=>{const route=loadRequiredPageRoutes(root,'r','1').get('reader:1:1');const {observed_source,...original}=finding;return {...original,obligation:'reader:1:1',owner_required_page_route:route.binding,observed_sha256:null,observation_basis:'unbound'};};
++ return {root,put,link,entry,save,finding,normalized,close:()=>rmSync(root,{recursive:true,force:true})};
++}
++function unchanged(){const f=fixture();
++ for(const label of ['pre','post']){const ref=f.entry[label+'_snapshot'],s=JSON.parse(readFileSync(join(f.root,ref.path)));s.manifest=['thm-consumer'];f.put(ref.path,s);f.entry[label+'_snapshot']=f.link(ref.path);}
++ f.finding.defect='ill-formed';f.finding.evidence='Only unrelated external page formatting retrofit alleged.';
++ const doc=JSON.parse(readFileSync(join(f.root,f.entry.findings.path)));doc.findings=[f.finding];f.put(f.entry.findings.path,doc);f.entry.findings=f.link(f.entry.findings.path);f.entry.finding_sha256=requiredPageHash(f.finding);
++ const native=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));native.tail=JSON.stringify(doc);f.put(f.entry.native_result.path,native);f.entry.native_result=f.link(f.entry.native_result.path);
++ f.entry.routing_basis='owner-unchanged-required-page-context-v1';f.entry.scope_policy='claude9-external-formatting-only-v1';f.entry.edits=[];
++ f.put('research/before.md',readFileSync(join(f.root,'research/after.md'),'utf8'));f.entry.before=f.link('research/before.md');
++ f.entry.page_item_guards=[{id:'lem-supplier',guard_sha256:itemHashGuard(readFileSync(join(f.root,'items/lem-supplier.md'),'utf8'))}];
++ f.put('research/review.md',`Owner review r outside thm-consumer ${f.entry.before.sha256} ${f.entry.after.sha256}; CLAUDE.md#9 formatting scope only, unchanged published page, no mathematical acceptance.`);f.entry.review=f.link('research/review.md');f.save();return f;}
++test('unchanged native context routes exact real page, retains finding and unbound history',()=>{const f=unchanged();try{const original=readFileSync(join(f.root,f.entry.findings.path));const c=requiredPageCarrier(f.root,'r','1',f.normalized());assert.equal(c.unchanged_context,true);assert.equal(c.item_sha256,undefined);assert.deepEqual(original,readFileSync(join(f.root,f.entry.findings.path)));assert.equal(f.normalized().observed_sha256,null);assert.equal(f.normalized().pre_sha256,undefined);for(const verdict of ['false_positive','confirmed_nonfatal','escalated'])assert.equal(requiredPageVerdictAllowed(c,verdict),true);for(const verdict of ['accepted','repaired','accepted_repair','reviewed_no_defect','confirmed_fatal','context_accepted'])assert.equal(requiredPageVerdictAllowed(c,verdict),false);}finally{f.close();}});
++for(const[name,change]of[
++ ...['pre','post'].map(label=>['missing '+label+' native page inventory',f=>{const ref=f.entry[label+'_snapshot'],s=JSON.parse(readFileSync(join(f.root,ref.path)));delete s.page_manifest;f.put(ref.path,s);f.entry[label+'_snapshot']=f.link(ref.path);}]),
++ ...['pre','post'].flatMap(label=>[
++  ['missing '+label+' native item inventory',f=>{const ref=f.entry[label+'_snapshot'],s=JSON.parse(readFileSync(join(f.root,ref.path)));delete s.manifest;f.put(ref.path,s);f.entry[label+'_snapshot']=f.link(ref.path);}],
++  ['wrong '+label+' native consumer',f=>{const ref=f.entry[label+'_snapshot'],s=JSON.parse(readFileSync(join(f.root,ref.path)));s.manifest=['thm-other'];f.put(ref.path,s);f.entry[label+'_snapshot']=f.link(ref.path);}]]),
++ ['changed current page',f=>f.put(f.entry.current_path,'changed')],
++ ['changed after archive with valid updated reference',f=>{f.put(f.entry.after.path,readFileSync(join(f.root,f.entry.after.path),'utf8')+'extra prose');f.entry.after=f.link(f.entry.after.path);}],
++ ['nonempty edits',f=>f.entry.edits=[{before:'Published',after:'Unchanged'}]],
++ ['wrong scope policy',f=>f.entry.scope_policy='unrestricted'],
++ ['missing opt in',f=>delete f.entry.routing_basis],
++ ['original findings changed',f=>f.put(f.entry.findings.path,{batch:'1',findings:[]})],
++ ['original native completion changed',f=>{const n=JSON.parse(readFileSync(join(f.root,f.entry.native_result.path)));n.tail='{}';f.put(f.entry.native_result.path,n);f.entry.native_result=f.link(f.entry.native_result.path);}],
++ ['wrong origin requires',f=>{f.put(f.entry.manifest.path,[{id:'owned',requires:[],items:[{id:'thm-consumer'}]}]);f.entry.manifest=f.link(f.entry.manifest.path);}],
++ ['page acquired other run-manifest ownership',f=>f.put('research/r-batch-2.pages.json',[{id:'outside',items:[]}])],
++ ['source context changed',f=>f.put('items/lem-supplier.md',readFileSync(join(f.root,'items/lem-supplier.md'),'utf8')+'source change')],
++ ['missing context guard',f=>f.entry.page_item_guards=[]],
++ ['unbound review scope',f=>{f.put(f.entry.review.path,'r outside thm-consumer '+f.entry.before.sha256);f.entry.review=f.link(f.entry.review.path);}],
++ ['wrong actual dependency edge',f=>{f.put('items/thm-consumer.md','---\nid: thm-consumer\nstatus: draft\ndeps: []\n---\n');f.entry.dependency_path[0].guard_sha256=itemHashGuard(readFileSync(join(f.root,'items/thm-consumer.md'),'utf8'));}],
++])test('unchanged rejects '+name,()=>{const f=unchanged();try{change(f);f.save();assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'));}finally{f.close();}});
++test('old edited route retains real prose repair and zero-edit rejection',()=>{const f=fixture();try{assert.equal(loadRequiredPageRoutes(f.root,'r','1').size,1);const c=requiredPageCarrier(f.root,'r','1',f.normalized());assert.equal(c.unchanged_context,undefined);assert.equal(requiredPageVerdictAllowed(c,'confirmed_fatal'),true);f.entry.edits=[];f.save();assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'),/exact small prose edits/);}finally{f.close();}});
++test('old edited route retains unique body-edit and exact reconstruction guards',()=>{const f=fixture();try{f.entry.edits=[{before:'status',after:'modified'}];f.save();assert.throws(()=>loadRequiredPageRoutes(f.root,'r','1'),/nonprose|unaccounted/);}finally{f.close();}});
++// Exercise actual staged Step3 scope integration on a disposable fixture only.
++test('scope retains independent false-positive ledger path and blocks unchanged repair/context acceptance',()=>{const f=unchanged();try{
++ for(const path of tracked.stdout.split('\0').filter(p=>/\.(?:mjs|mts|json)$/.test(p))){mkdirSync(join(f.root,path,'..'),{recursive:true});copyFileSync(join(repo,path),join(f.root,path));}
++ for(const name of ['step3-owner-required-page-routes.mjs','step3-scope.mjs'])copyFileSync(join(codeDir,name),join(f.root,'tools',name));
++ const run=(...args)=>spawnSync(process.execPath,[join(f.root,'tools/step3-scope.mjs'),...args,'--root',f.root,'--run','r'],{cwd:f.root,encoding:'utf8',env:{...process.env,PRESTIGE_MATH_REPO:repo}});
++ const ok=(...args)=>{const r=run(...args);assert.equal(r.status,0,r.stdout+r.stderr);return r;};
++ f.put('library/test/owned.md','---\npage: owned\nstatus: draft\nitems: [thm-consumer]\nexamples: []\n---\n');f.put('research/r-alpha-groups.json',[{label:'g',covers:['1']}]);f.put('research/r-batch-1.proof-contracts.json',{version:1,scope:['thm-consumer'],contracts:{'thm-consumer':{}}});
++ ok('hash','--batch','1','--label','pre');ok('hash','--batch','1','--label','post');f.entry.pre_snapshot=f.link(f.entry.pre_snapshot.path);f.entry.post_snapshot=f.link(f.entry.post_snapshot.path);f.save();ok('post-reader','--batch','1');
++ const scope=JSON.parse(readFileSync(join(f.root,'research/r-step3-scope-1.json')));assert.equal(scope.reader_findings.length,1);assert.ok(!scope.refuter_scope.includes('outside'));f.put('research/r-refute-1.json',{batch:'1',opened:scope.refuter_scope,not_opened:[],flagged:[],coverage_note:'Fixture exact assigned scope'});ok('collect','--batch','1');
++ f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'fixture-format-scope',subject:'outside',caught_at_stage:'3a-adjudicate',severity:'fatal',disposition:'false-positive'})+'\n');
++ const decision={obligation:'reader:1:1',id:'outside',route:'reader',verdict:'false_positive',defect_ids:['fixture-format-scope'],evidence:'Independent fixture Alpha determines published required-page formatting is outside selected-frontier repair scope under CLAUDE9.',historical_delta_unknown:true,owner_resolution:'Original observation is unbound; current unchanged published carrier is routed only for scope adjudication.'};const save=()=>f.put('research/r-alpha-batch-1-3a-decisions.json',{version:1,run:'r',group:'batch-1',decisions:[decision]});save();ok('stamp');ok('check','--batch','1','--phase','adjudicate');
++ for(const verdict of ['confirmed_fatal','accepted_repair','context_accepted']){decision.verdict=verdict;save();const r=run('check','--batch','1','--phase','adjudicate');assert.notEqual(r.status,0);assert.match(r.stdout+r.stderr,/unchanged-required-page-verdict/);}
++ decision.verdict='confirmed_nonfatal';save();f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'fixture-format-scope',subject:'outside',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition:'nonfatal-recorded'})+'\n');ok('stamp');ok('check','--batch','1','--phase','adjudicate');
++ for(const disposition of ['fixed','narrowed','dropped']){f.put('research/defect-ledger.jsonl',JSON.stringify({run:'r',defect_id:'fixture-format-scope',subject:'outside',caught_at_stage:'3a-adjudicate',severity:'nonfatal',disposition})+'\n');const rejected=run('check','--batch','1','--phase','adjudicate');assert.notEqual(rejected.status,0);assert.match(rejected.stdout+rejected.stderr,/unchanged-required-page-ledger/);}
++ decision.verdict='escalated';save();const blocked=run('check','--batch','1','--phase','adjudicate');assert.notEqual(blocked.status,0);assert.match(blocked.stdout+blocked.stderr,/owner-escalation/);
++ decision.verdict='false_positive';save();ok('stamp');rmSync(join(f.root,'research/defect-ledger.jsonl'));assert.notEqual(run('check','--batch','1','--phase','adjudicate').status,0);
++ }finally{f.close();}});
++test.after(()=>rmSync(toolRoot,{recursive:true,force:true}));

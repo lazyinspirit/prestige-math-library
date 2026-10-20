@@ -1,0 +1,159 @@
+{
+  "group": "f",
+  "batches": [
+    "17"
+  ],
+  "pages_read": [
+    "ml02-cart",
+    "ml02-cart-examples"
+  ],
+  "items_read": [
+    "def-empirical-decision-tree",
+    "thm-node-mean-minimizes-squared-error",
+    "def-cost-complexity-pruning",
+    "alg-cart-greedy-split",
+    "alg-weakest-link-pruning",
+    "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+    "thm-weakest-link-pruning-terminates",
+    "ex-cart-subtrees-same-fit-different-penalties",
+    "ex-cart-one-dimensional-threshold-tree"
+  ],
+  "conventions": [
+    {
+      "convention": "The sample has n ≥ 1 and p ≥ 1. Left branches use x_j ≤ t, right branches use x_j > t, and both child sample sets must be nonempty.",
+      "fixed_by": "def-empirical-decision-tree",
+      "matters_for": [
+        "alg-cart-greedy-split",
+        "alg-weakest-link-pruning",
+        "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+        "thm-weakest-link-pruning-terminates",
+        "ex-cart-one-dimensional-threshold-tree"
+      ]
+    },
+    {
+      "convention": "Regression leaves predict sample means. Classification leaves predict the most frequent class, choosing the least class index in a tie. Entropy uses natural logarithms and 0 log 0 = 0.",
+      "fixed_by": "def-empirical-decision-tree",
+      "matters_for": [
+        "thm-node-mean-minimizes-squared-error",
+        "def-cost-complexity-pruning",
+        "alg-cart-greedy-split",
+        "ex-cart-subtrees-same-fit-different-penalties"
+      ]
+    },
+    {
+      "convention": "R(T) is total sample-count-weighted leaf impurity, |T| counts leaves, and C_α(T) = R(T) + α|T| for α ≥ 0. The weakest-link denominator is |T_t| − 1.",
+      "fixed_by": "def-cost-complexity-pruning",
+      "matters_for": [
+        "alg-weakest-link-pruning",
+        "thm-weakest-link-pruning-terminates",
+        "ex-cart-subtrees-same-fit-different-penalties"
+      ]
+    },
+    {
+      "convention": "The root has depth zero. Candidate thresholds are adjacent-distinct-value midpoints; score ties use coordinate index then cut index. Splits need no strictly positive loss reduction.",
+      "fixed_by": "alg-cart-greedy-split",
+      "matters_for": [
+        "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+        "ex-cart-one-dimensional-threshold-tree"
+      ]
+    },
+    {
+      "convention": "Pruning recomputes quotients on the current tree, collapses one minimizing node per iteration, and resolves ties by lexicographic root-to-node address with L < R.",
+      "fixed_by": "alg-weakest-link-pruning",
+      "matters_for": [
+        "thm-weakest-link-pruning-terminates",
+        "ex-cart-subtrees-same-fit-different-penalties"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-empirical-decision-tree",
+      "statement": "Finite empirical binary trees split sample indices using coordinate thresholds with two nonempty children; terminal sample sets partition the sample. Regression predictions are leaf means; classification predictions and impurities follow the specified class-frequency rules.",
+      "used_by": [
+        "thm-node-mean-minimizes-squared-error",
+        "def-cost-complexity-pruning",
+        "alg-cart-greedy-split",
+        "alg-weakest-link-pruning",
+        "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+        "thm-weakest-link-pruning-terminates",
+        "ex-cart-subtrees-same-fit-different-penalties",
+        "ex-cart-one-dimensional-threshold-tree",
+        "alg-bagged-random-forest",
+        "alg-gradient-boosting",
+        "thm-gradient-boosting-empirical-loss-nonincreasing"
+      ]
+    },
+    {
+      "id": "thm-node-mean-minimizes-squared-error",
+      "statement": "Let I be a nonempty finite set of sample indices and let y_i be real for every i ∈ I. Among all real constants c, the unique minimizer of Σ_i(y_i − c)² is the sample mean, and the minimum value is the sum of squared deviations from that mean.",
+      "used_by": [
+        "alg-cart-greedy-split",
+        "thm-cart-greedy-split-is-best-listed-split-and-terminates"
+      ]
+    },
+    {
+      "id": "thm-cart-greedy-split-is-best-listed-split-and-terminates",
+      "statement": "Under the greedy CART input conditions, each selected split minimizes the declared child-weighted empirical loss among all nonempty coordinate-threshold partitions, with the specified tie rule. Growth terminates with depth at most the maximum depth and nonempty children at every split; no global tree optimality is asserted.",
+      "used_by": [
+        "ex-cart-one-dimensional-threshold-tree",
+        "alg-gradient-boosting",
+        "thm-gradient-boosting-empirical-loss-nonincreasing"
+      ]
+    },
+    {
+      "id": "def-cost-complexity-pruning",
+      "statement": "For collapsed subtrees of a fixed finite empirical tree, define R(T) as total training impurity, C_α(T) = R(T) + α|T| for α ≥ 0, and g(t) = [R(t) − R(T_t)]/(|T_t| − 1) for current nonterminal nodes.",
+      "used_by": [
+        "alg-weakest-link-pruning",
+        "thm-weakest-link-pruning-terminates",
+        "ex-cart-subtrees-same-fit-different-penalties"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "prop-standard-coordinate-inner-products",
+      "used_for": "The node-mean proof equips the real scalar domain and finite coordinate codomain with standard inner products before applying the normal-equation theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "The node-mean proof verifies directly that summing coordinates is the adjoint of the constant-vector embedding.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "The node-mean proof applies the finite-dimensional minimizer characterization T*(Tc − b) = 0; all required linearity and inner-product hypotheses are established.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-cart-one-dimensional-threshold-tree",
+      "concern": "Verification 3.1 says, “The root split has depth $1=d_{\\max}$”. The algorithm assigns the root depth 0; its children have depth 1 and therefore remain leaves. The computed output is correct, but this sentence misidentifies the node depths.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "finding": "The Definition begins, “Let $V,W$ be inner product spaces ([[def-inner-product-space]]) over the same field and let $T:V\\to W$ be linear ([[def-linear-map]]).” These two hyperlinks interrupt the defining section, contrary to the uninterrupted-statement requirement. There is no following Definition references section carrying them. The mathematical definition itself supports its CART use.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "ml02-random-forests",
+      "to": "ml02-cart",
+      "faithful": true,
+      "note": "The forest algorithm preserves nonempty bootstrap-position child sets, midpoint candidates, weighted impurity scores, depth-zero roots, depth caps, and deterministic ties. It explicitly identifies m = p with CART and m < p with nodewise coordinate restriction. CART suppliers assert no forest performance guarantee. Its data-flow diagram agrees with the construction."
+    },
+    {
+      "from": "ml02-boosting",
+      "to": "ml02-cart",
+      "faithful": true,
+      "note": "Gradient boosting fits finite-depth squared-error CART to finite pseudo-residuals and uses its finite, nonempty leaf partition. It distinguishes fitted leaf means from subsequent line-minimizing offsets. The nonincreasing-loss theorem cites CART only for finite output and the sample partition; its inequality follows from attained leafwise minima and comparison with zero offsets."
+    }
+  ]
+}

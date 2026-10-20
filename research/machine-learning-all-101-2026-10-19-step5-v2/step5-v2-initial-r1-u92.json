@@ -1,0 +1,90 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "92",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-nystrom-kernel-ridge-fit",
+      "model": "gpt-6-luna",
+      "context_sha256": "f68159d58605a015b85ac66ba86536ec954612efe8d93c2ec24dd17913cf3389",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Definition references label incorrectly attributes existence and uniqueness to the Moore–Penrose definition, which only specifies the four equations and conditional notation. The already declared dependency thm-moore-penrose-pseudoinverse-exists-and-is-unique proves both claims by SVD, including rank zero and empty shapes. Corrected the definition label and added a separate theorem reference; no mathematical prerequisite or procedure was missing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-nystrom-kernel-ridge-fit",
+      "disposition": "repaired",
+      "post_sha256": "58989308ac742dfffaa1e7f64f51f5366c0d9c9a16bf52d31c657e81d24abda1",
+      "review_context_sha256": "5aec8e34bd0fa4cc0355f03ccd66f49f362a4656db21e02bdd3f823ca23df60f",
+      "reason": "Reviewed the complete procedure, owning contract and page interfaces against the Moore–Penrose definition/existence proof, Nyström definition/order proof, shifted inverse lemma and residual certificate. The Nyström matrix is PSD, so B is SPD and p^TBp is positive for nonzero p; the zero branch returns. Step 3 excludes zero residual before either division. In exact arithmetic the updated residual equals y-Bb, so every exit supplies actual residuals and certified tests both. Checked s=0, singular/zero K, y=0, n=1, eta=0 and T=0; no arbitrary choice is needed. Only the erroneous reference attribution changed. The Definition is byte-identical and no diagram is present or needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "alg-nystrom-kernel-ridge-fit",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "Definition references",
+      "reason": "Existence and uniqueness were misattributed to the defining equations although the correct theorem was already a dependency. Repaired the two reference labels without changing the Definition or dependencies.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_paths": [
+      "items/alg-nystrom-kernel-ridge-fit.md"
+    ],
+    "interface_change": false,
+    "statement_comparison": "Reconstructed the exact pre-edit carrier by reversing the sole reference patch and matched its itemHashGuard to the frozen before hash dbccf460d925ad35ac3a7196bdad0813384201de9d68845baaeac6a8c7d138c0. The original and current Definition sections are byte-identical; no consumer propagation is triggered.",
+    "source_evidence": [
+      "items/def-moore-penrose-pseudoinverse.md: Definition gives the four equations and conditional notation only.",
+      "items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md: complete proof steps 1.1–6.1 construct V Sigma+ U* and prove uniqueness by block equations; empty blocks and rank zero are admitted.",
+      "items/thm-singular-value-decomposition.md: complete proof explicitly includes zero-dimensional spaces and rank zero.",
+      "items/lem-nystrom-square-root-projector-identity.md and items/thm-psd-nystrom-order-and-exactness.md: complete projection-compression and PSD proofs validate B positivity for every sketch.",
+      "items/lem-regularized-gram-matrix-inverse-bound.md and items/thm-kernel-ridge-residual-prediction-certificate.md: complete proofs validate the shifted system and the original-system residual interpretation.",
+      "research/machine-learning-all-101-2026-10-19-batch-92.proof-contracts.json: assigned algorithm boundaries and risk review; library/machine-learning/sketched-kernel-learning-and-certified-solves.md and its examples companion: compact frontmatter-only interfaces."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-nystrom-kernel-ridge-fit.md --json",
+        "exit_code": 0,
+        "result": "1 file; not-applicable; 0 checked proofs; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-nystrom-kernel-ridge-fit.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/alg-nystrom-kernel-ridge-fit.md",
+        "exit_code": 0,
+        "result": "1 item; 0 proof steps; 0 defects. Run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-92.proof-contracts.json --items alg-nystrom-kernel-ridge-fit --strict --json",
+        "exit_code": 0,
+        "result": "Assigned algorithm checked; ok true; no errors or warnings."
+      }
+    ],
+    "published_ledger_updates": [],
+    "unresolved_obligations": [],
+    "handoff": "Repairer review only; no independent review of this repair, judge invocation, stamp, certification, publication or round transition performed. Controller retains ordinary current-context review and rejudgment duties."
+  }
+}

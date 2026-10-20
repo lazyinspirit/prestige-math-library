@@ -1,0 +1,1233 @@
+{
+  "version": 1,
+  "scope": [
+    "def-regularized-kernel-prediction-system",
+    "lem-regularized-gram-matrix-inverse-bound",
+    "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+    "alg-nystrom-kernel-ridge-fit",
+    "thm-kernel-ridge-gram-perturbation-bound",
+    "thm-kernel-ridge-residual-prediction-certificate",
+    "rem-statistical-and-numerical-kernel-errors",
+    "ex-kernel-ridge-singular-and-zero-gram-matrices",
+    "ex-kernel-ridge-nystrom-exact-range",
+    "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error",
+    "ex-training-gram-does-not-control-test-prediction"
+  ],
+  "contracts": {
+    "def-regularized-kernel-prediction-system": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The ordered training list is explicitly nonempty, so n is positive, the mean-square average is defined, and the shifted matrices have positive dimension. A zero Gram matrix is allowed, but is not an empty training list or empty indexed loss family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The ordered training list is explicitly nonempty, so n is positive, the mean-square average is defined, and the shifted matrices have positive dimension. A zero Gram matrix is allowed, but is not an empty training list or empty indexed loss family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition allows zero response and a zero PSD Gram matrix; the positive shift remains tau>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes every n>=1, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits singular and zero Gram matrices; the shifted system is justified by the inverse-bound lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition assumes lambda>0 and sets tau=n lambda; tau=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition selects no element from a family and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition fixes mean-square normalization tau=n lambda and constructs coefficients and fitted vectors from a shifted PSD matrix. It does not assert a converse characterization of kernels or predictors from the resulting finite training fit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This definition fixes mean-square normalization tau=n lambda and constructs coefficients and fitted vectors from a shifted PSD matrix. It does not assert a converse characterization of kernels or predictors from the resulting finite training fit.",
+            "item_sha256": "a9b27987427662d88ad8365eabd10d3c4a9d673e1e9a4dc35e3bec04a7d1e727",
+            "row_sha256": "09f10a06aa4a650442625c2c8520fa347e26fbc4001c7051dd6e1dd0b3b16195"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition fixes mean-square normalization tau=n lambda and constructs coefficients and fitted vectors from a shifted PSD matrix. It does not assert a converse characterization of kernels or predictors from the resulting finite training fit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This definition fixes mean-square normalization tau=n lambda and constructs coefficients and fitted vectors from a shifted PSD matrix. It does not assert a converse characterization of kernels or predictors from the resulting finite training fit.",
+            "item_sha256": "a9b27987427662d88ad8365eabd10d3c4a9d673e1e9a4dc35e3bec04a7d1e727",
+            "row_sha256": "3b38bf7714c2fd6bf6209c716f747694ceb894092576984c9f651a8e53d81038"
+          }
+        }
+      ],
+      "risk_review": {"status":"complete","reviewer":"owner-delegated:/root/calibration_surrogate_repair","notes":"Owner-delegated focused review read the full current Definition, references and Remarks. The source explicitly supplies a real PSD kernel AND a real RKHS H with that kernel. It does not infer H from PSD alone. n>=1 and lambda>0 give tau=n lambda>0. For every supplied finite symmetric PSD G, the stated quadratic-form inequality makes G+tau I positive definite/invertible, including singular/zero G; a_G and u_G=y-tau a_G follow by finite matrix algebra. The objective uses mean-square normalization. Only the unchanged PSD and supplied-RKHS predicates of the repaired upstream Definition are used; the separately Countable-Choice-qualified canonical completion is not invoked. No source repair, choice assumption on this given-data definition, generalization guarantee or native acceptance is asserted.","provenance":"Explicit owner-requested current consumer review; not native Alpha92 coverage or acceptance of a changed supplier.","source_sha256":"d81a83a2c4550e497c85282e4634d91d8b620115fc130e8c79eb6935e70137ee"}
+    },
+    "lem-regularized-gram-matrix-inverse-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-shift-is-invertible",
+          "step": "1.1",
+          "claim": "Since $\\tau>0$ and $M,N$ are positive semidefinite, every nonzero $x$ satisfies $x^TAx=x^TMx+\\tau\\lVert x\\rVert_2^2\\ge\\tau\\lVert x\\rVert_2^2>0$ and $x^TBx=x^TNx+\\tau\\lVert x\\rVert_2^2\\ge\\tau\\lVert x\\rVert_2^2>0$. Thus $A$ and $B$ are positive definite and invertible. By [F1], write $M=U\\operatorname{diag}(\\mu_1,\\ldots,\\mu_n)U^T$ with $U$ orthogonal and each $\\mu_i\\ge0$. Then $A=U\\operatorname{diag}(\\mu_i+\\tau)U^T$ and $A^{-1}=U\\operatorname{diag}((\\mu_i+\\tau)^{-1})U^T$; applying the same diagonalization argument to $N$ gives the corresponding formula for $B^{-1}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "inverse-operator-norm-bound",
+          "step": "2.1",
+          "claim": "Orthogonality of $U$ gives $\\lVert A^{-1}x\\rVert_2^2=\\sum_i (U^Tx)_i^2(\\mu_i+\\tau)^{-2}\\le\\tau^{-2}\\lVert x\\rVert_2^2$ for every $x$. Taking the supremum over unit vectors gives $\\lVert A^{-1}\\rVert_2\\le1/\\tau$; the identical calculation for $N$ gives $\\lVert B^{-1}\\rVert_2\\le1/\\tau$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "resolvent-identity-and-bound",
+          "step": "3.1",
+          "claim": "Since $B-A=N-M$, multiplying out yields $A^{-1}(B-A)B^{-1}=A^{-1}-B^{-1}$. For every unit vector $x$, the definition of the induced norm gives $\\lVert A^{-1}(N-M)B^{-1}x\\rVert_2\\le\\lVert A^{-1}\\rVert_2\\lVert N-M\\rVert_2\\lVert B^{-1}\\rVert_2$. Taking the supremum and using step 2.1 proves the asserted resolvent bound.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both matrices have n at least one and the induced norm is taken over nonempty unit spheres in that positive-dimensional real vector space. Zero PSD matrices remain allowed; an empty-dimensional matrix is outside the stated hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Both matrices have n at least one and the induced norm is taken over nonempty unit spheres in that positive-dimensional real vector space. Zero PSD matrices remain allowed; an empty-dimensional matrix is outside the stated hypotheses.",
+            "item_sha256": "0ce5286005193f1dd17c9c8540491f0344d8fd38a2c0fdebafedde5bee988023",
+            "row_sha256": "663bc82a8b16e8d6bc99649dcd672ca0b5d001d701e397723fa69a7af76eed06"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes eigenvalues equal to zero; adding tau>0 makes each shifted eigenvalue positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 apply to n=1 without a dimension restriction beyond n>=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits zero eigenvalues and proves invertibility after the positive shift."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes tau>0; the inverse bound is proved for every positive tau and makes no claim at tau=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use a finite orthogonal eigenbasis and explicit matrix algebra; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Positive shifts of two PSD matrices give inverse norm bounds and a resolvent identity. The lemma does not infer positive semidefiniteness or the shift size conversely from an inverse-norm inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Positive shifts of two PSD matrices give inverse norm bounds and a resolvent identity. The lemma does not infer positive semidefiniteness or the shift size conversely from an inverse-norm inequality.",
+            "item_sha256": "0ce5286005193f1dd17c9c8540491f0344d8fd38a2c0fdebafedde5bee988023",
+            "row_sha256": "4119aedf7f03bbec42f2995b3a260061a33b912e9b3b76630ce30e8743a71679"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Positive shifts of two PSD matrices give inverse norm bounds and a resolvent identity. The lemma does not infer positive semidefiniteness or the shift size conversely from an inverse-norm inequality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Positive shifts of two PSD matrices give inverse norm bounds and a resolvent identity. The lemma does not infer positive semidefiniteness or the shift size conversely from an inverse-norm inequality.",
+            "item_sha256": "0ce5286005193f1dd17c9c8540491f0344d8fd38a2c0fdebafedde5bee988023",
+            "row_sha256": "736ad11e9f39071b6fba898eaa8558ff96a0f8be0b31bb617ef63eeb5bc8fdf9"
+          }
+        }
+      ]
+    },
+    "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. Under the Axiom of Countable Choice, the canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-regularized-gram-matrix-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $M,N\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TMx\\ge0$ and $x^TNx\\ge0$ for every $x\\in\\mathbb R^n$, where $n\\ge1$, and let $\\tau>0$. Write $I_n$ for the identity matrix, $A=M+\\tau I_n$, and $B=N+\\tau I_n$. For vectors use $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$, and for a matrix $T$ use the induced Euclidean norm $\\lVert T\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Tx\\rVert_2$. Positive definite means $x^TAx>0$ for every nonzero $x$, and analogously for $B$. Then $A$ and $B$ are positive definite and invertible, $\\lVert A^{-1}\\rVert_2,\\lVert B^{-1}\\rVert_2\\le1/\\tau$, and\n\n$$A^{-1}-B^{-1}=A^{-1}(N-M)B^{-1},\\qquad \\lVert A^{-1}-B^{-1}\\rVert_2\\le\\frac{\\lVert M-N\\rVert_2}{\\tau^2}. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "kernel-system-residual",
+          "step": "1.1",
+          "claim": "By [F1], $K$ is a real symmetric positive-semidefinite matrix. Let $a=(K+\\tau I_n)^{-1}y$, which exists by [F2]\u2013[F3], and set $f_0=\\sum_i a_i k(\\cdot,x_i)$. The reproducing identities give $f_0(x_j)=\\sum_i a_i k(x_j,x_i)=(Ka)_j$, so if $r=y-(f_0(x_i))_{i=1}^n$, then $r=y-Ka=\\tau a$ by $(K+\\tau I_n)a=y$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "objective-difference",
+          "step": "2.1",
+          "claim": "Fix any $h\\in\\mathcal H$. The reproducing identities yield $\\langle f_0,h\\rangle_{\\mathcal H}=\\sum_i a_i h(x_i)=a^T(h(x_i))_{i=1}^n$. Expanding both squared norms in $J(f_0+h)-J(f_0)$ gives $\\frac1n\\lVert (h(x_i))_{i=1}^n\\rVert_2^2-\\frac2n r^T(h(x_i))_{i=1}^n+2\\lambda a^T(h(x_i))_{i=1}^n+\\lambda\\lVert h\\rVert_{\\mathcal H}^2$. Substituting $r=\\tau a=n\\lambda a$ cancels the two cross terms, leaving $\\frac1n\\lVert(h(x_i))\\rVert_2^2+\\lambda\\lVert h\\rVert_{\\mathcal H}^2\\ge0$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unique-minimizer",
+          "step": "3.1",
+          "claim": "Step 2.1 shows $J(f_0+h)\\ge J(f_0)$ for every $h$, so $f_0$ is a minimizer. Equality forces $\\lambda\\lVert h\\rVert_{\\mathcal H}^2=0$, hence $h=0$ because $\\lambda>0$; the minimizer is unique. The evaluation computation in step 1.1 gives its fitted vector $u=Ka=y-\\tau a$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The training list has n at least one and lambda is strictly positive, so tau=n lambda is nonzero and the empirical average has terms. The finite kernel-section sum is therefore over a nonempty list; a zero kernel or zero function is allowed but does not make the training family empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The training list has n at least one and lambda is strictly positive, so tau=n lambda is nonzero and the empirical average has terms. The finite kernel-section sum is therefore over a nonempty list; a zero kernel or zero function is allowed but does not make the training family empty."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The training list has n at least one and lambda is strictly positive, so tau=n lambda is nonzero and the empirical average has terms. The finite kernel-section sum is therefore over a nonempty list; a zero kernel or zero function is allowed but does not make the training family empty.",
+            "item_sha256": "ca755b1f1da5c43893eb2203e629b9fbe6b434a87c4a9a11c31c031769fafcbf",
+            "row_sha256": "6c54128d33d63c8890d3d9abcbd10aa2e2d258c6413ce49224e4dceec14f5bf2"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 remain valid for y=0 or K=0 because tau>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use finite sums and apply when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use only K positive semidefinite; no full-rank condition is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires lambda>0; step 3.1 uses strict positivity to prove uniqueness, and lambda=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use only the given finite list and reproducing identities; this proof is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The shifted coefficient constructs the unique RKHS minimizer by cancelling the objective cross terms and using lambda positive. The statement does not claim an iff between arbitrary coefficient representations and uniqueness, especially when the Gram matrix is singular.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The shifted coefficient constructs the unique RKHS minimizer by cancelling the objective cross terms and using lambda positive. The statement does not claim an iff between arbitrary coefficient representations and uniqueness, especially when the Gram matrix is singular.",
+            "item_sha256": "ca755b1f1da5c43893eb2203e629b9fbe6b434a87c4a9a11c31c031769fafcbf",
+            "row_sha256": "1381e9901889de9ce46ce12f60b2c38e0c3dda238a50a4cd13ec805041ae6e2c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The shifted coefficient constructs the unique RKHS minimizer by cancelling the objective cross terms and using lambda positive. The statement does not claim an iff between arbitrary coefficient representations and uniqueness, especially when the Gram matrix is singular.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The shifted coefficient constructs the unique RKHS minimizer by cancelling the objective cross terms and using lambda positive. The statement does not claim an iff between arbitrary coefficient representations and uniqueness, especially when the Gram matrix is singular.",
+            "item_sha256": "ca755b1f1da5c43893eb2203e629b9fbe6b434a87c4a9a11c31c031769fafcbf",
+            "row_sha256": "301c817adb92d2ec36c3f7fd636c7565126872a1180680443b02339c5f626a59"
+          }
+        }
+      ],
+      "risk_review": {"status":"complete","reviewer":"owner-delegated:/root/calibration_surrogate_repair","notes":"Owner-delegated focused review read the full current Statement, Facts F1-F3 and all proof steps1.1-3.1, the regularized-system Definition, the upstream kernel/RKHS predicates and the complete shifted-inverse lemma. A real RKHS H is an explicit input; it is not constructed from a bare PSD kernel. F1 supplies finite Gram PSD and reproducing sections, F3 supplies the shifted inverse for tau=n lambda>0. Step1.1 forms f0 from finite sections and yields residual r=tau a. In2.1 symmetry/reproduction gives <f0,h>=a^T(h(x_i)); substituting r=n lambda a cancels the cross terms and leaves n^(-1)||h(X)||^2+lambda||h||^2. Step3.1 proves global minimality and uniqueness since lambda>0; no separate representer/existence theorem or canonical completion is needed. Zero y, singular/zero Gram matrices, repeated inputs and n=1 are covered; lambda=0 and empty training data are excluded. The scoped upstream Countable Choice qualification leaves every used predicate unchanged. No consumer Statement/proof edit is necessary, and this owner review does not claim native92 accepted the new producer source.","provenance":"Explicit owner-requested current consumer review; not native Alpha92 coverage or acceptance of a changed supplier.","source_sha256":"85df10dd0f5f35213a3be22356a5761c6363e88171eb8240f16afcd955e05c6f"}
+    },
+    "alg-nystrom-kernel-ridge-fit": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires n>=1 but explicitly admits a zero-width sketch s=0 and defines its Nystr\u00f6m matrix by the empty-matrix convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition allows y=0 and K=0; the initial residual branch returns a finite status."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition applies to n=1 and the finite iteration loop remains defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition uses the Moore-Penrose inverse for singular S^TKS and allows rank-deficient sketches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition allows eta=0 and T=0; the initial residual check or budget-exhausted branch returns a status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Algorithm Definition is deterministic given its finite inputs and uses exact real arithmetic; it selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Nystr\u00f6m solver returns certified only after checking both actual residuals, and has separate uncertified and budget-exhausted branches. Its iteration instructions do not claim equivalence between a small sketched residual alone and original-system solve accuracy.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The Nystr\u00f6m solver returns certified only after checking both actual residuals, and has separate uncertified and budget-exhausted branches. Its iteration instructions do not claim equivalence between a small sketched residual alone and original-system solve accuracy.",
+            "item_sha256": "dbccf460d925ad35ac3a7196bdad0813384201de9d68845baaeac6a8c7d138c0",
+            "row_sha256": "85e79972166cb2a263c9c8263c8ebb79929339bcefc186392824a3679d5d1c57"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Nystr\u00f6m solver returns certified only after checking both actual residuals, and has separate uncertified and budget-exhausted branches. Its iteration instructions do not claim equivalence between a small sketched residual alone and original-system solve accuracy.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The Nystr\u00f6m solver returns certified only after checking both actual residuals, and has separate uncertified and budget-exhausted branches. Its iteration instructions do not claim equivalence between a small sketched residual alone and original-system solve accuracy.",
+            "item_sha256": "dbccf460d925ad35ac3a7196bdad0813384201de9d68845baaeac6a8c7d138c0",
+            "row_sha256": "a5ac8545cec7d0db9b98239cdd0e0ee346e16d5338139869af0dbbba0c9d8d14"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Read complete Definition steps 1\u20134 and status paragraph, Moore\u2013Penrose definition/existence, Nystr\u00f6m PSD, shifted inverse and residual certificate. Inputs are n>=1, PSD real K, tau>0, eta>=0, s>=0 and integer T>=0 in exact arithmetic. B is SPD, so p^TBp is nonnegative, zero branch returns, and positive branch divides safely; step 3 removes zero residual before beta denominator. Exact recurrence residual equals y-Bb, and both actual residuals are returned on every exit. Checked T=0, s=0, y=0, eta=0, zero/singular K, early zero-Nystr\u00f6m residual with large original residual and final-budget exit. Certified checks both residuals; returned Ktilde b is not confused with Kb in the original-system certificate. No finite-precision, statistical or successful-solve-after-budget claim. Procedure composes declared suppliers without a self-edge. No change needed."
+      }
+    },
+    "thm-kernel-ridge-gram-perturbation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regularized-gram-matrix-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $M,N\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TMx\\ge0$ and $x^TNx\\ge0$ for every $x\\in\\mathbb R^n$, where $n\\ge1$, and let $\\tau>0$. Write $I_n$ for the identity matrix, $A=M+\\tau I_n$, and $B=N+\\tau I_n$. For vectors use $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$, and for a matrix $T$ use the induced Euclidean norm $\\lVert T\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Tx\\rVert_2$. Positive definite means $x^TAx>0$ for every nonzero $x$, and analogously for $B$. Then $A$ and $B$ are positive definite and invertible, $\\lVert A^{-1}\\rVert_2,\\lVert B^{-1}\\rVert_2\\le1/\\tau$, and\n\n$$A^{-1}-B^{-1}=A^{-1}(N-M)B^{-1},\\qquad \\lVert A^{-1}-B^{-1}\\rVert_2\\le\\frac{\\lVert M-N\\rVert_2}{\\tau^2}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-psd-nystrom-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, and let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix. Put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nystr\u00f6m approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-psd-nystrom-order-and-exactness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, and $S\\in\\mathbb F^{n\\times s}$. In the Loewner order, where $B\\preceq C$ means $C-B$ is positive semidefinite, the Nystr\u00f6m approximation in [[def-psd-nystrom-approximation]] satisfies\n$0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$.\nIf the sketch captures the range in the sense that $\\operatorname{Ran}(AS)=\\operatorname{Ran}(A)$, then $\\widehat A_{\\mathrm{nys}}=A$. Here rank, when used in the proof, means dimension of the range.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nystrom-deterministic-spectral-residual-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, and let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$. Let $S\\in\\mathbb F^{n\\times s}$, and choose an integer $0\\le k\\le n$ and an orthonormal eigenbasis $U=(U_1\\ U_2)$ with the first $k$ eigenvectors in $U_1$. Set\n$\\Lambda_1=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_k)$,\n$\\Lambda_2=\\operatorname{diag}(\\lambda_{k+1},\\ldots,\\lambda_n)$,\n$\\Omega_1=U_1^*S$, and $\\Omega_2=U_2^*S$. Empty blocks have norm zero, $\\lambda_{n+1}:=0$, and the $0\\times s$ matrix has full row rank vacuously. If $\\Omega_1$ has full row rank, then, deterministically,\n\n$$\\|A-\\widehat A_{\\mathrm{nys}}\\|_2\\le\\lambda_{k+1}+\\|\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger\\|_2^2.$$\n\nHere $\\|M\\|_2=\\sup_{\\|x\\|_2=1}\\|Mx\\|_2$ is the induced Euclidean operator norm. No probability assumption on $S$ is made.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "shifted-inverse-bounds",
+          "step": "1.1",
+          "claim": "Put $A=K+\\tau I_n$ and $B=\\widetilde K+\\tau I_n$. By [F2], both inverses exist and have norm at most $1/\\tau$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "coefficient-resolvent-bound",
+          "step": "2.1",
+          "claim": "The resolvent identity gives $a_K-a_{\\widetilde K}=(A^{-1}-B^{-1})y=A^{-1}(\\widetilde K-K)B^{-1}y$. Taking norms and applying the bounds from step 1.1 and the assumed Gram error gives $\\lVert a_K-a_{\\widetilde K}\\rVert_2\\le\\delta\\lVert y\\rVert_2/\\tau^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fitted-vector-bound",
+          "step": "3.1",
+          "claim": "By [F1], $u_K=y-\\tau a_K$ and $u_{\\widetilde K}=y-\\tau a_{\\widetilde K}$. Subtracting these equalities and using step 2.1 gives $\\lVert u_K-u_{\\widetilde K}\\rVert_2=\\tau\\lVert a_K-a_{\\widetilde K}\\rVert_2\\le\\delta\\lVert y\\rVert_2/\\tau$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nystrom-specialization",
+          "step": "4.1",
+          "claim": "In the Nystr\u00f6m case, [F4] supplies positive semidefiniteness of $\\widetilde K$, and [F5] supplies the stated value of $\\delta$ whenever $\\Omega_1$ has full row rank. Substituting that bound into steps 2.1 and 3.1 proves the conditional Nystr\u00f6m conclusion.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The Nystr\u00f6m specialization explicitly permits s=0, r=0 and r=n. For r=0 the leading row block is empty with vacuous full-row-rank condition; for r=n the tail block has zero norm and lambda_(n+1) is defined as zero. Proof4.1 uses the stated residual supplier with these exact empty-block conventions, while the shifted n-dimensional systems still have n at least one.",
+          "evidence": "The Statement explicitly allows s=0, r=0 and r=n, declares the full-row-rank convention for empty leading rows, sets lambda_(n+1)=0, and assigns zero norm to empty blocks. Proof step 4.1 applies the stated deterministic residual supplier under these same conventions before substituting into the coefficient and fit bounds.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The Nystr\u00f6m specialization explicitly permits s=0, r=0 and r=n. For r=0 the leading row block is empty with vacuous full-row-rank condition; for r=n the tail block has zero norm and lambda_(n+1) is defined as zero. Proof4.1 uses the stated residual supplier with these exact empty-block conventions, while the shifted n-dimensional systems still have n at least one.",
+            "item_sha256": "450ef979a902be58d4ceb80afc920f5d34322d192deda622a91ab9a6b8f9fd5e",
+            "row_sha256": "341d0b823f6cd5bb229cafe3a48968c14f74d3497dad18e4f599fabcf33f3e63"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The bound includes y=0 and delta=0; steps 2.1 and 3.1 then give zero errors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Theorem Statement allows n=1, and steps 1.1-4.1 apply at that dimension; the Nystr\u00f6m specialization permits r=0 or r=n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-4.1 allow singular PSD Gram matrices; tau>0 ensures both shifted inverses exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes delta=0 and r=0,n with empty-block conventions; tau=0 remains excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-4.1 use only finite-dimensional spectral and matrix algebra; the deterministic specialization assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The PSD Gram error upper bound implies coefficient and training-fit error upper bounds; full-row-rank leading sketch supplies one sufficient Nystr\u00f6m residual estimate. None is claimed necessary from small fitted error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The PSD Gram error upper bound implies coefficient and training-fit error upper bounds; full-row-rank leading sketch supplies one sufficient Nystr\u00f6m residual estimate. None is claimed necessary from small fitted error.",
+            "item_sha256": "450ef979a902be58d4ceb80afc920f5d34322d192deda622a91ab9a6b8f9fd5e",
+            "row_sha256": "cb7fd63134c34969b03440626d7e31777ce699c100ae460d1e2bc924e8d6c37a"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The PSD Gram error upper bound implies coefficient and training-fit error upper bounds; full-row-rank leading sketch supplies one sufficient Nystr\u00f6m residual estimate. None is claimed necessary from small fitted error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The PSD Gram error upper bound implies coefficient and training-fit error upper bounds; full-row-rank leading sketch supplies one sufficient Nystr\u00f6m residual estimate. None is claimed necessary from small fitted error.",
+            "item_sha256": "450ef979a902be58d4ceb80afc920f5d34322d192deda622a91ab9a6b8f9fd5e",
+            "row_sha256": "913377d66b97cf98432a7b1ba1a60def166b5c1b31c6caf66d51d84ee7d5a25a"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Read current Proof 1.1\u20134.1 and exact F1\u2013F5 source statements and local inverse/Nystrom proofs. Resolvent order/sign, inverse norms <=1/tau and u=y-tau a give the stated coefficient/training bounds. Nystr\u00f6m PSD holds for arbitrary s>=0; residual substitution requires rank(Omega1)=r. Checked n=1, zero/singular K and Ktilde, y=0, delta=0, s=0, r=0 (delta=lambda1) and r=n (empty tail, exact capture); tau=0/n=0 excluded. No converse, probability, test-prediction or RKHS construction assertion is inferred. No defect or item repair."
+      }
+    },
+    "thm-kernel-ridge-residual-prediction-certificate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regularized-gram-matrix-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $M,N\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TMx\\ge0$ and $x^TNx\\ge0$ for every $x\\in\\mathbb R^n$, where $n\\ge1$, and let $\\tau>0$. Write $I_n$ for the identity matrix, $A=M+\\tau I_n$, and $B=N+\\tau I_n$. For vectors use $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$, and for a matrix $T$ use the induced Euclidean norm $\\lVert T\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Tx\\rVert_2$. Positive definite means $x^TAx>0$ for every nonzero $x$, and analogously for $B$. Then $A$ and $B$ are positive definite and invertible, $\\lVert A^{-1}\\rVert_2,\\lVert B^{-1}\\rVert_2\\le1/\\tau$, and\n\n$$A^{-1}-B^{-1}=A^{-1}(N-M)B^{-1},\\qquad \\lVert A^{-1}-B^{-1}\\rVert_2\\le\\frac{\\lVert M-N\\rVert_2}{\\tau^2}. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "residual-linear-system",
+          "step": "1.1",
+          "claim": "By [F1], $r=y-(K+\\tau I_n)b=(K+\\tau I_n)(a-b)$. Invertibility in [F2] therefore gives $b-a=-(K+\\tau I_n)^{-1}r$, so $\\lVert b-a\\rVert_2\\le\\lVert r\\rVert_2/\\tau$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fitted-vector-residual-bound",
+          "step": "2.1",
+          "claim": "Since $u=Ka$, the training fitted-vector error is $Kb-u=K(b-a)$. For every vector $x$, the definition of the induced norm gives $\\lVert Kx\\rVert_2\\le\\lVert K\\rVert_2\\lVert x\\rVert_2$. Applying this to $b-a$ and using step 1.1 proves $\\lVert Kb-u\\rVert_2\\le\\lVert K\\rVert_2\\lVert r\\rVert_2/\\tau$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The residual certificate fixes n at least one, so y, a and b are vectors on a nonempty coordinate list. The permitted zero Gram matrix or zero residual gives zero values in existing sums rather than an empty indexed problem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The residual certificate fixes n at least one, so y, a and b are vectors on a nonempty coordinate list. The permitted zero Gram matrix or zero residual gives zero values in existing sums rather than an empty indexed problem.",
+            "item_sha256": "0b54bcf9111f54681d41a99af45ffdc35c6838a0060067372e0b4732c2513880",
+            "row_sha256": "9247c5144549636a27fb6aa5dd43369684956363335f7ccca5547a74086e97a1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If y=0 and b=0, the residual and both certified errors are zero by steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 are valid for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows singular K; step 1.1 uses only the positive shift tau>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement uses any residual r and tau>0; zero residual gives exact b=a, while tau=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 are finite matrix identities and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The actual original-system residual controls coefficient and training fitted-vector errors through the positive shifted inverse. The theorem supplies one-way norm upper bounds, not equivalence between sketched residuals, test predictions and exact solutions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The actual original-system residual controls coefficient and training fitted-vector errors through the positive shifted inverse. The theorem supplies one-way norm upper bounds, not equivalence between sketched residuals, test predictions and exact solutions.",
+            "item_sha256": "0b54bcf9111f54681d41a99af45ffdc35c6838a0060067372e0b4732c2513880",
+            "row_sha256": "06190062714d4be9384afd24cd0b2246a7a1d159ee55769f64f0787b11ff1760"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The actual original-system residual controls coefficient and training fitted-vector errors through the positive shifted inverse. The theorem supplies one-way norm upper bounds, not equivalence between sketched residuals, test predictions and exact solutions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The actual original-system residual controls coefficient and training fitted-vector errors through the positive shifted inverse. The theorem supplies one-way norm upper bounds, not equivalence between sketched residuals, test predictions and exact solutions.",
+            "item_sha256": "0b54bcf9111f54681d41a99af45ffdc35c6838a0060067372e0b4732c2513880",
+            "row_sha256": "8fb9e6b951678d6275b06eae1892f1035051af086d46c3051666e8b274a76eec"
+          }
+        }
+      ]
+    },
+    "rem-statistical-and-numerical-kernel-errors": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Remark concerns finite nonempty training lists and finite sketches."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Remark statement records deterministic residual and perturbation guarantees for zero responses and zero Gram matrices through the cited theorem statements."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Remark statement's GP, kernel, and finite matrix interfaces allow n=1 under the cited supplier hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Remark statement preserves singular kernel and posterior covariances where allowed and requires tau>0 for the observed shifted inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Remark statement gives k>=2, p>=2, ell=k+p<=min(m,n) for the randomized expectation branch and imports no endpoint outside that regime."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Remark statement keeps the deterministic branch choice-free, the optional GP branch under AC, and the Gaussian expectation branch under Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Read complete Scope and Scope references and all 12 declared prerequisite interfaces. Deterministic Gram/residual results concern finite training vectors; test predictor also needs a cross-kernel vector. In GP/KRR supplier, use supplied real RKHS, zero mean in H, n>=1, sigma=sqrt(tau)>0, independent N(0,tau I) noise and AC: observed covariance is SPD and training posterior mean is K(K+tau I)^-1 Y almost surely, as qualified by posterior-law supplier. No unconditional RKHS construction is used. Gaussian-law/range-finder supplier fixes A, iid real or variance-one normalized complex Gaussian sketch, k,p>=2, ell=k+p<=min(m,n), CC and exact arithmetic. Real/complex interfaces yield expectation only; no per-draw arbitrary-sketch, tail, leverage sampling, statistical risk or rounding guarantee follows. Zero/singular K and repeated training points remain allowed with tau>0; finite Gaussian construction assumptions explicitly retained. Algorithm residual statuses agree. Supplier observation-model diagram directions represent latent evaluation and addition, not posterior independence. No mathematical defect or item edit; known published AC/CC inline-link maintenance remains separate."
+      }
+    },
+    "ex-kernel-ridge-singular-and-zero-gram-matrices": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regularized-gram-matrix-inverse-bound",
+          "source_section": "Statement",
+          "quote": "Let $M,N\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TMx\\ge0$ and $x^TNx\\ge0$ for every $x\\in\\mathbb R^n$, where $n\\ge1$, and let $\\tau>0$. Write $I_n$ for the identity matrix, $A=M+\\tau I_n$, and $B=N+\\tau I_n$. For vectors use $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$, and for a matrix $T$ use the induced Euclidean norm $\\lVert T\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Tx\\rVert_2$. Positive definite means $x^TAx>0$ for every nonzero $x$, and analogously for $B$. Then $A$ and $B$ are positive definite and invertible, $\\lVert A^{-1}\\rVert_2,\\lVert B^{-1}\\rVert_2\\le1/\\tau$, and\n\n$$A^{-1}-B^{-1}=A^{-1}(N-M)B^{-1},\\qquad \\lVert A^{-1}-B^{-1}\\rVert_2\\le\\frac{\\lVert M-N\\rVert_2}{\\tau^2}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a set, let $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ be a real positive-semidefinite kernel, and let $\\mathcal H$ be a real reproducing-kernel Hilbert space with kernel $k$. Take a finite ordered list $X=(x_i)_{i=1}^n$ with $n\\ge1$, a response vector $y\\in\\mathbb R^n$, and $\\lambda>0$. Put $K=(k(x_i,x_j))_{i,j=1}^n$ and $\\tau=n\\lambda$. Define $a=(K+\\tau I_n)^{-1}y$, $f_0=\\sum_{i=1}^n a_i k(\\cdot,x_i)$, and $u=Ka$. Then $f_0$ is the unique minimizer over $f\\in\\mathcal H$ of\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2,$$\n\nand its training evaluation vector is $u=y-\\tau a$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "singular-diagonal-system",
+          "step": "1.1",
+          "claim": "For $K=\\operatorname{diag}(1,0)$, $K+\\tau I_2=\\operatorname{diag}(1+\\tau,\\tau)$, whose inverse is $\\operatorname{diag}((1+\\tau)^{-1},\\tau^{-1})$. Multiplication by $(p,q)^T$ gives the displayed coefficient vector, and multiplication by $K$ gives $u=((1+\\tau)^{-1}p,0)^T$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-gram-system",
+          "step": "2.1",
+          "claim": "For $K=0$, $K+\\tau I_n=\\tau I_n$ has inverse $\\tau^{-1}I_n$, so $a=y/\\tau$ and $u=Ka=0$ for every $n\\ge1$. Both matrices are positive semidefinite, and [F3] identifies their finite systems with the stated RKHS minimizers when the kernel hypotheses hold.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses nonempty matrices; the zero-matrix branch still has n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the zero Gram matrix case for every y."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes n=1 as an allowed zero-matrix case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly uses the singular matrix diag(1,0), and step 2.1 uses K=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example assumes tau>0; both displayed inverses are defined, and tau=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 are finite scalar calculations with no choice premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The singular diagonal and all-zero PSD matrices yield the explicitly computed shifted coefficients while regularization remains positive. These calculations are not a two-way criterion for matrix rank or uniqueness of a kernel from its training output.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The singular diagonal and all-zero PSD matrices yield the explicitly computed shifted coefficients while regularization remains positive. These calculations are not a two-way criterion for matrix rank or uniqueness of a kernel from its training output.",
+            "item_sha256": "7568e958f14e7d7aead00e6e3cd818fd54bc8cd1909ee4542fec99648b9eb483",
+            "row_sha256": "d82a13e349395fd120806235affc2b69b661e505912fb663f84eca8bc4ba4b29"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The singular diagonal and all-zero PSD matrices yield the explicitly computed shifted coefficients while regularization remains positive. These calculations are not a two-way criterion for matrix rank or uniqueness of a kernel from its training output.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The singular diagonal and all-zero PSD matrices yield the explicitly computed shifted coefficients while regularization remains positive. These calculations are not a two-way criterion for matrix rank or uniqueness of a kernel from its training output.",
+            "item_sha256": "7568e958f14e7d7aead00e6e3cd818fd54bc8cd1909ee4542fec99648b9eb483",
+            "row_sha256": "3a75a4276ca64ab54129fa345b889338c9849ff23ca2798fe33834728e0f8687"
+          }
+        }
+      ]
+    },
+    "ex-kernel-ridge-nystrom-exact-range": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-psd-nystrom-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, and let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix. Put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nystr\u00f6m approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-psd-nystrom-order-and-exactness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, $n\\ge1$, $s\\ge0$, $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite, and $S\\in\\mathbb F^{n\\times s}$. In the Loewner order, where $B\\preceq C$ means $C-B$ is positive semidefinite, the Nystr\u00f6m approximation in [[def-psd-nystrom-approximation]] satisfies\n$0\\preceq\\widehat A_{\\mathrm{nys}}\\preceq A$.\nIf the sketch captures the range in the sense that $\\operatorname{Ran}(AS)=\\operatorname{Ran}(A)$, then $\\widehat A_{\\mathrm{nys}}=A$. Here rank, when used in the proof, means dimension of the range.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kernel-ridge-gram-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $K,\\widetilde K\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TKx\\ge0$ and $x^T\\widetilde Kx\\ge0$ for every $x\\in\\mathbb R^n$, with $n\\ge1$, let $y\\in\\mathbb R^n$, and let $\\tau>0$. Write $I_n$ for the identity matrix. For $G\\in\\{K,\\widetilde K\\}$ define $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$. Define $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$ for vectors and $\\lVert M\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Mx\\rVert_2$ for matrices. If $\\lVert K-\\widetilde K\\rVert_2\\le\\delta$ for some $\\delta\\ge0$, then\n\n$$\\lVert a_K-a_{\\widetilde K}\\rVert_2\\le\\frac{\\delta\\lVert y\\rVert_2}{\\tau^2},\\qquad \\lVert u_K-u_{\\widetilde K}\\rVert_2\\le\\frac{\\delta\\lVert y\\rVert_2}{\\tau}. $$\n\nIn particular, let $S\\in\\mathbb R^{n\\times s}$ with $s\\ge0$ and $\\widetilde K=KS(S^TKS)^\\dagger S^TK$, where $M^\\dagger$ denotes the unique matrix satisfying the four Moore\u2013Penrose equations. Choose $0\\le r\\le n$ and an orthogonal eigenbasis $K=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_n)U^T$ with $U^TU=I_n$ and $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$. Write $U=(U_1\\ U_2)$ with the first $r$ eigenvectors in $U_1$, let $\\Lambda_2=\\operatorname{diag}(\\lambda_{r+1},\\ldots,\\lambda_n)$ and $\\Lambda_2^{1/2}=\\operatorname{diag}(\\sqrt{\\lambda_{r+1}},\\ldots,\\sqrt{\\lambda_n})$, and set $\\Omega_1=U_1^TS$ and $\\Omega_2=U_2^TS$. If $\\Omega_1$ has full row rank, meaning $\\operatorname{rank}(\\Omega_1)=r$, with the empty-row convention when $r=0$, then the same bounds hold with $\\delta=\\lambda_{r+1}+\\lVert\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger\\rVert_2^2$, using $\\lambda_{n+1}=0$ and zero norm for empty blocks.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-sketch-captures-range",
+          "step": "1.1",
+          "claim": "Since $S=I_2$, $KS=K$, hence $\\operatorname{Ran}(KS)=\\operatorname{Ran}(K)$. By [F2], the Nystr\u00f6m matrix equals $K$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identical-shifted-solves",
+          "step": "2.1",
+          "claim": "The shifted matrix is $K+\\tau I_2=\\operatorname{diag}(4+\\tau,1+\\tau)$, so its inverse gives $a_K=((4+\\tau)^{-1}p,(1+\\tau)^{-1}q)^T$ and multiplication by $K$ gives the displayed fitted vector. Step 1.1 makes the same calculations apply to $\\widetilde K$, while [F4] with $\\delta=0$ confirms both errors vanish.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a two-dimensional training Gram matrix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The response may be zero and the equal-Gram conclusion remains exact by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes n=2 and is specifically a two-eigenvalue range-capture calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The displayed K is positive definite; singular capture is not the case illustrated."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example assumes tau>0 and exact full-range capture; the perturbation delta is exactly zero in steps 1.1-2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use explicit two-dimensional matrices and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the concrete diagonal Gram matrix and identity sketch, range capture gives the identical matrix and hence identical fitted vectors. This witness does not claim that equal fitted vectors for one response imply exact range capture.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "For the concrete diagonal Gram matrix and identity sketch, range capture gives the identical matrix and hence identical fitted vectors. This witness does not claim that equal fitted vectors for one response imply exact range capture.",
+            "item_sha256": "f50f5930c25637afac3008f9b1bf17c60eaf2fdfa18a4f77963fd1c39783c786",
+            "row_sha256": "f36886e0e76a919319d0efa3ed20602e933645c58e398859ac2930f17788beed"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the concrete diagonal Gram matrix and identity sketch, range capture gives the identical matrix and hence identical fitted vectors. This witness does not claim that equal fitted vectors for one response imply exact range capture.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "For the concrete diagonal Gram matrix and identity sketch, range capture gives the identical matrix and hence identical fitted vectors. This witness does not claim that equal fitted vectors for one response imply exact range capture.",
+            "item_sha256": "f50f5930c25637afac3008f9b1bf17c60eaf2fdfa18a4f77963fd1c39783c786",
+            "row_sha256": "9132e5843bebc27856b2ff1356b3a26663872bc76e19fe82d5e4f77cb7a300c2"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Read Example, F1\u2013F4 and Verification 1.1\u20132.1 against current definitions and exactness/perturbation suppliers. S=I2 gives Ran(KS)=Ran(K); directly K K^-1 K=K for diag(4,1). Diagonal shifted inverses give coefficients (p/(4+tau),q/(1+tau)) and fit (4p/(4+tau),q/(1+tau)). Both denominators are positive for tau>0; p or q or both may vanish. Delta=0 is admitted by the perturbation theorem, so its two errors are zero. No full-rank inference for a general sketch, probabilistic assertion, or tau=0 endpoint is used. No defect or edit."
+      }
+    },
+    "ex-kernel-ridge-small-regularizer-amplifies-coefficient-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kernel-ridge-gram-perturbation-bound",
+          "source_section": "Statement",
+          "quote": "Let $K,\\widetilde K\\in\\mathbb R^{n\\times n}$ be symmetric matrices such that $x^TKx\\ge0$ and $x^T\\widetilde Kx\\ge0$ for every $x\\in\\mathbb R^n$, with $n\\ge1$, let $y\\in\\mathbb R^n$, and let $\\tau>0$. Write $I_n$ for the identity matrix. For $G\\in\\{K,\\widetilde K\\}$ define $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$. Define $\\lVert x\\rVert_2=(\\sum_i x_i^2)^{1/2}$ for vectors and $\\lVert M\\rVert_2=\\sup_{\\lVert x\\rVert_2=1}\\lVert Mx\\rVert_2$ for matrices. If $\\lVert K-\\widetilde K\\rVert_2\\le\\delta$ for some $\\delta\\ge0$, then\n\n$$\\lVert a_K-a_{\\widetilde K}\\rVert_2\\le\\frac{\\delta\\lVert y\\rVert_2}{\\tau^2},\\qquad \\lVert u_K-u_{\\widetilde K}\\rVert_2\\le\\frac{\\delta\\lVert y\\rVert_2}{\\tau}. $$\n\nIn particular, let $S\\in\\mathbb R^{n\\times s}$ with $s\\ge0$ and $\\widetilde K=KS(S^TKS)^\\dagger S^TK$, where $M^\\dagger$ denotes the unique matrix satisfying the four Moore\u2013Penrose equations. Choose $0\\le r\\le n$ and an orthogonal eigenbasis $K=U\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_n)U^T$ with $U^TU=I_n$ and $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$. Write $U=(U_1\\ U_2)$ with the first $r$ eigenvectors in $U_1$, let $\\Lambda_2=\\operatorname{diag}(\\lambda_{r+1},\\ldots,\\lambda_n)$ and $\\Lambda_2^{1/2}=\\operatorname{diag}(\\sqrt{\\lambda_{r+1}},\\ldots,\\sqrt{\\lambda_n})$, and set $\\Omega_1=U_1^TS$ and $\\Omega_2=U_2^TS$. If $\\Omega_1$ has full row rank, meaning $\\operatorname{rank}(\\Omega_1)=r$, with the empty-row convention when $r=0$, then the same bounds hold with $\\delta=\\lambda_{r+1}+\\lVert\\Lambda_2^{1/2}\\Omega_2\\Omega_1^\\dagger\\rVert_2^2$, using $\\lambda_{n+1}=0$ and zero norm for empty blocks.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scalar-shifted-coefficients",
+          "step": "1.1",
+          "claim": "Both $K$ and $\\widetilde K$ are positive semidefinite, and their spectral-norm difference is $d$. Their shifted systems are the positive scalars $\\tau$ and $d+\\tau$, so [F1] gives $a_K=1/\\tau$ and $a_{\\widetilde K}=1/(d+\\tau)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "diverging-coefficient-error",
+          "step": "2.1",
+          "claim": "Subtraction gives $\\lvert a_K-a_{\\widetilde K}\\rvert=\\left|\\frac1\\tau-\\frac1{d+\\tau}\\right|=\\frac{d}{\\tau(d+\\tau)}$. For $0<\\tau\\le d$, this is at least $1/(2\\tau)$, so it diverges as $\\tau\\downarrow0$. The general upper bound in [F2] is $d/\\tau^2$; it remains a valid scale-sensitive certificate and gives no uniform coefficient bound as $\\tau$ approaches zero.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example has n=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero original Gram matrix K=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly takes n=1 and step 1.1 computes its shifted systems."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses K=0, which is singular, while the positive scalar approximation remains PSD."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves divergence only in the limit tau down to zero; each stated solve assumes tau>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use scalar algebra and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The scalar witness K zero and approximation d positive has coefficient difference d divided by tau times d plus tau, diverging as tau decreases to zero. It illustrates amplification, without asserting every small-regularizer system must diverge.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The scalar witness K zero and approximation d positive has coefficient difference d divided by tau times d plus tau, diverging as tau decreases to zero. It illustrates amplification, without asserting every small-regularizer system must diverge.",
+            "item_sha256": "a5b7965fb09212407dc7fe689a55211ac94b79e8c657128980cdc2b781111bc7",
+            "row_sha256": "12c75ead8b8209826d0d8a65cc517a68ce433f458720d2ba055f938deca9bf98"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The scalar witness K zero and approximation d positive has coefficient difference d divided by tau times d plus tau, diverging as tau decreases to zero. It illustrates amplification, without asserting every small-regularizer system must diverge.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The scalar witness K zero and approximation d positive has coefficient difference d divided by tau times d plus tau, diverging as tau decreases to zero. It illustrates amplification, without asserting every small-regularizer system must diverge.",
+            "item_sha256": "a5b7965fb09212407dc7fe689a55211ac94b79e8c657128980cdc2b781111bc7",
+            "row_sha256": "8bed02bf0bd686f6d41d969429f7ea396a117a59484af4c44ea2e991b6311134"
+          }
+        }
+      ]
+    },
+    "ex-training-gram-does-not-control-test-prediction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces",
+          "source_section": "Definition",
+          "quote": "A **real kernel** on a set $X$ is a function $k:X\\times X\\to\\mathbb R$. It is **positive semidefinite** if it is symmetric and, for every integer $n\\ge1$, every $x_1,\\ldots,x_n\\in X$, and every $c_1,\\ldots,c_n\\in\\mathbb R$,\n\n$$\\sum_{i=1}^n\\sum_{j=1}^n c_i c_j k(x_i,x_j)\\ge0.$$\n\nA **real reproducing kernel Hilbert space with kernel $k$** is a real Hilbert space $\\mathcal H$ of functions $X\\to\\mathbb R$ such that, for each $x\\in X$, the section $k_x:=k(\\cdot,x)$ lies in $\\mathcal H$ and $\\langle f,k_x\\rangle_{\\mathcal H}=f(x)$ for every $f\\in\\mathcal H$. Consequently $\\langle k_z,k_x\\rangle_{\\mathcal H}=k(z,x)=k(x,z)$.\n\nFor the canonical construction, let $E_0$ be the real vector space of finitely supported functions $a:X\\to\\mathbb R$, write $\\delta_x$ for the function supported at $x$ with value $1$, and put\n\n$$B(a,b):=\\sum_{x\\in\\operatorname{supp}(a)}\\sum_{z\\in\\operatorname{supp}(b)}a(x)b(z)k(x,z).$$\n\nLet $N:=\\{a\\in E_0:B(a,a)=0\\}$. Under the Axiom of Countable Choice, the canonical space is formed by giving $E_0/N$ its induced inner product and taking a norm completion; the image of $\\delta_x$ is denoted $k_x$. For an element $h$ of that completion, its associated function is $x\\mapsto\\langle h,k_x\\rangle$. The quotient, completed inner product, and function identification are justified by the local construction theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regularized-kernel-prediction-system",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a set, $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ a real positive-semidefinite kernel, and $\\mathcal H$ a real reproducing-kernel Hilbert space with kernel $k$. Let $X=(x_i)_{i=1}^n$ be a nonempty finite ordered training list in $\\mathcal X$, let $K=(k(x_i,x_j))_{i,j=1}^n$, let $y\\in\\mathbb R^n$, and let $\\lambda>0$. Set $\\tau=n\\lambda$ and define the mean-square empirical objective\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2. $$\n\nFor any finite real symmetric positive-semidefinite matrix $G\\in\\mathbb R^{n\\times n}$, define its regularized kernel prediction system by $a_G=(G+\\tau I_n)^{-1}y$ and $u_G=Ga_G$, where $I_n$ is the $n\\times n$ identity matrix. The original training system uses $G=K$. The same definition applies to any positive-semidefinite matrix approximation $\\widetilde K$ of $K$, with $a_{\\widetilde K}=(\\widetilde K+\\tau I_n)^{-1}y$ and $u_{\\widetilde K}=\\widetilde K a_{\\widetilde K}$. In either case $u_G=y-\\tau a_G$. The scalar $\\tau=n\\lambda$ fixes the normalization between mean-square loss and the unnormalized finite linear system.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-psd-nystrom-approximation",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let $A\\in\\mathbb F^{n\\times n}$ be Hermitian positive semidefinite with $n\\ge1$, and let $S\\in\\mathbb F^{n\\times s}$ with $s\\ge0$ be any finite sketch matrix. Put $W=S^*AS\\in\\mathbb F^{s\\times s}$. The **Nystr\u00f6m approximation** associated with $(A,S)$ is\n$\\widehat A_{\\mathrm{nys}}=AS\\,W^\\dagger S^*A$.\n\nThe Moore-Penrose inverse is defined for every finite matrix, including singular $W$, and is unique by the dependencies. No rank, sampling, or probabilistic condition is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kernel-ridge-system-minimizes-mean-square-rkhs-objective",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a set, let $k:\\mathcal X\\times\\mathcal X\\to\\mathbb R$ be a real positive-semidefinite kernel, and let $\\mathcal H$ be a real reproducing-kernel Hilbert space with kernel $k$. Take a finite ordered list $X=(x_i)_{i=1}^n$ with $n\\ge1$, a response vector $y\\in\\mathbb R^n$, and $\\lambda>0$. Put $K=(k(x_i,x_j))_{i,j=1}^n$ and $\\tau=n\\lambda$. Define $a=(K+\\tau I_n)^{-1}y$, $f_0=\\sum_{i=1}^n a_i k(\\cdot,x_i)$, and $u=Ka$. Then $f_0$ is the unique minimizer over $f\\in\\mathcal H$ of\n\n$$J(f)=\\frac1n\\sum_{i=1}^n(y_i-f(x_i))^2+\\lambda\\lVert f\\rVert_{\\mathcal H}^2,$$\n\nand its training evaluation vector is $u=y-\\tau a$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "two-valid-psd-kernels",
+          "step": "1.1",
+          "claim": "For each $j$, the feature vectors $\\phi_j(x),\\phi_j(z)$ are linearly independent. Hence $v\\mapsto f_v$ is injective, the stated inner product makes $\\mathcal H_j$ a complete two-dimensional real inner-product space, and $k_j(\\cdot,s)=f_{\\phi_j(s)}$ satisfies $\\langle f_v,k_j(\\cdot,s)\\rangle_{\\mathcal H_j}=v^T\\phi_j(s)=f_v(s)$. For any finite list $(t_i)$ in $\\{x,z\\}$ and real coefficients $(c_i)$, $\\sum_{i,j}c_ic_jk_j(t_i,t_j)=\\lVert\\sum_i c_i\\phi_j(t_i)\\rVert_2^2\\ge0$. Thus each $k_j$ is a positive-semidefinite kernel with the displayed Gram matrix and an explicitly specified real RKHS.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "common-training-solution",
+          "step": "2.1",
+          "claim": "For the training list consisting of $x$, both training Gram matrices equal $[1]$. By [F2], both shifted systems give coefficient $1/(1+\\tau)$ and training fitted value $1/(1+\\tau)$. The list length is $n=1$, so setting $\\lambda=\\tau>0$ gives $\\tau=n\\lambda$; the actual RKHSs established in step 1.1 let [F4] identify these coefficients with the unique kernel-ridge minimizers. The exact test predictions are $k_0(z,x)/(1+\\tau)=0$ and $k_1(z,x)/(1+\\tau)=1/(2(1+\\tau))$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-test-predictions",
+          "step": "3.1",
+          "claim": "Since $G_0S=(1,1/10)^T$ and $S^TG_0S=101/100$, [F3] gives the displayed rank-one matrix $\\widetilde K$. Its training entry is $100/101$, so [F2] gives $\\widetilde a=(100/101+1)^{-1}=101/201$ at $\\tau=1$. The approximate test prediction is $(10/101)(101/201)=10/201$; the exact prediction under $G_0$ is zero. The training fitted-value difference is $|1/2-(100/101)(101/201)|=|1/2-100/201|=1/402$, while the test-prediction difference is $10/201$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses two distinct points and a nonempty one-point training list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The kernels allow a zero cross-kernel entry, and step 3.1 computes the resulting zero test prediction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example uses exactly one training point; steps 2.1-3.1 compute its training and test values."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both displayed two-point kernel matrices are positive definite; degeneracy is not needed for the witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For every tau>0 the two test predictions in step 3.1 differ; no tau=0 endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use explicit finite matrices and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Two explicit RKHS feature maps have the same one-point training Gram value but different test cross-kernels and predictions. The Nystr\u00f6m witness likewise separates training and test errors; neither is an equivalence or converse recovery theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Two explicit RKHS feature maps have the same one-point training Gram value but different test cross-kernels and predictions. The Nystr\u00f6m witness likewise separates training and test errors; neither is an equivalence or converse recovery theorem.",
+            "item_sha256": "9a9a4d0a51c6c2eb7b5d62626a02b8f41ca592a5ca7ccee2339ebcdb4ab36e09",
+            "row_sha256": "2b34bfa04aaa7faaa4f4069b3e8dc94bb8c9e28be6b3e0363b2b2711c822d38f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Two explicit RKHS feature maps have the same one-point training Gram value but different test cross-kernels and predictions. The Nystr\u00f6m witness likewise separates training and test errors; neither is an equivalence or converse recovery theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Two explicit RKHS feature maps have the same one-point training Gram value but different test cross-kernels and predictions. The Nystr\u00f6m witness likewise separates training and test errors; neither is an equivalence or converse recovery theorem.",
+            "item_sha256": "9a9a4d0a51c6c2eb7b5d62626a02b8f41ca592a5ca7ccee2339ebcdb4ab36e09",
+            "row_sha256": "ebcb21befa97c3a87548b458b13c73941e066c63b24126ce02e16e8176643295"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-92",
+        "notes": "Read entire Example and Verification 1.1\u20133.1, exact PSD/RKHS Definition, shifted-system, Nystr\u00f6m and minimizer interfaces. For each fixed kernel index, the finite Gram quadratic form is the squared norm of the weighted feature sum. Both feature pairs span R2 (determinants 1 and sqrt(3)/2), giving explicitly complete RKHSs without canonical infinite completion. Training matrices [1] agree; test cross entries 0 and 1/2 yield predictions 0 and 1/(2(1+tau)) for every tau>0. For G0=I2 and S=(1,1/10), S^TS=101/100 gives entries 100/101,10/101,1/101; at tau=1 coefficient=101/201, fit error=1/402, test error=10/201, training Gram error=1/101. Full two-point matrix and one-point training submatrix are distinguished. n=1 uses lambda=tau. No claim of RKHS canonical construction or a test-error bound from training error alone; batch-15 missing-choice construction remains a separate open escalation. No item repair."
+      }
+    }
+  }
+}

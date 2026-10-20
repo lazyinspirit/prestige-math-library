@@ -1,0 +1,2878 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "32",
+  "pair": "relu-approximation-rates-and-depth-expressivity",
+  "scope": [
+    "def-relu-network",
+    "def-relu-linear-region",
+    "lem-univariate-relu-affine-interval-count",
+    "lem-relu-tent-iterate-depth",
+    "lem-relu-square-approximation",
+    "lem-relu-bounded-product-approximation",
+    "lem-sobolev-taylor-grid-approximation",
+    "thm-yarotsky-fixed-architecture-sobolev-approximation-rate",
+    "thm-yarotsky-adaptive-one-dimensional-lipschitz-approximation",
+    "thm-yarotsky-approximation-lower-bounds",
+    "lem-hyperplane-arrangement-region-count",
+    "lem-relu-rank-sensitive-region-recursion",
+    "thm-relu-linear-region-upper-bound",
+    "lem-relu-folding-block",
+    "thm-relu-linear-region-lower-bounds",
+    "lem-bernstein-polynomial-lipschitz-error",
+    "thm-telgarsky-depth-separation-l1",
+    "cex-telgarsky-small-k-large-degree-gate",
+    "ex-relu-tent-map-depth-vs-width",
+    "ex-target-specific-vs-target-independent-approximation",
+    "ex-linear-regions-do-not-guarantee-learning",
+    "thm-borsuk-ulam-general",
+    "thm-warren-polynomial-sign-pattern-bound",
+    "thm-sobolev-continuous-nonlinear-width-lower-bound",
+    "lem-relu-network-vc-dimension-bound",
+    "fs-telgarsky-unrestricted-gate-parameter-separation"
+  ],
+  "contracts": {
+    "def-relu-network": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the scalar input-output case d=r=1 and one hidden layer are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "ReLU feedforward networks and complexity conventions states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "def-relu-linear-region": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions has no separate one parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Connected activation-pattern regions states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-univariate-relu-affine-interval-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Before any hidden layer, the input is affine on $I$. Suppose all values through layer $\\ell-1$ are affine on each of $M$ subintervals. On any one such interval, every preactivation in layer $\\ell$ is affine, and each has at most one zero unless it is identically zero. The at most $n_\\ell$ zeros divide that interval into at most $n_\\ell+1$ subintervals on each of which all ReLU outputs are affine.",
+          "inputs": [
+            "given",
+            "F1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Induction over the hidden layers gives at most $\\prod_{\\ell=1}^H(n_\\ell+1)$ intervals; the affine output adds no breakpoints. For $H\\ge1$, AM\u2013GM gives $\\prod(n_\\ell+1)\\le(1+H^{-1}\\sum n_\\ell)^H=(1+U/H)^H$. With no hidden layer the output is affine on the entire interval.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: H=0 and width-one layers are covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A depth-H univariate ReLU network has a product bound on affine intervals states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-relu-tent-iterate-depth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "On $[0,1/2]$, $\\tau(x)=2x$, and on $[1/2,1]$, $\\tau(x)=2-2x$. Thus $\\tau$ maps each half interval bijectively onto $[0,1]$ with slope magnitude $2$. If $\\tau^q$ has the stated property, each of its dyadic intervals is split at its midpoint by the preimage of $1/2$; composition with $\\tau$ makes two dyadic intervals, each mapped bijectively onto $[0,1]$, with slopes multiplied by $2$. Induction proves the interval and slope claims.",
+          "inputs": [
+            "given",
+            "F1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "A layer with two ReLU units computes $u=\\rho(2v)$ and $w=\\rho(2v-1)$ from the preceding scalar value $v\\in[0,1]$, and the affine output $u-2w$ equals $\\tau(v)$. For each next block substitute the preceding block's affine output expression for $v$ in its two preactivations, so one hidden layer suffices per iterate. Forward each block's affine output to the final affine unit; these skip edges add only $O(q)$ parameters. The network uses $2q$ hidden units and $O(q+1)$ weights; counting input and output gives depth $q+2$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: q=0 is the identity on one interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the end dyadic intervals map onto [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Tent-map iterates and ReLU implementation states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-relu-square-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-tent-iterate-depth",
+          "source_section": "Statement",
+          "quote": "Let $\\rho(z)=\\max\\{0,z\\}$ and define $\\tau(x)=2\\rho(x)-4\\rho(x-1/2)$ for $x\\in[0,1]$. For each integer $q\\ge0$, $\\tau^q$ is affine and maps bijectively onto $[0,1]$ on each of the $2^q$ dyadic intervals $[j2^{-q},(j+1)2^{-q}]$, with slope of magnitude $2^q$. It is computed on $[0,1]$ by a ReLU network with $2q$ hidden units, $q$ hidden layers, and $O(q+1)$ weights; its depth, counting input and output layers, is $q+2$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Let $I_q$ be the linear interpolant of $x^2$ at the dyadic nodes $j2^{-q}$. On each interval of $I_{q-1}$, the difference $I_{q-1}-I_q$ is zero at its endpoints and has height $4^{-q}$ at the midpoint. By [F1], $\\tau^q$ is the unit tent on each such interval, so $I_{q-1}-I_q=4^{-q}\\tau^q$. Since $I_0(x)=x$, telescoping gives $I_m(x)=x-\\sum_{q=1}^m4^{-q}\\tau^q(x)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "On a dyadic interval $[a,b]$ of length $2^{-m}$, linear interpolation of $x^2$ has error $(x-a)(b-x)$, whose maximum is $(b-a)^2/4=4^{-(m+1)}$. Choose $m$ with $4^{-(m+1)}\\le\\delta$. Then $I_m$ approximates $x^2$ within $\\delta$ and $I_m(0)=0$.",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Compute the $m$ iterates in parallel-stage form from [F1] and combine their outputs with the affine sum in step 1.1. The resulting network has $O(m+1)$ units, weights, and depth, and $m\\le C'(1+\\log(1/\\delta))$ by the choice of $m$. Taking $Q_\\delta=I_m$ proves the claim.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the interpolating network satisfies Q_delta(0)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square has no separate one parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: interpolation includes x=0 and x=1, with Q_delta(0)=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Logarithmic-size ReLU approximation of the square states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-relu-bounded-product-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-square-approximation",
+          "source_section": "Statement",
+          "quote": "For every $0<\\delta<1$, there is a ReLU network $Q_\\delta:[0,1]\\to\\mathbb R$ such that $Q_\\delta(0)=0$, $\\|Q_\\delta(x)-x^2\\|_{L^\\infty([0,1])}\\le\\delta$, and the depth, number of weights, and number of computation units are each at most $C(1+\\log(1/\\delta))$ for an absolute constant $C$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Set $\\delta=\\varepsilon/(6M^2)$ and, for $|x|,|y|\\le M$, put $$P_{M,\\varepsilon}(x,y)=2M^2\\left[Q_\\delta\\!\\left(\\frac{|x+y|}{2M}\\right)-Q_\\delta\\!\\left(\\frac{|x|}{2M}\\right)-Q_\\delta\\!\\left(\\frac{|y|}{2M}\\right)\\right].$$ All three arguments lie in $[0,1]$. Replacing $Q_\\delta(u)$ by $u^2$ gives $2M^2[((x+y)^2-x^2-y^2)/(4M^2)]=xy$, so the absolute error is at most $2M^2(3\\delta)=\\varepsilon$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Since $Q_\\delta(0)=0$, substituting $x=0$ makes the first and third terms equal and the second zero; substituting $y=0$ makes the first and second terms equal and the third zero. Thus the network vanishes on both coordinate axes. Absolute value is represented by $|z|=\\rho(z)+\\rho(-z)$, and the three square networks run in parallel followed by an affine combination, so their total depth is $O_M(1+\\log(1/\\varepsilon))$ and their total weights and units are of the same order.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: either zero factor forces exact zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation has no separate one parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: both coordinate axes are exact-zero cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Correctly scaled bounded product approximation states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-sobolev-taylor-grid-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-w-one-infinity-functions-have-lipschitz-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^n$ be open, bounded and convex. If $u\\in W^{1,\\infty}(\\Omega;\\mathbb K)$, then $u$ has a representative $u^{*}$ with\n$$|u^{*}(x)-u^{*}(y)|\\le\\|Du\\|_{L^\\infty(\\Omega)}\\,|x-y|\\qquad(x,y\\in\\Omega),$$\nand $u^{*}=u$ almost everywhere on $\\Omega$. Conversely, every Lipschitz function $f:\\Omega\\to\\mathbb K$ with constant $L$ lies in $W^{1,\\infty}(\\Omega)$ and $\\|Df\\|_{L^\\infty(\\Omega)}\\le L$ for real scalars, while $\\|Df\\|_{L^\\infty(\\Omega)}\\le\\sqrt2 L$ for complex scalars. In both cases the real-linear derivative has operator norm at most $L$ almost everywhere.\n\n**Gradient convention.** For a weak gradient $Dv=(D_1v,\\ldots,D_nv)$ we write $|Dv|=(\\sum_{i=1}^n|D_iv|^2)^{1/2}$ for its Euclidean norm and $\\|Dv\\|_{L^\\infty(\\Omega)}:=\\||Dv|\\|_{L^\\infty(\\Omega)}$ for the essential supremum of that norm, as in [[lem-pointwise-potential-bound-for-compactly-supported-smooth-functions]]. For real scalars this norm equals the derivative operator norm. For complex scalars it is the Frobenius norm of the real-linear map $\\mathbb R^n\\to\\mathbb R^2$ and can exceed its operator norm: $f(x)=x_1+ix_2$ is $1$-Lipschitz but $|Df|=\\sqrt2$. If $\\Omega=\\varnothing$ both assertions hold vacuously.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-smooth-approximation-in-wkp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $k\\in\\mathbb N_0$, $1\\le p<\\infty$ and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$u\\in W^{k,p}(\\Omega;\\mathbb K)$. Fix a nonnegative\n$\\rho\\in C_c^\\infty(\\mathbb R^n)$ of unit mass with\n$\\operatorname{supp}\\rho\\subseteq\\overline B_1(0)$, put\n$\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$, and define the\ninterior mollification\n$$u_\\varepsilon(x)=(\\rho_\\varepsilon*\\widetilde u)(x)=\\int_{\\mathbb R^n}\\widetilde u(y)\\,\\rho_\\varepsilon(x-y)\\,dy,$$\nwhere $\\widetilde u$ is a representative of $u$ extended by zero to\n$\\mathbb R^n$. Then $u_\\varepsilon\\to u$ in $W^{k,p}(U;\\mathbb K)$ for every\nopen $U\\subset\\subset\\Omega$; equivalently $u_\\varepsilon\\to u$ in\n$W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$. The exponent $p=1$ is included, and\nno assertion about density or convergence in the $W^{k,\\infty}$ norm is made.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, let $u\\in W^{k,p}(\\Omega;\\mathbb K)$ with $k\\in\\mathbb N_0$,\n$1\\le p\\le\\infty$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let\n$\\rho\\in C_c^\\infty(\\mathbb R^n)$ be nonnegative with\n$\\int_{\\mathbb R^n}\\rho=1$ and $\\operatorname{supp}\\rho\\subseteq\\overline B_1(0)$.\nFor $\\varepsilon>0$ put $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$\nand\n$$\\Omega_\\varepsilon=\\{x\\in\\Omega:\\operatorname{dist}(x,\\mathbb R^n\\setminus\\Omega)>\\varepsilon\\},\\qquad\\Omega_\\varepsilon=\\mathbb R^n\\ \\text{when }\\Omega=\\mathbb R^n .$$\nThen $\\rho_\\varepsilon*u$ is defined and smooth on $\\Omega_\\varepsilon$, and\nfor every multi-index $\\alpha$ with $|\\alpha|\\le k$,\n$$D^\\alpha(\\rho_\\varepsilon*u)=\\rho_\\varepsilon*(D^\\alpha u)\\qquad\\text{on }\\Omega_\\varepsilon,$$\nas pointwise smooth functions for the constructed representatives and as\nalmost-everywhere classes. Here $D^\\alpha u$ is extended by zero off $\\Omega$\nin the convolution.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For each $|\\alpha|<n$, $D^\\alpha f\\in W^{1,\\infty}(Q)$ by [F1], since its first weak derivatives are among the derivatives of $f$ of order at most $n$. By [F1], choose their Lipschitz representatives; their Lipschitz constants are at most $\\sqrt d$, because each coordinate weak derivative has essential supremum at most $1$. Since $Q$ has finite measure and all derivatives of order at most $n-1$ are essentially bounded, the same weak-derivative identities give $f\\in W^{n-1,1}(Q)$. By [A1] and [F2], Countable Choice holds, and the interior mollification theorem applies with $k=n-1$ and $p=1$. For every compact segment in $Q$, convolution of each Lipschitz representative differs from it uniformly by at most $\\sqrt d$ times the mollifier radius, so the mollified derivatives through order $n-1$ converge uniformly there.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For an interior grid center $a_m$ and interior $x$, choose the mollifier radius smaller than the distance from their segment to $\\partial Q$. By [F3], $D^\\alpha f_\\delta=\\rho_\\delta*D^\\alpha f$ on that segment; nonnegativity and unit mass of $\\rho_\\delta$ imply $|D^\\alpha f_\\delta|\\le\\|D^\\alpha f\\|_\\infty\\le1$ for $|\\alpha|=n$. The one-variable Taylor formula applied to $t\\mapsto f_\\delta(a_m+t(x-a_m))$ therefore gives remainder at most $\\frac1{n!}\\sup_t|\\frac{d^n}{dt^n}f_\\delta(a_m+t(x-a_m))|\\le C(d,n)\\|x-a_m\\|_\\infty^n$, since $\\sum_i|x_i-a_{m,i}|\\le d\\|x-a_m\\|_\\infty$. Passing to the uniform limits from step 1.1 proves the estimate for interior points. Approximate any boundary grid center and any boundary input by interior points; the Lipschitz extensions of all coefficients and the finite Taylor polynomial are continuous, so the same estimate holds on the closed cube.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The one-dimensional hats sum to $1$ on each grid interval, so their tensor products satisfy $\\sum_m\\phi_m=1$ on the cube; at most $2^d$ are nonzero at any point, and each nonzero term has $\\|x-a_m\\|_\\infty\\le1/N$. Therefore $|f(x)-g_N(x)|\\le\\sum_{m:\\phi_m(x)>0}\\phi_m(x)C(d,n)N^{-n}=C(d,n)N^{-n}$. Each $u_\\alpha$ and each hat is continuous on the closed cube, so the finite sum $g_N$ extends continuously there.",
+          "inputs": [
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Local Taylor approximation on a Sobolev grid has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Local Taylor approximation on a Sobolev grid has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: d=n=1 and N=2 are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Local Taylor approximation on a Sobolev grid has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the finite sum extends continuously to the closed cube."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Local Taylor approximation on a Sobolev grid states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Local Taylor approximation on a Sobolev grid states no biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC supplies the Lipschitz representative and implies Countable Choice for the interior-mollification supplier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-yarotsky-fixed-architecture-sobolev-approximation-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-sobolev-taylor-grid-approximation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d,n\\ge1$, let $Q=(0,1)^d$, and let $f\\in W^{n,\\infty}(Q;\\mathbb R)$ have Sobolev norm at most $1$ using the maximum over weak derivatives of order at most $n$. For every integer $N\\ge2$, take the tensor grid $a_m=m/N$, $m\\in\\{0,\\ldots,N\\}^d$, and the partition-of-unity hats $\\phi_m(x)=\\prod_{i=1}^d(1-N|x_i-m_i/N|)_+$. Use the Lipschitz representatives of $D^\\alpha f$ for $|\\alpha|<n$ to define $T_mf(x)=\\sum_{|\\alpha|<n}D^\\alpha f(a_m)(x-a_m)^\\alpha/\\alpha!$. Then $g_N=\\sum_m\\phi_mT_mf$ extends continuously to $[0,1]^d$ and satisfies $\\|f-g_N\\|_{L^\\infty(Q)}\\le C(d,n)N^{-n}$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-relu-bounded-product-approximation",
+          "source_section": "Statement",
+          "quote": "Fix $M>0$. For every $0<\\varepsilon<M^2$, there is a ReLU network $P_{M,\\varepsilon}$ on $[-M,M]^2$ that satisfies $|P_{M,\\varepsilon}(x,y)-xy|\\le\\varepsilon$ and $P_{M,\\varepsilon}(x,0)=P_{M,\\varepsilon}(0,y)=0$. Its depth, number of weights, and number of computation units are at most $C_M(1+\\log(1/\\varepsilon))$, where $C_M$ depends only on $M$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Choose an integer $N\\ge2$ with $C(d,n)N^{-n}\\le\\varepsilon/2$ and form $g_N$ from [F1]. Then $N\\le C'(d,n)\\varepsilon^{-1/n}$, so the number of grid centers is $(N+1)^d=O_{d,n}(\\varepsilon^{-d/n})$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "For each center $a_m$, write its Taylor polynomial as a finite sum of monomials in the scaled variables $z_i=N(x_i-a_{m,i})$, multiplied by coefficients $D^\\alpha f(a_m)N^{-|\\alpha|}/\\alpha!$. On the support of $\\phi_m$, $|z_i|\\le1$, and all coefficients are bounded by a constant depending only on $d,n$. The hat $\\phi_m$ is the product of $d$ one-dimensional ReLU hats, since $|z|=\\rho(z)+\\rho(-z)$ and $u_+=\\rho(u)$. There are only a number depending on $d,n$ of products and summands. Choose the error of each product operation to be $\\eta/C(d,n)$; inductively, multiplying by a factor of magnitude at most $1$ adds at most that error to the previous product error, and summing the finitely many terms multiplies it by at most another $C(d,n)$. Thus the monomial sum and then its product with the hat have term error at most $\\eta$. Every intermediate input stays in a fixed bounded interval depending only on $d,n$, and the final product is exactly zero whenever any hat factor vanishes, by [F2]. The resulting subnetwork has $O_{d,n}(1+\\log(1/\\eta))$ weights, units, and depth.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "At any $x$, at most $2^d$ of the exact hats are nonzero by [F1], and the constructed approximate term is zero outside the same support. Thus summing all local subnetworks gives a network $\\Phi_f$ with $\\|g_N-\\Phi_f\\|_\\infty\\le2^d\\eta$. Choose $\\eta=\\varepsilon/2^{d+1}$. Then the triangle inequality and step 1.1 give $\\|f-\\Phi_f\\|_\\infty\\le\\varepsilon$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The local polynomial degree and number of terms depend only on $d,n$, while the grid size depends only on $N$. All local subnetworks have depth $O_{d,n}(1+\\log(1/\\eta))$ and size of the same order; they run in parallel and their outputs are summed affinely. Hence the total depth is $O_{d,n}(1+\\log(1/\\varepsilon))$ and the total weights and units are $O_{d,n}(N^d(1+\\log(1/\\varepsilon)))=O_{d,n}(\\varepsilon^{-d/n}(1+\\log(1/\\varepsilon)))$. The edge pattern depends on $N,d,n,\\varepsilon$ but not on $f$; only Taylor coefficients and output weights depend on $f$.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: d=n=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Target-independent ReLU rate on the unit Sobolev ball states no biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is stated in the theorem and is required by the Sobolev Taylor-grid supplier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-yarotsky-adaptive-one-dimensional-lipschitz-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-w-one-infinity-functions-have-lipschitz-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge1$ and let $\\Omega\\subseteq\\mathbb R^n$ be open, bounded and convex. If $u\\in W^{1,\\infty}(\\Omega;\\mathbb K)$, then $u$ has a representative $u^{*}$ with\n$$|u^{*}(x)-u^{*}(y)|\\le\\|Du\\|_{L^\\infty(\\Omega)}\\,|x-y|\\qquad(x,y\\in\\Omega),$$\nand $u^{*}=u$ almost everywhere on $\\Omega$. Conversely, every Lipschitz function $f:\\Omega\\to\\mathbb K$ with constant $L$ lies in $W^{1,\\infty}(\\Omega)$ and $\\|Df\\|_{L^\\infty(\\Omega)}\\le L$ for real scalars, while $\\|Df\\|_{L^\\infty(\\Omega)}\\le\\sqrt2 L$ for complex scalars. In both cases the real-linear derivative has operator norm at most $L$ almost everywhere.\n\n**Gradient convention.** For a weak gradient $Dv=(D_1v,\\ldots,D_nv)$ we write $|Dv|=(\\sum_{i=1}^n|D_iv|^2)^{1/2}$ for its Euclidean norm and $\\|Dv\\|_{L^\\infty(\\Omega)}:=\\||Dv|\\|_{L^\\infty(\\Omega)}$ for the essential supremum of that norm, as in [[lem-pointwise-potential-bound-for-compactly-supported-smooth-functions]]. For real scalars this norm equals the derivative operator norm. For complex scalars it is the Frobenius norm of the real-linear map $\\mathbb R^n\\to\\mathbb R^2$ and can exceed its operator norm: $f(x)=x_1+ix_2$ is $1$-Lipschitz but $|Df|=\\sqrt2$. If $\\Omega=\\varnothing$ both assertions hold vacuously.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "source_section": "Statement",
+          "quote": "In ZF, assume the Axiom of Choice. Then the Axiom of Countable Choice holds.\nMoreover, if $R\\subseteq X\\times X$ is a serial relation on a nonempty set\n$X$ and $a\\in X$, there is a sequence $(x_n)_{n\\in\\mathbb N}$ such that\n$x_0=a$ and $x_nRx_{n+1}$ for every $n$. Thus AC supplies the\nprescribed-initial-point form of Dependent Choice.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [A1] and [F2], the Countable Choice convention in [F1] holds. Choose the Lipschitz representative on $(0,1)$ and extend it uniquely to $[0,1]$: values along any sequence approaching an endpoint are Cauchy and any two such limits agree by the Lipschitz bound. The continuous representative satisfies $|f|\\le1$ everywhere, since any interior value with modulus greater than $1$ would by continuity violate the almost-everywhere bound on an interval of positive measure. Let $T\\ge1$ be an integer and let $f_1$ linearly interpolate $f$ at $t/T$, $0\\le t\\le T$. Then $f_1$ is $1$-Lipschitz, and $f_2=f-f_1$ vanishes at every grid endpoint and is $2$-Lipschitz. Indeed, both summands are $1$-Lipschitz.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Let $m\\ge1$ and let $\\Gamma$ be the set of piecewise-linear functions on the grid $r/m$, $0\\le r\\le m$, with endpoint values zero and successive increments in $\\{-2/m,0,2/m\\}$. Thus $|\\Gamma|\\le3^m$. For each coarse interval $I_t=[t/T,(t+1)/T)$, rescale $g_t(y)=Tf_2((t+y)/T)$. This function is $2$-Lipschitz and vanishes at both endpoints. Quantize each node value down to the nearest multiple of $2/m$; adjacent quantized values differ by one of the three allowed increments. At a fraction $\\theta$ of a grid subinterval, a $2$-Lipschitz function differs from its endpoint chord by at most $4\\theta(1-\\theta)/m\\le1/m$; quantizing both endpoint values changes that chord by at most $2/m$. Hence some $\\gamma_t\\in\\Gamma$ satisfies $\\sup_{x\\in I_t}|f_2(x)-T^{-1}\\gamma_t(Tx-t)|\\le3/(Tm)$.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Define the discontinuous selector $\\chi(z)=z$ for $0\\le z<1$ and $0$ otherwise. For $x\\in[0,1)$, exactly the index $t$ with $x\\in I_t$ has $\\chi(Tx-t)=Tx-t$; all other terms vanish. Therefore $$\\widetilde f_2(x)=\\frac1T\\sum_{\\gamma\\in\\Gamma}\\gamma\\!\\left(\\sum_{t:\\gamma_t=\\gamma}\\chi(Tx-t)\\right)$$ equals the local interpolant $T^{-1}\\gamma_t(Tx-t)$ and has error at most $3/(Tm)$. If $s_{\\gamma,r}$ is the slope of $\\gamma$ on $[r/m,(r+1)/m]$, then its zero value at $0$ gives $$\\gamma(z)=s_{\\gamma,0}\\rho(z)+\\sum_{r=1}^{m-1}(s_{\\gamma,r}-s_{\\gamma,r-1})\\rho(z-r/m),\\qquad 0\\le z\\le1,$$ by matching the initial slope and each slope jump. This uses $m$ ReLU hinges. The cache is a depth-five mixed-gate network with $O(T+m3^m)$ units and weights: $T$ selector units, at most $3^m$ grouped sums, $m3^m$ ReLU hinge units, and an affine output. For the coarse interpolant, set $s_t=T(f((t+1)/T)-f(t/T))$ for $0\\le t<T$; then $$f_1(x)=f(0)+s_0\\rho(x)+\\sum_{t=1}^{T-1}(s_t-s_{t-1})\\rho(x-t/T)$$ on $[0,1]$. This slope-jump identity has $T$ ReLU units and one affine output, so $f_1$ is a depth-three ReLU network of size $O(T)$.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Replace each discontinuous selector by $$\\chi_\\delta(z)=\\rho(z)-\\delta^{-1}\\rho(z-(1-\\delta))+(\\delta^{-1}-1)\\rho(z-1).$$ This continuous piecewise-linear function agrees with $\\chi$ on $[0,1-\\delta]$, decreases linearly to zero on $[1-\\delta,1]$, and is zero outside $[0,1]$. Let $\\varphi_\\delta$ be the piecewise-linear tent that is zero outside $[0,1-\\delta]$, rises from $0$ to $1$ on $[0,\\delta]$, equals $1$ on $[\\delta,1-2\\delta]$, and falls to $0$ on $[1-2\\delta,1-\\delta]$. Its four slope jumps give a representation by at most four ReLU hinges as in step 3.1. Put $\\Phi_\\delta(x)=\\sum_{t=0}^{T-1}\\varphi_\\delta(Tx-t)$; this comb is a ReLU spline with $O(T)$ units and weights. Replacing the $T$ selectors by three ReLU units each and adding the comb keeps the cache size $O(T+m3^m)$ independently of $\\delta$.",
+          "inputs": [
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "Let $\\widetilde f_{2,\\delta}$ be the cache network using $\\chi_\\delta$, and set $$f_{2,\\delta}(x)=\\rho(\\widetilde f_{2,\\delta}(x)+2\\Phi_\\delta(x)-1)-\\rho(2\\Phi_\\delta(x)-1).$$ At most one selector is nonzero at any $x$, its value lies in $[0,1]$, and each rescaled $\\gamma_t$ vanishes at both endpoints and is $2$-Lipschitz; hence $|\\widetilde f_{2,\\delta}(x)|\\le1$. On each plateau where $\\Phi_\\delta=1$, the selector is unchanged and the gate outputs the cache. Where $\\Phi_\\delta=0$, the two ReLU terms cancel. On the transition strips $y\\in[0,\\delta]$ or $y\\in[1-2\\delta,1-\\delta]$ in a coarse coordinate $y=Tx-t$, $\\chi_\\delta(y)=\\chi(y)$, so the cache equals the continuous piecewise-linear spline $\\widetilde f_2$ from step 3.1. For $0\\le p\\le1$, the map $a\\mapsto\\rho(a+2p-1)-\\rho(2p-1)$ is $1$-Lipschitz and vanishes at $a=0$, hence its output has modulus at most $|a|$. Every point where $0<\\Phi_\\delta<1$ is within $2\\delta/T$ of a coarse endpoint; both $f_2$ and $\\widetilde f_2$ vanish there and are $2$-Lipschitz, so on those strips $|f_2-f_{2,\\delta}|\\le8\\delta/T$. Where $\\Phi_\\delta=0$, $f_{2,\\delta}=0$ and $|f_2|\\le4\\delta/T$, which is also within this bound. On plateaus the quantization error is at most $3/(Tm)$ by step 2.1. Thus $$\\|f_2-f_{2,\\delta}\\|_\\infty\\le 8\\delta/T+3/(Tm).$$ The two final ReLU preactivations absorb the former affine cache output, followed by a shared affine output, so depth increases from five to six; complexity remains $O(T+m3^m)$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "step": "6.1",
+          "claim": "Choose $m=\\lceil\\tfrac12\\log_3(1/\\varepsilon)\\rceil$, $T=\\lceil6/(m\\varepsilon)\\rceil$, and $0<\\delta\\le\\min\\{1/4,\\varepsilon T/16\\}$. Then both error terms in step 5.1 are at most $\\varepsilon/2$, while $T+m3^m\\le C/[\\varepsilon\\log(1/\\varepsilon)]$: here $T=O(1/(\\varepsilon m))$, $3^m=O(\\varepsilon^{-1/2})$, and $m\\varepsilon^{-1/2}=O(1/(\\varepsilon m))$ because $\\varepsilon^{1/2}(\\log(1/\\varepsilon))^2$ is bounded on $(0,1/2)$. The sum $f_1+f_{2,\\delta}$ is the required ReLU approximation.",
+          "inputs": [
+            "step 3.1",
+            "step 5.1",
+            "algebra",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Target-dependent depth-six approximation of Lipschitz functions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Target-dependent depth-six approximation of Lipschitz functions has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the one-dimensional unit ball is the full stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Target-dependent depth-six approximation of Lipschitz functions has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof steps 1.1\u20135.1: the representative and residual construction include both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the displayed Sobolev representative convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Target-dependent depth-six approximation of Lipschitz functions states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Target-dependent depth-six approximation of Lipschitz functions states no biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC supplies the Lipschitz representative used to interpolate each Sobolev class."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-yarotsky-approximation-lower-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-univariate-relu-affine-interval-count",
+          "source_section": "Statement",
+          "quote": "Let a scalar-input ReLU network have $H\\ge0$ hidden layers of widths $n_1,\\ldots,n_H$ and an affine output. On any interval, its output is affine on at most $\\prod_{\\ell=1}^H(n_\\ell+1)$ subintervals. In particular, if it has $U=\\sum_\\ell n_\\ell$ hidden units, the number of affine intervals is at most $(1+U/H)^H$ for $H\\ge1$, and is $1$ when $H=0$.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sobolev-continuous-nonlinear-width-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d,n\\ge1$ be integers, $Q=[0,1]^d$, and let $F_{d,n}\\subset C(Q;\\mathbb R)$ consist of the continuous functions whose restrictions represent members of $W^{n,\\infty}((0,1)^d)$ satisfying\n$$\\max_{|\\alpha|\\le n}\\|D^\\alpha f\\|_{L^\\infty((0,1)^d)}\\le1.$$\nThere exists $c_{d,n}>0$ such that, for every integer $W\\ge1$, every map $\\eta:\\mathbb R^W\\to C(Q;\\mathbb R)$, and every map $M:F_{d,n}\\to\\mathbb R^W$ continuous for the uniform norm on $F_{d,n}$,\n$$\\sup_{f\\in F_{d,n}}\\|f-\\eta(M(f))\\|_\\infty\\ge c_{d,n}(W+1)^{-n/d}.$$\nNo continuity or measurability assumption is imposed on $\\eta$. In particular, if this supremum is at most $\\varepsilon>0$, then $W\\ge C_{d,n}\\varepsilon^{-d/n}$ for some $C_{d,n}>0$ depending only on $d,n$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-relu-network-vc-dimension-bound",
+          "source_section": "Statement",
+          "quote": "Fix a scalar-output ReLU feedforward architecture on $[0,1]^d$, permitting skip edges, with $W\\ge1$ scalar connection coefficients and unit biases, and depth at most $L$. Fix a real threshold $a$. For its realizations $f_\\theta$, let $\\mathcal H_a=\\{\\{x:f_\\theta(x)>a\\}:\\theta\\in\\mathbb R^W\\}$. There is an absolute constant $C$ such that $\\operatorname{VC}(\\mathcal H_a)\\le CW^2$ and $\\operatorname{VC}(\\mathcal H_a)\\le CW L\\log(2W)$. In particular, for $W\\ge2$ the bound $\\operatorname{VC}(\\mathcal H_a)\\le C L^2W\\log W$ holds. The same assertions hold for $f_\\theta(x)\\ge a$. The parameter count includes every hidden and output bias, even when its chosen value is zero.\n\n",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [F2], the hypotheses of clause (i) imply $\\varepsilon\\ge c_{d,n}(W+1)^{-n/d}$. Since $W\\ge1$, we have $W+1\\le2W$, hence $W\\ge\\tfrac12 c_{d,n}^{d/n}\\varepsilon^{-d/n}$. The decoder needs no continuity; exactly the selector topology in the statement is used.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "For clause (ii), write $p(t)=(4t(1-t))^{n+1}$ on $[0,1]$, extended by zero, and $\\psi(x)=\\prod_{r=1}^d p(x_r)$. The polynomial has endpoint zeros of order $n+1$, so its zero extension is $C^n$. Put $B=\\max_{|\\alpha|\\le n}\\|D^\\alpha\\psi\\|_\\infty\\ge1$. Partition the cube into $K^d$ cubes of side $1/K$, with lower vertices $v_j$, and define $\\phi_j(x)=B^{-1}K^{-n}\\psi(K(x-v_j))$. All derivatives through order $n$ vanish at support boundaries, so the weak derivatives of these finite sums are their classical derivatives, as follows by integration by parts with zero boundary terms. Disjoint support interiors imply that every $f_\\sigma=\\sum_{j=1}^{K^d}\\sigma_j\\phi_j$, $\\sigma_j\\in\\{-1,1\\}$, belongs to $F_{d,n}$, since $\\|D^\\alpha f_\\sigma\\|_\\infty\\le K^{|\\alpha|-n}\\le1$ for $|\\alpha|\\le n$. At the center $x_j$ of cube $j$, $f_\\sigma(x_j)=\\sigma_jB^{-1}K^{-n}$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "For clause (iii), nonlinearity of $f$ implies that its Hessian is nonzero at an interior point; otherwise all first derivatives are constant on the connected cube and $f$ is affine. A symmetric nonzero Hessian has a direction with nonzero second directional derivative. By continuity choose a short interior segment and parameterize it by $t\\in[0,1]$, so $g(t)=f(a+tv)$ has either $g''\\ge c_0>0$ throughout or $g''\\le-c_0<0$ throughout. The approximating network restricts to a scalar-input network of at most the same depth and unit count.",
+          "inputs": [
+            "given",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For sufficiently small $\\varepsilon>0$, choose $K=\\lfloor(1/(4B\\varepsilon))^{1/n}\\rfloor\\ge\\tfrac12(1/(4B\\varepsilon))^{1/n}$. Then the center amplitude $B^{-1}K^{-n}$ is at least $4\\varepsilon$. Every approximant to $f_\\sigma$ within $\\varepsilon$ has positive output at centers with $\\sigma_j=1$ and negative output at centers with $\\sigma_j=-1$. Thus the threshold classifiers from the one fixed architecture shatter these $K^d\\ge c_{d,n}\\varepsilon^{-d/n}$ centers.",
+          "inputs": [
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Combining step 2.1 with the first bound in [F3] gives $c_{d,n}\\varepsilon^{-d/n}\\le CW^2$, hence $W\\ge c\\varepsilon^{-d/(2n)}$. Shrinking the constant covers the remaining non-small accuracies, because any scalar-output architecture has $W\\ge1$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "If $L\\le c_1(\\log(1/\\varepsilon))^p$, the second bound in [F3] gives $c_{d,n}\\varepsilon^{-d/n}\\le Cc_1^2W(\\log(1/\\varepsilon))^{2p}\\log(2W)$. For sufficiently small $\\varepsilon$, if $W\\ge\\varepsilon^{-d/n}$ the desired conclusion follows directly since $\\log(1/\\varepsilon)\\ge1$. Otherwise $\\log(2W)\\le\\log2+(d/n)\\log(1/\\varepsilon)\\le C_{d,n}\\log(1/\\varepsilon)$, and rearrangement gives $W\\ge c_2\\varepsilon^{-d/n}(\\log(1/\\varepsilon))^{-2p-1}$. No assumption on continuity of the targetwise weight choices was made in either shattering argument.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Write $H=L-2$ and let $U$ be its hidden unit count. Pad missing layers by empty layers if necessary. By [F1] and AM\u2013GM, the restricted network has at most $M\\le\\prod_{\\ell=1}^{H}(n_\\ell+1)\\le(1+U/H)^H$ affine intervals. One has length $h\\ge1/M$. On this interval the network output $r$ is affine. If $g''\\ge c_0$, midpoint convexity applied to $g(t)-c_0t^2/2$ gives $g(a)+g(b)-2g((a+b)/2)\\ge c_0h^2/4$; in the other case apply this to $-g$. The affine second difference of $r$ is zero; the three uniform errors bound the absolute second difference of $g$ by $4\\varepsilon$. Thus $\\varepsilon\\ge c_0/(16M^2)$. Rearranging gives $U\\ge c(f,L)\\varepsilon^{-1/(2H)}$ for small $\\varepsilon$. Each hidden unit has a counted bias parameter, so the number of weights is at least $U$, proving clause (iii). AC and its countable-choice consequence are inherited through the stated Sobolev representative and width suppliers; the finite sign and segment constructions require no additional choice.",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement has nonempty unit ball and cube; n,d,W\u22651."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; proof argument includes derivatives and summands equal to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; proof argument include d=n=W=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; proof argument excludes affine target explicitly; proof argument pads absent hidden layers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; proof argument verifies weak-derivative matching at cube boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; Statement assumes AC; proof argument records inherited supplier use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [
+        "def-axiom-of-choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "lem-hyperplane-arrangement-region-count": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Let $R(m,d)$ be the largest possible number of complementary regions. With no hyperplanes or in dimension zero, $R(0,d)=R(m,0)=1$. Adding the last hyperplane $H$ splits only old regions that meet $H$; each old region is convex, so its intersection with $H$ contributes at most one region of the arrangement induced on $H\\cong\\mathbb R^{d-1}$. Hence $R(m,d)\\le R(m-1,d)+R(m-1,d-1)$.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Induction on $m+d$ and Pascal's identity give $R(m,d)\\le\\sum_{j=0}^d\\binom{m-1}{j}+\\sum_{j=0}^{d-1}\\binom{m-1}{j}=\\sum_{j=0}^{d}\\binom mj$. If the arrangement is in general position, its restriction to $H$ is also in general position and has $m-1$ hyperplanes in dimension $d-1$; every one of its regions lies in one old region and cuts that region into two, so the recurrence is equality. Such arrangements exist: choose distinct $t_1,\\ldots,t_m$ and use $H_i:\\sum_{k=1}^d t_i^{k-1}x_k=t_i^d$. Any $q\\le d$ normals are independent by the Vandermonde determinant, while no $d+1$ equations have a common solution because their augmented Vandermonde matrix is invertible. The same induction gives the claimed exact sum.",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Hyperplane arrangement upper count and general-position count has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: m=0 is included and gives one region."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: dimension d=1 and m=0 are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Hyperplane arrangement upper count and general-position count has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: the ambient affine space is counted in full, with no boundary truncation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Hyperplane arrangement upper count and general-position count uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Hyperplane arrangement upper count and general-position count states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Hyperplane arrangement upper count and general-position count states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-relu-rank-sensitive-region-recursion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hyperplane-arrangement-region-count",
+          "source_section": "Statement",
+          "quote": "For integers $m\\ge0$ and $d\\ge1$, the complement of any $m$ affine hyperplanes in $\\mathbb R^d$ has at most $\\sum_{j=0}^{d}\\binom mj$ connected components, with $\\binom mj=0$ for $j>m$. If the hyperplanes are in general position, meaning every $q\\le d$ of them meet in codimension $q$ and no $d+1$ have a common point, the number of components is exactly this sum; such arrangements exist for every $m,d$. On a zero-dimensional affine image there is at most one full-dimensional activation cell.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "On the current affine image, the $n_\\ell$ preactivations are affine functions, so [F1] bounds the number of full-dimensional sign cells by $S=\\sum_{j=0}^{\\min(r,n_\\ell)}\\binom{n_\\ell}{j}$. A sign cell has an active subset $A\\subseteq\\{1,\\ldots,n_\\ell\\}$. By [F2], its output is the diagonal projection of the affine layer output that keeps coordinates in $A$ and sets the others to zero; its next affine image therefore has dimension at most $\\min(r,|A|)$. Each subset labels at most one cell because its strict sign constraints are affine half-spaces on the current image.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Backward induction in the displayed recurrence shows that $R_{\\ell+1}(s)$ is nondecreasing in $s$: increasing $s$ adds nonnegative terms and does not decrease any argument. Therefore, among at most $S$ distinct active subsets its sum is maximized by choosing the $S$ subsets of largest cardinality. Those can be taken to have sizes $n_\\ell-j$ with multiplicities $\\binom{n_\\ell}{j}$ for $0\\le j\\le\\min(r,n_\\ell)$; their total number is exactly $S$. The associated next dimensions are at most $\\min(r,n_\\ell-j)$, giving the displayed recurrence. Induction backward from $R_{L+1}=1$ proves the claim.",
+          "inputs": [
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: affine image dimension r=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions has no separate one parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive layer recursion for ReLU regions states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-relu-linear-region-upper-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-rank-sensitive-region-recursion",
+          "source_section": "Statement",
+          "quote": "Let $n_0,L,n_1,\\ldots,n_L\\ge1$ be integers, consider a layered ReLU network of input dimension $n_0$ and hidden widths $n_1,\\ldots,n_L$, and let $r\\in\\mathbb N_0$. Set $R_{L+1}(r)=1$ and, for $1\\le\\ell\\le L$, define $$R_\\ell(r)=\\sum_{j=0}^{\\min(r,n_\\ell)}\\binom{n_\\ell}{j}R_{\\ell+1}\\!\\left(\\min\\{r,n_\\ell-j\\}\\right).$$ After layers $\\ell,\\ldots,L$, any activation cell whose current affine image has dimension at most $r$ produces at most $R_\\ell(r)$ activation cells.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hyperplane-arrangement-region-count",
+          "source_section": "Statement",
+          "quote": "For integers $m\\ge0$ and $d\\ge1$, the complement of any $m$ affine hyperplanes in $\\mathbb R^d$ has at most $\\sum_{j=0}^{d}\\binom mj$ connected components, with $\\binom mj=0$ for $j>m$. If the hyperplanes are in general position, meaning every $q\\le d$ of them meet in codimension $q$ and no $d+1$ have a common point, the number of components is exactly this sum; such arrangements exist for every $m,d$. On a zero-dimensional affine image there is at most one full-dimensional activation cell.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Expand [F1]'s recurrence successively for $\\ell=1,\\ldots,L$. At layer $\\ell$, the prior choices have reduced the available affine dimension to at most $\\min(n_0,n_1-j_1,\\ldots,n_{\\ell-1}-j_{\\ell-1})$, so the allowed next indices are exactly those in $J$. Each term contributes the factor $\\binom{n_\\ell}{j_\\ell}$, and the terminal continuation is $1$. This gives the displayed sum.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If $L=1$, the first layer is an arrangement of $n_1$ affine hyperplanes in the input space. By [F2], a general-position choice attains the sum, proving tightness for one hidden layer.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: one hidden layer is the stated tight boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Rank-sensitive upper bound for ReLU linear regions states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-relu-folding-block": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Set $t_0=0$, $t_{n+1}=1$, and $t_i=(2i-1)/(2n+1)$ for $1\\le i\\le n$. Put $y_i=0$ for even $i$ and $y_i=1$ for odd $i$, and define $s_i=(y_{i+1}-y_i)/(t_{i+1}-t_i)$ for $0\\le i\\le n$. The piecewise-affine interpolant through $(t_i,y_i)$ maps every interval bijectively onto $[0,1]$. Its first slope is $s_0=2n+1$, while $s_2=(2n+1)/2$ and $s_3=-(2n+1)/2$, so $s_3-s_2=-s_0$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Use hidden units $h_i(x)=\\rho(x-t_i)$ for $i\\ne3$ and $h_3(x)=\\rho(t_3-x)$. Give unit $i$ output coefficient $a_i=s_i-s_{i-1}$, including $a_3=s_3-s_2=-s_0$, and set output bias $d=-a_3t_3$. Before $t_1$ only $h_3$ is active, so the output is $d+a_3(t_3-x)=s_0x$. At every $t_i$, the slope changes by $a_i$: for $i\\ne3$ this is the right-facing ReLU slope jump, and for $i=3$ it is the left-facing ReLU slope jump. Thus the network output has the same initial value and slope jumps as the interpolant in step 1.1, so it equals that interpolant on $[0,1]$. This uses exactly $n$ hidden ReLU units and one affine output.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Each fold block's output is affine in the current hidden layer, so it can be substituted into the affine preactivations of the next adjacent layer without adding an intervening layer. At each knot $t_i$, exactly the corresponding hidden unit changes activation, so the $n+1$ intervals have distinct activation patterns. Each existing interval is cut into $n_{\\ell+1}+1$ subintervals, each mapped bijectively onto $[0,1]$; the new layer's patterns distinguish these subintervals, while earlier layer patterns distinguish their parent intervals. Induction over the blocks gives $\\prod_{\\ell=1}^L(n_\\ell+1)$ intervals, each a distinct full-dimensional activation region.",
+          "inputs": [
+            "step 2.1",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=3 is the minimum fold width and the construction includes it."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20132.1: the first and last fold intervals include their endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A width-n ReLU block makes n+1 full folds states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-relu-linear-region-lower-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-folding-block",
+          "source_section": "Statement",
+          "quote": "For every integer $n\\ge3$, there is a scalar-input standard adjacent-layer ReLU block with one hidden layer of width $n$ whose output is continuous and piecewise affine on $[0,1]$, has exactly $n$ interior breakpoints, and maps each of the resulting $n+1$ intervals bijectively onto $[0,1]$. Composing blocks of widths $n_1,\\ldots,n_L\\ge3$ yields $\\prod_{\\ell=1}^L(n_\\ell+1)$ full-dimensional activation regions in one input dimension.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-relu-linear-region-upper-bound",
+          "source_section": "Statement",
+          "quote": "Let $n_0,L,n_1,\\ldots,n_L\\ge1$ be integers and consider a standard adjacent-layer ReLU network with input dimension $n_0$ and $L$ hidden layers of widths $n_1,\\ldots,n_L$. Define $J$ to be the set of integer tuples $(j_1,\\ldots,j_L)$ satisfying $$0\\le j_\\ell\\le\\min\\{n_0,n_1-j_1,\\ldots,n_{\\ell-1}-j_{\\ell-1},n_\\ell\\}\\qquad(1\\le\\ell\\le L),$$ where for $\\ell=1$ the terms between $n_0$ and $n_\\ell$ are absent. The number of full-dimensional activation-pattern regions is at most $$\\sum_{(j_1,\\ldots,j_L)\\in J}\\prod_{\\ell=1}^L\\binom{n_\\ell}{j_\\ell}.$$ For one hidden layer, the bound is attained by hyperplanes in general position.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hyperplane-arrangement-region-count",
+          "source_section": "Statement",
+          "quote": "For integers $m\\ge0$ and $d\\ge1$, the complement of any $m$ affine hyperplanes in $\\mathbb R^d$ has at most $\\sum_{j=0}^{d}\\binom mj$ connected components, with $\\binom mj=0$ for $j>m$. If the hyperplanes are in general position, meaning every $q\\le d$ of them meet in codimension $q$ and no $d+1$ have a common point, the number of components is exactly this sum; such arrangements exist for every $m,d$. On a zero-dimensional affine image there is at most one full-dimensional activation cell.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Compose the width-$n_\\ell$ blocks from [F1]. Each existing interval is divided into $n_{\\ell+1}+1$ intervals, each mapped onto $[0,1]$, so after all $L$ layers the number is $\\prod_{\\ell=1}^L(n_\\ell+1)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For $n_0=1$, each index $j_\\ell$ in [F2]'s upper sum is $0$ or $1$: the previous factors leave $n_i-j_i\\ge2$ for every $n_i\\ge3$. Thus the sum factors as $\\prod_{\\ell=1}^L(1+n_\\ell)$, so the count in step 1.1 is exact. For the multidimensional construction, in each of the first $L-1$ layers allocate $q_\\ell=\\lfloor n_\\ell/n_0\\rfloor\\ge3$ units to each coordinate and implement an independent width-$q_\\ell$ fold on that coordinate; set any remaining units constantly inactive. Each prior box is thereby subdivided into $(q_\\ell+1)^{n_0}$ boxes, each mapped bijectively onto $[0,1]^{n_0}$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "In the last hidden layer choose $n_L$ affine preactivation hyperplanes in general position in the image cube. By [F3], each of the boxes from step 2.1 has $\\sum_{j=0}^{n_0}\\binom{n_L}{j}$ activation cells in its preimage. Distinct boxes have disjoint interiors, so multiplying their counts gives the stated lower bound.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: n_0=1 and L=1 are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "One-dimensional and multidimensional ReLU region lower bounds states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "lem-bernstein-polynomial-lipschitz-error": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Take independent Bernoulli variables $X_1,\\ldots,X_N$ with success probability $x$, and put $S=\\sum_iX_i$. The binomial formula gives $B_Nf(x)=\\mathbb E f(S/N)$, so the Lipschitz hypothesis yields $|B_Nf(x)-f(x)|\\le L\\mathbb E|S/N-x|$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Independence gives $\\mathbb E S=\\sum_{i=1}^N\\mathbb E X_i=Nx$ and $\\operatorname{Var}(S)=\\sum_{i=1}^N\\operatorname{Var}(X_i)=Nx(1-x)$, because each Bernoulli variable has variance $x(1-x)$. Therefore Cauchy\u2013Schwarz yields $\\mathbb E|S/N-x|\\le\\sqrt{\\mathbb E(S/N-x)^2}=\\sqrt{x(1-x)/N}\\le1/(2\\sqrt N)$. The estimate holds for every $x$, proving the uniform bound.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Uniform error bound for Bernstein approximation of a Lipschitz function has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: L=0 is the constant-function boundary and the error bound is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: N=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant functions with L=0 are reproduced exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the uniform supremum includes x=0 and x=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Uniform error bound for Bernstein approximation of a Lipschitz function uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniform error bound for Bernstein approximation of a Lipschitz function states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Uniform error bound for Bernstein approximation of a Lipschitz function states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "thm-telgarsky-depth-separation-l1": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-tent-iterate-depth",
+          "source_section": "Statement",
+          "quote": "Let $\\rho(z)=\\max\\{0,z\\}$ and define $\\tau(x)=2\\rho(x)-4\\rho(x-1/2)$ for $x\\in[0,1]$. For each integer $q\\ge0$, $\\tau^q$ is affine and maps bijectively onto $[0,1]$ on each of the $2^q$ dyadic intervals $[j2^{-q},(j+1)2^{-q}]$, with slope of magnitude $2^q$. It is computed on $[0,1]$ by a ReLU network with $2q$ hidden units, $q$ hidden layers, and $O(q+1)$ weights; its depth, counting input and output layers, is $q+2$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernstein-polynomial-lipschitz-error",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge0$, let $f:[0,1]\\to\\mathbb R$ satisfy $|f(x)-f(y)|\\le L|x-y|$, and let $N\\ge1$ be an integer. The Bernstein polynomial $$B_Nf(x):=\\sum_{j=0}^N f(j/N)\\binom Njx^j(1-x)^{N-j}$$ satisfies $$\\sup_{x\\in[0,1]}|B_Nf(x)-f(x)|\\le\\frac{L}{2\\sqrt N}.$$\n\n",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "A computational block with two gates $\\rho(z)$, $\\rho(z-1/2)$ followed by the gate $\\rho(2u-4v)$ computes $h$. Compose $q$ blocks, identifying repeated parameter slots. Only the coordinate-selection vector of length $d$ and the four scalar slots $0,-1/2,2,-4$ are needed: the first vector supplies coefficient $1$ for the selected coordinate and coefficient $0$ for the others, and its selected coefficient $1$ may also supply the fixed unit coefficient in subsequent blocks. There are $3q$ gates and $2q$ computational layers. Appending an affine identity produces the stated conversion. On the cube the output is the tent iterate in [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Fix all coordinates except $x_1=z$, and consider any comparator with actual nonempty layer widths $m_1,\\ldots,m_\\ell$ and $\\ell\\le k$, $\\sum_i m_i\\le m$. Maintain one common partition of the line into open intervals on which all gates through layer $i$ are polynomials of degree at most $\\beta^i$. Initially there is one interval and input coordinates are affine. In one previous interval, each of the at most $tm_i$ gate predicates at layer $i$ is a polynomial of degree at most $\\alpha\\beta^{i-1}$ after substitution, hence introduces at most that many roots unless identically zero, in which case its test is constant. Thus the new common partition has at most $1+tm_i\\alpha\\beta^{i-1}$ pieces per old piece. On each piece all indicators are constant, and the gate output is a polynomial of degree at most $\\beta^i$. Skip edges cause no change: earlier outputs already have polynomial degree at most $\\beta^{i-1}$ on this common partition.",
+          "inputs": [
+            "given",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "It follows that the threshold classifier $1[g(z)\\ge1/2]$ is constant on at most $C=(1+\\beta^\\ell)\\prod_{i=1}^{\\ell}(1+tm_i\\alpha\\beta^{i-1})$ open intervals. Identically zero threshold polynomials contribute no roots. Since every factor's nonconstant term is at least one, $C\\le2(2t\\alpha)^\\ell\\beta^{\\ell(\\ell+1)/2}\\prod_i m_i\\le2(2t\\alpha m/\\ell)^\\ell\\beta^{\\ell(\\ell+1)/2}\\le B$, where the penultimate inequality is AM\u2013GM. The same partition argument applies for every fixed offset of the remaining coordinates.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Put $T=2^q$. By [F1], the target threshold classifier alternates on $N=T+1$ intervals in $[0,1]$. Its two end intervals have length $1/(2T)$ and each of the others length $1/T$. The integral of $|f-1/2|$ is $1/(8T)$ on each end interval and $1/(4T)$ on each other interval. A comparator classifier with at most $C$ intervals has at most $C-1$ internal boundaries. Discard target intervals containing such a boundary. At most $C-1$ intervals are discarded; in each of the at most $C$ remaining runs the alternating target labels disagree with the constant comparator on at least half the run length minus $1/2$. Hence at least $(N-2C)/2$ target intervals disagree throughout, whenever this quantity is positive. Their contribution gives $\\int_0^1|f-g|\\,dz\\ge\\max\\{0,(N-2C)/(16T)\\}$. Endpoint equalities have no effect on the integral. Integrating in the other coordinates gives the displayed bound and its $B\\le T/4$ consequence.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Write $s=t\\alpha\\beta$. For $\\ell=1$, the bound in step 2.1 is $4sm$. For $\\ell\\ge2$, use $(2/\\ell)^\\ell\\le1$, $\\ell(\\ell+1)/2\\le\\ell^2$, and $\\ell\\le\\ell^2$ to bound it by $2(sm)^{\\ell^2}$. Therefore $B\\le4(sm)^{k^2}$. If $m\\le2^{k/s}$ and $s2^{k/s}\\le2^k$, then $B\\le2^{k^3+2}=T/4$. For $s=1$ the condition is equality; for fixed $s>1$ it is equivalent to $k\\ge s\\log_2(s)/(s-1)$, so it eventually holds. This proves the exponential-budget assertion with all its indicated parameter cases.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "A binary decision tree with $r$ total nodes has at most $(r-1)/2$ internal branch nodes. On a fixed line each nonconstant affine test has at most one zero. A sum of at most $t$ such trees, with $r\\le2^{A/t}$ and $A=k^3$, is constant away from at most $t(2^{A/t}-1)/2$ thresholds. Convexity of $u\\mapsto2^u$ yields $t(2^{A/t}-1)\\le2^A-1$ for $t\\ge1$. Thus its threshold classifier has at most $(2^A+1)/2\\le2^{A+2}=T/4$ intervals. Step 3.1 proves the tree assertion. Finally at $k=d=t=\\alpha=1$, the target $h^5$ is $32$-Lipschitz; its degree-$2^{22}$ Bernstein polynomial has uniform error at most $32/(2\\sqrt{2^{22}})=1/128$ by [F2]. This polynomial is one $(1,1,2^{22})$ gate, allowed by the node budget $2^{1/2^{22}}>1$, so the parameter restriction cannot be omitted.",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement sets every parameter and m\u22651; the maximum defining B is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; proof argument treats identically zero predicate and threshold polynomials as constant tests."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; proof argument handles \u2113=1 and s=1 explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; proof argument handles constant decision trees; proof argument allows skip edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; proof argument disregard only finitely many interval endpoints of measure zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; Statement and finite constructions use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "cex-telgarsky-small-k-large-degree-gate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-tent-iterate-depth",
+          "source_section": "Statement",
+          "quote": "Let $\\rho(z)=\\max\\{0,z\\}$ and define $\\tau(x)=2\\rho(x)-4\\rho(x-1/2)$ for $x\\in[0,1]$. For each integer $q\\ge0$, $\\tau^q$ is affine and maps bijectively onto $[0,1]$ on each of the $2^q$ dyadic intervals $[j2^{-q},(j+1)2^{-q}]$, with slope of magnitude $2^q$. It is computed on $[0,1]$ by a ReLU network with $2q$ hidden units, $q$ hidden layers, and $O(q+1)$ weights; its depth, counting input and output layers, is $q+2$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernstein-polynomial-lipschitz-error",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge0$, let $f:[0,1]\\to\\mathbb R$ satisfy $|f(x)-f(y)|\\le L|x-y|$, and let $N\\ge1$ be an integer. The Bernstein polynomial $$B_Nf(x):=\\sum_{j=0}^N f(j/N)\\binom Njx^j(1-x)^{N-j}$$ satisfies $$\\sup_{x\\in[0,1]}|B_Nf(x)-f(x)|\\le\\frac{L}{2\\sqrt N}.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "On $[0,1]$, $h(x)=2x$ for $x\\le1/2$ and $h(x)=2-2x$ for $x\\ge1/2$, so it equals the tent map in [F1], maps the interval into itself, and is $2$-Lipschitz. Thus $h^5$ is $32$-Lipschitz. For $N=2^{22}$, [F2] gives a degree-$N$ polynomial $P_N$ with $\\sup_{[0,1]}|h^5-P_N|\\le32/(2\\sqrt N)=1/128$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "A single gate with the constant predicate polynomial $q_1(z)=1$, condition $q_1(z)\\ge0$, and polynomial piece $P_N$ is $(1,1,N)$-semi-algebraic; the predicate is always true and has degree $0$. Since $2^{1/N}<2$, the allowed integer node count is one. The normalized Lebesgue integral on $[0,1]$ of its error is at most $1/128<1/64$, so this is a counterexample to the claimed uniform lower bound.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement refuted concerns a nonempty unit interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; Counterexample has a constant positive predicate of degree zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; Counterexample fixes k=d=t=\u03b1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; Counterexample permits a one-gate polynomial network."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; Counterexample uses a uniform error bound including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; Counterexample uses explicit finite parameters and requires no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "ex-relu-tent-map-depth-vs-width": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-tent-iterate-depth",
+          "source_section": "Statement",
+          "quote": "Let $\\rho(z)=\\max\\{0,z\\}$ and define $\\tau(x)=2\\rho(x)-4\\rho(x-1/2)$ for $x\\in[0,1]$. For each integer $q\\ge0$, $\\tau^q$ is affine and maps bijectively onto $[0,1]$ on each of the $2^q$ dyadic intervals $[j2^{-q},(j+1)2^{-q}]$, with slope of magnitude $2^q$. It is computed on $[0,1]$ by a ReLU network with $2q$ hidden units, $q$ hidden layers, and $O(q+1)$ weights; its depth, counting input and output layers, is $q+2$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-relu-linear-region-upper-bound",
+          "source_section": "Statement",
+          "quote": "Let $n_0,L,n_1,\\ldots,n_L\\ge1$ be integers and consider a standard adjacent-layer ReLU network with input dimension $n_0$ and $L$ hidden layers of widths $n_1,\\ldots,n_L$. Define $J$ to be the set of integer tuples $(j_1,\\ldots,j_L)$ satisfying $$0\\le j_\\ell\\le\\min\\{n_0,n_1-j_1,\\ldots,n_{\\ell-1}-j_{\\ell-1},n_\\ell\\}\\qquad(1\\le\\ell\\le L),$$ where for $\\ell=1$ the terms between $n_0$ and $n_\\ell$ are absent. The number of full-dimensional activation-pattern regions is at most $$\\sum_{(j_1,\\ldots,j_L)\\in J}\\prod_{\\ell=1}^L\\binom{n_\\ell}{j_\\ell}.$$ For one hidden layer, the bound is attained by hyperplanes in general position.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Set $q=10$ in [F1]. Then the iterate has $2^{10}=1024$ intervals, $20$ hidden units, and depth $12$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "With $n_0=1$ and $n_1=20$, [F2] gives at most $\\binom{20}{0}+\\binom{20}{1}=21$ regions. Since $1024>21$, the example exhibits the depth-width difference claimed.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.1: q=10 is a positive finite iterate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Tent-map composition gives exponentially many intervals states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "ex-target-specific-vs-target-independent-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-yarotsky-fixed-architecture-sobolev-approximation-rate",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d,n\\ge1$, let $Q=(0,1)^d$, and let $F_{d,n}$ be the unit ball of $W^{n,\\infty}(Q;\\mathbb R)$ for the norm given by the maximum of the essential suprema of all weak derivatives of order at most $n$. There is a constant $C=C(d,n)$ such that for every $0<\\varepsilon<1/2$ one can choose a ReLU network architecture, independent of $f\\in F_{d,n}$, for which every $f\\in F_{d,n}$ has weights producing a representative $\\Phi_f$ with $$\\|f-\\Phi_f\\|_{L^\\infty(Q)}\\le\\varepsilon,$$ depth at most $C(1+\\log(1/\\varepsilon))$, and at most $C\\varepsilon^{-d/n}(1+\\log(1/\\varepsilon))$ weights and computation units.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-yarotsky-adaptive-one-dimensional-lipschitz-approximation",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $F_{1,1}$ be the unit ball of $W^{1,\\infty}((0,1);\\mathbb R)$ under the maximum norm of the function and its weak derivative, using the Lipschitz representative on $[0,1]$. There is an absolute constant $C$ such that for every $f\\in F_{1,1}$ and $0<\\varepsilon<1/2$, an architecture depending on $f$ computes a ReLU approximation with uniform error at most $\\varepsilon$, depth $6$ counting input and output layers, and at most $C/[\\varepsilon\\log(1/\\varepsilon)]$ weights, connections, and computation units.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The derivative of $f$ is $f'(x)=x$, so $\\|f\\|_{L^\\infty}=1/2$ and $\\|f'\\|_{L^\\infty}=1$. By [F1], $\\|f\\|_{W^{1,\\infty}}=1$. Directly, $|x^2-y^2|/2=|x-y||x+y|/2\\le|x-y|$ on $[0,1]$, so $f$ is unit-Lipschitz.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Apply [F2] and [F3] to this same target. Their size ratio is $[1/(\\varepsilon\\log(1/\\varepsilon))]/[\\varepsilon^{-1}\\log(1/\\varepsilon)]=(\\log(1/\\varepsilon))^{-2}$ up to constants, which tends to zero. This compares existence rates only and makes no claim about optimization or training.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures has no separate zero parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.1: the target has unit W^{1,infinity} norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures has no separate degenerate parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 1.1: the target is defined on the closed interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Same target with adaptive and target-independent architectures states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "ex-linear-regions-do-not-guarantee-learning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hyperplane-arrangement-region-count",
+          "source_section": "Statement",
+          "quote": "For integers $m\\ge0$ and $d\\ge1$, the complement of any $m$ affine hyperplanes in $\\mathbb R^d$ has at most $\\sum_{j=0}^{d}\\binom mj$ connected components, with $\\binom mj=0$ for $j>m$. If the hyperplanes are in general position, meaning every $q\\le d$ of them meet in codimension $q$ and no $d+1$ have a common point, the number of components is exactly this sum; such arrangements exist for every $m,d$. On a zero-dimensional affine image there is at most one full-dimensional activation cell.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "By [F1], the activation cells number $\\binom{10}{0}+\\binom{10}{1}+\\binom{10}{2}=1+10+45=56$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Set all coefficients into the affine output unit and its bias to zero. By [F2], the prediction is then $0$ at every input. Since $Y=1$ surely, $(0-Y)^2=1$ surely, so the expected squared risk is $1$ despite the $56$ activation cells.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Many linear regions give no training or generalization guarantee has a fixed nonempty interval, cube, graph, or ambient affine space in its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 2.1: zero output coefficients give the explicit constant predictor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 1.1: one hidden layer already has 56 regions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and step 2.1: zero output coefficients leave all hidden activation cells intact."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Many linear regions give no training or generalization guarantee has no separate endpoints parameter or assertion beyond its stated hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Many linear regions give no training or generalization guarantee uses only the stated finite constructions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Many linear regions give no training or generalization guarantee states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Many linear regions give no training or generalization guarantee states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-32-author",
+        "notes": "This author-side contract maps the written argument and boundary cases; it is not independent approval."
+      }
+    },
+    "fs-telgarsky-unrestricted-gate-parameter-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relu-tent-iterate-depth",
+          "source_section": "Statement",
+          "quote": "Let $\\rho(z)=\\max\\{0,z\\}$ and define $\\tau(x)=2\\rho(x)-4\\rho(x-1/2)$ for $x\\in[0,1]$. For each integer $q\\ge0$, $\\tau^q$ is affine and maps bijectively onto $[0,1]$ on each of the $2^q$ dyadic intervals $[j2^{-q},(j+1)2^{-q}]$, with slope of magnitude $2^q$. It is computed on $[0,1]$ by a ReLU network with $2q$ hidden units, $q$ hidden layers, and $O(q+1)$ weights; its depth, counting input and output layers, is $q+2$.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bernstein-polynomial-lipschitz-error",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge0$, let $f:[0,1]\\to\\mathbb R$ satisfy $|f(x)-f(y)|\\le L|x-y|$, and let $N\\ge1$ be an integer. The Bernstein polynomial $$B_Nf(x):=\\sum_{j=0}^N f(j/N)\\binom Njx^j(1-x)^{N-j}$$ satisfies $$\\sup_{x\\in[0,1]}|B_Nf(x)-f(x)|\\le\\frac{L}{2\\sqrt N}.$$\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Set $d=k=t=\\alpha=1$, $\\beta=N=2^{22}$. The gate $P_N(z)=B_N(h^5)(z)$ is a single $(1,1,N)$-semi-algebraic gate: use the constant predicate polynomial $q_1(z)=1$ with condition $q_1(z)\\ge0$, and the one polynomial piece $p_1(z)=P_N(z)$, whose degree is at most $N$. The predicate condition holds for every $z$, and $q_1$ has degree $0\\le\\alpha$. The claimed node cap is $2^{1/N}<2$, so the integer node count of this network is at most one. Hence $P_N$ belongs to the first class in the claimed union.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "On $[0,1]$, the formula for $h$ reduces to $2x$ on $[0,1/2]$ and $2-2x$ on $[1/2,1]$, so it is the tent map in [F1], maps the interval into itself, and is $2$-Lipschitz. Thus $h^5$ is $32$-Lipschitz. Applying [F2] at $N=2^{22}$ gives $\\|P_N-h^5\\|_\\infty\\le32/(2\\sqrt{2^{22}})=1/128$. Consequently $\\int_0^1|P_N(x)-h^5(x)|\\,dx\\le1/128<1/64$, contradicting the claimed infimum lower bound.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement refuted concerns a nonempty unit interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; Counterexample has a constant positive predicate of degree zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; Counterexample fixes k=d=t=\u03b1=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; Counterexample permits a one-gate polynomial network."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; Counterexample uses a uniform error bound including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; Counterexample uses explicit finite parameters and requires no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "lem-relu-network-vc-dimension-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relu-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A ReLU feedforward network from $[0,1]^d$ to $\\mathbb R^r$ is a finite acyclic feedforward computation graph with $d$ input coordinates, hidden units applying $\\rho(z)=\\max\\{0,z\\}$ to affine combinations of earlier unit values, and $r$ affine output units. Edges may skip layers. Its depth is the maximum number of layers met on an input-to-output path, counting the input and output layers, so a network with one hidden layer has depth $3$. Its computation units are its hidden and output units; its connections are its directed weighted edges; its weights are all connection coefficients and unit biases. The number of each quantity counts scalar entries, including zero entries only when the architecture explicitly includes them. A layered fully connected ReLU network is the specialization in which edges join consecutive layers and every such edge is present.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-warren-polynomial-sign-pattern-bound",
+          "source_section": "Statement",
+          "quote": "Let $k,m,d\\ge1$ be integers and let $p_1,\\ldots,p_m$ be real polynomials in $k$ variables, each of total degree at most $d$ (including the zero polynomial). The number of strict sign vectors $(\\operatorname{sgn}p_1(x),\\ldots,\\operatorname{sgn}p_m(x))\\in\\{-1,1\\}^m$ attained at points where all polynomials are nonzero is at most $(2md+1)^k$. The number of binary vectors $(\\mathbf1_{p_i(x)>0})_{i=1}^m$ is also at most $(2md+1)^k$, and the same bound holds with $\\ge0$ in place of $>0$. The number of ternary sign vectors in $\\{-1,0,1\\}^m$ is at most $(4md+1)^k$. Each assertion remains valid when $x$ is restricted to any subset of $\\mathbb R^k$.\n\n",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-vc-class-of-sets-and-index",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C\\subseteq\\mathcal P(X)$ be a family of subsets of an arbitrary set $X$. For a finite $T\\subseteq X$, its trace is\n\n$$\\mathcal C|_T:=\\{C\\cap T:C\\in\\mathcal C\\}.$$\n\nThe family $\\mathcal C$ **shatters** $T$ when $\\mathcal C|_T=\\mathcal P(T)$. This extends the finite-ground-set trace convention of [[def-shattering-and-vc-dimension]]: any finite $T$ can be relabeled by $[|T|]$, and relabeling preserves all traces and their cardinalities.\n\nFor a nonempty class, its **VC dimension** $d(\\mathcal C)$ is the greatest size of a finite shattered set if those sizes are bounded, is $0$ if no singleton is shattered, and is $+\\infty$ if finite shattered sets have unbounded size. When the dimension is finite, its **VC index** is\n\n$$V(\\mathcal C):=d(\\mathcal C)+1,$$\n\nequivalently the least positive integer $V$ such that no $V$-point subset is shattered. The empty class is assigned $V=0$ by convention and is treated separately in the entropy theorem.\n",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Remove all hidden units that have no path to the output. Also remove all hidden units having no input ancestor: for each fixed parameter assignment their values are constants in $x$, and their contributions to a remaining unit or the output can be added to its existing bias. Allowing these new biases to vary independently produces a fixed reduced architecture whose realization class contains the original class. No new coefficient slots are needed, because every surviving computation unit already has a bias; edges and removed units only disappear. If the output has no input ancestor, the original class consists of constant functions and has VC dimension at most $1$, which satisfies the conclusions. Otherwise the reduced graph has $w\\le W$ counted slots, $U$ hidden units, and $U+1\\le w$ because the output and every hidden unit have counted biases. Every remaining unit lies on an input-to-output path. Rank each hidden unit by the maximum number of computation units on an input-to-that-unit path, and give the output its analogous rank $K$. Then each edge increases rank, and $K\\le L-1$ and $K\\le U+1\\le w$. Empty ranks can be omitted. It suffices to bound the reduced class.",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Fix arbitrary sample points $x_1,\\ldots,x_m$. For any prescribed binary mask $b\\in\\{0,1\\}^U$, replace the ReLU at hidden unit $v$ by multiplication of its preactivation by $b_v$. Its preactivation and the final output are now polynomials in the $w$ parameters. By induction along the graph, a unit of rank $j$ has polynomial degree at most $j$: input values have degree zero, multiplication by an edge coefficient raises degree by one, addition of a bias has degree one, and multiplication by a fixed mask entry changes no degree. Thus every such polynomial has degree at most $K\\le w$. On any actual parameter vector the convention $b_v=\\mathbf1_{z_v>0}$ gives a unique mask, even when a preactivation is zero, and the masked polynomials then reproduce every actual unit value.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For each sample point and each of the $2^U$ masks, form the $U$ preactivation polynomials and the output polynomial minus $a$. There are $M=m(U+1)2^U$ polynomials, all of degree at most $w$. Their strict-positivity vector determines the actual output classification at every sample point: evaluate units in topological order, determining their actual mask by the relevant preactivation entry, then read the output entry for that mask. Hence the number of label vectors is at most $(2Mw+1)^w\\le(3mw^2 2^w)^w$ by [F2]. If the classifier uses $\\ge a$, take the hidden-unit mask $\\mathbf1_{z_v\\ge0}$ and use nonnegativity vectors throughout; at zero, multiplying by either mask value still gives the ReLU value, so the same count holds.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "For a second count, start with the single parameter-space cell $\\mathbb R^w$. At stage $j$, refine every existing cell by the activation bits of all units of rank $j$ at all $m$ sample points; at the final stage refine by the output threshold bits. Within a cell, all earlier mask bits are fixed, so the relevant $mN_j$ preactivation polynomials, or output-minus-threshold polynomials, have degree at most $j\\le K$ by step 2.1, where $N_j$ is the number of units at that rank, with $N_K=1$ for the output. By [F2] there are at most $(2mN_jK+1)^w\\le(3mwK)^w$ refinements of each cell. This estimate holds on an arbitrary cell; no connectedness or openness is needed. After $K$ stages, the number of cells, hence the number of output label vectors, is at most $(3mwK)^{wK}$. The construction using $\\ge0$ activation bits and nonnegativity output bits proves the identical bound for the other threshold convention.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Put $m_0=64w^2$. At this sample size the base-two logarithm of the last bound is $w(\\log_2 3+\\log_2m_0+2\\log_2w+w)=w(w+\\log_2 3+6+4\\log_2w)\\le13w^2<m_0$, using $\\log_2w\\le w$ for integers $w\\ge1$. Thus no $m_0$-point set can be shattered, and [F3] rules out all larger shattered sets. Consequently $\\operatorname{VC}(\\mathcal H_a)<64w^2\\le64W^2$.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "Write $A=wK$ and $B=\\log_2(2w)\\ge1$, and take the integer $m_1=\\lceil64AB\\rceil\\le65AB$. Since $K\\le w$, one has $\\log_2 A\\le2\\log_2w$ and $\\log_2B\\le B$. The base-two logarithm of the label-count bound at $m=m_1$ is at most $A\\log_2(195A^2B)\\le A(8+4\\log_2w+\\log_2B)\\le A(4+5B)\\le9AB< m_1$. No set of $m_1$ points is shattered. Therefore $\\operatorname{VC}(\\mathcal H_a)<m_1\\le65wK\\log_2(2w)\\le65WL\\log_2(2W)$. Conversion between logarithm bases changes only an absolute constant. For $W\\ge2$, $\\log(2W)\\le2\\log W$ and $L\\ge1$, so this implies the requested $CL^2W\\log W$ estimate. Together with step 4.1 and the constant-output case, this proves every assertion.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 4.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "thm-borsuk-ulam-general": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-mod-two-cohomology-ring-of-infinite-real-projective-space",
+          "source_section": "Statement",
+          "quote": "Assume AC. Infinite real projective space has\n$$H^*(\\mathbb {RP}^{\\infty};\\mathbb F_2)\\cong\\mathbb F_2[a],\\qquad |a|=1.$$\n\nFor every integer $n\\geq0$, restriction along the standard skeletal inclusion\n$i_n:\\mathbb {RP}^n\\hookrightarrow\\mathbb {RP}^{\\infty}$ is an isomorphism in\ndegrees at most $n$. For $n\\geq1$ it sends $a$ to the unique nonzero\ndegree-one class on $\\mathbb {RP}^n$; for $n=0$ it sends $a$ to zero.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "source_section": "Statement",
+          "quote": "For each integer $m\\ge0$, $\\mathbb{RP}^m=S^m/(x\\sim-x)$ has a CW structure with one cell in each dimension $0,\\ldots,m$. Orientations can be chosen so its integral cellular complex has $C_j=\\mathbb Z$ in these degrees, $d_j=2$ for positive even $j$, and $d_j=0$ for odd $j$. Consequently its integral homology is $\\mathbb Z$ in degree zero, $\\mathbb Z/2$ in odd degrees $0<j<m$, $\\mathbb Z$ in degree $j=m$ when $m$ is odd, and zero otherwise. For $m=0$ only the degree-zero copy occurs.\n\nThe quotient $q:\\mathbb{RP}^2\\to\\mathbb{RP}^2/\\mathbb{RP}^1\\cong S^2$ induces an isomorphism $H_2(\\mathbb{RP}^2;\\mathbb F_2)\\to H_2(S^2;\\mathbb F_2)$. Assuming AC, it therefore induces an isomorphism $q^*:H^2(S^2;\\mathbb F_2)\\to H^2(\\mathbb{RP}^2;\\mathbb F_2)$, both groups being $\\mathbb F_2$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cohomology-of-a-finite-cw-complex-vanishes-above-its-dimension",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ be a nonempty finite CW complex of dimension $d$, and let\n$R$ be a commutative ring. For every $n>d$ the singular cohomology vanishes:\n$$H^n(X;R)=0.$$\nMore generally, for a CW pair $(X,A)$ with $X$ finite of dimension $d$ one has\n$H^n(X,A;R)=0$ for every $n>d$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to Y$ are homotopic continuous maps, then $f^*=g^*:H^n(Y;G)\\to H^n(X;G)$ for every integer $n$ and every abelian coefficient group $G$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-cup-product-is-natural-unital-and-associative",
+          "source_section": "Statement",
+          "quote": "For continuous $f:X\\to Y$ and a commutative unital ring $R$, pullback on singular cohomology satisfies\n$$f^*(a\\smile b)=f^*a\\smile f^*b,\\qquad f^*(1)=1.$$\nCup product is associative already on cochains. Consequently $f^*:H^*(Y;R)\\to H^*(X;R)$ is a unital graded-ring homomorphism. Homotopic maps give the same homomorphism.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "We first rule out a continuous odd map $g:S^m\\to S^{m-1}$ for $m\\ge1$. Such a map descends to $b:\\mathbb{RP}^m\\to\\mathbb{RP}^{m-1}$, $b([x])=[g(x)]$. This is continuous by the quotient topology, since the composite with the sphere quotient is continuous and $g(-x)=-g(x)$.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "In the coordinate subspace $\\mathbb R^{m+1}\\oplus\\mathbb R^m\\subset\\mathbb R^{\\infty}$, define $$H([x],t)=[\\cos(\\pi t/2)x,\\ \\sin(\\pi t/2)g(x)],\\qquad 0\\le t\\le1.$$ Its representing vector has norm one. Replacing $x$ by $-x$ negates the whole vector, so the projective point is independent of representative. Continuity can be checked on each chart where a chosen coordinate of $x$ is nonzero: choose the unit representative with that coordinate positive, which varies continuously in the ratios of the remaining coordinates, and use the displayed formula. These charts cover projective space, proving joint continuity in $([x],t)$. Thus $H$ is a homotopy from $i_m$ to $j\\circ b$, where $j([y])=[0,y]$ is the inclusion in the second block. The same formula with $y$ in the first $m$ coordinates and $y$ in the second block, namely $[\\cos(\\pi t/2)y,0,\\sin(\\pi t/2)y]$, is a homotopy from $i_{m-1}$ to $j$. Both homotopies lie in the finite projective subspace $\\mathbb{RP}^{2m}$ of the infinite space and therefore are continuous there as well.",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Put $a_k=i_k^*a$. By [F3] and step 2.1, $a_m=b^*a_{m-1}$, including $m=1$ when $a_0=0$. Consequently $$a_m^m=b^*(a_{m-1}^m)=0,$$ since $H^m(\\mathbb{RP}^{m-1};\\mathbb F_2)=0$ by [F2]. On the other hand, [F1] says $a^m\\ne0$ and that $i_m^*$ is an isomorphism in degree $m$, so $a_m^m=i_m^*(a^m)\\ne0$. These incompatible conclusions rule out every such odd map.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "For $m\\ge1$, if $h(x)-h(-x)$ never vanished, then $$g(x)=\\frac{h(x)-h(-x)}{\\|h(x)-h(-x)\\|_2}$$ would be continuous, take values in $S^{m-1}$ and satisfy $g(-x)=-g(x)$. Step 3.1 rules this out, so an antipodal pair has equal images. When $m=0$, the codomain $\\mathbb R^0$ consists of one point and the two points of $S^0$ have equal images directly. AC is inherited exactly as stated in [A1].",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement: sphere is nonempty for every m\u22650."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; proof argument proves m=0 directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; proof argument handle m=1 via RP\u2070."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; proof argument handles vanishing antipodal difference; normalization is only used when it never vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; proof argument verifies the two homotopy endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; Statement assumes AC inherited through cohomology; proof argument identifies its use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [
+        "def-axiom-of-choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "thm-sobolev-continuous-nonlinear-width-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with\n$n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p\\le\\infty$, and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Write\n$$\\mathcal A_k=\\{\\alpha\\in\\mathbb N_0^n:|\\alpha|\\le k\\}.$$\nThis is a finite nonempty set: every coordinate of such an $\\alpha$ lies in\n$\\{0,\\ldots,k\\}$, and it contains the zero multi-index.\n\nThe real and complex $L^p$ classes use the conventions in\n[[def-l-p-space-as-a-quotient-by-null-functions]] and\n[[def-complex-lp-and-euclidean-test-function-conventions]]. Their quotient\nnorm values are supplied by\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]\nfor real scalars and\n[[thm-complex-holder-minkowski-and-the-quotient-norm]] for complex scalars.\n\nDefine $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.\n\nFor the zero multi-index, set $D^0u=u$. Since $\\mathcal A_0=\\{0\\}$,\n$$W^{0,p}(\\Omega;\\mathbb K)=L^p(\\Omega;\\mathbb K).$$\nThe Sobolev norm expression is\n$$\\|u\\|_{W^{k,p}(\\Omega)}= \\begin{cases} \\left(\\displaystyle\\sum_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^p(\\Omega)}^p\\right)^{1/p},&1\\le p<\\infty,\\\\[1ex] \\displaystyle\\max_{\\alpha\\in\\mathcal A_k} \\|D^\\alpha u\\|_{L^\\infty(\\Omega)},&p=\\infty. \\end{cases}$$\nThe formula is finite because each derivative class belongs to $L^p$ and\n$\\mathcal A_k$ is finite; at $k=0$ it reduces to the $L^p$ norm expression.\nThe finite maximum is defined because $\\mathcal A_k$ is nonempty. The norm\naxioms for this expression are a separate assertion from this definition.\n\nFor open $U\\subseteq\\Omega$ with $\\overline U$ compact and contained in\n$\\Omega$, the notation $W^{k,p}_{\\mathrm{loc}}(\\Omega;\\mathbb K)$ means that\nthe restriction of the class belongs to $W^{k,p}(U;\\mathbb K)$ for every such\n$U$.\n\nIf $\\Omega=\\varnothing$, the $L^p$ space and every $W^{k,p}$ space contain\nonly the zero class, and the displayed norm expression is zero.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-borsuk-ulam-general",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $m\\ge0$ and every continuous map $h:S^m\\to\\mathbb R^m$, there exists $x\\in S^m$ with $h(x)=h(-x)$. Here $S^m$ is the Euclidean unit sphere in $\\mathbb R^{m+1}$.\n\n",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Define $p(t)=(4t(1-t))^{n+1}$ for $0\\le t\\le1$ and $p(t)=0$ otherwise, and put $\\psi(x)=\\prod_{r=1}^d p(x_r)$. The one-sided derivatives of $p$ of orders $0,\\ldots,n$ vanish at each endpoint because the polynomial has a zero of multiplicity $n+1$ there. Hence the zero extension is $C^n(\\mathbb R)$, and $\\psi\\in C^n(\\mathbb R^d)$ is supported in $[0,1]^d$, is one at its center, and lies between zero and one. Set $$B=\\max_{|\\alpha|\\le n}\\|D^\\alpha\\psi\\|_\\infty\\ge1.$$ This is finite since the derivatives are continuous polynomials on the compact cube and zero outside it. Their classical derivatives are weak derivatives: integrate by parts successively in each coordinate against a compactly supported smooth test function; endpoint terms vanish because the derivatives below order $n$ match their zero extensions. This also verifies the weak derivative identity after every scaling and finite sum used below.",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Set $N=W+1$ and $k=\\lceil N^{1/d}\\rceil$. Partition $Q$ into $k^d$ closed coordinate cubes of side $1/k$, and take the first $N$ in lexicographic order. Write $v_j$ for their lower vertices and put $$\\phi_j(x)=B^{-1}k^{-n}\\psi(k(x-v_j)),\\qquad j=1,\\ldots,N.$$ Distinct supports have disjoint interiors; all derivatives of orders at most $n$ vanish on their boundaries. Thus, for $u=(u_1,\\ldots,u_N)\\in[-1,1]^N$, the sum $T(u)=\\sum_j u_j\\phi_j$ satisfies $\\|D^\\alpha T(u)\\|_\\infty\\le B^{-1}k^{|\\alpha|-n}\\|D^\\alpha\\psi\\|_\\infty\\le1$. The weak derivative verification in step 1.1 proves $T(u)\\in F_{d,n}$. Disjoint interiors, and evaluation at the centers, give the exact identity $$\\|T(u)\\|_\\infty=B^{-1}k^{-n}\\max_j|u_j|.$$ In particular $T$ is linear, odd and continuous into $C(Q)$ with its uniform norm.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For $z\\in S^{N-1}=S^W$, put $R(z)=z/\\|z\\|_\\infty$. Its denominator is nonzero, and $R$ is continuous and odd with $\\|R(z)\\|_\\infty=1$. Therefore $z\\mapsto M(T(R(z)))$ is continuous into $\\mathbb R^W$. By [F2], some antipodal pair has equal images. Setting $f=T(R(z))$, we obtain $M(f)=M(-f)$ and $\\|f\\|_\\infty=B^{-1}k^{-n}$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Let $q=\\eta(M(f))=\\eta(M(-f))$. The triangle inequality yields $$2B^{-1}k^{-n}=\\|f-(-f)\\|_\\infty\\le\\|f-q\\|_\\infty+\\|-f-q\\|_\\infty.$$ At least one of the two errors is at least $B^{-1}k^{-n}$. Because $k\\le2N^{1/d}$, this is at least $c_{d,n}N^{-n/d}$ with $c_{d,n}=2^{-n}B^{-1}>0$. This proves the asserted supremum bound without any regularity of $\\eta$.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "If every error is at most $\\varepsilon$, step 4.1 gives $W+1\\ge(c_{d,n}/\\varepsilon)^{d/n}$. Since $W\\ge1$ implies $W+1\\le2W$, we obtain $W\\ge\\tfrac12 c_{d,n}^{d/n}\\varepsilon^{-d/n}$. The construction works at $W=1$, $d=1$, $n=1$, on cubes touching the boundary and when $N=k^d$, with exactly the same vanishing-derivative argument. AC is inherited from [F2] and subsumes the countable choice in [F1]; choosing finitely many indexed cubes or derivatives introduces no new choice principle.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement; Statement: d,n,W\u22651; cube and sphere used are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; proof argument includes u=0 and zero weak derivatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; proof argument covers W=d=n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; proof argument includes N=k^d and zero coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; proof argument check derivative matching on support boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; proof argument identifies inherited AC and finite indexed cube selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [
+        "def-axiom-of-choice"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    },
+    "thm-warren-polynomial-sign-pattern-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-monomials-multidegree-and-total-degree",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field. Every polynomial in the iterated ring\n$F[x_1,\\dots,x_n]$ has a unique finite expansion\n\n$$f=\\sum_{\\mathbf{t}}c_{\\mathbf{t}}x^{\\mathbf{t}},\\qquad x^{\\mathbf{t}}:=x_1^{t_1}\\cdots x_n^{t_n},$$\n\nover finitely many multi-indices $\\mathbf{t}=(t_1,\\dots,t_n)\\in\\mathbb{N}^n$.\n\nFor such an index, the scalar $c_{\\mathbf{t}}$ is the **coefficient**\n$[x^{\\mathbf{t}}]f$ of the monomial $x^{\\mathbf{t}}$.\n\nThe **degree in $x_i$** is the largest $t_i$ with $c_{\\mathbf{t}}\\ne0$, and the\n**total degree** is the largest value of $t_1+\\cdots+t_n$ with\n$c_{\\mathbf{t}}\\ne0$. For the zero polynomial, every degree is left undefined.\n\nEvaluation at a point $(a_1,\\dots,a_n)\\in F^n$ is the iterated substitution\nsupplied by the universal property of the polynomial ring.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fermat-for-euclidean-local-extrema",
+          "source_section": "Statement",
+          "quote": "If $f:U\\subseteq\\mathbb R^m\\to\\mathbb R$ is differentiable at an interior local maximum or minimum $a$, then $\\nabla f(a)=0$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "First establish an elementary zero-counting fact. If $D\\ge1$ and $r_i(x)=x_i^D+s_i(x)$ with $\\deg s_i<D$ for $1\\le i\\le k$, then these $k$ polynomials have at most $D^k$ distinct common real zeros. In the quotient vector space $V=\\mathbb R[x_1,\\ldots,x_k]/(r_1,\\ldots,r_k)$, every monomial is a linear combination of the $D^k$ monomials $x_1^{a_1}\\cdots x_k^{a_k}$ with $0\\le a_i<D$. Indeed, if some exponent is at least $D$, replace its factor $x_i^D$ by $-s_i$ modulo the ideal. Every resulting monomial has strictly smaller total degree, so induction on total degree terminates and proves the spanning assertion. Thus $\\dim V\\le D^k$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "If no strict sign vector occurs, its bound is immediate. Otherwise choose one representative $a_\\sigma$ for each attained strict vector $\\sigma$. Only finitely many choices are involved, since there are at most $2^m$ vectors. Set $P=\\prod_{i=1}^m p_i$ and $D=2md+1$. Then $P(a_\\sigma)\\ne0$. Choose a single $\\delta>0$ so small that $H(a_\\sigma)>0$ for every representative, where $H(x)=P(x)^2-\\delta\\sum_{i=1}^k x_i^{D+1}$. Such a choice exists: there are finitely many positive numbers $P(a_\\sigma)^2$, and the other term has a fixed finite value at each representative. Since $D+1$ is even and greater than $2\\deg P$, $H(x)\\to-\\infty$ as $\\|x\\|\\to\\infty$. Explicitly, $|P(x)|^2\\le C(1+\\|x\\|^{2md})$ and $\\sum_i x_i^{D+1}\\ge k^{-(D+1)/2}\\|x\\|^{D+1}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For any finite list of distinct common zeros $z_1,\\ldots,z_t$, evaluation defines a surjective linear map $V\\to\\mathbb R^t$. To see surjectivity, for every ordered pair $j\\ne h$ choose a coordinate $i(j,h)$ in which $z_j$ and $z_h$ differ, and set $h_j(x)=\\prod_{h\\ne j}(x_{i(j,h)}-(z_h)_{i(j,h)})/((z_j)_{i(j,h)}-(z_h)_{i(j,h)})$. Then $h_j(z_h)$ is $1$ for $h=j$ and $0$ otherwise. Evaluation vanishes on the ideal because all its generators vanish at these zeros, so it is well defined on $V$ and the classes of $h_j$ map onto the standard coordinate vectors. Consequently $t\\le\\dim V\\le D^k$. If there were more than $D^k$ zeros, choosing a finite list of $D^k+1$ of them would contradict this inequality. This proves the zero-counting fact without a genericity or multiplicity assumption.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "For an attained strict vector $\\sigma$, put $S_\\sigma=\\{x:\\operatorname{sgn}p_i(x)=\\sigma_i\\text{ for all }i\\}$. This is open. Its closure has a maximum of $H$: choose a closed ball containing $a_\\sigma$ outside which $H<0$, and apply [F2] to its nonempty closed bounded intersection with $\\overline{S_\\sigma}$. The resulting maximum is positive, because $H(a_\\sigma)>0$, and it is also the maximum over the full closure. Any point in $\\overline{S_\\sigma}\\setminus S_\\sigma$ has $p_i=0$ for some $i$ by continuity, so there $H=-\\delta\\sum_i x_i^{D+1}\\le0$. Therefore the positive maximum is attained at a point $b_\\sigma\\in S_\\sigma$, which is an interior local maximum of $H$. Distinct strict vectors give distinct such points.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "By [F3] every $b_\\sigma$ is a common zero of the $k$ polynomials $\\partial_i H=2P\\partial_iP-\\delta(D+1)x_i^D$. After division by the nonzero coefficient $-\\delta(D+1)$, each has the form $x_i^D+s_i(x)$ with $\\deg s_i\\le2md-1<D$. The zero-counting fact therefore bounds their distinct common zeros, and hence the number of strict sign vectors, by $D^k=(2md+1)^k$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "For binary vectors with $>0$, choose one representative per attained vector. Choose $\\varepsilon>0$ smaller than every nonzero $|p_i|$ occurring at these finitely many representatives; if there are no such values, choose any positive $\\varepsilon$. The strict signs of $p_i-\\varepsilon$ at the representatives now encode their original binary vectors: positive values remain positive, and nonpositive values become negative. Applying the strict bound to the $m$ shifted polynomials gives the binary bound. For $\\ge0$, use $p_i+\\varepsilon$: nonnegative values become positive, and negative values remain negative. For ternary vectors choose representatives and $\\varepsilon$ in the same way, and use the $2m$ polynomials $p_i-\\varepsilon,p_i+\\varepsilon$. Their strict sign pairs are $(-,-)$, $(-,+)$, and $(+,+)$ for the original negative, zero, and positive values, respectively, so distinct ternary vectors give distinct strict vectors. The strict bound with $2m$ polynomials gives $(4md+1)^k$. Restriction of the domain only removes vectors.",
+          "inputs": [
+            "step 3.1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement restricts all integer parameters to positive values and the proof treats zero-polynomial and constant-network cases explicitly; no additional boundary hypothesis is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/depth_approximation_repair",
+        "notes": "Current proposed mathematical carrier and every step reviewed; draft proposal only, no native acceptance or recertification."
+      }
+    }
+  }
+}

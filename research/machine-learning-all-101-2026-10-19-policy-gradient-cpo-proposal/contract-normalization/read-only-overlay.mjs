@@ -1,0 +1,4 @@
+// Explicit read-only source overlay; unmodified validator receives exactly three staged carriers.
+import fs from 'node:fs';import path from 'node:path';import {syncBuiltinESMExports} from 'node:module';
+const base='research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/contract-normalization';const patch=JSON.parse(fs.readFileSync(`${base}/patch.json`,'utf8'));const original=fs.readFileSync;const staged=new Map(patch.source_format_rows.map(row=>[path.resolve(row.actual_path),original(row.staged_path)]));
+fs.readFileSync=function(p,options){const key=p instanceof URL?path.resolve(p.pathname):path.resolve(String(p));const bytes=staged.get(key);if(!bytes)return original.apply(this,arguments);const encoding=typeof options==='string'?options:options?.encoding;return encoding?bytes.toString(encoding):Buffer.from(bytes);};syncBuiltinESMExports();

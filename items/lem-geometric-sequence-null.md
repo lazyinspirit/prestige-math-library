@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: cases
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-geometric-sequence-null.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -35,21 +36,35 @@ sources:
 
 ## Statement
 
-Let $r \in \mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).
+Let $r \in \mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$).
 
 1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \to 0$
-   ([[def-real-limit]]).
+   (Limits and Cauchy sequences of reals).
 2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\infty$**
-   ([[def-divergence-to-infinity]]).
+   (Divergence to $+\infty$ and to $-\infty$).
 
 Claim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the
 terms $r^k$ alternate in sign and are unbounded, so they neither converge nor
 diverge to $+\infty$; what is true of them is the statement about their absolute
 values.
 
-Both claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and
+Both claims come from Bernoulli's inequality (Bernoulli's inequality $(1+x)^n \ge 1 + nx$) and
 the Archimedean property. Nothing here needs the least-upper-bound property
-except through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].
+except through Every complete ordered field is Archimedean and For every $\varepsilon > 0$ in a complete ordered field there is a natural $n \ge 1$ with $1/n < \varepsilon$.
+
+## Statement references
+
+[[def-integer-power]]
+
+[[def-real-limit]]
+
+[[def-divergence-to-infinity]]
+
+[[lem-bernoulli-inequality]]
+
+[[thm-of-archimedean]]
+
+[[cor-archimedean-reciprocal]]
 
 ## Facts & Assumptions
 

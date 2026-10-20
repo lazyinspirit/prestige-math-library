@@ -1,0 +1,595 @@
+[
+  {
+    "order": 2754,
+    "id": "ml02-federated-optimization",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Federated averaging, local SGD, and SCAFFOLD",
+    "companion": "ml02-federated-optimization-examples",
+    "requires": [
+      "ml02-differential-privacy",
+      "ml02-linear-sparse-models",
+      "probability-spaces-random-variables-and-expectation",
+      "variance-reduced-finite-sum-and-adaptive-gradient-optimization"
+    ],
+    "items": [
+      {
+        "id": "def-federated-objective-and-client-sampling",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Federated objectives and client sampling",
+        "justified_by": []
+      },
+      {
+        "id": "alg-local-sgd",
+        "deps": [
+          "def-independent-random-elements"
+        ],
+        "dependency_level": 0,
+        "kind": "algorithm",
+        "title": "Local SGD with periodic synchronization",
+        "justified_by": []
+      },
+      {
+        "id": "lem-relaxed-euclidean-squared-norm",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Relaxed inequalities for squared Euclidean norms",
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-martingale-difference-sum-variance",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Second moment bound for a finite martingale-difference sum",
+        "justified_by": []
+      },
+      {
+        "id": "lem-local-sgd-weighted-recursion",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Quadratic-weighted telescope for a strongly convex recursion",
+        "justified_by": []
+      },
+      {
+        "id": "lem-federated-recursion-averaging",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Geometric and sublinear averaging for descent recursions",
+        "justified_by": []
+      },
+      {
+        "id": "lem-smooth-convex-gradient-difference",
+        "deps": [
+          "lem-l-smoothness-descent-inequality",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Smooth convex gradient differences around a minimizer",
+        "justified_by": []
+      },
+      {
+        "id": "lem-convex-gradient-step-nonexpansive",
+        "deps": [
+          "lem-l-smoothness-descent-inequality",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Gradient steps of smooth convex functions are nonexpansive",
+        "justified_by": []
+      },
+      {
+        "id": "alg-fedavg",
+        "deps": [
+          "def-federated-objective-and-client-sampling"
+        ],
+        "dependency_level": 1,
+        "kind": "algorithm",
+        "title": "Federated averaging (FedAvg)",
+        "justified_by": []
+      },
+      {
+        "id": "alg-scaffold",
+        "deps": [
+          "def-federated-objective-and-client-sampling"
+        ],
+        "dependency_level": 1,
+        "kind": "algorithm",
+        "title": "SCAFFOLD with client and server control variates",
+        "justified_by": []
+      },
+      {
+        "id": "lem-uniform-client-sampling-moments",
+        "deps": [
+          "def-federated-objective-and-client-sampling",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Moments of a uniformly sampled fixed-size client set",
+        "justified_by": []
+      },
+      {
+        "id": "lem-local-sgd-virtual-progress",
+        "deps": [
+          "alg-local-sgd",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-l-smoothness-descent-inequality",
+          "lem-finite-sum-gradient-is-average",
+          "thm-finite-jensen-inequality-in-euclidean-space",
+          "def-euclidean-inner-product",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "One-step progress of the virtual local-SGD iterate",
+        "justified_by": []
+      },
+      {
+        "id": "lem-local-sgd-sampling-variance",
+        "deps": [
+          "alg-local-sgd",
+          "def-independent-random-elements",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Variance reduction across independent local-SGD workers",
+        "justified_by": []
+      },
+      {
+        "id": "lem-local-sgd-client-drift",
+        "deps": [
+          "alg-local-sgd",
+          "lem-relaxed-euclidean-squared-norm",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Deviation of local-SGD workers from their virtual mean",
+        "justified_by": []
+      },
+      {
+        "id": "lem-perturbed-strong-convexity",
+        "deps": [
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-l-smoothness-descent-inequality",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 1,
+        "kind": "lemma",
+        "title": "Strong-convexity inequality for a perturbed gradient point",
+        "justified_by": []
+      },
+      {
+        "id": "thm-local-sgd-convex-round-complexity",
+        "deps": [
+          "alg-local-sgd",
+          "lem-local-sgd-virtual-progress",
+          "lem-local-sgd-sampling-variance",
+          "lem-local-sgd-client-drift",
+          "lem-local-sgd-weighted-recursion",
+          "lem-finite-sum-gradient-is-average",
+          "thm-finite-jensen-inequality-in-euclidean-space",
+          "def-independent-random-elements",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "Strongly convex local-SGD round complexity",
+        "justified_by": []
+      },
+      {
+        "id": "lem-fedavg-one-round-progress",
+        "deps": [
+          "alg-fedavg",
+          "def-federated-objective-and-client-sampling",
+          "lem-uniform-client-sampling-moments",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-perturbed-strong-convexity",
+          "lem-smooth-convex-gradient-difference",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "lem-finite-martingale-difference-sum-variance"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "One-round progress of strongly convex FedAvg",
+        "justified_by": []
+      },
+      {
+        "id": "lem-fedavg-local-drift",
+        "deps": [
+          "alg-fedavg",
+          "def-federated-objective-and-client-sampling",
+          "lem-convex-gradient-step-nonexpansive",
+          "lem-relaxed-euclidean-squared-norm",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 2,
+        "kind": "lemma",
+        "title": "Client drift under FedAvg gradient dissimilarity",
+        "justified_by": []
+      },
+      {
+        "id": "def-scaffold-analysis-trajectory-and-errors",
+        "deps": [
+          "alg-scaffold",
+          "def-federated-objective-and-client-sampling",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_level": 2,
+        "kind": "definition",
+        "title": "SCAFFOLD trajectories, client drift, control lag and tracking error",
+        "justified_by": []
+      },
+      {
+        "id": "thm-fedavg-under-gradient-dissimilarity",
+        "deps": [
+          "alg-fedavg",
+          "def-federated-objective-and-client-sampling",
+          "lem-uniform-client-sampling-moments",
+          "lem-fedavg-one-round-progress",
+          "lem-fedavg-local-drift",
+          "lem-federated-recursion-averaging",
+          "lem-smooth-convex-gradient-difference",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 3,
+        "kind": "theorem",
+        "title": "Strongly convex FedAvg under bounded gradient dissimilarity",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-control-tracking-identity",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Option II controls track gradients at stored client anchors",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-convex-server-variance",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-control-tracking-identity",
+          "lem-finite-martingale-difference-sum-variance",
+          "lem-uniform-client-sampling-moments",
+          "lem-smooth-convex-gradient-difference",
+          "lem-finite-sum-gradient-is-average",
+          "lem-relaxed-euclidean-squared-norm",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Convex SCAFFOLD server-update second moment",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-convex-control-lag",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-uniform-client-sampling-moments",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-smooth-convex-gradient-difference",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 3,
+        "kind": "lemma",
+        "title": "Convex SCAFFOLD control-lag recursion",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-convex-client-drift",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-smooth-convex-gradient-difference",
+          "lem-convex-gradient-step-nonexpansive",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "lem-scaffold-control-tracking-identity"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Convex SCAFFOLD client-drift bound",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-convex-round-progress",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-convex-server-variance",
+          "lem-scaffold-convex-control-lag",
+          "lem-scaffold-convex-client-drift",
+          "lem-perturbed-strong-convexity",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 5,
+        "kind": "lemma",
+        "title": "Strongly convex SCAFFOLD progress in one communication round",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-nonconvex-server-variance",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-control-tracking-identity",
+          "lem-finite-martingale-difference-sum-variance",
+          "lem-uniform-client-sampling-moments",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-finite-sum-gradient-is-average",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Nonconvex SCAFFOLD server-update moments",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-nonconvex-client-drift",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-control-tracking-identity",
+          "lem-relaxed-euclidean-squared-norm",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 4,
+        "kind": "lemma",
+        "title": "Nonconvex SCAFFOLD query-point drift bound",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-nonconvex-control-lag",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-control-tracking-identity",
+          "lem-scaffold-nonconvex-server-variance",
+          "lem-uniform-client-sampling-moments",
+          "lem-relaxed-euclidean-squared-norm",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 5,
+        "kind": "lemma",
+        "title": "Nonconvex SCAFFOLD control-anchor tracking recursion",
+        "justified_by": []
+      },
+      {
+        "id": "lem-scaffold-nonconvex-round-progress",
+        "deps": [
+          "alg-scaffold",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-nonconvex-server-variance",
+          "lem-scaffold-nonconvex-control-lag",
+          "lem-scaffold-nonconvex-client-drift",
+          "lem-relaxed-euclidean-squared-norm",
+          "lem-l-smoothness-descent-inequality",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 6,
+        "kind": "lemma",
+        "title": "Nonconvex SCAFFOLD progress in one communication round",
+        "justified_by": []
+      },
+      {
+        "id": "thm-scaffold-convex-and-nonconvex-rates",
+        "deps": [
+          "alg-scaffold",
+          "def-federated-objective-and-client-sampling",
+          "def-scaffold-analysis-trajectory-and-errors",
+          "lem-scaffold-convex-round-progress",
+          "lem-scaffold-nonconvex-round-progress",
+          "lem-scaffold-control-tracking-identity",
+          "lem-federated-recursion-averaging",
+          "lem-smooth-convex-gradient-difference",
+          "lem-finite-sum-gradient-is-average",
+          "lem-l-smoothness-descent-inequality",
+          "def-euclidean-inner-product",
+          "def-axiom-of-choice",
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-taking-out-what-is-known",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 7,
+        "kind": "theorem",
+        "title": "SCAFFOLD rates for strongly convex, convex and nonconvex objectives",
+        "justified_by": []
+      },
+      {
+        "id": "fs-scaffold-general-convex-uniform-output-round-headline",
+        "deps": [
+          "alg-scaffold"
+        ],
+        "dependency_level": 2,
+        "kind": "false-statement",
+        "title": "SCAFFOLD general-convex round headline with a uniform server-iterate output",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2755,
+    "id": "ml02-federated-optimization-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Federated averaging, local SGD, and SCAFFOLD — Examples",
+    "companion": "ml02-federated-optimization",
+    "requires": [
+      "ml02-federated-optimization"
+    ],
+    "items": [
+      {
+        "id": "ex-local-versus-periodic-synchronization",
+        "deps": [
+          "alg-local-sgd"
+        ],
+        "dependency_level": 1,
+        "kind": "example",
+        "title": "Local updates and periodic synchronization give different averages",
+        "justified_by": []
+      },
+      {
+        "id": "ex-client-data-locality-does-not-imply-dp",
+        "deps": [
+          "def-differential-privacy-and-adjacency",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "dependency_level": 1,
+        "kind": "example",
+        "title": "Keeping records on clients does not imply differential privacy",
+        "justified_by": []
+      },
+      {
+        "id": "ex-two-client-shifted-optima",
+        "deps": [
+          "def-federated-objective-and-client-sampling",
+          "alg-fedavg",
+          "def-linear-regression-objectives"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "Two clients with shifted least-squares optima",
+        "justified_by": []
+      },
+      {
+        "id": "ex-scaffold-control-correction",
+        "deps": [
+          "def-federated-objective-and-client-sampling",
+          "alg-scaffold"
+        ],
+        "dependency_level": 2,
+        "kind": "example",
+        "title": "SCAFFOLD controls cancel shifted local gradients at the server model",
+        "justified_by": []
+      }
+    ]
+  }
+]

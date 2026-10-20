@@ -1,0 +1,1029 @@
+{
+  "version": 1,
+  "scope": [
+    "def-uniform-algorithmic-stability",
+    "thm-strongly-convex-regularized-erm-stability",
+    "thm-uniform-stability-expected-generalization",
+    "thm-uniform-stability-high-probability-generalization",
+    "ex-strongly-convex-regularized-loss-stability",
+    "ex-one-nearest-neighbor-has-unit-deletion-instability",
+    "ex-stability-versus-training-accuracy-and-rademacher-bound"
+  ],
+  "contracts": {
+    "def-uniform-algorithmic-stability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at n=1 the retained set after deletion is empty, and the rule is defined for every retained index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: beta_n may equal zero; the loss-change inequality then forces equality for every deletion and test point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: sample size n=1 is included explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No nondegeneracy assumption or parameter is part of this definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the learner is a deterministic map and the definition makes no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-strongly-convex-regularized-erm-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Write $F(f)=m^{-1}\\sum_{j=1}^m c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2$ and $G(f)=m^{-1}\\sum_{j\\ne i}c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2$, with minimizers $f=A_S$ and $g=A_{S\\setminus i}$. For any convex $Q$ and $J(h)=Q(h)+\\lambda\\|h\\|^2$, the identity $\\|(1-t)u+tv\\|^2=(1-t)\\|u\\|^2+t\\|v\\|^2-t(1-t)\\|u-v\\|^2$ and convexity of $Q$ give $J((1-t)u+tv)\\le(1-t)J(u)+tJ(v)-\\lambda t(1-t)\\|u-v\\|^2$. If $u$ minimizes $J$, then $J(u)\\le J((1-t)u+tv)$; subtracting $(1-t)J(u)$, dividing by $t>0$, and letting $t\\downarrow0$ yields $J(v)-J(u)\\ge\\lambda\\|u-v\\|^2$. This applied to either objective shows that two minimizers must coincide. Each objective is unchanged by reordering its full or retained sample, so its unique minimizer is permutation-invariant. Apply the same gap inequality to $F$ at $f$ with $v=g$ and to $G$ at $g$ with $v=f$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Adding the two inequalities from step 1.1 cancels all common loss terms and both regularizers except the deleted observation, so $2\\lambda\\|f-g\\|_{\\mathcal H}^2\\le F(g)-F(f)+G(f)-G(g)=m^{-1}[c(g(x_i),y_i)-c(f(x_i),y_i)]\\le\\sigma|g(x_i)-f(x_i)|/m$. The RKHS identity in the Statement and [F2] give $|g(x_i)-f(x_i)|=|\\langle g-f,K_{x_i}\\rangle|\\le\\kappa\\|g-f\\|_{\\mathcal H}$. If $f=g$ the desired norm bound is immediate; otherwise dividing by $2\\lambda\\|f-g\\|_{\\mathcal H}$ yields $\\|f-g\\|_{\\mathcal H}\\le\\sigma\\kappa/(2\\lambda m)$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For any test pair $(x,y)$, $\\sigma$-Lipschitzness and the reproducing-kernel estimate give $|c(f(x),y)-c(g(x),y)|\\le\\sigma|\\langle f-g,K_x\\rangle|\\le\\sigma\\kappa\\|f-g\\|_{\\mathcal H}\\le\\sigma^2\\kappa^2/(2\\lambda m)$. Taking the supremum over samples, deleted indices, and test pairs gives the stated stability coefficient. Since $1/m$ decreases with $m$ for fixed positive $\\lambda$, the displayed envelope is nonincreasing.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the one-point case; after deletion the objective is only lambda times the squared norm."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats f=g before division; if sigma kappa is zero, its objective-gap inequality forces f=g."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits every m>=1, including m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes coincident minimizers and does not divide by a norm unless f!=g."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint claim occurs in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves uniqueness from attainment, so no choice of minimizer is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-uniform-stability-expected-generalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix $i\\in[m]$ and extend the coordinate sample to $(\\mathsf Z^{m+1},P^{m+1})$, writing $Z_i'$ for the last coordinate. By [A1] and [F6], $(S,z')\\mapsto L_{A_S}(z')$ is integrable on this product space, and [F5] identifies $\\mathbb E_S R_P(A_S)$ with $\\mathbb E_{S,Z_i'}L_{A_S}(Z_i')$. On each all-coordinate rectangle, the $P^{m+1}$ mass is the product of its coordinate masses. Transposing coordinates $i$ and $m+1$ preserves that value; the generating and uniqueness statements in [F4] therefore show that the transposed product law is again $P^{m+1}$. If $S^{(i)}$ replaces $Z_i$ by $Z_i'$, this gives $\\mathbb E_{S,Z_i'}L_{A_S}(Z_i')=\\mathbb E_{S,Z_i'}L_{A_{S^{(i)}}}(Z_i)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "By [F2] and [F7], $R_P(A_S)-R_P(A_{S\\setminus i})=\\int_{\\mathsf Z}(L_{A_S}(z)-L_{A_{S\\setminus i}}(z))\\,P(dz)$. The integrand has absolute value at most $\\beta_m$ by [F9], so [F8] gives $|R_P(A_S)-R_P(A_{S\\setminus i})|\\le\\int\\beta_m\\,dP=\\beta_m$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "For each $i$, the deleted output $A_{S\\setminus i}$ depends only on the retained coordinates. Since $Z_i$ is independent of them and has law $P$, [F5] and [F6] give $\\mathbb E_S L_{A_{S\\setminus i}}(Z_i)=\\mathbb E_S R_P(A_{S\\setminus i})$. Averaging over $i$ therefore yields $\\mathbb E_S[R_P(A_S)-R_{\\mathrm{loo}}(A,S)]=m^{-1}\\sum_{i=1}^m\\mathbb E_S[R_P(A_S)-R_P(A_{S\\setminus i})]$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2] and linearity, step 1.1 gives $\\mathbb E_S[R_P(A_S)-\\widehat R_S(A_S)]=m^{-1}\\sum_{i=1}^m\\mathbb E_{S,Z_i'}[L_{A_{S^{(i)}}}(Z_i)-L_{A_S}(Z_i)]$. The indexed retained samples $S\\setminus i$ and $S^{(i)}\\setminus i$ coincide. Applying [F9] to each full output and that common deletion output, then the triangle inequality, bounds the absolute value of every summand by $2\\beta_m$. Averaging gives the first expected bound.",
+          "inputs": [
+            "F2",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Each summand in the average in step 1.3 is at most $\\beta_m$ by step 1.2, so its average is at most $\\beta_m$. This proves the leave-one-out bound.",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.3 covers m=1, where the retained sample for the LOO output is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 yields zero risk change when beta_m=0, and steps 2.1-3.1 retain the stated expectation bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement assumes m>=1 and the proof handles a one-coordinate sample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement allows M=0; steps 1.1-1.3 use no positive lower bound on M or beta_m, so all losses may be zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement says all conclusions are choice-free; the proof uses finite products and integration only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-uniform-stability-high-probability-generalization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-uniform-stability-expected-generalization",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable instance and label spaces, let $P$ be a probability measure on $\\mathsf Z=\\mathsf X\\times\\mathsf Y$, and let $\\mathcal F$ be a class of measurable predictors with measurable loss $\\ell:\\mathbb R\\times\\mathsf Y\\to[0,\\infty)$. For $f\\in\\mathcal F$ and $z=(x,y)$ write $L_f(z)=\\ell(f(x),y)$, $R_P(f)=\\int_{\\mathsf Z}L_f(z)\\,P(dz)$, and $\\widehat R_S(f)=m^{-1}\\sum_{i=1}^mL_f(Z_i)$. Let $S=(Z_1,\\ldots,Z_m)$ have product law $P^m$, with $m\\ge1$, and let $A$ be a deterministic, permutation-invariant size-indexed learning rule that outputs members of $\\mathcal F$ and whose sample-dependent loss and risk maps are measurable. Assume $0\\le L_{A_T}(z)\\le M<\\infty$ for every full or deleted sample $T$ and every $z\\in\\mathsf Z$, and assume $A$ has uniform deletion stability with a finite nonincreasing sequence $(\\beta_n)_{n\\ge1}$. Define $R_{\\mathrm{loo}}(A,S)=m^{-1}\\sum_{i=1}^m L_{A_{S\\setminus i}}(Z_i)$, using the size-$m$ deletion output. Then\n\n$$\\mathbb E_{S\\sim P^m}\\bigl[R_P(A_S)-\\widehat R_S(A_S)\\bigr]\\le2\\beta_m\\qquad\\text{and}\\qquad\\mathbb E_{S\\sim P^m}\\bigl[R_P(A_S)-R_{\\mathrm{loo}}(A,S)\\bigr]\\le\\beta_m.$$\n\nMoreover, for every sample $S$ and index $i\\in[m]$,\n\n$$|R_P(A_S)-R_P(A_{S\\setminus i})|\\le\\beta_m.$$\n\nAll three conclusions are choice-free.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-mcdiarmid-bounded-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, let $Z_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be independent random elements, meaning measurable maps ([[def-random-element-and-real-random-variable]]), with laws $\\mu_i$ given by pushforward ([[def-law-or-distribution-of-a-random-element]]). Put $\\mu=\\bigotimes_{i=1}^n\\mu_i$ on the finite product sigma-algebra ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]). Let $f:\\prod_{i=1}^nS_i\\to\\mathbb R$ be product-measurable with $\\int|f|\\,d\\mu<\\infty$. Suppose finite deterministic constants $c_i\\ge0$ satisfy\n$$|f(z_1,\\ldots,z_i,\\ldots,z_n)-f(z_1,\\ldots,z_i',\\ldots,z_n)|\\le c_i$$\nfor every fixed setting of the other coordinates and every $z_i,z_i'$. The independent product-law theorem identifies the law of $Z=(Z_1,\\ldots,Z_n)$ as $\\mu$. Applying change of variables for expectation first to $|f|$ and then to $f$ makes $f(Z)$ integrable and gives $\\mathbb E f(Z)=\\int f\\,d\\mu$. Put $V=\\sum_{i=1}^n c_i^2$. For $t>0$, if $V>0$ then\n$$\\mathbb P\\bigl(f(Z_1,\\ldots,Z_n)-\\mathbb E f(Z_1,\\ldots,Z_n)\\ge t\\bigr)\\le\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$\nand if $V=0$ this probability is $0$. The same bound holds for the lower tail, so the two-sided probability is at most $2e^{-2t^2/V}$ when $V>0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Fix an index $k$ and let $S'$ be any sample that differs from $S$ only at coordinate $k$. Their retained samples $S\\setminus k$ and $S'\\setminus k$ coincide. By [F4], $|R_P(A_S)-R_P(A_{S'})|\\le|R_P(A_S)-R_P(A_{S\\setminus k})|+|R_P(A_{S'\\setminus k})-R_P(A_{S'})|\\le2\\beta_m$. For every $j\\ne k$, the two loss terms at the common test point $Z_j$ differ by at most $2\\beta_m$, by [F2] through the same deleted output. The two $k$th loss terms each lie in $[0,M]$, so their difference is at most $M$. Hence $|\\widehat R_S(A_S)-\\widehat R_{S'}(A_{S'})|\\le 2(m-1)\\beta_m/m+M/m\\le2\\beta_m+M/m$. For $\\Phi(S)=R_P(A_S)-\\widehat R_S(A_S)$ this yields the coordinate oscillation $|\\Phi(S)-\\Phi(S')|\\le4\\beta_m+M/m$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Fix an index $k$ and samples $S,S'$ differing only at coordinate $k$. The risk term in $\\Psi(S)=R_P(A_S)-R_{\\mathrm{loo}}(A,S)$ changes by at most $2\\beta_m$ by [F4]. In the leave-one-out average, the $k$th term uses the same deleted training sample for $S$ and $S'$, and its test losses differ by at most $M$. For $j\\ne k$, the two deleted training samples $S\\setminus j$ and $S'\\setminus j$ have the same $m-2$ common observations and the two alternative $k$th observations. Form a size-$m$ indexed sample $T$ from those $m-2$ common observations and both alternatives. Up to permutation, each of the two deleted training samples is obtained by deleting one of the alternatives from $T$. Permutation invariance and [F2] therefore bound their loss change at the common test point $Z_j$ by $2\\beta_m$. When $m=1$ there are no indices $j\\ne k$, so only the $k$th term occurs. Thus the leave-one-out average changes by at most $2(m-1)\\beta_m/m+M/m\\le2\\beta_m+M/m$, and $|\\Psi(S)-\\Psi(S')|\\le4\\beta_m+M/m$.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Put $c=4\\beta_m+M/m$. If $c=0$, then $M=\\beta_m=0$ and every loss and both gaps vanish. If $c>0$, then $\\Phi$ is bounded, measurable, and integrable by [A2]. Since $0<\\delta<1$, [F5]–[F6] give $\\log(1/\\delta)>0$, so $t=c\\sqrt{m\\log(1/\\delta)/2}>0$. The product law $P^m$ makes the coordinates independent by [F3], and [F7] with all $m$ coordinate bounds equal to $c$ gives $\\mathbb P\\{\\Phi-\\mathbb E\\Phi\\ge t\\}\\le\\exp(-2t^2/(mc^2))=\\delta$. By [F4], outside this event $\\Phi\\le2\\beta_m+t=2\\beta_m+(4m\\beta_m+M)\\sqrt{\\log(1/\\delta)/(2m)}$. Together with the $c=0$ case this proves the first probability bound.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "With $c=4\\beta_m+M/m$, the case $c=0$ again has zero losses and zero gaps. If $c>0$, [A2] makes $\\Psi$ bounded, measurable, and integrable. Since $0<\\delta<1$, [F5]–[F6] give $\\log(1/\\delta)>0$. The product law $P^m$ makes the coordinates independent by [F3], and [F7] with coordinate bounds $c$ gives $\\mathbb P\\{\\Psi-\\mathbb E\\Psi\\ge c\\sqrt{m\\log(1/\\delta)/2}\\}\\le\\delta$. By [F4], $\\mathbb E\\Psi\\le\\beta_m$, so outside this event $\\Psi\\le\\beta_m+(4m\\beta_m+M)\\sqrt{\\log(1/\\delta)/(2m)}$. This proves the second probability bound, separately from the first.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles m=1, when there are no indices j different from k."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 handle c=4 beta_m+M/m=0 separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits m=1; the proof covers that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 handle zero coordinate oscillation without applying McDiarmid with zero denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement requires delta in (0,1), so neither endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes AC, used through the McDiarmid supplier in steps 2.1 and 3.1. Joint measurability of the full/deleted sample-dependent test losses is explicitly assumed; no measurable-selector existence is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves two inequalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves two inequalities, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-strongly-convex-regularized-loss-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-strongly-convex-regularized-erm-stability",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable instance and label spaces. Let $\\kappa\\ge0$, and let $\\mathcal H$ be a real Hilbert space of measurable real-valued functions on $\\mathsf X$ with kernel sections $K_x\\in\\mathcal H$ satisfying $f(x)=\\langle f,K_x\\rangle_{\\mathcal H}$ and $\\|K_x\\|_{\\mathcal H}^2=K(x,x)\\le\\kappa^2$ for every $x\\in\\mathsf X$. Let $\\lambda>0$ and $\\sigma\\ge0$, and let $c:\\mathbb R\\times\\mathsf Y\\to[0,\\infty)$ be measurable, convex in its first argument, and $\\sigma$-Lipschitz there, meaning $|c(u,y)-c(v,y)|\\le\\sigma|u-v|$ for all $u,v\\in\\mathbb R$ and $y\\in\\mathsf Y$. For a sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of size $m\\ge1$, define $A_S$ as the attained minimizer over $f\\in\\mathcal H$ of\n\n$$\n\\frac1m\\sum_{j=1}^m c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2,\n$$\n\nand define $A_{S\\setminus i}$ as the attained minimizer of\n\n$$\n\\frac1m\\sum_{j\\ne i}c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2,\n$$\n\nwhere the deleted objective retains the original denominator $m$. Assume these minima are attained for every sample and deletion. Then the learning rule is permutation-invariant and has uniform deletion stability\n\n$$\\sup_{S\\in(\\mathsf X\\times\\mathsf Y)^m,\\ 1\\le i\\le m,\\ (x,y)\\in\\mathsf X\\times\\mathsf Y}|c(A_S(x),y)-c(A_{S\\setminus i}(x),y)|\\le\\beta_m,\\qquad\\beta_m:=\\frac{\\sigma^2\\kappa^2}{2\\lambda m}.$$\n\nFor fixed $\\lambda$, this stability envelope is nonincreasing in $m$. The conclusion supplies no uniform bounded-loss constant $M$; any such hypothesis for a concentration bound must be checked separately.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-strongly-convex-regularized-erm-stability",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathsf X,\\Sigma_X)$ and $(\\mathsf Y,\\Sigma_Y)$ be measurable instance and label spaces. Let $\\kappa\\ge0$, and let $\\mathcal H$ be a real Hilbert space of measurable real-valued functions on $\\mathsf X$ with kernel sections $K_x\\in\\mathcal H$ satisfying $f(x)=\\langle f,K_x\\rangle_{\\mathcal H}$ and $\\|K_x\\|_{\\mathcal H}^2=K(x,x)\\le\\kappa^2$ for every $x\\in\\mathsf X$. Let $\\lambda>0$ and $\\sigma\\ge0$, and let $c:\\mathbb R\\times\\mathsf Y\\to[0,\\infty)$ be measurable, convex in its first argument, and $\\sigma$-Lipschitz there, meaning $|c(u,y)-c(v,y)|\\le\\sigma|u-v|$ for all $u,v\\in\\mathbb R$ and $y\\in\\mathsf Y$. For a sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of size $m\\ge1$, define $A_S$ as the attained minimizer over $f\\in\\mathcal H$ of\n\n$$\n\\frac1m\\sum_{j=1}^m c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2,\n$$\n\nand define $A_{S\\setminus i}$ as the attained minimizer of\n\n$$\n\\frac1m\\sum_{j\\ne i}c(f(x_j),y_j)+\\lambda\\|f\\|_{\\mathcal H}^2,\n$$\n\nwhere the deleted objective retains the original denominator $m$. Assume these minima are attained for every sample and deletion. Then the learning rule is permutation-invariant and has uniform deletion stability\n\n$$\\sup_{S\\in(\\mathsf X\\times\\mathsf Y)^m,\\ 1\\le i\\le m,\\ (x,y)\\in\\mathsf X\\times\\mathsf Y}|c(A_S(x),y)-c(A_{S\\setminus i}(x),y)|\\le\\beta_m,\\qquad\\beta_m:=\\frac{\\sigma^2\\kappa^2}{2\\lambda m}.$$\n\nFor fixed $\\lambda$, this stability envelope is nonincreasing in $m$. The conclusion supplies no uniform bounded-loss constant $M$; any such hypothesis for a concentration bound must be checked separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $t\\in[0,1]$, the objective is $p_J/m+(r_J-p_J)t/m+\\lambda t^2$, whose derivative vanishes at $(p_J-r_J)/(2\\lambda m)$; strict convexity gives the clipped formula as the unique minimizer on this interval. For $t<0$ the objective is $p_J/m-|J|t/m+\\lambda t^2$ and is decreasing toward $0$; for $t>1$ it is $|J|t/m-p_J/m+\\lambda t^2$ and is increasing away from $1$. Hence no global minimizer lies outside $[0,1]$, including when $J=\\varnothing$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Since $t_J,y\\in[0,1]$, $|t_J-y|\\le1$, so the common loss bound is $M=1$. Formula [F1] gives $R_P(f_t)=q(1-t)+(1-q)t$ and $\\widehat R_S(f_t)=m^{-1}[p_{[m]}(1-t)+r_{[m]}t]$ for $t\\in[0,1]$. The map $t\\mapsto|t-y|$ is convex and satisfies $||t-y|-|s-y||\\le|t-s|$, so $\\sigma=1$; the one-point RKHS has $\\kappa=1$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "By [F2] and [F3], the learner has uniform deletion-stability coefficient $\\beta_m\\le1/(2\\lambda m)$; step 2.1 independently verifies the bounded-loss premise required by the high-probability theorem.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 sets p_J=r_J=0 for J empty and gives the unique minimizer t_J=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes clipped minimizers at 0, including the empty retained set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example allows m=1 and keeps denominator m after deletion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes J empty; step 2.1 allows q=0 and q=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats t=0 and t=1 as endpoints of the clipping interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves strict convexity and a unique minimizer for every retained set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty retained set",
+          "claim": "p_J=r_J=0 gives t_J=0, the unique minimizer of lambda t^2.",
+          "evidence": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "single zero label",
+          "claim": "For m=1 and label 0, t_J=clip(-1/(2 lambda))=0.",
+          "evidence": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "single one label",
+          "claim": "For m=1 and label 1, t_J=clip(1/(2 lambda)) lies in [0,1].",
+          "evidence": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "ex-one-nearest-neighbor-has-unit-deletion-instability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For a fixed finite sample, nearest-index regions are finite Boolean combinations of Borel distance comparisons, so the prediction map is measurable. The tie rule depends only on the multiset of labels at the minimum distance, so reordering the training sample leaves every prediction unchanged. At feature $0$ the unique nearest label is $0$, and at feature $10$ all nearest labels are $1$; hence the rule predicts every training label correctly and [F2] gives empirical risk $0$. At feature $1$, the distances to $0$ and $10$ are $1$ and $9$, so the unique nearest label is $0$ and the loss at $(1,1)$ is $1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "After deleting the unique point $(0,0)$, every remaining training point has feature $10$ and label $1$, so the nearest-neighbor rule predicts $1$ at feature $1$ and has test loss $0$. The deletion loss change for this sample, deleted index, and test point is therefore $1$, so [F3] gives a stability coefficient at least $1$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Every zero-one loss difference has absolute value at most $1$, so every term in the supremum [F3] is at most $1$. Step 2.1 attains this value for every $m\\ge2$, hence the coefficient is exactly $1$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example defines the empty-sample output as the constant predictor 1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example asserts the coefficient is exactly 1 for m>=2 and has no zero-coefficient case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim is restricted to m>=2; it makes no size-one stability assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles repeated feature-10 observations and their tied nearest points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the deterministic majority and tie-to-zero rule, so no selection is left unspecified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "m=2 witness",
+          "claim": "S=((0,0),(10,1)) has empirical risk 0; deleting (0,0) changes loss at (1,1) from 1 to 0.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ]
+    },
+    "ex-stability-versus-training-accuracy-and-rademacher-bound": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-uniform-algorithmic-stability",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal Z$ be an observation set, let $\\mathcal H$ be a set of hypotheses, and let $L:\\mathcal H\\times\\mathcal Z\\to[0,\\infty)$ be a loss. A deterministic size-indexed learning rule consists, for every integer $n\\ge1$ and every retained index set $J\\subseteq[n]$, of a map $A_{n,J}$ from the indexed observations $(z_j)_{j\\in J}$ to $\\mathcal H$; the original sample size $n$ remains an input to this rule. For $S=(z_1,\\ldots,z_n)$ write $A_S:=A_{n,[n]}(S)$ and $A_{S\\setminus i}:=A_{n,[n]\\setminus\\{i\\}}(S|_{[n]\\setminus\\{i\\}})$ for the output after deleting indexed observation $i$. The rule is permutation-invariant if simultaneous reordering of the observations and relabeling of their retained indices leaves each output unchanged. Given a nonnegative sequence $(\\beta_n)_{n\\ge1}$, the rule has uniform deletion stability with coefficients $(\\beta_n)$ if, for every $n\\ge1$, every $S\\in\\mathcal Z^n$, every $i\\in[n]$, and every $z\\in\\mathcal Z$,\n\n$$\n|L(A_S,z)-L(A_{S\\setminus i},z)|\\le\\beta_n.\n$$\n\nThe sequence is nonincreasing when $\\beta_{n+1}\\le\\beta_n$ for every $n\\ge1$. This is the deletion convention. If $S'$ differs from $S$ only at coordinate $i$, then $S\\setminus i=S'\\setminus i$, and the triangle inequality gives $|L(A_S,z)-L(A_{S'},z)|\\le2\\beta_n$ for every $z$; the resulting replacement bound has coefficient $2\\beta_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rademacher-complexity",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space and let $\\mathcal G$ be a nonempty class of $\\mathcal A$-measurable functions $g:\\mathcal Z\\to[0,1]$. For a fixed sample $S=(z_1,\\ldots,z_m)\\in\\mathcal Z^m$, where $m\\ge1$, let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs in $\\{-1,+1\\}$. Define\n\n$$P_mg:=\\frac1m\\sum_{i=1}^m g(z_i),\\qquad Pg:=\\int g\\,dP,$$\n\nand define the empirical Rademacher complexity by\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\left[\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(z_i)\\right].$$\n\nHere $\\mathbb E_\\sigma$ is the uniform average over the $2^m$ sign vectors. If $S=(Z_1,\\ldots,Z_m)$ is an IID sample with common law $P$, and the displayed supremum is measurable as a function of $S$, the expected Rademacher complexity is\n\n$$\\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G).$$\n\nThe class may be finite, countable, or uncountable when the indicated supremum is measurable; a specified countable subclass giving the same supremum for every sign vector for almost every sample suffices. This is the one-sided convention: the definition contains no absolute value, and zero need not belong to $\\mathcal G$. Both complexities lie in $[0,1]$: every signed average lies in $[-1,1]$, and for any fixed $g_0\\in\\mathcal G$ the sign-average supremum is at least the sign-average for $g_0$, which is zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rademacher-uniform-generalization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $(\\mathcal Z,\\mathcal A,P)$ be a probability space, let $m\\ge1$, and let $\\mathcal G$ be a nonempty class of measurable functions $g:\\mathcal Z\\to[0,1]$. Take $S=(Z_1,\\ldots,Z_m)$ to be the coordinate sample with law $P^m$. Put $P_mg=m^{-1}\\sum_i g(Z_i)$ and $\\overline{\\mathcal G}:=\\{1-g:g\\in\\mathcal G\\}$. Assume the sample, independent-copy and sign suprema over $\\mathcal G$ and $\\overline{\\mathcal G}$ used in the displayed claims and the symmetrization argument are measurable. Let $\\sigma_1,\\ldots,\\sigma_m$ be independent uniform signs, and let\n\n$$\\widehat{\\mathfrak R}_S(\\mathcal G):=\\mathbb E_\\sigma\\sup_{g\\in\\mathcal G}\\frac1m\\sum_{i=1}^m\\sigma_i g(Z_i),\\qquad \\mathfrak R_m(\\mathcal G):=\\mathbb E_{S\\sim P^m}\\widehat{\\mathfrak R}_S(\\mathcal G),$$\n\nwhere the $\\sigma_i$ are independent uniform signs, and let $\\delta\\in(0,1)$. Each of the following four guarantees holds with probability at least $1-\\delta$ over $S$:\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(1/\\delta)}{2m}},$$\n\n$$\\forall g\\in\\mathcal G,\\qquad Pg\\le P_mg+2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\mathfrak R_m(\\mathcal G)+\\sqrt{\\frac{\\log(2/\\delta)}{2m}},$$\n\n$$\\sup_{g\\in\\mathcal G}|Pg-P_mg|\\le2\\widehat{\\mathfrak R}_S(\\mathcal G)+3\\sqrt{\\frac{\\log(4/\\delta)}{2m}}.$$\n\nThe four guarantees are separate probability statements. The choice axiom is used through the bounded-differences theorem.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Both rules depend only on the sample multiset, so they are permutation-invariant. Under $P$, $h_0\\equiv0$ has zero loss at every feature, so its population and empirical risks are both $0$. For $S=((j,0))$, the memorizing learner predicts $0$ at $j$ and $1$ at the other $N-1$ features. Thus its empirical risk is $0$ and its population risk is $(N-1)/N$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Fix any $z=(j,y)$ and one-point sample $S=(z)$. Since $\\mathcal H$ contains every binary labeling, some $h$ has loss $g_h(z)=0$ and some has $g_h(z)=1$. For sign $\\sigma=+1$, $\\sup_{g\\in\\mathcal G}\\sigma g(z)=1$; for sign $\\sigma=-1$, the supremum is $0$. The two equiprobable signs therefore give $\\widehat{\\mathfrak R}_S(\\mathcal G)=1/2$ for every $S$, and averaging over $S\\sim P$ gives $\\mathfrak R_1(\\mathcal G)=1/2$.",
+          "inputs": [
+            "A2",
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The constant learner returns $h_0$ on both $S$ and its deletion, so its size-one stability coefficient is $0$. The empty-sample memorizer predicts $1$ at $j$, whereas the full-sample memorizer predicts $0$ there; at test point $(j,0)$ the loss changes by $1$. Every zero-one loss difference is at most $1$, hence the memorizer's coefficient is exactly $1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "With $m=1$, [F5] has complexity term $2\\mathfrak R_1(\\mathcal G)=1$, and [F7]–[F8] make its confidence term positive for every $\\delta\\in(0,1)$. Every zero-one loss deviation is at most $1$, so this class-wide upper bound is no sharper than the trivial range, while step 1.1 gives the constant learner an exact zero gap and the memorizer zero training risk with a large population risk.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example defines the empty-sample memorizer output, used when deleting the one-point sample in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes exactly zero risk and stability for the constant learner."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 use the one-point sample m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The smallest domain N=2 is permitted, and all formulas in steps 1.1-1.2 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement restricts delta to (0,1), so the confidence guarantee is only asserted in the open interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example assumes AC for the Rademacher theorem; its finite learner and sign calculations are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=2 finite domain",
+          "claim": "At S=((1,0)), the constant learner has risk 0, the memorizer has population risk 1/2, and the class one-sided complexity is 1/2.",
+          "evidence": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "case": "one-point confidence bound",
+          "claim": "For m=1, 2 R_1=1 and the added confidence term is positive, so the right side exceeds 1.",
+          "evidence": [
+            "3.1"
+          ]
+        }
+      ]
+    }
+  }
+}

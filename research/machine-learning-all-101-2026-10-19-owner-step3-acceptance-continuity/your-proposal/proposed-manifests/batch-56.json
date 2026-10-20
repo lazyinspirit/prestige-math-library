@@ -1,0 +1,276 @@
+[
+  {
+    "order": 2802,
+    "id": "self-supervised-and-contrastive-representation-learning",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Self-supervised and contrastive representations",
+    "companion": "self-supervised-and-contrastive-representation-learning-examples",
+    "requires": [
+      "rademacher-complexity-and-generalization",
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "lem-contrastive-hinge-and-logistic-loss-properties",
+        "kind": "lemma",
+        "title": "Convexity, Lipschitz bounds, and oscillation of the source contrastive losses",
+        "deps": [
+          "cor-second-derivative-characterises-convexity",
+          "def-natural-logarithm",
+          "def-real-exponential-function-and-e",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-vector-rademacher-contraction-for-bounded-classes",
+        "kind": "lemma",
+        "title": "A finite-dimensional vector contraction bound for one-sided Rademacher averages",
+        "deps": [
+          "lem-cauchy-schwarz-for-finite-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-latent-class-contrastive-learning",
+        "kind": "definition",
+        "title": "Latent-class contrastive representation learning",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-population-and-empirical-risk",
+          "def-probability-measure",
+          "def-rademacher-complexity",
+          "def-supervised-learning-problem",
+          "lem-contrastive-hinge-and-logistic-loss-properties",
+          "lem-population-and-empirical-risk-are-measurable",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $(\\mathcal C,\\mathcal C_0,\\rho)$ be a measurable probability space and $(\\mathcal X,\\mathcal A)$ a measurable space. For each class $c\\in\\mathcal C$, let $D_c$ be a probability measure on $(\\mathcal X,\\mathcal A)$ and assume $c\\mapsto D_c(A)$ is measurable for every $A\\in\\mathcal A$. Assume the displayed mixtures define probability measures. The positive-pair law $D_{\\rm sim}$ and negative marginal $D_{\\rm neg}$ are specified by\n\n$$D_{\\rm sim}(A\\times B):=\\int_{\\mathcal C}D_c(A)D_c(B)\\,\\rho(dc),\\qquad D_{\\rm neg}(A):=\\int_{\\mathcal C}D_c(A)\\,\\rho(dc)$$\n\nfor measurable $A,B\\in\\mathcal A$. Equivalently, draw $C\\sim\\rho$ and then draw $X,X^+$ independently with law $D_C$ for a positive pair; draw a fresh independent class $C'\\sim\\rho$ and $X^-\\sim D_{C'}$ for one negative. The class labels are latent: the learner observes the pair and negative data, not their classes.\n\nLet $d\\ge1$, $R>0$, and let $\\mathcal F$ be a nonempty class of measurable maps $f:\\mathcal X\\to\\mathbb R^d$ satisfying $\\sup_{x\\in\\mathcal X}\\lVert f(x)\\rVert_2\\le R$. Use either one-negative loss $\\ell_{\\rm h}(t)=(1+t)_+$ or $\\ell_{\\rm log}(t)=\\log_2(1+e^t)$ from the immediately preceding loss-properties lemma. The contrastive score and population loss are\n\n$$q_f(x,x^+,x^-):=f(x)^\\top\\bigl(f(x^-)-f(x^+)\\bigr),\\qquad L_{\\rm un}(f):=\\mathbb E_{(X,X^+)\\sim D_{\\rm sim},\\,X^-\\sim D_{\\rm neg}}\\bigl[\\ell(q_f(X,X^+,X^-))\\bigr].$$\n\nFor $M\\ge1$, an observed sample is $S=((x_j,x_j^+,x_j^-))_{j=1}^M$ of $M$ independent triplets with common law $D_{\\rm sim}\\otimes D_{\\rm neg}$, and its empirical loss is $\\widehat L_{\\rm un}(f):=M^{-1}\\sum_{j=1}^M\\ell(q_f(x_j,x_j^+,x_j^-))$. For this sample define the unnormalized vector Rademacher complexity\n\n$$\\mathcal R_S(\\mathcal F):=\\mathbb E_\\varepsilon\\sup_{f\\in\\mathcal F}\\sum_{j=1}^M\\sum_{t=1}^d\\bigl(\\varepsilon_{jt0}f_t(x_j)+\\varepsilon_{jt+}f_t(x_j^+)+\\varepsilon_{jt-}f_t(x_j^-)\\bigr),$$\n\nwhere every $\\varepsilon_{jt0},\\varepsilon_{jt+},\\varepsilon_{jt-}$ is an independent uniform sign. This is the one-sided convention with no absolute value and no $1/M$ factor.\n\nAll vector and matrix expectations in this definition are taken entrywise in finite dimensions. The bound on $f$ makes each coordinate of $f(X)$ and every product defining a covariance entry integrable.\n\nLet $C_+,C_-\\sim\\rho$ be independent class draws and set $\\tau:=\\Pr(C_+=C_-)<1$. Assume the diagonal $\\Delta:=\\{(c,c):c\\in\\mathcal C\\}$ and each $\\Delta_A:=\\{(c,c):c\\in A\\}$, $A\\in\\mathcal C_0$, are measurable. The average binary task draws $(C_+,C_-)$ conditional on $C_+\\ne C_-$, then samples a label $Y$ uniformly from $\\{+1,-1\\}$ and an input $X$ from $D_{C_+}$ if $Y=+1$ or $D_{C_-}$ if $Y=-1$. For a vector representation $f$, a binary linear classifier uses a weight vector $w\\in\\mathbb R^d$ and loss $\\ell(-Yw^\\top f(X))$. Define $L_{\\rm sup}(f)$ as the average over tasks of the infimum of this risk over $w\\in\\mathbb R^d$. Write $\\mu_c:=\\mathbb E_{X\\sim D_c}f(X)$ and define the class-mean classifier by $w_\\mu=\\mu_{C_+}-\\mu_{C_-}$; its average risk is $L^\\mu_{\\rm sup}(f)$. For $\\gamma>0$, write $L^\\mu_{\\gamma,\\rm sup}(f)$ for the same mean-classifier risk with margin loss $\\ell_\\gamma(t):=(1+t/\\gamma)_+$ in place of $\\ell$.\n\nFor $\\tau>0$, let $L^=_{\\rm un}(f)$ and $L^\\ne_{\\rm un}(f)$ be the conditional contrastive risks given $C_+=C_-$ and $C_+\\ne C_-$, respectively. Let $\\nu$ be the class law conditioned on the collision event, namely $\\nu(A):=(\\rho\\otimes\\rho)(\\Delta_A)/\\tau$ for $A\\in\\mathcal C_0$; for an atomic class law this gives $\\nu(\\{c\\})=\\rho(\\{c\\})^2/\\tau$. Define $\\Sigma_f(c):=\\mathbb E_{X\\sim D_c}[(f(X)-\\mu_c)(f(X)-\\mu_c)^\\top]$ and\n\n$$s(f):=\\mathbb E_{C\\sim\\nu}\\left[\\sqrt{\\lVert\\Sigma_f(C)\\rVert_{\\rm op}}\\,\\mathbb E_{X\\sim D_C}\\lVert f(X)\\rVert_2\\right],\\qquad \\lVert\\Sigma\\rVert_{\\rm op}:=\\max_{\\lVert u\\rVert_2=1}\\lVert\\Sigma u\\rVert_2.$$\n\nThe assumed measurability of $\\Delta$ and every $\\Delta_A$ makes the displayed collision event and conditional class law well-defined; disjoint class sets give disjoint $\\Delta_A$, so the formula for $\\nu$ is countably additive and has total mass one. Assume also that $c\\mapsto\\mu_c$ and $c\\mapsto\\Sigma_f(c)$ are measurable for each $f$, and that the displayed class-conditional risks and random suprema used below are measurable.\n\nIf $\\tau=0$, there is no collision term; set $s(f):=0$ and use $L_{\\rm un}(f)=L^\\ne_{\\rm un}(f)$. Any empirical minimizer or approximate minimizer used below is separately assumed to be a measurable selector; no selector-existence claim is part of this definition."
+      },
+      {
+        "id": "lem-mean-classifier-loss-from-contrastive-loss",
+        "kind": "lemma",
+        "title": "Jensen comparison with the average mean-classifier loss",
+        "deps": [
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-hinge-and-logistic-loss-properties",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-jensen-inequality-for-expectation"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-contrastive-class-collision-deviation",
+        "kind": "lemma",
+        "title": "Class-collision loss is bounded by within-class covariance deviation",
+        "deps": [
+          "def-latent-class-contrastive-learning",
+          "def-moments-variance-and-covariance",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "lem-contrastive-hinge-and-logistic-loss-properties",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-jensen-inequality-for-expectation",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-subgaussian-contrastive-margin-comparison",
+        "kind": "lemma",
+        "title": "Class-conditional sub-Gaussian concentration yields a contrastive margin bound",
+        "deps": [
+          "cor-markov-inequality-for-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-latent-class-contrastive-learning",
+          "def-natural-logarithm",
+          "def-probability-measure",
+          "def-real-exponential-function-and-e",
+          "def-subgaussian-variable-and-vector",
+          "lem-contrastive-hinge-and-logistic-loss-properties",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-contrastive-uniform-generalization",
+        "kind": "lemma",
+        "title": "Uniform generalization bound for the one-negative contrastive loss",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-latent-class-contrastive-learning",
+          "def-natural-logarithm",
+          "lem-contrastive-hinge-and-logistic-loss-properties",
+          "lem-vector-rademacher-contraction-for-bounded-classes",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-natural-logarithm-laws",
+          "thm-rademacher-uniform-generalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-contrastive-empirical-minimizer-excess",
+        "kind": "lemma",
+        "title": "Population contrastive excess of an approximate empirical minimizer",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-uniform-generalization"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-contrastive-representation-transfer-with-class-collisions",
+        "kind": "theorem",
+        "title": "Contrastive transfer bound with class collisions",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-class-collision-deviation",
+          "lem-contrastive-empirical-minimizer-excess",
+          "lem-mean-classifier-loss-from-contrastive-loss"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "cor-contrastive-approximate-erm-transfer",
+        "kind": "corollary",
+        "title": "Contrastive transfer for an approximate empirical minimizer",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-class-collision-deviation",
+          "lem-contrastive-empirical-minimizer-excess",
+          "lem-mean-classifier-loss-from-contrastive-loss"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-contrastive-representation-transfer-under-within-class-deviation",
+        "kind": "theorem",
+        "title": "Contrastive transfer with a within-class covariance penalty",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-class-collision-deviation",
+          "thm-contrastive-representation-transfer-with-class-collisions"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "cor-subgaussian-contrastive-representation-transfer",
+        "kind": "corollary",
+        "title": "Sub-Gaussian contrastive transfer with a mean-classifier margin loss",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-subgaussian-contrastive-margin-comparison",
+          "thm-contrastive-representation-transfer-under-within-class-deviation"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2803,
+    "id": "self-supervised-and-contrastive-representation-learning-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Self-supervised and contrastive representations — Examples",
+    "companion": "self-supervised-and-contrastive-representation-learning",
+    "requires": [
+      "self-supervised-and-contrastive-representation-learning"
+    ],
+    "items": [
+      {
+        "id": "ex-contrastive-same-class-negative-collision",
+        "kind": "example",
+        "title": "A negative sample collides with the positive class",
+        "deps": [
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-hinge-and-logistic-loss-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-contrastive-high-within-class-variance",
+        "kind": "example",
+        "title": "High within-class variance raises contrastive loss despite perfect mean separation",
+        "deps": [
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-hinge-and-logistic-loss-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-augmentation-erases-class-information",
+        "kind": "example",
+        "title": "An augmentation that erases the label-relevant class coordinate",
+        "deps": [
+          "def-latent-class-contrastive-learning",
+          "lem-contrastive-hinge-and-logistic-loss-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-simclr-projection-head-reported-results",
+        "kind": "example",
+        "title": "SimCLR reports an empirical projection-head effect",
+        "deps": [
+          "def-latent-class-contrastive-learning"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-logistic-loss-not-covered-by-hinge-margin-comparison",
+        "kind": "example",
+        "title": "The hinge margin comparison does not extend to logistic contrastive loss",
+        "deps": [
+          "cor-subgaussian-contrastive-representation-transfer",
+          "def-axiom-of-choice",
+          "def-latent-class-contrastive-learning",
+          "lem-subgaussian-contrastive-margin-comparison",
+          "lem-contrastive-hinge-and-logistic-loss-properties"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "Consider two equally likely deterministic classes $a,b$ and the scalar representation $f(a)=2$, $f(b)=4$, so $R=4$, $\\tau=1/2$, and the classwise centered representation has sub-Gaussian proxy $\\sigma^2=0$. For the distinct-class tasks, the mean classifier has logistic risk\n\n$$L^\\mu_{\\rm sup}(f)=\\frac12\\bigl[\\log_2(1+e^4)+\\log_2(1+e^{-8})\\bigr]>\\frac52,$$\n\nwhile its source hinge margin risk at $\\gamma=1$ is exactly $L^\\mu_{1,\\rm sup}(f)=5/2$. The logistic contrastive risk conditioned on distinct classes has the same value as the displayed logistic mean-classifier risk. Consequently, for every $0<\\epsilon\\le1$ smaller than the positive gap, the source hinge margin comparison $L^\\ne_{\\rm un}(f)\\le\\gamma L^\\mu_{\\gamma,\\rm sup}(f)+\\epsilon$ fails for logistic contrastive loss. In particular, the hinge-margin corollary cannot be transferred unchanged to logistic training.\n\nFor the optional transfer comparison, assume the Axiom of Choice, fix $M\\ge1$ and $0<\\delta<1$, impose the corollary's remaining model, risk and supremum measurability, and measurable exact-empirical-minimizer hypotheses, and use the singleton $\\mathcal F=\\{f\\}$. The proposed extension is\n\n$$L^\\mu_{\\rm sup}(\\widehat f)\\le\\gamma L^\\mu_{\\gamma,\\rm sup}(f)+\\epsilon+\\frac{\\sqrt2L_0\\tau s(f)+2\\Gamma^{\\rm log}_M(S,\\delta)}{1-\\tau},$$\n\nwhere $L^\\mu_{\\rm sup}(\\widehat f)$ uses logistic task loss, $L^\\mu_{\\gamma,\\rm sup}(f)$ uses the scaled hinge margin loss, $\\gamma=1$ here, and\n\n$$\\Gamma^{\\rm log}_M(S,\\delta):=\\frac{2\\sqrt{18}L_0R\\,\\mathcal R_S(\\mathcal F)}{M}+3B_{\\ell_{\\rm log},R}\\sqrt{\\frac{\\ln(4/\\delta)}{2M}}$$\n\nuses the logistic loss oscillation. The example tests this claimed mean-classifier bound with logistic contrastive training."
+      }
+    ]
+  }
+]

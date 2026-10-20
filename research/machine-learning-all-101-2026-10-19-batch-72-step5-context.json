@@ -1,0 +1,262 @@
+{
+  "group": "x",
+  "batches": [
+    "72"
+  ],
+  "pages_read": [
+    "predictive-calibration-and-uncertainty-under-shift",
+    "predictive-calibration-and-uncertainty-under-shift-examples"
+  ],
+  "items_read": [
+    "alg-split-conformal-set-for-classification",
+    "def-top-label-calibration",
+    "alg-validation-temperature-scaling",
+    "def-binned-expected-calibration-error",
+    "thm-positive-temperature-scaling-preserves-argmax",
+    "ex-calibration-degradation-under-shift"
+  ],
+  "conventions": [
+    {
+      "convention": "Smaller conformal scores are more conforming. Use k = ceil((m+1)(1−α)), the kth calibration score when k ≤ m, and +∞ otherwise; membership uses score ≤ threshold. Calibration size zero is allowed.",
+      "fixed_by": "alg-split-conformal-set-for-classification",
+      "matters_for": [
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "convention": "Randomized conformal membership uses p_U > α, includes the candidate in its tie group, and shares one independent uniform U across candidate labels.",
+      "fixed_by": "alg-split-conformal-set-for-classification",
+      "matters_for": [
+        "alg-split-conformal-set-for-classification"
+      ]
+    },
+    {
+      "convention": "Top-label calibration means the correctness event-integral identity conditional only on top confidence; maximizing-label ties go to the smallest index.",
+      "fixed_by": "def-top-label-calibration",
+      "matters_for": [
+        "def-binned-expected-calibration-error",
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "convention": "Temperature selection uses finite real logits, a nonempty finite validation sample, a finite nonempty set of strictly positive temperatures, and the smallest validation-NLL minimizer.",
+      "fixed_by": "alg-validation-temperature-scaling",
+      "matters_for": [
+        "thm-positive-temperature-scaling-preserves-argmax",
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "convention": "Empirical ECE and MCE use a fixed finite Borel partition, omit empty bins, and require a nonempty evaluation sample. They are distinguished from population calibration error.",
+      "fixed_by": "def-binned-expected-calibration-error",
+      "matters_for": [
+        "ex-calibration-degradation-under-shift"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-split-conformal-set-for-classification",
+      "statement": "Given jointly measurable fixed training-dependent scores, m ≥ 0 calibration examples and 0 < α < 1, return labels whose score is at most the adjusted calibration order statistic, using +∞ when k = m+1. The optional randomized set uses the specified independent-uniform rank formula. Coverage requires separate distributional hypotheses.",
+      "used_by": [
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "id": "def-top-label-calibration",
+      "statement": "The forecast is top-label calibrated if for every Borel set B ⊆ [0,1], P(Y = Ŷ, C ∈ B) = E[1{C ∈ B}C], with C the maximum forecast coordinate and Ŷ the smallest maximizing label.",
+      "used_by": [
+        "def-binned-expected-calibration-error",
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "id": "alg-validation-temperature-scaling",
+      "statement": "For the specified trained finite-logit classifier, nonempty finite validation sample and finite nonempty positive-temperature candidate set, compute softmax validation NLL, choose its smallest minimizing temperature, and return its forecasts and smallest maximizing labels.",
+      "used_by": [
+        "thm-positive-temperature-scaling-preserves-argmax",
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "id": "thm-positive-temperature-scaling-preserves-argmax",
+      "statement": "For K ≥ 2, z ∈ R^K and T > 0, softmax(z/T) lies in the interior of Δ_K and has exactly the same maximizing index set as z. For the algorithm's finite validation inputs and candidate temperatures, every validation loss is finite and the smallest-minimizer rule returns a unique candidate.",
+      "used_by": [
+        "alg-validation-temperature-scaling",
+        "ex-calibration-degradation-under-shift"
+      ]
+    },
+    {
+      "id": "def-binned-expected-calibration-error",
+      "statement": "For a nonempty finite evaluation sample and a fixed finite Borel partition of [0,1], ECE is the sample-size-weighted sum of absolute within-bin accuracy-confidence gaps, and MCE is their maximum over occupied bins.",
+      "used_by": [
+        "ex-calibration-degradation-under-shift"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "used_for": "Fixed split-score orientation, conservative ranks, candidate-inclusive tie groups and shared independent-uniform randomization.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Measurable training statistic with a specified measurable target space.",
+      "opened": true
+    },
+    {
+      "id": "alg-split-conformal-prediction-set",
+      "used_for": "General split-conformal procedure, adjusted order statistic and infinity sentinel.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-order-statistic-and-rank-maps-are-measurable",
+      "used_for": "Measurability of finite order statistics and rank formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Independence requirement for the optional uniform variable.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Underlying probability-space convention for calibration.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel confidence events and fixed calibration bins.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Finite logarithms of positive softmax coordinates and inverse-exponential identities.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Real exponential used in softmax.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of the trained logit map.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Strict positivity of every softmax numerator and denominator.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Preservation of all strict logit comparisons under positive-temperature softmax.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Exact identity exp(2 log 3) = 9 in the validation example.",
+      "opened": true
+    },
+    {
+      "id": "def-regular-conditional-distribution",
+      "used_for": "Checking the constant finite conditional kernel under trivial training information.",
+      "opened": true
+    },
+    {
+      "id": "def-exchangeable-random-elements",
+      "used_for": "Swap invariance in the rare-feature example and its failure under the clean/corrupted shift.",
+      "opened": true
+    },
+    {
+      "id": "thm-split-conformal-marginal-coverage",
+      "used_for": "Conditional-on-training marginal coverage under an actual conditional exchangeable law; no arbitrary feature-conditional or shifted-law guarantee.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-conformal-nonconformity-score-and-rank-pvalue",
+      "finding": "The published Definition contains inline links, including “The measurable-statistic convention is that of [[def-statistic-and-estimator]].” It also links the randomized-procedure definition before the complete Definition ends. These violate the uninterrupted-definition requirement; there is no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-statistic-and-estimator",
+      "finding": "The published Definition contains “be an experiment ([[def-statistical-experiment]])” and further inline links to measurability and estimands. The complete Definition is interrupted by hyperlinks instead of placing them afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "alg-split-conformal-prediction-set",
+      "finding": "The published algorithm Definition contains “where $p_U$ is the score-rank formula in [[def-conformal-nonconformity-score-and-rank-pvalue]]” and a subsequent inline measurability-lemma link. Both precede the end of the complete Definition, contrary to the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-sigma-algebras-and-events",
+      "finding": "The published Definition says “sense of [[def-independent-families-of-event-classes]]” before continuing with the definition of independent events. This inline hyperlink interrupts the complete Definition and has no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The published Definition contains “with $\\mathbb P(X)=1$ ([[def-measure]])” and “probability space ([[def-measure-space]])”. These hyperlinks remain inside the complete Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-borel-sigma-algebra",
+      "finding": "The published Definition begins with “be a topological space ([[def-topological-space]])” and ends with an inline link to [[thm-generated-sigma-algebra-exists-and-is-minimal]]. Both links occur inside the Definition, contrary to the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The published Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states” before continuing with the inverse identities. The hyperlink interrupts the complete Definition rather than appearing in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The published Definition contains “convergence proved in [[lem-exponential-series-has-infinite-radius]]” and several further inline supplier links before its final paragraph. These violate the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "The published Definition opens with “be measurable spaces ([[def-measurable-space]])” before stating measurability and its equivalent characterization. The inline hyperlink interrupts the complete Definition and has no following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-regular-conditional-distribution",
+      "finding": "The published Definition contains “pointwise meaning of [[def-measure-kernel-and-probability-kernel]]” and an inline conditional-expectation link before its remaining qualifications. These hyperlinks interrupt the complete Definition instead of following it in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-exchangeable-random-elements",
+      "finding": "The published Definition links [[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]] and [[def-law-or-distribution-of-a-random-element]] before stating the permutation-invariance condition. This violates the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-split-conformal-marginal-coverage",
+      "finding": "The published Statement includes “in the sense of [[def-regular-conditional-distribution]]”, “as in [[def-exchangeable-random-elements]]”, and “Use the split set in [[alg-split-conformal-prediction-set]]” before its coverage conclusions. These hyperlinks interrupt the complete Statement instead of appearing afterward in Statement references.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "predictive-calibration-and-uncertainty-under-shift",
+      "to": "calibration-proper-losses-and-surrogate-classification",
+      "faithful": true,
+      "note": "Checked the source calibration definition, scoring-rule definition and strict-propriety theorem against the owned definitions and example. The confidence identity and smallest-index tie rule agree. Strict propriety is correctly used for the empirical label law and is explicitly distinguished from a future calibration guarantee."
+    },
+    {
+      "from": "predictive-calibration-and-uncertainty-under-shift",
+      "to": "distribution-shift-and-domain-adaptation",
+      "faithful": true,
+      "note": "The example cites only the general source/target joint-law interface. Its distinct deterministic feature laws are not claimed to satisfy covariate shift or target-marginal absolute continuity. The exchangeability failure is verified directly."
+    },
+    {
+      "from": "monotone-risk-calibration-and-deployment-guarantees",
+      "to": "predictive-calibration-and-uncertainty-under-shift",
+      "faithful": true,
+      "note": "Read the downstream page and its five items. The page prerequisite is contextual: no item directly cites an owned supplier. Its calibration identity agrees with the owned event-integral definition, and its discussion preserves the distinctions between probability calibration, marginal coverage and expected-risk control."
+    }
+  ]
+}

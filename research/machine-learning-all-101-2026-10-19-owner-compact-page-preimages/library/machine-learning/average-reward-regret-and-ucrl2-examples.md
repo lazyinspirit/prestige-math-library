@@ -1,0 +1,7 @@
+---
+page: "average-reward-regret-and-ucrl2-examples"
+title: "Average-reward regret and UCRL2 — Examples"
+status: draft
+items: []
+examples: ["ex-noncommunicating-mdp-has-state-dependent-gain", "ex-one-state-diameter-convention", "ex-pathwise-and-expected-regret-are-different"]
+---

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "78",
+  "round": 0,
+  "reviewed_items": [
+    "def-contextual-bandit-protocol",
+    "alg-exp4",
+    "lem-exp4-unbiased-expert-reward-estimates",
+    "lem-exp4-weighted-estimated-loss-second-moment",
+    "lem-exp4-potential-inequality",
+    "thm-exp4-expected-regret",
+    "ex-exp4-finite-two-expert-set",
+    "ex-exp4-duplicated-experts-change-prior-mass",
+    "ex-exp4-context-specific-expert-class"
+  ],
+  "reviewed_pages": [
+    "contextual-expert-bandits",
+    "contextual-expert-bandits-examples"
+  ],
+  "decision": "repair",
+  "reason": "Both pages have empty bodies, the assigned inventories, and compact-v1 layout. Supplier uses and the Exp4 proof chain are substantively supported; zero-probability arms are handled locally. The primary §18.4 treatment sets the theorem's learning rate and leaves Lemma 18.2's proof to Exercise 18.2 ([Lattimore–Szepesvári, Bandit Algorithms](https://tor-lattimore.com/downloads/book/book.pdf)). Local repairs are needed for algorithm property placement and example hypotheses.",
+  "findings": [
+    {
+      "id": "alg-exp4",
+      "type": "local",
+      "reason": "The Definition includes an induction proof of well-definedness, but algorithm properties belong in separate proved results; provide a well-definedness result and link it through justified_by while retaining the procedure."
+    },
+    {
+      "id": "ex-exp4-finite-two-expert-set",
+      "type": "local",
+      "reason": "The example gives the theorem's regret bound without specifying the theorem's tuned learning rate, eta = sqrt(log 2) for these parameters. State that choice for the bound clause; the one-round regret calculation itself is independent of eta."
+    },
+    {
+      "id": "ex-exp4-duplicated-experts-change-prior-mass",
+      "type": "local",
+      "reason": "The theorem-bound claim quantifies over any oblivious reward sequence but omits the required range x_t in [0,1]^2. State the bounded reward-sequence assumption."
+    },
+    {
+      "id": "ex-exp4-context-specific-expert-class",
+      "type": "local",
+      "reason": "The regret claim specifies contexts but no reward sequence or explicit horizon condition. State n >= 1 and quantify over fixed oblivious reward vectors x_t in [0,1]^k."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-exp4-unbiased-expert-reward-estimates",
+      "decision": "accept",
+      "reason": "Its use of the mixture, positive expert weights, and zero-support convention is justified by the algorithm."
+    },
+    {
+      "id": "lem-exp4-weighted-estimated-loss-second-moment",
+      "decision": "accept",
+      "reason": "The support-restricted moment calculation and sum_m Q_t,m E(t)_m,i = P_t,i yield the stated bound."
+    },
+    {
+      "id": "lem-exp4-potential-inequality",
+      "decision": "accept",
+      "reason": "The normalized exponential update and nonnegative estimated losses support the pathwise potential argument."
+    },
+    {
+      "id": "thm-exp4-expected-regret",
+      "decision": "accept",
+      "reason": "The fixed best expert, conditional estimate identities, second-moment bound, and tuned rate support the theorem."
+    },
+    {
+      "id": "ex-exp4-finite-two-expert-set",
+      "decision": "repair",
+      "reason": "The one-round calculation is sound; specify the tuned rate when invoking the general bound."
+    },
+    {
+      "id": "ex-exp4-duplicated-experts-change-prior-mass",
+      "decision": "repair",
+      "reason": "The duplication and prior-mass calculations are sound; state the reward range required by the theorem."
+    },
+    {
+      "id": "ex-exp4-context-specific-expert-class",
+      "decision": "repair",
+      "reason": "The expert count and bound are sound for an admissible reward sequence; make that sequence and horizon explicit."
+    }
+  ]
+}

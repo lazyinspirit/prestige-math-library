@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-binary-encoding-and-decoder, lem-finite-tuples-admit-effective-prefix-free-encodings]
 justified_by: []
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-natural-number-coding-of-finite-sequences.json
   audited: 2026-09-12
   precheck: n/a
 sources:
@@ -39,10 +40,14 @@ $$ \ulcorner a\urcorner_{\mathrm{seq}} $$
 whose binary numeral is $W(a)$. In particular, the empty sequence has code
 $\ulcorner()\urcorner_{\mathrm{seq}}=2$, because $W(())=10$.
 
-By [[lem-finite-tuples-admit-effective-prefix-free-encodings]], the tuple of
+By Finite tuples admit effective prefix-free binary encodings, the tuple of
 binary numerals inside $W(a)$ is effectively and uniquely decodable, so this
 construction gives an injective coding of finite sequences of natural numbers
 by natural numbers.
+
+## Definition references
+
+[[lem-finite-tuples-admit-effective-prefix-free-encodings]]
 
 ## Remarks
 

@@ -1,0 +1,192 @@
+--- items/alg-monte-carlo-policy-evaluation.md
++++ items/alg-monte-carlo-policy-evaluation.md
+@@ -32,11 +32,11 @@
+ 
+ ## Definition
+ 
+-**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, an initial-state rule, and a requested number $n\ge0$ of episodes. Assume the Axiom of Choice for the policy path laws defining $V^\pi$ and the episode distributions, and that every episode used reaches $S_\dagger$ in finite time almost surely from every start state. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\mu$ and stationary target policy $\pi$. In off-policy mode require $\pi(a\mid x)>0\Rightarrow\mu(a\mid x)>0$ for every nonterminal state $x$ and action $a\in A(x)$.
++**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, an initial-state rule, and an episode budget $N\in\mathbb N\cup\{\infty\}$. Assume the Axiom of Choice for the policy path laws defining $V^\pi$ and the episode distributions, and that episodes reach $S_\dagger$ in finite time almost surely from every state under each stationary policy used: the target $\pi$, and also the behavior $\mu$ in off-policy mode. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\mu$ and stationary target policy $\pi$. In off-policy mode require $\pi(a\mid x)>0\Rightarrow\mu(a\mid x)>0$ for every nonterminal state $x$ and action $a\in A(x)$.
+ 
+-**Output:** For every nonterminal state, its visit count and each available estimate after the $n$ episodes; report no estimate when its required denominator is zero. Set the value estimate of every terminal state to $0$.
++**Output:** After every finite number $n$ of completed episodes, for every nonterminal state its visit count and each available estimate; report no estimate when its required denominator is zero. A finite budget $N$ returns these outputs after episode $N$; budget $\infty$ emits successive finite-prefix outputs without a final output or convergence assertion. Set the value estimate of every terminal state to $0$.
+ 
+-Initialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate the $n$ episodes using the selected mode and initial-state rule. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\sum_{k=t_i(s)}^{T_i-1}\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.
++Initialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate successive independent episodes using the selected mode and initial-state rule; stop after $N$ episodes when $N$ is finite. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\sum_{k=t_i(s)}^{T_i-1}\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.
+ 
+ In on-policy mode, update only on this first visit: set $m=C(s)+1$; if $m=1$, set $\widehat V(s)=G_{t_i(s)}$, and otherwise set
+ 
+@@ -50,7 +50,7 @@
+ W_i(s)=\prod_{k=t_i(s)}^{T_i-1}\frac{\pi(A_k\mid S_k)}{\mu(A_k\mid S_k)},
+ $$
+ 
+-where $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\Sigma(s)$, and increment $C(s)$. After processing the episodes, the ordinary first-visit estimator is
++where $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\Sigma(s)$, and increment $C(s)$. After any $n$ completed episodes, the ordinary first-visit estimator is
+ 
+ $$
+ \widehat V^{\rm ordinary}_n(s)=\frac{B(s)}{C(s)}
+--- items/alg-sarsa-on-policy-control.md
++++ items/alg-sarsa-on-policy-control.md
+@@ -10,6 +10,7 @@
+   - def-finite-markov-decision-process
+   - def-discounted-return-and-value-functions
+   - def-episodic-returns-td-errors-and-policy-support
++  - thm-ionescu-tulcea-construction-of-a-markov-chain
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -31,11 +32,13 @@
+ 
+ ## Definition
+ 
+-**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, a start-state distribution $\nu$ on $S$ sampled independently for each episode, a requested number $m\ge0$ of episodes, an initial table $Q_0:D\to\mathbb R$, deterministic per-pair step-size sequences $\alpha_k(s,a)\in[0,1]$, and a policy-improvement rule $\Pi$ that maps each action-value table to a stationary policy. Assume the Axiom of Choice for the policy path laws and that every policy used reaches $S_\dagger$ almost surely from the episode start states.
++**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, an initial-state rule specifying a distribution on $S$ at each episode boundary (independent draws from a fixed $\nu$ are a special case), an episode budget $m\in\mathbb N\cup\{\infty\}$, an initial table $Q_0:D\to\mathbb R$, a step-size rule giving $\alpha_n(S_n,A_n)\in[0,1]$ from available history before the next reward and state are observed (deterministic per-pair visit-index schedules are a special case), and an action-selection rule $\Pi$ that uses the current table and available history to supply a distribution on the legal actions of the current state. Assume the Axiom of Choice for the policy path laws, that the sampling rules are measurable functions of the information available when used, and that the episodes generated by the actual rule, including within-episode changes, reach $S_\dagger$ almost surely from their start states.
+ 
+-**Output:** The action-value table after every transition update and the final table after the requested episode sequence.
++Interpret successive draws on finite discrete transition-record spaces, including a restart record at each episode boundary. Conditional on the full available history and its current state $s$, choose the action using the distribution supplied by $\Pi$ at the current history and the next reward/state using $p(s',\rho\mid s,a)$; the initial-state rule gives the restart kernel. Require all sampling and step-size rules to be measurable with respect to their available histories. The table and counts are computed from these records. Under the stated AC assumption, the history-dependent kernel construction supplies this law, with a fixed stop symbol after a finite budget.
+ 
+-Initialize visit counts $C(s,a)=0$ for all $(s,a)\in D$. For each of the $m$ episodes, apply $\Pi$ to the current table and hold the resulting policy $\pi_e=\Pi(Q)$ fixed throughout that episode. Sample the episode's start state from $\nu$. If it is terminal, end the episode without an update. Otherwise sample the initial action from $\pi_e$. At each transition from the current nonterminal pair $(S_n,A_n)$, observe $R_{n+1}$ and $S_{n+1}$, and put $k=C(S_n,A_n)$. If $S_{n+1}\notin S_\dagger$, sample $A_{n+1}$ from the same episode policy $\pi_e(\cdot\mid S_{n+1})$ and set
++**Output:** The action-value table after every transition update and after every completed episode. A finite budget returns the final table after those episodes; budget $\infty$ specifies the successive tables indefinitely and has no final output or convergence assertion.
++
++Initialize $Q=Q_0$ and visit counts $C(s,a)=0$ for all $(s,a)\in D$. For each episode allowed by the budget, sample its start state using the initial-state rule. If it is terminal, end the episode without an update. Otherwise sample the initial action using $\Pi$ with the current table and history. At each current nonterminal pair $(S_n,A_n)$, obtain $\alpha_n(S_n,A_n)$ from the step-size rule before observing $(R_{n+1},S_{n+1})$ from the MDP's conditional joint reward-transition law. For a visit-index schedule use $k=C(S_n,A_n)$. If $S_{n+1}\notin S_\dagger$, apply $\Pi$ to the still pre-update table $Q_n$ and the available history through the new state, sample $A_{n+1}$ from that action distribution, and set
+ 
+ $$
+ \delta_n^{\mathrm{Sarsa}}=R_{n+1}+\gamma Q_n(S_{n+1},A_{n+1})-Q_n(S_n,A_n).
+@@ -44,12 +47,14 @@
+ If $S_{n+1}\in S_\dagger$, instead set $\delta_n^{\mathrm{Sarsa}}=R_{n+1}-Q_n(S_n,A_n)$ and take no terminal action. Update only the current pair:
+ 
+ $$
+-Q_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\alpha_k(S_n,A_n)\delta_n^{\mathrm{Sarsa}},
++Q_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\alpha_n(S_n,A_n)\delta_n^{\mathrm{Sarsa}},
+ $$
+ 
+-leaving every other coordinate unchanged. Increment $C(S_n,A_n)$ and output the updated table. If the next state is terminal, end the episode; otherwise set $(S,A)=(S_{n+1},A_{n+1})$ and continue. Recompute the policy only at the next episode boundary. The sampled next action, rather than a maximum over actions, is part of the target, and the behavior and target policy agree throughout each episode; Sarsa is on-policy. The procedure makes no convergence claim.
++leaving every other coordinate unchanged. Increment $C(S_n,A_n)$ and output the updated table. If the next state is terminal, end the episode; otherwise set $(S,A)=(S_{n+1},A_{n+1})$ and continue. Retain the sampled $A_{n+1}$ as the action actually executed next; do not resample it after updating the table. At the following transition, the next application of $\Pi$ may use the updated table and history. A policy frozen for an episode is permitted as a special case. Stop after $m$ completed episodes when $m$ is finite. The sampled next action, rather than a maximum over actions, is part of the target and is also used by the behavior process, so Sarsa is on-policy. The procedure makes no convergence claim.
+ 
+ ## Definition references
++
++[[thm-ionescu-tulcea-construction-of-a-markov-chain|Under AC, successive history-dependent probability kernels give the sampling law]].
+ 
+ [[def-finite-markov-decision-process|The finite state-dependent action sets and joint reward-transition law]].
+ 
+--- items/alg-td-zero-prediction.md
++++ items/alg-td-zero-prediction.md
+@@ -12,6 +12,7 @@
+   - def-policy-bellman-operator
+   - lem-policy-value-satisfies-bellman-equation
+   - def-episodic-returns-td-errors-and-policy-support
++  - thm-ionescu-tulcea-construction-of-a-markov-chain
+ justified_by: []
+ aliases: []
+ forward_refs: []
+@@ -33,11 +34,13 @@
+ 
+ ## Definition
+ 
+-**Inputs:** A finite MDP with nonempty state set $S$, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, stationary policy $\pi$, a start-state distribution $\nu$ on $S$ sampled independently for each episode, a requested number $m\ge0$ of episodes, an initial table $V_0:S\to\mathbb R$ with $V_0(s)=0$ on $S_\dagger$, and deterministic per-state step-size sequences $\alpha_k(s)\in[0,1]$ for $s\notin S_\dagger$ and $k\ge0$. Assume the Axiom of Choice for the path laws defining $V^\pi$, and that every episode used reaches $S_\dagger$ almost surely from its start state.
++**Inputs:** A finite MDP with nonempty state set $S$, discount $0\le\gamma<1$, terminal set $S_\dagger\subseteq S$, stationary policy $\pi$, an initial-state rule specifying a distribution on $S$ at each episode boundary (a fixed distribution $\nu$ sampled independently for each episode is a special case), an episode budget $m\in\mathbb N\cup\{\infty\}$, an initial table $V_0:S\to\mathbb R$ with $V_0(s)=0$ on $S_\dagger$, and a step-size rule giving $\alpha_n(S_n)\in[0,1]$ from the available history before the next reward and state are observed. Deterministic per-state sequences $\alpha_k(s)$ indexed by visit count are a special case. Assume the Axiom of Choice for the path laws defining $V^\pi$, and that every episode used reaches $S_\dagger$ almost surely from its start state.
+ 
+-**Output:** The value table after every transition update and the final table after the requested episode sequence.
++Interpret successive draws on finite discrete transition-record spaces, including a restart record at each episode boundary. Conditional on the full available history and its current state $s$, choose the action using $\pi(a\mid s)$ and the next reward/state using $p(s',\rho\mid s,a)$; the initial-state rule gives the restart kernel. Require all sampling and step-size rules to be measurable with respect to their available histories. The table and counts are computed from these records. Under the stated AC assumption, the history-dependent kernel construction supplies this law, with a fixed stop symbol after a finite budget.
+ 
+-Initialize visit counts $C(s)=0$ for $s\notin S_\dagger$. For each of the $m$ episodes, sample its start state from $\nu$. If it is terminal, end that episode without an update. Otherwise, at each current nonterminal state $S_n$, sample $A_n$ from $\pi(\cdot\mid S_n)$ and then observe $(R_{n+1},S_{n+1})$ from the MDP's joint reward-transition law. Put $k=C(S_n)$ and form
++**Output:** The value table after every transition update and after every completed episode. A finite budget returns the final table after those episodes; budget $\infty$ specifies the successive tables indefinitely, with no final output or convergence assertion.
++
++Initialize $V=V_0$ and visit counts $C(s)=0$ for $s\notin S_\dagger$. For each episode allowed by the budget, sample its start state using the initial-state rule. If it is terminal, end that episode without an update. Otherwise, at each current nonterminal state $S_n$, sample $A_n$ from $\pi(\cdot\mid S_n)$, obtain $\alpha_n(S_n)$ from the step-size rule, and then observe $(R_{n+1},S_{n+1})$ from the MDP's joint reward-transition law conditional on the available history and selected pair. For a visit-index schedule use $k=C(S_n)$. Form
+ 
+ $$
+ \delta_n^V=R_{n+1}+\gamma V_n(S_{n+1})-V_n(S_n),
+@@ -46,12 +49,14 @@
+ where the continuation term is zero when $S_{n+1}\in S_\dagger$. Update
+ 
+ $$
+-V_{n+1}(S_n)=V_n(S_n)+\alpha_k(S_n)\delta_n^V.
++V_{n+1}(S_n)=V_n(S_n)+\alpha_n(S_n)\delta_n^V.
+ $$
+ 
+-Leave every other coordinate unchanged, increment $C(S_n)$, and output the updated table. If $S_{n+1}$ is terminal, end the episode; otherwise continue from $S_{n+1}$. The next episode starts by applying the initial-state rule again. Thus the sampled transitions use the policy whose value is estimated. This is a one-step bootstrapped prediction procedure and makes no convergence claim.
++Leave every other coordinate unchanged, increment $C(S_n)$, and output the updated table. If $S_{n+1}$ is terminal, end the episode; otherwise continue from $S_{n+1}$. The next episode starts by applying the initial-state rule again, retaining the table and counts; stop after $m$ completed episodes when $m$ is finite. Thus the sampled transitions use the policy whose value is estimated. This is a one-step bootstrapped prediction procedure and makes no convergence claim.
+ 
+ ## Definition references
++
++[[thm-ionescu-tulcea-construction-of-a-markov-chain|Under AC, successive history-dependent probability kernels give the sampling law]].
+ 
+ [[def-finite-markov-decision-process|The finite joint reward-transition law and stationary policies]].
+ 
+--- research/machine-learning-all-101-2026-10-19-batch-81.pages.json
++++ research/machine-learning-all-101-2026-10-19-batch-81.pages.json
+@@ -187,7 +187,8 @@
+           "def-discounted-return-and-value-functions",
+           "def-policy-bellman-operator",
+           "lem-policy-value-satisfies-bellman-equation",
+-          "def-episodic-returns-td-errors-and-policy-support"
++          "def-episodic-returns-td-errors-and-policy-support",
++          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+         ],
+         "dependency_level": 4
+       },
+@@ -198,7 +199,8 @@
+         "deps": [
+           "def-finite-markov-decision-process",
+           "def-discounted-return-and-value-functions",
+-          "def-episodic-returns-td-errors-and-policy-support"
++          "def-episodic-returns-td-errors-and-policy-support",
++          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+         ],
+         "dependency_level": 4
+       },
+--- research/machine-learning-all-101-2026-10-19-batch-81.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-batch-81.proof-contracts.json
+@@ -943,7 +943,7 @@
+           "fact": "F5",
+           "source": "alg-q-learning",
+           "source_section": "Definition",
+-          "quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
++          "quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here.",
+           "uses": [
+             "1.2",
+             "2.1"
+@@ -1463,7 +1463,7 @@
+           "fact": "F2",
+           "source": "alg-q-learning",
+           "source_section": "Definition",
+-          "quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
++          "quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1581,7 +1581,7 @@
+           "fact": "F3",
+           "source": "alg-q-learning",
+           "source_section": "Definition",
+-          "quote": "For a finite discounted MDP with $0\\le\\gamma<1$, maintain an action-value table $Q_n\\in\\mathbb R^D$. At time $n$, a behavior rule selects the current pair $(S_n,A_n)$ and the process returns reward $R_{n+1}$ and next state $S_{n+1}$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nand update only the visited coordinate:\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nAll other coordinates remain unchanged. The update target uses the greedy maximum even when the behavior rule is exploratory, so the algorithm is off-policy and uses no importance-sampling ratio. The update rule by itself asserts no convergence guarantee.",
++          "quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, finite nonempty action sets $A(s)$, finite reward alphabet $\\mathcal R$, and discount $0\\le\\gamma<1$; an initial state $S_0\\in S$; a behavior rule that selects a legal action using the interaction history available at time $n$; an initial table $Q_0\\in\\mathbb R^D$; and a step-size rule that, before observing the next reward and state, supplies $\\alpha_n(S_n,A_n)\\in[0,1]$ from the history and selected pair. A deterministic per-pair schedule $\\alpha_k(s,a)\\in[0,1]$ based on the number of previous visits to $(s,a)$ is a special case. The interaction must, conditional on its history and the selected pair $(S_n,A_n)$, draw $(S_{n+1},R_{n+1})$ with joint mass $p(s',\\rho\\mid S_n,A_n)$.\n\n**Output:** The action-value table after every interaction, $(Q_n)_{n\\ge0}$; a finite run outputs its current table $Q_n$.\n\nInitialize $Q=Q_0$. For each $n=0,1,2,\\ldots$, select $A_n$ by the behavior rule, obtain $\\alpha_n(S_n,A_n)$ from the step-size rule, and observe $(R_{n+1},S_{n+1})$. Compute\n\n$$\n\\delta_n=R_{n+1}+\\gamma\\max_{b\\in A(S_{n+1})}Q_n(S_{n+1},b)-Q_n(S_n,A_n),\n$$\n\nthen update only the visited coordinate by\n\n$$\nQ_{n+1}(S_n,A_n)=Q_n(S_n,A_n)+\\alpha_n(S_n,A_n)\\delta_n.\n$$\n\nLeave every other coordinate unchanged, set the current table to $Q_{n+1}$, and set the current state to $S_{n+1}$. The target uses the greedy maximum even when the behavior rule explores, so this is off-policy and uses no importance-sampling ratio. The procedure makes no convergence claim; convergence requires additional hypotheses not imposed here.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1721,7 +1721,7 @@
+           "fact": "F3",
+           "source": "alg-monte-carlo-policy-evaluation",
+           "source_section": "Definition",
+-          "quote": "Let a finite discounted MDP have $0\\le\\gamma<1$ and terminal set $S_\\dagger$. Require episodes to reach $S_\\dagger$ in finite time almost surely from every state under each policy used. For on-policy prediction, generate independent episodes under a stationary target policy $\\pi$. In episode $i$, let $I_i(s)=1$ if $s$ is visited before termination and $I_i(s)=0$ otherwise. When $I_i(s)=1$, let $t_i(s)$ be the first visit time and let $G_{t_i(s)}$ be the discounted return from that time to termination. Maintain the visit count $C(s)$ and estimate $V^\\pi(s)$ by the sample mean of these first-visit returns: after the $m$th observed first visit to $s$, update\n\n$$\nC(s)\\leftarrow m,\\qquad V(s)\\leftarrow V(s)+\\frac{G_{t_i(s)}-V(s)}{m}.\n$$\n\nFor off-policy prediction, let episodes instead be generated under a stationary behavior policy $\\mu$, while $\\pi$ remains the target policy. Require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$. For each first visit to $s$, set\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. After $n$ episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)}\n$$\n\nwhen the denominator is positive. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)W_i(s)}\n$$\n\nwhen its denominator is positive; if that denominator is zero, no weighted estimate is produced. The finite-episode likelihood-ratio identity gives the ordinary weighted return conditional mean $V^\\pi(s)$ for each positive-probability first-visit history. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures specify estimators only and make no convergence claim or Monte Carlo control claim.",
++          "quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\\le\\gamma<1$, terminal set $S_\\dagger\\subseteq S$, an initial-state rule, and an episode budget $N\\in\\mathbb N\\cup\\{\\infty\\}$. Assume the Axiom of Choice for the policy path laws defining $V^\\pi$ and the episode distributions, and that episodes reach $S_\\dagger$ in finite time almost surely from every state under each stationary policy used: the target $\\pi$, and also the behavior $\\mu$ in off-policy mode. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\\mu$ and stationary target policy $\\pi$. In off-policy mode require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$.\n\n**Output:** After every finite number $n$ of completed episodes, for every nonterminal state its visit count and each available estimate; report no estimate when its required denominator is zero. A finite budget $N$ returns these outputs after episode $N$; budget $\\infty$ emits successive finite-prefix outputs without a final output or convergence assertion. Set the value estimate of every terminal state to $0$.\n\nInitialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate successive independent episodes using the selected mode and initial-state rule; stop after $N$ episodes when $N$ is finite. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\\sum_{k=t_i(s)}^{T_i-1}\\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.\n\nIn on-policy mode, update only on this first visit: set $m=C(s)+1$; if $m=1$, set $\\widehat V(s)=G_{t_i(s)}$, and otherwise set\n\n$$\n\\widehat V(s)\\leftarrow\\widehat V(s)+\\frac{G_{t_i(s)}-\\widehat V(s)}{m}.\n$$\n\nThen set $C(s)=m$. In off-policy mode, for each first visit compute\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\\Sigma(s)$, and increment $C(s)$. After any $n$ completed episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{B(s)}{C(s)}\n$$\n\nwhen $C(s)>0$; otherwise no ordinary estimate is produced. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{B(s)}{W_\\Sigma(s)}\n$$\n\nwhen $W_\\Sigma(s)>0$; otherwise no weighted estimate is produced. Under target support, for each positive-probability behavior history ending immediately upon a first visit to a nonterminal state $s$, before its action is sampled, the ordinary weighted return has conditional mean $V^\\pi(s)$ by the finite-episode likelihood-ratio identity. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures make no convergence claim or Monte Carlo control claim.",
+           "uses": [
+             "1.1"
+           ]
+@@ -1840,7 +1840,7 @@
+           "fact": "F4",
+           "source": "lem-finite-episode-policy-importance-ratio-is-unbiased",
+           "source_section": "Statement",
+-          "quote": "Assume the Axiom of Choice. Let a finite MDP with terminal set $S_\\dagger$ have $0\\le\\gamma<1$, and let $\\pi$ and $\\mu$ be stationary target and behavior policies. Suppose $\\pi(a\\mid x)>0$ implies $\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$, and episodes reach $S_\\dagger$ in finite time almost surely from every state under both policies. For any starting state $s$, a behavior-generated episode has first terminal time $T$ and ratio\n\n$$\n\\Lambda_{0:T-1}=\\prod_{k=0}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere the empty product for $T=0$ is $1$. For every bounded measurable real function $G$ of the finite episode,\n\n$$\nE_{\\mu,s}[\\Lambda_{0:T-1}G]=E_{\\pi,s}[G].\n$$\n\nThe identity therefore applies to every episode suffix starting at a state $s$ that can be reached by a finite behavior history. If $H$ is one positive-probability finite behavior history that first visits $s$ at time $t$, let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$$\n\nbe the suffix return. Then\n\n$$\n\\frac{E_{\\mu,s_0}[\\mathbf1_H\\Lambda_{t:T-1}G_t]}{P_{\\mu,s_0}(H)}=V^\\pi(s).\n$$\n\nThus the ordinary first-visit importance-sampling return has mean $V^\\pi(s)$ conditional on each first-visit history.",
++          "quote": "Assume the Axiom of Choice. Let a finite MDP with terminal set $S_\\dagger$ have $0\\le\\gamma<1$, and let $\\pi$ and $\\mu$ be stationary target and behavior policies. Suppose $\\pi(a\\mid x)>0$ implies $\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$, and episodes reach $S_\\dagger$ in finite time almost surely from every state under both policies. For any starting state $s$, a behavior-generated episode has first terminal time $T$ and ratio\n\n$$\n\\Lambda_{0:T-1}=\\prod_{k=0}^{T-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere the empty product for $T=0$ is $1$. For every bounded measurable real function $G$ of the finite episode,\n\n$$\nE_{\\mu,s}[\\Lambda_{0:T-1}G]=E_{\\pi,s}[G].\n$$\n\nThe identity therefore applies to every episode suffix starting at a state $s$ that can be reached by a finite behavior history. Fix an initial state $s_0$. If $H$ is a positive-probability finite behavior history from $s_0$ that first visits $s$ at time $t$ and ends immediately upon observing $S_t=s$, before the action $A_t$ is sampled (when $s$ is terminal, no action is sampled and the suffix is empty), let\n\n$$G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$$\n\nbe the suffix return. Then\n\n$$\n\\frac{E_{\\mu,s_0}[\\mathbf1_H\\Lambda_{t:T-1}G_t]}{P_{\\mu,s_0}(H)}=V^\\pi(s).\n$$\n\nThus the ordinary first-visit importance-sampling return has mean $V^\\pi(s)$ conditional on each pre-action first-visit history.",
+           "uses": [
+             "2.1"
+           ]
+@@ -2007,7 +2007,7 @@
+           "fact": "F3",
+           "source": "alg-monte-carlo-policy-evaluation",
+           "source_section": "Definition",
+-          "quote": "Let a finite discounted MDP have $0\\le\\gamma<1$ and terminal set $S_\\dagger$. Require episodes to reach $S_\\dagger$ in finite time almost surely from every state under each policy used. For on-policy prediction, generate independent episodes under a stationary target policy $\\pi$. In episode $i$, let $I_i(s)=1$ if $s$ is visited before termination and $I_i(s)=0$ otherwise. When $I_i(s)=1$, let $t_i(s)$ be the first visit time and let $G_{t_i(s)}$ be the discounted return from that time to termination. Maintain the visit count $C(s)$ and estimate $V^\\pi(s)$ by the sample mean of these first-visit returns: after the $m$th observed first visit to $s$, update\n\n$$\nC(s)\\leftarrow m,\\qquad V(s)\\leftarrow V(s)+\\frac{G_{t_i(s)}-V(s)}{m}.\n$$\n\nFor off-policy prediction, let episodes instead be generated under a stationary behavior policy $\\mu$, while $\\pi$ remains the target policy. Require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$. For each first visit to $s$, set\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. After $n$ episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)}\n$$\n\nwhen the denominator is positive. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{\\sum_{i=1}^n I_i(s)W_i(s)G_{t_i(s)}}{\\sum_{i=1}^n I_i(s)W_i(s)}\n$$\n\nwhen its denominator is positive; if that denominator is zero, no weighted estimate is produced. The finite-episode likelihood-ratio identity gives the ordinary weighted return conditional mean $V^\\pi(s)$ for each positive-probability first-visit history. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures specify estimators only and make no convergence claim or Monte Carlo control claim.",
++          "quote": "**Inputs:** A finite MDP with nonempty finite state set $S$, discount $0\\le\\gamma<1$, terminal set $S_\\dagger\\subseteq S$, an initial-state rule, and an episode budget $N\\in\\mathbb N\\cup\\{\\infty\\}$. Assume the Axiom of Choice for the policy path laws defining $V^\\pi$ and the episode distributions, and that episodes reach $S_\\dagger$ in finite time almost surely from every state under each stationary policy used: the target $\\pi$, and also the behavior $\\mu$ in off-policy mode. Choose one mode: (a) on-policy prediction with independent episodes under a stationary target policy $\\pi$; or (b) off-policy prediction with independent episodes under a stationary behavior policy $\\mu$ and stationary target policy $\\pi$. In off-policy mode require $\\pi(a\\mid x)>0\\Rightarrow\\mu(a\\mid x)>0$ for every nonterminal state $x$ and action $a\\in A(x)$.\n\n**Output:** After every finite number $n$ of completed episodes, for every nonterminal state its visit count and each available estimate; report no estimate when its required denominator is zero. A finite budget $N$ returns these outputs after episode $N$; budget $\\infty$ emits successive finite-prefix outputs without a final output or convergence assertion. Set the value estimate of every terminal state to $0$.\n\nInitialize visit counts $C(s)=0$ and leave each nonterminal state's estimate unavailable. Generate successive independent episodes using the selected mode and initial-state rule; stop after $N$ episodes when $N$ is finite. In episode $i$, for each nonterminal state $s$ visited before termination, let $t_i(s)$ be its first visit time and let $G_{t_i(s)}=\\sum_{k=t_i(s)}^{T_i-1}\\gamma^{k-t_i(s)}R_{k+1}$ be the return from that visit.\n\nIn on-policy mode, update only on this first visit: set $m=C(s)+1$; if $m=1$, set $\\widehat V(s)=G_{t_i(s)}$, and otherwise set\n\n$$\n\\widehat V(s)\\leftarrow\\widehat V(s)+\\frac{G_{t_i(s)}-\\widehat V(s)}{m}.\n$$\n\nThen set $C(s)=m$. In off-policy mode, for each first visit compute\n\n$$\nW_i(s)=\\prod_{k=t_i(s)}^{T_i-1}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},\n$$\n\nwhere $T_i$ is the terminal time and an empty product is $1$. Maintain $B(s)=0$ and $W_\\Sigma(s)=0$ initially; add $W_i(s)G_{t_i(s)}$ to $B(s)$ and $W_i(s)$ to $W_\\Sigma(s)$, and increment $C(s)$. After any $n$ completed episodes, the ordinary first-visit estimator is\n\n$$\n\\widehat V^{\\rm ordinary}_n(s)=\\frac{B(s)}{C(s)}\n$$\n\nwhen $C(s)>0$; otherwise no ordinary estimate is produced. The weighted first-visit estimator is\n\n$$\n\\widehat V^{\\rm weighted}_n(s)=\\frac{B(s)}{W_\\Sigma(s)}\n$$\n\nwhen $W_\\Sigma(s)>0$; otherwise no weighted estimate is produced. Under target support, for each positive-probability behavior history ending immediately upon a first visit to a nonterminal state $s$, before its action is sampled, the ordinary weighted return has conditional mean $V^\\pi(s)$ by the finite-episode likelihood-ratio identity. The self-normalized weighted estimator need not be unbiased at a finite sample size. These procedures make no convergence claim or Monte Carlo control claim.",
+           "uses": [
+             "1.1"
+           ]

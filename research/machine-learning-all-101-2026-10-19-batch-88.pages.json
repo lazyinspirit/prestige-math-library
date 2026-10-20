@@ -1,0 +1,408 @@
+[
+  {
+    "order": 2863,
+    "id": "pomdps-and-belief-state-planning",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "POMDPs and belief-state planning",
+    "companion": "pomdps-and-belief-state-planning-examples",
+    "requires": [
+      "conditional-distributions-and-regular-conditional-probability",
+      "finite-mdps-and-bellman-operators"
+    ],
+    "items": [
+      {
+        "id": "lem-cardinality-of-finite-natural-initial-segment",
+        "kind": "lemma",
+        "title": "A finite initial segment of the naturals has its index as cardinality",
+        "deps": [
+          "def-natural-numbers",
+          "def-nat-order",
+          "lem-nat-order-is-membership",
+          "def-finite-cardinality"
+        ],
+        "dependency_level": 0,
+        "statement": "For each $n\\in\\mathbb N$, let $I_n=\\{t\\in\\mathbb N:t<n\\}$. Then $I_n=n$, so $I_n$ is finite and $|I_n|=n$.",
+        "strategy": "Identify the additive-order initial segment with the von Neumann natural n, then use the finite-cardinality definition.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Bob Dumas and John E. McCarthy, Transition to Higher Mathematics, §1.2: Sets",
+              "url": "https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/Transition_to_Higher_Mathematics_(Dumas_and_McCarthy)/01:_New_Page/1.02:_New_Page",
+              "locator": "Complete relevant page, lines 226–232: the set of natural numbers less than n is a canonical set with exactly n elements; the proof here derives the claim from the library's von Neumann-order and finite-cardinality suppliers."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "def-finite-pomdp",
+        "kind": "definition",
+        "title": "Finite partially observable Markov decision process",
+        "deps": [
+          "def-finite-markov-decision-process",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $S$ be a finite nonempty set of hidden states, $A$ a finite nonempty action set available in every state, and $\\Omega$ a finite nonempty observation set. Give these sets their power-set sigma-algebras. A finite POMDP with known model consists of a finite reward alphabet $\\mathcal R\\subseteq\\mathbb R$ and a joint probability mass $p(s',\\rho\\mid s,a)$ on $S\\times\\mathcal R$ for each $(s,a)\\in S\\times A$, an observation probability distribution $O(\\cdot\\mid s')$ on $\\Omega$ for each $s'\\in S$, and an initial belief $b_0:S\\to[0,1]$ with $\\sum_{s\\in S}b_0(s)=1$. Put\n\n$$T(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a),\\qquad r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a).$$\n\nAt decision time $t$, write $S_t\\in S$ for the hidden state, $A_t\\in A$ for the chosen action, $R_t\\in\\mathcal R$ for the realized reward, and $O_{t+1}\\in\\Omega$ for the next observation. Conditional on $S_t=s$ and $A_t=a$, the joint law of next state $S_{t+1}=s'$, reward $R_t=\\rho$, and observation $O_{t+1}=o$ is $p(s',\\rho\\mid s,a)O(o\\mid s')$. Thus the observation depends only on the next state and is not an additional observation of the reward. A policy uses only the past actions and observations; realized rewards are not included in its history. For a horizon $H\\in\\mathbb N$ and discount $\\gamma\\in[0,1]$, the objective is to maximize $\\mathbb E[\\sum_{t=0}^{H-1}\\gamma^tR_t]$. The model is known; learning its transition, reward, or observation laws is outside this definition.",
+        "strategy": "Specify a finite hidden-state MDP, an action-independent next-state observation kernel, the initial belief, observed history, and a finite-horizon objective.",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §3.1, PDF pp. 8–9. The local observation model is the action-independent specialization in the controlling design."
+            },
+            {
+              "title": "Russ Tedrake, Planning Under Uncertainty: Partially-observable Markov decision processes, MIT Underactuated Robotics course notes",
+              "url": "https://underactuated.mit.edu/belief.html",
+              "locator": "Complete relevant page, lines 13–17."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 3–4."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-finite-pomdp-belief-update-is-probability-kernel"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "def-belief-state-and-bayes-filter",
+        "kind": "definition",
+        "title": "Belief states and the finite Bayes filter",
+        "deps": [
+          "def-finite-pomdp",
+          "thm-bayes-formula-for-dominated-kernels",
+          "def-measure-kernel-and-probability-kernel",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "dependency_level": 2,
+        "statement": "For a finite POMDP with state set $S$, define its **belief simplex** by $\\Delta(S)=\\{b:S\\to[0,1]:\\sum_{s\\in S}b(s)=1\\}$, with the Euclidean subspace topology and its Borel sigma-algebra. At time $t$, the observed-history random variable is $H_t=(A_0,O_1,\\ldots,A_{t-1},O_t)$, and a realized history is $h_t=(a_0,o_1,\\ldots,a_{t-1},o_t)$; at $t=0$ both histories are empty. A (possibly randomized) **history policy** assigns to each finite history $h_t$ a probability distribution $\\pi_t(\\cdot\\mid h_t)$ on $A$; a deterministic choice is the point-mass case. Let $\\Pr_\\pi$ be the induced finite law: multiply the initial belief, these action probabilities, and the one-step factors $p(s',\\rho\\mid s,a)O(o\\mid s')$, and sum out hidden states and unobserved rewards when taking marginals. Thus policy randomization depends only on the observed history and is conditionally independent of the hidden state given that history. The history $h_t$ is **reachable** when $\\Pr_\\pi(H_t=h_t)>0$. Its **belief state** is\n\n$$b_t(s)=\\Pr_\\pi(S_t=s\\mid H_t=h_t)=\\frac{\\Pr_\\pi(S_t=s,H_t=h_t)}{\\Pr_\\pi(H_t=h_t)},$$\n\nwhere both probabilities are finite sums of products of the specified initial, action, transition, joint reward-transition, and observation probabilities, with unobserved rewards summed out. At $t=0$, the empty history has belief $b_0$.\n\nFor $b\\in\\Delta(S)$ and $a\\in A$, define the predicted state distribution $\\bar b_{b,a}(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$ and, for $o\\in\\Omega$, the observation probability\n\n$$q(o\\mid b,a)=\\sum_{s'\\in S}O(o\\mid s')\\bar b_{b,a}(s').$$\n\nWhen $q(o\\mid b,a)>0$, the **Bayes filter** is the probability vector\n\n$$\\tau(b,a,o)(s')=\\frac{O(o\\mid s')\\bar b_{b,a}(s')}{q(o\\mid b,a)}.$$\n\nWhen $q(o\\mid b,a)=0$, $\\tau(b,a,o)$ is undefined; no quotient or filler value is assigned. For each $(b,a)$, the **belief-state transition kernel** on Borel sets $C\\subseteq\\Delta(S)$ is\n\n$$K(C\\mid b,a)=\\sum_{o\\in\\Omega:q(o\\mid b,a)>0}q(o\\mid b,a)\\,1_C(\\tau(b,a,o)),$$\n\nand the expected one-step reward at belief $b$ under action $a$ is $\\bar r(b,a)=\\sum_{s\\in S}b(s)r(s,a)$, where $1_C$ denotes the indicator function of $C$.",
+        "strategy": "Define the finite conditional belief by its positive-history ratio, then state the normalizer, positive-probability Bayes update, and belief-state transition kernel.",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §§3.2–3.4, PDF pp. 9–11. The filter is defined only for positive observation probability."
+            },
+            {
+              "title": "Russ Tedrake, Planning Under Uncertainty: Partially-observable Markov decision processes, MIT Underactuated Robotics course notes",
+              "url": "https://underactuated.mit.edu/belief.html",
+              "locator": "Complete relevant page, lines 18–24."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 7–8."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-finite-pomdp-belief-update-is-probability-kernel"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "alg-pomdp-witness-backup",
+        "kind": "algorithm",
+        "title": "Exhaustive finite-horizon POMDP alpha-vector backup",
+        "deps": [
+          "def-finite-pomdp",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "dependency_level": 2,
+        "statement": "Input a finite POMDP, a horizon $H\\in\\mathbb N$, and its discount $\\gamma\\in[0,1]$. A depth-zero policy tree is the empty continuation and has the zero vector $\\alpha_0:S\\to\\mathbb R$. Recursively, a depth-$(h+1)$ policy tree consists of a root action $a\\in A$ and one depth-$h$ continuation tree for each observation $o\\in\\Omega$. If the continuation vectors are $(\\alpha_o)_{o\\in\\Omega}$, assign the tree the vector\n\n$$\\alpha_{a,(\\alpha_o)}(s)=r(s,a)+\\gamma\\sum_{s'\\in S}T(s'\\mid s,a)\\sum_{o\\in\\Omega}O(o\\mid s')\\alpha_o(s')\\qquad(s\\in S).$$\n\nSet $\\Gamma_0=\\{\\alpha_0\\}$. For each $h=0,\\ldots,H-1$, form $\\Gamma_{h+1}$ from every action $a\\in A$ and every tuple $(\\alpha_o)_{o\\in\\Omega}\\in\\Gamma_h^{\\Omega}$ using the displayed formula, treating $\\Gamma_{h+1}$ as a set so equal vectors are stored once. Return $(\\Gamma_0,\\ldots,\\Gamma_H)$. This procedure exhaustively enumerates finite policy-tree vectors; it does not perform linear-program witness pruning and makes no bit-complexity or polynomial-time claim.",
+        "strategy": "Enumerate all finite observation-contingent policy trees by root action and one continuation tree per observation, and compute their state-conditional values recursively.",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §4.1–4.3, PDF pp. 11–16. The local procedure is exhaustive and does not claim the paper's optimized LP witness-search complexity."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 8–15 and 19."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-pomdp-belief-update-is-probability-kernel",
+        "kind": "lemma",
+        "title": "The finite POMDP Bayes filter is a probability kernel",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-bayes-formula-for-dominated-kernels",
+          "def-sum-over-a-finite-index-set",
+          "lem-a-double-sum-over-finite-index-sets-may-be-interchanged"
+        ],
+        "dependency_level": 3,
+        "statement": "Let a finite POMDP be fixed, let $b\\in\\Delta(S)$ and $a\\in A$, and put $\\bar b(s')=\\sum_{s\\in S}T(s'\\mid s,a)b(s)$, $q(o)=\\sum_{s'\\in S}O(o\\mid s')\\bar b(s')$, and, when $q(o)>0$, $\\tau(o)(s')=O(o\\mid s')\\bar b(s')/q(o)$. For Borel $C\\subseteq\\Delta(S)$ define $K(C)=\\sum_{o:q(o)>0}q(o)1_C(\\tau(o))$. Then the joint next-state/reward/observation mass in the POMDP definition is normalized; $\\bar b$ and $q$ are probability distributions; every defined $\\tau(o)$ is a probability distribution and is the conditional law of the next state given observation $o$; and $K$ is a probability measure. Moreover, $(b,a)\\mapsto K(C\\mid b,a)$ is Borel measurable for each Borel $C$, so $K$ is a probability kernel from $\\Delta(S)\\times A$ to $\\Delta(S)$. No Axiom of Choice is used.",
+        "strategy": "Normalize the predicted-state law and observation kernel, specialize dominated-kernel Bayes to counting measure, and prove measurability of the finite belief transition.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §§3.1–3.4, PDF pp. 8–11. The finite Bayes formula and positive-normalizer domain are proved locally."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 7–8."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-belief-mdp-sufficient-statistic",
+        "kind": "theorem",
+        "title": "The belief state is a sufficient statistic for finite POMDP control",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "def-sum-over-a-finite-index-set",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 4,
+        "statement": "Let a finite POMDP with known model be fixed. A deterministic history policy chooses an action from the finite action set using only preceding actions and observations; a randomized history policy assigns an action distribution using only that history, with its randomization conditionally independent of the hidden state. For every positive-probability history $h_t$ with belief $b_t$ and every action $a$ having positive conditional selection probability at that history,\n\n$$\\Pr(S_{t+1}=s',O_{t+1}=o\\mid h_t,A_t=a)=\\sum_{s\\in S}b_t(s)T(s'\\mid s,a)O(o\\mid s').$$\n\nConsequently the observation probability is $q(o\\mid b_t,a)$, the next belief is $\\tau(b_t,a,o)$ whenever that probability is positive, and the conditional expected reward is $\\bar r(b_t,a)$. The controlled belief-state model has the fully observed Borel state space $\\Delta(S)$, action set $A$, transition kernel $K$, and reward $\\bar r$; under a policy depending only on the current belief, the belief process is Markov. For every remaining finite horizon $n$, the optimal value depends on the history only through $b$ and satisfies\n\n$$V_0(b)=0,\\qquad V_{n+1}(b)=\\max_{a\\in A}\\left[\\bar r(b,a)+\\gamma\\sum_{o:q(o\\mid b,a)>0}q(o\\mid b,a)V_n(\\tau(b,a,o))\\right].$$\n\nEach maximum is attained; randomizing an action cannot increase the value. An observation with zero probability requires no posterior update. The conclusion holds for $\\gamma\\in[0,1]$ and uses no Axiom of Choice.",
+        "strategy": "Factor the next-state/observation law through the current conditional state distribution, then induct on the remaining finite horizon using the finite action maximum.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §§3.2–3.4, PDF pp. 9–11. The local conditional factorization and finite-horizon recursion are proved in full."
+            },
+            {
+              "title": "Russ Tedrake, Planning Under Uncertainty: Partially-observable Markov decision processes, MIT Underactuated Robotics course notes",
+              "url": "https://underactuated.mit.edu/belief.html",
+              "locator": "Complete relevant page, lines 18–24; its sufficiency claim is independently derived here."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 7–8."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+        "kind": "theorem",
+        "title": "Finite-horizon POMDP values are piecewise-linear and convex",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "alg-pomdp-witness-backup",
+          "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "thm-belief-mdp-sufficient-statistic",
+          "def-sum-over-a-finite-index-set",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max",
+          "def-finite-cardinality",
+          "def-nat-power",
+          "thm-product-rule",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 5,
+        "statement": "Fix a finite POMDP, horizon $H\\in\\mathbb N$, and discount $\\gamma\\in[0,1]$. For $0\\le h\\le H$, let $\\Gamma_h$ be the finite alpha-vector set returned by the exhaustive backup, with set semantics for duplicate vectors. Then, for every belief $b\\in\\Delta(S)$,\n\n$$V_h(b)=\\max_{\\alpha\\in\\Gamma_h}\\sum_{s\\in S}b(s)\\alpha(s),$$\n\nwhere $V_h$ is the optimal expected $h$-step discounted reward. Thus $V_h$ is the upper envelope of finitely many linear functions on $\\Delta(S)$: it is linear on each region $R_\\alpha=\\{b\\in\\Delta(S):\\sum_s b(s)\\alpha(s)\\ge\\sum_s b(s)\\beta(s)\\text{ for every }\\beta\\in\\Gamma_h\\}$ and is convex. Define a **witness belief** for $\\alpha\\in\\Gamma_h$ to be any $b\\in\\Delta(S)$ with $\\sum_s b(s)\\alpha(s)=V_h(b)$. Removing every vector with no witness belief leaves $V_h$ unchanged. For the count, $\\mathcal P_0$ contains the empty continuation and each $\\mathcal P_{h+1}$ consists of a root action and one depth-$h$ continuation for each observation; with $N_h=|\\mathcal P_h|$, $N_0=1$ and $N_{h+1}=|A|N_h^{|\\Omega|}$. The exhaustive candidate and witness-vector counts are bounded by $N_h$, which can grow exponentially in $h$. No infinite-horizon representation or polynomial-time pruning claim is made.",
+        "strategy": "Induct on horizon to identify each policy tree's state-value vector, average under the initial belief, take the finite maximum, and prove envelope convexity and witness-pruning invariance.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Kaelbling, Littman, and Cassandra, Planning and Acting in Partially Observable Stochastic Domains, Brown Technical Report CS-96-08",
+              "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+              "locator": "Complete PDF; §§4.1–4.3, PDF pp. 11–16, and witness/pruning context in §4, PDF pp. 13–19. The alpha-vector induction and witness-pruning invariance are proved locally."
+            },
+            {
+              "title": "Pascal Poupart, CS 886 Lecture 13: POMDPs, University of Waterloo",
+              "url": "https://cs.uwaterloo.ca/~ppoupart/teaching/cs886-fall05/lectureNotes/cs886-lecture13.pdf",
+              "locator": "Complete lecture, slides 8–15 and 19. The slides are used for independent treatment and count context, not as a proof substitute."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 2864,
+    "id": "pomdps-and-belief-state-planning-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "POMDPs and belief-state planning — Examples",
+    "companion": "pomdps-and-belief-state-planning",
+    "requires": [
+      "pomdps-and-belief-state-planning"
+    ],
+    "items": [
+      {
+        "id": "ex-pomdp-two-state-bayes-update",
+        "kind": "example",
+        "title": "A two-state POMDP update changes a three-to-one prior to nine-to-one",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $S=\\{s_0,s_1\\}$, $A=\\{a\\}$, $\\Omega=\\{x,y\\}$, reward alphabet $\\{0\\}$, and horizon $H=1$ with $\\gamma=1$. For each $i\\in\\{0,1\\}$, the joint next-state/reward law assigns probability one to $(s_i,0)$ from $(s_i,a)$, so the hidden state remains fixed and the reward is zero. Let $b_0(s_0)=3/4$, $b_0(s_1)=1/4$, and set $O(x\\mid s_0)=3/4$, $O(x\\mid s_1)=1/4$, $O(y\\mid s_0)=1/4$, and $O(y\\mid s_1)=3/4$. The probability of observing $x$ is $5/8$, and after $x$ the belief is $b_1(s_0)=9/10$, $b_1(s_1)=1/10$.",
+        "strategy": "Compute the predictive observation mass and apply the finite Bayes formula coordinate by coordinate.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pomdp-observation-aliasing-preserves-belief",
+        "kind": "example",
+        "title": "An observation with identical state likelihoods leaves the belief unchanged",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $S=\\{s_0,s_1\\}$, $A=\\{a\\}$, $\\Omega=\\{x\\}$, reward alphabet $\\{0\\}$, horizon $H=1$, and discount $\\gamma=1$. From each state, the joint next-state/reward law assigns probability one to the same state with reward zero. Let $b_0(s_0)=2/3$, $b_0(s_1)=1/3$, and let $O(x\\mid s_0)=O(x\\mid s_1)=1$. Then $q(x\\mid b_0,a)=1$ and the posterior after $x$ is again $(2/3,1/3)$; the observation does not distinguish the two hidden states.",
+        "strategy": "Evaluate the common observation likelihood in the numerator and normalizer, then simplify both posterior coordinates.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pomdp-zero-likelihood-observation-is-not-updated",
+        "kind": "example",
+        "title": "A zero-likelihood observation has no posterior update",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "lem-finite-pomdp-belief-update-is-probability-kernel",
+          "def-sum-over-a-finite-index-set"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $S=\\{s_0,s_1\\}$, $A=\\{a\\}$, $\\Omega=\\{x,y\\}$, reward alphabet $\\{0\\}$, horizon $H=1$, and discount $\\gamma=1$. From each state, the joint next-state/reward law assigns probability one to that same state with reward zero. Put $b_0(s_0)=1$, $b_0(s_1)=0$, and let $O(x\\mid s_0)=1$, $O(y\\mid s_0)=0$, $O(x\\mid s_1)=0$, and $O(y\\mid s_1)=1$. Then the observation distribution has $q(y\\mid b_0,a)=0$ and $q(x\\mid b_0,a)=1$, so $\\tau(b_0,a,y)$ is undefined and the belief transition uses only the positive-mass $x$ branch.",
+        "strategy": "Compute the observation masses and apply the filter's stated positive-normalizer domain.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      },
+      {
+        "id": "ex-pomdp-policy-tree-enumeration-grows-exponentially",
+        "kind": "example",
+        "title": "A finite POMDP family has exponentially many witnessed alpha vectors",
+        "deps": [
+          "def-finite-pomdp",
+          "def-belief-state-and-bayes-filter",
+          "alg-pomdp-witness-backup",
+          "thm-finite-horizon-pomdp-piecewise-linear-convex-value",
+          "def-finite-cardinality",
+          "def-nat-power",
+          "thm-product-rule",
+          "thm-cardinality-of-a-set-of-functions",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-nat-addition",
+          "lem-nat-order-is-membership",
+          "lem-nat-transitive-irreflexive",
+          "thm-induction-principle",
+          "lem-cardinality-of-finite-natural-initial-segment"
+        ],
+        "dependency_level": 6,
+        "statement": "For each $n\\in\\mathbb N$ with $0<n$, let $I_n=\\{t\\in\\mathbb N:t<n\\}$ be a clock set and let a hidden binary string be a function $x:I_n\\to\\{0,1\\}$. Write $\\sigma(t)$ for the natural successor. Put $S=\\{(x,t):x\\in\\{0,1\\}^{I_n},\\ t\\in I_n\\}$, $A=\\{0,1\\}$, $\\Omega=\\{o\\}$, and reward alphabet $\\mathcal R=\\{0,1\\}$. For $t\\in I_n$, define $t^+=\\sigma(t)$ if $\\sigma(t)\\in I_n$, and $t^+=t$ otherwise. Under action $a$ at $(x,t)$, the joint next-state/reward law assigns probability one to next state $(x,t^+)$ and reward $1_{\\{a=x(t)\\}}$; the sole observation $o$ occurs with probability one. Let $x^\\circ:I_n\\to\\{0,1\\}$ be the constant-zero string, take $b_0=\\delta_{(x^\\circ,0)}$, and set horizon $H=n$ and $\\gamma=1$. There are exactly $2^n$ depth-$n$ policy trees, one for each binary action string $y:I_n\\to\\{0,1\\}$. The alpha vector of tree $y$, evaluated at state $(x,0)$, is $\\sum_{t<n}1_{\\{x(t)=y(t)\\}}$. At the point-mass belief $\\delta_{(y,0)}$ this vector has value $n$, while every distinct action string has value strictly less than $n$. Therefore all $2^n$ alpha vectors are distinct and each has a witness belief in $\\Delta(S)$, which need not be reachable from the specified initial belief; the family has state count $n2^n$.",
+        "strategy": "Count the binary action sequences, compute each deterministic tree's reward vector along the clocked state path, and use the point-mass belief at its matching string to witness unique optimality.",
+        "proof_strategy": "direct",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "forward_refs": []
+      }
+    ]
+  }
+]

@@ -11,6 +11,7 @@ deps: [def-ordered-field, lem-of-mult-neg]
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-square-positive.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -32,9 +33,13 @@ proof_strategy: cases
 
 ## Statement
 
-Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$. For
+Let $F$ be an ordered field (Ordered field) with positive cone $P$. For
 every $a \in F$ with $a \neq 0$ we have $a^2 > 0$, where $a^2 = a \cdot a$. In
 particular, every nonzero square is positive.
+
+## Statement references
+
+[[def-ordered-field]]
 
 ## Facts & Assumptions
 

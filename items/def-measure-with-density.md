@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-measure-with-density.json
   audited: 2026-08-27
   precheck: n/a
   judge:
@@ -29,4 +30,9 @@ $f:X\to[0,+\infty]$ be measurable. The **measure with density $f$ relative
 to $\mu$** is the measure
 $$f\,d\mu:\mathcal A\to[0,+\infty],\qquad (f\,d\mu)(A):=\int_A f\,d\mu,$$
 whose measure property is supplied by
-[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].
+The indefinite integral of a nonnegative measurable function is a measure.
+
+## Definition references
+
+[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]
+

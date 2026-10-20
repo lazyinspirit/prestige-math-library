@@ -14,6 +14,7 @@ sources:
     - title: "S. Roch, Lecture 3: Modes of convergence, Definition 3.1"
       url: "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes3.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-almost-sure-convergence-of-random-variables.json
   audited: 2026-09-07
   precheck: n/a
   judge:
@@ -27,6 +28,13 @@ verification:
 Let $(X_n)$ and $X$ be real random variables on one probability space.  Write
 $X_n\to X$ **almost surely** when
 $$\mathbb P\bigl(\{\omega:X_n(\omega)\to X(\omega)\text{ in }\mathbb R\}\bigr)=1.$$
-The convergence in the event is the real convergence of [[def-real-limit]].
-The set is measurable by [[lem-almost-sure-convergence-event-is-measurable]],
+The convergence in the event is the real convergence of Limits and Cauchy sequences of reals.
+The set is measurable by The almost-sure convergence event is measurable,
 so its probability is defined.
+
+## Definition references
+
+[[def-real-limit]]
+
+[[lem-almost-sure-convergence-event-is-measurable]]
+

@@ -1,0 +1,2098 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-du-activation-normalizer-finite-positive",
+    "lem-du-conditional-loss-contraction-under-gram-control",
+    "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+    "lem-du-output-gradient-gram-update-identity",
+    "lem-du-initial-output-gaussian-concentration",
+    "ex-du-relu-outside-analytic-activation-class",
+    "ex-du-residual-skip-at-every-layer",
+    "ex-du-interpolation-does-not-imply-test-fit",
+    "ex-du-duplicate-inputs-force-singular-gram",
+    "ex-du-initial-output-common-mode-variance",
+    "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+    "lem-du-neighborhood-gram-and-hessian-control",
+    "lem-du-local-pl-descent-and-path-length",
+    "lem-du-simultaneous-initialization-event",
+    "thm-residual-network-polynomial-width-training-convergence"
+  ],
+  "contracts": {
+    "lem-du-activation-normalizer-finite-positive": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Lipschitz continuity gives $|\\sigma(z)|\\le B+L|z|$, hence $\\sigma(z)^2\\le2B^2+2L^2z^2$. By [F1], $\\mathbb E\\sigma(Z)^2\\le2B^2+2L^2<\\infty$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "A nonpolynomial analytic function is not identically zero, so choose $z_0$ with $\\sigma(z_0)\\ne0$. Continuity gives an open interval around $z_0$ on which $|\\sigma|\\ge|\\sigma(z_0)|/2$. The standard normal density is strictly positive on that interval, so its integral of $\\sigma^2$ is positive.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The expectation is both finite and strictly positive by steps 1.1 and 1.2, so its reciprocal exists and is positive and finite.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "softplus",
+          "calculation": "Softplus is continuous, nonzero and Lipschitz, so the proved bounds apply.",
+          "result": "Its Gaussian squared expectation is positive and finite.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one scalar Gaussian law and has no empty index family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement excludes the identically zero activation because it is polynomial; the proof uses a nonzero value and a positive-density interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Definition covers a single scalar standard-normal law and uses its finite second moment."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The proof remains valid when B=0; if L=0, an admissible analytic activation is constant and therefore excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint parameter or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement explicitly assumes AC for the probability-law suppliers; the nonzero witness is one finite existential choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        }
+      ]
+    },
+    "lem-du-conditional-loss-contraction-under-gram-control": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By the real spectral theorem, the eigenvalues of $I-\\eta G$ lie in $[1-\\eta\\Lambda,1-\\eta\\lambda]\\subseteq[0,1-\\eta\\lambda]$. Hence $\\|(I-\\eta G)r\\|_2\\le(1-\\eta\\lambda)\\|r\\|_2$, and the triangle inequality with the remainder hypothesis gives $\\|r^+\\|_2\\le(1-3\\eta\\lambda/4)\\|r\\|_2$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $t=\\eta\\lambda\\in(0,1]$. Then $(1-3t/4)^2\\le1-t/2$, since $1-t/2-(1-3t/4)^2=t(1-9t/16)\\ge7t/16>0$. Squaring the estimate in step 1.1 and multiplying by $1/2$ yields $L^+\\le(1-\\eta\\lambda/2)L$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "zero residual",
+          "calculation": "r=0 forces R=0 by the remainder hypothesis.",
+          "result": "Both losses vanish.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The residual is a vector in R^n with positive n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The zero residual forces R=0 by the stated remainder bound, giving equality in the loss estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The spectral estimate also applies to a one-dimensional symmetric matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: A zero eigenvalue is excluded by the explicit positive lower eigenvalue hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement includes eta Lambda=1 and eta lambda=1 in its closed spectral and scalar estimates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional matrix estimate is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way sufficient condition."
+        }
+      ]
+    },
+    "lem-du-population-gram-kernels-are-finite-symmetric-psd": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-du-activation-normalizer-finite-positive",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The input matrix $K^{(0)}$ is symmetric, and for $v\\in\\mathbb R^n$, $v^TK^{(0)}v=\\|\\sum_i v_ix_i\\|_2^2\\ge0$. Its diagonal entries are $\\|x_i\\|_2^2=1$, giving the base case.",
+          "inputs": [
+            "base",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Assume the induction hypothesis that $K^{(h-1)}$ is finite, symmetric positive semidefinite, and has diagonal $1$, for some $1\\le h<H$. By [F2]\u2013[F3], take $G\\sim N_n(0,K^{(h-1)})$; each pair $(G_i,G_j)$ has covariance $A_{ij}^{(h)}$. The growth bound $|\\sigma(z)|\\le|\\sigma(0)|+L|z|$ and the finite Gaussian second moments make each product $\\sigma(G_i)\\sigma(G_j)$ integrable by Cauchy\u2013Schwarz. Thus $K^{(h)}$ is finite and symmetric, and for every $v$, $v^TK^{(h)}v=c_\\sigma\\mathbb E[(\\sum_i v_i\\sigma(G_i))^2]\\ge0$. Because $G_i\\sim N(0,1)$, its diagonal is $c_\\sigma\\mathbb E[\\sigma(Z)^2]=1$ by [F5]. This establishes the induction step.",
+          "inputs": [
+            "ih",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For the fixed $H$, let $P(h)$ mean that $K^{(h)}$ is finite, symmetric positive semidefinite, and has diagonal $1$, for $0\\le h<H$. Define $Q(k)$ to mean $P(j)$ for every $j\\le\\min(k,H-1)$. Step 1.1 gives $Q(0)$. If $Q(k)$ and $k+1<H$, step 2.1 applied with $h=k+1$ gives $P(k+1)$ and hence $Q(k+1)$; if $k+1\\ge H$, $Q(k+1)$ adds no new index. By [F6], $Q(H-1)$ holds, so $K^{(H-1)}$ is finite, symmetric positive semidefinite, and has diagonal $1$; when $H=1$, this is exactly the base matrix $K^{(0)}$. By [F4], take independent $G,G'$ both distributed as $N_n(0,K^{(H-1)})$. The vector with coordinates $Y_i=\\sqrt{c_\\sigma}\\,G'_i\\sigma'(G_i)$ has finite second moments; $\\sigma'$ is bounded because it is the derivative of a Lipschitz differentiable function. Factoring expectations of independent variables gives $\\mathbb E[Y_iY_j]=c_\\sigma K_{ij}^{(H-1)}\\mathbb E[\\sigma'(G_i)\\sigma'(G_j)]=K_{ij}^{(H)}$. Therefore $K^{(H)}$ is finite and symmetric, and $v^TK^{(H)}v=\\mathbb E[(\\sum_i v_iY_i)^2]\\ge0$ for every $v$. This proves the fully connected terminal claim and discharges that induction.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For the residual base layer let $G_0\\sim N_n(0,S^{(0)})$ and $V^{(1)}=\\sqrt{c_\\sigma}\\,\\sigma(G_0)$, with activation applied coordinatewise. Then $EV^{(1)}=b^{(1)}$ and $E[V^{(1)}(V^{(1)})^T]=S^{(1)}$ by [F1]. The growth bound used in step 2.1 proves finite second moments. Thus $S^{(1)}-b^{(1)}(b^{(1)})^T$ is its covariance, and its quadratic form in $v$ equals $E[(v^T(V^{(1)}-EV^{(1)}))^2]\\ge0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Suppose a finite-second-moment vector $V^{(h-1)}$ has mean $b^{(h-1)}$ and second-moment matrix $S^{(h-1)}$. Take $G\\sim N_n(0,S^{(h-1)})$ independently of this vector, and put $V^{(h)}=V^{(h-1)}+\\alpha\\sigma(G)$. Finite second moments follow from the growth bound and $(u+v)^2\\le2u^2+2v^2$. Independence gives $EV^{(h)}=b^{(h-1)}+\\alpha\\mu^{(h-1)}$ and $E[V_i^{(h)}V_j^{(h)}]=S_{ij}^{(h-1)}+\\alpha(b_i^{(h-1)}\\mu_j^{(h-1)}+b_j^{(h-1)}\\mu_i^{(h-1)})+\\alpha^2E[\\sigma(G_i)\\sigma(G_j)]=S_{ij}^{(h)}$. This constructs each successive vector through the finitely many layers, by [F6]. Its second-moment matrix and covariance are positive semidefinite by the expectation-of-a-square argument of step 3.2.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 3.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For $H\\ge2$, take independent $G,G'\\sim N_n(0,S^{(H-1)})$ and set $Y_i=(c_{\\rm res}/H)G'_i\\sigma'(G_i)$. The boundedness $|\\sigma'|\\le L$ gives finite second moments, and independence gives $E[Y_iY_j]=K_{{\\rm res},ij}^{(H)}$. Consequently this terminal matrix is symmetric positive semidefinite. At $H=1$ it equals the already proved fully connected matrix by definition. This proves all residual assertions.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes a positive number of inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The zero-vector quadratic form vanishes in every PSD conclusion of the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes H=1, where the residual and fully connected kernels coincide by definition; at H=2 the residual intermediate update range is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows singular Gaussian covariances and repeated inputs. The independent-feature second-moment representations prove positive semidefiniteness for both architectures, without claiming residual unit diagonals."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite layer recursion has no limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement explicitly assumes AC, DC, and countable choice for Gaussian vectors and independent copies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional."
+        }
+      ]
+    },
+    "lem-du-output-gradient-gram-update-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFr\u00e9chet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fr\u00e9chet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a real-linear map $L$ such that for every $\\varepsilon>0$ there is $\\delta>0$ for which",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $r=u(\\theta)-y$. By the scalar chain rule applied to $\\frac12\\sum_i(u_i-y_i)^2$, the parameter gradient is $J(\\theta)^Tr$. By [F3], $h:=\\theta^+-\\theta=-\\eta J(\\theta)^Tr$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $u$ is differentiable, [F4] gives $u(\\theta+h)=u(\\theta)+J(\\theta)h+R$, where $R:=u(\\theta+h)-u(\\theta)-J(\\theta)h$ is the first-order remainder. Substitute $h=-\\eta J(\\theta)^Tr$ to get $J(\\theta)h=-\\eta J(\\theta)J(\\theta)^Tr=-\\eta G(\\theta)r$, which is the claimed identity.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "zero residual",
+          "calculation": "u=y makes the gradient step zero and the first-order remainder zero.",
+          "result": "The output remains unchanged.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The output vector and finite parameter vector have positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement includes the zero-residual case: the gradient step and first-order remainder vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: For one observation the Jacobian has one row and the stated chain-rule identity still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: No invertibility is assumed; a rank-deficient Jacobian still gives the stated update identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional derivative argument uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not a biconditional."
+        }
+      ]
+    },
+    "lem-du-initial-output-gaussian-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-standard-gaussian-lipschitz-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC, DC, and countable choice. Let $Z\\sim\\gamma_d$ be standard Gaussian\non $\\mathbb R^d$ and let\n$f:\\mathbb R^d\\to\\mathbb R$ be $L$-Lipschitz. If $L>0$, then for every $r>0$,\n$$P\\{f(Z)\\ge E f(Z)+r\\}\\le e^{-r^2/(2L^2)}.$$\nIf $L=0$, the probability on the left is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The reverse triangle inequality gives $|\\|\\Phi a\\|_2-\\|\\Phi b\\|_2|\\le\\|\\Phi(a-b)\\|_2\\le\\|\\Phi\\|_{\\rm op}\\|a-b\\|_2$, so $a\\mapsto\\|\\Phi a\\|_2$ is $\\|\\Phi\\|_{\\rm op}$-Lipschitz. Since $E[aa^T]=I_m$ by [F2], $E\\|\\Phi a\\|_2^2=\\operatorname{tr}(\\Phi\\Phi^T)=\\operatorname{tr}(G)$; Cauchy\u2013Schwarz yields $E\\|\\Phi a\\|_2\\le\\sqrt{\\operatorname{tr}(G)}$.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $\\|\\Phi\\|_{\\rm op}=0$, then $u=0$ and the asserted event has probability one. Otherwise apply [F1] to $g(a)=\\|\\Phi a\\|_2$ with $r=\\|\\Phi\\|_{\\rm op}\\sqrt{2\\log(1/\\delta)}>0$. The upper-tail probability is at most $\\exp(-\\log(1/\\delta))=\\delta$, and the mean bound in step 1.1 gives the displayed threshold.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Phi=0",
+          "calculation": "The image norm, trace and operator norm all vanish.",
+          "result": "The probability event holds surely.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a positive finite feature matrix dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: For Phi=0 the norm, trace, and operator norm are all zero, so the probability statement holds surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: For a one-dimensional feature matrix, the same Lipschitz and mean argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The Statement allows singular Phi; the zero operator is handled directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: The confidence parameter ranges over the open interval 0<delta<1, so the chosen threshold is positive and finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement covers this boundary: AC, DC, and countable choice are explicit assumptions for the Gaussian concentration supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-sided probability bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-sided probability bound."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        },
+        {
+          "id": "def-dependent-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        }
+      ]
+    },
+    "ex-du-relu-outside-analytic-activation-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $t<0$, $\\sigma(t)=0$, so its left derivative at $0$ is $0$; for $t>0$, $\\sigma(t)=t$, so its right derivative at $0$ is $1$. The two one-sided derivatives differ, and the derivative at $0$ does not exist.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Every analytic real function is differentiable at every point of its domain. Since ReLU is not differentiable at $0$, it is not analytic; it also fails the Lipschitz-derivative condition in [F1].",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "t=0",
+          "calculation": "The left and right derivatives are 0 and 1.",
+          "result": "The derivative does not exist.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns a scalar function on the nonempty real line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: The example explicitly checks the unequal one-sided derivatives at zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element family or depth-one theorem case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate data or matrix case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The function has domain R and no endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The derivative calculation is deterministic and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way exclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way exclusion."
+        }
+      ]
+    },
+    "ex-du-residual-skip-at-every-layer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Substituting $h=2$ gives an identity contribution $x^{(1)}$ and nonlinear contribution $\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(2)}x^{(1)})$ in $x^{(2)}$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substituting $h=3$ gives an identity contribution $x^{(2)}$ and nonlinear contribution $\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(3)}x^{(2)})$ in $x^{(3)}$. Thus the recurrence contains the skip at both post-initial layers.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "H=3",
+          "calculation": "Substitute h=2 and h=3 into the residual recurrence.",
+          "result": "Both post-initial layers have identity skips.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes depth three and has two nonempty post-initial layers."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: Even if a nonlinear branch vanishes, the identity contribution remains in the recurrence in the Example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes H=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No feature or weight nondegeneracy is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting layer index is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite recurrence calculation is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a direct structural fact."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a direct structural fact."
+        }
+      ]
+    },
+    "ex-du-interpolation-does-not-imply-test-fit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "At the training point, $g_0(0)=g_1(0)=0=y$, so both one-point empirical losses $\\frac12(g_j(0)-y)^2$ are zero.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "At the test point, $g_0(1)=0$ and $g_1(1)=1$, so the two predictors agree on the entire training sample but have different test predictions. This verifies the stated logical limitation of empirical interpolation.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one training example",
+          "calculation": "Both functions vanish at 0 and differ at 1.",
+          "result": "Training predictions agree while test predictions differ.",
+          "checked_in": "Steps 1.1\u20132.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example contains one training input and one test input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: Both empirical losses are exactly zero in the worked example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: The one-training-point case is the explicit Example setting."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No matrix or network degeneracy assumption is involved."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example uses fixed inputs 0 and 1, not limiting endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two functions and points are explicit and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example concerns failure of implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example concerns failure of implication, not a biconditional."
+        }
+      ]
+    },
+    "ex-du-duplicate-inputs-force-singular-gram": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The rows $i,j$ of $K^{(0)}$ coincide because $K_{i\\ell}^{(0)}=\\langle x_i,x_\\ell\\rangle=\\langle x_j,x_\\ell\\rangle=K_{j\\ell}^{(0)}$ for every $\\ell$. This is the base case.",
+          "inputs": [
+            "base",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Assume the rows $i,j$ of $K^{(h-1)}$ coincide. By [F2], $K^{(h-1)}$ is symmetric, so the corresponding columns also coincide. For each $\\ell$, the covariance matrices $A_{i\\ell}^{(h)}$ and $A_{j\\ell}^{(h)}$ are equal; when $h<H$ their activation expectations therefore agree, and at $h=H$ both the derivative expectations and prefactors $K_{i\\ell}^{(H-1)}$, $K_{j\\ell}^{(H-1)}$ agree. Thus rows $i,j$ of the fully connected $K^{(h)}$ coincide. For the residual recursion, the first-layer means also agree because the initial variances agree. Assuming equal rows of $S^{(h-1)}$ and equal means $b_i^{(h-1)}=b_j^{(h-1)}$, the Gaussian marginal means satisfy $\\mu_i^{(h-1)}=\\mu_j^{(h-1)}$. Substitution in both residual recurrences gives equal rows of $S^{(h)}$ and equal new means. The terminal derivative formula then gives equal terminal rows as well. This supplies the same finite induction for the residual case; at $H=1$ the kernels coincide by definition.",
+          "inputs": [
+            "ih",
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For the fixed $H$, let $P(h)$ assert that rows $i,j$ of $K^{(h)}$ coincide for $0\\le h\\le H$. The base case is step 1.1; step 2.1 proves $P(h)$ from $P(h-1)$ for each $1\\le h\\le H$. Applying [F4] by finite induction therefore gives equal terminal rows, including the case $H=1$. Let $v=e_i-e_j\\ne0$. Equal rows and symmetry imply $K^{(H)}v=0$. By [F2]\u2013[F3], all eigenvalues are nonnegative and zero is an eigenvalue, so the smallest eigenvalue is zero. This proves the example and discharges the induction.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires two distinct observation indices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: The vector e_i-e_j is a nonzero null vector in the repeated-input example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "reason": "The hypothesis requires at least two indexed observations.",
+          "evidence": "The Statement includes H=1, where the residual and fully connected kernels coincide by definition; at H=2 the residual intermediate update range is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows singular Gaussian covariances and repeated inputs. The independent-feature second-moment representations prove positive semidefiniteness for both architectures, without claiming residual unit diagonals."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite-depth recursion has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-index induction uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a one-way sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a one-way sufficient condition."
+        }
+      ]
+    },
+    "ex-du-initial-output-common-mode-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-du-activation-normalizer-finite-positive",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the finite-dimensional Gaussian probability law.\nLet $G\\in F^{a\\times b}$ have the iid Gaussian law of\n[[def-standard-real-and-normalized-complex-gaussian-matrix-law]]. If $U,V$\nare compatible orthogonal matrices for $F=\\mathbb R$ or unitary matrices for\n$F=\\mathbb C$, then $U^*GV$ has the same iid law as $G$. In particular, if\n$W\\in F^{n\\times n}$ is orthogonal/unitary and $\\Omega\\in F^{n\\times\\ell}$\nis iid Gaussian, then any two disjoint row blocks of $W^*\\Omega$ are\nindependent standard Gaussian matrices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Softplus is positive and nonconstant. It is analytic, has derivative in $(0,1)$, and its second derivative is at most $1/4$, so it satisfies the activation regularity assumptions. By [F2] and [F4], $\\mu$ is finite; because $\\sigma(Z)\\ge\\log 2$ when $Z\\ge0$ and the standard normal density is positive on $(0,1)$, $\\mu>0$. Since softplus is nonconstant, choose $z_0$ with $\\sigma(z_0)\\ne\\mu$; continuity and the positive Gaussian density give $\\mathbb E[(s-\\mu)^2]>0$. Expanding this finite square and using $\\mathbb E s=\\mu$ yields $\\mathbb E[s^2]>\\mu^2$. Therefore $0<\\rho<1$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $U=\\operatorname{span}\\{x_1,\\ldots,x_n\\}$. By [F5], $\\mathbb R^d=U\\oplus U^\\perp$, and [F6] supplies an orthonormal basis of $U^\\perp$. Joining it to $x_1,\\ldots,x_n$ gives the columns of an orthogonal matrix $Q$. By [F7], $W^{(1)}Q$ has the same iid Gaussian law as $W^{(1)}$, so all coordinates $W^{(1)}_{r\\cdot}x_i$ are independent standard normals. Thus $\\mathbb E[(\\Phi\\Phi^T)_{ii}]=c_\\sigma\\mathbb E[s^2]=1$, while for $i\\ne j$, $\\mathbb E[(\\Phi\\Phi^T)_{ij}]=c_\\sigma\\mu^2=\\rho$. Therefore $\\mathbb E[\\Phi\\Phi^T]=(1-\\rho)I_n+\\rho\\mathbf1\\mathbf1^T$, and its quadratic form in the unit vector $e$ is $1+(n-1)\\rho$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Conditional on the hidden weights, $e^Tu=e^T\\Phi a$ is a centered normal random variable with variance $S=e^T\\Phi\\Phi^Te\\ge0$, by [F1] and [F3]. The nonnegative random variable $S$ has expectation $1+(n-1)\\rho>\\rho n/2$, so the event $S>\\rho n/2$ has positive probability; otherwise its expectation would be at most $\\rho n/2$. On this event, for any fixed $C>0$, the conditional probability of $|e^Tu|>C\\sqrt n$ is at least $P\\{|Z|>C\\sqrt{2/\\rho}\\}>0$. Averaging over the hidden weights proves positive unconditional probability, and $\\|u\\|_2\\ge|e^Tu|$ gives the asserted absence of one confidence-uniform constant.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "n=1",
+          "calculation": "e=1 and E[e^T Phi Phi^T e]=1.",
+          "result": "The formula reduces to normalized single-feature variance.",
+          "checked_in": "Steps 1.1\u20133.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n>=1 and width m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: The common-mode variance is positive because rho>0 in the example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: For n=1 the expected common-mode expression reduces to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: A singular feature matrix is allowed; the conditional Gaussian argument only needs a nonnegative quadratic form."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes H=1 and has no limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example covers this boundary: AC is explicit for the scalar and multivariate Gaussian-law suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way probability conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way probability conclusion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        },
+        {
+          "id": "def-countable-choice",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "reason": "The explicit axiom fact is used only at the proof steps that cite it."
+        }
+      ]
+    },
+    "thm-wide-network-gradient-descent-reaches-zero-training-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-du-simultaneous-initialization-event",
+          "source_section": "Statement",
+          "quote": "Use either of the two architectures, its own terminal population kernel $K$, and independent Gaussian initialization. Assume AC, DC and countable choice and the activation and bounded-label hypotheses of the convergence theorems. Write $\\lambda=\\lambda_{\\min}(K)>0$, $q=1+\\log(16/\\delta)$ and $M=\\sqrt{1+\\log(16mnH/\\delta)}$. There are constants $A\\ge2$ and $C\\ge1$, depending only on the fixed activation bounds, its normalizer, the label bound, and, in the residual case, $c_{\\rm res}$, with the following property. For the fully connected case put $T=A^H$; if",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-du-neighborhood-gram-and-hessian-control",
+          "source_section": "Statement",
+          "quote": "Use either Du architecture with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-du-local-pl-descent-and-path-length",
+          "source_section": "Statement",
+          "quote": "Let $u:\\mathbb R^p\\to\\mathbb R^n$ be $C^2$, $L=\\frac12\\|u-y\\|^2$, and $r_0=u(\\theta_0)-y$. On the closed ball $B(\\theta_0,R)$ suppose a block $J_*$ of the output Jacobian satisfies $J_*J_*^T\\succeq(\\lambda/2)I_n$ and $\\|\\nabla^2L\\|\\le S$, with $\\lambda,S>0$. If $R>2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$ and $0<\\eta\\le1/S$, every fixed-step gradient-descent iterate stays in the ball,",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\lambda=\\lambda_0$ and $q=1+\\log(16/\\delta)$. Fix an exponential envelope $E=A_0^H$ for all initialization constants in [F2] and another $F=A_1^H$ for [F3] with those initialization bounds. These bases depend only on the permitted fixed bounds. The source-width form permits $m\\ge W\\max\\{n^4/\\lambda^4,n/\\delta,n^2\\log(16Hn/\\delta)/\\lambda^2\\}$, where $W=A_2^H$ is chosen sufficiently large in terms of the fixed bases of $E,F$; in particular take $W\\ge CEF^2$. All these choices are fixed before selecting the radius. On the event from [F2], of probability at least $1-\\delta$, $r_0=u(0)-y$ satisfies $\\|r_0\\|^2\\le Enq$, the initialized last-layer Gram is at least $3\\lambda I/4$, and all other hypotheses of [F3] hold. Also $\\lambda\\le c_\\sigma L^2$ by the diagonal of [F1].",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The displayed width also implies $m\\ge CEF^2 n^3q/\\lambda^3$, after fixing $W$ sufficiently large. For the logarithmic term this follows without an extra logarithmic width factor: writing $A_*=n^4/\\lambda^4$ and $B_*=n/\\delta$, one has $n^3\\lambda^{-3}\\log(1/\\delta)=n^{-1/4}A_*^{3/4}B_*^{1/4}\\delta^{1/4}\\log(1/\\delta)\\le(4/e)\\max(A_*,B_*)$, since $t e^{-t/4}\\le4/e$ for $t\\ge0$. The constant part of $q$ is absorbed by $A_*$ using $\\lambda\\le c_\\sigma L^2$ and $n\\ge1$. Choose the fixed radius $D=4\\sqrt{Enq/\\lambda}$. These inequalities give $D/\\sqrt m\\le c/F$ and $FnD/\\sqrt m\\le\\lambda/4$. Hence [F3] supplies $J_H(\\theta)J_H(\\theta)^T\\succeq\\lambda I/2$ on the entire ball of radius $D$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The same width implies $m\\ge C\\max(n,H,1/\\delta)$, so $M=\\sqrt{1+\\log(16mnH/\\delta)}\\le C\\sqrt{\\log(em)}$ and $q\\le C\\log(em)$. The loss-Hessian bound in [F3], $D=4\\sqrt{Enq/\\lambda}$, and $\\lambda\\le c_\\sigma L^2$ yield $\\|\\nabla^2L\\|\\le T'n^2\\lambda^{-1}(1+qM/\\sqrt m)$, where $T'=A'^H$ after enlarging its fixed base. Indeed expand $(\\sqrt{Enq}+F\\sqrt nD)(1+D)$ in that bound; because $n,q\\ge1$ and $\\lambda$ is bounded above, every term is at most an allowed exponential constant times $n^{3/2}q/\\lambda$, before the exterior factor $\\sqrt nM/\\sqrt m$. The function $\\log(em)^{3/2}/\\sqrt m$ is bounded for $m\\ge1$, so the Hessian is bounded by $S=T''n^2/\\lambda$ on the ball, with $T''=A''^H$. The allowed sufficiently small step-size constant ensures $\\eta\\le1/S$.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The radius satisfies $D>2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$. Apply [F4] with the last-hidden-layer Jacobian block and the ball and smoothness bounds from steps 2.1 and 3.1. Every iterate stays in that ball, and $L(\\theta^{(k)})\\le(1-\\eta\\lambda/2)^kL(\\theta^{(0)})$ for all $k$. Choosing the step-size constant also ensures $0<\\eta\\lambda/2<1$, so geometric convergence to zero follows. The initialization event has probability at least $1-\\delta$, proving the claim. The same application bounds the total parameter path by $2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$; [F3] therefore supplies last-layer Gram stability and the displayed output Taylor-remainder bound on every accepted update segment, for all iterates simultaneously.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero individual labels and zero initial loss; the loss proof treats zero loss as stationary. No argument divides by an individual feature or output value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes a zero terminal minimum eigenvalue, but allows singular intermediate Gaussian covariances. The covariance expectation proof extends to correlation endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes 0<delta<1 and strictly positive step size, with its sufficiently small constant; no endpoint confidence or zero-step guarantee is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        }
+      ]
+    },
+    "lem-du-neighborhood-gram-and-hessian-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $z_h=W_hx_{h-1}$ and $s_1=\\sqrt{c_\\sigma}$ in both architectures, $s_h=\\sqrt{c_\\sigma}$ for fully connected $h\\ge2$, and $s_h=c_{\\rm res}/H$ for residual $h\\ge2$. A layer has feature Jacobian $P_h=(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))W_h$ in the fully connected case, and $P_h=I+(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))W_h$ in residual layers $h\\ge2$. Within the stated ball, $\\|W_h\\|\\le(B_w+D/\\sqrt m)\\sqrt m$. Products of consecutive $P_h$, $h\\ge2$, therefore have norm at most $A^H$ in the fully connected case and $\\prod_h(1+C/H)\\le e^C$ in the residual case. All estimates below use only $h\\ge2$ for matrix operator norms; the input is fixed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $e_h=\\|x_h(\\theta)-x_h(\\theta_0)\\|$. Lipschitz continuity gives $e_1\\le\\sqrt{c_\\sigma}LD/\\sqrt m$. For fully connected layers, $e_h\\le C e_{h-1}+CA_0^H D/\\sqrt m$; for residual layers it gives $e_h\\le(1+C/H)e_{h-1}+CD/(H\\sqrt m)$, using the fixed upper feature bound in the residual case and the initial exponential envelope in the fully connected case. Summing the geometric recurrences gives $e_h\\le TD/\\sqrt m$ in the first case and $e_h\\le CD/\\sqrt m$ in the second. The imposed smallness of $D/\\sqrt m$ keeps all feature norms in the required bounds and justifies the recurrences successively. Also $\\|z_h(\\theta)-z_h(\\theta_0)\\|\\le TD$ or $CD$, since it is bounded by $\\|W_h(\\theta)\\|e_{h-1}+D\\|x_{h-1}(\\theta_0)\\|$ for $h\\ge2$, and by $D$ for $h=1$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a unit parameter direction $v$, let $\\xi_h=D x_h[v]$. At the first layer $\\|\\xi_1\\|\\le C\\|v_{W_1}\\|/\\sqrt m$. Subsequent layers obey $\\xi_h=P_h\\xi_{h-1}+(s_h/\\sqrt m)\\operatorname{diag}(\\sigma'(z_h))v_{W_h}x_{h-1}$. The product bounds in step 1.1, the feature bounds in step 2.1, and Cauchy\u2013Schwarz over layer blocks give $\\max_h\\|\\xi_h\\|\\le T/\\sqrt m$ or $C/\\sqrt m$. For the residual case use $\\sum_{h\\ge2}s_h\\|v_{W_h}\\|\\le c_{\\rm res}(\\sum_{h\\ge2}\\|v_{W_h}\\|^2)^{1/2}/\\sqrt H\\le C$, retaining the separate first-layer term. Thus $\\|D z_h[v]\\|\\le T$ or $C$, uniformly in $h$. Since $Df_i[v]=v_a^Tx_H+a^T\\xi_H$ and $\\|a\\|\\le C\\sqrt m$, each output gradient has norm at most $T$ or $C$, proving $\\|J\\|\\le T\\sqrt n$ or $C\\sqrt n$. This explicitly retains the output and first-layer terms with no $1/H$ bound.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Put $d_h=b_h(\\theta)-b_h(\\theta_0)$. The backward recurrence is $b_{h-1}=P_h^Tb_h$, with $d_H=a-a_0$. Decompose its difference as $P_h(\\theta)^Td_h+(P_h(\\theta)-P_h(\\theta_0))^Tb_h(\\theta_0)$. The latter is the sum of a weight-difference term bounded by $Ts_hD$ (respectively $Cs_hD$) and a gate-difference term bounded by $Cs_h B_bM\\|z_h(\\theta)-z_h(\\theta_0)\\|$, because $\\|\\operatorname{diag}(\\sigma'(z_h)-\\sigma'(z_{h,0}))b_{h,0}\\|\\le\\beta B_bM\\|z_h-z_{h,0}\\|$. Summing the backward recurrence with the product bounds gives $\\|d_h\\|\\le TM D$ or $CM D$. Hence $\\|b_h(\\theta)\\|_\\infty\\le TM(1+D)$ or $CM(1+D)$. The crude $\\ell_2$ bound $\\|b_h(\\theta)\\|_2\\le T\\sqrt m$ or $C\\sqrt m$ follows separately from step 1.1 and $\\|a\\|_2\\le C\\sqrt m$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "For the last-hidden-layer Gram, put $X_i=x_i^{(H-1)}$, $Z_i=W_HX_i$ and $\\gamma=c_\\sigma$ or $c_{\\rm res}^2/H^2$. Direct differentiation gives $G_{H,ij}=\\gamma\\langle X_i,X_j\\rangle m^{-1}\\sum_ra_r^2\\sigma'(Z_{i,r})\\sigma'(Z_{j,r})$. Subtract its initialized version in three parts: feature-inner-product change, derivative-gate change with $a_0^2$, and output-weight-square change. Step 2.1 bounds the first part by $T D/\\sqrt m$ or $CD/\\sqrt m$ before multiplying by $\\gamma$. For the second part, Cauchy\u2013Schwarz gives $m^{-1}\\sum_ra_{0,r}^2|\\Delta Z_{i,r}|\\le m^{-1}\\|a_0\\|_4^2\\|\\Delta Z_i\\|_2\\le C\\|\\Delta Z_i\\|_2/\\sqrt m$; multiply by $\\beta L$, and use step 2.1. For the third part, $m^{-1}\\sum_r|a_r^2-a_{0,r}^2|\\le m^{-1}\\|a-a_0\\|_2(\\|a\\|_2+\\|a_0\\|_2)\\le CD/\\sqrt m$. Feature norms and $|\\sigma'|\\le L$ bound all remaining factors. The entry error is consequently at most $TD/\\sqrt m$ or $CD/(H^2\\sqrt m)$. The operator norm is at most $n$ times this entry bound.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For two unit parameter directions $v,w$, twice differentiating the output gives the mixed output-weight terms $v_a^TDx_H[w]+w_a^TDx_H[v]$, and the sum over layers of $\\frac{s_h}{\\sqrt m}b_h^T\\left(\\operatorname{diag}(\\sigma''(z_h))(Dz_h[v]\\odot Dz_h[w])+\\operatorname{diag}(\\sigma'(z_h))(v_{W_h}Dx_{h-1}[w]+w_{W_h}Dx_{h-1}[v])\\right).$ This identity follows by differentiating every primitive twice and propagating each resulting second-order term through its downstream Jacobians; the linear skip has zero second derivative. The coordinate-product inequality $\\|p\\odot q\\|_1\\le\\|p\\|_2\\|q\\|_2$, steps 3.1\u20133.2, and $\\sum_hs_h\\le CH$ or $C$ bound the first part by $TM(1+D)/\\sqrt m$ or $CM(1+D)/\\sqrt m$. The terms involving $v_{W_h}Dx_{h-1}[w]$ use the $\\ell_2$ backward bound and $\\|Dx_{h-1}[w]\\|\\le T/\\sqrt m$ or $C/\\sqrt m$; summing with Cauchy\u2013Schwarz over matrix blocks gives the same bound. The output-weight mixed terms are at most $T/\\sqrt m$ or $C/\\sqrt m$. This proves the output-Hessian bound, with polynomial factors in $H$ absorbed into $A^H$ only for the fully connected case.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The identity $\\nabla^2L=J^TJ+\\sum_i r_i\\nabla^2f_i$ gives $\\|\\nabla^2L\\|\\le\\|J\\|^2+\\sqrt n\\|r\\|\\max_i\\|\\nabla^2f_i\\|$. Integrating the Jacobian along the straight segment to initialization gives $\\|r\\|\\le\\|r_0\\|+T\\sqrt nD$ or $\\|r_0\\|+C\\sqrt nD$. Substitution of steps 3.1 and 4.1 proves the claimed loss-Hessian bound, after enlarging $A,C$ to absorb squares of fixed exponential envelopes. For each coordinate the integral Taylor formula is $f_i(\\theta+h)-f_i(\\theta)-Df_i(\\theta)h=\\int_0^1(1-t)D^2f_i(\\theta+th)[h,h]\\,dt$. Step 4.1 bounds its absolute value by $TM(1+D)\\|h\\|^2/(2\\sqrt m)$ or the corresponding residual constant. Summing coordinate squares gives the stated vector Taylor bound.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement includes D=0 and h=0; the perturbation and Taylor estimates then vanish exactly, with no division by these increments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes deterministic finite initialization bounds and permits zero individual features, output weights and singular Gram matrices; this lemma alone does not assume spectral positivity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes the closed radius and every segment contained in it. There is no step-size or confidence parameter in this deterministic lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        }
+      ]
+    },
+    "lem-du-local-pl-descent-and-path-length": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^d$ be open and let $f:U\\to\\mathbb R$ be continuously\nFr\u00e9chet differentiable. The gradient $\\nabla f(x)$ is the vector of partial\nderivatives in the Euclidean coordinates, with the convention of\n[[def-jacobian-matrix-and-gradient]]; differentiability is the Fr\u00e9chet\ncondition of [[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $g=\\nabla L=J^Tr$. Since $JJ^T\\succeq J_*J_*^T$, $\\|g\\|^2=r^TJJ^Tr\\ge(\\lambda/2)\\|r\\|^2=\\lambda L$ in the ball. For any step $\\theta^+=\\theta-hg$, $0<h\\le\\eta$, whose segment stays in the ball, integration of the Hessian bound along that segment gives $L-L^+\\ge h(1-Sh/2)\\|g\\|^2\\ge(h/2)\\|g\\|^2$. Thus $L^+\\le(1-h\\lambda/2)L$. If $L>0$, nonnegativity of $L^+$ gives $h\\lambda/2\\le1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For such a segment with $L>0$, $\\sqrt L-\\sqrt{L^+}=(L-L^+)/(\\sqrt L+\\sqrt{L^+})\\ge h\\|g\\|^2/(4\\sqrt L)\\ge(\\sqrt\\lambda/4)h\\|g\\|$. If $L=0$, $r=0$ and hence $g=0$, so the step is stationary. Telescoping any finite sequence of admissible full or truncated steps gives total parameter path length at most $4\\sqrt{L_0}/\\sqrt\\lambda=2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Suppose there is a first proposed full step exiting the ball. Truncate that step at the first intersection with its boundary; this is a segment of length $h\\|g\\|$ with $h\\le\\eta$, wholly in the ball. Step 2.1 applies to all previous steps and this truncated step, giving total path length strictly less than $R$. Reaching the boundary from $\\theta_0$ requires length at least $R$, a contradiction. Thus no exit occurs. Step 1.1 applied at every full step gives the loss rate, and taking the supremum of finite partial path lengths in step 2.1 gives the asserted series bound.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns a finite-dimensional output map with a nontrivial positive Gram lower bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero individual labels and zero initial loss; the loss proof treats zero loss as stationary. No argument divides by an individual feature or output value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and proof use only finite Euclidean spaces, including dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles zero loss by stationarity; positive lambda excludes a deficient output Gram rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes eta=1/S and a closed controlled ball, with a strict radius margin."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The deterministic finite-dimensional Statement uses no axiom of choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        }
+      ]
+    },
+    "lem-du-simultaneous-initialization-event": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-standard-gaussian-lipschitz-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC, DC, and countable choice. Let $Z\\sim\\gamma_d$ be standard Gaussian\non $\\mathbb R^d$ and let\n$f:\\mathbb R^d\\to\\mathbb R$ be $L$-Lipschitz. If $L>0$, then for every $r>0$,\n$$P\\{f(Z)\\ge E f(Z)+r\\}\\le e^{-r^2/(2L^2)}.$$\nIf $L=0$, the probability on the left is zero.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $0\\le s,t$ and a real random variable\n$X_t-X_s$ has law $N(0,|t-s|)$, then, for every integer $m\\ge1$,\n$$E|X_t-X_s|^{2m}=c_m|t-s|^m,$$\nwhere\n$$c_m=E|Z|^{2m}=(2m-1)!!=1\\cdot3\\cdots(2m-1)<\\infty$$\nfor $Z\\sim N(0,1)$. In particular, when $m\\ge2$, this is the moment hypothesis\nof the one-parameter Kolmogorov criterion with\n$\\alpha=2m$, $\\beta=m-1$, and $C_T=c_m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-du-initial-output-gaussian-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC, DC and countable choice. Fix hidden-layer feature vectors $\\phi_1,\\ldots,\\phi_n\\in\\mathbb R^m$, form the matrix $\\Phi\\in\\mathbb R^{n\\times m}$ with rows $\\phi_i^T$, and let the independent output-weight vector $a\\sim N_m(0,I_m)$. Put $u=\\Phi a$ and $G=\\Phi\\Phi^T$. Then for every $0<\\delta<1$,",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "We give the scalar estimates used below explicitly. If $U,V$ are centered Gaussian variables with variances at most a fixed $Q$, then $|\\sigma(z)|\\le B+L|z|$ and [F3] imply $\\|\\sigma(U)\\|_{2p}\\le C\\sqrt p$ and $\\|\\sigma(U)\\sigma(V)\\|_p\\le Cp$ for integers $p\\ge2$. The same last bound holds for $a^2\\sigma'(U)\\sigma'(V)$ when $a$ is an independent standard normal, because $|\\sigma'|\\le L$. After centering, each such variable $X$ satisfies $E|X|^p\\le p! C^p$, enlarging $C$ using $p^p\\le e^p p!$. Expanding its exponential series, for $|t|\\le1/(2C)$ one has $Ee^{tX}\\le1+\\sum_{p\\ge2}(C|t|)^p\\le e^{2C^2t^2}$. For $m$ independent copies, exponential Markov with $t=s/(4C^2)$, and then with $-t$, gives $P(|m^{-1}\\sum_rX_r|>s)\\le2e^{-cms^2}$ for $0<s\\le c$. All constants are uniform over the covariances with these variance bounds.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The Gaussian expectation maps needed in the population recurrences are Lipschitz functions of the three entries of their bivariate covariance on any region $v\\le Q_{ii},Q_{jj}\\le Q$, where $v>0$ is fixed. Here this assertion applies both to $E[\\sigma(U)\\sigma(V)]$ and to $E[\\sigma'(U)\\sigma'(V)]$. To verify it, parameterize $U=\\sqrt s Z$, $V=\\sqrt t(\\rho Z+\\sqrt{1-\\rho^2}Z')$. At fixed $\\rho$, changing $s,t$ changes the expectation by at most $C(|\\Delta s|+|\\Delta t|)$, using the Lipschitz constants $L,\\beta$, Cauchy\u2013Schwarz, and $s,t\\ge v$. At fixed $s,t$ and $|\\rho|<1$, the centered bivariate Gaussian density $\\phi_{s,t,\\rho}(u,v)$ satisfies $\\partial_\\rho\\phi_{s,t,\\rho}=\\sqrt{st}\\,\\partial_u\\partial_v\\phi_{s,t,\\rho}$, as direct differentiation of its exponential quadratic formula shows. Integrating this identity twice by parts gives the derivative of the expectation with respect to $\\rho$ as $\\sqrt{st}E[g'(U)g'(V)]$, where $g=\\sigma$ or $g=\\sigma'$. Its absolute value is at most $QL^2$ or $Q\\beta^2$. The boundary terms vanish because $g$ has at most linear growth and bounded first derivative; first integrate on finite rectangles and pass to the limit using the Gaussian tail and the displayed growth bounds. The same bounds extend to $\\rho=\\pm1$ by dominated convergence in the displayed representation. Finally $\\rho=Q_{ij}/\\sqrt{st}$ is Lipschitz in the entries when $s,t\\ge v$. The marginal map $s\\mapsto E\\sigma(\\sqrt s Z)$ is Lipschitz for the same reason.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Write $\\widehat S_{ij}^{(h)}=\\langle x_i^{(h)}(0),x_j^{(h)}(0)\\rangle$ and, for residual layers, $\\widehat b_i^{(h)}=m^{-1/2}\\sum_r x_{i,r}^{(h)}(0)$. Conditional on previous layers, the preactivation pairs in distinct rows are independent centered Gaussians with covariance given by $\\widehat S^{(h-1)}$. In the fully connected case, step 1.1 bounds each difference of $\\widehat S_{ij}^{(h)}$ from its conditional mean by $Ct_0$, except with probability $\\delta/(32Hn^2)$, where $t_0=\\sqrt{\\log(64Hn^2/\\delta)/m}$. Its conditional mean is exactly the fully connected population expectation evaluated at $\\widehat S^{(h-1)}$. Since the population diagonal is one, step 2.1 gives, while the error is at most a fixed small constant, $e_h\\le C e_{h-1}+Ct_0$, where $e_h=\\max_{ij}|\\widehat S_{ij}^{(h)}-K_{ij}^{(h)}|$ and $e_0=0$. Thus $e_h\\le A^H t_0$ after increasing $A$. The width in the Statement makes this smaller than the fixed stopping threshold and than $c\\lambda/n$. Conditional bounds and a union bound over $h,i,j$ therefore justify the estimates through layers $h<H$; the last hidden-feature norm is bounded by one further conditional application of the activation moment estimate, without identifying its covariance with the terminal derivative kernel. A first layer crossing the stopping threshold would contradict this recurrence. In particular all feature norms are bounded by a constant, hence by $T$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In the residual case the population feature variances lie in a fixed compact interval $[v,Q]$ independent of $H$. Indeed the vector construction in [F1] gives $S^{(h)}-b^{(h)}(b^{(h)})^T\\succeq S^{(1)}-b^{(1)}(b^{(1)})^T$, whose diagonal is $v=c_\\sigma\\operatorname{Var}(\\sigma(Z))>0$. Positivity of $v$ follows from nonconstancy, continuity and the positive Gaussian density. Also $\\sqrt{S_{ii}^{(h)}}\\le\\sqrt{S_{ii}^{(h-1)}}+\\alpha(B+L\\sqrt{S_{ii}^{(h-1)}})$ with $\\alpha=c_{\\rm res}/H$, so iteration gives a fixed upper bound. The empirical conditional mean satisfies exactly the same residual second-moment/mean recursion with $S,b$ replaced by $\\widehat S,\\widehat b$. The nonlinear quadratic part has conditional fluctuation at most $C\\alpha^2t_0$ by step 1.1. Each cross part is $\\alpha m^{-1/2}\\sum_r x_{i,r}^{(h-1)}\\sigma(U_{j,r})$; its centered value has absolute size at most $C\\alpha t_0$ by [F2], since its Lipschitz constant in the independent row Gaussians is at most $C\\alpha\\|x_i^{(h-1)}\\|/\\sqrt m$. The empirical mean has fluctuation at most $C\\alpha t_0$ by [F2]. Step 2.1 now yields $e_h\\le(1+C/H)e_{h-1}+Ct_0/H$, taking the maximum of the covariance and mean errors. The first layer has $e_1\\le Ct_0$ by step 1.1 and [F2]. Hence $e_h\\le Ct_0$ uniformly in $H$. The same stopping argument, now in $[v/2,2Q]$, and the width assumption justify the conditional estimates at every layer and give the feature bound through $h<H$. One further conditional step gives $\\|x_i^{(H)}\\|\\le C$, using the same upper-norm recurrence, so $\\max_{i,h}\\|x_i^{(h)}\\|\\le C$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For either architecture, conditional on layers before the last, the last-hidden-layer Jacobian Gram entries are $s_H^2\\widehat S_{ij}^{(H-1)}m^{-1}\\sum_ra_r^2\\sigma'(z_{i,r})\\sigma'(z_{j,r})$, where $s_H^2=c_\\sigma$ for the fully connected case and $s_H^2=c_{\\rm res}^2/H^2$ for residual $H\\ge2$. This follows by differentiating the last layer. The summands are independent across $r$. Steps 1.1\u20132.1, the feature bounds and errors just proved give entry error at most $Tt_0$ in the fully connected case and $Ct_0/H^2$ in the residual case. The width assumptions make each at most $\\lambda/(4n)$, increasing $A,C$ as necessary. An $n\\times n$ matrix whose entries have absolute value at most $\\varepsilon$ has operator norm at most $n\\varepsilon$, by Cauchy\u2013Schwarz. Thus $\\|J_HJ_H^T-K\\|_{\\rm op}\\le\\lambda/4$, proving the eigenvalue bound.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "step": "5.2",
+          "claim": "A $1/4$-net of the unit sphere in $\\mathbb R^m$ can be chosen with at most $9^m$ points: take a maximal separated set and compare volumes of disjoint radius-$1/8$ balls with the radius-$9/8$ ball. Approximation in both arguments gives $\\|W\\|_{\\rm op}\\le2\\max_{v,w\\text{ in net}}|v^TWw|$. Each $v^TWw$ is standard normal, whose tail is at most $2e^{-t^2/2}$ by [F2]. Union bounds give $\\|W^{(h)}\\|\\le C\\sqrt m$ for all $h\\ge2$ with failure at most $\\delta/16$ when $m\\ge C\\log(16H/\\delta)$, which follows from either displayed width because $\\lambda\\le c_\\sigma L^2$ in the fully connected case and $\\lambda\\le C/H^2$ in the residual case. The latter bound follows by bounding the diagonal of its terminal kernel with step 4.1. Gaussian second and eighth moments and Chebyshev give $\\|a\\|_2\\le C\\sqrt m$ and $\\|a\\|_4\\le Cm^{1/4}$ with failure at most $\\delta/16$ when $m\\ge C/\\delta$, also implied by the widths. These arguments never bound $\\|W^{(1)}\\|$ on the whole input space, so no input-dimension condition is used.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Conditional on hidden weights, $b_{i,h}(0)=P_{i,h}^Ta$, where $P_{i,h}$ is the product of downstream feature Jacobians. Their operator norms are at most $T$ for fully connected layers and $C$ for residual layers: the latter uses $\\prod_{l>h}(1+C/H)\\le e^C$. Each coordinate is centered Gaussian of variance at most $T^2$ or $C^2$. The Gaussian tail and a union bound over at most $mnH$ coordinates give the asserted coordinate maxima, with failure at most $\\delta/16$, enlarging $A,C$. Finally [F4] and $\\|\\Phi\\|_{\\rm op}\\le\\|\\Phi\\|_F\\le\\sqrt n\\max_i\\|x_i^{(H)}\\|$ give $\\|u(0)\\|\\le C\\sqrt{Tnq}$ or $C\\sqrt{nq}$ with failure at most $\\delta/16$. Adding the bounded labels, and taking a union bound over all preceding failures (each allocated no more than its indicated fraction of $\\delta$), proves the simultaneous event.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero labels and sigma(0)=0. The proof divides only by positive fixed activation variance, width, and the assumed positive terminal eigenvalue."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes a zero terminal minimum eigenvalue, but allows singular intermediate Gaussian covariances. The covariance expectation proof extends to correlation endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes 0<delta<1 and strictly positive step size, with its sufficiently small constant; no endpoint confidence or zero-step guarantee is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        }
+      ]
+    },
+    "thm-residual-network-polynomial-width-training-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "source_section": "Definition",
+          "quote": "Fix positive integers $d,n,H,m$, training inputs $x_1,\\ldots,x_n\\in\\mathbb R^d$ with $\\|x_i\\|_2=1$, labels $y_1,\\ldots,y_n\\in\\mathbb R$, an analytic nonpolynomial activation $\\sigma$ satisfying $|\\sigma(0)|<\\infty$ and finite Lipschitz constants for $\\sigma$ and $\\sigma'$, and the positive finite normalization $c_\\sigma=(\\mathbb E_{Z\\sim N(0,1)}[\\sigma(Z)^2])^{-1}$. A fully connected network of width $m$ and depth $H$ is the finite feedforward recurrence",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix $K^{(h)}$, every residual feature second-moment matrix $S^{(h)}$, and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy $K_{ii}^{(h)}=1$ for $0\\le h<H$. For the residual sequence, $S^{(h)}-b^{(h)}(b^{(h)})^T$ is positive semidefinite for $1\\le h<H$; its diagonal is not asserted to equal one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-du-simultaneous-initialization-event",
+          "source_section": "Statement",
+          "quote": "Use either of the two architectures, its own terminal population kernel $K$, and independent Gaussian initialization. Assume AC, DC and countable choice and the activation and bounded-label hypotheses of the convergence theorems. Write $\\lambda=\\lambda_{\\min}(K)>0$, $q=1+\\log(16/\\delta)$ and $M=\\sqrt{1+\\log(16mnH/\\delta)}$. There are constants $A\\ge2$ and $C\\ge1$, depending only on the fixed activation bounds, its normalizer, the label bound, and, in the residual case, $c_{\\rm res}$, with the following property. For the fully connected case put $T=A^H$; if",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-du-neighborhood-gram-and-hessian-control",
+          "source_section": "Statement",
+          "quote": "Use either Du architecture with all parameters equipped with the Euclidean norm (Frobenius norm on each matrix block). At a fixed initialization assume all hidden feature norms are at most $B_x$, all matrices $W^{(h)}(0)$ with $h\\ge2$ have operator norm at most $B_w\\sqrt m$, $\\|a(0)\\|_2\\le B_a\\sqrt m$, $\\|a(0)\\|_4\\le B_4m^{1/4}$, and all backward feature derivatives $b_{i,h}(0)=\\nabla_{x_i^{(h)}}f_i$ have coordinate maxima at most $B_bM$, where $M\\ge1$. For fully connected networks allow $B_x,B_b\\le A_0^H$ for a fixed $A_0\\ge2$, while $B_w,B_a,B_4$ are fixed independent of $H$. There are $A\\ge2,C\\ge1$ depending only on $A_0$, these fixed bounds and the activation, with the following bounds; write $T=A^H$. In the residual case the constants depend also on fixed $c_{\\rm res}$, and every $T$ below is replaced by a fixed $C$ independent of $H$. Uniformly on any parameter ball $\\|\\theta-\\theta_0\\|\\le D$ with $D/\\sqrt m\\le c/T$ (fully connected) or $D/\\sqrt m\\le c$ (residual),",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-du-local-pl-descent-and-path-length",
+          "source_section": "Statement",
+          "quote": "Let $u:\\mathbb R^p\\to\\mathbb R^n$ be $C^2$, $L=\\frac12\\|u-y\\|^2$, and $r_0=u(\\theta_0)-y$. On the closed ball $B(\\theta_0,R)$ suppose a block $J_*$ of the output Jacobian satisfies $J_*J_*^T\\succeq(\\lambda/2)I_n$ and $\\|\\nabla^2L\\|\\le S$, with $\\lambda,S>0$. If $R>2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$ and $0<\\eta\\le1/S$, every fixed-step gradient-descent iterate stays in the ball,",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "First take $H\\ge2$ and put $\\lambda=\\lambda_0$, $q=1+\\log(16/\\delta)$. At the stated width, [F2] supplies with probability at least $1-\\delta$ a simultaneous event with all constants independent of $H$, on which $\\|r_0\\|^2\\le Cnq$ and $J_H(0)J_H(0)^T\\succeq3\\lambda I/4$. The residual kernel diagonal gives $\\lambda\\le C/H^2$; this uses the fixed upper feature-variance bound and $|\\sigma'|\\le L$. The residual neighborhood bounds [F3] retain separate first-layer and readout gradients without an erroneous $1/H$ factor.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Choose $D=4\\sqrt{Cnq/\\lambda}$, with $C$ fixed sufficiently large for the initial-residual bound. The width implies $m\\ge Cn^3q/(\\lambda^3H^4)$ and $m\\ge CD^2$. To see the logarithmic absorption, use $A_*=n^4/\\lambda^4$, $B_*=n/\\delta$ and $n^3\\lambda^{-3}\\log(1/\\delta)\\le(4/e)\\max(A_*,B_*)$, which follows from $\\delta^{1/4}\\log(1/\\delta)\\le4/e$ exactly as in the fully connected argument. Dividing by $H^4$ only decreases the requirement, while the approved width contains $H^6A_*$ and $B_*$. The constant part is absorbed using $\\lambda H^2\\le C$ and $n,H\\ge1$. Consequently $D/\\sqrt m\\le c$ and $CnD/(H^2\\sqrt m)\\le\\lambda/4$, so the last-layer Gram is at least $\\lambda I/2$ throughout this ball.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "All constants in the residual Hessian estimate are independent of $H$. Substitution of $D$ and the initial-residual bound in [F3] yields $\\|\\nabla^2L\\|\\le Cn+Cn^2qM/(\\lambda\\sqrt m)$, because $\\lambda\\le C$ and $n,q\\ge1$. The approved width and $\\lambda\\le C/H^2$ imply $m\\ge C\\max(n,H^6,1/\\delta)$. Thus $M\\le C\\sqrt{\\log(em)}$, $q\\le C\\log(em)$ and $qM/\\sqrt m\\le C/H^2$: explicitly, $\\log(em)^{3/2}\\le C m^{1/6}$ for all $m\\ge1$, so the ratio is at most $Cm^{-1/3}\\le C/H^2$. Also $n\\le Cn^2/(\\lambda H^2)$. Therefore $\\|\\nabla^2L\\|\\le S=Cn^2/(\\lambda H^2)$ on the ball. The permitted sufficiently small fixed step-size constant makes $\\eta\\le1/S$.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $D>2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$, [F4] confines every iterate to the ball and gives $L(\\theta^{(k)})\\le(1-\\eta\\lambda/2)^kL(\\theta^{(0)})$. The step-size constant can ensure $0<\\eta\\lambda/2<1$, because $\\lambda H^2\\le C$. This proves geometric convergence on the probability-$1-\\delta$ event. For $H=1$ the architectures and population kernels coincide; the width is exactly the fully connected depth-one restriction up to fixed constants, and its local proof applies with the same contraction and step-size form. The same application bounds the total parameter path by $2\\sqrt2\\|r_0\\|/\\sqrt\\lambda$; [F3] therefore supplies last-layer Gram stability and the displayed output Taylor-remainder bound on every accepted update segment, for all iterates simultaneously.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires positive finite sample count, width and depth; there is no empty layer-data problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement allows zero individual labels and zero initial loss; the loss proof treats zero loss as stationary. No argument divides by an individual feature or output value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement covers one sample and width one when the width inequalities permit it; residual depth one is explicitly identified with the fully connected case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes a zero terminal minimum eigenvalue, but allows singular intermediate Gaussian covariances. The covariance expectation proof extends to correlation endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes 0<delta<1 and strictly positive step size, with its sufficiently small constant; no endpoint confidence or zero-step guarantee is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement inherits AC, DC and countable choice only from its explicit Gaussian suppliers; all finite vector and ball estimates require no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a one-way result, not a biconditional."
+        }
+      ]
+    }
+  }
+}

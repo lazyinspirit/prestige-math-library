@@ -10,6 +10,7 @@ provenance:
 deps: [thm-change-of-variables-for-expectation, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces, lem-finite-random-variables-are-measurable, def-expectation-on-a-finite-probability-space, lem-expectation-by-distribution]
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-expectation-agrees-with-the-finite-weighted-sum.json
   audited: 2026-09-04
   precheck: pass
 sources:
@@ -22,11 +23,17 @@ sources:
 
 Let $(\Omega,w)$ be a finite probability space and let $X:\Omega\to\mathbb R$.
 After identifying $(\Omega,w)$ with the full-power-set probability space of
-[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],
+Finite probability spaces are exactly finite full-power-set probability spaces,
 the expectation defined by
-[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with
+Expectation of a nonnegative or integrable random variable agrees with
 the published finite formulas:
 $$\mathbb E[X]=\sum_{\omega\in\Omega}X(\omega)w(\omega)=\sum_{x\in X(\Omega)}x\,\mathbb P(X=x).$$
+
+## Statement references
+
+[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]]
+
+[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]
 
 ## Facts & Assumptions
 

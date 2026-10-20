@@ -14,6 +14,7 @@ forward_refs: [def-cardinal]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-cardinality.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -35,13 +36,13 @@ pipeline_run: null
 ## Definition
 
 Throughout this page $\mathbb{N}$ is the set of von Neumann naturals
-([[def-natural-numbers]]): $0 = \varnothing$, $\sigma(n) = n \cup \{n\}$, and
+(The natural numbers $\mathbb{N}$ (von Neumann)): $0 = \varnothing$, $\sigma(n) = n \cup \{n\}$, and
 $n = \{\, m \in \mathbb{N} : m < n \,\}$ is itself the set of its predecessors,
-the order being the additive order of [[def-nat-order]] identified with
-membership in [[lem-nat-order-is-membership]]. Write $A \approx B$ when a
-bijection $A \to B$ exists ([[def-equinumerous]],
-[[def-injection-surjection-bijection]]). A set $A$ is **finite** when
-$A \approx n$ for some $n \in \mathbb{N}$ ([[def-countable]]).
+the order being the additive order of Order on the natural numbers identified with
+membership in On $\mathbb{N}$ the order is membership: $m < n \iff m \in n$. Write $A \approx B$ when a
+bijection $A \to B$ exists (Equinumerous sets, $A \approx B$ and $A \preceq B$,
+Injection, surjection, bijection). A set $A$ is **finite** when
+$A \approx n$ for some $n \in \mathbb{N}$ (Finite, countably infinite, countable, uncountable).
 
 **Definition.** Let $A$ be a finite set. Then there is **exactly one**
 $n \in \mathbb{N}$ with $A \approx n$, and we write
@@ -56,8 +57,8 @@ such $n$ exists: that is literally what "$A$ is finite" says. At most one exists
 if $A \approx n$ and $A \approx m$ with $n, m \in \mathbb{N}$, then $n \approx A$,
 because the inverse of a bijection is a bijection, and hence $n \approx m$,
 because a composition of bijections is a bijection
-([[def-injection-surjection-bijection]]); and $n \approx m$ forces $n = m$ by
-claim 3 of [[lem-pigeonhole]]. So $\lvert A\rvert$ names a single natural number
+(Injection, surjection, bijection); and $n \approx m$ forces $n = m$ by
+claim 3 of The pigeonhole principle on $\mathbb{N}$. So $\lvert A\rvert$ names a single natural number
 and not a family of choices.
 
 **Four consequences, proved here because everything on this page uses them.**
@@ -82,6 +83,22 @@ $B \approx \lvert A\rvert$ by transitivity.
 $\lvert A\rvert = \lvert B\rvert$ if and only if $A \approx B$. If the
 cardinalities agree then $A \approx \lvert A\rvert = \lvert B\rvert \approx B$;
 conversely $A \approx B$ gives $\lvert B\rvert = \lvert A\rvert$ by (c).
+
+## Definition references
+
+[[def-natural-numbers]]
+
+[[def-nat-order]]
+
+[[lem-nat-order-is-membership]]
+
+[[def-equinumerous]]
+
+[[def-injection-surjection-bijection]]
+
+[[def-countable]]
+
+[[lem-pigeonhole]]
 
 ## Remarks
 

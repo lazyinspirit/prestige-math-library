@@ -14,7 +14,7 @@ landmark: true
 short: "intermediate value theorem"
 proof_strategy: constructive
 verification:
-  repair: research/statistical-models-experiments-62-published-bibliography-thm-intermediate-value-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-intermediate-value.json
   precheck: pass
 sources:
   scraped: []
@@ -32,8 +32,8 @@ pipeline_run: null
 ## Statement
 
 Let $a, b \in \mathbb{R}$ with $a \le b$, let $f : [a,b] \to \mathbb{R}$ be
-continuous on the closed bounded interval $[a,b]$ ([[def-interval]],
-[[def-continuity-real]]), and let $y \in \mathbb{R}$ satisfy
+continuous on the closed bounded interval $[a,b]$ (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length,
+Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point), and let $y \in \mathbb{R}$ satisfy
 
 $$f(a) \le y \le f(b) \qquad \text{or} \qquad f(b) \le y \le f(a) .$$
 
@@ -42,19 +42,31 @@ Then there is $c \in [a,b]$ with $f(c) = y$.
 **The construction is canonical, so no choice principle is used.** The bisection
 below tests the left half first and takes the right half only when the left one
 has been ruled out, so the passage from one interval to the next is a *function*
-of that interval, and [[thm-recursion]] applies with nothing selected. This is
+of that interval, and The recursion theorem applies with nothing selected. This is
 the same discipline the library uses wherever a sequence is built one term at a
 time.
 
 **Completeness of $\mathbb{R}$ is what does the work.** The bisection produces a
 nested sequence of closed bounded intervals whose lengths tend to $0$, and it is
-[[thm-nested-interval-property]] — hence the least-upper-bound property — that
+A nested sequence of nonempty closed bounded intervals has nonempty intersection, and the intersection is a single point exactly when the lengths tend to $0$ — hence the least-upper-bound property — that
 supplies the point. Over an ordered field that is not complete the theorem
 fails; the witness for that, stated for an arbitrary ordered field and worked
 over $\mathbb{Q}$, is
-[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own
+On a closed interval of $\mathbb{Q}$ there is a continuous unbounded function, a bounded one with no maximum, and one without the intermediate value property, which states its own
 $\varepsilon$-$\delta$ continuity inline and is not an instance of this page's
 definition.
+
+## Statement references
+
+[[def-interval]]
+
+[[def-continuity-real]]
+
+[[thm-recursion]]
+
+[[thm-nested-interval-property]]
+
+[[cex-evt-and-ivt-fail-over-a-non-complete-field]]
 
 ## Facts & Assumptions
 

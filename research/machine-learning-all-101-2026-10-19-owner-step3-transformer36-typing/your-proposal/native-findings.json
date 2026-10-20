@@ -1,0 +1,173 @@
+{
+  "reader": [
+    {
+      "id": "def-transformer-encoder-decoder-layer",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "location": "## Definition, encoder equation and decoder residual description (lines 40\u201342)",
+      "defect": "ill-formed",
+      "evidence": "The encoder equation adds MHA(X,X,X) to X, and the decoder description adds each attention output to a width-d residual input. The direct MHA supplier allows arbitrary output width d_o (def-multihead-self-attention, lines 27 and 36), so these additions are undefined unless each attention sublayer has output width d. The Definition does not state this condition. Specify d_o=d for encoder self-attention, decoder self-attention, and decoder cross-attention. This draft supplier is in current-run batch 36.",
+      "severity": "fatal",
+      "original_index": 4
+    }
+  ],
+  "refuter": [
+    {
+      "id": "def-transformer-encoder-decoder-layer",
+      "location": "## Definition, encoder equation (line 40) and decoder residual description (line 42)",
+      "defect": "ill-formed",
+      "evidence": "Line 40 adds MHA(X,X,X) to X, and line 42 adds each decoder attention output to a width-d residual input. The dependency def-multihead-self-attention (lines 27, 36) permits arbitrary positive output width d_o and gives MHA output shape R^{n_q\u00d7d_o}. Without requiring d_o=d for encoder self-attention, decoder self-attention, and decoder cross-attention, these additions are undefined when d_o\u2260d.",
+      "severity": "fatal",
+      "original_index": 1
+    },
+    {
+      "id": "def-transformer-encoder-decoder-layer",
+      "location": "## Definition, sequence dimensions (lines 30 and 42)",
+      "defect": "missing-hypothesis",
+      "evidence": "The Definition gives X\u2208R^{n\u00d7d} and decoder inputs U\u2208R^{m\u00d7d}, E\u2208R^{n\u00d7d} without requiring n,m\u22651. The dependency def-multihead-self-attention (line 27) requires n_q,n_k to be positive integers. Zero-row inputs therefore fall outside the stated MHA domain; require positive sequence lengths.",
+      "severity": "fatal",
+      "original_index": 2
+    }
+  ],
+  "decisions": [
+    {
+      "obligation": "reader:71:4",
+      "id": "def-transformer-encoder-decoder-layer",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac",
+      "route": "reader",
+      "verdict": "escalated",
+      "evidence": "Current observed producer hash is unchanged. For n=1,d=2,d_o=3 the MHA supplier returns a 1-by-3 output and the defined residual adds it to a 1-by-2 input. Missing prerequisite: each encoder/decoder attention output must have width d. Attempted closure checked current MHA, scaled attention, causal mask, FFN, producer contract and manifest; their explanatory notes do not supply the missing defining hypothesis. Vaswani \u00a73.1 confirms common residual width. Producer batch 36 is read-only here: owner must route supplier-first defining-clause repair and current consumer review. Scaling risk remains open; no completed repair is claimed.",
+      "defect_ids": [
+        "machine-learning-all-101-2026-10-19-3a-b71-transformer-width"
+      ]
+    },
+    {
+      "obligation": "refuter:71:1",
+      "id": "def-transformer-encoder-decoder-layer",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac",
+      "route": "flagged",
+      "verdict": "escalated",
+      "evidence": "Current observed producer hash is unchanged. For n=1,d=2,d_o=3 the MHA supplier returns a 1-by-3 output and the defined residual adds it to a 1-by-2 input. Missing prerequisite: each encoder/decoder attention output must have width d. Attempted closure checked current MHA, scaled attention, causal mask, FFN, producer contract and manifest; their explanatory notes do not supply the missing defining hypothesis. Vaswani \u00a73.1 confirms common residual width. Producer batch 36 is read-only here: owner must route supplier-first defining-clause repair and current consumer review. Scaling risk remains open; no completed repair is claimed.",
+      "defect_ids": [
+        "machine-learning-all-101-2026-10-19-3a-b71-transformer-width"
+      ]
+    },
+    {
+      "obligation": "refuter:71:2",
+      "id": "def-transformer-encoder-decoder-layer",
+      "subject_type": "in-run-dependency",
+      "consumer_id": "ex-empirical-language-model-scaling-law",
+      "observed_source": {
+        "snapshot": "current",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+      },
+      "producer_batch": "36",
+      "dependency_path": [
+        {
+          "id": "ex-empirical-language-model-scaling-law",
+          "item_sha256": "fa890d97b4519be1f10ab4f0944f1251d8ccbf01cb464cf8352e88bea1121490"
+        },
+        {
+          "id": "def-transformer-encoder-decoder-layer",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543"
+        }
+      ],
+      "producer_carrier_at_split": {
+        "producer_batch": "36",
+        "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+        "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+        "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+      },
+      "producer_pre_snapshot": {
+        "path": "research/machine-learning-all-101-2026-10-19-step3-hash-36-pre.json",
+        "sha256": "00faf3e1e46e8e6e768c4a59822ec858f765b718adc68faf21f6e9ea45171865",
+        "carrier": {
+          "producer_batch": "36",
+          "item_sha256": "48a140203c9256f57cf45a3477c670e6d57b6d0c3ea1df7ee5e764fa71cac543",
+          "contract_sha256": "46f032e2bb5a435ed99ab7eef73957dffeaf4bc986cf8a0dcd58d14b333f8c11",
+          "manifest_sha256": "18b952a50e947628102613bf96a099f4758c8978b7e36004410eb71007385e34"
+        }
+      },
+      "observation_basis": "current",
+      "observed_sha256": "ea48637bcf850ba6442977914d827d98639b8436b689c7898a6688729a2547ac",
+      "route": "flagged",
+      "verdict": "escalated",
+      "evidence": "Current observed producer hash is unchanged. The producer does not state positive integer n,m; m=1,n=0 leaves cross-attention with empty encoder keys outside the positive-length MHA domain. Missing prerequisite: explicit positive sequence lengths or a complete empty-input branch. Attempted closure checked current MHA, scaled attention, causal mask, FFN, producer contract and manifest; their explanatory notes do not supply the missing defining hypothesis. Vaswani \u00a73.1 confirms common residual width. Producer batch 36 is read-only here: owner must route supplier-first defining-clause repair and current consumer review. Scaling risk remains open; no completed repair is claimed.",
+      "defect_ids": [
+        "machine-learning-all-101-2026-10-19-3a-b71-transformer-domain"
+      ]
+    }
+  ]
+}

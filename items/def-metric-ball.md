@@ -14,6 +14,7 @@ aliases: [def-open-ball, def-closed-ball, def-sphere]
 landmark: true
 short: "$B(x,r)$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-ball.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -36,8 +37,8 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \in X$ and let
-$r \in \mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric), let $x \in X$ and let
+$r \in \mathbb{R}$ with $r > 0$ (Order on the reals). Define
 
 $$B(x,r) := \{\, y \in X : d(x,y) < r \,\}, \qquad \bar B(x,r) := \{\, y \in X : d(x,y) \le r \,\}, \qquad S(x,r) := \{\, y \in X : d(x,y) = r \,\}.$$
 
@@ -48,15 +49,15 @@ this library.
 
 **Immediate consequences of the definitions.** For every $x \in X$ and $r > 0$:
 
-- $x \in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);
+- $x \in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric);
   in particular open and closed balls are nonempty.
 - $B(x,r) \subseteq \bar B(x,r)$ and $S(x,r) \subseteq \bar B(x,r)$, and
   $\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of
-  the order of $\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):
+  the order of $\mathbb{R}$ (Complete ordered field (least-upper-bound property), Ordered field):
   each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.
 - If $0 < s \le r$ then $B(x,s) \subseteq B(x,r)$ and
   $\bar B(x,s) \subseteq \bar B(x,r)$, by transitivity of the order.
-- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the
+- Nonnegativity of the metric (Nonnegativity of a metric is a consequence of the other axioms, not an axiom) is what forces the
   radius convention, and it forces it for the **open** ball only: if $r \le 0$
   then $B(x,r) = \{y : d(x,y) < r\}$ is empty, because $d(x,y) \ge 0 \ge r$
   for every $y$. The other two sets behave differently at $r = 0$, and the
@@ -76,9 +77,23 @@ is proved.
 **The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and
 not on $x$ and $r$ alone. When more than one space or more than one metric is in
 play we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\bar B$ and $S$. This
-matters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a
+matters as soon as subspaces appear (Isometry, isometric embedding, and the subspace metric on a subset): a
 ball of a subspace is the trace on it of a ball of the ambient space, and the two
 are different sets.
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-real-order]]
+
+[[def-complete-ordered-field]]
+
+[[def-ordered-field]]
+
+[[lem-metric-nonnegativity]]
+
+[[def-isometry-and-metric-embedding]]
 
 ## Remarks
 

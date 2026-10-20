@@ -1,0 +1,535 @@
+[
+  {
+    "batch": 8,
+    "id": "def-proper-scoring-rule",
+    "index": 0,
+    "smoke": {
+      "case": "binary simplex boundary",
+      "result": "For p=(1,0), q=(0,1), the log loss is +infinity while the truthful log loss is 0; the Brier expected-loss difference is 2.",
+      "check": "ml101-finite-proper-scoring",
+      "parameters": {
+        "fixture": "binary-boundary"
+      },
+      "asserts": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\times\\mathcal Y\\to[0,+\\infty]$ whose section $q\\mapsto S(q,j)$ is Borel measurable for every label $j$. If the true label distribution is $p\\in\\Delta_K$ and the reported forecast is $q\\in\\Delta_K$, its expected score loss is $\\bar S(p,q)=\\sum_{j=1}^Kp_jS(q,j)$, where a term with $p_j=0$ contributes zero even when $S(q,j)=+\\infty$. The loss is **proper** if $\\bar S(p,p)\\le\\bar S(p,q)$ for every $p,q\\in\\Delta_K$, and **strictly proper** if equality implies $q=p$. The logarithmic loss is $S_{\\log}(q,j)=-\\log q_j$, with $-\\log0=+\\infty$, where $\\log$ is the natural logarithm; the Brier loss is $S_{\\mathrm B}(q,j)=\\sum_{i=1}^K(q_i-\\mathbf1_{\\{i=j\\}})^2$."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-jensen-for-simplex-pairs",
+    "index": 0,
+    "smoke": {
+      "case": "constant vector",
+      "result": "For Z=(u,v) almost surely, E Z=(u,v), so Jensen holds with equality.",
+      "check": "ml101-simplex-pair-jensen",
+      "parameters": {
+        "fixture": "constant-vector"
+      },
+      "asserts": "For an integer $K\\ge2$, let $\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$ and $C=\\Delta_K\\times\\Delta_K\\subset\\mathbb R^{2K}$. Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $Z=(U,V):\\Omega\\to C$ be measurable, and let $\\psi:C\\to\\mathbb R$ be continuous and jointly convex, meaning $\\psi(\\lambda z+(1-\\lambda)w)\\le\\lambda\\psi(z)+(1-\\lambda)\\psi(w)$ for all $z,w\\in C$ and $\\lambda\\in[0,1]$. Define $\\mathbb E Z$ coordinatewise. Then $\\mathbb E Z=(\\mathbb E U,\\mathbb E V)\\in C$ and\n$$\\psi(\\mathbb E U,\\mathbb E V)\\le\\mathbb E[\\psi(U,V)].$$"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-negative-root-power-is-convex",
+    "index": 0,
+    "smoke": {
+      "case": "s=1",
+      "result": "phi_1(t)=-t is affine and convex.",
+      "check": "ml101-negative-root-power",
+      "parameters": {
+        "fixture": "s=1"
+      },
+      "asserts": "For every real $s\\ge1$, the function $\\varphi_s:[0,\\infty)\\to\\mathbb R$ defined by $\\varphi_s(t)=-t^{1/s}$, with $0^{1/s}=0$, is convex."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-negative-root-power-is-convex",
+    "index": 1,
+    "smoke": {
+      "case": "s=2",
+      "result": "phi_2(t)=-sqrt(t) has second derivative 1/(4 t^(3/2))>0 for t>0 and continuous value 0 at t=0.",
+      "check": "ml101-negative-root-power",
+      "parameters": {
+        "fixture": "s=2"
+      },
+      "asserts": "For every real $s\\ge1$, the function $\\varphi_s:[0,\\infty)\\to\\mathbb R$ defined by $\\varphi_s(t)=-t^{1/s}$, with $0^{1/s}=0$, is convex."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "def-probability-calibration",
+    "index": 0,
+    "smoke": {
+      "case": "reliable forecast",
+      "result": "If Y has law p and G is constantly p, each event identity reduces to p_j 1_{p in B}=p_j 1_{p in B}.",
+      "check": "ml101-forecast-event-calibration",
+      "parameters": {
+        "fixture": "truthful-prior"
+      },
+      "asserts": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, and let $G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable forecast, where $\\Delta_K=\\{p\\in[0,1]^K:\\sum_jp_j=1\\}$. The forecast is **fully reliable** if for every label $j$ and every Borel set $B\\subseteq\\Delta_K$,\n$$\\mathbb P(Y=j,\\ G\\in B)=\\mathbb E[\\mathbf1_{\\{G\\in B\\}}G_j].$$\nIt is **classwise calibrated** if for every $j$ and every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=j,\\ G_j\\in B)=\\mathbb E[\\mathbf1_{\\{G_j\\in B\\}}G_j].$$\nFor the **top-confidence calibration** condition, define $C=\\max_jG_j$ and $\\widehat Y=\\min\\{j:G_j=C\\}$, so ties go to the smallest label. The forecast is top-confidence calibrated if for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf1_{\\{C\\in B\\}}C].$$\nA measurable function $r:\\Delta_K\\to\\Delta_K$ is a **calibration function** for $G$ if for every $j$ and every Borel set $B\\subseteq\\Delta_K$,\n$$\\mathbb P(Y=j,\\ G\\in B)=\\mathbb E[\\mathbf1_{\\{G\\in B\\}}r_j(G)].$$\nWhen such a function is supplied and $d:\\Delta_K\\times\\Delta_K\\to[0,+\\infty)$ is measurable, the **expected calibration error with discrepancy $d$** is $\\eta_d=\\mathbb E[d(r(G),G)]$."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-finite-label-conditional-probability-function",
+    "index": 0,
+    "smoke": {
+      "case": "two labels on a singleton feature",
+      "result": "If P(Y=y_1)=p, then eta=(p,1-p) satisfies the single feature-event identity for both labels.",
+      "check": "ml101-finite-label-conditioning",
+      "parameters": {
+        "fixture": "singleton-feature"
+      },
+      "asserts": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the full power-set sigma-algebra on $\\mathcal Y$, and $K\\ge2$, and joint probability law $P$ on $\\mathsf X\\times\\mathcal Y$; let $X$ and $Y$ be its coordinate random variables and let $\\mathcal G=\\{X^{-1}(A):A\\in\\Sigma_X\\}$, the sigma-algebra generated by $X$. There is a measurable function $\\eta=(\\eta_1,\\ldots,\\eta_K):\\mathsf X\\to\\Delta_K$, where $\\Delta_K=\\{p\\in[0,1]^K:\\sum_jp_j=1\\}$, such that for every label index $j$ and $A\\in\\Sigma_X$,\n$$P(X\\in A,\\ Y=y_j)=\\mathbb E[\\eta_j(X)\\mathbf1_{\\{X\\in A\\}}].$$"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-log-and-brier-strict-propriety",
+    "index": 0,
+    "smoke": {
+      "case": "p=(1,0), q=(0,1)",
+      "result": "The log risk at q is +infinity; the Brier risk difference is 2.",
+      "check": "ml101-finite-proper-scoring",
+      "parameters": {
+        "fixture": "binary-boundary"
+      },
+      "asserts": "For every $K\\ge2$ and $p,q\\in\\Delta_K$, the logarithmic and Brier losses in the definition of finite-label score loss satisfy $\\bar S(p,p)\\le\\bar S(p,q)$, with equality only when $q=p$. The expected logarithmic loss at the truthful forecast is finite, including when some coordinates of $p$ vanish."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-log-and-brier-strict-propriety",
+    "index": 1,
+    "smoke": {
+      "case": "p=q",
+      "result": "Both expected-loss differences vanish.",
+      "check": "ml101-finite-proper-scoring",
+      "parameters": {
+        "fixture": "truthful-equality"
+      },
+      "asserts": "For every $K\\ge2$ and $p,q\\in\\Delta_K$, the logarithmic and Brier losses in the definition of finite-label score loss satisfy $\\bar S(p,p)\\le\\bar S(p,q)$, with equality only when $q=p$. The expected logarithmic loss at the truthful forecast is finite, including when some coordinates of $p$ vanish."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "cor-any-feature-induces-calibrated-forecast",
+    "index": 0,
+    "smoke": {
+      "case": "constant feature",
+      "result": "If X is constant, eta(X) is the prior vector and the event identity reduces to the label marginal.",
+      "check": "ml101-forecast-event-calibration",
+      "parameters": {
+        "fixture": "constant-feature"
+      },
+      "asserts": "Assume AC. Let a finite-label supervised prediction problem have measurable instance space $(\\mathsf X,\\Sigma_X)$ and finite labels $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with the full power-set sigma-algebra, where $K\\ge2$. Identify label $y_j$ with its index $j$ when applying numbered-label calibration, so forecast coordinate $j$ always represents the event $Y=y_j$. For every measurable feature $T:\\mathsf X\\to(\\mathsf Z,\\Sigma_Z)$, there is a measurable $\\eta_T:\\mathsf Z\\to\\Delta_K$ such that $G=\\eta_T(T(X))$ is a conditional class-probability forecast given $T(X)$ and is fully reliable. This includes the identity feature and a constant feature."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-posterior-forecast-minimizes-scoring-risk",
+    "index": 0,
+    "smoke": {
+      "case": "binary Brier score",
+      "result": "For binary probability vectors P=(p,1-p) and Q=(q,1-q), direct Brier expected-loss excess is ||Q-P||_2^2=2(q-p)^2; equality forces Q=P.",
+      "check": "ml101-posterior-brier-vector",
+      "parameters": {
+        "fixture": "binary-vector"
+      },
+      "asserts": "Assume AC. Let $X$ and a finite label $Y\\in\\{1,\\ldots,K\\}$ with the full power-set sigma-algebra, $K\\ge2$, have a joint probability law on standard-Borel spaces. For a proper finite-label score loss $S$, a measurable posterior forecast $G(x)=P(Y\\in\\cdot\\mid X=x)$ minimizes the expected score loss among all measurable forecasts. If $S$ is strictly proper and the posterior forecast has finite expected score loss, equality of risk for another forecast $q(X)$ implies $q(X)=G(X)$ almost surely.",
+      "historical_result": "For posterior p and forecast q, conditional excess is (q-p)^2, so equality forces q=p."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "def-classification-calibration-of-a-surrogate",
+    "index": 0,
+    "smoke": {
+      "case": "binary logistic margin convention",
+      "result": "For eta=1 and Phi(t)=log(1+exp(t)), conditional risk is Phi(-u), minimized at the extended endpoint +infinity.",
+      "check": "ml101-logistic-margin",
+      "parameters": {
+        "fixture": "positive-label-endpoint"
+      },
+      "asserts": "Let $Y\\in\\{-1,+1\\}$ be the label in a supervised prediction problem with the full power-set sigma-algebra on this binary label set, and choose the finite-label conditional probability function ordered as $(-1,+1)$; write $\\eta(x)=\\eta_{+1}(x)$. Let $\\Phi:\\mathbb R\\to[0,\\infty)$ be finite, convex and nondecreasing. It is continuous on $\\mathbb R$; extend it to $\\overline{\\mathbb R}=\\mathbb R\\cup\\{-\\infty,+\\infty\\}$ by its one-sided monotone limits, which may equal $+\\infty$. The resulting extended function is Borel measurable. For $u\\in\\overline{\\mathbb R}$ define the conditional margin risk\n$$L_\\Phi(x,u)=\\eta(x)\\Phi(-u)+(1-\\eta(x))\\Phi(u),$$\nusing $0\\cdot(+\\infty)=0$ at endpoints. A measurable extended-real conditional minimizer is a measurable $h_\\Phi^*:\\mathsf X\\to\\overline{\\mathbb R}$ satisfying $L_\\Phi(x,h_\\Phi^*(x))\\le L_\\Phi(x,u)$ for every $x$ and every $u\\in\\overline{\\mathbb R}$. For a measurable real-valued score $h$, its margin loss is $\\ell_\\Phi(h(x),y)=\\Phi(-yh(x))$, its surrogate risk is $L_\\Phi(h)=\\mathbb E[\\Phi(-Yh(X))]$, and its conditional-minimum risk is $L_\\Phi^*=\\mathbb E[L_\\Phi(X,h_\\Phi^*(X))]$. Under the zero-score-is-error convention, its classification risk is $R_{01}(h)=P(Yh(X)\\le0)$, and the Bayes classification risk is $R_{01}^*=\\mathbb E[\\min\\{\\eta(X),1-\\eta(X)\\}]$. Write $h^*(x)=\\eta(x)-\\tfrac12$ for the centered conditional class probability."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-binned-calibration-estimator-limits",
+    "index": 0,
+    "smoke": {
+      "case": "one-bin cancellation",
+      "result": "If mean label vector equals mean forecast, the one-bin discrepancy is zero even if within-bin calibration error is positive.",
+      "check": "ml101-binned-calibration",
+      "parameters": {
+        "fixture": "one-bin-cancellation"
+      },
+      "asserts": "Let $Y$ be a random variable into $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra, $K\\ge2$, and let $G\\in\\Delta_K$ be a random forecast with measurable calibration function $r:\\Delta_K\\to\\Delta_K$. Let $d:\\Delta_K\\times\\Delta_K\\to[0,\\infty)$ be continuous and satisfy $d(p,p)=0$. For a finite data-independent Borel partition $\\mathcal P$ of $\\Delta_K$, draw an iid sequence $(G_i,Y_i)$ from the joint law of $(G,Y)$, let $V_i=e_{Y_i}$ be the corresponding standard basis vector, and form the empirical estimator\n$$\\widehat E_{n,\\mathcal P}=\\sum_{B\\in\\mathcal P}\\frac{N_B}{n}\\,d(\\bar V_B,\\bar G_B),$$\nwhere $N_B=\\#\\{i\\le n:G_i\\in B\\}$ and, when $N_B>0$, $\\bar V_B$ and $\\bar G_B$ are the sample averages in bin $B$; when $N_B=0$, set both to any fixed $q_0\\in\\Delta_K$. Define\n$$E_{\\mathcal P}=\\sum_{B\\in\\mathcal P:P(G\\in B)>0}P(G\\in B)\\,d\\!\\left(\\mathbb E[r(G)\\mid G\\in B],\\mathbb E[G\\mid G\\in B]\\right).$$\nFor each fixed $\\mathcal P$, $\\widehat E_{n,\\mathcal P}\\to E_{\\mathcal P}$ almost surely. If $d$ is additionally jointly convex, then $E_{\\mathcal P}\\le\\mathbb E[d(r(G),G)]$. Without requiring convexity, if $\\mathcal P_m$ is a sequence of finite data-independent Borel partitions whose mesh $\\max_{B\\in\\mathcal P_m}\\operatorname{diam}_2(B)$ tends to zero, where $\\operatorname{diam}_2(B)=\\sup_{u,v\\in B}\\|u-v\\|_2$, and $r$ is Lipschitz with respect to the Euclidean metric on $\\Delta_K$, then $E_{\\mathcal P_m}\\to\\mathbb E[d(r(G),G)]$. Thus the iterated limit $\\lim_{m\\to\\infty}\\lim_{n\\to\\infty}\\widehat E_{n,\\mathcal P_m}$ equals the expected calibration error almost surely; no diagonal rate is asserted."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-binary-zero-one-risk-excess-with-zero-tie",
+    "index": 0,
+    "smoke": {
+      "case": "eta=1/2 and h=0",
+      "result": "R_01(h)-R_01^*=1/2, exactly the tie correction.",
+      "check": "ml101-zero-score-risk",
+      "parameters": {
+        "fixture": "fair-label"
+      },
+      "asserts": "For a binary supervised problem with the full power-set sigma-algebra on $Y\\in\\{-1,+1\\}$, conditional positive-label probability $\\eta$, and any measurable real-valued score $h$, use $R_{01}(h)=P(Yh(X)\\le0)$ and $R_{01}^*=\\mathbb E\\min\\{\\eta(X),1-\\eta(X)\\}$. Then\n$$R_{01}(h)-R_{01}^*=2\\mathbb E\\!\\left[\\left|\\eta(X)-\\tfrac12\\right|\\mathbf1_{\\{h(X)(\\eta(X)-\\tfrac12)\\le0\\}}\\right]+\\mathbb E\\!\\left[\\min\\{\\eta(X),1-\\eta(X)\\}\\mathbf1_{\\{h(X)=0\\}}\\right].$$"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "lem-binary-zero-one-risk-excess-with-zero-tie",
+    "index": 1,
+    "smoke": {
+      "case": "eta=1 and h=0",
+      "result": "Excess is 1; the main term 1 plus tie term 0 equals 1.",
+      "check": "ml101-zero-score-risk",
+      "parameters": {
+        "fixture": "positive-label"
+      },
+      "asserts": "For a binary supervised problem with the full power-set sigma-algebra on $Y\\in\\{-1,+1\\}$, conditional positive-label probability $\\eta$, and any measurable real-valued score $h$, use $R_{01}(h)=P(Yh(X)\\le0)$ and $R_{01}^*=\\mathbb E\\min\\{\\eta(X),1-\\eta(X)\\}$. Then\n$$R_{01}(h)-R_{01}^*=2\\mathbb E\\!\\left[\\left|\\eta(X)-\\tfrac12\\right|\\mathbf1_{\\{h(X)(\\eta(X)-\\tfrac12)\\le0\\}}\\right]+\\mathbb E\\!\\left[\\min\\{\\eta(X),1-\\eta(X)\\}\\mathbf1_{\\{h(X)=0\\}}\\right].$$"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "fs-unadjusted-surrogate-regret-bound",
+    "index": 0,
+    "smoke": {
+      "case": "scale witness",
+      "result": "Step 1.1: premise1/4=(1/4)*1; excess1 and claimed squared upper bound3/8<1.",
+      "check": "ml101-surrogate-regret-witness",
+      "parameters": {
+        "fixture": "hinge-scale"
+      },
+      "asserts": "1.1 Give the one-point feature space its power-set sigma-algebra and take $Y=+1$ surely. Let $\\Phi(t)=\\max(0,1+t)$, a finite nonnegative nondecreasing convex function: each affine term is nondecreasing and their maximum satisfies the convexity inequality by bounding each affine term at a convex combination by the corresponding convex combination of the two maxima. Here $\\eta=1$, $L_\\Phi(x,u)=\\max(0,1-u)$, and the constant minimizer $h_\\Phi^*=1$ has risk zero. With $s=2,c=1/4$, the margin premise is $1/4\\le(1/4)(1-0)$, an equality. For $h=-1/2$, classification excess is $1$ and surrogate excess is $3/2$, whereas the claimed bound is $(1/2)\\sqrt{3/2}<1$ since its square is $3/8<1$. All scores and risks are measurable and finite. Thus the proposed coefficient is false even without zero scores and with a finite conditional minimizer. [F1, construct, algebra]"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "fs-unadjusted-surrogate-regret-bound",
+    "index": 1,
+    "smoke": {
+      "case": "tie witness",
+      "result": "Step 2.1: eta1/2,h0 gives classification excess1/2 and surrogate excess0.",
+      "check": "ml101-surrogate-regret-witness",
+      "parameters": {
+        "fixture": "hinge-tie"
+      },
+      "asserts": "2.1 Independently use the same one-point feature space and hinge loss, but let each label have probability $1/2$. Then $L_\\Phi(x,u)=[\\max(0,1-u)+\\max(0,1+u)]/2\\ge1$, with equality at $u=0$, so take $h_\\Phi^*=h=0$. For $s=1,c=1$ the premise is $0\\le0$ and surrogate excess is zero. But $R_{01}(h)=1$ while $R_{01}^*=1/2$, so classification excess is $1/2$. Both $2c$ and $2c^{1/s}$ times the zero surrogate excess vanish. This refutes the uncorrected tie convention independently of the scale defect and completes the refutation. [F1, construct, step 1.1, algebra] \u220e"
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-surrogate-regret-controls-classification-regret",
+    "index": 0,
+    "smoke": {
+      "case": "planned scale counterexample",
+      "result": "eta=1, s=2, c=1/2, Phi(t)=log(1+exp(t)), h=-0.1 satisfies the premise but the planned coefficient-2c RHS is below 1.",
+      "check": "ml101-surrogate-regret-witness",
+      "parameters": {
+        "fixture": "logistic-scale"
+      },
+      "asserts": "Mohri et al. Theorem 4.7 assumes the margin right-hand side is $c^s[L_\\Phi(x,0)-L_\\Phi(x,h_\\Phi^*(x))]$ to obtain coefficient $2c$. The controlling plan instead has $c$ there, which yields $2c^{1/s}$. The source classifier predicts $+1$ at zero, while the plan counts zero as an error; the exact local risk identity therefore requires the displayed zero-score correction. The original planned zero-remainder formula with coefficient $2c$ is false: a deterministic positive label with natural-log logistic loss, $s=2$, $c=1/2$, and score $h=-0.1$ satisfies its premise but has excess classification error $1>\\sqrt{\\ln(1+e^{0.1})}$. Independently, at $\\eta=1/2$ the zero score has surrogate excess zero and zero-score-is-error excess $1/2$, so changing only the coefficient cannot repair that convention. The corrected general bound and both clean specializations above retain the complete planned surrogate scope. Mohri Lemma 4.5 overcounts at zero under its own $+1$ tie rule; only its valid upper bound is used here, proved directly in step 7.1."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "thm-surrogate-regret-controls-classification-regret",
+    "index": 1,
+    "smoke": {
+      "case": "zero-score tie",
+      "result": "eta=1/2 and h=0 has surrogate excess zero and classification excess 1/2; the explicit tie correction equals 1/2.",
+      "check": "ml101-surrogate-regret-witness",
+      "parameters": {
+        "fixture": "logistic-tie"
+      },
+      "asserts": "Mohri et al. Theorem 4.7 assumes the margin right-hand side is $c^s[L_\\Phi(x,0)-L_\\Phi(x,h_\\Phi^*(x))]$ to obtain coefficient $2c$. The controlling plan instead has $c$ there, which yields $2c^{1/s}$. The source classifier predicts $+1$ at zero, while the plan counts zero as an error; the exact local risk identity therefore requires the displayed zero-score correction. The original planned zero-remainder formula with coefficient $2c$ is false: a deterministic positive label with natural-log logistic loss, $s=2$, $c=1/2$, and score $h=-0.1$ satisfies its premise but has excess classification error $1>\\sqrt{\\ln(1+e^{0.1})}$. Independently, at $\\eta=1/2$ the zero score has surrogate excess zero and zero-score-is-error excess $1/2$, so changing only the coefficient cannot repair that convention. The corrected general bound and both clean specializations above retain the complete planned surrogate scope. Mohri Lemma 4.5 overcounts at zero under its own $+1$ tie rule; only its valid upper bound is used here, proved directly in step 7.1."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-multiclass-calibration-notions-differ",
+    "index": 0,
+    "smoke": {
+      "case": "Model A",
+      "result": "Full reliability false; classwise and top-confidence calibration true.",
+      "check": "ml101-multiclass-calibration",
+      "parameters": {
+        "fixture": "A"
+      },
+      "asserts": "For each of three models let $X$ and $Y$ have their full power-set sigma-algebras, let $X$ be uniform on $\\{1,2,3\\}$, set $G(X=i)=g_i$, and specify the conditional law of $Y$ at $X=i$ by the row $p_i=P(Y=\\cdot\\mid X=i)$. In Model A take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.4,0.3,0.3)&(0.4,0.4,0.2)\\\\ 2 &(0.3,0.4,0.3)&(0.2,0.4,0.4)\\\\ 3 &(0.3,0.3,0.4)&(0.4,0.2,0.4) \\end{array}$$\nIn Model B take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.3,0.2)&(0.7,0.2,0.1)\\\\ 2 &(0.2,0.5,0.3)&(0.1,0.5,0.4)\\\\ 3 &(0.3,0.2,0.5)&(0.4,0.3,0.3) \\end{array}$$\nIn Model C take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.5,0)&(0.8,0.2,0)\\\\ 2 &(0.5,0,0.5)&(0.2,0,0.8)\\\\ 3 &(0,0.5,0.5)&(0,0.8,0.2) \\end{array}$$\nUse the smallest-index rule to break top-class ties. Model A is classwise and top-confidence calibrated but not fully reliable; Model B is top-confidence calibrated but neither classwise calibrated nor fully reliable; Model C is classwise calibrated but neither top-confidence calibrated nor fully reliable. Hence the three calibration notions are pairwise distinct."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-multiclass-calibration-notions-differ",
+    "index": 1,
+    "smoke": {
+      "case": "Model B",
+      "result": "Top-confidence calibration true; classwise and full reliability false.",
+      "check": "ml101-multiclass-calibration",
+      "parameters": {
+        "fixture": "B"
+      },
+      "asserts": "For each of three models let $X$ and $Y$ have their full power-set sigma-algebras, let $X$ be uniform on $\\{1,2,3\\}$, set $G(X=i)=g_i$, and specify the conditional law of $Y$ at $X=i$ by the row $p_i=P(Y=\\cdot\\mid X=i)$. In Model A take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.4,0.3,0.3)&(0.4,0.4,0.2)\\\\ 2 &(0.3,0.4,0.3)&(0.2,0.4,0.4)\\\\ 3 &(0.3,0.3,0.4)&(0.4,0.2,0.4) \\end{array}$$\nIn Model B take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.3,0.2)&(0.7,0.2,0.1)\\\\ 2 &(0.2,0.5,0.3)&(0.1,0.5,0.4)\\\\ 3 &(0.3,0.2,0.5)&(0.4,0.3,0.3) \\end{array}$$\nIn Model C take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.5,0)&(0.8,0.2,0)\\\\ 2 &(0.5,0,0.5)&(0.2,0,0.8)\\\\ 3 &(0,0.5,0.5)&(0,0.8,0.2) \\end{array}$$\nUse the smallest-index rule to break top-class ties. Model A is classwise and top-confidence calibrated but not fully reliable; Model B is top-confidence calibrated but neither classwise calibrated nor fully reliable; Model C is classwise calibrated but neither top-confidence calibrated nor fully reliable. Hence the three calibration notions are pairwise distinct."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-multiclass-calibration-notions-differ",
+    "index": 2,
+    "smoke": {
+      "case": "Model C",
+      "result": "Classwise calibration true; top-confidence and full reliability false; tie-break accuracy is 0.6.",
+      "check": "ml101-multiclass-calibration",
+      "parameters": {
+        "fixture": "C"
+      },
+      "asserts": "For each of three models let $X$ and $Y$ have their full power-set sigma-algebras, let $X$ be uniform on $\\{1,2,3\\}$, set $G(X=i)=g_i$, and specify the conditional law of $Y$ at $X=i$ by the row $p_i=P(Y=\\cdot\\mid X=i)$. In Model A take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.4,0.3,0.3)&(0.4,0.4,0.2)\\\\ 2 &(0.3,0.4,0.3)&(0.2,0.4,0.4)\\\\ 3 &(0.3,0.3,0.4)&(0.4,0.2,0.4) \\end{array}$$\nIn Model B take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.3,0.2)&(0.7,0.2,0.1)\\\\ 2 &(0.2,0.5,0.3)&(0.1,0.5,0.4)\\\\ 3 &(0.3,0.2,0.5)&(0.4,0.3,0.3) \\end{array}$$\nIn Model C take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.5,0)&(0.8,0.2,0)\\\\ 2 &(0.5,0,0.5)&(0.2,0,0.8)\\\\ 3 &(0,0.5,0.5)&(0,0.8,0.2) \\end{array}$$\nUse the smallest-index rule to break top-class ties. Model A is classwise and top-confidence calibrated but not fully reliable; Model B is top-confidence calibrated but neither classwise calibrated nor fully reliable; Model C is classwise calibrated but neither top-confidence calibrated nor fully reliable. Hence the three calibration notions are pairwise distinct."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-calibrated-constant-prior-forecast",
+    "index": 0,
+    "smoke": {
+      "case": "p=(0.7,0.2,0.1)",
+      "result": "For each j and B, both sides equal p_j if p is in B and zero otherwise.",
+      "check": "ml101-forecast-event-calibration",
+      "parameters": {
+        "fixture": "truthful-prior"
+      },
+      "asserts": "Give $X\\in\\{a,b\\}$ and $Y\\in\\{1,2,3\\}$ their full power-set sigma-algebras. Let $X$ be uniform on $\\{a,b\\}$ and independent of $Y$, whose probabilities are $(0.7,0.2,0.1)$. The forecast $G(X)=(0.7,0.2,0.1)$ is fully reliable and equals the conditional class distribution given either feature value, but it is constant and therefore cannot distinguish $a$ from $b$."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-fixed-bin-ece-underestimates-calibration-error",
+    "index": 0,
+    "smoke": {
+      "case": "two-atom forecast",
+      "result": "True L1 first-coordinate calibration error 0.2; one-bin population discrepancy 0.",
+      "check": "ml101-binned-calibration",
+      "parameters": {
+        "fixture": "one-bin-cancellation"
+      },
+      "asserts": "Give $X\\in\\{a,b\\}$ and $Y\\in\\{1,2\\}$ their full power-set sigma-algebras. Let $X$ be uniform on $\\{a,b\\}$, let $P(Y=1\\mid X=a)=0.8$ and $P(Y=1\\mid X=b)=0.6$, and forecast $G(a)=(0.6,0.4)$, $G(b)=(0.8,0.2)$. For an iid sample from this law and discrepancy $d(p,q)=|p_1-q_1|$, the full calibration error is $0.2$. If the entire forecast simplex is treated as one bin, the empirical binned calibration estimate converges almost surely to zero."
+    }
+  },
+  {
+    "batch": 8,
+    "id": "ex-calibrated-coarsened-risk-score-is-low-information",
+    "index": 0,
+    "smoke": {
+      "case": "merged atoms a,b",
+      "result": "The merged conditional success probability is (0.1+0.9)/2=0.5, while the original laws differ.",
+      "check": "ml101-coarsened-forecast",
+      "parameters": {
+        "fixture": "merge-a-b"
+      },
+      "asserts": "Give $X\\in\\{a,b,c\\}$ and the binary label $Y\\in\\{1,2\\}$ their full power-set sigma-algebras. Let $X$ be uniform on $\\{a,b,c\\}$ and let the conditional probabilities be $P(Y=1\\mid X=a)=0.1$, $P(Y=1\\mid X=b)=0.9$, and $P(Y=1\\mid X=c)=0.75$. Coarsen the feature by $T(a)=T(b)=u$ and $T(c)=v$, and forecast $G=(P(Y=1\\mid T),P(Y=2\\mid T))$. Then $G(a)=G(b)=(0.5,0.5)$ and $G(c)=(0.75,0.25)$. This forecast is fully reliable, although it cannot distinguish $a$ from $b$, whose conditional label laws differ."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "alg-split-conformal-set-for-classification",
+    "index": 0,
+    "smoke": {
+      "case": "zero calibration examples",
+      "result": "For m=0 and 0<alpha<1, k=1=m+1, q=+infinity, and every finite-scored class label is returned.",
+      "check": "ml101-split-conformal-threshold",
+      "parameters": {
+        "fixture": "zero-calibration"
+      },
+      "asserts": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "alg-split-conformal-set-for-classification",
+    "index": 1,
+    "smoke": {
+      "case": "one calibration example at alpha=1/2",
+      "result": "For m=1, k=ceil(2/2)=1; q is exactly the single calibration score.",
+      "check": "ml101-split-conformal-threshold",
+      "parameters": {
+        "fixture": "one-calibration"
+      },
+      "asserts": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "def-top-label-calibration",
+    "index": 0,
+    "smoke": {
+      "case": "constant forecast (9/10, 1/10), label always 1",
+      "result": "On B={9/10}, the correctness event has probability 1 and the confidence integral is 9/10, so top-label calibration fails.",
+      "check": "ml101-top-label-events",
+      "parameters": {
+        "fixture": "overconfident"
+      },
+      "asserts": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "def-top-label-calibration",
+    "index": 1,
+    "smoke": {
+      "case": "constant truthful forecast",
+      "result": "If Y has distribution p and G is constantly p, the event identity holds for every Borel confidence set.",
+      "check": "ml101-top-label-events",
+      "parameters": {
+        "fixture": "truthful"
+      },
+      "asserts": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "alg-validation-temperature-scaling",
+    "index": 0,
+    "smoke": {
+      "case": "four labels 1,1,1,2 and logits (2 log 3,0)",
+      "result": "On candidates {1,2}, T=1 yields (9/10,1/10), T=2 yields (3/4,1/4), and empirical log loss selects T=2.",
+      "check": "ml101-temperature-validation",
+      "parameters": {
+        "fixture": "four-labels"
+      },
+      "asserts": "Fix $K\\ge2$. The input is a trained classifier with a measurable, finite-valued\nlogit map $z:\\mathcal X\\to\\mathbb R^K$, a nonempty finite validation sample\n$(x_i,y_i)_{i=1}^{n_v}$ with $n_v\\ge1$ and $y_i\\in\\{1,\\ldots,K\\}$, and a\nfinite nonempty set of candidate temperatures $\\mathcal T\\subset(0,\\infty)$.\nThe validation labels were not used to fit the logits. For $T\\in\\mathcal T$,\ncompute\n$$p_T(j\\mid x)=\\frac{\\exp(z_j(x)/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell(x)/T)}\\quad (j=1,\\ldots,K),\\qquad L_{\\mathrm{val}}(T)=-\\frac1{n_v}\\sum_{i=1}^{n_v}\\log p_T(y_i\\mid x_i).$$\nChoose the smallest temperature among the minimizers,\n$$T^*=\\min\\arg\\min_{T\\in\\mathcal T}L_{\\mathrm{val}}(T).$$\nand return the forecasts $p_{T^*}(\\cdot\\mid x)$ and predicted label\n$\\min\\arg\\max_j p_{T^*}(j\\mid x)$ for each input $x$. This is a\nfinite-candidate version of validation negative-log-likelihood temperature\nscaling. It selects only by empirical validation loss; it makes no finite-sample\ncalibration guarantee for future data, particularly when the validation and\nfuture data laws differ."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "def-binned-expected-calibration-error",
+    "index": 0,
+    "smoke": {
+      "case": "one occupied bin with 3/4 correct and confidence 9/10",
+      "result": "ECE=MCE=|3/4-9/10|=3/20.",
+      "check": "ml101-binned-top-error",
+      "parameters": {
+        "fixture": "three-quarter-overconfident"
+      },
+      "asserts": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "def-binned-expected-calibration-error",
+    "index": 1,
+    "smoke": {
+      "case": "one occupied bin with 3/4 correct and confidence 3/4",
+      "result": "ECE=MCE=0.",
+      "check": "ml101-binned-top-error",
+      "parameters": {
+        "fixture": "three-quarter-matched"
+      },
+      "asserts": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "thm-positive-temperature-scaling-preserves-argmax",
+    "index": 0,
+    "smoke": {
+      "case": "z=(2 log 3,0), T=1",
+      "result": "Softmax is (9/10,1/10), with maximizing index set {1}.",
+      "check": "ml101-temperature-argmax",
+      "parameters": {
+        "fixture": "T1"
+      },
+      "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "thm-positive-temperature-scaling-preserves-argmax",
+    "index": 1,
+    "smoke": {
+      "case": "z=(2 log 3,0), T=2",
+      "result": "Softmax is (3/4,1/4), with maximizing index set {1}.",
+      "check": "ml101-temperature-argmax",
+      "parameters": {
+        "fixture": "T2"
+      },
+      "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "thm-positive-temperature-scaling-preserves-argmax",
+    "index": 2,
+    "smoke": {
+      "case": "all logits equal",
+      "result": "Every positive temperature gives equal softmax coordinates, so the maximizing index set is unchanged.",
+      "check": "ml101-temperature-argmax",
+      "parameters": {
+        "fixture": "all-tied"
+      },
+      "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "ex-calibration-degradation-under-shift",
+    "index": 0,
+    "smoke": {
+      "case": "perfectly accurate constant forecast",
+      "result": "Top-label calibration fails on B={9/10}; one-bin ECE and MCE equal 1/10.",
+      "check": "ml101-calibration-shift",
+      "parameters": {
+        "fixture": "accurate-overconfident"
+      },
+      "asserts": "First, on a one-point probability space let $Y=1$ and let the forecast be\n$G=(9/10,1/10)$. Its top prediction is always correct, but its top confidence\nis $9/10$. On any nonempty sample from this law, the one-bin ECE and MCE are\nboth $1/10$."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "ex-calibration-degradation-under-shift",
+    "index": 1,
+    "smoke": {
+      "case": "four-point validation set",
+      "result": "The NLL-selected T=2 keeps class 1 as prediction and reduces the one-bin ECE from 3/20 to 0.",
+      "check": "ml101-calibration-shift",
+      "parameters": {
+        "fixture": "four-point-validation"
+      },
+      "asserts": "Second, take four validation labels $1,1,1,2$ and give every example logits\n$(2\\log 3,0)$. Fit temperature scaling on the finite candidate set\n$\\{1,2\\}$. At temperature $1$ the forecast is $(9/10,1/10)$; at temperature\n$2$ it is $(3/4,1/4)$. The validation NLL rule chooses temperature $2$. Both\ntemperatures predict class $1$, while their one-bin ECE values are respectively\n$3/20$ and $0$."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "ex-calibration-degradation-under-shift",
+    "index": 2,
+    "smoke": {
+      "case": "rare subgroup split conformal",
+      "result": "Marginal coverage is 91/100, but coverage given rare test feature is 1/10.",
+      "check": "ml101-calibration-shift",
+      "parameters": {
+        "fixture": "rare-subgroup"
+      },
+      "asserts": "Third, let the feature be rare with probability $1/10$ and common with\nprobability $9/10$, let the true label always be $1$, and use labels\n$\\{1,2\\}$. Take one calibration pair and the test pair as independent draws\nfrom this same law, with trivial training information and fixed score\n$s(x,y)=\\mathbf 1_{\\{x\\text{ is rare}\\}}$. At miscoverage level\n$\\alpha=1/2$, the split conformal set has marginal coverage $91/100$ but\ncoverage $1/10$ conditional on the test feature being rare."
+    }
+  },
+  {
+    "batch": 72,
+    "id": "ex-calibration-degradation-under-shift",
+    "index": 3,
+    "smoke": {
+      "case": "source/target score mismatch",
+      "result": "The source calibration threshold is 0 and target coverage is 0 because the true target label score is 1.",
+      "check": "ml101-calibration-shift",
+      "parameters": {
+        "fixture": "source-target"
+      },
+      "asserts": "Fourth, let a source law put probability one on feature clean with label $1$,\nand let a distinct target law put probability one on feature corrupted with\nlabel $1$. Use the fixed score values\n$s(\\mathrm{clean},1)=0$, $s(\\mathrm{clean},2)=1$,\n$s(\\mathrm{corrupted},1)=1$, and $s(\\mathrm{corrupted},2)=2$. With one\ncalibration example from the source law and $\\alpha=1/2$, the split conformal\nthreshold is $0$, so the prediction set at a target feature is empty and target\ncoverage is $0$."
+    }
+  }
+]

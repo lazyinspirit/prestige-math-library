@@ -11,8 +11,8 @@ deps: [def-frobenius-matrix-norm, def-operator-norm-on-a-finite-dimensional-inne
 aliases: []
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison.json
   precheck: pass
-  repair: research/quantum-computing-algorithms-60-2026-10-15-owner-step4-published-alerts/unitary-invariance/repair-receipt.json
 sources:
   scraped: []
   references:
@@ -31,7 +31,7 @@ let $\sigma_1\ge\sigma_2\ge\cdots\ge\sigma_r>0$ be the positive singular values 
 $A$, where $r=\operatorname{rank}A$; write $\sigma_1=0$ when $r=0$.
 
 1. **Spectral formula.** $\lVert A\rVert_2=\sigma_1$, where $\lVert\cdot\rVert_2$ is
-   the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]].
+   the operator norm of The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv||.
 2. **Frobenius formula.** $\lVert A\rVert_F=\bigl(\sigma_1^{2}+\cdots+\sigma_r^{2}\bigr)^{1/2}$.
 3. **Unitary invariance.** For every unitary $U\in M_m(\mathbb F)$ and
    $V\in M_n(\mathbb F)$ (over $\mathbb F=\mathbb R$: orthogonal matrices),
@@ -42,6 +42,10 @@ $A$, where $r=\operatorname{rank}A$; write $\sigma_1=0$ when $r=0$.
    inequality is an equality exactly when $\sigma_1=\cdots=\sigma_r$, that is,
    when all nonzero singular values coincide. In particular
    $\lVert A\rVert_F\le\sqrt{\min(m,n)}\,\lVert A\rVert_2$.
+
+## Statement references
+
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
 
 ## Facts & Assumptions
 

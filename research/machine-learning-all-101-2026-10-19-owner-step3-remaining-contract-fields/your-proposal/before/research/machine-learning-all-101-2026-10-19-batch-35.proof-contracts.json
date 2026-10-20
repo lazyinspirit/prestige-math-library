@@ -1,0 +1,1968 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "def-recurrent-neural-network",
+    "def-linear-state-space-model",
+    "alg-radix-two-fft",
+    "def-lstm-cell",
+    "def-s4-dplr-parameterization",
+    "alg-cauchy-matvec-at-roots-of-unity",
+    "alg-s4-state-space-recurrence-and-convolution",
+    "lem-woodbury-dplr-bilinear-inverse",
+    "lem-roots-of-unity-fft-complexity",
+    "thm-hippo-leg-matrices-have-low-rank-structure",
+    "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+    "thm-dplr-discretized-step-linear-cost",
+    "lem-s4-convolution-root-of-unity-reduction",
+    "thm-s4-convolution-filter-complexity",
+    "ex-lstm-scalar-gates",
+    "ex-s4-scalar-recurrent-and-convolutional-views",
+    "ex-s4-filter-cost-excludes-training",
+    "thm-cauchy-root-grid-matvec-numerical-cost"
+  ],
+  "contracts": {
+    "def-recurrent-neural-network": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a zero-length horizon, if included in the chosen natural-number convention, leaves the initial state h0 and has no update vertices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero inputs or a zero initial state are allowed; the output depends on the chosen maps and need not be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: T=1 gives exactly one state-map occurrence with the same fixed parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant or otherwise degenerate F and G are allowed; no injectivity or nonlinearity is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The unrolling starts with the supplied h_0 and uses inputs x_1 through x_T, with each evaluation at t using the preceding state. No evaluation at an input x_0 or x_{T+1} is required; at zero horizon there are no map-evaluation occurrences beyond the initial state.",
+          "evidence": "Definition, the following declared clauses/formulas: `a finite horizon $T\\in\\mathbb N$`; `an initial state $h_0\\in\\mathbb R^{d_h}$, and inputs $x_1,\\ldots,x_T\\in\\mathbb R^{d_x}$`; `it computes $h_t=F(h_{t-1},x_t;\\theta)$`; `for $1\\le t\\le T$`. The unrolling starts with the supplied h_0 and uses inputs x_1 through x_T, with each evaluation at t using the preceding state. No evaluation at an input x_0 or x_{T+1} is required; at zero horizon there are no map-evaluation occurrences beyond the initial state.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The unrolling starts with the supplied h_0 and uses inputs x_1 through x_T, with each evaluation at t using the preceding state. No evaluation at an input x_0 or x_{T+1} is required; at zero horizon there are no map-evaluation occurrences beyond the initial state.",
+            "item_sha256": "2115a07d49ef1576999a8270863252b9ffc4d36ac2999de1ef87f23ce7c317a7",
+            "row_sha256": "252b20a81b1da67153bfb7d7f823962e024c70882135cb434cabbeb8a2a1307f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite unrolling is constructed from the given maps, states and inputs without selecting from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition claims no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-linear-state-space-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires positive finite dimensions N,m,p and states no empty-matrix case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero matrices, zero input, or zero initial state are allowed; no nonzero response is required."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=m=p=1 is included, and a singleton interval yields only the specified initial-value constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A=0 or B=0 is permitted; the trajectory and direct term remain separately specified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every bounded interval is Lebesgue measurable by the added box-measure dependency; any interval I is the countable union of I intersected with [-n,n], so the sigma-algebra property in the complete-measure theorem makes I measurable and lambda restricts to I. The trajectory equation is imposed almost everywhere on I, including when t0 is an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: trajectories and inputs are given data; the definition makes no choice from a family of solutions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition specifies what counts as an absolutely continuous state trajectory satisfying the almost-everywhere linear equation and initial value. It states no iff theorem characterizing existence or a particular solution formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The definition specifies what counts as an absolutely continuous state trajectory satisfying the almost-everywhere linear equation and initial value. It states no iff theorem characterizing existence or a particular solution formula.",
+            "item_sha256": "071694a6a212d67e6832676d68f4df1d0c64d37296df89c9559a37f097201c86",
+            "row_sha256": "e7c91d5ad80077923a256e4d7a0ee47a3b5bcd21f041e3bb21e04f8ad0802ab4"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructs matrices or a unique system from an output trajectory. The direct term Du(t) is defined separately and is not equated with the state contribution.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse reconstructs matrices or a unique system from an output trajectory. The direct term Du(t) is defined separately and is not equated with the state contribution.",
+            "item_sha256": "071694a6a212d67e6832676d68f4df1d0c64d37296df89c9559a37f097201c86",
+            "row_sha256": "dbde16d048e5b7603b20712a0d4591f54d8992846857a390a2cd475135e19f81"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Reviewed the complete Definition against all six published prerequisites. Countable Choice supplies the complete Lebesgue measure space; the box theorem with n=1 covers bounded open/closed/half-open/degenerate intervals, and the countable union of intersections with [-n,n] covers unbounded intervals. Compact-subinterval integrability and coordinatewise absolute continuity have the cited meanings. t0 excludes the empty interval; a singleton is null and the differential condition can be excluded there. No existence or uniqueness theorem is asserted. Zero data and finite real/complex dimensions are admitted. Accepted the measurability clarification without changing the model interface. Gu et al. §2.1 supplies the ODE convention; no additional choice is used."
+      }
+    },
+    "alg-radix-two-fft": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The transform length is M=2^q with q>=0, so M is at least one. No zero-length vector is in this procedure; the minimal length M=1 has its explicit return(a_0) base case, and division in the inverse is by this positive M.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The transform length is M=2^q with q>=0, so M is at least one. No zero-length vector is in this procedure; the minimal length M=1 has its explicit return(a_0) base case, and division in the inverse is by this positive M. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
+            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero input vector is returned as the zero transform by the linear recursion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the base case M=1 returns its sole entry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: q=0 gives M=1 and omega=1; the base case returns the identity transform, and its inverse uses conjugate omega=1 and division by M=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the recursion deterministically splits the supplied finite array by parity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure claims no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure claims no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-lstm-cell": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: d_x and d_h are positive, so empty state or input coordinates are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero weights and biases are allowed and produce the constant-gate case in the companion example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: scalar dimensions d_x=d_h=1 are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: gates may be constant and candidate updates may vanish; no nondegeneracy condition is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The initial h_0 and c_0 are supplied independently. At t=1 each gate uses h_0 and the cell update uses c_0; the recurrence is asserted only for t>=1, so it does not impose the updated-state identity on arbitrary initial h_0,c_0.",
+          "evidence": "Definition, the following declared clauses/formulas: `and initial values $h_0,c_0$`; `At each time $t\\ge1$, set`. The initial h_0 and c_0 are supplied independently. At t=1 each gate uses h_0 and the cell update uses c_0; the recurrence is asserted only for t>=1, so it does not impose the updated-state identity on arbitrary initial h_0,c_0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The initial h_0 and c_0 are supplied independently. At t=1 each gate uses h_0 and the cell update uses c_0; the recurrence is asserted only for t>=1, so it does not impose the updated-state identity on arbitrary initial h_0,c_0.",
+            "item_sha256": "803298526253ab0b3bc19137474e563179b0fd6b05dc569f8d1b75f2bfe39ed9",
+            "row_sha256": "839292e51c717fe978269804d9d4e1c518386c27a686a480c27068af9c57fd6a"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the recurrence uses explicitly supplied finite vectors and shared matrices; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The standard LSTM item supplies gate and state recurrences with shared matrices, including no peepholes or projection. It does not characterize all recurrent maps by an equivalence to these gates.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The standard LSTM item supplies gate and state recurrences with shared matrices, including no peepholes or projection. It does not characterize all recurrent maps by an equivalence to these gates.",
+            "item_sha256": "803298526253ab0b3bc19137474e563179b0fd6b05dc569f8d1b75f2bfe39ed9",
+            "row_sha256": "d15163bea5b4d61b1ce7c2ec9c6f7f31ca6077de755f1a610117c66c549f9469"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse infers unique weights or gates from a given hidden-state sequence; the cell parameters and both initial states are inputs to the displayed update.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse infers unique weights or gates from a given hidden-state sequence; the cell parameters and both initial states are inputs to the displayed update.",
+            "item_sha256": "803298526253ab0b3bc19137474e563179b0fd6b05dc569f8d1b75f2bfe39ed9",
+            "row_sha256": "6c77bd449699ee8397765026b6d36bc125b0ac7ec9bfc99dc10bd242eceda680"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-s4-dplr-parameterization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: the model has a positive finite state dimension and the DPLR rank is positive when used by this batch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: B, C, P or Q may be zero; the formulas remain defined whenever the stated bilinear inverse exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: N=1 and transform length M=1 are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: P=0 or Q=0 reduces DPLR to diagonal form."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Δ is required to be strictly positive and I−ΔA/2 must be invertible; Δ=0 is outside the stated discretization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all matrices and vectors are supplied finite data, and the state change is explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "DPLR/NPLR factor forms and the bilinear matrices are prescribed definitions, with a stated unitary-coordinate conversion. They are not a characterization of every state-space system by a performance equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "DPLR/NPLR factor forms and the bilinear matrices are prescribed definitions, with a stated unitary-coordinate conversion. They are not a characterization of every state-space system by a performance equivalence.",
+            "item_sha256": "9e88723abe523619d7fefe14b97260c9ec67742550dc2781f584289abeb97562",
+            "row_sha256": "717ea09dee0db2c44828d997275cd41d165605fb4ee33221124db06209edad93"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not infer a unique low-rank factorization or rank bound from a filter, and the supplied transformed output vector convention gives no converse cost theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The definition does not infer a unique low-rank factorization or rank bound from a filter, and the supplied transformed output vector convention gives no converse cost theorem.",
+            "item_sha256": "9e88723abe523619d7fefe14b97260c9ec67742550dc2781f584289abeb97562",
+            "row_sha256": "b13d29362e14f5fbbc1f90a69b3eec716ee34c28d5692057afba8f6954ac82c1"
+          }
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-cauchy-matvec-at-roots-of-unity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: when n=0 it returns the zero vector directly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero weights give a zero numerator and zero output whenever the requested denominators are nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: M=1 and n=1 reduce to the single quotient a_1/(1−μ_1), or collision if its denominator is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated poles are permitted by the product-tree recurrence; collisions are detected by evaluated denominator zeros."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "At M=1 the Definition uses the sole root1, folds coefficients modulo z-1 and needs no primitive-root reindexing. The separate n=0 branch returns the zero vector before any product tree; positive pole lists use the explicit collision test before quotient evaluation.",
+          "evidence": "At M=1 the Definition uses the sole root1, folds coefficients modulo z-1 and needs no primitive-root reindexing. The separate n=0 branch returns the zero vector before any product tree; positive pole lists use the explicit collision test before quotient evaluation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "At M=1 the Definition uses the sole root1, folds coefficients modulo z-1 and needs no primitive-root reindexing. The separate n=0 branch returns the zero vector before any product tree; positive pole lists use the explicit collision test before quotient evaluation.",
+            "item_sha256": "1bc769dfc3143ac4f7fd2e58ef7aa6c29f769148d870f188d7d3146d1bfc5913",
+            "row_sha256": "503b198ab33995cfb0e4d82ddc96423126c824572d7127b7ea1ef3c13d1e2434"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the balanced tree is built deterministically from a finite ordered list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm claims no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm claims no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked full procedure and supplier alg-radix-two-fft. Disjoint balanced index splitting terminates, rational numerators combine by common denominators, repeated poles remain valid, and folding modulo z^M-1 preserves every root value. Any primitive radix-two root is a unique odd power of the standard root when M>1; exhaustive power comparison and output permutation cost O(M) in the exact zero-test model. M=1 needs no root search; n=0 returns zeros; collisions report a status rather than divide. The repaired FFT supplies omega=1, so both M=1 DFT calls are now defined. No change needed; no choice used. Pan §§3.2–3.3 contextualizes rational evaluation; correctness/cost are supplied separately by the owned theorem."
+      }
+    },
+    "alg-s4-state-space-recurrence-and-convolution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The full state and rank dimensions are N,r>=1 and filter length is L>=1, but the nonexceptional pole partition may be empty when every lambda_j=-2/Delta. Its Cauchy sum is then zero by the called n=0 procedure, and the finite exceptional constant term supplies the value. Empty J or Z coordinate partitions are handled by their stated diagonal/bordered branches, not by setting the whole state dimension to zero.",
+          "evidence": "Definition, the following declared clauses/formulas: `Let $N,r\\ge1$`; `fix an integer $L\\ge1$`; `S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j}`; `let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$`; `If $Z$ is empty, use the Woodbury inverse`; `If $s=|Z|>0$, then when $s\\le r$ solve the bordered system`. The full state and rank dimensions are N,r>=1 and filter length is L>=1, but the nonexceptional pole partition may be empty when every lambda_j=-2/Delta. Its Cauchy sum is then zero by the called n=0 procedure, and the finite exceptional constant term supplies the value. Empty J or Z coordinate partitions are handled by their stated diagonal/bordered branches, not by setting the whole state dimension to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input or zero B yields a zero state contribution; direct term Du remains separate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the length-one filter uses M=1 and its sole root z=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero P or Q gives W=I in the filter mode; singular diagonal bases are handled by the bordered branch when solvable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Δ>0 is required; the root z=−1 is evaluated by its finite formula and λ=−2/Δ by its explicit limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: finite arrays, roots and linear solves are supplied, and every branch is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure claims no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure claims no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-woodbury-dplr-bilinear-inverse": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Assume $W$ is invertible and define $X:=D^{-1}-D^{-1}UW^{-1}V^*D^{-1}$. Expansion gives $(D+UV^*)X=I+U(V^*D^{-1}-W^{-1}V^*D^{-1}-V^*D^{-1}UW^{-1}V^*D^{-1})=I$, because $(I_r+V^*D^{-1}U)W^{-1}V^*D^{-1}=WW^{-1}V^*D^{-1}=V^*D^{-1}$.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Expanding in the other order gives $X(D+UV^*)=I+D^{-1}U(V^*-W^{-1}V^*-W^{-1}V^*D^{-1}UV^*)=I$, because $W^{-1}(I_r+V^*D^{-1}U)V^*=W^{-1}WV^*=V^*$. Thus $X$ is the two-sided inverse of $D+UV^*$, proving this direction and the formula.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Conversely assume $D+UV^*$ is invertible and let $w\\in\\mathbb C^r$ satisfy $Ww=0$. Set $x=D^{-1}Uw$. Then $(D+UV^*)x=U(I_r+V^*D^{-1}U)w=UWw=0$, so invertibility gives $x=0$. Hence $Uw=Dx=0$, and therefore $Ww=w+V^*D^{-1}Uw=w$. Since $Ww=0$, we have $w=0$. Thus $W$ has zero kernel; by [A2] it is invertible.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes N,r≥1 and makes no empty-matrix claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the proof: if U or V is zero, W=I_r and D+UV*=D; both sides of the equivalence hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: for N=r=1 the formula is the scalar identity (d+u\bar v)^{-1}=d^{-1}−d^{-1}u(1+\bar v d^{-1}u)^{-1}\bar v d^{-1} whenever defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof handles a singular correction by showing a nonzero kernel vector would contradict invertibility of D+UV*. This is included in the Statement or Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use only finite matrix products and a kernel argument; no choice principle is used. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "the proof prove W invertible implies D+UV* is invertible and give the inverse. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "the proof proves D+UV* invertible implies W has trivial kernel and is invertible. This is included in the Statement or Proof."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=r=1",
+          "calculation": "Write D=d≠0, U=u, V=v. Then W=1+\bar v u/d and the formula simplifies to 1/(d+u\bar v) when W≠0.",
+          "result": "Both invertibility directions and the inverse formula reduce to scalar algebra."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked every product dimension and both inverse expansions, using (I+V*D^-1U)W^-1=I and its reverse. Conversely Ww=0 implies x=D^-1Uw is in the kernel of D+UV*, then x=0 and w=Ww=0; finite dimensionality gives invertibility. Zero U or V gives W=I; singular W is not used in the inverse formula. Finite positive dimensions are the intended domain and zero-dimensional extensions satisfy the same identities. No choice or analytic limit is used. Gu et al. Appendix C.3 Proposition 4 agrees, and the local proof supplies both directions."
+      }
+    },
+    "lem-roots-of-unity-fft-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-radix-two-fft",
+          "source_section": "Definition",
+          "quote": "For a nonnegative integer $q$, let $M=2^q$, set $\\omega=1$ when $M=1$ and $\\omega=e^{-2\\pi i/M}$ when $M>1$, and let $a=(a_0,\\ldots,a_{M-1})\\in\\mathbb C^M$. The forward discrete Fourier transform (DFT) is the vector $\\widehat a\\in\\mathbb C^M$ with $\\widehat a_k=\\sum_{j=0}^{M-1}a_j\\omega^{jk}$. The radix-two procedure returns this vector by the following exact recursion. If $M=1$, return $(a_0)$. If $M>1$, recursively compute the length-$M/2$ DFTs $E$ and $O$ of $(a_0,a_2,\\ldots,a_{M-2})$ and $(a_1,a_3,\\ldots,a_{M-1})$, using the primitive root $\\omega^2$. For $0\\le k<M/2$, return $\\widehat a_k=E_k+\\omega^k O_k$ and $\\widehat a_{k+M/2}=E_k-\\omega^kO_k$. The inverse transform is obtained by running the same procedure with $\\overline\\omega$ and dividing every output by $M$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For $0\\le j,\\ell<M$, the $(j,\\ell)$ entry of $F^*F$ is $\\sum_{k=0}^{M-1}\\omega^{(\\ell-j)k}$. If $j=\\ell$, this sum is $M$. Otherwise $\\omega^{\\ell-j}\\ne1$ and the finite geometric-sum identity gives $\\sum_{k=0}^{M-1}\\omega^{(\\ell-j)k}=(1-\\omega^{M(\\ell-j)})/(1-\\omega^{\\ell-j})=0$. Thus $F^*F=MI$, which gives the asserted inverse.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Splitting the DFT sum into even and odd indices gives $E_k+\\omega^kO_k$ for $0\\le k<M/2$. For frequency $k+M/2$, the even factor is unchanged because $\\omega^{jM}=1$, while the odd factor changes sign because $\\omega^{M/2}=-1$. Therefore the outputs in [F1] are exactly the defining DFT sums. Induction on $q$, starting with $M=1$, proves exactness of the recursion.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "At length $M>1$, forming both half-length transforms and combining their $M$ outputs costs at most $cM$ arithmetic operations for an absolute constant $c$. Hence $T(M)\\le2T(M/2)+cM$ and $T(1)=O(1)$; expanding this recurrence for $q=\\log_2M$ levels gives $T(M)=O(M\\log(2+M))$. The input, output, and one level of butterflies require $O(M)$ workspace; the inverse has the same cost plus coordinatewise scaling by $1/M$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Let $f,g$ have degree less than $n$, and choose $M'=2^{\\lceil\\log_2(2n-1)\\rceil}$. Pad their coefficient lists to length $M'$, apply the forward DFT, multiply corresponding transformed coordinates, and apply the inverse DFT. For coefficient index $s$, the inverse-transform formula expands it as $\\sum_{j,\\ell} f_jg_\\ell\\,M'^{-1}\\sum_{k=0}^{M'-1}\\omega^{(j+\\ell-s)k}$; step 1.1 makes the inner sum one exactly when $j+\\ell\\equiv s\\pmod {M'}$ and zero otherwise. Thus the result is cyclic convolution modulo $z^{M'}-1$. The ordinary product has degree at most $2n-2<M'$, so no coefficient wraps around and the result is the exact polynomial product. Since $2n-1\\le M'<2(2n-1)$ when $n>1$ (and $M'=1$ when $n=1$), step 3.1 gives $O(n\\log(2+n))$ operations and $O(n)$ space.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: M=2^q≥1, so no zero-length transform is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof: the recursion is linear and maps the zero vector to zero at every size. This is included in the Statement or Proof."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and the proof: for M=1 the DFT is the identity; the polynomial multiplication case n=1 also uses M′=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof: for q=0 the one-coordinate matrix satisfies F*F=I directly. This is included in the Statement or Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval-valued parameter or endpoint claim occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use finite sums and deterministic even/odd splitting only. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma proves an inversion and complexity result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma proves an inversion and complexity result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "M=1",
+          "calculation": "F=[1], F*F=I, forward and inverse transforms return the one entry.",
+          "result": "Base case matches the stated inverse and recursion."
+        },
+        {
+          "case": "M=2",
+          "calculation": "ω=−1 and F=[[1,1],[1,−1]], so F*F=2I.",
+          "result": "The even/odd butterfly and inverse scaling agree with the formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read four proof steps and exact FFT definition. Finite geometric orthogonality yields F*F=MI, including M=1. Even/odd splitting and omega^(M/2)=-1 prove the recursion by q-induction. The butterfly recurrence solves to O(M log(2+M)); freeing completed recursive buffers gives O(M) space by a geometric series. The least radix-two padding length is at least 2n-1 and less than twice it for n>1; degree at most 2n-2 avoids cyclic wraparound. n=1 uses length one. The inverse uses conjugate roots and 1/M. No choice or analytic convergence is needed. Gu Appendix C.2 and Pan §3.3 checked; the elementary local proof establishes the stronger specific radix-two bounds."
+      }
+    },
+    "thm-hippo-leg-matrices-have-low-rank-structure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-s4-dplr-parameterization",
+          "source_section": "Definition",
+          "quote": "An $N$-state single-input, single-output complex linear state-space model has $B,C\\in\\mathbb C^N$, state equation $x'(t)=Ax(t)+Bu(t)$, and output $y(t)=C^*x(t)$; its direct term is set to zero in the S4 convolution convention. Here $X^*$ denotes conjugate transpose; a square complex matrix $H$ is normal when $H^*H=HH^*$; and a square matrix $V$ is unitary when $V^*V=VV^*=I$. A matrix is in diagonal-plus-low-rank (DPLR) form of rank $r$ if\n$$\nA=\\Lambda-PQ^*,\n$$\nwhere $\\Lambda\\in\\mathbb C^{N\\times N}$ is diagonal and $P,Q\\in\\mathbb C^{N\\times r}$. It is in normal-plus-low-rank (NPLR) form of rank $r$ if\n$$\nA=V\\Lambda V^*-PQ^*,\n$$\nwhere $V\\in\\mathbb C^{N\\times N}$ is unitary, $\\Lambda$ is diagonal, and $P,Q\\in\\mathbb C^{N\\times r}$. The unitary state change $\\widetilde x=V^*x$ converts this NPLR representation to DPLR form and changes $B,C$ to $V^*B,V^*C$, respectively.\n\nFor a step size $\\Delta>0$ such that $I-\\Delta A/2$ is invertible, the bilinear recurrent matrices are\n$$ \\overline A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2),\\qquad \\overline B=(I-\\Delta A/2)^{-1}\\Delta B,\\qquad \\overline C=C. $$\nWith initial state $x_{-1}=0$, the discrete recurrence is $x_t=\\overline A x_{t-1}+\\overline B u_t$, $y_t=\\overline C^*x_t$. Its length-$L$ impulse kernel is the vector $K_L=(\\overline C^*\\overline A^j\\overline B)_{j=0}^{L-1}$. For a nonzero direct term $D$, the output has the additional separate skip term $Du_t$.\n\nFor a filter evaluation of transform length $M\\ge L$, the output vector for the length-$M$ truncated generating function is $\\widetilde C_M=(I-\\overline A^M)^*C$. A filter procedure may receive $\\widetilde C_M$ as given data; an operation count for evaluating the filter from this transformed vector does not include the separate work of forming it from $C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $w_n=\\sqrt{2n+1}$ and define the real skew-symmetric matrix $S$ by $S_{nk}=-w_nw_k/2$ for $n>k$, $S_{nk}=w_nw_k/2$ for $n<k$, and $S_{nn}=0$. The transpose is $-S$, so over $\\mathbb C$ its conjugate transpose is also $-S$; hence $S$ is normal. With $v=w/\\sqrt2$, entrywise comparison gives $G^S=(S-\\tfrac12I)-vv^*$: below the diagonal the entries are $-w_nw_k$, above they cancel to zero, and on the diagonal they are $-\\tfrac12-(2n+1)/2=-(n+1)$. Since a scalar shift of a normal matrix is normal and $vv^*$ has rank at most one, this is the required LegS decomposition. This assertion concerns the finite coefficient matrix only; the factor $1/t$ in the LegS ODE remains time-dependent.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Define $S$ with entries $-1/2$ below the diagonal, $+1/2$ above it, and zero on the diagonal. It is real skew-symmetric and therefore normal. For $e=(1,\\ldots,1)^T$, entrywise comparison gives $G^L=(S-\\tfrac12I)-\\tfrac12ee^*$: below the diagonal the two terms sum to $-1$, above they sum to zero, and on the diagonal they sum to $-1$. Thus the original LagT generator is a normal matrix minus a rank-at-most-one matrix.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "For LegT let $D=\\operatorname{diag}(2n+1)_{n=0}^{N-1}$ and $E=\\operatorname{diag}((-1)^n)_{n=0}^{N-1}$. Define $T_{nk}=1$ for $n\\ge k$, and $T_{nk}=(-1)^{k-n}$ for $n<k$. Then direct entry evaluation gives $G^T=-DETE/\\theta$: for $n\\ge k$, $(-1)^n(-1)^k=(-1)^{n-k}$, while for $n<k$, $(-1)^n(-1)^{k-n}(-1)^k=1$. Write $T=S+R$, where $R_{nk}=1$ when $n$ and $k$ have the same parity and is zero otherwise. The matrix $R$ is the sum of the outer products of the even-index and odd-index indicator vectors, so its rank is at most two. For opposite parities, $S_{nk}=1$ below the diagonal and $S_{nk}=-1$ above it; for equal parities and on the diagonal, $S_{nk}=0$. Thus $S^T=-S$. The invertible diagonal matrix $S_0=D^{1/2}E$ gives $S_0^{-1}G^TS_0=-\\theta^{-1}D^{1/2}SD^{1/2}-\\theta^{-1}D^{1/2}RD^{1/2}$. The first term is real skew-symmetric and hence normal; the second has rank at most two. The diagonal similarity is essential: this proves the claim for an equivalent state-space matrix, not unitary similarity of the raw LegT matrix.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "In each case write the resulting generator as $H-UV^*$ with $H$ normal: for LegS and LagT the factors are the displayed real vectors divided by $\\sqrt2$, and for LegT use the even and odd indicator columns multiplied by $D^{1/2}/\\sqrt\\theta$ as both factors. By [F2], choose a unitary matrix $V_0$ with $V_0^*HV_0=\\Lambda$ diagonal. Then $V_0^*(H-UV^*)V_0=\\Lambda-(V_0^*U)(V_0^*V)^*$, preserving the low-rank bound. If the original coordinates were changed by $S_0$, the total state change is $x=S_0V_0z$; substitution into $x'=Gx+Bu$, $y=C^*x$ gives $z'=(V_0^*S_0^{-1}GS_0V_0)z+V_0^*S_0^{-1}Bu$ and output vector $V_0^*S_0^*C$. These are exactly the state-coordinate transformations required for an equivalent DPLR model.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: row/column indices require N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: at N=1 the lower/upper off-diagonal parts vanish and the remaining diagonal is represented by the stated shift and rank correction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof and 1.2 directly give the N=1 LegS and LagT decompositions; the proof gives rank at most two for LegT."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof: one parity indicator can be empty, so the LegT rank may drop below two without invalidating the bound. This is included in the Statement or Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: LegT requires θ>0 and LegS uses t>0 for its separate 1/t ODE factor; neither zero endpoint is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof applies the finite-dimensional spectral theorem and explicit state changes; no family of representatives is selected. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: it asserts low-rank decompositions and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: it asserts low-rank decompositions and no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1 LegS",
+          "calculation": "G^S=[−1], S=[0], v=[1/√2], so (S−I/2)−vv*=[−1].",
+          "result": "The diagonal and rank-one terms reproduce the source matrix."
+        },
+        {
+          "case": "N=1 LegT",
+          "calculation": "D=E=[1], T=R=[1], S=[0], and S0=1; the normal part is zero and the rank-one part is [−1/θ].",
+          "result": "The similarity and rank bound hold in the smallest dimension."
+        }
+      ]
+    },
+    "thm-cauchy-matvec-at-roots-of-unity-exact-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-cauchy-matvec-at-roots-of-unity",
+          "source_section": "Definition",
+          "quote": "Input an integer $M=2^q$ with $q\\ge0$, a primitive $M$th root of unity $\\omega$, a finite list of poles $\\mu_1,\\ldots,\\mu_n\\in\\mathbb C$, and weights $a_1,\\ldots,a_n\\in\\mathbb C$. The required output is $y_k=\\sum_{j=1}^n a_j/(\\omega^k-\\mu_j)$ for $0\\le k<M$, provided no denominator is zero. If $n=0$, return the zero vector.\n\nHere a primitive $M$th root means $\\omega^M=1$ and $\\omega^k\\ne1$ for $1\\le k<M$. For $n\\ge1$, form a balanced binary tree on the pole indices, splitting each consecutive index interval into two intervals whose sizes differ by at most one. At a leaf containing index $j$, store polynomials $D_j(z)=z-\\mu_j$ and $P_j(z)=a_j$. At an internal node with disjoint child index sets $I_1,I_2$, store\n$$ D_I(z)=D_{I_1}(z)D_{I_2}(z),\\qquad P_I(z)=P_{I_1}(z)D_{I_2}(z)+D_{I_1}(z)P_{I_2}(z). $$\nAt the root, fold the coefficients of each polynomial modulo $z^M-1$: the coefficient at degree $r$ is replaced by the sum of coefficients at degrees congruent to $r$ modulo $M$. Let $\\omega_0=e^{-2\\pi i/M}$, which equals $1$ when $M=1$. Apply the radix-two DFT procedure to each folded coefficient vector to evaluate $P_I$ and $D_I$ at $\\omega_0^j$, $0\\le j<M$. If $M>1$, find the unique odd integer $s\\in\\{1,3,\\ldots,M-1\\}$ with $\\omega=\\omega_0^s$ by generating and comparing the $M$ powers of $\\omega_0$, then place the value at index $sk\\bmod M$ at output index $k$; this is the supplied root order because $\\omega^k=\\omega_0^{sk}$. For $M=1$, the only root is $1$ and no reindexing is needed. This root search and reindexing use $O(M)$ operations. If some reindexed $D_I(\\omega^k)=0$, return status `collision`; otherwise return $y_k=P_I(\\omega^k)/D_I(\\omega^k)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-roots-of-unity-fft-complexity",
+          "source_section": "Statement",
+          "quote": "Let $M=2^q$ for an integer $q\\ge0$, and let $\\omega=e^{-2\\pi i/M}$ (with $\\omega=1$ when $M=1$). Define the forward DFT matrix $F\\in\\mathbb C^{M\\times M}$ by $F_{kj}=\\omega^{jk}$, where $^*$ denotes conjugate transpose. Then $F^*F=MI$, so the inverse DFT is $M^{-1}F^*$. The radix-two procedure defined on this page computes either transform exactly in $O(M\\log(2+M))$ complex arithmetic operations and $O(M)$ space. Consequently, for every integer $n\\ge1$, two polynomials of degree less than $n$ can be multiplied exactly in $O(n\\log(2+n))$ complex arithmetic operations and $O(n)$ space by zero-padding to a radix-two transform length at least $2n-1$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For a leaf containing index $j$, $P_j(z)/D_j(z)=a_j/(z-\\mu_j)$ whenever $z\\ne\\mu_j$. If the identity $P_I/D_I=\\sum_{j\\in I}a_j/(z-\\mu_j)$ holds for the two child sets, then the internal-node formulas in [F1] give $P_I/D_I=P_{I_1}/D_{I_1}+P_{I_2}/D_{I_2}$. Induction up the finite tree therefore gives $P_I(z)/D_I(z)=\\sum_{j=1}^{n}a_j/(z-\\mu_j)$ at the root wherever its denominator is nonzero.",
+          "inputs": [
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The balanced tree has height at most $\\lceil\\log_2 n\\rceil$. At a node whose index set has size $s$, its three polynomial products have operand degrees at most $s$; by [F2] they cost $O(s\\log(2+s))$ operations. At a fixed height, the node index sets are disjoint and their sizes sum to at most $n$, so that height costs at most $O(n\\log(2+n))$. Summing over the height gives $O(n\\log^2(2+n))$ operations, including the coefficient additions. A depth-first evaluation stores at most one completed sibling subtree per level; their coefficient-array sizes form a geometric sum bounded by $O(n)$, so the product-tree workspace is $O(n)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "Write the root coefficients as $P_I(z)=\\sum_j p_jz^j$ and $D_I(z)=\\sum_j d_jz^j$. For each $0\\le r<M$, fold them to $p'_r=\\sum_{j\\equiv r\\pmod M}p_j$ and $d'_r=\\sum_{j\\equiv r\\pmod M}d_j$. Since $\\omega^{kM}=1$, evaluating the folded polynomials at $\\omega^k$ gives exactly $P_I(\\omega^k)$ and $D_I(\\omega^k)$. The algorithm evaluates both folded arrays with two radix-two DFTs on the standard grid $\\omega_0^j=e^{-2\\pi i j/M}$; if $M>1$, the supplied primitive root is $\\omega=\\omega_0^s$ for a unique odd $s$, so reindexing the standard outputs at $sk\\bmod M$ gives their values at $\\omega^k$. For $M=1$ the grids coincide. By [F2] the two transforms cost $O(M\\log(2+M))$ operations and $O(M)$ additional space; finding $s$ and reindexing cost $O(M)$ operations and space, within the same bounds. Folding costs $O(n)$ operations and $O(n+M)$ space.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The noncollision hypothesis makes $D_I(\\omega^k)=\\prod_j(\\omega^k-\\mu_j)\\ne0$ for every $k$. Thus the divisions in [F1] are defined, and step 1.1 identifies each quotient with the required Cauchy sum. Adding the product-tree, folding, transform, and division costs gives $O((n+M)\\log^2(2+n+M))$ operations and $O(n+M)$ space.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This exact product-tree cost theorem assumes n>=1 poles and M>=1 roots, so its quantified sum is never over an empty pole list. The algorithm separate n=0 zero-vector branch is outside this theorem input scope rather than an omitted proof case.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "This exact product-tree cost theorem assumes n>=1 poles and M>=1 roots, so its quantified sum is never over an empty pole list. The algorithm separate n=0 zero-vector branch is outside this theorem input scope rather than an omitted proof case. This explicit hypothesis/outcome is the disposition of the surface detector candidate, not a waiver of a mathematical case.",
+            "actual_detector_why": "the item quantifies over a family or indexed aggregate (\\\\sum_\\{)"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the proof: zero weights give P_I=0 and each defined quotient is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 is covered, including M=1 when its sole denominator is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: repeated poles are allowed and the product-tree induction does not require distinct μ_j."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement: no interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof construct a deterministic finite balanced tree and use finite polynomial arithmetic only. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem establishes exact output and upper arithmetic/space costs under pole/root noncollision. It is not a necessary-and-sufficient characterization of algorithms attaining that complexity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The theorem establishes exact output and upper arithmetic/space costs under pole/root noncollision. It is not a necessary-and-sufficient characterization of algorithms attaining that complexity.",
+            "item_sha256": "c9484f49a4550f7e185a83161249b643109f01fa162b13f7f967b240a56210b6",
+            "row_sha256": "3aebe20e537f914fee202cd2c0e591cb69e520a6937f54b000799254a85f8bb5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says quasi-linear runtime forces noncollision or a product-tree representation; noncollision is an explicit sufficient input hypothesis for the supplied procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse says quasi-linear runtime forces noncollision or a product-tree representation; noncollision is an explicit sufficient input hypothesis for the supplied procedure.",
+            "item_sha256": "c9484f49a4550f7e185a83161249b643109f01fa162b13f7f967b240a56210b6",
+            "row_sha256": "70cdb5f19c7bfdf728969098e45e667c71f83adc21b41e9c1d2b5db4466bfb73"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "n=1, M=1",
+          "calculation": "D(z)=z−μ, P(z)=a; at root 1 the procedure returns a/(1−μ), provided μ≠1.",
+          "result": "The tree and folded evaluation agree with the target sum."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked every step against the two completed level-one suppliers. Induction gives P/D=sum a_j/(z-mu_j) away from all poles, also for repeated poles. Balanced tree levels cost O(n log(2+n)); depth-first completed sibling sizes form a geometric sum, so total tree cost is O(n log^2(2+n)) and space O(n). Folding costs O(n+M), two FFTs and supplied-root reindexing cost O(M log(2+M)), and all final denominators are nonzero by the hypothesis. n=1 and M=1 are included; zero weights do not alter denominator validity. No claim of stability or bit cost is inferred. Pan §3.3 is contextual; local FFT multiplication and rational-tree proof supply this exact root-grid bound."
+      }
+    },
+    "thm-dplr-discretized-step-linear-cost": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-s4-dplr-parameterization",
+          "source_section": "Definition",
+          "quote": "An $N$-state single-input, single-output complex linear state-space model has $B,C\\in\\mathbb C^N$, state equation $x'(t)=Ax(t)+Bu(t)$, and output $y(t)=C^*x(t)$; its direct term is set to zero in the S4 convolution convention. Here $X^*$ denotes conjugate transpose; a square complex matrix $H$ is normal when $H^*H=HH^*$; and a square matrix $V$ is unitary when $V^*V=VV^*=I$. A matrix is in diagonal-plus-low-rank (DPLR) form of rank $r$ if\n$$\nA=\\Lambda-PQ^*,\n$$\nwhere $\\Lambda\\in\\mathbb C^{N\\times N}$ is diagonal and $P,Q\\in\\mathbb C^{N\\times r}$. It is in normal-plus-low-rank (NPLR) form of rank $r$ if\n$$\nA=V\\Lambda V^*-PQ^*,\n$$\nwhere $V\\in\\mathbb C^{N\\times N}$ is unitary, $\\Lambda$ is diagonal, and $P,Q\\in\\mathbb C^{N\\times r}$. The unitary state change $\\widetilde x=V^*x$ converts this NPLR representation to DPLR form and changes $B,C$ to $V^*B,V^*C$, respectively.\n\nFor a step size $\\Delta>0$ such that $I-\\Delta A/2$ is invertible, the bilinear recurrent matrices are\n$$ \\overline A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2),\\qquad \\overline B=(I-\\Delta A/2)^{-1}\\Delta B,\\qquad \\overline C=C. $$\nWith initial state $x_{-1}=0$, the discrete recurrence is $x_t=\\overline A x_{t-1}+\\overline B u_t$, $y_t=\\overline C^*x_t$. Its length-$L$ impulse kernel is the vector $K_L=(\\overline C^*\\overline A^j\\overline B)_{j=0}^{L-1}$. For a nonzero direct term $D$, the output has the additional separate skip term $Du_t$.\n\nFor a filter evaluation of transform length $M\\ge L$, the output vector for the length-$M$ truncated generating function is $\\widetilde C_M=(I-\\overline A^M)^*C$. A filter procedure may receive $\\widetilde C_M$ as given data; an operation count for evaluating the filter from this transformed vector does not include the separate work of forming it from $C$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-woodbury-dplr-bilinear-inverse",
+          "source_section": "Statement",
+          "quote": "Let $D\\in\\mathbb C^{N\\times N}$ be invertible, let $U,V\\in\\mathbb C^{N\\times r}$, and set $W=I_r+V^*D^{-1}U$, where $^*$ denotes conjugate transpose. Then $D+UV^*$ is invertible if and only if $W$ is invertible. When these matrices are invertible,\n$$\n(D+UV^*)^{-1}=D^{-1}-D^{-1}U W^{-1}V^*D^{-1}.\n$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "Let $N,r\\ge1$ and $A=\\Lambda-PQ^*$ with $\\Lambda\\in\\mathbb C^{N\\times N}$ diagonal and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose; let $B,C\\in\\mathbb C^N$, let $\\Delta>0$, and put $\\alpha=\\Delta/2$. The bilinear step is defined only when $G=I-\\alpha A$ is invertible. Given an input sequence $(u_t)$ and state $x_{-1}$, its recurrent mode computes\n$$ b_t=(I+\\alpha A)x_{t-1}+\\Delta Bu_t,\\qquad Gx_t=b_t,\\qquad y_t=C^*x_t. $$\nFor a zero initial state, the equivalent matrices and length-$L$ kernel are $\\bar A=G^{-1}(I+\\alpha A)$, $\\bar B=G^{-1}\\Delta B$, and $K_j=C^*\\bar A^j\\bar B$ for $0\\le j<L$; a direct term $Du_t$, if present, is added separately.\n\nFor the filter mode, fix an integer $L\\ge1$, let $M$ be the least power of two with $M\\ge L$, let $\\omega=e^{-2\\pi i/M}$, and let $\\widetilde C\\in\\mathbb C^N$ be supplied as the length-$M$ truncated-output parameter. When a conventional output vector $C$ is used, this parameter is $\\widetilde C=(I-\\bar A^M)^*C$. Define the $M$ root values $z_k=\\omega^k$. The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.\n\nFor $z_k=-1$, set $H(z_k)=(\\Delta/2)\\widetilde C^*B$. For each $z=z_k\\ne-1$, put $s(z)=(2/\\Delta)(1-z)/(1+z)$. If $s(z)-\\lambda_j=0$ for some diagonal entry $\\lambda_j$ of $\\Lambda$, return status `resonant-diagonal`. If no diagonal resonance is present, write $R(z)=\\operatorname{diag}((s(z)-\\lambda_j)^{-1})$ and $W(z)=I_r+Q^*R(z)P$. If $W(z)$ is singular, return status `resonant-correction`. When this correction is invertible, the target root value is\n$$ H(z)=\\frac{2}{1+z}\\left(\\widetilde C^*R(z)B-\\widetilde C^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right). $$\nThe preceding resolvent expression specifies the target root values. The filter evaluation computes them using $1+2r+r^2=(r+1)^2$ scalar Cauchy products as follows. Put $a=2/\\Delta$, and for each $j$ with $\\lambda_j\\ne-a$ define $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any pair of vectors $u,v\\in\\mathbb C^N$, compute on the root grid\n$$ S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j} $$\nby calling the roots-of-unity Cauchy procedure with poles $\\mu_j$ and weights $-2\\overline{u_j}v_j/(a+\\lambda_j)$, then adding the displayed constant. A collision $\\mu_j=z_k$ returns status `resonant-diagonal`. For $z=z_k\\ne-1$, set\n$$ W(z)=I_r+\\frac{1+z}{2}S_{Q,P}(z),\\qquad H(z)=S_{\\widetilde C,B}(z)-\\frac{1+z}{2}S_{\\widetilde C,P}(z)W(z)^{-1}S_{Q,B}(z). $$\nIf $W(z)$ is singular, return status `resonant-correction`. The four families $S_{\\widetilde C,B}$, $S_{\\widetilde C,P}$, $S_{Q,B}$, and $S_{Q,P}$ contain $1$, $r$, $r$, and $r^2$ scalar products, respectively. The root $-1$ is handled directly and is never included in this Cauchy evaluation. Matrix products and inversions of the $r\\times r$ corrections are performed separately at each root.\n\nThe recurrent solver may exploit the diagonal-plus-low-rank structure as follows. Write $d_j=1-\\alpha\\lambda_j$, let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$. If $Z$ is empty, use the Woodbury inverse with $D=\\operatorname{diag}(d_j)$ and correction $I_r+\\alpha Q^*D^{-1}P$; if this correction is singular, return status `singular-bilinear-matrix`. If $s=|Z|>0$, then when $s\\le r$ solve the bordered system\n$$ \\begin{bmatrix} I_r+\\alpha Q_J^*D_J^{-1}P_J&-Q_Z^*\\\\ \\alpha P_Z&0 \\end{bmatrix} \\begin{bmatrix}z\\\\x_Z\\end{bmatrix} = \\begin{bmatrix}Q_J^*D_J^{-1}b_J\\\\b_Z\\end{bmatrix}, \\qquad x_J=D_J^{-1}(b_J-\\alpha P_Jz), $$\nwhere $D_J=\\operatorname{diag}(d_j)_{j\\in J}$; if $s>r$ or the bordered system is singular, return status `singular-bilinear-matrix`. Here $z=Q^*x$. This branch solves $Gx=b$ without assuming the diagonal base is invertible.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $\\alpha=\\Delta/2$ and $D=I-\\alpha\\Lambda$. For a current state $x$ and input $u$, form $b=(I+\\alpha A)x+\\Delta Bu=x+\\alpha\\Lambda x-\\alpha P(Q^*x)+\\Delta Bu$. Diagonal scaling costs $O(N)$ operations, the two low-rank products cost $O(Nr)$, and the remaining vector additions cost $O(N)$. The solve is $Gx'=b$ with $G=D+\\alpha PQ^*$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If every diagonal entry of $D$ is nonzero, apply [F2] with $U=\\alpha P$ and $V=Q$. Since $G$ is invertible, the correction $W=I_r+\\alpha Q^*D^{-1}P$ is invertible, and $x'=D^{-1}b-D^{-1}(\\alpha P)W^{-1}Q^*D^{-1}b$. Forming $D^{-1}P$ and $W$ costs $O(Nr^2)$ operations and $O(Nr+r^2)$ space; factoring $W$ costs $O(r^3)$. Applying the inverse to one right-hand side costs $O(Nr+r^2)$ operations. Thus this branch meets the stated bounds.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "Otherwise let $Z=\\{j:D_{jj}=0\\}$, $J=\\{0,\\ldots,N-1\\}\\setminus Z$, and $s=|Z|$. The rows of $G$ indexed by $Z$ are those of $\\alpha P_ZQ^*$, whose rank is at most $r$. If $s>r$, these $s$ rows are linearly dependent, so $G$ is singular, contrary to the hypothesis. Hence $s\\le r$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Suppose $s\\le r$ and consider a homogeneous solution $(z,x_Z)$ of the bordered system in [F3]. Set $x_J=-\\alpha D_J^{-1}P_Jz$. The first bordered row gives $z=Q_J^*x_J+Q_Z^*x_Z=Q^*x$, while its lower row gives $\\alpha P_Zz=0$. Therefore the $J$ rows of $Gx$ equal $D_Jx_J+\\alpha P_JQ^*x=0$, and the $Z$ rows equal $\\alpha P_ZQ^*x=\\alpha P_Zz=0$. Invertibility of $G$ implies $x=0$, hence $z=Q^*x=0$ and $x_Z=0$. The square bordered matrix has trivial kernel and is therefore invertible.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For any right-hand side, solve the bordered system, define $x_J=D_J^{-1}(b_J-\\alpha P_Jz)$, and keep the solved $x_Z$. Its first row states $z=Q^*x$; the upper coordinate equations then give $(Gx)_J=b_J$, and the lower row gives $(Gx)_Z=\\alpha P_Zz=b_Z$. Thus $x=x'$ is the unique solution to $Gx'=b$. The bordered dimension is $r+s\\le2r$; forming it and its right-hand side costs $O(Nr^2)$ operations and $O(Nr+r^2)$ space, and factoring/solving it costs $O(r^3)$. Computing $C^*x'$ adds $O(N)$. Both branches satisfy the claimed fixed-rank linear bounds.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N,r≥1; no zero-dimensional solve is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if B=0 and the input/state right-hand side is zero, the solved state is zero under invertibility of G."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and the proof: N=r=1 uses either one scalar diagonal solve or a bordered system of size at most two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof explicitly handle zero diagonal entries and rank-deficient rows; the full invertibility hypothesis is retained. This is included in the Statement or Proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Δ>0; Δ=0 is outside the bilinear step specified here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use deterministic finite matrix operations, elimination and kernel arguments only. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem uses invertibility of the bilinear matrix to prove finite structured solve costs and correction invertibility. Its Statement gives conditional consequences, not the Woodbury supplier biconditional quoted in Facts.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The theorem uses invertibility of the bilinear matrix to prove finite structured solve costs and correction invertibility. Its Statement gives conditional consequences, not the Woodbury supplier biconditional quoted in Facts.",
+            "item_sha256": "370a177cfbe3aa2bbffb6d0983b437604495a41072672ee4a378aa7f7b1d8d0a",
+            "row_sha256": "cc9f6b7de48781b093e86e72948eaa5493cff6490f56abdfb98dffc613f352fa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says a linear-cost recurrent update implies the displayed factorization, fixed-rank hypothesis or invertibility assumptions; those are supplied before either solve branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse says a linear-cost recurrent update implies the displayed factorization, fixed-rank hypothesis or invertibility assumptions; those are supplied before either solve branch.",
+            "item_sha256": "370a177cfbe3aa2bbffb6d0983b437604495a41072672ee4a378aa7f7b1d8d0a",
+            "row_sha256": "1ea149edaf416393da28d2a6d81ac34bb19e63bff33854aef2599aaf5d5c56d4"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=r=1, singular base",
+          "calculation": "Take α=1, Λ=1, P=Q=1. Then D=0 and G=1; the bordered matrix is [[0,−1],[1,0]], which is invertible.",
+          "result": "The singular-diagonal branch returns the unique scalar solve."
+        }
+      ]
+    },
+    "lem-s4-convolution-root-of-unity-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-s4-dplr-parameterization",
+          "source_section": "Definition",
+          "quote": "An $N$-state single-input, single-output complex linear state-space model has $B,C\\in\\mathbb C^N$, state equation $x'(t)=Ax(t)+Bu(t)$, and output $y(t)=C^*x(t)$; its direct term is set to zero in the S4 convolution convention. Here $X^*$ denotes conjugate transpose; a square complex matrix $H$ is normal when $H^*H=HH^*$; and a square matrix $V$ is unitary when $V^*V=VV^*=I$. A matrix is in diagonal-plus-low-rank (DPLR) form of rank $r$ if\n$$\nA=\\Lambda-PQ^*,\n$$\nwhere $\\Lambda\\in\\mathbb C^{N\\times N}$ is diagonal and $P,Q\\in\\mathbb C^{N\\times r}$. It is in normal-plus-low-rank (NPLR) form of rank $r$ if\n$$\nA=V\\Lambda V^*-PQ^*,\n$$\nwhere $V\\in\\mathbb C^{N\\times N}$ is unitary, $\\Lambda$ is diagonal, and $P,Q\\in\\mathbb C^{N\\times r}$. The unitary state change $\\widetilde x=V^*x$ converts this NPLR representation to DPLR form and changes $B,C$ to $V^*B,V^*C$, respectively.\n\nFor a step size $\\Delta>0$ such that $I-\\Delta A/2$ is invertible, the bilinear recurrent matrices are\n$$ \\overline A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2),\\qquad \\overline B=(I-\\Delta A/2)^{-1}\\Delta B,\\qquad \\overline C=C. $$\nWith initial state $x_{-1}=0$, the discrete recurrence is $x_t=\\overline A x_{t-1}+\\overline B u_t$, $y_t=\\overline C^*x_t$. Its length-$L$ impulse kernel is the vector $K_L=(\\overline C^*\\overline A^j\\overline B)_{j=0}^{L-1}$. For a nonzero direct term $D$, the output has the additional separate skip term $Du_t$.\n\nFor a filter evaluation of transform length $M\\ge L$, the output vector for the length-$M$ truncated generating function is $\\widetilde C_M=(I-\\overline A^M)^*C$. A filter procedure may receive $\\widetilde C_M$ as given data; an operation count for evaluating the filter from this transformed vector does not include the separate work of forming it from $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-woodbury-dplr-bilinear-inverse",
+          "source_section": "Statement",
+          "quote": "Let $D\\in\\mathbb C^{N\\times N}$ be invertible, let $U,V\\in\\mathbb C^{N\\times r}$, and set $W=I_r+V^*D^{-1}U$, where $^*$ denotes conjugate transpose. Then $D+UV^*$ is invertible if and only if $W$ is invertible. When these matrices are invertible,\n$$\n(D+UV^*)^{-1}=D^{-1}-D^{-1}U W^{-1}V^*D^{-1}.\n$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-cauchy-matvec-at-roots-of-unity",
+          "source_section": "Definition",
+          "quote": "Input an integer $M=2^q$ with $q\\ge0$, a primitive $M$th root of unity $\\omega$, a finite list of poles $\\mu_1,\\ldots,\\mu_n\\in\\mathbb C$, and weights $a_1,\\ldots,a_n\\in\\mathbb C$. The required output is $y_k=\\sum_{j=1}^n a_j/(\\omega^k-\\mu_j)$ for $0\\le k<M$, provided no denominator is zero. If $n=0$, return the zero vector.\n\nHere a primitive $M$th root means $\\omega^M=1$ and $\\omega^k\\ne1$ for $1\\le k<M$. For $n\\ge1$, form a balanced binary tree on the pole indices, splitting each consecutive index interval into two intervals whose sizes differ by at most one. At a leaf containing index $j$, store polynomials $D_j(z)=z-\\mu_j$ and $P_j(z)=a_j$. At an internal node with disjoint child index sets $I_1,I_2$, store\n$$ D_I(z)=D_{I_1}(z)D_{I_2}(z),\\qquad P_I(z)=P_{I_1}(z)D_{I_2}(z)+D_{I_1}(z)P_{I_2}(z). $$\nAt the root, fold the coefficients of each polynomial modulo $z^M-1$: the coefficient at degree $r$ is replaced by the sum of coefficients at degrees congruent to $r$ modulo $M$. Let $\\omega_0=e^{-2\\pi i/M}$, which equals $1$ when $M=1$. Apply the radix-two DFT procedure to each folded coefficient vector to evaluate $P_I$ and $D_I$ at $\\omega_0^j$, $0\\le j<M$. If $M>1$, find the unique odd integer $s\\in\\{1,3,\\ldots,M-1\\}$ with $\\omega=\\omega_0^s$ by generating and comparing the $M$ powers of $\\omega_0$, then place the value at index $sk\\bmod M$ at output index $k$; this is the supplied root order because $\\omega^k=\\omega_0^{sk}$. For $M=1$, the only root is $1$ and no reindexing is needed. This root search and reindexing use $O(M)$ operations. If some reindexed $D_I(\\omega^k)=0$, return status `collision`; otherwise return $y_k=P_I(\\omega^k)/D_I(\\omega^k)$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $\\alpha=\\Delta/2$. For every root $z\\ne-1$, substitution of $\\bar A=G^{-1}(I+\\alpha A)$ gives $I-z\\bar A=G^{-1}((1-z)I-\\alpha(1+z)A)=G^{-1}\\alpha(1+z)(s(z)I-A)$. By [A1] and [F2], $s(z)I-A=(s(z)I-\\Lambda)+PQ^*$ is invertible; inversion and multiplication by $\\bar B=G^{-1}\\Delta B$ give $(I-z\\bar A)^{-1}\\bar B=\\frac{2}{1+z}(s(z)I-A)^{-1}B$. At $z=-1$, $I+\\bar A=G^{-1}(G+I+\\alpha A)=2G^{-1}$ is invertible.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For any root $z\\ne-1$, put $a=1/\\alpha=2/\\Delta$. For $\\lambda_j\\ne-a$, direct algebra gives $s(z)-\\lambda_j=\\frac{(a-\\lambda_j)-(a+\\lambda_j)z}{1+z}=\\frac{(a+\\lambda_j)(\\mu_j-z)}{1+z}$, hence $\\frac{2}{1+z}(s(z)-\\lambda_j)^{-1}=-\\frac{2}{a+\\lambda_j}(z-\\mu_j)^{-1}$. For $\\lambda_j=-a$, $s(z)-\\lambda_j=2a/(1+z)$ and the scaled reciprocal is $1/a=\\Delta/2$. No nonexceptional pole equals $-1$, since $\\mu_j=-1$ would imply $2a=0$ although $a>0$.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At each root, $z^M=1$ and step 1.1 makes $I-z\\bar A$ invertible. The finite geometric identity gives $(I-\\bar A^M)(I-z\\bar A)^{-1}=\\sum_{j=0}^{M-1}z^j\\bar A^j$. Multiplying by $C^*$ and $\\bar B$, and using $\\widetilde C_M^*=C^*(I-\\bar A^M)$, gives $H_M(z)=\\widetilde C_M^*(I-z\\bar A)^{-1}\\bar B$; for $z\\ne-1$, step 1.1 supplies its bilinear resolvent expression.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $A=\\Lambda-PQ^*$, $sI-A=(sI-\\Lambda)+PQ^*$. Applying [F2] with $D=sI-\\Lambda$ and multiplying by $\\widetilde C_M^*$ and $B$ gives the displayed Woodbury expression for $H_M(z)$ from step 2.1, with $R=(sI-\\Lambda)^{-1}$ and $W=I+Q^*RP$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "If $M$ is even, $-1$ is a root. Step 1.1 gives $(I+\\bar A)^{-1}\\bar B=(1/2)G(G^{-1}\\Delta B)=(\\Delta/2)B$; applying the finite geometric identity from step 2.1 yields $H_M(-1)=\\widetilde C_M^*(I+\\bar A)^{-1}\\bar B=(\\Delta/2)\\widetilde C_M^*B$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "By step 1.2, each scaled diagonal-resolvent entry in step 3.1 is one scalar roots-of-unity Cauchy sum, with the $\\lambda_j=-a$ entries supplied by their explicit constants. The four vector-pair families $\\widetilde C_M^*RB$, $\\widetilde C_M^*RP$, $Q^*RB$, and $Q^*RP$ have sizes $1,r,r,r^2$, so [F3] evaluates at most $(r+1)^2$ products; at $r=1$ this is four.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "N,r,L and the root-grid length M are positive, but either diagonal index partition lambda_j=-a or lambda_j!= -a may be empty. Proof step 1.2 handles the exceptional constants and step 4.1 uses the n=0 Cauchy procedure for an empty nonexceptional sum; the scaled-resolvent identity remains valid termwise.",
+          "evidence": "N,r,L and the root-grid length M are positive, but either diagonal index partition lambda_j=-a or lambda_j!= -a may be empty. Proof step 1.2 handles the exceptional constants and step 4.1 uses the n=0 Cauchy procedure for an empty nonexceptional sum; the scaled-resolvent identity remains valid termwise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero B or transformed output makes all root values zero whenever the required inverses exist."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: M=1 has only root z=1; the z=−1 branch is used only when M is even."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and the proof: λ=−2/Δ is handled by its explicit finite constant instead of a pole."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Δ>0; z=−1 is evaluated separately and the singular diagonal/correction cases are excluded by explicit hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use finite geometric identities and deterministic matrix algebra; no choice is used. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Lemma: no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Lemma: no biconditional is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "A=−1, Δ=1, M=2",
+          "calculation": "Then Ā=1/3, B̄=2/3, and for C=1, C̃_2=8/9. The roots are 1 and −1; H(1)=8/9 by R(1)=1, while H(−1)=4/9.",
+          "result": "The root values equal K_0+K_1 and K_0−K_1 for K=(2/3,2/9)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked all six steps against the DPLR definition, S4 procedure, Cauchy procedure and Woodbury lemma. I-z*Abar factors as G^-1*alpha*(1+z)*(sI-A), so required diagonal/correction inverses make the geometric resolvent valid. The finite identity uses z^M=1 and Ctilde*=C*(I-Abar^M); no infinite-series convergence is assumed. At -1, I+Abar=2G^-1 and the finite value is Delta/2*Ctilde*B. Mapping lambda!=-a gives mu=(a-lambda)/(a+lambda) and weight -2/(a+lambda); lambda=-a contributes the constant Delta/2. mu=-1 is impossible because a>0; other collisions are excluded by diagonal invertibility. M=1 has only z=1. The 1,r,r,r^2 blocks give at most (r+1)^2 calls, also with empty sums or repeated poles. Gu Appendix C.3 Lemmas C.3–C.4 checked; the local argument handles exceptional roots explicitly. No choice is spent."
+      }
+    },
+    "thm-s4-convolution-filter-complexity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "Let $N,r\\ge1$ and $A=\\Lambda-PQ^*$ with $\\Lambda\\in\\mathbb C^{N\\times N}$ diagonal and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose; let $B,C\\in\\mathbb C^N$, let $\\Delta>0$, and put $\\alpha=\\Delta/2$. The bilinear step is defined only when $G=I-\\alpha A$ is invertible. Given an input sequence $(u_t)$ and state $x_{-1}$, its recurrent mode computes\n$$ b_t=(I+\\alpha A)x_{t-1}+\\Delta Bu_t,\\qquad Gx_t=b_t,\\qquad y_t=C^*x_t. $$\nFor a zero initial state, the equivalent matrices and length-$L$ kernel are $\\bar A=G^{-1}(I+\\alpha A)$, $\\bar B=G^{-1}\\Delta B$, and $K_j=C^*\\bar A^j\\bar B$ for $0\\le j<L$; a direct term $Du_t$, if present, is added separately.\n\nFor the filter mode, fix an integer $L\\ge1$, let $M$ be the least power of two with $M\\ge L$, let $\\omega=e^{-2\\pi i/M}$, and let $\\widetilde C\\in\\mathbb C^N$ be supplied as the length-$M$ truncated-output parameter. When a conventional output vector $C$ is used, this parameter is $\\widetilde C=(I-\\bar A^M)^*C$. Define the $M$ root values $z_k=\\omega^k$. The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.\n\nFor $z_k=-1$, set $H(z_k)=(\\Delta/2)\\widetilde C^*B$. For each $z=z_k\\ne-1$, put $s(z)=(2/\\Delta)(1-z)/(1+z)$. If $s(z)-\\lambda_j=0$ for some diagonal entry $\\lambda_j$ of $\\Lambda$, return status `resonant-diagonal`. If no diagonal resonance is present, write $R(z)=\\operatorname{diag}((s(z)-\\lambda_j)^{-1})$ and $W(z)=I_r+Q^*R(z)P$. If $W(z)$ is singular, return status `resonant-correction`. When this correction is invertible, the target root value is\n$$ H(z)=\\frac{2}{1+z}\\left(\\widetilde C^*R(z)B-\\widetilde C^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right). $$\nThe preceding resolvent expression specifies the target root values. The filter evaluation computes them using $1+2r+r^2=(r+1)^2$ scalar Cauchy products as follows. Put $a=2/\\Delta$, and for each $j$ with $\\lambda_j\\ne-a$ define $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any pair of vectors $u,v\\in\\mathbb C^N$, compute on the root grid\n$$ S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j} $$\nby calling the roots-of-unity Cauchy procedure with poles $\\mu_j$ and weights $-2\\overline{u_j}v_j/(a+\\lambda_j)$, then adding the displayed constant. A collision $\\mu_j=z_k$ returns status `resonant-diagonal`. For $z=z_k\\ne-1$, set\n$$ W(z)=I_r+\\frac{1+z}{2}S_{Q,P}(z),\\qquad H(z)=S_{\\widetilde C,B}(z)-\\frac{1+z}{2}S_{\\widetilde C,P}(z)W(z)^{-1}S_{Q,B}(z). $$\nIf $W(z)$ is singular, return status `resonant-correction`. The four families $S_{\\widetilde C,B}$, $S_{\\widetilde C,P}$, $S_{Q,B}$, and $S_{Q,P}$ contain $1$, $r$, $r$, and $r^2$ scalar products, respectively. The root $-1$ is handled directly and is never included in this Cauchy evaluation. Matrix products and inversions of the $r\\times r$ corrections are performed separately at each root.\n\nThe recurrent solver may exploit the diagonal-plus-low-rank structure as follows. Write $d_j=1-\\alpha\\lambda_j$, let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$. If $Z$ is empty, use the Woodbury inverse with $D=\\operatorname{diag}(d_j)$ and correction $I_r+\\alpha Q^*D^{-1}P$; if this correction is singular, return status `singular-bilinear-matrix`. If $s=|Z|>0$, then when $s\\le r$ solve the bordered system\n$$ \\begin{bmatrix} I_r+\\alpha Q_J^*D_J^{-1}P_J&-Q_Z^*\\\\ \\alpha P_Z&0 \\end{bmatrix} \\begin{bmatrix}z\\\\x_Z\\end{bmatrix} = \\begin{bmatrix}Q_J^*D_J^{-1}b_J\\\\b_Z\\end{bmatrix}, \\qquad x_J=D_J^{-1}(b_J-\\alpha P_Jz), $$\nwhere $D_J=\\operatorname{diag}(d_j)_{j\\in J}$; if $s>r$ or the bordered system is singular, return status `singular-bilinear-matrix`. Here $z=Q^*x$. This branch solves $Gx=b$ without assuming the diagonal base is invertible.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-s4-convolution-root-of-unity-reduction",
+          "source_section": "Statement",
+          "quote": "Let $N,r\\ge1$, $M=2^q\\ge1$, $1\\le L\\le M$, $A=\\Lambda-PQ^*$ with diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$ and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose, $B,C\\in\\mathbb C^N$, and $\\Delta>0$. Assume $G=I-\\Delta A/2$ is invertible, define $\\bar A=G^{-1}(I+\\Delta A/2)$, $\\bar B=G^{-1}\\Delta B$, and put $\\widetilde C_M=(I-\\bar A^M)^*C$. For each $M$th root of unity $z\\ne-1$, let $s(z)=(2/\\Delta)(1-z)/(1+z)$, $R(z)=(s(z)I-\\Lambda)^{-1}$, and $W(z)=I_r+Q^*R(z)P$. Assume all these $R(z)$ and $W(z)$ are invertible. The length-$M$ truncated generating value $H_M(z)=\\sum_{j=0}^{M-1}C^*\\bar A^j\\bar B z^j$ then satisfies\n$$\nH_M(z)=\\frac{2}{1+z}\\left(\\widetilde C_M^*R(z)B-\\widetilde C_M^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right)\\quad(z\\ne-1).\n$$\nIf $M$ is even, the root $z=-1$ has the finite value $H_M(-1)=(\\Delta/2)\\widetilde C_M^*B$. For $a=2/\\Delta$ and each diagonal entry $\\lambda_j\\ne-a$, put $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any $u,v\\in\\mathbb C^N$ and root $z\\ne-1$,\n$$\n\\frac{2}{1+z}u^*R(z)v=\\frac{\\Delta}{2}\\sum_{\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j}.\n$$\nThus the four families of scalar products $\\widetilde C_M^*RB$, $\\widetilde C_M^*RP$, $Q^*RB$, and $Q^*RP$ reduce to $1+2r+r^2=(r+1)^2$ roots-of-unity Cauchy products; when $r=1$ there are four.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $M=2^q\\ge1$, $\\omega$ be a primitive $M$th root of unity, and let $\\mu_1,\\ldots,\\mu_n\\in\\mathbb C$ and $a_1,\\ldots,a_n\\in\\mathbb C$ satisfy $\\mu_j\\ne\\omega^k$ for every $j$ and $0\\le k<M$. Then the Cauchy matrix-vector product $y_k=\\sum_{j=1}^{n}a_j/(\\omega^k-\\mu_j)$, $0\\le k<M$, is computed exactly by the balanced product-tree procedure using $O((n+M)\\log^2(2+n+M))$ complex arithmetic operations and $O(n+M)$ space. Repeated poles are allowed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-roots-of-unity-fft-complexity",
+          "source_section": "Statement",
+          "quote": "Let $M=2^q$ for an integer $q\\ge0$, and let $\\omega=e^{-2\\pi i/M}$ (with $\\omega=1$ when $M=1$). Define the forward DFT matrix $F\\in\\mathbb C^{M\\times M}$ by $F_{kj}=\\omega^{jk}$, where $^*$ denotes conjugate transpose. Then $F^*F=MI$, so the inverse DFT is $M^{-1}F^*$. The radix-two procedure defined on this page computes either transform exactly in $O(M\\log(2+M))$ complex arithmetic operations and $O(M)$ space. Consequently, for every integer $n\\ge1$, two polynomials of degree less than $n$ can be multiplied exactly in $O(n\\log(2+n))$ complex arithmetic operations and $O(n)$ space by zero-padding to a radix-two transform length at least $2n-1$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hippo-leg-matrices-have-low-rank-structure",
+          "source_section": "Statement",
+          "quote": "Index rows and columns by $0,\\ldots,N-1$. Define the real LegS coefficient matrix $G^S$ by $G^S_{nk}=-\\sqrt{(2n+1)(2k+1)}$ when $n>k$, $G^S_{nn}=-(n+1)$, and $G^S_{nk}=0$ when $n<k$. In the LegS coefficient ODE for $t>0$ this matrix is multiplied by the time-dependent scalar $1/t$; the matrix assertion below does not make that ODE time-invariant. For $\\theta>0$, define the LegT state generator by $G^T_{nk}=-(2n+1)(-1)^{n-k}/\\theta$ when $n\\ge k$ and $G^T_{nk}=-(2n+1)/\\theta$ when $n<k$. Define the original HiPPO LagT state generator by $G^L_{nk}=-1$ when $n\\ge k$ and $G^L_{nk}=0$ when $n<k$. Here $X^*$ is conjugate transpose, a complex matrix $H$ is normal when $H^*H=HH^*$, and a square matrix $V$ is unitary when $V^*V=VV^*=I$. For LegS and LagT use the identity similarity; for LegT use the invertible diagonal similarity $S_0=\\operatorname{diag}(\\sqrt{2n+1})_{n=0}^{N-1}\\operatorname{diag}((-1)^n)_{n=0}^{N-1}$. Each transformed matrix is a difference $H-UV^*$ with $H$ normal and $\\operatorname{rank}(UV^*)\\le1$ for LegS and LagT and $\\operatorname{rank}(UV^*)\\le2$ for LegT. Consequently the equivalent finite-dimensional complex state-space matrix has a normal-plus-low-rank representation, and a unitary change of state coordinates gives diagonal-plus-low-rank form. Under any state change $x=S\\widetilde x$, the input and output vectors change to $S^{-1}B$ and $S^*C$, respectively.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-root-grid-matvec-numerical-cost",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, $M=2^q\\ge1$, $z_k=\\exp(2\\pi i k/M)$, and let $a_j,\\mu_j\\in\\mathbb C$ satisfy $|z_k-\\mu_j|\\ge d>0$ for every $j,k$. Repeated poles are allowed. Let $A\\ge\\sum_j|a_j|$ and $s=\\max(1,A/d)$. For $0<\\eta\\le1/2$, the products $y_k=\\sum_j a_j/(z_k-\\mu_j)$ have numerical approximations satisfying\n$$ \\max_k|\\widehat y_k-y_k|\\le\\eta s $$\nusing $O((n+M)\\log(2+M)\\log(1/\\eta))$ scalar operations and $O(n+M)$ scalar words. Consequently absolute error $\\delta$, for $0<\\delta\\le1/2$, costs $O((n+M)\\log(2+M)\\log(s/\\delta))$ operations with the same word space.\n\nThe model is variable-precision arithmetic with unrestricted exponent range, supplied certified approximations to the inputs, roots and arc-center constants, and certified bounds for the finite computation specified in the proof. Each real comparison, word access and scalar arithmetic operation has unit cost; the latter has absolute rounding error at most $u$. A word stores one scalar at the selected precision. Input approximation, working precision and word lengths may depend on $n,M,d,A,\\eta$ and intermediate magnitudes. This is neither a bit-complexity bound nor a bound at fixed word length. All preprocessing, geometric routing and numerical summation operations are included; computing the supplied constants or certificates from other representations is excluded.\n\nHere is a sufficient explicit precision certificate. For the selected finite rational summation circuit, include its input constants among its exact intermediates, let $T$ bound its arithmetic gates, let $V\\ge1$ bound their moduli, and let $0<D\\le1$ bound below the modulus of every divisor. Set $K=64(V+1)^2/D^2$. With $\\tau=\\eta s/2$, it suffices to take\n$$ u\\le\\frac{\\min(1,D/2,\\tau)}{2K^{T+1}}. $$\nThe geometric decisions additionally use certified interval enclosures narrow enough to choose between the overlapping near and far tests described below. Such enclosures require only finite precision, including at threshold equalities. These certificate assumptions hold for each particular noncollision input, but have no uniform bound as pole/root separation tends to zero.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The fixed-rank DPLR input is valid for the equivalent HiPPO state-space coordinates by [F5]; the operation argument also applies to any supplied DPLR matrices of the same dimensions. By [F2], each required root value has the stated Cauchy-product expression, including the direct value at $-1$. Under the noncollision and correction-invertibility assumptions, the filter procedure in [F1] therefore computes all $M$ generating values exactly.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For $z\\ne-1$, $R=\\beta D$. Substitution in [F2] gives $H_M(z)=x-\\beta u(I_r+\\beta T)^{-1}v$ and $W=I_r+\\beta T$. Also $|\\beta|\\le1$. The pole mapping in [F2] expresses each entry of $D$ as $-2/(a+\\lambda_j)(z-\\mu_j)^{-1}$ for $\\lambda_j\\ne-a$, and as the constant $\\Delta/2$ otherwise. Thus the weights in [F6] are exactly $-2\\overline{f_j}g_j/(a+\\lambda_j)$ for the applicable vector pair $f,g$. Their preparation and the exceptional constant sums cost $O(N)$ for fixed $r$. At $-1$, retain the direct value $(\\Delta/2)\\widetilde C_M^*B$ from [F2], without a resolvent division.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Each scalar product has at most $N$ poles and is evaluated on $M$ roots. If it has at least one pole, [F3] bounds its cost by $O((N+M)\\log^2(2+N+M))$ operations and $O(N+M)$ space; if it has no poles, its constant value is formed by a single finite sum in $O(N+M)$ operations and space. There are at most $(r+1)^2$ such products by [F2], a constant number because $r$ is fixed. The per-root correction matrix products and inversions cost $O(M(r+1)^3)$ operations by finite-dimensional elimination, which is $O(M)$ for fixed $r$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "The generating values are the DFT of the $M$ coefficients $C^*\\bar A^j\\bar B$ for $0\\le j<M$. By [F4], the inverse radix-two transform recovers these coefficients exactly; [F1] then returns their first $L$ entries, which are precisely the length-$L$ filter.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.3",
+          "step": "2.3",
+          "claim": "Let $\\delta=\\varepsilon/[32r w^2(b+1)^2]$ and first consider exact arithmetic on truncated Cauchy sums having scalar entry errors at most $\\delta$, with finite constant sums exact. Denote the resulting blocks by $\\widehat x,\\widehat u,\\widehat v,\\widehat T$. Each of their infinity-norm errors is at most $e=r\\delta$, since each row has at most $r$ entries and $r\\ge1$. Hence $\\|\\widehat W-W\\|_\\infty\\le e$, $we<1/2$ and $e\\le1$. Writing $E=W^{-1}(\\widehat W-W)$, the geometric series $\\sum_{j\\ge0}(-E)^j$ converges in infinity norm because $\\|E\\|_\\infty\\le we<1/2$, is the inverse of $I+E$ by finite geometric identities and passage to the norm limit, and has norm at most $2$. Therefore $\\|\\widehat W^{-1}\\|_\\infty\\le2w$. The identity $\\widehat W^{-1}-W^{-1}=-W^{-1}(\\widehat W-W)\\widehat W^{-1}$ gives $\\|\\widehat W^{-1}-W^{-1}\\|_\\infty\\le2w^2e$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Since $M$ is the least power of two at least $L$, $M<2L$ for every integer $L\\ge1$. Combining the Cauchy products, per-root corrections, and inverse transform gives $O((N+L)\\log^2(2+N+L))$ exact complex arithmetic operations. Processing the Cauchy products sequentially uses $O(N)$ product-tree workspace; their $(r+1)^2$ root-value arrays, the correction matrices, and the inverse transform use $O(M(r+1)^2)$ additional space. Fixed $r$ and $M<2L$ give total $O(N+L)$ working space. The proof counts the supplied $\\widetilde C_M$ as input and does not count its formation from $C$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.2",
+          "step": "3.2",
+          "claim": "Expanding the difference of the two triple products as $(\\widehat u-u)\\widehat W^{-1}\\widehat v+u(\\widehat W^{-1}-W^{-1})\\widehat v+uW^{-1}(\\widehat v-v)$ and using step 2.3 bounds its modulus by $2we(b+1)+2bw^2e(b+1)+bwe$. Adding the error in $x$ and using $|\\beta|\\le1$ bounds each generating-value error by $e[1+2w(b+1)+2bw^2(b+1)+bw]\\le9w^2(b+1)^2e\\le9\\varepsilon/32$. The direct $-1$ value has no truncation error. The exact inverse DFT averages $M$ unit-modulus multiples in each output coordinate, so its infinity operator norm is at most one; consequently the exact inverse transform of these approximations has coefficient error at most $9\\varepsilon/32$.",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Apply [F6] with absolute tolerance $\\delta$ to each scalar sum; its exact truncated circuit has error at most $\\delta$, as required above. Although [F6] is stated on $\\zeta_j=e^{2\\pi i j/M}$, the filter grid is $z_k=e^{-2\\pi i k/M}=\\zeta_{(-k\\bmod M)}$; run each numerical Cauchy product on the positive grid and permute its outputs to the filter order, in $O(M)$ operations and words, preserving the maximum error and pole/root separation bounds. It uses $p=O(\\log(s/\\delta))=O(\\log(\\kappa/\\varepsilon))$ terms. There are at most $(r+1)^2$ sums, processed sequentially; their arrays and the fixed-size blocks use $O(N+M)$ words. The per-root inverses can be computed by the adjugate/determinant formula, which is constant work for fixed $r$ and has nonzero determinants by step 2.3. Add the radix-two inverse transform and finite sums: the scalar count is $O((N+M)\\log(2+N+M)\\log(\\kappa/\\varepsilon))$. The replacement $M<2L$ gives the stated count and space.",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "step 3.1",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "To include every rounding error, regard the entire selected computation, from supplied DPLR parameters, transformed vector and root/arc constants through weight formation, Cauchy sums, finite constants, adjugate inverses and inverse FFT, as one finite rational circuit. Include conjugations as exact sign changes. Require certified $T_0,V_0,D_0$ with $T_0$ an upper bound on its gates, $V_0\\ge1$ an upper bound on exact intermediate moduli, and $0<D_0\\le1$ a lower bound on every exact divisor modulus. Such bounds exist for each input because step 2.3 proves all truncated correction inverses exist and all other divisions are nonzero by the hypotheses. Put $K_0=64(V_0+1)^2/D_0^2$ and select input and gate accuracy $u\\le\\min(1,D_0/2,\\varepsilon/2)/(2K_0^{T_0+1})$, also sufficient for the certified overlapping routing tests of [F6]. The gate recurrence proved in [F6] then gives final additional error at most $\\varepsilon/2$, including errors in supplied parameters, roots, weights, $\\beta$, correction inverses and twiddle factors. Together with step 3.2 this is less than $\\varepsilon$. No precision selection changes the scalar count or scalar-word count, although their bit cost can grow. Bounded $\\kappa$ gives $\\log(\\kappa/\\varepsilon)=O(\\log(1/\\varepsilon))$; arbitrary conditioning retains the explicit $\\kappa$ term.",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.3",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement: N,r,L≥1, so empty state, rank and filter lengths are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero B or C̃_M gives the zero exact filter under the stated invertibility hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: L=1 gives M=1 and inverse transformation returns the first coefficient K_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: P=0 or Q=0 is allowed; the low-rank correction becomes identity and the Cauchy families remain defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: numerical epsilon lies in (0,1/2]; certified d>0 and correction bounds are required; bit cost and fixed word length are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use fixed finite arrays and deterministic FFT/product-tree routines; no choice is used. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The S4 theorem proves exact arithmetic and separately certified numerical upper bounds, with bounded conditioning as a sufficient specialization of its logarithmic factor. It asserts no equivalence between those models or guarantees.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The S4 theorem proves exact arithmetic and separately certified numerical upper bounds, with bounded conditioning as a sufficient specialization of its logarithmic factor. It asserts no equivalence between those models or guarantees.",
+            "item_sha256": "63e0866ecc97fde50713acf58b78e011785896769b97d35e1fc04d3b78014e60",
+            "row_sha256": "f9a1894734b8819e9039d40142735cb5e3fe581be7c502e11bd4601c90a345a9"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructs separation/conditioning certificates from a small error or runtime, and no complete training-cost, fixed-word or empirical-accuracy conclusion is stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse reconstructs separation/conditioning certificates from a small error or runtime, and no complete training-cost, fixed-word or empirical-accuracy conclusion is stated.",
+            "item_sha256": "63e0866ecc97fde50713acf58b78e011785896769b97d35e1fc04d3b78014e60",
+            "row_sha256": "f9c556e7254a31bc7503b3e6fda9cec21621d3db7e4b79c653e9c570ea33c243"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=r=L=M=1, Λ=−1, P=Q=0, Δ=1, B=C=1",
+          "calculation": "Ā=1/3, B̄=2/3, C̃_1=2/3, z=1, R=1 and W=1; the exact root value is 2/3.",
+          "result": "The length-one inverse transform returns K_0=2/3 with no resonance."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Reviewed all nine proof steps and seven suppliers. The corrected positive-to-negative root permutation j=-k mod M is bijective, preserves all pole distances and infinity error, and adds only O(M) work/words. Exact (r+1)^2 Cauchy evaluations, fixed-r correction inverses and inverse DFT recover all M coefficients; M<2L yields the claimed exact bound. Empty Cauchy lists are constants, lambda=-a uses its finite contribution, and -1 uses the finite direct formula. With delta=epsilon/[32r*w^2*(b+1)^2] the block infinity errors are at most e=r*delta, w*e<1/2, and the Neumann series gives inverse norm <=2w and inverse error <=2w^2*e. Expanding the triple product gives generating error <=9*epsilon/32; inverse DFT infinity norm <=1 preserves it. The entire selected rational circuit includes weight formation, exceptional sums, correction inverses, root and twiddle errors; its certified nonzero divisors and finite intermediate bounds permit the stated u and add at most epsilon/2. Thus total error is <epsilon, with logarithmic kappa dependence. Adj/determinant evaluation is constant work at fixed r; precision, certificates and forming Ctilde are explicitly excluded from scalar/word counts. HiPPO use is conditional on the same invertibility hypotheses and equivalent coordinates, not a claim about time-invariant LegS dynamics. Accepted the reindexing clarification; no claim strength changed. Gu Appendix C.3 and Pan §§3.3,6.1–6.4,7.1 checked, without importing a fixed-word claim."
+      }
+    },
+    "ex-lstm-scalar-gates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lstm-cell",
+          "source_section": "Definition",
+          "quote": "Fix positive finite dimensions $d_x,d_h$, inputs $x_t\\in\\mathbb R^{d_x}$, hidden states $h_t\\in\\mathbb R^{d_h}$, cell states $c_t\\in\\mathbb R^{d_h}$, and initial values $h_0,c_0$. A standard long short-term memory (LSTM) cell without peephole connections or projection has shared matrices $W_i,W_f,W_o,W_c\\in\\mathbb R^{d_h\\times d_x}$, $U_i,U_f,U_o,U_c\\in\\mathbb R^{d_h\\times d_h}$, and biases $b_i,b_f,b_o,b_c\\in\\mathbb R^{d_h}$. Apply $\\sigma(s)=(1+e^{-s})^{-1}$ and $\\tanh(s)=(e^s-e^{-s})/(e^s+e^{-s})$ coordinatewise. At each time $t\\ge1$, set\n\n$$ i_t=\\sigma(W_i x_t+U_i h_{t-1}+b_i),\\qquad f_t=\\sigma(W_f x_t+U_f h_{t-1}+b_f),\\qquad o_t=\\sigma(W_o x_t+U_o h_{t-1}+b_o), $$\n\n$$ g_t=\\tanh(W_c x_t+U_c h_{t-1}+b_c),\\qquad c_t=f_t\\odot c_{t-1}+i_t\\odot g_t,\\qquad h_t=o_t\\odot\\tanh(c_t), $$\n\nwhere $\\odot$ is coordinatewise multiplication. The same matrices and biases are reused at every time step. The vectors $i_t,f_t,o_t$ are the input, forget, and output gates, and $g_t$ is the candidate state update.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Every gate's affine argument is zero because all weights and biases vanish. By [F1], $\\sigma(0)=1/(1+1)=1/2$ and $\\tanh(0)=0$, so $i_t=f_t=o_t=1/2$ and $g_t=0$. Substitution into the cell recurrence gives $c_t=c_{t-1}/2$ and $h_t=\\tfrac12\\tanh(c_t)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The recurrence in step 1.1 gives $c_1=2^{-1}c_0$. If $c_{t-1}=2^{-(t-1)}c_0$, then $c_t=c_{t-1}/2=2^{-t}c_0$; induction proves this for every $t\\ge1$. Substituting this expression into the hidden-state identity in step 1.1 gives $h_t=\\tfrac12\\tanh(2^{-t}c_0)$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: d_x=d_h=1, so the example has no empty coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the proof: arbitrary c_0=0 gives c_t=h_t=0 for every t≥1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: at t=1 the formulas give c_1=c_0/2 and h_1=(1/2)tanh(c_0/2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: zero weights and biases make all gates constant and the candidate update zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: no interval-valued parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof use direct scalar evaluation and induction, with no choice. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Zero weights give the particular scalar gate values and geometric cell-state sequence calculated in the example. This is not a necessary-and-sufficient condition for observing those values.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Zero weights give the particular scalar gate values and geometric cell-state sequence calculated in the example. This is not a necessary-and-sufficient condition for observing those values.",
+            "item_sha256": "4cfc6d1f04daf739615d0b261c9ca000bbfffb2a5e316b36ad800b9c4b1057c1",
+            "row_sha256": "213950568f1fd9752de9482cb8d0599cf5357ee2a8938e7a260bc4e88ed950b2"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse claims that every LSTM producing this sequence must have zero weights; arbitrary initial h_0,c_0 and inputs remain part of the witness data.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse claims that every LSTM producing this sequence must have zero weights; arbitrary initial h_0,c_0 and inputs remain part of the witness data.",
+            "item_sha256": "4cfc6d1f04daf739615d0b261c9ca000bbfffb2a5e316b36ad800b9c4b1057c1",
+            "row_sha256": "cffbf89df31e3158e5d0e3baf0a60adb78b15ecc70cde21f2bd260769544975a"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "c_0=2, t=1",
+          "calculation": "Zero affine terms give i_1=f_1=o_1=1/2 and g_1=0, hence c_1=1 and h_1=(1/2)tanh(1).",
+          "result": "The explicit recurrence agrees with the closed form."
+        }
+      ]
+    },
+    "ex-s4-scalar-recurrent-and-convolutional-views": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-s4-dplr-parameterization",
+          "source_section": "Definition",
+          "quote": "An $N$-state single-input, single-output complex linear state-space model has $B,C\\in\\mathbb C^N$, state equation $x'(t)=Ax(t)+Bu(t)$, and output $y(t)=C^*x(t)$; its direct term is set to zero in the S4 convolution convention. Here $X^*$ denotes conjugate transpose; a square complex matrix $H$ is normal when $H^*H=HH^*$; and a square matrix $V$ is unitary when $V^*V=VV^*=I$. A matrix is in diagonal-plus-low-rank (DPLR) form of rank $r$ if\n$$\nA=\\Lambda-PQ^*,\n$$\nwhere $\\Lambda\\in\\mathbb C^{N\\times N}$ is diagonal and $P,Q\\in\\mathbb C^{N\\times r}$. It is in normal-plus-low-rank (NPLR) form of rank $r$ if\n$$\nA=V\\Lambda V^*-PQ^*,\n$$\nwhere $V\\in\\mathbb C^{N\\times N}$ is unitary, $\\Lambda$ is diagonal, and $P,Q\\in\\mathbb C^{N\\times r}$. The unitary state change $\\widetilde x=V^*x$ converts this NPLR representation to DPLR form and changes $B,C$ to $V^*B,V^*C$, respectively.\n\nFor a step size $\\Delta>0$ such that $I-\\Delta A/2$ is invertible, the bilinear recurrent matrices are\n$$ \\overline A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2),\\qquad \\overline B=(I-\\Delta A/2)^{-1}\\Delta B,\\qquad \\overline C=C. $$\nWith initial state $x_{-1}=0$, the discrete recurrence is $x_t=\\overline A x_{t-1}+\\overline B u_t$, $y_t=\\overline C^*x_t$. Its length-$L$ impulse kernel is the vector $K_L=(\\overline C^*\\overline A^j\\overline B)_{j=0}^{L-1}$. For a nonzero direct term $D$, the output has the additional separate skip term $Du_t$.\n\nFor a filter evaluation of transform length $M\\ge L$, the output vector for the length-$M$ truncated generating function is $\\widetilde C_M=(I-\\overline A^M)^*C$. A filter procedure may receive $\\widetilde C_M$ as given data; an operation count for evaluating the filter from this transformed vector does not include the separate work of forming it from $C$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "Let $N,r\\ge1$ and $A=\\Lambda-PQ^*$ with $\\Lambda\\in\\mathbb C^{N\\times N}$ diagonal and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose; let $B,C\\in\\mathbb C^N$, let $\\Delta>0$, and put $\\alpha=\\Delta/2$. The bilinear step is defined only when $G=I-\\alpha A$ is invertible. Given an input sequence $(u_t)$ and state $x_{-1}$, its recurrent mode computes\n$$ b_t=(I+\\alpha A)x_{t-1}+\\Delta Bu_t,\\qquad Gx_t=b_t,\\qquad y_t=C^*x_t. $$\nFor a zero initial state, the equivalent matrices and length-$L$ kernel are $\\bar A=G^{-1}(I+\\alpha A)$, $\\bar B=G^{-1}\\Delta B$, and $K_j=C^*\\bar A^j\\bar B$ for $0\\le j<L$; a direct term $Du_t$, if present, is added separately.\n\nFor the filter mode, fix an integer $L\\ge1$, let $M$ be the least power of two with $M\\ge L$, let $\\omega=e^{-2\\pi i/M}$, and let $\\widetilde C\\in\\mathbb C^N$ be supplied as the length-$M$ truncated-output parameter. When a conventional output vector $C$ is used, this parameter is $\\widetilde C=(I-\\bar A^M)^*C$. Define the $M$ root values $z_k=\\omega^k$. The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.\n\nFor $z_k=-1$, set $H(z_k)=(\\Delta/2)\\widetilde C^*B$. For each $z=z_k\\ne-1$, put $s(z)=(2/\\Delta)(1-z)/(1+z)$. If $s(z)-\\lambda_j=0$ for some diagonal entry $\\lambda_j$ of $\\Lambda$, return status `resonant-diagonal`. If no diagonal resonance is present, write $R(z)=\\operatorname{diag}((s(z)-\\lambda_j)^{-1})$ and $W(z)=I_r+Q^*R(z)P$. If $W(z)$ is singular, return status `resonant-correction`. When this correction is invertible, the target root value is\n$$ H(z)=\\frac{2}{1+z}\\left(\\widetilde C^*R(z)B-\\widetilde C^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right). $$\nThe preceding resolvent expression specifies the target root values. The filter evaluation computes them using $1+2r+r^2=(r+1)^2$ scalar Cauchy products as follows. Put $a=2/\\Delta$, and for each $j$ with $\\lambda_j\\ne-a$ define $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any pair of vectors $u,v\\in\\mathbb C^N$, compute on the root grid\n$$ S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j} $$\nby calling the roots-of-unity Cauchy procedure with poles $\\mu_j$ and weights $-2\\overline{u_j}v_j/(a+\\lambda_j)$, then adding the displayed constant. A collision $\\mu_j=z_k$ returns status `resonant-diagonal`. For $z=z_k\\ne-1$, set\n$$ W(z)=I_r+\\frac{1+z}{2}S_{Q,P}(z),\\qquad H(z)=S_{\\widetilde C,B}(z)-\\frac{1+z}{2}S_{\\widetilde C,P}(z)W(z)^{-1}S_{Q,B}(z). $$\nIf $W(z)$ is singular, return status `resonant-correction`. The four families $S_{\\widetilde C,B}$, $S_{\\widetilde C,P}$, $S_{Q,B}$, and $S_{Q,P}$ contain $1$, $r$, $r$, and $r^2$ scalar products, respectively. The root $-1$ is handled directly and is never included in this Cauchy evaluation. Matrix products and inversions of the $r\\times r$ corrections are performed separately at each root.\n\nThe recurrent solver may exploit the diagonal-plus-low-rank structure as follows. Write $d_j=1-\\alpha\\lambda_j$, let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$. If $Z$ is empty, use the Woodbury inverse with $D=\\operatorname{diag}(d_j)$ and correction $I_r+\\alpha Q^*D^{-1}P$; if this correction is singular, return status `singular-bilinear-matrix`. If $s=|Z|>0$, then when $s\\le r$ solve the bordered system\n$$ \\begin{bmatrix} I_r+\\alpha Q_J^*D_J^{-1}P_J&-Q_Z^*\\\\ \\alpha P_Z&0 \\end{bmatrix} \\begin{bmatrix}z\\\\x_Z\\end{bmatrix} = \\begin{bmatrix}Q_J^*D_J^{-1}b_J\\\\b_Z\\end{bmatrix}, \\qquad x_J=D_J^{-1}(b_J-\\alpha P_Jz), $$\nwhere $D_J=\\operatorname{diag}(d_j)_{j\\in J}$; if $s>r$ or the bordered system is singular, return status `singular-bilinear-matrix`. Here $z=Q^*x$. This branch solves $Gx=b$ without assuming the diagonal base is invertible.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Here $I-\\Delta A/2=1$ and $I+\\Delta A/2=1$, so [F1] gives $\\bar A=1$ and $\\bar B=1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2] and step 1.1, $x_t=x_{t-1}+u_t$ and $y_t=x_t$. The base value is $x_{-1}=0$; if $x_{t-1}=\\sum_{s=0}^{t-1}u_s$, then $x_t=x_{t-1}+u_t=\\sum_{s=0}^{t}u_s$. Induction proves $y_t=\\sum_{s=0}^{t}u_s$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "By [F1] and step 1.1, every kernel coefficient is $C^*\\bar A^j\\bar B=1$. Therefore its causal convolution at time $t$ is $\\sum_{j=0}^{t}u_{t-j}=\\sum_{s=0}^{t}u_s$, which equals the recurrent output in step 2.1 after substituting $s=t-j$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: an empty finite input sequence has no output indices and makes the pointwise output claim vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and the proof: the zero input sequence gives x_t=y_t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: for one input u_0, x_0=y_0=u_0 and K_0=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: A=0 is a degenerate scalar transition, but I−ΔA/2=1 is invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example: no interval-valued parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof are explicit scalar algebra and finite induction. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the fixed scalar data the example evaluates both representations and shows equal causal outputs. It gives an identity for this run, not an iff characterization of arbitrary state-space models.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "For the fixed scalar data the example evaluates both representations and shows equal causal outputs. It gives an identity for this run, not an iff characterization of arbitrary state-space models.",
+            "item_sha256": "7c8ad793c7926bf0479000e046f08c494717a761e96f071d238ebea47ec4d90c",
+            "row_sha256": "1601cf56648a2cab32b9d7500130705e2f1b941903864822a4128e56b819e0aa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse recovers A=0,B=C=1 or zero initialization merely from equality of a recurrent and convolutional output; those parameters are supplied.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse recovers A=0,B=C=1 or zero initialization merely from equality of a recurrent and convolutional output; those parameters are supplied.",
+            "item_sha256": "7c8ad793c7926bf0479000e046f08c494717a761e96f071d238ebea47ec4d90c",
+            "row_sha256": "0dcce5a31f9666697c9f5d40b3c8a589e7aa0e99387ddfbac989415042cac4db"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-step input",
+          "calculation": "For u_0=3, x_0=3, y_0=3 and K_0u_0=1·3=3.",
+          "result": "The recurrent and convolutional values agree."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read all three steps against both actual suppliers. A=0, Delta=1 gives G=1, Abar=Bbar=1, and zero initial state x_-1 makes x_t=sum_{s=0}^t u_s by finite induction; C=1 gives the same output. Kernel entries are all one, and substitution s=t-j gives identical causal convolution. L=1 and t=0 give u0; arbitrary complex or real inputs, zero input and cancellation are valid. This example uses recurrent/kernel definitions, not the nonresonant root-evaluation theorem: Abar=1 would be resonant at z=1 and that theorem is not invoked. No choice or analytic limit is used; Gu §§2.3–2.4 checked."
+      }
+    },
+    "ex-s4-filter-cost-excludes-training": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-s4-convolution-filter-complexity",
+          "source_section": "Statement",
+          "quote": "Let $N,r,L\\ge1$, let $r$ be fixed, and let $A=\\Lambda-PQ^*$ with diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$, $P,Q\\in\\mathbb C^{N\\times r}$, and $B,C\\in\\mathbb C^N$, where $^*$ denotes conjugate transpose. Let $\\Delta>0$, assume $I-\\Delta A/2$ is invertible, and choose $M$ to be the least power of two with $M\\ge L$. For the length-$M$ filter procedure, take the transformed output vector $\\widetilde C_M=(I-\\bar A^M)^*C$ as supplied input, where $\\bar A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2)$. Assume that every root-grid diagonal resolvent and low-rank correction used by the procedure is invertible. In the exact complex arithmetic model, each scalar addition, multiplication, division, and zero test has unit cost. The length-$L$ filter is $K_L=(C^*\\bar A^j\\bar B)_{j=0}^{L-1}$. The procedure returns the first $L$ coefficients of this filter using at most $(r+1)^2$ roots-of-unity Cauchy products, $O((N+L)\\log^2(2+N+L))$ operations, and $O(N+L)$ working space. The operation count is for filter evaluation from $\\widetilde C_M$; it does not include forming that vector from $C$. This bound applies in particular to the equivalent DPLR state coordinates of the stated HiPPO generators.\n\nFor numerical evaluation, put $a=2/\\Delta$, $\\beta(z)=(1+z)/2$, and $D(z)=2R(z)/(1+z)$ at roots $z\\ne-1$, where $R(z)=(a(1-z)/(1+z)I-\\Lambda)^{-1}$. Define the scaled blocks $x=\\widetilde C_M^*DB$, $u=\\widetilde C_M^*DP$, $v=Q^*DB$, $T=Q^*DP$, and $W=I_r+\\beta T$. Matrix infinity norm means maximum absolute row sum; for a column it is maximum absolute entry. Suppose certified constants $b,w,s\\ge1$ bound, over these roots, $|x|,\\|u\\|_\\infty,\\|v\\|_\\infty,\\|T\\|_\\infty$ by $b$, and $\\|W^{-1}\\|_\\infty$ by $w$. For each scalar scaled-block Cauchy sum, require a certified pole/root separation $d>0$ and a weight bound $A\\ge\\sum_j|a_j|$ with $A/d\\le s$; the finite constant contributions from $\\lambda_j=-a$ and the direct value at $-1$ are formed separately. Empty sums need no separation certificate. Set $\\kappa=64r w^2(b+1)^2s$.\n\nFor $0<\\varepsilon\\le1/2$, a numerical implementation returns $\\widehat K_L$ with $\\|\\widehat K_L-K_L\\|_\\infty\\le\\varepsilon$ using $O((N+L)\\log(2+N+L)\\log(\\kappa/\\varepsilon))$ scalar operations and $O(N+L)$ scalar words. On families with bounded $\\kappa$, this is $O((N+L)\\log(2+N+L)\\log(1/\\varepsilon))$. The numerical model uses variable-precision scalar operations, unrestricted exponent range and supplied certified input/root approximations; each operation and word access has unit cost. Word lengths and sufficient precision depend on separation, correction conditioning, intermediate magnitudes and accuracy. The finite circuit precision certificate in the proof is required; these counts exclude bit cost, computing certificates, and forming $\\widetilde C_M$. They imply no complete training-cost or long-context-accuracy bound.\n\nThe numerical procedure also receives the exact index partition $\\{j:\\lambda_j=-a\\}$ and $\\{j:\\lambda_j\\ne-a\\}$, where $a=2/\\Delta$, so it can select the exceptional constant terms without a finite-precision equality test.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-s4-state-space-recurrence-and-convolution",
+          "source_section": "Definition",
+          "quote": "Let $N,r\\ge1$ and $A=\\Lambda-PQ^*$ with $\\Lambda\\in\\mathbb C^{N\\times N}$ diagonal and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose; let $B,C\\in\\mathbb C^N$, let $\\Delta>0$, and put $\\alpha=\\Delta/2$. The bilinear step is defined only when $G=I-\\alpha A$ is invertible. Given an input sequence $(u_t)$ and state $x_{-1}$, its recurrent mode computes\n$$ b_t=(I+\\alpha A)x_{t-1}+\\Delta Bu_t,\\qquad Gx_t=b_t,\\qquad y_t=C^*x_t. $$\nFor a zero initial state, the equivalent matrices and length-$L$ kernel are $\\bar A=G^{-1}(I+\\alpha A)$, $\\bar B=G^{-1}\\Delta B$, and $K_j=C^*\\bar A^j\\bar B$ for $0\\le j<L$; a direct term $Du_t$, if present, is added separately.\n\nFor the filter mode, fix an integer $L\\ge1$, let $M$ be the least power of two with $M\\ge L$, let $\\omega=e^{-2\\pi i/M}$, and let $\\widetilde C\\in\\mathbb C^N$ be supplied as the length-$M$ truncated-output parameter. When a conventional output vector $C$ is used, this parameter is $\\widetilde C=(I-\\bar A^M)^*C$. Define the $M$ root values $z_k=\\omega^k$. The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.\n\nFor $z_k=-1$, set $H(z_k)=(\\Delta/2)\\widetilde C^*B$. For each $z=z_k\\ne-1$, put $s(z)=(2/\\Delta)(1-z)/(1+z)$. If $s(z)-\\lambda_j=0$ for some diagonal entry $\\lambda_j$ of $\\Lambda$, return status `resonant-diagonal`. If no diagonal resonance is present, write $R(z)=\\operatorname{diag}((s(z)-\\lambda_j)^{-1})$ and $W(z)=I_r+Q^*R(z)P$. If $W(z)$ is singular, return status `resonant-correction`. When this correction is invertible, the target root value is\n$$ H(z)=\\frac{2}{1+z}\\left(\\widetilde C^*R(z)B-\\widetilde C^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right). $$\nThe preceding resolvent expression specifies the target root values. The filter evaluation computes them using $1+2r+r^2=(r+1)^2$ scalar Cauchy products as follows. Put $a=2/\\Delta$, and for each $j$ with $\\lambda_j\\ne-a$ define $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any pair of vectors $u,v\\in\\mathbb C^N$, compute on the root grid\n$$ S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j} $$\nby calling the roots-of-unity Cauchy procedure with poles $\\mu_j$ and weights $-2\\overline{u_j}v_j/(a+\\lambda_j)$, then adding the displayed constant. A collision $\\mu_j=z_k$ returns status `resonant-diagonal`. For $z=z_k\\ne-1$, set\n$$ W(z)=I_r+\\frac{1+z}{2}S_{Q,P}(z),\\qquad H(z)=S_{\\widetilde C,B}(z)-\\frac{1+z}{2}S_{\\widetilde C,P}(z)W(z)^{-1}S_{Q,B}(z). $$\nIf $W(z)$ is singular, return status `resonant-correction`. The four families $S_{\\widetilde C,B}$, $S_{\\widetilde C,P}$, $S_{Q,B}$, and $S_{Q,P}$ contain $1$, $r$, $r$, and $r^2$ scalar products, respectively. The root $-1$ is handled directly and is never included in this Cauchy evaluation. Matrix products and inversions of the $r\\times r$ corrections are performed separately at each root.\n\nThe recurrent solver may exploit the diagonal-plus-low-rank structure as follows. Write $d_j=1-\\alpha\\lambda_j$, let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$. If $Z$ is empty, use the Woodbury inverse with $D=\\operatorname{diag}(d_j)$ and correction $I_r+\\alpha Q^*D^{-1}P$; if this correction is singular, return status `singular-bilinear-matrix`. If $s=|Z|>0$, then when $s\\le r$ solve the bordered system\n$$ \\begin{bmatrix} I_r+\\alpha Q_J^*D_J^{-1}P_J&-Q_Z^*\\\\ \\alpha P_Z&0 \\end{bmatrix} \\begin{bmatrix}z\\\\x_Z\\end{bmatrix} = \\begin{bmatrix}Q_J^*D_J^{-1}b_J\\\\b_Z\\end{bmatrix}, \\qquad x_J=D_J^{-1}(b_J-\\alpha P_Jz), $$\nwhere $D_J=\\operatorname{diag}(d_j)_{j\\in J}$; if $s>r$ or the bordered system is singular, return status `singular-bilinear-matrix`. Here $z=Q^*x$. This branch solves $Gx=b$ without assuming the diagonal base is invertible.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The procedure in [F2] receives parameters and returns a kernel. By [F1], the proved exact operation and space bounds count that filter-evaluation procedure with $\\widetilde C_M$ supplied.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The procedure's input/output specification in [F2] contains no parameter-gradient computation or optimizer update. Therefore its operation count does not count a larger computation that additionally performs either operation, including a complete training step.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The exact bound counts arithmetic operations and working space only. The separate numerical guarantee in [F1] specifies its absolute error, conditioning factor and variable-precision scalar model; it requires its own certified hypotheses. Its scalar-operation and word-space counts do not bound bit cost or guarantee a fixed word length, and neither cost theorem asserts empirical long-context accuracy. These additional conclusions therefore do not follow from the filter bounds.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example: the dependent theorem assumes L≥1 and has no empty-filter complexity claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: zero parameters or input may make the filter zero but do not add gradient or optimizer work to the counted procedure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: L=1 still counts one filter-evaluation call, not a training step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: conditioning and resonance are explicit hypotheses/statuses of the dependent procedure; no degenerate case is treated as numerically accurate by cost alone."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: numerical epsilon lies in (0,1/2]; certified d>0 and correction bounds are required; bit cost and fixed word length are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof the proof reason from deterministic routine inputs/outputs and no choices. This is included in the Statement or Proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example applies the exact and certified numerical filter bounds and identifies excluded work. It does not equate a filter-evaluation operation count with a complete training computation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "The example applies the exact and certified numerical filter bounds and identifies excluded work. It does not equate a filter-evaluation operation count with a complete training computation.",
+            "item_sha256": "03e46eb483d24bdf10a75150b856b9a4b7e9e5e11d9ef18051991275591bd39f",
+            "row_sha256": "ef2e0e0458c3e8a209726c614b1bdc362a1480e35149e2e7201507fd5cf020c8"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A cheap kernel evaluation is not claimed to imply a cheap optimizer/gradient computation, and no converse derives conditioning or precision certificates from a measured runtime.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "A cheap kernel evaluation is not claimed to imply a cheap optimizer/gradient computation, and no converse derives conditioning or precision certificates from a measured runtime.",
+            "item_sha256": "03e46eb483d24bdf10a75150b856b9a4b7e9e5e11d9ef18051991275591bd39f",
+            "row_sha256": "4b1d0215a5b29280b962fead61aea0cc73b790d25d2a2bd98d56cd18beaf7868"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scope check",
+          "calculation": "The exact theorem’s output is one kernel vector; its algorithm has no parameter-gradient or optimizer-update output.",
+          "result": "The count cannot be identified with a complete training-step count."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Checked the complete Example and all three proof steps against the current theorem and algorithm. Exact DPLR data, zero/correction invertibility, supplied Ctilde, exceptional partition, finite-constant terms, b/w/s bounds, kappa, epsilon range, supplied routing enclosures and finite-circuit precision assumptions match the actual supplier. No fixed-word, bit-cost, certificate-construction or Ctilde-formation cost is asserted. The filter procedure returns coefficients and performs neither gradients nor optimizer updates; its cost therefore counts only that subroutine. M=L=1, empty scaled Cauchy sums and a separately added direct term are covered by the supplier. Empirical long-context accuracy is not inferred. No choice is spent in this finite computation. No defect or item edit needed."
+      }
+    },
+    "thm-cauchy-root-grid-matvec-numerical-cost": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "If $n=0$, return zero; if $M=1$, sum the $n$ nonzero-denominator fractions directly, using $O(n+1)$ operations and space, and use the rounding argument below. Otherwise construct a binary tree on consecutive root indices. Its root covers all roots, with center $0$ and radius $1$. At depth $\\ell\\ge1$, a node contains $m=M/2^\\ell$ consecutive roots starting at index $b$; its center is $c=\\exp(2\\pi i(b+(m-1)/2)/M)$ and its covering radius is $R=2\\sin(\\pi(m-1)/(2M))\\le\\pi 2^{-\\ell}$. These disks contain their roots because the largest angular distance from the arc midpoint is $\\pi(m-1)/M$. Singleton leaves have radius zero. For each pole start at the root: at a nonleaf stop at a far node if $|c-\\mu_j|\\ge3R/2$, or descend into both children if $|c-\\mu_j|\\le2R$. In the overlap either choice is valid. A singleton is evaluated directly if reached. Certified interval tests terminate: for $R>0$, the two thresholds have a positive gap $R/2$, so enclosures of width less than $R/4$ distinguish at least one admissible choice, even when one threshold is an equality. Squared-distance comparisons implement the same test with a positive gap and finitely accurate supplied coordinates.",
+          "inputs": [
+            "given",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At a fixed depth put $J=2^\\ell$. The $J$ arc centers are equally spaced on the unit circle and have mutual distance at least $2\\sin(\\pi/J)\\ge4/J$ for $J\\ge2$, by concavity of sine on $[0,\\pi/2]$. Every near center lies within $2\\pi/J$ of its pole. Disks of radius $2/J$ about these centers have disjoint interiors and lie in the disk of radius $(2\\pi+2)/J$ about that pole. Comparing their areas bounds the number of near centers by $(\\pi+1)^2<18$. Thus there are fewer than $36$ candidate children per pole at the next depth, including all far stops. The root contributes one candidate. The $q+1$ depths therefore contain $O(n\\log(2+M))$ pole/node pairs. Each root follows exactly one stopped or singleton node for each pole, so these pairs partition all pole/root interactions without duplication. Repeated poles obey the same argument separately.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For a stopped pair put $t=-(z-c)/(c-\\mu_j)$. Its targets satisfy $|t|\\le2/3$. The finite geometric identity gives $1/(z-\\mu_j)=\\sum_{h=0}^{p-1}(-(z-c))^h/(c-\\mu_j)^{h+1}+t^p/(z-\\mu_j)$. Therefore the error in this pair is at most $(2/3)^p|a_j|/|z-\\mu_j|$. Summing the partition from step 2.1 gives error at each root at most $(2/3)^p\\sum_j|a_j|/|z-\\mu_j|\\le(2/3)^p A/d$. Choose $p\\ge1$ with $(2/3)^p\\le\\eta/2$; then $p=O(\\log(1/\\eta))$ and the truncation error is at most $\\eta s/2$. Direct singleton interactions have zero truncation error.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Process depths successively, keeping the bounded near list per pole for the next depth and the bounded far list for the current depth. At a fixed depth, store $v_{j,I}=1/(c_I-\\mu_j)$ and initially $w_{j,I}=a_jv_{j,I}$ for each far pair. Initialize one target power $t_k=1$ per root. For degrees $h=0,\\ldots,p-1$, clear one coefficient $g_I$ per current-depth node, add every current $w_{j,I}$ to its node's $g_I$, and add $g_{I(k)}t_k$ to each target accumulator, where $I(k)$ is its unique ancestor at this depth. Update $w_{j,I}\\leftarrow w_{j,I}v_{j,I}$ and $t_k\\leftarrow-(z_k-c_{I(k)})t_k$. A node without stopped pairs has coefficient zero. Discard the depth's arrays before advancing; at leaves add all direct pairs. The sums are exactly the polynomials in step 3.1. Each depth/degree uses $O(n+M)$ operations and words by step 2.1; the near/far lists, current coefficients, powers and output arrays occupy $O(n+M)$ words. No array of $p$ moments and no list across all depths is stored. The binary root tree has fewer than $2M$ nodes, so its supplied constants and routing data also occupy $O(M)$ words. Routing costs $O(n\\log(2+M)+M)$ operations; fixed-width certified interval arithmetic for each overlapping test has constant scalar cost at its supplied sufficient precision. Total cost is $O((n+M)\\log(2+M)p)$, with $O(n+M)$ words independently of $p$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "Fix the certified routing and the exact truncated rational circuit just constructed. Nonleaf far denominators are nonzero by their distance test; leaf denominators are nonzero by [A1]. Its finite exact intermediates and denominators admit the stated $V,D$. Suppose all already formed operands have error at most $e\\le\\min(1,D/2)$. Addition or subtraction increases error by at most $2e+u$. Multiplication increases it by at most $(2V+1)e+u$. For division, writing exact operands as $x,y$, approximate operands as $x',y'$, and $|y|\\ge D$, gives $|y'|\\ge D/2$ and $|x'/y'-x/y|\\le2e/D+2Ve/D^2$; the final rounding adds $u$. Conjugation and changing signs do not increase error. All these bounds are at most $Ke+u$ for the stated $K\\ge2$. Input constant error is at most $u$. Induction over the $T$ gates bounds every operand error by $2uK^{T+1}$: more precisely after $t$ gates the maximum error is at most $u(1+K+\\cdots+K^t)\\le2uK^t$. The stated choice of $u$ keeps this within $\\min(1,D/2,\\tau)$, so every division remains defined and the output rounding error is at most $\\tau$. Root and pole approximation errors are included as input errors in this recurrence. The certified routing uses exact admissible inequalities, so rounding cannot route a pair outside its valid geometric estimate; the positive overlapping gap in step 1.1 permits finite enclosures, whose sufficient precision can be selected together with this $u$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "Combine the truncation and rounding errors to obtain $\\max_k|\\widehat y_k-y_k|\\le\\eta s$. For absolute error $\\delta$ apply the construction with $\\eta=\\delta/s\\le1/2$, obtaining $p=O(\\log(s/\\delta))$. These substitutions do not change the memory argument. The elementary example $y=1/(z-\\mu)$ changes by $h/((z-\\mu)(z-\\mu-h))$ when $\\mu$ changes to $\\mu+h$, showing why separation-dependent precision cannot be omitted from an absolute-error statement. The count in step 4.1 measures scalar words and operations at the required precision and supplies no bound on their bit lengths or bit cost.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 returns zero for n=0; the Statement requires M≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero weights give y=0; s=max(1,A/d) keeps the accuracy scale defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats M=1 directly and the rounding proof applies to the finite sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles repeated poles separately; the Statement excludes pole/root collisions by d>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: eta=1/2 is included, eta=0 and d=0 are excluded; step 1.1 uses overlapping tests even at threshold equalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 use finite deterministic indexing and supplied certified constants, without arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Separation, magnitude and precision certificates imply an absolute numerical error and scalar-operation bound. The theorem does not characterize all stable inputs or all possible working precisions by an equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "Separation, magnitude and precision certificates imply an absolute numerical error and scalar-operation bound. The theorem does not characterize all stable inputs or all possible working precisions by an equivalence.",
+            "item_sha256": "ed884aa255e77ed25960a465609b3a1d700f3912ee8ee9d2b099f3e6d193ea1c",
+            "row_sha256": "c3eb98f85a139238a0137ce81dafe0ed361597b87b280c2ebc8860945bdadbcb"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse derives a uniform pole separation or bounded word length from observed approximation accuracy. The text explicitly excludes fixed-word and bit-complexity interpretations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/policy_gradient_cpo_repair",
+            "reason": "No converse derives a uniform pole separation or bounded word length from observed approximation accuracy. The text explicitly excludes fixed-word and bit-complexity interpretations.",
+            "item_sha256": "ed884aa255e77ed25960a465609b3a1d700f3912ee8ee9d2b099f3e6d193ea1c",
+            "row_sha256": "8f0cbb3bd87d290dab7a612728ffd05a711edeb4f64bd0e5a58e5a0dfd30934b"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-35",
+        "notes": "Read all six steps independently. The arc radius formula follows from chord length; equally spaced centers have separation at least 4/J, so disjoint radius-2/J disks give fewer than 18 near nodes per pole per depth and fewer than 36 candidates at the next level. The overlapping 3R/2 and 2R tests terminate with finite supplied certified enclosures. Each target/pole pair belongs to exactly one stopped node or leaf. The geometric remainder is bounded by (2/3)^p A/d, including repeated poles. Streaming degrees and depths gives linear word space independent of p; zero poles and M=1 use direct branches. Division perturbation and the K recurrence keep each divisor at least D/2 and total error at most eta*s after truncation and rounding. Certificates and input constants are supplied and their construction/bit cost excluded, as explicitly stated. Checked Pan Lemma 6.1, Lemma 6.3 and §6.4; local proof establishes its own accuracy/precision and streaming bounds rather than importing stronger source guarantees."
+      }
+    }
+  }
+}

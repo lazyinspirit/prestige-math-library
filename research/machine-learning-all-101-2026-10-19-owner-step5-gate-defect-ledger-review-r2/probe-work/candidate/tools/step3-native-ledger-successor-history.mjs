@@ -1,0 +1,76 @@
+// Verify-only continuity for one exact later native metadata append.
+// Original ledger bytes and every ordinary current ownership check remain intact.
+import {createHash} from 'node:crypto';
+import {readFileSync,lstatSync} from 'node:fs';
+import {resolve,relative,isAbsolute} from 'node:path';
+import {isPublishedItem} from './published-repair-policy.mjs';
+const authority={"run":"machine-learning-all-101-2026-10-19","evidence":{"report":{"path":"research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-gate-r1-u1.json","sha256":"c616f7c7f9fa4721dfa158c54835bfbf4cbd65ee0bbbd59512ba19a96559f4d8"},"pack":{"path":"research/machine-learning-all-101-2026-10-19-step5-v2/gate-1.json","sha256":"65abf4b856c7a44558b01511cf176e4d3798b6523b0946f38e72cc85ff9d70aa"},"result":{"path":"research/machine-learning-all-101-2026-10-19-dispatch/alpha-repair-step5-v2-gate-r1-u1.result.json","sha256":"c63309694f83a5af3220bbbc4b9f2de43d50d4d6eeb517cfca9d8c22df4e9e5e"},"attempt":{"path":"research/machine-learning-all-101-2026-10-19-dispatch/alpha-repair-step5-v2-gate-r1-u1.attempt-1.result.json","sha256":"c63309694f83a5af3220bbbc4b9f2de43d50d4d6eeb517cfca9d8c22df4e9e5e"},"prompt":{"path":"research/machine-learning-all-101-2026-10-19-dispatch/alpha-repair-step5-v2-gate-r1-u1.attempt-1.prompt.md","sha256":"9cc4e9d670f7852103636bfc3a48c4204b7488ed5cb94047cb76eb40c1c2097c"},"closure":{"path":"research/machine-learning-all-101-2026-10-19-step3-closure.json","sha256":"930c5a487d5c943288c0eff74dc9f46716b32c9509488ef1337ced9fcf111020"}},"entries":[{"kind":"taxonomy-successor","before":"ml101-b11-3a-sign-tail-source-locator","after":"ml101-b11-3a-sign-tail-source-locator-gate1-taxonomy","subject":"lem-finite-independent-sign-sum-tail","original_sha256":"d7a3038ad3e514af24460da75961e617f54eca5b94dffaca9f8e3a57bbf89fa1","successor_sha256":"68887179b55827b7c6b7968fcd1e82126e8c0fbc0d4ff56b3b7ce1666d7689a3"},{"kind":"taxonomy-successor","before":"ml101-b11-3a-posterior-odds-source-locator","after":"ml101-b11-3a-posterior-odds-source-locator-gate1-taxonomy","subject":"lem-bernoulli-coordinate-posterior-odds-bound","original_sha256":"a6904783119ad6130fecd07f21b72b9e201f82eeaf250062fec216e9a560a7cb","successor_sha256":"ecd37765fc9fffa81b9d88cea764bcc7c1500b50047bf14e1b4cf9241f119b1f"},{"kind":"taxonomy-successor","before":"ml101-b11-3a-dimension-radius-borel-hypothesis","after":"ml101-b11-3a-dimension-radius-borel-hypothesis-gate1-taxonomy","subject":"ex-gaussian-robust-risk-dimension-radius-scaling","original_sha256":"f5c81932005b0748a04a47f00200bcdfc49b1e4ce0b3b24b41e81e7abd3a2427","successor_sha256":"8f86f419947a6a467fb5d84ddf3a1e434bc303174c8111493930813aa78172e7"},{"kind":"taxonomy-successor","before":"ml101-b11-3a-natural-robust-borel-hypothesis","after":"ml101-b11-3a-natural-robust-borel-hypothesis-gate1-taxonomy","subject":"ex-natural-and-robust-risk-on-gaussian-model","original_sha256":"9becd8d6eb02c3e9e0340daad5f9003bcde7c7cd7d975b1faae61000184ca38c","successor_sha256":"47e2d6cdad0d3c324d88b8b9d3adb416474b5198d78684265aa0b1748e074edd"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b75-entropy-lemma-chain-citation","after":"machine-learning-all-101-2026-10-19-3a-b75-entropy-lemma-chain-citation-gate1-taxonomy","subject":"lem-negative-entropy-geometry-of-simplex","original_sha256":"8542e0ed96d99a23b3f1513d529e3a9e462cdd4b01d48daf9f12e187129353c2","successor_sha256":"19a06fca6fbd38be1989f1b72342119c84e4e7fd129ed2ef028aaa53187965c8"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b75-entropy-example-chain-citation","after":"machine-learning-all-101-2026-10-19-3a-b75-entropy-example-chain-citation-gate1-taxonomy","subject":"ex-negative-entropy-mirror-descent-on-simplex","original_sha256":"30480dacb2e207f3cc88fecade0cba591622474c05b60d9b10ccb2e2b4ba87bf","successor_sha256":"814649e4fb822830f32b4b511d84a028d9166e92f00a8864d5a041518d8f8b68"},{"kind":"taxonomy-successor","before":"ml101-b83-3a-lem-ucrl2-evi-termination","after":"ml101-b83-3a-lem-ucrl2-evi-termination-gate1-taxonomy","subject":"lem-ucrl2-evi-termination","original_sha256":"9f651855cc0cb2a3b8d6ee0741e0a17b52a30bdfab808350766b8442fa42f0c7","successor_sha256":"aa354ecbcb77c5090249c915b3ef30c9b95ab7f07b004e526c429b0abbff26a5"},{"kind":"taxonomy-successor","before":"ml101-b83-3a-thm-communicating-mdp-common-optimal-average-reward","after":"ml101-b83-3a-thm-communicating-mdp-common-optimal-average-reward-gate1-taxonomy","subject":"thm-communicating-mdp-common-optimal-average-reward","original_sha256":"26804b20f9b8ba5f3683e9198d3ce170ff1d6700bbdd3059af8ec30e91889378","successor_sha256":"9b705f723cb8b0fd4ef4f96e89df3a38116997b2b29a48695703cf76b9598f99"},{"kind":"taxonomy-successor","before":"ml101-b83-3a-thm-ucrl2-high-probability-regret","after":"ml101-b83-3a-thm-ucrl2-high-probability-regret-gate1-taxonomy","subject":"thm-ucrl2-high-probability-regret","original_sha256":"792b21c92d9b99f9fbf0a8c1f0e19b6edb7193e98b90b62156b92293d1bbf705","successor_sha256":"a1e48000ca581bb7600701f2150abe31251cfae58a333a2a9cfb9a8f7c8adb38"},{"kind":"taxonomy-successor","before":"ml101-b83-3a-reader-page-layout-false-positive","after":"ml101-b83-3a-reader-page-layout-false-positive-gate1-taxonomy","subject":"average-reward-regret-and-ucrl2-examples","original_sha256":"f9f8050620a6912d5cace628a98044c38327058ebcc88c5b00f30e4cddf611e2","successor_sha256":"db148d11dc89a46425a0e6359cc133379def9b7c4918a4a794694976ea6e97e7"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-1","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-1-gate1-taxonomy","subject":"def-cholesky-factorisation-with-positive-diagonal","original_sha256":"f048983565bd99053ad0b95d1d213edbca264b459a8e0a88282d563250aa90a7","successor_sha256":"82a3296849034b648b64082cf0c8e67a12d689bb9bc713b6da00795b3c6a7054"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-2","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-2-gate1-taxonomy","subject":"thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost","original_sha256":"1e2e5982ab29efedfcda81ceb445c31e6d16b36edc3d55412556fec6d61274f2","successor_sha256":"f4de5df9a0ce3651965d547d5d8f068a72b435b617d34856ab577db6e16092c1"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-3","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-3-gate1-taxonomy","subject":"def-forward-and-back-substitution-for-triangular-systems","original_sha256":"a0d1b49319fe43d71784c6443b6c901cedad1c892c744850cdf2db3cdcf9bb81","successor_sha256":"162d84bcfbbe23c1419fbce7b6161a03c63eebf19736407ec1e4ac9de7dcae6f"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-4","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-4-gate1-taxonomy","subject":"def-rank-and-nullity","original_sha256":"8d5bc7495d3a2d4defde72ade2b05b6de4bca3d14935cd0c3305c5fb61cd0758","successor_sha256":"4455d351109b237c7c43aece4d2c562176a1a61932a498a346cf41f4cd3b5646"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-5","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-5-gate1-taxonomy","subject":"def-dimension","original_sha256":"07d523e21e8649d17948e168ddfbcec174fb18eee73f4e4705136d52f4d6e02c","successor_sha256":"5dccecd351d6e5f646434df135b8adc96a86d53ac98f8499d2a55bcabea9a363"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-8","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-8-gate1-taxonomy","subject":"lem-kernel-basis-extension-gives-image-basis","original_sha256":"adac8df40733a6de9d2924f4a5942e073df99d03a368af97705920b568333861","successor_sha256":"edc16afa9e388f7b98ba0f4c310dd0be38121af64769599ef555ac233790379a"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-published-format-9","after":"machine-learning-all-101-2026-10-19-3a-b101-published-format-9-gate1-taxonomy","subject":"thm-rank-nullity","original_sha256":"17df5f23d62f7f394a552b61d13839de559f11c390c362ae1a34c15008022a6b","successor_sha256":"f2c943eede974cb1709870e53da71d4ae6699060d6015a2ffd3b56ab631a5645"},{"kind":"taxonomy-successor","before":"machine-learning-all-101-2026-10-19-3a-b101-cluster-assumption-qualification","after":"machine-learning-all-101-2026-10-19-3a-b101-cluster-assumption-qualification-gate1-taxonomy","subject":"rem-semisupervised-cluster-assumptions","original_sha256":"9873005fe33ae90e3fc48ffeb11e32fa3eadd312ce3dd18efcaf6630accd8f9d","successor_sha256":"01818033d6fdaf9776dabe69ff996165917e5826993c421e628464d80be5eeb2"}]};
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const need=(v,m)=>{if(!v)throw Error(`Native Step3 ledger successor history: ${m}`);};
+function bound(root,ref){
+ const p=resolve(root,ref.path),rel=relative(resolve(root),p);
+ need(rel.startsWith('research/')&&!rel.split('/').includes('..')&&!isAbsolute(rel),'outside research evidence');
+ let cursor=resolve(root);for(const part of rel.split('/')){cursor=resolve(cursor,part);need(!lstatSync(cursor).isSymbolicLink(),'symlink evidence');}
+ need(lstatSync(p).isFile(),'nonregular evidence');const b=readFileSync(p);need(sha(b)===ref.sha256,`changed ${ref.path}`);return b;
+}
+export function nativeStep3LedgerSuccessorHistory(root,run,closure,currentRows){
+ if(run!==authority.run)return false;
+ const e=authority.evidence,originalClosure=JSON.parse(bound(root,e.closure));
+ need(same(closure,originalClosure)&&closure.version===3&&closure.basis==='dependency-ordered-step3a'
+   &&closure.run===run&&closure.status==='closed'&&closure.step3_ledger_rows_count===317
+   &&closure.step3_ledger_rows_sha256==='8fd60e9fbcb4acedb21ae3a4b37d067a08531eee603d5f0bbbe359abed69dcaf','changed original closure');
+ const report=JSON.parse(bound(root,e.report)),pack=JSON.parse(bound(root,e.pack)),resultBytes=bound(root,e.result);
+ const result=JSON.parse(resultBytes);need(bound(root,e.attempt).equals(resultBytes),'native result differs from immutable attempt');
+ const prompt=bound(root,e.prompt).toString();
+ need(report.run===run&&report.phase==='gate'&&report.round===1&&String(report.unit)==='1'
+   &&pack.run===run&&pack.phase==='gate'&&pack.round===1&&pack.units.includes('1')
+   &&report.input_sha256===sha(JSON.stringify(pack)),'wrong native report or input pack');
+ need(result.run===run&&result.role==='alpha-repair'&&result.label==='step5-v2-gate-r1-u1'
+   &&result.attempt===1&&result.evidence_tag==='.attempt-1'&&same(result.covers,['1'])
+   &&result.runner==='codex'&&result.model==='gpt-6.1-sol'&&result.provider_effort==='high'
+   &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out===false
+   &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
+   &&result.terminal_summary.final_response_present===true&&result.terminal_summary.error_events===0
+   &&Number.isFinite(Date.parse(result.started_at))&&Number.isFinite(Date.parse(result.ended_at))
+   &&Date.parse(result.started_at)<=Date.parse(result.ended_at)&&Date.parse(result.started_at)>Date.parse(closure.closed_at)
+   &&result.tail.includes(e.report.path)&&String(result.prompt).endsWith('/'+e.prompt.path)
+   &&prompt.includes('output: '+e.report.path)&&prompt.includes(report.input_sha256),'not the exact genuine completed native owner');
+ const metadata=report.repair_notes.filter(x=>x&&typeof x==='object'&&x.shared_global_metadata).map(x=>x.shared_global_metadata);
+ need(metadata.length===1&&metadata[0].ledger==='research/defect-ledger.jsonl'
+   &&metadata[0].appended_taxonomy_successors===18,'missing native taxonomy handoff');
+ const declared=metadata[0].entries.filter(x=>x.kind==='taxonomy-successor');
+ need(same(declared,authority.entries.map(({original_sha256,successor_sha256,...entry})=>entry)),'changed native successor inventory');
+ const rows=readFileSync(resolve(root,'research/defect-ledger.jsonl'),'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse);
+ const successors=new Set();
+ for(const pin of authority.entries){
+  const originals=rows.filter(r=>r.defect_id===pin.before),later=rows.filter(r=>r.defect_id===pin.after);
+  need(originals.length===1&&later.length===1,'missing or duplicate original/successor');
+  const original=originals[0],successor=later[0];
+  need(sha(JSON.stringify(original))===pin.original_sha256&&sha(JSON.stringify(successor))===pin.successor_sha256,
+    'changed original or native successor '+pin.after);
+  need(original.run===run&&successor.run===run&&original.subject===pin.subject&&successor.subject===pin.subject
+    &&same(successor.supersedes,[pin.before])&&rows.indexOf(successor)>rows.indexOf(original),
+    'invalid backward same-subject continuity');
+  need(Number.isFinite(Date.parse(successor.at))&&Date.parse(successor.at)>=Date.parse(result.started_at)
+    &&Date.parse(successor.at)<=Date.parse(result.ended_at),'successor recording time outside actual native execution');
+  // Pins bind every field; this comparison additionally makes the narrow
+  // metadata-only nature of this particular native operation explicit.
+  const projected={...successor};for(const k of ['defect_id','at','location','subclass','evidence','supersedes','metadata_reconciliation'])delete projected[k];
+  const before={...original};for(const k of ['defect_id','at','location','subclass','evidence','supersedes','metadata_reconciliation'])delete before[k];
+  need(same(projected,before),'native successor changes nonmetadata fields');
+  need(successor.evidence.length===original.evidence.length&&original.evidence.every((v,i)=>
+    Object.entries(v).every(([k,value])=>same(successor.evidence[i][k],value))
+    &&Object.keys(successor.evidence[i]).every(k=>Object.hasOwn(v,k)||(k==='path'&&successor.evidence[i].path===v.url))),
+    'native successor changes original evidence meaning');
+  successors.add(pin.after);
+ }
+ const selected=rows.filter(r=>r.run===run&&['3a-adjudicate','3b-cross'].includes(r.caught_at_stage)
+   &&!isPublishedItem(root,r.subject)).sort((a,b)=>String(a.defect_id).localeCompare(String(b.defect_id)));
+ need(same(selected,currentRows),'current selected rows differ from actual ledger');
+ const frozen=selected.filter(r=>!successors.has(r.defect_id));
+ need(selected.length===328&&selected.length-frozen.length===11&&frozen.length===317
+   &&sha(JSON.stringify(frozen))===closure.step3_ledger_rows_sha256,
+   'remaining original frozen inventory differs');
+ return true;
+}

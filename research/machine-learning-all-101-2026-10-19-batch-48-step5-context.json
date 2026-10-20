@@ -1,0 +1,254 @@
+{
+  "group": "p",
+  "batches": [
+    "48"
+  ],
+  "pages_read": [
+    "minimum-norm-interpolation-and-double-descent",
+    "minimum-norm-interpolation-and-double-descent-examples"
+  ],
+  "items_read": [
+    "def-ridgeless-minimum-norm-regression",
+    "lem-iid-uniform-fill-distance-rate",
+    "lem-ridgeless-risk-decomposition",
+    "lem-dense-cube-polynomial-norming-and-reproduction",
+    "lem-gaussian-rbf-power-function-fill-distance-bound",
+    "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+    "lem-zero-signal-isotropic-risk-limit",
+    "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+    "lem-isotropic-minimum-norm-risk-components",
+    "ex-double-descent-in-neural-and-tree-models",
+    "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+  ],
+  "conventions": [
+    {
+      "convention": "The ridgeless estimator is X⁺y, the minimum-Euclidean-norm least-squares solution, including when exact interpolation is impossible.",
+      "fixed_by": "def-ridgeless-minimum-norm-regression",
+      "matters_for": [
+        "lem-ridgeless-risk-decomposition",
+        "thm-isotropic-ridgeless-risk-across-interpolation-threshold"
+      ]
+    },
+    {
+      "convention": "Prediction risk averages over training noise and an independent isotropic test feature conditional on the design; it measures error against the noiseless signal and adds no test-label noise variance.",
+      "fixed_by": "lem-ridgeless-risk-decomposition",
+      "matters_for": [
+        "lem-zero-signal-isotropic-risk-limit",
+        "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+        "lem-isotropic-minimum-norm-risk-components",
+        "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+      ]
+    },
+    {
+      "convention": "The asymptotic design consists of upper-left blocks of one infinite real iid array with mean zero, variance one and finite fourth moment. Signals are deterministic with fixed norm r ≥ 0; AC is assumed, and γ = 1 is excluded.",
+      "fixed_by": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "matters_for": [
+        "lem-isotropic-minimum-norm-risk-components",
+        "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+      ]
+    },
+    {
+      "convention": "Fill distance uses Euclidean distance on a closed positive-side-length cube. The uniform-sampling lemma assumes Countable Choice and normalized Lebesgue measure.",
+      "fixed_by": "lem-iid-uniform-fill-distance-rate",
+      "matters_for": [
+        "thm-noiseless-rkhs-interpolation-fill-distance-bound"
+      ]
+    },
+    {
+      "convention": "Polynomial reproduction concerns total degree at most n, has coefficient ℓ¹ bound Aⁿ under 2nh_X/L ≤ κ, allows rotated cubes and requires no separation or choice principle.",
+      "fixed_by": "lem-dense-cube-polynomial-norming-and-reproduction",
+      "matters_for": [
+        "lem-gaussian-rbf-power-function-fill-distance-bound"
+      ]
+    },
+    {
+      "convention": "The Gaussian kernel is exp(−‖x−z‖²/(2σ²)) with σ > 0. Its power function is the RKHS distance of a kernel section from the finite sample-section span; Countable Choice is assumed.",
+      "fixed_by": "lem-gaussian-rbf-power-function-fill-distance-bound",
+      "matters_for": [
+        "thm-noiseless-rkhs-interpolation-fill-distance-bound"
+      ]
+    },
+    {
+      "convention": "The noiseless sampling estimate holds on one event simultaneously for every RKHS interpolant; its right side retains both the target norm and interpolant norm.",
+      "fixed_by": "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+      "matters_for": []
+    },
+    {
+      "convention": "The neural-network and forest curves are reports of specified finite experiments, without a universal double-descent assertion.",
+      "fixed_by": "ex-double-descent-in-neural-and-tree-models",
+      "matters_for": []
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-ridgeless-risk-decomposition",
+      "statement": "For deterministic X and β, independent centered noise with covariance σ²I and independent centered test features with covariance I, conditional prediction risk equals ‖(I−X⁺X)β‖² + σ² tr((XᵀX)⁺) = ‖(I−X⁺X)β‖² + (σ²/n) tr(S⁺), where S=XᵀX/n.",
+      "used_by": [
+        "lem-zero-signal-isotropic-risk-limit",
+        "lem-isotropic-minimum-norm-risk-components"
+      ]
+    },
+    {
+      "id": "lem-dense-cube-polynomial-norming-and-reproduction",
+      "statement": "For each integer d ≥ 1 there are A > 1 and κ > 0 such that, for any closed cube of side L > 0 and finite nonempty sample set X, if n ≥ 1 and 2nh_X/L ≤ κ, then every real polynomial of total degree at most n satisfies sup_Ω|p| ≤ Aⁿ max_X|p|. At each x ∈ Ω, real coefficients reproduce all these polynomials simultaneously with sum of absolute values at most Aⁿ. Rotated cubes are allowed; no separation or choice principle is required.",
+      "used_by": [
+        "lem-gaussian-rbf-power-function-fill-distance-bound"
+      ]
+    },
+    {
+      "id": "lem-gaussian-rbf-power-function-fill-distance-bound",
+      "statement": "Assuming Countable Choice, for the real Gaussian RKHS on a fixed closed positive-side-length cube there are C,c,h₀ > 0, depending only on d, Ω and σ, such that every finite nonempty X with 0 < h_X ≤ h₀ satisfies sup_Ω P_X ≤ C exp(−c|log h_X|/h_X).",
+      "used_by": [
+        "thm-noiseless-rkhs-interpolation-fill-distance-bound"
+      ]
+    },
+    {
+      "id": "lem-iid-uniform-fill-distance-rate",
+      "statement": "Assuming Countable Choice, independent uniform samples on a product cube of side L have, for every sufficiently large n, probability at least 1−1/n of Euclidean fill distance at most C_d L(log n/n)^(1/d), where C_d=2√d·2^(1/d).",
+      "used_by": [
+        "thm-noiseless-rkhs-interpolation-fill-distance-bound"
+      ]
+    },
+    {
+      "id": "lem-zero-signal-isotropic-risk-limit",
+      "statement": "Assuming AC, for upper-left blocks of one infinite real iid mean-zero, variance-one, finite-fourth-moment array with p_n/n → γ ∈ (0,∞) excluding 1, zero-signal conditional prediction risk converges almost surely to σ²γ/(1−γ) for γ < 1 and σ²/(γ−1) for γ > 1, under the stated independent noise and isotropic test-feature assumptions.",
+      "used_by": [
+        "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+        "lem-isotropic-minimum-norm-risk-components"
+      ]
+    },
+    {
+      "id": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "statement": "Under AC, the stated nested real iid finite-fourth-moment design, deterministic signals of fixed norm r ≥ 0, independent centered noise of covariance σ²I and independent centered test features of covariance I, conditional prediction risk converges almost surely to σ²γ/(1−γ) for 0 < γ < 1 and r²(1−1/γ)+σ²/(γ−1) for γ > 1. No limit is asserted when p_n/n → 1.",
+      "used_by": [
+        "lem-isotropic-minimum-norm-risk-components",
+        "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+      ]
+    },
+    {
+      "id": "lem-isotropic-minimum-norm-risk-components",
+      "statement": "Under the isotropic ridgeless risk theorem's hypotheses, B_n=‖(I−X_n⁺X_n)β_n‖² and V_n=(σ²/n)tr(S_n⁺) converge almost surely to 0 and σ²γ/(1−γ) for γ < 1, and to r²(1−1/γ) and σ²/(γ−1) for γ > 1.",
+      "used_by": [
+        "ex-isotropic-risk-components-and-signal-to-noise-regimes"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "The four Penrose equations and the meaning of X⁺.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Finite real SVD, including rank-zero cases, and pseudoinverse trace identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Existence and uniqueness of the pseudoinverse and identification of its SVD formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+      "used_for": "The equivalent minimum-norm characterization of ridgeless regression.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The precise countable-choice assumption in the measure and RKHS arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The choice assumption carried by the asymptotic spectral suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and a common law for uniform samples and nested design entries.",
+      "opened": true
+    },
+    {
+      "id": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+      "used_for": "Normalized Lebesgue sampling on a cube.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume",
+      "used_for": "Half-open box volumes in the fill-distance partition.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Measurability and measure preservation when partition cells differ by boundary subsets.",
+      "opened": true
+    },
+    {
+      "id": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+      "used_for": "Nullity of cube and partition-cell boundary faces.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-union-bound",
+      "used_for": "Bounding the probability that any partition cell is empty.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Choice-free compactness of cubes and finite-dimensional simplices.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-image-of-a-compact-space-is-compact",
+      "used_for": "Compactness of the finite symmetric convex hull in polynomial reproduction.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of polynomial maxima and nearest points in compact convex sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-eulers-formula",
+      "used_for": "Finite trigonometric-polynomial calculations in the polynomial norming proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "The unit modulus of exp(it).",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-derivatives",
+      "used_for": "Differentiating the trigonometric kernels and coordinate substitutions.",
+      "opened": true
+    },
+    {
+      "id": "thm-linear-change-of-variables-for-lebesgue-measure",
+      "used_for": "Transporting uniform sampling between a rotated cube and a product cube.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+      "used_for": "The translation component of the cube-coordinate transformation.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "minimum-norm-interpolation-and-double-descent",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "Checked the cited kernel definition, Gaussian positive-semidefiniteness example, canonical RKHS construction and finite-dimensional projection lemma against their consumer uses. Real scalars, Countable Choice and finite section spans are preserved; invertibility of the Gram matrix is not assumed."
+    },
+    {
+      "from": "minimum-norm-interpolation-and-double-descent",
+      "to": "sample-covariance-resolvent-limits",
+      "faithful": true,
+      "note": "The risk-closure corollary supplies exactly the positive-fixed-signal-norm limits cited by the zero-signal lemma and risk theorem, with the same nested real iid array, finite fourth moment, deterministic signals, AC, noise/test independence and γ ≠ 1. The zero-signal extension is proved locally using signals e₁ and 2e₁ rather than attributed to the supplier."
+    }
+  ]
+}

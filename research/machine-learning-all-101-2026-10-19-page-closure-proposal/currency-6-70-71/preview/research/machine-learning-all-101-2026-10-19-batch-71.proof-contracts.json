@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "scope": [
+    "def-foundation-model-as-broad-pretraining-and-adaptation",
+    "ex-empirical-language-model-scaling-law",
+    "ex-pretraining-adaptation-interface-limitations"
+  ],
+  "contracts": {
+    "def-foundation-model-as-broad-pretraining-and-adaptation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The qualitative Definition makes no empty-model or empty-data existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero threshold for data, parameters, or performance is part of the Definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one modality is allowed; multimodality is not required."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate architecture or parameter limit is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no limiting parameter or training endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all models and distributions are supplied; no selection or existence axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        }
+      ]
+    },
+    "ex-empirical-language-model-scaling-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "In the usage of the 2021 Bommasani et al. report, a **foundation model** is a model trained on broad data, generally using self-supervision at scale, that can be adapted to a wide range of downstream tasks.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-transformer-encoder-decoder-layer",
+          "source_section": "Definition",
+          "quote": "The decoder's causal mask admits keys at positions $j\\le i$ for query position $i$. Encoder and decoder stacks are finite compositions of their respective layers, with positional encodings added to token embeddings before the stacks.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "power-curve-ratio",
+          "claim": "A positive fitted power curve changes by the factor lambda to the negative exponent when its argument is multiplied by lambda.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "reported-fit-specializations",
+          "claim": "The three fit ratios and compute-allocation ratios follow by substitution in their separate reported regimes.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fits require positive parameter, dataset, and compute scales; no empty model or dataset is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Each power curve divides by its positive scale variable; zero scale is outside the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the ratio is 1 when the multiplicative scale factor lambda is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-width, zero-layer, or degenerate model claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the numeric model and dataset ranges are bounded, and ratios are claimed only when both values remain in the measured range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Verification use positive scalar arithmetic only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example reports one-way empirical fits and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example reports one-way empirical fits and no biconditional."
+        }
+      ]
+    },
+    "ex-pretraining-adaptation-interface-limitations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "The report’s 2021 theory discussion asks under what conditions a small population pretraining loss implies a small minimal adaptation loss. It identifies this pretraining-adaptation interface as a theory gap involving the pretraining and task distributions, objectives, training methods, and model architecture.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-source-target-distributions-and-shift",
+          "source_section": "Definition",
+          "quote": "The pair is under **covariate shift** when conditional label kernels $K_S,K_T$ are supplied, there is a measurable set $N$ with $\\mu_T(N)=0$ such that $K_S(x,\\cdot)=K_T(x,\\cdot)$ as probability measures for every $x\\notin N$, and $\\mu_T\\ll\\mu_S$. No existence of conditional kernels is asserted by this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-foundation-model-as-broad-pretraining-and-adaptation",
+          "source_section": "Definition",
+          "quote": "In-context learning conditions on such a prompt and a test input while keeping the pretrained parameters fixed. Parameter-based adaptation instead optimizes some or all parameters using task information.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-kernel-identities",
+          "claim": "The specified point-mass kernels reproduce the two finite joint laws under the source/target integral convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "non-domination-witness",
+          "claim": "The singleton containing b witnesses failure of target absolute continuity with respect to the source marginal.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "adaptation-route-distinction",
+          "claim": "Prompt conditioning with fixed pretrained parameters is distinct from parameter empirical-risk minimization, and no pretraining-to-task guarantee is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite spaces are nonempty and the sample size is assumed n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the source marginal assigns zero mass to {b}, which is the non-domination witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: each joint law and supplied conditional kernel is a unit point mass of total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: both joint laws are point masses; Step 1.1 verifies their conditional-kernel identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting model parameter, training endpoint, or asymptotic law is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Verification: the finite spaces, laws, and kernels are explicit; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        }
+      ]
+    }
+  }
+}

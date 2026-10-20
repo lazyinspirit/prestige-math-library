@@ -1,0 +1,187 @@
+{
+  "group": "s",
+  "batches": ["58"],
+  "pages_read": [
+    "variational-autoencoders-and-the-elbo",
+    "variational-autoencoders-and-the-elbo-examples"
+  ],
+  "items_read": [
+    "def-variational-autoencoder",
+    "cor-vae-elbo-kl-decomposition",
+    "thm-reparameterization-gradient-under-dominated-differentiation",
+    "alg-reparameterized-variational-training",
+    "lem-reparameterized-variational-training-finite-run-terminates",
+    "ex-vae-inference-gap"
+  ],
+  "conventions": [
+    {
+      "convention": "Posterior densities and ELBOs are used only on positive finite evidence fibres. Admissibility requires encoder support compatibility and absolute integrability of both log terms; terms weighted by a zero encoder density are zero.",
+      "fixed_by": "def-variational-autoencoder",
+      "matters_for": [
+        "cor-vae-elbo-kl-decomposition",
+        "thm-reparameterization-gradient-under-dominated-differentiation",
+        "alg-reparameterized-variational-training",
+        "ex-vae-inference-gap"
+      ]
+    },
+    {
+      "convention": "Reverse KL has the encoder measure as its first argument and posterior measure as its second. The explicit density-ratio identity is choice-free; library KL identification and the stated lower-bound branch assume AC.",
+      "fixed_by": "cor-vae-elbo-kl-decomposition",
+      "matters_for": [
+        "alg-reparameterized-variational-training",
+        "ex-vae-inference-gap"
+      ]
+    },
+    {
+      "convention": "The data set is finite and nonempty, the base noise law is parameter independent, and the sampled data index is uniform and independent of the noise. Pathwise differentiation holds the noise and index fixed.",
+      "fixed_by": "thm-reparameterization-gradient-under-dominated-differentiation",
+      "matters_for": [
+        "alg-reparameterized-variational-training",
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    },
+    {
+      "convention": "Sample-path regularity and positive finite log arguments hold outside common null sets across all data indices and parameters. Differentiation additionally requires a local integrable gradient envelope and a square-integrable gradient at the parameter under consideration.",
+      "fixed_by": "thm-reparameterization-gradient-under-dominated-differentiation",
+      "matters_for": [
+        "alg-reparameterized-variational-training",
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    },
+    {
+      "convention": "Training uses ascent updates η[t+1] = η[t] + α[t]G[t], a positive finite horizon T, and rounds indexed from 0 through T−1. Every update must remain admissible; both records are set to zero on the common exceptional null set.",
+      "fixed_by": "alg-reparameterized-variational-training",
+      "matters_for": [
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    },
+    {
+      "convention": "Termination counts draws, branch decisions, pointwise evaluations and vector updates as mathematical operations; it supplies no implementation-cost, convergence or optimality guarantee.",
+      "fixed_by": "lem-reparameterized-variational-training-finite-run-terminates",
+      "matters_for": [
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-variational-autoencoder",
+      "statement": "Defines the prior and decoder densities, joint density, positive finite evidence and posterior, admissible encoder and ELBO, and a fixed-law pathwise representation of encoder samples.",
+      "used_by": [
+        "cor-vae-elbo-kl-decomposition",
+        "thm-reparameterization-gradient-under-dominated-differentiation",
+        "alg-reparameterized-variational-training",
+        "lem-reparameterized-variational-training-finite-run-terminates",
+        "ex-vae-inference-gap"
+      ]
+    },
+    {
+      "id": "thm-reparameterization-gradient-under-dominated-differentiation",
+      "statement": "For a fixed finite nonempty data set, admissible fixed-law encoder representations and jointly measurable integrable payoffs with the stated common-null-set C1 regularity, local integrable gradient envelopes and square-integrable gradients at η₀, the finite-average ELBO is differentiable at η₀; the independent uniform one-example pathwise gradient is unbiased and has finite coordinate variances.",
+      "used_by": [
+        "alg-reparameterized-variational-training",
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    },
+    {
+      "id": "cor-vae-elbo-kl-decomposition",
+      "statement": "For a fixed observation with positive finite evidence and an admissible encoder, log evidence equals ELBO plus the encoder-to-posterior density-ratio integral. Under AC, that integral is the nonnegative library reverse KL, hence ELBO is at most log evidence.",
+      "used_by": [
+        "alg-reparameterized-variational-training",
+        "ex-vae-inference-gap"
+      ]
+    },
+    {
+      "id": "alg-reparameterized-variational-training",
+      "statement": "With its full admissibility and update-domain requirements, performs T rounds of independent data/noise sampling, null-set-safe payoff and fixed-noise gradient evaluation, and positive-step gradient ascent; returns the parameter and recorded payoff/gradient trajectories.",
+      "used_by": [
+        "lem-reparameterized-variational-training-finite-run-terminates"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-variational-family-and-elbo",
+      "used_for": "Generic support, absolute log-integrability and ELBO conventions specialized by the VAE definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-bayes-formula-for-dominated-kernels",
+      "used_for": "Posterior interpretation on positive finite evidence fibres with a jointly measurable decoder density.",
+      "opened": true
+    },
+    {
+      "id": "thm-elbo-kl-decomposition",
+      "used_for": "The corollary's density-ratio identity and AC-dependent reverse-KL identification and nonnegativity.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions inherited by the library KL and Gaussian suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-simulation-gradient-objective-and-payoff-oracle",
+      "used_for": "Jointly measurable, parameterwise integrable simulation-payoff interface.",
+      "opened": true
+    },
+    {
+      "id": "def-pathwise-simulation-gradient-estimator",
+      "used_for": "Fixed-noise differentiation convention without an automatic unbiasedness assertion.",
+      "opened": true
+    },
+    {
+      "id": "thm-pathwise-simulation-gradient-is-unbiased-under-envelope",
+      "used_for": "Differentiability, unbiasedness and finite coordinate variances under the explicit envelope and second-moment hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiation of the full payoff along parameter segments.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passage to expectations under an integrable majorant in the cited pathwise differentiation argument.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Finite horizon and zero-based iteration conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Propagation of finite admissible states through the prescribed finite loop.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional density-ratio convention in the Gaussian example.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian law and variance-parameter conventions in both example models.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-location-scale-density",
+      "used_for": "Positive Gaussian densities, quadratic logarithms and the explicit log-density ratio.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-location-scale-mean-and-variance",
+      "used_for": "Finite second moments, encoder admissibility and expectation of the affine log-density ratio.",
+      "opened": true
+    },
+    {
+      "id": "thm-normal-normal-conjugate-update",
+      "used_for": "Positive finite evidence and posterior N(8/3, 4/9) for the first Gaussian model.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": []
+}

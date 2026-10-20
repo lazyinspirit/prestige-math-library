@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-discrete-adjoint-gradient-recursion.json
 id: thm-discrete-adjoint-gradient-recursion
 kind: theorem
 title: The reverse recursion is the exact gradient of a finite state-step objective
@@ -26,13 +28,17 @@ sources:
 
 ## Statement
 
-Use the setting of [[def-parameterized-finite-state-step-objective]]. Write $A_n=D_x\Psi_n(x_n,\theta)$, $B_n=D_\theta\Psi_n(x_n,\theta)$, and let $S_n=D_\theta x_n$. Then
+Use the setting of Finite parameterized state-step graphs and objectives. Write $A_n=D_x\Psi_n(x_n,\theta)$, $B_n=D_\theta\Psi_n(x_n,\theta)$, and let $S_n=D_\theta x_n$. Then
 $$S_0=D x_0(\theta),\qquad S_{n+1}=A_nS_n+B_n.$$
 Define $p_N=D_x\phi(x_N,\theta)^T$ and, backward for $n=N-1,\ldots,0$,
 $$p_n=D_x\ell_n(x_n,\theta)^T+A_n^Tp_{n+1}.$$
 The exact gradient of the finite objective is
 $$\nabla_\theta J=D_\theta\phi(x_N,\theta)^T+S_0^Tp_0+\sum_{n=0}^{N-1}\bigl(D_\theta\ell_n(x_n,\theta)^T+B_n^Tp_{n+1}\bigr).$$
 The recursion is the reverse derivative of the finite graph in exact real arithmetic; it makes no convergence claim about an iteration used to choose $\theta$.
+
+## Statement references
+
+[[def-parameterized-finite-state-step-objective]]
 
 ## Facts & Assumptions
 

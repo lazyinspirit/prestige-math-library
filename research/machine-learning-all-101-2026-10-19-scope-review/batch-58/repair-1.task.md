@@ -1,0 +1,15 @@
+# Batch 58: repair 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 58
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: variational-autoencoders-and-the-elbo, variational-autoencoders-and-the-elbo-examples
+Items: def-variational-autoencoder, cor-vae-elbo-kl-decomposition, thm-reparameterization-gradient-under-dominated-differentiation, alg-reparameterized-variational-training, ex-vae-inference-gap
+Consolidated findings: [{"id":"def-variational-autoencoder","type":"local","reason":"Define an admissible triple explicitly to require positive finite evidence as well as the stated support and log-integrability conditions. “Use this posterior only when” does not clearly make that evidence condition part of admissibility."},{"id":"alg-reparameterized-variational-training","type":"local","reason":"Steps 2–3 do not specify what to do when a sampled noise value lies in the theorem’s common null set, where the logarithms or pointwise gradient may be undefined. Specify the theorem’s null-set version, such as setting h_t and G_t to zero there."}]
+Authorized source files: ["items/def-variational-autoencoder.md","items/cor-vae-elbo-kl-decomposition.md","items/thm-reparameterization-gradient-under-dominated-differentiation.md","items/alg-reparameterized-variational-training.md","items/ex-vae-inference-gap.md","library/machine-learning/variational-autoencoders-and-the-elbo.md","library/machine-learning/variational-autoencoders-and-the-elbo-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

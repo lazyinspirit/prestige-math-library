@@ -14,6 +14,7 @@ landmark: true
 short: "linear change of variables"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-linear-change-of-variables-for-lebesgue-measure.json
   audited: 2026-08-26
   precheck: pass
   judge:
@@ -35,9 +36,9 @@ pipeline_run: null
 ## Statement
 
 Let $n \ge 1$, **assume the Axiom of Countable Choice**
-([[def-countable-choice]]) and let $T : \mathbb{R}^n \to \mathbb{R}^n$ be linear
-with matrix $A$ ([[def-linear-map]],
-[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).
+(The Axiom of Countable Choice ($\mathrm{AC}_\omega$)) and let $T : \mathbb{R}^n \to \mathbb{R}^n$ be linear
+with matrix $A$ (Linear map between vector spaces over the same field,
+Every Euclidean linear map has a unique matrix and satisfies $\|Lh\|_2\le K\|h\|_2$ for some $K\ge0$).
 
 1. **Invertible case.** If $\det A \ne 0$, then $T[E]$ is Lebesgue measurable for
    every Lebesgue measurable $E$ and
@@ -49,9 +50,19 @@ with matrix $A$ ([[def-linear-map]],
 
 **The singular clause is stated as nullity and not as a product.** When
 $\det A = 0$ and $\lambda_n(E) = +\infty$ the expression
-$|\det A|\,\lambda_n(E)$ is $0\cdot(+\infty)$, which [[def-extended-reals]]
+$|\det A|\,\lambda_n(E)$ is $0\cdot(+\infty)$, which The extended real line $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\}$, its order, and the arithmetic that is left undefined
 leaves undefined; writing the conclusion as $\lambda_n(T[E]) = 0$ says the same
 thing wherever the product is defined and remains a statement where it is not.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-linear-map]]
+
+[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]
+
+[[def-extended-reals]]
 
 ## Facts & Assumptions
 

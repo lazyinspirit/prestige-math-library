@@ -25,6 +25,7 @@ sources:
       url: "https://faculty.etsu.edu/gardnerr/5357/notes/Munkres-20.pdf"
 pipeline_run: null
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-metric-topology.json
   verified:
     model: gpt-6-sol
     verdict: locally-reviewed
@@ -35,10 +36,10 @@ verification:
 
 ## Definition
 
-Let $(X,d)$ be a metric space ([[def-metric-space]]).
+Let $(X,d)$ be a metric space (Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric).
 
 A subset $U \subseteq X$ is **open in $(X,d)$** if for every $x \in U$ there is a
-real $r > 0$ with $B(x,r) \subseteq U$ ([[def-metric-ball]]). A subset
+real $r > 0$ with $B(x,r) \subseteq U$ (Open ball, closed ball and sphere in a metric space). A subset
 $F \subseteq X$ is **closed in $(X,d)$** if its complement $X \setminus F$ is
 open.
 
@@ -62,7 +63,15 @@ each of its points, and metric balls suffice to test this condition.
 
 **The metric, not the set, determines $\mathcal{T}_d$.** Two metrics on the same
 set may have different metric topologies, and two different metrics may have the
-same one; the systematic comparison is [[def-equivalent-metrics]].
+same one; the systematic comparison is Topologically, uniformly and Lipschitz equivalent metrics on a set.
+
+## Definition references
+
+[[def-metric-space]]
+
+[[def-metric-ball]]
+
+[[def-equivalent-metrics]]
 
 ## Remarks
 

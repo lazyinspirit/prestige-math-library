@@ -18,6 +18,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-ito-sde-and-strong-solution.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -41,7 +42,7 @@ right-continuous and contains every $P$-null subset of $\mathcal F$ in
 $\mathcal F_0$ (the usual conditions).
 
 Let $W=(W_t)_{0\le t\le T}$ be a standard $m$-dimensional Brownian motion
-[[def-d-dimensional-brownian-motion]] adapted to this filtration, with
+$d$-dimensional Brownian motion adapted to this filtration, with
 $W_t-W_s$ independent of $\mathcal F_s$ and distributed as
 $N_m(0,(t-s)I_m)$ for $0\le s<t\le T$. Let
 $X_0:\Omega\to\mathbb R^d$ be $\mathcal F_0$-measurable, satisfy
@@ -71,23 +72,23 @@ the vector Itô equation
 $$X_t=X_0+\int_0^t b(s,X_s)\,ds+\left(\sum_{k=1}^m\int_0^t\sigma^{ik}(s,X_s)\,dW_s^k\right)_{i=1}^d,\qquad 0\le t\le T.$$
 uses a pathwise Lebesgue integral for the drift and, in each coordinate, the
 localized Itô integral from
-[[def-continuous-brownian-ito-process]], clause 2. Require
+Continuous Brownian Ito processes, clause 2. Require
 $\int_0^T|b(s,X_s)|ds<\infty$ and
 $\int_0^T\|\sigma(s,X_s)\|_F^2ds<\infty$ almost surely; these are the local
 coefficient-integrability conditions in that definition. When a coordinate
 integrand has finite expected energy, its integral is the square-integrable
-Itô integral of [[def-ito-integral-for-square-integrable-predictable-processes]];
+Itô integral of Ito integral for square-integrable predictable processes;
 the Picard estimates below establish that stronger condition for every input
 in $\mathcal H_T$. Equality of processes means
 equality for every $t$ on one measurable event of probability one, that is,
 indistinguishability
-[[def-law-modification-and-indistinguishability-of-processes]]. A **strong
+Process law, modification, and indistinguishability. A **strong
 solution on $[0,T]$** is an adapted continuous process satisfying this
 integral equation indistinguishably. No moment bound is included in the
 definition; the existence theorem proves its $L^2$ path-sup bound.
 The usual-filtration, continuity, and finite-coordinate conventions agree
 with the multidimensional class of continuous Brownian Itô processes
-[[def-continuous-brownian-ito-process]]. This definition makes no ellipticity,
+Continuous Brownian Ito processes. This definition makes no ellipticity,
 transition-density, forward-equation, or time-reversal assertion.
 
 Brownian motion here means the finite-horizon version of the cited definition:
@@ -104,7 +105,17 @@ integrals agree up to the smaller stop by the finite-energy stopping identity.
 On the full event of finite energy, $\rho_n=T$ for all sufficiently large
 $n$, so these integrals paste uniquely on the whole closed interval $[0,T]$,
 exactly as in the localized construction of
-[[def-continuous-brownian-ito-process]]. At $T=0$ every integral is zero.
+Continuous Brownian Ito processes. At $T=0$ every integral is zero.
+
+## Definition references
+
+[[def-d-dimensional-brownian-motion]]
+
+[[def-continuous-brownian-ito-process]]
+
+[[def-ito-integral-for-square-integrable-predictable-processes]]
+
+[[def-law-modification-and-indistinguishability-of-processes]]
 
 ## Sources
 

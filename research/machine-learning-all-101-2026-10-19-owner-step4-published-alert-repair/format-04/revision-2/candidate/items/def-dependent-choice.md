@@ -1,0 +1,125 @@
+---
+id: def-dependent-choice
+kind: definition
+title: "The axiom of dependent choice: a relation in which every element is related to something admits an $\\mathbb{N}$-indexed chain"
+status: published
+origin: session
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-choice-function, def-axiom-of-choice, def-countable-choice, def-function, def-natural-numbers, def-cartesian-product, def-power-set, def-axiom-schema-of-separation, thm-induction-principle, lem-nat-order-is-membership, lem-nat-nonzero-is-successor]
+justified_by: []
+forward_refs: [rem-compactness-choice-ledger-metric]
+aliases: [def-dc]
+landmark: true
+short: "dependent choice (DC)"
+sources:
+  scraped: []
+  references:
+    - title: "Axiom of dependent choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_dependent_choice"
+    - title: "Axiom of countable choice (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Axiom_of_countable_choice"
+    - title: "H. Herrlich, Axiom of Choice, Lecture Notes in Mathematics 1876, Springer 2006"
+      url: "https://link.springer.com/book/10.1007/11601562"
+pipeline_run: null
+verification:
+  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-2/receipts/def-dependent-choice.json
+---
+
+## Definition
+
+Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$.
+Call $R$ **entire on $X$** when
+
+$$\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$$
+
+The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following
+statement.
+
+> For every nonempty set $X$, every relation $R$ entire on $X$, and every
+> $a \in X$, there is a function $x : \mathbb{N} \to X$ (A function is a relation $f$ with $(a,b) \in f$ and $(a,c) \in f$ implying $b = c$; $f : A \to B$, the value $f(a)$, domain and codomain,
+> The natural numbers $\mathbb{N}$ (von Neumann)) with
+> $$x_0 = a \qquad \text{and} \qquad x_n \mathbin{R} x_{n+1} \ \text{ for every } n \in \mathbb{N}.$$
+
+Here a sequence in $X$ means a function from $\mathbb{N}$ to $X$, not necessarily
+a real-valued sequence. As everywhere in this library $\mathbb{N}$ contains $0$, and the sequence is
+indexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every
+later term is related to its predecessor.
+
+**What DC adds to what came before.** Choice function and
+The Axiom of Choice select one element from each member of a family that is
+fixed in advance, and The Axiom of Countable Choice ($\mathrm{AC}_\omega$) does the same for a family indexed
+by $\mathbb{N}$. In both, the family is given before any selection is made. DC is
+the principle needed when the $n$-th set to select from is not known until the
+first $n$ selections have been made: here the admissible values of $x_{n+1}$ are
+exactly the $R$-successors of $x_n$, so the family being chosen from is built
+along the choosing. Thus the displayed recursion is directly an instance of
+DC; it is not itself an application of the fixed-family formulation of
+countable choice. This observation concerns the input to the two axioms and
+makes no claim about a nonimplication between them.
+
+**The starting point may be dropped.** The formally weaker statement obtained by
+deleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there
+is a sequence with $x_n \mathbin{R} x_{n+1}$ for all $n$ — is an immediate
+consequence of the form above, since $X$ is nonempty and any of its elements may
+be taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\to X$ with nonzero $k\in\mathbb N$, $p(0)=a$, and $p(i)\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\mathcal P(\mathbb N\times X)$ (The power set $\mathcal{P}(x) = \{\, z : z \subseteq x \,\}$, The Cartesian product $A \times B := \{\, z \in \mathcal{P}(\mathcal{P}(A \cup B)) : \exists a \in A\ \exists b \in B\ z = (a,b) \,\}$, The Axiom Schema of Separation: for each formula $\varphi$, $\forall \bar p\,\forall x\,\exists y\,\forall z\,(z \in y \leftrightarrow (z \in x \wedge \varphi(z,\bar p)))$); a natural is the set of its predecessors (On $\mathbb{N}$ the order is membership: $m < n \iff m \in n$). The singleton path $\{(0,a)\}$ lies in $P$.
+
+On $P$ let $p\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\cup\{(k,y)\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.
+
+Their graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\bigcup_{n\in\mathbb N}p_n$ is a function with domain $\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.
+
+**$R$ need not be an order and the terms need not be distinct.** What DC delivers
+is a sequence, that is a function $\mathbb{N} \to X$, not a chain in the
+order-theoretic sense (Chain in a poset). The relation may be symmetric, and the
+sequence may repeat a value or be constant; all that is asserted is
+$x_n \mathbin{R} x_{n+1}$ at every index.
+
+## Definition references
+
+[[def-function]]
+
+[[def-natural-numbers]]
+
+[[def-choice-function]]
+
+[[def-axiom-of-choice]]
+
+[[def-countable-choice]]
+
+[[def-power-set]]
+
+[[def-cartesian-product]]
+
+[[def-axiom-schema-of-separation]]
+
+[[lem-nat-order-is-membership]]
+
+[[lem-nat-nonzero-is-successor]]
+
+[[thm-induction-principle]]
+
+[[def-chain]]
+
+## Remarks
+
+**Locally proved implications between the choice principles.** The later
+[[thm-choice-implies-dependent-implies-countable-choice]] proves in ZF that
+
+$$\mathrm{AC}\Longrightarrow\mathrm{DC}\Longrightarrow\mathrm{AC}_\omega.$$
+
+Its first implication uses AC to select a successor for each state and then
+recurses on that specified function. Its second applies DC to the set of finite
+partial selections, starting from the empty function, and takes their union.
+This item makes no assertion about reversing either implication.
+
+**Nothing in this library proves DC, and nothing assumes it silently.** Like
+[[def-axiom-of-choice]] and [[def-countable-choice]], DC is a statement that may
+be assumed or not. Every theorem whose proof uses it says so in its own
+statement, and the accounting for the compactness page is collected in
+[[rem-compactness-choice-ledger-metric]].
+
+**The cost of a particular argument.** When an item records a DC use,
+it asserts that the written argument is carried out in $\mathrm{ZF}+\mathrm{DC}$.
+Necessity or equivalence needs a separate proof and does not follow from the
+chosen argument alone.

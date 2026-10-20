@@ -1,0 +1,1376 @@
+{
+  "version": 1,
+  "scope": [
+    "def-verifier-and-generation-protocol",
+    "alg-budgeted-verifier-guided-generation",
+    "thm-independent-generation-success-and-verifier-error",
+    "lem-finite-response-likelihood-ratio-change-of-measure",
+    "alg-finite-group-relative-policy-update",
+    "lem-finite-response-score-gradient-identities",
+    "thm-group-centered-score-estimator-factor",
+    "rem-reasoning-training-evidence-and-evaluation-targets",
+    "ex-equal-group-rewards-zero-advantages",
+    "ex-perfect-and-false-positive-verifiers",
+    "ex-repeated-dependent-copies-no-sampling-gain",
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+    "lem-budgeted-verifier-generation-termination-and-calls"
+  ],
+  "contracts": {
+    "def-verifier-and-generation-protocol": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition requires nonempty prompt, response, and support sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition assigns zero mass outside the fixed support and defines scores only on supported responses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a singleton support; normalization gives its only response probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows the verifier to equal correctness or to differ from it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition requires an open parameter domain and makes no boundary-parameter claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition gives finite response lists and no arbitrary-index selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "alg-budgeted-verifier-guided-generation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "N=1 rejection search",
+          "result": "For a two-response law with π(c)=1/4, π(w)=3/4, A(c)=1, and A(w)=0, the procedure returns c with probability 1/4 and otherwise returns failure after its single draw."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires N at least one and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition explicitly returns failure after the budget if no verifier accepts."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows N=1 and either returns that accepted response or failure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition resolves equal best-of-N scores by the fixed total order."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition makes no asymptotic statement as N grows."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite sampling procedure uses no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "thm-independent-generation-success-and-verifier-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "For each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Equivalently, for every finite choice of distinct indices $i_0,\\dots,i_{n-1}$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-1-1",
+          "step": "1.1",
+          "claim": "Under A_q=C_q, rejection search succeeds exactly on the event union_i {C_q(Y_i)=1}. Its complement is the intersection of the N failure events. By independence [F4], that complement has probability (1-p)^N, so the success probability is 1-(1-p)^N.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-1-2",
+          "step": "1.2",
+          "claim": "Let F_i be the event that the first i adaptive responses are all incorrect, with F_0 the whole sample space. Enumerate the finite response histories lexicographically using the fixed response list in [F1], and partition F_{i-1} into its positive-probability histories h. By [A1], each satisfies Pr(C_q(Y_i)=0|h)<=1-p, so finite additivity gives Pr(F_i)=sum_h Pr(h)Pr(C_q(Y_i)=0|h)<=(1-p)Pr(F_{i-1}). Induction from Pr(F_0)=1 yields Pr(F_N)<=(1-p)^N.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-independent-generation-success-and-verifier-error-2-1",
+          "step": "2.1",
+          "claim": "For each draw let B_i={A_q(Y_i)=1,C_q(Y_i)=0}. Any accepted incorrect output selected from the N candidates lies in union_i B_i. For every outcome, 1_{union_i B_i}<=sum_i 1_{B_i}; summing this pointwise inequality against the nonnegative finite outcome masses gives Pr(union_i B_i)<=sum_i Pr(B_i)<=N epsilon. Thus the false-acceptance probability is at most N epsilon. No factorization or independence is used in this step.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "perfect verifier, p=1/4, N=2",
+          "result": "Independent success is 1-(3/4)^2=7/16; with false-acceptance marginal bound ε=1/4, the finite union bound is Nε=1/2 without independence."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a positive finite budget and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement part 1 gives success probability 0 at p=0, and part 3 gives zero success upper bound at that endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement part 1 gives success probability 1 at p=1, and part 3 gives zero failure bound at that endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement part 1 remains defined when every draw is incorrect (p=0) or correct (p=1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has no continuous parameter-boundary or limiting claim; p=0 and p=1 are covered under the zero and one cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite event and history sums use the fixed finite response list and require no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ]
+    },
+    "lem-finite-response-likelihood-ratio-change-of-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "For each $q\\in Q$, a parameterized sampling policy is a probability mass function $\\pi_\\theta(\\cdot\\mid q)$ on $Y_q$, for $\\theta\\in U$, with a fixed nonempty support $B_q\\subseteq Y_q$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-response-likelihood-ratio-change-of-measure-1-1",
+          "step": "1.1",
+          "claim": "For each index j, if q(y_j)=0, support inclusion forces p(y_j)=0 and the definition gives q(y_j)rho(y_j)=p(y_j)=0. If q(y_j)>0, the quotient is defined and q(y_j)rho(y_j)=p(y_j). Thus this equality holds for every j=1,...,m.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-likelihood-ratio-change-of-measure-2-1",
+          "step": "2.1",
+          "claim": "Multiplying the pointwise equality in step 1.1 by f(y_j) and summing over j using [F3] gives the stated identity. Taking f(y_j)=1 gives sum_j q(y_j)rho(y_j)=sum_j p(y_j)=1. Every operation is a finite sum, so no choice or sigma-finite measure hypothesis is used.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Y={a,b}, p=(1/3,2/3), q=(1/2,1/2)",
+          "result": "ρ=(2/3,4/3); for f=(2,-1), both weighted sums equal 0, and Σ_y q(y)ρ(y)=1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a finite nonempty response set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly handles q(y_j)=0 and uses support inclusion to obtain p(y_j)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 with f=1 proves normalization, including a singleton finite response list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "In the Statement, p=q makes rho=1 on positive masses, so both finite sums agree term by term."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is a finite mass identity and has no parameter endpoint or limiting assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement fixes an enumeration of the finite response set; all sums use that enumeration without arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ]
+    },
+    "alg-finite-group-relative-policy-update": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "G=3 and rewards (7,7,7)",
+          "result": "The population standard deviation is 0, so A=(0,0,0); every clipped reward term is 0 and the separately defined KL penalty remains."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires a nonempty finite prompt list, G at least two, and positive finite iteration counts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition sets every advantage to zero when the group population standard deviation s_l is zero, while retaining the separately defined KL term."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Definition requires G at least two and K,T at least one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition specifies the equal-reward case through s_l=0 and assigns all group advantages the value zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition restricts epsilon to (0,1) and step sizes to positive values; it makes no claim at parameter or hyperparameter limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses finite prompt, response, group, and update lists; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "lem-finite-response-score-gradient-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Write the support in the inherited order as $(b_{q,1},\\ldots,b_{q,n_q})$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differentiable-stochastic-policy",
+          "source_section": "Definition",
+          "quote": "each map $\\theta\\mapsto\\pi_\\theta(a\\mid s)$ is totally differentiable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "For scalar-valued $f$, its **gradient** is",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-finite-response-score-gradient-identities-1-1",
+          "step": "1.1",
+          "claim": "For each supported response b_j, [F2] supplies differentiability and positive mass, so [F3] and [F1] give pi_theta(b_j|q)S_theta(q,b_j)=nabla_theta pi_theta(b_j|q).",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-score-gradient-identities-2-1",
+          "step": "2.1",
+          "claim": "By [F4], differentiate the finite normalization identity sum_{j=1}^m pi_theta(b_j|q)=1 term by term. Using step 1.1 and the finite-law expectation in [F1] yields E_theta[S_theta(q,Y)|q]=sum_j nabla_theta pi_theta(b_j|q)=nabla_theta 1=0.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-finite-response-score-gradient-identities-3-1",
+          "step": "3.1",
+          "claim": "Since r(b_j) is fixed and finite, [F4] differentiates J(theta)=sum_j pi_theta(b_j|q)r(b_j) term by term. Substituting step 1.1 gives nabla_theta J(theta)=sum_j r(b_j)nabla_theta pi_theta(b_j|q)=E_theta[r(Y)S_theta(q,Y)|q].",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Bernoulli policy at θ=1/4",
+          "result": "For π(a)=θ, π(b)=1-θ, scores are (4,-4/3); their expectation is 0. With r=(1,0), J(θ)=θ and E[rS]=1=J′(θ)."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a nonempty fixed policy support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that the finite score expectation is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 differentiates the normalization sum; for a singleton support this says the only probability has derivative zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant reward, step 3.1 and the zero-score identity in step 2.1 give both sides equal to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to the open parameter domain U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement fixes an enumerated finite support and the proof uses only finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ]
+    },
+    "thm-group-centered-score-estimator-factor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-response-score-gradient-identities",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E_\\theta[S_\\theta(q,Y)\\mid q]=0,\\qquad \\mathbb E_\\theta[r(Y)S_\\theta(q,Y)\\mid q]=\\nabla_\\theta J(\\theta).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Equivalently, for every finite choice of distinct indices $i_0,\\dots,i_{n-1}$,",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-group-centered-score-estimator-factor-1-1",
+          "step": "1.1",
+          "claim": "By [F2], for every i, E[R_iS_i|q]=nabla_theta J(theta) and E[S_i|q]=0. Therefore E[G^{-1}sum_i R_iS_i|q]=nabla_theta J(theta).",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-1-2",
+          "step": "1.2",
+          "claim": "For i neq j, expand the finite expectation over response pairs (y,z). By [F1] and [F4], the joint mass is pi_theta(y|q)pi_theta(z|q), so E[R_jS_i|q]=(sum_k pi_theta(b_{q,k}|q)S_theta(q,b_{q,k}))(sum_k pi_theta(b_{q,k}|q)r(b_{q,k}))=0 by the zero-score identity in [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-2-1",
+          "step": "2.1",
+          "claim": "Expand overline R=G^{-1}sum_j R_j. In G^{-1}sum_i overline R S_i, the G diagonal terms have expectation nabla_theta J(theta) by [F2], and all G(G-1) off-diagonal terms have expectation zero by step 1.2. Hence E[G^{-1}sum_i overline R S_i|q]=G^{-1}nabla_theta J(theta). Subtracting this from step 1.1 gives the first identity.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-group-centered-score-estimator-factor-3-1",
+          "step": "3.1",
+          "claim": "For each i, every term in overline R_{-i}S_i has the form R_jS_i with j neq i, so step 1.2 gives E[overline R_{-i}S_i|q]=0. Subtracting these zero means from step 1.1 proves the leave-one-out identity.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Bernoulli policy at θ=1/2, r=(1,0), G=2",
+          "result": "The raw score gradient is 1. The same-group centered estimator has expectation 1/2=(1-1/G)·1; the leave-one-out estimator has expectation 1."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a positive group size G at least two and a nonempty policy support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For r identically zero, the Statement has J=0 and both centered estimators vanish."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement assumes G at least two; its leave-one-out mean is undefined for G=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant r, every same-group centered reward difference is zero and the leave-one-out difference is zero; the score identity in step 1.1 gives nabla J=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to a parameter theta in the open policy domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement uses an explicitly finite group and finite response support; the proof uses finite pair sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no biconditional."
+        }
+      ]
+    },
+    "rem-reasoning-training-evidence-and-evaluation-targets": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This explanatory remark concerns the nonempty finite response protocols specified in its cited definitions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark makes no theorem about a zero reward or zero policy probability."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark makes no special one-sample boundary claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark distinguishes evaluation targets and states limitations, not a degenerate-case theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no limiting claim in token budget, sample count, or policy parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite ratio caveat is explicitly conditional on AC; the local response results do not require it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark asserts no biconditional."
+        }
+      ]
+    },
+    "ex-equal-group-rewards-zero-advantages": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Also fix a finite real reward $r_q(y)$ and a finite real selection score $u_q(y)$ on $Y_q$, when a training or best-of-$N$ procedure uses them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-group-relative-policy-update",
+          "source_section": "Definition",
+          "quote": "Set $A_{\\ell,i}:=(R_{\\ell,i}-\\overline R_\\ell)/s_\\ell$ when $s_\\ell>0$, and set $A_{\\ell,i}=0$ for every $i$ when $s_\\ell=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-equal-group-rewards-zero-advantages-1-1",
+          "step": "1.1",
+          "claim": "Since every reward is 7, the group mean is overline R=(7+7+7)/3=7, and each difference R_i-overline R is zero. Thus the population standard deviation is s=0.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-equal-group-rewards-zero-advantages-2-1",
+          "step": "2.1",
+          "claim": "By the specified zero-standard-deviation branch in [F2], each A_i=0. For every sampled response and candidate parameter, both arguments of the clipped minimum are zero, so its average reward-surrogate contribution is zero. The objective's separately defined KL term remains.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "G=3 and rewards (7,7,7)",
+          "result": "Mean 7, population standard deviation 0, all advantages 0, and the KL term remains."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires three group draws and a nonempty response support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives population standard deviation s=0 for the stated equal rewards, triggering the definition’s zero-advantage branch."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes G=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example is the equal-reward degenerate group; step 1.1 computes its mean and zero deviations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example makes no parameter-boundary claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example is a direct finite calculation and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    },
+    "ex-perfect-and-false-positive-verifiers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "For each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "Return the first response $y$ for which $A_q(y)=1$, together with status",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-perfect-and-false-positive-verifiers-1-1",
+          "step": "1.1",
+          "claim": "For the perfect verifier, p=3/4 and rejection succeeds iff at least one of the two independent draws is c. Its failure probability is (1-3/4)^2=1/16, so its success probability is 15/16.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-perfect-and-false-positive-verifiers-2-1",
+          "step": "2.1",
+          "claim": "For the accept-all verifier, the first draw is always accepted. It is incorrect exactly when it is w, an event of probability 1/4. Each draw has false-acceptance probability epsilon=1/4, so [F3] gives the valid bound N epsilon=1/2; the exact first-draw probability 1/4 is below it.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "π(c)=3/4, π(w)=1/4, N=2",
+          "result": "A perfect verifier succeeds with probability 15/16. An accept-all verifier returns an incorrect first draw with probability 1/4, below the union bound 2·(1/4)=1/2."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a two-element response support and N=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes correctness probability 3/4 and does not treat the p=0 boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes N=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example compares a perfect verifier and an accept-all verifier on a nonconstant correctness event; it makes no deterministic-outcome claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example uses probabilities 3/4 and 1/4, not parameter endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite sums on a two-response space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    },
+    "ex-repeated-dependent-copies-no-sampling-gain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "For each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-repeated-dependent-copies-no-sampling-gain-1-1",
+          "step": "1.1",
+          "claim": "Since Y_1=Y_2=Y, the event that at least one candidate is correct equals {C(Y)=1}, so its probability is 1/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-repeated-dependent-copies-no-sampling-gain-2-1",
+          "step": "2.1",
+          "claim": "The copies are not independent because Pr(Y_1 correct,Y_2 correct)=1/2, not (1/2)^2. Applying [F2] to genuinely independent draws with the same marginal would give 1-(1-1/2)^2=3/4, which differs from the repeated-copy probability in step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "two copies of one Bernoulli draw with p=1/2",
+          "result": "Repeated-copy success is 1/2 and the joint success probability is 1/2; independent draws would give 1-(1/2)^2=3/4."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses a two-element response support and two copies."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes one-draw correctness probability 1/2 and does not treat a zero-success endpoint."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes two repeated copies."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example isolates dependence between duplicate draws and does not treat a constant correctness outcome."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example uses one-draw success probability 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is one finite Bernoulli draw repeated twice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    },
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "For each prompt, let $C_q:Y_q\\to\\{0,1\\}$ be a supplied correctness predicate and $A_q:Y_q\\to\\{0,1\\}$ a supplied verifier. The finite response set has its power-set sigma-algebra, so both maps are measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-budgeted-verifier-guided-generation",
+          "source_section": "Definition",
+          "quote": "Return the first response $y$ for which $A_q(y)=1$, together with status",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-generation-success-and-verifier-error",
+          "source_section": "Statement",
+          "quote": "If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "$\\pi_\\theta(y\\mid q)>0$ for $y\\in B_q$, $\\pi_\\theta(y\\mid q)=0$ for $y\\notin B_q$, and $\\sum_{j=1}^{m_q}\\pi_\\theta(y_{q,j}\\mid q)=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-verifier-and-generation-protocol",
+          "source_section": "Definition",
+          "quote": "Independent draws from $\\pi_\\theta(\\cdot\\mid q)$ mean that the joint mass of any finite tuple $(y_1,\\ldots,y_N)$ is $\\prod_{i=1}^N\\pi_\\theta(y_i\\mid q)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-1",
+          "step": "1.1",
+          "claim": "The normalized product law on the finite replica space makes the mean integrable; coordinate marginals are the original law, so the finite expectation definition and linearity give empirical mean 1/4.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-2",
+          "step": "1.2",
+          "claim": "With two independent candidates, the probability neither is correct is (1-1/4)^2=9/16. Therefore oracle pass@2 is 1-9/16=7/16.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-1-3",
+          "step": "1.3",
+          "claim": "A response is accepted with probability 1/4+3/8=5/8. Rejection search fails only if both candidates are w_2, which has probability (3/8)^2=9/64, so the probability it returns an accepted response is 55/64.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy-2-1",
+          "step": "2.1",
+          "claim": "It returns a correct response if the first draw is c, or if the first is rejected w_2 and the second is c. This has probability 1/4+(3/8)(1/4)=11/32=22/64. Conditional on an accepted output, the selected accuracy is therefore (22/64)/(55/64)=2/5, distinct from the pass@1 and oracle pass@2 values above.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "π(c)=1/4, π(w1)=π(w2)=3/8, A(c)=A(w1)=1, A(w2)=0, N=2",
+          "result": "Pass@1 is 1/4, oracle pass@2 is 7/16, rejection success is 55/64, and conditional verifier-selected accuracy is (22/64)/(55/64)=2/5."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses three responses with positive masses and two draws."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assigns each of its three responses positive mass and uses no zero-mass response."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example compares one-sample pass@1 with two-sample oracle pass@2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example has nonconstant correctness and verifier outcomes and makes no deterministic-outcome claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All response masses are strictly between zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every metric is a finite sum or ratio on the explicitly listed response law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional."
+        }
+      ]
+    },
+    "lem-budgeted-verifier-generation-termination-and-calls": {
+      "citations": [],
+      "derivations": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "N>=1 and response support nonempty are explicit premises; no empty candidate maximum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof1.1 includes zero accepted responses returning failure; zero scores remain finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof1.1-2.1 covers N=1 with zero comparisons."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof1.2 covers repeated identical responses and tied scores via the supplied strict order."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof1.1 covers first/last draw acceptance and all N rejections."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof1.2 constructs the least maximizer by a finite scan; no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional assertion; stated exact-output condition is established directly in finite search proof."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

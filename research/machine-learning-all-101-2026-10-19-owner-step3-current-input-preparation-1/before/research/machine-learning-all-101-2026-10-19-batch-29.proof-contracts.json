@@ -1,0 +1,1175 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-private-randomized-weighted-majority",
+    "alg-private-finite-class-erm",
+    "thm-private-online-learning-regret-under-composition",
+    "thm-private-erm-excess-risk",
+    "ex-online-one-round-replacement",
+    "ex-private-threshold-class-erm",
+    "ex-private-erm-large-finite-class"
+  ],
+  "contracts": {
+    "alg-private-randomized-weighted-majority": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "By induction on $t$, each $w_{t,j}$ is finite and strictly positive: this holds initially since $w_{1,j}=1$, and each update multiplies such a weight by the finite positive number $\\exp(-\\eta\\ell_t(j))$ from [F1]. Since $[k]$ is finite and nonempty, $Z_t:=\\sum_{r=1}^k w_{t,r}$ is finite and strictly positive, so every $p_{t,j}$ is defined and nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The finite sum of the action probabilities is $\\sum_{j=1}^k p_{t,j}=Z_t/Z_t=1$. For each history $h$, define $\\mu_t^h(A)=\\sum_{j\\in A}p_{t,j}(h)$ for $A\\subseteq[k]$. This is countably additive because a pairwise disjoint family of subsets of the finite set $[k]$ has only finitely many nonempty members, and $\\mu_t^h([k])=1$. For each event $A$, the map $h\\mapsto\\mu_t^h(A)$ is measurable since $H_t$ has its power-set sigma-algebra. Hence $K_t$ is a probability kernel by [F3] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires k,T>=1; step 1.1 verifies finite positive normalizers for every round."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero losses are allowed in the Definition; step 1.1 yields unit weights at zero cumulative loss."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case k=1 is included by k>=1, and step 2.1 normalizes the single positive action weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At T=1 the empty cumulative sum is zero in the Definition and step 1.1 keeps weights defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Loss endpoints 0 and 1 belong to [0,1] in the Definition; steps 1.1 and 2.1 verify probability validity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The action set [k] is finite and nonempty for k>=1; step 2.1 shows its probabilities sum to one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Reviewed Definition and Verification 1.1\u20132.1 against every F1\u2013F4 supplier statement. Finite recursion gives positive finite weights and normalizers; finite event sums give countably additive mass-one measures and power-set history sigma-algebras give measurable evaluations even for uncountable finite-length histories. Loss fixed before fresh draw prevents anticipation. Checked k=T=1, zero/unit losses and eta>0; no AC or diagrams. Exact preimage/pre hash and current/post hash compared. Reader corrects false finite-history-set wording and removes redundant closed-form definition. Consumer search finds only owned online theorem and replacement example; their precise fixed/nonanticipating uses are compatible and synchronized."
+      }
+    },
+    "alg-private-finite-class-erm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurable-space",
+          "source_section": "Definition",
+          "quote": "A **measurable space** is a pair $(X,\\mathcal A)$ consisting of a set $X$ and a\nsigma-algebra $\\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of\n$\\mathcal A$ are the **measurable subsets** of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measurable-rectangle",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. A subset of\n$X \\times Y$ is a **measurable rectangle** if it has the form $A \\times B$ with\n$A \\in \\mathcal A$ and $B \\in \\mathcal B$.\n\nThe ambient sigma-algebras matter: the same set may be a measurable rectangle\nfor one pair $(\\mathcal A,\\mathcal B)$ and not for another.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For each $h\\in\\mathcal C$, its mismatch set is $(h^{-1}\\{0\\}\\times\\{1\\})\\cup(h^{-1}\\{1\\}\\times\\{0\\})$, a finite union of measurable rectangles by [F1]. Thus each sample loss indicator and the finite average $\\widehat L_S(h)$ are measurable in the ordered sample. By [F2]\u2013[F4], the weight $w_S(h)$ is finite, positive, and measurable in $S$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Since $\\mathcal C$ is finite and nonempty, $Z_S:=\\sum_{g\\in\\mathcal C}w_S(g)$ is finite, measurable, and strictly positive. For $a\\le0$, $\\{S:1/Z_S>a\\}$ is the whole sample space; for $a>0$, it is $\\{S:Z_S<1/a\\}$, which is measurable by [F5]. Hence $1/Z_S$, and then each $p_S(h):=w_S(h)/Z_S$, is measurable by [F4]. These probabilities sum to one. Define $K(S,A)=\\sum_{h\\in A}p_S(h)$ for $A\\subseteq\\mathcal C$; it is countably additive because a disjoint family of subsets of finite $\\mathcal C$ has only finitely many nonempty members, and $K(S,\\mathcal C)=1$. For each $A$, $S\\mapsto K(S,A)$ is measurable as a finite sum of measurable functions; on the power-set private-database domain every event evaluation is also measurable. Thus [F6] gives the probability-kernel conditions.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires m>=n>=1, so the empirical average has a nonempty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero empirical risks are allowed; steps 1.1 and 2.1 keep weights positive and normalize them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1 and a singleton finite class; step 2.1 still has a positive normalizer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The minimal database size m=n is included; step 1.1 uses only m>=n for the empirical risk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Binary losses at 0 and 1 are included in the Definition; step 1.1 proves measurability of each indicator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes a finite nonempty class; step 2.1 sums its positive weights to one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm Definition asserts no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Reviewed Definition and Verification 1.1\u20132.1 against every F1\u2013F6 supplier statement. Measurable binary mismatch rectangles pull back through sample coordinates; finite sums, continuous exponential, threshold reciprocal and products give measurable positive normalized weights. Finite event sums are countably additive and have total mass one; private count-domain evaluations are measurable on its power set. Checked m=n=1, singleton class, zero and unit losses, nonempty domain/class and epsilon>0. No AC or diagrams. Authenticated preimage matches pre hash; current bytes match post hash. Reader expansion of the elementary finite-measure argument is sound nonfatal polish; Definition unchanged."
+      }
+    },
+    "thm-private-online-learning-regret-under-composition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-private-randomized-weighted-majority",
+          "source_section": "Definition",
+          "quote": "Let $k,T$ be positive integers, let $\\eta>0$, and let $[k]=\\{1,\\ldots,k\\}$. The input also supplies a full-information loss process: before the round-$t$ action draw, its vector $\\ell_t\\in[0,1]^k$ is fixed using only the previous transcript and any external randomness, and the vector is revealed after the draw. Put $H_t=([k]\\times[0,1]^k)^{t-1}$, with $H_1=\\{()\\}$, and give $H_t$ its power-set sigma-algebra; these histories have finite length but need not be finite sets. Initialize $w_{1,j}=1$ for each $j\\in[k]$. At round $t$, given $h_{t-1}=((a_s,\\ell_s))_{s<t}$, compute\n$$p_{t,j}=\\frac{w_{t,j}}{\\sum_{r=1}^k w_{t,r}}.$$\nDraw $a_t=j$ with probability $p_{t,j}$, observe the entire vector $\\ell_t$, and update $w_{t+1,j}=w_{t,j}\\exp(-\\eta\\ell_t(j))$. Equivalently, the conditional action kernel is $K_t(h_{t-1},A)=\\sum_{j\\in A}p_{t,j}$ for each $A\\subseteq[k]$. The action draw uses fresh randomness independent of the loss process, so its conditional law given the past and the already fixed current loss vector is $K_t$. Return the action transcript $(a_1,\\ldots,a_T)$.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qa-30-exp-quadratic-bound",
+          "source_section": "Statement",
+          "quote": "For $0<\\eta\\le1$ and $x\\in[-1,1]$,\n$$\\exp(-\\eta x)\\le1-\\eta x+\\eta^2.$$\nConsequently, if $M=M^*$ and $-I\\preceq M\\preceq I$, then $\\exp(-\\eta M)\\preceq I-\\eta M+\\eta^2I$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-martingale-difference-sequence",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] for conditional-expectation existence. A **martingale difference sequence** relative to $(\\mathcal F_n)_{n\\ge0}$ is a sequence $(D_n)_{n\\ge1}$ of real integrable variables such that $D_n$ is $\\mathcal F_n$-measurable and\n$$E[D_n\\mid\\mathcal F_{n-1}]=0\\quad\\text{a.s. for every }n\\ge1.$$\nIntegrability and adaptedness have the timewise meanings of [[def-adapted-and-integrable-stochastic-process]]. Conditional expectations have the class convention of [[def-conditional-expectation-as-an-ae-class]], which is the exact inherited use of AC here. No representative is selected by this definition. There is no $D_0$, and $\\mathcal F_0$ need not be trivial or generated by the differences.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-azuma-hoeffding-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(M_k,\\mathcal F_k)_{k=0}^n$ be a martingale. Suppose finite $\\mathcal F_{k-1}$-measurable $A_k,B_k$ and deterministic $c_k\\ge0$ satisfy\n$$A_k\\le M_k-M_{k-1}\\le B_k,\\qquad B_k-A_k\\le c_k$$\nalmost surely. Then for every $t>0$,\n$$\\mathbb P(M_n-M_0\\ge t)\\le \\exp\\!\\left(-\\frac{2t^2}{\\sum_{k=1}^n c_k^2}\\right),$$\nand the analogous lower-tail bound holds, with the zero-denominator expression interpreted as $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal D$ be a set equipped with its power-set sigma-algebra and a symmetric adjacency relation $\\sim$; this includes finite-support record-count databases with neighbors differing by one added or removed occurrence. Let $k\\ge1$, let $Y_1,\\ldots,Y_k$ be arbitrary measurable output spaces, and let round $i$ be a probability kernel $K_i(D,h,\\cdot)$ on $Y_i$, measurable in the previous transcript $h\\in H_{i-1}=\\prod_{j<i}Y_j$ for each database $D$. Suppose that for every ordered neighboring pair $D\\sim D'$, every $i$, every $h$, and every measurable $A\\subseteq Y_i$,\n$$K_i(D,h,A)\\le e^\\varepsilon K_i(D',h,A)+\\delta,$$\nwhere $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$. If $0<\\delta'<1$ and $k\\delta+\\delta'\\le1$, then the full transcript, on the finite product sigma-algebra, is $(\\varepsilon',k\\delta+\\delta')$-differentially private, where\n$$\\varepsilon'=\\varepsilon\\sqrt{2k\\ln(1/\\delta')}+k\\varepsilon(e^\\varepsilon-1).$$",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "First suppose $0<\\eta\\le1$. Write $W_t=\\sum_{j=1}^k w_{t,j}$ and $\\mu_t=\\sum_{j=1}^k p_{t,j}\\ell_t(j)$. By [F2] with $\\rho=\\eta$ and $x=\\ell_t(j)$, $W_{t+1}/W_t=\\sum_jp_{t,j}e^{-\\eta\\ell_t(j)}\\le1-\\eta\\mu_t+\\eta^2$. Both sides are positive: the left side is positive by [F9], and it is at most the right side. Applying the increasing logarithm and then [F4] gives $\\ln(W_{t+1}/W_t)\\le-\\eta\\mu_t+\\eta^2$. Summing over $t$ and using $W_1=k$ yields $\\ln(W_{T+1}/k)\\le-\\eta\\sum_t\\mu_t+T\\eta^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F9"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "Fix two adjacent loss sequences and a common prior action history. Before round $t$, their cumulative losses differ coordinatewise by at most one, because only one full loss vector was replaced and each coordinate belongs to $[0,1]$. By [F1], [F3], and [F9], the positive unnormalized weights for each action have ratio between $e^{-\\eta}$ and $e^\\eta$. Summing over actions gives the same two-sided bounds for their normalizers. Dividing the weight ratios by the normalizer ratios bounds each action-probability ratio by $e^{2\\eta}$ in either order; summing over any event proves the ordered $(2\\eta,0)$ round-kernel inequalities.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F9"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "For every expert $j$, $W_{T+1}\\ge w_{T+1,j}=\\exp(-\\eta\\sum_t\\ell_t(j))$. The finite set of cumulative losses has a minimizer. Taking logarithms and combining with step 1.1 gives $\\sum_t\\mu_t-\\min_j\\sum_t\\ell_t(j)\\le(\\ln k)/\\eta+\\eta T$. This is a pathwise inequality for every realized sequence, including one selected adaptively from earlier actions.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "Set $L=\\ln(1/\\delta)>0$ and apply [F8] with $\\varepsilon_r=2\\eta$, $\\delta_r=0$, and $\\delta'=\\delta$. The composed privacy parameter is $2\\eta\\sqrt{2TL}+2T\\eta(e^{2\\eta}-1)$. The first cap in $\\eta$ bounds the first summand by $\\varepsilon/2$. The second cap gives $2\\eta\\le1$; [F2] with $\\rho=2\\eta$ and $x=-1$ gives $e^{2\\eta}-1\\le2\\eta+4\\eta^2\\le4\\eta$. The third cap therefore bounds the second summand by $8T\\eta^2\\le\\varepsilon/2$. Their sum is at most $\\varepsilon$, and the composed failure probability is $T\\cdot0+\\delta=\\delta$. This proves transcript $(\\varepsilon,\\delta)$-privacy under [A1].",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F8",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Under the filtration in the Statement, $\\ell_t$ and $p_{t,j}$ are measurable before the draw and the conditional law of $a_t$ is $p_t$. All losses and their conditional averages are bounded by one. For every event $B\\in\\mathcal F_{t-1}$ and action $j$, [F1] gives $\\Pr(B\\cap\\{a_t=j\\})=\\mathbb E[\\mathbf1_Bp_{t,j}]$. Summing over the finite action set gives $\\mathbb E[\\mathbf1_B\\ell_t(a_t)]=\\mathbb E[\\mathbf1_B\\sum_jp_{t,j}\\ell_t(j)]=\\mathbb E[\\mathbf1_B\\mu_t]$. Thus [F5] makes $\\mu_t$ a conditional-expectation version and $X_t=\\ell_t(a_t)-\\mu_t$ has conditional mean zero. Taking $B=\\Omega$ gives $\\mathbb E[\\ell_t(a_t)]=\\mathbb E[\\mu_t]$. Taking expectations in step 2.1 therefore proves the expected-regret inequality when $\\eta\\le1$. If $\\eta>1$, then $R_T\\le1<\\eta$, since each average loss lies in $[0,1]$; this proves the same expected bound for every $\\eta>0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "Each $X_t$ is $\\mathcal F_t$-measurable, and step 3.1 shows its conditional mean given $\\mathcal F_{t-1}$ is zero. Since $0\\le\\mu_t\\le1$, it lies in the finite predictable interval $[-\\mu_t,1-\\mu_t]\\subseteq[-1,1]$, so $X_t$ is integrable and this interval has length one. By [F6] under AC [A1], $(X_t)$ is a martingale-difference sequence; its partial sums are a martingale by the conditional-mean-zero property. Apply [F7] with the predictable endpoints $A_t=-\\mu_t$, $B_t=1-\\mu_t$ and $c_t=1$ to obtain $\\Pr(\\sum_tX_t\\ge s)\\le e^{-2s^2/T}$ for $s>0$. The realized regret numerator equals $\\sum_tX_t+\\sum_t\\mu_t-\\min_j\\sum_t\\ell_t(j)$; step 2.1 bounds its second term. Taking $s=\\sqrt{T\\ln(1/\\beta)/2}$ gives the displayed tail bound for $\\eta\\le1$. If $\\eta>1$, then $R_T\\le1<\\eta$ deterministically, so the asserted tail bound also holds. When $k=1$, the only action is the comparator, hence $R_T=0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "claim": "For $k\\ge2$, substituting $\\eta=\\sqrt{\\ln k/T}$ in the expected bound of step 3.1 gives $\\eta+\\ln k/(\\eta T)=2\\sqrt{\\ln k/T}$. For the privacy choice, since $\\eta$ is the minimum of three positive numbers, $1/\\eta=\\max\\{\\sqrt{32TL}/\\varepsilon,2,4\\sqrt{T/\\varepsilon}\\}$. Substitution in the high-probability bound of step 4.1 gives the stated exact capped expression. The first cap alone is attained by $\\eta_0$ exactly when the other two hold: $\\eta_0\\le1/2$ is equivalent to $\\varepsilon\\le\\sqrt{8TL}$, and $\\eta_0\\le\\sqrt{\\varepsilon/(16T)}$ is equivalent to $\\varepsilon\\le2L$. In that region, substitution gives the stated specialization. Finally, for adjacent interactive strategies, their stated common-history ordered kernel inequalities are precisely the roundwise hypothesis of [F8]; applying it with the same parameters and the estimates in step 2.2 proves the same transcript guarantee.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F8",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires k,T>=1, eta>0, and strict privacy/confidence endpoints; steps 1.1 and 2.2 use these ranges."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero loss vectors are allowed; step 1.1 gives the potential estimate on the full closed interval [0,1]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The singleton action case k=1 has identically zero regret by step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case eta>1 is handled directly in steps 3.1 and 4.1; privacy caps cover eta<=1/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Loss endpoints 0 and 1 are allowed; the predictable interval in step 4.1 has length exactly one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite expert set has a minimizer and the action kernels are normalized; steps 2.1 and 1.2 establish these uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way regret and privacy bounds, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way regret and privacy bounds, not an iff."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read Statement and all seven Proof steps against F1\u2013F9/A1 exact supplier statements. Recursion equals cumulative exponential by induction and exponential addition. Potential inequality is pathwise for eta<=1; eta>1 follows from regret<=1. Conditional bounded loss identity gives zero-mean increments, predictable intervals [-mu_t,1-mu_t] have length one and Azuma gives the stated tail. Ordered neighboring full-vector inputs change cumulative coordinates by at most one, hence weight and normalizer ratios each cost exp(eta). Composition hypotheses hold for every common history, with delta_r=0 and 0<delta<1. Three eta caps bound the two composition summands by epsilon/2; reciprocal maximum and both eta0 feasibility equivalences checked. k=T=1, all zero/unit losses and all positive eta included. AC accurately limited to Azuma/composition suppliers; expected bound explicit and choice-free. Interactive claim assumes the requisite common-history inequalities and does not infer them from arbitrary adaptive losses. Dwork\u2013Roth Algorithm15/Theorem11.1 and Theorem3.20 source statements checked (printed pp.223\u2013224,49). No diagrams or hyperlink interruptions. Reader only synchronizes F1 to sound revised procedure; Statement unchanged."
+      }
+    },
+    "thm-private-erm-excess-risk": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-privacy-and-adjacency",
+          "source_section": "Definition",
+          "quote": "Let $U$ be a nonempty set of possible records and let $\\mathbb N_0=\\{0,1,2,\\ldots\\}$. A database is a function $D:U\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(D)=\\{u\\in U:D(u)\\ne0\\}$; $D(u)$ is the number of occurrences of record $u$. Let $\\mathcal D$ be the set of databases and equip it with the power-set sigma-algebra. For $u\\in U$, let $\\mathbf 1_{\\{u\\}}$ be the function that is one at $u$ and zero elsewhere. Two databases $D,D'\\in\\mathcal D$ are neighbors, written $D\\sim D'$, when $D'=D+\\mathbf 1_{\\{u\\}}$ or $D=D'+\\mathbf 1_{\\{u\\}}$ for some $u\\in U$.\n\nA randomized mechanism with output measurable space $(Y,\\mathcal B)$ is a probability kernel $K$ from $\\mathcal D$ to $Y$: for each $D\\in\\mathcal D$, $A\\mapsto K(D,A)$ is a probability measure on $(Y,\\mathcal B)$, and for each $A\\in\\mathcal B$, $D\\mapsto K(D,A)$ is measurable. Given $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$, the mechanism is $(\\varepsilon,\\delta)$-differentially private if, for every ordered neighboring pair $D\\sim D'$ and every output event $A\\in\\mathcal B$,\n\n$$\nK(D,A)\\le e^{\\varepsilon}K(D',A)+\\delta.\n$$\n\nThe mechanism is $\\varepsilon$-differentially private, or pure $\\varepsilon$-differentially private, when $\\delta=0$. The ordered-pair quantifier includes both directions because $\\sim$ is symmetric.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-private-finite-class-erm",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let the binary label set $\\{0,1\\}$ carry its power-set sigma-algebra, and let $\\mathcal C$ be a finite nonempty class of measurable maps $h:\\mathcal X\\to\\{0,1\\}$. Fix an integer $n\\ge1$ and a parameter $\\varepsilon>0$. On an ordered labeled sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ with $m\\ge n$, or on its underlying finite multiset, define\n$$\\widehat L_S(h)=\\frac1m\\sum_{i=1}^m\\mathbf 1\\{h(x_i)\\ne y_i\\},\\qquad w_S(h)=\\exp\\!\\left(-\\frac{\\varepsilon n}{2}\\widehat L_S(h)\\right).$$\nOutput $h\\in\\mathcal C$ with probability $w_S(h)/\\sum_{g\\in\\mathcal C}w_S(g)$. This formula is invariant under permutations of the sample. For the statistical input, the ordered sample space has its finite product sigma-algebra. For the private-database input, the same formula is defined on finite-support record-count functions of size at least $n$, with the power-set sigma-algebra; privacy is proved separately.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-class-agnostic-erm-bound",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a measurable space, let $P$ be a probability law on $\\mathcal X\\times\\{0,1\\}$, and let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. Let $Z_i=(X_i,Y_i)$, $1\\le i\\le m$, be IID with law $P$, where $m\\ge1$, and define $R_P(h)=P\\{h(X)\\ne Y\\}$ and $\\widehat R_S(h)=m^{-1}\\sum_{i=1}^m\\mathbf 1\\{h(X_i)\\ne Y_i\\}$. With natural logarithms, for $0<\\delta<1$ put\n\n$$a_{m,\\mathcal H,\\delta}:=\\sqrt{\\frac{\\log|\\mathcal H|+\\log(2/\\delta)}{2m}}.$$\n\nThen, with probability at least $1-\\delta$, both $|R_P(h)-\\widehat R_S(h)|\\le a_{m,\\mathcal H,\\delta}$ for every $h\\in\\mathcal H$ and\n\n$$R_P(\\widehat h_\\eta(S))-\\inf_{h\\in\\mathcal H}R_P(h)\\le 2a_{m,\\mathcal H,\\delta}+\\eta,$$\n\nfor each fixed finite tolerance $\\eta\\ge0$, where $\\widehat h_\\eta$ is the measurable finite-list empirical-risk selector applied with tolerance $\\eta$ to an ordered list containing every member of $\\mathcal H$ exactly once. In particular, exact ERM ($\\eta=0$) has excess risk at most $2a_{m,\\mathcal H,\\delta}$. The conclusion is agnostic: it assumes no zero-risk classifier. No form of the Axiom of Choice is assumed.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Let $D,D'$ be neighboring databases in the restricted domain and orient them so $D'$ is obtained from $D$ by adding one record $z=(x,y)$. Since both databases are in the domain, $m:=|D|\\ge n$. For $q_h=\\mathbf1\\{h(x)\\ne y\\}\\in\\{0,1\\}$, $\\widehat L_{D'}(h)-\\widehat L_D(h)=(m\\widehat L_D(h)+q_h)/(m+1)-\\widehat L_D(h)=(q_h-\\widehat L_D(h))/(m+1)$. As $q_h,\\widehat L_D(h)\\in[0,1]$, this difference has absolute value at most $1/(m+1)\\le1/n$; reversing the pair gives the same bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For a fixed sample $S$, let $\\widehat L_*=\\min_{h\\in\\mathcal C}\\widehat L_S(h)$, which exists because the class is finite and nonempty. For any $t>0$, the selector's probability that $\\widehat L_S(H)>\\widehat L_*+t$ is at most $|\\mathcal C|\\exp(-\\varepsilon n(\\widehat L_*+t)/2)/\\exp(-\\varepsilon n\\widehat L_*/2)=|\\mathcal C|e^{-\\varepsilon nt/2}$: each event weight is bounded by the numerator term and the normalizer includes a minimizer's weight. With $t=\\frac{2}{\\varepsilon n}(\\ln|\\mathcal C|+\\ln(2/\\beta))>0$, this probability is at most $\\beta/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Apply [F3] with $\\gamma=\\beta/2$. With probability at least $1-\\beta/2$, all $h\\in\\mathcal C$ satisfy $|L_P(h)-\\widehat L_S(h)|\\le a$, where $a=\\sqrt{(\\ln|\\mathcal C|+\\ln(4/\\beta))/(2n)}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Write $w_D(h)=\\exp(-\\varepsilon n\\widehat L_D(h)/2)$ and $Z_D=\\sum_{g\\in\\mathcal C}w_D(g)$. By [F5] and step 1.1, $e^{-\\varepsilon/2}\\le w_D(h)/w_{D'}(h)\\le e^{\\varepsilon/2}$ for each $h$. Summing gives the same two-sided bounds for $Z_D/Z_{D'}$. Each weight and normalizer is positive and finite because the class is finite nonempty and [F5] makes every exponential weight positive. The normalized finite weights therefore form a probability measure on the output class; because the restricted database domain has the power-set sigma-algebra, every event-evaluation function is measurable, so this is a probability kernel. Therefore $(w_D(h)/Z_D)/(w_{D'}(h)/Z_{D'})\\le e^\\varepsilon$. Summing over any event $A\\subseteq\\mathcal C$ proves $K(D,A)\\le e^\\varepsilon K(D',A);$ interchanging $D,D'$ proves the reverse ordered inequality. By [F1] this is pure $\\varepsilon$-DP.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "For every fixed sample, step 1.2 bounds the conditional selector failure probability by $\\beta/2$, so averaging over the sample gives the same joint failure bound. Intersect that utility event with the deviation event from step 1.3; [F4] gives probability at least $1-\\beta$. On the intersection, $\\widehat L_S(H)\\le\\min_g\\widehat L_S(g)+t$, $L_P(H)\\le\\widehat L_S(H)+a$, and for every $h\\in\\mathcal C$, $\\min_g\\widehat L_S(g)\\le\\widehat L_S(h)\\le L_P(h)+a$. Taking the infimum over $h$ in the last inequality and combining yields $L_P(H)-\\inf_hL_P(h)\\le2a+t$, which is the displayed excess-risk bound.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Suppose $|\\mathcal C|\\ge2$ and write $Q=\\ln|\\mathcal C|+\\ln(1/\\beta)\\ge\\ln2$. Then $\\ln|\\mathcal C|+\\ln(4/\\beta)=Q+\\ln4\\le3Q$ and $\\ln|\\mathcal C|+\\ln(2/\\beta)=Q+\\ln2\\le2Q$. The sample-size condition gives $2\\sqrt{3Q/(2n)}\\le\\alpha/2$ and $4Q/(\\varepsilon n)\\le\\alpha/6$, so the bound in step 2.2 is at most $2\\alpha/3\\le\\alpha$. If $|\\mathcal C|=1$, its only classifier is always selected and minimizes population risk over that class, so its excess is zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement now requires X nonempty, as required by the algorithm and DP Definition, as well as n>=1, C finite nonempty and both databases of size at least n. No empty record universe or empty empirical average is invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes epsilon>0 and permits zero empirical loss; steps 1.1 and 1.2 retain positive weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The singleton class case is handled exactly in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The smallest allowed sample size m=n is included; step 1.1 uses 1/(m+1)<=1/n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statistical parameters alpha,beta are strictly between zero and one as stated; step 3.1 proves the bound over that range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite nonempty class has an empirical minimizer without choice; step 1.2 uses a finite minimum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way privacy, utility, and sample-size implications, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way privacy, utility, and sample-size implications, not an iff."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read Statement and all six Proof steps against F1\u2013F5 exact supplier statements and complete current agnostic-ERM and uniform-deviation proofs. Confirmed refuter:29:1: X empty was admitted although the cited selector and DP universe require nonemptiness; repaired Statement/Given to require X nonempty. On restricted add/remove domain, risk difference=(q-Lhat)/(m+1) has magnitude<=1/n, giving weight and normalizer ratio bounds exp(epsilon/2) and event bound exp(epsilon) in both orders. For fixed sample the bad weight tail is |C|exp(-epsilon*n*t/2); measurable finite kernel permits averaging. Apply simultaneous finite-class event at gamma=beta/2 and union bound to give 2a+t, without identifying randomized selector with deterministic ERM. Q>=ln2 implies logarithm shifts <=3Q,2Q; n>=24Q/alpha^2 and 24Q/(epsilon*alpha) give alpha/2+alpha/6<=alpha. n=m=1, singleton C, zero/unit loss, positive epsilon and alpha,beta in (0,1) checked; choice-free. Both consumers have explicit nonempty finite X, so no consumer mathematical edits. No diagrams. Historical supplier readiness note preserved; independent proof review establishes mathematical sufficiency, not engine readiness."
+      }
+    },
+    "ex-online-one-round-replacement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-private-randomized-weighted-majority",
+          "source_section": "Definition",
+          "quote": "Let $k,T$ be positive integers, let $\\eta>0$, and let $[k]=\\{1,\\ldots,k\\}$. The input also supplies a full-information loss process: before the round-$t$ action draw, its vector $\\ell_t\\in[0,1]^k$ is fixed using only the previous transcript and any external randomness, and the vector is revealed after the draw. Put $H_t=([k]\\times[0,1]^k)^{t-1}$, with $H_1=\\{()\\}$, and give $H_t$ its power-set sigma-algebra; these histories have finite length but need not be finite sets. Initialize $w_{1,j}=1$ for each $j\\in[k]$. At round $t$, given $h_{t-1}=((a_s,\\ell_s))_{s<t}$, compute\n$$p_{t,j}=\\frac{w_{t,j}}{\\sum_{r=1}^k w_{t,r}}.$$\nDraw $a_t=j$ with probability $p_{t,j}$, observe the entire vector $\\ell_t$, and update $w_{t+1,j}=w_{t,j}\\exp(-\\eta\\ell_t(j))$. Equivalently, the conditional action kernel is $K_t(h_{t-1},A)=\\sum_{j\\in A}p_{t,j}$ for each $A\\subseteq[k]$. The action draw uses fresh randomness independent of the loss process, so its conditional law given the past and the already fixed current loss vector is $K_t$. Return the action transcript $(a_1,\\ldots,a_T)$.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-private-online-learning-regret-under-composition",
+          "source_section": "Statement",
+          "quote": "Let $k,T\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, let $\\eta>0$, and let each loss vector lie in $[0,1]^k$. Before round $t$ define $w_{t,j}=\\exp(-\\eta\\sum_{s<t}\\ell_s(j))$, $W_t=\\sum_{i=1}^k w_{t,i}$, and $p_{t,j}=w_{t,j}/W_t$. Draw $a_t=j$ with probability $p_{t,j}$, then observe the full vector $\\ell_t$ and update $w_{t+1,j}=w_{t,j}\\exp(-\\eta\\ell_t(j))$; release the transcript $(a_1,\\ldots,a_T)$. For the regret claims, assume a filtered probability model $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t=0}^T,\\mathbb P)$ in which $\\ell_t$ and $p_t$ are $\\mathcal F_{t-1}$-measurable, each action $a_t$ is $\\mathcal F_t$-measurable, and $\\mathbb P(a_t=j\\mid\\mathcal F_{t-1})=p_{t,j}$ for every $j\\in[k]$; hence each prior action is $\\mathcal F_{t-1}$-measurable and the loss vector may depend on the previous transcript but not on the current draw. Set\n$$R_T=\\frac1T\\sum_{t=1}^T\\ell_t(a_t)-\\min_{j\\in[k]}\\frac1T\\sum_{t=1}^T\\ell_t(j).$$\nThen\n$$\\mathbb E R_T\\le \\eta+\\frac{\\ln k}{\\eta T},$$\nfor every such process. Assuming the Axiom of Choice, for every $0<\\beta<1$,\n$$\\Pr\\!\\left(R_T\\le \\eta+\\frac{\\ln k}{\\eta T}+\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}\\right)\\ge1-\\beta.$$\nThe expected-regret proof uses no choice axiom. At $k=1$, $R_T=0$ identically. For $k\\ge2$, substituting $\\eta=\\sqrt{\\ln k/T}$ into the expected-regret bound gives $2\\sqrt{\\ln k/T}$.\n\nFor privacy, let $\\mathcal L_T:=([0,1]^k)^T$ carry the power-set sigma-algebra, regard a fixed sequence $(\\ell_1,\\ldots,\\ell_T)\\in\\mathcal L_T$ as the input, and make two sequences adjacent when one complete time-step vector is replaced by an arbitrary vector in $[0,1]^k$. Give the full action transcript $[k]^T$ its power-set sigma-algebra. For every common prior action history, the round-$t$ action kernels satisfy the ordered event inequalities for $(2\\eta,0)$-differential privacy. Assuming the Axiom of Choice, for every $\\varepsilon>0$ and $0<\\delta<1$, put $L=\\ln(1/\\delta)$ and choose\n$$\\eta=\\min\\left\\{\\frac{\\varepsilon}{\\sqrt{32TL}},\\frac12,\\sqrt{\\frac{\\varepsilon}{16T}}\\right\\}.$$\nThe full transcript is then $(\\varepsilon,\\delta)$-differentially private. With this choice the high-probability bound above is exactly\n$$R_T\\le \\eta+\\frac{\\ln k}{T} \\max\\left\\{\\frac{\\sqrt{32TL}}{\\varepsilon},\\,2,\\,4\\sqrt{\\frac{T}{\\varepsilon}}\\right\\} +\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}$$\nwith probability at least $1-\\beta$. If $\\eta_0=\\varepsilon/\\sqrt{32TL}$ satisfies $\\varepsilon\\le\\sqrt{8TL}$ and $\\varepsilon\\le2L$, then $\\eta=\\eta_0$ and this bound specializes to\n$$R_T\\le \\eta_0+\\frac{\\sqrt{32L}\\,\\ln k}{\\varepsilon\\sqrt T} +\\sqrt{\\frac{\\ln(1/\\beta)}{2T}}.$$\nThe fixed-sequence privacy claim and the nonanticipating adaptive-loss regret claim have distinct input quantifiers. The same privacy conclusion applies on any set of interactive loss-generating strategies equipped with its power-set sigma-algebra and a symmetric adjacency relation, provided that, for each strategy, its action kernels are measurable in the prior transcript and, at every common transcript, they satisfy the ordered $(2\\eta,0)$ event inequalities for every ordered adjacent pair of strategies.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The sequences agree at rounds one and three and differ only at round two, where $(0,0)$ is replaced by $(1,0)$, so they are adjacent by [F2]. Both start with weights $(1,1)$, and the common first loss vector $(0,0)$ leaves those weights unchanged; hence the first- and second-round kernels are uniform.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "After the second loss vector, the all-zero input still has weights $(1,1)$, while the replaced input has weights $(e^{-\\eta},1)$. Dividing by their normalizers yields $(1/2,1/2)$ and $(e^{-\\eta}/(1+e^{-\\eta}),1/(1+e^{-\\eta}))=(1/(1+e^\\eta),e^\\eta/(1+e^\\eta))$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For the event $\\{1\\}$ at round three, the all-zero probability divided by the replaced-input probability is $(1/2)/(1/(1+e^\\eta))=(1+e^\\eta)/2$. Thus the third-round kernels differ, while their ordered ratios remain covered by the theorem's $(2\\eta,0)$ bound from [F2]; this calculation makes no claim that a transcript-level privacy bound fails.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes k=2 and T=3, so both inputs and the action space are nonempty; step 1.1 checks the initial kernels."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The all-zero sequence is included and its first two weights are computed in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes two actions and three rounds, so it contains no singleton-action or one-round boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The first two round kernels coincide while round three changes; steps 1.1 and 2.1 show the timing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Eta is strictly positive as required in the Example; steps 2.1 and 3.1 hold for every such eta."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The output set {1,2} is finite and nonempty; the normalized probabilities are computed in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The Example asserts no biconditional. Actual item evidence: The fixed k=2,T=3 example compares all-zero losses with replacement of the second complete vector. Verification1.1 proves adjacency and uniform first-two kernels,2.1 computes third-round weights, and3.1 gives the ratio(1+exp(eta))/2 while explicitly preserving the theorem's privacy bound. This is a direct example of differing kernels, not a necessary-and-sufficient criterion.",
+            "item_sha256": "c37dfd4905201860729c28bd56058f4fd6b73da29fa0b6dcf52e634cc916779c",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The Example asserts no biconditional. Actual item evidence: The fixed k=2,T=3 example compares all-zero losses with replacement of the second complete vector. Verification1.1 proves adjacency and uniform first-two kernels,2.1 computes third-round weights, and3.1 gives the ratio(1+exp(eta))/2 while explicitly preserving the theorem's privacy bound. This is a direct example of differing kernels, not a necessary-and-sufficient criterion.",
+            "item_sha256": "c37dfd4905201860729c28bd56058f4fd6b73da29fa0b6dcf52e634cc916779c",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-private-threshold-class-erm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-private-finite-class-erm",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let the binary label set $\\{0,1\\}$ carry its power-set sigma-algebra, and let $\\mathcal C$ be a finite nonempty class of measurable maps $h:\\mathcal X\\to\\{0,1\\}$. Fix an integer $n\\ge1$ and a parameter $\\varepsilon>0$. On an ordered labeled sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ with $m\\ge n$, or on its underlying finite multiset, define\n$$\\widehat L_S(h)=\\frac1m\\sum_{i=1}^m\\mathbf 1\\{h(x_i)\\ne y_i\\},\\qquad w_S(h)=\\exp\\!\\left(-\\frac{\\varepsilon n}{2}\\widehat L_S(h)\\right).$$\nOutput $h\\in\\mathcal C$ with probability $w_S(h)/\\sum_{g\\in\\mathcal C}w_S(g)$. This formula is invariant under permutations of the sample. For the statistical input, the ordered sample space has its finite product sigma-algebra. For the private-database input, the same formula is defined on finite-support record-count functions of size at least $n$, with the power-set sigma-algebra; privacy is proved separately.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-private-finite-class-erm",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let the binary label set $\\{0,1\\}$ carry its power-set sigma-algebra, and let $\\mathcal C$ be a finite nonempty class of measurable maps $h:\\mathcal X\\to\\{0,1\\}$. Fix an integer $n\\ge1$ and a parameter $\\varepsilon>0$. On an ordered labeled sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ with $m\\ge n$, or on its underlying finite multiset, define\n$$\\widehat L_S(h)=\\frac1m\\sum_{i=1}^m\\mathbf 1\\{h(x_i)\\ne y_i\\},\\qquad w_S(h)=\\exp\\!\\left(-\\frac{\\varepsilon n}{2}\\widehat L_S(h)\\right).$$\nOutput $h\\in\\mathcal C$ with probability $w_S(h)/\\sum_{g\\in\\mathcal C}w_S(g)$. This formula is invariant under permutations of the sample. For the statistical input, the ordered sample space has its finite product sigma-algebra. For the private-database input, the same formula is defined on finite-support record-count functions of size at least $n$, with the power-set sigma-algebra; privacy is proved separately.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $r=0$, the predictions on $0,1,2$ are $(1,1,1)$, which disagree with labels $(0,1,0)$ twice. For $r=1$, predictions are $(0,1,1)$ and disagree once; for $r=2$, predictions are $(0,0,1)$ and disagree twice; for $r=3$, predictions are $(0,0,0)$ and disagree once. Dividing by the three records gives risks $(2/3,1/3,2/3,1/3)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F1] with $n=3$, a risk $2/3$ gives weight $\\exp(-3\\varepsilon(2/3)/2)=e^{-\\varepsilon}$ and a risk $1/3$ gives weight $\\exp(-3\\varepsilon(1/3)/2)=e^{-\\varepsilon/2}$. Therefore the normalizer is $Z=2e^{-\\varepsilon}+2e^{-\\varepsilon/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Dividing the weights by $Z=2e^{-\\varepsilon/2}(1+e^{-\\varepsilon/2})$ gives probability $1/[2(1+e^{\\varepsilon/2})]$ for each risk-$2/3$ threshold and probability $e^{\\varepsilon/2}/[2(1+e^{\\varepsilon/2})]$ for each risk-$1/3$ threshold. The four probabilities sum to one, since the two groups have total masses $1/(1+e^{\\varepsilon/2})$ and $e^{\\varepsilon/2}/(1+e^{\\varepsilon/2})$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example has a nonempty three-record database and four thresholds; step 1.1 computes every loss."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-one losses include both 0 and 1; step 1.1 includes the endpoint losses."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes four thresholds and three records; it makes no singleton-class or one-example claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The empirical risks tie in two pairs; steps 1.1 and 3.1 verify that ties normalize correctly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Epsilon is strictly positive; steps 2.1 and 3.1 preserve finite positive weights and probabilities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The four threshold maps form a finite nonempty output class; step 3.1 verifies probabilities sum to one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The Example asserts no biconditional. Actual item evidence: The Example fixes four thresholds, three labeled records and epsilon>0. Verification1.1 enumerates all prediction errors,2.1 evaluates their four weights, and3.1 normalizes the two tied groups. The displayed equalities calculate this supplied example; they do not assert an iff characterization of general private ERM or a reverse implication from output probabilities.",
+            "item_sha256": "5230b8ccfd44b734ed12163448ac2b179e5ae50929e6374ab3409380e3f2d677",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The Example asserts no biconditional. Actual item evidence: The Example fixes four thresholds, three labeled records and epsilon>0. Verification1.1 enumerates all prediction errors,2.1 evaluates their four weights, and3.1 normalizes the two tied groups. The displayed equalities calculate this supplied example; they do not assert an iff characterization of general private ERM or a reverse implication from output probabilities.",
+            "item_sha256": "5230b8ccfd44b734ed12163448ac2b179e5ae50929e6374ab3409380e3f2d677",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-private-erm-large-finite-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-private-erm-excess-risk",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let $\\mathcal C$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$, let $n\\ge1$ be an integer, and let $\\varepsilon>0$. On the domain of finite labeled databases of size at least $n$, use add/remove adjacency, with both neighboring databases required to remain in the domain. For a database $D$ of size $m\\ge n$, write\n$$\\widehat L_D(h)=\\frac1m\\sum_{(x,y)\\in D}\\mathbf1\\{h(x)\\ne y\\},$$\nwhere records are counted with multiplicity. The finite-class exponential selector that outputs $h\\in\\mathcal C$ with probability proportional to $\\exp(-\\varepsilon n\\widehat L_D(h)/2)$ is pure $\\varepsilon$-differentially private on this domain.\n\nFor the statistical guarantee, let $P$ be any probability law on $\\mathcal X\\times\\{0,1\\}$, let $Z_1,\\ldots,Z_n$ be IID with law $P$, and apply the same selector to their labeled sample. Define the population risk $L_P(h)=P\\{h(X)\\ne Y\\}$. For every $0<\\beta<1$, with probability at least $1-\\beta$ over both the sample and the selector's random draw, its output $H$ satisfies\n$$L_P(H)-\\inf_{h\\in\\mathcal C}L_P(h) \\le 2\\sqrt{\\frac{\\ln|\\mathcal C|+\\ln(4/\\beta)}{2n}} +\\frac{2}{\\varepsilon n}\\left(\\ln|\\mathcal C|+\\ln(2/\\beta)\\right).$$\nIf $|\\mathcal C|\\ge2$ and $0<\\alpha,\\beta<1$, then\n$$n\\ge24\\max\\left\\{ \\frac{\\ln|\\mathcal C|+\\ln(1/\\beta)}{\\varepsilon\\alpha}, \\frac{\\ln|\\mathcal C|+\\ln(1/\\beta)}{\\alpha^2} \\right\\}$$\nsuffices to make this excess risk at most $\\alpha$ with probability at least $1-\\beta$. If $|\\mathcal C|=1$, the excess risk is identically zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-private-finite-class-erm",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a nonempty measurable space, let the binary label set $\\{0,1\\}$ carry its power-set sigma-algebra, and let $\\mathcal C$ be a finite nonempty class of measurable maps $h:\\mathcal X\\to\\{0,1\\}$. Fix an integer $n\\ge1$ and a parameter $\\varepsilon>0$. On an ordered labeled sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ with $m\\ge n$, or on its underlying finite multiset, define\n$$\\widehat L_S(h)=\\frac1m\\sum_{i=1}^m\\mathbf 1\\{h(x_i)\\ne y_i\\},\\qquad w_S(h)=\\exp\\!\\left(-\\frac{\\varepsilon n}{2}\\widehat L_S(h)\\right).$$\nOutput $h\\in\\mathcal C$ with probability $w_S(h)/\\sum_{g\\in\\mathcal C}w_S(g)$. This formula is invariant under permutations of the sample. For the statistical input, the ordered sample space has its finite product sigma-algebra. For the private-database input, the same formula is defined on finite-support record-count functions of size at least $n$, with the power-set sigma-algebra; privacy is proved separately.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "There are two independent choices for each of the $d$ coordinates of a point in $\\{0,1\\}^d$, so $|\\mathcal X|=2^d$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "A map $h:\\mathcal X\\to\\{0,1\\}$ is determined by one binary value at each of the $2^d$ domain points, and every such assignment defines a map. Hence there are $2^{2^d}$ maps, so $|\\mathcal C|=2^{2^d}$ and $\\ln|\\mathcal C|=2^d\\ln2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Since $d\\ge1$, $|\\mathcal C|\\ge2$. Substituting $\\ln|\\mathcal C|=2^d\\ln2$ into [F1] gives exactly the displayed sufficient sample-size condition.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "By [F2], the normalizer contains $|\\mathcal C|=2^{2^d}$ terms. Directly computing one empirical risk by evaluating its loss on each of the $m$ records takes $m$ loss evaluations; doing this for every hypothesis uses $m|\\mathcal C|=m\\,2^{2^d}$ such evaluations. This is the cost of that exhaustive procedure; the count alone does not rule out an implementation that exploits structure or samples from the same distribution without explicitly listing every hypothesis.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires d>=1, making the finite domain and class nonempty; steps 1.1 and 2.1 count them."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boundary d=0 is excluded by d>=1 and alpha,beta,epsilon are positive in the Example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At d=1 the formula yields four classifiers and step 2.1 applies without an asymptotic assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For every d>=1 the all-functions class has at least two members; step 2.1 verifies its cardinality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parameters alpha,beta lie strictly inside (0,1) and epsilon>0 in the Statement; step 3.1 substitutes them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The class is all assignments on a finite domain; step 2.1 constructs it by finite binary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-forward disposition: The Example asserts no biconditional. Actual item evidence: For d>=1 the Example counts all binary maps on{0,1}^d. Verification1.1\u20132.1 computes class size2^(2^d),3.1 substitutes its logarithm into a sufficient sample bound, and4.1 counts only the literal exhaustive implementation. It explicitly disclaims a lower bound for all algorithms and asserts no biconditional or converse to the sufficient guarantee.",
+            "item_sha256": "1c0bf6284719b169c7711a2f06a8cc6ccb7981b60a7c3961b5d925022661720b",
+            "row_sha256": "a5072be23b5bfb7ac8e0aafab204b5529e8851df50371b28f2fb987fa2619bb6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example asserts no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_margin53",
+            "reason": "Focused iff-reverse disposition: The Example asserts no biconditional. Actual item evidence: For d>=1 the Example counts all binary maps on{0,1}^d. Verification1.1\u20132.1 computes class size2^(2^d),3.1 substitutes its logarithm into a sufficient sample bound, and4.1 counts only the literal exhaustive implementation. It explicitly disclaims a lower bound for all algorithms and asserts no biconditional or converse to the sufficient guarantee.",
+            "item_sha256": "1c0bf6284719b169c7711a2f06a8cc6ccb7981b60a7c3961b5d925022661720b",
+            "row_sha256": "77756435c13a762ce71040cdd7a689e2d5dce488291672d43c3d1f4e1e39c801"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  },
+  "excluded_escalations": []
+}

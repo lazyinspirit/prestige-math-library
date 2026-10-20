@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "57",
+  "pair": "reconstruction-and-masked-autoencoders",
+  "scope": [
+    "def-reconstruction-autoencoder",
+    "alg-masked-autoencoder-pretraining",
+    "ex-reconstruction-objective-shortcut"
+  ],
+  "contracts": {
+    "def-reconstruction-autoencoder": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This definition concerns finite empirical risks on fixed patch grids.: the stated positive-size input domain excludes an empty training set or patch grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: M, q, and n are positive integers; the masked branch further requires M≥2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the unmasked risks allow M=1 and q=1; the masked branch allows k=1 when M≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For $T=T_{\\rm norm}$, all masked-objective formulas below are defined only on $\\mathcal D_{\\rm norm}$. The raw target has no such restriction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the masked branch excludes k=0 and k=M, so at least one patch is visible and at least one is scored."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: masks are averaged over the specified finite nonempty family; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-57-author",
+        "notes": "Checked general population and finite empirical risk domains, measurability assumptions, unrestricted joint clean/corrupted law, extended nonnegative expectation, finite uniform mask law, normalized-target boundary, and no unasserted equivalence with unmasked risk. This author-side record is not independent approval."
+      }
+    },
+    "alg-masked-autoencoder-pretraining": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This algorithm runs on a finite nonempty training set and fixed finite patch grid.: the stated positive-size input domain excludes an empty training set or patch grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the algorithm requires n≥1, M≥2, q≥1, 1≤k<M, and finite gradients on reached iterates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the boundary J=0 is allowed and returns the initial encoder; n=1, q=1, and k=1 with M=2 are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the normalized target branch requires positive standard deviation for every training patch; the raw target branch does not."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: mask-count endpoints k=0 and k=M are excluded; every admissible mask has visible and masked positions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: each mask is sampled from a specified finite nonempty family, with no arbitrary choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-57-author",
+        "notes": "Checked all procedure inputs, the empty-update boundary, finite mask sampling, gradient admissibility, and lack of any convergence claim. This author-side record is not independent approval."
+      }
+    },
+    "ex-reconstruction-objective-shortcut": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reconstruction-autoencoder",
+          "source_section": "Definition",
+          "quote": "Fix integers $M,q\\ge1$, set $[M]=\\{1,\\ldots,M\\}$, and write the image space on a fixed patch grid as $\\mathcal X=(\\mathbb R^q)^M$. A measurable space is a set with a specified sigma-algebra; equip $\\mathcal X$ and a finite-dimensional latent space $\\mathcal Z$ with such structures. An image is $x=(x_1,\\ldots,x_M)\\in\\mathcal X$, with $q$ real pixel values in each of its $M$ patches. Let $S=(x^{(1)},\\ldots,x^{(n)})$ be a finite training set with $n\\ge1$. For $u\\in\\mathbb R^q$, set $\\|u\\|_2^2=\\sum_{r=1}^q u_r^2$. For $V\\subseteq[M]$ let $\\mathcal Z^V=\\{(z_j)_{j\\in V}:z_j\\in\\mathcal Z\\}$. For unmasked reconstruction, the encoder and decoder are deterministic measurable maps $E_\\phi:\\mathcal X\\to\\mathcal Z$ and $D_\\psi:\\mathcal Z\\to\\mathcal X$. For masked reconstruction, the encoder is a measurable deterministic map $(V,(x_j)_{j\\in V})\\mapsto(z_j)_{j\\in V}\\in\\mathcal Z^V$, and the decoder maps the ordered length-$M$ sequence of encoded visible tokens and mask tokens to an element of $\\mathcal X$. Each mask token is one learned vector $m\\in\\mathcal Z$ reused at every masked position. All maps take finite real values; when implemented by feedforward neural networks, each is a finite computation graph evaluated in the layered order of its vertices.\n\nLet $X:\\Omega\\to\\mathcal X$ be a measurable random image on a probability space. Assume that the displayed squared-loss random variables are measurable. The **population reconstruction risk** is\n$$R_{\\rm rec}(\\phi,\\psi;X):=\\mathbb E\\left[\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(X))_j-X_j\\|_2^2\\right]\\in[0,+\\infty].$$\nA stochastic denoising corruption is any measurable random image $\\widetilde X:\\Omega\\to\\mathcal X$ on the same probability space as the clean image $X$; their dependence may be arbitrary, with no restriction on support. The **population denoising risk** reconstructs the clean image:\n$$R_{\\rm den}(\\phi,\\psi;X,\\widetilde X):=\\mathbb E\\left[\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(\\widetilde X))_j-X_j\\|_2^2\\right]\\in[0,+\\infty].$$\nThese expectations use the extended integral of a nonnegative measurable random variable, so they may be infinite.\n\nThe **empirical reconstruction risk** on uncorrupted images is\n$$R_{\\rm rec}^{\\rm emp}(\\phi,\\psi;S):=\\frac1{nMq}\\sum_{i=1}^n\\sum_{j=1}^M\\|D_\\psi(E_\\phi(x^{(i)}))_j-x^{(i)}_j\\|_2^2.$$\n\nA **finite denoising corruption law** assigns to each training image $x^{(i)}$ a finite set $C_i$ of corrupted images and weights $c_i(\\tilde x)\\ge0$ with $\\sum_{\\tilde x\\in C_i}c_i(\\tilde x)=1$. The empirical denoising risk is the finite-support specialization of the population risk:\n$$R_{\\rm den}^{\\rm emp}(\\phi,\\psi;S,C):=\\frac1n\\sum_{i=1}^n\\sum_{\\tilde x\\in C_i}c_i(\\tilde x)\\frac1{Mq}\\sum_{j=1}^M\\|D_\\psi(E_\\phi(\\tilde x))_j-x^{(i)}_j\\|_2^2.$$\n\nFor masked autoencoding, fix an integer $k$ with $1\\le k<M$ and let $\\mathcal V_k=\\{V\\subseteq[M]:|V|=k\\}$, a set with cardinality $\\binom{M}{k}$. A mask $V$ is sampled uniformly from $\\mathcal V_k$; the patches in $V$ are visible and the patches in $[M]\\setminus V$ are masked. The encoder receives only the visible patches, with their positions, and no mask tokens. The decoder receives the encoded visible patches and a shared learned mask token at each missing position, with position information for all $M$ slots, and outputs predictions $\\hat x_j(\\phi,\\psi;x,V)\\in\\mathbb R^q$ for every patch position.\n\nThe original-pixel target map is $T_{\\rm raw}(u)=u$. The optional normalized-pixel target is defined for $u=(u_1,\\ldots,u_q)$ with positive standard deviation by\n$$\\bar u:=\\frac1q\\sum_{r=1}^q u_r,\\qquad s(u):=\\left(\\frac1q\\sum_{r=1}^q(u_r-\\bar u)^2\\right)^{1/2}>0,\\qquad T_{\\rm norm}(u):=\\frac{u-\\bar u\\mathbf 1}{s(u)},$$\nwhere $\\mathbf 1=(1,\\ldots,1)\\in\\mathbb R^q$.\nThe target choice $T$ is one of these maps. Define\n$$\\mathcal D_{\\rm norm}:=\\{x\\in\\mathcal X:s(x_j)>0\\text{ for every }j\\in[M]\\}.$$\nFor $T=T_{\\rm norm}$, all masked-objective formulas below are defined only on $\\mathcal D_{\\rm norm}$. Thus a finite empirical objective requires $x^{(i)}\\in\\mathcal D_{\\rm norm}$ for every $i$, and the population objective requires $\\mathbb P(X\\in\\mathcal D_{\\rm norm})=1$; the raw target has no such restriction. The **per-example masked-patch mean squared error**, its population objective, and its finite empirical objective are\n$$\\ell_{\\rm MAE}(\\phi,\\psi;x,V,T):=\\frac1{(M-k)q}\\sum_{j\\in[M]\\setminus V}\\|\\hat x_j(\\phi,\\psi;x,V)-T(x_j)\\|_2^2,$$\n$$R_{\\rm MAE}(\\phi,\\psi;X,k,T):=\\frac1{\\binom Mk}\\sum_{V\\in\\mathcal V_k}\\mathbb E[\\ell_{\\rm MAE}(\\phi,\\psi;X,V,T)],$$\n$$R_{\\rm MAE}^{\\rm emp}(\\phi,\\psi;S,k,T):=\\frac1{n\\binom Mk}\\sum_{i=1}^n\\sum_{V\\in\\mathcal V_k}\\ell_{\\rm MAE}(\\phi,\\psi;x^{(i)},V,T).$$\nThe population objective averages the expectation over the image law for each fixed mask; equivalently, it is the joint expectation for an independent uniform mask. The finite empirical objective averages over every training image and mask.\n\nBecause the encoder input and decoder output depend on $V$ and the loss is evaluated only on $[M]\\setminus V$, this is an expectation of a mask-dependent loss. It is not defined as an estimator of the separate full-image risk $R_{\\rm rec}$, and no equality or unbiasedness between these objectives is asserted. Neither loss alone guarantees that a learned code retains distinctions needed for a downstream label (semantic sufficiency), uniquely determines an underlying data-generating parameter (identifiability), or improves performance on a specified later task (downstream feature quality).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-masked-autoencoder-pretraining",
+          "source_section": "Definition",
+          "quote": "Let $S=(x^{(1)},\\ldots,x^{(n)})$ be a finite image training set on one fixed grid with $M$ patches of $q$ pixel values each. Choose a visible count $k$ with $1\\le k<M$, a finite update count $J\\ge0$, differentiable encoder and decoder families parameterized by $\\theta=(\\phi,\\psi,m)\\in\\Theta\\subseteq\\mathbb R^p$, an initial parameter vector $\\theta_0\\in\\Theta$, an optimizer state set $\\mathcal S$, and an initial optimizer state $s_0\\in\\mathcal S$. Choose either the original-pixel target $T(u)=u$ or, provided every patch of every training image has positive standard deviation, the normalized target $T(u)=(u-\\bar u\\mathbf 1)/s(u)$, where $\\bar u=q^{-1}\\sum_{r=1}^q u_r$ and $s(u)=(q^{-1}\\sum_{r=1}^q(u_r-\\bar u)^2)^{1/2}$. For each $V\\subseteq[M]$ with $|V|=k$, the encoder is a map from $V$ and the visible patch values to one encoded token at each position in $V$; it receives no mask tokens. The decoder is a map from the ordered length-$M$ sequence of encoded visible tokens and one shared learned vector $m$ at every position in $[M]\\setminus V$ to predictions $\\hat x_j\\in\\mathbb R^q$ at every patch position. Position $j$ is supplied to the maps as its index. Require that the masked mean squared error\n$$\\frac1{(M-k)q}\\sum_{j\\in[M]\\setminus V}\\|\\hat x_j-T(x_j)\\|_2^2$$\nhas a finite parameter gradient at every iterate reached by the procedure.\n\nAn **optimizer update schedule** is a supplied finite family of maps $U_t:(\\Theta\\times\\mathcal S)\\times\\mathbb R^p\\to\\Theta\\times\\mathcal S$ for $0\\le t<J$, each defined on its entire displayed domain. When $\\Theta=\\mathbb R^p$, plain stochastic gradient descent with step sizes $\\eta_t>0$ is the special case $U_t((\\theta,s),g)=(\\theta-\\eta_tg,s)$.\n\nFor each $t=0,\\ldots,J-1$, perform the following steps.\n\n1. Sample $I_t$ uniformly from $\\{1,\\ldots,n\\}$ and, independently, sample $V_t$ uniformly from $\\mathcal V_k=\\{V\\subseteq[M]:|V|=k\\}$. Sampling is with replacement across different update steps.\n2. Apply the encoder to the visible patch values at positions in $V_t$. Restore their original order, insert the shared learned vector $m$ at every position in $[M]\\setminus V_t$, and supply each position index to the decoder. Apply the decoder to this full ordered sequence to obtain $\\hat x_{t,j}\\in\\mathbb R^q$ for every $j\\in[M]$.\n3. Compute $L_t=((M-k)q)^{-1}\\sum_{j\\in[M]\\setminus V_t}\\|\\hat x_{t,j}-T(x^{(I_t)}_j)\\|_2^2$, compute $g_t=\\nabla_\\theta L_t$, and update $(\\theta_{t+1},s_{t+1})=U_t((\\theta_t,s_t),g_t)$.\n\nReturn the trained encoder $E_{\\phi_J}$ and parameter vector $\\theta_J$. The decoder is used during pretraining and may be discarded afterward. The mask ratio is $\\rho=(M-k)/M$. The procedure defines finite stochastic updates only; it does not assert that the updates converge to a minimizer or that the returned representation is semantically sufficient.\n\nThe diagram records the data flow. Solid arrows pass data or predictions; the bottom comparison uses only positions in $[M]\\setminus V$. The definitions and numbered instructions specify the algorithm completely, and no proof or property relies on the diagram.\n\n```tikz\n\\begin{tikzpicture}[>=stealth,scale=0.78,transform shape]\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (input) at (0,0) {Input patch\\\\sequence};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (mask) at (2.7,0) {Uniformly sample\\\\visible positions};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (enc) at (5.4,0) {Encoder sees\\\\visible patches only};\n  \\node[draw,rounded corners,align=center,minimum width=2.4cm,minimum height=0.8cm] (restore) at (8.3,0) {Insert learned tokens\\\\at missing positions};\n  \\node[draw,rounded corners,align=center,minimum width=2.1cm,minimum height=0.8cm] (dec) at (11.2,0) {Decoder};\n  \\node[draw,rounded corners,align=center,minimum width=2.3cm,minimum height=0.8cm] (pred) at (14,0) {Predictions at\\\\all positions};\n  \\node[draw,rounded corners,align=center,minimum width=3.0cm,minimum height=0.8cm] (loss) at (8.3,-1.7) {Masked-patch MSE\\\\only};\n  \\node[draw,rounded corners,align=center,minimum width=2.8cm,minimum height=0.8cm] (target) at (3.4,-1.7) {Clean targets at\\\\missing positions};\n  \\draw[->] (input) -- (mask);\n  \\draw[->] (mask) -- node[above] {visible subset} (enc);\n  \\draw[->] (enc) -- (restore);\n  \\draw[->] (restore) -- (dec);\n  \\draw[->] (dec) -- (pred);\n  \\draw[->] (pred) |- (loss);\n  \\draw[->] (target) -- (loss);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-feedforward-neural-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A finite feedforward computation graph from $\\mathbb R^d$ to $\\mathbb R^r$ consists of a finite directed graph $(V,E)$ with no directed cycle; pairwise disjoint input, hidden, and output vertex sets $I,H,O$ whose union is $V$; exactly $d$ input vertices and $r$ output vertices; and a specified ordering of $V$ in which the tail of every directed edge precedes its head. The input vertices are labelled bijectively by the coordinates $1,\\ldots,d$, and input vertex $i$ has value $x_i$ for $x\\in\\mathbb R^d$. Each non-input vertex $v$ has a real bias $b_v$, a real weight $w_{uv}$ for every edge $u\\to v$, and a real activation function $\\rho_v$. In the specified order, its value is\n\n$$z_v=\\rho_v\\!\\left(b_v+\\sum_{u:\\,u\\to v}w_{uv}z_u\\right).$$\n\nThe network output is the vector of values at $O$. A layered multilayer perceptron is the specialization with layers $V_0,\\ldots,V_L$, where $V_0=I$, $V_L=O$, and every edge goes from $V_{\\ell-1}$ to $V_\\ell$ for some $\\ell$; the hidden vertices use a shared activation and the output vertices use the identity activation. A fully connected layered perceptron includes every edge between consecutive layers. The fixed ordering makes the recursive evaluation unambiguous and is part of the graph data.\n\nThe diagram shows the edge direction and evaluation convention for a fully connected scalar-output perceptron with one hidden layer. Each circle is one scalar-valued node; the hidden nodes apply $\\sigma$ and the output node is linear. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.5cm]\n  \\node[draw,circle] (x1) {$x_1$};\n  \\node[draw,circle,below of=x1] (x2) {$x_2$};\n  \\node[draw,circle,right of=x1,yshift=-0.35cm] (h1) {$\\sigma$};\n  \\node[draw,circle,below of=h1] (h2) {$\\sigma$};\n  \\node[draw,circle,right of=h1,yshift=-0.35cm] (y) {$y$};\n  \\draw[->] (x1) -- (h1);\n  \\draw[->] (x1) -- (h2);\n  \\draw[->] (x2) -- (h1);\n  \\draw[->] (x2) -- (h2);\n  \\draw[->] (h1) -- (y);\n  \\draw[->] (h2) -- (y);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $p_0$, the mean is $1/4$ and the standard deviation is $1/4$; for $p_1$, they are $3/4$ and $1/4$. Hence [F1] gives $T_{\\rm norm}(p_0)=(-1,1)=T_{\\rm norm}(p_1)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Both patches of either image have this same normalized target. By [F2], each mask leaves exactly one masked patch, and the decoder predicts $(-1,1)$ there. Its squared error is zero, so the per-example loss [F1] is zero for every image-mask outcome. The finite expectation [F3] is therefore zero.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The encoder returns $z_*$ for both differently labelled images. Any deterministic classifier applied only to this code has the same output on both images, so it cannot classify both labels correctly. The constant maps are permitted finite feedforward maps by [F4], taking zero incoming weights and fixed biases.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example has two images, two patches per image, and one visible patch.: the stated positive-size input domain excludes an empty training set or patch grid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: there are no zero-sized patches or pixel vectors; q=2 and both patch types are nonzero vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: M=2, q=2, n=2, and k=1, the smallest masked grid with one visible and one masked patch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: both patch standard deviations equal 1/4, so the normalized target is defined and no zero-variance convention is invoked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: the only admissible masks are {1} and {2}, and both have zero loss."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: the finite image-mask law has four outcomes, all explicitly assigned zero loss; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-57-author",
+        "notes": "Recomputed both normalized targets, verified zero loss for each of the four image-mask outcomes, and checked that a constant code cannot separate the two labels. This author-side record is not independent approval."
+      }
+    }
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "group": "a",
+  "batches": [
+    "3"
+  ],
+  "pages_read": [
+    "finite-class-pac-learning-and-erm",
+    "finite-class-pac-learning-and-erm-examples"
+  ],
+  "items_read": [
+    "def-realizable-and-agnostic-pac",
+    "thm-finite-class-agnostic-erm-bound",
+    "thm-finite-class-realizable-pac-bound",
+    "thm-finite-class-sample-complexity",
+    "ex-finite-lookup-table-pac-sample-complexities",
+    "ex-duplicate-predictors-and-distinct-class-size",
+    "ex-zero-training-error-can-have-positive-population-risk"
+  ],
+  "conventions": [
+    {
+      "convention": "Classes are finite nonempty sets of measurable binary classifiers; labels have the discrete sigma-algebra and risk uses zero-one loss.",
+      "fixed_by": "def-realizable-and-agnostic-pac",
+      "matters_for": [
+        "thm-finite-class-agnostic-erm-bound",
+        "thm-finite-class-realizable-pac-bound",
+        "thm-finite-class-sample-complexity",
+        "ex-finite-lookup-table-pac-sample-complexities",
+        "ex-duplicate-predictors-and-distinct-class-size",
+        "ex-zero-training-error-can-have-positive-population-risk"
+      ]
+    },
+    {
+      "convention": "Samples have positive integer size and mutually independent observations with a common joint law. Realizability means existence of a class member with zero population risk, hence agreement almost surely rather than at every instance.",
+      "fixed_by": "def-realizable-and-agnostic-pac",
+      "matters_for": [
+        "thm-finite-class-realizable-pac-bound",
+        "thm-finite-class-sample-complexity",
+        "ex-zero-training-error-can-have-positive-population-risk"
+      ]
+    },
+    {
+      "convention": "A deterministic learner is measurable into the finite discrete hypothesis class. A randomized learner has a measurable output map and an independent seed; its PAC probability includes both sample and seed.",
+      "fixed_by": "def-realizable-and-agnostic-pac",
+      "matters_for": [
+        "thm-finite-class-agnostic-erm-bound",
+        "thm-finite-class-realizable-pac-bound",
+        "thm-finite-class-sample-complexity"
+      ]
+    },
+    {
+      "convention": "The agnostic selector uses a fixed finite tolerance η ≥ 0 and an ordered enumeration containing each distinct classifier exactly once; the deviation event controls the whole class.",
+      "fixed_by": "thm-finite-class-agnostic-erm-bound",
+      "matters_for": [
+        "thm-finite-class-sample-complexity",
+        "ex-duplicate-predictors-and-distinct-class-size"
+      ]
+    },
+    {
+      "convention": "Logarithms are natural. Sample-complexity formulas are sufficient upper bounds, with 0 < ε, δ < 1 and 0 ≤ η < ε for approximate agnostic ERM; they assert neither optimality nor computational efficiency.",
+      "fixed_by": "thm-finite-class-sample-complexity",
+      "matters_for": [
+        "ex-finite-lookup-table-pac-sample-complexities",
+        "ex-duplicate-predictors-and-distinct-class-size"
+      ]
+    },
+    {
+      "convention": "Duplicate classifiers are removed by retaining their first occurrences, preserving the selected classifier for every sample and finite tolerance.",
+      "fixed_by": "ex-duplicate-predictors-and-distinct-class-size",
+      "matters_for": [
+        "ex-duplicate-predictors-and-distinct-class-size"
+      ]
+    },
+    {
+      "convention": "All three finite-class theorem proofs assume no form of the Axiom of Choice.",
+      "fixed_by": "thm-finite-class-agnostic-erm-bound",
+      "matters_for": [
+        "thm-finite-class-realizable-pac-bound",
+        "thm-finite-class-sample-complexity"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-realizable-and-agnostic-pac",
+      "statement": "For finite nonempty measurable binary H, realizability means some h* ∈ H has R_P(h*) = 0. Realizable PAC requires P{R_P(A(S)) ≤ ε} ≥ 1 − δ for every realizable law; agnostic PAC requires P{R_P(A(S)) − inf_H R_P ≤ ε} ≥ 1 − δ for every law. Learners are measurable, and randomized criteria include an independent seed.",
+      "used_by": [
+        "thm-finite-class-agnostic-erm-bound",
+        "thm-finite-class-realizable-pac-bound",
+        "thm-finite-class-sample-complexity",
+        "def-vc-pac-learning-criterion",
+        "def-pool-based-realizable-active-learning",
+        "rem-active-label-complexity-and-noisy-oracles"
+      ]
+    },
+    {
+      "id": "thm-finite-class-agnostic-erm-bound",
+      "statement": "For a finite nonempty measurable binary class H and m ≥ 1 IID observations, let a = sqrt((log|H| + log(2/δ))/(2m)), where 0 < δ < 1. With probability at least 1 − δ, every classifier has absolute population–empirical deviation at most a, and the measurable finite-list η-ERM has excess risk at most 2a + η for each fixed finite η ≥ 0. No realizability or choice axiom is assumed.",
+      "used_by": [
+        "thm-finite-class-sample-complexity",
+        "thm-private-erm-excess-risk"
+      ]
+    },
+    {
+      "id": "thm-finite-class-realizable-pac-bound",
+      "statement": "For a finite nonempty measurable binary class H admitting a zero-risk member and m ≥ 1 IID observations, the measurable finite-list exact ERM satisfies P{R_P(output) ≤ ε} ≥ 1 − δ whenever 0 < ε, δ < 1 and m ≥ (log|H| + log(1/δ))/ε. The proof is choice-free.",
+      "used_by": [
+        "thm-finite-class-sample-complexity"
+      ]
+    },
+    {
+      "id": "thm-finite-class-sample-complexity",
+      "statement": "For finite nonempty measurable binary H of size N and 0 < ε, δ < 1, finite-list exact ERM is realizable PAC for m ≥ (log N + log(1/δ))/ε. For arbitrary laws, fixed 0 ≤ η < ε finite-list η-ERM is agnostic PAC for m ≥ 2(log N + log(2/δ))/(ε − η)^2. Here m is a positive integer; these are sufficient upper bounds.",
+      "used_by": [
+        "ex-finite-lookup-table-pac-sample-complexities",
+        "ex-duplicate-predictors-and-distinct-class-size"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common-law sample convention in the definition, theorem proofs, and examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-class-uniform-deviation",
+      "used_for": "Choice-free finite-class two-sided deviation tail 2|F| exp(−2m t²), applied to measurable binary error indicators.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Positive logarithm domain and inverse exponential identities in confidence-radius and sample-size calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithmic monotonicity, product and reciprocal laws, and log 1 = 0.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Independence of classification-error indicators in the realizable proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Finite union bounds, including the null event where a zero-risk classifier is inconsistent.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "The realizable proof's bound (1 − p)^m ≤ exp(−mp), including p = 1.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positivity and reciprocal identities in the realizable confidence calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Published prerequisite of the opened population-risk definition: risk as a nonnegative integral.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Measurable rectangles and finite sample products used by the opened risk and selector suppliers.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Finite minima, sums, truncations, and measurable comparisons in the opened risk and finite-list selector proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Measurable-space interface in the supervised-problem prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Preimage criterion used by the risk and finite-list selector measurability proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability-law interface in the supervised-problem prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Mutual independence underlying the IID and indicator-independence suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Common-law meaning in the IID supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-real-valued-measurable-function",
+      "used_for": "Measurability criteria used in the opened empirical-risk and finite-list selector suppliers.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-finite-class-realizable-pac-bound",
+      "concern": "Proof 3.1 says, “the failure event is contained in the event bounded in step 2.1.” Consistency of the selected ERM was established only almost surely. The containment therefore holds outside the null event where h* is inconsistent, rather than literally for every sample. Including that null event in the containment, or stating containment modulo a null set, closes the argument without changing the theorem.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-identically-distributed-and-iid-random-variables",
+      "finding": "The published Definition contains “their laws in [[def-law-or-distribution-of-a-random-element]] agree” and “the whole family is independent in [[def-independent-random-elements]]”. These inline hyperlinks interrupt the Definition; there is no following Definition references section containing them, as required by the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The published Definition says “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that”. This hyperlink occurs inside the complete Definition rather than in an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The published Definition includes “of [[def-integrable-real-and-complex-functions-and-their-integrals]], its”. This inline hyperlink interrupts the integrable-variable branch of the Definition instead of appearing afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "finding": "The published Definition includes “[[def-measurable-rectangle]].” immediately after defining the two-space product sigma-algebra, before the empty and finite-product clauses. The hyperlink is inside the complete Definition and has not been moved to Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-space",
+      "finding": "The published Definition contains “([[def-sigma-algebra]])” before its final sentence defining measurable subsets. The hyperlink interrupts the Definition rather than appearing in a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-measurable-function-between-measurable-spaces",
+      "finding": "The published Definition contains “([[def-measurable-space]])” before the measurability criterion and its equivalent formulation. The hyperlink remains inside the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-probability-measure",
+      "finding": "The published Definition contains “([[def-measure]])” and “([[def-measure-space]])” within the paragraph defining probability measures, probability spaces, sample spaces, and events. These links have not been moved after the complete Definition into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-independent-random-elements",
+      "finding": "The published Definition includes “[[def-independent-sigma-algebras-and-events]].” and later “from [[def-sigma-algebra-generated-by-a-function]].” Both hyperlinks remain within the Definition instead of a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-extended-real-valued-measurable-function",
+      "finding": "The published Definition contains “([[def-measure-space]])”, “([[def-extended-reals]])”, and “([[def-borel-sigma-algebra]])” before the measurability criterion and its equivalent threshold formulation. These hyperlinks interrupt the complete Definition.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "finite-class-pac-learning-and-erm",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Checked the supervised-problem, population/empirical-risk, ERM, finite-list algorithm, risk-measurability, and selector-measurability interfaces against their batch-3 uses. Binary bounded loss satisfies their hypotheses; the selector supplies a measurable proper approximate or exact ERM."
+    },
+    {
+      "from": "vc-dimension-growth-and-pac-classification",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The opened def-vc-pac-learning-criterion explicitly extends the probability criteria to possibly infinite classes with separate risk-measurability requirements. Its finite measurable-learner specialization agrees with the supplied definition; it does not import a finite-class theorem for infinite H."
+    },
+    {
+      "from": "rademacher-complexity-and-generalization",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The page edge is prerequisite context rather than a direct citation of a batch-3 theorem. The opened ERM corollary proves the analogous two-deviation comparison locally and carries its own general-class measurability, existence, and AC assumptions."
+    },
+    {
+      "from": "adversarial-robustness-and-robust-risk",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The page edge supplies PAC context; no direct citation to a batch-3 item was found in its listed items. The opened robust-risk definition separately uses outer expectation and ±1 labels, without claiming that the ordinary finite-class PAC theorem applies to arbitrary robust losses."
+    },
+    {
+      "from": "ml02-private-learning",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "thm-private-erm-excess-risk F3 and Proof 1.3 use precisely the simultaneous two-sided deviation conclusion for a finite nonempty measurable binary class with n IID observations and confidence γ = β/2. The resulting log(4/β) constant is correct; its randomized selector utility is established separately."
+    },
+    {
+      "from": "compression-generalization-for-trained-networks",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The prerequisite is contextual. The opened compression theorem derives its one-sided finite-code deviation locally rather than invoking the binary ERM theorem for its multiclass score setting. The codebook is fixed independently of the sample, and the bound concerns the selected compressed classifier."
+    },
+    {
+      "from": "active-querying-version-spaces-and-abstention",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The opened active-learning definition and caveat remark accurately distinguish distributional zero-risk realizability from a pointwise exact oracle on an arbitrary pool. Their explicit null-mass pool witness confirms that no stronger oracle conclusion is attributed to the PAC definition."
+    }
+  ]
+}

@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-random-element-and-real-random-variable, def-nonnegative-lebesgue-integral, def-integrable-real-and-complex-functions-and-their-integrals]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-expectation-of-a-nonnegative-or-integrable-random-variable.json
   audited: 2026-09-04
   precheck: n/a
   judge:
@@ -31,7 +32,7 @@ Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space.
   extended-valued integral
   $$\mathbb E[X]:=\int_\Omega X\,d\mathbb P\in[0,+\infty].$$
 - If $X:\Omega\to\mathbb R$ or $X:\Omega\to\mathbb C$ is integrable in the sense
-  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its
+  of Integrable real and complex functions, and their integrals, its
   **expectation** is again
   $$\mathbb E[X]:=\int_\Omega X\,d\mathbb P,$$
   now a finite real or complex number.
@@ -39,3 +40,8 @@ Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space.
 For an integrable real random variable,
 $$\mathbb E[X]=\mathbb E[X^+]-\mathbb E[X^-],$$
 where $X^+$ and $X^-$ are its positive and negative parts.
+
+## Definition references
+
+[[def-integrable-real-and-complex-functions-and-their-integrals]]
+

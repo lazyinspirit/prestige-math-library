@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "21",
+  "round": 0,
+  "reviewed_items": [
+    "def-finite-weighted-graph-laplacian",
+    "lem-finite-trace-minimization",
+    "lem-deterministic-eigenspace-basis",
+    "def-ratio-cut-and-normalized-cut",
+    "lem-weighted-graph-laplacian-quadratic-form-and-kernel",
+    "lem-ratio-cut-indicator-trace-identities",
+    "thm-weighted-ratio-and-normalized-cut-relaxations",
+    "alg-weighted-spectral-clustering",
+    "ex-knn-symmetrization-changes-ratio-cut",
+    "ex-disconnected-weighted-components-spectral-clustering",
+    "ex-isolated-vertex-in-normalized-cut",
+    "ex-concentric-circles-spectral-embedding"
+  ],
+  "reviewed_pages": [
+    "ml02-spectral-clustering",
+    "ml02-spectral-clustering-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full assigned batch and both compact-v1, body-free pages were reviewed against the approved ML-20 scope and actual supplier proofs. The weighted graph and cut arguments, relaxation proof, and finite computations check out. Escalation is required for a proof gap in a published spectral prerequisite used by the assigned chain. Two examples also need local input-interface repairs.",
+  "findings": [
+    {
+      "id": "thm-real-normal-endomorphism-classification",
+      "type": "prerequisite",
+      "reason": "Proof step 3.1 asserts that the complex orthonormal eigenbasis splits into real eigenvectors and conjugate pairs, but the proof does not construct such a basis. Step 1.2 does not establish a complete real orthonormal basis for each real eigenspace, and step 2.1 does not establish a conjugation-compatible basis for each nonreal eigenspace pair. The smallest missing argument is to show conjugation maps E_lambda onto E_bar-lambda, choose paired orthonormal bases for nonreal pairs, and choose real orthonormal bases for real eigenspaces. This feeds cor-real-spectral-theorem-for-self-adjoint-endomorphisms, whose step 1.1 uses the block decomposition. The theorem statement is true; an independent proof appears in [Axler §7B, theorem 7.29](https://linear.axler.net/LADR4e.pdf), but that does not complete this supplier proof. The supplier is outside batch 21 and the A-page also requires its spectral-theorem page, so owner reconciliation is needed."
+    },
+    {
+      "id": "ex-disconnected-weighted-components-spectral-clustering",
+      "type": "local",
+      "reason": "The example specifies W but invokes alg-weighted-spectral-clustering, whose inputs require data in R^p and a fixed deterministic graph builder G returning W. The verification uses W directly. Add explicit data, p, and a graph-builder input (for example, a constant builder returning the stated W), and specify mode=ratio."
+    },
+    {
+      "id": "ex-isolated-vertex-in-normalized-cut",
+      "type": "local",
+      "reason": "The example specifies W but invokes alg-weighted-spectral-clustering, whose inputs require data in R^p and a fixed deterministic graph builder G returning W. The verification uses W directly. Add explicit data, p, and a graph-builder input (for example, a constant builder returning the stated W)."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "decision": "escalate",
+      "reason": "Directly consumes the defective block-classification proof in step 1.1."
+    },
+    {
+      "id": "thm-courant-fischer-min-max-principle",
+      "decision": "escalate",
+      "reason": "Its proof uses the real spectral theorem for eigenbasis and compression steps."
+    },
+    {
+      "id": "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+      "decision": "escalate",
+      "reason": "Its proof depends on Courant-Fischer."
+    },
+    {
+      "id": "lem-finite-trace-minimization",
+      "decision": "escalate",
+      "reason": "Directly uses the real spectral theorem in facts F1 and proof step 1.2, and Rayleigh characterization in F2 and step 1.1."
+    },
+    {
+      "id": "thm-weighted-ratio-and-normalized-cut-relaxations",
+      "decision": "escalate",
+      "reason": "Proof steps 2.1 and 2.2 use lem-finite-trace-minimization."
+    },
+    {
+      "id": "alg-weighted-spectral-clustering",
+      "decision": "escalate",
+      "reason": "Its eigenspace and relaxation use depend on the spectral and trace-minimization chain."
+    },
+    {
+      "id": "ex-disconnected-weighted-components-spectral-clustering",
+      "decision": "escalate",
+      "reason": "Depends on alg-weighted-spectral-clustering; also needs the local graph-builder input repair above."
+    },
+    {
+      "id": "ex-isolated-vertex-in-normalized-cut",
+      "decision": "escalate",
+      "reason": "Depends on alg-weighted-spectral-clustering; also needs the local graph-builder input repair above."
+    },
+    {
+      "id": "ex-concentric-circles-spectral-embedding",
+      "decision": "escalate",
+      "reason": "Depends on alg-weighted-spectral-clustering."
+    },
+    {
+      "id": "ml02-spectral-clustering",
+      "decision": "escalate",
+      "reason": "Its required spectral-theorem page contains the affected published prerequisite."
+    },
+    {
+      "id": "ml02-spectral-clustering-examples",
+      "decision": "escalate",
+      "reason": "Depends on the A page and contains examples downstream of the affected algorithm."
+    }
+  ]
+}

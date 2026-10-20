@@ -1,0 +1,223 @@
+{
+  "group": "c",
+  "batches": ["9"],
+  "pages_read": [
+    "minimax-learning-lower-bounds-and-optimal-rates",
+    "minimax-learning-lower-bounds-and-optimal-rates-examples"
+  ],
+  "items_read": [
+    "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+    "lem-bounded-variable-lower-tail-from-mean",
+    "def-minimax-excess-risk",
+    "thm-realizable-vc-minimax-lower-bound",
+    "thm-agnostic-vc-minimax-lower-bound",
+    "cor-vc-minimax-rate-match",
+    "ex-bernoulli-two-point-testing",
+    "ex-finite-shattered-set",
+    "ex-fixed-confidence-vc-lower-bounds"
+  ],
+  "conventions": [
+    {
+      "convention": "Binary labels have the full power-set sigma-algebra. Classifiers are measurable, and VC dimension is the supremum of finite shattered cardinalities, allowing +∞.",
+      "fixed_by": "def-minimax-excess-risk",
+      "matters_for": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound",
+        "ex-finite-shattered-set"
+      ]
+    },
+    {
+      "convention": "Admissible learners output members of H, use a seed law fixed independently of D, and have measurable point evaluations and measurable population-risk random variables. Samples have law D^m independently of the seed.",
+      "fixed_by": "def-minimax-excess-risk",
+      "matters_for": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound",
+        "cor-vc-minimax-rate-match",
+        "ex-fixed-confidence-vc-lower-bounds"
+      ]
+    },
+    {
+      "convention": "The benchmark is infimum risk over H, without an attainment assumption. Realizability requires an actual target f in H and implies benchmark zero. Tail events use strict inequality.",
+      "fixed_by": "def-minimax-excess-risk",
+      "matters_for": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound",
+        "cor-vc-minimax-rate-match"
+      ]
+    },
+    {
+      "convention": "A randomized Bernoulli test ψ is the probability of deciding +; the two signs have equal prior probabilities. With zero observations its average error is exactly 1/2.",
+      "fixed_by": "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+      "matters_for": [
+        "thm-agnostic-vc-minimax-lower-bound",
+        "ex-bernoulli-two-point-testing"
+      ]
+    },
+    {
+      "convention": "The bounded-mean tail inequality applies to 0 ≤ Z ≤ 1 almost surely and 0 ≤ t < 1, and bounds Pr{Z > t}.",
+      "fixed_by": "lem-bounded-variable-lower-tail-from-mean",
+      "matters_for": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-minimax-excess-risk",
+      "statement": "Defines binary measurable classifiers, finite-set shattering, class and target risks, admissible randomized learners, and expected and strict-tail minimax risks with the infimum over learners outside the supremum over laws.",
+      "used_by": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound",
+        "cor-vc-minimax-rate-match",
+        "ex-finite-shattered-set",
+        "ex-fixed-confidence-vc-lower-bounds"
+      ]
+    },
+    {
+      "id": "lem-bounded-variable-lower-tail-from-mean",
+      "statement": "On any probability space, if a random variable Z satisfies 0 ≤ Z ≤ 1 almost surely and 0 ≤ t < 1, then Pr{Z > t} ≥ (EZ − t)/(1 − t).",
+      "used_by": [
+        "thm-realizable-vc-minimax-lower-bound",
+        "thm-agnostic-vc-minimax-lower-bound"
+      ]
+    },
+    {
+      "id": "lem-bernoulli-two-point-testing-for-vc-lower-bound",
+      "statement": "For 0 < u < 1 and Bernoulli success probabilities (1−u)/2 and (1+u)/2, every randomized equal-prior test using k ≥ 1 observations satisfies e_k ≥ (1−√(1−(1−u²)^k))/2 ≥ 2Φ(2⌈k/2⌉,u), where Φ(t,u)=(1−√(1−exp(−tu²/(1−u²))))/4. With k=0 its error is exactly 1/2.",
+      "used_by": [
+        "thm-agnostic-vc-minimax-lower-bound",
+        "ex-bernoulli-two-point-testing"
+      ]
+    },
+    {
+      "id": "thm-realizable-vc-minimax-lower-bound",
+      "statement": "For a nonempty measurable binary class of finite VC dimension d ≥ 2 and integer m ≥ ⌈(d−1)/4⌉, every possibly randomized learner has a realizable finite-support law and target for which target risk exceeds (d−1)/(32m) with probability at least 1/100.",
+      "used_by": [
+        "cor-vc-minimax-rate-match",
+        "ex-fixed-confidence-vc-lower-bounds"
+      ]
+    },
+    {
+      "id": "thm-agnostic-vc-minimax-lower-bound",
+      "statement": "For a nonempty measurable binary class of finite VC dimension d ≥ 2 and integer m ≥ ⌈64d/5⌉, every possibly randomized learner has a law D for which R_D(A(S)) − inf_{h∈H}R_D(h) > √(d/(320m)) with probability at least 1/64.",
+      "used_by": [
+        "cor-vc-minimax-rate-match",
+        "ex-fixed-confidence-vc-lower-bounds"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-shattering-and-vc-dimension",
+      "used_for": "Finite indexed trace and shattering definitions; the owned definition explicitly extends these to arbitrary instance spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Measurable-space convention and the empty-instance-space boundary.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Checking the fixed-predictor measurability supplier's composition argument.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Checking rectangle preimages and finite sample projections in the risk-measurability supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-real-valued-measurable-function",
+      "used_for": "Checking the supplier's strict-superlevel argument for scaling a nonnegative extended empirical sum.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Checking finite nonnegative sums in the risk-measurability supplier; its complete proof was read.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Population-risk integral and nonnegative expectation conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Probability normalization, including the absence of probability measures on an empty space.",
+      "opened": true
+    },
+    {
+      "id": "def-loss-function-and-risk",
+      "used_for": "The supervised-prediction supplier's measurable nonnegative loss and risk interface.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "Checking the supervised-prediction supplier's contextual interpretation of parameter-indexed laws.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "Checking that the supervised-prediction supplier imports no identifiability or parameter-measurability assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-cardinality",
+      "used_for": "Finite cardinalities underlying the published shattering definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-subset-of-a-finite-set",
+      "used_for": "Finite subset bounds underlying the published finite-domain VC definition.",
+      "opened": true
+    },
+    {
+      "id": "cor-cardinality-of-the-power-set",
+      "used_for": "Finite power-set conventions underlying indexed traces and binary labelings.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Zero-inclusive natural-number convention in finite VC dimension.",
+      "opened": true
+    },
+    {
+      "id": "def-nat-order",
+      "used_for": "Natural-number order used by the published finite VC definition.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-minimax-excess-risk",
+      "concern": "The Definition starts 'Let (X,Σ) be a measurable instance space' and requires H nonempty, but does not explicitly require X nonempty or explicitly begin with a supervised prediction problem. Under the literal measurable-space hypothesis, X=∅ and H={the empty function} are allowed. Then there are no probability laws on X×{0,1}, so both distribution classes are empty and the displayed minimax suprema do not define the intended nonnegative risks without an additional convention. The referenced supervised-problem definition requires nonempty spaces, but whether that requirement is inherited here needs explicit resolution. The d≥2 theorem statements themselves exclude this boundary.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-agnostic-vc-minimax-lower-bound",
+      "concern": "Proof Step 2.1 invokes an equal-prior test after conditioning on other signs, and Step 4.1 says 'The prior on σ is finite', but the proof never explicitly assigns σ the uniform product prior on {−1,+1}^d independently of the learner seed and sample generation. That assignment is needed for the conditional fair-sign testing argument and is an immediate missing setup sentence.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "def-minimax-excess-risk",
+      "concern": "Remarks says 'for measurable binary predictors g,f, their disagreement set in X×{0,1} is a union of the measurable rectangles' g⁻¹({0})×{1} and g⁻¹({1})×{0}. This union is {(x,y):g(x)≠y}, not the disagreement of g and f. For g=f≡0 on a nonempty space, their disagreement is empty whereas the displayed union is X×{1}. The intended measurability conclusion is sound, but the event description needs correction.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-realizable-vc-minimax-lower-bound",
+      "concern": "The Statement contains the unfinished clause 'such that, for the labeled law D_f of (X,f(X)) with X∼μ.' A separate 'Here δ_x...' sentence then intervenes before the probability display. The intended assertion is recoverable, but the defining clause and displayed conclusion should form a complete sentence.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "minimax-learning-lower-bounds-and-optimal-rates",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Read the prerequisite page and the actual supervised-problem, population-risk, and fixed-predictor risk-measurability suppliers. The consumer specializes to binary zero-one risk and separately imposes iid sampling, a D-independent seed law, point-evaluation measurability, and random-risk measurability. It does not infer these additional learner conditions from the fixed-predictor supplier. The prerequisite page contains the cited items and introduces no reverse logical dependency on batch 9. The consumer's empty-space hypothesis ambiguity is recorded separately."
+    }
+  ]
+}

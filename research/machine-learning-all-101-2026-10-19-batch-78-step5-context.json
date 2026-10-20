@@ -1,0 +1,264 @@
+{
+  "group": "z",
+  "batches": [
+    "78"
+  ],
+  "pages_read": [
+    "contextual-expert-bandits",
+    "contextual-expert-bandits-examples"
+  ],
+  "items_read": [
+    "def-contextual-bandit-protocol",
+    "alg-exp4",
+    "lem-exp4-updates-are-well-defined",
+    "lem-exp4-unbiased-expert-reward-estimates",
+    "lem-exp4-weighted-estimated-loss-second-moment",
+    "lem-exp4-potential-inequality",
+    "thm-exp4-expected-regret",
+    "ex-exp4-finite-two-expert-set",
+    "ex-exp4-duplicated-experts-change-prior-mass",
+    "ex-exp4-context-specific-expert-class"
+  ],
+  "conventions": [
+    {
+      "convention": "The horizon n≥1, action count k>1, and expert count M>1 are integers. Rewards in [0,1]^k and stochastic advice rows are deterministic and fixed before learner randomization; advice is revealed before the current action.",
+      "fixed_by": "def-contextual-bandit-protocol",
+      "matters_for": [
+        "alg-exp4",
+        "lem-exp4-unbiased-expert-reward-estimates",
+        "lem-exp4-weighted-estimated-loss-second-moment",
+        "thm-exp4-expected-regret",
+        "ex-exp4-context-specific-expert-class"
+      ]
+    },
+    {
+      "convention": "Expected regret is the expectation of the best fixed expert's cumulative advice-weighted reward minus the learner's cumulative observed reward. The comparator is nonrandom because the instance is fixed.",
+      "fixed_by": "def-contextual-bandit-protocol",
+      "matters_for": [
+        "thm-exp4-expected-regret",
+        "ex-exp4-finite-two-expert-set",
+        "ex-exp4-duplicated-experts-change-prior-mass",
+        "ex-exp4-context-specific-expert-class"
+      ]
+    },
+    {
+      "convention": "Exp4 starts with uniform expert weights, uses exact real arithmetic and η>0, and assumes a probability space carrying the prescribed measurable finite action draws. No sampler construction or uniform exploration mixture is required.",
+      "fixed_by": "alg-exp4",
+      "matters_for": [
+        "lem-exp4-updates-are-well-defined",
+        "lem-exp4-potential-inequality",
+        "thm-exp4-expected-regret",
+        "ex-exp4-duplicated-experts-change-prior-mass"
+      ]
+    },
+    {
+      "convention": "An importance-weighted quotient on an action with P(t,i)=0 is defined to be zero on every outcome. Its action reward estimate is therefore one; no componentwise unbiasedness is asserted for unsupported actions.",
+      "fixed_by": "alg-exp4",
+      "matters_for": [
+        "lem-exp4-updates-are-well-defined",
+        "lem-exp4-unbiased-expert-reward-estimates",
+        "lem-exp4-weighted-estimated-loss-second-moment",
+        "lem-exp4-potential-inequality"
+      ]
+    },
+    {
+      "convention": "The theorem uses the natural logarithm and the positive learning rate η=√(2 log M/(nk)); its regret guarantee is for this tuned rate.",
+      "fixed_by": "thm-exp4-expected-regret",
+      "matters_for": [
+        "ex-exp4-finite-two-expert-set",
+        "ex-exp4-duplicated-experts-change-prior-mass",
+        "ex-exp4-context-specific-expert-class"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-exp4",
+      "statement": "For n≥1, k>1, M>1 and η>0 in the fixed contextual bandit protocol, initialize Q(1,m)=1/M, mix advice using P(t,i)=Σm Q(t,m)E(t)(m,i), sample an action with conditional distribution P(t), form the specified importance-weighted reward estimates with zero quotient on unsupported actions, and normalize Q(t,m) exp(η times the expert reward estimate) to obtain Q(t+1,m).",
+      "used_by": [
+        "lem-exp4-updates-are-well-defined",
+        "lem-exp4-unbiased-expert-reward-estimates",
+        "lem-exp4-weighted-estimated-loss-second-moment",
+        "lem-exp4-potential-inequality",
+        "thm-exp4-expected-regret",
+        "ex-exp4-finite-two-expert-set",
+        "ex-exp4-duplicated-experts-change-prior-mass",
+        "ex-exp4-context-specific-expert-class"
+      ]
+    },
+    {
+      "id": "lem-exp4-updates-are-well-defined",
+      "statement": "For every exact-real Exp4 input with n≥1, k>1, M>1, finite η>0, an oblivious reward/advice instance and supplied measurable draws, every Q_t is a strictly positive probability vector, P_t belongs to Δ_k, and P(t,i)=0 implies E(t)(m,i)=0 for every expert. All estimates are finite, corresponding estimated losses are nonnegative, normalization is finite and positive, and the procedure completes all n rounds.",
+      "used_by": [
+        "alg-exp4",
+        "lem-exp4-unbiased-expert-reward-estimates",
+        "lem-exp4-weighted-estimated-loss-second-moment",
+        "lem-exp4-potential-inequality",
+        "thm-exp4-expected-regret"
+      ]
+    },
+    {
+      "id": "lem-exp4-unbiased-expert-reward-estimates",
+      "statement": "In Exp4, at every round t∈[n] and for every expert m∈[M], the conditional expectation of the expert reward estimate given the pre-action history equals ⟨E(t)_m,x_t⟩. This includes zero-probability actions, without asserting componentwise unbiasedness on unsupported actions.",
+      "used_by": [
+        "thm-exp4-expected-regret"
+      ]
+    },
+    {
+      "id": "lem-exp4-weighted-estimated-loss-second-moment",
+      "statement": "At every Exp4 round, with estimated expert loss equal to one minus estimated expert reward, the conditional expectation of Σm Q(t,m) times the squared estimated expert loss is at most k, including zero-probability actions under the zero-quotient convention.",
+      "used_by": [
+        "thm-exp4-expected-regret"
+      ]
+    },
+    {
+      "id": "lem-exp4-potential-inequality",
+      "statement": "For any Exp4 run with η>0 and any fixed expert m*, every realized action sequence satisfies: the cumulative estimated reward of m* minus the cumulative Q-weighted estimated expert reward is at most log M/η plus (η/2) times the cumulative Q-weighted squared estimated expert loss.",
+      "used_by": [
+        "thm-exp4-expected-regret"
+      ]
+    },
+    {
+      "id": "thm-exp4-expected-regret",
+      "statement": "For integers n≥1, k>1, M>1, deterministic rewards x_t∈[0,1]^k and stochastic advice rows fixed before learner randomization, with advice revealed before action and only sampled rewards observed, Exp4 with η=√(2 log M/(nk)) has expected regret against the best fixed expert at most √(2nk log M).",
+      "used_by": [
+        "ex-exp4-finite-two-expert-set",
+        "ex-exp4-duplicated-experts-change-prior-mass",
+        "ex-exp4-context-specific-expert-class"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability of finite action draws.",
+      "opened": true
+    },
+    {
+      "id": "def-filtration-and-filtered-probability-space",
+      "used_for": "Pre-action history filtration and its information ordering.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expectations of regret and finite-range estimates as Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Real exponential evaluations in the expert update.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Strict positivity of exponential weights and normalizers.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Positive reciprocals in normalization and supported importance-weighted estimates.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-sign-rules",
+      "used_for": "Positivity and order preservation in the well-definedness proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Propagation of Exp4 invariants through the finite horizon.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Checking conditional moment identities by integration over finite history atoms.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "The inverse-exponential logarithm on positive normalizers.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Monotonicity, telescoping logarithmic ratios, positivity of log M, and log(k^c)=c log k.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Derivative 1/s in the local proof of log s≤s−1.",
+      "opened": true
+    },
+    {
+      "id": "lem-mean-value-theorem-on-closed-interval",
+      "used_for": "The local logarithmic bound used in the potential argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Factoring out exp(η) when converting estimated rewards to nonnegative estimated losses.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Taking expectations of the pathwise potential inequality and finite sums.",
+      "opened": true
+    },
+    {
+      "id": "lem-nonnegative-square-root-exists-and-unique",
+      "used_for": "Existence and positivity of the tuned learning rate and the final regret expression.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-random-element-and-real-random-variable",
+      "finding": "The Definition contains “in the sense of [[def-measurable-function-between-measurable-spaces]]” and “[[def-borel-sigma-algebra]]” within its defining prose. These hyperlinks interrupt the complete Definition and have not been moved to an immediately following Definition references section as required by the dispatch's statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-filtration-and-filtered-probability-space",
+      "finding": "The Definition contains “probability space [[def-probability-measure]]” and “[[def-sigma-algebra]]” within its defining paragraph. These hyperlinks remain inside the complete Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The second defining bullet contains “of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. The supplier hyperlink interrupts the Definition; no immediately following Definition references section carries it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The Definition contains “provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]” and additional inline supplier links. These remain within the Definition instead of an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-inverse-positive",
+      "finding": "The Statement begins “Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$”. The inline hyperlink interrupts the Statement and has not been moved to a Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-sign-rules",
+      "finding": "The Statement begins “Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$”. The inline hyperlink interrupts the Statement and has not been moved to a Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "The Definition includes “Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]” and “Integrable representatives use [[def-l-one-of-a-measure]]”. Both hyperlinks remain inside the Definition section rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The Definition includes “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that”. This hyperlink remains inside the complete Definition instead of an immediately following Definition references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "contextual-expert-bandits",
+      "to": "adversarial-bandits-and-importance-weighted-feedback",
+      "faithful": true,
+      "note": "Checked the prerequisite page inventory and the actual estimator, conditional-moment and nonpositive-axis exponential suppliers against their uses in Exp4. The general estimator requires positive probability on every arm; Exp4 explicitly identifies its positive-coordinate use, defines zero quotients locally, and proves that unsupported actions receive zero advice from every expert. Its finite-history calculations establish the needed moments directly. The exponential bound is applied only to nonpositive arguments. No exploration-based Exp3 guarantee or stronger adversary scope is imported."
+    }
+  ]
+}

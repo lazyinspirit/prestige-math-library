@@ -15,8 +15,8 @@ landmark: true
 short: "extreme value theorem (metric)"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-extreme-value-metric.json
   precheck: pass
-  repair: research/numerical-optimization-dynamics-2026-10-16-owner-step2-preclaimed-published-receipts-CONTINUED-ROOT-1035-v1/thm-extreme-value-metric.repair.json
 sources:
   scraped: []
   references:
@@ -31,22 +31,40 @@ pipeline_run: null
 
 ## Statement
 
-Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],
-[[def-metric-space]]) and let $f : X \to \mathbb{R}$ be continuous
-([[def-metric-continuity]]), $\mathbb{R}$ carrying its usual metric
-$d_{\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the
-image $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a
-maximum and a minimum ([[def-max-min]]): there are points
+Let $(X,d)$ be a nonempty compact metric space (Open cover, subcover, compact metric space, and compact subset of a metric space,
+Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) and let $f : X \to \mathbb{R}$ be continuous
+(Continuity of a map between metric spaces, at a point and globally, in the $\varepsilon$-$\delta$ form), $\mathbb{R}$ carrying its usual metric
+$d_{\mathbb{R}}(s,t) = |s-t|$ (The absolute value makes $\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded). Then the
+image $f[X]$ is bounded above and below (Lower bound, bounded below, bounded set), and it has a
+maximum and a minimum (Maximum and minimum of a set): there are points
 $x_{\max}, x_{\min} \in X$ with
 
 $$f(x_{\min}) \;\le\; f(x) \;\le\; f(x_{\max}) \qquad \text{for every } x \in X,$$
 
 and then $f(x_{\max}) = \sup f[X]$ and $f(x_{\min}) = \inf f[X]$
-([[def-complete-ordered-field]], [[def-infimum]]).
+(Complete ordered field (least-upper-bound property), Greatest lower bound (infimum)).
 
 Nonemptiness of $X$ is a hypothesis and not an oversight: for $X = \emptyset$ the
 image is empty and has neither a supremum nor a maximum. No choice principle is
 used.
+
+## Statement references
+
+[[def-metric-compactness]]
+
+[[def-metric-space]]
+
+[[def-metric-continuity]]
+
+[[lem-real-line-is-a-metric-space]]
+
+[[def-bounded-set]]
+
+[[def-max-min]]
+
+[[def-complete-ordered-field]]
+
+[[def-infimum]]
 
 ## Facts & Assumptions
 

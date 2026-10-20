@@ -1,0 +1,500 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "67",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "lem-continuous-local-martingale-quadratic-variation",
+      "model": "gpt-6-luna",
+      "context_sha256": "b10824d21af1917dcfe3a6df995ffbd2285de250a5911898f3aa2ba789223929",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original refinement equality uses H_s from (t_k,t_{k+1}] at s=t_k, hence uses the previous coefficient instead of M_{t_k}. This is a false equality in the core L2 Cauchy argument. Repaired the coefficient bookkeeping to [t_k,t_{k+1}). Also repaired stopped-bracket compatibility, the raw-stopping representative caveat, and finite-variation summation by parts without assuming A,C adapted. The representative caveat is necessary: an a.s.-continuous adapted martingale on an incomplete filtration can have a nonmeasurable raw stopped value; the explicit counterexample is recorded in repair_notes.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-density-translation-factorization",
+      "model": "gpt-6-luna",
+      "context_sha256": "a7e76d3937ac5f15e8780cad6e53134e1d933ea9ccf1e89b2024d8cde1fcc7cc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The initial Tonelli application does not establish product measurability of f(b-c) for a merely Lebesgue measurable f. Apply the proved Lebesgue change-of-variables theorem to the given joint density under the determinant-one shear, including its exceptional null set, then use completed-product agreement and Tonelli only on the separated factors. The Countable Choice hypothesis actually required by these local measure suppliers is now explicit. The distributional hypotheses and independence/density conclusions are retained.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-forward-kolmogorov-duality-gives-reversed-martingales",
+      "model": "gpt-6-luna",
+      "context_sha256": "e98c93548bce190aef4fc50ac0e5d811dc130b58b959af6f4445620bcc978ba2",
+      "outcome": "false_positive",
+      "reason": "The actual cited supplier contains the construction: lem-test-function-cutoffs-and-euclidean-localization proof 1.1 fixes a single smooth bump b, forms translated dilates b_j, and gives chi=1-product(1-b_j) for a finite rational-ball cover. Its step 3.1 explicitly fixes a coding of finite rational lists and takes the least covering code. For each prescribed K_n and O, the consumer uses precisely that least-code rule and the same fixed bump. It defines a function of n by a unique natural-number minimum; no countable choice of arbitrary cutoff witnesses occurs. The full supplier even asserts a choice-free countable locally finite partition of unity. The objection overlooks its complete argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-predictable-elliptic-martingale-brownian-reconstruction",
+      "model": "gpt-6-luna",
+      "context_sha256": "de62d595dc395af59a37dc5cebf98fce6272e996daf4d9a00df846a0430522d1",
+      "outcome": "false_positive",
+      "reason": "The last sentence of step 3.1 explicitly invokes the Levy supplier proof on the finite horizon, rather than assuming a whole-line extension. Inspected both the full vector proof and its scalar characteristic-exponential supplier. In scalar steps 2.1–8.1 use the bounded-horizon hit stop inf{u<=T:|N_u|>=m} capped at T: stopped clocks are t wedge stop, terminal square sums have uniform L2 bounds, Taylor remainders vanish, and dominated convergence is bounded by exp(theta^2 T/2), including t=T. The vector proof then applies scalar identities to linear functionals and uses Fourier event tests to identify Gaussian increments independent of F_s. All these arguments concern 0<=s<t<=T; no hypothesis about a process beyond T enters. The existing proof-adaptation sentence is mathematically justified.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-continuous-local-martingale-quadratic-variation",
+      "disposition": "repaired",
+      "post_sha256": "98a6ad417abb9cc74bc384c7b8b22a2a7306437f5f14ece1f7313b3f7e7c66f5",
+      "review_context_sha256": "5bd4824dbe81daaec163778d62cf85646e02e60c12393a7eda8a485302200177",
+      "reason": "Reviewed all eight steps after repair. Everywhere-continuous adapted input representatives justify raw bounded stopping. Corrected common-refinement coefficients give the L2 Cauchy/Doob estimate; pointwise limits preserve adaptation and stopped measurability. Partial-sum identities give compatible stopped brackets and true stopped compensators. Polarization and summation by parts prove the product formula even for nonadapted finite-variation parts. A zero bracket makes the finite-variation martingale square a nonnegative local martingale started at zero, hence zero. The necessary representative caveat changes the Statement; every direct consumer was examined. This is repair-author review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "lem-density-translation-factorization",
+      "disposition": "repaired",
+      "post_sha256": "3d02b1379e9ca36d0267261539c9e749d175422ed6b4ccc5b5a25593c0393506",
+      "review_context_sha256": "579fb557e8170ac099677ea46b3135ca9b90760ca44be08b5b16300eb65cc228",
+      "reason": "The determinant-one shear transports the null exceptional set by change of variables applied to its indicator. The transformed density factors depend on separate coordinates, so completed-product agreement licenses Tonelli; integration of p_C gives p_A f and independence. Countable Choice is explicitly inherited from the proved measure suppliers. The only direct consumer already assumes full AC and remains sound. No density regularity or distributional conclusion is weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-forward-kolmogorov-duality-gives-reversed-martingales",
+      "disposition": "unaffected",
+      "post_sha256": "47c62a0d4e801351fc248ee7b82f1b8f3077b2c2d3d4622457a4b5c7b2988837",
+      "review_context_sha256": "2cbd54b48ce967939e45f8c8b4cd3c41f10cf5d72c72cf546da0a693bd74f9ec",
+      "reason": "Checked all four steps and the full cutoff supplier. Compact support and classical p,g justify interior differentiation; the adjoint identity has the correct negative sign; the explicit weighted-flux integrability dominates the time integral and permits both endpoints. The least-coded rational finite covers give the required cutoff sequence without Countable Choice. Dominated convergence with |Z| and pi-lambda give all Borel terminal-state event tests, and reverse Markov factorization extends them to the full reversed natural filtration. No item, contract or page edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-predictable-elliptic-martingale-brownian-reconstruction",
+      "disposition": "unaffected",
+      "post_sha256": "9bf362a739a3660b93bf9fda290faf8b0e3f0298b67b2d9a48260b72cb99b763",
+      "review_context_sha256": "e8d91c80b1624994cc99dad9f4a7f1d3c6018be64ee5d71ce73abdcaa963747e",
+      "reason": "Reviewed augmentation, stopped trace-energy completion, elementary isometry, product-compensator passage, pasting, original-adapted Brownian descent and recovery. Re-examined the changed quadratic-variation Statement: proof 1.1 explicitly normalizes continuous processes in the usual augmentation before every F2 use, satisfying its representative convention. The full scalar/vector Levy proof works through T. Item guard is unchanged; current supplier quotation mirrors were repaired only in the contract. No independent acceptance of a repair is claimed.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [
+        "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-anderson-reverse-time-diffusion",
+    "lem-elliptic-local-martingale-brownian-representation",
+    "lem-predictable-elliptic-martingale-brownian-reconstruction",
+    "lem-forward-density-duality-identifies-reverse-process",
+    "thm-markov-diffusion-reversal-by-bayes-kernels",
+    "thm-gaussian-smoothing-reversal-on-truncated-time-interval"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-refinement-node",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "invalid-inference",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "lem-continuous-local-martingale-quadratic-variation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "The common-refinement equality used the previous coefficient at partition nodes. Corrected the staircase indexing and proved the resulting L2 Cauchy estimate.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-continuous-local-martingale-quadratic-variation."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-continuous-local-martingale-quadratic-variation"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-raw-stopping-version",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "lem-continuous-local-martingale-quadratic-variation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "Almost-sure continuity on an incomplete filtration does not justify raw stopped evaluation. The report gives an explicit nonmeasurable stopped-value counterexample; an everywhere-continuous adapted representative convention repairs the assertion.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-continuous-local-martingale-quadratic-variation."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-continuous-local-martingale-quadratic-variation"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-product-measurability",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "fatal",
+        "location": "proof-step",
+        "subject": "lem-density-translation-factorization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "Tonelli was applied without product measurability. Repaired using Lebesgue change of variables on the joint density and Tonelli only after separation; declared the local suppliers Countable Choice premise.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-density-translation-factorization."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-density-translation-factorization"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-quote-mirrors-lem-continuous-local-martingale-quadratic-variation",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "contract-mismatch",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "lem-continuous-local-martingale-quadratic-variation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "The assigned proof contract quoted older supplier sections. Refreshed only the literal quotation mirrors after inspecting the current supplier clauses; prior text is retained and the focused strict contract check now passes.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-continuous-local-martingale-quadratic-variation."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-continuous-local-martingale-quadratic-variation"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-quote-mirrors-lem-density-translation-factorization",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "contract-mismatch",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "lem-density-translation-factorization",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "The assigned proof contract quoted older supplier sections. Refreshed only the literal quotation mirrors after inspecting the current supplier clauses; prior text is retained and the focused strict contract check now passes.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-density-translation-factorization."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-density-translation-factorization"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "append",
+      "row": {
+        "defect_id": "machine-learning-all-101-2026-10-19-step5-initial-r1-u67-quote-mirrors-lem-predictable-elliptic-martingale-brownian-reconstruction",
+        "run": "machine-learning-all-101-2026-10-19",
+        "at": "2026-10-20T11:39:21.268032Z",
+        "batch": "67",
+        "group": "v",
+        "class": "accuracy",
+        "subclass": "contract-mismatch",
+        "severity": "nonfatal",
+        "location": "contract-row",
+        "subject": "lem-predictable-elliptic-martingale-brownian-reconstruction",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "status": "closed",
+        "reason": "The assigned proof contract quoted older supplier sections. Refreshed only the literal quotation mirrors after inspecting the current supplier clauses; prior text is retained and the focused strict contract check now passes.",
+        "evidence": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "note": "Current carrier, mathematical finding, repair and focused validation are recorded in this report for lem-predictable-elliptic-martingale-brownian-reconstruction."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-initial-r1-u67.json",
+            "id": "lem-predictable-elliptic-martingale-brownian-reconstruction"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-forward-kolmogorov-duality-gives-reversed-martingales",
+      "reason": "The cutoff supplier proof explicitly constructs rational-ball cutoffs and least covering codes, giving the sequence without Countable Choice.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-predictable-elliptic-martingale-brownian-reconstruction",
+      "reason": "The existing proof expressly invokes the finite-horizon Levy argument; its full scalar and vector derivations use no process values beyond T.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-elliptic-local-martingale-brownian-representation",
+      "supplier": "lem-continuous-local-martingale-quadratic-variation",
+      "route": "ordinary-frontier-owner",
+      "reason": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration. See repair_notes.interface_events for the exact affected use, source snippet, hash and minimal repair.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-forward-density-duality-identifies-reverse-process",
+      "supplier": "lem-continuous-local-martingale-quadratic-variation",
+      "route": "ordinary-frontier-owner",
+      "reason": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration. See repair_notes.interface_events for the exact affected use, source snippet, hash and minimal repair.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "supplier": "lem-continuous-local-martingale-quadratic-variation",
+      "route": "ordinary-frontier-owner",
+      "reason": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration. See repair_notes.interface_events for the exact affected use, source snippet, hash and minimal repair.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-gaussian-smoothing-reversal-on-truncated-time-interval",
+      "supplier": "lem-continuous-local-martingale-quadratic-variation",
+      "route": "ordinary-frontier-owner",
+      "reason": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration. See repair_notes.interface_events for the exact affected use, source snippet, hash and minimal repair.",
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update-required",
+      "reason": "All assigned carriers and all direct affected consumers are draft frontier items. No published consumer was edited or found mathematically defective. The published Levy proofs support the finite-horizon argument; published measure suppliers are used with their declared Countable Choice hypotheses. Draft operational findings remain in the run report and canonical defect-ledger proposals.",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_scope_repaired_with_frontier_owner_work_pending",
+    "repair_complete": true,
+    "independent_review_of_own_repairs": false,
+    "interface_events": [
+      {
+        "id": "lem-continuous-local-martingale-quadratic-variation",
+        "statement_changed": true,
+        "exact_statement_delta": "Prepended: Each input local martingale below is taken with everywhere-continuous adapted paths; it suffices that its full continuity event belongs to the initial sigma-algebra, so it can first be normalized there. All pathwise stopping operations use these representatives.",
+        "mathematical_evidence": "Without this convention, take Omega=[0,1], F_t=Borel([0,1]) for all t, Borel Lebesgue probability, a Borel null Cantor set N and a non-Borel D subset N excluding 0. Put M_t(omega)=1 if omega=t and t belongs to D, and 0 otherwise. Each fixed-time value is Borel and zero a.s., so M is a true martingale, continuous on Omega minus N. The Borel stopping time tau(omega)=omega has M_tau=1_D, which is not measurable. Thus the original unconditional raw-stopping clause is false. The repaired convention excludes this raw representative and preserves the conclusion for normalized continuous versions.",
+        "affected_consumers": [
+          {
+            "id": "lem-elliptic-local-martingale-brownian-representation",
+            "path": "items/lem-elliptic-local-martingale-brownian-representation.md",
+            "affected_use": "F4; proof Given, 1.1, 2.1 and 4.1 use original-filtration stopped martingales, choose continuous adapted limits and stop their squares, without a full continuity event in F0.",
+            "disposition": "requires_frontier_owner_repair",
+            "invalidated_claim": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration.",
+            "minimality": "Normalize on the usual augmentation for the integral construction and recover an original-adapted version as in the existing predictable reconstruction; alternatively apply that supplier after constructing a predictable coefficient representative. Its Statement need not change. This also resolves the Step-4 digest version concern.",
+            "source_excerpt": "giving a continuous adapted version $B^{(n)}$ on the stopped interval.",
+            "consumer_raw_sha256": "52e9e5548804f236a7ab60966ae5684619b4a6b8f5ef044fd42a914f19ef2948"
+          },
+          {
+            "id": "lem-predictable-elliptic-martingale-brownian-reconstruction",
+            "path": "items/lem-predictable-elliptic-martingale-brownian-reconstruction.md",
+            "affected_use": "F2 is used in proof 1.1 after passing to the completed right-continuous augmentation; that step explicitly normalizes all continuous paths on an initial-measurable null event. Subsequent stopped integrals remain there until the original-adapted Brownian descent in 3.1.",
+            "disposition": "examined_sound_unchanged",
+            "invalidated_claim": "None: the explicit input normalization satisfies the source convention.",
+            "minimality": "Its explicit augmentation and normalization meet the repaired representative convention. No item edit is needed; its review context is refreshed after this actual supplier-effect examination.",
+            "source_excerpt": "Countably many continuous processes can now be normalized on their common null exceptional set in the initial sigma-algebra.",
+            "consumer_raw_sha256": "7eeed3d5f1072c09182461f53229d6f8679d3e2011b45b797016197cc5f0fb73"
+          },
+          {
+            "id": "lem-forward-density-duality-identifies-reverse-process",
+            "path": "items/lem-forward-density-duality-identifies-reverse-process.md",
+            "affected_use": "F3 and proof 1.1 use the auxiliary usual filtration, which supports initial-measurable normalization. Proof 6.1 then transfers to the raw natural filtration of Y and stops each compensated test at its bounded-value hitting times.",
+            "disposition": "requires_frontier_owner_repair",
+            "invalidated_claim": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration.",
+            "minimality": "The auxiliary uses remain sound. Make the canonical everywhere-continuous representative and stopping transfer in 6.1 explicit before claiming raw stopped event identities; a.s. continuity of the original raw Y alone does not justify that stopped evaluation. Preserve the consumer Statement and prove the version/descent step.",
+            "source_excerpt": "stop each at its bounded-value hitting times, which are natural-filtration stopping times.",
+            "consumer_raw_sha256": "45e6a6baad06944f9d5914d30eab0b135f11bb7b62c7492b2192f8a7beab8c02"
+          },
+          {
+            "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+            "path": "items/thm-markov-diffusion-reversal-by-bayes-kernels.md",
+            "affected_use": "F4 and proof 2.1 use compact coordinate-product localization before the later augmentation sentence; proof 3.2 again stops actual Y in the raw reversed natural filtration at a radius.",
+            "disposition": "requires_frontier_owner_repair",
+            "invalidated_claim": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration.",
+            "minimality": "Move auxiliary augmentation/normalization before the F4 applications in 2.1, and justify normalization/descent before raw hitting-time arguments in 3.2. The current raw path hypotheses alone do not supply the revised input representative convention; preserve the stated reverse-SDE conclusion.",
+            "source_excerpt": "Fix $R$ and stop when $|Y|$ first reaches $R$.",
+            "consumer_raw_sha256": "d182aa5bd6c79282039fd16522a7b4f730015023f8bf188435ae1dbde986bc4b"
+          },
+          {
+            "id": "thm-gaussian-smoothing-reversal-on-truncated-time-interval",
+            "path": "items/thm-gaussian-smoothing-reversal-on-truncated-time-interval.md",
+            "affected_use": "F4 and proof 2.1 stop raw Y and use coordinate-product local martingales, while proof 3.1 only afterward passes to the usual augmented reversed filtration.",
+            "disposition": "requires_frontier_owner_repair",
+            "invalidated_claim": "The cited raw bounded-stopping/localization inference is not justified for merely a.s.-continuous adapted representatives on an incomplete filtration.",
+            "minimality": "Work in the usual augmented reversed filtration and normalize continuous processes before proof 2.1. The Statement already asks for Brownian motion there, so this is a proof-only repair and needs no further interface propagation.",
+            "source_excerpt": "Fix $R_1$ and stop when $|Y|$ reaches $R_1$.",
+            "consumer_raw_sha256": "e0f1068956a0fbc5061c0011844028c01d348557be8459914a2aeb5827d69f81"
+          }
+        ]
+      },
+      {
+        "id": "lem-density-translation-factorization",
+        "statement_changed": true,
+        "affected_consumers": [
+          {
+            "id": "thm-anderson-reverse-time-diffusion",
+            "path": "items/thm-anderson-reverse-time-diffusion.md",
+            "affected_use": "F5 and proof step 3.1 apply the subtraction factorization to A=X_t, B=tilde W_t, C=tilde W_s, with f the Gaussian increment density for s>t0.",
+            "disposition": "examined_sound_unchanged",
+            "invalidated_claim": "No conclusion is invalidated: the consumer Statement and A1 already assume full AC, which implies the newly explicit Countable Choice premise; its Gaussian/smooth density inputs satisfy the unchanged analytic hypotheses.",
+            "minimality": "No consumer repair is necessary, and its unchanged Statement stops propagation. Its Step-4 Tang/Zhao locator concern is outside this assigned repair lane.",
+            "source_excerpt": "Apply [F5] with $A=X_t$, $B=\\widetilde W_t$, $C=\\widetilde W_s$, and $f=\\varphi_{t-s}$.",
+            "consumer_raw_sha256": "92b1504bbc3e8147e4229117eb17c007c4ff6a6fa7856eff4dbd7c36149da391"
+          }
+        ],
+        "exact_statement_delta": "Prepended to the original Statement: Assume the Axiom of Countable Choice. All remaining hypotheses and conclusions are unchanged."
+      }
+    ],
+    "owner_frontier_repairs_required": [
+      "lem-elliptic-local-martingale-brownian-representation",
+      "lem-forward-density-duality-identifies-reverse-process",
+      "thm-markov-diffusion-reversal-by-bayes-kernels",
+      "thm-gaussian-smoothing-reversal-on-truncated-time-interval"
+    ],
+    "outside_frontier_maintenance_required": [],
+    "unresolved_assigned_mathematics": [],
+    "source_evidence": [
+      "Consulted van der Vaart, Theorem 5.64 complete proof, printed pp.81–82, and Theorem 6.1 complete proof, printed p.119. Inspected the full local scalar characteristic-exponential and vector Levy proofs. No claim of reading Anderson, Tang/Zhao, or the full van der Vaart book.",
+      "Read the actual local change-of-variables and Euclidean completed-product Statements and relevant complete arguments; each requires Countable Choice. The source-quote mirrors preserve their previous text in quote_before_step5_u67."
+    ],
+    "metadata_repairs": [
+      "Updated only assigned contract entries and owning manifest mirrors, under acquire/reread/edit/check/release of tools/step5-shared-write-lock.mjs. Historical independent risk reviews remain; new notes identify the repair author and do not claim independence.",
+      "Refreshed stale quotations for AC, Lp completeness, translation invariance, conditional expectation and the revised quadratic-variation Statement. The unchanged predictable reconstruction has metadata_repair_only:true."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-continuous-local-martingale-quadratic-variation.md items/lem-density-translation-factorization.md --json",
+        "exit_code": 0,
+        "result": "After final item edits: two proofs checked, zero failures. Both unchanged assigned proofs also passed the earlier four-item precheck."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-continuous-local-martingale-quadratic-variation.md items/lem-density-translation-factorization.md items/lem-forward-kolmogorov-duality-gives-reversed-martingales.md items/lem-predictable-elliptic-martingale-brownian-reconstruction.md --json",
+        "exit_code": 0,
+        "result": "After final item edits: four files checked, zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-67.proof-contracts.json --strict --items lem-continuous-local-martingale-quadratic-variation,lem-density-translation-factorization,lem-forward-kolmogorov-duality-gives-reversed-martingales,lem-predictable-elliptic-martingale-brownian-reconstruction --json",
+        "exit_code": 0,
+        "result": "After final contract edits: four assigned contracts checked, zero errors and warnings. Initial failures from stale quote mirrors and changed derivation inputs were repaired."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-continuous-local-martingale-quadratic-variation.md items/lem-density-translation-factorization.md",
+        "exit_code": 0,
+        "result": "After final item edits: two items, ten steps, zero defects."
+      },
+      {
+        "command": "Read-only current-input and manifest comparison using readLibraryItems, reviewMatchesCurrent and digest",
+        "exit_code": 0,
+        "result": "Final validation passed: frozen input digest, all four current review contexts, tuple coverage, dispositions, supporting hashes, assigned manifest dependencies and statement mirrors, uninterrupted Statements, and exact six-consumer downstream inventory."
+      }
+    ],
+    "diagram_review": "No TikZ/tikzcd diagrams occur in the four assigned items; no diagram is needed for these arguments.",
+    "closure": "Two unique rejected items remain confirmed-fatal for this round despite repairs. Four necessary unassigned frontier proof repairs are explicitly pending with their owner. This handoff does not certify the run, adjudicate those consumers, launch a rejudge, or waive further workflow work."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-67.proof-contracts.json": "2242164ef61f0821a79c5745d7bd79ad765871bcdd2e3cb5efca2de03b5f5883",
+    "research/machine-learning-all-101-2026-10-19-batch-67.pages.json": "679535d24940160f833499891c2310af1b28b1ee23faa6ef7bd8457dd7c38339"
+  }
+}

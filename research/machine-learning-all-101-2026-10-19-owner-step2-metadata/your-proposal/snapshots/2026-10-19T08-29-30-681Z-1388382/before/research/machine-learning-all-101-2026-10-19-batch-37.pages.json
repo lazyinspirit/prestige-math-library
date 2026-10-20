@@ -1,0 +1,683 @@
+[
+  {
+    "order": 2768,
+    "id": "neural-operators-and-physics-informed-learning",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Neural operators and PINN consistency",
+    "companion": "neural-operators-and-physics-informed-learning-examples",
+    "requires": [
+      "approximation-and-compactness-in-ck",
+      "feedforward-networks-and-universal-approximation",
+      "heat-equation-maximum-principles-duhamel-and-smoothing",
+      "lax-milgram-and-weak-elliptic-solutions",
+      "schauder-and-lp-elliptic-estimates",
+      "schauder-bases-approximation-and-banach-space-pathologies",
+      "uniform-spaces",
+      "sard-theorem-and-transversality",
+      "strongly-continuous-semigroups-and-hille-yosida",
+      "parabolic-finite-element-methods"
+    ],
+    "items": [
+      {
+        "id": "def-discretization-invariant-operator-family",
+        "kind": "definition",
+        "title": "Discretization-invariant operator family",
+        "deps": [
+          "def-banach-space",
+          "def-metric-compactness"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-physics-informed-neural-network-loss",
+        "kind": "definition",
+        "title": "Physics-informed residual loss and Hölder regularization",
+        "deps": [
+          "def-measure-space",
+          "def-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-shin-elliptic-divergence-form-operator",
+        "kind": "definition",
+        "title": "Shin's positive divergence-form elliptic operator",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-shin-parabolic-operator-and-boundary",
+        "kind": "definition",
+        "title": "Shin's parabolic operator, data, and initial-lateral boundary",
+        "deps": [
+          "def-parabolic-cylinder-and-parabolic-boundary",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-pinn-random-samples-are-space-filling",
+        "kind": "lemma",
+        "title": "Lower cell-mass bounds give a random fill-distance estimate",
+        "deps": [
+          "def-measure",
+          "def-probability-measure",
+          "def-independent-random-elements",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+        "kind": "lemma",
+        "title": "The printed all-scale probability cell-mass bound is inconsistent",
+        "deps": [
+          "def-probability-measure",
+          "prop-measure-monotonicity"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-shin-radial-smooth-cutoff",
+        "kind": "lemma",
+        "title": "A smooth radial profile with a prescribed inner plateau",
+        "deps": [
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-neural-operator-compact-union-under-uniform-convergence",
+        "kind": "lemma",
+        "title": "Uniformly convergent images of a compact set have compact union",
+        "deps": [
+          "def-metric-space",
+          "def-metric-compactness",
+          "def-metric-continuity",
+          "def-metric-topology",
+          "thm-continuous-image-of-a-compact-space-is-compact"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-neural-operator-input-output-spaces-have-ap",
+        "kind": "theorem",
+        "title": "The neural-operator input and output spaces have the approximation property",
+        "deps": [
+          "def-countable-choice",
+          "def-approximation-property-and-bounded-approximation-property",
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-holder-inequality-for-integrals",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-empirical-pinn-objective",
+        "kind": "algorithm",
+        "title": "Empirical Hölder-regularized PINN objective",
+        "deps": [
+          "def-physics-informed-neural-network-loss"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-neural-operator",
+        "kind": "definition",
+        "title": "Neural operator between function spaces",
+        "deps": [
+          "def-feedforward-neural-network",
+          "def-banach-space",
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "def-measure-space",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-over-a-measurable-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-neural-operator-activation-classes",
+        "kind": "definition",
+        "title": "Activation classes for neural-operator universality",
+        "deps": [
+          "def-feedforward-neural-network"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-shin-elliptic-energy-estimate",
+        "kind": "lemma",
+        "title": "Elliptic H1 error estimate from the source coefficient bound",
+        "deps": [
+          "def-shin-elliptic-divergence-form-operator",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-shin-elliptic-residual-stability",
+        "kind": "lemma",
+        "title": "Elliptic residual and boundary stability from a maximum principle",
+        "deps": [
+          "def-shin-elliptic-divergence-form-operator"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-shin-bounded-open-set-hilbert-evolution-triple",
+        "kind": "lemma",
+        "title": "The zero-boundary Sobolev evolution triple on an arbitrary bounded open set",
+        "deps": [
+          "def-countable-choice",
+          "def-parabolic-evolution-triple-and-energy-space",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "thm-poincare-inequality-for-w-one-p-zero",
+          "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-shin-parabolic-energy-estimate",
+        "kind": "lemma",
+        "title": "Parabolic L2 energy estimate with zero initial-lateral trace",
+        "deps": [
+          "def-shin-parabolic-operator-and-boundary",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "def-countable-choice",
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-parabolic-energy-pairing-and-trace",
+          "def-parabolic-evolution-triple-and-energy-space"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-shin-parabolic-residual-stability",
+        "kind": "lemma",
+        "title": "Variable-coefficient parabolic residual and boundary stability",
+        "deps": [
+          "def-shin-parabolic-operator-and-boundary",
+          "def-parabolic-cylinder-and-parabolic-boundary"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-sampling-reconstruction-bridge-for-neural-operator-quadratures",
+        "kind": "lemma",
+        "title": "Finite sampling reconstruction bridges compact-uniform raw quadrature limits",
+        "deps": [
+          "def-discretization-invariant-operator-family",
+          "lem-neural-operator-compact-union-under-uniform-convergence",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-compact-implies-complete-and-totally-bounded"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $X,U$ be real Banach spaces, and let continuous maps $H,H_n:X\\to U$ satisfy $\\sup_{a\\in K}\\|H_n(a)-H(a)\\|_U\\to0$ for every norm-compact $K\\subset X$. Suppose continuous finite-dimensional sampling and reconstruction maps $S_n:X\\to E_n$ and $J_n:E_n\\to X$ are supplied and satisfy $\\sup_{a\\in K}\\|J_nS_n(a)-a\\|_X\\to0$ on every such $K$. Then\n$$G_n(a)=H_n(J_n(S_n(a)))$$\nis a finite-sampling family in the displayed definition, with $F_n=E_n$, finite map the identity and output reconstruction $R_n=H_n\\circ J_n:E_n\\to U$, and $G_n\\to H$ uniformly on every norm-compact input set in the actual $U$ norm.\n\nFor the supremum-norm continuous-input case these reconstruction hypotheses always hold with exactly the prescribed tags of arbitrary finite partitions of a nonempty bounded open $D\\subset\\mathbb R^d$ whose maximal cell diameters $h_n$ tend to zero. Namely let $X=C(\\bar D;\\mathbb R^q)$, let $S_n(a)=(a(\\xi_{n,j}))_j$, and, when $h_n>0$, for $x\\in\\bar D$ put\n$$w_{n,j}(x)=\\max\\{0,2h_n-|x-\\xi_{n,j}|\\},\\qquad J_n(z)(x)=\\frac{\\sum_jw_{n,j}(x)z_j}{\\sum_jw_{n,j}(x)}.$$\nIf $h_n=0$, the domain is the zero-dimensional singleton; define $J_n(z)$ to be the constant function with value $z_1$. This reconstructs every input exactly. In both branches $\\|J_nS_n\\|_{X\\to X}\\le1$, and the reconstruction error is bounded by the input modulus of continuity at $2h_n$, uniformly on every compact input family. In a stronger Banach input norm the first clause applies whenever the stated reconstructions converge in that norm; convergence in the supremum norm alone is not substituted for that condition.\n\nA further case needs no input reconstruction. Suppose a raw finite architecture first uses its input only through the sampled pointwise lift in the integral-only field $v_{1,n}(x)=\\sum_j\\omega_{n,j}\\kappa_n(x,\\xi_{n,j})P(a(\\xi_{n,j}))+b_n(x)$, and every later stage acts on this field and the fixed parameters without further access to the original input. Assume these stages are defined and continuous on the compatible Banach spaces in question. Then each raw map itself factors through the finite input sample vector. Its compact-uniform raw convergence therefore already gives a finite-sampling family in the actual output norm, regardless of whether a sample reconstruction into the input norm has been supplied. This includes the integral-only universality subclass, when its kernels and intermediate spaces satisfy the declared compatible norm hypotheses."
+      },
+      {
+        "id": "alg-neural-operator-mesh-discretization",
+        "kind": "algorithm",
+        "title": "Riemann-sum realization of a neural operator",
+        "deps": [
+          "def-discretization-invariant-operator-family",
+          "def-neural-operator"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+        "kind": "counterexample",
+        "title": "The PINN regularization thresholds need not be comparable under the stated count condition",
+        "deps": [
+          "alg-empirical-pinn-objective"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+        "kind": "counterexample",
+        "title": "Exterior-sphere domains need not have global C2alpha Dirichlet solutions",
+        "deps": [
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-elliptic-residual-stability",
+          "def-holder-spaces-c-k-alpha-and-their-scaled-norms",
+          "lem-shin-radial-smooth-cutoff",
+          "def-laplacian-of-a-c2-function",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "fs-shin-global-holder-dirichlet-claim",
+        "kind": "false-statement",
+        "title": "Exterior spheres and continuous boundary data do not give global bounded C2alpha solvability",
+        "deps": [
+          "def-shin-elliptic-divergence-form-operator",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+          "lem-shin-elliptic-residual-stability",
+          "def-holder-spaces-c-k-alpha-and-their-scaled-norms"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-fourier-neural-operator-layer",
+        "kind": "definition",
+        "title": "Fourier neural-operator layer",
+        "deps": [
+          "def-neural-operator",
+          "def-measure-space",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-integral-over-a-measurable-set"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-neural-operator-ba-class-is-empty-as-defined",
+        "kind": "lemma",
+        "title": "The printed diameter-bounded activation class is empty",
+        "deps": [
+          "def-neural-operator-activation-classes"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+        "kind": "lemma",
+        "title": "Kernel Riemann sums converge uniformly on compact continuous-input sets",
+        "deps": [
+          "def-discretization-invariant-operator-family",
+          "def-neural-operator",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "def-totally-bounded",
+          "thm-heine-borel-rn",
+          "thm-finite-products-of-compact-spaces",
+          "def-product-topology",
+          "def-continuous-real-functions-on-a-compact-metric-space",
+          "cor-compact-domain-maps-are-uniformly-continuous",
+          "thm-extreme-value-metric",
+          "thm-continuous-image-of-a-compact-space-is-compact"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-pinn-residual-loss-from-fill-distance",
+        "kind": "lemma",
+        "title": "Fill-distance control of the population PINN loss",
+        "deps": [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-shin-interior-parabolic-schauder-estimate",
+        "kind": "lemma",
+        "title": "Interior parabolic Schauder estimates by freezing the Gaussian kernel",
+        "deps": [
+          "def-countable-choice",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "thm-heat-kernel-is-the-causal-fundamental-solution",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+        "kind": "lemma",
+        "title": "Classical parabolic solvability by weak approximation and exterior-ball barriers",
+        "deps": [
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-interior-parabolic-schauder-estimate",
+          "thm-parabolic-variational-wellposedness-and-energy-stability",
+          "lem-parabolic-energy-pairing-and-trace",
+          "lem-positive-part-is-an-admissible-weak-test-by-truncation",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "thm-higher-order-sobolev-embedding",
+          "thm-reference-simplex-sobolev-extension",
+          "thm-arzela-ascoli-for-real-ck"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-shin-zero-data-parabolic-classical-energy-identification",
+        "kind": "lemma",
+        "title": "Zero-data bounded classical parabolic errors are weak energy solutions",
+        "deps": [
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-shin-bounded-open-set-hilbert-evolution-triple",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-parabolic-energy-pairing-and-trace",
+          "lem-parabolic-weak-compactness-separable-bochner-hilbert",
+          "thm-l-one-approximate-identities-converge-in-l-p"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+        "kind": "theorem",
+        "title": "Variable-coefficient parabolic initial-boundary existence and residual stability",
+        "deps": [
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-shin-parabolic-operator-and-boundary",
+          "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+          "lem-shin-zero-data-parabolic-classical-energy-identification"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-neural-operator-discretization-invariance",
+        "kind": "theorem",
+        "title": "Neural-operator quadratures in the uniform norm and compatible Banach norms",
+        "deps": [
+          "def-discretization-invariant-operator-family",
+          "def-neural-operator",
+          "alg-neural-operator-mesh-discretization",
+          "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-pinn-cell-occupancy-controls-uniform-residual",
+        "kind": "lemma",
+        "title": "Populated sampling cells control the uniform PINN residual",
+        "deps": [
+          "def-probability-measure",
+          "def-independent-random-elements",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-pinn-regularized-loss-consistency",
+        "kind": "theorem",
+        "title": "Regularized PINN minimizers have vanishing residuals under sample refinement",
+        "deps": [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective",
+          "lem-pinn-residual-loss-from-fill-distance",
+          "lem-pinn-random-samples-are-space-filling",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "thm-first-borel-cantelli",
+          "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+          "lem-pinn-cell-occupancy-controls-uniform-residual"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+        "kind": "lemma",
+        "title": "Smooth elliptic Dirichlet solvability from a boundary Sobolev bootstrap",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "thm-fredholm-alternative-for-weak-elliptic-dirichlet-problems",
+          "thm-global-h-two-dirichlet-regularity",
+          "lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary",
+          "lem-normal-second-derivative-recovered-from-the-elliptic-equation",
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-higher-order-sobolev-embedding",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "lem-shin-elliptic-residual-stability"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+        "kind": "lemma",
+        "title": "Uniform boundary Schauder bounds and smooth interior domain approximants",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-holder-spaces-c-k-alpha-and-their-scaled-norms",
+          "def-bounded-c-k-domain-and-boundary-charts",
+          "thm-newtonian-potential-for-holder-data-is-classical",
+          "thm-dirichlet-problem-on-a-ball-by-the-poisson-integral",
+          "lem-smooth-sphere-data-have-a-harmonic-replacement",
+          "thm-interior-derivative-estimates-for-harmonic-functions",
+          "thm-weak-maximum-principle-for-the-laplacian",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-dominated-convergence",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-gram-schmidt-orthonormalisation",
+          "cor-regular-level-set-local-graph-theorem"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+        "kind": "theorem",
+        "title": "Exterior-sphere elliptic Dirichlet existence, energy and residual stability",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+          "lem-shin-elliptic-residual-stability",
+          "def-holder-spaces-c-k-alpha-and-their-scaled-norms",
+          "def-wkp-zero-as-a-sobolev-closure",
+          "lem-w-one-two-is-a-hilbert-space",
+          "thm-gram-schmidt-orthonormalisation",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-interior-schauder-estimate-for-uniformly-elliptic-equations",
+          "thm-morse-sard-for-euclidean-maps",
+          "thm-tietze-extension-theorem",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "cor-real-and-euclidean-vector-valued-ascoli-arzela",
+          "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+          "thm-young-inequality-real-exponents",
+          "thm-holder-inequality-for-integrals",
+          "thm-kernel-of-the-trace-is-w-one-p-zero",
+          "lem-sobolev-trace-agrees-with-continuous-boundary-values"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-pinn-linear-elliptic-consistency",
+        "kind": "theorem",
+        "title": "Elliptic PINN minimizers converge to the Dirichlet solution",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-shin-elliptic-divergence-form-operator",
+          "lem-shin-elliptic-residual-stability",
+          "lem-shin-elliptic-energy-estimate",
+          "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+          "thm-pinn-regularized-loss-consistency",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+          "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-pinn-linear-parabolic-consistency",
+        "kind": "theorem",
+        "title": "Parabolic PINN minimizers converge to the initial-boundary solution",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-shin-zero-data-parabolic-classical-energy-identification",
+          "def-shin-parabolic-operator-and-boundary",
+          "lem-shin-parabolic-residual-stability",
+          "lem-shin-parabolic-energy-estimate",
+          "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+          "thm-pinn-regularized-loss-consistency",
+          "cex-pinn-regularization-thresholds-need-balanced-sample-counts"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-neural-operator-compact-uniform-universality",
+        "kind": "theorem",
+        "title": "Neural operators approximate continuous maps uniformly on compacta",
+        "deps": [
+          "def-neural-operator",
+          "def-neural-operator-activation-classes",
+          "lem-neural-operator-ba-class-is-empty-as-defined",
+          "thm-locally-integrable-functions-embed-in-distributions",
+          "def-countable-choice",
+          "thm-single-hidden-layer-universal-approximation",
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-ap-finite-dimensional-factorization-of-continuous-maps",
+        "kind": "lemma",
+        "title": "Approximation property gives finite-dimensional factorization on compacta",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+        "kind": "lemma",
+        "title": "Inward mollification and smooth finite-rank approximation on Lipschitz domains",
+        "deps": [
+          "def-countable-choice",
+          "def-sobolev-space-wkp-and-its-norm",
+          "lem-sobolev-norm-is-well-defined-and-definite",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-mollification-commutes-with-weak-derivatives-in-the-interior",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "thm-minkowski-integral-inequality",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-weak-leibniz-rule-with-a-smooth-factor",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-holder-inequality-for-integrals",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "lem-smooth-bump-between-concentric-euclidean-balls"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-smooth-integral-functionals-approximate-on-compact-function-sets",
+        "kind": "lemma",
+        "title": "Smooth integral functionals approximate bounded functionals on compact sets",
+        "deps": [
+          "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+          "def-countable-choice",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration"
+        ],
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2769,
+    "id": "neural-operators-and-physics-informed-learning-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Neural operators and PINN consistency — Examples",
+    "companion": "neural-operators-and-physics-informed-learning",
+    "requires": [
+      "neural-operators-and-physics-informed-learning"
+    ],
+    "items": [
+      {
+        "id": "ex-non-global-training-stationary-point",
+        "kind": "example",
+        "title": "Gradient descent can stay at a non-global stationary point",
+        "deps": [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-sparse-pinn-collocation-aliases-residual",
+        "kind": "example",
+        "title": "A smooth residual can vanish at every collocation point and remain nonzero in population loss",
+        "deps": [
+          "def-physics-informed-neural-network-loss",
+          "alg-empirical-pinn-objective"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-fourier-neural-operator-layer-and-claim-boundary",
+        "kind": "example",
+        "title": "A one-frequency Fourier layer on the circle",
+        "deps": [
+          "def-fourier-neural-operator-layer"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+        "kind": "example",
+        "title": "A kernel integral has a mesh-refinement limit while a fixed-grid map needs a separate interface",
+        "deps": [
+          "def-neural-operator",
+          "alg-neural-operator-mesh-discretization"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+        "kind": "counterexample",
+        "title": "A one-neuron kernel has convergent uniform quadratures and divergent C1 quadratures",
+        "deps": [
+          "def-neural-operator",
+          "alg-neural-operator-mesh-discretization",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-countable-choice",
+          "thm-single-hidden-layer-universal-approximation"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-raw-neural-operator-local-term-needs-input-reconstruction",
+        "kind": "counterexample",
+        "title": "A raw neural-operator local term cannot be reconstructed exactly from finitely many samples",
+        "deps": [
+          "def-neural-operator",
+          "def-discretization-invariant-operator-family"
+        ],
+        "dependency_level": 2,
+        "statement": "The raw volume-weighted quadrature rule for every continuous-function neural operator, with the original local term evaluated at arbitrary output queries, is exactly a map of finitely many prescribed input point samples alone. In particular the raw rule is asserted to factor through its sample vector without any input reconstruction.\n\nThis assertion is false even on $D=(0,1)$ with input and output space $C([0,1])$, identity lifting and projection, and one layer with local matrix $W=1$, zero kernel and bias, and identity activation. It concerns exact factorization of the raw rule, not the existence of convergent reconstructed approximations."
+      },
+      {
+        "id": "ex-pinn-small-scale-cube-sampling-has-instances",
+        "kind": "example",
+        "title": "Uniform cube sampling satisfies the corrected small-scale conditions",
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "dependency_level": 0
+      }
+    ]
+  }
+]

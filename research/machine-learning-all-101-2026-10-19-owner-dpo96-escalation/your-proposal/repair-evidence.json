@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "96",
+  "outside_cycle": 1,
+  "status": "Proposal-only owner resolution; no native review or acceptance credit.",
+  "native_state_confirmation": {
+    "source": "research/machine-learning-all-101-2026-10-19-scope-review/batch-96/state.json",
+    "actual_state": {
+      "version": 1,
+      "run": "machine-learning-all-101-2026-10-19",
+      "batch": "96",
+      "reviews": [
+        {
+          "round": 0,
+          "decision": "escalate"
+        }
+      ],
+      "repairs": [],
+      "phase": "held",
+      "reason": "The mathematical claims, proofs, and examples check under their stated finite-support and differentiability assumptions. The primary DPO paper\u2019s \u00a74 and Appendix A.2 support the reward substitution and loss; Appendix A.4\u2019s final gradient orientation conflicts with its defined variable, while the local proof derives the correct gradient directly ([arXiv v3 PDF](https://arxiv.org/pdf/2305.18290v3)). Escalation is required because the assigned algorithm scope lacks a separate proved result for its properties."
+    },
+    "report_available": "review-0.json; repair-1.json does not exist on disk at this resolution. No report or engine transition invented.",
+    "prior_editorial_state": "Actual def-kl-regularized-policy-improvement Definition already has no inline wikilinks and carries labeled Definition references. No operation is proposed on it."
+  },
+  "confirmed_defects": [
+    {
+      "id": "alg-direct-preference-optimization-finite-budget",
+      "defect": "No separate proved result or justified_by establishes procedure invariants, exact gradient, finite termination and work.",
+      "resolution": "lem-finite-budget-dpo-properties-and-work"
+    },
+    {
+      "id": "alg-direct-preference-optimization-finite-budget",
+      "defect": "Testing membership in an arbitrary open Theta is not automatically a terminating computational operation.",
+      "resolution": "Supply exact total membership oracle M_Theta with finite declared per-call costs; call it explicitly at the unchanged accept/reject decision. Supply terminating exact graph value, pullback and domain/branch evaluators in an explicit unit-cost oracle model. Preserve arbitrary open Theta; do not require all proposed iterates remain in it."
+    }
+  ],
+  "changes": {
+    "existing_file": "Six unique algorithm spans, all in operations.json: justified_by, explicit oracle/primitive input model, oracle-backed rejection condition, oracle-backed acceptance condition, Definition reference, and extraction of stable-loss algebra from Remarks into the helper.",
+    "new_file": "Create-only complete draft helper with uninterrupted Statement, Facts/Given, six phase-stratified proof steps and truthful inherited procedure-background attribution.",
+    "scope_preserved": "All data domains, finite response sets, distinct comparison labels, full support, beta>0, arbitrary open Theta, C1 policy/strict-branch graph assumptions, theta0 in Theta, T>=0, nonempty possibly duplicate mini-batches, finite eta_t>=0, exact gradient formula, AD diagnostics, accept/reject branch, last valid pair, T=0 and COMPLETED semantics remain. No convergence or all-proposed-iterates-in-domain restriction added."
+  },
+  "proof_use_evidence": [
+    {
+      "supplier": "thm-dpo-reward-policy-reparameterization",
+      "local_read": "Full actual Statement/Facts/proof.",
+      "check": "Proof1.3 computes d/du log(1+e^-u)=-sigma(-u); proof3.1 applies the finite-sum chain rule to the difference of log-policy coordinates, with fixed positive q. Mini-batch is another nonempty ordered dataset, so repetitions have their actual multiplicities and the exact displayed gradient is valid."
+    },
+    {
+      "supplier": "def-finite-straight-line-computational-program; alg-reverse-mode-automatic-differentiation",
+      "local_read": "Full actual Definitions.",
+      "check": "Finite node and parent-slot lists, fixed finite vector dimensions, specified strict-branch and diagnostic behavior. Declared exact evaluators/test primitives supply the missing execution assumptions. Reverse sweeps initialize and accumulate finitely many coordinates; graph domain/branch membership is not silently assumed algorithmically decidable."
+    },
+    {
+      "supplier": "thm-reverse-mode-computes-gradient; lem-finite-straight-line-program-defines-c1-map",
+      "local_read": "Full actual Statements/Facts/proofs.",
+      "check": "Nodewise C1 composition on admissible strict branches is proved by finite induction. Reverse correctness uses parent-slot path products, adds repeated-slot contributions, and matches the reverse recurrence. The algorithm uses these gradients only on successful evaluations and retains its error guards. It does not differentiate max/absolute value."
+    },
+    {
+      "supplier": "def-natural-logarithm; cor-exponential-reciprocal-and-positivity; thm-exponential-addition-formula",
+      "local_read": "Full current Definition and proofs of both results.",
+      "check": "Finite real log ratios follow from positive policy/reference coordinates. For u<0 exponentiating -u+log(1+e^u) gives 1+e^-u, proving the stable expression by the inverse logarithm. For u>=0 it is direct. All loss and sigmoid evaluations have positive denominators/arguments."
+    },
+    {
+      "supplier": "algorithm input and supplied primitive/oracle model",
+      "check": "Induct on accepted iterations: initialize valid pair; return it unchanged on diagnostic or rejected candidate; only evaluate policy/full loss at an accepted theta in Theta and then replace pair. Finite graph traversals, finite batches and at most T update attempts give termination. No global membership-computability theorem is asserted."
+    },
+    {
+      "supplier": "declared cost model",
+      "check": "For finitely many fixed finite-dimensional record graphs, let C>=d+1 bound one record loss or gradient block in unit-cost primitive operations. At most n(T+1) full-loss record evaluations and O(sum m_t) batch record blocks plus O((d+1)(T+1)) bookkeeping give the displayed O(C[n(T+1)+M+T+1]) bound. At most T membership calls have summed actual finite costs; a uniform C_Theta is an optional additional supplied bound, not a consequence of openness."
+    }
+  ],
+  "affected_consumers": {
+    "original_interface_changes": [
+      "alg-direct-preference-optimization-finite-budget"
+    ],
+    "method": "Independent recursive exact item-ID search across current items/library/articles, including frontmatter/body/nonlogical references and reached aliases. No seed alias exists. Then explicitly followed the actual parent-page requires edge to page B.",
+    "current_item_consumers": [],
+    "page_dispositions": [
+      {
+        "path": "library/machine-learning/preference-learning-and-direct-preference-optimization.md",
+        "disposition": "Full actual page is frontmatter only and places the algorithm. It copies no mathematical assertion or execution input. Original placement remains valid under the explicit oracle model. Register the new helper after the algorithm on this page through root-owned canonical registration."
+      },
+      {
+        "path": "library/machine-learning/preference-learning-and-direct-preference-optimization-examples.md",
+        "disposition": "Full actual page is frontmatter only, lists four finite Gibbs/support/offset examples and requires page A. No example references the algorithm or consumes its changed computational input. The requires edge and all example placements remain valid; no repair."
+      }
+    ],
+    "nonconsumers": "The Gibbs/reparameterization results and four examples are neighboring items/suppliers, not consumers of the changed algorithm; no affected mathematical claim is copied into them. No other direct/indirect/alias/nonlogical current item use found."
+  },
+  "source_use": {
+    "external_fulltext": "None consulted by this owner. The native reviewer reports reading DPO external fulltext; that is not our reading claim. New helper source URL is background attribution for the inherited procedure, and its finite-budget/oracle-work proof is given locally.",
+    "snapshots": "before/ stores exact current algorithm, DPO theorem and already-fixed KL Definition. context/ stores actual proof suppliers, parent page and required page B."
+  },
+  "checks": {
+    "mechanical": "All six old spans occur uniquely; sequential replay equals the full candidate; create-only helper target absent; all three current-before snapshots match current sources. Final explicit candidate precheck: algorithm N/A, helper PASS, failed0. Explicit proof-layout:2items,6steps,0defects. First precheck proposed moving an independent cost-constant step to phase1; normalized and reran on final candidate.",
+    "distinction": "These local candidate formatting checks are not mathematical proof certification or integrated run gates.",
+    "not_done": "No live source/page/metadata/manifest/globalplan/engine writes; no hash, broad batteries, audit stamps or native review credit. Root owns integration, helper registration, normalized metadata and current-input preparation."
+  },
+  "remaining_gaps": "None identified in these two issues under the declared primitive/oracle model. Actual finite per-call membership costs are input data; the work bound intentionally keeps their sum separate."
+}

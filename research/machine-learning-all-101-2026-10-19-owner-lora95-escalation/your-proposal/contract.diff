@@ -1,0 +1,157 @@
+--- research/machine-learning-all-101-2026-10-19-batch-95.proof-contracts.json
++++ research/machine-learning-all-101-2026-10-19-owner-lora95-escalation/your-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-95.proof-contracts.json
+@@ -234,27 +234,28 @@
+           "fact": "F1",
+           "source": "def-low-rank-adaptation-of-a-linear-layer",
+           "source_section": "Definition",
+-          "quote": "W=W_0+cBA",
++          "quote": "Let $d,k$ be positive integers, let $1\\le r\\le\\min(d,k)$, let $c\\in\\mathbb R\\setminus\\{0\\}$, and fix a matrix $W_0\\in\\mathbb R^{d\\times k}$. A rank-$r$ adapter for the linear layer $x\\mapsto W_0x$ consists of trainable factor matrices $B\\in\\mathbb R^{d\\times r}$ and $A\\in\\mathbb R^{r\\times k}$ and the updated weight matrix\n\n$$W=W_0+cBA.$$\n\nIts output on $x\\in\\mathbb R^k$ is $Wx=W_0x+cB(Ax)\\in\\mathbb R^d$. The base matrix $W_0$ is frozen, meaning that an adaptation procedure does not update its entries; only entries of $A$ and $B$ are trainable in this definition. The update matrix is $W-W_0=cBA$, whose rank is the dimension of its image as a linear map from $\\mathbb R^k$ to $\\mathbb R^d$. No bias, dropout, random initialization, optimization rule, or convergence guarantee is part of this definition.",
+           "uses": [
+             "1.1",
+             "1.2",
+-            "6.1"
++            "1.3"
+           ]
+         },
+         {
+           "fact": "F2",
+           "source": "alg-finite-budget-low-rank-adaptation",
+           "source_section": "Definition",
+-          "quote": "Run reverse-mode automatic differentiation on its scalar output with respect to the ordered list of all entries of $A_t$ followed by all entries of $B_t$, each matrix flattened row by row.",
+-          "uses": [
+-            "5.1"
++          "quote": "Fix positive integers $d,k,n$, an integer $1\\le r\\le\\min(d,k)$, a frozen matrix $W_0\\in\\mathbb R^{d\\times k}$, a nonzero scale $c\\in\\mathbb R$, a finite ordered data list $(x_i,y_i)_{i=1}^n$ with $x_i\\in\\mathbb R^k$, and, for each data entry, a loss program $\\ell_i$ that returns a real scalar wherever its primitive calls are defined. Let $T\\ge0$ be a finite integer, let $I_0,\\ldots,I_{T-1}$ be fixed finite nonempty ordered lists of indices in $\\{1,\\ldots,n\\}$ (repeated indices are allowed), let $\\eta_0,\\ldots,\\eta_{T-1}\\ge0$ be finite step sizes, and supply an initial matrix $A_0\\in\\mathbb R^{r\\times k}$. The procedure has no dropout or random initialization; any random initialization must be sampled externally and supplied as $A_0$. Set $B_0=0\\in\\mathbb R^{d\\times r}$.\n\nRepresent each loss evaluation by a specified finite real-arithmetic program with a scalar output. Each primitive is continuously differentiable on a declared open domain or is piecewise continuously differentiable, with finitely many open branch regions, a continuously differentiable formula on each region, and a separately specified primal boundary value when one is defined. Here $C^1$ means totally differentiable with continuous derivative. Check admissibility at the current factors on each step; a strict branch used at one step need not be the branch used at another.\n\n$$L_t(A,B)=\\frac{1}{|I_t|}\\sum_{i\\in I_t}\\ell_i\\!\\left((W_0+cBA)x_i\\right)$$\n\nStarting with $t=0$, perform the following finite loop while $t<T$:\n\n1. Evaluate the displayed program at $(A_t,B_t)$, visiting its primitive calls in evaluation order. At the first call with no primal value, return `DOMAIN_ERROR` with the current factors and step index $t$. At the first defined piecewise primitive whose input lies on a branch boundary or has ambiguous branch selection, return `NONDIFFERENTIABLE` with the current factors and step index $t$. If every primitive call has a value and every piecewise primitive is on a unique strict branch, run reverse-mode automatic differentiation on this same scalar-output program at $(A_t,B_t)$, with the selected branch choices, with respect to the ordered list of all entries of $A_t$ followed by all entries of $B_t$, each matrix flattened row by row. If reverse mode returns either failure status, return it with the current factors and step index $t$. No factor update is made on a failure status.\n2. If reverse mode returns gradients, reshape the first and second blocks into $G^A_t\\in\\mathbb R^{r\\times k}$ and $G^B_t\\in\\mathbb R^{d\\times r}$, respectively, and set\n\n$$A_{t+1}=A_t-\\eta_tG^A_t,\\qquad B_{t+1}=B_t-\\eta_tG^B_t.$$\n\n   Increment $t$ by one.\n\nAfter $T$ successful updates, return `SUCCESS`, the matrices $A_T,B_T$, and the merged weight $W_0+cB_TA_T$. At $T=0$ return the supplied $A_0$, zero $B_0$, and $W_0$ without evaluating a loss. This is a finite real-arithmetic procedure; it asserts no convergence, minimization, generalization, floating-point accuracy, speed, or memory guarantee.",
++          "uses": [
++            "5.1",
++            "6.1"
+           ]
+         },
+         {
+           "fact": "F3",
+           "source": "thm-shared-parameter-backpropagation-gradient-formula",
+           "source_section": "Statement",
+-          "quote": "Then the backpropagation algorithm returns $J(\\theta)$ and",
++          "quote": "Let $p,q\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $H\\subseteq\\mathbb R^q$ be open, and let $T$ be a nonnegative integer. Suppose $h_0:\\Theta\\to H$, $\\Phi_t:\\Theta\\times H\\to H$ for $1\\le t\\le T$, and $\\ell:\\Theta\\times H\\to\\mathbb R$ are continuously differentiable on open domains containing the trajectory at $\\theta\\in\\Theta$. A continuously differentiable map is totally differentiable at each point and has a derivative matrix continuous on its domain. Define $h_0=h_0(\\theta)$, $h_t=\\Phi_t(\\theta,h_{t-1})$, and $J(\\theta)=\\ell(\\theta,h_T)$. Write $A_t=D_\\theta\\Phi_t(\\theta,h_{t-1})$ and $B_t=D_h\\Phi_t(\\theta,h_{t-1})$, with each partial derivative holding the other argument fixed. Set $\\lambda_T=(D_h\\ell(\\theta,h_T))^T$ and, in descending order, $\\lambda_{t-1}=B_t^T\\lambda_t$. Then the backpropagation algorithm returns $J(\\theta)$ and\n\n$$\\nabla_\\theta J(\\theta)=(D_\\theta\\ell(\\theta,h_T))^T+\\sum_{t=1}^{T}A_t^T\\lambda_t+(Dh_0(\\theta))^T\\lambda_0,$$\n\nwhere the sum is empty when $T=0$. The statement also applies when every primitive is evaluated on one fixed strict $C^1$ branch; it makes no assertion at a branch boundary.",
+           "uses": [
+             "1.2"
+           ]
+@@ -263,7 +264,7 @@
+           "fact": "F4",
+           "source": "thm-chain-rule-for-total-derivatives",
+           "source_section": "Statement",
+-          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and",
++          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+           "uses": [
+             "2.1"
+           ]
+@@ -272,7 +273,7 @@
+           "fact": "F5",
+           "source": "thm-reverse-mode-computes-gradient",
+           "source_section": "Statement",
+-          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$.",
++          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$. More precisely, at any operation node $i$, if its value is temporarily treated as an independent variable and all later operations are recomputed from it, then the accumulated cotangent at $i$ is the derivative of the scalar output with respect to that independent node value.",
+           "uses": [
+             "5.1"
+           ]
+@@ -280,8 +281,8 @@
+       ],
+       "derivations": [
+         {
+-          "id": "bilinear-differential",
+-          "claim": "The derivative of W0+cBA in direction (K,H) is c(HA+BK).",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-1",
++          "claim": "Fix perturbations $H\\in\\mathbb R^{d\\times r}$ and $K\\in\\mathbb R^{r\\times k}$ of $B$ and $A$. Expanding the product gives $W_0+c(B+\\varepsilon H)(A+\\varepsilon K)=W+\\varepsilon c(HA+BK)+\\varepsilon^2cHK$, so the derivative of $(A,B)\\mapsto W_0+cBA$ in direction $(K,H)$ is $c(HA+BK)$.",
+           "step": "1.1",
+           "inputs": [
+             "F1",
+@@ -290,8 +291,8 @@
+           ]
+         },
+         {
+-          "id": "shared-minibatch",
+-          "claim": "A fixed minibatch empirical loss is a finite C1 recurrence with the same factor entries shared across transitions.",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-2",
++          "claim": "At a successful algorithm step, list its minibatch entries, counting repeated indices separately, as $(x_j,\\ell_j)_{j=1}^m$. Set $\\theta$ to the ordered vector of all entries of $A$ and $B$, put $h_0=0$, and define $h_j=h_{j-1}+m^{-1}\\ell_j((W_0+cBA)x_j)$ for $1\\le j\\le m$. On the strict branches selected at this step, this is a finite $C^1$ recurrence on open domains with one shared parameter input and terminal scalar $h_m=\\mathcal L(W_0+cBA)$ for that minibatch. Thus the recurrence gradient formula in [F3] applies, including repeated parameter uses.",
+           "step": "1.2",
+           "inputs": [
+             "F1",
+@@ -301,8 +302,18 @@
+           ]
+         },
+         {
+-          "id": "loss-differential",
+-          "claim": "The chain rule gives the loss differential as the Frobenius pairing with c(HA+BK).",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-1-3",
++          "claim": "Associativity of matrix multiplication gives $W_0x+cB(Ax)=(W_0+cBA)x$. Counting entries of the two trainable factors gives $rk+dr=r(d+k)$; the base matrix is frozen.",
++          "step": "1.3",
++          "inputs": [
++            "F1",
++            "given",
++            "algebra"
++          ]
++        },
++        {
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-2-1",
++          "claim": "By the chain rule, the derivative of $(A,B)\\mapsto\\mathcal L(W_0+cBA)$ in direction $(K,H)$ is $\\langle G,c(HA+BK)\\rangle_F$.",
+           "step": "2.1",
+           "inputs": [
+             "F4",
+@@ -312,8 +323,8 @@
+           ]
+         },
+         {
+-          "id": "trace-adjoints",
+-          "claim": "The two trace identities move A and B to their Frobenius-adjoint positions.",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-3-1",
++          "claim": "The trace identity $\\operatorname{tr}(G^{\\mathsf T}HA)=\\operatorname{tr}((GA^{\\mathsf T})^{\\mathsf T}H)$ gives $\\langle G,HA\\rangle_F=\\langle GA^{\\mathsf T},H\\rangle_F$. The trace identity $\\operatorname{tr}(G^{\\mathsf T}BK)=\\operatorname{tr}((B^{\\mathsf T}G)^{\\mathsf T}K)$ gives $\\langle G,BK\\rangle_F=\\langle B^{\\mathsf T}G,K\\rangle_F$.",
+           "step": "3.1",
+           "inputs": [
+             "step 2.1",
+@@ -321,8 +332,8 @@
+           ]
+         },
+         {
+-          "id": "factor-gradients",
+-          "claim": "The arbitrary factor perturbations identify the two matrix gradients.",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-4-1",
++          "claim": "The Frobenius inner product determines a matrix uniquely from its pairing with every perturbation. Since $H$ and $K$ are arbitrary, step 3.1 therefore identifies the gradients as $\\nabla_B\\mathcal L=cGA^{\\mathsf T}$ and $\\nabla_A\\mathcal L=cB^{\\mathsf T}G$.",
+           "step": "4.1",
+           "inputs": [
+             "step 3.1",
+@@ -330,8 +341,8 @@
+           ]
+         },
+         {
+-          "id": "reverse-mode-output",
+-          "claim": "The algorithm reverse-mode gradients equal the derivatives identified by the trace calculation.",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-5-1",
++          "claim": "At a successful step the algorithm evaluates this same finite scalar program, and [F5] states that its reverse-mode call returns the exact input derivative on the strict branches selected at that step. Therefore its returned factor gradients equal the derivatives identified in step 4.1.",
+           "step": "5.1",
+           "inputs": [
+             "F2",
+@@ -342,8 +353,8 @@
+           ]
+         },
+         {
+-          "id": "zero-gradient-boundary",
+-          "claim": "B=0 forces the A gradient to vanish, and A=B=0 forces both to vanish.",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-5-2",
++          "claim": "If $B=0$, the formula for $\\nabla_A\\mathcal L$ in step 4.1 is zero; if also $A=0$, the formula for $\\nabla_B\\mathcal L$ is zero.",
+           "step": "5.2",
+           "inputs": [
+             "step 4.1",
+@@ -351,11 +362,11 @@
+           ]
+         },
+         {
+-          "id": "merge-and-count",
+-          "claim": "Associativity proves exact merging and counting matrix entries gives r(d+k).",
++          "id": "thm-low-rank-adapter-merging-and-gradients-step-6-1",
++          "claim": "Under the termination hypothesis, each loop iteration makes finitely many primitive calls in its stated evaluation order. It either encounters the first undefined or boundary/ambiguous primitive, in which case the algorithm returns the corresponding status before updating, or completes the primal evaluation on strict branches. In the latter case the reverse sweep traverses finitely many nodes and parent slots, and every local derivative evaluation returns its specified derivative by assumption; the algorithm then performs one finite update and increments $t$. Induction on $t$ shows there can be at most $T$ successful updates. If no failure occurs, the loop reaches $t=T$ and returns `SUCCESS`; if $T=0$, its explicit zero-step case returns immediately.",
+           "step": "6.1",
+           "inputs": [
+-            "F1",
++            "F2",
+             "given",
+             "algebra"
+           ]

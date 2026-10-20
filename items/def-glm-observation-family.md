@@ -16,6 +16,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-glm-observation-family.json
   precheck: n/a
   judge:
     model: "gpt-6-luna"
@@ -37,8 +38,15 @@ $$f_i(y_i;\theta_i,\phi)=\exp\!\left\{\frac{y_i\theta_i-b(\theta_i)}{a_i(\phi)}+
 
 The contract requires $f_i\ge0$, $\int f_i(\,\cdot\,;\theta_i,\phi)\,d\nu_i=1$ for every $\theta_i\in J$, and a fixed support $S_i\in\mathcal A_i$ such that $f_i>0$ on $S_i$ and $f_i=0$ off $S_i$, up to a $\nu_i$-null set independent of $\theta_i$. When the mean and variance identities are used, it also requires a finite second moment and locally uniform integrable envelopes for the first and second $\theta_i$ derivatives of $f_i$ on $S_i$.
 
-For a vector $\theta=(\theta_1,\ldots,\theta_n)\in J^n$, the **product sampling law** is the finite product $\bigotimes_{i=1}^n P_{i,\theta_i,\phi}$, where $P_{i,\theta_i,\phi}$ has density $f_i$ relative to $\nu_i$. The coordinate responses are independent in the sense of [[def-independent-random-elements]]. Their product base measure is $\nu=\bigotimes_{i=1}^n\nu_i$ on $\bigotimes_{i=1}^n\mathcal A_i$. The next lemma verifies that the joint density is $\prod_i f_i$.
+For a vector $\theta=(\theta_1,\ldots,\theta_n)\in J^n$, the **product sampling law** is the finite product $\bigotimes_{i=1}^n P_{i,\theta_i,\phi}$, where $P_{i,\theta_i,\phi}$ has density $f_i$ relative to $\nu_i$. The coordinate responses are independent in the sense of Independent random elements. Their product base measure is $\nu=\bigotimes_{i=1}^n\nu_i$ on $\bigotimes_{i=1}^n\mathcal A_i$. The next lemma verifies that the joint density is $\prod_i f_i$.
 
 The design or conditioning convention, observation units, and response/index roles are part of the surrounding scientific model contract. A sampling-law specification is not evidence that the scientific model is empirically adequate.
 
-Every scientific application also records a [[def-scientific-statistical-model-contract]]: it names the observation space and record, scientific and analysis units, index meanings, response and predictor maps, target, observation mechanism, support, law, conditioning, and adequacy assumptions. The contract does not itself imply independence or common support; those are explicit hypotheses of this response-family definition. Here $i$ is only a component index until the application assigns it a scientific unit or time meaning.
+Every scientific application also records a Scientific statistical model contracts: it names the observation space and record, scientific and analysis units, index meanings, response and predictor maps, target, observation mechanism, support, law, conditioning, and adequacy assumptions. The contract does not itself imply independence or common support; those are explicit hypotheses of this response-family definition. Here $i$ is only a component index until the application assigns it a scientific unit or time meaning.
+
+## Definition references
+
+[[def-independent-random-elements]]
+
+[[def-scientific-statistical-model-contract]]
+

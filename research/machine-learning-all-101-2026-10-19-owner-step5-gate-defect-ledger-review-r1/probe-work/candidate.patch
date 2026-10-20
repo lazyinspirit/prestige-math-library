@@ -1,0 +1,101 @@
+--- a/tools/defect-ledger-historical-metadata.mjs
++++ b/tools/defect-ledger-historical-metadata.mjs
+@@ -0,0 +1,11 @@
++// Validation-only projection of exact immutable original Step3 metadata.
++// Never used by append; no severity, disposition, ownership or evidence is removed.
++import {createHash} from 'node:crypto';
++const run='machine-learning-all-101-2026-10-19';
++const pins=new Map([["ml101-b11-3a-sign-tail-source-locator","d7a3038ad3e514af24460da75961e617f54eca5b94dffaca9f8e3a57bbf89fa1",{"location":"frontmatter","evidence":[{"path":"items/lem-finite-independent-sign-sum-tail.md","note":"Authenticated full pre-reader source binds its pre snapshot; only source title/reference changed at reader stage, with unchanged manifest and contract hashes. Primary PDF has B.2 and Lemma 29 on p.33, Theorem 31 on p.35 and proof ending p.38. Retained B.2 and amended PDF range from 32–37 to 33–38. Independently checked current full proof and every direct supplier statement; no mathematical interface change."},{"url":"https://arxiv.org/pdf/1804.11285v2","note":"B.2: physical/printed pp.33–38, zero-based PDF indices 32–37.","path":"https://arxiv.org/pdf/1804.11285v2"}]}],["ml101-b11-3a-posterior-odds-source-locator","a6904783119ad6130fecd07f21b72b9e201f82eeaf250062fec216e9a560a7cb",{"location":"frontmatter","evidence":[{"path":"items/lem-bernoulli-coordinate-posterior-odds-bound.md","note":"Authenticated full pre-reader source binds its pre snapshot; only source title/reference changed at reader stage, with unchanged manifest and contract hashes. Primary PDF has B.2 and Lemma 29 on p.33, Theorem 31 on p.35 and proof ending p.38. Retained B.2 and amended PDF range from 32–37 to 33–38. Independently checked current full proof and every direct supplier statement; no mathematical interface change."},{"url":"https://arxiv.org/pdf/1804.11285v2","note":"B.2: physical/printed pp.33–38, zero-based PDF indices 32–37.","path":"https://arxiv.org/pdf/1804.11285v2"}]}],["ml101-b11-3a-dimension-radius-borel-hypothesis","f5c81932005b0748a04a47f00200bcdfc49b1e4ce0b3b24b41e81e7abd3a2427",{"location":"statement","subclass":"missing-hypothesis"}],["ml101-b11-3a-natural-robust-borel-hypothesis","9becd8d6eb02c3e9e0340daad5f9003bcde7c7cd7d975b1faae61000184ca38c",{"location":"statement","subclass":"missing-hypothesis"}],["machine-learning-all-101-2026-10-19-3a-b75-entropy-lemma-chain-citation","8542e0ed96d99a23b3f1513d529e3a9e462cdd4b01d48daf9f12e187129353c2",{"location":"proof-step"}],["machine-learning-all-101-2026-10-19-3a-b75-entropy-example-chain-citation","30480dacb2e207f3cc88fecade0cba591622474c05b60d9b10ccb2e2b4ba87bf",{"location":"proof-step"}],["ml101-b83-3a-lem-ucrl2-evi-termination","9f651855cc0cb2a3b8d6ee0741e0a17b52a30bdfab808350766b8442fa42f0c7",{"location":"proof-step"}],["ml101-b83-3a-thm-communicating-mdp-common-optimal-average-reward","26804b20f9b8ba5f3683e9198d3ce170ff1d6700bbdd3059af8ec30e91889378",{"location":"proof-step"}],["ml101-b83-3a-thm-ucrl2-high-probability-regret","792b21c92d9b99f9fbf0a8c1f0e19b6edb7193e98b90b62156b92293d1bbf705",{"location":"proof-step"}],["ml101-b83-3a-reader-page-layout-false-positive","f9f8050620a6912d5cace628a98044c38327058ebcc88c5b00f30e4cddf611e2",{"location":"frontmatter"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-1","f048983565bd99053ad0b95d1d213edbca264b459a8e0a88282d563250aa90a7",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-2","1e2e5982ab29efedfcda81ceb445c31e6d16b36edc3d55412556fec6d61274f2",{"location":"statement"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-3","a0d1b49319fe43d71784c6443b6c901cedad1c892c744850cdf2db3cdcf9bb81",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-4","8d5bc7495d3a2d4defde72ade2b05b6de4bca3d14935cd0c3305c5fb61cd0758",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-5","07d523e21e8649d17948e168ddfbcec174fb18eee73f4e4705136d52f4d6e02c",{"location":"definition"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-8","adac8df40733a6de9d2924f4a5942e073df99d03a368af97705920b568333861",{"location":"remark"}],["machine-learning-all-101-2026-10-19-3a-b101-published-format-9","17df5f23d62f7f394a552b61d13839de559f11c390c362ae1a34c15008022a6b",{"location":"remark"}],["machine-learning-all-101-2026-10-19-3a-b101-cluster-assumption-qualification","9873005fe33ae90e3fc48ffeb11e32fa3eadd312ce3dd18efcaf6630accd8f9d",{"location":"remark","subclass":"false-or-overstrong-statement"}]].map(([id,sha256,fields])=>[id,{sha256,fields}]));
++export function historicalMetadataRow(row){
++ const pin=pins.get(row.defect_id);
++ if(row.run!==run||!pin)return row;
++ if(createHash('sha256').update(JSON.stringify(row)).digest('hex')!==pin.sha256)return row;
++ return {...row,...structuredClone(pin.fields)};
++}
+--- a/tools/defect-ledger.mjs
++++ b/tools/defect-ledger.mjs
+@@ -52,6 +52,7 @@
+ import { validateFrontier } from './step5-rounds.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+ import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
++import { historicalMetadataRow } from './defect-ledger-historical-metadata.mjs';
+ 
+ const STEP3_SCOPE_TOOL = fileURLToPath(new URL('./step3-scope.mjs', import.meta.url));
+ const STEP3_CLOSE_TOOL = fileURLToPath(new URL('./step3-close.mjs', import.meta.url));
+@@ -348,7 +349,7 @@
+   const frozenRows = frozenFrontier44Rows(rows, runFilter, errs);
+   for (const row of rows) {
+     if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
+-    errs.push(...validateRow(frozenRows.has(row) ? frozenTaxonomyRow(row) : row, ids,
++    errs.push(...validateRow(frozenRows.has(row) ? frozenTaxonomyRow(row) : historicalMetadataRow(row), ids,
+       { historicalTaxonomy: !active.has(row) }));
+   }
+   return errs;
+--- a/tools/step3-close.mjs
++++ b/tools/step3-close.mjs
+@@ -55,7 +55,7 @@
+   ...(version === 3 ? homeAlphaClosureEvidence(root, run) : {}),
+   ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),
+   ...(version === 3 ? foreignReaderClosureEvidence(root, run) : {}),
+-  ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
++  ...(version === 3 ? requiredPageClosureEvidence(root, run, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
+   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
+   ...(version === 3 && repairEvidencePolicy === OWNER_REPAIR_EVIDENCE_FREEZE_POLICY
+--- a/tools/step3-manifest-history.mjs
++++ b/tools/step3-manifest-history.mjs
+@@ -202,6 +202,21 @@
+     &&route.registry===`research/${run}-step3-owner-${route.kind}-routes.json`,
+     'invalid historical route identity');
+   if(preclosure){const captured=preclosureArchive(root,run,batch,r,route,current,frozenArtifacts);if(captured)return captured;}
++  if(frozenArtifacts&&route.kind==='required-page') {
++    // Read only the exact already-frozen manifest slot. A restored preimage is
++    // authenticated by that original slot, not by a new certificate or receipt.
++    assert(frozenArtifacts[r.path]===r.sha256
++      &&frozenArtifacts[route.registry]===sha(bytes(root,route.registry)),
++      'required-page history differs from original frozen artifact slots');
++    const registry=json(root,route.registry),original=registry.routes?.[route.index]?.[route.field];
++    assert(registry.version===1&&registry.run===run
++      &&registry.policy==='owner-step3-required-published-page-route-v1'
++      &&original?.path===r.path&&original.sha256===r.sha256,
++      'required-page history differs from original frozen route');
++    if(sha(current)===r.sha256)return {historical:current,current,archived:false};
++    const historical=ref(root,{path:`research/${run}-step5-v2/supporting-metadata/${r.sha256}.json`,sha256:r.sha256});
++    return {historical,current,archived:true};
++  }
+   if(frozenArtifacts){
+     // No new certified/owner archive may enlarge an already frozen artifact set.
+     assert(frozenArtifacts[r.path]===r.sha256&&sha(current)===r.sha256,'missing exact original closure-time manifest archive');
+--- a/tools/step3-owner-required-page-routes.mjs
++++ b/tools/step3-owner-required-page-routes.mjs
+@@ -43,9 +43,10 @@
+ // A closed route's original manifest remains historical after native Step-5
+ // repairs update its mirrors. Resolve only the exact already-certified preimage;
+ // no registry, closure key/hash, current manifest or native receipt is rewritten.
+-function closureManifest(root,run,e,index) {
++function closureManifest(root,run,e,index,frozenArtifacts=null) {
+   const result=historicalStep3Manifest(root,run,e.batch,e.manifest,{kind:'required-page',
+-    registry:`research/${run}-step3-owner-required-page-routes.json`,index,field:'manifest'});
++    registry:`research/${run}-step3-owner-required-page-routes.json`,index,field:'manifest'},
++    {preclosure:Boolean(frozenArtifacts),frozenArtifacts});
+   if(result.archived){
+     currentManifestRoute(root,run,e,JSON.parse(result.historical));
+     currentManifestRoute(root,run,e,JSON.parse(result.current));
+@@ -152,7 +153,7 @@
+ // Freeze only this route's authenticated historical inputs. Current mathematical
+ // sources retain ordinary later-stage currency rules; the after archive is the
+ // immutable corrected page carrier. Existing owner registries are unaffected.
+-export function requiredPageClosureEvidence(root,run) {
++export function requiredPageClosureEvidence(root,run,{frozenArtifacts=null}={}) {
+   assert(safe(run),'invalid run');const p=`research/${run}-step3-owner-required-page-routes.json`;
+   if(!existsSync(resolve(root,p)))return {};
+   const raw=bytes(root,p),doc=JSON.parse(raw);
+@@ -160,7 +161,7 @@
+   const out={[p]:sha(raw)};
+   for(const [index,e] of doc.routes.entries()) for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot','manifest','before','after','review']) {
+     const r=e[key];assert(typeof r?.path==='string' && r.path.startsWith('research/'),'invalid historical closure path');
+-    if(key==='manifest')closureManifest(root,run,e,index);else ref(root,r);
++    if(key==='manifest')closureManifest(root,run,e,index,frozenArtifacts);else ref(root,r);
+     assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous closure reference');out[r.path]=r.sha256;
+   }
+   return out;

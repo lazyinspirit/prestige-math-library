@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "61",
+  "agent": "/root/step2_margin53",
+  "created_at": "2026-10-19T07:37:25.165515+00:00",
+  "proposal_only": true,
+  "cycle": 1,
+  "native_finding": "research/machine-learning-all-101-2026-10-19-scope-review/batch-61/review-1.json",
+  "confirmed_defect": {
+    "item": "lem-finitely-generated-cone-is-closed",
+    "locus": "F1 and its proof1.2 uses",
+    "reason": "F1 sums x_k y_k over 1<=k<=r although actual Euclidean vectors are functions on r={0,...,r-1}. It omits coordinate0 and refers to undefined coordinate r; proof1.2 relies on its pairing/norm identity and positive definiteness.",
+    "witness": "For r=1, x:{0}->R with x_0=1 is a valid vector. Original F1 calls for x_1, outside its domain. Correct pairing is sum_{k<1}x_k^2=x_0^2=1, and the existing F5 metric has d2(x,0)=1.",
+    "smallest_repair": "One unique F1 line replacement: state coordinates k<r and sum over k<r. Existing Euclidean supplier already supplies exactly this fact; no helper/dependency/new mathematical assumption needed."
+  },
+  "actual_supplier_review": [
+    {
+      "id": "def-euclidean-inner-product",
+      "read": "Full current published definition including local algebra justifications and scope remarks.",
+      "evidence": "Defines R^n as functions n->R with n={0,...,n-1}; pairing sum k<n; positive definiteness is proved by vanishing nonnegative squares; norm and metric agreement clause6 is valid for n>=1. Corrected F1 agrees exactly."
+    },
+    {
+      "id": "lem-metrics-on-rn",
+      "read": "Full current published Statement/Facts/Proof/Remarks.",
+      "evidence": "Defines same functions n->R, coordinates k<n, d2=sqrt(sum k<n coordinate differences squared), n>=1. Proof1.2 proves separation by nonnegative squares and square-root zero criterion; proof1.6-1.7,2.1,3.1 derive Euclidean triangle inequality via finite Cauchy-Schwarz. This is actual F5 metric and supports unchanged coordinate estimates/complement balls."
+    },
+    {
+      "id": "thm-invertible-matrix-theorem",
+      "read": "Full published Statement/Facts/Proof.",
+      "evidence": "Trivial square-matrix kernel implies invertibility through rank/pivot/unique-solvability equivalences; proof4.1 constructs unique-solution inverse. Cone applies at s>=1 to G=A^T A after its kernel calculation. No indexing change to this interface."
+    }
+  ],
+  "actual_corrected_proof_use": {
+    "gram_identity": "For independent S={i_1,...,i_s}, columns correspond to domain coordinates k<s by A z=sum_{k<s} z_k g_{i_{k+1}}. Expanding finite sums gives z^T(A^T A)z=sum_{j<r}(sum_{k<s}(g_{i_{k+1}})_j z_k)^2=sum_{j<r}(Az)_j^2=||Az||2^2 under corrected F1. If Gz=0, positive definiteness gives Az=0, independence gives z=0, then invertible-matrix theorem applies as before.",
+    "coordinate_estimate": "For k<r, u_k^2<=sum_{j<r}u_j^2=||u||2^2. Existing F7/F8 nonnegative square-root and squaring laws yield |u_k|<=||u||2. Subsequent finite-linear-form continuity and open-complement proof use the same index range. All remaining proof text already uses k<s or j<r consistently.",
+    "boundary": "r=1 and nonempty supports s=1 included; empty support handled independently by C_empty={0}; finite support reduction and finite union unchanged."
+  },
+  "focused_consumer_checks": [
+    {
+      "id": "thm-finite-metric-transport-duality",
+      "locus": "F7, proof1.2 and2.1",
+      "disposition": "unchanged",
+      "reason": "Uses only closedness and closure under nonnegative combinations of a finitely generated cone in R^{2m+1}, with m>=1. Its own F10 and explicit proof1.2 block identification already use library coordinates k<m and final coordinate2m. Corrected cone F1 now matches, and full cone Statement remains identical."
+    },
+    {
+      "id": "ex-two-point-finite-metric-transport-duality",
+      "locus": "F2, Verification2.1",
+      "disposition": "unchanged",
+      "reason": "Uses unchanged finite primal/dual equality and attainment on two points. Explicit plans and potentials remain feasible with matching value delta|a-b|."
+    },
+    {
+      "id": "ex-finite-chain-transport-duality",
+      "locus": "F2, Verification3.1",
+      "disposition": "unchanged",
+      "reason": "Explicitly relabels finite theorem first-coordinate normalization to f0=0 on chain0,...,n; uses unchanged dual equality. Cone index repair adds no constraint."
+    },
+    {
+      "id": "ex-attaining-finite-metric-primal-dual-pair",
+      "locus": "F1, Verification2.1",
+      "disposition": "unchanged",
+      "reason": "Uses unchanged equality and complementary slackness for its explicit three-point plan/potential, both value1. Diagram checked: edge distances1, positive arrows pi12=pi32=1/2 agree with displayed matrix; unaffected."
+    },
+    {
+      "id": "thm-kantorovich-rubinstein-duality-on-compact-second-countable-metric-spaces",
+      "locus": "F4; finite-transport steps1.2,2.1,2.3,3.1,3.3",
+      "disposition": "unchanged",
+      "reason": "Focused check of actual finite-theorem uses only: fixed positive scale gives finite nonempty metric net and probability atom vectors. Unchanged finite theorem supplies attained extrema and equality, used for lift and comparison. No compact attainment or choice assumption added; core KR proof not reopened."
+    },
+    {
+      "id": "thm-kantorovich-rubinstein-duality-on-compact-metric-spaces",
+      "locus": "F4; finite-transport steps1.2,2.1,2.3,3.1,3.3",
+      "disposition": "unchanged",
+      "reason": "Same fixed-scale finite-theorem interface remains valid without second-countability or choice. No compact primal/dual attainment asserted; current Remarks expressly preserve infimum/supremum. Focused compatibility only, not another core review cycle."
+    }
+  ],
+  "consumer_discovery": "rg across items found cone referenced directly only by thm-finite-metric-transport-duality; finite theorem referenced by the three examples and two compact theorems listed. Since no original Statement/Definition changed, no further interface-change propagation or downstream edits are required. Weak-convergence/Wasserstein content and all current hypotheses remain untouched.",
+  "preserved": "Only F1 changes. Full cone Statement and all Proof text exact unchanged, along with deps, metadata and no-choice axiom_use. Consumer files untouched. No new scope restrictions or weak-convergence cases changed.",
+  "files": {
+    "before": "research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/before/lem-finitely-generated-cone-is-closed.md",
+    "candidate": "research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/candidates/lem-finitely-generated-cone-is-closed.md",
+    "operations": "research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/operations.json",
+    "supplier_snapshots": "research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/suppliers",
+    "consumer_snapshots": "research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/consumer-context"
+  },
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs research/machine-learning-all-101-2026-10-19-owner-cone61-escalation/your-proposal/candidates/lem-finitely-generated-cone-is-closed.md",
+      "after_final_candidate_edit": true,
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 3 steps, 0 defects"
+    }
+  ],
+  "limits": "Proposal-only same-agent focused repair evidence; no independent/native review coverage, gate approval or certification claimed. No live items/pages/metadata/manifests/engine/state/hash/recertification edits. Root owns integration and recertification."
+}

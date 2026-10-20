@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-finite-sigma-finite-and-semifinite-measures.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -28,10 +29,15 @@ pipeline_run: null
 
 ## Definition
 
-Let $(X,\mathcal A,\mu)$ be a measure space ([[def-measure-space]]).
+Let $(X,\mathcal A,\mu)$ be a measure space (Measure spaces).
 
 - The measure $\mu$ is **finite** if $\mu(X)<+\infty$.
 - It is **sigma-finite** if there is a sequence $(E_n)_{n\in\mathbb N}$ in $\mathcal A$ such that $X=\bigcup_nE_n$ and $\mu(E_n)<+\infty$ for every $n$.
 - It is **semifinite** if, whenever $E\in\mathcal A$ and $\mu(E)>0$, there is $F\in\mathcal A$ with $F\subseteq E$ and $0<\mu(F)<+\infty$.
 
 The last condition is automatic when $0<\mu(E)<+\infty$, by taking $F=E$; its substantive case is $\mu(E)=+\infty$.
+
+## Definition references
+
+[[def-measure-space]]
+

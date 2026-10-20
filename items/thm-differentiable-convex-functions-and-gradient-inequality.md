@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-differentiable-convex-functions-and-gradient-inequality.json
   precheck: pass
   audited: 2026-08-21
 sources:
@@ -31,7 +32,13 @@ Let $U\subseteq\mathbb R^n$ be open and convex, and let $f:U\to\mathbb R$ be dif
 
 $$f(y)\ge f(x)+\langle\nabla f(x),y-x\rangle\qquad(x,y\in U).$$
 
-Equivalently, $\nabla f(x)$ is a subgradient at every $x$ ([[def-subgradient-and-subdifferential]], [[def-jacobian-matrix-and-gradient]]).
+Equivalently, $\nabla f(x)$ is a subgradient at every $x$ (Subgradients and the subdifferential of a convex function, The Jacobian matrix of partial derivatives and the gradient in the scalar-valued case).
+
+## Statement references
+
+[[def-subgradient-and-subdifferential]]
+
+[[def-jacobian-matrix-and-gradient]]
 
 ## Facts & Assumptions
 

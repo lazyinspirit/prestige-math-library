@@ -14,28 +14,39 @@ sources:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Section 3.2 and Exercise 3.8"
       url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-deterministic-ito-integrals-are-gaussian.json
   audited: 2026-09-22
 ---
 
 ## Statement
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]. Fix $T>0$ and let
+Elementary predictable Brownian integrands. Fix $T>0$ and let
 $h\in L^2[0,T]$ be deterministic, choose a Borel representative of its
 Lebesgue-equivalence class, and set $h(s,\omega):=h(s)$. This process is
 predictable with finite energy. Then the Ito integral
 $\int_0^Th_s\,dB_s$
-[[def-ito-integral-for-square-integrable-predictable-processes]] is centered
+Ito integral for square-integrable predictable processes is centered
 normal with variance $\int_0^Th^2ds$: its law is $N(0,\int_0^Th^2ds)$ in the
-convention of [[def-standard-normal-and-normal-laws]], where $N(0,0)$ is the
+convention of Standard normal and normal laws, where $N(0,0)$ is the
 Dirac law at $0$. More generally, for deterministic $h_1,\dots,h_d\in L^2[0,T]$
 the vector of integrals is jointly Gaussian in the sense of
-[[def-multivariate-normal-law]]: its law is $N_d(0,\Sigma)$ with
+Multivariate normal law, including singular covariance: its law is $N_d(0,\Sigma)$ with
 $$\Sigma_{jk}=\int_0^Th_j(s)h_k(s)\,ds .$$
 In particular the covariance of the pair is
 $\operatorname{Cov}(\int h_jdB,\int h_kdB)=\int h_jh_k$, the integrals are
 uncorrelated exactly when $\int h_jh_k=0$, and integrals of deterministic
 integrands with disjoint supports are independent.
+
+## Statement references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-ito-integral-for-square-integrable-predictable-processes]]
+
+[[def-standard-normal-and-normal-laws]]
+
+[[def-multivariate-normal-law]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,167 @@
+[
+  {
+    "order": 2780,
+    "id": "initialization-and-signal-propagation",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Initialization and signal propagation",
+    "companion": "initialization-and-signal-propagation-examples",
+    "requires": [
+      "feedforward-networks-and-universal-approximation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "lem-centered-independent-weighted-sum-variance",
+        "kind": "lemma",
+        "title": "Variance of a centered random weighted sum",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-measurable-functions-preserve-independence",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-symmetric-rectifier-moments",
+        "kind": "lemma",
+        "title": "Second moments of symmetric rectifiers",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "thm-change-of-variables-for-expectation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-iid-relu-layer-forces-zero-atom-next",
+        "kind": "lemma",
+        "title": "An IID ReLU layer forces a zero atom in the next preactivation",
+        "deps": [
+          "def-independent-random-elements",
+          "lem-symmetric-rectifier-moments",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-rectifier-variance-preserving-initialization",
+        "kind": "algorithm",
+        "title": "Rectifier variance-preserving initialization",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-feedforward-neural-network",
+          "def-independent-random-elements",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-relu-forward-variance-recurrence",
+        "kind": "theorem",
+        "title": "ReLU forward preactivation-variance recurrence",
+        "deps": [
+          "def-feedforward-neural-network",
+          "lem-centered-independent-weighted-sum-variance",
+          "lem-symmetric-rectifier-moments"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-relu-backward-variance-recurrence",
+        "kind": "theorem",
+        "title": "ReLU backward gradient-variance recurrence",
+        "deps": [
+          "def-feedforward-neural-network",
+          "lem-centered-independent-weighted-sum-variance",
+          "lem-symmetric-rectifier-moments",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-for-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-prelu-variance-preserving-scale",
+        "kind": "corollary",
+        "title": "PReLU fan-in and fan-out variance scales",
+        "deps": [
+          "alg-rectifier-variance-preserving-initialization",
+          "lem-centered-independent-weighted-sum-variance",
+          "lem-symmetric-rectifier-moments",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-relu-backward-variance-recurrence",
+          "thm-relu-forward-variance-recurrence",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2781,
+    "id": "initialization-and-signal-propagation-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Initialization and signal propagation — Examples",
+    "companion": "initialization-and-signal-propagation",
+    "requires": [
+      "initialization-and-signal-propagation"
+    ],
+    "items": [
+      {
+        "id": "ex-zero-mean-or-bias-breaks-relu-half-moment",
+        "kind": "example",
+        "title": "Mean-zero weights or a nonzero bias do not supply the ReLU half-moment",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "lem-symmetric-rectifier-moments"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-finite-width-iid-relu-stack-has-zero-atom",
+        "kind": "example",
+        "title": "A finite IID ReLU stack cannot keep every preactivation atomless",
+        "deps": [
+          "lem-iid-relu-layer-forces-zero-atom-next",
+          "thm-relu-backward-variance-recurrence"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-fan-in-versus-fan-out-initialization",
+        "kind": "example",
+        "title": "Fan-in and fan-out target different signal directions",
+        "deps": [
+          "alg-rectifier-variance-preserving-initialization",
+          "thm-relu-backward-variance-recurrence",
+          "thm-relu-forward-variance-recurrence"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-prelu-variance-scale",
+        "kind": "example",
+        "title": "A PReLU slope changes both initialization scales",
+        "deps": [
+          "cor-prelu-variance-preserving-scale"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

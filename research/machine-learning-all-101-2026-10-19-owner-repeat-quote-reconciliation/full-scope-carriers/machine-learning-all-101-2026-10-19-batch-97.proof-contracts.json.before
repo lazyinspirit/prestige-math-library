@@ -1,0 +1,1998 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-state-kernel-error-controls-mixtures",
+    "thm-finite-chain-reverse-kernel-error-telescope",
+    "lem-finite-masking-chain-is-well-defined",
+    "lem-finite-grid-masked-sampler-is-well-defined",
+    "thm-masking-chain-posterior",
+    "lem-finite-product-kl-additivity",
+    "lem-finite-masking-path-reversal-factorization",
+    "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+    "lem-finite-masked-generative-joint-law-is-normalized",
+    "lem-forward-path-is-admissible-for-finite-masked-model",
+    "cor-masked-diffusion-finite-elbo-cross-entropy",
+    "ex-finite-chain-model-error-accumulates-with-zero-mesh-error",
+    "cex-factorized-reverse-kernel-fails-for-correlated-tokens",
+    "ex-masked-diffusion-single-token-posterior"
+  ],
+  "contracts": {
+    "lem-finite-state-kernel-error-controls-mixtures": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $A\\subseteq S$. By [F2] and the finite mixture formulas, $$| (\\mu Q)(A)-(\\mu P)(A)|=\\left|\\sum_{x\\in S}\\mu(x)\\bigl(Q(x,A)-P(x,A)\\bigr)\\right|\\le\\sum_{x\\in S}\\mu(x)|Q(x,A)-P(x,A)|.$$ Each summand's event difference is bounded by its row total variation, so the right side is at most $\\sum_x\\mu(x)\\varepsilon=\\varepsilon$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Taking the supremum over all $A\\subseteq S$ in step 1.1 and applying [F1] gives $\\operatorname{TV}(\\mu Q,\\mu P)\\le\\varepsilon$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The state set S is explicitly nonempty and mu is normalized, excluding an empty mixing law. The event supremum still includes the empty event, for which both event masses are zero and the proof1.1 inequality holds directly.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The state set S is explicitly nonempty and mu is normalized, excluding an empty mixing law. The event supremum still includes the empty event, for which both event masses are zero and the proof1.1 inequality holds directly."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The state set S is explicitly nonempty and mu is normalized, excluding an empty mixing law. The event supremum still includes the empty event, for which both event masses are zero and the proof1.1 inequality holds directly.",
+            "item_sha256": "479bbc773cb1331e13f4d38e8ae1cc693cb009e6f68594c799a4be3e16d00f26",
+            "row_sha256": "9f3261473eb36e2a98f6b4df29a049b9e1e01083b48585301dec092794adcdb5"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 includes the allowed endpoint ε=0, where every row event difference and therefore every mixture event difference is zero.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid at ε=1 because each row event difference is at most its row total-variation bound.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 applies when μ is concentrated at one state; the mixture bound then reduces to that single row bound.",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The statement has no temporal or interval endpoints.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses only finite sums and an event supremum; it makes no selections from nonempty sets.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "A uniform row TV error implies the same mixture error upper bound for every input probability vector. It does not infer a uniform row bound from one particular input mixture or characterize equality cases.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "A uniform row TV error implies the same mixture error upper bound for every input probability vector. It does not infer a uniform row bound from one particular input mixture or characterize equality cases.",
+            "item_sha256": "479bbc773cb1331e13f4d38e8ae1cc693cb009e6f68594c799a4be3e16d00f26",
+            "row_sha256": "4d6fa90fe0324e5b819f9abb1136b54f12f9183711b84ddb1798ebbfdf94c5b3"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "A uniform row TV error implies the same mixture error upper bound for every input probability vector. It does not infer a uniform row bound from one particular input mixture or characterize equality cases.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "A uniform row TV error implies the same mixture error upper bound for every input probability vector. It does not infer a uniform row bound from one particular input mixture or characterize equality cases.",
+            "item_sha256": "479bbc773cb1331e13f4d38e8ae1cc693cb009e6f68594c799a4be3e16d00f26",
+            "row_sha256": "5d379306fa9c19300e4430d10e192c7a0e5832e13496e48fbd17b25119c60eac"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-chain-reverse-kernel-error-telescope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-total-variation-coupling-and-kernel-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\nu$ be probability measures on $(\\mathsf X,\\mathcal X)$ and let\n$P$ be a probability kernel on that space. Then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}=\\sup_{f:\\mathsf X\\to[0,1]\\ \\mathcal X\\text{-measurable}}\\left|\\int f\\,d\\mu-\\int f\\,d\\nu\\right|,$$\n$$\\lVert\\mu P-\\nu P\\rVert_{\\rm TV}\\le\\lVert\\mu-\\nu\\rVert_{\\rm TV}.$$\nIf $(U,V)$ is a coupling of $\\mu$ and $\\nu$ on a probability space and\n$E$ is a measurable event on which $U=V$, then\n$$\\lVert\\mu-\\nu\\rVert_{\\rm TV}\\le\\mathbb P(E^c).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-state-kernel-error-controls-mixtures",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a finite nonempty set and let $Q$ and $P$ be probability kernels on $S$, meaning that each row is a probability vector. For probability vectors $u,v$ on $S$, use $\\operatorname{TV}(u,v)=\\sup_{A\\subseteq S}|u(A)-v(A)|$, where $u(A)=\\sum_{x\\in A}u(x)$. If $\\sup_{x\\in S}\\operatorname{TV}(Q(x,\\cdot),P(x,\\cdot))\\le\\varepsilon$ for $0\\le\\varepsilon\\le1$, then every probability vector $\\mu$ on $S$ satisfies\n$$\\operatorname{TV}(\\mu Q,\\mu P)\\le\\varepsilon,$$\nwhere $(\\mu Q)(A)=\\sum_{x\\in S}\\mu(x)Q(x,A)$ and similarly for $\\mu P$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $j$ and $A\\subseteq S$. Insert the intermediate measure $\\nu_jQ_j$ and use the ordinary triangle inequality for real numbers on the two event differences. The first difference is at most $\\operatorname{TV}(\\mu_j,\\nu_j)$ by [F2], and the second is at most $\\varepsilon_j$ by [F3]. Taking the supremum over $A$ by [F1] gives $\\operatorname{TV}(\\mu_{j-1},\\nu_{j-1})\\le\\operatorname{TV}(\\mu_j,\\nu_j)+\\varepsilon_j$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Apply step 1.1 successively for $j=N,N-1,\\ldots,1$. The intermediate distances telescope, so $\\operatorname{TV}(\\mu_0,\\nu_0)\\le\\operatorname{TV}(\\mu_N,\\nu_N)+\\sum_{j=1}^N\\varepsilon_j\\le\\varepsilon_{\\mathrm{init}}+\\sum_{j=1}^N\\varepsilon_j$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Since both endpoint vectors are probability laws, [F1] gives $\\operatorname{TV}(\\mu_0,\\nu_0)\\le1$. Combining this with step 2.1 yields the stated minimum, including the cases $N=1$, zero kernel errors, and a sum at least one.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The state space is explicitly nonempty and N is at least one, with initial probability vectors. Thus the theorem covers a positive-length kernel composition; the empty event in its event-supremum convention simply contributes zero to proof1.1.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The state space is explicitly nonempty and N is at least one, with initial probability vectors. Thus the theorem covers a positive-length kernel composition; the empty event in its event-supremum convention simply contributes zero to proof1.1."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The state space is explicitly nonempty and N is at least one, with initial probability vectors. Thus the theorem covers a positive-length kernel composition; the empty event in its event-supremum convention simply contributes zero to proof1.1.",
+            "item_sha256": "7fcfce6633410e4c0ed830d50bf3e925e2995205241bcfda052d7da0e2f43979",
+            "row_sha256": "1f78eb21ae46897475e2eff3d032e6ac6cebc4fa7de1dfc3b61e5ac8f8b6818b"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include zero initial and row errors; the telescoped bound then gives zero endpoint error.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly covers N=1 and the clamp at one.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality of endpoint laws when the initial laws agree and every row error is zero.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 telescopes from level N to level 0, and step 3.1 checks the two endpoint laws.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 is finite induction through the N kernel pairs and requires no choice axiom.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Initial TV error and per-step uniform row bounds imply the endpoint bound capped at one. It does not characterize per-step kernel errors from an endpoint discrepancy or assert reverse implication of the triangle bound.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Initial TV error and per-step uniform row bounds imply the endpoint bound capped at one. It does not characterize per-step kernel errors from an endpoint discrepancy or assert reverse implication of the triangle bound.",
+            "item_sha256": "7fcfce6633410e4c0ed830d50bf3e925e2995205241bcfda052d7da0e2f43979",
+            "row_sha256": "a6cf82f08050c004bb11f3838109b966419c18892563a0c08e7e08e5f64a5eb0"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Initial TV error and per-step uniform row bounds imply the endpoint bound capped at one. It does not characterize per-step kernel errors from an endpoint discrepancy or assert reverse implication of the triangle bound.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Initial TV error and per-step uniform row bounds imply the endpoint bound capped at one. It does not characterize per-step kernel errors from an endpoint discrepancy or assert reverse implication of the triangle bound.",
+            "item_sha256": "7fcfce6633410e4c0ed830d50bf3e925e2995205241bcfda052d7da0e2f43979",
+            "row_sha256": "4f70999c64be20020081eadd5bb3f371f010e3582ee37e59488516be9f183e23"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-97",
+        "notes": "Independently checked all three steps and exact TV, probability-kernel, mixture-error and contraction suppliers. Insert nu_j Q_j, bound the first difference by same-kernel contraction and second by uniform row error, then finite descending induction gives the sum. Endpoint laws remain probability vectors, permitting the clamp at one. N=1, singleton S, empty event, zero errors and sums >=1 are covered; no limit or choice is used. Reader has no finding; refuter has no finding on this item."
+      }
+    },
+    "lem-finite-masking-chain-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in Measures on sigma-algebras and A measurable function between measurable spaces; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The strict schedule gives $0\\le r_j\\le1$. For a clean token $v$, its one-coordinate row has total mass $r_j+(1-r_j)=1$; for $m$, the row mass is $1$. Therefore every product row satisfies $\\sum_{z'\\in S}Q_j(z,z')=\\prod_{i=1}^L\\sum_{w\\in V\\cup\\{m\\}}a_j(z_i,w)=1$. Its entries are nonnegative. Since $S$ is finite with its power-set sigma-algebra, [F2] makes $Q_j$ a probability kernel.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For fixed $x$, sum the conditional path mass backward: summing first over $z_N$ uses the row sum of $Q_N$ from step 1.1 and removes that factor; repeating for $z_{N-1},\\ldots,z_1$ leaves $\\mathbf 1_{\\{z_0=x\\}}$. Summing over $z_0$ then gives $1$, so each conditional path mass sums to one.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Multiplying these conditional path laws by $\\mu(x)$ and summing over the finite set $V^L$ gives total mass $\\sum_x\\mu(x)=1$. All masses are nonnegative and the path space is finite, so the joint mass is a probability vector.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The inherited vocabulary is finite nonempty and both L and N are positive. Its position and transition products therefore have their specified positive-size index lists, while the initial clean law has total mass one rather than empty support.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited vocabulary is finite nonempty and both L and N are positive. Its position and transition products therefore have their specified positive-size index lists, while the initial clean law has total mass one rather than empty support."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited vocabulary is finite nonempty and both L and N are positive. Its position and transition products therefore have their specified positive-size index lists, while the initial clean law has total mass one rather than empty support.",
+            "item_sha256": "d82b0b9ed103bc53fcd7229f6d6a60dc5fed7de84ccf530e680d4ae1d0ef0641",
+            "row_sha256": "4c34daf4f9c902e2e68638877446568fca7041b5efcd3184ea11238dd785b61a"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 permits r_j=0 at the terminal step and verifies that the clean-state row still sums to one.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 verifies a one-coordinate product row as a product with one factor; the same row-sum calculation applies.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 includes the deterministic mask row and all deterministic copy outcomes as probability rows.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 uses the initial condition z_0=x and sums through the terminal level N under the stated α_0=1, α_N=0 schedule.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use only finite state-space summation and multiplication by μ.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "One-coordinate row normalization and finite product summation give a probability path law. The lemma asserts no converse that every finite path law arises from this absorbing-mask schedule.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "One-coordinate row normalization and finite product summation give a probability path law. The lemma asserts no converse that every finite path law arises from this absorbing-mask schedule.",
+            "item_sha256": "d82b0b9ed103bc53fcd7229f6d6a60dc5fed7de84ccf530e680d4ae1d0ef0641",
+            "row_sha256": "194040115c5c2567fb2fc180a862e8e0edb4a44f979d1c3c63732da95774bd77"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "One-coordinate row normalization and finite product summation give a probability path law. The lemma asserts no converse that every finite path law arises from this absorbing-mask schedule.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "One-coordinate row normalization and finite product summation give a probability path law. The lemma asserts no converse that every finite path law arises from this absorbing-mask schedule.",
+            "item_sha256": "d82b0b9ed103bc53fcd7229f6d6a60dc5fed7de84ccf530e680d4ae1d0ef0641",
+            "row_sha256": "18ac623847fddc73b22aa441297e8900c26aff7619e5e55eeefb1a4779b15388"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-grid-masked-sampler-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-finite-grid-masked-diffusion-sampler",
+          "source_section": "Definition",
+          "quote": "For the finite masking chain with state space $S=(V\\cup\\{m\\})^L$ and survival schedule $\\alpha_0,\\ldots,\\alpha_N$, take probability vectors $h_{i,j}(z)\\in\\Delta(V)$ for every position $i\\in\\{1,\\ldots,L\\}$, reverse step $j\\in\\{1,\\ldots,N\\}$, and current state $z\\in S$, where $\\Delta(V)=\\{p:V\\to[0,1]:\\sum_{v\\in V}p(v)=1\\}$. Initialize $Z_N=m^L$. For $j=N,N-1,\\ldots,1$, set $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)$ and update all positions from the same current state $z=Z_j$ as follows, independently across positions conditional on $z$: if $z_i\\ne m$, set $Z_{j-1,i}=z_i$; if $z_i=m$ and $c_j=1$, draw $Z_{j-1,i}$ from $h_{i,j}(z)$; if $z_i=m$ and $c_j<1$, set $Z_{j-1,i}=m$ when $U^{\\mathrm{mask}}_{j,i}\\ge c_j$, and otherwise draw the clean token from $h_{i,j}(z)$ using $U^{\\mathrm{token}}_{j,i}$. The resulting one-coordinate row is $p_{i,j}(w\\mid z)=\\mathbf1_{\\{w=z_i\\}}$ when $z_i\\ne m$, and, when $z_i=m$, has mass $1-c_j$ at $m$ and mass $c_jh_{i,j}(z)(v)$ at each $v\\in V$; the sequence-state kernel is $P_j(z,z')=\\prod_{i=1}^L p_{i,j}(z'_i\\mid z)$. Return $Z_0$ after the finite loop. The mathematical random source is a finite product of mutually independent uniform $[0,1]$ variables $U^{\\mathrm{mask}}_{j,i},U^{\\mathrm{token}}_{j,i}$, one pair for each step and position; an implementation seed is valid only insofar as its supplied random kernel has this law. For inverse-CDF token draws, fix any order $V=(v_1,\\ldots,v_K)$, choose the first $v_k$ whose cumulative mass strictly exceeds $U^{\\mathrm{token}}_{j,i}$, and return $v_K$ if that draw equals $1$. At $j=1$, $c_1=1$, so every remaining mask is unmasked.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For $j\\ge1$, strict decrease gives $\\alpha_j<1$ and $\\alpha_{j-1}>\\alpha_j\\ge0$, so $c_j>0$. Since $\\alpha_{j-1}\\le1$, $\\alpha_{j-1}-\\alpha_j\\le1-\\alpha_j$, hence $c_j\\le1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If $z_i\\ne m$, the coordinate row in [F1] is a point mass and sums to one. If $z_i=m$, its mass is $(1-c_j)+\\sum_{v\\in V}c_jh_{i,j}(z)(v)=1$ because $h_{i,j}(z)$ is a probability vector. The product over positions therefore has nonnegative entries summing to the product of $L$ ones, namely one; by [F2] it is a probability-kernel row.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Fix a current state $z$ and position $i$. If $z_i=m$ and $c_j<1$, the uniform threshold satisfies $\\Pr(U^{\\mathrm{mask}}_{j,i}\\ge c_j)=1-c_j$ and $\\Pr(U^{\\mathrm{mask}}_{j,i}<c_j)=c_j$. For an ordered vocabulary $v_1,\\ldots,v_K$, put $H_0=0$ and $H_k=\\sum_{a=1}^kh_{i,j}(z)(v_a)$. The inverse-CDF rule selects $v_k$ on the interval $[H_{k-1},H_k)$, whose uniform probability is $H_k-H_{k-1}=h_{i,j}(z)(v_k)$. The fallback at $U^{\\mathrm{token}}_{j,i}=1$ has probability zero and so does not change this law, even if the fallback token has zero mass. Since the mask and token uniforms are independent, the resulting row assigns mass $1-c_j$ to $m$ and $c_jh_{i,j}(z)(v)$ to each $v$. If $c_j=1$, the direct token draw has law $h_{i,j}(z)$ and no mask is retained. Unmasked coordinates are copied, and independence of the random pairs across positions makes the sequence row the product in [F1]. Thus the stated random instructions realize the coordinate and product rows from step 2.1.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The loop has exactly $N$ reverse-step iterations, each updates the finite set of $L$ positions once, and each inverse-CDF search checks at most the finite number $K=|V|$ of tokens; the fallback defines the draw also at $U^{\\mathrm{token}}_{j,i}=1$. Hence every instruction terminates and the algorithm terminates after finitely many operations. Starting from the point mass at $m^L$, composition of the normalized rows from step 2.1 gives a normalized finite path and endpoint law. At $j=1$, $c_1=(\\alpha_0-\\alpha_1)/(1-\\alpha_1)=1$, so the algorithm's direct token-draw branch removes every remaining mask and copies every already clean coordinate. Thus $Z_0\\in V^L$, completing the support claim.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The sampler assumes nonempty V and positive L,N, with a supplied probability vector at every relevant position/state. Its token search has at least one token and its reverse loop at least one step; an empty vocabulary or zero-position sampler is outside these hypotheses.",
+          "case": "empty",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The sampler assumes nonempty V and positive L,N, with a supplied probability vector at every relevant position/state. Its token search has at least one token and its reverse loop at least one step; an empty vocabulary or zero-position sampler is outside these hypotheses.",
+            "item_sha256": "b76c3a985a1fe8dce22d4c4441e09f8727648fa3aeeb1fecd9ed8a668c7074d2",
+            "row_sha256": "9a2a43c21a883f1a3397d20b0ea087e0f3232fdc1b7d9260bcc148f9c48ebb83"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 allows zero entries of h and zero mask-retention mass; the row sum remains one, and step 4.1 treats c_1=1.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 4.1 evaluates c_1=1 and verifies deterministic unmasking at the clean endpoint.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 4.1 includes the deterministic c_1=1 row that removes every remaining mask.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly uses α_0=1 and α_1>0 to obtain c_1=1 and a clean final state.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 form finite row products and finite kernel compositions only.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Normalized coordinate rows imply a normalized product sampler and the final direct token branch removes every mask. This does not characterize true data reverse laws or claim learned independent rows equal the posterior of a correlated clean law.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Normalized coordinate rows imply a normalized product sampler and the final direct token branch removes every mask. This does not characterize true data reverse laws or claim learned independent rows equal the posterior of a correlated clean law.",
+            "item_sha256": "b76c3a985a1fe8dce22d4c4441e09f8727648fa3aeeb1fecd9ed8a668c7074d2",
+            "row_sha256": "e35af4aa14ec72e50e1870b1a68eb46776bc775383a332e9496e20d61017bc08"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Normalized coordinate rows imply a normalized product sampler and the final direct token branch removes every mask. This does not characterize true data reverse laws or claim learned independent rows equal the posterior of a correlated clean law.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Normalized coordinate rows imply a normalized product sampler and the final direct token branch removes every mask. This does not characterize true data reverse laws or claim learned independent rows equal the posterior of a correlated clean law.",
+            "item_sha256": "b76c3a985a1fe8dce22d4c4441e09f8727648fa3aeeb1fecd9ed8a668c7074d2",
+            "row_sha256": "0ef288a4a95a3b91ed5e8bf84f358c6e1569ad5d7176c00751874da42dd34e75"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-masking-chain-posterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-masking-chain-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For a finite absorbing-mask chain with finite clean vocabulary, mask symbol, sequence length, strict grid, and survival schedule as specified above, each sequence-state transition row is a probability vector, and the displayed joint path mass $\\mu(x)\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i})$ sums to one over $x\\in V^L$ and $z_0,\\ldots,z_N\\in S$. Thus it defines a probability law on the finite clean-sequence and path space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For one coordinate, the probability of surviving all steps through $s$ is $\\prod_{j=1}^{s}r_j=\\alpha_s$, with the empty product equal to one when $s=0$. Survival through $t$ has probability $\\alpha_t$. Since the mask is absorbing, the event “clean at $s$ and masked at $t$” has probability $\\alpha_s-\\alpha_t$, while “masked at $t$” has probability $1-\\alpha_t$. The latter is positive for $t\\ge1$. Dividing these finite event probabilities gives the two displayed conditional masses, which sum to one.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If $z_{t,i}\\in V$, positive conditional probability forces $z_{t,i}=x_i$; the token could not have changed or been unmasked after masking, so its earlier value is the same. If $z_{t,i}=m$, step 1.1 gives the two possible earlier values and their probabilities. By [F1], conditional on $x$ the coordinate paths are independent; conditioning on the coordinatewise event $Z_t=z_t$ therefore leaves the coordinate posterior laws independent, and their product is the asserted full conditional law.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The strict schedule gives $0<c_{s,t}\\le1$ and $1-c_{s,t}=(1-\\alpha_s)/(1-\\alpha_t)$. At $s=0$, $c_{s,t}=1$; at $t=N$, $\\alpha_t=0$ and the denominator is one. Thus the formula covers both endpoints without conditioning on the zero-probability event $Z_0=m$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "reason": "At s=0 the survival product over steps through s is empty and is explicitly assigned value one in proof1.1. The resulting clean posterior has zero mask mass, while t is at least one so the denominator one minus alpha_t remains positive; no conditioning on a zero-probability initially masked event is used.",
+          "case": "empty",
+          "evidence": "Proof step 1.1 explicitly assigns the survival product through s=0 the empty-product value one. Proof step 3.1 then gives clean posterior probability one and mask probability zero at s=0, while t>=1 keeps the conditioning denominator positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "At s=0 the survival product over steps through s is empty and is explicitly assigned value one in proof1.1. The resulting clean posterior has zero mask mass, while t is at least one so the denominator one minus alpha_t remains positive; no conditioning on a zero-probability initially masked event is used.",
+            "item_sha256": "cd3fd0682f7f45c3397a1e35f59d29a2d86686f5607a889f5a335f4c709c10da",
+            "row_sha256": "95421482781f587598ecd6dd7f5b1814b6b900981e6048c499ee45bd1e92eaaf"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the zero mask-posterior mass at s=0 and avoids conditioning on Z_0=m.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 verifies c_{0,t}=1 at the s=0 endpoint, while step 2.1 includes copied unmasked coordinates.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 identifies deterministic copying at every unmasked coordinate; step 3.1 includes the deterministic s=0 posterior.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 checks both s=0 and t=N in the posterior formula.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite conditional probability ratios and finite coordinate products.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Fixing the clean string and a positive-probability later state yields the displayed product posterior and copy/mask branches. The theorem does not conversely claim factorization after removing the clean-string conditioning.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Fixing the clean string and a positive-probability later state yields the displayed product posterior and copy/mask branches. The theorem does not conversely claim factorization after removing the clean-string conditioning.",
+            "item_sha256": "cd3fd0682f7f45c3397a1e35f59d29a2d86686f5607a889f5a335f4c709c10da",
+            "row_sha256": "1b450871d9307558d4d6eff378b3aa84c369c918ae91cbe39b7c7609d8c7440b"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Fixing the clean string and a positive-probability later state yields the displayed product posterior and copy/mask branches. The theorem does not conversely claim factorization after removing the clean-string conditioning.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Fixing the clean string and a positive-probability later state yields the displayed product posterior and copy/mask branches. The theorem does not conversely claim factorization after removing the clean-string conditioning.",
+            "item_sha256": "cd3fd0682f7f45c3397a1e35f59d29a2d86686f5607a889f5a335f4c709c10da",
+            "row_sha256": "dfce7763bd15d73bb2dcdb6997ae4cef460b4d2d6db9da722654b26a360853a3"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-product-kl-additivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Suppose some coordinate $k$ has $u_k(a_k)>0=v_k(a_k)$. For every other coordinate $i$, the finite probability vector $u_i$ has a nonempty support set $A_i=\\{a:u_i(a)>0\\}$. Choose one point from each of the finitely many $A_i$ by recursion over the finite index list; this uses only finite choice. Then $U(a_1,\\ldots,a_r)>0$ while $V(a_1,\\ldots,a_r)=0$. By [F1], $D(U\\|V)=+\\infty$ and $D(u_k\\|v_k)=+\\infty$, so both sides of the claimed identity are $+\\infty$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Otherwise, for every $i$ and every $a_i$ with $u_i(a_i)>0$, $v_i(a_i)>0$. For each tuple with $U(a)>0$, $$\\log\\frac{U(a)}{V(a)}=\\sum_{i=1}^r\\log\\frac{u_i(a_i)}{v_i(a_i)}.$$ Substitute this finite sum into the definition [F1], interchange the finite sums, and sum out every coordinate except $i$; each such marginal sum is $\\sum_{a_k}u_k(a_k)=1$. The result is $D(U\\|V)=\\sum_i\\sum_{a_i:u_i(a_i)>0}u_i(a_i)\\log(u_i(a_i)/v_i(a_i))=\\sum_iD(u_i\\|v_i)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Steps 1.1 and 1.2 cover all possibilities, including $r=1$ and coordinates with zero source mass. This proves the extended-valued identity.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The coordinate count r is at least one and every S_k is nonempty with normalized probability vectors. Hence there is no empty product alphabet or zero-factor theorem. At r=1, the sums over other coordinates collapse to the usual identity mass one, as explicitly covered in proof2.1.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The coordinate count r is at least one and every S_k is nonempty with normalized probability vectors. Hence there is no empty product alphabet or zero-factor theorem. At r=1, the sums over other coordinates collapse to the usual identity mass one, as explicitly covered in proof2.1."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The coordinate count r is at least one and every S_k is nonempty with normalized probability vectors. Hence there is no empty product alphabet or zero-factor theorem. At r=1, the sums over other coordinates collapse to the usual identity mass one, as explicitly covered in proof2.1.",
+            "item_sha256": "4ba1a35ba81e4497cbd643815772cc1b10032ce2cec1146e0bbabc2a03c4f851",
+            "row_sha256": "e8f718e118bb57483b7f5f949b6bffea415e504f7107217951e6ad27a9653482"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 treat zero source terms, positive source mass against zero reference mass, and the absolutely continuous branch.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 includes r=1, where the product identity is the single-coordinate identity.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 handles singular point-mass factors and step 1.2 handles the finite log-ratio sum on supported tuples.",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The statement has no temporal or interval endpoints.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 chooses support points by recursion over a finite list; this is finite choice proved by induction, not an appeal to AC.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The KL of the specified finite product laws equals the sum of coordinate KLs, including simultaneous positive infinity under support failure. No converse says KL additivity for one pair implies independent coordinate structure of arbitrary laws.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The KL of the specified finite product laws equals the sum of coordinate KLs, including simultaneous positive infinity under support failure. No converse says KL additivity for one pair implies independent coordinate structure of arbitrary laws.",
+            "item_sha256": "4ba1a35ba81e4497cbd643815772cc1b10032ce2cec1146e0bbabc2a03c4f851",
+            "row_sha256": "0dc0ac45f2f6e31bde8543b717e29d9a51e3613529e7290505a6126bd2d49aa3"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The KL of the specified finite product laws equals the sum of coordinate KLs, including simultaneous positive infinity under support failure. No converse says KL additivity for one pair implies independent coordinate structure of arbitrary laws.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The KL of the specified finite product laws equals the sum of coordinate KLs, including simultaneous positive infinity under support failure. No converse says KL additivity for one pair implies independent coordinate structure of arbitrary laws.",
+            "item_sha256": "4ba1a35ba81e4497cbd643815772cc1b10032ce2cec1146e0bbabc2a03c4f851",
+            "row_sha256": "b9cc5d39aeac269bfd3f9aa2ca78329855977be6883c43ca00d74486e6278b67"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-masking-path-reversal-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-masking-chain-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For a finite absorbing-mask chain with finite clean vocabulary, mask symbol, sequence length, strict grid, and survival schedule as specified above, each sequence-state transition row is a probability vector, and the displayed joint path mass $\\mu(x)\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i})$ sums to one over $x\\in V^L$ and $z_0,\\ldots,z_N\\in S$. Thus it defines a probability law on the finite clean-sequence and path space.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-masking-chain-posterior",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$ be the survival schedule of the finite masking chain. Fix a clean sequence $x\\in V^L$ and grid indices $0\\le s<t\\le N$. For every state $z_t\\in(V\\cup\\{m\\})^L$ with $\\Pr(Z_t=z_t\\mid X=x)>0$, the conditional law of $Z_s$ given $X=x,Z_t=z_t$ is a product over coordinates. At coordinate $i$, if $z_{t,i}\\in V$, then $Z_{s,i}=z_{t,i}$ with probability one. If $z_{t,i}=m$, then, with $c_{s,t}=(\\alpha_s-\\alpha_t)/(1-\\alpha_t)$, the only possible values are $x_i$ and $m$, with probabilities\n$$\\Pr(Z_{s,i}=x_i\\mid X=x,Z_{t,i}=m)=c_{s,t},\\qquad \\Pr(Z_{s,i}=m\\mid X=x,Z_{t,i}=m)=\\frac{1-\\alpha_s}{1-\\alpha_t}.$$\nThe denominator is positive because $t\\ge1$ implies $\\alpha_t<1$; at $s=0$ the mask posterior has zero mass.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $j$ and a positive-probability suffix $(z_j,\\ldots,z_N)$. By [F1], for every prefix ending at $z_j$, the probability of adjoining the fixed future suffix is multiplied by the same factor $\\prod_{k=j+1}^N a_k(z_{k-1},z_k)$, which does not depend on $z_{j-1}$. Summing over earlier coordinates preserves this common factor, so it cancels in the conditional ratio. Thus $q_x(Z_{j-1}=z_{j-1}\\mid Z_j=z_j,\\ldots,Z_N=z_N)=q_x(Z_{j-1}=z_{j-1}\\mid Z_j=z_j)$ on this positive suffix.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Repeated finite conditioning in reverse order gives $q_x(z_{0:N})=q_x(z_N)\\prod_{j=N}^{1}q_x(z_{j-1}\\mid z_j,\\ldots,z_N)$. Replace each suffix conditional by step 1.1 and identify the one-step row using [F3]. The resulting equality is the displayed factorization, including $N=1$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "reason": "The chain has positive length, but at j=N the future-suffix product in proof1.1 has no factors and equals one. That identity factor cancels harmlessly; proof2.1 explicitly includes N=1, where reverse factorization has the single posterior factor and no nontrivial future suffix.",
+          "case": "empty",
+          "evidence": "In proof step 1.1 the fixed future multiplier is the product from k=j+1 through N. At j=N it is the empty product one, so the common-factor cancellation still holds. Proof step 2.1 explicitly includes N=1 in the finite reverse conditioning formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The chain has positive length, but at j=N the future-suffix product in proof1.1 has no factors and equals one. That identity factor cancels harmlessly; proof2.1 explicitly includes N=1, where reverse factorization has the single posterior factor and no nontrivial future suffix.",
+            "item_sha256": "d4cfd7b63dda86482ba46e2531ea4349ad642500b97a2172707d618d6de40284",
+            "row_sha256": "bce8328195dbbd9d140afce795c220a1334fbcb61aa467c35eaa665f185b9935"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "The Statement restricts the identity to positive-probability paths, and step 1.1 takes conditional ratios only on positive suffixes.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes N=1 in the repeated finite-conditioning identity.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply to a deterministic positive path: each conditional ratio is defined and the factorization remains exact.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 retains the terminal factor q_x(z_N) and factors every predecessor back to level 0.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite sequence of conditional-probability identities on a finite path space.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "On positive forward paths, finite conditioning and cancellation of the common future factor give the reverse posterior factorization. This is not an equivalence between coordinate independence after marginalizing X and this clean-string-conditional identity.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "On positive forward paths, finite conditioning and cancellation of the common future factor give the reverse posterior factorization. This is not an equivalence between coordinate independence after marginalizing X and this clean-string-conditional identity.",
+            "item_sha256": "d4cfd7b63dda86482ba46e2531ea4349ad642500b97a2172707d618d6de40284",
+            "row_sha256": "68388aa33b4f62ace4bafb38e1ee689ebf5bbd8e57bd173becc1ee087718797f"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "On positive forward paths, finite conditioning and cancellation of the common future factor give the reverse posterior factorization. This is not an equivalence between coordinate independence after marginalizing X and this clean-string-conditional identity.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "On positive forward paths, finite conditioning and cancellation of the common future factor give the reverse posterior factorization. This is not an equivalence between coordinate independence after marginalizing X and this clean-string-conditional identity.",
+            "item_sha256": "d4cfd7b63dda86482ba46e2531ea4349ad642500b97a2172707d618d6de40284",
+            "row_sha256": "a6ca7614642841f1a61194b87cf6fc055371fe6b8b190152188f02616dd5da3c"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-masked-diffusion-kl-reduces-to-cross-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-masking-chain-posterior",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$ be the survival schedule of the finite masking chain. Fix a clean sequence $x\\in V^L$ and grid indices $0\\le s<t\\le N$. For every state $z_t\\in(V\\cup\\{m\\})^L$ with $\\Pr(Z_t=z_t\\mid X=x)>0$, the conditional law of $Z_s$ given $X=x,Z_t=z_t$ is a product over coordinates. At coordinate $i$, if $z_{t,i}\\in V$, then $Z_{s,i}=z_{t,i}$ with probability one. If $z_{t,i}=m$, then, with $c_{s,t}=(\\alpha_s-\\alpha_t)/(1-\\alpha_t)$, the only possible values are $x_i$ and $m$, with probabilities\n$$\\Pr(Z_{s,i}=x_i\\mid X=x,Z_{t,i}=m)=c_{s,t},\\qquad \\Pr(Z_{s,i}=m\\mid X=x,Z_{t,i}=m)=\\frac{1-\\alpha_s}{1-\\alpha_t}.$$\nThe denominator is positive because $t\\ge1$ implies $\\alpha_t<1$; at $s=0$ the mask posterior has zero mass.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-finite-grid-masked-diffusion-sampler",
+          "source_section": "Definition",
+          "quote": "For the finite masking chain with state space $S=(V\\cup\\{m\\})^L$ and survival schedule $\\alpha_0,\\ldots,\\alpha_N$, take probability vectors $h_{i,j}(z)\\in\\Delta(V)$ for every position $i\\in\\{1,\\ldots,L\\}$, reverse step $j\\in\\{1,\\ldots,N\\}$, and current state $z\\in S$, where $\\Delta(V)=\\{p:V\\to[0,1]:\\sum_{v\\in V}p(v)=1\\}$. Initialize $Z_N=m^L$. For $j=N,N-1,\\ldots,1$, set $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)$ and update all positions from the same current state $z=Z_j$ as follows, independently across positions conditional on $z$: if $z_i\\ne m$, set $Z_{j-1,i}=z_i$; if $z_i=m$ and $c_j=1$, draw $Z_{j-1,i}$ from $h_{i,j}(z)$; if $z_i=m$ and $c_j<1$, set $Z_{j-1,i}=m$ when $U^{\\mathrm{mask}}_{j,i}\\ge c_j$, and otherwise draw the clean token from $h_{i,j}(z)$ using $U^{\\mathrm{token}}_{j,i}$. The resulting one-coordinate row is $p_{i,j}(w\\mid z)=\\mathbf1_{\\{w=z_i\\}}$ when $z_i\\ne m$, and, when $z_i=m$, has mass $1-c_j$ at $m$ and mass $c_jh_{i,j}(z)(v)$ at each $v\\in V$; the sequence-state kernel is $P_j(z,z')=\\prod_{i=1}^L p_{i,j}(z'_i\\mid z)$. Return $Z_0$ after the finite loop. The mathematical random source is a finite product of mutually independent uniform $[0,1]$ variables $U^{\\mathrm{mask}}_{j,i},U^{\\mathrm{token}}_{j,i}$, one pair for each step and position; an implementation seed is valid only insofar as its supplied random kernel has this law. For inverse-CDF token draws, fix any order $V=(v_1,\\ldots,v_K)$, choose the first $v_k$ whose cumulative mass strictly exceeds $U^{\\mathrm{token}}_{j,i}$, and return $v_K$ if that draw equals $1$. At $j=1$, $c_1=1$, so every remaining mask is unmasked.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\nFinite f-divergence with support conventions by\nThe finite KL generator has the required convex boundary extension. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "In a supervised prediction problem, for every measurable predictor $f$, the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable, so its population risk is a defined extended nonnegative integral. For every sample size $m\\ge1$, the empirical risk $S\\mapsto\\widehat R_S(f)$ is an extended nonnegative measurable function on the finite product sample space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-product-kl-additivity",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let $S_1,\\ldots,S_r$ be finite nonempty sets, and let $u_k,v_k$ be probability vectors on $S_k$. Put $U=\\bigotimes_{k=1}^r u_k$ and $V=\\bigotimes_{k=1}^r v_k$ on $S_1\\times\\cdots\\times S_r$. With $D$ the finite directional KL divergence, zero source masses contributing zero and positive source mass against zero reference mass contributing $+\\infty$, one has\n$$D(U\\|V)=\\sum_{k=1}^rD(u_k\\|v_k),$$\nwith equality also when one or both sides are $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Equip the finite feature space $S$ and label space $V$ with their power-set sigma-algebras, and equip $\\Delta(V)$ with the Borel sigma-algebra inherited from $\\mathbb R^V$. Every predictor $h_{i,j}:S\\to\\Delta(V)$ is measurable because its domain is finite and discrete. For each $v\\in V$, the coordinate map $p\\mapsto p(v)$ is continuous, and $g(t)=-\\log t$ for $t>0$, with $g(0)=+\\infty$, is Borel measurable on $[0,1]$. Therefore $p\\mapsto-\\log p(v)$ is Borel measurable and nonnegative. Since $V$ is finite and discrete, the loss $(p,v)\\mapsto-\\log p(v)$ is measurable on $\\Delta(V)\\times V$. This verifies the loss-measurability requirement in [F5] and the finite-state measurability used in [F7]. Now fix a step $j$, clean string $x$, and observed positive-probability state $z_j$. The true and learned conditional laws both factor over positions by [F2] and [F3]. Applying [F8] to these finite product rows makes their joint conditional KL the sum of the coordinate KLs, preserving the singular $+\\infty$ case described by [F4].",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If $z_{j,i}\\ne m$, the true and learned coordinate rows are the same point mass, so their KL is zero. If $z_{j,i}=m$, put $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)>0$ and $d_j=(1-\\alpha_{j-1})/(1-\\alpha_j)$. The true row has mass $c_j$ at $x_i$ and $d_j$ at $m$; the learned row has mass $c_jh_{i,j}(z_j)(v)$ at $v\\in V$ and $d_j$ at $m$. If $h_{i,j}(z_j)(x_i)>0$, the only nonzero KL terms are $c_j\\log(c_j/(c_jh_{i,j}(z_j)(x_i)))=-c_j\\log h_{i,j}(z_j)(x_i)$ and, when $d_j>0$, $d_j\\log(d_j/d_j)=0$. If $h_{i,j}(z_j)(x_i)=0$, [F4] gives $+\\infty$, which is the same extended value as $c_j[-\\log h_{i,j}(z_j)(x_i)]$. Thus the full conditional KL is $\\sum_i\\mathbf1_{M_{j,i}}c_j[-\\log h_{i,j}(z_j)(x_i)]$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For each $i$, [F1] gives $\\Pr(M_{j,i}\\mid X=x)=1-\\alpha_j$, independent of $x$. Averaging the $i$th term of step 2.1 over the forward corruption therefore gives $c_j(1-\\alpha_j)\\mathbb E[-\\log h_{i,j}(Z_j)(X_i)\\mid M_{j,i}]=(\\alpha_{j-1}-\\alpha_j)R_{j,i}$ by [F5]–[F7]. This argument conditions on a positive event and does not assume the clean coordinates of $X$ are independent.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Sum the step 3.1 identity over the finite positions and all $j=1,\\ldots,N$. The coefficient identity $c_j(1-\\alpha_j)=\\alpha_{j-1}-\\alpha_j$ holds because $\\alpha_j<1$. At $j=1$, $\\alpha_0=1$ gives $d_1=0$, which is the zero mask-retention term already omitted in step 2.1; at $j=N$, $\\alpha_N=0$ gives $\\Pr(M_{N,i})=1$, so the conditional risk in step 3.1 is defined on the whole terminal event. Extended nonnegative sums preserve the $+\\infty$ cases from step 2.1, giving the stated equality.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The vocabulary is nonempty and L,N are positive, so the step/position sums are not empty index families. Some realized states may have no masked positions; their coordinate KLs are zero copy-row terms in proof2.1, not undefined conditional risks, since each conditioning mask event has positive probability one minus alpha_j.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The vocabulary is nonempty and L,N are positive, so the step/position sums are not empty index families. Some realized states may have no masked positions; their coordinate KLs are zero copy-row terms in proof2.1, not undefined conditional risks, since each conditioning mask event has positive probability one minus alpha_j."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The vocabulary is nonempty and L,N are positive, so the step/position sums are not empty index families. Some realized states may have no masked positions; their coordinate KLs are zero copy-row terms in proof2.1, not undefined conditional risks, since each conditioning mask event has positive probability one minus alpha_j.",
+            "item_sha256": "9892f4136458e2efe13a92c0860e32afb1eee9d8d70c6f05737b011bdb417aaf",
+            "row_sha256": "0737b83a20a3a704ceac8394c2b17ca62178cbbab3670e63f6723becf961472e"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 gives +∞ when a predictor assigns zero probability to a true token, and step 4.1 preserves that extended value; step 4.1 also treats d_1=0.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include a single coordinate L=1 and a finite one-term coordinate sum.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 treats the deterministic copied row at unmasked coordinates and the d_j=0 terminal-cleaning row.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 4.1 checks d_1=0 from α_0=1 and P(M_{N,i})=1 from α_N=0.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use finite product-KL and finite conditional expectations; no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Conditional-on-clean product posterior KL reduces to the weighted masked-token population risks, retaining extended infinity when a true-token prediction is zero. It does not characterize independent clean data or equivalence of a learned sampler with the data reverse law.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Conditional-on-clean product posterior KL reduces to the weighted masked-token population risks, retaining extended infinity when a true-token prediction is zero. It does not characterize independent clean data or equivalence of a learned sampler with the data reverse law.",
+            "item_sha256": "9892f4136458e2efe13a92c0860e32afb1eee9d8d70c6f05737b011bdb417aaf",
+            "row_sha256": "c146a08cf0870fed74f5b5376f9af10f745420529640db9313c8df5d6b5253e9"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Conditional-on-clean product posterior KL reduces to the weighted masked-token population risks, retaining extended infinity when a true-token prediction is zero. It does not characterize independent clean data or equivalence of a learned sampler with the data reverse law.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Conditional-on-clean product posterior KL reduces to the weighted masked-token population risks, retaining extended infinity when a true-token prediction is zero. It does not characterize independent clean data or equivalence of a learned sampler with the data reverse law.",
+            "item_sha256": "9892f4136458e2efe13a92c0860e32afb1eee9d8d70c6f05737b011bdb417aaf",
+            "row_sha256": "40672d68bee1e7dc488f5edeb2a536796813ba18f6f1ab67adb2dbf2984ba789"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-97",
+        "notes": "Independently read all four steps, true posterior, sampler procedure/normalization, product-KL proof, directional finite KL definition and current batch-2 supervised/risk definitions and measurability proof. Finite discrete features make every predictor measurable; simplex actions have Borel sigma algebra and -log p(v) extends measurably to +infinity at zero. Product KL applies conditional on X, not after marginalizing correlated clean tokens. Copy rows contribute zero; masked rows contribute c_j[-log h(X_i)] including h(X_i)=0. Strict schedule ensures c_j>0 and mask probability 1-alpha_j>0, so averaging gives the weight alpha_(j-1)-alpha_j without 0 times infinity. At j=1 d_j=0 is omitted, j=N mask event is certain, N=1 and singleton V are valid. Finite nonnegative sums preserve infinity. Sahoo §§3.2.1–3.2.3 and Appendix A.2 support the posterior/substitution computation; no continuum limit or variance theorem is inferred. Reader/refuter report no defect here."
+      }
+    },
+    "lem-finite-masked-generative-joint-law-is-normalized": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masked-diffusion-generative-model",
+          "source_section": "Definition",
+          "quote": "For the finite masking state space $S=(V\\cup\\{m\\})^L$ and reverse kernels $P_j$ of the finite-grid sampler, put a point-mass prior at $Z_N=m^L$. Define a decoder $D$ from $S$ to $V^L$ by $D(x\\mid z_0)=\\mathbf1_{\\{x=z_0\\}}$ when $z_0\\in V^L$, and $D(x\\mid z_0)=|V|^{-L}$ for every $x\\in V^L$ when $z_0\\notin V^L$. The finite joint mass of a clean output $x\\in V^L$ and latent path $(z_0,\\ldots,z_N)\\in S^{N+1}$ is\n$$p(x,z_0,\\ldots,z_N)=\\mathbf1_{\\{z_N=m^L\\}}\\left(\\prod_{j=1}^N P_j(z_j,z_{j-1})\\right)D(x\\mid z_0).$$\nThus reverse step $j$ maps the state at level $j$ to the state at level $j-1$; the decoder is deterministic on clean endpoint states and is explicitly normalized on all other states.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-grid-masked-sampler-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $V$ be finite and nonempty, $m\\notin V$, $L,N\\ge1$, $0=t_0<\\cdots<t_N=1$, and $1=\\alpha_0>\\cdots>\\alpha_N=0$. For each $i,j,z$, let $h_{i,j}(z)$ be a probability vector on $V$, put $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)$, and define the reverse coordinate rows to copy an unmasked token and, from $m$, assign mass $1-c_j$ to $m$ and mass $c_jh_{i,j}(z)(v)$ to each $v\\in V$. Their product rows are probability vectors. Composing these $N$ kernels from the point mass at $m^L$ therefore gives a normalized finite law, and its final state lies in $V^L$ because $c_1=1$ removes every remaining mask.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For fixed $z_0\\in S$, if $z_0\\in V^L$ then $D(\\cdot\\mid z_0)$ is a point mass; otherwise it assigns $|V|^{-L}$ to each of the $|V|^L$ clean outputs. In both cases $\\sum_{x\\in V^L}D(x\\mid z_0)=1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Sum [F1] first over $x$, using step 1.1. Then sum over $z_0$ in $P_1(z_1,z_0)$, over $z_1$ in $P_2(z_2,z_1)$, and successively over $z_{N-1}$ in $P_N(z_N,z_{N-1})$. Each inner sum is one by [F2], leaving $\\sum_{z_N}\\mathbf1_{\\{z_N=m^L\\}}=1$. All sums are finite, so this iterated summation equals the total joint mass.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Every factor in [F1] is nonnegative, and step 2.1 shows the finite total mass is one. Therefore the displayed function is a probability law.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The clean vocabulary is nonempty and L,N are at least one, so V to the L and the path space are finite nonempty. The fallback decoder assigns positive reciprocal cardinality to every clean output, avoiding a uniform law on an empty alphabet.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The clean vocabulary is nonempty and L,N are at least one, so V to the L and the path space are finite nonempty. The fallback decoder assigns positive reciprocal cardinality to every clean output, avoiding a uniform law on an empty alphabet."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The clean vocabulary is nonempty and L,N are at least one, so V to the L and the path space are finite nonempty. The fallback decoder assigns positive reciprocal cardinality to every clean output, avoiding a uniform law on an empty alphabet.",
+            "item_sha256": "4c5bda9ad3a7afbe3bf20c3319dbe5f0c628f2e00f6de77ef2feb9e29627821c",
+            "row_sha256": "842a574772584780d860f4e7967d4756b03356b95bb0de1f3dbe46b34f7ccad4"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow zero decoder or kernel entries; row sums and the terminal point mass still give total mass one.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 covers |V|=1: both the point decoder and the uniform decoder sum to one.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly sum the point-mass decoder and terminal prior cases.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 sums from the terminal indicator z_N=m^L back through all reverse levels to z_0.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 is a finite iterated sum of probability-kernel rows.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Successive summation of normalized decoder and reverse rows gives joint mass one. The result does not infer coordinate independence or full-support predictors conversely from joint normalization.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Successive summation of normalized decoder and reverse rows gives joint mass one. The result does not infer coordinate independence or full-support predictors conversely from joint normalization.",
+            "item_sha256": "4c5bda9ad3a7afbe3bf20c3319dbe5f0c628f2e00f6de77ef2feb9e29627821c",
+            "row_sha256": "a436b52bfd61210c57cc7e2af53eede30a3151c705f93cb7764486f619da0870"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Successive summation of normalized decoder and reverse rows gives joint mass one. The result does not infer coordinate independence or full-support predictors conversely from joint normalization.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Successive summation of normalized decoder and reverse rows gives joint mass one. The result does not infer coordinate independence or full-support predictors conversely from joint normalization.",
+            "item_sha256": "4c5bda9ad3a7afbe3bf20c3319dbe5f0c628f2e00f6de77ef2feb9e29627821c",
+            "row_sha256": "70412e9e0cbe7779670f05abad93d12466e2625d84753cc72ff8f7d2534ff365"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-forward-path-is-admissible-for-finite-masked-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-grid-masked-diffusion-sampler",
+          "source_section": "Definition",
+          "quote": "For the finite masking chain with state space $S=(V\\cup\\{m\\})^L$ and survival schedule $\\alpha_0,\\ldots,\\alpha_N$, take probability vectors $h_{i,j}(z)\\in\\Delta(V)$ for every position $i\\in\\{1,\\ldots,L\\}$, reverse step $j\\in\\{1,\\ldots,N\\}$, and current state $z\\in S$, where $\\Delta(V)=\\{p:V\\to[0,1]:\\sum_{v\\in V}p(v)=1\\}$. Initialize $Z_N=m^L$. For $j=N,N-1,\\ldots,1$, set $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)$ and update all positions from the same current state $z=Z_j$ as follows, independently across positions conditional on $z$: if $z_i\\ne m$, set $Z_{j-1,i}=z_i$; if $z_i=m$ and $c_j=1$, draw $Z_{j-1,i}$ from $h_{i,j}(z)$; if $z_i=m$ and $c_j<1$, set $Z_{j-1,i}=m$ when $U^{\\mathrm{mask}}_{j,i}\\ge c_j$, and otherwise draw the clean token from $h_{i,j}(z)$ using $U^{\\mathrm{token}}_{j,i}$. The resulting one-coordinate row is $p_{i,j}(w\\mid z)=\\mathbf1_{\\{w=z_i\\}}$ when $z_i\\ne m$, and, when $z_i=m$, has mass $1-c_j$ at $m$ and mass $c_jh_{i,j}(z)(v)$ at each $v\\in V$; the sequence-state kernel is $P_j(z,z')=\\prod_{i=1}^L p_{i,j}(z'_i\\mid z)$. Return $Z_0$ after the finite loop. The mathematical random source is a finite product of mutually independent uniform $[0,1]$ variables $U^{\\mathrm{mask}}_{j,i},U^{\\mathrm{token}}_{j,i}$, one pair for each step and position; an implementation seed is valid only insofar as its supplied random kernel has this law. For inverse-CDF token draws, fix any order $V=(v_1,\\ldots,v_K)$, choose the first $v_k$ whose cumulative mass strictly exceeds $U^{\\mathrm{token}}_{j,i}$, and return $v_K$ if that draw equals $1$. At $j=1$, $c_1=1$, so every remaining mask is unmasked.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-masking-chain-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For a finite absorbing-mask chain with finite clean vocabulary, mask symbol, sequence length, strict grid, and survival schedule as specified above, each sequence-state transition row is a probability vector, and the displayed joint path mass $\\mu(x)\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i})$ sums to one over $x\\in V^L$ and $z_0,\\ldots,z_N\\in S$. Thus it defines a probability law on the finite clean-sequence and path space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-masked-generative-joint-law-is-normalized",
+          "source_section": "Statement",
+          "quote": "Let $V$ be finite and nonempty, $m\\notin V$, $L,N\\ge1$, and $S=(V\\cup\\{m\\})^L$. Let $P_j$ be probability kernels on $S$, put prior mass one at $z_N=m^L$, and let $D(x\\mid z_0)=\\mathbf1_{\\{x=z_0\\}}$ when $z_0\\in V^L$ and $D(x\\mid z_0)=|V|^{-L}$ otherwise. Then the finite joint mass $p(x,z_0,\\ldots,z_N)=\\mathbf1_{\\{z_N=m^L\\}}\\left(\\prod_{j=1}^NP_j(z_j,z_{j-1})\\right)D(x\\mid z_0)$ is nonnegative and sums to one over $x\\in V^L$ and $(z_0,\\ldots,z_N)\\in S^{N+1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$ (that is, $\\int_\\Omega q\\,d\\mu=1$), write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nThe normalization follows from positive-scalar homogeneity of the nonnegative integral:\n$$\\int\\pi\\,d\\mu=Z^{-1}\\int\\gamma\\,d\\mu=1.$$\nThe induced density set functions are measures by The indefinite integral of a nonnegative measurable function is a measure. Their total masses are one: $Q(\\Omega)=1$ by the probability-density hypothesis on $q$, and $\\Pi(\\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\\in\\mathcal A$ satisfy $\\Pi(A)=0$. Then $\\int_A\\pi\\,d\\mu=0$, so the zero-integral criterion gives $\\pi=0$ $\\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are Monotonicity and nonnegative homogeneity of the nonnegative integral and A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse the extended logarithm $\\log0=-\\infty$, agreeing with The natural logarithm as the inverse of the exponential function on positive inputs. Since $\\int\\gamma\\,d\\mu<\\infty$ and $\\int q\\,d\\mu=1$, both functions are finite $\\mu$-almost everywhere: for either $f=\\gamma$ or $f=q$, $\\mu\\{f=\\infty\\}\\le n^{-1}\\int f\\,d\\mu$ for every $n\\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\\log\\gamma|$, $q|\\log q|$, $q\\log\\gamma$, and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in Bayes formula for dominated kernels and Conditional density formula. In particular, Likelihood densities supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The forward survival ratios telescope to $\\prod_{j=1}^Nr_j=\\alpha_N=0$, so for each coordinate the event of remaining clean at $N$ has probability zero; hence every $q_x$-positive path has $z_N=m^L$, while the defining path mass forces $z_0=x$. Fix such a path. A clean-to-clean forward transition copies its token, and the learned reverse row assigns that transition probability one. A clean-to-mask transition has learned reverse probability $c_jh_{i,j}(z_j)(x_i)>0$. A mask-to-mask transition can occur only for $j\\ge2$, because $z_0=x$ is clean; then $\\alpha_{j-1}<1$ and its learned reverse probability $d_j=(1-\\alpha_{j-1})/(1-\\alpha_j)>0$. These are all positive-probability forward transitions by [F1]. Thus every factor in the learned reverse path mass is positive, and the terminal prior and clean-state decoder are also positive; hence $\\gamma_x(z_0,\\ldots,z_N)>0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "By [F3], at least one path has positive $q_x$ mass. Step 1.1 makes its joint model mass positive, so $Z_x>0$; [F4] gives $Z_x\\le1$. On every $q_x$-positive path, step 1.1 gives $\\gamma_x>0$, hence $\\pi_x>0$ and $q_x\\ll\\pi_x$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The path space is finite. On each of its finitely many $q_x$-positive states, both $q_x(z)$ and $\\gamma_x(z)$ are positive finite real numbers, so both logarithms are finite. Their finite weighted sum is finite; on $q_x=0$ states the variational convention contributes zero. This verifies [F5] and proves admissibility.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "V is nonempty and L,N are positive. The forward law is a probability vector on the finite path space, so at least one path has positive mass as used in proof2.1; full-support reverse rows make its joint target positive, rather than normalizing an empty support.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "V is nonempty and L,N are positive. The forward law is a probability vector on the finite path space, so at least one path has positive mass as used in proof2.1; full-support reverse rows make its joint target positive, rather than normalizing an empty support."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "V is nonempty and L,N are positive. The forward law is a probability vector on the finite path space, so at least one path has positive mass as used in proof2.1; full-support reverse rows make its joint target positive, rather than normalizing an empty support.",
+            "item_sha256": "946559ca6767573c5cc585c36fe706b5ac1c6f3bf3c54db928a0bc52e4c85a23",
+            "row_sha256": "5cd495699e8502e4f37bc31452d26717aa802030732c26b9a6ccb4dd259cccbe"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 sets the variational contributions to zero on q_x-zero states and proves finite logarithms on every positive path.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 uses only finiteness of S^{N+1}, which also holds for L=N=1.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 checks every possible positive transition, including deterministic copy and terminal transitions.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses α_0=1 to force z_0=x and α_N=0 to force z_N=m^L.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 enumerate a finite path space and use finite sums only.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Strict masked-token predictor positivity makes every forward-positive path model-positive and gives finite weighted logs, hence admissibility. It is a sufficient support proof, not an iff characterization requiring full predictor support in every possible admissible model.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Strict masked-token predictor positivity makes every forward-positive path model-positive and gives finite weighted logs, hence admissibility. It is a sufficient support proof, not an iff characterization requiring full predictor support in every possible admissible model.",
+            "item_sha256": "946559ca6767573c5cc585c36fe706b5ac1c6f3bf3c54db928a0bc52e4c85a23",
+            "row_sha256": "9eac3a878c0c2c83013bd1ffe30d95d8aab8118e64c7fc51eb36e77466f4276c"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Strict masked-token predictor positivity makes every forward-positive path model-positive and gives finite weighted logs, hence admissibility. It is a sufficient support proof, not an iff characterization requiring full predictor support in every possible admissible model.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Strict masked-token predictor positivity makes every forward-positive path model-positive and gives finite weighted logs, hence admissibility. It is a sufficient support proof, not an iff characterization requiring full predictor support in every possible admissible model.",
+            "item_sha256": "946559ca6767573c5cc585c36fe706b5ac1c6f3bf3c54db928a0bc52e4c85a23",
+            "row_sha256": "c3889528919eb8905eb336db32aceffa1384afc5801095bb9833146cbffaa37f"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-97",
+        "notes": "Read all three proof steps and all seven actual prerequisites, including current variational admissibility definition, finite joint normalization, sampler normalization and forward law. Every positive forward path starts at x and ends at all-mask. Reversing clean copies has mass one, clean-to-mask has positive c_j h(x_i), and retained masks occur only j>=2 where d_j>0. Full support is required exactly at masked states. A positive q_x path exists by finite normalization, forcing 0<Z_x<=1; support domination and finite absolute log sums follow on finite positive support. N=1, singleton vocabulary, j=1 zero d_1 and zero q_x paths checked; no infinite integrability or choice argument is used. Refuter:97:1 independently confirmed fatal citation-inaccurate: complete Blei §2.2 (printed pp.861–862, Eqs.11–14) gives KL/ELBO identities but not the precise admissibility conditions. Locator repaired to distinguish the external background from the exact local definition/proof. No statement or proof changed; repair confidence 1."
+      }
+    },
+    "cor-masked-diffusion-finite-elbo-cross-entropy": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-masked-diffusion-generative-model",
+          "source_section": "Definition",
+          "quote": "For the finite masking state space $S=(V\\cup\\{m\\})^L$ and reverse kernels $P_j$ of the finite-grid sampler, put a point-mass prior at $Z_N=m^L$. Define a decoder $D$ from $S$ to $V^L$ by $D(x\\mid z_0)=\\mathbf1_{\\{x=z_0\\}}$ when $z_0\\in V^L$, and $D(x\\mid z_0)=|V|^{-L}$ for every $x\\in V^L$ when $z_0\\notin V^L$. The finite joint mass of a clean output $x\\in V^L$ and latent path $(z_0,\\ldots,z_N)\\in S^{N+1}$ is\n$$p(x,z_0,\\ldots,z_N)=\\mathbf1_{\\{z_N=m^L\\}}\\left(\\prod_{j=1}^N P_j(z_j,z_{j-1})\\right)D(x\\mid z_0).$$\nThus reverse step $j$ maps the state at level $j$ to the state at level $j-1$; the decoder is deterministic on clean endpoint states and is explicitly normalized on all other states.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-masked-generative-joint-law-is-normalized",
+          "source_section": "Statement",
+          "quote": "Let $V$ be finite and nonempty, $m\\notin V$, $L,N\\ge1$, and $S=(V\\cup\\{m\\})^L$. Let $P_j$ be probability kernels on $S$, put prior mass one at $z_N=m^L$, and let $D(x\\mid z_0)=\\mathbf1_{\\{x=z_0\\}}$ when $z_0\\in V^L$ and $D(x\\mid z_0)=|V|^{-L}$ otherwise. Then the finite joint mass $p(x,z_0,\\ldots,z_N)=\\mathbf1_{\\{z_N=m^L\\}}\\left(\\prod_{j=1}^NP_j(z_j,z_{j-1})\\right)D(x\\mid z_0)$ is nonnegative and sums to one over $x\\in V^L$ and $(z_0,\\ldots,z_N)\\in S^{N+1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-forward-path-is-admissible-for-finite-masked-model",
+          "source_section": "Statement",
+          "quote": "Let $V$ be finite and nonempty, $m\\notin V$, $L,N\\ge1$, and $1=\\alpha_0>\\cdots>\\alpha_N=0$. For each position, reverse step, state with a masked position, and clean token, assume $h_{i,j}(z)(v)>0$. Fix $x\\in V^L$, let $q_x$ be the forward path probability vector on $S^{N+1}$ conditioned on $X=x$, let $\\gamma_x(z_0,\\ldots,z_N)=p(x,z_0,\\ldots,z_N)$ be the finite joint model mass, and put $Z_x=\\sum_z\\gamma_x(z)$ and $\\pi_x=\\gamma_x/Z_x$. Then $0<Z_x\\le1$, $q_x=0$ wherever $\\pi_x=0$, and\n$$\\sum_{z:q_x(z)>0}q_x(z)\\bigl(|\\log\\gamma_x(z)|+|\\log q_x(z)|\\bigr)<\\infty.$$\nWith weighted log terms set to zero where $q_x=0$, as in the variational definition, $q_x$ is an admissible variational density for the finite joint target $\\gamma_x$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$ (that is, $\\int_\\Omega q\\,d\\mu=1$), write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nThe normalization follows from positive-scalar homogeneity of the nonnegative integral:\n$$\\int\\pi\\,d\\mu=Z^{-1}\\int\\gamma\\,d\\mu=1.$$\nThe induced density set functions are measures by The indefinite integral of a nonnegative measurable function is a measure. Their total masses are one: $Q(\\Omega)=1$ by the probability-density hypothesis on $q$, and $\\Pi(\\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\\in\\mathcal A$ satisfy $\\Pi(A)=0$. Then $\\int_A\\pi\\,d\\mu=0$, so the zero-integral criterion gives $\\pi=0$ $\\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are Monotonicity and nonnegative homogeneity of the nonnegative integral and A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse the extended logarithm $\\log0=-\\infty$, agreeing with The natural logarithm as the inverse of the exponential function on positive inputs. Since $\\int\\gamma\\,d\\mu<\\infty$ and $\\int q\\,d\\mu=1$, both functions are finite $\\mu$-almost everywhere: for either $f=\\gamma$ or $f=q$, $\\mu\\{f=\\infty\\}\\le n^{-1}\\int f\\,d\\mu$ for every $n\\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\\log\\gamma|$, $q|\\log q|$, $q\\log\\gamma$, and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in Bayes formula for dominated kernels and Conditional density formula. In particular, Likelihood densities supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-elbo-kl-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\gamma,Z,\\pi,q$ satisfy Variational family and evidence lower bound, and put $Q=q\\,\\mu$ and $\\Pi=\\pi\\,\\mu$. The choice-free density-ratio identity\n$$\\log Z=\\operatorname{ELBO}(q)+\\int q\\log(q/\\pi)\\,d\\mu$$\nholds, with the ratio integrand set to zero where $q=0$. Under AC, the final integral is the library reverse divergence $D(Q\\|\\Pi)$ and is nonnegative. Consequently\n$$\\operatorname{ELBO}(q)\\le\\log Z.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-masking-path-reversal-factorization",
+          "source_section": "Statement",
+          "quote": "Fix a clean string $x\\in V^L$ and let $q_x$ be the finite forward path law of the absorbing-mask chain. For every path $(z_0,\\ldots,z_N)$ with $q_x(z_0,\\ldots,z_N)>0$, the reversed path probability factors as\n$$q_x(z_0,\\ldots,z_N)=q_x(Z_N=z_N)\\prod_{j=N}^{1}q_x(Z_{j-1}=z_{j-1}\\mid Z_j=z_j).$$\nEach factor on the right is the true one-step posterior conditional on the clean string $x$; the identity is asserted only on positive-probability paths.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-masked-diffusion-kl-reduces-to-cross-entropy",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\cdots>\\alpha_N=0$. Draw $X=(X_1,\\ldots,X_L)$ from any probability law on $V^L$. Conditional on $X$, at step $j$ each clean coordinate survives with probability $r_j=\\alpha_j/\\alpha_{j-1}$ using fresh Bernoulli innovations independent across coordinates and steps, and otherwise becomes $m$; an already masked coordinate remains masked. Thus $Z_j$ is the state after step $j$. For $j=1,\\ldots,N$, put\n$$c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j),\\qquad d_j=(1-\\alpha_{j-1})/(1-\\alpha_j).$$\nLet $h_{i,j}:S\\to\\Delta(V)$ be any predictors, where $S=(V\\cup\\{m\\})^L$ and $\\Delta(V)$ is the set of probability vectors on $V$. Define the learned reverse kernel $P_j$ to have product rows: an unmasked coordinate is copied, while a masked coordinate assigns mass $d_j$ to $m$ and mass $c_jh_{i,j}(z)(v)$ to each $v\\in V$. For every positive-probability current state $z_j$, the true conditional law $q(Z_{j-1}\\mid Z_j=z_j,X)$ also has product rows: it copies every unmasked coordinate and, at a masked coordinate $i$, assigns mass $c_j$ to $X_i$ and $d_j$ to $m$. For $1\\le i\\le L$, let $M_{j,i}=\\{Z_{j,i}=m\\}$, which has probability $1-\\alpha_j>0$, and let $P_{j,i}^{\\mathrm{mask}}$ be the conditional law of $(Z_j,X_i)$ given $M_{j,i}$. View $h_{i,j}$ as a predictor in the finite supervised problem with feature $Z_j$, label $X_i$, action space $\\Delta(V)$, its singleton predictor class, and loss $\\ell(p,v)=-\\log p(v)$, with $-\\log0=+\\infty$. Its population risk under $P_{j,i}^{\\mathrm{mask}}$ is\n$$R_{j,i}=\\mathbb E[\\ell(h_{i,j}(Z_j),X_i)\\mid M_{j,i}].$$\nFor finite-alphabet probability vectors $P=(p_a)$ and $Q=(q_a)$, write $D_{\\mathrm{KL}}(P\\|Q)=\\sum_{a:p_a>0}p_a\\log(p_a/q_a)$, with zero source terms set to zero and positive source mass against zero reference mass set to $+\\infty$. Define the extended-nonnegative conditional reverse-KL contribution\n$$\\mathcal L_j=\\mathbb E_{X,Z_j}\\left[D_{\\mathrm{KL}}\\left(q(Z_{j-1}\\mid Z_j,X)\\middle\\|P_j(Z_j,\\cdot)\\right)\\right].$$\nThen\n$$\\sum_{j=1}^N\\mathcal L_j=\\sum_{j=1}^N\\sum_{i=1}^L(\\alpha_{j-1}-\\alpha_j)R_{j,i}$$\nas an equality of extended nonnegative quantities. If a predictor assigns zero mass to the true token on a positive-probability masked event, both sides are $+\\infty$; finite cross-entropy is not assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\nFinite f-divergence with support conventions by\nThe finite KL generator has the required convex boundary extension. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Fix $x\\in V^L$ and take counting measure on the finite path space $S^{N+1}$. By [F2], $\\gamma_x(z)=p(x,z)$ has finite normalizer $Z_x=p(x)\\le1$; by [F3], $0<Z_x$ and $q_x$ is admissible for $\\gamma_x$. Under this counting measure, the induced probability laws assign singleton masses $q_x(z)$ and $\\pi_x(z)$. Admissibility gives $q_x(z)>0\\Rightarrow\\pi_x(z)>0$, so the ratio integral in [F5] is the finite sum $\\sum_{z:q_x(z)>0}q_x(z)\\log(q_x(z)/\\pi_x(z))$, which is exactly $D_{\\mathrm{KL}}(q_x\\|\\pi_x)$ by [F8]. Applying [F5] with [A1] therefore gives $\\log p(x)=\\mathcal E(x)+D_{\\mathrm{KL}}(q_x\\|\\pi_x)$ and $\\mathcal E(x)\\le\\log p(x)$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "The forward path formula forces $Z_0=x$. For each coordinate, the product of forward survival ratios is $\\alpha_N=0$, so the finite forward law assigns probability one to $Z_N=m^L$; thus on every $q_x$-positive path the decoder and prior factors in [F1] are both one. By [F6], $q_x(z_{0:N})=q_x(z_N)\\prod_{j=N}^1q_x(z_{j-1}\\mid z_j,x)$ on this path, and $q_x(z_N)=1$. Therefore $\\log(p(x,z)/q_x(z))$ is the sum of the reverse-step log ratios. By [F8], the conditional expectation of each log ratio is the negative finite KL term, so $\\mathcal E(x)=-\\sum_{j=1}^N\\mathcal L_j(x)$, where $\\mathcal L_j(x)=\\mathbb E_{Z_j\\mid X=x}D_{\\mathrm{KL}}(q(Z_{j-1}\\mid Z_j,x)\\|P_j(Z_j,\\cdot))$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Average the identity from step 1.2 over $X\\sim\\mu$. The resulting expected sum of $\\mathcal L_j(X)$ is exactly the left side of the finite KL-to-risk identity in [F7]; substituting [F7] yields $\\mathbb E[-\\mathcal E(X)]=\\sum_{j,i}(\\alpha_{j-1}-\\alpha_j)R_{j,i}$.",
+          "inputs": [
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The endpoint cancellation in step 1.2 uses $Z_0=x$ from $\\alpha_0=1$ and $Z_N=m^L$ from $\\alpha_N=0$. If either endpoint is changed, its decoder reconstruction or terminal-prior KL factor remains in the finite log-ratio expansion unless a separate hypothesis makes it vanish.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The vocabulary is nonempty and L,N are at least one, so clean strings and the finite path space exist and the reverse product has steps. Full-support prediction makes at least one forward-positive path model-positive for every fixed clean string; the evidence sum is not an empty or zero-mass target.",
+          "case": "empty",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The vocabulary is nonempty and L,N are at least one, so clean strings and the finite path space exist and the reverse product has steps. Full-support prediction makes at least one forward-positive path model-positive for every fixed clean string; the evidence sum is not an empty or zero-mass target."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The vocabulary is nonempty and L,N are at least one, so clean strings and the finite path space exist and the reverse product has steps. Full-support prediction makes at least one forward-positive path model-positive for every fixed clean string; the evidence sum is not an empty or zero-mass target.",
+            "item_sha256": "8cafa4325934816f50fc76d57d20aefbd333128f79def1b63205410a717437fc",
+            "row_sha256": "7e20a5942fc4beefa6ab8199832df72585e36318e7406a47faa2f16f9cab22d5"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.2 uses the exact all-mask terminal state α_N=0 and step 3.1 records which endpoint terms would return if an endpoint changed.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 apply to the single-step case N=1 and the finite coordinate sum, including L=1.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 averages over μ and remains valid when μ is concentrated on one clean string.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 verify exact clean and all-mask endpoints and identify the reconstruction/prior terms when they are changed.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 applies the library ELBO/KL theorem under the explicitly stated AC premise [A1]; steps 1.2–3.1 are finite choice-free calculations.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Full-support reverse predictors and exact clean/all-masked endpoints imply admissibility and the weighted-cross-entropy ELBO identity. The corollary does not conversely characterize all variational models by that identity or remove endpoint terms under approximate endpoints.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Full-support reverse predictors and exact clean/all-masked endpoints imply admissibility and the weighted-cross-entropy ELBO identity. The corollary does not conversely characterize all variational models by that identity or remove endpoint terms under approximate endpoints.",
+            "item_sha256": "8cafa4325934816f50fc76d57d20aefbd333128f79def1b63205410a717437fc",
+            "row_sha256": "f0b5f02a9e0c277f0c74da0da13478da34dde58aa1a1e8009c05c055260827ea"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "Full-support reverse predictors and exact clean/all-masked endpoints imply admissibility and the weighted-cross-entropy ELBO identity. The corollary does not conversely characterize all variational models by that identity or remove endpoint terms under approximate endpoints.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Full-support reverse predictors and exact clean/all-masked endpoints imply admissibility and the weighted-cross-entropy ELBO identity. The corollary does not conversely characterize all variational models by that identity or remove endpoint terms under approximate endpoints.",
+            "item_sha256": "8cafa4325934816f50fc76d57d20aefbd333128f79def1b63205410a717437fc",
+            "row_sha256": "77d2a797c941092bd532831862fd9ba9c9c19d8bde35e9cb41a324578c4947f3"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-97",
+        "notes": "Read every step and all 13 actual dependency carriers, including the explicit AC axiom and entire published ELBO/KL proof. Finite counting measure, positive evidence, support domination and log integrability follow from the checked admissibility lemma. The explicit ratio sum equals directional finite KL, so the AC-qualified library decomposition and bound apply. Positive paths have decoder and terminal prior equal to one; backward factorization cancels q_x and conditional expectation yields minus the sum of reverse KLs. Finite averaging then uses the checked KL-to-masked-risk identity. Full support on finite masked states makes each used logarithm finite; zero data masses are harmless. N=1, singleton V, first-step no mask retention and terminal all-mask event checked. Approximate endpoints explicitly keep extra terms, and no continuum limit is asserted. AC is retained exactly for the library KL identification/nonnegativity application; finite calculations need no choice. Sahoo Appendix A.2.4/B.1, complete Blei §2.2 and complete CMU Lecture13 §2.3.2 support the external context without replacing local proof. Reader/refuter report no defect here."
+      }
+    },
+    "ex-finite-chain-model-error-accumulates-with-zero-mesh-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-variation-distance-for-probability-laws",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ and $\\nu$ be probability measures on the same measurable space\n$(E,\\mathcal E)$ ([[def-probability-measure]]). Their **total variation\ndistance** is\n\n$$\\lVert\\mu-\\nu\\rVert_{\\mathrm{TV}}:=\\sup_{A\\in\\mathcal E}\\bigl|\\mu(A)-\\nu(A)\\bigr| .$$\n\nFor every event $A$ the difference $\\mu(A)-\\nu(A)$ is a real number in\n$[-1,1]$, because both measures have total mass one; hence the set being\nmaximized is a nonempty subset of $[0,1]$ and the supremum lies in $[0,1]$.\nThe empty event and the whole space give the values $0$ and\n$|\\mu(E)-\\nu(E)|=0$, so the distance is zero when $\\mu=\\nu$, and it is symmetric\nin $\\mu$ and $\\nu$. This convention carries no factor $1/2$ in the supremum;\nit is therefore not the total variation norm of the signed measure $\\mu-\\nu$,\nwhich is twice the quantity above when that signed measure is considered on a\nmeasurable space where the decomposition is attained. On a countable state\nspace with its power-set sigma-algebra the supremum equals the half-$\\ell^1$\nsum $\\tfrac12\\sum_{x\\in E}|\\mu(\\{x\\})-\\nu(\\{x\\})|$; that identity is proved in\n[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-chain-reverse-kernel-error-telescope",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a finite nonempty state space and let $N\\ge1$. For each $j=1,\\ldots,N$, let $Q_j$ and $P_j$ be probability kernels on $S$, used in reverse order from level $j$ to level $j-1$. Starting from probability vectors $\\mu_N,\\nu_N$, define $\\mu_{j-1}=\\mu_jQ_j$ and $\\nu_{j-1}=\\nu_jP_j$. If $\\operatorname{TV}(\\mu_N,\\nu_N)\\le\\varepsilon_{\\mathrm{init}}$ and\n$$\\sup_{z\\in S}\\operatorname{TV}(Q_j(z,\\cdot),P_j(z,\\cdot))\\le\\varepsilon_j\\qquad(1\\le j\\le N),$$\nwhere $\\varepsilon_{\\mathrm{init}},\\varepsilon_1,\\ldots,\\varepsilon_N\\in[0,1]$, then\n$$\\operatorname{TV}(\\mu_0,\\nu_0)\\le\\min\\left\\{1,\\varepsilon_{\\mathrm{init}}+\\sum_{j=1}^N\\varepsilon_j\\right\\}.$$\nHere $\\operatorname{TV}(u,v)=\\sup_{A\\subseteq S}|u(A)-v(A)|$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "At state $0$, the true row is $\\delta_0$ and the learned row is $(1-\\varepsilon,\\varepsilon)$, so their event difference on $\\{1\\}$ is $\\varepsilon$; at state $1$ the rows agree. Since these are the only two states, [F1] gives uniform row error exactly $\\varepsilon$ at each step.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "After one learned step the law is $(1-\\varepsilon,\\varepsilon)$. Since $1$ is absorbing and $0$ returns to $0$ with probability $1-\\varepsilon$, after two steps its mass at $0$ is $(1-\\varepsilon)^2$ and its mass at $1$ is $1-(1-\\varepsilon)^2=2\\varepsilon-\\varepsilon^2$. The true identity chain remains $\\delta_0$, so [F1] gives endpoint TV $2\\varepsilon-\\varepsilon^2>0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For $\\varepsilon=1/4$, the endpoint error is $7/16$, while [F2] gives the valid bound $2\\varepsilon=1/2$. The example has no time-discretization term because the reference is the fixed two-step chain itself.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example fixes a two-state space, two transitions and an initial point mass. Thus its endpoint comparison uses neither an empty kernel composition nor an empty probability law.",
+          "case": "empty",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The example fixes a two-state space, two transitions and an initial point mass. Thus its endpoint comparison uses neither an empty kernel composition nor an empty probability law.",
+            "item_sha256": "0f4b0f93914a34897d2e1ea3f699745fb3b6a25ba61a8f7fbcdb153764d5ff58",
+            "row_sha256": "dcff77361215e4f9e9ba818a5428897e654fe8a7b8a5d35c121a6373f284c5c7"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example assumes 0<ε<1, so the zero-error boundary is outside its stated parameter range.",
+          "case": "zero"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example assumes 0<ε<1 and fixes N=2; ε=1 and a one-step chain are outside its stated range.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include the point-mass initial law δ_0 and identity true chain.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 computes the exact law at the terminal state after the two specified transitions.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 are calculations on the explicitly listed two-state finite space.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The fixed two-step identity reference and absorbing learned perturbation give endpoint error two epsilon minus epsilon squared. This demonstrates model error without mesh error, not equivalence between positive model error and endpoint discrepancy for arbitrary chains.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The fixed two-step identity reference and absorbing learned perturbation give endpoint error two epsilon minus epsilon squared. This demonstrates model error without mesh error, not equivalence between positive model error and endpoint discrepancy for arbitrary chains.",
+            "item_sha256": "0f4b0f93914a34897d2e1ea3f699745fb3b6a25ba61a8f7fbcdb153764d5ff58",
+            "row_sha256": "d1a4a38bf15a43ae1a76c8bb1d6e07c75f9b22f14dfbd6bae3cadca91c53cae0"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The fixed two-step identity reference and absorbing learned perturbation give endpoint error two epsilon minus epsilon squared. This demonstrates model error without mesh error, not equivalence between positive model error and endpoint discrepancy for arbitrary chains.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The fixed two-step identity reference and absorbing learned perturbation give endpoint error two epsilon minus epsilon squared. This demonstrates model error without mesh error, not equivalence between positive model error and endpoint discrepancy for arbitrary chains.",
+            "item_sha256": "0f4b0f93914a34897d2e1ea3f699745fb3b6a25ba61a8f7fbcdb153764d5ff58",
+            "row_sha256": "c863c216d44b21e7d57147c8a3e5a1996372632ab667494f68bbaf9b7b0b9f02"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-97",
+        "notes": "Read all three verification steps and exact TV/telescope suppliers. On {0,1}, the four events give row discrepancy epsilon at 0 and zero at 1. Learned survival is (1-epsilon)^2; endpoint TV is 2epsilon-epsilon^2, positive for 0<epsilon<1 and <=min(1,2epsilon). At epsilon=1/4 this is 7/16 versus 1/2. Singleton/empty-space issues are excluded by the explicit two-state witness; epsilon endpoints are excluded but the formulas have the correct limiting values. No continuum approximation, convergence or choice is claimed. Reader/refuter report no defect here."
+      }
+    },
+    "cex-factorized-reverse-kernel-fails-for-correlated-tokens": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-masking-chain-posterior",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$ be the survival schedule of the finite masking chain. Fix a clean sequence $x\\in V^L$ and grid indices $0\\le s<t\\le N$. For every state $z_t\\in(V\\cup\\{m\\})^L$ with $\\Pr(Z_t=z_t\\mid X=x)>0$, the conditional law of $Z_s$ given $X=x,Z_t=z_t$ is a product over coordinates. At coordinate $i$, if $z_{t,i}\\in V$, then $Z_{s,i}=z_{t,i}$ with probability one. If $z_{t,i}=m$, then, with $c_{s,t}=(\\alpha_s-\\alpha_t)/(1-\\alpha_t)$, the only possible values are $x_i$ and $m$, with probabilities\n$$\\Pr(Z_{s,i}=x_i\\mid X=x,Z_{t,i}=m)=c_{s,t},\\qquad \\Pr(Z_{s,i}=m\\mid X=x,Z_{t,i}=m)=\\frac{1-\\alpha_s}{1-\\alpha_t}.$$\nThe denominator is positive because $t\\ge1$ implies $\\alpha_t<1$; at $s=0$ the mask posterior has zero mass.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-finite-grid-masked-diffusion-sampler",
+          "source_section": "Definition",
+          "quote": "For the finite masking chain with state space $S=(V\\cup\\{m\\})^L$ and survival schedule $\\alpha_0,\\ldots,\\alpha_N$, take probability vectors $h_{i,j}(z)\\in\\Delta(V)$ for every position $i\\in\\{1,\\ldots,L\\}$, reverse step $j\\in\\{1,\\ldots,N\\}$, and current state $z\\in S$, where $\\Delta(V)=\\{p:V\\to[0,1]:\\sum_{v\\in V}p(v)=1\\}$. Initialize $Z_N=m^L$. For $j=N,N-1,\\ldots,1$, set $c_j=(\\alpha_{j-1}-\\alpha_j)/(1-\\alpha_j)$ and update all positions from the same current state $z=Z_j$ as follows, independently across positions conditional on $z$: if $z_i\\ne m$, set $Z_{j-1,i}=z_i$; if $z_i=m$ and $c_j=1$, draw $Z_{j-1,i}$ from $h_{i,j}(z)$; if $z_i=m$ and $c_j<1$, set $Z_{j-1,i}=m$ when $U^{\\mathrm{mask}}_{j,i}\\ge c_j$, and otherwise draw the clean token from $h_{i,j}(z)$ using $U^{\\mathrm{token}}_{j,i}$. The resulting one-coordinate row is $p_{i,j}(w\\mid z)=\\mathbf1_{\\{w=z_i\\}}$ when $z_i\\ne m$, and, when $z_i=m$, has mass $1-c_j$ at $m$ and mass $c_jh_{i,j}(z)(v)$ at each $v\\in V$; the sequence-state kernel is $P_j(z,z')=\\prod_{i=1}^L p_{i,j}(z'_i\\mid z)$. Return $Z_0$ after the finite loop. The mathematical random source is a finite product of mutually independent uniform $[0,1]$ variables $U^{\\mathrm{mask}}_{j,i},U^{\\mathrm{token}}_{j,i}$, one pair for each step and position; an implementation seed is valid only insofar as its supplied random kernel has this law. For inverse-CDF token draws, fix any order $V=(v_1,\\ldots,v_K)$, choose the first $v_k$ whose cumulative mass strictly exceeds $U^{\\mathrm{token}}_{j,i}$, and return $v_K$ if that draw equals $1$. At $j=1$, $c_1=1$, so every remaining mask is unmasked.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Since $\\alpha_1=0$, [F1] gives $Z_1=(m,m)$ with probability one, independent of $X$. By [F2], conditioning on this state and reversing to $s=0$ returns $X$ exactly. Hence the true reverse law puts mass $1/2$ on $(0,0)$ and $1/2$ on $(1,1)$, and zero on the two unequal strings.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Each marginal coordinate of that true law is uniform on $\\{0,1\\}$, but its joint law is not their product: the product would assign mass $1/4$ to $(0,1)$, while the true law assigns zero. Therefore the exact reverse conditional is not independent across positions.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The learned sampler has $c_1=1$ and draws the two coordinates independently from their uniform predictors by [F3]. Its output assigns probability $1/4$ to each of the four strings, so it cannot equal the true reverse law in step 1.1. This refutes the universal factorization statement while leaving the forward conditional independence assumption intact.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The witness fixes vocabulary size two, sequence length two and one masking step. Its four-string state alphabet and two positive clean atoms are explicit nonempty objects; no empty sequence or zero-step chain is used.",
+          "case": "empty",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The witness fixes vocabulary size two, sequence length two and one masking step. Its four-string state alphabet and two positive clean atoms are explicit nonempty objects; no empty sequence or zero-step chain is used.",
+            "item_sha256": "c3454684456cbe3c4c02f65bd187c99cbcbc32447afb0801a95f9820a52d4074",
+            "row_sha256": "7128401a154fd15ad21435e8838720c848dc5c0eb15cc771f858f8e1c208f770"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute zero mass on each unequal string under the true reverse law.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "The Statement fixes N=1, and step 3.1 computes the one-step learned output law.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 checks that conditional on X the true reverse law is deterministic, while step 2.1 shows its marginal is correlated.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses α_1=0 to force the all-mask terminal state and the s=0 reverse endpoint.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 compute explicit finite probabilities; no choice is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The two-token clean law supported on equal strings refutes universal factorization after marginalizing the clean sequence. It does not state an iff criterion for when a reverse kernel factorizes or deny conditional factorization given the clean string.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-token clean law supported on equal strings refutes universal factorization after marginalizing the clean sequence. It does not state an iff criterion for when a reverse kernel factorizes or deny conditional factorization given the clean string.",
+            "item_sha256": "c3454684456cbe3c4c02f65bd187c99cbcbc32447afb0801a95f9820a52d4074",
+            "row_sha256": "d6b395d037fdfd894bdd0fd6cdcad158030b9b59d6abc04e48b32fcfed298915"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The two-token clean law supported on equal strings refutes universal factorization after marginalizing the clean sequence. It does not state an iff criterion for when a reverse kernel factorizes or deny conditional factorization given the clean string.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-token clean law supported on equal strings refutes universal factorization after marginalizing the clean sequence. It does not state an iff criterion for when a reverse kernel factorizes or deny conditional factorization given the clean string.",
+            "item_sha256": "c3454684456cbe3c4c02f65bd187c99cbcbc32447afb0801a95f9820a52d4074",
+            "row_sha256": "9a7db8d4a71a45e48e6146f3d62149d0dc21258ca48010fea3f5f77f34564523"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-masked-diffusion-single-token-posterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-masking-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Fix a finite nonempty clean vocabulary $V$, a mask symbol $m\\notin V$, integers $L,N\\ge1$, a grid $0=t_0<t_1<\\cdots<t_N=1$, a survival schedule $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$, and a probability vector $\\mu$ on $V^L$ (nonnegative entries summing to one). Put $S=(V\\cup\\{m\\})^L$ and $r_j=\\alpha_j/\\alpha_{j-1}$ for $1\\le j\\le N$. On one coordinate, the step-$j$ transition from $v\\in V$ stays at $v$ with probability $r_j$ and moves to $m$ with probability $1-r_j$; from $m$ it stays at $m$ with probability one. All other one-coordinate transitions have probability zero. The sequence-state transition from $z$ to $z'$ in $S$ is the product of these one-coordinate probabilities over the $L$ coordinates. Starting with $Z_0=X\\sim\\mu$, the conditional path mass is\n$$\\Pr(Z_0=z_0,\\ldots,Z_N=z_N\\mid X=x)=\\mathbf 1_{\\{z_0=x\\}}\\prod_{j=1}^N\\prod_{i=1}^L a_j(z_{j-1,i},z_{j,i}),$$\nwhere $a_j$ is the stated one-coordinate transition rule. Thus, conditional on the clean sequence, the coordinate trajectories are independent. At each step, the next-coordinate states are independent conditional on the preceding sequence state, with the transition probabilities above; successive states of a coordinate need not be independent. The mask is absorbing.\n\nThe following one-coordinate diagram records the three transition formulas at step $j$; each arrow label is its transition probability. The clean-state loop has probability $r_N=0$ at the terminal step $j=N$, so it is absent from the support there.\n\n```tikz\n\\begin{tikzpicture}\n  \\node[draw,circle] (v) at (0,0) {$v\\in V$};\n  \\node[draw,circle] (m) at (3,0) {$m$};\n  \\draw[->] (v.east) to[bend left=15] node[above] {$1-r_j$} (m.west);\n  \\draw[->] (v.north) .. controls (-0.8,1.4) and (0.8,1.4) .. node[above] {$r_j$} (v.north);\n  \\draw[->] (m.south) .. controls (2.2,-1.4) and (3.8,-1.4) .. node[below] {$1$} (m.south);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-masking-chain-posterior",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite nonempty vocabulary, let $m\\notin V$, let $L,N\\ge1$, and let $1=\\alpha_0>\\alpha_1>\\cdots>\\alpha_N=0$ be the survival schedule of the finite masking chain. Fix a clean sequence $x\\in V^L$ and grid indices $0\\le s<t\\le N$. For every state $z_t\\in(V\\cup\\{m\\})^L$ with $\\Pr(Z_t=z_t\\mid X=x)>0$, the conditional law of $Z_s$ given $X=x,Z_t=z_t$ is a product over coordinates. At coordinate $i$, if $z_{t,i}\\in V$, then $Z_{s,i}=z_{t,i}$ with probability one. If $z_{t,i}=m$, then, with $c_{s,t}=(\\alpha_s-\\alpha_t)/(1-\\alpha_t)$, the only possible values are $x_i$ and $m$, with probabilities\n$$\\Pr(Z_{s,i}=x_i\\mid X=x,Z_{t,i}=m)=c_{s,t},\\qquad \\Pr(Z_{s,i}=m\\mid X=x,Z_{t,i}=m)=\\frac{1-\\alpha_s}{1-\\alpha_t}.$$\nThe denominator is positive because $t\\ge1$ implies $\\alpha_t<1$; at $s=0$ the mask posterior has zero mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For $(s,t)=(1,2)$, $c_{1,2}=(1/2-0)/(1-0)=1/2$, and $1-c_{1,2}=(1-1/2)/(1-0)=1/2$. Since $\\alpha_2=0$, [F1] gives $Z_2=m$ with probability one, so [F2] yields the displayed posterior row.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "For $(s,t)=(0,1)$, $c_{0,1}=(1-1/2)/(1-1/2)=1$. The conditioning event $Z_1=m$ has probability $1-\\alpha_1=1/2>0$, so [F2] gives probability one to $Z_0=a$ and zero to the mask, with no zero-denominator endpoint used.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The vocabulary contains two tokens, the sequence has one position and the schedule has two transitions. The s=0 endpoint returns the fixed clean token; it is a clean initial endpoint, not an empty string or empty conditioning event.",
+          "case": "empty",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The vocabulary contains two tokens, the sequence has one position and the schedule has two transitions. The s=0 endpoint returns the fixed clean token; it is a clean initial endpoint, not an empty string or empty conditioning event.",
+            "item_sha256": "5f70eeeb166bab1bc77d8c98f08a6dc9e3aebb67663bcf4ea9e6dc2f56771665",
+            "row_sha256": "150a9df21438a21ce972a4614ddcfa2edc4ed8732a1bfbcecc0e6f31178a47c5"
+          }
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 computes zero mask mass at the clean endpoint s=0 and conditions only on the positive-probability event Z_1=m.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "The Example fixes a single token, L=1, and steps 1.1–2.1 verify its posterior rows.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 gives the deterministic clean predecessor with c_{0,1}=1.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check (s,t)=(1,2) with α_2=0 and (0,1) with α_0=1.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 evaluate explicit finite ratios only.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The prescribed one-token two-step schedule gives explicit posterior rows one half/one half and complete unmasking. These computations do not characterize all schedules from one posterior value or assert a converse independence statement.",
+          "case": "iff-forward",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The prescribed one-token two-step schedule gives explicit posterior rows one half/one half and complete unmasking. These computations do not characterize all schedules from one posterior value or assert a converse independence statement.",
+            "item_sha256": "5f70eeeb166bab1bc77d8c98f08a6dc9e3aebb67663bcf4ea9e6dc2f56771665",
+            "row_sha256": "f7a30c225a50b5e6c94d49df312f51a1639c6d6e64f5d95d75e488d7ea3bb94c"
+          }
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The prescribed one-token two-step schedule gives explicit posterior rows one half/one half and complete unmasking. These computations do not characterize all schedules from one posterior value or assert a converse independence statement.",
+          "case": "iff-reverse",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The prescribed one-token two-step schedule gives explicit posterior rows one half/one half and complete unmasking. These computations do not characterize all schedules from one posterior value or assert a converse independence statement.",
+            "item_sha256": "5f70eeeb166bab1bc77d8c98f08a6dc9e3aebb67663bcf4ea9e6dc2f56771665",
+            "row_sha256": "aaa5d72357ca14f0e4c35e8fb977c63076beda82499cf1856e906d1c117acf05"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,1858 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "43",
+  "scope": [
+    "lem-centered-independent-weighted-sum-variance",
+    "lem-symmetric-rectifier-moments",
+    "lem-iid-relu-layer-forces-zero-atom-next",
+    "thm-relu-forward-variance-recurrence",
+    "thm-relu-backward-variance-recurrence",
+    "cor-prelu-variance-preserving-scale",
+    "ex-zero-mean-or-bias-breaks-relu-half-moment",
+    "ex-finite-width-iid-relu-stack-has-zero-atom",
+    "ex-fan-in-versus-fan-out-initialization",
+    "ex-prelu-variance-scale"
+  ],
+  "contracts": {
+    "lem-centered-independent-weighted-sum-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Each $W_i$ and $X_i$ is integrable by [F6] applied with the constant random variable $1$. Independence of the two random elements gives independence of $W_i$ and $X_i$ by [F1], so [F4] yields $\\mathbb E[W_iX_i]=\\mathbb E[W_i]\\mathbb E[X_i]=0$. Linearity [F9] over the finite index set gives $\\mathbb E[S]=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Fix $i\\ne j$. The coordinate-product maps $(w,x)\\mapsto w_iw_j$ and $(w,x)\\mapsto x_ix_j$ are measurable by [F5]. Since the joint law of $(W,X)$ is the product law by [F2], these maps, one applied to each independent factor, give independent random variables $A=W_iW_j$ and $B=X_iX_j$ by [F3]. Both are integrable by [F6]. Also $\\mathbb E[A]=\\mathbb E[W_i]\\mathbb E[W_j]=0$ by [F4] and mutual independence of the weights. Hence [F4] gives $\\mathbb E[W_iW_jX_iX_j]=\\mathbb E[AB]=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "claim": "For each $i$, $W_i^2$ and $X_i^2$ are independent nonnegative random variables by [F2] and [F3]. Applying the nonnegative case of [F4] gives $\\mathbb E[W_i^2X_i^2]=\\mathbb E[W_i^2]\\mathbb E[X_i^2]=\\sigma_i^2\\mathbb E[X_i^2]<\\infty$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Expanding the finite square $S^2$ gives diagonal terms from step 1.3 and cross terms from step 1.2, so $S^2$ is integrable. Linearity [F9] gives $\\mathbb E[S^2]=\\sum_i\\sigma_i^2\\mathbb E[X_i^2]$. By step 1.1, $\\mathbb E[S]=0$; [F7] and [F8] therefore identify this second moment with $\\operatorname{Var}(S)$ and prove the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The weighted-sum length is a positive integer, with a supplied real coordinate for each weight and input. Its proof expands that finite square; there is no assertion about a zero-dimensional input vector or an absent probability law.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The weighted-sum length is a positive integer, with a supplied real coordinate for each weight and input. Its proof expands that finite square; there is no assertion about a zero-dimensional input vector or an absent probability law."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The weighted-sum length is a positive integer, with a supplied real coordinate for each weight and input. Its proof expands that finite square; there is no assertion about a zero-dimensional input vector or an absent probability law.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "38a57caa4165c80170a5aa889c64986c951818781c68866a179b1dd4241b533f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the exact formula including zero weight variances; step 2.1 identifies the resulting zero second moment with variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a sole weight-input product there are no cross terms. Proof 1.3 gives its second moment by independence, proof 1.1 gives its zero mean, and proof 2.1 identifies the same diagonal expression as variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "For a sole weight-input product there are no cross terms. Proof 1.3 gives its second moment by independence, proof 1.1 gives its zero mean, and proof 2.1 identifies the same diagonal expression as variance.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "e5374d020f0a4f6f9e92b0df22d5ee6feb0f97e7d382e01eb893a353a8c4a74a"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all weight variances vanish, step 2.1 makes every diagonal second moment zero and step 2.1 gives the same variance identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 1.2, 1.3 and 2.1 (integrability, off-diagonal factorization, diagonal moments and finite expansion): Weight variances may be zero and input second moments may vanish; the diagonal products then vanish without dividing by them. The hypotheses require only finite second moments and centered independent weights, not a strict lower variance bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Weight variances may be zero and input second moments may vanish; the diagonal products then vanish without dividing by them. The hypotheses require only finite second moments and centered independent weights, not a strict lower variance bound.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "6b2ad25aa059b341796c94cf4beb1a50a96c99f9bde610d6a9110cefed04c544"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 1.2, 1.3 and 2.1 (integrability, off-diagonal factorization, diagonal moments and finite expansion): Both random vectors are given and their independence is assumed. The proof factors only finite coordinate products, retaining dependence among input coordinates; it does not construct an independent coupling or require selection of probability versions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Both random vectors are given and their independence is assumed. The proof factors only finite coordinate products, retaining dependence among input coordinates; it does not construct an independent coupling or require selection of probability versions.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "017168073018ce29cae9f32d85f896ebfe50836c87e0210dfc747bf9a5b5edb5"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The variance identity is derived under the stated independent-centered-weight hypotheses while input coordinates may be dependent. It is a sufficient moment formula, not a converse recovering weight independence or centeredness from one observed weighted-sum variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The variance identity is derived under the stated independent-centered-weight hypotheses while input coordinates may be dependent. It is a sufficient moment formula, not a converse recovering weight independence or centeredness from one observed weighted-sum variance.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "0442347bde4e521b5e80ea3b5bb12782e958c286b90f1feb81efd2a3303a3ae3"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The variance identity is derived under the stated independent-centered-weight hypotheses while input coordinates may be dependent. It is a sufficient moment formula, not a converse recovering weight independence or centeredness from one observed weighted-sum variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The variance identity is derived under the stated independent-centered-weight hypotheses while input coordinates may be dependent. It is a sufficient moment formula, not a converse recovering weight independence or centeredness from one observed weighted-sum variance.",
+            "item_sha256": "a574864f20fa43bb1fe40c839135f84d97e0bd5318d94a13c141dd60e4a61724",
+            "row_sha256": "fb922a97a7071db70ed4eb7b58916334fcb400aabb7456c644fedffe958cd415"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-43",
+        "notes": "Independently checked Proof 1.1–2.1 against all nine current cited supplier statements: Cauchy–Schwarz gives coordinate and cross-product integrability; vector independence permits factoring weight products from input products; centered mutually independent weights kill off-diagonal expectations. Nonnegative factorization gives finite diagonal moments, so the finite square is integrable. Input coordinates need not be independent. n=1, zero weights and zero input moments are covered without division; n=0 is excluded. All variables are real, both random vectors are given, no AC or converse is used. Reader and refuter raise no finding. JHU Handout 8 §3 lines 108–109 corroborates the moment calculation; the local proof establishes the more general dependent-input version."
+      }
+    },
+    "lem-symmetric-rectifier-moments": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Symmetry gives $\\mathbb P(Z>0)=\\mathbb P(Z<0)$, and these probabilities sum to $1-p_0$, so each is $(1-p_0)/2$. The gate takes the values $1,a,c$ on the positive, negative, and zero events, respectively, so its squared expectation is $((1+a^2)/2)(1-p_0)+c^2p_0$. For the remaining moment claims assume $\\mathbb E[Z^2]<\\infty$. Applying [F1] and [F2] to $t\\mapsto t^2\\mathbf 1_{t>0}$ and $t\\mapsto t^2\\mathbf 1_{t<0}$ shows that the positive-side and negative-side second moments are equal. Their sum is $\\mathbb E[Z^2]$, since the contribution at zero is zero, so each is $\\frac12\\mathbb E[Z^2]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F1], symmetry gives $\\mathbb E[Z]=\\mathbb E[-Z]$, while scalar linearity [F5] gives $\\mathbb E[-Z]=-\\mathbb E[Z]$, hence $\\mathbb E[Z]=0$. The expectation $\\mathbb E[|Z|]$ is finite by [F4]. The positive and negative parts of $Z$ have equal expectations by symmetry and sum to $|Z|$, so linearity [F5] gives each expectation as $\\frac12\\mathbb E[|Z|]$. Therefore $\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|]$ and $\\mathbb E[\\phi_a(Z)]=\\mathbb E[Z\\mathbf 1_{Z>0}]+a\\mathbb E[Z\\mathbf 1_{Z<0}]=\\frac{1-a}{2}\\mathbb E[|Z|]$, using [F5] for the sum and scalar factor.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The identities $\\rho(Z)^2=Z^2\\mathbf 1_{Z>0}$ and $\\phi_a(Z)^2=Z^2\\mathbf 1_{Z>0}+a^2Z^2\\mathbf 1_{Z<0}$ now give the two asserted second moments from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Expanding the variance definition [F3] using expectation linearity [F5] gives $\\operatorname{Var}(\\rho(Z))=\\mathbb E[\\rho(Z)^2]-(\\mathbb E[\\rho(Z)])^2$. Substitution of steps 2.1 and 1.2 proves the stated centered-variance identity and completes all formulas.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The object is a given scalar probability law, not an indexed family of hidden units. Its positive, negative and zero events may individually be empty, but together have total mass one; the three-event partition is exactly what proof 1.1 uses.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The object is a given scalar probability law, not an indexed family of hidden units. Its positive, negative and zero events may individually be empty, but together have total mass one; the three-event partition is exactly what proof 1.1 uses.",
+            "item_sha256": "ea82778c764904b35404b41f373d5c7a04918fa9e34462e6543ced6150afc7d6",
+            "row_sha256": "1afb417c7300c1eaf56ae862b96f098f5a52f64d2fb4c7e771bda82d54636a4d"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the c^2 p0 kink contribution and sign probability (1-p0)/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 (zero atom, finite gate values and activation second moments): If the zero-event probability is one, the activation moments all vanish and the specified gate second moment reduces to the squared kink value. If the negative-side slope and kink value are both the linear value, the gate is the ordinary derivative everywhere, including at zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "If the zero-event probability is one, the activation moments all vanish and the specified gate second moment reduces to the squared kink value. If the negative-side slope and kink value are both the linear value, the gate is the ordinary derivative everywhere, including at zero.",
+            "item_sha256": "ea82778c764904b35404b41f373d5c7a04918fa9e34462e6543ced6150afc7d6",
+            "row_sha256": "25d14b9b642d3acbdf555499cce5ea29baf2ea3d37c97f76258167727dbf0dec"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At p0=1 the gate moment is c^2 and all activation moments vanish by steps 1.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 needs no Z second moment for signs or gates; the later activation moments assume it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1 and 2.1 (zero atom, finite gate values and activation second moments): The random variable and finite gate values are given. Symmetry pairs two integrals against the same law, and the finite-moment branch uses Cauchy–Schwarz; no random realization, sign representative or derivative value at the kink is selected by a choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The random variable and finite gate values are given. Symmetry pairs two integrals against the same law, and the finite-moment branch uses Cauchy–Schwarz; no random realization, sign representative or derivative value at the kink is selected by a choice principle.",
+            "item_sha256": "ea82778c764904b35404b41f373d5c7a04918fa9e34462e6543ced6150afc7d6",
+            "row_sha256": "32601c018f108fd8734ce9c50a22b8960de2b94b16d1ce47519f80df2416ea1b"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives consequences of a symmetric scalar law and distinguishes a stipulated kink convention from an ordinary derivative. It does not state that these moment identities imply symmetry, or that a prescribed gate value creates differentiability at a genuine rectifier kink.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The lemma gives consequences of a symmetric scalar law and distinguishes a stipulated kink convention from an ordinary derivative. It does not state that these moment identities imply symmetry, or that a prescribed gate value creates differentiability at a genuine rectifier kink.",
+            "item_sha256": "ea82778c764904b35404b41f373d5c7a04918fa9e34462e6543ced6150afc7d6",
+            "row_sha256": "1b1a1a6b24f6aa33f27d8f27b3e91ee62852c3222525a38c0d0bb5129f201879"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives consequences of a symmetric scalar law and distinguishes a stipulated kink convention from an ordinary derivative. It does not state that these moment identities imply symmetry, or that a prescribed gate value creates differentiability at a genuine rectifier kink.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The lemma gives consequences of a symmetric scalar law and distinguishes a stipulated kink convention from an ordinary derivative. It does not state that these moment identities imply symmetry, or that a prescribed gate value creates differentiability at a genuine rectifier kink.",
+            "item_sha256": "ea82778c764904b35404b41f373d5c7a04918fa9e34462e6543ced6150afc7d6",
+            "row_sha256": "e7a4a14c1fe791db5c88a6fd5a383ee397c83695943fc72b8c1d2988945e33d8"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-43",
+        "notes": "Independently checked Proof 1.1–3.1 and all five exact supplier statements. Symmetry splits positive/negative probabilities with p0 retained; zero contributes nothing to activation moments but contributes c²p0 to the gate. L2 implies L1, so first moments and centered-variance expansion are legitimate. For every real a (including 0,1,-1) the positive/negative decomposition gives the displayed PReLU formulas. p0=1, Z=0, and p0=0 satisfy all identities; a=1,c=1 is precisely the ordinary differentiable kink case. No AC, limiting argument or unsupported converse. He et al. §2.2 and JHU §3 motivate the half moment; the atom-aware generalization is proved locally. Reader delta is sentence grammar only and preserves all formulas, hypotheses and strength; current bytes match native post and archived pre bytes match native pre."
+      }
+    },
+    "lem-iid-relu-layer-forces-zero-atom-next": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-symmetric-rectifier-moments",
+          "source_section": "Statement",
+          "quote": "Let $Z$ be a real random variable whose law is symmetric about zero, meaning\nthat $Z$ and $-Z$ have the same distribution.\nWrite $p_0=\\mathbb P(Z=0)$. Define the ReLU function $\\rho(t)=\\max(t,0)$ and,\nfor $a\\in\\mathbb R$, define $\\phi_a(t)=t$ for $t>0$ and $\\phi_a(t)=at$ for\n$t\\le0$. Then $\\mathbb P(Z>0)=\\mathbb P(Z<0)=(1-p_0)/2$. If\n$\\mathbb E[Z^2]<\\infty$, the following ReLU moment identities hold:\n$$\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|],\\qquad \\mathbb E[\\rho(Z)^2]=\\frac12\\mathbb E[Z^2].$$\nThe corresponding PReLU identities are\n$$\\mathbb E[\\phi_a(Z)]=\\frac{1-a}{2}\\mathbb E[|Z|],\\qquad \\mathbb E[\\phi_a(Z)^2]=\\frac{1+a^2}{2}\\mathbb E[Z^2].$$\nIn particular,\n$$\\operatorname{Var}(\\rho(Z))=\\frac12\\mathbb E[Z^2]-\\frac14\\bigl(\\mathbb E[|Z|]\\bigr)^2.$$\nFor any specified value $c\\in\\mathbb R$ at the kink, put\n$\\eta_{a,c}(t)=\\mathbf 1_{t>0}+a\\mathbf 1_{t<0}+c\\mathbf 1_{t=0}$.\nThen, without a moment hypothesis on $Z$,\n$$\\mathbb E[\\eta_{a,c}(Z)^2]=\\frac{1+a^2}{2}(1-p_0)+c^2p_0.$$\nThe zero-at-kink ReLU backpropagation gate is $\\eta_{0,0}$, with second\nmoment $(1-p_0)/2$. It agrees almost surely with the ordinary ReLU derivative\nif $p_0=0$. A specified value at zero is a backpropagation convention, and is\nnot an ordinary derivative there unless $a=1$ and $c=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], $\\mathbb P(Z_i<0)=1/2$ for each $i$. On the event $E=\\bigcap_{i=1}^n\\{Z_i<0\\}$, every $X_i=\\operatorname{ReLU}(Z_i)$ is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Since $\\{X_i=0\\}=\\{Z_i\\le0\\}$ and $\\mathbb P(Z_i=0)=0$, the event $A=\\bigcap_i\\{X_i=0\\}$ agrees with $E$ up to a null set. Under the weaker hypothesis, independence of the $X_i$ and [F2] give $\\mathbb P(A)=\\prod_i\\mathbb P(X_i=0)=2^{-n}$. Under the original hypothesis, each $\\sigma(X_i)$ is a sub-sigma-algebra of $\\sigma(Z_i)$ because ReLU is measurable, so [F3] implies independence of the $X_i$ and the same calculation applies.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "On $E$, $T=\\sum_iW_iX_i=0$ for every value of the real weights. Hence $\\mathbb P(T=0)\\ge\\mathbb P(E)=2^{-n}>0$, which proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input count is positive and the sign-zero event is an intersection over actual rectified inputs. This excludes an empty fan-in; the proof uses the positive probability that all supplied inputs vanish, not an empty-intersection convention.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The input count is positive and the sign-zero event is an intersection over actual rectified inputs. This excludes an empty fan-in; the proof uses the positive probability that all supplied inputs vanish, not an empty-intersection convention."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The input count is positive and the sign-zero event is an intersection over actual rectified inputs. This excludes an empty fan-in; the proof uses the positive probability that all supplied inputs vanish, not an empty-intersection convention.",
+            "item_sha256": "1518cabf7db1818df36e3ac15c701e732f17b86e361fbdf51b32aff91ad49981",
+            "row_sha256": "2c0fff51e20be82ac41ccd3cf60ea373c01be60e799d717e2003b3769cc4f2e1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers arbitrary real weights, including zero weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 1.2 and 2.1 (the supplied independent zero events and deterministic zero weighted sum): With a single symmetric atomless preactivation its negative-sign event has half the probability mass. On that event the rectified input is zero, and any finite real weight makes the next zero-bias preactivation zero; the lower atom bound remains positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "With a single symmetric atomless preactivation its negative-sign event has half the probability mass. On that event the rectified input is zero, and any finite real weight makes the next zero-bias preactivation zero; the lower atom bound remains positive.",
+            "item_sha256": "1518cabf7db1818df36e3ac15c701e732f17b86e361fbdf51b32aff91ad49981",
+            "row_sha256": "0f59bc679b61c336eb3b88ddd3c1b95b2e9e65e2daae9da488fe93af3ef006a4"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 needs no weight moments or independence; the lower bound uses only activation sign probabilities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the weaker activation-independence formulation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 1.2 and 2.1 (the supplied independent zero events and deterministic zero weighted sum): The preactivations and arbitrary real weights already live on the same probability space. The proof uses their supplied independence only for the rectified zero events; it never chooses independent weights or requires an auxiliary probability-space extension.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The preactivations and arbitrary real weights already live on the same probability space. The proof uses their supplied independence only for the rectified zero events; it never chooses independent weights or requires an auxiliary probability-space extension.",
+            "item_sha256": "1518cabf7db1818df36e3ac15c701e732f17b86e361fbdf51b32aff91ad49981",
+            "row_sha256": "c41169c1485d50d5ca3ac69fa70d0875c9bbc076e7027e64e0249a316b06d9c1"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The all-zero rectified-input event is sufficient to force a next-layer zero atom regardless of weight dependence. The conclusion is a lower probability bound, not a characterization of every cancellation event producing zero or a converse demanding independent preactivations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The all-zero rectified-input event is sufficient to force a next-layer zero atom regardless of weight dependence. The conclusion is a lower probability bound, not a characterization of every cancellation event producing zero or a converse demanding independent preactivations.",
+            "item_sha256": "1518cabf7db1818df36e3ac15c701e732f17b86e361fbdf51b32aff91ad49981",
+            "row_sha256": "8c76504d903f89f3b14c77a1e2e106d201e615101ee8677009f854aab6e330ec"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The all-zero rectified-input event is sufficient to force a next-layer zero atom regardless of weight dependence. The conclusion is a lower probability bound, not a characterization of every cancellation event producing zero or a converse demanding independent preactivations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The all-zero rectified-input event is sufficient to force a next-layer zero atom regardless of weight dependence. The conclusion is a lower probability bound, not a characterization of every cancellation event producing zero or a converse demanding independent preactivations.",
+            "item_sha256": "1518cabf7db1818df36e3ac15c701e732f17b86e361fbdf51b32aff91ad49981",
+            "row_sha256": "21755960b1bf5faf19e401a071b880c885e0960ce04e75e76eef90e34648fa73"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-relu-forward-variance-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-feedforward-neural-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A finite feedforward computation graph from $\\mathbb R^d$ to $\\mathbb R^r$ consists of a finite directed graph $(V,E)$ with no directed cycle; pairwise disjoint input, hidden, and output vertex sets $I,H,O$ whose union is $V$; exactly $d$ input vertices and $r$ output vertices; and a specified ordering of $V$ in which the tail of every directed edge precedes its head. The input vertices are labelled bijectively by the coordinates $1,\\ldots,d$, and input vertex $i$ has value $x_i$ for $x\\in\\mathbb R^d$. Each non-input vertex $v$ has a real bias $b_v$, a real weight $w_{uv}$ for every edge $u\\to v$, and a real activation function $\\rho_v$. In the specified order, its value is\n\n$$z_v=\\rho_v\\!\\left(b_v+\\sum_{u:\\,u\\to v}w_{uv}z_u\\right).$$\n\nThe network output is the vector of values at $O$. A layered multilayer perceptron is the specialization with layers $V_0,\\ldots,V_L$, where $V_0=I$, $V_L=O$, and every edge goes from $V_{\\ell-1}$ to $V_\\ell$ for some $\\ell$; the hidden vertices use a shared activation and the output vertices use the identity activation. A fully connected layered perceptron includes every edge between consecutive layers. The fixed ordering makes the recursive evaluation unambiguous and is part of the graph data.\n\nThe diagram shows the edge direction and evaluation convention for a fully connected scalar-output perceptron with one hidden layer. Each circle is one scalar-valued node; the hidden nodes apply $\\sigma$ and the output node is linear. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.5cm]\n  \\node[draw,circle] (x1) {$x_1$};\n  \\node[draw,circle,below of=x1] (x2) {$x_2$};\n  \\node[draw,circle,right of=x1,yshift=-0.35cm] (h1) {$\\sigma$};\n  \\node[draw,circle,below of=h1] (h2) {$\\sigma$};\n  \\node[draw,circle,right of=h1,yshift=-0.35cm] (y) {$y$};\n  \\draw[->] (x1) -- (h1);\n  \\draw[->] (x1) -- (h2);\n  \\draw[->] (x2) -- (h1);\n  \\draw[->] (x2) -- (h2);\n  \\draw[->] (h1) -- (y);\n  \\draw[->] (h2) -- (y);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-centered-independent-weighted-sum-variance",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Let $W_1,\\ldots,W_n$ be mutually independent real random\nvariables with finite second moments, means $\\mathbb E[W_i]=0$, and variances\n$\\sigma_i^2$. Let $X=(X_1,\\ldots,X_n)$ be a real random vector whose\ncoordinates have finite second moments, and suppose the random elements $W$\nand $X$ are independent. The coordinates of $X$ need not be mutually\nindependent. For $S=\\sum_{i=1}^n W_iX_i$, the variable $S$ is square-integrable,\n$\\mathbb E[S]=0$, and\n$$\\operatorname{Var}(S)=\\sum_{i=1}^n\\sigma_i^2\\mathbb E[X_i^2].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-symmetric-rectifier-moments",
+          "source_section": "Statement",
+          "quote": "Let $Z$ be a real random variable whose law is symmetric about zero, meaning\nthat $Z$ and $-Z$ have the same distribution.\nWrite $p_0=\\mathbb P(Z=0)$. Define the ReLU function $\\rho(t)=\\max(t,0)$ and,\nfor $a\\in\\mathbb R$, define $\\phi_a(t)=t$ for $t>0$ and $\\phi_a(t)=at$ for\n$t\\le0$. Then $\\mathbb P(Z>0)=\\mathbb P(Z<0)=(1-p_0)/2$. If\n$\\mathbb E[Z^2]<\\infty$, the following ReLU moment identities hold:\n$$\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|],\\qquad \\mathbb E[\\rho(Z)^2]=\\frac12\\mathbb E[Z^2].$$\nThe corresponding PReLU identities are\n$$\\mathbb E[\\phi_a(Z)]=\\frac{1-a}{2}\\mathbb E[|Z|],\\qquad \\mathbb E[\\phi_a(Z)^2]=\\frac{1+a^2}{2}\\mathbb E[Z^2].$$\nIn particular,\n$$\\operatorname{Var}(\\rho(Z))=\\frac12\\mathbb E[Z^2]-\\frac14\\bigl(\\mathbb E[|Z|]\\bigr)^2.$$\nFor any specified value $c\\in\\mathbb R$ at the kink, put\n$\\eta_{a,c}(t)=\\mathbf 1_{t>0}+a\\mathbf 1_{t<0}+c\\mathbf 1_{t=0}$.\nThen, without a moment hypothesis on $Z$,\n$$\\mathbb E[\\eta_{a,c}(Z)^2]=\\frac{1+a^2}{2}(1-p_0)+c^2p_0.$$\nThe zero-at-kink ReLU backpropagation gate is $\\eta_{0,0}$, with second\nmoment $(1-p_0)/2$. It agrees almost surely with the ordinary ReLU derivative\nif $p_0=0$. A specified value at zero is a backpropagation convention, and is\nnot an ordinary derivative there unless $a=1$ and $c=1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "In the fully connected layer from $X_{\\ell-1}$ to $Z_\\ell$, each coordinate is $Z_{\\ell,j}=\\sum_{i=1}^{n_\\ell}W_{\\ell,ji}X_{\\ell-1,i}$. Apply [F2] to this row of weights and the input vector. Since its entries have common variance $\\sigma_\\ell^2$ and the input coordinates have common second moment, this gives $\\mathbb E[Z_{\\ell,j}]=0$ and $\\operatorname{Var}(Z_{\\ell,j})=n_\\ell\\sigma_\\ell^2\\mathbb E[X_{\\ell-1,1}^2]$. For $\\ell=1$ this is the stated raw-input base relation.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For $\\ell\\ge2$, $X_{\\ell-1,1}=\\rho(Z_{\\ell-1,1})$. By [F3], $\\mathbb E[X_{\\ell-1,1}^2]=\\frac12\\mathbb E[Z_{\\ell-1,1}^2]$. Symmetry makes $\\mathbb E[Z_{\\ell-1,1}]=0$, so this is $\\frac12\\operatorname{Var}(Z_{\\ell-1,1})$. Substitution into step 1.1 proves the claimed recurrence.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Apply step 2.1 successively for $\\ell=2,\\ldots,L$. The product of the finitely many coefficients is the displayed expression for $V_L$; setting each coefficient to $1$ proves preservation. No division by a variance occurs, so the identity also holds when $V_1=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Depth is at least two and every layer width is positive, so both each weighted input sum and the hidden-layer product have actual factors. The raw-input relation is separately stated and no nonexistent preceding rectifier layer is inserted at that boundary.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Depth is at least two and every layer width is positive, so both each weighted input sum and the hidden-layer product have actual factors. The raw-input relation is separately stated and no nonexistent preceding rectifier layer is inserted at that boundary."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Depth is at least two and every layer width is positive, so both each weighted input sum and the hidden-layer product have actual factors. The raw-input relation is separately stated and no nonexistent preceding rectifier layer is inserted at that boundary.",
+            "item_sha256": "513013d4cb2ab86da341464ca8ac769e823af6caf151027bc779ab391b15012f",
+            "row_sha256": "33d6b9af1528061ba8ecee595db158304dc07e049bfdfb42ee475b3500bc6d2a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 does not divide by V1 and includes zero variance; the finite Rademacher model allows zero atoms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Remarks (the independent signed-weight scalar realization) and proof steps 1.1 and 2.1 (width-independent finite moment identities): Width one is expressly realized by the finite independent signed-weight construction in the Remarks. Fresh centered signs give symmetric preactivations even though later layers acquire zero atoms, and the raw and hidden moment formulas still hold exactly in that scalar stack.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Width one is expressly realized by the finite independent signed-weight construction in the Remarks. Fresh centered signs give symmetric preactivations even though later layers acquire zero atoms, and the raw and hidden moment formulas still hold exactly in that scalar stack.",
+            "item_sha256": "513013d4cb2ab86da341464ca8ac769e823af6caf151027bc779ab391b15012f",
+            "row_sha256": "9fc05827af7d07c55a3e75c0b28114adb10e63f4fb8cea49daa1cb6ac5bc2a08"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 allow zero weight variance and zero input second moment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the raw-input boundary separately; step 3.1 supplies the finite hidden-layer product."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1, 2.1 and 3.1 (finite weighted-sum identity and its layerwise substitutions): Weights and activations are supplied as finite random vectors with the required independence and common second moments. The proof applies a weighted-sum identity and substitutes finite layer recurrences; it adds no arbitrary independent realization or infinite-width limiting construction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Weights and activations are supplied as finite random vectors with the required independence and common second moments. The proof applies a weighted-sum identity and substitutes finite layer recurrences; it adds no arbitrary independent realization or infinite-width limiting construction.",
+            "item_sha256": "513013d4cb2ab86da341464ca8ac769e823af6caf151027bc779ab391b15012f",
+            "row_sha256": "dbaa110c96ac4f38c0fa0e68a9ca74fb2cec20a189570f7df29c25768d5698e2"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward theorem supplies an exact ensemble-moment recurrence from centered independent weights and symmetric preactivations, allowing dependent activation coordinates and zero atoms. It does not infer those hypotheses from variance preservation or identify ensemble variance with every sampled network signal.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The forward theorem supplies an exact ensemble-moment recurrence from centered independent weights and symmetric preactivations, allowing dependent activation coordinates and zero atoms. It does not infer those hypotheses from variance preservation or identify ensemble variance with every sampled network signal.",
+            "item_sha256": "513013d4cb2ab86da341464ca8ac769e823af6caf151027bc779ab391b15012f",
+            "row_sha256": "9a6f64ba987ea3f83134f9e33f3196290621e39d40fcdd7f6fbd9243db6d15ad"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The forward theorem supplies an exact ensemble-moment recurrence from centered independent weights and symmetric preactivations, allowing dependent activation coordinates and zero atoms. It does not infer those hypotheses from variance preservation or identify ensemble variance with every sampled network signal.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The forward theorem supplies an exact ensemble-moment recurrence from centered independent weights and symmetric preactivations, allowing dependent activation coordinates and zero atoms. It does not infer those hypotheses from variance preservation or identify ensemble variance with every sampled network signal.",
+            "item_sha256": "513013d4cb2ab86da341464ca8ac769e823af6caf151027bc779ab391b15012f",
+            "row_sha256": "fe6d6269428f83e54ebe9e70e820fb0150fb7c9d2230fb449d3c65e02ae6b573"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": []
+    },
+    "thm-relu-backward-variance-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-feedforward-neural-network",
+          "source_section": "Definition",
+          "quote": "Fix integers $d,r\\ge1$. A finite feedforward computation graph from $\\mathbb R^d$ to $\\mathbb R^r$ consists of a finite directed graph $(V,E)$ with no directed cycle; pairwise disjoint input, hidden, and output vertex sets $I,H,O$ whose union is $V$; exactly $d$ input vertices and $r$ output vertices; and a specified ordering of $V$ in which the tail of every directed edge precedes its head. The input vertices are labelled bijectively by the coordinates $1,\\ldots,d$, and input vertex $i$ has value $x_i$ for $x\\in\\mathbb R^d$. Each non-input vertex $v$ has a real bias $b_v$, a real weight $w_{uv}$ for every edge $u\\to v$, and a real activation function $\\rho_v$. In the specified order, its value is\n\n$$z_v=\\rho_v\\!\\left(b_v+\\sum_{u:\\,u\\to v}w_{uv}z_u\\right).$$\n\nThe network output is the vector of values at $O$. A layered multilayer perceptron is the specialization with layers $V_0,\\ldots,V_L$, where $V_0=I$, $V_L=O$, and every edge goes from $V_{\\ell-1}$ to $V_\\ell$ for some $\\ell$; the hidden vertices use a shared activation and the output vertices use the identity activation. A fully connected layered perceptron includes every edge between consecutive layers. The fixed ordering makes the recursive evaluation unambiguous and is part of the graph data.\n\nThe diagram shows the edge direction and evaluation convention for a fully connected scalar-output perceptron with one hidden layer. Each circle is one scalar-valued node; the hidden nodes apply $\\sigma$ and the output node is linear. The diagram illustrates the definition and is not used in any proof.\n\n```tikz\n\\begin{tikzpicture}[>=stealth, node distance=1.5cm]\n  \\node[draw,circle] (x1) {$x_1$};\n  \\node[draw,circle,below of=x1] (x2) {$x_2$};\n  \\node[draw,circle,right of=x1,yshift=-0.35cm] (h1) {$\\sigma$};\n  \\node[draw,circle,below of=h1] (h2) {$\\sigma$};\n  \\node[draw,circle,right of=h1,yshift=-0.35cm] (y) {$y$};\n  \\draw[->] (x1) -- (h1);\n  \\draw[->] (x1) -- (h2);\n  \\draw[->] (x2) -- (h1);\n  \\draw[->] (x2) -- (h2);\n  \\draw[->] (h1) -- (y);\n  \\draw[->] (h2) -- (y);\n\\end{tikzpicture}\n```",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-symmetric-rectifier-moments",
+          "source_section": "Statement",
+          "quote": "Let $Z$ be a real random variable whose law is symmetric about zero, meaning\nthat $Z$ and $-Z$ have the same distribution.\nWrite $p_0=\\mathbb P(Z=0)$. Define the ReLU function $\\rho(t)=\\max(t,0)$ and,\nfor $a\\in\\mathbb R$, define $\\phi_a(t)=t$ for $t>0$ and $\\phi_a(t)=at$ for\n$t\\le0$. Then $\\mathbb P(Z>0)=\\mathbb P(Z<0)=(1-p_0)/2$. If\n$\\mathbb E[Z^2]<\\infty$, the following ReLU moment identities hold:\n$$\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|],\\qquad \\mathbb E[\\rho(Z)^2]=\\frac12\\mathbb E[Z^2].$$\nThe corresponding PReLU identities are\n$$\\mathbb E[\\phi_a(Z)]=\\frac{1-a}{2}\\mathbb E[|Z|],\\qquad \\mathbb E[\\phi_a(Z)^2]=\\frac{1+a^2}{2}\\mathbb E[Z^2].$$\nIn particular,\n$$\\operatorname{Var}(\\rho(Z))=\\frac12\\mathbb E[Z^2]-\\frac14\\bigl(\\mathbb E[|Z|]\\bigr)^2.$$\nFor any specified value $c\\in\\mathbb R$ at the kink, put\n$\\eta_{a,c}(t)=\\mathbf 1_{t>0}+a\\mathbf 1_{t<0}+c\\mathbf 1_{t=0}$.\nThen, without a moment hypothesis on $Z$,\n$$\\mathbb E[\\eta_{a,c}(Z)^2]=\\frac{1+a^2}{2}(1-p_0)+c^2p_0.$$\nThe zero-at-kink ReLU backpropagation gate is $\\eta_{0,0}$, with second\nmoment $(1-p_0)/2$. It agrees almost surely with the ordinary ReLU derivative\nif $p_0=0$. A specified value at zero is a backpropagation convention, and is\nnot an ordinary derivative there unless $a=1$ and $c=1$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-centered-independent-weighted-sum-variance",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Let $W_1,\\ldots,W_n$ be mutually independent real random\nvariables with finite second moments, means $\\mathbb E[W_i]=0$, and variances\n$\\sigma_i^2$. Let $X=(X_1,\\ldots,X_n)$ be a real random vector whose\ncoordinates have finite second moments, and suppose the random elements $W$\nand $X$ are independent. The coordinates of $X$ need not be mutually\nindependent. For $S=\\sum_{i=1}^n W_iX_i$, the variable $S$ is square-integrable,\n$\\mathbb E[S]=0$, and\n$$\\operatorname{Var}(S)=\\sum_{i=1}^n\\sigma_i^2\\mathbb E[X_i^2].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "At a realization with nonzero preactivations, the derivative of ReLU is the diagonal matrix with entries $\\gamma_{\\ell,j}$, and the affine derivative is $W_\\ell$. The chain rule [F2] therefore gives the two backward identities in the Statement. The specified convention defines the same identities at zeros without using [F2] there.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "For fixed $i$, $g_{\\ell-1,i}=\\sum_jT_{ji}$. A finite sum of square-integrable variables is square-integrable: $(\\sum_jT_{ji})^2\\le d_\\ell\\sum_jT_{ji}^2$. By [F7] each pairwise product is integrable. Expanding the mean and centered square, then applying [F6] and expectation linearity [F9], gives exactly the asserted mean and covariance sums, without factoring any dependent variables.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6",
+            "F7",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "claim": "Under the conditional assumptions, [F3] and gate independence give $\\mathbb E[h_{\\ell,j}^2]=\\mathbb E[\\gamma_{\\ell,j}]\\mathbb E[g_{\\ell,j}^2]=(1-p_\\ell)G_\\ell/2$ by [F5]. For fixed $i$, the column of weights is centered, independent, and independent of $h_\\ell$. Applying [F4] yields mean zero and variance $\\sigma_\\ell^2\\sum_j\\mathbb E[h_{\\ell,j}^2]=((1-p_\\ell)/2)d_\\ell\\sigma_\\ell^2G_\\ell$. This also equals the upstream second moment, proving the one-step formula.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Repeat step 1.3 for the finitely many layers $L,L-1,\\ldots,r$. All generated upstream coordinates are centered and have the common second moment in step 1.3, so substitution gives the stated product, including a possibly uncentered terminal signal. Setting $p_\\ell=0$ gives the original half-factor formulas and setting $\\sigma_\\ell^2=2/d_\\ell$ makes those factors one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "To prove the feasibility obstruction, let $q=\\mathbb P(W_{\\ell,11}<0)$. Symmetry and positive variance imply $q>0$: if $q=0$, symmetry gives $\\mathbb P(W_{\\ell,11}>0)=0$, forcing variance zero. By [F8], the event $E$ that all $d_\\ell d_{\\ell-1}$ matrix entries are strictly negative has probability $q^{d_\\ell d_{\\ell-1}}>0$. Since $X_{\\ell-1}$ is coordinatewise nonnegative, all coordinates of $Z_\\ell$ are nonpositive on $E$, so $\\gamma_\\ell=0$ and $h_\\ell=0$ there, including when the input vector is zero. Independence of $W_\\ell$ and $h_\\ell$ now gives $0=\\mathbb P(E\\cap\\{h_\\ell\\ne0\\})=\\mathbb P(E)\\mathbb P(h_\\ell\\ne0)$, hence $h_\\ell=0$ almost surely. If $p_\\ell<1$, step 1.3's gate calculation gives $0=\\mathbb E[h_{\\ell,j}^2]=(1-p_\\ell)G_\\ell/2$, hence $G_\\ell=0$. This proves the obstruction without declaring the valid conditional identities false.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F8",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A layer is fixed in a finite fully connected stack, so its incoming and outgoing coordinates are supplied by the positive-width network convention. The conditional product is over an explicitly indicated layer interval; the actual covariance formula remains a finite sum and is not an empty-architecture gradient claim.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "A layer is fixed in a finite fully connected stack, so its incoming and outgoing coordinates are supplied by the positive-width network convention. The conditional product is over an explicitly indicated layer interval; the actual covariance formula remains a finite sum and is not an empty-architecture gradient claim."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "A layer is fixed in a finite fully connected stack, so its incoming and outgoing coordinates are supplied by the positive-width network convention. The conditional product is over an explicitly indicated layer interval; the actual covariance formula remains a finite sum and is not an empty-architecture gradient claim.",
+            "item_sha256": "7e6a0c90b11d06c6402f803097e4eb68f2147565a17ba949e97fd13a5f331b13",
+            "row_sha256": "76229a6288f6c064b7a7f9101bc61ce899051f22b0b43671a7864f9a9548ebd9"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies zero-at-kink signals without claiming an ordinary derivative; step 2.1 uses factor (1-p)/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single output coordinate makes the cross-covariance sum empty and leaves the ordinary variance of its sole summand. The displayed one-step conditional recurrence is proved in proof 1.3 before any product over several layers, so a one-layer range needs no extra argument.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "A single output coordinate makes the cross-covariance sum empty and leaves the ordinary variance of its sole summand. The displayed one-step conditional recurrence is proved in proof 1.3 before any product over several layers, so a one-layer range needs no extra argument.",
+            "item_sha256": "7e6a0c90b11d06c6402f803097e4eb68f2147565a17ba949e97fd13a5f331b13",
+            "row_sha256": "4a082165c0de875c70cba42a3d8d75cc49ac5b8907f05fc023a422d34168bbf9"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 needs positive weight variance only for the infeasibility claim; the other identities allow zero weights and p=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 allows noncentered terminal signal, recovers p=0 half factors, and permits p=1 zero gates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The actual signals are defined from the given objective and supplied zero-at-kink rule. Additional independence is stated conditionally and never inferred by selecting an initialization; proof 3.1 instead establishes that the full hidden-layer assumptions force a zero gated signal in the nondegenerate ReLU case.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The actual signals are defined from the given objective and supplied zero-at-kink rule. Additional independence is stated conditionally and never inferred by selecting an initialization; proof 3.1 instead establishes that the full hidden-layer assumptions force a zero gated signal in the nondegenerate ReLU case.",
+            "item_sha256": "7e6a0c90b11d06c6402f803097e4eb68f2147565a17ba949e97fd13a5f331b13",
+            "row_sha256": "02505468d28ed796a882214aec8a8472f0939234ae193deff7b840a3d2cb88c7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem separates an unconditional covariance identity, a conditional product calculation, and a feasibility obstruction for actual ReLU hidden signals. None is a converse characterizing all network-gradient laws from a half-variance factor; in particular the product does not assert existence of a nonzero independent backward signal.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The theorem separates an unconditional covariance identity, a conditional product calculation, and a feasibility obstruction for actual ReLU hidden signals. None is a converse characterizing all network-gradient laws from a half-variance factor; in particular the product does not assert existence of a nonzero independent backward signal.",
+            "item_sha256": "7e6a0c90b11d06c6402f803097e4eb68f2147565a17ba949e97fd13a5f331b13",
+            "row_sha256": "ee8547a748a29ed7234d5adbf930851d0fffb0841369a9956c22f2185ebbfd49"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem separates an unconditional covariance identity, a conditional product calculation, and a feasibility obstruction for actual ReLU hidden signals. None is a converse characterizing all network-gradient laws from a half-variance factor; in particular the product does not assert existence of a nonzero independent backward signal.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The theorem separates an unconditional covariance identity, a conditional product calculation, and a feasibility obstruction for actual ReLU hidden signals. None is a converse characterizing all network-gradient laws from a half-variance factor; in particular the product does not assert existence of a nonzero independent backward signal.",
+            "item_sha256": "7e6a0c90b11d06c6402f803097e4eb68f2147565a17ba949e97fd13a5f331b13",
+            "row_sha256": "fe41ef06e96ef559b37b1bfa91cbd8b042e7e1ad67ca6230860c31bab2ca8ebc"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-43",
+        "notes": "Read every step 1.1–3.1 and all nine current supplier statements. The chain rule applies only away from all relevant ReLU zeros; signals at zeros are explicitly conventional. General finite covariance expansion needs only the stated L2 summands, also for any bounded measurable replacement gate. Conditional gate-vector/downstream independence factors h_j², while whole-matrix/h independence permits the centered-weight lemma on each column, without assuming independence among h coordinates. Iterating yields common upstream second moments and permits an uncentered terminal signal. p=1, sigma²=0 and G=0 give zero factors without illegal division. For the feasibility obstruction, symmetry and positive variance give positive strict-negative probability; finite mutual entry independence makes the all-negative-matrix event positive. Nonnegative previous ReLU outputs then force h=0 on that event, and W/h independence forces h=0 a.s.; p<1 plus gate independence forces G=0. No unstated input/weight independence is needed for that obstruction. The theorem does not misrepresent the conditional source recurrence as realizable nonzero gradients. He et al. §2.2 Eqs. (13)–(16) explicitly assume the two independences; current proof correctly treats their limitations. No AC, missing limiting argument, new defect or repair."
+      }
+    },
+    "cor-prelu-variance-preserving-scale": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rectifier-variance-preserving-initialization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite layered perceptron with positive integer widths\n$d_0,\\ldots,d_L$, a real negative-side slope $a$, a mode\n$m\\in\\{\\mathrm{forward},\\mathrm{backward}\\}$, and a finite mutually\nindependent family of real random variables $\\xi_{\\ell ji}$ with a common\nsymmetric law, mean zero, and variance one. The layer matrix has shape\n$d_\\ell\\times d_{\\ell-1}$, with row index $j$ and column index $i$.\n\n**Output.** Random weight matrices $W_\\ell$ and zero bias vectors $b_\\ell$.\n\n**Instructions.** For each $1\\le\\ell\\le L$, set the fan-in\n$n_\\ell=d_{\\ell-1}$ and fan-out $\\hat n_\\ell=d_\\ell$. Set\n$$v_\\ell=\\frac{2}{(1+a^2)n_\\ell}\\quad(m=\\mathrm{forward}),\\qquad v_\\ell=\\frac{2}{(1+a^2)\\hat n_\\ell}\\quad(m=\\mathrm{backward}).$$\nFor every matrix entry set $W_{\\ell,ji}=\\sqrt{v_\\ell}\\,\\xi_{\\ell ji}$, and\nset $b_\\ell=0$. The case $a=0$ is ReLU; the piecewise-linear activation for\ngeneral $a$ is $t$ for $t>0$ and $at$ for $t\\le0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-symmetric-rectifier-moments",
+          "source_section": "Statement",
+          "quote": "Let $Z$ be a real random variable whose law is symmetric about zero, meaning\nthat $Z$ and $-Z$ have the same distribution.\nWrite $p_0=\\mathbb P(Z=0)$. Define the ReLU function $\\rho(t)=\\max(t,0)$ and,\nfor $a\\in\\mathbb R$, define $\\phi_a(t)=t$ for $t>0$ and $\\phi_a(t)=at$ for\n$t\\le0$. Then $\\mathbb P(Z>0)=\\mathbb P(Z<0)=(1-p_0)/2$. If\n$\\mathbb E[Z^2]<\\infty$, the following ReLU moment identities hold:\n$$\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|],\\qquad \\mathbb E[\\rho(Z)^2]=\\frac12\\mathbb E[Z^2].$$\nThe corresponding PReLU identities are\n$$\\mathbb E[\\phi_a(Z)]=\\frac{1-a}{2}\\mathbb E[|Z|],\\qquad \\mathbb E[\\phi_a(Z)^2]=\\frac{1+a^2}{2}\\mathbb E[Z^2].$$\nIn particular,\n$$\\operatorname{Var}(\\rho(Z))=\\frac12\\mathbb E[Z^2]-\\frac14\\bigl(\\mathbb E[|Z|]\\bigr)^2.$$\nFor any specified value $c\\in\\mathbb R$ at the kink, put\n$\\eta_{a,c}(t)=\\mathbf 1_{t>0}+a\\mathbf 1_{t<0}+c\\mathbf 1_{t=0}$.\nThen, without a moment hypothesis on $Z$,\n$$\\mathbb E[\\eta_{a,c}(Z)^2]=\\frac{1+a^2}{2}(1-p_0)+c^2p_0.$$\nThe zero-at-kink ReLU backpropagation gate is $\\eta_{0,0}$, with second\nmoment $(1-p_0)/2$. It agrees almost surely with the ordinary ReLU derivative\nif $p_0=0$. A specified value at zero is a backpropagation convention, and is\nnot an ordinary derivative there unless $a=1$ and $c=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-centered-independent-weighted-sum-variance",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. Let $W_1,\\ldots,W_n$ be mutually independent real random\nvariables with finite second moments, means $\\mathbb E[W_i]=0$, and variances\n$\\sigma_i^2$. Let $X=(X_1,\\ldots,X_n)$ be a real random vector whose\ncoordinates have finite second moments, and suppose the random elements $W$\nand $X$ are independent. The coordinates of $X$ need not be mutually\nindependent. For $S=\\sum_{i=1}^n W_iX_i$, the variable $S$ is square-integrable,\n$\\mathbb E[S]=0$, and\n$$\\operatorname{Var}(S)=\\sum_{i=1}^n\\sigma_i^2\\mathbb E[X_i^2].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-relu-forward-variance-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge2$ and let $d_0,\\ldots,d_L$ be positive integers. For each\n$1\\le\\ell\\le L$, let $W_\\ell\\in\\mathbb R^{d_\\ell\\times d_{\\ell-1}}$ have\nmutually independent, identically distributed entries with a symmetric law,\nmean zero, and finite variance $\\sigma_\\ell^2$, and suppose $W_\\ell$ is\nindependent of the input activation vector $X_{\\ell-1}$. Set the fan-in\n$n_\\ell=d_{\\ell-1}$, set every bias to zero, and define\n$Z_\\ell=W_\\ell X_{\\ell-1}$ and $X_\\ell=\\rho(Z_\\ell)$ coordinatewise, where\n$\\rho(t)=\\max(t,0)$. Assume for every layer that the coordinates of\n$X_{\\ell-1}$ have a common finite second moment; they need not be independent\nor identically distributed. Also assume that each preactivation coordinate $Z_{\\ell,j}$ has\na symmetric law; an atom at zero is allowed in this forward second-moment\nrecurrence. Then, for every $2\\le\\ell\\le L$ and\n$1\\le j\\le d_\\ell$,\n$$\\operatorname{Var}(Z_{\\ell,j})=\\frac12 n_\\ell\\sigma_\\ell^2\\operatorname{Var}(Z_{\\ell-1,1}).$$\nAt the raw-input boundary, the exact base relation is\n$$\\operatorname{Var}(Z_{1,j})=n_1\\sigma_1^2\\mathbb E[X_{0,1}^2];$$\nif $X_{0,1}$ is centered, its second moment here is its variance. In particular,\nwriting $V_\\ell=\\operatorname{Var}(Z_{\\ell,1})$, the exact finite-depth formula is\n$$V_L=V_1\\prod_{\\ell=2}^L\\frac{n_\\ell\\sigma_\\ell^2}{2}.$$\nThus $\\sigma_\\ell^2=2/n_\\ell$ for $\\ell\\ge2$ gives $V_L=V_1$,\nwith zero atoms allowed at every depth. This is a statement about ensemble\nsecond moments, not about variance along every sampled network or training success.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-relu-backward-variance-recurrence",
+          "source_section": "Statement",
+          "quote": "Consider a finite rectified stack in a fully connected layered perceptron,\nwith widths $d_0,\\ldots,d_L$, zero biases,\n$Z_\\ell=W_\\ell X_{\\ell-1}$, and $X_\\ell=\\rho(Z_\\ell)$,\nwhere $\\rho(t)=\\max(t,0)$. For an objective $J$ differentiable as a function\nof the last activation, set $g_L=\\nabla_{X_L}J(X_L)$ and define backward\nsignals by the zero-at-kink convention\n$\\gamma_{\\ell,j}=\\mathbf 1_{Z_{\\ell,j}>0}$,\n$h_\\ell=\\gamma_\\ell\\odot g_\\ell$, and\n$g_{\\ell-1}=W_\\ell^{\\mathsf T}h_\\ell$.\nAt realizations where all relevant preactivations are nonzero, these are\nordinary chain-rule gradients. At zeros they are specified backpropagation\nsignals; no ordinary derivative of ReLU at zero is asserted.\n\nWithout any independence assumptions, fix a layer $\\ell$ and suppose every\n$T_{ji}=W_{\\ell,ji}\\gamma_{\\ell,j}g_{\\ell,j}$ is square-integrable. Then\n$$\\mathbb E[g_{\\ell-1,i}]=\\sum_j\\mathbb E[T_{ji}],\\qquad \\operatorname{Var}(g_{\\ell-1,i})=\\sum_j\\operatorname{Var}(T_{ji})+2\\sum_{j<k}\\operatorname{Cov}(T_{ji},T_{ki}).$$\nThis is an exact atom-aware identity for the realized network signals. For any\nspecified bounded measurable random gate vector $q_\\ell$ in place of\n$\\gamma_\\ell$, define $T_{ji}=W_{\\ell,ji}q_{\\ell,j}g_{\\ell,j}$. If every\nredefined $T_{ji}$ is square-integrable, the same mean and covariance formulas\nhold.\n\nFor the conditional recurrence, additionally assume at the layers in question\nthat the entries of $W_\\ell$ are independent with a common symmetric centered\nlaw of finite variance $\\sigma_\\ell^2$, that $Z_{\\ell,j}$ is symmetric with\ncommon zero probability $p_\\ell$, and that the coordinates of $g_\\ell$ have\ncommon finite second moment $G_\\ell$. Assume the gate vector $\\gamma_\\ell$\nis independent of $g_\\ell$ and $W_\\ell$ is independent of $h_\\ell$.\nWrite the fan-out as $\\hat n_\\ell=d_\\ell$. Then\n$$\\mathbb E[g_{\\ell-1,i}]=0,\\qquad G_{\\ell-1}=\\operatorname{Var}(g_{\\ell-1,i})=\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2G_\\ell.$$\nIf these hypotheses hold for every $r\\le\\ell\\le L$, then\n$$G_{r-1}=G_L\\prod_{\\ell=r}^L\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2.$$\nIn particular, the source's atomless conditional case $p_\\ell=0$ gives\n$\\operatorname{Var}(g_{\\ell-1,i})=\\frac12\\hat n_\\ell\\sigma_\\ell^2\\mathbb E[g_{\\ell,1}^2]$\nand the corresponding product of half factors. If the downstream coordinate\nis centered, $G_\\ell$ is its variance. The conditional fan-out choice\n$\\sigma_\\ell^2=2/\\hat n_\\ell$ makes each atomless product factor one.\n\nThese conditional identities do not establish that a nonzero actual-network\ngradient satisfies their hypotheses. Indeed, if $\\ell\\ge2$,\n$X_{\\ell-1}$ is a ReLU output and $\\sigma_\\ell^2>0$, the assumption\n$W_\\ell\\perp h_\\ell$ already forces $h_\\ell=0$ almost surely. If also\n$p_\\ell<1$ and gate independence holds, it forces $G_\\ell=0$.\nThus the nonzero atomless backward preservation model with these full\nindependence assumptions is infeasible for such an actual ReLU layer; the\nconditional implication and product remain valid, and the general covariance\nidentity above supplies the unconditional finite-network formula.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Apply [F3] to a row of $W_\\ell$. The preactivation is centered and has variance $n_\\ell\\sigma_\\ell^2\\mathbb E[X_{\\ell-1,1}^2]$, which proves the raw-input relation. For $\\ell\\ge2$, [F2] and centered symmetry give $\\mathbb E[X_{\\ell-1,1}^2]=(1+a^2)V_{\\ell-1}/2$, proving the forward recurrence without an atomlessness or coordinate-independence assumption. Successive substitution gives the finite product; the forward choice [F1] makes every hidden-layer factor one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "At nonzero preactivations the derivative of PReLU is $1$ on the positive half-line and $a$ on the negative half-line, so [F4] gives the stated backward recursion for ordinary gradients there. At zeros the recursion is instead the specified convention, except in the linear case $a=1,c_\\ell=1$, where it is the ordinary derivative everywhere. By [F2] and independence of the gate and $g_\\ell$, [F7] gives $\\mathbb E[h_{\\ell,j}^2]=\\kappa_\\ell G_\\ell$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Apply [F3] to each column of $W_\\ell$ and $h_\\ell$, using the assumed matrix/signal independence. The upstream signal is centered and has variance $\\sigma_\\ell^2\\sum_j\\mathbb E[h_{\\ell,j}^2]=\\hat n_\\ell\\sigma_\\ell^2\\kappa_\\ell G_\\ell$. Iteration over the finite set of layers proves the backward product, just as for [F6]. If $p_\\ell=0$ then $\\kappa_\\ell=(1+a^2)/2$ and the source's backward choice [F1] gives unit coefficient. For positive $\\kappa_\\ell$, solving the unit-coefficient equation gives $1/(\\hat n_\\ell\\kappa_\\ell)$; for zero $\\kappa_\\ell$ the coefficient vanishes for every finite weight variance.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The positive source scales $2/((1+a^2)n_\\ell)$ and $2/((1+a^2)\\hat n_\\ell)$ agree exactly when $n_\\ell=\\hat n_\\ell$. At $a=0,c_\\ell=0$, the forward and backward formulas specialize to [F5] and [F6], including the atom correction and feasibility caveat; at $a=1,c_\\ell=1$, $\\kappa_\\ell=1$ for every zero probability, as required for the linear derivative. These substitutions also show why an arbitrary kink convention must not be silently identified with an ordinary derivative.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At a sole weighted layer the product over later hidden layers is empty, hence equals the multiplicative identity; the raw-input variance relation in proof 1.1 remains the full forward result. Products over a backward layer range are asserted only when that range is specified. No variance normalization by an empty fan-in is introduced.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "At a sole weighted layer the product over later hidden layers is empty, hence equals the multiplicative identity; the raw-input variance relation in proof 1.1 remains the full forward result. Products over a backward layer range are asserted only when that range is specified. No variance normalization by an empty fan-in is introduced.",
+            "item_sha256": "4bb261f83c84714d83c6891c7894484c9f1f452ad980cdea804fb98a5ac2ba7c",
+            "row_sha256": "968182e12290ca0813b84347e8e1eee092acdc1c198abf09b29a19f170c80f26"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 distinguishes kink conventions from ordinary derivatives; step 2.1 handles kappa=0 without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The linear activation slope and matching kink value are expressly included: proof 3.1 obtains unit gate second moment even with zero atoms. A sole weighted layer also uses the raw-input moment rather than incorrectly inserting the hidden-layer rectifier factor.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The linear activation slope and matching kink value are expressly included: proof 3.1 obtains unit gate second moment even with zero atoms. A sole weighted layer also uses the raw-input moment rather than incorrectly inserting the hidden-layer rectifier factor.",
+            "item_sha256": "4bb261f83c84714d83c6891c7894484c9f1f452ad980cdea804fb98a5ac2ba7c",
+            "row_sha256": "fba0cb50c17ed7288212b57968af38fd35530e40630588e73c8689d10305a99e"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks ReLU a=0,c=0 and linear a=1,c=1, including atoms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 separates raw input; step 2.1 handles zero and positive kappa."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.2, 2.1 and 3.1 (gate second moment, conditional backward recurrence and preservation scales): The finite stack, random weights, input activations and terminal signal are supplied. The initializer chooses a displayed positive reciprocal scale when the gate coefficient is positive; the zero-gate case is separately declared unable to preserve a nonzero signal. No selection of an actual nonzero gradient satisfying the conditional independence hypotheses is inferred.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The finite stack, random weights, input activations and terminal signal are supplied. The initializer chooses a displayed positive reciprocal scale when the gate coefficient is positive; the zero-gate case is separately declared unable to preserve a nonzero signal. No selection of an actual nonzero gradient satisfying the conditional independence hypotheses is inferred.",
+            "item_sha256": "4bb261f83c84714d83c6891c7894484c9f1f452ad980cdea804fb98a5ac2ba7c",
+            "row_sha256": "da9945cf28396fac66db13eac0be8b6a855c016e9faca86fd2d03aa6079c256f"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 shows equal source scales imply equal positive widths."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 shows equal widths give equal source scales."
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-43",
+        "notes": "Read Proof 1.1–3.1 and all seven exact current cited suppliers, including both complete recurrence proofs as prerequisite context. Rowwise centered-weight variance and symmetric PReLU moments yield the raw-input base and (1+a²)/2 hidden factor even with zero atoms and dependent coordinates. Finite substitution uses no division by V1; L=1 has the empty product value one. Backward gates are bounded for finite a,c, so gate/g independence yields E h_j²=kappa G; matrix/h independence licenses the same lemma on columns. Iteration concerns common second moments, with upstream means zero even for uncentered terminal g. p=0 gives the source scale; p=1 gives kappa=c²; a=0,c=0 matches the ReLU obstruction; a=1,c=1 gives kappa=1 at every atom probability. kappa=0 forces upstream zero and is kept separate from division. Both positive source scales agree iff positive widths agree, in both directions. Negative real slopes also satisfy the algebra and are never treated as monotone activations. No AC, limit or nonzero-gradient realizability is assumed. Checked He et al. §2.2 PReLU paragraph after Eq. (16), PDF p.5 lines 553–565, and JHU §3 lines 108–109. No defect, repair or unresolved prerequisite."
+      }
+    },
+    "ex-zero-mean-or-bias-breaks-relu-half-moment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-symmetric-rectifier-moments",
+          "source_section": "Statement",
+          "quote": "Let $Z$ be a real random variable whose law is symmetric about zero, meaning\nthat $Z$ and $-Z$ have the same distribution.\nWrite $p_0=\\mathbb P(Z=0)$. Define the ReLU function $\\rho(t)=\\max(t,0)$ and,\nfor $a\\in\\mathbb R$, define $\\phi_a(t)=t$ for $t>0$ and $\\phi_a(t)=at$ for\n$t\\le0$. Then $\\mathbb P(Z>0)=\\mathbb P(Z<0)=(1-p_0)/2$. If\n$\\mathbb E[Z^2]<\\infty$, the following ReLU moment identities hold:\n$$\\mathbb E[\\rho(Z)]=\\frac12\\mathbb E[|Z|],\\qquad \\mathbb E[\\rho(Z)^2]=\\frac12\\mathbb E[Z^2].$$\nThe corresponding PReLU identities are\n$$\\mathbb E[\\phi_a(Z)]=\\frac{1-a}{2}\\mathbb E[|Z|],\\qquad \\mathbb E[\\phi_a(Z)^2]=\\frac{1+a^2}{2}\\mathbb E[Z^2].$$\nIn particular,\n$$\\operatorname{Var}(\\rho(Z))=\\frac12\\mathbb E[Z^2]-\\frac14\\bigl(\\mathbb E[|Z|]\\bigr)^2.$$\nFor any specified value $c\\in\\mathbb R$ at the kink, put\n$\\eta_{a,c}(t)=\\mathbf 1_{t>0}+a\\mathbf 1_{t<0}+c\\mathbf 1_{t=0}$.\nThen, without a moment hypothesis on $Z$,\n$$\\mathbb E[\\eta_{a,c}(Z)^2]=\\frac{1+a^2}{2}(1-p_0)+c^2p_0.$$\nThe zero-at-kink ReLU backpropagation gate is $\\eta_{0,0}$, with second\nmoment $(1-p_0)/2$. It agrees almost surely with the ordinary ReLU derivative\nif $p_0=0$. A specified value at zero is a backpropagation convention, and is\nnot an ordinary derivative there unless $a=1$ and $c=1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "In the first case, $\\mathbb E[W]=(-1)(2/3)+2(1/3)=0$ and $\\operatorname{Var}(Z)=\\operatorname{Var}(W)=\\mathbb E[W^2]=2$. Since $\\operatorname{ReLU}(Z)$ is $2$ with probability $1/3$ and zero otherwise, $\\mathbb E[\\operatorname{ReLU}(Z)^2]=4/3$, whereas $\\frac12\\operatorname{Var}(Z)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The first preactivation has $\\mathbb P(Z>0)=1/3$ and $\\mathbb P(Z<0)=2/3$, so its law is not symmetric despite its zero mean and absence of an atom at zero. The symmetric-preactivation hypothesis of [F1] fails; zero mean alone cannot replace it.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "claim": "In the second case, conditioning on either value of $W$ shows that $WX$ is uniform on $[-2,2]$. Thus $Z=WX+1$ is uniform on $[-1,3]$, with mean $1$ and variance $(3-(-1))^2/12=4/3$; it has no atom at zero.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The density of $Z$ is $1/4$ on $[-1,3]$, so $\\mathbb E[\\operatorname{ReLU}(Z)^2]=\\frac14\\int_0^3 z^2\\,dz=9/4$, while $\\frac12\\operatorname{Var}(Z)=2/3$. The nonzero bias has shifted the symmetric preactivation and invalidated the half-moment identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each witness has exactly one input unit and one weight, with an explicitly given finite or interval probability law. The half-moment comparison is an integral of that scalar law, not a normalization over an empty network layer.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Each witness has exactly one input unit and one weight, with an explicitly given finite or interval probability law. The half-moment comparison is an integral of that scalar law, not a normalization over an empty network layer.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "b66931d6d81c6447bb0ddc7bb819fa9153915d2a2949a76ae0bd7ff5c1d3f0e3"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first weight law has zero mean and the first bias is zero, yet proof 1.1 computes a rectified second moment different from half the variance. The second witness has a nonzero bias; both laws have finite positive variance and no atom at zero, so the failure is genuinely lack of centered symmetry rather than division by zero.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The first weight law has zero mean and the first bias is zero, yet proof 1.1 computes a rectified second moment different from half the variance. The second witness has a nonzero bias; both laws have finite positive variance and no atom at zero, so the failure is genuinely lack of centered symmetry rather than division by zero.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "770af4e6f89adb86eaff68c5ede70c8511b4001ded19a46d8d274f73ca47a35f"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The constructions are one-unit preactivations. Their expectations are computed directly by a two-point sum in proof 1.1 and by integrating the shifted uniform density in proof 2.1; no multi-unit or asymptotic approximation is required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The constructions are one-unit preactivations. Their expectations are computed directly by a two-point sum in proof 1.1 and by integrating the shifted uniform density in proof 2.1; no multi-unit or asymptotic approximation is required.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "1bed4f3009ad634bf6b9e2dd6ab125ddb7a23e265d8d08085beeb15cd12374ef"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 1.1, 1.3 and 2.1 (the finite support witness and uniform-density integral): The first input is deterministic but its weight is not symmetric; the second preactivation is a translated continuous uniform variable. The proof isolates these different hypothesis failures and does not infer symmetry merely from a centered weight mean.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The first input is deterministic but its weight is not symmetric; the second preactivation is a translated continuous uniform variable. The proof isolates these different hypothesis failures and does not infer symmetry merely from a centered weight mean.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "5c6708f8b69c01e64c22f36fb88ca3b50ef6375035de47b9f6bdbaeb3f612a54"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 1.1, 1.3 and 2.1 (the finite support witness and uniform-density integral): The continuous witness has a closed bounded support and its rectified integral runs over the positive part of that support. The endpoints carry no atoms under the uniform law, while the discrete witness accounts for both support masses explicitly; neither drops a boundary probability.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The continuous witness has a closed bounded support and its rectified integral runs over the positive part of that support. The endpoints carry no atoms under the uniform law, while the discrete witness accounts for both support masses explicitly; neither drops a boundary probability.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "f369dbea6df1ca4d53b59a1e4b270cadfed0b4bedac4f5cca9cfc831652e5c11"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 1.1, 1.3 and 2.1 (the finite support witness and uniform-density integral): The independent weight/input construction and the finite support probabilities are part of the two given witnesses. All expectations are finite sums or an elementary definite integral; no random family is selected to establish the failure of the symmetric-preactivation hypothesis.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The independent weight/input construction and the finite support probabilities are part of the two given witnesses. All expectations are finite sums or an elementary definite integral; no random family is selected to establish the failure of the symmetric-preactivation hypothesis.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "d44e4879545e5a79adc2afdd047c324b016354a7d3489753c63d0275ccfd0fec"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These two witnesses show that centered weights alone and symmetric weights with a shifted bias do not guarantee the rectifier half-moment. They do not claim that a half-moment identity characterizes symmetry or that every nonzero bias must violate every possible moment equality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "These two witnesses show that centered weights alone and symmetric weights with a shifted bias do not guarantee the rectifier half-moment. They do not claim that a half-moment identity characterizes symmetry or that every nonzero bias must violate every possible moment equality.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "9ba2a265e998ba66b65b66bb280b3fe6acafdae9044e641d38c33e362cc75bae"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "These two witnesses show that centered weights alone and symmetric weights with a shifted bias do not guarantee the rectifier half-moment. They do not claim that a half-moment identity characterizes symmetry or that every nonzero bias must violate every possible moment equality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "These two witnesses show that centered weights alone and symmetric weights with a shifted bias do not guarantee the rectifier half-moment. They do not claim that a half-moment identity characterizes symmetry or that every nonzero bias must violate every possible moment equality.",
+            "item_sha256": "43c5e57381b054f285f7181dd05cb5421fb0a9f289ebb5a6154a8828652ff4a8",
+            "row_sha256": "3dbfd778b79d497cdb3adb72f975b45f1fd1c27990b0cb9796a5c3acc5f37c81"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "exact two-law calculation",
+          "steps": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ],
+          "evidence": "The first finite law gives ReLU second moment 4/3 versus half variance 1; the uniform shifted law gives 9/4 versus 2/3."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-43",
+        "notes": "Independently recomputed all Verification steps 1.1–2.1 and read the three exact suppliers. First finite law has EW=0, EW²=2 and EReLU(W)²=4/3, unequal to Var(W)/2=1, with no zero atom but unequal sign probabilities. In the second independent Rademacher/uniform model WX is uniform [-2,2]; shifting by 1 gives uniform [-1,3], mean 1, variance 4/3 and positive-part second moment integral (1/4)∫0³z² dz=9/4, unequal to 2/3. Neither example purports to refute the symmetric-zero-centered supplier. Both models are nonempty with finite moments, the continuous endpoints have zero probability, and no AC or converse is involved. Source context is the symmetry and zero-bias discussion of He et al. §2.2; the exact witnesses are local calculations. No reader/refuter finding, new defect or repair."
+      }
+    },
+    "ex-finite-width-iid-relu-stack-has-zero-atom": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-iid-relu-layer-forces-zero-atom-next",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $Z_1,\\ldots,Z_n$ be independent and identically\ndistributed real random variables whose law is symmetric about zero and has no\natom at zero. Put $X_i=\\operatorname{ReLU}(Z_i)$. For any real random\nvariables $W_1,\\ldots,W_n$ on the same probability space, define the next\nzero-bias preactivation $T=\\sum_{i=1}^n W_iX_i$. Then\n$$\\mathbb P(T=0)\\ge2^{-n}>0.$$\nIn particular, this next preactivation cannot be atomless at zero, regardless\nof the distribution or dependence of the weights. The same conclusion holds\nunder the weaker assumption that the $X_i$ are mutually independent and each\n$Z_i$ is symmetric with no atom at zero; independence of the $Z_i$ is not\nrequired in that formulation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-relu-backward-variance-recurrence",
+          "source_section": "Statement",
+          "quote": "Consider a finite rectified stack in a fully connected layered perceptron,\nwith widths $d_0,\\ldots,d_L$, zero biases,\n$Z_\\ell=W_\\ell X_{\\ell-1}$, and $X_\\ell=\\rho(Z_\\ell)$,\nwhere $\\rho(t)=\\max(t,0)$. For an objective $J$ differentiable as a function\nof the last activation, set $g_L=\\nabla_{X_L}J(X_L)$ and define backward\nsignals by the zero-at-kink convention\n$\\gamma_{\\ell,j}=\\mathbf 1_{Z_{\\ell,j}>0}$,\n$h_\\ell=\\gamma_\\ell\\odot g_\\ell$, and\n$g_{\\ell-1}=W_\\ell^{\\mathsf T}h_\\ell$.\nAt realizations where all relevant preactivations are nonzero, these are\nordinary chain-rule gradients. At zeros they are specified backpropagation\nsignals; no ordinary derivative of ReLU at zero is asserted.\n\nWithout any independence assumptions, fix a layer $\\ell$ and suppose every\n$T_{ji}=W_{\\ell,ji}\\gamma_{\\ell,j}g_{\\ell,j}$ is square-integrable. Then\n$$\\mathbb E[g_{\\ell-1,i}]=\\sum_j\\mathbb E[T_{ji}],\\qquad \\operatorname{Var}(g_{\\ell-1,i})=\\sum_j\\operatorname{Var}(T_{ji})+2\\sum_{j<k}\\operatorname{Cov}(T_{ji},T_{ki}).$$\nThis is an exact atom-aware identity for the realized network signals. For any\nspecified bounded measurable random gate vector $q_\\ell$ in place of\n$\\gamma_\\ell$, define $T_{ji}=W_{\\ell,ji}q_{\\ell,j}g_{\\ell,j}$. If every\nredefined $T_{ji}$ is square-integrable, the same mean and covariance formulas\nhold.\n\nFor the conditional recurrence, additionally assume at the layers in question\nthat the entries of $W_\\ell$ are independent with a common symmetric centered\nlaw of finite variance $\\sigma_\\ell^2$, that $Z_{\\ell,j}$ is symmetric with\ncommon zero probability $p_\\ell$, and that the coordinates of $g_\\ell$ have\ncommon finite second moment $G_\\ell$. Assume the gate vector $\\gamma_\\ell$\nis independent of $g_\\ell$ and $W_\\ell$ is independent of $h_\\ell$.\nWrite the fan-out as $\\hat n_\\ell=d_\\ell$. Then\n$$\\mathbb E[g_{\\ell-1,i}]=0,\\qquad G_{\\ell-1}=\\operatorname{Var}(g_{\\ell-1,i})=\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2G_\\ell.$$\nIf these hypotheses hold for every $r\\le\\ell\\le L$, then\n$$G_{r-1}=G_L\\prod_{\\ell=r}^L\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2.$$\nIn particular, the source's atomless conditional case $p_\\ell=0$ gives\n$\\operatorname{Var}(g_{\\ell-1,i})=\\frac12\\hat n_\\ell\\sigma_\\ell^2\\mathbb E[g_{\\ell,1}^2]$\nand the corresponding product of half factors. If the downstream coordinate\nis centered, $G_\\ell$ is its variance. The conditional fan-out choice\n$\\sigma_\\ell^2=2/\\hat n_\\ell$ makes each atomless product factor one.\n\nThese conditional identities do not establish that a nonzero actual-network\ngradient satisfies their hypotheses. Indeed, if $\\ell\\ge2$,\n$X_{\\ell-1}$ is a ReLU output and $\\sigma_\\ell^2>0$, the assumption\n$W_\\ell\\perp h_\\ell$ already forces $h_\\ell=0$ almost surely. If also\n$p_\\ell<1$ and gate independence holds, it forces $G_\\ell=0$.\nThus the nonzero atomless backward preservation model with these full\nindependence assumptions is infeasible for such an actual ReLU layer; the\nconditional implication and product remain valid, and the general covariance\nidentity above supplies the unconditional finite-network formula.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The example has $n=2$, so [F1] gives $\\mathbb P(T=0)\\ge2^{-2}=1/4$, independently of the values of $W_1,W_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "In the scalar stack, $Z_1$ is $\\pm\\sqrt2$ with equal probabilities. If $W_1<0$ then $X_1=0$ and $Z_2=0$; if $W_1>0$ then $Z_2$ is $2$ or $-2$ with equal probabilities. Thus the law of $Z_2$ gives probabilities $1/4,1/2,1/4$ to $-2,0,2$, respectively. Both preactivations have mean zero and variance $2$, and the second has zero probability $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Therefore the two first-layer preactivations can be atomless while the next preactivation is not atomless. Requiring the no-atom condition at every layer is incompatible with this finite IID ReLU stack.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "By [F2], $g_1=\\sqrt2 R$ exactly when both weights are positive, an event of probability $1/4$; it is zero otherwise. Independence and the centered sign $R$ give mean zero and variance $2(1/4)=1/2$. The atomless coefficient would be $(1/2)(1)(2)\\mathbb E[R^2]=1$. Here $h_2=R$ on the same positive-weight event and zero otherwise: $\\mathbb P(h_2\\ne0\\mid W_2<0)=0$, whereas $\\mathbb P(h_2\\ne0)=1/4$, so weight/gated-signal independence fails. The covariance identity and the specified kink convention remain valid; the atomless conditional recurrence is inapplicable.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The first model has two independent preactivations and the second is an explicitly specified two-layer scalar stack. Neither model has an empty incoming sum; the zero activation event is an event of positive probability, not an absent set of units.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The first model has two independent preactivations and the second is an explicitly specified two-layer scalar stack. Neither model has an empty incoming sum; the zero activation event is an event of positive probability, not an absent set of units.",
+            "item_sha256": "67bd96f2c4905b626138dfbeded637bc8870476e059eabdf980df9ddfc49fd17",
+            "row_sha256": "ac48c90cddfcb6c56007bd95f72f736ca4180bbb6d7ec6900d5cb7756c0aad53"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove the two-coordinate zero event; step 1.2 gives zero probability 1/2 in the scalar stack. The Example requires only no atom at zero, not a globally atomless law; independent Rademacher preactivations satisfy these hypotheses as well."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The realized-network branch has width one at each layer. Proof 1.2 enumerates the second preactivation law including its zero atom, and proof 3.1 computes the backward variance from the same finite sign states, so no width limit is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The realized-network branch has width one at each layer. Proof 1.2 enumerates the second preactivation law including its zero atom, and proof 3.1 computes the backward variance from the same finite sign states, so no width limit is used.",
+            "item_sha256": "67bd96f2c4905b626138dfbeded637bc8870476e059eabdf980df9ddfc49fd17",
+            "row_sha256": "e5e765e214bb8379b3f14825da4a3c0cc46bfe8735cbd18f7be558daa2933db7"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example fixes positive weight variance 2; step 3.1 shows failure of weight/gated-signal independence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite two-layer scalar stack in steps 1.2 and 3.1 separate actual forward moments and zero-at-kink backward signals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.2 and 3.1 (the explicitly supplied scalar signed-weight witness and its backward signal): The scalar witness provides its input, independent symmetric weights, random terminal sign and linear objective explicitly. The other branch accepts any real weights on the supplied space. No witness is selected from an infinite family and no conditional independence is silently manufactured.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The scalar witness provides its input, independent symmetric weights, random terminal sign and linear objective explicitly. The other branch accepts any real weights on the supplied space. No witness is selected from an infinite family and no conditional independence is silently manufactured.",
+            "item_sha256": "67bd96f2c4905b626138dfbeded637bc8870476e059eabdf980df9ddfc49fd17",
+            "row_sha256": "031dd7c27ca40ead731fa99a5ffbeb227c7f0a79c74031ae3d8abd093982c6f7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example supplies an obstruction: simultaneous negative rectifier inputs force a later zero atom, and a particular scalar stack violates the atomless conditional coefficient. This is not a converse stating that every zero atom arises from that event or that every dependent gated signal has the displayed backward variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The example supplies an obstruction: simultaneous negative rectifier inputs force a later zero atom, and a particular scalar stack violates the atomless conditional coefficient. This is not a converse stating that every zero atom arises from that event or that every dependent gated signal has the displayed backward variance.",
+            "item_sha256": "67bd96f2c4905b626138dfbeded637bc8870476e059eabdf980df9ddfc49fd17",
+            "row_sha256": "75e1af9b8568aa4837a783318fdfb21e84fc2a7584c32dd99a11c66366806392"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example supplies an obstruction: simultaneous negative rectifier inputs force a later zero atom, and a particular scalar stack violates the atomless conditional coefficient. This is not a converse stating that every zero atom arises from that event or that every dependent gated signal has the displayed backward variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The example supplies an obstruction: simultaneous negative rectifier inputs force a later zero atom, and a particular scalar stack violates the atomless conditional coefficient. This is not a converse stating that every zero atom arises from that event or that every dependent gated signal has the displayed backward variance.",
+            "item_sha256": "67bd96f2c4905b626138dfbeded637bc8870476e059eabdf980df9ddfc49fd17",
+            "row_sha256": "6100f985459818d1e9e33843fbb5e22fa9ff25084ca59b130294475f8704582c"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "n=2 zero-event calculation",
+          "steps": [
+            "1.1",
+            "1.2"
+          ],
+          "evidence": "Independence gives probability (1/2)^2=1/4 for both inputs to be negative, forcing T=0."
+        },
+        {
+          "name": "complete two-layer random-sign stack",
+          "steps": [
+            "1.2",
+            "3.1"
+          ],
+          "evidence": "Enumerating four equiprobable weight-sign outcomes gives law Z2=(-2,0,2) with masses (1/4,1/2,1/4), variance 2, and backward variance 1/2 rather than atomless prediction 1."
+        }
+      ]
+    },
+    "ex-fan-in-versus-fan-out-initialization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-rectifier-variance-preserving-initialization",
+          "source_section": "Definition",
+          "quote": "**Inputs.** A finite layered perceptron with positive integer widths\n$d_0,\\ldots,d_L$, a real negative-side slope $a$, a mode\n$m\\in\\{\\mathrm{forward},\\mathrm{backward}\\}$, and a finite mutually\nindependent family of real random variables $\\xi_{\\ell ji}$ with a common\nsymmetric law, mean zero, and variance one. The layer matrix has shape\n$d_\\ell\\times d_{\\ell-1}$, with row index $j$ and column index $i$.\n\n**Output.** Random weight matrices $W_\\ell$ and zero bias vectors $b_\\ell$.\n\n**Instructions.** For each $1\\le\\ell\\le L$, set the fan-in\n$n_\\ell=d_{\\ell-1}$ and fan-out $\\hat n_\\ell=d_\\ell$. Set\n$$v_\\ell=\\frac{2}{(1+a^2)n_\\ell}\\quad(m=\\mathrm{forward}),\\qquad v_\\ell=\\frac{2}{(1+a^2)\\hat n_\\ell}\\quad(m=\\mathrm{backward}).$$\nFor every matrix entry set $W_{\\ell,ji}=\\sqrt{v_\\ell}\\,\\xi_{\\ell ji}$, and\nset $b_\\ell=0$. The case $a=0$ is ReLU; the piecewise-linear activation for\ngeneral $a$ is $t$ for $t>0$ and $at$ for $t\\le0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-relu-forward-variance-recurrence",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge2$ and let $d_0,\\ldots,d_L$ be positive integers. For each\n$1\\le\\ell\\le L$, let $W_\\ell\\in\\mathbb R^{d_\\ell\\times d_{\\ell-1}}$ have\nmutually independent, identically distributed entries with a symmetric law,\nmean zero, and finite variance $\\sigma_\\ell^2$, and suppose $W_\\ell$ is\nindependent of the input activation vector $X_{\\ell-1}$. Set the fan-in\n$n_\\ell=d_{\\ell-1}$, set every bias to zero, and define\n$Z_\\ell=W_\\ell X_{\\ell-1}$ and $X_\\ell=\\rho(Z_\\ell)$ coordinatewise, where\n$\\rho(t)=\\max(t,0)$. Assume for every layer that the coordinates of\n$X_{\\ell-1}$ have a common finite second moment; they need not be independent\nor identically distributed. Also assume that each preactivation coordinate $Z_{\\ell,j}$ has\na symmetric law; an atom at zero is allowed in this forward second-moment\nrecurrence. Then, for every $2\\le\\ell\\le L$ and\n$1\\le j\\le d_\\ell$,\n$$\\operatorname{Var}(Z_{\\ell,j})=\\frac12 n_\\ell\\sigma_\\ell^2\\operatorname{Var}(Z_{\\ell-1,1}).$$\nAt the raw-input boundary, the exact base relation is\n$$\\operatorname{Var}(Z_{1,j})=n_1\\sigma_1^2\\mathbb E[X_{0,1}^2];$$\nif $X_{0,1}$ is centered, its second moment here is its variance. In particular,\nwriting $V_\\ell=\\operatorname{Var}(Z_{\\ell,1})$, the exact finite-depth formula is\n$$V_L=V_1\\prod_{\\ell=2}^L\\frac{n_\\ell\\sigma_\\ell^2}{2}.$$\nThus $\\sigma_\\ell^2=2/n_\\ell$ for $\\ell\\ge2$ gives $V_L=V_1$,\nwith zero atoms allowed at every depth. This is a statement about ensemble\nsecond moments, not about variance along every sampled network or training success.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-relu-backward-variance-recurrence",
+          "source_section": "Statement",
+          "quote": "Consider a finite rectified stack in a fully connected layered perceptron,\nwith widths $d_0,\\ldots,d_L$, zero biases,\n$Z_\\ell=W_\\ell X_{\\ell-1}$, and $X_\\ell=\\rho(Z_\\ell)$,\nwhere $\\rho(t)=\\max(t,0)$. For an objective $J$ differentiable as a function\nof the last activation, set $g_L=\\nabla_{X_L}J(X_L)$ and define backward\nsignals by the zero-at-kink convention\n$\\gamma_{\\ell,j}=\\mathbf 1_{Z_{\\ell,j}>0}$,\n$h_\\ell=\\gamma_\\ell\\odot g_\\ell$, and\n$g_{\\ell-1}=W_\\ell^{\\mathsf T}h_\\ell$.\nAt realizations where all relevant preactivations are nonzero, these are\nordinary chain-rule gradients. At zeros they are specified backpropagation\nsignals; no ordinary derivative of ReLU at zero is asserted.\n\nWithout any independence assumptions, fix a layer $\\ell$ and suppose every\n$T_{ji}=W_{\\ell,ji}\\gamma_{\\ell,j}g_{\\ell,j}$ is square-integrable. Then\n$$\\mathbb E[g_{\\ell-1,i}]=\\sum_j\\mathbb E[T_{ji}],\\qquad \\operatorname{Var}(g_{\\ell-1,i})=\\sum_j\\operatorname{Var}(T_{ji})+2\\sum_{j<k}\\operatorname{Cov}(T_{ji},T_{ki}).$$\nThis is an exact atom-aware identity for the realized network signals. For any\nspecified bounded measurable random gate vector $q_\\ell$ in place of\n$\\gamma_\\ell$, define $T_{ji}=W_{\\ell,ji}q_{\\ell,j}g_{\\ell,j}$. If every\nredefined $T_{ji}$ is square-integrable, the same mean and covariance formulas\nhold.\n\nFor the conditional recurrence, additionally assume at the layers in question\nthat the entries of $W_\\ell$ are independent with a common symmetric centered\nlaw of finite variance $\\sigma_\\ell^2$, that $Z_{\\ell,j}$ is symmetric with\ncommon zero probability $p_\\ell$, and that the coordinates of $g_\\ell$ have\ncommon finite second moment $G_\\ell$. Assume the gate vector $\\gamma_\\ell$\nis independent of $g_\\ell$ and $W_\\ell$ is independent of $h_\\ell$.\nWrite the fan-out as $\\hat n_\\ell=d_\\ell$. Then\n$$\\mathbb E[g_{\\ell-1,i}]=0,\\qquad G_{\\ell-1}=\\operatorname{Var}(g_{\\ell-1,i})=\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2G_\\ell.$$\nIf these hypotheses hold for every $r\\le\\ell\\le L$, then\n$$G_{r-1}=G_L\\prod_{\\ell=r}^L\\frac{1-p_\\ell}{2}\\hat n_\\ell\\sigma_\\ell^2.$$\nIn particular, the source's atomless conditional case $p_\\ell=0$ gives\n$\\operatorname{Var}(g_{\\ell-1,i})=\\frac12\\hat n_\\ell\\sigma_\\ell^2\\mathbb E[g_{\\ell,1}^2]$\nand the corresponding product of half factors. If the downstream coordinate\nis centered, $G_\\ell$ is its variance. The conditional fan-out choice\n$\\sigma_\\ell^2=2/\\hat n_\\ell$ makes each atomless product factor one.\n\nThese conditional identities do not establish that a nonzero actual-network\ngradient satisfies their hypotheses. Indeed, if $\\ell\\ge2$,\n$X_{\\ell-1}$ is a ReLU output and $\\sigma_\\ell^2>0$, the assumption\n$W_\\ell\\perp h_\\ell$ already forces $h_\\ell=0$ almost surely. If also\n$p_\\ell<1$ and gate independence holds, it forces $G_\\ell=0$.\nThus the nonzero atomless backward preservation model with these full\nindependence assumptions is infeasible for such an actual ReLU layer; the\nconditional implication and product remain valid, and the general covariance\nidentity above supplies the unconditional finite-network formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "With fan-in variance $\\sigma^2=2/64=1/32$, the forward factor is $\\frac12(64)(1/32)=1$, so $V$ is preserved. The backward factor is $\\frac12(128)(1/32)=2$, so the gradient variance becomes $2G$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "With fan-out variance $\\sigma^2=2/128=1/64$, the backward factor is $\\frac12(128)(1/64)=1$, so $G$ is preserved. The forward factor is $\\frac12(64)(1/64)=1/2$, so the next preactivation variance is $V/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Since the two widths differ, the required variances $1/32$ and $1/64$ differ, and no shared weight variance makes both recurrence coefficients equal to one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a positive input width and a larger positive output width, so both incoming and outgoing coordinate sets contain actual units. Its two scalar coefficient calculations do not quantify over an arbitrary family of empty network layers.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The example fixes a positive input width and a larger positive output width, so both incoming and outgoing coordinate sets contain actual units. Its two scalar coefficient calculations do not quantify over an arbitrary family of empty network layers.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "7e6f3ec4108e78d1cf263ecd98e10fdd186804a4524fafe5374aac5d936092bc"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 1.2 (the two explicit forward and backward multipliers): A zero preceding variance or downstream second moment is multiplied by the displayed coefficients and stays zero. The comparison only contrasts which coefficient equals one; it explicitly warns that the full nondegenerate ReLU backward assumptions can force the downstream signal itself to vanish.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "A zero preceding variance or downstream second moment is multiplied by the displayed coefficients and stays zero. The comparison only contrasts which coefficient equals one; it explicitly warns that the full nondegenerate ReLU backward assumptions can force the downstream signal itself to vanish.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "c3c401cd79ae47dd70f797d4db8279ca8b0017fa82bbf50c23a3366f9a3f7a90"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit value being tested is the propagation coefficient, not a unit-width boundary. Proofs 1.1 and 1.2 directly show which directional coefficient is one at each initializer and compute the unequal coefficient in the other direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The unit value being tested is the propagation coefficient, not a unit-width boundary. Proofs 1.1 and 1.2 directly show which directional coefficient is one at each initializer and compute the unequal coefficient in the other direction.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "f055adb7c108ca175e936426619d33585d7d53413bc666c3e7dae63021615d91"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The potential zero actual backward signal is retained as a caveat in the Example. The finite scalar comparison remains an algebraic conditional recurrence calculation even when that signal vanishes; it does not assert the existence of a nonzero network-gradient realization.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The potential zero actual backward signal is retained as a caveat in the Example. The finite scalar comparison remains an algebraic conditional recurrence calculation even when that signal vanishes; it does not assert the existence of a nonzero network-gradient realization.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "635f23108f5799a2eb705a312297010b0204442890774a53bb74b275be542f19"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Fan-in and fan-out are fixed strictly positive dimensions and the two weight variances are fixed positive reciprocals. There is no free continuous interval or limiting initialization parameter whose endpoints the example claims to cover.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Fan-in and fan-out are fixed strictly positive dimensions and the two weight variances are fixed positive reciprocals. There is no free continuous interval or limiting initialization parameter whose endpoints the example claims to cover.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "07c21b1eecbb9b00874f4850df657dda293804c8e741b66c78b1d814fce609d3"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 1.2 (the two explicit forward and backward multipliers): Both candidate weight scales are explicit numbers and all direction coefficients are finite arithmetic substitutions. The diagram fixes full vector dimensions; no hidden random-weight family or distribution is selected to realize the conditional backward formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Both candidate weight scales are explicit numbers and all direction coefficients are finite arithmetic substitutions. The diagram fixes full vector dimensions; no hidden random-weight family or distribution is selected to realize the conditional backward formula.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "fb676e94e311dba32033575e3855d5543dd235873c600cc0627296f77b734f4e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The unequal-width calculation exhibits two different sufficient scale choices for two signal directions. Its conclusion rules out a common unit coefficient for these fixed dimensions; it is not a characterization of all initialization laws or of when actual-network forward and backward gradients are simultaneously realizable.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The unequal-width calculation exhibits two different sufficient scale choices for two signal directions. Its conclusion rules out a common unit coefficient for these fixed dimensions; it is not a characterization of all initialization laws or of when actual-network forward and backward gradients are simultaneously realizable.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "8f4b04cc4e0e83a51672105d1c3df93a7ecd28da3d8ee35ca6ac45f7e7440ba5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The unequal-width calculation exhibits two different sufficient scale choices for two signal directions. Its conclusion rules out a common unit coefficient for these fixed dimensions; it is not a characterization of all initialization laws or of when actual-network forward and backward gradients are simultaneously realizable.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The unequal-width calculation exhibits two different sufficient scale choices for two signal directions. Its conclusion rules out a common unit coefficient for these fixed dimensions; it is not a characterization of all initialization laws or of when actual-network forward and backward gradients are simultaneously realizable.",
+            "item_sha256": "dbf07a0d6a53ccf47277d1d8833a6614124c11b10bee16f20a94c4bc6466648c",
+            "row_sha256": "36fca08c2076e9df938df871e55675ffceb08a21bdd1a55e0dcdd71ee4c7e188"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "64-to-128 exact scale comparison",
+          "steps": [
+            "1.1",
+            "1.2"
+          ],
+          "evidence": "The factors are (1,2) for variance 1/32 and (1/2,1) for variance 1/64."
+        }
+      ]
+    },
+    "ex-prelu-variance-scale": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-prelu-variance-preserving-scale",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb R$ and consider a finite rectified stack with zero biases,\nwidths $d_0,\\ldots,d_L$, $Z_\\ell=W_\\ell X_{\\ell-1}$, and\n$X_\\ell=\\phi_a(Z_\\ell)$, where $\\phi_a(t)=t$ for $t>0$ and\n$\\phi_a(t)=at$ for $t\\le0$. Put $n_\\ell=d_{\\ell-1}$ and\n$\\hat n_\\ell=d_\\ell$. Suppose each $W_\\ell$ has independent entries\nwith a common symmetric centered law of finite variance $\\sigma_\\ell^2$ and\nis independent of $X_{\\ell-1}$. Suppose each layer input has coordinates with\na common finite second moment, and all preactivation coordinates are symmetric\nabout zero. Input coordinates may be dependent, and zero atoms are allowed.\nThen, writing $V_\\ell=\\operatorname{Var}(Z_{\\ell,1})$,\n$$V_1=n_1\\sigma_1^2\\mathbb E[X_{0,1}^2],\\qquad V_\\ell=\\frac{1+a^2}{2}n_\\ell\\sigma_\\ell^2V_{\\ell-1}\\quad(2\\le\\ell\\le L),\\qquad V_L=V_1\\prod_{\\ell=2}^L\\frac{1+a^2}{2}n_\\ell\\sigma_\\ell^2.$$\nThus $\\sigma_\\ell^2=2/((1+a^2)n_\\ell)$ preserves the forward\npreactivation variance across the hidden layers.\n\nFor backward signals, take an objective $J$ differentiable as a function of\nthe last activation and set $g_L=\\nabla_{X_L}J(X_L)$. Specify a finite kink\nvalue $c_\\ell$ and put\n$\\eta_{\\ell,j}=\\mathbf 1_{Z_{\\ell,j}>0}+a\\mathbf 1_{Z_{\\ell,j}<0}+c_\\ell\\mathbf 1_{Z_{\\ell,j}=0}$,\n$h_\\ell=\\eta_\\ell\\odot g_\\ell$, and\n$g_{\\ell-1}=W_\\ell^{\\mathsf T}h_\\ell$.\nThey are ordinary chain-rule gradients when all relevant preactivations are\nnonzero; when $a=1$ and $c_\\ell=1$ the activation is linear and this also\nholds at zeros. Otherwise a specified kink value is a backpropagation convention.\nIf the coordinates of $Z_\\ell$ have common zero probability $p_\\ell$,\nthe coordinates of $g_\\ell$ have common finite second moment $G_\\ell$,\n$\\eta_\\ell$ is independent of $g_\\ell$, and $W_\\ell$ is independent of\n$h_\\ell$, then\n$$G_{\\ell-1}=\\operatorname{Var}(g_{\\ell-1,i})=\\hat n_\\ell\\sigma_\\ell^2\\kappa_\\ell G_\\ell,\\qquad \\kappa_\\ell=\\frac{1+a^2}{2}(1-p_\\ell)+c_\\ell^2p_\\ell.$$\nThe upstream coordinates have mean zero. If these conditional hypotheses hold\nfor every $r\\le\\ell\\le L$, then\n$$G_{r-1}=G_L\\prod_{\\ell=r}^L\\hat n_\\ell\\sigma_\\ell^2\\kappa_\\ell.$$\nIn the source's atomless case $p_\\ell=0$, this retains the original backward\nfactor $(1+a^2)\\hat n_\\ell\\sigma_\\ell^2/2$ and the fan-out choice\n$\\sigma_\\ell^2=2/((1+a^2)\\hat n_\\ell)$. For a noncentered terminal\nsignal $G_L$ is its second moment; for centered signals it is their variance.\nThe source's forward and atomless backward weight variances agree exactly when\n$n_\\ell=\\hat n_\\ell$. With atoms the conditional backward-preserving choice\nis $1/(\\hat n_\\ell\\kappa_\\ell)$ when $\\kappa_\\ell>0$; if\n$\\kappa_\\ell=0$ the upstream signal has zero variance for every finite\nweight variance. These are conditional backward statements, and no independence\nassumption or nonzero actual-gradient realization is inferred from initialization.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Since $1+a^2=1+1/4=5/4$, the forward-preserving variance is $2/((5/4)5)=8/25$. The forward recurrence factor is $(5/8)5(8/25)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The backward-preserving variance is $2/((5/4)10)=4/25$. The backward recurrence factor is $(5/8)10(4/25)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The two variances $8/25$ and $4/25$ differ because the fan-in and fan-out differ, so no shared weight variance makes both recurrence coefficients equal to one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The source-scale substitution fixes a positive fan-in and a positive fan-out. Its nonzero dimension factors make both variance denominators defined; no empty collection of incoming or outgoing signals occurs in this numerical comparison.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The source-scale substitution fixes a positive fan-in and a positive fan-out. Its nonzero dimension factors make both variance denominators defined; no empty collection of incoming or outgoing signals occurs in this numerical comparison.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "e088f35b03bfc973a86233676a4e376be2cac52060fd838505a9d3c6e20c51a1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 1.2 (the two unit recurrence factors): The displayed unit coefficients multiply a preceding variance or terminal second moment, so a zero signal remains zero. The calculation divides only by the positive dimension factors and the strictly positive slope-square correction, never by a signal variance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The displayed unit coefficients multiply a preceding variance or terminal second moment, so a zero signal remains zero. The calculation divides only by the positive dimension factors and the strictly positive slope-square correction, never by a signal variance.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "a16e67e87449bfc918c0d39f825c4a3214d2d9ace487458a62f4c1d5a0cb7b55"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proofs 1.1 and 1.2 substitute the two explicit preserving scales and obtain propagation coefficient exactly one in the requested direction. This is the actual unit-coefficient check; the numerical widths and slope are fixed rather than arbitrary boundary parameters.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "Proofs 1.1 and 1.2 substitute the two explicit preserving scales and obtain propagation coefficient exactly one in the requested direction. This is the actual unit-coefficient check; the numerical widths and slope are fixed rather than arbitrary boundary parameters.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "d834f80a8c2361ab0d1d20f999308ed4119fc356a66b8163def566201a5bc2ec"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero atom would change the conditional gate factor, as explicitly stated in the Example. The arithmetic uses the corollary atomless conditional coefficient and does not assert that its independence assumptions hold in an arbitrary realized network.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "A zero atom would change the conditional gate factor, as explicitly stated in the Example. The arithmetic uses the corollary atomless conditional coefficient and does not assert that its independence assumptions hold in an arbitrary realized network.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "1079b49e44a5f4ae90b099f1b7828ae7ced15fc1d874863254a8caeefa460228"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The negative-side slope is fixed strictly between the ordinary rectifier and linear cases. No interval of slopes, limiting kink values or zero-width networks is claimed; the two positive reciprocal weight variances are direct substitutions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The negative-side slope is fixed strictly between the ordinary rectifier and linear cases. No interval of slopes, limiting kink values or zero-width networks is claimed; the two positive reciprocal weight variances are direct substitutions.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "325a07762263a36e8ea65fde59882d1725b9bdea36b08e90495715f53b8145ac"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two unit-coefficient variances are obtained by solving explicit scalar equations. The example does not choose a probability law or actual terminal gradient realizing the conditional backward assumptions; those assumptions remain the quoted corollary interface.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The two unit-coefficient variances are obtained by solving explicit scalar equations. The example does not choose a probability law or actual terminal gradient realizing the conditional backward assumptions; those assumptions remain the quoted corollary interface.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "011709105c787835fe5a335b701ad7f53ed25592b8a21eae554ae287918ac301"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The PReLU example computes forward and backward scale factors for one fixed slope and unequal widths. It shows their incompatibility for this pair of dimensions; it does not assert a necessary-and-sufficient characterization of all rectifier initialization schemes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The PReLU example computes forward and backward scale factors for one fixed slope and unequal widths. It shows their incompatibility for this pair of dimensions; it does not assert a necessary-and-sufficient characterization of all rectifier initialization schemes.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "a5fac8210ddad082e08a9726cec24170b6ca2f18bb33f68e04142fe3c51c3062"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The PReLU example computes forward and backward scale factors for one fixed slope and unequal widths. It shows their incompatibility for this pair of dimensions; it does not assert a necessary-and-sufficient characterization of all rectifier initialization schemes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_reverse68",
+            "reason": "The PReLU example computes forward and backward scale factors for one fixed slope and unequal widths. It shows their incompatibility for this pair of dimensions; it does not assert a necessary-and-sufficient characterization of all rectifier initialization schemes.",
+            "item_sha256": "dff7aeb5d354cfdda92e690ab2362489ef520401357c4fabb1dd47afb5b46385",
+            "row_sha256": "385d4bedf08813a108371baa541f12b8fa177cdb4acd6f35dbc7f5d1587c3a3b"
+          }
+        }
+      ],
+      "axioms": [],
+      "finite_smoke": [],
+      "finite_checks": [
+        {
+          "name": "slope one-half exact scale calculation",
+          "steps": [
+            "1.1",
+            "1.2"
+          ],
+          "evidence": "The preservation variances are 8/25 and 4/25; substitution gives unit recurrence factors."
+        }
+      ]
+    }
+  }
+}

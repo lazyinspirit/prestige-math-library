@@ -16,6 +16,7 @@ forward_refs: [def-monoid-finite-product]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-sum-over-a-finite-index-set.json
   precheck: n/a
   judge:
     model: z-ai/glm-5.2
@@ -36,21 +37,21 @@ pipeline_run: null
 
 ## Definition
 
-Let $S$ be a finite set, $n := \lvert S\rvert$ ([[def-finite-cardinality]]), and
+Let $S$ be a finite set, $n := \lvert S\rvert$ (The cardinality $\lvert A\rvert$ of a finite set), and
 let $a : S \to \mathbb{R}$ or $a : S \to \mathbb{N}$, written $a_i$ for $a(i)$.
 Choose a bijection $\varphi : n \to S$, which exists because $S \approx n$
-([[def-equinumerous]]), and set
+(Equinumerous sets, $A \approx B$ and $A \preceq B$), and set
 
 $$\sum_{i \in S} a_i := \sum_{k<n} a_{\varphi(k)}, \qquad \prod_{i \in S} a_i := \prod_{k<n} a_{\varphi(k)},$$
 
-the right-hand sides being the iterated operations of [[def-finite-sum]] when the
-values are real and of [[def-nat-finite-sum-and-product]] when they are natural.
+the right-hand sides being the iterated operations of Finite sums and finite products, by recursion when the
+values are real and of Finite sums and finite products of natural numbers, $\sum_{k<n} a_k$ and $\prod_{k<n} a_k$ in $\mathbb{N}$ when they are natural.
 
 **Independence of the enumeration, which is the content of the definition.** Let
 $\varphi, \psi : n \to S$ be two bijections. Then $\pi := \varphi^{-1} \circ \psi$
-is a bijection $n \to n$ ([[def-injection-surjection-bijection]]), and
+is a bijection $n \to n$ (Injection, surjection, bijection), and
 $a_{\psi(k)} = a_{\varphi(\pi(k))}$ for every $k < n$. Applying
-[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\varphi(k)}$
+A finite sum is unchanged by a permutation of its index range: $\sum_{k<n} a_{\pi(k)} = \sum_{k<n} a_k$ for every bijection $\pi : n \to n$ to the list $c_k := a_{\varphi(k)}$
 gives
 
 $$\sum_{k<n} a_{\psi(k)} = \sum_{k<n} c_{\pi(k)} = \sum_{k<n} c_k = \sum_{k<n} a_{\varphi(k)},$$
@@ -77,20 +78,40 @@ former whenever the index set is a natural number.
 **(b) Reindexing along a bijection.** If $h : T \to S$ is a bijection of finite
 sets, then $\sum_{j \in T} a_{h(j)} = \sum_{i \in S} a_i$, and likewise for
 products. Indeed $\lvert T\rvert = \lvert S\rvert = n$ by transport
-([[def-finite-cardinality]]), and if $\varphi : n \to S$ is a bijection then
+(The cardinality $\lvert A\rvert$ of a finite set), and if $\varphi : n \to S$ is a bijection then
 $h^{-1} \circ \varphi : n \to T$ is one, so
 $\sum_{j \in T} a_{h(j)} = \sum_{k<n} a_{h(h^{-1}(\varphi(k)))} = \sum_{k<n} a_{\varphi(k)} = \sum_{i \in S} a_i$.
 
 **(c) The empty index set and a constant summand.** $\lvert\varnothing\rvert = 0$,
 so $\sum_{i \in \varnothing} a_i = 0$ and $\prod_{i \in \varnothing} a_i = 1$ by
 the base clause of the recursion. And for a constant $c$, clause (a) together
-with the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]
-in $\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\mathbb{R}$, gives
+with the constant clause of Laws of finite sums and products in $\mathbb{N}$, and $\iota\big(\sum_{k<n} a_k\big) = \sum_{k<n} \iota(a_k)$
+in $\mathbb{N}$, or clause 2 of Laws of finite sums and finite products in $\mathbb{R}$, gives
 
 $$\sum_{i \in S} c = \lvert S\rvert \cdot c \quad (c \in \mathbb{N}), \qquad \sum_{i \in S} c = \iota(\lvert S\rvert)\cdot c \quad (c \in \mathbb{R}),$$
 
 the second with $\iota$ written out because $\lvert S\rvert$ is a natural number
-and not an element of $\mathbb{R}$ ([[def-canonical-natural]]).
+and not an element of $\mathbb{R}$ (The canonical natural $\iota(n) = n \cdot 1_F$ of a field).
+
+## Definition references
+
+[[def-finite-cardinality]]
+
+[[def-equinumerous]]
+
+[[def-finite-sum]]
+
+[[def-nat-finite-sum-and-product]]
+
+[[def-injection-surjection-bijection]]
+
+[[lem-finite-sum-permutation-invariance]]
+
+[[lem-nat-finite-sum-laws-and-the-canonical-embedding]]
+
+[[lem-finite-sum-laws]]
+
+[[def-canonical-natural]]
 
 ## Remarks
 

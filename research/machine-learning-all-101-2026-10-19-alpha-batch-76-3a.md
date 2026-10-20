@@ -1,0 +1,67 @@
+# Step 3a adjudication — batch 76
+
+Run: `machine-learning-all-101-2026-10-19`; group: `batch-76`.
+
+The scope and generated order task owe exactly five touched decisions, twelve risk reviews, and no reader/refuter/page/foreign-gate decisions. Reader and refuter findings are empty. Review completed supplier first.
+
+## Completed review evidence
+
+- `lem-countably-valued-expectation-is-weighted-series`: Reviewed all four steps and seven current supplier statements. Finite disjoint truncations are measurable, bounded and integrable on the probability space, and increase pointwise even with empty cells or repeated/zero constants. Linearity and indicator expectations give finite partial sums; monotone convergence gives the extended identity, including infinity; finiteness is exactly integrability. No AC, cancellation of infinities, or unstated interchange is used.
+
+- `lem-ucb-prefix-envelope-sum-bound`: Reviewed every step and all 24 current supplier statements. The square-root and positive-part continuity/order arguments justify proper integrability and the decreasing sum-integral comparison. Both Gaussian half-line integrals converge separately; smooth increasing substitutions meet compact proper and improper hypotheses. Polynomial division proves pi<22/7. Finite geometric integration proves the exact rational log2/log3/log5 bounds. These imply log12>99/40 and log11>9/4. The D(L) comparison proves the stronger n>=12 case; for 5<=n<=11, D<=2 and n-2<=4L close all a^2 cases, including equality. No numerical approximation or unproved maximal inequality is used.
+
+- `lem-zeta-two-and-three-converge`: Reviewed all three steps and five current supplier statements. Positive canonical natural images make negative powers defined. Explicit square/cube differences prove monotonicity; condensed terms are geometric with ratios 1/2 and 1/4 starting at r=0. Cauchy condensation applies with its exact nonnegative nonincreasing hypotheses, and the positive first term proves zeta_p>=1. Zero indices never appear in reciprocals; no AC is used.
+
+The three level-0 risk reviews were completed before moving to concentration and the bandit model. No defect or blocker was found at this level.
+
+- `lem-independent-subgaussian-prefix-tail`: Reviewed all four steps and all ten current suppliers. Finite joint-law factorization and repeated Tonelli apply to continuous positive exponential factors over probability measures (hence sigma-finite). Individual MGFs are finite, so factoring creates no undefined extended products. The same calculation works at either sign of lambda; Markov at lambda=t/q proves both tails for q>=1,t>0; t=0 reduces to probabilities at most one. Means may vary and no stopping-time concentration or AC is used.
+
+- `def-stochastic-bandit-and-pseudo-regret`: Reviewed complete Definition and all nine supplier interfaces. Positive finite n,k ensure finite nonempty maximum and finite measurable stack selection. Full-table independence from U preserves the intended non-anticipating timing; private randomness is not assumed independent of observed history. The finite absolute-sum domination establishes integrable rewards and realized regret, and the change-of-law identity establishes the time-independent mean. k=1, tied arms and zero gaps remain admissible; no reward boundedness or sub-Gaussianity is silently imposed.
+
+- `alg-upper-confidence-bound-bandit`: accepted reader ordering repair. Native preimage SHA matches pre snapshot; current bytes match reader post. Counts precede positive-count means, which precede indices; zero-count branch avoids division. Finite least-index ties, n=k empty loop, k=1, and delta in (0,1) are well-defined. Consumer uses will be checked at their dependency levels.
+
+- `lem-bandit-reward-table-has-fixed-conditional-laws`: Reviewed all four steps and nine exact supplier interfaces. On each fixed past action string, recursive non-anticipation restricts every history event to U and the exposed initial stack coordinates; the next coordinate has index c_i+1<=t<=n and is distinct. Full-table independence from U together with mutual entry independence gives the required joint product law and independence of the exposed block from the unused coordinate. Finite partitioning proves both Borel event and integrable indicator-product mean identities. t=1 has a single empty action string and exposed vector U; null strings contribute zero. No conditioning on an adaptive count as though deterministic occurs.
+
+- `ex-heavy-tailed-reward-law-outside-subgaussian-model`: Reviewed all four verification steps and all 26 exact supplier statements/definitions. Positive finite zeta_3 normalizes the countable Dirac measure on the full-power-set positive integers. Singleton expectation and change of law give E|X|=zeta_2/zeta_3. For every lambda>0 the fourth exponential-series term gives p_j exp(lambda j)>=lambda^4 j/(24 zeta_3); Archimedean unboundedness forces the nonnegative integral to infinity. Centering multiplies by a positive finite scalar, preserving infinity without undefined extended arithmetic. The example claims only finite first absolute moment and failure of sub-Gaussianity; it does not apply bandit concentration to this law. No AC is used.
+
+- `lem-ucb-sharp-suboptimal-arm-expected-pulls`: Reviewed all five steps and ten exact suppliers. At delta=n^-2 the bonus is sqrt(4 log(n)/s). The n deterministic optimal-arm lower tails cost <=1/n. On their intersection, each post-initialization suboptimal pull is charged once to a distinct pre-pull count s in 1..n-1. Positive thresholds use the fixed-prefix upper tail; nonpositive thresholds cost at most one, giving exactly the proved envelope. Expectation costs <=1 for the bad event, so the envelope yields 3+8 log(n)/Delta_i^2. Horizons 2..4 use T_i<=n-k+1<=3 when a suboptimal arm exists; k=1 is vacuous. No random-count substitution is used.
+
+- `lem-ucb-suboptimal-arm-expected-pulls`: Reviewed all five numbered steps and six exact suppliers. The positive ceiling u_i is deterministic; u_i>=n is handled by the trivial count bound. Otherwise r_u<=Delta_i/2 and the good event prevents reaching more than u_i pulls. Strict index separation excludes tie problems. Union over n fixed optimal prefixes costs 1/n; the single fixed suboptimal-prefix failure costs n^-2. The expectation bound is u_i+n P(G_i^c)<=16 log(n)/Delta_i^2+2+1/n<=16 log(n)/Delta_i^2+3. Initialization, n=k, ties among optimal arms, k=1 vacuity and positive gaps are consistent.
+
+- `thm-explore-then-commit-expected-regret`: Reviewed all three steps, eight exact suppliers and current batch-73 regret-decomposition proof. Conditional-law lemma supplies its actual eventwise mean hypothesis; deterministic exploration gives counts m+(n-mk)1_{J=i}. For a suboptimal i, the two m-entry stacks are distinct; coordinatewise centering and negation preserve independence, integrability and the all-real-parameter MGF bound. Applying the q=2m tail at threshold m Delta_i gives exp(-m Delta_i^2/4). Multiplication by nonnegative gaps closes the bound; optimal/tied arms have zero coefficient, k=1 gives zero regret, and n=mk eliminates commitment cost. Reader addition of the independence supplier is sound and does not change the Statement.
+
+- `thm-ucb-gap-dependent-regret`: Reviewed both proof steps and eight supplier interfaces. The proved reward-stack conditional means discharge the actual batch-73 regret decomposition premise. The coefficient-16 pull lemma applies with the identical n>=max(k,2), all-entry sub-Gaussianity and delta=n^-2 schedule. Only positive gaps are divided by; zero-gap arms vanish before division. Finite summation gives precisely the claimed additive 3 sum Delta and logarithmic sum. All arms tied and k=1 give zero regret; initialization at n=k remains covered.
+
+- `thm-ucb-gap-free-regret`: Reviewed all three proof steps and ten exact supplier interfaces, including finite Cauchy-Schwarz with n=0 allowed. Conditional means give the regret decomposition and finite expectation linearity gives sum E[T_i]=n. For positive gaps, q_i=(E[T_i]-3)_+ is nonnegative, at most E[T_i], and Delta_i^2 q_i<=8 log(n) by the independently checked sharp count proof. E[T_i]<=3+q_i bounds regret; Cauchy-Schwarz on Delta_i sqrt(q_i),sqrt(q_i) gives sqrt(8 |I| n log(n))<=sqrt(8 n k log(n)). Empty I and q_i=0 are explicitly covered. The stronger constant is justified locally and is not attributed to source Theorem 7.2.
+
+## Decisions and authenticated comparison
+
+The five decisions are in the companion `alpha-batch-76-3a-decisions.json`. Two nonfatal reader repairs are accepted with confidence 1: UCB assignment order and ETC transformed-independence citation. Three contract-only quotation updates are `reviewed_no_defect`, `change_kind: metadata`, with no defect IDs. No mathematical claim was weakened or algorithm changed.
+
+The two complete preimages under `owner-step3-authenticated-preimages/preimage/items/` independently hash to the native pre snapshot: UCB `dbdc77481ce8522d5f49aac77f819ef1981c236ccd2c9f86cacb1d52fd69fd62`; ETC `ca61873d79f8e07829c8d10e5f4c92e0a875ca5316849ade5e9aac10cef0de0c`. Current hashes equal the native post snapshot: UCB `79afec6c444d5d3a76ea78977ca4f4b5824cd94984a258d3bde34dcbcf24a0be`; ETC `2d0553be370f185c9d7023a35a0dd0afb068e8ba07d621255b3d044e7343ab19`. All 17 current item raw hashes match the post snapshot. This compares actual bytes; no missing historical preimage or owner current-content exception was required.
+
+The authenticated pre contract compared with the current contract, excluding this adjudicator's risk reviews, shows the three metadata-only decisions change solely the copied UCB Definition quotation. The reader's ETC dependency/F6 addition is sound. Existing manifest consumers already have compatible interfaces; no manifest or item edit was needed here.
+
+## Consumer and published dispositions
+
+The UCB Definition edit only reorders assignments without changing any mathematical interface. The direct/reference consumer search over `items/` and `library/` finds the ordinary and sharp count lemmas, both UCB regret theorems, and the owning A page. All four actual proof uses were independently checked above: same bonus, initialization, finite argmax and tie rule. The A page only inventories the algorithm; its metadata needs no change. ETC's Statement is unchanged. No outside consumer repair or supplier escalation is needed. The batch-73 supplier `lem-finite-arm-regret-decomposes-into-expected-action-counts` was read in full; its finite expectation argument and conditional-mean hypotheses match the proved reward-stack interface. Stable IDs and proposed withdrawals are preserved.
+
+No defective published mathematical supplier was identified in the inspected prerequisite uses. Published carriers remain untouched. No diagrams occur in the routed carriers, and none is needed for these algebraic/probability arguments. The complete Statement/Definition/Example sections of all routed carriers are uninterrupted, with links in following matching references sections. No page-only obligation is owed; no page body was authored.
+
+## Sources and evidence limits
+
+Read every routed carrier in generated dependency order and every cited local prerequisite's relevant Statement/Definition; the report's preceding per-item records identify exact applications and boundary checks. Reader report and findings, refuter JSON, scope, generated order and native pre/post hashes were read directly. No reader/refuter/foreign findings were present; their lack of findings did not substitute for mathematical review.
+
+Consulted [Lattimore and Szepesvári, Bandit Algorithms](https://tor-lattimore.com/downloads/book/book.pdf), Theorem 5.3 and Corollary 5.5 (printed pp. 77–78), Theorem 6.1 and proof (pp. 92–93), and Theorems 7.1–7.2 (pp. 105–108). The ETC derivation agrees with the source's independent mean-difference concentration. The sharper UCB estimates are justified by the local envelope/count/Cauchy–Schwarz proofs, not by attributing their stronger constants to the book. Other familiar analytic and measure-theoretic facts were checked against their actual local statements; this is not a fresh audit of every transitive published proof or a claim to have read every bibliography entry.
+
+## Local checks and handoff
+
+- Initial risk report: 17 items routed, twelve HIGH/CRITICAL, zero errors. All twelve now have specific complete `risk_review` records.
+- Strict proof contracts: 17/17 checked, zero errors and zero warnings.
+- Risk report with `--require-reviewed`: 17 routed, zero errors.
+- Explicit precheck on the thirteen touched/risk carriers: eleven applicable phase proofs checked, zero failing; the two definition-like carriers have no proof phase.
+- Final explicit read-only proof-layout check: thirteen routed carriers, 46 steps, zero defects. No item changes required reflow.
+- Decisions inventory and referenced closed defect rows checked locally: exactly five owed obligations, twelve complete risks, and all seventeen item raw hashes still equal reader-post snapshots.
+- No item, page, manifest, provenance or judge metadata was edited by this adjudicator. Only the owning contract's twelve risk reviews, required report/decisions, defect rows and frontier consumer note were authored. No judge, stamp, dispatch, publication or engine gate cycle was initiated.
+
+No unresolved mathematical uncertainty or batch-local blocker remains. Engine-owned hashes and subsequent gate battery remain due after dispatch.

@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "scope": [
+    "def-low-rank-adaptation-of-a-linear-layer",
+    "alg-finite-budget-low-rank-adaptation",
+    "thm-low-rank-adapter-factorization-ambiguity",
+    "thm-low-rank-adapter-merging-and-gradients",
+    "rem-adaptation-rank-and-empirical-transfer",
+    "ex-low-rank-adapter-change-of-basis",
+    "ex-rank-one-adapter-cannot-realize-full-rank-update",
+    "ex-zero-zero-initialization-stalls-adaptation",
+    "ex-merged-and-unmerged-adapter-forward-pass-agree"
+  ],
+  "contracts": {
+    "def-low-rank-adaptation-of-a-linear-layer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires positive layer dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The scale is required to be nonzero; zero factors are still admitted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition supplies a model interface and no proof obligation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate ranks and factors are analyzed by the dependent theorems."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This definition makes no existence claim requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        }
+      ]
+    },
+    "alg-finite-budget-low-rank-adaptation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition statement: The explicit T=0 branch returns A0, B0=0, and W0 without evaluating a loss."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition statement: The admissible input includes A0=0 and B0 is initialized to 0; the algorithm has no division by a factor entry."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition statement: A single data point and a single update are allowed by n>=1 and T=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition statement: Zero factors are valid shapes; a primitive failure returns the unchanged current factors and a status."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition statement: A branch boundary returns NONDIFFERENTIABLE, and an undefined primitive returns DOMAIN_ERROR before an update."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses a fixed finite list, no internal random initialization, and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm defines a procedure and states no equivalence."
+        }
+      ]
+    },
+    "thm-low-rank-adapter-factorization-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-low-rank-adaptation-of-a-linear-layer",
+          "source_section": "Definition",
+          "quote": "The update matrix is $W-W_0=cBA$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner product spaces, and let $r$ be the number of positive singular values of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "rank-capacity",
+          "claim": "The image of BA is contained in the image of B, so every adapter update has rank at most r.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "svd-target",
+          "claim": "A target of rank q>0 has an SVD with exactly q positive terms; rank zero is handled by zero factors.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "latent-change",
+          "claim": "An invertible latent-coordinate change preserves the matrix product.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "padded-factors",
+          "claim": "Splitting each singular value into two square roots and padding with zeros constructs the required B and A.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "capacity-and-nonuniqueness",
+          "claim": "Ranks above r are excluded, ranks at most r are attained, and every target update has multiple factor pairs.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes positive ambient dimensions and a positive rank budget."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 represents a zero target by zero factors; step 3.1 gives a second factorization with B=0 and A' nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows r=1, including the invertible scalar change M=2I1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rank-zero target is treated separately in step 1.2 and in the nonuniqueness case of step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement includes r=min(d,k), covered by the same padding construction; c=0 is excluded by hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only a finite-dimensional SVD and finite zero-padding are used; no arbitrary choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves every factorized update has rank at most r."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 construct factors for every target update of rank at most r."
+        }
+      ]
+    },
+    "thm-low-rank-adapter-merging-and-gradients": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-low-rank-adaptation-of-a-linear-layer",
+          "source_section": "Definition",
+          "quote": "W=W_0+cBA",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-budget-low-rank-adaptation",
+          "source_section": "Definition",
+          "quote": "Run reverse-mode automatic differentiation on its scalar output with respect to the ordered list of all entries of $A_t$ followed by all entries of $B_t$, each matrix flattened row by row.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-shared-parameter-backpropagation-gradient-formula",
+          "source_section": "Statement",
+          "quote": "Then the backpropagation algorithm returns $J(\\theta)$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-reverse-mode-computes-gradient",
+          "source_section": "Statement",
+          "quote": "For a finite $C^1$ program with one scalar output $f$, on a fixed strict branch and at every admissible $x$, the reverse-mode algorithm returns $Df(x)^T1$, the gradient of $f$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bilinear-differential",
+          "claim": "The derivative of W0+cBA in direction (K,H) is c(HA+BK).",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "shared-minibatch",
+          "claim": "A fixed minibatch empirical loss is a finite C1 recurrence with the same factor entries shared across transitions.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "loss-differential",
+          "claim": "The chain rule gives the loss differential as the Frobenius pairing with c(HA+BK).",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trace-adjoints",
+          "claim": "The two trace identities move A and B to their Frobenius-adjoint positions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "factor-gradients",
+          "claim": "The arbitrary factor perturbations identify the two matrix gradients.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "reverse-mode-output",
+          "claim": "The algorithm reverse-mode gradients equal the derivatives identified by the trace calculation.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 4.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-gradient-boundary",
+          "claim": "B=0 forces the A gradient to vanish, and A=B=0 forces both to vanish.",
+          "step": "5.2",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "merge-and-count",
+          "claim": "Associativity proves exact merging and counting matrix entries gives r(d+k).",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empirical loss requires m>=1; the algorithm separately specifies its T=0 return."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.2 proves the A gradient is zero at B=0 and both gradients vanish at A=B=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows m=1 and a single successful update; the recurrence in step 1.2 has one transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.2 evaluates zero factors; the formulas contain no factor inverses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement assumes open C1 domains and a fixed strict branch; branch boundaries are excluded and the algorithm reports them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sums, parameter vectors and matrix operations are finite; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives formulas and an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives formulas and an identity, not an equivalence."
+        }
+      ]
+    },
+    "rem-adaptation-rank-and-empirical-transfer": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark is prose and states no proof-bearing claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark is not an equivalence."
+        }
+      ]
+    },
+    "ex-low-rank-adapter-change-of-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-factorization-ambiguity",
+          "source_section": "Statement",
+          "quote": "For any such factors and any invertible matrix $M\\in\\mathbb R^{r\\times r}$, the transformed factors $BM$ and $M^{-1}A$ represent the same update.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "original-product",
+          "claim": "Direct multiplication gives the original 2-by-2 update matrix.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "changed-product",
+          "claim": "The invertible scalar change produces distinct factors with the same matrix product.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses a nonzero rank-one update."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly uses rank budget r=1 and an invertible scalar M=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The selected factorization and update are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All quantities are finite real matrices with no domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit finite matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        }
+      ]
+    },
+    "ex-rank-one-adapter-cannot-realize-full-rank-update": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-factorization-ambiguity",
+          "source_section": "Statement",
+          "quote": "the adapter update $\\Delta=cBA$ has matrix rank at most $r$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identity-rank",
+          "claim": "The identity matrix on R2 has rank two.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rank-obstruction",
+          "claim": "A 2-by-1 by 1-by-2 product has rank at most one, so it cannot equal I2.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target identity is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement fixes rank budget r=1 and target rank two; step 1.1 computes the target rank."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The target is nonsingular and nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The rank calculation uses only explicit finite-dimensional images."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a concrete impossibility, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a concrete impossibility, not an equivalence."
+        }
+      ]
+    },
+    "ex-zero-zero-initialization-stalls-adaptation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-merging-and-gradients",
+          "source_section": "Statement",
+          "quote": "If $B=0$, then $\\nabla_A\\mathcal L=0$; if also $A=0$, then $\\nabla_B\\mathcal L=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-budget-low-rank-adaptation",
+          "source_section": "Definition",
+          "quote": "A_{t+1}=A_t-\\eta_tG^A_t",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "loss-gradient",
+          "claim": "At W=0 the scalar loss gradient is -1 and the graph is defined and differentiable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-zero-stall",
+          "claim": "At A=B=0 both gradients vanish and one gradient-descent update remains at zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonzero-a-moves",
+          "claim": "At A=1,B=0 the B gradient is -1, so a positive step moves B to eta.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one datum and one update."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the initialization A0=B0=0 and shows both gradients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement fixes one datum and one update; step 1.1 evaluates its scalar loss gradient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 compare the zero-zero case with A0=1,B0=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The polynomial loss is defined on all real weights and has no branch boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses fixed scalar data and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a finite calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a finite calculation, not an equivalence."
+        }
+      ]
+    },
+    "ex-merged-and-unmerged-adapter-forward-pass-agree": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-low-rank-adapter-merging-and-gradients",
+          "source_section": "Statement",
+          "quote": "For every input $x\\in\\mathbb R^k$, the unmerged and merged layer outputs agree:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "merged-computation",
+          "claim": "The factor product and merged matrix give the output (19,25).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unmerged-computation",
+          "claim": "The unmerged path gives the same output by direct calculation and the merge identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes positive 2-by-2 dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses nonzero factors and a nonzero scale."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement uses rank budget r=1 and step 1.1 computes the finite merged matrix."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No factor or input is degenerate in the selected witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example contains no limiting or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit finite matrices and vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a concrete equality, not an equivalence."
+        }
+      ]
+    }
+  }
+}

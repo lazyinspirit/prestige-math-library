@@ -1,0 +1,45 @@
+# Batch 52 unrestricted-infimum bridge — distinct native Step-2 issue, cycle 1
+
+This is a proposal only. The exact current theorem before-image, candidate and three unique replacement operations are retained in `before/items/`, `candidate/items/`, and `operations.json`. Every file was created exclusively; no existing proposal or live carrier was overwritten. The theorem's Statement is byte-for-byte unchanged. Only its dependency list, a new Fact [F8], and final proof step are proposed for change. No page, manifest, shared plan, native review, readiness, hash or engine evidence was changed.
+
+## Confirmed finding
+
+The actual `research/machine-learning-all-101-2026-10-19-scope-review/batch-52/review-1.json` raises one prerequisite issue: `def-partial-homogeneous-relaxed-objective` compares J with lifts having finite integral of |w|, whereas the theorem concludes equality with inf F over **every finite nonnegative Borel measure** in the feature-energy domain. Those domains can differ when the penalty vanishes. The original Step 4.1 does not bridge them. The finding and relevant current suppliers are archived verbatim under `before/`.
+
+## Smallest repair using an already proved supplier
+
+No new substantial theorem is necessary. The actual current `lem-mean-field-first-variation-and-measure-optimality` already has the exact unrestricted comparison scope. Its Statement asserts sufficiency for a finite-energy finite nonnegative Borel measure whenever its first variation is everywhere nonnegative and vanishes almost everywhere for that measure. Its proof Step 2.1 compares with an arbitrary finite-energy nonnegative competitor by convexity of R and commutation of the bounded functional dR with the Bochner integral. Infinite-energy competitors cannot improve it. No first weight moment, second moment, compact support, attainment of an arbitrary infimizing sequence, or measure normalization is assumed.
+
+The candidate applies that supplier to the concrete Jordan-sign lift of nu furnished by the existing relaxed-objective definition. Bounded phi and Vtilde and finite total variation of nu make this lift finite with finite feature energy even if its theta second moment is infinite. Its feature moment is exactly m_nu. Its first variation at (w,theta) equals w G_+(theta) for w>0, (-w)G_-(theta) for w<0 and zero for w=0. The existing negative-branch contradiction proves both G fields nonnegative everywhere, while the already accepted stationarity supplier supplies zero variation on the two Jordan sections. Therefore this lift globally minimizes unrestricted F and has value J(nu). This gives the missing equality without applying the projection to an inadmissible competitor.
+
+The sentence explaining nonnegativity does not reopen the earlier flow proof: current Steps 1.1–3.1 derive a contradiction from a negative value of either G field using only stationarity and the given flow. The supposition that nu is not minimizing was used only to obtain that negative value. Thus the same already accepted negative-branch contradiction rules out any such value. All earlier steps remain literally unchanged.
+
+## Actual supplier grounding
+
+- `def-feature-measure-energy`: the full F comparison class is finite nonnegative Borel measures; finite energy requires concentration on Omega, existence of the Bochner integral of Phi and finiteness of the nonnegative potential integral. It does not require integral |w| or P2. This is the unrestricted domain retained by the candidate.
+- `def-partial-homogeneous-relaxed-objective`: constructs the finite Jordan-sign lift, proves its feature moment m_nu and equality F(lift)=J(nu). The candidate uses only those supplied facts, not an unrestricted fixed-projection identity.
+- `def-partial-one-homogeneous-measure-projection`: requires finite integral |w| for h1. The Jordan-sign lift meets it, since its integral |w| equals |nu|(Theta). No h1 is formed for arbitrary finite-energy competitors.
+- `lem-partial-homogeneous-projection-limit-is-stationary`: its exact current Statement retains AC, both full boundary branches, all-f regularity and narrow signed convergence against C_b. These are already the theorem's hypotheses, and its signwise equalities apply to nu's canonical Jordan parts. No claim about raw positive/negative lift components is used.
+- `lem-partial-relaxed-objective-signwise-optimality`: the earlier theorem proof's global J conclusion remains unchanged; it compares against every finite signed measure with the bounded-feature signed Bochner convention. No compact support or theta moment restriction is introduced.
+- `lem-mean-field-first-variation-and-measure-optimality`: the newly explicit supplier proves exactly the unrestricted comparison described above; its full Statement, Facts and Proof were read. It depends on the feature-energy definition, Bochner commutation, and Dirac measures; it does not depend on the repaired theorem, so the new dependency creates no cycle.
+- `lem-partial-homogeneous-projection-limit-has-convergent-penalty`: the already accepted convergence fact [F7] is used unchanged. Its proof and the closed stationarity/radial/escape core are not reopened in this task.
+
+## Focused consumer check
+
+The only actual direct item consumer found by the current source scan is `cor-partial-homogeneous-wasserstein-limit-is-global-minimizer`. Its [F2] requires the theorem's full identity inf J=inf F, Step 1.1 uses the resulting limit F(mu_t)->inf F, and Step 2.1 combines that with `lem-partial-energy-continuous-under-w2` to conclude that the W2 limit minimizes F over all finite nonnegative measures. The candidate repairs exactly that supplier clause without changing its Statement. The corollary's full source and its actual energy-continuity supplier were read; no proof or Statement change is needed there. The theorem's page placement is unchanged. Source search found no other direct item consumer, so this task proposes no unrelated consumer edits.
+
+## Truncation proof, independently confirming the scope bridge
+
+The native finding's proposed alternative is also valid and does not need compact support in theta. For an arbitrary finite-energy finite nonnegative competitor eta on R x Theta, let eta_n be its restriction to {|w|<=n}. Then integral |w| d eta_n <= n eta(Omega)<infinity. By the **definition of finite energy**, Phi=w phi is Bochner integrable against eta; hence it is strongly measurable and its norm is eta-integrable. The functions 1_{|w|<=n} Phi converge pointwise to Phi and are dominated in norm by ||Phi||. The actual published `thm-bochner-dominated-convergence` therefore gives norm convergence of their integrals. Continuity of R gives convergence of the risk values. The nonnegative functions 1_{|w|<=n} V increase pointwise to V, so the actual published `thm-monotone-convergence-for-the-integral` gives convergence of the potential integrals. Thus F(eta_n)->F(eta), without assuming eta has finite first weight moment. Each eta_n is covered by the fixed-projection relaxed inequality, yielding inf J <= F(eta_n), and hence inf J <= F(eta). Conversely the Jordan-sign lift for each finite signed lambda gives inf F <= J(lambda). Taking both infima proves equality. The zero measure ensures both comparison classes are nonempty and both infima finite because R(0)<infinity; no minimizer or compact-support approximation is assumed.
+
+This truncation argument is recorded as independent mathematical confirmation only. The candidate uses the smaller existing-first-variation dependency and does not add dominated/monotone convergence as logical dependencies. Both actual published suppliers were read in full, and their current raw texts are archived for this scope check. AC already supplies the countable-choice assumption of Bochner dominated convergence.
+
+## Verification and limits
+
+One-file formatting check of the proposal candidate only:
+
+`node tools/proof-layout.mjs research/machine-learning-all-101-2026-10-19-owner-partial52-escalation/your-proposal/candidate/items/thm-partial-homogeneous-projected-limit-is-global-minimizer.md`
+
+Result: `proof-layout: 1 items, 5 steps, 0 defects` (exit 0). This is formatting evidence, not a native gate, readiness decision, independent acceptance or source hash certification.
+
+Read current CLAUDE.md fully, the actual entire native review JSON, the entire actual theorem and corollary, and the actual supplier texts listed above. No fresh external full-text source reading was needed for this elementary application of proved local suppliers; no such reading is claimed. The historical task's full Chizat–Bach Appendix C.4 reading is not reused as proof acceptance for this new issue. The on-disk Codex setting still records `model_auto_compact_token_limit = 500000` and scope `total`; no restart claim is made. Current git log was inspected read-only. Live-run counts from historical handoffs were not used as authority. Root owns current-state binding, metadata, review, integration, native recertification and gates.

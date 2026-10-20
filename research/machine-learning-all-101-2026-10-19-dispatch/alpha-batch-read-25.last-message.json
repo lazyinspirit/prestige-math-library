@@ -1,0 +1,225 @@
+{
+  "group": "h",
+  "batches": ["25"],
+  "pages_read": [
+    "ml02-graphical-models",
+    "ml02-graphical-models-examples"
+  ],
+  "items_read": [
+    "def-undirected-graphical-model-and-markov-properties",
+    "def-graphical-lasso-objective",
+    "def-restricted-boltzmann-machine",
+    "thm-gaussian-precision-zero-conditional-independence",
+    "lem-graphical-lasso-profiled-gaussian-likelihood",
+    "alg-graphical-lasso-coordinate-descent",
+    "lem-graphical-lasso-finite-budget-properties",
+    "thm-graphical-lasso-convexity-and-kkt",
+    "ex-rbm-visible-units-conditionally-independent-given-hidden",
+    "ex-three-node-gaussian-chain",
+    "ex-graphical-lasso-penalty-sparsity-threshold"
+  ],
+  "conventions": [
+    {
+      "convention": "The sample covariance uses divisor N. The graphical-lasso penalty sums over all ordered matrix entries, including diagonal entries; the off-diagonal-only penalty defines a separate objective.",
+      "fixed_by": "def-graphical-lasso-objective",
+      "matters_for": [
+        "lem-graphical-lasso-profiled-gaussian-likelihood",
+        "alg-graphical-lasso-coordinate-descent",
+        "thm-graphical-lasso-convexity-and-kkt",
+        "ex-graphical-lasso-penalty-sparsity-threshold"
+      ]
+    },
+    {
+      "convention": "Graphs are finite, simple and undirected. Global separation tests pairwise disjoint vertex sets. Clique potentials are strictly positive and finite; no equivalence between factorization and Markov properties is asserted.",
+      "fixed_by": "def-undirected-graphical-model-and-markov-properties",
+      "matters_for": [
+        "thm-gaussian-precision-zero-conditional-independence",
+        "ex-three-node-gaussian-chain"
+      ]
+    },
+    {
+      "convention": "Conditional independence uses bounded measurable real test functions and almost-sure conditional-expectation identities under the explicitly assumed AC convention.",
+      "fixed_by": "def-conditional-independence-given-a-sigma-algebra",
+      "matters_for": [
+        "def-undirected-graphical-model-and-markov-properties",
+        "def-restricted-boltzmann-machine",
+        "thm-gaussian-precision-zero-conditional-independence",
+        "ex-rbm-visible-units-conditionally-independent-given-hidden"
+      ]
+    },
+    {
+      "convention": "The Gaussian precision-zero equivalence requires positive-definite covariance and distinct indices. For p=2, conditioning on the remaining coordinates means conditioning on the trivial sigma-algebra.",
+      "fixed_by": "thm-gaussian-precision-zero-conditional-independence",
+      "matters_for": [
+        "ex-three-node-gaussian-chain"
+      ]
+    },
+    {
+      "convention": "RBM states are binary 0/1, energy is −aᵀv−bᵀh−vᵀWh, and absent-edge weights are fixed to zero. Finite contrastive divergence starts at the observed visible state and replaces the negative phase by its finite k-step law; it is not asserted to equal the likelihood gradient.",
+      "fixed_by": "def-restricted-boltzmann-machine",
+      "matters_for": [
+        "ex-rbm-visible-units-conditionally-independent-given-hidden"
+      ]
+    },
+    {
+      "convention": "The procedure uses positive finite sweep budgets, resets the block coefficient vector to zero, restores original coordinate indexing, and accepts candidates only after a positive-eigenvalue test. Its properties assume exact real arithmetic and exact finite-dimensional matrix operations; no convergence or optimizer guarantee is asserted.",
+      "fixed_by": "alg-graphical-lasso-coordinate-descent",
+      "matters_for": [
+        "lem-graphical-lasso-finite-budget-properties"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-graphical-lasso-objective",
+      "statement": "For symmetric positive-semidefinite S, positive-definite Θ and λ>0, F(S,λ)(Θ)=log det Θ−tr(SΘ)−λ∑ᵢ∑ⱼ|Θᵢⱼ|, including diagonal entries.",
+      "used_by": [
+        "lem-graphical-lasso-profiled-gaussian-likelihood",
+        "alg-graphical-lasso-coordinate-descent",
+        "thm-graphical-lasso-convexity-and-kkt",
+        "ex-graphical-lasso-penalty-sparsity-threshold"
+      ]
+    },
+    {
+      "id": "thm-graphical-lasso-convexity-and-kkt",
+      "statement": "For p≥1, S positive semidefinite and λ>0, the all-entry objective is strictly concave and attains a unique maximizer. A feasible Θ is that maximizer iff Θ⁻¹−S−λΓ=0 for symmetric Γ with diagonal entries 1 and the stated entrywise sign/subgradient conditions.",
+      "used_by": [
+        "ex-graphical-lasso-penalty-sparsity-threshold"
+      ]
+    },
+    {
+      "id": "thm-gaussian-precision-zero-conditional-independence",
+      "statement": "Assume AC. For X with law Nₚ(μ,Σ), p≥2 and Σ positive definite, Xᵢ and Xⱼ are conditionally independent given all remaining coordinates iff (Σ⁻¹)ᵢⱼ=0, for every distinct i,j.",
+      "used_by": [
+        "ex-three-node-gaussian-chain"
+      ]
+    },
+    {
+      "id": "def-restricted-boltzmann-machine",
+      "statement": "The finite binary energy model has product Bernoulli layer conditionals, the displayed exact likelihood gradients, and the separately defined finite-k contrastive-divergence components.",
+      "used_by": [
+        "ex-rbm-visible-units-conditionally-independent-given-hidden"
+      ]
+    },
+    {
+      "id": "alg-graphical-lasso-coordinate-descent",
+      "statement": "For p≥2, S positive semidefinite, λ>0 and positive integer budgets R,K, initialize W=S+λI, perform the specified finite block and soft-threshold coordinate updates with positive-definiteness guards, and return failure or W⁻¹.",
+      "used_by": [
+        "lem-graphical-lasso-finite-budget-properties"
+      ]
+    },
+    {
+      "id": "def-undirected-graphical-model-and-markov-properties",
+      "statement": "Under AC, defines finite simple undirected graphs, pairwise and global Markov properties through conditional independence, and strictly positive finite-state clique factorization without asserting their equivalence.",
+      "used_by": [
+        "thm-gaussian-precision-zero-conditional-independence",
+        "ex-three-node-gaussian-chain"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable coordinate variables in graphical models and finite RBMs.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice hypotheses for Gaussian laws and conditional independence.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The hypothesis of the Euclidean/product Lebesgue-measure identification.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Identifying conditional-density integrals as conditional-expectation versions.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-independence-given-a-sigma-algebra",
+      "used_for": "Exact conditional-independence convention in the graph, RBM and Gaussian items.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Finite weighted expectations in RBM gradient formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian projection laws, means and covariance conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Positive-definite Gaussian densities in conditioning and profile likelihood.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-density-formula",
+      "used_for": "Normalizing Gaussian sections to obtain a regular conditional distribution.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Factoring integrals against the conditional product density.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "The converse conditional-independence implication via bounded trigonometric tests.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Using the Gaussian Euclidean density as a product-reference density when p>2.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Supplying countable choice from the Gaussian theorem's AC hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Identifying the iid observation law with the product of Gaussian marginal laws.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-kernel-and-probability-kernel",
+      "used_for": "Viewing each Gaussian observation law as a constant kernel on a singleton.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-products-of-dominated-kernels-have-product-density",
+      "used_for": "Obtaining the product observation density used in the profile likelihood.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Candidate eigenvalue tests, positive-definite inverses, eigenvalue bounds and matrix square roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Factoring S=RᵀR to establish tr(SΘ)≥0.",
+      "opened": true
+    },
+    {
+      "id": "thm-hessian-characterises-convexity",
+      "used_for": "Convexity of −log det on the open convex positive-definite cone.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Chord inequalities and strictness used for uniqueness of the graphical-lasso optimizer.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": []
+}

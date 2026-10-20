@@ -11,6 +11,7 @@ deps: [def-sigma-algebra]
 aliases: []
 landmark: true
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-measurable-space.json
   precheck: n/a
   judge:
     model: "deepseek-v4-pro + claude-sonnet-5"
@@ -30,5 +31,10 @@ pipeline_run: null
 ## Definition
 
 A **measurable space** is a pair $(X,\mathcal A)$ consisting of a set $X$ and a
-sigma-algebra $\mathcal A$ on $X$ ([[def-sigma-algebra]]). The members of
+sigma-algebra $\mathcal A$ on $X$ (Sigma-algebras). The members of
 $\mathcal A$ are the **measurable subsets** of $X$.
+
+## Definition references
+
+[[def-sigma-algebra]]
+

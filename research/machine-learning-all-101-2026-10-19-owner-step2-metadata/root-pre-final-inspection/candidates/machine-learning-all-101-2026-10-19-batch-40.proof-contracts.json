@@ -1,0 +1,1662 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-sgd-trajectory-integrability",
+    "lem-independent-finite-random-index-extension",
+    "thm-stochastic-direction-expected-average-stationarity",
+    "thm-nonconvex-sgd-random-iterate-stationarity",
+    "ex-constant-step-sgd-noise-floor",
+    "ex-empirical-risk-sgd-oracle-is-unbiased",
+    "ex-sgd-biased-direction-violates-alignment"
+  ],
+  "note": "Step 1 proof-obligation contracts for machine-learning-all-101-2026-10-19 batch 40. Quotes are exact current supplier sections; finite smoke entries are hand-checked arithmetic cases and do not replace the proofs.",
+  "contracts": {
+    "lem-sgd-trajectory-integrability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3] and $2ab\\le a^2+b^2$, $\\|u+v\\|_2^2\\le2\\|u\\|_2^2+2\\|v\\|_2^2$. Thus $\\mathbb E\\|x_{k+1}\\|_2^2\\le2\\mathbb E\\|x_k\\|_2^2+2\\alpha_k^2\\mathbb E\\|G_k\\|_2^2$ for every $k<N$. The right side is finite whenever $x_k$ has finite second moment, using the expectation convention [F5].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The initial second moment is finite by the Statement, and step 1.1 carries finiteness from $x_k$ to $x_{k+1}$. Finite induction using [F4] therefore gives $\\mathbb E\\|x_k\\|_2^2<\\infty$ for all $k\\le N$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Lipschitz-gradient condition [F1] and [F3] give $\\|\\nabla f(x_k)\\|_2\\le\\|\\nabla f(0)\\|_2+L\\|x_k\\|_2$, so $\\|\\nabla f(x_k)\\|_2^2\\le2\\|\\nabla f(0)\\|_2^2+2L^2\\|x_k\\|_2^2$. Step 2.1 makes the right side integrable; hence every stated gradient has finite second moment.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F1] to $(0,x_k)$ and $(x_k,0)$. The upper bound gives $f(x_k)\\le f(0)+\\|\\nabla f(0)\\|_2\\|x_k\\|_2+(L/2)\\|x_k\\|_2^2$. The lower bound and the Lipschitz-gradient condition give $f(x_k)\\ge f(0)-\\|\\nabla f(0)\\|_2\\|x_k\\|_2-(3L/2)\\|x_k\\|_2^2$. Thus [F3] and $2ab\\le a^2+b^2$ imply $|f(x_k)|\\le |f(0)|+\\frac12\\|\\nabla f(0)\\|_2^2+\\left(\\frac12+\\frac{3L}{2}\\right)\\|x_k\\|_2^2$. The right side has finite expectation by step 2.1, so $\\mathbb E|f(x_k)|<\\infty$ for every $k\\le N$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d≥1 and N≥1, so an empty dimension or horizon is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1, 2.1, and 4.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.1 and 4.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication from moment assumptions to integrability, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication from moment assumptions to integrability, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "scalar-two-step-integrability",
+          "asserts": "For d=1, f(x)=x^2/2, x_0=1, G_0=2, G_1=3, α_0=1/2, and α_1=1/3, the iterates are x_1=0 and x_2=-1; each iterate, gradient, and objective has a finite second moment or absolute expectation.",
+          "claim": "The explicit finite deterministic trajectory confirms the recurrence indices and the moment conclusion at the initial, interior, and terminal iterates.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "horizon": 2
+        }
+      ]
+    },
+    "lem-independent-finite-random-index-extension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\widetilde\\Omega=\\Omega\\times\\{1,\\ldots,N\\}$ and let $\\widetilde{\\mathcal F}$ consist of the sets $E=\\bigcup_{k=1}^N A_k\\times\\{k\\}$ with every $A_k\\in\\mathcal F$. Each such decomposition is unique, since $A_k=\\{\\omega:(\\omega,k)\\in E\\}$. The empty set and whole space have this form; complements replace each $A_k$ by $\\Omega\\setminus A_k$; and countable unions replace each $A_k$ by the corresponding countable union in $\\mathcal F$. Thus $\\widetilde{\\mathcal F}$ is a sigma-algebra.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $E=\\bigcup_k A_k\\times\\{k\\}$ define $\\widetilde P(E)=\\sum_k p_kP(A_k)$. This is nonnegative and $\\widetilde P(\\widetilde\\Omega)=\\sum_kp_k=1$. If $E_j=\\bigcup_k A_{j,k}\\times\\{k\\}$ are pairwise disjoint, then for each fixed $k$ the sets $A_{j,k}$ are pairwise disjoint. Countable additivity of $P$ from [F2] gives $\\widetilde P(\\bigcup_jE_j)=\\sum_kp_k\\lim_{m\\to\\infty}\\sum_{j=1}^mP(A_{j,k})$. Because the sum over $k$ is finite, its limit commutes with this finite sum; rearranging each finite double sum gives $\\widetilde P(\\bigcup_jE_j)=\\lim_{m\\to\\infty}\\sum_{j=1}^m\\widetilde P(E_j)=\\sum_j\\widetilde P(E_j)$. Hence $\\widetilde P$ is a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $R(\\omega,k)=k$. It is measurable because each inverse image is $\\Omega\\times\\{k\\}$, and $\\widetilde P(R=k)=p_k$. For every $A\\in\\mathcal F$, its lift $\\widetilde A=A\\times\\{1,\\ldots,N\\}$ satisfies $\\widetilde P(\\widetilde A\\cap\\{R=k\\})=p_kP(A)=\\widetilde P(\\widetilde A)\\widetilde P(R=k)$, so $R$ is independent of all lifted original events.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "First suppose each $H_k$ is a nonnegative simple function. Write it as a finite sum of nonnegative constants times indicators of measurable sets. On the $k$th slice, the lifted indicator of $A\\in\\mathcal F$ is $\\mathbf1_{A\\times\\{k\\}}$, whose integral is its probability $p_kP(A)$ by [F4] and step 2.1. Finite linearity [F5], followed by summing the finitely many slices, gives $\\widetilde{\\mathbb E}[H_R]=\\sum_kp_k\\mathbb E[H_k]$.",
+          "step": "3.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For arbitrary nonnegative measurable $H_k$, choose increasing simple approximations $H_{k,m}\\uparrow H_k$ by [F6]. Since there are finitely many $k$, the lifted simple functions $H_m(\\omega,k)=H_{k,m}(\\omega)$ increase pointwise to $H_R$. Apply [F7] on the extension and on the original space to the simple-function identity of step 3.2; the finite sum over $k$ commutes with the increasing limit. Therefore $\\widetilde{\\mathbb E}[H_R]=\\sum_kp_k\\mathbb E[H_k]$ for all nonnegative measurable $H_k$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For integrable real $H_k$, apply step 4.1 separately to $H_k^+$ and $H_k^-$. Their weighted expectations are finite because $\\sum_kp_k\\mathbb E|H_k|<\\infty$. Subtracting the two nonnegative identities using [F5] proves both integrability of $H_R$ and the stated expectation formula. The extension and selector are explicitly finite-slice constructions, so this proof uses no choice axiom.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes N≥1 and a probability vector, so an empty index set is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1, 2.1, and 5.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1 and 5.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1, 3.1, and 5.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives an existence and expectation formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives an existence and expectation formula, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-point-weighted-expectation",
+          "asserts": "Take Ω={a,b}, P(a)=1/4, P(b)=3/4, p_1=1/3, p_2=2/3, H_1(a,b)=(2,4), and H_2(a,b)=(0,6). Then E[H_1]=7/2, E[H_2]=9/2, and E[H_R]=(1/3)(7/2)+(2/3)(9/2)=25/6.",
+          "claim": "The finite extension assigns mass p_kP({ω}) to slice (ω,k), giving the weighted expectation formula directly.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, 4.1, and 5.1",
+          "indices": 2
+        }
+      ]
+    },
+    "thm-stochastic-direction-expected-average-stationarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-stochastic-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Given $d\\ge1$, a continuously differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, an initial iterate $x_1$ measurable with respect to $\\mathcal F_1$, an integer horizon $N\\ge1$, deterministic finite stepsizes $\\alpha_1,\\ldots,\\alpha_N>0$, and a stochastic-gradient oracle whose output at $x_t$ is a random vector $G_t:\\Omega\\to\\mathbb R^d$ measurable with respect to $\\mathcal F_{t+1}$, the procedure returns the trajectory $(x_t)_{t=1}^{N+1}$. For each iteration $t=1,\\ldots,N$, query the oracle at $x_t$ and set\n$$x_{t+1}=x_t-\\alpha_tG_t.$$\nNo conditional mean, variance, or independence-across-iterations property is part of this procedure's definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-variance",
+          "source_section": "Definition",
+          "quote": "Assume AC. For real $X\\in L^2(P)$ define $\\operatorname{Var}(X\\mid\\mathcal G)=E[(X-E[X\\mid\\mathcal G])^2\\mid\\mathcal G]$ as an almost-sure class. Its integrability, nonnegativity, representative independence and second-moment formula are justified by the following lemma.\n\nThe conditional class is [[def-conditional-expectation-as-an-ae-class]], with [[def-axiom-of-choice]] inherited from existence. By [[cor-conditional-lp-contraction]], a version of the conditional mean is square integrable. The unbounded-factor rule [[thm-taking-out-what-is-known]] will apply to products whose integrability is verified in the well-definedness lemma, recorded under `justified_by`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, conditional variance is an integrable nonnegative class independent of representatives and satisfies $\\operatorname{Var}(X\\mid\\mathcal G)=E[X^2\\mid\\mathcal G]-(E[X\\mid\\mathcal G])^2$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-martingale-difference-sequence",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] for conditional-expectation existence. A **martingale difference sequence** relative to $(\\mathcal F_n)_{n\\ge0}$ is a sequence $(D_n)_{n\\ge1}$ of real integrable variables such that $D_n$ is $\\mathcal F_n$-measurable and\n$$E[D_n\\mid\\mathcal F_{n-1}]=0\\quad\\text{a.s. for every }n\\ge1.$$\nIntegrability and adaptedness have the timewise meanings of [[def-adapted-and-integrable-stochastic-process]]. Conditional expectations have the class convention of [[def-conditional-expectation-as-an-ae-class]], which is the exact inherited use of AC here. No representative is selected by this definition. There is no $D_0$, and $\\mathcal F_0$ need not be trivial or generated by the differences.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-sgd-trajectory-integrability",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $(\\Omega,\\mathcal F,P)$ be a probability space, and let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable with an $L$-Lipschitz gradient for some finite $L\\ge0$. Fix an integer $N\\ge1$, measurable maps $x_0,G_0,\\ldots,G_{N-1}:\\Omega\\to\\mathbb R^d$, and finite real stepsizes $\\alpha_0,\\ldots,\\alpha_{N-1}$. Suppose $\\mathbb E\\|x_0\\|_2^2<\\infty$ and $\\mathbb E\\|G_k\\|_2^2<\\infty$ for every $k<N$, and define $x_{k+1}=x_k-\\alpha_kG_k$. Then every $x_k$ and $\\nabla f(x_k)$ for $0\\le k\\le N$ has finite second moment, and every $f(x_k)$ has finite absolute expectation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $t\\ge1$ and write $g_t=\\nabla f(x_t)$, $m_t=\\mathbb E[G_t\\mid\\mathcal F_t]$, and $\\varepsilon_t=G_t-m_t$. The filtration and adapted-process conventions [F3, F4], together with the random-element convention [F5], make the time-indexed measurability explicit. By [F16], the objective values, gradients, and oracle vectors used below are integrable. The vector $\\varepsilon_t$ is $\\mathcal F_{t+1}$-measurable and has conditional mean zero given $\\mathcal F_t$, so each coordinate, after shifting the filtration to $\\mathcal H_n=\\mathcal F_{n+1}$, is a martingale difference by [F8]. The conditional variance identity [F2, F7] and [A3]–[A4] give $\\mathbb E[\\|G_t\\|_2^2\\mid\\mathcal F_t]=\\|m_t\\|_2^2+\\operatorname{Var}(G_t\\mid\\mathcal F_t)\\le M+(M_V+\\mu_G^2)\\|g_t\\|_2^2=M+M_G\\|g_t\\|_2^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "A4",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F15",
+            "F16",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F9] with $x=x_t$ and $y=x_{t+1}=x_t-\\alpha_tG_t$, condition on $\\mathcal F_t$, and use [F10] to take the $\\mathcal F_t$-measurable gradient factor outside. Each coordinate product is integrable because $2|g_{t,j}G_{t,j}|\\le g_{t,j}^2+G_{t,j}^2$, with finite expectations by [F16] and the stated oracle moments. Conditional linearity and order [F11] give $\\mathbb E[f(x_{t+1})\\mid\\mathcal F_t]\\le f(x_t)-\\alpha_t\\langle g_t,m_t\\rangle+\\frac{L\\alpha_t^2}{2}\\mathbb E[\\|G_t\\|_2^2\\mid\\mathcal F_t]\\le f(x_t)-\\left(\\mu\\alpha_t-\\frac{LM_G\\alpha_t^2}{2}\\right)\\|g_t\\|_2^2+\\frac{LM\\alpha_t^2}{2}$. All remaining terms are integrable by [F15]–[F16] and the second-moment bound in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "F1",
+            "F9",
+            "F10",
+            "F11",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For constant $\\alpha\\le\\mu/(LM_G)$, $\\mu\\alpha-LM_G\\alpha^2/2\\ge\\mu\\alpha/2$. Take ordinary expectations in step 2.1, using [F11]–[F12], and sum from $t=1$ to $T$. The objective terms telescope and [A5] gives $\\frac{\\mu\\alpha}{2}\\sum_{t=1}^T\\mathbb E\\|g_t\\|_2^2\\le f(x_1)-F_{\\inf}+\\frac{L\\alpha^2MT}{2}$. Divide by $T\\mu\\alpha/2$ to obtain the stated constant-step average bound.",
+          "step": "3.1",
+          "inputs": [
+            "A5",
+            "F11",
+            "F12",
+            "F15",
+            "F16",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the diminishing-step regime, $\\sum_t\\alpha_t^2<\\infty$ implies $\\alpha_t\\to0$: otherwise some $\\epsilon>0$ would satisfy $\\alpha_t\\ge\\epsilon$ at infinitely many indices, forcing the square sum to diverge. Since $\\mu/(LM_G)>0$, choose $K$ so that $\\alpha_t\\le\\mu/(LM_G)$ for every $t\\ge K$. Apply step 2.1 on this tail, take expectations, and telescope through $T\\ge K$; then $\\frac\\mu2\\sum_{t=K}^T\\alpha_t\\mathbb E\\|g_t\\|_2^2\\le\\mathbb E f(x_K)-F_{\\inf}+\\frac{LM}{2}\\sum_{t=K}^T\\alpha_t^2$. The right side is bounded independently of $T$ by [F15], [F16], and square summability. The omitted finite prefix has finite weighted sum by [F16]. Thus $\\sum_{t=1}^T\\alpha_t\\mathbb E\\|g_t\\|_2^2$ stays bounded while $A_T=\\sum_{t=1}^T\\alpha_t\\to\\infty$. Their ratio tends to zero, which is the claimed expectation of the weighted average because each $\\alpha_t$ is deterministic.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "A5",
+            "F11",
+            "F12",
+            "F15",
+            "F16",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The constant regime assumes T≥1, while the asymptotic regime concerns positive-index sequences."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1, 3.1, and 4.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1 and 4.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states sufficient conditions for stationarity and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states sufficient conditions for stationarity and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-step-smoothness-descent-equality",
+          "asserts": "For f(x)=x^2/2, x_1=1, G_1=1, L=1, α=1/2, and zero conditional variance, f(x_2)=1/8=f(x_1)-α|∇f(x_1)|^2+(Lα^2/2)|G_1|^2.",
+          "claim": "The deterministic quadratic attains the smoothness descent inequality used in step 1.2 and checks its constants.",
+          "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+          "iterations": 1
+        }
+      ]
+    },
+    "thm-nonconvex-sgd-random-iterate-stationarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-stochastic-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Given $d\\ge1$, a continuously differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, an initial iterate $x_1$ measurable with respect to $\\mathcal F_1$, an integer horizon $N\\ge1$, deterministic finite stepsizes $\\alpha_1,\\ldots,\\alpha_N>0$, and a stochastic-gradient oracle whose output at $x_t$ is a random vector $G_t:\\Omega\\to\\mathbb R^d$ measurable with respect to $\\mathcal F_{t+1}$, the procedure returns the trajectory $(x_t)_{t=1}^{N+1}$. For each iteration $t=1,\\ldots,N$, query the oracle at $x_t$ and set\n$$x_{t+1}=x_t-\\alpha_tG_t.$$\nNo conditional mean, variance, or independence-across-iterations property is part of this procedure's definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stochastic-gradient-oracle-and-unconstrained-update",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\ge1$ and a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_k)_{k\\ge0},P)$ as in [[def-filtration-and-filtered-probability-space]]. A sequence $x_k:\\Omega\\to\\mathbb R^d$ is an iterate process when each coordinate is $\\mathcal F_k$-measurable; a sequence $G_k:\\Omega\\to\\mathbb R^d$ is an oracle process when each coordinate is $\\mathcal F_{k+1}$-measurable. These are coordinatewise instances of [[def-random-element-and-real-random-variable]] and [[def-adapted-and-integrable-stochastic-process]]. Assume the coordinates used in a conditional moment are square-integrable.\n\nFor deterministic stepsizes $\\alpha_k>0$, the unconstrained Robbins–Monro/SGD update is\n$$x_{k+1}=x_k-\\alpha_kG_k.$$\nFor a differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, the oracle is conditionally unbiased when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)$ coordinatewise almost surely; it has conditional bias $b_k$ when $\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k$. The conditional variance of a vector is the sum of the scalar conditional variances of its coordinates, using [[def-conditional-variance]]. By [[lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]], it satisfies\n$$\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|\\mathbb E[G_k\\mid\\mathcal F_k]\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)$$\nalmost surely. All conditional expectations are coordinatewise instances of [[def-conditional-expectation-as-an-ae-class]], whose existence assumes the [[def-axiom-of-choice]]. No independence across iterations is part of this definition.\n\nThe conditional second-moment bound $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]\\le M_k^2$ and the conditional variance bound $\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$ are distinct hypotheses; the latter combines with conditional unbiasedness through the displayed identity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-variance",
+          "source_section": "Definition",
+          "quote": "Assume AC. For real $X\\in L^2(P)$ define $\\operatorname{Var}(X\\mid\\mathcal G)=E[(X-E[X\\mid\\mathcal G])^2\\mid\\mathcal G]$ as an almost-sure class. Its integrability, nonnegativity, representative independence and second-moment formula are justified by the following lemma.\n\nThe conditional class is [[def-conditional-expectation-as-an-ae-class]], with [[def-axiom-of-choice]] inherited from existence. By [[cor-conditional-lp-contraction]], a version of the conditional mean is square integrable. The unbounded-factor rule [[thm-taking-out-what-is-known]] will apply to products whose integrability is verified in the well-definedness lemma, recorded under `justified_by`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, conditional variance is an integrable nonnegative class independent of representatives and satisfies $\\operatorname{Var}(X\\mid\\mathcal G)=E[X^2\\mid\\mathcal G]-(E[X\\mid\\mathcal G])^2$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-martingale-difference-sequence",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] for conditional-expectation existence. A **martingale difference sequence** relative to $(\\mathcal F_n)_{n\\ge0}$ is a sequence $(D_n)_{n\\ge1}$ of real integrable variables such that $D_n$ is $\\mathcal F_n$-measurable and\n$$E[D_n\\mid\\mathcal F_{n-1}]=0\\quad\\text{a.s. for every }n\\ge1.$$\nIntegrability and adaptedness have the timewise meanings of [[def-adapted-and-integrable-stochastic-process]]. Conditional expectations have the class convention of [[def-conditional-expectation-as-an-ae-class]], which is the exact inherited use of AC here. No representative is selected by this definition. There is no $D_0$, and $\\mathcal F_0$ need not be trivial or generated by the differences.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-sgd-trajectory-integrability",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $(\\Omega,\\mathcal F,P)$ be a probability space, and let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable with an $L$-Lipschitz gradient for some finite $L\\ge0$. Fix an integer $N\\ge1$, measurable maps $x_0,G_0,\\ldots,G_{N-1}:\\Omega\\to\\mathbb R^d$, and finite real stepsizes $\\alpha_0,\\ldots,\\alpha_{N-1}$. Suppose $\\mathbb E\\|x_0\\|_2^2<\\infty$ and $\\mathbb E\\|G_k\\|_2^2<\\infty$ for every $k<N$, and define $x_{k+1}=x_k-\\alpha_kG_k$. Then every $x_k$ and $\\nabla f(x_k)$ for $0\\le k\\le N$ has finite second moment, and every $f(x_k)$ has finite absolute expectation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-independent-finite-random-index-extension",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $N\\ge1$, and let $p_1,\\ldots,p_N\\ge0$ satisfy $\\sum_{k=1}^N p_k=1$. There is a probability-space extension carrying an independent random index $R\\in\\{1,\\ldots,N\\}$ with $P(R=k)=p_k$. For any integrable real random variables $H_1,\\ldots,H_N$ on the original space, the lifted random variable $H_R(\\omega,k)=H_k(\\omega)$ is integrable on the extension and satisfies $\\mathbb E[H_R]=\\sum_{k=1}^N p_k\\mathbb E[H_k]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $k$ and put $g_k=\\nabla f(x_k)$ and $\\varepsilon_k=G_k-g_k$. The filtration and adapted-process convention [F3] puts $x_k$ and $G_k$ at their stated time indices, and [F4] records their random-element measurability. Under AC [A1], the conditional-expectation classes used here are the almost-sure classes in [F5]. By [F8], the objective values, gradients, and directions used in the descent calculation are integrable. The residual $\\varepsilon_k$ has conditional mean zero given $\\mathcal F_k$; after shifting the filtration by one index, its coordinates form martingale differences by [F3, F7]. The conditional variance identity [F2, F6] and [A3] yield $\\mathbb E[\\|G_k\\|_2^2\\mid\\mathcal F_k]=\\|g_k\\|_2^2+\\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\|g_k\\|_2^2+\\sigma^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the smoothness inequality [F9] to $x_{k+1}=x_k-\\gamma_kG_k$ and condition on $\\mathcal F_k$. The products are integrable because $2|g_{k,j}G_{k,j}|\\le g_{k,j}^2+G_{k,j}^2$ coordinatewise, with finite expectations by [F8]. Take the $\\mathcal F_k$-measurable gradient factor outside conditional expectation by [F10], then use [A2], [F11], and step 1.1 to obtain $\\mathbb E[f(x_{k+1})\\mid\\mathcal F_k]\\le f(x_k)-\\left(\\gamma_k-\\frac{L}{2}\\gamma_k^2\\right)\\|g_k\\|_2^2+\\frac{L\\gamma_k^2\\sigma^2}{2}$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F14",
+            "F15",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take ordinary expectations in step 2.1 using the tower property [F11, F12], and sum from $k=1$ to $N$. The objective terms telescope; by [A4], $\\mathbb E f(x_{N+1})\\ge f^*$. Therefore $\\sum_{k=1}^N\\left(\\gamma_k-\\frac{L}{2}\\gamma_k^2\\right)\\mathbb E\\|g_k\\|_2^2\\le f(x_1)-f^*+\\frac{L\\sigma^2}{2}\\sum_{k=1}^N\\gamma_k^2$. Multiplying by $2$ gives $\\sum_{k=1}^Na_k\\mathbb E\\|g_k\\|_2^2\\le2(f(x_1)-f^*)+L\\sigma^2\\sum_{k=1}^N\\gamma_k^2$.",
+          "step": "3.1",
+          "inputs": [
+            "A4",
+            "F11",
+            "F12",
+            "F15",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $a_k=\\gamma_k(2-L\\gamma_k)>0$, $S_N>0$ and $(a_k/S_N)_{k=1}^N$ is a probability vector. Apply [F13] to the integrable random variables $H_k=\\|g_k\\|_2^2$; it gives $\\mathbb E\\|\\nabla f(x_R)\\|_2^2=S_N^{-1}\\sum_ka_k\\mathbb E\\|g_k\\|_2^2$. Dividing step 3.1's bound by $LS_N$ yields the claimed weighted estimate.",
+          "step": "4.1",
+          "inputs": [
+            "F8",
+            "F13",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $D_f,\\sigma>0$ and set $\\gamma=\\min\\{1/L,D_f/(\\sigma\\sqrt N)\\}$. If $\\gamma=D_f/(\\sigma\\sqrt N)\\le1/L$, then $2\\gamma-L\\gamma^2\\ge\\gamma$ and $D_f^2+N\\sigma^2\\gamma^2=2D_f^2$, so the weighted bound is at most $2D_f\\sigma/\\sqrt N$. If $\\gamma=1/L$, the bound equals $LD_f^2/N+\\sigma^2/L$, and the clipping condition implies $\\sigma^2/L\\le LD_f^2/N$, giving at most $2LD_f^2/N$. Thus it is bounded by the stated sum of the two terms. If $\\sigma=0$, use $\\gamma=1/L$ in the formula to obtain $LD_f^2/N$. If $D_f=0<\\sigma$, use $\\gamma=1/(L\\sqrt N)$; then $S_N=(2\\sqrt N-1)/L$ and the right side is $\\sigma^2/[L(2\\sqrt N-1)]$. These cases prove the asserted constant-step rate and handle the zero boundaries.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite horizon is required to satisfy N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 3.1 and 4.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 4.1 and 5.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way stationarity guarantee, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way stationarity guarantee, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "single-iterate-weighted-bound-equality",
+          "asserts": "For f(x)=x^2/2, x_1=1, L=1, N=1, γ_1=1, G_1=1, σ=0, and f*=0, one has a_1=S_1=1, D_f^2=1, and (1/L)E|∇f(x_R)|^2=1=(D_f^2+σ^2γ_1^2)/S_1.",
+          "claim": "The one-step deterministic quadratic reaches equality in the main weighted bound and confirms the D_f normalization.",
+          "checked_in": "Statement and steps 2.1, 3.1, 4.1, and 5.1",
+          "iterations": 1
+        }
+      ]
+    },
+    "ex-constant-step-sgd-noise-floor": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-stochastic-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Given $d\\ge1$, a continuously differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, an initial iterate $x_1$ measurable with respect to $\\mathcal F_1$, an integer horizon $N\\ge1$, deterministic finite stepsizes $\\alpha_1,\\ldots,\\alpha_N>0$, and a stochastic-gradient oracle whose output at $x_t$ is a random vector $G_t:\\Omega\\to\\mathbb R^d$ measurable with respect to $\\mathcal F_{t+1}$, the procedure returns the trajectory $(x_t)_{t=1}^{N+1}$. For each iteration $t=1,\\ldots,N$, query the oracle at $x_t$ and set\n$$x_{t+1}=x_t-\\alpha_tG_t.$$\nNo conditional mean, variance, or independence-across-iterations property is part of this procedure's definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-variance",
+          "source_section": "Definition",
+          "quote": "Assume AC. For real $X\\in L^2(P)$ define $\\operatorname{Var}(X\\mid\\mathcal G)=E[(X-E[X\\mid\\mathcal G])^2\\mid\\mathcal G]$ as an almost-sure class. Its integrability, nonnegativity, representative independence and second-moment formula are justified by the following lemma.\n\nThe conditional class is [[def-conditional-expectation-as-an-ae-class]], with [[def-axiom-of-choice]] inherited from existence. By [[cor-conditional-lp-contraction]], a version of the conditional mean is square integrable. The unbounded-factor rule [[thm-taking-out-what-is-known]] will apply to products whose integrability is verified in the well-definedness lemma, recorded under `justified_by`.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, conditional variance is an integrable nonnegative class independent of representatives and satisfies $\\operatorname{Var}(X\\mid\\mathcal G)=E[X^2\\mid\\mathcal G]-(E[X\\mid\\mathcal G])^2$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-independent-finite-random-index-extension",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $N\\ge1$, and let $p_1,\\ldots,p_N\\ge0$ satisfy $\\sum_{k=1}^N p_k=1$. There is a probability-space extension carrying an independent random index $R\\in\\{1,\\ldots,N\\}$ with $P(R=k)=p_k$. For any integrable real random variables $H_1,\\ldots,H_N$ on the original space, the lifted random variable $H_R(\\omega,k)=H_k(\\omega)$ is integrable on the extension and satisfies $\\mathbb E[H_R]=\\sum_{k=1}^N p_k\\mathbb E[H_k]$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-stochastic-gradient-nonconvex-randomized-iterate-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable with $L$-Lipschitz gradient for $L>0$, and suppose $f(x)\\ge f_{\\inf}$ for every $x$, where $f_{\\inf}\\in\\mathbb R$ is a lower bound. Let $x_0$ be deterministic, $\\Delta=f(x_0)-f_{\\inf}$, and run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]] with constant $0<\\alpha\\le1/L$. Suppose\n$$\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k),\\qquad \\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma^2$$\nalmost surely for every $k$. After generating $x_0,\\ldots,x_{N-1}$, independently choose $R$ uniformly from $\\{0,\\ldots,N-1\\}$ on the finite product extension of the trajectory space; equivalently, $\\mathbb E\\|\\nabla f(x_R)\\|_2^2=N^{-1}\\sum_{k<N}\\mathbb E\\|\\nabla f(x_k)\\|_2^2$. Then\n$$\\mathbb E\\|\\nabla f(x_R)\\|_2^2\\le\\frac{2\\Delta}{\\alpha N}+L\\alpha\\sigma^2.$$\nFor fixed $\\Delta,\\sigma$, the stepsize $\\alpha=\\min\\{1/L,\\sqrt{2\\Delta/(L\\sigma^2N)}\\}$ gives an $O(N^{-1/2})$ bound when $\\Delta,\\sigma>0$; zero cases have the stronger bounds specified in the proof. This is an optimization guarantee, not an inferential or central-limit theorem.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-stochastic-gradient-biased-noise-floor",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $f:\\mathbb R^d\\to\\mathbb R$ have $L$-Lipschitz gradient for $L>0$ and satisfy $f(x)\\ge f_{\\inf}$ for a real lower bound $f_{\\inf}$. Run the unconstrained update of [[def-stochastic-gradient-oracle-and-unconstrained-update]] from square-integrable $x_0$ with deterministic steps $0<\\alpha_k\\le1/(4L)$. Suppose\n$$\\mathbb E[G_k\\mid\\mathcal F_k]=\\nabla f(x_k)+b_k,\\qquad \\|b_k\\|_2\\le\\beta_k,\\qquad \\operatorname{Var}(G_k\\mid\\mathcal F_k)\\le\\sigma_k^2$$\nalmost surely, where $b_k$ is $\\mathcal F_k$-measurable and $\\beta_k,\\sigma_k$ are deterministic nonnegative bounds. For $N\\ge1$ and $\\Delta=\\mathbb E f(x_0)-f_{\\inf}<\\infty$,\n$$\\frac{\\sum_{k=0}^{N-1}\\alpha_k\\mathbb E\\|\\nabla f(x_k)\\|_2^2}{\\sum_{k=0}^{N-1}\\alpha_k}\\le \\frac{2\\Delta+2\\sum_{k<N}\\alpha_k\\beta_k^2+2L\\sum_{k<N}\\alpha_k^2\\beta_k^2+L\\sum_{k<N}\\alpha_k^2\\sigma_k^2}{\\sum_{k<N}\\alpha_k}.$$\nIn particular, for constant $\\alpha,\\beta,\\sigma$ the uniform average is at most\n$$\\frac{2\\Delta}{\\alpha N}+\\frac52\\beta^2+L\\alpha\\sigma^2,$$\nand therefore\n$$\\limsup_{N\\to\\infty}\\frac1N\\sum_{k=0}^{N-1}\\mathbb E\\|\\nabla f(x_k)\\|_2^2\\le\\frac52\\beta^2+L\\alpha\\sigma^2.$$\nDecreasing steps retain the displayed weighted bias and noise sums.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed horizon $N$, let $\\mathcal F_t$ be generated by $\\xi_0,\\ldots,\\xi_{t-1}$, with $\\mathcal F_0$ trivial. For every fixed sign prefix of length $t$, exactly half its extensions have $\\xi_t=1$ and half have $\\xi_t=-1$, so $\\mathbb E[\\xi_t\\mid\\mathcal F_t]=0$ and $\\operatorname{Var}(\\xi_t\\mid\\mathcal F_t)=1$. Since $x_t$ is $\\mathcal F_t$-measurable and $f'(x)=x$, the direction $G_t=x_t+b+\\sigma\\xi_t$ has conditional mean $x_t+b$ and conditional variance $\\sigma^2$; it is unbiased when $b=0$ and has bias $b$ otherwise. All variables have finite moments because the sample space is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $m_t=\\mathbb E[x_t]$. The update is $x_{t+1}=qx_t-\\alpha b-\\alpha\\sigma\\xi_t$, hence $m_{t+1}=qm_t-\\alpha b$ with $m_0=x_0$. Induction gives $m_t=q^t x_0-b(1-q^t)$ for every $t\\le N$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $V_t=\\mathbb E[(x_t-m_t)^2]$. Because $x_t-m_t$ is $\\mathcal F_t$-measurable and $\\xi_t$ has conditional mean zero and conditional second moment one, the cross term vanishes and $V_{t+1}=q^2V_t+\\alpha^2\\sigma^2$, with $V_0=0$. Thus $V_t=\\alpha^2\\sigma^2\\sum_{j=0}^{t-1}q^{2j}=\\frac{\\alpha\\sigma^2}{2-\\alpha}(1-q^{2t})$, since $1-q^2=\\alpha(2-\\alpha)$. Adding $m_t^2$ proves the displayed moment formula, and it is independent of the chosen horizon whenever $N\\ge t$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F11",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Now assume AC for the published bounds. In the unbiased case, $L=1$, $f_{\\inf}=0$, $\\Delta=x_0^2/2$, and step 1.1 verifies conditional unbiasedness and variance $\\sigma^2$; $\\alpha\\le1/4\\le1/L$. Use [F8] with $p_k=1/N$ and apply [F9] to obtain $\\mathbb E|x_{R_N}|^2\\le x_0^2/(\\alpha N)+\\alpha\\sigma^2$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F8",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here $q=1-\\alpha\\in[3/4,1)$, so [F7] gives $q^t\\to0$. The formula in step 2.1 therefore yields $\\mathbb E[x_t^2]\\to b^2+\\alpha\\sigma^2/(2-\\alpha)$; if $b=0<\\sigma$, this limit is strictly positive. This proves the exact constant-step noise-floor claim without using AC.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For general $b$, step 1.1 verifies conditional mean $f'(x_t)+b$, bias bound $\\beta=|b|$, variance bound $\\sigma^2$, and $f(x)\\ge0$. The step restriction is $\\alpha\\le1/(4L)$ because $L=1$. Apply [F10] with $\\Delta=x_0^2/2$ to obtain $N^{-1}\\sum_{t=0}^{N-1}\\mathbb E[x_t^2]\\le x_0^2/(\\alpha N)+(5/2)b^2+\\alpha\\sigma^2$. The exact limiting floor from step 3.1 is at most $b^2+\\alpha\\sigma^2$, since $2-\\alpha\\ge1$, and is therefore consistent with this bound.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each horizon is required to satisfy N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.2"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes direct moment and comparison claims, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes direct moment and comparison claims, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-step-sign-cube-moment",
+          "asserts": "With α=1/4, b=0, σ=1, x_0=0, and N=2, q=3/4; the formula gives E[x_1^2]=1/16, E[x_2^2]=25/256, and limiting floor 1/7.",
+          "claim": "Enumerating the two sign coordinates gives the displayed recurrence moments and a positive unbiased noise floor.",
+          "checked_in": "Example and steps 1.1, 1.2, 2.1, and 3.1",
+          "horizon": 2
+        }
+      ]
+    },
+    "ex-empirical-risk-sgd-oracle-is-unbiased": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-minibatch-stochastic-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Given $d\\ge1$, a continuously differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, an initial iterate $x_1$ measurable with respect to $\\mathcal F_1$, an integer horizon $N\\ge1$, deterministic finite stepsizes $\\alpha_1,\\ldots,\\alpha_N>0$, an integer batch size $b\\ge1$, and a batched oracle whose outputs at $x_t$ are random vectors $G_{t,1},\\ldots,G_{t,b}:\\Omega\\to\\mathbb R^d$, each measurable with respect to $\\mathcal F_{t+1}$. For each iteration $t=1,\\ldots,N$, query the batched oracle at the current iterate $x_t$, receive the $b$ vectors, and form\n$$\\overline G_t=\\frac1b\\sum_{j=1}^bG_{t,j}$$\nand set $x_{t+1}=x_t-\\alpha_t\\overline G_t$. Return the trajectory $(x_t)_{t=1}^{N+1}$. The batch vectors are evaluated at the same current iterate; no independence, unbiasedness, or variance-reduction claim is part of this procedure's definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-conditional-variance",
+          "source_section": "Definition",
+          "quote": "Assume AC. For real $X\\in L^2(P)$ define $\\operatorname{Var}(X\\mid\\mathcal G)=E[(X-E[X\\mid\\mathcal G])^2\\mid\\mathcal G]$ as an almost-sure class. Its integrability, nonnegativity, representative independence and second-moment formula are justified by the following lemma.\n\nThe conditional class is [[def-conditional-expectation-as-an-ae-class]], with [[def-axiom-of-choice]] inherited from existence. By [[cor-conditional-lp-contraction]], a version of the conditional mean is square integrable. The unbounded-factor rule [[thm-taking-out-what-is-known]] will apply to products whose integrability is verified in the well-definedness lemma, recorded under `justified_by`.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, conditional variance is an integrable nonnegative class independent of representatives and satisfies $\\operatorname{Var}(X\\mid\\mathcal G)=E[X^2\\mid\\mathcal G]-(E[X\\mid\\mathcal G])^2$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-stochastic-direction-expected-average-stationarity",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $L>0$, and let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable with $L$-Lipschitz gradient. On a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, start at a deterministic $x_1$ and run stochastic gradient descent with square-integrable directions $G_t$, adapted iterates $x_t$, and updates $x_{t+1}=x_t-\\alpha_tG_t$. For each $t\\ge1$, put $g_t=\\nabla f(x_t)$ and $m_t=\\mathbb E[G_t\\mid\\mathcal F_t]$, with conditional expectations interpreted coordinatewise almost surely. Let the conditional variance of a vector be the sum of its coordinate conditional variances. Suppose there are constants $\\mu_G\\ge\\mu>0$, $M\\ge0$, $M_V\\ge0$, and $F_{\\inf}\\in\\mathbb R$ such that, almost surely for every $t$,\n$$\\langle g_t,m_t\\rangle\\ge\\mu\\|g_t\\|_2^2,\\qquad \\|m_t\\|_2\\le\\mu_G\\|g_t\\|_2,\\qquad \\operatorname{Var}(G_t\\mid\\mathcal F_t)\\le M+M_V\\|g_t\\|_2^2,\\qquad f(x_t)\\ge F_{\\inf}.$$\nSet $M_G=M_V+\\mu_G^2>0$.\n\nIf the stepsize is constant, $\\alpha_t=\\alpha$ with $0<\\alpha\\le\\mu/(LM_G)$, then for every integer $T\\ge1$,\n$$\\mathbb E\\left[\\frac1T\\sum_{t=1}^T\\|\\nabla f(x_t)\\|_2^2\\right]\\le\\frac{\\alpha LM}{\\mu}+\\frac{2(f(x_1)-F_{\\inf})}{T\\mu\\alpha}.$$\n\nIf instead the deterministic stepsizes satisfy $\\alpha_t>0$, $\\sum_{t=1}^{\\infty}\\alpha_t=\\infty$, and $\\sum_{t=1}^{\\infty}\\alpha_t^2<\\infty$, then, with $A_T=\\sum_{t=1}^T\\alpha_t$,\n$$\\mathbb E\\left[\\frac1{A_T}\\sum_{t=1}^T\\alpha_t\\|\\nabla f(x_t)\\|_2^2\\right]\\longrightarrow0\\qquad(T\\to\\infty).$$\nConditional unbiasedness is the special case $\\mu=\\mu_G=1$; a uniform conditional-variance bound $\\sigma^2$ then gives $M=\\sigma^2$ and $M_V=0$. No convexity or minimizer attainment is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $h_\\theta$ is measurable on the singleton instance space, and the squared loss is continuous, hence measurable; with the stated nonempty predictor class and probability law, these data satisfy the supervised-problem interface [F1]. By the empirical-risk definition [F2], $F_S(\\theta)=\\widehat R_S(h_\\theta)=\\frac1{2m}\\sum_{i=1}^m(\\theta-y_i)^2$. For $h\\ne0$, $[F_S(\\theta+h)-F_S(\\theta)]/h=m^{-1}\\sum_i(\\theta-y_i)+h/2=\\theta-\\bar y+h/2$, whose limit as $h\\to0$ is $\\theta-\\bar y$ by [F3]. Expanding around $\\bar y$ also gives $F_S(\\theta)=\\frac12(\\theta-\\bar y)^2+v_S/2$, so $F'_S(\\theta)=\\theta-\\bar y$, its gradient is $1$-Lipschitz, and its global infimum is $v_S/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conditional on any past index batches, each new batch tuple is uniform on $\\{1,\\ldots,m\\}^b$. For each component, $\\mathbb E[\\theta_t-y_{I_{t,j}}\\mid\\mathcal F_t]=\\theta_t-\\bar y$. Its centered value is $\\bar y-y_{I_{t,j}}$, with conditional second moment $v_S$; for $i\\ne j$, the cross moment is $m^{-2}(\\sum_r(\\bar y-y_r))^2=0$. Therefore the average direction has conditional mean $\\theta_t-\\bar y$ and conditional variance $b^{-2}(bv_S)=v_S/b$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The mean and variance in step 1.2 satisfy the unbiased branch of [F10] with $\\mu=\\mu_G=1$, $M=v_S/b$, $M_V=0$, $L=1$, and $F_{\\inf}=v_S/2$. Since $0<\\alpha\\le1=\\mu/(LM_G)$, substitute these values into [F10] to obtain the displayed expected-average bound. The data sample $S$ is fixed throughout; no expectation over a population law is used.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample size, batch size, and horizon are all required to be positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1, 1.2, and 2.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 1.2"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct construction and bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct construction and bound, not a biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "two-observation-minibatch",
+          "asserts": "For S=((*,0),(*,2)), θ_1=2, and batch size b=2, one has y-bar=1, v_S=1, conditional direction mean 1, and variance 1/2. With T=1 and α=1, the objective gap is 1/2, so the theorem bound is 1/2+1=3/2 while the gradient square is 1.",
+          "claim": "Enumerating the four ordered index pairs gives direction values 2,1,1,0, mean 1, and variance 1/2, confirming the with-replacement variance and substituted bound.",
+          "checked_in": "Example and steps 1.1, 1.2, and 2.1",
+          "sample_size": 2,
+          "batch_size": 2
+        }
+      ]
+    },
+    "ex-sgd-biased-direction-violates-alignment": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-stochastic-gradient-descent",
+          "source_section": "Definition",
+          "quote": "Given $d\\ge1$, a continuously differentiable objective $f:\\mathbb R^d\\to\\mathbb R$, a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, an initial iterate $x_1$ measurable with respect to $\\mathcal F_1$, an integer horizon $N\\ge1$, deterministic finite stepsizes $\\alpha_1,\\ldots,\\alpha_N>0$, and a stochastic-gradient oracle whose output at $x_t$ is a random vector $G_t:\\Omega\\to\\mathbb R^d$ measurable with respect to $\\mathcal F_{t+1}$, the procedure returns the trajectory $(x_t)_{t=1}^{N+1}$. For each iteration $t=1,\\ldots,N$, query the oracle at $x_t$ and set\n$$x_{t+1}=x_t-\\alpha_tG_t.$$\nNo conditional mean, variance, or independence-across-iterations property is part of this procedure's definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stochastic-direction-expected-average-stationarity",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $L>0$, and let $f:\\mathbb R^d\\to\\mathbb R$ be continuously differentiable with $L$-Lipschitz gradient. On a discrete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge1},P)$, start at a deterministic $x_1$ and run stochastic gradient descent with square-integrable directions $G_t$, adapted iterates $x_t$, and updates $x_{t+1}=x_t-\\alpha_tG_t$. For each $t\\ge1$, put $g_t=\\nabla f(x_t)$ and $m_t=\\mathbb E[G_t\\mid\\mathcal F_t]$, with conditional expectations interpreted coordinatewise almost surely. Let the conditional variance of a vector be the sum of its coordinate conditional variances. Suppose there are constants $\\mu_G\\ge\\mu>0$, $M\\ge0$, $M_V\\ge0$, and $F_{\\inf}\\in\\mathbb R$ such that, almost surely for every $t$,\n$$\\langle g_t,m_t\\rangle\\ge\\mu\\|g_t\\|_2^2,\\qquad \\|m_t\\|_2\\le\\mu_G\\|g_t\\|_2,\\qquad \\operatorname{Var}(G_t\\mid\\mathcal F_t)\\le M+M_V\\|g_t\\|_2^2,\\qquad f(x_t)\\ge F_{\\inf}.$$\nSet $M_G=M_V+\\mu_G^2>0$.\n\nIf the stepsize is constant, $\\alpha_t=\\alpha$ with $0<\\alpha\\le\\mu/(LM_G)$, then for every integer $T\\ge1$,\n$$\\mathbb E\\left[\\frac1T\\sum_{t=1}^T\\|\\nabla f(x_t)\\|_2^2\\right]\\le\\frac{\\alpha LM}{\\mu}+\\frac{2(f(x_1)-F_{\\inf})}{T\\mu\\alpha}.$$\n\nIf instead the deterministic stepsizes satisfy $\\alpha_t>0$, $\\sum_{t=1}^{\\infty}\\alpha_t=\\infty$, and $\\sum_{t=1}^{\\infty}\\alpha_t^2<\\infty$, then, with $A_T=\\sum_{t=1}^T\\alpha_t$,\n$$\\mathbb E\\left[\\frac1{A_T}\\sum_{t=1}^T\\alpha_t\\|\\nabla f(x_t)\\|_2^2\\right]\\longrightarrow0\\qquad(T\\to\\infty).$$\nConditional unbiasedness is the special case $\\mu=\\mu_G=1$; a uniform conditional-variance bound $\\sigma^2$ then gives $M=\\sigma^2$ and $M_V=0$. No convexity or minimizer attainment is assumed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The singleton measure has total mass one and is countably additive because at most one set in any disjoint sequence can be nonempty [F5]. By [F3], $\\nabla f(x)=x$ and $f(x)=x^2/2$. The deterministic direction has conditional mean $-x_t$ and conditional variance zero on the trivial filtration. Substitution into [F1] gives $x_{t+1}=x_t-\\alpha(-x_t)=(1+\\alpha)x_t$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The recurrence in step 1.1 and $1+\\alpha>0$ give $x_t=(1+\\alpha)^t x_0\\ne0$ for every $t\\ge0$ by [F4]. In particular, $f(x_1)=(1+\\alpha)^2x_0^2/2>x_0^2/2=f(x_0)$, so this direction can increase the objective in one step.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "given",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $t$, step 2.1 gives $x_t\\ne0$, so $\\nabla f(x_t)\\,\\mathbb E[G_t\\mid\\mathcal F_t]=x_t(-x_t)=-x_t^2<0$, whereas $\\mu|\\nabla f(x_t)|^2=\\mu x_t^2>0$ for every $\\mu>0$. Therefore the local positive-alignment hypothesis [F2] fails at every iterate, despite the direction norm equaling the gradient norm and the variance being zero. This comparison invokes the theorem only in its AC branch [A1]; the displayed deterministic calculation does not use AC.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes x_0≠0 and α>0 and does not quantify over an empty trajectory."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1 and 3.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes a positive-alignment condition directly and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example refutes a positive-alignment condition directly and states no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "one-step-negative-alignment",
+          "asserts": "For x_0=1 and α=1/2, the update gives x_1=3/2, f(x_1)=9/8>1/2=f(x_0), and ∇f(x_0)G_0=1(-1)=-1<0 while |G_0|=|∇f(x_0)|=1.",
+          "claim": "The first deterministic step verifies objective increase and failure of every positive alignment constant.",
+          "checked_in": "Example and steps 1.1, 2.1, and 3.1",
+          "iterations": 1
+        }
+      ]
+    }
+  }
+}

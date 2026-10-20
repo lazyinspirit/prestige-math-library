@@ -1,0 +1,9 @@
+# Fresh native refuter36 coverage correction
+
+Run: `machine-learning-all-101-2026-10-19`. Covers: `36`. Read and follow `briefs/refuter.md` and `briefs/tasks/alpha-3a-refuter.md` completely. This is one fresh independent native read, not adoption of prior coverage.
+
+Read the current exact `research/machine-learning-all-101-2026-10-19-step3-scope-36.json` refuter_scope and all assigned carriers in dependency order with their actual required supplier context. Truthfully report every required carrier in opened or not_opened and all findings about this assigned scope, using the ordinary refuter schema and read-only role. Do not edit any source, metadata, native evidence or engine state.
+
+The prior native report opened every assigned carrier and one unrelated current-run covariance theorem, which made its coverage output invalid. Its exact original report remains archived at `research/machine-learning-all-101-2026-10-19-owner-step3-new-native-failures/machine-learning-all-101-2026-10-19-refute-36.json`. The original covariance finding is NOT withdrawn or waived: authenticated `research/machine-learning-all-101-2026-10-19-step3-owner-foreign-refuter-routes.json` requires separate independent native Alpha47 decision `gate:ml101-b36-3a-variance-fact`, ordinary ledger and all home47 coverage. No36-to47 dependency exists or should be invented. Do not reclassify that historical finding here or pretend it belonged to the assigned transformer scope.
+
+Correct only coverage attribution by performing this complete fresh assigned-scope read. Extra supplier context must be genuinely reachable declared context; no unrelated extra target may be represented as assigned coverage. Preserve the exact current report batch and structured fields; do not claim unopened work complete. Root source correction or target47 review never substitutes for your assigned native36 review, and your result never supplies native47 acceptance.

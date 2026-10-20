@@ -1,0 +1,202 @@
+{
+  "group": "ag",
+  "batches": [
+    "98"
+  ],
+  "pages_read": [
+    "monotone-risk-calibration-and-deployment-guarantees",
+    "monotone-risk-calibration-and-deployment-guarantees-examples"
+  ],
+  "items_read": [
+    "def-finite-nested-decision-family-and-bounded-risk",
+    "alg-finite-grid-conformal-risk-control",
+    "thm-finite-grid-conformal-risk-control",
+    "thm-finite-grid-monotone-envelope-risk-control",
+    "rem-marginal-risk-control-and-adaptive-reuse",
+    "ex-zero-loss-finite-grid-risk-control",
+    "ex-finite-grid-risk-control-fallback",
+    "cex-nonmonotone-finite-grid-risk-control",
+    "ex-multilabel-false-negative-risk-control"
+  ],
+  "conventions": [
+    {
+      "convention": "The grid is deterministic and strictly increasing; n,M≥1, B>0 and 0≤α<B. Loss rows take values in the Borel space [0,B]^M. Exchangeability means joint-law invariance under row permutations, without independence.",
+      "fixed_by": "def-finite-nested-decision-family-and-bounded-risk",
+      "matters_for": [
+        "alg-finite-grid-conformal-risk-control",
+        "thm-finite-grid-conformal-risk-control",
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "cex-nonmonotone-finite-grid-risk-control"
+      ]
+    },
+    {
+      "convention": "Loss nesting means nonincreasing loss along the grid. Endpoint safety means every terminal loss is at most α almost surely. Expected test risk averages over both calibration and test rows.",
+      "fixed_by": "def-finite-nested-decision-family-and-bounded-risk",
+      "matters_for": [
+        "thm-finite-grid-conformal-risk-control",
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "rem-marginal-risk-control-and-adaptive-reuse",
+        "ex-finite-grid-risk-control-fallback",
+        "ex-multilabel-false-negative-risk-control"
+      ]
+    },
+    {
+      "convention": "Test (sum of n calibration losses+B)/(n+1)≤α in increasing grid order, including equality; return the first passing rule, or the maximum-grid rule with fallback status if none passes.",
+      "fixed_by": "alg-finite-grid-conformal-risk-control",
+      "matters_for": [
+        "thm-finite-grid-conformal-risk-control",
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "ex-zero-loss-finite-grid-risk-control",
+        "ex-finite-grid-risk-control-fallback",
+        "cex-nonmonotone-finite-grid-risk-control",
+        "ex-multilabel-false-negative-risk-control"
+      ]
+    },
+    {
+      "convention": "Conditional risk control requires a supplied actual regular conditional distribution of the full matrix, with exchangeability and the applicable loss hypotheses holding sectionwise almost surely.",
+      "fixed_by": "thm-finite-grid-conformal-risk-control",
+      "matters_for": [
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "rem-marginal-risk-control-and-adaptive-reuse"
+      ]
+    },
+    {
+      "convention": "The monotone envelope at index j is the maximum over indices k≥j, including j and M.",
+      "fixed_by": "thm-finite-grid-monotone-envelope-risk-control",
+      "matters_for": [
+        "rem-marginal-risk-control-and-adaptive-reuse"
+      ]
+    },
+    {
+      "convention": "Multilabel sets use scores ≥1−λ; the grid ends at λ=1, and the false-negative loss for an empty true-label set is zero.",
+      "fixed_by": "ex-multilabel-false-negative-risk-control",
+      "matters_for": [
+        "ex-multilabel-false-negative-risk-control"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-finite-grid-conformal-risk-control",
+      "statement": "Every admissible algorithm input returns a unique output after at most M threshold tests, without monotonicity or endpoint safety. For exchangeable Borel [0,B]^M loss rows on a deterministic finite grid, with n,M≥1, B>0, 0≤α<B, almost-sure coordinatewise nonincrease and terminal losses ≤α, the selected test loss has expectation ≤α. The corresponding conditional inequality holds given a supplied regular conditional full-matrix law whose sections satisfy these hypotheses almost surely.",
+      "used_by": [
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "rem-marginal-risk-control-and-adaptive-reuse",
+        "ex-multilabel-false-negative-risk-control"
+      ]
+    },
+    {
+      "id": "alg-finite-grid-conformal-risk-control",
+      "statement": "For bounded calibration losses on the supplied deterministic finite grid, return the first grid point and associated prediction rule satisfying (sum of calibration losses+B)/(n+1)≤α, with pass status; if none passes, return the maximum-grid rule with fallback status.",
+      "used_by": [
+        "thm-finite-grid-conformal-risk-control",
+        "thm-finite-grid-monotone-envelope-risk-control",
+        "ex-zero-loss-finite-grid-risk-control",
+        "ex-finite-grid-risk-control-fallback",
+        "cex-nonmonotone-finite-grid-risk-control",
+        "ex-multilabel-false-negative-risk-control"
+      ]
+    },
+    {
+      "id": "thm-finite-grid-monotone-envelope-risk-control",
+      "statement": "For exchangeable Borel [0,B]^M loss rows on a deterministic finite grid, with n,M≥1, B>0, 0≤α<B and terminal losses ≤α almost surely, calibrating the finite tail maxima gives expected original test loss ≤α, without original-row monotonicity. The conditional version holds under an actual sectionwise exchangeable regular conditional row law satisfying the same bounds and endpoint condition.",
+      "used_by": [
+        "rem-marginal-risk-control-and-adaptive-reuse"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurability of the bounded finite-dimensional loss rows.",
+      "opened": true
+    },
+    {
+      "id": "def-exchangeable-random-elements",
+      "used_for": "Row-permutation invariance, symmetric selection, and the independent two-point counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Equal laws of exchangeable selected coordinates in the main theorem.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Interpreting bounded selected losses and the two-state illustration as integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Identifying conditional-risk versions by testing integrals over conditioning events.",
+      "opened": true
+    },
+    {
+      "id": "def-regular-conditional-distribution",
+      "used_for": "Sectionwise probability laws and conditional-event identities in both conditional risk proofs.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Averaging exchangeable bounded coordinates and transferring almost-sure loss inequalities to expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Passing from finite-valued dyadic approximations to kernel integrals and conditional-expectation identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-split-conformal-marginal-coverage",
+      "used_for": "The remark's comparison with coverage of a particular miscoverage event under its stated exchangeability hypotheses.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-finite-grid-conformal-risk-control",
+      "concern": "Proof 1.2 defines j_*=min{j:S_j≤α} and then calls j_* a Borel function of the full matrix. Endpoint safety is only almost sure, so this set may be empty on an exceptional event and is empty for some matrices in the ambient Borel space. Specify a measurable default, such as j_*=M when the set is empty. This closes the global measurability detail used in 2.2; the risk argument remains valid almost surely.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-random-element-and-real-random-variable",
+      "finding": "The Definition includes “in the sense of [[def-measurable-function-between-measurable-spaces]]” and “from [[def-borel-sigma-algebra]]”. These hyperlinks remain inside the complete Definition rather than an immediately following Definition references section, contrary to the uninterrupted-statement instruction.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-exchangeable-random-elements",
+      "finding": "The Definition includes “by [[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]]” and “from [[def-law-or-distribution-of-a-random-element]]”. These interrupt the Definition; the required separate Definition references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "finding": "The Definition contains “integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]]”. The link is embedded in the defining case distinction rather than moved after the complete Definition into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-conditional-expectation-given-a-sigma-algebra",
+      "finding": "The Definition section includes “Expectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]” and “Integrable representatives use [[def-l-one-of-a-measure]]”. These hyperlinks have not been placed in the required immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-regular-conditional-distribution",
+      "finding": "The Definition includes “Probability kernel” followed by [[def-measure-kernel-and-probability-kernel]], and identifies conditional-expectation versions through [[def-conditional-expectation-given-a-sigma-algebra]]. Both links remain inside the Definition section instead of a separate Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-split-conformal-marginal-coverage",
+      "finding": "The Statement embeds [[def-regular-conditional-distribution]], [[def-exchangeable-random-elements]], and [[alg-split-conformal-prediction-set]] within its hypotheses and procedure specification. These hyperlinks interrupt the complete Statement and need the prescribed immediately following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "monotone-risk-calibration-and-deployment-guarantees",
+      "to": "predictive-calibration-and-uncertainty-under-shift",
+      "faithful": true,
+      "note": "The prerequisite page's top-label event-integral definition agrees with the remark's conditional-expectation formulation. Its temperature-scaling procedure disclaims finite-sample future calibration, and its split-conformal procedure separates construction from coverage assumptions. The risk page preserves those distinctions and makes no stronger reverse claim. This is a contextual page prerequisite; no item-level dependency on that page's items is declared."
+    }
+  ]
+}

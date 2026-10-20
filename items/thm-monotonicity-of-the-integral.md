@@ -14,6 +14,7 @@ landmark: true
 short: "monotonicity of the integral"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-monotonicity-of-the-integral.json
   precheck: pass
   verified:
     model: gpt-5.6-terra-codex-subscription
@@ -38,7 +39,7 @@ pipeline_run: null
 ## Statement
 
 Let $a < b$ be reals and let $f, g : [a,b] \to \mathbb{R}$ be integrable
-([[def-darboux-integral]]). Then:
+(The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$). Then:
 
 1. **Nonnegativity.** If $f(x) \ge 0$ for every $x \in [a,b]$ then
    $\int_a^b f \ge 0$.
@@ -50,15 +51,25 @@ Let $a < b$ be reals and let $f, g : [a,b] \to \mathbb{R}$ be integrable
 
 **Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable
 function with integral $0$ may be positive at infinitely many points; that is
-[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's
+FALSE: a nonnegative Riemann integrable function on $[a,b]$ with $\int_a^b f = 0$ is identically zero on the previous page's
 companion. Under the additional hypothesis of continuity the conclusion does
-hold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]
+hold, and that is A continuous $f \ge 0$ on $[a,b]$ with $\int_a^b f = 0$ is identically $0$
 below.
 
 **Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the
-convention of [[def-oriented-integral]], $f \le g$ gives
+convention of The integral with oriented limits: $\int_a^a f := 0$ and $\int_b^a f := -\int_a^b f$, $f \le g$ gives
 $\int_u^v f \le \int_u^v g$ when $u \le v$ and the reverse inequality when
 $u \ge v$, since both sides change sign together.
+
+## Statement references
+
+[[def-darboux-integral]]
+
+[[fs-nonnegative-integrable-with-zero-integral-vanishes]]
+
+[[thm-nonnegative-continuous-with-zero-integral-vanishes]]
+
+[[def-oriented-integral]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "86",
+  "round": 0,
+  "reviewed_items": [
+    "def-learned-mdp-model",
+    "def-finite-stochastic-shortest-path-problem",
+    "def-finite-horizon-mdp-return",
+    "alg-real-time-dynamic-programming",
+    "lem-finite-policy-kernel-tv-propagation",
+    "thm-finite-stochastic-shortest-path-value-exists",
+    "rem-ensemble-disagreement-is-not-calibrated-uncertainty",
+    "alg-dyna-q",
+    "alg-model-predictive-control",
+    "thm-single-policy-finite-horizon-simulation-bound",
+    "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+    "thm-rtdp-recurrently-backed-state-convergence",
+    "cex-rtdp-optimal-relevant-state-convergence-fails",
+    "def-model-exploitation",
+    "ex-model-accurate-on-behavior-support",
+    "ex-short-versus-long-model-rollouts",
+    "ex-model-exploitation-off-support"
+  ],
+  "reviewed_pages": [
+    "model-based-planning-dyna-and-model-exploitation",
+    "model-based-planning-dyna-and-model-exploitation-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved ML-78 scope, current supplier claims and proofs, and Barto et al.'s RTDP Theorem 3 and Appendix A were reviewed. The counterexample refutes the source's stated all-optimal-relevant-state claim. Five locally resolvable scope, prerequisite, and algorithm-specification findings remain.",
+  "findings": [
+    {
+      "id": "model-based-planning-dyna-and-model-exploitation",
+      "type": "scope",
+      "reason": "Approved ML-78 requires ML-72, but this page's requires list omits finite-mdps-and-bellman-operators, which contains the finite-MDP supplier; tabular-prediction-and-control has no transitive page requirement for it. Add the missing page prerequisite locally."
+    },
+    {
+      "id": "alg-dyna-q",
+      "type": "local",
+      "reason": "The algorithm gives inputs and an ongoing cycle but no explicit output or continuation contract. State what it outputs per real interaction, such as the updated Q table, and that it continues indefinitely or specify a stopping rule."
+    },
+    {
+      "id": "lem-asynchronous-value-iteration-for-stochastic-shortest-path",
+      "type": "prerequisite",
+      "reason": "Its supplier thm-finite-stochastic-shortest-path-value-exists requires at least one proper stationary policy to supply a finite optimal cost and Bellman equations. The SSP definition explicitly says properness is not guaranteed, and this lemma does not state the needed assumption. Add that prerequisite to the Statement."
+    },
+    {
+      "id": "thm-rtdp-recurrently-backed-state-convergence",
+      "type": "local",
+      "reason": "The optional condition f0 <= T f0 is ambiguous because T is defined only off goals. Restrict the inequality to nonglobal states or define T at goals as zero, and make the proof's domain consistent."
+    },
+    {
+      "id": "def-model-exploitation",
+      "type": "prerequisite",
+      "reason": "The Definition computes returns under true and learned models but does not specify that they form a common finite MDP/model pair with the row and reward conditions from def-learned-mdp-model; those assumptions appear only later in F1. State them among the Definition's inputs so both return recursions are well-defined."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "model-based-planning-dyna-and-model-exploitation",
+      "decision": "accept",
+      "reason": "Its item placement remains sound under the proposed local clarifications; it has no authored body making additional claims."
+    },
+    {
+      "id": "ex-model-exploitation-off-support",
+      "decision": "accept",
+      "reason": "The one-state example supplies common finite true and learned models, a supported set, horizon, initial state, and finite policy class. Its unique MPC-selected action still meets all three exploitation conditions under the clarified Definition."
+    },
+    {
+      "id": "model-based-planning-dyna-and-model-exploitation-examples",
+      "decision": "accept",
+      "reason": "The page remains a compact examples page requiring the A page; its only affected item use is the checked off-support example."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "38",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-backpropagation-through-shared-parameter-recurrence",
+      "model": "gpt-6-luna",
+      "context_sha256": "43e8206cacdc44080d3ba8cf22a9751dcd7d5a277eceec5f6fb97748ecd06d2c",
+      "outcome": "false_positive",
+      "reason": "The separate, already authored thm-shared-parameter-backpropagation-gradient-formula states precisely that this algorithm returns J(theta) and its gradient. Its Proof steps 1.1–3.1 identify the finite C1 unrolling, apply the proved reverse-mode theorem, and account for every transition parameter use, the direct loss term, and the initial-state pullback, including T=0. I checked that proof and its actual chain-rule and reverse-mode suppliers. The algorithm defines the procedure without claiming a local phase proof; its empty justified_by creates no missing correctness obligation because the separate correctness theorem correctly depends on the algorithm, rather than the reverse. No repair is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-backpropagation-through-shared-parameter-recurrence",
+      "disposition": "unaffected",
+      "post_sha256": "9f90a5fe3818658101c45a02347f9b636b3ae8eb5acfcd109dd38b7e04e49f17",
+      "review_context_sha256": "d3df9c94538404defc484b9b8a3dc31ac9c2274e7d07ba0088da05dc6d60de93",
+      "reason": "Reviewed the complete Definition, TikZ diagram, four declared direct suppliers, owning contract, A/B page interfaces, and separate gradient theorem and its proof. A_t is q by p, B_t is q by q, lambda_t is q by 1, and each update to g is p by 1. The descending loop adds the current transition contribution before propagating its cotangent. Writing S_t=D_theta h_t gives S_t=A_t+B_t S_{t-1}; multiplying by lambda_t^T and using lambda_{t-1}=B_t^T lambda_t telescopes to the stated gradient after adding the direct loss derivative and the initial-state term. For T=0 only those latter two terms remain. Finite C1 composition supplies a neighborhood of the evaluated trajectory; unique strict branches preserve this argument, while boundaries return no gradient. The forward diagram correctly connects theta to h_0, displayed transitions and loss, and depicts the omitted transitions schematically; it is not used as proof. The uninterrupted Definition, exact-real-arithmetic caveat, empty page bodies, and compact-v1 flags are sound. No choice principle, added prerequisite, item edit, metadata repair, or unresolved mathematical obligation is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "No item, contract, page, shared ledger, judgment, stamp, certificate, or round state was edited. The sole rejected tuple is a false positive; no canonical defect-ledger or published-ledger addition is proposed. Definition bytes are unchanged, so no supplier-interface event or downstream maintenance is triggered.",
+    "Immediately after mathematical review, ran node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items alg-backpropagation-through-shared-parameter-recurrence; exit 0 supplied the recorded hashes. The post guard equals initial-1.json before[id].",
+    "Focused check: node tools/tsx-run.mjs tools/precheck.mts --json items/alg-backpropagation-through-shared-parameter-recurrence.md items/thm-shared-parameter-backpropagation-gradient-formula.md; exit 0, two files, one proof checked, zero failures; algorithm not-applicable and theorem pass.",
+    "Focused check: node tools/rendercheck.mjs items/alg-backpropagation-through-shared-parameter-recurrence.md items/thm-shared-parameter-backpropagation-gradient-formula.md; exit 0, both files pass YAML and KaTeX/render-source checks. This check does not certify mathematical diagram correctness; the TikZ source was inspected directly as described in the review.",
+    "Final layout check: node tools/proof-layout.mjs items/alg-backpropagation-through-shared-parameter-recurrence.md items/thm-shared-parameter-backpropagation-gradient-formula.md; exit 0, two items, four steps, zero defects. An earlier rendercheck --help invocation was interrupted because the tool has no help flag and would select the corpus; it supplies no validation evidence.",
+    "No external source was consulted: the finite-dimensional chain-rule and reverse-accumulation mathematics is familiar, and the complete relevant local arguments were read. Native status confirms the live run is at 5.1-adjudicate; this report supplies only unit 38 evidence and does not claim run closure."
+  ]
+}

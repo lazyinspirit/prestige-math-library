@@ -1,0 +1,65 @@
+---
+id: lem-nonzero-real-polynomial-zero-set-is-lebesgue-null
+kind: lemma
+title: "The zero set of a nonzero real polynomial is Lebesgue null"
+status: draft
+origin: pipeline
+pipeline_run: machine-learning-all-101-2026-10-19
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots
+  - prop-countable-subsets-of-rn-are-lebesgue-null
+  - thm-finite-and-countable-subadditivity-of-measures
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets
+  - thm-borel-sets-are-lebesgue-measurable
+proof_strategy: induction
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Leshno, Lin, Pinkus, and Schocken, Multilayer Feedforward Networks With a Non-Polynomial Activation Function Can Approximate Any Function, proof of Theorem 1, Step 1"
+      url: "https://archive.nyu.edu/bitstream/2451/14329/1/IS-92-13.pdf"
+---
+
+## Statement
+
+Assume Countable Choice. For every integer $d\ge1$, if
+
+$$P(x_1,\ldots,x_d)=\sum_{\alpha\in\mathbb N_0^d}c_\alpha x_1^{\alpha_1}\cdots x_d^{\alpha_d},$$
+
+is a nonzero real polynomial with finitely many nonzero coefficients, then its zero set $\{x\in\mathbb R^d:P(x)=0\}$ is Lebesgue measurable and has $d$-dimensional Lebesgue measure zero.
+
+## Statement references
+
+[Leshno et al., proof of Theorem 1, polynomial-activation obstruction](https://archive.nyu.edu/bitstream/2451/14329/1/IS-92-13.pdf)
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, $d\ge1$, and a nonzero real polynomial $P$ in $d$ variables.
+
+[F1] A nonzero univariate real polynomial has only finitely many distinct real roots ([[thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots]]).
+
+[F2] Tonelli's theorem computes the measure of a Borel set by integrating the measures of its coordinate sections ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
+
+[F3] Product Lebesgue measure agrees with Euclidean Lebesgue measure on Borel sets ([[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]]).
+
+[F4] Countable subsets of Euclidean space are Lebesgue null under Countable Choice, and Lebesgue measure is countably subadditive ([[prop-countable-subsets-of-rn-are-lebesgue-null]], [[thm-finite-and-countable-subadditivity-of-measures]]).
+
+[F5] Under Countable Choice every Borel subset of $\mathbb R^d$ is Lebesgue measurable ([[thm-borel-sets-are-lebesgue-measurable]]).
+
+[A1] Countable Choice means every sequence of nonempty sets has a function choosing one element from each ([[def-countable-choice]]).
+
+## Proof
+
+1.1 Base case $d=1$: [F1] makes the zero set finite, hence countable and null by [F4]. [given, F1, F4, A1, base]
+
+1.2 Inductive step: let $d\ge2$ and assume the claim in dimension $d-1$. Write $P(x',t)=\sum_{j=0}^m Q_j(x')t^j$, where $x'\in\mathbb R^{d-1}$ and the highest coefficient $Q_m$ is a nonzero polynomial. By the induction hypothesis, $Z=\{x':Q_m(x')=0\}$ is null. For every $x'\notin Z$, the section $t\mapsto P(x',t)$ is a nonzero univariate polynomial, so its zero set is finite by [F1] and null by [F4]. [given, F1, F4, A1, IH]
+
+2.1 Fix $R\ge1$. The set $\{(x',t)\in[-R,R]^d:P(x',t)=0\}$ is Borel because $P$ is continuous. Its section has measure at most $2R$ when $x'\in Z$ and measure zero otherwise. Tonelli [F2] shows that its product measure is zero, since $Z$ is null; [F3] identifies this with its Euclidean Lebesgue measure. [step 1.2, F2, F3, F5, A1]
+
+3.1 The full zero set is the countable union of these Borel null intersections over integers $R\ge1$. Countable subadditivity [F4] makes it measurable and null. The base case and induction step prove the assertion for every $d\ge1$. [step 1.1, step 1.2, step 2.1, F4, F5, A1, discharge-induction] ∎
+

@@ -1,0 +1,265 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "46",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-sample-covariance-empirical-spectral-distribution",
+      "model": "gpt-6-luna",
+      "context_sha256": "465de612054b8c6a02a18350b62726d1bbfbdc6c2c9dd05ba9815b4edc64d531",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final sentence introduces an unqualified sequence, whereas def-sequence uses indices in N including zero (def-natural-numbers). Its n=0 term S(X_0) is outside the explicitly positive-row domain of S and would divide by zero. Explicitly indexing (X_n) by n>=1 and requiring positive integer p_n makes every term well-defined without changing the Gram formula, multiplicity normalization, or conditional positive-edge convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-sample-covariance-empirical-spectral-distribution",
+      "disposition": "repaired",
+      "post_sha256": "a4961850a2db64c7b4f355747e306e859cd3aafb540867b402699211f6db0a59",
+      "review_context_sha256": "5b687bac4741437f9ece46addb22b8e173d789e8ae52d30394ce884c56eab372",
+      "reason": "Author repair review: every sequence term now has positive row and column counts. The spectral theorem yields p real eigenvalues; v^T S(X)v=||Xv||^2/n>=0, and the supplied empirical-law lemma proves the p-normalized Dirac sum is a Borel probability measure. Maximum and guarded positive minimum exist in their stated finite nonempty domains. Zero matrices and rank deficiency remain admitted; no choice assumption or new supplier is needed. This is not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-sample-covariance-empirical-law-is-a-probability-measure",
+    "thm-marchenko-pastur-law-for-sample-covariance",
+    "lem-largest-sample-covariance-eigenvalue-lower-bound",
+    "lem-largest-sample-covariance-eigenvalue-upper-bound",
+    "thm-bai-yin-smallest-singular-value-limits",
+    "thm-largest-eigenvalue-sample-covariance-edge",
+    "thm-smallest-positive-eigenvalue-sample-covariance-edge"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-sample-covariance-empirical-spectral-distribution",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "locus": "Definition, final sentence",
+      "reason": "The final sentence introduces an unqualified sequence, whereas def-sequence uses indices in N including zero (def-natural-numbers). Its n=0 term S(X_0) is outside the explicitly positive-row domain of S and would divide by zero. Explicitly indexing (X_n) by n>=1 and requiring positive integer p_n makes every term well-defined without changing the Gram formula, multiplicity normalization, or conditional positive-edge convention."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-largest-sample-covariance-eigenvalue-lower-bound",
+      "status": "open",
+      "locus": "Statement, index/domain clause",
+      "reason": "The unrestricted index permits n=0, where S_n and p_n/n are undefined. Positive limiting aspect ratio ensures positive p_n only eventually; an initially empty column list also needs exclusion.",
+      "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and F3/step 2.1 transfer the largest eigenvalue.",
+      "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+      "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "lem-largest-sample-covariance-eigenvalue-upper-bound",
+      "status": "open",
+      "locus": "Statement, index/domain clause",
+      "reason": "The unrestricted index permits n=0 and hence division by zero in S_n and c_n=N_n/n; an empty column list would leave lambda_max(S_n) undefined.",
+      "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and proof steps 1.1-2.1 use N_n/n and lambda_max(S_n).",
+      "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+      "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-bai-yin-smallest-singular-value-limits",
+      "status": "open",
+      "locus": "Statement, index/domain clause",
+      "reason": "At n=0 the displayed singular-value list has length r_0=0 and no smallest member, and division by sqrt(n) is undefined. Positive p_n must also be specified for every indexed term.",
+      "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; r_n=min(n,p_n), s_{r_n}(X_n)/sqrt(n), and proof step 1.1 use the smaller Gram matrix.",
+      "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+      "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-largest-eigenvalue-sample-covariance-edge",
+      "status": "open",
+      "locus": "Statement, index/domain clause",
+      "reason": "The covariance at n=0 is undefined; positivity of all column counts is needed for the largest-eigenvalue list. This is the same missing domain qualification, independent of the sharp-edge argument.",
+      "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and proof steps 1.1-2.1 join largest-eigenvalue bounds.",
+      "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+      "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+      "status": "open",
+      "locus": "Statement, index/domain clause",
+      "reason": "The covariance at n=0 is undefined. This concerns the matrix domain, separate from the correctly conditional definition of its smallest positive eigenvalue and eventual existence assertions.",
+      "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; Set S_n=X_n^T X_n/n; F2 and proof steps 1.1-3.1 identify squared singular values divided by n.",
+      "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+      "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "edit": {
+      "path": "items/def-sample-covariance-empirical-spectral-distribution.md",
+      "section": "Definition",
+      "before": "For a sequence $X_n\\in\\mathbb R^{n\\times p_n}$",
+      "after": "For a sequence $(X_n)_{n\\ge1}$ with $X_n\\in\\mathbb R^{n\\times p_n}$ and positive integer $p_n$ for every $n\\ge1$"
+    },
+    "checked_context": [
+      "items/def-sequence.md, Definition and Remarks: Indexing",
+      "items/def-natural-numbers.md, Definition: 0 belongs to N",
+      "items/cor-real-spectral-theorem-for-self-adjoint-endomorphisms.md, Statement",
+      "items/def-dirac-measure.md, Definition",
+      "items/def-probability-measure.md, Definition",
+      "items/def-weak-convergence-of-borel-probability-measures.md, Definition",
+      "items/lem-sample-covariance-empirical-law-is-a-probability-measure.md, complete proof",
+      "research/machine-learning-all-101-2026-10-19-batch-46.proof-contracts.json, assigned definition contract",
+      "library/machine-learning/marchenko-pastur-law-and-edge-bounds.md and companion: frontmatter-only page interfaces"
+    ],
+    "sources_consulted": [],
+    "source_note": "Elementary finite-dimensional linear algebra and sequence indexing are familiar; no external source was consulted or is claimed as read. Existing source metadata is preserved.",
+    "contract_disposition": "No contract change: all assigned boundary rows already require positive dimensions; citations and derivations are empty for this definition. Historical template-review hashes were preserved.",
+    "statement_policy": "Definition contains no hyperlinks; existing two source links remain in separate paragraphs in Definition references.",
+    "diagram_review": "No TikZ/tikzcd diagrams occur in the assigned item; none is needed for these explicit matrix and measure formulas.",
+    "consumer_reviews": [
+      {
+        "id": "lem-sample-covariance-empirical-law-is-a-probability-measure",
+        "path": "items/lem-sample-covariance-empirical-law-is-a-probability-measure.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "unaffected",
+        "affected_use": "Statement: For positive integers $n,p$; F1 and proof steps 1.1-2.1 use S(X)=X^T X/n and the p-term empirical measure.",
+        "evidence": "Its explicit positive dimensions already satisfy the repaired domain; the PSD and finite empirical-law proof is unchanged."
+      },
+      {
+        "id": "thm-marchenko-pastur-law-for-sample-covariance",
+        "path": "items/thm-marchenko-pastur-law-for-sample-covariance.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "unaffected",
+        "affected_use": "Statement: For each positive integer $n$, let $p_n$ be a positive integer; F1 and proof steps 1.1 and 6.1 use the p_n-normalized nonnegative covariance ESD.",
+        "evidence": "Both dimensions are explicitly positive; the covariance and ESD uses retain exactly their former meaning."
+      },
+      {
+        "id": "lem-largest-sample-covariance-eigenvalue-lower-bound",
+        "path": "items/lem-largest-sample-covariance-eigenvalue-lower-bound.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "owner_repair_required",
+        "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and F3/step 2.1 transfer the largest eigenvalue.",
+        "evidence": "The unrestricted index permits n=0, where S_n and p_n/n are undefined. Positive limiting aspect ratio ensures positive p_n only eventually; an initially empty column list also needs exclusion.",
+        "invalidated_claim": "The unqualified all-index matrix/spectral notation includes undefined terms; no objection to the positive-index asymptotic edge value is asserted.",
+        "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+        "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope"
+      },
+      {
+        "id": "lem-largest-sample-covariance-eigenvalue-upper-bound",
+        "path": "items/lem-largest-sample-covariance-eigenvalue-upper-bound.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "owner_repair_required",
+        "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and proof steps 1.1-2.1 use N_n/n and lambda_max(S_n).",
+        "evidence": "The unrestricted index permits n=0 and hence division by zero in S_n and c_n=N_n/n; an empty column list would leave lambda_max(S_n) undefined.",
+        "invalidated_claim": "The unqualified all-index matrix/spectral notation includes undefined terms; no objection to the positive-index asymptotic edge value is asserted.",
+        "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+        "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope"
+      },
+      {
+        "id": "thm-bai-yin-smallest-singular-value-limits",
+        "path": "items/thm-bai-yin-smallest-singular-value-limits.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "owner_repair_required",
+        "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; r_n=min(n,p_n), s_{r_n}(X_n)/sqrt(n), and proof step 1.1 use the smaller Gram matrix.",
+        "evidence": "At n=0 the displayed singular-value list has length r_0=0 and no smallest member, and division by sqrt(n) is undefined. Positive p_n must also be specified for every indexed term.",
+        "invalidated_claim": "The unqualified all-index matrix/spectral notation includes undefined terms; no objection to the positive-index asymptotic edge value is asserted.",
+        "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+        "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope"
+      },
+      {
+        "id": "thm-largest-eigenvalue-sample-covariance-edge",
+        "path": "items/thm-largest-eigenvalue-sample-covariance-edge.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "owner_repair_required",
+        "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; S_n=X_n^T X_n/n and proof steps 1.1-2.1 join largest-eigenvalue bounds.",
+        "evidence": "The covariance at n=0 is undefined; positivity of all column counts is needed for the largest-eigenvalue list. This is the same missing domain qualification, independent of the sharp-edge argument.",
+        "invalidated_claim": "The unqualified all-index matrix/spectral notation includes undefined terms; no objection to the positive-index asymptotic edge value is asserted.",
+        "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+        "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope"
+      },
+      {
+        "id": "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+        "path": "items/thm-smallest-positive-eigenvalue-sample-covariance-edge.md",
+        "status": "draft",
+        "frontier": true,
+        "disposition": "owner_repair_required",
+        "affected_use": "Statement: For each $n$, let $X_n=(\\xi_{ij})_{1\\le i\\le n,1\\le j\\le p_n}$; Set S_n=X_n^T X_n/n; F2 and proof steps 1.1-3.1 identify squared singular values divided by n.",
+        "evidence": "The covariance at n=0 is undefined. This concerns the matrix domain, separate from the correctly conditional definition of its smallest positive eigenvalue and eventual existence assertions.",
+        "invalidated_claim": "The unqualified all-index matrix/spectral notation includes undefined terms; no objection to the positive-index asymptotic edge value is asserted.",
+        "minimality": "Change only the domain clause to: For each positive integer n, let p_n be a positive integer and X_n=(xi_ij)_{1<=i<=n,1<=j<=p_n}. Preserve all distributional assumptions and conclusions.",
+        "route": "ordinary frontier-owner lane; outside unit 46 assigned write scope"
+      }
+    ],
+    "published_ledger_updates": "None: all seven direct item consumers are draft original-frontier items. No published or outside-frontier direct consumer was found.",
+    "page_disposition": "Owning A page lists this definition and its direct consumers; companion B page imports the A page. Both have empty bodies and compact-v1 metadata, preserved unchanged.",
+    "unresolved_assigned_obligations": [],
+    "routed_owner_obligations": [
+      "lem-largest-sample-covariance-eigenvalue-lower-bound",
+      "lem-largest-sample-covariance-eigenvalue-upper-bound",
+      "thm-bai-yin-smallest-singular-value-limits",
+      "thm-largest-eigenvalue-sample-covariance-edge",
+      "thm-smallest-positive-eigenvalue-sample-covariance-edge"
+    ],
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-sample-covariance-empirical-spectral-distribution.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 0,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/def-sample-covariance-empirical-spectral-distribution.md\",\n      \"item_id\": \"def-sample-covariance-empirical-spectral-distribution\",\n      \"status\": \"not-applicable\"\n    }\n  ]\n}"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-sample-covariance-empirical-spectral-distribution.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-46.proof-contracts.json --strict --items def-sample-covariance-empirical-spectral-distribution --json",
+        "exit_code": 0,
+        "output": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"scope\": [\n    \"def-sample-covariance-empirical-spectral-distribution\"\n  ],\n  \"checked\": [\n    \"def-sample-covariance-empirical-spectral-distribution\"\n  ]\n}"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-sample-covariance-empirical-spectral-distribution.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects"
+      }
+    ],
+    "consumer_review_scope": "Consumer findings concern only the changed definition interface, indexing, dimension domains, and the exact displayed uses. They do not assert independent verification of the asymptotic random-matrix proofs or reading of their external sources. The separate Step-4 Chebyshev citation concern remains in the immutable batch digest and is not resolved by this domain repair.",
+    "next_action": "Assigned repair and focused checks are complete. Controller must route the five outside-lane frontier domain findings to their owners, then perform its ordinary certification and required independent rejudgment; no cycle or judge was launched here."
+  }
+}

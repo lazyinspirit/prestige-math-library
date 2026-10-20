@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "82",
+  "round": 0,
+  "reviewed_items": [
+    "def-pac-mdp-bounded-reward-model",
+    "thm-pac-mdp-value-functions",
+    "lem-pac-mdp-adaptive-sample-concentration",
+    "def-pac-mdp-sample-complexity",
+    "def-admissible-mdp-heuristic",
+    "lem-pac-mdp-value-simulation",
+    "def-pac-mdp-known-state-action-mdp",
+    "alg-r-max",
+    "alg-delayed-q-learning",
+    "thm-pac-mdp-escape-event-reduction",
+    "lem-r-max-empirical-model-accuracy",
+    "lem-delayed-q-learning-optimism-and-update-counts",
+    "thm-r-max-pac-bound",
+    "thm-delayed-q-learning-pac-bound",
+    "ex-pac-mdp-nonpermanent-bad-steps",
+    "ex-pac-mdp-inadmissible-heuristic-fails",
+    "ex-pac-mdp-discount-factor-dependence",
+    "ex-pac-mdp-delayed-q-zero-slack"
+  ],
+  "reviewed_pages": [
+    "pac-mdp-exploration",
+    "pac-mdp-exploration-examples"
+  ],
+  "decision": "repair",
+  "reason": "Round 0 requests one repair for the same-page findings below. The approved epsilon-zero theorem range remains an owner-scope obligation; it cannot be made into a finite uniform guarantee without an additional gap premise. Supplier uses and the positive-epsilon arguments were checked; the source scope conflict remains unresolved for final review.",
+  "findings": [
+    {
+      "id": "def-pac-mdp-sample-complexity",
+      "type": "scope",
+      "reason": "Approved ML-74 requires results for 0 ≤ ε < (1−γ)⁻¹, while this definition and both PAC theorem statements allow finite bounds only for ε > 0. N₀ is defined, but no finite uniform zero-tolerance bound holds over unrestricted bounded-reward MDPs with arbitrarily close stochastic action values. Strehl’s formal PAC definitions require ε > 0; its Theorems 11 and 16 display an incompatible zero endpoint despite inverse-ε thresholds [JMLR §1.5 and Theorems 11, 16](https://www.jmlr.org/papers/volume10/strehl09a/strehl09a.pdf). Owner reconciliation is required for thm-r-max-pac-bound, thm-delayed-q-learning-pac-bound, and their theorem-dependent examples ex-pac-mdp-discount-factor-dependence and ex-pac-mdp-delayed-q-zero-slack."
+    },
+    {
+      "id": "def-pac-mdp-bounded-reward-model",
+      "type": "prerequisite",
+      "reason": "The Definition introduces r(s,a) by integrating the Borel reward coordinate against K, but its suppliers do not define the Lebesgue expectation or establish that this bounded coordinate is measurable and integrable. Make that prerequisite explicit using the existing expectation/integral interface."
+    },
+    {
+      "id": "thm-pac-mdp-value-functions",
+      "type": "prerequisite",
+      "reason": "Steps 2.2 and 3.2 split expectations of R + γV(S′) and finite action mixtures into r + γPV. The current dependencies define expectation and supply the path law, but do not supply general Lebesgue-integral linearity for the Borel reward model. Cite and apply the existing integrable-expectation linearity result, or give the integral calculation locally."
+    },
+    {
+      "id": "lem-pac-mdp-adaptive-sample-concentration",
+      "type": "local",
+      "reason": "Step 4.1 cites nonexistent step 4.2; the transition deviation result is proved at step 2.3. Also make explicit in step 3.1 why E[Rᵢ | Fᵢ₋₁] = r(s,a) for the independent potential stream."
+    },
+    {
+      "id": "alg-r-max",
+      "type": "local",
+      "reason": "The procedure specifies inputs and repeated instructions but no formal output. State that each selected action is the per-step output and clarify whether the current Q table is exposed or internal, as required for algorithm Definitions."
+    },
+    {
+      "id": "alg-delayed-q-learning",
+      "type": "local",
+      "reason": "The procedure has no explicit repetition loop or formal output. Specify the t = 1, 2, … loop and the per-step action output, as required for algorithm Definitions."
+    },
+    {
+      "id": "ex-pac-mdp-inadmissible-heuristic-fails",
+      "type": "local",
+      "reason": "The example calls R-MAX without supplying its required value-iteration tolerance β. Fix an admissible β (for γ = 0, 0 < β < 1) and describe that the algorithm’s L sweeps leave the exact zero values unchanged."
+    },
+    {
+      "id": "lem-delayed-q-learning-optimism-and-update-counts",
+      "type": "local",
+      "reason": "Step 4.1 needs the U(s,a) < V*(s) case: optimism and nonincreasing Q values imply the pair cannot be selected or updated. If U(s,a) ≥ V*(s), explain why the one update that crosses below V*(s) accounts for the additive 1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pac-mdp-exploration",
+      "decision": "accept",
+      "reason": "Its body-free inventory remains correct. The actual martingale suppliers’ bounded-increment premises and the tabular supplier’s sampled Q-learning target were checked."
+    },
+    {
+      "id": "def-pac-mdp-bounded-reward-model",
+      "decision": "repair",
+      "reason": "Its finite-MDP supplier use correctly imports the finite state/action and joint-law conventions; the model still needs its own integral prerequisite made explicit."
+    },
+    {
+      "id": "alg-delayed-q-learning",
+      "decision": "repair",
+      "reason": "It reuses only the Q-learning sample-target formula, restates it locally, and imports no finite-reward-support or convergence claim. Its own loop/output specification needs repair."
+    },
+    {
+      "id": "lem-r-max-empirical-model-accuracy",
+      "decision": "accept",
+      "reason": "Its uses of R-MAX’s first-m batch, persistent known set, and rebuild behavior match the current procedure; the output declaration does not change them."
+    },
+    {
+      "id": "ex-pac-mdp-inadmissible-heuristic-fails",
+      "decision": "repair",
+      "reason": "The example’s R-MAX trajectory is sound, but it must supply the algorithm’s β input."
+    },
+    {
+      "id": "thm-r-max-pac-bound",
+      "decision": "accept",
+      "reason": "Its use of R-MAX parameters and update semantics is unchanged by an explicit output declaration; the separate approved epsilon-zero scope finding remains."
+    },
+    {
+      "id": "ex-pac-mdp-discount-factor-dependence",
+      "decision": "accept",
+      "reason": "Its positive-epsilon substitutions into both displayed bounds are valid; the scope finding concerns the theorem domain at epsilon zero."
+    },
+    {
+      "id": "lem-delayed-q-learning-optimism-and-update-counts",
+      "decision": "repair",
+      "reason": "Its use of the delayed batch target and flags matches the procedure; the zero-slack update allowance needs the stated local case split."
+    },
+    {
+      "id": "thm-delayed-q-learning-pac-bound",
+      "decision": "accept",
+      "reason": "Its use of the delayed update, residual set, and batch-size parameters is unchanged by an explicit loop/output declaration; the separate approved epsilon-zero scope finding remains."
+    },
+    {
+      "id": "ex-pac-mdp-delayed-q-zero-slack",
+      "decision": "accept",
+      "reason": "The specified one-state run updates after its first completed batch and has zero heuristic slack; the additive term covers this case."
+    }
+  ]
+}

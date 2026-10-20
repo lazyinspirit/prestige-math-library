@@ -14,6 +14,7 @@ aliases: [def-product-of-two-sets]
 landmark: true
 short: "Cartesian product"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-cartesian-product.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -36,17 +37,25 @@ pipeline_run: null
 ## Definition
 
 Let $A$ and $B$ be sets. By
-[[lem-ordered-pairs-lie-in-the-double-power-set]] every ordered pair $(a,b)$ with
+If $a \in A$ and $b \in B$ then $(a,b) \in \mathcal{P}(\mathcal{P}(A \cup B))$ every ordered pair $(a,b)$ with
 $a \in A$ and $b \in B$ is an element of $\mathcal{P}(\mathcal{P}(A \cup B))$, so
-[[def-axiom-schema-of-separation]] applied inside that set produces the
+The Axiom Schema of Separation: for each formula $\varphi$, $\forall \bar p\,\forall x\,\exists y\,\forall z\,(z \in y \leftrightarrow (z \in x \wedge \varphi(z,\bar p)))$ applied inside that set produces the
 **Cartesian product**
 
 $$A \times B := \{\, z \in \mathcal{P}(\mathcal{P}(A \cup B)) : \exists a \in A\ \exists b \in B\ z = (a,b) \,\}.$$
 
-Its elements are exactly the ordered pairs $(a,b)$ ([[def-ordered-pair]]) with
+Its elements are exactly the ordered pairs $(a,b)$ (The Kuratowski ordered pair $(a,b) := \{\{a\},\{a,b\}\}$) with
 $a \in A$ and $b \in B$: no such pair is lost, because each such pair lies in
 the ambient set being separated. Thus $z \in A \times B$ holds if and only if
 $z = (a,b)$ for some $a \in A$ and some $b \in B$.
+
+## Definition references
+
+[[lem-ordered-pairs-lie-in-the-double-power-set]]
+
+[[def-axiom-schema-of-separation]]
+
+[[def-ordered-pair]]
 
 ## Remarks
 

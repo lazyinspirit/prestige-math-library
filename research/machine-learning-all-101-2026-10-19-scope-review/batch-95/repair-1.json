@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "95",
+  "round": 1,
+  "reviewed_items": [
+    "def-low-rank-adaptation-of-a-linear-layer",
+    "alg-finite-budget-low-rank-adaptation",
+    "thm-low-rank-adapter-factorization-ambiguity",
+    "thm-low-rank-adapter-merging-and-gradients",
+    "rem-adaptation-rank-and-empirical-transfer",
+    "ex-low-rank-adapter-change-of-basis",
+    "ex-rank-one-adapter-cannot-realize-full-rank-update",
+    "ex-zero-zero-initialization-stalls-adaptation",
+    "ex-merged-and-unmerged-adapter-forward-pass-agree"
+  ],
+  "reviewed_pages": [
+    "low-rank-adaptation-and-parameter-update-geometry",
+    "low-rank-adaptation-and-parameter-update-geometry-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Both local findings are repaired and affected consumers check out. Escalate for owner reconciliation: the shared table in research/plan-machine-learning-track.md lists EM and Bayesian cross-validation as ML-87 prerequisites, but the approved ML-87 design and assigned sources contain no such uses or edges. No EM/CV premise is missing from the reviewed arguments.",
+  "findings": [
+    {
+      "id": "alg-finite-budget-low-rank-adaptation",
+      "type": "local",
+      "reason": "Repaired the procedure to check each current primal evaluation in order, return DOMAIN_ERROR or NONDIFFERENTIABLE before updating, and call reverse mode only on strict branches. Branch choices may vary between steps."
+    },
+    {
+      "id": "thm-low-rank-adapter-merging-and-gradients",
+      "type": "local",
+      "reason": "Added a separate termination and status conclusion with explicit finite-return assumptions and an induction proof. Linked this result through the algorithm's justified_by field."
+    },
+    {
+      "id": "ML-87 shared prerequisite reconciliation",
+      "type": "scope",
+      "reason": "The shared supplier table assigns EM and Bayesian cross-validation prerequisites to ML-87; the approved design and current item/page sources do not use them. Reconcile the table outside this batch's write scope."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-low-rank-adapter-merging-and-gradients",
+      "decision": "accept",
+      "reason": "The gradient proof applies on each successful step's strict branches, and the added termination proof matches the repaired algorithm's failure-before-update behavior."
+    },
+    {
+      "id": "ex-zero-zero-initialization-stalls-adaptation",
+      "decision": "accept",
+      "reason": "Its polynomial loss is defined and differentiable everywhere, so both stated one-step executions remain successful under the runtime checks."
+    },
+    {
+      "id": "rem-adaptation-rank-and-empirical-transfer",
+      "decision": "accept",
+      "reason": "It makes no convergence or transfer guarantee; its empirical claims remain qualified by their setup. Hu et al. describe the study-specific experiments in [§5](https://arxiv.org/pdf/2106.09685)."
+    },
+    {
+      "id": "ex-merged-and-unmerged-adapter-forward-pass-agree",
+      "decision": "accept",
+      "reason": "Its exact real-arithmetic merge calculation is unchanged by the algorithm and termination repairs."
+    },
+    {
+      "id": "low-rank-adaptation-and-parameter-update-geometry",
+      "decision": "accept",
+      "reason": "The body-free page retains its approved inventory and compact layout."
+    },
+    {
+      "id": "low-rank-adaptation-and-parameter-update-geometry-examples",
+      "decision": "accept",
+      "reason": "The body-free examples page retains its approved inventory; its affected examples remain valid."
+    }
+  ]
+}

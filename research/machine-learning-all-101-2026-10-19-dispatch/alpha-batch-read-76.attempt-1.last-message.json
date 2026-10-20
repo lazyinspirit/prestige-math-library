@@ -1,0 +1,240 @@
+{
+  "group": "y",
+  "batches": ["76"],
+  "pages_read": [
+    "stochastic-finite-armed-bandits",
+    "stochastic-finite-armed-bandits-examples"
+  ],
+  "items_read": [
+    "def-centered-subgaussian-reward",
+    "lem-zeta-two-and-three-converge",
+    "lem-countably-valued-expectation-is-weighted-series",
+    "lem-ucb-prefix-envelope-sum-bound",
+    "lem-independent-subgaussian-prefix-tail",
+    "def-stochastic-bandit-and-pseudo-regret",
+    "alg-explore-then-commit",
+    "alg-upper-confidence-bound-bandit",
+    "lem-bandit-reward-table-has-fixed-conditional-laws",
+    "lem-ucb-suboptimal-arm-expected-pulls",
+    "thm-explore-then-commit-expected-regret",
+    "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+    "thm-ucb-gap-dependent-regret",
+    "thm-ucb-gap-free-regret",
+    "ex-two-arm-deterministic-gap",
+    "ex-tied-optimal-bandit-arms",
+    "ex-heavy-tailed-reward-law-outside-subgaussian-model"
+  ],
+  "conventions": [
+    {
+      "convention": "A 1-sub-Gaussian reward is integrable and satisfies E[exp(λ(X−E[X]))] ≤ exp(λ²/2) for every real λ.",
+      "fixed_by": "def-centered-subgaussian-reward",
+      "matters_for": [
+        "lem-independent-subgaussian-prefix-tail",
+        "thm-explore-then-commit-expected-regret",
+        "lem-ucb-suboptimal-arm-expected-pulls",
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+        "ex-heavy-tailed-reward-law-outside-subgaussian-model"
+      ]
+    },
+    {
+      "convention": "All finite reward-table entries are mutually independent; learner randomness is independent of the entire table. Policies use only that randomness and previously revealed history; pulling an arm reveals its next unused stack entry.",
+      "fixed_by": "def-stochastic-bandit-and-pseudo-regret",
+      "matters_for": [
+        "lem-bandit-reward-table-has-fixed-conditional-laws",
+        "lem-ucb-suboptimal-arm-expected-pulls",
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+        "thm-explore-then-commit-expected-regret"
+      ]
+    },
+    {
+      "convention": "Pseudo-regret is the random sum of mean gaps; realized reward regret is nμ* minus observed total reward; R_n denotes the expectation of realized reward regret.",
+      "fixed_by": "def-stochastic-bandit-and-pseudo-regret",
+      "matters_for": [
+        "thm-explore-then-commit-expected-regret",
+        "thm-ucb-gap-dependent-regret",
+        "thm-ucb-gap-free-regret",
+        "ex-tied-optimal-bandit-arms"
+      ]
+    },
+    {
+      "convention": "UCB initializes every arm once, uses the natural-logarithm bonus sqrt(2 log(1/δ)/s), and chooses the least-index maximizer. The regret results set δ=n⁻².",
+      "fixed_by": "alg-upper-confidence-bound-bandit",
+      "matters_for": [
+        "lem-ucb-suboptimal-arm-expected-pulls",
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+        "thm-ucb-gap-dependent-regret",
+        "thm-ucb-gap-free-regret"
+      ]
+    },
+    {
+      "convention": "Explore-then-commit requires positive integers m,k,n with mk≤n, explores round-robin, and commits to the least-index empirical-mean maximizer.",
+      "fixed_by": "alg-explore-then-commit",
+      "matters_for": [
+        "thm-explore-then-commit-expected-regret",
+        "ex-two-arm-deterministic-gap"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-stochastic-bandit-and-pseudo-regret",
+      "statement": "The finite reward-stack model has mutually independent integrable entries with fixed arm laws, independent learner randomization, non-anticipating choices, and next-unused-entry rewards; gaps and both regret quantities are defined on that common probability space.",
+      "used_by": [
+        "alg-explore-then-commit",
+        "alg-upper-confidence-bound-bandit",
+        "lem-bandit-reward-table-has-fixed-conditional-laws",
+        "lem-ucb-suboptimal-arm-expected-pulls",
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+        "thm-explore-then-commit-expected-regret",
+        "thm-ucb-gap-dependent-regret",
+        "thm-ucb-gap-free-regret"
+      ]
+    },
+    {
+      "id": "lem-independent-subgaussian-prefix-tail",
+      "statement": "For q≥1 mutually independent integrable 1-sub-Gaussian real variables with means m_j, both tails of their centered sum at t≥0 are at most exp(−t²/(2q)).",
+      "used_by": [
+        "lem-ucb-suboptimal-arm-expected-pulls",
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+        "thm-explore-then-commit-expected-regret"
+      ]
+    },
+    {
+      "id": "lem-bandit-reward-table-has-fixed-conditional-laws",
+      "statement": "For t∈[n], i∈[k], B∈H_{t−1} contained in {A_t=i}, and Borel C, P(B∩{Y_t∈C})=P(B)P_i(C) and E[Y_t 1_B]=μ_i P(B).",
+      "used_by": [
+        "thm-explore-then-commit-expected-regret",
+        "thm-ucb-gap-dependent-regret",
+        "thm-ucb-gap-free-regret"
+      ]
+    },
+    {
+      "id": "lem-ucb-prefix-envelope-sum-bound",
+      "statement": "For integer n≥5, a>0 and L=log n, the sum over 1≤s<n of exp(−((a sqrt(s)−2 sqrt(L))_+)²/2) is at most 1+8L/a². For n≥12 it is at most 8L/a².",
+      "used_by": [
+        "lem-ucb-sharp-suboptimal-arm-expected-pulls"
+      ]
+    },
+    {
+      "id": "lem-ucb-sharp-suboptimal-arm-expected-pulls",
+      "statement": "For n≥max{k,2}, centered 1-sub-Gaussian reward-stack entries and the stated UCB algorithm with δ=n⁻², every arm with Δ_i>0 satisfies E[T_i(n)]≤3+8 log(n)/Δ_i².",
+      "used_by": [
+        "thm-ucb-gap-free-regret"
+      ]
+    },
+    {
+      "id": "lem-ucb-suboptimal-arm-expected-pulls",
+      "statement": "For n≥max{k,2}, 1-sub-Gaussian reward-stack entries and UCB with δ=n⁻², every arm with Δ_i>0 satisfies E[T_i(n)]≤3+16 log(n)/Δ_i².",
+      "used_by": [
+        "thm-ucb-gap-dependent-regret"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"cor-expectation-linearity-monotonicity-and-modulus-bound","used_for":"Finite expectation sums and inequalities.","opened":true},
+    {"id":"cor-expectation-of-an-indicator-is-probability","used_for":"Expected indicators and pull counts.","opened":true},
+    {"id":"cor-exponential-reciprocal-and-positivity","used_for":"Positive exponential factors and reciprocal identities.","opened":true},
+    {"id":"cor-markov-inequality-for-random-variables","used_for":"MGF tail derivation.","opened":true},
+    {"id":"def-canonical-natural","used_for":"Real interpretation of natural indices.","opened":true},
+    {"id":"def-dirac-measure","used_for":"Heavy-tail atomic law.","opened":true},
+    {"id":"def-expectation-of-a-nonnegative-or-integrable-random-variable","used_for":"Finite and extended expectations.","opened":true},
+    {"id":"def-factorial-and-falling-factorial","used_for":"Exponential-series lower bound using 4!=24.","opened":true},
+    {"id":"def-independent-random-elements","used_for":"Reward-table independence.","opened":true},
+    {"id":"def-integer-power","used_for":"Reciprocal powers and polynomial computations.","opened":true},
+    {"id":"def-integrable-real-and-complex-functions-and-their-integrals","used_for":"Integrability of nonnegative rewards.","opened":true},
+    {"id":"def-law-or-distribution-of-a-random-element","used_for":"Arm laws and pushforward expectations.","opened":true},
+    {"id":"def-natural-logarithm","used_for":"Confidence radii and envelope parameter.","opened":true},
+    {"id":"def-nonnegative-extended-series","used_for":"Possibly infinite weighted expectation series.","opened":true},
+    {"id":"def-nonnegative-weighted-sum-of-measures","used_for":"Heavy-tail probability construction.","opened":true},
+    {"id":"def-probability-measure","used_for":"Probability normalization.","opened":true},
+    {"id":"def-random-element-and-real-random-variable","used_for":"Measurability of rewards and randomization.","opened":true},
+    {"id":"def-real-exponential-function-and-e","used_for":"MGF definition and exponential series.","opened":true},
+    {"id":"def-series","used_for":"Ordinary convergent series and starting indices.","opened":true},
+    {"id":"lem-derivative-of-a-power","used_for":"Polynomial integration in the envelope estimate.","opened":true},
+    {"id":"lem-exponential-series-has-infinite-radius","used_for":"Exponential lower bound in the heavy-tail example.","opened":true},
+    {"id":"lem-improper-integral-splitting-and-tail-invariance","used_for":"Splitting the envelope integral.","opened":true},
+    {"id":"lem-law-of-a-random-element-is-a-probability-measure","used_for":"Validity of the heavy-tail reward law.","opened":true},
+    {"id":"lem-measurable-functions-preserve-independence","used_for":"Transformed reward independence.","opened":true},
+    {"id":"lem-of-naturals-positive","used_for":"Positive denominators and canonical indices.","opened":true},
+    {"id":"lem-probability-measure-basic-identities","used_for":"Union bound for optimal-arm prefix failures.","opened":true},
+    {"id":"prop-dirac-measure-is-a-probability-measure","used_for":"Atomic measure construction.","opened":true},
+    {"id":"prop-order-and-scalar-rules-for-the-nonnegative-integral","used_for":"MGF factorization and heavy-tail centering.","opened":true},
+    {"id":"thm-additivity-over-subintervals","used_for":"Sum-to-integral envelope comparison.","opened":true},
+    {"id":"thm-algebra-of-continuous-functions","used_for":"Continuity of envelope integrands.","opened":true},
+    {"id":"thm-algebra-of-derivatives","used_for":"Envelope calculus.","opened":true},
+    {"id":"thm-cauchy-condensation","used_for":"Convergence of the zeta sums.","opened":true},
+    {"id":"thm-cauchy-schwarz-finite","used_for":"Sharper gap-free regret estimate.","opened":true},
+    {"id":"thm-chain-rule","used_for":"Gaussian primitive differentiation.","opened":true},
+    {"id":"thm-change-of-variables-for-expectation","used_for":"Arm means and heavy-tail MGFs under the law.","opened":true},
+    {"id":"thm-composition-of-continuous-functions","used_for":"Envelope continuity.","opened":true},
+    {"id":"thm-continuous-implies-integrable","used_for":"Proper integrability of envelope functions.","opened":true},
+    {"id":"thm-derivative-of-exponential","used_for":"Gaussian integral primitive.","opened":true},
+    {"id":"thm-expectation-of-products-of-independent-random-variables","used_for":"Eventwise conditional mean in reward stacks.","opened":true},
+    {"id":"thm-exponential-addition-formula","used_for":"MGF multiplication and centering.","opened":true},
+    {"id":"thm-exponential-is-strictly-increasing","used_for":"Tail-event equivalence and envelope monotonicity.","opened":true},
+    {"id":"thm-exponential-limits-and-range","used_for":"Gaussian primitive endpoint limit.","opened":true},
+    {"id":"thm-ftc-second-part","used_for":"Envelope integral evaluations.","opened":true},
+    {"id":"thm-gaussian-integral","used_for":"Exact integrated envelope constant.","opened":true},
+    {"id":"thm-geometric-series","used_for":"Condensed zeta-series convergence.","opened":true},
+    {"id":"thm-independent-random-elements-have-product-joint-law","used_for":"MGF factorization and unused-coordinate independence.","opened":true},
+    {"id":"thm-linearity-of-improper-integrals","used_for":"Combining convergent Gaussian terms.","opened":true},
+    {"id":"thm-logarithm-derivative-and-integral","used_for":"Rational lower bounds for logarithms.","opened":true},
+    {"id":"thm-monotone-convergence-for-the-integral","used_for":"Countably valued expectation formula.","opened":true},
+    {"id":"thm-monotonicity-from-the-derivative","used_for":"Small-horizon envelope estimate.","opened":true},
+    {"id":"thm-monotonicity-of-the-integral","used_for":"Envelope comparisons and rational bounds.","opened":true},
+    {"id":"thm-natural-logarithm-laws","used_for":"Confidence schedule and logarithm comparisons.","opened":true},
+    {"id":"thm-nonnegative-series-bounded-partial-sums","used_for":"Exponential-series partial-sum lower bound.","opened":true},
+    {"id":"thm-nonnegative-weighted-sums-of-measures","used_for":"Heavy-tail measure construction.","opened":true},
+    {"id":"thm-of-archimedean","used_for":"Unbounded heavy-tail MGF partial sums.","opened":true},
+    {"id":"thm-of-square-roots","used_for":"Envelope square-root estimates.","opened":true},
+    {"id":"thm-principal-inverse-tangent-calculus","used_for":"Local proof that π<22/7.","opened":true},
+    {"id":"thm-substitution","used_for":"Envelope and logarithm substitutions.","opened":true},
+    {"id":"thm-substitution-for-improper-integrals","used_for":"Gaussian scaling and envelope substitution.","opened":true},
+    {"id":"thm-tonelli-theorem-for-sigma-finite-product-spaces","used_for":"Factoring nonnegative prefix MGFs.","opened":true}
+  ],
+  "concerns": [],
+  "alerts": [
+    {"item":"def-canonical-natural","finding":"Definition contains “Let $F$ be a field ([[def-field]])”. This inline hyperlink violates the required uninterrupted Definition; move links after the complete section.","severity":"presentation"},
+    {"item":"def-dirac-measure","finding":"Definition contains “([[def-sigma-algebra]])” in its opening hypothesis and links the probability-measure justification before the section ends. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-expectation-of-a-nonnegative-or-integrable-random-variable","finding":"Definition contains “of [[def-integrable-real-and-complex-functions-and-their-integrals]], its”. The hyperlink interrupts the complete Definition.","severity":"presentation"},
+    {"item":"def-factorial-and-falling-factorial","finding":"Definition begins “By the recursion theorem ([[thm-recursion]])” and contains further inline links. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-independent-random-elements","finding":"Definition contains “independent in the sense of [[def-independent-sigma-algebras-and-events]]”. The hyperlink remains inside the complete Definition.","severity":"presentation"},
+    {"item":"def-integer-power","finding":"Definition contains “([[def-ordered-field]], [[def-field]])” and further inline supplier links. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-integrable-real-and-complex-functions-and-their-integrals","finding":"Definition places [[prop-closure-properties-of-measurable-functions-used-by-the-integral]] between the positive/negative-part formulas and their properties. The complete Definition must be uninterrupted by hyperlinks.","severity":"presentation"},
+    {"item":"def-natural-logarithm","finding":"Definition contains “because [[cor-exponential-is-a-bijection-onto-positive-reals]] states”. The justification link remains inside the complete Definition.","severity":"presentation"},
+    {"item":"def-nonnegative-extended-series","finding":"Definition contains “([[def-extended-reals]])” in the opening domain and further inline links. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-nonnegative-weighted-sum-of-measures","finding":"Definition contains “using [[def-nonnegative-extended-series]]” and a concluding link to the measure theorem. Links must follow the complete Definition in Definition references.","severity":"presentation"},
+    {"item":"def-probability-measure","finding":"Definition contains “([[def-measure]])” and “([[def-measure-space]])” within its defining paragraph. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-random-element-and-real-random-variable","finding":"Definition contains “in the sense of [[def-measurable-function-between-measurable-spaces]]” and a Borel-sigma-algebra link before completing the real-variable definition. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-real-exponential-function-and-e","finding":"Definition contains “provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]” and further inline links. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"def-series","finding":"Definition opens with “the complete ordered field ([[def-real-numbers]])” and includes further inline links throughout its defining clauses. These violate the uninterrupted-Definition rule.","severity":"presentation"},
+    {"item":"lem-derivative-of-a-power","finding":"Statement opens “Powers are those of [[def-integer-power]]” and contains further inline links. The complete Statement must precede its references.","severity":"presentation"},
+    {"item":"lem-of-naturals-positive","finding":"Statement contains “with field structure as in [[def-field]]” within its hypotheses. This violates the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-additivity-over-subintervals","finding":"Statement contains “([[def-bounded-set]])”, “([[def-darboux-integral]])”, and an oriented-integral link inside its clauses. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-algebra-of-continuous-functions","finding":"Statement contains “$c$ ([[def-continuity-real]]). Then:” and further inline links. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-algebra-of-derivatives","finding":"Statement contains “([[def-limit-point-r]])” and “([[def-derivative]])” within its hypotheses, with further links afterward. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-cauchy-condensation","finding":"Statement contains “a family from $1$ ([[def-series]])” and further inline links. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-cauchy-schwarz-finite","finding":"Statement contains “with finite sums as in [[def-finite-sum]]” and links the root theorem within the conclusion. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-chain-rule","finding":"Statement contains “([[def-limit-point-r]])” and “([[def-derivative]])” in the hypotheses. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-composition-of-continuous-functions","finding":"Statement contains “$c$ ([[def-continuity-real]])” immediately after the continuity conclusion and further links later in the section. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-continuous-implies-integrable","finding":"Statement contains “([[def-continuity-real]])”, “([[def-bounded-set]])”, and “([[def-darboux-integral]])” within its hypothesis and conclusion. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-expectation-of-products-of-independent-random-variables","finding":"Statement contains “with independence in the sense of [[def-independent-random-elements]]” and a finite-independence link later. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-ftc-second-part","finding":"Statement contains “([[def-derivative]]; at $a$ and $b$” and “([[def-darboux-integral]])” within its hypotheses. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-geometric-series","finding":"Statement contains “the integer power ([[def-integer-power]])” and “([[def-series]])” within its hypotheses and convergence conclusion. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-monotonicity-from-the-derivative","finding":"Statement contains “order-convex ([[def-interval]])” and further inline definition links. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-monotonicity-of-the-integral","finding":"Statement contains “([[def-darboux-integral]]). Then:” and further inline links in the section. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-nonnegative-series-bounded-partial-sums","finding":"Statement contains “the range of $(s_n)$ ([[def-series]])” and links boundedness and divergence definitions inside its clauses. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-nonnegative-weighted-sums-of-measures","finding":"Statement contains “branches of [[def-nonnegative-weighted-sum-of-measures]]” before completing its measure conclusion. This violates the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-of-archimedean","finding":"Statement contains “([[def-complete-ordered-field]])” and “([[def-ordered-field]])” within its hypotheses and conclusion. These violate the uninterrupted-Statement rule.","severity":"presentation"},
+    {"item":"thm-of-square-roots","finding":"Statement contains “Let $F$ be a complete ordered field ([[def-complete-ordered-field]])”. The hyperlink interrupts its complete Statement.","severity":"presentation"},
+    {"item":"thm-substitution","finding":"Statement contains “([[def-derivative]])”, “([[def-darboux-integral]])”, and further inline links within the substitution hypotheses and conclusion. These violate the uninterrupted-Statement rule.","severity":"presentation"}
+  ],
+  "seams_checked": [
+    {
+      "from": "stochastic-finite-armed-bandits",
+      "to": "online-decision-protocols",
+      "faithful": true,
+      "note": "Checked the producer protocol, feedback/environment, regret definitions, and finite-arm decomposition against the consuming model and proofs. The stack lemma supplies the exact eventwise conditional-law and conditional-mean identities; regret consumers preserve the decomposition's integrability and conditional-mean premises. Reward regret is consistently distinguished from pseudo-regret and adversarial static regret."
+    }
+  ]
+}

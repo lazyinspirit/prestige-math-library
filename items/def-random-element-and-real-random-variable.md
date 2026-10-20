@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-probability-measure, def-measurable-function-between-measurable-spaces, def-borel-sigma-algebra]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-random-element-and-real-random-variable.json
   audited: 2026-09-04
   precheck: n/a
   judge:
@@ -29,7 +30,13 @@ Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space and let
 $(S,\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable
 map
 $$X:(\Omega,\mathcal F)\to(S,\Sigma)$$
-in the sense of [[def-measurable-function-between-measurable-spaces]].
+in the sense of A measurable function between measurable spaces.
 
 When $S=\mathbb R$ and $\Sigma=\mathcal B(\mathbb R)$ from
-[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.
+The Borel sigma-algebra of a topological space, the map $X$ is a **real random variable**.
+
+## Definition references
+
+[[def-measurable-function-between-measurable-spaces]]
+
+[[def-borel-sigma-algebra]]

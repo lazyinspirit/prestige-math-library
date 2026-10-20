@@ -1,0 +1,243 @@
+{
+  "group": "d",
+  "batches": ["13"],
+  "pages_read": [
+    "ml02-linear-sparse-models",
+    "ml02-linear-sparse-models-examples"
+  ],
+  "items_read": [
+    "def-linear-regression-objectives",
+    "lem-gaussian-sample-covariance-operator-concentration",
+    "lem-chi-square-degree-ratio",
+    "lem-finite-gaussian-max-comparison",
+    "lem-standard-gaussian-maximum-expectation-lower-bound",
+    "cex-wainwright-conditional-covariance-eigenvalue-bound",
+    "fs-wainwright-lower-signed-support-threshold",
+    "thm-ols-and-ridge-solutions",
+    "lem-orthonormal-lasso-soft-thresholding",
+    "lem-lasso-active-set-stationarity",
+    "fs-wainwright-signed-support-threshold-claim",
+    "ex-correlated-predictors-and-shrinkage",
+    "ex-orthonormal-lasso-soft-thresholding",
+    "ex-beta-min-below-lasso-threshold-loses-support"
+  ],
+  "conventions": [
+    {
+      "convention": "Empirical squared loss is ||y−Xβ||²/(2n). Lasso adds λ||β||₁, so the equivalent published convention is n⁻¹||y−Xβ||²+2λ||β||₁.",
+      "fixed_by": "def-linear-regression-objectives",
+      "matters_for": [
+        "lem-orthonormal-lasso-soft-thresholding",
+        "lem-lasso-active-set-stationarity",
+        "fs-wainwright-lower-signed-support-threshold",
+        "fs-wainwright-signed-support-threshold-claim",
+        "ex-correlated-predictors-and-shrinkage",
+        "ex-orthonormal-lasso-soft-thresholding",
+        "ex-beta-min-below-lasso-threshold-loses-support"
+      ]
+    },
+    {
+      "convention": "Ridge uses the unaveraged objective ||y−Xβ||²+λ||β||² with λ>0. An explicitly separate intercept uses the stated unpenalized-intercept convention.",
+      "fixed_by": "def-linear-regression-objectives",
+      "matters_for": [
+        "thm-ols-and-ridge-solutions",
+        "ex-correlated-predictors-and-shrinkage",
+        "ex-orthonormal-lasso-soft-thresholding"
+      ]
+    },
+    {
+      "convention": "Orthonormal design means XᵀX=I_p, rather than nI_p. The Lasso threshold is nλ; sign(0)=0 and (u)₊=max(u,0).",
+      "fixed_by": "lem-orthonormal-lasso-soft-thresholding",
+      "matters_for": [
+        "ex-orthonormal-lasso-soft-thresholding",
+        "ex-beta-min-below-lasso-threshold-loses-support"
+      ]
+    },
+    {
+      "convention": "Signed-support success means existence of an optimizer with sign(β̂)=sign(β*), including zeros off the true support. The Gaussian models have independent observations, independent design and noise, unit-diagonal covariance, and no separate intercept.",
+      "fixed_by": "fs-wainwright-signed-support-threshold-claim",
+      "matters_for": [
+        "fs-wainwright-signed-support-threshold-claim",
+        "fs-wainwright-lower-signed-support-threshold"
+      ]
+    },
+    {
+      "convention": "The matrix infinity norm is the maximum absolute row sum. Conditional covariance is the displayed Schur complement; the corresponding block of the inverse covariance is its inverse.",
+      "fixed_by": "cex-wainwright-conditional-covariance-eigenvalue-bound",
+      "matters_for": [
+        "cex-wainwright-conditional-covariance-eigenvalue-bound",
+        "fs-wainwright-lower-signed-support-threshold",
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "convention": "The Gaussian helper lemmas explicitly assume AC. The upper-threshold refutation additionally states DC and countable choice to match its published Gaussian Lipschitz concentration supplier.",
+      "fixed_by": "fs-wainwright-signed-support-threshold-claim",
+      "matters_for": [
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-gaussian-sample-covariance-operator-concentration",
+      "statement": "Assume AC. Let d_k,n_k≥1 be integer sequences with d_k/n_k→0. For each k, let G_k∈R^{n_k×d_k} have mutually independent N(0,1) entries. Then ||G_kᵀG_k/n_k−I_{d_k}||op→0 in probability.",
+      "used_by": [
+        "fs-wainwright-lower-signed-support-threshold",
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "id": "lem-chi-square-degree-ratio",
+      "statement": "Assume AC. Let r_k,n_k be positive integers with n_k→∞ and r_k/n_k→1. For each k, let Z_{k,1},…,Z_{k,r_k} be independent N(0,1) random variables and set D_k=Σ_j Z_{k,j}². Then D_k/n_k→1 in probability.",
+      "used_by": [
+        "fs-wainwright-lower-signed-support-threshold",
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "id": "lem-finite-gaussian-max-comparison",
+      "statement": "Assume AC. Let m≥2, and let X,Y∈R^m be independent, centered Gaussian vectors with finite covariance matrices. If E[(X_i−X_j)²]≥E[(Y_i−Y_j)²] for every i,j∈{1,…,m}, then E[max_i X_i]≥E[max_i Y_i].",
+      "used_by": [
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "id": "lem-standard-gaussian-maximum-expectation-lower-bound",
+      "statement": "Assume AC. There is an integer m₀ such that for every m≥m₀ and independent standard-normal random variables G₁,…,G_m, E[max_{1≤i≤m}G_i]≥(1/4)√log m.",
+      "used_by": [
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "id": "lem-lasso-active-set-stationarity",
+      "statement": "Let X∈R^{n×p}, y∈R^n, λ>0, and nonempty S⊆{1,…,p}. Assume X_S has full column rank. If an optimizer of ||y−Xβ||²/(2n)+λ||β||₁ has support exactly S and active sign vector b, then β̂_S=(X_SᵀX_S/n)⁻¹(X_Sᵀy/n−λb). This is a necessary active-coordinate condition only.",
+      "used_by": [
+        "fs-wainwright-signed-support-threshold-claim"
+      ]
+    },
+    {
+      "id": "lem-orthonormal-lasso-soft-thresholding",
+      "statement": "Let n,p≥1, X∈R^{n×p} satisfy XᵀX=I_p, y∈R^n, and λ>0. The objective ||y−Xβ||²/(2n)+λ||β||₁ has the unique minimizer β̂_j=S_{nλ}((Xᵀy)_j), where S_a(t)=sign(t)(|t|−a)₊.",
+      "used_by": [
+        "ex-orthonormal-lasso-soft-thresholding",
+        "ex-beta-min-below-lasso-threshold-loses-support"
+      ]
+    },
+    {
+      "id": "thm-ols-and-ridge-solutions",
+      "statement": "For n,p≥1, X∈R^{n×p}, and y∈R^n, OLS minimizers are exactly the solutions of XᵀXβ=Xᵀy and form β₀+ker X. This set is a singleton iff the columns of X are linearly independent. For every λ>0, ||y−Xβ||²+λ||β||² has unique minimizer (XᵀX+λI_p)⁻¹Xᵀy.",
+      "used_by": [
+        "ex-correlated-predictors-and-shrinkage",
+        "ex-orthonormal-lasso-soft-thresholding"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-lasso-estimator",
+      "used_for": "Checks the equivalence between the published Lasso normalization and the batch's empirical-loss convention.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumption carried by Gaussian constructions and concentration arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Choice assumption explicitly carried by the upper-threshold refutation's Gaussian concentration supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice assumption explicitly carried by the upper-threshold refutation's Gaussian concentration supplier.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Finite Gaussian realizations, linear projections, covariance calculations, and singular conditional Gaussian vectors.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian densities, elementary moment and moment-generating-function calculations, and tail estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Chernoff bounds and second-moment probability bounds in helper lemmas and both threshold refutations.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Quadratic-form characterization of the operator norm of symmetric matrices.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+      "used_for": "The net-to-operator-norm estimate in Gaussian sample covariance concentration.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Differentiation and endpoint limits in the finite Gaussian comparison interpolation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Independent Gaussian couplings in finite maximum comparison and the upper-threshold refutation.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Factorization and orthogonal invariance of standard Gaussian coordinates, including fixed-projector conditional calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product-law calculations for independent Gaussian coordinates and observations.",
+      "opened": true
+    },
+    {
+      "id": "thm-standard-gaussian-lipschitz-concentration",
+      "used_for": "A lower-tail bound for the conditional Gaussian maximum by applying the upper-tail theorem to minus the maximum.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "Existence, normal equations, and the full affine set of OLS minimizers.",
+      "opened": true
+    },
+    {
+      "id": "def-tikhonov-regularised-least-squares",
+      "used_for": "The unaveraged positive-penalty ridge objective, also checked against the LinUCB seam.",
+      "opened": true
+    },
+    {
+      "id": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+      "used_for": "Ridge existence, uniqueness, and closed-form minimizer; consistency of LinUCB's sample-sum normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Diagonalization of XᵀX and invertibility after adding a strictly positive ridge term.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "ml02-federated-optimization",
+      "to": "ml02-linear-sparse-models",
+      "faithful": true,
+      "note": "The consumer page declares this prerequisite. Its item inventory has no direct citation to an assigned batch-13 item. The federated objective definition distinguishes sample-count weighting from equal-client weighting and imports no Lasso threshold or ridge guarantee; there is no stronger supplier proposition asserted across this edge."
+    },
+    {
+      "from": "linear-contextual-bandits-and-linucb",
+      "to": "ml02-linear-sparse-models",
+      "faithful": true,
+      "note": "The consumer page declares this prerequisite, but its items cite the published Tikhonov suppliers directly. The bandit model explicitly uses unaveraged squared-error sums plus λ||θ||² and estimate (λI+ΣAAᵀ)⁻¹ΣAX, consistent with the batch's ridge convention. No batch-13 item cites either downstream seam page."
+    }
+  ]
+}

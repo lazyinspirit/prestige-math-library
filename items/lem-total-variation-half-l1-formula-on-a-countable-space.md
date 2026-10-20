@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-total-variation-half-l1-formula-on-a-countable-space.json
   audited: 2026-10-02
   precheck: pass
   judge:
@@ -31,7 +32,7 @@ sources:
 
 Let $E$ be an at most countable set equipped with the power-set
 $\sigma$-algebra $2^E$, and let $\mu,\nu$ be probability laws on $E$
-([[def-total-variation-distance-for-probability-laws]]). Then
+(Total variation distance for probability laws). Then
 
 $$\lVert\mu-\nu\rVert_{\mathrm{TV}}=\frac12\sum_{x\in E}\bigl|\mu(x)-\nu(x)\bigr| ,$$
 
@@ -39,6 +40,10 @@ where $\mu(x),\nu(x)$ denote the singleton masses and the series on the right
 is a series of nonnegative numbers in $[0,+\infty]$. The value is finite; it is
 $0$ exactly when $\mu=\nu$. The supremum defining the total variation distance
 is attained at the event $A_+=\{x\in E:\mu(x)>\nu(x)\}$.
+
+## Statement references
+
+[[def-total-variation-distance-for-probability-laws]]
 
 ## Facts & Assumptions
 

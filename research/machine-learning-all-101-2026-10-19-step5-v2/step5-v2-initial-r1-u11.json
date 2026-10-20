@@ -1,0 +1,381 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-adversarial-threat-set-and-robust-risk",
+      "model": "gpt-6-luna",
+      "context_sha256": "18ec708acd179be9bf72fc19d847caee4f0fb817596721a78b45fc70aed8498b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The general outer-risk definition is sound, but the final binary specialization omitted the discrete binary label/action spaces and its zero-one loss. These conventions are now explicit; the nonempty-threat supremum, closed balls, and measurable-majorant definition are unchanged. This is a nonfatal specification omission, not a counterexample to the outer-risk definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-binary-feature-bernoulli-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "7ab920acabca1178d485c52ae08473b345944975101024b6261f5942fbbb2682",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The displayed finite conditional law already proves conditional independence. The reference note incorrectly omitted the conditioning law: coordinate sigma-algebras are independent under each law given Y=y (and observations under each fixed Theta=theta), not necessarily under the unconditional mixture. Repaired only that note; the Definition is byte-for-byte unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-architecture-dependent-robustness-binary-feature-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "96a32062f4664ce4a45eb0b23afbb0f3e172676ab5048907ee80f09734ebb70f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.1 attributes exp(log r)=r to F5 although that fact lists only logarithm laws and its integral formula. The already declared dependency def-natural-logarithm explicitly gives the inverse identity, so this is a nonfatal local citation omission. Added the identity and its exact existing supplier to F5. Both branches, constants, posterior independence, zero-weight/no-sample cases and strict radius<1 threshold invariance remain sound; Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-robust-sample-upper-bound-gaussian-mixture",
+      "model": "gpt-6-luna",
+      "context_sha256": "5e622448a4750f3a4c61e76640739622f7ccd040d22ae9cb51d96839dddb7433",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "F1 bounds the normalized-or-fallback direction and does not exclude W=0, so the original inference W!=0 and consequent replacement of f_W by f_U had an unsupported logical step. Repaired Proof 1.1: conditional on all labels, the independent scalar normals Y_i X_i1 have mean theta_1 and variance sigma^2; their average is N(theta_1,sigma^2/n), hence atomless and P(W=0)<=P(W_1=0)=0. Removing this null event preserves the alignment probability and the positive normalization. Statement, constants, closed radius and tie convention are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-adversarial-threat-set-and-robust-risk",
+      "disposition": "repaired",
+      "post_sha256": "d6479b7ba3a374eb3dd4af82159089941ac9e244319ca802a30d8a2d2174b982",
+      "review_context_sha256": "f56e88a97213f3b9fab777cfc1667cf8c5b3ebf878f23cbfb11a00ba3afc009c",
+      "reason": "Reviewed measurable loss and outer-majorant definition; made only the binary specialization's discrete label/action spaces and zero-one loss explicit. All seven direct consumers already have binary labels and outputs.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-binary-feature-bernoulli-model",
+      "disposition": "repaired",
+      "post_sha256": "d019faf46ff2e0fea56db249a57a7d23b8a36486b37106cdaecb41ef550e0561",
+      "review_context_sha256": "b84d59e4646eb092032ff7afc32c35ab9dee4a9b99103abe22473f89f845f74a",
+      "reason": "Checked finite product masses normalize including tau=1/2. Repaired the reference note to take independence under each conditioning law; the Definition itself is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-architecture-dependent-robustness-binary-feature-model",
+      "disposition": "repaired",
+      "post_sha256": "84693f19385130935b5ca84663da5923d610bb897ff92ce474e45e42de03a930",
+      "review_context_sha256": "6d8e9dce69bce0f9c20105025ba1cdfb4a286e58ec2190e2bf28f205f564aa5c",
+      "reason": "Verified both Bernoulli branches, posterior-mean bound, finite coupling and threshold invariance. Added the already declared logarithm definition to F5, which now supplies its inverse identity; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-robust-sample-upper-bound-gaussian-mixture",
+      "disposition": "repaired",
+      "post_sha256": "761208de4594763c642ca360f91f953aa73241f621e4fed8cad6191546b7ee4c",
+      "review_context_sha256": "48f58b3920860b6f7b41a23f103b3ba47650af69761ca0e838be91b3578b2bd0",
+      "reason": "Verified W_1 is N(theta_1,sigma^2/n) and atomless, so removing W=0 preserves the alignment probability. Checked measurable margin majorant, Gaussian tail and both sample-size constants; Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-common-shift-robust-risk-lower-bound",
+    "thm-robust-sample-upper-bound-gaussian-mixture",
+    "thm-robust-sample-lower-bound-gaussian-mixture",
+    "thm-architecture-dependent-robustness-binary-feature-model",
+    "ex-bernoulli-perturbations-preserve-signs",
+    "ex-gaussian-robust-risk-dimension-radius-scaling",
+    "ex-natural-and-robust-risk-on-gaussian-model"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "def-adversarial-threat-set-and-robust-risk",
+      "severity": "nonfatal",
+      "class": "accuracy",
+      "subclass": "missing-hypothesis",
+      "location": "definition",
+      "disposition": "fixed",
+      "reason": "Reviewed measurable loss and outer-majorant definition; made only the binary specialization's discrete label/action spaces and zero-one loss explicit. All seven direct consumers already have binary labels and outputs.",
+      "post_sha256": "d6479b7ba3a374eb3dd4af82159089941ac9e244319ca802a30d8a2d2174b982",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "def-binary-feature-bernoulli-model",
+      "severity": "nonfatal",
+      "class": "accuracy",
+      "subclass": "citation-inaccurate",
+      "location": "remark",
+      "disposition": "fixed",
+      "reason": "Checked finite product masses normalize including tau=1/2. Repaired the reference note to take independence under each conditioning law; the Definition itself is unchanged.",
+      "post_sha256": "d019faf46ff2e0fea56db249a57a7d23b8a36486b37106cdaecb41ef550e0561",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "thm-architecture-dependent-robustness-binary-feature-model",
+      "severity": "nonfatal",
+      "class": "accuracy",
+      "subclass": "citation-missing",
+      "location": "facts-block",
+      "disposition": "fixed",
+      "reason": "Verified both Bernoulli branches, posterior-mean bound, finite coupling and threshold invariance. Added the already declared logarithm definition to F5, which now supplies its inverse identity; Statement unchanged.",
+      "post_sha256": "84693f19385130935b5ca84663da5923d610bb897ff92ce474e45e42de03a930",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-repaired-finding",
+      "id": "thm-robust-sample-upper-bound-gaussian-mixture",
+      "severity": "fatal",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "location": "proof-step",
+      "disposition": "fixed",
+      "reason": "Verified W_1 is N(theta_1,sigma^2/n) and atomless, so removing W=0 preserves the alignment probability. Checked measurable margin majorant, Gaussian tail and both sample-size constants; Statement unchanged.",
+      "post_sha256": "761208de4594763c642ca360f91f953aa73241f621e4fed8cad6191546b7ee4c",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "reason": "All assigned items and all direct consumers are draft frontier items; no published carrier was changed and no published consumer defect was found.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "items": [
+      {
+        "id": "def-adversarial-threat-set-and-robust-risk",
+        "claim": "General outer risk retained; binary specialization now has discrete action and label spaces {-1,+1}.",
+        "sources_consulted": [
+          "items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md#Definition",
+          "items/def-probability-measure.md#Definition",
+          "items/def-function.md#Definition",
+          "items/def-measurable-space.md#Definition",
+          "items/def-measurable-function-between-measurable-spaces.md#Definition",
+          "items/def-product-sigma-algebra-and-finite-product-sigma-algebras.md#Definition"
+        ]
+      },
+      {
+        "id": "def-binary-feature-bernoulli-model",
+        "claim": "Finite Bernoulli product masses and uniform-prior conditional experiment unchanged; product normalization includes tau=1/2.",
+        "sources_consulted": [
+          "items/def-independent-random-elements.md#Definition",
+          "items/def-independent-sigma-algebras-and-events.md#Definition",
+          "items/def-probability-measure.md#Definition"
+        ],
+        "validation": "Directly summed the two masses of every coordinate and the two label weights; positive label probabilities make every stated conditional law well-defined."
+      },
+      {
+        "id": "thm-architecture-dependent-robustness-binary-feature-model",
+        "claim": "Lower bound 1/2-gamma and thresholded one-sample upper bound beta are unchanged.",
+        "sources_consulted": [
+          "items/def-natural-logarithm.md#Definition: exp(log r)=r for every positive r",
+          "items/lem-bernoulli-coordinate-posterior-odds-bound.md#Statement and Proof",
+          "items/lem-finite-independent-sign-sum-tail.md#Statement and Proof",
+          "items/alg-coordinate-threshold-preprocessing.md#Definition",
+          "items/thm-natural-logarithm-laws.md#Statement",
+          "items/thm-logarithm-derivative-and-integral.md#Statement",
+          "items/def-real-exponential-function-and-e.md#Definition",
+          "items/cor-markov-inequality-for-random-variables.md#Statement",
+          "items/thm-linearity-of-the-lebesgue-integral-on-l-one.md#Statement"
+        ],
+        "validation": "Checked n<tau^-2, B<=0.3 epsilon gamma/tau<1 and a=2tau B<=0.6 epsilon gamma<1. Product posterior yields independent fresh signed coordinates; coordinatewise domination and Bernoulli/symmetric decomposition give probability >=(1-gamma)/2. Multiplication by 1-gamma/2 gives >=1/2-gamma. Upper branch sign tail gives exp(-2tau^4 d)<=beta. No diagrams occur or are needed.",
+        "metadata_repair": "Added current Definition quotation for F5/def-natural-logarithm and refreshed only this assigned contract's cited source sections."
+      },
+      {
+        "id": "thm-robust-sample-upper-bound-gaussian-mixture",
+        "claim": "Same Gaussian robust-risk upper bound and both 1/100 sample-size corollaries; no Statement change.",
+        "sources_consulted": [
+          "items/lem-gaussian-sample-mean-signal-alignment.md#Statement and Proof 1.1–4.1",
+          "items/def-two-class-spherical-gaussian-mixture-model.md#Definition",
+          "items/def-multivariate-normal-law.md#Definition",
+          "items/def-standard-normal-and-normal-laws.md#Definition",
+          "items/lem-characteristic-functions-under-affine-maps-and-independent-sums.md#Statement",
+          "items/lem-characteristic-function-of-a-normal-law.md#Statement",
+          "items/thm-uniqueness-of-a-law-from-its-characteristic-function.md#Statement",
+          "items/lem-gaussian-vector-norm-concentration.md#Statement and Proof",
+          "items/thm-cauchy-schwarz-and-the-euclidean-norm.md#Statement",
+          "items/alg-gaussian-mixture-robust-mean-classifier.md#Definition"
+        ],
+        "validation": "Verified independent normal averages using conditional product sampling, scalar characteristic functions and uniqueness. Positive sigma and n>=1 ensure nondegenerate coordinate law. Robust loss is bounded by a Borel margin event including score ties. Gaussian tail and ||u||_1<=sqrt(d) prove beta bound. With D=d^(1/4), checked k<4, A_n>=8/(17D), 47/(136D)>1/(4D), and second regime A_n>=32 epsilon/11. No diagrams occur or are needed.",
+        "metadata_repair": "Added def-standard-normal-and-normal-laws to this item and its owning manifest dependency list; added F7 citation, mapped F2/F7 to step 1.1, synchronized that derivation and the zero boundary. Only assigned contract entries were changed."
+      }
+    ],
+    "interface_change": "Only the final binary zero-one specialization in Definition now specifies discrete binary action/label spaces and ell(a,y)=1{a!=y}. General robust risk is unchanged.",
+    "consumer_examinations": [
+      {
+        "id": "lem-common-shift-robust-risk-lower-bound",
+        "path": "items/lem-common-shift-robust-risk-lower-bound.md",
+        "affected_use": "Facts F1 and Proof 1.2–2.1 use binary robust loss at the explicit shift -Y mu and monotonicity of each measurable majorant. Statement supplies Y uniform on {-1,+1} and a Borel binary classifier, so the clarified discrete binary specialization applies unchanged.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "[F1] Robust risk is the infimum of expectations of nonnegative measurable majorants of the pointwise robust loss; the $\\ell_\\infty$ threat includes every $x+\\delta$ with $\\|\\delta\\|_\\infty\\le\\epsilon$. [[def-adversarial-threat-set-and-robust-risk]].",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered.",
+        "metadata_followup": "Owner: refresh only this consumer contract's exact def-adversarial-threat-set-and-robust-risk Definition quotation in research/machine-learning-all-101-2026-10-19-batch-11.proof-contracts.json. Its old full quotation is now stale; this unassigned consumer contract entry was not edited."
+      },
+      {
+        "id": "thm-robust-sample-upper-bound-gaussian-mixture",
+        "path": "items/thm-robust-sample-upper-bound-gaussian-mixture.md",
+        "affected_use": "Facts F5 and Proof 1.3/2.1 majorize binary robust loss by the normal signed-margin indicator. Gaussian labels and f_W have values {-1,+1}; the discrete convention matches and no statement or proof change is needed from this supplier event.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "[F5] The $\\ell_\\infty$ robust loss is the indicator that some perturbation of $\\ell_\\infty$ norm at most $\\epsilon$ changes the label, and robust risk is the infimum over measurable nonnegative majorants. [[def-adversarial-threat-set-and-robust-risk]].",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered."
+      },
+      {
+        "id": "thm-robust-sample-lower-bound-gaussian-mixture",
+        "path": "items/thm-robust-sample-lower-bound-gaussian-mixture.md",
+        "affected_use": "Facts F3 and Proof 1.3/2.1 use the loss at shift -Y m(S) and its measurable lower bound. The sample model has binary labels and Borel F is binary-valued; outer majorants are unchanged, so this use remains sound.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "[F3] Robust risk is the infimum of expectations of nonnegative measurable majorants of pointwise robust loss, and the $\\ell_\\infty$ threat admits every shift of norm at most $\\epsilon$. [[def-adversarial-threat-set-and-robust-risk]].",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered.",
+        "metadata_followup": "Owner: refresh only this consumer contract's exact def-adversarial-threat-set-and-robust-risk Definition quotation in research/machine-learning-all-101-2026-10-19-batch-11.proof-contracts.json. Its old full quotation is now stale; this unassigned consumer contract entry was not edited."
+      },
+      {
+        "id": "thm-architecture-dependent-robustness-binary-feature-model",
+        "path": "items/thm-architecture-dependent-robustness-binary-feature-model.md",
+        "affected_use": "Facts F8 and Proof 5.1 use a label-dependent admissible perturbation to make Y<w,X+delta> negative. Both Bernoulli labels and f_w are binary, so the clarified zero-one loss applies; the thresholded upper branch also has binary output.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "[F8] Under the closed $\\ell_\\infty$ threat, robust zero-one loss is one exactly when some admissible perturbation changes the label. [[def-adversarial-threat-set-and-robust-risk]].",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered."
+      },
+      {
+        "id": "ex-bernoulli-perturbations-preserve-signs",
+        "path": "items/ex-bernoulli-perturbations-preserve-signs.md",
+        "affected_use": "Facts F3 and Proof 2.1 identify the robust loss on each finite support point as 1{g(x) != y}. Both g and the Bernoulli labels are binary, so the risk equality and sign-preservation argument remain sound.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "[F3] Robust zero-one loss is one exactly when some admissible perturbation changes the label; robust risk is the expectation of this loss. [[def-adversarial-threat-set-and-robust-risk]].",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered.",
+        "metadata_followup": "Owner: refresh only this consumer contract's exact def-adversarial-threat-set-and-robust-risk Definition quotation in research/machine-learning-all-101-2026-10-19-batch-11.proof-contracts.json. Its old full quotation is now stale; this unassigned consumer contract entry was not edited."
+      },
+      {
+        "id": "ex-gaussian-robust-risk-dimension-radius-scaling",
+        "path": "items/ex-gaussian-robust-risk-dimension-radius-scaling.md",
+        "affected_use": "The deps edge includes the robust-risk definition; Example and Proof 1.1/2.1 use binary Gaussian robust risk through the two Gaussian bound suppliers. The explicit model is binary and the general outer-risk convention is unchanged.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "  - def-adversarial-threat-set-and-robust-risk",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered."
+      },
+      {
+        "id": "ex-natural-and-robust-risk-on-gaussian-model",
+        "path": "items/ex-natural-and-robust-risk-on-gaussian-model.md",
+        "affected_use": "The deps edge includes robust risk; Example and Proof 2.1 use the prior-averaged lower bound for a Borel binary learning rule F. Both labels and predictions are explicitly {-1,+1}, so the clarified specialization preserves the use.",
+        "disposition": "unaffected",
+        "reason": "The consumer already has discrete binary labels and binary predictions; no claim is invalidated.",
+        "source_excerpt": "  - def-adversarial-threat-set-and-robust-risk",
+        "invalidated_claim": "None: the clarified binary specialization matches this consumer's existing label and prediction spaces.",
+        "minimality": "No item edit is needed. Statements are unchanged, so no further consumer hop is triggered."
+      }
+    ],
+    "page_examination": {
+      "path": "library/machine-learning/adversarial-robustness-and-robust-risk.md",
+      "disposition": "unaffected",
+      "reason": "Frontmatter-only compact page places the definition; it asserts no additional mathematics."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-adversarial-threat-set-and-robust-risk.md items/def-binary-feature-bernoulli-model.md items/thm-architecture-dependent-robustness-binary-feature-model.md items/thm-robust-sample-upper-bound-gaussian-mixture.md --json",
+        "exit_code": 0,
+        "result": "4 files; 2 proof-bearing items passed; 2 definitions not applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-adversarial-threat-set-and-robust-risk.md items/def-binary-feature-bernoulli-model.md items/thm-architecture-dependent-robustness-binary-feature-model.md items/thm-robust-sample-upper-bound-gaussian-mixture.md library/machine-learning/adversarial-robustness-and-robust-risk.md library/machine-learning/adversarial-robustness-and-robust-risk-examples.md --json",
+        "exit_code": 0,
+        "result": "6 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-11.proof-contracts.json --strict --items thm-architecture-dependent-robustness-binary-feature-model,thm-robust-sample-upper-bound-gaussian-mixture --json",
+        "exit_code": 0,
+        "result": "Both assigned theorem contracts passed. One nonblocking shotgun-bracket warning on Gaussian step 1.1; its cited facts are all actually used. An initial failed contract check found two missing F5 use mappings, which were repaired before this successful check."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-adversarial-threat-set-and-robust-risk.md items/def-binary-feature-bernoulli-model.md items/thm-architecture-dependent-robustness-binary-feature-model.md items/thm-robust-sample-upper-bound-gaussian-mixture.md",
+        "exit_code": 0,
+        "result": "4 items, 19 steps, 0 defects; run once after final item edits."
+      },
+      {
+        "command": "Current itemHashGuard comparison against all four recorded reviews",
+        "exit_code": 0,
+        "result": "All four post_sha256 values match. Review contexts were captured immediately after each completed mathematical review and were not refreshed."
+      }
+    ],
+    "outside_scope_findings": [
+      {
+        "path": "items/thm-robust-sample-lower-bound-gaussian-mixture.md",
+        "affected_use": "Statement joins the first display directly to prose as $$Consequently, if and then$$ before the second display.",
+        "disposition": "Report to owner; unassigned presentation defect confirmed against current Statement; no item edit."
+      },
+      {
+        "path": "items/lem-bernoulli-coordinate-posterior-odds-bound.md",
+        "affected_use": "Statement joins the posterior-odds display to prose as $$Moreover, and introduces the final display immediately after experiment,$$.",
+        "disposition": "Report to owner; unassigned presentation defect confirmed against current Statement; no item edit."
+      },
+      {
+        "path": "research/machine-learning-all-101-2026-10-19-batch-11.cross-batch-dependencies.json",
+        "affected_use": "Owning A page requires mixed-effects-and-longitudinal-models, but the complete cross-batch metadata contains only central-limit-theorems, finite-class-pac-learning-and-erm and relations-functions-and-quotients.",
+        "disposition": "Report digest concern to page/metadata owner; no assigned item depends on editing this page-edge report."
+      }
+    ],
+    "publication_maintenance": "All four assigned items and all seven direct consumers are draft members of the frozen frontier. No published or outside-frontier direct consumer was discovered or edited. No published maintenance repair is proposed.",
+    "source_honesty": "These finite-probability, Gaussian projection and elementary-analysis arguments are familiar. Consulted the local suppliers listed above; no external source reading or independent review of these repairs is claimed."
+  },
+  "downstream_uses": {
+    "lem-common-shift-robust-risk-lower-bound": "Facts F1 and Proof 1.2–2.1 use binary robust loss at the explicit shift -Y mu and monotonicity of each measurable majorant. Statement supplies Y uniform on {-1,+1} and a Borel binary classifier, so the clarified discrete binary specialization applies unchanged.",
+    "thm-robust-sample-upper-bound-gaussian-mixture": "Facts F5 and Proof 1.3/2.1 majorize binary robust loss by the normal signed-margin indicator. Gaussian labels and f_W have values {-1,+1}; the discrete convention matches and no statement or proof change is needed from this supplier event.",
+    "thm-robust-sample-lower-bound-gaussian-mixture": "Facts F3 and Proof 1.3/2.1 use the loss at shift -Y m(S) and its measurable lower bound. The sample model has binary labels and Borel F is binary-valued; outer majorants are unchanged, so this use remains sound.",
+    "thm-architecture-dependent-robustness-binary-feature-model": "Facts F8 and Proof 5.1 use a label-dependent admissible perturbation to make Y<w,X+delta> negative. Both Bernoulli labels and f_w are binary, so the clarified zero-one loss applies; the thresholded upper branch also has binary output.",
+    "ex-bernoulli-perturbations-preserve-signs": "Facts F3 and Proof 2.1 identify the robust loss on each finite support point as 1{g(x) != y}. Both g and the Bernoulli labels are binary, so the risk equality and sign-preservation argument remain sound.",
+    "ex-gaussian-robust-risk-dimension-radius-scaling": "The deps edge includes the robust-risk definition; Example and Proof 1.1/2.1 use binary Gaussian robust risk through the two Gaussian bound suppliers. The explicit model is binary and the general outer-risk convention is unchanged.",
+    "ex-natural-and-robust-risk-on-gaussian-model": "The deps edge includes robust risk; Example and Proof 2.1 use the prior-averaged lower bound for a Borel binary learning rule F. Both labels and predictions are explicitly {-1,+1}, so the clarified specialization preserves the use."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-11.pages.json": "78684c658fb92f4182172386659361afce94aa80285bf9da1618ec03d23ab3d0",
+    "research/machine-learning-all-101-2026-10-19-batch-11.proof-contracts.json": "b257e63f7792ceb0b4c599adc4e87a878bdba7aef5ca036d98fc72dc4f4b6a7b"
+  }
+}

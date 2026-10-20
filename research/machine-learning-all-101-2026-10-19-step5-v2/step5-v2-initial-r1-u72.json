@@ -1,0 +1,229 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "72",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "def-top-label-calibration",
+      "model": "gpt-6-luna",
+      "context_sha256": "01efe80a10fe87ec6c973a49e203f64dfe08da8c4e38ca3f05e9e2e5a24c19fa",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Measurability is missing: take Omega={a,b}, F={empty,Omega}, constant G=(1,0), and Y(a)=1,Y(b)=2. Then {Y=Yhat}={a} is not an event. Requiring Y to be a random variable restores the event-integral definition and matches def-probability-calibration.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-positive-temperature-scaling-preserves-argmax",
+      "model": "gpt-6-luna",
+      "context_sha256": "eaad6fdc90a9a880417d0ebadc1b6871bdff7a0ac149adb3ed27ff461c42783b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The simplex is contained in sum_j p_j=1, so its ambient Euclidean interior is empty. Positive softmax coordinates give relative interior instead. Specified the affine hyperplane and proved a relative ball of radius half the smallest coordinate lies in the simplex; argmax and finite-grid conclusions are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-calibration-degradation-under-shift",
+      "model": "gpt-6-luna",
+      "context_sha256": "105b81bf2ee9f13352ee86ffbc28b5dbf4b39046b22afa093bcb48cf3bc14e57",
+      "outcome": "false_positive",
+      "reason": "The classification algorithm lists alg-split-conformal-prediction-set in deps and its Definition references. Substitute the finite label space and s_H(x,y)=s(H,x,y) into the general Definition: both use R_i=s_H(X_i,Y_i), the identical k=ceil((m+1)(1-alpha)), sorting by (R_i,i), the same infinity branch, and C(x)={y:s_H(x,y)<=q}. Thus the sets are literally equal for every input, including ties. In the third model constant H is training-measurable, Q=mu tensor mu is an exchangeable regular conditional law under trivial training, and the finite score rule is jointly measurable. The coverage theorem therefore applies. Independently enumerating the four feature pairs gives marginal coverage 91/100 and rare-feature coverage 1/10. No separate identification theorem is needed for this direct substitution.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-top-label-calibration",
+      "disposition": "repaired",
+      "post_sha256": "24331a89c3384c2eed60797710f98f480306140aa2a1be686d554b3bc1ee40c4",
+      "review_context_sha256": "599cdce64be8c45fe1e629b4d768363f30e64a1d1661c850772bcb69f34f324e",
+      "reason": "Required a measurable finite-label random variable. Finite maxima and smallest-index comparisons make C and Yhat measurable, so the correctness event is a finite union of measurable label intersections and the bounded confidence integral exists. The calibration identity and tie convention are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-positive-temperature-scaling-preserves-argmax",
+      "disposition": "repaired",
+      "post_sha256": "b8e5e87eb58f8ff0e8a30aaaaad681ade9510a84035765efcd8a88c36c4adaaa",
+      "review_context_sha256": "b8305d93fd44bd5887207ae7dfbf85db3455ef77f481815e46e672efe95cbe4a",
+      "reason": "Positive finite exponential weights normalize to one and yield a relative neighborhood inside the simplex. Positive T and strictly increasing exp preserve every strict comparison and tie. Every validation logarithm is real and a finite nonempty temperature grid has a unique smallest minimizer. Checked actual exponential, log and procedure interfaces; no AC or diagram is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-calibration-degradation-under-shift",
+      "disposition": "unaffected",
+      "post_sha256": "c70db3e90451d1db473b79234f1ae928d2c5306098ace2a04df5175b67d67f62",
+      "review_context_sha256": "5ee3f6ff29c51653f860f89a6d63ffa98546bb9ecb216e73bfba6b478c8febdd",
+      "reason": "All four cases are sound: the first event sides are 1 and 9/10; strict log propriety on empirical frequencies (3/4,1/4) selects T=2 with ECE 0 instead of 3/20; the identical general/classification conformal procedure has marginal coverage 91/100 and rare coverage 1/10; the clean/corrupted pair fails exchangeability and gives an empty target set. The repaired measurable-label hypothesis holds on the one-point model and the unchanged argmax conclusion supplies step 1.2. Ovadia Sections 2-5, pp. 3-9, support the empirical scope, image shifts, text mixtures and Criteo caveats; no universal ranking is asserted. Only stale contract quotations were synchronized with current supplier sections; the item guard is unchanged.",
+      "metadata_repair_only": true,
+      "uncertain": false,
+      "source_urls": [
+        "https://proceedings.neurips.cc/paper/9547-can-you-trust-your-models-uncertainty-evaluating-predictive-uncertainty-under-dataset-shift.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-binned-expected-calibration-error",
+    "ex-calibration-degradation-under-shift",
+    "alg-validation-temperature-scaling"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-top-label-calibration",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "Measurability is missing: take Omega={a,b}, F={empty,Omega}, constant G=(1,0), and Y(a)=1,Y(b)=2. Then {Y=Yhat}={a} is not an event. Requiring Y to be a random variable restores the event-integral definition and matches def-probability-calibration.",
+      "status": "fixed",
+      "post_sha256": "24331a89c3384c2eed60797710f98f480306140aa2a1be686d554b3bc1ee40c4",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-positive-temperature-scaling-preserves-argmax",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "finding": "The simplex is contained in sum_j p_j=1, so its ambient Euclidean interior is empty. Positive softmax coordinates give relative interior instead. Specified the affine hyperplane and proved a relative ball of radius half the smallest coordinate lies in the simplex; argmax and finite-grid conclusions are unchanged.",
+      "status": "fixed",
+      "post_sha256": "b8e5e87eb58f8ff0e8a30aaaaad681ade9510a84035765efcd8a88c36c4adaaa",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-top-label-calibration",
+      "severity": "nonfatal",
+      "locus": "proof-contract boundary endpoints",
+      "finding": "The contract claimed top confidence C may equal zero, but K nonnegative coordinates summing to one imply C>=1/K. Corrected the worksheet to 1/K<=C<=1; the definition itself did not assert C=0.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed": [
+      "def-top-label-calibration",
+      "thm-positive-temperature-scaling-preserves-argmax",
+      "ex-calibration-degradation-under-shift"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-top-label-calibration.md items/thm-positive-temperature-scaling-preserves-argmax.md items/ex-calibration-degradation-under-shift.md --json",
+        "exit_code": 0,
+        "result": "3 files; 2 phase proofs pass, definition not applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-top-label-calibration.md items/thm-positive-temperature-scaling-preserves-argmax.md items/ex-calibration-degradation-under-shift.md --json",
+        "exit_code": 0,
+        "result": "3 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-top-label-calibration.md items/thm-positive-temperature-scaling-preserves-argmax.md",
+        "exit_code": 0,
+        "result": "2 changed items, 3 numbered steps, 0 defects; run after final item edits."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-72.proof-contracts.json --strict --items def-top-label-calibration,thm-positive-temperature-scaling-preserves-argmax,ex-calibration-degradation-under-shift --json",
+        "exit_code": 0,
+        "result": "All 3 assigned entries pass without warnings after exact source-quote and derivation/assertion synchronization."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-72.proof-contracts.json --items def-top-label-calibration,thm-positive-temperature-scaling-preserves-argmax,ex-calibration-degradation-under-shift --json",
+        "exit_code": 0,
+        "result": "9 bounded fixtures passed: 2 confidence-event, 3 temperature/argmax, 4 calibration/shift fixtures; these do not prove the general claims."
+      },
+      {
+        "command": "Read-only report validation against initial-1.json assignments, frontier.json ids and itemHashGuard for all three current item carriers.",
+        "exit_code": 0,
+        "result": "Exact rejected tuple coverage, frontier membership, current guards, evidence fields and repaired/unaffected dispositions pass."
+      }
+    ],
+    "next_action": "Controller collection, downstream frontier-owner accounting and ordinary independent rejudgment; this repair does not certify or judge itself.",
+    "sources_read": [
+      "items/def-probability-calibration.md, Definition",
+      "items/def-probability-measure.md, Definition",
+      "items/def-borel-sigma-algebra.md, Definition",
+      "items/alg-validation-temperature-scaling.md, complete Definition",
+      "items/alg-split-conformal-set-for-classification.md and items/alg-split-conformal-prediction-set.md, complete Definitions",
+      "items/thm-split-conformal-marginal-coverage.md, complete Statement and Proof",
+      "items/cor-exponential-reciprocal-and-positivity.md and items/thm-exponential-is-strictly-increasing.md, Statements and Proofs",
+      "items/def-natural-logarithm.md and items/def-real-exponential-function-and-e.md, Definitions",
+      "items/def-regular-conditional-distribution.md and items/def-exchangeable-random-elements.md, Definitions",
+      "items/thm-log-and-brier-strict-propriety.md, Statement and Proof; items/def-proper-scoring-rule.md, Definition",
+      "items/thm-exponential-addition-formula.md, Statement and Proof",
+      "items/def-source-target-distributions-and-shift.md, Definition",
+      "Ovadia et al., Sections 2-5, pp. 3-9; empirical claims only, not a theorem supplier"
+    ],
+    "consumer_examination": [
+      {
+        "supplier": "def-top-label-calibration",
+        "id": "def-binned-expected-calibration-error",
+        "path": "items/def-binned-expected-calibration-error.md",
+        "affected_use": "Definition references: fixes top-confidence and smallest-index conventions for a finite evaluation sample.",
+        "disposition": "unchanged_sound",
+        "reason": "The finite deterministic sample statistic does not require a population label map; its conventions are unchanged.",
+        "route": "frontier_owner_accounting"
+      },
+      {
+        "supplier": "def-top-label-calibration",
+        "id": "ex-calibration-degradation-under-shift",
+        "path": "items/ex-calibration-degradation-under-shift.md",
+        "affected_use": "Facts F1 and Verification 1.1 use the event-integral identity in the one-point model with Y=1 and G=(9/10,1/10).",
+        "disposition": "unchanged_sound",
+        "reason": "Constant Y on the one-point probability space is measurable, so both identity sides remain defined.",
+        "route": "assigned_review"
+      },
+      {
+        "supplier": "thm-positive-temperature-scaling-preserves-argmax",
+        "id": "alg-validation-temperature-scaling",
+        "path": "items/alg-validation-temperature-scaling.md",
+        "affected_use": "justified_by and Definition references invoke normalization, finite validation losses, finite-grid minimization and preservation of the maximizing class.",
+        "disposition": "unchanged_sound",
+        "reason": "The procedure uses positivity and the argmax/minimizer conclusions, all preserved; it does not require ambient interior.",
+        "route": "frontier_owner_accounting"
+      },
+      {
+        "supplier": "thm-positive-temperature-scaling-preserves-argmax",
+        "id": "ex-calibration-degradation-under-shift",
+        "path": "items/ex-calibration-degradation-under-shift.md",
+        "affected_use": "Facts F4 and Verification 1.2 use equality of maximizing index sets at temperatures 1 and 2.",
+        "disposition": "unchanged_sound",
+        "reason": "The argmax conclusion is unchanged; the example does not use the erroneous ambient interior assertion.",
+        "route": "assigned_review"
+      }
+    ],
+    "repair_complete": true,
+    "contract_repair": "Under step5-shared-write-lock acquire/reread/edit/check/release, updated only assigned contract entries: changed definition and theorem finite-smoke assertions, theorem step 1.1 derivation and relative-interior boundary, and supplier quotations whose exact source sections changed. Original risk reviews and historical evidence remain intact. The initial strict check exposed 7 stale quotations; the final scoped strict check passes. Also corrected the top-confidence endpoint worksheet: C cannot be zero for a simplex forecast, since C>=1/K; and replaced ambiguous interior wording in the example worksheet by strictly positive coordinates. Both metadata edits passed the final strict contract check under the shared lock.",
+    "interfaces_changed": [
+      "def-top-label-calibration: Definition requires Y measurable",
+      "thm-positive-temperature-scaling-preserves-argmax: Statement specifies relative interior in sum_j p_j=1"
+    ],
+    "interfaces_unchanged": [
+      "ex-calibration-degradation-under-shift: entire item unchanged"
+    ],
+    "published_ledger": "No assigned item or direct affected consumer is published; no published-consumer ledger update or outside-consumer maintenance repair is proposed. Step-4 published inline-link alerts were checked where needed against current suppliers, which now have separate reference sections.",
+    "page_review": "Both owning pages are frontmatter-only with page_layout: compact-v1 and unchanged inventories/requires edges. Both defining repairs preserve their page interfaces. No assigned item contains TikZ/tikzcd; these scalar finite examples require no diagram.",
+    "unresolved_obligations": []
+  }
+}

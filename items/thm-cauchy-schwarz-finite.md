@@ -14,6 +14,7 @@ landmark: true
 short: "$(\\sum a_k b_k)^2 \\le \\sum a_k^2 \\sum b_k^2$"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-cauchy-schwarz-finite.json
   precheck: pass
   verified:
     model: claude-opus-5
@@ -44,11 +45,11 @@ pipeline_run: null
 ## Statement
 
 Let $n \in \mathbb{N}$ and let $a_0, \dots, a_{n-1}$ and $b_0, \dots, b_{n-1}$ be
-reals, with finite sums as in [[def-finite-sum]]. Then
+reals, with finite sums as in Finite sums and finite products, by recursion. Then
 
 $$\Big(\sum_{k<n} a_k b_k\Big)^{2} \;\le\; \Big(\sum_{k<n} a_k^{2}\Big)\Big(\sum_{k<n} b_k^{2}\Big),$$
 
-and, in root form ([[thm-of-square-roots]]),
+and, in root form (Square roots exist: a unique $\sqrt{a} \ge 0$ with $(\sqrt{a})^2 = a$; the positives are $\{x^2 : x \neq 0\}$),
 
 $$\Big|\sum_{k<n} a_k b_k\Big| \;\le\; \sqrt{\sum_{k<n} a_k^{2}} \; \sqrt{\sum_{k<n} b_k^{2}}.$$
 
@@ -60,10 +61,18 @@ $k < n$.
 **No root is used in the proof of the squared form.** That form is an identity
 plus a sign argument in the ordered field, and the root form is only a
 restatement of it through the monotonicity of squaring on the nonnegatives
-([[lem-of-square-monotone]]); the root enters nowhere but the last step, where
-that restatement is made and [[thm-of-square-roots]] is what supplies the
+(Squaring is monotone on the nonnegatives); the root enters nowhere but the last step, where
+that restatement is made and Square roots exist: a unique $\sqrt{a} \ge 0$ with $(\sqrt{a})^2 = a$; the positives are $\{x^2 : x \neq 0\}$ is what supplies the
 square-root symbol. This matters here, because it makes the squared
 inequality independent of the existence theorem for roots.
+
+## Statement references
+
+[[def-finite-sum]]
+
+[[thm-of-square-roots]]
+
+[[lem-of-square-monotone]]
 
 ## Facts & Assumptions
 

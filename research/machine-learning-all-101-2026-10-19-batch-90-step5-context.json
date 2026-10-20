@@ -1,0 +1,306 @@
+{
+  "group": "ad",
+  "batches": [
+    "90"
+  ],
+  "pages_read": [
+    "constrained-mdps-and-policy-safety",
+    "constrained-mdps-and-policy-safety-examples"
+  ],
+  "items_read": [
+    "lem-finite-action-average-tv-controlled-by-kl",
+    "def-constrained-markov-decision-process",
+    "def-normalized-discounted-state-occupancy",
+    "def-discounted-cost-constraint",
+    "lem-normalized-discounted-state-occupancy-is-probability",
+    "def-discounted-value-and-advantage-functions",
+    "lem-discounted-occupancy-change-bounded-by-average-tv",
+    "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+    "thm-policy-performance-bound-by-average-divergence",
+    "alg-constrained-policy-optimization",
+    "lem-cpo-sample-update-well-defined-and-finite-search",
+    "rem-cpo-implementation-is-approximate",
+    "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+    "ex-empirical-cost-satisfaction-can-miss-population-violation",
+    "ex-exact-trust-region-and-sampled-line-search-disagree",
+    "cex-arbitrary-baseline-bound-without-old-policy-residual"
+  ],
+  "conventions": [
+    {
+      "convention": "The CMDP has nonempty finite states, finite nonempty state-dependent action sets, a finite reward alphabet, a normalized joint reward/next-state law, bounded transition costs, a common initial distribution, and discount 0 ≤ γ < 1.",
+      "fixed_by": "def-constrained-markov-decision-process",
+      "matters_for": [
+        "lem-normalized-discounted-state-occupancy-is-probability",
+        "lem-discounted-occupancy-change-bounded-by-average-tv",
+        "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "convention": "State distributions are column vectors; Kπ(s′,s) gives the transition probability from s to s′. The occupancy is dπ = (1−γ) Σ(t≥0) γ^t μπ_t.",
+      "fixed_by": "def-normalized-discounted-state-occupancy",
+      "matters_for": [
+        "lem-normalized-discounted-state-occupancy-is-probability",
+        "lem-discounted-occupancy-change-bounded-by-average-tv",
+        "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "convention": "Jg is the unnormalized expected discounted transition-signal sum, starting at time zero. Feasibility means Jci ≤ bi for every cost and asserts no per-trajectory bound.",
+      "fixed_by": "def-discounted-cost-constraint",
+      "matters_for": [
+        "def-discounted-value-and-advantage-functions",
+        "thm-policy-performance-bound-by-average-divergence",
+        "alg-constrained-policy-optimization",
+        "ex-expected-discounted-cost-does-not-imply-pathwise-safety",
+        "ex-empirical-cost-satisfaction-can-miss-population-violation",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    },
+    {
+      "convention": "Finite-action TV is half the ℓ1 difference. KL uses natural logarithms and direction new policy relative to old policy. Average KL omits zero-weight states and is infinite for a support violation at a positive-weight state.",
+      "fixed_by": "lem-finite-action-average-tv-controlled-by-kl",
+      "matters_for": [
+        "thm-policy-performance-bound-by-average-divergence",
+        "alg-constrained-policy-optimization",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    },
+    {
+      "convention": "For arbitrary bounded baseline f, L averages the new-policy residual minus the old-policy residual under dπ; the error coefficient uses the maximum absolute new-policy statewise residual.",
+      "fixed_by": "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+      "matters_for": [
+        "thm-policy-performance-bound-by-average-divergence",
+        "cex-arbitrary-baseline-bound-without-old-policy-residual"
+      ]
+    },
+    {
+      "convention": "The TV performance bounds are choice-free. The KL branch assumes AC and explicitly interprets infinite average KL as trivial extended bounds, including when the formal error coefficient vanishes.",
+      "fixed_by": "thm-policy-performance-bound-by-average-divergence",
+      "matters_for": [
+        "alg-constrained-policy-optimization",
+        "rem-cpo-implementation-is-approximate",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    },
+    {
+      "convention": "The update uses fixed common policy support on an open positive-dimensional parameter domain, local C2 regularity, positive sampled denominators, normalized nonnegative weights, fixed real estimates, an exact quadratic subproblem with lexicographic tie-breaking, and a finite ordered backtracking budget.",
+      "fixed_by": "alg-constrained-policy-optimization",
+      "matters_for": [
+        "lem-cpo-sample-update-well-defined-and-finite-search",
+        "rem-cpo-implementation-is-approximate",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-normalized-discounted-state-occupancy-is-probability",
+      "statement": "For a finite discounted CMDP and stationary policy, every finite-time state-mass vector and the normalized discounted occupancy are probability distributions. For every B ≥ 0 and transition signal bounded in absolute value by B, Jg converges absolutely and |Jg| ≤ B/(1−γ).",
+      "used_by": [
+        "def-discounted-value-and-advantage-functions",
+        "lem-discounted-occupancy-change-bounded-by-average-tv",
+        "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+      "statement": "For a finite discounted CMDP, bounded transition signal g, bounded baseline f and stationary policies π,π′, Jgπ′−Jgπ = Lπ,f^g(π′)/(1−γ) + Σs(dπ′(s)−dπ(s)) δbar_f^{g,π′}(s)/(1−γ), where L averages δbar_f^{g,π′}−δbar_f^{g,π} under dπ.",
+      "used_by": [
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "id": "lem-discounted-occupancy-change-bounded-by-average-tv",
+      "statement": "For a finite discounted CMDP and stationary policies π,π′, ‖dπ′−dπ‖1 ≤ 2γ/(1−γ) Σs dπ(s) TVs(π′,π).",
+      "used_by": [
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "id": "lem-finite-action-average-tv-controlled-by-kl",
+      "statement": "Assume AC. For a probability distribution d on a finite nonempty state set and probability distributions qs,ps on finite nonempty action sets, Σs d(s) TV(qs,ps) ≤ √(K/2), where K = Σ{s:d(s)>0} d(s) DKL(qs‖ps), with infinite K allowed.",
+      "used_by": [
+        "thm-policy-performance-bound-by-average-divergence"
+      ]
+    },
+    {
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "statement": "For a finite discounted CMDP, bounded g,f and stationary π,π′, the return difference lies between Lπ,f^g(π′)/(1−γ) ± 2γε_f^g(π′)/(1−γ)^2 Σs dπ(s) TVs(π′,π). Under AC, replacing the average TV by the square root of half the average directional KL preserves both inequalities; infinite average KL gives trivial extended bounds.",
+      "used_by": [
+        "alg-constrained-policy-optimization",
+        "rem-cpo-implementation-is-approximate",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    },
+    {
+      "id": "lem-cpo-sample-update-well-defined-and-finite-search",
+      "statement": "Under the sample update's inputs and assumptions and nonnegative integer budget L, the update has a unique mathematical output. A feasible positive-definite quadratic program has a unique lexicographically least maximizer; the nonzero single-cost recovery proposal uniquely minimizes the linearized cost on the trust ellipsoid. Once exact subproblem operations have been performed, backtracking uses at most L+1 candidate tests. These properties do not certify population costs, population KL, improvement or convergence.",
+      "used_by": [
+        "alg-constrained-policy-optimization"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "The explicit AC hypothesis carried by the Pinsker/KL branch and its consumers.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL, natural logarithms, absolute-continuity requirements and infinite-divergence conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-total-variation-distance-for-probability-laws",
+      "used_for": "Event-supremum TV; the assigned finite-action lemma locally proves its equality with half-ℓ1.",
+      "opened": true
+    },
+    {
+      "id": "thm-pinsker",
+      "used_for": "Statewise TV ≤ √(KL/2) under AC before the assigned finite weighted square-root argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Occupancy normalization, discounted-series bounds and the expected-cost example; indexing starts at zero and 0^0 is one.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Induction proving that all recursively defined finite-time state masses are probability distributions.",
+      "opened": true
+    },
+    {
+      "id": "lem-geometric-sequence-null",
+      "used_for": "Vanishing matrix-series and telescoping remainders for 0 ≤ γ < 1.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "The sampled KL Hessian in the quadratic trust-region program.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Coordinate, bilinear and norm identities in the proposal proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-definite-quadratic-forms-have-a-uniform-sphere-bound",
+      "used_for": "A positive lower sphere bound implying boundedness of the positive-definite trust ellipsoid.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of the closed bounded trust ellipsoid in positive parameter dimension.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Existence of global maximizers and successive coordinate minima defining the lexicographic tie rule.",
+      "opened": true
+    },
+    {
+      "id": "lem-closed-subset-of-a-compact-space-is-compact",
+      "used_for": "Compactness of the feasible set, maximizer set and successive coordinate restrictions.",
+      "opened": true
+    },
+    {
+      "id": "thm-invertible-matrix-theorem",
+      "used_for": "Invertibility of positive-definite H from its trivial nullspace.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Continuity estimates for linear functionals and the quadratic form.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "The integral estimate bounding log 20 in the exact-versus-sampled trust-region example.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "rem-cpo-implementation-is-approximate",
+      "concern": "The Remarks references label for alg-constrained-policy-optimization says “The sample-based update, quadratic approximation, CG solves, line search, and optional cost shaping.” The cited algorithm specifies an exact finite-data subproblem and contains no conjugate-gradient procedure. CG belongs to the practical implementation discussed in the cited paper, whose §6.1 explicitly describes approximate conjugate-gradient computations. The reference label conflates those two procedures; the remark's mathematical caveat remains sound.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-axiom-of-choice",
+      "finding": "def-axiom-of-choice interrupts its Definition with “([[def-choice-function]])” immediately after the choice-function formulation. This violates the required uninterrupted-definition policy; the link remains inside Definition rather than an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-kullback-leibler-divergence",
+      "finding": "def-kullback-leibler-divergence contains “([[def-probability-measure]])” and “Absolute continuity ... has the convention of [[def-absolutely-continuous-with-respect-to-a-positive-measure]]” inside Definition, followed by many further inline supplier links. The complete definition is interrupted by hyperlinks instead of placing them afterward in Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-total-variation-distance-for-probability-laws",
+      "finding": "def-total-variation-distance-for-probability-laws contains “([[def-probability-measure]])” in its opening Definition paragraph and “[[lem-total-variation-half-l1-formula-on-a-countable-space]]” later in the same section. Both hyperlinks remain inside the complete Definition, contrary to the uninterrupted-section policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-geometric-series",
+      "finding": "thm-geometric-series contains “([[def-integer-power]])” and “([[def-series]])” inside Statement, before the complete convergence/divergence claim and indexing conventions finish. These links violate the required uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-geometric-sequence-null",
+      "finding": "lem-geometric-sequence-null contains “([[def-integer-power]])”, “([[def-real-limit]])”, and “([[def-divergence-to-infinity]])” inside Statement, with additional inline supplier links before that section ends. The complete statement is interrupted instead of followed by Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-hessian-and-euclidean-critical-point",
+      "finding": "def-hessian-and-euclidean-critical-point includes “in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]” and “the gradient convention of [[def-jacobian-matrix-and-gradient]]” inside Definition. These supplier links interrupt the defining section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "def-euclidean-inner-product begins Definition with inline links “[[def-natural-numbers]]” and “[[lem-nat-order-is-membership]]”, and retains numerous further links throughout its defining section and level-three subsections. There is no intervening Definition references section; the complete definition violates the uninterrupted-section policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-heine-borel-rn",
+      "finding": "thm-heine-borel-rn places “([[lem-metrics-on-rn]])”, “([[def-metric-compactness]])”, and other supplier hyperlinks inside Statement, before its three clauses and choice/dimension qualifications are complete. This violates the required uninterrupted-statement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-extreme-value-metric",
+      "finding": "thm-extreme-value-metric includes “([[def-metric-compactness]], [[def-metric-space]])”, “([[def-metric-continuity]])”, and further inline links inside Statement. The complete hypotheses, conclusion and nonemptiness qualification must precede the reference section under the assigned editorial policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-closed-subset-of-a-compact-space-is-compact",
+      "finding": "lem-closed-subset-of-a-compact-space-is-compact includes “([[def-metric-compactness]], [[def-metric-space]])”, “([[def-metric-topology]])”, and “([[def-isometry-and-metric-embedding]])” inside Statement. These hyperlinks interrupt the statement instead of occupying an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "thm-cauchy-schwarz-and-the-euclidean-norm includes “as in [[def-euclidean-inner-product]]” in its opening Statement paragraph and further hyperlinks within its numbered clauses and concluding citation explanation. The complete statement remains interrupted by hyperlinks, contrary to the required policy.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "constrained-mdps-and-policy-safety",
+      "to": "finite-mdps-and-bellman-operators",
+      "faithful": true,
+      "note": "Read the supplier page, def-finite-markov-decision-process and lem-bounded-discounted-return-converges before their assigned consumers. The CMDP correctly specializes the supplier's possibly empty state set to nonempty S, retains the joint reward/transition law without imposing independence, and applies the bounded-return result to bounded finite-time expected signals. Supplier statements support the consumer quotations and uses, including γ=0."
+    },
+    {
+      "from": "constrained-mdps-and-policy-safety",
+      "to": "policy-gradients-reinforce-and-actor-critic",
+      "faithful": true,
+      "note": "Read the supplier page and def-differentiable-stochastic-policy before the update. Its open positive-dimensional parameter domain and fixed common support are preserved; the update explicitly strengthens regularity locally to C2. Empirical advantages and baseline estimates are supplied inputs without accuracy assumptions, so no episodic policy-gradient theorem is restated as an infinite-horizon estimator guarantee. The owning cross-batch ledger still marks this page edge open; this check supplies current interface evidence for its owner without changing that ledger."
+    }
+  ]
+}

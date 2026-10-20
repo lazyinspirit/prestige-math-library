@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "kind": "delegated-first-cycle-source-scope-repair",
+  "run": "machine-learning-all-101-2026-10-19",
+  "reviewer": "/root/policy_gradient_cpo_repair",
+  "cycle": 1,
+  "recorded_at": "2026-10-19T03:54:37.913841+00:00",
+  "native_coverage_adopted": false,
+  "shared_files_written": true,
+  "premature_write_recovery": "Worker misinterpreted staged-only scope and prematurely wrote9existing/2newcarriers; root restored all9and removed2new under exact guards at2026-10-19T03:54:09Z. See owner-premature-rl-restoration.json and proposal/premature-actual-write-inventory.json. No canonical plan/spec writes occurred. All final work is proposal-only.",
+  "readiness_or_gates_run": false,
+  "actual_restored_inputs_verified": true,
+  "decision": "proposed-for-root-full-review",
+  "confirmed_defects": [
+    {
+      "batch": 84,
+      "defect": "Canonical discounted policy-gradient identity omits gamma^t.",
+      "counterexample": "cex-policy-gradient-without-start-time-discount",
+      "calculation": "T=2, gamma=1/2, R1=0,R2=A1~Bernoulli(theta): J=theta/2, derivative1/2, undiscounted score-return sum expectation1."
+    },
+    {
+      "batch": 90,
+      "defect": "Canonical arbitrary-baseline surrogate omits old-policy residual.",
+      "counterexample": "cex-arbitrary-baseline-bound-without-old-policy-residual",
+      "calculation": "Identical policies, one state/action,reward1,gamma0,f0: return difference0 but both alleged bounds1."
+    },
+    {
+      "batch": 90,
+      "defect": "Native CPO sample line search omitted sample KL test.",
+      "repair": "Add Khat(theta_j)<=delta; source Algorithm1 enforces both constraints from Eq10.",
+      "affected_consumers": [
+        "rem-cpo-implementation-is-approximate",
+        "ex-exact-trust-region-and-sampled-line-search-disagree"
+      ]
+    }
+  ],
+  "minimal_missing_prerequisite": "No missing mathematical theorem supplier: native corrected local proofs already establish both sound formulas. The missing step is canonical/description reconciliation; original false claims are preserved in formal counterexamples.",
+  "canonical_proposals": [
+    {
+      "label": "ML-76",
+      "page_id": "policy-gradients-reinforce-and-actor-critic",
+      "canonical_stanza_before": "### ML-76 — Policy gradients, REINFORCE, and actor–critic\n\n**Pages:** policy-gradients-reinforce-and-actor-critic / policy-gradients-reinforce-and-actor-critic-examples. **Scope:** Define a differentiable episodic stochastic policy $\\pi_\\theta$, fixed start-state objective $J(\\theta)=v^{\\pi_\\theta}(s_0)$, and trajectory score. Under episode termination, common-support differentiability, finite expected return/score products, and justified differentiation through the trajectory law, derive the episodic score-function identity $\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]$. An integrable baseline $b(S_t)$ independent of the sampled action preserves the expected direction because its score term has conditional mean zero. Define REINFORCE and one-step actor–critic separately; the bootstrapped critic target can introduce approximation bias, and an expected update identity is not convergence of a nonlinear/deep optimizer. Continuing average-reward variants require the source's stationary ergodic state-distribution premise. Proposed interfaces: def-differentiable-stochastic-policy, thm-policy-gradient-theorem, alg-reinforce, alg-reinforce-with-baseline, alg-one-step-actor-critic, lem-action-independent-baseline-does-not-bias-policy-gradient. **Proof route:** differentiate the episodic trajectory likelihood under the stated integrability/dominated-differentiation assumptions, apply the log-derivative identity, telescope rewards-to-go, and show $\\mathbb E[\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)b(S_t)\\mid S_t]=0$. **Examples:** episodic REINFORCE, an action-independent variance-reducing baseline, a biased bootstrapped target. **Requires:** ML-72 — Finite MDPs and Bellman operators; ML-73 — Tabular prediction and control by interaction; thm-chain-rule-for-total-derivatives and def-conditional-expectation-given-a-sigma-algebra. **Sources:** Sutton & Barto PDF pp. 343–361 (printed pp. 323–341), Chapter 13: episodic objective and theorem proof, pp. 343–347; score-function REINFORCE and baseline, pp. 347–352; actor–critic algorithms, pp. 357–359. The displayed episodic theorem proof is source-backed; the explicit differentiation/interchange conditions remain to be stated and proved locally. No deep actor–critic convergence theorem is imported.",
+      "canonical_stanza_before_sha256": "61dcf6d7601691d3703854b52e6f3ad8dc35cf7b80f13739f8bfd81d9038c057",
+      "description_before_sha256": "af6fb1f41337a514d12c067c53aeebf8f0c5f6b4f84b6a2f06a98797925251ee",
+      "edits": [
+        {
+          "path": "research/plan-machine-learning-track.md",
+          "scope": "ML-76",
+          "unique_scope_excerpt": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]",
+          "occurrences_in_scope": 1,
+          "old": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]",
+          "new": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\gamma^t\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]"
+        },
+        {
+          "path": "research/plan-spec.json",
+          "row_id": "policy-gradients-reinforce-and-actor-critic",
+          "field": "description",
+          "row_before_sha256": "be033f8a86fcec0b9324ad7e4bf75c7684155e605a428d0db08cc2066ef0d65c",
+          "unique_field_excerpt": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]",
+          "occurrences_in_field": 1,
+          "old": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]",
+          "new": "\\nabla J(\\theta)=\\mathbb E_{\\pi_\\theta}[\\sum_{t=0}^{T-1}\\gamma^t\\nabla_\\theta\\log\\pi_\\theta(A_t\\mid S_t)\\,G_t]"
+        },
+        {
+          "path": "research/plan-machine-learning-track.md",
+          "scope": "ML-76",
+          "old": "and trajectory score.",
+          "new": "and trajectory score, with $G_t=\\sum_{k=t}^{T-1}\\gamma^{k-t}R_{k+1}$ and $0\\le\\gamma<1$.",
+          "occurrences_in_scope": 1
+        },
+        {
+          "path": "research/plan-machine-learning-track.md",
+          "scope": "ML-76",
+          "old": "**Sources:** Sutton & Barto PDF pp. 343–361 (printed pp. 323–341), Chapter 13: episodic objective and theorem proof, pp. 343–347; score-function REINFORCE and baseline, pp. 347–352; actor–critic algorithms, pp. 357–359.",
+          "new": "**Sources:** Sutton & Barto, complete Stanford-hosted 455-page second-edition draft, https://web.stanford.edu/class/psych209/Readings/SuttonBartoRL.pdf, Chapter 13 §§13.1–13.6 (printed pp. 266–276): theorem proof §13.2, discounted REINFORCE §13.3, baseline identity §13.4 and baseline pseudocode printed p. 273, actor–critic §13.5. This accessible draft supports the local scope; the original assigned earlier draft lacks this chapter. Equation (13.6) and pseudocode include the start-time discount; the local proof supplies the consistent discounted identity.",
+          "occurrences_in_scope": 1,
+          "reason": "Reconcile exact accessible source locator/current full-proof reading without rewriting original fetch history."
+        }
+      ],
+      "instructions": "Root applies same prose changes to both mirrors, preserves every foreign stanza/row, and refreshes exact controlling pointers centrally. Whole-file hashes here are observations only."
+    },
+    {
+      "label": "ML-82",
+      "page_id": "constrained-mdps-and-policy-safety",
+      "canonical_stanza_before": "### ML-82 — Constrained MDPs and policy safety\n\n**Pages:** constrained-mdps-and-policy-safety / constrained-mdps-and-policy-safety-examples. **Scope:** Define a finite discounted CMDP with bounded reward and cost, discount $\\gamma\\in[0,1)$, expected discounted return/cost, feasible policies, and a trust-region update. State Achiam et al.’s Theorem 1 in its average-divergence form: for $f:S\\to\\mathbb R$, define $\\delta_f(s,a,s')=r(s,a,s')+\\gamma f(s')-f(s)$, $\\epsilon_f=\\max_s|\\mathbb E_{a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]|$, $L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi,a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]$, and $D^\\pm_{\\pi,f}(\\pi')=L_{\\pi,f}(\\pi')\\pm\\frac{2\\gamma\\epsilon_f}{(1-\\gamma)^2}\\mathbb E_{s\\sim d^\\pi}[D_{\\rm TV}(\\pi'\\|\\pi)[s]]$, where $d^\\pi$ is the normalized discounted occupancy and $D_{\\rm TV}(p\\|q)=\\frac12\\sum_a|p(a)-q(a)|$. The theorem states $D^-_{\\pi,f}(\\pi')\\le J(\\pi')-J(\\pi)\\le D^+_{\\pi,f}(\\pi')$; the cost analogue follows by applying it to each cost return. The main paper sends Theorem 1’s proof to its supplement, which is not included in the cached main paper; retain the full local derivation obligation or acquire/read that supplement before calling the result proved. Separate the idealized trust-region bound from CPO’s sampled linearization, conjugate-gradient solve, line search, and cost shaping. Expected discounted-cost control is not pathwise safety or guaranteed safe exploration. Proposed interfaces: def-constrained-markov-decision-process, def-discounted-cost-constraint, alg-constrained-policy-optimization, thm-policy-performance-bound-by-average-divergence, rem-cpo-implementation-is-approximate. **Proof route:** derive the performance-difference identity, bound the state-distribution change by expected TV and then average KL using Pinsker/Jensen, and apply the same calculation to each cost. Reuse published `thm-pinsker` with event-supremum TV<=sqrt(KL/2), natural logarithms and AC for the finite-action TV/KL inequality; finite-sample and policy-linearization errors remain separate local estimates. **Examples:** an expected-cost constraint with rare violations, ideal update versus sampled line-search update, and empirical near-satisfaction. **Requires:** ML-72 — Finite MDPs and Bellman operators; ML-76 — Policy gradients, REINFORCE, and actor–critic; def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, and def-conditional-expectation-given-a-sigma-algebra; prove finite-action Pinsker/Jensen locally. **Sources:** Achiam et al., *Constrained Policy Optimization*, complete cached ICML/PMLR 70 main-paper PDF pp. 1–10: Theorem 1 and average-divergence definitions, pp. 3–4; TV-to-KL comparison and trust-region Proposition 1, pp. 4–5; CPO constrained update and practical approximation, pp. 5–8. The theorem statement and Proposition 1 are source-backed; the Theorem 1 proof is not in the main paper and the supplement was not inspected.",
+      "canonical_stanza_before_sha256": "be318a6d7ee0081fe5ce8d55148d7e26b6ed982a36cb64eb95e7991e73d43b4c",
+      "description_before_sha256": "0163d569931e4a8db23226d2cc3619e0c036801ed364482f477ba613138ff3d7",
+      "edits": [
+        {
+          "path": "research/plan-machine-learning-track.md",
+          "scope": "ML-82",
+          "unique_scope_excerpt": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi,a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]",
+          "occurrences_in_scope": 1,
+          "old": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi,a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]",
+          "new": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi}\\left[\\mathbb E_{a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]-\\mathbb E_{a\\sim\\pi,s'\\sim P}[\\delta_f(s,a,s')]\\right]"
+        },
+        {
+          "path": "research/plan-spec.json",
+          "row_id": "constrained-mdps-and-policy-safety",
+          "field": "description",
+          "row_before_sha256": "8d9f817feca5da011075c2a463a73046b18ea0855bbb45d83a8cbdabcac32ed2",
+          "unique_field_excerpt": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi,a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]",
+          "occurrences_in_field": 1,
+          "old": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi,a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]",
+          "new": "L_{\\pi,f}(\\pi')=(1-\\gamma)^{-1}\\mathbb E_{s\\sim d^\\pi}\\left[\\mathbb E_{a\\sim\\pi',s'\\sim P}[\\delta_f(s,a,s')]-\\mathbb E_{a\\sim\\pi,s'\\sim P}[\\delta_f(s,a,s')]\\right]"
+        },
+        {
+          "path": "research/plan-machine-learning-track.md",
+          "scope": "ML-82",
+          "old": "The theorem statement and Proposition 1 are source-backed; the Theorem 1 proof is not in the main paper and the supplement was not inspected.",
+          "new": "The theorem statement and Proposition 1 are source-backed. The complete official supplement, https://proceedings.mlr.press/v70/achiam17a/achiam17a-supp.pdf, Appendix 10.1.1–10.1.2 (PDF pp. 1–4), supplies the full arbitrary-baseline identity, occupancy-change bound and Theorem 1 proof; it was independently inspected in the current repair. Preserve the original malformed formula as cex-arbitrary-baseline-bound-without-old-policy-residual.",
+          "occurrences_in_scope": 1,
+          "reason": "Reconcile exact accessible source locator/current full-proof reading without rewriting original fetch history."
+        }
+      ],
+      "instructions": "Root applies same prose changes to both mirrors, preserves every foreign stanza/row, and refreshes exact controlling pointers centrally. Whole-file hashes here are observations only."
+    }
+  ],
+  "shared_observations": {
+    "canonical_sha256": "0d25e65aab6870196b8824a3ec620ff848ed97674609b3ca02591cbbbf55be99",
+    "plan_spec_sha256": "3ffd99bb10fe42f1f5c134d9e0b705cd635f9183e27a93aa1d21afbb80079637",
+    "authority": "Whole-file hash observations confer no whole-file write guard. Root owns all exact controlling hash pointers."
+  },
+  "sources_independently_read": [
+    {
+      "name": "sutton",
+      "sha256": "94b195c3d5f73878039453d8fc771494df0c140fd6978fd0c6d29178a56023b5",
+      "bytes": 10029704,
+      "scope_actually_read": "Complete relevant Chapter 13 §§13.1–13.6, printed 265–276; full downloaded 455-page PDF. Eq.(13.6), REINFORCE/baseline pseudocode and actor trace include gamma^t. This draft Eq.(13.9) itself omits the factor although adjacent pseudocode restores it; the local proof independently establishes the required discounted formula.",
+      "retrieval": "Independent direct full-PDF retrieval in this cycle; not adoption of native fetch stamp."
+    },
+    {
+      "name": "williams",
+      "sha256": "e1029df5459f4a83bf33a876df018ee4f7b628b210bb9d047a6d60ec13f7c838",
+      "bytes": 648357,
+      "scope_actually_read": "Full relevant §§2–5 and complete Appendix A.1–A.2 (printed 230–237,249–253); full 28-page PDF. The time-unfolded fixed-episode reinforcement has no discounted reward-to-go convention; not evidence for omitting gamma^t.",
+      "retrieval": "Independent direct full-PDF retrieval in this cycle; not adoption of native fetch stamp."
+    },
+    {
+      "name": "achiam",
+      "sha256": "738ba84a6cf3d6f947f91a467b13a3c888d908c050a0b9b58d097da22959a08f",
+      "bytes": 944800,
+      "scope_actually_read": "Full relevant §§3–6.3, Theorem 1/Corollaries 1–3/Proposition 1, Eq.(10) and Algorithm 1; full 10-page PDF. Ratio-minus-one term confirms subtraction of old-policy residual. Both average candidate-to-current KL and sample cost constraints are line-search checks.",
+      "retrieval": "Independent direct full-PDF retrieval in this cycle; not adoption of native fetch stamp."
+    },
+    {
+      "name": "achiam-supp",
+      "sha256": "bef401e5246c06fe3f61199213fb14269cf9da74e6b1a2b6194b69d4e352055e",
+      "bytes": 280640,
+      "scope_actually_read": "Complete Appendix 10.1.1–10.1.2, PDF 1–4: equations17–25, both lemmas and theorem proof through conclusion; full 8-page PDF. Local telescoping/resolvent argument checked independently.",
+      "retrieval": "Independent direct full-PDF retrieval in this cycle; not adoption of native fetch stamp."
+    },
+    {
+      "name": "altman",
+      "sha256": "9c14ec2f6997d2bce873e3586c9a810b661e361b4ecdac1440f662785228164f",
+      "bytes": 997389,
+      "scope_actually_read": "Chapter2 §§2.1–2.2 printed21–24; Chapter3 §3.1 printed27–28 including occupancy recurrence and stationary completeness argument; full 250-page PDF. Normalized cost differs by factor1-gamma from local return.",
+      "retrieval": "Independent direct full-PDF retrieval in this cycle; not adoption of native fetch stamp."
+    }
+  ],
+  "supplier_mathematics": {
+    "policy_gradient": "Countable finite terminal paths; finite-product derivative, summable remainder domination and score-return integrability justify exact differentiation, removal of earlier rewards by history-conditioned score zero, and gamma^t return regrouping. Baseline cancellation has a geometric integrable majorant. No nonlinear convergence claim.",
+    "cpo": "Telescoping residual identity subtracts the identical initial f expectation under both policies. Adding/subtracting old occupancy times new residual leaves unscaled action-expectation difference L and occupancy remainder. Resolvent norm<=1/(1-gamma), transition delta bound2 averageTV, and max residual yield2gamma epsilon/(1-gamma)^2. Local L is unscaled; canonical proposal retains its already-scaled L convention. Candidate-to-current KL/Pinsker/Jensen convention and AC branch preserved. No support restriction added."
+  },
+  "current_affected_consumer_closure": [
+    {
+      "id": "alg-constrained-policy-optimization",
+      "path": "items/alg-constrained-policy-optimization.md",
+      "sha256": "5f366152d00591caa16d61b33e5a9c703be6acf5ba24e576f189222dc917a12e",
+      "direct_consumes": [
+        "thm-policy-performance-bound-by-average-divergence"
+      ],
+      "review": "pass",
+      "detail": "Definition repaired: sample backtracking now tests sample KL <= delta as well as sample costs; ratio-minus-one advantage estimates remain correct."
+    },
+    {
+      "id": "alg-reinforce",
+      "path": "items/alg-reinforce.md",
+      "sha256": "e556113cf551c2bb361977231dbdc1359c69e3443a34b6f59601115261a2e398",
+      "direct_consumes": [
+        "thm-policy-gradient-theorem"
+      ],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "alg-reinforce-with-baseline",
+      "path": "items/alg-reinforce-with-baseline.md",
+      "sha256": "ac4ff31e736e55e8395f54ac1d8061c21bac268acd975966263c6424a7675f4a",
+      "direct_consumes": [
+        "alg-reinforce",
+        "lem-action-independent-baseline-does-not-bias-policy-gradient"
+      ],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "ex-action-independent-baseline-eliminates-variance",
+      "path": "items/ex-action-independent-baseline-eliminates-variance.md",
+      "sha256": "c6344a9852a6f475f12455b211f9727e804b8c4a6522c186efbccc74d95e0ec8",
+      "direct_consumes": [
+        "lem-action-independent-baseline-does-not-bias-policy-gradient",
+        "alg-reinforce",
+        "alg-reinforce-with-baseline"
+      ],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "ex-exact-trust-region-and-sampled-line-search-disagree",
+      "path": "items/ex-exact-trust-region-and-sampled-line-search-disagree.md",
+      "sha256": "98c3f90a809e0e7daa9ba1d47915d80b891c3a3308f1b025f72ea3ea271ffc66",
+      "direct_consumes": [
+        "alg-constrained-policy-optimization",
+        "thm-policy-performance-bound-by-average-divergence"
+      ],
+      "review": "pass",
+      "detail": "At gamma=0 the value-baseline surrogate is exact. K<4 is proved in step1.2, so the extra sample KL test passes for this one-state sample; only exact citation quote updated."
+    },
+    {
+      "id": "ex-reinforce-one-step-bernoulli-mdp",
+      "path": "items/ex-reinforce-one-step-bernoulli-mdp.md",
+      "sha256": "0a0c960fee105f14fe9037b86e5c9d3a908f6ea2a291b0aa5b8987a91bdb0f03",
+      "direct_consumes": [
+        "alg-reinforce"
+      ],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+      "path": "items/lem-action-independent-baseline-does-not-bias-policy-gradient.md",
+      "sha256": "60fc009be20bfdf2688148e66a7457390ee2f724b96f20a78e9dd161944d778f",
+      "direct_consumes": [
+        "thm-policy-gradient-theorem"
+      ],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+      "path": "items/lem-mdp-performance-difference-identity-with-arbitrary-baseline.md",
+      "sha256": "ab91d3a7f1c93b3d89109e0b435a4c9bd862354e85e8e247d06f46facd2a3947",
+      "direct_consumes": [],
+      "review": "pass",
+      "detail": "Uses the exact arbitrary-baseline difference surrogate or its value-baseline specialization; no residual defect."
+    },
+    {
+      "id": "rem-cpo-implementation-is-approximate",
+      "path": "items/rem-cpo-implementation-is-approximate.md",
+      "sha256": "469e40cd8af775340dbc4bcb36453b37c191d8b186a7af66b694171c9397025c",
+      "direct_consumes": [
+        "alg-constrained-policy-optimization",
+        "thm-policy-performance-bound-by-average-divergence"
+      ],
+      "review": "pass",
+      "detail": "Uses the exact arbitrary-baseline difference surrogate or its value-baseline specialization; no residual defect."
+    },
+    {
+      "id": "thm-policy-gradient-theorem",
+      "path": "items/thm-policy-gradient-theorem.md",
+      "sha256": "dd929ce9622519ec74f66720889ad96615573c138a29ae48ba602a73e47da9f1",
+      "direct_consumes": [],
+      "review": "pass",
+      "detail": "The native formula already contains gamma^t and preserves the start-state objective; no source change required."
+    },
+    {
+      "id": "thm-policy-performance-bound-by-average-divergence",
+      "path": "items/thm-policy-performance-bound-by-average-divergence.md",
+      "sha256": "4f303aa57e224b39fae273e1fb180de99090e8f30ccbd8e7c5894af395df9e32",
+      "direct_consumes": [
+        "lem-mdp-performance-difference-identity-with-arbitrary-baseline"
+      ],
+      "review": "pass",
+      "detail": "Uses the exact arbitrary-baseline difference surrogate or its value-baseline specialization; no residual defect."
+    }
+  ],
+  "old_consumer_inventory": "Native pre-edit batch84/90 manifest projections archived here; all original 24 rows retain their edges. No original result Statement changed by this worker; the sole native defining-clause change is CPO line search, whose two direct consumers and all indirect consumers are listed. No deleted old edges.",
+  "broader_textual_review": {
+    "query_roots": [
+      "thm-policy-gradient-theorem",
+      "lem-mdp-performance-difference-identity-with-arbitrary-baseline",
+      "thm-policy-performance-bound-by-average-divergence",
+      "alg-reinforce",
+      "def-differentiable-stochastic-policy"
+    ],
+    "additional_policy_consumers_reviewed": [
+      "def-verifier-and-generation-protocol",
+      "lem-finite-response-score-gradient-identities",
+      "alg-finite-group-relative-policy-update"
+    ],
+    "disposition": "The common policy definition is unchanged. Finite-response reward-gradient identities use a single finite response, so no time index or discount is omitted. The PPO-inspired clipped GRPO procedure explicitly asserts no monotonic improvement, unbiasedness or convergence. No additional native PPO/TRPO theorem/algorithm carrier or consumer was found by full items/library ML text searches for the algorithm names; TRPO appears only in external source contextual comparison.",
+    "transitive_no_source_change": "No further propagation is required because these common-interface items did not change."
+  },
+  "proposed_source_repairs": [
+    {
+      "path": "library/machine-learning/policy-gradients-reinforce-and-actor-critic-examples.md",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/policy-gradients-reinforce-and-actor-critic-examples.md",
+        "sha256": "995bf9455bd3295e8d558a8c2ff2bf143651b32d5a0d180838934f2b63b9699a"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/library/machine-learning/policy-gradients-reinforce-and-actor-critic-examples.md",
+        "sha256": "0ceef46a030feaedcd1730444c4f26ff2cab7b180b1ea1315f428553b9257972"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+        "sha256": "ec0235c1111859d568c80b2072c987ab468c84472925719eb181e3cfdf7ad958"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+        "sha256": "3dbd6c16517098ef4d102aa6e5ecb410c99debd277c277031592ec5be31d7398"
+      }
+    },
+    {
+      "path": "items/alg-constrained-policy-optimization.md",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/alg-constrained-policy-optimization.md",
+        "sha256": "8b4af94b4a6f7e02377918223efc028eb91fcbc99d627d63ceee92df4fe05ce8"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/items/alg-constrained-policy-optimization.md",
+        "sha256": "5f366152d00591caa16d61b33e5a9c703be6acf5ba24e576f189222dc917a12e"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+        "sha256": "ce852cd1efad500e63df636deeee077234edc7d2fc2fc21e53edad0b5ef96ddb"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+        "sha256": "4d833c52eb0625498d122ffaaead42d89efef128f9ff232663fdefb5b0874caf"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.coverage.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-90.coverage.json",
+        "sha256": "4f1f86d747472bf7cf5260031738ca54690fc258871a9d3bc75a93d76f1b511b"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-90.coverage.json",
+        "sha256": "505dc2dfa0fd8871e9b44818e73b68057976501c4002c3a6d8c89875531e0738"
+      }
+    },
+    {
+      "path": "library/machine-learning/constrained-mdps-and-policy-safety-examples.md",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/constrained-mdps-and-policy-safety-examples.md",
+        "sha256": "3fabf11c9dffa4436c45b6a82d4a8e4ac827e31c5f83b023f4784b1eb1232a18"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/library/machine-learning/constrained-mdps-and-policy-safety-examples.md",
+        "sha256": "504c60cbaa33c9169ca7957bfb94bd4ac0257f60120da12cd21d2571860a3ba1"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.coverage.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-84.coverage.json",
+        "sha256": "857ef6ad99a7f31d1209d9ee52c41e50727eb8991329d7a0363ba60bb999d18a"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-84.coverage.json",
+        "sha256": "e7871e8ed5251f9bb6dd90c81912fde1741703c62fa70f7d32029def031bb26a"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+        "sha256": "ed1ec9b1bf1ab1c3282bbb24c0129aa3875c25e91feb476725cdc172f25cee82"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+        "sha256": "c6697beeee7ba6a7c6c85c77b17635e48d435d2ddb90d8d1c7ac950ab572e245"
+      }
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+      "before": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-repair-preimages/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+        "sha256": "9a81b051e78116aae5b097631070c6ba501fb7b4866d6b80565b5c116868f3af"
+      },
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+        "sha256": "34c52c59a777c5508c6416b78bc2041f991baf2ea1b52618dd7afce9429323be"
+      }
+    },
+    {
+      "path": "items/cex-policy-gradient-without-start-time-discount.md",
+      "before": null,
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/items/cex-policy-gradient-without-start-time-discount.md",
+        "sha256": "873c6ab11a4ac96fd5db63c114226e2d64be25bc44ae9e4fe341e4b415018420"
+      }
+    },
+    {
+      "path": "items/cex-arbitrary-baseline-bound-without-old-policy-residual.md",
+      "before": null,
+      "current": {
+        "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/proposed/items/cex-arbitrary-baseline-bound-without-old-policy-residual.md",
+        "sha256": "9a2e930c602c24503fb173f8f340ac92c0c690c1beebc8a607a245e0f6d5cd7a"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/proof-layout.mjs items/cex-policy-gradient-without-start-time-discount.md items/cex-arbitrary-baseline-bound-without-old-policy-residual.md items/alg-constrained-policy-optimization.md",
+      "exit_code": 0,
+      "result": "3 items,4 steps,0 defects"
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-policy-gradient-without-start-time-discount.md items/cex-arbitrary-baseline-bound-without-old-policy-residual.md --json",
+      "exit_code": 0,
+      "result": "2 checked,0 failed"
+    },
+    {
+      "command": "node tools/rendercheck.mjs (three changed items and two changed pages, exact paths in actual_source_repairs)",
+      "exit_code": 0,
+      "result": "5 files,clean YAML and KaTeX"
+    },
+    {
+      "command": "node tools/proof-contract.mjs batch84/90 contracts --strict --items (two new cex and exact-vs-sampled consumer)",
+      "exit_code": 0,
+      "result": "All3 selected contracts clean after correcting worksheet boundary labels. Original failed worksheet check retained in this truthful narrative; no mathematical test failure."
+    }
+  ],
+  "history_preservation": "Native per-item Step1 records, immutable attempts/results/prompts/logs and all native source-fetch/history objects were not changed. Owner scope correction coverage entries are separate additions. Native source proof acceptance, owner readiness, level reconciliation and full gates remain root/native duties.",
+  "per_row_guard_map": [
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+      "selector": {
+        "page_id": "policy-gradients-reinforce-and-actor-critic",
+        "field": "items"
+      },
+      "before_sha256": "111a035ec84751551e991eaa75267976bb044720eef9339b640ddfa76d2e4dc4",
+      "after_sha256": "111a035ec84751551e991eaa75267976bb044720eef9339b640ddfa76d2e4dc4"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.pages.json",
+      "selector": {
+        "page_id": "policy-gradients-reinforce-and-actor-critic-examples",
+        "field": "items"
+      },
+      "before_sha256": "a3f647b408b1cb1634430a3c98f7baeb080d5e544de91b73b15a7341ea291d37",
+      "after_sha256": "441eb7ce705a318eca267510fbe3cb12f3f66374df758a9d14c29707e233759d"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.proof-contracts.json",
+      "selector": {
+        "contract_id": "cex-policy-gradient-without-start-time-discount"
+      },
+      "before_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "after_sha256": "9e0b9b554c39e839b47f6274b962bfa360b8af9f4d318f313e03ab6c086a6e13"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.coverage.json",
+      "selector": {
+        "field": "owner_scope_corrections"
+      },
+      "before_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "after_sha256": "08f2c18d85dd0b68e49a822387425e5c72c97951eb8a471bc10cc00528ba7b60"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+      "selector": {
+        "page_id": "constrained-mdps-and-policy-safety",
+        "field": "items"
+      },
+      "before_sha256": "78ab2bb8281a760618827c13cc686704357d2e6a0ad5418887f2172d28386bed",
+      "after_sha256": "78ab2bb8281a760618827c13cc686704357d2e6a0ad5418887f2172d28386bed"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.pages.json",
+      "selector": {
+        "page_id": "constrained-mdps-and-policy-safety-examples",
+        "field": "items"
+      },
+      "before_sha256": "3cebe4556eef74c1cee67287b3e08e6956093c034a91868b7ab4ac6593dd896e",
+      "after_sha256": "4356268b15d2044830c507996bc4c6e150e11a0f4407a20f74516995b70aac07"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+      "selector": {
+        "contract_id": "ex-exact-trust-region-and-sampled-line-search-disagree"
+      },
+      "before_sha256": "66371c7ca1ed041400ddf8b522f06212b622693fff5a728d42390afdb854f4df",
+      "after_sha256": "b709d0436b281a975ca1e11002a54f3b71bf27e834fdb159a7e107f9ea1e0797"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.proof-contracts.json",
+      "selector": {
+        "contract_id": "cex-arbitrary-baseline-bound-without-old-policy-residual"
+      },
+      "before_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "after_sha256": "a2f4fb7b067a04598547064cf10811be9a750bff96ff39dc99fdc600be50a6f3"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.coverage.json",
+      "selector": {
+        "field": "owner_scope_corrections"
+      },
+      "before_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "after_sha256": "c73594533d2a6454bc5d3e229d154abadbc25488594ddae1af667923748d4c69"
+    }
+  ],
+  "root_only_integration_script": {
+    "path": "research/machine-learning-all-101-2026-10-19-policy-gradient-cpo-proposal/integrate-root-only.py",
+    "executed": false,
+    "limitations": "Root must independently inspect scope and review before applying. Only the two uniquely serialized description strings are replaced; all foreign bytes remain untouched. Central exact controlling hash pointers remain root-owned. This worker has not applied shared edits."
+  },
+  "checks_context": "Focused checks ran against the exact proposed bytes while they were prematurely live, before root guarded restoration. No validation or proof coverage is claimed for absent actual new items.",
+  "native_handoff_bindings": [
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-84.result.json",
+      "sha256": "e443f0d2c438742bb40d3e610268a27fb7cc80da256efc42c3fae053dcc2bf61"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-84.attempt-1.result.json",
+      "sha256": "e443f0d2c438742bb40d3e610268a27fb7cc80da256efc42c3fae053dcc2bf61"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-84.attempt-1.prompt.md",
+      "sha256": "2e4fe73fd0b0813270af675b49c163e3898f7451516d8076ee1b0d60cbd4fdc5"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-84.notes.md",
+      "sha256": "9f2b6ba5160cc05db18a867538be24940b5c36df43ba7550602c6deb36fcd58b"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-90.result.json",
+      "sha256": "ac898ac0bc763dc28de9fe08cbc0668f25f7598e9ae3f410c33e77a00814eb39"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-90.attempt-1.result.json",
+      "sha256": "ac898ac0bc763dc28de9fe08cbc0668f25f7598e9ae3f410c33e77a00814eb39"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-dispatch/beta-batch-90.attempt-1.prompt.md",
+      "sha256": "4e2b54485d289fe3e2d2f47165e0f49d0928dabec350ca8346e0ba2142898eef"
+    },
+    {
+      "path": "research/machine-learning-all-101-2026-10-19-batch-90.notes.md",
+      "sha256": "928d1d9ffa7c59b31b52a27ddb6ae82ba59733647525a45db95b34132cd6d873"
+    }
+  ],
+  "native_source_locator_caveat": "The accessible Sutton draft §13.4 begins printed p.272; baseline pseudocode is printed p.273. Native locators sometimes say271–272. This is a locator caveat, not a mathematical argument supplier. Native fetch/history remains unchanged."
+}

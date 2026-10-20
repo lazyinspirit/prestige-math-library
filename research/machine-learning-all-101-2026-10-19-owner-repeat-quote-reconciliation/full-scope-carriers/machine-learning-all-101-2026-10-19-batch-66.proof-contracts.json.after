@@ -1,0 +1,1063 @@
+{
+  "version": 1,
+  "scope": [
+    "def-forward-gaussian-diffusion-chain",
+    "lem-isotropic-gaussian-kl-formula",
+    "thm-gaussian-forward-and-posterior-kernels",
+    "thm-ddpm-elbo-decomposition",
+    "alg-epsilon-prediction-diffusion-training",
+    "ex-scalar-gaussian-diffusion-chain",
+    "ex-weighted-and-simple-diffusion-losses",
+    "lem-diffusion-objective-estimator-expectation"
+  ],
+  "contracts": {
+    "def-forward-gaussian-diffusion-chain": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires finite integers d,T>=1, so an empty-dimensional or empty-horizon chain is outside its input domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires every forward beta_t and reverse sigma_t^2 to be strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits T=1; its forward path has one normalized transition and its reverse model has the separate positive-variance decoder."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly states that q(x_0|x_1,x_0) assigns probability only to x_0 and is not a Lebesgue density."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition restricts beta_t to (0,1) and sigma_t^2 to (0,infinity), excluding zero and infinite variances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states AC and identifies its Gaussian-law and product-measure interfaces; no additional arbitrary family of choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies the forward and reverse Gaussian models and states no biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies the forward and reverse Gaussian models and states no converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Checked the complete Definition, all seven supplier interfaces, and Ho §§2–3 Eqs. (1)–(2). Finite d,T>=1, beta in (0,1), positive finite reverse variances and finite Borel means make normalized measurable Gaussian kernels; Tonelli normalizes both finite products. AC covers the Gaussian and product-Lebesgue interfaces. The marginal is only defined on finite fibers; t=1 conditioned on x0 is correctly a point mass. The sole TikZ diagram has forward x_(t-1) to x_t and reverse x_t to x_(t-1), without an inverse assertion. No defect."
+      }
+    },
+    "lem-isotropic-gaussian-kl-formula": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n(Probability measures and probability spaces). Absolute continuity $P\\ll Q$ has the convention\nof Absolute continuity of a signed or complex measure with respect to a positive measure. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n(The Axiom of Choice) as in Likelihood ratio as a Radon–Nikodym derivative and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\nA sigma-finite positive measure has a nonnegative Radon–Nikodym density version.\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n(The natural logarithm as the inverse of the exponential function, Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm). These are\nmeasurable sets by Extended-real-valued measurable functions. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\nLikelihood-ratio change of measure, the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm (The natural logarithm as the inverse of the exponential function).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\nThe integral logarithm $L$ is the published natural logarithm and\nThe integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and\nSums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function, so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\nExtended-real-valued measurable functions. Its signed integral is\ndefined by the positive and negative parts\n(The positive and negative parts of a function,\nThe nonnegative Lebesgue integral).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\nThe real exponential function and the number $e$ by a power series and\nThe exponential function is strictly increasing, $1/e=\\exp(-1)$ by\nThe exponential is positive and satisfies $\\exp(-x)=1/\\exp(x)$, and $\\log(1/e)=-1$ by\nOrder, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n(Sums, scalar multiples, products and quotients: $(f+g)'(c) = f'(c) + g'(c)$, $(\\alpha f)'(c) = \\alpha f'(c)$, $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$, and $(f/g)'(c) = \\bigl(f'(c)g(c) - f(c)g'(c)\\bigr)/g(c)^{2}$ when $g(c) \\ne 0$, The integral logarithm satisfies $L'(x)=1/x$ for $x>0$ and $L(1)=0$,\nThe integral logarithm $L$ is the published natural logarithm, The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of Likelihood-ratio change of measure,\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of Integrable real and complex functions, and their integrals, its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-log-density-ratio",
+          "claim": "By [F1], both Lebesgue densities are strictly positive, so $Q\\ll P$. Expanding their Gaussian density formulas gives the log-density ratio $\\log\\frac{dQ}{dP}(x)=\\frac d2\\log\\frac wv-\\frac{\\|x-m\\|_2^2}{2v}+\\frac{\\|x-n\\|_2^2}{2w}$. All terms are integrable under $Q$ because its covariance is finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "integrate-gaussian-quadratics",
+          "claim": "Under $Q$, [F2] gives $\\mathbb E_Q\\|X-m\\|_2^2=dv$, and expansion of $X-n=(X-m)+(m-n)$ gives $\\mathbb E_Q\\|X-n\\|_2^2=dv+\\|m-n\\|_2^2$ because $\\mathbb E_Q(X-m)=0$. Integrating the ratio in step 1.1 and applying the AC-dependent convention [F3] and expectation definition [F4] yields $D_{\\mathrm{KL}}(Q\\|P)=\\frac d2\\log\\frac wv-\\frac d2+\\frac{dv+\\|m-n\\|_2^2}{2w}$, which is the stated formula.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires d>=1; zero-dimensional Gaussian vectors are outside the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires v,w>0, so neither KL density has a zero-variance endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes d=1 and step 2.1 reduces the formula to the scalar Gaussian calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes singular Gaussian covariances by requiring v,w>0; the density argument in step 1.1 uses that condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement restricts both variances to (0,infinity), and step 1.1 uses positive densities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, and steps 1.1-2.1 use the Gaussian-density and library-KL interfaces under that assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives a formula and does not state an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives a formula and does not state a converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read both proof steps and all six dependency interfaces. Strict positive Gaussian densities give Q<<P; expanding log(dQ/dP) and using E||X-m||²=dv and E||X-n||²=dv+||m-n||² yields the exact directional KL. Finite moments justify all signed integrals. At v=w and m=n it is zero; unequal positive variances and zero displacement are valid; zero variance is excluded. AC is inherited explicitly. The pre/post hashes record only reader proof-step separation here; the current calculation is sound. No diagram or mathematical defect."
+      }
+    },
+    "thm-gaussian-forward-and-posterior-kernels": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-forward-gaussian-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d,T\\ge1$ be finite integers, let $I_d$ be the $d\\times d$ identity matrix, and let $\\beta_1,\\ldots,\\beta_T\\in(0,1)$. Set $\\alpha_t=1-\\beta_t$, $\\bar\\alpha_0=1$, and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Write $\\lambda_d$ for Lebesgue measure on $\\mathbb R^d$ and define, for $v>0$,\n$$\\phi_{d,v}(y;m)=(2\\pi v)^{-d/2}\\exp\\!\\left(-\\frac{\\|y-m\\|_2^2}{2v}\\right),\\qquad y,m\\in\\mathbb R^d.$$\nThe notation $\\|z\\|_2^2=\\sum_{i=1}^d z_i^2$ is the squared Euclidean norm. The displayed function is the Lebesgue density of $N_d(m,vI_d)$.\n\nFor each fixed $x_0\\in\\mathbb R^d$, the forward chain has path density on $(\\mathbb R^d)^T$\n$$q(x_{1:T}\\mid x_0)=\\prod_{t=1}^T \\phi_{d,\\beta_t}(x_t;\\sqrt{\\alpha_t}\\,x_{t-1}).$$\nThus its transition from $x_{t-1}$ to $x_t$ is Gaussian with mean $\\sqrt{\\alpha_t}\\,x_{t-1}$ and covariance $\\beta_t I_d$. Each factor is a normalized density, and finite successive integration of the nonnegative product gives a probability density.\n\nFor a generic adjacent pair, the two model directions are shown below. The arrows indicate the direction in which each conditional density generates its target state; they assert no equality or inverse relation between the kernels.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node (previous) at (0,0) {$x_{t-1}$};\n  \\node (current) at (4,0) {$x_t$};\n  \\draw[->] (previous) to[bend left=24] node[midway,above] {$q(x_t\\mid x_{t-1})$} (current);\n  \\draw[->] (current) to[bend left=24] node[midway,below] {$p_{\\theta,t}(x_{t-1}\\mid x_t)$} (previous);\n\\end{tikzpicture}\n```\n\nA learned reverse Gaussian model consists of finite-valued Borel maps $\\mu_{\\theta,t}:\\mathbb R^d\\to\\mathbb R^d$ and fixed variances $\\sigma_t^2\\in(0,\\infty)$, for $1\\le t\\le T$. It is the joint density\n$$p_\\theta(x_{0:T})=\\phi_{d,1}(x_T;0)\\prod_{t=1}^T\\phi_{d,\\sigma_t^2}(x_{t-1};\\mu_{\\theta,t}(x_t)).$$\nIts prior is $p(x_T)=N_d(0,I_d)$, and its marginal density at $x_0$ is\n$$p_\\theta(x_0)=\\int_{(\\mathbb R^d)^T}p_\\theta(x_{0:T})\\,d\\lambda_d(x_1)\\cdots d\\lambda_d(x_T),$$\nwhenever this integral is finite. The joint reverse density is normalized by successive integration of its Gaussian transition factors followed by the prior density.\n\nFor $t=1$, the forward-chain conditional $q(x_0\\mid x_1,x_0)$ assigns probability one to every Borel set containing $x_0$ and zero to every Borel set not containing $x_0$; it is not a Lebesgue density. The separate learned reverse likelihood $p_\\theta(x_0\\mid x_1)$ is the Gaussian density above with variance $\\sigma_1^2>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $m\\ge1$ be finite, let $d_j\\ge1$, and let\n$Z_j$ for $1\\le j\\le m$ be mutually independent random elements of\n$\\mathbb R^{d_j}$. Suppose $Z_j\\sim N_{d_j}(a_j,\\Sigma_j)$, where each\n$\\Sigma_j$ is symmetric positive semidefinite. Put\n$D=\\sum_{j=1}^m d_j$, $Z=(Z_1,\\ldots,Z_m)$,\n$a=(a_1,\\ldots,a_m)$, and\n$\\Sigma=\\operatorname{diag}(\\Sigma_1,\\ldots,\\Sigma_m)$. Then\n$$Z\\sim N_D(a,\\Sigma).$$\nNo covariance block needs to be invertible.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariate-normal-conditional-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X\\in\\mathbb R^d$ and $Y\\in\\mathbb R^m$, with $d,m\\ge1$, be\njointly multivariate normal with mean $(a,b)$ and positive-semidefinite block\ncovariance\n$$\\Sigma=\\begin{pmatrix}A&C\\\\C^T&B\\end{pmatrix},$$\nwhere $B$ is positive definite. Then\n$$S=A-CB^{-1}C^T$$\nis positive semidefinite, and for every $y\\in\\mathbb R^m$ the probability law\n$$K(y,\\cdot)=N_d\\!\\left(a+CB^{-1}(y-b),S\\right)$$\nis defined. The map $K$ is a probability kernel and is a conditional law of\n$X$ given $Y$: for all Borel $E\\subseteq\\mathbb R^d$ and\n$F\\subseteq\\mathbb R^m$,\n$$\\mathbb P(X\\in E,Y\\in F)=\\int_F K(y,E)\\,\\mathbb P_Y(dy).$$\nThe covariance $A$ and the conditional covariance $S$ may be singular.\nPositive definiteness of $B$ is required; no pseudoinverse formula for\nsingular $B$ is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "innovation-independence",
+          "claim": "Under the forward path law with fixed $x_0$, for each $s$ put $\\xi_s=(X_s-\\sqrt{\\alpha_s}X_{s-1})/\\sqrt{\\beta_s}$. Changing variables $x_s=\\sqrt{\\alpha_s}x_{s-1}+\\sqrt{\\beta_s}z$ in the last transition density in [F1] gives the conditional density $\\phi_{d,1}(z;0)$, independent of the past. Thus for Borel past events $A$ and Borel $B\\subseteq\\mathbb R^d$, $\\mathbb P(X_{1:s-1}\\in A,\\xi_s\\in B)=\\mathbb P(X_{1:s-1}\\in A)N_d(0,I_d)(B)$. Each $\\xi_s$ is standard Gaussian and independent of the previous path; since earlier innovations are measurable functions of that path, $\\xi_1,\\ldots,\\xi_t$ are mutually independent for every $t$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "forward-marginal-induction",
+          "claim": "Iterating $X_t=\\sqrt{\\alpha_t}X_{t-1}+\\sqrt{\\beta_t}\\xi_t$ gives $X_t=\\sqrt{\\bar\\alpha_t}x_0+\\sum_{s=1}^t\\sqrt{\\beta_s\\prod_{r=s+1}^t\\alpha_r}\\,\\xi_s$. By step 1.1 and [F3], the finite innovation stack is jointly Gaussian. Thus each scalar projection of $X_t$ is normal with mean $u\\cdot\\sqrt{\\bar\\alpha_t}x_0$ and, by independence, variance $u^T\\left(\\sum_{s=1}^t\\beta_s\\prod_{r=s+1}^t\\alpha_r I_d\\right)u$; [F2] identifies its law as multivariate normal with that mean and covariance. Since $\\beta_s\\prod_{r=s+1}^t\\alpha_r=\\prod_{r=s+1}^t\\alpha_r-\\prod_{r=s}^t\\alpha_r$, the covariance sum telescopes to $(1-\\bar\\alpha_t)I_d$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "joint-adjacent-gaussian-block",
+          "claim": "Fix $t\\ge2$. By step 2.1, $X_{t-1}$ is Gaussian, and by step 1.1, $\\xi_t$ is independent of the past and standard Gaussian. The finite-stack result [F3] makes $(X_{t-1},\\xi_t)$ jointly Gaussian. For any $u,v\\in\\mathbb R^d$, the projection of $(X_{t-1},X_t)$ is $(u+\\sqrt{\\alpha_t}v)\\cdot X_{t-1}+\\sqrt{\\beta_t}v\\cdot\\xi_t$, a scalar projection of that Gaussian stack; hence [F2] makes the pair jointly Gaussian. Its means are $\\sqrt{\\bar\\alpha_{t-1}}x_0$ and $\\sqrt{\\bar\\alpha_t}x_0$, and its covariance blocks are $A=(1-\\bar\\alpha_{t-1})I_d$, $C=\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})I_d$, and $B=(1-\\bar\\alpha_t)I_d$. The full block covariance is positive semidefinite because each of its quadratic forms is the variance of a scalar projection of $(X_{t-1},X_t)$. Since $0<\\alpha_s<1$, we have $0<\\bar\\alpha_t<1$, so $B$ is positive definite.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditioned-posterior",
+          "claim": "Applying [F4] with these blocks gives conditional covariance $A-CB^{-1}C^T=\\left((1-\\bar\\alpha_{t-1})-\\frac{\\alpha_t(1-\\bar\\alpha_{t-1})^2}{1-\\bar\\alpha_t}\\right)I_d=\\frac{\\beta_t(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}I_d$ and conditional mean $\\sqrt{\\bar\\alpha_{t-1}}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}(x_t-\\sqrt{\\bar\\alpha_t}x_0)=\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t$. For $t\\ge2$, $\\bar\\alpha_{t-1}<1$ and $\\beta_t>0$, so $\\tilde\\beta_t>0$. This is the asserted conditional law; no density for the degenerate $t=1$ conditional was used.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires d,T>=1; the finite innovation sum in step 2.1 covers every t>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes 0<beta_t<1; step 3.1 proves tilde beta_t>0 for t>=2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes T=1 for the marginal, while its posterior formula is restricted to t>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 explicitly exclude a Lebesgue density at t=1, where conditioning on x_0 gives a point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The open schedule interval gives 0<bar alpha_t<1 in step 2.1 and a positive observed covariance block."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; steps 1.1-3.1 use only the Gaussian-stack and conditional-law suppliers under AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts two Gaussian formulas and no biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts two Gaussian formulas and no converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read all four proof steps, five supplier interfaces, and Ho Eqs. (4),(6),(7). Innovation change of variables gives mutual independence; the finite Gaussian stack and affine scalar projections justify joint normality. The variance sum telescopes to 1-bar-alpha_t. Observed covariance B=(1-bar-alpha_t)I is positive definite under the open schedule; Schur subtraction yields beta_t(1-bar-alpha_(t-1))/(1-bar-alpha_t)>0 for t>=2. The t=1 point-mass case is explicitly excluded from density claims; T=1 has only its valid forward marginal. AC inherited; no unconditional Gaussian reverse-law claim. No defects or diagrams."
+      }
+    },
+    "thm-ddpm-elbo-decomposition": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-forward-gaussian-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d,T\\ge1$ be finite integers, let $I_d$ be the $d\\times d$ identity matrix, and let $\\beta_1,\\ldots,\\beta_T\\in(0,1)$. Set $\\alpha_t=1-\\beta_t$, $\\bar\\alpha_0=1$, and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Write $\\lambda_d$ for Lebesgue measure on $\\mathbb R^d$ and define, for $v>0$,\n$$\\phi_{d,v}(y;m)=(2\\pi v)^{-d/2}\\exp\\!\\left(-\\frac{\\|y-m\\|_2^2}{2v}\\right),\\qquad y,m\\in\\mathbb R^d.$$\nThe notation $\\|z\\|_2^2=\\sum_{i=1}^d z_i^2$ is the squared Euclidean norm. The displayed function is the Lebesgue density of $N_d(m,vI_d)$.\n\nFor each fixed $x_0\\in\\mathbb R^d$, the forward chain has path density on $(\\mathbb R^d)^T$\n$$q(x_{1:T}\\mid x_0)=\\prod_{t=1}^T \\phi_{d,\\beta_t}(x_t;\\sqrt{\\alpha_t}\\,x_{t-1}).$$\nThus its transition from $x_{t-1}$ to $x_t$ is Gaussian with mean $\\sqrt{\\alpha_t}\\,x_{t-1}$ and covariance $\\beta_t I_d$. Each factor is a normalized density, and finite successive integration of the nonnegative product gives a probability density.\n\nFor a generic adjacent pair, the two model directions are shown below. The arrows indicate the direction in which each conditional density generates its target state; they assert no equality or inverse relation between the kernels.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node (previous) at (0,0) {$x_{t-1}$};\n  \\node (current) at (4,0) {$x_t$};\n  \\draw[->] (previous) to[bend left=24] node[midway,above] {$q(x_t\\mid x_{t-1})$} (current);\n  \\draw[->] (current) to[bend left=24] node[midway,below] {$p_{\\theta,t}(x_{t-1}\\mid x_t)$} (previous);\n\\end{tikzpicture}\n```\n\nA learned reverse Gaussian model consists of finite-valued Borel maps $\\mu_{\\theta,t}:\\mathbb R^d\\to\\mathbb R^d$ and fixed variances $\\sigma_t^2\\in(0,\\infty)$, for $1\\le t\\le T$. It is the joint density\n$$p_\\theta(x_{0:T})=\\phi_{d,1}(x_T;0)\\prod_{t=1}^T\\phi_{d,\\sigma_t^2}(x_{t-1};\\mu_{\\theta,t}(x_t)).$$\nIts prior is $p(x_T)=N_d(0,I_d)$, and its marginal density at $x_0$ is\n$$p_\\theta(x_0)=\\int_{(\\mathbb R^d)^T}p_\\theta(x_{0:T})\\,d\\lambda_d(x_1)\\cdots d\\lambda_d(x_T),$$\nwhenever this integral is finite. The joint reverse density is normalized by successive integration of its Gaussian transition factors followed by the prior density.\n\nFor $t=1$, the forward-chain conditional $q(x_0\\mid x_1,x_0)$ assigns probability one to every Borel set containing $x_0$ and zero to every Borel set not containing $x_0$; it is not a Lebesgue density. The separate learned reverse likelihood $p_\\theta(x_0\\mid x_1)$ is the Gaussian density above with variance $\\sigma_1^2>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-forward-and-posterior-kernels",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite Gaussian forward chain with dimension $d\\ge1$, horizon $T\\ge1$, and schedule $0<\\beta_t<1$ from the preceding definition. For each $x_0\\in\\mathbb R^d$ and $1\\le t\\le T$,\n$$q(x_t\\mid x_0)=N_d\\!\\left(\\sqrt{\\bar\\alpha_t}\\,x_0,(1-\\bar\\alpha_t)I_d\\right).$$\nFor every $2\\le t\\le T$, the conditional law given both endpoints is\n$$q(x_{t-1}\\mid x_t,x_0)=N_d\\!\\left(\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\ \\tilde\\beta_t I_d\\right),\\qquad \\tilde\\beta_t=\\frac{\\beta_t(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}>0.$$\nThe formula for $q(x_{t-1}\\mid x_t,x_0)$ is only asserted for $t\\ge2$; at $t=1$ the conditioning on $x_0$ makes $q(x_0\\mid x_1,x_0)$ a point mass, not a Lebesgue density. The Gaussian conditional above does not assert that the unconditional reverse law $q(x_{t-1}\\mid x_t)$ is Gaussian.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$ (that is, $\\int_\\Omega q\\,d\\mu=1$), write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nThe normalization follows from positive-scalar homogeneity of the nonnegative integral:\n$$\\int\\pi\\,d\\mu=Z^{-1}\\int\\gamma\\,d\\mu=1.$$\nThe induced density set functions are measures by The indefinite integral of a nonnegative measurable function is a measure. Their total masses are one: $Q(\\Omega)=1$ by the probability-density hypothesis on $q$, and $\\Pi(\\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\\in\\mathcal A$ satisfy $\\Pi(A)=0$. Then $\\int_A\\pi\\,d\\mu=0$, so the zero-integral criterion gives $\\pi=0$ $\\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are Monotonicity and nonnegative homogeneity of the nonnegative integral and A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse the extended logarithm $\\log0=-\\infty$, agreeing with The natural logarithm as the inverse of the exponential function on positive inputs. Since $\\int\\gamma\\,d\\mu<\\infty$ and $\\int q\\,d\\mu=1$, both functions are finite $\\mu$-almost everywhere: for either $f=\\gamma$ or $f=q$, $\\mu\\{f=\\infty\\}\\le n^{-1}\\int f\\,d\\mu$ for every $n\\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\\log\\gamma|$, $q|\\log q|$, $q\\log\\gamma$, and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in Bayes formula for dominated kernels and Conditional density formula. In particular, Likelihood densities supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-variational-family-and-elbo",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal A,\\mu)$ be a measure space. Let $\\gamma:\\Omega\\to[0,\\infty]$ be measurable and suppose\n$$Z:=\\int_\\Omega\\gamma\\,d\\mu\\in(0,\\infty).$$\nDefine the normalized target density $\\pi:=\\gamma/Z$. Then $\\int\\pi\\,d\\mu=1$. For a measurable probability density $q\\ge0$ (that is, $\\int_\\Omega q\\,d\\mu=1$), write $q\\ll_\\mu\\pi$ to mean $q=0$ $\\mu$-almost everywhere on $\\{\\pi=0\\}$. This is a support condition on the two densities. It ensures that the induced probability measures $Q:=q\\,\\mu$ and $\\Pi:=\\pi\\,\\mu$ have $Q\\ll\\Pi$.\n\nThe normalization follows from positive-scalar homogeneity of the nonnegative integral:\n$$\\int\\pi\\,d\\mu=Z^{-1}\\int\\gamma\\,d\\mu=1.$$\nThe induced density set functions are measures by The indefinite integral of a nonnegative measurable function is a measure. Their total masses are one: $Q(\\Omega)=1$ by the probability-density hypothesis on $q$, and $\\Pi(\\Omega)=1$ by the preceding calculation. To verify the absolute-continuity claim, let $A\\in\\mathcal A$ satisfy $\\Pi(A)=0$. Then $\\int_A\\pi\\,d\\mu=0$, so the zero-integral criterion gives $\\pi=0$ $\\mu$-almost everywhere on $A$. The support condition then gives $q=0$ $\\mu$-almost everywhere on $A$, and hence $Q(A)=0$. The homogeneity and zero-integral criteria used here are Monotonicity and nonnegative homogeneity of the nonnegative integral and A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere.\n\nCall $q$ **admissible** when $q\\ll_\\mu\\pi$ and\n$$\\int_\\Omega q\\bigl(|\\log\\gamma|+|\\log q|\\bigr)\\,d\\mu<\\infty.$$\nUse the extended logarithm $\\log0=-\\infty$, agreeing with The natural logarithm as the inverse of the exponential function on positive inputs. Since $\\int\\gamma\\,d\\mu<\\infty$ and $\\int q\\,d\\mu=1$, both functions are finite $\\mu$-almost everywhere: for either $f=\\gamma$ or $f=q$, $\\mu\\{f=\\infty\\}\\le n^{-1}\\int f\\,d\\mu$ for every $n\\ge1$. Interpret the weighted logarithmic terms on this measurable conull set and set them equal to zero on its measurable null complement, so the resulting functions remain measurable. In particular, set $q|\\log\\gamma|$, $q|\\log q|$, $q\\log\\gamma$, and $q\\log q$ equal to zero on $\\{q=0\\}$. On the set where $q>0$, admissibility implies $\\gamma>0$ $\\mu$-almost everywhere. Define the finite real number\n$$\\operatorname{ELBO}(q):=\\int_\\Omega q(\\log\\gamma-\\log q)\\,d\\mu.$$\nA **variational family** is a nonempty set of admissible densities. A maximizing member need not exist.\n\nFor a finite integer $m\\ge1$, let $\\Omega=\\prod_{j=1}^m\\Omega_j$, let each $(\\Omega_j,\\mathcal A_j,\\mu_j)$ be sigma-finite, and let $\\mu=\\bigotimes_{j=1}^m\\mu_j$. A **mean-field density** is a product $q(z)=\\prod_{j=1}^m q_j(z_j)$ of probability densities $q_j$; it belongs to the admissible mean-field family only when the product satisfies the support and integrability conditions above. Tonelli gives $\\int q\\,d\\mu=1$. The product form alone does not guarantee support or finite ELBO.\n\nIn a dominated Bayesian model, a posterior interpretation is available only with the model hypotheses and on fibers with finite positive evidence, as in Bayes formula for dominated kernels and Conditional density formula. In particular, Likelihood densities supplies separate likelihood versions but does not assert joint measurability in parameter and data. Supply the single jointly measurable density $\\gamma$ explicitly before using Tonelli or a posterior-kernel formula. No quotient is formed at zero or infinite normalizer.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-elbo-kl-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $\\mu,\\gamma,Z,\\pi,q$ satisfy Variational family and evidence lower bound, and put $Q=q\\,\\mu$ and $\\Pi=\\pi\\,\\mu$. The choice-free density-ratio identity\n$$\\log Z=\\operatorname{ELBO}(q)+\\int q\\log(q/\\pi)\\,d\\mu$$\nholds, with the ratio integrand set to zero where $q=0$. Under AC, the final integral is the library reverse divergence $D(Q\\|\\Pi)$ and is nonnegative. Consequently\n$$\\operatorname{ELBO}(q)\\le\\log Z.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-isotropic-gaussian-kl-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m,n\\in\\mathbb R^d$, and $v,w>0$. If $Q=N_d(m,vI_d)$ and $P=N_d(n,wI_d)$, then\n$$D_{\\mathrm{KL}}(Q\\|P)=\\frac d2\\left(\\frac vw-1+\\log\\frac wv\\right)+\\frac{\\|m-n\\|_2^2}{2w},$$\nwhere the KL divergence is directional, its first argument is absolutely continuous with respect to its second, and $\\log$ is the natural logarithm.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of Integrable real and complex functions, and their integrals, its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n(Probability measures and probability spaces). Absolute continuity $P\\ll Q$ has the convention\nof Absolute continuity of a signed or complex measure with respect to a positive measure. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n(The Axiom of Choice) as in Likelihood ratio as a Radon–Nikodym derivative and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\nA sigma-finite positive measure has a nonnegative Radon–Nikodym density version.\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n(The natural logarithm as the inverse of the exponential function, Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm). These are\nmeasurable sets by Extended-real-valued measurable functions. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\nLikelihood-ratio change of measure, the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm (The natural logarithm as the inverse of the exponential function).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\nThe integral logarithm $L$ is the published natural logarithm and\nThe integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by Order, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and\nSums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function, so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\nExtended-real-valued measurable functions. Its signed integral is\ndefined by the positive and negative parts\n(The positive and negative parts of a function,\nThe nonnegative Lebesgue integral).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\nThe real exponential function and the number $e$ by a power series and\nThe exponential function is strictly increasing, $1/e=\\exp(-1)$ by\nThe exponential is positive and satisfies $\\exp(-x)=1/\\exp(x)$, and $\\log(1/e)=-1$ by\nOrder, continuity, range, and the product, quotient, and reciprocal laws for the natural logarithm and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n(Sums, scalar multiples, products and quotients: $(f+g)'(c) = f'(c) + g'(c)$, $(\\alpha f)'(c) = \\alpha f'(c)$, $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$, and $(f/g)'(c) = \\bigl(f'(c)g(c) - f(c)g'(c)\\bigr)/g(c)^{2}$ when $g(c) \\ne 0$, The integral logarithm satisfies $L'(x)=1/x$ for $x>0$ and $L(1)=0$,\nThe integral logarithm $L$ is the published natural logarithm, The mean value theorem, as the case $g(x) = x$ of Cauchy's: for $f$ continuous on $[a,b]$ with $a < b$ and differentiable on $(a,b)$ there is $c \\in (a,b)$ with $f(b) - f(a) = f'(c)(b-a)$).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of Likelihood-ratio change of measure,\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reverse-marginal-propriety",
+          "claim": "The reverse path density is strictly positive and finite at every finite path because every Gaussian variance is positive and each mean is finite. Its path marginal on $x_{1:T}$ is a probability density by successive integration of its reverse kernels and prior. For fixed $x_0$, the decoder density satisfies $p_\\theta(x_0\\mid x_1)\\le(2\\pi\\sigma_1^2)^{-d/2}$, so integrating against that path marginal gives $p_\\theta(x_0)<\\infty$. It is strictly positive: on the positive-measure box $[-1,1]^{dT}$, the sets $\\{p_\\theta(x_{0:T})\\ge1/n\\}$ for positive integers $n$ cover the box because the density is positive everywhere. If all these sets had measure zero, their countable union would have measure zero, contradicting the positive measure of the box; one set therefore has positive measure, and the integral is positive. Thus $\\pi_\\theta(\\cdot\\mid x_0)$ is a proper positive density.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "forward-admissibility",
+          "claim": "The forward path density is a probability density and is positive everywhere. Its log is the finite sum $\\log q(x_{1:T}\\mid x_0)=\\sum_{t=1}^T\\left[-\\frac d2\\log(2\\pi\\beta_t)-\\frac{\\|x_t-\\sqrt{\\alpha_t}x_{t-1}\\|_2^2}{2\\beta_t}\\right]$. Under $q$, each normalized residual $(x_t-\\sqrt{\\alpha_t}x_{t-1})/\\sqrt{\\beta_t}$ has law $N_d(0,I_d)$ and finite second moment $d$ by [F10], so $\\mathbb E_q|\\log q|<\\infty$. Since the reverse density is also positive everywhere, $\\pi_\\theta>0$ everywhere and the support condition $Q_{x_0}\\ll\\Pi_{\\theta,x_0}$ holds.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "pathwise-elbo-kl-identity",
+          "claim": "Let $\\gamma(x_{1:T})=p_\\theta(x_{0:T})$ on path space with base measure $\\lambda_{dT}$. Step 1.1 gives $Z=\\int\\gamma\\,d\\lambda_{dT}=p_\\theta(x_0)\\in(0,\\infty)$ and the normalized target $\\pi=\\gamma/Z$; step 1.2 gives the support condition, and the Statement's integrability hypothesis together with step 1.2 gives $\\mathbb E_q(|\\log\\gamma|+|\\log q|)<\\infty$. The direction is $Q_{x_0}\\ll\\Pi_{\\theta,x_0}$, as required by [F8]. Therefore [F3], [F6], and [F9] apply, and [F4] gives the exact log-evidence identity and nonnegative reverse KL.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "telescoping-chain-decomposition",
+          "claim": "For $t\\ge2$, the Markov property and positive Gaussian densities give $q(x_t\\mid x_{t-1})=q(x_{t-1}\\mid x_t,x_0)q(x_t\\mid x_0)/q(x_{t-1}\\mid x_0)$. Substitute this into $p_\\theta(x_{0:T})/q(x_{1:T}\\mid x_0)$. The ratios $q(x_{t-1}\\mid x_0)/q(x_t\\mid x_0)$ telescope, leaving $p_\\theta(x_{0:T})/q(x_{1:T}\\mid x_0)=[p(x_T)/q(x_T\\mid x_0)]p_\\theta(x_0\\mid x_1)\\prod_{t=2}^T p_\\theta(x_{t-1}\\mid x_t)/q(x_{t-1}\\mid x_t,x_0)$. Taking the $q$-expectation of the logarithm yields the stated endpoint-plus-step decomposition, with the t=1 term $-\\mathbb E_{q(x_1\\mid x_0)}\\log p_\\theta(x_0\\mid x_1)$. Each reverse Gaussian log-density factor is bounded above; the assumed integrability of their finite sum makes each factor integrable, and the forward marginals and conditioned laws are Gaussian with finite quadratic moments, so the expectation splits termwise.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-epsilon-terms",
+          "claim": "For $t\\ge2$, substitute $x_t=\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\epsilon$ into the posterior mean in [F2]. Using $\\bar\\alpha_t=\\alpha_t\\bar\\alpha_{t-1}$ and $\\beta_t=1-\\alpha_t$ gives $\\tilde\\mu_t(x_t,x_0)=\\frac1{\\sqrt{\\alpha_t}}\\left(x_t-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\epsilon\\right)$. The reverse mean is the same expression with $\\epsilon_\\theta(x_t,t)$ in place of $\\epsilon$, so $\\|\\tilde\\mu_t-\\mu_{\\theta,t}\\|_2^2=\\frac{\\beta_t^2}{\\alpha_t(1-\\bar\\alpha_t)}\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\|_2^2$. Both posterior and reverse variances are positive for $t\\ge2$, so [F5] applies with $v=\\tilde\\beta_t$ and $w=\\sigma_t^2$; it gives exactly the coefficient $w_t$ and constant $C_t$ in the Statement.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "endpoint-and-surrogate-distinction",
+          "claim": "The terminal term remains $D_{\\mathrm{KL}}(q(x_T\\mid x_0)\\|N_d(0,I_d))$ in step 2.2 because finite $T$ and $0<\\beta_t<1$ give $\\bar\\alpha_T>0$; the $t=1$ term remains the separate positive-variance decoder log-likelihood. For an explicit counterexample, take $d=1$, $T=2$, $\\beta_1=\\tfrac14$, $\\beta_2=\\tfrac12$, $\\sigma_1^2=(2\\pi)^{-1}$, and $\\sigma_2^2=\\tilde\\beta_2=\\tfrac15$. Then $\\bar\\alpha_1=\\tfrac34$, $\\bar\\alpha_2=\\tfrac38$, $w_2=\\frac{(1/2)^2}{2(1/5)(1/2)(5/8)}=2$, and $C_2=\\frac12(1-1+\\log1)=0$. For a fixed datum $x_0$, set $\\epsilon_\\theta(x_1,1)=(x_1-\\sqrt{3/4}\\,x_0)/\\sqrt{1/4}$ and $\\epsilon_\\theta(x_2,2)=(x_2-\\sqrt{3/8}\\,x_0)/\\sqrt{5/8}+c$, with any $c\\in\\mathbb R$. These are finite Borel maps, and their Gaussian log densities have finite $q$-expectations because they are quadratic functions of finite-dimensional Gaussian variables. The first map makes $\\mu_{\\theta,1}(x_1)=x_0$, so the decoder density at its mean is $(2\\pi\\sigma_1^2)^{-1/2}=1$; integrating it against the normalized reverse path density gives $p_\\theta(x_0)=1$ for every $c$. Under the forward chain, the $t=1$ noise error is zero and the $t=2$ error is $c$, so $L_{\\mathrm{simple}}=c^2/2$, while the exact weighted $t=2$ ELBO contribution is $2c^2$ and its prior term is independent of $c$. Taking $c\\ne0$ gives $L_{\\mathrm{simple}}>0$ but exact negative log-likelihood $-\\log p_\\theta(x_0)=0$. Thus the unweighted loss is a surrogate, not in general the maximum-likelihood objective.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires finite d,T>=1 and fixes one observed x_0; its path space is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires positive finite evidence; step 1.1 proves p_theta(x_0) is positive and bounded above."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1, the sum over t=2,...,T is empty and the separate reconstruction and terminal terms remain in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and step 4.1 keep the degenerate t=1 forward conditional out of all Lebesgue-density and KL terms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires 0<beta_t<1 and finite positive reverse variances; step 3.1 uses tilde beta_t>0 only for t>=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit, and step 2.1 applies the BCS ELBO/KL identity only under its stated support and absolute-log-integrability hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives exact identities and a weighted objective formula, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives exact identities and a weighted objective formula, not a converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Reviewed all six proof steps and ten actual dependency interfaces, including the full admissibility and AC branch of the local ELBO/KL theorem. Decoder boundedness and everywhere positivity give finite positive evidence. Gaussian residual moments give integrable log q; every reverse log factor is bounded above, so integrability of their finite sum implies separate integrability. Forward-density ratios telescope with correct KL direction; weighted coefficient is beta_t²/[2 sigma_t² alpha_t(1-bar-alpha_t)]. For T=1 the interior sum is empty. Retains exact finite-T prior KL and positive decoder, never a t=1 posterior density. Checked the c-family witness: decoder constant mean x0 with sigma_1²=1/(2pi) makes density at that datum one, independent of c, while simple loss is c²/2. Ho Appendix A (17)–(22), (12),(14) agree; Prince lines 319–322 use an approximation appropriately qualified. Accept reader integrability and source-qualification repairs; no mathematical defect or diagram."
+      }
+    },
+    "alg-epsilon-prediction-diffusion-training": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires finite d,N,T>=1 and N>=1, so the data list, dimension, and horizon are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires each forward beta_t in (0,1) and each reverse variance sigma_t^2 in (0,infinity), so every sampling variance is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits N=1 and T=1; J is then the single valid timestep and the weighted branch uses the reconstruction likelihood."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition keeps the t=1 reconstruction likelihood separate and never evaluates a density for the degenerate forward conditional."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition requires 0<beta_t<1 and 0<sigma_t^2<infinity for every finite t, so all schedule square roots, weights, and Gaussian densities are defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only a finite uniform index and the supplied Gaussian noise law; AC is inherited from that interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Algorithm specifies a finite stochastic loss-estimation procedure and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Algorithm specifies a finite stochastic loss-estimation procedure and states no converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read the entire procedure and all five supplier interfaces, Ho Algorithm 1 and (5),(12),(14). Independent I,J,epsilon produce the correct forward marginal. K_T follows from the directional Gaussian KL formula; weighted factor T cancels uniform-time sampling and retains K_T once, decoder only at J=1. Mode-specific integrability hypotheses are sufficient for a finite expectation, including N=T=1. No posterior density is formed at t=1. Confirmed refuter:66:1 nonfatal: add separate proved lemma lem-diffusion-objective-estimator-expectation with both expected-output identities. Procedure unchanged; Remarks links the proof. AC is explicitly recorded in axiom_use and the new lemma. No convergence claim or diagram."
+      }
+    },
+    "ex-scalar-gaussian-diffusion-chain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-forward-gaussian-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d,T\\ge1$ be finite integers, let $I_d$ be the $d\\times d$ identity matrix, and let $\\beta_1,\\ldots,\\beta_T\\in(0,1)$. Set $\\alpha_t=1-\\beta_t$, $\\bar\\alpha_0=1$, and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Write $\\lambda_d$ for Lebesgue measure on $\\mathbb R^d$ and define, for $v>0$,\n$$\\phi_{d,v}(y;m)=(2\\pi v)^{-d/2}\\exp\\!\\left(-\\frac{\\|y-m\\|_2^2}{2v}\\right),\\qquad y,m\\in\\mathbb R^d.$$\nThe notation $\\|z\\|_2^2=\\sum_{i=1}^d z_i^2$ is the squared Euclidean norm. The displayed function is the Lebesgue density of $N_d(m,vI_d)$.\n\nFor each fixed $x_0\\in\\mathbb R^d$, the forward chain has path density on $(\\mathbb R^d)^T$\n$$q(x_{1:T}\\mid x_0)=\\prod_{t=1}^T \\phi_{d,\\beta_t}(x_t;\\sqrt{\\alpha_t}\\,x_{t-1}).$$\nThus its transition from $x_{t-1}$ to $x_t$ is Gaussian with mean $\\sqrt{\\alpha_t}\\,x_{t-1}$ and covariance $\\beta_t I_d$. Each factor is a normalized density, and finite successive integration of the nonnegative product gives a probability density.\n\nFor a generic adjacent pair, the two model directions are shown below. The arrows indicate the direction in which each conditional density generates its target state; they assert no equality or inverse relation between the kernels.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node (previous) at (0,0) {$x_{t-1}$};\n  \\node (current) at (4,0) {$x_t$};\n  \\draw[->] (previous) to[bend left=24] node[midway,above] {$q(x_t\\mid x_{t-1})$} (current);\n  \\draw[->] (current) to[bend left=24] node[midway,below] {$p_{\\theta,t}(x_{t-1}\\mid x_t)$} (previous);\n\\end{tikzpicture}\n```\n\nA learned reverse Gaussian model consists of finite-valued Borel maps $\\mu_{\\theta,t}:\\mathbb R^d\\to\\mathbb R^d$ and fixed variances $\\sigma_t^2\\in(0,\\infty)$, for $1\\le t\\le T$. It is the joint density\n$$p_\\theta(x_{0:T})=\\phi_{d,1}(x_T;0)\\prod_{t=1}^T\\phi_{d,\\sigma_t^2}(x_{t-1};\\mu_{\\theta,t}(x_t)).$$\nIts prior is $p(x_T)=N_d(0,I_d)$, and its marginal density at $x_0$ is\n$$p_\\theta(x_0)=\\int_{(\\mathbb R^d)^T}p_\\theta(x_{0:T})\\,d\\lambda_d(x_1)\\cdots d\\lambda_d(x_T),$$\nwhenever this integral is finite. The joint reverse density is normalized by successive integration of its Gaussian transition factors followed by the prior density.\n\nFor $t=1$, the forward-chain conditional $q(x_0\\mid x_1,x_0)$ assigns probability one to every Borel set containing $x_0$ and zero to every Borel set not containing $x_0$; it is not a Lebesgue density. The separate learned reverse likelihood $p_\\theta(x_0\\mid x_1)$ is the Gaussian density above with variance $\\sigma_1^2>0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-forward-and-posterior-kernels",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite Gaussian forward chain with dimension $d\\ge1$, horizon $T\\ge1$, and schedule $0<\\beta_t<1$ from the preceding definition. For each $x_0\\in\\mathbb R^d$ and $1\\le t\\le T$,\n$$q(x_t\\mid x_0)=N_d\\!\\left(\\sqrt{\\bar\\alpha_t}\\,x_0,(1-\\bar\\alpha_t)I_d\\right).$$\nFor every $2\\le t\\le T$, the conditional law given both endpoints is\n$$q(x_{t-1}\\mid x_t,x_0)=N_d\\!\\left(\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\ \\tilde\\beta_t I_d\\right),\\qquad \\tilde\\beta_t=\\frac{\\beta_t(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}>0.$$\nThe formula for $q(x_{t-1}\\mid x_t,x_0)$ is only asserted for $t\\ge2$; at $t=1$ the conditioning on $x_0$ makes $q(x_0\\mid x_1,x_0)$ a point mass, not a Lebesgue density. The Gaussian conditional above does not assert that the unconditional reverse law $q(x_{t-1}\\mid x_t)$ is Gaussian.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scalar-schedule",
+          "claim": "The schedule gives $\\alpha_1=1-\\tfrac14=\\tfrac34$, $\\alpha_2=1-\\tfrac12=\\tfrac12$, $\\bar\\alpha_1=\\tfrac34$, and $\\bar\\alpha_2=\\tfrac34\\cdot\\tfrac12=\\tfrac38$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "scalar-forward-marginal",
+          "claim": "By [F2] and the scalar normal convention [F3], $q(x_2\\mid x_0)$ has mean $\\sqrt{3/8}\\,x_0$ and variance $1-\\tfrac38=\\tfrac58$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "scalar-posterior",
+          "claim": "The posterior variance is $\\tilde\\beta_2=\\frac{(1/2)(1-3/4)}{1-3/8}=\\frac{1/8}{5/8}=\\tfrac15$. The $x_0$ coefficient is $\\frac{\\sqrt{3/4}(1/2)}{5/8}=\\tfrac{2\\sqrt3}{5}$, and the $x_2$ coefficient is $\\frac{\\sqrt{1/2}(1/4)}{5/8}=\\tfrac{\\sqrt2}{5}$. Substitution into [F2] gives the displayed posterior.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "t1-point-mass-boundary",
+          "claim": "Since the final conditioning includes the fixed value $x_0$, the conditional law of $x_0$ itself is concentrated at that value. It is therefore a point mass and has no Lebesgue density for the reconstruction term.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes d=1 and T=2, so neither the dimension nor the chain is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both schedule variances are strictly positive; step 2.1 computes the posterior variance 1/5."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example is one-dimensional; steps 2.1 and 2.2 verify the scalar normal formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 records the t=1 conditional probability concentrated at x_0 and does not assign it a Lebesgue density."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed beta values lie strictly inside (0,1), as used in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and the example only specializes the Gaussian formulas in steps 1.1-2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example computes one two-step chain and states no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example computes one two-step chain and states no converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Read all four verification steps and four dependency interfaces. Substitution gives bar-alpha_2=3/8, variance 5/8, posterior variance 1/5 and coefficients 2sqrt(3)/5 and sqrt(2)/5. x0=0 is allowed. The t=1 conditioned datum is a point mass, with no density asserted. Fixed positive schedule satisfies all kernel hypotheses; AC explicit. Ho (4),(6),(7) match this specialization. No defect or diagram."
+      }
+    },
+    "ex-weighted-and-simple-diffusion-losses": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-forward-gaussian-diffusion-chain",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $d,T\\ge1$ be finite integers, let $I_d$ be the $d\\times d$ identity matrix, and let $\\beta_1,\\ldots,\\beta_T\\in(0,1)$. Set $\\alpha_t=1-\\beta_t$, $\\bar\\alpha_0=1$, and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Write $\\lambda_d$ for Lebesgue measure on $\\mathbb R^d$ and define, for $v>0$,\n$$\\phi_{d,v}(y;m)=(2\\pi v)^{-d/2}\\exp\\!\\left(-\\frac{\\|y-m\\|_2^2}{2v}\\right),\\qquad y,m\\in\\mathbb R^d.$$\nThe notation $\\|z\\|_2^2=\\sum_{i=1}^d z_i^2$ is the squared Euclidean norm. The displayed function is the Lebesgue density of $N_d(m,vI_d)$.\n\nFor each fixed $x_0\\in\\mathbb R^d$, the forward chain has path density on $(\\mathbb R^d)^T$\n$$q(x_{1:T}\\mid x_0)=\\prod_{t=1}^T \\phi_{d,\\beta_t}(x_t;\\sqrt{\\alpha_t}\\,x_{t-1}).$$\nThus its transition from $x_{t-1}$ to $x_t$ is Gaussian with mean $\\sqrt{\\alpha_t}\\,x_{t-1}$ and covariance $\\beta_t I_d$. Each factor is a normalized density, and finite successive integration of the nonnegative product gives a probability density.\n\nFor a generic adjacent pair, the two model directions are shown below. The arrows indicate the direction in which each conditional density generates its target state; they assert no equality or inverse relation between the kernels.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node (previous) at (0,0) {$x_{t-1}$};\n  \\node (current) at (4,0) {$x_t$};\n  \\draw[->] (previous) to[bend left=24] node[midway,above] {$q(x_t\\mid x_{t-1})$} (current);\n  \\draw[->] (current) to[bend left=24] node[midway,below] {$p_{\\theta,t}(x_{t-1}\\mid x_t)$} (previous);\n\\end{tikzpicture}\n```\n\nA learned reverse Gaussian model consists of finite-valued Borel maps $\\mu_{\\theta,t}:\\mathbb R^d\\to\\mathbb R^d$ and fixed variances $\\sigma_t^2\\in(0,\\infty)$, for $1\\le t\\le T$. It is the joint density\n$$p_\\theta(x_{0:T})=\\phi_{d,1}(x_T;0)\\prod_{t=1}^T\\phi_{d,\\sigma_t^2}(x_{t-1};\\mu_{\\theta,t}(x_t)).$$\nIts prior is $p(x_T)=N_d(0,I_d)$, and its marginal density at $x_0$ is\n$$p_\\theta(x_0)=\\int_{(\\mathbb R^d)^T}p_\\theta(x_{0:T})\\,d\\lambda_d(x_1)\\cdots d\\lambda_d(x_T),$$\nwhenever this integral is finite. The joint reverse density is normalized by successive integration of its Gaussian transition factors followed by the prior density.\n\nFor $t=1$, the forward-chain conditional $q(x_0\\mid x_1,x_0)$ assigns probability one to every Borel set containing $x_0$ and zero to every Borel set not containing $x_0$; it is not a Lebesgue density. The separate learned reverse likelihood $p_\\theta(x_0\\mid x_1)$ is the Gaussian density above with variance $\\sigma_1^2>0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ddpm-elbo-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite Gaussian forward chain and reverse model as defined above, with finite-valued Borel reverse means and fixed variances $\\sigma_t^2\\in(0,\\infty)$. For the noise-prediction parameterization, let $\\epsilon_\\theta:\\mathbb R^d\\times\\{1,\\ldots,T\\}\\to\\mathbb R^d$ be Borel and set\n$$\\mu_{\\theta,t}(x_t)=\\frac1{\\sqrt{\\alpha_t}}\\left(x_t-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\,\\epsilon_\\theta(x_t,t)\\right),\\qquad 1\\le t\\le T.$$\nFor each fixed observed $x_0$, require $0<p_\\theta(x_0)<\\infty$, define the proper posterior density\n$$\\pi_\\theta(x_{1:T}\\mid x_0)=\\frac{p_\\theta(x_{0:T})}{p_\\theta(x_0)},$$\nand let $Q_{x_0}$ and $\\Pi_{\\theta,x_0}$ be the path probability measures with Lebesgue densities $q(x_{1:T}\\mid x_0)$ and $\\pi_\\theta(x_{1:T}\\mid x_0)$. Require $Q_{x_0}\\ll\\Pi_{\\theta,x_0}$ and\n$$\\mathbb E_{q(\\cdot\\mid x_0)}\\!\\left[|\\log q(x_{1:T}\\mid x_0)|+|\\log p_\\theta(x_{0:T})|\\right]<\\infty.$$\nHere $\\mathbb E_q[f]$ means the integral of $f$ against the path law with density $q(\\cdot\\mid x_0)$. Define\n$$\\operatorname{ELBO}_\\theta(x_0)=\\mathbb E_q\\!\\left[\\log p_\\theta(x_{0:T})-\\log q(x_{1:T}\\mid x_0)\\right].$$\nThen\n$$\\log p_\\theta(x_0)=\\operatorname{ELBO}_\\theta(x_0)+D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0}),\\qquad D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0})\\ge0.$$\nThe negative ELBO has the exact decomposition\n$$-\\operatorname{ELBO}_\\theta(x_0)=D_{\\mathrm{KL}}\\!\\left(q(x_T\\mid x_0)\\middle\\|N_d(0,I_d)\\right)+\\mathbb E_{q(x_1\\mid x_0)}[-\\log p_\\theta(x_0\\mid x_1)]+\\sum_{t=2}^T\\mathbb E_{q(x_t\\mid x_0)}\\!\\left[D_{\\mathrm{KL}}\\!\\left(q(x_{t-1}\\mid x_t,x_0)\\middle\\|p_\\theta(x_{t-1}\\mid x_t)\\right)\\right].$$\nIn particular, for $t\\ge2$, write\n$$\\tilde\\mu_t(x_t,x_0)=\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\quad w_t=\\frac{\\beta_t^2}{2\\sigma_t^2\\alpha_t(1-\\bar\\alpha_t)},\\quad C_t=\\frac d2\\left(\\frac{\\tilde\\beta_t}{\\sigma_t^2}-1+\\log\\frac{\\sigma_t^2}{\\tilde\\beta_t}\\right).$$\nIf $x_t=\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\,\\epsilon$ with $\\epsilon\\sim N_d(0,I_d)$, then the corresponding per-step KL term is\n$$\\mathbb E_\\epsilon\\!\\left[w_t\\left\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\right\\|_2^2+C_t\\right].$$\nAt $t=1$, the reconstruction term is the separate learned likelihood $p_\\theta(x_0\\mid x_1)$ with variance $\\sigma_1^2>0$; no Lebesgue density for $q(x_0\\mid x_1,x_0)$ is used. For finite $T$, the terminal-prior KL is retained; no equality $q(x_T\\mid x_0)=N_d(0,I_d)$ is assumed. The common unweighted objective\n$$L_{\\mathrm{simple}}(\\theta;x_0)=\\frac1T\\sum_{t=1}^T\\mathbb E_\\epsilon\\!\\left[\\left\\|\\epsilon-\\epsilon_\\theta\\!\\left(\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\epsilon,t\\right)\\right\\|_2^2\\right]$$\ndrops the schedule weights and replaces the separate endpoint terms with noise-prediction losses, so it is not in general the exact maximum-likelihood objective.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "loss-example-schedule",
+          "claim": "The schedule is $\\alpha_1=\\tfrac34$, $\\alpha_2=\\tfrac12$, $\\bar\\alpha_1=\\tfrac34$, and $\\bar\\alpha_2=\\tfrac38$. Hence $1-\\bar\\alpha_2=\\tfrac58$ and $\\tilde\\beta_2=\\frac{(1/2)(1-3/4)}{1-3/8}=\\tfrac15$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "noise-errors-and-decoder",
+          "claim": "For the forward sample $x_2=\\sqrt{3/8}\\,x_0+\\sqrt{5/8}\\,\\epsilon$, the step-two predictor in the Example returns $\\epsilon+1$, so the squared error is $1$ for every $\\epsilon$. For $x_1=\\sqrt{3/4}\\,x_0+\\sqrt{1/4}\\,\\epsilon$, the step-one predictor returns $\\epsilon$, and its reverse mean is $\\frac1{\\sqrt{3/4}}\\left(x_1-\\frac{1/4}{\\sqrt{1/4}}\\epsilon\\right)=x_0$. Therefore the reconstruction log-likelihood contribution is the fixed Gaussian density at its mean, independent of the step-two error.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "loss-example-weight",
+          "claim": "Substituting $\\sigma_2^2=\\tilde\\beta_2=\\tfrac15$ into [F2] gives $w_2=\\frac{(1/2)^2}{2(1/5)(1/2)(5/8)}=2$ and $C_2=\\frac12(1-1+\\log 1)=0$. Thus the exact step-two ELBO contribution is $2$ times the expected squared noise error.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-objective-contributions",
+          "claim": "The uniform-time simple objective has step-two contribution 1/2, while the exact weighted negative-ELBO term at step two is 2; hence the two step-two contributions differ.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes one data value, dimension d=1, and T=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The schedule has positive beta values and step 1.1 gives tilde beta_2=1/5."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The data set contains one fixed observation; the uniform time average is explicitly computed in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The step-one decoder is a positive-variance reverse likelihood, and the example never forms a density for q(x_0|x_1,x_0)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement uses beta values in (0,1), and sigma_2^2=1/5 is positive and finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; the arithmetic in steps 1.1-2.2 uses only the finite Gaussian formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example compares two objective contributions and states no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example compares two objective contributions and states no converse implication."
+        }
+      ]
+    },
+    "lem-diffusion-objective-estimator-expectation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-epsilon-prediction-diffusion-training",
+          "source_section": "Definition",
+          "quote": "Fix finite integers $d,N,T\\ge1$, a data set $D=(x_0^{(1)},\\ldots,x_0^{(N)})\\in(\\mathbb R^d)^N$, forward variances $\\beta_1,\\ldots,\\beta_T\\in(0,1)$, reverse variances $\\sigma_1^2,\\ldots,\\sigma_T^2\\in(0,\\infty)$, a Borel map $\\epsilon_\\theta:\\mathbb R^d\\times\\{1,\\ldots,T\\}\\to\\mathbb R^d$, and a mode from $\\{\\texttt{weighted-elbo},\\texttt{simple}\\}$. Set $\\alpha_t=1-\\beta_t$ and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Use the noise-prediction means\n$$\\mu_{\\theta,t}(y)=\\frac1{\\sqrt{\\alpha_t}}\\left(y-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\,\\epsilon_\\theta(y,t)\\right),\\qquad 1\\le t\\le T,$$\nand the reverse Gaussian model with these means, variances $\\sigma_t^2$, and prior $N_d(0,I_d)$ to define $p_\\theta$. In weighted-elbo mode, require for each $x_0^{(i)}$ that $0<p_\\theta(x_0^{(i)})<\\infty$, the forward path law be absolutely continuous with respect to the normalized reverse posterior path law, and\n$$\\mathbb E_{q(\\cdot\\mid x_0^{(i)})}\\!\\left[|\\log q(x_{1:T}\\mid x_0^{(i)})|+|\\log p_\\theta(x_{0:T})|\\right]<\\infty.$$\nIn simple mode, require for every $i$ and $t$ that\n$$\\mathbb E_{\\epsilon\\sim N_d(0,I_d)}\\!\\left[\\left\\|\\epsilon-\\epsilon_\\theta\\!\\left(\\sqrt{\\bar\\alpha_t}x_0^{(i)}+\\sqrt{1-\\bar\\alpha_t}\\epsilon,t\\right)\\right\\|_2^2\\right]<\\infty.$$\nThis procedure returns one stochastic loss estimate; it does not prescribe a parameter optimizer or claim optimizer convergence.\n\n1. Choose $I$ uniformly from $\\{1,\\ldots,N\\}$, choose $J$ uniformly from $\\{1,\\ldots,T\\}$ independently of $I$, and draw $\\epsilon\\sim N_d(0,I_d)$ independently of both.\n\n2. Set\n$$x_J=\\sqrt{\\bar\\alpha_J}\\,x_0^{(I)}+\\sqrt{1-\\bar\\alpha_J}\\,\\epsilon.$$\n\n3. If the mode is $\\texttt{simple}$, return\n$$\\left\\|\\epsilon-\\epsilon_\\theta(x_J,J)\\right\\|_2^2.$$\n\n4. If the mode is $\\texttt{weighted-elbo}$, first compute the exact terminal-prior term\n$$K_T(x_0^{(I)})=\\frac12\\left[\\bar\\alpha_T\\|x_0^{(I)}\\|_2^2+d\\left(-\\bar\\alpha_T-\\log(1-\\bar\\alpha_T)\\right)\\right].$$\nIf $J=1$, return\n$$K_T(x_0^{(I)})-T\\log p_\\theta(x_0^{(I)}\\mid x_J).$$\nIf $J\\ge2$, return\n$$K_T(x_0^{(I)})+T\\left[C_J+w_J\\left\\|\\epsilon-\\epsilon_\\theta(x_J,J)\\right\\|_2^2\\right],$$\nwhere $w_J$ and $C_J$ are the exact per-step coefficient and variance constant in the DDPM objective theorem.\n\nEach branch returns one sampled objective contribution. The $J=1$ weighted branch uses the positive-variance learned reconstruction likelihood; it never evaluates a density for the degenerate forward conditional $q(x_0\\mid x_1,x_0)$. This algorithm specifies the sampling procedure only; it makes no optimizer-convergence claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ddpm-elbo-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix a finite Gaussian forward chain and reverse model as defined above, with finite-valued Borel reverse means and fixed variances $\\sigma_t^2\\in(0,\\infty)$. For the noise-prediction parameterization, let $\\epsilon_\\theta:\\mathbb R^d\\times\\{1,\\ldots,T\\}\\to\\mathbb R^d$ be Borel and set\n$$\\mu_{\\theta,t}(x_t)=\\frac1{\\sqrt{\\alpha_t}}\\left(x_t-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\,\\epsilon_\\theta(x_t,t)\\right),\\qquad 1\\le t\\le T.$$\nFor each fixed observed $x_0$, require $0<p_\\theta(x_0)<\\infty$, define the proper posterior density\n$$\\pi_\\theta(x_{1:T}\\mid x_0)=\\frac{p_\\theta(x_{0:T})}{p_\\theta(x_0)},$$\nand let $Q_{x_0}$ and $\\Pi_{\\theta,x_0}$ be the path probability measures with Lebesgue densities $q(x_{1:T}\\mid x_0)$ and $\\pi_\\theta(x_{1:T}\\mid x_0)$. Require $Q_{x_0}\\ll\\Pi_{\\theta,x_0}$ and\n$$\\mathbb E_{q(\\cdot\\mid x_0)}\\!\\left[|\\log q(x_{1:T}\\mid x_0)|+|\\log p_\\theta(x_{0:T})|\\right]<\\infty.$$\nHere $\\mathbb E_q[f]$ means the integral of $f$ against the path law with density $q(\\cdot\\mid x_0)$. Define\n$$\\operatorname{ELBO}_\\theta(x_0)=\\mathbb E_q\\!\\left[\\log p_\\theta(x_{0:T})-\\log q(x_{1:T}\\mid x_0)\\right].$$\nThen\n$$\\log p_\\theta(x_0)=\\operatorname{ELBO}_\\theta(x_0)+D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0}),\\qquad D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0})\\ge0.$$\nThe negative ELBO has the exact decomposition\n$$-\\operatorname{ELBO}_\\theta(x_0)=D_{\\mathrm{KL}}\\!\\left(q(x_T\\mid x_0)\\middle\\|N_d(0,I_d)\\right)+\\mathbb E_{q(x_1\\mid x_0)}[-\\log p_\\theta(x_0\\mid x_1)]+\\sum_{t=2}^T\\mathbb E_{q(x_t\\mid x_0)}\\!\\left[D_{\\mathrm{KL}}\\!\\left(q(x_{t-1}\\mid x_t,x_0)\\middle\\|p_\\theta(x_{t-1}\\mid x_t)\\right)\\right].$$\nIn particular, for $t\\ge2$, write\n$$\\tilde\\mu_t(x_t,x_0)=\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\quad w_t=\\frac{\\beta_t^2}{2\\sigma_t^2\\alpha_t(1-\\bar\\alpha_t)},\\quad C_t=\\frac d2\\left(\\frac{\\tilde\\beta_t}{\\sigma_t^2}-1+\\log\\frac{\\sigma_t^2}{\\tilde\\beta_t}\\right).$$\nIf $x_t=\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\,\\epsilon$ with $\\epsilon\\sim N_d(0,I_d)$, then the corresponding per-step KL term is\n$$\\mathbb E_\\epsilon\\!\\left[w_t\\left\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\right\\|_2^2+C_t\\right].$$\nAt $t=1$, the reconstruction term is the separate learned likelihood $p_\\theta(x_0\\mid x_1)$ with variance $\\sigma_1^2>0$; no Lebesgue density for $q(x_0\\mid x_1,x_0)$ is used. For finite $T$, the terminal-prior KL is retained; no equality $q(x_T\\mid x_0)=N_d(0,I_d)$ is assumed. The common unweighted objective\n$$L_{\\mathrm{simple}}(\\theta;x_0)=\\frac1T\\sum_{t=1}^T\\mathbb E_\\epsilon\\!\\left[\\left\\|\\epsilon-\\epsilon_\\theta\\!\\left(\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\epsilon,t\\right)\\right\\|_2^2\\right]$$\ndrops the schedule weights and replaces the separate endpoint terms with noise-prediction losses, so it is not in general the exact maximum-likelihood objective.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gaussian-forward-and-posterior-kernels",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite Gaussian forward chain with dimension $d\\ge1$, horizon $T\\ge1$, and schedule $0<\\beta_t<1$ from the preceding definition. For each $x_0\\in\\mathbb R^d$ and $1\\le t\\le T$,\n$$q(x_t\\mid x_0)=N_d\\!\\left(\\sqrt{\\bar\\alpha_t}\\,x_0,(1-\\bar\\alpha_t)I_d\\right).$$\nFor every $2\\le t\\le T$, the conditional law given both endpoints is\n$$q(x_{t-1}\\mid x_t,x_0)=N_d\\!\\left(\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\ \\tilde\\beta_t I_d\\right),\\qquad \\tilde\\beta_t=\\frac{\\beta_t(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}>0.$$\nThe formula for $q(x_{t-1}\\mid x_t,x_0)$ is only asserted for $t\\ge2$; at $t=1$ the conditioning on $x_0$ makes $q(x_0\\mid x_1,x_0)$ a point mass, not a Lebesgue density. The Gaussian conditional above does not assert that the unconditional reverse law $q(x_{t-1}\\mid x_t)$ is Gaussian.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-isotropic-gaussian-kl-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m,n\\in\\mathbb R^d$, and $v,w>0$. If $Q=N_d(m,vI_d)$ and $P=N_d(n,wI_d)$, then\n$$D_{\\mathrm{KL}}(Q\\|P)=\\frac d2\\left(\\frac vw-1+\\log\\frac wv\\right)+\\frac{\\|m-n\\|_2^2}{2w},$$\nwhere the KL divergence is directional, its first argument is absolutely continuous with respect to its second, and $\\log$ is the natural logarithm.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of Integrable real and complex functions, and their integrals, its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "expectation-1-1",
+          "claim": "Conditional on $I=i,J=t$, the sampled state has the forward marginal in [F3]. Every returned value is finite and measurable: the predictor is finite-valued Borel, all schedule denominators and variances are positive, and the decoder density is strictly positive. In simple mode, the stated finite squared-error expectations make $Y$ integrable, and independence and uniform sampling give $\\mathbb E[Y]=(NT)^{-1}\\sum_{i=1}^N\\sum_{t=1}^T\\mathbb E_\\epsilon\\|\\epsilon-\\epsilon_\\theta(\\sqrt{\\bar\\alpha_t}x_0^{(i)}+\\sqrt{1-\\bar\\alpha_t}\\epsilon,t)\\|_2^2=N^{-1}\\sum_i L_{\\mathrm{simple}}(\\theta;x_0^{(i)})$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "expectation-1-2",
+          "claim": "In weighted-elbo mode, [F3] and [F4] with $v=1-\\bar\\alpha_T$, $w=1$, $m=\\sqrt{\\bar\\alpha_T}x_0^{(i)}$ and $n=0$ identify the algorithm's $K_T(x_0^{(i)})$ as the exact terminal KL. The mode's hypotheses are those of [F2], so the decoder log-density and the interior weighted squared errors are integrable. Finite sums over $i,t$ therefore make $Y$ integrable, even though a decoder contribution may be negative. For fixed $i$, averaging the branch values over $J$ and the noise cancels each factor $T$ and counts $K_T$ once, giving $\\mathbb E[Y\\mid I=i]=K_T(x_0^{(i)})+\\mathbb E_{q(x_1\\mid x_0^{(i)})}[-\\log p_\\theta(x_0^{(i)}\\mid x_1)]+\\sum_{t=2}^T\\mathbb E_\\epsilon[C_t+w_t\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\|_2^2]=-\\operatorname{ELBO}_\\theta(x_0^{(i)})$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "expectation-2-1",
+          "claim": "Averaging step 1.2 over the uniform index $I$ proves the weighted identity. When $N=1$ the data average has one term, and when $T=1$ only the decoder branch is selected and the interior sum is empty; the terminal term is still counted once. Thus both identities hold throughout the admitted domain.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: d,N,T>=1 excludes empty inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: Open schedule and positive reverse variances exclude zero denominators; zero prediction error is allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: Step 2.1 handles N=1 and T=1 explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: The t=1 branch uses the positive-variance decoder; no point-mass density is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: Every beta is in (0,1), hence 0<bar-alpha_t<1; all constants are finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–2.1: AC inherited from Gaussian and KL suppliers; finite index averaging uses no additional choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts expected-output identities, no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts expected-output identities, no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-66",
+        "notes": "Independently checked all three newly authored proof steps and six actual supplier interfaces. Finite-valued Borel evaluation and strictly positive Gaussian densities make real measurable branch values. Each mode admits precisely its needed integrability. Conditional on I=i,J=t, affine independent Gaussian noise has the stated forward marginal; terminal KL substitution v=1-bar-alpha_T,w=1,m=sqrt(bar-alpha_T)x0,n=0 gives K_T. Uniform time averaging counts K_T once and cancels T on decoder/interior contributions, yielding negative ELBO; simple averaging gives the uniform simple objective. Finite N averaging is valid and N=T=1 retains terminal plus decoder with an empty interior sum. Signed decoder loss is handled by absolute integrability, not nonnegativity. AC inherited; no new choice or optimizer-convergence assertion. No diagrams or unmet prerequisite."
+      }
+    }
+  }
+}

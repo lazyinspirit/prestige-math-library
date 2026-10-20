@@ -1,0 +1,916 @@
+{
+  "version": 1,
+  "scope": [
+    "def-smooth-bilevel-learning-problem",
+    "alg-adjoint-hypergradient-with-residual",
+    "thm-smooth-bilevel-hypergradient-formula",
+    "thm-adjoint-hypergradient-linear-solve-error",
+    "rem-truncated-training-and-exact-hypergradients",
+    "ex-ridge-hyperparameter-hypergradient",
+    "ex-singular-hessian-nonisolated-inner-minimum",
+    "ex-exact-state-wrong-truncated-hypergradient"
+  ],
+  "contracts": {
+    "def-smooth-bilevel-learning-problem": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no phase proof and fixes positive finite parameter and state dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition does not assert a zero-value or zero-parameter boundary result."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no phase proof; finite-dimensional inputs are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition has no phase proof or optimization guarantee."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition is local to open domains and makes no boundary claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition introduces the stationarity residual, local selected branch and its hypergradient, and the global strong-convexity inequality. A local stationary branch is not asserted equivalent to global minimality or Hessian invertibility; those are separate hypotheses of later results.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This definition introduces the stationarity residual, local selected branch and its hypergradient, and the global strong-convexity inequality. A local stationary branch is not asserted equivalent to global minimality or Hessian invertibility; those are separate hypotheses of later results.",
+            "item_sha256": "5c64ebcf051c6283075f98947c8fc5a39a7a023c5c0c401980e4d6b1373250fa",
+            "row_sha256": "74356756d21e74b23bd4a93763b9496d2c91e4cdd0512ed1a8f63e0d15dc0db7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition introduces the stationarity residual, local selected branch and its hypergradient, and the global strong-convexity inequality. A local stationary branch is not asserted equivalent to global minimality or Hessian invertibility; those are separate hypotheses of later results.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "This definition introduces the stationarity residual, local selected branch and its hypergradient, and the global strong-convexity inequality. A local stationary branch is not asserted equivalent to global minimality or Hessian invertibility; those are separate hypotheses of later results.",
+            "item_sha256": "5c64ebcf051c6283075f98947c8fc5a39a7a023c5c0c401980e4d6b1373250fa",
+            "row_sha256": "061f378c3f545d29a38e8be3d679e4dbc8d0454d88964d5716b40c3e7b0f467a"
+          }
+        }
+      ]
+    },
+    "alg-adjoint-hypergradient-with-residual": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm requires p,d >= 1 and contains no phase proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition returns the measured inner residual and solver residual when either is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm statement admits scalar parameter and state dimensions and a finite solver budget."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The algorithm statement returns SOLVER_FAILURE without a vector and requires a valid positive-definite certificate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Open graph domains and strict branches are part of the admissible input; graph boundaries return a status."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algorithm uses a supplied finite solver and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The Definition makes CONVERGED conditional on both the solver stopping report and the independently recomputed residual norm being at most tau; any returned CONVERGED status therefore entails both conditions, rather than trusting the report alone.",
+          "evidence": "The Definition final operational paragraph returns CONVERGED exactly when the solver stopping report passed and the independently recomputed residual norm is at most tau. A CONVERGED return therefore entails both checks, not merely the solver report."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "After the solver returns a vector, a passed stopping report together with residual norm at most tau triggers the CONVERGED branch exactly as specified; failure of either test returns the same numerical values with TOLERANCE_OR_BUDGET_NOT_MET. This is the reverse direction of the explicit status rule.",
+          "evidence": "The Definition final operational paragraph directs the CONVERGED status when the returned solver vector has both a passed stopping report and recomputed residual norm at most tau. Otherwise it returns the same numerical values with TOLERANCE_OR_BUDGET_NOT_MET, giving the reverse status implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Independently checked the complete Definition and TikZ data flow against reverse-mode and forward-over-reverse correctness, finite-program strict-branch rules, total-derivative coordinate identification and Hessian symmetry. f uses parameter/state order while g uses state/parameter order; the projections have sizes d and p and symmetry gives M_B=B^T. The SPD certificate and finite supplied solver are admissibility conditions, not derived guarantees. Failure, domain, branch, zero residual, tau=0 and both directions of CONVERGED are explicit. Returned residual is recomputed even for a non-success vector; exact arithmetic and no floating-point claim are preserved. No choice or prerequisite cycle; no mathematical defect found. Published inline-link findings are independently handled by reader:93:1–4,7,10, not hidden by this review."
+      }
+    },
+    "thm-smooth-bilevel-hypergradient-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-bilevel-learning-problem",
+          "source_section": "Definition",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means continuously differentiable on the open domain, and $C^2$ means that the derivative map is itself continuously differentiable. Gradients are column vectors, vector norms are Euclidean, and the norm of a matrix or linear map is the induced Euclidean operator norm.\n\nFor $(\\theta,w)\\in\\Theta\\times W$, define the inner stationarity residual $F(\\theta,w):=\\nabla_w f(\\theta,w)\\in\\mathbb R^d$, its state Jacobian $H(\\theta,w):=D_wF(\\theta,w)\\in\\mathbb R^{d\\times d}$, and its parameter Jacobian $B(\\theta,w):=D_\\theta F(\\theta,w)\\in\\mathbb R^{d\\times p}$. Thus $H$ is the inner Hessian and $B$ is the mixed derivative of the inner gradient. A point $(\\theta_0,w_0)$ is stationary when $F(\\theta_0,w_0)=0$. If a $C^1$ map $w^*:P\\to Q$, for open neighborhoods $P\\subseteq\\Theta$ of $\\theta_0$ and $Q\\subseteq W$ of $w_0$, satisfies $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for all $\\theta\\in P$, it is a local stationary branch. The associated outer objective is $J(\\theta):=g(w^*(\\theta),\\theta)$, and its column gradient $\\nabla_\\theta J$ is called the hypergradient of that branch. The definition of a local stationary branch imposes no global-minimality requirement.\n\nFor $\\mu>0$, the phrase globally $\\mu$-strongly convex in $w$ means that $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for every $u,v\\in\\mathbb R^d$, satisfies\n\n$$f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stationary-residual",
+          "claim": "Put $F(\\theta,w)=\\nabla_w f(\\theta,w)$. Since $f$ is $C^2$, this residual is $C^1$ on the open product domain; it vanishes at $(\\theta_0,w_0)$ and its state derivative is the invertible matrix $H(\\theta_0,w_0)$. Applying [F2] gives open neighborhoods and a unique $C^1$ local branch $w^*$ through that point.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "branch-derivative",
+          "claim": "The derivative clause of [L1], evaluated along this branch after shrinking its parameter neighborhood, gives $Dw^*(\\theta)=-H(\\theta,w^*(\\theta))^{-1}B(\\theta,w^*(\\theta))$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "outer-chain-rule",
+          "claim": "The map $\\theta\\mapsto (w^*(\\theta),\\theta)$ is $C^1$, so [F3] applied to $g$ and this map yields $\\nabla_\\theta J=\\partial_\\theta g+(Dw^*)^T\\nabla_w g$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hypergradient-transpose",
+          "claim": "Substitute step 2.1 into step 2.2 and use $(H^{-1}B)^T=B^TH^{-T}$. This is the asserted column-gradient hypergradient formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "global-minimizer-regime",
+          "claim": "In the stated global regime, fix any $\\theta\\in P$ and any stationary point $u\\in\\mathbb R^d$, so $\\nabla_w f(\\theta,u)=0$. For every $v\\ne u$, the strong-convexity inequality gives $f(\\theta,v)\\ge f(\\theta,u)+\\frac{\\mu}{2}\\|v-u\\|_2^2>f(\\theta,u)$. Thus this arbitrary stationary point is the unique global minimizer, proving the claim for every stationary point wherever the global regime holds.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes p,d >= 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement permits theta0=0 when it belongs to the open parameter domain; no division by theta occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof steps 1.1, 2.1, 2.2, and 3.1 apply unchanged when p=d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement excludes a singular state Hessian; a singular case is separately verified in ex-singular-hessian-nonisolated-inner-minimum."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The branch and derivative claims are local on open neighborhoods; no domain endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is finite-dimensional and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a derivative formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a derivative formula, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read all five proof steps and exact implicit-function and chain-rule statements/proofs. The derivative-map C2 convention makes F C1; positive dimensions, open product domain, zero residual and invertible state derivative meet the implicit-function hypotheses. Shrinking gives unique local branch and invertibility along it. Transposing -H^{-1}B yields the p-dimensional column gradient with g arguments reversed correctly. Strong convexity is a separate global hypothesis; its strict quadratic remainder proves uniqueness/minimality of any stationary point without claiming existence from convexity alone. Scalar and zero-coordinate values are admitted, singular Hessian excluded, endpoints local, no choice. No repair required."
+      }
+    },
+    "thm-adjoint-hypergradient-linear-solve-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-bilevel-learning-problem",
+          "source_section": "Definition",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means continuously differentiable on the open domain, and $C^2$ means that the derivative map is itself continuously differentiable. Gradients are column vectors, vector norms are Euclidean, and the norm of a matrix or linear map is the induced Euclidean operator norm.\n\nFor $(\\theta,w)\\in\\Theta\\times W$, define the inner stationarity residual $F(\\theta,w):=\\nabla_w f(\\theta,w)\\in\\mathbb R^d$, its state Jacobian $H(\\theta,w):=D_wF(\\theta,w)\\in\\mathbb R^{d\\times d}$, and its parameter Jacobian $B(\\theta,w):=D_\\theta F(\\theta,w)\\in\\mathbb R^{d\\times p}$. Thus $H$ is the inner Hessian and $B$ is the mixed derivative of the inner gradient. A point $(\\theta_0,w_0)$ is stationary when $F(\\theta_0,w_0)=0$. If a $C^1$ map $w^*:P\\to Q$, for open neighborhoods $P\\subseteq\\Theta$ of $\\theta_0$ and $Q\\subseteq W$ of $w_0$, satisfies $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for all $\\theta\\in P$, it is a local stationary branch. The associated outer objective is $J(\\theta):=g(w^*(\\theta),\\theta)$, and its column gradient $\\nabla_\\theta J$ is called the hypergradient of that branch. The definition of a local stationary branch imposes no global-minimality requirement.\n\nFor $\\mu>0$, the phrase globally $\\mu$-strongly convex in $w$ means that $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for every $u,v\\in\\mathbb R^d$, satisfies\n\n$$f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2.$$",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-bilevel-hypergradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means total differentiability with continuous derivative, and $C^2$ means the derivative map is $C^1$. Define $F(\\theta,w)=\\nabla_w f(\\theta,w)$, $H(\\theta,w)=D_wF(\\theta,w)$, and $B(\\theta,w)=D_\\theta F(\\theta,w)$. Suppose $F(\\theta_0,w_0)=0$ and $H(\\theta_0,w_0)$ is invertible. Then there are open neighborhoods $P\\subseteq\\Theta$ and $Q\\subseteq W$ of $\\theta_0$ and $w_0$ and a unique $C^1$ local stationary branch $w^*:P\\to Q$ through $(\\theta_0,w_0)$, meaning $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for every $\\theta\\in P$. After shrinking $P$ if necessary, $H(\\theta,w^*(\\theta))$ is invertible and\n\n$$Dw^*(\\theta)=-H(\\theta,w^*(\\theta))^{-1}B(\\theta,w^*(\\theta)).$$\n\nWrite $H^{-T}:=(H^{-1})^T$. For $J(\\theta)=g(w^*(\\theta),\\theta)$, where $\\partial_\\theta g$ holds $w$ fixed and gradients are column vectors, the hypergradient is\n\n$$\\nabla_\\theta J(\\theta)=\\partial_\\theta g(w^*(\\theta),\\theta)-B(\\theta,w^*(\\theta))^T H(\\theta,w^*(\\theta))^{-T}\\nabla_w g(w^*(\\theta),\\theta).$$\n\nThe local branch need not be a global inner optimizer. In the separate global regime where, for every $\\theta\\in P$, $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for some $\\mu>0$, satisfies $f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2$ for every $u,v\\in\\mathbb R^d$, each stationary point is the unique global minimizer.",
+          "uses": [
+            "1.4",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-implicit-sensitivity-error-controlled-by-residual",
+          "source_section": "Statement",
+          "quote": "Let $R(z,\\theta)$ be $C^2$ near an exact solution $R(z_*,\\theta_0)=0$, with $A(z)=R_z(z,\\theta_0)$ invertible and $B(z)=R_\\theta(z,\\theta_0)$. The implicit sensitivity at a state $z$ is $S(z)=-A(z)^{-1}B(z)$. Suppose the local inverse $\\Psi$ of $z\\mapsto R(z,\\theta_0)$, supplied near $z_*$ by the implicit function theorem, is defined on a convex residual neighborhood containing $0$ and $r=R(\\tilde z,\\theta_0)$, with $\\|D\\Psi(y)\\|\\le\\kappa$ along their segment. Suppose also that the segment from $z_*$ to $\\tilde z=\\Psi(r)$ lies in a convex neighborhood where $\\|A(z)^{-1}\\|\\le M$, $\\|B(z)\\|\\le B_0$, and $A,B$ are Lipschitz with constants $L_A,L_B$. Then\n$$\\|S(\\tilde z)-S(z_*)\\|\\le\\kappa\\bigl(M^2L_AB_0+ML_B\\bigr)\\|r\\|.$$\nThis bounds the implicit sensitivity formula evaluated at an approximate state. It is not by itself a bound for the derivative of a stopped iteration.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-adjoint-hypergradient-with-residual",
+          "source_section": "Definition",
+          "quote": "Input positive dimensions $p,d$, open sets $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$, $C^2$ and $C^1$ scalar functions $f:\\Theta\\times W\\to\\mathbb R$ and $g:W\\times\\Theta\\to\\mathbb R$, a point $(\\theta,w)\\in\\Theta\\times W$, and finite real-arithmetic computational graphs whose outputs equal $f$ and $g$ on open neighborhoods of the evaluated inputs. The graph primitives for $f$ are $C^2$ and those for $g$ are $C^1$. Here $C^1$ means total differentiability with continuous derivative, $C^2$ means the derivative map is $C^1$, and all graph evaluations must remain on one unique strict branch. Define $F=\\nabla_w f$, $H=D_wF$, $B=D_\\theta F$, $c=\\partial_\\theta g$ with $w$ held fixed, and $d=\\nabla_w g$; all gradients are column vectors. Also input a tolerance $\\tau\\ge0$, a positive integer solve budget $N$, a number $\\mu>0$, and a valid certificate that the evaluated inner Hessian is symmetric and satisfies $x^THx\\ge\\mu\\|x\\|_2^2$ for every $x\\in\\mathbb R^d$. Finally input a deterministic solver $S$ with the following contract: on a real symmetric positive-definite linear operator and a right-hand side, $S$ terminates within $N$ iterations and returns either a failure status or a vector $\\widetilde v$ and a report saying whether its own stopping test passed. The algorithm does not trust that report as an accuracy certificate; it recomputes the residual. All derivative and solver operations in this definition use exact real arithmetic.\n\nIf any graph evaluation is outside its declared domain, return DOMAIN_ERROR. If any piecewise primitive is at a branch boundary or has no unique strict active branch, return NONDIFFERENTIABLE and no gradient. Otherwise, use reverse mode on $f$ and take the state block of its returned gradient as the inner residual $r_{\\rm in}:=\\nabla_w f(\\theta,w)$. Use reverse mode on $g$ and take its parameter and state blocks as $c:=\\partial_\\theta g(w,\\theta)$ and $d:=\\nabla_w g(w,\\theta)$. In these expressions $c$ is the derivative with $w$ held fixed, and $d$ and $c$ are column vectors.\n\nFor any $u\\in\\mathbb R^d$, apply forward-over-reverse Hessian-vector differentiation to $f$ at $(\\theta,w)$ in direction $(0,u)\\in\\mathbb R^p\\times\\mathbb R^d$. Let $\\pi_\\theta$ and $\\pi_w$ denote projection onto the parameter and state coordinates of the returned vector. Define $M_Hu:=\\pi_w\\bigl(D(\\nabla f)(\\theta,w)(0,u)\\bigr)$ and $M_Bu:=\\pi_\\theta\\bigl(D(\\nabla f)(\\theta,w)(0,u)\\bigr)$. Hessian symmetry makes $M_Hu=Hu=H^Tu$ and $M_Bu=B^Tu$.\n\nCall $S$ on $M_H$ and right-hand side $d$ with tolerance $\\tau$ and budget $N$. If $S$ returns failure, return $(r_{\\rm in},\\text{SOLVER\\_FAILURE})$ with no hypergradient. If it returns a vector $\\widetilde v$, compute the actual linear residual $\\rho:=d-M_H\\widetilde v$ and the reported hypergradient estimate $\\widehat h:=c-M_B\\widetilde v$. Return $(\\widehat h,r_{\\rm in},\\rho,\\text{CONVERGED})$ exactly when the solver reports its stopping test passed and $\\|\\rho\\|_2\\le\\tau$; otherwise return the same numerical values with status TOLERANCE_OR_BUDGET_NOT_MET. The procedure makes no floating-point accuracy claim.",
+          "uses": [
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sensitivity-residual",
+          "claim": "Put $S(w):=-A(w)^{-1}B(w)$ on the stated state neighborhood. The chart and Lipschitz hypotheses with [F3] give $\\|S(\\widetilde w)-S(w^*)\\|\\le\\kappa(M^2L_AB_0+ML_B)\\|r\\|_2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "state-residual",
+          "claim": "For the state bound, set $\\gamma(t):=\\Psi(tr)$ for $0<t<1$. By [F4], $\\gamma'(t)=D\\Psi(tr)r$, so $\\|\\gamma'(t)\\|_2\\le\\kappa\\|r\\|_2$. For $0<\\varepsilon<1/2$, apply [F5] to $\\gamma$ on the convex open interval $(\\varepsilon/2,1-\\varepsilon/2)$ at $\\varepsilon$ and $1-\\varepsilon$; it gives $\\|\\Psi((1-\\varepsilon)r)-\\Psi(\\varepsilon r)\\|_2\\le\\kappa(1-2\\varepsilon)\\|r\\|_2$. Letting $\\varepsilon\\downarrow0$ and using continuity of $\\Psi$, $\\Psi(0)=w^*$ and $\\Psi(r)=\\widetilde w$ give $\\|\\widetilde w-w^*\\|_2\\le\\kappa\\|r\\|_2$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "sensitivity-size",
+          "claim": "The inverse and operator-norm hypotheses give $\\|S(\\widetilde w)\\|\\le\\|A(\\widetilde w)^{-1}\\|\\,\\|B(\\widetilde w)\\|\\le MB_0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hypergradient-expansion",
+          "claim": "Define the implicit formula evaluated at a state by $\\bar h(w):=c(w)+S(w)^Td(w)$. By [F1] and [F2], $\\bar h(w^*)=\\nabla_\\theta J(\\theta_0)$. Expansion gives $\\bar h(\\widetilde w)-\\bar h(w^*)=(c(\\widetilde w)-c(w^*))+(S(\\widetilde w)-S(w^*))^Td(w^*)+S(\\widetilde w)^T(d(\\widetilde w)-d(w^*))$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "linear-solve-bound",
+          "claim": "At the evaluated state, write $H=A(\\widetilde w)$ and $B=B(\\theta_0,\\widetilde w)$. Let $v_*=H^{-T}d(\\widetilde w)$. The residual identity gives $v_*-\\widetilde v=H^{-T}\\rho$. For any vector $x$, the certificate and [F7] imply $\\mu\\|x\\|_2^2\\le x^THx\\le\\|x\\|_2\\|Hx\\|_2$, hence $\\|H^{-1}\\|\\le1/\\mu$; symmetry gives the same bound for $H^{-T}$. The Euclidean dual formula and [F7] give $\\|B^Ty\\|_2\\le\\|B\\|\\|y\\|_2$, so $\\|\\widehat h-\\bar h(\\widetilde w)\\|_2=\\|B^TH^{-T}\\rho\\|_2\\le(B_0/\\mu)\\|\\rho\\|_2$.",
+          "step": "1.5",
+          "inputs": [
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "combined-estimate",
+          "claim": "For the exact-state claim, put $H:=H(\\theta_0,w_0)$, $B:=B(\\theta_0,w_0)$, $c:=c(w_0)$, and $d:=d(w_0)$, and let $v_*:=H^{-T}d$. Since $w_0=w^*(\\theta_0)$, [F2] gives $\\nabla_\\theta J(\\theta_0)=c-B^Tv_*$. The residual identity gives $v_*-\\widetilde v=H^{-T}\\rho$. For every $x$, the stated symmetry and lower-bound certificate together with [F7] imply $\\mu\\|x\\|_2^2\\le x^THx\\le\\|x\\|_2\\|Hx\\|_2$, so $\\|H^{-1}\\|\\le1/\\mu$; symmetry gives $\\|H^{-T}\\|\\le1/\\mu$. The Euclidean dual formula and [F7] give $\\|B^Ty\\|_2\\le\\|B\\|\\|y\\|_2$. Therefore $$\\|\\widehat h-\\nabla_\\theta J(\\theta_0)\\|_2=\\|B^TH^{-T}\\rho\\|_2\\le\\frac{\\|B\\|\\,\\|\\rho\\|_2}{\\mu}=\\frac{\\|B(\\theta_0,w^*(\\theta_0))\\|\\,\\|\\rho\\|_2}{\\mu}.$$ This proves the exact-state claim using only its stated hypotheses.",
+          "step": "1.6",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "state-formula-bound",
+          "claim": "For any matrix $M$ and vector $x$, the Euclidean dual formula $\\|M^Tx\\|_2=\\sup_{\\|y\\|_2=1}|y^TM^Tx|$ and [F7] give $\\|M^Tx\\|_2\\le\\|M\\|\\|x\\|_2$. Put $\\delta:=\\|\\widetilde w-w^*\\|_2$. Apply this norm bound to the three terms in step 1.4. The first and third terms have norms at most $L_c\\delta$ and $MB_0L_d\\delta$, respectively, by the stated Lipschitz bounds and step 1.3. The middle term is at most $\\kappa D_*(M^2L_AB_0+ML_B)\\|r\\|_2$ by step 1.1 and $\\|d(w^*)\\|_2\\le D_*$. Therefore $\\|\\bar h(\\widetilde w)-\\nabla_\\theta J(\\theta_0)\\|_2\\le(L_c+MB_0L_d)\\delta+\\kappa D_*(M^2L_AB_0+ML_B)\\|r\\|_2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 1.1",
+            "step 1.3",
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "residual-substitution",
+          "claim": "Substitute the state-residual estimate from step 1.2 into step 2.1. This gives the first term in the asserted approximate-state bound for the implicit formula evaluation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Combine the approximate-state formula bound from step 3.1 and the solve-error bound from step 1.5 by the triangle inequality. This gives the approximate-state bound under its separate chart and Lipschitz hypotheses.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 1.5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem uses positive finite state and parameter dimensions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.6 treats exact state r=0; the approximate-state term vanishes and only solve residual remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.5 apply to scalar H when H >= mu > 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires a symmetric positive-definite certificate; singular or indefinite evaluated Hessians are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The approximate-state clause is restricted to the stated open residual and state charts."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives error bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives error bounds, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read all nine steps, actual sensitivity lemma proof and full inverse-chart hypotheses, chain rule, mean-value inequality and Euclidean Cauchy–Schwarz. r and rho are different residuals. The residual-chart path gives delta<=kappa||r|| even with only segment derivative control, by restriction to a one-dimensional interval and endpoint continuity. The inverse difference identity proves a state-Lipschitz sensitivity bound too, but the old step did not explicitly derive it; reader step 2.1 correctly keeps kappa D_*(M^2 L_A B_0+M L_B)||r|| separate from (L_c+M B_0 L_d)delta. Substitution proves the claimed coefficient. SPD gives inverse norm <=1/mu and rho identity gives B_0||rho||/mu. Exact-state step 1.6 uses only its separate assumptions. Checked scalar, r=0, rho=0, singular exclusion and chart endpoints. Raw archived preimage matches pre hash and current raw matches post hash; accepted reader clarification with confidence 1, no further source edit."
+      }
+    },
+    "rem-truncated-training-and-exact-hypergradients": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark has no phase proof worksheet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly includes q=0 with the K=1 exponent convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes K=1 as a finite iterate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement preserves the q=0 edge convention and distinguishes it from q in (0,1) examples."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is local at theta0 in an open parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The statement makes no choice use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark states distinctions and bounds, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark states distinctions and bounds, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read the entire Boundary and both actual sensitivity/shared-parameter supplier statements and proofs. Contraction, invariant convex D, C2 neighborhood, derivative-Lipschitz constants, C1 initial map and fixed parameter match the finite-iteration supplier. The recurrence for derivative error is q D_k+C delta_0 q^k and sums to q^K d_0+C K q^{K-1}delta_0. Checked q=0,K=1 and K>1, p=0 or m=0, zero state residual and finite evaluation neighborhoods. The separate BPTT formula includes the initial-state derivative and empty sum at T=0; dimensions/transposes match the current batch-38 theorem. No claim of differentiating a stopped iteration from a small residual alone. No choice or new defect."
+      }
+    },
+    "ex-ridge-hyperparameter-hypergradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-bilevel-learning-problem",
+          "source_section": "Definition",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means continuously differentiable on the open domain, and $C^2$ means that the derivative map is itself continuously differentiable. Gradients are column vectors, vector norms are Euclidean, and the norm of a matrix or linear map is the induced Euclidean operator norm.\n\nFor $(\\theta,w)\\in\\Theta\\times W$, define the inner stationarity residual $F(\\theta,w):=\\nabla_w f(\\theta,w)\\in\\mathbb R^d$, its state Jacobian $H(\\theta,w):=D_wF(\\theta,w)\\in\\mathbb R^{d\\times d}$, and its parameter Jacobian $B(\\theta,w):=D_\\theta F(\\theta,w)\\in\\mathbb R^{d\\times p}$. Thus $H$ is the inner Hessian and $B$ is the mixed derivative of the inner gradient. A point $(\\theta_0,w_0)$ is stationary when $F(\\theta_0,w_0)=0$. If a $C^1$ map $w^*:P\\to Q$, for open neighborhoods $P\\subseteq\\Theta$ of $\\theta_0$ and $Q\\subseteq W$ of $w_0$, satisfies $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for all $\\theta\\in P$, it is a local stationary branch. The associated outer objective is $J(\\theta):=g(w^*(\\theta),\\theta)$, and its column gradient $\\nabla_\\theta J$ is called the hypergradient of that branch. The definition of a local stationary branch imposes no global-minimality requirement.\n\nFor $\\mu>0$, the phrase globally $\\mu$-strongly convex in $w$ means that $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for every $u,v\\in\\mathbb R^d$, satisfies\n\n$$f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-bilevel-hypergradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means total differentiability with continuous derivative, and $C^2$ means the derivative map is $C^1$. Define $F(\\theta,w)=\\nabla_w f(\\theta,w)$, $H(\\theta,w)=D_wF(\\theta,w)$, and $B(\\theta,w)=D_\\theta F(\\theta,w)$. Suppose $F(\\theta_0,w_0)=0$ and $H(\\theta_0,w_0)$ is invertible. Then there are open neighborhoods $P\\subseteq\\Theta$ and $Q\\subseteq W$ of $\\theta_0$ and $w_0$ and a unique $C^1$ local stationary branch $w^*:P\\to Q$ through $(\\theta_0,w_0)$, meaning $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for every $\\theta\\in P$. After shrinking $P$ if necessary, $H(\\theta,w^*(\\theta))$ is invertible and\n\n$$Dw^*(\\theta)=-H(\\theta,w^*(\\theta))^{-1}B(\\theta,w^*(\\theta)).$$\n\nWrite $H^{-T}:=(H^{-1})^T$. For $J(\\theta)=g(w^*(\\theta),\\theta)$, where $\\partial_\\theta g$ holds $w$ fixed and gradients are column vectors, the hypergradient is\n\n$$\\nabla_\\theta J(\\theta)=\\partial_\\theta g(w^*(\\theta),\\theta)-B(\\theta,w^*(\\theta))^T H(\\theta,w^*(\\theta))^{-T}\\nabla_w g(w^*(\\theta),\\theta).$$\n\nThe local branch need not be a global inner optimizer. In the separate global regime where, for every $\\theta\\in P$, $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for some $\\mu>0$, satisfies $f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2$ for every $u,v\\in\\mathbb R^d$, each stationary point is the unique global minimizer.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ridge-inner-solution",
+          "claim": "Differentiate the inner loss: $\\partial_wf=(1+\\lambda)w-1$ and $H=1+\\lambda>0$. Thus its stationary point is $w^*=1/(1+\\lambda)$. Completing the square gives $f(\\lambda,w)=\\frac12(1+\\lambda)(w-\\frac1{1+\\lambda})^2+\\frac{\\lambda}{2(1+\\lambda)}$, so this stationary point is the unique global minimizer.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "direct-outer-derivative",
+          "claim": "Substitution into the outer loss gives $J(\\lambda)=1/(2(1+\\lambda)^2)$, whose direct derivative is $J'(\\lambda)=-1/(1+\\lambda)^3$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "implicit-formula-check",
+          "claim": "At $w^*$, the mixed derivative is $B=\\partial_\\lambda((1+\\lambda)w-1)=w^*=1/(1+\\lambda)$, the state derivative is $\\nabla_wg=w^*=1/(1+\\lambda)$, and $\\partial_\\lambda g=0$. Formula [F2] therefore gives $-B H^{-1}\\nabla_wg=-1/(1+\\lambda)^3$, agreeing with step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one scalar parameter and one scalar state."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement restricts lambda to the open domain (0,infinity), excluding zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the complete scalar stationary equation and solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies H=1+lambda>0 for every admissible lambda."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Lambda=0 is outside the stated open parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The calculation uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a derivative and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a derivative and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read all three verification steps and both cited prerequisites. Directly completed the square: minimum constant lambda/(2(1+lambda)), H=1+lambda>0, B=w*, direct g parameter derivative zero, and outer derivative -1/(1+lambda)^3. Smooth open lambda>0 domain meets local theorem; lambda=0 is excluded rather than silently used. Unique global minimizer follows from positive square coefficient, no unproved existence/choice. Correct scalar example, no repair."
+      }
+    },
+    "ex-singular-hessian-nonisolated-inner-minimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-bilevel-learning-problem",
+          "source_section": "Definition",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means continuously differentiable on the open domain, and $C^2$ means that the derivative map is itself continuously differentiable. Gradients are column vectors, vector norms are Euclidean, and the norm of a matrix or linear map is the induced Euclidean operator norm.\n\nFor $(\\theta,w)\\in\\Theta\\times W$, define the inner stationarity residual $F(\\theta,w):=\\nabla_w f(\\theta,w)\\in\\mathbb R^d$, its state Jacobian $H(\\theta,w):=D_wF(\\theta,w)\\in\\mathbb R^{d\\times d}$, and its parameter Jacobian $B(\\theta,w):=D_\\theta F(\\theta,w)\\in\\mathbb R^{d\\times p}$. Thus $H$ is the inner Hessian and $B$ is the mixed derivative of the inner gradient. A point $(\\theta_0,w_0)$ is stationary when $F(\\theta_0,w_0)=0$. If a $C^1$ map $w^*:P\\to Q$, for open neighborhoods $P\\subseteq\\Theta$ of $\\theta_0$ and $Q\\subseteq W$ of $w_0$, satisfies $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for all $\\theta\\in P$, it is a local stationary branch. The associated outer objective is $J(\\theta):=g(w^*(\\theta),\\theta)$, and its column gradient $\\nabla_\\theta J$ is called the hypergradient of that branch. The definition of a local stationary branch imposes no global-minimality requirement.\n\nFor $\\mu>0$, the phrase globally $\\mu$-strongly convex in $w$ means that $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for every $u,v\\in\\mathbb R^d$, satisfies\n\n$$f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-bilevel-hypergradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means total differentiability with continuous derivative, and $C^2$ means the derivative map is $C^1$. Define $F(\\theta,w)=\\nabla_w f(\\theta,w)$, $H(\\theta,w)=D_wF(\\theta,w)$, and $B(\\theta,w)=D_\\theta F(\\theta,w)$. Suppose $F(\\theta_0,w_0)=0$ and $H(\\theta_0,w_0)$ is invertible. Then there are open neighborhoods $P\\subseteq\\Theta$ and $Q\\subseteq W$ of $\\theta_0$ and $w_0$ and a unique $C^1$ local stationary branch $w^*:P\\to Q$ through $(\\theta_0,w_0)$, meaning $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for every $\\theta\\in P$. After shrinking $P$ if necessary, $H(\\theta,w^*(\\theta))$ is invertible and\n\n$$Dw^*(\\theta)=-H(\\theta,w^*(\\theta))^{-1}B(\\theta,w^*(\\theta)).$$\n\nWrite $H^{-T}:=(H^{-1})^T$. For $J(\\theta)=g(w^*(\\theta),\\theta)$, where $\\partial_\\theta g$ holds $w$ fixed and gradients are column vectors, the hypergradient is\n\n$$\\nabla_\\theta J(\\theta)=\\partial_\\theta g(w^*(\\theta),\\theta)-B(\\theta,w^*(\\theta))^T H(\\theta,w^*(\\theta))^{-T}\\nabla_w g(w^*(\\theta),\\theta).$$\n\nThe local branch need not be a global inner optimizer. In the separate global regime where, for every $\\theta\\in P$, $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for some $\\mu>0$, satisfies $f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2$ for every $u,v\\in\\mathbb R^d$, each stationary point is the unique global minimizer.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonisolated-minimizers",
+          "claim": "The inner loss is nonnegative and equals zero exactly when $u=\\theta$, independently of $v$. Therefore its full global minimizer set is $\\{(\\theta,v):v\\in\\mathbb R\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "singular-hessian",
+          "claim": "Its state gradient is $(u-\\theta,0)^T$ and its Hessian is $\\begin{pmatrix}1&0\\\\0&0\\end{pmatrix}$, whose kernel contains $(0,1)^T$ and is therefore singular.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "different-branch-gradients",
+          "claim": "The maps $w_0^*(\\theta)=(\\theta,0)$ and $w_1^*(\\theta)=(\\theta,\\theta)$ are both $C^1$ and lie in the minimizing set from step 1.1 for every $\\theta$. Their outer objectives are $g(w_0^*(\\theta),\\theta)=0$ and $g(w_1^*(\\theta),\\theta)=\\theta$, so their derivatives are respectively $0$ and $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "formula-inapplicable",
+          "claim": "Since these two admissible selections yield distinct derivatives and step 1.2 violates the invertibility hypothesis in [F2], the input does not determine one hypergradient through the argmin set, and the local formula does not apply.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one parameter and two state coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 identifies the zero Hessian direction in the v coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example statement fixes one scalar parameter and two explicit state coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 verify singularity and the resulting distinct branch derivatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All functions are defined on the full open Euclidean domains."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example constructs two explicit branches and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The witness loss has a free v direction and two smooth minimizing selections whose outer derivatives are zero and one. It demonstrates nonuniqueness of the branch hypergradient, without claiming that every singular Hessian necessarily produces these branches or this ambiguity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The witness loss has a free v direction and two smooth minimizing selections whose outer derivatives are zero and one. It demonstrates nonuniqueness of the branch hypergradient, without claiming that every singular Hessian necessarily produces these branches or this ambiguity.",
+            "item_sha256": "f38c92c93afa1db0c9e827d2c0bc1db030dc7764e66418d62a0b6e0d7e36af15",
+            "row_sha256": "f9524e90b06bd1af3073b9d55ffc9c897be767dda020d8e9364d407d7e4e5dfb"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The witness loss has a free v direction and two smooth minimizing selections whose outer derivatives are zero and one. It demonstrates nonuniqueness of the branch hypergradient, without claiming that every singular Hessian necessarily produces these branches or this ambiguity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The witness loss has a free v direction and two smooth minimizing selections whose outer derivatives are zero and one. It demonstrates nonuniqueness of the branch hypergradient, without claiming that every singular Hessian necessarily produces these branches or this ambiguity.",
+            "item_sha256": "f38c92c93afa1db0c9e827d2c0bc1db030dc7764e66418d62a0b6e0d7e36af15",
+            "row_sha256": "a1f75bb81512d5aec549c933e87342cee5c71d473114a0b4e2e5cdd8f36e8275"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read all four verification steps and both cited prerequisites. f>=0 with equality exactly u=theta for every v; Hessian diag(1,0) has nonzero kernel vector. Both explicit smooth selections minimize globally and produce outer derivatives 0 and 1, including at theta=0 where selections coincide but derivatives differ. The example does not assert that every singular Hessian makes a branch ambiguous. Invertibility hypothesis fails as stated; no use of an inverse or choice. No repair."
+      }
+    },
+    "ex-exact-state-wrong-truncated-hypergradient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-smooth-bilevel-learning-problem",
+          "source_section": "Definition",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means continuously differentiable on the open domain, and $C^2$ means that the derivative map is itself continuously differentiable. Gradients are column vectors, vector norms are Euclidean, and the norm of a matrix or linear map is the induced Euclidean operator norm.\n\nFor $(\\theta,w)\\in\\Theta\\times W$, define the inner stationarity residual $F(\\theta,w):=\\nabla_w f(\\theta,w)\\in\\mathbb R^d$, its state Jacobian $H(\\theta,w):=D_wF(\\theta,w)\\in\\mathbb R^{d\\times d}$, and its parameter Jacobian $B(\\theta,w):=D_\\theta F(\\theta,w)\\in\\mathbb R^{d\\times p}$. Thus $H$ is the inner Hessian and $B$ is the mixed derivative of the inner gradient. A point $(\\theta_0,w_0)$ is stationary when $F(\\theta_0,w_0)=0$. If a $C^1$ map $w^*:P\\to Q$, for open neighborhoods $P\\subseteq\\Theta$ of $\\theta_0$ and $Q\\subseteq W$ of $w_0$, satisfies $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for all $\\theta\\in P$, it is a local stationary branch. The associated outer objective is $J(\\theta):=g(w^*(\\theta),\\theta)$, and its column gradient $\\nabla_\\theta J$ is called the hypergradient of that branch. The definition of a local stationary branch imposes no global-minimality requirement.\n\nFor $\\mu>0$, the phrase globally $\\mu$-strongly convex in $w$ means that $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for every $u,v\\in\\mathbb R^d$, satisfies\n\n$$f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-iteration-sensitivity-bound-and-residual-limitation",
+          "source_section": "Statement",
+          "quote": "Let $p,m\\ge0$, let $\\Theta\\subseteq\\mathbb R^p$ be open with $\\theta_0\\in\\Theta$, and let $G:U\\to\\mathbb R^m$ be $C^2$ on an open neighborhood $U\\subseteq\\mathbb R^m\\times\\Theta$ of $D\\times\\{\\theta_0\\}$. Suppose $D\\subseteq\\mathbb R^m$ is an open convex neighborhood of $z_*$ and $z_*=G(z_*,\\theta_0)$. Assume $G(D,\\theta_0)\\subseteq D$, $\\|G_z(z,\\theta_0)\\|\\le q<1$ on $D$, and $G_z,G_\\theta$ are Lipschitz in $z$ with constants $L_z,L_\\theta$. Let $z_0:\\Theta\\to\\mathbb R^m$ be $C^1$, with the iterates at $\\theta_0$ lying in $D$. Write $s_*=D\\phi(\\theta_0)$ for the local exact fixed-point branch (supplied by the implicit function theorem when $p,m\\ge1$), $e_k=D_\\theta z_k(\\theta_0)$, $\\delta_0=\\|z_0(\\theta_0)-z_*\\|$, $d_0=\\|e_0-s_*\\|$, and $C=L_z\\|s_*\\|+L_\\theta$. For every integer $K\\ge1$,\n$$\\|z_K(\\theta_0)-z_*\\|\\le q^K\\delta_0,\\qquad \\|e_K-s_*\\|\\le q^K d_0+C K q^{K-1}\\delta_0,$$\nwith $q^0=1$ when $q=0,K=1$. If $R(z,\\theta)=z-G(z,\\theta)$ and $r_K=R(z_K(\\theta_0),\\theta_0)$, then $(1-q)\\|z_K-z_*\\|\\le\\|r_K\\|$. The derivative error is not bounded by the residual alone: for $G(z,\\theta)=qz+(1-q)\\theta$, $\\theta_0=0$, and $z_0(\\theta)=0$, every finite $K$ has residual zero at $\\theta_0$ but $e_K=1-q^K\\ne1=s_*$ when $0<q<1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-bilevel-hypergradient-formula",
+          "source_section": "Statement",
+          "quote": "Let $p,d\\ge1$, let $\\Theta\\subseteq\\mathbb R^p$ and $W\\subseteq\\mathbb R^d$ be open, and let $f:\\Theta\\times W\\to\\mathbb R$ be $C^2$ and $g:W\\times\\Theta\\to\\mathbb R$ be $C^1$. Here $C^1$ means total differentiability with continuous derivative, and $C^2$ means the derivative map is $C^1$. Define $F(\\theta,w)=\\nabla_w f(\\theta,w)$, $H(\\theta,w)=D_wF(\\theta,w)$, and $B(\\theta,w)=D_\\theta F(\\theta,w)$. Suppose $F(\\theta_0,w_0)=0$ and $H(\\theta_0,w_0)$ is invertible. Then there are open neighborhoods $P\\subseteq\\Theta$ and $Q\\subseteq W$ of $\\theta_0$ and $w_0$ and a unique $C^1$ local stationary branch $w^*:P\\to Q$ through $(\\theta_0,w_0)$, meaning $w^*(\\theta_0)=w_0$ and $F(\\theta,w^*(\\theta))=0$ for every $\\theta\\in P$. After shrinking $P$ if necessary, $H(\\theta,w^*(\\theta))$ is invertible and\n\n$$Dw^*(\\theta)=-H(\\theta,w^*(\\theta))^{-1}B(\\theta,w^*(\\theta)).$$\n\nWrite $H^{-T}:=(H^{-1})^T$. For $J(\\theta)=g(w^*(\\theta),\\theta)$, where $\\partial_\\theta g$ holds $w$ fixed and gradients are column vectors, the hypergradient is\n\n$$\\nabla_\\theta J(\\theta)=\\partial_\\theta g(w^*(\\theta),\\theta)-B(\\theta,w^*(\\theta))^T H(\\theta,w^*(\\theta))^{-T}\\nabla_w g(w^*(\\theta),\\theta).$$\n\nThe local branch need not be a global inner optimizer. In the separate global regime where, for every $\\theta\\in P$, $f(\\theta,\\cdot)$ is defined on all of $\\mathbb R^d$ and, for some $\\mu>0$, satisfies $f(\\theta,v)\\ge f(\\theta,u)+\\nabla_w f(\\theta,u)^T(v-u)+\\frac{\\mu}{2}\\|v-u\\|_2^2$ for every $u,v\\in\\mathbb R^d$, each stationary point is the unique global minimizer.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-fixed-point",
+          "claim": "Solving $z=G(z,\\theta)$ gives $(1-q)z=(1-q)\\theta$. Since $1-q>0$, the unique fixed point is $z^*(\\theta)=\\theta$, and therefore $J(\\theta)=z^*(\\theta)$ has derivative $1$. Also $G_z=q<1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $K=0$, $z_0(\\theta)=(1-q^0)\\theta=0$. If $z_K(\\theta)=(1-q^K)\\theta$, then $z_{K+1}=q(1-q^K)\\theta+(1-q)\\theta=(1-q^{K+1})\\theta$. Induction gives the displayed finite-iterate formula for every $K\\ge1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "closed-form-iterate",
+          "claim": "The inner objective has $\\partial_zf=z-\\theta$, so its stationary branch is the same $z^*(\\theta)=\\theta$ as the fixed-point branch. Here $H=1$, $B=-1$, $\\partial_\\theta g=0$, and $\\nabla_zg=1$. Formula [F3] therefore gives $0-(-1)(1)^{-1}(1)=1$, verifying the exact hypergradient under the bilevel prerequisites.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-residual",
+          "claim": "At $\\theta_0=0$, step 1.2 gives $z_K(0)=0=z^*(0)$ and the fixed-point residual is $z_K(0)-G(z_K(0),0)=0-G(0,0)=0$. The stopped outer objective is $J_K(\\theta)=g(z_K(\\theta),\\theta)=(1-q^K)\\theta$, so $J_K'(0)=1-q^K$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "wrong-stopped-derivative",
+          "claim": "Because $0<q<1$ and $K\\ge1$, $q^K>0$, hence $1-q^K\\ne1$. Thus the zero residual at the exact state does not make the finite-unroll derivative equal to the exact hypergradient.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one scalar parameter and one scalar state."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 computes zero exact-state residual at theta0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes K=1 in the finite-iterate recurrence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes 0<q<1, excluding the endpoints where the displayed discrepancy can vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter domain is all of R and the example is evaluated at an interior point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar recurrence is deterministic and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a discrepancy and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a discrepancy and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-93",
+        "notes": "Read all five verification steps and actual stationary-branch, finite-iteration and remark prerequisites. Induction including K=0 gives z_K=(1-q^K)theta; at theta=0 both state and residual vanish while finite derivative is 1-q^K. Since 0<q<1 and K>=1, discrepancy q^K is strictly positive. Explicit f=(z-theta)^2/2 connects the fixed point to the stationary problem: H=1, B=-1 and g_z=1 give hypergradient 1 on full open scalar domains. q=0 and q=1 are excluded (the former would remove discrepancy); no asymptotic or uniform-error claim, endpoint issue, choice or hidden inverse assumption. All citations and dimensions match. No repair."
+      }
+    }
+  }
+}

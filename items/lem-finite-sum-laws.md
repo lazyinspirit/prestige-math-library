@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/quantum-prerequisites-4-2026-10-15-owner/published-repairs/lem-finite-sum-laws.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-finite-sum-laws.json
 id: lem-finite-sum-laws
 kind: lemma
 title: "Laws of finite sums and finite products"
@@ -34,14 +34,22 @@ pipeline_run: null
 
 Let $a, b, c : \mathbb{N} \to \mathbb{R}$ be sequences of reals, let
 $\lambda \in \mathbb{R}$, and let $m, n \in \mathbb{N}$, with finite sums and
-finite products as in [[def-finite-sum]]. Then:
+finite products as in Finite sums and finite products, by recursion. Then:
 
 1. **Additivity.** $\displaystyle\sum_{k<n}(a_k + b_k) = \sum_{k<n} a_k + \sum_{k<n} b_k$.
-2. **Scaling.** $\displaystyle\sum_{k<n} \lambda a_k = \lambda \sum_{k<n} a_k$; in particular $\displaystyle\sum_{k<n} \lambda = n\lambda$, where $n$ denotes the canonical field image $n\cdot1_{\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).
+2. **Scaling.** $\displaystyle\sum_{k<n} \lambda a_k = \lambda \sum_{k<n} a_k$; in particular $\displaystyle\sum_{k<n} \lambda = n\lambda$, where $n$ denotes the canonical field image $n\cdot1_{\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).
 3. **Splitting.** If $m \le n$ then $\displaystyle\sum_{k<n} a_k = \sum_{k<m} a_k + \sum_{k=m}^{n-1} a_k$, and $\displaystyle\prod_{k<n} a_k = \Big(\prod_{k<m} a_k\Big)\Big(\prod_{k=m}^{n-1} a_k\Big)$.
 4. **Monotonicity.** If $a_k \le b_k$ for all $k < n$ then $\displaystyle\sum_{k<n} a_k \le \sum_{k<n} b_k$. In particular, if $a_k \ge 0$ for all $k < n$ then $\sum_{k<n} a_k \ge 0$, every single term satisfies $a_j \le \sum_{k<n} a_k$ for $j < n$, and $\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.
 5. **Telescoping.** $\displaystyle\sum_{k<n}\big(c_{k+1} - c_k\big) = c_n - c_0$.
 6. **Products.** $\displaystyle\prod_{k<n}(a_k b_k) = \Big(\prod_{k<n} a_k\Big)\Big(\prod_{k<n} b_k\Big)$; if $a_k \ge 0$ for all $k < n$ then $\prod_{k<n} a_k \ge 0$, and if $a_k > 0$ for all $k < n$ then $\prod_{k<n} a_k > 0$.
+
+## Statement references
+
+[[def-finite-sum]]
+
+[[lem-of-q-embeds]]
+
+[[lem-of-naturals-positive]]
 
 ## Facts & Assumptions
 

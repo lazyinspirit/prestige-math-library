@@ -1,0 +1,192 @@
+[
+  {
+    "order": 2784,
+    "id": "overparameterized-training-and-interpolation",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Overparameterized networks and training to interpolation",
+    "companion": "overparameterized-training-and-interpolation-examples",
+    "requires": [
+      "gaussian-process-support-and-concentration",
+      "nonconvex-gradient-descent-and-stationarity",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {"id":"lem-du-activation-normalizer-finite-positive","kind":"lemma","title":"The Gaussian activation normalizer is finite and positive","deps":["def-standard-normal-and-normal-laws","lem-gaussian-even-moment-bound-for-brownian-increments","def-axiom-of-choice"],"dependency_level":0},
+      {"id":"lem-du-conditional-loss-contraction-under-gram-control","kind":"lemma","title":"Gram control and a Taylor remainder imply one-step loss contraction","deps":[],"dependency_level":0},
+      {
+        "id": "def-du-overparameterized-network-architectures-and-gram-kernels",
+        "kind": "definition",
+        "title": "Fully connected and residual networks with the Du Gram kernel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-feedforward-neural-network",
+          "lem-du-activation-normalizer-finite-positive",
+          "def-multivariate-normal-law",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+        "kind": "lemma",
+        "title": "The recursively defined population Gram matrices are finite, symmetric, and positive semidefinite",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-activation-normalizer-finite-positive",
+          "def-multivariate-normal-law",
+          "cor-countable-independent-copies-exist",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-induction-principle",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2
+      },
+      {"id":"lem-du-output-gradient-gram-update-identity","kind":"lemma","title":"Gradient descent induces an exact output Gram update with a Taylor remainder","deps":["def-du-overparameterized-network-architectures-and-gram-kernels","thm-shared-parameter-backpropagation-gradient-formula","alg-gradient-descent","def-real-frechet-derivative-on-real-and-complex-matrix-spaces"],"dependency_level":2},
+      {"id":"lem-du-initial-output-gaussian-concentration","kind":"lemma","title":"Gaussian output initialization concentrates conditionally on the hidden features","deps":["def-du-overparameterized-network-architectures-and-gram-kernels","thm-standard-gaussian-lipschitz-concentration","def-multivariate-normal-law","def-axiom-of-choice","def-dependent-choice","def-countable-choice"],"dependency_level":2},
+      {
+        "id": "lem-du-local-pl-descent-and-path-length",
+        "kind": "lemma",
+        "title": "Local Gram positivity and loss smoothness give confined gradient descent",
+        "deps": [
+          "alg-gradient-descent",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-du-neighborhood-gram-and-hessian-control",
+        "kind": "lemma",
+        "title": "Parameter-ball control of the last-layer Gram and loss Hessian",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "thm-shared-parameter-backpropagation-gradient-formula",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-du-simultaneous-initialization-event",
+        "kind": "lemma",
+        "title": "Simultaneous initialization estimates for the Du architectures",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "lem-du-initial-output-gaussian-concentration",
+          "thm-standard-gaussian-lipschitz-concentration",
+          "def-multivariate-normal-law",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "kind": "theorem",
+        "title": "Wide fully connected networks converge geometrically to zero empirical training loss",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "lem-du-output-gradient-gram-update-identity",
+          "lem-du-initial-output-gaussian-concentration",
+          "lem-du-conditional-loss-contraction-under-gram-control",
+          "lem-du-simultaneous-initialization-event",
+          "lem-du-neighborhood-gram-and-hessian-control",
+          "lem-du-local-pl-descent-and-path-length",
+          "alg-gradient-descent",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-standard-gaussian-lipschitz-concentration",
+          "thm-shared-parameter-backpropagation-gradient-formula",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-residual-network-polynomial-width-training-convergence",
+        "kind": "theorem",
+        "title": "Wide residual networks converge geometrically to zero empirical loss with polynomial depth dependence",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "lem-du-output-gradient-gram-update-identity",
+          "lem-du-initial-output-gaussian-concentration",
+          "lem-du-conditional-loss-contraction-under-gram-control",
+          "lem-du-simultaneous-initialization-event",
+          "lem-du-neighborhood-gram-and-hessian-control",
+          "lem-du-local-pl-descent-and-path-length",
+          "alg-gradient-descent",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-standard-gaussian-lipschitz-concentration",
+          "thm-shared-parameter-backpropagation-gradient-formula",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2785,
+    "id": "overparameterized-training-and-interpolation-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Overparameterized networks and training to interpolation — Examples",
+    "companion": "overparameterized-training-and-interpolation",
+    "requires": ["overparameterized-training-and-interpolation"],
+    "items": [
+      {"id":"ex-du-relu-outside-analytic-activation-class","kind":"example","title":"ReLU lies outside the analytic activation assumptions","deps":["def-du-overparameterized-network-architectures-and-gram-kernels"],"dependency_level":2},
+      {"id":"ex-du-residual-skip-at-every-layer","kind":"example","title":"The analyzed residual network skips at every layer","deps":["def-du-overparameterized-network-architectures-and-gram-kernels"],"dependency_level":2},
+      {"id":"ex-du-interpolation-does-not-imply-test-fit","kind":"example","title":"Empirical interpolation does not determine test predictions","deps":["def-du-overparameterized-network-architectures-and-gram-kernels"],"dependency_level":2},
+      {
+        "id": "ex-du-duplicate-inputs-force-singular-gram",
+        "kind": "example",
+        "title": "Duplicate inputs force the population Gram matrix to be singular",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-induction-principle"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-du-initial-output-common-mode-variance",
+        "kind": "example",
+        "title": "Correlated inputs create a high-variance common initialization mode",
+        "deps": [
+          "def-du-overparameterized-network-architectures-and-gram-kernels",
+          "lem-du-activation-normalizer-finite-positive",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "cor-cauchy-schwarz-for-random-variables",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

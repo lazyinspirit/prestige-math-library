@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-elbo-kl-decomposition.json
 id: thm-elbo-kl-decomposition
 kind: theorem
 title: "Evidence lower bound is log evidence minus reverse KL"
@@ -31,10 +33,14 @@ sources:
 
 ## Statement
 
-Let $\mu,\gamma,Z,\pi,q$ satisfy [[def-variational-family-and-elbo]], and put $Q=q\,\mu$ and $\Pi=\pi\,\mu$. The choice-free density-ratio identity
+Let $\mu,\gamma,Z,\pi,q$ satisfy Variational family and evidence lower bound, and put $Q=q\,\mu$ and $\Pi=\pi\,\mu$. The choice-free density-ratio identity
 $$\log Z=\operatorname{ELBO}(q)+\int q\log(q/\pi)\,d\mu$$
 holds, with the ratio integrand set to zero where $q=0$. Under AC, the final integral is the library reverse divergence $D(Q\|\Pi)$ and is nonnegative. Consequently
 $$\operatorname{ELBO}(q)\le\log Z.$$
+
+## Statement references
+
+[[def-variational-family-and-elbo]]
 
 ## Facts & Assumptions
 

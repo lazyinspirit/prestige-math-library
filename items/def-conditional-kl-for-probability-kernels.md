@@ -17,6 +17,7 @@ provenance:
   proof: not-applicable
 axiom_use: "AC is inherited from measurable-space KL and the countable determining-algebra interface used for standard-Borel kernels."
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-conditional-kl-for-probability-kernels.json
   precheck: n/a
 sources:
   references:
@@ -30,5 +31,9 @@ sources:
 
 Let $(Z,\mathcal Z)$ and $(E,\mathcal E)$ be standard-Borel spaces, let $\mu$ be a probability measure on $Z$, and let $K,L:Z\rightsquigarrow E$ be supplied probability kernels. Define their **conditional KL divergence with base $\mu$** by
 $$D_\mu(K\|L):=\int_Z D(K(z,\cdot)\|L(z,\cdot))\,\mu(dz)\in[0,+\infty].$$
-The integrand is measurable by [[thm-conditional-kl-is-measurable]], so this is a well-defined nonnegative extended integral. No absolute-continuity assumption is imposed on individual fibers; a singular fiber has divergence $+\infty$. Changing supplied kernel versions on a $\mu$-null set does not change the integral.
+The integrand is measurable by Conditional KL is measurable for supplied kernels, so this is a well-defined nonnegative extended integral. No absolute-continuity assumption is imposed on individual fibers; a singular fiber has divergence $+\infty$. Changing supplied kernel versions on a $\mu$-null set does not change the integral.
+
+## Definition references
+
+[[thm-conditional-kl-is-measurable]]
 

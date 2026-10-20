@@ -1,0 +1,15 @@
+# Batch 15: repair 1
+
+Run: machine-learning-all-101-2026-10-19
+Batch: 15
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: ml02-rkhs-svm, ml02-rkhs-svm-examples
+Items: def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces, lem-finite-dimensional-projection-in-a-real-inner-product-space, thm-canonical-rkhs-construction-and-reproducing-property, lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization, thm-finite-sample-representer-theorem-in-an-rkhs, def-hard-and-soft-margin-support-vector-machines, lem-soft-margin-svm-primal-attainment, thm-soft-margin-svm-dual-and-kkt-conditions, ex-gaussian-radial-kernel, ex-linear-and-polynomial-kernels, ex-separable-hard-margin-svm, ex-overlapping-soft-margin-svm-score-and-kkt
+Consolidated findings: [{"id":"thm-soft-margin-svm-dual-and-kkt-conditions","type":"local","reason":"Before invoking the Gram-factorization supplier in F4 and step 5.1, explicitly establish that the feature-induced kernel is positive semidefinite: its finite Gram quadratic form is the squared norm of the corresponding feature-vector sum. This verifies the supplier’s hypothesis locally."}]
+Authorized source files: ["items/def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces.md","items/lem-finite-dimensional-projection-in-a-real-inner-product-space.md","items/thm-canonical-rkhs-construction-and-reproducing-property.md","items/lem-positive-semidefinite-gram-matrix-has-euclidean-feature-factorization.md","items/thm-finite-sample-representer-theorem-in-an-rkhs.md","items/def-hard-and-soft-margin-support-vector-machines.md","items/lem-soft-margin-svm-primal-attainment.md","items/thm-soft-margin-svm-dual-and-kkt-conditions.md","items/ex-gaussian-radial-kernel.md","items/ex-linear-and-polynomial-kernels.md","items/ex-separable-hard-margin-svm.md","items/ex-overlapping-soft-margin-svm-score-and-kkt.md","library/machine-learning/ml02-rkhs-svm.md","library/machine-learning/ml02-rkhs-svm-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

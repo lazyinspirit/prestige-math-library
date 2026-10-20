@@ -14,6 +14,7 @@ landmark: true
 short: "zero derivative gives a constant"
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/cor-zero-derivative-implies-constant.json
   audited: 2026-07-28
   precheck: pass
   judge:
@@ -36,10 +37,10 @@ pipeline_run: null
 
 ## Statement
 
-Let $I \subseteq \mathbb{R}$ be order-convex ([[def-interval]]) and let
-$f : I \to \mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and
+Let $I \subseteq \mathbb{R}$ be order-convex (Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and let
+$f : I \to \mathbb{R}$ be continuous on $I$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point) and
 differentiable at every point of $I$ that is interior to $I$
-([[def-interior-closure-boundary-r]], [[def-derivative]]), with
+(Interior, closure, boundary and exterior of a subset of $\mathbb{R}$, The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set), with
 
 $$f'(x) = 0 \qquad \text{at every interior point } x \text{ of } I .$$
 
@@ -67,6 +68,16 @@ the derivative at an endpoint is free to be nonzero: once $f$ is known to be
 constant its difference quotient at an endpoint is constantly $0$, so wherever
 $f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,
 not a hypothesis of it.
+
+## Statement references
+
+[[def-interval]]
+
+[[def-continuity-real]]
+
+[[def-interior-closure-boundary-r]]
+
+[[def-derivative]]
 
 ## Facts & Assumptions
 

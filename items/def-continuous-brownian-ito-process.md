@@ -14,42 +14,43 @@ sources:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Section 5.9"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-continuous-brownian-ito-process.json
   audited: 2026-09-22
 ---
 
 ## Definition
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
-[[def-elementary-predictable-brownian-integrand]]: $B$ is a standard Brownian
+Elementary predictable Brownian integrands: $B$ is a standard Brownian
 motion on a filtered probability space, adapted to $(\mathcal F_t)_{t\ge0}$,
 with $B_t-B_s$ independent of $\mathcal F_s$ of law $N(0,t-s)$ for $0\le s<t$.
 For this localized-calculus definition the filtration satisfies the usual
 conditions, as required by
-[[def-locally-square-integrable-predictable-brownian-integrand]].
+Locally square-integrable predictable Brownian integrands.
 
 1. **Real continuous Brownian Ito process.** A real progressively measurable process
    $X=(X_t)_{t\ge0}$ is a **continuous Brownian Ito process** when there are
    * a finite real $\mathcal F_0$-measurable $X_0$,
    * a real progressively measurable process $b=(b_s)_{s\ge0}$
-     [[def-progressively-measurable-and-predictable-process]] with
+     Progressively measurable and predictable processes with
      $\int_0^t|b_s|\,ds<\infty$ almost surely for every finite $t\ge0$, and
    * a real predictable process $\sigma=(\sigma_s)_{s\ge0}$, locally
      square-integrable in the sense that $\int_0^t\sigma_s^2\,ds<\infty$
      almost surely for every finite $t$
-     [[def-locally-square-integrable-predictable-brownian-integrand]],
+     Locally square-integrable predictable Brownian integrands,
 
    such that, up to equality at all times on a measurable probability-one event,
    $$X_t=X_0+\int_0^tb_s\,ds+\int_0^t\sigma_s\,dB_s,\qquad t\ge0,$$
    where the first integral is the pathwise Lebesgue integral of $s\mapsto
    b_s(\omega)$ and the second is the localized Ito integral
-   $\sigma\cdot B$ of [[thm-localized-ito-integral]]. One writes
+   $\sigma\cdot B$ of Localized Ito integral. One writes
    $\displaystyle dX_t=b_t\,dt+\sigma_t\,dB_t$ for the display, and $b$ is
    called the **drift** and $\sigma$ the **diffusion coefficient** of this
    representation.
 
 2. **Multidimensional Brownian-driven process.** Let $d\ge1$ and $m\ge1$ be
    finite integers, let $B=(B^1,\dots,B^m)$ be a standard $m$-dimensional
-   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to
+   Brownian motion $d$-dimensional Brownian motion that is adapted to
    $(\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of
    $\mathcal F_s$ for $0\le s<t$, let $X_0$ be a finite
    $\mathcal F_0$-measurable $\mathbb R^d$-valued random vector, let $b$ be an
@@ -57,12 +58,12 @@ conditions, as required by
    $\int_0^t|b^i_s|\,ds<\infty$ almost surely for every $i$ and finite $t$, and let
    $\sigma=(\sigma^{ik})$ be an $\mathbb R^{d\times m}$-valued predictable
    process, each entry predictable
-   [[def-progressively-measurable-and-predictable-process]], with
+   Progressively measurable and predictable processes, with
    $\int_0^t(\sigma^{ik}_s)^2\,ds<\infty$ almost surely for every $i,k$ and finite $t$.
    Then
    $$X^i_t=X^i_0+\int_0^tb^i_s\,ds+\sum_{k=1}^m\int_0^t\sigma^{ik}_s\,dB^k_s, \qquad i=1,\dots,d,$$
    defines an $\mathbb R^d$-valued **continuous Brownian Ito process** driven by
-   $B$, using the progressive integral versions of [[thm-localized-ito-integral]]. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.
+   $B$, using the progressive integral versions of Localized Ito integral. Other progressive representatives agreeing on one measurable full event at every time represent the same process. No claim is made that an arbitrary null-path modification remains adapted.
 
 The following well-definedness clauses are part of the definition and are used
 throughout.
@@ -70,7 +71,7 @@ throughout.
 3. **The drift integral is a genuine pathwise integral.** Progressive
    measurability gives measurable sections and makes the positive and negative
    integrals $\mathcal F_t$-measurable by the parameter-integral part of Tonelli
-   [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], applied to Lebesgue measure on $[0,t]$ and the probability measure on $\mathcal F_t$.
+   Tonelli's theorem for nonnegative measurable functions on a sigma-finite product, applied to Lebesgue measure on $[0,t]$ and the probability measure on $\mathcal F_t$.
    On the event where both extended integrals are finite, their difference is
    the drift integral; set it to zero otherwise. This is an adapted measurable
    convention, is finite everywhere, and on one probability-one event is
@@ -82,15 +83,15 @@ throughout.
    almost-sure drift and local-energy classes under the usual conditions.
 
 4. **The stochastic integral exists, is unique and is continuous.** By
-   [[def-locally-square-integrable-predictable-brownian-integrand]] and
-   [[thm-localized-ito-integral]] the localized integral $\sigma\cdot B$ is a
+   Locally square-integrable predictable Brownian integrands and
+   Localized Ito integral the localized integral $\sigma\cdot B$ is a
    well-defined adapted process with continuous paths, unique up to
    indistinguishability, and each of its finite-energy pieces is a
    square-integrable martingale. The displayed integral representative is progressive; $X$ is adapted by its required progressive measurability and has
    continuous paths, $X_t$ is finite almost surely for each $t$, and
    $M^i_t:=\sum_k\int_0^t\sigma^{ik}_s\,dB^k_s$ is a continuous local
    martingale relative to $(\mathcal F_t)$ in the sense of
-   [[def-continuous-time-adapted-process-and-martingale]] for every $i$, with the common energy localizers described in clause 6.
+   Continuous-time adapted processes and martingales for every $i$, with the common energy localizers described in clause 6.
 
 5. **The coefficients are not part of the process.** A continuous Brownian Ito
    process may admit several representations $X=X_0+b\cdot\mathrm{Leb}
@@ -114,7 +115,7 @@ throughout.
    $\sigma1_{[0,\tau]}$; these retain almost-sure integrability and the required
    progressive/predictable measurability. The drift identity is pathwise.
    For the stochastic identity, apply the finite-energy stopping identity of
-   [[thm-localized-ito-integral]], clause 4, on the canonical energy intervals
+   Localized Ito integral, clause 4, on the canonical energy intervals
    of $\sigma$. The truncated integrand has finite energy on these same
    intervals. Comparing its canonical intervals with them at their pairwise
    minima by clause 4 identifies the localized integrals there. Countably
@@ -137,14 +138,31 @@ throughout.
 
 7. **No pathwise integral against Brownian motion is defined.** The display
    defines the stochastic integral only as the localized limit of
-   [[thm-localized-ito-integral]]; no integral $\int_0^tH_s(\omega)\,dB_s(\omega)$
+   Localized Ito integral; no integral $\int_0^tH_s(\omega)\,dB_s(\omega)$
    along the individual path is asserted, and the page's examples show that
    the pathwise Riemann--Stieltjes route is unavailable.
 
 No choice beyond the declared AC of the ambient interfaces enters the
 construction: the coefficients $b,\sigma$ and the process are given data, and
 the canonically localized integral is constructed in
-[[thm-localized-ito-integral]]. The Axiom of Choice is declared because the
+Localized Ito integral. The Axiom of Choice is declared because the
 conditional-expectation and $L^2$ interfaces used downstream assume it, and
 the countable-choice obligations inherited from those interfaces are declared
 as dependencies of this item.
+
+## Definition references
+
+[[def-elementary-predictable-brownian-integrand]]
+
+[[def-locally-square-integrable-predictable-brownian-integrand]]
+
+[[def-progressively-measurable-and-predictable-process]]
+
+[[thm-localized-ito-integral]]
+
+[[def-d-dimensional-brownian-motion]]
+
+[[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+
+[[def-continuous-time-adapted-process-and-martingale]]
+

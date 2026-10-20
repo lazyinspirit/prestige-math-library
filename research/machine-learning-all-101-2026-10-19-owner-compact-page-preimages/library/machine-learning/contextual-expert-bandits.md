@@ -1,0 +1,15 @@
+---
+page: contextual-expert-bandits
+title: Contextual expert bandits
+status: draft
+items:
+  - def-contextual-bandit-protocol
+  - alg-exp4
+  - lem-exp4-unbiased-expert-reward-estimates
+  - lem-exp4-weighted-estimated-loss-second-moment
+  - lem-exp4-potential-inequality
+  - thm-exp4-expected-regret
+examples: []
+requires:
+  - adversarial-bandits-and-importance-weighted-feedback
+---

@@ -1,0 +1,3256 @@
+arXiv:2402.07487v3  [cs.LG]  5 Jul 2025
+
+SCORE-BASED DIFFUSION MODELS VIA STOCHASTIC
+DIFFERENTIAL EQUATIONS
+
+WENPIN TANG AND HANYANG ZHAO
+
+Abstract. This is an expository article on the score-based diffusion models, with a par-
+ticular focus on the formulation via stochastic differential equations (SDE). After a gentle
+introduction, we discuss the two pillars in the diffusion modeling – sampling and score
+matching, which encompass the SDE/ODE sampling, score matching efficiency, the con-
+sistency models, and reinforcement learning. Short proofs are given to illustrate the main
+idea of the stated results. The article is primarily a technical introduction to the field, and
+practitioners may also find some analysis useful in designing new models or algorithms.
+
+Key words: Diffusion models, discretization, generative models, ordinary differential equa-
+tions, reinforcement learning, sampling, score matching, stochastic differential equations,
+total variation, Wasserstein distance.
+
+AMS 2020 Mathematics Subject Classification: 60J60, 62E17, 65C30, 68P01.
+
+What I cannot create, I do not understand. – Richard Feynman
+
+1. Introduction
+
+Diffusion models describe a family of generative models that genuinely create the desired
+target distribution from noise. Inspired from energy-based modeling [76], [31, 81, 83] for-
+malized the idea of diffusion models, which underpin the recent success in the text-to-image
+creators such as DALL·E 2 [70] and Stable Diffusion [73], and the text-to-video generators
+Sora [64], Make-A-Video [75] and Veo [27]. Roughly speaking, score-based diffusion models
+rely on a forward-backward procedure1:
+
+• Forward deconstruction: starting from the target distribution X0 ∼pdata(·), the
+model gradually adds noise to transform the signal into noise X0 →X1 →· · · →
+
+Xn
+d≈pnoise(·).
+• Backward construction: start with Xn ∼pnoise(·), and reverse the forward process to
+
+recover the signal from noise Xn →Xn−1 →· · · →X0
+d≈pdata(·).
+
+Date: Feburary 12, 2024.
+1There is another class of generative models, the flow-based models in which:
+
+• The forward process transform the signal to a prescribed noise by a deterministic flow: X0 →X1 →
+· · · →Xn
+d= pnoise(·). The noise pnoise(·) is often called the prior.
+
+• The backward process reconstructs the signal from noise: Xn →Xn−1 →· · · →X0
+d≈pdata(·).
+
+Examples include normalizing flows [57, 66], rectified flows [19, 58], diffusion bridges [15], and consistency
+models [78, 79]. See Section 5 for a discussion on the probability flow ODE.
+
+1
+
+
+2
+WENPIN TANG AND HANYANG ZHAO
+
+The forward deconstruction is straightforward. What’s the key in the diffusion models is the
+backward construction, and the underlying question is how to reverse the forward process.
+The answer hinges on two pillars: time reversal of (Markov) diffusion processes to set the
+form of the backward process (Section 2), and score matching to learn this process (Section
+4).
+
+(a) Original Swiss Roll
+
+(b) Swiss Roll generation with 200, 400, 600, 800, 10000 iterations.
+
+Figure 1. Swiss Roll generation.
+
+In the original work [31, 77, 81], the forward/backward processes are specified by discrete-
+time Markov chains; [80, 83] unified the previous models through the lens of stochastic
+differential equations (SDE). In fact, there is no conceptual distinction between discrete
+and continuous diffusion models because the diffusion models specified by the SDEs can be
+regarded as the continuum limits of the discrete models (Section 3), and the discrete diffusion
+models are obtained from the continuous models by suitable time discretization (Section 6.3).
+The view is that the SDEs unveil structural properties of the models, whereas the discrete
+counterparts give practical implementation.
+The purpose of this article is to provide a tutorial on the recent theory of score-based
+diffusion models, mainly from a continuous perspective with a statistical focus. References
+on the discrete models will also be given. We sketch the proofs for most stated results, and
+the assumptions are given only when they are crucial in the analysis.
+We often use the
+phrase “under suitable conditions” to avoid less important technical details, and keep the
+presentation concise and to the point. The paper serves as a gentle introduction to the field,
+and practitioners may find some analysis useful in designing new models or algorithms. Since
+the SDE formulation is adopted, we assume that the readers are familiar with basic stochastic
+calculus. Øksendal’s book [63] provides a user-friendly account for stochastic analysis, and
+more advanced textbooks are [40, 84]. See also [8, 98] for a literature review and future
+directions in diffusion models, and [9, 95] for more advanced materials such as diffusion
+guidance and fine-tuning.
+The remainder of the paper is organized as follows. In Section 2, we start with the time
+reversal formula of diffusion processes, which is the cornerstone of diffusion models. Concrete
+examples are provided in Section 3. Section 4 is concerned with score matching techniques,
+another key ingredient of diffusion models.
+In Section 5, a deterministic sampler – the
+
+
+DIFFUSION MODELS
+3
+
+probability ODE flow is introduced, along with its application to the consistency models.
+In Section 6, we consider the convergence of diffusion samplers. Additional results on score
+matching are given in Section 7. Concluding remarks and future directions are summarized
+in Section 8.
+
+Notations: Below we collect a few notations that will be used throughout.
+
+• For x, y vectors, denote by x · y the inner product between x and y, and |x| the
+Euclidean (L2) norm of x.
+• For A a matrix (or a vector), A⊤denotes the transpose of A. For A a square matrix,
+Tr(A) is the trace of A.
+• For f : Rd →R, ∇f is the gradient of f, ∇· f = div(f) is the divergence of f,
+∇2f is the Hessian of f, and ∆f is the Laplacian of f. For f = (f1, . . . , fn) with
+fi : Rd →R its ith column, (∇f)⊤
+i = ∇fi (the Jacobian matrix), and (∇·f)i = div(fi)
+for i = 1, . . . , n.
+• The symbol a = O(b) means that a/b is bounded, and a = o(b) means that a/b tends
+to zero as some problem parameter tends to 0 or ∞.
+• For X a random variable, L(X) denotes the probability distribution of X, and X ∼
+
+p(·) means that X has the distribution p(·). The notation X d= Y represents that X
+and Y have the same distribution.
+• EX and Var(X) denote the expectation and the variance of X respectively. We use
+�EX for the empirical average of X, i.e. �EX = 1
+
+n
+�n
+i=1 Xi for X1, · · · , Xn independent
+and identically distributed copies of X.
+• N(µ, Σ) denotes Gaussian distribution with mean µ and covariance matrix Σ.
+• For P and Q two probability distributions, dTV (P, Q) = supA |P(A) −Q(A)| is the
+total variation distance between P and Q; KL(P, Q) =
+�
+log
+�
+dP
+dQ
+�
+dP is the Kullback-
+
+Leilber (KL) divergence between P and Q; W2(P, Q) =
+�
+infγ E(X,Y )∼γ|X −Y |2�1
+
+2 ,
+where the infimum is taken over all couplings γ of P and Q, is the Wasserstein-2
+distance between P and Q.
+
+2. Time reversal formula
+
+In this section, we present the time reversal formula, which lays the foundation for score-
+based diffusion models.
+Consider a general (forward) SDE:
+
+dXt = f(t, Xt)dt + g(t, Xt)dBt,
+X0 ∼pdata(·),
+(2.1)
+
+where (Bt, t ≥0) is n-dimensional Brownian motion2, and f : R+ × Rd →Rd and g :
+R+ × Rd →Rd×n are diffusion parameters. Some conditions on f(·, ·) and g(·, ·) are required
+so that the SDE (2.1) is well-defined. For instance,
+
+• If f and g are Lipschitz and have linear growth in x uniformly in t, then (2.1) has a
+strong solution which is pathwise unique.
+
+2Write B = (B1, . . . , Bn), where Bi’s are independent standard Brownian motions.
+
+
+4
+WENPIN TANG AND HANYANG ZHAO
+
+• If f is bounded, and g is bounded, continuous and strictly elliptic, then (2.1) has a
+weak solution which is unique in distribution.
+
+See [40, 63] for background on the well-posedness of SDEs, and [13, Chapter 1] for a review
+of related results.
+For ease of presentation, we assume that Xt has a (suitably smooth) probability density
+p(t, ·). Let T > 0 be fixed, and run the SDE (2.1) until time T to get XT ∼p(T, ·). Now if we
+start with p(T, ·) and run the process X backward for time T, then we can generate copies
+of p(0, ·) = pdata(·). More precisely, consider the time reversal Yt := XT−t for 0 ≤t ≤T.
+Assuming that Y also satisfies an SDE, we can run the backward process:
+
+dYt = ¯f(t, Yt)dt + ¯g(t, Yt)dBt,
+Y0 ∼p(T, ·).
+
+So we generate the desired YT ∼pdata(·) at time T.
+As mentioned earlier, the high-level idea of diffusion models is to create the target distri-
+bution from noise. This means that the noise should not depend on the target distribution.
+Thus, we replace the (backward) initialization Y0 ∼p(T, ·) with some noise pnoise(·):
+
+dYt = ¯f(t, Yt)dt + ¯g(t, Yt)dBt,
+Y0 ∼pnoise(·),
+(2.2)
+
+as an approximation. Two natural questions arise:
+
+(1) How do we choose the noise pnoise(·)?
+(2) What are the coefficients ¯f(·, ·) and ¯g(·, ·)?
+
+For (1), the noise pnoise(·) should be easily sampled. It is commonly derived by decoupling X0
+from the conditional distribution of (XT | X0), as we will explain with the examples in Section
+3. It is expected that the closer the the distributions p(T, ·) and pnoise(·) are, the closer the
+distribution of YT sampled from (2.2) is to pdata(·). For (2), it relies on the following result
+on the time reversal of SDEs. To simplify the notations, we write
+
+a(t, x) := g(t, x)g(t, x)⊤.
+
+Theorem 2.1 (Time reversal formula). [1, 30] Under suitable conditions on f(·, ·), g(·, ·)
+and {p(t, ·)}0≤t≤T , we have:
+
+g(t, x) = g(T −t, x),
+f(t, x) = −f(T −t, x) + ∇· (p(T −t, x)a(T −t, x))
+
+p(T −t, x)
+.
+(2.3)
+
+Proof. We give a heuristic derivation of the formula (2.3), which consists of identifying the
+Fokker–Planck equation of p(t, x) := p(T −t, x) (the probability density of the time reversal
+Y ). First, the infinitesimal generator of X is L := 1
+
+2∇·a(t, x)∇+fa·∇, where fa := f −1
+
+2∇·a.
+It is known that the density p(t, x) satisfies the Fokker–Planck equation:
+
+∂
+∂tp(t, x) = L∗p(t, x),
+
+where L∗:= 1
+
+2∇· a(t, x)∇−∇· fa is the adjoint operator of L. Thus,
+
+∂
+∂tp(t, x) = −1
+
+2∇· (a(T −t, x) ∇p(t, x)) + ∇· (fa(T −t, x) p(t, x)) .
+(2.4)
+
+
+DIFFUSION MODELS
+5
+
+On the other hand, we expect the generator of Y to be L := 1
+
+2∇· a(t, x)∇+ fa · ∇. The
+Fokker-Planck equation for p(t, x) is:
+
+∂
+∂tp(t, x) = 1
+
+2∇· (a(t, x) ∇p(t, x)) −∇·
+�
+
+fa(t, x) p(t, x)
+�
+.
+(2.5)
+
+Comparing (2.4) and (2.5), we set a(t, x) = a(T −t, x) and then get
+�
+fa(T −t, x) + fa(t, x)
+�
+
+p(t, x) = a(T −t, x) ∇p(t, x),
+
+which can be rewritten as:
+�
+f(T −t, x) + f(t, x)
+�
+
+p(t, x) −∇· a(T −t, x) p(t, x) = a(T −t, x) ∇p(t, x).
+
+This yields the desired result.
+□
+
+Let’s comment on Theorem 2.1. [30, 62] proved the result by assuming that f(·, ·) and
+g(·, ·) are globally Lipschitz, and the density p(t, x) satisfies an a priori H1 bound.
+The
+implicit condition on p(t, x) is guaranteed if ∂t + L is hypoelliptic, or ∇2a(t, x) is uniformly
+bounded. These conditions were relaxed in [69], where only the boundedness of ∇a(t, x) in
+some L2 norm is required. In another direction, [22, 23] used an entropy argument to prove
+the time reversal formula in the case of n = d and g(t, x) = σI. This approach was further
+developed by [6] in connection with optimal transport theory.
+By Theorem 2.1, the backward process is:
+
+dYt = (−f(T −t, Yt) + a(T −t, Yt)∇log p(T −t, Yt) + ∇· a(T −t, Yt))dt
+
++ g(T −t, Yt)dBt,
+Y0 ∼pnoise(·).
+(2.6)
+
+Since f(·, ·) and g(·, ·) are chosen in advance, all but the term ∇log p(T −t, Yt) in (2.6)
+are avaliable. So in order to run the backward process (2.6), we need to learn ∇log p(t, x),
+known as Stein’s score function. Recently developed score-based generative modeling consists
+of estimating ∇log p(t, x) by function approximations, which will be discussed in Section 4.
+
+3. Examples
+
+We have seen that a diffusion model is specified by the pair (f(·, ·), g(·, ·)). The design of
+(f(·, ·), g(·, ·)) is important because it determines the quality of data generation. There are
+two general rules of thumb: easy learning from the forward process, and good sampling from
+the backward process, which will be clear in the next two sections.
+Now let’s provide some examples of the diffusion model (2.1)–(2.6). Most existing models
+take the form:
+n = d
+and
+g(t, x) = g(t)I,
+
+where g(t) ∈R+. That is, the model parameter g(·, ·) is only time-dependent, rather than
+(time and) state-dependent. One important reason is that for the SDEs with state-dependent
+coefficient, it is often not easy to decouple X0 from the distribution of (XT | X0). Hence, it is
+not clear how to pick pnoise(·) as a proxy to XT ∼p(T, ·), as is the case of geometric Brownian
+motion.
+
+(a) Ornstein-Ulenback (OU) process [15]:
+
+f(t, x) = θ(µ −x) with θ > 0, µ ∈Rd
+and
+g(t) = σ > 0.
+(3.1)
+
+
+6
+WENPIN TANG AND HANYANG ZHAO
+
+The distribution of (Xt | X0 = x) is p(t, ·; x) = N(µ+(x−µ)e−θt, σ2
+
+2θ (1−e−2θt)I). An obvious
+candidate for the noise is the stationary distribution of the OU process pnoise(·) = N(µ, σ2
+
+2θ I).
+The backward process is specified to:
+
+dYt =
+�
+θ(Yt −µ) + σ2∇log p(T −t, Yt)
+�
+dt + g dBt, Y0 ∼N
+�
+µ, σ2
+
+2θ I
+�
+.
+(3.2)
+
+More generally, consider the overdamped Langevin process:
+
+f(t, x) = −∇U(x)
+and
+g(t) = σ > 0,
+(3.3)
+
+with a suitable landscape U : Rd →R.
+The OU process corresponds to the choice of
+U(x) = θ
+
+2|x −µ|2. The backward process is then:
+
+dYt =
+�
+∇U(Yt) + σ2∇log p(T −t, Yt)
+�
+dt + σdBt, Y0 ∝exp
+�
+−2 U(·)
+
+σ2
+
+�
+.
+(3.4)
+
+(b) Variance exploding (VE) SDE [83]: This is the continuum limit of score matching with
+Langevin dynamics (SMLD) [81]. The idea of SMLD is to use N noise scales σ0 < σ1 < · · · <
+σN−1, and run the (forward) Markov chain:
+
+xi = xi−1 +
+�
+
+σ2
+i −σ2
+i−1zi−1,
+1 ≤i ≤N,
+
+where z0, . . . , zN−1 are independent and identically distributed N(0, I). By taking ∆t =
+T
+N →0, σ(i∆t) = σi, xi∆t = xi and zi∆t = zi, we get xt+∆t = xt +
+�
+
+σ2(t + ∆t) −σ2(t) zt ≈
+
+xt +
+�
+
+dσ2(t)
+
+dt
+∆t zt. That is,
+
+dXt =
+
+�
+
+dσ2(t)
+
+dt
+dBt,
+0 ≤t ≤T.
+
+This implies that f(t, x) = 0 and g(t) =
+�
+
+dσ2(t)
+
+dt
+. The noise scales are typically set to be a
+
+geometric sequence σ(t) = σmin
+�
+σmax
+
+σmin
+
+�t
+
+T , with σmin ≪σmax. Thus,
+
+f(t, x) = 0
+and
+g(t) = σmin
+
+�σmax
+
+σmin
+
+�t
+
+T �
+
+2
+T log σmax
+
+σmin
+.
+(3.5)
+
+Here Xt = X0 +
+�t
+0 g(s)dBs is the Paley-Wiener integral. The distribution of (Xt | X0 = x)
+is:
+
+p(t, ·; x) = N
+�
+x,
+��t
+
+0
+g2(s)ds
+�
+I
+�
+= N
+
+�
+
+x, σ2
+min
+
+��σmax
+
+σmin
+
+�2t
+
+T
+−1
+
+�
+
+I
+
+�
+
+.
+(3.6)
+
+The name “variance exploding” comes from the fact that Var(X0) ≪Var(XT ) because
+σmin ≪σmax. Note that the forward process X does not have a stationary distribution, but
+we can decouple x from p(T, ·) = N
+�
+x, (σ2
+max −σ2
+min)I
+�
+to get
+
+pnoise(·) = N(0, (σ2
+max −σ2
+min)I)).
+
+The backward process is:
+
+dYt = g2(T −t))∇log p(T −t, Yt) + g(T −t)dBt, Y0 ∼N(0, (σ2
+max −σ2
+min)I)),
+(3.7)
+
+where g(t) is defined by (3.5).
+
+
+DIFFUSION MODELS
+7
+
+As we will see in Section 5, it is more convenient to use σ(t) = t and g(t) =
+√
+
+2t (suggested
+by [41] as a base model), with pnoise(·) = N(0, T 2I) as an alternative parametrization.
+
+(c) Variance preserving (VP) SDE [83]: This is the continuum limit of denoising diffusion
+probabilistic models (DDPM) [31]. DDPM uses N noise scales β1 < β2 < · · · < βN, and runs
+the (forward) Markov chain:
+
+xi =
+�
+
+1 −βixi−1 +
+�
+
+βizi,
+1 ≤i ≤N.
+
+Similarly, by taking the limit ∆t = T
+
+N →0 with β(i∆t) = Nβi/T, xi∆t = xi and zi∆t = zi,
+we get xt+∆t =
+�
+
+1 −β(t)∆t xt +
+�
+
+β(t)∆t zt ≈xt −1
+
+2β(t)xt∆t +
+�
+
+β(t)∆t zt. This leads to:
+
+dXt = −1
+
+2β(t)Xt dt +
+�
+
+β(t) dBt,
+0 ≤t ≤T.
+
+We have:
+
+f(t, x) = −1
+
+2β(t)x
+and
+g(t) =
+�
+
+β(t).
+(3.8)
+
+The noise scales of DDPM are typically an arithmetic sequence:
+
+β(t) = βmin + t
+
+T (βmax −βmin),
+with βmin ≪βmax,
+(3.9)
+
+(and βmin, βmax are scaled to the order N/T.) By applying Itˆo’s formula to e
+1
+2
+�t
+0 β(s)dsXt, we
+get the distribution of (Xt | X0 = x):
+
+p(t, ·; x) = N
+�
+e−1
+
+2
+�t
+0 β(s)dsx, (1 −e−
+�t
+0 β(s)ds)I
+�
+.
+(3.10)
+
+Thus, p(T, ·; x) = N(e−T
+
+4 (βmax+βmin)x, (1 −e−T
+
+2 (βmax+βmin))I), which is close to N(0, I) if
+βmax, or T is set to be large. This justifies the name “variance preserving”, and we can set
+pnoise = N(0, I). The backward process is:
+
+dYt =
+�1
+
+2β(T −t)Yt + β(T −t)∇log p(T −t, Yt)
+�
+dt+
+�
+
+β(T −t))dBt,
+
+Y0 ∼N(0, I),
+(3.11)
+
+where β(t) is defined by (3.9).
+Note that the choice of β(t) = σ2 leads to the OU process with f(t, x) = −1
+
+2σ2x and
+g(t) = σ.
+In fact, the VP SDE is also referred to as the OU process in the literature
+[11, 47, 48]. Here we emphasize the difference between the OU process, and the VP SDE
+with the (typical) choice (3.9) for β(t).
+
+(d) Sub-variance preserving (subVP) SDE [83]:
+
+f(t, x) = −1
+
+2β(t)x
+and
+g(t) =
+�
+
+β(t)(1 −e−2
+�t
+0 β(s)ds),
+(3.12)
+
+where β(t) is defined by (3.9). The same reasoning as in (c) shows that the distribution of
+(Xt | X0 = x) is:
+
+p(t, ·; x) = N
+�
+e−1
+
+2
+�t
+0 β(s)dsx, (1 −e−
+�t
+0 β(s)ds)2I
+�
+
+= N
+�
+e−t2
+
+4T (βmax−βmin)−t
+
+2 βminx, (1 −e−t2
+
+2T (βmax−βmin)−tβmin)2I
+�
+.
+(3.13)
+
+
+8
+WENPIN TANG AND HANYANG ZHAO
+
+Note that Varsub-VP(Xt) ≤VarVP(Xt), hence the name “sub-VP”, and pnoise(·) = N(0, I).
+Set
+γ(t) := e−2
+�t
+0 β(s)ds = e−t2
+
+T (βmax−βmin)−2tβmin,
+
+so g(t) =
+�
+
+β(t)(1 −γ(t)). The backward process is:
+
+dYt =
+�1
+
+2β(T −t)Yt + β(T −t)(1 −γ(T −t))∇log p(T −t, Yt)
+�
+dt
+
++
+�
+
+β(T −t)(1 −γ(T −t))dBt,
+Y0 ∼N(0, I).
+(3.14)
+
+(e) Contractive diffusion probabilistic models (CDPM) [89]: The idea of CDPM is to force
+contraction on the backward process to narrow the score matching errors (at the cost of
+possible noise approximation bias). A practical criterion is:
+
+(x −x′) · (f(t, x) −f(t, x′)) ≥rf(t)|x −x|2,
+with
+inf
+t∈[0,T] rf(t) > 0.
+(3.15)
+
+For instance, we consider contractive variance preserving (CVP) SDE:
+
+f(t, x) = 1
+
+2β(t)x
+and
+g(t) =
+�
+
+β(t),
+(3.16)
+
+where β(t) is defined by (3.9). Similar to (c), we set
+
+pnoise(·) = N
+�
+0, (e
+T
+
+2 (βmax+βmin) −1)I
+�
+.
+
+The backward process is:
+
+dYt =
+�
+−1
+
+2β(T −t)Yt + β(T −t)∇log p(T −t, Yt)
+�
+dt
+
++
+�
+
+β(T −t)dBt,
+Y0 ∼N
+�
+0, (e
+T
+
+2 (βmax+βmin) −1)I
+�
+.
+(3.17)
+
+Among these examples, VE and VP SDEs are the most widely used models (e.g., Sta-
+ble Diffusion uses VP, and consistency models rely on VE.) CDPM achieves slightly better
+performance on certain tasks, but needs to fine-tune its hyperparameters to trade off noise
+approximation bias and score matching errors. In each of the above models, one can estimate
+the corresponding score function ∇log p(t, x) for backward sampling – this is inconvenient
+because score matching often requires large computational cost.
+Nevertheless, there is a
+reparametrization trick via the probability flow ODE that allows to sample from different
+models with a single score function of VE. This will be discussed in Section 5.1.
+
+4. Score matching techniques
+
+In Section 2, we have seen that the main obstacle for backward sampling (2.6) is the
+unknown score function ∇log p(t, x). This section reviews the recently developed score-based
+generative modeling [31, 81, 83], whose goal is to estimate the score function ∇log p(t, x) by
+a family of functions {sθ(t, x)}θ (e.g., kernels and neural nets). This technique is referred to
+as score matching. With the (true) score function ∇log p(t, x) being replaced with the score
+matching function sθ(t, x), the backward process (2.6) becomes:
+
+dYt = (−f(T −t, Yt) + a(T −t, Yt)sθ(T −t, Yt) + ∇· a(T −t, Yt))dt
+
++ g(T −t, Yt)dBt,
+Y0 ∼pnoise(·).
+(4.1)
+
+
+DIFFUSION MODELS
+9
+
+In the case of g(t, x) = g(t)I, it simplifies to:
+
+dYt =
+�
+−f(T −t, Yt) + g2(T −t)sθ(T −t, Yt)
+�
+dt+g(T −t)dBt,
+
+Y0 ∼pnoise(·).
+(4.2)
+
+The plan of this section is as follows. In Section 4.1, we present the general score matching
+technique. The two (popularly used) scalable score matching methods – sliced score matching
+and denoising score matching will be discussed in Sections 4.2 and 4.3.
+
+4.1. Score matching. Recall that {sθ(t, x)}θ is a family of functions on R+×Rd parametrized
+by θ, which are used to approximate the score function ∇log p(t, x). Fix time t, the goal is
+to solve the stochastic optimization problem:
+
+min
+θ
+JESM(θ) := Ep(t,·)|sθ(t, X) −∇log p(t, X)|2,
+(4.3)
+
+where Ep(t,·) denotes the expectation taken over X ∼p(t, ·). But the problem (4.3), known
+as the explicit score matching (ESM), is far-fetched because the score ∇log p(t, X) on the
+right side is not available.
+Interestingly, this problem has been studied in the context of estimating statistical models
+with unknown normalizing constant.
+(In fact, if p(·) is a Gibbs measure, then its score
+∇log p(·) does not depend on the normalizing constant.) The following result shows that the
+score matching problem (4.3) can be recast into a feasible stochastic optimization with no
+∇log p(t, X)-term, referred to as the implicit score matching (ISM).
+
+Theorem 4.1 (Implicit score matching). [36] Let
+
+JISM(θ) := Ep(t,·)
+�
+|sθ(t, X)|2 + 2 ∇· sθ(t, X)
+�
+.
+(4.4)
+
+Under suitable conditions on sθ, we have JISM(θ) = JESM(θ) + C for some C independent
+of θ. Consequently, the minimum point of JISM and that of JESM coincide.
+
+Proof. We have
+
+∇θJISM(θ) = ∇θEp(t,·)
+�
+|sθ(t, X)|2�
+−2Ep(t,·)
+�
+∇θsθ(t, X)⊤∇log p(t, X)
+�
+
+= ∇θEp(t,·)
+�
+|sθ(t, X)|2�
+−2
+�
+∇θsθ(t, x)⊤∇p(t, x)dx
+
+= ∇θEp(t,·)
+�
+|sθ(t, X)|2�
+−2 ∇θ
+
+�
+sθ(t, x)⊤∇p(t, x)dx
+
+= ∇θEp(t,·)
+�
+|sθ(t, X)|2�
++ 2∇θ
+
+�
+∇· sθ(t, x) p(t, x)dx
+
+= ∇θEp(t,·)
+�
+|sθ(t, X)|2 + 2 ∇· sθ(t, X)
+�
+= ∇θ �
+J (θ),
+
+where we use the divergence theorem in the fourth equation.
+□
+
+Clearly, the implicit score matching problem (4.4) can be solved by stochastic optimization
+tools, e.g., stochastic gradient descent (SGD). Here the distribution p(t, ·) is sampled by
+first sampling a random data point from pdata(·), followed by the conditional distribution of
+(Xt | X0). This requires the distribution of (Xt | X0) be easy to sample – the easy learning
+criterion for diffusion models. Notably, the distribution of (Xt | X0) is Gaussian for all the
+examples in Section 3.
+
+
+10
+WENPIN TANG AND HANYANG ZHAO
+
+In practice, a time-weighted version of the problem (4.3) is considered:
+
+min
+θ
+˜
+JESM(θ) := Et∈U(0,T)Ep(t,·)
+�
+λ(t)|sθ(t, X) −∇log p(t, X)|2�
+
+= 1
+
+T
+
+�T
+
+0
+Ep(t,·)
+�
+λ(t)|sθ(t, X) −∇log p(t, X)|2�
+dt,
+(4.5)
+
+where U(0, T) denotes the uniform distribution over [0, T], and λ : R →R+ is a weight
+function. The corresponding implicit score matching problem is:
+
+min
+θ
+˜
+JISM(θ) = Et∈U(0,T)Ep(t,·)
+�
+λ(t)(|sθ(t, X)|2 + 2 ∇· sθ(t, X))
+�
+.
+(4.6)
+
+Note, however, that the problem (4.4) or (4.6) can still be computationally expensive when
+the dimension d is large. For instance, if we use a neural net as the function class of sθ(t, x),
+we need to perform d times backpropagation of all the parameters to compute ∇· sθ(t, x) =
+Tr(∇sθ(t, x)). This means that the computation of the derivatives scales linearly with the
+dimension, hence making the gradient descent methods inefficient to solve the score matching
+problem with respect to high dimensional data. Two alternative approaches are commonly
+used to deal with the scalability issue, which will be the focus of the next subsections.
+
+4.2. Sliced score matching. The burden of computation comes from the term ∇· sθ(t, x).
+One clever idea proposed by [82] is to tackle this term by random projections. It relies on
+the key observation:
+∇· sθ(t, x) = Ev∼N(0,I)
+�
+v⊤∇sθ(t, x)v
+�
+,
+(4.7)
+
+where ∇sθ(t, x) ∈Rd×d is the Jacobian matrix of sθ(t, x). The (implicit) score matching
+problem (4.6) can then be rewritten as:
+
+min
+θ
+˜
+JSSM(θ) = Et∈U(0,T)Ev∼N(0,I)Ep(t,·)
+�
+λ(t)
+�
+|sθ(t, X)|2 + 2 v⊤∇(v⊤sθ(t, x))
+��
+,
+(4.8)
+
+which is referred to as the sliced score matching (SSM). Since ˜
+JSSM(θ) = ˜
+JISM(θ) for all θ,
+we have the following result.
+
+Theorem 4.2 (Sliced score matching). [82] Under suitable conditions on sθ, we have ˜
+JSSM(θ) =
+˜
+JESM(θ) + C for some C independent of θ. Consequently, the minimum point of ˜
+JSSM(θ)
+and that of ˜
+JESM(θ) coincide.
+
+Note that for a single fixed v, it only requires one-time backpropagation because the term
+v⊤sθ(t, x) can be regarded as adding a layer of the inner product between v and sθ(t, x). To
+get the expectation Ev∼N(0,I) in (4.8), we pick m samples of vi ∼N(0, I), 1 ≤i ≤m, compute
+the objective for each vi, and then take the average. So it requires m times backpropagation.
+Typically, m is set to be small (m ≪d), and empirical studies show that m = 1 is often good
+enough.
+
+4.3. Denoising score matching. The second approach relies on conditioning Xt on X0 ∼
+pdata(·), known as denoising score matching (DSM) [36, 92].
+Let’s go back to the ESM
+problem (4.5), and it is equivalent to the following DSM problem:
+˜
+JDSM(θ)
+
+= Et∼U(0,T)
+�
+λ(t)EX0∼pdata(·)EXt|X0
+�
+|sθ(t, Xt) −∇log p(t, Xt | X0)|2��
+,
+(4.9)
+
+
+DIFFUSION MODELS
+11
+
+where the gradient ∇log p(t, Xt | X0) is with respect to Xt.
+
+Theorem 4.3 (Denoising score matching). [92] Under suitable conditions on sθ, we have
+˜
+JDSM(θ) = ˜
+JESM(θ) + C for some C independent of θ. Consequently, the minimum point of
+˜
+JDSM and that of ˜
+JESM coincide.
+
+Proof. Let JDSM(θ) := EX0∼pdata(·)EXt|X0
+�
+|sθ(t, Xt) −∇log p(t, Xt | X0)|2�
+.
+It suffices to
+prove that JDSM(θ) = JESM(θ) + C for some C independent of θ. Note that
+
+JESM(θ) = Ep(t,·)|sθ(t, X) −∇log p(t, X)|2
+
+= Ep(t,·)
+�
+|sθ(t, X)|2 −2sθ(t, X)⊤∇log p(t, X) + |∇log p(t, X)|2�
+.
+
+For the inner product, we can rewrite it as:
+
+Ep(t,·)
+�
+sθ(t, X)⊤∇log p(t, X)
+�
+
+=
+�
+
+x
+sθ(t, x)⊤∇p(t, x)dx
+
+=
+�
+
+x
+sθ(t, x)⊤∇
+�
+
+x0
+p(0, x0)p(t, x; x0)dx0dx
+
+=
+�
+
+x0
+
+�
+
+x
+sθ(t, x)⊤p(0, x0)∇p(t, x; x0)dxdx0
+
+=
+�
+
+x0
+p(0, x0)
+�
+
+x
+sθ(t, x)⊤p(t, x; x0)∇log p(t, ; |x0)dxdx0
+
+= EX0∼pdata(·)EXt|X0
+�
+sθ(t, Xt)⊤∇log p(t, Xt | X0)
+�
+.
+
+Combining with Ep(t,·)|sθ(t, X)|2 = EX0∼pdata(·)EXt|X0|sθ(t, X)|2 concludes the proof.
+□
+
+The main takeaway of DSM is that the gradient of the log density at some corrupted
+point should ideally move towards the clean sample. As mentioned earlier, the conditional
+distribution of (Xt | X0) is required to be simple, e.g., Gaussian for all the examples in Section
+3. Here we set:
+
+(Xt | X0) ∼N(µt(X0), σ2
+t I)
+for some µt(·) and σt > 0.
+
+For instance, µt(x) = x and σt = σmin
+
+��
+σmax
+
+σmin
+
+�2t
+
+T −1 for VE, and µ(t, x) = e−1
+
+2
+�t
+0 β(s)dsx and
+
+σt =
+�
+
+1 −e−
+�t
+0 β(s)ds for VP. In this case, we can compute explicitly the conditional score:
+
+∇log p(t, Xt | X0) = µt(X0) −Xt
+
+σ2
+t
+.
+(4.10)
+
+The direction
+1
+σ2
+t (Xt −µt(X0)) clearly facilitates moving to the clean sample, and we want
+sθ(t, x) to match the score (4.10) as best it can. The problem (4.9) reads as:
+˜
+JDSM(θ)
+
+= Et∼U(0,T)
+
+�
+
+λ(t)EX0∼pdata(·)EXt|X0
+
+�����sθ(t, Xt) + Xt −µt(X0)
+
+σ2
+t
+
+����
+
+2��
+
+.
+(4.11)
+
+
+12
+WENPIN TANG AND HANYANG ZHAO
+
+Alternatively, the problem (4.11) can be interpreted as the least squares of X0 over Xt by
+Tweedie’s formula [18]. In fact,
+
+E (µt(X0) | Xt) = Xt + σ2
+t ∇log p(t, Xt).
+(4.12)
+
+So ∇log p(t, x) minimizes the loss EX0∼pdata(·)EXt|X0
+���h(t, Xt) + Xt−µt(X0)
+
+σ2
+���
+2
+over all measur-
+able function h. For function approximations, we replace h with {sθ(t, x)}θ. See also [87] for
+Tweedie’s formula generalized to non-Gaussian diffusion models.
+Empirically, it was observed [83] that a good candidate for the weight function λ(t) is:
+
+λ(t) ∝1/E |∇log p(t, Xt | X0)|2 = σ2
+t .
+(4.13)
+
+The choice (4.13) is related to an evidence lower bound (ELBO) of the KL divergence between
+the generated distribution and the true distribution, see [33, 60, 80] for discussions. See also
+[43] for other choices of λ(t). Injecting (4.13) into (4.11) yields the ultimate objective:
+
+˜
+JDSM(θ) = Et∼U(0,T)
+
+�
+
+σ2
+t EX0∼pdata(·)EXt|X0
+
+�����sθ(t, Xt) + Xt −µt(X0)
+
+σ2
+t
+
+����
+
+2��
+
+= Et∼U(0,T)
+�
+EX0∼pdata(·)Eϵ∼N(0,I)
+�
+|σtsθ(t, µt(X0) + σtϵ) + ϵ|2��
+,
+
+(4.14)
+
+where the second equality follows from a change of variables ϵ := Xt−µt(X0)
+
+σt
+.
+Denoising score matching (4.14), which is essentially a least squares regression, is the
+most widely used approach for score matching. It often requires large batches to solve the
+stochastic optimization problem. Sliced score matching (4.8) is computationally efficient in
+high dimensions. However, its performance relies on the random projections, i.e., the choice
+of slices, which may incur high variance when the number of samples m is small.
+
+5. ODE samplers and consistency model
+
+The stochastic sampler (4.2) (and its discretization) may suffer from slow convergence and
+instability due to the randomness. Moreover, estimating the score function for each model
+is computationally expensive.
+In this section, we consider sampling YT by an equivalent
+deterministic scheme – the ODE sampler. Section 5.1 presents the probability flow ODE
+that leads to the ODE sampler of diffusion models. We also explain the reparametrization
+trick (mentioned at the end of Section 3), which avoids score matching repeatedly for different
+models. In Section 5.2, we discuss one prominent recent application of ODE sampling – the
+consistency model.
+
+5.1. The probability flow ODE. The main idea is that starting from Y ′
+0 ∼p(T, ·), and
+going through an ODE rather than an SDE will produce a sample Y ′
+T ∼pdata(·). Here we
+are only concerned with the sampled distribution at time T.
+The equivalent ODE formulation is a consequence of the following result, known as the
+probability flow ODE.
+
+Theorem 5.1 (Probability flow ODE). Let (Xt, 0 ≤t ≤T) be defined by (2.1), with p(t, ·)
+the probability distribution of Xt. Let
+
+�f(t, x) := f(t, x) −1
+
+2∇· (g(t, x)g(t, x)⊤) −1
+
+2g(t, x)g(t, x)⊤∇log p(t, x),
+(5.1)
+
+
+DIFFUSION MODELS
+13
+
+and let ( �
+Xt, 0 ≤t ≤T) solve the ODE:
+
+d �
+Xt
+dt = �f(t, �
+Xt),
+�
+X0 ∼pdata(·).
+(5.2)
+
+Then for each t, Xt and �
+Xt have the same distribution.
+
+Proof. The idea is to match the Fokker-Planck equation in both settings. Denote by �p(t, x)
+the probability distribution of �
+Xt defined by (5.2). By the (first-order) Fokker-Planck equa-
+tion, �p(t, x) solves
+
+∂�p(t, x)
+
+∂t
+= −∇·
+�
+�f(t, x)�p(t, x)
+�
+,
+�p(0, x) = pdata(x).
+(5.3)
+
+On the other hand, p(t, x) solves the (second order) Fokker-Planck equation:
+
+∂p(t, x)
+
+∂t
+= −∇· (f(t, x)p(t, x)) + 1
+
+2∇2 :
+�
+g(t, x)g(t, x)⊤p(t, x)
+�
+, p(0, x) = pdata(x).
+(5.4)
+
+where : denotes the Frobenius inner product. By algebraic rearrangement, (5.4) simplifies
+to:
+∂p(t, x)
+
+∂t
+= −∇·
+�
+�f(t, x)p(t, x)
+�
+,
+p(0, x) = pinit(x).
+(5.5)
+
+Comparing (5.2) with (5.4) yields �p(t, ·) = p(t, ·).
+□
+
+We remark that the two processes X and �
+X only have the same marginal distributions, but
+they don’t have the same distribution at the level of the process (nor the joint distributions).
+Now let’s apply the equivalent ODE formulation to the diffusion models. We specify to
+the practical case where n = d and σ(t, x) = σ(t)I. The corresponding ODE is given by
+dXt
+
+dt = f(t, Xt) −1
+
+2g2(t)∇log p(t, Xt),
+X0 ∼pdata(·),
+(5.6)
+
+and the backward ODE is then:
+dYt
+
+dt = −f(T −t, Yt) + 1
+
+2g2(T −t)∇log p(T −t, Yt),
+Y0 ∼pnoise(·).
+(5.7)
+
+With the score function ∇log p(t, x) being replaced with the score matching function sθ(t, x),
+the backward ODE becomes:
+dYt
+
+dt = −f(T −t, Yt) + 1
+
+2g2(T −t)sθ(T −t, Yt),
+Y0 ∼pnoise(·),
+(5.8)
+
+which can be regarded as the continuum limit of denoising diffusion implicit models (DDIM)
+[77]. Among the examples in Section 3:
+
+(b’) The ODE sampler for VE is:
+dYt
+
+dt = 1
+
+2g2(T −t)sθ(T −t, Yt),
+Y0 ∼pnoise(·),
+(5.9)
+
+where g is defined by (3.5). An alternative parametrization is g(t) =
+√
+
+2t.
+
+(c’) The ODE sampler for VP is:
+dYt
+
+dt = 1
+
+2β(T −t) (Yt + sθ(T −t, Yt)) ,
+Y0 ∼pnoise(·).
+(5.10)
+
+where β(t) is defined by (3.9).
+
+
+14
+WENPIN TANG AND HANYANG ZHAO
+
+The ODEs (5.9)–(5.10) can be easily solved by existing ODE solvers, see Section 6.3 for
+further discussions.
+Now let’s explain the reparametrization trick, which allows to sample from different models
+with the score function of VE. Let pVE(t, x) be the probability density of Xt, with f(t, x) = 0
+and g(t) =
+√
+
+2t. Note that in all the above examples, f(·, ·) takes the form f(t, x) = f(t)x
+with f(t) ∈R.
+In this case, by a change of variables [41], the diffusion model can be
+reparametrized by
+
+s(t) := exp
+��t
+
+0
+f(r)dr
+�
+and
+ℓ(t) :=
+
+��t
+
+0
+
+g(r)2
+
+s(r)2 dr,
+(5.11)
+
+so that the ODE (5.6) becomes:
+
+dXt
+
+dt = s′(t)
+
+s(t) Xt −s(t)2ℓ′(t)ℓ(t)∇log pVE
+�
+ℓ(t), Xt
+
+s(t)
+
+�
+, X0 ∼pdata(·).
+(5.12)
+
+That is, a diffusion model with f(t, x) = f(t)x can be represented in terms of VE by a
+suitable space-time change. For instance, s(t) = 1 and ℓ(t) = t for VE with f(t) = 0 and
+
+g(t) =
+√
+
+2t, and s(t) = e−1
+
+2
+�t
+0 β(r)dr and ℓ(t) =
+�
+
+e
+�t
+0 β(r)dr −1 for VP with f(t) = −1
+
+2β(t)
+and g(t) =
+�
+
+β(t).
+Using the score matching techniques in Section 4, we can approximate the score ∇log pVE(t, x)
+by a class of functions {sVE
+θ (t, x)}θ. The ODE sampler is then:
+
+dYt
+
+dt = −s′(T −t)
+
+s(T −t) Yt + s(T −t)2ℓ′(T −t)ℓ(T −t)sVE
+θ
+
+�
+ℓ(T −t),
+Yt
+s(T −t)
+
+�
+,
+
+Y0 ∼pnoise(·).
+(5.13)
+
+In particular, the ODE sampler for VP is:
+
+dYt
+
+dt = 1
+
+2β(T −t)
+�
+Yt + sVE
+θ
+
+��
+
+e
+�T −t
+0
+β(r)dr −1, Yte
+1
+2
+�T −t
+0
+β(r)dr
+��
+,
+
+Y0 ∼pnoise(·).
+
+5.2. Consistency model. Here we present an application of the probability flow ODE –
+the consistency model [79] (see [42, 78] for a more advanced version, and [61] for its latest
+application.) The advantage of the consistency modeling is that it only performs a one-step
+sampling – this is in contrast with the SDE or the ODE sampling, where multiple steps are
+required in discretization.
+The main takeaway of the consistency model is to approximate the ODE flow. Recall the
+ODE sampler from (5.7). The ODE theory implies that there is a function (the ODE flow)
+F : R+ × R+ × Rd →Rd such that
+
+Yt = F(t, s, Ys),
+for 0 ≤s < t ≤T.
+(5.14)
+
+Thus, YT = F(T, t, Yt) for any t. The consistency model proposes to learn F(T, ·, ·) directly.
+To be more precise, the function of form Fθ(T −t, y) is used to approximate the flow F(T, t, y).
+(Note that if the ODE (5.7) is autonomous, e.g. the OU process, the flow F(t, s, y) is indeed
+of form F(t −s, y).) With the learned flow Fθ, the model outputs the sample Fθ(T, Y0),
+Y0 ∼pnoise(·) in just one step.
+
+
+DIFFUSION MODELS
+15
+
+Now the question is how to learn the ODE flow F(T, t, y) ≈Fθ(T −t, y). Two methods
+were proposed based on the group property (5.14).
+
+(a) Consistency distillation (CD): the approach builds on top of a pretrained score function
+
+sθ(t, x). Take t ∼U(0, T). First sample Y+
+d= Xt of the forward process (VE with g(t) =
+√
+
+2t
+is used, so Xt ∼N(x, t2I) with x ∼pdata(·)). Then use the ODE sampler (5.7) to set:
+
+Y−= Y+ +
+�
+−f(t, Y+) + 1
+
+2g2(t)sθ(t, Y+)
+�
+δ,
+(5.15)
+
+for some small δ. Roughly speaking, (Y+, Y−) are on the ODE flow F at the times T −t and
+T −t + δ. Inspired by the fact that
+
+F(T, T −t, YT−t)
+�
+��
+�
+≈Fθ(t,Y+)
+
+= YT = F(T, T −t + δ, YT−t+δ)
+�
+��
+�
+≈Fθ(t−δ,Y−)
+
+,
+
+the training objective is:
+
+Et∈U(0,T)E[λ(t)|Fθ(t, Y+) −Fθ(t −δ, Y−)|2],
+(5.16)
+
+where λ(t) is a weight function.
+
+(b) Consistency training (CT): the approach is similar to CD, except that Y−
+d= Xt−δ is
+
+taken independently of Y+
+d= Xt. (In the VE setting with g(t) =
+√
+
+2t, Y+ ∼N(x, t2I) and
+Y−∼N(x, (t −δ)2I) independently.) Thus, CT does not require a pretrained score function.
+Note that
+Y+
+d= YT−t
+and
+Y−
+d= YT−t+δ
+marginally.
+But in contrast with CD, (Y+, Y−) are not on the ODE flow path, i.e., a wrong coupling.
+Now we consider a simple scenario, where g(t) =
+√
+
+2t and pdata(·) = δ0 (delta mass at 0).
+It is easy to compute that
+
+(Y CT
++
+, Y CT
+−
+) d= N
+�
+0,
+�
+t2I
+0
+0
+(t −δ)2I
+
+��
+,
+
+(Y CD
++
+, Y CD
+−
+) d= N
+�
+0,
+�
+t2I
+t(t −δ)I
+t(t −δ)I
+(t −δ)2I
+
+��
+.
+
+As a result,
+
+W 2
+2 ((Y CD
++
+, Y CD
+−
+), (Y CT
++
+, Y CT
+−
+)) = 2d
+�
+t2 + (t −δ)2 −
+�
+
+t4 + (t −δ)4
+�
+
+≈2(2 −
+√
+
+2)t2d.
+(5.17)
+
+So the distance between (Y CD
++
+, Y CD
+−
+) and (Y CT
++
+, Y CT
+−
+) is far from being negligible. By taking
+
+t ∼U(0, 1), the expected W2 distance is of order
+��
+1 −
+√
+
+2
+2
+�
+d.
+This explains why CD
+
+outperforms CT empirically [79]. A remedy to CT has recently been proposed in [78].
+Also note that the objective function (5.16) can be lifted to continuous time via partial
+differential relation of the ODE flow YT = F(T, T −t, YT−t) ≈Fθ(t, YT−t):
+
+Et∈U(0,T)E
+
+�
+
+λ(t)
+����∂tFθ(t, Y+) + ∇Fθ(t, Y+)
+�
+f(t, Y+) −1
+
+2g2(t)sθ(t, Y+)
+�����
+
+2�
+
+,
+(5.18)
+
+
+16
+WENPIN TANG AND HANYANG ZHAO
+
+or
+
+Et∈U(0,T)E
+�
+λ(t)Fθ(t, Y+) ·
+�
+∂tFθ(t, Y+) + ∇Fθ(t, Y+)Y+ −x
+
+t
+
+��
+,
+(5.19)
+
+where Y+
+d= Xt and x ∼pdata(·). The functions (5.18) and (5.19) are the continuum limits
+of CD and CT respectively after suitable scaling.
+
+6. Convergence results
+
+In this section, we consider the convergence of the stochastic samplers, i.e., the backward
+processes, under a “blackbox” assumption on score matching:
+
+Assumption 6.1. There exists ε > 0 such that Ep(t,·)|sθ(t, X)−∇log p(t, X)|2 ≤ε2, t ∈[0, T]
+for some sθ(·, ·).
+
+For instance, the score matching function sθ(·, ·) can be the output of any algorithm in-
+troduced in Section 4. This condition postulates an L2-bound on score matching. As we
+will see in Section 7, there has been a body of work on the accuracy of score matching. So
+these assumptions, especially Assumption 6.1 can be replaced with those score approximation
+bounds.
+The quality of the diffusion model relies on how (f(·, ·), g(·)) is chosen. Since the SDEs
+are inherently in continuous time, the convergence of the diffusion model as a continuous
+process yields another criterion on the design of the model. Ideally, we want to show that the
+stochastic sampler YT defined by (4.1), as well as its discretization are close in distribution
+to the target distribution pdata(·). Here we focus on two metrics: the total variation distance
+and the Wasserstein-2 distance. While most existing convergence results were established in
+the total variation distance (or KL divergence), the convergence in the Wasserstein metric
+is important because it has shown to align with human judgment on image similarity [5],
+and the standard evaluation metric – Fr´echet inception distance (FID) is also based on the
+Wasserstein distance.
+For simplicity, we assume (as in Section 3) that n = d and g(t, x) = g(t)I. In Sections
+6.1–6.2, we study the convergence of the stochastic samplers in continuous time in the two
+metrics respectively. The problem of discretization will be discussed in Section 6.3, with
+additional references given.
+
+6.1. Stochastic sampler – total variation bound. The goal is to bound dTV (L(YT ), pdata(·)),
+with Y defined by (4.2). [15] first provided a bound of dTV (L(YT ), pdata(·)) for the OU process
+(3.1), assuming an L∞-bound on score matching3. The bound is of form:
+
+dTV (L(YT ), pdata(·)) ≤dTV (p(T, ·), pnoise(·))
+�
+��
+�
+≤C exp(−C′T)
+
++Dε exp(D′T),
+(6.1)
+
+for some C, C′, D, D′ > 0 depending on θ, µ and pdata(·). The disadvantage of this result is
+that the score matching error grows exponentially in time T. A recent breakthrough [11]
+improved this bound to be polynomial in T (and d). The result is stated for the (discretized)
+OU process, but is easily extended to the general case.
+
+3There exists ε > 0 such that |sθ(t, ·) −∇log p(t, ·)|∞≤ε, t ∈[0, T] for some sθ(·, ·).
+
+
+DIFFUSION MODELS
+17
+
+Theorem 6.2 (Total variation bound). [11] Let Assumption 6.1 hold, and assume that g(t)
+is bounded away from zero. Then
+
+dTV (L(YT ), pdata(·)) ≤dTV (p(T, ·), pnoise(·))
+�
+��
+�
+noise approx. error
++
+ε
+�
+
+T/2
+����
+score matching error
+
+.
+(6.2)
+
+Proof. We sketch the proof, which is to decompose dTV (L(YT ), pdata(·)) into the noise ap-
+proximation error and the score matching error. Denote by
+
+• QT the distribution of the backward process (4.2), i.e., with the matched score sθ(t, x)
+and Y0 ∼pnoise(·);
+• Q′
+T the distribution of the backward process, with the matched score sθ(t, x) and
+Y0 ∼p(T, ·);
+• Q′′
+T the distribution of the backward process, with the true score ∇log p(t, x) and
+Y0 ∼p(T, ·).
+
+By the data processing inequality, we have:
+
+dTV (L(YT ), pdata(·)) ≤dTV (QT , Q′
+T ) + dTV (Q′
+T , Q′′
+T )
+
+≤dTV (p(T, ·), pnoise(·)) + dTV (Q′
+T , Q′′
+T ).
+(6.3)
+
+The key to bound the term dTV (Q′
+T , Q′′
+T ) is the identity:
+
+KL(Q′′
+T , Q′
+T ) = EQ′′
+T
+
+�
+log dQ′′
+T
+dQ′
+T
+
+�
+= EQ′′
+T
+
+�T
+
+0
+|sθ(T −t, Yt) −∇log p(T −t, Yt)|2dt,
+(6.4)
+
+where the second equality follows from the Girsanov theorem. Further by Assumption 6.1,
+we get by Pinsker’s inequality:
+
+dTV (Q′
+T , Q′′
+T ) ≤
+
+�
+
+1
+2KL(Q′′
+T , Q′
+T ) ≤ε
+�
+
+T/2.
+(6.5)
+
+Combining (6.3) and (6.5) yields (6.2).
+□
+
+Now let’s consider an important special case – the VP SDE that also includes the OU
+process.
+
+Corollary 6.3 (Total variation for VP). Let (Yt, 0 ≤t ≤T) be specified by (3.8) (the
+backward process of VP). Let Assumption 6.1 hold, and assume that β(t) is bounded away
+from zero, and Epdata(·)|x|2 < ∞. Then for T sufficiently large,
+
+dTV (L(YT ), pdata(·)) ≤e−1
+
+2
+�T
+0 β(s)ds�
+
+Epdata(·)|x|2/2 + ε
+�
+
+T/2.
+(6.6)
+
+Proof. Recall from (3.10) that for VP, the conditional distribution of (Xt | X0 = x) is
+N
+�
+e−1
+
+2
+�t
+0 β(s)dsx, (1 −e−
+�t
+0 β(s)ds)I
+�
+. By the convexity of KL divergence, we have:
+
+KL(p(T, ·), pnoise(·))
+
+≤Epdata(·)
+
+�
+KL
+�
+N
+�
+e−1
+
+2
+�T
+0 β(s)dsx, (1 −e−
+�T
+0 β(s)ds)I
+�
+, N(0, I)
+�
+
+�
+��
+�
+(a)
+
+�
+.
+(6.7)
+
+
+18
+WENPIN TANG AND HANYANG ZHAO
+
+Moreover,
+
+(a) = e−
+�T
+0 β(s)ds|x|2 −d
+�
+e−
+�T
+0 β(s)ds + log(1 −e−
+�T
+0 β(s)ds)
+�
+
+≤e−
+�T
+0 β(s)ds|x|2,
+as T →∞,
+(6.8)
+
+since β(t) is bounded away from zero, and hence
+�T
+0 β(s)ds →∞as T →∞. Combining
+(6.7), (6.8) with (6.2) yields (6.6).
+□
+
+Similar polynomial bounds were also obtained by [47, 48] for the VP SDE. There χ2-
+divergence (and an identity analogous to (6.4)) is used to bound dTV (L(YT ), pdata(·)).
+
+6.2. Stochastic sampler – Wasserstein bound. We make the following additional as-
+sumptions.
+
+Assumption 6.4. The following conditions hold:
+
+(1) There exists rf : [0, T] →R such that (x −x′) · (f(t, x) −f(t, x′)) ≥rf(t)|x −x′|2 for
+all t, x, x′.
+(2) There exists L > 0 such that |sθ(t, x) −sθ(t, x′)| ≤L|x −x′| for all t, x, x′.
+
+The condition (1) assumes the growth of f(t, ·), and (2) assumes the Lipschitz property of
+the score matching function (as considered in [46]).
+
+Theorem 6.5 (Wasserstein bound). [89] Let Assumptions 6.1, 6.4 hold.
+For h > 0 a
+hyperparameter, define
+
+u(t) :=
+�T
+
+T−t
+
+�
+−2rf(s) + (2L + 2h)g2(s)
+�
+ds.
+(6.9)
+
+Then we have
+
+W2(pdata(·), L(YT )) ≤
+
+�
+�
+�
+�
+�W 2
+2 (p(T, ·), pnoise(·))eu(T)
+�
+��
+�
+noise approx. error
++ ε2
+
+2h
+
+�T
+
+0
+g2(t)eu(T)−u(T−t)dt
+�
+��
+�
+score matching error
+
+.
+(6.10)
+
+Proof. The idea relies on coupling. Consider the coupled SDEs:
+�
+dUt =
+�
+−f(T −t, Ut) + g2(T −t)∇log p(T −t, Ut)
+�
+dt + g(T −t)dBt,
+dVt =
+�
+−f(T −t, Vt) + g2(T −t)sθ(T −t, Vt)
+�
+dt + g(T −t)dBt,
+
+where (U0, V0) are coupled to achieve W2(p(T, ·), pnoise(·)). Note that
+
+W 2
+2 (pdata(·), L(YT )) ≤E|UT −VT |2,
+
+so the goal is to bound E|UT −VT |2. By Itˆo’s formula, we get
+
+d|Ut −Vt|2 = 2(Ut −Vt) · (−f(T −t, Ut) + g2(T −t)∇log p(T −t, Ut)
+
++ f(T −t, Vt) −g2(T −t)sθ(T −t, Vt))dt,
+
+
+DIFFUSION MODELS
+19
+
+which implies that
+
+d E|Ut −Vt|2
+
+dt
+= −2 E((Ut −Vt) · (f(T −t, Ut) −f(T −t, Vt))
+�
+��
+�
+(a)
+
+)
+
++ 2 E((Ut −Vt) · g2(T −t)(∇log p(T −t, Ut) −sθ(T −t, Vt)))
+�
+��
+�
+(b)
+
+.
+(6.11)
+
+By Assumption 6.4 (1), we get (a) ≥rf(T −t) E|Ut −Vt|2. Moreover,
+
+(b) = g2(T −t)
+�
+E((Ut −Vt) · (∇log p(T −t, Ut) −sθ(T −t, Ut)))
+
++ E((Ut −Vt) · (sθ(T −t, Ut) −sθ(T −t, Vt)))
+�
+
+≤g2(T −t)
+�
+hE|Ut −Vt|2 + 1
+
+4hε2 + L E|Ut −Vt|2
+�
+,
+
+(6.12)
+
+where we use Assumptions 6.1 and 6.4 (2) in the last inequality. Therefore,
+
+d E|Ut −Vt|2
+
+dt
+≤
+�
+−2rf(T −t) + (2h + 2L)g2(T −t)
+�
+E|Ut −Vt|2 + ε2
+
+2hg2(T −t).
+
+Applying Gr¨onwall’s inequality, we have E|UT −VT |2 ≤eu(T)E|U0 −V0|2 + ε2
+
+2h
+�T
+0 σ2(T −
+t)eu(T)−u(t)dt, which yields (6.10).
+□
+
+Theorem 6.5 assumes that the score matching function is Lipschitz, which may be too
+restrictive, say for a neural net. A more natural assumption is that there exists L > 0 such
+that
+
+|∇log p(t, x) −∇log p(t, x′)| ≤L|x −x′| for all t, x, x′,
+
+i.e., the score function (rather than the score matching function) is Lipschitz. In this case, the
+result still holds if an L∞bound on score matching is assumed. [24] obtained a similar result
+by an L2-bound on score matching but directly assuming that E|sθ(T −t, Vt) −∇log p(T −
+t, Vt)|2 ≤ε2 for all t.
+Theorem 6.5 does not require a specific structure of f(t, x). The bound (6.10) is loose
+in the general case, e.g., rf(t) may be negative, and hence the bound is exponential in T.
+Nevertheless, the estimates in the proof can be refined in some special cases. Here we examine
+the VP model.
+The following result provides a bound for VP, assuming that pdata(·) is strongly log-concave.
+Recall that a smooth function h : Rd →R is κ-strongly log-concave if
+
+(∇log h(x) −∇log h(y)) · (x −y) ≤−κ|x −y|2.
+(6.13)
+
+In comparison with Corollary 6.3, the score matching error does not grow in T.
+
+Theorem 6.6 (Wasserstein bound for VP). Let (Yt, 0 ≤t ≤T) be defined by (3.8) (the
+backward process of VP). Assume that pdata(·) is κ-strongly log-concave with κ >
+1
+2, and
+
+
+20
+WENPIN TANG AND HANYANG ZHAO
+
+Epdata(·)|x|2 < ∞. For h < min(κ, 1) −1
+
+2, we have:
+
+W 2
+2 (pdata(·), L(YT )) ≤e−{βmin+βmax(2 min(κ,1)−1−2h)}T �
+Epdata(·)|x|2 + o(e−βminT )d
+�
+
++ ε2
+β2
+max
+2h(2 min(κ, 1) −1 −2h).
+(6.14)
+
+Proof. Recall that rf(t) = −1
+
+2β(t), g(t) =
+�
+
+β(t) and pnoise(·) ∼N(0, I). The key improve-
+ment relies on the fact [24, Proposition 10]: If pdata(·) is κ-strongly log-concave, then p(T −t, ·)
+is
+
+κ
+�
+e−
+�T −t
+0
+β(s)ds + κ
+�T−t
+
+0
+e−
+�T −t
+s
+β(v)dvβ(s)ds
+�−1
+−strongly log-concave.
+
+(The convolution preserves strong log-concavity.) Thus, the term E((Ut −Vt) · (∇log p(T −
+t, Ut) −∇log p(T −t, Vt))) in (6.12) is bounded from above by
+
+−
+κ
+
+e−
+�T −t
+0
+β(s)ds + κ
+�T−t
+0
+e−
+�T −t
+s
+β(v)dvβ(s)ds
+E|Ut −Vt|2.
+
+instead of L E|Ut −Vt|2. Consequently, we obtain the bound (6.10) by replacing u(t) with
+
+uVP(t) :=
+�T
+
+T−t
+β(s)
+
+�
+
+1 + 2h −
+2κ
+
+e−
+�s
+0 β(v)dv + κ
+�s
+0 e−
+�s
+v β(u)duβ(v)dv
+
+�
+
+ds.
+(6.15)
+
+It is easy to see that uVP(T) ≤βmax(1 + 2h −2 min(κ, 1))T, and uVP(T) −uVP(T −t) ≤
+βmax(1 + 2h −2 min(κ, 1))t. Moreover,
+
+W 2
+2 (p(T, ·), pnoise(·)) ≤e−
+�T
+0 β(s)dsEpdata(·)|x|2 + d
+
+4e−2
+�T
+0 β(s)ds
+
+≤e−βminT Epdata(·)|x|2 + d
+
+4e−2βminT .
+
+For κ > 1
+
+2, we take h < min(κ, 1) −1
+
+2, so 1 + 2h −2 min(κ, 1) < 0. Combining (6.10) with
+the above estimates yields (6.14).
+□
+
+See [89] for a Wasserstein bound for CVP. In comparison with VP, CVP (and more general
+CDPM) is designed to be robust to the score matching error and discretization (see Section
+6.3), at the cost of noise approximation error. Practically, T should not set to be too large
+for CVP to control the noise approximation bias.
+
+6.3. Discretization. In order to implement the diffusion model, we need to discretize the
+corresponding SDE. For the SDE (4.2), there are several ways of discretization. Fix 0 = t0 <
+t1 · · · < tN = T to be the time discretization. Initialize �
+X0 ∼pnoise(·), and set
+�
+Xk = �
+Xk−1 + (−f(T −tk, �
+Xk−1)+g2(T −tk−1)sθ(T −tk−1, �
+Xk−1))(tk −tk−1)
+
++
+�tk
+
+tk−1
+g(T −t)dBt,
+for k = 1, . . . , N,
+(6.16)
+
+where
+�tk
+tk−1 g(T −t)dBt is sampled as N(0,
+�tk
+tk−1 g2(T −t)dt), or the Euler-Maruyama scheme:
+
+�
+Xk = �
+Xk−1 + (−f(T −tk, �
+Xk−1) + g2(T −tk−1)sθ(T −tk−1, �
+Xk−1))(tk −tk−1)
+
++ g(T −tk−1)(Btk −Btk−1),
+for k = 1, . . . , N.
+(6.17)
+
+
+DIFFUSION MODELS
+21
+
+In practice, the predictor-corrector (PC) sampler [83] is frequently used, where the scheme
+(6.16) or (6.17) serves as the predictor, followed by a score-based corrector. More precisely,
+for each k, let �
+X(0)
+k
+be the output of the predictor (6.16) or (6.17), and fix some ϵk > 0. The
+corrector �
+Xk = �
+X(M)
+k
+is given by
+
+�
+X(ℓ+1)
+k
+= �
+X(ℓ)
+k
++ ϵksθ(T −tk, �
+X(ℓ)
+k ) +
+√
+
+2(B′
+(ℓ+1)ϵk −B′
+ℓϵk),
+for ℓ= 0, . . . , M −1,
+(6.18)
+
+where M is the number of steps in the corrector step. The hyperparameters ϵk are taken
+to be decreasing in k. Essentially, (6.18) is the discrete scheme of the Langevin equation
+dXt = ∇log p(T −tk, Xt) +
+√
+
+2B′
+t that converges to p(T −tk, ·), but with the score function
+replaced with the estimated sθ(T −tk, ·). Since the scheme (6.16) or (6.17) is the predictor
+of the PC sampler, it is also called the predictor-only sampler.
+Again as seen in Section 3, most popular diffusion models have a common structure:
+f(t, x) = f(t)x, with f(t) ∈R. In this case, the exponential integrator (EI) [99] can be
+applied to solve the SDE (4.2), or the ODE (5.8). Letting Ψ(s, t) := e−
+�t
+s f(T−u)du, we have
+for 0 ≤s < t ≤T,
+
+Yt = Ψ(s, t)Ys +
+�t
+
+s
+Ψ(u, t)g2(T −u)sθ(T −u, Yu)du +
+�t
+
+s
+Ψ(u, t)g(T −u)dBu,
+(25’)
+
+or
+
+Yt = Ψ(s, t)Ys + 1
+
+2
+
+�t
+
+s
+Ψ(u, t)g2(T −u)sθ(T −u, Yu)du.
+(45’)
+
+So the discretization is:
+
+�
+Xk = Ψ(tk−1, tk) �
+Xk−1 +
+
+��tk
+
+tk−1
+Ψ(tk−1, u)g2(T −u)du
+
+�
+
+sθ(T −tk−1, �
+Xk−1)
+
++
+�tk
+
+tk−1
+Ψ(tk−1, u)g(T −u)dBu,
+for k = 1, . . . , N.
+
+(6.19)
+
+or
+
+�
+Xk = Ψ(tk−1, tk) �
+Xk−1 + 1
+
+2
+
+��tk
+
+tk−1
+Ψ(tk−1, u)g2(T −u)du
+
+�
+
+sθ(T −tk−1, �
+Xk−1),
+
+for k = 1, . . . , N.
+
+(6.20)
+
+Note that the EI solvers (6.19)–(6.20) for VP correspond to DDPM and DDIM, respectively.
+See also [97, 100] for higher order EI solvers.
+Classical SDE theory [44] indicates that the discretization error is of order C(T)δ, with
+C(T) exponential in T. A natural question is whether there are better bounds for the SDEs
+arising from the diffusion models in Section 3. The general way to control the discretization
+error is to prove a one-step estimate, and then unfold the recursion. The analysis is mostly
+tedious, and we do not plan to expand the details here. The table below summarizes known
+results on the discretization error of various diffusion models.
+
+
+22
+WENPIN TANG AND HANYANG ZHAO
+
+Ref.
+Metric
+Model
+Sampling
+Step size
+Discretization error
+[11]
+TV
+OU
+Euler
+δ
+
+√
+
+Td
+√
+
+δ
+[47, 48]
+TV
+OU
+PC
+varying
+OT (1)
+√
+
+d
+√
+
+δ
+[97]
+TV
+OU
+EI
+δ
+
+√
+
+Td7√
+
+δ3
+
+[24]
+W2
+VE
+Euler
+δ
+eO(T)√
+
+dδ
+W2
+VP
+Euler
+δ
+eO(T 3)√
+
+dδ
+[89]
+W2
+CDPM
+Euler
+δ
+OT (1)
+√
+
+d
+√
+
+δ
+
+TABLE 2. Discretization errors.
+
+There has been work on the convergence of diffusion models in a compact domain, or
+satisfying the manifold hypothesis [14, 67]. In this case, the Wasserstein distance is simply
+bounded by the total variation distance. [11, 47, 48] also considered bounded target distribu-
+tions, which should not be confused with diffusion models in a compact domain because the
+SDEs can live in an unbounded space. An early stopping argument is used there to guarantee
+the convergence of diffusion models in the W2 metric. See also [2] for finer results on the
+convergence of the OU process, and [50, 51, 53] that worked directly on the convergence of
+(discrete) DDPM.
+The theory of the ODE sampling of diffusion models is, however, still sparse. [10, 34]
+studied the total variation convergence of the ODE sampler for the OU process, and [26]
+established Wasserstein bounds for the ODE sampler of VE and VP. See also [3, 12, 51, 53, 55]
+for closely related results on the deterministic sampler of diffusion models.
+Recently, there has been a surge of interest in understanding the convergence of diffusion
+models, where the target distribution is concentrated on low-dimensional manifolds in a
+higher-dimensional space. This phenomenon is called “adapting to unknown low-dimensional
+structures” [54]. Typically, the dependence of the discretization error in d is replaced with
+some intrinsic dimension k ≪d (plus a polynomial log d correction). See also [35, 56, 68, 85]
+for further development in this direction.
+
+7. Further results on score matching
+
+In the previous sections, we have seen that the success of diffusion models relies largely on
+the quality of score matching. This section reviews further results on score matching in the
+context of diffusion models. Section 7.1 considers statistical efficiency of score matching, and
+Section 7.2 presents approximations by neural nets. In Section 7.3, we introduce the idea of
+diffusion model alignment by reinforcement learning (RL).
+
+7.1. Statistical efficiency of score matching. In this subsection, we focus on the statis-
+tical aspect of the score matching problem (4.4). Assume that
+
+sθ(t, x) = ∇log pθ(t, x),
+for all t, x,
+(7.1)
+
+where pθ(t, ·) is a family of probability distributions parametrized by θ.
+In other words,
+sθ(·, ·) is the score function of a parametric family of probability distributions instead of an
+arbitrary neural net. This assumption is restrictive (and may seem to not be realistic), but it
+serves as a first step to understand the statistical efficiency of score matching in the context
+of diffusion models.
+
+
+DIFFUSION MODELS
+23
+
+Under the assumption (7.1), the score matching problem (4.4) becomes
+
+min
+θ
+JESM(θ) := Ep(t,·)|∇log pθ(t, x) −∇log p(t, X)|2,
+(7.2)
+
+and the corresponding implicit score matching problem is:
+
+min
+θ
+JISM(θ) : = Ep(t,·)
+�
+|∇log pθ(t, X)|2 + 2 ∇· ∇log pθ(t, X)
+�
+
+= Ep(t,·)
+�
+|∇log pθ(t, X)|2 + 2 Tr(∇2 log pθ(t, X))
+�
+.
+(7.3)
+
+Let �θn be minimum point of the empirical version of (7.2) or (7.3) from n samples X1, . . . , Xn ∼
+p(t, ·):
+
+�θn := arg minθ
+1
+n
+
+n
+�
+
+i=1
+
+�
+|∇log pθ(t, Xi)|2 + 2 Tr(∇2 log pθ(t, Xi))
+�
+.
+(7.4)
+
+The question of interest is whether the estimated p�θn(t, ·) approximates well the probability
+distribution p(t, ·). The answer is hinted in the following theorem.
+
+Theorem 7.1 (Consistency and asymptotic normality). [37, 45] Fix t ∈[0, T].
+
+(1) Assume that p(t, ·) has full support, and p(t, ·) = pθ∗(t, ·) for some θ∗and p(t, ·) ̸=
+pθ(t, ·) for any θ ̸= θ∗. Then JESM(θ) = 0 if and only if θ = θ∗.
+(2) Assume further that pθ(t, ·) belongs to the exponential family, i.e. pθ(t, ·) ∝exp(θ ·
+F(·)) for a suitably nice F. Then
+
+√n(�θn −θ∗) →N(0, ΓSM),
+(7.5)
+
+with
+
+ΓSM
+:=
+Epθ∗(t,·)
+
+�
+(∇F(X)∇F(X)⊤)−1Σ∇F(X)∇F(X)⊤θ∗+∆F(X)E(∇F(X)∇F(X)⊤)−1
+�
+,
+
+where Σ• is the Fisher information matrix, and the Laplacian ∆F(X) applies coordinate-
+wise to F(X).
+
+Proof. (1) If JESM(θ) = 0, then ∇log pθ(t, ·) = ∇log p(t, ·). So pθ(t, ·) = p(t, ·) + C, and
+C = 0 because p(t, ·) and pθ(t, ˙) are probability distributions. By the hypothesis, we have
+θ = θ∗.
+(2) Recall that p(t, ·) = pθ∗(t, ·). The key to the analysis relies on the fact that
+
+θ∗= −E(∇F(X)∇F(X)⊤)−1E∆F(X).
+(7.6)
+
+Denote by �En the empirical expectation of n i.i.d. random variables distributed by p(t, ·).
+Write �En(∇F(X)∇F(X)⊤) = E(∇F(X)∇F(X)⊤) + δ1,n/√n and �En∆F(X) = EF(X) +
+
+
+24
+WENPIN TANG AND HANYANG ZHAO
+
+δ2/√n. Note that
+
+�θ = −�En(∇F(X)∇F(X)⊤)−1�En∆F(X)
+
+= −
+
+
+
+
+E(∇F(X)∇F(X)⊤)−1�En(∇F(X)∇F(X)⊤)
+�
+��
+�
+I+E(∇F(X)∇F(X)⊤)−1δ1,n/√n
+
+
+
+
+
+
+−1
+
+E(∇F(X)∇F(X)⊤)−1�En∆F(X)
+�
+��
+�
+−θ∗+E(∇F(X)∇F(X)⊤)−1δ2,n/√n
+
+=
+�
+−I + E(∇F(X)∇F(X)⊤)−1 δ1,n
+√n + O
+�1
+
+n
+
+��
+
+�
+−θ∗+ E(∇F(X)∇F(X)⊤)−1 δ2,n
+√n
+
+�
+
+= θ∗−E(∇F(X)∇F(X)⊤)−1 θ∗δ1,n + δ2,n
+√n
++ O(1/√n),
+
+where we use Slutsky’s theorem in the third equation. Moreover,
+
+θ∗δ1,n + δ2,n
+√n
+
+= E(∇F(X)∇F(X)⊤θ∗+ ∆F(X)) −�En(∇F(X)∇F(X)⊤θ∗+ ∆F(X)),
+
+which converges in distribution to N(0, Σ∇F(X)∇F(X)⊤θ∗+∆F(X)). Combining the above esti-
+mates yields (7.5).
+□
+
+Under the assumptions in Theorem 7.1, it is clear that Assumption 6.1 (L2-bound on score
+matching) holds if
+
+Ep(t,·)
+
+�
+sup
+θ
+|∂θpθ(t, X)|2+ϵ
+�
+< ∞,
+
+for any ϵ > 0. Another interesting result from [45] shows that under an isoperimetric assump-
+tion on p(t, ·), the statistical efficiency of score matching is close to the maximum likelihood
+estimate by comparing ΓSM with ΓMLE = Σ−1
+F(X). Similar results were obtained by [65] for a
+more general class of distributions.
+
+7.2. Score matching by neural nets. Here we consider score matching for VP. Recall
+γ(t) := exp
+�
+−2
+�t
+0 β(s)ds
+�
+. By Tweedie’s formula [18, 72], the score function can be written
+as:
+
+∇log p(t, x) =
+γ(t)
+1
+4
+
+1 −
+�
+
+γ(t)
+E(X0 | Xt = x) −
+1
+
+1 −
+�
+
+γ(t)
+x,
+(7.7)
+
+Inspired by the special structure (7.7), it is natural to take the function approximation:
+
+sθ(t, x) =
+γ(t)
+1
+4
+
+1 −
+�
+
+γ(t)
+fθ(t, x) −
+1
+
+1 −
+�
+
+γ(t)
+x,
+(7.8)
+
+
+DIFFUSION MODELS
+25
+
+with fθ(t, x) a suitable neural net (e.g. ReLU net). As pointed out by [7], the specific form
+(7.8) has close affinity to the U-net, where the term −
+1
+1−√
+
+γ(t)x corresponds to a shortcut
+
+connection.
+The following theorem provides a template for a class of results concerning the approxima-
+tion efficiency of score matching. To simplify the presentation, we take the weight λ(t) = 1.
+
+Theorem 7.2. [7, 29] Let �sθ(·, ·) solve one of the empirical score matching problems (in
+Section 4), where E is replaced with �E under finite samples. Let �sθ,k be the output at iteration
+k of some algorithm (e.g. SGD). For �s = �sθ or �sθ,k, we have:
+�T
+
+0
+Ep(t,·)|�s(t, ·) −∇log p(t, ·)|2dt
+
+≤
+�T
+
+0
+Ep(t,·)|�s(t, ·) −∇log p(t, ·)|2 −�Ep(t,·)|�s(t, ·) −∇log p(t, ·)|2dt
+
++ inf
+θ
+
+�T
+
+0
+�Ep(t,·)|sθ(t, ·) −∇log p(t, ·)|2dt,
+
+(7.9)
+
+where the first term on the right side of (7.9) is the sample error of score matching, and the
+second term is the approximation error.
+
+In [7], fθ(t, x) is taken to be a multilayer ReLU with linear structure. But no specific
+algorithm of stochastic optimization is used (corresponding to �s = �sθ). [29] considered a
+two-layer ReLU net, and gradient descent is used to update �s = �sθ,k. In particular, they used
+a neural tangent kernel as a universal proxy to the score, and showed that score matching
+(using a two-layer ReLU net) is as easy as kernel regression. [94] considered a feedforward
+net, also with gradient descent to update �sθ,k. In general, the bound (7.9) depends, in a
+complicated manner, on the data distribution, the net structure, the sample size, and the
+number of iterations in the optimization algorithm.
+
+7.3. Score matching by reinforcement learning. In this last subsection, we consider
+score matching by RL, which was initiated by [4, 20, 49]. The idea is to treat the score as
+the action in RL, where the reward measures how well the sample YT aligns with human
+preferences (diffusion model alignment). Since the diffusion model is specified by the SDE,
+the recently developed continuous RL [38, 39, 93, 103] provides a convenient framework to
+formulate score matching by RL.
+Let’s recall the setup of continuous RL. The state dynamics (Xa
+t , t ≥0) is governed by
+the SDE:
+dXa
+t = b (t, Xa
+t , at) dt + σ (t) dBt,
+Xa
+0 ∼pinit(·),
+(7.10)
+
+where b : [0, T] × Rd × A →Rd, σ : [0, T] →R+, and the action as ∈A is generated from
+a distribution π (· | t, Xa
+t ) by external randomization. Define the (state) value function given
+the feedback policy {π(· | t, x) : x ∈Rd} by
+
+V (t, x; π) := E
+��T
+
+t
+r (s, Xπ
+s , aπ
+s ) ds + h(Xπ
+T )
+����Xπ
+0 = x
+�
+,
+
+where r : R+×Rd×A →R and h : Rd →R are the running and terminal rewards, respectively.
+The performance metric is η(π) :=
+�
+
+Rd V (0, x; π)pinit(dx). The main task of continuous RL is
+
+
+26
+WENPIN TANG AND HANYANG ZHAO
+
+to approximate maxπ η(π) by constructing a sequence of policies πk, k = 1, 2, . . . recursively
+such that η(πk) is non-decreasing.
+Now we introduce the main idea from [101, 102] (see also [25]). Comparing the backward
+process (2.6) with the continuous RL (7.10), it is natural to set pinit(·) = pnoise(·),
+
+b(t, x, a) = −f(T −t, x) + g2(T −t)a
+and
+σ(t) = g(T −t).
+(7.11)
+
+Here the action a has a clear meaning – it is at the place of the score function. So we can
+deploy the continuous RL machinery to “fine-tune” the score. At time t, we use a Gaussian
+exploration aθ
+t ∼πθ(· | t, Y θ
+t ) = N(µθ(t, Y θ
+t ), σ2
+t I), where σt is a predetermined exploration
+level for each t. Under the Gaussian exploration, the RL dynamics is:
+
+dY θ
+t =
+�
+−f(T −t, Y θ
+t ) + g2(T −t)µθ(t, Y θ
+t )
+�
+dt + g(T −t)dBt, Y θ
+0 ∼pnoise(·).
+(7.12)
+
+Denote by pθ(t, ·) the probability distribution of Y θ
+t .
+In particular, the score matching
+parametrization µθ(t, Y θ
+t ) = sθ(T −t, Y θ
+t ) recovers the backward process (4.2).
+In order to prevent the model from overfitting to the reward or catastrophic forgetting,
+we add a penalty term to ensure that the pretrained model spre(·, ·) is fully exploited. The
+problem that we want to solve is:
+
+max
+θ
+E
+�
+R(Y θ
+T ) −β KL
+�
+pθ(T, ·), pθpre(T, ·)
+��
+,
+(7.13)
+
+where β > 0 is a (given) penalty cost, R : Rd →R is a reward to evaluate the sample Y θ
+T . It
+is easy to see that the objective function (7.13) is equivalent to:
+
+E
+�T
+
+0
+−β
+
+2 g2(T −t)|aθ
+t −µθpre(t, Y θ
+t )|2
+
+�
+��
+�
+r(t,Y θ
+t ,aθ
+t )
+
+dt + E R(Y θ
+T )
+����
+h(Y θ
+T )
+
+,
+
+We also define the corresponding value function:
+
+V (t, x; πθ) = E
+��T
+
+t
+−β
+
+2 g2(T −t)|aθ
+t −µθpre(t, Y θ
+t )|2dt + R(Y θ
+T )
+����Y θ
+t = x
+�
+.
+(7.14)
+
+The following theorem gives the policy gradient with respect to the performance metric η.
+
+Theorem 7.3 (Policy gradient for score matching). [25, 102] The policy gradient of a policy
+πθ parameterized by θ is:
+
+∇θV (t, x; πθ) = E
+��T
+
+t
+∇θ log πθ(aθ
+s|s, Y θ
+s )q(t, Y θ
+s , aθ
+s; πθ)ds
+����Y θ
+t = x
+�
+,
+(7.15)
+
+where q(t, x, a; πθ) = ∂V
+
+∂t (t, x; πθ)+g2(T −t)∂V
+
+∂x (t, x; πθ) a+r(t, x, a) is the advantage function
+in continuous RL.
+
+Proof. It follows from [38, Theorem 5] that for all t, x,
+
+∇θV (t, x; πθ)
+
+= E
+��T
+
+t
+∇θ log πθ(aθ
+s|s, Y θ
+s )
+�
+dV (s, Y θ
+s ; πθ) + R(Y θ
+s )ds
+�����Y θ
+t = x
+�
+.
+(7.16)
+
+
+DIFFUSION MODELS
+27
+
+By applying Itˆo’s formula to V (t, Y θ
+t ; πθ), we have:
+
+dV (t, Y θ
+t ; πθ)
+
+=
+�
+∂tV (t, Y θ
+t ; πθ) + 1
+
+2g2(T −t)∆V (t, Y θ
+t ; πθ) −f(T −t, Y θ
+t )∂V
+
+∂x (t, Y θ
+t , πθ)
+
++ g2(T −t)∂V
+
+∂x (t, Y θ
+t , πθ)aθ
+t + r(t, Y θ
+t , aθ
+t)
+�
+dt + ∂V
+
+∂x (t, Y θ
+t ; πθ)g(T −t)dBt.
+
+(7.17)
+
+Injecting (7.17) into (7.16), and noting g2(T −t)∂V
+
+∂x (t, Y θ
+t , πθ)aθ
+t + r(t, Y θ
+t , aθ
+t) are the only
+terms involving aθ
+t yields the desired result.
+□
+
+Relying on Theorem 7.3, the machinery in [103] provides various algorithms (e.g., proximal
+policy optimization (PPO) [74]) to implement score fine-tuning.
+
+8. Conclusion and future directions
+
+In this section, we collect a few open problems which we hope to trigger future research.
+
+(1) The theory for the ODE samplers, and especially the consistency model is sparse.
+[52] studied the convergence rate of a modified CD. It would be useful to establish
+provable/sharp guarantees for the original CD.
+(2) There has also been work on diffusion models in constraint domains [17, 21, 59, 71].
+Establishing the convergence result in each particular case is of independent interest.
+(3) Approximation efficiency for score matching were studied in simple scenarios, e.g.,
+exponential families, two-layer neural nets. It would be interesting to see whether
+one can go beyond these cases to match the practice.
+(4) Diffusion guidance [16, 32] and fine-tuning [90, 91] are used to generate data that is
+customized for specific downstream tasks. Some recent work [28, 86, 88, 96] explored
+the theoretical aspects of these approaches, which calls for further development.
+(5) Diffusion model alignment is a promising subject in the context of RL from human
+feedback (RLHF). Rudiments are provided in Section 7.3, and it remains to build an
+entire framework, with provable guarantees.
+
+Acknowledgement: We thank Yuxin Chen, Sinho Chewi, Xuefeng Gao and Yuting Wei for
+helpful discussions. Hanyang Zhao is supported by NSF grant DMS-2206038, and InnoHK
+Initiative, The Government of the HKSAR and the AIFT Lab. Wenpin Tang is supported
+by NSF grants DMS-2113779 and DMS-2206038, the Columbia Innovation Hub grant, and
+the Tang Family Assistant Professorship.
+
+References
+
+[1] B. D. O. Anderson. Reverse-time diffusion equation models. Stochastic Process. Appl., 12(3):313–326,
+1982.
+[2] J. Benton, V. De Bortoli, A. Doucet, and G. Deligiannidis. Linear convergence bounds for diffusion
+models via stochastic localization. In ICLR, 2024.
+[3] J. Benton, G. Deligiannidis, and A. Doucet. Error bounds for flow matching methods. 2023.
+arXiv:2305.16860.
+[4] K. Black, M. Janner, Y. Du, I. Kostrikov, and S. Levine. Training diffusion models with reinforcement
+learning. In ICLR, 2024.
+
+
+28
+WENPIN TANG AND HANYANG ZHAO
+
+[5] A. Borji. Pros and cons of GAN evaluation measures. Comput. Vis. Image Underst., 179:41–65, 2019.
+[6] P. Cattiaux, G. Conforti, I. Gentil, and C. L´eonard. Time reversal of diffusion processes under a finite
+entropy condition. Ann. Inst. Henri Poincar´e Probab. Stat., 59(4):1844–1881, 2023.
+[7] M. Chen, K. Huang, T. Zhao, and M. Wang. Score approximation, estimation and distribution recovery
+of diffusion models on low-dimensional data. In ICML, volume 40, pages 4672–4712, 2023.
+[8] M. Chen, S. Mei, J. Fan, and M. Wang. Opportunities and challenges of diffusion models for generative
+ai. Natl. Sci. Rev., 11(12):nwae348, 2024.
+[9] M. Chen, S. Mei, J. Fan, and M. Wang. An overview of diffusion models: Applications, guided generation,
+statistical rates and optimization. 2024. arXiv:2404.07771.
+[10] S. Chen, S. Chewi, H. Lee, Y. Li, J. Lu, and A. Salim. The probability flow ODE is provably fast. In
+Neurips, volume 36, 2023.
+[11] S. Chen, S. Chewi, J. Li, Y. Li, A. Salim, and A. R. Zhang. Sampling is as easy as learning the score:
+theory for diffusion models with minimal data assumptions. 2023.
+[12] S. Chen, G. Daras, and A. Dimakis. Restoration-degradation beyond linear diffusions: A non-asymptotic
+analysis for ddim-type samplers. In ICML, volume 40, pages 4462–4484, 2023.
+[13] A. S. Cherny and H.-J. Engelbert. Singular stochastic differential equations, volume 1858 of Lecture
+Notes in Mathematics. Springer-Verlag, 2005.
+[14] V. De Bortoli. Convergence of denoising diffusion models under the manifold hypothesis. 2022.
+arXiv:2208.05314.
+[15] V. De Bortoli, J. Thornton, J. Heng, and A. Doucet. Diffusion Schr¨odinger bridge with applications to
+score-based generative modeling. In Neurips, volume 34, pages 17695–17709, 2021.
+[16] P. Dhariwal and A. Nichol. Diffusion models beat GANs on image synthesis. In Neurips, volume 34,
+pages 8780–8794, 2021.
+[17] S. Dieleman, L. Sartran, A. Roshannai, N. Savinov, Y. Ganin, P. H. Richemond, A. Doucet,
+R. Strudel, C. Dyer, and C. Durkan. Continuous diffusion for categorical data. 2022. arXiv preprint
+arXiv:2211.15089.
+[18] B. Efron. Tweedie’s formula and selection bias. J. Amer. Statist. Assoc., 106(496):1602–1614, 2011.
+[19] P. Esser, S. Kulal, A. Blattmann, R. Entezari, J. M¨uller, H. Saini, Y. Levi, D. Lorenz, A. Sauer,
+and F. Boesel. Scaling rectified flow transformers for high-resolution image synthesis. In ICML, pages
+12606–12633, 2024.
+[20] Y. Fan and K. Lee. Optimizing DDPM sampling with shortcut fine-tuning. 2023. arXiv:2301.13362.
+[21] N. Fishman, L. Klarner, V. De Bortoli, E. Mathieu, and M. Hutchinson. Diffusion models for constrained
+domains. 2023. arXiv:2304.05364.
+[22] H. F¨ollmer. An entropy approach to the time reversal of diffusion processes. In Stochastic differential
+systems (Marseille-Luminy, 1984), volume 69 of Lect. Notes Control Inf. Sci., pages 156–163. Springer,
+Berlin, 1985.
+[23] H. F¨ollmer. Time reversal on Wiener space. In Stochastic processes—mathematics and physics (Bielefeld,
+1984), volume 1158 of Lecture Notes in Math., pages 119–129. Springer, Berlin, 1986.
+[24] X. Gao, H. M. Nguyen, and L. Zhu. Wasserstein convergence guarantees for a general class of score-based
+generative models. J. Mach. Learn. Res., 26(43):1–54, 2025.
+[25] X. Gao, J. Zha, and X. Y. Zhou. Reward-directed score-based diffusion models via q-learning. 2024.
+arXiv:2409.04832.
+[26] X. Gao and L. Zhu. Convergence analysis for general probability flow ODEs of diffusion models in
+Wasserstein distances. 2024. arXiv:2401.17958.
+[27] Google. State-of-the-art video and image generation with Veo 2 and Imagen 3. 2024. Available at https:
+//blog.google/technology/google-labs/video-image-generation-update-december-2024/.
+[28] Y. Guo, H. Yuan, Y. Yang, M. Chen, and M. Wang. Gradient guidance for diffusion models: An
+optimization perspective. 2024. arXiv:2404.14743.
+[29] Y. Han, M. Razaviyayn, and R. Xu. Neural network-based score estimation in diffusion models: Opti-
+mization and generalization. In ICLR, 2024.
+[30] U. G. Haussmann and E. Pardoux. Time reversal of diffusions. Ann. Probab., 14(4):1188–1205, 1986.
+[31] J. Ho, A. Jain, and P. Abbeel. Denoising diffusion probabilistic models. In Neurips, volume 33, pages
+6840–6851, 2020.
+
+
+DIFFUSION MODELS
+29
+
+[32] J. Ho and T. Salimans. Classifier-free diffusion guidance. In NeurIPS 2021 Workshop on Deep Generative
+Models and Downstream Applications, 2021.
+[33] C.-W. Huang, J. H. Lim, and A. C. Courville. A variational perspective on diffusion-based generative
+models and score matching. In Neurips, volume 34, pages 22863–22876, 2021.
+[34] D. Z. Huang, J. Huang, and Z. Lin. Convergence analysis of probability flow ode for score-based gener-
+ative models. 2025. arXiv:2404.09730. To appear in IEEE Trans. Inf. Theory.
+[35] Z. Huang, Y. Wei, and Y. Chen. Denoising diffusion probabilistic models are optimally adaptive to
+unknown low dimensionality. 2024. arXiv:2410.18784.
+[36] A. Hyv¨arinen. Estimation of non-normalized statistical models by score matching. J. Mach. Learn. Res.,
+6:695–709, 2005.
+[37] A. Hyv¨arinen. Some extensions of score matching. Comput. Statist. Data Anal., 51(5):2499–2512, 2007.
+[38] Y. Jia and X. Y. Zhou. Policy gradient and actor-critic learning in continuous time and space: Theory
+and algorithms. J. Mach. Learn. Res., 23(154):1–55, 2022.
+[39] Y. Jia and X. Y. Zhou. q-learning in continuous time. J. Mach. Learn. Res., 24(161):1–61, 2023.
+[40] I. Karatzas and S. E. Shreve. Brownian motion and stochastic calculus, volume 113 of Graduate Texts
+in Mathematics. Springer-Verlag, New York, second edition, 1991.
+[41] T. Karras, M. Aittala, T. Aila, and S. Laine. Elucidating the design space of diffusion-based generative
+models. In Neurips, volume 35, pages 26565–26577, 2022.
+[42] D. Kim, C.-H. Lai, W.-H. Liao, N. Murata, Y. Takida, T. Uesaka, Y. He, Y. Mitsufuji, and S. Ermon.
+Consistency trajectory models: Learning probability flow ODE trajectory of diffusion. In ICLR, 2024.
+[43] D. Kingma and R. Gao. Understanding diffusion objectives as the elbo with simple data augmentation.
+In Neurips, volume 36, pages 65484–65516, 2023.
+[44] P. E. Kloeden and E. Platen. Numerical solution of stochastic differential equations, volume 23 of Ap-
+plications of Mathematics (New York). Springer-Verlag, Berlin, 1992.
+[45] F. Koehler, A. Heckett, and A. Risteski. Statistical efficiency of score matching:
+The view from
+isoperimetry. In ICLR, 2023.
+[46] D. Kwon, Y. Fan, and K. Lee. Score-based generative modeling secretly minimizes the Wasserstein
+distance. In Neurips, volume 35, pages 20205–20217, 2022.
+[47] H. Lee, J. Lu, and Y. Tan. Convergence for score-based generative modeling with polynomial complexity.
+In Neurips, volume 35, pages 22870–22882, 2022.
+[48] H. Lee, J. Lu, and Y. Tan. Convergence of score-based generative modeling for general data distributions.
+In ALT, pages 946–985, 2023.
+[49] K. Lee, H. Liu, M. Ryu, O. Watkins, Y. Du, C. Boutilier, P. Abbeel, M. Ghavamzadeh, and S. S. Gu.
+Aligning text-to-image models using human feedback. 2023. arXiv:2302.12192.
+[50] G. Li and C. Cai. Provable acceleration for diffusion models under minimal assumptions. 2024.
+arXiv:2410.23285.
+[51] G. Li, Y. Huang, T. Efimov, Y. Wei, Y. Chi, and Y. Chen. Accelerating convergence of score-based
+diffusion models, provably. In ICML, 2024.
+[52] G. Li, Z. Huang, and Y. Wei. Towards a mathematical theory for consistency training in diffusion
+models. 2024. arXiv:2402.07802.
+[53] G. Li, Y. Wei, Y. Chen, and Y. Chi. Towards faster non-asymptotic convergence for diffusion-based
+generative models. In ICLR, 2024.
+[54] G. Li and Y. Yan. Adapting to unknown low-dimensional structures in score-based diffusion models. In
+Neurips, volume 37, pages 126297–126331, 2024.
+[55] G. Li and Y. Yan. O (d/t) convergence theory for diffusion probabilistic models under minimal assump-
+tions. In ICLR, 2025.
+[56] J. Liang, Z. Huang, and Y. Chen. Low-dimensional adaptation of diffusion models: Convergence in total
+variation. 2025. arXiv preprint arXiv:2501.12982.
+[57] Y. Lipman, R. T. Chen, H. Ben-Hamu, M. Nickel, and M. Le. Flow matching for generative modeling.
+In ICLR, 2023.
+[58] X. Liu, C. Gong, and Q. Liu. Flow straight and fast: Learning to generate and transfer data with
+rectified flow. In ICLR, 2022.
+[59] A. Lou and S. Ermon. Reflected diffusion models. 2023. arXiv:2304.04740.
+[60] C. Luo. Understanding diffusion models: A unified perspective. 2022. arXiv:2208.11970.
+
+
+30
+WENPIN TANG AND HANYANG ZHAO
+
+[61] S. Luo, Y. Tan, L. Huang, J. Li, and H. Zhao. Latent consistency models: Synthesizing high-resolution
+images with few-step inference. 2023. arXiv:2310.04378.
+[62] A. Millet, D. Nualart, and M. Sanz. Integration by parts and time reversal for diffusion processes. Ann.
+Probab., 17(1):208–238, 1989.
+[63] B. Ø ksendal. Stochastic differential equations. Universitext. Springer-Verlag, Berlin, fifth edition, 1998.
+An introduction with applications.
+[64] OpenAI. Sora: Creating video from text. 2024. Available at https://openai.com/sora.
+[65] C. Pabbaraju, D. Rohatgi, A. Sevekari, H. Lee, A. Moitra, and A. Risteski. Provable benefits of score
+matching. 2023. arXiv:2306.01993.
+[66] G. Papamakarios, E. Nalisnick, D. J. Rezende, S. Mohamed, and B. Lakshminarayanan. Normalizing
+flows for probabilistic modeling and inference. J. Mach. Learn. Res., 22:Paper No. 57, 64, 2021.
+[67] J. Pidstrigach. Score-based generative models detect manifolds. In Neurips, volume 35, pages 35852–
+35865, 2022.
+[68] P. Potaptchik, I. Azangulov, and G. Deligiannidis. Linear convergence of diffusion models under the
+manifold hypothesis. 2024. arXiv:2410.09046.
+[69] J. Quastel. Time reversal of degenerate diffusions. In In and out of equilibrium (Mambucaba, 2000),
+volume 51 of Progr. Probab., pages 249–257. Birkh¨auser Boston, Boston, MA, 2002.
+[70] A. Ramesh, P. Dhariwal, A. Nichol, C. Chu, and M. Chen. Hierarchical text-conditional image generation
+with clip latents. 2022. arXiv:2204.06125.
+[71] P. H. Richemond, S. Dieleman, and A. Doucet. Categorical SDEs with simplex diffusion. 2022.
+arXiv:2210.14784.
+[72] H. Robbins. An empirical Bayes approach to statistics. In Proceedings of the Third Berkeley Symposium
+on Mathematical Statistics and Probability, 1954–1955, vol. I, pages 157–163. Univ. California Press,
+Berkeley-Los Angeles, Calif., 1956.
+[73] R. Rombach, A. Blattmann, D. Lorenz, P. Esser, and B. Ommer. High-resolution image synthesis with
+latent diffusion models. In CVPR, pages 10684–10695, 2022.
+[74] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algo-
+rithms. 2017. arXiv:1707.06347.
+[75] U. Singer, A. Polyak, T. Hayes, X. Yin, J. An, S. Zhang, Q. Hu, H. Yang, O. Ashual, and O. Gafni.
+Make-a-video: Text-to-video generation without text-video data. In ICLR, 2023.
+[76] J. Sohl-Dickstein, E. Weiss, N. Maheswaranathan, and S. Ganguli. Deep unsupervised learning using
+nonequilibrium thermodynamics. In ICML, volume 32, pages 2256–2265, 2015.
+[77] J. Song, C. Meng, and S. Ermon. Denoising diffusion implicit models. In ICLR, 2021.
+[78] Y. Song and P. Dhariwal. Improved techniques for training consistency models. In ICLR, 2023.
+[79] Y. Song, P. Dhariwal, M. Chen, and I. Sutskever. Consistency models. In ICML, volume 40, page
+32211–32252, 2023.
+[80] Y. Song, C. Durkan, I. Murray, and S. Ermon. Maximum likelihood training of score-based diffusion
+models. In Neurips, volume 34, pages 1415–1428, 2021.
+[81] Y. Song and S. Ermon. Generative modeling by estimating gradients of the data distribution. In Neurips,
+volume 32, page 11918–11930, 2019.
+[82] Y. Song, S. Garg, J. Shi, and S. Ermon. Sliced score matching: A scalable approach to density and score
+estimation. In UAI, volume 35, pages 574–584, 2020.
+[83] Y. Song, J. Sohl-Dickstein, D. P. Kingma, A. Kumar, S. Ermon, and B. Poole. Score-based generative
+modeling through stochastic differential equations. In ICLR, 2021.
+[84] D. W. Stroock and S. R. S. Varadhan. Multidimensional diffusion processes, volume 233 of Grundlehren
+der Mathematischen Wissenschaften. Springer-Verlag, 1979.
+[85] J. Tang and Y. Yan. Adaptivity and convergence of probability flow odes in diffusion generative models.
+2025. arXiv:2501.18863.
+[86] W. Tang. Fine-tuning of diffusion models via stochastic control: entropy regularization and beyond.
+2024. arXiv:2403.06279.
+[87] W. Tang, N. Touzi, and X. Y. Zhou. Tweedie’s formula for diffusion generative models beyond Gaussian.
+2025+. Working paper.
+[88] W. Tang and R. Xu. A stochastic analysis approach to conditional diffusion guidance. 2025. Available
+at https://www.columbia.edu/~wt2319/CDG.pdf.
+
+
+DIFFUSION MODELS
+31
+
+[89] W. Tang and H. Zhao. Contractive diffusion probabilistic models. 2024. arXiv:2401.13115.
+[90] M. Uehara, Y. Zhao, K. Black, E. Hajiramezanali, G. Scalia, N. L. Diamant, A. M. Tseng, T. Biancalani,
+and S. Levine. Fine-tuning of continuous-time diffusion models as entropy-regularized control. 2024.
+arXiv:2402.15194.
+[91] M. Uehara, Y. Zhao, K. Black, E. Hajiramezanali, G. Scalia, N. L. Diamant, A. M. Tseng, S. Levine,
+and T. Biancalani. Feedback efficient online fine-tuning of diffusion models. 2024. arXiv:2402.16359.
+[92] P. Vincent. A connection between score matching and denoising autoencoders. Neural Comput.,
+23(7):1661–1674, 2011.
+[93] H. Wang, T. Zariphopoulou, and X. Y. Zhou. Reinforcement learning in continuous time and space: A
+stochastic control approach. J. Mach. Learn. Res., 21(198):1–34, 2020.
+[94] Y. Wang, Y. He, and M. Tao. Evaluating the design space of diffusion-based generative models. In
+Neurips, volume 37, pages 19307–19352, 2024.
+[95] G. I. Winata, H. Zhao, A. Das, W. Tang, D. D. Yao, S.-X. Zhang, and S. Sahu. Preference tuning with
+human feedback on language, speech, and vision tasks: A survey. J. Artif. Intell. Res., 82:2595–2661,
+2025.
+[96] Y. Wu, M. Chen, Z. Li, M. Wang, and Y. Wei. Theoretical insights for diffusion guidance: A case study
+for gaussian mixture models. In ICML, volume 41, pages 53291 – 53327, 2024.
+[97] Y. Wu, Y. Chen, and Y. Wei. Stochastic Runge-Kutta methods: Provable acceleration of diffusion
+models. 2024. arXiv:2410.04760.
+[98] L. Yang, Z. Zhang, Y. Song, S. Hong, R. Xu, Y. Zhao, W. Zhang, B. Cui, and M.-H. Yang. Diffusion
+models: A comprehensive survey of methods and applications. ACM Comput. Surv., 56(4):1–39, 2023.
+[99] Q. Zhang and Y. Chen. Fast sampling of diffusion models with exponential integrator. In ICLR, 2023.
+[100] Q. Zhang, J. Song, and Y. Chen. Improved order analysis and design of exponential integrator for
+diffusion models sampling. 2023. arXiv:2308.02157.
+[101] H. Zhao, H. Chen, J. Zhang, D. D. Yao, and W. Tang. Scores as actions: a framework of fine-tuning
+diffusion models by continuous-time reinforcement learning. 2024. arXiv:2409.08400.
+[102] H. Zhao, H. Chen, J. Zhang, D. D. Yao, and W. Tang. Score as action: Fine-tuning diffusion generative
+models by continuous-time reinforcement learning. 2025. arXiv:2502.01819. To appear in ICML.
+[103] H. Zhao, W. Tang, and D. D. Yao. Policy optimization for continuous reinforcement learning. In Neurips,
+volume 36, 2023.
+
+Department of Industrial Engineering and Operations Research, Columbia University.
+Email address: wt2319@columbia.edu
+
+Department of Industrial Engineering and Operations Research, Columbia University.
+Email address: hz2684@columbia.edu
+
+

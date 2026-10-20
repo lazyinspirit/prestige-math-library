@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "93",
+  "round": 0,
+  "reviewed_items": [
+    "def-smooth-bilevel-learning-problem",
+    "alg-adjoint-hypergradient-with-residual",
+    "thm-smooth-bilevel-hypergradient-formula",
+    "thm-adjoint-hypergradient-linear-solve-error",
+    "rem-truncated-training-and-exact-hypergradients",
+    "ex-ridge-hyperparameter-hypergradient",
+    "ex-singular-hessian-nonisolated-inner-minimum",
+    "ex-exact-state-wrong-truncated-hypergradient"
+  ],
+  "reviewed_pages": [
+    "bilevel-learning-hypergradients-and-implicit-layers",
+    "bilevel-learning-hypergradients-and-implicit-layers-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch and both compact, body-free pages match the approved ML-85 inventory and scope. Four local issues need one repair pass; the remaining claims, supplier uses, examples, and page prerequisites check out.",
+  "findings": [
+    {
+      "id": "alg-adjoint-hypergradient-with-residual",
+      "type": "prerequisite",
+      "reason": "The procedure defines C2 via a continuously differentiable derivative map, but its use of cor-hessian-is-symmetric relies on coordinate C2 regularity from def-ck. This is needed for M_B u = B^T u as well as Hessian symmetry. Make the bridge explicit, for example using thm-total-derivative-computes-directional-and-partial-derivatives applied to Df."
+    },
+    {
+      "id": "thm-smooth-bilevel-hypergradient-formula",
+      "type": "local",
+      "reason": "Proof step 4.1 takes u = w*(theta), proving that the branch point is the unique global minimizer. The statement says each stationary point is the unique minimizer. Apply the same inequality to an arbitrary stationary point to support the full claim."
+    },
+    {
+      "id": "thm-adjoint-hypergradient-linear-solve-error",
+      "type": "local",
+      "reason": "The exact-state bound is derived in step 4.1 only by specializing the approximate-state argument, whose chart and Lipschitz assumptions are absent from the exact-state claim. Prove it directly under the exact-state assumptions, using hhat - grad J = B^T H^{-T} rho and the SPD inverse bound."
+    },
+    {
+      "id": "ex-exact-state-wrong-truncated-hypergradient",
+      "type": "prerequisite",
+      "reason": "The example defines a fixed-point map but no inner objective whose stationary branch supplies the bilevel hypergradient; its def-smooth and thm-smooth prerequisites are therefore not established. In Facts/Verification, relate the example to f(theta,z) = 1/2(z-theta)^2, whose stationarity equation is equivalent to z = G(z,theta), and apply the formula while preserving the stated example."
+    }
+  ],
+  "consumer_checks": []
+}

@@ -1,0 +1,1184 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-exp-negative-argument-second-order-upper-bound",
+    "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+    "thm-exp3-expected-regret",
+    "ex-rare-arm-importance-weighted-estimator",
+    "ex-deterministic-rewards-importance-weighted-feedback",
+    "ex-exp3-and-full-information-hedge-differ"
+  ],
+  "contracts": {
+    "lem-exp-negative-argument-second-order-upper-bound": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-mean-value-theorem-on-closed-interval",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$ be continuous on $[a,b]$ and differentiable on\n$(a,b)$, with $a<b$. Then there is $c\\in(a,b)$ such that\n$$\nf(b)-f(a)=f'(c)(b-a).\n$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $z=0$, the claim is equality. For $z<0$, fix any $a<b\\le0$ and set $g(t)=1+t-\\exp(t)$. By [F2], $g'(t)=1-\\exp(t)\\ge0$ for $t\\le0$, because [F3] and [F1] give $\\exp(t)\\le\\exp(0)=1$. Applying [F4] to $g$ on $[a,b]$ shows $g(b)-g(a)=g'(c)(b-a)\\ge0$, so $g$ is nondecreasing on $(-\\infty,0]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Now $g(0)=0$, so step 1.1 gives $g(t)\\le0$ for every $t\\le0$. Set $f(t)=1+t+t^2/2-\\exp(t)$; then $f'(t)=g(t)$. Applying [F4] on $[z,0]$ gives $f(0)-f(z)=g(c)(-z)\\le0$. Since $f(0)=0$, $f(z)\\ge0$, which is the required inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no empty set or empty sequence input; the argument concerns a real z."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies equality at z=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The endpoint z=1 is outside the stated domain z<=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the degenerate endpoint z=0 directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include z=0, the endpoint of the domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No object is selected; the proof uses only real calculus."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The exponential quadratic majorant is equality at zero, while two mean-value arguments on the negative axis give the inequality elsewhere. The auxiliary derivatives have the required signs by exponential monotonicity; no reverse implication identifying negative arguments is asserted.",
+            "item_sha256": "b82b5de129af2546f5a9e7cc93ac31ba96eac7220cd07a6aa680e139ada8135b",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The exponential quadratic majorant is equality at zero, while two mean-value arguments on the negative axis give the inequality elsewhere. The auxiliary derivatives have the required signs by exponential monotonicity; no reverse implication identifying negative arguments is asserted.",
+            "item_sha256": "b82b5de129af2546f5a9e7cc93ac31ba96eac7220cd07a6aa680e139ada8135b",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-argument",
+          "claim": "The inequality is sharp at z=0.",
+          "result": "exp(0)=1=1+0+0."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    },
+    "lem-bandit-importance-weighted-estimator-has-conditional-moments": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "Let $k,n\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, and let\n$$\n\\Delta_k=\\left\\{p\\in[0,1]^k:\\sum_{i=1}^k p_i=1\\right\\}.\n$$\nOn a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $(\\mathcal F_t)_{t=0}^n$ be the discrete filtration generated by the complete histories through round $t$, with $\\mathcal F_0$ trivial; a complete pre-action history records past reward vectors, actions, and observed rewards. A reward vector is either fixed in advance or a deterministic function of the complete pre-action history. Thus, at a finite horizon with finitely many arms, there are finitely many possible histories. Before action $A_t$ is drawn, the current reward vector $x_t=(x_{t,1},\\ldots,x_{t,k})\\in[0,1]^k$ and sampling distribution $P_t=(P_{t,1},\\ldots,P_{t,k})\\in\\Delta_k$ are $\\mathcal F_{t-1}$-measurable, and $P_{t,i}>0$ for every $i$. The finite-valued measurable action $A_t\\in[k]$ has conditional law $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$. The learner observes only $X_t=x_{t,A_t}$ and sets\n$$\nY_t=1-X_t,\\qquad y_{t,i}=1-x_{t,i},\\qquad \\widehat Y_{t,i}=\\frac{\\mathbf 1\\{A_t=i\\}Y_t}{P_{t,i}},\\qquad \\widehat X_{t,i}=1-\\widehat Y_{t,i}.\n$$\nThe quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate. A fixed reward sequence is the oblivious case; allowing $x_t$ to depend on the history available before $A_t$ is drawn gives the non-anticipating past-adaptive case. In either case the current reward vector is chosen before the current action. For finite horizons and finite action histories generated by such a fixed or deterministic history-dependent sequence, all these estimates are finite and integrable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a positive-probability atom $H$ of the finite pre-action history. On $H$, $y_{t,i}$ and $P_{t,i}$ are fixed. By [F1], $\\mathbb P(H\\cap\\{A_t=i\\})=P_{t,i}\\mathbb P(H)$; the estimator is $y_{t,i}/P_{t,i}$ on that event and zero on the rest of $H$. Hence $\\int_H\\widehat Y_{t,i}\\,d\\mathbb P=y_{t,i}\\mathbb P(H)$. The function with value $y_{t,i}$ on each history atom is measurable and integrable, and finite additivity gives the same integral identity on every event in $\\mathcal F_{t-1}$. By [F2], it is a conditional-expectation version, proving $\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the same atom $H$, $\\widehat Y_{t,i}^{\\,2}$ is $y_{t,i}^2/P_{t,i}^2$ on $H\\cap\\{A_t=i\\}$ and zero otherwise. Thus $\\int_H\\widehat Y_{t,i}^{\\,2}\\,d\\mathbb P=(y_{t,i}^2/P_{t,i}^2)P_{t,i}\\mathbb P(H)=(y_{t,i}^2/P_{t,i})\\mathbb P(H)$. Extending over the finite atoms and applying [F2] proves $\\mathbb E[\\widehat Y_{t,i}^{\\,2}\\mid\\mathcal F_{t-1}]=y_{t,i}^2/P_{t,i}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At a fixed history, the centered estimator has value $y_{t,i}(1-P_{t,i})/P_{t,i}$ with probability $P_{t,i}$ and value $-y_{t,i}$ with probability $1-P_{t,i}$, by step 1.1. Its conditional variance is therefore $P_{t,i}[y_{t,i}(1-P_{t,i})/P_{t,i}]^2+(1-P_{t,i})y_{t,i}^2=y_{t,i}^2(1-P_{t,i})/P_{t,i}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes k>=1 and a fixed arm i."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 give zero first and second moments when y_i=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero variance when p_i=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the deterministic action case p_i=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 works for y_i=0 and y_i=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The conditional law in the Statement is a finite distribution on nonempty [k]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Within each finite pre-action history atom, the estimator is a two-valued variable and the positive arm probability cancels one inverse factor in each conditional moment. Summing atoms verifies conditional-expectation versions; this derives moments from the estimator and does not characterize all unbiased estimators.",
+            "item_sha256": "1a3076a2cff6c5432f669bd1f7a7cbddbd62075e6968a3fb43227282b39c72f7",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Within each finite pre-action history atom, the estimator is a two-valued variable and the positive arm probability cancels one inverse factor in each conditional moment. Summing atoms verifies conditional-expectation versions; this derives moments from the estimator and does not characterize all unbiased estimators.",
+            "item_sha256": "1a3076a2cff6c5432f669bd1f7a7cbddbd62075e6968a3fb43227282b39c72f7",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "p-quarter-loss-one",
+          "claim": "For p=1/4 and y=1, the conditional moments are mean 1, second moment 4, variance 3.",
+          "result": "The estimator equals 4 with probability 1/4 and 0 with probability 3/4."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    },
+    "thm-exp3-expected-regret": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-adversary-and-feedback-model",
+          "source_section": "Definition",
+          "quote": "In an online decision protocol with horizon $T$, the environment and feedback model specifies how each loss function is chosen and what the learner observes after choosing $x_t$. **Full-information feedback** reveals the entire function $f_t$ (or, for $N$ experts, the full vector of their $N$ losses) after the round-$t$ choice. **Bandit feedback** reveals only the played loss $f_t(x_t)$ after that choice. An **oblivious adversary** fixes the whole sequence $(f_1,\\ldots,f_T)$ before the learner's random choices are realized; it may know the learner's rule but not its realized private randomization. A **non-anticipating adaptive adversary** chooses $f_t$ from the history available before $x_t$ is chosen, so $f_t$ may depend on earlier choices and feedback but not on the current choice or the learner's current private randomization. A **reactive adversary** may choose $f_t$ after observing $x_t$, so its round-$t$ loss may depend on that current choice. These adversary classes have different timing and are not interchangeable; a guarantee established for one class is not asserted for another. For the stochastic reward model, let $\\mathcal B(\\mathbb R)$ be the smallest collection of subsets of $\\mathbb R$ that contains every open interval and is closed under complements and countable unions; its members are the Borel sets. A **stochastic finite-arm reward environment** has $N\\ge1$ arms, a fixed probability measure $P_i$ on $(\\mathbb R,\\mathcal B(\\mathbb R))$ for each arm $i\\in[N]:=\\{1,\\ldots,N\\}$, and finite first moments $\\int_{\\mathbb R}|y|\\,P_i(dy)<\\infty$ with means $\\mu_i:=\\int_{\\mathbb R} y\\,P_i(dy)$. At each round the learner chooses a measurable arm $A_t$ with values in $[N]$ equipped with its full power set, before the reward $Y_t$ is drawn. The fixed-law condition means that, for every $i$, every event $B$ determined by the history before the reward and the chosen arm with $B\\subseteq\\{A_t=i\\}$, and every $C\\in\\mathcal B(\\mathbb R)$, $\\mathbb P(B\\cap\\{Y_t\\in C\\})=\\mathbb P(B)P_i(C)$. The model also states explicitly the conditional-mean identity used below: $\\mathbb E[\\mathbf1_B Y_t]=\\mu_i\\mathbb P(B)$ for every such $B$. Here $Y_t$ is an integrable real random variable, $\\mathbf1_B$ is the indicator of event $B$, and the history-and-arm events are measurable in the common probability space. This stochastic reward model is distinct from adversarial loss models and supplies no regret guarantee by itself.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-exp3",
+          "source_section": "Definition",
+          "quote": "Let $k>1$ and $n\\ge1$ be integers, and let $\\eta>0$. Use the finite-arm bandit protocol with rewards in $[0,1]$ and conditional sampling as specified in the bandit importance-weighted estimator definition. Initialize $\\widehat S_{0,i}=0$ for each $i\\in[k]$. For rounds $t=1,\\ldots,n$, perform the following operations:\n\n1. Set\n   $$\n   P_{t,i}=\\frac{\\exp(\\eta\\widehat S_{t-1,i})}{\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t-1,j})},\\qquad i\\in[k].\n   $$\n2. Draw a measurable finite-valued action $A_t$ with conditional probabilities $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$, and observe only $X_t=x_{t,A_t}$.\n3. Form the loss estimates $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and reward estimates $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ for every $i\\in[k]$.\n4. Update $\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}$ for every $i\\in[k]$.\n\nThe output is $(P_t,A_t,X_t,\\widehat X_t,\\widehat Y_t)_{t=1}^n$ and $\\widehat S_n$. These operations use exact real arithmetic. The procedure assumes a probability space carrying the stated measurable draws; it makes no probability-space construction claim. Normalizing the weights $\\exp(\\eta\\widehat S_{t-1,i})$ is the exponential-weights step used by Hedge.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "Let $k,n\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, and let\n$$\n\\Delta_k=\\left\\{p\\in[0,1]^k:\\sum_{i=1}^k p_i=1\\right\\}.\n$$\nOn a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $(\\mathcal F_t)_{t=0}^n$ be the discrete filtration generated by the complete histories through round $t$, with $\\mathcal F_0$ trivial; a complete pre-action history records past reward vectors, actions, and observed rewards. A reward vector is either fixed in advance or a deterministic function of the complete pre-action history. Thus, at a finite horizon with finitely many arms, there are finitely many possible histories. Before action $A_t$ is drawn, the current reward vector $x_t=(x_{t,1},\\ldots,x_{t,k})\\in[0,1]^k$ and sampling distribution $P_t=(P_{t,1},\\ldots,P_{t,k})\\in\\Delta_k$ are $\\mathcal F_{t-1}$-measurable, and $P_{t,i}>0$ for every $i$. The finite-valued measurable action $A_t\\in[k]$ has conditional law $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$. The learner observes only $X_t=x_{t,A_t}$ and sets\n$$\nY_t=1-X_t,\\qquad y_{t,i}=1-x_{t,i},\\qquad \\widehat Y_{t,i}=\\frac{\\mathbf 1\\{A_t=i\\}Y_t}{P_{t,i}},\\qquad \\widehat X_{t,i}=1-\\widehat Y_{t,i}.\n$$\nThe quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate. A fixed reward sequence is the oblivious case; allowing $x_t$ to depend on the history available before $A_t$ is drawn gives the non-anticipating past-adaptive case. In either case the current reward vector is chosen before the current action. For finite horizons and finite action histories generated by such a fixed or deterministic history-dependent sequence, all these estimates are finite and integrable.",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+          "source_section": "Statement",
+          "quote": "In the bandit importance-weighted estimator definition, fix a round $t$ and arm $i$, and write $p=P_{t,i}>0$ and $y=y_{t,i}$. Then\n$$\n\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i},\\qquad \\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=\\frac{y_{t,i}^2}{P_{t,i}}.\n$$\nWith conditional variance defined by $\\operatorname{Var}(Z\\mid\\mathcal F_{t-1})=\\mathbb E[(Z-\\mathbb E[Z\\mid\\mathcal F_{t-1}])^2\\mid\\mathcal F_{t-1}]$, one also has\n$$\n\\operatorname{Var}(\\widehat Y_{t,i}\\mid\\mathcal F_{t-1})=\\frac{y_{t,i}^2(1-P_{t,i})}{P_{t,i}}.\n$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exp-negative-argument-second-order-upper-bound",
+          "source_section": "Statement",
+          "quote": "For every real $z\\le0$,\n$$\n\\exp(z)\\le1+z+\\frac{z^2}{2}.\n$$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$\nConsequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then\n$$ (1-p)^m\\le\\exp(-mp). $$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-online-decision-protocol",
+          "source_section": "Definition",
+          "quote": "Fix a positive integer horizon $T$, a nonempty action set $K$, and, when choices or the environment are randomized, a probability space $(\\Omega,\\mathcal F,\\mathbb P)$. An online decision protocol has rounds $t=1,\\ldots,T$. Before round $t$, the learner has the history $h_{t-1}$ consisting of its earlier choices and all feedback and loss information revealed in earlier rounds. It chooses $x_t\\in K$ using only $h_{t-1}$ and any learner-private randomization available by that time. In a randomized protocol, $X_t$ is a measurable random element of $K$, meaning a measurable map from $(\\Omega,\\mathcal F)$ into $K$ equipped with its declared measurable structure. The environment supplies a real-valued loss function $f_t:K\\to\\mathbb R$; it may have fixed $f_t$ before the choice or choose it after the choice, as specified by the environment model, but the learner does not observe $f_t$ before choosing $x_t$. The learner incurs loss $f_t(x_t)$ and then receives feedback about round $t$ according to the feedback model. The history $h_t$ adds $x_t$, the feedback received, and any part of $f_t$ explicitly revealed in round $t$. No convexity, boundedness, or regret guarantee is part of this protocol definition.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-static-dynamic-and-strongly-adaptive-regret",
+          "source_section": "Definition",
+          "quote": "Let a finite-horizon online protocol have horizon $T$, action set $K$, round losses $f_t:K\\to\\mathbb R$, and learner choices $x_t\\in K$. Whenever a minimum below is used, assume it is finite and attained. For a fixed comparator $u\\in K$, the realized regret is\n$$\nR_T(u):=\\sum_{t=1}^T f_t(x_t)-\\sum_{t=1}^T f_t(u).\n$$\nThe **static regret** is\n$$\nR_T^{\\rm stat}:=\\sum_{t=1}^T f_t(x_t)-\\min_{u\\in K}\\sum_{t=1}^T f_t(u).\n$$\nFor randomized learners or environments, **expected regret** is the expectation of the specified regret random variable over their joint randomness, when that random variable is measurable and integrable. In a stochastic finite-arm reward model with means $(\\mu_i)_{i\\in[N]}$, let $\\mu^*:=\\max_{i\\in[N]}\\mu_i$. The **pseudo-regret** is the random variable\n$$\n\\bar R_T:=\\sum_{t=1}^T(\\mu^*-\\mu_{A_t}),\n$$\nwhereas the **realized reward regret** is\n$$\nR_T^{\\rm rew}:=\\sum_{t=1}^T(\\mu^*-Y_t).\n$$\n\nFor dynamic comparators, suppose $K\\subseteq\\mathbb R^d$ for a positive integer $d$ and fix a norm $\\|\\cdot\\|:\\mathbb R^d\\to[0,\\infty)$, meaning $\\|v\\|=0$ exactly when $v=0$, $\\|\\lambda v\\|=|\\lambda|\\|v\\|$ for every $\\lambda\\in\\mathbb R$, and $\\|v+w\\|\\le\\|v\\|+\\|w\\|$. Given a comparator sequence $u_{1:T}=(u_1,\\ldots,u_T)\\in K^T$, the **dynamic regret** and its **path length** are\n$$\nR_T^{\\rm dyn}(u_{1:T}):=\\sum_{t=1}^T f_t(x_t)-\\sum_{t=1}^T f_t(u_t),\\qquad P(u_{1:T}):=1+\\sum_{t=1}^{T-1}\\|u_t-u_{t+1}\\|.\n$$\nFor a nonempty contiguous integer interval $I=[r,s]$ with $1\\le r\\le s\\le T$, its **interval regret** is\n$$\nR_I:=\\sum_{t=r}^s f_t(x_t)-\\min_{u\\in K}\\sum_{t=r}^s f_t(u),\n$$\nand the **adaptive regret** is $\\max_{1\\le r\\le s\\le T}R_{[r,s]}$. For an algorithm $A$ producing the choices $x_1,\\ldots,x_T$, write $R_I(A)$ for its interval regret on $I$. The algorithm is **strongly adaptive** relative to a specified loss, feedback, adversary, and comparator class only if there are a stated base algorithm $A_0$, constants $C>0$ and $p\\ge0$, and a specified bound $B_{A_0}(n)$ on $A_0$'s static regret at horizon $n$ in that same class, such that for every nonempty contiguous interval $I\\subseteq\\{1,\\ldots,T\\}$,\n$$\nR_I(A)\\le C\\bigl(\\log(eT)\\bigr)^p B_{A_0}(|I|),\n$$\nwhere $\\log$ is the natural logarithm and $|I|=s-r+1$. Strong adaptivity is a regret property relative to intervals; it does not imply anytime statistical validity.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "alg-exp3",
+          "source_section": "Definition",
+          "quote": "Let $k>1$ and $n\\ge1$ be integers, and let $\\eta>0$. Use the finite-arm bandit protocol with rewards in $[0,1]$ and conditional sampling as specified in the bandit importance-weighted estimator definition. Initialize $\\widehat S_{0,i}=0$ for each $i\\in[k]$. For rounds $t=1,\\ldots,n$, perform the following operations:\n\n1. Set\n   $$\n   P_{t,i}=\\frac{\\exp(\\eta\\widehat S_{t-1,i})}{\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t-1,j})},\\qquad i\\in[k].\n   $$\n2. Draw a measurable finite-valued action $A_t$ with conditional probabilities $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$, and observe only $X_t=x_{t,A_t}$.\n3. Form the loss estimates $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and reward estimates $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ for every $i\\in[k]$.\n4. Update $\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}$ for every $i\\in[k]$.\n\nThe output is $(P_t,A_t,X_t,\\widehat X_t,\\widehat Y_t)_{t=1}^n$ and $\\widehat S_n$. These operations use exact real arithmetic. The procedure assumes a probability space carrying the stated measurable draws; it makes no probability-space construction claim. Normalizing the weights $\\exp(\\eta\\widehat S_{t-1,i})$ is the exponential-weights step used by Hedge.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "alg-exp3",
+          "source_section": "Definition",
+          "quote": "Let $k>1$ and $n\\ge1$ be integers, and let $\\eta>0$. Use the finite-arm bandit protocol with rewards in $[0,1]$ and conditional sampling as specified in the bandit importance-weighted estimator definition. Initialize $\\widehat S_{0,i}=0$ for each $i\\in[k]$. For rounds $t=1,\\ldots,n$, perform the following operations:\n\n1. Set\n   $$\n   P_{t,i}=\\frac{\\exp(\\eta\\widehat S_{t-1,i})}{\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t-1,j})},\\qquad i\\in[k].\n   $$\n2. Draw a measurable finite-valued action $A_t$ with conditional probabilities $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$, and observe only $X_t=x_{t,A_t}$.\n3. Form the loss estimates $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and reward estimates $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ for every $i\\in[k]$.\n4. Update $\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}$ for every $i\\in[k]$.\n\nThe output is $(P_t,A_t,X_t,\\widehat X_t,\\widehat Y_t)_{t=1}^n$ and $\\widehat S_n$. These operations use exact real arithmetic. The procedure assumes a probability space carrying the stated measurable draws; it makes no probability-space construction claim. Normalizing the weights $\\exp(\\eta\\widehat S_{t-1,i})$ is the exponential-weights step used by Hedge.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "alg-exp3",
+          "source_section": "Definition",
+          "quote": "Let $k>1$ and $n\\ge1$ be integers, and let $\\eta>0$. Use the finite-arm bandit protocol with rewards in $[0,1]$ and conditional sampling as specified in the bandit importance-weighted estimator definition. Initialize $\\widehat S_{0,i}=0$ for each $i\\in[k]$. For rounds $t=1,\\ldots,n$, perform the following operations:\n\n1. Set\n   $$\n   P_{t,i}=\\frac{\\exp(\\eta\\widehat S_{t-1,i})}{\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t-1,j})},\\qquad i\\in[k].\n   $$\n2. Draw a measurable finite-valued action $A_t$ with conditional probabilities $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$, and observe only $X_t=x_{t,A_t}$.\n3. Form the loss estimates $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and reward estimates $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ for every $i\\in[k]$.\n4. Update $\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}$ for every $i\\in[k]$.\n\nThe output is $(P_t,A_t,X_t,\\widehat X_t,\\widehat Y_t)_{t=1}^n$ and $\\widehat S_n$. These operations use exact real arithmetic. The procedure assumes a probability space carrying the stated measurable draws; it makes no probability-space construction claim. Normalizing the weights $\\exp(\\eta\\widehat S_{t-1,i})$ is the exponential-weights step used by Hedge.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First fix any positive finite real learning rate $\\eta$ and any reward sequence admitted by the algorithm. Initially $\\widehat S_{0,i}=0$ is finite for every $i$ by [F18]. Suppose all $\\widehat S_{t-1,i}$ are finite. Then each $\\exp(\\eta\\widehat S_{t-1,i})$ is a positive finite real by [F7] and the real-valued exponential definition [F17]. Its finite sum over $[k]$ is positive and finite, so [F1] gives $P_{t,i}>0$ and $\\sum_iP_{t,i}=1$. The assumed measurable action draw exists by [F21]; its observed reward is in $[0,1]$. Thus each $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ is finite, and [F19] makes every $\\widehat S_{t,i}$ finite. Induction proves these facts through round $n$. The prescribed loop has the finite index set $\\{1,\\ldots,n\\}$ and each round consists of the finite operations just checked together with an assumed draw, so it completes exactly $n$ rounds. This argument uses only $\\eta>0$ and the algorithm's reward range, for either fixed or deterministic past-adaptive rewards. For the rate in the regret clauses, $k>1$, [F10] and [F20] give $\\log k>\\log1=0$, and [F9] makes $\\log k$ real; hence that tuned $\\eta$ is also a positive finite real and the same argument applies to it.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "F17",
+            "F18",
+            "F19",
+            "F20",
+            "F21",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $t=0$, the claimed identity $\\widehat S_{t,i}=t-\\sum_{s=1}^t\\widehat Y_{s,i}$ holds by [F18] and the empty-sum convention. If it holds at $t-1$, then [F19] and $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ give\n$$\n\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}=t-\\sum_{s=1}^t\\widehat Y_{s,i}.\n$$\nSubstituting this identity into [F1] and using [F6] factors out the common positive term $\\exp(\\eta(t-1))$ from numerator and denominator, giving the stated loss-weight formula for $P_{t,i}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "F18",
+            "F19",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $t$, set $W_t=\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t,j})$ and $V_t=\\sum_{j=1}^kP_{t,j}\\widehat Y_{t,j}^{2}$. By [F1], [F7], and step 1.1, $W_t$ is positive and finite, and $P_t$ is a probability vector.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [A1] and [F11], each reward vector is fixed at the pre-action history. At each such history, [F3] and $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ give the conditional mean $\\mathbb E[\\widehat X_{t,i}\\mid\\mathcal F_{t-1}]=x_{t,i}$ by the finite conditional sum. Averaging these sums over histories and using [F14] and [F19] gives $\\mathbb E[\\widehat S_{n,i}]=\\mathbb E[\\sum_tx_{t,i}]$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F19",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "On every round and every action outcome, $\\sum_jP_{t,j}\\widehat X_{t,j}=1-\\sum_jP_{t,j}\\widehat Y_{t,j}=1-Y_t=X_t$, because only the sampled arm contributes to the middle sum.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix a pre-action history at round $t$. If $A_t=a$, only coordinate $a$ contributes to $V_t$, with value $y_{t,a}^2/P_{t,a}$. Its conditional expectation is therefore $\\sum_{a=1}^kP_{t,a}(y_{t,a}^2/P_{t,a})=\\sum_{a=1}^ky_{t,a}^2\\le k$, since $0\\le y_{t,a}\\le1$. Averaging over the finite histories and summing the $n$ rounds gives $\\mathbb E[\\sum_tV_t]\\le nk$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F12",
+            "F14",
+            "F15",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "By [F1]–[F2], $W_t/W_{t-1}=\\sum_{j=1}^kP_{t,j}\\exp(\\eta\\widehat X_{t,j})=\\exp(\\eta)\\sum_{j=1}^kP_{t,j}\\exp(-\\eta\\widehat Y_{t,j})$. Each $\\widehat Y_{t,j}\\ge0$, so [F4] with $z=-\\eta\\widehat Y_{t,j}$ gives $W_t/W_{t-1}\\le\\exp(\\eta)(1-\\eta\\sum_jP_{t,j}\\widehat Y_{t,j}+\\eta^2V_t/2)$. Put $u_t=-\\eta\\sum_jP_{t,j}\\widehat Y_{t,j}+\\eta^2V_t/2$. By [F5] and $\\sum_jP_{t,j}\\widehat X_{t,j}=1-\\sum_jP_{t,j}\\widehat Y_{t,j}$, this is at most $\\exp(\\eta+u_t)=\\exp(\\eta\\sum_jP_{t,j}\\widehat X_{t,j}+\\eta^2V_t/2)$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Multiplying step 3.2 over $t=1,\\ldots,n$ and using [F6] gives $W_n/W_0\\le\\exp(\\eta\\sum_{t=1}^n\\sum_jP_{t,j}\\widehat X_{t,j}+\\eta^2\\sum_{t=1}^nV_t/2)$. Here $W_0=k$ by [F17]–[F18], and $W_n\\ge\\exp(\\eta\\widehat S_{n,i})$ for every $i$ by [F19]. Since $k=\\exp(\\log k)$ by [F9], strict increase [F8] and $\\eta>0$ yield $\\widehat S_{n,i}-\\sum_{t=1}^n\\sum_jP_{t,j}\\widehat X_{t,j}\\le\\log k/\\eta+(\\eta/2)\\sum_{t=1}^nV_t$ for every arm $i$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F8",
+            "F9",
+            "F17",
+            "F18",
+            "F19",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For the oblivious case set $R_{n,i}=\\sum_tx_{t,i}-\\mathbb E[\\sum_tX_t]$; for the past-adaptive case set $R_{n,i}=\\mathbb E[\\sum_t(x_{t,i}-X_t)]$. By steps 2.2–2.3, both equal $\\mathbb E[\\widehat S_{n,i}-\\sum_t\\sum_jP_{t,j}\\widehat X_{t,j}]$. Taking expectations in step 4.1, using [F14]–[F16], and applying step 3.1 gives $R_{n,i}\\le\\log k/\\eta+\\eta nk/2$ for every $i$.",
+          "step": "5.1",
+          "inputs": [
+            "F14",
+            "F15",
+            "F16",
+            "step 4.1",
+            "step 3.1",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Using $\\eta>0$ from step 1.1, substitution gives $\\log k/\\eta=\\eta nk/2=\\sqrt{nk\\log k/2}$. The per-arm bound in step 5.1 therefore equals $\\sqrt{2nk\\log k}$; taking the finite maximum over $i$ proves both regret bounds in the Statement.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof step 1.2 verifies the cumulative-estimate identity at time zero using the empty-sum convention. Positive horizon and more than one arm are required by the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero weighted quadratic contribution when every loss y_{t,i}=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement excludes k=1; then log k=0 and the displayed learning-rate formula is undefined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and the algorithm Definition keep all Exp3 probabilities positive; no zero denominator occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses 0<=y_{t,i}<=1, including both reward endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 takes the finite maximum over [k], with k>1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Finite induction proves positive finite weights and completion for either fixed or deterministic history-dependent rewards, and the initial cumulative identity explicitly uses an empty sum. The potential argument bounds each fixed comparator before taking the maximum outside expectation; it does not claim a converse or reactive-policy regret.",
+            "item_sha256": "5cf5c92f6d015c36e63af0fcaec32e63d5f62ff8e2f11965292d10cd3ff1731d",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Finite induction proves positive finite weights and completion for either fixed or deterministic history-dependent rewards, and the initial cumulative identity explicitly uses an empty sum. The potential argument bounds each fixed comparator before taking the maximum outside expectation; it does not claim a converse or reactive-policy regret.",
+            "item_sha256": "5cf5c92f6d015c36e63af0fcaec32e63d5f62ff8e2f11965292d10cd3ff1731d",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-round-two-arm",
+          "claim": "For n=1, k=2, and rewards (1,0), the expected regret and theorem bound have exact finite values.",
+          "result": "Exp3 starts uniformly, so expected reward is 1/2 and regret is 1/2; eta=sqrt(log 2) and the stated bound is 2 sqrt(log 2)."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    },
+    "ex-rare-arm-importance-weighted-estimator": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "Let $k,n\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, and let\n$$\n\\Delta_k=\\left\\{p\\in[0,1]^k:\\sum_{i=1}^k p_i=1\\right\\}.\n$$\nOn a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $(\\mathcal F_t)_{t=0}^n$ be the discrete filtration generated by the complete histories through round $t$, with $\\mathcal F_0$ trivial; a complete pre-action history records past reward vectors, actions, and observed rewards. A reward vector is either fixed in advance or a deterministic function of the complete pre-action history. Thus, at a finite horizon with finitely many arms, there are finitely many possible histories. Before action $A_t$ is drawn, the current reward vector $x_t=(x_{t,1},\\ldots,x_{t,k})\\in[0,1]^k$ and sampling distribution $P_t=(P_{t,1},\\ldots,P_{t,k})\\in\\Delta_k$ are $\\mathcal F_{t-1}$-measurable, and $P_{t,i}>0$ for every $i$. The finite-valued measurable action $A_t\\in[k]$ has conditional law $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$. The learner observes only $X_t=x_{t,A_t}$ and sets\n$$\nY_t=1-X_t,\\qquad y_{t,i}=1-x_{t,i},\\qquad \\widehat Y_{t,i}=\\frac{\\mathbf 1\\{A_t=i\\}Y_t}{P_{t,i}},\\qquad \\widehat X_{t,i}=1-\\widehat Y_{t,i}.\n$$\nThe quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate. A fixed reward sequence is the oblivious case; allowing $x_t$ to depend on the history available before $A_t$ is drawn gives the non-anticipating past-adaptive case. In either case the current reward vector is chosen before the current action. For finite horizons and finite action histories generated by such a fixed or deterministic history-dependent sequence, all these estimates are finite and integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+          "source_section": "Statement",
+          "quote": "In the bandit importance-weighted estimator definition, fix a round $t$ and arm $i$, and write $p=P_{t,i}>0$ and $y=y_{t,i}$. Then\n$$\n\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i},\\qquad \\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=\\frac{y_{t,i}^2}{P_{t,i}}.\n$$\nWith conditional variance defined by $\\operatorname{Var}(Z\\mid\\mathcal F_{t-1})=\\mathbb E[(Z-\\mathbb E[Z\\mid\\mathcal F_{t-1}])^2\\mid\\mathcal F_{t-1}]$, one also has\n$$\n\\operatorname{Var}(\\widehat Y_{t,i}\\mid\\mathcal F_{t-1})=\\frac{y_{t,i}^2(1-P_{t,i})}{P_{t,i}}.\n$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "The first-arm loss is $y_{1,1}=1$. On $A_1=1$, which has probability $1/10$, its estimate is $1/(1/10)=10$; on $A_1=2$, which has probability $9/10$, its estimate is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2] with $y=1$ and $p=1/10$, the mean is $1$, the second moment is $1/(1/10)=10$, and the variance is $1^2(1-1/10)/(1/10)=9$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\widehat X_{1,1}=1-\\widehat Y_{1,1}$, its values are $-9$ and $1$ on the two events, respectively, so it can fall outside the true reward range $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two arms and one round.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The rare arm has fixed sampling probability one tenth, making its loss estimate ten on that event and zero otherwise. Direct substitution computes the mean and variance on a nonempty two-outcome experiment; the example illustrates variance inflation without a biconditional.",
+            "item_sha256": "1a7637877497eb86ef35c2d5688d5a6ed8bbbc9a52f6ba5e3655a52366946793",
+            "row_sha256": "494da02f5a700bda21ea323437d203b3546fa0943721b99a0d9da4622956db07"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed rare arm has loss one; the example does not analyze a zero-loss arm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes k=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both sampling probabilities are strictly between zero and one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses deterministic rewards 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 enumerates both possible actions under positive probabilities."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The rare arm has fixed sampling probability one tenth, making its loss estimate ten on that event and zero otherwise. Direct substitution computes the mean and variance on a nonempty two-outcome experiment; the example illustrates variance inflation without a biconditional.",
+            "item_sha256": "1a7637877497eb86ef35c2d5688d5a6ed8bbbc9a52f6ba5e3655a52366946793",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The rare arm has fixed sampling probability one tenth, making its loss estimate ten on that event and zero otherwise. Direct substitution computes the mean and variance on a nonempty two-outcome experiment; the example illustrates variance inflation without a biconditional.",
+            "item_sha256": "1a7637877497eb86ef35c2d5688d5a6ed8bbbc9a52f6ba5e3655a52366946793",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rare-arm-outcomes",
+          "claim": "For p=1/10 and y=1, the estimate values are 10 and 0 with probabilities 1/10 and 9/10.",
+          "result": "The mean is 1, second moment 10, variance 9; the reward estimate is -9 or 1."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    },
+    "ex-deterministic-rewards-importance-weighted-feedback": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "Let $k,n\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, and let\n$$\n\\Delta_k=\\left\\{p\\in[0,1]^k:\\sum_{i=1}^k p_i=1\\right\\}.\n$$\nOn a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $(\\mathcal F_t)_{t=0}^n$ be the discrete filtration generated by the complete histories through round $t$, with $\\mathcal F_0$ trivial; a complete pre-action history records past reward vectors, actions, and observed rewards. A reward vector is either fixed in advance or a deterministic function of the complete pre-action history. Thus, at a finite horizon with finitely many arms, there are finitely many possible histories. Before action $A_t$ is drawn, the current reward vector $x_t=(x_{t,1},\\ldots,x_{t,k})\\in[0,1]^k$ and sampling distribution $P_t=(P_{t,1},\\ldots,P_{t,k})\\in\\Delta_k$ are $\\mathcal F_{t-1}$-measurable, and $P_{t,i}>0$ for every $i$. The finite-valued measurable action $A_t\\in[k]$ has conditional law $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$. The learner observes only $X_t=x_{t,A_t}$ and sets\n$$\nY_t=1-X_t,\\qquad y_{t,i}=1-x_{t,i},\\qquad \\widehat Y_{t,i}=\\frac{\\mathbf 1\\{A_t=i\\}Y_t}{P_{t,i}},\\qquad \\widehat X_{t,i}=1-\\widehat Y_{t,i}.\n$$\nThe quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate. A fixed reward sequence is the oblivious case; allowing $x_t$ to depend on the history available before $A_t$ is drawn gives the non-anticipating past-adaptive case. In either case the current reward vector is chosen before the current action. For finite horizons and finite action histories generated by such a fixed or deterministic history-dependent sequence, all these estimates are finite and integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bandit-importance-weighted-estimator-has-conditional-moments",
+          "source_section": "Statement",
+          "quote": "In the bandit importance-weighted estimator definition, fix a round $t$ and arm $i$, and write $p=P_{t,i}>0$ and $y=y_{t,i}$. Then\n$$\n\\mathbb E[\\widehat Y_{t,i}\\mid\\mathcal F_{t-1}]=y_{t,i},\\qquad \\mathbb E[\\widehat Y_{t,i}^{2}\\mid\\mathcal F_{t-1}]=\\frac{y_{t,i}^2}{P_{t,i}}.\n$$\nWith conditional variance defined by $\\operatorname{Var}(Z\\mid\\mathcal F_{t-1})=\\mathbb E[(Z-\\mathbb E[Z\\mid\\mathcal F_{t-1}])^2\\mid\\mathcal F_{t-1}]$, one also has\n$$\n\\operatorname{Var}(\\widehat Y_{t,i}\\mid\\mathcal F_{t-1})=\\frac{y_{t,i}^2(1-P_{t,i})}{P_{t,i}}.\n$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "Arm 2 has loss $y_{1,2}=1$. If $A_1=2$, an event of probability $1/4$, then $\\widehat Y_{1,2}=1/(1/4)=4$; if $A_1=1$, an event of probability $3/4$, then $\\widehat Y_{1,2}=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2] with $y=1$ and $p=1/4$, the conditional mean is $1$, the second moment is $1/(1/4)=4$, and the variance is $(1-1/4)/(1/4)=3$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\widehat X_{1,2}=1-\\widehat Y_{1,2}$, it equals $-3$ when arm 2 is drawn and $1$ when arm 1 is drawn. Thus a deterministic reward in $[0,1]$ can produce an estimated reward outside $[0,1]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two arms and one round.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The fixed two-arm environment has one positive-probability loss estimate equal to four and its complementary value zero. Direct moments explain a negative estimated reward despite a deterministic true reward; this is a concrete witness with nonempty arms and one round, not an equivalence.",
+            "item_sha256": "c1cf87156fc2250fe95e3859fbcf668a3578a8d3d53c0dac74bba4dc93eb1527",
+            "row_sha256": "494da02f5a700bda21ea323437d203b3546fa0943721b99a0d9da4622956db07"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The moment calculation focuses on arm 2, whose loss is one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes k=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both sampling probabilities are strictly between zero and one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed rewards in the Statement are 1 and 0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 enumerates both possible actions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The fixed two-arm environment has one positive-probability loss estimate equal to four and its complementary value zero. Direct moments explain a negative estimated reward despite a deterministic true reward; this is a concrete witness with nonempty arms and one round, not an equivalence.",
+            "item_sha256": "c1cf87156fc2250fe95e3859fbcf668a3578a8d3d53c0dac74bba4dc93eb1527",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The fixed two-arm environment has one positive-probability loss estimate equal to four and its complementary value zero. Direct moments explain a negative estimated reward despite a deterministic true reward; this is a concrete witness with nonempty arms and one round, not an equivalence.",
+            "item_sha256": "c1cf87156fc2250fe95e3859fbcf668a3578a8d3d53c0dac74bba4dc93eb1527",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "deterministic-arm-two-outcomes",
+          "claim": "For p=1/4 and y=1, the loss estimate is 4 or 0.",
+          "result": "The mean is 1, second moment 4, variance 3; the reward estimate is -3 or 1."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    },
+    "ex-exp3-and-full-information-hedge-differ": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-exp3",
+          "source_section": "Definition",
+          "quote": "Let $k>1$ and $n\\ge1$ be integers, and let $\\eta>0$. Use the finite-arm bandit protocol with rewards in $[0,1]$ and conditional sampling as specified in the bandit importance-weighted estimator definition. Initialize $\\widehat S_{0,i}=0$ for each $i\\in[k]$. For rounds $t=1,\\ldots,n$, perform the following operations:\n\n1. Set\n   $$\n   P_{t,i}=\\frac{\\exp(\\eta\\widehat S_{t-1,i})}{\\sum_{j=1}^k\\exp(\\eta\\widehat S_{t-1,j})},\\qquad i\\in[k].\n   $$\n2. Draw a measurable finite-valued action $A_t$ with conditional probabilities $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$, and observe only $X_t=x_{t,A_t}$.\n3. Form the loss estimates $\\widehat Y_{t,i}=\\mathbf1\\{A_t=i\\}(1-X_t)/P_{t,i}$ and reward estimates $\\widehat X_{t,i}=1-\\widehat Y_{t,i}$ for every $i\\in[k]$.\n4. Update $\\widehat S_{t,i}=\\widehat S_{t-1,i}+\\widehat X_{t,i}$ for every $i\\in[k]$.\n\nThe output is $(P_t,A_t,X_t,\\widehat X_t,\\widehat Y_t)_{t=1}^n$ and $\\widehat S_n$. These operations use exact real arithmetic. The procedure assumes a probability space carrying the stated measurable draws; it makes no probability-space construction claim. Normalizing the weights $\\exp(\\eta\\widehat S_{t-1,i})$ is the exponential-weights step used by Hedge.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-hedge",
+          "source_section": "Definition",
+          "quote": "Let $N,T\\ge1$ be integers, let $[N]=\\{1,\\ldots,N\\}$ be the expert set, and let $\\epsilon>0$. At each round $t=1,\\ldots,T$, a finite loss vector $\\ell_t=(\\ell_t(1),\\ldots,\\ell_t(N))\\in[0,\\infty)^N$ is revealed after the learner's choice. Initialize $W_1(i)=1$ for every $i\\in[N]$. At round $t$, set\n$$x_t(i):=\\frac{W_t(i)}{\\sum_{j=1}^{N}W_t(j)},\\qquad i\\in[N],$$\nLet $\\mathcal H_{t-1}$ be the pre-round history sigma-algebra generated by the previously played choices and all previously revealed loss vectors (any random loss vector is assumed measurable on the protocol's probability space). The weights and $x_t$ are $\\mathcal H_{t-1}$-measurable. Draw a measurable expert choice $I_t\\in[N]$ with conditional distribution\n$$\\mathbb P(I_t=i\\mid\\mathcal H_{t-1})=x_t(i)\\quad\\text{almost surely},\\qquad i\\in[N],$$\nand play $I_t$. After observing the whole vector $\\ell_t$, update\n$$W_{t+1}(i):=W_t(i)\\exp(-\\epsilon\\ell_t(i)),\\qquad i\\in[N].$$\nThe output is the distributions $x_1,\\ldots,x_T$, the sampled choices $I_1,\\ldots,I_T$, and the final weights. Every factor $\\exp(-\\epsilon\\ell_t(i))$ is a positive finite real; from the positive finite initial weights it follows by induction that every normalizing denominator is positive and finite. The protocol assumes a probability space carrying the stated measurable draws; no probability-space construction is claimed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bandit-importance-weighted-estimator",
+          "source_section": "Definition",
+          "quote": "Let $k,n\\ge1$ be integers, let $[k]=\\{1,\\ldots,k\\}$, and let\n$$\n\\Delta_k=\\left\\{p\\in[0,1]^k:\\sum_{i=1}^k p_i=1\\right\\}.\n$$\nOn a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, let $(\\mathcal F_t)_{t=0}^n$ be the discrete filtration generated by the complete histories through round $t$, with $\\mathcal F_0$ trivial; a complete pre-action history records past reward vectors, actions, and observed rewards. A reward vector is either fixed in advance or a deterministic function of the complete pre-action history. Thus, at a finite horizon with finitely many arms, there are finitely many possible histories. Before action $A_t$ is drawn, the current reward vector $x_t=(x_{t,1},\\ldots,x_{t,k})\\in[0,1]^k$ and sampling distribution $P_t=(P_{t,1},\\ldots,P_{t,k})\\in\\Delta_k$ are $\\mathcal F_{t-1}$-measurable, and $P_{t,i}>0$ for every $i$. The finite-valued measurable action $A_t\\in[k]$ has conditional law $\\mathbb P(A_t=i\\mid\\mathcal F_{t-1})=P_{t,i}$. The learner observes only $X_t=x_{t,A_t}$ and sets\n$$\nY_t=1-X_t,\\qquad y_{t,i}=1-x_{t,i},\\qquad \\widehat Y_{t,i}=\\frac{\\mathbf 1\\{A_t=i\\}Y_t}{P_{t,i}},\\qquad \\widehat X_{t,i}=1-\\widehat Y_{t,i}.\n$$\nThe quantity $\\widehat Y_{t,i}$ is the importance-weighted loss estimate for arm $i$, and $\\widehat X_{t,i}$ is its corresponding reward estimate. A fixed reward sequence is the oblivious case; allowing $x_t$ to depend on the history available before $A_t$ is drawn gives the non-anticipating past-adaptive case. In either case the current reward vector is chosen before the current action. For finite horizons and finite action histories generated by such a fixed or deterministic history-dependent sequence, all these estimates are finite and integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\widehat S_{0,1}=\\widehat S_{0,2}=0$, Exp3 starts with probabilities $(1/2,1/2)$. If $A_1=1$, then $Y_1=0$ and $\\widehat X_{1,1}=\\widehat X_{1,2}=1$, so the next Exp3 distribution is uniform. If $A_1=2$, then $Y_1=1$, $P_{1,2}=1/2$, and $(\\widehat Y_{1,1},\\widehat Y_{1,2})=(0,2)$; hence $\\widehat X_1=(1,-1)$ and the next distribution is $(\\exp(\\eta)/(\\exp(\\eta)+\\exp(-\\eta)),\\exp(-\\eta)/(\\exp(\\eta)+\\exp(-\\eta)))$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Full-information Hedge uses $\\epsilon=\\eta$ and sees losses $(0,1)$, so its next weights are $(1,\\exp(-\\eta))$ and its normalized distribution is $(\\exp(\\eta)/(\\exp(\\eta)+1),1/(\\exp(\\eta)+1))$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4] and [F6], $\\exp(\\eta)>1$, so Hedge's first probability exceeds $1/2$ and differs from Exp3's first probability after $A_1=1$. Also $\\exp(2\\eta)>\\exp(\\eta)$, so the odds ratio after $A_1=2$ is $\\exp(2\\eta)$ for Exp3 and $\\exp(\\eta)$ for Hedge; these distributions differ as well.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "supplier_interfaces": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two arms and one round.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Uniform initialization and a strictly positive learning rate yield two explicit Exp3 successor distributions, each distinct from the full-information Hedge update by strict exponential monotonicity. The two outcomes exhaust the one-round sample space, and no empty protocol or converse assertion is present.",
+            "item_sha256": "18449ff333f28271ee5c973031103fadfc532f668e303eb0efbcfaecc527a6c2",
+            "row_sha256": "494da02f5a700bda21ea323437d203b3546fa0943721b99a0d9da4622956db07"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero observed loss when arm 1 is sampled."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes k=2 and eta>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The initial distribution is uniform and all updated weights are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the reward vector (1,0) and loss vector (0,1), including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both possible actions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Uniform initialization and a strictly positive learning rate yield two explicit Exp3 successor distributions, each distinct from the full-information Hedge update by strict exponential monotonicity. The two outcomes exhaust the one-round sample space, and no empty protocol or converse assertion is present.",
+            "item_sha256": "18449ff333f28271ee5c973031103fadfc532f668e303eb0efbcfaecc527a6c2",
+            "row_sha256": "251662856516b445080caf2baa335c43bf5c6537b9f944860e1082217114120c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional or iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Uniform initialization and a strictly positive learning rate yield two explicit Exp3 successor distributions, each distinct from the full-information Hedge update by strict exponential monotonicity. The two outcomes exhaust the one-round sample space, and no empty protocol or converse assertion is present.",
+            "item_sha256": "18449ff333f28271ee5c973031103fadfc532f668e303eb0efbcfaecc527a6c2",
+            "row_sha256": "22163681eeab385007e45d3c205561e39904ec5d4d3974e7daf265535bd7efa5"
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "exp3-versus-hedge-one-round",
+          "claim": "For eta>0 and rewards (1,0), the two possible Exp3 updates differ from Hedge.",
+          "result": "Hedge's odds are exp(eta); Exp3 odds are 1 after A=1 and exp(2 eta) after A=2."
+        }
+      ],
+      "finite_smoke": null,
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta batch 77 author self-review",
+        "notes": "Reviewed the current claim, assumptions, exact supplier excerpts, numbered steps, boundary dispositions, and applicable finite calculations. This is author evidence, not independent approval."
+      }
+    }
+  }
+}

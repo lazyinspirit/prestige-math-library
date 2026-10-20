@@ -1,0 +1,1586 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-compression-binomial-sum-bound",
+    "lem-pac-bayes-donsker-varadhan-inequality",
+    "thm-pac-bayes-kl-bound",
+    "thm-compression-generalization-bound",
+    "cor-pac-bayes-risk-bound",
+    "cor-compression-sample-size-bound",
+    "ex-pac-bayes-single-hypothesis-posterior",
+    "cex-pac-bayes-data-dependent-prior-fails",
+    "ex-finite-support-sample-compression"
+  ],
+  "contracts": {
+    "lem-compression-binomial-sum-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-binomial-theorem",
+          "source_section": "Statement",
+          "quote": "(x+y)^{n} \\;=\\; \\sum_{k<n+1} \\iota\\binom{n}{k}\\, x^{k}\\, y^{\\,n-k}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "(1-p)^m\\le\\exp(-mp).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "a^{n+1} = a^n \\cdot a",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "e:=\\exp(1)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "\\exp(x+y)=\\exp(x)\\exp(y).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Finite sums and finite products of $a$ are defined by recursion on the upper index",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "If $a_k \\le b_k$ for all $k < n$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "$\\iota(n)$ is the **canonical natural** of $n$ in $F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "n \\cdot 1_F > 0",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weighted-binomial-expansion",
+          "claim": "The weight x^d is no larger than x^i for i≤d, so the truncated coefficient sum is bounded by the full binomial expansion.",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F2",
+            "F5",
+            "F1"
+          ]
+        },
+        {
+          "id": "exponential-and-division",
+          "claim": "The exponential bound yields e^d; dividing by positive x^d gives (em/d)^d.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes natural m,d with 1≤d; it makes no empty-index-family claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The denominator condition d≥1 excludes d=0; the separate sample-size corollary treats d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1 include m=d=1, where x=1 and all inequalities are valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1 allow m=d, so x=1 and the bound remains an equality at the exponential comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 includes x=1 when m=d; x is always strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses arithmetic and finite sums and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The finite-sum inequality is proved for arbitrary natural m,d and its m=d=1 boundary is covered; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "lem-pac-bayes-donsker-varadhan-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pac-bayes-prior-and-posterior",
+          "source_section": "Definition",
+          "quote": "\\mathrm{KL}(\\rho\\|\\pi):=\\sup_{\\mathcal P}\\sum_{A\\in\\mathcal P}\\rho(A)\\log\\frac{\\rho(A)}{\\pi(A)}",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-log-sum-inequality",
+          "source_section": "Statement",
+          "quote": "\\sum_{a_i>0}a_i\\ln\\frac{a_i}{b_i}\\ge A\\ln\\frac AB.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "e:=\\exp(1)",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "\\exp(x+y)=\\exp(x)\\exp(y).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-valued-change-of-measure",
+          "claim": "The finite log-sum inequality proves the change-of-measure bound for finite-valued f.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "bounded-function-limit",
+          "claim": "Uniform finite-valued approximations and exponential comparison extend the inequality to bounded measurable f.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability measure on Theta is assumed, so the empty measurable space case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives the finite-valued case; for f=0 it reduces to nonnegative relative entropy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 permits a one-cell partition and the finite log-sum argument includes N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 uses only absolute continuity and finite partitions, so point-mass measures are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 includes the final endpoint when partitioning the bounded range and keeps uniform error at most 1/n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The approximation uses explicit finite range partitions and does not invoke a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The finite-valued proof is exact and the bounded case follows by an explicit uniform approximation; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "thm-pac-bayes-kl-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Then the family $(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "If $g\\ge0$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-bounded-variable-hoeffding-mgf",
+          "source_section": "Statement",
+          "quote": "\\mathbb E\\exp\\{\\lambda(Y-\\mathbb EY)\\}\\le \\exp(\\lambda^2/8).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "\\exp(x+y)=\\exp(x)\\exp(y).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-pac-bayes-donsker-varadhan-inequality",
+          "source_section": "Statement",
+          "quote": "\\mathbb E_{\\theta\\sim\\rho}f(\\theta)\\le \\mathrm{KL}(\\rho\\|\\pi)+\\log\\mathbb E_{\\theta\\sim\\pi}\\exp(f(\\theta))",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "if the partial pointwise sum $f+g$ is defined at every point, then it is measurable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "if $f$ is measurable and $g$ is a Borel measurable function on its codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-pac-bayes-prior-and-posterior",
+          "source_section": "Definition",
+          "quote": "\\mathrm{KL}(\\rho\\|\\pi):=\\sup_{\\mathcal P}\\sum_{A\\in\\mathcal P}\\rho(A)\\log\\frac{\\rho(A)}{\\pi(A)}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "e:=\\exp(1)",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fixed-predictor-mgf",
+          "claim": "Hoeffding’s MGF and independence give the fixed-parameter exponential risk-difference moment, including the zero-loss case.",
+          "step": "1.1",
+          "inputs": [
+            "F13",
+            "F12",
+            "F2",
+            "F4",
+            "F6",
+            "F5",
+            "F7",
+            "A1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "mixture-measurability-and-moment",
+          "claim": "Tonelli and product measurability define the positive measurable prior mixture and bound its expectation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F11",
+            "F14",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "markov-event",
+          "claim": "Markov’s inequality gives a single high-probability threshold event for the prior mixture.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "A1",
+            "F14",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "posterior-change-of-measure",
+          "claim": "The local change-of-measure inequality applies to every posterior on that event and yields the claimed term.",
+          "step": "4.1",
+          "inputs": [
+            "F10",
+            "F12",
+            "A1",
+            "F14",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "simultaneous-conclusion",
+          "claim": "The common event controls all posteriors, and the zero-loss case completes the theorem.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample size assumption m≥1 excludes an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 handles C=0 separately and proves the inequality directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 uses the same one-observation MGF argument when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The MGF, product, and Tonelli arguments in steps 1.1–2.1 allow point-mass priors and data laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 handles C=0; the theorem assumes lambda>0 and delta strictly between zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The common event and change-of-measure inequality cover every posterior without selecting one or using AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an implication, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The MGF, mixture, and probability arguments are symbolic for arbitrary spaces; C=0 is handled explicitly and no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "thm-compression-generalization-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sample-compression-scheme",
+          "source_section": "Definition",
+          "quote": "consists of a compression map $\\kappa_m$ for each sample length $m\\in\\mathbb N$ and fixed reconstruction maps $G_k$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "if the partial pointwise sum $f+g$ is defined at every point, then it is measurable",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Finite sums and finite products of $a$ are defined by recursion on the upper index",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "a^{n+1} = a^n \\cdot a",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "a \\le b \\iff a^n \\le b^n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bad-event-measurability",
+          "claim": "Joint measurability and Tonelli make each indexed candidate’s bad-consistent event measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F4"
+          ]
+        },
+        {
+          "id": "fixed-index-subset-probability",
+          "claim": "Conditioning on selected coordinates leaves an independent product sample with consistency probability at most (1-epsilon)^(m-i).",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F2",
+            "F4",
+            "F1",
+            "step 1.1",
+            "F7"
+          ]
+        },
+        {
+          "id": "finite-union-bound",
+          "claim": "Counting subsets and applying the finite union bound gives the exact sum and contains the learner failure event.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 treats i=0 using the empty selected tuple and the empty finite product convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For risk zero, the event risk>epsilon is empty; steps 1.1–3.1 require only epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When m=1, the assumption m>d forces d=0 and steps 2.1–3.1 remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 2.1–3.1 use the rectangle formula for arbitrary D, including point masses and repeated observations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict bad-risk event and 0<epsilon<1 are used in steps 2.1–3.1; endpoint claims are not added."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The union is over a finite set of index subsets; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an upper-bound implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an upper-bound implication, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The index-subset count is symbolic for arbitrary m,d and includes i=0; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "cor-pac-bayes-risk-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pac-bayes-kl-bound",
+          "source_section": "Statement",
+          "quote": "Fix the prior $\\pi$ independently of $S$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "per-grid-event",
+          "claim": "Each fixed lambda uses the PAC-Bayes theorem at confidence delta/N and has the same log penalty.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "finite-grid-intersection",
+          "claim": "The intersection of the N events has probability at least 1-delta and controls every lambda and posterior.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires a nonempty finite grid, so N≥1 in steps 1.1–2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The grid argument in steps 1.1–2.1 uses only the PAC-Bayes event and remains valid for zero loss or zero KL."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the union and intersection in step 2.1 reduce to the single event from step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use only the finite union bound and allow repeated or identical lambda values only through the set cardinality N."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement requires lambda>0 and 0<delta<1; step 1.1 uses eta=delta/N in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only a finite union and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is an implication, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The finite-grid union argument is symbolic for arbitrary N≥1; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "cor-compression-sample-size-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compression-generalization-bound",
+          "source_section": "Statement",
+          "quote": "\\le\\sum_{i=0}^{d}\\binom{m}{i}(1-\\epsilon)^{m-i}.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compression-binomial-sum-bound",
+          "source_section": "Statement",
+          "quote": "\\sum_{i=0}^{d}\\iota\\binom{m}{i}\\le\\left(\\frac{e\\,\\iota(m)}{\\iota(d)}\\right)^d",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "(1-p)^m\\le\\exp(-mp).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "e:=\\exp(1)",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "\\exp(x+y)=\\exp(x)\\exp(y).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-compression-case",
+          "claim": "For d=0 the exact sum is (1-epsilon)^m and the stated condition makes it at most delta.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "positive-compression-case",
+          "claim": "For 1≤d<m, the binomial and exponential bounds reduce the exact sum to the stated exponential expression.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "risk-conclusion",
+          "claim": "The applicable branch bounds the learner failure event by delta, proving risk at most epsilon with probability 1-delta.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample-size hypothesis m>d≥0 excludes an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 proves the d=0 branch explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1 the hypothesis forces d=0, and step 1.1 covers that branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 rely on the exact compression sum and work for point-mass data laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The assumptions epsilon,delta∈(0,1) and m>d are used in steps 1.1–2.1; d=m is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses inequalities and a finite union bound already included in the theorem supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a sufficient sample-size condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a sufficient sample-size condition, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The d=0 and d≥1 branches are proved separately; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "ex-pac-bayes-single-hypothesis-posterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pac-bayes-prior-and-posterior",
+          "source_section": "Definition",
+          "quote": "\\mathrm{KL}(\\rho\\|\\pi):=\\sup_{\\mathcal P}\\sum_{A\\in\\mathcal P}\\rho(A)\\log\\frac{\\rho(A)}{\\pi(A)}",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pac-bayes-kl-bound",
+          "source_section": "Statement",
+          "quote": "Fix the prior $\\pi$ independently of $S$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "point-mass-kl",
+          "claim": "Absolute continuity holds and the singleton partition attains the relative entropy log 2.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "pointwise-theorem-specialization",
+          "claim": "Averaging against the point mass specializes the PAC-Bayes theorem to h0.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Theta is explicitly a two-point nonempty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 applies the theorem when C=0; the posterior point-mass computation remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem permits m=1, and step 2.1 makes no larger-sample assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The posterior is a point mass and step 1.1 computes its finite-partition divergence exactly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 assume C≥0, lambda>0, and delta∈(0,1), including the C=0 endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes h0 explicitly and makes no nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a specialization, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a specialization, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The two-point partition divergence is computed exactly in Verification; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "cex-pac-bayes-data-dependent-prior-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pac-bayes-prior-and-posterior",
+          "source_section": "Definition",
+          "quote": "\\mathrm{KL}(\\rho\\|\\pi):=\\sup_{\\mathcal P}\\sum_{A\\in\\mathcal P}\\rho(A)\\log\\frac{\\rho(A)}{\\pi(A)}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pac-bayes-kl-bound",
+          "source_section": "Statement",
+          "quote": "Fix the prior $\\pi$ independently of $S$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "\\log(xy)=\\log x+\\log y",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-natural-logarithm-bounded-by-argument",
+          "source_section": "Statement",
+          "quote": "0\\le\\log x\\le x-1\\le x.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sample-selected-prior",
+          "claim": "A finite lexicographic rule chooses an unseen ten-set and defines the sample-dependent point-mass prior and posterior.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "risk-calculation",
+          "claim": "The unseen set gives population risk one half and empirical risk zero for every sample.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "zero-kl-and-bound-violation",
+          "claim": "Equal point-mass measures have KL zero, and the claimed right side is at most two fifths.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "failure-probability-one",
+          "claim": "The inequality fails for every sample, while the construction violates the fixed-prior premise.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes a length-10 sample and a nonempty finite instance space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 uses zero empirical risk and zero relative entropy in the violation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes m=10 and makes no claim for m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 handles repeated sample points because the observed support has at most ten elements."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes delta=1/4 and lambda=20 and makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 chooses the lexicographically first qualifying set from a finite totally ordered family, so no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a guarantee, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a guarantee, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The finite 20-point instance and numerical RHS 2/5 are checked exactly in steps 1.1–4.1; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    },
+    "ex-finite-support-sample-compression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sample-compression-scheme",
+          "source_section": "Definition",
+          "quote": "consists of a compression map $\\kappa_m$ for each sample length $m\\in\\mathbb N$ and fixed reconstruction maps $G_k$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compression-generalization-bound",
+          "source_section": "Statement",
+          "quote": "\\le\\sum_{i=0}^{d}\\binom{m}{i}(1-\\epsilon)^{m-i}.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "consistency-and-measurability",
+          "claim": "First-occurrence selection uses at most two entries, reconstructs from them, and reproduces every observed label.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "exact-risk-law",
+          "claim": "The risk is one half exactly on the all-zero sample and otherwise zero, whose probability is 2^-m.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "compression-bound-comparison",
+          "claim": "At epsilon one quarter the i=0 term of the theorem bound dominates the exact failure probability.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes m≥3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 identifies risk zero on every sample containing a one and the positive-risk all-zero case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The compression theorem requires m>d=2, so m=1 is outside the example claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 include repeated observations and the all-zero sample."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example evaluates only epsilon=1/4 and asserts no risk-threshold endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses deterministic first-occurrence indices and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_check_disposition": "The two-point sample risk distribution and 2^-m probability are computed exactly; no registered finite-smoke selector applies.",
+      "axiom_uses": []
+    }
+  }
+}

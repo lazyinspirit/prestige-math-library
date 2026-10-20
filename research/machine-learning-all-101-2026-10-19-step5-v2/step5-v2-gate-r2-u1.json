@@ -1,0 +1,71 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "gate",
+  "round": 2,
+  "unit": "1",
+  "input_sha256": "fcbc7afa97b22dd0440b03c7d0c62c6f9ed8c35ec6b994622509dcddbd9e81b7",
+  "decisions": [],
+  "reviews": [],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [
+    {
+      "index": 0,
+      "reason": "UNRESOLVED operator-only stdout-flush failure, not a completed gate repair. Unit 1 has no assigned items; diagnostic 0 is the owner-held defect-ledger liveness failure with no item subjects. The frozen code-0 output contains only an incomplete outside-findings inventory and no summary. A focused replay with regular-file stdout produced the complete inventory of 147 exclusions followed by 402 defect rows checked and zero errors. Replaying the identical command with piped stdout, as used by the native runner, returned code 0 but only 65,536 bytes and no liveness match. tools/defect-ledger.mjs writes the large inventory and summary immediately before process.exit(), which can discard pending pipe writes. tools/autopilot/src/gates.mts retains all received chunks until close; it does not truncate them. An operator must repair the checker's output draining outside this dispatch's authorized file scope, verify complete piped output, and arrange the required native recertification and full scoped battery. Outside findings remain exclusions, not passes or item assignments; none were edited.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-step5-v2/gate-2.json": "47be9b0cb2e9450207f72855ff07a2c1c800c22abd49c1eb3dd32feec10d21c6",
+    "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-gate-r2-u1.gate-diagnostics.json": "ef0a19ded12f2a1ca0b19f6e67ac2631b09d1f27e9f21487c3f51753ef368291",
+    "research/machine-learning-all-101-2026-10-19-step5-v2/step5-v2-gate-r2-u1.task.md": "3ece4b2798f70994e217da8f0a24711fb1eebb0dc6147578fba16d28b824c33d"
+  },
+  "repair_notes": {
+    "status": "blocked_by_assigned_file_scope",
+    "repair_complete": false,
+    "assignment": "Frozen assignments[1] is empty; its sole assigned gate diagnostic is index 0. No mathematical item, diagram, statement, proof, contract, page, manifest or ledger was changed. No item review hashes or proof-layout checks apply.",
+    "identity_check": "The canonical compact JSON SHA-256 of gate-2.json matches input_sha256; supporting_evidence separately binds its raw file bytes.",
+    "live_context": "Read current .autopilot/machine-learning-all-101-2026-10-19/state.json: stage 5.9-repair, paused false. Current Git HEAD observed as 5087048bd4, Authenticate frozen history after native ledger metadata repairs. No run transition, judge, certification or workflow-code edit was performed.",
+    "diagnosis": {
+      "frozen_output_characters": 146146,
+      "frozen_output_lines": 1,
+      "frozen_raw_exit_code": 0,
+      "frozen_summary_present": false,
+      "relevant_code": [
+        "tools/defect-ledger.mjs:731-733 prints the exclusion inventory, then the liveness summary, then immediately calls process.exit(errs.length ? 1 : 0).",
+        "tools/autopilot/src/gates.mts:54-65 captures piped stdout/stderr without a size cap and waits for close.",
+        "tools/autopilot/src/gates.mts:89-94 correctly fails closed when the required liveness summary is absent."
+      ]
+    },
+    "focused_checks": [
+      {
+        "command": "node tools/defect-ledger.mjs check --run machine-learning-all-101-2026-10-19 --adjudications research/machine-learning-all-101-2026-10-19-judge-adjudications.jsonl --reader-decisions research/machine-learning-all-101-2026-10-19-step5-alert-decisions.jsonl --closure research/machine-learning-all-101-2026-10-19-judge-closure.json --frontier research/machine-learning-all-101-2026-10-19-step5-v2/frontier.json",
+        "capture": "Python subprocess.run with stdout/stderr redirected to temporary regular files; decoded and examined the noninventory lines and parsed the exclusion inventory without dumping it.",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout_bytes": 257730,
+        "stdout_characters": 257639,
+        "stdout_sha256": "8f2f7539cb3377c0f7ba7ffb629d50ebbaaa3e406fd7b4b2790b48f146e980cf",
+        "summary": "defect-ledger: 402 defect row(s) checked for machine-learning-all-101-2026-10-19, 0 error(s)",
+        "excluded_findings": 147,
+        "frozen_output_is_exact_prefix": true,
+        "limitation": "A focused diagnostic replay with regular-file output does not establish native piped gate liveness or replace the complete battery."
+      },
+      {
+        "command": "Identical defect-ledger command above, replayed with Python subprocess.run(capture_output=True), matching the native gate's pipe capture.",
+        "exit_code": 0,
+        "stderr": "",
+        "stdout_bytes": 65536,
+        "stdout_characters": 65520,
+        "liveness_matches": [],
+        "result": "Reproduced missing summary and truncated inventory despite zero exit status; native liveness remains unresolved."
+      }
+    ],
+    "operator_required": [
+      "Repair the checker's stdout termination/draining in tools/defect-ledger.mjs without suppressing outside exclusions, weakening liveness, or rewriting frozen diagnostics. Workflow code is explicitly excluded from this dispatch's write authority.",
+      "Verify complete stdout and the actual summary through the native pipe capture, then follow the engine's drained-writer recertification and full scoped gate battery. This report grants no gate pass or certification."
+    ]
+  }
+}

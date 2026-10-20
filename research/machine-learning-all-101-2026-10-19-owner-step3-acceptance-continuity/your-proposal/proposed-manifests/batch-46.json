@@ -1,0 +1,347 @@
+[
+  {
+    "order": 2786,
+    "id": "marchenko-pastur-law-and-edge-bounds",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Marchenko–Pastur law and sample-covariance edge bounds",
+    "companion": "marchenko-pastur-law-and-edge-bounds-examples",
+    "requires": [
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "weak-convergence-tightness-and-representation",
+      "robust-influence-and-breakdown"
+    ],
+    "items": [
+      {
+        "id": "def-sample-covariance-empirical-spectral-distribution",
+        "kind": "definition",
+        "title": "Sample covariance matrices and their empirical spectral distributions",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-dirac-measure",
+          "def-probability-measure",
+          "def-weak-convergence-of-borel-probability-measures"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-sample-covariance-empirical-law-is-a-probability-measure"
+        ]
+      },
+      {
+        "id": "def-stieltjes-transform-of-a-real-probability-measure",
+        "kind": "definition",
+        "title": "Stieltjes transform of a probability measure on the real line",
+        "deps": [
+          "def-probability-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-marchenko-pastur-measure",
+        "kind": "definition",
+        "title": "Marchenko–Pastur measure with aspect ratio gamma",
+        "deps": [
+          "def-countable-choice",
+          "def-borel-sigma-algebra",
+          "def-dirac-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-marchenko-pastur-formula-defines-a-finite-measure"
+        ],
+        "statement": "Assume the Axiom of Countable Choice.\n\nFor $\\gamma>0$, set\n$$a_\\gamma=(1-\\sqrt\\gamma)^2,\\qquad b_\\gamma=(1+\\sqrt\\gamma)^2,\\qquad r_+:=\\max\\{r,0\\}\\quad(r\\in\\mathbb R).$$\nDefine the Marchenko–Pastur set function on Borel $A\\subseteq\\mathbb R$ by\n$$\\mu_\\gamma(A):=\\int_{A\\cap(a_\\gamma,b_\\gamma)}\\frac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x}\\,d\\lambda(x)+\\left(1-\\frac1\\gamma\\right)_+\\delta_0(A),$$\nwhere $\\lambda$ is Lebesgue measure on $\\mathbb R$. The formula defines a finite Borel measure; its total mass is established by the Marchenko–Pastur law below."
+      },
+      {
+        "id": "lem-fourth-moment-quadratic-form-resolvent-bound",
+        "kind": "lemma",
+        "title": "Fourth-moment bound for a centered quadratic form of an independent vector",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-rank-one-resolvent-update-and-trace-bound",
+        "kind": "lemma",
+        "title": "Rank-one resolvent update and trace bound for a positive semidefinite matrix",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-uniform-row-partial-sums-of-nested-finite-variance-array",
+        "kind": "lemma",
+        "title": "Uniform row partial sums of a nested finite-variance array",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-fixed-degree-covariance-trace-and-edge-witnesses",
+        "kind": "lemma",
+        "title": "Fixed-degree covariance trace moments and independent edge witnesses",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-singular-value-decomposition",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-sample-covariance-empirical-law-is-a-probability-measure",
+        "kind": "lemma",
+        "title": "The empirical spectral distribution of a sample covariance matrix is a probability measure",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "lem-finite-empirical-measure-is-a-probability-law",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-adapted-resolvent-trace-concentration",
+        "kind": "lemma",
+        "title": "Adapted resolvent-trace martingale concentration for independent columns",
+        "deps": [
+          "lem-rank-one-resolvent-update-and-trace-bound",
+          "thm-mcdiarmid-bounded-differences",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Choice, and let all random vectors below be defined on one common probability space. For each positive integer $n$, let $d_n$ be a positive integer, let $Y_{n,1},\\ldots,Y_{n,n}$ be independent random vectors in $\\mathbb R^{d_n}$, let $B_n=\\sum_{j=1}^{n}Y_{n,j}Y_{n,j}^{\\mathsf T}$, and let $z=u+i\\eta$ with fixed $u\\in\\mathbb R$ and $\\eta>0$. Define\n$$M_n(z):=\\frac1{d_n}\\operatorname{tr}(B_n-zI)^{-1}.$$\nIf $d_n/n\\to c$ for some $c\\in(0,\\infty)$, then $M_n(z)-\\mathbb E[M_n(z)]\\to0$ almost surely. More precisely, for every $t>0$,\n$$\\Pr\\left\\{|M_n(z)-\\mathbb E M_n(z)|>t\\right\\} \\le4\\exp\\left(-\\frac{t^2d_n^2\\eta^2}{4n}\\right).$$"
+      },
+      {
+        "id": "lem-marchenko-pastur-formula-defines-a-finite-measure",
+        "kind": "lemma",
+        "title": "The Marchenko–Pastur formula defines a probability law with the fixed-point transform",
+        "deps": [
+          "def-countable-choice",
+          "def-marchenko-pastur-measure",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+        "kind": "lemma",
+        "title": "Stieltjes inversion and uniqueness for probability measures on the real line",
+        "deps": [
+          "def-countable-choice",
+          "def-stieltjes-transform-of-a-real-probability-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-dynkin-pi-lambda"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Countable Choice.\n\nLet $\\mu$ be a Borel probability measure on $\\mathbb R$, with Stieltjes transform $m_\\mu(z)=\\int (x-z)^{-1}\\,d\\mu(x)$ for $\\operatorname{Im}z>0$. For every $a<b$ and $x\\in\\mathbb R$,\n$$\\mu((a,b))+\\tfrac12\\mu(\\{a\\})+\\tfrac12\\mu(\\{b\\})=\\lim_{\\eta\\downarrow0}\\frac1\\pi\\int_a^b\\operatorname{Im}m_\\mu(u+i\\eta)\\,du,\\qquad \\mu(\\{x\\})=\\lim_{\\eta\\downarrow0}\\eta\\,\\operatorname{Im}m_\\mu(x+i\\eta).$$\nIf two Borel probability measures on $\\mathbb R$ have the same Stieltjes transform on the upper half-plane, then they are equal."
+      },
+      {
+        "id": "lem-nested-iid-fourth-moment-truncation-and-diagonal-control",
+        "kind": "lemma",
+        "title": "Nested iid fourth-moment truncation and uniform diagonal control",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-uniform-row-partial-sums-of-nested-finite-variance-array",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-marchenko-pastur-law-for-sample-covariance",
+        "kind": "theorem",
+        "title": "Almost-sure Marchenko–Pastur law for finite-fourth-moment sample covariance matrices",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "def-stieltjes-transform-of-a-real-probability-measure",
+          "def-marchenko-pastur-measure",
+          "lem-sample-covariance-empirical-law-is-a-probability-measure",
+          "lem-fourth-moment-quadratic-form-resolvent-bound",
+          "lem-rank-one-resolvent-update-and-trace-bound",
+          "lem-adapted-resolvent-trace-concentration",
+          "lem-stieltjes-transform-inversion-and-uniqueness-on-the-real-line",
+          "def-weak-convergence-of-borel-probability-measures",
+          "cor-tightness-extracts-a-weakly-convergent-subsequence",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-almost-sure-convergence-of-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-chebyshev-inequality",
+          "lem-marchenko-pastur-formula-defines-a-finite-measure"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Choice, and let all the matrices $X_n$ be defined on one common probability space. For each positive integer $n$, let $p_n$ be a positive integer with $p_n/n\\to\\gamma\\in(0,\\infty)$, and let $X_n\\in\\mathbb R^{n\\times p_n}$ have mutually independent entries. Assume that all entries of all the matrices $X_n$ have one common law with mean zero, variance one, and finite fourth moment. Set $S_n=X_n^{\\mathsf T}X_n/n$ and let $\\mu_n$ be its empirical spectral distribution normalized by $p_n$. Then $\\mu_n$ converges weakly almost surely to the probability measure with density\n$$\\rho_\\gamma(x)=\\begin{cases}\\dfrac{\\sqrt{(b_\\gamma-x)(x-a_\\gamma)}}{2\\pi\\gamma x},&a_\\gamma<x<b_\\gamma,\\\\0,&x\\notin(a_\\gamma,b_\\gamma),\\end{cases}\\qquad a_\\gamma=(1-\\sqrt\\gamma)^2,\\quad b_\\gamma=(1+\\sqrt\\gamma)^2,$$\nand an atom of mass $(1-1/\\gamma)_+$ at zero."
+      },
+      {
+        "id": "lem-nonbacktracking-covariance-high-moment-bound",
+        "kind": "lemma",
+        "title": "Nonbacktracking covariance high moments and an independent coarse norm bound",
+        "deps": [
+          "lem-nested-iid-fourth-moment-truncation-and-diagonal-control",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "cor-markov-inequality-for-random-variables",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-largest-sample-covariance-eigenvalue-lower-bound",
+        "kind": "lemma",
+        "title": "Independent lower bound for the largest sample-covariance eigenvalue",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "lem-nonbacktracking-covariance-high-moment-bound",
+          "lem-fixed-degree-covariance-trace-and-edge-witnesses"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-sample-covariance-spectrum-confinement",
+        "kind": "lemma",
+        "title": "Finite-fourth-moment covariance spectral confinement",
+        "deps": [
+          "lem-nested-iid-fourth-moment-truncation-and-diagonal-control",
+          "lem-nonbacktracking-covariance-high-moment-bound",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-singular-value-decomposition"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-largest-sample-covariance-eigenvalue-upper-bound",
+        "kind": "lemma",
+        "title": "Finite-fourth-moment upper bound for the largest sample-covariance eigenvalue",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "lem-sample-covariance-spectrum-confinement"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-bai-yin-smallest-singular-value-limits",
+        "kind": "theorem",
+        "title": "Bai–Yin lower singular-value limits and full rank away from aspect one",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-sample-covariance-empirical-spectral-distribution",
+          "thm-singular-value-decomposition",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "lem-sample-covariance-spectrum-confinement",
+          "lem-nonbacktracking-covariance-high-moment-bound",
+          "lem-fixed-degree-covariance-trace-and-edge-witnesses"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-largest-eigenvalue-sample-covariance-edge",
+        "kind": "theorem",
+        "title": "Almost-sure limit of the largest sample-covariance eigenvalue",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "lem-largest-sample-covariance-eigenvalue-upper-bound",
+          "lem-largest-sample-covariance-eigenvalue-lower-bound",
+          "thm-singular-value-decomposition",
+          "thm-operator-norm-is-the-largest-singular-value"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+        "kind": "theorem",
+        "title": "Almost-sure limit and structural-zero count at the lower sample-covariance edge",
+        "deps": [
+          "def-sample-covariance-empirical-spectral-distribution",
+          "thm-bai-yin-smallest-singular-value-limits",
+          "thm-singular-value-decomposition",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-identically-distributed-and-iid-random-variables",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2876,
+    "id": "marchenko-pastur-law-and-edge-bounds-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Marchenko–Pastur law and sample-covariance edge bounds — Examples",
+    "companion": "marchenko-pastur-law-and-edge-bounds",
+    "requires": [
+      "marchenko-pastur-law-and-edge-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-marchenko-pastur-law-and-edges-at-aspect-one-quarter",
+        "kind": "example",
+        "title": "Marchenko–Pastur law and edges below aspect one",
+        "deps": [
+          "def-marchenko-pastur-measure",
+          "thm-marchenko-pastur-law-for-sample-covariance",
+          "thm-largest-eigenvalue-sample-covariance-edge",
+          "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-marchenko-pastur-law-and-edges-at-aspect-four",
+        "kind": "example",
+        "title": "Structural zeros and the positive edge above aspect one",
+        "deps": [
+          "def-marchenko-pastur-measure",
+          "thm-marchenko-pastur-law-for-sample-covariance",
+          "thm-largest-eigenvalue-sample-covariance-edge",
+          "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-marchenko-pastur-law-and-closing-edge-at-aspect-one",
+        "kind": "example",
+        "title": "The Marchenko–Pastur support and closing lower edge at aspect one",
+        "deps": [
+          "def-marchenko-pastur-measure",
+          "thm-marchenko-pastur-law-for-sample-covariance",
+          "thm-largest-eigenvalue-sample-covariance-edge",
+          "thm-smallest-positive-eigenvalue-sample-covariance-edge",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  }
+]

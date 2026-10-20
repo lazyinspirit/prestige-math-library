@@ -1,0 +1,359 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "84",
+  "source_coverage_file": "research/machine-learning-all-101-2026-10-19-batch-84.coverage.json",
+  "source_fetch_check": {
+    "command": "node tools/source-fetch-check.mjs --coverage research/machine-learning-all-101-2026-10-19-batch-84.coverage.json --stamp --timeout-sec 120",
+    "result": "source-fetch-check: 2/2 source(s) fetch-verified (2 newly stamped); source-fetch-check: 2/2 source(s) resolved (0 documented drops; not fetch stamps)",
+    "exit_code": 0,
+    "recovery_retries_added": 0,
+    "prior_attempts_reused": true
+  },
+  "author_reading_scope": "Read the complete relevant argument ranges in two independent full-text treatments. Sutton and Barto: the complete accessible 455-page second-edition draft §§13.1–13.6, printed pp. 266–276, including the episodic policy-gradient theorem proof, the conversion to the sampled REINFORCE update with its gamma-to-time factor, the action-independent baseline identity, one-step actor-critic pseudocode and bootstrapping warning, and the continuing average-reward ergodicity premise. Williams: the complete 28-page article, including §§2, 4–5 and Appendix A.1–A.2; the normalized stochastic-output derivative, baseline independence condition, REINFORCE score identity and episodic time-unfolding proof were inspected. The local theorem supplies explicit common-support, dominated-differentiation, finite score-return integrability, and finite-MDP path-law hypotheses; every general result and finite example is proved locally. No general nonlinear/deep optimizer convergence claim is imported.",
+  "search_and_retrieval_history": [
+    {
+      "query": "Sutton and Barto, Chapter 13 policy-gradient methods, full second-edition text and planned PDF pages 343–361",
+      "outcome": "Downloaded the task's Stanford URL https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf (352 pages). Inspection showed it is an earlier 2015 in-progress draft whose Chapter 13 is Neuroscience and which does not contain the planned policy-gradient chapter; this copy was not used to support batch 84 claims."
+    },
+    {
+      "query": "Sutton and Barto 2018 complete Chapter 13 policy-gradient source",
+      "outcome": "The official author-hosted bookdraft2018mar21.pdf returned HTTP 502 through the PDF reader; direct curl attempts to both the www and non-www host failed TLS hostname verification. The Stanford-hosted full 455-page second-edition draft SuttonBartoRL.pdf was then opened and its complete Chapters 13.1–13.6 were inspected."
+    },
+    {
+      "query": "Sutton and Barto Chapter 13 policy-gradient chapter PDF alternative",
+      "outcome": "A chapter-extract candidate at https://bjpcjp.github.io/pdfs/math/policy-gradients-RL.pdf returned 404. Search then located the full Stanford-hosted 455-page SuttonBartoRL.pdf, whose contents and complete Chapter 13 match the required policy-gradient scope."
+    },
+    {
+      "query": "Ronald J. Williams 1992 Simple Statistical Gradient-Following Algorithms full-text PDF",
+      "outcome": "Opened the complete 28-page article copy, checked the paper's original title and author, and read §§2, 4–5 and Appendix A.1–A.2. Its episodic derivation uses total episode reinforcement rather than the discounted finite-MDP convention; that scope difference is recorded and the discounted gamma-to-time factor is supplied by Sutton and Barto and the local proof."
+    },
+    {
+      "query": "node tools/source-fetch-check.mjs --coverage research/machine-learning-all-101-2026-10-19-batch-84.coverage.json --stamp --timeout-sec 120",
+      "outcome": "The native full-text fetch check succeeded on the first fetch of both selected sources: 2/2 fetch-verified, 2/2 resolved, exit code 0."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Richard S. Sutton and Andrew G. Barto, Reinforcement Learning: An Introduction, second-edition draft",
+      "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoRL.pdf",
+      "page_scopes": [
+        "policy-gradients-reinforce-and-actor-critic",
+        "policy-gradients-reinforce-and-actor-critic-examples"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T22:52:26.417Z",
+        "bytes": 10029704,
+        "sha256_16": "94b195c3d5f73878",
+        "kind": "pdf",
+        "pages": 455
+      },
+      "author_read_locators": [
+        {
+          "locator": "§13.1, printed pp. 266–267: differentiable policy parameterization and stochastic action probabilities.",
+          "supported_items": [
+            "def-differentiable-stochastic-policy"
+          ],
+          "disposition": "The source supplies the parameterized-policy interface; the local definition states a fixed positive common support explicitly."
+        },
+        {
+          "locator": "§13.2, printed pp. 268–270: episodic policy-gradient theorem, equation (13.5), and complete state-value recursion proof.",
+          "supported_items": [
+            "thm-policy-gradient-theorem"
+          ],
+          "disposition": "The source proof differentiates the policy Bellman recursion and unrolls discounted state visitation. The local theorem proves the likelihood-ratio representation under explicit trajectory-law domination and score-return integrability."
+        },
+        {
+          "locator": "§13.3, printed p. 270: conversion to the sampled return estimator, equation (13.6), gamma-to-time factor, and episode-level update caveat.",
+          "supported_items": [
+            "thm-policy-gradient-theorem",
+            "alg-reinforce",
+            "ex-reinforce-one-step-bernoulli-mdp"
+          ],
+          "disposition": "The source explicitly uses gamma^t when G_t is the discounted return from time t. The local batch corrects the planned identity by this necessary factor and freezes theta while collecting each episode before one aggregate update."
+        },
+        {
+          "locator": "§13.4, printed pp. 271–272: arbitrary state baseline identity (13.8), REINFORCE with baseline update (13.9), and variance discussion.",
+          "supported_items": [
+            "lem-action-independent-baseline-does-not-bias-policy-gradient",
+            "alg-reinforce-with-baseline",
+            "ex-action-independent-baseline-eliminates-variance"
+          ],
+          "disposition": "The general zero-score baseline term is proved locally, and the B-page example computes one finite case where variance is eliminated. No claim is made that every baseline reduces variance."
+        },
+        {
+          "locator": "§13.5, printed pp. 273–274: one-step actor-critic pseudocode, discounted actor trace, and bootstrapping-bias discussion.",
+          "supported_items": [
+            "alg-one-step-actor-critic",
+            "ex-actor-critic-bootstrap-can-bias-policy-update"
+          ],
+          "disposition": "The procedure is stated locally with pre-update parameters and the gamma^t actor trace; the B-page finite MDP verifies a biased first update under a specified critic error."
+        },
+        {
+          "locator": "§13.6, printed pp. 275–276: continuing average-reward objective and limiting steady-state distribution independent of the initial state under ergodicity.",
+          "supported_items": [
+            "thm-policy-gradient-theorem"
+          ],
+          "disposition": "Retained as an explicit scope warning in the theorem's Remarks; no continuing average-reward result is claimed."
+        }
+      ]
+    },
+    {
+      "title": "Ronald J. Williams, Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning, Machine Learning 8 (1992)",
+      "url": "https://gwern.net/doc/reinforcement-learning/model-free/1992-williams.pdf",
+      "page_scopes": [
+        "policy-gradients-reinforce-and-actor-critic"
+      ],
+      "fetch_verified": {
+        "at": "2026-10-18T22:52:26.513Z",
+        "bytes": 648357,
+        "sha256_16": "e1029df5459f4a83",
+        "kind": "pdf",
+        "pages": 28
+      },
+      "author_read_locators": [
+        {
+          "locator": "§2, PDF pp. 230–233: parameterized stochastic output laws and differentiability requirements.",
+          "supported_items": [
+            "def-differentiable-stochastic-policy"
+          ],
+          "disposition": "Independent foundational treatment of differentiable stochastic policies; the local interface is specialized to finite-MDP stationary policies and common support."
+        },
+        {
+          "locator": "§4 and Appendix A.1, printed pp. 233–234 and PDF pp. 249–252: REINFORCE score identity, Theorem 1, normalization derivative, and baseline conditionally independent of the sampled output.",
+          "supported_items": [
+            "lem-policy-score-has-zero-conditional-mean",
+            "thm-policy-gradient-theorem",
+            "lem-action-independent-baseline-does-not-bias-policy-gradient",
+            "alg-reinforce-with-baseline"
+          ],
+          "disposition": "The full Appendix A.1 argument is included in the reading; local proofs specialize the zero-score and baseline identities to the finite-MDP filtration and state baseline."
+        },
+        {
+          "locator": "§5 and Appendix A.2, printed pp. 235–238 and PDF pp. 252–253: episodic REINFORCE and the time-unfolding proof for shared parameters.",
+          "supported_items": [
+            "thm-policy-gradient-theorem",
+            "alg-reinforce"
+          ],
+          "disposition": "The source's episodic total-reinforcement argument is inspected completely. Its undiscounted convention is not used to omit gamma^t from the discounted MDP identity."
+        },
+        {
+          "locator": "Introduction p. 229 and Conclusion p. 248: actor-critic combines an immediate learner with a temporal-difference critic; no general convergence theory for the full class.",
+          "supported_items": [
+            "alg-one-step-actor-critic",
+            "alg-reinforce"
+          ],
+          "disposition": "Used only for algorithm context and the explicit no-convergence-claim caveat; Sutton and Barto supplies the full one-step pseudocode."
+        }
+      ]
+    }
+  ],
+  "source_resolution": [
+    {
+      "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf",
+      "title": "The task-assigned earlier in-progress Sutton and Barto draft; historical candidate, not selected as claim support.",
+      "source_resolution": {
+        "status": "owner-escalation",
+        "reason": "The assigned URL is an earlier in-progress draft without policy-gradient Chapter 13. The exact 2018 bookdraft URL was not recovered, but a complete fetched and stamped Stanford-hosted second-edition draft contains §§13.1–13.6 and supports the local work. The owner must reconcile the controlling plan locator and its missing gamma-to-time factor; no replacement source reading, proof, or approval is inferred for the exact 2018 file.",
+        "search_summary": "Inspected the assigned 352-page URL, then tried five recovery candidates: the official 2018 PDF reader, both www/non-www direct hosts, one alternate chapter extract, and finally the full Stanford-hosted second-edition draft. The first four alternatives failed or lacked the chapter; the full Stanford draft succeeded, so recovery stopped. Williams was separately read as the independent second treatment, not counted as a Sutton-source retry.",
+        "attempts": [
+          {
+            "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf",
+            "at": null,
+            "outcome": "Fetched and inspected a 352-page earlier in-progress draft; Chapter 13 is Neuroscience and it does not contain the assigned policy-gradient section, so it was not used."
+          },
+          {
+            "url": "https://web.stanford.edu/class/psych209/Readings/bookdraft2018mar21.pdf",
+            "at": null,
+            "outcome": "The PDF reader returned HTTP 502."
+          },
+          {
+            "url": "https://www.incompleteideas.net/bookdraft2018mar21.pdf",
+            "at": null,
+            "outcome": "Direct curl failed TLS hostname verification."
+          },
+          {
+            "url": "https://incompleteideas.net/bookdraft2018mar21.pdf",
+            "at": null,
+            "outcome": "Direct curl failed TLS hostname verification."
+          },
+          {
+            "url": "https://bjpcjp.github.io/pdfs/math/policy-gradients-RL.pdf",
+            "at": null,
+            "outcome": "Chapter-extract candidate returned HTTP 404."
+          },
+          {
+            "url": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoRL.pdf",
+            "at": "2026-10-18T22:52:26.417Z",
+            "outcome": "Fetched and stamped successfully; full 455-page second-edition draft inspected for §§13.1–13.6."
+          }
+        ],
+        "searches": [
+          {
+            "query": "Sutton and Barto Chapter 13 policy-gradient methods full second-edition text and planned PDF pages 343–361",
+            "outcome": "The assigned Stanford URL yielded an earlier 352-page draft with a different Chapter 13; it was not used."
+          },
+          {
+            "query": "Sutton and Barto 2018 complete Chapter 13 policy-gradient source",
+            "outcome": "Official author-hosted 2018 routes returned HTTP 502 or TLS hostname-verification failures; the full Stanford-hosted 455-page second-edition draft was located and its complete relevant chapter inspected."
+          },
+          {
+            "query": "Sutton and Barto Chapter 13 policy-gradient chapter PDF alternative",
+            "outcome": "One chapter extract returned 404; the full Stanford-hosted second-edition draft provided complete §§13.1–13.6."
+          },
+          {
+            "query": "Ronald J. Williams 1992 Simple Statistical Gradient-Following Algorithms full-text PDF",
+            "outcome": "The complete article was read; its episodic total-reinforcement convention is distinguished from the discounted finite-MDP convention used locally."
+          }
+        ],
+        "alternatives": [
+          {
+            "item": "def-differentiable-stochastic-policy",
+            "argument": "Sutton §13.1 and Williams §2 independently motivate a differentiable stochastic policy; the local definition adds finite-MDP stationarity, a fixed common positive support, and an explicit score vector.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-total-derivative-in-euclidean-space",
+              "def-jacobian-matrix-and-gradient",
+              "thm-chain-rule-for-total-derivatives",
+              "thm-logarithm-derivative-and-integral"
+            ]
+          },
+          {
+            "item": "lem-policy-score-has-zero-conditional-mean",
+            "argument": "Sutton §13.4 and Williams Appendix A.1 support the normalization-derivative cancellation; the local proof conditions on finite pre-action history atoms and checks zero-probability and terminal atoms.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "lem-finite-mdp-policy-action-state-reward-path-law",
+              "def-axiom-of-choice",
+              "def-conditional-expectation-given-a-sigma-algebra",
+              "def-sum-over-a-finite-index-set",
+              "thm-algebra-of-total-derivatives",
+              "thm-induction-principle"
+            ]
+          },
+          {
+            "item": "thm-policy-gradient-theorem",
+            "argument": "Sutton §§13.2–13.3 and Williams Appendix A.2 provide episodic likelihood/score arguments; Williams uses undiscounted reinforcement, so the local finite-trajectory proof derives the discounted gamma-to-time factor under explicit dominated differentiation and integrability assumptions.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-discounted-return-and-value-functions",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-finite-mdp-policy-action-state-reward-path-law",
+              "lem-policy-score-has-zero-conditional-mean",
+              "def-axiom-of-choice",
+              "def-countable",
+              "def-natural-number-coding-of-finite-sequences",
+              "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+              "def-conditional-expectation-given-a-sigma-algebra",
+              "def-total-derivative-in-euclidean-space",
+              "def-jacobian-matrix-and-gradient",
+              "thm-chain-rule-for-total-derivatives",
+              "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+              "thm-logarithm-derivative-and-integral",
+              "thm-taking-out-what-is-known",
+              "thm-dominated-convergence"
+            ]
+          },
+          {
+            "item": "alg-one-step-actor-critic",
+            "argument": "Sutton §13.5 provides the one-step TD actor-critic procedure and its discounted actor trace; the local definition fixes simultaneous pre-update parameters, domains, terminal continuation, and disclaims convergence.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-finite-mdp-policy-action-state-reward-path-law",
+              "def-axiom-of-choice",
+              "def-total-derivative-in-euclidean-space",
+              "def-jacobian-matrix-and-gradient"
+            ]
+          },
+          {
+            "item": "alg-reinforce",
+            "argument": "Sutton §13.3 and Williams §5/Appendix A.2 support the episode-level score-return update; the local theorem and algorithm preserve the gamma-to-time factor and freeze the policy during the episode.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-finite-mdp-policy-action-state-reward-path-law",
+              "def-axiom-of-choice",
+              "thm-policy-gradient-theorem"
+            ]
+          },
+          {
+            "item": "lem-action-independent-baseline-does-not-bias-policy-gradient",
+            "argument": "Sutton §13.4 and Williams Appendix A.1 support action-independent baseline cancellation; the local proof applies the conditional zero-score identity and a geometric integrable bound to a fixed finite state baseline.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-policy-score-has-zero-conditional-mean",
+              "thm-policy-gradient-theorem",
+              "def-axiom-of-choice",
+              "def-conditional-expectation-given-a-sigma-algebra",
+              "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+              "thm-taking-out-what-is-known",
+              "thm-geometric-series",
+              "thm-dominated-convergence"
+            ]
+          },
+          {
+            "item": "alg-reinforce-with-baseline",
+            "argument": "Sutton §13.4 and Williams §4/Appendix A.1 support the fixed state-baseline update; the local procedure freezes both the baseline and policy during the episode and makes no universal variance claim.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "def-axiom-of-choice",
+              "alg-reinforce",
+              "lem-action-independent-baseline-does-not-bias-policy-gradient"
+            ]
+          },
+          {
+            "item": "ex-actor-critic-bootstrap-can-bias-policy-update",
+            "argument": "Sutton §13.5 motivates the bootstrap-bias boundary; the complete four-state calculation is local and compares the exact zero objective gradient with expected first actor increment 1/8 under alpha=1/4, with each proposed update remaining inside the open policy domain.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "alg-one-step-actor-critic",
+              "def-total-derivative-in-euclidean-space",
+              "thm-logarithm-derivative-and-integral",
+              "def-axiom-of-choice"
+            ]
+          },
+          {
+            "item": "ex-reinforce-one-step-bernoulli-mdp",
+            "argument": "Sutton §13.3 motivates the discounted sampled estimator; the complete finite Bernoulli expectation and derivative are calculated locally, with gamma^0=1.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-finite-mdp-policy-action-state-reward-path-law",
+              "alg-reinforce",
+              "def-total-derivative-in-euclidean-space",
+              "thm-logarithm-derivative-and-integral",
+              "def-axiom-of-choice"
+            ]
+          },
+          {
+            "item": "ex-action-independent-baseline-eliminates-variance",
+            "argument": "Sutton §13.4 and Williams Appendix A.1 motivate the zero-mean baseline identity; exact finite calculations show variance 1 drops to 0 only for this stated baseline and MDP.",
+            "deps": [
+              "def-finite-markov-decision-process",
+              "def-differentiable-stochastic-policy",
+              "def-episodic-returns-td-errors-and-policy-support",
+              "lem-action-independent-baseline-does-not-bias-policy-gradient",
+              "alg-reinforce",
+              "alg-reinforce-with-baseline",
+              "def-total-derivative-in-euclidean-space",
+              "thm-logarithm-derivative-and-integral",
+              "def-axiom-of-choice"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

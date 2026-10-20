@@ -1,0 +1,330 @@
+{
+  "group": "n",
+  "batches": ["42"],
+  "pages_read": [
+    "adaptive-gradient-optimizers",
+    "adaptive-gradient-optimizers-examples"
+  ],
+  "items_read": [
+    "alg-rmsprop",
+    "alg-adam",
+    "alg-amsgrad",
+    "lem-geometric-polynomial-decay",
+    "lem-clipped-negative-prefix-positive-suffix",
+    "lem-adaptive-moment-updates-well-defined",
+    "lem-amsgrad-one-step-regret-inequality",
+    "lem-amsgrad-momentum-energy-bound",
+    "thm-adam-online-regret-counterexample",
+    "thm-amsgrad-online-convex-regret",
+    "ex-adam-fixed-epsilon-online-regret-counterexample",
+    "ex-amsgrad-historical-maximum",
+    "ex-amsgrad-constant-beta-outside-decaying-schedule"
+  ],
+  "conventions": [
+    {
+      "convention": "RMSProp has no momentum or bias correction and adds a strictly positive ε outside the second-moment square root. A finite horizon may be zero.",
+      "fixed_by": "alg-rmsprop",
+      "matters_for": ["lem-adaptive-moment-updates-well-defined"]
+    },
+    {
+      "convention": "Adam is scalar, uncorrected, initialized with zero moments, uses α/√t and denominator √(v_t+ε), and clips each update to [-1,1]. Inputs require v_t+ε>0.",
+      "fixed_by": "alg-adam",
+      "matters_for": [
+        "lem-adaptive-moment-updates-well-defined",
+        "thm-adam-online-regret-counterexample",
+        "ex-adam-fixed-epsilon-online-regret-counterexample"
+      ]
+    },
+    {
+      "convention": "AMSGrad takes the coordinatewise historical maximum of raw second moments, applies no bias correction or stabilizer, leaves zero-weight tentative coordinates unchanged, and permits any minimizer of its weighted quadratic over a nonempty compact convex feasible set.",
+      "fixed_by": "alg-amsgrad",
+      "matters_for": [
+        "lem-adaptive-moment-updates-well-defined",
+        "lem-amsgrad-one-step-regret-inequality",
+        "lem-amsgrad-momentum-energy-bound",
+        "thm-amsgrad-online-convex-regret",
+        "ex-amsgrad-historical-maximum",
+        "ex-amsgrad-constant-beta-outside-decaying-schedule"
+      ]
+    },
+    {
+      "convention": "Vector coordinates are one-based abbreviations z_i=z(i-1), translating the published Euclidean supplier's zero-based function coordinates.",
+      "fixed_by": "alg-amsgrad",
+      "matters_for": [
+        "lem-amsgrad-one-step-regret-inequality",
+        "lem-amsgrad-momentum-energy-bound",
+        "thm-amsgrad-online-convex-regret"
+      ]
+    },
+    {
+      "convention": "The zero-ε Adam counterexample covers every α>0 and fixed β₁<√β₂; the positive-ε counterexample fixes α=1/10, β₁=0 and β₂=1/45. Comparators are selected separately at each finite horizon.",
+      "fixed_by": "thm-adam-online-regret-counterexample",
+      "matters_for": ["ex-adam-fixed-epsilon-online-regret-counterexample"]
+    },
+    {
+      "convention": "The AMSGrad regret inequality allows arbitrary 0≤β₁,t≤β₁=β₁,₁ with β₁/√β₂<1; its square-root upper-regret consequence requires either β₁,t=β₁λ^(t-1), 0≤λ<1, or β₁,t=β₁/t.",
+      "fixed_by": "thm-amsgrad-online-convex-regret",
+      "matters_for": ["ex-amsgrad-constant-beta-outside-decaying-schedule"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-adaptive-moment-updates-well-defined",
+      "statement": "For every finite admissible run of the RMSProp, uncorrected Adam, or uncorrected AMSGrad procedures defined on this page, all moment coordinates are finite and all second-moment coordinates are nonnegative. Every denominator specified by the procedure is positive. For AMSGrad, a zero historical-maximum coordinate has zero current and previous first moments, and the raw second moment is positive whenever its historical maximum is positive; the zero-ratio convention is therefore consistent. Each weighted minimization over the compact feasible set attains a minimum.",
+      "used_by": [
+        "lem-amsgrad-one-step-regret-inequality",
+        "lem-amsgrad-momentum-energy-bound",
+        "thm-adam-online-regret-counterexample",
+        "thm-amsgrad-online-convex-regret",
+        "ex-adam-fixed-epsilon-online-regret-counterexample",
+        "ex-amsgrad-historical-maximum",
+        "ex-amsgrad-constant-beta-outside-decaying-schedule"
+      ]
+    },
+    {
+      "id": "lem-amsgrad-one-step-regret-inequality",
+      "statement": "At an AMSGrad round with a nonempty compact convex F, convex loss ℓ_t, g_t∈∂ℓ_t(x_t), α_t>0 and 0≤β₁,t<1, let q_t,i=√v̂_t,i and E_t(z)=Σ_{i:q_t,i>0}z_i²/q_t,i. For every u∈F, ℓ_t(x_t)-ℓ_t(u) is at most (‖x_t-u‖²_Qt-‖x_{t+1}-u‖²_Qt)/(2α_t(1-β₁,t)) + α_t E_t(m_t)/(2(1-β₁,t)) + β₁,t α_t E_t(m_{t-1})/(2(1-β₁,t)) + β₁,t ‖x_t-u‖²_Qt/(2α_t(1-β₁,t)).",
+      "used_by": ["thm-amsgrad-online-convex-regret"]
+    },
+    {
+      "id": "lem-amsgrad-momentum-energy-bound",
+      "statement": "For finite-horizon uncorrected AMSGrad with α_t=α/√t, α>0, β₂∈(0,1), 0≤β₁,t≤β₁<√β₂ and γ=β₁/√β₂, interpreting zero-denominator contributions as zero, Σ_t α_t Σ_i m_t,i²/√v̂_t,i ≤ α Σ_i Σ_t |g_t,i|/√t divided by ((1-β₁)(1-γ)√(1-β₂)).",
+      "used_by": ["thm-amsgrad-online-convex-regret"]
+    },
+    {
+      "id": "lem-clipped-negative-prefix-positive-suffix",
+      "statement": "Let n≥1, x₀∈[-1,1], k∈{0,…,n}, δ_j≤0 for j≤k and δ_j≥0 for j>k. Define c(y)=max{-1,min{1,y}} and x_j=c(x_{j-1}+δ_j). Then x_n≥min{1,x₀+Σ_{j=1}^n δ_j}.",
+      "used_by": ["thm-adam-online-regret-counterexample"]
+    },
+    {
+      "id": "lem-geometric-polynomial-decay",
+      "statement": "For every real q∈[0,1), every p∈{1,2}, and every real δ>0, there is an integer N≥1 such that n^p q^n<δ for every integer n≥N.",
+      "used_by": ["thm-adam-online-regret-counterexample"]
+    },
+    {
+      "id": "thm-adam-online-regret-counterexample",
+      "statement": "For every α>0 and fixed β₁<√β₂ in the stated Adam parameter ranges, some even C≥2 gives the ε=0 periodic slopes C,-1,…,-1, initialized at x₁=1, with liminf R_T/T≥2/C. For every fixed ε>0, α=1/10, β₁=0, β₂=1/45 and periodic slopes 3√ε,-√ε,-√ε give liminf R_T/T≥2√ε/3. Both claims use uncorrected scalar Adam with inside-root ε and clipping to [-1,1].",
+      "used_by": ["ex-adam-fixed-epsilon-online-regret-counterexample"]
+    },
+    {
+      "id": "thm-amsgrad-online-convex-regret",
+      "statement": "Under its nonempty compact convex domain, continuous convex losses, chosen bounded subgradients, finite coordinate-diameter bound, α_t=α/√t, β₁=β₁,₁, 0≤β₁,t≤β₁ and γ=β₁/√β₂<1 hypotheses, R_T(u)≤D∞²√T Σ_i√v̂_T,i/(2α(1-β₁)) + D∞² Σ_{t,i}β₁,t√v̂_t,i/α_t divided by (1-β₁)² + α Σ_{i,t}|g_t,i|/√t divided by ((1-β₁)²(1-γ)√(1-β₂)). The geometric and reciprocal first-moment schedules stated there give best-comparator regret O(√T).",
+      "used_by": ["ex-amsgrad-constant-beta-outside-decaying-schedule"]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"def-natural-numbers","used_for":"Natural-number round and horizon indices.","opened":true},
+    {"id":"def-integer-power","used_for":"Moment expansions and geometric powers, including exponent zero.","opened":true},
+    {"id":"thm-induction-principle","used_for":"Finite recurrence, clipping and moment bounds.","opened":true},
+    {"id":"def-ordered-field","used_for":"Real arithmetic and order conventions.","opened":true},
+    {"id":"def-complete-ordered-field","used_for":"Completeness hypotheses for roots and Archimedean arguments.","opened":true},
+    {"id":"cor-cauchy-reals-lub-complete","used_for":"Completeness of the ambient real field.","opened":true},
+    {"id":"thm-of-archimedean","used_for":"Large period selection and unbounded partial-sum estimates.","opened":true},
+    {"id":"lem-geometric-sequence-null","used_for":"Geometric decay in the polynomial-geometric helper.","opened":true},
+    {"id":"def-euclidean-inner-product","used_for":"Finite-dimensional coordinates, inner products and norm identities.","opened":true},
+    {"id":"thm-cauchy-schwarz-and-the-euclidean-norm","used_for":"Weighted Cauchy–Schwarz, coordinate bounds and norm inequalities.","opened":true},
+    {"id":"thm-of-square-roots","used_for":"Existence and uniqueness of nonnegative roots.","opened":true},
+    {"id":"lem-of-square-positive","used_for":"Nonnegativity and positivity of nonzero squared coordinates.","opened":true},
+    {"id":"lem-of-zero-mult","used_for":"Zero squared coordinates and zero moment terms.","opened":true},
+    {"id":"lem-of-square-monotone","used_for":"Order comparisons of roots and nonnegative squares.","opened":true},
+    {"id":"lem-of-sign-rules","used_for":"Moment positivity and scaling inequalities.","opened":true},
+    {"id":"lem-of-inverse-positive","used_for":"Positive division and reciprocal comparisons.","opened":true},
+    {"id":"def-max-min","used_for":"Scalar clipping and historical maxima.","opened":true},
+    {"id":"lem-finite-set-has-max","used_for":"Existence of two-element maxima and minima.","opened":true},
+    {"id":"def-interval","used_for":"Closed scalar feasible interval [-1,1].","opened":true},
+    {"id":"def-convex-subset-of-euclidean-space","used_for":"Feasible segments in the weighted projection argument.","opened":true},
+    {"id":"def-convex-and-strictly-convex-functions-on-euclidean-sets","used_for":"Convex losses and affine-loss examples.","opened":true},
+    {"id":"def-subgradient-and-subdifferential","used_for":"Supporting inequalities converting gradient estimates into regret.","opened":true},
+    {"id":"thm-euclidean-heine-borel-pseudocompactness-and-extreme-values","used_for":"Compactness, boundedness, projection minimizers and best comparators.","opened":true},
+    {"id":"def-finite-sum","used_for":"Finite coordinate and time sums, including empty sums.","opened":true},
+    {"id":"lem-finite-sum-laws","used_for":"Finite telescoping, distribution and nonnegative sum bounds.","opened":true},
+    {"id":"def-sequence","used_for":"Eventual bounds and average-regret sequences.","opened":true},
+    {"id":"def-limsup-liminf","used_for":"Tail-infimum definition of average-regret limit inferior.","opened":true},
+    {"id":"lem-algebra-of-continuous-real-maps-on-a-space","used_for":"Continuity of cumulative losses.","opened":true},
+    {"id":"def-abs-value","used_for":"Continuity verification in the constant-momentum example.","opened":true},
+    {"id":"lem-of-abs-value","used_for":"Absolute-value identities in that verification.","opened":true},
+    {"id":"def-metric-continuity","used_for":"The example's epsilon-delta continuity check.","opened":true},
+    {"id":"lem-real-line-is-a-metric-space","used_for":"Usual real metric in that continuity check.","opened":true},
+    {"id":"alg-adam-update","used_for":"Checking the explicit distinction from published bias-corrected Adam.","opened":true},
+    {"id":"alg-amsgrad-update","used_for":"Checking the explicit distinction from the published maximum of bias-corrected second moments.","opened":true},
+    {"id":"cex-adam-periodic-linear-losses-force-divergence","used_for":"Checking that the contextual published counterexample concerns a distinct unprojected bias-corrected procedure.","opened":true}
+  ],
+  "concerns": [
+    {
+      "id": "thm-adam-online-regret-counterexample",
+      "concern": "The source locator describes Appendices B and F as 'PDF pp. 14–18'. In the linked 23-page PDF, Appendix B starts on page 12 and Appendix F occupies pages 21–23. The named appendices are relevant, but the page range does not locate the fixed-ε argument. Checked against https://arxiv.org/pdf/1904.09237.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-adam-fixed-epsilon-online-regret-counterexample",
+      "concern": "The source locator says 'Appendix F fixed-epsilon Adam counterexample, PDF pp. 17–18.' Appendix F is on pages 21–23 of the linked PDF, rather than pages 17–18. The local verification faithfully invokes the owned theorem.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-amsgrad-momentum-energy-bound",
+      "concern": "The source locator places the 'intermediate AMSGrad momentum-energy lemma and its complete convolution estimate' on PDF pages 15–16. The intermediate Lemma 2 begins on page 17 and its convolution proof continues on page 18 of https://arxiv.org/pdf/1904.09237. The locally supplied convolution proof was independently checked.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-amsgrad-online-convex-regret",
+      "concern": "The Reddi–Kale–Kumar locator gives Theorem 4 and Corollary 1 on 'PDF pp. 5' and Appendix D on '15–16'. In the linked PDF the theorem and corollary are on page 6, and Appendix D runs through pages 16–19. The local proof supplies its own bound and does not merely assume the source's conclusion.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "cor-cauchy-reals-lub-complete",
+      "finding": "Its Statement contains 'Hence, together with [[thm-reals-ordered-field]]' and '([[def-complete-ordered-field]])'. These inline links interrupt the complete Statement and have no following Statement references section, contrary to the required reference-placement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-abs-value",
+      "finding": "Its Definition begins 'Let $F$ be an ordered field ([[def-ordered-field]])'. The inline link remains inside the Definition rather than a following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-complete-ordered-field",
+      "finding": "Its Definition begins 'Let $F$ be an ordered field ([[def-ordered-field]])'. The inline link violates the uninterrupted-definition requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "finding": "Its Definition contains 'be convex ([[def-convex-subset-of-euclidean-space]])' and 'The parameter interval is the closed interval of [[def-interval]]'. Both links occur within the defining section rather than following it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-convex-subset-of-euclidean-space",
+      "finding": "Its Definition places '([[def-interval]])' immediately after the parameter interval. This inline link violates the required uninterrupted-definition presentation.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-euclidean-inner-product",
+      "finding": "Its Definition contains inline links including '([[def-natural-numbers]], [[lem-nat-order-is-membership]])' before the function-space formula, and further supplier links throughout its defining subsections. They are not moved after the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-finite-sum",
+      "finding": "Its Definition opens with '([[def-complete-ordered-field]])' and includes inline links such as '([[thm-recursion]])' throughout the construction. There is no following Definition references section carrying these links.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-integer-power",
+      "finding": "Its Definition contains '([[def-ordered-field]], [[def-field]])' in the ambient-field sentence and many further inline supplier links in the exponent clauses. These interrupt the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-interval",
+      "finding": "Its Definition starts with '([[def-complete-ordered-field]], [[def-ordered-field]])' and '([[def-real-order]])', with further links throughout the section. These remain inside the Definition rather than following it.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-limsup-liminf",
+      "finding": "Its Definition begins 'Let $(x_k)$ be a sequence of reals ([[def-sequence]])' and contains inline extended-real supplier links throughout. The required uninterrupted Definition and following reference section are absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-max-min",
+      "finding": "Its Definition includes '([[def-ordered-field]], [[def-complete-ordered-field]])' in the uniqueness paragraph. These links occur before the complete defining section ends.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-metric-continuity",
+      "finding": "Its Definition opens 'be metric spaces ([[def-metric-space]])' and contains further inline links including '([[def-metric-ball]])'. They violate the required reference placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-natural-numbers",
+      "finding": "Its Definition places '([[def-inductive-set]])' before the defining formula and includes '[[lem-omega-smallest-inductive]]' in the existence explanation. The complete Definition is interrupted by links.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-ordered-field",
+      "finding": "Its Definition starts 'An **ordered field** is a field $F$ ([[def-field]])'. The inline supplier link should follow the complete Definition under the prescribed policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-sequence",
+      "finding": "Its Definition contains inline links in its opening ambient-field and natural-number conventions, including '[[def-complete-ordered-field]]' and '[[def-natural-numbers]]', and later links in the convergence explanation. These remain inside the complete Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-subgradient-and-subdifferential",
+      "finding": "Its Definition contains '([[def-convex-and-strictly-convex-functions-on-euclidean-sets]])' before defining a subgradient, and '[[def-euclidean-inner-product]]' after the subdifferential formula. Both links remain inside the Definition.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-set-has-max",
+      "finding": "Its Statement contains '([[def-max-min]])' and a later inline '[[lem-finite-subsets-listable]]' in the listability qualification. The complete Statement lacks the required separate reference section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-finite-sum-laws",
+      "finding": "Its Statement says 'with finite sums and finite products as in [[def-finite-sum]]' before listing the conclusions, and includes further inline supplier links in clause 2. These interrupt the Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-geometric-sequence-null",
+      "finding": "Its Statement contains '([[def-integer-power]])', '([[def-real-limit]])' and '([[def-divergence-to-infinity]])' within the hypotheses and conclusions, plus further inline links before Facts. They violate the required uninterrupted-statement presentation.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-abs-value",
+      "finding": "Its Statement includes '([[def-ordered-field]])' and '([[def-abs-value]])' before its conclusions. These links have not been moved to a following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-inverse-positive",
+      "finding": "Its Statement begins 'Let $F$ be an ordered field ([[def-ordered-field]])'. This inline link violates the required reference-placement policy.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-sign-rules",
+      "finding": "Its Statement begins 'Let $F$ be an ordered field ([[def-ordered-field]])'. The link interrupts the Statement before the five conclusions.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-square-positive",
+      "finding": "Its Statement begins 'Let $F$ be an ordered field ([[def-ordered-field]])'. The inline link remains inside the Statement rather than a following references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-of-zero-mult",
+      "finding": "Its Statement reads 'In any field $F$ ([[def-field]]), for every ...'. The inline field link interrupts the claim.",
+      "severity": "presentation"
+    },
+    {
+      "item": "lem-real-line-is-a-metric-space",
+      "finding": "Its Statement includes '([[def-abs-value]])' before 'Then', and links such as '([[def-metric-space]])' within its numbered conclusions. These links remain inside the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "finding": "Its Statement introduces the inner product 'as in [[def-euclidean-inner-product]]' and includes further links within the norm conclusion and subsequent citation explanation. The complete Statement is interrupted by hyperlinks.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-archimedean",
+      "finding": "Its Statement contains '([[def-complete-ordered-field]])' before the Archimedean conclusion and '([[def-ordered-field]])' in the canonical-natural qualification. The links have not been moved after the complete Statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-of-square-roots",
+      "finding": "Its Statement begins 'Let $F$ be a complete ordered field ([[def-complete-ordered-field]])'. The supplier link interrupts the Statement and no following Statement references section carries it.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "adaptive-gradient-optimizers",
+      "to": "stochastic-gradient-descent-for-learning",
+      "faithful": true,
+      "note": "This is a contextual page prerequisite. The SGD procedure explicitly imposes no conditional-mean or variance guarantee, and the assigned adaptive procedures accept finite gradient inputs without importing such guarantees. No SGD stationarity conclusion is restated as an adaptive-method result."
+    },
+    {
+      "from": "generative-adversarial-networks",
+      "to": "adaptive-gradient-optimizers",
+      "faithful": true,
+      "note": "Checked the GAN page and its four item bodies in the reverse consumer direction. They do not invoke Adam or AMSGrad regret as a premise. The ideal-discriminator theorem explicitly says its distribution-space identity does not assert convergence of finite neural alternating optimization, preserving the optimizer page's limitations."
+    }
+  ]
+}

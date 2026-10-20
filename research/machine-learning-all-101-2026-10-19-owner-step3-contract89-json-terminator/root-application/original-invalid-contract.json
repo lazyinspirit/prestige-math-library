@@ -1,0 +1,1494 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-dagger-strongly-convex-follow-the-leader-regret",
+    "lem-finite-horizon-mdp-policy-occupancy",
+    "def-imitation-learning-and-expert-surrogate-loss",
+    "alg-dagger",
+    "lem-dagger-mixture-occupancy",
+    "lem-dagger-task-cost-from-expert-surrogate",
+    "thm-dagger-no-regret-reduction",
+    "thm-dagger-finite-sample-generalization",
+    "ex-behavior-cloning-covariate-shift",
+    "ex-dagger-interactive-expert-labels",
+    "ex-surrogate-loss-fails-task-cost-control"
+  ],
+  "contracts": {
+    "lem-dagger-strongly-convex-follow-the-leader-regret": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Each $F_n$ is $n\\mu$-strongly convex by summing the defining inequalities, so it has at most one minimizer; the assumed attainment therefore makes every $\\theta_{n+1}$ well-defined and unique. For any comparator $v\\in K$, expand $L_i(\\theta_{i+1})=F_i(\\theta_{i+1})-F_{i-1}(\\theta_{i+1})$ and telescope to obtain $\\sum_{i=1}^N L_i(\\theta_{i+1})=F_N(\\theta_{N+1})+\\sum_{i=1}^{N-1}\\big(F_i(\\theta_{i+1})-F_i(\\theta_{i+2})\\big)\\le F_N(v)$, because $\\theta_{i+1}$ minimizes $F_i$ and $\\theta_{N+1}$ minimizes $F_N$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For $i\\ge2$, apply the midpoint strong-convexity inequality for $F_{i-1}$ to $\\theta_i$ and $\\theta_{i+1}$. Since $\\theta_i$ minimizes $F_{i-1}$, this gives $\\frac{(i-1)\\mu}{4}\\|\\theta_{i+1}-\\theta_i\\|_2^2\\le F_{i-1}(\\theta_{i+1})-F_{i-1}(\\theta_i)$. Optimality of $\\theta_{i+1}$ for $F_i=F_{i-1}+L_i$ bounds the right side by $L_i(\\theta_i)-L_i(\\theta_{i+1})$, which is at most $G\\|\\theta_{i+1}-\\theta_i\\|_2$ by Lipschitz continuity. If the distance is zero the loss difference is zero; otherwise divide by it to obtain $L_i(\\theta_i)-L_i(\\theta_{i+1})\\le4G^2/((i-1)\\mu)$.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The first difference satisfies $L_1(\\theta_1)-L_1(\\theta_2)\\le1$ because both values lie in $[0,1]$. Summing this with the bounds from step 2.1 yields $\\sum_{i=1}^N\\big(L_i(\\theta_i)-L_i(\\theta_{i+1})\\big)\\le1+\\frac{4G^2}{\\mu}H_{N-1}$. For a minimizer $v$ of $F_N$, step 1.1 gives $\\sum_iL_i(\\theta_{i+1})\\le F_N(v)$; adding that inequality proves the Statement.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameter set K is nonempty, dimension d and round count N are positive, and every cumulative minimum is attained. At N=1, H0 is expressly zero and the stability sum has no later-round terms; proof3.1 uses the bounded first loss difference, so no empty cumulative loss minimizer is selected.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The parameter set K is nonempty, dimension d and round count N are positive, and every cumulative minimum is attained. At N=1, H0 is expressly zero and the stability sum has no later-round terms; proof3.1 uses the bounded first loss difference, so no empty cumulative loss minimizer is selected."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits G=0; Lipschitz continuity makes each loss difference zero, and step 2.1 handles zero distance without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits N=1; H_0=0 and step 3.1 bounds the initial loss difference by 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits singleton K; all iterates coincide and regret is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes lambda in [0,1]; step 2.1 uses the midpoint lambda=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Attained cumulative minima and theta_1 are supplied; steps 1.1–3.1 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Bounded Lipschitz strongly convex losses with attained minima imply the stated FTL regret estimate. The result does not characterize all low-regret loss sequences by strong convexity or infer unique minima from one realized regret value.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Bounded Lipschitz strongly convex losses with attained minima imply the stated FTL regret estimate. The result does not characterize all low-regret loss sequences by strong convexity or infer unique minima from one realized regret value.",
+            "item_sha256": "1f8e57fc85682874120cf624dd8b361de7a3e0a6bdb82a8c92d1fdd4dbb14bd7",
+            "row_sha256": "6644587b0f49cd74acd33b00f692ee8a8773e60121d0bc1bfd0f1d2fb56d5660"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Bounded Lipschitz strongly convex losses with attained minima imply the stated FTL regret estimate. The result does not characterize all low-regret loss sequences by strong convexity or infer unique minima from one realized regret value.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Bounded Lipschitz strongly convex losses with attained minima imply the stated FTL regret estimate. The result does not characterize all low-regret loss sequences by strong convexity or infer unique minima from one realized regret value.",
+            "item_sha256": "1f8e57fc85682874120cf624dd8b361de7a3e0a6bdb82a8c92d1fdd4dbb14bd7",
+            "row_sha256": "91ccc0b68618c44f2a38014b63825b6a6cdc06c36c8a3d62f27861d450739cdf"
+          }
+        }
+      ]
+    },
+    "lem-finite-horizon-mdp-policy-occupancy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-markov-decision-process",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, possibly empty, let $\\mathcal R$ be a finite subset of $\\mathbb R$, and for each $s\\in S$ let $A(s)$ be a finite nonempty set. Here **finite** means bijective with a natural number, and the **discrete sigma-algebra** on a set is its power set. Write $D=\\{(s,a):s\\in S,\\ a\\in A(s)\\}$. A **finite Markov decision process (MDP)** consists of these sets and numbers $p(s',\\rho\\mid s,a)\\in[0,1]$, indexed by $(s,a)\\in D$, $s'\\in S$, and $\\rho\\in\\mathcal R$, with\n\n$$ \\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1 \\qquad ((s,a)\\in D). $$\n\nEquip each set used here, including $D$, with its power-set (discrete) sigma-algebra. Thus $p$ is the point-mass form of a probability kernel from $D$ to $S\\times\\mathcal R$: each input assigns a probability measure on $S\\times\\mathcal R$, and every event section is measurable. The joint law allows the next state and reward to be dependent. Define the expected reward and state-transition probabilities by\n\n$$ r(s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}\\rho\\,p(s',\\rho\\mid s,a), \\qquad P(s'\\mid s,a)=\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a). $$\n\nIf $\\mathcal R\\ne\\emptyset$, put $M=\\max_{\\rho\\in\\mathcal R}|\\rho|$; if $\\mathcal R=\\emptyset$, put $M=0$. A stationary Markov policy is a family of probabilities $\\pi(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\pi(a\\mid s)=1$ for every $s\\in S$. A deterministic policy is a function $\\pi$ with $\\pi(s)\\in A(s)$ for every $s$. When $S=\\emptyset$, these families and policies are the unique empty functions and all statewise formulas are vacuous.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-a-double-sum-over-finite-index-sets-may-be-interchanged",
+          "source_section": "Statement",
+          "quote": "Let $S$ and $T$ be finite sets and let $a : S \\times T \\to \\mathbb{R}$, or\n$a : S \\times T \\to \\mathbb{N}$, written $a_{ij}$ for $a(i,j)$. Then $S \\times T$\nis finite and\n\n$$\\sum_{i \\in S}\\Big(\\sum_{j \\in T} a_{ij}\\Big) \\;=\\; \\sum_{p \\in S \\times T} a_p \\;=\\; \\sum_{j \\in T}\\Big(\\sum_{i \\in S} a_{ij}\\Big),$$\n\nall three sums being the sums over a finite index set of\n[[def-sum-over-a-finite-index-set]], carried by [[def-finite-sum]] when the\nvalues are real and by [[def-nat-finite-sum-and-product]] when they are natural.\n\n**This is not a clause of [[thm-sum-rule]].** That theorem splits one sum along a\npartition of *its own* index set; the identity above exchanges the roles of two\n*different* index sets, and it is what an argument that counts a set of pairs in\ntwo ways needs. Both outer index sets may be empty, in which case all three\nquantities are $0$ (respectively $1$ for the product form of the underlying\nrecursion), since a sum over the empty index set is the empty sum.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "At $t=0$, $\\mu_0$ is nonnegative and has sum one by [A1].",
+          "inputs": [
+            "A1"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Fix $t<T$ and assume [L1]. Every term in the recursion for $\\mu_{t+1}(s')$ is nonnegative by [F1]. For each admissible $(s,a)$, [F1] and finite-sum interchange [F3] give $\\sum_{s'\\in S}P(s'\\mid s,a)=\\sum_{s'\\in S}\\sum_{\\rho\\in\\mathcal R}p(s',\\rho\\mid s,a)=1$. Interchange the finite state sums and factor constants using [F2]–[F4]: $\\sum_{s'\\in S}\\mu_{t+1}(s')=\\sum_{s'\\in S}\\sum_{s\\in S}\\sum_{a\\in A(s)}\\mu_t(s)\\pi(a\\mid s)P(s'\\mid s,a)=\\sum_{s\\in S}\\mu_t(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)\\sum_{s'\\in S}P(s'\\mid s,a)=\\sum_{s\\in S}\\mu_t(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)=\\sum_{s\\in S}\\mu_t(s)=1$. The calculation and nonnegativity prove that $\\mu_{t+1}$ is a probability vector.",
+          "inputs": [
+            "L1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Step 1.1 proves the base case and step 1.2 proves the successor case, so [F5] gives nonnegative normalized vectors $\\mu_t$ for every $0\\le t\\le T$.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Every term in $d_\\pi(s)$ is nonnegative. Summing over $s$ and using the finite-sum scaling law [F4] gives $\\sum_s d_\\pi(s)=T^{-1}\\sum_{t=0}^{T-1}\\sum_s\\mu_t(s)=T^{-1}\\sum_{t=0}^{T-1}1=1$, because there are exactly $T$ indices and $T\\ge1$. Hence $d_\\pi$ is a probability vector.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "S and every A(s) are expressly nonempty and T is at least one. The occupancy sum has exactly T normalized marginals, as used in proof3.1, so no empty time average or zero normalization is admitted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "S and every A(s) are expressly nonempty and T is at least one. The occupancy sum has exactly T normalized marginals, as used in proof3.1, so no empty time average or zero normalization is admitted."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits zero initial coordinates; steps 1.2 and 2.1 preserve nonnegativity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits T=1; step 3.1 then gives d_pi=mu_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement includes a one-state MDP; steps 1.2–3.1 still normalize."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Induction begins at t=0 and covers t=T in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses finite sums and induction only; steps 1.2–3.1 make no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The finite probability recursion preserves normalization and its T-term average is a probability vector. The lemma does not characterize all probability distributions as occupancies or require an infinite-path extension.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The finite probability recursion preserves normalization and its T-term average is a probability vector. The lemma does not characterize all probability distributions as occupancies or require an infinite-path extension.",
+            "item_sha256": "836b47b62ab685730d53a812eb9f50033e8790f41ad30ca2384484cb610f9335",
+            "row_sha256": "7fa866cd2b279a35e91bc5fbea040c2d951ad19d6381351b8129fb3e82ed1017"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The finite probability recursion preserves normalization and its T-term average is a probability vector. The lemma does not characterize all probability distributions as occupancies or require an infinite-path extension.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The finite probability recursion preserves normalization and its T-term average is a probability vector. The lemma does not characterize all probability distributions as occupancies or require an infinite-path extension.",
+            "item_sha256": "836b47b62ab685730d53a812eb9f50033e8790f41ad30ca2384484cb610f9335",
+            "row_sha256": "f4005ef30da448936e13a87129018d7cd94a04aa94014f4a9eb4e33d65128371"
+          }
+        }
+      ]
+    },
+    "def-imitation-learning-and-expert-surrogate-loss": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The MDP state/action domains, learner parameter set K and horizon-indexed policy family are nonempty, with T positive. The subset of nonexpert actions at a state may be empty, in which case its disagreement sum is zero; this does not make the learner class or occupancy law empty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The MDP state/action domains, learner parameter set K and horizon-indexed policy family are nonempty, with T positive. The subset of nonexpert actions at a state may be empty, in which case its disagreement sum is zero; this does not make the learner class or occupancy law empty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero task costs and zero disagreement; the surrogate range includes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits T=1 and the sole occupancy is the initial marginal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes deterministic policies, one-state MDPs, and singleton learner classes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits beta_i=0 and beta_i=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition constructs occupancies by finite recursion and assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The imitation setup defines occupancies, task costs and a loss upper-bounding action disagreement. It does not characterize task-cost control by an iff with a surrogate score; disagreement domination is an explicit separate requirement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The imitation setup defines occupancies, task costs and a loss upper-bounding action disagreement. It does not characterize task-cost control by an iff with a surrogate score; disagreement domination is an explicit separate requirement.",
+            "item_sha256": "fdae99fa029c28c2a39ec1fd38c795fcae1b9619aab1158db1b57b6f43b6fce0",
+            "row_sha256": "4d9d7f862ae87634df98bd73b07d3bba638d0e2346ee4bf08651f42fe8c99af1"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The imitation setup defines occupancies, task costs and a loss upper-bounding action disagreement. It does not characterize task-cost control by an iff with a surrogate score; disagreement domination is an explicit separate requirement.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The imitation setup defines occupancies, task costs and a loss upper-bounding action disagreement. It does not characterize task-cost control by an iff with a surrogate score; disagreement domination is an explicit separate requirement.",
+            "item_sha256": "fdae99fa029c28c2a39ec1fd38c795fcae1b9619aab1158db1b57b6f43b6fce0",
+            "row_sha256": "128d487eb0a10505757b90b84448b5991f4b0fd4ecd696f5bac74a60bef54823"
+          }
+        }
+      ]
+    },
+    "alg-dagger": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N,m and horizon T are positive and the learner parameter set is nonempty with attained cumulative minima. The initial aggregate D0 is intentionally empty, but theta1 is supplied and the first minimization occurs only after mT labeled visits have been appended; no loss average or FTL update is evaluated on an empty sample.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "N,m and horizon T are positive and the learner parameter set is nonempty with attained cumulative minima. The initial aggregate D0 is intentionally empty, but theta1 is supplied and the first minimization occurs only after mT labeled visits have been appended; no loss average or FTL update is evaluated on an empty sample."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits beta_i=0; the learner acts while the expert is still queried for labels."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits N=m=T=1; empirical loss is the single observed state loss."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows a singleton learner class or a unique attained minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits beta_i=0 and beta_i=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies a deterministic minimizer selector and assumes attained minima."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "DAgger specifies mixed rollouts, interactive labels and cumulative empirical FTL minimization; it does not assert equivalence between expert-only demonstrations and labels at learner-visited states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "DAgger specifies mixed rollouts, interactive labels and cumulative empirical FTL minimization; it does not assert equivalence between expert-only demonstrations and labels at learner-visited states.",
+            "item_sha256": "ca52b0f206b7f550a1482c216028b0675d49338d63dda78162a201093c474ac1",
+            "row_sha256": "af309c8659a453ea00a5182e16a73cd5b4ba94b815c78bf680800e8c944e3afb"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "DAgger specifies mixed rollouts, interactive labels and cumulative empirical FTL minimization; it does not assert equivalence between expert-only demonstrations and labels at learner-visited states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "DAgger specifies mixed rollouts, interactive labels and cumulative empirical FTL minimization; it does not assert equivalence between expert-only demonstrations and labels at learner-visited states.",
+            "item_sha256": "ca52b0f206b7f550a1482c216028b0675d49338d63dda78162a201093c474ac1",
+            "row_sha256": "d501fd7ce6e2902a463363c7f7e935dc81b36f9ad399c8138846493d1f9a8d2b"
+          }
+        }
+      ]
+    },
+    "lem-dagger-mixture-occupancy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-horizon-mdp-policy-occupancy",
+          "source_section": "Statement",
+          "quote": "Let a finite Markov decision process have a nonempty finite state set $S$ and finite nonempty action sets $A(s)$, with state transition probabilities $P(s'\\mid s,a)$ obtained by summing its joint reward-transition law over rewards. Let $T\\ge1$ be an integer, let $\\mu_0:S\\to[0,1]$ satisfy $\\sum_{s\\in S}\\mu_0(s)=1$, and let $\\pi(a\\mid s)$ be a stationary Markov policy. Define recursively\n\n$$\\mu_{t+1}(s')=\\sum_{s\\in S}\\sum_{a\\in A(s)}\\mu_t(s)\\pi(a\\mid s)P(s'\\mid s,a),\\qquad 0\\le t<T.$$\n\nThen each $\\mu_t$ is a probability vector on $S$, and the finite-horizon average occupancy\n\n$$d_\\pi(s)=\\frac1T\\sum_{t=0}^{T-1}\\mu_t(s)$$\n\nis also a probability vector. This construction uses only finite sums and does not require an infinite-path probability extension.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Put $q=1-\\beta$. The transition matrix of the mixed policy is $P_{\\pi_\\beta}=qP_{\\hat\\pi}+\\beta P_{\\pi^*}$ by finite-sum distributivity. For each $t\\le T$, we show $\\mu_t^{\\pi_\\beta}=q^t\\mu_t^{\\hat\\pi}+r_t$, where $r_t$ has nonnegative coordinates and total mass $1-q^t$. At $t=0$, take $r_0=0$. If the formula holds at $t<T$, the recursion gives $\\mu_{t+1}^{\\pi_\\beta}=q^{t+1}\\mu_{t+1}^{\\hat\\pi}+\\underbrace{q^t\\beta\\mu_t^{\\hat\\pi}P_{\\pi^*}+r_tP_{\\pi_\\beta}}_{r_{t+1}}$. The two terms defining $r_{t+1}$ have nonnegative coordinates, and their total masses are $q^t\\beta$ and $1-q^t$, so $r_{t+1}$ has mass $1-q^{t+1}$. Induction proves the decomposition for every $t\\le T$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Since $0\\le q\\le1$, for each $t<T$ one has $q^t\\ge q^T$. Thus $r'_t:=r_t+(q^t-q^T)\\mu_t^{\\hat\\pi}$ is nonnegative and has mass $1-q^T$. Averaging over $t=0,\\ldots,T-1$ gives $d_{\\pi_\\beta}=q^T d_{\\hat\\pi}+r'$, where $r'=T^{-1}\\sum_{t<T}r'_t$ has mass $1-q^T$. If $1-q^T>0$, normalize $r'$ to a probability vector $\\nu$; then for $g:S\\to[0,1]$ the difference of expectations is $(1-q^T)(\\sum_s\\nu(s)g(s)-\\sum_s d_{\\hat\\pi}(s)g(s))$, whose absolute value is at most $1-q^T$. If $1-q^T=0$, the occupancies are equal and the same bound is zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The Bernoulli inequality $q^T=(1-\\beta)^T\\ge1-T\\beta$ follows by induction: it is equality at $T=0$, and multiplying $q^n\\ge1-n\\beta$ by $q\\ge0$ gives $q^{n+1}\\ge(1-n\\beta)(1-\\beta)=1-(n+1)\\beta+n\\beta^2\\ge1-(n+1)\\beta$. Also $1-q^T\\le1$, so $1-q^T\\le\\min\\{1,T\\beta\\}$. Combining this with step 2.1 proves the Statement.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The horizon T is positive and finite state/action sets and initial probability vector are nonempty. Thus the T-normalized occupancy average exists. When the residual mixing mass is zero, proof2.1 handles it without normalizing by zero; it is a zero residual measure, not an empty state space.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The horizon T is positive and finite state/action sets and initial probability vector are nonempty. Thus the T-normalized occupancy average exists. When the residual mixing mass is zero, proof2.1 handles it without normalizing by zero; it is a zero residual measure, not an empty state space."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows beta=0; step 2.1 gives equal occupancies and zero difference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows beta=1; step 2.1 bounds two [0,1]-valued expectations by 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement allows T=1; step 2.1 compares the initial-state mixture directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement allows beta=0, beta=1, and g values 0 and 1; steps 2.1 and 3.1 include them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use finite probability vectors and scalar normalization only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Per-decision expert mixing implies an absolute occupancy-expectation error at most the mixing mass and T beta. This one-way estimate is not a converse identifying expert-use probability from matching state distributions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Per-decision expert mixing implies an absolute occupancy-expectation error at most the mixing mass and T beta. This one-way estimate is not a converse identifying expert-use probability from matching state distributions.",
+            "item_sha256": "0c9dade436cfbeee1c77a258400f03e8f613e4c17d2ffbd24d780042c8cdf928",
+            "row_sha256": "d38345b8735cae4b4c7807507414d05af49d795719d027bdc1f373942f1598f8"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Per-decision expert mixing implies an absolute occupancy-expectation error at most the mixing mass and T beta. This one-way estimate is not a converse identifying expert-use probability from matching state distributions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Per-decision expert mixing implies an absolute occupancy-expectation error at most the mixing mass and T beta. This one-way estimate is not a converse identifying expert-use probability from matching state distributions.",
+            "item_sha256": "0c9dade436cfbeee1c77a258400f03e8f613e4c17d2ffbd24d780042c8cdf928",
+            "row_sha256": "1105002e7b65b36ed12b47e67fe104baee94c02e529129a62767ff991746e216"
+          }
+        }
+      ]
+    },
+    "lem-dagger-task-cost-from-expert-surrogate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For k=0,...,T, let rho_t^(k)=pi_theta for t<k and pi* for t>=k. Fact [F2] defines the finite-horizon cost J(rho^(k)) for these time-dependent policies. Then J(rho^(0))=J(pi*) and J(rho^(T))=J(pi_theta), so telescoping gives J(pi_theta)-J(pi*)=sum_{k=0}^{T-1}(J(rho^(k+1))-J(rho^(k))).",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The two hybrid policies in the kth difference have the same state distribution mu_k^pi_theta at time k. One takes the learner action at time k and the other the expert action; both follow the expert afterward. The finite-horizon cost recursion [F2] and Q_k^* give J(rho^(k+1))-J(rho^(k))=sum_s mu_k^pi_theta(s) sum_a pi_theta(a|s)(Q_k^*(s,a)-V_k^*(s)).",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For $a=\\pi^*(s)$ the cost-to-go difference in step 2.1 is zero by the definition of $V_k^*$. For every other action it is at most $u$ by [A1]. Therefore each inner sum in step 2.1 is at most $u\\sum_{a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)\\le u\\ell(s,\\theta)$ by [A2].",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Sum step 3.1 over $k=0,\\ldots,T-1$ and use $d_{\\pi_\\theta}=T^{-1}\\sum_{k<T}\\mu_k^{\\pi_\\theta}$ from [F1]. The result is $J(\\pi_\\theta)-J(\\pi^*)\\le u\\sum_{k<T}\\sum_s\\mu_k^{\\pi_\\theta}(s)\\ell(s,\\theta)=uT\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$, as claimed.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The finite MDP and T-normalized occupancy have positive-size domains, but the nonexpert-action subset may be empty at a state with only the expert action. In proof3.1 its sum is zero and the expert-action cost-to-go difference is zero, so the state contributes no increase without any division by that subset size.",
+          "evidence": "Proof step 3.1 separates the expert action, whose expert cost-to-go gap is zero, from the sum over other actions. When no other action exists that finite sum is zero, so the state contribution is zero without dividing by a number of nonexpert actions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits u=0; step 3.1 bounds every hybrid increment by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits T=1; steps 1.1–4.1 then have one hybrid difference."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the learner agrees everywhere with the expert, step 3.1 gives equal task cost."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At the expert action the cost-to-go gap is zero in step 3.1; u may also be zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof use finite hybrid and state/action sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniform expert cost-to-go control and statewise disagreement domination imply the learner task-cost increase bound. The lemma asserts no converse from low task cost to low surrogate loss, and the hypotheses apply beyond expert-reached states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Uniform expert cost-to-go control and statewise disagreement domination imply the learner task-cost increase bound. The lemma asserts no converse from low task cost to low surrogate loss, and the hypotheses apply beyond expert-reached states.",
+            "item_sha256": "3dbde3c93db822656b70b906893c9296c3719ecb67383a31697a9333dc2e7dc0",
+            "row_sha256": "08d9cc691268e4643b2fa8cd60cbc8b63df738f6dd10a4768f6bf5669c3ca2b3"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Uniform expert cost-to-go control and statewise disagreement domination imply the learner task-cost increase bound. The lemma asserts no converse from low task cost to low surrogate loss, and the hypotheses apply beyond expert-reached states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Uniform expert cost-to-go control and statewise disagreement domination imply the learner task-cost increase bound. The lemma asserts no converse from low task cost to low surrogate loss, and the hypotheses apply beyond expert-reached states.",
+            "item_sha256": "3dbde3c93db822656b70b906893c9296c3719ecb67383a31697a9333dc2e7dc0",
+            "row_sha256": "3ef607e0232d7ee1b816231c0c224bd174edb9f9bbd846459847eaf5319e8109"
+          }
+        }
+      ]
+    },
+    "thm-dagger-no-regret-reduction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-dagger",
+          "source_section": "Definition",
+          "quote": "Let a finite-horizon imitation-learning problem have the finite MDP, initial state distribution, positive integer horizon $T$, deterministic expert $\\pi^*$, learner class $\\{\\pi_\\theta:\\theta\\in K\\}$, and expert surrogate loss $\\ell(s,\\theta)$ defined previously. Let $N\\ge1$ and $m\\ge1$ be integers giving the number of training rounds and trajectories per round, let $\\beta_1,\\ldots,\\beta_N\\in[0,1]$ be expert-use probabilities, supply an initial parameter $\\theta_1\\in K$, and supply a deterministic selector for attained minimizers of the cumulative losses. Require that each cumulative training-loss function below attains a minimum on $K$; when the minimizer is unique the selector returns it.\n\nInitialize the aggregated training dataset as the empty multiset $\\mathcal D_0=\\varnothing$.\n\nFor each round $i=1,\\ldots,N$:\n\n1. Set $\\hat\\pi_i=\\pi_{\\theta_i}$. For the rollout policy, at each decision time of every trajectory, independently draw an expert-use coin with success probability $\\beta_i$. At current state $s$, if the coin succeeds, execute $\\pi^*(s)$; otherwise sample an action from $\\hat\\pi_i(\\cdot\\mid s)$ and execute it. This per-decision stochastic policy is $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$.\n2. Run $m$ trajectories of length $T$ from the specified initial distribution using $\\pi_i$. At every visited state $S_{ij t}$, for $1\\le j\\le m$ and $0\\le t<T$, query and record the expert label $\\pi^*(S_{ij t})$. Append these labeled pairs to $\\mathcal D_{i-1}$, with multiplicity, to form $\\mathcal D_i$. The expert label is recorded for training and is not executed unless the mixture in step 1 selected the expert.\n3. Define the empirical round loss on every candidate parameter by\n\n   $$\\hat L_i(\\theta)=\\frac1{mT}\\sum_{j=1}^m\\sum_{t=0}^{T-1}\\ell(S_{ij t},\\theta).$$\n\n4. Update by Follow-the-Leader on the cumulative empirical loss: set $\\theta_{i+1}$ to the supplied selector's choice from $\\arg\\min_{\\theta\\in K}\\sum_{r=1}^i\\hat L_r(\\theta)$.\n\nThe finite-sample output is the sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ and the aggregated labeled multiset $\\mathcal D_N$. The population-loss idealization replaces each empirical $\\hat L_i$ by $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$; it is used only for the infinite-sample theorem. The procedure requires an interactive expert capable of labeling learner-visited states.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dagger-strongly-convex-follow-the-leader-regret",
+          "source_section": "Statement",
+          "quote": "Let $d,N\\ge1$ be integers, let $K\\subseteq\\mathbb R^d$ be nonempty and convex, and define $\\|x-y\\|_2=(\\sum_{r=1}^d(x_r-y_r)^2)^{1/2}$. Let $G\\ge0$ and $\\mu>0$. For each $i=1,\\ldots,N$, let $L_i:K\\to[0,1]$ be $G$-Lipschitz, meaning $|L_i(x)-L_i(y)|\\le G\\|x-y\\|_2$, and $\\mu$-strongly convex, meaning\n\n$$L_i((1-\\lambda)x+\\lambda y)\\le(1-\\lambda)L_i(x)+\\lambda L_i(y)-\\frac{\\mu}{2}\\lambda(1-\\lambda)\\|x-y\\|_2^2$$\n\nfor all $x,y\\in K$ and $\\lambda\\in[0,1]$. For $n=1,\\ldots,N$, assume $F_n:=\\sum_{i=1}^nL_i$ attains a minimum on $K$. Let $\\theta_1\\in K$ and, for $n=1,\\ldots,N$, let $\\theta_{n+1}$ be the unique minimizer of $F_n$. Define $H_0=0$ and $H_n=\\sum_{j=1}^n1/j$ for $n\\ge1$. Then\n\n$$\\sum_{i=1}^N L_i(\\theta_i)-\\min_{\\theta\\in K}\\sum_{i=1}^NL_i(\\theta)\\le1+\\frac{4G^2}{\\mu}H_{N-1}.$$\n\nThe minimizers are unique because $F_n$ is $n\\mu$-strongly convex. The first policy $\\theta_1$ may be any supplied point of $K$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-dagger-mixture-occupancy",
+          "source_section": "Statement",
+          "quote": "Let a finite-horizon MDP have positive integer horizon $T$, and let $\\pi^*$ and $\\hat\\pi$ be stationary Markov policies. For a stationary policy $\\pi$, define its state transition matrix by $P_\\pi(s,s')=\\sum_{a\\in A(s)}\\pi(a\\mid s)P(s'\\mid s,a)$; for a state vector $\\mu$, define $(\\mu P_\\pi)(s')=\\sum_{s\\in S}\\mu(s)P_\\pi(s,s')$. Fix $\\beta\\in[0,1]$ and let $\\pi_\\beta(a\\mid s)=\\beta\\pi^*(a\\mid s)+(1-\\beta)\\hat\\pi(a\\mid s)$, which is the per-decision expert/learner mixture. For every function $g:S\\to[0,1]$, its finite-horizon average occupancies satisfy\n\n$$\\left|\\sum_{s\\in S}d_{\\pi_\\beta}(s)g(s)-\\sum_{s\\in S}d_{\\hat\\pi}(s)g(s)\\right|\\le1-(1-\\beta)^T\\le\\min\\{1,T\\beta\\}.$$\n\nHere $d_\\pi=T^{-1}\\sum_{t=0}^{T-1}\\mu_t^\\pi$ is the normalized average of the state marginals from the common initial distribution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-dagger-task-cost-from-expert-surrogate",
+          "source_section": "Statement",
+          "quote": "Let a finite-horizon MDP, horizon $T\\ge1$, initial distribution, deterministic expert $\\pi^*$, learner policy $\\pi_\\theta$, task cost $J$, expert cost-to-go $Q_t^*$, expert value $V_t^*(s)=Q_t^*(s,\\pi^*(s))$, occupancy $d_{\\pi_\\theta}$, and surrogate $\\ell(s,\\theta)$ be as defined previously. Suppose $u\\ge0$ and\n\n$$Q_t^*(s,a)-V_t^*(s)\\le u$$\n\nfor every time $0\\le t<T$, state $s\\in S$, and admissible action $a\\in A(s)$, and suppose $\\ell(s,\\theta)\\ge\\sum_{a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$ for every state. Then\n\n$$J(\\pi_\\theta)-J(\\pi^*)\\le uT\\sum_{s\\in S}d_{\\pi_\\theta}(s)\\ell(s,\\theta).$$\n\nThe one-step cost-to-go bound is required at all states and times, including states not reached by the expert.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Since $L_i$ is the finite probability-weighted average of the statewise losses, averaging the uniform strong-convexity inequality and the $G$-Lipschitz inequality in [A1] over $d_{\\pi_i}$ shows that each $L_i$ is $\\mu$-strongly convex, $G$-Lipschitz, and valued in $[0,1]$. The exact FTL updates [F2], attained minima [A2], and bound [F3] therefore give $\\frac1N\\sum_{i=1}^NL_i(\\theta_i)\\le\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}{N}$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Let $q=1-\\alpha$ and $k=k_\\alpha$. Since $(1-\\alpha)(1+\\alpha)=1-\\alpha^2\\le1$, $q\\le(1+\\alpha)^{-1}$. For every integer $n\\ge1$, $(1+\\alpha)^n\\ge1+n\\alpha$: it is equality at $n=1$, and multiplying the inductive inequality by $1+\\alpha>0$ gives $(1+\\alpha)^{n+1}\\ge1+(n+1)\\alpha+n\\alpha^2\\ge1+(n+1)\\alpha$. Thus $(1+\\alpha)^k\\ge1+k\\alpha\\ge2$ and $q^k\\le1/2$. Partition indices $i$ into blocks $i=jk+r+1$ with $j\\ge0$ and $0\\le r<k$. On block $j$, [A3] gives $\\min(1,T\\beta_i)\\le\\min(1,Tq^{jk})\\le\\min(1,T2^{-j})$. Hence $\\sum_{i=1}^N\\min(1,T\\beta_i)\\le k\\sum_{j=0}^{\\infty}\\min(1,T2^{-j})\\le k(q_T+2)$, because the first $q_T+1$ terms are at most $1$ and the remaining geometric tail is $T\\sum_{j=q_T+1}^{\\infty}2^{-j}=T2^{-q_T}\\le1$.",
+          "inputs": [
+            "A3",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "For every positive integer $n$, let $q_n$ be the least nonnegative integer with $n\\le2^{q_n}$. If $N=1$, then $H_{N-1}=0\\le1+q_N$. If $N\\ge2$, group $H_{N-1}$ into the initial term $1$ and blocks $2^{j-1}<r\\le2^j$, $1\\le j\\le q_N$. Each block has at most $2^{j-1}$ terms, each at most $2^{-(j-1)}$, so $H_{N-1}\\le1+q_N$. These dyadic lengths grow logarithmically in their arguments.",
+          "inputs": [
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each round, apply the absolute-value estimate [F4] to $g(s)=\\ell(s,\\theta_i)\\in[0,1]$, using its direction $\\sum_s d_{\\hat\\pi_i}(s)g(s)\\le L_i(\\theta_i)+\\min(1,T\\beta_i)$. Averaging over $i$ and using step 1.1 yields $\\frac1N\\sum_{i=1}^N\\sum_s d_{\\hat\\pi_i}(s)\\ell(s,\\theta_i)\\le\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}N+\\frac1N\\sum_{i=1}^N\\min(1,T\\beta_i)$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "By step 1.2 and step 2.1, the average own-occupancy surrogate loss of the finite sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ is at most $\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)}N$. At least one member $\\hat\\pi_i$ has own-occupancy surrogate loss no larger than this average, because otherwise every term in the finite average would be strictly larger than the average.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Apply the one-step assumption [A4] through [F5] to that index $i$ and substitute the bound from step 3.1. This gives the stated task-cost inequality.",
+          "inputs": [
+            "A4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "If $N\\ge uT\\bigl(1+\\frac{4G^2}{\\mu}H_{N-1}+k_\\alpha(q_T+2)\\bigr)$, then the additive term in the Statement is at most $1$. To verify the iteration order, set $\\bar u=\\max(1,u)$ and $B=\\bar uT\\ge1$; let $b=\\lceil B\\rceil$ and let $Q$ be the least integer with $b+T+2\\le2^Q$. Choose an integer $C\\ge1$ and set $N=\\lceil CbQ\\rceil$. Since $b\\le2^Q$ and $Q\\le2^Q$, $N\\le(C+1)2^{2Q}$, so the least $q_N$ with $N\\le2^{q_N}$ satisfies $q_N\\le2Q+q_{C+1}$. By step 1.3 and $q_T\\le Q$, the bracket is at most $1+\\frac{4G^2}{\\mu}(2Q+q_{C+1}+1)+k_\\alpha(Q+2)$. Set $c=4G^2/\\mu$, $a=2c+k_\\alpha$, $b_0=c$, and $b_1=1+c+2k_\\alpha$; the bracket bound equals $aQ+b_0q_{C+1}+b_1$. Choose an integer $r\\ge2$ so large that $r(r-1)/2\\ge a+b_0(r+1)+b_1$; such an $r$ exists because the left side is quadratic with positive leading coefficient and the right side is affine in $r$. The binomial theorem gives $C:=2^r\\ge r(r-1)/2$, while $C+1\\le2^{r+1}$ gives $q_{C+1}\\le r+1$. Hence $C\\ge a+b_0q_{C+1}+b_1$. Since $Q\\ge1$ and $a,b_0,b_1\\ge0$, $CQ\\ge(a+b_0q_{C+1}+b_1)Q\\ge aQ+b_0q_{C+1}+b_1$; as $b\\ge B$, this gives $N\\ge CbQ\\ge B(aQ+b_0q_{C+1}+b_1)$. Thus $N\\ge\\bar uT$ times the bracket, which also implies the required inequality with $u$. Moreover $Q=O(\\log(B+2))$, so $N=O(B\\log(B+2))=\\widetilde O(\\bar uT)$. When $u\\ge1$, this is $\\widetilde O(uT)$; if $u<1$, replacing it by $\\bar u=1$ is a valid upper-bound normalization for the iteration count. The estimate retains the hindsight optimum $\\epsilon_N$ and assumes no realizability condition $\\pi^*\\in\\Pi$.",
+          "inputs": [
+            "A1",
+            "A3",
+            "A4",
+            "step 1.3",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The learner parameter set is nonempty, the horizon T and population round count N are positive, and the hindsight minimum is attained. The learned-policy list therefore contains a member for the average-selection argument; N=1 uses H0=0 rather than requiring a nonexistent later-round harmonic term.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The learner parameter set is nonempty, the horizon T and population round count N are positive, and the hindsight minimum is attained. The learned-policy list therefore contains a member for the average-selection argument; N=1 uses H0=0 rather than requiring a nonexistent later-round harmonic term."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits u=0; step 4.1 gives J(hat_pi_i)≤J(pi*) for the selected iterate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits N=T=1; H_0=0 and q_T=0 in steps 1.3 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits alpha=1; step 1.2 has q=0 and later expert-use probabilities vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes alpha=1 and beta_1=0 or 1; step 1.2 handles these endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes all minima attained and supplies exact FTL updates; its population proof is finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Population FTL regret, the expert-mixture occupancy estimate and the uniform cost-to-go premise imply that one learned policy satisfies the task bound. It does not conversely identify no-regret dynamics from one policy return or turn this infinite-sample guarantee into a finite-sample theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Population FTL regret, the expert-mixture occupancy estimate and the uniform cost-to-go premise imply that one learned policy satisfies the task bound. It does not conversely identify no-regret dynamics from one policy return or turn this infinite-sample guarantee into a finite-sample theorem.",
+            "item_sha256": "33ccf4148798ba8f69b6d8fa5db5f1384c23bcc3ef2162efbc08e36c72e3eb3f",
+            "row_sha256": "de2210dbb9d797968c8f41f5d563803552ccb01c4ebd52f1e7d21d68620bc25e"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Population FTL regret, the expert-mixture occupancy estimate and the uniform cost-to-go premise imply that one learned policy satisfies the task bound. It does not conversely identify no-regret dynamics from one policy return or turn this infinite-sample guarantee into a finite-sample theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Population FTL regret, the expert-mixture occupancy estimate and the uniform cost-to-go premise imply that one learned policy satisfies the task bound. It does not conversely identify no-regret dynamics from one policy return or turn this infinite-sample guarantee into a finite-sample theorem.",
+            "item_sha256": "33ccf4148798ba8f69b6d8fa5db5f1384c23bcc3ef2162efbc08e36c72e3eb3f",
+            "row_sha256": "82878984b9e406799f869c2779fa0a5a9888d2a92dc5b70a9f144c3845246e4b"
+          }
+        }
+      ]
+    },
+    "thm-dagger-finite-sample-generalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-dagger",
+          "source_section": "Definition",
+          "quote": "Let a finite-horizon imitation-learning problem have the finite MDP, initial state distribution, positive integer horizon $T$, deterministic expert $\\pi^*$, learner class $\\{\\pi_\\theta:\\theta\\in K\\}$, and expert surrogate loss $\\ell(s,\\theta)$ defined previously. Let $N\\ge1$ and $m\\ge1$ be integers giving the number of training rounds and trajectories per round, let $\\beta_1,\\ldots,\\beta_N\\in[0,1]$ be expert-use probabilities, supply an initial parameter $\\theta_1\\in K$, and supply a deterministic selector for attained minimizers of the cumulative losses. Require that each cumulative training-loss function below attains a minimum on $K$; when the minimizer is unique the selector returns it.\n\nInitialize the aggregated training dataset as the empty multiset $\\mathcal D_0=\\varnothing$.\n\nFor each round $i=1,\\ldots,N$:\n\n1. Set $\\hat\\pi_i=\\pi_{\\theta_i}$. For the rollout policy, at each decision time of every trajectory, independently draw an expert-use coin with success probability $\\beta_i$. At current state $s$, if the coin succeeds, execute $\\pi^*(s)$; otherwise sample an action from $\\hat\\pi_i(\\cdot\\mid s)$ and execute it. This per-decision stochastic policy is $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$.\n2. Run $m$ trajectories of length $T$ from the specified initial distribution using $\\pi_i$. At every visited state $S_{ij t}$, for $1\\le j\\le m$ and $0\\le t<T$, query and record the expert label $\\pi^*(S_{ij t})$. Append these labeled pairs to $\\mathcal D_{i-1}$, with multiplicity, to form $\\mathcal D_i$. The expert label is recorded for training and is not executed unless the mixture in step 1 selected the expert.\n3. Define the empirical round loss on every candidate parameter by\n\n   $$\\hat L_i(\\theta)=\\frac1{mT}\\sum_{j=1}^m\\sum_{t=0}^{T-1}\\ell(S_{ij t},\\theta).$$\n\n4. Update by Follow-the-Leader on the cumulative empirical loss: set $\\theta_{i+1}$ to the supplied selector's choice from $\\arg\\min_{\\theta\\in K}\\sum_{r=1}^i\\hat L_r(\\theta)$.\n\nThe finite-sample output is the sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ and the aggregated labeled multiset $\\mathcal D_N$. The population-loss idealization replaces each empirical $\\hat L_i$ by $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$; it is used only for the infinite-sample theorem. The procedure requires an interactive expert capable of labeling learner-visited states.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dagger-strongly-convex-follow-the-leader-regret",
+          "source_section": "Statement",
+          "quote": "Let $d,N\\ge1$ be integers, let $K\\subseteq\\mathbb R^d$ be nonempty and convex, and define $\\|x-y\\|_2=(\\sum_{r=1}^d(x_r-y_r)^2)^{1/2}$. Let $G\\ge0$ and $\\mu>0$. For each $i=1,\\ldots,N$, let $L_i:K\\to[0,1]$ be $G$-Lipschitz, meaning $|L_i(x)-L_i(y)|\\le G\\|x-y\\|_2$, and $\\mu$-strongly convex, meaning\n\n$$L_i((1-\\lambda)x+\\lambda y)\\le(1-\\lambda)L_i(x)+\\lambda L_i(y)-\\frac{\\mu}{2}\\lambda(1-\\lambda)\\|x-y\\|_2^2$$\n\nfor all $x,y\\in K$ and $\\lambda\\in[0,1]$. For $n=1,\\ldots,N$, assume $F_n:=\\sum_{i=1}^nL_i$ attains a minimum on $K$. Let $\\theta_1\\in K$ and, for $n=1,\\ldots,N$, let $\\theta_{n+1}$ be the unique minimizer of $F_n$. Define $H_0=0$ and $H_n=\\sum_{j=1}^n1/j$ for $n\\ge1$. Then\n\n$$\\sum_{i=1}^N L_i(\\theta_i)-\\min_{\\theta\\in K}\\sum_{i=1}^NL_i(\\theta)\\le1+\\frac{4G^2}{\\mu}H_{N-1}.$$\n\nThe minimizers are unique because $F_n$ is $n\\mu$-strongly convex. The first policy $\\theta_1$ may be any supplied point of $K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-dagger-mixture-occupancy",
+          "source_section": "Statement",
+          "quote": "Let a finite-horizon MDP have positive integer horizon $T$, and let $\\pi^*$ and $\\hat\\pi$ be stationary Markov policies. For a stationary policy $\\pi$, define its state transition matrix by $P_\\pi(s,s')=\\sum_{a\\in A(s)}\\pi(a\\mid s)P(s'\\mid s,a)$; for a state vector $\\mu$, define $(\\mu P_\\pi)(s')=\\sum_{s\\in S}\\mu(s)P_\\pi(s,s')$. Fix $\\beta\\in[0,1]$ and let $\\pi_\\beta(a\\mid s)=\\beta\\pi^*(a\\mid s)+(1-\\beta)\\hat\\pi(a\\mid s)$, which is the per-decision expert/learner mixture. For every function $g:S\\to[0,1]$, its finite-horizon average occupancies satisfy\n\n$$\\left|\\sum_{s\\in S}d_{\\pi_\\beta}(s)g(s)-\\sum_{s\\in S}d_{\\hat\\pi}(s)g(s)\\right|\\le1-(1-\\beta)^T\\le\\min\\{1,T\\beta\\}.$$\n\nHere $d_\\pi=T^{-1}\\sum_{t=0}^{T-1}\\mu_t^\\pi$ is the normalized average of the state marginals from the common initial distribution.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-azuma-hoeffding-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(M_k,\\mathcal F_k)_{k=0}^n$ be a martingale. Suppose finite $\\mathcal F_{k-1}$-measurable $A_k,B_k$ and deterministic $c_k\\ge0$ satisfy\n$$A_k\\le M_k-M_{k-1}\\le B_k,\\qquad B_k-A_k\\le c_k$$\nalmost surely. Then for every $t>0$,\n$$\\mathbb P(M_n-M_0\\ge t)\\le \\exp\\!\\left(-\\frac{2t^2}{\\sum_{k=1}^n c_k^2}\\right),$$\nand the analogous lower-tail bound holds, with the zero-denominator expression interpreted as $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-martingale-difference-sequence",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] for conditional-expectation existence. A **martingale difference sequence** relative to $(\\mathcal F_n)_{n\\ge0}$ is a sequence $(D_n)_{n\\ge1}$ of real integrable variables such that $D_n$ is $\\mathcal F_n$-measurable and\n$$E[D_n\\mid\\mathcal F_{n-1}]=0\\quad\\text{a.s. for every }n\\ge1.$$\nIntegrability and adaptedness have the timewise meanings of [[def-adapted-and-integrable-stochastic-process]]. Conditional expectations have the class convention of [[def-conditional-expectation-as-an-ae-class]], which is the exact inherited use of AC here. No representative is selected by this definition. There is no $D_0$, and $\\mathcal F_0$ need not be trivial or generated by the differences.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-martingales-and-martingale-differences-correspond",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $M$ is a martingale, then $D_n=M_n-M_{n-1}$, $n\\ge1$, is a martingale difference sequence. Conversely, given a martingale difference sequence $D$ and any integrable $\\mathcal F_0$-measurable real $M_0$, the process $M_n=M_0+\\sum_{k=1}^nD_k$ is a martingale. For fixed $M_0$ these constructions are inverse.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]]. An integrable adapted real process $X$ [[def-adapted-and-integrable-stochastic-process]] is a **martingale**, **submartingale**, or **supermartingale** when, respectively, for every $n\\ge0$,\n$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$\nThese are three separate conditions, with the convention that a submartingale has conditional future mean at least its present value. The conditional expectations are the almost-sure classes of [[def-conditional-expectation-as-an-ae-class]]; that supplier inherits AC from its Radon–Nikodym existence proof. The definition itself selects no representative and assumes no completed filtration.\n\nThe condition is imposed at each adjacent pair of times. An all-pairs formulation requires a proof. No boundedness or independence is part of this definition, and no trivial or deterministic initial value is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For any realized sample sequence, $\\hat L_i$ is a finite average of functions $\\ell(S_{ijt},\\cdot)$, so [A1] makes it $[0,1]$-valued, $G$-Lipschitz, and $\\mu$-strongly convex on $K$. By [F2] and [A2], the iterates are exact FTL iterates and the hindsight minimum is attained. Applying [F3] samplewise gives $\\frac1N\\sum_{i=1}^N\\hat L_i(\\theta_i)\\le\\hat\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}N$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Flatten the pairs $(i,j)$ in round-major order. Put $\\mathcal G_0=\\mathcal F_{1,0}$ and, for $r=(i-1)m+j$ with $1\\le i\\le N$ and $1\\le j\\le m$, put $\\mathcal G_r=\\mathcal F_{i,j}$; for every $r>mN$, put $\\mathcal G_r=\\mathcal G_{mN}$. Within each round the sigma-algebras are nested, and at round boundaries $\\mathcal F_{i,0}=\\mathcal F_{i-1,m}$, so $(\\mathcal G_r)_{r\\ge0}$ is an infinite filtration. Define $D_{(i-1)m+j}=L_i(\\theta_i)-\\bar\\ell_{ij}(\\theta_i)$ for the sample indices and set $D_r=0$ for $r>mN$. For each fixed round $i$, the policy probabilities are Borel functions of $\\theta$, the finite occupancy recursion uses only finite sums and products, and $\\ell(s,\\cdot)$ is continuous by its Lipschitz property. Thus [F15] makes $L_i(\\theta)$ Borel, so $L_i(\\theta_i)$ is measurable with respect to $\\mathcal G_{(i-1)m}=\\mathcal F_{i,0}$ and hence with respect to each $\\mathcal G_{r-1}$ in round $i$. Since the state set is finite and each statewise loss is continuous, $(s,\\theta)\\mapsto\\ell(s,\\theta)$ is measurable; the revealed states and preceding measurable parameter therefore make each $\\bar\\ell_{ij}(\\theta_i)$ measurable with respect to $\\mathcal G_r$. By [A1] and the probability-occupancy property in [F1], both $L_i(\\theta_i)$ and $\\bar\\ell_{ij}(\\theta_i)$ lie in $[0,1]$, so each sample increment is integrable and in $[-1,1]$; the zero extension has the same properties. For $r=(i-1)m+j\\le mN$, [A3], [F13], and [F14] give $\\mathbb E[D_r\\mid\\mathcal G_{r-1}]=L_i(\\theta_i)-L_i(\\theta_i)=0$. For $r>mN$, [F14] gives $\\mathbb E[0\\mid\\mathcal G_{r-1}]=0$. Thus $D$ is an infinite adapted martingale-difference sequence by [F6], using the filtration and process conventions [F8, F9, F11].",
+          "inputs": [
+            "A1",
+            "A3",
+            "F1",
+            "F6",
+            "F8",
+            "F9",
+            "F11",
+            "F13",
+            "F14",
+            "F15",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Put $q=1-\\alpha$ and $k=k_\\alpha$. For every integer $n\\ge1$, $(1+\\alpha)^n\\ge1+n\\alpha$: equality holds for $n=1$, and if it holds for $n$, then multiplication by $1+\\alpha>0$ gives $(1+\\alpha)^{n+1}\\ge(1+n\\alpha)(1+\\alpha)=1+(n+1)\\alpha+n\\alpha^2\\ge1+(n+1)\\alpha$. Thus [F16] gives $(1+\\alpha)^k\\ge1+k\\alpha\\ge2$. Also $q(1+\\alpha)=1-\\alpha^2\\le1$, so $q\\le(1+\\alpha)^{-1}$ and $q^k\\le1/2$. For block $j\\ge0$, let $I_j=\\{jk+1,\\ldots,(j+1)k\\}$. If $j=0$, [A4] gives $\\beta_1\\le1=q^0$ and $\\beta_i\\le q^{i-1}\\le1$ for the other indices; if $j\\ge1$, every $i\\in I_j$ satisfies $\\beta_i\\le q^{i-1}\\le q^{jk}$. Thus each block contributes at most $k\\min(1,T2^{-j})$. Let $J=\\lceil N/k\\rceil-1$, so the blocks $j=0,\\ldots,J$ cover all sample indices. Their terms with $j\\le q_T$ contribute at most $q_T+1$ inside the sum over blocks. If $J\\ge q_T+1$, the identity $2^{-j}=2^{-(j-1)}-2^{-j}$ telescopes to $\\sum_{j=q_T+1}^{J}2^{-j}=2^{-q_T}-2^{-J}\\le2^{-q_T}$; if $J<q_T+1$, this tail is empty. Hence the remaining block contribution is at most $T2^{-q_T}\\le1$, and $\\sum_{i=1}^N\\min(1,T\\beta_i)\\le k_\\alpha(q_T+2)$.",
+          "inputs": [
+            "A4",
+            "F16",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F7], $M_0=0$ and $M_r=\\sum_{k=1}^rD_k$ form a martingale on the infinite filtration $(\\mathcal G_r)$. Its restriction to $r=0,\\ldots,mN$ is the finite martingale required by [F5]. Each of its first $mN$ increments has predictable endpoints $-1$ and $1$, of width $2$, so [F5] and the AC hypothesis [F12] give $\\mathbb P(M_{mN}\\ge t)\\le\\exp(-t^2/(2mN))$. Taking $t=\\sqrt{2mN\\ln(1/\\delta)}$ makes this probability at most $\\delta$. Since $M_{mN}=m\\sum_{i=1}^N(L_i(\\theta_i)-\\hat L_i(\\theta_i))$, outside that event $\\frac1N\\sum_iL_i(\\theta_i)\\le\\frac1N\\sum_i\\hat L_i(\\theta_i)+\\sqrt{\\frac{2\\ln(1/\\delta)}{mN}}$.",
+          "inputs": [
+            "A3",
+            "F5",
+            "F7",
+            "F10",
+            "F12",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "On the event from step 2.1, combine its mixed-policy loss bound with step 1.1 to obtain $\\frac1N\\sum_iL_i(\\theta_i)\\le\\hat\\epsilon_N+\\frac{1+\\frac{4G^2}{\\mu}H_{N-1}}N+\\sqrt{\\frac{2\\ln(1/\\delta)}{mN}}$.",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Apply both directions of the absolute occupancy estimate [F4] with $g(s)=\\ell(s,\\theta_i)$, giving $\\sum_sd_{\\hat\\pi_i}(s)\\ell(s,\\theta_i)\\le L_i(\\theta_i)+\\min(1,T\\beta_i)$. Average over $i$ and use step 3.1 and step 1.3. At least one of the $N$ own-occupancy losses is no larger than their average, so on the event of step 2.1 some $i$ satisfies the displayed inequality in the Statement. Its probability is at least $1-\\delta$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "For the rate claim, set $L=\\ln(1/\\delta)\\ge\\ln2$ and choose a fixed $C\\ge3/\\ln2$, so $N_0=CT^2L\\ge3>e$. With $c=4G^2/\\mu$, for $N\\ge2$ we have $H_{N-1}=1+\\sum_{r=2}^{N-1}1/r\\le1+\\sum_{r=2}^{N-1}\\int_{r-1}^r dx/x=1+\\ln(N-1)\\le1+\\ln N$, with the sum empty when $N=2$. The derivative of $x\\mapsto[1+c(1+\\ln x)]/x$ is $(c-1-c\\ln x)/x^2\\le0$ for $x\\ge e$, so for $N\\ge N_0$ the FTL term is at most $[1+c(1+\\ln N_0)]/N_0=O((1+\\ln T)/T^2)$, since $L\\ge\\ln2$ and $(1+\\ln L)/L$ is bounded on $[\\ln2,\\infty)$. Also $q_T\\le1+\\log_2T$, so the mixing term is $O((1+\\ln T)/T^2)$, while the Azuma term is at most $\\sqrt{2/(mC)}/T$. As $1+\\ln T\\le T$ for $T\\ge1$, the two former terms are $O(1/T)$ as well. This proves the stated rate on the same event as step 4.1.",
+          "inputs": [
+            "A5",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "N,m,T and dimension d are positive and K is nonempty; all empirical means use mT or N positive terms. The empty harmonic tail at N=1 uses the explicit H0=0 convention, and the zero extension of the martingale after mN is not an empty evaluation dataset.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "N,m,T and dimension d are positive and K is nonempty; all empirical means use mT or N positive terms. The empty harmonic tail at N=1 uses the explicit H0=0 convention, and the zero extension of the martingale after mN is not an empty evaluation dataset."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero losses and zero increments are permitted; step 2.1 remains valid with width 2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement permits T=N=m=1; steps 1.1–4.1 cover the single-sample case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits alpha=1 and singleton K; steps 1.1 and 1.3 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits alpha=1 and delta in (0,1); steps 2.1 and 1.3 include those endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit for conditional expectation and Azuma; steps 1.2–2.1 use no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The stated conditional rollout mean, measurability, attained exact FTL minima and strong convexity imply a high-probability surrogate-loss guarantee. It asserts neither a converse sampling characterization nor a finite-sample task-cost guarantee.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The stated conditional rollout mean, measurability, attained exact FTL minima and strong convexity imply a high-probability surrogate-loss guarantee. It asserts neither a converse sampling characterization nor a finite-sample task-cost guarantee.",
+            "item_sha256": "15f98cd002a784d4b8fa9a51b94bce5ffcf25e4baa11399db8e2f4125f7dab9d",
+            "row_sha256": "786b879418d211b2f7d20d22eca7e67552865aea4dbd699cd122fc6ad2b0eb9b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The stated conditional rollout mean, measurability, attained exact FTL minima and strong convexity imply a high-probability surrogate-loss guarantee. It asserts neither a converse sampling characterization nor a finite-sample task-cost guarantee.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The stated conditional rollout mean, measurability, attained exact FTL minima and strong convexity imply a high-probability surrogate-loss guarantee. It asserts neither a converse sampling characterization nor a finite-sample task-cost guarantee.",
+            "item_sha256": "15f98cd002a784d4b8fa9a51b94bce5ffcf25e4baa11399db8e2f4125f7dab9d",
+            "row_sha256": "322c52f7c81774c28ca001fc6d7daee9d8e0a1d4ce3391c6aa1413450f7bb150"
+          }
+        }
+      ]
+    },
+    "ex-behavior-cloning-covariate-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Under the expert, the state remains $g$ at every decision time, so $d_{\\pi^*}$ is the point mass at $g$. The learner's action-disagreement probability at $g$ is $\\epsilon$, hence its behavior-cloning surrogate loss averaged under $d_{\\pi^*}$ equals $\\epsilon$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Put $q=1-\\epsilon$. The probability that the learner is at $g$ at time $t$ is $q^t$: it is $1$ at $t=0$, and if it is $g$ at time $t$ it remains there at the next state with probability $q$, while if it is $b$ it remains $b$. Thus the probability at time $t+1$ is $q^tq=q^{t+1}$. At decision time $t$, expected cost is $q^t\\epsilon+(1-q^t)=1-q^{t+1}$. Summing for $t=0,\\ldots,T-1$ gives the displayed cost.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each integer $k\\ge1$, $(1-\\epsilon)^k\\ge1-k\\epsilon$: the case $k=1$ is equality, and if it holds at $k$, multiplication by $1-\\epsilon\\ge0$ gives $(1-\\epsilon)^{k+1}\\ge(1-k\\epsilon)(1-\\epsilon)=1-(k+1)\\epsilon+k\\epsilon^2\\ge1-(k+1)\\epsilon$. Therefore $1-q^k\\le k\\epsilon$.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "If $T=1$, the displayed cost is $\\epsilon$, which lies between $\\epsilon T^2/8$ and $\\epsilon T^2$. Now assume $T\\ge2$, so $0<\\epsilon\\le1/2$. Then $(1-\\epsilon)^{-1}\\ge1+\\epsilon$ because $(1-\\epsilon)^{-1}-(1+\\epsilon)=\\epsilon^2/(1-\\epsilon)\\ge0$. Also $(1+\\epsilon)^k\\ge1+k\\epsilon$ for all $k\\ge1$: it is equality for $k=1$, and multiplication by $1+\\epsilon>0$ gives $(1+\\epsilon)^{k+1}\\ge(1+k\\epsilon)(1+\\epsilon)=1+(k+1)\\epsilon+k\\epsilon^2\\ge1+(k+1)\\epsilon$. Hence $q^k\\le1/(1+k\\epsilon)$. For $k\\le T$, [A1] gives $k\\epsilon\\le1$, so $1-q^k\\ge k\\epsilon/(1+k\\epsilon)\\ge k\\epsilon/2$. Let $r=\\lceil T/2\\rceil$; there are at least $T/2$ integer indices from $r$ through $T$, each at least $T/2$, so $\\sum_{k=1}^T k\\ge T^2/4$. The expected cost is at least $\\epsilon T^2/8$.",
+          "inputs": [
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Summing the upper estimate $1-q^k\\le k\\epsilon$ from step 2.1 gives cost at most $\\epsilon\\sum_{k=1}^T k\\le\\epsilon T^2$. Together with the lower estimate from step 2.2, this proves the claimed bounds.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies the two nonempty states g,b and positive horizon T."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example assumes epsilon>0; epsilon=0 removes the positive-shift claim and is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example permits T=1 and epsilon=1; step 2.2 verifies this boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 treats T=1 separately before using the lower bound for T≥2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example includes epsilon=1/T; step 2.2 uses k epsilon≤1 at that endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example is a finite explicit MDP verified by finite recursion and sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-state witness computes a learner cost of order epsilon times T squared despite expert-distribution disagreement epsilon. It demonstrates possible covariate-shift amplification, not a converse that every low behavior-cloning loss has quadratic cost.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-state witness computes a learner cost of order epsilon times T squared despite expert-distribution disagreement epsilon. It demonstrates possible covariate-shift amplification, not a converse that every low behavior-cloning loss has quadratic cost.",
+            "item_sha256": "c030670521377a3d45a018f66dbbc0ec8d5bf301b81750cc86fc15c3de234d59",
+            "row_sha256": "7e6ec713806ebe7e2cd866c6f615227d4e75eafd6fb101b21c7cbb0d9db0334c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two-state witness computes a learner cost of order epsilon times T squared despite expert-distribution disagreement epsilon. It demonstrates possible covariate-shift amplification, not a converse that every low behavior-cloning loss has quadratic cost.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The two-state witness computes a learner cost of order epsilon times T squared despite expert-distribution disagreement epsilon. It demonstrates possible covariate-shift amplification, not a converse that every low behavior-cloning loss has quadratic cost.",
+            "item_sha256": "c030670521377a3d45a018f66dbbc0ec8d5bf301b81750cc86fc15c3de234d59",
+            "row_sha256": "c61cbe5521e3372414b0838ac83366b5af9159a0ed9157fe1431227de6d9761a"
+          }
+        }
+      ]
+    },
+    "ex-dagger-interactive-expert-labels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-dagger",
+          "source_section": "Definition",
+          "quote": "Let a finite-horizon imitation-learning problem have the finite MDP, initial state distribution, positive integer horizon $T$, deterministic expert $\\pi^*$, learner class $\\{\\pi_\\theta:\\theta\\in K\\}$, and expert surrogate loss $\\ell(s,\\theta)$ defined previously. Let $N\\ge1$ and $m\\ge1$ be integers giving the number of training rounds and trajectories per round, let $\\beta_1,\\ldots,\\beta_N\\in[0,1]$ be expert-use probabilities, supply an initial parameter $\\theta_1\\in K$, and supply a deterministic selector for attained minimizers of the cumulative losses. Require that each cumulative training-loss function below attains a minimum on $K$; when the minimizer is unique the selector returns it.\n\nInitialize the aggregated training dataset as the empty multiset $\\mathcal D_0=\\varnothing$.\n\nFor each round $i=1,\\ldots,N$:\n\n1. Set $\\hat\\pi_i=\\pi_{\\theta_i}$. For the rollout policy, at each decision time of every trajectory, independently draw an expert-use coin with success probability $\\beta_i$. At current state $s$, if the coin succeeds, execute $\\pi^*(s)$; otherwise sample an action from $\\hat\\pi_i(\\cdot\\mid s)$ and execute it. This per-decision stochastic policy is $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$.\n2. Run $m$ trajectories of length $T$ from the specified initial distribution using $\\pi_i$. At every visited state $S_{ij t}$, for $1\\le j\\le m$ and $0\\le t<T$, query and record the expert label $\\pi^*(S_{ij t})$. Append these labeled pairs to $\\mathcal D_{i-1}$, with multiplicity, to form $\\mathcal D_i$. The expert label is recorded for training and is not executed unless the mixture in step 1 selected the expert.\n3. Define the empirical round loss on every candidate parameter by\n\n   $$\\hat L_i(\\theta)=\\frac1{mT}\\sum_{j=1}^m\\sum_{t=0}^{T-1}\\ell(S_{ij t},\\theta).$$\n\n4. Update by Follow-the-Leader on the cumulative empirical loss: set $\\theta_{i+1}$ to the supplied selector's choice from $\\arg\\min_{\\theta\\in K}\\sum_{r=1}^i\\hat L_r(\\theta)$.\n\nThe finite-sample output is the sequence $\\hat\\pi_1,\\ldots,\\hat\\pi_N$ and the aggregated labeled multiset $\\mathcal D_N$. The population-loss idealization replaces each empirical $\\hat L_i$ by $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$; it is used only for the infinite-sample theorem. The procedure requires an interactive expert capable of labeling learner-visited states.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "With $\\beta_1=0$, the first round executes $\\pi^{\\rm bad}$. From $S_0=g$ it takes $e$ to $S_1=b$; at both visited states the expert labels are $c$ at $g$ and $r$ at $b$. By [F2], both labeled pairs enter the aggregate dataset.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "On this two-example dataset, $\\pi^{\\rm good}$ has total 0–1 loss $0$, while $\\pi^{\\rm bad}$ disagrees on both labeled states and has loss $2$. Thus the unique FTL minimizer is $\\pi^{\\rm good}$, which is the next policy.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "In round 2, $\\beta_2=0$ and $\\pi^{\\rm good}$ takes $c$ at $g$, so the state remains $g$ and the expert label is $c$. Adding this pair preserves $\\pi^{\\rm good}$ as the unique zero-loss minimizer. Since the expert itself remains at $g$ on every expert-only rollout, it never labels $b$; the first interactive DAgger round supplies that missing recovery label.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies a two-state MDP and two rounds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example sets beta_1=beta_2=0; step 1.1 computes the learner-only rollout and labels."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example fixes T=N=2 and m=1; it makes no varying one-round or one-step claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example uses a two-policy finite class; step 2.1 verifies a unique FTL minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example uses beta=0, and steps 1.1–3.1 compute both rounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Finite data and the unique minimizer are computed directly in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The deterministic two-round witness explicitly acquires the recovery label at b and selects the unique good policy. It illustrates why fixed expert trajectories omit that label; it states no iff criterion for all successful imitation learners.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The deterministic two-round witness explicitly acquires the recovery label at b and selects the unique good policy. It illustrates why fixed expert trajectories omit that label; it states no iff criterion for all successful imitation learners.",
+            "item_sha256": "ec3972fa93d3ef403182bd2f29acff1231027c057e1f5419704dcb4ddd52ce3d",
+            "row_sha256": "5498fc457cf198e2b80f2708fb761efa4da8f1042d1f5d11b07e209aea74b5a0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The deterministic two-round witness explicitly acquires the recovery label at b and selects the unique good policy. It illustrates why fixed expert trajectories omit that label; it states no iff criterion for all successful imitation learners.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The deterministic two-round witness explicitly acquires the recovery label at b and selects the unique good policy. It illustrates why fixed expert trajectories omit that label; it states no iff criterion for all successful imitation learners.",
+            "item_sha256": "ec3972fa93d3ef403182bd2f29acff1231027c057e1f5419704dcb4ddd52ce3d",
+            "row_sha256": "e9c2c5a9343d52e8d8f74326391b4b3a7946d1ff7e5642b60b7147563a312a4e"
+          }
+        }
+      ]
+    },
+    "ex-surrogate-loss-fails-task-cost-control": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-imitation-learning-and-expert-surrogate-loss",
+          "source_section": "Definition",
+          "quote": "Fix a finite Markov decision process with nonempty finite state set $S$ and finite nonempty action set $A(s)$ at each state, a positive integer horizon $T$, and an initial probability vector $\\mu_0$ on $S$. A **policy** is a stationary Markov policy $\\pi(a\\mid s)$; a **deterministic expert** is a function $\\pi^*:S\\to\\bigcup_{s\\in S}A(s)$ with $\\pi^*(s)\\in A(s)$. For a policy $\\pi$, let $\\mu_t^\\pi$ and $d_\\pi$ be the finite-horizon state and average-occupancy probability vectors defined by the finite recursion in the preceding lemma.\n\nLet $c_t(s,a)\\in[0,1]$ be the task cost at time $t$ for $0\\le t<T$. Define the total expected task cost by\n\n$$J(\\pi)=\\sum_{t=0}^{T-1}\\sum_{s\\in S}\\mu_t^\\pi(s)\\sum_{a\\in A(s)}\\pi(a\\mid s)c_t(s,a).$$\n\nDefine the expert cost-to-go recursively by $V_T^*(s)=0$ and, for $0\\le t<T$,\n\n$$Q_t^*(s,a)=c_t(s,a)+\\sum_{s'\\in S}P(s'\\mid s,a)V_{t+1}^*(s'),\\qquad V_t^*(s)=Q_t^*(s,\\pi^*(s)).$$\n\nFor a learner policy $\\pi_\\theta$ indexed by a parameter $\\theta$ in a nonempty set $K$, define its expert-action disagreement probability at $s$ by $e(s,\\theta)=\\sum_{a\\in A(s):a\\ne\\pi^*(s)}\\pi_\\theta(a\\mid s)$. An **expert surrogate loss** is a function $\\ell:S\\times K\\to[0,1]$ satisfying $\\ell(s,\\theta)\\ge e(s,\\theta)$ for every $s\\in S$ and $\\theta\\in K$. The average surrogate loss under a policy's own state occupancy is $\\mathbb E_{s\\sim d_{\\pi_\\theta}}[\\ell(s,\\theta)]=\\sum_s d_{\\pi_\\theta}(s)\\ell(s,\\theta)$.\n\n**Behavior cloning** fits a learner policy using expert labels on states sampled from $d_{\\pi^*}$. **DAgger** (Dataset Aggregation) is the interactive alternative: at iteration $i$, it rolls out a mixture $\\pi_i=\\beta_i\\pi^*+(1-\\beta_i)\\hat\\pi_i$, where $\\hat\\pi_i$ is the current learner and $\\beta_i\\in[0,1]$ is the expert-use probability at each decision, queries the expert on the visited states, aggregates those labeled states with prior data, and updates the learner. In the infinite-sample analysis define $L_i(\\theta)=\\sum_s d_{\\pi_i}(s)\\ell(s,\\theta)$. When the minimum is attained, define $\\epsilon_N=\\min_{\\theta\\in K}N^{-1}\\sum_{i=1}^N L_i(\\theta)$ and the learner's average regret $\\gamma_N=N^{-1}\\sum_{i=1}^N L_i(\\theta_i)-\\epsilon_N$. Labels under learner-induced states require interaction with the expert; fixed demonstrations alone do not supply them.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The state is always $s$ under both policies, so every occupancy is the point mass at $s$. By the defined surrogate, the learner's expected surrogate loss is $\\ell(s,\\theta)=0$. Its disagreement probability is $1$, so [F1]'s required domination premise fails.",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At each of the $T$ decisions the learner pays cost $1$, while the expert pays cost $0$. Therefore $J(\\hat\\pi)=T$ and $J(\\pi^*)=0$. Any unconditional claim that zero surrogate loss alone forces $J(\\hat\\pi)\\le J(\\pi^*)$ would assert $T\\le0$, contradicting $T\\ge1$.",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies a one-state MDP and T≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Candidate score is zero and disagreement is one, as verified in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary T=1 gives task-cost difference one in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Self-transition keeps occupancy at the single state for every horizon, as checked in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Learner disagreement is exactly one and candidate score zero in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example is a finite one-state calculation and makes no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The identically zero candidate score violates disagreement domination and coexists with task cost T. This counterexample shows a missing sufficient premise cannot be ignored; it does not prove domination is a necessary condition for every possible task-cost bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The identically zero candidate score violates disagreement domination and coexists with task cost T. This counterexample shows a missing sufficient premise cannot be ignored; it does not prove domination is a necessary condition for every possible task-cost bound.",
+            "item_sha256": "a0148b7bc1da4393faee0a3035876f224e2d7b385ddea35ed0be23d4ec1a8724",
+            "row_sha256": "3ef7ea8bd359cda7cf9466a8033b061aaaabe12c91419e30f273da32a5ab64a7"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The identically zero candidate score violates disagreement domination and coexists with task cost T. This counterexample shows a missing sufficient premise cannot be ignored; it does not prove domination is a necessary condition for every possible task-cost bound.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The identically zero candidate score violates disagreement domination and coexists with task cost T. This counterexample shows a missing sufficient premise cannot be ignored; it does not prove domination is a necessary condition for every possible task-cost bound.",
+            "item_sha256": "a0148b7bc1da4393faee0a3035876f224e2d7b385ddea35ed0be23d4ec1a8724",
+            "row_sha256": "5446579736d084b7a977e9ed4b627b78284a86c437eb49176491568fe2b1a7c4"
+          }
+        }
+      ]
+    }
+  }
+}\n

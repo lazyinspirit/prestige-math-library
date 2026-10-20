@@ -18,6 +18,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-binomial-theorem.json
   precheck: pass
   judge:
     model: z-ai/glm-5.2
@@ -42,10 +43,10 @@ For all $x, y \in \mathbb{R}$ and every $n \in \mathbb{N}$,
 
 $$(x+y)^{n} \;=\; \sum_{k<n+1} \iota\binom{n}{k}\, x^{k}\, y^{\,n-k},$$
 
-where the powers are the integer powers of [[def-integer-power]], the sum is the
-real finite sum of [[def-finite-sum]] over $k = 0, 1, \dots, n$, the difference
+where the powers are the integer powers of Integer powers $a^m$, the sum is the
+real finite sum of Finite sums and finite products, by recursion over $k = 0, 1, \dots, n$, the difference
 $n-k$ is a genuine one because $k \le n$ throughout the range, and $\iota$ is the
-canonical natural of [[def-canonical-natural]].
+canonical natural of The canonical natural $\iota(n) = n \cdot 1_F$ of a field.
 
 **The coefficient is $\iota\binom{n}{k}$ and not $\binom{n}{k}$.** A binomial
 coefficient is a natural number, that is a von Neumann natural, that is a set; it
@@ -57,6 +58,14 @@ natural-number multiples of a ring element, so a commutative-ring version is
 available wherever rings are; rings are not available at this point in the
 reading order, and the ring statement is a separate statement, to be made where
 they are. See the Remarks below.
+
+## Statement references
+
+[[def-integer-power]]
+
+[[def-finite-sum]]
+
+[[def-canonical-natural]]
 
 ## Facts & Assumptions
 

@@ -1,0 +1,350 @@
+[
+  {
+    "order": 2738,
+    "id": "ml02-dimension-reduction",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "PCA, kernel PCA, MDS, and manifold embeddings",
+    "companion": "ml02-dimension-reduction-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "hilbert-space-geometry-and-riesz-representation",
+      "inner-product-spaces-and-orthogonality",
+      "matrix-norms-condition-numbers-and-numerical-stability",
+      "the-spectral-theorem-and-singular-value-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-finite-centering-matrix",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "definition",
+        "title": "Finite centering matrices and centered data",
+        "justified_by": [],
+        "statement": "For an integer $n\\ge1$, let $\\mathbf1_n\\in\\mathbb R^n$ be the vector whose entries are all $1$, and let $I_n$ be the $n\\times n$ identity matrix. The **centering matrix** is\n\n$$H_n:=I_n-\\frac1n\\mathbf1_n\\mathbf1_n^T.$$\n\nFor $v\\in\\mathbb R^n$, write $\\bar v:=n^{-1}\\mathbf1_n^Tv$; then $H_nv=v-\\bar v\\mathbf1_n$. For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $p\\ge1$, its **centered data matrix** is $X_c:=H_nX$; each column of $X_c$ has sum zero."
+      },
+      {
+        "id": "thm-finite-centering-matrix-is-orthogonal-projector",
+        "deps": [
+          "def-finite-centering-matrix",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "dependency_level": 1,
+        "kind": "theorem",
+        "title": "The finite centering matrix is the orthogonal projection onto the zero-sum subspace",
+        "justified_by": [],
+        "statement": "For $n\\ge1$, let $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$. Then $H_n^T=H_n$, $H_n^2=H_n$, $H_n\\mathbf1_n=0$, and for each $v\\in\\mathbb R^n$, $H_nv=v-(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$. Thus $H_n$ is the orthogonal projection onto $\\{v\\in\\mathbb R^n:\\mathbf1_n^Tv=0\\}$."
+      },
+      {
+        "id": "def-rank-q-principal-component-analysis",
+        "deps": [
+          "def-finite-centering-matrix",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 1,
+        "kind": "definition",
+        "title": "Rank-q principal component analysis by Frobenius reconstruction error",
+        "justified_by": [
+          "thm-pca-frobenius-optimality"
+        ],
+        "statement": "For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n,p\\ge1$, set $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and $X_c=H_nX$. For an integer $q$ with $1\\le q\\le p$, a rank-$q$ PCA frame is a matrix $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$. Its reconstruction is $X_cQQ^T$, and its squared Frobenius reconstruction error is\n\n$$\\|X_c-X_cQQ^T\\|_F^2=\\sum_{i<n}\\sum_{j<p}(X_c-X_cQQ^T)_{ij}^2.$$\n\nA rank-$q$ PCA solution is any frame minimizing this error over all such $Q$; its score matrix is $X_cQ$. A minimizing frame need not be unique when the relevant eigenvalues are tied."
+      },
+      {
+        "id": "lem-ky-fan-trace-maximization",
+        "deps": [
+          "prop-standard-coordinate-inner-products",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "The maximum trace over q-dimensional orthonormal frames is the sum of the top q eigenvalues",
+        "justified_by": [],
+        "statement": "Let $A\\in\\mathbb R^{p\\times p}$ be symmetric with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$, counted with multiplicity. For $1\\le q\\le p$ and every $Q\\in\\mathbb R^{p\\times q}$ satisfying $Q^TQ=I_q$,\n\n$$\\operatorname{tr}(Q^TAQ)\\le\\sum_{j=1}^q\\lambda_j.$$\n\nEquality is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $q$ largest eigenvalues. Equality holds exactly when the column space of $Q$ contains every eigenspace with eigenvalue greater than $\\lambda_q$, is orthogonal to every eigenspace with eigenvalue less than $\\lambda_q$, and uses a subspace of dimension $q-\\#\\{j:\\lambda_j>\\lambda_q\\}$ from the eigenspace with eigenvalue $\\lambda_q$."
+      },
+      {
+        "id": "thm-pca-frobenius-optimality",
+        "deps": [
+          "def-rank-q-principal-component-analysis",
+          "lem-ky-fan-trace-maximization",
+          "thm-singular-value-decomposition",
+          "prop-standard-coordinate-inner-products",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "def-frobenius-matrix-norm"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "The top right singular subspace minimizes rank-q PCA Frobenius reconstruction error",
+        "justified_by": [],
+        "statement": "Let $X\\in\\mathbb R^{n\\times p}$, $n,p\\ge1$, let $X_c=(I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T)X$, and let $1\\le q\\le p$. Write $\\sigma_1\\ge\\cdots\\ge\\sigma_p\\ge0$ for the singular values of $X_c$, padding by zeros after its rank. Among all $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$, the minimum of $\\|X_c-X_cQQ^T\\|_F^2$ is\n\n$$\\sum_{j=q+1}^{p}\\sigma_j^2.$$\n\nA frame is minimizing exactly when its column space contains every eigenspace of $X_c^TX_c$ with eigenvalue greater than $\\sigma_q^2$, is orthogonal to every eigenspace with eigenvalue less than $\\sigma_q^2$, and uses the remaining dimension inside the eigenspace with eigenvalue $\\sigma_q^2$. In particular a choice of $q$ right singular vectors for the $q$ largest singular values is minimizing; ties can give different minimizing subspaces."
+      },
+      {
+        "id": "alg-kernel-principal-component-analysis",
+        "deps": [
+          "def-finite-centering-matrix"
+        ],
+        "dependency_level": 1,
+        "kind": "algorithm",
+        "title": "Kernel principal component analysis for a finite positive-semidefinite Gram matrix",
+        "justified_by": [
+          "thm-centered-psd-kernel-gram-matrix-is-psd"
+        ],
+        "statement": "Given $n\\ge1$ data points and a finite symmetric Gram matrix $K\\in\\mathbb R^{n\\times n}$ satisfying $a^TKa\\ge0$ for every $a\\in\\mathbb R^n$, define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered Gram matrix $K_c=H_nKH_n$. The positive-semidefinite condition is an input hypothesis; no theorem that an arbitrary kernel formula produces such a matrix is assumed. For $1\\le q\\le n$, kernel PCA retains the $q$ largest eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$ of $K_c$ and associated orthonormal eigenvectors $u_1,\\ldots,u_q$, returning the score matrix $U_q\\operatorname{diag}(\\sqrt{\\lambda_1},\\ldots,\\sqrt{\\lambda_q})$. Eigenvectors inside a tied eigenspace may be chosen arbitrarily."
+      },
+      {
+        "id": "thm-centered-psd-kernel-gram-matrix-is-psd",
+        "deps": [
+          "alg-kernel-principal-component-analysis",
+          "thm-finite-centering-matrix-is-orthogonal-projector",
+          "prop-standard-coordinate-inner-products",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "Double-centering a finite positive-semidefinite Gram matrix preserves positive semidefiniteness",
+        "justified_by": [],
+        "statement": "Let $n\\ge1$ and let $K\\in\\mathbb R^{n\\times n}$ be symmetric and satisfy $a^TKa\\ge0$ for every $a\\in\\mathbb R^n$. With $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$, the centered matrix $K_c=H_nKH_n$ is symmetric and positive semidefinite. Consequently it has an orthonormal eigenbasis and all its eigenvalues are nonnegative."
+      },
+      {
+        "id": "alg-classical-multidimensional-scaling",
+        "deps": [
+          "def-finite-centering-matrix"
+        ],
+        "dependency_level": 1,
+        "kind": "algorithm",
+        "title": "Classical multidimensional scaling from a finite dissimilarity matrix",
+        "justified_by": [
+          "thm-classical-mds-recovers-euclidean-distances"
+        ],
+        "statement": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$."
+      },
+      {
+        "id": "lem-equal-gram-configurations-are-isometric",
+        "deps": [
+          "prop-standard-coordinate-inner-products"
+        ],
+        "dependency_level": 0,
+        "kind": "lemma",
+        "title": "Finite configurations with equal Gram matrices have isometric linear spans",
+        "justified_by": [],
+        "statement": "Let $n\\ge0$, $x_1,\\ldots,x_n\\in\\mathbb R^d$, and $y_1,\\ldots,y_n\\in\\mathbb R^m$ be finite lists with $\\langle x_i,x_j\\rangle=\\langle y_i,y_j\\rangle$ for every $1\\le i,j\\le n$, using the standard Euclidean inner products. The assignment $\\sum_{i=1}^n c_i x_i\\mapsto\\sum_{i=1}^n c_i y_i$ is a well-defined linear isometry from $\\operatorname{span}\\{x_i\\}$ onto $\\operatorname{span}\\{y_i\\}$; when $n=0$ both spans are zero spaces and the assignment is the unique zero map."
+      },
+      {
+        "id": "thm-classical-mds-recovers-euclidean-distances",
+        "deps": [
+          "alg-classical-multidimensional-scaling",
+          "thm-finite-centering-matrix-is-orthogonal-projector",
+          "lem-equal-gram-configurations-are-isometric",
+          "prop-standard-coordinate-inner-products",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "Double-centering Euclidean squared distances recovers their centered Gram matrix",
+        "justified_by": [],
+        "statement": "Let $n\\ge1$. For every symmetric nonnegative zero-diagonal dissimilarity matrix $D$, the matrix $B=-\\frac12H_nD^{\\circ2}H_n$ used by classical multidimensional scaling is symmetric and has a real orthonormal eigendecomposition, though it may have negative eigenvalues. If $D_{ij}=\\|z_i-z_j\\|_2$ for points $z_1,\\ldots,z_n\\in\\mathbb R^d$, where $\\|v\\|_2=(\\sum_{a=1}^d v_a^2)^{1/2}$, then $B=Z_cZ_c^T$ for the centered row-data matrix $Z_c=H_nZ$, so $B$ is positive semidefinite. The coordinates formed from all positive eigenvalues reproduce every pairwise distance exactly; if the requested embedding dimension is at least the number of positive eigenvalues, the truncated procedure is exact. The centered configurations obtained from $Z$ and these coordinates are related by a linear isometry between their spans, so the original configurations agree up to translation and Euclidean isometry of their affine spans."
+      },
+      {
+        "id": "alg-deterministic-neighbor-selection",
+        "deps": [],
+        "dependency_level": 0,
+        "kind": "algorithm",
+        "title": "Deterministic finite nearest-neighbor lists and graph symmetrizations",
+        "justified_by": [],
+        "statement": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path."
+      },
+      {
+        "id": "alg-isomap",
+        "deps": [
+          "alg-deterministic-neighbor-selection",
+          "alg-classical-multidimensional-scaling"
+        ],
+        "dependency_level": 2,
+        "kind": "algorithm",
+        "title": "Finite ISOMAP with deterministic neighborhoods and connected-graph shortest paths",
+        "justified_by": [],
+        "statement": "Input: a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, an embedding dimension $q\\ge1$, and either a $k$-nearest-neighbor parameter $1\\le k<n$ with an explicit union or mutual symmetrization choice, or a radius $r>0$. Use $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$; for the $k$-nearest-neighbor option, each neighbor list orders candidates by increasing $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index. Construct the selected undirected graph and give each edge $\\{i,j\\}$ weight $\\|x_i-x_j\\|_2$. If the graph is disconnected, return the status \u201cdisconnected\u201d and do not claim finite all-pairs graph distances. If it is connected, define $d_G(i,j)$ as the minimum total edge weight over all paths from $i$ to $j$; because the graph is finite with nonnegative edge weights, a minimum occurs among its finitely many simple paths. Form the symmetric dissimilarity matrix $D_G=(d_G(i,j))$ and apply classical multidimensional scaling to $D_G$ with requested dimension $q$. This finite procedure makes no guarantee that graph distances accurately approximate manifold geodesics or that the output recovers a manifold."
+      },
+      {
+        "id": "def-lle-local-reconstruction-weights",
+        "deps": [
+          "alg-deterministic-neighbor-selection"
+        ],
+        "dependency_level": 1,
+        "kind": "definition",
+        "title": "Minimum-norm affine reconstruction weights for a finite LLE neighborhood",
+        "justified_by": [
+          "thm-minimum-norm-lle-weights-exist-uniquely"
+        ],
+        "statement": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular."
+      },
+      {
+        "id": "thm-minimum-norm-lle-weights-exist-uniquely",
+        "deps": [
+          "def-lle-local-reconstruction-weights",
+          "prop-standard-coordinate-inner-products",
+          "thm-least-squares-solutions-and-normal-equation",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ],
+        "dependency_level": 2,
+        "kind": "theorem",
+        "title": "Finite LLE affine least-squares weights have a unique minimum-norm minimizer",
+        "justified_by": [],
+        "statement": "Fix $x_i\\in\\mathbb R^p$ and a nonempty finite neighbor list $N_i=(j_1,\\ldots,j_k)$ of distinct indices. The constrained problem\n\n$$\\min_{w\\in\\mathbb R^k}\\left\\|x_i-\\sum_{s=1}^k w_sx_{j_s}\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{s=1}^k w_s=1$$\n\nhas a nonempty affine set of minimizers, and exactly one member of that set has smallest Euclidean norm. Thus the minimum-norm rule in finite LLE defines one weight vector even when the local covariance matrix is singular. This conclusion uses no choice axiom."
+      },
+      {
+        "id": "alg-locally-linear-embedding",
+        "deps": [
+          "alg-deterministic-neighbor-selection",
+          "def-lle-local-reconstruction-weights",
+          "thm-minimum-norm-lle-weights-exist-uniquely",
+          "prop-standard-coordinate-inner-products",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_level": 3,
+        "kind": "algorithm",
+        "title": "Finite locally linear embedding with minimum-norm weights and a simple constant kernel",
+        "justified_by": [
+          "thm-lle-trace-minimizers"
+        ],
+        "statement": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status \u201cconstant kernel not isolated\u201d and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency."
+      },
+      {
+        "id": "thm-lle-trace-minimizers",
+        "deps": [
+          "alg-locally-linear-embedding",
+          "lem-ky-fan-trace-maximization",
+          "prop-standard-coordinate-inner-products",
+          "def-trace-of-a-square-matrix",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "dependency_level": 4,
+        "kind": "theorem",
+        "title": "Under the simple constant-kernel condition, LLE trace minimizers are bottom positive eigenvectors",
+        "justified_by": [],
+        "statement": "Let $W\\in\\mathbb R^{n\\times n}$ satisfy $W\\mathbf1_n=\\mathbf1_n$, put $M=(I_n-W)^T(I_n-W)$, and assume $\\ker(I_n-W)=\\operatorname{span}\\{\\mathbf1_n\\}$. Let $0<\\mu_1\\le\\cdots\\le\\mu_{n-1}$ be the eigenvalues of $M$ restricted to the zero-sum subspace $\\mathbf1_n^\\perp$. For $1\\le q<n$, the minimum of $\\operatorname{tr}(Y^TMY)$ over $Y\\in\\mathbb R^{n\\times q}$ with $Y^T\\mathbf1_n=0$ and $Y^TY=I_q$ is $\\sum_{j=1}^q\\mu_j$. The minimum is attained by taking the columns of $Y$ to be orthonormal eigenvectors for the $q$ smallest positive eigenvalues; when eigenvalues tie, the minimizing subspace may vary inside the tied eigenspace. The trace is the sum of diagonal entries."
+      },
+      {
+        "id": "def-metric-stress-mds",
+        "deps": [
+          "alg-classical-multidimensional-scaling"
+        ],
+        "dependency_level": 2,
+        "kind": "definition",
+        "title": "Metric distance-stress multidimensional scaling",
+        "justified_by": [],
+        "statement": "For a symmetric nonnegative zero-diagonal dissimilarity matrix $D\\in\\mathbb R^{n\\times n}$, $n\\ge2$, and a target dimension $q\\ge1$, use the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^q v_a^2)^{1/2}$. The **metric stress** of centered coordinates $Y=(y_1^T,\\ldots,y_n^T)^T\\in\\mathbb R^{n\\times q}$, with $\\mathbf1_n^TY=0$, is\n\n$$S_D(Y):=\\sum_{1\\le i<j\\le n}\\bigl(D_{ij}-\\|y_i-y_j\\|_2\\bigr)^2.$$\n\nMetric stress MDS is the separate optimization problem of minimizing $S_D(Y)$ over such centered $Y$. It is a distance-based, generally nonconvex objective and does not define the positive-eigenvalue solution used by classical multidimensional scaling; no solver convergence or global-optimizer guarantee is part of this definition."
+      }
+    ]
+  },
+  {
+    "order": 2739,
+    "id": "ml02-dimension-reduction-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "PCA, kernel PCA, MDS, and manifold embeddings \u2014 Examples",
+    "companion": "ml02-dimension-reduction",
+    "requires": [
+      "ml02-dimension-reduction"
+    ],
+    "items": [
+      {
+        "id": "ex-rank-q-pca-exact-reconstruction",
+        "deps": [
+          "def-rank-q-principal-component-analysis",
+          "thm-pca-frobenius-optimality"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A rank-one centered data matrix is reconstructed exactly by rank-one PCA",
+        "justified_by": [],
+        "statement": "Let\n\n$$X=\\begin{pmatrix}1&0\\\\0&0\\\\-1&0\\end{pmatrix}\\in\\mathbb R^{3\\times2},\\qquad q=1.$$\n\nThe columns of $X$ already have mean zero and $X$ has rank one. The rank-one PCA frame $Q=(1,0)^T$ reconstructs $X$ exactly, so the minimum squared Frobenius reconstruction error is zero and the unique minimizing subspace is $\\operatorname{span}\\{(1,0)^T\\}$."
+      },
+      {
+        "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+        "deps": [
+          "alg-classical-multidimensional-scaling",
+          "thm-classical-mds-recovers-euclidean-distances"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A non-Euclidean three-point dissimilarity produces a negative MDS eigenvalue",
+        "justified_by": [],
+        "statement": "Take the symmetric dissimilarity matrix\n\n$$D=\\begin{pmatrix}0&1&1\\\\1&0&3\\\\1&3&0\\end{pmatrix}.$$\n\nIt is nonnegative with zero diagonal and is not Euclidean because $D_{13}+D_{12}=2<D_{23}=3$. Its classical-MDS matrix $B=-\\frac12H_3D^{\\circ2}H_3$ has a negative eigenvalue, so positive-eigenvalue truncation is not exact distance recovery."
+      },
+      {
+        "id": "ex-disconnected-knn-graph-blocks-isomap-distances",
+        "deps": [
+          "alg-deterministic-neighbor-selection",
+          "alg-isomap"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A one-nearest-neighbor graph can disconnect finite ISOMAP",
+        "justified_by": [],
+        "statement": "Let $x_1=0$, $x_2=1/10$, $x_3=10$, and $x_4=101/10$ in $\\mathbb R$, use $k=1$, and symmetrize by union. The resulting undirected neighbor graph has exactly the two edges $\\{1,2\\}$ and $\\{3,4\\}$, so it is disconnected. ISOMAP therefore returns its disconnected status and does not form finite all-pairs graph distances.\n\nThe diagram shows the two union-graph components; labels are the sample indices.\n\n```tikz\n\\begin{tikzpicture}[vertex/.style={draw,circle,minimum size=7mm}]\n  \\node[vertex] (x1) at (0,0) {$1$};\n  \\node[vertex] (x2) at (1.4,0) {$2$};\n  \\node[vertex] (x3) at (4,0) {$3$};\n  \\node[vertex] (x4) at (5.4,0) {$4$};\n  \\draw (x1)--node[above] {$1/10$}(x2);\n  \\draw (x3)--node[above] {$1/10$}(x4);\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "ex-singular-local-lle-covariance",
+        "deps": [
+          "def-lle-local-reconstruction-weights",
+          "thm-minimum-norm-lle-weights-exist-uniquely"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "A singular local LLE covariance still has a unique minimum-norm weight vector",
+        "justified_by": [],
+        "statement": "Take $x_1=0$, $x_2=1$, $x_3=-1$, and $x_4=0$ in $\\mathbb R$, with $i=1$ and $k=3$. The neighbor order is $N_1=(4,2,3)$. Define the local difference matrix $Z_1=[x_1-x_j]_{j\\in N_1}$ and its local covariance matrix $C_1=Z_1^TZ_1$; then $C_1$ has rank one and is singular. The affine reconstruction minimizers are $w_4=1-2t$, $w_2=w_3=t$ for real $t$, and the unique minimum-norm choice is $w_4=w_2=w_3=1/3$."
+      },
+      {
+        "id": "ex-connected-lle-graph-need-not-have-simple-zero",
+        "deps": [
+          "alg-deterministic-neighbor-selection",
+          "def-lle-local-reconstruction-weights",
+          "thm-minimum-norm-lle-weights-exist-uniquely",
+          "alg-locally-linear-embedding"
+        ],
+        "dependency_level": 4,
+        "kind": "example",
+        "title": "A connected LLE neighbor graph can have more than one fixed vector",
+        "justified_by": [],
+        "statement": "Take $x_1=x_3=-1$, $x_2=x_4=1$, and $x_5=0$ in $\\mathbb R$, with $k=2$ and deterministic distance ties broken by index. The undirected union neighbor graph is connected. The minimum-norm local weights give\n\n$$W=\\begin{pmatrix}0&0&1&0&0\\\\0&0&0&1&0\\\\1&0&0&0&0\\\\0&1&0&0&0\\\\1/2&1/2&0&0&0\\end{pmatrix},$$\n\nfor which $\\ker(I_5-W)$ has dimension two rather than being $\\operatorname{span}\\{\\mathbf1_5\\}$. Thus graph connectivity alone does not satisfy the simple constant-kernel condition required by LLE.\n\nThe diagram shows the undirected union neighbor graph. Its edges record selected neighbor relations, not whether the corresponding directed LLE weight is nonzero.\n\n```tikz\n\\begin{tikzpicture}[vertex/.style={draw,circle,minimum size=7mm}]\n  \\node[vertex] (x1) at (0,1) {$1:-1$};\n  \\node[vertex] (x3) at (0,-1) {$3:-1$};\n  \\node[vertex] (x5) at (2,0) {$5:0$};\n  \\node[vertex] (x2) at (4,1) {$2:1$};\n  \\node[vertex] (x4) at (4,-1) {$4:1$};\n  \\draw (x1)--(x3) (x1)--(x5) (x3)--(x5);\n  \\draw (x2)--(x4) (x2)--(x5) (x4)--(x5);\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "ex-square-loop-mds-isomap-lle-differ",
+        "deps": [
+          "alg-classical-multidimensional-scaling",
+          "thm-classical-mds-recovers-euclidean-distances",
+          "alg-deterministic-neighbor-selection",
+          "alg-isomap",
+          "alg-locally-linear-embedding",
+          "thm-lle-trace-minimizers"
+        ],
+        "dependency_level": 5,
+        "kind": "example",
+        "title": "Classical MDS, ISOMAP, and LLE give different embeddings of a four-point square",
+        "justified_by": [],
+        "statement": "Take four points $x_1=(0,0)$, $x_2=(1,0)$, $x_3=(1,1)$, $x_4=(0,1)$ around a unit square, use $k=1$ with ties broken by sample index and union symmetrization, and request dimension $q=1$. The neighbor graph has edges $\\{1,2\\}$, $\\{2,3\\}$, and $\\{1,4\\}$, so it unrolls to the path $4-1-2-3$. One valid top-eigenvector choice for classical MDS of the original Euclidean distances gives coordinates $Y_M=(-1/2,1/2,1/2,-1/2)^T$. ISOMAP gives coordinates congruent to $Y_I=(-1/2,1/2,3/2,-3/2)^T$. LLE gives coordinates proportional to $(a,-a,-1,1)^T$, where $a=\\sqrt5-2$. These three one-dimensional configurations are pairwise noncongruent under translations and reflections.\n\nThe diagram labels the square\u2019s sample indices. Blue edges are the union 1-nearest-neighbor graph; the dashed side $\\{3,4\\}$ belongs to the square geometry but is not retained by the tie rule.\n\n```tikz\n\\begin{tikzpicture}[vertex/.style={draw,circle,minimum size=7mm}]\n  \\node[vertex] (x1) at (0,0) {$1$};\n  \\node[vertex] (x2) at (2,0) {$2$};\n  \\node[vertex] (x3) at (2,2) {$3$};\n  \\node[vertex] (x4) at (0,2) {$4$};\n  \\draw[blue,thick] (x1)--(x2)--(x3);\n  \\draw[blue,thick] (x1)--(x4);\n  \\draw[gray,dashed] (x3)--(x4);\n\\end{tikzpicture}\n```"
+      },
+      {
+        "id": "ex-metric-stress-objective-nonconvex",
+        "deps": [
+          "def-metric-stress-mds"
+        ],
+        "dependency_level": 3,
+        "kind": "example",
+        "title": "The metric stress objective is not convex even for two points",
+        "justified_by": [],
+        "statement": "Let two objects have dissimilarity $D_{12}=1$ and use one-dimensional centered coordinates $Y(t)=(t,-t)$, $t\\in\\mathbb R$. The metric stress is $f(t)=(1-2|t|)^2$, which is not convex: $f(0)=1$ while $\\bigl(f(-1/4)+f(1/4)\\bigr)/2=1/4$."
+      }
+    ]
+  }
+]

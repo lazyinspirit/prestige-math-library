@@ -1,0 +1,477 @@
+[
+  {
+    "order": 2734,
+    "id": "ml02-clustering-mixtures",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "K-means, Gaussian mixtures, and soft assignments",
+    "companion": "ml02-clustering-mixtures-examples",
+    "requires": [
+      "central-limit-theorems",
+      "em-algorithm-and-latent-variable-likelihood-ascent",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "inner-product-spaces-and-orthogonality",
+      "lebesgue-measure-on-euclidean-space",
+      "numerical-optimization-for-statistical-computation",
+      "probability-spaces-random-variables-and-expectation",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "def-k-means-objective",
+        "kind": "definition",
+        "title": "K-means objective",
+        "statement": "Let $n,p$ be positive integers, let $1\\le K\\le n$, let $x_1,\\ldots,x_n\\in\\mathbb R^p$ be observed vectors, and let $\\mu_1,\\ldots,\\mu_K\\in\\mathbb R^p$ be centers. A labeling is a vector $z=(z_1,\\ldots,z_n)\\in\\{1,\\ldots,K\\}^n$, and its $k$th cluster is $C_k(z):=\\{i:z_i=k\\}$. For $v=(v_1,\\ldots,v_p)\\in\\mathbb R^p$, set $\\|v\\|_2^2:=\\sum_{j=1}^p v_j^2$. The K-means objective is\n\n$$J(z,\\mu_1,\\ldots,\\mu_K):=\\sum_{i=1}^n\\|x_i-\\mu_{z_i}\\|_2^2=\\sum_{k=1}^K\\sum_{i\\in C_k(z)}\\|x_i-\\mu_k\\|_2^2.$$\n\nAn empty cluster contributes zero to the sum.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Definition: specify the finite labeled data, centers, coordinatewise squared Euclidean distance, within-cluster sum, and zero contribution from empty clusters.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-finite-gaussian-mixture",
+        "kind": "definition",
+        "title": "Finite Gaussian mixture with positive-definite component covariances",
+        "statement": "Assume AC. Let $p\\ge1$, $\\mu\\in\\mathbb R^p$, and let $\\Sigma\\in\\mathbb R^{p\\times p}$ be symmetric positive definite, meaning $v^{\\mathsf T}\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. Define the component function\n\n$$\\phi_p(x;\\mu,\\Sigma):=(2\\pi)^{-p/2}(\\det\\Sigma)^{-1/2}\\exp\\!\\left(-\\tfrac12(x-\\mu)^{\\mathsf T}\\Sigma^{-1}(x-\\mu)\\right),\\qquad x\\in\\mathbb R^p.$$\n\nThe component law is $N_p(\\mu,\\Sigma)$, the $p$-dimensional normal law with mean $\\mu$ and covariance matrix $\\Sigma$. The separate local normalization result proves that $\\phi_p$ is its Lebesgue density.\n\nA finite $K$-component Gaussian mixture has an integer $K\\ge1$, weights $\\pi_1,\\ldots,\\pi_K>0$ with $\\sum_{k=1}^K\\pi_k=1$, means $\\mu_k\\in\\mathbb R^p$, and symmetric positive-definite covariance matrices $\\Sigma_k\\in\\mathbb R^{p\\times p}$. Its density is\n\n$$f_\\theta(x):=\\sum_{k=1}^K\\pi_k\\phi_p(x;\\mu_k,\\Sigma_k),$$\n\nwhere $\\theta=((\\pi_k,\\mu_k,\\Sigma_k))_{k=1}^K$. For a positive integer $n$ and an ordered sample $x_1,\\ldots,x_n$ modeled as conditionally independent observations from this mixture, define the likelihood $L(\\theta;x_{1:n}):=\\prod_{i=1}^n f_\\theta(x_i)$ and log likelihood $\\ell(\\theta;x_{1:n}):=\\sum_{i=1}^n\\log f_\\theta(x_i)$. The responsibility weight of component $k$ for observation $x_i$ is\n\n$$\\gamma_{ik}(\\theta):=\\frac{\\pi_k\\phi_p(x_i;\\mu_k,\\Sigma_k)}{\\sum_{j=1}^K\\pi_j\\phi_p(x_i;\\mu_j,\\Sigma_j)}.$$",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-moments-variance-and-covariance",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws"
+        ],
+        "justified_by": [
+          "thm-finite-gaussian-component-density-normalized"
+        ],
+        "dependency_level": 0,
+        "strategy": "Definition: specify the positive-weight SPD Gaussian component formula, finite mixture, iid-sample likelihood, and normalized component responsibilities; density normalization is supplied by the local spectral-root theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+        "kind": "lemma",
+        "title": "Strict concavity of log determinant on positive-definite matrices",
+        "statement": "Let $p\\ge1$ and let $A_0,A_1\\in\\mathbb R^{p\\times p}$ be symmetric positive-definite matrices. For $0<t<1$ and $A_0\\ne A_1$,\n\n$$\\log\\det((1-t)A_0+tA_1)>(1-t)\\log\\det A_0+t\\log\\det A_1.$$\n\nIf $A_0=A_1$, equality holds. Thus $A\\mapsto\\log\\det A$ is strictly concave on the positive-definite cone.",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-determinant-of-a-square-matrix",
+          "def-trace-of-a-square-matrix",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-derivative-of-matrix-inversion",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Differentiate log det along an SPD line by Jacobi’s formula, differentiate again using the inverse derivative, show the Hessian is a strictly negative sum of squares for every nonzero symmetric direction, then derive the strict chord inequality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5, printed p. 74",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+        "kind": "theorem",
+        "title": "Equal-spherical mixture assignments and objective converge to k-means",
+        "statement": "Let $n,p,K$ be positive integers, let $x_1,\\ldots,x_n,\\mu_1,\\ldots,\\mu_K\\in\\mathbb R^p$, and fix positive weights $\\pi_1,\\ldots,\\pi_K$ with $\\sum_{k=1}^K\\pi_k=1$. Put $d_{ik}:=\\|x_i-\\mu_k\\|_2^2$, $d_i^*:=\\min_{1\\le k\\le K}d_{ik}$, and $M_i:=\\{k:d_{ik}=d_i^*\\}$. For every $\\sigma>0$, define the normalized soft-assignment weights\n\n$$\\rho_{ik}^{(\\sigma)}:=\\frac{\\pi_k\\exp(-d_{ik}/(2\\sigma^2))}{\\sum_{j=1}^K\\pi_j\\exp(-d_{ij}/(2\\sigma^2))}$$\n\nand the finite-data objective\n\n$$\\Psi_\\sigma:=-2\\sigma^2\\sum_{i=1}^n\\log\\left(\\sum_{k=1}^K\\pi_k\\exp(-d_{ik}/(2\\sigma^2))\\right).$$\n\nAs $\\sigma\\downarrow0$, for each $i$ and $k$,\n\n$$\\rho_{ik}^{(\\sigma)}\\longrightarrow\\begin{cases}\\displaystyle\\frac{\\pi_k}{\\sum_{j\\in M_i}\\pi_j},&k\\in M_i,\\\\[6pt]0,&k\\notin M_i,\\end{cases}$$\n\nand\n\n$$\\Psi_\\sigma\\longrightarrow\\sum_{i=1}^n d_i^*=\\min_{z\\in\\{1,\\ldots,K\\}^n}\\sum_{i=1}^n d_{i,z_i}.$$\n\nThus a unique nearest center receives limiting weight one, while tied nearest centers divide limiting weight in proportion to their fixed mixture weights. This is a fixed-parameter finite-data limit and asserts no convergence of EM iterates.",
+        "deps": [
+          "thm-exponential-limits-and-range"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "strategy": "Factor the minimum squared distance from each finite softmax denominator; the nearest-center weights remain as a positive finite sum, giving proportional tie limits and convergence of the scaled log-sum-exp objective.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, Exercise 13.1",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §9.3.2 and Exercise 9.11",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-lloyd-k-means",
+        "kind": "algorithm",
+        "title": "Lloyd's k-means algorithm with explicit tie handling",
+        "statement": "**Input.** Let $n,p$ be positive integers, let $1\\le K\\le n$, let $x_1,\\ldots,x_n\\in\\mathbb R^p$, and supply initial centers $\\mu_1^{(0)},\\ldots,\\mu_K^{(0)}\\in\\mathbb R^p$.\n\n**Initialization.** Assign each $x_i$ to a nearest initial center, choosing the smallest center index in a tie. Denote these labels by $z_i^{(0)}$.\n\n**Iteration.** For $t=0,1,2,\\ldots$:\n\n1. With the current centers fixed, assign each $x_i$ to a nearest center. If its current label $z_i^{(t)}$ is among the nearest-center indices, retain $z_i^{(t)}$; otherwise choose the smallest nearest-center index. Call the resulting labels $z_i^{(t+1)}$.\n2. For each nonempty cluster $C_k^{(t+1)}:=\\{i:z_i^{(t+1)}=k\\}$, set\n   $$\\mu_k^{(t+1)}:=\\frac{1}{|C_k^{(t+1)}|}\\sum_{i\\in C_k^{(t+1)}}x_i.$$\n   If $C_k^{(t+1)}$ is empty, set $\\mu_k^{(t+1)}:=\\mu_k^{(t)}$.\n3. If both $z^{(t+1)}=z^{(t)}$ and $\\mu^{(t+1)}=\\mu^{(t)}$, return these labels and centers. Otherwise continue with the updated labels and centers.\n\nThe procedure makes no global-minimization claim. Its termination under these tie rules is proved separately.",
+        "deps": [
+          "def-k-means-objective"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Procedure: initialize by nearest center with smallest-index ties, retain current labels on later ties, update nonempty centers to their means, preserve empty centers, and stop only when labels and centers both stabilize.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-finite-gaussian-component-density-normalized",
+        "kind": "theorem",
+        "title": "Positive-definite multivariate Gaussian density is normalized",
+        "statement": "Assume AC. Let $p\\ge1$, let $\\mu\\in\\mathbb R^p$, and let $\\Sigma\\in\\mathbb R^{p\\times p}$ be symmetric positive definite. Let $Z_1,\\ldots,Z_p$ be independent standard normal random variables, let $Z=(Z_1,\\ldots,Z_p)^{\\mathsf T}$, and set $X=\\mu+\\Sigma^{1/2}Z$, where $\\Sigma^{1/2}$ is the symmetric positive-definite square root. Then the law of $X$ has Lebesgue density\n\n$$\\phi_p(x;\\mu,\\Sigma)=(2\\pi)^{-p/2}(\\det\\Sigma)^{-1/2}\\exp\\!\\left(-\\tfrac12(x-\\mu)^{\\mathsf T}\\Sigma^{-1}(x-\\mu)\\right),\\qquad x\\in\\mathbb R^p.$$\n\nIn particular, $\\phi_p$ is nonnegative and $\\int_{\\mathbb R^p}\\phi_p(x;\\mu,\\Sigma)\\,dx=1$.",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-finite-gaussian-mixture",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "strategy": "Diagonalize the SPD covariance, form its symmetric positive square root, identify the product standard-normal density using Tonelli and a generating rectangle class, and apply linear change of variables with the determinant computed spectrally.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §2.3, Equation (2.43)",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-lloyd-objective-monotonicity-and-termination",
+        "kind": "theorem",
+        "title": "Lloyd iteration is objective-decreasing and terminates",
+        "statement": "Let $n,p$ be positive integers, let $1\\le K\\le n$, let $x_1,\\ldots,x_n\\in\\mathbb R^p$, and supply any initial centers in $(\\mathbb R^p)^K$. The tie-sensitive Lloyd algorithm defined on this page terminates after finitely many iterations. At each fixed-center assignment, the K-means objective does not increase, and it strictly decreases if any label changes. At each center update, the objective does not increase, and it strictly decreases if a nonempty-cluster center changes. At termination each label is a nearest-center label under the stated retention rule, and every nonempty-cluster center is its sample mean; no global-minimum conclusion is made.",
+        "deps": [
+          "alg-lloyd-k-means",
+          "def-k-means-objective",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "For each fixed-center assignment use the nearest-center rule and strict tie retention; for each nonempty cluster use the finite least-squares normal equations. The finite label set and unique means rule out nonterminal recurrence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-gaussian-mixture-em",
+        "kind": "algorithm",
+        "title": "Exact EM updates for a finite Gaussian mixture",
+        "statement": "**Inputs.** Assume AC. Supply positive integers $n,p,K$, observations $x_1,\\ldots,x_n\\in\\mathbb R^p$ whose affine span is $\\mathbb R^p$ (equivalently, no nonzero $v\\in\\mathbb R^p$ has $v^{\\mathsf T}x_i$ constant over all $i$), an initial finite Gaussian mixture parameter $\\theta_0=((\\pi_k^{(0)},\\mu_k^{(0)},\\Sigma_k^{(0)}))_{k=1}^K$ in the domain of the finite-mixture definition, and a positive integer $T$.\n\n**Procedure.** For $t=0,1,\\ldots,T-1$, compute the responsibilities\n\n$$\\gamma_{ik}^{(t)}:=\\frac{\\pi_k^{(t)}\\phi_p(x_i;\\mu_k^{(t)},\\Sigma_k^{(t)})}{\\sum_{j=1}^K\\pi_j^{(t)}\\phi_p(x_i;\\mu_j^{(t)},\\Sigma_j^{(t)})},\\qquad N_k^{(t)}:=\\sum_{i=1}^n\\gamma_{ik}^{(t)}.$$\n\nThen make the exact updates\n\n$$\\pi_k^{(t+1)}:=\\frac{N_k^{(t)}}{n},\\qquad \\mu_k^{(t+1)}:=\\frac{1}{N_k^{(t)}}\\sum_{i=1}^n\\gamma_{ik}^{(t)}x_i,$$\n\n$$\\Sigma_k^{(t+1)}:=\\frac{1}{N_k^{(t)}}\\sum_{i=1}^n\\gamma_{ik}^{(t)}(x_i-\\mu_k^{(t+1)})(x_i-\\mu_k^{(t+1)})^{\\mathsf T}.$$\n\n**Output.** Return the finite parameter sequence $(\\theta_0,\\theta_1,\\ldots,\\theta_T)$. Every E-step uses the current parameter and every M-step uses that E-step's responsibilities. The affine-span hypothesis is imposed for the unrestricted positive-definite covariance update; constrained covariance domains require their own M-step. This definition makes no claim about convergence of parameters or a global maximum.",
+        "deps": [
+          "alg-expectation-maximization",
+          "def-axiom-of-choice",
+          "def-finite-gaussian-mixture",
+          "thm-finite-gaussian-component-density-normalized"
+        ],
+        "justified_by": [
+          "thm-gaussian-mixture-exact-m-step-maximizes-q"
+        ],
+        "dependency_level": 2,
+        "strategy": "Procedure: at each finite step compute responsibilities at the current positive-weight/SPD mixture, then set weights to effective-count proportions and means/covariances to responsibility-weighted sample moments.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-gaussian-mixture-exact-m-step-maximizes-q",
+        "kind": "theorem",
+        "title": "The full-affine-span Gaussian-mixture M-step maximizes Q",
+        "statement": "Assume AC. Let $n,p,K$ be positive integers, let $x_1,\\ldots,x_n\\in\\mathbb R^p$ have affine span $\\mathbb R^p$ (equivalently, no nonzero $v\\in\\mathbb R^p$ makes $v^{\\mathsf T}x_i$ constant over all $i$), and let $\\theta=((\\pi_k,\\mu_k,\\Sigma_k))_{k=1}^K$ be a finite Gaussian-mixture parameter with every $\\pi_k>0$ and every $\\Sigma_k$ symmetric positive definite. Define\n\n$$\\gamma_{ik}=\\frac{\\pi_k\\phi_p(x_i;\\mu_k,\\Sigma_k)}{\\sum_{j=1}^K\\pi_j\\phi_p(x_i;\\mu_j,\\Sigma_j)},\\qquad N_k=\\sum_{i=1}^n\\gamma_{ik},\\qquad \\bar x_k=\\frac1{N_k}\\sum_{i=1}^n\\gamma_{ik}x_i,$$\n\nand\n\n$$S_k=\\frac1{N_k}\\sum_{i=1}^n\\gamma_{ik}(x_i-\\bar x_k)(x_i-\\bar x_k)^{\\mathsf T}.$$\n\nFor a candidate parameter $\\vartheta=((\\rho_k,m_k,V_k))_{k=1}^K$ in the same domain, let\n\n$$Q(\\vartheta\\mid\\theta)=\\sum_{i=1}^n\\sum_{k=1}^K\\gamma_{ik}\\log\\!\\left(\\rho_k\\phi_p(x_i;m_k,V_k)\\right).$$\n\nThen every $N_k$ is positive, $\\sum_kN_k=n$, every $S_k$ is positive definite, and the unique global maximizer of $Q(\\vartheta\\mid\\theta)$ over all positive mixture weights summing to one, means in $\\mathbb R^p$, and symmetric positive-definite covariances is\n\n$$\\rho_k^*=N_k/n,\\qquad m_k^*=\\bar x_k,\\qquad V_k^*=S_k.$$\n\nIn particular, the displayed E-step responsibilities and M-step update formulas are well-defined and attain this maximum.",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-determinant-of-a-square-matrix",
+          "def-finite-gaussian-mixture",
+          "def-kullback-leibler-divergence",
+          "def-probability-measure",
+          "def-trace-of-a-square-matrix",
+          "lem-log-determinant-strictly-concave-on-positive-definite-matrices",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-determinant-multiplicative",
+          "thm-finite-gaussian-component-density-normalized",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "def-natural-logarithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Separate the complete-data Q function into simplex, weighted-mean, and covariance terms. Use finite categorical KL, weighted-centering, full affine span, and strict log-det concavity in precision coordinates to prove a unique attained maximizer.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §9.2.2",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            },
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, §8.5.2",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-gaussian-mixture-em-observed-likelihood-is-nondecreasing",
+        "kind": "theorem",
+        "title": "Exact Gaussian-mixture EM does not decrease observed log likelihood",
+        "statement": "Assume AC. Let $n,p,K$ be positive integers, let $x_1,\\ldots,x_n\\in\\mathbb R^p$ have affine span $\\mathbb R^p$ (equivalently, no nonzero $v\\in\\mathbb R^p$ makes $v^{\\mathsf T}x_i$ constant over all $i$), and start from a finite Gaussian-mixture parameter $\\theta_0=((\\pi_k^{(0)},\\mu_k^{(0)},\\Sigma_k^{(0)}))_{k=1}^K$ with positive weights summing to one and symmetric positive-definite covariances. For $t=0,\\ldots,T-1$, where $T\\ge1$, set\n\n$$\\gamma_{ik}^{(t)}:=\\frac{\\pi_k^{(t)}\\phi_p(x_i;\\mu_k^{(t)},\\Sigma_k^{(t)})}{\\sum_{j=1}^K\\pi_j^{(t)}\\phi_p(x_i;\\mu_j^{(t)},\\Sigma_j^{(t)})},\\qquad N_k^{(t)}:=\\sum_i\\gamma_{ik}^{(t)},$$\n\nand update\n\n$$\\pi_k^{(t+1)}:=N_k^{(t)}/n,\\qquad \\mu_k^{(t+1)}:=\\frac{\\sum_i\\gamma_{ik}^{(t)}x_i}{N_k^{(t)}},\\qquad \\Sigma_k^{(t+1)}:=\\frac{\\sum_i\\gamma_{ik}^{(t)}(x_i-\\mu_k^{(t+1)})(x_i-\\mu_k^{(t+1)})^{\\mathsf T}}{N_k^{(t)}}.$$\n\nFor each $t$, define\n\n$$\\ell(\\theta_t;x_{1:n}):=\\sum_{i=1}^n\\log\\!\\left(\\sum_{k=1}^K\\pi_k^{(t)}\\phi_p(x_i;\\mu_k^{(t)},\\Sigma_k^{(t)})\\right).$$\n\nEvery update is well-defined, every $\\theta_t$ remains in the stated mixture domain, and\n\n$$\\ell(\\theta_{t+1};x_{1:n})\\ge\\ell(\\theta_t;x_{1:n})\\qquad(0\\le t<T).$$\n\nNo strict increase, parameter convergence, or global maximum conclusion is asserted.",
+        "deps": [
+          "alg-expectation-maximization",
+          "alg-gaussian-mixture-em",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "cor-continuous-functions-are-borel-measurable",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-axiom-of-choice",
+          "def-finite-gaussian-mixture",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-kullback-leibler-divergence",
+          "def-latent-variable-joint-and-observed-data-factorization",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-determinant-differential-and-jacobis-formula",
+          "thm-derivative-of-matrix-inversion",
+          "thm-em-observed-log-likelihood-is-nondecreasing",
+          "thm-finite-gaussian-component-density-normalized",
+          "thm-gaussian-mixture-exact-m-step-maximizes-q",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-observed-density-is-latent-marginal-under-tonelli",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-cauchy-schwarz-finite"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "strategy": "Construct the normalized finite-label complete-data density and compute its marginal/posterior. Verify support, finite directional KL, positive finite marginals, and absolute log-integrability; identify Q with the local M-step objective and apply the current published EM identity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, §8.5.2 and §14.3.7",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §§9.2.2 and 9.4",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2735,
+    "id": "ml02-clustering-mixtures-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "K-means, Gaussian mixtures, and soft assignments — Examples",
+    "companion": "ml02-clustering-mixtures",
+    "requires": [
+      "ml02-clustering-mixtures"
+    ],
+    "items": [
+      {
+        "id": "ex-lloyd-tie-sensitive-local-minima",
+        "kind": "example",
+        "title": "Tie retention gives distinct Lloyd fixed points",
+        "statement": "For the data $x_1=0,x_2=1,x_3=2,x_4=3$ in $\\mathbb R$ and $K=2$, use nearest-center initialization with smallest-index initialization ties, retain the current label on later ties, replace each nonempty center by its assigned-data mean, and leave empty centers unchanged. For clusters $C_1,C_2$ and centers $c_1,c_2$, define the cost by $J=\\sum_{k=1}^2\\sum_{x_i\\in C_k}(x_i-c_k)^2$. Initial centers $(0,11/10)$ yield the fixed clusters $\\{0\\}$ and $\\{1,2,3\\}$ with centers $(0,2)$ and cost $2$. Initial centers $(3,19/10)$ yield the fixed clusters $\\{3\\}$ and $\\{0,1,2\\}$ with centers $(3,1)$ and cost $2$. Initial centers $(1/2,5/2)$ yield the fixed clusters $\\{0,1\\}$ and $\\{2,3\\}$ with centers $(1/2,5/2)$ and cost $1$. In the first two runs, the boundary observation is tied between the two updated centers and stays in its current cluster by the retention rule; each output is a fixed point, while the third has lower cost.",
+        "deps": [
+          "alg-lloyd-k-means",
+          "def-k-means-objective"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Compute nearest-label assignments, mean updates, subsequent tie retentions, terminal states, and squared costs for all three specified starts; the TikZ figure is only a display of those computations.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, §14.3.5",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            },
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §9.1",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-fractional-gaussian-mixture-responsibilities",
+        "kind": "example",
+        "title": "A tied observation keeps fractional Gaussian responsibilities",
+        "statement": "Assume AC. Take one observation $x=0\\in\\mathbb R$, two Gaussian components with means $\\mu_1=-1$ and $\\mu_2=1$, common variance $\\sigma^2>0$, and mixture weights $\\pi_1=1/3$ and $\\pi_2=2/3$. Their component density is $\\phi_1(x;\\mu,\\sigma^2)=(2\\pi\\sigma^2)^{-1/2}\\exp(-(x-\\mu)^2/(2\\sigma^2))$, and the responsibility of component $k$ is $\\gamma_k=\\pi_k\\phi_1(0;\\mu_k,\\sigma^2)/\\sum_{j=1}^2\\pi_j\\phi_1(0;\\mu_j,\\sigma^2)$. The two squared distances from the observation to the component means are both $1$. For every $\\sigma>0$, the responsibility vector is exactly $(1/3,2/3)$; therefore as $\\sigma\\downarrow0$ it remains fractional rather than converging to $(1,0)$ or $(0,1)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-gaussian-mixture",
+          "thm-equal-spherical-mixture-low-variance-kmeans-limit",
+          "thm-finite-gaussian-component-density-normalized"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Substitute the one-dimensional Gaussian formula; equal distances give identical positive component densities, which cancel in the responsibility ratio. The finite low-variance theorem confirms the weighted tied-center limit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §9.3.2 and Exercise 9.11",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            },
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, Exercise 13.1",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-gaussian-mixture-likelihood-unbounded",
+        "kind": "example",
+        "title": "A two-point sample has unbounded Gaussian-mixture likelihood",
+        "statement": "Assume AC. For the observations $x_1=0,x_2=1\\in\\mathbb R$, use two Gaussian components of weights $1/2,1/2$, both with mean $0$, with variances $\\varepsilon^2$ and $1$ for $\\varepsilon>0$. Write $\\phi_1(x;0,s^2)=(2\\pi s^2)^{-1/2}\\exp(-x^2/(2s^2))$, $f_\\varepsilon(x)=\\tfrac12\\phi_1(x;0,\\varepsilon^2)+\\tfrac12\\phi_1(x;0,1)$, and $L_\\varepsilon=f_\\varepsilon(0)f_\\varepsilon(1)$. Every parameter in this family has positive weights and positive-definite one-dimensional covariances. The likelihood $L_\\varepsilon$ is unbounded above as $\\varepsilon\\downarrow0$; hence its log likelihood is unbounded above as well.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-gaussian-mixture",
+          "thm-finite-gaussian-component-density-normalized",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "strategy": "Lower-bound the mixture density at the collapsing observation by the shrinking-variance component and at the other observation by the fixed component; multiply and send epsilon to zero through positive values.",
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Bishop, Pattern Recognition and Machine Learning, §9.2.2",
+              "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf"
+            },
+            {
+              "title": "Hastie, Tibshirani, and Friedman, The Elements of Statistical Learning, 2nd ed., corrected 12th printing, §14.3.7",
+              "url": "https://drive.google.com/uc?export=download&id=1--Wo5Hcl2y_v3DL-tGgcJHRPdtjiVYjS"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

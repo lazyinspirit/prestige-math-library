@@ -1,0 +1,318 @@
+{
+  "group": "o",
+  "batches": ["45"],
+  "pages_read": [
+    "overparameterized-training-and-interpolation",
+    "overparameterized-training-and-interpolation-examples"
+  ],
+  "items_read": [
+    "lem-du-activation-normalizer-finite-positive",
+    "lem-du-conditional-loss-contraction-under-gram-control",
+    "def-du-overparameterized-network-architectures-and-gram-kernels",
+    "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+    "lem-du-output-gradient-gram-update-identity",
+    "lem-du-initial-output-gaussian-concentration",
+    "lem-du-local-pl-descent-and-path-length",
+    "lem-du-neighborhood-gram-and-hessian-control",
+    "lem-du-simultaneous-initialization-event",
+    "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+    "thm-residual-network-polynomial-width-training-convergence",
+    "ex-du-relu-outside-analytic-activation-class",
+    "ex-du-residual-skip-at-every-layer",
+    "ex-du-interpolation-does-not-imply-test-fit",
+    "ex-du-duplicate-inputs-force-singular-gram",
+    "ex-du-initial-output-common-mode-variance"
+  ],
+  "conventions": [
+    {
+      "convention": "Depth H counts hidden layers. Every weight-matrix entry and output-vector entry is independently initialized as N(0,1), and all entries are trained. The loss is one half the sum of squared residuals, without division by n.",
+      "fixed_by": "def-du-overparameterized-network-architectures-and-gram-kernels",
+      "matters_for": [
+        "lem-du-output-gradient-gram-update-identity",
+        "lem-du-neighborhood-gram-and-hessian-control",
+        "lem-du-simultaneous-initialization-event",
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "convention": "The activation is analytic and nonpolynomial, with finite Lipschitz constants for both the activation and its derivative. Its normalization is cσ = 1/E[σ(Z)²] for standard normal Z.",
+      "fixed_by": "def-du-overparameterized-network-architectures-and-gram-kernels",
+      "matters_for": [
+        "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+        "lem-du-neighborhood-gram-and-hessian-control",
+        "lem-du-simultaneous-initialization-event",
+        "ex-du-relu-outside-analytic-activation-class"
+      ]
+    },
+    {
+      "convention": "The terminal population kernel corresponds to the last hidden weight-matrix Jacobian block, rather than the full output Jacobian or the last hidden-feature covariance. Its Gaussian covariance uses the preceding feature second-moment matrix.",
+      "fixed_by": "def-du-overparameterized-network-architectures-and-gram-kernels",
+      "matters_for": [
+        "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+        "lem-du-simultaneous-initialization-event",
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "convention": "Residual layers 2 through H each add an identity skip and a nonlinear branch scaled by cres/(H√m). The population feature recursion retains the mean cross terms. At H=1, the residual architecture and terminal kernel equal their fully connected counterparts.",
+      "fixed_by": "def-du-overparameterized-network-architectures-and-gram-kernels",
+      "matters_for": [
+        "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+        "lem-du-neighborhood-gram-and-hessian-control",
+        "lem-du-simultaneous-initialization-event",
+        "thm-residual-network-polynomial-width-training-convergence",
+        "ex-du-residual-skip-at-every-layer",
+        "ex-du-duplicate-inputs-force-singular-gram"
+      ]
+    },
+    {
+      "convention": "Parameter balls use the Euclidean norm of the complete parameter tuple, with Frobenius norms on matrix blocks. Residual first-layer and output-vector derivatives carry no 1/H suppression.",
+      "fixed_by": "lem-du-neighborhood-gram-and-hessian-control",
+      "matters_for": [
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "convention": "The Gaussian constructions explicitly assume AC, DC and countable choice. Initial-output concentration is conditional on fixed hidden features and takes probability over the independent output vector.",
+      "fixed_by": "lem-du-initial-output-gaussian-concentration",
+      "matters_for": [
+        "lem-du-simultaneous-initialization-event",
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence",
+        "ex-du-initial-output-common-mode-variance"
+      ]
+    },
+    {
+      "convention": "The residual convergence theorem deliberately uses the sufficient width term n⁴H⁶/λ₀⁴. Its Remarks distinguish this from the sharper source term n⁴/(λ₀⁴H⁶).",
+      "fixed_by": "thm-residual-network-polynomial-width-training-convergence",
+      "matters_for": [
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-du-local-pl-descent-and-path-length",
+      "statement": "Let u: Rᵖ → Rⁿ be C², L = ½‖u−y‖², and r₀ = u(θ₀)−y. On the closed ball B(θ₀,R) suppose a block J* of the output Jacobian satisfies J*J*ᵀ ⪰ (λ/2)Iₙ and ‖∇²L‖ ≤ S, with λ,S>0. If R>2√2‖r₀‖/√λ and 0<η≤1/S, every fixed-step gradient-descent iterate stays in the ball, L(θₖ)≤(1−ηλ/2)ᵏL(θ₀), and the total parameter path length is at most 2√2‖r₀‖/√λ.",
+      "used_by": [
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "id": "lem-du-neighborhood-gram-and-hessian-control",
+      "statement": "Under the stated deterministic initialization bounds, uniformly on parameter balls of radius D satisfying D/√m≤c/T for fully connected networks, or D/√m≤c for residual networks, the last-hidden-layer Gram perturbation is bounded by TnD/√m, or CnD/(H²√m) for residual H≥2. The output Hessian is bounded by TM(1+D)/√m, and the loss Hessian by Tn + T√n(‖r₀‖+T√nD)M(1+D)/√m; T=Aᴴ is replaced by a fixed C independent of H in the residual case.",
+      "used_by": [
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "id": "lem-du-simultaneous-initialization-event",
+      "statement": "For either architecture under AC, DC, countable choice, the activation and bounded-label hypotheses, λ=λmin(K)>0 and 0<δ<1, the respective displayed sufficient width gives probability at least 1−δ of simultaneous feature, matrix, readout and backward-coordinate bounds, J_H(0)J_H(0)ᵀ ⪰ 3λI/4, and ‖u(0)−y‖²≤Tnq. Here q=1+log(16/δ), T=Aᴴ for fully connected networks, and T is replaced by C independent of H for residual H≥2; residual depth one uses the fully connected case.",
+      "used_by": [
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence"
+      ]
+    },
+    {
+      "id": "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+      "statement": "Assume AC, DC and countable choice. Under the hypotheses and notation defining the Du population Gram recursion, every fully connected matrix K^(h), every residual feature second-moment matrix S^(h), and both terminal matrices are finite, symmetric, and positive semidefinite. The fully connected matrices satisfy Kᵢᵢ^(h)=1 for 0≤h<H. For the residual sequence, S^(h)−b^(h)(b^(h))ᵀ is positive semidefinite for 1≤h<H; its diagonal is not asserted to equal one.",
+      "used_by": [
+        "lem-du-simultaneous-initialization-event",
+        "thm-wide-network-gradient-descent-reaches-zero-training-loss",
+        "thm-residual-network-polynomial-width-training-convergence",
+        "ex-du-duplicate-inputs-force-singular-gram"
+      ]
+    },
+    {
+      "id": "lem-du-activation-normalizer-finite-positive",
+      "statement": "Assume AC. Let Z have the standard normal law on R. Suppose σ: R → R is analytic, nonpolynomial, satisfies |σ(0)|≤B for some finite B, and is L-Lipschitz for a finite L. Then 0<E[σ(Z)²]<∞. Consequently cσ=(E[σ(Z)²])⁻¹ is a well-defined positive finite real number.",
+      "used_by": [
+        "def-du-overparameterized-network-architectures-and-gram-kernels",
+        "lem-du-population-gram-kernels-are-finite-symmetric-psd",
+        "ex-du-initial-output-common-mode-variance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Standard-normal density, affine normal laws and degenerate variance conventions.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-even-moment-bound-for-brownian-increments",
+      "used_for": "Gaussian second, eighth and higher even moments in normalization and initialization estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Symmetric matrix spectral bounds and positive-semidefinite kernel interpretation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Euclidean norm, inner-product, coordinate-product and matrix-entry estimates.",
+      "opened": true
+    },
+    {
+      "id": "alg-gradient-descent",
+      "used_for": "Fixed-step update and stationary-point convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-taylor-integral-remainder",
+      "used_for": "Taylor estimates after restricting outputs or the loss to parameter segments.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Induced operator norms of Jacobians, Hessians and weight matrices.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Gaussian covariance constructions, including singular covariances and linear projections.",
+      "opened": true
+    },
+    {
+      "id": "thm-standard-gaussian-lipschitz-concentration",
+      "used_for": "Conditional output-norm concentration, residual cross terms and Gaussian coordinate tails.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Integrability of activation products and first- and second-moment bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-countable-independent-copies-exist",
+      "used_for": "Independent Gaussian copies in terminal-kernel positive-semidefiniteness proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Independent coupling of residual feature laws and fresh Gaussian vectors.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Independent product expectations and exponential-moment factorization.",
+      "opened": true
+    },
+    {
+      "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+      "used_for": "Output-Jacobian first-order expansion and remainder convention.",
+      "opened": true
+    },
+    {
+      "id": "def-frobenius-matrix-norm",
+      "used_for": "Euclidean parameter-block norms and feature-matrix norm bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-p-norms-on-rn",
+      "used_for": "The fourth norm of the initialized readout vector.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Integrating Jacobian bounds along parameter segments.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumptions inherited by Gaussian-law suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Explicit independent-copy and Gaussian concentration assumptions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit Gaussian and independent-copy construction assumptions.",
+      "opened": true
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "used_for": "Bivariate Gaussian density differentiation away from singular correlation endpoints.",
+      "opened": true
+    },
+    {
+      "id": "thm-differentiation-under-the-integral-sign",
+      "used_for": "Differentiation of Gaussian expectation maps on compact correlation intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-by-parts",
+      "used_for": "Compact-rectangle derivation of covariance derivatives of Gaussian expectations.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Gaussian integration limits and continuity at correlation ±1.",
+      "opened": true
+    },
+    {
+      "id": "cor-markov-inequality-for-random-variables",
+      "used_for": "Exponential-moment tail estimates for independent row averages.",
+      "opened": true
+    },
+    {
+      "id": "cor-chebyshev-inequality-for-random-variables",
+      "used_for": "Initialized readout second- and fourth-norm bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Lipschitz control from bounded correlation derivatives.",
+      "opened": true
+    },
+    {
+      "id": "lem-epsilon-net-of-unit-sphere-has-cardinality-bound",
+      "used_for": "Finite sphere nets in Gaussian weight-matrix operator-norm bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-union-bound",
+      "used_for": "Combining initialization events over layers, inputs, coordinates and kernel entries.",
+      "opened": true
+    },
+    {
+      "id": "thm-induction-principle",
+      "used_for": "Population recursions and propagation of equal rows for duplicate inputs.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+      "used_for": "Completing orthonormal inputs to a basis in the common-mode example.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-dimensional-orthogonal-decomposition",
+      "used_for": "Orthogonal complement and projection calculations in the common-mode example.",
+      "opened": true
+    },
+    {
+      "id": "lem-gaussian-matrix-orthogonal-unitary-invariance-and-block-independence",
+      "used_for": "Independence of Gaussian preactivations at orthonormal inputs.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "overparameterized-training-and-interpolation",
+      "to": "nonconvex-gradient-descent-and-stationarity",
+      "faithful": true,
+      "note": "Read the prerequisite page and thm-smooth-bounded-below-gd-stationarity, then checked both convergence arguments against its actual conclusion. The prerequisite establishes vanishing gradients under global smoothness and an iteratewise lower bound; neither interpolation theorem invokes it as a global-minimization result. Their stronger conclusions use the local Gram, Hessian and confinement lemmas proved in this batch. The page prerequisite is contextual and does not overstate the supplier."
+    }
+  ]
+}

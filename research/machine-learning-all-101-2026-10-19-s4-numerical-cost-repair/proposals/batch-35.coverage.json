@@ -1,0 +1,248 @@
+{
+  "pages": [
+    {
+      "page": "recurrent-and-state-space-networks",
+      "sources": [
+        {
+          "title": "Ian Goodfellow, Yoshua Bengio, and Aaron Courville, Deep Learning, Chapter 10, full online textbook chapter",
+          "kind": "textbook",
+          "url": "https://www.deeplearningbook.org/contents/rnn",
+          "locator": "Complete Chapter 10 HTML; specifically \u00a7\u00a710.1\u201310.2 on recurrent computation and unrolling, \u00a710.10 and \u00a710.10.1 on gated recurrent networks and LSTM equations (Eqs. 10.40\u201310.44, printed pp. 405\u2013406). The full chapter was fetched; these are the inspected mathematical passages.",
+          "contents": [
+            {
+              "name": "\u00a710.1, Unfolding Computational Graphs: finite time-indexed copies of a shared recurrent computation",
+              "disposition": "included",
+              "item": "def-recurrent-neural-network",
+              "reason": "The definition states a finite horizon, one time-indexed map per step, and shared parameters without importing the chapter's gradient claims."
+            },
+            {
+              "name": "\u00a710.2, Recurrent Neural Networks: recurrent hidden-state update and parameter sharing over time",
+              "disposition": "included",
+              "item": "def-recurrent-neural-network",
+              "reason": "The local definition specifies state, input, initial value, horizon and parameter reuse as the source's recurrent convention requires."
+            },
+            {
+              "name": "\u00a710.10.1, Long Short-Term Memory: input, forget, output and candidate equations (Eqs. 10.40\u201310.44)",
+              "disposition": "included",
+              "item": "def-lstm-cell",
+              "reason": "The item preserves the peephole-free equations, domains, shared parameters and activation conventions used in this source treatment."
+            },
+            {
+              "name": "Chapter 10 sections on gradient propagation, bidirectional/recursive variants, and empirical model comparisons beyond the assigned architecture statements",
+              "disposition": "out-of-scope",
+              "reason": "The assigned pair defines recurrent and LSTM architectures only; it states no gradient theorem, bidirectional or recursive architecture, training method, or empirical comparison, so adding those claims would exceed the controlling design."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.deeplearningbook.org/contents/rnn",
+              "at": "2026-10-18T19:14:35.106Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-18T19:14:35.107Z",
+            "bytes": 12807992,
+            "sha256_16": "a5b26f2631060f2b",
+            "kind": "html",
+            "text_chars": 108009
+          }
+        },
+        {
+          "title": "Albert Gu, Karan Goel, and Christopher R\u00e9, Efficiently Modeling Long Sequences with Structured State Spaces, arXiv:2111.00396 v3",
+          "kind": "paper",
+          "url": "https://arxiv.org/pdf/2111.00396",
+          "locator": "Full 32-page arXiv v3 text inspected. Relevant headings and arguments: \u00a7\u00a72.1\u20132.4, \u00a7\u00a73.1\u20133.3, Theorems 1\u20133, Algorithm 1, Appendix C.1\u2013C.3 (including Lemmas C.2\u2013C.4 and Proposition 5).",
+          "contents": [
+            {
+              "name": "\u00a72.1, State Space Models: continuous state equation, output and separate direct term",
+              "disposition": "included",
+              "item": "def-linear-state-space-model",
+              "reason": "The local definition gives finite-dimensional domains, local integrability, absolutely continuous trajectories and the separate direct term."
+            },
+            {
+              "name": "\u00a72.2, Addressing Long-Range Dependencies with HiPPO: motivation and empirical context",
+              "disposition": "out-of-scope",
+              "reason": "This pair proves finite matrix structure but makes no memory-optimality, long-range-accuracy or benchmark claim; the motivating discussion is not needed as a mathematical prerequisite."
+            },
+            {
+              "name": "\u00a72.3, Discrete-time SSM: bilinear recurrent matrices and Theorem 2's recurrence-cost claim",
+              "disposition": "included",
+              "item": "def-s4-dplr-parameterization",
+              "reason": "The bilinear definition states the required inverse condition; the local DPLR theorem supplies the actual solve and its correction invertibility."
+            },
+            {
+              "name": "\u00a72.4, Training SSMs: unrolled zero-state recurrence and convolution kernel",
+              "disposition": "included",
+              "item": "def-s4-dplr-parameterization",
+              "reason": "The zero-state kernel is stated with the column-vector and conjugate-transpose convention, and its recurrent/convolutional equality is verified locally in a scalar example."
+            },
+            {
+              "name": "\u00a73.1, Motivation: Diagonalization; Lemma 3.1 on state-coordinate equivalence and Lemma 3.2 on the raw HiPPO diagonalizer",
+              "disposition": "inline",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "The theorem proves the needed coordinate equivalence directly and explicitly uses a diagonal similarity for LegT; it does not import the source's ill-conditioned raw diagonalizer as an S4 representation."
+            },
+            {
+              "name": "\u00a73.2, The S4 Parameterization: Definition 1 and Theorem 1 on normal-plus-low-rank form for HiPPO matrices",
+              "disposition": "included",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "Entrywise decompositions for LegS, LegT and LagT are supplied locally, then the finite-dimensional complex spectral theorem produces the DPLR coordinates."
+            },
+            {
+              "name": "\u00a73.3, S4 Algorithms and Computational Complexity: Theorem 2 and Theorem 3",
+              "disposition": "included",
+              "item": "thm-dplr-discretized-step-linear-cost",
+              "reason": "Theorem 2's one-step claim is proved with both the ordinary Woodbury and singular-diagonal bordered solve branches."
+            },
+            {
+              "name": "\u00a73.3, S4 Algorithms and Computational Complexity: four Cauchy products, linear space, and the source-reported numerical precision claim in Theorem 3",
+              "disposition": "included",
+              "item": "thm-s4-convolution-filter-complexity",
+              "reason": "Original source operation claim is preserved with a complete local arc-tree numerical supplier and S4 error propagation. Absolute kernel error epsilon has explicit log(kappa/epsilon) dependence, reducing uniformly to the reported log(1/epsilon) factor on bounded-kappa families. Variable-precision scalar words/operations are counted, with separation-dependent precision and no bit-cost claim."
+            },
+            {
+              "name": "Appendix C.1: normal-plus-low-rank structure of the HiPPO LegS matrix",
+              "disposition": "included",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "The LegS skew-symmetric part and rank-one correction are checked entry by entry, with the source's time-dependent 1/t coefficient factor retained."
+            },
+            {
+              "name": "Appendix C.2: bilinear update, explicit DPLR solve, and Woodbury identity",
+              "disposition": "included",
+              "item": "lem-woodbury-dplr-bilinear-inverse",
+              "reason": "The finite-dimensional Woodbury identity and its two-sided inverse formula are proved locally; the DPLR cost theorem also handles a singular diagonal base."
+            },
+            {
+              "name": "Appendix C.3, Reductions 1\u20133 and Lemmas C.2\u2013C.4: truncated generating function, bilinear resolvent and Cauchy-kernel reduction",
+              "disposition": "included",
+              "item": "lem-s4-convolution-root-of-unity-reduction",
+              "reason": "The finite geometric identity, bilinear resolvent algebra, Woodbury correction, root \u22121 value and exceptional eigenvalue limit are derived locally."
+            },
+            {
+              "name": "Appendix C.3, Proposition 5 and Corollary C.5: exact and numerical Cauchy-kernel cost statements",
+              "disposition": "included",
+              "item": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+              "reason": "The exact arithmetic complexity is proved by the local product-tree/FFT argument; Proposition 5's numerical branch is not treated as proof of the S4 finite-precision claim."
+            },
+            {
+              "name": "\u00a74 and Appendix D: datasets, benchmarks, training protocols and empirical performance results",
+              "disposition": "out-of-scope",
+              "reason": "The assignment excludes empirical performance, long-context accuracy and complete training-cost claims; the source's experiments are not used as theorem evidence."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/2111.00396",
+              "at": "2026-10-18T19:14:37.843Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-18T19:14:37.844Z",
+            "bytes": 3386172,
+            "sha256_16": "872b4ef302312d04",
+            "kind": "pdf",
+            "pages": 32
+          }
+        },
+        {
+          "title": "Albert Gu, Tri Dao, Stefano Ermon, Atri Rudra, and Christopher R\u00e9, HiPPO: Recurrent Memory with Optimal Polynomial Projections, arXiv:2008.07669 v2",
+          "kind": "paper",
+          "url": "https://arxiv.org/pdf/2008.07669",
+          "locator": "Full relevant sections inspected: \u00a72.3 for the LegS, LegT and LagT coefficient/state generators; Appendices D.1\u2013D.3 for their matrix formulas and derivations. The item uses the finite matrix calculations only.",
+          "contents": [
+            {
+              "name": "\u00a72.3, HiPPO matrices: LegS, LegT and LagT generator conventions and entries",
+              "disposition": "included",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "The theorem records each matrix's entry convention and proves the stated normal-plus-rank-one or rank-two decomposition."
+            },
+            {
+              "name": "Appendix D.1: LegS coefficient matrix and its skew-symmetric plus rank-one decomposition",
+              "disposition": "included",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "The local proof preserves the exact diagonal and off-diagonal entries and states that the ODE carries the additional time factor 1/t."
+            },
+            {
+              "name": "Appendices D.2\u2013D.3: LegT and LagT state matrices and their coordinate conventions",
+              "disposition": "included",
+              "item": "thm-hippo-leg-matrices-have-low-rank-structure",
+              "reason": "The proof distinguishes original LagT diagonal \u22121 from the S4 paper's \u22121/2 variant and handles LegT by an explicit invertible diagonal similarity."
+            },
+            {
+              "name": "The polynomial-projection optimality and approximation results beyond the finite matrix decompositions",
+              "disposition": "out-of-scope",
+              "reason": "The assigned theorem concerns matrix form and coordinate changes only; no optimal-projection or approximation-performance conclusion is asserted or needed for the DPLR algorithm."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/2008.07669",
+              "at": "2026-10-18T19:14:38.633Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-18T19:14:38.633Z",
+            "bytes": 1998619,
+            "sha256_16": "c207f881aa09c2b8",
+            "kind": "pdf",
+            "pages": 47
+          }
+        },
+        {
+          "title": "Victor Y. Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, arXiv:1506.02285 v3",
+          "kind": "paper",
+          "url": "https://arxiv.org/pdf/1506.02285",
+          "locator": "Full relevant text inspected: \u00a7\u00a73.2\u20133.3, 6.1\u20136.4 and 7.1, including exact polynomial/Cauchy arithmetic, the CV/HSS approximate constructions and the arbitrary-knot error discussion.",
+          "contents": [
+            {
+              "name": "\u00a7\u00a73.2\u20133.3: polynomial multiplication and exact Cauchy computations through polynomial arithmetic",
+              "disposition": "inline",
+              "item": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+              "reason": "The product-tree numerator and denominator identity is proved locally and uses the exact polynomial multiplication bound; Pan's general method is not cited as a substitute for that proof."
+            },
+            {
+              "name": "\u00a76.1 geometric separated-kernel expansion, developed into a complete local root-arc-tree proof",
+              "disposition": "included",
+              "item": "thm-cauchy-root-grid-matvec-numerical-cost",
+              "reason": "The local proof supplies certified overlapping routing, constant per-depth interaction lists, degree streaming with linear word memory independent of expansion degree, explicit geometric remainder, and a finite circuit rounding bound for all noncollision root-grid inputs."
+            },
+            {
+              "name": "\u00a7\u00a76.1\u20136.4, including Theorem 6.3: CV/HSS approximate Cauchy computations and the stated log(1/epsilon)=O(log n) regime",
+              "disposition": "included",
+              "item": "thm-s4-convolution-filter-complexity",
+              "reason": "Original source operation claim is preserved with a complete local arc-tree numerical supplier and S4 error propagation. Absolute kernel error epsilon has explicit log(kappa/epsilon) dependence, reducing uniformly to the reported log(1/epsilon) factor on bounded-kappa families. Variable-precision scalar words/operations are counted, with separation-dependent precision and no bit-cost claim."
+            },
+            {
+              "name": "\u00a77.1, including Theorem 7.1: extension to arbitrary knots and error amplification depending on the Cauchy condition number",
+              "disposition": "included",
+              "item": "thm-s4-convolution-filter-complexity",
+              "reason": "Original source operation claim is preserved with a complete local arc-tree numerical supplier and S4 error propagation. Absolute kernel error epsilon has explicit log(kappa/epsilon) dependence, reducing uniformly to the reported log(1/epsilon) factor on bounded-kappa families. Variable-precision scalar words/operations are counted, with separation-dependent precision and no bit-cost claim."
+            },
+            {
+              "name": "Other Cauchy-matrix approximation settings not used by the fixed roots-of-unity exact arithmetic proof",
+              "disposition": "out-of-scope",
+              "reason": "The exact theorem needs only the local product-tree and radix-two FFT proof, while unrelated knot geometries and approximation regimes would not resolve the assigned numerical hypotheses."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://arxiv.org/pdf/1506.02285",
+              "at": "2026-10-18T19:14:39.108Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-18T19:14:39.108Z",
+            "bytes": 729458,
+            "sha256_16": "fbf78d5304f14050",
+            "kind": "pdf",
+            "pages": 25
+          }
+        }
+      ]
+    }
+  ]
+}

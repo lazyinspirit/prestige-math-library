@@ -1,0 +1,13 @@
+# Frozen proposal: distinct reverse-generator domination issue, cycle 1
+
+The previous analytic prerequisite is now locally proved. No active source, contract, manifest, gate, run state or hash has been changed by this packet, and no native acceptance is claimed. Original theorem Statement and its Proof3.1 onward are byteexact; the sampler and the closed predictable reconstruction are untouched.
+
+- `guarded-source-ops.json`: five create-only helpers, three guarded existing-item repairs, and one exact guarded A-page insertion. Every original source before still equals current, and every unique-span operation reproduces its candidate.
+- `candidate/items/`: eight complete final item candidates. The normalized Bellman helper was authored by calibration_surrogate_repair; the other four new helpers and consumer repairs by this lead. Exact authorship and same-lead full consumer dispositions are in `same-lead-consumer-closure.json`.
+- `metadata-contract-directives.json` and `candidate/research/*batch-67.pages.json`: exact-current manifest before/candidate plus insertion order and contract regeneration directions. Dependency levels are provisional: root must recompute the actual DAG levels and all quote/hash mirrors. Owner-created session origin is retained for the normalized Bellman helper, with run/page metadata present.
+- `substantive-boundary-risk-worksheets.json`: all eight native boundary axes plus concrete risk reasoning for all eight candidate items. Preserve every existing finite_smoke array; this packet invents no finite-smoke execution or native review credit.
+- `local-source-validation.json`: exact raw/source span checks, dependency-ID resolution, preserved main Statement/closed core, standalone proof-layout8items61steps0defects. No gates were run.
+
+The generic supplier has an explicit material qualification: Bayes kernels/formal adjoint algebra remain unconditional; its martingale clause now requires the proved helper’s explicit forward backward-Kolmogorov, adjoint and local-flux conditions. The old forward-only martingale assertion is unsupported, not refuted. Root must explicitly approve that interface disposition. The original richer main theorem avoids this qualification entirely: its existing reverse-MP existence and ellipticity imply occupation absolute continuity and identify the actual reverse law. Its consumers therefore receive no added hypothesis.
+
+Root owns final mathematical acceptance, source application, helper registration/owner-create, contract and manifest regeneration, native continuity, hash binding and gates. Historical impasse/conditional packets remain intact and are superseded as proposals by this complete packet, not retroactively certified.

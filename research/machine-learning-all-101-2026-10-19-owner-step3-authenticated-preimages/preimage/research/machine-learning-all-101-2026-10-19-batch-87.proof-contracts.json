@@ -1,0 +1,1563 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-offline-coverage-impossibility-example",
+    "def-offline-reinforcement-learning-dataset",
+    "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+    "alg-trajectory-importance-sampling-ope",
+    "alg-doubly-robust-ope",
+    "thm-trajectory-importance-sampling-is-unbiased",
+    "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+    "rem-offline-rl-distribution-shift-and-pessimism",
+    "ex-offline-ope-full-support-and-missing-support",
+    "ex-offline-ope-exploding-trajectory-weights",
+    "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased",
+    "ex-offline-ope-doubly-robust-correctness-branches"
+  ],
+  "contracts": {
+    "thm-offline-coverage-impossibility-example": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "In each process, every state-action pair has a valid reward/next-state probability row: the specified reward and next state occur with probability $1$. Under the behavior policy the only possible one-step trajectory is $(s_0,a,0,z)$. Hence each size-$n$ logged dataset consists of the same fixed trajectory tuple in both processes, so its law is the same point mass for every $n\\ge1$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The target policy chooses $b$ at $s_0$, so its one-step expected return is $1$ in $M_+$ and $-1$ in $M_-$. Since action $a$ has value $0$, the unique maximizing action is $b$ in $M_+$ and $a$ in $M_-$. The behavior law gives zero probability to action $b$, while the target law gives it probability $1$; thus full trajectory coverage fails.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Let $T$ be any real-valued estimator of finite expectation computed from the logged dataset. Equality of the two dataset laws in step 1.1 implies $\\mathbb E_{M_+}T=\\mathbb E_{M_-}T$ by [F1]. Unbiasedness in both processes would require this common expectation to equal both $1$ and $-1$, which is impossible. A data-based action selector has the same output distribution in both processes; if it chooses $b$ with probability $q$, its probability of being correct is $q$ in $M_+$ and $1-q$ in $M_-$, so it cannot identify the unique maximizing action with certainty in both.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes the nonempty finite state, action, and reward sets; steps 1.1–1.2 construct both transition rows."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 use reward 0 under the behavior action and distinguish target values +1 and -1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement fixes horizon H=1; steps 1.1–1.2 compute the full one-step data and target laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the deterministic behavior-generated trajectory, the missing-target-action support case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or discount boundary is part of this one-step identification claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement explicitly records the choice assumptions and construction. Steps 1.1–2.1 explicitly construct finite point-mass laws and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence/impossibility claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an existence/impossibility claim, not a biconditional."
+        }
+      ]
+    },
+    "def-offline-reinforcement-learning-dataset": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "State and reward sets and every action set are nonempty, H is at least one, and n is at least one. The finite trajectory law is normalized by its joint transition/reward masses, so its indexed path family is not an empty sample space.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "State and reward sets and every action set are nonempty, H is at least one, and n is at least one. The finite trajectory law is normalized by its joint transition/reward masses, so its indexed path family is not an empty sample space."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "State and reward sets and every action set are nonempty, H is at least one, and n is at least one. The finite trajectory law is normalized by its joint transition/reward masses, so its indexed path family is not an empty sample space.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "77c02f7aa8152d9777c2cb6abe34730c570a1b98c1fd508518b908761950f0e0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: policy and transition masses are nonnegative, trajectory atoms are their products, and full coverage transfers behavior-null events to target-null events. Transition and policy masses may be zero. Full trajectory coverage transfers behavior-null events to target-null events, while nonnegative atom products assign zero mass to impossible paths; returns remain finite on the full finite tuple space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Transition and policy masses may be zero. Full trajectory coverage transfers behavior-null events to target-null events, while nonnegative atom products assign zero mass to impossible paths; returns remain finite on the full finite tuple space.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "5e816a327e6c480322d708351794c94cb29c91069494b4b2c510e82573280deb"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton state, action or reward set is allowed by the finite nonempty hypotheses. H=1 has one action/reward transition and n=1 gives one logged trajectory, with the same normalized atom-mass and return definitions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "A singleton state, action or reward set is allowed by the finite nonempty hypotheses. H=1 has one action/reward transition and n=1 gives one logged trajectory, with the same normalized atom-mass and return definitions.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "af253005c0c8b2e36da17ffc237d775b447b66e6aa309354483aa21019932b51"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the nonnegative normalized mass tables and fixed initial state allow deterministic policy, transition and reward laws; the reachable-pair support qualification is stated explicitly. Deterministic policies and deterministic rewards are admitted finite probability masses. The fixed initial state and common transition/reward law remain unchanged, and the support condition is checked only at target-reachable state-action pairs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Deterministic policies and deterministic rewards are admitted finite probability masses. The fixed initial state and common transition/reward law remain unchanged, and the support condition is checked only at target-reachable state-action pairs.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "7c19e974c3a3478f0dee958365c732329b86fbd43681328b887846a0eba34649"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the horizon paragraph explicitly fixes H>=1 and 0<=gamma<=1, and its displayed return is the finite discounted reward sum. The discount interval includes zero and one: zero selects the first reward and one sums the H finite rewards. H itself is positive, so neither endpoint invokes an empty or infinite-horizon return.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The discount interval includes zero and one: zero selects the first reward and one sums the H finite rewards. H itself is positive, so neither endpoint invokes an empty or infinite-horizon return.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "c7f5a4362ddfa7e4e99f0f5d9cb2386cd08e54d133f47cf19d71339cee71b485"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the opening sentence explicitly assumes the Axiom of Choice for the policy-induced path laws, and the following trajectory formula identifies those laws. The opening sentence explicitly assumes the Axiom of Choice for the policy-induced path-law supplier. This is a declared inherited convention, not an assertion that the finite support condition by itself constructs all trajectory laws without that supplier.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The opening sentence explicitly assumes the Axiom of Choice for the policy-induced path-law supplier. This is a declared inherited convention, not an assertion that the finite support condition by itself constructs all trajectory laws without that supplier.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "d995878d0f57ce05e5df9fdbae3a14c5eb960cddfa9edd698ab16d5abdd1844f"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Full coverage is defined as absolute continuity of the target law with respect to behavior law. The reachable state-action support condition is proved sufficient, not asserted necessary or equivalent to full coverage.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Full coverage is defined as absolute continuity of the target law with respect to behavior law. The reachable state-action support condition is proved sufficient, not asserted necessary or equivalent to full coverage.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "ba96923a233d4349b2d9b7e397c234ecbdac46bcc09b91306d8a28ec1d1b24f0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Full coverage is defined as absolute continuity of the target law with respect to behavior law. The reachable state-action support condition is proved sufficient, not asserted necessary or equivalent to full coverage.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Full coverage is defined as absolute continuity of the target law with respect to behavior law. The reachable state-action support condition is proved sufficient, not asserted necessary or equivalent to full coverage.",
+            "item_sha256": "68b0dd5f4525418e0c3cc34393373ee00787c8e80402d442a53458254ceb8591",
+            "row_sha256": "61171367640d739207da1bf511eaabd1b61d75f9a597a096a163e06f3d51afc4"
+          }
+        }
+      ]
+    },
+    "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-radon-nikodym-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\lambda$ and $\\mu$ be sigma-finite positive measures and let $\\nu$ be a\nsigned measure or a finite complex measure on the same measurable space.\nAssume there is an increasing measurable exhaustion $(X_n)_{n\\in\\mathbb N}$\nwith $\\bigcup_nX_n=X$, $\\lambda(X_n)<+\\infty$, $\\mu(X_n)<+\\infty$, and\n$|\\nu|(X_n)<+\\infty$ for every $n$, and assume $\\nu\\ll\\mu\\ll\\lambda$. Then\n$$\\frac{d\\nu}{d\\lambda}=\\frac{d\\nu}{d\\mu}\\frac{d\\mu}{d\\lambda}\\qquad\\lambda\\text{-almost everywhere.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For a complete trajectory atom $\\tau=(s_0,a_0,r_1,\\ldots,a_{H-1},r_H,s_H)$, [F1] gives $P^\\sigma_H(\\{\\tau\\})=\\prod_{k=0}^{H-1}\\sigma(a_k\\mid s_k)p(s_{k+1},r_{k+1}\\mid s_k,a_k)$. If this atom has positive target mass, coverage makes its behavior mass positive. The initial state and every transition/reward factor are common, so on every behavior-positive atom the quotient $P^\\pi_H(\\{\\tau\\})/P^\\mu_H(\\{\\tau\\})$ is exactly $\\prod_{k=0}^{H-1}\\pi(a_k\\mid s_k)/\\mu(a_k\\mid s_k)$; if the target mass is zero, this quotient is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Fix $t<H$ and project the full trajectory law onto $\\Omega_{t+1}$. If a prefix set is behavior-null, its inverse image in $\\Omega_H$ is behavior-null; full coverage makes that inverse image target-null, so $P^\\pi_{t+1}\\ll P^\\mu_{t+1}$. The prefix space is finite. Let $\\lambda_{t+1}$ be counting measure on it; $P^\\mu_{t+1}\\ll\\lambda_{t+1}$, and the whole prefix space is a common finite exhaustion for $\\lambda_{t+1}$, $P^\\mu_{t+1}$, and $P^\\pi_{t+1}$. By [A1], [F4]–[F6] give the RN density classes and their chain rule. On each behavior-positive prefix, [F1]–[F2] give the atom-mass quotient by cancelling the common initial and transition/reward factors, leaving $\\prod_{k=0}^{t}\\pi(A_k\\mid S_k)/\\mu(A_k\\mid S_k)$. Thus $W_{0:t}=dP^\\pi_{t+1}/dP^\\mu_{t+1}$ almost everywhere.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Fix $t<H$ and a real $g$ integrable under $P^\\pi_{t+1}$. Step 2.1 supplies the prefix density $W_{0:t}$. Applying [F7] to $g^+$ and $g^-$ gives $\\mathbb E_{P^\\mu_H}[W_{0:t}|g|]=\\mathbb E_{P^\\pi_{t+1}}|g|<\\infty$ and equality of the two weighted integrals for each part. Subtracting the finite positive and negative integrals by [F8] proves the prefix expectation identity. Taking $t=H-1$ and $g=G$ gives the full-horizon assertion.",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inherited MDP has H at least one and nonempty state/action/reward sets. Prefixes are indexed by t from zero through H minus one, so their likelihood product has at least one action; the prefix spaces carry probability laws rather than empty indexed aggregates.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited MDP has H at least one and nonempty state/action/reward sets. Prefixes are indexed by t from zero through H minus one, so their likelihood product has at least one action; the prefix spaces carry probability laws rather than empty indexed aggregates."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include target-null atoms and behavior-null prefixes, with the ratio convention set to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies when H=1 and t=0, the only prefix is the full trajectory."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly handle zero atom masses and the behavior-null set case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1–3.1 cover t=0 and t=H−1, including the full-horizon identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC, and step 2.1 invokes the AC-dependent RN existence and chain-rule suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves density identities and does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves density identities and does not state an equivalence."
+        }
+      ]
+    },
+    "alg-trajectory-importance-sampling-ope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dataset has n at least one and the inherited finite MDP has H at least one and nonempty action sets. The trajectory product and empirical averages therefore do not admit an empty sample or zero-horizon interpretation.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The dataset has n at least one and the inherited finite MDP has H at least one and nonempty action sets. The trajectory product and empirical averages therefore do not admit an empty sample or zero-horizon interpretation."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The dataset has n at least one and the inherited finite MDP has H at least one and nonempty action sets. The trajectory product and empirical averages therefore do not admit an empty sample or zero-horizon interpretation.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "35cc1809d046f110a022ec0e29355e45b222924647031b414720109090fd0499"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the paragraph computing rho specifies unsupported and both-zero branches, and the WIS display separately returns zero when total weight is zero. An observed behavior-zero target-positive pair returns unsupported; a pair with both probabilities zero gets ratio zero. WIS explicitly returns zero when the sum of full-horizon weights is zero, rather than dividing by that sum.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "An observed behavior-zero target-positive pair returns unsupported; a pair with both probabilities zero gets ratio zero. WIS explicitly returns zero when the sum of full-horizon weights is zero, rather than dividing by that sum.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "e05f825ff28059375dfa3da0cb64451eb9d8708cb3463bb55befe900b66acb5a"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n>=1, the cumulative weights initialized at index -1 to one, and the OIS/PDIS/WIS displays specify the singleton-sample and one-action cases. For n=1 the estimators use one trajectory, with WIS equal to its return only when its full weight is positive and zero otherwise. H=1 gives one action ratio and one reward, with the initialized empty-prefix weight equal to one.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "For n=1 the estimators use one trajectory, with WIS equal to its return only when its full weight is positive and zero otherwise. H=1 gives one action ratio and one reward, with the initialized empty-prefix weight equal to one.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "0a3cb14631386e1b02c1609811dbd3428731101c5c231a4e71213a6a9b4a8689"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the observed zero-propensity branches and the explicit full-horizon coverage requirement distinguish supported evaluations from unsupported records. Deterministic target or behavior policies may assign zero action masses. Coverage excludes behavior-null target-positive trajectories in the mathematical guarantee, while the operational unsupported and both-zero branches still specify outputs on such supplied records.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Deterministic target or behavior policies may assign zero action masses. Coverage excludes behavior-null target-positive trajectories in the mathematical guarantee, while the operational unsupported and both-zero branches still specify outputs on such supplied records.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "c26134f3ad2f150515355f0b7be9741a7f8284c9ad4da6634ae326626cfbbd9b"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the input explicitly allows 0<=gamma<=1 and defines the finite return as the H-term gamma-weighted reward sum. Gamma=0 leaves the first reward contribution, while gamma=1 sums all finitely many rewards. These finite-horizon endpoint formulas require no infinite-horizon convergence assumption; WIS retains its separate zero-total-weight branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Gamma=0 leaves the first reward contribution, while gamma=1 sums all finitely many rewards. These finite-horizon endpoint formulas require no infinite-horizon convergence assumption; WIS retains its separate zero-total-weight branch.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "d4f23d054c3ed4a49ff87c904c55aa26964a5a24ac68dbe636deabb5d294d643"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: its first sentence explicitly assumes AC for the policy-induced trajectory laws, followed by supplied logged data and true propensities. AC is explicitly assumed for the policy-induced trajectory laws used by the ratio supplier. The logged trajectories and true propensities are input data, so the estimator does not silently select an unobserved supporting action or a new fitted behavior policy.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "AC is explicitly assumed for the policy-induced trajectory laws used by the ratio supplier. The logged trajectories and true propensities are input data, so the estimator does not silently select an unobserved supporting action or a new fitted behavior policy.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "910b051a85c4d017f3052e53521e55d04124d76a84aa6c671ed67343513281d0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "OIS, PDIS and self-normalized WIS are three specified estimates. No equivalence between their numerical agreement and correct coverage is stated, and the self-normalized output is explicitly not claimed finite-sample unbiased.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "OIS, PDIS and self-normalized WIS are three specified estimates. No equivalence between their numerical agreement and correct coverage is stated, and the self-normalized output is explicitly not claimed finite-sample unbiased.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "37fae5615b3eb3fbf5b438fd9859b5dfc107941eb248193304f5583f7a5eb016"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "OIS, PDIS and self-normalized WIS are three specified estimates. No equivalence between their numerical agreement and correct coverage is stated, and the self-normalized output is explicitly not claimed finite-sample unbiased.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "OIS, PDIS and self-normalized WIS are three specified estimates. No equivalence between their numerical agreement and correct coverage is stated, and the self-normalized output is explicitly not claimed finite-sample unbiased.",
+            "item_sha256": "525ff668141fcadff49105363f5216d63dd1c5b27ba36704fd2a5754cb55e013",
+            "row_sha256": "50c6413f0a62a4d8f3ee9319f731820d0cd1f46c2be22ee761963331c124dd0d"
+          }
+        }
+      ]
+    },
+    "alg-doubly-robust-ope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inherited MDP has nonempty state, action and reward sets, horizon H at least one, and the evaluation dataset has n at least one. Thus both the action-average values and sample-average estimate exclude empty input lists.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited MDP has nonempty state, action and reward sets, horizon H at least one, and the evaluation dataset has n at least one. Thus both the action-average values and sample-average estimate exclude empty input lists."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited MDP has nonempty state, action and reward sets, horizon H at least one, and the evaluation dataset has n at least one. Thus both the action-average values and sample-average estimate exclude empty input lists.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "514c2bc204b4388b53f692d502864ddc4928a8f47a6d601465b2fbfd18eba20e"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the fixed terminal value Vhat_H=0, the nonnegative fitted multipliers, and the propensity-ratio qualification after the score formula provide these zero conventions. The terminal value Vhat_H is set to zero, finite fitted multipliers may equal zero, and then their affected residual weights vanish. When multipliers are represented as ratios, their stipulated target-positive denominators must be positive; no division by a zero fitted propensity is prescribed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The terminal value Vhat_H is set to zero, finite fitted multipliers may equal zero, and then their affected residual weights vanish. When multipliers are represented as ratios, their stipulated target-positive denominators must be positive; no division by a zero fitted propensity is prescribed.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "dadbd1f86b3be062a7fbdda5d1809218b7c8d413c1b87423534a564bd5776bc4"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the input permits n>=1 and inherits positive horizon H, and the displayed single-trajectory score uses Vhat_H=0. With a single evaluation trajectory the sample average is its one residual score. At horizon H=1 the terminal value is zero and the score reduces to Vhat_0 plus the first weight times reward minus Qhat_0, so both minimal positive sizes are defined.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "With a single evaluation trajectory the sample average is its one residual score. At horizon H=1 the terminal value is zero and the score reduces to Vhat_0 plus the first weight times reward minus Qhat_0, so both minimal positive sizes are defined.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "898db8068b1c1f282053ab0ac5b7609d42c1b2ee547b2c773c9afde21884e680"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the supplied Q functions are finite, the multipliers are finite nonnegative, and their weighted residuals are used without an accuracy assertion. A deterministic policy or reward distribution remains a normalized finite MDP law. Zero multipliers simply delete weighted residuals and finite Qhat values keep every displayed score finite; the procedure itself asserts no unbiasedness for arbitrary jointly misspecified inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "A deterministic policy or reward distribution remains a normalized finite MDP law. Zero multipliers simply delete weighted residuals and finite Qhat values keep every displayed score finite; the procedure itself asserts no unbiasedness for arbitrary jointly misspecified inputs.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "1431ae9e0fd957e3eaab2f4fc258ab833a8643e1a89e740b0b7f2c38dd55f57b"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the score sums gamma^t weighted residuals through H-1 and fixes the terminal value Vhat_H=0 under the inherited finite-horizon discount domain. The inherited discount allows gamma=0 and gamma=1. At zero only the t=0 residual contributes; at one the finite H residuals are undiscounted. The explicit Vhat_H=0 prevents a leftover terminal model term in either endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The inherited discount allows gamma=0 and gamma=1. At zero only the t=0 residual contributes; at one the finite H residuals are undiscounted. The explicit Vhat_H=0 prevents a leftover terminal model term in either endpoint.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "dcdae1e3e02a1ec1d9ce5954b8ab530c2accebe369b22af24e4ef5a30b2f560d"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition explicitly assumes AC for the behavior trajectory law inherited from the finite path-law supplier. The fitted functions and multipliers are supplied and held fixed; no selection of fitted models from arbitrary nonempty sets is added.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The Definition explicitly assumes AC for the behavior trajectory law inherited from the finite path-law supplier. The fitted functions and multipliers are supplied and held fixed; no selection of fitted models from arbitrary nonempty sets is added.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "87194eade39ed57562f676e65298e97e914aefd3e149c0b3f525e4248835baef"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The procedure defines a weighted residual estimate with a fixed zero terminal value. It makes no converse assertion that an unbiased finite estimate forces correct propensities or an exact Q model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The procedure defines a weighted residual estimate with a fixed zero terminal value. It makes no converse assertion that an unbiased finite estimate forces correct propensities or an exact Q model.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "9a7d85e096e2ab01b0c31547a7c08260e4f34d901d1c84c7f436def1f38063aa"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The procedure defines a weighted residual estimate with a fixed zero terminal value. It makes no converse assertion that an unbiased finite estimate forces correct propensities or an exact Q model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The procedure defines a weighted residual estimate with a fixed zero terminal value. It makes no converse assertion that an unbiased finite estimate forces correct propensities or an exact Q model.",
+            "item_sha256": "55c62ab8988f68dbe28b3f60c586b81776a953affd29e4c9de05f5907620980d",
+            "row_sha256": "fe65deb5ccd010d70b1b6727303010526f06e884174ec7bda124548cecd980da"
+          }
+        }
+      ]
+    },
+    "thm-trajectory-importance-sampling-is-unbiased": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-trajectory-importance-sampling-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nThe procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon dataset conditions of the preceding definition, with full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For $0\\le t<H$, let $\\Omega_{t+1}$ be the finite set of trajectory prefixes through $(R_{t+1},S_{t+1})$, and let $P^\\sigma_{t+1}$ be the marginal law of this prefix under policy $\\sigma\\in\\{\\pi,\\mu\\}$. On a behavior-positive prefix define\n\n$$W_{0:t}=\\prod_{k=0}^{t}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},$$\n\nand set $W_{0:t}=0$ on behavior-null prefixes. Then $P^\\pi_{t+1}\\ll P^\\mu_{t+1}$, and $W_{0:t}$ is a version of $dP^\\pi_{t+1}/dP^\\mu_{t+1}$ up to $P^\\mu_{t+1}$-almost-everywhere equality. In particular, for every real $G$ integrable under $P^\\pi_H$, the full-horizon weight $W_{0:H-1}$ satisfies\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:H-1}G]=\\mathbb E_{P^\\pi_H}[G],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:H-1}|G|]<\\infty.$$\n\nThe same identity holds prefixwise: for each $0\\le t<H$ and every real $g$ integrable under $P^\\pi_{t+1}$, with $g$ evaluated on the observed prefix,\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:t}g]=\\mathbb E_{P^\\pi_H}[g],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:t}|g|]<\\infty.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On any input where the algorithm returns numerical estimates, each propensity ratio is finite: when $\\mu(A_t^i\\mid S_t^i)>0$, it is a quotient of finite probabilities by a positive probability; when both probabilities are zero, the algorithm sets the ratio to zero. If $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, the algorithm returns `unsupported` instead. Thus every cumulative weight is finite. Each return and every finite sum in OIS and PDIS is finite because the reward set, horizon, and dataset are finite. The WIS numerator and denominator are finite, and the procedure either divides by a positive finite denominator or returns zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "An observed pair with $\\mu(A_t^i\\mid S_t^i)=0$ lies on a behavior-null trajectory atom by [F1]. Since the trajectory space, horizon, and sample size are finite, the event that any observed pair has zero behavior propensity is a finite union of null events. The algorithm therefore returns numerical estimates almost surely under the behavior sample law. Extending the three estimator expressions by any fixed finite values on the `unsupported` null event does not change their expectations.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Fix a logged trajectory index $i$. By [F1], its law is $P^\\mu_H$, and [F3] applied to $G_i$ gives $\\mathbb E_\\mu[W_{i,H-1}G_i]=\\mathbb E_\\pi[G_H]=J_H(\\pi;s_0)$. Linearity [F4] gives $\\mathbb E_\\mu[\\widehat J_{\\mathrm{OIS}}]=n^{-1}\\sum_{i=1}^nJ_H(\\pi;s_0)=J_H(\\pi;s_0)$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Fix $i$ and $0\\le t<H$. The reward $R_{t+1}^i$ is a function of the prefix through $(R_{t+1},S_{t+1})$, so [F3] gives $\\mathbb E_\\mu[W_{i,t}R_{t+1}^i]=\\mathbb E_\\pi[R_{t+1}]$. Multiplying each equality by the fixed $\\gamma^t$ and summing the finite range $0\\le t<H$, [F4] yields $\\mathbb E_\\mu[\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i]=J_H(\\pi;s_0)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Each of the $n$ PDIS trajectory scores in [F2] has expectation $J_H(\\pi;s_0)$ by step 3.2. Their finite sample average has the same expectation by [F4], proving $\\mathbb E_\\mu[\\widehat J_{\\mathrm{PDIS}}]=J_H(\\pi;s_0)$. Step 3.1 proves the ordinary-estimator claim.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes H≥1 and n≥1 and contains no empty model or empty dataset case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 applies the prefix density identity to each reward, including zero rewards and zero weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows H=1 and n=1; steps 1.1–3.1 use finite averages valid in these cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the single-trajectory OIS average; the density lemma includes behavior-null atoms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite sums in steps 1.1–2.1 cover γ=0 and γ=1 and the terminal index H−1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 explicitly assumes AC for the trajectory-law and RN-density suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives sufficient hypotheses for unbiasedness, not an equivalence."
+        }
+      ]
+    },
+    "thm-doubly-robust-ope-is-unbiased-under-either-correct-component": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-doubly-robust-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the behavior-policy trajectory law. Input a finite-horizon logged dataset with $n\\ge1$ behavior trajectories, a target policy $\\pi$, finite real functions $\\widehat Q_t(s,a)$ for $0\\le t<H$, and finite nonnegative action-weight multipliers $\\widehat\\rho_t(s,a)$ for $0\\le t<H$. Hold the functions and multipliers fixed when taking expectation over the evaluation dataset; they may be conditioned on an independent training sample. Define $\\widehat V_H(s)=0$ for every $s$, and for $t=H-1,\\ldots,0$ define\n\n$$\\widehat V_t(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\widehat Q_t(s,a).$$\n\nFor each logged trajectory $i$, set $\\widehat W_{i,-1}=1$ and $\\widehat W_{i,t}=\\widehat W_{i,t-1}\\widehat\\rho_t(S_t^i,A_t^i)$ for $0\\le t<H$. Compute\n\n$$D_i=\\widehat V_0(s_0)+\\sum_{t=0}^{H-1}\\gamma^t\\widehat W_{i,t}\\left(R_{t+1}^i+\\gamma\\widehat V_{t+1}(S_{t+1}^i)-\\widehat Q_t(S_t^i,A_t^i)\\right),$$\n\nand return $\\widehat J_{\\mathrm{DR}}=n^{-1}\\sum_{i=1}^nD_i$. When supplied as propensity ratios, the multipliers have the form $\\widehat\\rho_t(s,a)=\\pi(a\\mid s)/\\widetilde\\mu_t(a\\mid s)$, with positive denominators on target-positive actions. In the exact-ratio case they equal the target-to-behavior action-likelihood factors $\\pi(a\\mid s)/\\mu(a\\mid s)$; the procedure also permits finite fitted multipliers for the correct-value-model case. The fixed terminal value $\\widehat V_H=0$ is part of the procedure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-horizon-trajectory-ratio-is-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon dataset conditions of the preceding definition, with full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For $0\\le t<H$, let $\\Omega_{t+1}$ be the finite set of trajectory prefixes through $(R_{t+1},S_{t+1})$, and let $P^\\sigma_{t+1}$ be the marginal law of this prefix under policy $\\sigma\\in\\{\\pi,\\mu\\}$. On a behavior-positive prefix define\n\n$$W_{0:t}=\\prod_{k=0}^{t}\\frac{\\pi(A_k\\mid S_k)}{\\mu(A_k\\mid S_k)},$$\n\nand set $W_{0:t}=0$ on behavior-null prefixes. Then $P^\\pi_{t+1}\\ll P^\\mu_{t+1}$, and $W_{0:t}$ is a version of $dP^\\pi_{t+1}/dP^\\mu_{t+1}$ up to $P^\\mu_{t+1}$-almost-everywhere equality. In particular, for every real $G$ integrable under $P^\\pi_H$, the full-horizon weight $W_{0:H-1}$ satisfies\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:H-1}G]=\\mathbb E_{P^\\pi_H}[G],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:H-1}|G|]<\\infty.$$\n\nThe same identity holds prefixwise: for each $0\\le t<H$ and every real $g$ integrable under $P^\\pi_{t+1}$, with $g$ evaluated on the observed prefix,\n\n$$\\mathbb E_{P^\\mu_H}[W_{0:t}g]=\\mathbb E_{P^\\pi_H}[g],\\qquad \\mathbb E_{P^\\mu_H}[W_{0:t}|g|]<\\infty.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-mdp-policy-action-state-reward-path-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let a finite MDP have nonempty state set $S$, and let $\\pi$ be a stationary Markov policy. Fix an initial state $s_0\\in S$ and let\n\n$$Z=\\{(s,a,r,s'):s\\in S,\\ a\\in A(s),\\ r\\in\\mathcal R,\\ s'\\in S\\}$$\n\nwith its discrete sigma-algebra. There is a probability law on $S\\times Z^{\\mathbb N}$ whose first state is $S_0=s_0$ and whose subsequent coordinates are $Z_n=(S_n,A_n,R_{n+1},S_{n+1})$. For every $m\\ge0$ and every feasible finite trajectory $(s_0,a_0,r_1,s_1,\\ldots,a_{m-1},r_m,s_m)$, its probability is\n\n$$\n\\prod_{n=0}^{m-1}\\pi(a_n\\mid s_n)\\,p(s_{n+1},r_{n+1}\\mid s_n,a_n),\n$$\n\nwhere the empty product for $m=0$ is $1$.\n\nIts state-reward marginal also has the finite-prefix probabilities\n\n$$\n\\prod_{n=0}^{m-1}\\sum_{a\\in A(s_n)}\\pi(a\\mid s_n)p(s_{n+1},r_{n+1}\\mid s_n,a)\n$$\n\nfor each feasible finite state-reward path $(s_0,r_1,s_1,\\ldots,r_m,s_m)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-conditional-expectation-exists-by-radon-nikodym",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every real integrable $X$ on $(\\Omega,\\mathcal F,P)$ and every sub-sigma-algebra $\\mathcal G$, a conditional-expectation version of $X$ given $\\mathcal G$ exists.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "First assume condition 1. For every $t$, the residual $C_t=R_{t+1}+\\gamma\\widehat V_{t+1}(S_{t+1})-\\widehat Q_t(S_t,A_t)$ is a function of the prefix through $(R_{t+1},S_{t+1})$, so [F3] gives $\\mathbb E_\\mu[\\widehat W_{0:t}C_t]=\\mathbb E_\\pi[C_t]$. The baseline term is the same under both laws because $S_0=s_0$ is fixed.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Now assume condition 2. For each $s$, let $U_t^\\pi(s)$ be the expected discounted return over steps $t,\\ldots,H-1$ under target policy $\\pi$, starting at state $s$ at time $t$, and set $U_H^\\pi(s)=0$. The zero-step return gives $U_H^\\pi=V_H^\\pi$. If $U_{t+1}^\\pi=V_{t+1}^\\pi$, then conditioning on the finite target action sum and the joint next-state/reward mass gives $U_t^\\pi(s)=\\sum_a\\pi(a\\mid s)\\sum_{s',r}p(s',r\\mid s,a)(r+\\gamma V_{t+1}^\\pi(s'))=\\sum_a\\pi(a\\mid s)Q_t^\\pi(s,a)=V_t^\\pi(s)$. Backward induction proves $U_t^\\pi=V_t^\\pi$ for all $t$, hence $V_0^\\pi(s_0)=J_H(\\pi;s_0)$. Condition 2 and the algorithm's definition of $\\widehat V_t$ then give $\\widehat V_t=V_t^\\pi$ for all $t$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "Fix $t$ and let $\\mathcal H_t$ be the finite sigma-algebra generated by the history through $(S_t,A_t)$. For each positive-probability history atom $h$ ending at $(s,a)$, the path-law formula in [F4] gives $P_\\mu(h,(R_{t+1},S_{t+1})=(r,s'))=P_\\mu(h)\\,p(s',r\\mid s,a)$; dividing by $P_\\mu(h)>0$ proves that the conditional next reward/state mass is $p(s',r\\mid s,a)$. Therefore $E_\\mu[C_t\\mid\\mathcal H_t]=\\sum_{s',r}p(s',r\\mid s,a)\\left(r+\\gamma V_{t+1}^\\pi(s')-Q_t^\\pi(s,a)\\right)=0$. The equality follows because $Q_t^\\pi(s,a)$ is defined by the same finite sum. Each $\\widehat W_{0:t}$ is a finite $\\mathcal H_t$-measurable function, since the trajectory space and horizon are finite and the multipliers are fixed. Applying [F6] and then expectation preservation [F7] yields $\\mathbb E_\\mu[\\widehat W_{0:t}C_t]=0$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "For each state $s$, $\\sum_a\\pi(a\\mid s)\\widehat Q_t(s,a)=\\widehat V_t(s)$, so averaging over the target-law distribution of $S_t$ gives $\\mathbb E_\\pi[\\widehat Q_t(S_t,A_t)]=\\mathbb E_\\pi[\\widehat V_t(S_t)]$. Substituting the density identities from step 1.1 into the expected score, the $\\widehat V_t$ terms telescope: $\\mathbb E_\\mu D=\\widehat V_0(s_0)+\\sum_{t=0}^{H-1}\\gamma^t\\mathbb E_\\pi[R_{t+1}]+\\sum_{t=0}^{H-1}\\gamma^{t+1}\\mathbb E_\\pi[\\widehat V_{t+1}(S_{t+1})]-\\sum_{t=0}^{H-1}\\gamma^t\\mathbb E_\\pi[\\widehat V_t(S_t)]=J_H(\\pi;s_0)$ because $S_0=s_0$ and $\\widehat V_H=0$. This proves condition 1 without requiring a correct Q model.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "Every residual term in $D$ has zero expectation by step 1.3, while the baseline is $\\widehat V_0(s_0)=V_0^\\pi(s_0)=J_H(\\pi;s_0)$ by step 1.2. Hence $\\mathbb E_\\mu D=J_H(\\pi;s_0)$. No coverage or ratio-correctness premise was used in this branch.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Condition 1 implies that one trajectory score has expectation $J_H(\\pi;s_0)$ by step 2.1, and condition 2 implies the same by step 2.2. Every evaluation trajectory has this same behavior law by [F1], so linearity of the integral [F8] makes their finite sample average have expectation $J_H(\\pi;s_0)$. Thus either exact condition is sufficient.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite-horizon dataset conditions give nonempty state/action/reward sets, H at least one and n at least one. The residual and action sums thus have their stipulated finite nonempty domains; the terminal value at H is explicitly zero, not an empty undefined model.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The finite-horizon dataset conditions give nonempty state/action/reward sets, H at least one and n at least one. The residual and action sums thus have their stipulated finite nonempty domains; the terminal value at H is explicitly zero, not an empty undefined model."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 use zero conditional residuals and the terminal value V̂_H=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 establishes the backward-induction base V_H=0 and remains valid when H=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Condition 2 and steps 1.2–1.3 and 2.2 cover missing behavior support and arbitrary finite multipliers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement includes γ∈[0,1]; steps 1.2 and 2.1–2.2 account for γ=0, γ=1, and terminal time H."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 name AC, and step 1.3 uses the AC-dependent conditional-expectation existence result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states two separate sufficient conditions, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states two separate sufficient conditions, not a biconditional characterization."
+        }
+      ]
+    },
+    "rem-offline-rl-distribution-shift-and-pessimism": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The discussion is explicitly under the preceding finite-horizon data assumptions, including a nonempty logged dataset and positive horizon. It neither defines an empty-sample OPE estimator nor claims coverage from an empty behavior law.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The discussion is explicitly under the preceding finite-horizon data assumptions, including a nonempty logged dataset and positive horizon. It neither defines an empty-sample OPE estimator nor claims coverage from an empty behavior law.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "742c7b583fb159733148b380c174bd90e2a81376ccb17bf3dd68f5e9914b9a20"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement in “Limits of offline evaluation and policy optimization” says that with missing coverage, two environments can agree on every logged trajectory and assign different values to an unobserved action. Missing behavior coverage is treated as a limitation: environments can agree on all logs but differ on an unobserved action. Finite assignments on behavior-null unsupported events do not recover identification; self-normalization and clipping can change expectations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Missing behavior coverage is treated as a limitation: environments can agree on all logs but differ on an unobserved action. Finite assignments on behavior-null unsupported events do not recover identification; self-normalization and clipping can change expectations.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "788095a982ff974f0320063ff6ebab638e3625091c0f885f4daebabfc659cae0"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement “For each fixed model, horizon, and sample size, the trajectory dataset space is finite” in the limits paragraph includes their minimal allowed positive values. The finite numerical-output and variance observation applies to each fixed positive horizon and sample size, including H=1 and n=1. It still supplies no uniform variance bound or fixed-sample policy-safety guarantee at those minimal sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The finite numerical-output and variance observation applies to each fixed positive horizon and sample size, including H=1 and n=1. It still supplies no uniform variance bound or fixed-sample policy-safety guarantee at those minimal sizes.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "57aab6dc08d39836be7e4bba6b35f8b10fbd936012e2b3218349091dad8cf650"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement in the limits paragraph says that after a fixed finite assignment on the behavior-null unsupported event, each estimator has finitely many finite values and hence finite second moment. Finite deterministic models and fixed finite assignments on behavior-null unsupported records yield finitely many finite estimator values for each fixed dataset space. This permits finite variance but does not bound variance uniformly as propensities vary or create coverage where none exists.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "Finite deterministic models and fixed finite assignments on behavior-null unsupported records yield finitely many finite estimator values for each fixed dataset space. This permits finite variance but does not bound variance uniformly as propensities vary or create coverage where none exists.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "1dad316b6fa0bdb27a068b8eb2fb99635b05c993b6e304640a7936d82bd5c874"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The opening statement “Under the finite-horizon data assumptions above” retains that definition's discount domain; the later product-weight sentence discusses horizon dependence, not an infinite-horizon endpoint theorem. The remark inherits the finite horizon and discounts zero through one. Its warning about product weights concerns changing horizons and behavior laws, not an unproved infinite-horizon limit at gamma=1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The remark inherits the finite horizon and discounts zero through one. Its warning about product weights concerns changing horizons and behavior laws, not an unproved infinite-horizon limit at gamma=1.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "b3f6d0c850257b35cc612521de846b6fad56e11bc948b8ae2849548c4dc6ccaa"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The opening limits statement invokes the preceding finite-horizon data assumptions, whose Definition explicitly assumes AC for path laws; the remark's frontmatter also lists def-axiom-of-choice among its inherited suppliers. The listed suppliers include AC-backed path laws and unbiasedness results under their stated coverage hypotheses. The remark introduces no optimizer or estimator selection from an arbitrary family; it preserves those supplier assumptions rather than claiming a choice-free safety theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The listed suppliers include AC-backed path laws and unbiasedness results under their stated coverage hypotheses. The remark introduces no optimizer or estimator selection from an arbitrary family; it preserves those supplier assumptions rather than claiming a choice-free safety theorem.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "f4b5790265b67ba148550822c55a789e8a7f0f566831c0ec340921e280ab5f6a"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark distinguishes unbiased evaluation from safety or policy-improvement guarantees and warns that pessimism and constraints alone do not imply safety. It offers no necessary-and-sufficient characterization of safe offline policies.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The remark distinguishes unbiased evaluation from safety or policy-improvement guarantees and warns that pessimism and constraints alone do not imply safety. It offers no necessary-and-sufficient characterization of safe offline policies.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "c99b85469d59aefdeb525a368023921647451ed9196ada8b1c10d361c191842c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark distinguishes unbiased evaluation from safety or policy-improvement guarantees and warns that pessimism and constraints alone do not imply safety. It offers no necessary-and-sufficient characterization of safe offline policies.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/step2_spectral21_repair",
+            "reason": "The remark distinguishes unbiased evaluation from safety or policy-improvement guarantees and warns that pessimism and constraints alone do not imply safety. It offers no necessary-and-sufficient characterization of safe offline policies.",
+            "item_sha256": "0aa297dcc98605cc3221a02cb32f6a646b4e8a817ae813cec893d61e1dfb1791",
+            "row_sha256": "2ae351528db7fd8833a2aae185ce5c708b8c7b02a3c437c961d3c8c114067f9b"
+          }
+        }
+      ]
+    },
+    "ex-offline-ope-full-support-and-missing-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-trajectory-importance-sampling-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nThe procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-offline-coverage-impossibility-example",
+          "source_section": "Statement",
+          "quote": "There are two finite one-step Markov decision processes with the same logged-data law under one behavior policy, but different target-policy values and different uniquely optimal actions. A finite one-step Markov decision process here has a finite state set, finite nonempty action sets, a finite reward set, and a probability mass on the next-state/reward pair for every state/action pair. Let the state set be $\\{s_0,z\\}$, the action sets be $A(s_0)=\\{a,b\\}$ and $A(z)=\\{c\\}$, the reward set be $\\{-1,0,1\\}$, and the horizon be $H=1$. In both processes, action $a$ at $s_0$ gives reward $0$ and moves to $z$, and action $c$ at $z$ gives reward $0$ and stays at $z$. In process $M_+$, action $b$ at $s_0$ gives reward $1$ and moves to $z$; in process $M_-$, it gives reward $-1$ and moves to $z$. The behavior policy chooses $a$ at $s_0$ with probability $1$, while the target policy chooses $b$ there with probability $1$; both policies choose $c$ at $z$ with probability $1$. Every behavior-generated logged trajectory is $(s_0,a,0,z)$ in both processes, so every sample size $n\\ge1$ has the same logged-data law in $M_+$ and $M_-$. The target value is the expected one-step reward: it is $1$ in $M_+$ and $-1$ in $M_-$, and the unique value-maximizing initial action is $b$ in $M_+$ and $a$ in $M_-$. An estimator here is a real-valued function of the logged dataset; it is unbiased for a target value when its expectation under the logged-data law equals that value. Consequently, no such estimator can be unbiased for the target value in both processes, and no data-based action selector can identify the unique optimal initial action with certainty in both.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Under $\\mu(b\\mid s_0)=\\tfrac12$, the ratio for an observed $b$ is $1/(\\tfrac12)=2$; its return is $1$. The ratio for an observed $a$ is $0/(\\tfrac12)=0$; its return is $0$. Thus the OIS score is $2$ with probability $\\tfrac12$ and $0$ with probability $\\tfrac12$, so its expectation is $1$, equal to the target value. Since $H=1$, PDIS has the same score.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Under $\\mu(a\\mid s_0)=1$, the target trajectory taking $b$ has target probability $1$ and behavior probability $0$, so the full-coverage premise fails and its likelihood ratio is undefined. The two reward choices $r(b)=1$ and $r(b)=-1$ yield the same deterministic logged trajectory but target values $1$ and $-1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes nonempty states and actions in both finite one-step MDPs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the zero behavior probability for the target action and the missing-support conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and steps 1.1–2.1 use H=1 and directly compute both possible one-step outcomes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the deterministic behavior policy with absent target-action support."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes the single terminal reward; no varying discount or endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and The two finite examples are constructed explicitly in steps 1.1–2.1 under the stated AC convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies two cases and proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies two cases and proves no biconditional."
+        }
+      ]
+    },
+    "ex-offline-ope-exploding-trajectory-weights": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-trajectory-importance-sampling-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nThe procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Under the target policy all $H$ actions are $b$, every reward is $1$, and $\\gamma=1$, so $G_H=H$. Under behavior, the event that all $H$ actions are $b$ has probability $\\varepsilon^H$; on that event every factor is $1/\\varepsilon$, hence $W_{0:H-1}=\\varepsilon^{-H}$. If any action is $a$, its target probability is zero, the product weight is zero, and the OIS score is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The score $X=W_{0:H-1}G_H$ therefore equals $H\\varepsilon^{-H}$ with probability $\\varepsilon^H$ and $0$ otherwise. Thus $E_\\mu X=\\varepsilon^H H\\varepsilon^{-H}=H$ and $E_\\mu X^2=\\varepsilon^H H^2\\varepsilon^{-2H}=H^2\\varepsilon^{-H}$. Subtracting $(E_\\mu X)^2=H^2$ gives $\\operatorname{Var}_\\mu(X)=H^2(\\varepsilon^{-H}-1)$. Since $\\varepsilon^{-H}$ is exponential in $H$, the variance grows exponentially although every finite-horizon score is finite.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes one state, two actions, and H≥1; it does not treat an empty MDP."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 assigns score zero to every behavior trajectory containing action a."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formulas in steps 1.1–2.1 hold at H=1 as well as every finite H≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes deterministic target actions and the rare-event behavior support parameter ε∈(0,1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example sets γ=1 and includes the final ratio factor at index H−1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and The finite one-state process and all probabilities are explicitly specified; no choice principle is needed for the calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a variance calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a variance calculation, not a biconditional."
+        }
+      ]
+    },
+    "ex-offline-ope-weighted-and-clipped-estimators-can-be-biased": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-trajectory-importance-sampling-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the policy-induced trajectory laws. Input a finite-horizon logged dataset of $n\\ge1$ independent behavior trajectories, a target policy $\\pi$, the true behavior propensities $\\mu(a\\mid s)$, horizon $H$, and discount $0\\le\\gamma\\le1$. Require full horizon coverage $P^\\pi_H\\ll P^\\mu_H$. For trajectory $i$, compute $\\rho_{i,t}=\\pi(A_t^i\\mid S_t^i)/\\mu(A_t^i\\mid S_t^i)$ for $0\\le t<H$, and $W_{i,t}=\\prod_{k=0}^{t}\\rho_{i,k}$; set $W_{i,-1}=1$. If an observed pair has $\\mu(A_t^i\\mid S_t^i)=0<\\pi(A_t^i\\mid S_t^i)$, return status unsupported; if both probabilities are zero, set that ratio to zero. Let $G_i=\\sum_{t=0}^{H-1}\\gamma^tR_{t+1}^i$. Return the ordinary trajectory estimator\n\n$$\\widehat J_{\\mathrm{OIS}}=\\frac1n\\sum_{i=1}^n W_{i,H-1}G_i,$$\n\nthe per-decision estimator\n\n$$\\widehat J_{\\mathrm{PDIS}}=\\frac1n\\sum_{i=1}^n\\sum_{t=0}^{H-1}\\gamma^tW_{i,t}R_{t+1}^i,$$\n\nand the self-normalized weighted estimator\n\n$$\\widehat J_{\\mathrm{WIS}}=\\begin{cases}\\displaystyle\\frac{\\sum_{i=1}^nW_{i,H-1}G_i}{\\sum_{i=1}^nW_{i,H-1}},&\\sum_{i=1}^nW_{i,H-1}>0,\\\\0,&\\sum_{i=1}^nW_{i,H-1}=0.\\end{cases}$$\n\nThe procedure specifies estimators; it includes no finite-sample unbiasedness assertion for the self-normalized output.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For one trajectory, $W_i=2$ and $G_i=1$ when action $b$ is observed, an event of probability $\\tfrac12$; when action $a$ is observed, $W_i=0$ and $G_i=0$. Thus $W_iG_i$ equals $2$ or $0$ with equal probability and has expectation $1$. Linearity gives expectation $1$ for the ordinary sample average.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Let $K$ be the number of $b$ actions in the $n$ independent episodes. If $K>0$, the WIS numerator is $2K$ and its denominator is $2K$, so the estimate is $1$; if $K=0$, its estimate is $0$ by convention. Independence gives $P(K=0)=2^{-n}$. Hence its expectation is $1-2^{-n}$, and its bias relative to target value $1$ is $-2^{-n}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "For each trajectory, $\\min\\{W_i,1\\}G_i$ equals $1$ when $b$ is observed and $0$ when $a$ is observed. Its expectation is $\\tfrac12$, so the clipped sample average also has expectation $\\tfrac12$ by linearity. Its bias is $-\\tfrac12$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes n≥1 and has two states/actions as stated; no empty sample is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles K=0, where the WIS denominator is zero and the algorithm returns zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-trajectory calculations in step 1.1 hold for n=1; the WIS sample formula handles all n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the all-a sample with zero total weight; step 3.1 computes the clipped score."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The one-step example has no discount endpoint variation; γ does not affect the single reward."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and The finite sample space is enumerated directly in steps 1.1–3.1, with no choice principle needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes estimator expectations and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes estimator expectations and states no biconditional."
+        }
+      ]
+    },
+    "ex-offline-ope-doubly-robust-correctness-branches": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-offline-reinforcement-learning-dataset",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice for the policy-induced path laws below. Let $S$ be a nonempty finite state set, let $A(s)$ be a finite nonempty action set for each $s\\in S$, and let $\\mathcal R\\subset\\mathbb R$ be a finite nonempty reward set. A finite Markov decision process here consists of these sets and a joint next-state/reward probability mass $p(s',r\\mid s,a)\\ge0$, defined for $s,s'\\in S$, $a\\in A(s)$, and $r\\in\\mathcal R$, with $\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)=1$ for every $(s,a)$. A stationary Markov policy $\\sigma$ assigns probabilities $\\sigma(a\\mid s)\\ge0$ with $\\sum_{a\\in A(s)}\\sigma(a\\mid s)=1$ at every state.\n\nFix a horizon $H\\ge1$, a discount $0\\le\\gamma\\le1$, and an initial state $s_0\\in S$. A trajectory is a tuple $\\tau=(s_0,a_0,r_1,s_1,\\ldots,a_{H-1},r_H,s_H)$ with $s_t\\in S$, $a_t\\in A(s_t)$, and $r_{t+1}\\in\\mathcal R$ for each $0\\le t<H$. Write $\\Omega_H$ for the finite set of all such tuples. For each stationary policy $\\sigma$, let $P^\\sigma_H$ be the probability law on $\\Omega_H$ whose atom masses are\n\n$$P^\\sigma_H(\\{\\tau\\})=\\prod_{t=0}^{H-1}\\sigma(a_t\\mid s_t)p(s_{t+1},r_{t+1}\\mid s_t,a_t).$$\n\nFor a trajectory $\\tau$, its finite-horizon return is $G_H(\\tau)=\\sum_{t=0}^{H-1}\\gamma^t r_{t+1}$, and the value of target policy $\\pi$ from $s_0$ is $J_H(\\pi;s_0)=\\int_{\\Omega_H}G_H\\,dP^\\pi_H$. A fixed logged dataset of size $n\\ge1$ consists of independent trajectories $(\\tau_1,\\ldots,\\tau_n)$, each with law $P^\\mu_H$ for a behavior policy $\\mu$; the true behavior propensities $\\mu(a\\mid s)$ used to generate the data are known. Full horizon coverage means $P^\\pi_H\\ll P^\\mu_H$, so every behavior-null trajectory event is also target-null. In this finite setting, the condition $\\pi(a\\mid s)>0\\Rightarrow\\mu(a\\mid s)>0$ at every state-action pair reachable under $\\pi$ before time $H$ is sufficient for full horizon coverage. A trajectory function is integrable under a law $P$ when $\\int_{\\Omega_H}|f|\\,dP<\\infty$. All returns are integrable in this finite-horizon finite-reward setting; importance-weighted return expressions below are used only when they are integrable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-doubly-robust-ope",
+          "source_section": "Definition",
+          "quote": "Assume AC for the behavior-policy trajectory law. Input a finite-horizon logged dataset with $n\\ge1$ behavior trajectories, a target policy $\\pi$, finite real functions $\\widehat Q_t(s,a)$ for $0\\le t<H$, and finite nonnegative action-weight multipliers $\\widehat\\rho_t(s,a)$ for $0\\le t<H$. Hold the functions and multipliers fixed when taking expectation over the evaluation dataset; they may be conditioned on an independent training sample. Define $\\widehat V_H(s)=0$ for every $s$, and for $t=H-1,\\ldots,0$ define\n\n$$\\widehat V_t(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\widehat Q_t(s,a).$$\n\nFor each logged trajectory $i$, set $\\widehat W_{i,-1}=1$ and $\\widehat W_{i,t}=\\widehat W_{i,t-1}\\widehat\\rho_t(S_t^i,A_t^i)$ for $0\\le t<H$. Compute\n\n$$D_i=\\widehat V_0(s_0)+\\sum_{t=0}^{H-1}\\gamma^t\\widehat W_{i,t}\\left(R_{t+1}^i+\\gamma\\widehat V_{t+1}(S_{t+1}^i)-\\widehat Q_t(S_t^i,A_t^i)\\right),$$\n\nand return $\\widehat J_{\\mathrm{DR}}=n^{-1}\\sum_{i=1}^nD_i$. When supplied as propensity ratios, the multipliers have the form $\\widehat\\rho_t(s,a)=\\pi(a\\mid s)/\\widetilde\\mu_t(a\\mid s)$, with positive denominators on target-positive actions. In the exact-ratio case they equal the target-to-behavior action-likelihood factors $\\pi(a\\mid s)/\\mu(a\\mid s)$; the procedure also permits finite fitted multipliers for the correct-value-model case. The fixed terminal value $\\widehat V_H=0$ is part of the procedure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-doubly-robust-ope-is-unbiased-under-either-correct-component",
+          "source_section": "Statement",
+          "quote": "Assume AC and the finite-horizon dataset conditions with fixed target policy $\\pi$, behavior policy $\\mu$, horizon $H$, discount $0\\le\\gamma\\le1$, and initial state $s_0$. Hold the finite functions $\\widehat Q_t$ and multipliers $\\widehat\\rho_t$ fixed when taking expectation over the evaluation trajectories. Set $\\widehat V_H(s)=0$ and $\\widehat V_t(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)\\widehat Q_t(s,a)$. Let\n\n$$D(\\tau)=\\widehat V_0(s_0)+\\sum_{t=0}^{H-1}\\gamma^t\\widehat W_{0:t}(\\tau)\\left(R_{t+1}+\\gamma\\widehat V_{t+1}(S_{t+1})-\\widehat Q_t(S_t,A_t)\\right),\\qquad \\widehat W_{0:t}=\\prod_{k=0}^{t}\\widehat\\rho_k(S_k,A_k).$$\n\nFor a dataset of $n$ independent evaluation trajectories, let $\\widehat J_{\\mathrm{DR}}=n^{-1}\\sum_{i=1}^nD(\\tau_i)$. Then $\\mathbb E[\\widehat J_{\\mathrm{DR}}]=J_H(\\pi;s_0)$ under either of these separate conditions:\n\n1. The full target trajectory law is absolutely continuous with respect to the behavior trajectory law, and every multiplier is the correct action ratio $\\widehat\\rho_t(s,a)=\\pi(a\\mid s)/\\mu(a\\mid s)$ on every behavior-positive state-action pair reachable before time $H$; the ratio is $0$ when $\\pi(a\\mid s)=0<\\mu(a\\mid s)$. No correctness assumption is imposed on the functions $\\widehat Q_t$.\n\n2. For every $0\\le t<H$, state $s$, and action $a$, the value model is exact:\n\n   $$\\widehat Q_t(s,a)=Q_t^\\pi(s,a):=\\sum_{s'\\in S}\\sum_{r\\in\\mathcal R}p(s',r\\mid s,a)\\left(r+\\gamma V_{t+1}^\\pi(s')\\right),\\qquad V_H^\\pi(s)=0,\\qquad V_t^\\pi(s)=\\sum_{a\\in A(s)}\\pi(a\\mid s)Q_t^\\pi(s,a),$$\n\n   so $\\widehat V_t=V_t^\\pi$ at every step, including the zero terminal value. This branch requires no trajectory coverage and no correctness assumption on the fixed finite multipliers. If neither exact condition holds, this theorem asserts no unbiasedness.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "In the first case, $\\widehat V_0(s_0)=\\tfrac12\\widehat Q_0(s_0,a)+\\tfrac12\\widehat Q_0(s_0,b)=0$, $\\widehat\\rho_0(s_0,a)=0$, and $\\widehat\\rho_0(s_0,b)=2$. A logged $a$ has score $0+0(0-0)=0$; a logged $b$ has score $0+2(1-0)=2$. Since each occurs with probability $\\tfrac12$, the mean DR score is $1$, the target value, although $\\widehat Q_0(s_0,b)=0\\ne1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "In the second case, the exact finite-horizon model has $Q_0^\\pi(s_0,a)=0$, $Q_0^\\pi(s_0,b)=1$, and $Q_0^\\pi(z,c)=0$; its target-policy value is $\\widehat V_0(s_0)=1$ and its terminal value is $0$. The behavior policy always logs $a$, so each observed residual is $0+\\tfrac12\\cdot0-0=0$, regardless of the supplied multiplier $1$. Every DR score is therefore $1$, and its expectation is the target value despite the absent target action in behavior data.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The first calculation verifies the exact-ratio branch with a misspecified Q function; the second verifies the exact-model branch with missing support and incorrect multipliers. Both use the terminal convention $\\widehat V_1=0$ from [F2].",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-state, nonempty finite MDP and H=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses a zero residual on every observed behavior trajectory in the no-support branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example and steps 1.1–2.1 evaluate the H=1 terminal convention V̂_1=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly uses missing target-action support and finite arbitrary multipliers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example fixes γ=1/2 and terminal time H=1; the algebra uses the terminal value zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC; steps 1.1–2.1 compute the finite transition tables and sample scores explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example demonstrates each sufficient branch, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example demonstrates each sufficient branch, not an equivalence."
+        }
+      ]
+    }
+  }
+}

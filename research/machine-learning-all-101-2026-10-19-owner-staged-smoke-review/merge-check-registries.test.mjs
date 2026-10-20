@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {mergeCheckRegistries as merge} from './merge-check-registries.mjs';
+const a=()=>({ok:true}), b=()=>({ok:false});
+const result=merge([['legacy',{a}],['new',{b}]]);
+assert.equal(result.a,a); assert.equal(result.b,b); assert.ok(Object.isFrozen(result));
+assert.throws(()=>merge([['legacy',{same:a}],['new',{same:b}]]),/legacy and new/);
+assert.throws(()=>merge([['x',{bad:42}]]),/Invalid finite check/);
+assert.throws(()=>merge([['x',[]]]),/Invalid named/);
+const special=Object.create(null);special.__proto__=a;
+assert.equal(Object.getPrototypeOf(merge([['x',special]])),null);
+assert.equal(merge([['x',special]]).__proto__,a);
+console.log('PASS: pure merge preservation, duplicates, invalid registries/callbacks, frozen null prototype');

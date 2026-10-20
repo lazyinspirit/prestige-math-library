@@ -1,0 +1,1142 @@
+{
+  "version": 1,
+  "level": "machine-learning-all-101-2026-10-19",
+  "scope": [
+    "def-finite-labeled-graph",
+    "def-multiset",
+    "def-graph-isomorphism",
+    "def-message-passing-gnn",
+    "def-one-dimensional-weisfeiler-lehman-test",
+    "lem-countable-bounded-multiset-sum-encoding",
+    "alg-message-passing-forward-pass",
+    "def-graph-isomorphism-network",
+    "lem-one-wl-isomorphism-invariance",
+    "thm-message-passing-gnn-no-more-powerful-than-1wl",
+    "thm-injective-message-passing-matches-1wl",
+    "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl",
+    "ex-mean-max-aggregation-lose-multiplicity",
+    "ex-gin-irrational-self-weight-encoding"
+  ],
+  "contracts": {
+    "def-finite-labeled-graph": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty vertex set gives an empty edge set and empty label map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: arbitrary edge sets include the edgeless graph."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a singleton vertex set has no two-element edge."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: labels may be constant; no injectivity is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The graph data have no depth, time horizon or real interval parameter. Vertices at the ends of a drawn edge are ordinary unordered members of that edge; there is no special endpoint identity to prove."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the finite sets and label map are specified data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item specifies a finite vertex set, two-element undirected edges and a vertex-label function. It does not assert an equivalence between graph construction and a tested graph property."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse derives a unique labeled graph from a neighborhood or connectivity condition; the triple and its neighborhood are supplied definitions."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-multiset": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the zero multiplicity function is the empty multiset."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: all multiplicities zero give size zero and empty support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one occurrence has total multiplicity one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated values are represented by multiplicity greater than one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The explicit list convention includes n=0: it denotes the empty multiset, whose multiplicity function is identically zero and whose support sum has size zero. Nonempty lists retain every occurrence through their index count.",
+          "evidence": "The explicit list convention includes n=0: it denotes the empty multiset, whose multiplicity function is identically zero and whose support sum has size zero. Nonempty lists retain every occurrence through their index count."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: a multiplicity function is given; no selection is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "The Definition states equality exactly when multiplicity functions agree. Equal multisets are the same function m:X->N_0, so evaluation at each x gives the same multiplicity.",
+          "evidence": "The Definition states equality exactly when multiplicity functions agree. Equal multisets are the same function m:X->N_0, so evaluation at each x gives the same multiplicity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Conversely, if all multiplicities agree at every x in X, the two multiplicity functions are equal as functions and hence are the same finite multiset. The finite-support requirement remains in force for both inputs.",
+          "evidence": "Conversely, if all multiplicities agree at every x in X, the two multiplicity functions are equal as functions and hence are the same finite multiset. The finite-support requirement remains in force for both inputs."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-graph-isomorphism": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty graphs have the empty bijection; an empty and nonempty graph have no bijection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: edgeless graphs are covered by the same label-preserving bijection condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: singleton graphs are isomorphic exactly when the vertex labels agree."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: repeated labels and nontrivial automorphisms are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "An isomorphism is defined on finite vertex sets and tests distinct pairs; no ordered interval or iteration endpoint is present. Both ends of every undirected edge are already treated symmetrically by the adjacency condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the isomorphism is a given bijection, not a choice from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "For the supplied label-preserving vertex bijection, the defining adjacency biconditional sends each edge {u,v} of G to the edge {phi(u),phi(v)} of H. This is its explicit forward adjacency-preservation requirement.",
+          "evidence": "For the supplied label-preserving vertex bijection, the defining adjacency biconditional sends each edge {u,v} of G to the edge {phi(u),phi(v)} of H. This is its explicit forward adjacency-preservation requirement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "The reverse clause of the same defining biconditional requires an image edge {phi(u),phi(v)} in H to come from {u,v} in G. Bijectivity and label preservation are simultaneous requirements, so nonedges cannot be silently collapsed.",
+          "evidence": "The reverse clause of the same defining biconditional requires an image edge {phi(u),phi(v)} in H to come from {u,v} in G. Bijectivity and label preservation are simultaneous requirements, so nonedges cannot be silently collapsed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-message-passing-gnn": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the graph readout is applied to the empty node-state multiset."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the depth K is finite and may be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a singleton vertex has empty neighbor multiset."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant aggregation, update, or readout maps are permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The depth K may be zero. Then the neighbor/update recursion has no layers and the graph output is R applied to the initial embedded-label multiset, using H_K=H_0. Positive depths read the state after the final prescribed layer.",
+          "evidence": "The depth K may be zero. Then the neighbor/update recursion has no layers and the graph output is R applied to the initial embedded-label multiset, using H_K=H_0. Positive depths read the state after the final prescribed layer."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all feature spaces and maps are input data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes shared aggregation/update/readout functions and defines graph distinction by unequal outputs; it is not an equivalence between distinction and graph nonisomorphism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says every pair of nonisomorphic graphs can be separated by these supplied maps. The no-identity-input and shared-map restrictions remain part of the model data."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-one-dimensional-weisfeiler-lehman-test": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty graph color histogram is the empty multiset at each round."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: edgeless vertices have empty neighbor-color multisets."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: singleton graphs update using the empty neighbor multiset."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a singleton label set and repeated colors are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "At round t=0 the colors are exactly the given labels and the graph multiset is their label histogram. The tuple update starts afterward and is defined for every finite successor; the Definition does not require a last or infinite round.",
+          "evidence": "At round t=0 the colors are exactly the given labels and the graph multiset is their label histogram. The tuple update starts afterward and is defined for every finite successor; the Definition does not require a last or infinite round."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the recursion is a deterministic tuple construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The tuple recurrence defines finite-round colors and a distinguishing event at each round. It does not equate successful color distinction with graph nonisomorphism in both directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "One-WL-indistinguishability means that no finite color histogram differs; no converse claims this forces a vertex isomorphism. The regular-graph limitation remains possible."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-countable-bounded-multiset-sum-encoding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Let $B=\\max\\{2,M+1\\}$ and set $\\phi(x)=B^{\\nu(x)}$. If $M=0$, the only allowed multiset is empty, so its sum encoding is injective. If $M\\ge1$ and two allowed multisets $S,T$ have equal sums, for each $j\\in\\mathbb N_0$ let $d_j$ be the multiplicity in $S$ minus the multiplicity in $T$ of the element with $\\nu$-index $j$, and set $d_j=0$ when no element has that index. The sequence $(d_j)$ has finite support and $|d_j|\\le M$. If some $d_j\\ne0$, let $r$ be its largest such index. Equality of the sums gives $|d_r|B^r=|\\sum_{j<r}d_jB^j|\\le M(B^r-1)/(B-1)\\le B^r-1$, contradicting $|d_r|B^r\\ge B^r$. Hence all multiplicities agree and $S=T$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Suppose $(1+\\varepsilon)\\phi(c)+\\sum_{x\\in S}\\phi(x)=(1+\\varepsilon)\\phi(c')+\\sum_{x\\in T}\\phi(x)$. Rearranging gives $A+\\varepsilon D=0$, where $A=\\phi(c)-\\phi(c')+\\sum_{x\\in S}\\phi(x)-\\sum_{x\\in T}\\phi(x)$ and $D=\\phi(c)-\\phi(c')$ are integers. If $D\\ne0$, then $\\varepsilon=-A/D$ is rational, contrary to the hypothesis. Thus $D=0$; since $B\\ge2$ has distinct powers and $\\nu$ is injective, $\\phi$ is injective and $c=c'$. The equality then reduces to equality of the neighbor sums; step 1.1 gives $S=T$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty multiset has sum zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: M=0 leaves only the empty multiset."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: for M=1, B=2 and distinct code indices have distinct powers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: a singleton feature universe still has an injective code."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The bound M=0 is expressly allowed. Proof step 1.1 then has only the empty neighbor multiset and its sum code is injective; the center/pair argument in step 2.1 still uses the nonzero irrational coefficient and injective base powers.",
+          "evidence": "The bound M=0 is expressly allowed. Proof step 1.1 then has only the empty neighbor multiset and its sum code is injective; the center/pair argument in step 2.1 still uses the nonzero irrational coefficient and injective base powers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: from the given injection nu, the proof constructs phi directly and makes no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma constructs an injective base-power sum code and an irrational self-weight extension on bounded multisets. It gives existence and injectivity, not a characterization of every possible code."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse infers countability or a cardinality bound from an arbitrary injective sum representation; those are supplied hypotheses of this construction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-color, size-at-most-one code",
+          "calculation": "With nu(a)=0, nu(b)=1, M=1, and B=2, the allowed multiset sums are 0 for empty, 1 for {{a}}, and 2 for {{b}}. For epsilon=sqrt(2), the pair values for (a,{{b}}) and (b,{{a}}) are 3+sqrt(2) and 3+2sqrt(2).",
+          "result": "The three bounded multiset sums and the two distinct-center pair codes are unequal as claimed."
+        }
+      ]
+    },
+    "alg-message-passing-forward-pass": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the vertex loop is empty and the procedure returns the empty readout multiset."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: K=0 returns the initial-feature readout explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-vertex graph has no neighbor terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: constant maps still define every procedure step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The Definition explicitly includes K=0 and returns the readout of the embedded initial-label multiset with no layer update. At positive finite K, initialization is round0 and the final readout uses the completed roundK states.",
+          "evidence": "The Definition explicitly includes K=0 and returns the readout of the embedded initial-label multiset with no layer update. At positive finite K, initialization is round0 and the final readout uses the completed roundK states."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: all maps are supplied and the finite loops make no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward-pass algorithm computes typed aggregates, updates and one readout from supplied maps; it does not characterize which graph functions admit this computation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse reconstructs the layer maps from a graph output. Repeated aggregation is an instruction, not a necessary-and-sufficient expressivity assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-graph-isomorphism-network": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the readout receives the empty multiset when the vertex set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: K may be zero, with no update layers."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for one vertex the neighbor sum is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: epsilon and MLP maps need not be injective."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "Depth K is nonnegative. With K=0 there are no epsilon parameters or M_k updates, h_v^0 is the initial embedding, and the defined readout acts on those initial features. The positive-depth formula is applied only for1<=k<=K.",
+          "evidence": "Depth K is nonnegative. With K=0 there are no epsilon parameters or M_k updates, h_v^0 is the initial embedding, and the defined readout acts on those initial features. The positive-depth formula is applied only for1<=k<=K."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: dimensions, scalars, activation, and maps are supplied data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "GIN is defined by its sum preactivation followed by chosen finite perceptrons and a multiset readout. The text expressly imposes no injectivity or universal-map realization claim to characterize."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The displayed GIN update has no converse asserting that every injective multiset function is realized by a fixed finite MLP; that assertion is explicitly disclaimed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-one-wl-isomorphism-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-graph-isomorphism",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in the same set $\\Sigma$. A label-preserving graph isomorphism from $G$ to $H$ is a bijection $\\varphi:V\\to W$ such that $\\ell(v)=m(\\varphi(v))$ for every $v\\in V$, and for all distinct $u,v\\in V$, $\\{u,v\\}\\in E$ if and only if $\\{\\varphi(u),\\varphi(v)\\}\\in F$. The graphs are isomorphic when such a bijection exists, and nonisomorphic otherwise.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-one-dimensional-weisfeiler-lehman-test",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in a common set $\\Sigma$. Define color sets recursively by $C_0=\\Sigma$ and $C_{t+1}=C_t\\times\\mathsf M_{\\mathrm{fin}}(C_t)$ for each integer $t\\ge0$. Set $c_0^G(v)=\\ell(v)$ and $c_0^H(w)=m(w)$; for $t\\ge0$, update\n\n$$ c_{t+1}^G(v)=\\left(c_t^G(v),\\{\\!\\{c_t^G(u):u\\in N_G(v)\\}\\!\\}\\right),\\qquad c_{t+1}^H(w)=\\left(c_t^H(w),\\{\\!\\{c_t^H(z):z\\in N_H(w)\\}\\!\\}\\right). $$\n\nThe graph color multiset at round $t$ is $C_t(G)=\\{\\!\\{c_t^G(v):v\\in V\\}\\!\\}$, and likewise for $H$. One-dimensional Weisfeiler\u2013Leman color refinement distinguishes $G$ and $H$ at round $t$ when $C_t(G)\\ne C_t(H)$; it distinguishes the pair when this holds for some finite $t$. If no finite round distinguishes them, they are one-WL-indistinguishable. In the unlabeled case, take $\\Sigma$ to be a singleton. The tuple update is the canonical collision-free color encoding.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By induction on $t$, $c_t^G(v)=c_t^H(\\varphi(v))$ for every $v\\in V(G)$. At $t=0$ this is label preservation from [F1]. If it holds at $t$, bijectivity and adjacency preservation in [F1] give a bijection $N_G(v)\\to N_H(\\varphi(v))$, and corresponding neighbors have equal round-$t$ colors by the induction hypothesis. Thus the neighbor-color multisets agree; the center colors agree as well, so the ordered-pair update [F2] gives equality at round $t+1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The same vertex bijection therefore sends every occurrence of each round-$t$ color in $G$ to an occurrence of that color in $H$, and its inverse gives the reverse correspondence. Hence the two graph color multisets have equal multiplicities for each color by [F3]. Their round-$t$ histograms agree for every finite $t$, so no round distinguishes them.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: an isomorphism between empty graphs preserves the empty histogram."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: with no edges every neighbor multiset is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the base label equality and induction cover a one-vertex graph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: repeated labels cause no exception to the induction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "Proof step 1.1 begins at t=0 with label preservation and extends along the vertex isomorphism to each finite round. The histogram argument in step 2.1 uses the same bijection, including the initial round, with no separate limiting endpoint.",
+          "evidence": "Proof step 1.1 begins at t=0 with label preservation and extends along the vertex isomorphism to each finite round. The histogram argument in step 2.1 uses the same bijection, including the initial round, with no separate limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: given the isomorphism, the color recursion is deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The isomorphism lemma proves that corresponding vertices and graph histograms keep equal colors. It asserts the isomorphism-to-WL implication only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse from equal WL histograms to a label-preserving graph isomorphism is not asserted; regular nonisomorphic witnesses can share every histogram."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-message-passing-gnn-no-more-powerful-than-1wl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-message-passing-gnn",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex-labeled simple undirected graph $G=(V,E,\\ell)$, a finite nonnegative depth $K$, feature sets $H_0,\\ldots,H_K$, and an initial map $\\eta:\\Sigma\\to H_0$. For each $k=1,\\ldots,K$, choose a set $Z_k$, an aggregation function $A_k:\\mathsf M_{\\mathrm{fin}}(H_{k-1})\\to Z_k$ on finite multisets, and an update function $U_k:H_{k-1}\\times Z_k\\to H_k$. Initialize $h_v^0=\\eta(\\ell(v))$ and recursively set\n\n$$\na_v^k=A_k\\!\\left(\\{\\!\\{h_u^{k-1}:u\\in N_G(v)\\}\\!\\}\\right),\\qquad h_v^k=U_k(h_v^{k-1},a_v^k).\n$$\n\nFor a chosen output set $Y$, a graph readout is a function $R:\\mathsf M_{\\mathrm{fin}}(H_K)\\to Y$; the graph output is $z_G=R(\\{\\!\\{h_v^K:v\\in V\\}\\!\\})$. The same maps are used on every graph being compared. The model has no vertex-identity input and uses no graph-wide information before the readout. It distinguishes two graphs when their outputs differ.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-one-dimensional-weisfeiler-lehman-test",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in a common set $\\Sigma$. Define color sets recursively by $C_0=\\Sigma$ and $C_{t+1}=C_t\\times\\mathsf M_{\\mathrm{fin}}(C_t)$ for each integer $t\\ge0$. Set $c_0^G(v)=\\ell(v)$ and $c_0^H(w)=m(w)$; for $t\\ge0$, update\n\n$$ c_{t+1}^G(v)=\\left(c_t^G(v),\\{\\!\\{c_t^G(u):u\\in N_G(v)\\}\\!\\}\\right),\\qquad c_{t+1}^H(w)=\\left(c_t^H(w),\\{\\!\\{c_t^H(z):z\\in N_H(w)\\}\\!\\}\\right). $$\n\nThe graph color multiset at round $t$ is $C_t(G)=\\{\\!\\{c_t^G(v):v\\in V\\}\\!\\}$, and likewise for $H$. One-dimensional Weisfeiler\u2013Leman color refinement distinguishes $G$ and $H$ at round $t$ when $C_t(G)\\ne C_t(H)$; it distinguishes the pair when this holds for some finite $t$. If no finite round distinguishes them, they are one-WL-indistinguishable. In the unlabeled case, take $\\Sigma$ to be a singleton. The tuple update is the canonical collision-free color encoding.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-message-passing-gnn",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex-labeled simple undirected graph $G=(V,E,\\ell)$, a finite nonnegative depth $K$, feature sets $H_0,\\ldots,H_K$, and an initial map $\\eta:\\Sigma\\to H_0$. For each $k=1,\\ldots,K$, choose a set $Z_k$, an aggregation function $A_k:\\mathsf M_{\\mathrm{fin}}(H_{k-1})\\to Z_k$ on finite multisets, and an update function $U_k:H_{k-1}\\times Z_k\\to H_k$. Initialize $h_v^0=\\eta(\\ell(v))$ and recursively set\n\n$$\na_v^k=A_k\\!\\left(\\{\\!\\{h_u^{k-1}:u\\in N_G(v)\\}\\!\\}\\right),\\qquad h_v^k=U_k(h_v^{k-1},a_v^k).\n$$\n\nFor a chosen output set $Y$, a graph readout is a function $R:\\mathsf M_{\\mathrm{fin}}(H_K)\\to Y$; the graph output is $z_G=R(\\{\\!\\{h_v^K:v\\in V\\}\\!\\})$. The same maps are used on every graph being compared. The model has no vertex-identity input and uses no graph-wide information before the readout. It distinguishes two graphs when their outputs differ.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By induction on $t=0,\\ldots,K$, equal round-$t$ WL colors of vertices from either graph imply equal GNN states after $t$ layers. At $t=0$, the shared initial embedding gives this implication. If it holds at $t$ and two vertices have equal round-$(t+1)$ colors, [F2] says their center colors and neighbor-color multisets agree. By the induction hypothesis, equal neighbor colors have equal GNN states; applying this correspondence occurrence by occurrence gives equal neighbor-state multisets. The shared aggregation and update functions in [F1] therefore give equal next-layer states. Thus a well-defined map from each round-$t$ color occurring in either graph to its common GNN state exists.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At round $K$, the assumed equal WL color multisets become equal multisets of GNN states when each color is sent to its common state from step 1.1; multiplicities are preserved by [F3]. The shared graph readout in [F4] receives equal multisets, so the two graph outputs are equal. The contrapositive gives the stated distinguishing implication.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: equal empty histograms give equal empty readout inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: for K=0, the initial embedding is the induction base and step 2.1 applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: empty neighbor multisets still pass through the shared functions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: noninjective or constant layer maps can collapse colors but cannot exceed the WL ceiling."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "For K=0, proof step 1.1 uses the shared initial embedding and step 2.1 applies the shared readout to equal initial-label state multisets. Thus the zero-layer endpoint is included, while every larger finite K follows the same induction.",
+          "evidence": "For K=0, proof step 1.1 uses the shared initial embedding and step 2.1 applies the shared readout to equal initial-label state multisets. Thus the zero-layer endpoint is included, while every larger finite K follows the same induction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the two graphs and all network maps are supplied inputs; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The upper-power theorem says matching WL histograms force equal GNN outputs. Its equivalent distinguishing formulation is the contrapositive of that implication, not an iff identifying all distinguishing networks."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse WL-distinction-implies-distinction-by-arbitrary-message-passing is not claimed; noninjective maps may collapse colors. The separate injective theorem has additional hypotheses."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-injective-message-passing-matches-1wl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-one-dimensional-weisfeiler-lehman-test",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in a common set $\\Sigma$. Define color sets recursively by $C_0=\\Sigma$ and $C_{t+1}=C_t\\times\\mathsf M_{\\mathrm{fin}}(C_t)$ for each integer $t\\ge0$. Set $c_0^G(v)=\\ell(v)$ and $c_0^H(w)=m(w)$; for $t\\ge0$, update\n\n$$ c_{t+1}^G(v)=\\left(c_t^G(v),\\{\\!\\{c_t^G(u):u\\in N_G(v)\\}\\!\\}\\right),\\qquad c_{t+1}^H(w)=\\left(c_t^H(w),\\{\\!\\{c_t^H(z):z\\in N_H(w)\\}\\!\\}\\right). $$\n\nThe graph color multiset at round $t$ is $C_t(G)=\\{\\!\\{c_t^G(v):v\\in V\\}\\!\\}$, and likewise for $H$. One-dimensional Weisfeiler\u2013Leman color refinement distinguishes $G$ and $H$ at round $t$ when $C_t(G)\\ne C_t(H)$; it distinguishes the pair when this holds for some finite $t$. If no finite round distinguishes them, they are one-WL-indistinguishable. In the unlabeled case, take $\\Sigma$ to be a singleton. The tuple update is the canonical collision-free color encoding.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-message-passing-gnn",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex-labeled simple undirected graph $G=(V,E,\\ell)$, a finite nonnegative depth $K$, feature sets $H_0,\\ldots,H_K$, and an initial map $\\eta:\\Sigma\\to H_0$. For each $k=1,\\ldots,K$, choose a set $Z_k$, an aggregation function $A_k:\\mathsf M_{\\mathrm{fin}}(H_{k-1})\\to Z_k$ on finite multisets, and an update function $U_k:H_{k-1}\\times Z_k\\to H_k$. Initialize $h_v^0=\\eta(\\ell(v))$ and recursively set\n\n$$\na_v^k=A_k\\!\\left(\\{\\!\\{h_u^{k-1}:u\\in N_G(v)\\}\\!\\}\\right),\\qquad h_v^k=U_k(h_v^{k-1},a_v^k).\n$$\n\nFor a chosen output set $Y$, a graph readout is a function $R:\\mathsf M_{\\mathrm{fin}}(H_K)\\to Y$; the graph output is $z_G=R(\\{\\!\\{h_v^K:v\\in V\\}\\!\\})$. The same maps are used on every graph being compared. The model has no vertex-identity input and uses no graph-wide information before the readout. It distinguishes two graphs when their outputs differ.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-countable-bounded-multiset-sum-encoding",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a countable set and let $M\\in\\mathbb N_0$. There is a map $\\phi:\\mathcal X\\to\\mathbb N_{>0}\\subset\\mathbb Q$ such that the sum $S\\mapsto\\sum_{x\\in S}\\phi(x)$ is injective on finite multisets $S$ of total multiplicity at most $M$. For every irrational $\\varepsilon\\in\\mathbb R\\setminus\\mathbb Q$, the map\n\n$$\n(c,S)\\longmapsto(1+\\varepsilon)\\phi(c)+\\sum_{x\\in S}\\phi(x)\n$$\n\nis injective on pairs with $c\\in\\mathcal X$ and $S$ a finite multiset of total multiplicity at most $M$. For $M=0$, the only allowed neighbor multiset is empty.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-graph-isomorphism-network",
+          "source_section": "Definition",
+          "quote": "Fix a finite depth $K\\in\\mathbb N_0$, positive integer dimensions $d_0,\\ldots,d_K$, an initial embedding $\\eta:\\Sigma\\to\\mathbb R^{d_0}$, scalars $\\varepsilon_1,\\ldots,\\varepsilon_K\\in\\mathbb R$, and maps $M_k:\\mathbb R^{d_{k-1}}\\to\\mathbb R^{d_k}$ for $1\\le k\\le K$. Each $M_k$ is a multilayer perceptron, meaning a finite composition of affine maps between finite-dimensional real vector spaces and coordinatewise applications of a fixed scalar activation. On a finite vertex-labeled simple undirected graph $G$, initialize $h_v^0=\\eta(\\ell(v))$ and update\n\n$$\nh_v^k=M_k\\!\\left((1+\\varepsilon_k)h_v^{k-1}+\\sum_{u\\in N_G(v)}h_u^{k-1}\\right)\\qquad(1\\le k\\le K).\n$$\n\nFor a chosen output set $Y$, the graph readout is a map $R:\\mathsf M_{\\mathrm{fin}}(\\mathbb R^{d_K})\\to Y$ on the multiset of final vertex features. The neighbor sum counts each neighbor vertex once, so equal feature vectors at different neighbors contribute with their multiplicity. This definition imposes no injectivity condition on the perceptrons or the readout and makes no claim that a fixed finite architecture realizes an arbitrary injection.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-message-passing-gnn",
+          "source_section": "Definition",
+          "quote": "Fix a finite vertex-labeled simple undirected graph $G=(V,E,\\ell)$, a finite nonnegative depth $K$, feature sets $H_0,\\ldots,H_K$, and an initial map $\\eta:\\Sigma\\to H_0$. For each $k=1,\\ldots,K$, choose a set $Z_k$, an aggregation function $A_k:\\mathsf M_{\\mathrm{fin}}(H_{k-1})\\to Z_k$ on finite multisets, and an update function $U_k:H_{k-1}\\times Z_k\\to H_k$. Initialize $h_v^0=\\eta(\\ell(v))$ and recursively set\n\n$$\na_v^k=A_k\\!\\left(\\{\\!\\{h_u^{k-1}:u\\in N_G(v)\\}\\!\\}\\right),\\qquad h_v^k=U_k(h_v^{k-1},a_v^k).\n$$\n\nFor a chosen output set $Y$, a graph readout is a function $R:\\mathsf M_{\\mathrm{fin}}(H_K)\\to Y$; the graph output is $z_G=R(\\{\\!\\{h_v^K:v\\in V\\}\\!\\})$. The same maps are used on every graph being compared. The model has no vertex-identity input and uses no graph-wide information before the readout. It distinguishes two graphs when their outputs differ.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "For each $k\\le K$, we prove that there is an injective map $\\psi_k$ from the WL colors occurring at round $k$ in either graph to their GNN states. For $k=0$, use the initial embedding and [A1]. If this holds at $k-1$, a round-$k$ WL color has the form $(c,S)$ by [F1]. The injective map $\\psi_{k-1}$ sends different center colors to different center states and, occurrence by occurrence, different neighbor-color multisets to different neighbor-state multisets. By [A2], their aggregates and then their updated states remain different whenever $(c,S)$ differs. Equal WL colors give equal states because the layer maps are shared functions. Thus the resulting round-$k$ state map $\\psi_k$ is well-defined and injective.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The WL histograms at round $K$ differ by hypothesis. Applying the injective map $\\psi_K$ to each color occurrence preserves multiplicities and keeps these two multisets different. The final node-state multisets therefore differ, and [A3] makes their graph readouts different by [F5].",
+          "inputs": [
+            "given",
+            "A3",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "If the active feature set is countable and neighbor multisets have size at most $\\Delta$, apply [F3] with $M=\\Delta$ to obtain the stated center/multiset preactivation code for any irrational $\\varepsilon$. If each graph has at most $N$ vertices, apply the multiset part of [F3] with $M=N$ to obtain an injective sum code for final node-state multisets. Formula [F4] identifies the first code with the GIN preactivation when the current features use $\\phi$; the injectivity of any post-MLP or readout realizing the full theorem remains the separate hypothesis [A2]\u2013[A3].",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "Both-empty graphs do not meet the WL-distinction hypothesis, but one empty and one nonempty graph can meet it already at round0; their state multisets remain different under the injective maps in proof steps 1.1\u20132.1. Empty neighbor multisets and size bounds Delta=0 or N=0 are separately covered by the bounded-multiset construction invoked in step 3.1.",
+          "evidence": "Both-empty graphs do not meet the WL-distinction hypothesis, but one empty and one nonempty graph can meet it already at round0; their state multisets remain different under the injective maps in proof steps 1.1\u20132.1. Empty neighbor multisets and size bounds Delta=0 or N=0 are separately covered by the bounded-multiset construction invoked in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1: if WL separates at round zero, the injective initial map and readout preserve the difference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the induction applies to single vertices and empty neighbor multisets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the conclusion is conditional on the stated injectivity hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "If K=0 already distinguishes the initial label histograms, the base embedding in proof step 1.1 is injective on occurring labels. Step2.1 then sends the different initial histograms to different state multisets and the injective readout separates them, without requiring a layer update.",
+          "evidence": "If K=0 already distinguishes the initial label histograms, the base embedding in proof step 1.1 is injective on occurring labels. Step2.1 then sends the different initial histograms to different state multisets and the injective readout separates them, without requiring a layer update."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1: the proof uses the supplied maps and constructed code, with no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Under actual embedding/aggregation/update/readout injectivity, a WL-distinguished pair has different GNN outputs. The theorem states a sufficient hypothesis chain, not an iff classification of all network maps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says a network separating this pair must have globally injective aggregation or that a finite MLP realizes every abstract injection. The Statement explicitly retains those separate hypotheses and the limited sum-code existence scope."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-nonisomorphic-regular-graphs-indistinguishable-by-1wl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-labeled-graph",
+          "source_section": "Definition",
+          "quote": "Fix a set of labels $\\Sigma$. A finite vertex-labeled simple undirected graph is a triple $G=(V,E,\\ell)$ in which $V$ is a finite set of vertices, $E$ is a set of two-element subsets of $V$, and $\\ell:V\\to\\Sigma$ assigns a label to each vertex. Its neighborhood at $v\\in V$ is $N_G(v)=\\{u\\in V:\\{u,v\\}\\in E\\}$. Thus edges have no orientation, loops, or multiplicity. Graphs compared in one labeled-graph statement use the same label set $\\Sigma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-graph-isomorphism",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in the same set $\\Sigma$. A label-preserving graph isomorphism from $G$ to $H$ is a bijection $\\varphi:V\\to W$ such that $\\ell(v)=m(\\varphi(v))$ for every $v\\in V$, and for all distinct $u,v\\in V$, $\\{u,v\\}\\in E$ if and only if $\\{\\varphi(u),\\varphi(v)\\}\\in F$. The graphs are isomorphic when such a bijection exists, and nonisomorphic otherwise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-one-dimensional-weisfeiler-lehman-test",
+          "source_section": "Definition",
+          "quote": "Let $G=(V,E,\\ell)$ and $H=(W,F,m)$ be finite vertex-labeled simple undirected graphs with labels in a common set $\\Sigma$. Define color sets recursively by $C_0=\\Sigma$ and $C_{t+1}=C_t\\times\\mathsf M_{\\mathrm{fin}}(C_t)$ for each integer $t\\ge0$. Set $c_0^G(v)=\\ell(v)$ and $c_0^H(w)=m(w)$; for $t\\ge0$, update\n\n$$ c_{t+1}^G(v)=\\left(c_t^G(v),\\{\\!\\{c_t^G(u):u\\in N_G(v)\\}\\!\\}\\right),\\qquad c_{t+1}^H(w)=\\left(c_t^H(w),\\{\\!\\{c_t^H(z):z\\in N_H(w)\\}\\!\\}\\right). $$\n\nThe graph color multiset at round $t$ is $C_t(G)=\\{\\!\\{c_t^G(v):v\\in V\\}\\!\\}$, and likewise for $H$. One-dimensional Weisfeiler\u2013Leman color refinement distinguishes $G$ and $H$ at round $t$ when $C_t(G)\\ne C_t(H)$; it distinguishes the pair when this holds for some finite $t$. If no finite round distinguishes them, they are one-WL-indistinguishable. In the unlabeled case, take $\\Sigma$ to be a singleton. The tuple update is the canonical collision-free color encoding.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "In $G$, vertex $i$ has the two distinct neighbors $i-1$ and $i+1$ modulo $6$. In $H$, each vertex has the other two vertices of its own triangle as neighbors. Thus every vertex in each graph has degree $2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "At round $0$, all vertices of both graphs have color $\\star$. If every vertex in both graphs has a common color $c_t$ at round $t$, then each vertex has the neighbor-color multiset with exactly two copies of $c_t$. The update [F3] therefore assigns the same ordered-pair color to every vertex in both graphs at round $t+1$. By induction, each graph has six copies of the same color at every round, so their color multisets agree and 1-WL never distinguishes them.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Suppose an isomorphism $\\varphi:G\\to H$ existed. Choose one vertex from each of the two triangles of $H$ and take their preimages under the surjection $\\varphi$. In $G$ a finite sequence of cyclically consecutive vertices joins those preimages. Applying $\\varphi$ to that sequence gives an edge path in $H$ by [F2], but $H$ has no edge between its triangles and hence no such path. This contradiction proves nonisomorphism.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: the fixed witness consists of six vertices in each graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: every vertex has degree two, so no zero-degree boundary occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: the fixed witness has six vertices, not one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1: uniform labels, repeated colors, and disconnected components are treated explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "Verification step 1.2 starts at round0 with six copies of the common label in each graph and propagates that equality to every finite successor. There is no terminal-round assumption or limit step in this indistinguishability witness.",
+          "evidence": "Verification step 1.2 starts at round0 with six copies of the common label in each graph and propagates that equality to every finite successor. There is no terminal-round assumption or limit step in this indistinguishability witness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the proof names vertices in the two finite triangles and uses a hypothetical bijection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A six-cycle and two triangles provide a nonisomorphic pair with equal WL histograms; the example is a particular limitation witness, not an equivalence between regularity and indistinguishability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse says every WL-indistinguishable pair is a six-cycle/two-triangle pair or even regular. Only the listed finite graphs are verified."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "C6 versus two disjoint C3 graphs",
+          "calculation": "Each vertex in C6 and in C3 disjoint-union C3 has exactly two neighbors. With one uniform initial color, each round gives every vertex the same color and each six-vertex graph histogram consists of six copies of that color. C6 has paths between all vertex pairs; the two triangles have no path between components.",
+          "result": "The graphs are nonisomorphic and one-WL-indistinguishable at every finite round."
+        }
+      ]
+    },
+    "ex-mean-max-aggregation-lose-multiplicity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The multiplicity of $x$ is $1$ in $S_1$ and $2$ in $S_2$, so $S_1\\ne S_2$ by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The sums are $x$ and $2x$, with sizes $1$ and $2$, so both means equal $x$. In each coordinate, the maximum of one copy of $x_j$ and the maximum of two equal copies of $x_j$ are both $x_j$. Thus both aggregators return the same value on the distinct multisets.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: mean and max are defined only on the stated nonempty multisets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: with x=0 both means and coordinatewise maxima are still equal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the example compares multisets of sizes one and two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: any vector x, including repeated or constant coordinates, gives the same outputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The smallest admitted nonempty multiset here is the singleton S_1={x}. Verification step 2.1 divides its sum by size1 and takes a singleton coordinate maximum, both yielding x; the two-copy multiset gives the same outputs. Empty means/maxima are excluded by the stated nonempty input condition.",
+          "evidence": "The smallest admitted nonempty multiset here is the singleton S_1={x}. Verification step 2.1 divides its sum by size1 and takes a singleton coordinate maximum, both yielding x; the two-copy multiset gives the same outputs. Empty means/maxima are excluded by the stated nonempty input condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the arbitrary input x and the two finite multisets are specified directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits two different multisets with identical mean and max values, establishing noninjectivity by a witness rather than an iff characterization of all collisions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse asserts that equal mean or maximum always arises only from repeating one vector. Other collisions are not excluded or classified."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one versus two copies of a vector",
+          "calculation": "For x in R^d, mean({{x}})=x and mean({{x,x}})=(x+x)/2=x; coordinatewise max over one or two equal copies is x.",
+          "result": "Both aggregators agree on two different multisets."
+        }
+      ]
+    },
+    "ex-gin-irrational-self-weight-encoding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multiset",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A finite multiset on $X$ is a function $m:X\\to\\mathbb N_0$ with finite support $\\operatorname{supp}(m)=\\{x\\in X:m(x)>0\\}$. The multiplicity $m(x)$ is the number of occurrences of $x$, and the size is $|m|=\\sum_{x\\in\\operatorname{supp}(m)}m(x)$. Two finite multisets are equal exactly when their multiplicity functions agree at every element of $X$. We write $\\{\\!\\{x_1,\\ldots,x_n\\}\\!\\}$ for the multiset whose multiplicity at $x$ is the number of indices $i$ with $x_i=x$; $n=0$ denotes the empty multiset.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-graph-isomorphism-network",
+          "source_section": "Definition",
+          "quote": "Fix a finite depth $K\\in\\mathbb N_0$, positive integer dimensions $d_0,\\ldots,d_K$, an initial embedding $\\eta:\\Sigma\\to\\mathbb R^{d_0}$, scalars $\\varepsilon_1,\\ldots,\\varepsilon_K\\in\\mathbb R$, and maps $M_k:\\mathbb R^{d_{k-1}}\\to\\mathbb R^{d_k}$ for $1\\le k\\le K$. Each $M_k$ is a multilayer perceptron, meaning a finite composition of affine maps between finite-dimensional real vector spaces and coordinatewise applications of a fixed scalar activation. On a finite vertex-labeled simple undirected graph $G$, initialize $h_v^0=\\eta(\\ell(v))$ and update\n\n$$\nh_v^k=M_k\\!\\left((1+\\varepsilon_k)h_v^{k-1}+\\sum_{u\\in N_G(v)}h_u^{k-1}\\right)\\qquad(1\\le k\\le K).\n$$\n\nFor a chosen output set $Y$, the graph readout is a map $R:\\mathsf M_{\\mathrm{fin}}(\\mathbb R^{d_K})\\to Y$ on the multiset of final vertex features. The neighbor sum counts each neighbor vertex once, so equal feature vectors at different neighbors contribute with their multiplicity. This definition imposes no injectivity condition on the perceptrons or the readout and makes no claim that a fixed finite architecture realizes an arbitrary injection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-countable-bounded-multiset-sum-encoding",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X$ be a countable set and let $M\\in\\mathbb N_0$. There is a map $\\phi:\\mathcal X\\to\\mathbb N_{>0}\\subset\\mathbb Q$ such that the sum $S\\mapsto\\sum_{x\\in S}\\phi(x)$ is injective on finite multisets $S$ of total multiplicity at most $M$. For every irrational $\\varepsilon\\in\\mathbb R\\setminus\\mathbb Q$, the map\n\n$$\n(c,S)\\longmapsto(1+\\varepsilon)\\phi(c)+\\sum_{x\\in S}\\phi(x)\n$$\n\nis injective on pairs with $c\\in\\mathcal X$ and $S$ a finite multiset of total multiplicity at most $M$. For $M=0$, the only allowed neighbor multiset is empty.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The number $\\sqrt2$ is irrational: if $\\sqrt2=p/q$ for coprime positive integers $p,q$, then $p^2=2q^2$ makes $p$ even, say $p=2s$, and substitution gives $q^2=2s^2$, so $q$ is even as well, contradicting coprimality.",
+          "inputs": [
+            "given",
+            "algebra",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "By [F2], $J_{\\sqrt2}(r,\\{\\!\\{b\\}\\!\\})=(1+\\sqrt2)\\cdot1+2=3+\\sqrt2$, while $J_{\\sqrt2}(b,\\{\\!\\{r\\}\\!\\})=(1+\\sqrt2)\\cdot2+1=3+2\\sqrt2$. Their difference is $\\sqrt2\\ne0$, so the distinct pairs have distinct preactivations.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The feature set has two elements and both neighbor multisets have size one. Thus the example meets the countability and bound hypotheses of [F3], with irrational $\\varepsilon$ established in step 1.1; the computed separation is a concrete instance of that injective coding condition.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: both specified neighbor multisets have size one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the code values are positive and no zero code case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the displayed example uses one neighbor occurrence in each pair."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the two specified center/neighbor pairs are explicitly computed and are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coding example fixes epsilon=sqrt(2) and two one-neighbor multisets. There is no accuracy interval, layer horizon or varying boundary parameter; the concrete differences are 3+sqrt(2) and 3+2sqrt(2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the finite feature set and code are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies that one irrational self-weight separates two specified center/neighbor pairs by their computed preactivations. It states no criterion characterizing all separating self-weights."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse deduces irrationality from separation of this particular pair; the example supplies sqrt(2) and proves its irrationality before evaluating the two codes."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two colors and one neighbor",
+          "calculation": "With phi(r)=1, phi(b)=2, epsilon=sqrt(2), J(r,{{b}})=3+sqrt(2) and J(b,{{r}})=3+2sqrt(2).",
+          "result": "The two center/neighbor pairs have different preactivation values."
+        }
+      ]
+    }
+  }
+}

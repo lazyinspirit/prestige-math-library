@@ -1,0 +1,226 @@
+[
+  {
+    "order": 2822,
+    "id": "anderson-reverse-time-diffusion",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Anderson reverse-time diffusion",
+    "companion": "anderson-reverse-time-diffusion-examples",
+    "requires": [
+      "forward-ito-sde-well-posedness",
+      "gaussian-smoothing-densities-scores-and-endpoint-limits"
+    ],
+    "items": [
+      {
+        "id": "def-reversed-transition-kernels-for-diffusions",
+        "kind": "definition",
+        "title": "Bayes-reversed transition kernels for a diffusion",
+        "strategy": "Define the reverse-time kernel from the forward marginal density and transition density, retaining positivity, normalization, Chapman\u2013Kolmogorov and regularity as explicit hypotheses to be checked by the consumer lemma.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-continuous-local-martingale-quadratic-variation",
+        "kind": "lemma",
+        "title": "Quadratic variation of a continuous local martingale",
+        "strategy": "Localize to bounded martingales; control left-step martingale sums in L2 by orthogonal increments and Doob\u2019s inequality; pass the exact square-increment identity to the limit and polarize.",
+        "deps": [
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-axiom-of-choice",
+          "def-continuous-time-adapted-process-and-martingale",
+          "def-continuous-time-stopping-time",
+          "def-quadratic-covariation-of-brownian-ito-processes",
+          "lem-martingale-differences-are-orthogonal-in-l2",
+          "thm-dominated-convergence",
+          "thm-doob-lp-maximal-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-density-translation-factorization",
+        "kind": "lemma",
+        "title": "A translated conditional density factorizes after subtraction",
+        "strategy": "Use the determinant-one translation b=d+c to change from the pair (A,B) to (A,B\u2212C), then integrate out C with Tonelli.",
+        "deps": [
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-elliptic-local-martingale-brownian-representation",
+        "kind": "lemma",
+        "title": "An elliptic local martingale has a Brownian driver",
+        "strategy": "Construct the inverse-diffusion stochastic integral by stopped left-step sums, prove its martingale isometry and covariation from the defining product-martingale identities, then apply the vector L\u00e9vy characterization.",
+        "deps": [
+          "cor-vector-levy-characterization",
+          "def-axiom-of-choice",
+          "def-continuous-time-adapted-process-and-martingale",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-adapted-continuous-processes-are-progressively-measurable",
+          "thm-doob-lp-maximal-inequality",
+          "def-conditional-expectation-as-an-ae-class",
+          "lem-continuous-local-martingale-quadratic-variation",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-reversed-kernels-and-generator-identity",
+        "kind": "lemma",
+        "title": "Reversed kernels, generator, and martingale problem",
+        "strategy": "Normalize the Bayes kernels by the forward marginal identity, compose them by forward Chapman\u2013Kolmogorov, differentiate the adjoint transition expression on compactly supported tests, expand the adjoint product rule, and derive the localized reverse martingale problem.",
+        "deps": [
+          "def-reversed-transition-kernels-for-diffusions",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-anderson-reverse-time-diffusion",
+        "kind": "theorem",
+        "title": "Anderson's bounded-start reverse-time diffusion theorem",
+        "strategy": "Use the augmented joint Fokker\u2013Planck equation to identify a product Gaussian density, repeat the factorization conditionally to prove reverse-noise increments and their filtration properties, and convert the forward It\u00f4 integral to a backward It\u00f4 integral with its covariation correction.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-d-dimensional-brownian-motion",
+          "def-ito-sde-and-strong-solution",
+          "lem-density-translation-factorization",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "thm-quadratic-covariation-of-brownian-ito-processes"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-bayes-reversed-gaussian-smoothing-kernels",
+        "kind": "definition",
+        "title": "Bayes-reversed Gaussian smoothing kernels",
+        "strategy": "Define the reversed kernel from the explicit Gaussian marginal and transition densities, verify its normalization by the forward marginal identity, and verify reverse Chapman\u2013Kolmogorov by Gaussian transition composition.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-gaussian-smoothed-data-law-and-transition-density",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-markov-diffusion-reversal-by-bayes-kernels",
+        "kind": "theorem",
+        "title": "Reverse-time SDE for an unbounded-start Markov diffusion",
+        "strategy": "Apply the Bayes kernel and generator lemma, localize coordinate and coordinate-product tests, obtain the reverse local martingale and its covariance, reconstruct Brownian motion with the inverse diffusion matrix, and use the stated martingale-problem well-posedness hypothesis.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ito-sde-and-strong-solution",
+          "def-reversed-transition-kernels-for-diffusions",
+          "lem-elliptic-local-martingale-brownian-representation",
+          "lem-reversed-kernels-and-generator-identity",
+          "lem-continuous-local-martingale-quadratic-variation"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-reversed-smoothing-generator-and-martingale",
+        "kind": "lemma",
+        "title": "Generator and martingale problem for reversed Gaussian smoothing",
+        "strategy": "Differentiate the explicit Gaussian reverse-kernel expression on compactly supported tests, use the heat equation, expand the adjoint product rule to expose the plus-score sign, and integrate the transition identity to obtain the localized martingale problem.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayes-reversed-gaussian-smoothing-kernels",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-gaussian-mixture-score-and-global-lipschitz-bound",
+          "thm-gaussian-smoothing-density-and-forward-equation",
+          "def-gaussian-smoothed-data-law-and-transition-density"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-gaussian-smoothing-reversal-on-truncated-time-interval",
+        "kind": "theorem",
+        "title": "Reverse Gaussian smoothing on a truncated time interval",
+        "strategy": "Use the reversed-kernel martingale problem, localize coordinate and product tests, reconstruct Brownian motion by the inverse scalar diffusion and the vector L\u00e9vy characterization, apply the published Lipschitz SDE well-posedness interface on [0,T\u2212epsilon], and carry the separate endpoint coupling bound with no score claim at zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bayes-reversed-gaussian-smoothing-kernels",
+          "def-ito-sde-and-strong-solution",
+          "lem-elliptic-local-martingale-brownian-representation",
+          "lem-reversed-smoothing-generator-and-martingale",
+          "thm-gaussian-mixture-score-and-global-lipschitz-bound",
+          "thm-gaussian-smoothing-endpoint-weak-limit",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "lem-continuous-local-martingale-quadratic-variation",
+          "thm-gaussian-smoothing-density-and-forward-equation"
+        ],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2873,
+    "id": "anderson-reverse-time-diffusion-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Anderson reverse-time diffusion \u2014 Examples",
+    "companion": "anderson-reverse-time-diffusion",
+    "requires": [
+      "anderson-reverse-time-diffusion"
+    ],
+    "items": [
+      {
+        "id": "cex-state-dependent-diffusion-score-only-reversal",
+        "kind": "counterexample",
+        "title": "State-dependent diffusion needs a divergence correction",
+        "strategy": "Transform Brownian motion by a smooth increasing diffeomorphism with nonconstant derivative, compute its forward score and diffusion-matrix divergence, and show the score-only reverse drift differs from the proven generator formula.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ito-sde-and-strong-solution",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "thm-markov-diffusion-reversal-by-bayes-kernels",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-bounded-start-anderson-reversal",
+        "kind": "example",
+        "title": "Bounded-start Brownian reversal under Anderson's hypotheses",
+        "strategy": "Specialize Anderson's theorem to scalar Brownian motion with a bounded smooth initial density, substitute the explicit Gaussian convolution for the marginal density, and retain the joint-density uniqueness premise explicitly.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-gaussian-smoothed-data-law-and-transition-density",
+          "thm-anderson-reverse-time-diffusion",
+          "thm-gaussian-smoothing-density-and-forward-equation"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-stationary-ornstein-uhlenbeck-reversal",
+        "kind": "example",
+        "title": "A stationary Ornstein\u2013Uhlenbeck diffusion reverses to itself",
+        "strategy": "Insert the stationary Gaussian score into the general reversal formula, compute the reversed drift, and verify the centered normal law remains invariant by the explicit transition mean and variance.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ito-sde-and-strong-solution",
+          "def-standard-normal-and-normal-laws",
+          "lem-deterministic-ito-integral-has-gaussian-independent-increments",
+          "lem-normal-density-has-total-mass-one",
+          "thm-global-strong-well-posedness-for-lipschitz-ito-sdes",
+          "thm-markov-diffusion-reversal-by-bayes-kernels",
+          "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

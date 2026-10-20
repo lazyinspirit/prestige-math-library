@@ -1,0 +1,493 @@
+[
+  {
+    "order": 2764,
+    "id": "recurrent-and-state-space-networks",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Recurrent, LSTM, and structured state-space models",
+    "companion": "recurrent-and-state-space-networks-examples",
+    "requires": [
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "the-lebesgue-integral-and-the-convergence-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-recurrent-neural-network",
+        "kind": "definition",
+        "title": "Shared-parameter recurrent neural network",
+        "statement": "Fix positive finite dimensions $d_x,d_h,d_y$, a finite horizon $T\\in\\mathbb N$, a parameter set $\\Theta$, an initial state $h_0\\in\\mathbb R^{d_h}$, and inputs $x_1,\\ldots,x_T\\in\\mathbb R^{d_x}$. A shared-parameter recurrent neural network is specified by a state map $F:\\mathbb R^{d_h}\\times\\mathbb R^{d_x}\\times\\Theta\\to\\mathbb R^{d_h}$ and, optionally, an output map $G:\\mathbb R^{d_h}\\times\\mathbb R^{d_x}\\times\\Theta\\to\\mathbb R^{d_y}$. For a fixed $\\theta\\in\\Theta$, it computes $h_t=F(h_{t-1},x_t;\\theta)$ and, when $G$ is supplied, $y_t=G(h_t,x_t;\\theta)$ for $1\\le t\\le T$, using the same $\\theta$ at every time. Its unrolling is the finite directed acyclic computation graph whose vertices are the input, state, output, and map-evaluation occurrences and whose edges record which values each evaluation uses. The folded schematic may show a feedback edge, while the time-indexed unrolled graph is acyclic.\n\nFor horizon $T=2$, the following TikZ graph shows the dependency edges in the unrolling. The boxes $F_1,F_2$ are two time-indexed occurrences of the same map $F$; the dashed edges indicate that both occurrences receive the identical parameter $\\theta$. The graph omits the optional output map $G$.\n\n\\begin{center}\n\\begin{tikzpicture}[>=stealth, every node/.style={draw, rounded corners, inner sep=4pt}]\n  \\node (h0) at (0,0) {$h_0$};\n  \\node (x1) at (0,-1.1) {$x_1$};\n  \\node (f1) at (2,-0.55) {$F_1$};\n  \\node (h1) at (4,-0.55) {$h_1$};\n  \\node (x2) at (4,-1.65) {$x_2$};\n  \\node (f2) at (6,-1.1) {$F_2$};\n  \\node (h2) at (8,-1.1) {$h_2$};\n  \\node (theta) at (4,1) {$\\theta$};\n  \\draw[->] (h0) -- (f1);\n  \\draw[->] (x1) -- (f1);\n  \\draw[->] (f1) -- (h1);\n  \\draw[->] (h1) -- (f2);\n  \\draw[->] (x2) -- (f2);\n  \\draw[->] (f2) -- (h2);\n  \\draw[->, dashed] (theta) -- (f1);\n  \\draw[->, dashed] (theta) -- (f2);\n\\end{tikzpicture}\n\\end{center}",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §§10.1–10.2",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-linear-state-space-model",
+        "kind": "definition",
+        "title": "Continuous-time linear state-space model",
+        "statement": "Assume the Axiom of Countable Choice, so the usual Lebesgue-measurable sets on $\\mathbb R$ form a complete measure space with Lebesgue measure $\\lambda$; restrict that measure to the interval $I$ when needed. Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $I\\subseteq\\mathbb R$ be an interval with $t_0\\in I$, and let $N,m,p\\ge1$ be finite. A continuous-time linear state-space model consists of matrices $A\\in\\mathbb F^{N\\times N}$, $B\\in\\mathbb F^{N\\times m}$, $C\\in\\mathbb F^{p\\times N}$, $D\\in\\mathbb F^{p\\times m}$, an initial value $x_0\\in\\mathbb F^N$, and an input $u:I\\to\\mathbb F^m$ whose real and imaginary coordinates are Lebesgue measurable and integrable on every compact subinterval of $I$. A state trajectory is a function $x:I\\to\\mathbb F^N$ whose real and imaginary coordinates are absolutely continuous on every compact subinterval of $I$ (with absolute continuity defined by the $\\varepsilon$–$\\delta$ condition on finite families of disjoint subintervals), with $x(t_0)=x_0$ and $x'(t)=Ax(t)+Bu(t)$ outside a Lebesgue-null subset of $I$. Its output is $y(t)=Cx(t)+Du(t)$. The term $Du(t)$ is the direct input-to-output term and is separate from the state contribution $Cx(t)$.",
+        "deps": [
+          "def-countable-choice",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-absolutely-continuous-function",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §2.1",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-radix-two-fft",
+        "kind": "algorithm",
+        "title": "Radix-two discrete Fourier transform",
+        "statement": "For a nonnegative integer $q$, let $M=2^q$, let $\\omega=e^{-2\\pi i/M}$ when $M>1$, and let $a=(a_0,\\ldots,a_{M-1})\\in\\mathbb C^M$. The forward discrete Fourier transform (DFT) is the vector $\\widehat a\\in\\mathbb C^M$ with $\\widehat a_k=\\sum_{j=0}^{M-1}a_j\\omega^{jk}$. The radix-two procedure returns this vector by the following exact recursion. If $M=1$, return $(a_0)$. If $M>1$, recursively compute the length-$M/2$ DFTs $E$ and $O$ of $(a_0,a_2,\\ldots,a_{M-2})$ and $(a_1,a_3,\\ldots,a_{M-1})$, using the primitive root $\\omega^2$. For $0\\le k<M/2$, return $\\widehat a_k=E_k+\\omega^k O_k$ and $\\widehat a_{k+M/2}=E_k-\\omega^kO_k$. The inverse transform is obtained by running the same procedure with $\\overline\\omega$ and dividing every output by $M$.",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-woodbury-dplr-bilinear-inverse",
+        "kind": "lemma",
+        "title": "Woodbury inverse for a diagonal-plus-low-rank update",
+        "statement": "Let $D\\in\\mathbb C^{N\\times N}$ be invertible, let $U,V\\in\\mathbb C^{N\\times r}$, and set $W=I_r+V^*D^{-1}U$, where $^*$ denotes conjugate transpose. Then $D+UV^*$ is invertible if and only if $W$ is invertible. When these matrices are invertible,\n$$\n(D+UV^*)^{-1}=D^{-1}-D^{-1}U W^{-1}V^*D^{-1}.\n$$",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2–C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-lstm-cell",
+        "kind": "definition",
+        "title": "Standard LSTM cell",
+        "statement": "Fix positive finite dimensions $d_x,d_h$, inputs $x_t\\in\\mathbb R^{d_x}$, hidden states $h_t\\in\\mathbb R^{d_h}$, cell states $c_t\\in\\mathbb R^{d_h}$, and initial values $h_0,c_0$. A standard long short-term memory (LSTM) cell without peephole connections or projection has shared matrices $W_i,W_f,W_o,W_c\\in\\mathbb R^{d_h\\times d_x}$, $U_i,U_f,U_o,U_c\\in\\mathbb R^{d_h\\times d_h}$, and biases $b_i,b_f,b_o,b_c\\in\\mathbb R^{d_h}$. Apply $\\sigma(s)=(1+e^{-s})^{-1}$ and $\\tanh(s)=(e^s-e^{-s})/(e^s+e^{-s})$ coordinatewise. At each time $t\\ge1$, set\n\n$$ i_t=\\sigma(W_i x_t+U_i h_{t-1}+b_i),\\qquad f_t=\\sigma(W_f x_t+U_f h_{t-1}+b_f),\\qquad o_t=\\sigma(W_o x_t+U_o h_{t-1}+b_o), $$\n\n$$ g_t=\\tanh(W_c x_t+U_c h_{t-1}+b_c),\\qquad c_t=f_t\\odot c_{t-1}+i_t\\odot g_t,\\qquad h_t=o_t\\odot\\tanh(c_t), $$\n\nwhere $\\odot$ is coordinatewise multiplication. The same matrices and biases are reused at every time step. The vectors $i_t,f_t,o_t$ are the input, forget, and output gates, and $g_t$ is the candidate state update.",
+        "deps": [
+          "def-recurrent-neural-network"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §10.10.1, Eqs. 10.40–10.44",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "def-s4-dplr-parameterization",
+        "kind": "definition",
+        "title": "DPLR structured state-space parameterization",
+        "statement": "An $N$-state single-input, single-output complex linear state-space model has $B,C\\in\\mathbb C^N$, state equation $x'(t)=Ax(t)+Bu(t)$, and output $y(t)=C^*x(t)$; its direct term is set to zero in the S4 convolution convention. Here $X^*$ denotes conjugate transpose; a square complex matrix $H$ is normal when $H^*H=HH^*$; and a square matrix $V$ is unitary when $V^*V=VV^*=I$. A matrix is in diagonal-plus-low-rank (DPLR) form of rank $r$ if\n$$\nA=\\Lambda-PQ^*,\n$$\nwhere $\\Lambda\\in\\mathbb C^{N\\times N}$ is diagonal and $P,Q\\in\\mathbb C^{N\\times r}$. It is in normal-plus-low-rank (NPLR) form of rank $r$ if\n$$\nA=V\\Lambda V^*-PQ^*,\n$$\nwhere $V\\in\\mathbb C^{N\\times N}$ is unitary, $\\Lambda$ is diagonal, and $P,Q\\in\\mathbb C^{N\\times r}$. The unitary state change $\\widetilde x=V^*x$ converts this NPLR representation to DPLR form and changes $B,C$ to $V^*B,V^*C$, respectively.\n\nFor a step size $\\Delta>0$ such that $I-\\Delta A/2$ is invertible, the bilinear recurrent matrices are\n$$ \\overline A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2),\\qquad \\overline B=(I-\\Delta A/2)^{-1}\\Delta B,\\qquad \\overline C=C. $$\nWith initial state $x_{-1}=0$, the discrete recurrence is $x_t=\\overline A x_{t-1}+\\overline B u_t$, $y_t=\\overline C^*x_t$. Its length-$L$ impulse kernel is the vector $K_L=(\\overline C^*\\overline A^j\\overline B)_{j=0}^{L-1}$. For a nonzero direct term $D$, the output has the additional separate skip term $Du_t$.\n\nFor a filter evaluation of transform length $M\\ge L$, the output vector for the length-$M$ truncated generating function is $\\widetilde C_M=(I-\\overline A^M)^*C$. A filter procedure may receive $\\widetilde C_M$ as given data; an operation count for evaluating the filter from this transformed vector does not include the separate work of forming it from $C$.",
+        "deps": [
+          "def-linear-state-space-model"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §§2.1, 2.3, 3.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-roots-of-unity-fft-complexity",
+        "kind": "lemma",
+        "title": "Roots-of-unity orthogonality and radix-two FFT cost",
+        "statement": "Let $M=2^q$ for an integer $q\\ge0$, and let $\\omega=e^{-2\\pi i/M}$ (with $\\omega=1$ when $M=1$). Define the forward DFT matrix $F\\in\\mathbb C^{M\\times M}$ by $F_{kj}=\\omega^{jk}$, where $^*$ denotes conjugate transpose. Then $F^*F=MI$, so the inverse DFT is $M^{-1}F^*$. The radix-two procedure defined on this page computes either transform exactly in $O(M\\log(2+M))$ complex arithmetic operations and $O(M)$ space. Consequently, for every integer $n\\ge1$, two polynomials of degree less than $n$ can be multiplied exactly in $O(n\\log(2+n))$ complex arithmetic operations and $O(n)$ space by zero-padding to a radix-two transform length at least $2n-1$.",
+        "deps": [
+          "alg-radix-two-fft"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-cauchy-matvec-at-roots-of-unity",
+        "kind": "algorithm",
+        "title": "Exact Cauchy matrix-vector product on a radix-two root grid",
+        "statement": "Input an integer $M=2^q$ with $q\\ge0$, a primitive $M$th root of unity $\\omega$, a finite list of poles $\\mu_1,\\ldots,\\mu_n\\in\\mathbb C$, and weights $a_1,\\ldots,a_n\\in\\mathbb C$. The required output is $y_k=\\sum_{j=1}^n a_j/(\\omega^k-\\mu_j)$ for $0\\le k<M$, provided no denominator is zero. If $n=0$, return the zero vector.\n\nHere a primitive $M$th root means $\\omega^M=1$ and $\\omega^k\\ne1$ for $1\\le k<M$. For $n\\ge1$, form a balanced binary tree on the pole indices, splitting each consecutive index interval into two intervals whose sizes differ by at most one. At a leaf containing index $j$, store polynomials $D_j(z)=z-\\mu_j$ and $P_j(z)=a_j$. At an internal node with disjoint child index sets $I_1,I_2$, store\n$$ D_I(z)=D_{I_1}(z)D_{I_2}(z),\\qquad P_I(z)=P_{I_1}(z)D_{I_2}(z)+D_{I_1}(z)P_{I_2}(z). $$\nAt the root, fold the coefficients of each polynomial modulo $z^M-1$: the coefficient at degree $r$ is replaced by the sum of coefficients at degrees congruent to $r$ modulo $M$. Let $\\omega_0=e^{-2\\pi i/M}$, which equals $1$ when $M=1$. Apply the radix-two DFT procedure to each folded coefficient vector to evaluate $P_I$ and $D_I$ at $\\omega_0^j$, $0\\le j<M$. If $M>1$, find the unique odd integer $s\\in\\{1,3,\\ldots,M-1\\}$ with $\\omega=\\omega_0^s$ by generating and comparing the $M$ powers of $\\omega_0$, then place the value at index $sk\\bmod M$ at output index $k$; this is the supplied root order because $\\omega^k=\\omega_0^{sk}$. For $M=1$, the only root is $1$ and no reindexing is needed. This root search and reindexing use $O(M)$ operations. If some reindexed $D_I(\\omega^k)=0$, return status `collision`; otherwise return $y_k=P_I(\\omega^k)/D_I(\\omega^k)$.",
+        "deps": [
+          "alg-radix-two-fft"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §§3.2–3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+        "kind": "theorem",
+        "title": "HiPPO LegS, LegT, and LagT generators have normal-plus-low-rank form",
+        "statement": "Index rows and columns by $0,\\ldots,N-1$. Define the real LegS coefficient matrix $G^S$ by $G^S_{nk}=-\\sqrt{(2n+1)(2k+1)}$ when $n>k$, $G^S_{nn}=-(n+1)$, and $G^S_{nk}=0$ when $n<k$. In the LegS coefficient ODE for $t>0$ this matrix is multiplied by the time-dependent scalar $1/t$; the matrix assertion below does not make that ODE time-invariant. For $\\theta>0$, define the LegT state generator by $G^T_{nk}=-(2n+1)(-1)^{n-k}/\\theta$ when $n\\ge k$ and $G^T_{nk}=-(2n+1)/\\theta$ when $n<k$. Define the original HiPPO LagT state generator by $G^L_{nk}=-1$ when $n\\ge k$ and $G^L_{nk}=0$ when $n<k$. Here $X^*$ is conjugate transpose, a complex matrix $H$ is normal when $H^*H=HH^*$, and a square matrix $V$ is unitary when $V^*V=VV^*=I$. For LegS and LagT use the identity similarity; for LegT use the invertible diagonal similarity $S_0=\\operatorname{diag}(\\sqrt{2n+1})_{n=0}^{N-1}\\operatorname{diag}((-1)^n)_{n=0}^{N-1}$. Each transformed matrix is a difference $H-UV^*$ with $H$ normal and $\\operatorname{rank}(UV^*)\\le1$ for LegS and LagT and $\\operatorname{rank}(UV^*)\\le2$ for LegT. Consequently the equivalent finite-dimensional complex state-space matrix has a normal-plus-low-rank representation, and a unitary change of state coordinates gives diagonal-plus-low-rank form. Under any state change $x=S\\widetilde x$, the input and output vectors change to $S^{-1}B$ and $S^*C$, respectively.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 1 and Appendix C.1",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Gu et al., HiPPO: Recurrent Memory with Optimal Polynomial Projections, §2.3 and Appendices D.1–D.3",
+              "url": "https://arxiv.org/pdf/2008.07669"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "alg-s4-state-space-recurrence-and-convolution",
+        "kind": "algorithm",
+        "title": "S4 state-space recurrence and convolution procedure",
+        "statement": "Let $N,r\\ge1$ and $A=\\Lambda-PQ^*$ with $\\Lambda\\in\\mathbb C^{N\\times N}$ diagonal and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose; let $B,C\\in\\mathbb C^N$, let $\\Delta>0$, and put $\\alpha=\\Delta/2$. The bilinear step is defined only when $G=I-\\alpha A$ is invertible. Given an input sequence $(u_t)$ and state $x_{-1}$, its recurrent mode computes\n$$ b_t=(I+\\alpha A)x_{t-1}+\\Delta Bu_t,\\qquad Gx_t=b_t,\\qquad y_t=C^*x_t. $$\nFor a zero initial state, the equivalent matrices and length-$L$ kernel are $\\bar A=G^{-1}(I+\\alpha A)$, $\\bar B=G^{-1}\\Delta B$, and $K_j=C^*\\bar A^j\\bar B$ for $0\\le j<L$; a direct term $Du_t$, if present, is added separately.\n\nFor the filter mode, fix an integer $L\\ge1$, let $M$ be the least power of two with $M\\ge L$, let $\\omega=e^{-2\\pi i/M}$, and let $\\widetilde C\\in\\mathbb C^N$ be supplied as the length-$M$ truncated-output parameter. When a conventional output vector $C$ is used, this parameter is $\\widetilde C=(I-\\bar A^M)^*C$. Define the $M$ root values $z_k=\\omega^k$. The algorithm returns the first $L$ coefficients of the inverse radix-two transform of the values $H(z_k)$ below.\n\nFor $z_k=-1$, set $H(z_k)=(\\Delta/2)\\widetilde C^*B$. For each $z=z_k\\ne-1$, put $s(z)=(2/\\Delta)(1-z)/(1+z)$. If $s(z)-\\lambda_j=0$ for some diagonal entry $\\lambda_j$ of $\\Lambda$, return status `resonant-diagonal`. If no diagonal resonance is present, write $R(z)=\\operatorname{diag}((s(z)-\\lambda_j)^{-1})$ and $W(z)=I_r+Q^*R(z)P$. If $W(z)$ is singular, return status `resonant-correction`. When this correction is invertible, the target root value is\n$$ H(z)=\\frac{2}{1+z}\\left(\\widetilde C^*R(z)B-\\widetilde C^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right). $$\nThe preceding resolvent expression specifies the target root values. The filter evaluation computes them using $1+2r+r^2=(r+1)^2$ scalar Cauchy products as follows. Put $a=2/\\Delta$, and for each $j$ with $\\lambda_j\\ne-a$ define $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any pair of vectors $u,v\\in\\mathbb C^N$, compute on the root grid\n$$ S_{uv}(z)=\\frac{2}{1+z}u^*R(z)v =\\frac{\\Delta}{2}\\sum_{j:\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{j:\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j} $$\nby calling the roots-of-unity Cauchy procedure with poles $\\mu_j$ and weights $-2\\overline{u_j}v_j/(a+\\lambda_j)$, then adding the displayed constant. A collision $\\mu_j=z_k$ returns status `resonant-diagonal`. For $z=z_k\\ne-1$, set\n$$ W(z)=I_r+\\frac{1+z}{2}S_{Q,P}(z),\\qquad H(z)=S_{\\widetilde C,B}(z)-\\frac{1+z}{2}S_{\\widetilde C,P}(z)W(z)^{-1}S_{Q,B}(z). $$\nIf $W(z)$ is singular, return status `resonant-correction`. The four families $S_{\\widetilde C,B}$, $S_{\\widetilde C,P}$, $S_{Q,B}$, and $S_{Q,P}$ contain $1$, $r$, $r$, and $r^2$ scalar products, respectively. The root $-1$ is handled directly and is never included in this Cauchy evaluation. Matrix products and inversions of the $r\\times r$ corrections are performed separately at each root.\n\nThe recurrent solver may exploit the diagonal-plus-low-rank structure as follows. Write $d_j=1-\\alpha\\lambda_j$, let $J=\\{j:d_j\\ne0\\}$ and $Z=\\{j:d_j=0\\}$. If $Z$ is empty, use the Woodbury inverse with $D=\\operatorname{diag}(d_j)$ and correction $I_r+\\alpha Q^*D^{-1}P$; if this correction is singular, return status `singular-bilinear-matrix`. If $s=|Z|>0$, then when $s\\le r$ solve the bordered system\n$$ \\begin{bmatrix} I_r+\\alpha Q_J^*D_J^{-1}P_J&-Q_Z^*\\\\ \\alpha P_Z&0 \\end{bmatrix} \\begin{bmatrix}z\\\\x_Z\\end{bmatrix} = \\begin{bmatrix}Q_J^*D_J^{-1}b_J\\\\b_Z\\end{bmatrix}, \\qquad x_J=D_J^{-1}(b_J-\\alpha P_Jz), $$\nwhere $D_J=\\operatorname{diag}(d_j)_{j\\in J}$; if $s>r$ or the bordered system is singular, return status `singular-bilinear-matrix`. Here $z=Q^*x$. This branch solves $Gx=b$ without assuming the diagonal base is invertible.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-radix-two-fft",
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Algorithm 1 and Appendix C",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+        "kind": "theorem",
+        "title": "Exact roots-of-unity Cauchy matvec has quasi-linear arithmetic cost",
+        "statement": "Let $n\\ge1$, $M=2^q\\ge1$, $\\omega$ be a primitive $M$th root of unity, and let $\\mu_1,\\ldots,\\mu_n\\in\\mathbb C$ and $a_1,\\ldots,a_n\\in\\mathbb C$ satisfy $\\mu_j\\ne\\omega^k$ for every $j$ and $0\\le k<M$. Then the Cauchy matrix-vector product $y_k=\\sum_{j=1}^{n}a_j/(\\omega^k-\\mu_j)$, $0\\le k<M$, is computed exactly by the balanced product-tree procedure using $O((n+M)\\log^2(2+n+M))$ complex arithmetic operations and $O(n+M)$ space. Repeated poles are allowed.",
+        "deps": [
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-roots-of-unity-fft-complexity"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-dplr-discretized-step-linear-cost",
+        "kind": "theorem",
+        "title": "A fixed-rank DPLR bilinear recurrent step has linear arithmetic cost",
+        "statement": "Let $N,r\\ge1$, let $A=\\Lambda-PQ^*$ with diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$ and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose, let $B,C\\in\\mathbb C^N$, and let $\\Delta>0$. If $G=I-\\Delta A/2$ is invertible, then one bilinear recurrent update and its scalar output can be computed using $O(N(r+1)^2+(r+1)^3)$ exact complex arithmetic operations and $O(N(r+1)+(r+1)^2)$ working space. For fixed $r$, this is $O(N)$ operations and $O(N)$ space. When the diagonal base $I-\\Delta\\Lambda/2$ is invertible, the required $r\\times r$ Woodbury correction is invertible. When that diagonal base is singular but $G$ is invertible, the bordered correction in the recurrent algorithm is invertible and has size at most $2r$.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 2 and Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "lem-s4-convolution-root-of-unity-reduction",
+        "kind": "lemma",
+        "title": "DPLR SSM filter values reduce to Cauchy products",
+        "statement": "Let $N,r\\ge1$, $M=2^q\\ge1$, $1\\le L\\le M$, $A=\\Lambda-PQ^*$ with diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$ and $P,Q\\in\\mathbb C^{N\\times r}$, where $^*$ denotes conjugate transpose, $B,C\\in\\mathbb C^N$, and $\\Delta>0$. Assume $G=I-\\Delta A/2$ is invertible, define $\\bar A=G^{-1}(I+\\Delta A/2)$, $\\bar B=G^{-1}\\Delta B$, and put $\\widetilde C_M=(I-\\bar A^M)^*C$. For each $M$th root of unity $z\\ne-1$, let $s(z)=(2/\\Delta)(1-z)/(1+z)$, $R(z)=(s(z)I-\\Lambda)^{-1}$, and $W(z)=I_r+Q^*R(z)P$. Assume all these $R(z)$ and $W(z)$ are invertible. The length-$M$ truncated generating value $H_M(z)=\\sum_{j=0}^{M-1}C^*\\bar A^j\\bar B z^j$ then satisfies\n$$\nH_M(z)=\\frac{2}{1+z}\\left(\\widetilde C_M^*R(z)B-\\widetilde C_M^*R(z)P\\,W(z)^{-1}Q^*R(z)B\\right)\\quad(z\\ne-1).\n$$\nIf $M$ is even, the root $z=-1$ has the finite value $H_M(-1)=(\\Delta/2)\\widetilde C_M^*B$. For $a=2/\\Delta$ and each diagonal entry $\\lambda_j\\ne-a$, put $\\mu_j=(a-\\lambda_j)/(a+\\lambda_j)$. For any $u,v\\in\\mathbb C^N$ and root $z\\ne-1$,\n$$\n\\frac{2}{1+z}u^*R(z)v=\\frac{\\Delta}{2}\\sum_{\\lambda_j=-a}\\overline{u_j}v_j-2\\sum_{\\lambda_j\\ne-a}\\frac{\\overline{u_j}v_j}{a+\\lambda_j}\\frac{1}{z-\\mu_j}.\n$$\nThus the four families of scalar products $\\widetilde C_M^*RB$, $\\widetilde C_M^*RP$, $Q^*RB$, and $Q^*RP$ reduce to $1+2r+r^2=(r+1)^2$ roots-of-unity Cauchy products; when $r=1$ there are four.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "thm-cauchy-root-grid-matvec-numerical-cost",
+        "kind": "theorem",
+        "title": "Numerical Cauchy products on a root grid with explicit accuracy scale",
+        "deps": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.3, Proposition 5",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §6.1 and §§6.2–6.4",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "statement": "Let $n\\ge0$, $M=2^q\\ge1$, $z_k=\\exp(2\\pi i k/M)$, and let $a_j,\\mu_j\\in\\mathbb C$ satisfy $|z_k-\\mu_j|\\ge d>0$ for every $j,k$. Repeated poles are allowed. Let $A\\ge\\sum_j|a_j|$ and $s=\\max(1,A/d)$. For $0<\\eta\\le1/2$, the products $y_k=\\sum_j a_j/(z_k-\\mu_j)$ have numerical approximations satisfying\n$$ \\max_k|\\widehat y_k-y_k|\\le\\eta s $$\nusing $O((n+M)\\log(2+M)\\log(1/\\eta))$ scalar operations and $O(n+M)$ scalar words. Consequently absolute error $\\delta$, for $0<\\delta\\le1/2$, costs $O((n+M)\\log(2+M)\\log(s/\\delta))$ operations with the same word space.\n\nThe model is variable-precision arithmetic with unrestricted exponent range, supplied certified approximations to the inputs, roots and arc-center constants, and certified bounds for the finite computation specified in the proof. Each real comparison, word access and scalar arithmetic operation has unit cost; the latter has absolute rounding error at most $u$. A word stores one scalar at the selected precision. Input approximation, working precision and word lengths may depend on $n,M,d,A,\\eta$ and intermediate magnitudes. This is neither a bit-complexity bound nor a bound at fixed word length. All preprocessing, geometric routing and numerical summation operations are included; computing the supplied constants or certificates from other representations is excluded.\n\nHere is a sufficient explicit precision certificate. For the selected finite rational summation circuit, include its input constants among its exact intermediates, let $T$ bound its arithmetic gates, let $V\\ge1$ bound their moduli, and let $0<D\\le1$ bound below the modulus of every divisor. Set $K=64(V+1)^2/D^2$. With $\\tau=\\eta s/2$, it suffices to take\n$$ u\\le\\frac{\\min(1,D/2,\\tau)}{2K^{T+1}}. $$\nThe geometric decisions additionally use certified interval enclosures narrow enough to choose between the overlapping near and far tests described below. Such enclosures require only finite precision, including at threshold equalities. These certificate assumptions hold for each particular noncollision input, but have no uniform bound as pole/root separation tends to zero.",
+        "strategy": "direct",
+        "justified_by": []
+      },
+      {
+        "id": "thm-s4-convolution-filter-complexity",
+        "kind": "theorem",
+        "title": "S4 convolution-filter arithmetic and numerical cost",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "thm-hippo-leg-matrices-have-low-rank-structure",
+          "lem-roots-of-unity-fft-complexity",
+          "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+          "thm-cauchy-root-grid-matvec-numerical-cost",
+          "lem-s4-convolution-root-of-unity-reduction"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 3 and Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §§3.3, 6.1–6.4, 7.1",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "statement": "Let $N,r,L\\ge1$, let $r$ be fixed, and let $A=\\Lambda-PQ^*$ with diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$, $P,Q\\in\\mathbb C^{N\\times r}$, and $B,C\\in\\mathbb C^N$, where $^*$ denotes conjugate transpose. Let $\\Delta>0$, assume $I-\\Delta A/2$ is invertible, and choose $M$ to be the least power of two with $M\\ge L$. For the length-$M$ filter procedure, take the transformed output vector $\\widetilde C_M=(I-\\bar A^M)^*C$ as supplied input, where $\\bar A=(I-\\Delta A/2)^{-1}(I+\\Delta A/2)$. Assume that every root-grid diagonal resolvent and low-rank correction used by the procedure is invertible. In the exact complex arithmetic model, each scalar addition, multiplication, division, and zero test has unit cost. The length-$L$ filter is $K_L=(C^*\\bar A^j\\bar B)_{j=0}^{L-1}$. The procedure returns the first $L$ coefficients of this filter using at most $(r+1)^2$ roots-of-unity Cauchy products, $O((N+L)\\log^2(2+N+L))$ operations, and $O(N+L)$ working space. The operation count is for filter evaluation from $\\widetilde C_M$; it does not include forming that vector from $C$. This bound applies in particular to the equivalent DPLR state coordinates of the stated HiPPO generators.\n\nFor numerical evaluation, put $a=2/\\Delta$, $\\beta(z)=(1+z)/2$, and $D(z)=2R(z)/(1+z)$ at roots $z\\ne-1$, where $R(z)=(a(1-z)/(1+z)I-\\Lambda)^{-1}$. Define the scaled blocks $x=\\widetilde C_M^*DB$, $u=\\widetilde C_M^*DP$, $v=Q^*DB$, $T=Q^*DP$, and $W=I_r+\\beta T$. Matrix infinity norm means maximum absolute row sum; for a column it is maximum absolute entry. Suppose certified constants $b,w,s\\ge1$ bound, over these roots, $|x|,\\|u\\|_\\infty,\\|v\\|_\\infty,\\|T\\|_\\infty$ by $b$, and $\\|W^{-1}\\|_\\infty$ by $w$. For each scalar scaled-block Cauchy sum, require a certified pole/root separation $d>0$ and a weight bound $A\\ge\\sum_j|a_j|$ with $A/d\\le s$; the finite constant contributions from $\\lambda_j=-a$ and the direct value at $-1$ are formed separately. Empty sums need no separation certificate. Set $\\kappa=64r w^2(b+1)^2s$.\n\nFor $0<\\varepsilon\\le1/2$, a numerical implementation returns $\\widehat K_L$ with $\\|\\widehat K_L-K_L\\|_\\infty\\le\\varepsilon$ using $O((N+L)\\log(2+N+L)\\log(\\kappa/\\varepsilon))$ scalar operations and $O(N+L)$ scalar words. On families with bounded $\\kappa$, this is $O((N+L)\\log(2+N+L)\\log(1/\\varepsilon))$. The numerical model uses variable-precision scalar operations, unrestricted exponent range and supplied certified input/root approximations; each operation and word access has unit cost. Word lengths and sufficient precision depend on separation, correction conditioning, intermediate magnitudes and accuracy. The finite circuit precision certificate in the proof is required; these counts exclude bit cost, computing certificates, and forming $\\widetilde C_M$. They imply no complete training-cost or long-context-accuracy bound.\n\nThe numerical procedure also receives the exact index partition $\\{j:\\lambda_j=-a\\}$ and $\\{j:\\lambda_j\\ne-a\\}$, where $a=2/\\Delta$, so it can select the exceptional constant terms without a finite-precision equality test.",
+        "strategy": "direct",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 2765,
+    "id": "recurrent-and-state-space-networks-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Recurrent, LSTM, and structured state-space models — Examples",
+    "companion": "recurrent-and-state-space-networks",
+    "requires": [
+      "recurrent-and-state-space-networks"
+    ],
+    "items": [
+      {
+        "id": "ex-lstm-scalar-gates",
+        "kind": "example",
+        "title": "A scalar LSTM cell with constant gates",
+        "statement": "Take $d_x=d_h=1$, set every LSTM weight and bias to zero, allow any scalar input sequence and any initial values $h_0,c_0\\in\\mathbb R$. Then for every $t\\ge1$, the input, forget, and output gates equal $1/2$, the candidate update is zero, and\n$$\nc_t=2^{-t}c_0,\\qquad h_t=\\tfrac12\\tanh(2^{-t}c_0).\n$$",
+        "deps": [
+          "def-lstm-cell"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §10.10.1",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-s4-scalar-recurrent-and-convolutional-views",
+        "kind": "example",
+        "title": "A scalar state-space layer has matching recurrent and convolutional outputs",
+        "statement": "Take the scalar state-space model $A=0$, $B=C=1$, direct term $D=0$, step size $\\Delta=1$, and initial state $x_{-1}=0$. For any integer $L\\ge1$ and any length-$L$ scalar input sequence $(u_0,\\ldots,u_{L-1})$, the bilinear matrices are $\\bar A=1$ and $\\bar B=1$, so the recurrence gives $x_t=x_{t-1}+u_t$ and $y_t=\\sum_{s=0}^{t}u_s$ for $0\\le t<L$. The length-$L$ impulse kernel is $(1,\\ldots,1)$, and its causal convolution $\\sum_{j=0}^{t}K_j u_{t-j}$ gives the same outputs for $0\\le t<L$.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §§2.3–2.4",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "ex-s4-filter-cost-excludes-training",
+        "kind": "example",
+        "title": "The filter-operation bound is not a training-cost bound",
+        "deps": [
+          "thm-s4-convolution-filter-complexity",
+          "alg-s4-state-space-recurrence-and-convolution"
+        ],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §3.3 and Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "statement": "Assume $N,r,L\\ge1$ with fixed $r$, $A=\\Lambda-PQ^*$ for diagonal $\\Lambda\\in\\mathbb C^{N\\times N}$ and $P,Q\\in\\mathbb C^{N\\times r}$, $B,C\\in\\mathbb C^N$, and $\\Delta>0$. Let $G=I-\\Delta A/2$ be invertible, let $M$ be the least power of two at least $L$, set $\\bar A=G^{-1}(I+\\Delta A/2)$ and $\\bar B=G^{-1}\\Delta B$, and supply $\\widetilde C_M=(I-\\bar A^M)^*C$. Assume the root-grid diagonal resolvents $R(z)=(a(1-z)/(1+z)I-\\Lambda)^{-1}$ and corrections $I_r+Q^*R(z)P$ are invertible for every $M$th root $z\\ne-1$, where $a=2/\\Delta$; the value at $-1$, when that root occurs, is handled by its finite formula. In the exact complex arithmetic model, each scalar addition, multiplication, division, and zero test has unit cost, and the filter cost counts evaluation from the supplied $\\widetilde C_M$, not its formation. A nonzero direct input-to-output term is separate from the kernel.\n\nFor numerical evaluation, at each root $z\\ne-1$ put $\\beta(z)=(1+z)/2$ and $\\mathcal D(z)=2R(z)/(1+z)$, and define $x=\\widetilde C_M^*\\mathcal D B$, $u=\\widetilde C_M^*\\mathcal D P$, $v=Q^*\\mathcal D B$, $T=Q^*\\mathcal D P$, and $W=I_r+\\beta T$. Matrix infinity norm is maximum absolute row sum, and for a column it is maximum absolute entry. Suppose certified constants $b,w,s\\ge1$ bound $|x|,\\|u\\|_\\infty,\\|v\\|_\\infty,\\|T\\|_\\infty$ by $b$ and $\\|W^{-1}\\|_\\infty$ by $w$ over these roots. For every scalar Cauchy sum used for a scaled block, supply a certified pole/root separation $d>0$ and a weight bound $A_{\\rm wt}\\ge\\sum_j|a_j|$ with $A_{\\rm wt}/d\\le s$; also supply the exact index partition $\\lambda_j=-a$ or $\\lambda_j\\ne-a$ so the exceptional constant terms are selected, and form the finite constants and the $-1$ value separately. Empty Cauchy sums need no separation certificate. Put $\\kappa=64r w^2(b+1)^2s$.\n\nFor $0<\\varepsilon\\le1/2$, assume variable-precision scalar arithmetic with unrestricted exponent range, certified input, root and arc-center approximations, certified enclosures sufficient for the geometric routing decisions, and the finite rational-circuit precision certificate. Explicitly, for the selected finite circuit let $T_0$ bound its arithmetic gates, $V_0\\ge1$ bound exact intermediate moduli, and $0<D_0\\le1$ bound below every exact divisor modulus; with $K_0=64(V_0+1)^2/D_0^2$, choose $u\\le\\min(1,D_0/2,\\varepsilon/2)/(2K_0^{T_0+1})$. Each supplied input/constant approximation and each scalar arithmetic operation has absolute error at most $u$; each scalar operation and word access has unit cost. Precision and word lengths may depend on the input separation, correction conditioning, intermediate magnitudes and target accuracy. The operation and word counts exclude bit cost, computing the supplied certificates, and forming $\\widetilde C_M$.\n\nFor the stated DPLR data, the length-$L$ kernel is $K_L=(C^*\\bar A^j\\bar B)_{j=0}^{L-1}$. From the supplied $\\widetilde C_M$, the exact filter procedure evaluates it using at most $(r+1)^2$ roots-of-unity Cauchy products, $O((N+L)\\log^2(2+N+L))$ exact complex arithmetic operations, and $O(N+L)$ working space. Under the numerical hypotheses above, for $0<\\varepsilon\\le1/2$ it returns $\\widehat K_L$ with $\\|\\widehat K_L-K_L\\|_\\infty\\le\\varepsilon$ using $O((N+L)\\log(2+N+L)\\log(\\kappa/\\varepsilon))$ scalar operations and $O(N+L)$ scalar words; bounded-$\\kappa$ families have the factor $\\log(1/\\varepsilon)$. These evaluation counts exclude forming $\\widetilde C_M$, computing the supplied certificates, and bit cost. The filter procedure does not compute parameter gradients or optimizer updates, so its count is not a bound for a complete training step. Neither the exact arithmetic count nor the conditional numerical guarantee supplies a fixed-word bound or an empirical long-context accuracy guarantee.",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "justified_by": []
+      }
+    ]
+  }
+]

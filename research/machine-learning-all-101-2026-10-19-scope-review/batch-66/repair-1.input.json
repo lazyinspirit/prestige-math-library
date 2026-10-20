@@ -1,0 +1,163 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-66-1",
+  "inventory": {
+    "pages": [
+      "discrete-diffusion-and-variational-objectives",
+      "discrete-diffusion-and-variational-objectives-examples"
+    ],
+    "items": [
+      "def-forward-gaussian-diffusion-chain",
+      "lem-isotropic-gaussian-kl-formula",
+      "thm-gaussian-forward-and-posterior-kernels",
+      "thm-ddpm-elbo-decomposition",
+      "alg-epsilon-prediction-diffusion-training",
+      "ex-scalar-gaussian-diffusion-chain",
+      "ex-weighted-and-simple-diffusion-losses"
+    ],
+    "pairs": [
+      "discrete-diffusion-and-variational-objectives"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-forward-gaussian-diffusion-chain.md",
+    "items/lem-isotropic-gaussian-kl-formula.md",
+    "items/thm-gaussian-forward-and-posterior-kernels.md",
+    "items/thm-ddpm-elbo-decomposition.md",
+    "items/alg-epsilon-prediction-diffusion-training.md",
+    "items/ex-scalar-gaussian-diffusion-chain.md",
+    "items/ex-weighted-and-simple-diffusion-losses.md",
+    "library/machine-learning/discrete-diffusion-and-variational-objectives.md",
+    "library/machine-learning/discrete-diffusion-and-variational-objectives-examples.md"
+  ],
+  "write_batches": [
+    "66"
+  ],
+  "consumer_scope": [
+    {
+      "id": "alg-epsilon-prediction-diffusion-training",
+      "path": [
+        "def-forward-gaussian-diffusion-chain",
+        "alg-epsilon-prediction-diffusion-training"
+      ],
+      "paths": [
+        [
+          "def-forward-gaussian-diffusion-chain",
+          "alg-epsilon-prediction-diffusion-training"
+        ],
+        [
+          "lem-isotropic-gaussian-kl-formula",
+          "alg-epsilon-prediction-diffusion-training"
+        ],
+        [
+          "thm-gaussian-forward-and-posterior-kernels",
+          "alg-epsilon-prediction-diffusion-training"
+        ],
+        [
+          "thm-ddpm-elbo-decomposition",
+          "alg-epsilon-prediction-diffusion-training"
+        ]
+      ]
+    },
+    {
+      "id": "ex-scalar-gaussian-diffusion-chain",
+      "path": [
+        "def-forward-gaussian-diffusion-chain",
+        "ex-scalar-gaussian-diffusion-chain"
+      ],
+      "paths": [
+        [
+          "def-forward-gaussian-diffusion-chain",
+          "ex-scalar-gaussian-diffusion-chain"
+        ],
+        [
+          "thm-gaussian-forward-and-posterior-kernels",
+          "ex-scalar-gaussian-diffusion-chain"
+        ]
+      ]
+    },
+    {
+      "id": "ex-weighted-and-simple-diffusion-losses",
+      "path": [
+        "def-forward-gaussian-diffusion-chain",
+        "ex-weighted-and-simple-diffusion-losses"
+      ],
+      "paths": [
+        [
+          "def-forward-gaussian-diffusion-chain",
+          "ex-weighted-and-simple-diffusion-losses"
+        ],
+        [
+          "lem-isotropic-gaussian-kl-formula",
+          "thm-ddpm-elbo-decomposition",
+          "ex-weighted-and-simple-diffusion-losses"
+        ],
+        [
+          "thm-gaussian-forward-and-posterior-kernels",
+          "thm-ddpm-elbo-decomposition",
+          "ex-weighted-and-simple-diffusion-losses"
+        ],
+        [
+          "thm-ddpm-elbo-decomposition",
+          "ex-weighted-and-simple-diffusion-losses"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ddpm-elbo-decomposition",
+      "path": [
+        "def-forward-gaussian-diffusion-chain",
+        "thm-ddpm-elbo-decomposition"
+      ],
+      "paths": [
+        [
+          "def-forward-gaussian-diffusion-chain",
+          "thm-ddpm-elbo-decomposition"
+        ],
+        [
+          "lem-isotropic-gaussian-kl-formula",
+          "thm-ddpm-elbo-decomposition"
+        ],
+        [
+          "thm-gaussian-forward-and-posterior-kernels",
+          "thm-ddpm-elbo-decomposition"
+        ]
+      ]
+    },
+    {
+      "id": "thm-gaussian-forward-and-posterior-kernels",
+      "path": [
+        "def-forward-gaussian-diffusion-chain",
+        "thm-gaussian-forward-and-posterior-kernels"
+      ],
+      "paths": [
+        [
+          "def-forward-gaussian-diffusion-chain",
+          "thm-gaussian-forward-and-posterior-kernels"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-forward-gaussian-diffusion-chain": [
+      "## Definition\n\nAssume AC. Let $d,T\\ge1$ be finite integers, let $I_d$ be the $d\\times d$ identity matrix, and let $\\beta_1,\\ldots,\\beta_T\\in(0,1)$. Set $\\alpha_t=1-\\beta_t$, $\\bar\\alpha_0=1$, and $\\bar\\alpha_t=\\prod_{s=1}^t\\alpha_s$. Write $\\lambda_d$ for Lebesgue measure on $\\mathbb R^d$ and define, for $v>0$,\n$$\\phi_{d,v}(y;m)=(2\\pi v)^{-d/2}\\exp\\!\\left(-\\frac{\\|y-m\\|_2^2}{2v}\\right),\\qquad y,m\\in\\mathbb R^d.$$\nThe notation $\\|z\\|_2^2=\\sum_{i=1}^d z_i^2$ is the squared Euclidean norm. The displayed function is the Lebesgue density of $N_d(m,vI_d)$.\n\nFor each fixed $x_0\\in\\mathbb R^d$, the forward chain has path density on $(\\mathbb R^d)^T$\n$$q(x_{1:T}\\mid x_0)=\\prod_{t=1}^T \\phi_{d,\\beta_t}(x_t;\\sqrt{\\alpha_t}\\,x_{t-1}).$$\nThus its transition from $x_{t-1}$ to $x_t$ is Gaussian with mean $\\sqrt{\\alpha_t}\\,x_{t-1}$ and covariance $\\beta_t I_d$. Each factor is a normalized density, and finite successive integration of the nonnegative product gives a probability density.\n\nFor a generic adjacent pair, the two model directions are shown below. The arrows indicate the direction in which each conditional density generates its target state; they assert no equality or inverse relation between the kernels.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node (previous) at (0,0) {$x_{t-1}$};\n  \\node (current) at (4,0) {$x_t$};\n  \\draw[->] (previous) to[bend left=24] node[midway,above] {$q(x_t\\mid x_{t-1})$} (current);\n  \\draw[->] (current) to[bend left=24] node[midway,below] {$p_{\\theta,t}(x_{t-1}\\mid x_t)$} (previous);\n\\end{tikzpicture}\n```\n\nA learned reverse Gaussian model consists of finite-valued Borel maps $\\mu_{\\theta,t}:\\mathbb R^d\\to\\mathbb R^d$ and fixed variances $\\sigma_t^2\\in(0,\\infty)$, for $1\\le t\\le T$. It is the joint density\n$$p_\\theta(x_{0:T})=\\phi_{d,1}(x_T;0)\\prod_{t=1}^T\\phi_{d,\\sigma_t^2}(x_{t-1};\\mu_{\\theta,t}(x_t)).$$\nIts prior is $p(x_T)=N_d(0,I_d)$, and its marginal density at $x_0$ is\n$$p_\\theta(x_0)=\\int_{(\\mathbb R^d)^T}p_\\theta(x_{0:T})\\,d\\lambda_d(x_1)\\cdots d\\lambda_d(x_T),$$\nwhenever this integral is finite. The joint reverse density is normalized by successive integration of its Gaussian transition factors followed by the prior density.\n\nFor $t=1$, the forward-chain conditional $q(x_0\\mid x_1,x_0)$ assigns probability one to every Borel set containing $x_0$ and zero to every Borel set not containing $x_0$; it is not a Lebesgue density. The separate learned reverse likelihood $p_\\theta(x_0\\mid x_1)$ is the Gaussian density above with variance $\\sigma_1^2>0$."
+    ],
+    "lem-isotropic-gaussian-kl-formula": [
+      "## Statement\n\nAssume AC. Let $d\\ge1$, $m,n\\in\\mathbb R^d$, and $v,w>0$. If $Q=N_d(m,vI_d)$ and $P=N_d(n,wI_d)$, then\n$$D_{\\mathrm{KL}}(Q\\|P)=\\frac d2\\left(\\frac vw-1+\\log\\frac wv\\right)+\\frac{\\|m-n\\|_2^2}{2w},$$\nwhere the KL divergence is directional, its first argument is absolutely continuous with respect to its second, and $\\log$ is the natural logarithm."
+    ],
+    "thm-gaussian-forward-and-posterior-kernels": [
+      "## Statement\n\nAssume AC and the finite Gaussian forward chain with dimension $d\\ge1$, horizon $T\\ge1$, and schedule $0<\\beta_t<1$ from the preceding definition. For each $x_0\\in\\mathbb R^d$ and $1\\le t\\le T$,\n$$q(x_t\\mid x_0)=N_d\\!\\left(\\sqrt{\\bar\\alpha_t}\\,x_0,(1-\\bar\\alpha_t)I_d\\right).$$\nFor every $2\\le t\\le T$, the conditional law given both endpoints is\n$$q(x_{t-1}\\mid x_t,x_0)=N_d\\!\\left(\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\ \\tilde\\beta_t I_d\\right),\\qquad \\tilde\\beta_t=\\frac{\\beta_t(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}>0.$$\nThe formula for $q(x_{t-1}\\mid x_t,x_0)$ is only asserted for $t\\ge2$; at $t=1$ the conditioning on $x_0$ makes $q(x_0\\mid x_1,x_0)$ a point mass, not a Lebesgue density. The Gaussian conditional above does not assert that the unconditional reverse law $q(x_{t-1}\\mid x_t)$ is Gaussian."
+    ],
+    "thm-ddpm-elbo-decomposition": [
+      "## Statement\n\nAssume AC. Fix a finite Gaussian forward chain and reverse model as defined above, with finite-valued Borel reverse means and fixed variances $\\sigma_t^2\\in(0,\\infty)$. For the noise-prediction parameterization, let $\\epsilon_\\theta:\\mathbb R^d\\times\\{1,\\ldots,T\\}\\to\\mathbb R^d$ be Borel and set\n$$\\mu_{\\theta,t}(x_t)=\\frac1{\\sqrt{\\alpha_t}}\\left(x_t-\\frac{\\beta_t}{\\sqrt{1-\\bar\\alpha_t}}\\,\\epsilon_\\theta(x_t,t)\\right),\\qquad 1\\le t\\le T.$$\nFor each fixed observed $x_0$, require $0<p_\\theta(x_0)<\\infty$, define the proper posterior density\n$$\\pi_\\theta(x_{1:T}\\mid x_0)=\\frac{p_\\theta(x_{0:T})}{p_\\theta(x_0)},$$\nand let $Q_{x_0}$ and $\\Pi_{\\theta,x_0}$ be the path probability measures with Lebesgue densities $q(x_{1:T}\\mid x_0)$ and $\\pi_\\theta(x_{1:T}\\mid x_0)$. Require $Q_{x_0}\\ll\\Pi_{\\theta,x_0}$ and\n$$\\mathbb E_{q(\\cdot\\mid x_0)}\\!\\left[|\\log q(x_{1:T}\\mid x_0)|+|\\log p_\\theta(x_{0:T})|\\right]<\\infty.$$\nHere $\\mathbb E_q[f]$ means the integral of $f$ against the path law with density $q(\\cdot\\mid x_0)$. Define\n$$\\operatorname{ELBO}_\\theta(x_0)=\\mathbb E_q\\!\\left[\\log p_\\theta(x_{0:T})-\\log q(x_{1:T}\\mid x_0)\\right].$$\nThen\n$$\\log p_\\theta(x_0)=\\operatorname{ELBO}_\\theta(x_0)+D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0}),\\qquad D_{\\mathrm{KL}}(Q_{x_0}\\|\\Pi_{\\theta,x_0})\\ge0.$$\nThe negative ELBO has the exact decomposition\n$$-\\operatorname{ELBO}_\\theta(x_0)=D_{\\mathrm{KL}}\\!\\left(q(x_T\\mid x_0)\\middle\\|N_d(0,I_d)\\right)+\\mathbb E_{q(x_1\\mid x_0)}[-\\log p_\\theta(x_0\\mid x_1)]+\\sum_{t=2}^T\\mathbb E_{q(x_t\\mid x_0)}\\!\\left[D_{\\mathrm{KL}}\\!\\left(q(x_{t-1}\\mid x_t,x_0)\\middle\\|p_\\theta(x_{t-1}\\mid x_t)\\right)\\right].$$\nIn particular, for $t\\ge2$, write\n$$\\tilde\\mu_t(x_t,x_0)=\\frac{\\sqrt{\\bar\\alpha_{t-1}}\\beta_t}{1-\\bar\\alpha_t}x_0+\\frac{\\sqrt{\\alpha_t}(1-\\bar\\alpha_{t-1})}{1-\\bar\\alpha_t}x_t,\\quad w_t=\\frac{\\beta_t^2}{2\\sigma_t^2\\alpha_t(1-\\bar\\alpha_t)},\\quad C_t=\\frac d2\\left(\\frac{\\tilde\\beta_t}{\\sigma_t^2}-1+\\log\\frac{\\sigma_t^2}{\\tilde\\beta_t}\\right).$$\nIf $x_t=\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\,\\epsilon$ with $\\epsilon\\sim N_d(0,I_d)$, then the corresponding per-step KL term is\n$$\\mathbb E_\\epsilon\\!\\left[w_t\\left\\|\\epsilon-\\epsilon_\\theta(x_t,t)\\right\\|_2^2+C_t\\right].$$\nAt $t=1$, the reconstruction term is the separate learned likelihood $p_\\theta(x_0\\mid x_1)$ with variance $\\sigma_1^2>0$; no Lebesgue density for $q(x_0\\mid x_1,x_0)$ is used. For finite $T$, the terminal-prior KL is retained; no equality $q(x_T\\mid x_0)=N_d(0,I_d)$ is assumed. The common unweighted objective\n$$L_{\\mathrm{simple}}(\\theta;x_0)=\\frac1T\\sum_{t=1}^T\\mathbb E_\\epsilon\\!\\left[\\left\\|\\epsilon-\\epsilon_\\theta\\!\\left(\\sqrt{\\bar\\alpha_t}x_0+\\sqrt{1-\\bar\\alpha_t}\\epsilon,t\\right)\\right\\|_2^2\\right]$$\ndrops the schedule weights and replaces the separate endpoint terms with noise-prediction losses, so it is not in general the exact maximum-likelihood objective."
+    ],
+    "alg-epsilon-prediction-diffusion-training": [
+      "## Definition\n\nFix a finite data set $D=(x_0^{(1)},\\ldots,x_0^{(N)})\\subset\\mathbb R^d$ with $N\\ge1$, a finite Gaussian schedule of horizon $T\\ge1$, fixed positive reverse variances, a Borel noise predictor $\\epsilon_\\theta$, and a mode from $\\{\\texttt{weighted-elbo},\\texttt{simple}\\}$. This procedure returns one stochastic loss estimate; it does not prescribe a parameter optimizer or claim optimizer convergence.\n\n1. Choose $I$ uniformly from $\\{1,\\ldots,N\\}$, choose $J$ uniformly from $\\{1,\\ldots,T\\}$ independently of $I$, and draw $\\epsilon\\sim N_d(0,I_d)$ independently.\n\n2. Set\n$$x_J=\\sqrt{\\bar\\alpha_J}\\,x_0^{(I)}+\\sqrt{1-\\bar\\alpha_J}\\,\\epsilon.$$\n\n3. If the mode is $\\texttt{simple}$, return\n$$\\left\\|\\epsilon-\\epsilon_\\theta(x_J,J)\\right\\|_2^2.$$\n\n4. If the mode is $\\texttt{weighted-elbo}$, first compute the exact terminal-prior term\n$$K_T(x_0^{(I)})=\\frac12\\left[\\bar\\alpha_T\\|x_0^{(I)}\\|_2^2+d\\left(-\\bar\\alpha_T-\\log(1-\\bar\\alpha_T)\\right)\\right].$$\nIf $J=1$, return\n$$K_T(x_0^{(I)})-T\\log p_\\theta(x_0^{(I)}\\mid x_J).$$\nIf $J\\ge2$, return\n$$K_T(x_0^{(I)})+T\\left[C_J+w_J\\left\\|\\epsilon-\\epsilon_\\theta(x_J,J)\\right\\|_2^2\\right],$$\nwhere $w_J$ and $C_J$ are the exact per-step coefficient and variance constant in the DDPM objective theorem.\n\nEach branch returns one sampled objective contribution. The $J=1$ weighted branch uses the positive-variance learned reconstruction likelihood; it never evaluates a density for the degenerate forward conditional $q(x_0\\mid x_1,x_0)$. This algorithm specifies the sampling procedure only; it makes no optimizer-convergence claim."
+    ],
+    "ex-scalar-gaussian-diffusion-chain": [],
+    "ex-weighted-and-simple-diffusion-losses": []
+  }
+}

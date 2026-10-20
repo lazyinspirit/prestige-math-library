@@ -1,0 +1,260 @@
+{
+  "group": "v",
+  "batches": [
+    "65"
+  ],
+  "pages_read": [
+    "neural-odes-and-continuous-normalizing-flows",
+    "neural-odes-and-continuous-normalizing-flows-examples"
+  ],
+  "items_read": [
+    "def-neural-ode",
+    "thm-neural-ode-global-smooth-flow",
+    "thm-instantaneous-change-of-variables-for-ode-flow",
+    "alg-adjoint-sensitivity-method",
+    "ex-numerical-adjoint-error"
+  ],
+  "conventions": [
+    {
+      "convention": "State and parameter dimensions satisfy d,q ≥ 1; the parameter domain is open. A neural ODE definition alone asserts neither global existence nor numerical accuracy.",
+      "fixed_by": "def-neural-ode",
+      "matters_for": [
+        "thm-neural-ode-global-smooth-flow",
+        "alg-adjoint-sensitivity-method",
+        "ex-numerical-adjoint-error"
+      ]
+    },
+    {
+      "convention": "Global means existence throughout the prescribed finite interval [0,T], with T > 0. The field is jointly smooth and has state-Lipschitz and origin bounds uniform on each compact parameter set. Endpoint time derivatives are one-sided.",
+      "fixed_by": "thm-neural-ode-global-smooth-flow",
+      "matters_for": [
+        "thm-instantaneous-change-of-variables-for-ode-flow",
+        "alg-adjoint-sensitivity-method",
+        "ex-numerical-adjoint-error",
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    },
+    {
+      "convention": "The density theorem assumes Countable Choice and a strictly positive continuous initial Lebesgue probability density. The flow starts at time zero; its Jacobian determinant is positive, and the trajectory log-density derivative is minus the state divergence.",
+      "fixed_by": "thm-instantaneous-change-of-variables-for-ode-flow",
+      "matters_for": [
+        "thm-instantaneous-change-of-variables-for-ode-flow"
+      ]
+    },
+    {
+      "convention": "Adjoints and returned parameter gradients are column vectors. State equations, terminal adjoint equations, and integrals are exact continuous objects; numerical replacements are outside the procedure's accuracy guarantees.",
+      "fixed_by": "alg-adjoint-sensitivity-method",
+      "matters_for": [
+        "ex-numerical-adjoint-error"
+      ]
+    },
+    {
+      "convention": "Euler uses N ≥ 1 equal steps on [0,1]; the finite graph gradient is differentiated at fixed N. The stated witness compares N = 50 and N = 100 at θ = −100.",
+      "fixed_by": "ex-numerical-adjoint-error",
+      "matters_for": [
+        "ex-numerical-adjoint-error"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-neural-ode-global-smooth-flow",
+      "statement": "For a jointly C∞ field on an open time interval containing [0,T], with state-Lipschitz and origin bounds uniform on every compact parameter set, each initial condition at s ∈ [0,T] has a unique solution throughout [0,T]. For fixed s,t, the transition is locally C∞ in initial state and parameter, is a state diffeomorphism with inverse the reversed transition, and its state Jacobian satisfies the variational equation with identity initial matrix.",
+      "used_by": [
+        "thm-instantaneous-change-of-variables-for-ode-flow",
+        "alg-adjoint-sensitivity-method",
+        "ex-numerical-adjoint-error",
+        "alg-flow-matching-training-and-sampling",
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    },
+    {
+      "id": "def-neural-ode",
+      "statement": "A parameterized neural ordinary differential equation on I is the initial-value problem ż(t) = vθ(t,z(t)), z(s) = zs, for v:I × R^d × Θ → R^d, open I and Θ, d,q ≥ 1, θ ∈ Θ, s ∈ I, and zs ∈ R^d.",
+      "used_by": [
+        "thm-neural-ode-global-smooth-flow",
+        "thm-instantaneous-change-of-variables-for-ode-flow",
+        "alg-adjoint-sensitivity-method",
+        "ex-numerical-adjoint-error",
+        "alg-flow-matching-training-and-sampling",
+        "lem-flow-matching-training-and-exact-sampling-properties"
+      ]
+    },
+    {
+      "id": "alg-adjoint-sensitivity-method",
+      "statement": "Under its finite-horizon smooth-field, compact-parameter, C1 initial-map and objective hypotheses, solve the state IVP forward, solve −p′ = Du vᵀp + Du ℓᵀ backward with p(T) = Du φᵀ, and return G = Dθ φᵀ + Dθ u0ᵀp(0) + ∫₀ᵀ(Dθ ℓᵀ + Dθ vᵀp)dt.",
+      "used_by": [
+        "ex-numerical-adjoint-error"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-mean-value-inequality-for-total-derivatives",
+      "used_for": "Deriving local state-Lipschitz bounds from bounded state derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Bounding continuous derivative norms on compact cylinders.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of closed bounded finite-dimensional cylinders and parameter neighborhoods.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence and uniqueness for the smooth vector field.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "Passing from local solutions to a unique maximal solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-gronwall-integral-inequality",
+      "used_for": "Uniform forward and backward finite-horizon state bounds.",
+      "opened": true
+    },
+    {
+      "id": "lem-ode-extension-from-a-compact-interior-region",
+      "used_for": "Excluding finite maximal endpoints within [0,T], including the reflected left-endpoint case.",
+      "opened": true
+    },
+    {
+      "id": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+      "used_for": "Smooth local transitions in initial state and parameters before finite composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-for-nonautonomous-smooth-odes",
+      "used_for": "Smooth local transitions with varying initial time.",
+      "opened": true
+    },
+    {
+      "id": "thm-c1-dependence-of-solutions-on-initial-data",
+      "used_for": "The state-Jacobian variational equation on common local intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Differentiating composed transition maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-flow-log-density-equation",
+      "used_for": "Pushforward density, positive Jacobian determinant, negative-divergence log-density identity, and one-sided endpoint identities.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption inherited through Lebesgue change of variables.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-ode-adjoint-gradient-formula",
+      "used_for": "The exact continuous gradient expression, including initial, terminal, running-cost and vector-field parameter terms.",
+      "opened": true
+    },
+    {
+      "id": "lem-parameter-ode-flow-tangent-on-common-tube",
+      "used_for": "Checking the continuous adjoint supplier's inherited convex common-tube hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-parameterized-finite-state-step-objective",
+      "used_for": "Identifying fixed-step Euler as a finite C1 state-step graph.",
+      "opened": true
+    },
+    {
+      "id": "thm-discrete-adjoint-gradient-recursion",
+      "used_for": "Identifying the discrete adjoint with the derivative of the finite Euler objective.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The exponential appearing in the exact linear flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Verifying the exact state solution, continuous adjoint and exact objective derivative.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-algebra-and-chain-rules",
+      "used_for": "Differentiating the exponential compositions and finite Euler polynomial.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Reducing the continuous adjoint integrand to exp(θ).",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Showing exp(−100) > 0, distinct from both finite gradient witnesses.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "alg-adjoint-sensitivity-method",
+      "concern": "The inherited hypothesis needed to apply thm-continuous-ode-adjoint-gradient-formula is not explicitly discharged: its tangent supplier requires a bounded convex open O with compact closure inside the field domain containing the relevant trajectories. The algorithm supplies a compact trajectory tube, which need not have a convex neighborhood inside a nonconvex Θ. A reader can localize around each evaluation parameter to a relatively compact parameter ball and use the global state bound to construct a convex product neighborhood. This localization should be stated when justifying the supplier invocation.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-extreme-value-metric",
+      "finding": "The Statement contains inline hyperlinks, including 'Let (X,d) be a nonempty compact metric space ([[def-metric-compactness]], [[def-metric-space]])'. Further links interrupt continuity, boundedness and extrema clauses. These violate the required uninterrupted Statement and immediate Statement references placement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-heine-borel-rn",
+      "finding": "The Statement contains inline hyperlinks, including 'is a compact subset ... ([[def-metric-compactness]])' and the closedness and boundedness links in clause 2. It also links thm-complete-and-totally-bounded-implies-compact within the Statement commentary. The required Statement references section is absent.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-countable-choice",
+      "finding": "The Definition ends with 'Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has a choice function.' Both hyperlinks interrupt the complete Definition and have not been moved to an immediately following Definition references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-continuous-ode-adjoint-gradient-formula",
+      "finding": "The Statement begins 'Let uθ solve the parameter-dependent ODE of [[lem-parameter-ode-flow-tangent-on-common-tube]] on [0,T].' This supplier hyperlink remains within the Statement rather than an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-discrete-adjoint-gradient-recursion",
+      "finding": "The Statement begins 'Use the setting of [[def-parameterized-finite-state-step-objective]].' The hyperlink interrupts the Statement and no immediate Statement references section follows the complete statement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "def-real-exponential-function-and-e",
+      "finding": "The Definition contains 'provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]' and further inline links defining factorial, the natural embedding, powers and series. These hyperlinks have not been moved after the complete Definition into Definition references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-c1-dependence-of-solutions-on-initial-data",
+      "finding": "Proof 1.1 asserts that every nearby solution graph lies in 'one compact cylinder K ⊆ D'; Proof 2.1 then evaluates DxF on the straight secant between two nearby trajectories and invokes uniform continuity on K. An arbitrary open ODE domain need not contain a single product cylinder covering the whole trajectory, and containment of both trajectories in a compact set alone does not put their secants in it. A compact neighborhood of the base graph with a uniform interior margin, followed by sufficiently small initial perturbations, supplies the needed argument.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "thm-c1-dependence-of-solutions-on-initial-data",
+      "finding": "The numbered proof steps end their tagged paragraphs before continuing the same arguments in separate untagged paragraphs and displays. For example, Proof 1.1 ends '[F1, L1, L2]' before the displayed variational equation and the paragraph beginning 'whose existence on I is given by [L2]'. Proofs 2.1–4.1 have the same structure. This violates the requirement that each complete step occupy one paragraph and end with its justification tags.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "conditional-flow-matching-and-transport-paths",
+      "to": "neural-odes-and-continuous-normalizing-flows",
+      "faithful": true,
+      "note": "Checked both the supplier interfaces and their uses in alg-flow-matching-training-and-sampling and lem-flow-matching-training-and-exact-sampling-properties. Sampling explicitly assumes the jointly smooth open-time extension and compact-parameter uniform Lipschitz/origin bounds. Lemma F4 faithfully states the global-flow supplier, and Proof 3.1 uses its joint continuity for measurable exact-flow output. Neither consumer infers target-distribution equality or numerical accuracy."
+    }
+  ]
+}

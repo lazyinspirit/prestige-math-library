@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-characteristic-function-of-a-real-random-variable.json
   audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
@@ -28,6 +29,17 @@ For a real random variable $X$ on $(\Omega,\mathcal F,\mathbb P)$, its **charact
 $$\varphi_X(t)=\mathbb E[e^{itX}]=\int_{\mathbb R}e^{itx}\,\mathbb P_X(dx),\qquad t\in\mathbb R.$$
 For a specified Borel probability measure $\mu$ on $\mathbb R$, write $\varphi_\mu(t)=\int e^{itx}\,\mu(dx)$.
 
-The complex integral means the sum of the real integral and $i$ times the imaginary integral, as in [[def-integrable-real-and-complex-functions-and-their-integrals]]. Euler's formula in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] gives $e^{itx}=\cos(tx)+i\sin(tx)$, a continuous function of $x$ with modulus one. Its components are bounded and measurable, hence integrable against a probability measure. [[thm-change-of-variables-for-expectation]] therefore applies to this bounded Borel function and proves the displayed identity. [[thm-integral-triangle-inequality]] gives $|\varphi_\mu(t)|\le\int1\,d\mu=1$.
+The complex integral means the sum of the real integral and $i$ times the imaginary integral, as in Integrable real and complex functions, and their integrals. Euler's formula in $\exp(x+iy)=e^x(\cos y+i\sin y)$, $|\exp(x+iy)|=e^x$, and $e^{i\pi}+1=0$ gives $e^{itx}=\cos(tx)+i\sin(tx)$, a continuous function of $x$ with modulus one. Its components are bounded and measurable, hence integrable against a probability measure. Change of variables for expectation therefore applies to this bounded Borel function and proves the displayed identity. The modulus of an integral is bounded by the integral of the modulus gives $|\varphi_\mu(t)|\le\int1\,d\mu=1$.
 
 No moment assumption is imposed. In particular $X=0$ gives $\varphi_X\equiv1$ and a constant $X=c$ gives $\varphi_X(t)=e^{itc}$. These definitions require no choice of representatives or new use of AC.
+
+## Definition references
+
+[[def-integrable-real-and-complex-functions-and-their-integrals]]
+
+[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]
+
+[[thm-change-of-variables-for-expectation]]
+
+[[thm-integral-triangle-inequality]]
+

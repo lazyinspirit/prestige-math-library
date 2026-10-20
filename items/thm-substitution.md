@@ -15,7 +15,7 @@ landmark: true
 short: "substitution"
 proof_strategy: direct
 verification:
-  repair: research/statistical-models-experiments-62-published-bibliography-thm-substitution-repair.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-substitution.json
   precheck: pass
 sources:
   scraped: []
@@ -33,17 +33,17 @@ pipeline_run: null
 ## Statement
 
 Let $c < d$ be reals and let $\varphi : [c,d] \to \mathbb{R}$ be differentiable
-at every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with
-$\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let
+at every point of $[c,d]$ as a function on $[c,d]$ (The derivative $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$ of $f : A \to \mathbb{R}$ at a point $c \in A$ that is a limit point of $A$, and differentiability on a set), with
+$\varphi'$ integrable on $[c,d]$ (The lower and upper Darboux integrals of a bounded $f$ on $[a,b]$ as $\sup_P L(f,P)$ and $\inf_P U(f,P)$, Darboux integrability as their equality, and the notation $\int_a^b f$). Let
 $J \subseteq \mathbb{R}$ be order-convex with at least two elements
-([[def-interval]]) with $\varphi[\,[c,d]\,] \subseteq J$, and let $f : J \to
-\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).
+(Intervals of $\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) with $\varphi[\,[c,d]\,] \subseteq J$, and let $f : J \to
+\mathbb{R}$ be continuous on $J$ (Continuity of $f : A \to \mathbb{R}$ at a point of $A$ and on $A$: the $\varepsilon$-$\delta$ condition, its agreement with $\lim_{x \to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point).
 
 Then $(f\circ\varphi)\,\varphi'$ is integrable on $[c,d]$ and
 
 $$\int_{\varphi(c)}^{\varphi(d)} f \;=\; \int_c^d (f\circ\varphi)\,\varphi' ,$$
 
-the left-hand integral being the oriented one of [[def-oriented-integral]].
+the left-hand integral being the oriented one of The integral with oriented limits: $\int_a^a f := 0$ and $\int_b^a f := -\int_a^b f$.
 
 **Neither injectivity nor monotonicity of $\varphi$ is assumed**, and that is
 exactly why the left-hand side is written with oriented limits: $\varphi(d)$ may
@@ -55,6 +55,18 @@ function is ever formed.
 With $f$ merely integrable the composite $f \circ \varphi$ need not be
 integrable at all, so the right-hand side need not exist; that is
 the false statement that weakens it on the companion page.
+
+## Statement references
+
+[[def-derivative]]
+
+[[def-darboux-integral]]
+
+[[def-interval]]
+
+[[def-continuity-real]]
+
+[[def-oriented-integral]]
 
 ## Facts & Assumptions
 

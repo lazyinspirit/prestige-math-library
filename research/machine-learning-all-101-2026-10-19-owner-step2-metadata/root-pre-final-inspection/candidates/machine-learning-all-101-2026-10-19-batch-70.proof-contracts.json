@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "scope": [
+    "def-symmetric-image-text-contrastive-loss",
+    "alg-zero-shot-prompt-classification",
+    "ex-prompt-and-distribution-sensitive-transfer"
+  ],
+  "contracts": {
+    "def-symmetric-image-text-contrastive-loss": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires d>=1, N>=1, and nonempty input sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: each encoder output is required nonzero before L2 normalization; s=exp(tau)>0 and the real exponential has positive finite values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: when N=1 both directional denominators contain the same sole exponential term, so both cross-entropies are zero; d=1 is allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: coincident nonzero embeddings leave every normalization and finite softmax sum defined; off-diagonal entries remain index negatives by definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all finite batch inputs are supplied and all operations are finite sums; the Definition uses no selection or choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition has no biconditional."
+        }
+      ]
+    },
+    "alg-zero-shot-prompt-classification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Algorithm requires a nonempty class list and a nonempty template list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: image/text outputs and every averaged class embedding are required nonzero before normalization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: with K=M=1 the class prototype is the single normalized text embedding, the softmax output is p_1=1, and c_1 is returned."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: tied logits are resolved by the least index; a zero prototype is excluded by the admissibility condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Algorithm has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the class/template lists are finite and the tie rule is deterministic, so no arbitrary selection or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Algorithm has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Algorithm has no biconditional."
+        }
+      ]
+    },
+    "ex-prompt-and-distribution-sensitive-transfer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-zero-shot-prompt-classification",
+          "source_section": "Definition",
+          "quote": "Fix image and text encoder maps $f_\\theta:\\mathsf X\\to\\mathbb R^d$ and $g_\\phi:\\mathsf T\\to\\mathbb R^d$ into one shared embedding space, and a real log-scale $\\tau$ with $s:=\\exp(\\tau)>0$. The inputs are an image $x\\in\\mathsf X$, an ordered nonempty list of distinct class descriptions $C=(c_1,\\ldots,c_K)$, and a finite nonempty list of prompt templates $T=(t_1,\\ldots,t_M)$, where each $t_m$ maps a class description to a text input. The admissible input conditions are $f_\\theta(x)\\ne0$, $g_\\phi(t_m(c_k))\\ne0$ for every $k,m$, and a nonzero average text embedding for every class.\n\n1. Normalize the image embedding: $u:=f_\\theta(x)/\\|f_\\theta(x)\\|_2$.\n\n2. For each class $c_k$ and template $t_m$, form the text embedding $v_{km}:=g_\\phi(t_m(c_k))/\\|g_\\phi(t_m(c_k))\\|_2$.\n\n3. Average the normalized prompt embeddings in the shared embedding space and normalize the average to obtain the class prototype $q_k:=\\left(\\frac1M\\sum_{m=1}^M v_{km}\\right)\\big/\\left\\|\\frac1M\\sum_{m=1}^M v_{km}\\right\\|_2$. This is prompt-template averaging; it averages embeddings before classification, not class probabilities.\n\n4. For each class compute the scaled similarity score $z_k:=s\\langle u,q_k\\rangle$ and softmax probability $p_k:=\\exp(z_k)/\\sum_{r=1}^K\\exp(z_r)$.\n\n5. Return the vector $(p_1,\\ldots,p_K)$ and class $c_{k^*}$, where $k^*$ is the least index maximizing $z_k$.\n\nThe returned classifier is zero-shot in the precise sense that no labeled examples from the target classification dataset are used to fit its class prototypes or classifier. The encoder maps, log-scale, class descriptions, and templates are fixed inputs to this inference procedure; it performs no training or parameter update. The procedure makes no accuracy or distribution-generalization guarantee.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Under the first wording, the normalized mean of $e_1$ and $e_2$ is $q_A=(1/\\sqrt2,1/\\sqrt2)$, while the two $B$ prompts average to $q_B=(4/5,3/5)$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Under the alternate wording, the $A$ prototype is $e_1$ and the $B$ prototype remains $(4/5,3/5)$, giving scores $s$ and $4s/5$. Thus the same image is classified as $A$ after the prompt change.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "In the second setup both image embeddings equal $e_1$, so their scores against $(q_A,q_B)=(e_1,e_2)$ are $(s,0)$ and the classifier predicts $A$ on both images. It is correct on $x_0$ and incorrect on $x_1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Their scores are $z_A=s/\\sqrt2$ and $z_B=4s/5$. Since both sides are positive and $(4/5)^2=16/25>1/2=(1/\\sqrt2)^2$, $z_B>z_A$, so the class-prototype classifier returns $B$.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "The only error atom has source mass $1/4$ and target mass $3/4$. Therefore the source and target errors are $1/4$ and $3/4$, respectively, with difference $1/2$.",
+          "inputs": [
+            "given",
+            "A2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The individual retrieval dot products are $1,0,4/5,4/5$. Since $1>4/5$, retrieval returns the first $A$ prompt, unlike the class-prototype classifier.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "By [A2] and [A3], $x_1$ is a $B$ image and $d_A$ is false of $B$, so $(x_1,d_A)$ is semantically mismatched. The stated inner-product formula $\\langle(a,b),(c,d)\\rangle=ac+bd$ gives similarity $1$ for $(x_1,d_A)$ and $0$ for the matched pair $(x_1,d_B)$.",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two classes, two templates, and nonempty finite source and target laws."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: all constructed embeddings are unit vectors and s>0; the zero cross-score has a positive finite exponential."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example deliberately fixes two classes and two prompt templates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: both shift images have the same embedding, and the constructed class comparisons are strict; the classifier remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: all lists and test laws are finite, score comparisons are strict, and the classifier's tie rule is deterministic; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example has no biconditional."
+        }
+      ]
+    }
+  }
+}

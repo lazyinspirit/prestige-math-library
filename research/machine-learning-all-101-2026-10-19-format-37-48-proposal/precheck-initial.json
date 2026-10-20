@@ -1,0 +1,365 @@
+{
+  "summary": {
+    "files": 58,
+    "checked": 49,
+    "failed": 17
+  },
+  "results": [
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/alg-empirical-pinn-objective.md",
+      "item_id": "alg-empirical-pinn-objective",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/alg-neural-operator-mesh-discretization.md",
+      "item_id": "alg-neural-operator-mesh-discretization",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/cex-neural-operator-sup-norm-discretization-does-not-control-c1.md",
+      "item_id": "cex-neural-operator-sup-norm-discretization-does-not-control-c1",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/cex-pinn-regularization-thresholds-need-balanced-sample-counts.md",
+      "item_id": "cex-pinn-regularization-thresholds-need-balanced-sample-counts",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The threshold definitions for $d\\ge2$, positive fixed $\\lambda_r,\\lambda_b,c_r,c_b$, and the sample-count condition in the Statement.\n\n[F1] The exact thresholds are\n$$\\widehat\\lambda^R_{r,m}=\\frac{3\\lambda_r(\\sqrt d)^{2\\alpha}c_r^{-2\\alpha/d}m_r^{-\\alpha/d}}{C_m},\\qquad \\widehat\\lambda^R_{b,m}=\\frac{3\\lambda_b(\\sqrt d)^{2\\alpha}c_b^{-2\\alpha/(d-1)}m_b^{-\\alpha/(d-1)}}{C_m},$$\nwhere the same positive $C_m$ divides both coordinates ([[alg-empirical-pinn-objective]]).\n\n\n\n**Proof strategy:** explicit sample-count sequence.\n\n1.1 Set $m_r=m_b=n$ for integers $n\\ge1$. Since $d/(d-1)>1$, we have $n\\le n^{d/(d-1)}$, so the required count condition holds. Choose $\\lambda_m^R=\\widehat\\lambda_m^R$; then the coordinatewise lower-bound condition is equality and the max norm is exactly the prescribed comparison scale. [given, F1, algebra, choose]\n\n2.1 Cancelling the common factor $C_m$ in [F1] gives $$\\frac{\\lambda^R_{r,m}}{\\lambda^R_{b,m}}=\\frac{\\widehat\\lambda^R_{r,m}}{\\widehat\\lambda^R_{b,m}}=\\frac{\\lambda_r c_r^{-2\\alpha/d}}{\\lambda_b c_b^{-2\\alpha/(d-1)}}\\,n^{\\alpha/(d-1)-\\alpha/d}=C\\,n^{\\alpha/(d(d-1))},$$ where $C>0$ is independent of $n$. The exponent is positive, so the ratio tends to infinity. Thus the two coordinates need not be comparable under the stated count condition. [step 1.1, F1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain.md",
+      "item_id": "cex-shin-elliptic-corner-regularity-on-exterior-sphere-domain",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** $0<\\alpha<1$ and the source's claimed $C^{2,\\alpha}(U)\\cap C^0(\\bar U)$ solution class.\n\n[F1] The library's $C^{2,\\alpha}(U)$ is the bounded global Hölder class; its norm includes the supremum of every second derivative over all of $U$ ([[def-holder-spaces-c-k-alpha-and-their-scaled-norms]]).\n\n[F2] For $L=\\Delta$, a bounded-domain function $w\\in C^2(U)\\cap C^0(\\bar U)$ with $\\Delta w=0$ and $w|_{\\partial U}=0$ vanishes identically ([[lem-shin-elliptic-residual-stability]]).\n\n[F3] The locally proved radial profile $\\chi$ is smooth, equals $1$ for $r\\le1/4$, and equals $0$ for $r\\ge1/2$ ([[lem-shin-radial-smooth-cutoff]]).\n\n[F4] The Laplacian of a scalar $C^2$ function on an open subset of $\\mathbb R^2$ is $w_{xx}+w_{yy}$ ([[def-laplacian-of-a-c2-function]]).\n\n[F5] The total chain rule applies to the smooth local polar-coordinate change on $r>0$ ([[thm-chain-rule-for-total-derivatives]]).\n\n\n\n1.1 Let $U=\\{(r\\cos\\theta,r\\sin\\theta):0<r<1,\\ 0<\\theta<2\\pi/3\\}$. It is bounded and Lipschitz: its boundary consists of two line segments and a circular arc, meeting at finitely many corners of angles $2\\pi/3$ and $\\pi/2$. At a smooth boundary point, a sufficiently small ball tangent on the exterior side is disjoint from $U$; on the circular arc one can use a ball outside the unit disk. At a corner of interior angle $\\beta<\\pi$, choose a ball tangent at the corner with its center on the exterior angle bisector. Directions from the vertex to points in this ball lie within angle $\\pi/2$ of the center direction, while the sector directions are at angular distance at least $\\pi-\\beta/2>\\pi/2$; hence the ball is exterior. Therefore $U$ satisfies the exterior sphere condition everywhere. [given, cases]\n\n1.2 Let $\\chi$ be the profile supplied by [F3]. Set $$u(r,\\theta)=\\chi(r)r^{3/2}\\sin(3\\theta/2),\\qquad L=\\Delta,\\qquad f=\\Delta u,\\qquad g=0.$$ Since $r>0$ on $U$, $u\\in C^\\infty(U)$. It extends continuously by zero at the vertex, vanishes on both straight sides because the sine factor vanishes, and vanishes on the circular arc because $\\chi(1)=0$. To compute $\\Delta w$ for any $C^2$ function in local polar coordinates, write $c=\\cos\\theta$ and $s=\\sin\\theta$. The chain rule [F5] gives $$w_{xx}=c^2w_{rr}+\\frac{s^2}{r}w_r+\\frac{s^2}{r^2}w_{\\theta\\theta}-\\frac{2sc}{r}w_{r\\theta}+\\frac{2sc}{r^2}w_\\theta,\\quad w_{yy}=s^2w_{rr}+\\frac{c^2}{r}w_r+\\frac{c^2}{r^2}w_{\\theta\\theta}+\\frac{2sc}{r}w_{r\\theta}-\\frac{2sc}{r^2}w_\\theta.$$ By [F4], adding yields $\\Delta w=w_{rr}+r^{-1}w_r+r^{-2}w_{\\theta\\theta}$. For $w=r^{3/2}\\sin(3\\theta/2)$, these derivatives are $w_r=\\frac32r^{1/2}\\sin(3\\theta/2)$, $w_{rr}=\\frac34r^{-1/2}\\sin(3\\theta/2)$, and $w_{\\theta\\theta}=-\\frac94r^{3/2}\\sin(3\\theta/2)$, so the polar Laplacian is zero on $r<1/4$. On the annulus where $\\chi$ varies, $r$ is bounded away from zero and all factors are smooth; outside $r<1/2$, $u=0$. Thus $f$ is smooth and supported in $1/4\\le r\\le1/2$. The domain $U$ is convex, so boundedness of $\\nabla f$ gives a Lipschitz bound on $f$ along each segment in $U$; since $U$ is bounded and $0<\\alpha<1$, this implies $f\\in C^{0,\\alpha}(U)$. [given, F3, F4, F5, algebra]\n\n2.1 Along the ray $\\theta=\\pi/3$ and for $0<r<1/4$, $\\partial_{rr}u=(3/4)r^{-1/2}$, which is unbounded as $r\\downarrow0$. A bounded global $C^{2,\\alpha}$ norm bounds every Cartesian second derivative and hence every unit-direction second derivative, so [F1] implies $u\\notin C^{2,\\alpha}(U)$. The coefficients of $L=\\Delta$ are smooth, the ellipticity constant is $1$, and the expanded zero-order coefficient is $0\\le0$. [step 1.2, F1, algebra]\n\n3.1 The displayed $u$ is a classical solution in $C^2(U)\\cap C^0(\\bar U)$ of $\\Delta u=f$ with zero Dirichlet data. Any other solution in that class differs from $u$ by a zero-boundary harmonic function, which vanishes by [F2]. Hence it is the unique classical solution, and no solution in the asserted global $C^{2,\\alpha}(U)\\cap C^0(\\bar U)$ class exists. This refutes the assertion. [step 1.2, step 2.1, F2, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-discretization-invariant-operator-family.md",
+      "item_id": "def-discretization-invariant-operator-family",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-fourier-neural-operator-layer.md",
+      "item_id": "def-fourier-neural-operator-layer",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-neural-operator-activation-classes.md",
+      "item_id": "def-neural-operator-activation-classes",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-neural-operator.md",
+      "item_id": "def-neural-operator",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-physics-informed-neural-network-loss.md",
+      "item_id": "def-physics-informed-neural-network-loss",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-ridgeless-minimum-norm-regression.md",
+      "item_id": "def-ridgeless-minimum-norm-regression",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** Positive integers $n,p$, $X\\in\\mathbb R^{n\\times p}$, and\n$y\\in\\mathbb R^n$.\n\n[F1] The Moore--Penrose pseudoinverse $X^+$ is the unique matrix satisfying the\nfour Penrose equations ([[def-moore-penrose-pseudoinverse]]).\n\n[F2] For every finite real matrix $X$ and vector $y$, $X^+y$ is the unique\nleast-squares minimiser of minimum Euclidean norm\n([[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]).\n\n\n\n1.1 The existence-and-uniqueness theorem [F2] makes $X^+$ well-defined for this finite matrix; [F1] fixes the four equations that define it. [given, F1, F2]\n\n2.1 By [F2], this vector is exactly the unique minimum-norm least-squares solution, which verifies the equivalent characterization. [given, F2] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-shin-elliptic-divergence-form-operator.md",
+      "item_id": "def-shin-elliptic-divergence-form-operator",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/def-shin-parabolic-operator-and-boundary.md",
+      "item_id": "def-shin-parabolic-operator-and-boundary",
+      "status": "not-applicable"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-double-descent-in-neural-and-tree-models.md",
+      "item_id": "ex-double-descent-in-neural-and-tree-models",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-fourier-neural-operator-layer-and-claim-boundary.md",
+      "item_id": "ex-fourier-neural-operator-layer-and-claim-boundary",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** $v(x)=\\sin(2\\pi x)$ on $\\mathbb T=\\mathbb R/\\mathbb Z$ and the Fourier coefficient convention in the Fourier neural-operator layer definition.\n\n[F1] The Fourier coefficient of $e^{2\\pi i kx}$ at index $j$ is $1$ if $j=k$ and $0$ otherwise, by integrating the exponential over one period.\n\n\n\n**Proof strategy:** compute the two nonzero Fourier coefficients.\n\n1.1 Using $\\sin(2\\pi x)=(e^{2\\pi ix}-e^{-2\\pi ix})/(2i)$ and [F1], $\\widehat v(1)=1/(2i)$, $\\widehat v(-1)=-1/(2i)$, and every other coefficient is zero. [given, F1, algebra]\n\n2.1 With $R_1=R_{-1}=1$, the retained sum is $e^{2\\pi ix}/(2i)-e^{-2\\pi ix}/(2i)=v(x)$. At cutoff zero, the sum has only the $k=0$ term, which vanishes because $\\widehat v(0)=0$. [step 1.1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-isotropic-risk-components-and-signal-to-noise-regimes.md",
+      "item_id": "ex-isotropic-risk-components-and-signal-to-noise-regimes",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** $r\\ge0$, $\\sigma\\ge0$, and $\\gamma>0$ with $\\gamma\\ne1$.\n\n[F1] The limiting bias and variance components are the two displayed branches\n([[lem-isotropic-minimum-norm-risk-components]]).\n\n\n\n1.1 Summing the two components in [F1] gives the total risk $R(\\gamma)=\\sigma^2\\gamma/(1-\\gamma)$ for $0<\\gamma<1$ and $R(\\gamma)=r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$ for $\\gamma>1$. Differentiating the first expression gives $R'(\\gamma)=\\sigma^2/(1-\\gamma)^2$, so it is strictly increasing for $\\sigma>0$ and is identically zero for $\\sigma=0$. [given, F1, algebra]\n\n1.2 For $\\gamma>1$, $$R'(\\gamma)=\\frac{r^2}{\\gamma^2}-\\frac{\\sigma^2}{(\\gamma-1)^2}.$$ If $\\sigma>0$ and $r\\le\\sigma$, then $r/\\gamma\\le\\sigma/\\gamma<\\sigma/(\\gamma-1)$, so $R'<0$. If $r>\\sigma>0$, the derivative vanishes exactly when $r(\\gamma-1)=\\sigma\\gamma$, namely at $\\gamma_*=r/(r-\\sigma)>1$; it is negative before this point and positive after it, giving the unique minimum. If $\\sigma=0$, the derivative is $r^2/\\gamma^2$, which is positive for $r>0$ and zero for $r=0$. [given, F1, algebra]\n\n2.1 The limits at $\\gamma\\downarrow0$, $\\gamma\\uparrow1$, and $\\gamma\\to\\infty$ follow directly from the formulas in [F1]. In particular, the singular terms at $\\gamma=1$ vanish when $\\sigma=0$ and diverge when $\\sigma>0$. For $\\sigma>0$ every finite-domain risk value is positive while the underparameterized branch tends to zero as $\\gamma\\downarrow0$, proving that its global infimum is $0$ and is not attained. When $\\sigma=0$, the underparameterized branch equals $0$ identically. [given, F1, step 1.1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-neural-operator-grid-refinement-vs-fixed-grid-network.md",
+      "item_id": "ex-neural-operator-grid-refinement-vs-fixed-grid-network",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** A continuous function $a:[0,1]\\to\\mathbb R$, the integral operator $G$, and the midpoint quadrature rule in the Example.\n\n[F1] A continuous function on the compact interval $[0,1]$ is uniformly continuous.\n\n\n\n**Proof strategy:** estimate each midpoint cell error by the modulus of continuity.\n\n1.1 Let $I_j=[(j-1)/n,j/n]$ and define $\\omega_a(\\delta)=\\sup\\{|a(x)-a(y)|:x,y\\in[0,1],\\ |x-y|\\le\\delta\\}$. For each $y\\in I_j$, $|y-(j-\\frac12)/n|\\le1/(2n)$, so $$\\left|\\int_{I_j}a(y)\\,dy-\\frac1n a((j-\\tfrac12)/n)\\right|\\le\\frac1n\\omega_a(1/(2n)).$$ Summing over $j$ gives $|G(a)(x)-G_n(a)(x)|\\le\\omega_a(1/(2n))$ for every $x$. [given, algebra]\n\n2.1 By [F1], $\\omega_a(\\delta)\\to0$ as $\\delta\\downarrow0$. The bound in step 1.1 is independent of $x$, so $G_n(a)\\to G(a)$ in $C([0,1])$. The dimension of $F_n$ changes with $n$ and its definition returns only a length-$n$ vector, so no arbitrary-point output or common function-space domain follows from $F_n$ alone. [step 1.1, F1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-non-global-training-stationary-point.md",
+      "item_id": "ex-non-global-training-stationary-point",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The polynomial objective and gradient-descent update in the Example.\n\n[F1] $J'(\\theta)=4\\theta(\\theta^2-1)$ by polynomial differentiation.\n\n\n\n**Proof strategy:** compare objective values and evaluate the update at zero.\n\n1.1 Since $J(\\theta)$ is a square, $J(\\theta)\\ge0$, with equality exactly when $\\theta^2=1$. Also $J(0)=1$. Hence $0$ is not a global minimizer. [given, algebra]\n\n2.1 By [F1], $J'(0)=0$. If $\\theta_k=0$, the update gives $\\theta_{k+1}=0-\\eta J'(0)=0$; induction from $\\theta_0=0$ yields $\\theta_k=0$ for all $k$. The iterates therefore never reach either global minimizer. [given, F1, algebra, induction] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-pinn-small-scale-cube-sampling-has-instances.md",
+      "item_id": "ex-pinn-small-scale-cube-sampling-has-instances",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/ex-sparse-pinn-collocation-aliases-residual.md",
+      "item_id": "ex-sparse-pinn-collocation-aliases-residual",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The operator, data, collocation set, and trial functions in the Example.\n\n[F1] The derivative of $h_m$ is $h_m'(x)=\\sin(2\\pi mx)$.\n\n[F2] For every positive integer $m$, $\\int_0^1\\sin^2(2\\pi mx)dx=1/2$, by $\\sin^2 z=(1-\\cos(2z))/2$ and direct integration.\n\n\n\n**Proof strategy:** evaluate the derivative at the grid points and integrate its square.\n\n1.1 Differentiating the displayed formula gives [F1]. At $x_j=j/m$, $h_m'(x_j)=\\sin(2\\pi j)=0$. Also $h_m(0)=h_m(1)=0$ since $\\cos(0)=\\cos(2\\pi m)=1$. Thus the empirical residual and exact boundary errors vanish. [given, F1, algebra]\n\n2.1 The population residual loss is $\\int_0^1|h_m'(x)|^2dx=1/2$ by [F2]. Therefore exact collocation fit at these sample points does not by itself force the population residual loss to be small. [step 1.1, F2, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/fs-shin-global-holder-dirichlet-claim.md",
+      "item_id": "fs-shin-global-holder-dirichlet-claim",
+      "status": "pass",
+      "strategy": "contradiction"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-ap-finite-dimensional-factorization-of-continuous-maps.md",
+      "item_id": "lem-ap-finite-dimensional-factorization-of-continuous-maps",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-dense-cube-polynomial-norming-and-reproduction.md",
+      "item_id": "lem-dense-cube-polynomial-norming-and-reproduction",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-gaussian-rbf-power-function-fill-distance-bound.md",
+      "item_id": "lem-gaussian-rbf-power-function-fill-distance-bound",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-iid-uniform-fill-distance-rate.md",
+      "item_id": "lem-iid-uniform-fill-distance-rate",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** Countable Choice, the cube $\\Omega$, dimension $d$, and independent\nuniform sample $U_1,U_2,\\ldots$ as in the Statement.\n\n[A1] Countable Choice means every countable family of nonempty sets has a\nchoice function ([[def-countable-choice]]).\n\n[F1] Lebesgue measure agrees with volume on half-open boxes; therefore an\naxis-aligned subcube of side length $L/m$ has normalized Lebesgue probability\n$m^{-d}$ in $\\Omega$ ([[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]],\n[[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]).\n\n[F2] The probability of a finite union of events is at most the sum of their\nprobabilities ([[thm-finite-union-bound]]).\n\n[F3] Independence means mutual independence of the whole family of random\nelements ([[def-identically-distributed-and-iid-random-variables]]).\n\n\n\n1.1 For $n$ large enough that $t_n:=(n/(2\\log n))^{1/d}\\ge2$, put $m_n=\\lfloor t_n\\rfloor$ and partition each coordinate interval of $\\Omega$ into $m_n$ equal half-open intervals, closing the last interval at its right endpoint. This gives $m_n^d$ disjoint measurable cells, each of probability $m_n^{-d}$ by [F1]. [given, A1, F1, construct]\n\n2.1 For a fixed cell, independence [F3] gives probability $(1-m_n^{-d})^n\\le e^{-n/m_n^d}$ that it is empty. By [F2], the probability that some cell is empty is at most $m_n^d e^{-n/m_n^d}\\le n e^{-2\\log n}=1/n$, because $m_n^d\\le n/(2\\log n)$ and hence $n/m_n^d\\ge2\\log n$. [given, F2, F3, step 1.1, algebra]\n\n3.1 On the complementary event every cell contains a sample point. Every $x\\in\\Omega$ belongs to one cell, whose Euclidean diameter is $L\\sqrt d/m_n$; therefore $h_n\\le L\\sqrt d/m_n$. Since $t_n\\ge2$ implies $m_n=\\lfloor t_n\\rfloor\\ge t_n/2$, we obtain $$h_n\\le2L\\sqrt d\\left(\\frac{2\\log n}{n}\\right)^{1/d} =C_dL\\left(\\frac{\\log n}{n}\\right)^{1/d}.$$ The event has probability at least $1-1/n$ by step 2.1. [given, step 2.1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains.md",
+      "item_id": "lem-inward-mollification-and-finite-rank-approximation-on-lipschitz-domains",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-isotropic-minimum-norm-risk-components.md",
+      "item_id": "lem-isotropic-minimum-norm-risk-components",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-neural-operator-ba-class-is-empty-as-defined.md",
+      "item_id": "lem-neural-operator-ba-class-is-empty-as-defined",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** An integer $q\\ge1$ and the definition of $\\mathrm{BA}_q$.\n\n[F1] Membership in $\\mathrm{BA}_q$ requires, for every compact $K\\subset\\mathbb R^q$, every $\\varepsilon>0$, and every $C\\ge\\operatorname{diam}_2(K)$, a network satisfying both the identity-approximation and global-bound inequalities ([[def-neural-operator-activation-classes]]).\n\n\n\n**Proof strategy:** direct.\n\n1.1 Suppose $\\sigma\\in\\mathrm{BA}_q$. Choose $x_0\\in\\mathbb R^q$ with $x_0\\ne0$, set $K=\\{x_0\\}$, choose $C=0$, and choose $0<\\varepsilon<|x_0|_2$. Since a singleton has diameter zero, these choices satisfy the quantifiers in [F1]. [given, F1, choose]\n\n2.1 The required network would satisfy $|f(x)|_2\\le0$ for every $x\\in\\mathbb R^q$, hence $f(x_0)=0$. It would also satisfy $|f(x_0)-x_0|_2\\le\\varepsilon$, which becomes $|x_0|_2\\le\\varepsilon$, contrary to the choice of $\\varepsilon$. Therefore no $\\sigma$ belongs to $\\mathrm{BA}_q$. [given, step 1.1, F1, contradiction] ∎\n\n\n\nThe source's immediately adjacent assertion that ReLU belongs to this class cannot follow from the printed definition: the contradiction above applies to every activation. The global-output-bound branch of the source's Theorem 11 is therefore vacuous as printed. A change from diameter to a bound involving the location of $K$ would be a different definition and requires owner reconciliation."
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-neural-operator-compact-union-under-uniform-convergence.md",
+      "item_id": "lem-neural-operator-compact-union-under-uniform-convergence",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** Metric spaces, a compact subset $K$, continuous maps, and uniform convergence on $K$ as stated.\n\n[F1] Compactness means that every open cover has a finite subcover; this convention applies to compact subsets of metric spaces ([[def-metric-compactness]]).\n\n[F2] A continuous map sends a compact subset of a metric space to a compact subset ([[thm-continuous-image-of-a-compact-space-is-compact]]).\n\n[F3] In a metric space, open sets contain an open ball about each of their points, and open balls are open ([[def-metric-space]], [[def-metric-topology]]).\n\n\n\n**Proof technique:** open-cover argument with a uniform neighborhood of the limit image.\n\n1.1 If $K=\\emptyset$, then $W=\\emptyset$ and it is compact. Otherwise let $\\mathcal V$ be any open cover of $W$. By [F2], $f[K]$ is compact, so [F1] gives finitely many $V_1,\\ldots,V_q\\in\\mathcal V$ covering $f[K]$. Set $O=\\bigcup_{i=1}^qV_i$, an open set containing $f[K]$. [given, F1, F2, cases]\n\n2.1 Form the family of all balls $B_Y(y,r)$ with $y\\in f[K]$, $r>0$, and $B_Y(y,2r)\\subseteq O$. This family covers $f[K]$ by openness and [F3], so [F1] gives a finite subcover with centers $y_1,\\ldots,y_s$ and radii $r_1,\\ldots,r_s$. Since $f[K]\\ne\\emptyset$, $s\\ge1$; let $\\delta=\\min_i r_i>0$. If $z\\in Y$ and $d_Y(z,y)<\\delta$ for some $y\\in f[K]$, choose $i$ with $d_Y(y,y_i)<r_i$; then $d_Y(z,y_i)<\\delta+r_i\\le2r_i$, so $z\\in B_Y(y_i,2r_i)\\subseteq O$. Thus every point within distance $\\delta$ of some point of $f[K]$ lies in $O$. [step 1.1, F1, F3, algebra]\n\n3.1 Uniform convergence supplies $N\\ge1$ such that $d_Y(f_n(x),f(x))<\\delta$ for every $x\\in K$ and every $n\\ge N$. Since $f(x)\\in f[K]$, step 2.1 implies $f_n[K]\\subseteq O$ for every $n\\ge N$. [given, step 2.1, algebra]\n\n4.1 For each of the finitely many indices $1\\le n<N$, [F2] makes $f_n[K]$ compact, so [F1] supplies a finite subfamily of $\\mathcal V$ covering it. Together with $V_1,\\ldots,V_q$ from step 1.1, these finitely many members cover $f[K]$, all $f_n[K]$ with $n\\ge N$, and each remaining $f_n[K]$. Hence every open cover of $W$ has a finite subcover, so $W$ is compact by [F1]. The proof uses only finite subcovers and a finite minimum, not a choice axiom. [step 1.1, step 3.1, F1, F2, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs.md",
+      "item_id": "lem-neural-operator-kernel-riemann-sums-uniform-on-compact-inputs",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The compact set $K$, the continuous kernel $\\kappa$, and the quadrature functionals in the Statement.\n\n[F1] A compact metric space is totally bounded, so for every $\\delta>0$ it has a finite $\\delta$-net ([[thm-compact-implies-complete-and-totally-bounded]], [[def-totally-bounded]]).\n\n[F2] The hypotheses give pointwise convergence $Q_n f\\to\\int_D f$ on $C(\\bar D)$ and a uniform bound on the operator norms of $Q_n$.\n\n[F3] Heine–Borel makes $\\bar D$ and $\\bar D'$ compact. Finite products are compact in the product topology, which agrees with the topology of the max product metric because its balls are products of factor balls and such rectangles form a basis. The kernel is bounded and uniformly continuous on the compact metric product $\\bar D'\\times\\bar D$, and each $a\\in C(\\bar D)$ is bounded on $\\bar D$ ([[thm-heine-borel-rn]], [[thm-finite-products-of-compact-spaces]], [[def-product-topology]], [[cor-compact-domain-maps-are-uniformly-continuous]], [[thm-extreme-value-metric]], [[def-continuous-real-functions-on-a-compact-metric-space]]).\n\n[F4] The continuous image of a compact metric space is compact ([[thm-continuous-image-of-a-compact-space-is-compact]]).\n\n\n\n**Proof strategy:** direct finite-net argument.\n\n1.1 Define $\\Phi(x,a)=\\kappa(x,\\cdot)a(\\cdot)$ on $\\bar D'\\times K$. For $(x,a),(x',a')$ in this product, $$\\|\\Phi(x',a')-\\Phi(x,a)\\|_\\infty\\le\\|\\kappa\\|_\\infty\\|a'-a\\|_\\infty+\\|a\\|_\\infty\\sup_{y\\in\\bar D}|\\kappa(x',y)-\\kappa(x,y)|.$$ The constants are finite by [F3]. Given $\\eta>0$, uniform continuity of $\\kappa$ on $\\bar D'\\times\\bar D$ gives a positive $\\delta_1$ making the second term less than $\\eta/2$ when $|x'-x|<\\delta_1$; choosing $\\delta_2>0$ with $\\|\\kappa\\|_\\infty\\delta_2<\\eta/2$ bounds the first term whenever $\\|a'-a\\|_\\infty<\\delta_2$ (if $\\|\\kappa\\|_\\infty=0$, that term is zero). Thus $\\Phi$ is continuous for the max product metric. The domain is compact by [F3], so [F4] makes its image $S$ compact. [given, F3, F4, algebra]\n\n1.2 Put $M=1+\\sup_n\\|Q_n\\|+|D|>0$. For any $f,g\\in C(\\bar D)$, $$\\left|Q_n(f)-\\int_Df-Q_n(g)+\\int_Dg\\right|\\le M\\|f-g\\|_\\infty,$$ since $|\\int_D(f-g)|\\le |D|\\|f-g\\|_\\infty$. [given, F2, algebra]\n\n2.1 Fix $\\varepsilon>0$. Put $M=1+\\sup_n\\|Q_n\\|+|D|>0$. By [F1] and step 1.1, choose a finite $\\varepsilon/(3M)$-net $f_1,\\dots,f_J$ for $S$. For each $j$, [F2] gives an index $n_j$ such that $|Q_n(f_j)-\\int_Df_j|<\\varepsilon/3$ whenever $n\\ge n_j$. [step 1.1, F1, F2, choose]\n\n3.1 Let $n\\ge\\max_j n_j$ and $f\\in S$. Choose $j$ with $\\|f-f_j\\|_\\infty<\\varepsilon/(3M)$. By [step 1.2] and the bound from [step 2.1], $$|Q_n(f)-\\int_Df|\\le M\\|f-f_j\\|_\\infty+|Q_n(f_j)-\\int_Df_j|+M\\|f_j-f\\|_\\infty<\\varepsilon.$$ Every $f\\in S$ has this bound, so taking the supremum over $a\\in K$ and $x\\in\\bar D'$ proves the assertion. [step 1.2, step 2.1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-pinn-cell-occupancy-controls-uniform-residual.md",
+      "item_id": "lem-pinn-cell-occupancy-controls-uniform-residual",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-pinn-random-samples-are-space-filling.md",
+      "item_id": "lem-pinn-random-samples-are-space-filling",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-pinn-residual-loss-from-fill-distance.md",
+      "item_id": "lem-pinn-residual-loss-from-fill-distance",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The trial function, residual and boundary operators, sample sets, fill distances, measures, and positive loss weights in the Statement.\n\n[F1] The population and empirical PINN losses use the weighted-square conventions in the local definition ([[def-physics-informed-neural-network-loss]]).\n\n[F2] Each cell in the partition has residual mass at most $C_r\\varepsilon_r^d$ and boundary mass at most $C_b\\varepsilon_b^{d-1}$ by the upper ball-mass assumptions in the Statement.\n\n[F3] The Hölder seminorm convention is $|v(x)-v(y)|\\le[v]_{\\alpha;E}|x-y|^\\alpha$ ([[def-physics-informed-neural-network-loss]]).\n\n\n\n**Proof strategy:** integrate local collocation bounds over nearest-sample cells.\n\n1.1 Order each finite sample set and assign each point of $U$ to a nearest residual sample, breaking ties by the least index. This produces a measurable finite Voronoi partition $V_1,\\ldots,V_{m_r}$; each cell lies in the radius-$\\varepsilon_r$ ball about its assigned sample, so [F2] gives $\\mu_r(V_i)\\le C_r\\varepsilon_r^d$. Use the same construction on $\\Gamma$ to get cells $W_j$ with $\\mu_b(W_j)\\le C_b\\varepsilon_b^{d-1}$. [given, F2, choose]\n\n1.2 If $x\\in V_i$, the three-term square inequality and [F3] give $$|L[h](x)-f(x)|^2\\le3|L[h](x_i^r)-f(x_i^r)|^2+3\\varepsilon_r^{2\\alpha}[L[h]]_{\\alpha;U}^2+3\\varepsilon_r^{2\\alpha}[f]_{\\alpha;U}^2.$$ If $y\\in W_j$, the same argument gives the corresponding boundary bound with $B[h]$, $g$, and $\\varepsilon_b$. [given, F3, algebra]\n\n2.1 Integrate the residual inequality over the cells. The collocation terms contribute at most $3C_rm_r\\varepsilon_r^d\\lambda_r m_r^{-1}\\sum_i|L[h](x_i^r)-f(x_i^r)|^2$, and the seminorm and data terms contribute $3\\lambda_r\\varepsilon_r^{2\\alpha}([L[h]]_{\\alpha;U}^2+[f]_{\\alpha;U}^2)$ because $\\mu_r(U)=1$. [step 1.1, step 1.2, F1, algebra]\n\n2.2 Integrating the boundary inequality gives the same estimate with $3C_bm_b\\varepsilon_b^{d-1}$ multiplying the empirical boundary term and $3\\lambda_b\\varepsilon_b^{2\\alpha}([B[h]]_{\\alpha;\\Gamma}^2+[g]_{\\alpha;\\Gamma}^2)$ for the remaining terms. [step 1.1, step 1.2, F1, algebra]\n\n3.1 By the definition of $C_m$, the empirical residual and boundary coefficients in steps 2.1–2.2 are at most $C_m$. The two residual seminorm coefficients equal $C_m\\lambda^R_{r,m}$ and $C_m\\lambda^R_{b,m}$ by definition, while the data terms already have their displayed coefficients. Adding the two estimates yields the result. [step 2.1, step 2.2, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-ridgeless-risk-decomposition.md",
+      "item_id": "lem-ridgeless-risk-decomposition",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-bounded-open-set-hilbert-evolution-triple.md",
+      "item_id": "lem-shin-bounded-open-set-hilbert-evolution-triple",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-elliptic-energy-estimate.md",
+      "item_id": "lem-shin-elliptic-energy-estimate",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-elliptic-residual-stability.md",
+      "item_id": "lem-shin-elliptic-residual-stability",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The bounded domain, uniformly elliptic coefficient matrix, bounded lower-order coefficients with $\\widetilde c\\le0$, and $w\\in C^2(U)\\cap C^0(\\bar U)$.\n\n[F1] The operator expands with the positive principal part and zero-order coefficient shown in [[def-shin-elliptic-divergence-form-operator]].\n\n[F2] A continuous function on the compact set $\\bar U$ attains its maximum; a $C^2$ function at an interior maximum has zero gradient and negative-semidefinite Hessian.\n\n\n\n**Proof strategy:** construct a strict positive barrier and apply the weak maximum principle by perturbation.\n\n1.1 Since $U$ is bounded, choose real numbers $a_1<b_1$ with $a_1\\le x_1\\le b_1$ on $\\bar U$. Let $B=\\|\\widetilde b_1\\|_{C^0(U)}$ and $C_0=\\|\\widetilde c\\|_{C^0(U)}$. Choose $\\kappa>0$ large enough that $\\kappa^2\\lambda_0-\\kappa B-C_0\\ge1$. For $\\psi(x)=e^{\\kappa x_1}$, [F1] gives $$L[\\psi](x)=e^{\\kappa x_1}\\bigl(\\kappa^2a_{11}(x)+\\kappa\\widetilde b_1(x)+\\widetilde c(x)\\bigr)\\ge e^{\\kappa a_1}>0.$$ Choose $M>e^{\\kappa b_1}$ and set $\\Phi=M-\\psi$. Then $\\Phi>0$ on $\\bar U$ and $L[\\Phi]=M\\widetilde c-L[\\psi]\\le-e^{\\kappa a_1}$. [given, F1, algebra, choose]\n\n2.1 Put $R=\\|L[w]\\|_{C^0(U)}$, $Q=\\|w\\|_{C^0(\\partial U)}$, and $\\eta=e^{\\kappa a_1}$. For $z=w-Q-(R/\\eta)\\Phi$, the boundary values satisfy $z\\le0$. In $U$, $$L[z]=L[w]-Q\\widetilde c-(R/\\eta)L[\\Phi]\\ge -R+R=0,$$ because $-Q\\widetilde c\\ge0$. [given, step 1.1, algebra]\n\n3.1 Suppose $z(x_0)>0$ at some $x_0\\in U$. Since $z\\le0$ on $\\partial U$ and $z$ is continuous on $\\bar U$, its positive maximum is attained at an interior point. For sufficiently small $\\delta>0$, $z+\\delta\\psi$ has an interior positive maximum as well: its value at $x_0$ is at least $z(x_0)>0$, while its boundary values are at most $\\delta e^{\\kappa b_1}<z(x_0)$. At that interior maximum [F2] and $\\widetilde c\\le0$ give $L[z+\\delta\\psi]\\le0$, contradicting $L[z+\\delta\\psi]>0$. Hence $z\\le0$ on $U$, and therefore $$w\\le Q+(R/\\eta)\\|\\Phi\\|_{C^0(\\bar U)}.$$ Applying the same argument to $-w$ yields the corresponding lower bound. Taking $C_L=\\max\\{1,\\|\\Phi\\|_{C^0(\\bar U)}/\\eta\\}$ proves the first estimate; applying it to $u^*-h$ proves the second. [step 2.1, F2, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-interior-parabolic-schauder-estimate.md",
+      "item_id": "lem-shin-interior-parabolic-schauder-estimate",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-parabolic-classical-approximation-and-boundary-attainment.md",
+      "item_id": "lem-shin-parabolic-classical-approximation-and-boundary-attainment",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-parabolic-energy-estimate.md",
+      "item_id": "lem-shin-parabolic-energy-estimate",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-parabolic-residual-stability.md",
+      "item_id": "lem-shin-parabolic-residual-stability",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent.md",
+      "item_id": "lem-shin-pinn-all-scale-cell-mass-assumption-inconsistent",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** A probability measure $\\mu$ on nonempty $X$, an integer $d\\ge1$, and a constant $c>0$.\n\n[F1] A probability measure satisfies $\\mu(X)=1$ ([[def-probability-measure]]).\n\n[F2] If $E\\subseteq X$ is measurable, then $\\mu(E)\\le\\mu(X)$ ([[prop-measure-monotonicity]]).\n\n\n\n**Proof technique:** choose one scale at which the asserted lower bound exceeds total mass.\n\n1.1 Choose $\\varepsilon>c^{-1/d}$. Since $X$ is nonempty, any partition of $X$ has at least one cell $E$. The set $E$ is measurable and $E\\subseteq X$, so [F1] and [F2] give $\\mu(E)\\le1$. [given, F1, F2, choose]\n\n2.1 The asserted lower bound gives $\\mu(E)\\ge c\\varepsilon^d>1$, contradicting step 1.1. Hence no such all-scale family of partitions exists. [given, step 1.1, algebra, contradiction] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-radial-smooth-cutoff.md",
+      "item_id": "lem-shin-radial-smooth-cutoff",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap.md",
+      "item_id": "lem-shin-smooth-dirichlet-approximants-from-sobolev-bootstrap",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants.md",
+      "item_id": "lem-shin-uniform-boundary-schauder-estimate-for-smooth-dirichlet-approximants",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-shin-zero-data-parabolic-classical-energy-identification.md",
+      "item_id": "lem-shin-zero-data-parabolic-classical-energy-identification",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-smooth-integral-functionals-approximate-on-compact-function-sets.md",
+      "item_id": "lem-smooth-integral-functionals-approximate-on-compact-function-sets",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/lem-zero-signal-isotropic-risk-limit.md",
+      "item_id": "lem-zero-signal-isotropic-risk-limit",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** The nested real iid design, positive aspect ratio $\\gamma\\ne1$,\nindependent centered noise with covariance $\\sigma^2I_n$, centered test feature\nwith covariance $I_{p_n}$, and the Axiom of Choice from the Statement.\n\n[A1] The Axiom of Choice permits a choice function for every family of\nnonempty sets ([[def-axiom-of-choice]]).\n\n[F1] For the nested real iid finite-fourth-moment design and every deterministic\nsignal sequence of fixed norm $r>0$, the design-conditional risk tends almost\nsurely to $\\sigma^2\\gamma/(1-\\gamma)$ for $\\gamma<1$ and to\n$r^2(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$ for $\\gamma>1$\n([[cor-isotropic-minimum-norm-risk-closure-under-edge-gap]]).\n\n[F2] The conditional risk for a deterministic signal is its squared projection\nonto $\\ker X_n$ plus the signal-independent noise term\n([[lem-ridgeless-risk-decomposition]]).\n\n[F3] Iid entries are independent and share one common distribution\n([[def-identically-distributed-and-iid-random-variables]]).\n\n\n\n1.1 For each $n$, let $e_{1,n}$ be the first standard basis vector in $\\mathbb R^{p_n}$. For $a\\in\\{1,2\\}$, let $\\mathcal R_n^{(a)}$ denote the conditional risk with signal $\\beta_n^{(a)}=a e_{1,n}$, and put $B_n=e_{1,n}^{\\mathsf T}(I-X_n^+X_n)e_{1,n}$ and $V_n=(\\sigma^2/n)\\operatorname{tr}(S_n^+)$. [given, choose]\n\n2.1 Applying [F2] to each auxiliary signal gives $\\mathcal R_n^{(1)}=B_n+V_n$ and $\\mathcal R_n^{(2)}=4B_n+V_n$. Applying [F1] with norms $1$ and $2$ gives almost-sure limits for both risks; the intersection of these two probability-one events still has probability one. The iid law is common in both applications by [F3]. [A1, F1, F2, F3, step 1.1, algebra]\n\n3.1 The exact identities in step 2.1 give $V_n=(4\\mathcal R_n^{(1)}-\\mathcal R_n^{(2)})/3$. If $\\gamma<1$, both risk limits in [F1] equal $\\sigma^2\\gamma/(1-\\gamma)$, so $V_n$ tends to that quantity. If $\\gamma>1$, their limits are respectively $1-1/\\gamma+\\sigma^2/(\\gamma-1)$ and $4(1-1/\\gamma)+\\sigma^2/(\\gamma-1)$; their indicated combination is $\\sigma^2/(\\gamma-1)$. [F1, step 2.1, algebra]\n\n4.1 For the zero signal in the Statement, [F2] identifies $\\mathcal R_n$ with the same $V_n$. Step 3.1 therefore gives both asserted limits. [given, F2, step 3.1] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-isotropic-ridgeless-risk-across-interpolation-threshold.md",
+      "item_id": "thm-isotropic-ridgeless-risk-across-interpolation-threshold",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-neural-operator-compact-uniform-universality.md",
+      "item_id": "thm-neural-operator-compact-uniform-universality",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-neural-operator-discretization-invariance.md",
+      "item_id": "thm-neural-operator-discretization-invariance",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-neural-operator-input-output-spaces-have-ap.md",
+      "item_id": "thm-neural-operator-input-output-spaces-have-ap",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-noiseless-rkhs-interpolation-fill-distance-bound.md",
+      "item_id": "thm-noiseless-rkhs-interpolation-fill-distance-bound",
+      "status": "repair",
+      "strategy": "direct",
+      "proposed_proof": "**Given:** Countable Choice, the Gaussian RKHS $\\mathcal H_\\sigma$, target\n$h^*$, and iid uniform sample from the Statement.\n\n[A1] The Axiom of Countable Choice says every countable sequence of nonempty\nsets has a choice function ([[def-countable-choice]]).\n\n[F1] The Gaussian radial function is a real positive semidefinite kernel\n([[ex-gaussian-radial-kernel]]).\n\n[F2] Under Countable Choice, a real positive semidefinite kernel has a\ncanonical RKHS with the stated reproducing property\n([[thm-canonical-rkhs-construction-and-reproducing-property]]).\n\n[F3] A real RKHS has sections $k_x=k(\\cdot,x)$ and satisfies\n$\\langle f,k_x\\rangle=f(x)$ for every function $f$ in that space\n([[def-positive-semidefinite-kernels-and-reproducing-kernel-hilbert-spaces]]).\n\n[F4] The Gaussian power function has the stated bound\n([[lem-gaussian-rbf-power-function-fill-distance-bound]]).\n\n[F5] An iid uniform sample on a fixed cube has Euclidean fill distance at most\n$C_dL(\\log n/n)^{1/d}$ with probability at least $1-1/n$\n([[lem-iid-uniform-fill-distance-rate]]).\n\n[F6] Every finite-dimensional subspace of a real inner-product space admits an\northogonal projection ([[lem-finite-dimensional-projection-in-a-real-inner-product-space]]).\n\n\n\n1.1 By [A1], [F1], and [F2], the Gaussian kernel has the real RKHS used in the Statement, with evaluation property [F3]. Let $X_n=\\{x_1,\\ldots,x_n\\}$ and $V_n=\\operatorname{span}\\{k_\\sigma(\\cdot,x_i):1\\le i\\le n\\}$. For any interpolant $h$, put $g=h-h^*$. Then $g(x_i)=0$, so [F3] gives $\\langle g,k_\\sigma(\\cdot,x_i)\\rangle=0$ for each $i$ and hence $g\\perp V_n$. By [F6] the projection $\\Pi_{V_n}$ exists; therefore $$g(x)=\\langle g,k_\\sigma(\\cdot,x)\\rangle =\\langle g,k_\\sigma(\\cdot,x)-\\Pi_{V_n}k_\\sigma(\\cdot,x)\\rangle.$$ The inner-product Cauchy--Schwarz inequality follows by expanding $\\|u-tv\\|^2\\ge0$ and minimizing over real $t$ (with the zero-vector case immediate). Thus $|g(x)|\\le\\|g\\|_{\\mathcal H_\\sigma}P_{X_n}(x)$. [given, A1, F1, F2, F3, F4, F6, algebra]\n\n2.1 The triangle inequality gives $\\|g\\|_{\\mathcal H_\\sigma}\\le\\|h\\|_{\\mathcal H_\\sigma}+\\|h^*\\|_{\\mathcal H_\\sigma}$. Taking the supremum in step 1.1 yields $$\\sup_{x\\in\\Omega}|h(x)-h^*(x)|\\le (\\|h\\|_{\\mathcal H_\\sigma}+\\|h^*\\|_{\\mathcal H_\\sigma}) \\sup_{x\\in\\Omega}P_{X_n}(x).$$ [given, step 1.1, algebra]\n\n3.1 By [F5], on an event of probability at least $1-1/n$, the fill distance $h_{X_n}$ is at most $\\bar h_n=C_dL(\\log n/n)^{1/d}$. For all sufficiently large $n$, $\\bar h_n<\\min(h_0,e^{-1})$; the function $u\\mapsto|\\log u|/u$ is decreasing on $(0,e^{-1}]$, so [F4] applies and gives $$\\sup_xP_{X_n}(x)\\le C\\exp\\!\\left(-c\\frac{|\\log h_{X_n}|}{h_{X_n}}\\right) \\le C\\exp\\!\\left(-\\frac{c}{\\bar h_n}\\right) =C\\exp\\!\\left(-\\frac{c}{C_dL}\\left(\\frac{n}{\\log n}\\right)^{1/d}\\right).$$ Using this bound in step 2.1 proves the displayed estimate with $A=C$ and $B=c/(C_dL)$, uniformly for every interpolant on that event. [given, F4, F5, step 2.1, algebra] ∎"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-pinn-linear-elliptic-consistency.md",
+      "item_id": "thm-pinn-linear-elliptic-consistency",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-pinn-linear-parabolic-consistency.md",
+      "item_id": "thm-pinn-linear-parabolic-consistency",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-pinn-regularized-loss-consistency.md",
+      "item_id": "thm-pinn-regularized-loss-consistency",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-shin-elliptic-dirichlet-existence-and-residual-stability.md",
+      "item_id": "thm-shin-elliptic-dirichlet-existence-and-residual-stability",
+      "status": "pass",
+      "strategy": "direct"
+    },
+    {
+      "file": "research/machine-learning-all-101-2026-10-19-format-37-48-proposal/items/thm-shin-parabolic-initial-boundary-existence-and-residual-stability.md",
+      "item_id": "thm-shin-parabolic-initial-boundary-existence-and-residual-stability",
+      "status": "pass",
+      "strategy": "direct"
+    }
+  ]
+}

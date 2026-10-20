@@ -1,0 +1,5 @@
+# AdaGrad batch75 owner proposal, cycle1
+
+The native final review correctly identifies an inline algorithm-property proof: the accumulated Gram matrix being PSD is a missing separately proved prerequisite. The create-only lemma proves its full finite Gram identity and verifies both full and diagonal scales, including zero and singular matrices. Four guarded algorithm spans add justified_by, explicitly map one-based labels to zero-based coordinates, retain the PSD assertion while extracting its proof, and add a reference. All procedure formulas and input scope remain unchanged.
+
+Use operations.json with exact before/alg-adagrad.md comparison, then compare full candidates/alg-adagrad.md. Create the helper only if its live target is absent. repair-evidence.json records supplier proof uses and complete affected-consumer dispositions; consumer-trace.json records independent current closure. Root owns helper registration, metadata and current-input checks. Final explicit candidate precheck passes for the lemma (algorithm not-applicable), and proof-layout reports 2 items,3 steps,0 defects. No run gates, hashes, audits or native acceptance claims are included.

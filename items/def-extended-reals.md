@@ -14,6 +14,7 @@ aliases: [def-extended-real-line]
 landmark: true
 short: "$\\overline{\\mathbb{R}}$"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-extended-reals.json
   precheck: n/a
   verified:
     model: gpt-5.6-sol-codex-subscription
@@ -38,21 +39,21 @@ pipeline_run: null
 ## Definition
 
 Fix two objects $-\infty$ and $+\infty$, distinct from one another and neither of
-them a real number ([[def-real-numbers]]), and set
+them a real number (The real numbers), and set
 
 $$\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty, +\infty\}.$$
 
 This is a **new object**, introduced here explicitly with its own order and its
 own partial arithmetic. It is not an enlargement of the field $\mathbb{R}$, and
-no operation of $\mathbb{R}$ ([[def-complete-ordered-field]]) is redefined by
+no operation of $\mathbb{R}$ (Complete ordered field (least-upper-bound property)) is redefined by
 anything below.
 
 **The order.** For $a, b \in \overline{\mathbb{R}}$ declare
 
 $$a \le b \quad :\Longleftrightarrow \quad a = -\infty \ \text{ or } \ b = +\infty \ \text{ or } \ \big(a, b \in \mathbb{R} \text{ and } a \le b \text{ in } \mathbb{R}\big),$$
 
-with $\mathbb{R}$ ordered as in [[def-real-order]], and write $a < b$ for
-"$a \le b$ and $a \ne b$" as usual ([[def-partial-order]]).
+with $\mathbb{R}$ ordered as in Order on the reals, and write $a < b$ for
+"$a \le b$ and $a \ne b$" as usual (Partial order and partially ordered set).
 
 **$(\overline{\mathbb{R}}, \le)$ is a totally ordered set, and the inclusion of
 $\mathbb{R}$ preserves and reflects the order.** All four checks are immediate
@@ -92,7 +93,7 @@ $\nu(\nu(a)) = a$ and
 $$a \le b \iff -b \le -a \qquad (a, b \in \overline{\mathbb{R}}).$$
 
 For $a$ and $b$ real this is the elementwise order reversal in $\mathbb{R}$:
-translation invariance ([[lem-of-add-order]]) applied with the constant $-a-b$
+translation invariance (Order is preserved by adding a constant and by adding inequalities) applied with the constant $-a-b$
 turns $a < b$ into $-b < -a$ and, applied with the constant $a+b$, turns it back,
 while $a = b$ holds exactly when $-a = -b$. In every other case both sides are
 decided by the first two clauses of the order: $a = -\infty$ makes both sides
@@ -132,6 +133,18 @@ exponentiation and no absolute value on $\overline{\mathbb{R}}$ in this library;
 where such an expression is wanted it is written out in the two defined
 operations, and where a case falls in the undefined list the statement carries an
 explicit hypothesis saying so.
+
+## Definition references
+
+[[def-real-numbers]]
+
+[[def-complete-ordered-field]]
+
+[[def-real-order]]
+
+[[def-partial-order]]
+
+[[lem-of-add-order]]
 
 ## Remarks
 

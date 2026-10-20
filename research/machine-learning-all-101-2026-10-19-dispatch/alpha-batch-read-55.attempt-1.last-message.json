@@ -1,0 +1,292 @@
+{
+  "group": "r",
+  "batches": ["55"],
+  "pages_read": [
+    "algorithmic-stability-of-stochastic-training",
+    "algorithmic-stability-of-stochastic-training-examples"
+  ],
+  "items_read": [
+    "lem-iid-sample-plus-ghost-point-are-exchangeable",
+    "def-uniform-stability",
+    "thm-uniform-stability-implies-expected-generalization",
+    "thm-sgd-stability-convex-loss",
+    "thm-sgd-stability-nonconvex-loss",
+    "ex-sgd-convex-stability-linear-in-steps",
+    "ex-sgd-stability-convex-vs-nonconvex-schedules",
+    "ex-sgd-nonlipschitz-loss-no-uniform-stability"
+  ],
+  "conventions": [
+    {
+      "convention": "Replacement adjacency concerns ordered samples differing in at most one coordinate. Stability takes the absolute value outside expectation over sample-independent internal randomness and quantifies over every adjacent sample pair and every test observation. Permutation invariance is unnecessary.",
+      "fixed_by": "def-uniform-stability",
+      "matters_for": [
+        "thm-uniform-stability-implies-expected-generalization",
+        "thm-sgd-stability-convex-loss",
+        "thm-sgd-stability-nonconvex-loss",
+        "ex-sgd-nonlipschitz-loss-no-uniform-stability"
+      ]
+    },
+    {
+      "convention": "Generalization is population risk minus empirical risk, bounded in absolute value after taking expectation over both sample and algorithm randomness. Joint loss measurability and risk integrability are explicit hypotheses.",
+      "fixed_by": "thm-uniform-stability-implies-expected-generalization",
+      "matters_for": [
+        "thm-sgd-stability-convex-loss",
+        "thm-sgd-stability-nonconvex-loss"
+      ]
+    },
+    {
+      "convention": "Updates start at fixed w₀ and run for t=1,…,T. The whole index vector is independent of the sample; each index is uniform, but indices at different times may depend on one another. Convex steps permit both endpoints 0 and 2/β.",
+      "fixed_by": "thm-sgd-stability-convex-loss",
+      "matters_for": [
+        "ex-sgd-convex-stability-linear-in-steps",
+        "ex-sgd-stability-convex-vs-nonconvex-schedules"
+      ]
+    },
+    {
+      "convention": "The nonconvex theorem requires n≥2, β,c>0, loss values in [0,1], and nonnegative nonincreasing steps with αₜ≤c/t. Its displayed bound is interpreted as zero when L=0.",
+      "fixed_by": "thm-sgd-stability-nonconvex-loss",
+      "matters_for": [
+        "ex-sgd-stability-convex-vs-nonconvex-schedules"
+      ]
+    },
+    {
+      "convention": "Uniform stability includes samples outside the support of the sampling law; the quadratic example therefore compares arbitrary labels despite choosing a point-mass population law.",
+      "fixed_by": "def-uniform-stability",
+      "matters_for": [
+        "ex-sgd-nonlipschitz-loss-no-uniform-stability"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-uniform-stability-implies-expected-generalization",
+      "statement": "For an IID supervised sample, independent internal randomness, a measurable joint loss map, and integrable displayed risks, uniform replacement stability at level ε implies |E[R_P(A_n(S,U_n))−R̂_S(A_n(S,U_n))]|≤ε. No permutation-invariance assumption is required.",
+      "used_by": [
+        "thm-sgd-stability-convex-loss",
+        "thm-sgd-stability-nonconvex-loss"
+      ]
+    },
+    {
+      "id": "def-uniform-stability",
+      "statement": "For every pair S,S′ of ordered samples differing in at most one coordinate and every test observation z, |E_U L_{A_n(S,U)}(z)−E_U L_{A_n(S′,U)}(z)|≤ε, with independent internal randomness and finite expected test losses.",
+      "used_by": [
+        "thm-uniform-stability-implies-expected-generalization",
+        "thm-sgd-stability-convex-loss",
+        "thm-sgd-stability-nonconvex-loss",
+        "ex-sgd-nonlipschitz-loss-no-uniform-stability"
+      ]
+    },
+    {
+      "id": "thm-sgd-stability-convex-loss",
+      "statement": "For n,T,d≥1, β>0, L≥0, jointly measurable supervised loss and gradient maps, totally differentiable convex per-observation losses with β-Lipschitz gradients and L-Lipschitz values, an IID sample, sample-independent uniform-marginal indices, fixed initialization, deterministic 0≤αₜ≤2/β, and the stated measurability and integrability assumptions, the specified updates have uniform replacement stability at level (2L²/n)Σₜαₜ and absolute expected population-minus-empirical risk gap at most that level. Cross-time index dependence is allowed.",
+      "used_by": [
+        "ex-sgd-convex-stability-linear-in-steps",
+        "ex-sgd-stability-convex-vs-nonconvex-schedules",
+        "ex-sgd-nonlipschitz-loss-no-uniform-stability"
+      ]
+    },
+    {
+      "id": "lem-iid-sample-plus-ghost-point-are-exchangeable",
+      "statement": "For m≥1 IID random elements Z₁,…,Zₘ,Z_* with law P on a measurable space, replacing coordinate i of S by Z_* gives (S,Z_*) and (S^(i),Zᵢ) the same distribution on the finite product measurable space.",
+      "used_by": [
+        "thm-uniform-stability-implies-expected-generalization"
+      ]
+    },
+    {
+      "id": "thm-sgd-stability-nonconvex-loss",
+      "statement": "For n≥2, T,d≥1, β,c>0, L≥0, the stated jointly measurable supervised loss and gradient maps, totally differentiable per-observation losses in [0,1] with L-Lipschitz values and β-Lipschitz gradients, an IID sample, sample-independent uniform-marginal indices, fixed initialization, nonnegative nonincreasing steps αₜ≤c/t, and measurable output risks, the specified procedure has uniform replacement stability and absolute expected population-minus-empirical risk gap at most (1+1/(βc))(2cL²)^(1/(βc+1))T^(βc/(βc+1))/(n−1). The bound is zero for L=0; cross-time index dependence is allowed.",
+      "used_by": [
+        "ex-sgd-stability-convex-vs-nonconvex-schedules"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and common coordinate laws in the ghost-point lemma and generalization arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-sigma-algebras-and-events",
+      "used_for": "Finite intersection product formula in the exchangeability proof.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Rectangle-generated finite product measurable spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Uniqueness of the common finite product law, iterating the two-factor theorem for probability measures.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Expected losses and finite expected generalization gaps.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability conditions permitting subtraction and integration of losses.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Interchanging sample, seed, and ghost-observation integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Subtracting expected risks and averaging coordinate-replacement identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-triangle-inequality",
+      "used_for": "Passing the uniform seed-averaged stability bound through outer expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+      "used_for": "Convex-loss hypotheses and the nonexpansive-gradient supplier's supporting-line derivation.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Directional difference-quotient derivation of the gradient norm bound.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Euclidean gradient notation in both SGD stability proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean inner products, norms, and normalized gradient directions.",
+      "opened": true
+    },
+    {
+      "id": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+      "used_for": "Identifying the derivative along the normalized gradient with the gradient norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Norm triangle inequalities and normalization of nonzero gradient vectors.",
+      "opened": true
+    },
+    {
+      "id": "lem-l-smoothness-descent-inequality",
+      "used_for": "The opened nonexpansiveness supplier derives cocoercivity using this quadratic descent inequality.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Bounding products of nonconvex update expansion factors.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Exponentiating the harmonic-sum upper bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Combining finite products of exponentials.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Exponential notation in the nonconvex product estimate.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Logarithm notation and its inverse-exponential convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Identifying log T−log s with log(T/s).",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Bounding harmonic tails by the integral of 1/x.",
+      "opened": true
+    },
+    {
+      "id": "def-real-power",
+      "used_for": "Converting exponential-logarithmic bounds to positive real powers.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-power-continuity-and-derivatives",
+      "used_for": "Monotonicity and antiderivatives of the truncated power envelope.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Evaluating power-tail integrals on nondegenerate positive intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Integrability of the continuous truncated power envelope.",
+      "opened": true
+    },
+    {
+      "id": "thm-additivity-over-subintervals",
+      "used_for": "Adding adjacent integral bounds and splitting the envelope integral at r.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Harmonic-sum and decreasing-envelope sum-to-integral comparisons.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-iid-sample-plus-ghost-point-are-exchangeable",
+      "concern": "The Hardt–Recht–Singer source metadata and Statement references locate Theorem 2.2's proof in “§2.2”. In the linked arXiv v2 paper, Theorem 2.2 and its proof are in Section 2, PDF pp. 4–5, before §2.1. The theorem number is correct; the subsection locator is not. Source checked: https://arxiv.org/pdf/1509.01240.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-uniform-stability",
+      "concern": "The Hardt–Recht–Singer locator says “§2.2, Definition 2.1”. In the linked arXiv v2 paper, Definition 2.1 is in Section 2, PDF p. 4, before §2.1. The definition number is correct; the subsection locator is not. Source checked: https://arxiv.org/pdf/1509.01240.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-uniform-stability-implies-expected-generalization",
+      "concern": "The Hardt–Recht–Singer source locator says “§2.2, Theorem 2.2 and complete coordinate-replacement proof”. The linked arXiv v2 paper places this theorem and proof in Section 2, PDF pp. 4–5, before §2.1. The theorem number and mathematical use are correct. Source checked: https://arxiv.org/pdf/1509.01240.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-sgd-stability-nonconvex-loss",
+      "concern": "The Hardt–Recht–Singer source locator says “§3.4, Theorem 3.12, Lemma 3.11, and complete proof”. In the linked arXiv v2 paper, these are in §3.5, “Non-convex optimization”, PDF pp. 12–14. The theorem number and displayed bound agree with the source. Source checked: https://arxiv.org/pdf/1509.01240.",
+      "severity": "presentation"
+    },
+    {
+      "id": "ex-sgd-stability-convex-vs-nonconvex-schedules",
+      "concern": "The Hardt–Recht–Singer source locator gives “§§3.3–3.4, convex and nonconvex stability bounds”. In the linked arXiv v2 paper, the convex bound is in §3.3 but the nonconvex bound is in §3.5; §3.4 treats strongly convex optimization. Source checked: https://arxiv.org/pdf/1509.01240.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "algorithmic-stability-of-stochastic-training",
+      "to": "stochastic-gradient-descent-for-learning",
+      "faithful": true,
+      "note": "Opened both page inventories and alg-stochastic-gradient-descent. The supplier defines an unconstrained oracle update without imposing conditional moments or cross-time independence. Both stability consumers explicitly define their own finite-sample updates and sample-independent uniform-marginal indices; neither imports a stationarity or generalization guarantee from the oracle procedure. The zero-step allowance is stated locally."
+    },
+    {
+      "from": "algorithmic-stability-of-stochastic-training",
+      "to": "ml02-federated-optimization",
+      "faithful": true,
+      "note": "Opened both page inventories and the complete lem-convex-gradient-step-nonexpansive supplier. Its statement supplies exactly the convex, β-smooth nonexpansiveness needed for 0≤α≤2/β, including endpoints. Its current proof derives the supporting-line inequality, cocoercivity, and the squared-distance estimate. The convex stability consumer F6 and Proof 2.1 preserve these hypotheses and range. The supplier now explicitly distinguishes its full-range local proof from the narrower related SCAFFOLD citation."
+    }
+  ]
+}

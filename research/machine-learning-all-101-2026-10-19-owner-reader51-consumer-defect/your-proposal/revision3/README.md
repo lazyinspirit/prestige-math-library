@@ -1,0 +1,7 @@
+Revision3 is the authoritative focused rebase for reader51:1, original mathematical cycle1. Select packet-index-v3.json. V1 and editorial revision2 remain immutable history.
+
+The current before source is the genuine authenticated native-reader52 postimage4b975b2a. Native reader52 and split52 both ended successfully; split52 captured the genuine native post before owner repair. The current refute52 dispatch is absent. No native state or controls were changed by this owner.
+
+The accepted local-energy Statement is byte-identical to revision2 and has no inline links. The native corrected F2 marginal-pullback explanation and bounded-linear-map dependency are retained, together with the accepted explicit Bochner finiteness and fixed-limit coupling estimate. Exactly one source CAS, three contract-field CAS and one manifest deps field CAS apply to current native preimages. The other native regenerated contract rows and every boundary, finite_smoke and risk-review field remain unchanged.
+
+The refreshed actual item/alias/nonlogical/page closure is still the lemma, its sole corollary and two body-free pages. No additional source repair is required. Focused candidate precheck/layout and13quote/twophase/current-CAS checks pass. ROOT-ONLY-apply.py is syntax-checked and was never executed. It requires native52 reader/split success, authenticated postimage, absent refuter and exact current guards/CAS. Root alone integrates, routes and binds hashes; no native gates run.

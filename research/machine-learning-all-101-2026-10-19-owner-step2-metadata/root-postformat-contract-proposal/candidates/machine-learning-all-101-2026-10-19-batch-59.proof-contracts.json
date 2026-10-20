@@ -1,0 +1,913 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "59",
+  "scope": [
+    "def-energy-based-density-and-partition-function",
+    "lem-energy-based-density-is-a-probability-measure",
+    "thm-score-matching-integration-by-parts-identity",
+    "alg-contrastive-divergence-k",
+    "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+    "ex-short-run-contrastive-divergence-bias"
+  ],
+  "contracts": {
+    "def-energy-based-density-and-partition-function": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: if X is empty, then the nonnegative integral Zθ is zero, so there is no admissible normalized model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zθ=0 is excluded by the strict admissibility condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: Zθ=1 satisfies 0<Zθ<∞ and the stated density remains normalized."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a zero-measure reference space gives Zθ=0 and is rejected by the same admissibility condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the admissible interval is strict at both 0 and infinity; neither endpoint is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition gives the normalized measure by an explicit density formula and does not choose a point from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition is a direct construction and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition is a direct construction and states no biconditional."
+        }
+      ]
+    },
+    "lem-energy-based-density-is-a-probability-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-energy-based-density-and-partition-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $\\Theta$ be a parameter set,\nand for each $\\theta\\in\\Theta$ let $E_\\theta:X\\to\\mathbb R$ be a measurable\nenergy function. Its **partition function relative to $\\mu$** is\n$$Z_\\theta:=\\int_X e^{-E_\\theta(x)}\\,d\\mu(x).$$\nThe admissible parameter set is\n$$\\Theta_\\mu:=\\{\\theta\\in\\Theta:0<Z_\\theta<\\infty\\}.$$\nFor $\\theta\\in\\Theta_\\mu$, the **energy-based probability measure** is the\nmeasure with density $e^{-E_\\theta}/Z_\\theta$ relative to $\\mu$:\n$$P_\\theta(A):=\\frac{1}{Z_\\theta}\\int_A e^{-E_\\theta(x)}\\,d\\mu(x),\\qquad A\\in\\mathcal A.$$\nThe restriction $0<Z_\\theta<\\infty$ is part of the definition; parameters\noutside $\\Theta_\\mu$ do not define a normalized model by this formula.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exponential-series-has-infinite-radius",
+          "source_section": "Statement",
+          "quote": "For every real $x$, the series $\\sum_{n\\ge0}x^n/\\iota(n!)$ converges absolutely. Its power-series radius is therefore $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-power-series-sums-are-continuous",
+          "source_section": "Statement",
+          "quote": "If $f(x)=\\sum_{n\\ge0}a_n(x-c)^n$ for $|x-c|<R$, then $f$ is continuous at every $x_0$ satisfying $|x_0-c|<R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scaled-density-is-measure",
+          "claim": "Define $\\phi(t):=\\exp(-t)$. By [F4], $\\phi(t)=\\sum_{n\\ge0}(-1)^nt^n/\\iota(n!)$ is a power-series sum with infinite radius, so [F5] makes $\\phi$ continuous on $\\mathbb R$. Thus [F6] makes it Borel measurable, and [F7] with the measurable energy from [F1] makes $x\\mapsto\\exp(-E_\\theta(x))$ measurable. Its values are positive by [F8], hence nonnegative. Put $M_\\theta(A):=\\int_A e^{-E_\\theta}\\,d\\mu$. Now [F2] makes $M_\\theta$ a measure and $M_\\theta(X)=Z_\\theta$. Thus $P_\\theta(\\varnothing)=Z_\\theta^{-1}M_\\theta(\\varnothing)=0$. For any pairwise disjoint sequence $(A_n)_{n\\ge0}$, [F2] and finite-sum homogeneity give $P_\\theta(\\bigcup_{n\\ge0}A_n)=Z_\\theta^{-1}\\sum_{n\\ge0}M_\\theta(A_n)=\\lim_{N\\to\\infty}\\sum_{n=0}^N Z_\\theta^{-1}M_\\theta(A_n)=\\sum_{n\\ge0}P_\\theta(A_n)$. Therefore $P_\\theta$ is a measure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "normalization-is-one",
+          "claim": "Its total mass is $P_\\theta(X)=Z_\\theta^{-1}M_\\theta(X)=1$, so [F3] makes $P_\\theta$ a probability measure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: an empty X forces Zθ=0, so no θ satisfies the admissibility hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the case Zθ=0 is excluded; step 2.1 uses the positive finite normalizer."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the normalization for every admissible Zθ, including Zθ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves countable additivity without requiring the density to be positive almost everywhere."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval or endpoint parameter; the only scalar restriction is the strict admissibility condition on Zθ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 scales the density measure directly and selects no representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a direct normalization result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts a direct normalization result, not an equivalence."
+        }
+      ]
+    },
+    "thm-score-matching-integration-by-parts-identity": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-energy-based-density-and-partition-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $\\Theta$ be a parameter set,\nand for each $\\theta\\in\\Theta$ let $E_\\theta:X\\to\\mathbb R$ be a measurable\nenergy function. Its **partition function relative to $\\mu$** is\n$$Z_\\theta:=\\int_X e^{-E_\\theta(x)}\\,d\\mu(x).$$\nThe admissible parameter set is\n$$\\Theta_\\mu:=\\{\\theta\\in\\Theta:0<Z_\\theta<\\infty\\}.$$\nFor $\\theta\\in\\Theta_\\mu$, the **energy-based probability measure** is the\nmeasure with density $e^{-E_\\theta}/Z_\\theta$ relative to $\\mu$:\n$$P_\\theta(A):=\\frac{1}{Z_\\theta}\\int_A e^{-E_\\theta(x)}\\,d\\mu(x),\\qquad A\\in\\mathcal A.$$\nThe restriction $0<Z_\\theta<\\infty$ is part of the definition; parameters\noutside $\\Theta_\\mu$ do not define a normalized model by this formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, let\n$u,v\\in L^1_{\\mathrm{loc}}(\\Omega)$, and let\n$\\alpha\\in\\mathbb N_0^n$ be the multi-index of\n[[def-ck-and-multi-index-notation-in-several-variables]]. We say that $v$ is\nthe **weak derivative** $D^\\alpha u$ if\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nBoth integrals are finite because the test and all its derivatives are bounded\nand compactly supported. The test identity is choice-free. By\n[[def-locally-integrable-function-as-a-regular-distribution]] and the signed\ntranspose convention in [[def-distributional-derivative]], it is equivalent\nto $\\partial^\\alpha T_u=T_v$ as distributions. For $\\alpha=0$, this identity\nreduces to $T_u=T_v$, hence to $u=v$ almost everywhere by the published\nembedding theorem under [[def-countable-choice]].\n\n**Well-definedness.** Changing either representative on a null set leaves each\ntest integral unchanged. Weak derivatives are therefore statements about\nalmost-everywhere classes; existence and uniqueness of their locally\nintegrable value classes are audited separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-weak-derivatives-are-unique-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\alpha\\in\\mathbb N_0^n$, and $u,v,w\\in L^1_{\\mathrm{loc}}(\\Omega)$. If both\n$v$ and $w$ are weak $\\alpha$-derivatives of $u$, then\n$$v=w\\quad\\text{almost everywhere on }\\Omega.$$\nThus a weak derivative, when it exists, is unique as an almost-everywhere\nclass. No connectedness assumption is needed.\n\nIf $\\Omega=\\varnothing$, the assertion holds because there is only the zero\nclass and no nonzero tests.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cutoff-integration-by-parts",
+          "claim": "The energy model has density $e^{-E_\\theta}/Z_\\theta$ by [F1]. By [F2], $P_p(A)=\\int_Ap\\,d\\lambda_d$ is a measure; since $P_p(\\mathbb R^d)=1$, [F5] makes it a probability measure. The $C^1$ score field is locally integrable by [F6], and [F8] makes the divergence independent of its weak-derivative representatives. Set $\\rho(t)=0$ for $t\\le0$ and $\\rho(t)=e^{-1/t}$ for $t>0$, and define $\\eta(r)=\\rho(2-r)/(\\rho(2-r)+\\rho(r-1))$ for $r\\ge0$. Then $\\eta$ is smooth, equals $1$ on $[0,1]$, equals $0$ on $[2,\\infty)$, and has values in $[0,1]$; $\\chi(x)=\\eta(\\|x\\|)$ is smooth because it is constant near the origin. The cutoff $\\chi_R(x)=\\chi(x/R)$ equals $1$ on $B_R$, vanishes off $B_{2R}$, and satisfies $\\|\\nabla\\chi_R\\|_\\infty\\le C/R$, where $C=\\|\\nabla\\chi\\|_\\infty$. Apply [F7] to each diagonal pair $(\\psi_{\\theta,i},g_{ii})$ with test function $p\\chi_R$ and sum over $i$; expanding $\\nabla(p\\chi_R)$ gives $\\int\\chi_R\\psi_\\theta\\cdot\\nabla p\\,d\\lambda_d+\\int p\\psi_\\theta\\cdot\\nabla\\chi_R\\,d\\lambda_d=-\\int p\\chi_R\\operatorname{div}\\psi_\\theta\\,d\\lambda_d$. The identity extends from smooth tests to this $C^1$ compactly supported test: set $b(x)=e^{-1/(1-\\|x\\|^2)}$ for $\\|x\\|<1$ and $b(x)=0$ otherwise, and normalize $\\rho_0=b/(\\int b\\,d\\lambda_d)$; the denominator is positive and finite, so $\\rho_0$ is a smooth compactly supported unit-mass mollifier. For $\\varphi=p\\chi_R$, put $\\varphi_\\varepsilon=\\varphi*\\rho_{0,\\varepsilon}$. Uniform continuity of $\\varphi$ and $\\nabla\\varphi$ gives $\\|\\varphi_\\varepsilon-\\varphi\\|_\\infty+\\|\\nabla\\varphi_\\varepsilon-\\nabla\\varphi\\|_\\infty\\to0$, with all supports in one compact set for $\\varepsilon\\le1$. Local integrability of $\\psi_\\theta$ and $g_{ii}$ therefore lets both sides converge to the displayed identity; the product rule gives its terms.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "construct"
+          ]
+        },
+        {
+          "id": "integrable-cross-term-and-boundary",
+          "claim": "On $\\{p>0\\}$, $\\nabla p=p s_p$; at a point with $p=0$, nonnegativity and differentiability make it a local minimum, so $\\nabla p=0$ there too. Thus $\\nabla p=p s_p$ everywhere. Componentwise $|\\psi_\\theta\\cdot s_p|\\le\\sum_i|\\psi_{\\theta,i}s_{p,i}|$ and $2|ab|\\le a^2+b^2$ imply $\\int|\\psi_\\theta\\cdot\\nabla p|\\,d\\lambda_d\\le\\frac12\\mathbb E_p(\\|\\psi_\\theta\\|^2+\\|s_p\\|^2)<\\infty$ and $\\int p|\\operatorname{div}\\psi_\\theta|\\,d\\lambda_d<\\infty$. Also $\\|\\psi_\\theta\\|\\le(1+\\|\\psi_\\theta\\|^2)/2$, so the cutoff term from step 1.1 is bounded in absolute value by $\\frac{C}{2R}(1+\\mathbb E_p\\|\\psi_\\theta\\|^2)\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "remove-cutoff",
+          "claim": "Let $R=n$ for integers $n\\to\\infty$. Then $\\chi_n\\to1$ pointwise and $|\\chi_n|\\le1$. The first integrand in step 1.1 is dominated by $|\\psi_\\theta\\cdot\\nabla p|$ and the third by $p|\\operatorname{div}\\psi_\\theta|$, both integrable by step 2.1. Applying [F4] to both terms and using the vanishing cutoff term from step 2.1 gives $\\int\\psi_\\theta\\cdot\\nabla p\\,d\\lambda_d=-\\int p\\operatorname{div}\\psi_\\theta\\,d\\lambda_d$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "score-matching-expansion",
+          "claim": "Expanding the square gives $J(\\theta)=\\frac12\\mathbb E_p\\|\\psi_\\theta\\|^2+\\frac12\\mathbb E_p\\|s_p\\|^2-\\int p\\psi_\\theta\\cdot s_p\\,d\\lambda_d$. Since $\\nabla p=p s_p$ by step 2.1, step 3.1 turns the last term into $+\\mathbb E_p[\\operatorname{div}\\psi_\\theta]$; the remaining data-score term is $C_p$, independent of $\\theta$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem explicitly assumes d≥1 and a probability density on R^d, so there is no empty-dimensional domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles points with p(x)=0 by nonnegativity and differentiability, proving ∇p=0 there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows d=1; the cutoff in step 1.1 is smooth because it is constant near the origin."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers density zeros and requires only the stated weighted moments."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 send R to infinity using an O(R⁻¹) cutoff estimate and assume no pointwise boundary limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs each cutoff explicitly; ACω is used only for the Lebesgue-measure and weak-derivative representative interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The identity is asserted as an equality, not as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The identity is asserted as an equality, not as a biconditional."
+        }
+      ]
+    },
+    "alg-contrastive-divergence-k": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a probability data law Q0 cannot exist on the empty state space because Q0(X)=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires 0<Zθ<∞ and integer k≥1; a zero normalizer and k=0 are outside its domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes k=1 and gives its reconstruction law by one kernel composition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition requires invariance but not mixing or strict positivity, so an invariant identity kernel remains an admissible degenerate chain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition imposes no endpoint condition on θ; admissibility is checked pointwise through Zθ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The transition sampler is an explicit input to the procedure and no element is chosen from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition gives a procedure and objective, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition gives a procedure and objective, not a biconditional."
+        }
+      ]
+    },
+    "thm-contrastive-divergence-k-gradient-omits-chain-derivative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-energy-based-density-and-partition-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $\\Theta$ be a parameter set,\nand for each $\\theta\\in\\Theta$ let $E_\\theta:X\\to\\mathbb R$ be a measurable\nenergy function. Its **partition function relative to $\\mu$** is\n$$Z_\\theta:=\\int_X e^{-E_\\theta(x)}\\,d\\mu(x).$$\nThe admissible parameter set is\n$$\\Theta_\\mu:=\\{\\theta\\in\\Theta:0<Z_\\theta<\\infty\\}.$$\nFor $\\theta\\in\\Theta_\\mu$, the **energy-based probability measure** is the\nmeasure with density $e^{-E_\\theta}/Z_\\theta$ relative to $\\mu$:\n$$P_\\theta(A):=\\frac{1}{Z_\\theta}\\int_A e^{-E_\\theta(x)}\\,d\\mu(x),\\qquad A\\in\\mathcal A.$$\nThe restriction $0<Z_\\theta<\\infty$ is part of the definition; parameters\noutside $\\Theta_\\mu$ do not define a normalized model by this formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-contrastive-divergence-k",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,\\mu)$ be a measure space, let $r$ be a positive\ninteger and $\\theta\\in\\mathbb R^r$,\nand let $E_\\theta:\\mathcal X\\to\\mathbb R$ be measurable in $x$ and continuously\ndifferentiable in $\\theta$. Define the energy model $P_\\theta$ relative to $\\mu$\nonly when\n$$0<Z_\\theta:=\\int_\\mathcal X e^{-E_\\theta(x)}\\,d\\mu(x)<\\infty,$$\nwith density $e^{-E_\\theta}/Z_\\theta$. Let $Q_0$ be a data probability\nmeasure on $(\\mathcal X,\\mathcal A)$ and let $K_\\theta$ be a probability kernel\nfrom $\\mathcal X$ to itself which leaves $P_\\theta$ invariant, meaning\n$$\\int_\\mathcal X K_\\theta(x,A)\\,P_\\theta(dx)=P_\\theta(A)\\qquad(A\\in\\mathcal A).$$\nLet $\\{*\\}$ carry its full sigma-algebra, let $G_{0,\\theta}(*,A):=Q_0(A)$,\nand recursively compose the probability kernel $G_{j,\\theta}$ from $\\{*\\}$ to\n$\\mathcal X$ with $K_\\theta$ to obtain $G_{j+1,\\theta}$. Define\n$Q_{j,\\theta}(A):=G_{j,\\theta}(*,A)$; thus $Q_{0,\\theta}=Q_0$ and\n$$Q_{j+1,\\theta}(A)=\\int_\\mathcal X K_\\theta(x,A)\\,Q_{j,\\theta}(dx),\\qquad A\\in\\mathcal A.$$\nFinite probability-kernel composition makes each $Q_{j,\\theta}$ a probability\nmeasure. For an integer $k\\ge1$, $Q_{k,\\theta}$ is the $k$-step reconstruction law.\n\nIf $Q_0$ and $Q_{k,\\theta}$ have specified nonnegative measurable densities\n$r_{0,\\theta}$ and $r_{k,\\theta}$ relative to $P_\\theta$, meaning\n$Q_{j,\\theta}(A)=\\int_A r_{j,\\theta}\\,dP_\\theta$ for every $A\\in\\mathcal A$\nfor $j\\in\\{0,k\\}$, and\n$$\\int|r_{j,\\theta}\\log r_{j,\\theta}|\\,dP_\\theta<\\infty\\qquad(j\\in\\{0,k\\}),$$\ndefine their finite contrastive-divergence objective by\n$$\\operatorname{CD}_k(\\theta):=\\int r_{0,\\theta}\\log r_{0,\\theta}\\,dP_\\theta-\\int r_{k,\\theta}\\log r_{k,\\theta}\\,dP_\\theta,$$\nwhere $0\\log0:=0$ and $\\log$ is the natural logarithm. On a finite state\nspace where $P_\\theta$ has positive mass at every state, write\n$p_\\theta(x):=P_\\theta(\\{x\\})$ and $q_{j,\\theta}(x):=Q_{j,\\theta}(\\{x\\})$.\nThen $r_{j,\\theta}(x)=q_{j,\\theta}(x)/p_\\theta(x)$ and the objective equals\n$$\\sum_{x:q_{0,\\theta}(x)>0}q_{0,\\theta}(x)\\log\\frac{q_{0,\\theta}(x)}{p_\\theta(x)}-\\sum_{x:q_{k,\\theta}(x)>0}q_{k,\\theta}(x)\\log\\frac{q_{k,\\theta}(x)}{p_\\theta(x)},$$\nsince each finite-space integral is the sum of the integrand times the point\nmass and $p_\\theta r_{j,\\theta}=q_{j,\\theta}$.\n\nFor a positive integer $m$, the procedure takes independent data draws\n$x^1,\\ldots,x^m$ with common law $Q_0$, a transition sampler for $K_\\theta$,\nand a learning rate $\\eta>0$; the\nreconstruction chains are drawn independently conditional on their starts. Its\noutput is the updated parameter from the **stop-gradient CD-$k$ update**:\n\n1. For each $i$, set $x^{i,0}=x^i$ and draw $x^{i,j+1}$ from\n   $K_\\theta(x^{i,j},\\cdot)$ for $j=0,\\ldots,k-1$.\n2. Form\n   $$\\widehat g_k=\\frac1m\\sum_{i=1}^m\\left(\\nabla_\\theta E_\\theta(x^i)-\\nabla_\\theta E_\\theta(x^{i,k})\\right).$$\n3. Update $\\theta\\leftarrow\\theta-\\eta\\widehat g_k$.\n\nWhen $\\nabla_\\theta E_\\theta$ is integrable under $Q_0$ and $Q_{k,\\theta}$,\nthe associated **population CD-$k$ direction** is\n$$g_k(\\theta):=\\int\\nabla_\\theta E_\\theta\\,dQ_0-\\int\\nabla_\\theta E_\\theta\\,dQ_{k,\\theta}.$$\nThe procedure makes no claim that the chain has mixed in $k$ steps. The\nparameter derivative of $Q_{k,\\theta}$ is not stopped in the scalar objective's\ndefinition; the update above deliberately omits that derivative.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-contrastive-divergence-k",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,\\mu)$ be a measure space, let $r$ be a positive\ninteger and $\\theta\\in\\mathbb R^r$,\nand let $E_\\theta:\\mathcal X\\to\\mathbb R$ be measurable in $x$ and continuously\ndifferentiable in $\\theta$. Define the energy model $P_\\theta$ relative to $\\mu$\nonly when\n$$0<Z_\\theta:=\\int_\\mathcal X e^{-E_\\theta(x)}\\,d\\mu(x)<\\infty,$$\nwith density $e^{-E_\\theta}/Z_\\theta$. Let $Q_0$ be a data probability\nmeasure on $(\\mathcal X,\\mathcal A)$ and let $K_\\theta$ be a probability kernel\nfrom $\\mathcal X$ to itself which leaves $P_\\theta$ invariant, meaning\n$$\\int_\\mathcal X K_\\theta(x,A)\\,P_\\theta(dx)=P_\\theta(A)\\qquad(A\\in\\mathcal A).$$\nLet $\\{*\\}$ carry its full sigma-algebra, let $G_{0,\\theta}(*,A):=Q_0(A)$,\nand recursively compose the probability kernel $G_{j,\\theta}$ from $\\{*\\}$ to\n$\\mathcal X$ with $K_\\theta$ to obtain $G_{j+1,\\theta}$. Define\n$Q_{j,\\theta}(A):=G_{j,\\theta}(*,A)$; thus $Q_{0,\\theta}=Q_0$ and\n$$Q_{j+1,\\theta}(A)=\\int_\\mathcal X K_\\theta(x,A)\\,Q_{j,\\theta}(dx),\\qquad A\\in\\mathcal A.$$\nFinite probability-kernel composition makes each $Q_{j,\\theta}$ a probability\nmeasure. For an integer $k\\ge1$, $Q_{k,\\theta}$ is the $k$-step reconstruction law.\n\nIf $Q_0$ and $Q_{k,\\theta}$ have specified nonnegative measurable densities\n$r_{0,\\theta}$ and $r_{k,\\theta}$ relative to $P_\\theta$, meaning\n$Q_{j,\\theta}(A)=\\int_A r_{j,\\theta}\\,dP_\\theta$ for every $A\\in\\mathcal A$\nfor $j\\in\\{0,k\\}$, and\n$$\\int|r_{j,\\theta}\\log r_{j,\\theta}|\\,dP_\\theta<\\infty\\qquad(j\\in\\{0,k\\}),$$\ndefine their finite contrastive-divergence objective by\n$$\\operatorname{CD}_k(\\theta):=\\int r_{0,\\theta}\\log r_{0,\\theta}\\,dP_\\theta-\\int r_{k,\\theta}\\log r_{k,\\theta}\\,dP_\\theta,$$\nwhere $0\\log0:=0$ and $\\log$ is the natural logarithm. On a finite state\nspace where $P_\\theta$ has positive mass at every state, write\n$p_\\theta(x):=P_\\theta(\\{x\\})$ and $q_{j,\\theta}(x):=Q_{j,\\theta}(\\{x\\})$.\nThen $r_{j,\\theta}(x)=q_{j,\\theta}(x)/p_\\theta(x)$ and the objective equals\n$$\\sum_{x:q_{0,\\theta}(x)>0}q_{0,\\theta}(x)\\log\\frac{q_{0,\\theta}(x)}{p_\\theta(x)}-\\sum_{x:q_{k,\\theta}(x)>0}q_{k,\\theta}(x)\\log\\frac{q_{k,\\theta}(x)}{p_\\theta(x)},$$\nsince each finite-space integral is the sum of the integrand times the point\nmass and $p_\\theta r_{j,\\theta}=q_{j,\\theta}$.\n\nFor a positive integer $m$, the procedure takes independent data draws\n$x^1,\\ldots,x^m$ with common law $Q_0$, a transition sampler for $K_\\theta$,\nand a learning rate $\\eta>0$; the\nreconstruction chains are drawn independently conditional on their starts. Its\noutput is the updated parameter from the **stop-gradient CD-$k$ update**:\n\n1. For each $i$, set $x^{i,0}=x^i$ and draw $x^{i,j+1}$ from\n   $K_\\theta(x^{i,j},\\cdot)$ for $j=0,\\ldots,k-1$.\n2. Form\n   $$\\widehat g_k=\\frac1m\\sum_{i=1}^m\\left(\\nabla_\\theta E_\\theta(x^i)-\\nabla_\\theta E_\\theta(x^{i,k})\\right).$$\n3. Update $\\theta\\leftarrow\\theta-\\eta\\widehat g_k$.\n\nWhen $\\nabla_\\theta E_\\theta$ is integrable under $Q_0$ and $Q_{k,\\theta}$,\nthe associated **population CD-$k$ direction** is\n$$g_k(\\theta):=\\int\\nabla_\\theta E_\\theta\\,dQ_0-\\int\\nabla_\\theta E_\\theta\\,dQ_{k,\\theta}.$$\nThe procedure makes no claim that the chain has mixed in $k$ steps. The\nparameter derivative of $Q_{k,\\theta}$ is not stopped in the scalar objective's\ndefinition; the update above deliberately omits that derivative.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-likelihood-gradient",
+          "claim": "Fix a coordinate $j$ and vary only $\\theta_j$ in a small interval inside the open set $\\Theta$. Since $\\mathcal X$ is finite and each energy is real, [F13] makes every $e^{-E_\\theta(x)}$ positive; hence [F1] gives $0<Z_\\theta<\\infty$. The formula for $p_\\theta$ then gives positive coordinates summing to one, so it is a probability vector by [F4]. By [F6], [F7] and [F8], differentiating the finite sum gives $\\partial_jZ_\\theta=-\\sum_xe^{-E_\\theta(x)}\\partial_jE_\\theta(x)$. The same chain and quotient rules give $\\partial_jp_\\theta(x)/p_\\theta(x)=-\\partial_jE_\\theta(x)-\\partial_jZ_\\theta/Z_\\theta=-\\partial_jE_\\theta(x)+\\sum_yp_\\theta(y)\\partial_jE_\\theta(y)$; [F9] identifies the left side with $\\partial_j\\log p_\\theta(x)$. Because $q_0$ is fixed and sums to one by [F4], differentiating $\\mathcal L=-\\sum_xq_0(x)\\log p_\\theta(x)$ and summing this identity yields the displayed likelihood-gradient formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "differentiate-reconstruction-law",
+          "claim": "The recurrence in [F2] gives $q_{j+1,\\theta}=q_{j,\\theta}K_\\theta$, hence $q_{k,\\theta}=q_0K_\\theta^k$ and $\\sum_xq_{k,\\theta}(x)=1$. For $k=1$ the product rule [F6] gives $\\partial_j(q_0K_\\theta)=q_0\\partial_jK_\\theta$. If $\\partial_j(q_0K_\\theta^k)=\\sum_{s=0}^{k-1}q_0K_\\theta^s(\\partial_jK_\\theta)K_\\theta^{k-1-s}$, then entrywise application of [F6] to $q_0K_\\theta^kK_\\theta$ yields $\\sum_{s=0}^{k-1}q_0K_\\theta^s(\\partial_jK_\\theta)K_\\theta^{k-s}+q_0K_\\theta^k(\\partial_jK_\\theta)$, which is the same formula with $k+1$ by appending the $s=k$ term. Thus the stated product derivative holds for every $k$. Differentiating $\\sum_xq_{k,\\theta}(x)=1$ by [F6] gives $\\sum_x\\partial_jq_{k,\\theta}(x)=0$. Strict positivity of $K_\\theta$ and nonzero mass of $q_0$ imply $q_{k,\\theta}(x)>0$ for every $x$, so the following logarithms are finite.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $w(x_0,\\ldots,x_k):=q_0(x_0)\\prod_{s=0}^{k-1}K_\\theta(x_s,x_{s+1})$. These weights are nonnegative. Summing successively over $x_k,\\ldots,x_1$ and using the row sums of $K_\\theta$ reduces $\\sum_{\\omega\\in\\Omega}w(\\omega)$ to $\\sum_{x_0}q_0(x_0)=1$. The set function $\\mathbb P_\\theta(A)=\\sum_{\\omega\\in A}w(\\omega)$ vanishes on the empty set and is countably additive: a disjoint sequence of subsets of finite $\\Omega$ has only finitely many nonempty terms. Thus [F10] makes it a measure, and [F11] makes it a probability measure.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F4",
+            "F10",
+            "F11",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "differentiate-reconstruction-kl",
+          "claim": "By the quotient rule [F6], $\\partial_j(q_{k,\\theta}(x)/p_\\theta(x))=\\partial_jq_{k,\\theta}(x)/p_\\theta(x)-q_{k,\\theta}(x)\\partial_jp_\\theta(x)/p_\\theta(x)^2$; the chain and logarithm derivative rules [F7, F9] then give $\\partial_j\\log(q_{k,\\theta}(x)/p_\\theta(x))=\\partial_jq_{k,\\theta}(x)/q_{k,\\theta}(x)-\\partial_j\\log p_\\theta(x)$. Applying the product rule [F6] to each summand of $D_{\\rm KL}(q_{k,\\theta}\\|p_\\theta)$ therefore gives $\\partial_jq_{k,\\theta}(x)(\\log(q_{k,\\theta}(x)/p_\\theta(x))+1)-q_{k,\\theta}(x)\\partial_j\\log p_\\theta(x)$. Summing the finite terms, the $+1$ contribution vanishes by step 1.2. Substitution from step 1.1 yields $\\partial_jD_{\\rm KL}(q_{k,\\theta}\\|p_\\theta)=\\sum_x\\partial_jq_{k,\\theta}(x)\\log(q_{k,\\theta}(x)/p_\\theta(x))+\\sum_xq_{k,\\theta}(x)\\partial_jE_\\theta(x)-\\sum_xp_\\theta(x)\\partial_jE_\\theta(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For $s=0$, $K_\\theta^0=I$ is row-stochastic and its entries are the length-zero path weights. If the entries of $K_\\theta^s$ sum the products along all length-$s$ paths, then $K_\\theta^{s+1}(x,y)=\\sum_zK_\\theta^s(x,z)K_\\theta(z,y)$ appends the final transition, so its entries sum the length-$(s+1)$ path weights; also $\\sum_yK_\\theta^{s+1}(x,y)=\\sum_zK_\\theta^s(x,z)\\sum_yK_\\theta(z,y)=1$. Thus $\\mathbb P_\\theta(X_0=x,X_k=y)=q_0(x)K_\\theta^k(x,y)$. The function $g_f$ is finite-valued; for each Borel $C\\subseteq\\mathbb R$, $\\{g_f(X_0)\\in C\\}=X_0^{-1}(\\{x:g_f(x)\\in C\\})$, so $g_f(X_0)$ is $\\sigma(X_0)$-measurable. Both $f(X_k)$ and $g_f(X_0)$ are integrable since $\\Omega$ is finite.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "subtract-kl-derivatives",
+          "claim": "Since $q_0$ is fixed, the terms $q_0(x)\\log q_0(x)$ in $D_{\\rm KL}(q_0\\|p_\\theta)$ have zero derivative; applying the same product and logarithm rules [F6, F9] and using the log-density formula from step 1.1 and $\\sum_xq_0(x)=1$ gives $\\partial_jD_{\\rm KL}(q_0\\|p_\\theta)=\\sum_xq_0(x)\\partial_jE_\\theta(x)-\\sum_xp_\\theta(x)\\partial_jE_\\theta(x)$. Subtracting step 2.1 cancels the model expectations and yields the stated $\\partial_j\\operatorname{CD}_k$ formula. By [F3], the algorithm uses only its first two terms; the remaining sum is the derivative through $K_\\theta^k$. Comparing with step 1.1 also shows that the algorithm replaces the exact likelihood negative phase $p_\\theta$ by $q_{k,\\theta}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Every event in $\\sigma(X_0)$ has the form $\\{X_0\\in B\\}$ for some $B\\subseteq\\mathcal X$, since these preimages form a sigma-algebra and generate $\\sigma(X_0)$. For every such event, step 2.2 gives $$\\int \\mathbf1_{\\{X_0\\in B\\}}f(X_k)\\,d\\mathbb P_\\theta=\\sum_{x\\in B}q_0(x)\\sum_yK_\\theta^k(x,y)f(y)=\\int \\mathbf1_{\\{X_0\\in B\\}}g_f(X_0)\\,d\\mathbb P_\\theta,$$ where terms with $q_0(x)=0$ vanish. The integrability and measurability from step 2.2 and this event-integral identity satisfy [F12], so $g_f(X_0)$ is the asserted conditional-expectation version.",
+          "step": "4.1",
+          "inputs": [
+            "F12",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: X is required to be finite and nonempty; an empty state space cannot carry q0 with total mass one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement fixes k≥1 and pθ is strictly positive; step 1.2 gives qkθ(x)>0 so every displayed logarithm is finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes a one-state space; then pθ=q0=qkθ=1 and both gradients and the correction term are zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 permits zero entries of q0 but strict positivity of Kθ makes every qkθ entry positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes Θ is open, so the coordinate derivatives are taken at interior parameter points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite sums and matrix products and require no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives derivative identities and a comparison, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives derivative identities and a comparison, not a biconditional."
+        }
+      ]
+    },
+    "ex-short-run-contrastive-divergence-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-energy-based-density-and-partition-function",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $\\Theta$ be a parameter set,\nand for each $\\theta\\in\\Theta$ let $E_\\theta:X\\to\\mathbb R$ be a measurable\nenergy function. Its **partition function relative to $\\mu$** is\n$$Z_\\theta:=\\int_X e^{-E_\\theta(x)}\\,d\\mu(x).$$\nThe admissible parameter set is\n$$\\Theta_\\mu:=\\{\\theta\\in\\Theta:0<Z_\\theta<\\infty\\}.$$\nFor $\\theta\\in\\Theta_\\mu$, the **energy-based probability measure** is the\nmeasure with density $e^{-E_\\theta}/Z_\\theta$ relative to $\\mu$:\n$$P_\\theta(A):=\\frac{1}{Z_\\theta}\\int_A e^{-E_\\theta(x)}\\,d\\mu(x),\\qquad A\\in\\mathcal A.$$\nThe restriction $0<Z_\\theta<\\infty$ is part of the definition; parameters\noutside $\\Theta_\\mu$ do not define a normalized model by this formula.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-contrastive-divergence-k",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,\\mu)$ be a measure space, let $r$ be a positive\ninteger and $\\theta\\in\\mathbb R^r$,\nand let $E_\\theta:\\mathcal X\\to\\mathbb R$ be measurable in $x$ and continuously\ndifferentiable in $\\theta$. Define the energy model $P_\\theta$ relative to $\\mu$\nonly when\n$$0<Z_\\theta:=\\int_\\mathcal X e^{-E_\\theta(x)}\\,d\\mu(x)<\\infty,$$\nwith density $e^{-E_\\theta}/Z_\\theta$. Let $Q_0$ be a data probability\nmeasure on $(\\mathcal X,\\mathcal A)$ and let $K_\\theta$ be a probability kernel\nfrom $\\mathcal X$ to itself which leaves $P_\\theta$ invariant, meaning\n$$\\int_\\mathcal X K_\\theta(x,A)\\,P_\\theta(dx)=P_\\theta(A)\\qquad(A\\in\\mathcal A).$$\nLet $\\{*\\}$ carry its full sigma-algebra, let $G_{0,\\theta}(*,A):=Q_0(A)$,\nand recursively compose the probability kernel $G_{j,\\theta}$ from $\\{*\\}$ to\n$\\mathcal X$ with $K_\\theta$ to obtain $G_{j+1,\\theta}$. Define\n$Q_{j,\\theta}(A):=G_{j,\\theta}(*,A)$; thus $Q_{0,\\theta}=Q_0$ and\n$$Q_{j+1,\\theta}(A)=\\int_\\mathcal X K_\\theta(x,A)\\,Q_{j,\\theta}(dx),\\qquad A\\in\\mathcal A.$$\nFinite probability-kernel composition makes each $Q_{j,\\theta}$ a probability\nmeasure. For an integer $k\\ge1$, $Q_{k,\\theta}$ is the $k$-step reconstruction law.\n\nIf $Q_0$ and $Q_{k,\\theta}$ have specified nonnegative measurable densities\n$r_{0,\\theta}$ and $r_{k,\\theta}$ relative to $P_\\theta$, meaning\n$Q_{j,\\theta}(A)=\\int_A r_{j,\\theta}\\,dP_\\theta$ for every $A\\in\\mathcal A$\nfor $j\\in\\{0,k\\}$, and\n$$\\int|r_{j,\\theta}\\log r_{j,\\theta}|\\,dP_\\theta<\\infty\\qquad(j\\in\\{0,k\\}),$$\ndefine their finite contrastive-divergence objective by\n$$\\operatorname{CD}_k(\\theta):=\\int r_{0,\\theta}\\log r_{0,\\theta}\\,dP_\\theta-\\int r_{k,\\theta}\\log r_{k,\\theta}\\,dP_\\theta,$$\nwhere $0\\log0:=0$ and $\\log$ is the natural logarithm. On a finite state\nspace where $P_\\theta$ has positive mass at every state, write\n$p_\\theta(x):=P_\\theta(\\{x\\})$ and $q_{j,\\theta}(x):=Q_{j,\\theta}(\\{x\\})$.\nThen $r_{j,\\theta}(x)=q_{j,\\theta}(x)/p_\\theta(x)$ and the objective equals\n$$\\sum_{x:q_{0,\\theta}(x)>0}q_{0,\\theta}(x)\\log\\frac{q_{0,\\theta}(x)}{p_\\theta(x)}-\\sum_{x:q_{k,\\theta}(x)>0}q_{k,\\theta}(x)\\log\\frac{q_{k,\\theta}(x)}{p_\\theta(x)},$$\nsince each finite-space integral is the sum of the integrand times the point\nmass and $p_\\theta r_{j,\\theta}=q_{j,\\theta}$.\n\nFor a positive integer $m$, the procedure takes independent data draws\n$x^1,\\ldots,x^m$ with common law $Q_0$, a transition sampler for $K_\\theta$,\nand a learning rate $\\eta>0$; the\nreconstruction chains are drawn independently conditional on their starts. Its\noutput is the updated parameter from the **stop-gradient CD-$k$ update**:\n\n1. For each $i$, set $x^{i,0}=x^i$ and draw $x^{i,j+1}$ from\n   $K_\\theta(x^{i,j},\\cdot)$ for $j=0,\\ldots,k-1$.\n2. Form\n   $$\\widehat g_k=\\frac1m\\sum_{i=1}^m\\left(\\nabla_\\theta E_\\theta(x^i)-\\nabla_\\theta E_\\theta(x^{i,k})\\right).$$\n3. Update $\\theta\\leftarrow\\theta-\\eta\\widehat g_k$.\n\nWhen $\\nabla_\\theta E_\\theta$ is integrable under $Q_0$ and $Q_{k,\\theta}$,\nthe associated **population CD-$k$ direction** is\n$$g_k(\\theta):=\\int\\nabla_\\theta E_\\theta\\,dQ_0-\\int\\nabla_\\theta E_\\theta\\,dQ_{k,\\theta}.$$\nThe procedure makes no claim that the chain has mixed in $k$ steps. The\nparameter derivative of $Q_{k,\\theta}$ is not stopped in the scalar objective's\ndefinition; the update above deliberately omits that derivative.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-contrastive-divergence-k",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,\\mu)$ be a measure space, let $r$ be a positive\ninteger and $\\theta\\in\\mathbb R^r$,\nand let $E_\\theta:\\mathcal X\\to\\mathbb R$ be measurable in $x$ and continuously\ndifferentiable in $\\theta$. Define the energy model $P_\\theta$ relative to $\\mu$\nonly when\n$$0<Z_\\theta:=\\int_\\mathcal X e^{-E_\\theta(x)}\\,d\\mu(x)<\\infty,$$\nwith density $e^{-E_\\theta}/Z_\\theta$. Let $Q_0$ be a data probability\nmeasure on $(\\mathcal X,\\mathcal A)$ and let $K_\\theta$ be a probability kernel\nfrom $\\mathcal X$ to itself which leaves $P_\\theta$ invariant, meaning\n$$\\int_\\mathcal X K_\\theta(x,A)\\,P_\\theta(dx)=P_\\theta(A)\\qquad(A\\in\\mathcal A).$$\nLet $\\{*\\}$ carry its full sigma-algebra, let $G_{0,\\theta}(*,A):=Q_0(A)$,\nand recursively compose the probability kernel $G_{j,\\theta}$ from $\\{*\\}$ to\n$\\mathcal X$ with $K_\\theta$ to obtain $G_{j+1,\\theta}$. Define\n$Q_{j,\\theta}(A):=G_{j,\\theta}(*,A)$; thus $Q_{0,\\theta}=Q_0$ and\n$$Q_{j+1,\\theta}(A)=\\int_\\mathcal X K_\\theta(x,A)\\,Q_{j,\\theta}(dx),\\qquad A\\in\\mathcal A.$$\nFinite probability-kernel composition makes each $Q_{j,\\theta}$ a probability\nmeasure. For an integer $k\\ge1$, $Q_{k,\\theta}$ is the $k$-step reconstruction law.\n\nIf $Q_0$ and $Q_{k,\\theta}$ have specified nonnegative measurable densities\n$r_{0,\\theta}$ and $r_{k,\\theta}$ relative to $P_\\theta$, meaning\n$Q_{j,\\theta}(A)=\\int_A r_{j,\\theta}\\,dP_\\theta$ for every $A\\in\\mathcal A$\nfor $j\\in\\{0,k\\}$, and\n$$\\int|r_{j,\\theta}\\log r_{j,\\theta}|\\,dP_\\theta<\\infty\\qquad(j\\in\\{0,k\\}),$$\ndefine their finite contrastive-divergence objective by\n$$\\operatorname{CD}_k(\\theta):=\\int r_{0,\\theta}\\log r_{0,\\theta}\\,dP_\\theta-\\int r_{k,\\theta}\\log r_{k,\\theta}\\,dP_\\theta,$$\nwhere $0\\log0:=0$ and $\\log$ is the natural logarithm. On a finite state\nspace where $P_\\theta$ has positive mass at every state, write\n$p_\\theta(x):=P_\\theta(\\{x\\})$ and $q_{j,\\theta}(x):=Q_{j,\\theta}(\\{x\\})$.\nThen $r_{j,\\theta}(x)=q_{j,\\theta}(x)/p_\\theta(x)$ and the objective equals\n$$\\sum_{x:q_{0,\\theta}(x)>0}q_{0,\\theta}(x)\\log\\frac{q_{0,\\theta}(x)}{p_\\theta(x)}-\\sum_{x:q_{k,\\theta}(x)>0}q_{k,\\theta}(x)\\log\\frac{q_{k,\\theta}(x)}{p_\\theta(x)},$$\nsince each finite-space integral is the sum of the integrand times the point\nmass and $p_\\theta r_{j,\\theta}=q_{j,\\theta}$.\n\nFor a positive integer $m$, the procedure takes independent data draws\n$x^1,\\ldots,x^m$ with common law $Q_0$, a transition sampler for $K_\\theta$,\nand a learning rate $\\eta>0$; the\nreconstruction chains are drawn independently conditional on their starts. Its\noutput is the updated parameter from the **stop-gradient CD-$k$ update**:\n\n1. For each $i$, set $x^{i,0}=x^i$ and draw $x^{i,j+1}$ from\n   $K_\\theta(x^{i,j},\\cdot)$ for $j=0,\\ldots,k-1$.\n2. Form\n   $$\\widehat g_k=\\frac1m\\sum_{i=1}^m\\left(\\nabla_\\theta E_\\theta(x^i)-\\nabla_\\theta E_\\theta(x^{i,k})\\right).$$\n3. Update $\\theta\\leftarrow\\theta-\\eta\\widehat g_k$.\n\nWhen $\\nabla_\\theta E_\\theta$ is integrable under $Q_0$ and $Q_{k,\\theta}$,\nthe associated **population CD-$k$ direction** is\n$$g_k(\\theta):=\\int\\nabla_\\theta E_\\theta\\,dQ_0-\\int\\nabla_\\theta E_\\theta\\,dQ_{k,\\theta}.$$\nThe procedure makes no claim that the chain has mixed in $k$ steps. The\nparameter derivative of $Q_{k,\\theta}$ is not stopped in the scalar objective's\ndefinition; the update above deliberately omits that derivative.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-contrastive-divergence-k-gradient-omits-chain-derivative",
+          "source_section": "Statement",
+          "quote": "Let $r$ be a positive integer, let $\\mathcal X$ be finite and nonempty, and\nlet $\\Theta\\subseteq\\mathbb R^r$ be open. For each $x,y\\in\\mathcal X$, assume\nthe coordinate partial derivatives of $E_\\theta(x)$ and $K_\\theta(x,y)$ exist\nand are continuous on $\\Theta$. Let $K_\\theta$ be strictly positive and\nrow-stochastic, so $K_\\theta(x,y)>0$ and $\\sum_yK_\\theta(x,y)=1$. Use counting\nmeasure as the reference measure, set\n$$Z_\\theta:=\\sum_{x\\in\\mathcal X}e^{-E_\\theta(x)},\\qquad p_\\theta(x):=e^{-E_\\theta(x)}/Z_\\theta,$$\nlet $q_0$ be a fixed probability vector on $\\mathcal X$, assume $p_\\theta$ is\ninvariant for $K_\\theta$, and fix an integer $k\\ge1$. Define\n$K_\\theta^0=I$, $K_\\theta^{s+1}=K_\\theta^sK_\\theta$, and\n$q_{k,\\theta}=q_0K_\\theta^k$, where vectors are row vectors, and\n$$\\mathcal L(\\theta):=-\\sum_xq_0(x)\\log p_\\theta(x),\\qquad \\operatorname{CD}_k(\\theta):=D_{\\rm KL}(q_0\\|p_\\theta)-D_{\\rm KL}(q_{k,\\theta}\\|p_\\theta),$$\nwhere for finite probability mass functions $a,b$ with $b(x)>0$,\n$$D_{\\rm KL}(a\\|b):=\\sum_{x:a(x)>0}a(x)\\log\\frac{a(x)}{b(x)}$$\nwith $\\log$ the natural logarithm and zero-mass terms contributing zero. For each parameter coordinate $j$,\n$$\\partial_j\\mathcal L(\\theta)=\\sum_xq_0(x)\\partial_jE_\\theta(x)-\\sum_xp_\\theta(x)\\partial_jE_\\theta(x),$$\nwhile\n$$\\partial_j\\operatorname{CD}_k(\\theta)=\\sum_xq_0(x)\\partial_jE_\\theta(x)-\\sum_xq_{k,\\theta}(x)\\partial_jE_\\theta(x)-\\sum_x\\partial_jq_{k,\\theta}(x)\\log\\frac{q_{k,\\theta}(x)}{p_\\theta(x)}.$$\nThe reconstruction-law derivative is\n$$\\partial_jq_{k,\\theta}=\\sum_{s=0}^{k-1}q_0K_\\theta^s(\\partial_jK_\\theta)K_\\theta^{k-1-s}.$$\nThus the population direction used by stop-gradient CD-$k$ is the first two\nterms of the displayed $\\partial_j\\operatorname{CD}_k$ formula and omits the\nexplicit derivative through the $k$ transition kernels. It also replaces the\nmodel expectation in the exact negative log-likelihood gradient by the finite\nreconstruction law; no equality between these gradients is asserted.\n\nFor the finite-state path calculation, let $\\Omega:=\\mathcal X^{k+1}$ with its\nfull sigma-algebra, let $X_s$ be the $s$th coordinate map, and define\n$$\\mathbb P_\\theta(A):=\\sum_{(x_0,\\ldots,x_k)\\in A}q_0(x_0)\\prod_{s=0}^{k-1}K_\\theta(x_s,x_{s+1}),\\qquad A\\subseteq\\Omega.$$\nThis is a probability measure. For every real $f:\\mathcal X\\to\\mathbb R$, set\n$$g_f(x):=\\begin{cases}\\sum_yK_\\theta^k(x,y)f(y),&q_0(x)>0,\\\\0,&q_0(x)=0.\\end{cases}$$\nThen $g_f(X_0)$ is a version of\n$\\mathbb E_{\\mathbb P_\\theta}[f(X_k)\\mid\\sigma(X_0)]$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]), neighbourhoods are those of\n[[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\n**limit point of $A$**. The **difference quotient of $f$ at $c$** is the function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}, \\qquad q_{f,c}(x) := \\frac{f(x) - f(c)}{x - c} .$$\n\nThe division is legitimate at every point of the domain, since $x \\ne c$ gives\n$x - c \\ne 0$.\n\n**The point $c$ is a limit point of $A \\setminus \\{c\\}$, not merely of $A$.**\nFor every real $\\varepsilon > 0$ the punctured neighbourhood\n$N^{*}_{\\varepsilon}(c)$ omits $c$, so\n\n$$N^{*}_{\\varepsilon}(c) \\cap A \\;=\\; N^{*}_{\\varepsilon}(c) \\cap (A \\setminus \\{c\\}) ,$$\n\nand the left-hand side is nonempty because $c$ is a limit point of $A$. So\n$q_{f,c}$ is a function on a set having $c$ as a limit point, and\n$\\lim_{x \\to c} q_{f,c}(x)$ is a notion that [[def-function-limit]] defines.\n\n$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is\n\n$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$\n\n**Two obligations are carried by that notation, and both are discharged here.**\n\n1. **Uniqueness.** Writing $f'(c)$ treats the right-hand side as a name for a\n   single real number. That is legitimate: $c$ is a limit point of the domain\n   $A \\setminus \\{c\\}$ of $q_{f,c}$, so at most one real can satisfy the\n   $\\varepsilon$-$\\delta$ condition, by [[lem-function-limit-unique]] applied to\n   $q_{f,c}$. Two reals both meeting the condition are therefore equal, and the\n   symbol denotes.\n2. **Meaningfulness.** The hypothesis that $c$ is a limit point of $A$ is not\n   decoration. At an **isolated** point of $A$ the punctured condition\n   $0 < |x - c| < \\delta$ is met by no point of the domain at all, so the\n   $\\varepsilon$-$\\delta$ formula is satisfied vacuously by *every* real at\n   once; this is why [[def-function-limit]] leaves the limit undefined there,\n   and it is why this library defines $f'(c)$ only at a limit point of $A$. At\n   an isolated point of its domain a function is neither differentiable nor\n   non-differentiable here: the question is not posed.\n\n**The limit sees only $A \\setminus \\{c\\}$, so how the difference quotient is\nextended to $c$ is irrelevant.** Let $Q : A \\to \\mathbb{R}$ agree with\n$q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.\nThen $\\lim_{x \\to c} Q(x) = L$ if and only if $\\lim_{x \\to c} q_{f,c}(x) = L$.\nBoth conditions read: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ such that every point $x$ of the relevant domain with\n$0 < |x - c| < \\delta$ satisfies $|{\\cdot} - L| < \\varepsilon$\n([[def-function-limit]]). The clause $0 < |x - c|$ removes $x = c$ from both\nquantifiers, so in both cases the points quantified over are exactly the\n$x \\in A \\setminus \\{c\\}$ with $0 < |x - c| < \\delta$, at which $Q$ and\n$q_{f,c}$ take the same value. The two conditions are the same condition.\n\n**Differentiability on a set.** For $S \\subseteq A$, $f$ is **differentiable on\n$S$** when it is differentiable at every $c \\in S$; implicit in that phrase is\nthat every point of $S$ is a limit point of $A$. $f$ is **differentiable** when\nit is differentiable on the whole of $A$.\n\n**Restriction of the domain.** Let $B \\subseteq A$, let $c \\in B$ and suppose\n$c$ is a limit point of $B$. If $f$ is differentiable at $c$, then so is the\nrestriction $f|_B : B \\to \\mathbb{R}$, and\n\n$$(f|_B)'(c) \\;=\\; f'(c) .$$\n\nIndeed $B \\setminus \\{c\\} \\subseteq A \\setminus \\{c\\}$; the displayed identity\nof punctured neighbourhoods above, applied to $B$, shows that $c$ is a limit\npoint of $B \\setminus \\{c\\}$; the difference quotient $q_{f|_B, c}$ is the\nrestriction of $q_{f,c}$ to $B \\setminus \\{c\\}$, since $f|_B(c) = f(c)$; and\nclaim 2 of [[lem-limit-is-local]] carries the limit to that restriction.\n\n**Every point of a nondegenerate interval is a limit point of it.** Let\n$J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two\nelements and let $p \\in J$. Choose $q \\in J$ with $q \\ne p$, and let a real\n$\\varepsilon > 0$ be given. If $p < q$, put $y := p + \\tfrac{1}{2}\\min\\{\\varepsilon,\\ q - p\\}$;\nthen $p < y$, and $y - p \\le \\tfrac{1}{2}(q-p) < q - p$, so $p < y < q$ and\norder-convexity gives $y \\in J$, while $0 < |y - p| < \\varepsilon$. If $q < p$,\nthe point $y := p - \\tfrac{1}{2}\\min\\{\\varepsilon,\\ p - q\\}$ serves in the same\nway. So $N^{*}_{\\varepsilon}(p) \\cap J \\ne \\varnothing$ for every real\n$\\varepsilon > 0$, that is, $p$ is a limit point of $J$\n([[def-limit-point-r]]).\n\nConsequently, for $f$ defined on a nondegenerate interval $I$, the symbol\n$f'(c)$ is meaningful at **every** $c \\in I$, endpoints included. At an endpoint\nthe difference quotient is taken over the points of $I$ lying on the one side\nthat is available, so what other texts call a one-sided derivative is, here,\nsimply the derivative of $f$ on $I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-invariant-model-kernel",
+          "claim": "Direct normalization gives $Z_\\theta=1+e^{-\\theta}$ and the displayed $p_\\theta$. By [F9], its coordinates are positive. Each row of $K_\\theta$ sums to $1/2+\\sum_y p_\\theta(y)/2=1$, every entry is positive, and $\\sum_xp_\\theta(x)K_\\theta(x,y)=\\frac12p_\\theta(y)+\\frac12p_\\theta(y)\\sum_xp_\\theta(x)=p_\\theta(y)$, so $K_\\theta$ is an admissible invariant kernel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F9",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-reconstruction-and-derivatives",
+          "claim": "At $\\theta=0$, $p_0(0)=p_0(1)=1/2$ and $q_0=\\delta_0$, so [F2] gives $q_{1,0}(1)=K_0(0,1)=p_0(1)/2=1/4$ and $q_{1,0}(0)=3/4$. Also $E'_\\theta(0)=0$ and $E'_\\theta(1)=1$. By [F6] and [F7], $(e^{-\\theta})'=-e^{-\\theta}$; applying the quotient rule [F5] to $u/(1+u)$, where $u=e^{-\\theta}$, gives $p'_\\theta(1)=u'/(1+u)^2=-e^{-\\theta}/(1+e^{-\\theta})^2=-p_\\theta(1)p_\\theta(0)$. Hence $p'_0(1)=-1/4$; the scalar rule [F5] applied to $q_{1,\\theta}(1)=p_\\theta(1)/2$ gives $q'_{1,0}(1)=-1/8$ and, since $q_{1,\\theta}(0)=1-q_{1,\\theta}(1)$, $q'_{1,0}(0)=1/8$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compare-likelihood-gradients",
+          "claim": "By [F4], the exact negative log-likelihood gradient at $0$ is $0-p_0(1)=-1/2$. By [F3], the population stop-gradient CD-1 direction is $0-q_{1,0}(1)=-1/4$, so it differs from the exact likelihood gradient.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-chain-derivative-correction",
+          "claim": "By [F4] and step 2.1, the chain correction is $\\sum_{x\\in\\{0,1\\}}q'_{1,0}(x)\\log(q_{1,0}(x)/p_0(x))=\\frac18\\log\\frac32-\\frac18\\log\\frac12=\\frac18\\log3>0$. Subtracting it from the first two CD terms $-1/4$ gives $\\left.\\frac{d}{d\\theta}\\operatorname{CD}_1(\\theta)\\right|_{\\theta=0}=-\\frac14-\\frac18\\log3$, as stated. Thus the stop-gradient CD-1 direction also differs from the exact CD-1 objective derivative.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: X={0,1} is explicitly nonempty and every probability is computed on these two states."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example evaluates the interior parameter θ=0; step 2.1 gives p0(0)=p0(1)=1/2 with no zero denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example uses k=1, the shortest permitted chain, and computes its reconstruction law in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example uses the degenerate data law δ0; step 2.1 computes the resulting reconstruction distribution explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter domain is all of R, and θ=0 is an interior value rather than an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 calculate every term on the explicit two-state space without any selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete numerical witness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete numerical witness, not an equivalence."
+        }
+      ]
+    }
+  }
+}

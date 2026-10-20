@@ -1,0 +1,226 @@
+PDF PAGE 1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MIT 6.7220/15.084 — Nonlinear Optimization (Spring ‘25) 
+Lecture 12 
+Gradient descent and descent lemmas 
+Instructor: Prof. Gabriele Farina 
+With this lecture, we start exploring first-order optimization methods for nonlinear opti­
+mization. We begin our exploration in the case of minimization of unconstrained differentiable 
+functions, that is, optimization problems of the form 
+min 𝑓(𝑥) 
+𝑥 
+s.t. 𝑥 ∈ ℝ𝑛. 
+In this case, as we mentioned several times (see, for example, Lecture 2), a point 𝑥⋆ ∈ ℝ𝑛 
+solves the optimization problem only if ∇𝑓(𝑥⋆) = 0. Furthermore, when 𝑓 is convex, the 
+necessary condition also becomes sufficient (Lecture 4). 
+L12.1 The fundamental idea of gradient descent 
+The function 𝑓 might be complicated. A fundamental idea for constructing an optimization
+algorithm is to approximate 𝑓 with tractable simpler models and take steps assuming the 
+model is locally accurate at the current point 𝑥𝑡. For gradient descent and, more generally, 
+first-order methods, the local model of the function is obtained from truncating the Taylor 
+approximation of 𝑓 around the current point 𝑥𝑡 to its first order: 
+𝑓(𝑥) ≈𝑓(𝑥𝑡) + ⟨∇𝑓(𝑥𝑡), 𝑥−𝑥𝑡⟩ 
+for all 𝑥“close to” 𝑥𝑡. 
+The idea of gradient descent is then to move in the direction that minimizes the approxi­
+mation of the objective above, that is, move a certain amount 𝜂 > 0 in the direction −∇𝑓(𝑥𝑡) 
+of steepest descent of the function: 
+𝑥𝑡+1 ≔ 𝑥𝑡 − 𝜂∇𝑓(𝑥𝑡) . 
+(1) 
+We will call 𝑥0 the initial point, and the parameter 𝜂 > 0 the “stepsize” or “learning rate”. 
+Intuitively, the safe magnitude of 𝜂 must be determined as a function of how quickly the 
+first-order expansion becomes inaccurate. 
+★These notes are class material that has not undergone formal peer review. The TAs and I are grateful for 
+any reports of typos. 
+Lecture 12 • Gradient descent and descent lemmas • MIT 6.7220/15.084 
+| 1/9 
+
+PDF PAGE 2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+L12.2 Analysis for 𝐿-smooth functions 
+Since gradient descent operates by considering the first-order approximation of 𝑓, it is natural 
+that a key quantity in the analysis of the algorithm has to do with how quickly the first-
+order approximation becomes inaccurate. In particular, when replacing 𝑓 with its first-order 
+approximation, we are imagining that the gradient of 𝑓 is constant at all points—that is, 
+the graph of 𝑓 has no curvature. For how far around a given points 𝑥𝑡 is this approximation 
+sensible? A very natural answer to this question is given by the smoothness of 𝑓. 
+In other words, a standard avenue for studying gradient descent passes through requiring a 
+bound on how fast the function’s gradient can change by moving slightly in any direction. 
+This implies that as we start taking a movement in the direction −∇𝑓(𝑥𝑡) from 𝑥𝑡, the 
+new gradients we will encounter on the way will still be mostly aligned with ∇𝑓(𝑥𝑡), and so 
+−∇𝑓(𝑥𝑡) will continue to be a good descent direction for a while. 
+L12.2.1 𝐿-smoothness 
+Specifically, we will require that the gradient ∇𝑓(𝑥) be 𝐿-Lipschitz continuous for some 
+constant 𝐿 ≥ 0. This condition is often called 𝐿-smoothness in the literature. We present it 
+now for general functions with arbitrary convex domains Ω; today, we will only care about 
+the case Ω = ℝ𝑛. 
+Definition L12.1 (𝐿-smoothness). A differentiable function 𝑓 : Ω → ℝ is 𝐿-smooth if its 
+gradient is 𝐿-Lipschitz continuous, that is, 
+‖∇𝑓(𝑥) −∇𝑓(𝑦)‖2 ≤𝐿‖𝑥−𝑦‖2 
+∀𝑥, 𝑦∈Ω. 
+An immediate consequence of 𝐿-smoothness is that the function admits a quadratic upper 
+bound. This property will come in extremely handy in the analysis. 
+Theorem L12.1 (Quadratic upper bound). Let 𝑓 : Ω → ℝ be 𝐿-smooth on a convex 
+domain Ω. Then, we can upper bound the function 𝑓 as 
+𝑓(𝑦) ≤𝑓(𝑥) + ⟨∇𝑓(𝑥), 𝑦−𝑥⟩+ 𝐿
+2 ‖𝑦−𝑥‖2 
+∀𝑥, 𝑦∈Ω. 
+(2)
+2 
+Proof. The idea is simple: we express the growth 𝑓(𝑦) − 𝑓(𝑥) as the integral of the gradient 
+on the line connecting 𝑥 to 𝑦, and we then use the Lipschitzness bound on the growth of 
+the gradient ∇𝑓 to bound the growth: 
+Lecture 12 • Gradient descent and descent lemmas • MIT 6.7220/15.084 
+| 2/9 
+
+PDF PAGE 3
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+1 
+𝑓(𝑦) −𝑓(𝑥) = ∫ ⟨∇𝑓(𝑥+ 𝑡⋅(𝑦−𝑥)), 𝑦−𝑥⟩d𝑡 
+0 
+1 
+= (∫ ⟨∇𝑓(𝑥+ 𝑡⋅(𝑦−𝑥)) −∇𝑓(𝑥), 𝑦−𝑥⟩d𝑡) + ⟨∇𝑓(𝑥), 𝑦−𝑥⟩ 
+0 
+1 
+≤(∫ ‖∇𝑓(𝑥+ 𝑡⋅(𝑦−𝑥)) −∇𝑓(𝑥)‖2 ⋅‖𝑦−𝑥‖2 d𝑡) + ⟨∇𝑓(𝑥), 𝑦−𝑥⟩ 
+0 
+1 
+≤(∫ 𝑡𝐿‖𝑦−𝑥‖2
+2 d𝑡) + ⟨∇𝑓(𝑥), 𝑦−𝑥⟩ 
+0 
+= 𝐿
+2 ‖𝑦−𝑥‖2
+2 + ⟨∇𝑓(𝑥), 𝑦−𝑥⟩. 
+Rearranging, we obtain the statement. 
+□ 
+We also mention the following characterization. 
+Theorem L12.2. For twice differentiable functions 𝑓 : Ω → ℝ defined on an open set Ω ⊆ 
+ℝ𝑛, an equivalent condition of 𝐿-smoothness is 
+−𝐿𝐼 ⪯ ∇2𝑓(𝑥) ⪯ 𝐿𝐼 
+∀𝑥 ∈ Ω, 
+or equivalently, 
+|𝑣⊤∇2𝑓(𝑥)𝑣| ≤ 𝐿 
+∀𝑥 ∈ Ω, 𝑣 ∈ ℝ𝑛 : ‖𝑣‖2 = 1. 
+L12.2.2 Convergence in gradient norm: The gradient descent lemma 
+We can use the quadratic upper bound (Theorem L12.1) to quantify the improvement of one
+step of the gradient descent algorithm. This bound on the improvement is often called the 
+gradient descent lemma. 
+Theorem L12.3 (Gradient descent lemma). Let 𝑓 : ℝ𝑛 → ℝ be 𝐿-smooth. Then, for any 
+0 < 𝜂≤ 𝐿
+1 , each step of gradient descent (1) guarantees 
+𝑓(𝑥𝑡+1) ≤ 𝑓(𝑥𝑡) − 𝜂
+2‖∇𝑓(𝑥𝑡)‖2 
+2. 
+Proof. We start by writing (2) for the choice 𝑥 = 𝑥𝑡, 𝑦 = 𝑥𝑡+1: 
+𝑓(𝑥𝑡+1) ≤𝑓(𝑥𝑡) + ⟨∇𝑓(𝑥𝑡), 𝑥𝑡+1 −𝑥𝑡⟩+ 𝐿
+2 ‖𝑥𝑡+1 −𝑥𝑡‖
+2 
+2. 
+Plugging in the gradient descent step 𝑥𝑡+1 = 𝑥𝑡 − 𝜂∇𝑓(𝑥𝑡), we therefore obtain 
+Lecture 12 • Gradient descent and descent lemmas • MIT 6.7220/15.084 
+| 3/9 
+
+PDF PAGE 4
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+𝑓(𝑥𝑡+1) ≤ 𝑓(𝑥𝑡) − 𝜂‖∇𝑓(𝑥𝑡)‖2
+2 + 𝐿
+2 𝜂2‖∇𝑓(𝑥𝑡)‖2
+2 
+= 𝑓(𝑥𝑡) − 𝜂(1 − 𝐿
+2 𝜂)‖∇𝑓(𝑥𝑡)‖2 
+2. 
+If 𝜂≤ 𝐿
+1 , the parenthesis is 1 − 𝐿
+2 𝜂 ≥ 1
+2 , and the result follows. 
+□ 
+The previous result shows that for 𝐿-smooth functions, there exists a good choice of learning 
+1
+rate (namely, 𝜂= 𝐿 ) such that each step of gradient descent guarantees to improve the 
+function value if the current point does not have a zero gradient. 
+Assuming that 𝑓 is lower bounded, the gradient descent lemma also implies that the gradients
+of the points produced by gradient descent must eventually become small. Indeed, imagine 
+running the algorithm for 𝑇 iterations. Then, by repeatedly using the gradient descent lemma, 
+we would have 
+𝑇 −1 
+𝑓(𝑥𝑇) ≤𝑓(𝑥0) − 𝜂
+2 ∑‖∇𝑓(𝑥𝑡)‖2
+2. 
+𝑡=0 
+Assume now that 𝑓 is lower bounded by 𝑓⋆ ≔ inf 𝑓. Since 𝑓(𝑥𝑇) ≥ 𝑓⋆, the above implies that 
+𝑇 −1 
+∑‖∇𝑓(𝑥𝑡)‖2
+2 ≤ 𝜂
+2(𝑓(𝑥0) −𝑓⋆). 
+𝑡=0 
+2}
+𝑇 −1 
+2
+So, at least one among the {‖∇𝑓(𝑥𝑡)‖2 
+must be upper bounded by 𝜂𝑇 (𝑓(𝑥0) − 𝑓⋆).
+𝑡=0 
+More formally, we have the following. 
+Theorem L12.4. Let 𝑓 : ℝ𝑛 → ℝ be 𝐿-smooth, and let 0 < 𝜂≤ 𝐿
+1 . Then, by running 
+gradient descent for 𝑇 iterations, at least one of the points {𝑥𝑡} encountered must satisfy 
+‖∇𝑓(𝑥𝑡)‖2 ≤√2 ⋅ 𝑓(𝑥0) −𝑓⋆
+.
+𝜂𝑇 
+We remark that the above result does not require convexity of 𝑓. 
+L12.2.3 Convergence in convex function value: The Euclidean mirror de­
+scent lemma 
+The result in Theorem L12.4 only guarantees a convergence rate (to 0) for the objective’s 
+gradient norm, not of the suboptimality gap 𝑓(𝑥𝑡) − 𝑓⋆ as measured by the function value. 
+In other words, while a small gradient indicates a condition of almost local optimality, it 
+does not necessarily mean that the function value is close to optimal. To see this, consider 
+the function 𝑓(𝑥) = 𝜀 log(1 + 𝑒𝑥). The gradient satisfies ∇𝑓(𝑥) ≤ 𝜀 for all 𝑥 ∈ ℝ, and so 𝑥 
+might be arbitrarily far from optimal while the gradient is small. 
+However, for convex functions, a convergence rate in function value can be established, as 
+we now show. 
+Lecture 12 • Gradient descent and descent lemmas • MIT 6.7220/15.084 
+| 4/9 

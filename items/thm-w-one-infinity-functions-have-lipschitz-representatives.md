@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-w-one-infinity-functions-have-lipschitz-representatives.json
   judge:
     model: "gpt-6.1-sol"
     verdict: pass
@@ -31,11 +32,17 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\ge1$ and let $\Omega\subseteq\mathbb R^n$ be open, bounded and convex. If $u\in W^{1,\infty}(\Omega;\mathbb K)$, then $u$ has a representative $u^{*}$ with
+Assume the Axiom of Choice (The Axiom of Choice). Let $n\ge1$ and let $\Omega\subseteq\mathbb R^n$ be open, bounded and convex. If $u\in W^{1,\infty}(\Omega;\mathbb K)$, then $u$ has a representative $u^{*}$ with
 $$|u^{*}(x)-u^{*}(y)|\le\|Du\|_{L^\infty(\Omega)}\,|x-y|\qquad(x,y\in\Omega),$$
 and $u^{*}=u$ almost everywhere on $\Omega$. Conversely, every Lipschitz function $f:\Omega\to\mathbb K$ with constant $L$ lies in $W^{1,\infty}(\Omega)$ and $\|Df\|_{L^\infty(\Omega)}\le L$ for real scalars, while $\|Df\|_{L^\infty(\Omega)}\le\sqrt2 L$ for complex scalars. In both cases the real-linear derivative has operator norm at most $L$ almost everywhere.
 
-**Gradient convention.** For a weak gradient $Dv=(D_1v,\ldots,D_nv)$ we write $|Dv|=(\sum_{i=1}^n|D_iv|^2)^{1/2}$ for its Euclidean norm and $\|Dv\|_{L^\infty(\Omega)}:=\||Dv|\|_{L^\infty(\Omega)}$ for the essential supremum of that norm, as in [[lem-pointwise-potential-bound-for-compactly-supported-smooth-functions]]. For real scalars this norm equals the derivative operator norm. For complex scalars it is the Frobenius norm of the real-linear map $\mathbb R^n\to\mathbb R^2$ and can exceed its operator norm: $f(x)=x_1+ix_2$ is $1$-Lipschitz but $|Df|=\sqrt2$. If $\Omega=\varnothing$ both assertions hold vacuously.
+**Gradient convention.** For a weak gradient $Dv=(D_1v,\ldots,D_nv)$ we write $|Dv|=(\sum_{i=1}^n|D_iv|^2)^{1/2}$ for its Euclidean norm and $\|Dv\|_{L^\infty(\Omega)}:=\||Dv|\|_{L^\infty(\Omega)}$ for the essential supremum of that norm, as in Pointwise potential bound for compactly supported smooth functions. For real scalars this norm equals the derivative operator norm. For complex scalars it is the Frobenius norm of the real-linear map $\mathbb R^n\to\mathbb R^2$ and can exceed its operator norm: $f(x)=x_1+ix_2$ is $1$-Lipschitz but $|Df|=\sqrt2$. If $\Omega=\varnothing$ both assertions hold vacuously.
+
+## Statement references
+
+[[def-axiom-of-choice]]
+
+[[lem-pointwise-potential-bound-for-compactly-supported-smooth-functions]]
 
 ## Facts & Assumptions
 

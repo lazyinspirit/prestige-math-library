@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 short: "$(x_k)$, bounded, eventually, subsequence"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-sequence.json
   precheck: n/a
   verified:
     model: claude-opus-5
@@ -46,10 +47,10 @@ pipeline_run: null
 
 ## Definition
 
-Throughout, $\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]],
-[[def-real-numbers]]) with its order and absolute value ([[def-real-order]]), and
-$\mathbb{N}$ is the set of natural numbers with its order ([[def-natural-numbers]],
-[[def-nat-order]]).
+Throughout, $\mathbb{R}$ is the complete ordered field (Complete ordered field (least-upper-bound property),
+The real numbers) with its order and absolute value (Order on the reals), and
+$\mathbb{N}$ is the set of natural numbers with its order (The natural numbers $\mathbb{N}$ (von Neumann),
+Order on the natural numbers).
 
 A **sequence of reals** is a function $x : \mathbb{N} \to \mathbb{R}$. We write
 $x_k$ for the value $x(k)$, call it the **$k$-th term**, and write $(x_k)$, or
@@ -73,13 +74,27 @@ Let $(x_k)$ be a sequence of reals and let $P$ be a property of indices.
   it is again a sequence of reals.
 
 **Convergence and Cauchyness are not defined here.** They are already fixed, for
-sequences of reals, by the published [[def-real-limit]]: $(x_k)$ *converges* to
+sequences of reals, by the published Limits and Cauchy sequences of reals: $(x_k)$ *converges* to
 $x \in \mathbb{R}$ when for every rational $\varepsilon > 0$ there is
 $K \in \mathbb{N}$ with $|x_k - x| < \varepsilon$ for all $k \ge K$, and $(x_k)$
 is *Cauchy* when for every rational $\varepsilon > 0$ there is $K \in \mathbb{N}$
 with $|x_k - x_l| < \varepsilon$ for all $k, l \ge K$. This page builds the
 toolkit for those two notions and does not restate them. A sequence
 **converges** if it converges to some real, and **diverges** if it does not.
+
+## Definition references
+
+[[def-complete-ordered-field]]
+
+[[def-real-numbers]]
+
+[[def-real-order]]
+
+[[def-natural-numbers]]
+
+[[def-nat-order]]
+
+[[def-real-limit]]
 
 ## Remarks
 

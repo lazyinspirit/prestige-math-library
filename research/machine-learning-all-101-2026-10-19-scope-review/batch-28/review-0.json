@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "28",
+  "round": 0,
+  "reviewed_items": [
+    "def-differential-privacy-and-adjacency",
+    "def-laplace-distribution",
+    "def-global-l1-sensitivity",
+    "thm-laplace-density-from-exponential-law",
+    "lem-laplace-product-density",
+    "alg-laplace-mechanism",
+    "thm-laplace-mechanism-privacy",
+    "def-exponential-mechanism-utility-sensitivity",
+    "alg-exponential-mechanism",
+    "thm-exponential-mechanism-privacy-and-utility",
+    "lem-dp-test-function-extension",
+    "thm-dp-postprocessing",
+    "lem-dp-pure-privacy-loss-kl-bound",
+    "lem-dp-approximate-kernel-purification",
+    "thm-basic-adaptive-composition",
+    "thm-advanced-adaptive-composition-standard-borel-outputs",
+    "lem-dp-joint-measure-purification",
+    "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+    "thm-basic-and-advanced-composition",
+    "rem-differential-privacy-scope-and-limitations",
+    "ex-add-remove-noisy-count",
+    "ex-finite-range-private-selection",
+    "ex-postprocessing-private-noisy-count",
+    "ex-record-level-versus-client-level-adjacency"
+  ],
+  "reviewed_pages": [
+    "ml02-differential-privacy",
+    "ml02-differential-privacy-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, approved claim scopes, page prerequisites, and actual supplier arguments were reviewed. The claims and hypotheses match the approved scope, but several proofs use exponential or logarithm laws without identifying those prerequisites. These can be resolved locally without changing statements or definitions.",
+  "findings": [
+    {
+      "id": "lem-laplace-product-density",
+      "type": "prerequisite",
+      "reason": "Step 1.1 factors an exponential of a sum into a product, requiring thm-exponential-addition-formula, which is absent from the dependencies and facts. Add and cite that supplier."
+    },
+    {
+      "id": "thm-basic-adaptive-composition",
+      "type": "prerequisite",
+      "reason": "Step 2.1 uses e^(E_{i-1})e^(ε_i)=e^(E_i), requiring thm-exponential-addition-formula. Add and cite that supplier."
+    },
+    {
+      "id": "thm-laplace-mechanism-privacy",
+      "type": "prerequisite",
+      "reason": "Step 2.1 rewrites a ratio of exponential densities as the exponential of a difference. Cite thm-exponential-addition-formula and cor-exponential-reciprocal-and-positivity in the dependencies and argument."
+    },
+    {
+      "id": "thm-exponential-mechanism-privacy-and-utility",
+      "type": "prerequisite",
+      "reason": "Steps 1.1 and 2.1 use exponential addition, monotonicity, and the reciprocal identity to bound weight ratios and factor the bad-output weight. Identify and cite thm-exponential-addition-formula, thm-exponential-is-strictly-increasing, and cor-exponential-reciprocal-and-positivity."
+    },
+    {
+      "id": "lem-dp-approximate-kernel-purification",
+      "type": "prerequisite",
+      "reason": "Steps 3.1–4.1 use a=e^ε≥1 and e^(−ε)=1/a for clipping and mass correction. Add and cite thm-exponential-is-strictly-increasing and cor-exponential-reciprocal-and-positivity."
+    },
+    {
+      "id": "lem-dp-joint-measure-purification",
+      "type": "prerequisite",
+      "reason": "Steps 2.1–4.1 use a=e^ε≥1 and identify e^(−ε)=1/a. Add and cite thm-exponential-is-strictly-increasing and cor-exponential-reciprocal-and-positivity."
+    },
+    {
+      "id": "thm-advanced-adaptive-composition-standard-borel-outputs",
+      "type": "prerequisite",
+      "reason": "Step 4.1 asserts ln(∏r_i)=∑ln(r_i) but cites only the logarithm definition. Add thm-natural-logarithm-laws as a dependency and identify the product law in the proof."
+    },
+    {
+      "id": "thm-advanced-adaptive-composition-arbitrary-measurable-outputs",
+      "type": "prerequisite",
+      "reason": "Steps 3.1–4.1 use a=e^ε≥1 and the reciprocal relation e^(−ε)=1/a. Add and cite thm-exponential-is-strictly-increasing and cor-exponential-reciprocal-and-positivity."
+    }
+  ],
+  "consumer_checks": []
+}

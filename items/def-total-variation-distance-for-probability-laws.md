@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-total-variation-distance-for-probability-laws.json
   audited: 2026-10-02
   precheck: n/a
   judge:
@@ -28,7 +29,7 @@ sources:
 ## Definition
 
 Let $\mu$ and $\nu$ be probability measures on the same measurable space
-$(E,\mathcal E)$ ([[def-probability-measure]]). Their **total variation
+$(E,\mathcal E)$ (Probability measures and probability spaces). Their **total variation
 distance** is
 
 $$\lVert\mu-\nu\rVert_{\mathrm{TV}}:=\sup_{A\in\mathcal E}\bigl|\mu(A)-\nu(A)\bigr| .$$
@@ -44,4 +45,11 @@ which is twice the quantity above when that signed measure is considered on a
 measurable space where the decomposition is attained. On a countable state
 space with its power-set sigma-algebra the supremum equals the half-$\ell^1$
 sum $\tfrac12\sum_{x\in E}|\mu(\{x\})-\nu(\{x\})|$; that identity is proved in
-[[lem-total-variation-half-l1-formula-on-a-countable-space]], not assumed here.
+Half-$\ell^1$ formula for total variation on a countable space, not assumed here.
+
+## Definition references
+
+[[def-probability-measure]]
+
+[[lem-total-variation-half-l1-formula-on-a-countable-space]]
+

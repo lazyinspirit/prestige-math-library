@@ -1,0 +1,783 @@
+{
+  "version": 1,
+  "scope": [
+    "def-gan-minimax-objective",
+    "def-gan-jensen-shannon-divergence",
+    "lem-gan-jensen-shannon-divergence-nonnegative-and-equality",
+    "thm-optimal-discriminator-and-js-divergence",
+    "ex-disjoint-supports-saturate-ideal-discriminator",
+    "ex-neural-game-nonconvergence"
+  ],
+  "contracts": {
+    "def-gan-minimax-objective": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An empty X cannot support P(X)=Q(X)=1 with measure(empty)=0. The discriminator class is also nonempty: the constant D=1/2 is measurable and has payoff -2log2, so the value C does not take a supremum of the empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_analysis_supplier_proofs",
+            "reason": "The word family in the sigma-algebra explanation does not admit an empty probability domain or empty discriminator class."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition sets zero-density times an infinite endpoint loss to zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition specifies a functional and makes no one-point optimization claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Finite-valued densities may vanish on arbitrary measurable sets; the objective remains defined by nonnegative integrals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The discriminator range includes 0 and 1, with the extended logarithm and zero-density conventions stated in the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The laws, densities and discriminator are supplied; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional claim."
+        }
+      ]
+    },
+    "def-gan-jensen-shannon-divergence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The normalized probability-density hypotheses exclude an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition sets phi(0)=0 and r=s=0 when the mixture density vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: On a one-point probability space p=q=m and r=s=1, so both defining integrands vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: On disjoint supports r and s take the boundary values 0 and 2, which are explicitly defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The zero-ratio endpoint uses phi(0)=0; no undefined 0 ln 0 term occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The density ratios are explicit pointwise functions; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional claim."
+        }
+      ]
+    },
+    "lem-gan-jensen-shannon-divergence-nonnegative-and-equality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gan-minimax-objective",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set, let $\\mathcal A$ be a sigma-algebra on $X$ (a family containing $\\emptyset$ and $X$, closed under complements and countable unions), and let $\\mu:\\mathcal A\\to[0,+\\infty]$ be a countably additive measure with $\\mu(\\emptyset)=0$. Let $P,Q$ be probability measures on $(X,\\mathcal A)$, meaning countably additive measures with $P(X)=Q(X)=1$. A function from $X$ to a Borel space is measurable when the inverse image of each Borel set belongs to $\\mathcal A$. Assume that $P$ and $Q$ have finite-valued, nonnegative, measurable densities $p$ and $q$ with respect to the same measure $\\mu$, meaning that $P(E)=\\int_E p\\,d\\mu$ and $Q(E)=\\int_E q\\,d\\mu$ for every $E\\in\\mathcal A$. In particular, $\\int p\\,d\\mu=\\int q\\,d\\mu=1$.\n\nFor a measurable discriminator $D:X\\to[0,1]$, put $a(t)=-\\ln t$ for $0<t\\le1$ and $a(0)=+\\infty$, and put $b(t)=-\\ln(1-t)$ for $0\\le t<1$ and $b(1)=+\\infty$. In the products below, define $0\\cdot(+\\infty)=0$; a positive finite factor times $+\\infty$ is $+\\infty$. Define the log payoff and the unrestricted discriminator value by\n$$\nV(D;P,Q):=-\\int p(x)a(D(x))\\,d\\mu(x)-\\int q(x)b(D(x))\\,d\\mu(x),\\qquad C(P,Q):=\\sup_{D:X\\to[0,1]\\,\\mathrm{measurable}}V(D;P,Q).\n$$\nEach integral is the nonnegative Lebesgue integral, defined as the supremum of the integrals of nonnegative simple minorants, so $V(D;P,Q)\\in[-\\infty,0]$. The supremum ranges over all measurable functions into $[0,1]$, including boundary values; it is not restricted to a finite-parameter discriminator family.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gan-jensen-shannon-divergence",
+          "source_section": "Definition",
+          "quote": "In the common-density setting, put $m=(p+q)/2$. Additivity and nonnegative homogeneity of the integral give $\\int m\\,d\\mu=1$. Define $r=p/m$ and $s=q/m$ where $m>0$, and define $r=s=0$ where $m=0$; then $0\\le r,s\\le2$ and $r+s=2$ wherever $m>0$. Let $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$. The density-defined Jensen–Shannon divergence is\n$$\n\\operatorname{JS}_\\mu(P,Q):=\\frac12\\int m\\phi(r)\\,d\\mu+\\frac12\\int m\\phi(s)\\,d\\mu.\n$$\nThe integrals are finite, and this formula is the average of the two density-relative-entropy terms from $p$ and $q$ to the mixture density $m$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space and let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-coordinatewise-measurability-into-r-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $(X,\\mathcal{A})$ be a measurable space, and let\n$f = (f_1,\\dots,f_n) : X \\to \\mathbb{R}^n$. Then $f$ is measurable if and only\nif each coordinate function $f_j : X \\to \\mathbb{R}$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ be a measurable space and let\n$f,g:X\\to\\overline{\\mathbb R}$ be measurable for the Borel sigma-algebra on\nthe extended real line. Products of functions use\n$\\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$\nabbreviates $\\underline c\\odot_X f$ for the constant function $\\underline c$.\nThe magnitude function is $|f|=\\max(f,-f)$ as in\n[[def-positive-and-negative-parts-of-a-function]]. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;\n4. the pointwise product $fg:=f\\odot_X g$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define $\\psi(0)=1$ and $\\psi(t)=t\\ln t-t+1$ for $t>0$. If $0<t<1$, then $\\ln t=-\\int_t^1du/u>-(1-t)/t=1-1/t$, since $1/u<1/t$ for $t<u\\le1$. If $t>1$, then $\\ln t=\\int_1^tdu/u>(t-1)/t=1-1/t$, since $1/u>1/t$ for $1\\le u<t$. Thus $\\psi(t)>0$ for $t\\ne1$ and $\\psi(1)=0$. Also $-1\\le\\phi(t)\\le0$ for $0<t\\le1$, by the first inequality and $\\ln t\\le0$; and $0\\le\\phi(t)\\le t(t-1)\\le2$ for $1\\le t\\le2$, since $\\ln t=\\int_1^tdu/u\\le t-1$. At $t=0$, $\\phi(0)=0$ and $\\psi(0)=1$. Hence $\\psi\\ge0$ with equality exactly at $1$, $|\\phi(t)|\\le2$, and $\\psi(t)\\le5$ on $[0,2]$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], [F7] and [F8], $\\int m\\,d\\mu=\\tfrac12\\int(p+q)\\,d\\mu=1$. By [F2], $0\\le r,s\\le2$. Coordinatewise measurability [F10], Borel composition [F11], and arithmetic/product closure [F9, F12] make $m\\phi(r)$, $m\\phi(s)$, and $\\tfrac12m(\\psi(r)+\\psi(s))$ measurable. Step 1.1 gives $|m\\phi(r)|,|m\\phi(s)|\\le2m$ and $0\\le\\tfrac12m(\\psi(r)+\\psi(s))\\le5m$, so they are integrable. On $m>0$, $r+s=2$ and $\\phi(t)=\\psi(t)+t-1$, so $\\phi(r)+\\phi(s)=\\psi(r)+\\psi(s)\\ge0$; when $m=0$ both products by $m$ vanish. Linearity in [F6] gives $\\operatorname{JS}_\\mu(P,Q)=\\int \\tfrac12m(\\psi(r)+\\psi(s))\\,d\\mu\\ge0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\operatorname{JS}_\\mu(P,Q)=0$, the nonnegative measurable function $h:=\\tfrac12m(\\psi(r)+\\psi(s))$ has integral zero by step 2.1. By [F5], $h=0$ $\\mu$-almost everywhere. On $m>0$, both $\\psi(r)$ and $\\psi(s)$ are nonnegative, so they must each be zero almost everywhere there; step 1.1 gives $r=s=1$ there, hence $p=q$. On $m=0$, nonnegativity and $m=(p+q)/2$ give $p=q=0$. Therefore $p=q$ $\\mu$-almost everywhere, and [F1] implies $P(E)=Q(E)$ for every measurable $E$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Conversely, suppose $P=Q$. If $\\{p>q\\}$ had positive measure, it would be the countable union over positive integers $n,k$ of $E_{n,k}:=\\{p-q\\ge1/n\\}\\cap\\{p+q\\ge1/k\\}$, so some $E_{n,k}$ would have positive measure. On that set, $\\mu(E_{n,k})/k\\le\\int_{E_{n,k}}(p+q)\\,d\\mu\\le\\int(p+q)\\,d\\mu=2\\int m\\,d\\mu=2$ by [F1], [F7], [F8] and step 2.1, so its measure is finite. By [F1] and [F6], $0=P(E_{n,k})-Q(E_{n,k})=\\int_{E_{n,k}}(p-q)\\,d\\mu\\ge\\mu(E_{n,k})/n>0$, a contradiction. The same argument with $p,q$ exchanged rules out $\\{q>p\\}$, hence $p=q$ $\\mu$-almost everywhere. Then $r=s=1$ almost everywhere on $m>0$, so [F2] gives $\\operatorname{JS}_\\mu(P,Q)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Steps 3.1 and 3.2 prove that $\\operatorname{JS}_\\mu(P,Q)$ is zero exactly when $P=Q$; step 2.1 proves it is finite and nonnegative. These are all claims in the Statement.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The probability-measure normalization hypotheses exclude an empty underlying space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The proof handles phi(0)=0 and psi(0)=1 explicitly, including points where p=q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: On a one-point probability space the only two laws coincide and the divergence is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof allows either density to vanish and treats disjoint-support ratios r,s in {0,2}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The scalar inequality and integrability bound include t=0, t=1 and t=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses a single witness from a countable cover of {p>q}; it does not construct a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves JS=0 implies p=q almost everywhere and hence P=Q."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves P=Q implies p=q almost everywhere and hence JS=0."
+        }
+      ]
+    },
+    "thm-optimal-discriminator-and-js-divergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gan-minimax-objective",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set, let $\\mathcal A$ be a sigma-algebra on $X$ (a family containing $\\emptyset$ and $X$, closed under complements and countable unions), and let $\\mu:\\mathcal A\\to[0,+\\infty]$ be a countably additive measure with $\\mu(\\emptyset)=0$. Let $P,Q$ be probability measures on $(X,\\mathcal A)$, meaning countably additive measures with $P(X)=Q(X)=1$. A function from $X$ to a Borel space is measurable when the inverse image of each Borel set belongs to $\\mathcal A$. Assume that $P$ and $Q$ have finite-valued, nonnegative, measurable densities $p$ and $q$ with respect to the same measure $\\mu$, meaning that $P(E)=\\int_E p\\,d\\mu$ and $Q(E)=\\int_E q\\,d\\mu$ for every $E\\in\\mathcal A$. In particular, $\\int p\\,d\\mu=\\int q\\,d\\mu=1$.\n\nFor a measurable discriminator $D:X\\to[0,1]$, put $a(t)=-\\ln t$ for $0<t\\le1$ and $a(0)=+\\infty$, and put $b(t)=-\\ln(1-t)$ for $0\\le t<1$ and $b(1)=+\\infty$. In the products below, define $0\\cdot(+\\infty)=0$; a positive finite factor times $+\\infty$ is $+\\infty$. Define the log payoff and the unrestricted discriminator value by\n$$\nV(D;P,Q):=-\\int p(x)a(D(x))\\,d\\mu(x)-\\int q(x)b(D(x))\\,d\\mu(x),\\qquad C(P,Q):=\\sup_{D:X\\to[0,1]\\,\\mathrm{measurable}}V(D;P,Q).\n$$\nEach integral is the nonnegative Lebesgue integral, defined as the supremum of the integrals of nonnegative simple minorants, so $V(D;P,Q)\\in[-\\infty,0]$. The supremum ranges over all measurable functions into $[0,1]$, including boundary values; it is not restricted to a finite-parameter discriminator family.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gan-jensen-shannon-divergence",
+          "source_section": "Definition",
+          "quote": "In the common-density setting, put $m=(p+q)/2$. Additivity and nonnegative homogeneity of the integral give $\\int m\\,d\\mu=1$. Define $r=p/m$ and $s=q/m$ where $m>0$, and define $r=s=0$ where $m=0$; then $0\\le r,s\\le2$ and $r+s=2$ wherever $m>0$. Let $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$. The density-defined Jensen–Shannon divergence is\n$$\n\\operatorname{JS}_\\mu(P,Q):=\\frac12\\int m\\phi(r)\\,d\\mu+\\frac12\\int m\\phi(s)\\,d\\mu.\n$$\nThe integrals are finite, and this formula is the average of the two density-relative-entropy terms from $p$ and $q$ to the mixture density $m$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gan-jensen-shannon-divergence-nonnegative-and-equality",
+          "source_section": "Statement",
+          "quote": "For two probability measures $P,Q$ with finite-valued nonnegative densities $p,q$ relative to a common measure $\\mu$, put $m=(p+q)/2$, $r=p/m$ and $s=q/m$ where $m>0$, and $r=s=0$ where $m=0$. Set $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$. The functions $m\\phi(r)$ and $m\\phi(s)$ are integrable, and the density-defined Jensen–Shannon divergence $\\operatorname{JS}_\\mu(P,Q)=\\tfrac12\\int m\\phi(r)\\,d\\mu+\\tfrac12\\int m\\phi(s)\\,d\\mu$ is a finite nonnegative real number. It is zero if and only if $P=Q$, equivalently if and only if $p=q$ $\\mu$-almost everywhere.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-coordinatewise-measurability-into-r-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $(X,\\mathcal{A})$ be a measurable space, and let\n$f = (f_1,\\dots,f_n) : X \\to \\mathbb{R}^n$. Then $f$ is measurable if and only\nif each coordinate function $f_j : X \\to \\mathbb{R}$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define $F:[0,\\infty)^2\\to[0,1]$ by $F(a,b)=a/(a+b)$ when $a+b>0$ and $F(0,0)=1/2$. It is continuous on the Borel set $\\{a+b>0\\}$ and constant on its singleton complement, hence Borel. By [F8], $x\\mapsto(p(x),q(x))$ is measurable, and [F9] makes $D^*=F(p,q)$ measurable.",
+          "inputs": [
+            "F8",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix $x$ and write $a=p(x)$ and $b=q(x)$. If $a,b>0$, the function $f(y)=a\\ln y+b\\ln(1-y)$ on $0<y<1$ is differentiable with $f'(y)=a/y-b/(1-y)=(a-(a+b)y)/(y(1-y))$: the derivative of $1-y$ is $-1$ by its difference quotient, [F4] differentiates $\\ln$, [F10] applies the chain rule, and [F11] gives the sum and scalar rules. The denominator is positive; the numerator is positive for $y<y^*:=a/(a+b)$ and negative for $y>y^*$. By [F12], $f$ is continuous on every closed subinterval of $(0,1)$. For any $y\\in(0,y^*)$, [F13] on $[y,y^*]$ gives $c\\in(y,y^*)$ with $f(y^*)-f(y)=f'(c)(y^*-y)>0$. For any $y\\in(y^*,1)$, [F13] on $[y^*,y]$ gives $c\\in(y^*,y)$ with $f(y)-f(y^*)=f'(c)(y-y^*)<0$. At $y=0,1$ the payoff is $-\\infty$. If $a=0<b$, then $f(y)=b\\ln(1-y)\\le0=f(0)$, with equality at $y=0$. If $b=0<a$, then $f(y)=a\\ln y\\le0=f(1)$, with equality at $y=1$. If $a=b=0$, every $y$ gives value $0$. In all four cases, $D^*(x)$ maximizes the pointwise payoff.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For any measurable $D$, step 1.2 gives the pointwise loss inequality $p(-\\ln D)+q(-\\ln(1-D))\\ge p(-\\ln D^*)+q(-\\ln(1-D^*))$, with zero-density endpoint terms interpreted as in [F1]. Monotonicity [F6] of the nonnegative integral therefore gives $V(D;P,Q)\\le V(D^*;P,Q)$. Since $D^*$ is measurable by step 1.1, the supremum is attained and $C(P,Q)=V(D^*;P,Q)$.",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On $m>0$, one has $p=mr$, $q=ms$, $D^*=r/2$ and $1-D^*=s/2$. Using $0\\ln0=0$ when $r=0$ or $s=0$, the pointwise optimized payoff is $m\\phi(r)+m\\phi(s)-m(r+s)\\ln2=m\\phi(r)+m\\phi(s)-2m\\ln2$. On $m=0$, both densities and all displayed products are zero, so the same identity holds. The first two terms are integrable by [F3]; [F1] and [F7] give $\\int m\\,d\\mu=1$. Hence [F7], [F2] and $\\ln4=2\\ln2$ give $C(P,Q)=2\\operatorname{JS}_\\mu(P,Q)-\\ln4$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "By [F3], $\\operatorname{JS}_\\mu(P,Q)\\ge0$, and it vanishes exactly when $P=Q$. Step 3.1 therefore gives $C(P,Q)\\ge-\\ln4$ with equality exactly at $P=Q$. The unrestricted density class contains the data law itself, so this value is attained there and no other generator law attains it. The argument establishes only the distribution-space optimum stated here.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The probability-measure hypotheses exclude an empty underlying space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The four pointwise density cases include p=q=0, where D*=1/2, and either single-zero case, where D* is an endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: When P=Q, the theorem gives D*=1/2 almost everywhere and C=-ln 4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The p=0 or q=0 branches attain D*=0 or 1, respectively, with zero-density product conventions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The discriminator range includes 0 and 1 and the endpoint cases are verified in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: D* is explicitly defined as a Borel composition; no maximizer selection or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves equality at -ln 4 only if P=Q."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves P=Q attains -ln 4."
+        }
+      ]
+    },
+    "ex-disjoint-supports-saturate-ideal-discriminator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-optimal-discriminator-and-js-divergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $P,Q$ be probability measures with finite-valued nonnegative measurable densities $p,q$ relative to $\\mu$, normalized by $\\int p\\,d\\mu=\\int q\\,d\\mu=1$. For every measurable discriminator $D:X\\to[0,1]$, define\n$$\nV(D;P,Q)=\\int p\\ln D\\,d\\mu+\\int q\\ln(1-D)\\,d\\mu,\n$$\nextending $\\ln0=-\\infty$ and making each zero-density term $0\\cdot(-\\infty)$ equal to $0$. Let $C(P,Q)$ be the supremum of $V(D;P,Q)$ over all such $D$. Put $m=(p+q)/2$, $r=p/m$ and $s=q/m$ where $m>0$, set $r=s=0$ where $m=0$, define $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$, and set $\\operatorname{JS}_\\mu(P,Q)=\\tfrac12\\int m\\phi(r)\\,d\\mu+\\tfrac12\\int m\\phi(s)\\,d\\mu$. Then the measurable discriminator\n$$\nD^*(x)=\\begin{cases}\\dfrac{p(x)}{p(x)+q(x)},&p(x)+q(x)>0,\\\\[4pt]\\dfrac12,&p(x)+q(x)=0\\end{cases}\n$$\nmaximizes $V$, and $C(P,Q)=-\\ln4+2\\operatorname{JS}_\\mu(P,Q)$. Consequently $C(P,Q)\\ge-\\ln4$, with equality if and only if $P=Q$. Over the unrestricted class of probability densities, equality of the generator law with the data law is the unique global distribution optimum. This identity does not assert convergence of finite neural alternating optimization.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gan-jensen-shannon-divergence",
+          "source_section": "Definition",
+          "quote": "In the common-density setting, put $m=(p+q)/2$. Additivity and nonnegative homogeneity of the integral give $\\int m\\,d\\mu=1$. Define $r=p/m$ and $s=q/m$ where $m>0$, and define $r=s=0$ where $m=0$; then $0\\le r,s\\le2$ and $r+s=2$ wherever $m>0$. Let $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$. The density-defined Jensen–Shannon divergence is\n$$\n\\operatorname{JS}_\\mu(P,Q):=\\frac12\\int m\\phi(r)\\,d\\mu+\\frac12\\int m\\phi(s)\\,d\\mu.\n$$\nThe integrals are finite, and this formula is the average of the two density-relative-entropy terms from $p$ and $q$ to the mixture density $m$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Their densities are $p(a)=1,p(b)=0,q(a)=0,q(b)=1$. Thus $m(a)=m(b)=1/2$, $(r(a),s(a))=(2,0)$ and $(r(b),s(b))=(0,2)$.",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $D^*(a)=1/(1+0)=1$ and $D^*(b)=0/(0+1)=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Since $\\phi(0)=0$ and $\\phi(2)=2\\ln2$, the two integrals in [F2] each equal $\\ln2$ before their factor $1/2$; hence $\\operatorname{JS}_\\mu(P_{\\rm data},P_G)=\\ln2$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F1] and step 2.2, $C(P_{\\rm data},P_G)=-\\ln4+2\\ln2=0$. The discriminator takes only the saturated endpoint values on the two supports, as claimed.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-point space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: Each density vanishes at the point outside its support, and the verification uses the zero-term convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has two support points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: The laws have disjoint singleton supports, with ratios (2,0) and (0,2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The computed ideal discriminator equals 1 at a and 0 at b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The sample space, laws, densities and discriminator values are all explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives explicit values, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives explicit values, not a biconditional."
+        }
+      ]
+    },
+    "ex-neural-game-nonconvergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-optimal-discriminator-and-js-divergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $P,Q$ be probability measures with finite-valued nonnegative measurable densities $p,q$ relative to $\\mu$, normalized by $\\int p\\,d\\mu=\\int q\\,d\\mu=1$. For every measurable discriminator $D:X\\to[0,1]$, define\n$$\nV(D;P,Q)=\\int p\\ln D\\,d\\mu+\\int q\\ln(1-D)\\,d\\mu,\n$$\nextending $\\ln0=-\\infty$ and making each zero-density term $0\\cdot(-\\infty)$ equal to $0$. Let $C(P,Q)$ be the supremum of $V(D;P,Q)$ over all such $D$. Put $m=(p+q)/2$, $r=p/m$ and $s=q/m$ where $m>0$, set $r=s=0$ where $m=0$, define $\\phi(0)=0$ and $\\phi(t)=t\\ln t$ for $t>0$, and set $\\operatorname{JS}_\\mu(P,Q)=\\tfrac12\\int m\\phi(r)\\,d\\mu+\\tfrac12\\int m\\phi(s)\\,d\\mu$. Then the measurable discriminator\n$$\nD^*(x)=\\begin{cases}\\dfrac{p(x)}{p(x)+q(x)},&p(x)+q(x)>0,\\\\[4pt]\\dfrac12,&p(x)+q(x)=0\\end{cases}\n$$\nmaximizes $V$, and $C(P,Q)=-\\ln4+2\\operatorname{JS}_\\mu(P,Q)$. Consequently $C(P,Q)\\ge-\\ln4$, with equality if and only if $P=Q$. Over the unrestricted class of probability densities, equality of the generator law with the data law is the unique global distribution optimum. This identity does not assert convergence of finite neural alternating optimization.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $h\\ne0$, $\\bigl(L(\\theta+h,\\varphi)-L(\\theta,\\varphi)\\bigr)/h=\\bigl((\\theta+h)\\varphi-\\theta\\varphi\\bigr)/h=\\varphi$, so $\\partial_\\theta L=\\varphi$. Likewise $\\bigl(L(\\theta,\\varphi+h)-L(\\theta,\\varphi)\\bigr)/h=\\theta$, so $\\partial_\\varphi L=\\theta$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitution into the update gives $\\theta_{n+1}=\\theta_n-\\varphi_n$ and $\\varphi_{n+1}=\\varphi_n+\\theta_{n+1}=\\theta_n$. Thus $x_{n+1}=Mx_n$ for $x_n=(\\theta_n,\\varphi_n)^\\mathsf T$ and $M=\\begin{pmatrix}1&-1\\\\1&0\\end{pmatrix}$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Matrix multiplication gives $M^2=\\begin{pmatrix}0&-1\\\\1&-1\\end{pmatrix}$ and $M^3=-I$. Hence $x_{n+3}=-x_n$ and $x_{n+6}=x_n$ for every $n$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $x_0\\ne0$, the subsequence $(x_{6k})_{k\\ge0}$ is constantly $x_0$ and $(x_{6k+3})_{k\\ge0}$ is constantly $-x_0\\ne x_0$. These subsequences have different limits, so $(x_n)$ does not converge. The computed cycle is for this explicitly defined toy game; [F1] shows it supplies no conclusion about convergence of GAN neural training.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonempty parameter space R^2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The zero initial pair would be a fixed point and is explicitly excluded from the nonconvergence claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-parameter game, not a one-point probability model."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No density or support boundary occurs in this scalar bilinear game."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No discriminator probability endpoint occurs in this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: Every gradient and update is an explicit scalar formula with no selected auxiliary object."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a cycle for nonzero starts, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a cycle for nonzero starts, not an iff claim."
+        }
+      ]
+    }
+  }
+}

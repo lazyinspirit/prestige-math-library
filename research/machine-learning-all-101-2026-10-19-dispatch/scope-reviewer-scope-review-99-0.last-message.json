@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "99",
+  "round": 0,
+  "reviewed_items": [
+    "def-verifier-and-generation-protocol",
+    "alg-budgeted-verifier-guided-generation",
+    "thm-independent-generation-success-and-verifier-error",
+    "lem-finite-response-likelihood-ratio-change-of-measure",
+    "alg-finite-group-relative-policy-update",
+    "lem-finite-response-score-gradient-identities",
+    "thm-group-centered-score-estimator-factor",
+    "rem-reasoning-training-evidence-and-evaluation-targets",
+    "ex-equal-group-rewards-zero-advantages",
+    "ex-perfect-and-false-positive-verifiers",
+    "ex-repeated-dependent-copies-no-sampling-gain",
+    "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy"
+  ],
+  "reviewed_pages": [
+    "verifiable-generation-and-test-time-sampling",
+    "verifiable-generation-and-test-time-sampling-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved ML-91 scope, and actual supplier uses were reviewed. The finite probability and score calculations check by direct arguments. The offline-RL remark states the trajectory-ratio supplier’s AC, coverage, and integrability assumptions; the finite cancellation lemma does not import the general measure result. Source claims are limited to context: [DeepSeek-R1 v1](https://arxiv.org/pdf/2501.12948v1), [PPO v1](https://arxiv.org/pdf/1707.06347v1), and [Sutton and Barto](https://web.stanford.edu/class/psych209/Readings/SuttonBartoRL.pdf). No unresolved outside prerequisite gap was found. One local repair round is needed.",
+  "findings": [
+    {
+      "id": "alg-budgeted-verifier-guided-generation",
+      "type": "local",
+      "reason": "The Definition asserts that both modes terminate within N draws. Algorithmic termination and call-count properties need a separate proved result. Retain the exact stop instructions, move the property to a result, and have dependent proofs cite it."
+    },
+    {
+      "id": "alg-finite-group-relative-policy-update",
+      "type": "local",
+      "reason": "The Definition asserts that the procedure is finite but has no separate proved result. Add a termination and bounded-call result for the finite T, K, M, and G loops, while retaining the operational instructions."
+    },
+    {
+      "id": "lem-finite-response-score-gradient-identities",
+      "type": "local",
+      "reason": "The expectations are vector-valued. State in Facts or the proof that finite vector expectations and sums are defined coordinatewise, and establish the identities coordinatewise."
+    },
+    {
+      "id": "thm-group-centered-score-estimator-factor",
+      "type": "local",
+      "reason": "The proof uses linearity and factorization for vector expectations, while its cited expectation suppliers cover real or complex scalar variables. Add the coordinatewise finite-vector convention and justify those operations coordinatewise."
+    },
+    {
+      "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+      "type": "local",
+      "reason": "Steps 1.3 and 2.1 use product probabilities for independent candidates but omit F8, the stated product-law fact. Cite F8 in those steps; F4 in step 1.3 does not supply that premise."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-independent-generation-success-and-verifier-error",
+      "decision": "repair",
+      "reason": "Its F2 and success-event proof use the bounded termination property of alg-budgeted-verifier-guided-generation; cite the separate result after it is added."
+    },
+    {
+      "id": "ex-perfect-and-false-positive-verifiers",
+      "decision": "repair",
+      "reason": "Its F2 uses the rejection termination and draw bound; cite the separate result after it is added."
+    },
+    {
+      "id": "ex-pass-at-one-oracle-pass-n-verifier-selected-accuracy",
+      "decision": "repair",
+      "reason": "Its rejection calculations use the finite draw bound and also need F8 cited for the independent product probabilities."
+    },
+    {
+      "id": "ex-repeated-dependent-copies-no-sampling-gain",
+      "decision": "accept",
+      "reason": "It uses the independent success formula through the theorem and directly verifies dependence of the duplicated copies."
+    },
+    {
+      "id": "rem-reasoning-training-evidence-and-evaluation-targets",
+      "decision": "accept",
+      "reason": "Its procedure descriptions and limitations do not rely on the algorithm termination assertions; its offline-RL claims match the inspected supplier hypotheses."
+    },
+    {
+      "id": "ex-equal-group-rewards-zero-advantages",
+      "decision": "accept",
+      "reason": "It uses the group objective and zero-standard-deviation branch, not the algorithm’s termination claim."
+    }
+  ]
+}

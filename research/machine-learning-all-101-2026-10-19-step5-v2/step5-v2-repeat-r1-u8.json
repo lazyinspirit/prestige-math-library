@@ -1,0 +1,188 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "8",
+  "input_sha256": "a5c30205133334dfbe5b7d7b702cb1de32b4633029f3d1d5fcd667c85576247b",
+  "decisions": [
+    {
+      "id": "def-proper-scoring-rule",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "41cc409221a3fbcc4d13c99bedde8a952b990d747b33778c42f55d2cfd903f05",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The equality-only clause does not imply properness. For S(q,j)=2-S_B(q,j), 0<=S_B<=2 makes S a continuous nonnegative loss and its expected loss is 1+||p||^2-||p-q||^2. Equality with the truthful expected loss forces q=p, but every other report has strictly smaller loss. Thus the original clause admits strictly improper losses. Added the explicit requirement that S is proper to the strict-propriety clause.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-proper-scoring-rule",
+      "disposition": "repaired",
+      "post_sha256": "92ae308c4ea6de8df94a44d9640c0b15d8c35221a58623021eefc28b0f50e491",
+      "review_context_sha256": "210d3886afd212fc8c99d5106e9f4dba88c58ba487540628a68a3ef9b2122999",
+      "reason": "The corrected definition requires both truthful loss minimization for all p,q and equality only for q=p. Checked the finite simplex, nonnegative extended loss and section measurability, zero-mass times infinity convention, and unchanged log/Brier formulas against all three declared prerequisite definitions. No AC, existence claim, diagram, inline statement link or page-body repair is needed. This is the repair author's mathematical check, not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-log-and-brier-strict-propriety",
+    "thm-posterior-forecast-minimizes-scoring-risk",
+    "alg-validation-temperature-scaling",
+    "def-binned-expected-calibration-error",
+    "thm-finite-action-gibbs-policy-optimum"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-proper-scoring-rule",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "reason": "The equality-only clause does not imply properness. For S(q,j)=2-S_B(q,j), 0<=S_B<=2 makes S a continuous nonnegative loss and its expected loss is 1+||p||^2-||p-q||^2. Equality with the truthful expected loss forces q=p, but every other report has strictly smaller loss. Thus the original clause admits strictly improper losses. Added the explicit requirement that S is proper to the strict-propriety clause.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "action": "no-update-required",
+      "id": "def-proper-scoring-rule",
+      "reason": "The assigned supplier and all five direct dependency/reference consumers are draft original-frontier items. No published consumer or outside-frontier mathematical use was found in the current item/page search; no published repair or audit claim is proposed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item_ids": [
+      "def-proper-scoring-rule"
+    ],
+    "definition_change": {
+      "before": "**strictly proper** if equality implies $q=p$.",
+      "after": "**strictly proper** if it is proper and equality implies $q=p$."
+    },
+    "conventions": "K>=2; Borel measurable nonnegative extended score losses minimized in expectation; p_j=0 contributes zero even for infinite score. All conventions and formulas preserved.",
+    "dependencies": [
+      "def-loss-function-and-risk",
+      "def-natural-logarithm",
+      "def-borel-sigma-algebra"
+    ],
+    "source_review": "Familiar finite-simplex algebra and standard proper-loss definition; no external source was consulted or claimed read in this review. Read the three local supplier definitions and all five direct consumer items.",
+    "contract_repair": "Under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release, updated exactly five copies of the changed defining clause in research/machine-learning-all-101-2026-10-19-batch-8.proof-contracts.json: the assigned finite_smoke assertion and the four F1/F3 or F2/F3 citation mirrors in its two direct batch-8 consumers. All other contract text, including earlier review evidence, was preserved.",
+    "page_review": "library/machine-learning/calibration-proper-losses-and-surrogate-classification.md already has only YAML frontmatter, the assigned item inventory and page_layout: compact-v1; unchanged.",
+    "direct_consumers": [
+      {
+        "id": "thm-log-and-brier-strict-propriety",
+        "path": "items/thm-log-and-brier-strict-propriety.md",
+        "affected_use": "Statement and proof steps 1.2, 2.1 and 3.1 use the finite expected-score convention and conclude strict propriety of logarithmic and Brier losses.",
+        "reason": "The proof establishes both the minimizing inequality and equality only at q=p for each loss, including zero coordinates. It therefore proves the corrected strict-propriety definition without any item edit. Exact F1/F3 quotation mirrors were updated in the owning batch-8 contract.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "required_item_repair": false,
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-posterior-forecast-minimizes-scoring-risk",
+        "path": "items/thm-posterior-forecast-minimizes-scoring-risk.md",
+        "affected_use": "F2 and proof steps 1.1 and 2.1 use properness for pointwise minimization and nonnegative regret, then strictness for almost-sure equality of forecasts.",
+        "reason": "The Statement and Given already assume a proper loss, and the uniqueness clause additionally assumes strict propriety and finite posterior expected risk. Adding properness to strictness validates F2 directly; no consumer statement or proof changes are needed. Exact F2/F3 quotation mirrors were updated in the owning batch-8 contract.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "required_item_repair": false,
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "alg-validation-temperature-scaling",
+        "path": "items/alg-validation-temperature-scaling.md",
+        "affected_use": "Definition uses S_log(q,j)=-log(q_j) for validation NLL; Definition references cites strict propriety while explicitly denying a finite-sample calibration guarantee.",
+        "reason": "The logarithmic formula, finite candidate temperature selection and caveat are unchanged. The cited local theorem proves both properness and strictness, so the stronger defining conjunction preserves every actual use.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "required_item_repair": false,
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "def-binned-expected-calibration-error",
+        "path": "items/def-binned-expected-calibration-error.md",
+        "affected_use": "The final Definition sentence contrasts binned accuracy/confidence summaries with log and Brier losses and states that the latter are strictly proper.",
+        "reason": "Both properties of log and Brier are proved in the cited local theorem, so the sentence remains true after explicitly including properness. No change to the bin statistics or their interpretation is needed.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "required_item_repair": false,
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      },
+      {
+        "id": "thm-finite-action-gibbs-policy-optimum",
+        "path": "items/thm-finite-action-gibbs-policy-optimum.md",
+        "affected_use": "F2 and proof step 4.1 identify D(p||p*) with excess logarithmic expected loss and use strict propriety to prove nonnegativity and uniqueness when |Y|>=2.",
+        "reason": "The expected logarithmic-loss formula is unchanged, and the cited theorem proves its minimizing inequality and equality case. Step 4.1 treats |Y|=1 separately and uses full support of p* to keep the difference finite. The correction preserves this argument.",
+        "disposition": "unaffected",
+        "route": "frontier-owner",
+        "required_item_repair": false,
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "required_metadata_repair": {
+          "path": "research/machine-learning-all-101-2026-10-19-batch-96.proof-contracts.json",
+          "fact": "F2",
+          "source": "def-proper-scoring-rule",
+          "affected_use": "The current supplier quotation copies the entire Definition and still contains the old strict-propriety clause.",
+          "minimality": "The batch-96 owner should refresh only this source quotation to include \"it is proper and\"; all finite logarithmic formulas and the consumer proof remain sound."
+        }
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-8.proof-contracts.json --items def-proper-scoring-rule --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; one selected contract; zero errors and warnings."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-proper-scoring-rule.md --json",
+        "exit_code": 0,
+        "result": "One file checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-proper-scoring-rule.md --json",
+        "exit_code": 0,
+        "result": "not-applicable; one definition, zero checked proofs, zero failures."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/machine-learning-all-101-2026-10-19-batch-8.proof-contracts.json --items def-proper-scoring-rule --json",
+        "exit_code": 0,
+        "result": "ml101-finite-proper-scoring passed: truthful logarithmic loss 0, opposite-vertex loss infinity, Brier regret 2, zero-mass infinite terms omitted. This finite check does not prove general propriety."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-proper-scoring-rule.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "Read-only report-integrity assertions using tools/item-hash.mjs and the frozen repeat-1.json",
+        "exit_code": 0,
+        "result": "Exact pack digest and rejected-tuple coverage match; current guard matches the recorded review. Reversing only the four-word defining-clause insertion recovers the frozen before guard. The immediate review-context hash was preserved."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collects this fatal decision, routes all five frontier consumer contexts and the batch-96 quotation refresh, then performs ordinary certification and independent current rejudgment. No judge or workflow transition was launched."
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-8.proof-contracts.json": "aea61b5b5c02db936013565e8c86c6ecfafa0a3af9504ca4ba96ad3ca2928b59"
+  }
+}

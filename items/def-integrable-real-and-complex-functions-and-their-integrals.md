@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [prop-closure-properties-of-measurable-functions-used-by-the-integral, def-nonnegative-lebesgue-integral, def-complex-conjugate-real-imaginary-part-and-modulus]
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-integrable-real-and-complex-functions-and-their-integrals.json
   audited: 2026-08-27
   precheck: n/a
 sources:
@@ -25,7 +26,7 @@ sources:
 Let $f:X\to\mathbb R$ be measurable. Its positive and negative parts are
 $$f^+:=\max\{f,0\},\qquad f^-:=\max\{-f,0\};$$
 they are measurable by
-[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and
+Closure properties of measurable functions used by the integral and
 satisfy $f=f^+-f^-$ and $|f|=f^++f^-$.
 
 The **Lebesgue integral of a real measurable function** is defined whenever at
@@ -36,6 +37,13 @@ when $\int|f|\,d\mu<+\infty$.
 
 For a complex measurable function $h=u+iv$ with
 $u=\operatorname{Re}h,\ v=\operatorname{Im}h$
-([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be
+(Real and imaginary parts, complex conjugation, and modulus), define $h$ to be
 **integrable** when $|h|$ is integrable, and then define
 $$\int h\,d\mu:=\int u\,d\mu+i\int v\,d\mu.$$
+
+## Definition references
+
+[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]
+
+[[def-complex-conjugate-real-imaginary-part-and-modulus]]
+

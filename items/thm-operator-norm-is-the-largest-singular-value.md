@@ -12,8 +12,8 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-operator-norm-is-the-largest-singular-value.json
   precheck: pass
-  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-operator-norm-is-the-largest-singular-value.json
 sources:
   scraped: []
   references:
@@ -35,8 +35,12 @@ If $V\ne0$ and $s_1$ is the largest singular value of $T$, then
 $$\lVert T\rVert=s_1.$$
 
 In the nonzero case, the maximum in
-[[def-operator-norm-on-a-finite-dimensional-inner-product-space]] is attained at
+The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv|| is attained at
 a right-singular vector for $s_1$.
+
+## Statement references
+
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
 
 ## Facts & Assumptions
 

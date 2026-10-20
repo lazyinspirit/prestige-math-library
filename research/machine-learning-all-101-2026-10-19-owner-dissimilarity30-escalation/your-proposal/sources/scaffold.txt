@@ -1,0 +1,4796 @@
+PDF PAGE 1
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Sai Praneeth Karimireddy 1 2 Satyen Kale 3 Mehryar Mohri 3 4 Sashank J. Reddi 3 Sebastian U. Stich 1
+Ananda Theertha Suresh 3
+Abstract
+Federated Averaging (FEDAVG) has emerged as
+the algorithm of choice for federated learning
+due to its simplicity and low communication
+cost.
+However, in spite of recent research ef-
+forts, its performance is not fully understood. We
+obtain tight convergence rates for FEDAVG and
+prove that it suffers from ‘client-drift’ when the
+data is heterogeneous (non-iid), resulting in un-
+stable and slow convergence.
+As a solution, we propose a new algorithm
+(SCAFFOLD) which uses control variates (vari-
+ance reduction) to correct for the ‘client-drift’ in
+its local updates. We prove that SCAFFOLD re-
+quires signiﬁcantly fewer communication rounds
+and is not affected by data heterogeneity or client
+sampling. Further, we show that (for quadratics)
+SCAFFOLD can take advantage of similarity in
+the client’s data yielding even faster convergence.
+The latter is the ﬁrst result to quantify the useful-
+ness of local-steps in distributed optimization.
+1. Introduction
+Federated learning has emerged as an important paradigm
+in modern large-scale machine learning. Unlike in tradi-
+tional centralized learning where models are trained using
+large datasets stored in a central server (Dean et al., 2012;
+Iandola et al., 2016; Goyal et al., 2017), in federated learn-
+ing, the training data remains distributed over a large num-
+ber of clients, which may be phones, network sensors, hos-
+pitals, or alternative local information sources (Koneˇcn`y
+et al., 2016b;a; McMahan et al., 2017; Mohri et al., 2019;
+Kairouz et al., 2019).
+A centralized model (referred to
+as server model) is then trained without ever transmitting
+1EPFL, Lausanne 2Based on work performed at Google Re-
+search, New York. 3Google Research, New York 4Courant Insti-
+tute, New York. Correspondence to: Sai Praneeth Karimireddy
+<sai.karimireddy@epﬂ.ch>.
+Proceedings of the 37 th International Conference on Machine
+Learning, Vienna, Austria, PMLR 119, 2020. Copyright 2020 by
+the author(s).
+client data over the network, thereby ensuring a basic level
+of privacy. In this work, we investigate stochastic optimiza-
+tion algorithms for federated learning.
+The key challenges for federated optimization are 1) deal-
+ing with unreliable and relatively slow network connections
+between the server and the clients, 2) only a small subset
+of clients being available for training at a given time, and
+3) large heterogeneity (non-iid-ness) in the data present on
+the different clients (Koneˇcn`y et al., 2016a). The most pop-
+ular algorithm for this setting is FEDAVG (McMahan et al.,
+2017). FEDAVG tackles the communication bottleneck by
+performing multiple local updates on the available clients
+before communicating to the server. While it has shown
+success in certain applications, its performance on hetero-
+geneous data is still an active area of research (Li et al.,
+2018; Yu et al., 2019; Li et al., 2019b; Haddadpour & Mah-
+davi, 2019; Khaled et al., 2020). We prove that indeed such
+heterogeneity has a large effect on FEDAVG—it introduces
+a drift in the updates of each client resulting in slow and un-
+stable convergence. Further, we show that this client-drift
+persists even if full batch gradients are used and all clients
+participate throughout the training.
+As a solution, we propose a new Stochastic Controlled Av-
+eraging algorithm (SCAFFOLD) which tries to correct for
+this client-drift. Intuitively, SCAFFOLD estimates the up-
+date direction for the server model (c) and the update direc-
+tion for each client ci.1 The difference (c −ci) is then an
+estimate of the client-drift which is used to correct the local
+update. This strategy successfully overcomes heterogene-
+ity and converges in signiﬁcantly fewer rounds of commu-
+nication. Alternatively, one can see heterogeneity as intro-
+ducing ‘client-variance’ in the updates across the different
+clients and SCAFFOLD then performs ‘client-variance re-
+duction’ (Schmidt et al., 2017; Johnson & Zhang, 2013;
+Defazio et al., 2014). We use this viewpoint to show that
+SCAFFOLD is relatively unaffected by client sampling.
+Finally, while accommodating heterogeneity is important,
+it is equally important that a method can take advantage of
+similarities in the client data. We prove that SCAFFOLD
+indeed has such a property, requiring fewer rounds of com-
+1We refer to these estimates as control variates and the result-
+ing correction technique as stochastic controlled averaging.
+
+PDF PAGE 2
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+munication when the clients are more similar.
+Contributions.
+We summarize our main results below.
+• We derive tighter convergence rates for FEDAVG than
+previously known for convex and non-convex functions
+with client sampling and heterogeneous data.
+• We give matching lower bounds to prove that even with
+no client sampling and full batch gradients, FEDAVG
+can be slower than SGD due to client-drift.
+• We propose a new Stochastic Controlled Averaging al-
+gorithm (SCAFFOLD) which corrects for this client-
+drift. We prove that SCAFFOLD is at least as fast as
+SGD and converges for arbitrarily heterogeneous data.
+• We show SCAFFOLD can additionally take advantage
+of similarity between the clients to further reduce the
+communication required, proving the advantage of tak-
+ing local steps over large-batch SGD for the ﬁrst time.
+• We prove that SCAFFOLD is relatively unaffected by
+the client sampling obtaining variance reduced rates,
+making it especially suitable for federated learning.
+Finally, we conﬁrm our theoretical results on simulated and
+real datasets (extended MNIST by Cohen et al. (2017)).
+Related work. For identical clients, FEDAVG coincides
+with parallel SGD analyzed by (Zinkevich et al., 2010) who
+proved asymptotic convergence. Stich (2018) and, more
+recently Stich & Karimireddy (2019); Patel & Dieuleveut
+(2019); Khaled et al. (2020), gave a sharper analysis of the
+same method, under the name of local SGD, also for iden-
+tical functions. However, there still remains a gap between
+their upper bounds and the lower bound of Woodworth
+et al. (2018). The analysis of FEDAVG for heterogeneous
+clients is more delicate due to the afore-mentioned client-
+drift, ﬁrst empirically observed by Zhao et al. (2018). Sev-
+eral analyses bound this drift by assuming bounded gradi-
+ents (Wang et al., 2019; Yu et al., 2019), or view it as addi-
+tional noise (Khaled et al., 2020), or assume that the client
+optima are ϵ-close (Li et al., 2018; Haddadpour & Mahdavi,
+2019). In a concurrent work, (Liang et al., 2019) propose to
+use variance reduction to deal with client heterogeneity but
+still show rates slower than SGD and do not support client
+sampling. Our method SCAFFOLD can also be seen as an
+improved version of the distributed optimization algorithm
+DANE by (Shamir et al., 2014), where a ﬁxed number of
+(stochastic) gradient steps are used in place of a proximal
+point update. A more in-depth discussion of related work
+is given in Appendix A. We summarize the complexities of
+different methods for heterogeneous clients in Table 2.
+2. Setup
+We formalize the problem as minimizing a sum of stochas-
+tic functions, with only access to stochastic samples:
+Table 1. Summary of notation used in the paper
+N, S, and i
+total num., sampled num., and index of clients
+R, r
+number, index of communication rounds
+K, k
+number, index of local update steps
+xr
+aggregated server model after round r
+yr
+i,k
+ith client’s model in round r and step k
+cr, cr
+i
+control variate of server, ith client after round r
+f(x⋆) = min
+x∈Rd
+
+f(x) := 1
+N
+N
+X
+i=1
+(fi(x) := Eζi[fi(x; ζi)])
+
+.
+The functions fi represents the loss function on client i. All
+our results can be easily extended to the weighted case.
+We assume that f is bounded from below by f ⋆and fi is
+β-smooth. Further, we assume gi(x) := ∇fi(x; ζi) is an
+unbiased stochastic gradient of fi with variance bounded
+by σ2. For some results, we assume µ ≥0 (strong) con-
+vexity. Note that σ only bounds the variance within clients.
+We also deﬁne two non-standard terminology below.
+(A1) (G, B)-BGD or bounded gradient dissimilarity:
+there exist constants G ≥0 and B ≥1 such that
+1
+N
+N
+X
+i=1
+∥∇fi(x)∥2 ≤G2 + B2∥∇f(x)∥2 , ∀x .
+If {fi} are convex, we can relax the assumption to
+1
+N
+N
+X
+i=1
+∥∇fi(x)∥2 ≤G2 + 2βB2(f(x) −f ⋆) , ∀x .
+(A2) δ-BHD or bounded Hessian dissimilarity:
+∥∇2fi(x) −∇2f(x)∥≤δ , ∀x .
+Further, fi is δ-weakly convex i.e. ∇2fi(x) ⪰−δI.
+The assumptions A1 and A2 are orthogonal—it is possible
+to have G = 0 and δ = 2β, or δ = 0 but G ≫1.
+3. Convergence of FedAvg
+In this section we review FEDAVG and improve its conver-
+gence analysis by deriving tighter rates than known before.
+The scheme consists of two main parts: local updates to the
+model (1), and aggregating the client updates to update the
+server model (2). In each round, a subset of clients S ⊆[N]
+are sampled uniformly. Each of these clients i ∈S copies
+the current sever model yi = x and performs K local up-
+dates of the form:
+yi ←yi −ηlgi(yi) .
+(1)
+Here ηl is the local step-size. Then the clients’ updates
+(yi−x) are aggregated to form the new server model using
+a global step-size ηg as:
+x ←x + ηg
+|S|
+X
+i∈S
+(yi −x) .
+(2)
+
+PDF PAGE 3
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Table 2. Number of communication rounds required to reach ϵ accuracy for µ strongly convex and non-convex functions (log factors
+are ignored). Set µ = ϵ for general convex rates. (G, B) bounds gradient dissimilarity (A1), and δ bounds Hessian dissimilarity (A2).
+Our rates for FEDAVG are more general and tighter than others, even matching the lower bound. However, SGD is still faster (B ≥1).
+SCAFFOLD does not require any assumptions, is faster than SGD, and is robust to client sampling. Further, when clients become more
+similar (small δ), SCAFFOLD converges even faster.
+Method
+Strongly convex
+Non-convex
+Sampling
+Assumptions
+SGD (large batch)
+σ2
+µNKϵ + 1
+µ
+σ2
+NKϵ2 + 1
+ϵ
+×
+–
+FedAvg
+(Li et al., 2019b)
+σ2
+µ2NKϵ + G2K
+µ2ϵ
+–
+×
+(G, 0)-BGD
+(Yu et al., 2019)
+–
+σ2
+NKϵ2 + G2NK
+ϵ
+×
+(G, 0)-BGD
+(Khaled et al., 2020)
+σ2+G2
+µNKϵ + σ+G
+µ√ϵ + NB2
+µ
+–
+×
+(G, B)-BGD
+Ours (Thm. I)1
+M2
+µSKϵ +
+G
+µ√ϵ + B2
+µ
+M2
+SKϵ2 +
+G
+ϵ3/2 + B2
+ϵ
+✓
+(G, B)-BGD
+Lower-bound (Thm. II)
+Ω(
+σ2
+µNKϵ +
+G
+√µϵ)
+?
+×
+(G, 1)-BGD
+FedProx (Li et al., 2018)2
+B2
+µ
+B2
+ϵ
+(weakly convex)
+✓
+σ = 0, (0, B)-BGD
+DANE (Shamir et al., 2014)2,3
+δ2
+µ2
+–
+×
+σ = 0, δ-BHD
+VRL-SGD (Liang et al., 2019)
+–
+Nσ2
+Kϵ2 + N
+ϵ
+×
+–
+SCAFFOLD
+Theorem III
+σ2
+µSKϵ + 1
+µ + N
+S
+σ2
+SKϵ2 + 1
+ϵ(N
+S )
+2
+3
+✓
+–
+Theorem IV3
+σ2
+µNKϵ +
+1
+µK + δ
+µ
+σ2
+NKϵ2 +
+1
+Kϵ + δ
+ϵ
+×
+δ-BHD
+1 M 2 := σ2 + K(1 −S
+N )G2. Note that M 2
+S = σ2
+N when no sampling (S = N).
+2 proximal point method i.e. K ≫1.
+3 proved only for quadratic functions.
+3.1. Rate of convergence
+We now state our novel convergence results for functions
+with bounded dissimilarity (proofs in Appendix D.2).
+Theorem I. For β-smooth functions {fi} which satisfy
+(A1), the output of FEDAVG has expected error smaller
+than ϵ for some values of ηl, ηg, R satisfying
+• Strongly convex: ηg ≥
+√
+S, ηl ≤
+1
+(1+B2)6βKηg , and
+R = ˜O
+
+σ2
+µKSϵ +
+ 1 −S
+N
+ G2
+µSϵ +
+√βG
+µ√ϵ + B2β
+µ
+
+,
+• General convex: ηg ≥
+√
+S, ηl ≤
+1
+(1+B2)6βKηg , and
+R = O
+ σ2D2
+KSϵ2 +
+ 1−S
+N
+G2D2
+Sϵ2 +
+√βG
+ϵ
+3
+2
++ B2βD2
+ϵ
+
+,
+• Non-convex: ηg ≥
+√
+S, ηl ≤
+1
+(1+B2)6βKηg , and
+R = O
+βσ2F
+KSϵ2 +
+ 1 −S
+N
+G2F
+Sϵ2 +
+√βG
+ϵ
+3
+2
++ B2βF
+ϵ
+
+,
+where D := ∥x0 −x⋆∥2 and F := f(x0) −f ⋆.
+It is illuminating to compare our rates with those of the
+simpler iid. case i.e. with G = 0 and B = 1.
+Our
+strongly-convex rates become
+σ2
+µSKϵ + 1
+µ. In comparison,
+the best previously known rate for this case was by Stich
+& Karimireddy (2019) who show a rate of
+σ2
+µSKϵ + S
+µ. The
+main source of improvement in the rates came from the
+use of two separate step-sizes (ηl and ηg). By having a
+larger global step-size ηg, we can use a smaller local step-
+size ηl thereby reducing the client-drift while still ensur-
+ing progress. However, even our improved rates do not
+match the lower-bound for the identical case of
+σ2
+µSKϵ +
+1
+Kµ
+(Woodworth et al., 2018). We bridge this gap for quadratic
+functions in Section 6.
+We now compare FEDAVG to two other algorithms Fed-
+Prox by (Li et al., 2018) (aka EASGD by (Zhang et al.,
+2015)) and to SGD. Suppose that G = 0 and σ = 0 i.e.
+we use full batch gradients and all clients have very similar
+optima. In such a case, FEDAVG has a complexity of B2
+µ
+which is identical to that of FedProx (Li et al., 2018). Thus,
+FedProx does not have any theoretical advantage.
+Next, suppose that all clients participate (no sampling) with
+S = N and there is no variance σ = 0.
+Then, the
+
+PDF PAGE 4
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+x
+y1
+client 1
+y2
+client 2
+x⋆
+2
+x⋆
+1
+x⋆
+server
+client update
+client drift
+server update
+SGD update
+true opt.
+client opt.
+Figure 1. Client-drift in FEDAVG is illustrated for 2 clients with
+3 local steps (N = 2, K = 3). The local updates yi (in blue)
+move towards the individual client optima x⋆
+i (orange square).
+The server updates (in red) move towards
+1
+N
+P
+i x⋆
+i instead of to
+the true optimum x⋆(black square).
+above for strongly-convex case simpliﬁes to
+G
+µ√ϵ + B2
+µ . In
+comparison, extending the proof of (Khaled et al., 2020)
+using our techniques gives a worse dependence on G of
+G2
+µKNϵ +
+G
+µ√ϵ. Similarly, for the non-convex case, our rates
+are tighter and have better dependence on G than (Yu et al.,
+2019). However, simply running SGD in this setting would
+give a communication complexity of β
+µ which is faster, and
+independent of similarity assumptions. In the next section
+we examine the necessity of such similarity assumptions.
+3.2. Lower bounding the effect of heterogeneity
+We now show that when the functions {fi} are distinct,
+the local updates of FEDAVG on each client experiences
+drift thereby slowing down convergence. We show that the
+amount of this client drift, and hence the slowdown in the
+rate of convergence, is exactly determined by the gradient
+dissimilarity parameter G in (A1).
+We now examine the mechanism by which the client-drift
+arises (see Fig. 1). Let x⋆be the global optimum of f(x)
+and x⋆
+i be the optimum of each client’s loss function fi(x).
+In the case of heterogeneous data, it is quite likely that each
+of these x⋆
+i is far away from the other, and from the global
+optimum x⋆. Even if all the clients start from the same
+point x, each of the yi will move towards their client opti-
+mum x⋆
+i . This means that the average of the client updates
+(which is the server update) moves towards
+1
+N
+PN
+i=1 x⋆
+i .
+This difference between 1
+N
+PN
+i=1 x⋆
+i and the true optimum
+x⋆is exactly the cause of client-drift. To counter this drift,
+FEDAVG is forced to use much smaller step-sizes which in
+turn hurts convergence. We can formalize this argument to
+prove a lower-bound (see Appendix D.4 for proof).
+Theorem II. For any positive constants G and µ, there
+exist µ-strongly convex functions satisfying A1 for which
+FEDAVG with K ≥2, σ = 0 and N = S has an error
+Algorithm 1 SCAFFOLD: Stochastic Controlled Averag-
+ing for federated learning
+1: server input: initial x and c, and global step-size ηg
+2: client i’s input: ci, and local step-size ηl
+3: for each round r = 1, . . . , R do
+4:
+sample clients S ⊆{1, . . . , N}
+5:
+communicate (x, c) to all clients i ∈S
+6:
+on client i ∈S in parallel do
+7:
+initialize local model yi ←x
+8:
+for k = 1, . . . , K do
+9:
+compute mini-batch gradient gi(yi)
+10:
+yi ←yi −ηl (gi(yi) −ci + c)
+11:
+end for
+12:
+c+
+i ←(i) gi(x), or (ii) ci −c +
+1
+Kηl (x −yi)
+13:
+communicate (∆yi, ∆ci) ←(yi −x, c+
+i −ci)
+14:
+ci ←c+
+i
+15:
+end on client
+16:
+(∆x, ∆c) ←
+1
+|S|
+P
+i∈S(∆yi, ∆ci)
+17:
+x ←x + ηg∆x and c ←c + |S|
+N ∆c
+18: end for
+f(xr) −f(x⋆) ≥Ω
+ G2
+µR2
+
+.
+This implies that the
+G
+√ϵ term is unavoidable even if there
+is no stochasticity. Further, because FEDAVG uses RKN
+stochastic gradients, we also have the statistical lower-
+bound of
+σ2
+µKNϵ. Together, these lower bounds prove that
+the rate derived in Theorem I is nearly optimal (up to de-
+pendence on µ). In the next section, we introduce a new
+method SCAFFOLD to mitigate this client-drift.
+4. SCAFFOLD algorithm
+In this section we ﬁrst describe SCAFFOLD and then dis-
+cuss how it solves the problem of client-drift.
+Method.
+SCAFFOLD has three main steps: local up-
+dates to the client model (3), local updates to the client
+control variate (4), and aggregating the updates (5). We
+describe each in more detail.
+Along with the server model x, SCAFFOLD maintains a
+state for each client (client control variate ci) and for the
+server (server control variate c). These are initialized to
+ensure that c =
+1
+N
+P ci and can safely all be initialized to
+0. In each round of communication, the server parameters
+(x, c) are communicated to the participating clients S ⊂
+[N]. Each participating client i ∈S initializes its local
+model with the server model yi ←x. Then it makes a pass
+over its local data performing K updates of the form:
+yi ←yi + ηl(gi(yi) + c −ci) .
+(3)
+Then, the local control variate ci is also updated. For this,
+
+PDF PAGE 5
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+x
+x⋆
+1
+x⋆
+correction
+local gradient
+y1
+client update
+Figure 2. Update steps of SCAFFOLD on a single client. The
+local gradient (dashed black) points to x⋆
+1 (orange square), but
+the correction term (c −ci) (in red) ensures the update moves
+towards the true optimum x⋆(black square).
+we provide two options:
+c+
+i ←
+(
+Option I.
+gi(x) , or
+Option II.
+ci −c +
+1
+Kηl (x −yi) .
+(4)
+Option I involves making an additional pass over the local
+data to compute the gradient at the server model x. Op-
+tion II instead re-uses the previously computed gradients
+to update the control variate. Option I can be more stable
+than II depending on the application, but II is cheaper to
+compute and usually sufﬁces (all our experiments use Op-
+tion II). The client updates are then aggregated and used to
+update the server parameters:
+x ←x + ηg
+|S|
+X
+i∈S
+(yi −x) ,
+c ←c + 1
+N
+X
+i∈S
+(c+
+i −ci) .
+(5)
+This ﬁnishes one round of communication. Note that the
+clients in SCAFFOLD are stateful and retain the value of
+ci across multiple rounds. Further, if ci is always set to 0,
+then SCAFFOLD becomes equivalent to FEDAVG. The
+full details are summarized in Algorithm 1.
+Usefulness of control variates.
+If communication cost
+was not a concern, the ideal update on client i would be
+yi ←yi + 1
+N
+X
+j
+gj(yi) .
+(6)
+Such an update essentially computes an unbiased gradient
+of f and hence becomes equivalent to running FEDAVG
+in the iid case (which has excellent performance). Unfor-
+tunately such an update requires communicating with all
+clients for every update step. SCAFFOLD instead uses
+control variates such that
+cj ≈gj(yi) and c ≈1
+N
+X
+j
+gj(yi) .
+Then, SCAFFOLD (3) mimics the ideal update (6) with
+(gi(yi) −ci + c) ≈1
+N
+X
+j
+gj(yi) .
+Thus, the local updates of SCAFFOLD remain synchro-
+nized and converge for arbitrarily heterogeneous clients.
+5. Convergence of SCAFFOLD
+We state the rate of SCAFFOLD without making any as-
+sumption on the similarity between the functions. See Ap-
+pendix E for the full proof.
+Theorem III. For any β-smooth functions {fi}, the output
+of SCAFFOLD has expected error smaller than ϵ for ηg =
+√
+S and some values of ηl, R satisfying
+• Strongly convex: ηl ≤min
+
+1
+81βKηg ,
+S
+15µNKηg
+
+and
+R = ˜O
+
+σ2
+µKSϵ + β
+µ + N
+S
+
+,
+• General convex: ηl ≤
+1
+81βKηg and
+R = ˜O
+ σ2D2
+KSϵ2 + βD2
+ϵ
++ NF
+S
+
+,
+• Non-convex: ηl ≤
+1
+24Kηgβ
+  S
+N
+ 2
+3 and
+R = O
+βσ2F
+KSϵ2 +
+N
+S
+ 2
+3 βF
+ϵ
+
+,
+where D := ∥x0 −x⋆∥2 and F := f(x0) −f ⋆.
+Let us ﬁrst examine the rates without client sampling (S =
+N). For the strongly convex case, the number of rounds be-
+comes
+σ2
+µNKϵ + 1
+µ. This rate holds for arbitrarily heteroge-
+neous clients unlike Theorem I and further matches that of
+SGD with K times larger batch-size, proving that SCAF-
+FOLD is at least as fast as SGD. These rates also match
+known lower-bounds for distributed optimization (Arjevani
+& Shamir, 2015) (up to acceleration) and are unimprovable
+in general. However in certain cases SCAFFOLD is prov-
+ably faster than SGD. We show this fact in Section 6.
+Now let σ = 0. Then our rates in the strongly-convex case
+are 1
+µ + N
+S and
+  N
+S
+ 2
+3 1
+ϵ in the non-convex case. These ex-
+actly match the rates of SAGA (Defazio et al., 2014; Reddi
+et al., 2016c). In fact, when σ = 0, K = 1 and S = 1,
+the update of SCAFFOLD with option I reduces to SAGA
+where in each round consists of sampling one client fi.
+Thus SCAFFOLD can be seen as an extension of vari-
+ance reduction techniques for federated learning, and one
+could similarly extend SARAH (Nguyen et al., 2017), SPI-
+DER (Fang et al., 2018), etc. Note that standard SGD with
+client sampling is provably slower and converges at a sub-
+linear rate even with σ = 0.
+Proof sketch.
+For simplicity, assume that σ = 0 and con-
+sider the ideal update of (6) which uses the full gradient
+∇f(y) every step. Clearly, this would converge at a lin-
+ear rate even with S = 1. FEDAVG would instead use an
+
+PDF PAGE 6
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+update ∇fi(y). The difference between the ideal update
+(6) and the FEDAVG update (1) is ∥∇fi(y) −∇f(y)∥.
+We need a bound on the gradient-dissimilarity as in (A1)
+to bound this error. SCAFFOLD instead uses the update
+∇fi(y) −ci + c, and the difference from ideal update be-
+comes
+X
+i
+∥(∇fi(y)−ci +c)−∇f(y)∥2 ≤
+X
+i
+∥ci −∇fi(y)∥2 .
+Thus, the error is independent of how similar or dissimilar
+the functions fi are, and instead only depends on the qual-
+ity of our approximation ci ≈∇fi(y). Since fi is smooth,
+we can expect that the gradient ∇fi(y) does not change too
+fast and hence is easy to approximate. Appendix E trans-
+lates this intuition into a formal proof.
+6. Usefulness of local steps
+In this section we investigate when and why taking local
+steps might be useful over simply computing a large-batch
+gradient in distributed optimization.
+We will show that
+when the functions across the clients share some similarity,
+local steps can take advantage of this and converge faster.
+For this we consider quadratic functions and express their
+similarity with the δ parameter introduced in (A2).
+Theorem IV. For any β-smooth quadratic functions {fi}
+with δ bounded Hessian dissimilarity (A2), the output of
+SCAFFOLD with S = N (no sampling) has error smaller
+than ϵ for ηg = 1 and some values of ηl, R satisfying
+• Strongly convex: ηl ≤
+1
+15Kδ+8β and
+R = ˜O
+ βσ2
+µKNϵ + β + δK
+µK
+
+,
+• Weakly convex: ηl ≤
+1
+15Kδ+8β and
+R = O
+ βσ2F
+KNϵ2 + (β + δK)F
+Kϵ
+
+,
+where we deﬁne F := (f(x0) −f ⋆).
+When σ = 0 and K is large, the complexity of SCAF-
+FOLD becomes δ
+µ. In contrast DANE, which being a prox-
+imal point method also uses large K, requires ( δ
+µ)2 rounds
+(Shamir et al., 2014) which is signiﬁcantly slower, or needs
+an additional backtracking-line search to match the rates
+of SCAFFOLD (Yuan & Li, 2019). Further, Theorem IV
+is the ﬁrst result to demonstrate improvement due to simi-
+lairty for non-convex functions as far as we are aware.
+Suppose that {fi} are identical. Recall that δ in (A2) mea-
+sures the Hessian dissimilarity between functions and so
+δ = 0 for this case. Then Theorem IV shows that the com-
+plexity of SCAFFOLD is
+σ2
+µKNϵ +
+1
+µK which (up to ac-
+celeration) matches the i.i.d. lower bound of (Woodworth
+et al., 2018). In contrast, SGD with K times larger batch-
+size would require
+σ2
+µKNϵ + 1
+µ (note the absence of K in the
+second term). Thus, for identical functions, SCAFFOLD
+(and in fact even FEDAVG) improves linearly with increas-
+ing number of local steps. In the other extreme, if the func-
+tions are arbitrarily different, we may have δ = 2β. In this
+case, the complexity of SCAFFOLD and large-batch SGD
+match the lower bound of Arjevani & Shamir (2015) for the
+heterogeneous case.
+The above insights can be generalized to when the func-
+tions are only somewhat similar. If the Hessians are δ-close
+and σ = 0, then the complexity is β+δK
+µK . This bound im-
+plies that the optimum number of local steps one should
+use is K =
+β
+δ . Picking a smaller K increases the com-
+munication required whereas increasing it further would
+only waste computational resources. While this result is
+intuitive—if the functions are more ‘similar’, local steps
+are more useful—Theorem IV shows that it is the similar-
+ity of the Hessians which matters. This is surprising since
+the Hessians of {fi} may be identical even if their individ-
+ual optima x⋆
+i are arbitrarily far away from each other and
+the gradient-dissimilarity (A1) is unbounded.
+Proof sketch.
+Consider a simpliﬁed SCAFFOLD up-
+date with σ = 0 and no sampling (S = N):
+yi = yi −η(∇fi(yi) + ∇f(x) −∇fi(x)) .
+We would ideally want to perform the update yi = yi −
+η∇f(yi) using the full gradient ∇f(yi). We reinterpret
+the correction term of SCAFFOLD (c −ci) as perform-
+ing the following ﬁrst order correction to the local gradient
+∇fi(yi) to make it closer to the full gradient ∇f(yi):
+∇fi(yi) −∇fi(x)
+|
+{z
+}
+≈∇2fi(x)(yi−x)
++
+∇f(x)
+| {z }
+≈∇f(yi)+∇2f(x)(x−yi)
+≈∇f(yi) + (∇2fi(x) −∇2f(x))(yi −x)
+≈∇f(yi) + δ(yi −x)
+Thus the SCAFFOLD update approximates the ideal up-
+date up to an error δ. This intuition is proved formally for
+quadratic functions in Appendix F. Generalizing these re-
+sults to other functions is a challenging open problem.
+7. Experiments
+We run experiments on both simulated and real datasets
+to conﬁrm our theory. Our main ﬁndings are i) SCAF-
+FOLD consistently outperforms SGD and FEDAVG across
+all parameter regimes, and ii) the beneﬁt (or harm) of local
+steps depends on both the algorithm and the similarity of
+the clients data.
+
+PDF PAGE 7
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+0
+20
+40
+60
+10−3
+100
+103
+loss
+G = 1
+0
+20
+40
+60
+10−3
+100
+103
+G = 10
+0
+20
+40
+60
+10−3
+100
+103
+G = 100
+SGD, K = 1
+FedAvg, K = 2
+FedAvg, K = 10
+0
+20
+40
+60
+rounds
+10−20
+10−10
+100
+loss
+0
+20
+40
+60
+rounds
+10−20
+10−10
+100
+0
+20
+40
+60
+rounds
+10−20
+10−10
+100
+SGD, K = 1
+Scaffold, K = 2
+Scaffold, K = 10
+Figure 3. SGD (dashed black), FedAvg (above), and SCAFFOLD
+(below) on simulated data. FedAvg gets worse as local steps in-
+creases with K = 10 (red) worse than K = 2 (orange). It also
+gets slower as gradient-dissimilarity (G) increases (to the right).
+SCAFFOLD signiﬁcantly improves with more local steps, with
+K = 10 (blue) faster than K = 2 (light blue) and SGD. Its per-
+formance is identical as we vary heterogeneity (G).
+7.1. Setup
+Our simulated experiments uses N = 2 quadratic func-
+tions based on our lower-bounds in Theorem II. We use
+full-batch gradients (σ = 0) and no client sampling. Our
+real world experiments run logistic regression (convex) and
+2 layer fully connected network (non-convex) on the EM-
+NIST (Cohen et al., 2017). We divide this dataset among
+N = 100 clients as follows: for s% similar data we allocate
+to each client s% i.i.d. data and the remaining (100 −s)%
+by sorting according to label (cf. Hsu et al. (2019)).
+We consider four algorithms:
+SGD, FEDAVG SCAF-
+FOLD and FEDPROX with SGD as the local solver (Li
+et al., 2018). On each client SGD uses the full local data
+to compute a single update, whereas the other algorithms
+take 5 steps per epoch (batch size is 0.2 of local data). We
+always use global step-size ηg = 1 and tune the local step-
+size ηl individually for each algorithm. SCAFFOLD uses
+option II (no extra gradient computations) and FEDPROX
+has ﬁxed regularization = 1 to keep comparison fair.
+7.2. Simulated results
+The results are summarized in Fig. 3. Our simulated data
+has Hessian difference δ = 1 (A2) and β = 1. We vary the
+gradient heterogeneity (A1) as G ∈[1, 10, 100]. For all val-
+ued of G, FEDAVG gets slower as we increase the number
+of local steps. This is explained by the fact that client-drift
+increases as we increase the number of local steps, hinder-
+ing progress. Further, as we increase G, FEDAVG continues
+to slow down exactly as dictated by Thms. I and II. Note
+that when heterogeneity is small (G = β = 1), FEDAVG
+can be competitive with SGD.
+SCAFFOLD is consistently faster than SGD, with K = 2
+being twice as fast and K = 10 about 5 times faster. Fur-
+ther, its convergence is completely unaffected by G, con-
+ﬁrming our theory in Thm. III. The former observation that
+we do not see linear improvement with K is explained by
+Thm. IV since we have δ > 0. This sub linear improvement
+is still signiﬁcantly faster than both SGD and FEDAVG.
+7.3. EMNIST results
+We run extensive experiments on the EMNIST dataset to
+measure the interplay between the algorithm, number of
+epochs (local updates), number of participating clients, and
+the client similarity. Table 3 measures the beneﬁt (or harm)
+of using more local steps, Table 4 studies the resilience to
+client sampling, and Table 5 reports preliminary results on
+neural networks. We are mainly concerned with minimiz-
+ing the number of communication rounds. We observe that
+SCAFFOLD is consistently the best. Across all range
+of values tried, we observe that SCAFFOLD outperforms
+SGD, FEDAVG, and FEDPROX. The latter FEDPROX is
+always slower than the other local update methods, though
+in some cases it outperforms SGD. Note that it is possible
+to improve FEDPROX by carefully tuning the regularization
+parameter (Li et al., 2018). FEDAVG is always slower than
+SCAFFOLD and faster than FEDPROX.
+SCAFFOLD > SGD > FedAvg for heterogeneous
+clients. When similarity is 0%, FEDAVG gets slower with
+increasing local steps. If we take more than 5 epochs, its
+performance is worse than SGD’s. SCAFFOLD initially
+worsens as we increase the number of epochs but then ﬂat-
+tens. However, its performance is always better than that of
+SGD, conﬁrming that it can handle heterogeneous data.
+SCAFFOLD and FedAvg get faster with more similar-
+ity, but not SGD. As similarity of the clients increases, the
+performance of SGD remains relatively constant. On the
+other hand, SCAFFOLD and FEDAVG get signiﬁcantly
+faster as similarity increases. Further, local steps become
+much more useful, showing monotonic improvement with
+the increase in number of epochs. This is because with
+increasing the i.i.d.ness of the data, both the gradient and
+Hessian dissimilarity decrease.
+SCAFFOLD is resilient to client sampling. As we de-
+crease the fraction of clients sampled, SCAFFOLD ,and
+FEDAVG only show a sub-linear slow-down.
+They are
+more resilient to sampling in the case of higher similarity.
+SCAFFOLD outperforms FedAvg on non-convex exper-
+iments. We see that SCAFFOLD is better than FEDAVG
+in terms of ﬁnal test accuracy reached, though interestingly
+FEDAVG seems better than SGD even when similarity is 0.
+However, much more extensive experiments (beyond cur-
+rent scope) are needed before drawing conclusions.
+
+PDF PAGE 8
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Table 3. Communication rounds to reach 0.5 test accuracy for logistic regression on EMNIST as we vary number of epochs. 1k+
+indicates 0.5 accuracy was not reached even after 1k rounds, and similarly an arrowhead indicates that the barplot extends beyond the
+table. 1 epoch for local update methods corresponds to 5 local steps (0.2 batch size), and 20% of clients are sampled each round. We
+ﬁx µ = 1 for FEDPROX and use variant (ii) for SCAFFOLD to ensure all methods are comparable. Across all parameters (epochs and
+similarity), SCAFFOLD is the fastest method. When similarity is 0 (sorted data), FEDAVG consistently gets worse as we increase the
+number of epochs, quickly becoming slower than SGD. SCAFFOLD initially gets worse and later stabilizes, but is always at least as
+fast as SGD. As similarity increases (i.e. data is more shufﬂed), both FEDAVG and SCAFFOLD signiﬁcantly outperform SGD though
+SCAFFOLD is still better than FEDAVG. Further, with higher similarity, both methods beneﬁt from increasing number of epochs.
+Epochs
+0% similarity (sorted)
+10% similarity
+100% similarity (i.i.d.)
+Num. of rounds
+Speedup
+Num. of rounds
+Speedup
+Num. of rounds
+Speedup
+SGD
+1
+317
+(1×)
+365
+(1×)
+416
+(1×)
+SCAFFOLD1
+77
+(4.1×)
+62
+(5.9×)
+60
+(6.9×)
+5
+152
+(2.1×)
+20
+(18.2×)
+10
+(41.6×)
+10
+286
+(1.1×)
+16
+(22.8×)
+7
+(59.4×)
+20
+266
+(1.2×)
+11
+(33.2×)
+4
+(104×)
+FedAvg
+1
+258
+(1.2×)
+74
+(4.9×)
+83
+(5×)
+5
+428
+(0.7×)
+34
+(10.7×)
+10
+(41.6×)
+10
+711
+(0.4×)
+25
+(14.6×)
+6
+(69.3×)
+20
+1k+
+(< 0.3×)
+18
+(20.3×)
+4
+(104×)
+FedProx
+1
+1k+
+(< 0.3×)
+979
+(0.4×)
+459
+(0.9×)
+5
+1k+
+(< 0.3×)
+794
+(0.5×)
+351
+(1.2×)
+10
+1k+
+(< 0.3×)
+894
+(0.4×)
+308
+(1.4×)
+20
+1k+
+(< 0.3×)
+916
+(0.4×)
+351
+(1.2×)
+Table 4. Communication rounds to reach 0.45 test accuracy for
+logistic regression on EMNIST as we vary the number of sam-
+pled clients. Number of epochs is kept ﬁxed to 5. SCAFFOLD is
+consistently faster than FEDAVG. As we decrease the number of
+clients sampled in each round, the increase in number of rounds
+is sub-linear. This slow-down is better for more similar clients.
+Clients
+0% similarity
+10% similarity
+SCAFFOLD
+20%
+143
+(1.0×)
+9
+(1.0×)
+5%
+290
+(2.0×)
+13
+(1.4×)
+1%
+790
+(5.5×)
+28
+(3.1×)
+FEDAVG
+20%
+179
+(1.0×)
+12
+(1.0×)
+5%
+334
+(1.9×)
+17
+(1.4×)
+1%
+1k+
+(5.6+×)
+35
+(2.9×)
+8. Conclusion
+Our work studied the impact of heterogeneity on the per-
+formance of optimization methods for federated learning.
+Our careful theoretical analysis showed that FEDAVG can
+be severely hampered by gradient dissimilarity, and can be
+even slower than SGD. We then proposed a new stochastic
+algorithm (SCAFFOLD) which overcomes gradient dis-
+similarity using control variates. We demonstrated the ef-
+fectiveness of SCAFFOLD via strong convergence guar-
+Table 5. Best test accuracy after 1k rounds with 2-layer fully con-
+nected neural network (non-convex) on EMNIST trained with
+5 epochs per round (25 steps) for the local methods, and 20%
+of clients sampled each round. SCAFFOLD has the best ac-
+curacy and SGD has the least. SCAFFOLD again outperforms
+other methods. SGD is unaffected by similarity, whereas the local
+methods improve with client similarity.
+0% similarity
+10% similarity
+SGD
+0.766
+0.764
+FEDAVG
+0.787
+0.828
+SCAFFOLD
+0.801
+0.842
+antees and empirical evaluations. Further, we showed that
+while SCAFFOLD is always at least as fast as SGD, it can
+be much faster depending on the Hessian dissimilarity in
+our data. Thus, different algorithms can take advantage of
+(and are limited by) different notions of dissimilarity. We
+believe that characterizing and isolating various dissimilar-
+ities present in real world data can lead to further new algo-
+rithms and signiﬁcant impact on distributed, federated, and
+decentralized learning.
+
+PDF PAGE 9
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Acknowledgments.
+We thank Filip Hanzely and Jakub
+Koneˇcn`y for discussions regarding variance reduction tech-
+niques and Blake Woodworth, Virginia Smith and Kumar
+Kshitij Patel for suggestions which improved the writing.
+References
+Agarwal, N., Suresh, A. T., Yu, F. X., Kumar, S., and
+McMahan, B.
+cpSGD: Communication-efﬁcient and
+differentially-private distributed SGD. In Proceedings
+of NeurIPS, pp. 7575–7586, 2018.
+Arjevani, Y. and Shamir, O.
+Communication complex-
+ity of distributed convex learning and optimization. In
+Advances in neural information processing systems, pp.
+1756–1764, 2015.
+Bassily, R., Smith, A., and Thakurta, A. Private empiri-
+cal risk minimization: Efﬁcient algorithms and tight er-
+ror bounds. In 2014 IEEE 55th Annual Symposium on
+Foundations of Computer Science, pp. 464–473. IEEE,
+2014.
+Basu, D., Data, D., Karakus, C., and Diggavi, S. Qsparse-
+local-SGD: Distributed SGD with quantization, spar-
+siﬁcation, and local computations.
+arXiv preprint
+arXiv:1906.02367, 2019.
+Bonawitz, K., Ivanov, V., Kreuter, B., Marcedone, A.,
+McMahan, H. B., Patel, S., Ramage, D., Segal, A.,
+and Seth, K. Practical secure aggregation for privacy-
+preserving machine learning. In Proceedings of the 2017
+ACM SIGSAC Conference on Computer and Communi-
+cations Security, pp. 1175–1191. ACM, 2017.
+Brisimi, T. S., Chen, R., Mela, T., Olshevsky, A., Pascha-
+lidis, I. C., and Shi, W. Federated learning of predic-
+tive models from federated electronic health records. In-
+ternational journal of medical informatics, 112:59–67,
+2018.
+Cen, S., Zhang, H., Chi, Y., Chen, W., and Liu, T.-Y.
+Convergence of distributed stochastic variance reduced
+methods without sampling extra data.
+arXiv preprint
+arXiv:1905.12648, 2019.
+Chaudhuri, K., Monteleoni, C., and Sarwate, A. D. Differ-
+entially private empirical risk minimization. Journal of
+Machine Learning Research, 12(Mar):1069–1109, 2011.
+Chen, M., Mathews, R., Ouyang, T., and Beaufays, F.
+Federated learning of out-of-vocabulary words. arXiv
+preprint arXiv:1903.10635, 2019a.
+Chen, M., Suresh, A. T., Mathews, R., Wong, A., Beau-
+fays, F., Allauzen, C., and Riley, M. Federated learning
+of N-gram language models. In Proceedings of the 23rd
+Conference on Computational Natural Language Learn-
+ing (CoNLL), 2019b.
+Cohen, G., Afshar, S., Tapson, J., and Van Schaik, A.
+Emnist:
+Extending mnist to handwritten letters.
+In
+2017 International Joint Conference on Neural Net-
+works (IJCNN), pp. 2921–2926. IEEE, 2017.
+Dean, J., Corrado, G., Monga, R., Chen, K., Devin, M.,
+Mao, M., Ranzato, M., Senior, A., Tucker, P., Yang, K.,
+Le, Q. V., and Ng, A. Y. Large scale distributed deep
+networks. In Advances in neural information processing
+systems, pp. 1223–1231, 2012.
+Defazio, A. and Bottou, L. On the ineffectiveness of vari-
+ance reduced optimization for deep learning.
+In Ad-
+vances in Neural Information Processing Systems, pp.
+1753–1763, 2019.
+Defazio, A., Bach, F., and Lacoste-Julien, S. SAGA: A
+fast incremental gradient method with support for non-
+strongly convex composite objectives. In Advances in
+neural information processing systems, pp. 1646–1654,
+2014.
+Fang, C., Li, C. J., Lin, Z., and Zhang, T. SPIDER: Near-
+optimal non-convex optimization via stochastic path-
+integrated differential estimator. In Advances in Neural
+Information Processing Systems, pp. 689–699, 2018.
+Glasserman, P. Monte Carlo methods in ﬁnancial engineer-
+ing, volume 53. Springer Science & Business Media,
+2013.
+Goyal,
+P.,
+Doll´ar,
+P.,
+Girshick,
+R.,
+Noordhuis,
+P.,
+Wesolowski, L., Kyrola, A., Tulloch, A., Jia, Y., and He,
+K. Accurate, large minibatch SGD: Training imagenet
+in 1 hour. arXiv preprint arXiv:1706.02677, 2017.
+Haddadpour, F. and Mahdavi, M. On the convergence of lo-
+cal descent methods in federated learning. arXiv preprint
+arXiv:1910.14425, 2019.
+Hanzely, F. and Richt´arik, P. One method to rule them all:
+Variance reduction for data, parameters and many new
+methods. arXiv preprint arXiv:1905.11266, 2019.
+Hard, A., Rao, K., Mathews, R., Beaufays, F., Augenstein,
+S., Eichner, H., Kiddon, C., and Ramage, D. Federated
+learning for mobile keyboard prediction. arXiv preprint
+arXiv:1811.03604, 2018.
+Hsu, T.-M. H., Qi, H., and Brown, M.
+Measuring the
+effects of non-identical data distribution for federated
+visual classiﬁcation. arXiv preprint arXiv:1909.06335,
+2019.
+
+PDF PAGE 10
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Iandola, F. N., Moskewicz, M. W., Ashraf, K., and Keutzer,
+K. Firecaffe: near-linear acceleration of deep neural net-
+work training on compute clusters. In Proceedings of
+the IEEE Conference on Computer Vision and Pattern
+Recognition, pp. 2592–2600, 2016.
+Johnson, R. and Zhang, T. Accelerating stochastic gradient
+descent using predictive variance reduction. In Advances
+in neural information processing systems, pp. 315–323,
+2013.
+Kairouz, P., McMahan, H. B., Avent, B., Bellet, A., Bennis,
+M., Bhagoji, A. N., Bonawitz, K., Charles, Z., Cormode,
+G., Cummings, R., et al. Advances and open problems
+in federated learning. arXiv preprint arXiv:1912.04977,
+2019.
+Karimi, H., Nutini, J., and Schmidt, M.
+Linear conver-
+gence of gradient and proximal-gradient methods un-
+der the polyak-łojasiewicz condition. In Joint European
+Conference on Machine Learning and Knowledge Dis-
+covery in Databases, pp. 795–811. Springer, 2016.
+Karimireddy, S. P., Rebjock, Q., Stich, S. U., and Jaggi, M.
+Error feedback ﬁxes SignSGD and other gradient com-
+pression schemes.
+arXiv preprint arXiv:1901.09847,
+2019.
+Khaled, A., Mishchenko, K., and Richt´arik, P. Tighter the-
+ory for local SGD on indentical and heterogeneous data.
+In Proceedings of AISTATS, 2020.
+Kifer, D., Smith, A., and Thakurta, A. Private convex em-
+pirical risk minimization and high-dimensional regres-
+sion. In Conference on Learning Theory, pp. 25–1, 2012.
+Koneˇcn`y, J., McMahan, H. B., Ramage, D., and Richt´arik,
+P.
+Federated optimization:
+Distributed machine
+learning for on-device intelligence.
+arXiv preprint
+arXiv:1610.02527, 2016a.
+Koneˇcn`y, J., McMahan, H. B., Yu, F. X., Richt´arik, P.,
+Suresh, A. T., and Bacon, D. Federated learning: Strate-
+gies for improving communication efﬁciency.
+arXiv
+preprint arXiv:1610.05492, 2016b.
+Kulunchakov, A. and Mairal, J.
+Estimate sequences for
+stochastic composite optimization: Variance reduction,
+acceleration, and robustness to noise.
+arXiv preprint
+arXiv:1901.08788, 2019.
+Lee, J. D., Lin, Q., Ma, T., and Yang, T.
+Distributed
+stochastic variance reduced gradient methods and a
+lower bound for communication complexity.
+arXiv
+preprint arXiv:1507.07595, 2015.
+Lei, L. and Jordan, M. Less than a single pass: Stochas-
+tically controlled stochastic gradient. In AISTATS, pp.
+148–156, 2017.
+Li, T., Sahu, A. K., Sanjabi, M., Zaheer, M., Talwalkar,
+A., and Smith, V. On the convergence of federated op-
+timization in heterogeneous networks.
+arXiv preprint
+arXiv:1812.06127, 2018.
+Li, T., Sanjabi, M., and Smith, V. Fair resource allocation
+in federated learning. arXiv preprint arXiv:1905.10497,
+2019a.
+Li, T., Sahu, A. K., Zaheer, M., Sanjabi, M., Talwalkar,
+A., and Smith, V. Feddane: A federated newton-type
+method. arXiv preprint arXiv:2001.01920, 2020.
+Li, X., Huang, K., Yang, W., Wang, S., and Zhang, Z.
+On the convergence of FedAvg on non-iid data. arXiv
+preprint arXiv:1907.02189, 2019b.
+Liang, X., Shen, S., Liu, J., Pan, Z., Chen, E., and Cheng,
+Y. Variance reduced local sgd with lower communication
+complexity. arXiv preprint arXiv:1912.12844, 2019.
+McMahan, B., Moore, E., Ramage, D., Hampson, S., and
+y Arcas, B. A. Communication-efﬁcient learning of deep
+networks from decentralized data.
+In Proceedings of
+AISTATS, pp. 1273–1282, 2017.
+Mishchenko, K., Gorbunov, E., Tak´aˇc, M., and Richt´arik,
+P. Distributed learning with compressed gradient differ-
+ences. arXiv preprint arXiv:1901.09269, 2019.
+Mohri, M., Sivek, G., and Suresh, A. T. Agnostic federated
+learning. arXiv preprint arXiv:1902.00146, 2019.
+Nedich, A., Olshevsky, A., and Shi, W.
+A geomet-
+rically convergent method for distributed optimization
+over time-varying graphs. In 2016 IEEE 55th Confer-
+ence on Decision and Control (CDC), pp. 1023–1029.
+IEEE, 2016.
+Nesterov, Y. Lectures on convex optimization, volume 137.
+Springer, 2018.
+Nguyen, L. M., Liu, J., Scheinberg, K., and Tak´aˇc, M.
+Sarah: A novel method for machine learning problems
+using stochastic recursive gradient. In Proceedings of
+the 34th International Conference on Machine Learning-
+Volume 70, pp. 2613–2621. JMLR. org, 2017.
+Nguyen, L. M., Scheinberg, K., and Tak´aˇc, M.
+Inexact
+SARAH algorithm for stochastic optimization.
+arXiv
+preprint arXiv:1811.10105, 2018.
+Patel, K. K. and Dieuleveut, A. Communication trade-offs
+for synchronized distributed SGD with large step size.
+arXiv preprint arXiv:1904.11325, 2019.
+Ramaswamy, S., Mathews, R., Rao, K., and Beaufays, F.
+Federated learning for emoji prediction in a mobile key-
+board. arXiv preprint arXiv:1906.04329, 2019.
+
+PDF PAGE 11
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Reddi, S. J., Hefny, A., Sra, S., Poczos, B., and Smola, A.
+Stochastic variance reduction for nonconvex optimiza-
+tion. In International conference on machine learning,
+pp. 314–323, 2016a.
+Reddi, S. J., Koneˇcn`y, J., Richt´arik, P., P´ocz´os, B., and
+Smola, A. Aide: Fast and communication efﬁcient dis-
+tributed optimization. arXiv preprint arXiv:1608.06879,
+2016b.
+Reddi, S. J., Sra, S., P´oczos, B., and Smola, A. Fast in-
+cremental method for smooth nonconvex optimization.
+In 2016 IEEE 55th Conference on Decision and Control
+(CDC), pp. 1971–1977. IEEE, 2016c.
+Safran, I. and Shamir, O. How good is sgd with random
+shufﬂing? arXiv preprint arXiv:1908.00045, 2019.
+Samarakoon, S., Bennis, M., Saad, W., and Debbah, M.
+Federated learning for ultra-reliable low-latency v2v
+communications. In 2018 IEEE Global Communications
+Conference (GLOBECOM), pp. 1–7. IEEE, 2018.
+Schmidt, M., Le Roux, N., and Bach, F. Minimizing ﬁnite
+sums with the stochastic average gradient. Mathematical
+Programming, 162(1-2):83–112, 2017.
+Shamir, O., Srebro, N., and Zhang, T. Communication-
+efﬁcient distributed optimization using an approximate
+newton-type method. In International conference on ma-
+chine learning, pp. 1000–1008, 2014.
+Shi, W., Ling, Q., Wu, G., and Yin, W. EXTRA: An ex-
+act ﬁrst-order algorithm for decentralized consensus op-
+timization. SIAM Journal on Optimization, 25(2):944–
+966, 2015.
+Smith, V., Forte, S., Ma, C., Tak´aˇc, M., Jordan, M.,
+and Jaggi, M.
+CoCoA: A general framework for
+communication-efﬁcient distributed optimization. Jour-
+nal of Machine Learning Research, 18(230):1–49, 2018.
+Stich, S. U. Local SGD converges fast and communicates
+little. arXiv preprint arXiv:1805.09767, 2018.
+Stich, S. U. Uniﬁed optimal analysis of the (stochastic) gra-
+dient method. arXiv preprint arXiv:1907.04232, 2019.
+Stich, S. U. and Karimireddy, S. P.
+The error-feedback
+framework: Better rates for SGD with delayed gradi-
+ents and compressed communication.
+arXiv preprint
+arXiv:1909.05350, 2019.
+Stich, S. U., Cordonnier, J.-B., and Jaggi, M. Sparsiﬁed
+SGD with memory. In Advances in Neural Information
+Processing Systems, pp. 4447–4458, 2018.
+Suresh, A. T., Yu, F. X., Kumar, S., and McMahan, H. B.
+Distributed mean estimation with limited communica-
+tion. In Proceedings of the 34th International Confer-
+ence on Machine Learning-Volume 70, pp. 3329–3337.
+JMLR. org, 2017.
+Tran-Dinh, Q., Pham, N. H., Phan, D. T., and Nguyen,
+L. M.
+Hybrid stochastic gradient descent algorithms
+for stochastic nonconvex optimization. arXiv preprint
+arXiv:1905.05920, 2019.
+Wang, S., Tuor, T., Salonidis, T., Leung, K. K., Makaya, C.,
+He, T., and Chan, K. Adaptive federated learning in re-
+source constrained edge computing systems. IEEE Jour-
+nal on Selected Areas in Communications, 37(6):1205–
+1221, 2019.
+Woodworth, B. E., Wang, J., Smith, A., McMahan, H. B.,
+and Srebro, N. Graph oracle models, lower bounds, and
+gaps for parallel stochastic optimization. In Advances in
+neural information processing systems, pp. 8496–8506,
+2018.
+Yang, T., Andrew, G., Eichner, H., Sun, H., Li, W., Kong,
+N., Ramage, D., and Beaufays, F.
+Applied federated
+learning: Improving google keyboard query suggestions.
+arXiv preprint arXiv:1812.02903, 2018.
+Yu, H., Yang, S., and Zhu, S. Parallel restarted SGD with
+faster convergence and less communication: Demystify-
+ing why model averaging works for deep learning. In
+Proceedings of the AAAI Conference on Artiﬁcial Intel-
+ligence, volume 33, pp. 5693–5700, 2019.
+Yuan, X.-T. and Li, P.
+On convergence of distributed
+approximate newton methods: Globalization, sharper
+bounds and beyond. arXiv preprint arXiv:1908.02246,
+2019.
+Zhang, L., Mahdavi, M., and Jin, R. Linear convergence
+with condition number independent access of full gra-
+dients. In Advances in Neural Information Processing
+Systems, pp. 980–988, 2013a.
+Zhang, S., Choromanska, A. E., and LeCun, Y. Deep learn-
+ing with elastic averaging sgd. In Advances in neural
+information processing systems, pp. 685–693, 2015.
+Zhang,
+Y.,
+Duchi,
+J. C.,
+and Wainwright,
+M. J.
+Communication-efﬁcient algorithms for statistical opti-
+mization. The Journal of Machine Learning Research,
+14(1):3321–3363, 2013b.
+Zhao, Y., Li, M., Lai, L., Suda, N., Civin, D., and Chandra,
+V. Federated learning with non-iid data. arXiv preprint
+arXiv:1806.00582, 2018.
+
+PDF PAGE 12
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Zinkevich, M., Weimer, M., Li, L., and Smola, A. J. Par-
+allelized stochastic gradient descent.
+In Advances in
+neural information processing systems, pp. 2595–2603,
+2010.
+
+PDF PAGE 13
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Appendix
+A. Related work and signiﬁcance
+Federated learning.
+As stated earlier, federated learning involves learning a centralized model from distributed client
+data. This centralized model beneﬁts from all client data and can often result in a beneﬁcial performance e.g. in including
+next word prediction (Hard et al., 2018; Yang et al., 2018), emoji prediction (Ramaswamy et al., 2019), decoder models
+(Chen et al., 2019b), vocabulary estimation (Chen et al., 2019a), low latency vehicle-to-vehicle communication (Sama-
+rakoon et al., 2018), and predictive models in health (Brisimi et al., 2018). Nevertheless, federated learning raises several
+types of issues and has been the topic of multiple research efforts studying the issues of generalization and fairness (Mohri
+et al., 2019; Li et al., 2019a), the design of more efﬁcient communication strategies (Koneˇcn`y et al., 2016b;a; Suresh et al.,
+2017; Stich et al., 2018; Karimireddy et al., 2019; Basu et al., 2019), the study of lower bounds (Woodworth et al., 2018),
+differential privacy guarantees (Agarwal et al., 2018), security (Bonawitz et al., 2017), etc. We refer to Kairouz et al.
+(2019) for an in-depth survey of this area.
+Convergence of FEDAVG
+For identical clients, FEDAVG coincides with parallel SGD analyzed by (Zinkevich et al.,
+2010) who proved asymptotic convergence.
+Stich (2018) and, more recently Stich & Karimireddy (2019); Patel &
+Dieuleveut (2019); Khaled et al. (2020), gave a sharper analysis of the same method, under the name of local SGD, also for
+identical functions. However, there still remains a gap between their upper bounds and the lower bound of Woodworth et al.
+(2018). The analysis of FEDAVG for heterogeneous clients is more delicate due to the afore-mentioned client-drift, ﬁrst
+empirically observed by Zhao et al. (2018). Several analyses bound this drift by assuming bounded gradients (Wang et al.,
+2019; Yu et al., 2019), or view it as additional noise (Khaled et al., 2020), or assume that the client optima are ϵ-close (Li
+et al., 2018; Haddadpour & Mahdavi, 2019). In a concurrent work, (Liang et al., 2019) propose to use variance reduction
+to deal with client heterogeneity but still show rates slower than SGD. We summarize the communication complexities of
+different methods for heterogeneous clients in Table 2.
+Variance reduction.
+The use of control variates is a classical technique to reduce variance in Monte Carlo sampling
+methods (cf. (Glasserman, 2013)). In optimization, they were used for ﬁnite-sum minimization by SVRG (Johnson &
+Zhang, 2013; Zhang et al., 2013a) and then in SAGA (Defazio et al., 2014) to simplify the linearly convergent method
+SAG (Schmidt et al., 2017). Numerous variations and extensions of the technique are studied in (Hanzely & Richt´arik,
+2019). Starting from (Reddi et al., 2016a), control variates have also frequently been used to reduce variance in ﬁnite-sum
+non-convex settings (Reddi et al., 2016c; Nguyen et al., 2018; Fang et al., 2018; Tran-Dinh et al., 2019). Further, they
+are used to obtain linearly converging decentralized algorithms under the guise of ‘gradient-tracking’ in (Shi et al., 2015;
+Nedich et al., 2016) and for gradient compression as ‘compressed-differences’ in (Mishchenko et al., 2019). Our method
+can be viewed as seeking to remove the ‘client-variance’ in the gradients across the clients, though there still remains
+additional stochasticity as in (Kulunchakov & Mairal, 2019), which is important in deep learning (Defazio & Bottou,
+2019).
+Distributed optimization.
+The problem of client-drift we described is a common phenomenon in distributed optimiza-
+tion. In fact, classic techniques such as ADMM mitigate this drift, though they are not applicable in federated learning.
+For well structured convex problems, CoCoA uses the dual variable as the control variates, enabling ﬂexible distributed
+methods (Smith et al., 2018). DANE by (Shamir et al., 2014) obtain a closely related primal only algorithm, which was
+later accelerated by Reddi et al. (2016b) and recently extended to federated learning (Li et al., 2020). SCAFFOLD can
+be viewed as an improved version of DANE where a ﬁxed number of (stochastic) gradient steps are used in place of a
+proximal point update. In a similar spirit, distributed variance reduction techniques have been proposed for the ﬁnite-sum
+case (Lee et al., 2015; Koneˇcn`y et al., 2016a; Cen et al., 2019). However, these methods are restricted to ﬁnite-sums and
+are not applicable to the stochastic setting studied here.
+
+PDF PAGE 14
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+B. Technicalities
+We examine some additional deﬁnitions and introduce some technical lemmas.
+B.1. Additional deﬁnitions
+We make precise a few deﬁnitions and explain some of their implications.
+(A3) fi is µ-convex for µ ≥0 and satisﬁes:
+⟨∇fi(x), y −x⟩≤−
+
+fi(x) −fi(y) + µ
+2 ∥x −y∥2
+, for any i, x, y .
+Here, we allow that µ = 0 (we refer to this case as the general convex case as opposed to strongly convex). It is also
+possible to generalize all proofs here to the weaker notion of PL-strong convexity (Karimi et al., 2016).
+(A4) gi(x) := ∇fi(x; ζi) is unbiased stochastic gradient of fi with bounded variance
+Eζi[∥gi(x) −∇fi(x)∥2] ≤σ2 , for any i, x .
+Note that (A4) only bounds the variance within the same client, but not the variance across the clients.
+(A5) {fi} are β-smooth and satisfy:
+∥∇fi(x) −∇fi(y)∥≤β∥x −y∥, for any i, x, y .
+(7)
+The assumption (A5) also implies the following quadratic upper bound on fi
+fi(y) ≤fi(x) + ⟨∇f(x), y −x⟩+ β
+2 ∥y −x∥2 .
+(8)
+If additionally the function {fi} are convex and x⋆is an optimum of f, (A5) implies (via Nesterov (2018), Theorem 2.1.5)
+1
+2βN
+N
+X
+i=1
+∥∇fi(x) −∇fi(x⋆)∥2 ≤f(x) −f ⋆.
+(9)
+Further, if fi is twice-differentiable, (A5) implies that ∥∇2fi(x)∥≤β for any x.
+B.2. Some technical lemmas
+Now we cover some technical lemmas which are useful for computations later on. The two lemmas below are useful to
+unroll recursions and derive convergence rates. The ﬁrst one is a slightly improved (and simpliﬁed) version of (Stich, 2019,
+Theorem 2). It is straightforward to remove the additional logarithmic terms if we use a varying step-size (Kulunchakov &
+Mairal, 2019, Lemma 13).
+Lemma 1 (linear convergence rate). For every non-negative sequence {dr−1}r≥1 and any parameters µ > 0, ηmax ∈
+(0, 1/µ], c ≥0, R ≥
+1
+2ηmaxµ, there exists a constant step-size η ≤ηmax and weights wr := (1 −µη)1−r such that for
+WR := PR+1
+r=1 wr,
+ΨR :=
+1
+WR
+R+1
+X
+r=1
+wr
+η (1 −µη) dr−1 −wr
+η dr + cηwr
+
+= ˜O
+
+µd0 exp(−µηmaxR) +
+c
+µR
+
+.
+Proof. By substituting the value of wr, we observe that we end up with a telescoping sum and estimate
+ΨR =
+1
+ηWR
+R+1
+X
+r=1
+(wr−1dr−1 −wrdr) + cη
+WR
+R+1
+X
+r=1
+wr ≤
+d0
+ηWR
++ cη .
+
+PDF PAGE 15
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+When R ≥
+1
+2µη, (1 −µη)R ≤exp(−µηR) ≤2
+3. For such an R, we can lower bound ηWR using
+ηWR = η(1 −µη)−R
+R
+X
+r=0
+(1 −µη)r = η(1 −µη)−R 1 −(1 −µη)R
+µη
+≥(1 −µη)−R 1
+3µ .
+This proves that for all R ≥
+1
+2µη,
+ΨR ≤3µd0(1 −µη)R + cη ≤3µdo exp(−µηR) + cη .
+The lemma now follows by carefully tuning η. Consider the following two cases depending on the magnitude of R and
+ηmax:
+• Suppose
+1
+2µR ≤ηmax ≤log(max(1,µ2Rd0/c))
+µR
+. Then we can choose η = ηmax,
+ΨR ≤3µd0 exp [−µηmaxR] + cηmax ≤3µd0 exp [−µηmaxR] + ˜O
+ c
+µR
+
+.
+• Instead if ηmax > log(max(1,µ2Rd0/c))
+µR
+, we pick η = log(max(1,µ2Rd0/c))
+µR
+to claim that
+ΨR ≤3µd0 exp
+
+−log(max(1, µ2Rd0/c))
+
++ ˜O
+ c
+µR
+
+≤˜O
+ c
+µR
+
+.
+The next lemma is an extension of (Stich & Karimireddy, 2019, Lemma 13), (Kulunchakov & Mairal, 2019, Lemma 13)
+and is useful to derive convergence rates for general convex functions (µ = 0) and non-convex functions.
+Lemma 2 (sub-linear convergence rate). For every non-negative sequence {dr−1}r≥1 and any parameters ηmax ≥0,
+c ≥0, R ≥0, there exists a constant step-size η ≤ηmax and weights wr = 1 such that,
+ΨR :=
+1
+R + 1
+R+1
+X
+r=1
+dr−1
+η
+−dr
+η + c1η + c2η2
+
+≤
+d0
+ηmax(R + 1) + 2√c1d0
+√
+R + 1 + 2
+
+d0
+R + 1
+ 2
+3
+c
+1
+3
+2 .
+Proof. Unrolling the sum, we can simplify
+ΨR ≤
+d0
+η(R + 1) + c1η + c2η2 .
+Similar to the strongly convex case (Lemma 1), we distinguish the following cases:
+• When R + 1 ≤
+d0
+c1η2max , and R + 1 ≤
+d0
+c2η3max we pick η = ηmax to claim
+ΨR ≤
+d0
+ηmax(R + 1) + c1ηmax + c2η2
+max ≤
+d0
+ηmax(R + 1) +
+√c1d0
+√
+R + 1 +
+
+d0
+R + 1
+ 2
+3
+c
+1
+3
+2 .
+• In the other case, we have η2
+max ≥
+d0
+c1(R+1) or η3
+max ≥
+d0
+c2(R+1). We choose η = min
+q
+d0
+c1(R+1),
+3q
+d0
+c2(R+1)
+
+to
+prove
+ΨR ≤
+d0
+η(R + 1) + cη = 2√c1d0
+√
+R + 1 + 2
+3
+s
+d2
+0c2
+(R + 1)2 .
+Next, we state a relaxed triangle inequality true for the squared ℓ2 norm.
+
+PDF PAGE 16
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Lemma 3 (relaxed triangle inequality). Let {v1, . . . , vτ} be τ vectors in Rd. Then the following are true:
+1. ∥vi + vj∥2 ≤(1 + a)∥vi∥2 + (1 + 1
+a)∥vj∥2 for any a > 0, and
+2. ∥Pτ
+i=1 vi∥2 ≤τ Pτ
+i=1∥vi∥2.
+Proof. The proof of the ﬁrst statement for any a > 0 follows from the identity:
+∥vi + vj∥2 = (1 + a)∥vi∥2 + (1 + 1
+a)∥vj∥2 −∥√avi +
+1
+√avj∥2 .
+For the second inequality, we use the convexity of x →∥x∥2 and Jensen’s inequality
+
+1
+τ
+τ
+X
+i=1
+vi
+
+2
+≤1
+τ
+τ
+X
+i=1
+vi
+2 .
+Next we state an elementary lemma about expectations of norms of random vectors.
+Lemma 4 (separating mean and variance). Let {Ξ1, . . . , Ξτ} be τ random variables in Rd which are not necessarily
+independent. First suppose that their mean is E[Ξi] = ξi and variance is bounded as E[∥Ξi −ξi∥2] ≤σ2. Then, the
+following holds
+E[∥
+τ
+X
+i=1
+Ξi∥2] ≤∥
+τ
+X
+i=1
+ξi∥2 + τ 2σ2 .
+Now instead suppose that their conditional mean is E[Ξi|Ξi−1, . . . Ξ1] = ξi i.e. the variables {Ξi −ξi} form a martingale
+difference sequence, and the variance is bounded by E[∥Ξi −ξi∥2] ≤σ2 as before. Then we can show the tighter bound
+E[∥
+τ
+X
+i=1
+Ξi∥2] ≤2∥
+τ
+X
+i=1
+ξi∥2 + 2τσ2 .
+Proof. For any random variable X, E[X2] = (E[X −E[X]])2 + (E[X])2 implying
+E[∥
+τ
+X
+i=1
+Ξi∥2] = ∥
+τ
+X
+i=1
+ξi∥2 + E[∥
+τ
+X
+i=1
+Ξi −ξi∥2] .
+Expanding the above expression using relaxed triangle inequality (Lemma 3) proves the ﬁrst claim:
+E[∥
+τ
+X
+i=1
+Ξi −ξi∥2] ≤τ
+τ
+X
+i=1
+E[∥Ξi −ξi∥2] ≤τ 2σ2 .
+For the second statement, ξi is not deterministic and depends on Ξi−1, . . . , Ξ1. Hence we have to resort to the cruder
+relaxed triangle inequality to claim
+E[∥
+τ
+X
+i=1
+Ξi∥2] ≤2∥
+τ
+X
+i=1
+ξi∥2 + 2 E[∥
+τ
+X
+i=1
+Ξi −ξi∥2]
+and then use the tighter expansion of the second term:
+E[∥
+τ
+X
+i=1
+Ξi −ξi∥2] =
+X
+i,j
+E
+
+(Ξi −ξi)⊤(Ξj −ξj)
+
+=
+X
+i
+E
+
+∥Ξi −ξi∥2
+≤τσ2 .
+The cross terms in the above expression have zero mean since {Ξi −ξi} form a martingale difference sequence.
+
+PDF PAGE 17
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+C. Properties of convex functions
+We now study two lemmas which hold for any smooth and strongly-convex functions. The ﬁrst is a generalization of the
+standard strong convexity inequality (A3), but can handle gradients computed at slightly perturbed points.
+Lemma 5 (perturbed strong convexity). The following holds for any β-smooth and µ-strongly convex function h, and any
+x, y, z in the domain of h:
+⟨∇h(x), z −y⟩≥h(z) −h(y) + µ
+4 ∥y −z∥2 −β∥z −x∥2 .
+Proof. Given any x, y, and z, we get the following two inequalities using smoothness and strong convexity of h:
+⟨∇h(x), z −x⟩≥h(z) −h(x) −β
+2 ∥z −x∥2
+⟨∇h(x), x −y⟩≥h(x) −h(y) + µ
+2 ∥y −x∥2 .
+Further, applying the relaxed triangle inequality gives
+µ
+2 ∥y −x∥2 ≥µ
+4 ∥y −z∥2 −µ
+2 ∥x −z∥2 .
+Combining all the inequalities together we have
+⟨∇h(x), z −y⟩≥h(z) −h(y) + µ
+4 ∥y −z∥2 −β + µ
+2
+∥z −x∥2 .
+The lemma follows since β ≥µ.
+Here, we see that a gradient step is a contractive operator.
+Lemma 6 (contractive mapping). For any β-smooth and µ-strongly convex function h, points x, y in the domain of h, and
+step-size η ≤1
+β , the following is true
+∥x −η∇h(x) −y + η∇h(y)∥2 ≤(1 −µη)∥x −y∥2 .
+Proof.
+∥x −η∇h(x) −y + η∇h(y)∥2 = ∥x −y∥2 + η2∥∇h(x) −∇h(y)∥2 −2η⟨∇h(x) −∇h(y), x −y⟩
+(A5)
+≤∥x −y∥2 + (η2β −2η)⟨∇h(x) −∇h(y), x −y⟩.
+Recall our bound on the step-size η ≤1
+β which implies that (η2β −2η) ≤−η. Finally, apply the µ-strong convexity of h
+to get
+−η⟨∇h(x) −∇h(y), x −y⟩≤−ηµ∥x −y∥2 .
+
+PDF PAGE 18
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+D. Convergence of FEDAVG
+Algorithm 2 FEDAVG: Federated Averaging
+1: server input: initial x, and global step-size ηg
+2: client i’s input: local step-size ηl
+3: for each round r = 1, . . . , R do
+4:
+sample clients S ⊆{1, . . . , N}
+5:
+communicate x to all clients i ∈S
+6:
+on client i ∈S in parallel do
+7:
+initialize local model yi ←x
+8:
+for k = 1, . . . , K do
+9:
+compute mini-batch gradient gi(yi)
+10:
+yi ←yi −ηlgi(yi)
+11:
+end for
+12:
+communicate ∆yi ←yi −x
+13:
+end on client
+14:
+∆x ←
+1
+|S|
+P
+i∈S ∆yi
+15:
+x ←x + ηg∆x
+16: end for
+We outline the FEDAVG method in Algorithm 2. In round r we sample Sr ⊆[N] clients with |Sr| = S and then perform
+the following updates:
+• Starting from the shared global parameters yr
+i,0 = xr−1, we update the local parameters for k ∈[K]
+yr
+i,k = yr
+i,k−1 −ηlgi(yr
+i,k−1) .
+(10)
+• Compute the new global parameters using only updates from the clients i ∈Sr and a global step-size ηg:
+xr = xr−1 + ηg
+S
+X
+i∈Sr
+(yr
+i,K −xr−1) .
+(11)
+Finally, for some weights {wr}, we output
+¯xR = xr−1 with probability
+wr
+P
+τ wτ
+for r ∈{1, . . . , R + 1} .
+(12)
+D.1. Bounding heterogeneity
+Recall our bound on the gradient dissimilarity:
+1
+N
+N
+X
+i=1
+∥∇fi(x)∥2 ≤G2 + B2∥∇f(x)∥2 .
+(13)
+If {fi} are convex, we can relax the assumption to
+1
+N
+N
+X
+i=1
+∥∇fi(x)∥2 ≤G2 + 2βB2(f(x) −f ⋆) .
+(14)
+We deﬁned two variants of the bounds on the heterogeneity depending of whether the functions are convex or not. Suppose
+that the functions f is indeed convex as in (A3) and β-smooth as in (A5), then it is straightforward to see that (13) implies
+(14). Thus for convex functions, (A1) is mildly weaker. Suppose that the functions {f1, . . . , fN} are convex and β-smooth.
+
+PDF PAGE 19
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Then (14) is satisﬁed with B2 = 2 since
+1
+N
+N
+X
+i=1
+∥∇fi(x)∥2 ≤2
+N
+N
+X
+i=1
+∥∇fi(x⋆)∥2 + 2
+N
+N
+X
+i=1
+∥∇fi(x) −∇fi(x⋆)∥2
+(9)
+≤2
+N
+N
+X
+i=1
+∥∇fi(x⋆)∥2
+|
+{z
+}
+=: σ2
+f
++4β(f(x) −f ⋆) .
+Thus, (G, B)-BGD (14) is equivalent to the heterogeneity assumption of (Mishchenko et al., 2019) with G2 = σ2
+f. Instead,
+if we have the stronger assumption (A1) but the functions are possibly non-convex, then G = ϵ corresponds to the local
+dissimilarity deﬁned in (Li et al., 2018).
+D.2. Rates of convergence (Theorem I)
+We ﬁrst restate Theorem I with some additional details and then see its proof.
+Theorem V. Suppose that the functions {fi} satisﬁes assumptions A4, A5, and A1. Then, in each of the following cases,
+there exist weights {wr} and local step-sizes ηl such that for any ηg ≥1 the output of FEDAVG (12) ¯xR satisﬁes
+• Strongly convex: fi satisﬁes (A3) for µ > 0, ηl ≤
+1
+8(1+B2)βKηg , R ≥8(1+B2)β
+µ
+then
+E[f(¯xR)] −f(x⋆) ≤˜O
+
+M 2
+µRKS + βG2
+µ2R2 + µD2 exp(−
+µ
+16(1+B2)β R)
+
+,
+• General convex: fi satisﬁes (A3) for µ = 0, ηl ≤
+1
+(1+B2)8βKηg , R ≥1 then
+E[f(¯xR)] −f(x⋆) ≤O
+ MD
+√
+RKS
++ D4/3(βG2)1/3
+(R + 1)2/3
++ B2βD2)
+R
+
+,
+• Non-convex: fi satisﬁes (A1) and ηl ≤
+1
+(1+B2)8βKηg , then
+E[∥∇f(¯xR)∥2] ≤O
+ 
+βM
+√
+F
+√
+RKS
++ F 2/3(βG2)1/3
+(R + 1)2/3
++ B2βF
+R
+!
+,
+where M 2 := σ2(1 + S
+η2g ) + K(1 −S
+N )G2, D := ∥x0 −x⋆∥, and F := f(x0) −f ⋆.
+D.3. Proof of convergence
+We will only prove the rate of convergence for convex functions here. The corresponding rates for non-convex functions
+are easy to derive following the techniques in the rest of the paper.
+Lemma 7. (one round progress) Suppose our functions satisﬁes assumptions (A1) and (A3)–(A5). For any step-size
+satisfying ηl ≤
+1
+(1+B2)8βKηg and effective step-size ˜η := Kηgηl, the updates of FEDAVG satisfy
+E∥xr −x⋆∥2 ≤(1 −µ˜η
+2 ) E∥xr−1 −x⋆∥2 + ( 1
+KS )˜η2σ2 + (1 −S
+N ) 4˜η2
+S G2 −˜η(E[f(xr−1)] −f(x⋆)) + 3β˜ηEr ,
+where Er is the drift caused by the local updates on the clients deﬁned to be
+Er :=
+1
+KN
+K
+X
+k=1
+N
+X
+i=1
+Er[
+yr
+i,k −xr−12] .
+
+PDF PAGE 20
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Proof. We start with the observation that the updates (10) and (11) imply that the server update in round r can be written
+as below (dropping the superscripts everywhere)
+∆x = −˜η
+KS
+X
+k,i∈S
+gi(yi,k−1) and E[∆x] = −
+˜η
+KN
+X
+k,i
+E[∇fi(yi,k−1)] .
+We adopt the convention that summations are always over k ∈[K] or i ∈[N] unless otherwise stated. Expanding using
+above observing, we proceed as2
+Er−1∥x + ∆x −x⋆∥2 = ∥x −x⋆∥2 −2˜η
+KN
+X
+k,i
+⟨∇fi(yi,k−1), x −x⋆⟩+ ˜η2 Er−1
+
+1
+KS
+X
+k,i∈S
+gi(yi,k−1)
+
+2
+Lem. 4
+≤
+∥x −x⋆∥2 −2˜η
+KN
+X
+k,i
+⟨∇fi(yi,k−1), x −x⋆⟩
+|
+{z
+}
+A1
++ ˜η2 Er−1
+
+1
+KS
+X
+k,i∈S
+∇fi(yi,k−1)
+
+2
+|
+{z
+}
+A2
++ ˜η2σ2
+KS .
+We can directly apply Lemma 5 with h = fi, x = yi,k−1, y = x⋆, and z = x to the ﬁrst term A1
+A1 = 2˜η
+KN
+X
+k,i
+⟨∇fi(yi,k−1), x⋆−x⟩
+≤2˜η
+KN
+X
+k,i
+
+fi(x⋆) −fi(x) + β∥yi,k−1 −x∥2 −µ
+4 ∥x −x⋆∥2
+= −2˜η
+
+f(x) −f(x⋆) + µ
+4 ∥x −x⋆∥2
++ 2β˜ηE .
+For the second term A2, we repeatedly apply the relaxed triangle inequality (Lemma 4)
+A2 = ˜η2 Er−1
+
+1
+KS
+X
+k,i∈S
+∇fi(yi,k−1) −∇fi(x) + ∇fi(x)
+
+2
+≤2˜η2 Er−1
+
+1
+KS
+X
+k,i∈S
+∇fi(yi,k−1) −∇fi(x)
+
+2
++ 2˜η2 Er−1
+
+1
+S
+X
+i∈S
+∇fi(x)
+
+2
+≤2˜η2
+KN
+X
+i,k
+Er−1∥∇fi(yi,k−1) −∇fi(x)∥2 + 2˜η2 Er−1
+
+1
+S
+X
+i∈S
+∇fi(x) −∇f(x) + ∇f(x)
+
+2
+≤2˜η2β2
+KN
+X
+i,k
+Er−1∥yi,k−1 −x∥2 + 2˜η2∥∇f(x)∥2 + (1 −S
+N )4˜η2 1
+SN
+X
+i
+∥∇fi(x)∥2
+≤2˜η2β2E + 8˜η2β(B2 + 1)(f(x) −f(x⋆)) + (1 −S
+N ) 4˜η2
+S G2
+The last step used Assumption (G, B)-BGD assumption (14) that
+1
+N
+PN
+i=1∥∇fi(x)∥2 ≤G2 + 2βB2(f(x) −f ⋆). The
+extra (1 −S
+N improvement we get is due to sampling the functions {fi} without replacement. Plugging back the bounds
+on A1 and A2,
+Er−1∥x + ∆x −x⋆∥2 ≤(1 −µ˜η
+2 )∥x −x⋆∥2 −(2˜η −8β˜η2(B2 + 1))(f(x) −f(x⋆))
++ (1 + ˜ηβ)2β˜ηE +
+1
+KS ˜η2σ2 + (1 −S
+N ) 4˜η2
+S G2 .
+The lemma now follows by observing that 8β˜η(B2 + 1) ≤1 and that B ≥0.
+2We use the notation Er−1[ · ] to mean conditioned on ﬁltration r i.e. on all the randomness generated prior to round r.
+
+PDF PAGE 21
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Lemma 8. (bounded drift) Suppose our functions satisﬁes assumptions (A1) and (A3)–(A5). Then the updates of FE-
+DAVG for any step-size satisfying ηl ≤
+1
+(1+B2)8βKηg have bounded drift:
+3β˜ηEr ≤2˜η
+3 (E[f(xr−1)]) −f(x⋆) + ˜η2σ2
+2Kη2g
++ 18β˜η3G2 .
+Proof. If K = 1, the lemma trivially holds since yi,0 = x for all i ∈[N] and Er = 0. Assume K ≥2 here on. Recall that
+the local update made on client i is yi,k = yi,k−1 −ηlgi(yi,k−1). Then,
+E∥yi,k −x∥2 = E∥yi,k−1 −x −ηlgi(yi,k−1)∥2
+≤E∥yi,k−1 −x −ηl∇fi(yi,k−1)∥2 + η2
+l σ2
+≤(1 −
+1
+K−1) E∥yi,k−1 −x∥2 + Kη2
+l ∥∇fi(yi,k−1)∥2 + η2
+l σ2
+= (1 −
+1
+K−1) E∥yi,k−1 −x∥2 +
+˜η2
+ηgK ∥∇fi(yi,k−1)∥2 + ˜η2σ2
+K2η2g
+≤(1 −
+1
+K−1) E∥yi,k−1 −x∥2 + 2˜η2
+ηgK ∥∇fi(yi,k−1) −∇fi(x)∥2 + 2˜η2
+ηgK ∥∇fi(x)∥2 + ˜η2σ2
+K2η2g
+≤(1 −
+1
+K−1 + 2˜η2β2
+ηgK ) E∥yi,k−1 −x∥2 + 2˜η2
+ηgK ∥∇fi(x)∥2 + ˜η2σ2
+K2η2g
+≤(1 −
+1
+2(K−1)) E∥yi,k−1 −x∥2 + 2˜η2
+ηgK ∥∇fi(x)∥2 + ˜η2σ2
+K2η2g
+.
+In the above proof we separated the mean and the variance in the ﬁrst inequality, then used the relaxed triangle inequality
+with a =
+1
+K−1 in the next inequality. Next equality uses the deﬁnition of ˜η, and the rest follow from the Lipschitzness of
+the gradient. Unrolling the recursion above,
+E∥yi,k −x∥2 ≤
+k−1
+X
+τ=1
+( 2˜η2
+ηgK ∥∇fi(x)∥2 + ˜η2σ2
+K2η2g
+)(1 −
+1
+2(K−1))τ
+≤( 2˜η2
+ηgK ∥∇fi(x)∥2 + ˜η2σ2
+K2η2g
+)3K .
+Averaging over i and k, multiplying by 3β˜η and then using Assumption A1,
+3β˜ηEr ≤1
+N
+X
+i
+18β˜η3∥∇fi(x)∥2 + 3β˜η3σ2
+Kη2g
+≤18β˜η3G2 + 3β˜η3σ2
+Kη2g
++ 36β2˜η3B2(f(x) −f(x⋆))
+The lemma now follows from our assumption that 8(B2 + 1)β˜η ≤1.
+Proof of Theorems I, V
+Adding the statements of Lemmas 7 and 8, we get
+E∥x + ∆x −x⋆∥2 ≤(1 −µ˜η
+2 ) E∥x −x⋆∥2 + ( 1
+KS )˜η2σ2 + (1 −S
+N ) 4˜η2
+S G2 −˜η(E[f(x)] −f(x⋆))
++ 2˜η
+3 (E[f(x)]) −f(x⋆) + ˜η2σ2
+2Kη2g
++ 18β˜η3G2
+= (1 −µ˜η
+2 ) E∥x −x⋆∥2 −˜η
+3(E[f(x)] −f(x⋆)) + ˜η2
+
+σ2
+KS (1 + S
+η2g ) + 4G2
+S (1 −S
+N ) + 18β˜ηG2
+
+.
+Moving the (f(x) −f(x⋆)) term and dividing throughout by ˜η
+3, we get the following bound for any ˜η ≤
+1
+8(1+B2)β
+E[f(xr−1)] −f(x⋆) ≤3
+˜η(1 −µ˜η
+2 )∥xr−1 −x⋆∥2 −3
+˜η∥xr −x⋆∥2 + 3˜η
+
+σ2
+KS (1 + S
+η2g ) + 4G2
+S (1 −S
+N ) + 18β˜ηG2
+
+.
+
+PDF PAGE 22
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+If µ = 0 (general convex), we can directly apply Lemma 2. Otherwise, by averaging using weights wr = (1 −µ˜η
+2 )1−r and
+using the same weights to pick output ¯xR, we can simplify the above recursive bound (see proof of Lem. 1) to prove that
+for any ˜η satisfying
+1
+µR ≤˜η ≤
+1
+8(1+B2)β
+E[f(¯xR)] −f(x⋆) ≤3∥x0 −x⋆∥2
+|
+{z
+}
+=:d
+µ exp(−˜η
+2µR) + ˜η
+  2σ2
+KS (1 + S
+η2g ) + 8G2
+S (1 −S
+N )
+|
+{z
+}
+=:c1
+
++ ˜η2(36βG2
+| {z }
+=:c2
+)
+Now, the choice of ˜η = min
+n
+log(max(1,µ2Rd/c1))
+µR
+,
+1
+(1+B2)8β
+o
+yields the desired rate.The proof of the non-convex case is
+very similar and also relies on Lemma 2.
+D.4. Lower bound for FEDAVG (Theorem II)
+We ﬁrst formalize the class of algorithms we look at before proving out lower bound.
+(A6) We assume that FEDAVG is run with ηg = 1, K > 1, and arbitrary possibly adaptive positive step-sizes {η1, . . . , ηR}
+are used with ηr ≤1
+µ and ﬁxed within a round for all clients. Further, the server update is a convex combination of the
+client updates with non-adaptive weights.
+Note that we only prove the lower bound here for ηg = 1. In fact, by taking ηg inﬁnitely large and scaling ηl ∝
+1
+Kηg
+such that the effective step size ˜η = ηlηgK remains constant, FEDAVG reduces to the simple large batch SGD method.
+Hence, proving a lower bound for arbitrary ηg is not possible, but also is of questionable relevance. Further, note that when
+σ2 = 0, the upper bound in Theorem V uses ηg = 1 and hence the lower bound serves to show that our analysis is tight.
+Below we state a more formal version of Theorem II.
+Theorem VI. For any positive constants G, µ, there exist µ-strongly convex functions satisfying A1 for which that the
+output of FEDAVG satisfying A6 has the error for any r ≥1:
+f(xr) −f(x⋆) ≥Ω
+ min
+ f(x0) −f(x⋆), G2
+µR2
+
+.
+Proof. Consider the following simple one-dimensional functions for any given µ and G:
+f1(x) := µx2 + Gx, and f2(x) := −Gx ,
+with f(x) =
+1
+2(f1(x) + f2(x)) =
+µ
+2 x2 and optimum at x = 0. Clearly f is µ-strongly convex and further f1 and f2
+satisfy A1 with B = 3. Note that we chose f2 to be a linear function (not strongly convex) to simplify computations. The
+calculations made here can be extended with slightly more work for ( ˜f2 = µ
+2 x2 −Gx) (e.g. see Theorem 1 of (Safran &
+Shamir, 2019)).
+Let us start FEDAVG from x0 > 0. A single local update for f1 and f2 in round r ≥1 is respectively
+y1 = y1 −ηr(2µx + G) and y2 = y2 + ηrG .
+Then, straightforward computations show that the update at the end of round r is of the following form for some averaging
+weight α ∈[0, 1]
+xr = xr−1((1 −α)(1 −2µηr)K + α) + ηrG
+K−1
+X
+τ=0
+(α −(1 −α)(1 −2µηr)τ) .
+Since α was picked obliviously, we can assume that α ≤0.5. If indeed α > 0.5, we can swap the deﬁnitions of f1 and f2
+and the sign of x0. With this, we can simplify as
+xr ≥xr−1 (1 −2µηr)K + 1
+2
++ ηrG
+2
+K−1
+X
+τ=0
+(1 −(1 −2µηr)τ)
+≥xr−1(1 −2µηr)K + ηrG
+2
+K−1
+X
+τ=0
+(1 −(1 −2µηr)τ) .
+
+PDF PAGE 23
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Observe that in the above expression, the right hand side is increasing with ηr—this represents the effect of the client
+drift and increases the error as the step-size increases. The left hand side decreases with ηr—this is the usual convergence
+observed due to taking gradient steps. The rest of the proof is to show that even with a careful balancing of the two terms,
+the effect of G cannot be removed. Lemma 9 performs exactly such a computation to prove that for any r ≥1,
+xr ≥c min(x0, G
+µR) .
+We ﬁnish the proof by noting that f(xr) = µ
+2 (xr)2.
+Lemma 9. Suppose that for all r ≥1, ηr ≤1
+µ and the following is true:
+xr ≥xr−1(1 −2µηr)K + ηrG
+2
+K−1
+X
+τ=0
+(1 −(1 −2µηr)τ) .
+Then, there exists a constant c > 0 such that for any sequence of step-sizes {ηr}:
+xr ≥c min(x0, G
+µR)
+Proof. Deﬁne γr = µηrR(K −1). Such a γr exists and is positive since K ≥2. Then, γr satisﬁes
+(1 −2µηr)
+K−1
+2
+= (1 −
+2γr
+R(K −1))
+K−1
+2
+≤exp(−γr/R) .
+We then have
+xr ≥xr−1(1 −2µηr)K + ηrG
+2
+K−1
+X
+τ=0
+(1 −(1 −2µηr)τ)
+≥xr−1(1 −2µηr)K + ηrG
+2
+K−1
+X
+τ=(K−1)/2
+(1 −(1 −2µηr)τ)
+≥xr−1(1 −2µηr)K + γrG
+4µ (1 −exp(−γr/R)) .
+The second inequality follows because ηr ≤1
+µ implies that (1 −(1 −2µηr)τ) is always positive. If γr ≥R/8, then we
+have a constant c1 ∈(0, 1/32) which satisﬁes
+xr ≥c1G
+µ
+.
+(15)
+On the other hand, if γr < R/8, we have a tighter inequality
+(1 −2µηr)
+K−1
+2
+= (1 −
+2γr
+R(K −1))
+K−1
+2
+≤1 −γr
+R ,
+implying that
+xr ≥xr−1
+
+1 −
+2γr
+R(K −1)
+K
++ γ2
+rG
+4Rµ
+≥xr−1(1 −4γr
+R ) + γ2
+rG
+4µR .
+(16)
+The last step used Bernoulli’s inequality and the fact that K −1 ≤K/2 for K ≥2. Observe that in the above expression,
+the right hand side is increasing with γr—this represents the effect of the client drift and increases the error as the step-size
+increases. The left hand side decreases with γr—this is the usual convergence observed due to taking gradient steps. The
+rest of the proof is to show that even with a careful balancing of the two terms, the effect of G cannot be removed.
+
+PDF PAGE 24
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Suppose that all rounds after r0 ≥0 have a small step-size i.e. γr ≤R/8 for all r > r0 and hence satisﬁes (16). Then we
+will prove via induction that
+xr ≥min(crxr0,
+G
+256µR), for constants cr := (1 −
+1
+2R)r−r0 .
+(17)
+For r = r0, (17) is trivially satisﬁed. Now for r > r0,
+xr ≥xr−1(1 −4γr
+R ) + γ2
+rG
+4µR
+≥min
+
+xr−1(1 −
+1
+2R) ,
+G
+256µR
+
+= min
+
+crxr0 ,
+G
+256µR
+
+.
+The ﬁrst step is because of (16) and the last step uses the induction hypothesis. The second step considers two cases for
+γr: either γr ≤1
+8 and (1 −
+1
+2R) ≥(1 −
+1
+2R), or γ2
+r ≥
+1
+64. Finally note that cr ≥1
+2 using Bernoulli’s inequality. We have
+hence proved
+xR ≥min
+1
+2xr0 ,
+G
+256µR
+
+Now suppose γr0 > R/8. Then (15) implies that xR ≥cG
+µR for some constant c > 0. If instead no such r0 ≥1 exists,
+then we can set r0 = 0. Now ﬁnally observe that the previous proof did not make any assumption on R, and in fact the
+inequality stated above holds for all r ≥1.
+
+PDF PAGE 25
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+E. Convergence of SCAFFOLD
+We ﬁrst restate the convergence theorem more formally, then prove the result for the convex case, and then for non-convex
+case. Throughout the proof, we will focus on the harder option II. The proofs for SCAFFOLD with option I are nearly
+identical and so we skip them.
+Theorem VII. Suppose that the functions {fi} satisﬁes assumptions A4 and A5. Then, in each of the following cases,
+there exist weights {wr} and local step-sizes ηl such that for any ηg ≥1 the output (22) of SCAFFOLD satisﬁes:
+• Strongly convex: fi satisﬁes (A3) for µ > 0, ηl ≤min
+
+1
+81βKηg ,
+S
+15µNKηg
+
+, R ≥max( 162β
+µ , 30N
+S ) then
+E[f(¯xR)] −f(x⋆) ≤˜O
+
+σ2
+µRKS (1 + S
+η2g ) + µ ˜D2 exp
+
+−min
+ S
+30N ,
+µ
+162β
+
+R
+
+.
+• General convex: fi satisﬁes (A3) for µ = 0, ηl ≤
+1
+81βKηg , R ≥1 then
+E[f(¯xR)] −f(x⋆) ≤O
+ 
+σ ˜D
+√
+RKS
+q
+1 + S
+η2g
+
++ β ˜D2
+R
+!
+,
+• Non-convex: ηl ≤
+1
+24Kηgβ
+  S
+N
+ 2
+3 , and R ≥1, then
+E[∥∇f(¯xR)∥2] ≤O
+ 
+σ
+√
+F
+√
+RKS
+q
+1 + N
+η2g
+
++ βF
+R
+N
+S
+ 2
+3 !
+.
+Here ˜D2 := (∥x0 −x⋆∥2 +
+1
+2Sβ2
+PN
+i=1∥c0
+i −∇fi(x⋆)∥2) and F := (f(x0) −f(x⋆)).
+Note that the ˜D2 deﬁned above involves an additional term
+1
+2Sβ2
+PN
+i=1∥c0
+i −∇fi(x⋆)∥2. This is standard in variance
+reduction methods (Johnson & Zhang, 2013; Defazio et al., 2014; Hanzely & Richt´arik, 2019) and it is standard practice
+to set c0
+i using warm start by focusing on the ﬁrst N/S rounds to initialize c0
+i = gi(x0) computed over a batch size of size
+K. Then, using smoothness of fi, we can bound this additional term as
+1
+2Sβ2
+N
+X
+i=1
+∥c0
+i −∇fi(x⋆)∥2 ≤N
+Sβ (f(x0) −f ⋆) + Nσ2
+KSβ2 .
+Thus, the asymptotic rates of SCAFFOLD for general convex functions incurs an additive term of the order of O( N
+SR)
+and only affects the logarithmic terms for strongly convex functions.
+We will rewrite SCAFFOLD using notation which is convenient for the proofs: {yi} represent the client models, x is the
+aggregate server model, and ci and c are the client and server control variates. For an equivalent description which is easier
+to implement, we refer to Algorithm 1. The server maintains a global control variate c as before and each client maintains
+its own control variate ci. In round r, a subset of clients Sr of size S are sampled uniformly from {1, . . . , N}. Suppose
+that every client performs the following updates
+• Starting from the shared global parameters y0
+i,r = xr−1, we update the local parameters for k ∈[K]
+yr
+i,k = yr
+i,k−1 −ηlvr
+i,k ,
+where
+vr
+i,k := gi(yr
+i,k−1) −cr−1
+i
++ cr−1
+(18)
+• Update the control iterates using (option II):
+˜cr
+i = cr−1 −cr−1
+i
++
+1
+Kηl (xr−1 −xr
+i,K) = 1
+K
+K
+X
+k=1
+gi(yr
+i,k−1) .
+(19)
+We update the local control variates only for clients i ∈Sr
+cr
+i =
+(
+˜cr
+i
+if i ∈Sr
+cr−1
+i
+otherwise.
+(20)
+
+PDF PAGE 26
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+• Compute the new global parameters and global control variate using only updates from the clients i ∈Sr:
+xr = xr−1 + ηg
+S
+X
+i∈Sr
+(yr
+i,K −xr−1) and cr = 1
+N
+N
+X
+i=1
+cr
+i = 1
+N
+  X
+i∈Sr
+cr
+i +
+X
+j /∈Sr
+cr−1
+j
+
+.
+(21)
+Finally, for some weights {wr}, we output
+¯xR = xr−1 with probability
+wr
+P
+τ wτ
+for r ∈{1, . . . , R + 1} .
+(22)
+Note that the clients are agnostic to the sampling and their updates are identical to when all clients are participating. Also
+note that the control variate choice (19) corresponds to (option II) of Algorithm 1. Further, the updates of the clients i /∈Sr
+is forgotten and is deﬁned only to make the proofs easier. While actually implementing the method, only clients i ∈Sr
+participate and the rest remain inactive (see Algorithm 1).
+E.1. Convergence of SCAFFOLD for convex functions (Theorem III)
+We will ﬁrst bound the variance of SCAFFOLD update in Lemma 10, then see how sampling of clients effects our control
+variates in Lemma 11, and ﬁnally bound the amount of client-drift in Lemma 12. We will then use these three lemmas to
+prove the progress in a single round in Lemma 13. Combining this progress with Lemmas 1 and 2 gives us the desired
+rates.
+Additional deﬁnitions.
+Before proceeding with the proof of our lemmas, we need some additional deﬁnitions of the
+various errors we track. As before, we deﬁne the effective step-size to be
+˜η := Kηlηg .
+We deﬁne client-drift to be how much the clients move from their starting point:
+Er :=
+1
+KN
+K
+X
+k=1
+N
+X
+i=1
+E[∥yr
+i,k −xr−1∥2] .
+(23)
+Because we are sampling the clients, not all the client control-variates get updated every round. This leads to some ‘lag’
+which we call control-lag:
+Cr := 1
+N
+N
+X
+j=1
+E∥E[cr
+i ] −∇fi(x⋆)∥2 .
+(24)
+Variance of server update.
+We study how the variance of the server update can be bounded.
+Lemma 10. For updates (18)—(21), we can bound the variance of the server update in any round r and any ˜η := ηlηgK ≥
+0 as follows
+E[∥xr −xr−1∥2] ≤8β˜η2(E[f(xr−1)] −f(x⋆)) + 8˜η2Cr−1 + 4˜η2β2Er + 12˜η2σ2
+KS
+.
+Proof. The server update in round r can be written as follows (dropping the superscript r everywhere)
+E∥∆x∥2 = E
+−˜η
+KS
+X
+k,i∈S
+vi,k
+2 = E
+ ˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) + c −ci)
+2 ,
+
+PDF PAGE 27
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+which can then be expanded as
+E∥∆x∥2 ≤E
+ ˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) + c −ci)
+2
+≤4 E
+ ˜η
+KS
+X
+k,i∈S
+gi(yi,k−1) −∇fi(x)
+2 + 4˜η2 E∥c∥2 + 4 E
+ ˜η
+KS
+X
+k,i∈S
+∇fi(x⋆) −ci
+2
++ 4 E
+ ˜η
+KS
+X
+k,i∈S
+∇fi(x) −∇fi(x⋆)
+2
+(9)
+≤4 E
+ ˜η
+KS
+X
+k,i∈S
+gi(yi,k−1) −∇fi(x)
+2 + 4˜η2 E∥c∥2 + 4 E
+ ˜η
+S
+X
+i∈S
+∇fi(x⋆) −ci
+2
++ 8β˜η2(E[f(x)] −f(x⋆))
+≤4 E
+ ˜η
+KS
+X
+k,i∈S
+∇fi(yi,k−1) −∇fi(x)
+2 + 4˜η2∥E[c]∥2 + 4
+ ˜η
+S
+X
+i∈S
+∇fi(x⋆) −E[ci]
+2
++ 8β˜η2(E[f(x)] −f(x⋆)) + 12˜η2σ2
+KS
+.
+The inequality before the last used the smoothness of {fi}. The last inequality which separates the mean and the variance
+is an application of Lemma 4: the variance of ( 1
+KS
+P
+k,i∈S gi(yi,k−1)) is bounded by σ2/KS. Similarly, cj as deﬁned in
+(19) for any j ∈[N] has variance smaller than σ2/K and hence the variance of ( 1
+S
+P
+i∈S ci) is smaller than σ2/KS.
+Using Lemma 3.2 twice to simplify:
+E∥∆x∥2 ≤4˜η2
+KN
+X
+k,i
+E
+∇fi(yi,k−1) −∇fi(x)
+2 + 4˜η2∥E[c]∥2 + 4˜η2
+N
+X
+i
+∇fi(x⋆) −E[ci]
+2
++ 8β˜η2(E[f(x)] −f(x⋆)) + 12˜η2σ2
+KS
+≤4˜η2
+KN
+X
+k,i
+E
+∇fi(yi,k−1) −∇fi(x)
+2
+|
+{z
+}
+T1
++8˜η2
+N
+X
+i
+∇fi(x⋆) −E[ci]
+2
++ 8β˜η2(E[f(x)] −f(x⋆)) + 12˜η2σ2
+KS
+.
+The second step follows because c = 1
+N
+P
+i ci. Since the gradient of fi is β-Lipschitz, T1 ≤β24˜η2
+KN
+P
+k,i E
+yi,k−1−x
+2 =
+4˜η2β2E. The deﬁnition of the error in the control variate Cr−1 := 1
+N
+PN
+j=1 E∥E[ci]−∇fi(x⋆)∥2 completes the proof.
+Change in control lag.
+We have previously related the variance of the server update to the control lag. We now examine
+how the control-lag grows each round.
+Lemma 11. For updates (18)—(21) with the control update (19) and assumptions A3–A5, the following holds true for any
+˜η := ηlηgK ∈[0, 1/β]:
+Cr ≤(1 −S
+N )Cr−1 + S
+N
+ 4β(E[f(xr−1)] −f(x⋆)) + 2β2Er
+
+.
+Proof. Recall that after round r, the control update rule (19) implies that cr
+i is set as per
+cr
+i =
+(
+cr−1
+i
+if i /∈Sr i.e. with probability (1 −S
+N ). ,
+1
+K
+PK
+k=1 gi(yr
+i,k−1)
+with probability S
+N .
+Taking expectations on both sides yields
+E[cr
+i ] = (1 −S
+N ) E[cr−1
+i
+] +
+S
+KN
+PK
+k=1 E[∇fi(yr
+i,k−1)] , ∀i ∈[N] .
+
+PDF PAGE 28
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Plugging the above expression in the deﬁnition of Cr we get
+Cr = 1
+N
+N
+X
+i=1
+∥E[cr
+i ] −∇fi(x⋆)∥2
+= 1
+N
+N
+X
+i=1
+∥(1 −S
+N )(E[cr−1
+i
+] −∇fi(x⋆)) + S
+N ( 1
+K
+PK
+k=1 E[∇fi(yr
+i,k−1)] −∇fi(x⋆))∥2
+≤(1 −S
+N )Cr−1 +
+S
+N2K
+PK
+k=1 E∥∇fi(yr
+i,k−1) −∇fi(x⋆)∥2 .
+The ﬁnal step applied Jensen’s inequality twice. We can then further simplify using the relaxed triangle inequality as
+Er−1[Cr] ≤
+
+1 −S
+N
+
+Cr−1 +
+S
+N 2K
+X
+i,k
+E∥∇fi(yr
+i,k−1) −∇fi(x⋆)∥2
+≤
+
+1 −S
+N
+
+Cr−1 + 2S
+N 2
+X
+i
+E∥∇fi(xr−1) −∇fi(x⋆)∥2 +
+2S
+N 2K
+X
+i,k
+E∥∇fi(yr
+i,k−1) −∇fi(xr−1)∥2
+(7)
+≤
+
+1 −S
+N
+
+Cr−1 + 2S
+N 2
+X
+i
+E∥∇fi(xr−1) −∇fi(x⋆)∥2 +
+2S
+N 2K β2 X
+i,k
+E∥yr
+i,k−1 −xr−1∥2
+(9)
+≤
+
+1 −S
+N
+
+Cr−1 + S
+N (4β(E[f(xr−1)] −f(x⋆)) + β2Er) .
+The last two inequalities follow from smoothness of {fi} and the deﬁnition Er =
+1
+NK β2 P
+i,k E∥yr
+i,k−1 −xr−1∥2.
+Bounding client-drift.
+We will now bound the ﬁnal source of error which is the client-drift.
+Lemma 12. Suppose our step-sizes satisfy ηl ≤
+1
+81βKηg and fi satisﬁes assumptions A3–A5. Then, for any global ηg ≥1
+we can bound the drift as
+3β˜ηEr ≤2˜η2
+3 Cr−1 +
+˜η
+25η2g (E[f(xr−1)] −f(x⋆)) +
+˜η2
+Kη2g σ2 .
+Proof. First, observe that if K = 1, Er = 0 since yi,0 = x for all i ∈[N] and that Cr−1 and the right hand side are both
+positive. Thus the lemma is trivially true if K = 1. For K > 1, we build a recursive bound of the drift.Starting from the
+deﬁnition of the update (18) and then applying the relaxed triangle inequality, we can expand
+1
+S Er−1
+X
+i∈S
+(yi −ηlvi) −x
+2
+
+= 1
+S Er−1
+X
+i∈S
+yi −ηlgi(yi) + ηlc −ηlci −x
+2
+
+≤1
+S Er−1
+X
+i∈S
+yi −ηl∇fi(yi) + ηlc −ηlci −x
+2
+
++ η2
+l σ2
+≤(1 + a)
+S
+Er−1
+X
+i∈S
+yi −ηl∇fi(yi) + ηl∇fi(x) −x
+2
+|
+{z
+}
+T2
+
++ (1 + 1
+a)η2
+l Er−1
+ 1
+S
+X
+i∈S
+∥c −ci + ∇fi(x)∥2
+
+|
+{z
+}
+T3
++η2
+l σ2 .
+The ﬁnal step follows from the relaxed triangle inequality (Lemma 3). Applying the contractive mapping Lemma 6 for
+ηl ≤1/β shows
+T2 = 1
+S
+X
+i∈S
+yi −ηl∇fi(yi) + ηl∇fi(x) −x
+2 ≤
+yi −x
+2 .
+
+PDF PAGE 29
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Once again using our relaxed triangle inequality to expand the other term T3, we get
+T3 = Er−1
+ 1
+S
+X
+i∈S
+∥c −ci + ∇fi(x)∥2
+
+= 1
+N
+N
+X
+j=1
+∥c −ci + ∇fi(x)∥2
+= 1
+N
+N
+X
+j=1
+∥c −ci + ∇fi(x⋆) + ∇fi(x) −∇fi(x⋆)∥2
+≤3∥c∥2 + 3
+N
+N
+X
+j=1
+∥ci −∇fi(x⋆)∥2 + 3
+N
+N
+X
+j=1
+∥∇fi(x) −∇fi(x⋆)∥2
+≤6
+N
+N
+X
+j=1
+∥ci −∇fi(x⋆)∥2 + 3
+N
+N
+X
+j=1
+∥∇fi(x) −∇fi(x⋆)∥2
+≤6
+N
+N
+X
+j=1
+∥ci −∇fi(x⋆)∥2 + 6β(f(x) −f(x⋆)) .
+The last step used the smoothness of fi. Combining the bounds on T2 and T3 in the original inequality and using a =
+1
+K−1
+gives
+1
+N
+X
+i
+E
+yi,k −x
+2 ≤
+(1 +
+1
+K−1)
+N
+X
+i
+E
+yi,k−1 −x
+2 + η2
+l σ2
++ 6η2
+l Kβ(f(x) −f(x⋆)) + 6Kη2
+l
+N
+X
+i
+E∥ci −∇fi(x⋆)∥2 .
+Recall that with the choice of ci in (19), the variance of ci is less than σ2
+K . Separating its mean and variance gives
+1
+N
+X
+i
+E
+yi,k −x
+2 ≤
+
+1 +
+1
+K −1
+ 1
+N
+X
+i
+E
+yi,k−1 −x
+2 + 7η2
+l σ2+
+6η2
+l Kβ(f(x) −f(x⋆)) + 6Kη2
+l
+N
+X
+i
+∥E[ci] −∇fi(x⋆)∥2
+(25)
+Unrolling the recursion (25), we get the following for any k ∈{1, . . . , K}
+1
+N
+X
+i
+E
+yi,k −x
+2 ≤
+ 6Kβη2
+l (f(x) −f(x⋆)) + 6Kη2
+l Cr−1 + 7βη2
+l σ2
+ k−1
+X
+τ=0
+(1 +
+1
+K−1)τ
+!
+≤
+ 6Kβη2
+l (f(x) −f(x⋆)) + 6Kη2
+l Cr−1 + 7βη2
+l σ2
+(K −1)((1 +
+1
+K−1)K −1)
+≤
+ 6Kβη2
+l (f(x) −f(x⋆)) + 6Kη2
+l Cr−1 + 7βη2
+l σ2
+3K
+≤18K2βη2
+l (f(x) −f(x⋆)) + 18K2η2
+l Cr−1 + 21Kβη2
+l σ2 .
+The inequality (K −1)((1 +
+1
+K−1)K −1) ≤3K can be veriﬁed for K = 2, 3 manually. For K ≥4,
+(K −1)((1 +
+1
+K−1)K −1) < K(exp(
+K
+K−1) −1) ≤K(exp( 4
+3) −1) < 3K .
+Again averaging over k and multiplying by 3β yields
+3βEr ≤54K2β2η2
+l (f(x) −f(x⋆)) + 54K2βη2
+l Cr−1 + 63βKη2
+l σ2
+=
+1
+η2g
+
+54β2˜η2(f(x) −f(x⋆)) + 54β˜η2Cr−1 + 63β˜η2 σ2
+K
+
+≤
+1
+η2g
+
+1
+25(f(x) −f(x⋆)) + 2
+3 ˜ηCr−1 + ˜η σ2
+K
+
+.
+The equality follows from the deﬁnition ˜η = Kηlηg, and the ﬁnal inequality uses the bound that ˜η ≤
+1
+81β .
+
+PDF PAGE 30
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Progress in one round.
+Now that we have a bound on all errors, we can describe our progress.
+Lemma 13. Suppose assumptions A3–A5 are true. Then the following holds for any step-sizes satisfying ηg ≥1, ηl ≤
+min
+
+1
+81βKηg ,
+S
+15µNKηg
+
+, and effective step-size ˜η := Kηgηl
+E
+h
+∥xr −x⋆∥2 + 9N ˜η2
+S
+Cr
+i
+≤(1−µ˜η
+2 )
+
+E∥xr−1 −x⋆∥2 + 9N ˜η2
+S
+Cr−1
+
+−˜η(E[f(xr−1)]−f(x⋆))+ 12˜η2
+KS (1+ S
+η2g )σ2 .
+Proof. Starting from our server update equation,
+∆x = −˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) + c −ci), and E[∆x] = −
+˜η
+KN
+X
+k,i
+gi(yi,k−1) .
+We can then apply Lemma 10 to bound the second moment of the server update as
+Er−1∥x + ∆x −x⋆∥2 = Er−1∥x −x⋆∥2 −2˜η
+KS Er−1
+X
+k,i∈S
+⟨∇fi(yi,k−1), x −x⋆⟩+ Er−1
+∆x
+2
+≤2˜η
+KS Er−1
+X
+k,i∈S
+⟨∇fi(yi,k−1), x⋆−x⟩
+|
+{z
+}
+T4
++ Er−1∥x −x⋆∥2
++ 8β˜η2(E[f(xr−1)] −f(x⋆)) + 8˜η2Cr−1 + 4˜η2β2E + 12˜η2σ2
+KS
+.
+The term T4 can be bounded by using perturbed strong-convexity (Lemma 5) with h = fi, x = yi,k−1, y = x⋆, and z = x
+to get
+E[T4] = 2˜η
+KS E
+X
+k,i∈S
+⟨∇fi(yi,k−1), x⋆−x⟩
+≤2˜η
+KS E
+X
+k,i∈S
+
+fi(x⋆) −fi(x) + β∥yi,k−1 −x∥2 −µ
+4 ∥x −x⋆∥2
+= −2˜η E
+
+f(x) −f(x⋆) + µ
+4 ∥x −x⋆∥2
++ 2β˜ηE .
+Plugging T4 back, we can further simplify the expression to get
+E∥x + ∆x −x⋆∥2 ≤E∥x −x⋆∥2 −2˜η
+
+f(x) −f(x⋆) + µ
+4 ∥x −x⋆∥2
++ 2β˜ηE
++ 12˜η2σ2
+KS
++ 8β˜η2(E[f(xr−1)] −f(x⋆)) + 8˜η2Cr−1 + 4˜η2β2E
+= (1 −µ˜η
+2 )∥x −x⋆∥2 + (8β˜η2 −2˜η)(f(x) −f(x⋆))
++ 12˜η2σ2
+KS
++ (2β˜η + 4β2˜η2)E + 8˜η2Cr−1 .
+We can use Lemma 11 (scaled by 9˜η2 N
+S ) to bound the control-lag
+9˜η2 N
+S Cr ≤(1 −µ˜η
+2 )9˜η2 N
+S Cr−1 + 9( µ˜ηN
+2S −1)˜η2Cr−1 + 9˜η2 4β(E[f(xr−1)] −f(x⋆)) + 2β2E
+
+Now recall that Lemma 12 bounds the client-drift:
+3β˜ηEr ≤2˜η2
+3 Cr−1 +
+˜η
+25η2g (E[f(xr−1)] −f(x⋆)) +
+˜η2
+Kη2g σ2 .
+Adding all three inequalities together,
+E∥x + ∆x −x⋆∥2 + 9˜η2NCr
+S
+≤(1 −µ˜η
+2 )
+
+E∥x −x⋆∥2 + 9˜η2NCr−1
+S
+
++ (44β˜η2 −49
+25 ˜η)(f(x) −f(x⋆))
++ 12˜η2σ2
+KS
+(1 + S
+η2g ) + (22β2˜η2 −β˜η)E + ( 9µ˜ηN
+2S
+−1
+3)˜η2Cr−1
+Finally, the lemma follows from noting that ˜η ≤
+1
+81β implies 44β2˜η2 ≤24
+25 ˜β and ˜η ≤
+S
+15µN implies 9µ˜ηN
+2S
+≤1
+3.
+
+PDF PAGE 31
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+The ﬁnal rate follows simply by unrolling the recursive bound in Lemma 13 using Lemma 1 in the strongly-convex case
+and Lemma 2 if µ = 0. Also note that if c0
+i = gi(x0), then ˜ηN
+S C0 can be bounded in terms of function sub-optimality F.
+E.2. Convergence of SCAFFOLD for non-convex functions (Theorem III)
+We now analyze the most general case of SCAFFOLD with option II on functions which are potentially non-convex. Just
+as in the non-convex proof, we will ﬁrst bound the variance of the server update in Lemma 14, the change in control lag in
+Lemma 15 and ﬁnally we bound the client-drift in Lemma 16. Combining these three together gives us the progress made
+in one round in Lemma 17. The ﬁnal rate is derived from the progress made using Lemma 2.
+Additional notation.
+Recall that in round r, we update the control variate as (19)
+cr
+i =
+(
+1
+K
+PK
+k=1 gi(yr
+i,k−1)
+if i ∈Sr ,
+cr−1
+i
+otherwise .
+We introduce the following notation to keep track of the ‘lag’ in the update of the control variate: deﬁne a sequence of
+parameters {αr−1
+i,k−1} such that for any i ∈[N] and k ∈[K] we have α0
+i,k−1 := x0 and for r ≥1,
+αr
+i,k−1 :=
+(
+yr
+i,k−1
+if i ∈Sr ,
+αr−1
+i,k−1
+otherwise .
+(26)
+By the update rule for control variates (19) and the deﬁnition of {αr−1
+i,k−1} above, the following property always holds:
+cr
+i = 1
+K
+K
+X
+k=1
+gi(αr
+i,k−1) .
+We can then deﬁne the following Ξr to be the error in control variate for round r:
+Ξr :=
+1
+KN
+K
+X
+k=1
+N
+X
+i=1
+E∥αr
+i,k−1 −xr∥2 .
+(27)
+Also recall the closely related deﬁnition of client drift caused by local updates:
+Er :=
+1
+KN
+K
+X
+k=1
+N
+X
+i=1
+E[∥yr
+i,k −xr−1∥2] .
+Variance of server update.
+Let us analyze how the control variates effect the variance of the aggregate server update.
+Lemma 14. For updates (18)—(21)and assumptions A4 and A5, the following holds true for any ˜η := ηlηgK ∈[0, 1/β]:
+E∥Er−1[xr] −xr−1∥2 ≤2˜η2β2Er + 2˜η2 E∥∇f(xr−1)∥2 , and
+E∥xr −xr−1∥2 ≤4˜η2β2Er + 8˜η2β2Ξr−1 + 4˜η2 E∥∇f(xr−1)∥2 + 9˜η2σ2
+KS
+.
+Proof. Recall that that the server update satisﬁes
+E[∆x] = −
+˜η
+KN
+X
+k,i
+E[gi(yi,k−1)] .
+From the deﬁnition of αr−1
+i,k−1 and dropping the superscript everywhere we have
+∆x = −˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) + c −ci) where ci = 1
+K
+X
+k
+gi(αi,k−1) .
+
+PDF PAGE 32
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Taking norm on both sides and separating mean and variance, we proceed as
+E∥∆x∥2 = E∥−˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) −gi(αi,k−1) + c −ci)∥2
+≤E
+−˜η
+KS
+X
+k,i∈S
+(∇fi(yi,k−1) + E[c] −E[ci])
+
+2
++ 9˜η2σ2
+KS
+≤E
+ ˜η2
+KS
+X
+k,i∈S
+∇fi(yi,k−1) + E[c] −E[ci]
+
+2
++ 9˜η2σ2
+KS
+=
+˜η2
+KN
+X
+k,i
+E
+(∇fi(yi,k−1) −∇fi(x)) + (E[c] −∇f(x)) + ∇f(x) −(E[ci] −∇fi(x))
+
+2
++ 9˜η2σ2
+KS
+≤4˜η2
+KN
+X
+k,i
+E∥∇fi(yi,k−1) −∇fi(x)∥2 + 8˜η2
+KN
+X
+k,i
+E∥∇fi(αi,k−1) −∇fi(x)∥2
++ 4˜η2 E∥∇f(x)∥2 + 9˜η2σ2
+KS
+≤4˜η2β2Er + 8β2˜η2Ξr−1 + 4˜η2 E∥∇f(x)∥2 + 9˜η2σ2
+KS
+.
+In the ﬁrst inequality, note that the three random variables— 1
+KS
+P
+k,i∈S gi(yi,k), 1
+S
+P
+i∈S ci, and c—may not be inde-
+pendent but each have variance smaller than
+σ2
+KS and so we can apply Lemma 4. The rest of the inequalities follow from
+repeated applications of the relaxed triangle inequality, β-Lipschitzness of fi, and the deﬁnition of Ξr−1 (27). This proves
+the second statement. The ﬁrst statement follows from our expression of Er−1[∆x] and similar computations.
+Lag in the control variates.
+We now analyze the ‘lag’ in the control variates due to us sampling only a small subset
+of clients each round. Because we cannot rely on convexity anymore but only on the Lipschitzness of the gradients, the
+control-lag increases faster in the non-convex case.
+Lemma 15. For updates (18)—(21) and assumptions A4, A5, the following holds true for any ˜η ≤
+1
+24β ( S
+N )α for α ∈[ 1
+2, 1]
+where ˜η := ηlηgK:
+Ξr ≤(1 −17S
+36N )Ξr−1 +
+1
+48β2 ( S
+N )2α−1∥∇f(xr−1)∥2 + 97
+48( S
+N )2α−1Er + (
+S
+Nβ2 )
+σ2
+32KS .
+Proof. The proof proceeds similar to that of Lemma 11 except that we cannot rely on convexity. Recall that after round r,
+the deﬁnition of αr
+i,k−1 (26) implies that
+ESr[αr
+i,k−1] = (1 −S
+N )αr−1
+i,k−1 + S
+N yr
+i,k−1 .
+Plugging the above expression in the deﬁnition of Ξr we get
+Ξr =
+1
+KN
+X
+i,k
+E∥αr
+i,k−1 −xr∥2
+=
+
+1 −S
+N
+
+·
+1
+KN
+X
+i
+E∥αr−1
+i,k−1 −xr∥2
+|
+{z
+}
+T5
++ S
+N ·
+1
+KN
+X
+k,i
+E∥yr
+i,k−1 −xr∥2
+|
+{z
+}
+T6
+.
+We can expand the second term T6 with the relaxed triangle inequality to claim
+T6 ≤2(Er + E∥∆xr∥2) .
+
+PDF PAGE 33
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+We will expand the ﬁrst term T5 to claim for a constant b ≥0 to be chosen later
+T5 =
+1
+KN
+X
+i
+E(∥αr−1
+i,k−1 −xr−1∥2 + ∥∆xr∥2 + Er−1
+D
+∆xr, αr−1
+i,k−1 −xr−1E
+)
+≤
+1
+KN
+X
+i
+E(∥αr−1
+i,k−1 −xr−1∥2 + ∥∆xr∥2 + 1
+b∥Er−1[∆xr]∥2 + b∥αr−1
+i,k−1 −xr−1∥2)
+where we used Young’s inequality which holds for any b ≥0. Combining the bounds for T5 and T6,
+Ξr ≤
+ 1 −S
+N
+
+(1 + b)Ξr−1 + 2 S
+N Er + 2 E∥∆xr∥2 + 1
+b E∥Er−1[∆xr]∥2
+≤(
+ 1 −S
+N
+
+(1 + b) + 16˜η2β2)Ξr−1 + ( 2S
+N + 8˜η2β2 + 2 1
+b ˜η2β2)Er + (8 + 2 1
+b)˜η2 E∥∇f(x)∥2) + 18˜η2σ2
+KS
+The last inequality applied Lemma 14. Verify that with choice of b =
+S
+2(N−S), we have
+ 1 −S
+N
+
+(1 + b) ≤(1 −
+S
+2N )
+and 1
+b ≤2N
+S . Plugging these values along with the bound on the step-size 16β2˜η2 ≤
+1
+36( S
+N )2α ≤
+S
+36N completes the
+lemma.
+Bounding the drift.
+We will next bound the client drift Er. For this, convexity is not crucial and we will recover a very
+similar result to Lemma 12 only use the Lipschitzness of the gradient.
+Lemma 16. Suppose our step-sizes satisfy ηl ≤
+1
+24βKηg and fi satisﬁes assumptions A4–A5. Then, for any global ηg ≥1
+we can bound the drift as
+5
+3β2˜ηEr ≤5
+3β3˜η2Ξr−1 +
+˜η
+24η2g E∥∇f(xr−1)∥2 +
+˜η2β
+4Kη2g σ2 .
+Proof. First, observe that if K = 1, Er = 0 since yi,0 = x for all i ∈[N] and that Ξr−1 and the right hand side are both
+positive. Thus the Lemma is trivially true if K = 1 and we will henceforth assume K ≥2. Starting from the update rule
+(18) for i ∈[N] and k ∈[K]
+E∥yi,k −x∥2 = E∥yi,k−1 −ηl(gi(yi,k−1) + c −ci) −x∥2
+≤E∥yi,k−1 −ηl(∇fi(yi,k−1) + c −ci) −x∥2 + η2
+l σ2
+≤(1 +
+1
+K−1) E∥yi,k−1 −x∥2 + Kη2
+l E∥∇fi(yi,k−1) + c −ci∥2 + η2
+l σ2
+= (1 +
+1
+K−1) E∥yi,k−1 −x∥2 + η2
+l σ2
++ Kη2
+l E∥∇fi(yi,k−1) −∇fi(x) + (c −∇f(x)) + ∇f(x) −(ci −∇fi(x)∥2
+≤(1 +
+1
+K−1) E∥yi,k−1 −x∥2 + 4Kη2
+l E∥∇fi(yi,k−1) −∇fi(x)∥2 + η2
+l σ2
++ 4Kη2
+l E∥c −∇f(x)∥2 + 4Kη2
+l E∥∇f(x)∥2 + 4Kη2
+l E∥ci −∇fi(x)∥2
+≤(1 +
+1
+K−1 + 4Kβ2η2
+l ) E∥yi,k−1 −x∥2 + η2
+l σ2 + 4Kη2
+l E∥∇f(x)∥2
++ 4Kη2
+l E∥c −∇f(x)∥2 + 4Kη2
+l E∥ci −∇fi(x)∥2
+The inequalities above follow from repeated application of the relaxed triangle inequalities and the β-Lipschitzness of fi.
+Averaging the above over i, the deﬁnition of c = 1
+N
+P
+i ci and Ξr−1 (27) gives
+1
+N
+X
+i
+E∥yi,k −x∥2 ≤(1 +
+1
+K−1 + 4Kβ2η2
+l ) 1
+N
+X
+i
+E∥yi,k−1 −x∥2
++ η2
+l σ2 + 4Kη2
+l E∥∇f(x)∥2 + 8Kη2
+l β2Ξr−1
+≤
+ η2
+l σ2 + 4Kη2
+l E∥∇f(x)∥2 + 8Kη2
+l β2Ξr−1
+
+ k−1
+X
+τ=0
+(1 +
+1
+K−1 + 4Kβ2η2
+l )τ
+!
+=
+ ˜η2σ2
+K2η2g
++ 4˜η2
+Kη2g
+E∥∇f(x)∥2 + 8˜η2β2
+Kη2g
+Ξr−1
+ k−1
+X
+τ=0
+(1 +
+1
+K−1 + 4β2˜η2
+Kη2g
+)τ
+!
+≤
+
+˜ησ2
+24βK2η2g
++
+1
+144β2Kη2g
+E∥∇f(x)∥2 +
+˜ηβ
+3Kη2g
+Ξr−1
+
+3K .
+
+PDF PAGE 34
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+The last inequality used the bound on the step-size β˜η ≤
+1
+24. Averaging over k and multiplying both sides by 5
+3β2˜η yields
+the lemma statement.
+Progress made in each round.
+Given that we can bound all sources of error, we can ﬁnally prove the progress made in
+each round.
+Lemma 17. Suppose the updates (18)—(21) satisfy assumptions A4–A5. For any effective step-size ˜η := Kηgηl satisfying
+˜η ≤
+1
+24β
+  S
+N
+ 2
+3 ,
+
+E[f(xr)] + 12β3˜η2 N
+S Ξr
+
+≤
+
+E[f(xr−1)] + 12β3˜η2 N
+S Ξr−1
+
++ 5β˜η2σ2
+KS
+(1 + S
+η2g ) −˜η
+14 E∥∇f(xr−1)∥2 .
+Proof. Starting from the smoothness of f and taking conditional expectation gives
+Er−1[f(x + ∆x)] ≤f(x) + ⟨∇f(x), Er−1[∆x]⟩+ β
+2 Er−1∥∆x∥2 .
+We as usual dropped the superscript everywhere. Recall that the server update can be written as
+∆x = −˜η
+KS
+X
+k,i∈S
+(gi(yi,k−1) + c −ci), and ES[∆x] = −
+˜η
+KN
+X
+k,i
+gi(yi,k−1) .
+Substituting this in the previous inequality and applying Lemma 14 to bound E[∥∆x∥2] gives
+E[f(x + ∆x)] −f(x) ≤−
+˜η
+KN
+X
+k,i
+⟨∇f(x), E[∇fi(yi,k−1)]⟩+ β
+2 E∥∆x∥2
+≤−
+˜η
+KN
+X
+k,i
+⟨∇f(x), E[∇fi(yi,k−1)]⟩+
+2˜η2β3Er + 4˜η2β3Ξr−1 + 2β˜η2 E∥∇f(x)∥2 + 9β˜η2σ2
+2KS
+≤−˜η
+2∥∇f(x)∥2 + ˜η
+2
+X
+i,k
+E
+
+1
+KN
+X
+i,k
+∇fi(yi,k−1) −∇f(x)
+
+2
++
+2˜η2β3Er + 4˜η2β3Ξr−1 + 2β˜η2 E∥∇f(x)∥2 + 9β˜η2σ2
+2KS
+≤−˜η
+2∥∇f(x)∥2 +
+˜η
+2KN
+X
+i,k
+E
+∇fi(yi,k−1) −∇fi(x)
+
+2
++
+2˜η2β3Er + 4˜η2β3Ξr−1 + 2β˜η2 E∥∇f(x)∥2 + 9β˜η2σ2
+2KS
+≤−( ˜η
+2 −2β˜η2)∥∇f(x)∥2 + ( ˜η
+2 + 2β˜η2)β2Er + 4β3˜η2Ξr−1 + 9β˜η2σ2
+2KS
+.
+The third inequality follows from the observation that −ab = 1
+2((b−a)2 −a2)−1
+2b2 ≤1
+2((b−a)2 −a2) for any a, b ∈R,
+and the last from the β-Lipschitzness of fi. Now we use Lemma 15 to bound Ξr as
+12β3˜η2 N
+S Ξr ≤12β3˜η2 N
+S
+
+(1 −17S
+36N )Ξr−1 +
+1
+48β2 ( S
+N )2α−1∥∇f(xr−1)∥2 + 97
+48( S
+N )2α−1Er + (
+S
+Nβ2 )
+σ2
+32KS
+
+= 12β3˜η2 N
+S Ξr−1 −17
+3 β3˜η2Ξr−1 + 1
+4β˜η2( N
+S )2−2α∥∇f(x)∥2 + 97
+4 β3˜η2( N
+S )2−2αEr + 3β˜η2σ2
+8KS
+.
+Also recall that Lemma 16 states that
+5
+3β2˜ηEr ≤5
+3β3˜η2Ξr−1 +
+˜η
+24η2g E∥∇f(xr−1)∥2 +
+˜η2β
+4Kη2g σ2 .
+
+PDF PAGE 35
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Adding these bounds on Ξr and Er to that of E[f(x + ∆x)] gives
+(E[f(x + ∆x)] + 12β3˜η2 N
+S Ξr) ≤(E[f(x)] + 12β3˜η2 N
+S Ξr−1) + ( 5
+3 −17
+3 )β3˜η2Ξr−1
+−( ˜η
+2 −2β˜η2 −1
+4β˜η2( N
+S )2−2α)∥∇f(x)∥2 + ( ˜η
+2 −5˜η
+3 + 2β˜η2 + 97
+4 β˜η2( N
+S )2−2α)β2Er + 39β˜η2σ2
+8KS
+(1 + S
+η2g ) .
+By our choice of α = 2
+3 and plugging in the bound on step-size β˜η( N
+S )2−2α ≤
+1
+24 proves the lemma.
+The non-convex rate of convergence now follows by unrolling the recursion in Lemma 17 and selecting an appropriate
+step-size ˜η as in Lemma 2. Finally note that if we initialize c0
+i = gi(x0) then we have Ξ0 = 0.
+
+PDF PAGE 36
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+F. Usefulness of local steps (Theorem IV)
+Let us state our rates of convergence for SCAFFOLD which interpolates between identical and completely heterogeneous
+clients. In this section, we always set ηg = 1 and assume all clients participate (S = N).
+Theorem VIII. Suppose that the functions {fi} are quadratic and satisfy assumptions A4, A5 and additionally A2. Then,
+for global step-size ηg = 1 in each of the following cases, there exist probabilities {pr
+k} and local step-size ηl such that the
+output (29) of SCAFFOLD when run with no client sampling (S = N) using update (28) satisﬁes:
+• Strongly convex: fi satisﬁes (A3) for µ > 0, ηl ≤min(
+1
+10β ,
+1
+22δK ,
+1
+10µK ), R ≥max( 20β
+µ , 44δK+20µK
+µ
+, 20K) then
+E[∥∇f(¯xR)∥2] ≤˜O
+
+βσ2
+µRKN + µD2 exp
+
+−
+µ
+20β + 44δK + 20µK RK
+
+.
+• General convex: f satisﬁes ∇2f ⪰−δI, ηl ≤min(
+1
+10β ,
+1
+22δK ), and R ≥1, then
+E[∥∇f(¯xR)∥2] ≤O
+ 
+σ
+p
+β(f(x0) −f ⋆)
+√
+RKN
++ (β + δK)(f(x0) −f ⋆)
+RK
+!
+.
+Note that if δ = 0, we match (up to acceleration) the lower bound in (Woodworth et al., 2018). While certainly δ = 0
+when the functions are identical as studied in (Woodworth et al., 2018), our upper-bound is signiﬁcantly stronger since it is
+possible that δ = 0 even for highly heterogeneous functions. For example, objective perturbation (Chaudhuri et al., 2011;
+Kifer et al., 2012) is an optimal mechanism to achieve differential privacy for smooth convex objectives (Bassily et al.,
+2014). Intuitively, objective perturbation relies on masking each client’s gradients by adding a large random linear term to
+the objective function. In such a case, we would have high gradient dissimilarity but no Hessian dissimilarity.
+Our non-convex convergence rates are the ﬁrst of their kind as far as we are aware—no previous work shows how one can
+take advantage of similarity for non-convex functions. However, we should note that non-convex quadratics do not have
+a global lower-bound on the function value f ⋆. We will instead assume that f ⋆almost surely lower-bounds the value of
+f(xR), implicitly assuming that the iterates remain bounded.
+Outline.
+In the rest of this section, we will focus on proving Theorem VIII. We will show how to bound variance in
+Lemma 21, bound the amount of drift in Lemma 20, and show progress made in one step in Lemma 22. In all of these we
+do not use convexity, but strongly rely on the functions being quadratics. Then we combine these to derive the progress
+made by the server in one round—for this we need weak-convexity to argue that averaging the parameters does not hurt
+convergence too much. As before, it is straight-forward to derive rates of convergence from the one-round progress using
+Lemmas 1 and 2.
+F.1. Additional notation and assumptions
+For any matrix M and vector v, let ∥v∥2
+M := v⊤Mv. Since all functions in this section are quadratics, we can assume
+w.l.o.g they are of the following form:
+fi(x) −fi(x⋆
+i ) = 1
+2∥x −x⋆
+i ∥2
+Ai for i ∈[N] , and f(x) = 1
+2∥x −x⋆
+i ∥2
+A , for all x ,
+for some {x⋆
+i } and x⋆, A :=
+1
+N
+PN
+i=1 Ai. We also assume that A is a symmetric matrix though this requirement is easily
+relaxed. Note that this implies f(x⋆) = 0 and that ∇fi(x) = A(x −x⋆
+i ). If {fi} are additionally convex, we have that x⋆
+i
+is the optimum of fi and x⋆the optimum of f. However, this is not necessarily true in general.
+We will also focus on a simpliﬁed version of SCAFFOLD where in each round r, client i performs the following update
+starting from yr
+i,0 ←xr−1:
+yr
+i,k = yr
+i,k−1 −η(gi(yr
+i,k−1) + ∇f(xr−1) −∇fi(xr−1)) , i.e.
+Er−1,k−1[yr
+i,k] = yr
+i,k−1 −ηA(yr
+i,k−1 −x⋆) −η(Ai −A)(yr
+i,k−1 −xr−1)) ,
+(28)
+
+PDF PAGE 37
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+where the second part is specialized to quadratics and the expectation is conditioned over everything before current step
+k of round r. At the end of each round, as before, xr =
+1
+N
+PN
+i=1 yr
+i,K. The ﬁnal output of the algorithm is chosen using
+probabilities {pr
+k} as
+¯xR = xr
+k with probability pr
+k , where xr
+k := 1
+N
+N
+X
+i=1
+yr
+i,k .
+(29)
+Note that we are now possibly outputting iterates computed within a single round and that xr = xr
+K. Beyond this, the
+update above differs from our usual SCAFFOLD in two key aspects: a) it uses gradients computed at xr−1 as control
+variates instead of those at either xr−2 (as in option I) or yr−1
+i,k
+(as in option II), and b) it uses full batch gradients to
+compute its control variates instead of stochastic gradients. The ﬁrst issue is easy to ﬁx and our proof extends to using
+both option I or option II using techniques in Section E. The second issue is more technical—using stochastic gradients for
+control variates couples the randomness across the clients in making the local-updates biased. While it may be possible to
+get around this (cf. (Lei & Jordan, 2017; Nguyen et al., 2017; Tran-Dinh et al., 2019)), we will not attempt to do so in this
+work. Note that if K local update steps typically represents running multiple epochs on each client. Hence one additional
+epoch to compute the control variate ∇fi(x) does not signiﬁcantly add to the cost.
+Finally, we deﬁne the following sequence of positive numbers for notation convenience:
+ξr
+i,k :=
+ Er−1[f(yr
+i,k)] −f(x⋆) + δ(1 + 1
+K )K−k Er−1∥yr
+i,k −xr−1∥2
+, and
+˜ξr
+i,k :=
+ [f(Er−1[yr
+i,k])] −f(x⋆) + δ(1 + 1
+K )K−k Er−1,k−1∥Er−1[yr
+i,k] −xr−1∥2
+.
+Observe that for k = 0, ξr
+i,0 = ˜ξr
+i,0 = f(xr−1) −f(x⋆).
+F.2. Lemmas tracking errors
+Effect of averaging.
+We see how averaging can reduce variance. A similar argument was used in the special case of
+one-shot averaging in (Zhang et al., 2013b).
+Lemma 18. Suppose {fi} are quadratic functions and assumption A4 is satisﬁed. Then let xr
+k and yr
+i,k be vectors in step
+k and round r generated using (28)—(29). Then,
+Er−1∥∇f(xr
+k)∥2 ≤1
+N
+N
+X
+i=1
+∥∇f(Er−1[yr
+i,k])∥2 + 1
+N 2
+N
+X
+i=1
+Er−1[∥∇f(yr
+i,k)∥2] .
+Proof. Observe that the variables {yi,k −x} are independent of each other (the only source of randomness is the local
+gradient computations). The rest of the proof is exactly that of Lemma 4. Dropping superscripts everywhere,
+Er−1∥A(xr
+k −x⋆)∥2 = Er−1∥1
+N
+X
+i
+A(yi,k −x⋆)∥2
+= Er−1∥1
+N
+X
+i
+A(Er−1[yi,k] −x⋆)∥2 + Er−1∥1
+N
+X
+i
+A(Er−1[yi,k] −yi,k)∥2
+= Er−1∥1
+N
+X
+i
+A(Er−1[yi,k] −x⋆)∥2 +
+1
+N2
+X
+i
+Er−1∥A(Er−1[yi,k] −yi,k)∥2
+= Er−1∥1
+N
+X
+i
+A(Er−1[yi,k] −x⋆)∥2 +
+1
+N2
+X
+i
+Er−1∥A(yi,k −x⋆−Er−1[yi,k −x⋆])∥2
+≤Er−1∥1
+N
+X
+i
+A(Er−1[yi,k] −x⋆)∥2 +
+1
+N2
+X
+i
+Er−1∥A(yi,k −x⋆)∥2 .
+The third equality was because {yi,k} are independent of each other conditioned on everything before round r.
+We next see the effect of averaging on function values.
+Lemma 19. Suppose that f is δ general-convex, then we have:
+1
+N
+n
+X
+i=1
+ξr
+i,k ≥Er−1[f(xr
+k)] −f(x⋆) , and 1
+N
+n
+X
+i=1
+˜ξr
+i,k ≥f(Er−1[xr
+k]) −f(x⋆) .
+
+PDF PAGE 38
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Proof. Since f is δ-general convex, it follows that the function f(z) + δ(1 + 1
+K )K−k∥z −x∥2
+2 is convex in z for any
+k ∈[K]. The lemma now follows directly from using convexity and the deﬁnition of xr
+k = 1
+N yr
+i,k.
+Bounding drift of one client.
+We see how the client drift of SCAFFOLD depends on δ.
+Lemma 20. For the update (28), assuming (A2) and that {fi} are quadratics, the following holds for any η ≤
+1
+21δK
+Er−1,k−1∥yr
+i,k −xr−1∥2 ≤(1 +
+1
+2K )∥yr
+i,k−1 −xr−1∥2 + 7Kη2∥∇f(yr
+i,k−1)∥2 + η2σ2 .
+Proof. Starting from the update step (28)
+Er−1,k−1∥y+
+i −x∥2 ≤∥yi −x −ηA(yi −x⋆) −η(Ai −A)(yi −x)∥2 + η2σ2
+≤(1 +
+1
+7(K−1))∥(I −η(Ai −A)(yi −x)∥2 + 7Kη2∥A(yi −x⋆)∥2 + η2σ2 .
+Note that if K = 1, then the ﬁrst inequality directly proves the lemma. For the second inequality, we assumed K ≥2 and
+then applied our relaxed triangle inequality. By assumption A2, we have the following for ηδ ≤1
+∥(I −η(Ai −A))2∥= ∥I −η(Ai −A)∥2 ≤(1 + ηδ)2 ≤1 + 3ηδ .
+Using the bound on the step-size η ≤
+1
+21δK gives
+Er−1,k−1∥y+
+i −x∥2 ≤(1 +
+1
+7K )(1 +
+1
+7(K−1))∥yi −x∥2 + 7Kη2∥A(yi −x⋆)∥2 + η2σ2
+Simple computations now give the Lemma statement for all K ≥1.
+Tracking the variance.
+We will see how to bound the variance of the output.
+Lemma 21. Consider the update (28) for quadratic {fi} with η ≤max(
+1
+2δK , 1
+β ). Then, if further (A2), (A5) and (A4)
+are satisﬁed, we have
+Er−1 f(xr) ≤f(Er−1[xr]) + 3Kβ σ2
+N .
+Further if {fi} are strongly convex satisfying (A3), we have
+Er−1 f(xr) ≤f(Er−1[xr]) + β σ2
+N
+K
+X
+k=1
+(1 −µη)k−1 .
+Proof. We can rewrite the update step (28) as below:
+yi,k = yi,k−1 −η(Ai(yi,k−1 −x⋆) + (A −Ai)(x −x⋆)) −ηζi,k ,
+where by the bounded variance assumption A4, ζi,k is a random variable satisfying Ek−1,r−1[ζi,k]
+=
+0 and
+Ek−1,r−1∥ζi,k∥2 ≤σ2. Subtracting x⋆from both sides and unrolling the recursion gives
+yi,K −x⋆= (I −ηAi)(yi,K−1 −x⋆) −η((A −Ai)(x −x⋆) + ζi,K)
+= (I −ηAi)K(x −x⋆) −
+K
+X
+k=1
+η(I −ηAi)k−1(ζi,k + (A −Ai)(x −x⋆)) .
+Similarly, the expected iterate satisﬁes the same equation without the ζi,k
+Er−1[yi,K] −x⋆= (I −ηAi)K(x −x⋆) −
+K
+X
+k=1
+η(I −ηAi)k−1(A −Ai)(x −x⋆) .
+This implies that the difference satisﬁes
+Er−1[yi,K] −yi,K = η
+K
+X
+k=1
+(I −ηAi)k−1ζi,k .
+
+PDF PAGE 39
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+We can relate this to the function value as follows:
+Er−1∥xr
+K −x⋆∥2
+A = ∥Er−1[xr
+k] −x⋆∥2
+A + Er−1∥Er−1[xr
+k] −xr
+K∥2
+A
+= ∥Er−1[xr
+k] −x⋆∥2
+A + Er−1∥1
+N
+P
+i(Er−1[yi,K] −yi,K)∥2
+A
+= ∥Er−1[xr
+k] −x⋆∥2
+A + η2 Er−1∥1
+N
+P
+i,k(I −ηAi)k−1ζi,k∥2
+A
+= ∥Er−1[xr
+k] −x⋆∥2
+A + η2
+N2 Er−1
+P
+i,k∥(I −ηAi)k−1ζi,k∥2
+A
+≤∥Er−1[xr
+k] −x⋆∥2
+A + βη2
+N 2 Er−1
+P
+i,k∥(I −ηAi)k−1ζi,k∥2
+2 .
+The last inequality used smoothness of f and the one before that relied on the independence of ζi,k. Now, if fi is general
+convex we have for η ≤
+1
+2δK that I −ηAi ⪯(1 +
+1
+2K )I and hence
+∥(I −ηAi)k−1ζi,k∥2
+2 ≤σ2(1 +
+1
+2K )2(k−1) ≤3σ2 .
+This proves our second statement of the lemma. For strongly convex functions, we have for η ≤1
+β ,
+∥(I −ηAi)k−1ζi,k∥2
+2 ≤σ2(1 −ηµ)2(k−1) ≤σ2(1 −ηµ)k−1 .
+F.3. Lemmas showing progress
+Progress of one client in one step.
+Now we focus only on a single client and monitor their progress.
+Lemma 22. Suppose (A2), (A5) and (A4) hold, and {fi} are quadratics. Then, the following holds for the update (28)
+with η ≤min(
+1
+10β ,
+1
+22δK ,
+1
+µK ) with µ = 0 is f is non-convex or general-convex
+ξr
+i,k ≤(1 −µη
+6 )ξr
+i,k−1 −η
+6 Er−1∥∇f(yr
+i,k−1)∥2 + 7βη2σ2, and
+˜ξr
+i,k ≤(1 −µη
+6 )˜ξr
+i,k−1 −η
+6∥∇f(Er−1[yr
+i,k−1])∥2 .
+Proof. Recall that ξr
+i,k ≥0 is deﬁned to be
+ξr
+i,k :=
+ Er−1[f(yr
+i,k)] −f(x⋆) + δ(1 + 1
+K )K−k Er−1∥yr
+i,k −xr−1∥2
+.
+Let us start from the local update step (28) (dropping unnecessary subscripts and superscripts)
+Er−1,k−1∥y+
+i −x⋆∥2
+A ≤∥yi −x⋆∥2
+A −2η⟨A(yi −x⋆), A(yi −x⋆)⟩+ 2η⟨(A −Ai)(yi −x), A(yi −x⋆)⟩
++ η2∥A(yi −x⋆) + (Ai −A)(yi −x))∥2
+A + βη2σ2
+≤∥yi −x⋆∥2
+A −3η
+2 ∥A(yi −x⋆)∥2
+2 + 2η∥(A −Ai)(yi −x)∥2
+2
++ 2η2∥A(yi −x⋆)∥2
+A + 2η2∥(Ai −A)(yi −x))∥2
+A + βη2σ2
+≤∥yi −x⋆∥2
+A −( 3η
+2 −2η2β)∥A(yi −x⋆)∥2
+2 + βη2σ2 + δ2(2η2β + 2η)∥yi −x∥2
+2
+≤∥yi −x⋆∥2
+A −( 3η
+2 −2η2β)∥A(yi −x⋆)∥2
+2 + βη2σ2 +
+δ
+10K ∥yi −x∥2
+2 .
+The second to last inequality used that ∥· ∥2
+A ≤β∥· ∥2
+2 by (A5) and that ∥(A −Ai)( · )∥2
+2 ≤δ2∥· ∥2
+2 by (A2). The ﬁnal
+inequality used that η ≤max(
+1
+10β ,
+1
+22δK ). Now, multiplying Lemma 20 by δ(1 + 1
+K )K−k ≤20δ
+7 we have
+δ(1 + 1
+K )K−k Er−1,k−1∥y+
+i −x∥2 ≤δ(1 + 1
+K )K−k(1 +
+1
+2K )∥yi −x∥2 + 20δKη2∥A(yi −x⋆)∥2 + 3δη2σ2
+≤δ(1 + 1
+K )K−k(1 +
+1
+2K +
+1
+10K )∥yi −x∥2 −
+δ
+10K ∥yi −x∥2
++ 20δKη2∥A(yi −x⋆)∥2 + 3δη2σ2
+≤(1 −
+1
+5K )δ(1 + 1
+K )K−k+1(1 + 1
+K )∥yi −x∥2 −
+δ
+10K ∥yi −x∥2
++ 20δKη2∥A(yi −x⋆)∥2 + 3δη2σ2 .
+
+PDF PAGE 40
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Adding this to our previous equation gives the following recursive bound:
+ Er−1,k−1∥y+
+i −x⋆∥2
+A + δ(1 + 1
+K )K−k Er−1,k−1∥y+
+i −x∥2
+≤
+ ∥yi −x⋆∥2
+A + (1 −
+1
+5K )δ(1 + 1
+K )K−k+1∥yi −x∥2
+−( 3η
+2 −2η2β −20δKη2)∥A(yi −x⋆)∥2
+2 + (3δ + β)η2σ2
+The bound on our step-size η ≤min(
+1
+10β ,
+1
+22δK ) implies that 3η
+2 −2η2β −20δKη2 ≥η
+3 and recall that δ ≤2β. This
+proves ﬁrst statement of the lemma for non-strongly convex functions (µ = 0). If additionally f is strongly-convex with
+µ > 0, we have
+η∥A(yi −x⋆)∥2
+2 ≥µη
+2 ∥yi −x⋆∥2
+A + η
+2∥A(yi −x⋆)∥2
+2 .
+This can be used to tighten the inequality as follows
+
+Er−1,k−1∥y+
+i −x⋆∥2
+A + δ(1 + 1
+K )K−(k−1) Er−1,k−1∥y+
+i −x∥2
+≤
+ (1 −µη
+6 )∥yi −x⋆∥2
+A + (1 −
+1
+5K )δ(1 + 1
+K )K−k+1∥yi −x∥2
+−η
+2∥A(yi −x⋆)∥2
+2 + 7βη2σ2
+If η ≤
+1
+µK , then (1 −
+1
+5K ) ≤(1 −µη
+6 ) and we have the strongly-convex version of the ﬁrst statement.
+Now for the second statement, recall that ˜ξr
+i,k ≥0 was deﬁned to be
+˜ξr
+i,k :=
+ [f(Er−1[yr
+i,k])] −f(x⋆) + δ(1 + 1
+K )K−k Er−1∥Er−1[yr
+i,k] −xr−1∥2
+.
+Observe that for quadratics, Er−1[∇f(x)] = ∇f(Er−1[x]). This implies that the analysis of ˜ξr
+i,k is essentially of a
+deterministic process with σ = 0, proving the second statement. It is also straightforward to repeat exactly the above
+argument to formally verify the second statement.
+Server progress in one round.
+Now we combine the progress made by each client in one step to calculate the server
+progress.
+Lemma 23. Suppose (A2), (A5) and (A4) hold, and {fi} are quadratics. Then, the following holds for the update (28)
+with η ≤min(
+1
+10β ,
+1
+21δK ,
+1
+10µK ) and weights wk := (1 −µη
+6 )1−k:
+η
+6
+K
+X
+k=1
+wk Er−1∥∇f(xr
+k)∥2 ≤(f(Er−2[xr−1]) −f ⋆) −wK(f(Er−1[xr]) −f ⋆) +
+K
+X
+k=1
+wk8η σ2
+N .
+Set µ = 0 if {fi}s are not strongly-convex (is only general-convex).
+Proof. Let us do the non-convex (and general convex) case ﬁrst. By summing over Lemma 22 we have
+η
+6
+K
+X
+k=1
+Er−1∥∇f(yi,k)∥2 ≤ξr
+i,0 −ξr
+i,K + 7Kβη2σ2 .
+A similar result holds with σ = 0 for Er−1[yi,k]. Now, using Lemma 18 we have that
+η
+6
+K
+X
+k=1
+Er−1∥∇f(xr
+k)∥2 ≤1
+N
+N
+X
+i=1
+(˜ξr
+i,0 + 1
+N ξi,0)
+|
+{z
+}
+=:θr
++
+−1
+N
+N
+X
+i=1
+(˜ξr
+i,K + 1
+N ξi,K)
+|
+{z
+}
+=:θr
+−
++7Kβη2 σ2
+N .
+Using Lemma 21, we have that
+θr
++ = (1 + 1
+N )(f(xr−1) −f(x⋆)) ≤f(Er−1[xr]) + 1
+N E f(xr) −(1 + 1
+N )f(x⋆) + 3Kβ σ2
+N .
+Further, by Lemma 19, we have that
+θr
+−≥f(Er−1[xr]) + 1
+N f(xr) −(1 + 1
+N )f(x⋆) .
+
+PDF PAGE 41
+SCAFFOLD: Stochastic Controlled Averaging for Federated Learning
+Combining the above gives:
+η
+6
+K
+X
+k=1
+Er−1∥∇f(xr
+k)∥2 ≤f(Er−2[xr−1]) −f(Er−1[xr]) + 10βK σ2
+N .
+proving the second part of the Lemma for weights wk = 1. The proof of strongly convex follows a very similar argument.
+Unrolling Lemma 22 using weights wk := (1 −µη
+6 )1−k gives
+η
+6
+K
+X
+k=1
+wk Er−1∥∇f(xr
+k)∥2 ≤θr
++ −wKθr
+−+
+K
+X
+k=1
+wk7η σ2
+N .
+As in the general-convex case, we can use Lemmas 19, 18 and 21 to prove that
+η
+6
+K
+X
+k=1
+wk Er−1∥∇f(xr
+k)∥2 ≤(f(Er−2[xr−1]) −f ⋆) −wK(f(Er−1[xr]) −f ⋆) +
+K
+X
+k=1
+wk8η σ2
+N .
+Deriving ﬁnal rates.
+The proof of Theorem VIII follows by appropriately unrolling Lemma 23. For general-convex
+functions, we can simply use Lemma 2 with the probabilities set as pr
+k =
+1
+KR. For strongly-convex functions, we use
+pr
+k ∝(1 −µη
+6 )1−rk and follow the computations in Lemma 1.

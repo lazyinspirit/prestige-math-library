@@ -1,0 +1,40 @@
+--- items/cor-erm-excess-risk-from-uniform-deviation.md
++++ proposal/cor-erm-excess-risk-from-uniform-deviation.md
+@@ -36,7 +36,7 @@
+ 
+ $$R_P(h):=Pg_h,\qquad \widehat R_S(h):=P_mg_h.$$
+ 
+-Suppose a measurable prediction rule $\widehat h_\eta$ exists such that each samplewise output is an $\eta$-approximate empirical risk minimizer, meaning $\widehat R_S(\widehat h_\eta(S))\le\inf_{h\in\mathcal H}\widehat R_S(h)+\eta$ for a fixed finite $\eta\ge0$. Assume $S\mapsto R_P(\widehat h_\eta(S))$ is measurable. For $\delta\in(0,1)$, with independent uniform signs $\sigma_i$, $\widehat{\mathfrak R}_S(\mathcal G)=\mathbb E_\sigma\sup_{g\in\mathcal G}m^{-1}\sum_i\sigma_i g(Z_i)$ and $\mathfrak R_m(\mathcal G)=\mathbb E_S\widehat{\mathfrak R}_S(\mathcal G)$, each of the following excess-risk bounds holds with probability at least $1-\delta$:
++Suppose a measurable prediction rule $\widehat h_\eta$ exists such that $\widehat h_\eta(S)\in\mathcal H$ for every sample $S$ and each samplewise output is an $\eta$-approximate empirical risk minimizer, meaning $\widehat R_S(\widehat h_\eta(S))\le\inf_{h\in\mathcal H}\widehat R_S(h)+\eta$ for a fixed finite $\eta\ge0$. Assume $S\mapsto R_P(\widehat h_\eta(S))$ is measurable. For $\delta\in(0,1)$, with independent uniform signs $\sigma_i$, $\widehat{\mathfrak R}_S(\mathcal G)=\mathbb E_\sigma\sup_{g\in\mathcal G}m^{-1}\sum_i\sigma_i g(Z_i)$ and $\mathfrak R_m(\mathcal G)=\mathbb E_S\widehat{\mathfrak R}_S(\mathcal G)$, each of the following excess-risk bounds holds with probability at least $1-\delta$:
+ 
+ $$R_P(\widehat h_\eta(S))-\inf_{h\in\mathcal H}R_P(h)\le4\mathfrak R_m(\mathcal G)+2\sqrt{\frac{\log(2/\delta)}{2m}}+\eta,$$
+ 
+@@ -70,7 +70,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A supervised prediction problem with bounded measurable loss, IID sample, AC, and an existing measurable $\eta$-approximate ERM rule whose selected population risk is measurable.
++**Given:** A supervised prediction problem with bounded measurable loss, IID sample, AC, and an existing measurable $\eta$-approximate ERM rule with $\widehat h_\eta(S)\in\mathcal H$ for every sample $S$ and measurable selected population risk.
+ 
+ [A1] Assume AC. It is used by the concentration theorem in the uniform-deviation supplier. [[def-axiom-of-choice]]
+ 
+@@ -78,7 +78,7 @@
+ 
+ [F2] Population risk is the integral of the loss under $P$ and empirical risk is its sample average. For $g_h(x,y)=\ell(h(x),y)$ these equal $Pg_h$ and $P_mg_h$. [[def-population-and-empirical-risk]]
+ 
+-[F3] An $\eta$-approximate ERM has empirical risk at most the empirical infimum plus $\eta$ when the infimum is finite; a measurable prediction rule is a jointly measurable sample-indexed predictor, and the definition asserts no selector exists for every class. [[def-empirical-risk-minimizer]]
++[F3] An $\eta$-approximate ERM relative to $\mathcal H$ belongs to $\mathcal H$ and has empirical risk at most the empirical infimum plus $\eta$ when the infimum is finite; the supplied measurable prediction rule has $\widehat h_\eta(S)\in\mathcal H$ for every sample $S$, is jointly measurable in sample and new instance, and the definition asserts no selector exists for every class. [[def-empirical-risk-minimizer]]
+ 
+ [F4] The induced loss $g_h$ is measurable, and fixed-predictor population and empirical risks are well-defined. [[lem-population-and-empirical-risk-are-measurable]]
+ 
+@@ -94,8 +94,8 @@
+ 
+ 1.1 For each $h\in\mathcal H$, the supervised loss function $g_h$ is measurable by [F1] and [F4]. By [F2], $R_P(h)=Pg_h$ and $\widehat R_S(h)=P_mg_h$, so the uniform bounds in [F5]–[F6] control all predictors in $\mathcal H$ under the IID hypothesis [F7]. [F1, F2, F4, F5, F6, F7, given, construct]
+ 
+-2.1 On the event in [F5], put $d:=2\mathfrak R_m(\mathcal G)+\sqrt{\log(2/\delta)/(2m)}$. Then every $h$ satisfies $R_P(h)\le\widehat R_S(h)+d$ and $\widehat R_S(h)\le R_P(h)+d$. By [F3], $\widehat R_S(\widehat h_\eta)\le\inf_h\widehat R_S(h)+\eta$. Applying the first inequality to $\widehat h_\eta$ and taking the infimum in the second gives $R_P(\widehat h_\eta)-\inf_hR_P(h)\le d+\inf_h\widehat R_S(h)+\eta-\inf_hR_P(h)\le2d+\eta$, where $\inf_h\widehat R_S(h)\le\inf_hR_P(h)+d$. [F2, F3, F5, step 1.1, algebra]
++2.1 On the event in [F5], put $d:=2\mathfrak R_m(\mathcal G)+\sqrt{\log(2/\delta)/(2m)}$. Then every $h$ satisfies $R_P(h)\le\widehat R_S(h)+d$ and $\widehat R_S(h)\le R_P(h)+d$. By [F3], $\widehat R_S(\widehat h_\eta)\le\inf_h\widehat R_S(h)+\eta$. Since $\widehat h_\eta(S)\in\mathcal H$ by [F3], applying the first inequality to $\widehat h_\eta$ and taking the infimum in the second gives $R_P(\widehat h_\eta)-\inf_hR_P(h)\le d+\inf_h\widehat R_S(h)+\eta-\inf_hR_P(h)\le2d+\eta$, where $\inf_h\widehat R_S(h)\le\inf_hR_P(h)+d$. [F2, F3, F5, step 1.1, algebra]
+ 
+-2.2 On the event in [F6], put $d:=2\widehat{\mathfrak R}_S(\mathcal G)+3\sqrt{\log(4/\delta)/(2m)}$. The two inequalities $R_P(h)\le\widehat R_S(h)+d$ and $\widehat R_S(h)\le R_P(h)+d$ hold for every $h$. Thus [F3] gives $R_P(\widehat h_\eta)-\inf_hR_P(h)\le d+\inf_h\widehat R_S(h)+\eta-\inf_hR_P(h)\le2d+\eta$, using $\inf_h\widehat R_S(h)\le\inf_hR_P(h)+d$. [F2, F3, F6, step 1.1, algebra]
++2.2 On the event in [F6], put $d:=2\widehat{\mathfrak R}_S(\mathcal G)+3\sqrt{\log(4/\delta)/(2m)}$. The two inequalities $R_P(h)\le\widehat R_S(h)+d$ and $\widehat R_S(h)\le R_P(h)+d$ hold for every $h$. Since $\widehat h_\eta(S)\in\mathcal H$, [F3] permits applying the first inequality to the selected predictor and gives $R_P(\widehat h_\eta)-\inf_hR_P(h)\le d+\inf_h\widehat R_S(h)+\eta-\inf_hR_P(h)\le2d+\eta$, using $\inf_h\widehat R_S(h)\le\inf_hR_P(h)+d$. [F2, F3, F6, step 1.1, algebra]
+ 
+ 3.1 The events in [F5] and [F6] are the AC-dependent concentration branch [A1]. Each has probability at least $1-\delta$; step 2.1 proves the first displayed excess bound on the [F5] event, and step 2.2 proves the second on the [F6] event. Substituting each value of $d$ from those steps gives respectively $4\mathfrak R_m(\mathcal G)+2\sqrt{\log(2/\delta)/(2m)}+\eta$ and $4\widehat{\mathfrak R}_S(\mathcal G)+6\sqrt{\log(4/\delta)/(2m)}+\eta$. The guarantees are separate. [A1, F5, F6, step 2.1, step 2.2, algebra] ∎

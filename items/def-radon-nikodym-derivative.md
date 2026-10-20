@@ -15,6 +15,7 @@ sources:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Chapter 13"
       url: "https://www.math.wustl.edu/~victor/classes/ma5051/rags100514.pdf"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-radon-nikodym-derivative.json
   precheck: n/a
   verified:
     model: gpt-6-sol
@@ -30,9 +31,20 @@ verification:
 
 Let $\mu$ be a sigma-finite positive measure.
 
-1. If $\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.
-2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\nu$ is a finite complex measure and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of complex $L^1(\mu)$ functions $h$ satisfying
+1. If $\nu$ is a signed measure satisfying the hypothesis of A sigma-finite signed measure that is absolutely continuous with respect to a sigma-finite positive measure has a unique almost-everywhere density and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.
+2. Assuming the Axiom of Choice (The Axiom of Choice), if $\nu$ is a finite complex measure and $\nu\ll\mu$, the **Radon-Nikodym derivative** $d\nu/d\mu$ is the $\mu$-almost-everywhere equivalence class of complex $L^1(\mu)$ functions $h$ satisfying
    $$\nu(E)=\int_E h\,d\mu\qquad(E\in\mathcal A),$$
-   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].
+   as given by A finite complex measure absolutely continuous with respect to a sigma-finite positive measure has an integrable complex density.
 
-In both cases the derivative is not a distinguished pointwise function: it is determined only up to $\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].
+In both cases the derivative is not a distinguished pointwise function: it is determined only up to $\mu$-almost-everywhere equality in the sense of Measure-null sets and almost-everywhere statements relative to a measure.
+
+## Definition references
+
+[[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]
+
+[[def-axiom-of-choice]]
+
+[[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]]
+
+[[def-measure-null-set-and-almost-everywhere]]
+

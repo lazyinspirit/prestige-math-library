@@ -1,0 +1,1807 @@
+{
+  "version": 1,
+  "scope": [
+    "def-linear-regression-objectives",
+    "lem-gaussian-sample-covariance-operator-concentration",
+    "lem-chi-square-degree-ratio",
+    "lem-finite-gaussian-max-comparison",
+    "lem-standard-gaussian-maximum-expectation-lower-bound",
+    "cex-wainwright-conditional-covariance-eigenvalue-bound",
+    "fs-wainwright-lower-signed-support-threshold",
+    "thm-ols-and-ridge-solutions",
+    "lem-orthonormal-lasso-soft-thresholding",
+    "lem-lasso-active-set-stationarity",
+    "fs-wainwright-signed-support-threshold-claim",
+    "ex-correlated-predictors-and-shrinkage",
+    "ex-orthonormal-lasso-soft-thresholding",
+    "ex-beta-min-below-lasso-threshold-loses-support"
+  ],
+  "contracts": {
+    "def-linear-regression-objectives": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition, final intercept clause: The empirical loss uses n>=1, and the ordinary feature penalty sums over p>=1 coordinates. The final intercept convention can nevertheless leave no slope coordinates when p=1: its group partition is then empty and its group penalty is the empty sum zero, while the unpenalized intercept loss remains defined. A fused operator with no differences similarly contributes its zero-dimensional norm; no claim of minimizer existence is made for these objectives."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition states lambda>0 for Lasso and lambda>=0 for group/fused penalty weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition applies to n=p=1 with scalar X,y,beta."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits rank-deficient X for OLS and asserts no existence or uniqueness guarantee for group/fused objectives."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The penalty parameter domains and the separated unpenalized intercept are explicit in the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This is a deterministic objective definition and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition lists different regression objectives and states that multiplying the chosen lasso objective by two preserves its minimizers. That positive scaling identity is not a characterization of ridge, group, or fused solutions and supplies no converse optimization theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The same-minimizer normalization observation follows from a positive scalar multiple of the objective; the item defines the other penalties without any existence or uniqueness claim.",
+            "item_sha256": "3b96824107b83486d45a2db570fe8760eb74fb30bc14288f75fb87ae383d0444",
+            "row_sha256": "cd830c392c90ec48a792d325cfa4b1dd7193f54f5f367c51f87cdce7a885f0b0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition lists different regression objectives and states that multiplying the chosen lasso objective by two preserves its minimizers. That positive scaling identity is not a characterization of ridge, group, or fused solutions and supplies no converse optimization theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The same-minimizer normalization observation follows from a positive scalar multiple of the objective; the item defines the other penalties without any existence or uniqueness claim.",
+            "item_sha256": "3b96824107b83486d45a2db570fe8760eb74fb30bc14288f75fb87ae383d0444",
+            "row_sha256": "154a46623a7ad22a232961fd9028b16d1ce907b75f844075e35aa0b80d7651a7"
+          }
+        }
+      ]
+    },
+    "lem-gaussian-sample-covariance-operator-concentration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "chi-square-chernoff",
+          "step": "1.1",
+          "claim": "Fix $k$, abbreviate $d=d_k$, $n=n_k$, and take a fixed unit $v\\in\\mathbb R^d$. The row products $Z_i=(G_kv)_i$ are independent $N(0,1)$ by [A1]. From [F1], $\\mathbb E e^{tZ_i^2}=(1-2t)^{-1/2}$ for $t<1/2$; applying [F2] at $t=\\delta/(2(1+\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\ge1+\\delta)\\le e^{-n[\\delta-\\log(1+\\delta)]/2}\\le e^{-n\\delta^2/8}$ for $0<\\delta\\le1$, since $\\delta-\\log(1+\\delta)=\\int_0^\\delta t/(1+t)\\,dt\\ge\\delta^2/4$. For $0<\\delta<1$, applying [F2] at $u=\\delta/(2(1-\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\le1-\\delta)\\le e^{-n[-\\delta-\\log(1-\\delta)]/2}\\le e^{-n\\delta^2/4}$, since $-\\delta-\\log(1-\\delta)=\\int_0^\\delta t/(1-t)\\,dt\\ge\\delta^2/2$; at $\\delta=1$ this event requires all $Z_i=0$ and has probability zero. Thus $\\mathbb P(|v^{\\mathsf T}(G_k^{\\mathsf T}G_k/n-I_d)v|>\\delta)\\le2e^{-n\\delta^2/8}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "net-union-bound",
+          "step": "2.1",
+          "claim": "Fix $0<\\varepsilon<1$ and greedily add unit vectors at distance greater than $1/4$ from those already chosen whenever possible. The open balls of radius $1/8$ around a finite separated set are disjoint and lie in the radius-$9/8$ ball, so volume comparison gives $|\\mathcal N|(1/8)^d\\le(9/8)^d$; hence the process terminates within $9^d$ choices and its maximal set is a $1/4$-net. Applying step 1.1 with $\\delta=\\varepsilon/2$ and taking a union bound yields $\\mathbb P(\\max_{v\\in\\mathcal N}|v^{\\mathsf T}(G_k^{\\mathsf T}G_k/n-I_d)v|>\\varepsilon/2)\\le2\\exp(d\\log9-n\\varepsilon^2/32)\\to0$ because $d/n\\to0$.",
+          "inputs": [
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "net-to-operator-norm",
+          "step": "3.1",
+          "claim": "For any symmetric $H$, [F3] gives $\\|H\\|_{\\mathrm{op}}=\\sup_{\\|x\\|_2=1}|x^{\\mathsf T}Hx|$. For each unit $x$, choose $v\\in\\mathcal N$ with $\\|x-v\\|_2\\le1/4$. By [F4] and the operator-norm definition, $$|x^{\\mathsf T}Hx-v^{\\mathsf T}Hv|=|(x-v)^{\\mathsf T}Hx+v^{\\mathsf T}H(x-v)|\\le2(1/4)\\|H\\|_{\\mathrm{op}}.$$ Hence $\\|H\\|_{\\mathrm{op}}\\le2\\max_{v\\in\\mathcal N}|v^{\\mathsf T}Hv|$. On the complementary event in step 2.1, take $H=G_k^{\\mathsf T}G_k/n-I_d$ to obtain $\\|H\\|_{\\mathrm{op}}\\le\\varepsilon$. Since this holds for every $0<\\varepsilon<1$, larger tolerances follow by monotonicity, and the claimed convergence in probability follows.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "fixed dimension",
+          "result": "For d=1 and n increasing, the scalar chi-square tail in step 1.1 tends to zero.",
+          "check": "ml101-gaussian-scalar-covariance-tail",
+          "asserts": "1.1 Fix $k$, abbreviate $d=d_k$, $n=n_k$, and take a fixed unit $v\\in\\mathbb R^d$. The row products $Z_i=(G_kv)_i$ are independent $N(0,1)$ by [A1]. From [F1], $\\mathbb E e^{tZ_i^2}=(1-2t)^{-1/2}$ for $t<1/2$; applying [F2] at $t=\\delta/(2(1+\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\ge1+\\delta)\\le e^{-n[\\delta-\\log(1+\\delta)]/2}\\le e^{-n\\delta^2/8}$ for $0<\\delta\\le1$, since $\\delta-\\log(1+\\delta)=\\int_0^\\delta t/(1+t)\\,dt\\ge\\delta^2/4$. For $0<\\delta<1$, applying [F2] at $u=\\delta/(2(1-\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\le1-\\delta)\\le e^{-n[-\\delta-\\log(1-\\delta)]/2}\\le e^{-n\\delta^2/4}$, since $-\\delta-\\log(1-\\delta)=\\int_0^\\delta t/(1-t)\\,dt\\ge\\delta^2/2$; at $\\delta=1$ this event requires all $Z_i=0$ and has probability zero. Thus $\\mathbb P(|v^{\\mathsf T}(G_k^{\\mathsf T}G_k/n-I_d)v|>\\delta)\\le2e^{-n\\delta^2/8}$. [A1, F1, F2, given, algebra]",
+          "fixture": "fixed-dimension-tail"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes integer d_k,n_k>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles every tolerance 0<delta<=1; zero tolerance is not asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 and the Statement include d=1 and n=1 at each finite index."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every matrix entry is standard normal; a degenerate Gaussian covariance is outside the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses any fixed positive tolerance below 1; larger tolerances follow from a smaller one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 explicitly assume AC for the finite Gaussian construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a sufficient asymptotic condition, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a sufficient asymptotic condition, not an iff statement."
+        }
+      ]
+    },
+    "lem-chi-square-degree-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "normal-moments",
+          "step": "1.1",
+          "claim": "Integration by parts against [F1], using $\\phi'(x)=-x\\phi(x)$ and the vanishing Gaussian boundary terms, gives $\\mathbb E Z_{k,j}^2=1$ and $\\mathbb E Z_{k,j}^4=3$, hence $\\operatorname{Var}(Z_{k,j}^2)=2$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "chi-square-ratio",
+          "step": "2.1",
+          "claim": "Independence and step 1.1 give $\\mathbb E D_k=r_k$ and $\\mathbb E(D_k-r_k)^2=2r_k$. Fix $\\eta>0$; eventually $|r_k/n_k-1|<\\eta/2$, so $|D_k/n_k-1|>\\eta$ implies $|D_k-r_k|>\\eta n_k/2$. Applying [F2] to $(D_k-r_k)^2$ gives $\\mathbb P(|D_k/n_k-1|>\\eta)\\le8r_k/(\\eta^2n_k^2)\\to0$, since $r_k/n_k\\to1$ and $n_k\\to\\infty$. This is convergence in probability.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For each k the degrees r_k and comparison dimension n_k are positive integers, so D_k sums at least one squared normal and D_k/n_k has a nonzero denominator. The sequence tends to infinite comparison dimension; no zero-degree chi-square variable is included.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/neural_operator_repair/current_pde_supplier_proofs",
+            "reason": "The indexed aggregate detector matches the r_k-coordinate sum, whose strictly positive degree is explicit. Independence is required only within each finite row, not over an empty family or across all k."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The convergence statement is checked for each tolerance eta>0 in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The moment calculation in step 1.1 applies to one normal coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The coordinates are standard normals of variance one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles every positive eta and uses only r_k/n_k->1 and n_k->infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC for the finite independent normal family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states one sufficient convergence condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states one sufficient convergence condition."
+        }
+      ]
+    },
+    "lem-finite-gaussian-max-comparison": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "softmax-hessian",
+          "step": "1.1",
+          "claim": "For $a>0$ define $\\Phi_a(x)=a^{-1}\\log\\sum_{i=1}^m e^{ax_i}$ and $p_i(x)=e^{ax_i}/\\sum_j e^{ax_j}$. Direct differentiation gives $\\partial_i\\Phi_a=p_i$ and $\\partial_{ij}\\Phi_a=a(p_i\\mathbf1_{i=j}-p_ip_j)$, while $\\max_i x_i\\le\\Phi_a(x)\\le\\max_i x_i+\\log(m)/a$.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interpolation-derivative",
+          "step": "2.1",
+          "claim": "Let $C_X,C_Y$ be the covariance matrices. On the product probability space [F2], represent $X=A\\xi$, $Y=B\\eta$ by independent standard-normal coordinate vectors using AC and the Gaussian realization [A1]. Put $Z_t=\\sqrt tX+\\sqrt{1-t}Y$ and $F_a(t)=\\mathbb E\\Phi_a(Z_t)$. For $0<t<1$, differentiate under the expectation; on every closed subinterval of $(0,1)$ the derivative is bounded by a constant times $\\|\\xi\\|_2+\\|\\eta\\|_2$, which is integrable, so [F3] applies. One-dimensional integration by parts against [F1], with the bounded first and second derivatives from step 1.1, gives\n$$F_a'(t)=\\frac12\\sum_{i,j}(C_X-C_Y)_{ij}\\,\\mathbb E[\\partial_{ij}\\Phi_a(Z_t)].$$\nThe boundary terms vanish because $\\phi(x)$ decays to zero and $\\partial_i\\Phi_a$ is bounded.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "increment-variance-monotonicity",
+          "step": "3.1",
+          "claim": "Substituting the Hessian from step 1.1 into step 2.1 and using $\\sum_i p_i=1$ rewrites the derivative as $$F_a'(t)=\\frac a4\\mathbb E\\left[\\sum_{i,j}p_i(Z_t)p_j(Z_t)\\left(\\mathbb E[(X_i-X_j)^2]-\\mathbb E[(Y_i-Y_j)^2]\\right)\\right]\\ge0.$$ Therefore $F_a(1)\\ge F_a(0)$ by integration over $t\\in(0,1)$ and continuity at the endpoints, which follows from the same integrable bound.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "maximum-limit",
+          "step": "4.1",
+          "claim": "The uniform approximation in step 1.1 gives $|\\mathbb E\\Phi_a(X)-\\mathbb E\\max_iX_i|\\le\\log(m)/a$ and the analogous bound for $Y$. Letting $a\\to\\infty$ in step 3.1 proves the asserted comparison.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes m>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all increment variances are equal, step 3.1 gives a constant interpolation expectation and equality of maxima."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The comparison statement is restricted to m>=2 coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement allows finite singular covariance matrices; the representation and interpolation do not invert them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 establishes continuity at t=0 and t=1; step 4.1 takes a->infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the statement and A1 for finite Gaussian realization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a one-way comparison, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a one-way comparison, not a biconditional."
+        }
+      ]
+    },
+    "lem-standard-gaussian-maximum-expectation-lower-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "gaussian-tail-lower-bound",
+          "step": "1.1",
+          "claim": "Put $t_m=\\tfrac12\\sqrt{\\log m}$ and $q_m=\\mathbb P(G_1\\ge t_m)$. Since $\\phi$ decreases on $[0,\\infty)$, $q_m\\ge\\phi(t_m+1/(t_m+1))/(t_m+1)\\ge e^{-t_m^2/2-t_m-1/2}/(\\sqrt{2\\pi}(t_m+1))$; the last inequality follows from $t_m/(t_m+1)\\le t_m$ and $1/(2(t_m+1)^2)\\le1/2$. Hence $m q_m\\to\\infty$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "maximum-expectation-lower-bound",
+          "step": "2.1",
+          "claim": "Let $M_m=\\max_iG_i$. Independence gives $\\mathbb P(M_m<t_m)=(1-q_m)^m\\le e^{-m q_m}\\to0$ and $\\mathbb E[G_1\\mathbf1_{\\{M_m<t_m\\}}]=\\mathbb E[G_1\\mathbf1_{\\{G_1<t_m\\}}](1-q_m)^{m-1}\\ge-(1-q_m)^{m-1}/\\sqrt{2\\pi}$. Splitting at $M_m=t_m$ yields $\\mathbb E M_m\\ge t_m(1-(1-q_m)^m)-(1-q_m)^{m-1}/\\sqrt{2\\pi}\\ge t_m/2=\\frac14\\sqrt{\\log m}$ for all sufficiently large $m$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim is for m sufficiently large and m>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the positive level t_m=1/2 sqrt(log m) for m large."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The assertion only claims the asymptotic bound for m>=m0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The coordinates are independent nondegenerate standard normals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the explicit asymptotic bound for all sufficiently large m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the statement for the finite Gaussian family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way lower bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way lower bound."
+        }
+      ]
+    },
+    "cex-wainwright-conditional-covariance-eigenvalue-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "covariance-hypotheses",
+          "step": "1.1",
+          "claim": "Fix any integer $s\\ge1$, set $p=2s$, $S=\\{1,\\ldots,s\\}$, and take $\\Sigma=\\begin{pmatrix}I_s&\\frac34I_s\\\\[2pt]\\frac34I_s&I_s\\end{pmatrix}$ with $C_{\\min}=1$, $C_{\\max}=7/4$, $D_{\\max}=1$, and $\\epsilon=1/4$. The vectors $(u,u)$ and $(u,-u)$ have eigenvalues $7/4$ and $1/4$ for every $u\\in\\mathbb R^s$, and these subspaces span $\\mathbb R^{2s}$; hence $\\Sigma$ is positive definite with unit diagonal and maximum eigenvalue $C_{\\max}$. Also $\\Sigma_{SS}=I_s$, so its minimum eigenvalue is $C_{\\min}$ and its inverse infinity norm is $D_{\\max}$, while $\\|\\Sigma_{S^cS}\\Sigma_{SS}^{-1}\\|_\\infty=3/4=1-\\epsilon$. Thus all stated covariance hypotheses hold.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "schur-complement-violation",
+          "step": "2.1",
+          "claim": "Substitution in [A1] gives $\\Sigma_{S^c\\mid S}=I_s-(3I_s/4)I_s^{-1}(3I_s/4)=7I_s/16$, so $\\lambda_{\\min}(\\Sigma_{S^c\\mid S})=7/16<4/7=1/C_{\\max}$ since $49<64$. Direct block multiplication gives $\\Sigma^{-1}=(16/7)\\begin{pmatrix}I_s&-3I_s/4\\\\[2pt]-3I_s/4&I_s\\end{pmatrix}$, whose lower-right block is $16I_s/7$, the inverse of the conditional covariance rather than the conditional covariance itself. Thus the proposed bound is false.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "s=1",
+          "result": "Sigma=[[1,3/4],[3/4,1]], conditional variance 7/16, while 1/Cmax=4/7.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "2.1 Substitution in [A1] gives $\\Sigma_{S^c\\mid S}=I_s-(3I_s/4)I_s^{-1}(3I_s/4)=7I_s/16$, so $\\lambda_{\\min}(\\Sigma_{S^c\\mid S})=7/16<4/7=1/C_{\\max}$ since $49<64$. Direct block multiplication gives $\\Sigma^{-1}=(16/7)\\begin{pmatrix}I_s&-3I_s/4\\\\[2pt]-3I_s/4&I_s\\end{pmatrix}$, whose lower-right block is $16I_s/7$, the inverse of the conditional covariance rather than the conditional covariance itself. Thus the proposed bound is false. [A1, step 1.1, algebra] ∎",
+          "fixture": "schur-s1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires both S and S^c nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example uses the interior incoherence value epsilon=1/4 in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is valid for s=1 and the finite smoke calculation checks that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The covariance eigenvalues 1/4 and 7/4 in step 1.1 are strictly positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the strict numerical inequality 7/16<4/7."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The block matrix and coordinate set are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to a universal lower bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to a universal lower bound, not a biconditional."
+        }
+      ]
+    },
+    "fs-wainwright-lower-signed-support-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-sample-covariance-operator-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d_k,n_k\\ge1$ be integer sequences with $d_k/n_k\\to0$. For each $k$, let $G_k\\in\\mathbb R^{n_k\\times d_k}$ have mutually independent $N(0,1)$ entries. Then\n\n$$\\left\\|\\frac{G_k^{\\mathsf T}G_k}{n_k}-I_{d_k}\\right\\|_{\\mathrm{op}}\\xrightarrow[k\\to\\infty]{\\mathbb P}0.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-chi-square-degree-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $r_k,n_k$ be positive integers with $n_k\\to\\infty$ and $r_k/n_k\\to1$. For each $k$, let $Z_{k,1},\\ldots,Z_{k,r_k}$ be independent $N(0,1)$ random variables and set $D_k=\\sum_{j=1}^{r_k}Z_{k,j}^2$. Then $D_k/n_k\\to1$ in probability.",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$, fixed weights $w_g>0$, and $\\lambda\\ge0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lower-derivation-1",
+          "step": "1.1",
+          "claim": "Fix $\\delta=\\epsilon=10^{-6}$, $c=(1-\\epsilon)/2$, $a=1/1000$, and $\\nu=1/100000$. For integers $N\\ge2$ tending to infinity set $$s=N^3,\\qquad p=s+N,\\qquad n=s+\\lceil a s\\log N\\rceil,\\qquad S=\\{1,\\ldots,s\\},\\qquad \\lambda_n=1.$$ In each observation let the first $2N$ active coordinates consist of independent pairs $(U_j,V_j)$, $1\\le j\\le N$, each with covariance $$B=\\begin{pmatrix}1&-(1-\\delta)\\\\-(1-\\delta)&1\\end{pmatrix},$$ and let the other $s-2N$ active coordinates be independent standard normals, independent of these pairs. Take independent standard normals $Z_j$, independent also of all active variables, and define the inactive coordinates by $$T_j=c(U_j-V_j)+\\sqrt r Z_j,\\qquad r=1-(1-\\epsilon)^2(1-\\delta/2).$$ Take independent observations and independent standard-normal noise $w_i$; set $\\beta_i^*=n$ on $S$ and zero off $S$. These finite Gaussian constructions define the model in the Statement, with $\\sigma^2=1$ and no intercept.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "lower-derivation-2",
+          "step": "2.1",
+          "claim": "The eigenvalues of $B$ are $\\delta$ and $2-\\delta$, and each row of $B^{-1}$ has absolute sum $1/\\delta$. Thus $C_{\\min}=\\delta$ and $D_{\\max}=1/\\delta$ work. Each inactive coordinate regresses on its pair with coefficients $(c,-c)$, so $\\|\\Sigma_{S^cS}\\Sigma_{SS}^{-1}\\|_\\infty=2c=1-\\epsilon$. Its variance is one by the definition of $r$, and $0<r<2\\epsilon+\\delta/2<3\\cdot10^{-6}$. The full covariance, after reordering, is a direct sum of positive-definite three-dimensional covariance blocks and singleton identity blocks: each triple is an invertible linear image of $(U_j,V_j,Z_j)$ because $r>0$. Every triple has trace three, so every eigenvalue is at most three. Consequently $C_{\\max}=3$ bounds the maximum eigenvalue of the full covariance, and all its diagonal entries are one.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-3",
+          "step": "3.1",
+          "claim": "For these constants, $$\\sqrt3-\\sqrt{8/3}=\\frac{1/3}{\\sqrt3+\\sqrt{8/3}}>\\frac1{12},\\qquad 3(2-\\epsilon)^2<12,$$ so the precise claimed constant satisfies $\\theta_\\ell>1/1728$ and $2(\\theta_\\ell-\\nu)>2(1/1728-1/100000)>a$. Since $\\lceil a s\\log N\\rceil\\le a s\\log N+1$, the claimed failure inequality $n<2(\\theta_\\ell-\\nu)s\\log N+s+1$ holds. Also $s,n-s,N\\to\\infty$ and $s/n\\to0$. The constant penalty is positive and non-increasing. The lower claim puts no restriction on $\\rho_n=n$.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-4",
+          "step": "4.1",
+          "claim": "Write $X_S=Z\\Sigma_{SS}^{1/2}$, with $Z$ an $n\\times s$ iid standard-Gaussian matrix, and put $G=X_S^{\\mathsf T}X_S$ and $A=G/n$. By [F1] and $s/n\\to0$, with probability tending to one the minimum eigenvalue of $A$ is at least $\\delta/2$ and $\\|A^{-1}\\|_{\\mathrm{op}}\\le2/\\delta$. On this event define $$\\widehat\\beta_S=n\\mathbf1+\\eta-A^{-1}\\mathbf1,\\qquad \\eta=A^{-1}X_S^{\\mathsf T}w/n,\\qquad \\widehat\\beta_{S^c}=0.$$ The shrinkage term satisfies $\\|A^{-1}\\mathbf1\\|_\\infty\\le2\\sqrt{s}/\\delta=o(n)$. Conditional on $X_S$, $\\eta$ is centered Gaussian with covariance $A^{-1}/n$, so [F5] and a finite union bound give $$\\mathbb P(\\|\\eta\\|_\\infty\\ge1\\mid X_S)\\le2s e^{-n\\delta/4}\\longrightarrow0$$ uniformly on the spectral event. Thus every active candidate coordinate is positive with probability tending to one.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-5",
+          "step": "4.2",
+          "claim": "Put $b=\\mathbf1_s$ and $T=b^{\\mathsf T}\\Sigma_{SS}^{-1}b=s-2N+2N/\\delta$, so $T/s\\to1$. To compute $Q=b^{\\mathsf T}G^{-1}b$, put $v=\\Sigma_{SS}^{-1/2}b$ and choose a fixed orthogonal matrix with first column $v/\\|v\\|_2$. Orthogonal invariance and [F4] make the rotated columns of $Z$, written $[h,H]$, mutually independent standard-Gaussian columns. They have full column rank almost surely: condition successively on earlier columns; for each fixed proper column subspace, projection onto any fixed nonzero normal vector has a continuous normal law, so a new standard-Gaussian column belongs to that subspace with probability zero. For full-rank $H$ put $$P_H=H(H^{\\mathsf T}H)^{-1}H^{\\mathsf T},\\qquad D=h^{\\mathsf T}(I-P_H)h.$$ Block elimination in the Gram matrix of $[h,H]$ gives exactly $Q=T/D$. For each fixed full-rank $H$, the projector $I-P_H$ has rank $n-s+1$, so orthogonal invariance gives the conditional law $D\\sim\\chi^2_{n-s+1}$. This conditional law is the same for every such $H$; the projector is a measurable function of $H$, and no random basis is selected. Since $(n-s+1)/n\\to1$, [F2] gives $D/n\\to1$ in probability, and therefore $Q/(s/n)\\to1$ in probability.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "lower-derivation-6",
+          "step": "5.1",
+          "claim": "Let $P=X_SG^{-1}X_S^{\\mathsf T}$. The candidate residual is $$u=y-X_S\\widehat\\beta_S=(I-P)w+nX_SG^{-1}b,\\qquad X_S^{\\mathsf T}u/n=b.$$ Its two displayed summands are orthogonal. For inactive column $j$, the construction gives $X_j=X_S a_j+\\sqrt r z_j$, where $a_j$ has entries $(c,-c)$ on its pair and zero elsewhere, and the $z_j$ are mutually independent standard-Gaussian vectors independent of $X_S,w$. Because $a_j^{\\mathsf T}b=0$, the dual variables $$V_j=X_j^{\\mathsf T}u/n=\\sqrt r z_j^{\\mathsf T}u/n$$ are, conditional on $X_S,w$, independent centered normals of common variance $$rM,\\qquad M=\\|u\\|_2^2/n^2=Q+\\|(I-P)w\\|_2^2/n^2.$$ By [F2], $\\|w\\|_2^2/n\\to1$ in probability. Since the second term is at most $\\|w\\|_2^2/n^2$, step 4.2 and $s\\to\\infty$ show $\\mathbb P(M\\le4s/n)\\to1$. This event depends only on $X_S,w$ and is independent of all inactive residual vectors.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-7",
+          "step": "6.1",
+          "claim": "On the event $M\\le4s/n$, since $n\\ge a s\\log N$ and $r<3\\cdot10^{-6}$, $$rM\\le\\frac{4r}{a\\log N}<\\frac{3}{250\\log N}.$$ Applying [F5] and a finite union bound conditionally on $X_S,w$ yields the uniform bound $$\\mathbb P\\!\\left(\\max_{1\\le j\\le N}|V_j|\\ge1\\,\\middle|\\,X_S,w\\right)\\le2N\\exp\\!\\left(-\\frac1{2rM}\\right)\\le2N^{1-125/3}\\longrightarrow0.$$ Removing the conditioning and adding the probability of $M>4s/n$ proves $\\max_j|V_j|<1$ with probability tending to one. Intersecting with the event in step 4.1 preserves probability tending to one and gives both active sign correctness and inactive dual feasibility.",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lower-derivation-8",
+          "step": "7.1",
+          "claim": "On this intersection put $z=X^{\\mathsf T}u/n$. It equals one on $S$ and satisfies $|z_j|<1$ off $S$. Since the candidate is positive on $S$ and zero off $S$, the scalar inequality $|\\widehat\\beta_i+h_i|-|\\widehat\\beta_i|\\ge z_i h_i$ holds for every coordinate and every real $h_i$. For every $h\\in\\mathbb R^p$, expand [F6], with $\\lambda_n=1$, to obtain $$F(\\widehat\\beta+h)-F(\\widehat\\beta)=\\frac{\\|Xh\\|_2^2}{2n}-h^{\\mathsf T}X^{\\mathsf T}u/n+\\|\\widehat\\beta+h\\|_1-\\|\\widehat\\beta\\|_1\\ge0.$$ Thus this candidate is an optimizer with $\\operatorname{sgn}(\\widehat\\beta)=\\operatorname{sgn}(\\beta^*)$. Its existence has probability tending to one, whereas step 3.1 meets the exact hypotheses that predict probability tending to zero. This refutes the stated lower implication.",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The original asymptotic formulation assumes all three dimensions diverge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes strictly positive penalty and variance-one noise."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No fixed one-dimensional limit is asserted; this refutes a growing-dimensional implication."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies positive-definite covariance and the proof treats rank failure as a null event or excludes it on the spectral event."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the strict original threshold and all dimensional/tuning conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The full original Statement and A1 carry every choice hypothesis used by the finite Gaussian suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted branch is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted branch is an implication, not a biconditional."
+        }
+      ]
+    },
+    "thm-ols-and-ridge-solutions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tikhonov-regularised-least-squares",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. The **Tikhonov regularised\nleast-squares objective** is the map\n\n$$ J_\\lambda(x):=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2 \\qquad(x\\in\\mathbb F^n), $$\n\nwhere $\\|\\cdot\\|_2$ is the Euclidean norm induced by the standard inner product\n([[def-inner-product-norm]]).\n\nThe parameter $\\lambda$ is part of the problem data. The second term penalises\nlarge norms of $x$, so the regularised problem is not the same optimisation\nproblem as the unregularised least-squares problem.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F\\in\\{\\mathbb R,\\mathbb C\\}$, let\n$A\\in M_{m\\times n}(\\mathbb F)$, let $b\\in\\mathbb F^m$, and let\n$\\lambda\\in\\mathbb R$ satisfy $\\lambda>0$. Then\nthe Tikhonov objective\n\n$$J_\\lambda(x)=\\|Ax-b\\|_2^2+\\lambda\\|x\\|_2^2$$\n\nis strictly convex and has the unique minimiser\n\n$$x_\\lambda=(A^*A+\\lambda I)^{-1}A^*b.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$, fixed weights $w_g>0$, and $\\lambda\\ge0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ols-solution-set",
+          "step": "1.1",
+          "claim": "Apply [F1] to the linear map $\\beta\\mapsto X\\beta$ between finite-dimensional Euclidean spaces. It gives existence, the equation $X^{\\mathsf T}(X\\beta-y)=0$, and the full set $\\beta_0+\\ker X$.",
+          "inputs": [
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "ols-uniqueness",
+          "step": "2.1",
+          "claim": "The translate $\\beta_0+\\ker X$ has exactly one element if and only if $\\ker X=\\{0\\}$. By definition this is equivalent to linear independence of the columns, proving the OLS uniqueness assertion.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ridge-invertibility-and-formula",
+          "step": "3.1",
+          "claim": "By [F2], there is an orthonormal basis of $\\mathbb R^p$ in which $X^{\\mathsf T}X$ is diagonal with entries $\\sigma_1^2,\\ldots,\\sigma_r^2,0,\\ldots,0$. Thus $X^{\\mathsf T}X+\\lambda I_p$ has positive diagonal entries $\\sigma_j^2+\\lambda$ and $\\lambda$, so the inverse exists. The objective in [F3] is exactly the ridge objective in [F5], and [F4] gives its unique minimizer in the displayed formula.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "X=[1,1]",
+          "result": "OLS normal equations give beta_1+beta_2=y; for lambda=1 and y=1, ridge gives (1/3,1/3).",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, and $y\\in\\mathbb R^n$. The ordinary least-squares minimizers of $\\|y-X\\beta\\|_2^2$ are exactly the solutions of $X^{\\mathsf T}X\\beta=X^{\\mathsf T}y$; if $\\beta_0$ is one such solution, the full minimizer set is $\\beta_0+\\ker X$. It is a singleton if and only if the columns of $X$ are linearly independent. For every $\\lambda>0$, the ridge objective $\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2$ has the unique minimizer\n$$\\widehat\\beta_{\\mathrm{ridge}}=(X^{\\mathsf T}X+\\lambda I_p)^{-1}X^{\\mathsf T}y.$$",
+          "fixture": "duplicate-ols-ridge"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes n,p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes lambda>0 for ridge; the OLS branch allows zero coefficients and zero response."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 specialize to the scalar case n=p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 allow rank-deficient X and characterize all minimizers; SVD step 2.1 makes ridge invertible regardless of rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement asserts the ridge formula only for lambda>0 and claims no lambda=0 ridge endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The local finite-dimensional consequences use supplied published results and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves singleton OLS minimizer implies ker X={0}, hence full column rank."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves ker X={0} gives a singleton OLS minimizer set."
+        }
+      ]
+    },
+    "lem-orthonormal-lasso-soft-thresholding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$, fixed weights $w_g>0$, and $\\lambda\\ge0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "coordinate-separation",
+          "step": "1.1",
+          "claim": "Put $z=X^{\\mathsf T}y$. Expanding the squared norm and using $X^{\\mathsf T}X=I_p$ gives $\\frac{1}{2n}\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_1=\\frac{\\|y\\|_2^2-\\|z\\|_2^2}{2n}+\\sum_{j=1}^p\\left(\\frac{(\\beta_j-z_j)^2}{2n}+\\lambda|\\beta_j|\\right)$. The first term is constant in $\\beta$, so the minimization separates into scalar strictly convex objectives.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "scalar-threshold-cases",
+          "step": "2.1",
+          "claim": "For a scalar $z$, the derivative of $(t-z)^2/(2n)+\\lambda|t|$ on $t>0$ is $(t-z)/n+\\lambda$, and on $t<0$ it is $(t-z)/n-\\lambda$. The positive stationary point is $t=z-n\\lambda$ exactly when $z>n\\lambda$; the negative stationary point is $t=z+n\\lambda$ exactly when $z<-n\\lambda$. When $|z|\\le n\\lambda$, the one-sided derivatives at zero satisfy $(-z/n-\\lambda)\\le0\\le(-z/n+\\lambda)$, so zero minimizes. Strict convexity makes each minimizer unique, and these cases are precisely $S_{n\\lambda}(z)$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "vector-minimizer",
+          "step": "3.1",
+          "claim": "Applying step 2.1 to every coordinate yields the stated vector formula and uniqueness.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "n=2, lambda=1/2, z=(3,-1)",
+          "result": "Threshold 1 gives (2,0), with the second coordinate at the zero boundary.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$ satisfy $X^{\\mathsf T}X=I_p$, and let $y\\in\\mathbb R^n$ and $\\lambda>0$. The objective\n$$\\frac{1}{2n}\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_1$$\nhas the unique minimizer $\\widehat\\beta_j=S_{n\\lambda}((X^{\\mathsf T}y)_j)$, where $S_a(t)=\\operatorname{sgn}(t)(|t|-a)_+$, $(u)_+=\\max\\{u,0\\}$, and $\\operatorname{sgn}(0)=0$. Thus the threshold is $n\\lambda$ under this loss normalization.",
+          "fixture": "orthonormal-n2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n,p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 maps z=0 to zero and handles |z|<=n lambda."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.2 reduce to the scalar objective when p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "X^T X=I_p excludes rank deficiency."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes z=±n lambda in the zero case; lambda is required positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar minimizer is explicit and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives a minimizer formula, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma gives a minimizer formula, not an iff criterion."
+        }
+      ]
+    },
+    "lem-lasso-active-set-stationarity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$, fixed weights $w_g>0$, and $\\lambda\\ge0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "restricted-gradient",
+          "step": "1.1",
+          "claim": "Fix an active coordinate $j$. For $|h|<|\\widehat\\beta_j|$, changing that coefficient by $h$ preserves its sign $b_j$, so the restricted objective is differentiable in $h$ and has a local minimum at $h=0$. Its positive difference quotients are nonnegative and its negative difference quotients are nonpositive; since the derivative exists, it is zero. Differentiating the squared loss and the fixed-sign penalty in each active coordinate gives $X_S^{\\mathsf T}(X_S\\widehat\\beta_S-y)/n+\\lambda b=0$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-solution",
+          "step": "2.1",
+          "claim": "Full column rank makes $X_S^{\\mathsf T}X_S/n$ invertible. Rearranging step 1.1 and multiplying by this inverse gives the displayed formula. The argument uses only active stationarity and makes no assertion about inactive coordinates.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nonempty active set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The assumption that active coefficients are nonzero is used in step 1.1; inactive coordinates are zero by support definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 apply to one active coordinate when its design column is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Full column rank of X_S is an explicit hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement assumes lambda>0 and makes no claim at lambda=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof differentiates a supplied optimizer and chooses no object from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a necessary condition only, not a characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement expressly does not assert inactive-coordinate sufficiency."
+        }
+      ]
+    },
+    "fs-wainwright-signed-support-threshold-claim": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lasso-active-set-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$, $y\\in\\mathbb R^n$, $\\lambda>0$, and let $S\\subseteq\\{1,\\ldots,p\\}$ be nonempty. Assume the active design $X_S$ has full column rank. If an optimizer $\\widehat\\beta$ of $\\|y-X\\beta\\|_2^2/(2n)+\\lambda\\|\\beta\\|_1$ has support exactly $S$ and sign vector $b=\\operatorname{sgn}(\\widehat\\beta_S)\\in\\{-1,1\\}^{|S|}$, then\n$$\\widehat\\beta_S=(X_S^{\\mathsf T}X_S/n)^{-1}(X_S^{\\mathsf T}y/n-\\lambda b).$$\nThis is a necessary active-coordinate condition only; it does not assert that the candidate satisfies any inactive-coordinate condition.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-sample-covariance-operator-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d_k,n_k\\ge1$ be integer sequences with $d_k/n_k\\to0$. For each $k$, let $G_k\\in\\mathbb R^{n_k\\times d_k}$ have mutually independent $N(0,1)$ entries. Then\n\n$$\\left\\|\\frac{G_k^{\\mathsf T}G_k}{n_k}-I_{d_k}\\right\\|_{\\mathrm{op}}\\xrightarrow[k\\to\\infty]{\\mathbb P}0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-chi-square-degree-ratio",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $r_k,n_k$ be positive integers with $n_k\\to\\infty$ and $r_k/n_k\\to1$. For each $k$, let $Z_{k,1},\\ldots,Z_{k,r_k}$ be independent $N(0,1)$ random variables and set $D_k=\\sum_{j=1}^{r_k}Z_{k,j}^2$. Then $D_k/n_k\\to1$ in probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-gaussian-max-comparison",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $m\\ge2$, and let $X,Y\\in\\mathbb R^m$ be independent, centered Gaussian vectors with finite covariance matrices. If\n\n$$\\mathbb E[(X_i-X_j)^2]\\ge\\mathbb E[(Y_i-Y_j)^2]\\qquad(i,j\\in\\{1,\\ldots,m\\}),$$\n\nthen $\\mathbb E[\\max_iX_i]\\ge\\mathbb E[\\max_iY_i]$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-standard-gaussian-maximum-expectation-lower-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. There is an integer $m_0$ such that for every $m\\ge m_0$ and independent standard-normal random variables $G_1,\\ldots,G_m$,\n$$\\mathbb E\\max_{1\\le i\\le m}G_i\\ge\\frac14\\sqrt{\\log m}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-standard-gaussian-lipschitz-concentration",
+          "source_section": "Statement",
+          "quote": "Assume AC, DC, and countable choice. Let $Z\\sim\\gamma_d$ be standard Gaussian\non $\\mathbb R^d$ and let\n$f:\\mathbb R^d\\to\\mathbb R$ be $L$-Lipschitz. If $L>0$, then for every $r>0$,\n$$P\\{f(Z)\\ge E f(Z)+r\\}\\le e^{-r^2/(2L^2)}.$$\nIf $L=0$, the probability on the left is zero.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density\n$$f_{m,\\Sigma}(x)=(2\\pi)^{-d/2}\\det(\\Sigma)^{-1/2} \\exp\\!\\left(-\\tfrac12(x-m)^T\\Sigma^{-1}(x-m)\\right), \\qquad x\\in\\mathbb R^d.$$",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "asymptotic-hypotheses",
+          "step": "1.1",
+          "claim": "For integers $n\\le\\lceil e^e\\rceil$, set $\\lambda_n=1$, and for $n>\\lceil e^e\\rceil$ set $\\lambda_n=(\\log\\log n)^{-1/2}$. Since $\\log\\log n>1$ in the latter range and is increasing, this defines a positive non-increasing sequence. For $k\\ge2$, set $N_k=\\lceil e^k\\rceil$, $s_k=\\lceil e^{k^2}\\rceil$, $n_k=\\lceil5s_kk\\rceil$, and $p_k=s_k+N_k$. Use the model subsequence at sample sizes $n_k$, with $\\Sigma_k=I_{p_k}$, $\\beta_k^*=(\\mathbf1_{s_k},0_{N_k})$, $\\sigma^2=1$, and $\\lambda_k=\\lambda_{n_k}$. Then $C_{\\min}=C_{\\max}=D_{\\max}=\\epsilon=1$, $\\rho_{n_k}=1$, and $\\theta_u=1$, while $\\log N_k\\sim k$, $\\log s_k\\sim k^2$, $n_k/s_k\\sim5k$, and $\\log\\log n_k\\sim2\\log k$. For $\\nu=1/2$, $n_k>3s_k\\log N_k+s_k$ eventually; also $\\lambda_k\\to0$, $n_k\\lambda_k^2/\\log N_k\\to\\infty$, and $\\lambda_k+\\sqrt{\\log s_k/n_k}\\to0$, so the claimed upper hypotheses hold.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-design-rotation",
+          "step": "2.1",
+          "claim": "Let $X_S$ be the active design, $A=X_S^{\\mathsf T}X_S/n_k$, and $v=X_S^{\\mathsf T}w/n_k$. Choose an orthogonal $R$ with first column $q=\\mathbf1_{s_k}/\\sqrt{s_k}$ and write $X_SR=[h,H]$. Each row keeps its $N(0,I_{s_k})$ projection laws under $R$; [F7]–[F10] give its factorized standard-normal density and [F9] gives independent rows, so entries of $h,H$ are mutually independent standard normals. Set $B=H^{\\mathsf T}H$, $P_H=HB^{-1}H^{\\mathsf T}$ when $B$ is invertible, and $d=h^{\\mathsf T}(I-P_H)h$. Conditional on $H$, $d$ is chi-square with $n_k-s_k+1$ degrees of freedom.",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-gram-and-block-decomposition",
+          "step": "3.1",
+          "claim": "Since $s_k/n_k\\to0$ and $(n_k-s_k+1)/n_k\\to1$, [F2] applied to $X_S$ and $H$ and [F3] applied conditionally to $d$ show that $E_{A,k}=\\{\\|A-I\\|_{\\mathrm{op}}\\le1/2\\}$, $E_{B,k}=\\{\\|B/n_k-I\\|_{\\mathrm{op}}\\le1/2\\}$, and $E_{d,k}=\\{n_k/2\\le d\\le2n_k\\}$ each have probability tending to one. Their intersection $E_k=E_{A,k}\\cap E_{B,k}\\cap E_{d,k}$ therefore has probability tending to one.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-noise-vanishes",
+          "step": "4.1",
+          "claim": "On $E_{A,k}$, $\\|A^{-1}\\|_{\\mathrm{op}}\\le2$. Given $X_S$, $A^{-1}v$ is centered Gaussian with covariance $A^{-1}/n_k$, so each coordinate variance is at most $2/n_k$. Completing the square in [F10] gives moment-generating function $e^{\\tau_i^2t^2/2}$; [F11] at $t=n_k/2$ yields $\\mathbb P(|(A^{-1}v)_i|\\ge1\\mid X_S)\\le2e^{-n_k/4}$. A union bound gives $\\mathbb P(\\|A^{-1}v\\|_\\infty\\ge1\\mid X_S)\\le2s_ke^{-n_k/4}$ on $E_{A,k}$, hence $\\mathbb P(E_{A,k}\\cap\\{\\|A^{-1}v\\|_\\infty\\ge1\\})\\le2s_ke^{-n_k/4}\\to0$.",
+          "inputs": [
+            "F10",
+            "F11",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "block-inverse-law",
+          "step": "4.2",
+          "claim": "For fixed full-rank $H$, the Gaussian coordinates of $h$ along $\\operatorname{im}H$ and its orthogonal complement are independent by the factorized density [F8]–[F10]; hence $H^{\\mathsf T}h\\sim N(0,B)$ is independent of $d$, and $B^{-1}H^{\\mathsf T}h$ has covariance $B^{-1}$. This conditional law is measurable because $B^{-1}$ and $P_H$ are Borel on $\\det B>0$. Direct multiplication gives $\\begin{pmatrix}h^{\\mathsf T}h&h^{\\mathsf T}H\\\\H^{\\mathsf T}h&B\\end{pmatrix}\\binom{1}{-B^{-1}H^{\\mathsf T}h}=\\binom d0$; since $R^{\\mathsf T}\\mathbf1=\\sqrt{s_k}e_1$, it follows that $A^{-1}\\mathbf1=(n_k/d)\\mathbf1+Z$, where $Z=-(n_k\\sqrt{s_k}/d)R\\binom0{B^{-1}H^{\\mathsf T}h}$ is conditionally centered Gaussian with covariance $\\Gamma=(n_k^2s_k/d^2)R\\begin{pmatrix}0&0\\\\0&B^{-1}\\end{pmatrix}R^{\\mathsf T}$. On $E_{B,k}\\cap E_{d,k}$, $\\|\\Gamma\\|_{\\mathrm{op}}\\le8s_k/n_k$ and, for $i\\ne j$, $\\mathbb E[(Z_i-Z_j)^2\\mid H,d]\\ge(n_k^2s_k/d^2)(1/(2n_k))\\|e_i-e_j\\|_2^2\\ge s_k/(4n_k)$.",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-max-comparison",
+          "step": "5.1",
+          "claim": "Conditional on $H,d$ when $E_{B,k}\\cap E_{d,k}$ holds, use [F12] to put the law of $Z$ and an independent standard Gaussian vector $G$ on a product space, and set $Y_i=\\sqrt{s_k/(8n_k)}G_i$. By [F4], their increment variances, and [F5], $\\mathbb E[\\max_iZ_i\\mid H,d]\\ge\\mathbb E\\max_iY_i\\ge(4\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k}$.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "F10",
+            "F12",
+            "step 4.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "active-max-concentration",
+          "step": "6.1",
+          "claim": "The map $z\\mapsto-\\max_i z_i$ is 1-Lipschitz. By [F7], represent $Z=\\Gamma^{1/2}G$ conditionally and apply [F6] with Lipschitz constant $\\sqrt{\\|\\Gamma\\|_{\\mathrm{op}}}$ and deviation half the mean bound in step 5.1; uniformly when $E_{B,k}\\cap E_{d,k}$ holds, $\\mathbb P(\\max_iZ_i<\\tfrac12\\mathbb E[\\max_iZ_i\\mid H,d]\\mid H,d)\\le e^{-c\\log s_k}\\to0$ for some fixed $c>0$. Hence $\\max_iZ_i\\ge(8\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k}$ with probability tending to one.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F6",
+            "F7",
+            "step 4.2",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "penalty-amplification",
+          "step": "7.1",
+          "claim": "On $E_{d,k}$, $n_k/d\\ge1/2$. Step 6.1 gives $\\max_iZ_i\\ge(8\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k}$ with probability tending to one, and $\\mathbb P(E_{B,k}\\cap E_{d,k})\\to1$. Since $A^{-1}\\mathbf1=(n_k/d)\\mathbf1+Z$ on this event, and step 1.1 gives $\\log s_k\\sim k^2$, $n_k/s_k\\sim5k$, and $\\lambda_k\\sim(2\\log k)^{-1/2}$, it follows that $\\lambda_k\\max_i(A^{-1}\\mathbf1)_i\\ge\\lambda_k(1/2+(8\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k})\\to\\infty$ in probability; the diverging term has order $\\sqrt{k/\\log k}$.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.2",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sign-recovery-impossible",
+          "step": "8.1",
+          "claim": "By steps 3.1, 4.1, and 7.1 and a union bound, with probability tending to one $E_{A,k}$ holds, $\\|A^{-1}v\\|_\\infty<1$, and $\\lambda_k\\max_i(A^{-1}\\mathbf1)_i>2$. If an optimizer had the correct signed support, [F1] would force $\\widehat\\beta_S=A^{-1}(X_S^{\\mathsf T}y/n_k-\\lambda_k\\mathbf1)=\\mathbf1+A^{-1}v-\\lambda_kA^{-1}\\mathbf1$. At an index attaining the maximum, these events imply $\\widehat\\beta_i<0$, contradicting the required positive sign. Thus exact signed-support success probability tends to zero, refuting the upper implication and the combined threshold statement.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "step 7.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "Sigma=I",
+          "result": "Cmin=Cmax=Dmax=epsilon=1 and both scheduled threshold constants equal one.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "1.1 For integers $n\\le\\lceil e^e\\rceil$, set $\\lambda_n=1$, and for $n>\\lceil e^e\\rceil$ set $\\lambda_n=(\\log\\log n)^{-1/2}$. Since $\\log\\log n>1$ in the latter range and is increasing, this defines a positive non-increasing sequence. For $k\\ge2$, set $N_k=\\lceil e^k\\rceil$, $s_k=\\lceil e^{k^2}\\rceil$, $n_k=\\lceil5s_kk\\rceil$, and $p_k=s_k+N_k$. Use the model subsequence at sample sizes $n_k$, with $\\Sigma_k=I_{p_k}$, $\\beta_k^*=(\\mathbf1_{s_k},0_{N_k})$, $\\sigma^2=1$, and $\\lambda_k=\\lambda_{n_k}$. Then $C_{\\min}=C_{\\max}=D_{\\max}=\\epsilon=1$, $\\rho_{n_k}=1$, and $\\theta_u=1$, while $\\log N_k\\sim k$, $\\log s_k\\sim k^2$, $n_k/s_k\\sim5k$, and $\\log\\log n_k\\sim2\\log k$. For $\\nu=1/2$, $n_k>3s_k\\log N_k+s_k$ eventually; also $\\lambda_k\\to0$, $n_k\\lambda_k^2/\\log N_k\\to\\infty$, and $\\lambda_k+\\sqrt{\\log s_k/n_k}\\to0$, so the claimed upper hypotheses hold. [given, construct, algebra]",
+          "fixture": "identity-threshold-constants"
+        },
+        {
+          "case": "asymptotic scale",
+          "result": "n/s~5k, log(s)~k^2, lambda~(2log k)^-1/2, so lambda sqrt(s log(s)/n)~sqrt(k/(10log k)) diverges.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "7.1 On $E_{d,k}$, $n_k/d\\ge1/2$. Step 6.1 gives $\\max_iZ_i\\ge(8\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k}$ with probability tending to one, and $\\mathbb P(E_{B,k}\\cap E_{d,k})\\to1$. Since $A^{-1}\\mathbf1=(n_k/d)\\mathbf1+Z$ on this event, and step 1.1 gives $\\log s_k\\sim k^2$, $n_k/s_k\\sim5k$, and $\\lambda_k\\sim(2\\log k)^{-1/2}$, it follows that $\\lambda_k\\max_i(A^{-1}\\mathbf1)_i\\ge\\lambda_k(1/2+(8\\sqrt8)^{-1}\\sqrt{s_k\\log s_k/n_k})\\to\\infty$ in probability; the diverging term has order $\\sqrt{k/\\log k}$. [step 1.1, step 3.1, step 4.2, step 6.1, algebra]",
+          "fixture": "scheduled-active-scale"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequence assumes s,n-s,N all diverge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The selected noise variance is one and lambda_k is positive for k>=2; the alleged upper condition is checked in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This is an asymptotic sequence with dimensions diverging."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Sigma=I is positive definite and the active Gram is invertible on the high-probability event E_k in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks lambda->0, n lambda^2/log N->infinity, and the stated beta-min limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC, DC, and countable choice are each assumed in the Statement and recorded in A1 and A2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement refutes a one-way sufficiency implication, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement refutes a one-way sufficiency implication, not an iff characterization."
+        }
+      ]
+    },
+    "ex-correlated-predictors-and-shrinkage": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ols-and-ridge-solutions",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, and $y\\in\\mathbb R^n$. The ordinary least-squares minimizers of $\\|y-X\\beta\\|_2^2$ are exactly the solutions of $X^{\\mathsf T}X\\beta=X^{\\mathsf T}y$; if $\\beta_0$ is one such solution, the full minimizer set is $\\beta_0+\\ker X$. It is a singleton if and only if the columns of $X$ are linearly independent. For every $\\lambda>0$, the ridge objective $\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2$ has the unique minimizer\n$$\\widehat\\beta_{\\mathrm{ridge}}=(X^{\\mathsf T}X+\\lambda I_p)^{-1}X^{\\mathsf T}y.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-regression-objectives",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$, let $X\\in\\mathbb R^{n\\times p}$ be a fixed design matrix, let $y\\in\\mathbb R^n$, and let $\\beta\\in\\mathbb R^p$. The empirical squared loss is\n\n$$\\ell_n(\\beta)=\\frac{1}{2n}\\|y-X\\beta\\|_2^2.$$\n\nOrdinary least squares minimizes $\\ell_n(\\beta)$ over $\\mathbb R^p$. For $\\lambda>0$, the ridge (Tikhonov) objective is\n\n$$J^{\\mathrm{ridge}}_\\lambda(\\beta)=\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2.$$\n\nFor $\\lambda>0$, the lasso objective in the empirical-loss convention is\n\n$$J^{\\mathrm{lasso}}_\\lambda(\\beta)=\\ell_n(\\beta)+\\lambda\\|\\beta\\|_1,\\qquad \\|\\beta\\|_1=\\sum_{j=1}^p|\\beta_j|.$$\n\nThis lasso has the same minimizers as $n^{-1}\\|y-X\\beta\\|_2^2+2\\lambda\\|\\beta\\|_1$, the fixed-design convention with penalty parameter $\\tau=\\lambda$.\n\nFor a partition $G_1,\\ldots,G_m$ of $\\{1,\\ldots,p\\}$, fixed weights $w_g>0$, and $\\lambda\\ge0$, the group-lasso objective is\n\n$$J^{\\mathrm{group}}_{\\lambda}(\\beta)=\\ell_n(\\beta)+\\lambda\\sum_{g=1}^m w_g\\|\\beta_{G_g}\\|_2.$$\n\nFor a fixed matrix $D\\in\\mathbb R^{q\\times p}$ and $\\lambda_1,\\lambda_2\\ge0$, a fused-lasso objective is\n\n$$J^{\\mathrm{fused}}_{\\lambda_1,\\lambda_2}(\\beta)=\\ell_n(\\beta)+\\lambda_1\\|\\beta\\|_1+\\lambda_2\\|D\\beta\\|_1.$$\n\nThese group and fused formulas define objectives only; no existence, uniqueness, or algorithm guarantee is asserted for them here. The formulas use the displayed feature scales, so rescaling a column changes the penalty unless its coefficient and penalty weight are adjusted. If an intercept is included, write $X=[\\mathbf 1\\;X_0]$ and $\\beta=(\\beta_0,\\gamma)$, define the loss by $\\|y-\\beta_0\\mathbf1-X_0\\gamma\\|_2^2/(2n)$, partition only the coordinates of $\\gamma$, and use a fused matrix of the form $D=[0\\;D_0]$. Each penalty then acts only on $\\gamma$ and the intercept coordinate $\\beta_0$ is unpenalized.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ols-line",
+          "step": "1.1",
+          "claim": "Here $X^{\\mathsf T}X=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ and $X^{\\mathsf T}y=(1,1)^{\\mathsf T}$. The OLS normal equations reduce to $\\beta_1+\\beta_2=1$, giving the stated full line.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ridge-point",
+          "step": "2.1",
+          "claim": "For ridge parameter $1$, $X^{\\mathsf T}X+I_2=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$, whose inverse sends $(1,1)^{\\mathsf T}$ to $(1/3,1/3)^{\\mathsf T}$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lasso-segment",
+          "step": "3.1",
+          "claim": "Write $t=\\beta_1+\\beta_2$. Since $|\\beta_1|+|\\beta_2|\\ge|t|$, the Lasso objective is at least $\\tfrac12(1-t)^2+\\tfrac14|t|$, with equality exactly when the coordinates have the same weak sign. The scalar function decreases up to $t=3/4$ and increases after it: on $t>0$ its derivative is $t-3/4$, and on $t<0$ its derivative is $t-5/4<0$. Thus its unique minimizing sum is $t=3/4>0$, where equality in the triangle inequality requires both coordinates nonnegative. This gives exactly the stated segment of minimizers.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "X=(1,1), y=1",
+          "result": "OLS sum is 1; ridge lambda=1 gives (1/3,1/3); Lasso lambda=1/4 gives the nonnegative segment with sum 3/4.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "Take $n=1$, $p=2$, $X=(1\\;1)$, and $y=1$. The OLS minimizers are exactly $\\{(\\beta_1,\\beta_2):\\beta_1+\\beta_2=1\\}$. Ridge with parameter $1$ has the unique minimizer $(1/3,1/3)$. Lasso with the empirical-loss convention and penalty $\\lambda=1/4$ has the full minimizer set $\\{(\\beta_1,\\beta_2):\\beta_1,\\beta_2\\ge0,\\ \\beta_1+\\beta_2=3/4\\}$.",
+          "fixture": "duplicate-shrinkage"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one observation and two predictors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example's fixed Lasso penalty is 1/4 and its fitted sum is explicitly computed in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the smallest positive sample size n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The duplicate columns make X rank one; step 1.1 gives the full OLS line and step 3.1 gives the Lasso segment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses lambda=1/4<1, placing the scalar lasso minimizer at positive sum 3/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All matrices and coefficients are explicit finite data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes three minimizer sets and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes three minimizer sets and states no biconditional."
+        }
+      ]
+    },
+    "ex-orthonormal-lasso-soft-thresholding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-orthonormal-lasso-soft-thresholding",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$ satisfy $X^{\\mathsf T}X=I_p$, and let $y\\in\\mathbb R^n$ and $\\lambda>0$. The objective\n$$\\frac{1}{2n}\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_1$$\nhas the unique minimizer $\\widehat\\beta_j=S_{n\\lambda}((X^{\\mathsf T}y)_j)$, where $S_a(t)=\\operatorname{sgn}(t)(|t|-a)_+$, $(u)_+=\\max\\{u,0\\}$, and $\\operatorname{sgn}(0)=0$. Thus the threshold is $n\\lambda$ under this loss normalization.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ols-and-ridge-solutions",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, and $y\\in\\mathbb R^n$. The ordinary least-squares minimizers of $\\|y-X\\beta\\|_2^2$ are exactly the solutions of $X^{\\mathsf T}X\\beta=X^{\\mathsf T}y$; if $\\beta_0$ is one such solution, the full minimizer set is $\\beta_0+\\ker X$. It is a singleton if and only if the columns of $X$ are linearly independent. For every $\\lambda>0$, the ridge objective $\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_2^2$ has the unique minimizer\n$$\\widehat\\beta_{\\mathrm{ridge}}=(X^{\\mathsf T}X+\\lambda I_p)^{-1}X^{\\mathsf T}y.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ols-and-ridge-values",
+          "step": "1.1",
+          "claim": "Since $X^{\\mathsf T}X=I_2$, OLS gives $X^{\\mathsf T}y=(3,-1)^{\\mathsf T}$, and the ridge formula with parameter $1$ gives $(I_2+I_2)^{-1}y=(3/2,-1/2)^{\\mathsf T}$.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lasso-threshold-values",
+          "step": "2.1",
+          "claim": "The Lasso threshold is $n\\lambda=2(1/2)=1$. Applying [F1] gives $S_1(3)=2$ and $S_1(-1)=0$, hence $(2,0)^{\\mathsf T}$. The equality case $|y_2|=n\\lambda$ is assigned zero by the stated soft-threshold formula.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "n=2, lambda=1/2",
+          "result": "Threshold=1; S_1(3)=2 and S_1(-1)=0.",
+          "check": "ml101-sparse-regression-finite",
+          "asserts": "Let $n=p=2$, $X=I_2$, $y=(3,-1)^{\\mathsf T}$, and use Lasso penalty $\\lambda=1/2$. Under the empirical loss $\\|y-X\\beta\\|_2^2/(2n)$, the unique Lasso minimizer is $(2,0)^{\\mathsf T}$ because the threshold is $n\\lambda=1$. OLS is $(3,-1)^{\\mathsf T}$, and ridge with parameter $1$ is $(3/2,-1/2)^{\\mathsf T}$.",
+          "fixture": "orthonormal-n2"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses n=p=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the coordinate exactly at the zero-threshold boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has two coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example states X=I_2, which has full rank and satisfies X^T X=I_2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the equality case |y_2|=n lambda is assigned zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses explicit finite vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct computation, not an iff statement."
+        }
+      ]
+    },
+    "ex-beta-min-below-lasso-threshold-loses-support": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-orthonormal-lasso-soft-thresholding",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$ satisfy $X^{\\mathsf T}X=I_p$, and let $y\\in\\mathbb R^n$ and $\\lambda>0$. The objective\n$$\\frac{1}{2n}\\|y-X\\beta\\|_2^2+\\lambda\\|\\beta\\|_1$$\nhas the unique minimizer $\\widehat\\beta_j=S_{n\\lambda}((X^{\\mathsf T}y)_j)$, where $S_a(t)=\\operatorname{sgn}(t)(|t|-a)_+$, $(u)_+=\\max\\{u,0\\}$, and $\\operatorname{sgn}(0)=0$. Thus the threshold is $n\\lambda$ under this loss normalization.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "threshold-sets-zero",
+          "step": "1.1",
+          "claim": "Here $X^{\\mathsf T}X=1$, $n\\lambda=1/2$, and $|X^{\\mathsf T}y|=1/4<1/2$. Therefore $S_{1/2}(1/4)=0$ by [F1].",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "support-mismatch",
+          "step": "2.1",
+          "claim": "The true coefficient is nonzero, so its support is $\\{1\\}$, whereas the estimated coefficient is zero and its support is empty. Thus this choice of penalty misses the support when the coefficient is below the threshold.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "n=p=1",
+          "result": "S_1/2(1/4)=0 while beta*=1/4 has support {1}.",
+          "check": "scalar-soft-threshold",
+          "asserts": "For the one-dimensional fixed design $n=p=1$, $X=[1]$, response $y=\\beta^*=1/4$, and Lasso penalty $\\lambda=1/2$, the true support is $\\{1\\}$ but the unique Lasso minimizer is $0$. This is a deterministic example with no observation noise; it asserts no random-design probability result.",
+          "z": 0.25,
+          "tau": 0.5
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one observation and one coefficient."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The true coefficient is positive 1/4, while the soft-threshold result is exactly zero in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly computes the one-dimensional case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example states the scalar design X=[1], which is nonzero and satisfies X^T X=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the strict below-threshold case 1/4<1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All data and coefficients are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives one support-failure instance and no characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives one support-failure instance and no characterization."
+        }
+      ]
+    }
+  }
+}

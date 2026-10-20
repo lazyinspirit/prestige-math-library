@@ -11,6 +11,7 @@ deps: [def-ordered-field, lem-of-mult-neg, lem-of-zero-mult]
 aliases: []
 landmark: false
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/lem-of-sign-rules.json
   precheck: pass
   judge:
     model: openai/gpt-5.4
@@ -32,7 +33,7 @@ proof_strategy: direct
 
 ## Statement
 
-Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and
+Let $F$ be an ordered field (Ordered field) with positive cone $P$, and
 let $a, b, c \in F$.
 
 1. If $a > 0$ and $b > 0$ then $ab > 0$.
@@ -40,6 +41,10 @@ let $a, b, c \in F$.
 3. If $a < 0$ and $b < 0$ then $ab > 0$.
 4. If $c > 0$ then $a < b \iff ac < bc$.
 5. If $c < 0$ then $a < b \iff bc < ac$ (multiplication by a negative reverses order).
+
+## Statement references
+
+[[def-ordered-field]]
 
 ## Facts & Assumptions
 

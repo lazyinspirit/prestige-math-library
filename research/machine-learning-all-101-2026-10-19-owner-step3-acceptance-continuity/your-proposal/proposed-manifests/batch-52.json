@@ -1,0 +1,584 @@
+[
+  {
+    "order": 2794,
+    "id": "mean-field-training-and-feature-learning",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Mean-field training and feature learning",
+    "companion": "mean-field-training-and-feature-learning-examples",
+    "requires": [
+      "banach-valued-integration-and-the-radon-nikodym-property",
+      "feedforward-networks-and-universal-approximation",
+      "hilbert-space-geometry-and-riesz-representation",
+      "homology-axioms-degree-and-classical-applications",
+      "prediction-problems-risks-and-empirical-minimization",
+      "probability-spaces-random-variables-and-expectation",
+      "wasserstein-gradient-flow-existence-and-stability",
+      "measures-and-their-basic-properties",
+      "signed-and-complex-measures-hahn-and-jordan",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "ascoli-arzela"
+    ],
+    "items": [
+      {
+        "id": "lem-bounded-domain-degree-properties",
+        "kind": "lemma",
+        "title": "Properties of bounded-domain degree",
+        "deps": [
+          "def-relative-singular-homology",
+          "def-r-orientation-of-a-topological-manifold",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs",
+          "thm-excision-for-singular-homology"
+        ],
+        "dependency_level": 0,
+        "local_order": 5,
+        "justified_by": [],
+        "statement": "Let $d\\ge1$, let $U\\subset\\mathbb R^d$ be bounded and open, and let $f:\\overline U\\to\\mathbb R^d$ be continuous. For $y\\notin f(\\partial U)$, put $K=f^{-1}(\\{y\\})\\cap U$ and define $D(f,U,y)$ by\n\n$$f_*[U]_K=D(f,U,y)[\\mathbb R^d]_{\\{y\\}}\\quad\\text{in }H_d(\\mathbb R^d,\\mathbb R^d\\setminus\\{y\\};\\mathbb Z),$$\n\nwhere $[U]_K$ is the unique relative orientation class restricting to the standard local generator on $K$, and $[\\mathbb R^d]_{\\{y\\}}$ is the positive local generator. This integer is well-defined. It is nonzero only if $f^{-1}(y)\\cap U\\ne\\varnothing$, and $D(\\operatorname{id},U,y)=1$ whenever $y\\in U$. If $U_1,U_2\\subset U$ are disjoint bounded open sets, $y\\notin f(\\partial U_i)$ for $i=1,2$, and every point of $f^{-1}(y)\\cap U$ lies in $U_1\\cup U_2$, then\n\n$$D(f,U,y)=D(f,U_1,y)+D(f,U_2,y).$$\n\nIf $H:[0,1]\\times\\overline U\\to\\mathbb R^d$ and $y:[0,1]\\to\\mathbb R^d$ are continuous and $y(t)\\notin H_t(\\partial U)$ for every $t$, then $D(H_0,U,y(0))=D(H_1,U,y(1))$."
+      },
+      {
+        "id": "lem-partial-negative-weight-crossing-time",
+        "kind": "lemma",
+        "title": "Correct finite-time bound for partial-homogeneity zero crossing",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-pushforward-support-is-closure-of-image",
+        "kind": "lemma",
+        "title": "Support of a continuous pushforward is the image closure",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 2,
+        "justified_by": []
+      },
+      {
+        "id": "def-bounded-domain-degree-from-relative-homology",
+        "kind": "definition",
+        "title": "Bounded-domain degree from relative homology",
+        "deps": [
+          "lem-bounded-domain-degree-properties"
+        ],
+        "dependency_level": 1,
+        "local_order": 13
+      },
+      {
+        "id": "def-partial-one-homogeneous-measure-projection",
+        "kind": "definition",
+        "title": "Partially one-homogeneous signed measure projection",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-measure",
+          "def-signed-measure",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 1,
+        "local_order": 3,
+        "justified_by": []
+      },
+      {
+        "id": "def-two-homogeneous-measure-projection",
+        "kind": "definition",
+        "title": "Two-homogeneous measure projection",
+        "deps": [
+          "def-feature-measure-energy"
+        ],
+        "dependency_level": 1,
+        "local_order": 4,
+        "justified_by": []
+      },
+      {
+        "id": "lem-feature-energy-continuous-under-w2-on-a-common-cutoff",
+        "kind": "lemma",
+        "title": "Feature energy is W2-continuous on a common cutoff",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-two-space-and-couplings",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "dependency_level": 1,
+        "local_order": 6,
+        "justified_by": [],
+        "statement": "Assume the feature-energy hypotheses on a closed convex set $Q_r\\subseteq\\Omega$, and let $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$ be concentrated on $Q_r$, with finite feature energy and $W_2(\\mu_n,\\mu)\\to0$. Then $F(\\mu_n)\\to F(\\mu)$."
+      },
+      {
+        "id": "lem-mean-field-first-variation-and-measure-optimality",
+        "kind": "lemma",
+        "title": "First variation and optimality over nonnegative measures",
+        "deps": [
+          "def-feature-measure-energy",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-dirac-measure"
+        ],
+        "dependency_level": 1,
+        "local_order": 7,
+        "justified_by": []
+      },
+      {
+        "id": "lem-partial-energy-continuous-under-w2",
+        "kind": "lemma",
+        "title": "Partial one-homogeneous energy is continuous under W2 convergence",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-two-space-and-couplings",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-axiom-of-choice",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "lem-linearity-of-the-bochner-integral"
+        ],
+        "dependency_level": 1,
+        "local_order": 8,
+        "justified_by": []
+      },
+      {
+        "id": "def-partial-homogeneous-relaxed-objective",
+        "kind": "definition",
+        "title": "Relaxed objective for a partially one-homogeneous projection",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-partial-one-homogeneous-measure-projection",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-axiom-of-choice",
+          "thm-jordan-decomposition-for-signed-measures",
+          "def-the-space-of-finite-total-variation-signed-measures",
+          "def-total-variation-of-a-signed-or-complex-measure",
+          "def-integration-against-a-signed-or-complex-measure",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "prop-jordan-parts-and-total-variation-formulas-for-signed-measures",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "dependency_level": 2,
+        "local_order": 15,
+        "justified_by": []
+      },
+      {
+        "id": "def-signed-square-relu-feature-map",
+        "kind": "definition",
+        "title": "Signed-square ReLU feature parameterization",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-single-hidden-layer-network"
+        ],
+        "dependency_level": 2,
+        "local_order": 16,
+        "justified_by": []
+      },
+      {
+        "id": "lem-mean-field-projection-identities",
+        "kind": "lemma",
+        "title": "Feature and energy identities for homogeneous projections",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-two-homogeneous-measure-projection",
+          "def-partial-one-homogeneous-measure-projection",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "lem-signed-narrow-convergence-controls-bochner-moments",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 2,
+        "local_order": 18,
+        "justified_by": [],
+        "statement": "Let $d\\ge2$, let $\\mathcal H$ be a real Hilbert space, let $R:\\mathcal H\\to[0,\\infty)$ be continuous, and let $\\Phi:\\mathbb R^d\\to\\mathcal H$ and $V:\\mathbb R^d\\to[0,\\infty)$ be continuous and positively two-homogeneous. For a finite nonnegative Borel measure $\\lambda$ on $\\mathbb R^d$ with finite second moment, define the feature-measure energy\n$$F(\\lambda):=R\\!\\left(\\int_{\\mathbb R^d}\\Phi(u)d\\lambda(u)\\right)+\\int_{\\mathbb R^d}V(u)d\\lambda(u).$$\nThe integrals are finite because the continuous two-homogeneous maps grow at most quadratically. For every such $\\mu$,\n\n$$\\int_{\\mathbb R^d}\\Phi(u)d\\mu(u)=\\int_{\\mathbb S^{d-1}}\\Phi(\\theta)dh^2(\\mu)(\\theta),\\qquad\\int_{\\mathbb R^d}V(u)d\\mu(u)=\\int_{\\mathbb S^{d-1}}V(\\theta)dh^2(\\mu)(\\theta).$$\n\nIf $(\\mu_n)$ is a sequence of such measures and $h^2(\\mu_n)$ converges weakly as finite measures on the compact sphere to a finite nonnegative measure $\\nu$, then the feature integrals converge in Hilbert norm, the regularizer integrals converge, and $F(\\mu_n)\\to R(\\int_{\\mathbb S^{d-1}}\\Phi d\\nu)+\\int_{\\mathbb S^{d-1}}Vd\\nu$. The continuity of $R$ is the risk premise used for this energy conclusion; it holds in particular under the feature-energy hypotheses.\n\nFor the partially one-homogeneous model, let $\\Theta$ be a closed Euclidean subset, let $\\varphi:\\Theta\\to\\mathcal H$ be bounded and norm-continuous into a separable real Hilbert space, and let $\\widetilde V:\\Theta\\to[0,\\infty)$ be bounded and measurable. Put $\\Phi(w,\\theta)=w\\varphi(\\theta)$ and $V(w,\\theta)=|w|\\widetilde V(\\theta)$. For every finite nonnegative Borel measure $\\mu$ on $\\mathbb R\\times\\Theta$ with $\\int|w|d\\mu<\\infty$ and every $z\\in\\mathcal H$, the exact feature identity is\n$$\\left\\langle z,\\int w\\varphi(\\theta)d\\mu\\right\\rangle=\\int\\langle z,\\varphi(\\theta)\\rangle dh^1(\\mu),$$\nusing the scalar pairing defined in the partial projection, and the penalty inequality is $\\int|w|\\widetilde V(\\theta)d\\mu\\ge\\int\\widetilde Vdh^1(\\mu)$. Define the lifted energy in this model by $F(\\mu)=R(\\int w\\varphi(\\theta)d\\mu)+\\int|w|\\widetilde V(\\theta)d\\mu$. If finite signed projections $h^1(\\mu_n)$ converge narrowly to $\\nu$, meaning convergence against every bounded continuous real test on $\\Theta$, then their feature moments converge weakly in $\\mathcal H$ when $\\varphi$ is bounded and continuous. If AC holds, then for closed Euclidean $\\Theta$ and bounded norm-continuous $\\varphi$ into a separable Hilbert space, they converge in Hilbert norm. Signed projection convergence alone does not imply penalty or full energy convergence for arbitrary lifts."
+      },
+      {
+        "id": "lem-w2-convergence-implies-homogeneous-projection-convergence",
+        "kind": "lemma",
+        "title": "W2 convergence implies weak convergence of homogeneous projections",
+        "deps": [
+          "def-wasserstein-two-space-and-couplings",
+          "def-two-homogeneous-measure-projection",
+          "def-partial-one-homogeneous-measure-projection",
+          "def-axiom-of-choice",
+          "prop-existence-and-lower-semicontinuity-of-optimal-couplings"
+        ],
+        "dependency_level": 2,
+        "local_order": 19,
+        "justified_by": []
+      },
+      {
+        "id": "lem-partial-relaxed-objective-signwise-optimality",
+        "kind": "lemma",
+        "title": "Signwise first-variation conditions minimize the relaxed objective",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-partial-homogeneous-relaxed-objective",
+          "def-partial-one-homogeneous-measure-projection",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "def-axiom-of-choice",
+          "thm-jordan-decomposition-for-signed-measures"
+        ],
+        "dependency_level": 3,
+        "local_order": 24,
+        "justified_by": []
+      },
+      {
+        "id": "def-one-hidden-layer-particle-measure-model",
+        "kind": "definition",
+        "title": "One-hidden-layer particle-measure model",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-single-hidden-layer-network",
+          "def-population-and-empirical-risk",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "local_order": 14,
+        "justified_by": []
+      },
+      {
+        "id": "lem-flow-preserves-box-separation",
+        "kind": "lemma",
+        "title": "Partial-homogeneity flows preserve box separation",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-uniform-boundedness-principle",
+          "def-partial-one-homogeneous-measure-projection",
+          "lem-characteristics-unique-and-stable",
+          "thm-global-wasserstein-flow-existence-uniqueness-and-stability",
+          "lem-pushforward-support-is-closure-of-image",
+          "def-bounded-domain-degree-from-relative-homology",
+          "lem-bounded-domain-degree-properties"
+        ],
+        "dependency_level": 12,
+        "local_order": 21,
+        "justified_by": []
+      },
+      {
+        "id": "lem-flow-preserves-spherical-separation",
+        "kind": "lemma",
+        "title": "A homogeneous flow preserves spherical support separation",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-axiom-of-choice",
+          "thm-superposition-for-finite-action-continuity-equations",
+          "lem-characteristics-unique-and-stable",
+          "lem-feature-flow-escape-bound",
+          "thm-global-wasserstein-flow-existence-uniqueness-and-stability",
+          "lem-pushforward-support-is-closure-of-image",
+          "lem-bounded-domain-degree-properties"
+        ],
+        "dependency_level": 12,
+        "local_order": 17,
+        "justified_by": []
+      },
+      {
+        "id": "lem-partial-homogeneous-escape-from-nonoptimal-projection",
+        "kind": "lemma",
+        "title": "Nonoptimal partial projections have an escaping sign branch",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-partial-one-homogeneous-measure-projection",
+          "def-partial-homogeneous-relaxed-objective",
+          "def-axiom-of-choice",
+          "lem-partial-homogeneous-penalty-is-constant-under-global-hypotheses",
+          "lem-partial-homogeneous-negative-level-trapping",
+          "lem-partial-feature-flow-moment-and-energy-identities",
+          "thm-superposition-for-finite-action-continuity-equations"
+        ],
+        "dependency_level": 6,
+        "local_order": 22,
+        "justified_by": []
+      },
+      {
+        "id": "lem-partial-homogeneous-projection-limit-is-stationary",
+        "kind": "lemma",
+        "title": "Stationarity of a partially homogeneous signed projection limit",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-partial-one-homogeneous-measure-projection",
+          "def-partial-homogeneous-relaxed-objective",
+          "def-axiom-of-choice",
+          "lem-signed-narrow-convergence-controls-bochner-moments",
+          "lem-partial-feature-flow-moment-and-energy-identities",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 6,
+        "local_order": 23,
+        "justified_by": []
+      },
+      {
+        "id": "lem-two-homogeneous-projection-limit-is-stationary",
+        "kind": "lemma",
+        "title": "A weak two-homogeneous projection limit is stationary on its support",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-two-homogeneous-measure-projection",
+          "lem-mean-field-projection-identities",
+          "lem-w2-convergence-implies-homogeneous-projection-convergence",
+          "lem-characteristics-unique-and-stable",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-superposition-for-finite-action-continuity-equations",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 6,
+        "local_order": 25,
+        "justified_by": []
+      },
+      {
+        "id": "lem-two-homogeneous-escape-from-nonoptimal-projection",
+        "kind": "lemma",
+        "title": "Negative regular sublevels force two-homogeneous projection escape",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-two-homogeneous-measure-projection",
+          "lem-mean-field-projection-identities",
+          "lem-mean-field-first-variation-and-measure-optimality",
+          "lem-two-homogeneous-projection-limit-is-stationary",
+          "lem-characteristics-unique-and-stable",
+          "thm-global-wasserstein-flow-existence-uniqueness-and-stability",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 12,
+        "local_order": 27,
+        "justified_by": []
+      },
+      {
+        "id": "thm-mean-field-particle-time-limits-interchange",
+        "kind": "theorem",
+        "title": "Particle number and training time limits interchange qualitatively",
+        "deps": [
+          "def-feature-measure-energy",
+          "thm-finite-particle-flows-converge-in-w2",
+          "thm-localized-wasserstein-flow",
+          "lem-feature-energy-continuous-under-w2-on-a-common-cutoff",
+          "def-wasserstein-two-space-and-couplings",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 13,
+        "local_order": 20,
+        "justified_by": []
+      },
+      {
+        "id": "thm-partial-homogeneous-projected-limit-is-global-minimizer",
+        "kind": "theorem",
+        "title": "A partially homogeneous signed projection limit is a minimizer",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-partial-one-homogeneous-measure-projection",
+          "def-partial-homogeneous-relaxed-objective",
+          "def-axiom-of-choice",
+          "lem-partial-homogeneous-projection-limit-is-stationary",
+          "lem-partial-relaxed-objective-signwise-optimality",
+          "lem-partial-homogeneous-escape-from-nonoptimal-projection",
+          "lem-flow-preserves-box-separation",
+          "lem-signed-narrow-convergence-controls-bochner-moments",
+          "lem-partial-homogeneous-penalty-is-constant-under-global-hypotheses",
+          "lem-partial-homogeneous-negative-level-trapping",
+          "lem-partial-homogeneous-projection-limit-has-convergent-penalty",
+          "lem-characteristics-unique-and-stable",
+          "thm-global-wasserstein-flow-existence-uniqueness-and-stability",
+          "lem-mean-field-first-variation-and-measure-optimality"
+        ],
+        "dependency_level": 13,
+        "local_order": 28,
+        "justified_by": []
+      },
+      {
+        "id": "cor-partial-homogeneous-wasserstein-limit-is-global-minimizer",
+        "kind": "corollary",
+        "title": "A W2 limit in the partial one-homogeneous case is globally minimizing",
+        "deps": [
+          "thm-partial-homogeneous-projected-limit-is-global-minimizer",
+          "lem-w2-convergence-implies-homogeneous-projection-convergence",
+          "lem-partial-energy-continuous-under-w2",
+          "def-partial-homogeneous-relaxed-objective",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 14,
+        "local_order": 30
+      },
+      {
+        "id": "thm-two-homogeneous-projected-limit-is-global-minimizer",
+        "kind": "theorem",
+        "title": "A separating two-homogeneous flow has globally minimizing projection limits",
+        "deps": [
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-two-homogeneous-measure-projection",
+          "lem-mean-field-projection-identities",
+          "lem-mean-field-first-variation-and-measure-optimality",
+          "lem-two-homogeneous-projection-limit-is-stationary",
+          "lem-two-homogeneous-escape-from-nonoptimal-projection",
+          "lem-flow-preserves-spherical-separation",
+          "thm-global-wasserstein-flow-existence-uniqueness-and-stability",
+          "def-axiom-of-choice",
+          "cor-ascoli-arzela-for-compact-metric-domains"
+        ],
+        "dependency_level": 13,
+        "local_order": 29,
+        "justified_by": []
+      },
+      {
+        "id": "cor-two-homogeneous-wasserstein-limit-is-global-minimizer",
+        "kind": "corollary",
+        "title": "A W2 limit in the two-homogeneous case is globally minimizing",
+        "deps": [
+          "thm-two-homogeneous-projected-limit-is-global-minimizer",
+          "lem-w2-convergence-implies-homogeneous-projection-convergence",
+          "def-two-homogeneous-measure-projection",
+          "lem-mean-field-projection-identities",
+          "def-axiom-of-choice",
+          "cor-weak-limits-are-unique"
+        ],
+        "dependency_level": 14,
+        "local_order": 31
+      },
+      {
+        "id": "lem-partial-feature-flow-moment-and-energy-identities",
+        "kind": "lemma",
+        "title": "Partial feature flows have exact energy and weight-moment identities",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "thm-superposition-for-finite-action-continuity-equations",
+          "lem-hilbert-valued-path-energy-characterization",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "local_order": 9
+      },
+      {
+        "id": "lem-partial-homogeneous-negative-level-trapping",
+        "kind": "lemma",
+        "title": "Negative partial-homogeneity levels trap all sufficiently close forcings",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-hilbert-space",
+          "thm-uniform-boundedness-principle",
+          "cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-heine-borel-rn"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "local_order": 10
+      },
+      {
+        "id": "lem-partial-homogeneous-penalty-is-constant-under-global-hypotheses",
+        "kind": "lemma",
+        "title": "The full global partial-model hypotheses force a constant penalty coefficient",
+        "deps": [
+          "def-feature-measure-energy"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "local_order": 11
+      },
+      {
+        "id": "lem-signed-narrow-convergence-controls-bochner-moments",
+        "kind": "lemma",
+        "title": "Signed narrow convergence controls variation tails and Bochner moments",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-jordan-decomposition-for-signed-measures",
+          "prop-jordan-parts-and-total-variation-formulas-for-signed-measures",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "thm-uniform-boundedness-principle",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "local_order": 12
+      },
+      {
+        "id": "lem-partial-homogeneous-projection-limit-has-convergent-penalty",
+        "kind": "lemma",
+        "title": "A partial signed projection limit has convergent penalty and energy",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-feature-measure-energy",
+          "def-wasserstein-gradient-flow-for-feature-energy",
+          "def-partial-one-homogeneous-measure-projection",
+          "def-partial-homogeneous-relaxed-objective",
+          "lem-signed-narrow-convergence-controls-bochner-moments",
+          "lem-partial-feature-flow-moment-and-energy-identities",
+          "lem-partial-homogeneous-projection-limit-is-stationary"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "local_order": 26
+      }
+    ],
+    "batch": "52"
+  },
+  {
+    "order": 2876,
+    "id": "mean-field-training-and-feature-learning-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Mean-field training and feature learning — Examples",
+    "companion": "mean-field-training-and-feature-learning",
+    "requires": [
+      "mean-field-training-and-feature-learning"
+    ],
+    "items": [
+      {
+        "id": "ex-single-particle-initialization-does-not-separate",
+        "kind": "example",
+        "title": "A single particle does not separate two spheres",
+        "deps": [],
+        "dependency_level": 0,
+        "local_order": 1,
+        "justified_by": []
+      },
+      {
+        "id": "ex-moving-features-versus-fixed-features",
+        "kind": "example",
+        "title": "Moving features can represent a target missed by a fixed feature",
+        "deps": [
+          "def-feature-measure-energy"
+        ],
+        "dependency_level": 1,
+        "local_order": 2,
+        "justified_by": []
+      },
+      {
+        "id": "cex-signed-square-relu-differential-is-not-locally-lipschitz",
+        "kind": "counterexample",
+        "title": "The signed-square ReLU differential need not be locally Lipschitz",
+        "deps": [
+          "def-signed-square-relu-feature-map"
+        ],
+        "dependency_level": 3,
+        "local_order": 3,
+        "justified_by": []
+      }
+    ],
+    "batch": "52"
+  }
+]

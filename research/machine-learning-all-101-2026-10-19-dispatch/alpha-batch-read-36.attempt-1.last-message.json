@@ -1,0 +1,265 @@
+{
+  "group": "l",
+  "batches": ["36"],
+  "pages_read": [
+    "attention-and-transformer-expressivity",
+    "attention-and-transformer-expressivity-examples"
+  ],
+  "items_read": [
+    "lem-2dyck-pcfg-prefix-mass-positive",
+    "def-scaled-dot-product-attention",
+    "def-positional-encoding-and-causal-mask",
+    "lem-paired-crossentropy-mixture-bound",
+    "def-multihead-self-attention",
+    "def-hahn-hard-soft-attention-sequence-model",
+    "def-transformer-encoder-decoder-layer",
+    "lem-hard-attention-depth-reduction",
+    "thm-hard-attention-languages",
+    "lem-soft-attention-one-symbol-influence",
+    "thm-soft-attention-parity-chance-limit",
+    "alg-transformer-forward-pass",
+    "thm-transformer-permutation-equivariance-without-position",
+    "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+    "thm-transformer-formal-language-limits",
+    "lem-yun-transformer-grid-lookup",
+    "lem-dense-attention-cost-and-path-length",
+    "thm-fixed-width-transformer-lp-universality",
+    "ex-position-free-vs-position-encoded-token-order",
+    "ex-two-token-causal-next-token-mask",
+    "ex-fixed-length-vs-unbounded-sequence-limits"
+  ],
+  "conventions": [
+    {
+      "convention": "Ordinary attention uses row-token matrices and row softmax; every masked query row must have at least one allowed key.",
+      "fixed_by": "def-scaled-dot-product-attention",
+      "matters_for": [
+        "def-multihead-self-attention",
+        "def-transformer-encoder-decoder-layer",
+        "alg-transformer-forward-pass",
+        "thm-transformer-permutation-equivariance-without-position",
+        "ex-two-token-causal-next-token-mask"
+      ]
+    },
+    {
+      "convention": "The causal mask permits j ≤ i, including the diagonal. Sinusoidal encoding positions and feature coordinates start at zero.",
+      "fixed_by": "def-positional-encoding-and-causal-mask",
+      "matters_for": [
+        "alg-transformer-forward-pass",
+        "thm-transformer-permutation-equivariance-without-position",
+        "ex-two-token-causal-next-token-mask"
+      ]
+    },
+    {
+      "convention": "Sequence-limit models append a fixed end marker and read its final state. Hard attention chooses the smallest maximizing key index; maps, depth and head count are fixed independently of length.",
+      "fixed_by": "def-hahn-hard-soft-attention-sequence-model",
+      "matters_for": [
+        "lem-hard-attention-depth-reduction",
+        "thm-hard-attention-languages",
+        "lem-soft-attention-one-symbol-influence",
+        "thm-transformer-formal-language-limits"
+      ]
+    },
+    {
+      "convention": "The inverse-length soft-influence result assumes additive bounded token and positional embeddings, fixed linear query/key/value maps, and globally Lipschitz positionwise maps. The changed token must precede the final marker.",
+      "fixed_by": "lem-soft-attention-one-symbol-influence",
+      "matters_for": [
+        "thm-soft-attention-parity-chance-limit",
+        "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+        "thm-transformer-formal-language-limits",
+        "ex-fixed-length-vs-unbounded-sequence-limits"
+      ]
+    },
+    {
+      "convention": "The PCFG prefix law conditions on reaching the sampled prefix length, without conditioning on exact total length. Eventual-termination conditioning replaces p by min(p,1-p).",
+      "fixed_by": "lem-2dyck-pcfg-prefix-mass-positive",
+      "matters_for": [
+        "thm-transformer-formal-language-limits"
+      ]
+    },
+    {
+      "convention": "Yun expressivity blocks use column-token matrices, column softmax, two size-one heads, width-four residual ReLU feedforward sublayers, a permitted scalar query bias, and no layer normalization. Modified lookup hardmax distributes weight equally among maximizers.",
+      "fixed_by": "def-transformer-encoder-decoder-layer",
+      "matters_for": [
+        "lem-yun-transformer-grid-lookup",
+        "thm-fixed-width-transformer-lp-universality"
+      ]
+    },
+    {
+      "convention": "Universality fixes d ≥ 1, n ≥ 2 and 1 ≤ p < ∞, uses integrated Lebesgue Lp error under Countable Choice, and permits depth and parameters to depend on the target and tolerance.",
+      "fixed_by": "thm-fixed-width-transformer-lp-universality",
+      "matters_for": [
+        "ex-position-free-vs-position-encoded-token-order",
+        "ex-fixed-length-vs-unbounded-sequence-limits"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-hard-attention-depth-reduction",
+      "statement": "Under the stated fixed-model and bounded-support hypotheses, any smaller positive free-position fraction can be retained while absorbing one attention layer into new layer-zero activations of bounded support; iteration through fixed depth leaves the output dependent on only constantly many original positions.",
+      "used_by": [
+        "thm-hard-attention-languages",
+        "thm-transformer-formal-language-limits"
+      ]
+    },
+    {
+      "id": "lem-soft-attention-one-symbol-influence",
+      "statement": "For two length-n inputs satisfying the bounded additive dot-product soft-attention hypotheses and differing only at i < n, their final hidden states differ by at most C/n; a fixed globally Lipschitz logit map followed by softmax gives probability-vector distance at most C'/n.",
+      "used_by": [
+        "thm-soft-attention-parity-chance-limit",
+        "lem-soft-2dyck-crossentropy-gap-paired-prefixes",
+        "thm-transformer-formal-language-limits"
+      ]
+    },
+    {
+      "id": "lem-yun-transformer-grid-lookup",
+      "statement": "For the stated integer grids with n ≤ δ^(-d), modified two-head residual attention and three-piece scalar gates realize every equivariant table on distinct-column grid matrices, returning zero on duplicate-column and sentinel inputs; position-tagged grids admit arbitrary tables.",
+      "used_by": [
+        "thm-fixed-width-transformer-lp-universality"
+      ]
+    },
+    {
+      "id": "lem-2dyck-pcfg-prefix-mass-positive",
+      "statement": "The survival-conditioned PCFG prefix law has equal-mass pairs differing at a nonfinal unmatched opening, with paired-event mass at least p²(1-p); conditioning on eventual termination gives the same process with parameter min(p,1-p).",
+      "used_by": [
+        "thm-transformer-formal-language-limits"
+      ]
+    },
+    {
+      "id": "lem-paired-crossentropy-mixture-bound",
+      "statement": "For probability vectors r,s,q,q' on an alphabet of size m, if ||q-q'||₁ ≤ ε, then CE(r,q)/2 + CE(s,q')/2 ≥ H((r+s)/2) - log(1+mε).",
+      "used_by": [
+        "thm-soft-attention-parity-chance-limit",
+        "lem-soft-2dyck-crossentropy-gap-paired-prefixes"
+      ]
+    },
+    {
+      "id": "thm-transformer-permutation-equivariance-without-position",
+      "statement": "Every finite composition of position-shared, position-free encoder layers with unmasked multi-head self-attention satisfies T(PX)=PT(X); simultaneous mask permutation gives the corresponding masked identity.",
+      "used_by": [
+        "lem-yun-transformer-grid-lookup",
+        "thm-fixed-width-transformer-lp-universality",
+        "ex-position-free-vs-position-encoded-token-order"
+      ]
+    },
+    {
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "statement": "Assuming Countable Choice, fixed d ≥ 1, n ≥ 2 and finite p ≥ 1, ordinary Yun blocks approximate continuous compactly supported equivariant maps in global integrated Lp; trainable positional encodings approximate arbitrary continuous maps on compact domains in integrated Lp over that domain.",
+      "used_by": [
+        "ex-position-free-vs-position-encoded-token-order",
+        "ex-fixed-length-vs-unbounded-sequence-limits"
+      ]
+    },
+    {
+      "id": "def-scaled-dot-product-attention",
+      "statement": "Attention is row-softmax(QKᵀ/√d_k)V; additive masks use zero on allowed pairs and negative infinity otherwise, with at least one allowed key per row.",
+      "used_by": [
+        "def-multihead-self-attention",
+        "def-hahn-hard-soft-attention-sequence-model",
+        "ex-two-token-causal-next-token-mask"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "thm-asymmetric-lovasz-local-lemma",
+      "used_for": "Positive probability of simultaneously avoiding the capture-failure events and excessive-fixing event in hard-attention depth reduction.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "The explicit choice assumption inherited by the integrated-Lebesgue universality theorem and its examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-is-a-complete-measure",
+      "used_for": "Countable additivity, completeness and extension of elementary volume in the universality error estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Grid-cell volumes, finite bounding-box measure and null coordinate hyperplanes.",
+      "opened": true
+    },
+    {
+      "id": "thm-borel-sets-are-lebesgue-measurable",
+      "used_for": "Measurability of compact sets and their closed neighborhoods under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-cantor-metric",
+      "used_for": "Uniform continuity of the target on its compact domain or support.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Vanishing excess measure of decreasing bounded closed neighborhoods of the compact support.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-dense-attention-cost-and-path-length",
+      "concern": "The Statement says “row softmax adds O(n²),” and Proof 2.1 counts only n rows of n scores after summing over h heads. The defined multi-head implementation has h separate n-by-n score matrices, so its softmax work is O(hn²). No fixed-h qualification is stated; taking h=d with size-one heads exposes the missing factor. The combined O(n²d) interaction bound survives because positive head widths imply h ≤ d, but the separate softmax claim as written is overstrong.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "thm-fixed-width-transformer-lp-universality",
+      "concern": "Proof 4.1 infers vanishing transition-strip error because “the fixed finite network is bounded,” while the ramp network changes with ρ and the softmax scales also vary. Boundedness for each individual network does not itself supply the uniform output bound needed for that inference. The particular construction appears to permit a short uniform-bound argument: quantizer outputs stay bounded, softmax outputs are convex combinations, and the lookup pulse/detector gates have bounded amplitudes independently of ramp width. That bound and the parameter-selection order should be made explicit.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "def-countable-choice",
+      "finding": "def-countable-choice, Definition, contains “Equivalently, in the vocabulary of [[def-choice-function]]” and “([[def-countable]])” inside the complete defining section. These inline hyperlinks violate the dispatch's uninterrupted-definition rule; no immediately following Definition references section carries them.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-lebesgue-measure-is-a-complete-measure",
+      "finding": "thm-lebesgue-measure-is-a-complete-measure, Statement, contains “([[def-countable-choice]]). Then:” and inline links to def-measure and def-complete-measure-space within the numbered conclusions. These hyperlinks interrupt the Statement rather than appearing in an immediately following Statement references section.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "finding": "thm-lebesgue-measure-of-a-box-of-every-kind, Statement, includes “([[def-countable-choice]])”, “([[def-multidimensional-rectangle-and-volume]])”, and further inline supplier links before the section ends. This violates the uninterrupted-statement and separate-reference-section requirement.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-borel-sets-are-lebesgue-measurable",
+      "finding": "thm-borel-sets-are-lebesgue-measurable, Statement, includes “([[def-countable-choice]])” and defines its conclusion using “([[def-borel-sigma-algebra]])” and “([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]])” inline. These links have not been moved after the complete Statement into Statement references.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-heine-cantor-metric",
+      "finding": "thm-heine-cantor-metric, Statement, contains “compact metric space ([[def-metric-compactness]])”, “continuous ([[def-metric-continuity]])”, and additional inline links, including thm-lebesgue-number-lemma in its choice qualification. These hyperlinks interrupt the complete Statement and lack an immediately following Statement references section.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "attention-and-transformer-expressivity",
+      "to": "feedforward-networks-and-universal-approximation",
+      "faithful": true,
+      "note": "The actual item edges use def-feedforward-neural-network for finite shared positionwise maps and layered MLP conventions. Its definition and diagram agree with those uses. The separate single-hidden-layer universality theorem is not imported."
+    },
+    {
+      "from": "foundation-models-transfer-and-scaling-evidence",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "This is contextual page sequencing. The foundation-model definition imports no attention theorem and explicitly avoids restricting foundation models to a particular architecture or asserting transfer guarantees."
+    },
+    {
+      "from": "exact-tiled-attention-and-memory-aware-differentiation",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "The block-summary definition and tiled algorithm preserve row-softmax weighted values and nonempty allowed-key sets. Their arbitrary real score scale is explicitly supplied; standard scaled dot-product attention is its c=1/√d specialization."
+    },
+    {
+      "from": "low-rank-adaptation-and-parameter-update-geometry",
+      "to": "attention-and-transformer-expressivity",
+      "faithful": true,
+      "note": "The page requirement is contextual. The adapter definition concerns a finite linear map with a frozen base and trainable factors; it makes no logical use of attention universality or sequence-limit results and does not strengthen them."
+    }
+  ]
+}

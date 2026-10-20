@@ -1,0 +1,143 @@
+{
+  "group": "ag",
+  "batches": ["100"],
+  "pages_read": [
+    "active-querying-version-spaces-and-abstention",
+    "active-querying-version-spaces-and-abstention-examples"
+  ],
+  "items_read": [
+    "def-pool-based-realizable-active-learning",
+    "alg-finite-pool-version-space-query",
+    "thm-active-version-space-invariant-and-query-bound",
+    "thm-disagreement-abstention-correctness",
+    "rem-active-label-complexity-and-noisy-oracles",
+    "ex-threshold-median-query-binary-search",
+    "ex-star-class-linear-disagreements",
+    "ex-active-learning-boundary-cases"
+  ],
+  "conventions": [
+    {
+      "convention": "The classifier class is finite and nonempty, its classifiers are measurable and binary-valued, the ordered pool may be empty or contain arbitrary feature points, and oracle responses equal a fixed target in the class pointwise at queried points. Distributional zero-risk realizability alone does not provide this oracle assumption.",
+      "fixed_by": "def-pool-based-realizable-active-learning",
+      "matters_for": [
+        "alg-finite-pool-version-space-query",
+        "thm-active-version-space-invariant-and-query-bound",
+        "thm-disagreement-abstention-correctness",
+        "rem-active-label-complexity-and-noisy-oracles",
+        "ex-threshold-median-query-binary-search",
+        "ex-star-class-linear-disagreements",
+        "ex-active-learning-boundary-cases"
+      ]
+    },
+    {
+      "convention": "The budget is a nonnegative integer. The ascending scan checks unanimity before the budget condition, but immediately returns after a query exhausts the budget, marking the remaining suffix as abstentions.",
+      "fixed_by": "alg-finite-pool-version-space-query",
+      "matters_for": [
+        "thm-active-version-space-invariant-and-query-bound",
+        "thm-disagreement-abstention-correctness",
+        "ex-star-class-linear-disagreements",
+        "ex-active-learning-boundary-cases"
+      ]
+    },
+    {
+      "convention": "The selective rule answers precisely where the current nonempty version space is unanimous. Its probabilities use a fixed query history and a fresh feature with law D_X independent of that history; these abstentions are distinct from unprocessed pool suffix records.",
+      "fixed_by": "thm-disagreement-abstention-correctness",
+      "matters_for": [
+        "rem-active-label-complexity-and-noisy-oracles"
+      ]
+    },
+    {
+      "convention": "Threshold h_k labels x_j by 1 exactly when j>k. Median queries use j=a+floor((b-a+1)/2), retaining [a,j-1] for response 1 and [j,b] for response 0. This is a separate selector from the ascending scan.",
+      "fixed_by": "ex-threshold-median-query-binary-search",
+      "matters_for": [
+        "ex-threshold-median-query-binary-search"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-pool-based-realizable-active-learning",
+      "statement": "A finite pool-based realizable active-learning instance has a finite nonempty class of measurable binary classifiers, an ordered finite pool, a target h* in the class, and a deterministic oracle satisfying O(x)=h*(x) at every queried point. The pool need not be sampled from D_X.",
+      "used_by": [
+        "alg-finite-pool-version-space-query",
+        "thm-active-version-space-invariant-and-query-bound",
+        "thm-disagreement-abstention-correctness",
+        "rem-active-label-complexity-and-noisy-oracles",
+        "ex-threshold-median-query-binary-search",
+        "ex-star-class-linear-disagreements",
+        "ex-active-learning-boundary-cases"
+      ]
+    },
+    {
+      "id": "alg-finite-pool-version-space-query",
+      "statement": "Initialize V=H and scan the ordered pool. Predict unanimous labels without querying; at disagreements query only while budget remains and filter V by the exact answer. Return with suffix abstentions when the budget stops the scan, or return after completing the pool.",
+      "used_by": [
+        "thm-active-version-space-invariant-and-query-bound",
+        "thm-disagreement-abstention-correctness",
+        "rem-active-label-complexity-and-noisy-oracles",
+        "ex-star-class-linear-disagreements",
+        "ex-active-learning-boundary-cases"
+      ]
+    },
+    {
+      "id": "thm-active-version-space-invariant-and-query-bound",
+      "statement": "At every stage the current version space contains h* and is nonempty; each unanimous prediction equals h* at that point; termination takes at most m pool iterations. The query count satisfies q≤min{m,|H|−1}. If every oracle-selected branch has size at most ρ times its pre-query version space, for fixed 0<ρ<1, then q≤log|H|/log(1/ρ).",
+      "used_by": [
+        "thm-disagreement-abstention-correctness",
+        "rem-active-label-complexity-and-noisy-oracles"
+      ]
+    },
+    {
+      "id": "thm-disagreement-abstention-correctness",
+      "statement": "For a current version space from the procedure and a fresh independent feature, DIS(V) is measurable, the selective abstention probability equals D_X(DIS(V)), and the probability of an answered prediction differing from h* is zero. No automatic upper bound on abstention probability follows from |V|.",
+      "used_by": [
+        "rem-active-label-complexity-and-noisy-oracles"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Defines the natural logarithm on positive reals used in the conditional shrink bound and the star-class logarithmic-growth comparisons.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Provides strict monotonicity, the product law, reciprocal identities and log 1=0 for the query bound and unbounded query-count/log-class-size ratios.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "def-natural-logarithm",
+      "finding": "The published Definition contains: “This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that” followed by the bijection claim. This hyperlink interrupts the Definition, contrary to the uninterrupted-statement rule. The reference should follow the complete Definition in a Definition references section; its mathematical content is sound.",
+      "severity": "presentation"
+    },
+    {
+      "item": "thm-natural-logarithm-laws",
+      "finding": "Proof 3.1 says: “As $\\exp(0)=1$, the inverse identity gives $\\log 1=0$. [L1] ∎”. L1 states continuity, strict increase, bijectivity and the inverse relation, but does not state exp(0)=1. The missing justification is immediate from L2 at u=v=0 and positivity from L3: exp(0)=exp(0)^2 and exp(0)>0 imply exp(0)=1. The result remains valid, but this step's citation omits its needed premise or derivation.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "active-querying-version-spaces-and-abstention",
+      "to": "finite-class-pac-learning-and-erm",
+      "faithful": true,
+      "note": "The prerequisite page supplies def-realizable-and-agnostic-pac. Its zero-population-risk definition is used faithfully: the active definition and remark explicitly distinguish almost-sure realizability from pointwise exact pool labels. No finite-class PAC rate is imported as an active query bound."
+    },
+    {
+      "from": "active-querying-version-spaces-and-abstention",
+      "to": "prediction-problems-risks-and-empirical-minimization",
+      "faithful": true,
+      "note": "Checked the supervised-problem and risk definitions and the risk-measurability lemma. The active model specializes to measurable binary classifiers. The remark's finite witness explicitly supplies the joint law, marginal and zero-one loss; it uses population risk without importing a positive sample-size or IID assumption."
+    },
+    {
+      "from": "active-querying-version-spaces-and-abstention",
+      "to": "vc-dimension-growth-and-pac-classification",
+      "faithful": true,
+      "note": "This is a curricular prerequisite only. No VC theorem is cited as a proof premise, and the limitations remark explicitly disclaims a VC-dimension or distribution-free active label-complexity rate. The page edge does not strengthen any cited proposition."
+    }
+  ]
+}

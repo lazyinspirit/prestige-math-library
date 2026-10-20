@@ -1,0 +1,1976 @@
+Fast Approximate Computations with Cauchy
+Matrices and Polynomials ∗
+Victor Y. Pan
+Departments of Mathematics and Computer Science
+Lehman College and the Graduate Center of the City University of New York
+Bronx, NY 10468 USA
+victor.pan@lehman.cuny.edu
+http://comet.lehman.cuny.edu/vpan/
+Abstract
+Multipoint polynomial evaluation and interpolation are fundamental for modern symbolic and nu-
+merical computing. The known algorithms solve both problems over any ﬁeld of constants in nearly
+linear arithmetic time, but the cost grows to quadratic for numerical solution. We ﬁx this discrepancy:
+our new numerical algorithms run in nearly linear arithmetic time. At ﬁrst we restate our goals as the
+multiplication of an n × n Vandermonde matrix by a vector and the solution of a Vandermonde linear
+system of n equations. Then we transform the matrix into a Cauchy structured matrix with some special
+features. By exploiting them, we approximate the matrix by a generalized hierarchically semiseparable
+matrix, which is a structured matrix of a diﬀerent class. Finally we accelerate our solution to the original
+problems by applying Fast Multipole Method to the latter matrix. Our resulting numerical algorithms
+run in nearly optimal arithmetic time when they perform the above fundamental computations with
+polynomials, Vandermonde matrices, transposed Vandermonde matrices, and a large class of Cauchy
+and Cauchy-like matrices. Some of our techniques may be of independent interest.
+Key words:
+Polynomial evaluation; Rational evaluation; Interpolation; Vandermonde matrices; Transfor-
+mation of matrix structures; Cauchy matrices; Fast Multipole Method; HSS matrices; Matrix compression
+AMS Subject Classiﬁcation:
+12Y05, 15A04, 47A65, 65D05, 68Q25
+1
+Introduction
+1.1
+The background and our progress
+Multipoint polynomial evaluation and interpolation are fundamental for modern symbolic and numerical
+computing. The known FFT-based algorithms run in nearly linear arithmetic time, but need quadratic time
+if the precision of computing is restricted, e.g., to the IEEE standard double precision (cf. [BF00], [BEGO08]).
+Our algorithms solve the problems in nearly linear arithmetic time even under such a restriction.
+At ﬁrst we restate the original tasks as the problems of multiplication of a Vandermonde matrix by a
+vector and the solution of a nonsingular Vandermonde linear system of equations, then transform the input
+matrix into a matrix with the structure of Cauchy type, and ﬁnally apply the numerically stable FMM to
+a generalized HSS matrix that approximates the latter matrix.1 “Historically HSS representation is just a
+special case of the representations commonly exploited in the FMM literature” [CDG06]. We refer the reader
+to the books [B10], [VVM], [EGH13], and the bibliography therein for the FMM and the HSS matrices.
+Our resulting fast algorithms apply to the following computational problems:
+∗Some results of this paper have been presented at ILAS’2013, Providence, RI, 2013, at CASC’2013, Berlin, Germany, 2013,
+and at CSR’2014, Moscow, Russia, 2014.
+1“HSS” and “FMM” are the acronyms for “Hierarchically Semiseparable” and “Fast Multipole Method”.
+1
+arXiv:1506.02285v3  [math.NA]  17 Apr 2017
+
+• multipoint polynomial evaluation and interpolation,
+• multiplication by a vector of a Vandermonde matrix, its transpose, and, more generally, matrices with
+the structures of Cauchy or Vandermonde type,
+• the solution of a linear system of equations with these coeﬃcient matrices,
+• rational interpolation and multipoint evaluation associated with Cauchy matrix computations.
+Some of our techniques can be of independent interest (cf. their extension in [P16]).
+As in the papers [MRT05], [CGS07], [XXG12], and [XXCB14], we count arithmetic operations in the ﬁeld
+C of complex numbers with no rounding errors, but our algorithms are essentially reduced to application of
+the celebrated algorithms of FFT and FMM, having stable numerical performance.
+1.2
+Related works and our techniques
+Our progress can be viewed as a new demonstration of the power of combining the transformation of matrix
+structures of [P90] with the FMM/HSS techniques.
+The paper [P90] has proposed some eﬃcient techniques for the transformation of the four most popular
+matrix structures of Toeplitz, Hankel, Cauchy, and Vandermonde types into each other and then showed
+that these techniques enable us to readily extend any eﬃcient algorithm for the inversion of a matrix having
+one of these structures to eﬃcient inversion of the matrices having structures of the three other types. The
+papers [PSLT93] and [PZHY97] have extended these techniques to the acceleration of multipoint polynomial
+evaluation, but have not invoked the FMM and achieved only limited progress. Short Section 9.2 of [PRT92]
+has pointed out some potential beneﬁts of combining FMM with the algorithm of the paper [G88], but has
+not developed that idea. The papers [P95] and [DGR96] applied FMM and some other advanced techniques
+in order to accelerate approximate polynomial evaluation at a set of real points.
+The closest neighbors of our present study are the papers [MRT05], [CGS07], [XXG12], [XXCB14],
+and [P15]. The former four papers approximate the solution of Toeplitz, Hankel, Toeplitz-like, and Han-
+kel-like linear systems of equations in nearly linear arithmetic time, versus the cubic time of the classical
+numerical algorithms and the previous record quadratic time of [GKO95]. All ﬁve papers [GKO95], [MRT05],
+[CGS07], [XXG12], and [XXCB14] begin with the transformation of an input matrix into a Cauchy-like one,
+by specializing the cited technique of [P90]. Then [GKO95] continued by exploiting the invariance of the
+Cauchy structure in row interchange, while the other four papers apply the numerically stable FMM in order
+to operate eﬃciently with HSS approximations of the basic Cauchy matrix.
+We incorporate the powerful FMM/HSS techniques, but extend them nontrivially. The papers [GKO95],
+[MRT05], [CGS07], [XXG12], and [XXCB14] handle just the special Cauchy matrix C = (
+1
+si−tj )m−1,n−1
+i,j=0
+for
+which m = n, {s0, . . . , sn−1} is the set of the n-th roots of unity and {t0, . . . , tn−1} is the set of the other
+2n-th roots of unity. Our fast Vandermonde multipliers and solvers bring us to a subclass of Cauchy matrices
+C = (
+1
+si−tj )m−1,n−1
+i,j=0
+rather than to a single matrix: we still assume that the knots t0, . . . , tn−1 are equally
+spaced on the unit circle, but impose no restriction on the knots s0, . . . , sm−1 and arrive at the matrices
+Cs,f =
+
+1
+si −fωj
+m−1,n−1
+i,j=0
+,
+(1.1)
+for any complex numbers f, s0, . . . , sm−1 and ω = exp(2π√−1/n) denoting a primitive nth root of unity.
+We call the matrices Cs,f CV matrices, link them to Vandermonde matrices, and devise eﬃcient approxi-
+mation algorithms that multiply a CV matrix by a vector, solve a nonsingular CV linear system of equations,
+and hence perform multipoint polynomial evaluation and interpolation. In order to achieve this progress, we
+work with extended HSS matrices, associated with CV matrices via a proper partition of the complex plane:
+we bound the numerical rank of the oﬀ-block-tridiagonal blocks (rather than the oﬀ-block-diagonal blocks,
+as is customary) and allow distinct rectangular blocks to share row indices. Extension of the FMM/HSS
+techniques to such matrix classes was not straightforward and required additional care.
+The paper [P15] revisited the method of the transformation of matrix structures (traced back to [P90]),
+recalled its techniques in some details, extended them, and ﬁnally outlined our present approach to polyno-
+mial interpolation and multipoint evaluation in order to demonstrate the power of that method once again.
+2
+
+The paper included only one half of a page to HSS matrices and about as much to the reduction of the
+polynomial evaluation and interpolation to computations with CV matrices. No room has been left for the
+description of nontrivial computations with generalized HSS matrices (having cyclic block tridiagonal part),
+to which the original problems are reduced. Furthermore the competing fast algorithms for polynomial and
+rational interpolation and multipoint evaluation of [MB72], [H72], and [GGS87] have not been cited.
+We ﬁll this void by describing in some detail the omitted algorithms for generalized HSS computation, by
+linking polynomial and rational interpolation and multipoint evaluation to CV matrices, by demonstrating
+the inherent numerical instability of the algorithms of [MB72], [H72], and [GGS87], and by presenting some
+numerical tests, in particular for comparison of numerical stability of our algorithms with that of [MB72].
+Also we more fully and more clearly cover the approximation of CV matrices by generalized HSS matrices.
+1.3
+Organization of our paper
+In the next section we recall some basic results for matrix computations. In Section 3 we recall the problems of
+polynomial and rational evaluation and interpolation and represent them in terms of Vandermonde, Cauchy,
+and CV matrices. Sections 2 and 3 (on the Background) make up Part I of our paper.
+Sections 4 and 5 (on the Extended HSS Matrices) make up Part II, where at ﬁrst we recall the known
+algorithms for fundamental computations with HSS matrices and then extend the algorithms to generalized
+HSS matrices having cyclic block tridiagonal part. Part II can be read independently of Section 3.
+Sections 6 and 7 (on Computations with the CV Matrices and Extensions) make up Part III of the
+paper. In Section 6 we approximate a CV matrix by generalized HSS matrices and estimate the complexity
+of the resulting numerical computations with CV matrices. In Section 7 we comment on the extensions and
+implementation of our algorithms, in particular the extension to computations with Vandermonde matrices
+and polynomials. The results of Section 6 imply our main results because we have already reduced polynomial
+interpolation and multipoint evaluation to computations with CV matrices in Part I and have elaborated
+upon fast computations with generalized HSS matrices in Part II.
+Part III uses Section 3.2 and equations (3.2) and (3.4) of Part I (which support the cited reduction to
+CV matrices) and Theorem 5.1 and Corollary 5.1 of Part II (where we estimate the cost of computations
+with generalized HSS matrices), but otherwise can be read independently of Parts I and II.
+Sections 8 and 9 make up Part IV of the paper. In Section 8 we report the results of our numerical tests.
+In Section 9 we brieﬂy summarize our study.
+PART I: BACKGROUND
+2
+Deﬁnitions and auxiliary results
+2.1
+Some basic deﬁnitions for matrix computations
+O = Om,n is the m × n matrix ﬁlled with zeros. I = In is the n × n identity matrix.
+M T is the transpose of a matrix M, M H is its Hermitian transpose.
+diag(B0, . . . , Bk−1) = diag(Bj)k−1
+j=0 is a k × k block diagonal matrix with diagonal blocks B0, . . . , Bk−1.
+Both (B0 . . . Bk−1) and (B0 | . . . | Bk−1) denote a 1 × k block matrix with k blocks B0, . . . , Bk−1.
+||M|| = ||M||2 denotes the spectral norm of a matrix M.
+For an m × n matrix M = (mi,j)m−1,n−1
+i,j=0
+, write |M| = maxi,j |mi,j|, and so ||M|| ≤√mn |M|, but for a
+set S we write |S| to denote its cardinality.
+An m × n matrix U is unitary if U HU = In or UU H = Im, and then ||U|| = 1.
+“≪” stands for “much less” quantiﬁed in context.
+2.2
+Submatrices, rank, and generators
+An m × n matrix M has a nonunique generating pair (F, GT ) of a length ρ if M = FGT for two matrices F
+of size m × ρ and G of size n × ρ. The minimum length of a generating pair of a matrix is equal to its rank.
+3
+
+R(B) and C(B) are the index sets of the rows and columns of its submatrix B, respectively. For two sets
+I ⊆{1, . . . , m} and J ⊆{1, . . . , n}, deﬁne the submatrix B = M(I, J ) = (mi,j)i∈I,j∈J such that R(B) = I
+and C(B) = J . Write M(I, .) = M(I, J ) if J = {1, . . . , n}. Write M(., J ) = M(I, J ) if I = {1, . . . , m}.
+Theorem 2.1. A matrix M has rank at least ρ if and only if it has a nonsingular ρ×ρ submatrix M(I, J ).
+If rank(M) = ρ, then M = M(., I)M(I, J )−1M(J , .).
+The theorem deﬁnes two generating pairs (M(., I), M(I, J )−1M(J , .) and (M(., I)M(I, J )−1, M(J , .)
+and a generating triple (M(., I), M(I, J )−1, M(J , .)) of a length ρ for a matrix M. We call such pairs
+and triples generators.
+One can obtain some generators of the minimum length for a given matrix by
+computing its SVD UΣV or its less costly rank revealing factorizations such as ULV and URV factorizations
+in [CGS07], [XXG12], and [XXCB14], where the matrices U and V are unitary, Σ is diagonal, and L and R are
+triangular (cf. [GL13, Section 5.6.8]). For eﬃcient alternative techniques, some of which use randomization
+or heuristics, see [GOS08], [GT01], [HMT11], [LWMRT], [M11], [M11a], [PQY15], [T00], [W14], [XXG12],
+and the references therein.
+2.3
+Small-norm approximation and perturbation
+Hereafter we deal with perturbations within a positive tolerance ξ. (One may think of machine epsilon, but
+in this paper we just assume that ξ is small in context.)
+A matrix ˜
+M is a ξ-approximation of a matrix M if || ˜
+M −M|| ≤ξ||M||.
+A ξ-generator of a matrix M is a generator of its ξ-approximation.
+The ξ-rank of a matrix M is the integer min|| ˜
+M−M||≤ξ||M|| rank( ˜
+M).
+A matrix M is ill-conditioned if its rank exceeds its numerical rank.
+3
+Polynomial and rational evaluation and interpolation as opera-
+tions with structured matrices
+3.1
+Four classes of structured matrices. Cauchy and Vandermonde matrices
+Recall the four classes of highly popular structured matrices, that is, Toeplitz matrices T = (ti−j)m−1,n−1
+i,j=0
+,
+Hankel matrices H = (hi+j)m−1,n−1
+i,j=0
+, Vandermonde matrices V = Vs = (sj
+i)m−1,n−1
+i,j=0
+, and Cauchy matrices
+C = Cs,t =
+
+1
+si−tj
+m−1,n−1
+i,j=0
+. (Some authors call the transpose V T a Vandermonde matrix.) The mn entries
+of such a structured m × n matrix are deﬁned by at most m + n parameters.
+These classes have been extended to the four more general classes of matrices having structures of Toeplitz,
+Hankel, Vandermonde, and Cauchy types. Each such an m×n matrix is naturally deﬁned by its displacement
+generator FH where F and G are m × d and d × n matrices, respectively, and where d ≪min{m, n}, that
+is, min{m, n} exceeds greatly the integer d (cf. [P01], [P15]).
+We mostly work with Vandermonde and Cauchy matrices and next recall some of their basic properties.
+The scalars s0, . . . , sm−1, t0, . . . , tn−1 deﬁne the Vandermonde and Cauchy matrices Vs and Cs,t, and we
+call them knots. If we shift the knots of a Cauchy matrix or scale them by a constant, we arrive at a Cauchy
+matrix again: aCas,at = Cs,t for a ̸= 0 and Cs+ae,t+ae = Cs,t for e = (1, . . . , 1)T .
+Theorem 3.1. (i) An m × n Vandermonde matrix Vs = (sj
+i)m−1,n−1
+i,j=0
+has full rank if and only if all m knots
+s0, . . . , sm−1 are distinct. (ii) An m × n Cauchy matrix Cs,t =
+
+1
+si−tj
+m−1,n−1
+i,j=0
+is well deﬁned and has full
+rank if and only if all its m + n knots are distinct.
+The four cited matrix structures have quite distinct features. In particular the matrix structure of Cauchy
+type is invariant in row and column interchange, in contrast to the structures of Toeplitz and Hankel types.
+This structure is stable in shifting and scaling its basic knots unlike the structure of Vandermonde type.
+The paper [P90], however, has transformed the matrices of any of the four classes into the matrices of the
+three other classes simply by means of multiplication by Hankel, Vandermonde, and transposed or inverse
+Vandermonde matrices. Then the paper has showed that such transforms readily extend any eﬃcient matrix
+4
+
+inversion algorithm for matrices of one of the four classes to the matrices of the three other classes, and
+similarly for the computation of determinants and the solution of linear systems of equations.
+Presently we apply a simple specialization of this general technique for devising eﬃcient approximation
+algorithms for Vandermonde matrix computations linked to polynomial evaluation and interpolation.
+3.2
+Four computational problems
+Problem 1. Multipoint Polynomial evaluation or Vandermonde-by-vector multiplication.
+INPUT: m + n complex scalars p0, . . . , pn−1; s0, . . . , sm−1.
+OUTPUT: m complex scalars v0, . . . , vm−1 satisfying vi = p(si) for p(x) = p0 + p1x + · · · + pn−1xn−1 and
+i = 0, . . . , m −1 or equivalently V p = v for V = Vs = (sj
+i)m−1,n−1
+i,j=0
+, p = (pj)n−1
+j=0 , and v = (vi)m−1
+i=0 .
+Problem 2. Polynomial interpolation or the solution of a Vandermonde linear system.
+INPUT: 2n complex scalars v0, . . . , vn−1; s0, . . . , sn−1, the last n of them distinct.
+OUTPUT: n complex scalars p0, . . . , pn−1 satisfying the above equations for m = n.
+Problem 3. Multipoint rational evaluation or Cauchy-by-vector multiplication.
+INPUT: 2m + n complex scalars s0, . . . , sm−1; t0, . . . , tn−1; v0, . . . , vm−1.
+OUTPUT: m complex scalars v0, . . . , vm−1 satisfying vi = Pn−1
+j=0
+uj
+si−tj for i = 0, . . . , m −1 or equivalently
+Cu = v for C = Cs,t =
+
+1
+si−tj
+m−1,n−1
+i,j=0
+, u = (uj)n−1
+j=0 , and v = (vi)m−1
+i=0 .
+Problem 4. Rational interpolation or the solution of a Cauchy linear system of equations.
+INPUT: 3n complex scalars s0, . . . , sn−1; t0, . . . , tn−1; v0, . . . , vn−1, the ﬁrst 2n of them distinct.
+OUTPUT: n complex scalars u0, . . . , un−1 satisfying the above equations for m = n.
+3.3
+The arithmetic complexity of Problems 1–4
+The algorithm of [MB72] solves Problem 1 by using O((m + n) log2(n) log(log(n))) arithmetic operations.
+This complexity bound has been extended to the solution of Problems 2 in [H72], 3 in [GGS87], and 4 (see
+equation (3.1) below) and is within a factor of log(n) log(log(n)) from the optimum [BM75].
+The cited algorithms supporting this bound require extended precision of computing and fail already
+for the input polynomials of moderate degree if the precision is restricted to the IEEE standard double
+precision (cf. Table 8.8). The approach relies heavily on computing with extended precision. Already the
+fast polynomial division algorithm requires computations with high precision for the worst case input, and
+the problem is aggravated in the recursive fan-in processes of polynomial multiplication and division in the
+algorithms of [MB72], [H72], and [GGS87]. Moreover, the following argument demonstrates that we must
+add at least n bits of precision when these algorithms compute the Lagrange auxiliary polynomial with the
+roots s0, . . . , sn−1.
+Problem 5. Computation of the polynomial coeﬃcients from its roots.
+INPUT: n complex scalars s0, . . . , sn−1.
+OUTPUT: the coeﬃcients of the polynomial l(x) = Qn−1
+i=0 (x −si).
+In order to observe the need for the precision increase, notice that the constant coeﬃcient has absolute
+value Qn−1
+j=0 |si|, which turns into 2n if, say, si = 2 for all i, but the coeﬃcient of x⌊n/2⌋has the order of 2n
+even if si = 1 for all i. The restriction of using bounded (e.g., double) precision of computing rules out using
+the cited fast algorithms, and the known double precision algorithms for Problems 1–4 require quadratic
+arithmetic time (cf. [BF00], [BEGO08]).
+This pessimistic outcome, however, does not apply to the important special case where the knots si
+are the nth roots of 1, that is, where si = ωi for ω = ωn = exp(2π√−1/n), i = 0, . . . , n −1. In this
+case, Vs = (ωij)m−1,n−1
+i,j=0
+and Problems 1 (for m = n) and 2 turn into the computation of the forward and
+inverse discrete Fourier transforms, respectively. Hereafter we use the acronyms DFT and IDFT and write
+Ω=
+1
+√n(ωij)n−1
+i,j=0. Notice that Ω= ΩT and ΩH = Ω−1 =
+1
+√n(ω−ij)n−1
+i,j=0 are unitary matrices. Based on
+FFT, one can perform the DFT and IDFT, that is, can solve Problems 1 and 2 in this special case, by using
+bounded precision of computing and involving only O(n log(n)) arithmetic operations [P01, Problem 2.4.2].
+5
+
+3.4
+Cauchy–Vandermonde links and their impact on Problems 1 and 2
+The following equation, traced to [K68] on [P01, page 110], links Problems 1 and 2 to Cauchy matrices,
+Cs,t = diag(l(si)−1)m−1
+i=0 VsV −1
+t
+diag(l′(tj))n−1
+j=0 , l(x) =
+n−1
+Y
+j=0
+(x −tj).
+(3.1)
+For t = f · (ωj)n−1
+j=0 , f ̸= 0, the knots tj are the scaled nth roots of 1, l(x) = xn −f n, l′(x) = nxn−1,
+Vt = √n Ωdiag(f j)n−1
+j=0 , V −1
+t
+=
+1
+√n diag(f −j)n−1
+j=0 ΩH. Likewise for s = e · (ωi)n−1
+i=0 , e ̸= 0, the knots si are
+the scaled nth roots of 1, Vs = √n Ωdiag(ei)n−1
+i=0 and V −1
+s
+=
+1
+√n diag(e−j)n−1
+j=0 ΩH.
+Write Cs,f = (
+1
+si−fωj )m−1,n−1
+i,j=0
+for f ̸= 0 and Ce,t = (
+1
+eωi−tj )m−1,n−1
+i,j=0
+for e ̸= 0 and obtain from (3.1) that
+Vs = f 1−n
+√n diag
+
+sn
+i −f nm−1
+i=0 Cs,f diag(ωj)n−1
+j=0 Ωdiag(f j)n−1
+j=0 ,
+(3.2)
+V −1
+t
+=
+1
+√n diag(e−i)m−1
+i=0 ΩH diag(l(ei))m−1
+i=0 Ce,t diag
+
+1
+l′(tj)
+n−1
+j=0 , and
+(3.3)
+V −1
+s
+= √n diag(f −j)n−1
+j=0 ΩH diag(ω−j)n−1
+j=0 C−1
+s,f diag
+ f n−1
+sn
+i −f n
+n−1
+i=0 for m = n.
+(3.4)
+These expressions link Vandermonde matrices and their inverses to the m × n CV matrices Cs,f of equation
+(1.1) and the n × m CVT matrices Ce,t = −CT
+t,e =
+
+1
+eωi−tj
+n−1,m−1
+i,j=0
+(for e ̸= 0), that is, Cauchy matrices
+with an arbitrary knot set T = {t0, . . . , tn−1} and with the knot set S = {si = eωi, i = 0, . . . , m −1}. More
+details on the subjects of this section can be found in [Pb].
+PART II: EXTENDED HSS MATRICES
+4
+Quasiseparable and HSS matrices
+4.1
+Quasiseparable matrices and generators
+Deﬁnition 4.1. Suppose that an m × n matrix M is represented as a k × k block matrix with a block
+diagonal bΣ = (Σ0, . . . , Σk−1). Let χ(bΣ) denote the overall number of the entries of all its k diagonal blocks
+Σ0, . . . , Σk−1 and let χ(bΣ) ≪mn, that is, let mn greatly exceed χ(bΣ). Furthermore let l and u denote the
+maximum ranks of the sub- and superdiagonal blocks of the matrix M, respectively. Then the matrix M is
+(l, u)-quasiseparable. By replacing ranks with ξ-ranks we deﬁne a (ξ, l, u)-quasiseparable matrix.
+The deﬁnition generalizes the class of banded matrices and their inverses: a matrix having a lower
+bandwidth l and an upper bandwidth u as well as its inverse (if deﬁned) are (l, u)-quasiseparable.
+In order to operate with (l, u)-quasiseparable matrices eﬃciently, one exploits their representation with
+quasiseparable generators, demonstrated by the following 4 × 4 example and deﬁned below in general form,
+M =
+
+
+
+
+Σ0
+S0T1
+S0B1T2
+S0B1B2T3
+P1Q0
+Σ1
+S1T2
+S1B2T3
+P2A1Q0
+P2Q1
+Σ2
+S2T3
+P3A2A1Q0
+P3A2Q1
+P3Q2
+Σ3
+
+
+
+.
+(4.1)
+By generalizing this example we arrive at the following deﬁnition.
+6
+
+Deﬁnition 4.2. (Cf. Table 4.1.) Suppose that an m × n matrix M is represented as a k × k block matrix
+with a block diagonal bΣ = (Σ0, . . . , Σk−1) such that χ(bΣ) ≪mn. (We reuse these assumptions of Deﬁnition
+4.1.)
+Furthermore suppose that a set {I1, . . . , Ik} partitions the set {1, . . . , m}; a set {J1, . . . , Jk} partitions the
+set {1, . . . , n}, and there exists a six-tuple {Pi, Qh, Sh, Ti, Ag, Bg} such that M(Ii, Jh) = PiAi−1 · · · Ah+1Qh
+and M(Ih, Ji) = ShBh+1 · · · Bi−1Ti for 0 ≤h < i < k.
+Here Pi, Qh, and Ag are |Ii| × li, lh+1 × |Jh|, and lg+1 × lg matrices, respectively, and
+Sh, Ti and Bg are |Ih| × uh+1, ui × |Ji|, and ug × ug+1 matrices, respectively,
+for g = 1, . . . , k −2, h = 0, . . . , k −2, i = 1, . . . , k −1.
+Then the six-tuple {Pi, Qh, Sh, Ti, Ag, Bg} is an (l, u)-quasi-separable generator of the matrix M, and
+the integers l = maxg{lg} and u = maxh{uh} are the lower and upper lengths or orders of this generator.
+Table 4.1: The sizes of quasiseparable generators of Deﬁnition 4.2
+Pi
+Qh
+Ag
+Sh
+Ti
+Bg
+|Ii| × li
+lh+1 × |Jh|
+lg+1 × lg
+|Ih| × uh+1
+ui × |Ji|
+ug × ug+1
+Theorem 4.1. (Cf. [B10], [VVM], [X12], [EGH13], and the bibliography therein.) A matrix M is (l, u)-
+quasi-separable if and only if it has a (nonunique) representation via (l, u)-quasi-separable generators.
+By virtue of this theorem one can redeﬁne the (l, u)-quasiseparable matrices as those representable with
+the families of quasiseparable generators {Ph, Qi, Ag} and {Sh, Ti, Bg} that have lower and upper orders l
+and u, respectively. Deﬁnitions 4.1 and 4.2 provide two useful insights into the properties of these matrices.
+The third equivalent deﬁnition in Section 4.4 (cf. Theorem 4.5) provides yet another insight and is linked to
+the study of the Cauchy matrix C1,ω2n in [CGS07], [XXG12], [XXCB14]. Various deﬁnitions, equivalent or
+closely related to those above, have been introduced by a number of authors (cf. [VVM], [B10], [EGH13], and
+the references therein). In particular the related study of H-matrices and H2-matrices in [H99], [T00], [BH02],
+[GH03], [B09], [B10], and references therein was the basis for the software libraries HLib, www.hlib.org, and
+H2Lib, http://www.h2lib.org/, https://github.com/H2Lib/H2Lib, developed at the Max Planck Institute
+for Mathematics in the Sciences.
+4.2
+Operations with quasiseparable matrices: deﬁnitions and demonstration
+Next we cover some basic operations with matrices represented with (l, u)-quasiseparable generators.
+Deﬁnition 4.3. Given diagonal blocks Σq, q = 0, . . . , k −1, of an (l, u)-quasiseparable matrix M and (l, u)-
+quasiseparable generators for all its sub- and super-diagonal blocks, let α(M) and β(M) denote the arithmetic
+cost of computing the vectors Mu and M −1u, respectively, maximized over all normalized vectors u, |u| = 1,
+and minimized over all algorithms. Write β(M) = ∞if the matrix M is singular. αξ(M) and βξ(M)
+replace the bounds α(M) and β(M), respectively, provided that instead of the evaluation of the vectors Mu
+and M −1u, respectively, we approximate them within the error bounds ξ||Mu|| and ξ||M −1u||, respectively.
+The straightforward algorithm supports the following bound.
+Theorem 4.2. α(M) ≤2(m + n)ρ −ρ −m where a generating pair of length ρ deﬁnes an m × n matrix M.
+The following estimates for computations with quasiseparable matrices extend the well-known estimates
+in the case of banded matrices.
+Theorem 4.3. [DV98], [H99], [EG02]. Suppose that an (l, u)-quasiseparable matrix M of size m × n is
+deﬁned by its mq × nq diagonal blocks Σq, q = 0, . . . , k −1, such that Pk−1
+q=0 mq = m, Pk−1
+q=0 nq = n, and
+s = Pk−1
+q=0 mqnq = O((l + u)(m + n)) and by the generators of length at most l and at most u for its sub-
+and superdiagonal blocks, respectively.
+(i) Then α(M) ≤2 Pk−1
+q=0((mq + nq)(l + u) + s) + 2l2k + 2u2k = O((l + u)(m + n)) and
+(ii) β(M) = O(Pk−1
+q=0((l + u)2(l + u + nq)nq + n3
+q)) if mq = nq for all q and if the matrix M is nonsingular.
+7
+
+Example 4.1. (Cf. Figures 2 and 3.) Let us multiply by a vector v the matrix M of equation (4.1).
+(i) At ﬁrst view it as 2×2 block matrix with diagonal blocks ¯Σ1 =
+ Σ0
+S0T1
+P1Q0
+Σ1
+
+and ¯Σ2 =
+ Σ2
+S2T3
+P3Q2
+Σ3
+
+;
+multiply the blocks
+S0B1T2
+S0B1B2T3
+S1T2
+S1B2T3
+
+and
+ P2A1Q0
+P2Q1
+P3A2A1Q0
+P3A2Q1
+
+by two subvectors of the vector v.
+(ii) Then multiply the blocks S0T1, P1Q0, S2T3, and P3Q2 of the matrices ¯Σ1 and ¯Σ2 of smaller sizes by
+four subvectors of the vector v.
+Perform the computations at both stages fast if the given generators of the blocks have small length.
+(iii) Then multiply the four diagonal blocks Σ1, Σ2, Σ3, and Σ4 by four subvectors of the vectors v. Perform
+these computations fast because the four blocks have a small overall number of entries.
+(iv) Finally obtain the vector Mv by properly summing the products.
+4.3
+Fast multiplication with recursive merging of diagonal blocks: outline
+In Example 4.1 we multiply the matrix M by a vector by using generators for only 6 out of its 22 sub- and
+super-diagonal blocks. Next we extend the above demonstration to multiplication of a general quasiseparable
+matrix M by a vector by using a small fraction of all generators.
+Deﬁnition 4.4. Suppose that M = (M0 | . . . | Mk−1) is a 1×k block matrix with k block columns Mq, each
+partitioned into a diagonal block Σq and a neutered block column Nq, q = 0, . . . , k −1 (cf. our Figures 1–3
+and [MRT05, Section 1]). Such a matrix is ρ-neutered if its every neutered block column N is represented as
+N = FH or N = FSH where F of size h × r, S of size r × r, and H of size r × k are its generator matrices
+and r ≤ρ. Call such a pair or triple a length r generator of the neutered block N and call r its length. A
+ξ-approximation of such a matrix is called (ξ, ρ)-neutered.
+In Figure 1 the diagonal blocks are black and the neutered block columns are gray or white.
+FIGURE 1
+Figure 1:
+FIGURE 2
+8
+
+In Figure 2 the diagonal blocks from Figure 1 (marked by black color) are merged pairwise into their
+diagonal unions, each made up of four blocks. Two of them (from Figure 1) are marked by black color, and
+the two other by gray color. The new neutered block columns are either white or gray, but their gray color is
+lighter. The new (larger) diagonal blocks of Figure 2 are merged pairwise into the diagonal blocks of Figure
+3, each made up of two black and two gray blocks, and its two neutered block columns are white.
+FIGURE 2
+9
+
+FIGURE 3
+10
+
+Theorem 4.4. Suppose that an m × n matrix M is a ρ-neutered k × k block matrix and that we are given
+k generators of length at most ρ for all its k neutered block columns as well as all the χ(bΣ) entries in the k
+diagonal blocks Σ0, . . . , Σk−1. Then
+α(M) ≤2χ(bΣ) + (2m + 2n −1)kρ = O(χ(bΣ) + (m + n)kρ).
+Proof. Multiply the diagonal blocks by vectors in the straightforward way and multiply the neutered block
+columns by vectors by using the representation with generators.
+Formally write M = M ′ + diag(Σq)k−1
+q=0. Notice that α(M) ≤2χ(bΣ) + α(M ′) + m. The neutered block
+columns of the matrix M share their entries with the matrix M ′, whose other entries are zeros. So the k
+pairs (F0, G0), . . . , (Fk−1, Gk−1) together form a single generating pair of a length at most kρ for the matrix
+M ′. Therefore α(M ′) ≤(2m + 2n −1)kρ −m by virtue of Theorem 4.2.
+The upper bound on α(M) of Theorem 4.4 is suﬃciently small unless the integers k or χ(bΣ) are large.
+Unfortunately we cannot bound both of these integers at once, but we can circumvent the problem by
+applying the algorithm of Theorem 4.4 recursively. We begin with a partition of the matrix M deﬁned by a
+few diagonal blocks that are ρ-neutered matrices themselves. Then we multiply neutered block columns fast
+(by using their generators), partition the diagonal blocks into smaller diagonal blocks and neutered block
+columns, and apply the same techniques recursively until we decrease the overall number of entries of the
+remaining diagonal blocks below a ﬁxed tolerance bound of order m + n or (m + n)ρ.
+We can begin with k = 2 and χ(bΣ) ≈0.5n2 and then double the integer k and roughly halve the integer
+χ(bΣ) in every recursive step. Then overall we deal with only O(m + n) neutered block columns and their
+generators and therefore multiply the matrix M by a vector by using O((m + n)ρ) arithmetic operations in
+all these recursive steps, thus matching the cost bounds in part (i) of Theorem 4.3.
+4.4
+HSS and balanced HSS matrices and the cost of basic operations with them
+Let us supply formal deﬁnitions and formal derivation of the latter estimates by applying the recursive
+process in the opposite direction, where at ﬁrst the integer k is large and then is recursively doubled, while
+the diagonal blocks are small at ﬁrst and then are merged recursively pairwise.
+Deﬁnition 4.5. Fix two positive integers l and q such that l + q ≤k and then merge the l block columns
+Mq, Mq+1, . . . , Mq+l−1, the l diagonal blocks Σq, Σq+1, . . . , Σq+l−1, and the l neutered block columns Nq, Nq+1,
+. . . , Nq+l−1 into their union Mq,l = M(., ∪l−1
+j=0C(Σq+j)), their diagonal union Σq,l, and their neutered union
+Nq,l, respectively, such that R(Σq,l) = ∪l−1
+j=0R(Σq+j) and every block column Mq,l is partitioned into the
+diagonal union Σq,l and the neutered union Nq,l.
+Deﬁne recursive merging of all diagonal blocks Σ0, . . . , Σk−1 by a binary tree whose leaves are associated
+with these blocks and whose every internal vertex is the union of its two children (see Figure 4). For every
+vertex v deﬁne the sets L(v) and R(v) of its left and right descendants, respectively. If 0 ≤|L(v)|−|R(v)| ≤1
+for all vertices v, then the binary tree is balanced and identiﬁes balanced merging of its leaves, in our case the
+diagonal blocks. We can uniquely deﬁne a balanced tree with n leaves by removing the 2l(n) −n rightmost
+leaves of the complete binary tree that has 2l(n) leaves for l(n) = ⌈log2(n)⌉. All leaves of the resulting heap
+structure with n leaves lie in its two lowest levels.
+FIGURE 4: Balanced merging of diagonal blocks.
+11
+
+
+
+
+
+
+
+
+
+HHHHHHHH
+    @
+@
+@@
+    @
+@
+@@
+
+
+
+
+A
+A
+AA
+
+
+
+
+A
+A
+AA
+
+
+
+
+A
+A
+AA
+
+
+
+
+A
+A
+AA
+Σ0,1,2,3,4,5,6,7
+Σ0,1,2,3
+Σ4,5,6,7
+Σ0,1
+Σ2,3
+Σ4,5
+Σ6,7
+Σ0
+Σ1
+Σ2
+Σ3
+Σ4
+Σ5
+Σ6
+Σ7
+Deﬁnition 4.6. (i) A block matrix is a balanced ρ-HSS matrix if it is ρ-neutered throughout the process of
+balanced merging of its diagonal blocks, that is, if all neutered unions of its neutered block columns involved
+into this process have ranks at most ρ. This is a ρ-HSS matrix if it is ρ-neutered throughout any process of
+recursive merging of its diagonal blocks.
+(ii) By replacing ranks with ξ-ranks we deﬁne balanced (ξ, ρ)-HSS matrices and (ξ, ρ)-HSS matrices.
+Fact 4.1. (i) Let a matrix be ρj-neutered at the j-th step of recursive balanced merging for every j. Then
+this is a balanced ρ-HSS matrix for ρ = maxj ρj.
+(ii) Likewise, let a matrix be (ξj, ρj)-neutered at the j-th step of recursive balanced merging for every j.
+Then this is a balanced (ξ, ρ)-HSS matrix for ξ = maxj ξj and ρ = maxj ρj.
+Theorem 4.5. (i) Every (l, u)-quasiseparable matrix M is an (l + u)-HSS matrix.
+(ii) Every ρ-HSS matrix is (ρ, ρ)-quasiseparable.
+Proof. A neutered block column Nq can be partitioned into its block sub- and superdiagonal parts Lq and Uq,
+respectively, and so rank(Nq) ≤rank(Lq)+rank(Uq). This implies that rank(Nq) ≤l +u for q = 0, . . . , k −1
+if the matrix M is (l, u)-quasiseparable, and part (i) is proven.
+Next consider the union N of any set of neutered block columns of a matrix M. It turns into a neutered
+block column at some stage of appropriate recursive merging. Therefore rank(N) ≤ρ where M is a ρ-HSS
+matrix. Now, for every oﬀ-diagonal block B of a matrix M, deﬁne the set of its neutered block columns that
+share some column indices with the block B and then notice that the block B is a submatrix of the neutered
+union of this set. Therefore rank(B) ≤rank(N) ≤ρ, and we obtain part (ii).
+By combining Theorems 4.3 and 4.5 we obtain the following results.
+Corollary 4.1. Assume a ρ-HSS matrix M given with mq × nq diagonal blocks Σq, q = 0, . . . , k −1, and
+write m = Pk−1
+q=0 mq, n = Pk−1
+q=0 nq, and s = Pk−1
+q=0 mqnq. Then
+(i) α(M) < 2s + 4ρ2k + 4 Pk−1
+q=0(mq + nq)ρ = O((m + n)ρ + s) and
+(ii) β(M) = O(Pk−1
+q=0((ρ + nq)ρ2nq + n3
+q)) if mq = nq for all q and if det(M) ̸= 0.
+For a balanced ρ-HSS matrix M we only have a little weaker representation than in Theorem 4.1, and
+so the proof of the estimates of Corollary 4.1 for α(M) and β(M) does not apply, but next we extend these
+bounds. Unlike Theorem 4.3 and Corollary 4.1, we allow mq ̸= nq for all q.
+Theorem 4.6. Assume a balanced ρ-HSS matrix M with mq×nq diagonal blocks Σq, q = 0, . . . , k−1, having
+s = Pk−1
+q=0 mqnq entries overall and write l = ⌈log2(k)⌉, m = Pk−1
+q=0 mq, n = Pk−1
+q=0 nq, m+ = maxk−1
+q=0 mq,
+n+ = maxk−1
+q=0 nq, and s ≤min{m+n, mn+}.
+(i) Then
+α(M) < 2s + (m + 4(m + n)ρ)l.
+(4.2)
+(ii) If m = n and if the matrix M is nonsingular, then
+β(M) = O(n+s + (n2
++ + ρn+ + lρ2)n + (kρ + n)ρ2).
+(4.3)
+(iii) The same bounds (4.2) and (4.3) hold for the transpose of a balanced ρ-HSS matrix M matrix having
+nq × mq diagonal blocks Σq for q = 0, . . . , k −1.
+12
+
+Proof. Let us readily prove part (i) by just counting the arithmetic operations involved in recursive merging.
+With no loss of generality assume that the (l −1)st (that is, ﬁnal) stage of a balanced merging process
+has produced a 2 × 2 block representation
+M =
+ 
+¯Σ(l)
+0
+¯S(l)
+01 ¯T (l)
+1
+¯S(l)
+10 ¯T (l)
+0
+¯Σ(l)
+1
+!
+where ¯Σ(l)
+j
+is an ¯m(l)
+j
+× ¯n(l)
+j
+matrix, ¯T (l)
+j
+is an ¯n(l)
+j
+× ¯ρ(l)
+j
+matrix, ¯ρ(l)
+j
+≤ρ, j = 0, 1, ¯m(l)
+1 + ¯m(l)
+2
+= m, and
+¯n(l)
+1 + ¯n(l)
+2
+= n. Clearly α(M) ≤m + P1
+j=0 α(¯Σ(l)
+j ) + P1
+j=0 α( ¯T (l)
+j ) + α( ¯S(l)
+01 ) + α( ¯S(l)
+10 ).
+Apply Theorem 4.2 and obtain that P1
+j=0 α( ¯T (l)
+j ) + α( ¯S(l)
+01 ) + α( ¯S(l)
+10 ) < 4(m + n)ρ.
+The second last stage of the balanced merging process produces a similar 2 × 2 block representation for
+each of the diagonal blocks ¯Σ(l)
+j , j = 0, 1. Therefore P1
+j=0 α(¯Σ(l)
+j ) < m + 4(m + n)ρ + Pk(1)
+j=0 α(¯Σ(1−1)
+j
+) where
+¯Σ(1−1)
+0
+, . . . , ¯Σ(1−1)
+k(1)−1 are the diagonal blocks output at the second last merging stage (cf. Figures 3 and 4).
+By recursively going back through the merging process, obtain that α(M) < (m + 4(m + n)ρ)l +
+Pk−1
+j=0 α(Σj). Here Σq = ¯Σ(0)
+q
+is an mq × nq matrix for mq = ¯m(0)
+q , nq = ¯n(0)
+q , q = 0, . . . , k −1. Hence
+Pk−1
+q=0 α(Σq) < 2 Pk−1
+q=0 mqnq = 2s, implying (4.2).
+Part (ii) of the theorem has been supported by the merging and compression algorithm of [CGS07]. The
+algorithm has been presented and analyzed in [CGS07] (cf. also [XXG12] and [XXCB14]) for the subclass
+of balanced ρ-HSS matrices, approximating the special matrix (
+1
+ω−fωj )n−1
+i,j=0 for ω = exp(2π√−1/n) and
+f = exp(π√−1/n), denoting primitive nth and 2nth rooots of 1, respectively, but both the algorithm and
+its analysis are readily extended, and bound (4.3) follows. All the proofs can be equally applied when rows
+of the matrix M replace its columns and vice versa, and this implies part (iii).
+Corollary 4.2. Under the assumptions of parts (i)–(iii) of Theorem 4.6 suppose that kρ = O(n) and
+n+ + ρ = O(log(n)). Then α(M) = O((m + n) log2(n)) and β(M) = O(n log3(n)).
+For our application to computations with CV matrices we must estimate α(M) and β(M) for a little
+more general class of matrices M deﬁned in the next section. (Such a matrix has cyclic block tridiagonal
+part with a suﬃciently small overall number of entries, say, O((m + n) log(m + n)), such that all blocks of
+the matrix M not overlapping this part have small rank, say, O(log(m + n)).) The algorithms supporting
+Theorem 4.6 and Corollary 4.2 are quite readily extended to these matrices in the next section.
+5
+Extension from diagonal to tridiagonal blocks
+Example 5.1. The following matrix has eight square or rectangular diagonal blocks Σ0, . . . , Σ7 and becomes
+block tridiagonal if we glue its lower and upper boundaries,
+M =
+
+
+
+
+
+
+
+
+
+
+
+
+Σ0
+B0
+O
+O
+O
+O
+O
+A0
+A1
+Σ1
+B1
+O
+O
+O
+O
+O
+O
+A2
+Σ2
+B2
+O
+O
+O
+O
+O
+O
+A3
+Σ3
+B3
+O
+O
+O
+O
+O
+O
+A4
+Σ4
+B4
+O
+O
+O
+O
+O
+O
+A5
+Σ5
+B5
+O
+O
+O
+O
+O
+O
+A6
+Σ6
+B6
+B7
+O
+O
+O
+O
+O
+A7
+Σ7
+
+
+
+
+
+
+
+
+
+
+
+
+.
+(5.1)
+Deﬁne the eight tridiagonal blocks,
+Σ(c)
+0
+=
+
+
+B7
+Σ0
+A1
+
+, Σ(c)
+1
+=
+
+
+B0
+Σ1
+A2
+
+, Σ(c)
+2
+=
+
+
+B1
+Σ2
+A3
+
+, Σ(c)
+3
+=
+
+
+B2
+Σ3
+A4
+
+,
+Σ(c)
+4
+=
+
+
+B3
+Σ4
+A5
+
+, Σ(c)
+5
+=
+
+
+B4
+Σ5
+A6
+
+, Σ(c)
+6
+=
+
+
+B5
+Σ6
+A7
+
+, and Σ(c)
+7
+=
+
+
+B6
+Σ7
+A0
+
+.
+13
+
+Here Σ(c)
+1 , Σ(c)
+2 , Σ(c)
+3 , Σ(c)
+4 , Σ(c)
+5 , and Σ(c)
+6
+are six blocks of the matrix M of (5.1), while Σ(c)
+0
+and Σ(c)
+7
+consist
+of two pairs of its blocks. Each pair, however, turns into a single block if we glue together the lower and upper
+boundaries of the matrix M. With the diagonal block Σq and the tridiagonal block Σ(c)
+q
+we still associate a
+block column Mq such that C(Mq) = C(Σ(c)
+q ).
+The admissible block N (c)
+q , playing the role similar to that of a neutered block column of Deﬁnition 4.4,
+complements the tridiagonal block Σ(c)
+q
+in its block column. The block N (c)
+q
+is ﬁlled with zeros in the case of
+the matrix M of (5.1) for every q, q = 0, . . . , 7, but not so in the case of general 8×8 block matrix embedding
+the matrix M of (5.1).
+Here are some sample unions of the tridiagonal blocks of the matrix M of (5.1), Σ(c)
+0,1,...,7 = M,
+Σ(c)
+0,1,2,3 =
+
+
+
+
+
+
+
+
+B7
+O
+O
+O
+Σ0
+B0
+O
+O
+A1
+Σ1
+B1
+O
+O
+A2
+Σ2
+B2
+O
+O
+A3
+Σ3
+O
+O
+O
+A4
+
+
+
+
+
+
+
+
+, Σ(c)
+0,1 =
+
+
+
+
+B7
+O
+Σ0
+B0
+A1
+Σ1
+O
+A2
+
+
+
+,
+and Σ(c)
+2,3 =
+
+
+
+
+B1
+O
+Σ2
+B2
+A3
+Σ3
+O
+A4
+
+
+
+.
+In Figure 5 the admissible blocks are light gray or white; two adjacent blocks of each black diagonal
+block are darker gray; the triples of these black and gray blocks form the tridiagonal blocks. The neutered
+block columns are either white or gray.
+FIGURE 5
+Let us generalize this demonstration (see Figure 5). Assume a block matrix M with k diagonal blocks
+Σq, of sizes m(c)
+q
+× nq, for q = 0, . . . , k −1, and glue together its lower and upper block boundaries. Then
+each diagonal block, including the two extremal blocks Σ0 and Σk−1, has exactly two adjacent blocks in its
+block column: they are given by the pair of the subdiagonal and superdiagonal blocks. Deﬁne the tridiagonal
+blocks Σ(c)
+0 , . . . , Σ(c)
+k−1 of sizes m(c)
+q
+×nq by combining such triples of blocks where m(c)
+q
+= mq−1 mod k +mq +
+mq+1 mod k, q = 0, . . . , k −1. Write m(c) = Pk−1
+q=0 m(c)
+q
+and notice that m(c) = 3m because the number of
+rows in each of the three block diagonals sums to m. Therefore s(c) = Pk−1
+q=0 m(c)
+q nq ≤m(c)n+ ≤3mn+.
+14
+
+The complements of the tridiagonal blocks in their block columns are also blocks, called admissible (cf.
+[B10]). We call the matrix itself an extended HSS matrix, and we extend accordingly our deﬁnitions of the
+unions of blocks, recursive and balanced merging, ρ-neutered, balanced ρ-HSS, ρ-HSS matrices, as well as
+(ξ, ρ)-neutered, balanced (ξ, ρ)-HSS, and (ξ, ρ)-HSS matrices (cf. Deﬁnitions 4.4, 4.5, and 4.6). Can we
+extend Theorem 4.6 and Corollary 4.2 to the case of extended balanced ρ-HSS matrices M where we replace
+the integer parameters m and s by m(c) = 3m and s(c) ≤m(c)n+ = 3mn+, respectively? The extension of
+part (i) of Theorem 4.6 is immediate, but in order to extend the algorithms supporting its part (ii), we must
+impose some restriction on the input matrix M.
+Deﬁnition 5.1. An extended balanced ρ-HSS matrix is hierarchically regular if all its diagonal blocks at
+the second factorization stage of the associated balanced merging process have full rank.
+This matrix is
+hierarchically well-conditioned if these blocks are also well-conditioned.
+Theorem 5.1. Suppose that the matrix M in Theorem 4.6 is replaced by an extended m×n balanced ρ-HSS
+matrix M (c) and also suppose that the integer parameters m and s in bounds (4.2) on α(M) and (4.3) on
+β(M) are replaced by m(c) = 3m and s(c) ≤3mn+, respectively. Then bound (4.2) still holds, and bound
+(4.3) holds if m = n and if the matrix M is hierarchically regular and hierarchically well-conditioned.
+Proof. Revisit the proof of the Theorem 4.6, by replacing the integer parameters m and ¯s(j) according to
+the assumptions of Theorem 5.1, and verify that the proof still remains valid (use the assumption that the
+matrix M is hierarchically regular and hierarchically well-conditioned in order to extend bound (4.3)).
+Corollary 5.1. Under the assumptions of Theorem 5.1 suppose that kρ = O(n) and n+ + ρ = O(log(n)).
+Then α(M) = O((m + n) log2(n)) and β(M) = O(n log3(n)).
+PART III: COMPUTATIONS WITH CV MATRICES
+AND EXTENSIONS
+6
+Approximation of the CV and CVT matrices by HSS matrices
+and algorithmic implications
+Our next goal is approximation of CV by HSS matrices, which will imply fast approximate solution of
+Problems 1–4 because in Part I we reduced them to computations with CV matrices of (1.1), and in Part II
+we described fast computations with HSS matrices.
+6.1
+Small-rank approximation of certain Cauchy matrices
+Deﬁnition 6.1. (See [CGS07, page 1254].) For a separation bound θ < 1 and a complex separation center
+c, a pair of complex points s and t is (θ, c)-separated if | t−c
+s−c| ≤θ. A pair of sets of complex numbers S and
+T is (θ, c)-separated if every pair of points s ∈S and t ∈T is (θ, c)-separated.
+Lemma 6.1. (See [R85] and [CGS07, equation (2.8)] or [Pb].) Suppose a pair of complex points s and t is
+(θ, c)-separated for 0 ≤θ < 1 and a complex center c. Fix a positive integer ρ and write q = t−c
+s−c and |q| ≤θ.
+Then
+1
+s−t =
+1
+s−c
+Pρ−1
+h=0
+(t−c)h
+(s−c)h +
+qρ
+s−c for |qρ| =
+|q|ρ
+1−|q| ≤
+θρ
+1−θ and a positive integer ρ.
+Corollary 6.1. (Cf. [CGS07, Section 2.2], [B10], or [Pb].) Suppose that two sets of 2n distinct complex
+numbers S = {s0, . . . , sm−1} and T = {t0, . . . , tn−1} are (θ, c)-separated from one another for 0 < θ < 1 and
+a global complex center c. Deﬁne the Cauchy matrix C = (
+1
+si−tj )m−1,n−1
+i,j=0
+and let δ = δc,S = minm−1
+i=0 |si −c|
+denote the distance from the center c to the set S. Fix a positive integer ρ and deﬁne the m × ρ matrix
+F = (1/(si −c)ν+1)m−1,ρ−1
+i,ν=0
+and the n × ρ matrix G = ((tj −c)ν)n−1,ρ−1
+j,ν=0
+. (We can compute these matrices
+by using (m + n)ρ + m arithmetic operations.) Then
+C = FGT + E, |E| ≤
+θρ
+(1 −θ)δ .
+(6.1)
+15
+
+6.2
+Block partition of a Cauchy matrix
+Generally neither CV matrix of equation (1.1) nor its blocks of a large size have global separation centers.
+So, instead of the approximation of a CV matrix by a low-rank matrix, we seek its approximation by an
+extended balanced ρ-HSS matrix for a bounded integer ρ. At ﬁrst we ﬁx a reasonably large integer k and
+then partition the complex plane into k congruent sectors sharing the origin 0. The following deﬁnition
+induces a uniform k-partition of the knot sets S and T and thus induces a block partition of the associated
+Cauchy matrix. In the next subsection we specialize these partitions to the case of a CV matrix.
+Deﬁnition 6.2. (See Figure 6.) A(φ, φ′) = {z = exp(ψ√−1) : 0 ≤φ ≤ψ < φ′ < 2π} is the semi-open
+arc of the unit circle {z : |z| = 1} with length φ′ −φ and endpoints τ = exp(φ√−1) and τ ′ = exp(φ′√−1).
+Γ(φ, φ′) = {z = r exp(ψ√−1) :
+r ≥0, 0 ≤φ ≤ψ < φ′ < 2π} is the semi-open sector. ¯Γ(φ, φ′) is its
+exterior.
+In Figure 6 we mark by black color an arc of the unit circle {z :
+|z = 1|}. The ﬁve line intervals
+[0, τ], [0, c], [0, τ ′], [τ, c], and [c, τ] are shown by dotted lines.
+Two broken lines represent the two line
+intervals bounding the intersection of the sector Γ(ψ, ψ′) and the unit disc D(0, 1) = {z : |z| ≤1}. The two
+perpendiculars from the center c onto these two bounding line intervals are also represented by broken lines.
+FIGURE 6
+Fix a positive integer l+, write k = 2l+, φq = 2qπ/k, and φ′
+q = φq+1 mod k. Then |φ′
+q−φq| = 2π/k for all q.
+Partition the unit circle {z :
+|z = 1|} by k equally spaced points φ0, . . . , φk−1 into k semi-open arcs
+Aq = A(φq, φ′
+q), each of length 2π/k. Deﬁne the semi-open sectors Γq = Γ(φq, φ′
+q) for q = 0, . . . , k −1, that
+is, Γq = Γ(φq, φq+1), for q = 0, . . . , k −2, and Γk−1 = Γ(φk−1, φ0).
+Assume the polar representation si = |si| exp(µi
+√−1) and tj = |tj| exp(νj
+√−1).
+Notice that the knots t0, . . . , tn−1 have been enumerated in the counter-clockwise order of the angles
+νj, beginning with the knots in the sector Γ(φ0, φ′
+0). Similarly re-enumerate the knots s0, . . . , sm−1, in the
+counter-clockwise order of the angles µj. Induce the block partition of a Cauchy matrix C = (Cp,q)k−1
+p,q=0 and
+its partition into block columns C = (C0 | . . . | Ck−1) such that
+Cp,q =
+
+1
+si −tj
+
+si∈Γp,tj∈Γq
+and Cq =
+
+1
+si −tj
+
+si∈{0,...,n−1},tj∈Γq
+for p, q = 0, . . . , k −1.
+16
+
+Furthermore, for every q, deﬁne (i) the diagonal block Σq = Cq,q, (ii) the two adjacent blocks Cq−1 mod k,q
+and Cq+1 mod k,q above and below it, (iii) the tridiagonal block Σ(c)
+q
+(made up of the block Cq and the two
+adjacent blocks), and (iv) the admissible block N (c)
+q , which complements the tridiagonal block Σ(c)
+q
+in its
+block column Cq.
+If a tridiagonal block Σ(c)
+q
+is empty, then the admissible block N (c)
+q
+occupies the entire block column Cq,
+that is, this block column has rank at most ρ. If, on the contrary, a tridiagonal block Σ(c)
+q
+occupies the entire
+block column Cq, then only the tridiagonal blocks in the two neighboring block columns Cq−1 mod k and
+Cq+1 mod k can be nonempty, and so all the other block columns are occupied entirely by admissible blocks
+and hence have ranks at most ρ.
+6.3
+Separation of the tridiagonal and admissible blocks of a CV matrix
+The following lemma can be readily veriﬁed (cf. Figure 6).
+Lemma 6.2. 0 ≤χ ≤φ ≤η < φ′ < χ′ ≤π/2 and write τ = exp(φ√−1), c = exp(η√−1), and τ ′ =
+exp(φ′√−1). Then |c −τ| = 2 sin( η−φ
+2 ) and the distance from the point c to the sector ¯Γ(χ, χ′) is equal to
+sin(ψ), for ψ = min{η −χ, χ′ −η}.
+Next we specialize the block partition of the previous subsection to the case of a CV matrix Cs,f of (1.1)
+for a ﬁxed complex f such that |f| = 1. In this case tj = fωj
+k for ωk = exp(2π√−1/k), j = 0, . . . , n −1, and
+every arc Aq contains ⌈n/k⌉or ⌊n/k⌋knots tj.
+In Figure 7, ψ = φ1 + φ0
+2 .
+FIGURE 7
+Theorem 6.1. (Cf.
+Figure 7.)
+Assume a uniform k-partition of the knot sets of a CV matrix above
+for k ≥12. Let Γ′
+q denote the union of the sector Γq and its two adjacent sectors on both sides, that is,
+Γ′
+q = Γq−1 mod k ∪Γq ∪Γq+1 mod k. Write ¯Γ′
+q to denote the exterior of the sector Γ′
+q and write cq to denote
+the midpoints of the arcs Aq = A(φq, φ′
+q) for φ′
+q = φq+1 mod k and q = 0, . . . , k −1. Furthermore let ¯δq
+denote the distance from the center cq to the sector ¯Γ′
+q. Then, for every q, (i) ¯δq ≥| sin( 3π
+k )| and (ii) the arc
+Aq and the sector ¯Γ′
+q are (θ, cq)-separated for θ = 2 sin( π
+2k)/ sin( 3π
+k ).
+17
+
+Proof. Suppose that 1 ≤q ≤k −3. Then Γ′
+q = Γ(φq−1, φq+2). Apply Lemma 6.2, for χ = φq−1, φ = φq,
+c = cq, φ′ = φ′
+q = φq+1, and χ′ = φq+2, and obtain the theorem. Similarly prove the theorem in the cases
+where q = 0, Γ′
+0 = Γ(φk−1, φ2); q = k−2 and Γ′
+k−2 = Γ(φk−3, φ0), and q = k−1 and Γ′
+k−1 = Γ(φk−2, φ1).
+Recall that sin(y) ≈y as y ≈0, and therefore θ ≈1/3 provided that the integer k is large. Notice that
+for every q the admissible block N (c)
+q
+is deﬁned by the knots tj lying on the arc Aq and the knots si lying
+in the sector ¯Γ′
+q, and apply Corollary 6.1. For every q, q = 0, . . . , k −1, write δq = minsi∈¯Γ′q |si −cq|, then
+notice that δq ≥¯δq, and obtain the following result.
+Corollary 6.2. Assume a suﬃciently large integer k, 2k < n, and let a uniform k-partition of the knot sets
+S and T of an m × n CV matrix C deﬁne k admissible blocks N (c)
+0 , . . . , N (c)
+k−1. Then all of them have the
+|E|-ranks at most ρ, that is, C is an extended (|E|, ρ)-neutered matrix, where |E| and ρ satisfy bound (6.1)
+for θ ≈1/3 and δ = mink−1
+q=0 |δq| ≥| sin( 3π
+k )|.
+Our k-uniform partition of the complex plane into k congruent sectors deﬁnes a desired partition of CV
+matrix into (θ, cq)-separated blocks for θ ≈1/3 or smaller. Trying to extend our results to the more general
+class of Cauchy matrices Cs,t whose all knots tj lie on the unit circle {z : |z| = 1}, one may consider various
+other partitions of the complex plane and apply the following extension of Lemma 6.2 and Theorem 6.1.
+Lemma 6.3. Assume the numbers θ, φ, φ′, and c such that 0 < θ < 1, 0 ≤φ < φ′ ≤2π, and c = exp(0.5(φ′+
+φ)√−1) is the midpoint of the arc A(φ, φ′). Write r = r(φ, φ′, θ) = 2
+θ sin( φ′−φ
+4
+). Let D(c, r) = {z : |z −c| ≤
+r} denote the disc on the complex plane with a center c and a radius r and let ¯D(c, r) = {z : |z −c| > r}
+denotes the exterior of this disc. Then the two sets A(φ, φ′) and ¯D(c, r) are (θ, c)-separated.
+6.4
+Approximation of a CV matrix by a balanced ρ-HSS matrix and the com-
+plexity of approximate computations with CV matrices
+Let δ(h) denote the minimum distance from the centers cq to the knots si lying in the admissible blocks
+after the hth recursive merging. Recall that the angles 2π/k of the k congruent sectors Γ0, . . . , Γk−1 are
+recursively doubled in every merging. So Lemma 6.2 implies that δ(h) ≥sin(3π2h/k) after the hth merging,
+h = 1, . . . , l. We deﬁne the recursive merging by choosing the integers k = 2l+ and l < l+. Choose them
+such that k/2l = 2l+−l ≥6. Then δ(h+1) > δ(h) > δ(0) ≥δ−= sin( 3π
+k ) for all h, and so δ−≈3π
+k for large
+integers k. Together with Corollary 6.2 these relationships imply the following result.
+Theorem 6.2. The CV matrix C of Corollary 6.2 as well as its transpose CVT matrix CT are two ex-
+tended balanced (ξ, ρ)-HSS matrices where the values ξ and ρ are linked by bound (6.1) for |E| = ξ,
+θ = 2 sin( π
+2k)/ sin( 3π
+k ), and δ = δh ≥δ−= sin( 3π
+k ), so that θ ≈1/3 and δ−≈
+3π
+k , for large integers
+k.
+Combine Corollary 5.1 with this theorem applied for k = 2l+ of order n/ log(n), for ρ and log(1/ξ) of
+order log(n), and for l < l+ such that l+ −l ≥6 (verify that in this case the assumptions of the corollary
+are satisﬁed), and obtain the following complexity estimates for CV matrices C and CVT matrices CT .
+Theorem 6.3. Assume an m × n CV matrix C and a positive ξ such that log(1/ξ) = O(log(n)). Then
+αξ(C) = O((m + n) log2(n)). If in addition m = n and if the matrix C is ξ-approximated by a hierarchically
+regular extended balanced ρ-HSS matrix, then βξ(C) = O(n log3(n)). The same bounds hold for the CVT
+matrix CT replacing C.
+7
+Extensions and implementation
+7.1
+Computations with matrices having displacement structure, polynomials,
+and rational functions
+By combining the algebraic techniques of transformation of matrix structure of [P90] with the FMM/HSS
+techniques, [P15, Section 9] extends the complexity bounds of Theorems 6.3 and 7.1 to generalized Cauchy
+18
+
+matrices M = (f(si −tj))m−1,n−1
+i,j=0
+for various functions f(z) such as z−p for a positive integer p, ln z, and
+tan z, to n × n structured matrices M having the displacement structures of Toeplitz, Hankel, Cauchy and
+Vandermonde types (cf. also [Pb]), and in particular to Cauchy matrices M = Cs,t having arbitrary sets of
+knots S and T . In the latter case the approximation error bound ξ increases by a factor bounded from above
+by the condition number κ(M) = ||M|| ||M +||, and the results are readily extended to Problems 3 and 4
+of multipoint rational evaluation and interpolation. Next we specify the simpler extension to computations
+with a Vandermonde matrix, its transpose, and polynomials.
+Theorem 7.1. For a positive ξ and a vector s = (si)m−1
+i=0 , write V = Vs and s+ = maxm−1
+i=0 |si|.
+(i) Then αξ(V ) + αξ(V T ) = O((m + n)ρ log2(n)) provided that s+ is bounded from above by a constant.
+(ii) Suppose that, for m = n and some complex f, |f| = 1, the CV matrix Cs,f has been ξ-approximated by
+a hierarchically nonsingular extended balanced (ξ, ρ)-HSS matrix. Then βξ(V ) + βξ(V T ) = O(nρ3 log(n)).
+(iii) One can extend the above bounds on αξ(V ) and βξ(V ) to the solution of Problems 1 and 2 of Section 3.
+Proof. With no loss of generality we can assume that m = n.
+Combine Theorem 6.3, equations (3.2),
+(3.4) and their transposes. The matrices diag(ωj)n−1
+j=0 , Ω/√n, ΩH/√n, and diag(f j)n−1
+j=0 are unitary, and so
+multiplication by them and by their inverses makes no impact on the output error norms. Multiplication
+by the matrix diag(sn
+i −f n)n−1
+i=0 can increase the value ξ by at most a factor of 1 + sn
++ ≤1 + |Vs|s+, while
+multiplication by the inverse of this matrix increases ξ by a factor of ∆= 1/ maxf: |f|=1 minn−1
+i=0 |sn
+i −f n|,
+which is at most 2n for a proper choice of the value f such that |f| = 1. Then the increase by a factor of ∆
+would make no impact on the asymptotic bounds of Theorem 7.1, and so we complete the proof of parts (i)
+and (ii). Equations of Problem 1 extend the proof to part (iii).
+7.2
+Simpliﬁed implementation
+One can implement our algorithms by computing the centers cq and the admissible blocks b
+Nq of bounded
+ranks in the merging process, but can avoid a large part of the computations by following the recipe of the
+papers [CGS07], [X12], [XXG12], and [XXCB14]. The idea is to bypass the computation of the centers cq
+and immediately compute HSS generators for the admissible blocks b
+Nq, deﬁned by HSS trees. The length
+(size) of the generators at every merging stage (represented by a ﬁxed level of the tree) can be chosen equal
+to the available upper bound on the numerical ranks of these blocks or can be adapted empirically. See
+[PLSZa, Section 10.1] for a recent acceleration of this stage.
+PART IV: NUMERICAL TESTS AND CONCLUSIONS
+8
+Numerical Experiments
+Numerical experiments have been performed under our supervision in the Graduate Center of the City
+University of New York by Franklin Lee and Aron Wolinetz (Section 8.1) and by Liang Zhao (Section 8.2).
+All computations have been performed with the IEEE standard double precision. The codes are available
+upon request.
+8.1
+Experimental computation of numerical ranks of the admissible blocks of
+CV matrices
+The test programs were written in Python 3.3.3, using the Numpy 1.7.1, Scipy 0.12.1, and Sympy 0.7.3
+libraries. The tests were run on Windows 7 64-bit SP1 on a Toshiba Satellite L515-S4925 with a Pentium
+Dual-Core T4300 @ 2.10GHz x2 processor. Random numbers were generated uniformly with the language’s
+Mersenne twister over the range {x : 0 ≤x < 1} and extended to the ranges {y :
+a ≤y < b} for
+y = a + (b −a)x.
+For n = 1024, 2048, 4096 we computed the vectors (ωj)n−1
+i=0 of the nth roots of unity, and for every pair
+of n and h, h = 0, 1, 4, we generated 100,000 instances of complex numbers s0, . . . , sn−1, thus deﬁning n × n
+CV matrices Cs,1 = (
+1
+si−ωj )n−1
+i,j=0.
+19
+
+We generated the knots si = |si| exp(φi
+√−1) as follows. At ﬁrst we generated the angles ¯φi over the
+range 0 ≤¯φi < 2π and the values |si| over the range [1−1/2h, 1+1/2h) for h = 0, 1, 4 and i = 0, . . . , n−1, in
+all cases independently for all i and t. Then for every vector (¯φi)k−1
+i=0 we computed the permutation matrix
+P deﬁning the vector (φi)n−1
+i=0 = P(¯φi)n−1
+i=0 with the coordinates φ0, . . . , φn−1 in the nondecreasing order. For
+every pair of the vectors (|si|)n−1
+i=0 and (φi)n−1
+i=0 we deﬁned the vector (si)n−1
+i=0 = (|si| exp(φi
+√−1))n−1
+i=0 and the
+CV matrix C = (
+1
+si−ωj )n−1
+i,j=0. Then we ﬁxed the integers k = 4, 32, 512, 2048, skipped integer pairs (k, n)
+where k < 2 or n/k < 2, and deﬁned tridiagonal and admissible blocks by following the recipes of Section 6.
+Finally we ﬁxed the tolerances ξ = 10−q for q = 2, 3, 4 and computed the ξ-ranks of nonempty admissible
+blocks N (c)
+q
+by applying the rank function numpy.linalg.matrix rank(X, tol).
+Tables 8.1–8.3 show the average computed values of the ξ-ranks in these tests. They vary rather little,
+remaining consistently small, when we changed the parameters h, k, and ξ, and they grew very slowly when
+we doubled the matrix dimension n.
+We also computed the average norms of the admissible blocks. They ranged between 100 and 1000.
+Table 8.1: The ξ-ranks of the admissible blocks for h = 0
+ξ
+n
+k=4
+k=32
+k=512
+0.01
+1024
+5.0
+5.0
+2.0
+0.01
+2048
+5.0
+5.0
+3.0
+0.01
+4096
+5.0
+5.0
+3.8
+0.001
+1024
+6.0
+6.0
+2.0
+0.001
+2048
+6.0
+6.0
+3.8
+0.001
+4096
+6.0
+6.3
+4.3
+0.0001
+1024
+7.0
+7.0
+2.0
+0.0001
+2048
+7.0
+7.0
+4.0
+0.0001
+4096
+7.0
+7.8
+5.0
+Table 8.2: The ξ-ranks of the admissible blocks for h = 1
+ξ
+n
+k=4
+k=32
+k=512
+0.01
+1024
+4.0
+5.0
+2.0
+0.01
+2048
+4.0
+5.0
+3.4
+0.01
+4096
+5.0
+5.8
+4.0
+0.001
+1024
+5.0
+6.0
+2.0
+0.001
+2048
+5.0
+6.0
+4.0
+0.001
+4096
+6.0
+7.0
+4.8
+0.0001
+1024
+6.0
+7.0
+2.0
+0.0001
+2048
+6.0
+7.0
+4.0
+0.0001
+4096
+6.0
+8.0
+5.4
+8.2
+Multipoint numerical evaluation of polynomials
+We tested numerical behavior of our algorithms for approximate evaluation of real and complex Gaussian
+random polynomials p(x) of degree n −1, for n = 64, 128, 256, 512, 1024, 2048, 4096, and generated the knots
+of the evaluation lying in the unit disc {z : |z| ≤1}.
+We performed the tests on a Dell server running Windows system and using MATLAB R2014a with
+double precision. We applied the MATLAB function ”randn()” in order to generate the real polynomial
+coeﬃcients and the real and imaginary parts separately for the complex coeﬃcients.
+20
+
+Table 8.3: The ξ-ranks of the admissible blocks for h = 4
+ξ
+n
+k=4
+k=32
+k=512
+0.01
+1024
+4.0
+5.0
+2.0
+0.01
+2048
+4.0
+5.0
+4.0
+0.01
+4096
+4.0
+5.0
+5.0
+0.001
+1024
+4.0
+6.0
+2.0
+0.001
+2048
+5.0
+6.0
+4.0
+0.001
+4096
+5.0
+6.0
+5.9
+0.0001
+1024
+5.0
+7.0
+2.0
+0.0001
+2048
+5.0
+7.0
+4.0
+0.0001
+4096
+6.0
+7.0
+6.6
+The knots of the evaluation, si = r ×exp(2πθ√−1), depended on two parameters r and θ. In all tests we
+deﬁned the values θ by applying the uniform random number generator ”rand()” to the line interval [0, 1),
+and we generated the absolute values r in two ways.
+In one series of our tests we set the absolute value r to 1, thus placing the knots si onto the unit circle
+{x : |x| = 1}, and then we displayed the test results in Tables 8.4 and 8.6.
+In another series of our tests we generated the absolute value r at random by applying the uniform
+random number generator ”rand()” to the line interval [0, 1], and then we displayed the test results in Tables
+8.5 and 8.7. The latter tests cover polynomial evaluation at the knots lying in the unit disc {z : |z| ≤1}, but
+can be extended to the evaluation outside it, by shifting from a polynomial p(x) of degree n to the reverse
+polynomial xnp(1/x).
+In all tables the columns “Max. Rank“ represent the maximum ξ-ranks of the oﬀ-tridiagonal blocks in
+the computation, for ξ = 10−5. The columns “Error” represent the absolute diﬀerence of our computed
+values of the polynomials and the output of the MATLAB function ”polyval()” for the same inputs.
+All tests have been repeated 100 times for each n and the average results have been displayed.
+According to the test results, the computed maximum numerical rank was consistently low, implying
+that our algorithm ran fast, even though it still produced quite accurate output values.
+For comparison, Table 8.8 displays the mean values and standard deviations of the output errors observed
+in our test of the polynomial evaluation algorithm of [MB72] applied to the same inputs and also with the
+IEEE standard double precision. According to these results, the algorithm has consistently performed with
+much inferior output accuracy for polynomials of degree 32 and higher.
+Table 8.4: Evaluation of Real Gaussian Polynomials on the Unit Circle
+Degree
+Max. Rank
+Error
+32
+13
+6.60 × 10−07
+64
+11
+8.05 × 10−08
+128
+12
+5.88 × 10−07
+256
+12
+4.01 × 10−07
+512
+12
+2.27 × 10−07
+1024
+12
+5.77 × 10−08
+2048
+13
+1.38 × 10−06
+4096
+13
+2.99 × 10−05
+21
+
+Table 8.5: Evaluation of Real Gaussian Polynomial in the Unit Disk
+Degree
+Max. Rank
+Error
+32
+18
+1.90 × 10−06
+64
+13
+1.47 × 10−06
+128
+13
+1.13 × 10−06
+256
+12
+9.09 × 10−07
+512
+13
+7.05 × 10−07
+1024
+12
+5.49 × 10−07
+2048
+13
+4.67 × 10−07
+4096
+13
+3.80 × 10−07
+Table 8.6: Evaluation of Complex Gaussian Polynomials on the Unit Circle
+Degree
+Max. Rank
+Error
+32
+12
+5.68 × 10−08
+64
+11
+5.05 × 10−07
+128
+12
+1.41 × 10−07
+256
+11
+1.42 × 10−07
+512
+12
+2.73 × 10−07
+1024
+12
+5.34 × 10−08
+2048
+13
+5.18 × 10−06
+4096
+13
+1.62 × 10−04
+Table 8.7: Evaluation of Complex Gaussian Polynomial in the Unit Disk
+Degree
+Max. Rank
+Error
+32
+18
+1.77 × 10−06
+64
+13
+1.39 × 10−06
+128
+13
+1.16 × 10−06
+256
+12
+8.71 × 10−07
+512
+12
+6.97 × 10−07
+1024
+12
+5.40 × 10−07
+2048
+13
+4.73 × 10−07
+4096
+13
+3.86 × 10−07
+Table 8.8: Polynomial Evaluation by Using the Algorithm of [MB72]
+(the entry “Inf” means “beyond the range”)
+Real Gaussian
+Complex Gaussian
+Degree
+mean
+std
+mean
+std
+16
+5.19 × 10−09
+1.21 × 10−08
+8.91 × 10−11
+6.50 × 10−11
+32
+4.54 × 10−02
+6.72 × 10−02
+1.66 × 10−03
+8.86 × 10−04
+64
+9.47 × 10+21
+2.99 × 10+22
+2.96 × 10+11
+1.22 × 10+11
+128
+2.87 × 10+53
+7.21 × 10+53
+2.12 × 10+164
+Inf
+22
+
+9
+Conclusions
+The papers [MRT05], [CGS07], [XXG12], and [XXCB14] combine the FMM/HSS techniques with the trans-
+formation of matrix structures (traced back to [P90]) in order to devise fast algorithms that approximate
+the solution of Toeplitz, Hankel, Toeplitz-like, and Hankel-like linear systems of equations by using nearly
+linear number of arithmetic operations performed with bounded precision. We yielded similar results (that
+is, used nearly linear number of arithmetic operations performed with bounded precision) for multiplication
+of Vandermonde and Cauchy matrices by a vector, the solution of linear systems of equations with these
+matrices, and polynomial multipoint evaluation and interpolation. This can be compared with quadratic
+arithmetic time of the known algorithms. The more involved techniques of 2D FMM should help to decrease
+our upper bounds α(M) by a logarithmic factor (cf. [B10, Section 3.6]).
+Our Section 7.1 and the papers [P15] and [P16] cover some extensions of our techniques and results to
+computations with other structured matrices and rational functions. Our study also promises a natural
+extension to the important class of polynomial Vandermonde matrices, VP,s = (pj(xi))m−1,n−1
+i,j=0
+, where P =
+(pj(x))n−1
+j=0 is any basis in the space of polynomials of degree less than n. This extension should exploit the
+following generalization of our equation (3.1), which reproduces [P01, equation (3.6.8)],
+Cs,t = diag(l(si)−1)m−1
+i=0 VP,sV −1
+P,t diag(l′(tj))n−1
+j=0 , l(x) =
+n−1
+Y
+j=0
+(x −tj).
+For a natural further direction, we plan to recast our algorithms into the form of algorithms for com-
+putations with H and H2 matrices. This will enable us to apply the eﬃcient subroutines available in the
+HLib library developed at the Max Planck Institute for Mathematics in the Sciences by L. Grasedyck and
+S. B¨orm, www.hlib.org, and in the H2Lib, http://www.h2lib.org/, https://github.com/H2Lib/H2Lib.
+Acknowledgements: Our research has been supported by the NSF Grants CCF 1116736 and CCF-
+1563942 and PSC CUNY Awards 67699-00 45 and 68862–00 46.
+We also greatly appreciate reviewers’
+thoughtful and helpful comments.
+References
+[B09]
+S. B¨orm, Construction of Data-sparse H2-matrices by Hierarchical Compression, SIAM J. Sci.
+Computing, 31, 18201839, 2009.
+[B10]
+S. B¨orm, Eﬃcient Numerical Methods for Non-local Operators: H2-Matrix Compression, Al-
+gorithms and Analysis, European Math. Society, 2010.
+[BEGO08]
+T. Bella, Y. Eidelman, I. Gohberg, V. Olshevsky, Computations with Quasiseparable Polyno-
+mials and Matrices, Theoretical Computer Science, 409, 2, 158–179, 2008.
+[BF00]
+D. A. Bini, G. Fiorentino, Design, Analysis, and Implementation of a Multiprecision Polyno-
+mial Rootﬁnder, Numerical Algorithms, 23, 127–173, 2000.
+[BGH03]
+S. B¨orm, L. Grasedyck, W. Hackbusch, Introduction to Hierarchical Matrices with Applica-
+tions, Engineering Analysis with Boundary Elements, 27(5), 405–422, 2003.
+[BH02]
+S. B¨orm, W. Hackbusch, Data-sparse Approximation by Adaptive H2-matrices, Computing,
+69, 1–35, 2002.
+[BM75]
+A. Borodin, I. Munro, The Computational Complexity of Algebraic and Numeric Problems,
+American Elsevier, New York, 1975.
+[CDG06]
+S. Chandrasekaran, P. Dewilde, M. Gu, W. Lyons, T. Pals, A Fast Solver for HSS Represen-
+tations via Sparse Matrices, SIAM J. Matrix Analysis and Applications, 29, 67–81, 2006.
+[CGS07]
+S. Chandrasekaran, M. Gu, X. Sun, J. Xia, J. Zhu, A Superfast Algorithm for Toeplitz Systems
+of Linear Equations, SIAM J. Matrix Anal. Appl., 29, 1247–1266, 2007.
+23
+
+[DGR96]
+A. Dutt, M. Gu, V. Rokhlin, Fast Algorithms for Polynomial Interpolation, Integration, and
+Diﬀerentiation, SIAM Journal on Numerical Analysis, 33, 5, 1689–1711, 1996.
+[DV98]
+P. Dewilde and A. van der Veen, Time-Varying Systems and Computations, Kluwer Academic
+Publishers, Dordrecht, The Netherlands, 1998.
+[EG02]
+Y. Eidelman, I. Gohberg, A Modiﬁcation of the Dewilde–van der Veen Method for Inversion
+of Finite Structured Matrices, Linear Algebra and Its Applications, 343, 419–450, 2002.
+[EGH13]
+Y. Eidelman, I. Gohberg, I. Haimovici, Separable Type Representations of Matrices and Fast
+Algorithms, Volumes 1 and 2. Birkh¨auser, 2013.
+[G88]
+A Gerasoulis, A Fast Algorithm for the Multiplication of Generalized Hilbert Matrices with
+Vectors, Mathematics of Computation, 50, 181, 179–188, 1988.
+[GGS87]
+A. Gerasoulis, M. D. Grigoriadis, L. Sun, A Fast Algorithm for Trummer’s Problem, SIAM
+Journal on Scientiﬁc and Statistical Computing, 8, 1, 135–138, 1987.
+[GH03]
+L. Grasedyck, W. Hackbusch, Construction and Arithmetics of H-Matrices, Computing, 70(4),
+295–334, 2003.
+[GKO95]
+I. Gohberg, T. Kailath, V. Olshevsky, Fast Gaussian Elimination with Partial Pivoting for
+Matrices with Displacement Structure, Mathematics of Computation, 64, 1557–1576, 1995.
+[GL13]
+G. H. Golub, C. F. Van Loan, Matrix Computations, fourth edition, The Johns Hopkins Uni-
+versity Press, Baltimore, Maryland, 2013.
+[GOS08]
+S. A. Goreinov, I. V. Oseledets, D. V. Savostyanov, E. E. Tyrtyshnikov, N. L. Zamarashkin,
+How to Find a Good Submatrix, Report 08-10, ICM HKBU, Kowloon Tong, Hong Kong, 2008.
+[GT01]
+S. A. Goreinov, E. E. Tyrtyshnikov, The Maximal-volume Concept in Approximation by Low-
+rank Matrices, Contemporary Mathematics, 208, 47–51, 2001.
+[H72]
+E. Horowitz, A Fast Method for Interpolation Using Preconditioning, Information Processing
+Letters, 1, 4, 157–163, 1972.
+[H99]
+W. Hackbusch, A Sparse Matrix Arithmetic Based on H-matrices. Part I: Introduction to
+H-matrices. Computing, 62, 89–108, 1999.
+[HMT11]
+N. Halko, P. G. Martinsson, J. A. Tropp, Finding Structure with Randomness: Probabilistic
+Algorithms for Approximate Matrix Decompositions, SIAM Review, 53, 2, 217–288, 2011.
+[K68]
+D. E. Knuth, The Art of Computer Programming, Vol. 1, Addison Wesley, Reading, Mas-
+sachusetts, 1968 (1st edition).
+[LWMRT]
+E. Liberty, F. Woolfe, P.-G. Martinsson, V. Rokhlin, M. Tygert, Randomized Algorithms for
+the Low-rank Approximation of Matrices, Proc. Natl. Acad. Sci. USA, 104, 20167–20172, 2007.
+[M11]
+M. W. Mahoney, Randomized Algorithms for Matrices and Data, Foundations and Trends in
+Machine Learning, NOW Publishers, 3, 2, 2011. (Abridged version in: Advances in Machine
+Learning and Data Mining for Astronomy, edited by M. J. Way, et al., pp. 647-672, 2012.)
+[M11a]
+P. G. Martinsson, A Fast Randomized Algorithm for Computing a Hierarchically Semiseparable
+Representation of a Matrix, SIAM J. Matrix Anal. Appl., 32, 1251–1274, 2011.
+[MB72]
+R. Moenck, A. Borodin, Fast Modular Transform via Division, Proc. 13th Annual Symposium
+on Switching and Automata Theory, 90–96, IEEE Comp. Society Press, Washington, DC, 1972.
+[MRT05]
+P. G. Martinsson, V. Rokhlin, M. Tygert, A Fast Algorithm for the Inversion of Toeplitz
+Matrices, Computers and Mathematics (with Applications), 50, 741–752, 2005.
+24
+
+[P90]
+V. Y. Pan, On Computations with Dense Structured Matrices, Math. of Computation, 55, 191,
+179–190, 1990. Proceedings version in Proc. International Symposium on Symbolic and Alge-
+braic Computation (ISSAC’89), 34–42, ACM Press, New York, 1989.
+[P95]
+V. Y. Pan, An Algebraic Approach to Approximate Evaluation of a Polynomial on a Set of
+Real Points, Advances in Computational Mathematics, 3, 41–58, 1995.
+[P01]
+V. Y. Pan, Structured Matrices and Polynomials:
+Uniﬁed Superfast Algorithms, Birkh¨a-
+user/Springer, Boston/New York, 2001.
+[P15]
+V. Y. Pan, Transformations of Matrix Structures Work Again, Linear Algebra and Its Appli-
+cations, 465, 1–32, 2015.
+[P16]
+V. Y. Pan, How Bad Are Vandermonde Matrices? SIAM J. Matrix Anal. Appl., in print.
+[Pb]
+V. Y. Pan, Fast Approximation Algorithms for Computations with Cauchy Matrices, Polyno-
+mials, and Rational Functions, arXiv:1506.02285 [math.NA] 34 pages, 7 ﬁgures, 8 tables, June
+7, 2015, revised in April 2016.
+[PLSZa]
+Victor Y. Pan, Qi Luan, John Svadlenka, and Liang Zhao, Primitive and Cynical Low-rank Ap-
+proximation, Preprocessing and Extensions, arXiv:1611.01391 [math.NA] (47 pages, 7 ﬁgures,
+5 tables), April 2017.
+[PQY15]
+V. Y. Pan, G. Qian, X. Yan, Random Multipliers Numerically Stabilize Gaussian and Block
+Gaussian Elimination: Proofs and an Extension to Low-rank Approximation, Linear Algebra
+and Its Applications, 481, 202–234 (2015).
+[PRT92]
+V. Pan, J. H. Reif, S. R. Tate, The Power of Combining the Techniques of Algebraic and
+Numerical Computing, Procs. of FOCS’92, 703–713, IEEE Comp. Soc. Press, 1992.
+[PSLT93]
+V. Y. Pan, A. Sadikou, E. Landowne, O. Tiga, A New Approach to Fast Polynomial Interpo-
+lation and Multipoint Evaluation, Computers and Math. Applics., 25, 9, 25–30, 1993.
+[PZHY97]
+V. Y. Pan, A. Zheng, X. Huang, Y.Yu, Fast Multipoint Polynomial Evaluation and Interpola-
+tion via Computation with Structured Matrices, Annals Numer. Math., 4, 483–510, 1997.
+[R85]
+V. Rokhlin, Rapid Solution of Integral Equations of Classical Potential Theory, Journal of
+Computational Physics, 60, 187–207, 1985.
+[T00]
+E. E. Tyrtyshnikov, Incomplete Cross Approximation in the Mosaic-skeleton Method, Com-
+puting, 64, 4, 367–380, 2000.
+[VVM]
+R. Vandebril, M. Van Barel, N. Mastronardi, Matrix Computations and Semiseparable Matrices
+(Volumes 1 and 2), The Johns Hopkins University Press, Baltimore, Maryland, 2007/2008.
+[W14]
+D. P. Woodruﬀ, Sketching As a Tool for Numerical Linear Algebra, Foundations and Trends
+in Theoretical Computer Science, 10, 1–2, 1–157, 2014.
+[X12]
+J. Xia, On the Complexity of Some Hierarchical Structured Matrix Algorithms, SIAM J.
+Matrix Anal. Appl., 33, 388–410, 2012.
+[XXCB14]
+J. Xia, Y. Xi, S. Cauley, V. Balakrishnan, Superfast and Stable Structured Solvers for Toeplitz
+Least Squares via Randomized Sampling, SIAM J. Matrix Anal. Appl., 35, 44–72, 2014.
+[XXG12]
+J. Xia, Y. Xi, M. Gu, A Superfast Structured Solver for Toeplitz Linear Systems via Random-
+ized Sampling, SIAM J. Matrix Anal. Appl., 33, 837–858, 2012.
+25

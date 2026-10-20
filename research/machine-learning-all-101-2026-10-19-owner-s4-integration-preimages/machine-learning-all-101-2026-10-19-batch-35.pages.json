@@ -1,0 +1,446 @@
+[
+  {
+    "order": 2764,
+    "id": "recurrent-and-state-space-networks",
+    "kind": "A",
+    "category": "machine-learning",
+    "title": "Recurrent, LSTM, and structured state-space models",
+    "companion": "recurrent-and-state-space-networks-examples",
+    "requires": [],
+    "items": [
+      {
+        "id": "def-recurrent-neural-network",
+        "kind": "definition",
+        "title": "Shared-parameter recurrent neural network",
+        "statement": "For finite dimensions d_x,d_h,d_y and horizon T, a shared-parameter recurrent neural network is specified by an initial state h_0, a parameter θ, a state map F, and an optional output map G. It evaluates h_t=F(h_{t-1},x_t;θ) and y_t=G(h_t,x_t;θ) for t=1,...,T, reusing the same θ at every time. Its unrolling is a finite directed acyclic computation graph with one time-indexed copy of each map and edges from the previous state, current input, and shared parameter to the current computation.",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §§10.1–10.2",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-linear-state-space-model",
+        "kind": "definition",
+        "title": "Continuous-time linear state-space model",
+        "statement": "Assume countable choice for the usual complete Lebesgue measure λ. For finite positive dimensions N,m,p over R or C, define A,B,C,D, an initial state, and an input whose real/imaginary coordinates are measurable and integrable on every compact subinterval. A trajectory has coordinatewise absolute continuity on compact subintervals, satisfies the initial value and x′=Ax+Bu almost everywhere, and has output y=Cx+Du; Du is separate from Cx.",
+        "deps": [
+          "def-countable-choice",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-absolutely-continuous-function",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §2.1",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-radix-two-fft",
+        "kind": "algorithm",
+        "title": "Radix-two discrete Fourier transform",
+        "statement": "For M=2^q and a primitive Mth root of unity ω, the recursive radix-two discrete Fourier transform takes a∈C^M, splits its even and odd indexed entries, recursively transforms each length-M/2 subarray with root ω^2, and combines the results as E_k+ω^k O_k and E_k−ω^k O_k for 0≤k<M/2; for M=1 it returns the sole entry.",
+        "deps": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-woodbury-dplr-bilinear-inverse",
+        "kind": "lemma",
+        "title": "Woodbury inverse for a diagonal-plus-low-rank update",
+        "statement": "Let D∈C^{N×N} be invertible and U,V∈C^{N×r}. Then D+UV* is invertible if and only if I_r+V*D^{-1}U is invertible; in that case (D+UV*)^{-1}=D^{-1}−D^{-1}U(I_r+V*D^{-1}U)^{-1}V*D^{-1}.",
+        "deps": [],
+        "dependency_level": 0,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2–C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-lstm-cell",
+        "kind": "definition",
+        "title": "Standard LSTM cell",
+        "statement": "For positive finite d_x,d_h, the peephole-free, unprojected LSTM has shared input, forget, output and candidate affine maps, σ(s)=(1+e^{−s})^{-1}, tanh(s)=(e^s−e^{−s})/(e^s+e^{−s}), cell update c_t=f_t⊙c_{t−1}+i_t⊙g_t, and hidden update h_t=o_t⊙tanh(c_t).",
+        "deps": [
+          "def-recurrent-neural-network"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §10.10.1, Eqs. 10.40–10.44",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-s4-dplr-parameterization",
+        "kind": "definition",
+        "title": "DPLR structured state-space parameterization",
+        "statement": "An N-state complex SISO model has B,C∈C^N, output C*x, conjugate transpose *, normality H*H=HH*, and unitary V*V=VV*=I. DPLR is A=Λ−PQ* with diagonal Λ and P,Q∈C^{N×r}; NPLR is A=VΛV*−PQ*. For Δ>0 with I−ΔA/2 invertible, define Ā=(I−ΔA/2)^{-1}(I+ΔA/2), B̄=(I−ΔA/2)^{-1}ΔB, C̄=C, zero-state recurrence and kernel K_L=(C̄*Ā^jB̄)_{j=0}^{L−1}; direct Du is separate. For M≥L the truncated-output vector is C̃_M=(I−Ā^M)*C; evaluation from supplied C̃_M excludes its formation cost.",
+        "deps": [
+          "def-linear-state-space-model"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §§2.1, 2.3, 3.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-roots-of-unity-fft-complexity",
+        "kind": "lemma",
+        "title": "Roots-of-unity orthogonality and radix-two FFT cost",
+        "statement": "For M=2^q and primitive root ω, the matrix F=(ω^{jk})_{j,k=0}^{M-1} satisfies F*F=MI, so its inverse is M^{-1}F*. The radix-two transform computes F a and F* a in O(M log(2+M)) complex arithmetic operations and O(M) space. Consequently, two polynomials of degree less than n can be multiplied exactly in O(n log(2+n)) complex arithmetic operations and O(n) space by zero-padding to a radix-two length at least 2n−1.",
+        "deps": [
+          "alg-radix-two-fft"
+        ],
+        "dependency_level": 1,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-cauchy-matvec-at-roots-of-unity",
+        "kind": "algorithm",
+        "title": "Exact Cauchy matrix-vector product on a radix-two root grid",
+        "statement": "For M=2^q, primitive root ω, finite poles μ_j and weights a_j, the balanced product tree, coefficient fold modulo z^M−1 and radix-two DFT evaluate y_k=Σ_j a_j/(ω^k−μ_j). If an evaluated denominator vanishes return collision; otherwise return the quotients. The empty pole list returns zero.",
+        "deps": [
+          "alg-radix-two-fft"
+        ],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §§3.2–3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-hippo-leg-matrices-have-low-rank-structure",
+        "kind": "theorem",
+        "title": "HiPPO LegS, LegT, and LagT generators have normal-plus-low-rank form",
+        "statement": "The indexed LegS coefficient matrix has lower entries −√((2n+1)(2k+1)), diagonal −(n+1), upper entries zero; its coefficient ODE multiplies it by 1/t for t>0. LegT has entries −(2n+1)(−1)^{n−k}/θ below/on diagonal and −(2n+1)/θ above, θ>0; original LagT has −1 on/below and zero above. Normal means H*H=HH*, unitary means V*V=VV*=I. LegS/LagT use identity similarity and LegT uses S0=diag(√(2n+1))diag((-1)^n); each becomes normal minus rank at most one or two, and a unitary diagonalization gives equivalent DPLR state coordinates with B,C transformed.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 1 and Appendix C.1",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Gu et al., HiPPO: Recurrent Memory with Optimal Polynomial Projections, §2.3 and Appendices D.1–D.3",
+              "url": "https://arxiv.org/pdf/2008.07669"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-s4-state-space-recurrence-and-convolution",
+        "kind": "algorithm",
+        "title": "S4 state-space recurrence and convolution procedure",
+        "statement": "Let N,r≥1 and A=Λ−PQ*, with diagonal Λ and P,Q∈C^{N×r}; * is conjugate transpose. For Δ>0 and invertible G=I−ΔA/2, the recurrent mode solves Gx_t=(I+ΔA/2)x_{t−1}+ΔBu_t and returns C*x_t; it handles a singular diagonal base by the stated bordered system. For filter length L, let M be the least power of two at least L and take supplied C̃_M=(I−Ā^M)*C. The filter mode evaluates the truncated generating function at M roots using the DPLR resolvent, exceptional limits and at most (r+1)^2 Cauchy products, reports resonances, inverse-transforms and returns the first L coefficients.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-radix-two-fft",
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Algorithm 1 and Appendix C",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+        "kind": "theorem",
+        "title": "Exact roots-of-unity Cauchy matvec has quasi-linear arithmetic cost",
+        "statement": "For n≥1 poles, M=2^q≥1, primitive Mth root ω, weights a_j, and no pole/root collision, the balanced product-tree Cauchy procedure returns y_k=Σ_{j=1}^n a_j/(ω^k−μ_j) with O((n+M)log²(2+n+M)) exact complex operations and O(n+M) space; repeated poles are allowed.",
+        "deps": [
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-roots-of-unity-fft-complexity"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §3.3",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-dplr-discretized-step-linear-cost",
+        "kind": "theorem",
+        "title": "A fixed-rank DPLR bilinear recurrent step has linear arithmetic cost",
+        "statement": "For N,r≥1, A=Λ−PQ*, diagonal Λ, P,Q∈C^{N×r}, conjugate transpose *, B,C∈C^N, Δ>0 and G=I−ΔA/2 invertible, one bilinear step and scalar output use O(N(r+1)^2+(r+1)^3) exact complex operations and O(N(r+1)+(r+1)^2) space, hence linear in N for fixed r. A nonsingular diagonal base gives an invertible Woodbury correction; a singular base with invertible G uses an invertible bordered correction of dimension at most 2r.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 2 and Appendix C.2",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-s4-convolution-root-of-unity-reduction",
+        "kind": "lemma",
+        "title": "DPLR SSM filter values reduce to Cauchy products",
+        "statement": "For A=Λ−PQ*, G=I−ΔA/2 invertible, Δ>0, and M=2^q≥L, define Ā=G^{-1}(I+ΔA/2), B̄=G^{-1}ΔB, C̃_M=(I−Ā^M)*C, with * conjugate transpose. At each nonresonant root z≠−1, s=(2/Δ)(1−z)/(1+z), the truncated generating value is the DPLR Woodbury resolvent expression; at z=−1 it equals (Δ/2)C̃_M*B. The Möbius pole map yields at most (r+1)^2 roots-of-unity Cauchy products, four when r=1, and λ=−2/Δ contributes a finite constant.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "alg-cauchy-matvec-at-roots-of-unity",
+          "lem-woodbury-dplr-bilinear-inverse"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-s4-convolution-filter-complexity",
+        "kind": "theorem",
+        "title": "S4 convolution-filter arithmetic and numerical cost",
+        "statement": "For fixed rank r, length L, DPLR A=Λ−PQ*, invertible I−ΔA/2, supplied C̃_M=(I−Ā^M)*C, and invertible root-grid diagonal resolvents/corrections, the length-L filter K_L=(C*Ā^jB̄)_{j=0}^{L−1} costs at most (r+1)^2 Cauchy products, O((N+L)log²(2+N+L)) exact complex operations and O(N+L) space. The count treats scalar operations/zero tests as unit cost, roots as supplied constants, and excludes forming C̃_M. The source-reported numerical O((N+L)log(2+N+L)log(1/ε)) bound for 0<ε≤1/2 remains unresolved locally for missing norm/model/conditioning-error assumptions; exact cost implies no training or accuracy bound.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution",
+          "thm-hippo-leg-matrices-have-low-rank-structure",
+          "lem-roots-of-unity-fft-complexity",
+          "thm-cauchy-matvec-at-roots-of-unity-exact-cost",
+          "lem-s4-convolution-root-of-unity-reduction"
+        ],
+        "dependency_level": 4,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, Theorem 3 and Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            },
+            {
+              "title": "Pan, Fast Approximate Computations with Cauchy Matrices and Polynomials, §§3.3, 6.1–6.4, 7.1",
+              "url": "https://arxiv.org/pdf/1506.02285"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2765,
+    "id": "recurrent-and-state-space-networks-examples",
+    "kind": "B",
+    "category": "machine-learning",
+    "title": "Recurrent, LSTM, and structured state-space models — Examples",
+    "companion": "recurrent-and-state-space-networks",
+    "requires": [
+      "recurrent-and-state-space-networks"
+    ],
+    "items": [
+      {
+        "id": "ex-lstm-scalar-gates",
+        "kind": "example",
+        "title": "A scalar LSTM cell with constant gates",
+        "statement": "For a scalar LSTM with every weight and bias zero, arbitrary scalar inputs and initial h_0,c_0 give i_t=f_t=o_t=1/2 and candidate g_t=0 for every t≥1; hence c_t=2^{-t}c_0 and h_t=(1/2)tanh(2^{-t}c_0).",
+        "deps": [
+          "def-lstm-cell"
+        ],
+        "dependency_level": 2,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10, §10.10.1",
+              "url": "https://www.deeplearningbook.org/contents/rnn"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-s4-scalar-recurrent-and-convolutional-views",
+        "kind": "example",
+        "title": "A scalar state-space layer has matching recurrent and convolutional outputs",
+        "statement": "For real scalar A=0,B=C=1,D=0, Δ=1, x_{−1}=0, and any finite input, Ā=B̄=1, so y_t=Σ_{s=0}^t u_s. The length-L kernel is (1,...,1) and its causal convolution Σ_{j=0}^t K_j u_{t−j} agrees for 0≤t<L.",
+        "deps": [
+          "def-s4-dplr-parameterization",
+          "alg-s4-state-space-recurrence-and-convolution"
+        ],
+        "dependency_level": 3,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §§2.3–2.4",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-s4-filter-cost-excludes-training",
+        "kind": "example",
+        "title": "The filter-operation bound is not a training-cost bound",
+        "statement": "For fixed DPLR parameters and supplied C̃_M, the exact bound counts one length-L filter only; the procedure computes no gradients or optimizer updates, so it is not a full training-step bound. It gives no numerical-conditioning, accuracy or long-context conclusion; the source-reported approximate-cost clause remains unresolved for missing norm and conditioning hypotheses.",
+        "deps": [
+          "thm-s4-convolution-filter-complexity",
+          "alg-s4-state-space-recurrence-and-convolution"
+        ],
+        "dependency_level": 5,
+        "strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gu, Goel, and Ré, Efficiently Modeling Long Sequences with Structured State Spaces, §3.3 and Appendix C.3",
+              "url": "https://arxiv.org/pdf/2111.00396"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

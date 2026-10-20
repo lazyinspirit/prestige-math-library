@@ -1,6 +1,6 @@
 ---
 verification:
-  repair: research/quantum-computing-algorithms-60-2026-10-15-owner/published-repairs/thm-arithmetic-and-lattice-operations-preserve-measurability.json
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-arithmetic-and-lattice-operations-preserve-measurability.json
 id: thm-arithmetic-and-lattice-operations-preserve-measurability
 kind: theorem
 title: "Arithmetic and lattice operations preserve measurability whenever they are defined"
@@ -24,15 +24,21 @@ sources:
 Let $(X,\mathcal A)$ be a measurable space and let
 $f,g:X\to\overline{\mathbb R}$ be measurable for the Borel sigma-algebra on
 the extended real line. Products of functions use
-$\odot_X$ from [[def-measurable-pointwise-extended-real-product]], and $cf$
+$\odot_X$ from A total pointwise product for extended-real-valued functions, and $cf$
 abbreviates $\underline c\odot_X f$ for the constant function $\underline c$.
 The magnitude function is $|f|=\max(f,-f)$ as in
-[[def-positive-and-negative-parts-of-a-function]]. Then:
+The positive and negative parts of a function. Then:
 
 1. $cf$ is measurable for every real scalar $c$;
 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;
 3. if the partial pointwise sum $f+g$ is defined at every point, then it is measurable;
 4. the pointwise product $fg:=f\odot_X g$ is measurable.
+
+## Statement references
+
+[[def-measurable-pointwise-extended-real-product]]
+
+[[def-positive-and-negative-parts-of-a-function]]
 
 ## Facts & Assumptions
 

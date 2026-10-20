@@ -1,0 +1,388 @@
+{
+  "group": "p",
+  "batches": [
+    "49"
+  ],
+  "pages_read": [
+    "neural-tangent-kernels-and-lazy-training",
+    "neural-tangent-kernels-and-lazy-training-examples"
+  ],
+  "items_read": [
+    "def-neural-tangent-kernel",
+    "def-width-normalized-fully-connected-network",
+    "lem-gaussian-ltwo-hermite-completeness",
+    "lem-bivariate-gaussian-feature-expectations-continuous",
+    "lem-gaussian-activation-covariance-strictness-and-ntk-recursion",
+    "lem-gaussian-hermite-covariance-expansion",
+    "thm-positive-definite-kernel-flow-converges-for-attained-convex-cost",
+    "lem-biased-hermite-kernel-is-strictly-positive-definite",
+    "lem-fixed-time-lazy-training-stability",
+    "thm-sequential-infinite-width-ntk-limit",
+    "prop-ntk-positive-definite-on-the-sphere",
+    "thm-least-squares-ntk-mode-decay",
+    "ex-finite-width-quadratic-network-has-changing-features-and-ntk",
+    "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon",
+    "ex-ntk-mode-wise-exponential-decay",
+    "ex-duplicate-inputs-make-ntk-gram-singular"
+  ],
+  "conventions": [
+    {
+      "convention": "The matrix-valued NTK is Dθf(θ,x) Dθf(θ,x′)ᵀ in standard Euclidean parameter coordinates; scalar kernels sum products over all parameters.",
+      "fixed_by": "def-neural-tangent-kernel",
+      "matters_for": [
+        "lem-fixed-time-lazy-training-stability",
+        "thm-sequential-infinite-width-ntk-limit",
+        "thm-least-squares-ntk-mode-decay",
+        "ex-finite-width-quadratic-network-has-changing-features-and-ntk"
+      ]
+    },
+    {
+      "convention": "Every weight and bias entry is an independently initialized standard normal parameter. Layer ℓ uses W^(ℓ)/√nℓ and βb^(ℓ), β>0; hidden layers apply σ and the output layer is linear.",
+      "fixed_by": "def-width-normalized-fully-connected-network",
+      "matters_for": [
+        "lem-fixed-time-lazy-training-stability",
+        "thm-sequential-infinite-width-ntk-limit",
+        "prop-ntk-positive-definite-on-the-sphere",
+        "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon"
+      ]
+    },
+    {
+      "convention": "The hidden-width limit is sequential: n₁ tends to infinity first, followed by n₂ through nL−1; the output dimension remains fixed.",
+      "fixed_by": "def-width-normalized-fully-connected-network",
+      "matters_for": [
+        "lem-fixed-time-lazy-training-stability",
+        "thm-sequential-infinite-width-ntk-limit",
+        "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon"
+      ]
+    },
+    {
+      "convention": "Gaussian Hermite expansions use monic probabilists’ polynomials normalized as hₘ=Hₘ/√m!, indexed from m=0, and standard Gaussian probability measure.",
+      "fixed_by": "lem-gaussian-ltwo-hermite-completeness",
+      "matters_for": [
+        "lem-gaussian-hermite-covariance-expansion",
+        "lem-biased-hermite-kernel-is-strictly-positive-definite",
+        "prop-ntk-positive-definite-on-the-sphere"
+      ]
+    },
+    {
+      "convention": "Singular Gaussian covariance matrices are allowed. Positive marginal variances make bounded Borel derivative representatives independent of null-set modifications in Gaussian expectations.",
+      "fixed_by": "thm-sequential-infinite-width-ntk-limit",
+      "matters_for": [
+        "prop-ntk-positive-definite-on-the-sphere",
+        "thm-least-squares-ntk-mode-decay",
+        "ex-duplicate-inputs-make-ntk-gram-singular"
+      ]
+    },
+    {
+      "convention": "Training uses θ̇=−Jᵀd/N, empirical norm ‖v‖N=(Σᵢ|vᵢ|²/N)½, and stochastic boundedness under width-specific probability laws with the prescribed iterated limsups.",
+      "fixed_by": "lem-fixed-time-lazy-training-stability",
+      "matters_for": [
+        "thm-sequential-infinite-width-ntk-limit",
+        "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon"
+      ]
+    },
+    {
+      "convention": "Strict positive definiteness on the unit sphere concerns finite lists of pairwise distinct points, includes n₀=1 and S⁰={−1,1}, and assumes positive bias and a globally Lipschitz nonpolynomial activation.",
+      "fixed_by": "prop-ntk-positive-definite-on-the-sphere",
+      "matters_for": [
+        "thm-least-squares-ntk-mode-decay",
+        "ex-ntk-mode-wise-exponential-decay",
+        "ex-duplicate-inputs-make-ntk-gram-singular"
+      ]
+    },
+    {
+      "convention": "The least-squares loss is Σᵢ(fᵢ−yᵢ)²/(2N); the fixed limiting-kernel flow has mode rates λᵢ/N, including constant residual modes when λᵢ=0.",
+      "fixed_by": "thm-least-squares-ntk-mode-decay",
+      "matters_for": [
+        "ex-ntk-mode-wise-exponential-decay",
+        "ex-duplicate-inputs-make-ntk-gram-singular"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-sequential-infinite-width-ntk-limit",
+      "statement": "Assume AC, finite data with N,n₀≥1, L≥2, β>0, and globally Lipschitz σ. For the scalar-output width-normalized Gaussian-initialized network, K₀ converges in probability under the prescribed sequential width limit to the stated deterministic covariance/derivative recursion K∞. With σ additionally C² with bounded second derivative, jointly measurable differentiable training paths satisfying the stated parameter equation, integrable directions, and stochastically bounded integrated empirical direction norm on a fixed horizon, supₜ‖Kₜ−K∞‖op tends to zero in probability, the exact output equation holds, and the displayed integrated limiting-kernel error tends to zero in probability.",
+      "used_by": [
+        "prop-ntk-positive-definite-on-the-sphere",
+        "thm-least-squares-ntk-mode-decay",
+        "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon",
+        "ex-ntk-mode-wise-exponential-decay"
+      ]
+    },
+    {
+      "id": "lem-fixed-time-lazy-training-stability",
+      "statement": "Under AC, fixed finite data, L≥2, β>0, T≥0, globally Lipschitz C² activation with bounded second derivative, scalar-output width-normalized Gaussian initialization, and the stated jointly measurable differentiable parameter paths driven by integrable directions with stochastically bounded integrated empirical norm, sup₀≤t≤T‖Kₜ−K₀‖op tends to zero in probability in the prescribed sequential hidden-width limit.",
+      "used_by": [
+        "thm-sequential-infinite-width-ntk-limit",
+        "ex-wide-tanh-network-lazy-on-a-fixed-time-horizon"
+      ]
+    },
+    {
+      "id": "lem-biased-hermite-kernel-is-strictly-positive-definite",
+      "statement": "Assume AC, n₀≥1, β>0, and globally Lipschitz nonpolynomial σ. For unit vectors x,y, the Gaussian feature kernel E[σ(Ux,y)σ(Vx,y)]+β², with marginal variance n₀⁻¹+β² and covariance β²+x·y/n₀, is strictly positive definite on every finite list of pairwise distinct sphere points, including S⁰.",
+      "used_by": [
+        "prop-ntk-positive-definite-on-the-sphere"
+      ]
+    },
+    {
+      "id": "lem-gaussian-ltwo-hermite-completeness",
+      "statement": "Assume AC. The normalized probabilists’ Hermite polynomials form a complete orthonormal basis of real Gaussian L², with norm-convergent coefficient expansions and Parseval’s identity. A continuous nonpolynomial L² function has unbounded nonzero coefficient support; every globally Lipschitz real function belongs to Gaussian L².",
+      "used_by": [
+        "lem-gaussian-hermite-covariance-expansion",
+        "lem-biased-hermite-kernel-is-strictly-positive-definite",
+        "prop-ntk-positive-definite-on-the-sphere"
+      ]
+    },
+    {
+      "id": "lem-gaussian-hermite-covariance-expansion",
+      "statement": "Assume AC. For real Gaussian L² functions f,g with normalized Hermite coefficients aₘ,bₘ and a centered unit-variance Gaussian pair of correlation ρ∈[−1,1], E[f(X)g(Y)]=Σₘaₘbₘρᵐ, with absolute convergence also at ρ=±1.",
+      "used_by": [
+        "lem-biased-hermite-kernel-is-strictly-positive-definite",
+        "prop-ntk-positive-definite-on-the-sphere"
+      ]
+    },
+    {
+      "id": "lem-bivariate-gaussian-feature-expectations-continuous",
+      "statement": "Assume AC. For convergent positive-semidefinite bivariate covariance matrices with positive approximating and limiting marginal variances, Gaussian expectations E[τ(Uₙ)τ(Vₙ)] converge for globally Lipschitz τ, and E[g(Uₙ)g(Vₙ)] converge for bounded Borel g, including singular covariance limits.",
+      "used_by": [
+        "thm-sequential-infinite-width-ntk-limit"
+      ]
+    },
+    {
+      "id": "lem-gaussian-activation-covariance-strictness-and-ntk-recursion",
+      "statement": "Assume AC, a positive-definite finite Gaussian covariance C, globally Lipschitz nonconstant σ, β>0, and a bounded Borel derivative representative s as stated. Then Sᵢⱼ=E[σ(Zᵢ)σ(Zⱼ)]+β² is strictly positive definite, Dᵢⱼ=E[s(Zᵢ)s(Zⱼ)] is positive semidefinite, and T∘D+S is strictly positive definite for every positive-semidefinite T.",
+      "used_by": [
+        "prop-ntk-positive-definite-on-the-sphere"
+      ]
+    },
+    {
+      "id": "prop-ntk-positive-definite-on-the-sphere",
+      "statement": "Assume AC, n₀≥1, L≥2, β>0, and globally Lipschitz nonpolynomial σ. The stated recursive scalar limiting NTK is strictly positive definite on every finite list of pairwise distinct points of Sⁿ⁰⁻¹, including the two points of S⁰.",
+      "used_by": [
+        "thm-least-squares-ntk-mode-decay",
+        "ex-ntk-mode-wise-exponential-decay",
+        "ex-duplicate-inputs-make-ntk-gram-singular"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Gaussian product integrability, approximation errors, and finite-data drift estimates.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Expectation expansions and positivity of Gaussian feature Gram matrices.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positive denominator and boundedness of the tanh activation.",
+      "opened": true
+    },
+    {
+      "id": "cor-iid-finite-variance-weak-law",
+      "used_for": "Conditional empirical feature averages and Gaussian weight moment averages.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Lipschitz bounds for activation derivatives and tanh.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Finite PSD feature factorizations, inverse-kernel metrics, and mode diagonalization.",
+      "opened": true
+    },
+    {
+      "id": "cor-uniqueness-of-the-l-one-fourier-transform",
+      "used_for": "Vanishing Gaussian moments imply zero orthogonal residual in the Hermite completeness proof.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumptions in Gaussian, Fourier, and L² constructions.",
+      "opened": true
+    },
+    {
+      "id": "def-complex-exponential",
+      "used_for": "Fourier exponential power series in Hermite completeness.",
+      "opened": true
+    },
+    {
+      "id": "def-convergence-in-probability",
+      "used_for": "Event-probability interpretation of width-limit assertions.",
+      "opened": true
+    },
+    {
+      "id": "def-fourier-transform-on-l-one-of-rn",
+      "used_for": "The −2πixξ Fourier convention used in Hermite completeness.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Euclidean Jacobian Grams, tensor features, and finite kernel-flow geometry.",
+      "opened": true
+    },
+    {
+      "id": "def-monic-probabilists-hermite-polynomials",
+      "used_for": "Hermite recurrence, normalization, and polynomial coefficients.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Finite Gaussian vectors and singular covariance realizations.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "Generating functions, tanh, and exponential mode solutions.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian densities, positive marginal variances, and initialization laws.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Parameter Jacobian and NTK definition.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "AC supplies the countable and dependent choice required by cited analytic suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Covariance determines Gaussian expectations, including singular cases.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-exponential-series-converges-everywhere",
+      "used_for": "Pointwise exponential series convergence in the Fourier uniqueness argument.",
+      "opened": true
+    },
+    {
+      "id": "lem-complex-lp-completeness-density-and-inner-product",
+      "used_for": "L² completeness and smooth approximation for bounded Borel Gaussian features.",
+      "opened": true
+    },
+    {
+      "id": "lem-hermite-orthogonality-and-monomial-expansion",
+      "used_for": "Gaussian Hermite orthogonality and the finite-degree spanning property.",
+      "opened": true
+    },
+    {
+      "id": "lem-l-one-fourier-transform-is-well-defined",
+      "used_for": "Fourier transform of the integrable Gaussian-weighted residual.",
+      "opened": true
+    },
+    {
+      "id": "lem-standard-normal-fourth-moment",
+      "used_for": "Finite conditional variances and bounded Gaussian empirical moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-absolutely-continuous-functions-have-integrable-derivatives",
+      "used_for": "Almost-everywhere differentiability of Lipschitz activations.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Hermite generating-function derivatives and tanh derivative identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-c1-lipschitz-ac-bv-hierarchy",
+      "used_for": "Lipschitz activations are absolutely continuous on compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Scalar generating-function and tanh differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Finite-network Jacobian recursion and exact output-flow equation.",
+      "opened": true
+    },
+    {
+      "id": "thm-countably-exceptional-differentiability-and-integrable-derivative-imply-absolute-continuity",
+      "used_for": "Differentiable training paths with integrable derivatives recover their increments by integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Generating functions, tanh, and scalar residual ODE solutions.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Fourier moment interchange, Gaussian covariance continuity, and differentiation under Gaussian expectation.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Gaussian generating-function factorization and tanh computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Gaussian generating functions and conditional weight-product moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+      "used_for": "Derivative representatives and activation regularity.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compact trapping balls and limit points for attained convex kernel flow.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local flow existence, uniqueness, and continuation in the convex-flow and finite-network examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Reordering the absolutely summable biased Hermite/binomial expansion.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "lem-fixed-time-lazy-training-stability",
+      "concern": "Proof 6.1 compresses the essential depth induction into 'induction from the constant first-layer Gram makes their changes tend uniformly to zero'. The displayed bilinear estimate requires operator-norm control of K^ℓ(t)−K^ℓ(0), whereas the immediately preceding estimates control normalized feature changes and individual output-index vectors. The induction should explicitly hold the subnetwork output dimension fixed while taking its preceding widths to infinity, and explain the subsequent outer width limit; entrywise convergence for a growing block alone would not imply operator-norm convergence. I reconstructed the intended fixed-output induction from the cited Jacot–Gabriel–Hongler Appendix A.2 argument, but this limit-order obligation is thin in the local proof.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-sequential-infinite-width-ntk-limit",
+      "concern": "The Statement permits 'any bounded Borel representative' agreeing with σ′ outside a null set, then says 'such a representative exists and is bounded by the Lipschitz constant'. A representative with that bound exists, but an arbitrary allowed representative need not obey it: for σ=0, s=100·1_{0} is a bounded Borel representative although Lip(σ)=0. The Gaussian expectations and proof remain valid because null-set changes are immaterial and the proof uses ‖s‖∞. Clarify that the Lipschitz-constant bound describes an available choice.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "neural-tangent-kernels-and-lazy-training",
+      "to": "automatic-differentiation-and-backpropagation",
+      "faithful": true,
+      "note": "Read the shared-parameter backpropagation algorithm and gradient theorem. The stability lemma and tanh example use finite C¹ networks, Euclidean transpose pullbacks, and accumulation over all parameter uses, within the supplier's smooth-domain hypotheses. No branch-boundary derivative is imported. The supplier diagram agrees with its forward-use and reverse-accumulation conventions."
+    },
+    {
+      "from": "neural-tangent-kernels-and-lazy-training",
+      "to": "ml02-rkhs-svm",
+      "faithful": true,
+      "note": "Read the PSD-kernel/RKHS definition and compared it with the convex kernel-flow theorem's Statement references, F2, and Proof 6.1. The consumer imports symmetry and positive semidefiniteness of finite Gram matrices, then separately assumes strict positive definiteness. It does not infer strictness from PSD or invoke the canonical RKHS completion without its choice hypothesis."
+    }
+  ]
+}

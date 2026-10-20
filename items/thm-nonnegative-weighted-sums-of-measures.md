@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/thm-nonnegative-weighted-sums-of-measures.json
   precheck: pass
   judge:
     model: "deepseek-v4-pro + gpt-5.6-terra"
@@ -29,7 +30,11 @@ pipeline_run: null
 
 ## Statement
 
-Let $(\mu_k)$ be measures on one measurable space and let $c_k\in[0,+\infty]$. Each scalar multiple $c_k\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\sum_kc_k\mu_k$ is also a measure.
+Let $(\mu_k)$ be measures on one measurable space and let $c_k\in[0,+\infty]$. Each scalar multiple $c_k\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of Nonnegative scalar multiples and countable weighted sums of measures, is a measure. Every finite or countable weighted sum $\sum_kc_k\mu_k$ is also a measure.
+
+## Statement references
+
+[[def-nonnegative-weighted-sum-of-measures]]
 
 ## Facts & Assumptions
 

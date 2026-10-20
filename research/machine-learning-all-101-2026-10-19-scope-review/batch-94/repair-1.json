@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "94",
+  "round": 1,
+  "reviewed_items": [
+    "def-attention-block-summary",
+    "alg-exact-tiled-softmax-attention",
+    "thm-tiled-attention-exactness",
+    "thm-tiled-attention-workspace-and-work",
+    "rem-attention-io-model-and-roundoff",
+    "ex-tiled-attention-one-key",
+    "ex-tiled-attention-empty-first-masked-block",
+    "ex-tiled-attention-two-merge-orders",
+    "ex-tiled-attention-replay-dropout-mask"
+  ],
+  "reviewed_pages": [
+    "exact-tiled-attention-and-memory-aware-differentiation",
+    "exact-tiled-attention-and-memory-aware-differentiation-examples"
+  ],
+  "decision": "accept",
+  "reason": "Reviewed the approved ML-86 inventory, both body-free pages, all assigned arguments, and actual in-batch and cross-frontier suppliers. Applied both local repairs; no Statement or Definition interface changed, no prerequisite gap remains, and no outside repair is needed. Prepared for final whole-batch review.",
+  "findings": [
+    {
+      "id": "thm-tiled-attention-exactness",
+      "type": "local",
+      "reason": "Replaced step 7.1 with the pointwise equality between the stored-statistic probabilities and dense softmax at the forward scores. Steps 4.1–6.1 establish the dense gradient directly, preserving the tie conclusion without differentiating the stored maximum or normalizer."
+    },
+    {
+      "id": "ex-tiled-attention-replay-dropout-mask",
+      "type": "local",
+      "reason": "Specified the full upstream matrix G=(1,0)^T and accounted for row 2's zero contribution, so the displayed value gradients apply to the full two-row input."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-tiled-attention-workspace-and-work",
+      "decision": "accept",
+      "reason": "Its operation and storage counts are proved independently; the exactness statement it cites is unchanged."
+    },
+    {
+      "id": "ex-tiled-attention-one-key",
+      "decision": "accept",
+      "reason": "The one-key output and gradient calculation remain valid; the exactness statement is unchanged."
+    },
+    {
+      "id": "ex-tiled-attention-empty-first-masked-block",
+      "decision": "accept",
+      "reason": "The empty-block handling and both row outputs remain valid; the exactness statement is unchanged."
+    },
+    {
+      "id": "ex-tiled-attention-two-merge-orders",
+      "decision": "accept",
+      "reason": "Both merge calculations remain valid; neither the summary definition nor the exactness statement changed."
+    },
+    {
+      "id": "rem-attention-io-model-and-roundoff",
+      "decision": "accept",
+      "reason": "It separates the scalar workspace claim from the paper's HBM model and its stated d≤M≤Nd range ([Dao et al., §3.2](https://arxiv.org/html/2205.14135))."
+    }
+  ]
+}

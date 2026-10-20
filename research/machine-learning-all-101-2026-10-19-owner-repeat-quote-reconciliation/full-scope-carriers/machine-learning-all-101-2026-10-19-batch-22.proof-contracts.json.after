@@ -1,0 +1,2591 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-finite-centering-matrix-is-orthogonal-projector",
+    "lem-ky-fan-trace-maximization",
+    "lem-equal-gram-configurations-are-isometric",
+    "thm-pca-frobenius-optimality",
+    "thm-centered-psd-kernel-gram-matrix-is-psd",
+    "thm-classical-mds-recovers-euclidean-distances",
+    "thm-minimum-norm-lle-weights-exist-uniquely",
+    "thm-lle-trace-minimizers",
+    "ex-rank-q-pca-exact-reconstruction",
+    "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue",
+    "ex-disconnected-knn-graph-blocks-isomap-distances",
+    "ex-singular-local-lle-covariance",
+    "ex-connected-lle-graph-need-not-have-simple-zero",
+    "ex-square-loop-mds-isomap-lle-differ",
+    "ex-metric-stress-objective-nonconvex"
+  ],
+  "contracts": {
+    "thm-finite-centering-matrix-is-orthogonal-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-centering-matrix",
+          "source_section": "Definition",
+          "quote": "For an integer $n\\ge1$, let $\\mathbf1_n\\in\\mathbb R^n$ be the vector whose entries are all $1$, and let $I_n$ be the $n\\times n$ identity matrix. The **centering matrix** is\n\n$$H_n:=I_n-\\frac1n\\mathbf1_n\\mathbf1_n^T.$$\n\nFor $v\\in\\mathbb R^n$, write $\\bar v:=n^{-1}\\mathbf1_n^Tv$; then $H_nv=v-\\bar v\\mathbf1_n$. For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $p\\ge1$, its **centered data matrix** is $X_c:=H_nX$; each column of $X_c$ has sum zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-finite-centering-matrix-is-orthogonal-projector-1-1",
+          "claim": "The matrix $\\mathbf1_n\\mathbf1_n^T$ is symmetric, so the formula in [F1] gives $H_n^T=H_n$. Also $\\mathbf1_n^T\\mathbf1_n=n$, and hence $H_n\\mathbf1_n=\\mathbf1_n-n^{-1}\\mathbf1_n n=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-finite-centering-matrix-is-orthogonal-projector-2-1",
+          "claim": "Writing $J=\\mathbf1_n\\mathbf1_n^T$, one has $J^2=\\mathbf1_n(\\mathbf1_n^T\\mathbf1_n)\\mathbf1_n^T=nJ$, so $H_n^2=(I_n-J/n)^2=I_n-2J/n+J^2/n^2=I_n-J/n=H_n$. The formula for $H_nv$ in [F1] shows that its image is zero-sum; if $\\mathbf1_n^Tv=0$, then $H_nv=v$. For any $v$, the residual $v-H_nv=(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$ is orthogonal to every zero-sum vector by [F2]. Hence $H_nv$ is the orthogonal projection of $v$ onto the zero-sum subspace.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n>=1 explicitly makes the mean divisor n nonzero. The empty-coordinate input n=0 is outside the definition and the proof never forms H_0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "n>=1 explicitly makes the mean divisor n nonzero. The empty-coordinate input n=0 is outside the definition and the proof never forms H_0.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "fbbf5c9ab404491491bff673b13b72526dbdc004c6e57cd8eca99d6153208c3f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Proof 1.1 computes H_n1=0, and linearity also gives H_n0=0; zero outputs for constant input vectors are a required projector property, not excluded inputs.",
+          "reason": "Proof 1.1 computes H_n1=0, and linearity also gives H_n0=0; zero outputs for constant input vectors are a required projector property, not excluded inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 1.1 computes H_n1=0, and linearity also gives H_n0=0; zero outputs for constant input vectors are a required projector property, not excluded inputs.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "b714095ef75874d98bf431383cb0b59ef13ca01e8e81134fd851ee1239e2b056"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: At n=1 the formula is H_1=0, whose image is the zero-sum subspace {0}; Proof 2.1's mean-subtraction identity yields exactly that zero projection.",
+          "reason": "At n=1 the formula is H_1=0, whose image is the zero-sum subspace {0}; Proof 2.1's mean-subtraction identity yields exactly that zero projection.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "At n=1 the formula is H_1=0, whose image is the zero-sum subspace {0}; Proof 2.1's mean-subtraction identity yields exactly that zero projection.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "eccfe6fd7221051b16a2bcf0fed0b8e6fa330e315787360bc955853c1f125ac3"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The projector is singular because its constant direction lies in the kernel, but Proof 2.1 verifies idempotence and orthogonality directly without an invertibility hypothesis.",
+          "reason": "The projector is singular because its constant direction lies in the kernel, but Proof 2.1 verifies idempotence and orthogonality directly without an invertibility hypothesis.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The projector is singular because its constant direction lies in the kernel, but Proof 2.1 verifies idempotence and orthogonality directly without an invertibility hypothesis.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "5dcd88bfd121e088869f6894e24195d0d0fde335df5d076631c141a7abc2bbbb"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The smallest allowed dimension n=1 gives the zero projector, and the algebra in Proof 2.1 applies to it. No limiting extension to n=0 or infinite dimension is claimed.",
+          "reason": "The smallest allowed dimension n=1 gives the zero projector, and the algebra in Proof 2.1 applies to it. No limiting extension to n=0 or infinite dimension is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The smallest allowed dimension n=1 gives the zero projector, and the algebra in Proof 2.1 applies to it. No limiting extension to n=0 or infinite dimension is claimed.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "18178b463bbfe19db87ed3f4283e05526293b7bd99c3e30c29abc5744ee24107"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The projector and each image Hv are explicit finite formulas; orthogonality is checked by the zero-sum inner product, without selecting a nearest point or an orthonormal basis.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The projector and each image Hv are explicit finite formulas; orthogonality is checked by the zero-sum inner product, without selecting a nearest point or an orthonormal basis.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "2949ee4e906ed5af689374745dce81a041086b3aaf1deaa41d9a31aa71616538"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The identities H^T=H, H^2=H and Hv=v-mean(v)1 identify a particular orthogonal projector; this is a direct construction, not a criterion with two implication directions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The identities H^T=H, H^2=H and Hv=v-mean(v)1 identify a particular orthogonal projector; this is a direct construction, not a criterion with two implication directions.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "ebb782b6202699b221119f56a577744d49b3efd8557781199dc2600e961dd134"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The identities H^T=H, H^2=H and Hv=v-mean(v)1 identify a particular orthogonal projector; this is a direct construction, not a criterion with two implication directions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The identities H^T=H, H^2=H and Hv=v-mean(v)1 identify a particular orthogonal projector; this is a direct construction, not a criterion with two implication directions.",
+            "item_sha256": "b50cc5c4220811ee0b9931926382fc358b3c3f04bf4abc006be584aca6c3f57b",
+            "row_sha256": "53f27f6a90ae29a7432c4788cf351ae935d66922ec6bd5c4bd8bd1af29dcc0eb"
+          }
+        }
+      ]
+    },
+    "lem-ky-fan-trace-maximization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ky-fan-trace-maximization-1-1",
+          "claim": "By [F1] and [F2], the matrix $A$ represents a self-adjoint map on $\\mathbb R^p$ with its standard inner product; [F3] gives an orthonormal eigenbasis $u_1,\\ldots,u_p$ ordered with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-2-1",
+          "claim": "For any feasible $Q$, put $P=QQ^T$. Since $Q^TQ=I_q$, $P^T=P$ and $P^2=P$, so $u_j=Pu_j+(I-P)u_j$ is an orthogonal decomposition and $a_j:=u_j^TPu_j=\\|Q^Tu_j\\|_2^2=\\|Pu_j\\|_2^2$ lies in $[0,1]$. This decomposition gives $a_j=0$ exactly when $Pu_j=0$, and $a_j=1$ exactly when $Pu_j=u_j$. Also $\\sum_{j=1}^p a_j=\\operatorname{tr}(P)=q$ by [F4]. The frame trace equals $\\operatorname{tr}(PA)$ by [F5]. If $U$ has columns $u_j$ and $\\Lambda=U^TAU=\\operatorname{diag}(\\lambda_j)$, [F5] and $UU^T=I$ give $\\operatorname{tr}(PA)=\\operatorname{tr}(U^TPAU)=\\operatorname{tr}((U^TPU)\\Lambda)=\\sum_{j=1}^p\\lambda_j a_j$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-3-1",
+          "claim": "Because $\\lambda_j\\ge\\lambda_q$ for $j\\le q$ and $\\lambda_j\\le\\lambda_q$ for $j>q$, $\\sum_{j=1}^p\\lambda_j a_j\\le\\sum_{j=1}^q(\\lambda_j a_j+\\lambda_q(1-a_j))\\le\\sum_{j=1}^q\\lambda_j$. The first inequality uses $\\sum_j a_j=q$; the second uses $0\\le a_j\\le1$ and $\\lambda_j\\ge\\lambda_q$ for $j\\le q$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-4-1",
+          "claim": "The first inequality in step 3.1 has nonnegative difference $\\sum_{j>q}(\\lambda_q-\\lambda_j)a_j$, so equality requires $a_j=0$ whenever $\\lambda_j<\\lambda_q$. The second has nonnegative difference $\\sum_{j\\le q}(\\lambda_j-\\lambda_q)(1-a_j)$, so equality requires $a_j=1$ whenever $\\lambda_j>\\lambda_q$. By step 2.1, these conditions say the chosen subspace contains all higher-eigenvalue eigenspaces, is orthogonal to all lower-eigenvalue eigenspaces, and takes its remaining dimension in the $\\lambda_q$ eigenspace. Conversely, each such subspace makes both differences zero. If $A=0$, all eigenvalues are zero and both differences vanish for every feasible $Q$, as does the stated equality condition.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ky-fan-trace-maximization-5-1",
+          "claim": "Taking the first $q$ vectors of the eigenbasis from step 1.1 as the columns of $Q$ gives a feasible frame and makes the trace equal $\\sum_{j=1}^q\\lambda_j$. Thus the upper bound is the attained maximum, with the stated equality cases.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The range 1<=q<=p excludes an empty frame, but q=p is admitted. In that case the lower-eigenvalue tail in Proof 4.1 is empty and every full orthogonal frame spans the required full space.",
+          "evidence": "Statement and proof: The range 1<=q<=p excludes an empty frame, but q=p is admitted. In that case the lower-eigenvalue tail in Proof 4.1 is empty and every full orthogonal frame spans the required full space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The range 1<=q<=p excludes an empty frame, but q=p is admitted. In that case the lower-eigenvalue tail in Proof 4.1 is empty and every full orthogonal frame spans the required full space.",
+            "item_sha256": "bd146e5833cfaf1ac422b85a22062e24a840019b07b56adaa2a2960f7b72ca5c",
+            "row_sha256": "ecf7ae06bc118d2498df0b74ba51212565759a16b1a8bc1b368e58944a17928f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 covers A=0: every feasible frame attains the same trace and satisfies the tie-space equality condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies when q=1 and identifies the top-eigenvalue eigenspace condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Proof 4.1 retains arbitrary subspaces within a tied cutoff eigenspace; when A=0, both nonnegative differences vanish for every feasible frame, exactly as its equality condition states.",
+          "reason": "Proof 4.1 retains arbitrary subspaces within a tied cutoff eigenspace; when A=0, both nonnegative differences vanish for every feasible frame, exactly as its equality condition states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 4.1 retains arbitrary subspaces within a tied cutoff eigenspace; when A=0, both nonnegative differences vanish for every feasible frame, exactly as its equality condition states.",
+            "item_sha256": "bd146e5833cfaf1ac422b85a22062e24a840019b07b56adaa2a2960f7b72ca5c",
+            "row_sha256": "d4fee3d20eb7ebaac42df7ec391fbff391a812cd2de6b9d3a9cdb3fe9996db65"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 also cover q=p, with the lower-index sum empty and the full eigenbasis attaining the bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof 1.1 takes one finite orthonormal eigenbasis from the spectral theorem, and Proof 5.1 uses its first q columns to exhibit attainment; no countable family of eigenbasis choices is needed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 1.1 takes one finite orthonormal eigenbasis from the spectral theorem, and Proof 5.1 uses its first q columns to exhibit attainment; no countable family of eigenbasis choices is needed.",
+            "item_sha256": "bd146e5833cfaf1ac422b85a22062e24a840019b07b56adaa2a2960f7b72ca5c",
+            "row_sha256": "bca95a0a3734c67642a396db810090d35ddb76050a2c9557b58e3f90b8398912"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "Necessity of the equality characterization is proved in 4.1: equality makes each nonnegative trace-difference term vanish, forcing a_j=1 above the cutoff and a_j=0 below it; Proof 2.1 translates these to containment and orthogonality.",
+          "evidence": "Statement and proof: Necessity of the equality characterization is proved in 4.1: equality makes each nonnegative trace-difference term vanish, forcing a_j=1 above the cutoff and a_j=0 below it; Proof 2.1 translates these to containment and orthogonality.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Necessity of the equality characterization is proved in 4.1: equality makes each nonnegative trace-difference term vanish, forcing a_j=1 above the cutoff and a_j=0 below it; Proof 2.1 translates these to containment and orthogonality.",
+            "item_sha256": "bd146e5833cfaf1ac422b85a22062e24a840019b07b56adaa2a2960f7b72ca5c",
+            "row_sha256": "7c571723361131ee0c95540abf2668664179c2ae74b311bf99ff5a29b50c69f0"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "Sufficiency is explicit in Proof 4.1: any subspace containing all higher eigenspaces and orthogonal to lower eigenspaces makes both differences zero, with the remaining dimension taken in the cutoff eigenspace.",
+          "evidence": "Statement and proof: Sufficiency is explicit in Proof 4.1: any subspace containing all higher eigenspaces and orthogonal to lower eigenspaces makes both differences zero, with the remaining dimension taken in the cutoff eigenspace.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Sufficiency is explicit in Proof 4.1: any subspace containing all higher eigenspaces and orthogonal to lower eigenspaces makes both differences zero, with the remaining dimension taken in the cutoff eigenspace.",
+            "item_sha256": "bd146e5833cfaf1ac422b85a22062e24a840019b07b56adaa2a2960f7b72ca5c",
+            "row_sha256": "bead1c88d3a7fe0adf5c25418651e186d76bf5541730415034ae631d042d3227"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all five steps and actual F1–F5 suppliers. Orthogonal projection weights lie in [0,1], sum to q by trace cyclicity, and give tr(PA)=sum lambda_j a_j. Both nonnegative deficit sums characterize equality in both directions, including repeated eigenvalues, A=0 and q=p. Finite spectral basis only; no AC. No reader/refuter mathematical finding; no diagram required."
+      }
+    },
+    "lem-equal-gram-configurations-are-isometric": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-equal-gram-configurations-are-isometric-1-1",
+          "claim": "For any coefficients $c_1,\\ldots,c_n$, bilinearity and the equal Gram entries give $\\|\\sum_i c_i x_i\\|_2^2=\\sum_{i,j}c_ic_j\\langle x_i,x_j\\rangle=\\sum_{i,j}c_ic_j\\langle y_i,y_j\\rangle=\\|\\sum_i c_i y_i\\|_2^2$. If $\\sum_i c_i x_i=0$, the left side is zero, so [F1] implies $\\sum_i c_i y_i=0$. Applying this to the difference of two coefficient representations shows that the assignment in the statement is well defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-equal-gram-configurations-are-isometric-2-1",
+          "claim": "For coefficient lists $c,d$, the same bilinear expansion gives $\\left\\langle\\sum_i c_ix_i,\\sum_jd_jx_j\\right\\rangle=\\sum_{i,j}c_id_j\\langle x_i,x_j\\rangle=\\sum_{i,j}c_id_j\\langle y_i,y_j\\rangle=\\left\\langle\\sum_i c_iy_i,\\sum_jd_jy_j\\right\\rangle$. The coefficient formula is linear, and its range contains every $y_i$ because it maps $x_i$ to $y_i$; hence its range is exactly their span and it preserves inner products. If $n=0$, both spans are zero spaces and this is their unique zero map. Thus in every case the assignment is an onto linear isometry.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 states explicitly that n=0 gives the unique isometry between zero spans."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: In Proof 1.1, a linear combination with zero x-vector has zero norm on the y-side and hence is the zero y-vector; Proof 2.1 also treats n=0 as the unique map between zero spans.",
+          "reason": "In Proof 1.1, a linear combination with zero x-vector has zero norm on the y-side and hence is the zero y-vector; Proof 2.1 also treats n=0 as the unique map between zero spans.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "In Proof 1.1, a linear combination with zero x-vector has zero norm on the y-side and hence is the zero y-vector; Proof 2.1 also treats n=0 as the unique map between zero spans.",
+            "item_sha256": "fde8967ca639e7b2cd8ca0164040301e9343b533df37e850306acc91e21037b2",
+            "row_sha256": "69f146174b532bf6f0e05187ad9495c5a4e22c41cb80466dc47339918506f73c"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to a single generator and maps its span isometrically onto the matching single-generator span."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: The norm identity in Proof 1.1 applies to every linear dependence among the x_i, so dependent or identically zero configurations still induce a well-defined coefficient map without an independence assumption.",
+          "reason": "The norm identity in Proof 1.1 applies to every linear dependence among the x_i, so dependent or identically zero configurations still induce a well-defined coefficient map without an independence assumption.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The norm identity in Proof 1.1 applies to every linear dependence among the x_i, so dependent or identically zero configurations still induce a well-defined coefficient map without an independence assumption.",
+            "item_sha256": "fde8967ca639e7b2cd8ca0164040301e9343b533df37e850306acc91e21037b2",
+            "row_sha256": "27a6a14bb206e7279912740287c14a603b11118f6b161219db55899c9c860af3"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter; the empty-list boundary is handled separately in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The map is given explicitly on coefficient combinations and representation independence is proved; the argument chooses no bases or representatives and works for the empty lists as stated.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The map is given explicitly on coefficient combinations and representation independence is proved; the argument chooses no bases or representatives and works for the empty lists as stated.",
+            "item_sha256": "fde8967ca639e7b2cd8ca0164040301e9343b533df37e850306acc91e21037b2",
+            "row_sha256": "ae06b7be5d85949ffeb9c2d307c5783c22fbf999af35e8b419acf45ca44bf529"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Equal Gram entries imply a well-defined onto linear isometry by the coefficient formula; the lemma does not assert the converse as a separate if-and-only-if proposition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Equal Gram entries imply a well-defined onto linear isometry by the coefficient formula; the lemma does not assert the converse as a separate if-and-only-if proposition.",
+            "item_sha256": "fde8967ca639e7b2cd8ca0164040301e9343b533df37e850306acc91e21037b2",
+            "row_sha256": "3f61171d018c20bf8475fb282da2a293e27e94bd8a086bc236a3604542a2add4"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equal Gram entries imply a well-defined onto linear isometry by the coefficient formula; the lemma does not assert the converse as a separate if-and-only-if proposition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Equal Gram entries imply a well-defined onto linear isometry by the coefficient formula; the lemma does not assert the converse as a separate if-and-only-if proposition.",
+            "item_sha256": "fde8967ca639e7b2cd8ca0164040301e9343b533df37e850306acc91e21037b2",
+            "row_sha256": "3805e5018c4b371535fa12ec1e16e6620efd2b3c9048fea07b4705d4e2b6e048"
+          }
+        }
+      ]
+    },
+    "thm-pca-frobenius-optimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-q-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n,p\\ge1$, set $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and $X_c=H_nX$. For an integer $q$ with $1\\le q\\le p$, a rank-$q$ PCA frame is a matrix $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$. Its reconstruction is $X_cQQ^T$, and its squared Frobenius reconstruction error is\n\n$$\\|X_c-X_cQQ^T\\|_F^2=\\sum_{i<n}\\sum_{j<p}(X_c-X_cQQ^T)_{ij}^2.$$\n\nA rank-$q$ PCA solution is any frame minimizing this error over all such $Q$; its score matrix is $X_cQ$. A minimizing frame need not be unique when the relevant eigenvalues are tied.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-matrix-norm",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $m,n\\in\\mathbb{N}$ and let\n$A=(a_{ij})\\in M_{m\\times n}(\\mathbb F)$. The **Frobenius norm** of $A$ is\n\n$$\\lVert A\\rVert_F\\;:=\\;\\Bigl(\\,\\sum_{i<m}\\sum_{j<n}|a_{ij}|^{2}\\Bigr)^{1/2},$$\n\nwhere $|\\cdot|$ is the absolute value on $\\mathbb R$\n(Absolute value in an ordered field) for $\\mathbb F=\\mathbb R$ and the modulus on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus) for\n$\\mathbb F=\\mathbb C$, and the outer power is the nonnegative real square root.\n\n**The displayed quantity is a norm.** Regard $A$ as the element of the\ncoordinate space $\\mathbb F^{mn}$ whose $j+in$-th entry is $a_{ij}$. The\nstandard coordinate inner product of The standard formulas $\\langle x,y\\rangle=\\sum_{k<n}x_k y_k$ on $\\mathbb R^n$ and $\\sum_{k<n}x_k\\overline{y_k}$ on $\\mathbb C^n$ are inner products\nsatisfies $\\langle A,A\\rangle=\\sum_{i,j}a_{ij}\\overline{a_{ij}}$, which equals\n$\\sum_{i,j}|a_{ij}|^{2}$ because $z\\overline z=|z|^{2}$\n(Conjugation is an involutive real-field automorphism, $z\\overline z=|z|^2$, and modulus is definite, multiplicative, and subadditive). Thus $\\lVert A\\rVert_F$ is\nexactly the inner-product norm of The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product evaluated at $A$,\nand the three norm axioms hold for $\\lVert\\cdot\\rVert_F$ because they hold for\nevery inner-product norm. For real matrices the same sum is\n$\\sum_{i,j}a_{ij}^{2}$, since $|x|^{2}=x^{2}$ for real $x$ by the two cases of\nAbsolute value in an ordered field.\n\nThe Frobenius norm is the Euclidean norm of the full entry list, not the\nlargest factor by which the matrix stretches a single vector. It can coincide\nwith an induced $2$-norm in one-row or one-column cases, but in general it is a\ndifferent matrix norm from the induced operator norms used on this page. Its\nrelation to the spectral norm, its unitary invariance and its singular-value\nformula are\nSpectral and Frobenius norms are unitarily invariant, are given by singular values, and satisfy the sharp rank comparison.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces, and let $r$ be the number of positive singular values of $T$.\nThen there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and\n$(f_1,\\dots,f_m)$ of $W$, together with singular values\n\n$$s_1\\ge\\cdots\\ge s_r>0,$$\n\nsuch that\n\n$$Tv=\\sum_{j=1}^r s_j\\langle v,e_j\\rangle f_j$$\n\nfor every $v\\in V$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, let $A\\in M_{m\\times n}(\\mathbb F)$, and\nlet $\\sigma_1\\ge\\sigma_2\\ge\\cdots\\ge\\sigma_r>0$ be the positive singular values of\n$A$, where $r=\\operatorname{rank}A$; write $\\sigma_1=0$ when $r=0$.\n\n1. **Spectral formula.** $\\lVert A\\rVert_2=\\sigma_1$, where $\\lVert\\cdot\\rVert_2$ is\n   the operator norm of The operator norm is zero on the zero domain and otherwise is max_{||v||=1} ||Tv||.\n2. **Frobenius formula.** $\\lVert A\\rVert_F=\\bigl(\\sigma_1^{2}+\\cdots+\\sigma_r^{2}\\bigr)^{1/2}$.\n3. **Unitary invariance.** For every unitary $U\\in M_m(\\mathbb F)$ and\n   $V\\in M_n(\\mathbb F)$ (over $\\mathbb F=\\mathbb R$: orthogonal matrices),\n   $$\\lVert UAV\\rVert_2=\\lVert A\\rVert_2,\\qquad \\lVert UAV\\rVert_F=\\lVert A\\rVert_F.$$\n4. **Sharp rank comparison.**\n   $$\\lVert A\\rVert_2\\;\\le\\;\\lVert A\\rVert_F\\;\\le\\;\\sqrt{r}\\,\\lVert A\\rVert_2.$$\n   The lower inequality is an equality exactly when $r\\le 1$; the upper\n   inequality is an equality exactly when $\\sigma_1=\\cdots=\\sigma_r$, that is,\n   when all nonzero singular values coincide. In particular\n   $\\lVert A\\rVert_F\\le\\sqrt{\\min(m,n)}\\,\\lVert A\\rVert_2$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ky-fan-trace-maximization",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{p\\times p}$ be symmetric with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$, counted with multiplicity. For $1\\le q\\le p$ and every $Q\\in\\mathbb R^{p\\times q}$ satisfying $Q^TQ=I_q$,\n\n$$\\operatorname{tr}(Q^TAQ)\\le\\sum_{j=1}^q\\lambda_j.$$\n\nEquality is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $q$ largest eigenvalues. Equality holds exactly when the column space of $Q$ contains every eigenspace with eigenvalue greater than $\\lambda_q$, is orthogonal to every eigenspace with eigenvalue less than $\\lambda_q$, and uses a subspace of dimension $q-\\#\\{j:\\lambda_j>\\lambda_q\\}$ from the eigenspace with eigenvalue $\\lambda_q$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-pca-frobenius-optimality-1-1",
+          "claim": "Put $C=X_c$ and $P=QQ^T$. Since $Q^TQ=I_q$, $P^T=P$ and $P^2=P$, so $C-CQQ^T=C(I-P)$ and $(I-P)^2=I-P$. By [F2] and [F5], $\\|C(I-P)\\|_F^2=\\operatorname{tr}((I-P)C^TC(I-P))$. Applying [F6] to cycle the first factor gives $\\operatorname{tr}(C^TC(I-P)^2)=\\operatorname{tr}(C^TC(I-P))$; then linearity gives $\\operatorname{tr}(C^TC)-\\operatorname{tr}(C^TCP)$. Applying [F6] again gives $\\operatorname{tr}(C^TCP)=\\operatorname{tr}(Q^TC^TCQ)$. Thus minimizing the reconstruction error is equivalent to maximizing $\\operatorname{tr}(Q^TC^TCQ)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-pca-frobenius-optimality-2-1",
+          "claim": "By [F3], choose right singular vectors $v_1,\\ldots,v_p$ and corresponding left vectors $u_1,\\ldots,u_r$ such that $Cv_j=\\sigma_j u_j$ for $j\\le r$ and $Cv_j=0$ for $j>r$, where $r=\\operatorname{rank}C$. For $i,j\\le r$, [F4] gives $v_i^TC^TCv_j=(Cv_i)^T(Cv_j)=\\sigma_i\\sigma_j u_i^Tu_j$, which is $\\sigma_j^2$ when $i=j$ and zero otherwise; for $j>r$ it is zero. Thus $C^TC$ has eigenvalues $\\sigma_1^2\\ge\\cdots\\ge\\sigma_p^2\\ge0$ in the basis $v_j$. Applying [F8] to $A=C^TC$ shows that the maximum trace is $\\sum_{j=1}^q\\sigma_j^2$, attained exactly by the top-eigenspace subspaces described in the statement. Therefore the minimum error is $\\|C\\|_F^2-\\sum_{j=1}^q\\sigma_j^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "thm-pca-frobenius-optimality-3-1",
+          "claim": "Substituting [F7] into the last expression gives $\\sum_{j=q+1}^p\\sigma_j^2$. The SVD basis in [F3] supplies a feasible frame from the top $q$ right singular vectors, so the bound is attained. If $q=p$, the sum is empty and equals zero; if $\\operatorname{rank}C\\le q$, every term in the tail is zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "n,p>=1 and q>=1 exclude empty data/frame dimensions, but q=p makes the tail sum empty. Proof 3.1 explicitly sets that sum to zero and the full frame reconstructs all columns.",
+          "evidence": "Statement and proof: n,p>=1 and q>=1 exclude empty data/frame dimensions, but q=p makes the tail sum empty. Proof 3.1 explicitly sets that sum to zero and the full frame reconstructs all columns.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "n,p>=1 and q>=1 exclude empty data/frame dimensions, but q=p makes the tail sum empty. Proof 3.1 explicitly sets that sum to zero and the full frame reconstructs all columns.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "154ffe4e70d01abcea240f8079e163d9fb071a4aa9c10253e4f45f2dafc63fc6"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Proof 3.1 covers rank(X_c)<=q: every tail singular value is zero and the minimum reconstruction error is zero, including X_c=0 and nonzero q.",
+          "reason": "Proof 3.1 covers rank(X_c)<=q: every tail singular value is zero and the minimum reconstruction error is zero, including X_c=0 and nonzero q.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 3.1 covers rank(X_c)<=q: every tail singular value is zero and the minimum reconstruction error is zero, including X_c=0 and nonzero q.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "821655d9c02b47f5b197e323d0071719496071ae1dee436cd131eb63bc7e36c2"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: At q=1, Proof 2.1 selects a top eigenline of C^TC with eigenvalue sigma_1 squared, yielding the one-component error equal to the remaining singular-value squares.",
+          "reason": "At q=1, Proof 2.1 selects a top eigenline of C^TC with eigenvalue sigma_1 squared, yielding the one-component error equal to the remaining singular-value squares.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "At q=1, Proof 2.1 selects a top eigenline of C^TC with eigenvalue sigma_1 squared, yielding the one-component error equal to the remaining singular-value squares.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "4836bdace6c82e4624a32f03fd2eca835d69de2b053811a63e78d6e4f2095d8a"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Zero singular values are padded after rank, and Proof 2.1 imports the cutoff tie-space equality conditions. Consequently rank deficiency and repeated top singular values are admitted rather than silently made unique.",
+          "reason": "Zero singular values are padded after rank, and Proof 2.1 imports the cutoff tie-space equality conditions. Consequently rank deficiency and repeated top singular values are admitted rather than silently made unique.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Zero singular values are padded after rank, and Proof 2.1 imports the cutoff tie-space equality conditions. Consequently rank deficiency and repeated top singular values are admitted rather than silently made unique.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "9354df1af18bbe578669f9961684fed1133441394c1ecf35632d7b16685ca456"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Proof 3.1 expressly handles q=p by the empty tail zero and rank(C)<=q by vanishing tail terms; q=1 is also included in the trace-frame range used in 2.1.",
+          "reason": "Proof 3.1 expressly handles q=p by the empty tail zero and rank(C)<=q by vanishing tail terms; q=1 is also included in the trace-frame range used in 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 3.1 expressly handles q=p by the empty tail zero and rank(C)<=q by vanishing tail terms; q=1 is also included in the trace-frame range used in 2.1.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "9db01a4cc4c9819e9a361deb62a82cb6e3121bdcaec1301c60f1344636be5514"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 invokes one finite SVD basis and Proof 3.1 takes its first q right singular vectors to exhibit an optimizer; no sequence of selections or choice axiom is needed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 2.1 invokes one finite SVD basis and Proof 3.1 takes its first q right singular vectors to exhibit an optimizer; no sequence of selections or choice axiom is needed.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "cfe8aa0717da46d95db9aa3a9298fe8b7398939ea998da8d947a6dfac1332ce4"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "reason": "If a frame minimizes reconstruction error, Proof 1.1 makes its trace maximal and Proof 2.1 applies the trace supplier's necessary equality conditions: contain all eigenspaces above the cutoff and be orthogonal below it.",
+          "evidence": "Statement and proof: If a frame minimizes reconstruction error, Proof 1.1 makes its trace maximal and Proof 2.1 applies the trace supplier's necessary equality conditions: contain all eigenspaces above the cutoff and be orthogonal below it.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "If a frame minimizes reconstruction error, Proof 1.1 makes its trace maximal and Proof 2.1 applies the trace supplier's necessary equality conditions: contain all eigenspaces above the cutoff and be orthogonal below it.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "7bbf76cc2fd27fb4840f93a14264df2b8abe419f65eab1ebe9eb06d76ee928c2"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "reason": "A frame with the stated cutoff-eigenspace structure attains the maximum trace by the equality cases used in Proof 2.1; subtracting that trace in Proof 1.1 yields precisely the minimum tail error computed in 3.1.",
+          "evidence": "Statement and proof: A frame with the stated cutoff-eigenspace structure attains the maximum trace by the equality cases used in Proof 2.1; subtracting that trace in Proof 1.1 yields precisely the minimum tail error computed in 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "A frame with the stated cutoff-eigenspace structure attains the maximum trace by the equality cases used in Proof 2.1; subtracting that trace in Proof 1.1 yields precisely the minimum tail error computed in 3.1.",
+            "item_sha256": "5dba7bf927de81f647e58665232cf5ecedcc7a131bcab35af3b1101049414795",
+            "row_sha256": "4fcd36125f84a77533a78a3a55ab10a5932861630c034ab0f9485a9a6edcf778"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "All three proof steps and actual eight supplier statements reviewed, including current SVD and published norm formula proofs. Projection/trace algebra reduces reconstruction to Ky Fan for C^TC; SVD gives its eigenvalues sigma_j^2 including the padded zero domain directions. Equality follows in both directions from the already reviewed Ky Fan characterization. q=p, n=1, rank zero, rank<=q and cutoff ties covered; no arbitrary choice. Reader published inline-link findings confirmed as editorial only; no mathematical change or diagram needed."
+      }
+    },
+    "thm-centered-psd-kernel-gram-matrix-is-psd": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-kernel-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Given $n\\ge1$ data points and a finite symmetric Gram matrix $K\\in\\mathbb R^{n\\times n}$ satisfying $a^TKa\\ge0$ for every $a\\in\\mathbb R^n$, define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered Gram matrix $K_c=H_nKH_n$. The positive-semidefinite condition is an input hypothesis; no theorem that an arbitrary kernel formula produces such a matrix is assumed. For $1\\le q\\le n$, kernel PCA retains the $q$ largest eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_n\\ge0$ of $K_c$ and associated orthonormal eigenvectors $u_1,\\ldots,u_q$, returning the score matrix $U_q\\operatorname{diag}(\\sqrt{\\lambda_1},\\ldots,\\sqrt{\\lambda_q})$. Eigenvectors inside a tied eigenspace may be chosen arbitrarily.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-centering-matrix-is-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$. Then $H_n^T=H_n$, $H_n^2=H_n$, $H_n\\mathbf1_n=0$, and for each $v\\in\\mathbb R^n$, $H_nv=v-(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$. Thus $H_n$ is the orthogonal projection onto $\\{v\\in\\mathbb R^n:\\mathbf1_n^Tv=0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-1-1",
+          "claim": "Since $K^T=K$ and $H_n^T=H_n$ by [F1] and [F2], $K_c^T=(H_nKH_n)^T=H_nKH_n=K_c$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-1-2",
+          "claim": "For every $a\\in\\mathbb R^n$, $a^TK_ca=(H_na)^TK(H_na)\\ge0$ by the input hypothesis on $K$. Thus $K_c$ is positive semidefinite.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-centered-psd-kernel-gram-matrix-is-psd-2-1",
+          "claim": "The standard coordinate basis is orthonormal for [F3], so [F4] makes the symmetric matrix $K_c$ self-adjoint and [F5] gives an orthonormal eigenbasis. If $u$ is a unit eigenvector with eigenvalue $\\lambda$, then $\\lambda=u^TK_cu\\ge0$ by step 1.2. Hence every eigenvalue is nonnegative, which makes the stated kernel-PCA eigenprocedure well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis n>=1 is needed for H_n=I-n^(-1)11^T; no empty sample or undefined zero-dimensional centering convention is included.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The hypothesis n>=1 is needed for H_n=I-n^(-1)11^T; no empty sample or undefined zero-dimensional centering convention is included.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "9114f82679565d9542e215209346574de53ec3962e3d7e31c8d7485926a26b37"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: If K=0 or a lies in the kernel of H_n, the quadratic expression in Proof 1.2 is zero and remains nonnegative; the argument requires no strictly positive Gram eigenvalue.",
+          "reason": "If K=0 or a lies in the kernel of H_n, the quadratic expression in Proof 1.2 is zero and remains nonnegative; the argument requires no strictly positive Gram eigenvalue.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "If K=0 or a lies in the kernel of H_n, the quadratic expression in Proof 1.2 is zero and remains nonnegative; the argument requires no strictly positive Gram eigenvalue.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "bf5a3b577452885d0afc3a13a929ef83168ef113d08944429af2adf698b5bfc4"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: For n=1, H_1=0 and therefore K_c=0. Proofs 1.1 and 1.2 still give symmetry and PSD, and the sole eigenvalue is zero as in 2.1.",
+          "reason": "For n=1, H_1=0 and therefore K_c=0. Proofs 1.1 and 1.2 still give symmetry and PSD, and the sole eigenvalue is zero as in 2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "For n=1, H_1=0 and therefore K_c=0. Proofs 1.1 and 1.2 still give symmetry and PSD, and the sole eigenvalue is zero as in 2.1.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "10e30581fbd483824b02f05ed0d65dff6c89bcb3edb16896a4dd7c367af1c6c2"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Proof 1.2 establishes nonnegativity without inverting K or H_n, so singular kernels and the constant direction annihilated by centering are included.",
+          "reason": "Proof 1.2 establishes nonnegativity without inverting K or H_n, so singular kernels and the constant direction annihilated by centering are included.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 1.2 establishes nonnegativity without inverting K or H_n, so singular kernels and the constant direction annihilated by centering are included.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "a6da7624b8c7eac6f1d891232d7472d9679594e85f0e8774ab050254ccbbe5b5"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This assertion has a fixed finite PSD input and no limit parameter; its sole dimension restriction is n>=1 and its centering algebra also includes n=1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "This assertion has a fixed finite PSD input and no limit parameter; its sole dimension restriction is n>=1 and its centering algebra also includes n=1.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "eb5b140c030b55578c23a2c22cc0a8f7991c417c0f4be26bb099864ab8eb33fd"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Symmetry and the quadratic identity are direct matrix equalities; Proof 2.1 invokes the spectral theorem for one finite centered matrix and normalizes only unit eigenvectors already supplied there.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Symmetry and the quadratic identity are direct matrix equalities; Proof 2.1 invokes the spectral theorem for one finite centered matrix and normalizes only unit eigenvectors already supplied there.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "994776fbdf6d253b5cdb96e1745bf19bb93f98155d2e6c8ba9200d5818e2784f"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The congruence identity a^THKH a=(Ha)^TK(Ha) proves PSD preservation and then nonnegative eigenvalues; no converse recovering the uncentered kernel from the centered matrix is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The congruence identity a^THKH a=(Ha)^TK(Ha) proves PSD preservation and then nonnegative eigenvalues; no converse recovering the uncentered kernel from the centered matrix is asserted.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "f22997a943e0584b4e7df59c678184d5ece352cf48f70afef92dc75878571208"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The congruence identity a^THKH a=(Ha)^TK(Ha) proves PSD preservation and then nonnegative eigenvalues; no converse recovering the uncentered kernel from the centered matrix is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The congruence identity a^THKH a=(Ha)^TK(Ha) proves PSD preservation and then nonnegative eigenvalues; no converse recovering the uncentered kernel from the centered matrix is asserted.",
+            "item_sha256": "b850a231d983e4defac06eff682c92052b8bfb4b3f564ad3c6f86517178c3567",
+            "row_sha256": "77d2ca3159bdc1a3983ea9ce7d89d941ba0e57e33ef3ccfd227b290e2071f1ab"
+          }
+        }
+      ]
+    },
+    "thm-classical-mds-recovers-euclidean-distances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-centering-matrix-is-orthogonal-projector",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$. Then $H_n^T=H_n$, $H_n^2=H_n$, $H_n\\mathbf1_n=0$, and for each $v\\in\\mathbb R^n$, $H_nv=v-(n^{-1}\\mathbf1_n^Tv)\\mathbf1_n$. Thus $H_n$ is the orthogonal projection onto $\\{v\\in\\mathbb R^n:\\mathbf1_n^Tv=0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space, let\n$T:V\\to V$ be linear, and let $\\mathcal E$ be an orthonormal basis of $V$. Write\n\n$$A=[T]_{\\mathcal E}^{\\mathcal E}.$$\n\nThen:\n\n1. $T$ is self-adjoint if and only if $A=A^*$.\n2. $T$ is normal if and only if $AA^*=A^*A$.\n\nOver $\\mathbb R$, $A^*$ is just $A^{\\mathsf T}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-equal-gram-configurations-are-isometric",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, $x_1,\\ldots,x_n\\in\\mathbb R^d$, and $y_1,\\ldots,y_n\\in\\mathbb R^m$ be finite lists with $\\langle x_i,x_j\\rangle=\\langle y_i,y_j\\rangle$ for every $1\\le i,j\\le n$, using the standard Euclidean inner products. The assignment $\\sum_{i=1}^n c_i x_i\\mapsto\\sum_{i=1}^n c_i y_i$ is a well-defined linear isometry from $\\operatorname{span}\\{x_i\\}$ onto $\\operatorname{span}\\{y_i\\}$; when $n=0$ both spans are zero spaces and the assignment is the unique zero map.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-1-1",
+          "claim": "For any permitted $D$, $D^{\\circ2}$ is symmetric and $H_n$ is symmetric by [F2], so $B^T=B$. The standard coordinate basis is orthonormal for [F3], so [F4] makes $B$ self-adjoint and [F5] gives a real orthonormal eigendecomposition; this justifies the spectral step even when some eigenvalues are negative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-1-2",
+          "claim": "Suppose $D_{ij}=\\|z_i-z_j\\|_2$ and let $Z$ be the matrix with rows $z_i^T$. Put $s_i=\\|z_i\\|_2^2$. Expanding each squared distance with the coordinate inner product [F3] gives $D^{\\circ2}=s\\mathbf1_n^T+\\mathbf1_ns^T-2ZZ^T$, hence $B=-\\frac12H_n(s\\mathbf1_n^T+\\mathbf1_ns^T-2ZZ^T)H_n=H_nZZ^TH_n=Z_cZ_c^T$ because $H_n\\mathbf1_n=0$ and $H_n^T=H_n$ by [F2]. For every $a$, $a^TBa=\\sum_r((Z_c^Ta)_r)^2\\ge0$ by the coordinate formula [F3], so $B$ is positive semidefinite; also $B\\mathbf1_n=Z_cZ_c^T\\mathbf1_n=0$. When $n=1$, $H_1=0$, so $Z_c=0$ and $B=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-2-1",
+          "claim": "In the Euclidean-distance case of step 1.2, $B$ is positive semidefinite. By [F5], choose an orthonormal eigenbasis. For each unit eigenvector $u$ with eigenvalue $\\lambda$, step 1.2 gives $\\lambda=u^TBu\\ge0$. Thus the zero-eigenvalue terms vanish and $B=U_+\\Lambda_+U_+^T$, where $U_+$ contains exactly the positive-eigenvalue eigenvectors and $\\Lambda_+$ is diagonal with strictly positive entries. If there are no positive eigenvalues, this is the empty decomposition and $B=0$. The classical-MDS coordinates from all positive eigenvalues are $Y=U_+\\Lambda_+^{1/2}$, so $YY^T=B$. By step 1.2, $B\\mathbf1_n=0$, and each column $u$ of $U_+$ with eigenvalue $\\lambda>0$ satisfies $\\lambda u^T\\mathbf1_n=u^TB\\mathbf1_n=0$; hence the rows of $Y$ are centered.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-3-1",
+          "claim": "By [F2], row $i$ of $Z_c$ is $z_i-\\bar z$, where $\\bar z=n^{-1}\\sum_i z_i$. For each $i,j$, the coordinate Gram identity gives $\\|y_i-y_j\\|_2^2=B_{ii}+B_{jj}-2B_{ij}=\\|z_i-\\bar z-(z_j-\\bar z)\\|_2^2=\\|z_i-z_j\\|_2^2=D_{ij}^2$. Both distances are nonnegative, so $\\|y_i-y_j\\|_2=D_{ij}$. The procedure retaining up to the requested dimension $q$ has the same Gram matrix when $q$ is at least the number of positive eigenvalues, so these equalities then hold for its returned coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-classical-mds-recovers-euclidean-distances-4-1",
+          "claim": "The row configurations of $Z_c$ and $Y$ have the same Gram matrix $B$ by step 1.2 and step 2.1. Applying [F6] gives an isometry between their spans. The original rows of $Z$ differ from those of $Z_c$ by the common translation $\\bar z$, so the original and embedded configurations are congruent after this translation. For a non-Euclidean $D$, step 1.1 still gives a symmetric spectral problem, but step 1.2 is unavailable and no exact-distance conclusion follows.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F6",
+            "algebra",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The object count n>=1 is fixed, but B can have no positive eigenvalues. Proof 2.1 explicitly takes the empty positive-eigenvalue decomposition then gives B=0 and zero-dimensional centered coordinates; Proof 1.2 includes n=1.",
+          "evidence": "Statement and proof: The object count n>=1 is fixed, but B can have no positive eigenvalues. Proof 2.1 explicitly takes the empty positive-eigenvalue decomposition then gives B=0 and zero-dimensional centered coordinates; Proof 1.2 includes n=1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The object count n>=1 is fixed, but B can have no positive eigenvalues. Proof 2.1 explicitly takes the empty positive-eigenvalue decomposition then gives B=0 and zero-dimensional centered coordinates; Proof 1.2 includes n=1.",
+            "item_sha256": "4b6a7e5c69eb1362efc2f77433cc5abf652fcf2fdf64d39dfd950345c8a3583e",
+            "row_sha256": "48dcd3576a722326f203b3d331c55e36e8f0359065fa6ae4f0d3beac502e028e"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats an empty positive spectrum and obtains B=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 cover n=1: H_1=0, so B=0 and the positive-eigenvalue coordinate list is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the degenerate Euclidean case B=0 through the empty positive-eigenvalue decomposition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 covers requested dimension q at least the number of positive eigenvalues, including equality at that endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 chooses an eigenbasis of a single finite symmetric matrix and keeps its positive directions; if none exist it uses the explicit empty decomposition, and the equal-Gram supplier supplies the isometry without selecting representatives.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 2.1 chooses an eigenbasis of a single finite symmetric matrix and keeps its positive directions; if none exist it uses the explicit empty decomposition, and the equal-Gram supplier supplies the isometry without selecting representatives.",
+            "item_sha256": "4b6a7e5c69eb1362efc2f77433cc5abf652fcf2fdf64d39dfd950345c8a3583e",
+            "row_sha256": "136d70aa66f93c80578b84ec847efb18d036287555c9b9ba67c8b810a60860e8"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem derives exact recovery under the Euclidean-distance hypothesis while retaining only a symmetric spectral problem for non-Euclidean inputs; it does not present that implication as an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The theorem derives exact recovery under the Euclidean-distance hypothesis while retaining only a symmetric spectral problem for non-Euclidean inputs; it does not present that implication as an iff claim.",
+            "item_sha256": "4b6a7e5c69eb1362efc2f77433cc5abf652fcf2fdf64d39dfd950345c8a3583e",
+            "row_sha256": "31310641766cdd1d1d3da8c99864bac152a5528f7127f41962e7bb0fa0f98a40"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem derives exact recovery under the Euclidean-distance hypothesis while retaining only a symmetric spectral problem for non-Euclidean inputs; it does not present that implication as an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The theorem derives exact recovery under the Euclidean-distance hypothesis while retaining only a symmetric spectral problem for non-Euclidean inputs; it does not present that implication as an iff claim.",
+            "item_sha256": "4b6a7e5c69eb1362efc2f77433cc5abf652fcf2fdf64d39dfd950345c8a3583e",
+            "row_sha256": "d17f737e1550044f220250a2f775c77da1d7ef0a0520aa6b4fb56bafdfedc8b8"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Checked all five steps, algorithm inputs n>=1 and q>=1, actual centering/equal-Gram lemmas and coordinate/spectral suppliers. Double centering annihilates both norm-square terms; lambda=u^TBu>=0 justifies positive spectral factorization. Empty positive spectrum returns n-by-0 coordinates, covering n=1 and coincident points. Positive eigenvectors are centered, Gram distances agree and span isometry follows. Negative dissimilarity spectra make no recovery claim. Reader clarification accepted; no AC or diagram needed."
+      }
+    },
+    "thm-minimum-norm-lle-weights-exist-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-1-1",
+          "claim": "Let $w^0=(1,0,\\ldots,0)\\in\\mathbb R^k$, let $L=\\{z\\in\\mathbb R^k:\\sum_s z_s=0\\}$, and define $T:L\\to\\mathbb R^p$ by $Tz=\\sum_s z_sx_{j_s}$. Every feasible $w$ has a unique form $w=w^0+z$ with $z\\in L$, and its residual is $x_i-x_{j_1}-Tz$. Thus the constrained problem is an ordinary finite-dimensional least-squares problem for $T$ on the inner-product subspace $L$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-2-1",
+          "claim": "By [F2], choose a least-squares minimizer $z_0\\in L$ and all minimizers are $z_0+N$, where $N=\\ker T\\subseteq L$. Therefore all feasible minimizing weights form the nonempty affine set $w^0+z_0+N$. In the degenerate case $T=0$, $z_0=0$ is a minimizer and $N=L$, so this set contains every feasible weight.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-3-1",
+          "claim": "Put $w_*=w^0+z_0$. By [F4], decompose $w_*=u+v$ with $u\\in N$ and $v\\in N^\\perp$ in $\\mathbb R^k$. Since $-u\\in N$, $v=w_*-u$ remains in the affine minimizer set. For any other minimizer $v+h$ with $h\\in N$, orthogonality gives $\\|v+h\\|_2^2=\\|v\\|_2^2+\\|h\\|_2^2$, which is at least $\\|v\\|_2^2$ with equality only if $h=0$. Hence $v$ is the unique minimum-norm minimizer. When $k=1$, $L=N=\\{0\\}$ and this gives the unique feasible weight $w^0=(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-minimum-norm-lle-weights-exist-uniquely-4-1",
+          "claim": "The proof applies the least-squares existence result once to this fixed finite-dimensional problem and uses a finite orthogonal decomposition; it selects no sequence of approximate minimizers and uses no Countable Choice.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonempty finite neighbor list is an explicit hypothesis. Proof 1.1 uses its first index j_1 to construct the feasible weight (1,0,...,0), so an empty neighborhood is outside the stated affine-sum-one problem.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "A nonempty finite neighbor list is an explicit hypothesis. Proof 1.1 uses its first index j_1 to construct the feasible weight (1,0,...,0), so an empty neighborhood is outside the stated affine-sum-one problem."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "A nonempty finite neighbor list is an explicit hypothesis. Proof 1.1 uses its first index j_1 to construct the feasible weight (1,0,...,0), so an empty neighborhood is outside the stated affine-sum-one problem.",
+            "item_sha256": "991ee0fa91bf03c32da1b4e37d4e1a1bd3983fa2768d86c3e48d8b13a990cd64",
+            "row_sha256": "309b37f1e3c375d363c374cffda76ab9307de1525b2a086e18ad758571603891"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover T=0, when all feasible weights minimize residual and orthogonal projection selects the unique least-norm one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers k=1 and gives the unique feasible weight (1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers T=0 explicitly, when every feasible weight minimizes the residual."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The constrained affine least-squares problem has no interval endpoint parameter; k=1 is checked in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 takes one supplied finite-dimensional least-squares minimizer z_0; subtracting its kernel component in 3.1 gives the unique least-norm weight independently of that witness. Proof 4.1 explicitly rules out a sequence or Countable Choice use.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Proof 2.1 takes one supplied finite-dimensional least-squares minimizer z_0; subtracting its kernel component in 3.1 gives the unique least-norm weight independently of that witness. Proof 4.1 explicitly rules out a sequence or Countable Choice use.",
+            "item_sha256": "991ee0fa91bf03c32da1b4e37d4e1a1bd3983fa2768d86c3e48d8b13a990cd64",
+            "row_sha256": "da87c8aecca71d2ad5258d9ffb3525b8bad0d88ebdb7ed331067e5d6968a5032"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The affine least-squares problem is shown to have minimizers and a unique least-norm member by orthogonal decomposition; the statement gives existence and uniqueness, not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The affine least-squares problem is shown to have minimizers and a unique least-norm member by orthogonal decomposition; the statement gives existence and uniqueness, not an iff criterion.",
+            "item_sha256": "991ee0fa91bf03c32da1b4e37d4e1a1bd3983fa2768d86c3e48d8b13a990cd64",
+            "row_sha256": "435c223c0d20d0aee967228807c2275eee5933e68ab935fe643d840b1b6aec32"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The affine least-squares problem is shown to have minimizers and a unique least-norm member by orthogonal decomposition; the statement gives existence and uniqueness, not an iff criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The affine least-squares problem is shown to have minimizers and a unique least-norm member by orthogonal decomposition; the statement gives existence and uniqueness, not an iff criterion.",
+            "item_sha256": "991ee0fa91bf03c32da1b4e37d4e1a1bd3983fa2768d86c3e48d8b13a990cd64",
+            "row_sha256": "b9eddf384f61f1d15332aee06093b1b1e4cd17051108e2843fb9cf94de2d888c"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "All four steps and F1–F4 current carriers reviewed. Nonempty neighborhood gives w0 and finite inner-product subspace L; least squares gives affine minimizers w0+z0+ker(T). Orthogonal decomposition in R^k removes exactly the kernel component; Pythagoras proves existence and uniqueness of the minimum-norm member. Singular/T=0 and k=1 cases valid; no covariance inverse or countable choice used. Reader/refuter contain no finding; no diagram needed."
+      }
+    },
+    "thm-lle-trace-minimizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ky-fan-trace-maximization",
+          "source_section": "Statement",
+          "quote": "Let $A\\in\\mathbb R^{p\\times p}$ be symmetric with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$, counted with multiplicity. For $1\\le q\\le p$ and every $Q\\in\\mathbb R^{p\\times q}$ satisfying $Q^TQ=I_q$,\n\n$$\\operatorname{tr}(Q^TAQ)\\le\\sum_{j=1}^q\\lambda_j.$$\n\nEquality is attained by taking the columns of $Q$ to be orthonormal eigenvectors for the $q$ largest eigenvalues. Equality holds exactly when the column space of $Q$ contains every eigenspace with eigenvalue greater than $\\lambda_q$, is orthogonal to every eigenspace with eigenvalue less than $\\lambda_q$, and uses a subspace of dimension $q-\\#\\{j:\\lambda_j>\\lambda_q\\}$ from the eigenspace with eigenvalue $\\lambda_q$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-trace-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "For a square matrix $A=(a_{ij})\\in M_n(F)$, its **trace** is the sum of its\ndiagonal entries,\n\n$$\\operatorname{tr}(A):=\\sum_{i\\in n}a_{ii}.$$\n\nFor $n=0$, this is the empty sum, so the unique empty matrix has trace $0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be self-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-lle-trace-minimizers-1-1",
+          "claim": "Put $A=I_n-W$. Then $A\\mathbf1_n=0$ by [F1], and $M=A^TA$ is symmetric with $M\\mathbf1_n=0$. For every $v$, $v^TMv=(Av)^T(Av)=\\sum_r(Av)_r^2\\ge0$ by [F2]. Also $Mv=0$ implies $0=v^TMv=\\sum_r(Av)_r^2$, hence $Av=0$; conversely $Av=0$ implies $Mv=0$. Therefore $\\ker M=\\ker A=\\operatorname{span}\\{\\mathbf1_n\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-2-1",
+          "claim": "By [F4], $\\mathbb R^n=\\operatorname{span}\\{\\mathbf1_n\\}\\oplus S$ for $S=\\mathbf1_n^\\perp$, and [F3] gives an orthonormal basis matrix $E\\in\\mathbb R^{n\\times(n-1)}$ for $S$. Symmetry and $M\\mathbf1_n=0$ imply $M(S)\\subseteq S$, because $\\mathbf1_n^TMv=(M\\mathbf1_n)^Tv=0$ for $v\\in S$. The restriction is self-adjoint and has matrix $R=E^TME$, which is symmetric and positive definite: if $c\\ne0$, then $Ec\\in S\\setminus\\{0\\}$, so $Ec\\notin\\ker M$ by step 1.1 and $c^TRc=(Ec)^TM(Ec)=\\sum_r(AEc)_r^2>0$. By [F7], the restriction has an orthonormal eigenbasis; for each unit eigenvector with eigenvalue $\\mu$, positive definiteness gives $\\mu>0$. List its eigenvalues as $0<\\mu_1\\le\\cdots\\le\\mu_{n-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-3-1",
+          "claim": "For every feasible $Y$, its columns lie in $S$, so $Y=EQ$ with $Q=E^TY$ and $Q^TQ=I_q$. Substitution gives $Y^TMY=Q^TRQ$, hence $\\operatorname{tr}(Y^TMY)=\\operatorname{tr}(Q^TRQ)$ by [F6]. Apply [F5] to $-R$, whose eigenvalues in descending order are $-\\mu_1\\ge\\cdots\\ge-\\mu_{n-1}$. It follows that $\\operatorname{tr}(Q^TRQ)\\ge\\sum_{j=1}^q\\mu_j$, with equality exactly for the q-dimensional bottom eigenspaces, including arbitrary choices inside a tie.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-lle-trace-minimizers-4-1",
+          "claim": "Taking $Q$ to have orthonormal columns spanning q bottom eigendirections of $R$ and setting $Y=EQ$ satisfies both constraints and attains the bound in step 3.1. This proves the minimum and its equality cases.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The condition 1<=q<n entails n>=2 and a nonempty q-frame inside the (n-1)-dimensional zero-sum subspace; neither an empty frame nor n=1 is in the quantified range.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The condition 1<=q<n entails n>=2 and a nonempty q-frame inside the (n-1)-dimensional zero-sum subspace; neither an empty frame nor n=1 is in the quantified range."
+          },
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The condition 1<=q<n entails n>=2 and a nonempty q-frame inside the (n-1)-dimensional zero-sum subspace; neither an empty frame nor n=1 is in the quantified range.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "d996776ef32910dd15d65e03aad94cacf147b00ce9381b388bcc407eef83913e"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves ker M=span{1}, identifying the single zero direction under the stated kernel hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: For q=1, Proof 3.1 reduces to the least eigenvalue mu_1 of the positive-definite restriction; the orthonormal single bottom eigendirection constructed in 4.1 is feasible.",
+          "reason": "For q=1, Proof 3.1 reduces to the least eigenvalue mu_1 of the positive-definite restriction; the orthonormal single bottom eigendirection constructed in 4.1 is feasible.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "For q=1, Proof 3.1 reduces to the least eigenvalue mu_1 of the positive-definite restriction; the orthonormal single bottom eigendirection constructed in 4.1 is feasible.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "4066a548eb780398760c09cdefd1582be76d5e3b20b106d53eaff3ff7fa0ecf4"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Repeated positive eigenvalues do not break attainment: Proof 3.1 applies the trace supplier's tie-space equality cases to -R, and 4.1 chooses a bottom q-dimensional eigenspace within that permitted tie.",
+          "reason": "Repeated positive eigenvalues do not break attainment: Proof 3.1 applies the trace supplier's tie-space equality cases to -R, and 4.1 chooses a bottom q-dimensional eigenspace within that permitted tie.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Repeated positive eigenvalues do not break attainment: Proof 3.1 applies the trace supplier's tie-space equality cases to -R, and 4.1 chooses a bottom q-dimensional eigenspace within that permitted tie.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "5d2551d10cee763aad4f2b88b8c319276836bc77a6bdbcb1d0b7eaf5dbc7220f"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The largest allowed q=n-1 uses a full orthonormal basis of the zero-sum restriction, and 4.1 lifts it by E to an n-by-(n-1) feasible Y. q=n is expressly excluded by q<n.",
+          "reason": "The largest allowed q=n-1 uses a full orthonormal basis of the zero-sum restriction, and 4.1 lifts it by E to an n-by-(n-1) feasible Y. q=n is expressly excluded by q<n.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The largest allowed q=n-1 uses a full orthonormal basis of the zero-sum restriction, and 4.1 lifts it by E to an n-by-(n-1) feasible Y. q=n is expressly excluded by q<n.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "18f743899da7f338513296a6f0d3e779ea1ccadaba9a33cfa5a7dd612ba710c0"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof invokes one finite orthonormal basis of the zero-sum subspace and one finite spectral frame to exhibit Y=EQ; no family of approximate minimizers or countable choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The proof invokes one finite orthonormal basis of the zero-sum subspace and one finite spectral frame to exhibit Y=EQ; no family of approximate minimizers or countable choice is used.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "e805bbc5969ba53cd1b33f77116bb82653ed35daa709d5df03b0ab61f574edcd"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The simple constant-kernel hypothesis makes the zero-sum restriction positive definite and its bottom eigenvectors attain the variational minimum; the top-level statement does not characterize arbitrary W by an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The simple constant-kernel hypothesis makes the zero-sum restriction positive definite and its bottom eigenvectors attain the variational minimum; the top-level statement does not characterize arbitrary W by an iff claim.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "96c5c29ebcb0196b1cf867414cd4df2c9212c7abfb389ba7743f888a85351f4f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The simple constant-kernel hypothesis makes the zero-sum restriction positive definite and its bottom eigenvectors attain the variational minimum; the top-level statement does not characterize arbitrary W by an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The simple constant-kernel hypothesis makes the zero-sum restriction positive definite and its bottom eigenvectors attain the variational minimum; the top-level statement does not characterize arbitrary W by an iff claim.",
+            "item_sha256": "766a87918d35e881a3e5af5f02a4ec58d32345c0b8d440c507c40ecd0bcca139",
+            "row_sha256": "4d72c113c3a191d10060647d498457ebe18b35c2d18322de3883a3467f570832"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all four steps and seven actual suppliers, including reader-added F7. A^TA has ker(A), constant kernel makes its restriction to S positive definite, and symmetry makes S invariant and restriction self-adjoint. F7 supplies an orthonormal restricted eigenbasis with mu>0. Feasible frames correspond bijectively to Q in R^(n-1); Ky Fan on -R gives bottom spectrum and both equality directions including ties and q=n-1. n>=2 follows from 1<=q<n; no AC. Refuter missing F7 deps declaration confirmed nonfatal and repaired; reader proof clarification retained; no statement change or consumer repair."
+      }
+    },
+    "ex-rank-q-pca-exact-reconstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rank-q-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "For a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n,p\\ge1$, set $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and $X_c=H_nX$. For an integer $q$ with $1\\le q\\le p$, a rank-$q$ PCA frame is a matrix $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$. Its reconstruction is $X_cQQ^T$, and its squared Frobenius reconstruction error is\n\n$$\\|X_c-X_cQQ^T\\|_F^2=\\sum_{i<n}\\sum_{j<p}(X_c-X_cQQ^T)_{ij}^2.$$\n\nA rank-$q$ PCA solution is any frame minimizing this error over all such $Q$; its score matrix is $X_cQ$. A minimizing frame need not be unique when the relevant eigenvalues are tied.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-pca-frobenius-optimality",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$, $n,p\\ge1$, let $X_c=(I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T)X$, and let $1\\le q\\le p$. Write $\\sigma_1\\ge\\cdots\\ge\\sigma_p\\ge0$ for the singular values of $X_c$, padding by zeros after its rank. Among all $Q\\in\\mathbb R^{p\\times q}$ with $Q^TQ=I_q$, the minimum of $\\|X_c-X_cQQ^T\\|_F^2$ is\n\n$$\\sum_{j=q+1}^{p}\\sigma_j^2.$$\n\nA frame is minimizing exactly when its column space contains every eigenspace of $X_c^TX_c$ with eigenvalue greater than $\\sigma_q^2$, is orthogonal to every eigenspace with eigenvalue less than $\\sigma_q^2$, and uses the remaining dimension inside the eigenspace with eigenvalue $\\sigma_q^2$. In particular a choice of $q$ right singular vectors for the $q$ largest singular values is minimizing; ties can give different minimizing subspaces.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-1-1",
+          "claim": "Each column of $X$ sums to zero, so $X_c=X$; multiplication gives $X^TX=\\begin{pmatrix}2&0\\\\0&0\\end{pmatrix}$, with singular values $\\sqrt2$ and $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-2-1",
+          "claim": "The vector $Q=(1,0)^T$ satisfies $Q^TQ=1$, and $X_cQQ^T=X$. Therefore its reconstruction error is zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-rank-q-pca-exact-reconstruction-3-1",
+          "claim": "Every squared Frobenius error is nonnegative, so this zero error is the global minimum. Since $2>0$ separates the two eigenvalues of $X^TX$, [F2] also gives the unique minimizing one-dimensional subspace $\\operatorname{span}\\{(1,0)^T\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Three observations and two feature columns are fixed in the displayed matrix, with target q=1; there is no empty matrix or empty frame in the example.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Three observations and two feature columns are fixed in the displayed matrix, with target q=1; there is no empty matrix or empty frame in the example.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "dff9f4b2a78a89be030305d67f60415efd076e263c4a6ced8e20f21ab90f965c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 verify zero reconstruction error and the zero singular-value tail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and its verification: At target q=1 the unit column Q=(1,0)^T has Q^TQ=1 and reconstructs X exactly in Verification 2.1, establishing the stated rank-one case.",
+          "reason": "At target q=1 the unit column Q=(1,0)^T has Q^TQ=1 and reconstructs X exactly in Verification 2.1, establishing the stated rank-one case.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "At target q=1 the unit column Q=(1,0)^T has Q^TQ=1 and reconstructs X exactly in Verification 2.1, establishing the stated rank-one case.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "0a5217c4293f06ee791e1dcc7a3db89c63c49f1efd2aac833ef5f68ca97ee154"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and its verification: Verification 1.1 computes X^TX=diag(2,0), including its zero singular value; Verification 3.1 uses the gap 2>0 to distinguish a unique optimal line despite rank deficiency.",
+          "reason": "Verification 1.1 computes X^TX=diag(2,0), including its zero singular value; Verification 3.1 uses the gap 2>0 to distinguish a unique optimal line despite rank deficiency.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Verification 1.1 computes X^TX=diag(2,0), including its zero singular value; Verification 3.1 uses the gap 2>0 to distinguish a unique optimal line despite rank deficiency.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "585f0f54173e531a62b90b7a1d9d7a56beb1002b9bd0df95426f5911ea09b06b"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "reason": "The requested q=1 is the smallest positive target rank and equals the data rank. Verification 2.1 gives exact reconstruction and Verification 3.1 identifies zero as the attained minimum error.",
+          "evidence": "Example and its verification: The requested q=1 is the smallest positive target rank and equals the data rank. Verification 2.1 gives exact reconstruction and Verification 3.1 identifies zero as the attained minimum error.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The requested q=1 is the smallest positive target rank and equals the data rank. Verification 2.1 gives exact reconstruction and Verification 3.1 identifies zero as the attained minimum error.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "d7b84274859c475ee4a1f735dd19f03305a2eacab8c856fc1dfeb12eb967d765"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The reconstruction frame is the explicit column (1,0)^T; its feasibility and exact multiplication are checked directly, so no selection among tied singular vectors is required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The reconstruction frame is the explicit column (1,0)^T; its feasibility and exact multiplication are checked directly, so no selection among tied singular vectors is required.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "e4d12f1b269e43c4cb6d97187100ad770a5bc0e2d621c64ca0970ebdb060c81c"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The given 3-by-2 rank-one matrix is reconstructed by the explicitly supplied frame (1,0), and its spectral gap makes the optimal line unique; this is one finite computation, not a two-direction theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The given 3-by-2 rank-one matrix is reconstructed by the explicitly supplied frame (1,0), and its spectral gap makes the optimal line unique; this is one finite computation, not a two-direction theorem.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "c686689d09483d4d6c15ee6e03b2e265241fd81e737b7b2e1fe4f49032656900"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The given 3-by-2 rank-one matrix is reconstructed by the explicitly supplied frame (1,0), and its spectral gap makes the optimal line unique; this is one finite computation, not a two-direction theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The given 3-by-2 rank-one matrix is reconstructed by the explicitly supplied frame (1,0), and its spectral gap makes the optimal line unique; this is one finite computation, not a two-direction theorem.",
+            "item_sha256": "2cfeaf1efe52a191580062fea759e3d7b876ddc1ec67b2ad906c0bb94a8266c0",
+            "row_sha256": "69daa06db6f34911987c096cdf2daa8b7ff883dc2452e7e74db5fb1091e81bb6"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all three steps and both previously reviewed suppliers. X is centered, X^TX=diag(2,0), Q=e1 is feasible and XP=X. Zero error is minimal; the strict 2>0 eigenvalue gap proves uniqueness of the subspace but not the signed frame. No AC, diagram or reader/refuter finding."
+      }
+    },
+    "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classical-mds-recovers-euclidean-distances",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. For every symmetric nonnegative zero-diagonal dissimilarity matrix $D$, the matrix $B=-\\frac12H_nD^{\\circ2}H_n$ used by classical multidimensional scaling is symmetric and has a real orthonormal eigendecomposition, though it may have negative eigenvalues. If $D_{ij}=\\|z_i-z_j\\|_2$ for points $z_1,\\ldots,z_n\\in\\mathbb R^d$, where $\\|v\\|_2=(\\sum_{a=1}^d v_a^2)^{1/2}$, then $B=Z_cZ_c^T$ for the centered row-data matrix $Z_c=H_nZ$, so $B$ is positive semidefinite. The coordinates formed from all positive eigenvalues reproduce every pairwise distance exactly; if the requested embedding dimension is at least the number of positive eigenvalues, the truncated procedure is exact. The centered configurations obtained from $Z$ and these coordinates are related by a linear isometry between their spans, so the original configurations agree up to translation and Euclidean isometry of their affine spans.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-1-1",
+          "claim": "Put $u=(1,1,-2)^T$ and $v=(1,-1,0)^T$. Both are zero-sum, so $H_3u=u$ and $H_3v=v$. Here $D^{\\circ2}=\\begin{pmatrix}0&1&1\\\\1&0&9\\\\1&9&0\\end{pmatrix}$, so direct multiplication gives $u^TBu=-\\tfrac12u^TD^{\\circ2}u=19$, $v^TBv=1$, and $u^TBv=-\\tfrac12u^TD^{\\circ2}v=-8$. Thus $w=u+8v$ satisfies $w^TBw=19+16(-8)+64=-45<0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-2-1",
+          "claim": "By [F2], $B$ is symmetric and has an orthonormal eigenbasis. If every eigenvalue were nonnegative, expressing $w$ in that eigenbasis would give $w^TBw\\ge0$, contradicting step 1.1. Therefore $B$ has a negative eigenvalue.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-non-euclidean-dissimilarity-has-negative-mds-eigenvalue-3-1",
+          "claim": "The stated triangle inequality fails, since $D_{13}+D_{12}=2<D_{23}=3$, so no Euclidean point configuration realizes $D$. This matches the negative eigenvalue and the Euclidean-only exactness hypothesis of [F2].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input is the displayed 3-by-3 matrix on three objects, so its centered subspace and explicit test vectors belong to a fixed nonempty configuration.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The input is the displayed 3-by-3 matrix on three objects, so its centered subspace and explicit test vectors belong to a fixed nonempty configuration.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "8b6b71262c52b330c536a036a9e10735f26a7f5b6709ab6326225a2008930707"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "The dissimilarity matrix has the required zero diagonal. Verification 1.1 uses zero-sum vectors fixed by H_3 and explicitly obtains a negative quadratic value, so zero entries are admitted rather than excluded.",
+          "evidence": "Example and its verification: The dissimilarity matrix has the required zero diagonal. Verification 1.1 uses zero-sum vectors fixed by H_3 and explicitly obtains a negative quadratic value, so zero entries are admitted rather than excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The dissimilarity matrix has the required zero diagonal. Verification 1.1 uses zero-sum vectors fixed by H_3 and explicitly obtains a negative quadratic value, so zero entries are admitted rather than excluded.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "f0061154d63b8c7ad9539d8980110ddda695160ef8a1115a81efc847eac68f8c"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-object or one-dimensional case in its stated domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and its verification: Verification 1.1 constructs w=u+8v with quadratic value -45; Verification 2.1 then rules out a PSD spectrum. The failure is non-Euclidean geometry, not an assumed nonsingular covariance.",
+          "reason": "Verification 1.1 constructs w=u+8v with quadratic value -45; Verification 2.1 then rules out a PSD spectrum. The failure is non-Euclidean geometry, not an assumed nonsingular covariance.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Verification 1.1 constructs w=u+8v with quadratic value -45; Verification 2.1 then rules out a PSD spectrum. The failure is non-Euclidean geometry, not an assumed nonsingular covariance.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "317702bf30ed1a1a643a082b6684ff56864dba9174f7e8767243399d54d7cbf6"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The distances 1,1,3 are fixed and there is no bandwidth, variance or interpolation parameter approaching an endpoint; failure is the strict triangle inequality 2<3.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The distances 1,1,3 are fixed and there is no bandwidth, variance or interpolation parameter approaching an endpoint; failure is the strict triangle inequality 2<3.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "ac275d67bc74132881f7e159b8b547a8cc8358838a5000cb4e54e5543bb126e6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The vectors u,v,w are explicitly supplied; the finite spectral theorem is used once to infer a negative eigenvalue from w^TBw<0, not to choose a sequence of configurations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The vectors u,v,w are explicitly supplied; the finite spectral theorem is used once to infer a negative eigenvalue from w^TBw<0, not to choose a sequence of configurations.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "8a840e0dc7966a706e396b03ed43b03ef4ff9427b2acb530a2da1da21f114088"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The prescribed three-point matrix violates the triangle inequality, and the explicit vector w has w^TBw=-45. This verifies one non-Euclidean example, not an iff characterization of all dissimilarities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The prescribed three-point matrix violates the triangle inequality, and the explicit vector w has w^TBw=-45. This verifies one non-Euclidean example, not an iff characterization of all dissimilarities.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "772117ec885a75e135d8f7e665112661a379cda39a069244b7c33fbaa3d0d1ea"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The prescribed three-point matrix violates the triangle inequality, and the explicit vector w has w^TBw=-45. This verifies one non-Euclidean example, not an iff characterization of all dissimilarities.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The prescribed three-point matrix violates the triangle inequality, and the explicit vector w has w^TBw=-45. This verifies one non-Euclidean example, not an iff characterization of all dissimilarities.",
+            "item_sha256": "0689e90c3659a565350b6712c03a28c4590fedf4a45ee8911218831a1c9665ee",
+            "row_sha256": "bd42545b3a18caf47a07b6259529ca2b6197ead65183fb2d0e28f2753a5a9e5e"
+          }
+        }
+      ]
+    },
+    "ex-disconnected-knn-graph-blocks-isomap-distances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-isomap",
+          "source_section": "Definition",
+          "quote": "Input: a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, an embedding dimension $q\\ge1$, and either a $k$-nearest-neighbor parameter $1\\le k<n$ with an explicit union or mutual symmetrization choice, or a radius $r>0$. Use $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$; for the $k$-nearest-neighbor option, each neighbor list orders candidates by increasing $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index. Construct the selected undirected graph and give each edge $\\{i,j\\}$ weight $\\|x_i-x_j\\|_2$. If the graph is disconnected, return the status “disconnected” and do not claim finite all-pairs graph distances. If it is connected, define $d_G(i,j)$ as the minimum total edge weight over all paths from $i$ to $j$; because the graph is finite with nonnegative edge weights, a minimum occurs among its finitely many simple paths. Form the symmetric dissimilarity matrix $D_G=(d_G(i,j))$ and apply classical multidimensional scaling to $D_G$ with requested dimension $q$. This finite procedure makes no guarantee that graph distances accurately approximate manifold geodesics or that the output recovers a manifold.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-disconnected-knn-graph-blocks-isomap-distances-1-1",
+          "claim": "The nearest neighbor of $x_1$ and $x_2$ is each other at distance $1/10$; the nearest neighbor of $x_3$ and $x_4$ is each other at distance $1/10$. Every distance between the two pairs is at least $99/10$, so no cross-pair edge is selected. By [F1], the union graph has exactly the two edges $\\{1,2\\}$ and $\\{3,4\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-disconnected-knn-graph-blocks-isomap-distances-2-1",
+          "claim": "The graph in step 1.1 has two connected components, so [F2] returns the disconnected status; a path between either cross-component pair does not exist, and the algorithm does not produce a finite all-pairs graph-distance matrix.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample contains four explicitly supplied points and each one-nearest list has one element; an empty sample or empty neighborhood is not among these fixed inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The sample contains four explicitly supplied points and each one-nearest list has one element; an empty sample or empty neighborhood is not among these fixed inputs.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "4b24d36ad120de0c977081dc177c1c7a3431b29315d99d650c697c6835ba2ef9"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "The coordinate x_1=0 is part of the actual example. Verification 1.1 computes its nearest point at distance 1/10, and the zero diagonal self-distances are not candidates for the nonself neighbor lists.",
+          "evidence": "Example and its verification: The coordinate x_1=0 is part of the actual example. Verification 1.1 computes its nearest point at distance 1/10, and the zero diagonal self-distances are not candidates for the nonself neighbor lists.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The coordinate x_1=0 is part of the actual example. Verification 1.1 computes its nearest point at distance 1/10, and the zero diagonal self-distances are not candidates for the nonself neighbor lists.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "e58d6b8eea192df6479df09cd6b2cefc54812f7f9c3c88cde15ae2ce4a9e9a65"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and its verification: The chosen k=1 is the smallest positive neighbor count; Verification 1.1 computes each single nearest neighbor and obtains precisely the two stated union edges.",
+          "reason": "The chosen k=1 is the smallest positive neighbor count; Verification 1.1 computes each single nearest neighbor and obtains precisely the two stated union edges.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The chosen k=1 is the smallest positive neighbor count; Verification 1.1 computes each single nearest neighbor and obtains precisely the two stated union edges.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "ff93230280ccf29edad0287a4149b0a6dd30dab76b8a2a499ca138829d875b7c"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no singular, tied, or otherwise degenerate branch beyond the cases explicitly checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and its verification: At the admitted discrete endpoint k=1, each graph component is an edge and no cross-component path exists; Verification 2.1 returns disconnected rather than a finite all-pairs distance matrix.",
+          "reason": "At the admitted discrete endpoint k=1, each graph component is an edge and no cross-component path exists; Verification 2.1 returns disconnected rather than a finite all-pairs distance matrix.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "At the admitted discrete endpoint k=1, each graph component is an edge and no cross-component path exists; Verification 2.1 returns disconnected rather than a finite all-pairs distance matrix.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "e846583d8c8b53fb0e50de6df45dccc0692a5885ff3b88855b41e099d835265f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All four nearest neighbors are unique because the within-pair distance 1/10 is strictly less than every cross-pair distance. No arbitrary neighbor selection or axiom of choice is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "All four nearest neighbors are unique because the within-pair distance 1/10 is strictly less than every cross-pair distance. No arbitrary neighbor selection or axiom of choice is used.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "c3aa5e9b6249f660ecd0e86d7aad15120ac36d10d8c8d14b3498a85ab1c28bf7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the prescribed four points the one-nearest union graph consists of two disjoint edges, so ISOMAP returns its disconnected status; this is one execution and not an equivalence characterizing every graph failure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "For the prescribed four points the one-nearest union graph consists of two disjoint edges, so ISOMAP returns its disconnected status; this is one execution and not an equivalence characterizing every graph failure.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "6db22ec7405502f3e46ad932a4a710c7936b1e52f744af73cadb30b9e24794f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the prescribed four points the one-nearest union graph consists of two disjoint edges, so ISOMAP returns its disconnected status; this is one execution and not an equivalence characterizing every graph failure.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "For the prescribed four points the one-nearest union graph consists of two disjoint edges, so ISOMAP returns its disconnected status; this is one execution and not an equivalence characterizing every graph failure.",
+            "item_sha256": "51a150ec7353b4ab8983369adb004d115bfee6bb8a41324295ce244c9893d841",
+            "row_sha256": "b257dada6dca37308dc0012da647e9eb4950e742145a5b824f642a1178bb47e6"
+          }
+        }
+      ]
+    },
+    "ex-singular-local-lle-covariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-minimum-norm-lle-weights-exist-uniquely",
+          "source_section": "Statement",
+          "quote": "Fix $x_i\\in\\mathbb R^p$ and a nonempty finite neighbor list $N_i=(j_1,\\ldots,j_k)$ of distinct indices. The constrained problem\n\n$$\\min_{w\\in\\mathbb R^k}\\left\\|x_i-\\sum_{s=1}^k w_sx_{j_s}\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{s=1}^k w_s=1$$\n\nhas a nonempty affine set of minimizers, and exactly one member of that set has smallest Euclidean norm. Thus the minimum-norm rule in finite LLE defines one weight vector even when the local covariance matrix is singular. This conclusion uses no choice axiom.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-singular-local-lle-covariance-1-1",
+          "claim": "The distances from $x_1=0$ to $x_4=0$, $x_2=1$, and $x_3=-1$ are $0,1,1$, so the deterministic list is $N_1=(4,2,3)$. The corresponding row matrix is $Z_1=(0,-1,1)$ and $C_1=Z_1^TZ_1=\\begin{pmatrix}0&0&0\\\\0&1&-1\\\\0&-1&1\\end{pmatrix}$, which is nonzero of rank one and hence singular.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-singular-local-lle-covariance-2-1",
+          "claim": "Write the weights in the order $(w_4,w_2,w_3)$. The constraint is $w_4+w_2+w_3=1$, and the reconstructed point is $w_2-w_3$. The minimum residual is zero exactly when $w_2=w_3=t$, giving $w_4=1-2t$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-singular-local-lle-covariance-3-1",
+          "claim": "Along this affine family, the squared norm is $(1-2t)^2+2t^2=6(t-1/3)^2+1/3$, uniquely minimized at $t=1/3$. Thus the minimum-norm weights are $(1/3,1/3,1/3)$ in the ordered list, and [F2] guarantees the selection is well-defined despite singularity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The neighborhood contains exactly the three distinct indices (4,2,3); the affine condition sums three weights to one and therefore does not involve an empty list.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The neighborhood contains exactly the three distinct indices (4,2,3); the affine condition sums three weights to one and therefore does not involve an empty list.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "314e9d4757beb3a561eb9e73550e1ce3d2b2722bcb51d91ecd88aa72b0421de2"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the exact zero-residual affine family."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has n=4 and k=3; it does not assert a one-sample or one-neighbor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and its verification: Verification 1.1 computes a rank-one 3-by-3 covariance, and 2.1 parameterizes all zero-residual feasible weights; 3.1 gives the unique least-norm triple (1/3,1/3,1/3) despite singularity.",
+          "reason": "Verification 1.1 computes a rank-one 3-by-3 covariance, and 2.1 parameterizes all zero-residual feasible weights; 3.1 gives the unique least-norm triple (1/3,1/3,1/3) despite singularity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Verification 1.1 computes a rank-one 3-by-3 covariance, and 2.1 parameterizes all zero-residual feasible weights; 3.1 gives the unique least-norm triple (1/3,1/3,1/3) despite singularity.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "0b31bbe5bd727087293d3cb7ff8e7db450be98937aaa3261b5aece38ee7398c1"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and its verification: The neighbor count k=3 includes every nonself point among the four observations; Verification 1.1 includes the zero-distance duplicate first and breaks the two unit-distance ties by index.",
+          "reason": "The neighbor count k=3 includes every nonself point among the four observations; Verification 1.1 includes the zero-distance duplicate first and breaks the two unit-distance ties by index.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The neighbor count k=3 includes every nonself point among the four observations; Verification 1.1 includes the zero-distance duplicate first and breaks the two unit-distance ties by index.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "6899ad1566f687d82258b572ac1a7d4de8208e6e3b85a9e795dd48c5bde2710a"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar quadratic 6(t-1/3)^2+1/3 uniquely picks t=1/3 in Verification 3.1; it is an explicit finite minimizer and requires no choice of approximate solutions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The scalar quadratic 6(t-1/3)^2+1/3 uniquely picks t=1/3 in Verification 3.1; it is an explicit finite minimizer and requires no choice of approximate solutions.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "44953c0b1a62a47c24e03055f96bf9a382315dc4b29cd8c292899441ae078dd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The singular local covariance is computed for one fixed ordered neighbor list and the squared weight norm is minimized explicitly at t=1/3; this example asserts no biconditional reconstruction criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The singular local covariance is computed for one fixed ordered neighbor list and the squared weight norm is minimized explicitly at t=1/3; this example asserts no biconditional reconstruction criterion.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "e9acf09e808c386ef92c44ee9c728b0b947941f0795e29207a19644b07a7233c"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The singular local covariance is computed for one fixed ordered neighbor list and the squared weight norm is minimized explicitly at t=1/3; this example asserts no biconditional reconstruction criterion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The singular local covariance is computed for one fixed ordered neighbor list and the squared weight norm is minimized explicitly at t=1/3; this example asserts no biconditional reconstruction criterion.",
+            "item_sha256": "b18f4441ae577635f58b2309f1e28bfb981a79093b2bb1c7d909705c80cd407a",
+            "row_sha256": "74aaf4ab46440971db6b2d2c7e3765815b07295361a247d71d467c0a95d20504"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read all three steps and both actual weight suppliers. Tie rule gives (4,2,3); Z=(0,-1,1) has nonzero rank-one Gram matrix. Zero residual iff w2=w3=t and w4=1-2t; norm=6(t-1/3)^2+1/3 gives exactly the stated unique weights, despite singularity. No matrix inverse or choice; no diagram or reader/refuter finding."
+      }
+    },
+    "ex-connected-lle-graph-need-not-have-simple-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lle-local-reconstruction-weights",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$, $n\\ge2$, and $1\\le k<n$. For each $i$, let $N_i$ be the first $k$ indices $j\\ne i$ under the increasing lexicographic order of $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index; the norm on $\\mathbb R^p$ is $\\|z\\|_2=(\\sum_{a=1}^p z_a^2)^{1/2}$. The local affine reconstruction weights are the vector $w_i=(w_{ij})_{j\\in N_i}\\in\\mathbb R^k$ minimizing\n\n$$\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{j\\in N_i}w_{ij}=1,$$\n\nAmong all minimizers, choose the one of smallest Euclidean norm $\\|w_i\\|_2=(\\sum_{j\\in N_i}w_{ij}^2)^{1/2}$. This minimum-norm rule fixes the weights even when the local covariance matrix is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-minimum-norm-lle-weights-exist-uniquely",
+          "source_section": "Statement",
+          "quote": "Fix $x_i\\in\\mathbb R^p$ and a nonempty finite neighbor list $N_i=(j_1,\\ldots,j_k)$ of distinct indices. The constrained problem\n\n$$\\min_{w\\in\\mathbb R^k}\\left\\|x_i-\\sum_{s=1}^k w_sx_{j_s}\\right\\|_2^2\\quad\\text{subject to}\\quad\\sum_{s=1}^k w_s=1$$\n\nhas a nonempty affine set of minimizers, and exactly one member of that set has smallest Euclidean norm. Thus the minimum-norm rule in finite LLE defines one weight vector even when the local covariance matrix is singular. This conclusion uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-1-1",
+          "claim": "For $x_1=x_3=-1$, the two nearest indices to each are the duplicate at $-1$ and $x_5=0$, giving $N_1=(3,5)$ and $N_3=(1,5)$. For $x_2=x_4=1$, the lists are $N_2=(4,5)$ and $N_4=(2,5)$. From $x_5=0$ all four distances are $1$, so $N_5=(1,2)$ by the index tie rule.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-2-1",
+          "claim": "For rows 1 and 3, the exact reconstruction weights are 1 on the duplicate point and 0 on $x_5$; for rows 2 and 4, they are 1 on the duplicate point and 0 on $x_5$. For row 5, weights $(1/2,1/2)$ on points $x_1=-1,x_2=1$ reconstruct zero exactly. Each is the unique minimum-norm choice by [F2] and [F3], yielding the displayed $W$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-2-2",
+          "claim": "The union edges are $\\{1,3\\}$, $\\{1,5\\}$, $\\{3,5\\}$, $\\{2,4\\}$, $\\{2,5\\}$, and $\\{4,5\\}$, so every vertex lies in one connected graph.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "ex-connected-lle-graph-need-not-have-simple-zero-3-1",
+          "claim": "The equation $Wy=y$ gives $y_1=y_3$, $y_3=y_1$, $y_2=y_4$, $y_4=y_2$, and $y_5=(y_1+y_2)/2$. The parameters $y_1,y_2$ are free, so $\\dim\\ker(I_5-W)=2$, whereas the constant vectors form a one-dimensional subspace. The condition in [F4] fails despite connectivity, and LLE does not specify an embedding for this input.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes five sample points and two ordered neighbors in every row; none of the local affine weight constraints is imposed on an empty neighborhood.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The example fixes five sample points and two ordered neighbors in every row; none of the local affine weight constraints is imposed on an empty neighborhood.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "5c05625f69224a5a83ebb4d42d54bc6b97090901498d61f11fdc0eb783e11444"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes a two-dimensional fixed space, so the zero eigenspace is explicitly non-simple."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has n=5 and k=2; it does not assert a one-sample or one-neighbor case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and its verification: Repeated coordinates at -1 and 1 give exact duplicate-point reconstructions with zero weights on vertex 5. Verification 2.1 computes those weights and 3.1 gives the resulting two-dimensional fixed space.",
+          "reason": "Repeated coordinates at -1 and 1 give exact duplicate-point reconstructions with zero weights on vertex 5. Verification 2.1 computes those weights and 3.1 gives the resulting two-dimensional fixed space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Repeated coordinates at -1 and 1 give exact duplicate-point reconstructions with zero weights on vertex 5. Verification 2.1 computes those weights and 3.1 gives the resulting two-dimensional fixed space.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "28f7d408e4510c857486709818a44106281fab953451f52cb007e8be0b0d7acf"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The kernel comparison uses one fixed W at k=2 and n=5, with no varying interval parameter or endpoint limit; the two-dimensional kernel is computed directly.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The kernel comparison uses one fixed W at k=2 and n=5, with no varying interval parameter or endpoint limit; the two-dimensional kernel is computed directly.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "09f63008251d222949214b0de05b2f2e93f6cebd3976ae63345948da15ff46a2"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Distance ties select the smaller sample index, each local weight is fixed by the minimum-norm rule, and the two free fixed-space parameters are exhibited explicitly; no choice function is required.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Distance ties select the smaller sample index, each local weight is fixed by the minimum-norm rule, and the two free fixed-space parameters are exhibited explicitly; no choice function is required.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "8e9fd6fc7f80a1f5da1aca436b0182e0d0c507e4e4362eca3913e5fc2a60be7c"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The fixed five-point construction has a connected neighbor graph but two independent solutions of Wy=y; this refutes connectivity as a sufficient simple-kernel condition rather than stating a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The fixed five-point construction has a connected neighbor graph but two independent solutions of Wy=y; this refutes connectivity as a sufficient simple-kernel condition rather than stating a biconditional.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "12bc877edf82343cfd9b8be3a5e8716d6198e5fa8713ec74bb7df4f1169ba7ff"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The fixed five-point construction has a connected neighbor graph but two independent solutions of Wy=y; this refutes connectivity as a sufficient simple-kernel condition rather than stating a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The fixed five-point construction has a connected neighbor graph but two independent solutions of Wy=y; this refutes connectivity as a sufficient simple-kernel condition rather than stating a biconditional.",
+            "item_sha256": "31dacd762123701ee66e5e1a956ebaea8d2c3bdfc92429fb947666e46899a30b",
+            "row_sha256": "328b5cf83200c4579c48e0a7b8c4c0f8b6a27cb1cca0df7ca5c139a8f0c8f73a"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Read four steps and all four actual suppliers. Duplicate-point rows uniquely reconstruct with weight 1 on duplicate, row 5 uniquely uses (1/2,1/2); neighbor tie rule gives the six union edges drawn. Graph is connected but fixed vectors are (a,b,a,b,(a+b)/2), so kernel dimension is exactly 2 and LLE correctly returns failure. Diagram has all six edges and distinguishes selected relations from nonzero weights. No AC or reader/refuter finding."
+      }
+    },
+    "ex-square-loop-mds-isomap-lle-differ": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-classical-multidimensional-scaling",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $D\\in\\mathbb R^{n\\times n}$ be symmetric with nonnegative entries and zero diagonal, and write $D^{\\circ2}$ for the matrix with entries $(D^{\\circ2})_{ij}=D_{ij}^2$. Define $H_n=I_n-n^{-1}\\mathbf1_n\\mathbf1_n^T$ and the centered matrix\n\n$$B:=-\\frac12H_nD^{\\circ2}H_n.$$\n\nFor a requested dimension $q\\ge1$, classical multidimensional scaling diagonalizes the real symmetric matrix $B$, retains up to the $q$ largest strictly positive eigenvalues $\\lambda_j$ with orthonormal eigenvectors $u_j$, and returns coordinates whose columns are $u_j\\sqrt{\\lambda_j}$. If fewer than $q$ positive eigenvalues exist, it returns only those positive-eigenvalue coordinates. For non-Euclidean dissimilarities this is a spectral procedure; it does not assert exact recovery of all entries of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classical-mds-recovers-euclidean-distances",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. For every symmetric nonnegative zero-diagonal dissimilarity matrix $D$, the matrix $B=-\\frac12H_nD^{\\circ2}H_n$ used by classical multidimensional scaling is symmetric and has a real orthonormal eigendecomposition, though it may have negative eigenvalues. If $D_{ij}=\\|z_i-z_j\\|_2$ for points $z_1,\\ldots,z_n\\in\\mathbb R^d$, where $\\|v\\|_2=(\\sum_{a=1}^d v_a^2)^{1/2}$, then $B=Z_cZ_c^T$ for the centered row-data matrix $Z_c=H_nZ$, so $B$ is positive semidefinite. The coordinates formed from all positive eigenvalues reproduce every pairwise distance exactly; if the requested embedding dimension is at least the number of positive eigenvalues, the truncated procedure is exact. The centered configurations obtained from $Z$ and these coordinates are related by a linear isometry between their spans, so the original configurations agree up to translation and Euclidean isometry of their affine spans.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-deterministic-neighbor-selection",
+          "source_section": "Definition",
+          "quote": "Let $x_1,\\ldots,x_n\\in\\mathbb R^p$ with $n\\ge2$, using the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For $1\\le k<n$, the deterministic $k$-nearest-neighbor list $N_k(i)$ consists of the first $k$ indices $j\\ne i$ when the other indices are ordered by increasing pair $(\\|x_i-x_j\\|_2,j)$ lexicographically; thus equal distances are broken by increasing sample index. All graphs below have vertex set $\\{1,\\ldots,n\\}$. The **union symmetrization** has edge $\\{i,j\\}$ when $j\\in N_k(i)$ or $i\\in N_k(j)$; the **mutual symmetrization** has edge $\\{i,j\\}$ exactly when both inclusions hold. Each included edge may be assigned weight $\\|x_i-x_j\\|_2$. For a radius $r>0$, the radius graph has edge $\\{i,j\\}$ exactly when $\\|x_i-x_j\\|_2\\le r$ for $1\\le i<j\\le n$. An undirected graph is connected when every two vertices are joined by a finite edge path.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-isomap",
+          "source_section": "Definition",
+          "quote": "Input: a finite data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, an embedding dimension $q\\ge1$, and either a $k$-nearest-neighbor parameter $1\\le k<n$ with an explicit union or mutual symmetrization choice, or a radius $r>0$. Use $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$; for the $k$-nearest-neighbor option, each neighbor list orders candidates by increasing $(\\|x_i-x_j\\|_2,j)$, so equal distances are broken by sample index. Construct the selected undirected graph and give each edge $\\{i,j\\}$ weight $\\|x_i-x_j\\|_2$. If the graph is disconnected, return the status “disconnected” and do not claim finite all-pairs graph distances. If it is connected, define $d_G(i,j)$ as the minimum total edge weight over all paths from $i$ to $j$; because the graph is finite with nonnegative edge weights, a minimum occurs among its finitely many simple paths. Form the symmetric dissimilarity matrix $D_G=(d_G(i,j))$ and apply classical multidimensional scaling to $D_G$ with requested dimension $q$. This finite procedure makes no guarantee that graph distances accurately approximate manifold geodesics or that the output recovers a manifold.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-locally-linear-embedding",
+          "source_section": "Definition",
+          "quote": "Input: a data matrix $X\\in\\mathbb R^{n\\times p}$ with $n\\ge2$, a neighbor count $1\\le k<n$, and an output dimension $1\\le q<n$, using $\\|v\\|_2=(\\sum_{a=1}^p v_a^2)^{1/2}$. For every row point $x_i$, select the first $k$ other sample indices ordered by $(\\|x_i-x_j\\|_2,j)$ and use the minimum-Euclidean-norm affine least-squares weights on that neighborhood, with weights summing to $1$. Form $W\\in\\mathbb R^{n\\times n}$ by placing those weights in the selected columns of row $i$ and zeros elsewhere; every row of $W$ then sums to $1$. If $\\ker(I_n-W)\\ne\\operatorname{span}\\{\\mathbf1_n\\}$, return the status “constant kernel not isolated” and do not specify an embedding. Otherwise put $M=(I_n-W)^T(I_n-W)$ and return any $Y\\in\\mathbb R^{n\\times q}$ minimizing\n\n$$\\operatorname{tr}(Y^TMY)\\quad\\text{subject to}\\quad Y^T\\mathbf1_n=0,\\qquad Y^TY=I_q,$$\n\nwhere $\\operatorname{tr}$ is the sum of diagonal entries. Equivalently, take orthonormal eigenvectors for the $q$ smallest positive eigenvalues of $M$. Ties allow multiple outputs. This finite-matrix procedure makes no guarantee of manifold recovery or consistency.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lle-trace-minimizers",
+          "source_section": "Statement",
+          "quote": "Let $W\\in\\mathbb R^{n\\times n}$ satisfy $W\\mathbf1_n=\\mathbf1_n$, put $M=(I_n-W)^T(I_n-W)$, and assume $\\ker(I_n-W)=\\operatorname{span}\\{\\mathbf1_n\\}$. Let $0<\\mu_1\\le\\cdots\\le\\mu_{n-1}$ be the eigenvalues of $M$ restricted to the zero-sum subspace $\\mathbf1_n^\\perp$. For $1\\le q<n$, the minimum of $\\operatorname{tr}(Y^TMY)$ over $Y\\in\\mathbb R^{n\\times q}$ with $Y^T\\mathbf1_n=0$ and $Y^TY=I_q$ is $\\sum_{j=1}^q\\mu_j$. The minimum is attained by taking the columns of $Y$ to be orthonormal eigenvectors for the $q$ smallest positive eigenvalues; when eigenvalues tie, the minimizing subspace may vary inside the tied eigenspace. The trace is the sum of diagonal entries.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-1-1",
+          "claim": "After centering the four points, their Gram matrix is $B=\\begin{pmatrix}1/2&0&-1/2&0\\\\0&1/2&0&-1/2\\\\-1/2&0&1/2&0\\\\0&-1/2&0&1/2\\end{pmatrix}$. The unit vector $u_x=(-1,1,1,-1)^T/2$ is an eigenvector with eigenvalue $1$, as is $u_y=(-1,-1,1,1)^T/2$; the other two eigenvalues are zero. Thus the x-coordinate choice $Y_M=u_x$ is a valid q=1 classical-MDS output, and it has repeated pairs $y_1=y_4$ and $y_2=y_3$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-1-2",
+          "claim": "With one neighbor per row, each LLE weight is $1$. Thus $W_{12}=W_{21}=W_{32}=W_{41}=1$ and other entries are zero; the equations $Wy=y$ force $y_1=y_2=y_3=y_4$, so the kernel is exactly the constant vectors. The matrix is $M=(I-W)^T(I-W)=\\begin{pmatrix}3&-2&0&-1\\\\-2&3&-1&0\\\\0&-1&1&0\\\\-1&0&0&1\\end{pmatrix}$. Its symmetric subspace vectors $(c,c,d,d)$ have eigenvalues $0,2$. On antisymmetric vectors $(c,-c,-d,d)$ it acts by $(c,d)\\mapsto(5c-d,d-c)$, whose characteristic equation is $\\lambda^2-6\\lambda+4=0$, giving eigenvalues $3-\\sqrt5$ and $3+\\sqrt5$. Hence the lowest positive eigenvalue is $3-\\sqrt5$ with eigenvector $(a,-a,-1,1)^T$, where $a=\\sqrt5-2\\in(0,1)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-2-1",
+          "claim": "The distances from each square vertex to its two side-neighbors tie at $1$. By [F3], the neighbor lists are $N_1=(2)$, $N_2=(1)$, $N_3=(2)$, and $N_4=(1)$; the union graph has the stated edges and is the path $4-1-2-3$. Its graph distances are exactly the line distances of the centered vector $Y_I=(-1/2,1/2,3/2,-3/2)^T$. Since this graph-distance matrix is Euclidean in one dimension, [F2] shows that ISOMAP’s q=1 classical-MDS output is congruent to $Y_I$. In particular its distance between vertices 1 and 4 is $1$, unlike the zero MDS distance in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-square-loop-mds-isomap-lle-differ-3-1",
+          "claim": "The LLE coordinate has four distinct values, unlike $Y_M$, so it is not congruent to the classical-MDS output. Its sorted consecutive gaps are proportional to $1-a,2a,1-a$, and these are not all equal: $2a=1-a$ would imply $3\\sqrt5=7$, contradicting $45\\ne49$ after squaring. The ISOMAP line has equal consecutive gaps, so LLE is not congruent to ISOMAP either. The distinct distance $d_{14}=1$ in ISOMAP and $d_{14}=0$ in classical MDS already separates those two outputs.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Four square vertices, one nearest neighbor per vertex and target dimension one are fixed; both spectral computations and all neighborhood lists are nonempty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "Four square vertices, one nearest neighbor per vertex and target dimension one are fixed; both spectral computations and all neighborhood lists are nonempty.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "902ccace666e9361683e771b21f689c79e0d86d366a4763717e314ca24c95be1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "The example includes the origin (0,0), zero Gram eigenvalues and the constant zero LLE eigenvector. Verification 1.1 retains a positive MDS eigenvector and 1.2 restricts LLE to its positive eigenvalues, so these zero quantities are allowed.",
+          "evidence": "Example and its verification: The example includes the origin (0,0), zero Gram eigenvalues and the constant zero LLE eigenvector. Verification 1.1 retains a positive MDS eigenvector and 1.2 restricts LLE to its positive eigenvalues, so these zero quantities are allowed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The example includes the origin (0,0), zero Gram eigenvalues and the constant zero LLE eigenvector. Verification 1.1 retains a positive MDS eigenvector and 1.2 restricts LLE to its positive eigenvalues, so these zero quantities are allowed.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "93aa7091a4e1f17136d3eb1d525302ed3a91ff369bf77c9da4867f868be889cb"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and its verification: The chosen k=1 makes every LLE weight exactly one, while q=1 selects one spectral direction. Verification 1.2 computes the resulting W and its lowest positive eigenvalue 3-sqrt(5).",
+          "reason": "The chosen k=1 makes every LLE weight exactly one, while q=1 selects one spectral direction. Verification 1.2 computes the resulting W and its lowest positive eigenvalue 3-sqrt(5).",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The chosen k=1 makes every LLE weight exactly one, while q=1 selects one spectral direction. Verification 1.2 computes the resulting W and its lowest positive eigenvalue 3-sqrt(5).",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "77372d7bc612ac67a47ed25e278c5eac09b53145727162195dfd707dfc6de6fe"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and its verification: The MDS top eigenvalue has multiplicity two and the example explicitly permits one valid x-coordinate choice. Repeated MDS row pairs distinguish that choice from the four distinct LLE coordinates in Verification 3.1.",
+          "reason": "The MDS top eigenvalue has multiplicity two and the example explicitly permits one valid x-coordinate choice. Repeated MDS row pairs distinguish that choice from the four distinct LLE coordinates in Verification 3.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The MDS top eigenvalue has multiplicity two and the example explicitly permits one valid x-coordinate choice. Repeated MDS row pairs distinguish that choice from the four distinct LLE coordinates in Verification 3.1.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "26430a6ede3d5519525a9cd07f32922a9590ed03188572229ffdfc56e54930f0"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and its verification: The discrete choices k=1 and q=1 are the minimal positive counts. The explicit neighbor tie decisions produce the path 4-1-2-3 and the simple constant LLE kernel, so no missing zero-eigenvector removal is presumed.",
+          "reason": "The discrete choices k=1 and q=1 are the minimal positive counts. The explicit neighbor tie decisions produce the path 4-1-2-3 and the simple constant LLE kernel, so no missing zero-eigenvector removal is presumed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The discrete choices k=1 and q=1 are the minimal positive counts. The explicit neighbor tie decisions produce the path 4-1-2-3 and the simple constant LLE kernel, so no missing zero-eigenvector removal is presumed.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "20e4fe60cbddd46432f147e34286778a50c0b3c3dd4f850a0d7cb09de7b2b975"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example supplies the top MDS eigenvector u_x, determines neighbor ties by index, and writes an explicit LLE eigenvector. This is one exhibited choice inside a repeated finite eigenspace, not a claim of a canonical basis.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The example supplies the top MDS eigenvector u_x, determines neighbor ties by index, and writes an explicit LLE eigenvector. This is one exhibited choice inside a repeated finite eigenspace, not a claim of a canonical basis.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "b4b766cfafdc240c0f7704d55ddc5e051007a2a80e5e0c8d024e1cca55823bbe"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The square example computes three particular one-dimensional outputs and distinguishes their distance patterns; it does not state that a geometric predicate is equivalent to an algorithmic outcome.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The square example computes three particular one-dimensional outputs and distinguishes their distance patterns; it does not state that a geometric predicate is equivalent to an algorithmic outcome.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "ef9eed5b7ff8190af26673d29d13012a65d7bf62012852342520929c8e39ddf6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The square example computes three particular one-dimensional outputs and distinguishes their distance patterns; it does not state that a geometric predicate is equivalent to an algorithmic outcome.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The square example computes three particular one-dimensional outputs and distinguishes their distance patterns; it does not state that a geometric predicate is equivalent to an algorithmic outcome.",
+            "item_sha256": "e47f27eb111e7e424d739e2e5fd33be841efa6e5b447251e52f7a42ce3b782cf",
+            "row_sha256": "716b872894f614533e37871cafb88626b043c5c0afc73aa263de5c8eb284990c"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-22",
+        "notes": "Checked all four steps and six previously reviewed actual suppliers. Centered square Gram has eigenvalues (1,1,0,0); chosen ux is unit, yielding repeated pairs. Tie lists yield path 4-1-2-3, whose graph distances equal the stated centered line distances. Singleton weights give displayed W and M, constant fixed kernel, symmetric-subspace spectrum (0,2) and antisymmetric characteristic lambda^2-6lambda+4. Bottom vector with a=sqrt(5)-2 is correct and normalized by the LLE constraint. Four distinct coordinates and unequal adjacent gap ratios separate LLE from MDS and ISOMAP even under reflection/translation. TikZ side labels, three blue path edges and omitted dashed side agree with tie rule. No AC or defect."
+      }
+    },
+    "ex-metric-stress-objective-nonconvex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-metric-stress-mds",
+          "source_section": "Definition",
+          "quote": "For a symmetric nonnegative zero-diagonal dissimilarity matrix $D\\in\\mathbb R^{n\\times n}$, $n\\ge2$, and a target dimension $q\\ge1$, use the Euclidean norm $\\|v\\|_2=(\\sum_{a=1}^q v_a^2)^{1/2}$. The **metric stress** of centered coordinates $Y=(y_1^T,\\ldots,y_n^T)^T\\in\\mathbb R^{n\\times q}$, with $\\mathbf1_n^TY=0$, is\n\n$$S_D(Y):=\\sum_{1\\le i<j\\le n}\\bigl(D_{ij}-\\|y_i-y_j\\|_2\\bigr)^2.$$\n\nMetric stress MDS is the separate optimization problem of minimizing $S_D(Y)$ over such centered $Y$. It is a distance-based, generally nonconvex objective and does not define the positive-eigenvalue solution used by classical multidimensional scaling; no solver convergence or global-optimizer guarantee is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-metric-stress-objective-nonconvex-1-1",
+          "claim": "For $Y(t)=(t,-t)$, the sole distance is $|t-(-t)|=2|t|$, so [F1] gives $f(t)=(1-2|t|)^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-metric-stress-objective-nonconvex-2-1",
+          "claim": "A convex function must satisfy the midpoint inequality $f(0)\\le\\tfrac12f(-a)+\\tfrac12f(a)$. At $a=1/4$, $f(0)=1$ and $f(-a)=f(a)=(1-1/2)^2=1/4$, so the midpoint inequality fails. Hence this valid stress objective is nonconvex.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There are exactly two objects and one dissimilarity D_12=1, hence the stress sum has exactly one pair term; no empty object configuration is admitted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "There are exactly two objects and one dissimilarity D_12=1, hence the stress sum has exactly one pair term; no empty object configuration is admitted.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "d9a223d1e429fa51d69ce339ea393e025e37467d8355db84a74a049d4ddb052c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "reason": "The coordinate parameter t=0 is explicitly admitted and is decisive: Verification 2.1 computes f(0)=1 while the average at t=+-1/4 is 1/4, establishing the convexity violation.",
+          "evidence": "Example and its verification: The coordinate parameter t=0 is explicitly admitted and is decisive: Verification 2.1 computes f(0)=1 while the average at t=+-1/4 is 1/4, establishing the convexity violation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The coordinate parameter t=0 is explicitly admitted and is decisive: Verification 2.1 computes f(0)=1 while the average at t=+-1/4 is 1/4, establishing the convexity violation.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "f96a3a9c890e7979df5f70c1fceede7b2c6437d56ccc668ea14a2b877580c531"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and its verification: The requested embedding dimension is one and there is one unordered object pair. Verification 1.1 reduces that sole stress term to (1-2|t|)^2.",
+          "reason": "The requested embedding dimension is one and there is one unordered object pair. Verification 1.1 reduces that sole stress term to (1-2|t|)^2.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The requested embedding dimension is one and there is one unordered object pair. Verification 1.1 reduces that sole stress term to (1-2|t|)^2.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "dc93b2891960f5c56d6632632c456d99d59ad3d10f02ebf871ff530cbf1970dd"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement has no singular, tied, or otherwise degenerate branch beyond the cases explicitly checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and its verification: The two comparison parameters -1/4 and 1/4 have midpoint zero; Verification 2.1 computes both endpoint values 1/4 and midpoint value 1, rather than merely invoking a generic stress calculation.",
+          "reason": "The two comparison parameters -1/4 and 1/4 have midpoint zero; Verification 2.1 computes both endpoint values 1/4 and midpoint value 1, rather than merely invoking a generic stress calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The two comparison parameters -1/4 and 1/4 have midpoint zero; Verification 2.1 computes both endpoint values 1/4 and midpoint value 1, rather than merely invoking a generic stress calculation.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "042866eb2455d8e057ff547e60765bcd6580e8da787c54396f823a4f67589d9a"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coordinates t,-t and the comparison value a=1/4 are explicit witnesses; no minimizer, neighborhood, eigenbasis or unspecified set representative is selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The coordinates t,-t and the comparison value a=1/4 are explicit witnesses; no minimizer, neighborhood, eigenbasis or unspecified set representative is selected.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "db5744fc8892ab132196f5ec4f624dc40b079397592a407ab9ce30c0bd02dcbb"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item exhibits a violated midpoint inequality for one explicit two-point stress objective; it does not assert equivalent conditions for convexity of general stress functions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The item exhibits a violated midpoint inequality for one explicit two-point stress objective; it does not assert equivalent conditions for convexity of general stress functions.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "52920d4abe2aa98d4a70ab85ef48843dd63210a4268bdb9be4b973a5bb2f7417"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item exhibits a violated midpoint inequality for one explicit two-point stress objective; it does not assert equivalent conditions for convexity of general stress functions.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/wasserstein_flow_repair/hilbert_chain_rule",
+            "reason": "The item exhibits a violated midpoint inequality for one explicit two-point stress objective; it does not assert equivalent conditions for convexity of general stress functions.",
+            "item_sha256": "eeca415e6087f1b7b7beafb204c1af7633cd366283bb5743197d8597ede524fb",
+            "row_sha256": "832f948d58dbe2ebd70e92bfb80d24340ee79e085055c9dbe86e7670cd6f38e4"
+          }
+        }
+      ]
+    }
+  }
+}

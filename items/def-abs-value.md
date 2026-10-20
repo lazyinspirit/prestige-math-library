@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 short: "|x|"
 verification:
+  repair: research/machine-learning-all-101-2026-10-19-owner-step4-published-alert-repair/application/receipts/def-abs-value.json
   precheck: n/a
   audited: 2026-07-25
 sources:
@@ -28,10 +29,14 @@ pipeline_run: null
 
 ## Definition
 
-Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of
+Let $F$ be an ordered field (Ordered field). The **absolute value** of
 $x \in F$ is
 
 $$|x| \;:=\; \begin{cases} x & \text{if } x \ge 0, \\ -x & \text{if } x < 0. \end{cases}$$
+
+## Definition references
+
+[[def-ordered-field]]
 
 ## Remarks
 

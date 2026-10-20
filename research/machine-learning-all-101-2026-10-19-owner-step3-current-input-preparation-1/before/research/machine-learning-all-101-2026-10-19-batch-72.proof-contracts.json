@@ -1,0 +1,775 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-split-conformal-set-for-classification",
+    "def-top-label-calibration",
+    "alg-validation-temperature-scaling",
+    "def-binned-expected-calibration-error",
+    "thm-positive-temperature-scaling-preserves-argmax",
+    "ex-calibration-degradation-under-shift"
+  ],
+  "contracts": {
+    "alg-split-conformal-set-for-classification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "zero calibration examples",
+          "result": "For m=0 and 0<alpha<1, k=1=m+1, q=+infinity, and every finite-scored class label is returned.",
+          "check": "ml101-split-conformal-threshold",
+          "parameters": {
+            "fixture": "zero-calibration"
+          },
+          "asserts": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses."
+        },
+        {
+          "case": "one calibration example at alpha=1/2",
+          "result": "For m=1, k=ceil(2/2)=1; q is exactly the single calibration score.",
+          "check": "ml101-split-conformal-threshold",
+          "parameters": {
+            "fixture": "one-calibration"
+          },
+          "asserts": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Definition permits m=0 and specifies the +infinity sentinel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Scores may be zero; ties are included in the threshold rule and randomized tie group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 is required and every finite label is scanned."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all scores tie, the conservative set uses the stated threshold and the optional rank uses one shared uniform."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The input has 0<alpha<1; k=m+1 is handled explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The score order and candidate-label scan are finite and deterministic; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Checked the complete finite classification procedure against all five declared suppliers and the score/rank measurability proof. For m=0, k=1=m+1 and q=+infinity; for 0<alpha<1 always 1<=k<=m+1. Fixed index sorting resolves score ties without altering q. Shared independent U includes the candidate in the tie block, giving U when all scores tie; scanning finitely many measurable scores is measurable. No coverage is asserted without separate exchangeability hypotheses. Tibshirani 2024 pp. 2-6, adjusted rank, sentinel footnote and auxiliary randomization read; the upper-tail form is equivalent under U -> 1-U up to null endpoints. Published inline-link findings 1-5 are nonfatal presentation issues, pending owner relocation; no mathematical repair needed. Refuter has no findings. No diagram needed or present; no AC use."
+      }
+    },
+    "def-top-label-calibration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "constant forecast (9/10, 1/10), label always 1",
+          "result": "On B={9/10}, the correctness event has probability 1 and the confidence integral is 9/10, so top-label calibration fails.",
+          "check": "ml101-top-label-events",
+          "parameters": {
+            "fixture": "overconfident"
+          },
+          "asserts": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence."
+        },
+        {
+          "case": "constant truthful forecast",
+          "result": "If Y has distribution p and G is constantly p, the event identity holds for every Borel confidence set.",
+          "check": "ml101-top-label-events",
+          "parameters": {
+            "fixture": "truthful"
+          },
+          "asserts": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K>=2 and a probability space are required.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The aggregate is over the finite label set, whose cardinality is at least two. A probability law has total mass one, so the sample space is nonempty; the empty Borel test set is permitted and makes both sides of the calibration identity zero. No undefined empty maximum occurs."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Forecast coordinates may equal zero; C and the event identity remain defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 is required and all labels are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Constant forecasts and deterministic labels are permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Ties use the smallest-index rule and C may equal 0 or 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite argmax set is resolved by a deterministic smallest-index rule."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "A supplied measurable simplex-valued forecast determines its top confidence and smallest maximizing label. Calibration is defined by event integrals for all Borel confidence sets; the armament contains no converse theorem relating this condition to classwise probability calibration.",
+            "item_sha256": "3046a9892b4c03266e39454c7024adc698d3257564f3e56ee1d69971ca5d2eef",
+            "row_sha256": "f456653bf6814cba48edc8029cf914c91f9f42fe166289a02ffa8e5523a0595d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "A supplied measurable simplex-valued forecast determines its top confidence and smallest maximizing label. Calibration is defined by event integrals for all Borel confidence sets; the armament contains no converse theorem relating this condition to classwise probability calibration.",
+            "item_sha256": "3046a9892b4c03266e39454c7024adc698d3257564f3e56ee1d69971ca5d2eef",
+            "row_sha256": "7118ef3cd8eb03eb0744616582f83aec95d1dcb9929aab1b53257c786c9c94ed"
+          }
+        }
+      ]
+    },
+    "alg-validation-temperature-scaling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "four labels 1,1,1,2 and logits (2 log 3,0)",
+          "result": "On candidates {1,2}, T=1 yields (9/10,1/10), T=2 yields (3/4,1/4), and empirical log loss selects T=2.",
+          "check": "ml101-temperature-validation",
+          "parameters": {
+            "fixture": "four-labels"
+          },
+          "asserts": "Fix $K\\ge2$. The input is a trained classifier with a measurable, finite-valued\nlogit map $z:\\mathcal X\\to\\mathbb R^K$, a nonempty finite validation sample\n$(x_i,y_i)_{i=1}^{n_v}$ with $n_v\\ge1$ and $y_i\\in\\{1,\\ldots,K\\}$, and a\nfinite nonempty set of candidate temperatures $\\mathcal T\\subset(0,\\infty)$.\nThe validation labels were not used to fit the logits. For $T\\in\\mathcal T$,\ncompute\n$$p_T(j\\mid x)=\\frac{\\exp(z_j(x)/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell(x)/T)}\\quad (j=1,\\ldots,K),\\qquad L_{\\mathrm{val}}(T)=-\\frac1{n_v}\\sum_{i=1}^{n_v}\\log p_T(y_i\\mid x_i).$$\nChoose the smallest temperature among the minimizers,\n$$T^*=\\min\\arg\\min_{T\\in\\mathcal T}L_{\\mathrm{val}}(T).$$\nand return the forecasts $p_{T^*}(\\cdot\\mid x)$ and predicted label\n$\\min\\arg\\max_j p_{T^*}(j\\mid x)$ for each input $x$. This is a\nfinite-candidate version of validation negative-log-likelihood temperature\nscaling. It selects only by empirical validation loss; it makes no finite-sample\ncalibration guarantee for future data, particularly when the validation and\nfuture data laws differ."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The validation sample and candidate-temperature set are both required to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Candidate temperatures satisfy T>0; zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 and all validation labels lie in {1,...,K}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If several candidates have identical losses, the smallest minimizing temperature is selected."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Finite logits and positive finite candidate temperatures give strictly positive softmax coordinates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite candidate set and deterministic smallest-minimizer rule require no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Read every defining instruction and all five actual suppliers, including the full strict-propriety proof (zero-probability support handled separately). Finite real logits and T>0 give finite positive softmax weights; the finite denominator is positive. Nonempty validation sample avoids division by zero. Nonempty finite positive candidate grid has finite losses and a nonempty finite argmin with a unique smallest temperature, as separately proved by the named justified_by theorem; no unconstrained continuous optimizer or calibration guarantee is asserted. Guo et al. section 4.2, p. 6, equation (9) checked: validation NLL and positive scalar temperature; the local finite-grid specialization is explicit. Tied logits and tied losses preserve the specified deterministic tie rules. No AC, diagram or repair needed. Reader findings 8-11 are published editorial defects only; refuter has no findings."
+      }
+    },
+    "def-binned-expected-calibration-error": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "one occupied bin with 3/4 correct and confidence 9/10",
+          "result": "ECE=MCE=|3/4-9/10|=3/20.",
+          "check": "ml101-binned-top-error",
+          "parameters": {
+            "fixture": "three-quarter-overconfident"
+          },
+          "asserts": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper."
+        },
+        {
+          "case": "one occupied bin with 3/4 correct and confidence 3/4",
+          "result": "ECE=MCE=0.",
+          "check": "ml101-binned-top-error",
+          "parameters": {
+            "fixture": "three-quarter-matched"
+          },
+          "asserts": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The sample has n>=1; empty bins are omitted from both formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Confidence values may be 0 or 1, and the Borel partition covers both endpoints."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 is required and the sample has at least one observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A constant confidence and tied predicted labels are allowed by the finite formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The fixed partition covers [0,1], including confidence endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family of sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empirical statistic averages accuracy-confidence gaps only over occupied bins of a fixed partition. Population calibration and proper scoring are explicitly distinguished, so these formulas assert neither a characterization of calibrated forecasts nor either direction of such a characterization.",
+            "item_sha256": "999ba99f32028fef7a2d1c24d5c0d21d7baaa337793eb6df8ad4d9702b12e7b2",
+            "row_sha256": "f456653bf6814cba48edc8029cf914c91f9f42fe166289a02ffa8e5523a0595d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The empirical statistic averages accuracy-confidence gaps only over occupied bins of a fixed partition. Population calibration and proper scoring are explicitly distinguished, so these formulas assert neither a characterization of calibrated forecasts nor either direction of such a characterization.",
+            "item_sha256": "999ba99f32028fef7a2d1c24d5c0d21d7baaa337793eb6df8ad4d9702b12e7b2",
+            "row_sha256": "7118ef3cd8eb03eb0744616582f83aec95d1dcb9929aab1b53257c786c9c94ed"
+          }
+        }
+      ]
+    },
+    "thm-positive-temperature-scaling-preserves-argmax": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-validation-temperature-scaling",
+          "source_section": "Definition",
+          "quote": "Fix $K\\ge2$. The input is a trained classifier with a measurable, finite-valued\nlogit map $z:\\mathcal X\\to\\mathbb R^K$, a nonempty finite validation sample\n$(x_i,y_i)_{i=1}^{n_v}$ with $n_v\\ge1$ and $y_i\\in\\{1,\\ldots,K\\}$, and a\nfinite nonempty set of candidate temperatures $\\mathcal T\\subset(0,\\infty)$.\nThe validation labels were not used to fit the logits. For $T\\in\\mathcal T$,\ncompute\n$$p_T(j\\mid x)=\\frac{\\exp(z_j(x)/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell(x)/T)}\\quad (j=1,\\ldots,K),\\qquad L_{\\mathrm{val}}(T)=-\\frac1{n_v}\\sum_{i=1}^{n_v}\\log p_T(y_i\\mid x_i).$$\nChoose the smallest temperature among the minimizers,\n$$T^*=\\min\\arg\\min_{T\\in\\mathcal T}L_{\\mathrm{val}}(T).$$\nand return the forecasts $p_{T^*}(\\cdot\\mid x)$ and predicted label\n$\\min\\arg\\max_j p_{T^*}(j\\mid x)$ for each input $x$. This is a\nfinite-candidate version of validation negative-log-likelihood temperature\nscaling. It selects only by empirical validation loss; it makes no finite-sample\ncalibration guarantee for future data, particularly when the validation and\nfuture data laws differ.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $j$, $w_j=\\exp(z_j/T)$ is a finite positive real by [F2]. Hence $S=\\sum_{\\ell=1}^K w_\\ell>0$, each $p_j(T)=w_j/S$ is positive, and $\\sum_jp_j(T)=1$. Thus $p(T)$ is in the interior of $\\Delta_K$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each validation example and class $j$, step 1.1 gives $p_T(j\\mid x_i)>0$, so its logarithm is finite by [F4]. Thus each candidate loss is finite. The finite nonempty set $\\mathcal T$ has a nonempty finite set of minimizers, which has a unique smallest element; the algorithm therefore returns a unique $T^*$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any classes $j,\\ell$, positivity of $T$ preserves the sign of $z_j-z_\\ell$. By [F3], $\\exp(z_j/T)$ and $\\exp(z_\\ell/T)$ have the same strict order as $z_j$ and $z_\\ell$; division by their common positive denominator $S$ from step 1.1 preserves that order and preserves ties. Every pairwise comparison is therefore identical for $p(T)$ and $z$, proving equality of their maximizing index sets.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "z=(2 log 3,0), T=1",
+          "result": "Softmax is (9/10,1/10), with maximizing index set {1}.",
+          "check": "ml101-temperature-argmax",
+          "parameters": {
+            "fixture": "T1"
+          },
+          "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+        },
+        {
+          "case": "z=(2 log 3,0), T=2",
+          "result": "Softmax is (3/4,1/4), with maximizing index set {1}.",
+          "check": "ml101-temperature-argmax",
+          "parameters": {
+            "fixture": "T2"
+          },
+          "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+        },
+        {
+          "case": "all logits equal",
+          "result": "Every positive temperature gives equal softmax coordinates, so the maximizing index set is unchanged.",
+          "check": "ml101-temperature-argmax",
+          "parameters": {
+            "fixture": "all-tied"
+          },
+          "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: K>=2 and a finite real logit vector are required."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: T>0 is required; division by zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: K>=2 is explicit; the argument also handles every finite K."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Tied logits preserve the entire maximizing index set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Every softmax coordinate is positive and the normalized vector is in the simplex interior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite candidate-temperature set has a unique deterministic smallest minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The proof normalizes finitely many positive exponential weights, obtains a smallest minimizer in the finite temperature candidate set, and preserves pairwise logit order and ties through positive scaling. Equality of maximizing index sets is concluded; no unproved equivalence theorem is being excluded.",
+            "item_sha256": "61c47b05b071283a89e7f7604a5459eb34291912a25ad9fa7c24c81d606be2a2",
+            "row_sha256": "425188172637e4c37b30d68b267bad907d2bd1a80322aad073fe636a15cad423"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "The proof normalizes finitely many positive exponential weights, obtains a smallest minimizer in the finite temperature candidate set, and preserves pairwise logit order and ties through positive scaling. Equality of maximizing index sets is concluded; no unproved equivalence theorem is being excluded.",
+            "item_sha256": "61c47b05b071283a89e7f7604a5459eb34291912a25ad9fa7c24c81d606be2a2",
+            "row_sha256": "ef20bc2b755a41fcd0329a43188cc7e29b986305fe4ee6c71fcf7d4698b882d0"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Independently traced all three proof steps and four facts to the five actual dependencies. Positive exponential weights sum to a finite positive denominator, normalize to one, and each coordinate lies strictly between zero and one since K>=2. Logarithms of positive finite probabilities are real; finite nonempty validation inputs and candidate grid give finite losses and a uniquely specified smallest minimizer. Multiplication by 1/T for T>0, strict increase of exp, and division by the common positive denominator preserve every strict comparison and equality, so the full argmax sets agree even for all-equal logits. Neither T=0 nor negative/infinite temperatures is admitted. Read positivity, monotonicity and exponential addition proofs; Guo section 4.2 equation (9) supports the reported temperature rule, while the local argument proves its precise scope. No proof gap, circular correctness invocation, AC, diagram or repair needed. Refuter has no finding."
+      }
+    },
+    "ex-calibration-degradation-under-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-top-label-calibration",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binned-expected-calibration-error",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-validation-temperature-scaling",
+          "source_section": "Definition",
+          "quote": "Fix $K\\ge2$. The input is a trained classifier with a measurable, finite-valued\nlogit map $z:\\mathcal X\\to\\mathbb R^K$, a nonempty finite validation sample\n$(x_i,y_i)_{i=1}^{n_v}$ with $n_v\\ge1$ and $y_i\\in\\{1,\\ldots,K\\}$, and a\nfinite nonempty set of candidate temperatures $\\mathcal T\\subset(0,\\infty)$.\nThe validation labels were not used to fit the logits. For $T\\in\\mathcal T$,\ncompute\n$$p_T(j\\mid x)=\\frac{\\exp(z_j(x)/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell(x)/T)}\\quad (j=1,\\ldots,K),\\qquad L_{\\mathrm{val}}(T)=-\\frac1{n_v}\\sum_{i=1}^{n_v}\\log p_T(y_i\\mid x_i).$$\nChoose the smallest temperature among the minimizers,\n$$T^*=\\min\\arg\\min_{T\\in\\mathcal T}L_{\\mathrm{val}}(T).$$\nand return the forecasts $p_{T^*}(\\cdot\\mid x)$ and predicted label\n$\\min\\arg\\max_j p_{T^*}(j\\mid x)$ for each input $x$. This is a\nfinite-candidate version of validation negative-log-likelihood temperature\nscaling. It selects only by empirical validation loss; it makes no finite-sample\ncalibration guarantee for future data, particularly when the validation and\nfuture data laws differ.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-positive-temperature-scaling-preserves-argmax",
+          "source_section": "Statement",
+          "quote": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-split-conformal-set-for-classification",
+          "source_section": "Definition",
+          "quote": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-split-conformal-marginal-coverage",
+          "source_section": "Statement",
+          "quote": "Let $Z_i=(X_i,Y_i)$, $1\\le i\\le m+1$, be random elements of one measurable\nexample space $(\\mathcal Z,\\mathscr Z)$, and let $\\mathcal T$ be the training\nsigma-field. Suppose the tuple $Z=(Z_1,\\ldots,Z_{m+1})$ has a regular\nconditional distribution $Q_\\omega$ given $\\mathcal T$ in the sense of\n[[def-regular-conditional-distribution]], whose sections have joint laws\ninvariant under every coordinate permutation, as in\n[[def-exchangeable-random-elements]], for almost every $\\omega$. Let $H$ be a $\\mathcal T$-measurable\ntraining statistic, and let $s:\\mathcal H\\times\\mathcal Z\\to\\mathbb R$ be a\njointly measurable split score rule. Use the split set in\n[[alg-split-conformal-prediction-set]] at $0<\\alpha<1$. Then\n$$\\mathbb P\\{Y_{m+1}\\in C(X_{m+1})\\mid\\mathcal T\\}\\ge1-\\alpha\\quad\\text{almost surely}.$$\nIf the tie-randomized set $C_U$ is used with one $U$ of Lebesgue probability\nlaw on $[0,1]$ independent of $\\mathcal T\\vee\\sigma(Z)$, then\n$$\\mathbb P\\{Y_{m+1}\\in C_U(X_{m+1})\\mid\\mathcal T\\}=1-\\alpha\\quad\\text{almost surely}.$$\nIn either case, integration over the training sigma-field gives the same\nmarginal lower bound or exact marginal coverage.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-regular-conditional-distribution",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(T,\\Tau)$ be a measurable random element and $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra. A **regular conditional distribution of X given $\\mathcal G$** is a probability kernel $K:(\\Omega,\\mathcal G)\\to(T,\\Tau)$ satisfying\n$$\\int_H K(\\omega,A)\\,P(d\\omega)=P(H\\cap\\{X\\in A\\})\\qquad(H\\in\\mathcal G,\\ A\\in\\Tau).$$\n\n\u201cProbability kernel\u201d has the pointwise meaning of [[def-measure-kernel-and-probability-kernel]]: every $K(\\omega,\\cdot)$ is a probability measure, and every evaluation is $\\mathcal G$-measurable. Its evaluations lie in $[0,1]$ and are integrable. Thus the testing identity says exactly that $K(\\cdot,A)$ is a conditional-expectation version of $1_{\\{X\\in A\\}}$ in [[def-conditional-expectation-given-a-sigma-algebra]]. Conversely, a probability kernel with these version identities satisfies the displayed definition.\n\nThe kernel requirement holds at every sample point. Separate eventwise choices of conditional-expectation versions do not imply it and do not by themselves provide one exceptional set valid for all A. When A is empty the testing identity is zero on both sides, and when A=T it is P(H) on both sides. This defines a property of a supplied kernel and makes no existence or AC assertion.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-exchangeable-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $Z_1,\\ldots,Z_n$ be random elements, $n\\ge1$, of one measurable space\n$(\\mathcal Z,\\mathscr Z)$. Their tuple $Z=(Z_1,\\ldots,Z_n)$ is a random element\nof $(\\mathcal Z^n,\\mathscr Z^{\\otimes n})$ by\n[[lem-coordinate-maps-and-permutations-are-measurable-on-finite-products]],\nand its law is the pushforward probability measure from\n[[def-law-or-distribution-of-a-random-element]]. For a permutation $\\pi$ of\n$\\{1,\\ldots,n\\}$, let $\\tau_\\pi(z)_i=z_{\\pi(i)}$. The tuple is\n**exchangeable** if\n$$\\mathbb P_Z\\circ\\tau_\\pi^{-1}=\\mathbb P_Z\\qquad\\text{for every permutation }\\pi.$$\n\nThis is invariance of the joint law, not an assertion of independence or identical marginal construction by independent sampling. The coordinate maps $\\tau_\\pi$ are measurable by the cited finite-product lemma.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-log-and-brier-strict-propriety",
+          "source_section": "Statement",
+          "quote": "For every $K\\ge2$ and $p,q\\in\\Delta_K$, the logarithmic and Brier losses in the definition of finite-label score loss satisfy $\\bar S(p,p)\\le\\bar S(p,q)$, with equality only when $q=p$. The expected logarithmic loss at the truthful forecast is finite, including when some coordinates of $p$ vanish.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-source-target-distributions-and-shift",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf X,\\Sigma_X)$, $(\\mathsf Y,\\Sigma_Y)$, and $(\\mathsf A,\\Sigma_A)$ be nonempty measurable spaces. A **source/target pair of joint laws** consists of probability measures $P_S$ and $P_T$ on $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$. For $D\\in\\{S,T\\}$, its input marginal is the probability measure $\\mu_D$ on $(\\mathsf X,\\Sigma_X)$ defined by $\\mu_D(A)=P_D(A\\times\\mathsf Y)$. If $h:\\mathsf X\\to\\mathsf A$ is measurable and $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ is product-measurable, then $(x,y)\\mapsto(h(x),y)$ is measurable: the preimage of a measurable rectangle $U\\times V$ is $h^{-1}(U)\\times V$, and such rectangles generate the product sigma-algebra. Taking preimages once more shows that $(x,y)\\mapsto\\ell(h(x),y)$ is measurable. The domain risk is the extended nonnegative integral\n$$R_D(h):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(h(x),y)\\,P_D(d(x,y)).$$\n\nA **conditional label kernel** for $P_D$ is a specified probability kernel $K_D$ from $(\\mathsf X,\\Sigma_X)$ to $(\\mathsf Y,\\Sigma_Y)$ such that, for every nonnegative product-measurable $g:\\mathsf X\\times\\mathsf Y\\to[0,+\\infty]$,\n$$\\int g(x,y)\\,P_D(d(x,y))=\\int_{\\mathsf X}\\left(\\int_{\\mathsf Y}g(x,y)\\,K_D(x,dy)\\right)\\mu_D(dx).$$\nThe pair is under **covariate shift** when conditional label kernels $K_S,K_T$ are supplied, there is a measurable set $N$ with $\\mu_T(N)=0$ such that $K_S(x,\\cdot)=K_T(x,\\cdot)$ as probability measures for every $x\\notin N$, and $\\mu_T\\ll\\mu_S$. No existence of conditional kernels is asserted by this definition.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the first model, $\\widehat Y=1$ and $C=9/10$ almost surely. For $B=\\{9/10\\}$, the left side of [F1] is $1$ and the right side is $9/10$, so top-label calibration fails despite accuracy $1$. In the single occupied bin, [F2] gives both errors as $|1-9/10|=1/10$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F10], temperature $1$ gives first-class probability $\\exp(2\\log3)/(1+\\exp(2\\log3))=9/10$, while temperature $2$ gives $\\exp(\\log3)/(1+\\exp(\\log3))=3/4$. The empirical NLL is the log-score risk $\\bar S_{\\log}(p,p_T)$ under the validation label frequencies $p=(3/4,1/4)$. Strict propriety [F9] therefore makes the value at $(3/4,1/4)$ strictly smaller than at $(9/10,1/10)$, so [F3] selects $T=2$. By [F4], both temperatures predict class $1$. Their one-bin gaps from the observed accuracy $3/4$ are $|3/4-9/10|=3/20$ and $|3/4-3/4|=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the rare-feature model, $m=1$ and $\\alpha=1/2$ give $k=\\lceil2(1/2)\\rceil=1$, so the threshold is the single calibration score: it is $1$ for a rare calibration feature and $0$ for a common one. Write $Q$ for the finite joint law of the calibration and test pairs; by [A1], $Q(z_1,z_2)=\\mu(z_1)\\mu(z_2)$, which is unchanged by swapping coordinates. For the trivial training sigma-field, whose only events are $\\emptyset$ and the whole space, the constant kernel with value $Q$ satisfies [F7]: the conditional-event integral is zero for $\\emptyset$ and is the ordinary law identity for the whole space. By [F8] its section is exchangeable. The finite score rule is measurable, so [F6] applies and yields conditional-on-training marginal coverage at least $1/2$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the test feature is common, its true-label score is $0\\le q$ for either possible threshold, so coverage is $1$. If it is rare, its true-label score is $1$, which is included exactly when the independent calibration feature is rare, an event of probability $1/10$. Thus subgroup coverage is $1/10$, while marginal coverage is $(9/10)\\cdot1+(1/10)\\cdot(1/10)=91/100$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the clean/corrupted model, the calibration score is always $0$, so $k=1$ gives $q=0$. At the target feature, both candidate labels have scores $1$ or $2$, hence neither belongs to $C(\\mathrm{corrupted})$ and target coverage is $0$. The calibration/test pair law assigns mass one to (clean, corrupted) and zero to (corrupted, clean), so it is not invariant under swapping; the exchangeability hypothesis in [F6] fails.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [
+        {
+          "case": "perfectly accurate constant forecast",
+          "result": "Top-label calibration fails on B={9/10}; one-bin ECE and MCE equal 1/10.",
+          "check": "ml101-calibration-shift",
+          "parameters": {
+            "fixture": "accurate-overconfident"
+          },
+          "asserts": "First, on a one-point probability space let $Y=1$ and let the forecast be\n$G=(9/10,1/10)$. Its top prediction is always correct, but its top confidence\nis $9/10$. On any nonempty sample from this law, the one-bin ECE and MCE are\nboth $1/10$."
+        },
+        {
+          "case": "four-point validation set",
+          "result": "The NLL-selected T=2 keeps class 1 as prediction and reduces the one-bin ECE from 3/20 to 0.",
+          "check": "ml101-calibration-shift",
+          "parameters": {
+            "fixture": "four-point-validation"
+          },
+          "asserts": "Second, take four validation labels $1,1,1,2$ and give every example logits\n$(2\\log 3,0)$. Fit temperature scaling on the finite candidate set\n$\\{1,2\\}$. At temperature $1$ the forecast is $(9/10,1/10)$; at temperature\n$2$ it is $(3/4,1/4)$. The validation NLL rule chooses temperature $2$. Both\ntemperatures predict class $1$, while their one-bin ECE values are respectively\n$3/20$ and $0$."
+        },
+        {
+          "case": "rare subgroup split conformal",
+          "result": "Marginal coverage is 91/100, but coverage given rare test feature is 1/10.",
+          "check": "ml101-calibration-shift",
+          "parameters": {
+            "fixture": "rare-subgroup"
+          },
+          "asserts": "Third, let the feature be rare with probability $1/10$ and common with\nprobability $9/10$, let the true label always be $1$, and use labels\n$\\{1,2\\}$. Take one calibration pair and the test pair as independent draws\nfrom this same law, with trivial training information and fixed score\n$s(x,y)=\\mathbf 1_{\\{x\\text{ is rare}\\}}$. At miscoverage level\n$\\alpha=1/2$, the split conformal set has marginal coverage $91/100$ but\ncoverage $1/10$ conditional on the test feature being rare."
+        },
+        {
+          "case": "source/target score mismatch",
+          "result": "The source calibration threshold is 0 and target coverage is 0 because the true target label score is 1.",
+          "check": "ml101-calibration-shift",
+          "parameters": {
+            "fixture": "source-target"
+          },
+          "asserts": "Fourth, let a source law put probability one on feature clean with label $1$,\nand let a distinct target law put probability one on feature corrupted with\nlabel $1$. Use the fixed score values\n$s(\\mathrm{clean},1)=0$, $s(\\mathrm{clean},2)=1$,\n$s(\\mathrm{corrupted},1)=1$, and $s(\\mathrm{corrupted},2)=2$. With one\ncalibration example from the source law and $\\alpha=1/2$, the split conformal\nthreshold is $0$, so the prediction set at a target feature is empty and target\ncoverage is $0$."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All four supplied finite models have nonempty sample spaces and specified observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The conformal example includes a zero threshold and an empty returned set under target shift."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Each classifier uses two labels; the validation sample has four points and the calibration sample one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The constant-label and constant-forecast models are explicitly verified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The softmax probabilities are positive interior points; the conformal +infinity sentinel is not used in the m=1 examples."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Temperature selection uses a finite deterministic tie rule; all finite score sets are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Four explicit finite models separately compute a confidence gap, a validation temperature minimizer, rare-feature conditional coverage, and an empty prediction set after a clean-to-corrupted shift. These are countervailing examples, not necessary-and-sufficient criteria for calibration or coverage.",
+            "item_sha256": "d07b1cdfd9996518c6d1ad04eef1939101a7c6079b68fee87be58666392303b5",
+            "row_sha256": "7b7ef328e250713ba3f9eee728806e342681d9ad479e56b0657f036e1d577868"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/ucrl2_repair",
+            "reason": "Four explicit finite models separately compute a confidence gap, a validation temperature minimizer, rare-feature conditional coverage, and an empty prediction set after a clean-to-corrupted shift. These are countervailing examples, not necessary-and-sufficient criteria for calibration or coverage.",
+            "item_sha256": "d07b1cdfd9996518c6d1ad04eef1939101a7c6079b68fee87be58666392303b5",
+            "row_sha256": "cabcafa3c4fad6e92b94526271c97728fd2d065f400924248b6ad4ff9016a0ed"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Independently checked every Example clause, facts F1-F11/A1-A2 and all five Verification steps against the thirteen actual dependencies. The first confidence-event sides are 1 and 9/10, giving ECE=MCE=1/10. The second empirical label law is (3/4,1/4), so strict log propriety selects T=2; exp(2log3)=9 and the one-bin gaps are 3/20 and zero. With m=1, alpha=1/2, k=1; the rare-feature threshold equals the calibration indicator. Enumerating the independent pair gives common-test coverage 1, rare-test coverage 1/10 and marginal 91/100. The constant finite joint-law kernel satisfies the conditional-event identity on both trivial-training events, and its exchangeability and fixed measurable scores meet the exact marginal-coverage theorem. Read that complete proof plus its rank, equivariance and conditional pushforward supplier proofs; no feature-conditional conclusion follows. The shifted example has q=0, empty target set and pair mass one on (clean,corrupted), disproving swap invariance. Ovadia sections 2-5 and Figures 2/4/5 support the empirical scope and amended OOD sentence; Guo section 4.2 and Tibshirani sections 1.2-2.3 checked, as well as Lei section 2.2 Theorem 2.2/Appendix A.1. Published editorial findings 12-16 do not affect these applications. Authenticated preimage raw hash equals pre snapshot; current equals post snapshot; exact diff changes only Remarks to acknowledge mixed ID/OOD accuracy curves. Accept that concise nonfatal citation correction with repair_confidence 1. No statement/definition/interface, manifest or proof fact changed; no consumer repair, AC or diagram needed. Fourteen batch finite-smoke checks passed."
+      }
+    }
+  }
+}

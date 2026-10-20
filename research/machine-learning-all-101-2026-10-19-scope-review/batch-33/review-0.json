@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "run": "machine-learning-all-101-2026-10-19",
+  "batch": "33",
+  "round": 0,
+  "reviewed_items": [
+    "def-discrete-convolutional-layer",
+    "def-group-action-on-feature-maps",
+    "def-p4-p4m-lattice-symmetry-groups",
+    "def-equivariant-neural-layer",
+    "def-group-convolution",
+    "def-pointwise-nonlinearity-and-pooling-on-group-features",
+    "thm-group-convolution-equivariance",
+    "ex-translation-equivariance-and-zero-padding",
+    "ex-p4-and-p4m-orientation-indexed-features",
+    "ex-nonstrided-subgroup-and-coset-pooling"
+  ],
+  "reviewed_pages": [
+    "convolution-and-group-equivariance",
+    "convolution-and-group-equivariance-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved scope, and published suppliers were reviewed. The correlation equivariance proof and examples are otherwise sound. The coset terminology conflicts with the published convention, and the theorem proof omits a used pooling definition from its listed facts. Both are locally repairable; no outside consumers were found.",
+  "findings": [
+    {
+      "id": "def-pointwise-nonlinearity-and-pooling-on-group-features",
+      "type": "local",
+      "reason": "The definition, its F2 fact, and its reference label call gH a right coset. Published def-coset defines gH as a left coset and Hg as a right coset. Correct the labels consistently while preserving the formulas."
+    },
+    {
+      "id": "thm-group-convolution-equivariance",
+      "type": "local",
+      "reason": "The Statement and F12 repeat the gH/right-coset mismatch. Step 1.3 also uses the Q_H formula and induced action on G/H, but F6 lists only pointwise and non-strided pooling; add the coset-pooling definition and action there, with finite H explicit."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-group-convolution-equivariance",
+      "decision": "repair",
+      "reason": "Correct its coset labels and make F6 state the Q_H formula and action used in step 1.3."
+    },
+    {
+      "id": "ex-nonstrided-subgroup-and-coset-pooling",
+      "decision": "repair",
+      "reason": "Its Example and F1 repeat the right-coset label for gH; correct both to left-coset terminology."
+    },
+    {
+      "id": "ex-translation-equivariance-and-zero-padding",
+      "decision": "accept",
+      "reason": "Its use of the theorem's translation-equivariance claim is unaffected by the coset correction."
+    },
+    {
+      "id": "ex-p4-and-p4m-orientation-indexed-features",
+      "decision": "accept",
+      "reason": "Its use of the theorem's group-correlation claim is unaffected by the coset correction."
+    }
+  ]
+}

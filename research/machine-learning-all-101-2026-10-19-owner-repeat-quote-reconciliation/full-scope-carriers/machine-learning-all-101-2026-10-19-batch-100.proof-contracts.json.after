@@ -1,0 +1,802 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-threshold-median-query-binary-search",
+    "thm-active-version-space-invariant-and-query-bound",
+    "ex-star-class-linear-disagreements",
+    "ex-active-learning-boundary-cases",
+    "thm-disagreement-abstention-correctness",
+    "rem-active-label-complexity-and-noisy-oracles"
+  ],
+  "contracts": {
+    "ex-threshold-median-query-binary-search": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Suppose the current candidate interval is $[a,b]$ with $s=b-a+1\\ge2$. Then $j=a+\\lfloor s/2\\rfloor$ satisfies $a<j\\le b$. Among candidate indices, the label at $x_j$ is $1$ exactly for $k<j$, namely $k\\in[a,j-1]$, and is $0$ exactly for $k\\ge j$, namely $k\\in[j,b]$. These branches have sizes $\\lfloor s/2\\rfloor$ and $\\lceil s/2\\rceil$. By [F1], the exact oracle retains the branch containing $k^*$, so the target remains in the updated interval and the new size is at most $\\lceil s/2\\rceil$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Starting from $s_0=n+1$, repeated ceiling-halving gives $s_r\\le\\lceil(n+1)/2^r\\rceil$: if this holds at $r$, then $s_{r+1}\\le\\lceil s_r/2\\rceil\\le\\lceil(n+1)/2^{r+1}\\rceil$. For the least $q$ with $2^q\\ge n+1$, this bound is at most $1$. Since the target remains in the interval by step 1.1, the selector stops with the singleton $\\{k^*\\}$ after at most $q$ queries.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example assumes $n\\ge1$, so an empty pool is excluded.",
+          "case": "empty"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "At least two thresholds are present because $n\\ge1$; the initial interval is not already a singleton.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 gives the two nonempty branches for n=1, so one query identifies the target.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 verifies target retention for either endpoint target k*=0 or k*=n.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 proves a<j<=b for every nonsingleton interval, including the first and last pool indices.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses the deterministic integer median formula; no choice axiom is needed.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The claim is one-way and contains no biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The claim is one-way and contains no biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-active-version-space-invariant-and-query-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-pool-version-space-query",
+          "source_section": "Definition",
+          "quote": "Input a finite pool-based realizable active-learning instance with ordered pool $U=(u_1,\\ldots,u_m)$ and a nonnegative integer query budget $b$. Initialize the current version space $V=\\mathcal H$, query count $q=0$, pool index $i=1$, an empty query log, and an empty status record for each pool index. While $i\\le m$, first check whether every $h\\in V$ gives the same label at $u_i$. If so, record that unanimous label as a prediction and set $i\\leftarrow i+1$, even when $q=b$. Otherwise, if $q=b$, mark indices $i,i+1,\\ldots,m$ as abstentions and return the current $V$, records, and query log. If instead $q<b$, query $y=\\mathcal O(u_i)$, append $(i,y)$ to the query log, record the queried label, replace $V$ by $\\{h\\in V:h(u_i)=y\\}$, set $q\\leftarrow q+1$ and $i\\leftarrow i+1$, and, if now $q=b$, mark all remaining indices $i,\\ldots,m$ as abstentions and return. If the scan reaches $i=m+1$, return the current $V$, records, and query log. The query budget limits oracle calls; the procedure scans each pool index at most once and reports unresolved suffix entries as abstentions when it stops at the budget.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Initially $V=\\mathcal H$, so [F1] gives $h^*\\in V$. If a query is made at $u_i$, [F1] gives its answer $y=h^*(u_i)$, and [F2] replaces $V$ by $\\{h\\in V:h(u_i)=y\\}$, which still contains $h^*$. If no query is made, $V$ is unchanged. Induction over the scan therefore keeps $h^*$ in every current $V$, so $V$ is never empty. The finite filters make no arbitrary selections, as recorded in [A1].",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "At each loop pass the algorithm either advances from index $i$ to $i+1$ or returns. Since $U$ has $m$ indices, after at most $m$ such advances it returns, including when $m=0$. It queries at most once per visited index, hence $q\\le m$.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Initially $q=0\\le b$. The only update that increases $q$ is made in the branch $q<b$, so it preserves $q\\le b$; when $q=b$, the algorithm does not query and either records a unanimous label or returns at a disagreement. Induction over the scan gives $q\\le b$, in particular no queries when $b=0$.",
+          "inputs": [
+            "F2",
+            "given",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "When [F2] records a unanimous label at $u_i$, every $h\\in V$ has that value there. Since $h^*\\in V$ by step 1.1, the recorded value equals $h^*(u_i)$.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "At every query, [F2] says the current classifiers disagree at the queried point. One of them is $h^*$ by step 1.1, so at least one current classifier has label different from the exact answer and is removed. Version spaces only shrink; consequently each query removes at least one distinct member of $\\mathcal H\\setminus\\{h^*\\}$. After $q$ queries at least $q$ such members have been removed, while $h^*$ remains, giving $q\\le|\\mathcal H|-1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Combining the pool-index bound in step 1.2 with step 2.2 gives $q\\le\\min\\{m,|\\mathcal H|-1\\}$.",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Under the additional branch-size hypothesis, after $r$ queries induction gives $|V_r|\\le\\rho^r|\\mathcal H|$. Step 1.1 gives $|V_q|\\ge1$, so $1\\le\\rho^q|\\mathcal H|$. Since $\\rho^q|\\mathcal H|>0$, [F4] gives $0=\\log1\\le\\log(\\rho^q|\\mathcal H|)=q\\log\\rho+\\log|\\mathcal H|$, where the product law is applied repeatedly to the integer power $\\rho^q$. Also $1/\\rho>1$, so [F4] gives $\\log(1/\\rho)>0$ and, by applying its product law to $\\rho(1/\\rho)=1$, $\\log\\rho=-\\log(1/\\rho)$. Rearranging yields $q\\le\\log|\\mathcal H|/\\log(1/\\rho)$. For $q=0$ the same conclusion follows from $|\\mathcal H|\\ge1$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "evidence": "Step 1.2 gives termination and q=0 when m=0.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.3 proves q<=b, hence b=0 forces no query; step 2.1 covers unanimous predictions before a disagreement.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.2 gives q<=|H|-1=0 when |H|=1.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 retains h* after every exact update, including a final query.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.2 include the last pool index and the m=0 endpoint.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite filtering and induction; fact A1 records that no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem states one-way bounds and no biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem states one-way bounds and no biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-100",
+        "notes": "Every step independently checked against pool and procedure Definitions and log laws. Exact labels preserve target; each query removes a distinct alternative. Index advance or return proves termination, including m=0; budget induction includes b=0; singleton H admits no query. Branch-size induction gives 1<=rho^q|H|; log(1/rho)>0 gives claimed bound including q=0. No AC or diagram. Published logarithm Proof 3.1 omits normalization citation (reader:100:1); L3 yields t=1/t, t>0, hence exp(0)=1, so consumer remains sound."
+      }
+    },
+    "ex-star-class-linear-disagreements": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-pool-version-space-query",
+          "source_section": "Definition",
+          "quote": "Input a finite pool-based realizable active-learning instance with ordered pool $U=(u_1,\\ldots,u_m)$ and a nonnegative integer query budget $b$. Initialize the current version space $V=\\mathcal H$, query count $q=0$, pool index $i=1$, an empty query log, and an empty status record for each pool index. While $i\\le m$, first check whether every $h\\in V$ gives the same label at $u_i$. If so, record that unanimous label as a prediction and set $i\\leftarrow i+1$, even when $q=b$. Otherwise, if $q=b$, mark indices $i,i+1,\\ldots,m$ as abstentions and return the current $V$, records, and query log. If instead $q<b$, query $y=\\mathcal O(u_i)$, append $(i,y)$ to the query log, record the queried label, replace $V$ by $\\{h\\in V:h(u_i)=y\\}$, set $q\\leftarrow q+1$ and $i\\leftarrow i+1$, and, if now $q=b$, mark all remaining indices $i,\\ldots,m$ as abstentions and return. If the scan reaches $i=m+1$, return the current $V$, records, and query log. The query budget limits oracle calls; the procedure scans each pool index at most once and reports unresolved suffix entries as abstentions when it stops at the budget.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Before the first query, $V=\\{h_*,h_1,\\ldots,h_m\\}$. Suppose before index $i$ the current version space is $\\{h_*,h_i,h_{i+1},\\ldots,h_m\\}$. At $x_i$, $h_i(x_i)=0$ while $h_*(x_i)=1$ and $h_j(x_i)=1$ for every $j>i$, so the point is a disagreement. Since $i\\le m\\le b$, the procedure queries it; [F1] returns $1$, and [F2] removes exactly $h_i$. Thus after this query the version space is $\\{h_*,h_{i+1},\\ldots,h_m\\}$. Induction proves this description at every index.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Applying step 1.1 through $i=m$ shows that all $m$ queries receive the positive target label, each removes one distinct alternative, and the final version space is $\\{h_*\\}$. Hence $q=m=|\\mathcal H|-1$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Set $m=2^k-1$ for integers $k\\ge2$. Then $|\\mathcal H|=2^k$ and $q=2^k-1$. Repeated application of [F4]'s product law gives $\\log|\\mathcal H|=k\\log2$, and strict increase with $2>1$ gives $\\log2>\\log1=0$. The ratio $q/(k\\log2)$ is at least $2^{k-1}/(k\\log2)$; the latter grows without bound because its consecutive-term ratio is $2k/(k+1)\\ge4/3$. Therefore no fixed constant multiple of $\\log|\\mathcal H|$ bounds the query count over this family.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The example assumes $m\\ge2$.",
+          "case": "empty"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The budget satisfies $b\\ge m\\ge2$.",
+          "case": "zero"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The class has $m+1\\ge3$ hypotheses.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 shows the terminal version space is the singleton {h*}.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 processes every pool index through the final point x_m.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses the explicitly listed finite class and pool; no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example states a one-way construction and no biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example states a one-way construction and no biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-100",
+        "notes": "Read all three Verification steps, complete Example and exact F1-F4 source sections. Before index i the surviving class is {h*,h_i,...,h_m}; labels differ at x_i, q=i-1<b, and answer 1 deletes only h_i. Through i=m this gives q=m and singleton target even at b=m. Finite full sigma algebra admits every classifier and any D_X. For k>=2, log(2^k)=k log2>0; 2^k-1>=2^(k-1), and consecutive ratio 2k/(k+1)>=4/3 yields an unbounded comparison. No empty or singleton-class case is claimed, no AC or diagram. Reader:100:3 is the shared nonfatal published normalization-citation omission; its L3 independently closes the elementary identity, so the example remains valid."
+      }
+    },
+    "ex-active-learning-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-pool-version-space-query",
+          "source_section": "Definition",
+          "quote": "Input a finite pool-based realizable active-learning instance with ordered pool $U=(u_1,\\ldots,u_m)$ and a nonnegative integer query budget $b$. Initialize the current version space $V=\\mathcal H$, query count $q=0$, pool index $i=1$, an empty query log, and an empty status record for each pool index. While $i\\le m$, first check whether every $h\\in V$ gives the same label at $u_i$. If so, record that unanimous label as a prediction and set $i\\leftarrow i+1$, even when $q=b$. Otherwise, if $q=b$, mark indices $i,i+1,\\ldots,m$ as abstentions and return the current $V$, records, and query log. If instead $q<b$, query $y=\\mathcal O(u_i)$, append $(i,y)$ to the query log, record the queried label, replace $V$ by $\\{h\\in V:h(u_i)=y\\}$, set $q\\leftarrow q+1$ and $i\\leftarrow i+1$, and, if now $q=b$, mark all remaining indices $i,\\ldots,m$ as abstentions and return. If the scan reaches $i=m+1$, return the current $V$, records, and query log. The query budget limits oracle calls; the procedure scans each pool index at most once and reports unresolved suffix entries as abstentions when it stops at the budget.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "If $m=0$, the initialized scan index is $i=1>m$. The loop has no iteration, so the procedure returns the initialized $V=\\mathcal H$ and empty query log.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "If $\\mathcal H=\\{h_0\\}$, then initially $V=\\{h_0\\}$; after any query-free scan step it remains that singleton. Thus every $u_i$ is unanimous with label $h_0(u_i)=h^*(u_i)$ by [F1]. Since [F2] tests unanimity before the budget condition, the procedure predicts each index and never queries, even when $b=0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "If $b=0$ for a general class, the query count remains $q=0$ until the first disagreement. At every preceding unanimous index, [F2] records a prediction and advances without a query. At the first disagreement, $q=b$, so [F2] marks that index and the remaining suffix as abstentions and returns; if no disagreement occurs, the scan reaches its end. In either case no oracle query is made.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 proves the empty-pool return.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 2.1 proves the zero-query-budget behavior.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.2 proves singleton-class behavior, including b=0.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.2 keeps the singleton current version space unchanged.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover the empty pool and the final scanned index.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the deterministic finite scan and no arbitrary set selections.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example states one-way boundary behavior and no biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The Example states one-way boundary behavior and no biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-disagreement-abstention-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-pool-version-space-query",
+          "source_section": "Definition",
+          "quote": "Input a finite pool-based realizable active-learning instance with ordered pool $U=(u_1,\\ldots,u_m)$ and a nonnegative integer query budget $b$. Initialize the current version space $V=\\mathcal H$, query count $q=0$, pool index $i=1$, an empty query log, and an empty status record for each pool index. While $i\\le m$, first check whether every $h\\in V$ gives the same label at $u_i$. If so, record that unanimous label as a prediction and set $i\\leftarrow i+1$, even when $q=b$. Otherwise, if $q=b$, mark indices $i,i+1,\\ldots,m$ as abstentions and return the current $V$, records, and query log. If instead $q<b$, query $y=\\mathcal O(u_i)$, append $(i,y)$ to the query log, record the queried label, replace $V$ by $\\{h\\in V:h(u_i)=y\\}$, set $q\\leftarrow q+1$ and $i\\leftarrow i+1$, and, if now $q=b$, mark all remaining indices $i,\\ldots,m$ as abstentions and return. If the scan reaches $i=m+1$, return the current $V$, records, and query log. The query budget limits oracle calls; the procedure scans each pool index at most once and reports unresolved suffix entries as abstentions when it stops at the budget.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-active-version-space-invariant-and-query-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite nonempty class of binary classifiers, let $U=(u_1,\\ldots,u_m)$ be a finite ordered pool with $m\\ge0$, let $h^*\\in\\mathcal H$, let the deterministic oracle return $h^*(u_i)$ at every query, and run the finite-pool version-space query procedure with any integer budget $b\\ge0$. At every stage the current version space contains $h^*$ and is nonempty; each pool label recorded as a unanimous prediction equals $h^*$ at that point; and the procedure terminates after at most $m$ pool iterations. If it makes $q$ queries, then $q\\le\\min\\{m,|\\mathcal H|-1\\}$. Moreover, on any execution for which each oracle-selected branch has size at most $\\rho$ times its pre-query version space, for a fixed $0<\\rho<1$, one has $q\\le\\log |\\mathcal H|/\\log(1/\\rho)$, where $\\log$ is the natural logarithm.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For each pair $h,g\\in V$, the disagreement set $\\{x:h(x)\\ne g(x)\\}$ is the union of $h^{-1}(\\{0\\})\\cap g^{-1}(\\{1\\})$ and $h^{-1}(\\{1\\})\\cap g^{-1}(\\{0\\})$. These sets are measurable because $h$ and $g$ are measurable. Since $V$ is finite by [F1] and [F2], $\\operatorname{DIS}(V)$ is a finite union of measurable sets and is measurable; this finite union uses no choice axiom by [A2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "A2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "By the definition of $g_V$, $g_V(x)=\\bot$ exactly when the members of $V$ do not all agree at $x$, which is exactly when $x\\in\\operatorname{DIS}(V)$. Thus the two events in the first equality are identical, and their $D_X$ probabilities agree for the fresh feature in [A1].",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "If $g_V(x)\\in\\{0,1\\}$, all classifiers in $V$ give that common label at $x$. By [F3], $h^*\\in V$, so the common label equals $h^*(x)$. Therefore the wrong-prediction event is empty and has probability zero under $D_X$.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The theorem concerns a current version space containing $h^*$, which is nonempty by its hypotheses and the invariant theorem.",
+          "case": "empty"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and step 2.1 identify abstention with DIS(V); for singleton V that set is empty by its definition.",
+          "case": "zero"
+        },
+        {
+          "status": "checked",
+          "evidence": "Statement and step 2.1 show that a singleton current V is unanimous everywhere and DIS(V) is empty.",
+          "case": "one"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 3.1 proves the wrong-prediction event is empty for every fixed history.",
+          "case": "degenerate"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "There are no temporal or interval endpoints in this probability identity.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.1 uses a finite union over pairs, and fact A2 states no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem states equalities and a one-way zero-error conclusion, not a biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The theorem states equalities and a one-way zero-error conclusion, not a biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "rem-active-label-complexity-and-noisy-oracles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-supervised-learning-problem",
+          "source_section": "Definition",
+          "quote": "A **supervised prediction problem** consists of nonempty measurable spaces $(\\mathsf X,\\Sigma_X)$ of instances, $(\\mathsf Y,\\Sigma_Y)$ of labels, and $(\\mathsf A,\\Sigma_A)$ of prediction actions; the product measurable space $(\\mathsf X\\times\\mathsf Y,\\Sigma_X\\otimes\\Sigma_Y)$; a probability measure $P$ on that product; a nonempty class $\\mathcal F$ of measurable predictors $f:\\mathsf X\\to\\mathsf A$; and a loss $\\ell:\\mathsf A\\times\\mathsf Y\\to[0,+\\infty]$ that is measurable with respect to $\\Sigma_A\\otimes\\Sigma_Y$. The law $P$ need not be supported on a deterministic labeling function, and this definition imposes no assumption that sample observations be independent or share a common law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-population-and-empirical-risk",
+          "source_section": "Definition",
+          "quote": "For a supervised prediction problem with joint law $P$, the **population risk** of any measurable predictor $f:\\mathsf X\\to\\mathsf A$ (in particular, every $f\\in\\mathcal F$) is the extended nonnegative integral\n$$R_P(f):=\\int_{\\mathsf X\\times\\mathsf Y}\\ell(f(x),y)\\,P(d(x,y))\\in[0,+\\infty].$$\nFor an ordered sample $S=((x_1,y_1),\\ldots,(x_m,y_m))$ of length $m\\ge1$, the **empirical risk** or **training risk** of any such $f$ is\n$$\\widehat R_S(f):=\\frac1m\\sum_{i=1}^m\\ell(f(x_i),y_i)\\in[0,+\\infty].$$\nNeither definition assumes finite risk. The sum uses extended nonnegative arithmetic; since $m\\ge1$, any summand equal to $+\\infty$ makes the empirical risk $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-population-and-empirical-risk-are-measurable",
+          "source_section": "Statement",
+          "quote": "In a supervised prediction problem, for every measurable predictor $f$, the function $(x,y)\\mapsto\\ell(f(x),y)$ is measurable, so its population risk is a defined extended nonnegative integral. For every sample size $m\\ge1$, the empirical risk $S\\mapsto\\widehat R_S(f)$ is an extended nonnegative measurable function on the finite product sample space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-realizable-and-agnostic-pac",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma_X)$ be a measurable instance space, let the binary label space $\\{0,1\\}$ have its discrete sigma-algebra, and let $\\mathcal H$ be a finite nonempty class of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. For a probability law $P$ on $\\mathcal X\\times\\{0,1\\}$, write $R_P(h)=P\\{(x,y):h(x)\\ne y\\}$ for the population zero-one risk. A sample of size $m\\ge1$ consists of $m$ independent observations with common law $P$; write $\\widehat R_S(h)=m^{-1}\\sum_{i=1}^m\\mathbf 1\\{h(X_i)\\ne Y_i\\}$ for its empirical zero-one risk. The law $P$ is realizable by $\\mathcal H$ if some $h^*\\in\\mathcal H$ satisfies $R_P(h^*)=0$.\n\nPut $\\mathcal Z=\\mathcal X\\times\\{0,1\\}$ with its product sigma-algebra. For fixed $m\\ge1$, a deterministic learner is a measurable map $A:\\mathcal Z^m\\to\\mathcal H$, where the finite set $\\mathcal H$ has its discrete sigma-algebra. For a law $P$ on $\\mathcal Z$, let $S=(Z_1,\\ldots,Z_m)$ be an IID sample with common law $P$, and write $\\mathbb P_S$ for probability under its joint law. For $0<\\epsilon,\\delta<1$, the learner is $(\\epsilon,\\delta)$-PAC realizable if, for every law $P$ realizable by $\\mathcal H$, $\\mathbb P_S\\{R_P(A(S))\\le\\epsilon\\}\\ge1-\\delta$. It is agnostic $(\\epsilon,\\delta)$-PAC if, for every law $P$ on $\\mathcal Z$, $\\mathbb P_S\\{R_P(A(S))-\\inf_{h\\in\\mathcal H}R_P(h)\\le\\epsilon\\}\\ge1-\\delta$. A randomized learner uses a measurable probability space $(\\mathcal U,\\Sigma_U,Q)$ and a measurable output map $A:\\mathcal Z^m\\times\\mathcal U\\to\\mathcal H$, with a seed $U\\sim Q$ independent of $S$; in both criteria replace $A(S)$ by $A(S,U)$ and $\\mathbb P_S$ by the joint probability $\\mathbb P_{S,U}$. All risks and the infimum are finite because the zero-one loss is bounded by one. These definitions impose no computational-efficiency claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-pool-based-realizable-active-learning",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $D_X$ be a probability measure on it, and let $\\mathcal H$ be a finite nonempty set of measurable classifiers $h:\\mathcal X\\to\\{0,1\\}$. A finite pool-based realizable active-learning instance consists of an ordered pool $U=(u_1,\\ldots,u_m)\\in\\mathcal X^m$ for some $m\\ge0$, an unknown target $h^*\\in\\mathcal H$, and a deterministic exact label oracle $\\mathcal O:\\mathcal X\\to\\{0,1\\}$ satisfying $\\mathcal O(x)=h^*(x)$ at every queried point. A fresh feature $X\\sim D_X$ has target label $h^*(X)$; the pool itself need not be sampled from $D_X$. For a set $Q\\subseteq\\{1,\\ldots,m\\}$ of queried indices with observed labels $(y_i)_{i\\in Q}$, the version space is $V(Q,y)=\\{h\\in\\mathcal H:h(u_i)=y_i\\text{ for every }i\\in Q\\}$. For any $V\\subseteq\\mathcal H$, its disagreement region is $\\operatorname{DIS}(V)=\\{x\\in\\mathcal X:\\exists h,g\\in V,\\ h(x)\\ne g(x)\\}$. Since $V$ is finite and every classifier is measurable, $\\operatorname{DIS}(V)$ is measurable. The pointwise exact-oracle assumption is stronger than standard distributional PAC realizability: zero population risk only requires agreement almost surely under the joint law and does not prescribe oracle values at every pool point.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-finite-pool-version-space-query",
+          "source_section": "Definition",
+          "quote": "Input a finite pool-based realizable active-learning instance with ordered pool $U=(u_1,\\ldots,u_m)$ and a nonnegative integer query budget $b$. Initialize the current version space $V=\\mathcal H$, query count $q=0$, pool index $i=1$, an empty query log, and an empty status record for each pool index. While $i\\le m$, first check whether every $h\\in V$ gives the same label at $u_i$. If so, record that unanimous label as a prediction and set $i\\leftarrow i+1$, even when $q=b$. Otherwise, if $q=b$, mark indices $i,i+1,\\ldots,m$ as abstentions and return the current $V$, records, and query log. If instead $q<b$, query $y=\\mathcal O(u_i)$, append $(i,y)$ to the query log, record the queried label, replace $V$ by $\\{h\\in V:h(u_i)=y\\}$, set $q\\leftarrow q+1$ and $i\\leftarrow i+1$, and, if now $q=b$, mark all remaining indices $i,\\ldots,m$ as abstentions and return. If the scan reaches $i=m+1$, return the current $V$, records, and query log. The query budget limits oracle calls; the procedure scans each pool index at most once and reports unresolved suffix entries as abstentions when it stops at the budget.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-active-version-space-invariant-and-query-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite nonempty class of binary classifiers, let $U=(u_1,\\ldots,u_m)$ be a finite ordered pool with $m\\ge0$, let $h^*\\in\\mathcal H$, let the deterministic oracle return $h^*(u_i)$ at every query, and run the finite-pool version-space query procedure with any integer budget $b\\ge0$. At every stage the current version space contains $h^*$ and is nonempty; each pool label recorded as a unanimous prediction equals $h^*$ at that point; and the procedure terminates after at most $m$ pool iterations. If it makes $q$ queries, then $q\\le\\min\\{m,|\\mathcal H|-1\\}$. Moreover, on any execution for which each oracle-selected branch has size at most $\\rho$ times its pre-query version space, for a fixed $0<\\rho<1$, one has $q\\le\\log |\\mathcal H|/\\log(1/\\rho)$, where $\\log$ is the natural logarithm.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-disagreement-abstention-correctness",
+          "source_section": "Statement",
+          "quote": "Fix a finite pool-based realizable active-learning instance, run the ascending-scan procedure for any finite number of steps, and let $V$ be the resulting current version space. Let $X\\sim D_X$ be a fresh feature independent of the query history. Define the selective prediction rule $g_V(x)$ to be the common label $c\\in\\{0,1\\}$ when every $h\\in V$ has $h(x)=c$, and to be the abstention symbol $\\bot$ otherwise. Then $\\operatorname{DIS}(V)$ is measurable,\n$$D_X(\\{x:g_V(x)=\\bot\\})=D_X(\\operatorname{DIS}(V)),$$\nand\n$$D_X(\\{x:g_V(x)\\in\\{0,1\\},\\ g_V(x)\\ne h^*(x)\\})=0.$$\nThese probabilities are for a fixed query history; the formula gives the abstention probability but no automatic upper bound on it from $|V|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Let $\\mathcal X=\\{a,b\\}$ with its full sigma-algebra and label set $\\{0,1\\}$ with its discrete sigma-algebra. Take the joint law $P=\\delta_{(a,0)}$, use zero-one loss $\\ell(\\hat y,y)=\\mathbf 1\\{\\hat y\\ne y\\}$, and set $D_X=P_X=\\delta_a$, where $P_X$ is the input marginal of $P$. Define $\\mathcal H=\\{h_0,h_1\\}$ by $h_0(a)=h_0(b)=0$ and $h_1(a)=0$, $h_1(b)=1$. For pool $U=(b)$, choose target $h^*=h_1$ and exact oracle $\\mathcal O=h_1$. The zero-one error events are measurable by [F1] and [F3], and [F2] defines their risks as their $P$-probabilities. Both risks are zero, so [F4] declares the law realizable by either classifier. Yet $h_0$ and $h^*$ give different labels at the pool point $b$, whose $D_X$-probability is zero. Thus distributional realizability does not prescribe the label at every possible pool point; [F5]'s pointwise oracle condition is a genuinely stronger interface.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Let $\\mathcal X=\\{a\\}$, $\\mathcal H=\\{h_0,h_1\\}$ with $h_0(a)=0$ and $h_1(a)=1$, target $h^*=h_0$, and budget $b\\ge1$. If the filtering update is fed the noisy response $1$ at the initial disagreement $a$, [F6] replaces $V=\\{h_0,h_1\\}$ by $\\{h_1\\}$, deleting the true target. Hence the invariant proof cannot be extended to arbitrary noisy responses.",
+          "inputs": [
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "For any $m\\ge2$, take $\\mathcal X=\\{x_1,\\ldots,x_m\\}$, target $h_*(x_j)=1$, alternatives $h_i(x_j)=0$ exactly when $j=i$, pool $(x_1,\\ldots,x_m)$, and budget $b\\ge m$. Before query $i$, the version space is $\\{h_*,h_i,\\ldots,h_m\\}$: this is true initially and, at $x_i$, the exact positive label removes only $h_i$. Thus all $m$ indices are queried and $q=m=|\\mathcal H|-1$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Set $m=2^k-1$ for integers $k\\ge2$. Then $|\\mathcal H|=2^k$ and $q=2^k-1$. By repeated application of [F10]'s product law, $\\log|\\mathcal H|=k\\log2$, and strict increase with $2>1$ gives $\\log2>\\log1=0$. The ratio $q/(k\\log2)$ is at least $2^{k-1}/(k\\log2)$; the latter is unbounded because its consecutive-term ratio is $2k/(k+1)\\ge4/3$. Therefore no uniform constant multiple of $\\log|\\mathcal H|$ bounds the query count, while [F7]'s logarithmic guarantee remains valid when its branch-shrink premise holds.",
+          "inputs": [
+            "F7",
+            "F9",
+            "F10",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Let $\\mathcal X=\\{a\\}$, $\\mathcal H=\\{h_0,h_1\\}$ with $h_0(a)=0$, $h_1(a)=1$, target $h^*=h_0$, current version space $V=\\mathcal H$, and $D_X(\\{a\\})=1$. The initial version space is consistent with the exact-target model. Then $\\operatorname{DIS}(V)=\\mathcal X$, so [F8] gives abstention probability $D_X(\\operatorname{DIS}(V))=1$ although $|V|=2$. This verifies that finiteness alone does not force the disagreement mass to be small. All witnesses are explicit finite constructions, as stated in [A1].",
+          "inputs": [
+            "A1",
+            "F5",
+            "F8",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "status": "not_applicable",
+          "reason": "The star-class witness assumes $m\\ge2$.",
+          "case": "empty"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The star-class witness uses a positive budget $b\\ge m\\ge2$.",
+          "case": "zero"
+        },
+        {
+          "status": "not_applicable",
+          "evidence": "The disagreement-mass witness in step 3.1 uses exactly two hypotheses.",
+          "case": "one",
+          "reason": "Every nontrivial witness uses at least two hypotheses; the remark makes no singleton-class claim."
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, and 3.1 give explicit finite witnesses for the stated caveats.",
+          "case": "degenerate"
+        },
+        {
+          "status": "checked",
+          "evidence": "Step 1.3 scans through the last pool point and reaches the singleton target version space.",
+          "case": "endpoints"
+        },
+        {
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 and 3.1 use explicitly listed finite witnesses; fact A1 states that no choice axiom is used.",
+          "case": "nonempty-choice"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The remark gives one-way caveats and witnesses, not a biconditional.",
+          "case": "iff-forward"
+        },
+        {
+          "status": "not_applicable",
+          "reason": "The remark gives one-way caveats and witnesses, not a biconditional.",
+          "case": "iff-reverse"
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-100",
+        "notes": "Checked all five proof steps and actual F1-F10 statements: supervised measurable product/loss and risk supplier, PAC zero-risk criterion, pool and filtering Definitions, target-invariant and abstention proofs, and logarithm laws. Repaired 1.1 explicitly sets H={h0,h1}, zero-one loss, P=delta_(a,0), D_X=P_X=delta_a, pool (b), target h1 and exact oracle h1: both risks vanish yet classifiers differ on the null pool point. Noise example deliberately violates exactness and deletes h0, establishing the caveat without claiming a noisy execution meets the algorithm input. Star induction and geometric ratio >=4/3 refute a uniform logarithmic bound. Initial two-class singleton-space witness has disagreement probability one; finite measurable witnesses need no AC or IID pool. No diagrams. Unchanged Statement/Definition gives no new consumer propagation. Published log normalization citation omission is nonfatal, routed by reader:100:2; L3 gives exp(0)=1 immediately."
+      }
+    }
+  }
+}

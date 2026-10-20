@@ -1,0 +1,77 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "100",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-finite-pool-version-space-query",
+      "model": "gpt-6-luna",
+      "context_sha256": "c7103111ede4a76a2efb1e0e0a7492ebb6a2c2fa22903b4f5f04c1bf3aa5b72d",
+      "outcome": "false_positive",
+      "reason": "The Definition gives an explicit early return immediately after a query exhausts the budget. Its earlier instruction to predict a unanimous label, even when q=b, is conditional on reaching that loop iteration; it does not require visiting indices after a return. For example, with two constant classifiers h_0=0 and h_1=1, target h_0, pool (a,b), and budget 1, querying a leaves V={h_0} and the explicit return records abstention at b. This is the specified output, not a contradiction: suffix records represent unprocessed entries, not the selective rule g_V. The final sentence expressly describes suffix abstentions on budget stopping. With budget zero the loop can still predict its initial unanimous prefix before returning at the first disagreement. The procedure is deterministic and well-defined under its exact-oracle prerequisite; no global promise to predict every unanimous suffix entry is stated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-finite-pool-version-space-query",
+      "disposition": "unaffected",
+      "post_sha256": "da309c171ac0fbdf92f3862002adfbe53faa5798e45a68f94c16925dcc2f171a",
+      "review_context_sha256": "cf1b7c268500cccd2123bb6bd7c719589d34b0a826a318981c4a8bbfad13123c",
+      "reason": "Read the complete procedure, its exact-target finite-pool prerequisite, its justified_by invariant theorem, the owning manifest and both pages, and the relevant abstention and boundary-case arguments. Initially h* belongs to V; each exact-answer filter preserves it, so the unanimity test always acts on a nonempty finite class and determines a unique binary label. Each continuing iteration increments i; each query requires q<b and increments q once. The finite scan, both return branches, empty pool, singleton class, and zero budget therefore have defined outputs and respect the query budget without choice. The early-return suffix convention is consistent with the owning examples and does not identify pool records with fresh-feature selective predictions. There is no algorithm-specific proof contract: this definition-like item has no phase proof, and its well-definedness is supplied by the listed theorem. Its complete Definition contains no hyperlinks, and there are no diagrams requiring correction or addition. No item, contract, or page repair is warranted; the guard equals the frozen before guard.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "repair_complete": true,
+    "assigned_items": ["alg-finite-pool-version-space-query"],
+    "claim_and_conventions": "An ascending finite scan predicts unanimous visited entries, queries disagreements while permitted, and may return with unprocessed suffix abstentions. Exact pointwise target labels preserve a nonempty version space. These pool status records are distinct from fresh-feature g_V predictions.",
+    "dependency_ids": ["def-pool-based-realizable-active-learning"],
+    "well_definedness_supplier": "thm-active-version-space-invariant-and-query-bound",
+    "evidence_paths": [
+      "items/alg-finite-pool-version-space-query.md: Definition, both explicit budget-return branches",
+      "items/def-pool-based-realizable-active-learning.md: Definition, finite nonempty class and exact oracle",
+      "items/thm-active-version-space-invariant-and-query-bound.md: Proof 1.1-1.3 and 2.1",
+      "items/thm-disagreement-abstention-correctness.md: Statement and Proof 2.1-3.1, separate fresh-feature rule",
+      "items/ex-active-learning-boundary-cases.md: Example and Verification 1.1-2.1",
+      "research/machine-learning-all-101-2026-10-19-batch-100.pages.json",
+      "research/machine-learning-all-101-2026-10-19-batch-100.proof-contracts.json",
+      "library/machine-learning/active-querying-version-spaces-and-abstention.md",
+      "library/machine-learning/active-querying-version-spaces-and-abstention-examples.md"
+    ],
+    "source_consultation": "This review uses direct finite-set and imperative-control-flow reasoning. No external source was consulted or claimed as read.",
+    "checks": [
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run machine-learning-all-101-2026-10-19 --items alg-finite-pool-version-space-query",
+        "exit_code": 0,
+        "result": "Captured the post guard and review context immediately after the mathematical review; both are copied into the review row."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-finite-pool-version-space-query.md --json",
+        "exit_code": 0,
+        "result": "One file; zero phase proofs checked; zero failures; status not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-finite-pool-version-space-query.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      }
+    ],
+    "proof_layout": "No item paths changed, so the required post-edit proof-layout command has no subjects.",
+    "ledger_disposition": "No confirmed defect or repair was found, so no canonical-defect-ledger or published-ledger modification is proposed. The Step-4 digest's logarithm alerts are outside this assignment and are not new findings of this review.",
+    "interface_comparison": "No Statement or Definition was changed; downstream propagation is not triggered.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection of this false-positive adjudication; no worker-launched judgment or certification."
+  }
+}

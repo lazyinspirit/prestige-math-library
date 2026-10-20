@@ -1,0 +1,158 @@
+{
+  "run": "machine-learning-all-101-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "76",
+  "input_sha256": "be31d8759cd439838c6ba1308b97ab1d68ec5727664112594898d2fa2bc53fee",
+  "decisions": [
+    {
+      "id": "alg-upper-confidence-bound-bandit",
+      "model": "gpt-6-luna",
+      "context_sha256": "8ca2be01fd9e1cabd4e9068756b17cc950fdfb1f78c7752da99ffbe14ffe3760",
+      "outcome": "false_positive",
+      "reason": "The Definition specifies a policy and asserts no confidence-coverage or regret guarantee. After initialization every count is positive; real rewards give finite empirical means, delta in (0,1) gives a positive finite logarithm, and finite least-index maximization defines each next action using only revealed history. These operations remain valid for integrable heavy-tailed rewards. The separate expected-pull and regret statements explicitly assume 1-sub-Gaussian entries. The book's statistical assumption supports those guarantees, not a requirement for executing the procedure.",
+      "uncertain": false,
+      "source_urls": [
+        "https://tor-lattimore.com/downloads/book/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-tied-optimal-bandit-arms",
+      "model": "gpt-6-luna",
+      "context_sha256": "ab52d799cbe98f834ea73ff90e6f696122aacfd35505b4545d9131f8fd8a2e2f",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The Example and all three Verification steps correctly concern deterministic zero reward stacks, but the title omits that restriction and can suggest that tied means force zero realized reward regret. With two Bernoulli(1/2) arms at n=1 the realized quantity is 1/2-Y, equal to plus or minus 1/2, despite zero gaps. Renamed the item to Deterministic zero-reward arms have zero regret and mirrored that title in its owning manifest. The Example, proof, dependencies and strength are unchanged. This is a nonfatal presentation defect, not a false proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-upper-confidence-bound-bandit",
+      "disposition": "unaffected",
+      "post_sha256": "c32feb662d14647db3eb0743187a3ff16126afd2df4a71420331bc4bf05d4ca5",
+      "review_context_sha256": "dcd41e13c542f6a37bc06fa411f6bd784dab94305486aadcffed46b5c3560bb1",
+      "reason": "Checked the complete procedure, bandit and sub-Gaussian definitions, owning contract boundaries and frontmatter-only page. Initialization, positive denominators, delta endpoints, finite maximization, tie-breaking and the empty later loop at n=k are sound. No probability guarantee is asserted here. The four local UCB performance statements separately impose the necessary 1-sub-Gaussian hypothesis; none obtains it from the algorithm definition. No item, contract or page edit is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://tor-lattimore.com/downloads/book/book.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-tied-optimal-bandit-arms",
+      "disposition": "repaired",
+      "post_sha256": "c9de4b87e11a3c7cfebe0a6f1ec79cf183ca4df5adfcbb3392760bd2420a3785",
+      "review_context_sha256": "fa113e905e7a95c62e60d990619f784894b33348b56e674d562e15a736c1133f",
+      "reason": "Reviewed the fixed deterministic-zero Example, its model supplier, full Verification, contract and owning page. Each arm mean and gap is zero, every selected reward is zero, and both defining regret sums vanish pointwise; expectation then gives zero. Deterministic table entries satisfy independence, and n=1 is included. Only the overly broad title changed. The manifest title and three current boundary-review bindings were updated under the shared-write lock, preserving prior boundary evidence. This is repair-author checking, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-tied-optimal-bandit-arms",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "frontmatter",
+      "finding": "The title Tied optimal arms have zero regret omitted the deterministic-zero environment and could be read as asserting zero realized reward regret for all equal-mean arms. Bernoulli(1/2) at horizon one gives realized regret 1/2-Y, which is nonzero.",
+      "correction": "Qualified the title to Deterministic zero-reward arms have zero regret; retained the full correct Example and Verification and mirrored the title in batch 76 metadata.",
+      "reason": "Only the title overgeneralized. The actual all-zero model makes both regrets identically zero for every admissible policy.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "class": "accuracy",
+      "subclass": "false-or-overstrong-title"
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "reason": "Both assigned items are draft. The algorithm remains byte-identical, and the example repair changes its title only; every original Statement, Definition, Example and proof section remains unchanged. There is no changed supplier interface or potentially defective published consumer identified by this review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "alg-upper-confidence-bound-bandit",
+      "ex-tied-optimal-bandit-arms"
+    ],
+    "source_reading": "Consulted Bandit Algorithms, Chapter 7 introduction and section 7.1, equations (7.1)-(7.2), Algorithm 3, the fixed-versus-random-count warning, and Theorem 7.1 hypotheses (printed pp. 102-105). No claim of reading the entire book or independently reviewing the full consumer proofs.",
+    "dependencies": [
+      "def-stochastic-bandit-and-pseudo-regret",
+      "def-natural-logarithm",
+      "thm-natural-logarithm-laws",
+      "def-centered-subgaussian-reward"
+    ],
+    "pending": [],
+    "item_change": "items/ex-tied-optimal-bandit-arms.md: title only; item body byte-identical.",
+    "metadata_changes": [
+      "research/machine-learning-all-101-2026-10-19-batch-76.pages.json: assigned example title mirror only.",
+      "research/machine-learning-all-101-2026-10-19-batch-76.proof-contracts.json: three assigned example template reviews refreshed after actual review, retaining previous records as history."
+    ],
+    "interface_changes": false,
+    "consumer_propagation": "No Statement or Definition changed. No downstream examination inventory or maintenance propagation is triggered.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/alg-upper-confidence-bound-bandit.md items/ex-tied-optimal-bandit-arms.md --json",
+        "exit_code": 0,
+        "result": "Two files: one applicable proof passed, algorithm not applicable, zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/alg-upper-confidence-bound-bandit.md items/ex-tied-optimal-bandit-arms.md library/machine-learning/stochastic-finite-armed-bandits.md library/machine-learning/stochastic-finite-armed-bandits-examples.md --json",
+        "exit_code": 0,
+        "result": "Four files checked; zero errors and warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-tied-optimal-bandit-arms.md",
+        "exit_code": 0,
+        "result": "One changed item, three steps, zero defects. Run after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/machine-learning-all-101-2026-10-19-batch-76.proof-contracts.json --strict --items alg-upper-confidence-bound-bandit,ex-tied-optimal-bandit-arms --json",
+        "exit_code": 0,
+        "result": "Both assigned contracts checked; zero errors and warnings."
+      },
+      {
+        "command": "Scoped statement-first parser and manifest/boundary-binding verification using tools/statement-first.mjs and tools/item-hash.mjs",
+        "exit_code": 0,
+        "result": "Both assigned statements/descriptions uninterrupted, references correctly placed; manifest titles and deps match; all three updated boundary bindings match the current item and row and preserve prior review history."
+      },
+      {
+        "command": "Read-only report assertions against frozen initial-1.json and current itemHashGuard values",
+        "exit_code": 0,
+        "result": "Exact input digest and identity, both rejected tuples and review rows, evidence hashes and review dispositions verified. Replacing only the corrected example title reconstructs its original guard; the algorithm guard equals its original guard."
+      }
+    ],
+    "repair_complete": true,
+    "unresolved_obligations": [],
+    "next_action": "Controller collection, subsequent independent rejudgment and native certification remain engine-owned; no judgments or stamps were written.",
+    "diagrams": "Neither assigned item contains TikZ/tikzcd; these algebraic procedures and zero-reward calculations need no diagram.",
+    "shared_integration": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u76, reread both current metadata files, updated only assigned example projections, checked both strict contracts and the title mirror, and released the lock.",
+    "active_run_observation": "Native status recomputed from .autopilot/machine-learning-all-101-2026-10-19: current stage 5.1-adjudicate, 70/101 covered at observation; later impact, certification and rejudgment stages remain pending. No workflow transition or worker was launched.",
+    "dependency_evidence": {
+      "alg-upper-confidence-bound-bandit": [
+        "items/def-stochastic-bandit-and-pseudo-regret.md#Definition",
+        "items/def-natural-logarithm.md#Definition",
+        "items/thm-natural-logarithm-laws.md#Statement"
+      ],
+      "ex-tied-optimal-bandit-arms": [
+        "items/def-stochastic-bandit-and-pseudo-regret.md#Definition: pseudo-regret is the sum of mean gaps, realized reward regret is n times the optimal mean minus observed rewards."
+      ]
+    }
+  },
+  "supporting_evidence": {
+    "research/machine-learning-all-101-2026-10-19-batch-76.pages.json": "a429c6ec3a79321ff97e9329e3de5e1b40994ea7d1d9e2c30b81f8f12af72f66",
+    "research/machine-learning-all-101-2026-10-19-batch-76.proof-contracts.json": "4c2430d5e8785581d5895388e176c2e6799c7d68dc20790949c164a852590e67"
+  }
+}
